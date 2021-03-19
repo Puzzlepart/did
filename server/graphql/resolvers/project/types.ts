@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'Input object for Project used in Mutation createOrUpdateProject'
 })
@@ -35,6 +39,9 @@ export class ProjectInput {
   labels?: string[]
 }
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a Project',
   simpleResolvers: true
@@ -82,13 +89,16 @@ export class Project {
   /**
    * Constructs a new Project
    *
-   * @param {ProjectInput} input Input
+   * @param input - Input
    */
   constructor(input?: ProjectInput) {
     Object.assign(this, input || {})
   }
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description:
     'Input object for ProjectOptions used in Mutation createOrUpdateProject'
@@ -98,6 +108,9 @@ export class ProjectOptions {
   createOutlookCategory?: boolean
 }
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a CreateOrUpdateProjectResult'
 })

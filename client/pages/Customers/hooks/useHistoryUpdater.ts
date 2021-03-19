@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { ICustomersParams, ICustomersState } from '../types'
+import { ICustomersParameters, ICustomersState } from '../types'
 
 /**
  * Update history hook on state change
  *
- * @param {IProjectsState} state State
+ * @param state - State
  */
 export function useHistoryUpdater(state: ICustomersState) {
   const history = useHistory()
-  const url = useParams<ICustomersParams>()
+  const url = useParams<ICustomersParameters>()
 
   useLayoutEffect(() => {
     const paths = [state.view, state.selected?.key || url.key]

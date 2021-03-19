@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 const tryRequire = require('try-require')
-const { resolve } = require('path')
+const path = require('path')
 const { name, version } = require('./package.json')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -9,12 +9,12 @@ const DefinePlugin = require('webpack').DefinePlugin
 const debug = require('debug')('webpack')
 
 /** CONSTANTS */
-const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'production'
+const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development'
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist/server'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
-const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs')
-const SRC_PATH = resolve(__dirname, 'client/')
+const HTML_PLUGIN_FILE_NAME = path.resolve(__dirname, 'server/views/_template.hbs')
+const SRC_PATH = path.resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
 debug('Compiling Did bundle')
@@ -28,7 +28,7 @@ const config = {
   mode: MODE,
   entry: { [name]: './client' },
   output: {
-    path: resolve(__dirname, SERVER_DIST, 'public/js'),
+    path: path.resolve(__dirname, SERVER_DIST, 'public/js'),
     filename: BUNDLE_FILE_NAME,
     publicPath: '/js',
   },
@@ -52,7 +52,7 @@ const config = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: resolve(__dirname, 'client/tsconfig.json')
+              configFile: path.resolve(__dirname, 'client/tsconfig.json')
             }
           },
         ],
@@ -75,18 +75,19 @@ const config = {
   },
   resolve: {
     alias: {
-      'office-ui-fabric': resolve(SRC_PATH, 'office-ui-fabric'),
-      common: resolve(SRC_PATH, 'common'),
-      types: resolve(SRC_PATH, 'types'),
-      utils: resolve(SRC_PATH, 'utils'),
-      helpers: resolve(SRC_PATH, 'helpers'),
-      pages: resolve(SRC_PATH, 'pages'),
-      components: resolve(SRC_PATH, 'components'),
-      i18n: resolve(SRC_PATH, 'i18n'),
-      config: resolve(SRC_PATH, 'config'),
-      AppContext: resolve(SRC_PATH, 'AppContext'),
-      AppConfig: resolve(SRC_PATH, 'App.config.json'),
-      DateUtils: resolve(__dirname, 'shared/utils/date'),
+      package: path.resolve(SRC_PATH, '../package.json'),
+      security: path.resolve(__dirname, 'shared/config/security'),
+      common: path.resolve(SRC_PATH, 'common'),
+      components: path.resolve(SRC_PATH, 'components'),
+      config: path.resolve(SRC_PATH, 'config'),
+      helpers: path.resolve(SRC_PATH, 'helpers'),
+      hooks: path.resolve(SRC_PATH, 'hooks'),
+      i18n: path.resolve(SRC_PATH, 'i18n'),
+      pages: path.resolve(SRC_PATH, 'pages'),
+      types: path.resolve(SRC_PATH, 'types'),
+      utils: path.resolve(SRC_PATH, 'utils'),
+      AppContext: path.resolve(SRC_PATH, 'AppContext'),
+      DateUtils: path.resolve(__dirname, 'shared/utils/date'),
     },
     extensions: [
       '.ts',
@@ -100,7 +101,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: HTML_PLUGIN_FILE_NAME,
-      filename: resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
+      filename: path.resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
       inject: true,
     }),
     new DefinePlugin({
@@ -116,11 +117,11 @@ if (IS_DEVELOPMENT) {
   const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
   config.stats = 'normal'
   config.watch = true
-  config.watchOptions = { aggregateTimeout: 250 }
+  config.watchOptions = { aggregateTimeout: 500 }
   config.plugins.push(
     new LiveReloadPlugin(),
     new WebpackBuildNotifierPlugin({
-      logo: resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
+      logo: path.resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
       sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
       suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
       showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',

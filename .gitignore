@@ -10,15 +10,6 @@ node_modules/
 # dotenv environment variables file
 .env
 
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.pnp.*
-
 # Node public folder
 server/public/js
 server/public/css
@@ -40,8 +31,6 @@ client/**/*js
 client/**/*js.map
 
 doc/
-.ignore/
 .DS_Store
-.tests/*.json
 .localtunnel
 schema.gql

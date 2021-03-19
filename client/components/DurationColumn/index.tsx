@@ -1,13 +1,16 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IDurationColumnProps } from './IDurationColumnProps'
+import { IDurationColumnProps } from './types'
 
 /**
- * @component DurationColumn
- * @category Timesheet
+ * @category Function Component
  */
-export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
+export const DurationColumn: FunctionComponent<IDurationColumnProps> = ({
+  row,
+  column
+}: IDurationColumnProps) => {
   const { t } = useTranslation()
   const style = { ...getValue<any>(column, 'data.style', {}) }
 
@@ -19,3 +22,5 @@ export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
 
   return <div style={style}>{colValue}</div>
 }
+
+export * from './types'

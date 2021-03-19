@@ -1,4 +1,4 @@
-query($customerKey: String) {
+query CustomerProjects ($customerKey: String) {
   projects(customerKey: $customerKey) {
     tag
     key

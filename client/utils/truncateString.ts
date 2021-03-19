@@ -1,10 +1,11 @@
 /**
  * Truncate string
  *
- * @param {string[]} input String to truncate
- * @param {number} length Max length
+ * @param str - String to truncate
+ * @param length - Max length
  */
-export function truncateString(input: string, length: number): string {
-  if (input.length > length) return input.substring(0, length) + '...'
-  return input
+export function truncateString(string: string, length: number): string {
+  if (string.length > length)
+    return string.slice(0, Math.max(0, length)) + '...'
+  return string
 }

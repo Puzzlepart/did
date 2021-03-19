@@ -1,32 +1,65 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import format from 'string-format'
 
-class BaseNotification {
+/**
+ * Used as a base to create notifications to the user
+ */
+export class UserNotification {
+  /**
+   * Notification ID
+   */
+  public id: string
+
+  /**
+   * Notification text
+   */
   public text: string
-  public moreLink: string
 
   constructor(
-    public id: string,
+    id: string,
     public type: number,
     public severity: number,
-    period: any,
+    private _period: any,
     template: string
   ) {
-    this.text = format(template, period.week, period.month)
-    this.moreLink = ['', 'timesheet/overview', ...period.id.split('_')].join(
-      '/'
-    )
+    this.id = this._generateId(id)
+    this.text = format(template, _period.week, _period.month)
+  }
+
+  /**
+   * Generates a unique notification id
+   *
+   * @param id - Id
+   */
+  private _generateId(id: string) {
+    return id.replace(/[^\dA-Za-z]/g, '')
+  }
+
+  /**
+   * More link
+   *
+   * @remarks This could be handled on the client in the future
+   */
+  public get moreLink() {
+    return ['', 'timesheet/overview', ...this._period.id.split('_')].join('/')
   }
 }
 
-export class ForecastNotification extends BaseNotification {
+/**
+ * @ignore
+ */
+export class ForecastNotification extends UserNotification {
   constructor(period: any, template: string) {
-    super(`forecast_${period.id}`, 1, 2, period, template)
+    super(`forecast${period.id}`, 1, 2, period, template)
   }
 }
 
-export class UnconfirmedPeriodNotification extends BaseNotification {
+/**
+ * @ignore
+ */
+export class UnconfirmedPeriodNotification extends UserNotification {
   constructor(period: any, template: string) {
-    super(`unconfirmed_period_${period.id}`, 0, 2, period, template)
+    super(`unconfirmedperiod${period.id}`, 0, 2, period, template)
   }
 }

@@ -1,16 +1,15 @@
 import { useMutation } from '@apollo/client'
+import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { IconPicker } from 'components/IconPicker'
 import {
-  DefaultButton,
   Label,
   Panel,
   PanelType,
   PrimaryButton,
   TextField
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { useState } from 'react'
-import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
 import { LabelInput } from 'types'
 import { omit } from 'underscore'
@@ -28,7 +27,6 @@ export const LabelForm = (props: ILabelFormProps) => {
       color: '#F8E71C'
     }
   )
-  const [colorPickerVisible, setColorPickerVisible] = useState<boolean>(false)
   const [addOrUpdateLabel] = useMutation($addOrUpdateLabel)
 
   /**
@@ -84,27 +82,15 @@ export const LabelForm = (props: ILabelFormProps) => {
         width={300}
         onSelected={(icon) => setModel({ ...model, icon })}
       />
-      <div className={styles.inputField}>
-        <Label>{t('common.colorLabel')}</Label>
-        <DefaultButton
-          text={
-            colorPickerVisible
-              ? t('common.closeColorPickerText')
-              : t('common.openColorPickerText')
-          }
-          iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
-          onClick={() => setColorPickerVisible(!colorPickerVisible)}
-        />
-        {colorPickerVisible && (
-          <SketchPicker
-            color={model.color}
-            onChange={({ hex }) => setModel({ ...model, color: hex })}
-          />
-        )}
-      </div>
+      <ColorPickerField
+        className={styles.inputField}
+        label={t('common.colorLabel')}
+        color={model.color}
+        onChanged={(color) => setModel({ ...model, color })}
+      />
       <div className={styles.inputField}>
         <Label>{t('common.previewText')}</Label>
-        <EntityLabel label={model} size='medium' />
+        <EntityLabel label={model} />
       </div>
       <PrimaryButton
         className={styles.saveBtn}

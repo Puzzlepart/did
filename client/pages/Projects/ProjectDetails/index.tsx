@@ -1,4 +1,5 @@
-import { Pivot, PivotItem } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'
@@ -8,6 +9,9 @@ import { Information } from './Information'
 import styles from './ProjectDetails.module.scss'
 import { TimeEntries } from './TimeEntries'
 
+/**
+ * @category Projects
+ */
 export const ProjectDetails: FunctionComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ProjectsContext)
@@ -36,3 +40,7 @@ export const ProjectDetails: FunctionComponent = () => {
     </div>
   )
 }
+
+export * from './Header'
+export * from './Information'
+export * from './TimeEntries'

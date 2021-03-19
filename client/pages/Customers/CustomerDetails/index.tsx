@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBar, MessageBarType } from 'office-ui-fabric'
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react'
 import { ProjectList } from 'pages/Projects'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,9 +1,32 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
 import { Role } from '../types'
 
+/**
+ * A type that describes a User photo
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a User photo',
+  simpleResolvers: true
+})
+export class UserPhoto {
+  @Field({
+    description: 'Base64 representation of the User photo',
+    nullable: true
+  })
+  base64?: string
+}
+
+/**
+ * A type that describes a User
+ *
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a User',
   simpleResolvers: true
@@ -11,10 +34,10 @@ import { Role } from '../types'
 export class User {
   _id?: string
 
-  @Field(() => ID)
+  @Field(() => ID, { nullable: true })
   id?: string
 
-  @Field()
+  @Field({ nullable: true })
   displayName?: string
 
   @Field({ nullable: true })
@@ -33,16 +56,28 @@ export class User {
   mail?: string
 
   @Field({ nullable: true })
+  startPage?: string
+
+  @Field({ nullable: true })
   preferredLanguage?: string
 
-  @Field(() => Role)
+  @Field({ nullable: true })
+  hiddenFromReports?: boolean
+
+  @Field(() => Role, { nullable: true })
   role?: Role | string
 
-  @Field(() => Subscription)
+  @Field(() => Subscription, { nullable: true })
   subscription?: Subscription
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   configuration?: any
+
+  @Field({ nullable: true })
+  provider?: string
+
+  @Field({ nullable: true })
+  photo?: UserPhoto
 
   public create?(user: User): User {
     Object.assign(this, user)
@@ -50,6 +85,9 @@ export class User {
   }
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'Input object for Role used in Mutation addOrUpdateUser/addUsers'
 })
@@ -76,20 +114,29 @@ export class UserInput {
   mail?: string
 
   @Field({ nullable: true })
+  startPage?: string
+
+  @Field({ nullable: true })
   preferredLanguage?: string
 
   @Field({ nullable: true })
-  role?: string
-}
+  hiddenFromReports?: boolean
 
-@InputType({ description: 'Input object for User query options' })
-export class UserQueryOptions {
   @Field({ nullable: true })
-  sortBy?: string
+  role?: string
+
+  @Field({ nullable: true })
+  provider?: string
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({ description: 'Input object for User query' })
 export class UserQuery {
   @Field({ nullable: true })
   role?: string
+
+  @Field({ nullable: true })
+  hiddenFromReports?: boolean
 }

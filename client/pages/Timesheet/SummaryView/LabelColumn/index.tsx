@@ -1,5 +1,5 @@
 import { EntityLabel } from 'components/EntityLabel'
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
 import { LabelObject as Label } from 'types'
 import { isEmpty } from 'underscore'
@@ -21,8 +21,8 @@ export const LabelColumn = (props: ILabelColumnProps) => {
           <div className={styles.description}>for {props.customer.name}</div>
           {!isEmpty(props.project.labels) && (
             <div className={styles.labels}>
-              {(props.project.labels as Label[]).map((label, idx: number) => (
-                <EntityLabel key={idx} label={label} size='xsmall' />
+              {(props.project.labels as Label[]).map((label, index: number) => (
+                <EntityLabel key={index} label={label} />
               ))}
             </div>
           )}

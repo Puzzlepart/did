@@ -1,7 +1,15 @@
-import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric'
-import React from 'react'
+/* eslint-disable tsdoc/syntax */
+import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
 
-export const ScrollablePaneWrapper = ({ children, condition, height }) =>
+/**
+ * @category Function Component
+ */
+export const ScrollablePaneWrapper: FunctionComponent<any> = ({
+  children,
+  condition,
+  height
+}) =>
   condition ? (
     <div style={{ position: 'relative', height }}>
       <ScrollablePane

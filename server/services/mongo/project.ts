@@ -1,4 +1,6 @@
+/* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
 import { filter, find, pick } from 'underscore'
 import { CustomerService } from '.'
 import { Context } from '../../graphql/context'
@@ -16,19 +18,27 @@ export type ProjectsData = {
   labels: Label[]
 }
 
+/**
+ * Project service
+ *
+ * @extends MongoDocumentService
+ * @category Injectable Container Service
+ */
+@Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
-  private _customer: CustomerService
-  private _label: LabelService
-
   /**
-   * Constructor for MongoDatabase
+   * Constructor for `ProjectService`
    *
-   * @param {Context} context Context
+   * @param context - Injected context through `typedi`
+   * @param _customerSvc - Injected `CustomerService` through `typedi`
+   * @param _labelSvc - Injected `LabelService` through `typedi`
    */
-  constructor(context: Context) {
+  constructor(
+    @Inject('CONTEXT') readonly context: Context,
+    private readonly _customerSvc: CustomerService,
+    private readonly _labelSvc: LabelService
+  ) {
     super(context, 'projects', ProjectService.name)
-    this._customer = new CustomerService(context)
-    this._label = new LabelService(context)
   }
 
   /**
@@ -36,20 +46,20 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * Returns the ID of the added project
    *
-   * @param {Project} project Project to add
+   * @param project - Project to add
    */
   public async addProject(project: Project): Promise<string> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
       const tag = [project.customerKey, project.key].join(' ')
-      const { insertedId } = await this.collection.insertOne({
+      const { insertedId } = await this.insert({
         _id: tag,
         tag,
         ...project
       })
       return insertedId
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -58,18 +68,16 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * Returns true if the operation was successful
    *
-   * @param {Project} project Project to update
+   * @param project - Project to update
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
-      const { result } = await this.collection.updateOne(filter, {
-        $set: project
-      })
+      const { result } = await this.update(filter, project)
       return result.ok === 1
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -80,7 +88,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * Connects labels and customer to projects
    *
-   * @param {FilterQuery<Project>} query Query
+   * @param query - Query
    */
   public getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
@@ -88,10 +96,10 @@ export class ProjectService extends MongoDocumentService<Project> {
         async () => {
           const [projects, customers, labels] = await Promise.all([
             this.find(query, { name: 1 }),
-            this._customer.getCustomers(
+            this._customerSvc.getCustomers(
               query?.customerKey && { key: query.customerKey }
             ),
-            this._label.getLabels()
+            this._labelSvc.getLabels()
           ])
           const _projects = projects
             .map((p) => {
@@ -108,8 +116,8 @@ export class ProjectService extends MongoDocumentService<Project> {
         },
         { key: ['getprojectsdata', query?.customerKey.toString()] }
       )
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

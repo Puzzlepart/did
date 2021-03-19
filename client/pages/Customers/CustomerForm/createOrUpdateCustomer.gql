@@ -1,4 +1,4 @@
-mutation($customer: CustomerInput!, $update: Boolean) {
+mutation CreateOrUpdateCustomer ($customer: CustomerInput!, $update: Boolean) {
   result: createOrUpdateCustomer(customer: $customer, update: $update) {
     success
     error {

@@ -1,0 +1,40 @@
+.root {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 8px;
+  padding: 0 10px 0 12px;
+
+  &:hover {
+    color: #fff;
+  }
+
+  .user {
+    div[class*='ms-Persona-primaryText'] {
+      color: #fff;
+    }
+    div[class*='ms-Persona-secondaryText'] {
+      color: #fff;
+      display: block;
+      font-size: 10px;
+    }
+  }
+}
+
+.menu {
+  border-radius: 3px;
+  padding-top: 15px;
+  height: auto;
+  width: auto;
+  z-index: 100;
+  overflow: hidden;
+  position: relative;
+
+  .divider {
+    display: block;
+    height: 0;
+    margin: 0;
+    border-top: 1px solid #e1e4e8;
+  }
+}

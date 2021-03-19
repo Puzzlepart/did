@@ -1,0 +1,20 @@
+{
+  "name": "did-server",
+  "includeVersion": true,
+  "out": "server/.docs",
+  "readme": "none",
+  "excludeInternal": true,
+  "hideGenerator": true,
+  "gitRevision": "dev",
+  "categorizeByGroup": true,
+  "categoryOrder": ["Resolver", "*"],
+  "entryPoints": [
+    "server/index.ts",
+    "server/app.ts",
+    "server/graphql/index.ts",
+    "server/middleware/index.ts",
+    "server/routes/auth.ts",
+    "server/services/index.ts",
+    "server/utils/index.ts"
+  ]
+}

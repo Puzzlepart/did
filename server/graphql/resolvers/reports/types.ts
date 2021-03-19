@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, Project, User } from '../types'
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a TimeEntry',
   simpleResolvers: true
@@ -60,14 +64,38 @@ export class TimeEntry {
   resource: User
 }
 
+/**
+ * Reports query preset
+ *
+ * @category GraphQL Type
+ */
+export type ReportsQueryPreset =
+  | 'LAST_MONTH'
+  | 'CURRENT_MONTH'
+  | 'LAST_YEAR'
+  | 'CURRENT_YEAR'
+  | 'FORECAST'
+
+/**
+ * @category GraphQL InputType
+ */
 @InputType()
 export class ReportsQuery {
-  @Field({ nullable: true })
-  preset?: string
-
+  /**
+   * ID of the project to filter on
+   */
   @Field({ nullable: true })
   projectId?: string
+}
+
+/**
+ * @category GraphQL InputType
+ */
+@InputType()
+export class ConfirmedPeriodsQuery {
+  @Field({ nullable: true })
+  week?: number
 
   @Field({ nullable: true })
-  userId?: string
+  year?: number
 }

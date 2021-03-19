@@ -1,0 +1,35 @@
+query UserContext {
+  subscription {
+    id
+    name
+    owner
+    settings {
+      forecast {
+        enabled
+        notifications
+      }
+      adsync {
+        enabled
+        properties
+        syncUserPhoto
+      }
+    }
+  }
+  user: currentUser {
+    id
+    mail
+    displayName
+    role {
+      name
+      icon
+      permissions
+    }
+    startPage
+    preferredLanguage
+    configuration
+    photo {
+      base64
+    }
+  }
+  authProviders
+}

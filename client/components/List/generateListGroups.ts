@@ -1,19 +1,21 @@
 import * as arraySort from 'array-sort'
 import { getValue } from 'helpers'
-import { IGroup } from 'office-ui-fabric'
+import { IGroup } from 'office-ui-fabric-react'
 import { isEmpty, unique } from 'underscore'
-import { IListGroups } from './types'
+import { IListGroupProps } from './types'
+
+type GenerateListGroups = [IGroup[], any[]]
 
 /**
  * Create groups
  *
- * @param {any[]} items Items
- * @param {IListGroups} props Props
+ * @param items - Items
+ * @param props - Props
  */
 export function generateListGroups(
   items: any[],
-  props: IListGroups
-): [IGroup[], any[]] {
+  props: IListGroupProps
+): GenerateListGroups {
   if (isEmpty(items)) return [null, []]
   const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
@@ -22,7 +24,7 @@ export function generateListGroups(
   )
   const uniqueGroupNames =
     props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
-  const groups = uniqueGroupNames.map((name, idx) => {
+  const groups = uniqueGroupNames.map((name, index) => {
     const itemsInGroup = items.filter((item) => {
       const itemValue = `${getValue<string>(
         item,
@@ -33,7 +35,7 @@ export function generateListGroups(
     })
     const total = props.totalFunc ? props.totalFunc(itemsInGroup) : ''
     const group: IGroup = {
-      key: idx.toString(),
+      key: index.toString(),
       name: `${name} ${total}`,
       startIndex: groupNames
         .map((g) => g.toLowerCase())

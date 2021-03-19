@@ -1,16 +1,20 @@
-import { AppContext } from 'AppContext'
+/* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
-import { DefaultButton, MessageBarType } from 'office-ui-fabric'
-import React, { useContext } from 'react'
+import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
 import styles from './Home.module.scss'
+import { useAuthProviders } from './useAuthProviders'
+import { useHome } from './useHome'
 
-export default (): React.ReactElement<HTMLDivElement> => {
-  const { subscription } = useContext(AppContext)
+/**
+ * @category Function Component
+ */
+export const Home: FunctionComponent = () => {
+  const { error, subscription } = useHome()
+  const providers = useAuthProviders()
   const { t } = useTranslation()
-  const error = JSON.parse(
-    document.getElementById('app').getAttribute('data-error') || null
-  )
 
   return (
     <div className={styles.root}>
@@ -22,15 +26,30 @@ export default (): React.ReactElement<HTMLDivElement> => {
           type={MessageBarType.error}
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
+          onDismiss={() => {
+            window.location.href = window.location.href.split('?')[0]
+          }}
         />
       )}
-      <div hidden={!!subscription || !!error}>
-        <DefaultButton
-          className={styles.signinbutton}
-          href='/auth/signin'
-          text={t('common.signInText')}
+      {isEmpty(Object.keys(providers)) && (
+        <UserMessage
+          type={MessageBarType.warning}
+          text={t('common.signInDisabledMessage')}
         />
-      </div>
+      )}
+      {!subscription && !error && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {Object.keys(providers).map((key) => (
+            <DefaultButton
+              key={key}
+              onClick={() => document.location.replace(`/auth/${key}/signin`)}
+              iconProps={{ iconName: providers[key].iconName }}
+              style={{ marginTop: 10 }}
+              text={providers[key].text}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

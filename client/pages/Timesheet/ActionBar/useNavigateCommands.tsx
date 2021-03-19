@@ -1,53 +1,34 @@
-import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { useContext } from 'react'
-import { ITimesheetContext } from '../context'
-import { SET_SCOPE } from '../reducer/actions'
+import { NEXT_PERIOD, PREVIOUS_PERIOD, SET_SCOPE } from '../reducer/actions'
 import { TimesheetContext, TimesheetScope } from '../types'
-import styles from './ActionBar.module.scss'
 
-const navigateCommands = [
-  {
-    title: (t: TFunction) => t('timesheet.goToCurrentWeek'),
-    date: new Date(),
-    iconName: 'RenewalCurrent',
-    disabled: (context: ITimesheetContext) =>
-      context.scope.isCurrentWeek || context.loading
-  },
-  {
-    title: (t: TFunction) => t('timesheet.goToPrevWeek'),
-    add: '-1w',
-    iconName: 'Back',
-    disabled: (context: ITimesheetContext) => context.loading
-  },
-  {
-    title: (t: TFunction) => t('timesheet.goToNextWeek'),
-    add: '1w',
-    iconName: 'Forward',
-    disabled: (context: ITimesheetContext) => context.loading
-  }
-]
 /**
- * Use navigate commands
+ * Returns Timesheet navigation commands based on
+ * `state` from `TimesheetContext`.
  */
 export function useNavigateCommands(): IContextualMenuItem[] {
-  const context = useContext(TimesheetContext)
-  return navigateCommands.map(
-    (cmd, key) =>
-      ({
-        key: `${key}`,
-        iconOnly: true,
-        disabled: cmd.disabled(context),
-        iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
-        onClick: () =>
-          context.dispatch(
-            SET_SCOPE({
-              scope: cmd.add
-                ? context.scope.set(cmd?.add)
-                : new TimesheetScope(cmd.date)
-            })
-          ),
-        title: cmd.title(context.t)
-      } as IContextualMenuItem)
-  )
+  const { scope, loading, dispatch, t } = useContext(TimesheetContext)
+  const navigateCurrentWeek: IContextualMenuItem = {
+    key: 'NAVIGATE_CURRENT_WEEK',
+    title: t('timesheet.goToCurrentWeek'),
+    iconProps: { iconName: 'RenewalCurrent' },
+    disabled: scope.isCurrentWeek || !!loading,
+    onClick: () => dispatch(SET_SCOPE(new TimesheetScope(new Date())))
+  }
+  const navigatePreviousPeriod: IContextualMenuItem = {
+    key: 'navigatePreviousPeriod',
+    title: t('timesheet.goToPrevWeek'),
+    iconProps: { iconName: 'Back' },
+    disabled: !!loading,
+    onClick: () => dispatch(PREVIOUS_PERIOD())
+  }
+  const navigateNextPeriod: IContextualMenuItem = {
+    key: 'navigateNextPeriod',
+    title: t('timesheet.goToNextWeek'),
+    iconProps: { iconName: 'Forward' },
+    disabled: !!loading,
+    onClick: () => dispatch(NEXT_PERIOD())
+  }
+  return [navigateCurrentWeek, navigatePreviousPeriod, navigateNextPeriod]
 }

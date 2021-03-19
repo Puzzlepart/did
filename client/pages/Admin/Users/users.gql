@@ -1,4 +1,4 @@
-{
+query UsersAdmin {
   activeDirectoryUsers {
     id
     displayName
@@ -16,6 +16,8 @@
     surname
     jobTitle
     mail
+    hiddenFromReports
+    provider
     role {
       name
       description

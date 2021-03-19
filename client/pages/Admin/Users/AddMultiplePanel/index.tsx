@@ -1,11 +1,11 @@
 import { List } from 'components'
 import {
   CheckboxVisibility,
-  SelectionMode,
-  PrimaryButton,
   Panel,
-  PanelType
-} from 'office-ui-fabric'
+  PanelType,
+  PrimaryButton,
+  SelectionMode
+} from 'office-ui-fabric-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
@@ -33,7 +33,7 @@ export const AddMultiplePanel = (props: IAddMultiplePanel) => {
         />
         <List
           items={activeDirectoryUsers}
-          selection={{
+          selectionProps={{
             mode: SelectionMode.multiple,
             onChanged: (selected) => setSelectedUsers(selected)
           }}

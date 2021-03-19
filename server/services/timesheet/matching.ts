@@ -1,19 +1,28 @@
+/* eslint-disable tsdoc/syntax */
 import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
-import MSGraphEvent from '../msgraph/types'
+import { ProjectMatch } from './types'
 
-type ProjectMatch = { id: string; key: string; customerKey: string }
-
-export default class {
+/**
+ * Timesheet matching engine
+ *
+ * @category TimesheetService
+ */
+export default class TimesheetMatchingEngine {
+  /**
+   * Constructor for `TimesheetMatchingEngine`
+   * 
+   * @param _data - Projects data
+   */
   constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
    *
-   * @param {Customer} customer Customer
-   * @param {string} projectKey Project key
+   * @param customer - Customer
+   * @param projectKey - Project key
    */
   private _findProjectSuggestion(customer: Customer, projectKey: string) {
     try {
@@ -28,7 +37,7 @@ export default class {
         customerProjects.filter((p) => p.key === target.toUpperCase())
       )
       return suggestion
-    } catch (error) {
+    } catch {
       return null
     }
   }
@@ -41,7 +50,7 @@ export default class {
    * * Returns 'body' if ignore tag is found in body
    * * Otherwise returns nulll
    *
-   * @param {EventObject} event
+   * @param event - Event to check for ignore
    */
   private _findIgnore(event: EventObject) {
     const ignoreCategory = find(
@@ -49,29 +58,28 @@ export default class {
       (c) => c.toLowerCase() === 'ignore'
     )
     if (!!ignoreCategory) return 'category'
-    if ((event.body || '').match(/[(\[\{]IGNORE[)\]\}]/gi) !== null)
-      return 'body'
+    if ((event.body || '').match(/[([{]ignore[)\]}]/gi) !== null) return 'body'
     return null
   }
 
   /**
    * Find project match in title/subject/categories
    *
-   * @param {string} inputStr The String object or string literal on which to perform the search.
-   * @param {boolean} strictMode Strict mode - require token
+   * @param inputStr - The String object or string literal on which to perform the search.
+   * @param strictMode - Strict mode - require token
    *
    * @returns an array of matches found in the inputStr
    */
   private _searchString(
-    inputStr: string,
+    inputString: string,
     strictMode: boolean = true
   ): ProjectMatch[] {
-    let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
+    let regex = /((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}))/gim
     if (strictMode)
-      regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
+      regex = /[([{]((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}?))[)\]}]/gim
     const matches = []
     let match: RegExpExecArray
-    while ((match = regex.exec(inputStr)) !== null) {
+    while ((match = regex.exec(inputString)) !== null) {
       const { key, customerKey } = match.groups
       matches.push({
         ...match.groups,
@@ -84,21 +92,21 @@ export default class {
   /**
    * Find project match in title/body/categories
    *
-   * @param {string} inputStr The String object or string literal on which to perform the search.
-   * @param {string} categoriesStr Categories string
+   * @param inputStr - The String object or string literal on which to perform the search.
+   * @param categoriesStr - Categories string
    */
   private _findProjectMatches(
-    inputStr: string,
-    categoriesStr: string
+    inputString: string,
+    categoriesString: string
   ): ProjectMatch[] {
-    const matches = this._searchString(categoriesStr, false)
-    return matches || this._searchString(inputStr)
+    const matches = this._searchString(categoriesString, false)
+    return matches || this._searchString(inputString)
   }
 
   /**
    * Find label matches in categories
    *
-   * @param {string[]} categories
+   * @param categories - Categories
    */
   private _findLabels(categories: string[]) {
     return filter(this._data.labels, (lbl) => contains(categories, lbl.name))
@@ -107,29 +115,28 @@ export default class {
   /**
    * Checks for project match in event
    *
-   * 1. Checks category/title/description for tokens
-   * 2. Checks title/description for key without any brackets/parantheses
+   * 1. Checks `category`, `title` and `description` for tokens
+   * 2. Checks `title` and `description` for key without any brackets/parantheses
+   * 3.If we found token matches in `srchStr` or `categoriesStr`
+   * We look through the matches and check if they match against
+   * a project
    *
-   * @param {EventObject} event Event
+   * @param event - Event
    */
   private _matchEvent(event: EventObject) {
     const ignore = this._findIgnore(event)
     if (ignore === 'category') {
       return { ...event, isSystemIgnored: true }
     }
-    const categoriesStr = event.categories.join('|').toUpperCase()
-    const srchStr = [event.title, event.body, categoriesStr]
+    const categoriesString = event.categories.join('|').toUpperCase()
+    const srchString = [event.title, event.body, categoriesString]
       .join('|')
       .toUpperCase()
-    const matches = this._findProjectMatches(srchStr, categoriesStr)
+    const matches = this._findProjectMatches(srchString, categoriesString)
     let projectKey: string
 
-    // We found token matches in srchStr or categoriesStr
-    // We look through the matches and check if they match against
-    // a project
     if (!isEmpty(matches)) {
-      for (let i = 0; i < matches.length; i++) {
-        const match = matches[i]
+      for (const match of matches) {
         event.customer = find(
           this._data.customers,
           (c) => match.customerKey === c.key
@@ -152,7 +159,7 @@ export default class {
 
     // We search the whole srchStr for match in non-strict/soft mode
     else {
-      const softMatches = this._searchString(srchStr, false)
+      const softMatches = this._searchString(srchString, false)
       event.project = find(
         this._data.projects,
         ({ _id }) => !!find(softMatches, (m) => m.id === _id)
@@ -179,7 +186,7 @@ export default class {
   /**
    * Check if project or customer is marked as inactive
    *
-   * @param {EventObject} event
+   * @param event - Event to check
    */
   private _checkInactive(event: EventObject) {
     const inactiveProject = event?.project?.inactive
@@ -196,9 +203,11 @@ export default class {
   /**
    * Match events
    *
-   * @param {MSGraphEvent[]} events
+   * @param events - Events to match
+   *
+   * @returns Events matched to projects, customers and labels
    */
-  public matchEvents(events: MSGraphEvent[]): EventObject[] {
+  public matchEvents(events: EventObject[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))
   }
 }

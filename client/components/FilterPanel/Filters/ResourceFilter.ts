@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
 import { contains, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
+/**
+ * @category FilterPanel
+ */
 export class ResourceFilter<
   ItemType = any,
   KeyType = any
@@ -11,9 +15,9 @@ export class ResourceFilter<
   /**
    * Constructor
    *
-   * @param {string} keyFieldName Field name for the item key
-   * @param {string} valueFieldName Field name for the item value
-   * @param {string} name Filter name
+   * @param keyFieldName - Field name for the item key
+   * @param valueFieldName - Field name for the item value
+   * @param name - Filter name
    */
   constructor(
     public keyFieldName: string,
@@ -24,15 +28,15 @@ export class ResourceFilter<
   }
 
   /**
-   * Intialize the ResourceFilter
+   * Intialize the `ResourceFilter`
    *
-   * @param {ItemType[]} items Items
+   * @param items_ - Items
    */
-  public initialize(items: ItemType[]): IFilter {
-    const _items = unique(
-      items.map((e) => ({
-        key: getValue(e, this.keyFieldName, null),
-        value: getValue(e, this.valueFieldName, null)
+  public initialize(items_: ItemType[]): IFilter {
+    const items = unique(
+      items_.map((item_) => ({
+        key: getValue(item_, this.keyFieldName, null),
+        value: getValue(item_, this.valueFieldName, null)
       })),
       (item) => item.key
     ).sort((a, b) => {
@@ -43,8 +47,8 @@ export class ResourceFilter<
     return {
       key: this.keyFieldName,
       name: this.name,
-      items: _items,
-      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
+      items,
+      selected: items.filter((index) => contains(this._selectedKeys, index.key))
     }
   }
 

@@ -1,79 +1,93 @@
+/* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
 import { pick } from 'underscore'
 import { Context } from '../../graphql/context'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+/**
+ * Role service
+ *
+ * @extends MongoDocumentService
+ * @category Injectable Container Service
+ */
+@Service({ global: false })
 export class RoleService extends MongoDocumentService<Role> {
-  constructor(context: Context) {
+  /**
+   * Constructor for `RoleService`
+   *
+   * @param context - Injected context through `typedi`
+   */
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'roles')
   }
 
   /**
    * Get roles
    *
-   * @param {FilterQuery<Role>} query Query
+   * @param query - Query
    */
   public async getRoles(query?: FilterQuery<Role>): Promise<Role[]> {
     try {
       const roles = await this.find(query)
       return roles
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
   /**
    * Get Role by name
    *
-   * @param {string} name Role name
+   * @param name - Role name
    */
   public async getByName(name: string): Promise<Role> {
     try {
       const role = await this.collection.findOne({ name })
       return role
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
   /**
    * Add role
    *
-   * @param {Role} role Role
+   * @param role - Role
    */
   public async addRole(role: Role) {
     try {
-      const result = await this.collection.insertOne(role)
+      const result = await this.insert(role)
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
   /**
    * Update role
    *
-   * @param {Role} role Role
+   * @param role - Role
    */
   public async updateRole(role: Role): Promise<void> {
     try {
-      await this.collection.updateOne(pick(role, 'name'), { $set: role })
-    } catch (err) {
-      throw err
+      await this.collection.updateOne(pick(role, 'name'), role)
+    } catch (error) {
+      throw error
     }
   }
 
   /**
    * Delete role
    *
-   * @param {string} name Role name
+   * @param name - Role name
    */
   public async deleteRole(name: string): Promise<void> {
     try {
       await this.collection.deleteOne({ name })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

@@ -22,7 +22,7 @@ export type ProjectFormAction =
 /**
  * Set project id
  *
- * @param {IProjectFormState} state State
+ * @param state - State
  */
 const setProjectId = (state: IProjectFormState) => {
   const { customerKey, key } = state.model
@@ -36,7 +36,7 @@ const setProjectId = (state: IProjectFormState) => {
 /**
  * Initialize state
  *
- * @param {Project} project Project
+ * @param project - Project
  */
 export const initState = (edit: Project): IProjectFormState => ({
   model: new ProjectModel(edit),
@@ -48,8 +48,8 @@ export const initState = (edit: Project): IProjectFormState => ({
 /**
  * Reducer for ProjectForm
  *
- * @param {IProjectFormState} state State
- * @param {ProjectFormAction} action Action
+ * @param state - State
+ * @param action - Action
  */
 export default (
   state: IProjectFormState,
@@ -84,9 +84,6 @@ export default (
         newState.validation = action.payload.validation
       }
       break
-
-    default:
-      throw new Error()
   }
   setProjectId(newState)
   return newState

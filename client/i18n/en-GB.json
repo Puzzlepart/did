@@ -12,20 +12,20 @@
     "confirmHoursText": "Confirm hours",
     "unconfirmHoursText": "Unconfirm hours",
     "goToCurrentWeek": "Go to current week",
-    "goToPrevWeek": "Go to previous week",
-    "goToNextWeek": "Go to next week",
-    "periodHoursSummaryText": "**{{hours}}** this period",
+    "goToPrevWeek": "Go to previous period",
+    "goToNextWeek": "Go to next period",
+    "weekHoursSummaryText": "**{{hours}}** this week. {{splitWeekInfoText}}",
     "hoursNotMatchedText": "**{{hours}}** unmatched this period. All events must be matched before you can confirm your timesheet.",
     "allHoursMatchedText": "**All hours matched!** Are you ready to confirm the period?",
     "periodConfirmedText": "**{{hours}}** confirmed this period. Click **Unconfirm hours** if you want to do some adjustments.",
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
     "undoIgnoreText": "Click to undo",
     "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
-    "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
+    "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above. ",
     "projectInactiveError": "Project is no longer active. Please resolve the event in Outlook.",
     "customerInactiveError": "Customer is no longer active. Please resolve the event in Outlook.",
-    "noProjectMatchFoundText": "No match found. Click **Resolve** to match the event manually or **Ignore** to ignore it.",
-    "resolveProjectButtonLabel": "Resolve",
+    "noProjectMatchFoundText": "No match found for any project.",
+    "resolveProjectButtonLabel": "Resolve manually",
     "ignoreEventButtonLabel": "Ignore",
     "clearProjectMatchTooltipText": "Clear match",
     "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
@@ -36,7 +36,7 @@
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
     "periodForecastedText": "The period is forecasted with {{hours}}.",
-    "matchEventPanelHeaderText": "Resolve event",
+    "matchEventPanelHeaderText": "Resolve event manually",
     "unforecastingPeriodDescription": "Hang on a minute...",
     "unforecastingPeriodLabel": "Removing forecast for the period",
     "forecastingPeriodLabel": "Forecasting period",
@@ -53,7 +53,8 @@
       "noDataText": "No data to show for the selected period.",
       "customerChartDescription": "Shows allocation per customer for the period",
       "projectChartDescription": "Shows allocation per project for the period"
-    }
+    },
+    "matchEventPanelSearchPlaceholder": "Search projects..."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -71,7 +72,7 @@
     "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, between {{PROJECT_KEY_MIN_LENGTH}} and {{PROJECT_KEY_MAX_LENGTH}} characters.",
     "nameFormValidationText": "Name should be at least {{PROJECT_NAME_MIN_LENGTH}} characters long.",
     "keyFormValidationText": "Project key should be between {{PROJECT_KEY_MIN_LENGTH}} and {{PROJECT_KEY_MAX_LENGTH}} characters long, and all uppercase.",
-    "createSuccess": "The project **{{name}}** was succesfully created. \nUse **{{projectId}}** to tag your events in Outlook.",
+    "createSuccess": "The project **{{name}}** was succesfully created. Use **{{projectId}}** to tag your events in Outlook.",
     "editLabel": "Edit project",
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed.",
     "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{id}}**. You can automatically create a category in Outlook by checking _Automatically create category in Outlook_.",
@@ -87,8 +88,9 @@
     "informationHeaderText": "Information",
     "timeEntriesHeaderText": "Time entries",
     "noInformationAvailable": "No information available about this project.",
-    "navigateText": "Go to project",
-    "iconFieldDescription": "Use an icon to make the project more recognizable in the Timesheet and Project pages. A random icon will be selected if you dont' pick one yourself."
+    "navigateText": "Details",
+    "iconFieldDescription": "Use an icon to make the project more recognizable in the Timesheet and Project pages. A random icon will be selected if you dont' pick one yourself.",
+    "createError": "We can't create the project at the moment. Please try again later."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -102,7 +104,8 @@
     "keyFieldLabel": "Customer key",
     "iconFieldDescription": "Use an icon to make the customer more recognizable in the Timesheet and Customer pages. A random icon will be selected if you dont' pick one yourself.",
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
-    "descriptionFieldDescription": "A short description for the customer. Supports markdown."
+    "descriptionFieldDescription": "A short description for the customer. Supports markdown.",
+    "createError": "We can't create the customer at the moment. Please try again later."
   },
   "admin": {
     "users": "Users",
@@ -127,7 +130,7 @@
     "editLabel": "Edit label",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
-    "noTimeEntriesText": "\nThere are no confirmed hours for the selected months in the selected year.",
+    "noTimeEntriesText": "\nThere are no confirmed hours for the selected months/weeks in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
     "tokenGeneratedText": "Make sure to copy your new personal access token now. You won’t be able to see it again!",
@@ -148,7 +151,13 @@
     "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
     "adUserSyncPropertiesLabel": "Properties to synchronize",
     "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
-    "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. "
+    "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
+    "userHiddenFromReportsLabel": "Hidden from reports",
+    "summaryViewProgressLabel": "Loading summary",
+    "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data...",
+    "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did.",
+    "adUserSyncUserPhotoLabel": "Synchronize user photo",
+    "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in."
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -201,8 +210,7 @@
     "iconFieldLabel": "Icon",
     "colorLabel": "Color",
     "createdLabel": "Created",
-    "closeColorPickerText": "Close color picker",
-    "openColorPickerText": "Click to pick color",
+    "openColorPickerText": "Select an color",
     "previewText": "Preview",
     "exportCurrentView": "Export current view",
     "monthLabel": "Month",
@@ -212,7 +220,7 @@
     "employeeLabel": "Employee",
     "yearLabel": "Year",
     "roleLabel": "Role",
-    "signInText": "Log in",
+    "ms365signInText": "Sign in with Microsoft 365",
     "signOutText": "Sign out",
     "roleUser": "User",
     "roleAdmin": "Administrator",
@@ -289,7 +297,7 @@
     },
     "preferredLanguageLabel": "Preferred language",
     "showAllFiltersText": "Show all ({{count}})",
-    "exportMyHours": "Export my hours",
+    "userReports": "My reports",
     "export": "Export",
     "exportTypeLastMonth": "Last month ({{monthName}})",
     "exportTypeCurrentMonth": "Current month ({{monthName}})",
@@ -301,12 +309,28 @@
     "officeLocationLabel": "Office Location",
     "departmentLabel": "Department",
     "mobilePhoneLabel": "Mobile phone",
-    "searchUserLabel": "Search in Azure Active Directory",
+    "searchUserLabel": "Search...",
     "exportTypeLastYear": "Last year ({{year}})",
     "fromDateLabel": "From:",
     "toDateLabel": "To:",
     "rangeLabel": "Range",
-    "totalHours": "Hours total"
+    "totalHours": "Hours total",
+    "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click _Export to Excel_ to export your hours to Excel.",
+    "exportExcel": "Export to Excel",
+    "errorFallbackHeader": "It looks like something went wrong",
+    "tryAgainText": "Try again, it might work...",
+    "githubIssueReportLinkText": "Report issue on GitHub",
+    "ownerLabel": "Owner",
+    "weekColumnTooltipTitle": "Week {{week}}",
+    "weekColumnTooltipHoursTotal": "<b>{{hours}} hours</b> total.",
+    "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}",
+    "disable": "Disable",
+    "startPageLabel": "Start page",
+    "preferredLanguageDescription": "Did will display menus and buttons in this language.",
+    "googleSignInText": "Sign in with Google",
+    "activeDirectory": "Azure AD",
+    "google": "Google",
+    "signInDisabledMessage": "Sign in is currently disabled. Please hold on."
   },
   "navigation": {
     "timesheet": "Timesheet",
@@ -333,7 +357,7 @@
     "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
     "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",
     "manageProjectsDescription": "Create new and edit existing projects.",
-    "accessReportsDescription": "Access to admin page where you administer users, roles, permissions, API tokens and labels.",
+    "accessReportsDescription": "Access to all Reports. Last year, this year, this month, last month and forecast. Also supports calls with API key.",
     "manageCustomersDescription": " Create new and edit existing customers.",
     "deleteCustomersDescription": "Deletion of customers is currently not supported.",
     "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
@@ -345,10 +369,11 @@
     "moreLinkText": "Read more here",
     "goToPeriodText": "Go to period",
     "headerText": "Notifications",
-    "emptyText": "You have no active notifications at this time.",
+    "emptyText": "You have no active notifications at this time. You have dismissed {{dismissedCount}} active notifications.",
     "templates": {
       "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
       "forecast": "Missing forecast for week {0} ({1})."
-    }
+    },
+    "clearDismissedText": "Click to show dismissed notifications."
   }
 }

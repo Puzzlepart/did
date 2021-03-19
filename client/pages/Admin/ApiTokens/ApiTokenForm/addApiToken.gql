@@ -1,3 +1,3 @@
-mutation($token: ApiTokenInput!) {
+mutation AddApiToken ($token: ApiTokenInput!) {
   apiKey: addApiToken(token: $token)
 }

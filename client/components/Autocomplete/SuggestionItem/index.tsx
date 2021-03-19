@@ -1,9 +1,13 @@
-import { Icon } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { omit } from 'underscore'
 import styles from './SuggestionItem.module.scss'
 import { ISuggestionItemProps } from './types'
 
+/**
+ * @category Autocomplete
+ */
 export function SuggestionItem(props: ISuggestionItemProps) {
   if (props.item.key === -1) {
     return <div data-is-focusable={true}>{props.item.text}</div>

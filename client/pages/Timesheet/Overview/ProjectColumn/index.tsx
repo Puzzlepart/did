@@ -1,6 +1,6 @@
 import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
 import { TFunction } from 'i18next'
-import { Icon, MessageBarType } from 'office-ui-fabric'
+import { Icon, MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -16,8 +16,8 @@ import { IProjectColumnProps } from './types'
 /**
  * Get error message
  *
- * @param {string} code Error code
- * @param {TFunction} t Translate function
+ * @param code - Error code
+ * @param t - Translate function
  */
 function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
   switch (code) {
@@ -28,7 +28,7 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
   }
 }
 
-const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
+export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   const { t } = useTranslation()
   const { dispatch, selectedPeriod } = useContext(TimesheetContext)
   let className = styles.root
@@ -53,7 +53,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     return (
       <div className={className}>
         <UserMessage
-          containerStyle={{ marginTop: 10 }}
+          containerStyle={{ marginTop: 10, width: '90%' }}
           isMultiline={true}
           type={MessageBarType.warning}
           iconName='TagUnknown'
@@ -93,5 +93,3 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     </ProjectTooltip>
   )
 }
-
-export default ProjectColumn

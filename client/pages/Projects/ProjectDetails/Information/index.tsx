@@ -1,6 +1,7 @@
+/* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBarType } from 'office-ui-fabric'
+import { MessageBarType } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown/with-html'
@@ -9,6 +10,9 @@ import { isEmpty } from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
 
+/**
+ * @category Projects
+ */
 export const Information: FunctionComponent = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)
@@ -31,8 +35,8 @@ export const Information: FunctionComponent = () => {
         />
       )}
       <div className={styles.labels}>
-        {(state.selected.labels as Label[]).map((label, idx) => (
-          <EntityLabel key={idx} label={label} size='medium' />
+        {(state.selected.labels as Label[]).map((label, index) => (
+          <EntityLabel key={index} label={label} />
         ))}
       </div>
       <UserMessage

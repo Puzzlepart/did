@@ -1,4 +1,4 @@
-mutation($name: String!) {
+mutation DeleteLabel ($name: String!) {
   deleteLabel(name: $name) {
     success
     error {

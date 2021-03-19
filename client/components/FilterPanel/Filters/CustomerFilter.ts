@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
 import { contains, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
+/**
+ * @category FilterPanel
+ */
 export class CustomerFilter<
   ItemType = any,
   KeyType = any
@@ -15,11 +19,11 @@ export class CustomerFilter<
   /**
    * Intialize the CustomerFilter
    *
-   * @param {ItemType[]} items Items
+   * @param items - Items
    */
   public initialize(items: ItemType[]): IFilter {
     const customers = unique(
-      items.map((e) => getValue(e, this.fieldName, null))
+      items.map((item_) => getValue(item_, this.fieldName, null))
     ).sort()
     const _items = customers.map((resource) => ({
       key: resource,
@@ -29,7 +33,9 @@ export class CustomerFilter<
       key: this.fieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
+      selected: _items.filter((index) =>
+        contains(this._selectedKeys, index.key)
+      )
     }
   }
 

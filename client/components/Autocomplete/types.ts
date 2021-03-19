@@ -1,13 +1,24 @@
-import { ISearchBoxProps } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { ISearchBoxProps } from 'office-ui-fabric-react'
 import { ISuggestionItem } from './SuggestionItem/types'
 
+/**
+ * @ignore
+ */
 export type AutocompleteSelectCallback<T = any> = (
   item: ISuggestionItem<T>
 ) => void
+
+/**
+ * @ignore
+ */
 export type AutocompleteItemIcons = {
   style: React.CSSProperties
 }
 
+/**
+ * @category Autocomplete
+ */
 export interface IAutocompleteProps<T = any> extends ISearchBoxProps {
   label?: string
   description?: string
@@ -20,6 +31,9 @@ export interface IAutocompleteProps<T = any> extends ISearchBoxProps {
   maxHeight?: number
 }
 
+/**
+ * @category Autocomplete
+ */
 export interface IAutocompleteState<T = any> {
   items?: ISuggestionItem<T>[]
   suggestions?: ISuggestionItem<T>[]

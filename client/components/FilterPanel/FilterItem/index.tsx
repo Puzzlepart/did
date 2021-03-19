@@ -1,13 +1,19 @@
-import { Checkbox, SearchBox } from 'office-ui-fabric'
-import React, { useState, useMemo } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { Checkbox, SearchBox } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { contains, isBlank } from 'underscore.string'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
-import { contains, isBlank } from 'underscore.string'
-import { useTranslation } from 'react-i18next'
 
-export const FilterItem = (props: IFilterItemProps) => {
+/**
+ * @category Function Component
+ */
+export const FilterItem: FunctionComponent<IFilterItemProps> = (
+  props: IFilterItemProps
+) => {
   const { t } = useTranslation()
-  const selectedKeys = props.filter.selected.map((f) => f.key)
+  const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
   const [searchTerm, onSearch] = useState<string>('')
   const [showCount, setShowCount] = useState(props.shortListCount)
 
@@ -32,7 +38,7 @@ export const FilterItem = (props: IFilterItemProps) => {
         <div key={item.key} className={styles.item}>
           <Checkbox
             label={item.value}
-            checked={selectedKeys.indexOf(item.key) !== -1}
+            checked={selectedKeys.has(item.key)}
             onChange={(_, checked) =>
               props.onFilterUpdated(props.filter, item, checked)
             }

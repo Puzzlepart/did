@@ -1,41 +1,35 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { List } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Role } from 'types'
-import { RoleColumns as columns } from './columns'
 import { IRolePanelProps, RolePanel } from './RolePanel'
 import $roles from './roles.gql'
 import styles from './Roles.module.scss'
+import { useColumns } from './useColumns'
 
+/**
+ * @category Function Component
+ */
 export const Roles = () => {
   const { t } = useTranslation()
   const { data, loading, refetch } = useQuery($roles)
   const [panel, setPanel] = useState<IRolePanelProps>(null)
-
-  /**
-   * On edit role
-   *
-   * @param {Role} role Role to edit
-   */
-  const onEdit = (role: Role) =>
-    setPanel({
-      headerText: t('admin.editRole'),
-      model: role
-    })
+  const columns = useColumns({ setPanel })
 
   return (
     <div className={styles.root}>
       <List
         enableShimmer={loading}
         items={data?.roles || []}
-        columns={columns(onEdit, t)}
+        columns={columns}
         commandBar={{
           items: [
             {
               key: 'ADD_NEW_ROLE',
               name: t('admin.addNewRole'),
-              onClick: () => setPanel({ headerText: t('admin.addNewRole') })
+              onClick: () => setPanel({ headerText: t('admin.addNewRole') }),
+              iconProps: { iconName: 'Permissions' }
             }
           ],
           farItems: []
@@ -44,7 +38,10 @@ export const Roles = () => {
       {panel && (
         <RolePanel
           {...panel}
-          onSave={() => refetch().then(() => setPanel(null))}
+          onSave={async () => {
+            await refetch()
+            setPanel(null)
+          }}
           onDismiss={() => setPanel(null)}
         />
       )}

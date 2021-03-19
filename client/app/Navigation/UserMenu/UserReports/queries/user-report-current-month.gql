@@ -1,0 +1,7 @@
+#import "./user-report-time-entry-fragment"
+
+query UserCurrentMonthReport {
+  userReport(preset: "CURRENT_MONTH") {
+    ...UserReportTimeEntryFragment
+  }
+}

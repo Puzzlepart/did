@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { ObjectType, InputType, Field, ID } from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'Input object for Label used in Mutation addOrUpdateLabel'
 })
@@ -19,6 +23,9 @@ export class LabelInput {
   icon?: string
 }
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a LabelObject',
   simpleResolvers: true
@@ -41,7 +48,7 @@ export class LabelObject {
   /**
    * Constructs a new Label
    *
-   * @param {LabelInput} input Input
+   * @param input - Input
    */
   constructor(input?: LabelInput) {
     Object.assign(this, input || {})

@@ -1,11 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable tsdoc/syntax */
 import { FilterPanel, List, UserMessage } from 'components'
-import DateUtils from 'DateUtils'
-import { Icon, Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric'
+import $date from 'DateUtils'
+import {
+  Icon,
+  Pivot,
+  PivotItem,
+  ProgressIndicator
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo } from 'react'
 import { isEmpty } from 'underscore'
-import getColumns from './columns'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
+import { useReports } from './hooks'
 import {
   CHANGE_QUERY,
   FILTERS_UPDATED,
@@ -13,17 +20,14 @@ import {
 } from './reducer/actions'
 import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
-import { useReports } from './hooks/useReports'
-import { useUpdateUserConfiguration } from './hooks/useUpdateUserConfiguration'
+import { SummaryView } from './SummaryView'
 
+/**
+ * @category Function Component
+ */
 export const Reports: FunctionComponent = () => {
-  const { state, dispatch, params, queries, filters, t } = useReports()
-  useUpdateUserConfiguration({
-    'reports.filters': state.savedFilters
-  })
-
-  const context = useMemo(() => ({ state, dispatch, t }), [state, dispatch, t])
-
+  const { state, dispatch, params, queries, columns, filters, t } = useReports()
+  const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
   return (
     <div className={styles.root}>
       <ReportsContext.Provider value={context}>
@@ -32,62 +36,87 @@ export const Reports: FunctionComponent = () => {
           onLinkClick={(item) =>
             dispatch(CHANGE_QUERY({ key: item.props.itemKey }))
           }>
-          {queries.map(({ key, text, iconName }) => (
-            <PivotItem
-              key={key}
-              itemKey={key}
-              headerText={text}
-              itemIcon={iconName}>
-              <div className={styles.container}>
-                {state.loading && (
-                  <div className={styles.progress}>
-                    <Icon iconName='OEM' className={styles.icon} />
-                    <ProgressIndicator
-                      className={styles.indicator}
-                      label={t('reports.generatingReportLabel')}
-                      description={t('reports.generatingReportDescription')}
-                    />
-                  </div>
-                )}
-                <List
-                  enableShimmer={state.loading}
-                  items={state.subset}
-                  groups={{
-                    ...state.groupBy,
-                    totalFunc: (items) => {
-                      const hrs = items.reduce(
-                        (sum, item) => sum + item.duration,
-                        0
-                      ) as number
-                      return t('common.headerTotalDuration', {
-                        duration: DateUtils.getDurationString(hrs, t)
-                      })
+          {queries
+            .filter((q) => !!q.text)
+            .map(({ key, text, iconName }) => (
+              <PivotItem
+                key={key}
+                itemKey={key}
+                headerText={text}
+                itemIcon={iconName}
+                headerButtonProps={{ disabled: state.loading }}>
+                <div className={styles.container}>
+                  {state.loading && (
+                    <div className={styles.progress}>
+                      <Icon iconName='OEM' className={styles.icon} />
+                      <ProgressIndicator
+                        className={styles.indicator}
+                        label={t('reports.generatingReportLabel')}
+                        description={t('reports.generatingReportDescription')}
+                      />
+                    </div>
+                  )}
+                  <List
+                    enableShimmer={state.loading}
+                    items={state.subset}
+                    listGroupProps={{
+                      ...state.groupBy,
+                      totalFunc: (items) => {
+                        const hrs = items.reduce(
+                          (sum, item) => sum + item.duration,
+                          0
+                        ) as number
+                        return t('common.headerTotalDuration', {
+                          duration: $date.getDurationString(hrs, t)
+                        })
+                      }
+                    }}
+                    columns={columns}
+                    commandBar={commandBar(context)}
+                  />
+                  <UserMessage
+                    hidden={
+                      !isEmpty(state.data.timeEntries) ||
+                      state.loading ||
+                      !state.preset
                     }
-                  }}
-                  columns={getColumns({ isResizable: true }, t)}
-                  commandBar={commandBar(context)}
-                />
-                <UserMessage
-                  hidden={
-                    !isEmpty(state.timeentries) || state.loading || !state.query
-                  }
-                  text={t('reports.noEntriesText')}
-                />
-                <FilterPanel
-                  isOpen={state.isFiltersOpen}
-                  headerText={t('reports.filterPanelHeaderText')}
-                  filters={filters}
-                  items={state.timeentries}
-                  onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
-                  onFiltersUpdated={(filters) =>
-                    dispatch(FILTERS_UPDATED({ filters }))
-                  }
-                  shortListCount={10}>
-                  <SaveFilterForm />
-                </FilterPanel>
-              </div>
-            </PivotItem>
-          ))}
+                    text={t('reports.noEntriesText')}
+                  />
+                  <FilterPanel
+                    isOpen={state.isFiltersOpen}
+                    headerText={t('reports.filterPanelHeaderText')}
+                    filters={filters}
+                    items={state.data.timeEntries}
+                    onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
+                    onFiltersUpdated={(filters) =>
+                      dispatch(FILTERS_UPDATED({ filters }))
+                    }
+                    shortListCount={10}>
+                    <SaveFilterForm />
+                  </FilterPanel>
+                </div>
+              </PivotItem>
+            ))}
+          <PivotItem
+            key='summary'
+            itemKey='summary'
+            headerText={t('admin.summary')}
+            itemIcon='CalendarWeek'
+            headerButtonProps={{ disabled: state.loading }}>
+            <div className={styles.container}>
+              {state.loading && (
+                <div className={styles.progress}>
+                  <Icon iconName='OEM' className={styles.icon} />
+                  <ProgressIndicator
+                    className={styles.indicator}
+                    label={t('reports.generatingReportLabel')}
+                    description={t('reports.generatingReportDescription')}
+                  />
+                </div>
+              )}
+              <SummaryView />
+            </div>
+          </PivotItem>
           <PivotItem itemKey='default' headerButtonProps={{ disabled: true }}>
             <UserMessage
               className={styles.container}

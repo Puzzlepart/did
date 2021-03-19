@@ -1,12 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 import { HotkeyModal } from 'components/HotkeyModal'
-import { Pivot, PivotItem } from 'office-ui-fabric'
+import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
 import { ErrorBar } from './ErrorBar'
-import { useHotkeys } from './hooks/useHotkeys'
-import { useTimesheet } from './hooks/useTimesheet'
+import { useTimesheet } from './hooks'
+import { useHotkeys } from './hotkeys/useHotkeys'
 import { Overview } from './Overview'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { StatusBar } from './StatusBar'
@@ -14,6 +15,9 @@ import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { TimesheetContext, TimesheetView } from './types'
 
+/**
+ * @category Function Component
+ */
 export const Timesheet: FunctionComponent = () => {
   const { state, dispatch, context, t } = useTimesheet()
   const { hotkeysProps } = useHotkeys(context)

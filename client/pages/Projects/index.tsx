@@ -1,9 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Projects } from './Projects'
-export { ProjectList } from './Projects'
 
-const _ = (): React.ReactElement<Switch> => {
+/**
+ * @ignore
+ */
+export const ProjectsPage = () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -23,4 +26,9 @@ const _ = (): React.ReactElement<Switch> => {
   )
 }
 
-export default _
+export * from './context'
+export * from './ProjectDetails'
+export * from './ProjectForm'
+export * from './ProjectList'
+export * from './Projects'
+export * from './types'

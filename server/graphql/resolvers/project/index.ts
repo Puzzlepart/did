@@ -1,7 +1,9 @@
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { PermissionScope } from '../../../../shared/config/security'
+import { ProjectService } from '../../../services/mongo'
 import MSGraphService from '../../../services/msgraph'
 import { IAuthOptions } from '../../authChecker'
 import {
@@ -11,31 +13,41 @@ import {
   ProjectOptions
 } from '../types'
 
+/**
+ * Resolver for `Project`.
+ *
+ * `ProjectService` and `MSGraphService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
+ * @category GraphQL Resolver
+ */
 @Service()
 @Resolver(Project)
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
    *
-   * @param {MongoService} _mongo Mongo service
-   * @param {MSGraphService} _msgraph MSGraphService
+   * @param _project - Project service
+   * @param _msgraph - Microsoft Graph service
    */
   constructor(
-    private readonly _mongo: MongoService,
+    private readonly _project: ProjectService,
     private readonly _msgraph: MSGraphService
   ) {}
 
   /**
    * Get projects
    *
-   * @param {string} customerKey Customer key
+   * @param customerKey - Customer key
    */
-  @Authorized<IAuthOptions>()
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_PROJECTS })
   @Query(() => [Project], { description: 'Get projects' })
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string
   ): Promise<Project[]> {
-    const { projects } = await this._mongo.project.getProjectsData(
+    const { projects } = await this._project.getProjectsData(
       customerKey && { customerKey }
     )
     return projects
@@ -44,11 +56,11 @@ export class ProjectResolver {
   /**
    * Create or update project
    *
-   * @param {ProjectInput} project Project
-   * @param {ProjectOptions} options Options
-   * @param {boolean} update Update
+   * @param project - Project
+   * @param options - Options
+   * @param update - Update
    */
-  @Authorized<IAuthOptions>({ permission: 'ef4032fb' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_PROJECTS })
   @Mutation(() => CreateOrUpdateProjectResult, {
     description: 'Create or update project'
   })
@@ -59,10 +71,10 @@ export class ProjectResolver {
   ): Promise<CreateOrUpdateProjectResult> {
     const p = new Project(project)
     if (update) {
-      const success = await this._mongo.project.updateProject(p)
+      const success = await this._project.updateProject(p)
       return { success }
     } else {
-      const id = await this._mongo.project.addProject(p)
+      const id = await this._project.addProject(p)
       if (options.createOutlookCategory) {
         await this._msgraph.createOutlookCategory(id)
       }

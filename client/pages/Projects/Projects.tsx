@@ -1,17 +1,23 @@
+/* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components/UserMessage'
-import { PERMISSION } from 'config/security/permissions'
-import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric'
-import { ProjectForm } from 'pages/Projects/ProjectForm'
+import { usePermissions } from 'hooks'
+import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
 import { useProjects } from './hooks/useProjects'
 import { ProjectDetails } from './ProjectDetails'
-import ProjectList from './ProjectList'
+import { ProjectForm } from './ProjectForm'
+import { ProjectList } from './ProjectList'
 import { CHANGE_VIEW } from './reducer/actions'
 import { ProjectsView } from './types'
 
+/**
+ * @category Function Component
+ */
 export const Projects: FunctionComponent = () => {
-  const { state, dispatch, listProps, user, t, context } = useProjects()
+  const { hasPermission } = usePermissions()
+  const { state, dispatch, listProps, t, context } = useProjects()
 
   return (
     <ProjectsContext.Provider value={context}>
@@ -55,7 +61,7 @@ export const Projects: FunctionComponent = () => {
           />
           {state.selected && <ProjectDetails />}
         </PivotItem>
-        {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
+        {hasPermission(PermissionScope.MANAGE_PROJECTS) && (
           <PivotItem
             itemID='new'
             itemKey='new'
@@ -68,5 +74,3 @@ export const Projects: FunctionComponent = () => {
     </ProjectsContext.Provider>
   )
 }
-
-export { ProjectList, ProjectDetails, ProjectForm }

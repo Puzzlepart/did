@@ -6,10 +6,13 @@ import { Db as MongoDatabase, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
-import env from '../utils/env'
+import { environment } from '../utils'
 import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 
+/**
+ * GraphQL context
+ */
 export class Context {
   /**
    * Request ID
@@ -22,6 +25,13 @@ export class Context {
    * User ID
    */
   public userId?: string
+
+  /**
+   * Provider
+   *
+   * google or microsoft
+   */
+  provider?: 'google' | 'azuread-openidconnect'
 
   /**
    * Subscription
@@ -41,7 +51,7 @@ export class Context {
   /**
    * Mongo client
    */
-  public client?: MongoClient
+  public mongoClient?: MongoClient
 
   /**
    * Mongo database
@@ -50,39 +60,50 @@ export class Context {
 }
 
 /**
- * Create context
+ * Generate unique ID for the request
+ */
+export function generateUniqueRequestId() {
+  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+}
+
+/**
+ * Create GraphQL context
  *
- * @param {Express.Request} request Express request
- * @param {MongoClient} client Mongo client
+ * * Sets the default mongodb instance on the context
+ * * Sets the user subscription on the context
+ * * Checks token auth using handleTokenAuthentication
+ * * Generates a random request ID using Math random
+ * * Sets CONTEXT and REQUEST on the container to enable
+ *   dependency injection in the resolvers.
+ *
+ * @param request - Express request
+ * @param mongoClient - Mongo client
  */
 export const createContext = async (
   request: Express.Request,
-  client: MongoClient
+  mongoClient: MongoClient
 ): Promise<Context> => {
   try {
-    const db = client.db(env('MONGO_DB_DB_NAME'))
+    const database = mongoClient.db(environment('MONGO_DB_DB_NAME'))
     const context: Context = {}
-    context.client = client
-    context.subscription = get(request, 'user.subscription')
+    context.requestId = generateUniqueRequestId()
+    context.container = Container.of(context.requestId)
+    context.mongoClient = mongoClient
+    context.subscription = get(request, 'user.subscription', { default: {} })
     const apiKey = get(request, 'api_key')
     if (apiKey) {
       const { permissions, subscription } = await handleTokenAuthentication(
         apiKey,
-        db
+        database
       )
       context.permissions = permissions
       context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
+      context.provider = get(request, 'user.provider')
       context.permissions = get(request, 'user.role.permissions')
     }
-    if (!context.subscription)
-      throw new AuthenticationError('Failed to authenticate.')
-    context.db = context.client.db(context.subscription.db)
-    context.requestId = Math.floor(
-      Math.random() * Number.MAX_SAFE_INTEGER
-    ).toString()
-    context.container = Container.of(context.requestId)
+    context.db = context.mongoClient.db(context.subscription.db)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })
     debug(`Creating context for request ${context.requestId}`)
@@ -95,25 +116,28 @@ export const createContext = async (
 /**
  * Handle token authentication
  *
- * @param {string} apiKey Api key
- * @param {MongoDatabase} db Mongodb database
+ * @param apiKey -Api key
+ * @param db - Mongodb database
  */
-const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {
-  const { expires, subscriptionId } = verify(
+const handleTokenAuthentication = async (
+  apiKey: string,
+  database: MongoDatabase
+) => {
+  const { expires, subscriptionId: _id } = verify(
     apiKey,
-    env('API_TOKEN_SECRET')
+    environment('API_TOKEN_SECRET')
   ) as any
   const expired = new DateObject(expires).jsDate < new Date()
   if (expired) throw new AuthenticationError('The specified token is expired.')
   const [token, subscription] = await Promise.all([
-    db.collection('api_tokens').findOne({
+    database.collection('api_tokens').findOne({
       apiKey,
       expires: {
         $gte: new Date()
       }
     }),
-    db.collection('subscriptions').findOne({
-      id: subscriptionId
+    database.collection('subscriptions').findOne({
+      _id
     })
   ])
   if (!token || !subscription)

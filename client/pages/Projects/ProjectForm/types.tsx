@@ -1,5 +1,6 @@
+/* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
-import { IPanelProps } from 'office-ui-fabric'
+import { IPanelProps } from 'office-ui-fabric-react'
 import {
   IFormValidation,
   LabelObject as Label,
@@ -8,6 +9,9 @@ import {
 } from 'types'
 import { first } from 'underscore'
 
+/**
+ * @category Projects
+ */
 export class ProjectModel {
   public name: string
   public key: string
@@ -20,7 +24,7 @@ export class ProjectModel {
   /**
    * Constructs a new ProjectModel from a Project object
    *
-   * @param {Project} project Project object
+   * @param project - Project object
    */
   constructor(project?: Project) {
     this.name = project?.name || ''
@@ -35,10 +39,16 @@ export class ProjectModel {
   }
 }
 
+/**
+ * @category Projects
+ */
 interface IProjectFormPanelProps extends IPanelProps {
   onSave: () => void
 }
 
+/**
+ * @category Projects
+ */
 export interface IProjectFormProps {
   /**
    * Panel props provided if the form is rendered within a panel
@@ -51,6 +61,9 @@ export interface IProjectFormProps {
   edit?: Project
 }
 
+/**
+ * @category Projects
+ */
 export interface IProjectFormState {
   model: ProjectModel
   options: ProjectOptions

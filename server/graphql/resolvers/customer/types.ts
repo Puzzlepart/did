@@ -1,6 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { ObjectType, InputType, Field, ID } from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
+
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a Customer',
   simpleResolvers: true
@@ -30,7 +35,7 @@ export class Customer {
   /**
    * Creates a Customer object from a CustomerInput object
    *
-   * @param {CustomerInput} input Input object
+   * @param input - Input object
    */
   public fromInput(input: CustomerInput): Customer {
     Object.assign(this, input)
@@ -38,6 +43,9 @@ export class Customer {
   }
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description:
     'Input object for Customer used in Mutation createOrUpdateCustomer'
@@ -67,6 +75,8 @@ export class CustomerInput {
 
 /**
  * Variables for query customers
+ *
+ * @ignore
  */
 export interface ICustomersQueryVariables {
   sortBy: string
@@ -74,6 +84,8 @@ export interface ICustomersQueryVariables {
 
 /**
  * Variables for mutation createOrUpdateCustomer
+ *
+ * @ignore
  */
 export interface ICreateOrUpdateCustomerVariables {
   customer: Customer
@@ -82,6 +94,8 @@ export interface ICreateOrUpdateCustomerVariables {
 
 /**
  * Variables for mutation createOrUpdateCustomer
+ *
+ * @ignore
  */
 export interface IDeleteCustomerVariables {
   key: string

@@ -17,7 +17,7 @@ export type CustomerFormAction =
 /**
  * Initialize state
  *
- * @param {Customer} customer Project
+ * @param edit - Customer to edit
  */
 export const initState = (edit: Customer): ICustomerFormState => ({
   model: new CustomerModel(edit),
@@ -28,8 +28,8 @@ export const initState = (edit: Customer): ICustomerFormState => ({
 /**
  * Reducer for ProjectForm
  *
- * @param {IProjectFormState} state State
- * @param {CustomerFormAction} action Action
+ * @param state - State
+ * @param action - Action
  */
 export default (
   state: ICustomerFormState,
@@ -56,9 +56,6 @@ export default (
         newState.validation = action.payload.validation
       }
       break
-
-    default:
-      throw new Error()
   }
   return newState
 }

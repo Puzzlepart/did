@@ -9,7 +9,12 @@
     "server/views/index.hbs": true,
     "server/public/js": true,
     "dist": true,
-    ".assets": true
+    "server/.docs": true,
+    "client/.docs": true,
+    ".localtunnel": true,
+    "package-lock*": true,
+    "README.md": true,
+    "CHANGELOG.md": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,

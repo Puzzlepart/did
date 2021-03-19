@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { AppContext } from 'AppContext'
@@ -9,8 +10,10 @@ import $timesheet from './timesheet.gql'
 /**
  * Use Timesheet query
  *
- * @param {ITimesheetState} state State
- * @param {Dispatch<AnyAction>} dispatch Dispatch
+ * @param state - State
+ * @param dispatch - Dispatch
+ *
+ * @category Timesheet Hooks
  */
 export function useTimesheetQuery(
   state: ITimesheetState,
@@ -23,7 +26,7 @@ export function useTimesheetQuery(
       query: state.scope.query(),
       options: {
         dateFormat: 'dddd DD',
-        locale: user.language,
+        locale: user.preferredLanguage,
         tzOffset: new Date().getTimezoneOffset()
       }
     },

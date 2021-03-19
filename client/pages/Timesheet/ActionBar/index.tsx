@@ -1,4 +1,4 @@
-import { CommandBar, ICommandBarProps } from 'office-ui-fabric'
+import { CommandBar, ICommandBarProps } from 'office-ui-fabric-react'
 import React from 'react'
 import styles from './ActionBar.module.scss'
 import { usePeriodCommands } from './selectPeriodCommands'

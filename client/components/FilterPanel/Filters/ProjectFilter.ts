@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { unique, contains } from 'underscore'
+import { contains, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
+/**
+ * @category FilterPanel
+ */
 export class ProjectFilter<
   ItemType = any,
   KeyType = any
@@ -15,11 +19,11 @@ export class ProjectFilter<
   /**
    * Intialize the ProjectFilter
    *
-   * @param {ItemType[]} items Items
+   * @param items - Items
    */
   public initialize(items: ItemType[]): IFilter {
     const projects = unique(
-      items.map((e) => getValue(e, this.fieldName, null))
+      items.map((item_) => getValue(item_, this.fieldName, null))
     ).sort()
     const _items = projects.map((resource) => ({
       key: resource,
@@ -29,7 +33,9 @@ export class ProjectFilter<
       key: this.fieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
+      selected: _items.filter((index) =>
+        contains(this._selectedKeys, index.key)
+      )
     }
   }
 

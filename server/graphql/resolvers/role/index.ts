@@ -1,22 +1,32 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { PermissionScope } from '../../../../shared/config/security'
+import { RoleService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { Role, RoleInput } from './types'
 
+/**
+ * Resolver for `Role`.
+ *
+ * `RoleService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
+ * @category GraphQL Resolver
+ */
 @Service()
 @Resolver(Role)
 export class RoleResolver {
   /**
    * Constructor for RoleResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _role - Role service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _role: RoleService) {}
 
   /**
    * Get roles
@@ -24,37 +34,34 @@ export class RoleResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Role], { description: 'Get roles' })
   roles() {
-    return this._mongo.role.getRoles()
+    return this._role.getRoles()
   }
 
   /**
    * Add or update role
    *
-   * @permission MANAGE_ROLESPERMISSIONS (cd52a735)
-   *
-   * @param {RoleInput} role Role
-   * @param {boolean} update Update
+   * @param role - Role
+   * @param update - Update
    */
-  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_ROLESPERMISSIONS })
   @Mutation(() => BaseResult, { description: 'Add or update role' })
   async addOrUpdateRole(
     @Arg('role', () => RoleInput) role: RoleInput,
     @Arg('update', { nullable: true }) update: boolean
   ) {
-    if (update) await this._mongo.role.updateRole(role)
-    else await this._mongo.role.addRole(role)
+    await (update ? this._role.updateRole(role) : this._role.addRole(role))
     return { success: true, error: null }
   }
 
   /**
    * Delete role
    *
-   * @param {string} name Name
+   * @param name - Name
    */
-  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_ROLESPERMISSIONS })
   @Mutation(() => BaseResult, { description: 'Delete role' })
   async deleteRole(@Arg('name', () => String) name: string) {
-    await this._mongo.role.deleteRole(name)
+    await this._role.deleteRole(name)
     return { success: true, error: null }
   }
 }

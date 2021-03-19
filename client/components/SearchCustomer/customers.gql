@@ -1,8 +1,0 @@
-query {
-  customers(sortBy: "name") {
-    key
-    name
-    description
-    icon
-  }
-}

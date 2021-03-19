@@ -1,6 +1,6 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { TFunction } from 'i18next'
-import { IColumn, Icon } from 'office-ui-fabric'
+import { IColumn, Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { Customer } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'

@@ -1,39 +1,33 @@
-import { useQuery } from '@apollo/client'
-import EventList from 'components/EventList'
-import { UserMessage } from 'components/UserMessage'
+/* eslint-disable tsdoc/syntax */
+import { EventList, UserMessage } from 'components'
 import {
   ActionButton,
   MessageBarType,
   ProgressIndicator
-} from 'office-ui-fabric'
-import React, { FunctionComponent, useContext } from 'react'
+} from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { ProjectsContext } from '../../context'
-import { onExportExcel } from './exportToExcel'
 import { Summary } from './Summary'
-import $timeentries from './timeentries.gql'
 import styles from './TimeEntries.module.scss'
+import { useTimeEntries } from './useTimeEntries'
 
+/**
+ * @category Projects
+ */
 export const TimeEntries: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { state } = useContext(ProjectsContext)
-  const { loading, error, data } = useQuery($timeentries, {
-    variables: {
-      query: { projectId: state.selected.tag }
-    }
-  })
-  const timeentries = data?.timeentries || []
-  const empty = isEmpty(timeentries)
-
+  const { loading, timeentries, onExport, error } = useTimeEntries()
   return (
     <div className={styles.root}>
-      <Summary hidden={empty} timeentries={timeentries} />
+      {!isEmpty(timeentries) && !loading && (
+        <Summary loading={loading} timeentries={timeentries} />
+      )}
       <div hidden={isEmpty(timeentries)}>
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
-          onClick={() => onExportExcel(state.selected, timeentries, t)}
+          onClick={() => onExport()}
         />
       </div>
       {error && (
@@ -42,15 +36,15 @@ export const TimeEntries: FunctionComponent = () => {
           text={t('projects.timeEntriesErrorText')}
         />
       )}
-      {empty && !loading && (
+      {isEmpty(timeentries) && !loading && (
         <UserMessage text={t('projects.noTimeEntriesText')} />
       )}
       {loading && (
         <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />
       )}
-      {!empty && (
+      {!isEmpty(timeentries) && (
         <EventList
-          events={timeentries}
+          items={timeentries}
           additionalColumns={[
             {
               key: 'resource.displayName',

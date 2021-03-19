@@ -1,15 +1,21 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable tsdoc/syntax */
+/**
+ * Main entry point for the App
+ *
+ * @module /
+ */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
-import i18n from 'i18next'
+import $date from 'DateUtils'
+import i18next from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
-import { logger } from 'utils'
-import DateUtils from 'DateUtils'
-import { App } from './App'
+import { App } from './app'
 import { ContextUser, IAppContext } from './AppContext'
-import { client, $context } from './graphql'
+import { $usercontext, client } from './graphql'
 import './i18n'
 
 /**
@@ -19,7 +25,7 @@ import './i18n'
  * * Sets up i18n with the user language
  * * Sets up DateUtils with the user language
  */
-const boostrap = async () => {
+export const boostrap = async () => {
   initializeIcons()
 
   /**
@@ -29,30 +35,30 @@ const boostrap = async () => {
     const context: IAppContext = {}
     try {
       const { data } = await client.query<Partial<IAppContext>>({
-        query: $context,
+        query: $usercontext,
         fetchPolicy: 'cache-first'
       })
       context.user = new ContextUser(data.user)
       context.subscription = data?.subscription
+      context.authProviders = data?.authProviders
       return context
-    } catch (error) {
-      // We return an "empty" user with preferred language en-GB (default)
+    } catch {
       return { user: new ContextUser() }
     }
   }
 
   const context = await getContext()
-  DateUtils.setup(context.user.language)
-  i18n.changeLanguage(context.user.language)
-
-  logger.info(`App initialized with language ${context.user.language}`)
+  $date.setup(context.user.preferredLanguage)
+  i18next.changeLanguage(context.user.preferredLanguage)
 
   ReactDom.render(
     <ApolloProvider client={client}>
       <App {...context} />
     </ApolloProvider>,
-    document.getElementById('app')
+    document.querySelector('#app')
   )
 }
 
 boostrap()
+
+export { App }

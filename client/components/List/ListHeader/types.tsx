@@ -1,9 +1,9 @@
 import {
-  IRenderFunction,
-  IDetailsHeaderProps,
   ICommandBarProps,
+  IDetailsHeaderProps,
+  IRenderFunction,
   ISearchBoxProps
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import { Dispatch } from 'react'
 
 export interface IListHeaderProps {
@@ -11,5 +11,5 @@ export interface IListHeaderProps {
   defaultRender: IRenderFunction<IDetailsHeaderProps>
   commandBar?: ICommandBarProps
   searchBox?: ISearchBoxProps
-  dispatch?: Dispatch<any>
+  dispatch?: Dispatch<unknown>
 }

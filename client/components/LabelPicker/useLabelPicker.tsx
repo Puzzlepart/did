@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { useEffect, useRef, useState } from 'react'
 import { LabelObject } from 'types'
 import { omit } from 'underscore'
-import $labels from './labels.gql'
+import $labels from '../../pages/Admin/Labels/labels.gql'
 import { ILabelPickerProps } from './types'
 
 export function useLabelPicker({
@@ -35,15 +35,15 @@ export function useLabelPicker({
       )
       setLabels(_labels)
       if (defaultSelectedKeys) {
-        const _selectedLabels = _labels.filter(
-          (lbl) => defaultSelectedKeys.indexOf(lbl.name) !== -1
+        const _selectedLabels = _labels.filter((lbl) =>
+          defaultSelectedKeys.includes(lbl.name)
         )
         setSelectedLabels(_selectedLabels)
       }
     }
   }, [data])
 
-  const ref = useRef(null)
+  const reference = useRef(null)
 
   return {
     onToggleLabel,
@@ -51,6 +51,6 @@ export function useLabelPicker({
     setShowCallout,
     labels,
     selectedLabels,
-    ref
+    ref: reference
   }
 }

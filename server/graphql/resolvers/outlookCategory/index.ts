@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable max-classes-per-file */
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -7,13 +6,23 @@ import { MSGraphService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { CreateOutlookCategoryResult, OutlookCategory } from './types'
 
+/**
+ * Resolver for `OutlookCategory`.
+ *
+ * `MSGraphService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
+ * @category GraphQL Resolver
+ */
 @Service()
 @Resolver(OutlookCategory)
 export class OutlookCategoryResolver {
   /**
    * Constructor for OutlookCategoryResolver
    *
-   * @param {MSGraphService} _msgraph MSGraphService
+   * @param _msgraph - Microsoft Graph service
    */
   constructor(private readonly _msgraph: MSGraphService) {}
 
@@ -30,7 +39,7 @@ export class OutlookCategoryResolver {
   /**
    * Create Outlook category
    *
-   * @param {string} category Category
+   * @param category - Category
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => CreateOutlookCategoryResult, {

@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
 import { IconPicker } from 'components'
-import { DefaultButton, TextField } from 'office-ui-fabric'
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import {
+  DefaultButton,
+  IContextualMenuItem,
+  TextField
+} from 'office-ui-fabric-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
@@ -17,6 +21,9 @@ const INITIAL_MODEL: IContextualMenuItem = {
   iconProps: { iconName: first(getIcons(1)) }
 }
 
+/**
+ * @category Reports
+ */
 export const SaveFilterForm = (props: ISaveFilterFormProps) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
@@ -26,7 +33,7 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
   /**
    * On save filter
    *
-   * @note Stringifies the saved filters (including the new one) and sends it to the
+   * @remarks Stringifies the saved filters (including the new one) and sends it to the
    * mutation updateUserConfiguration.
    *
    * @returns Promise<void>
@@ -69,7 +76,7 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
           <DefaultButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
-            disabled={model.text.length < 4 && inputVisible}
+            disabled={model.text.length < 2 && inputVisible}
             onClick={onSave}
           />
         </div>

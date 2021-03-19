@@ -1,5 +1,5 @@
-mutation($id: String!, $settings: SubscriptionSettingsInput!) {
-  result: updateSubscription(id: $id, settings: $settings) {
+mutation UpdateSubscription ($settings: SubscriptionSettingsInput!) {
+  result: updateSubscription(settings: $settings) {
     success
     error {
       message

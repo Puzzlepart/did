@@ -1,12 +1,15 @@
-import fs from 'fs'
+/* eslint-disable tsdoc/syntax */
 import express from 'express'
+import fs from 'fs'
 
 /**
  * Serve gzipped
  *
- * @param {string} contentType Content type
+ * @param contentType - Content type
+ *
+ * @category Express middleware
  */
-const serveGzipped = (contentType: string) => (
+export const serveGzippedMiddleware = (contentType: string) => (
   request: express.Request,
   response: express.Response,
   next: express.NextFunction
@@ -14,7 +17,7 @@ const serveGzipped = (contentType: string) => (
   // does browser support gzip? does the file exist?
   const acceptedEncodings = request.acceptsEncodings()
   if (
-    acceptedEncodings.indexOf('gzip') === -1 ||
+    !acceptedEncodings.includes('gzip') ||
     !fs.existsSync(`./public/${request.baseUrl}.gz`)
   ) {
     next()
@@ -31,5 +34,3 @@ const serveGzipped = (contentType: string) => (
   // let express.static take care of the updated request
   next()
 }
-
-export default serveGzipped

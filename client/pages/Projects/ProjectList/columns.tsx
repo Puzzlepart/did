@@ -1,7 +1,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { IColumn, Icon } from 'office-ui-fabric'
+import { IColumn, Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
 import { LabelObject as Label, Project } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -11,10 +11,8 @@ import { IProjectListProps } from './types'
 /**
  * Generate column definitions based on parameters specified
  *
- * @param {IProjectListProps} props Props
- * @param {TFunction} t Translate function
- *
- * @category ProjectList
+ * @param props - Props
+ * @param t - Translate function
  */
 export default (props: IProjectListProps, t: TFunction): IColumn[] =>
   [
@@ -54,8 +52,8 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
       }
     ),
     col('labels', '', {}, (project: Project) =>
-      (project.labels as Label[]).map((label, idx) => (
-        <EntityLabel key={idx} label={label} />
+      (project.labels as Label[]).map((label, index) => (
+        <EntityLabel key={index} label={label} />
       ))
     )
-  ].filter((col) => props.hideColumns.indexOf(col.key) === -1)
+  ].filter((col) => !(props.hideColumns || []).includes(col.key))

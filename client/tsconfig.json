@@ -20,7 +20,8 @@
     "typeRoots": ["../node_modules/@types"],
     "baseUrl": "./",
     "paths": {
-      "AppConfig": ["./App.config.json"],
+      "package": ["../package.json"],
+      "security": ["../shared/config/security"],
       "DateUtils": ["../shared/utils/date"]
     }
   }

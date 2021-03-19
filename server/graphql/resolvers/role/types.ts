@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a Role',
   simpleResolvers: true
@@ -23,6 +27,9 @@ export class Role {
   readOnly?: boolean
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'Input object for Role used in Mutation addOrUpdateRole'
 })

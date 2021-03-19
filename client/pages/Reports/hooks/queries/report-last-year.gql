@@ -1,0 +1,7 @@
+#import "../../../../graphql/fragments/timeentry-fragment.gql"
+
+query LastYearReport {
+  timeEntries: report(preset: "LAST_YEAR") {
+    ...TimeEntryFragment
+  }
+}

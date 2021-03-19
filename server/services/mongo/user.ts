@@ -1,33 +1,50 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { FilterQuery } from 'mongodb'
+import set from 'set-value'
+import { Inject, Service } from 'typedi'
 import { find, omit } from 'underscore'
 import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
-import set from 'set-value'
 
+/**
+ * User service
+ *
+ * @extends MongoDocumentService
+ * @category Injectable Container Service
+ */
+@Service({ global: false })
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
 
-  constructor(context: Context) {
+  /**
+   * Constructor for `UserService`
+   *
+   * @param context - Injected context through `typedi`
+   */
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'users')
     this._role = new RoleService(context)
   }
 
   /**
-   * Replace id with _id
+   * Replace id with _id for the User Object
    *
-   * @param {User} user User
+   * @remarks We want to store the user with _id in the mongodb collection, but
+   * use id when working with the user in our code.
+   *
+   * @param user - User
    */
   private _replaceId<T>(user: User): T {
     return ({ ...omit(user, 'id'), _id: user.id } as unknown) as T
   }
 
   /**
-   * Get users
+   * Get users by the specified query
    *
-   * @param {FilterQuery<User>} query Query
+   * @param query - Query
    */
   public async getUsers(query?: FilterQuery<User>): Promise<User[]> {
     try {
@@ -41,94 +58,101 @@ export class UserService extends MongoDocumentService<User> {
         role: find(roles, (role) => role.name === user.role),
         configuration: JSON.stringify(user.configuration)
       }))
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
   /**
    * Get user by ID
    *
-   * @param {string} id User ID
+   * @remarks Returns null if no user is found.
+   *
+   * @param idOrMail - User ID or mail
    */
-  public async getById(id: string) {
+  public async getById(idOrMail: string): Promise<User> {
     try {
-      const user = await this.collection.findOne({ _id: id })
-      if (!user.role) throw new Error()
+      const user = await this.collection.findOne({
+        $or: [{ _id: idOrMail }, { mail: idOrMail }]
+      })
+      if (!user) return null
+      if (!user.role) throw new Error(`The user ${idOrMail} has no role set.`)
       user.id = user._id
       user.role = await this._role.getByName(user.role as string)
       user.configuration = JSON.stringify(user.configuration)
       return user
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
   /**
-   * Add user
+   * Add the specified user object
    *
-   * @param {User} user User
+   * @param user - User
    */
   public async addUser(user: User) {
     try {
-      const result = await this.collection.insertOne(this._replaceId(user))
+      const result = await this.insert(this._replaceId(user))
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
   /**
-   * Add users
+   * Add multiple users in bulk
    *
-   * @param {User[]} users Users
+   * @param users_ - Users
    */
-  public async addUsers(users: User[]) {
+  public async addUsers(users_: User[]) {
     try {
-      const result = await this.collection.insertMany(
-        users.map((u) => this._replaceId(u))
-      )
-      return result
-    } catch (err) {
-      throw err
+      const users = users_.map((u) => this._replaceId(u))
+      return await this.insertMultiple(users)
+    } catch (error) {
+      throw error
     }
   }
 
   /**
-   * Update customer
+   * Update the specified user
    *
-   * @param {User} user User to update
+   * @param user - User to update
    */
   public async updateUser(user: User): Promise<void> {
     try {
-      await this.collection.updateOne({ _id: user.id }, { $set: user })
-    } catch (err) {
-      throw err
+      await this.update({ _id: user.id }, user)
+    } catch (error) {
+      throw error
     }
   }
 
   /**
-   * Update current user configuration
+   * Update configuration for the current user
    *
-   * @param {string} configuration Configuration
+   * @remarks For now we we're working with the configuration as a string,
+   * to avoid typing the whole configuration object.
+   *
+   * @param configuration - Configuration
    */
   public async updateCurrentUserConfiguration(configuration: string) {
     try {
       const filter = { _id: this.context.userId }
       const user = await this.collection.findOne(filter)
       const _configuration = JSON.parse(configuration)
+      // eslint-disable-next-line unicorn/no-array-reduce
       const mergedConfiguration = Object.keys(_configuration).reduce(
-        (obj, key) => {
-          set(obj, key, _configuration[key])
-          return obj
+        (object, key) => {
+          set(object, key, _configuration[key])
+          return object
         },
-        user.configuration
+        user.configuration || {}
       )
-      await this.collection.updateOne(filter, {
-        $set: { configuration: mergedConfiguration }
+      await this.update(filter, {
+        configuration: mergedConfiguration
       })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

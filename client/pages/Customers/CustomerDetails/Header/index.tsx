@@ -1,7 +1,7 @@
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext } from 'react'
-import { Actions } from './actions'
+import { CustomerActions } from './actions'
 import styles from './Header.module.scss'
 
 export const Header: FunctionComponent = () => {
@@ -14,7 +14,7 @@ export const Header: FunctionComponent = () => {
       <div className={styles.title}>
         <div className={styles.text}>{state.selected.name}</div>
       </div>
-      <Actions />
+      <CustomerActions />
     </div>
   )
 }

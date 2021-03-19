@@ -1,19 +1,18 @@
-import { useMutation } from '@apollo/client'
-import * as security from 'config/security'
 import { DateObject } from 'DateUtils'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import { Panel } from 'office-ui-fabric-react/lib/components/Panel'
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
-import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
-import React, { useMemo, useState } from 'react'
+import {
+  DefaultButton,
+  Dropdown,
+  Panel,
+  TextField
+} from 'office-ui-fabric-react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ApiTokenInput } from 'types'
 import { contains, isEmpty } from 'underscore'
 import { isBlank } from 'underscore.string'
-import $addApiToken from './addApiToken.gql'
+import { PermissionCheckbox } from '../../Roles/RolePanel/PermissionCheckbox'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
+import { useApiTokenForm } from './useApiTokenForm'
 
 export const ApiTokenForm = ({
   isOpen,
@@ -21,36 +20,14 @@ export const ApiTokenForm = ({
   onDismiss
 }: IApiTokenFormProps) => {
   const { t } = useTranslation()
-  const [addApiToken] = useMutation($addApiToken)
-  const [token, setToken] = useState<ApiTokenInput>({
-    name: '',
-    expires: null,
-    permissions: []
-  })
-  const permissions = useMemo(
-    () => security.permissions(t).filter((p) => p.api),
-    [t]
-  )
-
-  async function onAddApiToken() {
-    const { data } = await addApiToken({ variables: { token } })
-    onAdded(data.apiKey)
-  }
-
-  function togglePermission(permissionId: string, checked: boolean) {
-    const permissions = [...(token.permissions || [])]
-    const index = permissions.indexOf(permissionId)
-    if (checked && index === -1) permissions.push(permissionId)
-    else permissions.splice(index, 1)
-    setToken({ ...token, permissions })
-  }
-
-  const EXPIRY_OPTIONS = {
-    '1month': t('admin.apiTokens.oneMonth'),
-    '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
-    '1year': t('admin.apiTokens.oneYear'),
-    '30year': t('admin.apiTokens.neverExpiresText')
-  }
+  const {
+    token,
+    setToken,
+    expiryOptions,
+    permissions,
+    onAddApiToken,
+    togglePermission
+  } = useApiTokenForm({ onAdded })
 
   return (
     <Panel
@@ -63,23 +40,23 @@ export const ApiTokenForm = ({
         <TextField
           placeholder={t('admin.apiTokens.tokenNamePlaceholder')}
           required={true}
-          onChange={(_e, value) => setToken({ ...token, name: value })}
+          onChange={(_event, value) => setToken({ ...token, name: value })}
         />
       </div>
       <div className={styles.inputContainer}>
         <Dropdown
           placeholder={t('admin.apiTokens.tokenExpiryPlaceholder')}
           required={true}
-          onChange={(_e, { data }) =>
+          onChange={(_event, { data }) =>
             setToken({
               ...token,
               expires: new DateObject().add(data).jsDate
             })
           }
-          options={Object.keys(EXPIRY_OPTIONS).map((key) => ({
+          options={Object.keys(expiryOptions).map((key) => ({
             key,
             data: key,
-            text: EXPIRY_OPTIONS[key]
+            text: expiryOptions[key]
           }))}
         />
       </div>
@@ -87,20 +64,13 @@ export const ApiTokenForm = ({
         {t('admin.apiTokens.permissionsTitle')}
       </div>
       <div className={styles.permissions}>
-        {permissions.map(({ id, name, description }) => (
-          <div key={id} className={styles.permissionItem}>
-            <Toggle
-              label={name}
-              title={description}
-              inlineLabel={true}
-              styles={{ root: { margin: 0 } }}
-              defaultChecked={contains(token.permissions, id)}
-              onChange={(_event, checked) => togglePermission(id, checked)}
-            />
-            <div hidden={!description} className={styles.inputDescription}>
-              <span>{description}</span>
-            </div>
-          </div>
+        {permissions.map((permission, index) => (
+          <PermissionCheckbox
+            key={index}
+            checked={contains(token.permissions, permission.id)}
+            permission={permission}
+            onToggle={togglePermission}
+          />
         ))}
       </div>
       <DefaultButton

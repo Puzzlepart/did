@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes Subscription forecast settings'
 })
@@ -13,17 +17,26 @@ export class SubscriptionForecastSettings {
   notifications?: number
 }
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes Subscription AD sync settings'
 })
 export class SubscriptionADSyncSettings {
   @Field({ nullable: true })
-  adUserSyncEnabled?: boolean
+  enabled?: boolean
 
   @Field(() => [String], { nullable: true })
-  adUserSyncProperties?: string[]
+  properties?: string[]
+
+  @Field({ nullable: true })
+  syncUserPhoto?: boolean
 }
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
   @Field(() => SubscriptionForecastSettings, { nullable: true })
@@ -33,6 +46,9 @@ export class SubscriptionSettings {
   adsync?: SubscriptionADSyncSettings
 }
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a Subscription',
   simpleResolvers: true
@@ -46,6 +62,9 @@ export class Subscription {
   @Field()
   name: string
 
+  @Field({ nullable: true })
+  owner: string
+
   @Field(() => SubscriptionSettings, { nullable: true })
   settings?: SubscriptionSettings
 
@@ -55,6 +74,9 @@ export class Subscription {
   db?: string
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'A input that describes Subscription forecast settings'
 })
@@ -66,17 +88,26 @@ export class SubscriptionForecastSettingsInput {
   notifications?: number
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'A input that describes Subscription AD sync settings'
 })
 export class SubscriptionADSyncSettingsInput {
   @Field({ nullable: true })
-  adUserSyncEnabled?: boolean
+  enabled?: boolean
 
   @Field(() => [String], { nullable: true })
-  adUserSyncProperties?: string[]
+  properties?: string[]
+
+  @Field({ nullable: true })
+  syncUserPhoto?: boolean
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
   @Field(() => SubscriptionForecastSettingsInput, { nullable: true })

@@ -3,8 +3,8 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
-import CustomerColumn from './CustomerColumn'
-import ProjectColumn from './ProjectColumn'
+import { CustomerColumn } from './CustomerColumn'
+import { ProjectColumn } from './ProjectColumn'
 
 /**
  * Use additonal columns

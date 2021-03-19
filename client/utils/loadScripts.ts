@@ -1,20 +1,38 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+import { getValue as get } from 'helpers'
+
 /**
- * Load scripts
+ * Load scripts using document.createElement
  *
- * @param {string[]} src Source to load
+ * @param scriptSrc - Sources to load
+ * @param basePath - Base path
+ * @param globals - Globals
  */
-export function loadScripts(src: string[]): Promise<void> {
+export function loadScripts<T = any>(
+  scriptSource: string[],
+  basePath = '',
+  globals: Record<string, string>
+): Promise<T> {
   return new Promise((resolve) => {
     Promise.all(
-      src.map(
-        (s) =>
+      scriptSource.map(
+        (src_) =>
           new Promise((r) => {
             const script = document.createElement('script')
-            script.onload = () => r()
-            script.src = s
-            document.head.appendChild(script)
+            script.addEventListener('load', () => r(true))
+            script.src = [basePath, src_].join('')
+            document.head.append(script)
           })
       )
-    ).then(() => resolve())
+    ).then(() => {
+      const _globals = Object.keys(globals).reduce(
+        (obj, key) => ({
+          ...obj,
+          [key]: get(window, globals[key])
+        }),
+        {}
+      )
+      resolve((_globals as unknown) as T)
+    })
   })
 }

@@ -1,44 +1,16 @@
-import { Panel } from 'office-ui-fabric'
-import React, { useEffect, useState } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { Panel } from 'office-ui-fabric-react'
+import React from 'react'
 import { FilterItem } from './FilterItem'
-import { IFilter, IFilterItem } from './Filters'
-import { IFilterPanelProps } from './types'
 import styles from './FilterPanel.module.scss'
+import { IFilterPanelProps } from './types'
+import { useFilterPanel } from './useFilterPanel'
 
+/**
+ * @category Function Component
+ */
 export const FilterPanel = (props: IFilterPanelProps) => {
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
-  )
-  useEffect(
-    () => setFilters(props.filters.map((f) => f.initialize(props.items))),
-    [props.items, props.filters]
-  )
-
-  /**
-   * On filter updated
-   *
-   * @param {IFilter} filter
-   * @param {IFilterItem} item
-   * @param {boolean} checked
-   */
-  const onFilterUpdated = (
-    filter: IFilter,
-    item: IFilterItem,
-    checked: boolean
-  ) => {
-    if (checked) filter.selected.push(item)
-    else filter.selected = filter.selected.filter((f) => f.key !== item.key)
-    const updatedFilters = filters.map((f) => {
-      if (f.key === filter.key) {
-        return filter
-      }
-      return f
-    })
-    setFilters(updatedFilters)
-    props.onFiltersUpdated(
-      updatedFilters.filter((filter) => filter.selected.length > 0)
-    )
-  }
+  const { filters, onFilterUpdated } = useFilterPanel({ props })
 
   return (
     <Panel

@@ -1,23 +1,21 @@
 {
   "name": "did",
-  "version": "0.10.0",
+  "description": "The calendar is your Timesheet",
+  "version": "0.9.11",
   "private": true,
-  "engines": {
-    "node": ">=12.18.3",
-    "npm": ">=6.5.0"
-  },
   "scripts": {
-    "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node .tasks/open.js\" \"node .tasks/localtunnel.js\"",
-    "start": "node ./dist/server/index.js",
-    "watch:server": "nodemon",
-    "watch:client": "webpack",
-    "package:client": "webpack",
-    "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
-    "debug:server": "npm run build:server; npx ts-node ./server/index.ts -T --inspect --wait",
+    "watch": "node .tasks/watch.js",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
     "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
-    "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
-    "create-env": "node .tasks/create-dot-env.js"
+    "prettier": "prettier '**/*.ts*' --write --loglevel silent",
+    "start": "node ./dist/server/index.js",
+    "package:client": "webpack",
+    "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
+    "debug:server": "npm run build:server; ts-node ./server/index.ts -T --inspect --wait",
+    "create-env": "node .tasks/create-dot-env.js",
+    "typedoc": "node .tasks/typedoc.js",
+    "postversion": "npm run typedoc && npm run lint:fix && git add --all && git commit --amend",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "3.2.0",
@@ -26,6 +24,7 @@
     "@babel/preset-env": "7.8.0",
     "@microsoft/microsoft-graph-client": "2.0.0",
     "@pnp/common": "2.0.4",
+    "@primer/css": "^15.2.0",
     "@reduxjs/toolkit": "1.5.0",
     "@types/debug": "4.1.5",
     "@types/express": "4.17.8",
@@ -44,25 +43,21 @@
     "@types/react-router-dom": "5.1.6",
     "@types/recharts": "1.8.10",
     "@types/redis": "2.8.28",
-    "@types/scriptjs": "0.0.2",
     "@types/set-value": "2.0.0",
     "@types/simple-oauth2": "4.1.0",
     "@types/string-similarity": "4.0.0",
     "@types/string-strip-html": "5.0.0",
+    "@types/ua-parser-js": "^0.7.35",
     "@types/underscore": "1.10.24",
     "@types/underscore.string": "0.0.38",
     "@types/validator": "13.0.0",
     "@types/webpack-env": "1.15.3",
     "@uifabric/icons": "7.5.15",
     "@uifabric/react-hooks": "7.13.9",
-    "apollo-datasource-mongodb": "0.3.0",
     "apollo-server-express": "2.19.0",
-    "applicationinsights": "1.8.7",
     "array-sort": "1.0.0",
-    "azure-storage": "2.10.3",
     "babel-loader": "8.1.0",
     "body-parser": "1.19.0",
-    "chalk": "4.0.0",
     "class-validator": "0.12.2",
     "compression-webpack-plugin": "6.0.5",
     "concurrently": "5.3.0",
@@ -80,6 +75,7 @@
     "express-session": "1.17.0",
     "fast-copy": "2.1.1",
     "get-value": "3.0.1",
+    "googleapis": "39.2.0",
     "graphql": "15.3.0",
     "graphql-iso-date": "3.6.1",
     "graphql-tag": "2.11.0",
@@ -88,10 +84,7 @@
     "html-webpack-plugin": "4.5.0",
     "http-errors": "1.7.3",
     "i18next": "19.3.4",
-    "install": "0.13.0",
     "jsonwebtoken": "8.5.1",
-    "loglevel": "1.6.7",
-    "loglevel-plugin-prefix": "0.8.4",
     "mongodb": "3.6.4",
     "morgan": "1.10.0",
     "node-fetch": "2.6.0",
@@ -100,12 +93,14 @@
     "office-ui-fabric-react": "7.106.3",
     "passport": "0.4.1",
     "passport-azure-ad": "4.2.1",
+    "passport-google-oauth20": "2.0.0",
     "randomcolor": "0.6.2",
     "react": "16.13.1",
     "react-color": "2.19.3",
     "react-copy-to-clipboard": "5.0.3",
     "react-device-detect": "1.14.0",
     "react-dom": "16.13.1",
+    "react-error-boundary": "^3.1.1",
     "react-fade-in": "1.1.1",
     "react-hotkeys": "2.0.0",
     "react-i18next": "11.7.3",
@@ -128,26 +123,35 @@
     "type-graphql": "1.1.0",
     "typedi": "0.8.0",
     "typescript": "4.0.5",
+    "ua-parser-js": "^0.7.24",
     "underscore": "1.11.0",
     "underscore.string": "3.3.5",
     "validator": "13.0.0",
     "webpack": "4.44.1",
-    "webpack-cli": "4.1.0",
-    "with-default-props": "0.2.1"
+    "webpack-cli": "4.1.0"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "12.0.1",
+    "@types/passport-google-oauth20": "^2.0.7",
     "@types/string-format": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
-    "assert": "2.0.0",
-    "eslint": "6.8.0",
+    "chalk": "4.1.0",
+    "commitlint": "12.0.1",
+    "eslint": "^6.8.0",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-tsdoc": "0.2.11",
+    "eslint-plugin-unicorn": "^28.0.2",
+    "husky": "^5.1.3",
     "localtunnel": "2.0.1",
     "open": "7.2.1",
     "prettier": "2.2.1",
+    "prettier-plugin-organize-imports": "^1.1.1",
+    "typedoc": "^0.20.28",
+    "typedoc-plugin-markdown": "^3.5.0",
     "webpack-build-notifier": "2.1.0",
     "webpack-bundle-analyzer": "4.1.0",
     "webpack-livereload-plugin": "2.3.0"
@@ -155,5 +159,173 @@
   "resolutions": {
     "@babel/preset-env": "7.8.0"
   },
-  "sideEffects": false
+  "config": {
+    "app": {
+      "PROJECT_KEY_MIN_LENGTH": 2,
+      "PROJECT_KEY_MAX_LENGTH": 12,
+      "PROJECT_NAME_MIN_LENGTH": 2,
+      "CUSTOMER_KEY_MIN_LENGTH": 3,
+      "CUSTOMER_KEY_MAX_LENGTH": 12,
+      "CUSTOMER_NAME_MIN_LENGTH": 2,
+      "BROWSER_STORAGE_KEY_PREFIX": "did",
+      "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month",
+      "DEFAULT_USER_LANGUAGE": "en-GB",
+      "TIMESHEET_OVERVIEW_DAY_FORMAT": "dddd DD",
+      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm"
+    }
+  },
+  "contributors": [
+    {
+      "name": "Carl Joakim Damsleth",
+      "email": "carl.joakim.damsleth@puzzlepart.com",
+      "img": "https://avatars.githubusercontent.com/u/7300548?&size=130"
+    },
+    {
+      "name": "Ole Martin Pettersen",
+      "email": "olemp@puzzlepart.com",
+      "img": "https://avatars.githubusercontent.com/u/7606007?&size=130"
+    },
+    {
+      "name": "Ole Kristian Mørch-Storstein",
+      "email": "olekms@puzzlepart.com",
+      "img": "https://avatars.githubusercontent.com/u/170147?&size=130"
+    }
+  ],
+  "engines": {
+    "node": ">=12.18.3",
+    "npm": ">=6.5.0"
+  },
+  "sideEffects": false,
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "prettier",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:unicorn/recommended"
+    ],
+    "plugins": [
+      "prettier",
+      "react-hooks",
+      "eslint-plugin-tsdoc",
+      "unicorn"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/member-delimiter-style": 0,
+      "@typescript-eslint/explicit-function-return-type": 0,
+      "@typescript-eslint/explicit-module-boundary-types": 0,
+      "@typescript-eslint/no-inferrable-types": 0,
+      "react/prop-types": 0,
+      "no-inferrable-types": 0,
+      "react/display-name": 0,
+      "no-compare-neg-zero": 1,
+      "no-console": 2,
+      "eqeqeq": 1,
+      "max-classes-per-file": 1,
+      "jsx-quotes": [
+        "error",
+        "prefer-single"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "yoda": 2,
+      "require-await": 2,
+      "semi": [
+        "error",
+        "never",
+        {}
+      ],
+      "default-case": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "tsdoc/syntax": "warn",
+      "unicorn/filename-case": 0,
+      "unicorn/no-array-reduce": 0,
+      "unicorn/no-null": 0,
+      "unicorn/prevent-abbreviations": [
+        2,
+        {
+          "checkDefaultAndNamespaceImports": true,
+          "checkProperties": false,
+          "replacements": {
+            "args": false,
+            "props": false
+          }
+        }
+      ],
+      "unicorn/no-process-exit": 0
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  },
+  "eslintIgnore": [
+    "client/**/*.d.ts"
+  ],
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true,
+    "semi": false,
+    "arrowParens": "always",
+    "printWidth": 80,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "ci",
+          "chore",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "style",
+          "test",
+          "dev",
+          "i18n",
+          "github",
+          "readme",
+          "experimental"
+        ]
+      ]
+    }
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server",
+      "shared"
+    ],
+    "ext": "ts,json",
+    "exec": "ts-node ./server/index.ts -T",
+    "delay": 800,
+    "colours": true
+  }
 }

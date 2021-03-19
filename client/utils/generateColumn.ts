@@ -1,13 +1,13 @@
-import { IColumn } from 'office-ui-fabric'
+import { IColumn } from 'office-ui-fabric-react'
 
 /**
  * Generate a IColumn defintion
  *
- * @param {string} fieldName Field name
- * @param {string} name Name
- * @param {Partial<IColumn>} props Additional props
- * @param {function} onRender On render function (optional)
- * @param {number} minWidth Min width (defaults to 100)
+ * @param fieldName - Field name
+ * @param name -Name
+ * @param props - Additional props
+ * @param onRender - On render function
+ * @param minWidth - Min width
  */
 export function generateColumn(
   fieldName: string,

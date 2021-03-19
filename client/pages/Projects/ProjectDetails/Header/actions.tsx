@@ -1,19 +1,23 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
-import { PERMISSION } from 'config/security/permissions'
 import copy from 'fast-copy'
-import { DefaultButton } from 'office-ui-fabric'
+import { usePermissions } from 'hooks'
+import { DefaultButton } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { ProjectsContext } from '../../context'
 import { ProjectForm } from '../../ProjectForm'
 import { SET_SELECTED_PROJECT } from '../../reducer/actions'
 import $createOutlookCategory from './createOutlookCategory.gql'
 import styles from './Header.module.scss'
 
-export const Actions: FunctionComponent = () => {
+/**
+ * @category Projects
+ */
+export const ProjectActions: FunctionComponent = () => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
-  const { user } = useContext(AppContext)
+  const { hasPermission } = usePermissions()
   const { t } = useTranslation()
   const [showEditPanel, setShowEditPanel] = useState(false)
   const [createOutlookCategory] = useMutation($createOutlookCategory)
@@ -54,7 +58,7 @@ export const Actions: FunctionComponent = () => {
       </div>
       <div
         className={styles.actionItem}
-        hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
+        hidden={!hasPermission(PermissionScope.MANAGE_PROJECTS)}>
         <DefaultButton
           text={t('common.editLabel')}
           iconProps={{ iconName: 'Edit' }}

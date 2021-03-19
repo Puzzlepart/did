@@ -1,4 +1,4 @@
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { useTranslation } from 'react-i18next'
 import { filter } from 'underscore'
 import { getSum } from 'utils/getSum'
@@ -6,14 +6,14 @@ import { getSum } from 'utils/getSum'
 /**
  * Use summary hook
  *
- * @param {any[]} timeentries Time entries
+ * @param timeentries - Time entries
  */
 export function useSummary(timeentries: any[]) {
   const { t } = useTranslation()
   return [
     {
       label: t('common.hoursCurrentMonth'),
-      value: DateUtils.getDurationString(
+      value: $date.getDurationString(
         getSum(
           filter(
             timeentries,
@@ -28,7 +28,7 @@ export function useSummary(timeentries: any[]) {
     },
     {
       label: t('common.hoursPrevMonth'),
-      value: DateUtils.getDurationString(
+      value: $date.getDurationString(
         getSum(
           filter(
             timeentries,
@@ -43,7 +43,7 @@ export function useSummary(timeentries: any[]) {
     },
     {
       label: t('common.hoursCurrentYear'),
-      value: DateUtils.getDurationString(
+      value: $date.getDurationString(
         getSum(
           filter(
             timeentries,
@@ -56,7 +56,7 @@ export function useSummary(timeentries: any[]) {
     },
     {
       label: t('common.totalHours'),
-      value: DateUtils.getDurationString(getSum(timeentries, 'duration'), t)
+      value: $date.getDurationString(getSum(timeentries, 'duration'), t)
     }
   ]
 }

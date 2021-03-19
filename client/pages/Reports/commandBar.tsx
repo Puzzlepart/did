@@ -2,11 +2,10 @@ import {
   ContextualMenuItemType,
   format,
   IContextualMenuItem
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React from 'react'
-import { isEmpty, omit, pick } from 'underscore'
+import { isEmpty, omit } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
-import getColumns from './columns'
 import { IReportsContext } from './context'
 import {
   CLEAR_FILTERS,
@@ -20,7 +19,7 @@ import { getGroupByOptions } from './types'
 /**
  * Select group by command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const selectGroupByCmd = (context: IReportsContext) =>
   ({
@@ -29,13 +28,13 @@ const selectGroupByCmd = (context: IReportsContext) =>
     iconProps: { iconName: 'GroupList' },
     subMenuProps: {
       items: getGroupByOptions(context.t).map(
-        (opt) =>
+        ({ key, text, props: groupBy }) =>
           ({
-            ...pick(opt, 'key', 'text'),
+            key,
+            text,
             canCheck: true,
-            checked: context.state.groupBy.fieldName === opt.props.fieldName,
-            onClick: () =>
-              context.dispatch(SET_GROUP_BY({ groupBy: opt.props }))
+            checked: context.state.groupBy.fieldName === groupBy.fieldName,
+            onClick: () => context.dispatch(SET_GROUP_BY({ groupBy }))
           } as IContextualMenuItem)
       )
     }
@@ -44,19 +43,19 @@ const selectGroupByCmd = (context: IReportsContext) =>
 /**
  * Export to Excel command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
-const exportToExcelCmd = ({ state, t }: IReportsContext) =>
+const exportToExcelCmd = ({ state, columns, t }: IReportsContext) =>
   ({
     key: 'EXPORT_TO_EXCEL',
     text: t('reports.exportToExcel'),
     onClick: () => {
       const fileName = format(
-        state.query.exportFileName,
+        state.preset.exportFileName,
         new Date().toDateString().split(' ').join('-')
       )
       exportExcel(state.subset, {
-        columns: getColumns({}, t),
+        columns,
         fileName
       })
     },
@@ -66,7 +65,7 @@ const exportToExcelCmd = ({ state, t }: IReportsContext) =>
 /**
  * Open filter panel command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
   ({
@@ -79,7 +78,7 @@ const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
 /**
  * Clear filters
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
   ({
@@ -93,7 +92,7 @@ const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
 /**
  * Save filter  command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const saveFilterCmd = ({
   state,
@@ -135,22 +134,22 @@ const saveFilterCmd = ({
             onClick: () => dispatch(SET_FILTER({ filter }))
           }
         })
-      ].filter((i) => i)
+      ].filter((index) => index)
     }
   } as IContextualMenuItem)
 
 export default (context: IReportsContext) => ({
   items:
-    !!context.state.query && !context.state.loading
+    !!context.state.preset && !context.state.loading
       ? [selectGroupByCmd(context)]
       : [],
   farItems:
-    !!context.state.query && !context.state.loading
+    !!context.state.preset && !context.state.loading
       ? [
           exportToExcelCmd(context),
           !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
           openFilterPanelCmd(context),
           clearFiltersCmd(context)
-        ].filter((i) => i)
+        ].filter((index) => index)
       : []
 })

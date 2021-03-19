@@ -1,6 +1,6 @@
 import { IUserMessageProps } from 'components/UserMessage/types'
-import DateUtils from 'DateUtils'
-import { MessageBarType } from 'office-ui-fabric'
+import $date from 'DateUtils'
+import { MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,8 +19,10 @@ export function useMessages() {
   if (selectedPeriod) {
     if (!selectedPeriod.isConfirmed) {
       messages.push({
-        text: t('timesheet.periodHoursSummaryText', {
-          hours: DateUtils.getDurationString(selectedPeriod.totalDuration, t)
+        text: t('timesheet.weekHoursSummaryText', {
+          hours: $date.getDurationString(selectedPeriod.totalDuration, t),
+          splitWeekInfoText:
+            periods.length > 1 ? t('timesheet.splitWeekInfoText') : ''
         }),
         iconName: 'ReminderTime'
       })
@@ -28,10 +30,7 @@ export function useMessages() {
     if (!selectedPeriod.isComplete && !selectedPeriod.isForecast) {
       messages.push({
         text: t('timesheet.hoursNotMatchedText', {
-          hours: DateUtils.getDurationString(
-            selectedPeriod.unmatchedDuration,
-            t
-          )
+          hours: $date.getDurationString(selectedPeriod.unmatchedDuration, t)
         }),
         type: MessageBarType.warning,
         iconName: 'BufferTimeBoth'
@@ -47,7 +46,7 @@ export function useMessages() {
     if (selectedPeriod.isConfirmed) {
       messages.push({
         text: t('timesheet.periodConfirmedText', {
-          hours: DateUtils.getDurationString(selectedPeriod.matchedDuration, t)
+          hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
         }),
         type: MessageBarType.success,
         iconName: 'CheckMark'
@@ -56,7 +55,7 @@ export function useMessages() {
     if (selectedPeriod.isForecasted && !selectedPeriod.isConfirmed) {
       messages.push({
         text: t('timesheet.periodForecastedText', {
-          hours: DateUtils.getDurationString(selectedPeriod.forecastedHours, t)
+          hours: $date.getDurationString(selectedPeriod.forecastedHours, t)
         }),
         type: MessageBarType.info,
         iconName: 'BufferTimeBoth'
@@ -87,12 +86,6 @@ export function useMessages() {
           count: selectedPeriod.errors.length
         }),
         iconName: 'ErrorBadge'
-      })
-    }
-    if (periods.length > 1) {
-      messages.push({
-        text: t('timesheet.splitWeekInfoText'),
-        iconName: 'SplitObject'
       })
     }
   }

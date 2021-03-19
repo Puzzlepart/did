@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { IProjectsContext } from '../context'
 import { useProjectsReducer } from '../reducer'
-import { IProjectsParams } from '../types'
+import { IProjectsParameters } from '../types'
 import { useHistoryUpdater } from './useHistoryUpdater'
 import { useProjectList } from './useProjectList'
 import { useProjectsQuery } from './useProjectsQuery'
@@ -24,7 +24,7 @@ export function useProjects() {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
   const history = useHistory()
-  const url = useParams<IProjectsParams>()
+  const url = useParams<IProjectsParameters>()
   const { state, dispatch } = useProjectsReducer({ url, history })
   const { refetch, loading } = useProjectsQuery(dispatch)
 

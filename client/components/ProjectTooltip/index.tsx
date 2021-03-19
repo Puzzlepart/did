@@ -1,8 +1,12 @@
-import { TooltipDelay, TooltipHost } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'
 
+/**
+ * @category Function Component
+ */
 export const ProjectTooltip: FunctionComponent<IProjectTooltipProps> = (
   props: IProjectTooltipProps
 ): JSX.Element => {

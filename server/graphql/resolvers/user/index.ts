@@ -1,40 +1,69 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { MSGraphService } from '../../../services'
-import { MongoService } from '../../../services/mongo'
+import { PermissionScope } from '../../../../shared/config/security'
+import {
+  MSGraphService,
+  SubscriptionService,
+  UserService
+} from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
 import { User, UserInput, UserQuery } from './types'
 
+/**
+ * Resolver for `User`.
+ *
+ * `MSGraphService`, `UserService` and
+ * `SubscriptionService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
+ * @category GraphQL Resolver
+ */
 @Service()
 @Resolver(User)
 export class UserResolver {
   /**
    * Constructor for UserResolver
    *
-   * @param {MSGraphService} _msgraph MS Graph service
-   * @param {MongoService} _mongo Mongo service
+   * @param _msgraph - MS Graph service
+   * @param _userSvc - User service
+   * @param _subSvc - Subscription service
    */
   constructor(
     private readonly _msgraph: MSGraphService,
-    private readonly _mongo: MongoService
+    private readonly _userSvc: UserService,
+    private readonly _subSvc: SubscriptionService
   ) {}
+
+  /**
+   * Get auth providers
+   */
+  @Query(() => [String], { description: 'Get auth providers' })
+  authProviders(): string[] {
+    return (process.env.AUTH_PROVIDERS || '').split(' ')
+  }
 
   /**
    * Get current user
    *
-   * @param {Context} ctx GraphQL context
+   * @param ctx - GraphQL context
    */
-  @Query(() => User, { description: 'Get the currently logged in user' })
-  async currentUser(@Ctx() ctx: Context) {
-    const user = await this._mongo.user.getById(ctx.userId)
+  @Query(() => User, {
+    nullable: true,
+    description: 'Get the currently logged in user'
+  })
+  async currentUser(@Ctx() context: Context): Promise<User> {
+    const user = await this._userSvc.getById(context.userId)
+    if (!user) return null
     return {
       ...user,
-      subscription: pick(ctx.subscription, 'id', 'name')
+      subscription: pick(context.subscription, 'id', 'name', 'owner')
     }
   }
 
@@ -42,44 +71,52 @@ export class UserResolver {
    * Get Active Directory users
    */
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  activeDirectoryUsers() {
+  activeDirectoryUsers(): Promise<User[]> {
     return this._msgraph.getUsers()
   }
 
   /**
    * Get users
    *
-   * @param {UserQuery} query Query
+   * @param query - Query
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Query(() => [User], { description: 'Get users' })
-  users(@Arg('query', () => UserQuery, { nullable: true }) query: UserQuery) {
-    return this._mongo.user.getUsers(query)
+  users(
+    @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
+  ): Promise<User[]> {
+    return this._userSvc.getUsers(query)
   }
 
   /**
    * Add or update user
    *
-   * @param {UserInput} user User
-   * @param {boolean} update Update
+   * @param user - User
+   * @param update - Update
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Add or update user' })
   async addOrUpdateUser(
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    if (update) await this._mongo.user.updateUser(user)
-    else await this._mongo.user.addUser(user)
+    if (update) {
+      await this._userSvc.updateUser(user)
+    } else {
+      await this._userSvc.addUser(user)
+      if (user.provider !== 'microsoft') {
+        await this._subSvc.registerExternalUser(user.provider, user.mail)
+      }
+    }
     return { success: true, error: null }
   }
 
   /**
    * Add users
    *
-   * @param {UserInput[]} users Users
+   * @param users - Users
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Add users' })
   async addUsers(
     @Arg('users', () => [UserInput]) users: UserInput[]
@@ -88,21 +125,21 @@ export class UserResolver {
       ...user,
       role: 'User'
     }))
-    await this._mongo.user.addUsers(users)
+    await this._userSvc.addUsers(users)
     return { success: true, error: null }
   }
 
   /**
    * Update user configuration
    *
-   * @param {string} configuration Configuration
+   * @param configuration - Configuration
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Update user configuration' })
   async updateUserConfiguration(
     @Arg('configuration') configuration: string
   ): Promise<BaseResult> {
-    await this._mongo.user.updateCurrentUserConfiguration(configuration)
+    await this._userSvc.updateCurrentUserConfiguration(configuration)
     return { success: true }
   }
 }

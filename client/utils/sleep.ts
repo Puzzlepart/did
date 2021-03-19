@@ -1,8 +1,8 @@
 /**
- * Sleep for x seconds
+ * Sleep for n seconds
  *
- * @param {number} seconds Seconds
+ * @param n - Seconds to sleep
  */
-export function sleep(seconds: number) {
-  return new Promise((resolve) => window.setTimeout(resolve, seconds * 1000))
+export function sleep(n: number) {
+  return new Promise((resolve) => window.setTimeout(resolve, n * 1000))
 }

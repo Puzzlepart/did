@@ -1,15 +1,14 @@
-import { DurationColumn } from 'components/DurationColumn'
-import List from 'components/List'
-import { ProjectTooltip } from 'components/ProjectTooltip'
-import DateUtils from 'DateUtils'
-import { IColumn, MessageBar } from 'office-ui-fabric'
+/* eslint-disable unicorn/no-array-reduce */
+import { DurationColumn, List, ProjectTooltip } from 'components'
+import $date from 'DateUtils'
+import { IColumn, MessageBar } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, Project } from 'types'
 import { unique } from 'underscore'
 import { capitalize } from 'underscore.string'
-import { TimesheetContext } from '../'
+import { TimesheetContext } from '../context'
 import { TimesheetScope } from '../TimesheetScope'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
@@ -17,14 +16,14 @@ import styles from './SummaryView.module.scss'
 /**
  * Creates columns from scope
  *
- * @param {TimesheetScope} scope Timesheet scope
+ * @param scope - Timesheet scope
  */
 function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  const columns = Array.from(Array(7).keys()).map((i) => {
-    const day = scope.getDay(i)
+  const columns = [...Array.from({ length: 7 }).keys()].map((index) => {
+    const day = scope.getDay(index)
     return {
       key: day.format('YYYY-MM-DD'),
       fieldName: day.format('YYYY-MM-DD'),
@@ -71,12 +70,12 @@ function createColumns(scope: TimesheetScope): IColumn[] {
 /**
  * Generate rows from events and columns
  *
- * @param {EventObject[]} events Events
- * @param {IColumn[]} columns Columns
+ * @param events - Events
+ * @param columns - Columns
  */
 function generateRows(events: EventObject[], columns: IColumn[]) {
   const projects = unique(
-    events.map((e) => e.project),
+    events.map((event_) => event_.project),
     (p: Project) => p.tag
   )
   return projects.map((project) => {
@@ -84,17 +83,17 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
       (event) => event.project.tag === project.tag
     )
     return [...columns].splice(1, columns.length - 2).reduce(
-      (obj, col) => {
+      (object, col) => {
         const sum = [...projectEvents]
           .filter(
             (event) =>
-              DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+              $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
               col.fieldName
           )
           .reduce((sum, event) => (sum += event.duration), 0)
-        obj[col.fieldName] = sum
-        obj.sum += sum
-        return obj
+        object[col.fieldName] = sum
+        object.sum += sum
+        return object
       },
       {
         sum: 0,
@@ -108,23 +107,23 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
 /**
  * Generate total row
  *
- * @param {any[]} events Events
- * @param {IColumn[]} columns Columns
- * @param {string} label Label
+ * @param events - Events
+ * @param columns - Columns
+ * @param label - Label
  */
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
   return [...columns].splice(1, columns.length - 2).reduce(
-    (obj, col) => {
+    (object, col) => {
       const sum = [...events]
         .filter(
           (event) =>
-            DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+            $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
             col.fieldName
         )
         .reduce((sum, event) => (sum += event.duration), 0)
-      obj[col.fieldName] = sum
-      obj.sum += sum
-      return obj
+      object[col.fieldName] = sum
+      object.sum += sum
+      return object
     },
     { label, sum: 0 }
   )

@@ -1,11 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import { IAppContext } from 'AppContext'
-import { IReportsParams, IReportsQuery } from '../types'
+import { IReportsParameters, IReportsQuery } from '../types'
 
-export interface IReportsReducerParams {
+/**
+ * @category Reports
+ */
+export interface IReportsReducerParameters {
   /**
    * URL parameters
    */
-  url: IReportsParams
+  url: IReportsParameters
 
   /**
    * Queries

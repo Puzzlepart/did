@@ -1,4 +1,4 @@
-mutation($name: String!) {
+mutation DeleteApiToken ($name: String!) {
   result: deleteApiToken(name: $name) {
     success
     error {

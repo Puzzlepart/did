@@ -1,4 +1,8 @@
-import { Collection, FilterQuery, SortOptionObject } from 'mongodb'
+/* eslint-disable tsdoc/syntax */
+/* eslint-disable unicorn/no-array-callback-reference */
+
+import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
+import { isEmpty } from 'underscore'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
 
@@ -7,37 +11,115 @@ export class MongoDocumentService<T> {
   public collection: Collection<T>
 
   /**
-   * Constructs a new Mongo Document Service
+   * Constructer for `MongoDocumentService`
    *
-   * Specify cachePrefix to use an underlying CacheService
+   * Specify `cachePrefix` to use an underlying `CacheService`
    *
-   * @param {Context} context Context
-   * @param {string} collectionName Colletion name
-   * @param {string} cachePrefix Cache prefix
+   * @param context - Injected context through `typedi`
+   * @param collectionName - Collection name
+   * @param cachePrefix - Cache prefix
+   * @param database - Database
    */
   constructor(
     public readonly context: Context,
     public collectionName: string,
-    public cachePrefix?: string
+    public cachePrefix?: string,
+    database?: Db
   ) {
-    this.collection = context.db.collection(collectionName)
+    this.collection = (database || context.db).collection(collectionName)
     if (cachePrefix) {
       this.cache = new CacheService(this.context, cachePrefix)
     }
   }
 
   /**
+   * Extend query to be able to check for false OR null.
+   * Ref: https://stackoverflow.com/questions/11634601/mongodb-null-field-or-true-false
+   *
+   * @example Query
+   *
+   * { hiddenFromReports: false }
+   *
+   * will be converted to
+   *
+   * { hiddenFromReports: { $in: [false, null] } }
+   *
+   * @param query - Filter query
+   */
+  private _extendQuery(query: FilterQuery<T>) {
+    return Object.keys(query || {}).reduce((q, key) => {
+      const isFalse = query[key] === false
+      if (isFalse) {
+        q[key] = {
+          $in: [false, null]
+        }
+      } else {
+        q[key] = query[key]
+      }
+      return q
+    }, {})
+  }
+
+  /**
    * Wrapper on find().toArray()
    *
-   * @see — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+   * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
-   * @param {FilterQuery<T>} query Query
-   * @param {Array<[string, number]> | SortOptionObject<T>} sort Sort
+   * @param query - Filter query
+   * @param sort - Sort options
    */
-  public find(
-    query: FilterQuery<T>,
-    sort?: Array<[string, number]> | SortOptionObject<T>
-  ) {
-    return this.collection.find(query, { sort }).toArray()
+  public find<S = any>(query: FilterQuery<T>, sort?: S) {
+    return this.collection.find(this._extendQuery(query), { sort }).toArray()
+  }
+
+  /**
+   * Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+   *
+   * @remarks Returns void if documents_ is empty
+   *
+   * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+   *
+   * @param documents_ - Documents
+   */
+  public insertMultiple(documents_: OptionalId<any>[]) {
+    if (isEmpty(documents_)) return
+    const documents = documents_.map((document_) => ({
+      ...document_,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }))
+    return this.collection.insertMany(documents)
+  }
+
+  /**
+   * Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
+   *
+   * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
+   *
+   * @param document_ - Document
+   */
+  public insert(document_: OptionalId<any>) {
+    return this.collection.insertOne({
+      ...document_,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+  }
+
+  /**
+   * Wrapper on updateOne() that also updates `updatedAt` property
+   *
+   * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#updateOne
+   *
+   * @param query - Query
+   * @param document_ - Document
+   */
+  public update(query: FilterQuery<T>, document_: OptionalId<any>) {
+    return this.collection.updateOne(query, {
+      $set: {
+        ...document_,
+        updatedAt: new Date()
+      }
+    })
   }
 }

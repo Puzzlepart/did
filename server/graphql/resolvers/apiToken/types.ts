@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a ApiToken',
   simpleResolvers: true
@@ -23,6 +27,9 @@ export class ApiToken {
   subscriptionId?: string
 }
 
+/**
+ * @category GraphQL InputType
+ */
 @InputType({
   description: 'Input object for ApiToken used in mutation addApiToken'
 })

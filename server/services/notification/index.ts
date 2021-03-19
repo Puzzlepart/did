@@ -1,47 +1,60 @@
+/* eslint-disable tsdoc/syntax */
+/* eslint-disable unicorn/no-array-reduce */
+
 import get from 'get-value'
-import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { any } from 'underscore'
+import { ConfirmedPeriodsService, ForecastedPeriodsService } from '..'
 import { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 
+/**
+ * Notification service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 export class NotificationService {
-  private _confirmed_periods: Collection
-  private _forecasted_periods: Collection
   /**
-   * Constructor
+   * Constructor for `NotificationService`
    *
-   * @param {Context} context Context
-   * @param {TimesheetService} _timesheet Timesheet service
+   * @param context - Injected context through `typedi`
+   * @param _timesheetSvc - Injected `TimesheetService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
-    private readonly _timesheet: TimesheetService
-  ) {
-    this._confirmed_periods = this.context.db.collection('confirmed_periods')
-    this._forecasted_periods = this.context.db.collection('forecasted_periods')
-  }
+    private readonly _timesheetSvc: TimesheetService,
+    private readonly _cperiodSvc: ConfirmedPeriodsService,
+    private readonly _fperiodSvc: ForecastedPeriodsService
+  ) // eslint-disable-next-line unicorn/empty-brace-spaces
+  {}
 
   /**
    * Get periods
    *
-   * @param {string} add Add
-   * @param {number} count Count
-   * @param {string} locale Locale
+   * @param add - Add
+   * @param count - Count
+   * @param locale - User locale
    */
   private _getPeriods(add: string, count: number, locale: string) {
     const periods = []
     let d = new DateObject().add(add)
-    for (let i = 0; i <= count; i++) {
+    for (let index = 0; index <= count; index++) {
       const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
       const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
       periods.push(
-        ...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale)
+        ...this._timesheetSvc.getPeriods(
+          startOfWeek,
+          endOfWeek,
+          locale,
+          this.context.userId
+        )
       )
       d = d.add(add)
     }
@@ -51,22 +64,19 @@ export class NotificationService {
   /**
    * Get unconfirmed periods notifications
    *
-   * @param {string} template Notification template
-   * @param {string} locale Locale
+   * @param template - Notification template
+   * @param locale - Locale
    */
   private async _unconfirmedPeriods(template: string, locale: string) {
     const periods = this._getPeriods('-1w', 5, locale)
 
-    const confirmedPeriods = await this._confirmed_periods
-      .find({
-        userId: this.context.userId
-      })
-      .toArray()
+    const confirmedPeriods = await this._cperiodSvc.find({
+      userId: this.context.userId
+    })
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      if (!any(confirmedPeriods, ({ id }) => id === period.id)) {
-        $.push(period)
-      }
+      const isConfirmed = any(confirmedPeriods, ({ _id }) => _id === period._id)
+      if (!isConfirmed) $.push(period)
       return $
     }, [])
 
@@ -78,8 +88,8 @@ export class NotificationService {
   /**
    * Get forecast notifications
    *
-   * @param {string} template Notification template
-   * @param {string} locale Locale
+   * @param template - Notification template
+   * @param locale - Locale
    */
   private async _forecast(template: string, locale: string) {
     if (
@@ -96,22 +106,28 @@ export class NotificationService {
       locale
     )
 
-    const forecastedPeriods = await this._forecasted_periods
-      .find({
-        userId: this.context.userId
-      })
-      .toArray()
+    const forecastedPeriods = await this._fperiodSvc.find({
+      userId: this.context.userId
+    })
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      if (!any(forecastedPeriods, ({ id }) => id === period.id)) {
-        $.push(period)
-      }
+      const isForecasted = any(
+        forecastedPeriods,
+        ({ _id }) => _id === period._id
+      )
+      if (!isForecasted) $.push(period)
       return $
     }, [])
 
     return nperiods.map((period) => new ForecastNotification(period, template))
   }
 
+  /**
+   * Get notifications
+   *
+   * @param templates - Templats
+   * @param locale - User locale
+   */
   public async getNotifications(
     templates: NotificationTemplates,
     locale: string
@@ -124,3 +140,5 @@ export class NotificationService {
     return [].concat.apply([], notifications)
   }
 }
+
+export * from './types'

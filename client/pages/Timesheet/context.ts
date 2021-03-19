@@ -1,36 +1,17 @@
+/* eslint-disable tsdoc/syntax */
 import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import { createContext, Dispatch } from 'react'
+import { useSubmitActions } from './hooks/useSubmitActions'
 import { ITimesheetState } from './types'
 
-export interface ITimesheetContext extends ITimesheetState {
-  /**
-   * On submit period
-   *
-   * Action depends on parameter forecast
-   *
-   * - If set to true: Forecast the period
-   *
-   * - If set to false: Confirms the period
-   *
-   * @param {boolean} forecast Forecast
-   */
-  onSubmitPeriod: (forecast: boolean) => void
-
-  /**
-   * On unsubmit period
-   *
-   * Action depends on parameter forecast
-   *
-   * - If set to true: Removes forecast for period
-   *
-   * - If set to false: Unconfirms the period
-   *
-   * @param {boolean} forecast Forecast
-   */
-  onUnsubmitPeriod: (forecast: boolean) => void
-
+/**
+ * @category Timesheet
+ */
+export interface ITimesheetContext
+  extends ITimesheetState,
+    ReturnType<typeof useSubmitActions> {
   /**
    * Dispatch an action
    */
@@ -47,4 +28,7 @@ export interface ITimesheetContext extends ITimesheetState {
   t: TFunction
 }
 
+/**
+ * @category Timesheet
+ */
 export const TimesheetContext = createContext<ITimesheetContext>(null)

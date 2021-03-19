@@ -1,4 +1,4 @@
-query {
+query ApiTokens {
     tokens: apiTokens {
       name
       created

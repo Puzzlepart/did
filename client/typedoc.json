@@ -1,0 +1,22 @@
+{
+  "name": "did-client",
+  "includeVersion": true,
+  "out": "client/.docs",
+  "readme": "none",
+  "excludeInternal": true,
+  "hideGenerator": true,
+  "gitRevision": "dev",
+  "tsconfig": "./client/tsconfig.json",
+  "categorizeByGroup": true,
+  "categoryOrder": ["Function Component", "*"],
+  "entryPoints": [
+    "client/components/index.ts",
+    "client/pages/index.ts",
+    "client/hooks/index.ts",
+    "client/graphql/index.ts",
+    "client/helpers/index.ts",
+    "client/utils/index.ts",
+    "client/app/index.tsx",
+    "client/index.tsx"
+  ]
+}

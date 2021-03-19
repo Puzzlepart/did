@@ -1,98 +1,102 @@
-import { Collection } from 'mongodb'
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find, isEmpty, omit } from 'underscore'
-import { MSGraphService } from '..'
+import { find } from 'underscore'
+import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
-import { MongoService } from '../mongo'
+import { firstPart } from '../../utils'
+import {
+  ConfirmedPeriodsService,
+  ForecastedPeriodsService,
+  ForecastedTimeEntryService,
+  ProjectService,
+  TimeEntryService
+} from '../mongo'
 import MatchingEngine from './matching'
 import {
-  IConnectEventsParams,
-  IGetTimesheetParams,
-  ISubmitPeriodParams,
-  IUnsubmitPeriodParams
+  IConnectEventsParameters,
+  IGetTimesheetParameters,
+  IProviderEventsParameters,
+  ISubmitPeriodParameters,
+  ITimesheetPeriodData,
+  IUnsubmitPeriodParameters
 } from './types'
+import { mapMatchedEvents } from './utils'
 
+/**
+ * Timesheet service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 export class TimesheetService {
-  private _confirmed_periods: Collection
-  private _forecasted_periods: Collection
-  private _time_entries: Collection
-  private _forecasted_time_entries: Collection
-
   /**
    * Constructor
    *
-   * @param {Context} context Context
-   * @param {MSGraphService} _msgraph MSGraphService
-   * @param {MongoService} _mongo MongoService
+   * @param context - Injected context through `typedi`
+   * @param _msgraphSvc - Injected `MSGraphService` through `typedi`
+   * @param _googleCalSvc - Injected `GoogleCalendarService` through `typedi`
+   * @param _projectSvc - Injected `ProjectService` through `typedi`
+   * @param _teSvc - Injected `TimeEntryService` through `typedi`
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
-    private readonly _msgraph: MSGraphService,
-    private readonly _mongo: MongoService
-  ) {
-    const { db } = this.context
-    this._confirmed_periods = db.collection('confirmed_periods')
-    this._forecasted_periods = db.collection('forecasted_periods')
-    this._time_entries = db.collection('time_entries')
-    this._forecasted_time_entries = db.collection('forecasted_time_entries')
-  }
+    private readonly _msgraphSvc: MSGraphService,
+    private readonly _googleCalSvc: GoogleCalendarService,
+    private readonly _projectSvc: ProjectService,
+    private readonly _teSvc: TimeEntryService,
+    private readonly _fteSvc: ForecastedTimeEntryService,
+    private readonly _cperiodSvc: ConfirmedPeriodsService,
+    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
+  ) {}
 
   /**
    * Get timesheet
    *
-   * @param {IGetTimesheetParams} params Timesheet params
+   * @param params - Timesheet params
    */
-  public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
+  public async getTimesheet(
+    parameters: IGetTimesheetParameters
+  ): Promise<any[]> {
     try {
       const periods = this.getPeriods(
-        params.startDate,
-        params.endDate,
-        params.locale
+        parameters.startDate,
+        parameters.endDate,
+        parameters.locale,
+        this.context.userId
       )
-      const data = await this._mongo.project.getProjectsData()
-      for (let i = 0; i < periods.length; i++) {
-        const { _id } = this._getPeriodData(periods[i].id)
+      const data = await this._projectSvc.getProjectsData()
+      for (let index = 0; index < periods.length; index++) {
+        const { _id } = periods[index]
         const [confirmed, forecasted] = await Promise.all([
-          this._confirmed_periods.findOne({ _id }),
-          this._forecasted_periods.findOne({ _id })
+          this._cperiodSvc.collection.findOne({ _id }),
+          this._fperiodSvc.collection.findOne({ _id })
         ])
-        periods[i].isForecasted = !!forecasted
-        periods[i].forecastedHours = forecasted?.hours || 0
+        periods[index].isForecasted = !!forecasted
+        periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._time_entries
-            .find({ _periodId: _id })
-            .toArray()
-          periods[i] = {
-            ...periods[i],
+          periods[index] = {
+            ...periods[index],
             isConfirmed: true,
             events: this._connectEvents({
-              ...params,
-              events: entries,
-              projects: data.projects
+              ...parameters,
+              ...data,
+              events: confirmed.events
             })
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraph.getEvents(
-            periods[i].startDate,
-            periods[i].endDate,
-            {
-              tzOffset: params.tzOffset,
-              returnIsoDates: false
-            }
-          )
-          periods[i].events = engine.matchEvents(events).map((e) => ({
-            ...e,
-            date: DateUtils.formatDate(
-              e.startDateTime,
-              params.dateFormat,
-              params.locale
-            )
-          }))
+          periods[index].events = await this._getEventsFromProvider({
+            ...periods[index],
+            ...parameters,
+            provider: this.context.provider,
+            engine
+          })
         }
       }
       return periods
@@ -104,50 +108,36 @@ export class TimesheetService {
   /**
    * Submit period
    *
-   * @param {ISubmitPeriodParams} params Submit period params
+   * @param parameters - Submit period params
    */
-  public async submitPeriod(params: ISubmitPeriodParams): Promise<void> {
+  public async submitPeriod(
+    parameters: ISubmitPeriodParameters
+  ): Promise<void> {
     try {
-      const events = await this._msgraph.getEvents(
-        params.period.startDate,
-        params.period.endDate,
-        {
-          tzOffset: params.tzOffset,
-          returnIsoDates: false
-        }
-      )
-      const period = {
-        ...this._getPeriodData(params.period.id),
-        startDate: new Date(params.period.startDate),
-        endDate: new Date(params.period.endDate),
-        submitted: new Date(),
+      const events = await this._getEventsFromProvider({
+        ...parameters.period,
+        ...parameters,
+        provider: this.context.provider
+      })
+      const period: ITimesheetPeriodData = {
+        ...this._getPeriodData(parameters.period.id, this.context.userId),
         hours: 0,
-        forecastedHours: params.period.forecastedHours || 0
+        forecastedHours: parameters.period.forecastedHours || 0
       }
-      const entries = []
-      period.hours = params.period.matchedEvents.reduce((hours, m: any) => {
-        const event = find(events, ({ id }) => id === m.id)
-        if (!event) return null
-        entries.push({
-          ...m,
-          ...event,
-          _id: this._createUniqueEventId(event.id, event.startDateTime as Date),
-          ...omit(period, '_id'),
-          _periodId: period._id
-        })
-        return hours + event.duration
-      }, 0)
-      const entry_colletion = params.forecast
-        ? this._forecasted_time_entries
-        : this._time_entries
-      const period_collection = params.forecast
-        ? this._forecasted_periods
-        : this._confirmed_periods
+      const { getEvents, hours } = mapMatchedEvents(
+        period,
+        parameters.period.matchedEvents,
+        events
+      )
+      period.hours = hours
+      period.events = getEvents(false)
+      const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
+      const periodSvc = parameters.forecast
+        ? this._fperiodSvc
+        : this._cperiodSvc
       await Promise.all([
-        !isEmpty(entries)
-          ? entry_colletion.insertMany(entries)
-          : Promise.resolve(null),
-        period_collection.insertOne(period)
+        teSvc.insertMultiple(getEvents(true)),
+        periodSvc.insert(period)
       ])
     } catch (error) {
       throw error
@@ -157,25 +147,23 @@ export class TimesheetService {
   /**
    * Unsubmit period
    *
-   * @param {IUnsubmitPeriodParams} params Unsubmit period params
+   * @param parameters - Unsubmit period params
    */
-  public async unsubmitPeriod({
-    period,
-    forecast
-  }: IUnsubmitPeriodParams): Promise<void> {
+  public async unsubmitPeriod(
+    parameters: IUnsubmitPeriodParameters
+  ): Promise<void> {
     try {
-      const entry_colletion = forecast
-        ? this._forecasted_time_entries
-        : this._time_entries
-      const period_collection = forecast
-        ? this._forecasted_periods
-        : this._confirmed_periods
-      const { _id } = this._getPeriodData(period.id)
+      const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
+      const periodSvc = parameters.forecast
+        ? this._fperiodSvc
+        : this._cperiodSvc
+      const { _id } = this._getPeriodData(
+        parameters.period.id,
+        this.context.userId
+      )
       await Promise.all([
-        entry_colletion.deleteMany({
-          _periodId: _id
-        }),
-        period_collection.deleteOne({ _id })
+        teSvc.collection.deleteMany({ periodId: _id }),
+        periodSvc.collection.deleteOne({ _id })
       ])
     } catch (error) {
       throw error
@@ -183,28 +171,72 @@ export class TimesheetService {
   }
 
   /**
-   * Create unique ID consisting of event ID + event start date time
+   * Get events from provider
    *
-   * @param {string} eventId Event ID
-   * @param {Date} startDateTime Start date time
+   * - Provider `google` uses `_googleCalSvc` (`GoogleCalendarService`)
+   * - Default provider uses `_msgraphSvc` (`MSGraphService`)
+   *
+   * @param params - Parameters
+   *
+   * @returns Events
    */
-  private _createUniqueEventId(eventId: string, startDateTime: Date) {
-    return `${eventId}${startDateTime.getTime()}`.replace(/[^a-zA-Z0-9]/g, '')
+  private async _getEventsFromProvider({
+    provider,
+    startDate,
+    endDate,
+    tzOffset,
+    dateFormat,
+    locale,
+    engine = null
+  }: IProviderEventsParameters) {
+    const startDateTimeIso = DateUtils.toISOString(
+      `${startDate}:00:00:00.000`,
+      tzOffset
+    )
+    const endDateTimeIso = DateUtils.toISOString(
+      `${endDate}:23:59:59.999`,
+      tzOffset
+    )
+    let events: any[]
+    switch (provider) {
+      case 'google':
+        {
+          events = await this._googleCalSvc.getEvents(
+            startDateTimeIso,
+            endDateTimeIso
+          )
+        }
+        break
+      default: {
+        events = await this._msgraphSvc.getEvents(
+          startDateTimeIso,
+          endDateTimeIso
+        )
+      }
+    }
+    if (engine) {
+      return engine.matchEvents(events).map((event_) => ({
+        ...event_,
+        date: DateUtils.formatDate(event_.startDateTime, dateFormat, locale)
+      }))
+    }
+    return events
   }
 
   /**
    * Get period data from id
    *
    * * Generates an _id for Mongo DB
-   * * Returns week, month, year and _userId
+   * * Returns week, month, year and userId
    *
-   * @param {string} id Id
+   * @param id - Id
+   * @param userId - User ID
    */
-  private _getPeriodData(id: string) {
-    const [week, month, year] = id.split('_').map((p) => parseInt(p, 10))
+  private _getPeriodData(id: string, userId: string): ITimesheetPeriodData {
+    const [week, month, year] = id.split('_').map((p) => Number.parseInt(p, 10))
     return {
-      _id: `${id}${this.context.userId}`.replace(/[^a-zA-Z0-9]/g, ''),
-      _userId: this.context.userId,
+      _id: `${id}${userId}`.replace(/[^\dA-Za-z]/g, ''),
+      userId,
       week,
       month,
       year
@@ -214,14 +246,16 @@ export class TimesheetService {
   /**
    * Get periods between startDate and endDate
    *
-   * @param {string} startDate Start date
-   * @param {string} endDate End date
-   * @param {string} locale Locale
+   * @param startDate - Start date
+   * @param endDate - End date
+   * @param locale - Locale
+   * @param userId - User ID
    */
   public getPeriods(
     startDate: string,
     endDate: string,
-    locale: string
+    locale: string,
+    userId: string
   ): TimesheetPeriodObject[] {
     const isSplit = !DateUtils.isSameMonth(startDate, endDate)
     const periods: TimesheetPeriodObject[] = [
@@ -243,24 +277,33 @@ export class TimesheetService {
       )
     }
 
-    return periods
+    return periods.map((period) => {
+      return { ...this._getPeriodData(period.id, userId), ...period }
+    })
   }
 
   /**
-   * Connect events to projects
+   * Connect events to projects and customers
    *
-   * @param {IConnectEventsParams} params Connect events params
+   * @see https://docs.mongodb.com/manual/reference/database-references/
+   *
+   * @param params - Connect events parameters
    */
   private _connectEvents({
     events,
     projects,
+    customers,
     dateFormat,
     locale
-  }: IConnectEventsParams) {
+  }: IConnectEventsParameters) {
     return events.map((event) => ({
       id: event._id,
       ...event,
       project: find(projects, ({ _id }) => _id === event.projectId),
+      customer: find(
+        customers,
+        ({ key }) => key === firstPart(event.projectId)
+      ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }

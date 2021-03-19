@@ -1,8 +1,19 @@
-query {
+query Labels {
   labels {
     name
     description
     color
     icon
+  }
+  projects {
+    name
+    description
+    icon
+    labels {
+      name
+      description
+      color
+      icon
+    }
   }
 }

@@ -1,11 +1,20 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * @internal
+ */
 declare namespace Express {
+  /**
+   * @internal
+   */
   interface UserSubscription {
     id: string
-    connectionString: string
     name: string
     settings: any
   }
 
+  /**
+   * @internal
+   */
   interface User {
     id?: string
     displayName?: string

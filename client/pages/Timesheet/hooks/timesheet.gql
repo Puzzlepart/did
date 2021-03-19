@@ -1,7 +1,7 @@
-#import "./timesheet.fragments.project.gql"
+#import "../../../graphql/fragments/project-fragment.gql"
 
-query($query: TimesheetQuery!, $options: TimesheetOptions!) {
-  timesheet(query: $query, options: $options) {
+query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
+  periods: timesheet(query: $query, options: $options) {
     id
     week
     month

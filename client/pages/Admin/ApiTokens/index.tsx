@@ -1,8 +1,9 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { useMessage, UserMessage } from 'components'
-import List from 'components/List'
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import React, { useState } from 'react'
+import { List, useMessage, UserMessage } from 'components'
+import { Icon, MessageBarType } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
@@ -10,13 +11,20 @@ import { isNull } from 'underscore'
 import { ApiTokenForm } from './ApiTokenForm'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import styles from './ApiTokens.module.scss'
-import { ApiTokensColumns as columns } from './columns'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { Icon } from 'office-ui-fabric'
+import { useColumns } from './useColumns'
 
-export const ApiTokens = () => {
+/**
+ * Component for handling API tokens.
+ *
+ * * See created API tokens
+ * * Create new API tokens
+ * * Delete existing API tokens
+ *
+ * @category Function Component
+ */
+export const ApiTokens: FunctionComponent = () => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
   const [deleteApiToken] = useMutation($deleteApiToken)
@@ -27,7 +35,7 @@ export const ApiTokens = () => {
   /**
    * On delete API token
    *
-   * @param {ApiToken} token The token to dete
+   * @param token - The token to dete
    */
   async function onDeleteApiToken(token: ApiToken) {
     await deleteApiToken({ variables: { name: token.name } })
@@ -41,7 +49,7 @@ export const ApiTokens = () => {
   /**
    * On key added
    *
-   * @param {string} generatedKey Generated API key
+   * @param generatedKey - Generated API key
    */
   function onKeyAdded(generatedKey: string) {
     setForm({})
@@ -55,6 +63,8 @@ export const ApiTokens = () => {
       })
     refetch()
   }
+
+  const columns = useColumns({ onDeleteApiToken })
 
   return (
     <div className={styles.root}>
@@ -72,7 +82,7 @@ export const ApiTokens = () => {
         </FadeIn>
       )}
       <List
-        columns={columns(onDeleteApiToken, t)}
+        columns={columns}
         items={data?.tokens}
         commandBar={{
           items: [

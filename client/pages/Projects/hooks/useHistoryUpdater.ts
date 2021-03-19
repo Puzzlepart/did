@@ -1,15 +1,15 @@
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { IProjectsParams, IProjectsState } from '../types'
+import { IProjectsParameters, IProjectsState } from '../types'
 
 /**
  * Update history hook on state change
  *
- * @param {IProjectsState} state State
+ * @param state  -State
  */
 export function useHistoryUpdater(state: IProjectsState) {
   const history = useHistory()
-  const url = useParams<IProjectsParams>()
+  const url = useParams<IProjectsParameters>()
 
   useLayoutEffect(() => {
     const paths = [state.view, state.selected?.tag || url.key, state.detailsTab]

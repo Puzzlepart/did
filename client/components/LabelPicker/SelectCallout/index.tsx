@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import styles from './SelectCallout.module.scss'
-import { SearchBox, Checkbox, Callout, Icon } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { Callout, Checkbox, Icon, SearchBox } from 'office-ui-fabric-react'
+import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
+import styles from './SelectCallout.module.scss'
 import { ISelectCalloutProps } from './types'
 
+/**
+ * @category Function Component
+ */
 export const SelectCallout = (props: ISelectCalloutProps) => {
   const [labels, setLabels] = useState<LabelObject[]>(props.labels)
 
@@ -12,8 +16,8 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
   function onSearch(value: string) {
     let _labels = [...props.labels]
     if (value.length > 0) {
-      _labels = _labels.filter(
-        (lbl) => lbl.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      _labels = _labels.filter((lbl) =>
+        lbl.name.toLowerCase().includes(value.toLowerCase())
       )
     }
     setLabels(_labels)
@@ -30,16 +34,14 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
       <SearchBox
         className={styles.searchBox}
         placeholder={props.placeholder}
-        onChange={(_evt, value) => onSearch(value)}
+        onChange={(_event, value) => onSearch(value)}
       />
       <ul>
         {labels.map((lbl) => (
           <li key={lbl.name}>
             <div className={styles.itemContainer}>
               <Checkbox
-                defaultChecked={
-                  props.defaultSelectedKeys.indexOf(lbl.name) !== -1
-                }
+                defaultChecked={props.defaultSelectedKeys.includes(lbl.name)}
                 className={styles.itemCheckbox}
                 onChange={() => props.onToggleLabel(lbl)}
               />
