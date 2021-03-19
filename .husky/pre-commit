@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run lint:fix
 npx @appnest/readme generate --config .readme/blueprint.json
 npx @appnest/readme generate --config .changelog/blueprint.json

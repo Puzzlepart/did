@@ -59,10 +59,13 @@ Now you need to set the required environment variables from this table:
 
 | Folder/File                   | Description                                                  |
 | ----------------------------- | ------------------------------------------------------------ |
+| `/shared`                     | Shared code between client and server                        |
+| `/shared/config/security`     | Shared security configuration used by both the client and the server |
+| `/shared/utils/date`          | Shared date utilities used by both the client and the server |
 | `/client`                     | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`. |
+| `/client/app`                 | React app entry point                                        |
 | `/client/common`              | Common elements like icons etc                               |
 | `/client/components`          | React components reusable throughout the solution            |
-| `/client/config`              | Conifguration                                                |
 | `/client/graphql`             | Graphql implementation for the client using `@apollo/client` |
 | `/client/helpers`             | Helper functions                                             |
 | `/client/pages`               | Main pages of the solution                                   |
