@@ -45,7 +45,7 @@ Constructor for `TimeEntryService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*TimeEntryService*](services.timeentryservice.md)
 

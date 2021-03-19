@@ -15,7 +15,7 @@ export class MongoDocumentService<T> {
    *
    * Specify `cachePrefix` to use an underlying `CacheService`
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    * @param collectionName - Collection name
    * @param cachePrefix - Cache prefix
    * @param database - Database

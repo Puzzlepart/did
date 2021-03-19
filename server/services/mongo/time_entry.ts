@@ -15,7 +15,7 @@ export class TimeEntryService extends MongoDocumentService<TimeEntry> {
   /**
    * Constructor for `TimeEntryService`
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'time_entries')

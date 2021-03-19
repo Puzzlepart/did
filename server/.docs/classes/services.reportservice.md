@@ -37,12 +37,12 @@ Constructor for ReportsService
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi   |
-`_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through typedi   |
-`_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through typedi   |
-`_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through typedi   |
-`_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi   |
-`_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through typedi    |
+`context` | *Context* | Injected context through `typedi`   |
+`_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through `typedi`   |
+`_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through `typedi`   |
+`_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through `typedi`   |
+`_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through `typedi`   |
+`_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through `typedi`    |
 
 **Returns:** [*ReportService*](services.reportservice.md)
 

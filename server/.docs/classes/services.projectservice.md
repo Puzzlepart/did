@@ -48,9 +48,9 @@ Constructor for `ProjectService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi   |
-`_customerSvc` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through typedi   |
-`_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through typedi    |
+`context` | *Context* | Injected context through `typedi`   |
+`_customerSvc` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through `typedi`   |
+`_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through `typedi`    |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 

@@ -53,7 +53,7 @@ Constructor for `UserService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*UserService*](services.userservice.md)
 

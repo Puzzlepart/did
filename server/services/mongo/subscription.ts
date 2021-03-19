@@ -20,7 +20,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Constructor for `SubscriptionService`
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(

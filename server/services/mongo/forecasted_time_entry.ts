@@ -15,7 +15,7 @@ export class ForecastedTimeEntryService extends MongoDocumentService<TimeEntry> 
   /**
    * Constructor for `ForecastedTimeEntryService`
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'forecasted_time_entries')

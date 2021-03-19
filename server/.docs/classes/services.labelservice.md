@@ -50,7 +50,7 @@ Constructor for `LabelService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*LabelService*](services.labelservice.md)
 

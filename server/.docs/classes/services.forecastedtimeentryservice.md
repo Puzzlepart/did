@@ -45,7 +45,7 @@ Constructor for `ForecastedTimeEntryService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
 

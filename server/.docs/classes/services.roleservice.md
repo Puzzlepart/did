@@ -50,7 +50,7 @@ Constructor for `RoleService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 

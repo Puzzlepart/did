@@ -29,9 +29,9 @@ export class ProjectService extends MongoDocumentService<Project> {
   /**
    * Constructor for `ProjectService`
    *
-   * @param context - Injected context through typedi
-   * @param _customerSvc - Injected `CustomerService` through typedi
-   * @param _labelSvc - Injected `LabelService` through typedi
+   * @param context - Injected context through `typedi`
+   * @param _customerSvc - Injected `CustomerService` through `typedi`
+   * @param _labelSvc - Injected `LabelService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,

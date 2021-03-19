@@ -31,7 +31,7 @@ export class CacheService {
   /**
    * Constructor
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    * @param prefix - Prefix
    * @param context - Scope (defaults to CacheScope.SUBSCRIPTION)
    */

@@ -22,7 +22,7 @@ export class UserService extends MongoDocumentService<User> {
    /**
    * Constructor for `UserService`
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'users')

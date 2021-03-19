@@ -48,7 +48,7 @@ Constructor for `ApiTokenService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 

@@ -19,7 +19,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
   /**
    * Constructor for `ApiTokenService`
    *
-   * @param context - Injected context through typedi
+   * @param context - Injected context through `typedi`
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(
