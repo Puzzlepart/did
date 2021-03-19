@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { createClient as createRedisClient } from 'redis'
 import { environment } from '../../utils'
 
@@ -10,6 +11,8 @@ import { environment } from '../../utils'
  * - Using socket_keepalive to true
  *
  * @see https://github.com/Puzzlepart/did/issues/812
+ * 
+ * @category Express middleware
  */
 export const redisMiddlware = createRedisClient(
   6380,

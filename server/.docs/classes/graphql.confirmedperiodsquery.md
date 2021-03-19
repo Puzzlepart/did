@@ -29,7 +29,7 @@
 
 • `Optional` **week**: *number*
 
-Defined in: [graphql/resolvers/reports/types.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L95)
+Defined in: [graphql/resolvers/reports/types.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L97)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **year**: *number*
 
-Defined in: [graphql/resolvers/reports/types.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L98)
+Defined in: [graphql/resolvers/reports/types.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L100)

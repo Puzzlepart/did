@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
 import { environment } from '../../utils'
@@ -10,6 +11,8 @@ const RedisStore = require('connect-redis')(session)
  * "name" will show up as your cookie name in the browser
  * "cookie" is provided by default; you can add it to add additional personalized options
  * The "store" ttl is the expiration time for each Redis session ID, in seconds
+ * 
+ * @category Express middleware
  */
 export const redisSessionMiddleware = session({
   name: environment('SESSION_NAME', 'connect.sid'),

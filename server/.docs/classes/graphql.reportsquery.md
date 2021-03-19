@@ -30,4 +30,4 @@
 
 ID of the project to filter on
 
-Defined in: [graphql/resolvers/reports/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L86)
+Defined in: [graphql/resolvers/reports/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L88)

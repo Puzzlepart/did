@@ -6,18 +6,18 @@ NodeJS Express App middleware
 
 ## Table of contents
 
-### Variables
+### Express middleware Variables
 
 - [helmetMiddleware](middleware.md#helmetmiddleware)
 - [redisMiddlware](middleware.md#redismiddlware)
 
-### Functions
+### Express middleware Functions
 
 - [passportMiddleware](middleware.md#passportmiddleware)
 - [redisSessionMiddleware](middleware.md#redissessionmiddleware)
 - [serveGzippedMiddleware](middleware.md#servegzippedmiddleware)
 
-## Variables
+## Express middleware Variables
 
 ### helmetMiddleware
 
@@ -25,7 +25,11 @@ NodeJS Express App middleware
 
 Helmet configuration
 
-Defined in: [middleware/helmet/index.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L6)
+We allow framing from `https://teams.microsoft.com`
+
+**`see`** https://github.com/helmetjs/helmet
+
+Defined in: [middleware/helmet/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L13)
 
 ___
 
@@ -42,9 +46,9 @@ Redis client
 
 **`see`** https://github.com/Puzzlepart/did/issues/812
 
-Defined in: [middleware/redis/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L14)
+Defined in: [middleware/redis/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L17)
 
-## Functions
+## Express middleware Functions
 
 ### passportMiddleware
 
@@ -60,7 +64,7 @@ Name | Type | Description |
 
 **Returns:** *PassportStatic*
 
-Defined in: [middleware/passport/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L11)
+Defined in: [middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L14)
 
 ___
 
@@ -84,7 +88,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L14)
+Defined in: [middleware/session/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L17)
 
 ___
 
@@ -102,4 +106,4 @@ Name | Type | Description |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L9)
+Defined in: [middleware/gzip/index.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L12)

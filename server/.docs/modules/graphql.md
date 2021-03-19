@@ -62,7 +62,7 @@ GraphQL Server using `apollo-server-express`
 - [TimesheetResolver](../classes/graphql.timesheetresolver.md)
 - [UserResolver](../classes/graphql.userresolver.md)
 
-### Type aliases
+### GraphQL Type Type aliases
 
 - [ReportsQueryPreset](graphql.md#reportsquerypreset)
 
@@ -72,7 +72,7 @@ GraphQL Server using `apollo-server-express`
 - [generateGraphQLSchema](graphql.md#generategraphqlschema)
 - [setupGraphQL](graphql.md#setupgraphql)
 
-## Type aliases
+## GraphQL Type Type aliases
 
 ### ReportsQueryPreset
 
@@ -80,7 +80,7 @@ GraphQL Server using `apollo-server-express`
 
 Reports query preset
 
-Defined in: [graphql/resolvers/reports/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L70)
+Defined in: [graphql/resolvers/reports/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L72)
 
 ## Functions
 
