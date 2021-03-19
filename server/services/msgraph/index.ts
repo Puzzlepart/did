@@ -64,7 +64,7 @@ class MSGraphService {
    *
    * @returns A base64 representation of the user photo
    */
-  public async getUserPhoto(size: string): Promise<any> {
+  public async getUserPhoto(size: string): Promise<string> {
     try {
       const client = await this._getClient()
       const value = (await client
