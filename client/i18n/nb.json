@@ -152,7 +152,9 @@
     "userHiddenFromReportsLabel": "Skjult fra timeoversikt",
     "summaryViewProgressLabel": "Laster sammendrag",
     "summaryViewProgressDescription": "For å gi deg de ferskeste resultatene, genererer vi et sammendrag fra de nyeste dataene... ",
-    "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did."
+    "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did.",
+    "adUserSyncUserPhotoLabel": "Synkroniser profilbilde",
+    "adUserSyncUserPhotoDescription": "Synkroniser profilbilde fra Azure Active Directory når brukerne logger på."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

@@ -1,7 +1,7 @@
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { config } from 'package'
 import { PermissionScope } from 'security'
-import { Role, User } from 'types'
+import { Role, User, UserPhoto } from 'types'
 import { contains } from 'underscore'
 import { tryParseJson } from 'utils'
 
@@ -11,7 +11,8 @@ export class ContextUser {
   public role: Role
   public mail: string
   public startPage: string
-  public configuration: { [key: string]: any }
+  public configuration: Record<string, any>
+  public photo: UserPhoto
 
   /**
    * Constructor
@@ -26,6 +27,7 @@ export class ContextUser {
       this.role = _user.role as Role
       this.startPage = _user.startPage
       this.configuration = tryParseJson(_user.configuration, {})
+      this.photo = _user.photo
     }
   }
 

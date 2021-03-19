@@ -11,6 +11,7 @@ query UserContext {
       adsync {
         enabled
         properties
+        syncUserPhoto
       }
     }
   }
@@ -26,6 +27,9 @@ query UserContext {
     startPage
     preferredLanguage
     configuration
+    photo {
+      base64
+    }
   }
   authProviders
 }

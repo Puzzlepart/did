@@ -14,6 +14,7 @@
 
 - [enabled](graphql.subscriptionadsyncsettingsinput.md#enabled)
 - [properties](graphql.subscriptionadsyncsettingsinput.md#properties)
+- [syncUserPhoto](graphql.subscriptionadsyncsettingsinput.md#syncuserphoto)
 
 ## Constructors
 
@@ -29,7 +30,7 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L96)
+Defined in: [server/graphql/resolvers/subscription/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L99)
 
 ___
 
@@ -37,4 +38,12 @@ ___
 
 • `Optional` **properties**: *string*[]
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L99)
+Defined in: [server/graphql/resolvers/subscription/types.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L102)
+
+___
+
+### syncUserPhoto
+
+• `Optional` **syncUserPhoto**: *boolean*
+
+Defined in: [server/graphql/resolvers/subscription/types.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L105)

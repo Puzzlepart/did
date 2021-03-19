@@ -1,9 +1,9 @@
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
-import { ChoiceGroup, DefaultButton, Icon, Panel } from 'office-ui-fabric-react'
+import { ChoiceGroup, DefaultButton, Panel } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from '../UserMenu.module.scss'
+import { MenuItem } from '../MenuItem'
 import { useUserReports } from './useUserReports'
 
 export const UserReports: FunctionComponent = () => {
@@ -26,10 +26,11 @@ export const UserReports: FunctionComponent = () => {
 
   return (
     <>
-      <a href='#' onClick={togglePanel} className={styles.menuItem}>
-        <Icon iconName='ReportDocument' className={styles.icon} />
-        <span>{t('common.userReports')}</span>
-      </a>
+      <MenuItem
+        iconProps={{ iconName: 'ReportDocument' }}
+        text={t('common.userReports')}
+        onClick={togglePanel}
+      />
       <Panel
         headerText={t('common.userReports')}
         isOpen={showPanel}

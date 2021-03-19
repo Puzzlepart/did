@@ -44,6 +44,7 @@
 - [TimeEntry](../classes/graphql.timeentry.md)
 - [TimesheetPeriodObject](../classes/graphql.timesheetperiodobject.md)
 - [User](../classes/graphql.user.md)
+- [UserPhoto](../classes/graphql.userphoto.md)
 
 ### GraphQL Resolver Classes
 

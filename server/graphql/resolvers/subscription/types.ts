@@ -29,6 +29,9 @@ export class SubscriptionADSyncSettings {
 
   @Field(() => [String], { nullable: true })
   properties?: string[]
+
+  @Field({ nullable: true })
+  syncUserPhoto?: boolean
 }
 
 /**
@@ -97,6 +100,9 @@ export class SubscriptionADSyncSettingsInput {
 
   @Field(() => [String], { nullable: true })
   properties?: string[]
+
+  @Field({ nullable: true })
+  syncUserPhoto?: boolean
 }
 
 /**

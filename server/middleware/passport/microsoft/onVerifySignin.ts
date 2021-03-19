@@ -5,7 +5,7 @@ import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../../services/mongo'
 import { environment } from '../../../utils'
 import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
-import { synchronizeUserProfile } from '../synchronizeUserProfile'
+import { synchronizeUserProfile } from './synchronizeUserProfile'
 
 /**
  * On verify sign in Microsoft
