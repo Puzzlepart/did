@@ -62,7 +62,7 @@ Name | Type |
 
 The contrasting color (black or white)
 
-Defined in: client/utils/getContrastColor.ts:10
+Defined in: [client/utils/getContrastColor.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L10)
 
 ___
 

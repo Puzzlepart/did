@@ -5,37 +5,25 @@ import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import { getContrastColor } from 'utils'
 import styles from './EntityLabel.module.scss'
-import { IEntityLabelProps, LabelSize } from './types'
+import { IEntityLabelProps } from './types'
 
 /**
+ * The `EntityLabel` component is used to add contextual metadata
+ * to a design. Visually it styles text, adds padding, and rounded corners.
+ *
+ * @see https://primer.style/components/Label
+ *
  * @category Function Component
  */
 export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
-  size,
   label
 }: IEntityLabelProps) => {
   const { t } = useTranslation()
-  const className = [styles.root]
   const contrastColor = getContrastColor(label.color)
-  let iconVerticalAlign = 'text-bottom'
-
-  switch (size) {
-    case LabelSize.xsmall:
-      className.push(styles.sizeXSmall)
-      break
-    case LabelSize.medium:
-      className.push(styles.sizeMedium)
-      iconVerticalAlign = 'baseline'
-      break
-    case LabelSize.large:
-      className.push(styles.sizeLarge)
-      iconVerticalAlign = 'baseline'
-      break
-  }
 
   return (
     <div
-      className={className.join(' ')}
+      className={styles.root}
       style={{ backgroundColor: label.color }}
       title={label.description}>
       {label.icon && (
@@ -43,11 +31,11 @@ export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
           iconName={label.icon}
           style={{
             color: contrastColor,
-            verticalAlign: iconVerticalAlign
+            marginRight: 6
           }}
         />
       )}
-      <span className={styles.text} style={{ color: contrastColor }}>
+      <span style={{ color: contrastColor }}>
         {isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}
       </span>
     </div>

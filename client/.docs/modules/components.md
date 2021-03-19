@@ -6,10 +6,6 @@ Reusable React Function components.
 
 ## Table of contents
 
-### Enumerations
-
-- [LabelSize](../enums/components.labelsize.md)
-
 ### FilterPanel Classes
 
 - [BaseFilter](../classes/components.basefilter.md)
@@ -151,7 +147,12 @@ ___
 
 • `Const` **EntityLabel**: *FunctionComponent*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
 
-Defined in: [client/components/EntityLabel/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L13)
+The `EntityLabel` component is used to add contextual metadata
+to a design. Visually it styles text, adds padding, and rounded corners.
+
+**`see`** https://primer.style/components/Label
+
+Defined in: [client/components/EntityLabel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L18)
 
 ___
 

@@ -1,5 +1,5 @@
 import { DeleteLink, EditLink } from 'components'
-import { EntityLabel, LabelSize } from 'components/EntityLabel'
+import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
 import React from 'react'
 import { LabelObject } from 'types'
@@ -21,7 +21,7 @@ export const LabelColumns = (
     'name',
     t('common.nameFieldLabel'),
     { maxWidth: 180 },
-    (label: LabelObject) => <EntityLabel label={label} size={LabelSize.large} />
+    (label: LabelObject) => <EntityLabel label={label} />
   ),
   col('description', t('common.descriptionFieldLabel')),
   col(null, null, { minWidth: 180 }, (label: LabelObject) => (

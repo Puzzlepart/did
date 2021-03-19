@@ -9,7 +9,6 @@
 ### Properties
 
 - [label](components.ientitylabelprops.md#label)
-- [size](components.ientitylabelprops.md#size)
 
 ## Properties
 
@@ -18,11 +17,3 @@
 • **label**: *LabelObject* \| *LabelInput*
 
 Defined in: [client/components/EntityLabel/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.tsx#L8)
-
-___
-
-### size
-
-• `Optional` **size**: [*LabelSize*](../enums/components.labelsize.md)
-
-Defined in: [client/components/EntityLabel/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.tsx#L9)
