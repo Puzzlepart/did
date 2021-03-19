@@ -116,14 +116,7 @@ export class ReportService {
               ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
               project: pick(project, 'tag', 'name', 'description', 'icon'),
               customer: pick(customer, 'key', 'name', 'description', 'icon'),
-              resource: pick(
-                resource,
-                'id',
-                'givenName',
-                'surname',
-                'mail',
-                'displayName'
-              )
+              resource
             }
           ]
         }

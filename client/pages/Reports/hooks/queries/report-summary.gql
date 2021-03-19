@@ -13,6 +13,7 @@ query SummaryReport($userQuery: UserQuery, $queries: [ConfirmedPeriodsQuery!]!) 
     id
     displayName
     mail
+    photo
   }
   projects: projects {
     _id

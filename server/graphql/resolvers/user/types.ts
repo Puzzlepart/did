@@ -57,6 +57,9 @@ export class User {
   @Field({ nullable: true })
   provider?: string
 
+  @Field({ nullable: true })
+  photo?: string
+
   public create?(user: User): User {
     Object.assign(this, user)
     return this

@@ -19,6 +19,7 @@ export const UserColumn: FunctionComponent<IUserColumnProps> = ({
         text={user.displayName}
         secondaryText={user.mail}
         size={PersonaSize.size24}
+        imageUrl={user.photo}
       />
     </div>
   )

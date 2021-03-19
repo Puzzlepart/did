@@ -17,11 +17,14 @@ export async function synchronizeUserProfile(
   const properties = user?.subscription?.settings?.adsync?.properties || []
   if (!isEmpty(properties)) {
     const msgraphSrv = new MSGraphService(new OAuthService({ user }))
-    const data = await msgraphSrv.getCurrentUser(properties)
-    const needSync = !isEqual(
-      pick(user, ...properties),
-      pick(data, ...properties)
-    )
+    const [data, photo] = await Promise.all([
+      msgraphSrv.getCurrentUser(properties),
+      msgraphSrv.getUserPhoto('48x48')
+    ])
+    const needSync = !isEqual(pick(user, ...properties), {
+      photo,
+      ...pick(data, ...properties)
+    })
     if (needSync) {
       debug(
         'Synchronizing user profile properties %s from Azure AD.',
@@ -29,7 +32,8 @@ export async function synchronizeUserProfile(
       )
       await userSrv.updateUser({
         id: user.id,
-        ...pick(data, properties)
+        ...pick(data, properties),
+        photo
       })
       debug('User profile properties synchronized from Azure AD.')
     } else {
