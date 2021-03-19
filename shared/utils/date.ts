@@ -165,20 +165,28 @@ export class DateUtils {
     endDate,
     week,
     year,
+    dayFormat = 'DD',
     monthFormat = this.$.monthFormat,
-    yearFormat = this.$.yearFormat
+    yearFormat = this.$.yearFormat,
+    includeMonth,
+    includeTime
   }: TimeSpanStringOptions): string {
     startDate =
       startDate || new DateObject().fromObject({ week, year }).startOfWeek
     endDate = endDate || new DateObject().fromObject({ week, year }).endOfWeek
-    const isSameMonth = startDate.isSameMonth(endDate)
-    const isSameYear = startDate.isSameYear(endDate)
-    const isCurrentYear = startDate.isSameYear(new DateObject())
-    const startDateFormat = ['DD']
-    const endDateFormat = ['DD', monthFormat]
-    if (!isSameMonth) startDateFormat.push(monthFormat)
-    if (!isSameYear) startDateFormat.push(yearFormat)
-    if (!isCurrentYear) endDateFormat.push(yearFormat)
+    const startDateFormat = [dayFormat]
+    const endDateFormat = []
+    if (!startDate.isSameDay(endDate)) endDateFormat.push(dayFormat)
+    if (!startDate.isSameMonth(endDate) || includeMonth?.startDate)
+      startDateFormat.push(monthFormat)
+    if (!startDate.isSameMonth(endDate) || includeMonth?.endDate)
+      endDateFormat.push(monthFormat)
+    if (!startDate.isSameYear(endDate)) startDateFormat.push(yearFormat)
+    if (!startDate.isSameYear(new DateObject())) endDateFormat.push(yearFormat)
+    if (includeTime) {
+      startDateFormat.push(includeTime)
+      endDateFormat.push(includeTime)
+    }
     return [
       startDate.format(startDateFormat.join(' ')),
       endDate.format(endDateFormat.join(' '))

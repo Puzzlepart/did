@@ -1,12 +1,12 @@
+import { IListColumn } from 'components/List/types'
 import { DateObject } from 'DateUtils'
-import { getValue } from 'helpers'
-import { IColumn } from 'office-ui-fabric-react'
+import { getValue as get } from 'helpers'
 import { humanize } from 'underscore.string'
 import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {
   fileName: string
-  columns?: IColumn[]
+  columns?: IListColumn[]
   skip?: string[]
 }
 
@@ -43,12 +43,11 @@ export async function exportExcel(
   items: any[],
   options: IExcelExportOptions
 ): Promise<Blob> {
-  await loadScripts([
-    'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js'
-  ])
-
-  const xlsx = (window as any).XLSX
+  const { xlsx, saveAs } = await loadScripts<{ xlsx: any; saveAs: any }>(
+    ['FileSaver.js/1.3.8/FileSaver.min.js', 'xlsx/0.14.5/xlsx.full.min.js'],
+    'https://cdnjs.cloudflare.com/ajax/libs/',
+    { xlsx: 'XLSX', saveAs: 'saveAs' }
+  )
 
   if (!options.columns) {
     options.columns = Object.keys(items[0])
@@ -61,17 +60,19 @@ export async function exportExcel(
       }))
   }
 
+  const columns = options.columns.filter(
+    (column_) => !column_?.data?.hiddenFromExport
+  )
+
   const sheets = [
     {
       name: 'Sheet 1',
       data: [
-        options.columns.map((c) => c.name),
+        columns.map((column_) => column_.name),
         ...items.map((item) =>
-          options.columns.map((col) => {
-            const fieldValue = getValue<string>(item, col.fieldName)
-            switch (
-              getValue<ExcelColumnType>(col, 'data.excelColFormat', null)
-            ) {
+          columns.map((col) => {
+            const fieldValue = get<string>(item, col.fieldName)
+            switch (col?.data?.excelColFormat) {
               case 'date':
                 return {
                   v: new DateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
@@ -94,6 +95,6 @@ export async function exportExcel(
   const blob = new Blob([stringToArrayBuffer(wbout)], {
     type: 'application/octet-stream'
   })
-  ;(window as any).saveAs(blob, options.fileName)
+  saveAs(blob, options.fileName)
   return blob
 }

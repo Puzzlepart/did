@@ -64,19 +64,27 @@ ___
 
 ### loadScripts
 
-▸ **loadScripts**(`scriptSource`: *string*[]): *Promise*<void\>
+▸ **loadScripts**<T\>(`scriptSource`: *string*[], `basePath?`: *string*, `globals`: *Record*<string, string\>): *Promise*<T\>
 
 Load scripts using document.createElement
 
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`scriptSource` | *string*[] |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`scriptSource` | *string*[] | - | - |
+`basePath` | *string* | '' | Base path   |
+`globals` | *Record*<string, string\> | - | Globals    |
 
-**Returns:** *Promise*<void\>
+**Returns:** *Promise*<T\>
 
-Defined in: [client/utils/loadScripts.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L6)
+Defined in: [client/utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
 
 ___
 

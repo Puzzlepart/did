@@ -34,8 +34,14 @@ export type TimeSpanStringOptions = {
   endDate?: DateObject
   week?: number
   year?: number
+  dayFormat?: string
   monthFormat?: string
   yearFormat?: string
+  includeMonth?: {
+    startDate?: boolean
+    endDate?: boolean
+  }
+  includeTime?: string
 }
 
 export { DateObject }

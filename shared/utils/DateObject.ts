@@ -98,6 +98,15 @@ export class DateObject {
   }
 
   /**
+   * This indicates whether the DateObject object is the same day the other supplied date-time.
+   *
+   * @param date - Date
+   */
+  isSameDay(date: DateObject) {
+    return this.$.isSame(date.$, 'day')
+  }
+
+  /**
    * This indicates whether the DateObject object is the same month the other supplied date-time.
    *
    * @param date - Date

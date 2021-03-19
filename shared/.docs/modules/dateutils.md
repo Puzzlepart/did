@@ -67,7 +67,12 @@ ___
 
 Name | Type |
 :------ | :------ |
+`dayFormat`? | *string* |
 `endDate`? | [*DateObject*](../classes/dateutils.dateobject.md) |
+`includeMonth`? | *object* |
+`includeMonth.endDate`? | *boolean* |
+`includeMonth.startDate`? | *boolean* |
+`includeTime`? | *string* |
 `monthFormat`? | *string* |
 `startDate`? | [*DateObject*](../classes/dateutils.dateobject.md) |
 `week`? | *number* |
