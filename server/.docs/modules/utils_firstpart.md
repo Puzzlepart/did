@@ -1,4 +1,4 @@
-[did-server - v0.9.10](../README.md) / utils/firstPart
+[did-server - v0.9.11](../README.md) / utils/firstPart
 
 # Module: utils/firstPart
 

@@ -1,4 +1,4 @@
-[did-client - v0.9.10](../README.md) / [Components](../modules/components.md) / MonthFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / MonthFilter
 
 # Class: MonthFilter<ItemType, KeyType\>
 

@@ -1,4 +1,4 @@
-[did-server - v0.9.10](../README.md) / [services](../modules/services.md) / CacheService
+[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / CacheService
 
 # Class: CacheService
 

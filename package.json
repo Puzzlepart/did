@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "The calendar is your Timesheet",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "private": true,
   "config": {
     "app": {
@@ -55,7 +55,7 @@
     "typedoc:shared": "typedoc -options ./shared/typedoc.json",
     "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json",
     "typedoc:client": "typedoc -options ./client/typedoc.json",
-    "postversion": "npm run typedoc && npm run lint:fix",
+    "postversion": "npm run typedoc && npm run lint:fix && git commit --amend",
     "prepare": "husky install"
   },
   "dependencies": {

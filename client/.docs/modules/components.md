@@ -1,4 +1,4 @@
-[did-client - v0.9.10](../README.md) / Components
+[did-client - v0.9.11](../README.md) / Components
 
 # Module: Components
 

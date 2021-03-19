@@ -1,4 +1,4 @@
-[did-shared - v0.9.10](../README.md) / [DateUtils](../modules/dateutils.md) / IDateUtils
+[did-shared - v0.9.11](../README.md) / [DateUtils](../modules/dateutils.md) / IDateUtils
 
 # Interface: IDateUtils
 

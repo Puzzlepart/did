@@ -1,4 +1,4 @@
-[did-shared - v0.9.10](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / GlobalLocaleDataReturn
+[did-shared - v0.9.11](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / GlobalLocaleDataReturn
 
 # Interface: GlobalLocaleDataReturn
 
