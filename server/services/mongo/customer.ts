@@ -25,7 +25,10 @@ export class CustomerService extends MongoDocumentService<Customer> {
   public async addCustomer(customer: Customer): Promise<void> {
     try {
       await this.cache.clear({ key: 'getcustomers' })
-      await this.insert(customer)
+      await this.insert({
+        _id: customer.key,
+        ...customer
+      })
     } catch (error) {
       throw error
     }

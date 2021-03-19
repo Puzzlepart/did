@@ -45,7 +45,7 @@ Defined in: [server/graphql/resolvers/customer/index.ts:24](https://github.com/P
 
 ### createOrUpdateCustomer
 
-▸ **createOrUpdateCustomer**(`customer`: [*CustomerInput*](graphql.customerinput.md), `update`: *boolean*): *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
+▸ **createOrUpdateCustomer**(`customer`: [*CustomerInput*](graphql.customerinput.md), `update`: *boolean*): *Promise*<{ `success`: *boolean* = true }\>
 
 Create or update customer
 
@@ -56,7 +56,7 @@ Name | Type | Description |
 `customer` | [*CustomerInput*](graphql.customerinput.md) | Customer   |
 `update` | *boolean* | Update    |
 
-**Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
+**Returns:** *Promise*<{ `success`: *boolean* = true }\>
 
 Defined in: [server/graphql/resolvers/customer/index.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L51)
 

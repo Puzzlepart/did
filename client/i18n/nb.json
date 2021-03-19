@@ -103,7 +103,8 @@
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk et ikon for å gjøre kunden mer gjenkjennelig på timelisten og kundesiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv.",
     "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer.",
-    "descriptionFieldDescription": "En kort beskrivelse for kunden. \nStøtter markdown."
+    "descriptionFieldDescription": "En kort beskrivelse for kunden. \nStøtter markdown.",
+    "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen."
   },
   "admin": {
     "users": "Brukere",

@@ -56,7 +56,7 @@ export class CustomerResolver {
     await (update
       ? this._customer.updateCustomer(c)
       : this._customer.addCustomer(c))
-    return { success: true, error: null }
+    return { success: true }
   }
 
   /**
