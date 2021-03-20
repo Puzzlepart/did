@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
@@ -18,6 +19,9 @@ import { CustomTooltip } from './CustomTooltip'
 import { useChartConfig } from './useChartConfig'
 import { useChartData } from './useChartData'
 
+/**
+ * @category Timesheet
+ */
 export const AllocationView: FunctionComponent = () => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)

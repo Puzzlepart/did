@@ -40,7 +40,7 @@ Name | Type |
 
 **Returns:** [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
 
-Defined in: client/hooks/common/useArray.ts:12
+Defined in: [client/hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
 
 ___
 
