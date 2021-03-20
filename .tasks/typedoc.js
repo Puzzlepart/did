@@ -23,7 +23,7 @@ log(white(`
        `))
 
 concurrently([
-    { command: 'typedoc -options ./shared/typedoc.json ', name: 'typedoc/shared' },
-    { command: 'typedoc -options ./server/typedoc.json', name: 'typedoc/server' },
-    { command: 'typedoc -options ./client/typedoc.json', name: 'typedoc/client' }
+    { command: 'typedoc -options ./shared/typedoc.json --logger none', name: 'typedoc/shared' },
+    { command: 'typedoc -options ./server/typedoc.json --logger none', name: 'typedoc/server' },
+    { command: 'typedoc -options ./client/typedoc.json --logger none', name: 'typedoc/client' }
 ], {})

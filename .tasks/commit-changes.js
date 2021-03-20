@@ -34,6 +34,8 @@ async function commit_changes() {
     const commit_message =`${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     await exec('git add --all')
     await exec(`git commit -m "${commit_message}"`)
+    await exec('git add --all')
+    await exec(`git commit -m "${commit_message} --amend --no-verify"`)
     if(input.push) {
         await exec('git push --no-verify')
     }

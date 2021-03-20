@@ -67,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for start page user setting
 - Differentiating 0-hour weeks from unconfirmed weeks in Summary view #781
 - Synchronizes user photo from Azure AD #899
+- Added breadcrumn to mobile devices
 
 ### Fixed
 

@@ -27,7 +27,10 @@
 	* [Node version](#node-version)
 	* [Authentication](#authentication)
 		* [Google](#google)
-	* [Commits and `commitlint`](#commits-and-commitlint)
+	* [Commits and commitlint](#commits-and-commitlint)
+		* [Husky hooks](#husky-hooks)
+		* [Commitlint](#commitlint)
+		* [commit-changes.js](#commit-changesjs)
 	* [Branching / Deploying](#branching--deploying)
 		* [Main branch](#main-branch)
 		* [Dev branch](#dev-branch)
@@ -176,8 +179,8 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 #### Google
 See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) for more details on using Did with Google.
 
-### Commits and `commitlint`
-
+### Commits and commitlint
+#### Husky hooks
 We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
 
 You ***can** (but shouldn't) bypass pre-commit and commit-msg hooks using Git `--no-verify` option:
@@ -192,9 +195,13 @@ For Git commands that don't have a `--no-verify` option, you can use HUSKY envir
 HUSKY=0 git push # yolo!
 ```
 
+#### Commitlint
 We are also using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
 
 See `commitlint` in [package.json](./package.json). The commit message needs to be lowercase and have a prefix.
+
+#### commit-changes.js
+We also have the node script `.tasks/commit-changes.js` that can be used. This prompts you for the prefix and commit message, lints all files, generates documentation using `typedoc`, then commits your changes.
 
 ### Branching / Deploying
 
