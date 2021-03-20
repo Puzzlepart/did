@@ -1,48 +1,24 @@
-import { IPivotItemProps } from 'office-ui-fabric-react'
+import { AnyAction } from '@reduxjs/toolkit'
 import { createContext } from 'react'
-import { Subscription } from 'types'
 import { useNotificationsQuery } from '../hooks'
 import { ContextUser } from './ContextUser'
+import { IAppProps, IAppState } from './types'
 
-export interface IAppState {
-  nav?: IPivotItemProps
-}
-
-export interface IAppContext {
-  /**
-   * The currently logged in user
-   */
-  user?: ContextUser
-
-  /**
-   * Subscription
-   */
-  subscription?: Subscription
-
+export interface IAppContext extends IAppProps {
   /**
    * Notifications query
    */
   notificationsQuery?: ReturnType<typeof useNotificationsQuery>
 
   /**
-   * Auth providers
-   */
-  authProviders?: string[]
-
-  /**
    * Application state
    */
-  state?: {
-    /**
-     * The current `state` of the application
-     */
-    _current: IAppState
+  state?: IAppState
 
-    /**
-     * Function to set the application `state`
-     */
-    set: (state: IAppState) => void
-  }
+  /**
+   * Application dispatcher
+   */
+  dispatch?: React.Dispatch<AnyAction>
 }
 
 export const AppContext = createContext<IAppContext>(null)

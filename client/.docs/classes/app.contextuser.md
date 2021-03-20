@@ -44,7 +44,7 @@ Name | Type | Description |
 
 **Returns:** [*ContextUser*](app.contextuser.md)
 
-Defined in: client/app/ContextUser.ts:15
+Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
 
 ## Properties
 
@@ -52,7 +52,7 @@ Defined in: client/app/ContextUser.ts:15
 
 • **configuration**: *Record*<string, any\>
 
-Defined in: client/app/ContextUser.ts:14
+Defined in: [client/app/ContextUser.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L14)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • **displayName**: *string*
 
-Defined in: client/app/ContextUser.ts:10
+Defined in: [client/app/ContextUser.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L10)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **id**: *string*
 
-Defined in: client/app/ContextUser.ts:9
+Defined in: [client/app/ContextUser.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L9)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 • **mail**: *string*
 
-Defined in: client/app/ContextUser.ts:12
+Defined in: [client/app/ContextUser.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L12)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • **photo**: *UserPhoto*
 
-Defined in: client/app/ContextUser.ts:15
+Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 • **role**: *Role*
 
-Defined in: client/app/ContextUser.ts:11
+Defined in: [client/app/ContextUser.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L11)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 • **startPage**: *string*
 
-Defined in: client/app/ContextUser.ts:13
+Defined in: [client/app/ContextUser.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L13)
 
 ## Accessors
 
@@ -116,7 +116,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: client/app/ContextUser.ts:41
+Defined in: [client/app/ContextUser.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L41)
 
 ## Methods
 
@@ -134,4 +134,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: client/app/ContextUser.ts:62
+Defined in: [client/app/ContextUser.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L62)

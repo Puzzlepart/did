@@ -13,7 +13,6 @@ The App component
 ### Interfaces
 
 - [IAppContext](../interfaces/app.iappcontext.md)
-- [IAppState](../interfaces/app.iappstate.md)
 
 ### Function Component Variables
 
@@ -54,7 +53,7 @@ ___
 
 • `Const` **App**: *FunctionComponent*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [client/app/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L15)
+Defined in: [client/app/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L18)
 
 ___
 
@@ -62,7 +61,7 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: client/app/context.ts:48
+Defined in: [client/app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
 
 ___
 

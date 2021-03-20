@@ -21,11 +21,11 @@ export const MobileBreadcrumb: FunctionComponent<IMobileBreadcrumbProps> = (
       {
         key: 'current',
         text: props.text,
-        isCurrentItem: !state?._current?.nav?.headerText
+        isCurrentItem: !state.nav?.headerText
       },
-      state?._current?.nav?.headerText && {
-        key: state?._current?.nav?.itemKey,
-        text: state?._current?.nav?.headerText,
+      state.nav?.headerText && {
+        key: state.nav?.itemKey,
+        text: state.nav?.headerText,
         isCurrentItem: true
       }
     ],

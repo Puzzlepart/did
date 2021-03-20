@@ -1,30 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 /**
  * The App component
  *
  * @module App
  */
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { useNotificationsQuery } from '../hooks'
 import { AppRouter } from './AppRouter'
-import { AppContext, IAppContext, IAppState } from './context'
+import { AppContext, IAppContext } from './context'
 import { ErrorFallback } from './ErrorFallback'
 import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
+import useAppReducer from './reducer'
+import { IAppProps } from './types'
 
-export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
-  const [state, setState] = useState<IAppState>(null)
-  const notificationsQuery = useNotificationsQuery(context.user)
+export const App: FunctionComponent<IAppContext> = (props: IAppProps) => {
+  const [state, dispatch] = useAppReducer({})
+  const notificationsQuery = useNotificationsQuery(props.user)
+  const context = useMemo(
+    () => ({
+      ...props,
+      notificationsQuery,
+      state,
+      dispatch
+    }),
+    [state, notificationsQuery]
+  )
   return (
-    <AppContext.Provider
-      value={{
-        ...context,
-        notificationsQuery,
-        state: {
-          _current: state,
-          set: (s: any) => setState((state_) => ({ ...state_, ...s }))
-        }
-      }}>
+    <AppContext.Provider value={context}>
       <AppRouter />
     </AppContext.Provider>
   )

@@ -4,6 +4,7 @@ import { AppContext } from 'AppContext'
 import { IFlexiblePivotProps } from 'components/FlexiblePivot/types'
 import { find, IPivotItemProps } from 'office-ui-fabric-react'
 import { useContext, useEffect, useRef } from 'react'
+import { UPDATE_NAV } from '../../app/reducer'
 
 /**
  * Hook used by `<FlexiblePivot />` component to update the
@@ -18,7 +19,7 @@ import { useContext, useEffect, useRef } from 'react'
  */
 export function useMobileBreadcrumb(props: IFlexiblePivotProps) {
   const ref = useRef(null)
-  const { state } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   useEffect(() => {
     const items: any[] = props.items || ref?.current?.props?.children
     const current_ = find(items, (item) => {
@@ -26,8 +27,8 @@ export function useMobileBreadcrumb(props: IFlexiblePivotProps) {
       return itemKey === props.selectedKey
     })
     const nav: IPivotItemProps = current_?.props || current_
-    if (state._current?.nav !== nav) {
-      state.set({ nav })
+    if (state.nav !== nav) {
+      dispatch(UPDATE_NAV({ nav }))
     }
   }, [props.selectedKey, props.items])
   return ref

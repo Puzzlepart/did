@@ -4,11 +4,18 @@
 
 [App](../modules/app.md).IAppContext
 
+## Hierarchy
+
+* *IAppProps*
+
+  ↳ **IAppContext**
+
 ## Table of contents
 
 ### Properties
 
 - [authProviders](app.iappcontext.md#authproviders)
+- [dispatch](app.iappcontext.md#dispatch)
 - [notificationsQuery](app.iappcontext.md#notificationsquery)
 - [state](app.iappcontext.md#state)
 - [subscription](app.iappcontext.md#subscription)
@@ -22,7 +29,17 @@
 
 Auth providers
 
-Defined in: client/app/context.ts:30
+Defined in: client/app/types.ts:19
+
+___
+
+### dispatch
+
+• `Optional` **dispatch**: *Dispatch*<AnyAction\>
+
+Application dispatcher
+
+Defined in: [client/app/context.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L21)
 
 ___
 
@@ -39,24 +56,17 @@ Name | Type |
 `notifications` | *Notification*[] |
 `refetch` | (`delay?`: *number*) => *void* |
 
-Defined in: client/app/context.ts:25
+Defined in: [client/app/context.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L11)
 
 ___
 
 ### state
 
-• `Optional` **state**: *object*
+• `Optional` **state**: IAppState
 
 Application state
 
-#### Type declaration:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`_current` | [*IAppState*](app.iappstate.md) | The current `state` of the application   |
-`set` | (`state`: [*IAppState*](app.iappstate.md)) => *void* | Function to set the application `state`   |
-
-Defined in: client/app/context.ts:35
+Defined in: [client/app/context.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L16)
 
 ___
 
@@ -66,7 +76,7 @@ ___
 
 Subscription
 
-Defined in: client/app/context.ts:20
+Defined in: client/app/types.ts:14
 
 ___
 
@@ -76,4 +86,4 @@ ___
 
 The currently logged in user
 
-Defined in: client/app/context.ts:15
+Defined in: client/app/types.ts:9
