@@ -1,7 +1,7 @@
 const concurrently = require('concurrently')
 const inquirer = require('inquirer')
 const util = require('util')
-const { cyan, white } = require('chalk')
+const { cyan, white, red } = require('chalk')
 const log = console.log
 const { commitlint } = require('../package.json')
 const child_process = require('child_process')
@@ -34,15 +34,18 @@ async function commit_changes() {
     const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {
         await exec('git add --all')
-        await exec(`git commit -m "${commit_message}"`)
-        await exec('git add --all')
-        await exec(`git commit -m "${commit_message} --amend --no-verify"`)
+        try {
+            await exec(`git commit -m "${commit_message}"`)
+            await exec('git add --all')
+        } catch { }
+        await exec(`git commit -m "${commit_message}" --amend --no-verify`)
         if (input.push) {
             await exec('git push --no-verify')
         }
         log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
     } catch (error) {
-        console.log(error)
+        console.log(error.stderr)
+        log(red('An error occured commiting your changes.'))
     } finally {
         process.exit(0)
     }
