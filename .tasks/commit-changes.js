@@ -19,15 +19,24 @@ async function commit_changes() {
             type: 'input',
             name: 'commit_message',
             message: 'Enter a commit message:'
+        },
+        {
+            type: 'confirm',
+            name: 'push',
+            message: 'Do you want to push the changes right away?',
+            default: false
         }
     ])
     await concurrently([
         { command: 'npm run typedoc', name: 'typedoc' },
         { command: 'npm run lint:fix', name: 'eslint' }
     ], {})
-    const commit_message =`${input.commit_prefix}: ${input.commit_message}`
+    const commit_message =`${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     await exec('git add --all')
     await exec(`git commit -m "${commit_message}"`)
+    if(input.push) {
+        await exec('git push --no-verify')
+    }
     log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
     process.exit(0)
 }
