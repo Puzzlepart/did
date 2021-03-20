@@ -8,6 +8,7 @@ Reusable React Hooks
 
 ### React Hook Functions
 
+- [useArray](hooks.md#usearray)
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
@@ -16,6 +17,32 @@ Reusable React Hooks
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
 
 ## React Hook Functions
+
+### useArray
+
+▸ **useArray**<T\>(`initialValue?`: T[]): [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
+
+Returns the current state of the array, a function
+to push a new item to the array, and a function to
+check if the array contains the specified item
+
+#### Type parameters:
+
+Name |
+:------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`initialValue` | T[] |
+
+**Returns:** [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
+
+Defined in: client/hooks/common/useArray.ts:12
+
+___
 
 ### useBrowserStorage
 
