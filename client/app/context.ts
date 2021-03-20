@@ -1,8 +1,8 @@
 import { IPivotItemProps } from 'office-ui-fabric-react'
 import { createContext } from 'react'
 import { Subscription } from 'types'
+import { useNotificationsQuery } from '../hooks'
 import { ContextUser } from './ContextUser'
-import { useNotificationsQuery } from './hooks'
 
 export interface IAppState {
   nav?: IPivotItemProps

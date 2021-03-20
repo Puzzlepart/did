@@ -86,7 +86,7 @@ const config = {
       pages: path.resolve(SRC_PATH, 'pages'),
       types: path.resolve(SRC_PATH, 'types'),
       utils: path.resolve(SRC_PATH, 'utils'),
-      AppContext: path.resolve(SRC_PATH, 'AppContext'),
+      AppContext: path.resolve(SRC_PATH, 'app/context'),
       DateUtils: path.resolve(__dirname, 'shared/utils/date'),
     },
     extensions: [

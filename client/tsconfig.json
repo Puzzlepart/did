@@ -22,7 +22,8 @@
     "paths": {
       "package": ["../package.json"],
       "security": ["../shared/config/security"],
-      "DateUtils": ["../shared/utils/date"]
+      "DateUtils": ["../shared/utils/date"],
+      "AppContext": ["./app/context"]
     }
   }
 }

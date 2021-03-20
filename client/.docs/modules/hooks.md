@@ -69,7 +69,7 @@ ___
 
 ### useNotificationsQuery
 
-▸ **useNotificationsQuery**(`user`: ContextUser, `fetchPolicy?`: FetchPolicy): *object*
+▸ **useNotificationsQuery**(`user`: [*ContextUser*](../classes/app.contextuser.md), `fetchPolicy?`: FetchPolicy): *object*
 
 Notificatins query hook
 
@@ -77,7 +77,7 @@ Notificatins query hook
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`user` | ContextUser | - | Context user    |
+`user` | [*ContextUser*](../classes/app.contextuser.md) | - | Context user    |
 `fetchPolicy` | FetchPolicy | 'cache-first' | - |
 
 **Returns:** *object*

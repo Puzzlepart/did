@@ -5,9 +5,9 @@
  * @module App
  */
 import React, { FunctionComponent, useState } from 'react'
-import { AppContext, IAppContext, IAppState } from '../AppContext'
 import { useNotificationsQuery } from '../hooks'
 import { AppRouter } from './AppRouter'
+import { AppContext, IAppContext, IAppState } from './context'
 import { ErrorFallback } from './ErrorFallback'
 import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
@@ -30,4 +30,5 @@ export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
   )
 }
 
+export * from './context'
 export { ErrorFallback, MobileBreadcrumb, Navigation, AppRouter }

@@ -6,6 +6,15 @@ The App component
 
 ## Table of contents
 
+### Classes
+
+- [ContextUser](../classes/app.contextuser.md)
+
+### Interfaces
+
+- [IAppContext](../interfaces/app.iappcontext.md)
+- [IAppState](../interfaces/app.iappstate.md)
+
 ### Function Component Variables
 
 - [MobileBreadcrumb](app.md#mobilebreadcrumb)
@@ -14,6 +23,7 @@ The App component
 ### Other Variables
 
 - [App](app.md#app)
+- [AppContext](app.md#appcontext)
 - [AppRouter](app.md#approuter)
 
 ### Function Component Functions
@@ -42,9 +52,17 @@ ___
 
 ### App
 
-• `Const` **App**: *FunctionComponent*<IAppContext\>
+• `Const` **App**: *FunctionComponent*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
 Defined in: [client/app/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L15)
+
+___
+
+### AppContext
+
+• `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
+
+Defined in: client/app/context.ts:48
 
 ___
 
