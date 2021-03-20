@@ -16,6 +16,7 @@ import { IFlexiblePivotProps } from './types'
 export function useFlexiblePivotStyles({
   styles,
   fixedLinkWidth = false,
+  linkHeight = 30,
   hideIconsMobile = true
 }: IFlexiblePivotProps) {
   const styles_: IStyleFunctionOrObject<IPivotStyleProps, IPivotStyles> = {
@@ -25,25 +26,23 @@ export function useFlexiblePivotStyles({
     }
   }
   if (isMobile) {
-    styles_.linkContent = {
-      height: 30,
-      paddingLeft: 0
-    }
-    styles_.link = {
-      height: 30,
-      lineHeight: 30,
+    const link = {
+      height: linkHeight,
+      lineHeight: linkHeight,
       textAlign: 'left',
-      opacity: 0.4,
       margin: 0,
-      paddingLeft: 0
+      width: 'auto'
+    }
+    styles_.linkContent = { height: linkHeight }
+    styles_.link = {
+      ...link,
+      opacity: 0.4
     }
     styles_.linkIsSelected = {
-      height: 30,
-      lineHeight: 30,
-      textAlign: 'left',
-      margin: 0,
-      paddingLeft: 0,
-      ':before': { display: 'none' }
+      ...link,
+      ':before': { display: 'none' },
+      ':hover': { backgroundColor: 'transparent' },
+      ':active': { backgroundColor: 'transparent' }
     }
     if (hideIconsMobile) {
       styles_.icon = { display: 'none' }

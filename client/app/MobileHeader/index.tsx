@@ -2,6 +2,7 @@
 import { AppContext } from 'AppContext'
 import { Breadcrumb } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
+import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import styles from './MobileHeader.module.scss'
 import { IMobileHeaderProps } from './types'
@@ -27,6 +28,7 @@ export const MobileHeader: FunctionComponent<IMobileHeaderProps> = (
       isCurrentItem: true
     })
   }
+  if (isBrowser) return null
   return (
     <FadeIn delay={250}>
       <Breadcrumb className={styles.root} items={items} />

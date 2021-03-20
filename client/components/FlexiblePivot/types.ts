@@ -21,6 +21,13 @@ export interface IFlexiblePivotProps extends IPivotProps {
   hideIconsMobile?: boolean
 
   /**
+   * Link height on mobile devices
+   *
+   * @default 30
+   */
+  linkHeight?: string | number
+
+  /**
    * Optionally provide the item that are rendered
    * inside the Pivot. This can be used instead of
    * using `useRef` and `children` when that doesn't

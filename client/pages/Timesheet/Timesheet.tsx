@@ -1,7 +1,9 @@
 /* eslint-disable tsdoc/syntax */
+import { FlexiblePivot } from 'components'
 import { HotkeyModal } from 'components/HotkeyModal'
-import { Pivot, PivotItem } from 'office-ui-fabric-react'
+import { PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
@@ -29,8 +31,8 @@ export const Timesheet: FunctionComponent = () => {
           <ActionBar />
           <ErrorBar error={context.error} />
           <StatusBar />
-          <Pivot
-            defaultSelectedKey={state.selectedView}
+          <FlexiblePivot
+            selectedKey={state.selectedView}
             onLinkClick={({ props }) =>
               dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
             }>
@@ -42,14 +44,16 @@ export const Timesheet: FunctionComponent = () => {
               headerButtonProps={{ disabled: !!context.error }}>
               <Overview />
             </PivotItem>
-            <PivotItem
-              key='summary'
-              itemKey='summary'
-              headerText={t('timesheet.summaryHeaderText')}
-              itemIcon='List'
-              headerButtonProps={{ disabled: !!context.error }}>
-              <SummaryView />
-            </PivotItem>
+            {isBrowser && (
+              <PivotItem
+                key='summary'
+                itemKey='summary'
+                headerText={t('timesheet.summaryHeaderText')}
+                itemIcon='List'
+                headerButtonProps={{ disabled: !!context.error }}>
+                <SummaryView />
+              </PivotItem>
+            )}
             <PivotItem
               key='allocation'
               itemKey='allocation'
@@ -58,7 +62,7 @@ export const Timesheet: FunctionComponent = () => {
               headerButtonProps={{ disabled: !!context.error }}>
               <AllocationView />
             </PivotItem>
-          </Pivot>
+          </FlexiblePivot>
         </div>
         <HotkeyModal
           {...hotkeysProps}

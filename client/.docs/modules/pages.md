@@ -159,7 +159,7 @@ ___
 
 • `Const` **Customers**: FunctionComponent
 
-Defined in: [client/pages/Customers/Customers.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L24)
+Defined in: [client/pages/Customers/Customers.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L19)
 
 ___
 
@@ -183,7 +183,7 @@ ___
 
 • `Const` **Timesheet**: FunctionComponent
 
-Defined in: [client/pages/Timesheet/Timesheet.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L21)
+Defined in: [client/pages/Timesheet/Timesheet.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L23)
 
 ___
 

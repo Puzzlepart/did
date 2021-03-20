@@ -1,9 +1,8 @@
 /* eslint-disable unicorn/no-array-reduce */
 import { DurationColumn, List, ProjectTooltip } from 'components'
 import $date from 'DateUtils'
-import { IColumn, MessageBar } from 'office-ui-fabric-react'
+import { IColumn } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
-import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, Project } from 'types'
 import { unique } from 'underscore'
@@ -132,30 +131,20 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
 export const SummaryView = () => {
   const { t } = useTranslation()
   const context = useContext(TimesheetContext)
-  if (isMobile) {
-    return (
-      <MessageBar styles={{ root: { marginTop: 8 } }}>
-        {t('common.deviceViewNotSupported')}
-      </MessageBar>
-    )
-  } else {
-    const columns = createColumns(context.scope)
-    const events = context.selectedPeriod?.getEvents(false) || []
-    const items = [
-      ...generateRows(events, columns),
-      generateTotalRow(events, columns, t('common.sumLabel'))
-    ]
+  const columns = createColumns(context.scope)
+  const events = context.selectedPeriod?.getEvents(false) || []
+  const items = [
+    ...generateRows(events, columns),
+    generateTotalRow(events, columns, t('common.sumLabel'))
+  ]
 
-    return (
-      <div
-        key={`summary_${context.selectedPeriod?.id}`}
-        className={styles.root}>
-        <List
-          items={items}
-          columns={columns}
-          enableShimmer={!!context?.loading}
-        />
-      </div>
-    )
-  }
+  return (
+    <div key={`summary_${context.selectedPeriod?.id}`} className={styles.root}>
+      <List
+        items={items}
+        columns={columns}
+        enableShimmer={!!context?.loading}
+      />
+    </div>
+  )
 }

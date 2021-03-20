@@ -35,7 +35,7 @@ export const AppRouter: FunctionComponent = () => {
                   <Redirect to='/' />
                 ) : (
                   <>
-                    {isMobile && <MobileHeader text={page.text} />}
+                    <MobileHeader text={page.text} />
                     <div className={styles.container}>{page.component}</div>
                   </>
                 )}
