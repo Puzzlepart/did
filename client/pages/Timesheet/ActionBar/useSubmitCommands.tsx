@@ -5,6 +5,7 @@ import {
   PrimaryButton
 } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { first, omit } from 'underscore'
 import { TimesheetContext } from '../context'
@@ -149,7 +150,12 @@ export function useSubmitCommands() {
 
       return (
         <PrimaryButton
-          style={{ width: 180 }}
+          style={{
+            width: isMobile ? 160 : 180,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }}
           primary={false}
           {...(first(commands) as any)}
           menuProps={menuProps}
