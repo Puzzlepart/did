@@ -14,15 +14,15 @@ import { IUserColumnProps } from './types'
  */
 export const UserColumn: FunctionComponent<IUserColumnProps> = ({
   user,
-  size = PersonaSize.size24
+  persona = { size: PersonaSize.size24 }
 }: IUserColumnProps) => {
   return (
     <div>
       <Persona
+        {...persona}
         text={user.displayName}
         secondaryText={user.mail}
         tertiaryText={get(user, 'role.name')}
-        size={size}
         imageUrl={user.photo?.base64}
         styles={{
           tertiaryText: {

@@ -36,7 +36,7 @@ Name | Default |
 
 • `Optional` **defaultSelectedKey**: *string*
 
-Defined in: [client/components/Autocomplete/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L29)
+Defined in: [components/Autocomplete/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L29)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Optional` **description**: *string*
 
-Defined in: [client/components/Autocomplete/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L24)
+Defined in: [components/Autocomplete/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L24)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 • `Optional` **errorMessage**: *string*
 
-Defined in: [client/components/Autocomplete/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L30)
+Defined in: [components/Autocomplete/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L30)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • `Optional` **itemIcons**: AutocompleteItemIcons
 
-Defined in: [client/components/Autocomplete/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L25)
+Defined in: [components/Autocomplete/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L25)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • `Optional` **items**: [*ISuggestionItem*](components.isuggestionitem.md)<T\>[]
 
-Defined in: [client/components/Autocomplete/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L27)
+Defined in: [components/Autocomplete/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L27)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 • `Optional` **label**: *string*
 
-Defined in: [client/components/Autocomplete/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L23)
+Defined in: [components/Autocomplete/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L23)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • `Optional` **maxHeight**: *number*
 
-Defined in: [client/components/Autocomplete/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L31)
+Defined in: [components/Autocomplete/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L31)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 • `Optional` **noSuggestionsText**: *string*
 
-Defined in: [client/components/Autocomplete/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L28)
+Defined in: [components/Autocomplete/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L28)
 
 ___
 
@@ -100,4 +100,4 @@ ___
 
 • **onSelected**: *AutocompleteSelectCallback*<T\>
 
-Defined in: [client/components/Autocomplete/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L26)
+Defined in: [components/Autocomplete/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L26)

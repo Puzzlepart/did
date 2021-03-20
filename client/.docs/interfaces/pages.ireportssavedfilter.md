@@ -24,4 +24,4 @@
 
 #### Type declaration:
 
-Defined in: [client/pages/Reports/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L40)
+Defined in: [pages/Reports/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L40)

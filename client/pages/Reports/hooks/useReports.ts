@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
 import { useColumns } from './useColumns'
 import { useFilters } from './useFilters'
-import { useQueries } from './useQueries'
+import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
 
 /**
@@ -25,12 +26,12 @@ import { useReportsQuery } from './useReportsQuery'
 export function useReports() {
   const { t } = useTranslation()
   const history = useHistory()
-  const queries = useQueries()
+  const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
   useReportsQuery({ state, dispatch })
   useLayoutEffect(() => {
     if (state.preset) {
-      history.push(`/reports/${state.preset?.key || ''}`)
+      history.push(`/reports/${state.preset?.itemKey || ''}`)
     }
   }, [state.preset, history])
 
@@ -44,15 +45,14 @@ export function useReports() {
     !state.loading && !!state.filter?.text
   )
 
+  const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
+
   return {
-    state,
-    dispatch,
     queries,
-    history,
     columns,
     filters,
-    t
+    context
   }
 }
 
-export { useQueries }
+export { useReportsQueries as useQueries }

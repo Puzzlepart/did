@@ -23,7 +23,7 @@
 
 • **item**: [*ISuggestionItem*](components.isuggestionitem.md)<any\>
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L22)
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L22)
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 • **itemIcons**: AutocompleteItemIcons
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L23)
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L23)

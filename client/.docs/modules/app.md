@@ -29,13 +29,17 @@ The App component
 
 - [ErrorFallback](app.md#errorfallback)
 
+### Other Functions
+
+- [useAppContext](app.md#useappcontext)
+
 ## Function Component Variables
 
 ### MobileBreadcrumb
 
 • `Const` **MobileBreadcrumb**: *FunctionComponent*<IMobileBreadcrumbProps\>
 
-Defined in: [client/app/MobileBreadcrumb/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileBreadcrumb/index.tsx#L15)
+Defined in: [app/MobileBreadcrumb/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileBreadcrumb/index.tsx#L14)
 
 ___
 
@@ -43,7 +47,7 @@ ___
 
 • `Const` **Navigation**: FunctionComponent
 
-Defined in: [client/app/Navigation/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L15)
+Defined in: [app/Navigation/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L15)
 
 ___
 
@@ -53,7 +57,7 @@ ___
 
 • `Const` **App**: *FunctionComponent*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [client/app/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L18)
+Defined in: [app/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L18)
 
 ___
 
@@ -61,7 +65,7 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [client/app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
+Defined in: [app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
 
 ___
 
@@ -69,7 +73,7 @@ ___
 
 • `Const` **AppRouter**: FunctionComponent
 
-Defined in: [client/app/AppRouter.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L22)
+Defined in: [app/AppRouter.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L22)
 
 ## Function Component Functions
 
@@ -85,4 +89,18 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/app/ErrorFallback/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L31)
+Defined in: [app/ErrorFallback/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L31)
+
+___
+
+## Other Functions
+
+### useAppContext
+
+▸ **useAppContext**(): [*IAppContext*](../interfaces/app.iappcontext.md)
+
+Returns app context
+
+**Returns:** [*IAppContext*](../interfaces/app.iappcontext.md)
+
+Defined in: [app/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L29)

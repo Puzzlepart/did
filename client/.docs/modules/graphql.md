@@ -25,7 +25,7 @@ GraphQL
 
 ### $usercontext
 
-Renames and exports: [report\_current\_month](pages.md#report_current_month)
+Renames and exports: [default\_query](pages.md#default_query)
 
 ## Variables
 
@@ -39,4 +39,4 @@ Initializing our Apollo Client
 * Using url /graphql
 * Using cache-and-network as default fetchPolicy
 
-Defined in: [client/graphql/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L40)
+Defined in: [graphql/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L40)

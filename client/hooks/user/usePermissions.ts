@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
-import { useContext, useMemo } from 'react'
+import { useAppContext } from 'AppContext'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getPermissions, PermissionScope } from 'security'
 import { contains } from 'underscore'
@@ -20,7 +20,7 @@ import { contains } from 'underscore'
  */
 export function usePermissions(scopeIds?: string[], api = false) {
   const { t } = useTranslation()
-  const context = useContext(AppContext)
+  const context = useAppContext()
 
   let permissions = getPermissions(t)
 

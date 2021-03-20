@@ -30,7 +30,7 @@
 
 Export file name
 
-Defined in: [client/pages/Reports/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L24)
+Defined in: [pages/Reports/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L24)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 GraphQL query
 
-Defined in: [client/pages/Reports/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L14)
+Defined in: [pages/Reports/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L14)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 GraphQL query variables
 
-Defined in: [client/pages/Reports/types.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L19)
+Defined in: [pages/Reports/types.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L19)

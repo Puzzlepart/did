@@ -16,7 +16,10 @@ import { generateColumn as col } from 'utils/generateColumn'
  */
 export function useColumns({ setUserForm }): IListColumn[] {
   const { t } = useTranslation()
-  const userColumn = useUserListColumn(PersonaSize.size40, { maxWidth: 250 })
+  const userColumn = useUserListColumn(
+    { size: PersonaSize.size40 },
+    { maxWidth: 250 }
+  )
   return [
     userColumn,
     col('surname', t('common.surnameLabel'), {

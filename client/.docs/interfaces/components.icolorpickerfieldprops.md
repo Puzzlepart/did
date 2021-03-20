@@ -24,7 +24,7 @@
 
 • **color**: *string*
 
-Defined in: [client/components/ColorPickerField/types.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L6)
+Defined in: [components/ColorPickerField/types.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L6)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **label**: *string*
 
-Defined in: [client/components/ColorPickerField/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L5)
+Defined in: [components/ColorPickerField/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L5)
 
 ___
 
@@ -52,6 +52,6 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/ColorPickerField/types.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L7)
+Defined in: [components/ColorPickerField/types.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L7)
 
-Defined in: [client/components/ColorPickerField/types.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L7)
+Defined in: [components/ColorPickerField/types.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L7)

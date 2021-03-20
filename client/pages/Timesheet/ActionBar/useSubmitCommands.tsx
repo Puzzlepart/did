@@ -1,10 +1,11 @@
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import {
   IContextualMenuItem,
   IContextualMenuProps,
   PrimaryButton
 } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { first, omit } from 'underscore'
 import { TimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
@@ -29,7 +30,8 @@ const submitItemBaseProps = (
  * Use submit commands
  */
 export function useSubmitCommands() {
-  const { subscription } = useContext(AppContext)
+  const { t } = useTranslation()
+  const { subscription } = useAppContext()
   const context = useContext(TimesheetContext)
   return {
     key: 'SUBMIT_COMMANDS',
@@ -51,8 +53,8 @@ export function useSubmitCommands() {
           onClick: () => {
             context.onSubmitPeriod(true)
           },
-          text: context.t('timesheet.forecastHoursText'),
-          secondaryText: context.t('timesheet.forecastHoursSecondaryText')
+          text: t('timesheet.forecastHoursText'),
+          secondaryText: t('timesheet.forecastHoursSecondaryText')
         },
         UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
           ...(submitItemBaseProps(
@@ -62,8 +64,8 @@ export function useSubmitCommands() {
           onClick: () => {
             context.onUnsubmitPeriod(true)
           },
-          text: context.t('timesheet.unforecastHoursText'),
-          secondaryText: context.t('timesheet.unforecastHoursSecondaryText')
+          text: t('timesheet.unforecastHoursText'),
+          secondaryText: t('timesheet.unforecastHoursSecondaryText')
         },
         CONFIRM_PERIOD: {
           ...(submitItemBaseProps(
@@ -74,8 +76,8 @@ export function useSubmitCommands() {
           onClick: () => {
             context.onSubmitPeriod(false)
           },
-          text: context.t('timesheet.confirmHoursText'),
-          secondaryText: context.t('timesheet.confirmHoursSecondaryText')
+          text: t('timesheet.confirmHoursText'),
+          secondaryText: t('timesheet.confirmHoursSecondaryText')
         },
         UNCONFIRM_PERIOD: {
           ...(submitItemBaseProps(
@@ -86,8 +88,8 @@ export function useSubmitCommands() {
           onClick: () => {
             context.onUnsubmitPeriod(false)
           },
-          text: context.t('timesheet.unconfirmHoursText'),
-          secondaryText: context.t('timesheet.unconfirmHoursSecondaryText')
+          text: t('timesheet.unconfirmHoursText'),
+          secondaryText: t('timesheet.unconfirmHoursSecondaryText')
         }
       }
 

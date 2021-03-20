@@ -17,7 +17,7 @@
 
 • **column**: IColumn
 
-Defined in: [client/components/DurationColumn/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/types.tsx#L9)
+Defined in: [components/DurationColumn/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/types.tsx#L9)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **row**: *any*
 
-Defined in: [client/components/DurationColumn/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/types.tsx#L8)
+Defined in: [components/DurationColumn/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/types.tsx#L8)

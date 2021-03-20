@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createReducer, current } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import { useMemo, useReducer } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 import { TimesheetPeriodObject } from 'types'
 import { find, first, isEmpty, last } from 'underscore'
 import {
@@ -183,12 +186,10 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
 
 /**
  * Use Timesheet reducer
- *
- * @param params - Parameters
  */
-export function useTimesheetReducer(parameters: ITimesheetReducerParameters) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const reducer = useMemo(() => createTimesheetReducer(parameters), [])
-  const [state, dispatch] = useReducer(reducer, initState(parameters.url))
-  return { state, dispatch }
+export function useTimesheetReducer() {
+  const { t } = useTranslation()
+  const url = useParams<ITimesheetParameters>()
+  const reducer = useMemo(() => createTimesheetReducer({ t, url }), [])
+  return useReducer(reducer, initState(url))
 }

@@ -19,7 +19,7 @@
 
 • **code**: *string*
 
-Defined in: [client/graphql/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L20)
+Defined in: [graphql/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L20)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **message**: *string*
 
-Defined in: [client/graphql/index.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L19)
+Defined in: [graphql/index.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L19)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [client/graphql/index.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L18)
+Defined in: [graphql/index.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L18)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **statusCode**: *string*
 
-Defined in: [client/graphql/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L21)
+Defined in: [graphql/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L21)

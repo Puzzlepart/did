@@ -16,7 +16,7 @@ export function usePeriodCommands() {
     (period, index) =>
       ({
         key: `SELECT_PERIOD_COMMANDS_${index}`,
-        iconProps: { iconName: 'DateTime' },
+        iconProps: !isMobile && { iconName: 'DateTime' },
         style: isMobile ? {} : { padding: '12px 18px 12px 18px' },
         text: period.getName(t, true),
         canCheck: true,

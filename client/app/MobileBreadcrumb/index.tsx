@@ -1,11 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import { Breadcrumb } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
-import { filter } from 'underscore'
 import styles from './MobileBreadcrumb.module.scss'
 import { IMobileBreadcrumbProps } from './types'
 
@@ -15,22 +14,20 @@ import { IMobileBreadcrumbProps } from './types'
 export const MobileBreadcrumb: FunctionComponent<IMobileBreadcrumbProps> = (
   props: IMobileBreadcrumbProps
 ) => {
-  const { state } = useContext(AppContext)
-  const items = filter(
-    [
-      {
-        key: 'current',
-        text: props.text,
-        isCurrentItem: !state.nav?.headerText
-      },
-      state.nav?.headerText && {
-        key: state.nav?.itemKey,
-        text: state.nav?.headerText,
-        isCurrentItem: true
-      }
-    ],
-    (i) => !!i
-  )
+  const { state } = useAppContext()
+  const nav = Object.keys(state.nav || {})
+  const items = [
+    {
+      key: 'current',
+      text: props.text,
+      isCurrentItem: nav.length === 0
+    },
+    ...nav.map((key, index) => ({
+      key,
+      text: state.nav[key].text,
+      isCurrentItem: index === nav.length - 1
+    }))
+  ]
   if (isBrowser) return null
   return (
     <FadeIn delay={250}>

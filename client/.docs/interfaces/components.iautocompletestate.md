@@ -27,7 +27,7 @@ Name | Default |
 
 • `Optional` **isSuggestionDisabled**: *boolean*
 
-Defined in: [client/components/Autocomplete/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L40)
+Defined in: [components/Autocomplete/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L40)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • `Optional` **items**: [*ISuggestionItem*](components.isuggestionitem.md)<T\>[]
 
-Defined in: [client/components/Autocomplete/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L38)
+Defined in: [components/Autocomplete/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L38)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • `Optional` **selectedIndex**: *number*
 
-Defined in: [client/components/Autocomplete/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L43)
+Defined in: [components/Autocomplete/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L43)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • `Optional` **selectedItem**: [*ISuggestionItem*](components.isuggestionitem.md)<any\>
 
-Defined in: [client/components/Autocomplete/types.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L42)
+Defined in: [components/Autocomplete/types.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L42)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • `Optional` **suggestions**: [*ISuggestionItem*](components.isuggestionitem.md)<T\>[]
 
-Defined in: [client/components/Autocomplete/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L39)
+Defined in: [components/Autocomplete/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L39)
 
 ___
 
@@ -67,4 +67,4 @@ ___
 
 • `Optional` **value**: *string*
 
-Defined in: [client/components/Autocomplete/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L41)
+Defined in: [components/Autocomplete/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L41)

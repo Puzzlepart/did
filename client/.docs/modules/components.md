@@ -113,7 +113,7 @@ Reusable React Function components.
 
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
-Defined in: [client/components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+Defined in: [components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
 
 ## Function Component Variables
 
@@ -121,7 +121,7 @@ Defined in: [client/components/HotkeyModal/index.tsx:8](https://github.com/Puzzl
 
 • `Const` **Autocomplete**: *FunctionComponent*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
 
-Defined in: [client/components/Autocomplete/Autocomplete.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L20)
+Defined in: [components/Autocomplete/Autocomplete.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L20)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 • `Const` **ConditionalWrapper**: *FunctionComponent*<IConditionalWrapperProps\>
 
-Defined in: [client/components/ConditionalWrapper/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L15)
+Defined in: [components/ConditionalWrapper/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L15)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 • `Const` **CustomerLink**: *FunctionComponent*<ICustomerLinkProps\>
 
-Defined in: [client/components/CustomerLink/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L9)
+Defined in: [components/CustomerLink/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L9)
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 • `Const` **DurationColumn**: *FunctionComponent*<[*IDurationColumnProps*](../interfaces/components.idurationcolumnprops.md)\>
 
-Defined in: [client/components/DurationColumn/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/index.tsx#L10)
+Defined in: [components/DurationColumn/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/index.tsx#L10)
 
 ___
 
@@ -158,7 +158,7 @@ to a design. Visually it styles text, adds padding, and rounded corners.
 
 **`see`** https://primer.style/components/Label
 
-Defined in: [client/components/EntityLabel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L18)
+Defined in: [components/EntityLabel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L18)
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 • `Const` **EventList**: *FunctionComponent*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
 
-Defined in: [client/components/EventList/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L11)
+Defined in: [components/EventList/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L11)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 • `Const` **FilterItem**: *FunctionComponent*<IFilterItemProps\>
 
-Defined in: [client/components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
+Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
 
 ___
 
@@ -187,7 +187,7 @@ Flexible `<Pivot >` component
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: [client/components/FlexiblePivot/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L17)
+Defined in: [components/FlexiblePivot/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L17)
 
 ___
 
@@ -195,7 +195,7 @@ ___
 
 • `Const` **HotkeyModal**: *FunctionComponent*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
 
-Defined in: [client/components/HotkeyModal/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L13)
+Defined in: [components/HotkeyModal/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L13)
 
 ___
 
@@ -203,7 +203,7 @@ ___
 
 • `Const` **IconPicker**: *FunctionComponent*<IIconPickerProps\>
 
-Defined in: [client/components/IconPicker/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L13)
+Defined in: [components/IconPicker/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L13)
 
 ___
 
@@ -211,7 +211,7 @@ ___
 
 • `Const` **LabelPicker**: *FunctionComponent*<ILabelPickerProps\>
 
-Defined in: [client/components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
+Defined in: [components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
 
 ___
 
@@ -234,7 +234,7 @@ Used by the following components:
 * `<Reports />`
 * `<Timesheet />` => `<SummaryView />`
 
-Defined in: [client/components/List/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L28)
+Defined in: [components/List/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L28)
 
 ___
 
@@ -242,7 +242,7 @@ ___
 
 • `Const` **PermissionList**: *FunctionComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
-Defined in: [client/components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
+Defined in: [components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
 
 ___
 
@@ -250,7 +250,7 @@ ___
 
 • `Const` **ProjectLink**: *FunctionComponent*<IProjectLinkProps\>
 
-Defined in: [client/components/ProjectLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L11)
+Defined in: [components/ProjectLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L11)
 
 ___
 
@@ -258,7 +258,7 @@ ___
 
 • `Const` **ProjectTooltip**: *FunctionComponent*<IProjectTooltipProps\>
 
-Defined in: [client/components/ProjectTooltip/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L10)
+Defined in: [components/ProjectTooltip/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L10)
 
 ___
 
@@ -266,7 +266,7 @@ ___
 
 • `Const` **ScrollablePaneWrapper**: *FunctionComponent*<any\>
 
-Defined in: [client/components/ScrollablePaneWrapper/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L8)
+Defined in: [components/ScrollablePaneWrapper/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L8)
 
 ___
 
@@ -279,7 +279,7 @@ markdown using `react-markdown`
 
 **`remarks`** Typically used with the `useToast` hook
 
-Defined in: [client/components/Toast/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L16)
+Defined in: [components/Toast/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L16)
 
 ___
 
@@ -289,7 +289,7 @@ ___
 
 A component that supports a `<MessageBar />` with markdown using `react-markdown`
 
-Defined in: [client/components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
+Defined in: [components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
 
 ___
 
@@ -303,7 +303,7 @@ User column
 
 Renders a `<Persona />` component
 
-Defined in: [client/components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L15)
+Defined in: [components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L15)
 
 ## Function Component Functions
 
@@ -319,7 +319,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/ColorPickerField/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L12)
+Defined in: [components/ColorPickerField/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L12)
 
 ___
 
@@ -335,7 +335,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/DeleteLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L11)
+Defined in: [components/DeleteLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L11)
 
 ___
 
@@ -351,7 +351,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/DisableLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DisableLink/index.tsx#L11)
+Defined in: [components/DisableLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DisableLink/index.tsx#L11)
 
 ___
 
@@ -367,7 +367,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/EditLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L11)
+Defined in: [components/EditLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L11)
 
 ___
 
@@ -383,7 +383,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/FilterPanel/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L12)
+Defined in: [components/FilterPanel/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L12)
 
 ___
 
@@ -399,7 +399,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/SearchCustomer/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L13)
+Defined in: [components/SearchCustomer/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L13)
 
 ___
 
@@ -415,7 +415,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/SearchProject/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L12)
+Defined in: [components/SearchProject/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L12)
 
 ___
 
@@ -433,7 +433,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
+Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
 
 ___
 
@@ -464,7 +464,7 @@ Name | Type |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
 `suggestions` | { `data?`: *any* ; `iconName?`: *string* ; `isSelected`: *boolean* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `tag?`: *any* ; `type?`: *string*  }[] |
 
-Defined in: [client/components/Autocomplete/useAutocomplete.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L15)
+Defined in: [components/Autocomplete/useAutocomplete.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L15)
 
 ___
 
@@ -490,7 +490,7 @@ Name | Type |
 `onSearch` | (`\_`: *any*, `searchTerm`: *string*) => *any* |
 `onSetSelected` | (`index`: *number*) => *any* |
 
-Defined in: [client/components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
+Defined in: [components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
 
 ___
 
@@ -498,7 +498,7 @@ ___
 
 ### useUserListColumn
 
-▸ **useUserListColumn**(`size?`: PersonaSize, `props?`: *Partial*<IListColumn\>): IListColumn
+▸ **useUserListColumn**(`persona?`: IPersonaProps, `props?`: *Partial*<IListColumn\>): IListColumn
 
 Returns list column definition for `<UserColumn >`
 
@@ -509,12 +509,12 @@ on the item with key `user`
 
 Name | Type |
 :------ | :------ |
-`size` | PersonaSize |
+`persona` | IPersonaProps |
 `props?` | *Partial*<IListColumn\> |
 
 **Returns:** IListColumn
 
-Defined in: [client/components/UserColumn/useUserListColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L14)
+Defined in: [components/UserColumn/useUserListColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L14)
 
 ___
 
@@ -528,4 +528,4 @@ Hook used to show a temporarily message
 
 **Returns:** [[*IUserMessageProps*](../interfaces/components.iusermessageprops.md), (`message`: [*IUserMessageProps*](../interfaces/components.iusermessageprops.md), `duration?`: *number*) => *void*]
 
-Defined in: [client/components/UserMessage/useMessage.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/useMessage.ts#L10)
+Defined in: [components/UserMessage/useMessage.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/useMessage.ts#L10)

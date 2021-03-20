@@ -47,7 +47,7 @@ Name | Type | Description |
 
 Inherited from: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/MonthFilter.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L12)
+Defined in: [components/FilterPanel/Filters/MonthFilter.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L12)
 
 ## Properties
 
@@ -73,7 +73,7 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
 
 ___
 
@@ -101,7 +101,7 @@ Name | Type | Description |
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/MonthFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L28)
+Defined in: [components/FilterPanel/Filters/MonthFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L28)
 
 ___
 
@@ -123,4 +123,4 @@ this
 
 Inherited from: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

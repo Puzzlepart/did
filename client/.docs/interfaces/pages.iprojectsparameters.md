@@ -18,7 +18,7 @@
 
 • **detailsTab**: *string*
 
-Defined in: [client/pages/Projects/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L11)
+Defined in: [pages/Projects/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L11)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **key**: *string*
 
-Defined in: [client/pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)
+Defined in: [pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 • **view**: ProjectsView
 
-Defined in: [client/pages/Projects/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L10)
+Defined in: [pages/Projects/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L10)

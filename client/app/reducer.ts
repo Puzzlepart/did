@@ -1,10 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { IPivotItemProps } from 'office-ui-fabric-react'
 import { useMemo, useReducer } from 'react'
+import { omit } from 'underscore'
+import { IMobileBreadcrumbItem } from './MobileBreadcrumb'
 import { IAppState } from './types'
 
-export const UPDATE_NAV = createAction<{ nav: IPivotItemProps }>('UPDATE_NAV')
+/**
+ * dsadasdasdasdasda
+ */
+export const UPDATE_BREADCRUMB = createAction<[IMobileBreadcrumbItem, any[]?]>(
+  'UPDATE_BREADCRUMB'
+)
+export const PAGE_NAVIGATE = createAction('PAGE_NAVIGATE')
 
 /**
  * Use app reducer
@@ -18,9 +25,20 @@ export default function useAppReducer(initialState: IAppState) {
   const reducer = useMemo(
     () =>
       createReducer(initialState, (builder) =>
-        builder.addCase(UPDATE_NAV, (state, { payload }) => {
-          state.nav = payload.nav as any
-        })
+        builder
+          .addCase(UPDATE_BREADCRUMB, (state, { payload }) => {
+            const [item, omit_] = payload
+            state.nav = omit(
+              {
+                ...state.nav,
+                [item.level]: item
+              },
+              omit_
+            )
+          })
+          .addCase(PAGE_NAVIGATE, (state) => {
+            state.nav = null
+          })
       ),
     []
   )

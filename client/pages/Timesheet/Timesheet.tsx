@@ -5,6 +5,7 @@ import { PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { GlobalHotKeys } from 'react-hotkeys'
+import { useTranslation } from 'react-i18next'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
 import { ErrorBar } from './ErrorBar'
@@ -21,7 +22,8 @@ import { TimesheetContext, TimesheetView } from './types'
  * @category Function Component
  */
 export const Timesheet: FunctionComponent = () => {
-  const { state, dispatch, context, t } = useTimesheet()
+  const { t } = useTranslation()
+  const { context } = useTimesheet()
   const { hotkeysProps } = useHotkeys(context)
 
   return (
@@ -32,9 +34,11 @@ export const Timesheet: FunctionComponent = () => {
           <ErrorBar error={context.error} />
           <StatusBar />
           <FlexiblePivot
-            selectedKey={state.selectedView}
+            selectedKey={context.selectedView}
             onLinkClick={({ props }) =>
-              dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
+              context.dispatch(
+                CHANGE_VIEW({ view: props.itemKey as TimesheetView })
+              )
             }>
             <PivotItem
               key='overview'
@@ -67,7 +71,7 @@ export const Timesheet: FunctionComponent = () => {
         <HotkeyModal
           {...hotkeysProps}
           isOpen={context.showHotkeysModal}
-          onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
+          onDismiss={() => context.dispatch(TOGGLE_SHORTCUTS())}
         />
       </GlobalHotKeys>
     </TimesheetContext.Provider>

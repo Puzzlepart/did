@@ -44,7 +44,7 @@
 
 An array of additional columns to add
 
-Defined in: [client/components/EventList/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L18)
+Defined in: [components/EventList/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L18)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 Check box visibility
 
-Defined in: [client/components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
+Defined in: [components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 Column width overrides
 
-Defined in: [client/components/EventList/types.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L38)
+Defined in: [components/EventList/types.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L38)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 Columns
 
-Defined in: [client/components/List/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L60)
+Defined in: [components/List/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L60)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 Command bar props
 
-Defined in: [client/components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
+Defined in: [components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 Date format
 
-Defined in: [client/components/EventList/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L23)
+Defined in: [components/EventList/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L23)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 Enable shimmer
 
-Defined in: [client/components/EventList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L13)
+Defined in: [components/EventList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L13)
 
 ___
 
@@ -116,7 +116,7 @@ Fade in properties used by the FadeIn component (react-fade-in)
 
 [delay, transitionDuration]
 
-Defined in: [client/components/List/types.tsx:117](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L117)
+Defined in: [components/List/types.tsx:117](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L117)
 
 ___
 
@@ -128,7 +128,7 @@ Filters
 
 #### Type declaration:
 
-Defined in: [client/components/List/types.tsx:122](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L122)
+Defined in: [components/List/types.tsx:122](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L122)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 Overriding class name for header
 
-Defined in: [client/components/List/types.tsx:132](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L132)
+Defined in: [components/List/types.tsx:132](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L132)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 Fixed height
 
-Defined in: [client/components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
+Defined in: [components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 Hidden
 
-Defined in: [client/components/List/types.tsx:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L127)
+Defined in: [components/List/types.tsx:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L127)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 Items
 
-Defined in: [client/components/List/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L55)
+Defined in: [components/List/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L55)
 
 ___
 
@@ -178,7 +178,7 @@ ___
 
 Groups to render
 
-Defined in: [client/components/EventList/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L28)
+Defined in: [components/EventList/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L28)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 Group render props
 
-Defined in: [client/components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
+Defined in: [components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 Callback to render the column header
 
-Defined in: [client/components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
+Defined in: [components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 On render details header
 
-Defined in: [client/components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
+Defined in: [components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
 
 ___
 
@@ -218,7 +218,7 @@ ___
 
 Resizable columns
 
-Defined in: [client/components/EventList/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L43)
+Defined in: [components/EventList/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L43)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 Search box props
 
-Defined in: [client/components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
+Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
 
 ___
 
@@ -238,7 +238,7 @@ ___
 
 Selection
 
-Defined in: [client/components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
+Defined in: [components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
 
 ___
 
@@ -248,4 +248,4 @@ ___
 
 Show empty days
 
-Defined in: [client/components/EventList/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L33)
+Defined in: [components/EventList/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L33)

@@ -1,5 +1,7 @@
+import { TFunction } from 'i18next'
+import React from 'react'
 import { GlobalHotKeysProps } from 'react-hotkeys'
-import { ITimesheetContext } from '../context'
+import { AnyAction } from 'redux'
 import {
   NEXT_PERIOD,
   PREVIOUS_PERIOD,
@@ -8,10 +10,10 @@ import {
 } from '../reducer/actions'
 import { TimesheetScope } from '../TimesheetScope'
 
-export const getHotkeys = ({
-  dispatch,
-  t
-}: ITimesheetContext): GlobalHotKeysProps => ({
+export const getHotkeys = (
+  dispatch: React.Dispatch<AnyAction>,
+  t: TFunction
+): GlobalHotKeysProps => ({
   keyMap: {
     GO_TO_CURRENT_WEEK: {
       name: t('timesheet.goToCurrentWeek'),

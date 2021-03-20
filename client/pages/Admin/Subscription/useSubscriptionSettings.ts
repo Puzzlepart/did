@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import { useMessage } from 'components'
 import { getValue, setValue } from 'helpers'
 import { MessageBarType } from 'office-ui-fabric-react'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'
 import { pick } from 'underscore'
@@ -18,7 +18,7 @@ import { useSubscriptionConfig } from './useSubscriptionConfig'
  */
 export function useSubscriptionSettings() {
   const { t } = useTranslation()
-  const context = useContext(AppContext)
+  const context = useAppContext()
   const [subscription, setSubscription] = useState<Subscription>(
     omitDeep(deepCopy(context.subscription), '__typename')
   )
