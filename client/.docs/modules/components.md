@@ -99,6 +99,10 @@ Reusable React Function components.
 - [useAutocomplete](components.md#useautocomplete)
 - [useAutocompleteEvents](components.md#useautocompleteevents)
 
+### Other Functions
+
+- [useUserListColumn](components.md#useuserlistcolumn)
+
 ### UserMessage Functions
 
 - [useMessage](components.md#usemessage)
@@ -299,7 +303,7 @@ User column
 
 Renders a `<Persona />` component
 
-Defined in: [client/components/UserColumn/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L13)
+Defined in: [client/components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L15)
 
 ## Function Component Functions
 
@@ -487,6 +491,30 @@ Name | Type |
 `onSetSelected` | (`index`: *number*) => *any* |
 
 Defined in: [client/components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
+
+___
+
+## Other Functions
+
+### useUserListColumn
+
+▸ **useUserListColumn**(`size?`: PersonaSize, `props?`: *Partial*<IListColumn\>): IListColumn
+
+Returns list column definition for `<UserColumn >`
+
+The user object needs to be the item itself, or be
+on the item with key `user`
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`size` | PersonaSize |
+`props?` | *Partial*<IListColumn\> |
+
+**Returns:** IListColumn
+
+Defined in: [client/components/UserColumn/useUserListColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L14)
 
 ___
 

@@ -1,6 +1,8 @@
 /* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import { Persona, PersonaSize } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { IUserColumnProps } from './types'
 
 /**
@@ -11,18 +13,28 @@ import { IUserColumnProps } from './types'
  * @category SummaryView
  */
 export const UserColumn: FunctionComponent<IUserColumnProps> = ({
-  user
+  user,
+  size = PersonaSize.size24
 }: IUserColumnProps) => {
   return (
     <div>
       <Persona
         text={user.displayName}
         secondaryText={user.mail}
-        size={PersonaSize.size24}
+        tertiaryText={get(user, 'role.name')}
+        size={size}
         imageUrl={user.photo?.base64}
+        styles={{
+          tertiaryText: {
+            fontSize: 10,
+            visibility: isBrowser && 'hidden',
+            display: isMobile ? 'block' : 'hidden'
+          }
+        }}
       />
     </div>
   )
 }
 
 export * from './types'
+export * from './useUserListColumn'

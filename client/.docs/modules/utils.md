@@ -24,9 +24,9 @@ Reusable utility functions
 
 ### generateColumn
 
-▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<IColumn\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: IColumn) => *any*, `minWidth?`: *number*): IColumn
+▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<IListColumn\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: IListColumn) => *any*, `minWidth?`: *number*): IListColumn
 
-Generate a IColumn defintion
+Generate a `IListColumn` defintion
 
 #### Parameters:
 
@@ -34,11 +34,11 @@ Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `fieldName` | *string* | - | Field name   |
 `name` | *string* | '' | -Name   |
-`props` | *Partial*<IColumn\> | - | Additional props   |
-`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: IColumn) => *any* | - | On render function   |
+`props` | *Partial*<IListColumn\> | - | Additional props   |
+`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: IListColumn) => *any* | - | Render function   |
 `minWidth` | *number* | 100 | Min width    |
 
-**Returns:** IColumn
+**Returns:** IListColumn
 
 Defined in: [client/utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
 

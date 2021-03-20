@@ -8,12 +8,21 @@
 
 ### Properties
 
+- [size](components.iusercolumnprops.md#size)
 - [user](components.iusercolumnprops.md#user)
 
 ## Properties
 
+### size
+
+• `Optional` **size**: PersonaSize
+
+Defined in: [client/components/UserColumn/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L6)
+
+___
+
 ### user
 
-• **user**: *Pick*<User, *displayName* \| *mail* \| *photo*\>
+• **user**: *Pick*<User, *displayName* \| *mail* \| *photo* \| *role*\>
 
-Defined in: [client/components/UserColumn/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L4)
+Defined in: [client/components/UserColumn/types.tsx:5](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L5)
