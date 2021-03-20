@@ -33,7 +33,6 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (
     <Panel
       className={styles.root}
       headerText={props.headerText}
-      customWidth='440px'
       isOpen={true}
       isLightDismiss={true}
       onDismiss={props.onDismiss}>
