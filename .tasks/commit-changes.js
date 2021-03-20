@@ -31,16 +31,21 @@ async function commit_changes() {
         { command: 'npm run typedoc', name: 'typedoc' },
         { command: 'npm run lint:fix', name: 'eslint' }
     ], {})
-    const commit_message =`${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
-    await exec('git add --all')
-    await exec(`git commit -m "${commit_message}"`)
-    await exec('git add --all')
-    await exec(`git commit -m "${commit_message} --amend --no-verify"`)
-    if(input.push) {
-        await exec('git push --no-verify')
+    const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
+    try {
+        await exec('git add --all')
+        await exec(`git commit -m "${commit_message}"`)
+        await exec('git add --all')
+        await exec(`git commit -m "${commit_message} --amend --no-verify"`)
+        if (input.push) {
+            await exec('git push --no-verify')
+        }
+        log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
+    } catch (error) {
+        console.log(error)
+    } finally {
+        process.exit(0)
     }
-    log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
-    process.exit(0)
 }
 
 commit_changes()
