@@ -3,6 +3,7 @@ import { EditLink } from 'components'
 import { PermissionList } from 'components/PermissionList'
 import { Icon } from 'office-ui-fabric-react'
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -26,7 +27,8 @@ export function useColumns({ setPanel }) {
     }),
     col('description', t('common.descriptionLabel'), {
       maxWidth: 240,
-      isMultiline: true
+      isMultiline: true,
+      data: { hidden: isMobile }
     }),
     col(
       'permissions',
