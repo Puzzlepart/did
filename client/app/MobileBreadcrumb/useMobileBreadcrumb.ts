@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { AppContext } from 'AppContext'
 import { IFlexiblePivotProps } from 'components/FlexiblePivot/types'
-import { find } from 'office-ui-fabric-react'
+import { find, IPivotItemProps } from 'office-ui-fabric-react'
 import { useContext, useEffect, useRef } from 'react'
 
 /**
@@ -25,9 +25,9 @@ export function useMobileBreadcrumb(props: IFlexiblePivotProps) {
       const itemKey = item?.props?.itemKey || item.itemKey
       return itemKey === props.selectedKey
     })
-    const current = current_?.props || current_
-    if (state._current?.nav !== current) {
-      state.set({ nav: current })
+    const nav: IPivotItemProps = current_?.props || current_
+    if (state._current?.nav !== nav) {
+      state.set({ nav })
     }
   }, [props.selectedKey, props.items])
   return ref

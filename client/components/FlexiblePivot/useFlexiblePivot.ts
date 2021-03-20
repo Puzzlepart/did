@@ -8,9 +8,18 @@ import { useFlexiblePivotStyles } from './useFlexiblePivotStyles'
 /**
  * Component logic hook for `<FlexiblePivot />`
  *
+ * * Uses hook `useFlexiblePivotStyles` to get styles
+ * based on device
+ * * Uses hook `useMobileBreadcrumb` to update breadcrumb
+ * for mobile devices
+ *
  * @category FlexiblePivot
+ * @returns The `ref` and `styles` to be used by the <FlexiblePivot />`
+ * component
  */
-export function useFlexiblePivot(props: IFlexiblePivotProps) {
+export function useFlexiblePivot(
+  props: IFlexiblePivotProps
+): Partial<IFlexiblePivotProps> {
   const styles = useFlexiblePivotStyles(props)
   const ref = useMobileBreadcrumb(props)
   return {

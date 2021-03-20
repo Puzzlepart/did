@@ -8,7 +8,7 @@ The App component
 
 ### Function Component Variables
 
-- [MobileHeader](app.md#mobileheader)
+- [MobileBreadcrumb](app.md#mobilebreadcrumb)
 - [Navigation](app.md#navigation)
 
 ### Other Variables
@@ -22,11 +22,11 @@ The App component
 
 ## Function Component Variables
 
-### MobileHeader
+### MobileBreadcrumb
 
-• `Const` **MobileHeader**: *FunctionComponent*<IMobileHeaderProps\>
+• `Const` **MobileBreadcrumb**: *FunctionComponent*<IMobileBreadcrumbProps\>
 
-Defined in: [client/app/MobileHeader/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileHeader/index.tsx#L13)
+Defined in: [client/app/MobileBreadcrumb/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileBreadcrumb/index.tsx#L13)
 
 ___
 
