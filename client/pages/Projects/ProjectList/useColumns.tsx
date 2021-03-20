@@ -1,39 +1,47 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
-import { TFunction } from 'i18next'
-import { IColumn, Icon } from 'office-ui-fabric-react'
+import { IListColumn } from 'components/List/types'
+import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import { LabelObject as Label, Project } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 import { NameLabel } from './NameLabel'
 import { IProjectListProps } from './types'
 
 /**
- * Generate column definitions based on parameters specified
- *
- * @param props - Props
- * @param t - Translate function
+ * Returns column definitions
  */
-export default (props: IProjectListProps, t: TFunction): IColumn[] =>
-  [
-    col('icon', '', { maxWidth: 35, minWidth: 35 }, (project: Project) => {
+export function useColumns(props: IProjectListProps): IListColumn[] {
+  const { t } = useTranslation()
+  return [
+    col('icon', '', { minWidth: 125, maxWidth: 125 }, (project: Project) => {
       if (project.inactive) {
         return (
-          <Icon
-            title={t('projects.inactiveText')}
-            iconName='Warning'
-            styles={{ root: { fontSize: 16, color: '#ffbf00' } }}
-          />
+          <>
+            <Icon
+              title={t('projects.inactiveText')}
+              iconName='Warning'
+              styles={{ root: { fontSize: 16, color: '#ffbf00' } }}
+            />
+            <span style={{ marginLeft: 6, verticalAlign: 'top' }}>
+              {project.key}
+            </span>
+          </>
         )
       }
       return (
-        <Icon
-          iconName={project.icon || 'Page'}
-          styles={{ root: { fontSize: 16 } }}
-        />
+        <>
+          <Icon
+            iconName={project.icon || 'Page'}
+            styles={{ root: { fontSize: 16 } }}
+          />
+          <span style={{ marginLeft: 6, verticalAlign: 'top' }}>
+            {project.key}
+          </span>
+        </>
       )
     }),
-    col('key', t('common.keyFieldLabel'), { maxWidth: 120 }),
     col(
       'name',
       t('common.nameFieldLabel'),
@@ -57,3 +65,4 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
       ))
     )
   ].filter((col) => !(props.hideColumns || []).includes(col.key))
+}
