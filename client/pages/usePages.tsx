@@ -42,7 +42,7 @@ export function usePages(): UsePages {
     },
     {
       text: t('navigation.customers'),
-      iconName: 'People',
+      iconName: 'AccountActivity',
       path: '/customers',
       hidden: !hasPermission(PermissionScope.ACCESS_CUSTOMERS),
       component: <CustomersPage />

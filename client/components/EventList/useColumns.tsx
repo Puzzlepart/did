@@ -3,7 +3,7 @@ import $date from 'DateUtils'
 import * as helpers from 'helpers'
 import { IColumn, Link } from 'office-ui-fabric-react'
 import React, { useMemo } from 'react'
-import { BrowserView, MobileView } from 'react-device-detect'
+import { isBrowser, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, TimeEntry } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -99,11 +99,7 @@ const durationColumn = (props: IEventListProps, name: string): IColumn =>
     'duration',
     name,
     { ...getSizing(props, 'duration', 75, 75) },
-    (event: TimeEntry) => (
-      <BrowserView renderWithFragment={true}>
-        <DurationDisplay duration={event.duration} />
-      </BrowserView>
-    )
+    (event: TimeEntry) => <DurationDisplay duration={event.duration} />
   )
 
 export function useColumns(props: IEventListProps) {
@@ -113,12 +109,14 @@ export function useColumns(props: IEventListProps) {
       [
         titleColumn(props, t('common.titleLabel')),
         timeColumn(props, t('common.timeLabel')),
-        durationColumn(props, t('common.durationLabel')),
+        isBrowser && durationColumn(props, t('common.durationLabel')),
         ...props.additionalColumns
-      ].map((col) => ({
-        ...col,
-        isResizable: props.resizableColumns
-      })),
+      ]
+        .filter((col) => !!col)
+        .map((col) => ({
+          ...col,
+          isResizable: props.resizableColumns
+        })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [props.additionalColumns]
   )

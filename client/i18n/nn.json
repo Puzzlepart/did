@@ -65,7 +65,7 @@
     "outlookCategoryInfoText": "Her kan du sjå alle prosjekta som har ein korresponderande Outlook-kategori.",
     "noTimeEntriesText": "Ingen timar registrerte på dette prosjektet.",
     "timeEntriesErrorText": "Det oppstod ein feil ved innlasting av timane for dette prosjektet.",
-    "timeEntriesLoadingLabel": "Lastar inn timeliste",
+    "timeEntriesLoadingLabel": "Lastar inn timer for prosjektet",
     "myProjectsText": "Prosjekta mine",
     "myProjectsSearchPlaceholder": "Søk i prosjekta mine...",
     "exportTimeEntriesLabel": "Eksporter til Excel",
@@ -89,7 +89,8 @@
     "noInformationAvailable": "Ingen informasjon tilgjengeleg om dette prosjektet.",
     "navigateText": "Detaljer",
     "iconFieldDescription": "Bruk eit ikon for å gjera prosjektet meir gjenkjenneleg i timelista og på prosjektsida. \nEit tilfeldig ikon vil bli valt viss du ikkje vel eit sjølv.",
-    "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen."
+    "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
+    "timeEntriesLoadingDescription": "Ta en slurk kaffe hvis du har vært opptatt den siste tiden ..."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { IProjectsContext } from '../context'
 import { useProjectsReducer } from '../reducer'
 import { IProjectsParameters } from '../types'
-import { useHistoryUpdater } from './useHistoryUpdater'
+import { useProjecstHistory } from './useProjecstHistory'
 import { useProjectList } from './useProjectList'
 import { useProjectsQuery } from './useProjectsQuery'
 
@@ -27,7 +27,7 @@ export function useProjects() {
   const { state, dispatch } = useProjectsReducer({ url, history })
   const { refetch, loading } = useProjectsQuery(dispatch)
 
-  useHistoryUpdater(state)
+  useProjecstHistory(state)
 
   const context = useMemo<IProjectsContext>(
     () => ({

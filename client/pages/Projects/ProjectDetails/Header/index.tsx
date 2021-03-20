@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { ProjectsContext } from '../../context'
 import { ProjectActions } from './actions'
 import styles from './Header.module.scss'
@@ -19,7 +20,7 @@ export const Header: FunctionComponent = () => {
         <div className={styles.text}>{state.selected.name}</div>
         <div className={styles.subText}>{state.selected.customer.name}</div>
       </div>
-      <ProjectActions />
+      <ProjectActions hidden={isMobile} />
     </div>
   )
 }

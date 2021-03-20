@@ -3,32 +3,44 @@
   flex-direction: row;
   margin: 0 0 15px 0;
 
-  .iconContainer {
-    color: #787878;
-    font-size: 35px;
-    margin: 0 25px 0 0;
-  }
-
   .title {
     flex: 1 1 0;
 
+    .iconContainer {
+      color: #787878;
+      font-size: 26px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
     .text {
-      font-size: 28px;
+      font-size: 1.6rem;
       font-weight: 500;
-      margin-bottom: 0;
+      margin: 0 0 8px 8px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .subText {
+      font-size: 1rem;
+      color: #787878;
+      font-weight: 400;
+      margin: 0 0 8px 0;
     }
   }
 
   .actions {
-    margin: 6px 15px 0 8px;
-    display: flex;
+    .container {
+      margin: 6px 15px 0 8px;
+      display: flex;
 
-    .actionItem {
-      margin: 0 5px 0 0;
+      .actionItem {
+        margin: 0 5px 0 0;
 
-      a {
-        color: inherit;
-        text-decoration: none;
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
       }
     }
   }

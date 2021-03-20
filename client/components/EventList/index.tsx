@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { List } from 'components'
 import React, { FunctionComponent } from 'react'
-import { useColumns } from './columns'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
+import { useColumns } from './useColumns'
 
 /**
  * @category Function Component

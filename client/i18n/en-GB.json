@@ -65,7 +65,7 @@
     "outlookCategoryInfoText": "Here you can see the projects that have a corresponding category in Outlook.",
     "noTimeEntriesText": "No time entries registered for the project.",
     "timeEntriesErrorText": "An error occured loading time entries for the project.",
-    "timeEntriesLoadingLabel": "Loading time entries",
+    "timeEntriesLoadingLabel": "Loading time entries for project",
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export to Excel",
@@ -90,7 +90,8 @@
     "noInformationAvailable": "No information available about this project.",
     "navigateText": "Details",
     "iconFieldDescription": "Use an icon to make the project more recognizable in the Timesheet and Project pages. A random icon will be selected if you dont' pick one yourself.",
-    "createError": "We can't create the project at the moment. Please try again later."
+    "createError": "We can't create the project at the moment. Please try again later.",
+    "timeEntriesLoadingDescription": "Take a sip of coffee if you've been busy lately..."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

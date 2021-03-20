@@ -13,13 +13,13 @@
     flex: 1 1 0;
 
     .text {
-      font-size: 28px;
+      font-size: 1.6rem;
       font-weight: 500;
       margin-bottom: 0;
     }
 
     .subText {
-      font-size: 19px;
+      font-size: 1rem;
       color: #787878;
       font-weight: 400;
       margin: 0 0 8px 0;
@@ -27,15 +27,17 @@
   }
 
   .actions {
-    display: flex;
-    margin: 6px 15px 0 8px;
+    .container {
+      display: flex;
+      margin: 6px 15px 0 8px;
 
-    .actionItem {
-      margin: 0 5px 0 0;
+      .actionItem {
+        margin: 0 5px 0 0;
 
-      a {
-        color: inherit;
-        text-decoration: none;
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
       }
     }
   }
