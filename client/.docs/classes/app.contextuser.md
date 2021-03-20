@@ -119,7 +119,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: [client/app/ContextUser.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L48)
+Defined in: [client/app/ContextUser.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L43)
 
 ## Methods
 
@@ -137,4 +137,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [client/app/ContextUser.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L69)
+Defined in: [client/app/ContextUser.ts:64](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L64)

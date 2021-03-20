@@ -32,7 +32,7 @@ export class TimesheetPeriod {
   private _uiIgnoredEventsStorage: BrowserStorage<string[]>
 
   /**
-   * Initializes a new period instance
+   * Constructor for `TimesheetPeriod`
    *
    * @param period - Period
    */
@@ -56,6 +56,7 @@ export class TimesheetPeriod {
    *
    * @param t - Translate function
    * @param includeMonth - Include month
+   * @memberof TimesheetPeriod
    */
   public getName(t: TFunction, includeMonth?: boolean) {
     let name = `${t('common.weekLabel')} ${this.week}`
@@ -73,7 +74,7 @@ export class TimesheetPeriod {
    * project/customer is set to null for the event
    *
    * @param event - Event object
-   *
+   * @memberof TimesheetPeriod
    * @returns an extended event object
    */
   private _checkUiManualMatch(event: EventObject) {
@@ -102,6 +103,7 @@ export class TimesheetPeriod {
    * Get events
    *
    * @param includeUnmatched - Include unmatched events
+   * @memberof TimesheetPeriod
    */
   public getEvents(includeUnmatched: boolean = true): EventObject[] {
     return [...(this.events || [])]
@@ -119,13 +121,17 @@ export class TimesheetPeriod {
 
   /**
    * Get ignored events
+   *
+   * @memberof TimesheetPeriod
    */
   public get ignoredEvents(): string[] {
     return this._uiIgnoredEvents
   }
 
-  /*
+  /**
    * Get aggregated errors from the events in the period
+   *
+   * @memberof TimesheetPeriod
    */
   public get errors(): any[] {
     if (!this.getEvents) return []
@@ -136,13 +142,17 @@ export class TimesheetPeriod {
 
   /**
    * Get total duration of events in the period
+   *
+   * @memberof TimesheetPeriod
    */
   public get totalDuration(): number {
     return this.getEvents().reduce((sum, event) => (sum += event.duration), 0)
   }
 
-  /*
+  /**
    * Get matched duration for the events in the period
+   *
+   * @memberof TimesheetPeriod
    */
   public get matchedDuration(): number {
     return filter(this.getEvents(), (event) => !!event.project).reduce(
@@ -153,6 +163,8 @@ export class TimesheetPeriod {
 
   /**
    * Get unmatched duration for the events in the period
+   *
+   * @memberof TimesheetPeriod
    */
   public get unmatchedDuration(): number {
     return this.totalDuration - this.matchedDuration
@@ -163,6 +175,7 @@ export class TimesheetPeriod {
    *
    * @param eventId - Event id
    * @param project - Project
+   * @memberof TimesheetPeriod
    */
   public setManualMatch(eventId: string, project: Project) {
     const matches = this._uiMatchedEvents
@@ -174,6 +187,7 @@ export class TimesheetPeriod {
    * Clear manual match from local storage
    *
    * @param eventId - Event id
+   * @memberof TimesheetPeriod
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
@@ -184,6 +198,7 @@ export class TimesheetPeriod {
    * Store ignored event in browser storage
    *
    * @param eventId - Event id
+   * @memberof TimesheetPeriod
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
@@ -192,6 +207,8 @@ export class TimesheetPeriod {
 
   /**
    * Clear ignored events from browser storage
+   *
+   * @memberof TimesheetPeriod
    */
   public clearIgnoredEvents() {
     this._uiIgnoredEvents = []
@@ -200,6 +217,8 @@ export class TimesheetPeriod {
 
   /**
    * Get matched events with properties
+   *
+   * @memberof TimesheetPeriod
    */
   private get matchedEvents(): EventInput[] {
     const events = filter(
@@ -219,6 +238,7 @@ export class TimesheetPeriod {
   /**
    * Get data for the period
    *
+   * @memberof TimesheetPeriod
    * @returns Data for the period
    */
   public get data(): TimesheetPeriodInput {
@@ -235,6 +255,7 @@ export class TimesheetPeriod {
    * Get weekdays in the specified format
    *
    * @param dayFormat - Day format
+   * @memberof TimesheetPeriod
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {
@@ -244,6 +265,8 @@ export class TimesheetPeriod {
 
   /**
    * Returns URL path for the period
+   *
+   * @memberof TimesheetPeriod
    */
   public get path(): string {
     return this.id
@@ -255,6 +278,7 @@ export class TimesheetPeriod {
   /**
    * Period is complete meaning all events are matched
    *
+   * @memberof TimesheetPeriod
    * @returns true if the unmatched duration (unmatchedDuration) is equal to zero (0)
    */
   public get isComplete(): boolean {
@@ -263,6 +287,8 @@ export class TimesheetPeriod {
 
   /**
    * Period is in the past
+   *
+   * @memberof TimesheetPeriod
    */
   public get isPast(): boolean {
     return $date.isBefore(this.endDate)

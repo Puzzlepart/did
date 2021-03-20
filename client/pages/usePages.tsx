@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { INavItemProps } from 'app/Navigation'
 import { usePermissions } from 'hooks'
@@ -20,6 +21,14 @@ type UsePages = {
   nav: INavItemProps[]
 }
 
+/**
+ * Get all available pages in the app
+ *
+ * @returns The available page instances (`pages`), and
+ * `nav` used for the navigation
+ *
+ * @category React Hook
+ */
 export function usePages(): UsePages {
   const { t } = useTranslation()
   const { hasPermission } = usePermissions()

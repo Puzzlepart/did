@@ -4,7 +4,8 @@ import { TimesheetQuery } from 'types'
 import { ITimesheetParameters } from './types'
 
 /**
- * Handles a scope, the period of time between a startDateTime and endDateTime
+ * Handles a scope, the period of time between
+ * a startDateTime and endDateTime
  *
  * @category Timesheet
  */
@@ -13,7 +14,7 @@ export class TimesheetScope {
   public endDate?: DateObject
 
   /**
-   * Constructs a new TimesheetScope
+   * Constructs for `TimesheetScope`
    *
    * @param startDate - Optional start date
    */
@@ -26,6 +27,7 @@ export class TimesheetScope {
    * Sets `startDate` and `endDate` from `params`
    *
    * @param params - Params
+   * @memberof TimesheetScope
    */
   fromParams(parameters: ITimesheetParameters): TimesheetScope {
     this.startDate = new DateObject().fromObject(parameters)
@@ -37,6 +39,7 @@ export class TimesheetScope {
    * Get TimesheetQuery for the scope
    *
    * @param template - Template
+   * @memberof TimesheetScope
    */
   public query(template: string = 'YYYY-MM-DD'): TimesheetQuery {
     if (!this.startDate) return null
@@ -50,6 +53,7 @@ export class TimesheetScope {
    * Sets the scope and returns a cloned version of the TimesheetScope
    *
    * @param add - Add
+   * @memberof TimesheetScope
    */
   public set(add: string): TimesheetScope {
     this.startDate = this.startDate.add(add)
@@ -61,6 +65,7 @@ export class TimesheetScope {
    * Get a day in the scope by index
    *
    * @param index - Index
+   * @memberof TimesheetScope
    */
   public getDay(index: number): DateObject {
     return this.startDate.add(`${index}d`)
@@ -68,6 +73,8 @@ export class TimesheetScope {
 
   /**
    * Is the scope the current week
+   *
+   * @memberof TimesheetScope
    */
   public get isCurrentWeek(): boolean {
     return this.startDate.isCurrentWeek
@@ -75,6 +82,8 @@ export class TimesheetScope {
 
   /**
    * Get timespan string for the scope
+   *
+   * @memberof TimesheetScope
    */
   public get timespan(): string {
     return DateUtils.getTimespanString({

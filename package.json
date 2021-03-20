@@ -54,7 +54,6 @@
     "@types/validator": "13.0.0",
     "@types/webpack-env": "1.15.3",
     "@uifabric/icons": "7.5.15",
-    "@uifabric/react-hooks": "7.13.9",
     "apollo-server-express": "2.19.0",
     "array-sort": "1.0.0",
     "babel-loader": "8.1.0",
