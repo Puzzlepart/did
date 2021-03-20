@@ -11,7 +11,7 @@ import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
 
 /**
- * Hook for Reports
+ * Component logic for `<Reports />`
  *
  * * Get history using `useHistory`
  * * Get URL params using `useParams`

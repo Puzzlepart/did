@@ -70,6 +70,7 @@ Reusable React Function components.
 - [FlexiblePivot](components.md#flexiblepivot)
 - [HotkeyModal](components.md#hotkeymodal)
 - [IconPicker](components.md#iconpicker)
+- [IconText](components.md#icontext)
 - [LabelPicker](components.md#labelpicker)
 - [List](components.md#list)
 - [PermissionList](components.md#permissionlist)
@@ -204,6 +205,16 @@ ___
 • `Const` **IconPicker**: *FunctionComponent*<IIconPickerProps\>
 
 Defined in: [components/IconPicker/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L13)
+
+___
+
+### IconText
+
+• `Const` **IconText**: *FunctionComponent*<IIconTextProps\>
+
+Renders an inline `<Icon />` with text
+
+Defined in: [components/IconText/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconText/index.tsx#L13)
 
 ___
 

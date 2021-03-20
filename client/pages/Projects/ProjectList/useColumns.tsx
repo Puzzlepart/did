@@ -1,7 +1,7 @@
+import { IconText } from 'components'
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { IListColumn } from 'components/List/types'
-import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label, Project } from 'types'
@@ -15,32 +15,18 @@ import { IProjectListProps } from './types'
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
   return [
-    col('icon', '', { minWidth: 125, maxWidth: 125 }, (project: Project) => {
+    col('key', '', { minWidth: 125, maxWidth: 125 }, (project: Project) => {
       if (project.inactive) {
         return (
-          <>
-            <Icon
-              title={t('projects.inactiveText')}
-              iconName='Warning'
-              styles={{ root: { fontSize: 16, color: '#ffbf00' } }}
-            />
-            <span style={{ marginLeft: 6, verticalAlign: 'top' }}>
-              {project.key}
-            </span>
-          </>
+          <IconText
+            title={t('projects.inactiveText')}
+            iconName='Warning'
+            styles={{ root: { color: '#ffbf00' } }}
+            text={project.key}
+          />
         )
       }
-      return (
-        <>
-          <Icon
-            iconName={project.icon || 'Page'}
-            styles={{ root: { fontSize: 16 } }}
-          />
-          <span style={{ marginLeft: 6, verticalAlign: 'top' }}>
-            {project.key}
-          </span>
-        </>
-      )
+      return <IconText iconName={project.icon} text={project.key} />
     }),
     col(
       'name',

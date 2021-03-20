@@ -1,8 +1,9 @@
-import { ISearchBoxProps } from 'office-ui-fabric-react'
+/* eslint-disable tsdoc/syntax */
+import { IIconProps } from 'office-ui-fabric-react'
 
-export interface IIconPickerProps extends ISearchBoxProps {
-  label?: string
-  description?: string
-  defaultSelected?: string
-  onSelected: (icon: string) => void
+/**
+ * @category IconText
+ */
+export interface IIconTextProps extends IIconProps {
+  text: string
 }

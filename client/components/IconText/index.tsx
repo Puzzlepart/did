@@ -1,43 +1,22 @@
 /* eslint-disable tsdoc/syntax */
-import { getIcons } from 'common/icons'
-import { Autocomplete } from 'components/Autocomplete'
-import React, { FunctionComponent, useMemo } from 'react'
+import { Icon } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
 import { omit } from 'underscore'
-import { humanize } from 'underscore.string'
-import styles from './IconPicker.module.scss'
-import { IIconPickerProps } from './types'
+import styles from './IconText.module.scss'
+import { IIconTextProps } from './types'
 
 /**
+ * Renders an inline `<Icon />` with text
+ *
  * @category Function Component
  */
-export const IconPicker: FunctionComponent<IIconPickerProps> = (
-  props: IIconPickerProps
+export const IconText: FunctionComponent<IIconTextProps> = (
+  props: IIconTextProps
 ) => {
-  const items = useMemo(
-    () =>
-      getIcons().map((iconName) => ({
-        key: iconName,
-        text: humanize(iconName),
-        searchValue: [iconName, humanize(iconName)].join(' '),
-        iconName: iconName,
-        data: iconName
-      })),
-    []
-  )
-
   return (
-    <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
-      <Autocomplete
-        {...omit(props, 'className')}
-        defaultSelectedKey={props.defaultSelected}
-        required={props.required}
-        items={items}
-        itemIcons={{ style: {} }}
-        width={props.width}
-        placeholder={props.placeholder}
-        onClear={() => props.onSelected(null)}
-        onSelected={(item) => props.onSelected(item.data)}
-      />
+    <div className={styles.root}>
+      <Icon {...omit(props, 'text')} />
+      <span style={{ marginLeft: 6, verticalAlign: 'top' }}>{props.text}</span>
     </div>
   )
 }
