@@ -4,6 +4,9 @@
 
 [App](../modules/app.md).ContextUser
 
+`ContextUser` is the user object used for
+the `AppContext`
+
 ## Table of contents
 
 ### Constructors
@@ -34,7 +37,7 @@
 
 \+ **new ContextUser**(`_user?`: *User*): [*ContextUser*](app.contextuser.md)
 
-Constructor
+Constructor for `ContextUser`
 
 #### Parameters:
 
@@ -44,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*ContextUser*](app.contextuser.md)
 
-Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
+Defined in: [client/app/ContextUser.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L19)
 
 ## Properties
 
@@ -52,7 +55,7 @@ Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blo
 
 • **configuration**: *Record*<string, any\>
 
-Defined in: [client/app/ContextUser.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L14)
+Defined in: [client/app/ContextUser.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L18)
 
 ___
 
@@ -60,7 +63,7 @@ ___
 
 • **displayName**: *string*
 
-Defined in: [client/app/ContextUser.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L10)
+Defined in: [client/app/ContextUser.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L14)
 
 ___
 
@@ -68,7 +71,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [client/app/ContextUser.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L9)
+Defined in: [client/app/ContextUser.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L13)
 
 ___
 
@@ -76,7 +79,7 @@ ___
 
 • **mail**: *string*
 
-Defined in: [client/app/ContextUser.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L12)
+Defined in: [client/app/ContextUser.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L16)
 
 ___
 
@@ -84,7 +87,7 @@ ___
 
 • **photo**: *UserPhoto*
 
-Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
+Defined in: [client/app/ContextUser.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L19)
 
 ___
 
@@ -92,7 +95,7 @@ ___
 
 • **role**: *Role*
 
-Defined in: [client/app/ContextUser.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L11)
+Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
 
 ___
 
@@ -100,7 +103,7 @@ ___
 
 • **startPage**: *string*
 
-Defined in: [client/app/ContextUser.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L13)
+Defined in: [client/app/ContextUser.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L17)
 
 ## Accessors
 
@@ -116,7 +119,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: [client/app/ContextUser.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L41)
+Defined in: [client/app/ContextUser.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L48)
 
 ## Methods
 
@@ -134,4 +137,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [client/app/ContextUser.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L62)
+Defined in: [client/app/ContextUser.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L69)

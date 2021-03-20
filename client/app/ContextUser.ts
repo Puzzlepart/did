@@ -2,9 +2,13 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { config } from 'package'
 import { PermissionScope } from 'security'
 import { Role, User, UserPhoto } from 'types'
-import { contains } from 'underscore'
+import { contains, pick } from 'underscore'
 import { tryParseJson } from 'utils'
 
+/**
+ * `ContextUser` is the user object used for
+ * the `AppContext`
+ */
 export class ContextUser {
   public id: string
   public displayName: string
@@ -15,19 +19,17 @@ export class ContextUser {
   public photo: UserPhoto
 
   /**
-   * Constructor
+   * Constructor for `ContextUser`
    *
    * @param _user - User object
    */
   constructor(private _user?: User) {
     if (_user) {
-      this.id = _user.id
-      this.displayName = _user.displayName
-      this.mail = _user.mail
-      this.role = _user.role as Role
-      this.startPage = _user.startPage
+      Object.assign(
+        this,
+        pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
+      )
       this.configuration = tryParseJson(_user.configuration, {})
-      this.photo = _user.photo
     }
   }
 
