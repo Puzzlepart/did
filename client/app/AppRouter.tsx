@@ -16,7 +16,7 @@ import {
 } from 'react-router-dom'
 import styles from './App.module.scss'
 import { ErrorFallback } from './ErrorFallback'
-import { MobileHeader } from './MobileHeader'
+import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
 
 export const AppRouter: FunctionComponent = () => {
@@ -35,7 +35,7 @@ export const AppRouter: FunctionComponent = () => {
                   <Redirect to='/' />
                 ) : (
                   <>
-                    <MobileHeader text={page.text} />
+                    <MobileBreadcrumb text={page.text} />
                     <div className={styles.container}>{page.component}</div>
                   </>
                 )}

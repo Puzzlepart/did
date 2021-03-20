@@ -9,7 +9,7 @@ import { AppContext, IAppContext, IAppState } from '../AppContext'
 import { useNotificationsQuery } from '../hooks'
 import { AppRouter } from './AppRouter'
 import { ErrorFallback } from './ErrorFallback'
-import { MobileHeader } from './MobileHeader'
+import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
@@ -21,7 +21,7 @@ export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
         ...context,
         notificationsQuery,
         state: {
-          current: state,
+          _current: state,
           set: (s: any) => setState((state_) => ({ ...state_, ...s }))
         }
       }}>
@@ -30,4 +30,4 @@ export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
   )
 }
 
-export { ErrorFallback, MobileHeader, Navigation, AppRouter }
+export { ErrorFallback, MobileBreadcrumb, Navigation, AppRouter }

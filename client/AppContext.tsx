@@ -32,7 +32,17 @@ export interface IAppContext {
   /**
    * Application state
    */
-  state?: { current: IAppState; set: (state: IAppState) => void }
+  state?: {
+    /**
+     * The current `state` of the application
+     */
+    _current: IAppState
+
+    /**
+     * Function to set the application `state`
+     */
+    set: (state: IAppState) => void
+  }
 }
 
 export const AppContext = createContext<IAppContext>(null)

@@ -4,27 +4,27 @@ import { Breadcrumb } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
-import styles from './MobileHeader.module.scss'
-import { IMobileHeaderProps } from './types'
+import styles from './MobileBreadcrumb.module.scss'
+import { IMobileBreadcrumbProps } from './types'
 
 /**
  * @category Function Component
  */
-export const MobileHeader: FunctionComponent<IMobileHeaderProps> = (
-  props: IMobileHeaderProps
+export const MobileBreadcrumb: FunctionComponent<IMobileBreadcrumbProps> = (
+  props: IMobileBreadcrumbProps
 ) => {
   const { state } = useContext(AppContext)
   const items = [
     {
       key: 'current',
       text: props.text,
-      isCurrentItem: !state?.current?.nav?.headerText
+      isCurrentItem: !state?._current?.nav?.headerText
     }
   ]
-  if (state?.current?.nav?.headerText) {
+  if (state?._current?.nav?.headerText) {
     items.push({
-      key: state?.current?.nav?.itemKey,
-      text: state?.current?.nav?.headerText,
+      key: state?._current?.nav?.itemKey,
+      text: state?._current?.nav?.headerText,
       isCurrentItem: true
     })
   }
@@ -37,3 +37,4 @@ export const MobileHeader: FunctionComponent<IMobileHeaderProps> = (
 }
 
 export * from './types'
+export * from './useMobileBreadcrumb'

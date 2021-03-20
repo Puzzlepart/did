@@ -25,33 +25,33 @@ export function useFlexiblePivotStyles({
       flexWrap: 'wrap'
     }
   }
-  if (isMobile) {
-    const link = {
-      height: linkHeight,
-      lineHeight: linkHeight,
-      textAlign: 'left',
-      margin: 0,
-      width: 'auto'
-    }
-    styles_.linkContent = { height: linkHeight }
-    styles_.link = {
-      ...link,
-      opacity: 0.4
-    }
-    styles_.linkIsSelected = {
-      ...link,
-      ':before': { display: 'none' },
-      ':hover': { backgroundColor: 'transparent' },
-      ':active': { backgroundColor: 'transparent' }
-    }
-    if (hideIconsMobile) {
-      styles_.icon = { display: 'none' }
-    }
-    if (fixedLinkWidth) {
-      const linkWidth = fixedLinkWidth === true ? '45%' : fixedLinkWidth
-      styles_.link.width = linkWidth
-      styles_.linkIsSelected.width = linkWidth
-    }
+  if (!isMobile) return merge(styles_, styles as any)
+
+  const link = {
+    height: linkHeight,
+    lineHeight: linkHeight,
+    textAlign: 'left',
+    margin: 0,
+    width: 'auto'
+  }
+  styles_.linkContent = { height: linkHeight }
+  styles_.link = {
+    ...link,
+    opacity: 0.4
+  }
+  styles_.linkIsSelected = {
+    ...link,
+    ':before': { display: 'none' },
+    ':hover': { backgroundColor: 'transparent' },
+    ':active': { backgroundColor: 'transparent' }
+  }
+  if (hideIconsMobile) {
+    styles_.icon = { display: 'none' }
+  }
+  if (fixedLinkWidth) {
+    const linkWidth = fixedLinkWidth === true ? '45%' : fixedLinkWidth
+    styles_.link.width = linkWidth
+    styles_.linkIsSelected.width = linkWidth
   }
   return merge(styles_, styles as any)
 }
