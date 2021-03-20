@@ -81,7 +81,6 @@ All are built using React Function components and Hooks.
 - [Admin](pages.md#admin)
 - [Labels](pages.md#labels)
 - [Roles](pages.md#roles)
-- [SummaryView](pages.md#summaryview)
 - [Users](pages.md#users)
 
 ### Reports Functions
@@ -327,16 +326,6 @@ Defined in: [client/pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepar
 
 ___
 
-### SummaryView
-
-▸ `Const`**SummaryView**(): *Element*
-
-**Returns:** *Element*
-
-Defined in: [client/pages/Reports/SummaryView/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SummaryView/index.tsx#L12)
-
-___
-
 ### Users
 
 ▸ `Const`**Users**(): *Element*
@@ -396,7 +385,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L54)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L55)
 
 ___
 
@@ -425,7 +414,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:107](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L107)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:108](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L108)
 
 ___
 
@@ -454,7 +443,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:133](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L133)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:134](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L134)
 
 ___
 
@@ -483,7 +472,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L28)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L29)
 
 ___
 
@@ -512,7 +501,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L80)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:81](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L81)
 
 ___
 
@@ -531,7 +520,7 @@ Name | Default |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:152](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L152)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:153](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L153)
 
 ___
 
@@ -543,7 +532,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:177](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L177)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:178](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L178)
 
 ___
 

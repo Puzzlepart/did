@@ -47,8 +47,9 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
   }
 
   props.headerProps.onRenderColumnHeaderTooltip = (props, defaultRender) => {
-    if (!props?.column.data?.onRenderColumnHeader) return defaultRender(props)
-    return props?.column.data?.onRenderColumnHeader(props)
+    const onRenderColumnHeader = props?.column?.data?.onRenderColumnHeader
+    if (!onRenderColumnHeader) return defaultRender(props)
+    return onRenderColumnHeader(props)
   }
 
   return (

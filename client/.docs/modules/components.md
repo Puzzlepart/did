@@ -16,6 +16,10 @@ Reusable React Function components.
 - [WeekFilter](../classes/components.weekfilter.md)
 - [YearFilter](../classes/components.yearfilter.md)
 
+### Other Classes
+
+- [PivotItem](../classes/components.pivotitem.md)
+
 ### Autocomplete Interfaces
 
 - [IAutocompleteProps](../interfaces/components.iautocompleteprops.md)
@@ -67,6 +71,7 @@ Reusable React Function components.
 - [EntityLabel](components.md#entitylabel)
 - [EventList](components.md#eventlist)
 - [FilterItem](components.md#filteritem)
+- [FlexiblePivot](components.md#flexiblepivot)
 - [HotkeyModal](components.md#hotkeymodal)
 - [IconPicker](components.md#iconpicker)
 - [LabelPicker](components.md#labelpicker)
@@ -170,6 +175,19 @@ ___
 • `Const` **FilterItem**: *FunctionComponent*<IFilterItemProps\>
 
 Defined in: [client/components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
+
+___
+
+### FlexiblePivot
+
+• `Const` **FlexiblePivot**: *FunctionComponent*<IPivotProps\>
+
+Flexible `<Pivot >` component
+
+Adds styles **display: flex** and **flex-wrap: wrap**
+to make the `<Pivot >` mobile friendly
+
+Defined in: client/components/FlexiblePivot/index.tsx:13
 
 ___
 

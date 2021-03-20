@@ -3,6 +3,7 @@
 import { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { useMemo } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { capitalize } from 'underscore.string'
 import { IReportsQuery } from '../../types'
@@ -85,7 +86,7 @@ export function lastYearQuery<T = IReportsQuery>(
   const object = { year: year - 1 }
   return ({
     key: 'last_year',
-    text: t('common.exportTypeLastYear', object),
+    text: isBrowser && t('common.exportTypeLastYear', object),
     iconName: 'Previous',
     query,
     exportFileName: `TimeEntries-${object.year}-{0}.xlsx`

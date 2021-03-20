@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Pivot, PivotItem } from 'office-ui-fabric-react'
+import { FlexiblePivot, PivotItem } from 'components/FlexiblePivot'
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
@@ -17,25 +17,25 @@ export const Admin = () => {
     history.push(`/admin/${props.itemKey}`)
 
   return (
-    <div className={styles.root}>
-      <Pivot selectedKey={view || 'users'} onLinkClick={onPivotClick}>
-        {sections.map(
-          (section) =>
-            !section.hidden && (
-              <PivotItem
-                {...section}
-                key={section.itemKey}
-                className={styles.tab}>
-                {section.component}
-              </PivotItem>
-            )
-        )}
-      </Pivot>
-    </div>
+    <FlexiblePivot
+      className={styles.root}
+      selectedKey={view || 'users'}
+      onLinkClick={onPivotClick}>
+      {sections.map(
+        (section) =>
+          !section.hidden && (
+            <PivotItem
+              {...section}
+              key={section.itemKey}
+              className={styles.tab}>
+              {section.component}
+            </PivotItem>
+          )
+      )}
+    </FlexiblePivot>
   )
 }
 
-export * from '../Reports/SummaryView'
 export * from './ApiTokens'
 export * from './Labels'
 export * from './Roles'
