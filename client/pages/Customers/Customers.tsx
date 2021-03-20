@@ -1,11 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { FlexiblePivot } from 'components'
 import { usePermissions } from 'hooks'
-import {
-  MessageBar,
-  MessageBarType,
-  Pivot,
-  PivotItem
-} from 'office-ui-fabric-react'
+import { MessageBar, MessageBarType, PivotItem } from 'office-ui-fabric-react'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -27,7 +23,7 @@ export const Customers: FunctionComponent = () => {
 
   return (
     <CustomersContext.Provider value={context}>
-      <Pivot
+      <FlexiblePivot
         selectedKey={view}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))
@@ -55,7 +51,7 @@ export const Customers: FunctionComponent = () => {
             <CustomerForm />
           </PivotItem>
         )}
-      </Pivot>
+      </FlexiblePivot>
     </CustomersContext.Provider>
   )
 }

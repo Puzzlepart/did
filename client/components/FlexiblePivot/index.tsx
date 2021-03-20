@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { IPivotProps, Pivot } from 'office-ui-fabric-react'
+import { Pivot } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
-import { useFlexiblePivotStyles } from './useFlexiblePivotStyles'
+import { IFlexiblePivotProps } from './types'
+import { useFlexiblePivot } from './useFlexiblePivot'
 
 /**
  * Flexible `<Pivot >` component
@@ -11,12 +14,13 @@ import { useFlexiblePivotStyles } from './useFlexiblePivotStyles'
  *
  * @category Function Component
  */
-export const FlexiblePivot: FunctionComponent<IPivotProps> = (
-  props: IPivotProps
+export const FlexiblePivot: FunctionComponent<IFlexiblePivotProps> = (
+  props: IFlexiblePivotProps
 ) => {
-  const styles = useFlexiblePivotStyles()
+  const { ref, styles } = useFlexiblePivot(props)
+
   return (
-    <Pivot {...props} styles={styles}>
+    <Pivot {...props} ref={ref} styles={styles}>
       {props.children}
     </Pivot>
   )

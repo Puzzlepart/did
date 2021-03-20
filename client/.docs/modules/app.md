@@ -26,7 +26,7 @@ The App component
 
 • `Const` **MobileHeader**: *FunctionComponent*<IMobileHeaderProps\>
 
-Defined in: [client/app/MobileHeader/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileHeader/index.tsx#L10)
+Defined in: [client/app/MobileHeader/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileHeader/index.tsx#L12)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Const` **App**: *FunctionComponent*<IAppContext\>
 
-Defined in: [client/app/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L17)
+Defined in: [client/app/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L15)
 
 ___
 

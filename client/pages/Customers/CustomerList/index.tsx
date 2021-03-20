@@ -1,6 +1,7 @@
 import { List } from 'components'
 import { Checkbox, SelectionMode } from 'office-ui-fabric-react'
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
 import { columns } from './columns'
@@ -33,15 +34,17 @@ export const CustomerList = () => {
           {
             key: 'TOGGLE_INACTIVE',
             onRender: () => (
-              <Checkbox
-                styles={{ root: { margin: '6px 0 0 8px' } }}
-                disabled={isEmpty(
-                  filter(state.customers, (index) => index.inactive)
-                )}
-                checked={showInactive}
-                label={t('common.toggleInactiveText')}
-                onChange={(_event, checked) => setShowInactive(checked)}
-              />
+              <div hidden={isMobile}>
+                <Checkbox
+                  styles={{ root: { margin: '6px 0 0 8px' } }}
+                  disabled={isEmpty(
+                    filter(state.customers, (index) => index.inactive)
+                  )}
+                  checked={showInactive}
+                  label={t('common.toggleInactiveText')}
+                  onChange={(_event, checked) => setShowInactive(checked)}
+                />
+              </div>
             )
           }
         ],

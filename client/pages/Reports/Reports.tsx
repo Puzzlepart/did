@@ -21,24 +21,22 @@ import { SummaryView } from './SummaryView'
  * @category Function Component
  */
 export const Reports: FunctionComponent = () => {
-  const { state, dispatch, params, queries, columns, filters, t } = useReports()
+  const { state, dispatch, queries, columns, filters, t } = useReports()
   const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
   return (
     <ReportsContext.Provider value={context}>
       <FlexiblePivot
         className={styles.root}
-        defaultSelectedKey={params.query || 'default'}
-        onLinkClick={(item) =>
-          dispatch(CHANGE_QUERY({ key: item.props.itemKey }))
-        }>
+        selectedKey={state.preset?.itemKey || 'default'}
+        items={queries}
+        fixedLinkWidth={true}
+        onLinkClick={({ props }) => dispatch(CHANGE_QUERY({ props }))}>
         {queries
-          .filter((q) => !!q.text)
-          .map(({ key, text, iconName }) => (
+          .filter((q) => !!q.itemKey)
+          .map((props, index) => (
             <PivotItem
-              key={key}
-              itemKey={key}
-              headerText={text}
-              itemIcon={iconName}
+              {...props}
+              key={index}
               headerButtonProps={{ disabled: state.loading }}>
               <div className={styles.container}>
                 {state.loading && (

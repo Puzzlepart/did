@@ -9,13 +9,13 @@ import { default_query } from './queries'
 /**
  * Query hook for UserReports
  *
- * @param queryPreset - Query preset
+ * @param preset - Query preset
  *
  * @category UserReports Hooks
  */
-export function useUserReportQuery(queryPreset: any) {
-  const { data, loading } = useQuery(queryPreset?.query || default_query, {
-    skip: !queryPreset?.query,
+export function useUserReportQuery({ preset }) {
+  const { data, loading } = useQuery(preset?.query || default_query, {
+    skip: !preset?.query,
     fetchPolicy: 'cache-first'
   })
   const data_ = data?.userReport || []
@@ -23,7 +23,7 @@ export function useUserReportQuery(queryPreset: any) {
     () => ({
       data: data_,
       loading,
-      preset: (queryPreset?.text || '').toLowerCase(),
+      preset: (preset?.text || '').toLowerCase(),
       hours: getSum(data_, 'duration'),
       projects: unique(data_, (t) => t.project?.name).length
     }),

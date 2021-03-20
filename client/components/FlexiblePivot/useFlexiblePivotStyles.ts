@@ -2,38 +2,57 @@
 import {
   IPivotStyleProps,
   IPivotStyles,
-  IStyleFunctionOrObject
+  IStyleFunctionOrObject,
+  merge
 } from 'office-ui-fabric-react'
 import { isMobile } from 'react-device-detect'
+import { IFlexiblePivotProps } from './types'
 
 /**
- * @ignore
+ * Returns Pivot styles
+ *
+ * @param props - Component props
  */
-export function useFlexiblePivotStyles() {
-  const styles: IStyleFunctionOrObject<IPivotStyleProps, IPivotStyles> = {
+export function useFlexiblePivotStyles({
+  styles,
+  fixedLinkWidth = false,
+  hideIconsMobile = true
+}: IFlexiblePivotProps) {
+  const styles_: IStyleFunctionOrObject<IPivotStyleProps, IPivotStyles> = {
     root: {
       display: 'flex',
-      flexWrap: 'wrap',
-      paddingLeft: isMobile ? 10 : 0
+      flexWrap: 'wrap'
     }
   }
   if (isMobile) {
-    styles.linkContent = { height: 30 }
-    styles.link = {
-      width: '45%',
+    styles_.linkContent = {
       height: 30,
-      lineHeight: 30,
-      textAlign: 'left',
-      opacity: 0.6
+      paddingLeft: 0
     }
-    styles.linkIsSelected = {
-      width: '45%',
+    styles_.link = {
       height: 30,
       lineHeight: 30,
       textAlign: 'left',
+      opacity: 0.4,
+      margin: 0,
+      paddingLeft: 0
+    }
+    styles_.linkIsSelected = {
+      height: 30,
+      lineHeight: 30,
+      textAlign: 'left',
+      margin: 0,
+      paddingLeft: 0,
       ':before': { display: 'none' }
     }
-    styles.icon = { display: 'none' }
+    if (hideIconsMobile) {
+      styles_.icon = { display: 'none' }
+    }
+    if (fixedLinkWidth) {
+      const linkWidth = fixedLinkWidth === true ? '45%' : fixedLinkWidth
+      styles_.link.width = linkWidth
+      styles_.linkIsSelected.width = linkWidth
+    }
   }
-  return styles
+  return merge(styles_, styles as any)
 }

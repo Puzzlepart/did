@@ -159,7 +159,7 @@ ___
 
 • `Const` **Customers**: FunctionComponent
 
-Defined in: [client/pages/Customers/Customers.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L23)
+Defined in: [client/pages/Customers/Customers.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L24)
 
 ___
 
@@ -175,7 +175,7 @@ ___
 
 • `Const` **Projects**: FunctionComponent
 
-Defined in: [client/pages/Projects/Projects.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L18)
+Defined in: [client/pages/Projects/Projects.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L19)
 
 ___
 
@@ -256,7 +256,7 @@ ___
 Project list component used by `<Projects />`. Renders
 projects in a list using our `<List />` component.
 
-Defined in: [client/pages/Projects/ProjectList/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/index.tsx#L16)
+Defined in: [client/pages/Projects/ProjectList/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/index.tsx#L17)
 
 ___
 
@@ -302,7 +302,7 @@ Defined in: [client/pages/Timesheet/context.ts:34](https://github.com/Puzzlepart
 
 **Returns:** *Element*
 
-Defined in: [client/pages/Admin/Admin.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Admin.tsx#L11)
+Defined in: [client/pages/Admin/Admin.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Admin.tsx#L12)
 
 ___
 
@@ -362,7 +362,7 @@ ___
 
 ### currentMonthQuery
 
-▸ **currentMonthQuery**<T\>(`t`: TFunction, `query?`: *any*): T
+▸ **currentMonthQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
 Returns query properties for preset
 **CURRENT_MONTH**
@@ -370,12 +370,6 @@ Returns query properties for preset
 **`remarks`** Made as generic so it can also be used by
 `<UserReports />` which are using `IChoiceGroupOption`
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
-
 #### Parameters:
 
 Name | Type | Description |
@@ -383,15 +377,15 @@ Name | Type | Description |
 `t` | TFunction | Translate function   |
 `query` | *any* | GraphQL query    |
 
-**Returns:** T
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L54)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:57](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L57)
 
 ___
 
 ### currentYearQuery
 
-▸ **currentYearQuery**<T\>(`t`: TFunction, `query?`: *any*): T
+▸ **currentYearQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
 Returns query properties for preset
 **CURRENT_YEAR**
@@ -399,12 +393,6 @@ Returns query properties for preset
 **`remarks`** Made as generic so it can also be used by
 `<UserReports />` which are using `IChoiceGroupOption`
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
-
 #### Parameters:
 
 Name | Type | Description |
@@ -412,15 +400,15 @@ Name | Type | Description |
 `t` | TFunction | Translate function   |
 `query` | *any* | GraphQL query    |
 
-**Returns:** T
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:107](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L107)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:114](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L114)
 
 ___
 
 ### forecastQuery
 
-▸ **forecastQuery**<T\>(`t`: TFunction, `query?`: *any*): T
+▸ **forecastQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
 Returns query properties for preset
 **FORECAST**
@@ -428,12 +416,6 @@ Returns query properties for preset
 **`remarks`** Made as generic so it can also be used by
 `<UserReports />` which are using `IChoiceGroupOption`
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
-
 #### Parameters:
 
 Name | Type | Description |
@@ -441,15 +423,15 @@ Name | Type | Description |
 `t` | TFunction | Translate function   |
 `query` | *any* | GraphQL query    |
 
-**Returns:** T
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:133](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L133)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:142](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L142)
 
 ___
 
 ### lastMonthQuery
 
-▸ **lastMonthQuery**<T\>(`t`: TFunction, `query?`: *any*): T
+▸ **lastMonthQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
 Returns query properties for preset
 **LAST_MONTH**
@@ -457,12 +439,6 @@ Returns query properties for preset
 **`remarks`** Made as generic so it can also be used by
 `<UserReports />` which are using `IChoiceGroupOption`
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
-
 #### Parameters:
 
 Name | Type | Description |
@@ -470,27 +446,21 @@ Name | Type | Description |
 `t` | TFunction | Translate function   |
 `query` | *any* | GraphQL query    |
 
-**Returns:** T
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L28)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L29)
 
 ___
 
 ### lastYearQuery
 
-▸ **lastYearQuery**<T\>(`t`: TFunction, `query?`: *any*): T
+▸ **lastYearQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
 Returns query properties for preset
 **LAST_YEAR**
 
 **`remarks`** Made as generic so it can also be used by
 `<UserReports />` which are using `IChoiceGroupOption`
-
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
 
 #### Parameters:
 
@@ -499,28 +469,28 @@ Name | Type | Description |
 `t` | TFunction | Translate   |
 `query` | *any* | GraphQL query    |
 
-**Returns:** T
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L80)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L85)
 
 ___
 
 ### summaryQuery
 
-▸ **summaryQuery**<T\>(): T
+▸ **summaryQuery**(`t`: TFunction): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
 Returns query properties for
 Summary view
 
-#### Type parameters:
+#### Parameters:
 
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
 
-**Returns:** T
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:152](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L152)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:163](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L163)
 
 ___
 
@@ -532,7 +502,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:177](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L177)
+Defined in: [client/pages/Reports/hooks/useQueries.tsx:188](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueries.tsx#L188)
 
 ___
 
@@ -578,12 +548,11 @@ Name | Type |
 `dispatch` | *Dispatch*<AnyAction\> |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
 `history` | *History*<unknown\> |
-`params` | [*IReportsParameters*](../interfaces/pages.ireportsparameters.md) |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `t` | TFunction |
 
-Defined in: [client/pages/Reports/hooks/useReports.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L26)
+Defined in: [client/pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
 
 ___
 

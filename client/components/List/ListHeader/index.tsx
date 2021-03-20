@@ -1,11 +1,13 @@
 import {
   CommandBar,
   ICommandBarProps,
+  IContextualMenuItem,
   SearchBox,
   Sticky,
   StickyPositionType
 } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'
 import { EXECUTE_SEARCH } from '../reducer'
 import styles from './ListHeader.module.scss'
@@ -14,17 +16,20 @@ import { IListHeaderProps } from './types'
 export const ListHeader: FunctionComponent<IListHeaderProps> = (
   props: IListHeaderProps
 ) => {
+  const root = useRef(null)
   const timeout = useRef(null)
 
-  const searchBox = useMemo(() => {
+  const searchBoxItem = useMemo(() => {
     if (!props.searchBox) return null
     return {
       key: 'SEARCH_BOX',
       onRender: () => (
         <SearchBox
           {...props.searchBox}
+          styles={{
+            root: { width: isMobile ? root?.current?.clientWidth : 500 }
+          }}
           value={props.state.searchTerm}
-          className={styles.searchBox}
           onChange={(_event, searchTerm) => {
             clearTimeout(timeout.current)
             timeout.current = setTimeout(() => {
@@ -35,12 +40,12 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
           }}
         />
       )
-    }
+    } as IContextualMenuItem
   }, [props])
 
   const commandBarProps: ICommandBarProps = {
     ...(props.commandBar || {}),
-    items: [searchBox, ...(props.commandBar?.items || [])].filter(
+    items: [searchBoxItem, ...(props.commandBar?.items || [])].filter(
       (item) => item
     ),
     farItems: props.commandBar?.farItems || []
@@ -54,7 +59,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
 
   return (
     <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
-      <div className={styles.root}>
+      <div className={styles.root} ref={root}>
         <CommandBar
           {...commandBarProps}
           hidden={

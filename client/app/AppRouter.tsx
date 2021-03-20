@@ -21,28 +21,28 @@ import { Navigation } from './Navigation'
 
 export const AppRouter: FunctionComponent = () => {
   const { pages } = usePages()
+  let className = styles.root
+  if (isMobile) className += ` ${styles.mobile}`
   return (
     <Router>
-      <div className={styles.root}>
+      <div className={className}>
         <Navigation />
-        <div className={styles.container}>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Switch>
-              {pages.map((page, index) => (
-                <Route key={index} path={page.path}>
-                  {page.hidden ? (
-                    <Redirect to='/' />
-                  ) : (
-                    <>
-                      {isMobile && <MobileHeader text={page.text} />}
-                      {page.component}
-                    </>
-                  )}
-                </Route>
-              ))}
-            </Switch>
-          </ErrorBoundary>
-        </div>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Switch>
+            {pages.map((page, index) => (
+              <Route key={index} path={page.path}>
+                {page.hidden ? (
+                  <Redirect to='/' />
+                ) : (
+                  <>
+                    {isMobile && <MobileHeader text={page.text} />}
+                    <div className={styles.container}>{page.component}</div>
+                  </>
+                )}
+              </Route>
+            ))}
+          </Switch>
+        </ErrorBoundary>
       </div>
     </Router>
   )

@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *IContextualMenuItem*
+* *IPivotItemProps*
 
   ↳ **IReportsQuery**
 

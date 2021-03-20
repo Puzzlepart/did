@@ -180,14 +180,14 @@ ___
 
 ### FlexiblePivot
 
-• `Const` **FlexiblePivot**: *FunctionComponent*<IPivotProps\>
+• `Const` **FlexiblePivot**: *FunctionComponent*<IFlexiblePivotProps\>
 
 Flexible `<Pivot >` component
 
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: [client/components/FlexiblePivot/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L14)
+Defined in: [client/components/FlexiblePivot/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L17)
 
 ___
 

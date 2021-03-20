@@ -1,6 +1,7 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { FlexiblePivot, PivotItem } from 'components/FlexiblePivot'
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
 import { useSections } from './useSections'
@@ -10,17 +11,19 @@ import { useSections } from './useSections'
  */
 export const Admin = () => {
   const sections = useSections()
-  const { view } = useParams<{ view: string }>()
+  const params = useParams<{ view: string }>()
+  const [view, setView] = useState(params.view || 'users')
   const history = useHistory()
-
-  const onPivotClick = ({ props }: PivotItem) =>
-    history.push(`/admin/${props.itemKey}`)
 
   return (
     <FlexiblePivot
       className={styles.root}
-      selectedKey={view || 'users'}
-      onLinkClick={onPivotClick}>
+      fixedLinkWidth={true}
+      onLinkClick={({ props }) => {
+        setView(props.itemKey)
+        history.push(`/admin/${props.itemKey}`)
+      }}
+      selectedKey={view}>
       {sections.map(
         (section) =>
           !section.hidden && (

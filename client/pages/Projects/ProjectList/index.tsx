@@ -2,6 +2,7 @@
 import { List } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { isMobile } from 'react-device-detect'
 import { contains, filter, isEmpty } from 'underscore'
 import columns from './columns'
 import { IProjectListProps } from './types'
@@ -32,15 +33,17 @@ export const ProjectList: FunctionComponent<IProjectListProps> = (
           {
             key: 'TOGGLE_INACTIVE',
             onRender: () => (
-              <Checkbox
-                disabled={isEmpty(
-                  filter(props.items, (index) => index.inactive)
-                )}
-                styles={{ root: { margin: '6px 0 0 8px' } }}
-                checked={showInactive}
-                label={t('common.toggleInactiveText')}
-                onChange={(_event, checked) => setShowInactive(checked)}
-              />
+              <div hidden={isMobile}>
+                <Checkbox
+                  disabled={isEmpty(
+                    filter(props.items, (index) => index.inactive)
+                  )}
+                  styles={{ root: { margin: '6px 0 0 8px' } }}
+                  checked={showInactive}
+                  label={t('common.toggleInactiveText')}
+                  onChange={(_event, checked) => setShowInactive(checked)}
+                />
+              </div>
             )
           }
         ],

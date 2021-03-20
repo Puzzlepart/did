@@ -3,7 +3,7 @@ import { QueryResult } from '@apollo/client'
 import { createAction } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroupProps } from 'components/List/types'
-import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric-react'
 import { IReportsSavedFilter } from '../types'
 
 /**
@@ -56,7 +56,9 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
  *
  * @category Reports Actions
  */
-export const CHANGE_QUERY = createAction<{ key: string }>('FILTER_UPDATED')
+export const CHANGE_QUERY = createAction<{ props: IPivotItemProps }>(
+  'FILTER_UPDATED'
+)
 
 /**
  * A utility function to create an action creator for the given action type string.

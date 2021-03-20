@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
+import { FlexiblePivot } from 'components/FlexiblePivot'
 import { UserMessage } from 'components/UserMessage'
 import { usePermissions } from 'hooks'
-import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric-react'
+import { MessageBarType, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
@@ -21,7 +22,7 @@ export const Projects: FunctionComponent = () => {
 
   return (
     <ProjectsContext.Provider value={context}>
-      <Pivot
+      <FlexiblePivot
         selectedKey={state.view}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
@@ -70,7 +71,7 @@ export const Projects: FunctionComponent = () => {
             <ProjectForm />
           </PivotItem>
         )}
-      </Pivot>
+      </FlexiblePivot>
     </ProjectsContext.Provider>
   )
 }

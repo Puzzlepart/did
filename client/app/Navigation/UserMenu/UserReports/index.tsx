@@ -9,8 +9,8 @@ import { useUserReports } from './useUserReports'
 export const UserReports: FunctionComponent = () => {
   const { t } = useTranslation()
   const {
-    queryPreset,
-    setQueryPreset,
+    preset,
+    setPreset,
     queries,
     showPanel,
     togglePanel,
@@ -20,7 +20,7 @@ export const UserReports: FunctionComponent = () => {
 
   const { onExport } = useExcelExport({
     items: query?.data,
-    fileName: queryPreset?.exportFileName,
+    fileName: preset?.exportFileName,
     columns
   })
 
@@ -37,12 +37,12 @@ export const UserReports: FunctionComponent = () => {
         onDismiss={togglePanel}
         isLightDismiss={true}>
         <ChoiceGroup
-          defaultSelectedKey={queryPreset?.key}
-          onChange={setQueryPreset}
+          defaultSelectedKey={preset?.key}
+          onChange={setPreset}
           options={queries}
         />
         <UserMessage
-          hidden={!queryPreset || query.loading}
+          hidden={!preset || query.loading}
           containerStyle={{ marginTop: 15 }}
           iconName='ReminderTime'
           text={t('common.userReportSummary', query)}
@@ -52,7 +52,7 @@ export const UserReports: FunctionComponent = () => {
           styles={{ root: { marginTop: 20, width: '100%' } }}
           iconProps={{ iconName: 'ExcelDocument' }}
           onClick={onExport}
-          disabled={!queryPreset || query.loading}
+          disabled={!preset || query.loading}
         />
       </Panel>
     </>

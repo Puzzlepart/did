@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
 import { IListGroupProps } from 'components/List/types'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric-react'
 import { Project, TimesheetPeriodObject, User } from 'types'
 
 /**
  * @category Reports
  */
-export interface IReportsQuery extends IContextualMenuItem {
+export interface IReportsQuery extends IPivotItemProps {
   /**
    * GraphQL query
    */

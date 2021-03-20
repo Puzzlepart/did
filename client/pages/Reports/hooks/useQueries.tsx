@@ -3,15 +3,16 @@
 import { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { useMemo } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { capitalize } from 'underscore.string'
-import { IReportsQuery } from '../../types'
-import report_current_month from './report-current-month.gql'
-import report_current_year from './report-current-year.gql'
-import report_forecast from './report-forecast.gql'
-import report_last_month from './report-last-month.gql'
-import report_last_year from './report-last-year.gql'
-import report_summary from './report-summary.gql'
+import { IReportsQuery } from '../types'
+import report_current_month from './queries/report-current-month.gql'
+import report_current_year from './queries/report-current-year.gql'
+import report_forecast from './queries/report-forecast.gql'
+import report_last_month from './queries/report-last-month.gql'
+import report_last_year from './queries/report-last-year.gql'
+import report_summary from './queries/report-summary.gql'
 
 /**
  * Returns query properties for preset
@@ -25,18 +26,20 @@ import report_summary from './report-summary.gql'
  *
  * @category Reports
  */
-export function lastMonthQuery<T = IReportsQuery>(
+export function lastMonthQuery(
   t: TFunction,
   query = report_last_month
-): T {
-  const object = new DateObject().add('-1month').toObject()
-  return ({
-    key: 'last_month',
-    text: t('common.exportTypeLastMonth', object),
-    iconName: 'CalendarDay',
+): IReportsQuery {
+  const { monthName } = new DateObject().add('-1month').toObject()
+  return {
+    itemKey: 'last_month',
+    headerText: t('common.exportTypeLastMonth', {
+      monthName: isBrowser ? `(${monthName})` : ''
+    }),
+    itemIcon: 'CalendarDay',
     query,
-    exportFileName: `TimeEntries-${capitalize(object.monthName)}-{0}.xlsx`
-  } as unknown) as T
+    exportFileName: `TimeEntries-${capitalize(monthName)}-{0}.xlsx`
+  } as IReportsQuery
 }
 
 /**
@@ -51,18 +54,20 @@ export function lastMonthQuery<T = IReportsQuery>(
  *
  * @category Reports
  */
-export function currentMonthQuery<T = IReportsQuery>(
+export function currentMonthQuery(
   t: TFunction,
   query = report_current_month
-): T {
-  const object = new DateObject().toObject()
-  return ({
-    key: 'current_month',
-    text: t('common.exportTypeCurrentMonth', object),
-    iconName: 'Calendar',
+): IReportsQuery {
+  const { monthName } = new DateObject().toObject()
+  return {
+    itemKey: 'current_month',
+    headerText: t('common.exportTypeCurrentMonth', {
+      monthName: isBrowser ? `(${monthName})` : ''
+    }),
+    itemIcon: 'Calendar',
     query,
-    exportFileName: `TimeEntries-${capitalize(object.monthName)}-{0}.xlsx`
-  } as unknown) as T
+    exportFileName: `TimeEntries-${capitalize(monthName)}-{0}.xlsx`
+  } as IReportsQuery
 }
 
 /**
@@ -77,19 +82,21 @@ export function currentMonthQuery<T = IReportsQuery>(
  *
  * @category Reports
  */
-export function lastYearQuery<T = IReportsQuery>(
+export function lastYearQuery(
   t: TFunction,
   query = report_last_year
-): T {
-  const { year } = new DateObject().toObject('year')
-  const object = { year: year - 1 }
-  return ({
-    key: 'last_year',
-    text: t('common.exportTypeLastYear', object),
-    iconName: 'Previous',
+): IReportsQuery {
+  const object = new DateObject().toObject('year')
+  const year = object.year - 1
+  return {
+    itemKey: 'last_year',
+    headerText: t('common.exportTypeLastYear', {
+      year: isBrowser ? `(${year})` : ''
+    }),
+    itemIcon: 'Previous',
     query,
-    exportFileName: `TimeEntries-${object.year}-{0}.xlsx`
-  } as unknown) as T
+    exportFileName: `TimeEntries-${year}-{0}.xlsx`
+  } as IReportsQuery
 }
 
 /**
@@ -104,18 +111,20 @@ export function lastYearQuery<T = IReportsQuery>(
  *
  * @category Reports
  */
-export function currentYearQuery<T = IReportsQuery>(
+export function currentYearQuery(
   t: TFunction,
   query = report_current_year
-): T {
-  const object = new DateObject().toObject('year')
-  return ({
-    key: 'current_year',
-    text: t('common.exportTypeCurrentYear', object),
-    iconName: 'CalendarReply',
+): IReportsQuery {
+  const { year } = new DateObject().toObject('year')
+  return {
+    itemKey: 'current_year',
+    headerText: t('common.exportTypeCurrentYear', {
+      year: isBrowser ? `(${year})` : ''
+    }),
+    itemIcon: 'CalendarReply',
     query,
-    exportFileName: `TimeEntries-${object.year}-{0}.xlsx`
-  } as unknown) as T
+    exportFileName: `TimeEntries-${year}-{0}.xlsx`
+  } as IReportsQuery
 }
 
 /**
@@ -130,26 +139,28 @@ export function currentYearQuery<T = IReportsQuery>(
  *
  * @category Reports
  */
-export function forecastQuery<T = IReportsQuery>(
+export function forecastQuery(
   t: TFunction,
   query = report_forecast
-): T {
-  return ({
-    key: 'forecast',
-    text: t('reports.forecast'),
-    iconName: 'TimeSheet',
+): IReportsQuery {
+  return {
+    itemKey: 'forecast',
+    headerText: t('reports.forecast'),
+    itemIcon: 'TimeSheet',
     query,
     exportFileName: 'Forecast-{0}.xlsx'
-  } as unknown) as T
+  } as IReportsQuery
 }
 
 /**
  * Returns query properties for
  * Summary view
  *
+ * @param t - Translate function
+ *
  * @category Reports
  */
-export function summaryQuery<T = IReportsQuery>(): T {
+export function summaryQuery(t: TFunction): IReportsQuery {
   const periods = []
   let now = new DateObject()
   for (let index = 0; index < 8; index++) {
@@ -157,16 +168,16 @@ export function summaryQuery<T = IReportsQuery>(): T {
     const { week, year } = now.toObject()
     periods.unshift([week, year])
   }
-  return ({
-    key: 'summary',
-    text: undefined,
+  return {
+    itemKey: null,
+    headerText: t('admin.summary'),
     periods,
     query: report_summary,
     variables: {
       userQuery: { hiddenFromReports: false },
       queries: periods.map(([week, year]) => ({ week, year }))
     }
-  } as unknown) as T
+  } as IReportsQuery
 }
 
 /**

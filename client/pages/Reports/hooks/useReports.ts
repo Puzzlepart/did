@@ -1,13 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
-import { IReportsParameters } from '../types'
-import { useQueries } from './queries'
 import { useColumns } from './useColumns'
 import { useFilters } from './useFilters'
+import { useQueries } from './useQueries'
 import { useReportsQuery } from './useReportsQuery'
 
 /**
@@ -25,11 +24,10 @@ import { useReportsQuery } from './useReportsQuery'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const parameters = useParams<IReportsParameters>()
   const history = useHistory()
   const queries = useQueries()
   const [state, dispatch] = useReportsReducer(queries)
-  useReportsQuery({ state, dispatch, variables: state.preset?.variables })
+  useReportsQuery({ state, dispatch })
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.key || ''}`)
@@ -49,7 +47,6 @@ export function useReports() {
   return {
     state,
     dispatch,
-    params: parameters,
     queries,
     history,
     columns,
