@@ -4,6 +4,10 @@
   "out": "server/.docs",
   "readme": "none",
   "excludeInternal": true,
+  "excludeExternals": true,
+  "externalPattern": [
+    "node_modules/**/*.{ts,tsx,js}"
+  ],
   "hideGenerator": true,
   "gitRevision": "dev",
   "categorizeByGroup": true,

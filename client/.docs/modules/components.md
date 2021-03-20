@@ -16,10 +16,6 @@ Reusable React Function components.
 - [WeekFilter](../classes/components.weekfilter.md)
 - [YearFilter](../classes/components.yearfilter.md)
 
-### Other Classes
-
-- [PivotItem](../classes/components.pivotitem.md)
-
 ### Autocomplete Interfaces
 
 - [IAutocompleteProps](../interfaces/components.iautocompleteprops.md)
@@ -462,7 +458,7 @@ Name | Type |
 `onSetSelected` | (`index`: *number*) => *any* |
 `ref` | *MutableRefObject*<HTMLDivElement\> |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
-`suggestions` | { `ariaLabel?`: *string* ; `data?`: *any* ; `disabled?`: *boolean* ; `hidden?`: *boolean* ; `iconName?`: *string* ; `id?`: *string* ; `index?`: *number* ; `isSelected`: *boolean* ; `itemType?`: SelectableOptionMenuItemType ; `key`: *string* \| *number* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `selected?`: *boolean* ; `tag?`: *any* ; `text`: *string* ; `title?`: *string* ; `type?`: *string*  }[] |
+`suggestions` | { `data?`: *any* ; `iconName?`: *string* ; `isSelected`: *boolean* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `tag?`: *any* ; `type?`: *string*  }[] |
 
 Defined in: [client/components/Autocomplete/useAutocomplete.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L15)
 

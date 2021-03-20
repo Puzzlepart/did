@@ -4,6 +4,10 @@
   "out": "client/.docs",
   "readme": "none",
   "excludeInternal": true,
+  "excludeExternals": true,
+  "externalPattern": [
+    "node_modules/**/*.{ts,tsx}"
+  ],
   "hideGenerator": true,
   "gitRevision": "dev",
   "tsconfig": "./client/tsconfig.json",
