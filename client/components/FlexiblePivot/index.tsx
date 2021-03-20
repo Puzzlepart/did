@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { IPivotProps, Pivot } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { useFlexiblePivotStyles } from './useFlexiblePivotStyles'
 
 /**
  * Flexible `<Pivot >` component
@@ -13,8 +14,9 @@ import React, { FunctionComponent } from 'react'
 export const FlexiblePivot: FunctionComponent<IPivotProps> = (
   props: IPivotProps
 ) => {
+  const styles = useFlexiblePivotStyles()
   return (
-    <Pivot {...props} styles={{ root: { display: 'flex', flexWrap: 'wrap' } }}>
+    <Pivot {...props} styles={styles}>
       {props.children}
     </Pivot>
   )
