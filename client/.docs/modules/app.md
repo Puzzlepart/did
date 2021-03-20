@@ -26,7 +26,7 @@ The App component
 
 • `Const` **MobileBreadcrumb**: *FunctionComponent*<IMobileBreadcrumbProps\>
 
-Defined in: [client/app/MobileBreadcrumb/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileBreadcrumb/index.tsx#L13)
+Defined in: [client/app/MobileBreadcrumb/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileBreadcrumb/index.tsx#L15)
 
 ___
 

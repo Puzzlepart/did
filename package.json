@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "watch": "node .tasks/watch.js",
+    "commit:changes": "node ./.tasks/commit-changes.js",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
     "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier '**/*.ts*' --write --loglevel silent",

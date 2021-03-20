@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { merge, Pivot } from 'office-ui-fabric-react'
+import { Pivot } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { IFlexiblePivotProps } from './types'
 import { useFlexiblePivot } from './useFlexiblePivot'
@@ -17,9 +17,12 @@ import { useFlexiblePivot } from './useFlexiblePivot'
 export const FlexiblePivot: FunctionComponent<IFlexiblePivotProps> = (
   props: IFlexiblePivotProps
 ) => {
-  const props_ = useFlexiblePivot(props)
-
-  return <Pivot {...merge(props, props_)}>{props.children}</Pivot>
+  const { styles, ref } = useFlexiblePivot(props)
+  return (
+    <Pivot {...props} ref={ref} styles={styles}>
+      {props.children}
+    </Pivot>
+  )
 }
 
 export { PivotItem } from 'office-ui-fabric-react'
