@@ -8,10 +8,6 @@ All are built using React Function components and Hooks.
 
 ## Table of contents
 
-### References
-
-- [useQueries](pages.md#usequeries)
-
 ### Timesheet Classes
 
 - [TimesheetPeriod](../classes/pages.timesheetperiod.md)
@@ -89,6 +85,7 @@ All are built using React Function components and Hooks.
 - [lastMonthQuery](pages.md#lastmonthquery)
 - [lastYearQuery](pages.md#lastyearquery)
 - [summaryQuery](pages.md#summaryquery)
+- [useQueries](pages.md#usequeries)
 - [useReportsQueries](pages.md#usereportsqueries)
 
 ### Reports Hooks Functions
@@ -103,12 +100,6 @@ All are built using React Function components and Hooks.
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
-
-## References
-
-### useQueries
-
-Renames and exports: [useReportsQueries](pages.md#usereportsqueries)
 
 ## Timesheet Type aliases
 
@@ -358,7 +349,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:57
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L57)
 
 ___
 
@@ -381,7 +372,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:114
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:114](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L114)
 
 ___
 
@@ -404,7 +395,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:142
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:142](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L142)
 
 ___
 
@@ -427,7 +418,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:29
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L29)
 
 ___
 
@@ -450,7 +441,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:85
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L85)
 
 ___
 
@@ -469,7 +460,19 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:163
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:163](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L163)
+
+___
+
+### useQueries
+
+▸ **useQueries**(): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
+
+Use queries
+
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
+
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:189](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L189)
 
 ___
 
@@ -481,7 +484,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: pages/Reports/hooks/useReportsQueries.ts:189
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:189](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L189)
 
 ___
 

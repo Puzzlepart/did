@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
-import { Breadcrumb } from 'office-ui-fabric-react'
+import { Breadcrumb, IBreadcrumbItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
@@ -16,7 +16,7 @@ export const MobileBreadcrumb: FunctionComponent<IMobileBreadcrumbProps> = (
 ) => {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
-  const items = [
+  const items: IBreadcrumbItem[] = [
     {
       key: 'current',
       text: props.text,

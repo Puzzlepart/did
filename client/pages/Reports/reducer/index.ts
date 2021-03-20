@@ -27,7 +27,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         if (url.query) {
           state.preset = find(queries, (q) => q.itemKey === url.query) as any
         }
-        state.savedFilters = get(app.user.configuration, 'reports.filters', {
+        state.savedFilters = get(app, 'user.configuration.reports.filters', {
           default: {}
         })
       })
