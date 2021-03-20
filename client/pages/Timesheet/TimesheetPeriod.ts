@@ -24,7 +24,7 @@ export class TimesheetPeriod {
   public readonly isForecasted: boolean
   public readonly isForecast: boolean
   public readonly forecastedHours: number
-  private readonly month: string
+  public readonly month: string
   private events: EventObject[] = []
   private _uiIgnoredEvents: string[] = []
   private _uiMatchedEvents: Record<string, Project> = {}

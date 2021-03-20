@@ -2,13 +2,8 @@
   margin-top: 0;
   line-height: 44px;
 
-  &.mobile {
-    > i {
-      margin: 0 4px 0 8px;
-    }
-    > span {
-      vertical-align: top;
-    }
+  &.mobile i {
+    margin: 0 4px 0 8px;
   }
 
   &:hover {

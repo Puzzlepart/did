@@ -1,16 +1,17 @@
 /* eslint-disable tsdoc/syntax */
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { IProjectListProps } from './types'
+import { useColumns } from './useColumns'
 
 /**
  * Component logic hook for `<ProjecList />`
  *
  * @category Projects
  */
-export function useProjectList({ props }) {
-  const { t } = useTranslation()
+export function useProjectList(props: IProjectListProps) {
   const [items, setItems] = useState([...(props.items || [])])
   const [showInactive, setShowInactive] = useState(false)
+  const columns = useColumns(props)
 
   useEffect(
     () =>
@@ -22,8 +23,8 @@ export function useProjectList({ props }) {
 
   return {
     items,
+    columns,
     showInactive,
-    setShowInactive,
-    t
+    setShowInactive
   }
 }

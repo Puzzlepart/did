@@ -21,7 +21,6 @@ export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
     <>
       <MobileView viewClassName={`${styles.root} ${styles.mobile}`}>
         <Icon iconName='Calendar' onClick={onClick} />
-        <span>{selectedPeriod?.week}</span>
       </MobileView>
       <BrowserView>
         <TextField

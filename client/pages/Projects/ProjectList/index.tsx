@@ -3,8 +3,8 @@ import { List } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
-import { contains, filter, isEmpty } from 'underscore'
-import columns from './columns'
+import { useTranslation } from 'react-i18next'
+import { filter, isEmpty } from 'underscore'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
 
@@ -17,15 +17,15 @@ import { useProjectList } from './useProjectList'
 export const ProjectList: FunctionComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
-  const { items, showInactive, setShowInactive, t } = useProjectList({ props })
-
+  const { t } = useTranslation()
+  const { items, columns, showInactive, setShowInactive } = useProjectList(
+    props
+  )
   return (
     <List
       {...props}
       items={items}
-      columns={columns(props, t).filter(
-        (col) => !contains(props.hideColumns || [], col.key)
-      )}
+      columns={columns}
       groups={props.groups}
       selectionProps={props.selectionProps}
       commandBar={{

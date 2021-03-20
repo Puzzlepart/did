@@ -4,7 +4,6 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
-import { columns } from './columns'
 import { useCustomerList } from './useCustomerList'
 
 export const CustomerList = () => {
@@ -13,6 +12,7 @@ export const CustomerList = () => {
     state,
     loading,
     items,
+    columns,
     showInactive,
     setShowInactive,
     setSelectedCustomer
@@ -28,7 +28,7 @@ export const CustomerList = () => {
       height={state.selected && 400}
       enableShimmer={loading}
       items={items}
-      columns={columns(t)}
+      columns={columns}
       commandBar={{
         items: [
           {

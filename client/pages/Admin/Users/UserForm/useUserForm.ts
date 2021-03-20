@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import { ITextFieldProps } from 'office-ui-fabric-react'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import $addOrUpdateUser from './addOrUpdateUser.gql'
 
 export function useUserForm({ props }) {
   const { t } = useTranslation()
-  const { subscription } = useContext(AppContext)
+  const { subscription } = useAppContext()
   const { activeDirectoryUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>({})
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)

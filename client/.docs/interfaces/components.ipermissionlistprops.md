@@ -16,4 +16,4 @@
 
 • **permissionIds**: *string*[]
 
-Defined in: [client/components/PermissionList/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/types.tsx#L7)
+Defined in: [components/PermissionList/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/types.tsx#L7)

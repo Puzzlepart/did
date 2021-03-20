@@ -1,6 +1,6 @@
-import { IPivotItemProps } from 'office-ui-fabric-react'
 import { Subscription } from 'types'
 import { ContextUser } from './ContextUser'
+import { IMobileBreadcrumbItem } from './MobileBreadcrumb'
 
 export interface IAppProps {
   /**
@@ -20,5 +20,5 @@ export interface IAppProps {
 }
 
 export interface IAppState {
-  nav?: IPivotItemProps
+  nav?: Record<string, IMobileBreadcrumbItem>
 }

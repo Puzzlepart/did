@@ -169,8 +169,9 @@ export function summaryQuery(t: TFunction): IReportsQuery {
     periods.unshift([week, year])
   }
   return {
-    itemKey: null,
+    itemKey: 'summary',
     headerText: t('admin.summary'),
+    hidden: true,
     periods,
     query: report_summary,
     variables: {
@@ -185,7 +186,7 @@ export function summaryQuery(t: TFunction): IReportsQuery {
  *
  * @category Reports
  */
-export function useQueries(): IReportsQuery[] {
+export function useReportsQueries(): IReportsQuery[] {
   const { t } = useTranslation()
   return useMemo(
     () =>
@@ -203,10 +204,4 @@ export function useQueries(): IReportsQuery[] {
   )
 }
 
-export {
-  report_current_month,
-  report_last_month,
-  report_current_year,
-  report_last_year,
-  report_forecast
-}
+export { report_current_month as default_query }

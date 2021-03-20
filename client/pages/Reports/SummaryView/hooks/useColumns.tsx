@@ -4,9 +4,11 @@ import { useUserListColumn } from 'components/UserColumn'
 import $date from 'DateUtils'
 import {
   IColumn,
-  IDetailsColumnRenderTooltipProps
+  IDetailsColumnRenderTooltipProps,
+  PersonaSize
 } from 'office-ui-fabric-react'
 import React, { useContext, useMemo } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
 import { ReportsContext } from '../../context'
@@ -20,7 +22,10 @@ export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
   const { state } = useContext(ReportsContext)
   const periods: any[] = state.preset?.periods || []
-  const userColumn = useUserListColumn()
+  const userColumn = useUserListColumn({
+    size: PersonaSize.size24,
+    hidePersonaDetails: isMobile
+  })
   return useMemo(() => {
     const columns: IListColumn[] = [userColumn]
     columns.push(
@@ -45,7 +50,8 @@ export function useColumns(): IListColumn[] {
           key,
           fieldName: key,
           name,
-          minWidth: 100,
+          minWidth: 60,
+          maxWidth: 60,
           data,
           onRender: (item: any, _index: number, column: IColumn) => (
             <WeekColumn user={item.user} periods={item[column.fieldName]} />

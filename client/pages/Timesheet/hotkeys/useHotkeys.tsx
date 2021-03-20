@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ITimesheetContext } from '../types'
 import { getHotkeys } from './config'
 
@@ -12,6 +13,7 @@ import { getHotkeys } from './config'
  * @category Timesheet Hooks
  */
 export function useHotkeys(context: ITimesheetContext) {
-  const hotkeysProps = useMemo(() => getHotkeys(context), [])
+  const { t } = useTranslation()
+  const hotkeysProps = useMemo(() => getHotkeys(context.dispatch, t), [])
   return { hotkeysProps }
 }

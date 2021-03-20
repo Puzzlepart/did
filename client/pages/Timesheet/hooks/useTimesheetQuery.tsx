@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
+import { ApolloQueryResult, useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { AppContext } from 'AppContext'
-import { Dispatch, useContext, useLayoutEffect } from 'react'
+import { useAppContext } from 'AppContext'
+import { Dispatch, useLayoutEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'
 import { ITimesheetState } from '../types'
 import $timesheet from './timesheet.gql'
@@ -18,8 +18,8 @@ import $timesheet from './timesheet.gql'
 export function useTimesheetQuery(
   state: ITimesheetState,
   dispatch: Dispatch<AnyAction>
-) {
-  const { user } = useContext(AppContext)
+): () => Promise<ApolloQueryResult<any>> {
+  const { user } = useAppContext()
   const query = useQuery($timesheet, {
     skip: !state.scope.query(),
     variables: {
@@ -37,5 +37,5 @@ export function useTimesheetQuery(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
-  return { refetch: query.refetch }
+  return query.refetch
 }

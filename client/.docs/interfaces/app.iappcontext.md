@@ -29,7 +29,7 @@
 
 Auth providers
 
-Defined in: [client/app/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L19)
+Defined in: [app/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L19)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 Application dispatcher
 
-Defined in: [client/app/context.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L21)
+Defined in: [app/context.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L21)
 
 ___
 
@@ -56,7 +56,7 @@ Name | Type |
 `notifications` | *Notification*[] |
 `refetch` | (`delay?`: *number*) => *void* |
 
-Defined in: [client/app/context.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L11)
+Defined in: [app/context.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 Application state
 
-Defined in: [client/app/context.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L16)
+Defined in: [app/context.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L16)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 Subscription
 
-Defined in: [client/app/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L14)
+Defined in: [app/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L14)
 
 ___
 
@@ -86,4 +86,4 @@ ___
 
 The currently logged in user
 
-Defined in: [client/app/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L9)
+Defined in: [app/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L9)

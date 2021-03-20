@@ -21,7 +21,7 @@
 
 Periods
 
-Defined in: [client/pages/Reports/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L60)
+Defined in: [pages/Reports/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L60)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 Projects
 
-Defined in: [client/pages/Reports/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L65)
+Defined in: [pages/Reports/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L65)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 Time entries
 
-Defined in: [client/pages/Reports/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L50)
+Defined in: [pages/Reports/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L50)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 Users
 
-Defined in: [client/pages/Reports/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L55)
+Defined in: [pages/Reports/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L55)

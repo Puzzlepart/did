@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import { Callout, Icon, Persona, PersonaSize } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext, useRef, useState } from 'react'
+import React, { FunctionComponent, useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ import { UserSettings } from './UserSettings'
  */
 export const UserMenu: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { user, subscription } = useContext(AppContext)
+  const { user, subscription } = useAppContext()
   const [menuHidden, setMenuHidden] = useState(true)
   const target = useRef(null)
 

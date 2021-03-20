@@ -40,7 +40,7 @@ Name | Type |
 
 **Returns:** [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
 
-Defined in: [client/hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
+Defined in: [hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
 
 ___
 
@@ -68,7 +68,7 @@ Name | Type |
 
 **Returns:** [T, (`value`: *any*) => *void*, () => *void*]
 
-Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
+Defined in: [hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
 
 ___
 
@@ -90,7 +90,7 @@ Name | Type |
 :------ | :------ |
 `onExport` | () => *Promise*<void\> |
 
-Defined in: [client/hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
+Defined in: [hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
 
 ___
 
@@ -114,7 +114,7 @@ Name | Type |
 `notifications` | Notification[] |
 `refetch` | (`delay?`: *number*) => *void* |
 
-Defined in: [client/hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)
+Defined in: [hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)
 
 ___
 
@@ -142,7 +142,7 @@ Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [client/hooks/user/usePermissions.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L21)
+Defined in: [hooks/user/usePermissions.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L21)
 
 ___
 
@@ -162,7 +162,7 @@ Name | Type | Default value |
 
 **Returns:** [*boolean*, DispatchWithoutAction]
 
-Defined in: [client/hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
+Defined in: [hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
 
 ___
 
@@ -194,4 +194,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *void*
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L22)
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L22)

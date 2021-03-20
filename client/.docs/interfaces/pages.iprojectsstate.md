@@ -21,7 +21,7 @@
 
 • `Optional` **detailsTab**: *string*
 
-Defined in: [client/pages/Projects/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L24)
+Defined in: [pages/Projects/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L24)
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • `Optional` **error**: *ApolloError*
 
-Defined in: [client/pages/Projects/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L28)
+Defined in: [pages/Projects/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L28)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • `Optional` **outlookCategories**: *OutlookCategory*[]
 
-Defined in: [client/pages/Projects/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L27)
+Defined in: [pages/Projects/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L27)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • `Optional` **projects**: *Project*[]
 
-Defined in: [client/pages/Projects/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L26)
+Defined in: [pages/Projects/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L26)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 • `Optional` **selected**: *Project*
 
-Defined in: [client/pages/Projects/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L25)
+Defined in: [pages/Projects/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L25)
 
 ___
 
@@ -61,4 +61,4 @@ ___
 
 • `Optional` **view**: ProjectsView
 
-Defined in: [client/pages/Projects/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L23)
+Defined in: [pages/Projects/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L23)

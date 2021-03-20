@@ -5,7 +5,7 @@ import {
   currentYearQuery,
   lastMonthQuery,
   lastYearQuery
-} from 'pages/Reports/hooks/useQueries'
+} from 'pages/Reports/hooks/useReportsQueries'
 import { useTranslation } from 'react-i18next'
 import user_report_current_month from './user-report-current-month.gql'
 import user_report_current_year from './user-report-current-year.gql'

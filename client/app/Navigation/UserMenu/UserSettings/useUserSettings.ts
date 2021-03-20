@@ -1,13 +1,13 @@
 import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSettingsConfiguration } from './useSettingsConfiguration'
 
 export function useUserSettings() {
   const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const { user } = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 

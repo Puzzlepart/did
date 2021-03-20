@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import { IFlexiblePivotProps } from 'components/FlexiblePivot/types'
 import { find, IPivotItemProps } from 'office-ui-fabric-react'
-import { useContext, useEffect, useRef } from 'react'
-import { UPDATE_NAV } from '../../app/reducer'
+import { useEffect, useRef } from 'react'
+import { UPDATE_BREADCRUMB } from '../../app/reducer'
 
 /**
  * Hook used by `<FlexiblePivot />` component to update the
@@ -19,7 +19,7 @@ import { UPDATE_NAV } from '../../app/reducer'
  */
 export function useMobileBreadcrumb(props: IFlexiblePivotProps) {
   const ref = useRef(null)
-  const { state, dispatch } = useContext(AppContext)
+  const { state, dispatch } = useAppContext()
   useEffect(() => {
     const items: any[] = props.items || ref?.current?.props?.children
     const current_ = find(items, (item) => {
@@ -28,7 +28,16 @@ export function useMobileBreadcrumb(props: IFlexiblePivotProps) {
     })
     const nav: IPivotItemProps = current_?.props || current_
     if (state.nav !== nav) {
-      dispatch(UPDATE_NAV({ nav }))
+      dispatch(
+        UPDATE_BREADCRUMB([
+          {
+            key: nav?.itemKey,
+            text: nav?.headerText,
+            level: 2
+          },
+          !nav && [2]
+        ])
+      )
     }
   }, [props.selectedKey, props.items])
   return ref

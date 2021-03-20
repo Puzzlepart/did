@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { AppContext } from 'AppContext'
-import { useContext, useState } from 'react'
+import { useAppContext } from 'AppContext'
+import { useState } from 'react'
 import { useBrowserStorage } from '../../../hooks'
 import { IUserNotificationsState, NotificationModel } from './types'
 
@@ -9,7 +9,7 @@ import { IUserNotificationsState, NotificationModel } from './types'
  */
 export const useUserNotifications = () => {
   const [state, dispatch] = useState<IUserNotificationsState>({})
-  const { notificationsQuery } = useContext(AppContext)
+  const { notificationsQuery } = useAppContext()
 
   const showPanel = () => dispatch({ ...state, showPanel: true })
   const dismissPanel = () => dispatch({ ...state, showPanel: false })

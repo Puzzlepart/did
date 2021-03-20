@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IListColumn } from 'components/List/types'
-import { PersonaSize } from 'office-ui-fabric-react'
+import { IPersonaProps } from 'office-ui-fabric-react'
 import React from 'react'
 import { UserColumn } from '.'
 
@@ -12,7 +12,7 @@ import { UserColumn } from '.'
  * on the item with key `user`
  */
 export function useUserListColumn(
-  size = PersonaSize.size24,
+  persona: IPersonaProps = {},
   props?: Partial<IListColumn>
 ): IListColumn {
   return {
@@ -21,6 +21,8 @@ export function useUserListColumn(
     fieldName: 'user',
     name: null,
     minWidth: 50,
-    onRender: (item) => <UserColumn user={item?.user || item} size={size} />
+    onRender: (item) => (
+      <UserColumn user={item?.user || item} persona={persona} />
+    )
   }
 }

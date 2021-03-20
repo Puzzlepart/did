@@ -1,11 +1,10 @@
-import { AppContext } from 'AppContext'
-import { useContext } from 'react'
+import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
 
 export function useAuthProviders() {
   const { t } = useTranslation()
-  const context = useContext(AppContext)
+  const context = useAppContext()
   const authProviders = {
     'azuread-openidconnect': {
       text: t('common.ms365signInText'),

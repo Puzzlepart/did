@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
-import { useContext, useMemo, useReducer } from 'react'
+import { useAppContext } from 'AppContext'
+import { useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { IReportsParameters, IReportsQuery } from '..'
@@ -15,7 +15,7 @@ import createReducer from '../reducer'
  */
 export function useReportsReducer(queries: IReportsQuery[]) {
   const { t } = useTranslation()
-  const app = useContext(AppContext)
+  const app = useAppContext()
   const url = useParams<IReportsParameters>()
   const reducer = useMemo(() => createReducer({ app, url, queries }), [
     app,

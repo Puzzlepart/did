@@ -1,40 +1,30 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useLayoutEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { useMemo } from 'react'
 import { useTimesheetReducer } from '../reducer'
-import { ITimesheetContext, ITimesheetParameters } from '../types'
+import { ITimesheetContext } from '../types'
 import { useSubmitActions } from './useSubmitActions'
+import { useTimesheetHistory } from './useTimesheetHistory'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
 /**
  * Hook for Timesheet
  *
- * * Get history using useHistory
- * * Get URL params using useParams
- * * Using reducer from /reducer
- * * Using useTimesheetQuery with timesheet.gql
- * * Layout effects for initialiing state and updating state
- *   when the query is reloaded
- * * Returns TimesheetContextProvider with Timesheet context
+ * * Reacts to state changes and updates history
+ * using `useTimesheetHistory`
+ * * Using `useTimesheetReducer` to handle state
+ * and dispatching actions
+ * * Using `useTimesheetQuery` with timesheet.gql
+ *
+ * @returns Timesheet context
  *
  * @category Timesheet Hooks
  */
 export function useTimesheet() {
-  const { t } = useTranslation()
-  const history = useHistory()
-  const url = useParams<ITimesheetParameters>()
-  const { state, dispatch } = useTimesheetReducer({ url, t })
+  const [state, dispatch] = useTimesheetReducer()
+  const refetch = useTimesheetQuery(state, dispatch)
 
-  const { refetch } = useTimesheetQuery(state, dispatch)
-
-  useLayoutEffect(() => {
-    if (!state.selectedPeriod) return
-    history.push(
-      ['/timesheet', state.selectedView, state.selectedPeriod.path].join('/')
-    )
-  }, [state.selectedView, state.selectedPeriod])
+  useTimesheetHistory(state)
 
   const { onSubmitPeriod, onUnsubmitPeriod } = useSubmitActions({
     state,
@@ -48,8 +38,7 @@ export function useTimesheet() {
       refetch,
       onSubmitPeriod,
       onUnsubmitPeriod,
-      dispatch,
-      t
+      dispatch
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [state]
@@ -59,7 +48,6 @@ export function useTimesheet() {
     dispatch,
     context,
     onSubmitPeriod,
-    onUnsubmitPeriod,
-    t
+    onUnsubmitPeriod
   }
 }

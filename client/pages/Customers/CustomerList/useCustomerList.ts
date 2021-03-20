@@ -2,11 +2,16 @@ import { useContext, useEffect, useState } from 'react'
 import { Customer } from 'types'
 import { CustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
+import { useColumns } from './useColumns'
 
+/**
+ * Component logic for `<CustomerList />`
+ */
 export const useCustomerList = () => {
   const { dispatch, state, loading } = useContext(CustomersContext)
   const [items, setItems] = useState([...state.customers])
   const [showInactive, setShowInactive] = useState(false)
+  const columns = useColumns()
 
   useEffect(
     () =>
@@ -16,10 +21,10 @@ export const useCustomerList = () => {
     [state.customers, showInactive]
   )
   return {
-    loading,
     state,
+    loading,
     items,
-    setItems,
+    columns,
     showInactive,
     setShowInactive,
     setSelectedCustomer: (customer: Customer) =>

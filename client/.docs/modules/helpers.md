@@ -38,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/helpers/index.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L19)
+Defined in: [helpers/index.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L19)
 
 ___
 
@@ -66,7 +66,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [client/helpers/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L36)
+Defined in: [helpers/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L36)
 
 ___
 
@@ -84,4 +84,4 @@ Name | Type |
 
 **Returns:** *string*[]
 
-Defined in: [client/helpers/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L45)
+Defined in: [helpers/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L45)

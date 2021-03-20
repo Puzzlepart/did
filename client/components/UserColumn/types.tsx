@@ -1,7 +1,7 @@
-import { PersonaSize } from 'office-ui-fabric-react'
+import { IPersonaProps } from 'office-ui-fabric-react'
 import { User } from 'types'
 
 export interface IUserColumnProps {
   user: Pick<User, 'displayName' | 'mail' | 'photo' | 'role'>
-  size?: PersonaSize
+  persona?: IPersonaProps
 }
