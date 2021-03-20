@@ -312,7 +312,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [client/pages/Admin/Labels/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Labels/index.tsx#L15)
+Defined in: [client/pages/Admin/Labels/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Labels/index.tsx#L10)
 
 ___
 

@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client'
 import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { IconPicker } from 'components/IconPicker'
@@ -9,44 +8,13 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { LabelInput } from 'types'
-import { omit } from 'underscore'
-import validator from 'validator'
-import $addOrUpdateLabel from './addOrUpdateLabel.gql'
+import React from 'react'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
+import { useLabelForm } from './useLabelForm'
 
 export const LabelForm = (props: ILabelFormProps) => {
-  const { t } = useTranslation()
-  const [model, setModel] = useState<LabelInput>(
-    props.label || {
-      name: '',
-      description: '',
-      color: '#F8E71C'
-    }
-  )
-  const [addOrUpdateLabel] = useMutation($addOrUpdateLabel)
-
-  /**
-   * On save label
-   */
-  const onSave = async () => {
-    await addOrUpdateLabel({
-      variables: {
-        label: omit(model, '__typename'),
-        update: !!props.label
-      }
-    })
-    props.onSave(model)
-  }
-
-  /**
-   * Checks if form is valid
-   */
-  const isFormValid = (): boolean =>
-    !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
+  const { model, setModel, isFormValid, onSave, t } = useLabelForm({ props })
 
   return (
     <Panel
@@ -54,8 +22,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       type={PanelType.smallFixedFar}
       className={styles.root}
       headerText={!!props.label ? t('admin.editLabel') : t('admin.addNewLabel')}
-      isLightDismiss={true}
-      isOpen={true}>
+      isLightDismiss={true}>
       <TextField
         className={styles.inputField}
         spellCheck={false}

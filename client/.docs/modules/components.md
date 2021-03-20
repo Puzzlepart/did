@@ -187,7 +187,7 @@ Flexible `<Pivot >` component
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: client/components/FlexiblePivot/index.tsx:13
+Defined in: [client/components/FlexiblePivot/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L13)
 
 ___
 
