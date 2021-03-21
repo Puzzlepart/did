@@ -2,10 +2,10 @@
 require('dotenv').config()
 const tryRequire = require('try-require')
 const path = require('path')
-const { name, version } = require('./package.json')
-const CompressionPlugin = require('compression-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DefinePlugin = require('webpack').DefinePlugin
+const { name, version } = require('./package.json')
 const debug = require('debug')('webpack')
 
 /** CONSTANTS */
@@ -34,8 +34,10 @@ const config = {
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: 'all'
     },
+    minimize: false,
+    minimizer: []
   },
   module: {
     rules: [
@@ -109,13 +111,17 @@ const config = {
       'process.env.LOG_LEVEL': JSON.stringify(process.env.CLIENT_LOG_LEVEL || 'SILENT')
     })
   ],
+  stats: {
+    warnings: false,
+    modules: false,
+    assets: false
+  }
 }
 
 if (IS_DEVELOPMENT) {
   const { BundleAnalyzerPlugin } = tryRequire('webpack-bundle-analyzer')
   const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
   const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
-  config.stats = 'normal'
   config.watch = true
   config.watchOptions = { aggregateTimeout: 500 }
   config.plugins.push(
@@ -129,8 +135,21 @@ if (IS_DEVELOPMENT) {
     new BundleAnalyzerPlugin({ analyzerMode: process.env.BUNDLE_ANALYZER_MODE })
   )
 } else {
-  config.stats = 'errors-only'
-  config.plugins.push(new CompressionPlugin())
+  config.optimization.minimize = true
+  config.optimization.minimizer.push(new TerserPlugin({
+    parallel: true,
+    extractComments: false,
+    terserOptions: {
+      mangle: true,
+      keep_classnames: false,
+      keep_fnames: true,
+      ie8: false,
+      safari10: false,
+      format: {
+        comments: false,
+      }
+    },
+  }))
 }
 
 module.exports = config
