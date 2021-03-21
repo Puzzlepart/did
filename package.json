@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "node .tasks/watch.js",
     "commit:changes": "node ./.tasks/commit-changes.js",
-    "eslint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
+    "eslint": "eslint --ext .ts,.tsx ./client ./server --color",
     "eslint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier '**/*.ts*' --write --loglevel silent",
     "start": "node ./dist/server/index.js",
