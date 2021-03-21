@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { FlexiblePivotItem } from 'components'
 import { IPivotItemProps } from 'office-ui-fabric-react'
 import React from 'react'
 import { PermissionScope } from 'security'
@@ -9,7 +10,7 @@ import { PermissionScope } from 'security'
  * @category Pages
  */
 export interface IPageSectionComponent extends IPivotItemProps {
-  component: JSX.Element
+  component: FlexiblePivotItem
   permission?: PermissionScope
 }
 

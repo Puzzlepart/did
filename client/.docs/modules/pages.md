@@ -127,9 +127,9 @@ ___
 
 ### Customers
 
-• `Const` **Customers**: FunctionComponent
+• `Const` **Customers**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<ICustomerFormProps\>
 
-Defined in: [pages/Customers/Customers.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L19)
+Defined in: [pages/Customers/Customers.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L20)
 
 ___
 
@@ -213,9 +213,9 @@ ___
 
 ### ProjectForm
 
-• `Const` **ProjectForm**: *FunctionComponent*<IProjectFormProps\>
+• `Const` **ProjectForm**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<IProjectFormProps\>
 
-Defined in: [pages/Projects/ProjectForm/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/index.tsx#L22)
+Defined in: [pages/Projects/ProjectForm/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/index.tsx#L23)
 
 ___
 

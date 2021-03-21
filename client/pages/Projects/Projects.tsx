@@ -63,13 +63,11 @@ export const Projects: FunctionComponent = () => {
           {state.selected && <ProjectDetails />}
         </PivotItem>
         {hasPermission(PermissionScope.MANAGE_PROJECTS) && (
-          <PivotItem
-            itemID='new'
+          <ProjectForm
             itemKey='new'
             headerText={t('projects.createNewText')}
-            itemIcon='AddTo'>
-            <ProjectForm />
-          </PivotItem>
+            itemIcon='AddTo'
+          />
         )}
       </FlexiblePivot>
     </ProjectsContext.Provider>

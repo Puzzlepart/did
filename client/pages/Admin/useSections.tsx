@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { usePermissions } from 'hooks'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { IPageSectionComponent } from '../types'
@@ -24,33 +24,33 @@ export function useSections() {
         headerText: t('admin.users'),
         itemIcon: 'FabricUserFolder',
         hidden: !hasPermission(PermissionScope.MANAGE_USERS),
-        component: <Users />
+        component: Users
       },
       {
         itemKey: 'labels',
         headerText: t('admin.labels'),
         itemIcon: 'Label',
-        component: <Labels />
+        component: Labels
       },
       {
         itemKey: 'rolesPermissions',
         headerText: t('admin.rolesPermissions'),
         itemIcon: 'SecurityGroup',
         hidden: !hasPermission(PermissionScope.MANAGE_ROLESPERMISSIONS),
-        component: <Roles />
+        component: Roles
       },
       {
         itemKey: 'subscription',
         headerText: t('admin.subscriptionSettings'),
         itemIcon: 'Subscribe',
         hidden: !hasPermission(PermissionScope.MANAGE_SUBSCRIPTION),
-        component: <SubscriptionSettings />
+        component: SubscriptionSettings
       },
       {
         itemKey: 'apiTokens',
         headerText: t('admin.apiTokens.headerText'),
         itemIcon: 'AzureAPIManagement',
-        component: <ApiTokens />
+        component: ApiTokens
       }
     ],
     []

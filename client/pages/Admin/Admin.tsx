@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivot, PivotItem } from 'components/FlexiblePivot'
+import { FlexiblePivot } from 'components/FlexiblePivot'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
@@ -25,14 +25,14 @@ export const Admin = () => {
       }}
       selectedKey={view}>
       {sections.map(
-        (section) =>
-          !section.hidden && (
-            <PivotItem
-              {...section}
-              key={section.itemKey}
-              className={styles.tab}>
-              {section.component}
-            </PivotItem>
+        ({ itemKey, headerText, itemIcon, hidden, component: Component }) =>
+          !hidden && (
+            <Component
+              key={itemKey}
+              itemKey={itemKey}
+              headerText={headerText}
+              itemIcon={itemIcon}
+            />
           )
       )}
     </FlexiblePivot>

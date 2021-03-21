@@ -43,4 +43,4 @@ export interface IFlexiblePivotProps extends IPivotProps {
   items?: IPivotItemProps[]
 }
 
-export type FlexiblePivotItem = FunctionComponent<IPivotItemProps>
+export type FlexiblePivotItem<T = IPivotItemProps> = FunctionComponent<T>

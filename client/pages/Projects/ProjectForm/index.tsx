@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import {
   ConditionalWrapper,
+  FlexiblePivotItem,
   IconPicker,
   LabelPicker,
   SearchCustomer,
@@ -9,7 +10,7 @@ import {
 import { Toast } from 'components/Toast'
 import { Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric-react'
 import { config } from 'package'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { LabelObject as Label } from 'types'
 import { isBlank } from 'underscore.string'
 import styles from './ProjectForm.module.scss'
@@ -19,7 +20,7 @@ import { useProjectForm } from './useProjectForm'
 /**
  * @category Projects
  */
-export const ProjectForm: FunctionComponent<IProjectFormProps> = (
+export const ProjectForm: FlexiblePivotItem<IProjectFormProps> = (
   props: IProjectFormProps
 ) => {
   const { state, loading, dispatch, onFormSubmit, toast, t } = useProjectForm({
