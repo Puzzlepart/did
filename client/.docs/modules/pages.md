@@ -145,7 +145,7 @@ ___
 
 • `Const` **Projects**: FunctionComponent
 
-Defined in: [pages/Projects/Projects.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L19)
+Defined in: [pages/Projects/Projects.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L17)
 
 ___
 
@@ -221,7 +221,7 @@ ___
 
 ### ProjectList
 
-• `Const` **ProjectList**: *FunctionComponent*<[*IProjectListProps*](../interfaces/pages.iprojectlistprops.md)\>
+• `Const` **ProjectList**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<[*IProjectListProps*](../interfaces/pages.iprojectlistprops.md)\>
 
 Project list component used by `<Projects />`. Renders
 projects in a list using our `<List />` component.

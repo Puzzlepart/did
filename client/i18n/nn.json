@@ -62,7 +62,6 @@
     "categoryOutlookText": "Dette prosjektet har ein Outlook-kategori.",
     "workspaceLabel": "Prosjektområde",
     "createOutlookCategoryLabel": "Lag ein Outlook-kategori",
-    "outlookCategoryInfoText": "Her kan du sjå alle prosjekta som har ein korresponderande Outlook-kategori.",
     "noTimeEntriesText": "Ingen timar registrerte på dette prosjektet.",
     "timeEntriesErrorText": "Det oppstod ein feil ved innlasting av timane for dette prosjektet.",
     "timeEntriesLoadingLabel": "Lastar inn timer for prosjektet",

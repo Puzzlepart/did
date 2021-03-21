@@ -62,7 +62,6 @@
     "categoryOutlookText": "This project has a category in your Outlook.",
     "workspaceLabel": "Project workspace",
     "createOutlookCategoryLabel": "Create category in Outlook",
-    "outlookCategoryInfoText": "Here you can see the projects that have a corresponding category in Outlook.",
     "noTimeEntriesText": "No time entries registered for the project.",
     "timeEntriesErrorText": "An error occured loading time entries for the project.",
     "timeEntriesLoadingLabel": "Loading time entries for project",

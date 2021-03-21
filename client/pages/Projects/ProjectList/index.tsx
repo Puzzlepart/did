@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import { List } from 'components'
+import { FlexiblePivotItem, List } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
@@ -14,7 +14,7 @@ import { useProjectList } from './useProjectList'
  *
  * @category Projects
  */
-export const ProjectList: FunctionComponent<IProjectListProps> = (
+export const ProjectList: FlexiblePivotItem<IProjectListProps> = (
   props: IProjectListProps
 ) => {
   const { t } = useTranslation()
@@ -22,34 +22,37 @@ export const ProjectList: FunctionComponent<IProjectListProps> = (
     props
   )
   return (
-    <List
-      {...props}
-      items={items}
-      columns={columns}
-      groups={props.groups}
-      selectionProps={props.selectionProps}
-      commandBar={{
-        items: [
-          {
-            key: 'TOGGLE_INACTIVE',
-            onRender: () => (
-              <div hidden={isMobile}>
-                <Checkbox
-                  disabled={isEmpty(
-                    filter(props.items, (index) => index.inactive)
-                  )}
-                  styles={{ root: { margin: '6px 0 0 8px' } }}
-                  checked={showInactive}
-                  label={t('common.toggleInactiveText')}
-                  onChange={(_event, checked) => setShowInactive(checked)}
-                />
-              </div>
-            )
-          }
-        ],
-        farItems: []
-      }}
-    />
+    <>
+      <List
+        {...props}
+        items={items}
+        columns={columns}
+        groups={props.groups}
+        selectionProps={props.selectionProps}
+        commandBar={{
+          items: [
+            {
+              key: 'TOGGLE_INACTIVE',
+              onRender: () => (
+                <div hidden={isMobile}>
+                  <Checkbox
+                    disabled={isEmpty(
+                      filter(props.items, (index) => index.inactive)
+                    )}
+                    styles={{ root: { margin: '6px 0 0 8px' } }}
+                    checked={showInactive}
+                    label={t('common.toggleInactiveText')}
+                    onChange={(_event, checked) => setShowInactive(checked)}
+                  />
+                </div>
+              )
+            }
+          ],
+          farItems: []
+        }}
+      />
+      {props.children}
+    </>
   )
 }
 
