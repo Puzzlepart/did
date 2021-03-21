@@ -31,6 +31,7 @@ export const ReportsList: TabComponent = () => {
       <List
         enableShimmer={context.state.loading}
         items={context.state.subset}
+        height={window.innerHeight - 200}
         listGroupProps={{
           ...context.state.groupBy,
           totalFunc: (items) => {

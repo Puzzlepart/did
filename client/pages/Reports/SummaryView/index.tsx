@@ -31,6 +31,7 @@ export const SummaryView: TabComponent = () => {
           enableShimmer={state.loading}
           columns={columns}
           items={rows}
+          height={window.innerHeight - 200}
           headerClassName={styles.columnHeader}
         />
         <UserMessage
