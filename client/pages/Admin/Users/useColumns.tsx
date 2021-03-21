@@ -1,20 +1,25 @@
 /* eslint-disable tsdoc/syntax */
+import { IconText } from 'components'
 import { EditLink } from 'components/EditLink'
 import { IListColumn } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
-import { Icon, PersonaSize } from 'office-ui-fabric-react'
+import { ReactHookFunction } from 'hooks/types'
+import { PersonaSize } from 'office-ui-fabric-react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
+import { IUsersContext } from './context'
 
 /**
  * Returns columns for the `Users` component
  *
  * @category Users
  */
-export function useColumns({ setUserForm }): IListColumn[] {
+export const useColumns: ReactHookFunction<IUsersContext, IListColumn[]> = ({
+  setUserForm
+}) => {
   const { t } = useTranslation()
   const userColumn = useUserListColumn(
     { size: PersonaSize.size40 },
@@ -45,24 +50,19 @@ export function useColumns({ setUserForm }): IListColumn[] {
         maxWidth: 150,
         data: { hidden: isMobile }
       },
-      ({ role }) => (
-        <div title={role.description}>
-          <Icon style={{ marginRight: 8 }} iconName={role.icon} />
-          <span>{role.name}</span>
-        </div>
-      )
+      ({ role }) => <IconText iconName={role.icon} text={role.name} />
     ),
     col('actions', '', { maxWidth: 100 }, (user: User) => (
       <div style={{ display: 'flex' }}>
         <EditLink
           style={{ marginRight: 12 }}
           hidden={user.provider === 'google'}
-          onClick={() => {
+          onClick={() =>
             setUserForm({
               headerText: user.displayName,
               user
             })
-          }}
+          }
         />
       </div>
     ))

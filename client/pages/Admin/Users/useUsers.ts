@@ -31,7 +31,8 @@ export function useUsers() {
     () => ({
       roles: query.data?.roles || [],
       users: query.data?.users || [],
-      activeDirectoryUsers: query.data?.activeDirectoryUsers || []
+      activeDirectoryUsers: query.data?.activeDirectoryUsers || [],
+      setUserForm
     }),
     [query.data]
   )
@@ -63,7 +64,7 @@ export function useUsers() {
     query.refetch()
   }
 
-  const columns = useColumns({ setUserForm })
+  const columns = useColumns(context)
 
   return {
     context,
