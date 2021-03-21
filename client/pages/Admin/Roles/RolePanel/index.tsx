@@ -14,7 +14,7 @@ import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import { useRolePanel } from './useRolePanel'
 
-export const RolePanel: FC<IRolePanelProps> = (props: IRolePanelProps) => {
+export const RolePanel: FC<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
   const {
     data,

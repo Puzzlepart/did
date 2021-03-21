@@ -7,7 +7,7 @@
  */
 import React, { FC } from 'react'
 import { AppRouter } from './AppRouter'
-import { AppContext, IAppContext } from './context'
+import { AppContext } from './context'
 import { ErrorFallback } from './ErrorFallback'
 import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
@@ -19,7 +19,7 @@ import { useApp } from './useApp'
  *
  * @category App
  */
-export const App: FC<IAppContext> = (props: IAppProps) => {
+export const App: FC<IAppProps> = (props) => {
   const context = useApp(props)
   return (
     <AppContext.Provider value={context}>

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { IFilter, IFilterItem } from '../Filters'
 
 export interface IFilterItemProps {
@@ -17,6 +18,8 @@ export interface IFilterItemProps {
 
   /**
    * Number of items to show by default (can show all with Show all link)
+   *
+   * @default 10
    */
   shortListCount: number
 }

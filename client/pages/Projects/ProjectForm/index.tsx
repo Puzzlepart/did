@@ -20,9 +20,7 @@ import { useProjectForm } from './useProjectForm'
 /**
  * @category Projects
  */
-export const ProjectForm: TabComponent<IProjectFormProps> = (
-  props: IProjectFormProps
-) => {
+export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { state, loading, dispatch, onFormSubmit, toast, t } = useProjectForm({
     props
   })

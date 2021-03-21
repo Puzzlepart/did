@@ -1,12 +1,12 @@
 import { EntityLabel } from 'components/EntityLabel'
 import { Icon } from 'office-ui-fabric-react'
-import * as React from 'react'
+import React, { FC } from 'react'
 import { LabelObject as Label } from 'types'
 import { isEmpty } from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { ILabelColumnProps } from './types'
 
-export const LabelColumn = (props: ILabelColumnProps) => {
+export const LabelColumn: FC<ILabelColumnProps> = (props) => {
   if (props.project) {
     return (
       <div className={styles.root}>

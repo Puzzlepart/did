@@ -5,10 +5,13 @@ import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'
 
 /**
+ * Shows more details about the project in a
+ * `<TooltipHost />` from `office-ui-fabric-react`
+ *
  * @category Function Component
  */
 export const ProjectTooltip: FC<IProjectTooltipProps> = (
-  props: IProjectTooltipProps
+  props
 ): JSX.Element => {
   return (
     <TooltipHost

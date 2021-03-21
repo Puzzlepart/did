@@ -1,8 +1,9 @@
-import { DurationColumn, ProjectTooltip } from 'components'
+import { ProjectTooltip } from 'components'
 import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
 import { capitalize } from 'underscore.string'
 import { TimesheetScope } from '../TimesheetScope'
+import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 
 /**

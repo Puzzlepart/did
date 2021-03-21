@@ -15,11 +15,12 @@ import { SuggestionItem } from './SuggestionItem'
 import { useAutocomplete } from './useAutocomplete'
 
 /**
+ * Autocomplete component using `<SearchBox />`, `<Callout />`,
+ * `<FocusZone />` and `<List />` from `office-ui-fabric-react`.
+ *
  * @category Function Component
  */
-export const Autocomplete: FC<IAutocompleteProps> = (
-  props: IAutocompleteProps
-) => {
+export const Autocomplete: FC<IAutocompleteProps> = (props) => {
   const {
     state,
     className,
@@ -91,3 +92,5 @@ export const Autocomplete: FC<IAutocompleteProps> = (
     </div>
   )
 }
+
+export * from './types'

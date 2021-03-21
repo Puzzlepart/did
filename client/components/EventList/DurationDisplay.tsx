@@ -1,19 +1,15 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
 import { format } from 'office-ui-fabric-react'
-import React, { FC, HTMLProps } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-
-export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
-  displayFormat?: string
-  duration: number
-}
+import { IDurationDisplayProps } from './types'
 
 /**
  * @category Function Component
  */
 export const DurationDisplay: FC<IDurationDisplayProps> = (
-  props: IDurationDisplayProps
+  props
 ): JSX.Element => {
   const { t } = useTranslation()
   let displayValue = $date.getDurationString(props.duration, t)

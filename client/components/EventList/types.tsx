@@ -2,6 +2,7 @@
 import { ITypedHash } from '@pnp/common'
 import { IListProps } from 'components/List/types'
 import { IColumn } from 'office-ui-fabric-react'
+import { HTMLProps } from 'react'
 
 /**
  * @category EventList
@@ -26,4 +27,9 @@ export interface IEventListProps extends IListProps {
    * Resizable columns
    */
   resizableColumns?: boolean
+}
+
+export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
+  displayFormat?: string
+  duration: number
 }

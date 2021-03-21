@@ -14,9 +14,7 @@ import { useProjectList } from './useProjectList'
  *
  * @category Projects
  */
-export const ProjectList: TabComponent<IProjectListProps> = (
-  props: IProjectListProps
-) => {
+export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const { t } = useTranslation()
   const { items, columns, showInactive, setShowInactive } = useProjectList(
     props

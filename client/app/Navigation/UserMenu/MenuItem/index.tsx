@@ -7,7 +7,7 @@ import { IMenuItemProps } from './types'
 /**
  * @category UserMenu
  */
-export const MenuItem: FC<IMenuItemProps> = (props: IMenuItemProps) => {
+export const MenuItem: FC<IMenuItemProps> = (props) => {
   const className = [styles.root]
   let onClick = props.onClick
   if (props.href) {

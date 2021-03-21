@@ -10,6 +10,8 @@ export interface IConditionalWrapperProps extends HTMLProps<HTMLDivElement> {
 }
 
 /**
+ * Conditionally wraps `children` in `wrapper` based on `condition`
+ *
  * @category Function Component
  */
 export const ConditionalWrapper: FC<IConditionalWrapperProps> = ({

@@ -58,7 +58,7 @@ ___
 
 ### App
 
-• `Const` **App**: *FC*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
+• `Const` **App**: *FC*<IAppProps\>
 
 App
 

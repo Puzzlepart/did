@@ -10,6 +10,9 @@ import { useList } from './useList'
 /**
  * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
  *
+ * Supports list groups, selection, search box
+ * and custom column headers.
+ *
  * Used by the following components:
  *
  * * `<EventList />`
@@ -25,7 +28,7 @@ import { useList } from './useList'
  *
  * @category Function Component
  */
-export const List: FC<IListProps> = (props: IListProps) => {
+export const List: FC<IListProps> = (props) => {
   const { delay, transitionDuration, listProps } = useList({ props })
   return (
     <div className={styles.root} hidden={props.hidden}>

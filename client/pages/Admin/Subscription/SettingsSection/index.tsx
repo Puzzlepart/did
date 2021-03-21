@@ -12,9 +12,7 @@ import { ISettingsSectionProps } from './types'
 /**
  * @category SubscriptionSettings
  */
-export const SettingsSection: TabComponent<ISettingsSectionProps> = (
-  props: ISettingsSectionProps
-) => {
+export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
   const { settings, onChange } = useContext(SubscriptionContext)
   return (
     <div className={styles.root}>

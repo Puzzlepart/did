@@ -1,13 +1,16 @@
 /* eslint-disable tsdoc/syntax */
 import { useEffect, useState } from 'react'
 import { IFilter, IFilterItem } from './Filters'
+import { IFilterPanelProps } from './types'
 
 /**
  * Component logic hook for FilterPanel
  *
+ * @param props - Props
+ *
  * @category FilterPanel
  */
-export function useFilterPanel({ props }) {
+export function useFilterPanel(props: IFilterPanelProps) {
   const [filters, setFilters] = useState<IFilter[]>(
     props.filters.map((f) => f.initialize(props.items))
   )

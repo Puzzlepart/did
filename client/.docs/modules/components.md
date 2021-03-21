@@ -23,10 +23,6 @@ Reusable React Function components.
 - [ISuggestionItem](../interfaces/components.isuggestionitem.md)
 - [ISuggestionItemProps](../interfaces/components.isuggestionitemprops.md)
 
-### DurationColumn Interfaces
-
-- [IDurationColumnProps](../interfaces/components.idurationcolumnprops.md)
-
 ### EntityLabel Interfaces
 
 - [IEntityLabelProps](../interfaces/components.ientitylabelprops.md)
@@ -53,6 +49,7 @@ Reusable React Function components.
 ### Other Interfaces
 
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
+- [IDurationDisplayProps](../interfaces/components.idurationdisplayprops.md)
 - [ITabContainerProps](../interfaces/components.itabcontainerprops.md)
 - [ITabItemProps](../interfaces/components.itabitemprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
@@ -78,12 +75,14 @@ Reusable React Function components.
 ### Function Component Variables
 
 - [Autocomplete](components.md#autocomplete)
+- [ColorPickerField](components.md#colorpickerfield)
 - [ConditionalWrapper](components.md#conditionalwrapper)
 - [CustomerLink](components.md#customerlink)
-- [DurationColumn](components.md#durationcolumn)
+- [EditLink](components.md#editlink)
 - [EntityLabel](components.md#entitylabel)
 - [EventList](components.md#eventlist)
 - [FilterItem](components.md#filteritem)
+- [FilterPanel](components.md#filterpanel)
 - [HotkeyModal](components.md#hotkeymodal)
 - [IconPicker](components.md#iconpicker)
 - [IconText](components.md#icontext)
@@ -93,9 +92,15 @@ Reusable React Function components.
 - [ProjectLink](components.md#projectlink)
 - [ProjectTooltip](components.md#projecttooltip)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
+- [SearchCustomer](components.md#searchcustomer)
+- [SearchProject](components.md#searchproject)
 - [TabContainer](components.md#tabcontainer)
 - [Toast](components.md#toast)
 - [UserMessage](components.md#usermessage)
+
+### Autocomplete Variables
+
+- [SuggestionItem](components.md#suggestionitem)
 
 ### SummaryView Variables
 
@@ -103,17 +108,10 @@ Reusable React Function components.
 
 ### Function Component Functions
 
-- [ColorPickerField](components.md#colorpickerfield)
 - [DeleteLink](components.md#deletelink)
-- [DisableLink](components.md#disablelink)
-- [EditLink](components.md#editlink)
-- [FilterPanel](components.md#filterpanel)
-- [SearchCustomer](components.md#searchcustomer)
-- [SearchProject](components.md#searchproject)
 
 ### Autocomplete Functions
 
-- [SuggestionItem](components.md#suggestionitem)
 - [useAutocomplete](components.md#useautocomplete)
 - [useAutocompleteEvents](components.md#useautocompleteevents)
 
@@ -181,7 +179,21 @@ Defined in: [components/Toast/types.tsx:7](https://github.com/Puzzlepart/did/blo
 
 • `Const` **Autocomplete**: *FC*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
 
-Defined in: [components/Autocomplete/Autocomplete.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L20)
+Autocomplete component using `<SearchBox />`, `<Callout />`,
+`<FocusZone />` and `<List />` from `office-ui-fabric-react`.
+
+Defined in: [components/Autocomplete/Autocomplete.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L23)
+
+___
+
+### ColorPickerField
+
+• `Const` **ColorPickerField**: *FC*<[*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)\>
+
+Field to pick an color using `<SketchPicker />` from
+`react-color`
+
+Defined in: [components/ColorPickerField/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L15)
 
 ___
 
@@ -189,7 +201,9 @@ ___
 
 • `Const` **ConditionalWrapper**: *FC*<IConditionalWrapperProps\>
 
-Defined in: [components/ConditionalWrapper/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L15)
+Conditionally wraps `children` in `wrapper` based on `condition`
+
+Defined in: [components/ConditionalWrapper/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L17)
 
 ___
 
@@ -197,15 +211,21 @@ ___
 
 • `Const` **CustomerLink**: *FC*<ICustomerLinkProps\>
 
-Defined in: [components/CustomerLink/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L9)
+Renders a `<Link />` from `react-router-dom` that
+navigates to the specified customer
+
+Defined in: [components/CustomerLink/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L12)
 
 ___
 
-### DurationColumn
+### EditLink
 
-• `Const` **DurationColumn**: *FC*<[*IDurationColumnProps*](../interfaces/components.idurationcolumnprops.md)\>
+• `Const` **EditLink**: *FC*<IEditLinkProps\>
 
-Defined in: [components/DurationColumn/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/index.tsx#L10)
+Renders a edit link using `<Icon />` and `<Link />`
+from `office-ui-fabric-react`
+
+Defined in: [components/EditLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L14)
 
 ___
 
@@ -213,12 +233,14 @@ ___
 
 • `Const` **EntityLabel**: *FC*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
 
-The `EntityLabel` component is used to add contextual metadata
+The `<EntityLabel />` component is used to add contextual metadata
 to a design. Visually it styles text, adds padding, and rounded corners.
+
+Uses styles from `@primer/css`
 
 **`see`** https://primer.style/components/Label
 
-Defined in: [components/EntityLabel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L18)
+Defined in: [components/EntityLabel/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L20)
 
 ___
 
@@ -226,7 +248,11 @@ ___
 
 • `Const` **EventList**: *FC*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
 
-Defined in: [components/EventList/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L11)
+Renders events in a list using `<List />` component
+
+Supports property `additionalColumns`
+
+Defined in: [components/EventList/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L15)
 
 ___
 
@@ -238,11 +264,27 @@ Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/
 
 ___
 
+### FilterPanel
+
+• `Const` **FilterPanel**: *FC*<[*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)\>
+
+Filter panel that renders filter items with more than
+1 item.
+
+`shortListCount` defaults to **10**, meaning
+10 items are shown before displaying a show more link.
+
+Defined in: [components/FilterPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L18)
+
+___
+
 ### HotkeyModal
 
 • `Const` **HotkeyModal**: *FC*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
 
-Defined in: [components/HotkeyModal/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L13)
+Modal that shows the available shortcuts in the current context.
+
+Defined in: [components/HotkeyModal/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L15)
 
 ___
 
@@ -250,7 +292,10 @@ ___
 
 • `Const` **IconPicker**: *FC*<IIconPickerProps\>
 
-Defined in: [components/IconPicker/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L13)
+Icon picker using `<Autocomplete />` to select
+icons from `@uifabric/icons`
+
+Defined in: [components/IconPicker/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L16)
 
 ___
 
@@ -278,6 +323,9 @@ ___
 
 List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
 
+Supports list groups, selection, search box
+and custom column headers.
+
 Used by the following components:
 
 * `<EventList />`
@@ -291,7 +339,7 @@ Used by the following components:
 * `<Reports />`
 * `<Timesheet />` => `<SummaryView />`
 
-Defined in: [components/List/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L28)
+Defined in: [components/List/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L31)
 
 ___
 
@@ -307,7 +355,10 @@ ___
 
 • `Const` **ProjectLink**: *FC*<IProjectLinkProps\>
 
-Defined in: [components/ProjectLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L11)
+Renders a `<Link />` from `react-router-dom` that
+navigates to the specified project
+
+Defined in: [components/ProjectLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L14)
 
 ___
 
@@ -315,7 +366,10 @@ ___
 
 • `Const` **ProjectTooltip**: *FC*<IProjectTooltipProps\>
 
-Defined in: [components/ProjectTooltip/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L10)
+Shows more details about the project in a
+`<TooltipHost />` from `office-ui-fabric-react`
+
+Defined in: [components/ProjectTooltip/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L13)
 
 ___
 
@@ -323,7 +377,30 @@ ___
 
 • `Const` **ScrollablePaneWrapper**: *FC*<any\>
 
-Defined in: [components/ScrollablePaneWrapper/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L8)
+Conditionally wraps `children` in `<ScrollablePane />` based
+on `condition`
+
+Defined in: [components/ScrollablePaneWrapper/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L11)
+
+___
+
+### SearchCustomer
+
+• `Const` **SearchCustomer**: *FC*<ISearchCustomerProps\>
+
+Search for customers using `<Autocomplete />`
+
+Defined in: [components/SearchCustomer/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L15)
+
+___
+
+### SearchProject
+
+• `Const` **SearchProject**: *FC*<ISearchProjectProps\>
+
+Search for projects using `<Autocomplete />`
+
+Defined in: [components/SearchProject/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L14)
 
 ___
 
@@ -367,6 +444,16 @@ Defined in: [components/UserMessage/index.tsx:19](https://github.com/Puzzlepart/
 
 ___
 
+## Autocomplete Variables
+
+### SuggestionItem
+
+• `Const` **SuggestionItem**: *FC*<[*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)\>
+
+Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
+
+___
+
 ## SummaryView Variables
 
 ### UserColumn
@@ -381,25 +468,12 @@ Defined in: [components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/d
 
 ## Function Component Functions
 
-### ColorPickerField
-
-▸ `Const`**ColorPickerField**(`props`: [*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | [*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md) |
-
-**Returns:** *Element*
-
-Defined in: [components/ColorPickerField/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L12)
-
-___
-
 ### DeleteLink
 
 ▸ `Const`**DeleteLink**(`__namedParameters`: *IDeleteLinkProps*): *Element*
+
+Renders a delete link using `<Icon />` and `<Link />`
+from `office-ui-fabric-react`
 
 #### Parameters:
 
@@ -409,107 +483,11 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [components/DeleteLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L11)
-
-___
-
-### DisableLink
-
-▸ `Const`**DisableLink**(`__namedParameters`: *IDisableLinkProps*): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | *IDisableLinkProps* |
-
-**Returns:** *Element*
-
-Defined in: [components/DisableLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DisableLink/index.tsx#L11)
-
-___
-
-### EditLink
-
-▸ `Const`**EditLink**(`props`: *IEditLinkProps*): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | *IEditLinkProps* |
-
-**Returns:** *Element*
-
-Defined in: [components/EditLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L11)
-
-___
-
-### FilterPanel
-
-▸ `Const`**FilterPanel**(`props`: [*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | [*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md) |
-
-**Returns:** *Element*
-
-Defined in: [components/FilterPanel/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L12)
-
-___
-
-### SearchCustomer
-
-▸ `Const`**SearchCustomer**(`props`: *ISearchCustomerProps*): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | *ISearchCustomerProps* |
-
-**Returns:** *Element*
-
-Defined in: [components/SearchCustomer/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L13)
-
-___
-
-### SearchProject
-
-▸ `Const`**SearchProject**(`props`: *ISearchProjectProps*): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | *ISearchProjectProps* |
-
-**Returns:** *Element*
-
-Defined in: [components/SearchProject/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L12)
+Defined in: [components/DeleteLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L14)
 
 ___
 
 ## Autocomplete Functions
-
-### SuggestionItem
-
-▸ **SuggestionItem**(`props`: [*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | [*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md) |
-
-**Returns:** *Element*
-
-Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
-
-___
 
 ### useAutocomplete
 

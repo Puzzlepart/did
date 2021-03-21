@@ -9,11 +9,11 @@ import { IFilterItemProps } from './types'
 /**
  * @category Function Component
  */
-export const FilterItem: FC<IFilterItemProps> = (props: IFilterItemProps) => {
+export const FilterItem: FC<IFilterItemProps> = (props) => {
   const { t } = useTranslation()
   const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
   const [searchTerm, onSearch] = useState<string>('')
-  const [showCount, setShowCount] = useState(props.shortListCount)
+  const [showCount, setShowCount] = useState(props.shortListCount || 10)
 
   const items = useMemo(() => {
     return props.filter.items.filter((item) =>

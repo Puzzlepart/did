@@ -11,9 +11,7 @@ import { IMobileBreadcrumbProps } from './types'
 /**
  * @category Function Component
  */
-export const MobileBreadcrumb: FC<IMobileBreadcrumbProps> = (
-  props: IMobileBreadcrumbProps
-) => {
+export const MobileBreadcrumb: FC<IMobileBreadcrumbProps> = (props) => {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
   const items: IBreadcrumbItem[] = [

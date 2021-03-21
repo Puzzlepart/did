@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import React, { useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
 import $customers from '../../pages/Customers/customers.gql'
@@ -8,9 +8,11 @@ import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
 
 /**
+ * Search for customers using `<Autocomplete />`
+ *
  * @category Function Component
  */
-export const SearchCustomer = (props: ISearchCustomerProps) => {
+export const SearchCustomer: FC<ISearchCustomerProps> = (props) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
     fetchPolicy: 'cache-first'

@@ -9,7 +9,7 @@ import { WeekColumnTooltip } from './WeekColumnTooltip'
 /**
  * @category SummaryView
  */
-export const WeekColumn: FC<IWeekColumnProps> = (props: IWeekColumnProps) => {
+export const WeekColumn: FC<IWeekColumnProps> = (props) => {
   const target = useRef()
   const hours = useWeekColumn(props)
   if (hours.total === null) return null

@@ -3,6 +3,9 @@ import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react'
 import React, { FC } from 'react'
 
 /**
+ * Conditionally wraps `children` in `<ScrollablePane />` based
+ * on `condition`
+ *
  * @category Function Component
  */
 export const ScrollablePaneWrapper: FC<any> = ({

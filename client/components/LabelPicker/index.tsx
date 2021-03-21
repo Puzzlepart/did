@@ -11,9 +11,7 @@ import { useLabelPicker } from './useLabelPicker'
 /**
  * @category Function Component
  */
-export const LabelPicker: FC<ILabelPickerProps> = (
-  props: ILabelPickerProps
-) => {
+export const LabelPicker: FC<ILabelPickerProps> = (props) => {
   const { t } = useTranslation()
   const {
     labels,

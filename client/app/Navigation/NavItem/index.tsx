@@ -9,7 +9,7 @@ import { useNavItem } from './useNavItem'
 /**
  * @category Navigation
  */
-export const NavItem: FC<INavItemProps> = (props: INavItemProps) => {
+export const NavItem: FC<INavItemProps> = (props) => {
   const { className, onClick, shouldRender } = useNavItem(props)
   return (
     shouldRender && (

@@ -4,7 +4,7 @@ import { omit } from 'underscore'
 import styles from './Progress.module.scss'
 import { IProgressProps } from './types'
 
-export const Progress: FC<IProgressProps> = (props: IProgressProps) => {
+export const Progress: FC<IProgressProps> = (props) => {
   return (
     <div className={styles.root}>
       <div className={styles.progress}>

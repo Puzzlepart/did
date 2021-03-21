@@ -10,7 +10,7 @@ import { IIconTextProps } from './types'
  *
  * @category Function Component
  */
-export const IconText: FC<IIconTextProps> = (props: IIconTextProps) => {
+export const IconText: FC<IIconTextProps> = (props) => {
   return (
     <div className={styles.root}>
       <Icon {...omit(props, 'text')} iconName={props.iconName || 'Page'} />

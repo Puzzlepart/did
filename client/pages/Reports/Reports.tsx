@@ -58,8 +58,7 @@ export const Reports: FC = () => {
         onDismiss={() => context.dispatch(TOGGLE_FILTER_PANEL())}
         onFiltersUpdated={(filters) =>
           context.dispatch(FILTERS_UPDATED({ filters }))
-        }
-        shortListCount={10}>
+        }>
         <SaveFilterForm />
       </FilterPanel>
     </ReportsContext.Provider>

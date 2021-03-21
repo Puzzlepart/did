@@ -8,9 +8,12 @@ import styles from './IconPicker.module.scss'
 import { IIconPickerProps } from './types'
 
 /**
+ * Icon picker using `<Autocomplete />` to select
+ * icons from `@uifabric/icons`
+ *
  * @category Function Component
  */
-export const IconPicker: FC<IIconPickerProps> = (props: IIconPickerProps) => {
+export const IconPicker: FC<IIconPickerProps> = (props) => {
   const items = useMemo(
     () =>
       getIcons().map((iconName) => ({

@@ -6,9 +6,13 @@ import { IEventListProps } from './types'
 import { useColumns } from './useColumns'
 
 /**
+ * Renders events in a list using `<List />` component
+ *
+ * Supports property `additionalColumns`
+ *
  * @category Function Component
  */
-export const EventList: FC<IEventListProps> = (props: IEventListProps) => {
+export const EventList: FC<IEventListProps> = (props) => {
   const columns = useColumns(props)
   return (
     <div className={styles.root} hidden={props.hidden}>

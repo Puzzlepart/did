@@ -6,6 +6,9 @@ import styles from './DeleteLink.module.scss'
 import { IDeleteLinkProps } from './types'
 
 /**
+ * Renders a delete link using `<Icon />` and `<Link />`
+ * from `office-ui-fabric-react`
+ *
  * @category Function Component
  */
 export const DeleteLink = ({

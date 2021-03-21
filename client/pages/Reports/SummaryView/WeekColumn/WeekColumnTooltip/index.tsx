@@ -10,9 +10,7 @@ import styles from './WeekColumnTooltip.module.scss'
 /**
  * @category SummaryView
  */
-export const WeekColumnTooltip: FC<IWeekColumnTooltipProps> = (
-  props: IWeekColumnTooltipProps
-) => {
+export const WeekColumnTooltip: FC<IWeekColumnTooltipProps> = (props) => {
   const { week, month, year, customerTotals, t } = useWeekColumnTooltip(props)
   return (
     <div className={styles.root}>

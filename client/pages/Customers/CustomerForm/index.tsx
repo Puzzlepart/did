@@ -6,9 +6,7 @@ import styles from './CustomerForm.module.scss'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 
-export const CustomerForm: FC<ICustomerFormProps> = (
-  props: ICustomerFormProps
-) => {
+export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { loading, state, dispatch, toast, onFormSubmit, t } = useCustomerForm({
     props
   })

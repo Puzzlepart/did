@@ -8,8 +8,10 @@ import styles from './EntityLabel.module.scss'
 import { IEntityLabelProps } from './types'
 
 /**
- * The `EntityLabel` component is used to add contextual metadata
+ * The `<EntityLabel />` component is used to add contextual metadata
  * to a design. Visually it styles text, adds padding, and rounded corners.
+ *
+ * Uses styles from `@primer/css`
  *
  * @see https://primer.style/components/Label
  *

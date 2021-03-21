@@ -67,8 +67,10 @@ ___
 
 ### shortListCount
 
-• **shortListCount**: *number*
+• `Optional` **shortListCount**: *number*
 
 Number of items to show by default (can show all with Show all link)
 
-Defined in: [components/FilterPanel/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L27)
+**`default`** 10
+
+Defined in: [components/FilterPanel/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L29)

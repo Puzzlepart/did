@@ -79,6 +79,7 @@ All are built using React Function components and Hooks.
 ### Reports Variables
 
 - [ReportsContext](pages.md#reportscontext)
+- [SaveFilterForm](pages.md#savefilterform)
 
 ### Tab Component Variables
 
@@ -98,7 +99,6 @@ All are built using React Function components and Hooks.
 
 ### Reports Functions
 
-- [SaveFilterForm](pages.md#savefilterform)
 - [currentMonthQuery](pages.md#currentmonthquery)
 - [currentYearQuery](pages.md#currentyearquery)
 - [forecastQuery](pages.md#forecastquery)
@@ -345,6 +345,14 @@ Defined in: [pages/Reports/context.ts:36](https://github.com/Puzzlepart/did/blob
 
 ___
 
+### SaveFilterForm
+
+• `Const` **SaveFilterForm**: *FC*<ISaveFilterFormProps\>
+
+Defined in: [pages/Reports/SaveFilterForm/index.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L27)
+
+___
+
 ## Tab Component Variables
 
 ### ApiTokens
@@ -420,22 +428,6 @@ Defined in: [pages/Admin/Admin.tsx:18](https://github.com/Puzzlepart/did/blob/de
 ___
 
 ## Reports Functions
-
-### SaveFilterForm
-
-▸ `Const`**SaveFilterForm**(`props`: *ISaveFilterFormProps*): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | *ISaveFilterFormProps* |
-
-**Returns:** *Element*
-
-Defined in: [pages/Reports/SaveFilterForm/index.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L27)
-
-___
 
 ### currentMonthQuery
 

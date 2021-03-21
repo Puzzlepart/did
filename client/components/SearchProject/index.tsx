@@ -1,15 +1,17 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import * as React from 'react'
+import React, { FC } from 'react'
 import { Project } from 'types'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import $projects from './projects.gql'
 import { ISearchProjectProps } from './types'
 
 /**
+ * Search for projects using `<Autocomplete />`
+ *
  * @category Function Component
  */
-export const SearchProject = (props: ISearchProjectProps) => {
+export const SearchProject: FC<ISearchProjectProps> = (props) => {
   const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-first'
   })

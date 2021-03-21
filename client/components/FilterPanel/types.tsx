@@ -23,6 +23,8 @@ export interface IFilterPanelProps extends IPanelProps {
 
   /**
    * Number of items to show by default (can show all with Show all link)
+   *
+   * @default 10
    */
-  shortListCount: number
+  shortListCount?: number
 }

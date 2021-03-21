@@ -16,9 +16,7 @@ import styles from './UserMessage.module.scss'
  *
  * @category Function Component
  */
-export const UserMessage: FC<IUserMessageProps> = (
-  props: IUserMessageProps
-) => {
+export const UserMessage: FC<IUserMessageProps> = (props) => {
   const _styles: IStyleFunctionOrObject<
     IMessageBarStyleProps,
     IMessageBarStyles

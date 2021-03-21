@@ -1,16 +1,22 @@
 /* eslint-disable tsdoc/syntax */
 import { Panel } from 'office-ui-fabric-react'
-import React from 'react'
+import React, { FC } from 'react'
 import { FilterItem } from './FilterItem'
 import styles from './FilterPanel.module.scss'
 import { IFilterPanelProps } from './types'
 import { useFilterPanel } from './useFilterPanel'
 
 /**
+ * Filter panel that renders filter items with more than
+ * 1 item.
+ *
+ * `shortListCount` defaults to **10**, meaning
+ * 10 items are shown before displaying a show more link.
+ *
  * @category Function Component
  */
-export const FilterPanel = (props: IFilterPanelProps) => {
-  const { filters, onFilterUpdated } = useFilterPanel({ props })
+export const FilterPanel: FC<IFilterPanelProps> = (props) => {
+  const { filters, onFilterUpdated } = useFilterPanel(props)
 
   return (
     <Panel

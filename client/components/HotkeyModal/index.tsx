@@ -8,9 +8,11 @@ import styles from './HotkeyModal.module.scss'
 export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 
 /**
+ * Modal that shows the available shortcuts in the current context.
+ *
  * @category Function Component
  */
-export const HotkeyModal: FC<IHotkeyModal> = (props: IHotkeyModal) => {
+export const HotkeyModal: FC<IHotkeyModal> = (props) => {
   const { t } = useTranslation()
   return (
     <Modal

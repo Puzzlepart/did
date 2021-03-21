@@ -1,14 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { IDetailsColumnRenderTooltipProps } from 'office-ui-fabric-react'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './ColumnHeader.module.scss'
 
 /**
  * @category List
  */
-export const ColumnHeader = (
-  props: IDetailsColumnRenderTooltipProps
-): JSX.Element => {
+export const ColumnHeader: FC<IDetailsColumnRenderTooltipProps> = (props) => {
   return (
     <div className={styles.root}>
       <div className={`${styles.container} ${props.hostClassName}`}>

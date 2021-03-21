@@ -6,11 +6,12 @@ import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
 
 /**
+ * Renders a `<Link />` from `react-router-dom` that
+ * navigates to the specified project
+ *
  * @category Function Component
  */
-export const ProjectLink: FC<IProjectLinkProps> = (
-  props: IProjectLinkProps
-) => (
+export const ProjectLink: FC<IProjectLinkProps> = (props) => (
   <Link
     className={styles.root}
     to={`/projects/search/${props.project?.tag}`.toLowerCase()}>

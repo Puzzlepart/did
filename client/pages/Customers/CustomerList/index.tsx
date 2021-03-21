@@ -1,16 +1,12 @@
 import { List, TabComponent } from 'components'
-import {
-  Checkbox,
-  IPivotItemProps,
-  SelectionMode
-} from 'office-ui-fabric-react'
+import { Checkbox, SelectionMode } from 'office-ui-fabric-react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
 import { useCustomerList } from './useCustomerList'
 
-export const CustomerList: TabComponent = (props: IPivotItemProps) => {
+export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
   const {
     state,

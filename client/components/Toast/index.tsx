@@ -13,7 +13,7 @@ import { IToastProps } from './types'
  *
  * @category Function Component
  */
-export const Toast: FC<IToastProps> = (props: IToastProps) => {
+export const Toast: FC<IToastProps> = (props) => {
   const classNames = [styles.root]
   if (props.hidden) classNames.push(styles.fadeOut)
   return (
