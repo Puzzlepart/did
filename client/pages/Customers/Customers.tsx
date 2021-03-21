@@ -1,7 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { FlexiblePivot, FlexiblePivotItem } from 'components'
 import { usePermissions } from 'hooks'
-import { MessageBar, MessageBarType, PivotItem } from 'office-ui-fabric-react'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -30,19 +29,12 @@ export const Customers: FlexiblePivotItem<ICustomerFormProps> = () => {
           dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))
         }
         styles={{ itemContainer: { paddingTop: 10 } }}>
-        <PivotItem
-          itemID='search'
+        <CustomerList
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'>
-          {state.error && (
-            <MessageBar messageBarType={MessageBarType.error}>
-              {t('common.genericErrorText')}
-            </MessageBar>
-          )}
-          <CustomerList />
           {state.selected && <CustomerDetails />}
-        </PivotItem>
+        </CustomerList>
         {hasPermission(PermissionScope.MANAGE_CUSTOMERS) && (
           <CustomerForm
             itemKey='new'

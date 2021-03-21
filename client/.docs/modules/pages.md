@@ -129,7 +129,7 @@ ___
 
 • `Const` **Customers**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<ICustomerFormProps\>
 
-Defined in: [pages/Customers/Customers.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L20)
+Defined in: [pages/Customers/Customers.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L19)
 
 ___
 
