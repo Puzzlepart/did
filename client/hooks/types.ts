@@ -2,6 +2,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 
 export interface ReactHookFunction<ParamType = {}, ReturnType = {}> {
-  (params: ParamType): ReturnType | null
+  (params?: ParamType): ReturnType | null
   displayName?: string
 }
