@@ -30,11 +30,11 @@ export async function startServer(port: string) {
 
     switch (error.code) {
       case 'EACCES':
-        debug('\u001B[31m', `[${bind} requires elevated privileges]`)
+        debug('\u001B[31m', `${bind} requires elevated privileges`)
         process.exit(1)
         break
       case 'EADDRINUSE':
-        debug('\u001B[31m', `[${bind} is already in use]`)
+        debug('\u001B[31m', `${bind} is already in use`)
         process.exit(1)
         break
       default:
@@ -43,7 +43,7 @@ export async function startServer(port: string) {
   }
 
   function onListening() {
-    debug('\u001B[32m', `[Server listening on port ${port}]`)
+    debug('\u001B[32m', `Server listening on port [${port}]`)
   }
 
   server.listen(port)

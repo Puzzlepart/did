@@ -21,14 +21,15 @@ function getRedirectUrl() {
 /**
  * Microsoft/Azure AD auth strategy
  *
- * @param mcl - Mongo client
+ * @param mcl - Mongo client (`MongoClient`)
  *
- * @returns OIDCStrategy
+ * @returns `OIDCStrategy`
  */
 export const azureAdStrategy = (mcl: MongoClient) => {
   const redirectUrl = getRedirectUrl()
   return new OIDCStrategy(
     {
+      loggingLevel: 'error',
       identityMetadata:
         'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
       clientID: environment('MICROSOFT_CLIENT_ID'),

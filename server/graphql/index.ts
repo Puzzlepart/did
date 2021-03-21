@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable tsdoc/syntax */
 /**
  * GraphQL Server using `apollo-server-express`
@@ -132,6 +133,12 @@ export const setupGraphQL = async (
   try {
     const schema = await generateGraphQLSchema()
     const server = new ApolloServer({
+      logger: {
+        debug: () => null,
+        info: () => null,
+        warn: () => null,
+        error: () => null
+      },
       schema,
       rootValue: global,
       context: ({ req }) => createContext(req, client),
