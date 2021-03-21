@@ -10,6 +10,10 @@ import { generateRows } from './generateRows'
 import { generateTotalRow } from './generateTotalRow'
 
 /**
+ * Component logic for `<SummaryView />`
+ *
+ * @returns `IListProps`
+ *
  * @category Timesheet
  */
 export const useSummaryView: ReactHookFunction<{}, IListProps> = () => {
