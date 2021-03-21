@@ -1,5 +1,6 @@
+/* eslint-disable tsdoc/syntax */
 import * as arraySort from 'array-sort'
-import { getValue } from 'helpers'
+import { getValue as get } from 'helpers'
 import { IGroup } from 'office-ui-fabric-react'
 import { isEmpty, unique } from 'underscore'
 import { IListGroupProps } from './types'
@@ -7,41 +8,39 @@ import { IListGroupProps } from './types'
 type GenerateListGroups = [IGroup[], any[]]
 
 /**
- * Create groups
+ * Returns list groups based on property
+ * `listGroupProps` on the `<List />` component
  *
- * @param items - Items
- * @param props - Props
+ * @category List
  */
-export function generateListGroups(
+export function useListGroups(
   items: any[],
   props: IListGroupProps
 ): GenerateListGroups {
-  if (isEmpty(items)) return [null, []]
-  const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
+  if (!props) return [null, items]
+  const { fieldName, emptyGroupName, totalFunc } = props
+  if (isEmpty(items) && !props.groupNames) return [null, []]
+  const itemsSort = { props: [fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames = items.map((g) =>
-    getValue<string>(g, props.fieldName, props.emptyGroupName).toString()
+    get(g, fieldName, emptyGroupName).toString()
   )
   const uniqueGroupNames =
     props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
-  const groups = uniqueGroupNames.map((name, index) => {
-    const itemsInGroup = items.filter((item) => {
-      const itemValue = `${getValue<string>(
-        item,
-        props.fieldName,
-        props.emptyGroupName
-      )}`
+  const groups = uniqueGroupNames.map((name) => {
+    const items_ = items.filter((item) => {
+      const itemValue = `${get(item, fieldName, emptyGroupName)}`
       return `${itemValue}`.toLowerCase() === name.toLowerCase()
     })
-    const total = props.totalFunc ? props.totalFunc(itemsInGroup) : ''
+    const total = totalFunc ? props.totalFunc(items_) : ''
     const group: IGroup = {
-      key: index.toString(),
+      key: name,
       name: `${name} ${total}`,
       startIndex: groupNames
         .map((g) => g.toLowerCase())
         .indexOf(name.toLowerCase(), 0),
-      count: itemsInGroup.length,
-      isShowingAll: itemsInGroup.length === items.length,
+      count: items_.length,
+      isShowingAll: items_.length === items.length,
       isDropEnabled: false,
       isCollapsed: false
     }

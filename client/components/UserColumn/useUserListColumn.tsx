@@ -16,11 +16,12 @@ export function useUserListColumn(
   props?: Partial<IListColumn>
 ): IListColumn {
   return {
+    minWidth: 50,
+    maxWidth: 220,
     ...props,
     key: 'user',
     fieldName: 'user',
     name: null,
-    minWidth: 50,
     onRender: (item) => (
       <UserColumn user={item?.user || item} persona={persona} />
     )

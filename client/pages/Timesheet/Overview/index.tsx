@@ -14,7 +14,7 @@ import { useGroups } from './useGroups'
 export const Overview: TabComponent = () => {
   const { state } = useContext(TimesheetContext)
   const additionalColumns = useAdditionalColumns()
-  const groups = useGroups()
+  const listGroupProps = useGroups()
   const className = [styles.root]
   if (isMobile) className.push(styles.mobile)
   return (
@@ -23,9 +23,8 @@ export const Overview: TabComponent = () => {
         hidden={!!state.error}
         enableShimmer={!!state.loading}
         items={state.selectedPeriod?.getEvents()}
-        showEmptyDays={true}
         dateFormat={config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
-        listGroupProps={groups}
+        listGroupProps={listGroupProps}
         additionalColumns={additionalColumns}
       />
     </div>

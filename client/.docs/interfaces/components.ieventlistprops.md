@@ -34,7 +34,6 @@
 - [resizableColumns](components.ieventlistprops.md#resizablecolumns)
 - [searchBox](components.ieventlistprops.md#searchbox)
 - [selectionProps](components.ieventlistprops.md#selectionprops)
-- [showEmptyDays](components.ieventlistprops.md#showemptydays)
 
 ## Properties
 
@@ -44,7 +43,7 @@
 
 An array of additional columns to add
 
-Defined in: [components/EventList/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L18)
+Defined in: [components/EventList/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L14)
 
 ___
 
@@ -64,7 +63,7 @@ ___
 
 Column width overrides
 
-Defined in: [components/EventList/types.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L38)
+Defined in: [components/EventList/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L24)
 
 ___
 
@@ -94,7 +93,7 @@ ___
 
 Date format
 
-Defined in: [components/EventList/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L23)
+Defined in: [components/EventList/types.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L19)
 
 ___
 
@@ -102,9 +101,9 @@ ___
 
 • `Optional` **enableShimmer**: *boolean*
 
-Enable shimmer
+Enable shimmer (normally while loading)
 
-Defined in: [components/EventList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L13)
+Defined in: [components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
 
 ___
 
@@ -176,9 +175,9 @@ ___
 
 • `Optional` **listGroupProps**: IListGroupProps
 
-Groups to render
+Group props
 
-Defined in: [components/EventList/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L28)
+Defined in: [components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
 
 ___
 
@@ -218,7 +217,7 @@ ___
 
 Resizable columns
 
-Defined in: [components/EventList/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L43)
+Defined in: [components/EventList/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L29)
 
 ___
 
@@ -239,13 +238,3 @@ ___
 Selection
 
 Defined in: [components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
-
-___
-
-### showEmptyDays
-
-• `Optional` **showEmptyDays**: *boolean*
-
-Show empty days
-
-Defined in: [components/EventList/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L33)

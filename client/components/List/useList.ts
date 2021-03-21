@@ -2,9 +2,9 @@
 import { Selection, SelectionMode } from 'office-ui-fabric-react'
 import { useEffect, useMemo } from 'react'
 import { first } from 'underscore'
-import { generateListGroups } from './generateListGroups'
 import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
+import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 
 type UseList = {
@@ -31,22 +31,16 @@ export function useList({ props }: UseList) {
     return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
-        switch (props.selectionProps?.mode) {
-          case SelectionMode.single:
-            props.selectionProps.onChanged(first(_selection))
-            break
-          case SelectionMode.multiple:
-            props.selectionProps.onChanged(_selection)
-            break
+        if (props.selectionProps?.mode === SelectionMode.single) {
+          props.selectionProps.onChanged(first(_selection))
+        } else {
+          props.selectionProps.onChanged(_selection)
         }
       }
     })
   }, [props.selectionProps])
 
-  let groups = null
-  let items = [...state.items]
-  if (props.listGroupProps)
-    [groups, items] = generateListGroups(items, props.listGroupProps)
+  const [groups, items] = useListGroups([...state.items], props.listGroupProps)
 
   const [delay, transitionDuration] = props.fadeIn || [0, 0]
 

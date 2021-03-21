@@ -51,7 +51,7 @@ export function useColumns(): IListColumn[] {
           fieldName: key,
           name,
           minWidth: 60,
-          maxWidth: 60,
+          maxWidth: 100,
           data,
           onRender: (item: any, _index: number, column: IColumn) => (
             <WeekColumn user={item.user} periods={item[column.fieldName]} />

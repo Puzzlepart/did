@@ -17,7 +17,7 @@ export const EventList: FC<IEventListProps> = (props: IEventListProps) => {
         columns={columns}
         items={props.items}
         listGroupProps={props.listGroupProps}
-        listGroupRenderProps={{ showEmptyGroups: props.showEmptyDays }}
+        listGroupRenderProps={{ showEmptyGroups: true }}
       />
     </div>
   )

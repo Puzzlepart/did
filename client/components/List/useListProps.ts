@@ -28,6 +28,8 @@ type UseListProps<T = any> = {
 
 /**
  * List props hook
+ *
+ * @category List
  */
 export function useListProps({
   props,
