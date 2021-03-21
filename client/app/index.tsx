@@ -16,6 +16,8 @@ import { useApp } from './useApp'
 
 /**
  * App
+ *
+ * @category App
  */
 export const App: FunctionComponent<IAppContext> = (props: IAppProps) => {
   const context = useApp(props)

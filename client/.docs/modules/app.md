@@ -19,13 +19,13 @@ The App component
 - [MobileBreadcrumb](app.md#mobilebreadcrumb)
 - [Navigation](app.md#navigation)
 
-### Appx Variables
+### App Variables
 
+- [App](app.md#app)
 - [AppRouter](app.md#approuter)
 
 ### Other Variables
 
-- [App](app.md#app)
 - [AppContext](app.md#appcontext)
 
 ### Function Component Functions
@@ -54,7 +54,17 @@ Defined in: [app/Navigation/index.tsx:14](https://github.com/Puzzlepart/did/blob
 
 ___
 
-## Appx Variables
+## App Variables
+
+### App
+
+• `Const` **App**: *FunctionComponent*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
+
+App
+
+Defined in: [app/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L22)
+
+___
 
 ### AppRouter
 
@@ -67,16 +77,6 @@ Defined in: [app/AppRouter.tsx:28](https://github.com/Puzzlepart/did/blob/dev/cl
 ___
 
 ## Other Variables
-
-### App
-
-• `Const` **App**: *FunctionComponent*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
-
-App
-
-Defined in: [app/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L20)
-
-___
 
 ### AppContext
 

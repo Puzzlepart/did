@@ -23,7 +23,7 @@ import { Navigation } from './Navigation'
 /**
  * App router
  *
- * @category Appx
+ * @category App
  */
 export const AppRouter: FunctionComponent = () => {
   const { pages } = useAppContext()

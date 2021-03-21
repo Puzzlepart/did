@@ -300,10 +300,13 @@ ___
 
 Flexible tab container
 
+It's highly recommended for children of this component
+to use `TabComponent`
+
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: [components/TabContainer/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L17)
+Defined in: [components/TabContainer/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L20)
 
 ___
 

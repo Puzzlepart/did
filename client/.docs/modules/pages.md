@@ -81,6 +81,7 @@ All are built using React Function components and Hooks.
 - [ApiTokens](pages.md#apitokens)
 - [Labels](pages.md#labels)
 - [Roles](pages.md#roles)
+- [SubscriptionSettings](pages.md#subscriptionsettings)
 - [Users](pages.md#users)
 
 ### Timesheet Variables
@@ -359,6 +360,14 @@ ___
 • `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
 
 Defined in: [pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L14)
+
+___
+
+### SubscriptionSettings
+
+• `Const` **SubscriptionSettings**: [*TabComponent*](components.md#tabcomponent)
+
+Defined in: [pages/Admin/Subscription/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Subscription/index.tsx#L14)
 
 ___
 

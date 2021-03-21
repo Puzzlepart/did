@@ -9,6 +9,9 @@ import { useTabContainer } from './useTabContainer'
 /**
  * Flexible tab container
  *
+ * It's highly recommended for children of this component
+ * to use `TabComponent`
+ *
  * Adds styles **display: flex** and **flex-wrap: wrap**
  * to make the `<Pivot >` mobile friendly
  *

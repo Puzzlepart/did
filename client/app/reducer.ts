@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
@@ -5,9 +6,6 @@ import { omit } from 'underscore'
 import { IMobileBreadcrumbItem } from './MobileBreadcrumb'
 import { IAppState } from './types'
 
-/**
- * dsadasdasdasdasda
- */
 export const UPDATE_BREADCRUMB = createAction<[IMobileBreadcrumbItem, any[]?]>(
   'UPDATE_BREADCRUMB'
 )
@@ -20,6 +18,7 @@ export const PAGE_NAVIGATE = createAction('PAGE_NAVIGATE')
  * `useReducer` from `react`
  *
  * @param initialState - Initial state
+ * @category App
  */
 export default function useAppReducer(initialState: IAppState) {
   const reducer = useMemo(

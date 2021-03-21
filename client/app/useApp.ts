@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IAppContext } from 'AppContext'
 import { usePages } from 'pages/usePages'
@@ -8,6 +9,8 @@ import { IAppProps } from './types'
 
 /**
  * Component logic for `App`
+ *
+ * @category App Hooks
  */
 export function useApp(props: IAppProps) {
   const [state, dispatch] = useAppReducer({})

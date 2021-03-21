@@ -58,4 +58,5 @@ export const Admin = () => {
 export * from './ApiTokens'
 export * from './Labels'
 export * from './Roles'
+export * from './Subscription'
 export * from './Users'
