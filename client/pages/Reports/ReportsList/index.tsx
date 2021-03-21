@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivotItem, List, UserMessage } from 'components'
+import { List, TabItem, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import $date from 'DateUtils'
 import React, { useContext } from 'react'
@@ -15,7 +15,7 @@ import { useColumns } from './useColumns'
  *
  * @category Reports
  */
-export const ReportsList: FlexiblePivotItem = () => {
+export const ReportsList: TabItem = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const columns = useColumns({ isResizable: true })

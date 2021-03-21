@@ -1,23 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
 import { useAppContext } from 'AppContext'
-import { IFlexiblePivotProps } from 'components/FlexiblePivot/types'
+import { ITabContainerProps } from 'components/TabContainer'
 import { find, IPivotItemProps } from 'office-ui-fabric-react'
 import { useEffect, useRef } from 'react'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
 
 /**
- * Hook used by `<FlexiblePivot />` component to update the
+ * Hook used by `<ITabContainer />` component to update the
  * app navigation state rendered by the `<MobileBreadcrumb />`
  * component.
  *
- * @remarks Currently only supports `<FlexiblePivot />`, but can
+ * @remarks Currently only supports `<TabContainer />`, but can
  * be extended if it needs to support other components in the
  * future.
  *
- * @returns The `ref` to be used by the `<FlexiblePivot />` component
+ * @returns The `ref` to be used by the `<TabContainer />` component
  */
-export function useMobileBreadcrumb(props: IFlexiblePivotProps) {
+export function useMobileBreadcrumb(props: ITabContainerProps) {
   const ref = useRef(null)
   const { state, dispatch } = useAppContext()
   useEffect(() => {

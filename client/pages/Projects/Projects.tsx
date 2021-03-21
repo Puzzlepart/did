@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivot } from 'components/FlexiblePivot'
+import { TabContainer } from 'components/TabContainer'
 import { usePermissions } from 'hooks'
 import React, { FunctionComponent } from 'react'
 import { PermissionScope } from 'security'
@@ -20,7 +20,7 @@ export const Projects: FunctionComponent = () => {
 
   return (
     <ProjectsContext.Provider value={context}>
-      <FlexiblePivot
+      <TabContainer
         selectedKey={state.view}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
@@ -48,7 +48,7 @@ export const Projects: FunctionComponent = () => {
             itemIcon='AddTo'
           />
         )}
-      </FlexiblePivot>
+      </TabContainer>
     </ProjectsContext.Provider>
   )
 }

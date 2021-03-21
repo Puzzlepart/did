@@ -1,5 +1,6 @@
 import { getIcons } from 'common/icons'
-import { IPanelProps, IPivotItemProps } from 'office-ui-fabric-react'
+import { TabItemProps } from 'components/TabContainer'
+import { IPanelProps } from 'office-ui-fabric-react'
 import { Customer, IFormValidation } from 'types'
 import { first } from 'underscore'
 
@@ -21,7 +22,7 @@ interface ICustomerFormPanelProps extends IPanelProps {
   onSave: () => void
 }
 
-export interface ICustomerFormProps extends IPivotItemProps {
+export interface ICustomerFormProps extends TabItemProps {
   /**
    * Panel props provided if the form is rendered within a panel
    */

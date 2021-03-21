@@ -6,24 +6,21 @@ import React, { JSXElementConstructor, ReactElement } from 'react'
 import { isArray } from 'underscore'
 
 /**
- * Renders the items for the `<FlexiblePivot />`
+ * Renders the tabs for the `<TabContainer />`
  *
- * @param items - Items
- * @param itemProps - Item props
+ * @param tabs - Items
+ * @param props - Props
  */
-export function renderPivotItems(
-  items: any,
-  itemProps: Partial<IPivotItemProps>
-) {
-  return items.map((item: ReactElement) => {
-    if (isArray(item)) return renderPivotItems(item, itemProps)
+export function renderTabs(tabs: any, props: Partial<IPivotItemProps>) {
+  return tabs.map((item: ReactElement) => {
+    if (isArray(item)) return renderTabs(item, props)
     const type = item?.type as JSXElementConstructor<any>
     switch (type?.name) {
       case 'PivotItem':
         return item
       default: {
         return (
-          <PivotItem key={item.props.itemKey} {...item.props} {...itemProps}>
+          <PivotItem key={item.props.itemKey} {...item.props} {...props}>
             {item}
           </PivotItem>
         )

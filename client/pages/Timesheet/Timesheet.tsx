@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivot } from 'components'
+import { TabContainer } from 'components'
 import { HotkeyModal } from 'components/HotkeyModal'
 import React, { FunctionComponent } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -31,7 +31,7 @@ export const Timesheet: FunctionComponent = () => {
           <ActionBar />
           <ErrorBar error={context.error} />
           <StatusBar />
-          <FlexiblePivot
+          <TabContainer
             selectedKey={context.selectedView}
             onLinkClick={({ props }) =>
               context.dispatch(
@@ -56,7 +56,7 @@ export const Timesheet: FunctionComponent = () => {
               headerText={t('timesheet.allocationHeaderText')}
               itemIcon='ReportDocument'
             />
-          </FlexiblePivot>
+          </TabContainer>
         </div>
         <HotkeyModal
           {...hotkeysProps}

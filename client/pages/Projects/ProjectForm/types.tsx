@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
-import { IPanelProps, IPivotItemProps } from 'office-ui-fabric-react'
+import { TabItemProps } from 'components/TabContainer'
+import { IPanelProps } from 'office-ui-fabric-react'
 import {
   IFormValidation,
   LabelObject as Label,
@@ -49,7 +50,7 @@ interface IProjectFormPanelProps extends IPanelProps {
 /**
  * @category Projects
  */
-export interface IProjectFormProps extends IPivotItemProps {
+export interface IProjectFormProps extends TabItemProps {
   /**
    * Panel props provided if the form is rendered within a panel
    */

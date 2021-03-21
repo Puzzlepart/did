@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import {
   ConditionalWrapper,
-  FlexiblePivotItem,
   IconPicker,
   LabelPicker,
   SearchCustomer,
+  TabItem,
   UserMessage
 } from 'components'
 import { Toast } from 'components/Toast'
@@ -20,7 +20,7 @@ import { useProjectForm } from './useProjectForm'
 /**
  * @category Projects
  */
-export const ProjectForm: FlexiblePivotItem<IProjectFormProps> = (
+export const ProjectForm: TabItem<IProjectFormProps> = (
   props: IProjectFormProps
 ) => {
   const { state, loading, dispatch, onFormSubmit, toast, t } = useProjectForm({

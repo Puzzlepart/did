@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivotItem, List } from 'components'
+import { List, TabItem } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -14,7 +14,7 @@ import { useProjectList } from './useProjectList'
  *
  * @category Projects
  */
-export const ProjectList: FlexiblePivotItem<IProjectListProps> = (
+export const ProjectList: TabItem<IProjectListProps> = (
   props: IProjectListProps
 ) => {
   const { t } = useTranslation()

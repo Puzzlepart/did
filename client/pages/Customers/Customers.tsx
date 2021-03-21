@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivot, FlexiblePivotItem } from 'components'
+import { TabContainer, TabItem } from 'components'
 import { usePermissions } from 'hooks'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React from 'react'
@@ -16,14 +16,14 @@ import { CustomersView } from './types'
 /**
  * @category Function Component
  */
-export const Customers: FlexiblePivotItem<ICustomerFormProps> = () => {
+export const Customers: TabItem<ICustomerFormProps> = () => {
   const { t } = useTranslation()
   const { hasPermission } = usePermissions()
   const { state, dispatch, context, view } = useCustomers()
 
   return (
     <CustomersContext.Provider value={context}>
-      <FlexiblePivot
+      <TabContainer
         selectedKey={view}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))
@@ -42,7 +42,7 @@ export const Customers: FlexiblePivotItem<ICustomerFormProps> = () => {
             itemIcon='AddTo'
           />
         )}
-      </FlexiblePivot>
+      </TabContainer>
     </CustomersContext.Provider>
   )
 }

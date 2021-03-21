@@ -44,7 +44,7 @@ Reusable React Function components.
 ### Other Interfaces
 
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
-- [IFlexiblePivotProps](../interfaces/components.iflexiblepivotprops.md)
+- [ITabContainerProps](../interfaces/components.itabcontainerprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
 
 ### PermissionList Interfaces
@@ -57,8 +57,10 @@ Reusable React Function components.
 
 ### Type aliases
 
-- [FlexiblePivotItem](components.md#flexiblepivotitem)
 - [IHotkeyModal](components.md#ihotkeymodal)
+- [TabContainerComponent](components.md#tabcontainercomponent)
+- [TabItem](components.md#tabitem)
+- [TabItemProps](components.md#tabitemprops)
 
 ### Function Component Variables
 
@@ -69,7 +71,6 @@ Reusable React Function components.
 - [EntityLabel](components.md#entitylabel)
 - [EventList](components.md#eventlist)
 - [FilterItem](components.md#filteritem)
-- [FlexiblePivot](components.md#flexiblepivot)
 - [HotkeyModal](components.md#hotkeymodal)
 - [IconPicker](components.md#iconpicker)
 - [IconText](components.md#icontext)
@@ -79,6 +80,7 @@ Reusable React Function components.
 - [ProjectLink](components.md#projectlink)
 - [ProjectTooltip](components.md#projecttooltip)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
+- [TabContainer](components.md#tabcontainer)
 - [Toast](components.md#toast)
 - [UserMessage](components.md#usermessage)
 
@@ -112,25 +114,41 @@ Reusable React Function components.
 
 ## Type aliases
 
-### FlexiblePivotItem
-
-Ƭ **FlexiblePivotItem**<T\>: *FunctionComponent*<T\>
-
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | IPivotItemProps |
-
-Defined in: [components/FlexiblePivot/types.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/types.ts#L46)
-
-___
-
 ### IHotkeyModal
 
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
 Defined in: [components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+
+___
+
+### TabContainerComponent
+
+Ƭ **TabContainerComponent**: *FunctionComponent*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
+
+Defined in: components/TabContainer/types.ts:5
+
+___
+
+### TabItem
+
+Ƭ **TabItem**<T\>: *FunctionComponent*<T\>
+
+#### Type parameters:
+
+Name | Type | Default |
+:------ | :------ | :------ |
+`T` | [*TabItemProps*](components.md#tabitemprops) | *any* |
+
+Defined in: components/TabContainer/types.ts:50
+
+___
+
+### TabItemProps
+
+Ƭ **TabItemProps**: IPivotItemProps
+
+Defined in: components/TabContainer/types.ts:48
 
 ## Function Component Variables
 
@@ -192,19 +210,6 @@ ___
 • `Const` **FilterItem**: *FunctionComponent*<IFilterItemProps\>
 
 Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
-
-___
-
-### FlexiblePivot
-
-• `Const` **FlexiblePivot**: *FunctionComponent*<[*IFlexiblePivotProps*](../interfaces/components.iflexiblepivotprops.md)\>
-
-Flexible `<Pivot >` component
-
-Adds styles **display: flex** and **flex-wrap: wrap**
-to make the `<Pivot >` mobile friendly
-
-Defined in: [components/FlexiblePivot/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L18)
 
 ___
 
@@ -294,6 +299,19 @@ ___
 • `Const` **ScrollablePaneWrapper**: *FunctionComponent*<any\>
 
 Defined in: [components/ScrollablePaneWrapper/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L8)
+
+___
+
+### TabContainer
+
+• `Const` **TabContainer**: [*TabContainerComponent*](components.md#tabcontainercomponent)
+
+Flexible tab container
+
+Adds styles **display: flex** and **flex-wrap: wrap**
+to make the `<Pivot >` mobile friendly
+
+Defined in: components/TabContainer/index.tsx:16
 
 ___
 

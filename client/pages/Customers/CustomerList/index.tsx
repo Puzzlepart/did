@@ -1,4 +1,4 @@
-import { FlexiblePivotItem, List } from 'components'
+import { List, TabItem } from 'components'
 import {
   Checkbox,
   IPivotItemProps,
@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
 import { useCustomerList } from './useCustomerList'
 
-export const CustomerList: FlexiblePivotItem = (props: IPivotItemProps) => {
+export const CustomerList: TabItem = (props: IPivotItemProps) => {
   const { t } = useTranslation()
   const {
     state,

@@ -6,19 +6,19 @@ import {
   merge
 } from 'office-ui-fabric-react'
 import { isMobile } from 'react-device-detect'
-import { IFlexiblePivotProps } from './types'
+import { ITabContainerProps } from './types'
 
 /**
- * Returns Pivot styles
+ * Returns tab container styles
  *
  * @param props - Component props
  */
-export function useFlexiblePivotStyles({
+export function useTabContainerStyles({
   styles,
   fixedLinkWidth = false,
   linkHeight = 30,
   hideIconsMobile = true
-}: IFlexiblePivotProps) {
+}: ITabContainerProps) {
   const styles_: IStyleFunctionOrObject<IPivotStyleProps, IPivotStyles> = {
     root: {
       display: 'flex',

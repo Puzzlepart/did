@@ -126,7 +126,7 @@ ___
 
 ### Customers
 
-• `Const` **Customers**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<ICustomerFormProps\>
+• `Const` **Customers**: [*TabItem*](components.md#tabitem)<ICustomerFormProps\>
 
 Defined in: [pages/Customers/Customers.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L19)
 
@@ -212,7 +212,7 @@ ___
 
 ### ProjectForm
 
-• `Const` **ProjectForm**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<IProjectFormProps\>
+• `Const` **ProjectForm**: [*TabItem*](components.md#tabitem)<IProjectFormProps\>
 
 Defined in: [pages/Projects/ProjectForm/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/index.tsx#L23)
 
@@ -220,7 +220,7 @@ ___
 
 ### ProjectList
 
-• `Const` **ProjectList**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<[*IProjectListProps*](../interfaces/pages.iprojectlistprops.md)\>
+• `Const` **ProjectList**: [*TabItem*](components.md#tabitem)<[*IProjectListProps*](../interfaces/pages.iprojectlistprops.md)\>
 
 Project list component used by `<Projects />`. Renders
 projects in a list using our `<List />` component.

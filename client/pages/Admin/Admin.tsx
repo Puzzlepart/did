@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { FlexiblePivot } from 'components/FlexiblePivot'
+import { TabContainer } from 'components/TabContainer'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
@@ -16,7 +16,7 @@ export const Admin = () => {
   const history = useHistory()
 
   return (
-    <FlexiblePivot
+    <TabContainer
       className={styles.root}
       fixedLinkWidth={true}
       onLinkClick={({ props }) => {
@@ -35,7 +35,7 @@ export const Admin = () => {
             />
           )
       )}
-    </FlexiblePivot>
+    </TabContainer>
   )
 }
 

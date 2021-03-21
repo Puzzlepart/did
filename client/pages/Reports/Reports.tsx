@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { FilterPanel, FlexiblePivot, UserMessage } from 'components'
+import { FilterPanel, TabContainer, UserMessage } from 'components'
 import { PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -24,7 +24,7 @@ export const Reports: FunctionComponent = () => {
   const { queries, filters, context } = useReports()
   return (
     <ReportsContext.Provider value={context}>
-      <FlexiblePivot
+      <TabContainer
         className={styles.root}
         selectedKey={context.state.preset?.itemKey || 'default'}
         items={queries}
@@ -49,7 +49,7 @@ export const Reports: FunctionComponent = () => {
             text={t('reports.selectReportText')}
           />
         </PivotItem>
-      </FlexiblePivot>
+      </TabContainer>
       <FilterPanel
         isOpen={context.state.isFiltersOpen}
         headerText={t('reports.filterPanelHeaderText')}

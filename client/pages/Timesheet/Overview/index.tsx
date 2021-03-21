@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { EventList, FlexiblePivotItem } from 'components'
+import { EventList, TabItem } from 'components'
 import { config } from 'package'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -11,7 +11,7 @@ import { useGroups } from './useGroups'
 /**
  * @category Timesheet
  */
-export const Overview: FlexiblePivotItem = () => {
+export const Overview: TabItem = () => {
   const { loading, error, selectedPeriod } = useContext(TimesheetContext)
   const additionalColumns = useAdditionalColumns()
   const groups = useGroups()
