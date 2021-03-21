@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react'
 import { ProjectList } from 'pages/Projects'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
@@ -13,7 +13,7 @@ import $projects from './projects.gql'
 /**
  * @category Customers
  */
-export const CustomerDetails: FC = () => {
+export const CustomerDetails: React.FC = () => {
   const { t } = useTranslation()
   const { state } = useContext(CustomersContext)
   const { loading, error, data } = useQuery($projects, {

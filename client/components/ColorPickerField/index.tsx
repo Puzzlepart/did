@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { Label, TooltipHost } from 'office-ui-fabric-react'
-import React, { FC, useRef } from 'react'
+import React, { useRef } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import styles from './ColorPickerField.module.scss'
 import { IColorPickerFieldProps } from './types'
@@ -12,7 +12,7 @@ import { IColorPickerFieldProps } from './types'
  *
  * @category Function Component
  */
-export const ColorPickerField: FC<IColorPickerFieldProps> = (props) => {
+export const ColorPickerField: React.FC<IColorPickerFieldProps> = (props) => {
   const targetRef = useRef(null)
   return (
     <div className={`${props.className} ${styles.root}`}>

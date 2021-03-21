@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { ShimmeredDetailsList } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import FadeIn from 'react-fade-in'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import styles from './List.module.scss'
@@ -28,7 +28,7 @@ import { useList } from './useList'
  *
  * @category Function Component
  */
-export const List: FC<IListProps> = (props) => {
+export const List: React.FC<IListProps> = (props) => {
   const { delay, transitionDuration, listProps } = useList({ props })
   return (
     <div className={styles.root} hidden={props.hidden}>

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import { getContrastColor } from 'utils'
@@ -17,7 +17,7 @@ import { IEntityLabelProps } from './types'
  *
  * @category Function Component
  */
-export const EntityLabel: FC<IEntityLabelProps> = ({
+export const EntityLabel: React.FC<IEntityLabelProps> = ({
   label
 }: IEntityLabelProps) => {
   const { t } = useTranslation()

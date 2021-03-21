@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './MenuItem.module.scss'
 import { IMenuItemProps } from './types'
 
 /**
  * @category UserMenu
  */
-export const MenuItem: FC<IMenuItemProps> = (props) => {
+export const MenuItem: React.FC<IMenuItemProps> = (props) => {
   const className = [styles.root]
   let onClick = props.onClick
   if (props.href) {

@@ -6,14 +6,16 @@ import {
   Sticky,
   StickyPositionType
 } from 'office-ui-fabric-react'
-import React, { FC, useMemo, useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'
 import { EXECUTE_SEARCH } from '../reducer'
 import styles from './ListHeader.module.scss'
 import { IListHeaderProps } from './types'
 
-export const ListHeader: FC<IListHeaderProps> = (props: IListHeaderProps) => {
+export const ListHeader: React.FC<IListHeaderProps> = (
+  props: IListHeaderProps
+) => {
   const root = useRef(null)
   const timeout = useRef(null)
 

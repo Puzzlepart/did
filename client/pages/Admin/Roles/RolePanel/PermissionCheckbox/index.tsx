@@ -1,9 +1,11 @@
 import { Checkbox, Icon } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'
 
-export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (props) => {
+export const PermissionCheckbox: React.FC<IPermissionCheckboxProps> = (
+  props
+) => {
   return (
     <div className={styles.root} style={{ opacity: props.checked ? 1 : 0.6 }}>
       <Checkbox

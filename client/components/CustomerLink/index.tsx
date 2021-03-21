@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import React, { FC } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { ICustomerLinkProps } from './types'
 
@@ -9,7 +9,7 @@ import { ICustomerLinkProps } from './types'
  *
  * @category Function Component
  */
-export const CustomerLink: FC<ICustomerLinkProps> = ({
+export const CustomerLink: React.FC<ICustomerLinkProps> = ({
   customer
 }: ICustomerLinkProps) => (
   <Link to={`/customers/search/${customer?.key}`.toLowerCase()}>

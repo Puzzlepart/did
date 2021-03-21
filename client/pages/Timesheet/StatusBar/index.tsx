@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Progress } from 'components/Progress'
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { isEmpty } from 'underscore'
@@ -12,7 +12,7 @@ import { useMessages } from './useMessages'
 /**
  * @category Timesheet
  */
-export const StatusBar: FC = () => {
+export const StatusBar: React.FC = () => {
   if (isMobile) styles.root += ` ${styles.mobile}`
   const { state } = useContext(TimesheetContext)
 

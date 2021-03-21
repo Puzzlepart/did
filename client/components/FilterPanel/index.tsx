@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Panel } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import { FilterItem } from './FilterItem'
 import styles from './FilterPanel.module.scss'
 import { IFilterPanelProps } from './types'
@@ -15,7 +15,7 @@ import { useFilterPanel } from './useFilterPanel'
  *
  * @category Function Component
  */
-export const FilterPanel: FC<IFilterPanelProps> = (props) => {
+export const FilterPanel: React.FC<IFilterPanelProps> = (props) => {
   const { filters, onFilterUpdated } = useFilterPanel(props)
 
   return (

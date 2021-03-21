@@ -8,12 +8,12 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
 import { useLabelForm } from './useLabelForm'
 
-export const LabelForm: FC<ILabelFormProps> = (props) => {
+export const LabelForm: React.FC<ILabelFormProps> = (props) => {
   const { model, setModel, isFormValid, onSave, t } = useLabelForm({ props })
 
   return (

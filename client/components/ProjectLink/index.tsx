@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
@@ -11,7 +11,7 @@ import { IProjectLinkProps } from './types'
  *
  * @category Function Component
  */
-export const ProjectLink: FC<IProjectLinkProps> = (props) => (
+export const ProjectLink: React.FC<IProjectLinkProps> = (props) => (
   <Link
     className={styles.root}
     to={`/projects/search/${props.project?.tag}`.toLowerCase()}>

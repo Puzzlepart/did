@@ -6,7 +6,7 @@ import {
   IContextualMenuItem,
   TextField
 } from 'office-ui-fabric-react'
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
 import { ReportsContext } from '../context'
@@ -24,7 +24,7 @@ const INITIAL_MODEL: IContextualMenuItem = {
 /**
  * @category Reports
  */
-export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
+export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
   const [model, setModel] = useState<IContextualMenuItem>(INITIAL_MODEL)

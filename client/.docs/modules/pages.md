@@ -150,7 +150,7 @@ ___
 
 ### Projects
 
-• `Const` **Projects**: FC
+• `Const` **Projects**: React.FC
 
 Defined in: [pages/Projects/Projects.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L16)
 
@@ -158,7 +158,7 @@ ___
 
 ### Timesheet
 
-• `Const` **Timesheet**: FC
+• `Const` **Timesheet**: React.FC
 
 Defined in: [pages/Timesheet/Timesheet.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L22)
 
@@ -278,7 +278,7 @@ ___
 
 ### Header
 
-• `Const` **Header**: FC
+• `Const` **Header**: React.FC
 
 Defined in: [pages/Projects/ProjectDetails/Header/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L12)
 
@@ -286,7 +286,7 @@ ___
 
 ### Information
 
-• `Const` **Information**: FC
+• `Const` **Information**: React.FC
 
 Defined in: [pages/Projects/ProjectDetails/Information/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L16)
 
@@ -294,7 +294,7 @@ ___
 
 ### ProjectDetails
 
-• `Const` **ProjectDetails**: FC
+• `Const` **ProjectDetails**: React.FC
 
 Defined in: [pages/Projects/ProjectDetails/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/index.tsx#L15)
 
@@ -329,7 +329,7 @@ ___
 
 ### TimeEntries
 
-• `Const` **TimeEntries**: FC
+• `Const` **TimeEntries**: React.FC
 
 Defined in: [pages/Projects/ProjectDetails/TimeEntries/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/TimeEntries/index.tsx#L15)
 
@@ -347,7 +347,7 @@ ___
 
 ### SaveFilterForm
 
-• `Const` **SaveFilterForm**: *FC*<ISaveFilterFormProps\>
+• `Const` **SaveFilterForm**: *React.FC*<ISaveFilterFormProps\>
 
 Defined in: [pages/Reports/SaveFilterForm/index.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L27)
 

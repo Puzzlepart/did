@@ -177,7 +177,7 @@ Defined in: [components/Toast/types.tsx:7](https://github.com/Puzzlepart/did/blo
 
 ### Autocomplete
 
-• `Const` **Autocomplete**: *FC*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
+• `Const` **Autocomplete**: *React.FC*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
 
 Autocomplete component using `<SearchBox />`, `<Callout />`,
 `<FocusZone />` and `<List />` from `office-ui-fabric-react`.
@@ -188,7 +188,7 @@ ___
 
 ### ColorPickerField
 
-• `Const` **ColorPickerField**: *FC*<[*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)\>
+• `Const` **ColorPickerField**: *React.FC*<[*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)\>
 
 Field to pick an color using `<SketchPicker />` from
 `react-color`
@@ -199,7 +199,7 @@ ___
 
 ### ConditionalWrapper
 
-• `Const` **ConditionalWrapper**: *FC*<IConditionalWrapperProps\>
+• `Const` **ConditionalWrapper**: *React.FC*<IConditionalWrapperProps\>
 
 Conditionally wraps `children` in `wrapper` based on `condition`
 
@@ -209,7 +209,7 @@ ___
 
 ### CustomerLink
 
-• `Const` **CustomerLink**: *FC*<ICustomerLinkProps\>
+• `Const` **CustomerLink**: *React.FC*<ICustomerLinkProps\>
 
 Renders a `<Link />` from `react-router-dom` that
 navigates to the specified customer
@@ -220,7 +220,7 @@ ___
 
 ### EditLink
 
-• `Const` **EditLink**: *FC*<IEditLinkProps\>
+• `Const` **EditLink**: *React.FC*<IEditLinkProps\>
 
 Renders a edit link using `<Icon />` and `<Link />`
 from `office-ui-fabric-react`
@@ -231,7 +231,7 @@ ___
 
 ### EntityLabel
 
-• `Const` **EntityLabel**: *FC*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
+• `Const` **EntityLabel**: *React.FC*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
 
 The `<EntityLabel />` component is used to add contextual metadata
 to a design. Visually it styles text, adds padding, and rounded corners.
@@ -246,7 +246,7 @@ ___
 
 ### EventList
 
-• `Const` **EventList**: *FC*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
+• `Const` **EventList**: *React.FC*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
 
 Renders events in a list using `<List />` component
 
@@ -258,7 +258,7 @@ ___
 
 ### FilterItem
 
-• `Const` **FilterItem**: *FC*<IFilterItemProps\>
+• `Const` **FilterItem**: *React.FC*<IFilterItemProps\>
 
 Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
 
@@ -266,7 +266,7 @@ ___
 
 ### FilterPanel
 
-• `Const` **FilterPanel**: *FC*<[*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)\>
+• `Const` **FilterPanel**: *React.FC*<[*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)\>
 
 Filter panel that renders filter items with more than
 1 item.
@@ -280,7 +280,7 @@ ___
 
 ### HotkeyModal
 
-• `Const` **HotkeyModal**: *FC*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
+• `Const` **HotkeyModal**: *React.FC*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
 
 Modal that shows the available shortcuts in the current context.
 
@@ -290,7 +290,7 @@ ___
 
 ### IconPicker
 
-• `Const` **IconPicker**: *FC*<IIconPickerProps\>
+• `Const` **IconPicker**: *React.FC*<IIconPickerProps\>
 
 Icon picker using `<Autocomplete />` to select
 icons from `@uifabric/icons`
@@ -301,7 +301,7 @@ ___
 
 ### IconText
 
-• `Const` **IconText**: *FC*<IIconTextProps\>
+• `Const` **IconText**: *React.FC*<IIconTextProps\>
 
 Renders an inline `<Icon />` with text
 
@@ -311,7 +311,7 @@ ___
 
 ### LabelPicker
 
-• `Const` **LabelPicker**: *FC*<ILabelPickerProps\>
+• `Const` **LabelPicker**: *React.FC*<ILabelPickerProps\>
 
 Defined in: [components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
 
@@ -319,7 +319,7 @@ ___
 
 ### List
 
-• `Const` **List**: *FC*<[*IListProps*](../interfaces/components.ilistprops.md)\>
+• `Const` **List**: *React.FC*<[*IListProps*](../interfaces/components.ilistprops.md)\>
 
 List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
 
@@ -345,7 +345,7 @@ ___
 
 ### PermissionList
 
-• `Const` **PermissionList**: *FC*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
+• `Const` **PermissionList**: *React.FC*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
 Defined in: [components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
 
@@ -353,7 +353,7 @@ ___
 
 ### ProjectLink
 
-• `Const` **ProjectLink**: *FC*<IProjectLinkProps\>
+• `Const` **ProjectLink**: *React.FC*<IProjectLinkProps\>
 
 Renders a `<Link />` from `react-router-dom` that
 navigates to the specified project
@@ -364,7 +364,7 @@ ___
 
 ### ProjectTooltip
 
-• `Const` **ProjectTooltip**: *FC*<IProjectTooltipProps\>
+• `Const` **ProjectTooltip**: *React.FC*<IProjectTooltipProps\>
 
 Shows more details about the project in a
 `<TooltipHost />` from `office-ui-fabric-react`
@@ -375,7 +375,7 @@ ___
 
 ### ScrollablePaneWrapper
 
-• `Const` **ScrollablePaneWrapper**: *FC*<any\>
+• `Const` **ScrollablePaneWrapper**: *React.FC*<any\>
 
 Conditionally wraps `children` in `<ScrollablePane />` based
 on `condition`
@@ -386,7 +386,7 @@ ___
 
 ### SearchCustomer
 
-• `Const` **SearchCustomer**: *FC*<ISearchCustomerProps\>
+• `Const` **SearchCustomer**: *React.FC*<ISearchCustomerProps\>
 
 Search for customers using `<Autocomplete />`
 
@@ -396,7 +396,7 @@ ___
 
 ### SearchProject
 
-• `Const` **SearchProject**: *FC*<ISearchProjectProps\>
+• `Const` **SearchProject**: *React.FC*<ISearchProjectProps\>
 
 Search for projects using `<Autocomplete />`
 
@@ -422,7 +422,7 @@ ___
 
 ### Toast
 
-• `Const` **Toast**: *FC*<[*IToastProps*](components.md#itoastprops)\>
+• `Const` **Toast**: *React.FC*<[*IToastProps*](components.md#itoastprops)\>
 
 A Toast component that shows a `<MessageBar />` with
 markdown using `react-markdown`
@@ -435,7 +435,7 @@ ___
 
 ### UserMessage
 
-• `Const` **UserMessage**: *FC*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
+• `Const` **UserMessage**: *React.FC*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
 
 A component that supports a `<MessageBar />` with
 markdown using `react-markdown`.
@@ -448,7 +448,7 @@ ___
 
 ### SuggestionItem
 
-• `Const` **SuggestionItem**: *FC*<[*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)\>
+• `Const` **SuggestionItem**: *React.FC*<[*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)\>
 
 Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
 
@@ -458,7 +458,7 @@ ___
 
 ### UserColumn
 
-• `Const` **UserColumn**: *FC*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
+• `Const` **UserColumn**: *React.FC*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
 
 User column
 

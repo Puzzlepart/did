@@ -6,7 +6,7 @@
  */
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
-import React, { FC } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { ErrorBoundary } from 'react-error-boundary'
 import {
@@ -25,7 +25,7 @@ import { Navigation } from './Navigation'
  *
  * @category App
  */
-export const AppRouter: FC = () => {
+export const AppRouter: React.FC = () => {
   const { pages } = useAppContext()
   const [, hasPermission] = usePermissions()
   let className = styles.root

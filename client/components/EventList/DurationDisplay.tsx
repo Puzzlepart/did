@@ -1,14 +1,14 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
 import { format } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { IDurationDisplayProps } from './types'
 
 /**
  * @category Function Component
  */
-export const DurationDisplay: FC<IDurationDisplayProps> = (
+export const DurationDisplay: React.FC<IDurationDisplayProps> = (
   props
 ): JSX.Element => {
   const { t } = useTranslation()

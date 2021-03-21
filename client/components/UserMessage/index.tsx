@@ -5,7 +5,7 @@ import {
   IStyleFunctionOrObject,
   MessageBar
 } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
@@ -16,7 +16,7 @@ import styles from './UserMessage.module.scss'
  *
  * @category Function Component
  */
-export const UserMessage: FC<IUserMessageProps> = (props) => {
+export const UserMessage: React.FC<IUserMessageProps> = (props) => {
   const _styles: IStyleFunctionOrObject<
     IMessageBarStyleProps,
     IMessageBarStyles

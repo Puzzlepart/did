@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import React, { FC, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
 import $customers from '../../pages/Customers/customers.gql'
@@ -12,7 +12,7 @@ import { ISearchCustomerProps } from './types'
  *
  * @category Function Component
  */
-export const SearchCustomer: FC<ISearchCustomerProps> = (props) => {
+export const SearchCustomer: React.FC<ISearchCustomerProps> = (props) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
     fetchPolicy: 'cache-first'

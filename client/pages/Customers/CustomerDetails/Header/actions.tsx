@@ -2,7 +2,7 @@
 import { usePermissions } from 'hooks'
 import { DefaultButton } from 'office-ui-fabric-react'
 import { CustomersContext } from 'pages/Customers/context'
-import React, { FC, HTMLAttributes, useContext, useState } from 'react'
+import React, { HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { CustomerForm } from '../../CustomerForm'
@@ -11,7 +11,7 @@ import styles from './Header.module.scss'
 /**
  * @category Customers
  */
-export const CustomerActions: FC<HTMLAttributes<HTMLDivElement>> = (
+export const CustomerActions: React.FC<HTMLAttributes<HTMLDivElement>> = (
   props: HTMLAttributes<HTMLDivElement>
 ) => {
   const { t } = useTranslation()

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { TooltipHost } from 'office-ui-fabric-react'
-import React, { FC, useRef } from 'react'
+import React, { useRef } from 'react'
 import { IWeekColumnProps } from './types'
 import { useWeekColumn } from './useWeekColumn'
 import styles from './WeekColumn.module.scss'
@@ -9,7 +9,7 @@ import { WeekColumnTooltip } from './WeekColumnTooltip'
 /**
  * @category SummaryView
  */
-export const WeekColumn: FC<IWeekColumnProps> = (props) => {
+export const WeekColumn: React.FC<IWeekColumnProps> = (props) => {
   const target = useRef()
   const hours = useWeekColumn(props)
   if (hours.total === null) return null

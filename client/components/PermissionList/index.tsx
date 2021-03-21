@@ -2,14 +2,14 @@
 /* eslint-disable tsdoc/syntax */
 import { usePermissions } from 'hooks'
 import { Icon } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 
 /**
  * @category Function Component
  */
-export const PermissionList: FC<IPermissionListProps> = ({
+export const PermissionList: React.FC<IPermissionListProps> = ({
   permissionIds
 }: IPermissionListProps) => {
   const [permissions] = usePermissions(permissionIds)

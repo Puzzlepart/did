@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ProjectsContext } from '../../context'
 import { ProjectActions } from './actions'
@@ -9,7 +9,7 @@ import styles from './Header.module.scss'
 /**
  * @category Projects
  */
-export const Header: FC = () => {
+export const Header: React.FC = () => {
   const { state } = useContext(ProjectsContext)
   return (
     <div className={styles.root}>

@@ -5,7 +5,7 @@
  *
  * @module App
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { AppRouter } from './AppRouter'
 import { AppContext } from './context'
 import { ErrorFallback } from './ErrorFallback'
@@ -19,7 +19,7 @@ import { useApp } from './useApp'
  *
  * @category App
  */
-export const App: FC<IAppProps> = (props) => {
+export const App: React.FC<IAppProps> = (props) => {
   const context = useApp(props)
   return (
     <AppContext.Provider value={context}>

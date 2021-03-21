@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { FC } from 'react'
+import React from 'react'
 import { PermissionScope } from 'security'
 
 /**
@@ -7,7 +7,7 @@ import { PermissionScope } from 'security'
  *
  * @category Pages
  */
-export interface PageComponent extends FC {
+export interface PageComponent extends React.FC {
   /**
    * Icon that describe the page
    *

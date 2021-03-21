@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
-import React, { FC } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
@@ -11,7 +11,7 @@ import { UserNotifications } from './UserNotifications'
 /**
  * @category Function Component
  */
-export const Navigation: FC = () => {
+export const Navigation: React.FC = () => {
   const { pages, user } = useAppContext()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`

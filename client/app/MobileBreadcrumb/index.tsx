@@ -2,7 +2,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
 import { Breadcrumb, IBreadcrumbItem } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import styles from './MobileBreadcrumb.module.scss'
@@ -11,7 +11,7 @@ import { IMobileBreadcrumbProps } from './types'
 /**
  * @category Function Component
  */
-export const MobileBreadcrumb: FC<IMobileBreadcrumbProps> = (props) => {
+export const MobileBreadcrumb: React.FC<IMobileBreadcrumbProps> = (props) => {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
   const items: IBreadcrumbItem[] = [

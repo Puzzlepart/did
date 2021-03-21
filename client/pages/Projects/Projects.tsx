@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { TabContainer } from 'components/TabContainer'
-import React, { FC } from 'react'
+import React from 'react'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
 import { useProjects } from './hooks/useProjects'
@@ -13,7 +13,7 @@ import { ProjectsView } from './types'
 /**
  * @category Function Component
  */
-export const Projects: FC = () => {
+export const Projects: React.FC = () => {
   const { state, dispatch, listProps, t, context } = useProjects()
 
   return (

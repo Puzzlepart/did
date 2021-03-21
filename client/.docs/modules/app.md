@@ -40,7 +40,7 @@ The App component
 
 ### MobileBreadcrumb
 
-• `Const` **MobileBreadcrumb**: *FC*<IMobileBreadcrumbProps\>
+• `Const` **MobileBreadcrumb**: *React.FC*<IMobileBreadcrumbProps\>
 
 Defined in: [app/MobileBreadcrumb/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileBreadcrumb/index.tsx#L14)
 
@@ -48,7 +48,7 @@ ___
 
 ### Navigation
 
-• `Const` **Navigation**: FC
+• `Const` **Navigation**: React.FC
 
 Defined in: [app/Navigation/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L14)
 
@@ -58,7 +58,7 @@ ___
 
 ### App
 
-• `Const` **App**: *FC*<IAppProps\>
+• `Const` **App**: *React.FC*<IAppProps\>
 
 App
 
@@ -68,7 +68,7 @@ ___
 
 ### AppRouter
 
-• `Const` **AppRouter**: FC
+• `Const` **AppRouter**: React.FC
 
 App router
 

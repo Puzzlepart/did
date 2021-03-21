@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FC } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
@@ -9,7 +9,7 @@ import { useNavItem } from './useNavItem'
 /**
  * @category Navigation
  */
-export const NavItem: FC<INavItemProps> = (props) => {
+export const NavItem: React.FC<INavItemProps> = (props) => {
   const { className, onClick, shouldRender } = useNavItem(props)
   return (
     shouldRender && (

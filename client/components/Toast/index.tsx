@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import React, { FC } from 'react'
+import React from 'react'
 import { omit } from 'underscore'
 import { UserMessage } from '../UserMessage'
 import styles from './Toast.module.scss'
@@ -13,7 +13,7 @@ import { IToastProps } from './types'
  *
  * @category Function Component
  */
-export const Toast: FC<IToastProps> = (props) => {
+export const Toast: React.FC<IToastProps> = (props) => {
   const classNames = [styles.root]
   if (props.hidden) classNames.push(styles.fadeOut)
   return (
