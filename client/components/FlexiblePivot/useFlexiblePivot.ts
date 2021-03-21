@@ -13,9 +13,9 @@ import { useFlexiblePivotStyles } from './useFlexiblePivotStyles'
  * * Uses hook `useMobileBreadcrumb` to update breadcrumb
  * for mobile devices
  *
- * @category FlexiblePivot
  * @returns The `ref` and `styles` to be used by the <FlexiblePivot />`
  * component
+ * @category FlexiblePivot
  */
 export function useFlexiblePivot(
   props: IFlexiblePivotProps

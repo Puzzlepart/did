@@ -1,9 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { FlexiblePivot } from 'components'
 import { HotkeyModal } from 'components/HotkeyModal'
-import { PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
-import { isBrowser } from 'react-device-detect'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { ActionBar } from './ActionBar'
@@ -39,33 +37,25 @@ export const Timesheet: FunctionComponent = () => {
               context.dispatch(
                 CHANGE_VIEW({ view: props.itemKey as TimesheetView })
               )
-            }>
-            <PivotItem
-              key='overview'
+            }
+            itemProps={{
+              headerButtonProps: { disabled: !!context.error }
+            }}>
+            <Overview
               itemKey='overview'
               headerText={t('timesheet.overviewHeaderText')}
               itemIcon='CalendarWeek'
-              headerButtonProps={{ disabled: !!context.error }}>
-              <Overview />
-            </PivotItem>
-            {isBrowser && (
-              <PivotItem
-                key='summary'
-                itemKey='summary'
-                headerText={t('timesheet.summaryHeaderText')}
-                itemIcon='List'
-                headerButtonProps={{ disabled: !!context.error }}>
-                <SummaryView />
-              </PivotItem>
-            )}
-            <PivotItem
-              key='allocation'
+            />
+            <SummaryView
+              itemKey='summary'
+              headerText={t('timesheet.summaryHeaderText')}
+              itemIcon='List'
+            />
+            <AllocationView
               itemKey='allocation'
               headerText={t('timesheet.allocationHeaderText')}
               itemIcon='ReportDocument'
-              headerButtonProps={{ disabled: !!context.error }}>
-              <AllocationView />
-            </PivotItem>
+            />
           </FlexiblePivot>
         </div>
         <HotkeyModal

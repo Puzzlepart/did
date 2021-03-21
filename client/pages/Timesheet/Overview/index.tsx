@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import { EventList } from 'components'
+import { EventList, FlexiblePivotItem } from 'components'
 import { config } from 'package'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { TimesheetContext } from '../context'
 import styles from './Overview.module.scss'
@@ -11,13 +11,12 @@ import { useGroups } from './useGroups'
 /**
  * @category Timesheet
  */
-export const Overview: FunctionComponent = () => {
+export const Overview: FlexiblePivotItem = () => {
   const { loading, error, selectedPeriod } = useContext(TimesheetContext)
   const additionalColumns = useAdditionalColumns()
   const groups = useGroups()
   const className = [styles.root]
   if (isMobile) className.push(styles.mobile)
-
   return (
     <div className={className.join(' ')}>
       <EventList

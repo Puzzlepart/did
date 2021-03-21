@@ -44,6 +44,7 @@ Reusable React Function components.
 ### Other Interfaces
 
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
+- [IFlexiblePivotProps](../interfaces/components.iflexiblepivotprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
 
 ### PermissionList Interfaces
@@ -56,6 +57,7 @@ Reusable React Function components.
 
 ### Type aliases
 
+- [FlexiblePivotItem](components.md#flexiblepivotitem)
 - [IHotkeyModal](components.md#ihotkeymodal)
 
 ### Function Component Variables
@@ -109,6 +111,14 @@ Reusable React Function components.
 - [useMessage](components.md#usemessage)
 
 ## Type aliases
+
+### FlexiblePivotItem
+
+Ƭ **FlexiblePivotItem**: *FunctionComponent*<IPivotItemProps\>
+
+Defined in: [components/FlexiblePivot/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/types.ts#L47)
+
+___
 
 ### IHotkeyModal
 
@@ -181,14 +191,14 @@ ___
 
 ### FlexiblePivot
 
-• `Const` **FlexiblePivot**: *FunctionComponent*<IFlexiblePivotProps\>
+• `Const` **FlexiblePivot**: *FunctionComponent*<[*IFlexiblePivotProps*](../interfaces/components.iflexiblepivotprops.md)\>
 
 Flexible `<Pivot >` component
 
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: [components/FlexiblePivot/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L17)
+Defined in: [components/FlexiblePivot/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/index.tsx#L18)
 
 ___
 

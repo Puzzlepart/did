@@ -1,8 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
+import { FlexiblePivotItem } from 'components/FlexiblePivot/types'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { FunctionComponent, useContext, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Bar,
@@ -22,7 +23,7 @@ import { useChartData } from './useChartData'
 /**
  * @category Timesheet
  */
-export const AllocationView: FunctionComponent = () => {
+export const AllocationView: FlexiblePivotItem = () => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>(null)

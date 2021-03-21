@@ -153,7 +153,7 @@ ___
 
 • `Const` **Timesheet**: FunctionComponent
 
-Defined in: [pages/Timesheet/Timesheet.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L24)
+Defined in: [pages/Timesheet/Timesheet.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L22)
 
 ___
 
@@ -242,7 +242,7 @@ ___
 
 • `Const` **TimeEntries**: FunctionComponent
 
-Defined in: [pages/Projects/ProjectDetails/TimeEntries/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/TimeEntries/index.tsx#L18)
+Defined in: [pages/Projects/ProjectDetails/TimeEntries/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/TimeEntries/index.tsx#L15)
 
 ___
 

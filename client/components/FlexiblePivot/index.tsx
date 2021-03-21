@@ -3,6 +3,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Pivot } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { renderPivotItems } from './renderPivotItems'
 import { IFlexiblePivotProps } from './types'
 import { useFlexiblePivot } from './useFlexiblePivot'
 
@@ -20,9 +21,10 @@ export const FlexiblePivot: FunctionComponent<IFlexiblePivotProps> = (
   const { styles, ref } = useFlexiblePivot(props)
   return (
     <Pivot {...props} ref={ref} styles={styles}>
-      {props.children}
+      {renderPivotItems(props.children, props.itemProps)}
     </Pivot>
   )
 }
 
 export { PivotItem } from 'office-ui-fabric-react'
+export * from './types'

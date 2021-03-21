@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IPivotItemProps, IPivotProps } from 'office-ui-fabric-react'
+import { FunctionComponent } from 'react'
 
 export interface IFlexiblePivotProps extends IPivotProps {
   /**
@@ -28,6 +29,12 @@ export interface IFlexiblePivotProps extends IPivotProps {
   linkHeight?: string | number
 
   /**
+   * Item properties that will be shared between
+   * all items in the pivot
+   */
+  itemProps?: IPivotItemProps
+
+  /**
    * Optionally provide the item that are rendered
    * inside the Pivot. This can be used instead of
    * using `useRef` and `children` when that doesn't
@@ -35,3 +42,5 @@ export interface IFlexiblePivotProps extends IPivotProps {
    */
   items?: IPivotItemProps[]
 }
+
+export type FlexiblePivotItem = FunctionComponent<IPivotItemProps>
