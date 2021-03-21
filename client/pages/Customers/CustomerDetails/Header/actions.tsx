@@ -20,7 +20,7 @@ export const CustomerActions: FunctionComponent<
   HTMLAttributes<HTMLDivElement>
 > = (props: HTMLAttributes<HTMLDivElement>) => {
   const { t } = useTranslation()
-  const { hasPermission } = usePermissions()
+  const [, hasPermission] = usePermissions()
   const { state, loading, refetch } = useContext(CustomersContext)
   const [showEditPanel, setShowEditPanel] = useState(false)
   return (

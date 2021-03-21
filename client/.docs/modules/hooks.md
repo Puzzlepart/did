@@ -120,29 +120,26 @@ ___
 
 ### usePermissions
 
-▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): *object*
+▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): [IPermission[], (`scope`: PermissionScope) => *boolean*]
 
-Permissions hook
+Permissions hook that returns atuple of the available
+permissions and a function to check if the current user
+has the specified permission
 
 #### Parameters:
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`scopeIds?` | *string*[] | - | Scopes   |
-`api` | *boolean* | false | API    |
+`scopeIds?` | *string*[] | - | Limit the returns permissions to the specified ids   |
+`api` | *boolean* | false | Only return permissions available to be called externally    |
 
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`hasPermission` | (`scope`: PermissionScope) => *boolean* |
-`permissions` | IPermission[] |
+**Returns:** [IPermission[], (`scope`: PermissionScope) => *boolean*]
 
 Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [hooks/user/usePermissions.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L21)
+Defined in: [hooks/user/usePermissions.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L23)
 
 ___
 

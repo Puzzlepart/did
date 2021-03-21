@@ -6,7 +6,7 @@ import { IUserSetting, IUserSettingDropdown } from './types'
 
 export function useSettingsConfiguration() {
   const { t } = useTranslation()
-  const { hasPermission } = usePermissions()
+  const [, hasPermission] = usePermissions()
   const { pages } = useAppContext()
   return new Set<IUserSetting>([
     {

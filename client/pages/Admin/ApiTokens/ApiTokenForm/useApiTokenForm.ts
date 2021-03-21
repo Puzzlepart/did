@@ -15,7 +15,7 @@ export function useApiTokenForm({ onAdded }) {
     expires: null,
     permissions: []
   })
-  const { permissions } = usePermissions(null, true)
+  const [permissions] = usePermissions(null, true)
 
   async function onAddApiToken() {
     const { data } = await addApiToken({ variables: { token } })

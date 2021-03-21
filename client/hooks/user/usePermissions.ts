@@ -3,14 +3,16 @@
 import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getPermissions, PermissionScope } from 'security'
+import { getPermissions, IPermission, PermissionScope } from 'security'
 import { contains } from 'underscore'
 
 /**
- * Permissions hook
+ * Permissions hook that returns atuple of the available
+ * permissions and a function to check if the current user
+ * has the specified permission
  *
- * @param scopeIds - Scopes
- * @param api - API
+ * @param scopeIds - Limit the returns permissions to the specified ids
+ * @param api - Only return permissions available to be called externally
  *
  * @returns Permissions available based on specified permissionIds
  * and a function hasPermission that checks if the currently logged
@@ -18,7 +20,10 @@ import { contains } from 'underscore'
  *
  * @category React Hook
  */
-export function usePermissions(scopeIds?: string[], api = false) {
+export function usePermissions(
+  scopeIds?: string[],
+  api = false
+): [IPermission[], (scope: PermissionScope) => boolean] {
   const { t } = useTranslation()
   const context = useAppContext()
 
@@ -33,12 +38,13 @@ export function usePermissions(scopeIds?: string[], api = false) {
   }
 
   return useMemo(
-    () => ({
+    () => [
       permissions,
-      hasPermission: (scope: PermissionScope) => {
+      (scope: PermissionScope) => {
+        if (!scope) return true
         return context?.user ? context.user.hasPermission(scope) : false
       }
-    }),
+    ],
     [context?.user]
   )
 }

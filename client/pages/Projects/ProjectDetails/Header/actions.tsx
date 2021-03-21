@@ -24,7 +24,7 @@ export const ProjectActions: FunctionComponent<
   HTMLAttributes<HTMLDivElement>
 > = (props: HTMLAttributes<HTMLDivElement>) => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
-  const { hasPermission } = usePermissions()
+  const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
   const [showEditPanel, setShowEditPanel] = useState(false)
   const [createOutlookCategory] = useMutation($createOutlookCategory)

@@ -19,7 +19,7 @@ export function useRolePanel({ props }) {
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
   const [deleteRole] = useMutation($deleteRole)
   const [model, setModel] = useState<RoleInput>({})
-  const { permissions } = usePermissions()
+  const [permissions] = usePermissions()
   const saveDisabled =
     isEmpty(model.name) ||
     isEmpty(model.icon) ||

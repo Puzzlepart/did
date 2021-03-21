@@ -27,7 +27,7 @@ import { Navigation } from './Navigation'
  */
 export const AppRouter: FunctionComponent = () => {
   const { pages } = useAppContext()
-  const { hasPermission } = usePermissions()
+  const [, hasPermission] = usePermissions()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   return (

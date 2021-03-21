@@ -13,7 +13,7 @@ import { INavItemProps } from './types'
  */
 export function useNavItem(props: INavItemProps) {
   const { dispatch } = useAppContext()
-  const { hasPermission } = usePermissions()
+  const [, hasPermission] = usePermissions()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   return {

@@ -12,7 +12,7 @@ import { IPermissionListProps } from './types'
 export const PermissionList: FunctionComponent<IPermissionListProps> = ({
   permissionIds
 }: IPermissionListProps) => {
-  const { permissions } = usePermissions(permissionIds)
+  const [permissions] = usePermissions(permissionIds)
   return (
     <div className={styles.root}>
       <div className={styles.container}>
