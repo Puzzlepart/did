@@ -105,7 +105,7 @@ See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) fo
 
 ### Commits and commitlint
 #### Husky hooks
-We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
+We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `eslint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
 
 You ***can** (but shouldn't) bypass pre-commit and commit-msg hooks using Git `--no-verify` option:
 

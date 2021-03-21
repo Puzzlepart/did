@@ -29,7 +29,7 @@ async function commit_changes() {
     ])
     await concurrently([
         { command: 'npm run typedoc', name: 'typedoc' },
-        { command: 'npm run lint:fix', name: 'eslint' }
+        { command: 'npm run eslint:fix', name: 'eslint' }
     ], {})
     const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {

@@ -6,8 +6,8 @@
   "scripts": {
     "watch": "node .tasks/watch.js",
     "commit:changes": "node ./.tasks/commit-changes.js",
-    "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
-    "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
+    "eslint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
+    "eslint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier '**/*.ts*' --write --loglevel silent",
     "start": "node ./dist/server/index.js",
     "package:client": "webpack",
@@ -15,7 +15,7 @@
     "debug:server": "npm run build:server; ts-node ./server/index.ts -T --inspect --wait",
     "create-env": "node .tasks/create-dot-env.js",
     "typedoc": "node .tasks/typedoc.js",
-    "postversion": "npm run typedoc && npm run lint:fix && git add --all && git commit --amend",
+    "postversion": "npm run typedoc && npm run eslint:fix && git add --all && git commit --amend",
     "prepare": "husky install"
   },
   "dependencies": {
