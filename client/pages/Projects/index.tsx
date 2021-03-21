@@ -6,7 +6,13 @@ import { PermissionScope } from 'security'
 import { Projects } from './Projects'
 
 /**
- * @ignore
+ * Projects page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
 export const ProjectsPage: PageComponent = () => {
   const match = useRouteMatch()

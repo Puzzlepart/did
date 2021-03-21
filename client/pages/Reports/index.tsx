@@ -6,7 +6,13 @@ import { PermissionScope } from 'security'
 import { Reports } from './Reports'
 
 /**
- * @ignore
+ * Reports page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
 export const ReportsPage: PageComponent = () => {
   const match = useRouteMatch()

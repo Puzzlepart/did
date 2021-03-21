@@ -1,12 +1,18 @@
 /* eslint-disable tsdoc/syntax */
 import { PageComponent } from 'pages/types'
-import * as React from 'react'
+import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { PermissionScope } from 'security'
 import { Timesheet } from './Timesheet'
 
 /**
- * @ignore
+ * Timesheet page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
 export const TimesheetPage: PageComponent = () => {
   const match = useRouteMatch()

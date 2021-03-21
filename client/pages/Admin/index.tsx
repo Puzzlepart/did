@@ -6,7 +6,13 @@ import { PermissionScope } from 'security'
 import { Admin } from './Admin'
 
 /**
- * @ignore
+ * Admin page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
 export const AdminPage: PageComponent = () => {
   const match = useRouteMatch()

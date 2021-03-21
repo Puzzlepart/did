@@ -10,7 +10,9 @@ import { useAuthProviders } from './useAuthProviders'
 import { useHome } from './useHome'
 
 /**
- * @category Function Component
+ * Home page
+ *
+ * @category Page Component
  */
 export const Home: PageComponent = () => {
   const { error, subscription } = useHome()

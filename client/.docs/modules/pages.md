@@ -47,13 +47,21 @@ All are built using React Function components and Hooks.
 
 - [ApiTokens](pages.md#apitokens)
 - [Customers](pages.md#customers)
-- [Home](pages.md#home)
 - [Projects](pages.md#projects)
 - [Timesheet](pages.md#timesheet)
 
 ### Other Variables
 
 - [default\_query](pages.md#default_query)
+
+### Page Component Variables
+
+- [AdminPage](pages.md#adminpage)
+- [CustomersPage](pages.md#customerspage)
+- [Home](pages.md#home)
+- [ProjectsPage](pages.md#projectspage)
+- [ReportsPage](pages.md#reportspage)
+- [TimesheetPage](pages.md#timesheetpage)
 
 ### Projects Variables
 
@@ -136,14 +144,6 @@ Defined in: [pages/Customers/Customers.tsx:19](https://github.com/Puzzlepart/did
 
 ___
 
-### Home
-
-• `Const` **Home**: PageComponent
-
-Defined in: [pages/Home/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L15)
-
-___
-
 ### Projects
 
 • `Const` **Projects**: FunctionComponent
@@ -185,6 +185,88 @@ The extension enables you to:
 **`see`** https://www.apollographql.com/docs/devtools/editor-plugins/
 
 Defined in: [global.d.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/global.d.ts#L24)
+
+___
+
+## Page Component Variables
+
+### AdminPage
+
+• `Const` **AdminPage**: PageComponent
+
+Admin page
+
+Using `Switch`, `Route` and `useRouteMatch` from
+`react-router-dom` to support navigating between
+sub components
+
+Defined in: [pages/Admin/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/index.tsx#L17)
+
+___
+
+### CustomersPage
+
+• `Const` **CustomersPage**: PageComponent
+
+Customers page
+
+Using `Switch`, `Route` and `useRouteMatch` from
+`react-router-dom` to support navigating between
+sub components
+
+Defined in: [pages/Customers/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/index.tsx#L17)
+
+___
+
+### Home
+
+• `Const` **Home**: PageComponent
+
+Home page
+
+Defined in: [pages/Home/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L17)
+
+___
+
+### ProjectsPage
+
+• `Const` **ProjectsPage**: PageComponent
+
+Projects page
+
+Using `Switch`, `Route` and `useRouteMatch` from
+`react-router-dom` to support navigating between
+sub components
+
+Defined in: [pages/Projects/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/index.tsx#L17)
+
+___
+
+### ReportsPage
+
+• `Const` **ReportsPage**: PageComponent
+
+Reports page
+
+Using `Switch`, `Route` and `useRouteMatch` from
+`react-router-dom` to support navigating between
+sub components
+
+Defined in: [pages/Reports/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/index.tsx#L17)
+
+___
+
+### TimesheetPage
+
+• `Const` **TimesheetPage**: PageComponent
+
+Timesheet page
+
+Using `Switch`, `Route` and `useRouteMatch` from
+`react-router-dom` to support navigating between
+sub components
+
+Defined in: [pages/Timesheet/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/index.tsx#L17)
 
 ___
 
