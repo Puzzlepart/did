@@ -244,7 +244,7 @@ ___
 
 ### List
 
-• `Const` **List**: [*FlexiblePivotItem*](components.md#flexiblepivotitem)<IListProps\>
+• `Const` **List**: *FunctionComponent*<IListProps\>
 
 List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
 
@@ -261,7 +261,7 @@ Used by the following components:
 * `<Reports />`
 * `<Timesheet />` => `<SummaryView />`
 
-Defined in: [components/List/index.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L29)
+Defined in: [components/List/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L28)
 
 ___
 
