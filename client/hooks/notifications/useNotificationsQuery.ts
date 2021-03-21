@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next'
 import { ReactHookFunction } from '../types'
 import notifications from './notifications.gql'
 
-type UseNotificationsQueryParamType = {
+type NotificationsQueryParams = {
   user: ContextUser
   fetchPolicy?: FetchPolicy
 }
 
-type UseNotificationsQueryReturnType = {
+type NotificationsQuery = {
   data: Notification[]
   refetch: (delay?: number) => void
 }
@@ -26,8 +26,8 @@ type UseNotificationsQueryReturnType = {
  * @category React Hook
  */
 export const useNotificationsQuery: ReactHookFunction<
-  UseNotificationsQueryParamType,
-  UseNotificationsQueryReturnType
+  NotificationsQueryParams,
+  NotificationsQuery
 > = ({ user, fetchPolicy = 'cache-first' }) => {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notifications, {
