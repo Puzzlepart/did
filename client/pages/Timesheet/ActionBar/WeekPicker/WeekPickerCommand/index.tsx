@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react/jsx-no-undef */
 import { Icon, TextField } from 'office-ui-fabric-react'
-import React, { HTMLAttributes, useContext } from 'react'
+import React, { HTMLAttributes } from 'react'
 import { BrowserView, isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
-import { TimesheetContext } from '../../../context'
+import { useTimesheetContext } from '../../../context'
 import styles from './WeekPickerCommand.module.scss'
 
 /**
@@ -13,7 +13,7 @@ import styles from './WeekPickerCommand.module.scss'
  */
 export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
   const { t } = useTranslation()
-  const { state } = useContext(TimesheetContext)
+  const { state } = useTimesheetContext()
   const showWeekNumber =
     state.periods.length === 1 && !state.loading && !isMobile
   return (

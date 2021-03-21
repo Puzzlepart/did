@@ -97,6 +97,10 @@ All are built using React Function components and Hooks.
 
 - [Admin](pages.md#admin)
 
+### Other Functions
+
+- [useTimesheetContext](pages.md#usetimesheetcontext)
+
 ### Reports Functions
 
 - [currentMonthQuery](pages.md#currentmonthquery)
@@ -424,6 +428,23 @@ Defined in: [pages/Timesheet/context.ts:31](https://github.com/Puzzlepart/did/bl
 **Returns:** *Element*
 
 Defined in: [pages/Admin/Admin.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Admin.tsx#L18)
+
+___
+
+## Other Functions
+
+### useTimesheetContext
+
+▸ `Const`**useTimesheetContext**(): [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)
+
+Returns the current context value for Timesheet using
+`useContext` from `react`
+
+**Returns:** [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)
+
+`TimesheetContext`
+
+Defined in: [pages/Timesheet/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L39)
 
 ___
 

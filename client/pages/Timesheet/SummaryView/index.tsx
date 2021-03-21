@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-reduce */
 import { List, TabComponent } from 'components'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 import { createColumns } from './createColumns'
 import { generateRows } from './generateRows'
 import { generateTotalRow } from './generateTotalRow'
@@ -14,7 +14,7 @@ import styles from './SummaryView.module.scss'
  */
 export const SummaryView: TabComponent = () => {
   const { t } = useTranslation()
-  const { state } = useContext(TimesheetContext)
+  const { state } = useTimesheetContext()
   const columns = createColumns(state.scope)
   const events = state.selectedPeriod?.getEvents(false) || []
   const items = [

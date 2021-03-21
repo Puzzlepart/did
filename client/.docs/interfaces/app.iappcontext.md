@@ -46,16 +46,9 @@ ___
 
 ### notifications
 
-• `Optional` **notifications**: *object*
+• `Optional` **notifications**: NotificationsQuery
 
 Notifications query
-
-#### Type declaration:
-
-Name | Type |
-:------ | :------ |
-`data` | *Notification*[] |
-`refetch` | (`delay?`: *number*) => *void* |
 
 Defined in: [app/context.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L17)
 

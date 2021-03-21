@@ -3,7 +3,7 @@ import { UserMessage } from 'components'
 import { TabComponent } from 'components/TabContainer/types'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Bar,
@@ -14,7 +14,7 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
 import { useChartConfig } from './useChartConfig'
@@ -25,7 +25,7 @@ import { useChartData } from './useChartData'
  */
 export const AllocationView: TabComponent = () => {
   const { t } = useTranslation()
-  const { state } = useContext(TimesheetContext)
+  const { state } = useTimesheetContext()
   const container = useRef<HTMLDivElement>(null)
 
   const charts = useChartConfig()

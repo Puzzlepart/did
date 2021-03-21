@@ -1,8 +1,7 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react'
-import { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 import { CHANGE_PERIOD } from '../reducer/actions'
 
 /**
@@ -10,7 +9,7 @@ import { CHANGE_PERIOD } from '../reducer/actions'
  */
 export function usePeriodCommands() {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useTimesheetContext()
   if (state.periods.length === 1) return []
   return state.periods.map(
     (period, index) =>

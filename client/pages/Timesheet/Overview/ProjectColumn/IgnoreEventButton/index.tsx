@@ -1,15 +1,15 @@
 import { MessageBarButton } from 'office-ui-fabric-react'
 import { IGNORE_EVENT } from 'pages/Timesheet/reducer/actions'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { TimesheetContext } from '../../../types'
+import { useTimesheetContext } from '../../../types'
 import { IIgnoreEventButtonProps } from './types'
 
 export const IgnoreEventButton = ({
   event
 }: IIgnoreEventButtonProps): JSX.Element => {
   const { t } = useTranslation()
-  const { dispatch } = useContext(TimesheetContext)
+  const { dispatch } = useTimesheetContext()
   return (
     <MessageBarButton
       text={t('timesheet.ignoreEventButtonLabel')}

@@ -3,10 +3,10 @@ import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
 import { MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 
 /**
  * Returns the active messages
@@ -14,7 +14,7 @@ import { TimesheetContext } from '../context'
 export function useMessages(): IUserMessageProps[] {
   const { t } = useTranslation()
   const [, dismiss, isDismissed] = useArray<string>([])
-  const { state, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useTimesheetContext()
 
   if (!state.selectedPeriod) return []
 

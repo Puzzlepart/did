@@ -4,6 +4,7 @@
 import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
+import { Notification } from 'types'
 import { ReactHookFunction } from '../types'
 import notifications from './notifications.gql'
 

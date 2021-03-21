@@ -6,15 +6,31 @@ Reusable React Hooks
 
 ## Table of contents
 
+### React Hook Variables
+
+- [useNotificationsQuery](hooks.md#usenotificationsquery)
+
 ### React Hook Functions
 
 - [useArray](hooks.md#usearray)
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
-- [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
 - [useToggle](hooks.md#usetoggle)
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
+
+## React Hook Variables
+
+### useNotificationsQuery
+
+• `Const` **useNotificationsQuery**: *ReactHookFunction*<NotificationsQueryParams, NotificationsQuery\>
+
+Fetches notifications - returns the data and
+a function to refetch the data from the server.
+
+**`param`** Context user
+
+Defined in: [hooks/notifications/useNotificationsQuery.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L29)
 
 ## React Hook Functions
 
@@ -91,30 +107,6 @@ Name | Type |
 `onExport` | () => *Promise*<void\> |
 
 Defined in: [hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
-
-___
-
-### useNotificationsQuery
-
-▸ **useNotificationsQuery**(`user`: [*ContextUser*](../classes/app.contextuser.md), `fetchPolicy?`: FetchPolicy): *object*
-
-Notificatins query hook
-
-#### Parameters:
-
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`user` | [*ContextUser*](../classes/app.contextuser.md) | - | Context user    |
-`fetchPolicy` | FetchPolicy | 'cache-first' | - |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`data` | Notification[] |
-`refetch` | (`delay?`: *number*) => *void* |
-
-Defined in: [hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)
 
 ___
 

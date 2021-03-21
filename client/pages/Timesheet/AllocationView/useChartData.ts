@@ -1,9 +1,9 @@
 import getValue from 'get-value'
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { find } from 'underscore'
 import { truncateString } from 'utils/truncateString'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 import { IChartConfig } from './types'
 
 function getDataForChart(
@@ -39,7 +39,7 @@ export function useChartData<T = any>(
   charts: IChartConfig[],
   container: HTMLDivElement
 ): ChartData<T> {
-  const { state } = useContext(TimesheetContext)
+  const { state } = useTimesheetContext()
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {

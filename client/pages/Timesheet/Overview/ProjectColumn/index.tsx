@@ -2,11 +2,11 @@ import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
 import { TFunction } from 'i18next'
 import { Icon, MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
-import React, { useContext } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { TimesheetContext } from '../../context'
+import { useTimesheetContext } from '../../context'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { IgnoreEventButton } from './IgnoreEventButton'
 import { MatchEventPanel } from './MatchEventPanel'
@@ -30,7 +30,7 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
 
 export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useTimesheetContext()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   if (event.isSystemIgnored) {

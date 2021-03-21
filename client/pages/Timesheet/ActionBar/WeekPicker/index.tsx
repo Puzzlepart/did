@@ -8,19 +8,19 @@ import {
   FirstWeekOfYear,
   FocusTrapZone
 } from 'office-ui-fabric-react'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SET_SCOPE } from '../../reducer/actions'
-import { TimesheetContext, TimesheetScope } from '../../types'
+import { TimesheetScope, useTimesheetContext } from '../../types'
 import styles from './WeekPicker.module.scss'
 import { WeekPickerCommand } from './WeekPickerCommand'
 
 /**
  * @category Timesheet
  */
-export const WeekPicker = () => {
+export const WeekPicker: React.FC = () => {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useTimesheetContext()
   const [calendar, setCalendar] = useState(null)
   return (
     <>

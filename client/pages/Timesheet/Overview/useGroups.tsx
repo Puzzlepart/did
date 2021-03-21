@@ -2,17 +2,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import $date from 'DateUtils'
 import { config } from 'package'
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 
 /**
  * Use groups
  */
 export function useGroups() {
   const { t } = useTranslation()
-  const { state } = useContext(TimesheetContext)
+  const { state } = useTimesheetContext()
   return useMemo(
     () => ({
       fieldName: 'date',

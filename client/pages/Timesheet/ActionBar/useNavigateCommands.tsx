@@ -1,8 +1,7 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react'
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NEXT_PERIOD, PREVIOUS_PERIOD, SET_SCOPE } from '../reducer/actions'
-import { TimesheetContext, TimesheetScope } from '../types'
+import { TimesheetScope, useTimesheetContext } from '../types'
 
 /**
  * Returns Timesheet navigation commands based on
@@ -10,7 +9,7 @@ import { TimesheetContext, TimesheetScope } from '../types'
  */
 export function useNavigateCommands(): IContextualMenuItem[] {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useTimesheetContext()
   const navigateCurrentWeek: IContextualMenuItem = {
     key: 'NAVIGATE_CURRENT_WEEK',
     title: t('timesheet.goToCurrentWeek'),
