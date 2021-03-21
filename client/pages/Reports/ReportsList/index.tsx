@@ -18,7 +18,7 @@ import { useColumns } from './useColumns'
 export const ReportsList: TabComponent = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
-  const columns = useColumns({ isResizable: true })
+  const columns = useColumns()
   return (
     <div>
       {context.state.loading && (
