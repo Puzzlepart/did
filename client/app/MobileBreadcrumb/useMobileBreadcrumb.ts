@@ -33,9 +33,9 @@ export function useMobileBreadcrumb(props: ITabContainerProps) {
           {
             key: nav?.itemKey,
             text: nav?.headerText,
-            level: 2
+            level: props.level
           },
-          !nav && [2]
+          !nav && [props.level]
         ])
       )
     }

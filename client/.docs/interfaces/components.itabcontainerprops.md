@@ -18,6 +18,7 @@
 - [hideIconsMobile](components.itabcontainerprops.md#hideiconsmobile)
 - [itemProps](components.itabcontainerprops.md#itemprops)
 - [items](components.itabcontainerprops.md#items)
+- [level](components.itabcontainerprops.md#level)
 - [linkHeight](components.itabcontainerprops.md#linkheight)
 
 ## Properties
@@ -26,7 +27,7 @@
 
 • `Optional` **fixedLinkWidth**: *string* \| *number* \| *boolean*
 
-Fixed link width
+Fixed tab link width
 
 Either specify boolean `true` or `false` or
 specify the actual width. If `true` is specified
@@ -42,7 +43,7 @@ ___
 
 • `Optional` **hideIconsMobile**: *boolean*
 
-Hide icons on mobile devices
+Hide tab link icons on mobile devices
 
 **`default`** true
 
@@ -55,7 +56,7 @@ ___
 • `Optional` **itemProps**: *IPivotItemProps*
 
 Item properties that will be shared between
-all items in the pivot
+all tabs in the container
 
 Defined in: [components/TabContainer/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L36)
 
@@ -66,11 +67,23 @@ ___
 • `Optional` **items**: *IPivotItemProps*[]
 
 Optionally provide the item that are rendered
-inside the Pivot. This can be used instead of
+inside the tab container. This can be used instead of
 using `useRef` and `children` when that doesn't
 work as expected.
 
-Defined in: [components/TabContainer/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L44)
+Defined in: [components/TabContainer/types.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L51)
+
+___
+
+### level
+
+• `Optional` **level**: *number*
+
+Level in the navigation hierarchy
+
+**`default`** 2
+
+Defined in: [components/TabContainer/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L43)
 
 ___
 
@@ -78,7 +91,7 @@ ___
 
 • `Optional` **linkHeight**: *string* \| *number*
 
-Link height on mobile devices
+Tab link height on mobile devices
 
 **`default`** 30
 

@@ -5,6 +5,10 @@ interface ISubscriptionSettingBase {
   props: { [key: string]: any }
 }
 
+export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
+  type: 'text'
+}
+
 export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {
   type: 'bool'
 }
@@ -20,6 +24,7 @@ export interface ISubscriptionSettingCheckbox extends ISubscriptionSettingBase {
 }
 
 export type SubscriptionSettingField =
+  | ISubscriptionSettingText
   | ISubscriptionSettingBool
   | ISubscriptionSettingNumber
   | ISubscriptionSettingCheckbox

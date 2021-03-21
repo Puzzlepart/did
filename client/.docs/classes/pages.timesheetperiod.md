@@ -239,7 +239,7 @@ Period is complete meaning all events are matched
 
 `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
 
-Defined in: [pages/Timesheet/TimesheetPeriod.ts:299](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L299)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:300](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L300)
 
 ___
 
@@ -255,7 +255,7 @@ Period is in the past
 
 `true` if the `endDate` is before today
 
-Defined in: [pages/Timesheet/TimesheetPeriod.ts:310](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L310)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:311](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L311)
 
 ___
 
@@ -299,7 +299,7 @@ Returns URL path for the period
 
 **Returns:** *string*
 
-Defined in: [pages/Timesheet/TimesheetPeriod.ts:288](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L288)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:289](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L289)
 
 ___
 
@@ -509,4 +509,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*[]
 
-Defined in: [pages/Timesheet/TimesheetPeriod.ts:276](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L276)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:277](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L277)

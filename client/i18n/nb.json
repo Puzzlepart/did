@@ -145,7 +145,7 @@
     "forecastNotificationsLabel": "Varsler",
     "subscriptionSettings": "Abonnement",
     "summaryRangeValueFormat": "Viser {{value}} måneder",
-    "adsync": "Synkronisering med Azure Active Directory",
+    "adsync": "Synkronisering med Azure AD",
     "adUserSyncEnabledLabel": "Synkroniser brukeregenskaper",
     "adUserSyncEnabledDescription": "Synkroniser automatisk brukeregenskaper fra Azure Active Directory når brukeren logger på.",
     "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
@@ -156,7 +156,8 @@
     "summaryViewProgressDescription": "For å gi deg de ferskeste resultatene, genererer vi et sammendrag fra de nyeste dataene... ",
     "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did.",
     "adUserSyncUserPhotoLabel": "Synkroniser profilbilde",
-    "adUserSyncUserPhotoDescription": "Synkroniser profilbilde fra Azure Active Directory når brukerne logger på."
+    "adUserSyncUserPhotoDescription": "Synkroniser profilbilde fra Azure Active Directory når brukerne logger på.",
+    "subscriptionInfoHeader": "Grunnleggende informasjon"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

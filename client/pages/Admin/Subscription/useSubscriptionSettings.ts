@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { useMessage } from 'components'
+import { useToast } from 'components/Toast/useToast'
 import { getValue, setValue } from 'helpers'
 import { MessageBarType } from 'office-ui-fabric-react'
 import { useState } from 'react'
@@ -23,7 +23,7 @@ export function useSubscriptionSettings() {
     omitDeep(deepCopy(context.subscription), '__typename')
   )
   const [updateSubscription] = useMutation($updateSubscription)
-  const [message, setMessage] = useMessage()
+  const [toast, setToast] = useToast(6000)
   const sections = useSubscriptionConfig()
 
   const onChange = (
@@ -41,7 +41,7 @@ export function useSubscriptionSettings() {
   const onSaveSettings = async () => {
     const variables = pick(subscription, 'settings')
     await updateSubscription({ variables })
-    setMessage({
+    setToast({
       text: t('admin.subscriptionSettingsUpdateSuccess'),
       type: MessageBarType.success
     })
@@ -53,7 +53,7 @@ export function useSubscriptionSettings() {
       onChange
     },
     subscription,
-    message,
+    toast,
     onSaveSettings,
     sections
   }

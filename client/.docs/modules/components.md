@@ -132,7 +132,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [components/TabContainer/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L76)
+Defined in: [components/TabContainer/types.ts:83](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L83)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [components/TabContainer/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L74)
+Defined in: [components/TabContainer/types.ts:81](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L81)
 
 ## Function Component Variables
 

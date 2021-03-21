@@ -5,7 +5,7 @@ import { PermissionScope } from 'security'
 
 export interface ITabContainerProps extends IPivotProps {
   /**
-   * Fixed link width
+   * Fixed tab link width
    *
    * Either specify boolean `true` or `false` or
    * specify the actual width. If `true` is specified
@@ -16,14 +16,14 @@ export interface ITabContainerProps extends IPivotProps {
   fixedLinkWidth?: boolean | string | number
 
   /**
-   * Hide icons on mobile devices
+   * Hide tab link icons on mobile devices
    *
    * @default true
    */
   hideIconsMobile?: boolean
 
   /**
-   * Link height on mobile devices
+   * Tab link height on mobile devices
    *
    * @default 30
    */
@@ -31,13 +31,20 @@ export interface ITabContainerProps extends IPivotProps {
 
   /**
    * Item properties that will be shared between
-   * all items in the pivot
+   * all tabs in the container
    */
   itemProps?: IPivotItemProps
 
   /**
+   * Level in the navigation hierarchy
+   *
+   * @default 2
+   */
+  level?: number
+
+  /**
    * Optionally provide the item that are rendered
-   * inside the Pivot. This can be used instead of
+   * inside the tab container. This can be used instead of
    * using `useRef` and `children` when that doesn't
    * work as expected.
    */

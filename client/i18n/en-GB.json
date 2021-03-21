@@ -146,7 +146,7 @@
     "forecastNotificationsLabel": "Notifications",
     "subscriptionSettings": "Subscription",
     "summaryRangeValueFormat": "Showing {{value}} months",
-    "adsync": "Active Directory Sync",
+    "adsync": "Azure AD Sync",
     "adUserSyncEnabledLabel": "Synchronize user properties",
     "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
     "adUserSyncPropertiesLabel": "Properties to synchronize",
@@ -157,7 +157,8 @@
     "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data...",
     "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did.",
     "adUserSyncUserPhotoLabel": "Synchronize user photo",
-    "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in."
+    "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in.",
+    "subscriptionInfoHeader": "Basic info"
   },
   "reports": {
     "generatingReportLabel": "Generating report",

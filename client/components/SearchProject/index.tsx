@@ -14,7 +14,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     fetchPolicy: 'cache-first'
   })
 
-  const items: ISuggestionItem<Project>[] = (data?.projects || []).map(
+  const searchData: ISuggestionItem<Project>[] = (data?.projects || []).map(
     (project) => ({
       key: project.tag,
       text: project.name,
@@ -29,7 +29,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     <Autocomplete
       {...props}
       disabled={loading}
-      items={items}
+      items={searchData}
       itemIcons={{
         style: {
           marginTop: 8,
