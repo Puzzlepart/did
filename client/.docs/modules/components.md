@@ -116,7 +116,7 @@ Reusable React Function components.
 
 Ƭ **FlexiblePivotItem**: *FunctionComponent*<IPivotItemProps\>
 
-Defined in: [components/FlexiblePivot/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/types.ts#L47)
+Defined in: [components/FlexiblePivot/types.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/components/FlexiblePivot/types.ts#L46)
 
 ___
 
