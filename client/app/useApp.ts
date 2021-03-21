@@ -14,7 +14,7 @@ import { IAppProps } from './types'
  */
 export function useApp(props: IAppProps) {
   const [state, dispatch] = useAppReducer({})
-  const notifications = useNotificationsQuery(props.user)
+  const notifications = useNotificationsQuery({ user: props.user })
   const pages = usePages()
   const context = useMemo<IAppContext>(
     () =>

@@ -1,22 +1,34 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-console */
 /* eslint-disable tsdoc/syntax */
 import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
-import { Notification } from 'types'
+import { ReactHookFunction } from '../types'
 import notifications from './notifications.gql'
 
+type UseNotificationsQueryParamType = {
+  user: ContextUser
+  fetchPolicy?: FetchPolicy
+}
+
+type UseNotificationsQueryReturnType = {
+  data: Notification[]
+  refetch: (delay?: number) => void
+}
+
 /**
- * Notificatins query hook
+ * Fetches notifications - returns the data and
+ * a function to refetch the data from the server.
  *
  * @param user - Context user
  *
  * @category React Hook
  */
-export function useNotificationsQuery(
-  user: ContextUser,
-  fetchPolicy: FetchPolicy = 'cache-first'
-): { data: Notification[]; refetch: (delay?: number) => void } {
+export const useNotificationsQuery: ReactHookFunction<
+  UseNotificationsQueryParamType,
+  UseNotificationsQueryReturnType
+> = ({ user, fetchPolicy = 'cache-first' }) => {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notifications, {
     skip: !user.id,
