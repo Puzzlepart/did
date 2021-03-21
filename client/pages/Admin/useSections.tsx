@@ -1,10 +1,11 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { TabComponent } from 'components'
 import { usePermissions } from 'hooks'
+import { IPivotItemProps } from 'office-ui-fabric-react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { IPageSectionComponent } from '../types'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
@@ -12,12 +13,22 @@ import { SubscriptionSettings } from './Subscription'
 import { Users } from './Users'
 
 /**
+ * Defines a page section component
+ *
+ * @category Pages
+ */
+export interface IAdminSectionComponent extends IPivotItemProps {
+  component: TabComponent
+  permission?: PermissionScope
+}
+
+/**
  * @ignore
  */
 export function useSections() {
   const { t } = useTranslation()
   const { hasPermission } = usePermissions()
-  return useMemo<IPageSectionComponent[]>(
+  return useMemo<IAdminSectionComponent[]>(
     () => [
       {
         itemKey: 'users',
