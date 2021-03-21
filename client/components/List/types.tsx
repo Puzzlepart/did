@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import {
   CheckboxVisibility,
   IColumn,
@@ -12,6 +13,9 @@ import {
 } from 'office-ui-fabric-react'
 import { ExcelColumnType } from 'utils/exportExcel'
 
+/**
+ * @category List
+ */
 export interface IListColumnData {
   /**
    * Hidden column
@@ -41,6 +45,9 @@ export interface IListColumnData {
   ) => JSX.Element
 }
 
+/**
+ * @category List
+ */
 export interface IListColumn<T = IListColumnData> extends IColumn {
   /**
    * Data for the column - `IListColumnData`
@@ -48,6 +55,9 @@ export interface IListColumn<T = IListColumnData> extends IColumn {
   data?: T
 }
 
+/**
+ * @category List
+ */
 export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Items
@@ -132,6 +142,9 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   headerClassName?: string
 }
 
+/**
+ * @category List
+ */
 export interface IListState<T = any> {
   /**
    * Search term
@@ -149,11 +162,17 @@ export interface IListState<T = any> {
   items?: T[]
 }
 
+/**
+ * @category List
+ */
 export interface IListSelectionProps<T = any> {
   mode: SelectionMode
   onChanged: (selected: T) => void
 }
 
+/**
+ * @category List
+ */
 export interface IListGroupProps {
   fieldName: string
   groupNames?: string[]

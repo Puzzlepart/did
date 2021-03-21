@@ -41,6 +41,15 @@ Reusable React Function components.
 - [IFilterItem](../interfaces/components.ifilteritem.md)
 - [IFilterPanelProps](../interfaces/components.ifilterpanelprops.md)
 
+### List Interfaces
+
+- [IListColumn](../interfaces/components.ilistcolumn.md)
+- [IListColumnData](../interfaces/components.ilistcolumndata.md)
+- [IListGroupProps](../interfaces/components.ilistgroupprops.md)
+- [IListProps](../interfaces/components.ilistprops.md)
+- [IListSelectionProps](../interfaces/components.ilistselectionprops.md)
+- [IListState](../interfaces/components.iliststate.md)
+
 ### Other Interfaces
 
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
@@ -56,11 +65,15 @@ Reusable React Function components.
 
 - [IUserMessageProps](../interfaces/components.iusermessageprops.md)
 
-### Type aliases
+### Other Type aliases
 
 - [IHotkeyModal](components.md#ihotkeymodal)
 - [TabComponent](components.md#tabcomponent)
 - [TabContainerComponent](components.md#tabcontainercomponent)
+
+### Toast Type aliases
+
+- [IToastProps](components.md#itoastprops)
 
 ### Function Component Variables
 
@@ -104,15 +117,25 @@ Reusable React Function components.
 - [useAutocomplete](components.md#useautocomplete)
 - [useAutocompleteEvents](components.md#useautocompleteevents)
 
+### List Functions
+
+- [useList](components.md#uselist)
+- [useListGroups](components.md#uselistgroups)
+- [useListProps](components.md#uselistprops)
+
 ### Other Functions
 
 - [useUserListColumn](components.md#useuserlistcolumn)
+
+### Toast Functions
+
+- [useToast](components.md#usetoast)
 
 ### UserMessage Functions
 
 - [useMessage](components.md#usemessage)
 
-## Type aliases
+## Other Type aliases
 
 ### IHotkeyModal
 
@@ -141,6 +164,16 @@ ___
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
 Defined in: [components/TabContainer/types.ts:81](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L81)
+
+___
+
+## Toast Type aliases
+
+### IToastProps
+
+Ƭ **IToastProps**: [*IUserMessageProps*](../interfaces/components.iusermessageprops.md)
+
+Defined in: [components/Toast/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/types.tsx#L7)
 
 ## Function Component Variables
 
@@ -241,7 +274,7 @@ ___
 
 ### List
 
-• `Const` **List**: *FC*<IListProps\>
+• `Const` **List**: *FC*<[*IListProps*](../interfaces/components.ilistprops.md)\>
 
 List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
 
@@ -312,9 +345,9 @@ ___
 
 ### Toast
 
-• `Const` **Toast**: *FC*<IToastProps\>
+• `Const` **Toast**: *FC*<[*IToastProps*](components.md#itoastprops)\>
 
-A Toast component that shows a MessageBar with
+A Toast component that shows a `<MessageBar />` with
 markdown using `react-markdown`
 
 **`remarks`** Typically used with the `useToast` hook
@@ -535,11 +568,75 @@ Defined in: [components/Autocomplete/useAutocompleteEvents.ts:15](https://github
 
 ___
 
+## List Functions
+
+### useList
+
+▸ **useList**(`__namedParameters`: UseList): *object*
+
+Component logic hook for `<List />`
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | UseList |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`delay` | *number* |
+`listProps` | [*IListProps*](../interfaces/components.ilistprops.md)<any\> |
+`transitionDuration` | *number* |
+
+Defined in: [components/List/useList.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L19)
+
+___
+
+### useListGroups
+
+▸ **useListGroups**(`items`: *any*[], `props`: [*IListGroupProps*](../interfaces/components.ilistgroupprops.md)): GenerateListGroups
+
+Returns list groups based on property
+`listGroupProps` on the `<List />` component
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`items` | *any*[] |
+`props` | [*IListGroupProps*](../interfaces/components.ilistgroupprops.md) |
+
+**Returns:** GenerateListGroups
+
+Defined in: [components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
+
+___
+
+### useListProps
+
+▸ **useListProps**(`__namedParameters`: UseListProps): [*IListProps*](../interfaces/components.ilistprops.md)
+
+List props hook
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | UseListProps |
+
+**Returns:** [*IListProps*](../interfaces/components.ilistprops.md)
+
+Defined in: [components/List/useListProps.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L34)
+
+___
+
 ## Other Functions
 
 ### useUserListColumn
 
-▸ **useUserListColumn**(`persona?`: IPersonaProps, `props?`: *Partial*<IListColumn\>): IListColumn
+▸ **useUserListColumn**(`persona?`: IPersonaProps, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\>): [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Returns list column definition for `<UserColumn >`
 
@@ -551,11 +648,32 @@ on the item with key `user`
 Name | Type |
 :------ | :------ |
 `persona` | IPersonaProps |
-`props?` | *Partial*<IListColumn\> |
+`props?` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\> |
 
-**Returns:** IListColumn
+**Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Defined in: [components/UserColumn/useUserListColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L14)
+
+___
+
+## Toast Functions
+
+### useToast
+
+▸ **useToast**(`defaultDuration?`: *number*, `defaultProps?`: [*IToastProps*](components.md#itoastprops)): UseToast
+
+Hook used to show a temporarily `<Toast />`
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`defaultDuration` | *number* | 5000 | Default duration   |
+`defaultProps` | [*IToastProps*](components.md#itoastprops) | - | Default props    |
+
+**Returns:** UseToast
+
+Defined in: [components/Toast/useToast.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/useToast.ts#L25)
 
 ___
 

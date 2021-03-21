@@ -6,7 +6,7 @@ import styles from './Toast.module.scss'
 import { IToastProps } from './types'
 
 /**
- * A Toast component that shows a MessageBar with
+ * A Toast component that shows a `<MessageBar />` with
  * markdown using `react-markdown`
  *
  * @remarks Typically used with the `useToast` hook
@@ -27,3 +27,6 @@ export const Toast: FC<IToastProps> = (props: IToastProps) => {
     </div>
   )
 }
+
+export * from './types'
+export * from './useToast'

@@ -24,7 +24,7 @@ Reusable utility functions
 
 ### generateColumn
 
-▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<IListColumn\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: IListColumn) => *any*, `minWidth?`: *number*): IListColumn
+▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Generate a `IListColumn` defintion
 
@@ -34,11 +34,11 @@ Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `fieldName` | *string* | - | Field name   |
 `name` | *string* | '' | -Name   |
-`props` | *Partial*<IListColumn\> | - | Additional props   |
-`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: IListColumn) => *any* | - | Render function   |
+`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\> | - | Additional props   |
+`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any* | - | Render function   |
 `minWidth` | *number* | 100 | Min width    |
 
-**Returns:** IListColumn
+**Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Defined in: [utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
 

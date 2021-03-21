@@ -1,39 +1,45 @@
-[did-client - v0.9.11](../README.md) / [Pages](../modules/pages.md) / IProjectListProps
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / IListProps
 
-# Interface: IProjectListProps
+# Interface: IListProps<T\>
 
-[Pages](../modules/pages.md).IProjectListProps
+[Components](../modules/components.md).IListProps
+
+## Type parameters
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
 
 ## Hierarchy
 
-* [*IListProps*](components.ilistprops.md)<Project\>
+* *IShimmeredDetailsListProps*
 
-* *Omit*<IPivotItemProps, *componentRef*\>
+  ↳ **IListProps**
 
-  ↳ **IProjectListProps**
+  ↳↳ [*IEventListProps*](components.ieventlistprops.md)
+
+  ↳↳ [*IProjectListProps*](pages.iprojectlistprops.md)
 
 ## Table of contents
 
 ### Properties
 
-- [checkboxVisibility](pages.iprojectlistprops.md#checkboxvisibility)
-- [columns](pages.iprojectlistprops.md#columns)
-- [commandBar](pages.iprojectlistprops.md#commandbar)
-- [enableShimmer](pages.iprojectlistprops.md#enableshimmer)
-- [fadeIn](pages.iprojectlistprops.md#fadein)
-- [filters](pages.iprojectlistprops.md#filters)
-- [headerClassName](pages.iprojectlistprops.md#headerclassname)
-- [height](pages.iprojectlistprops.md#height)
-- [hidden](pages.iprojectlistprops.md#hidden)
-- [hideColumns](pages.iprojectlistprops.md#hidecolumns)
-- [items](pages.iprojectlistprops.md#items)
-- [listGroupProps](pages.iprojectlistprops.md#listgroupprops)
-- [listGroupRenderProps](pages.iprojectlistprops.md#listgrouprenderprops)
-- [onRenderColumnHeader](pages.iprojectlistprops.md#onrendercolumnheader)
-- [onRenderDetailsHeader](pages.iprojectlistprops.md#onrenderdetailsheader)
-- [renderLink](pages.iprojectlistprops.md#renderlink)
-- [searchBox](pages.iprojectlistprops.md#searchbox)
-- [selectionProps](pages.iprojectlistprops.md#selectionprops)
+- [checkboxVisibility](components.ilistprops.md#checkboxvisibility)
+- [columns](components.ilistprops.md#columns)
+- [commandBar](components.ilistprops.md#commandbar)
+- [enableShimmer](components.ilistprops.md#enableshimmer)
+- [fadeIn](components.ilistprops.md#fadein)
+- [filters](components.ilistprops.md#filters)
+- [headerClassName](components.ilistprops.md#headerclassname)
+- [height](components.ilistprops.md#height)
+- [hidden](components.ilistprops.md#hidden)
+- [items](components.ilistprops.md#items)
+- [listGroupProps](components.ilistprops.md#listgroupprops)
+- [listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
+- [onRenderColumnHeader](components.ilistprops.md#onrendercolumnheader)
+- [onRenderDetailsHeader](components.ilistprops.md#onrenderdetailsheader)
+- [searchBox](components.ilistprops.md#searchbox)
+- [selectionProps](components.ilistprops.md#selectionprops)
 
 ## Properties
 
@@ -42,8 +48,6 @@
 • `Optional` **checkboxVisibility**: CheckboxVisibility
 
 Check box visibility
-
-Inherited from: [IListProps](components.ilistprops.md).[checkboxVisibility](components.ilistprops.md#checkboxvisibility)
 
 Defined in: [components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
 
@@ -55,8 +59,6 @@ ___
 
 Columns
 
-Inherited from: [IListProps](components.ilistprops.md).[columns](components.ilistprops.md#columns)
-
 Defined in: [components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
 
 ___
@@ -67,8 +69,6 @@ ___
 
 Command bar props
 
-Inherited from: [IListProps](components.ilistprops.md).[commandBar](components.ilistprops.md#commandbar)
-
 Defined in: [components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
 
 ___
@@ -78,8 +78,6 @@ ___
 • `Optional` **enableShimmer**: *boolean*
 
 Enable shimmer (normally while loading)
-
-Inherited from: [IListProps](components.ilistprops.md).[enableShimmer](components.ilistprops.md#enableshimmer)
 
 Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
 
@@ -93,8 +91,6 @@ Fade in properties used by the FadeIn component (react-fade-in)
 
 [delay, transitionDuration]
 
-Inherited from: [IListProps](components.ilistprops.md).[fadeIn](components.ilistprops.md#fadein)
-
 Defined in: [components/List/types.tsx:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L127)
 
 ___
@@ -107,8 +103,6 @@ Filters
 
 #### Type declaration:
 
-Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
-
 Defined in: [components/List/types.tsx:132](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L132)
 
 ___
@@ -118,8 +112,6 @@ ___
 • `Optional` **headerClassName**: *string*
 
 Overriding class name for header
-
-Inherited from: [IListProps](components.ilistprops.md).[headerClassName](components.ilistprops.md#headerclassname)
 
 Defined in: [components/List/types.tsx:142](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L142)
 
@@ -131,8 +123,6 @@ ___
 
 Fixed height
 
-Inherited from: [IListProps](components.ilistprops.md).[height](components.ilistprops.md#height)
-
 Defined in: [components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
 
 ___
@@ -143,27 +133,15 @@ ___
 
 Hidden
 
-Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
-
 Defined in: [components/List/types.tsx:137](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L137)
-
-___
-
-### hideColumns
-
-• `Optional` **hideColumns**: *string*[]
-
-Defined in: [pages/Projects/ProjectList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L13)
 
 ___
 
 ### items
 
-• **items**: *Project*[]
+• **items**: T[]
 
 Items
-
-Inherited from: [IListProps](components.ilistprops.md).[items](components.ilistprops.md#items)
 
 Defined in: [components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
 
@@ -175,8 +153,6 @@ ___
 
 Group props
 
-Inherited from: [IListProps](components.ilistprops.md).[listGroupProps](components.ilistprops.md#listgroupprops)
-
 Defined in: [components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
 
 ___
@@ -186,8 +162,6 @@ ___
 • `Optional` **listGroupRenderProps**: IDetailsGroupRenderProps
 
 Group render props
-
-Inherited from: [IListProps](components.ilistprops.md).[listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
 
 Defined in: [components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
 
@@ -199,8 +173,6 @@ ___
 
 Callback to render the column header
 
-Inherited from: [IListProps](components.ilistprops.md).[onRenderColumnHeader](components.ilistprops.md#onrendercolumnheader)
-
 Defined in: [components/List/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L120)
 
 ___
@@ -211,17 +183,7 @@ ___
 
 On render details header
 
-Inherited from: [IListProps](components.ilistprops.md).[onRenderDetailsHeader](components.ilistprops.md#onrenderdetailsheader)
-
 Defined in: [components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
-
-___
-
-### renderLink
-
-• `Optional` **renderLink**: *boolean*
-
-Defined in: [pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
 
 ___
 
@@ -230,8 +192,6 @@ ___
 • `Optional` **searchBox**: *ISearchBoxProps*
 
 Search box props
-
-Inherited from: [IListProps](components.ilistprops.md).[searchBox](components.ilistprops.md#searchbox)
 
 Defined in: [components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
 
@@ -242,7 +202,5 @@ ___
 • `Optional` **selectionProps**: [*IListSelectionProps*](components.ilistselectionprops.md)<any\>
 
 Selection
-
-Inherited from: [IListProps](components.ilistprops.md).[selectionProps](components.ilistprops.md#selectionprops)
 
 Defined in: [components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)

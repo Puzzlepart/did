@@ -17,7 +17,7 @@
 
 ### columns
 
-• `Optional` **columns**: *IListColumn*<IListColumnData\>[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<[*IListColumnData*](components.ilistcolumndata.md)\>[]
 
 Columns
 

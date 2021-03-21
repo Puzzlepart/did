@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { useToast } from 'components/Toast/useToast'
+import { useToast } from 'components/Toast'
 import { getValue, setValue } from 'helpers'
 import { MessageBarType } from 'office-ui-fabric-react'
 import { useState } from 'react'
