@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { List, TabItem, UserMessage } from 'components'
+import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import styles from './SummaryView.module.scss'
 /**
  * @category Function Component
  */
-export const SummaryView: TabItem = () => {
+export const SummaryView: TabComponent = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const { state, rows, columns } = useSummaryView()

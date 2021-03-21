@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { List, TabItem } from 'components'
+import { List, TabComponent } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -14,7 +14,7 @@ import { useProjectList } from './useProjectList'
  *
  * @category Projects
  */
-export const ProjectList: TabItem<IProjectListProps> = (
+export const ProjectList: TabComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
   const { t } = useTranslation()

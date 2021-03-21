@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
-import { TabItem } from 'components/TabContainer/types'
+import { TabComponent } from 'components/TabContainer/types'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
 import React, { useContext, useRef } from 'react'
@@ -23,7 +23,7 @@ import { useChartData } from './useChartData'
 /**
  * @category Timesheet
  */
-export const AllocationView: TabItem = () => {
+export const AllocationView: TabComponent = () => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>(null)

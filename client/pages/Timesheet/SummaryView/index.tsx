@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-array-reduce */
-import { DurationColumn, List, ProjectTooltip, TabItem } from 'components'
+import { DurationColumn, List, ProjectTooltip, TabComponent } from 'components'
 import $date from 'DateUtils'
 import { IColumn } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
@@ -128,7 +128,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
   )
 }
 
-export const SummaryView: TabItem = () => {
+export const SummaryView: TabComponent = () => {
   const { t } = useTranslation()
   const context = useContext(TimesheetContext)
   const columns = createColumns(context.scope)

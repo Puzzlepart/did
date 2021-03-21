@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { TabItem } from 'components'
+import { TabComponent } from 'components'
 import { IPivotItemProps } from 'office-ui-fabric-react'
 import { FunctionComponent } from 'react'
 import { PermissionScope } from 'security'
@@ -10,7 +10,7 @@ import { PermissionScope } from 'security'
  * @category Pages
  */
 export interface IPageSectionComponent extends IPivotItemProps {
-  component: TabItem
+  component: TabComponent
   permission?: PermissionScope
 }
 

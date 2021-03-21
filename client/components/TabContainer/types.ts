@@ -2,8 +2,6 @@
 import { IPivotItemProps, IPivotProps } from 'office-ui-fabric-react'
 import { FunctionComponent } from 'react'
 
-export type TabContainerComponent = FunctionComponent<ITabContainerProps>
-
 export interface ITabContainerProps extends IPivotProps {
   /**
    * Fixed link width
@@ -47,4 +45,6 @@ export interface ITabContainerProps extends IPivotProps {
 
 export type TabItemProps = IPivotItemProps
 
-export type TabItem<T extends TabItemProps = any> = FunctionComponent<T>
+export type TabContainerComponent = FunctionComponent<ITabContainerProps>
+
+export type TabComponent<T extends TabItemProps = any> = FunctionComponent<T>

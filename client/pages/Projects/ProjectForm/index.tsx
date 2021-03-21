@@ -4,7 +4,7 @@ import {
   IconPicker,
   LabelPicker,
   SearchCustomer,
-  TabItem,
+  TabComponent,
   UserMessage
 } from 'components'
 import { Toast } from 'components/Toast'
@@ -20,7 +20,7 @@ import { useProjectForm } from './useProjectForm'
 /**
  * @category Projects
  */
-export const ProjectForm: TabItem<IProjectFormProps> = (
+export const ProjectForm: TabComponent<IProjectFormProps> = (
   props: IProjectFormProps
 ) => {
   const { state, loading, dispatch, onFormSubmit, toast, t } = useProjectForm({

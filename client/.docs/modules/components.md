@@ -58,8 +58,8 @@ Reusable React Function components.
 ### Type aliases
 
 - [IHotkeyModal](components.md#ihotkeymodal)
+- [TabComponent](components.md#tabcomponent)
 - [TabContainerComponent](components.md#tabcontainercomponent)
-- [TabItem](components.md#tabitem)
 - [TabItemProps](components.md#tabitemprops)
 
 ### Function Component Variables
@@ -122,17 +122,9 @@ Defined in: [components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/d
 
 ___
 
-### TabContainerComponent
+### TabComponent
 
-Ƭ **TabContainerComponent**: *FunctionComponent*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
-
-Defined in: [components/TabContainer/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L5)
-
-___
-
-### TabItem
-
-Ƭ **TabItem**<T\>: *FunctionComponent*<T\>
+Ƭ **TabComponent**<T\>: *FunctionComponent*<T\>
 
 #### Type parameters:
 
@@ -144,11 +136,19 @@ Defined in: [components/TabContainer/types.ts:50](https://github.com/Puzzlepart/
 
 ___
 
+### TabContainerComponent
+
+Ƭ **TabContainerComponent**: *FunctionComponent*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
+
+Defined in: [components/TabContainer/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L48)
+
+___
+
 ### TabItemProps
 
 Ƭ **TabItemProps**: IPivotItemProps
 
-Defined in: [components/TabContainer/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L48)
+Defined in: [components/TabContainer/types.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L46)
 
 ## Function Component Variables
 

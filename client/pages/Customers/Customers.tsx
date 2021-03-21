@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { TabContainer, TabItem } from 'components'
+import { TabComponent, TabContainer } from 'components'
 import { usePermissions } from 'hooks'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React from 'react'
@@ -16,7 +16,7 @@ import { CustomersView } from './types'
 /**
  * @category Function Component
  */
-export const Customers: TabItem<ICustomerFormProps> = () => {
+export const Customers: TabComponent<ICustomerFormProps> = () => {
   const { t } = useTranslation()
   const { hasPermission } = usePermissions()
   const { state, dispatch, context, view } = useCustomers()
