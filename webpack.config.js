@@ -13,7 +13,8 @@ const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist/server'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
-const HTML_PLUGIN_FILE_NAME = path.resolve(__dirname, 'server/views/_template.hbs')
+const HTML_PLUGIN_TEMPLATE = path.resolve(__dirname, 'server/views/_template.hbs')
+const HTML_PLUGIN_FILE_NAME = path.resolve(__dirname, SERVER_DIST, 'views/index.hbs')
 const SRC_PATH = path.resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
@@ -21,7 +22,6 @@ debug('Compiling Did bundle')
 debug('[MODE]: %s', MODE.toUpperCase())
 debug('[SERVER DIST]: %s', SERVER_DIST.toUpperCase())
 debug('[FILENAME]: %s', BUNDLE_FILE_NAME)
-debug('[HBS TEMPLATE]: %s', HTML_PLUGIN_FILE_NAME)
 
 /** CONFIG */
 const config = {
@@ -102,8 +102,8 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: HTML_PLUGIN_FILE_NAME,
-      filename: path.resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
+      template: HTML_PLUGIN_TEMPLATE,
+      filename: HTML_PLUGIN_FILE_NAME,
       inject: true,
     }),
     new DefinePlugin({
