@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
 import { format } from 'office-ui-fabric-react'
-import React, { FunctionComponent, HTMLProps } from 'react'
+import React, { FC, HTMLProps } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
@@ -12,7 +12,7 @@ export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
 /**
  * @category Function Component
  */
-export const DurationDisplay: FunctionComponent<IDurationDisplayProps> = (
+export const DurationDisplay: FC<IDurationDisplayProps> = (
   props: IDurationDisplayProps
 ): JSX.Element => {
   const { t } = useTranslation()

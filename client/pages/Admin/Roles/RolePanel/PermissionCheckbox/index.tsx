@@ -1,9 +1,9 @@
 import { Checkbox, Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'
 
-export const PermissionCheckbox: FunctionComponent<IPermissionCheckboxProps> = (
+export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (
   props: IPermissionCheckboxProps
 ) => {
   return (

@@ -2,7 +2,7 @@
 /* eslint-disable tsdoc/syntax */
 import { FilterPanel, TabContainer, UserMessage } from 'components'
 import { PivotItem } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from './context'
 import { useReports } from './hooks'
@@ -19,7 +19,7 @@ import { SummaryView } from './SummaryView'
 /**
  * @category Function Component
  */
-export const Reports: FunctionComponent = () => {
+export const Reports: FC = () => {
   const { t } = useTranslation()
   const { queries, filters, context } = useReports()
   return (

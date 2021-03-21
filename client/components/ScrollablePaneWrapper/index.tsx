@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
 import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 
 /**
  * @category Function Component
  */
-export const ScrollablePaneWrapper: FunctionComponent<any> = ({
+export const ScrollablePaneWrapper: FC<any> = ({
   children,
   condition,
   height

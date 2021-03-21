@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { List } from 'components'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 import { useColumns } from './useColumns'
@@ -8,9 +8,7 @@ import { useColumns } from './useColumns'
 /**
  * @category Function Component
  */
-export const EventList: FunctionComponent<IEventListProps> = (
-  props: IEventListProps
-) => {
+export const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   const columns = useColumns(props)
   return (
     <div className={styles.root} hidden={props.hidden}>

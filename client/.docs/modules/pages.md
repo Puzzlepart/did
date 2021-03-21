@@ -136,7 +136,7 @@ ___
 
 ### Projects
 
-• `Const` **Projects**: FunctionComponent
+• `Const` **Projects**: FC
 
 Defined in: [pages/Projects/Projects.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L16)
 
@@ -144,7 +144,7 @@ ___
 
 ### Timesheet
 
-• `Const` **Timesheet**: FunctionComponent
+• `Const` **Timesheet**: FC
 
 Defined in: [pages/Timesheet/Timesheet.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L22)
 
@@ -264,7 +264,7 @@ ___
 
 ### Header
 
-• `Const` **Header**: FunctionComponent
+• `Const` **Header**: FC
 
 Defined in: [pages/Projects/ProjectDetails/Header/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L12)
 
@@ -272,7 +272,7 @@ ___
 
 ### Information
 
-• `Const` **Information**: FunctionComponent
+• `Const` **Information**: FC
 
 Defined in: [pages/Projects/ProjectDetails/Information/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L16)
 
@@ -280,7 +280,7 @@ ___
 
 ### ProjectDetails
 
-• `Const` **ProjectDetails**: FunctionComponent
+• `Const` **ProjectDetails**: FC
 
 Defined in: [pages/Projects/ProjectDetails/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/index.tsx#L15)
 
@@ -315,7 +315,7 @@ ___
 
 ### TimeEntries
 
-• `Const` **TimeEntries**: FunctionComponent
+• `Const` **TimeEntries**: FC
 
 Defined in: [pages/Projects/ProjectDetails/TimeEntries/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/TimeEntries/index.tsx#L15)
 

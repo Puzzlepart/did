@@ -1,12 +1,12 @@
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
 import { ChoiceGroup, DefaultButton, Panel } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../MenuItem'
 import { useUserReports } from './useUserReports'
 
-export const UserReports: FunctionComponent = () => {
+export const UserReports: FC = () => {
   const { t } = useTranslation()
   const {
     preset,

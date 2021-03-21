@@ -1,12 +1,12 @@
 import { ConditionalWrapper, IconPicker, Toast } from 'components'
 import { Panel, PrimaryButton, TextField } from 'office-ui-fabric-react'
 import { config } from 'package'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import styles from './CustomerForm.module.scss'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 
-export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
+export const CustomerForm: FC<ICustomerFormProps> = (
   props: ICustomerFormProps
 ) => {
   const { loading, state, dispatch, toast, onFormSubmit, t } = useCustomerForm({

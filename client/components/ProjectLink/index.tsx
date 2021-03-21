@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
@@ -8,7 +8,7 @@ import { IProjectLinkProps } from './types'
 /**
  * @category Function Component
  */
-export const ProjectLink: FunctionComponent<IProjectLinkProps> = (
+export const ProjectLink: FC<IProjectLinkProps> = (
   props: IProjectLinkProps
 ) => (
   <Link

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IPivotItemProps, IPivotProps } from 'office-ui-fabric-react'
-import { FunctionComponent } from 'react'
+import { FC } from 'react'
 import { PermissionScope } from 'security'
 
 export interface ITabContainerProps extends IPivotProps {
@@ -71,8 +71,6 @@ export interface ITabItemProps extends Omit<IPivotItemProps, 'hidden'> {
   permission?: PermissionScope
 }
 
-export type TabContainerComponent = FunctionComponent<ITabContainerProps>
+export type TabContainerComponent = FC<ITabContainerProps>
 
-export type TabComponent<
-  T extends ITabItemProps = ITabItemProps
-> = FunctionComponent<T>
+export type TabComponent<T extends ITabItemProps = ITabItemProps> = FC<T>

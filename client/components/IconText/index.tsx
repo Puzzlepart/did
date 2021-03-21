@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { omit } from 'underscore'
 import styles from './IconText.module.scss'
 import { IIconTextProps } from './types'
@@ -10,9 +10,7 @@ import { IIconTextProps } from './types'
  *
  * @category Function Component
  */
-export const IconText: FunctionComponent<IIconTextProps> = (
-  props: IIconTextProps
-) => {
+export const IconText: FC<IIconTextProps> = (props: IIconTextProps) => {
   return (
     <div className={styles.root}>
       <Icon {...omit(props, 'text')} iconName={props.iconName || 'Page'} />

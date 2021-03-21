@@ -1,12 +1,10 @@
 import { Icon, ProgressIndicator } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { omit } from 'underscore'
 import styles from './Progress.module.scss'
 import { IProgressProps } from './types'
 
-export const Progress: FunctionComponent<IProgressProps> = (
-  props: IProgressProps
-) => {
+export const Progress: FC<IProgressProps> = (props: IProgressProps) => {
   return (
     <div className={styles.root}>
       <div className={styles.progress}>

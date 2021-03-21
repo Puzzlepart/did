@@ -2,7 +2,7 @@
 import { EventList, UserColumn, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import { ActionButton, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { Summary } from './Summary'
@@ -12,7 +12,7 @@ import { useTimeEntries } from './useTimeEntries'
 /**
  * @category Projects
  */
-export const TimeEntries: FunctionComponent = () => {
+export const TimeEntries: FC = () => {
   const { t } = useTranslation()
   const { loading, timeentries, onExport, error } = useTimeEntries()
   return (

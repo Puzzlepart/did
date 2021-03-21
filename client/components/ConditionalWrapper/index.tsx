@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { FunctionComponent, HTMLProps, ReactNode } from 'react'
+import { FC, HTMLProps, ReactNode } from 'react'
 
 /**
  * @ignore
@@ -12,7 +12,7 @@ export interface IConditionalWrapperProps extends HTMLProps<HTMLDivElement> {
 /**
  * @category Function Component
  */
-export const ConditionalWrapper: FunctionComponent<IConditionalWrapperProps> = ({
+export const ConditionalWrapper: FC<IConditionalWrapperProps> = ({
   condition,
   wrapper,
   children

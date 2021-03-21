@@ -6,7 +6,7 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React, { Fragment, FunctionComponent } from 'react'
+import React, { FC, Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'
 import { PermissionCheckbox } from './PermissionCheckbox'
@@ -14,9 +14,7 @@ import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import { useRolePanel } from './useRolePanel'
 
-export const RolePanel: FunctionComponent<IRolePanelProps> = (
-  props: IRolePanelProps
-) => {
+export const RolePanel: FC<IRolePanelProps> = (props: IRolePanelProps) => {
   const { t } = useTranslation()
   const {
     data,

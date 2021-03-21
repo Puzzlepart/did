@@ -124,7 +124,7 @@ ___
 
 ### TabComponent
 
-Ƭ **TabComponent**<T\>: *FunctionComponent*<T\>
+Ƭ **TabComponent**<T\>: *FC*<T\>
 
 #### Type parameters:
 
@@ -138,7 +138,7 @@ ___
 
 ### TabContainerComponent
 
-Ƭ **TabContainerComponent**: *FunctionComponent*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
+Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
 Defined in: [components/TabContainer/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L74)
 
@@ -146,7 +146,7 @@ Defined in: [components/TabContainer/types.ts:74](https://github.com/Puzzlepart/
 
 ### Autocomplete
 
-• `Const` **Autocomplete**: *FunctionComponent*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
+• `Const` **Autocomplete**: *FC*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
 
 Defined in: [components/Autocomplete/Autocomplete.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L20)
 
@@ -154,7 +154,7 @@ ___
 
 ### ConditionalWrapper
 
-• `Const` **ConditionalWrapper**: *FunctionComponent*<IConditionalWrapperProps\>
+• `Const` **ConditionalWrapper**: *FC*<IConditionalWrapperProps\>
 
 Defined in: [components/ConditionalWrapper/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L15)
 
@@ -162,7 +162,7 @@ ___
 
 ### CustomerLink
 
-• `Const` **CustomerLink**: *FunctionComponent*<ICustomerLinkProps\>
+• `Const` **CustomerLink**: *FC*<ICustomerLinkProps\>
 
 Defined in: [components/CustomerLink/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L9)
 
@@ -170,7 +170,7 @@ ___
 
 ### DurationColumn
 
-• `Const` **DurationColumn**: *FunctionComponent*<[*IDurationColumnProps*](../interfaces/components.idurationcolumnprops.md)\>
+• `Const` **DurationColumn**: *FC*<[*IDurationColumnProps*](../interfaces/components.idurationcolumnprops.md)\>
 
 Defined in: [components/DurationColumn/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/DurationColumn/index.tsx#L10)
 
@@ -178,7 +178,7 @@ ___
 
 ### EntityLabel
 
-• `Const` **EntityLabel**: *FunctionComponent*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
+• `Const` **EntityLabel**: *FC*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
 
 The `EntityLabel` component is used to add contextual metadata
 to a design. Visually it styles text, adds padding, and rounded corners.
@@ -191,7 +191,7 @@ ___
 
 ### EventList
 
-• `Const` **EventList**: *FunctionComponent*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
+• `Const` **EventList**: *FC*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
 
 Defined in: [components/EventList/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L11)
 
@@ -199,7 +199,7 @@ ___
 
 ### FilterItem
 
-• `Const` **FilterItem**: *FunctionComponent*<IFilterItemProps\>
+• `Const` **FilterItem**: *FC*<IFilterItemProps\>
 
 Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
 
@@ -207,7 +207,7 @@ ___
 
 ### HotkeyModal
 
-• `Const` **HotkeyModal**: *FunctionComponent*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
+• `Const` **HotkeyModal**: *FC*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
 
 Defined in: [components/HotkeyModal/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L13)
 
@@ -215,7 +215,7 @@ ___
 
 ### IconPicker
 
-• `Const` **IconPicker**: *FunctionComponent*<IIconPickerProps\>
+• `Const` **IconPicker**: *FC*<IIconPickerProps\>
 
 Defined in: [components/IconPicker/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L13)
 
@@ -223,7 +223,7 @@ ___
 
 ### IconText
 
-• `Const` **IconText**: *FunctionComponent*<IIconTextProps\>
+• `Const` **IconText**: *FC*<IIconTextProps\>
 
 Renders an inline `<Icon />` with text
 
@@ -233,7 +233,7 @@ ___
 
 ### LabelPicker
 
-• `Const` **LabelPicker**: *FunctionComponent*<ILabelPickerProps\>
+• `Const` **LabelPicker**: *FC*<ILabelPickerProps\>
 
 Defined in: [components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
 
@@ -241,7 +241,7 @@ ___
 
 ### List
 
-• `Const` **List**: *FunctionComponent*<IListProps\>
+• `Const` **List**: *FC*<IListProps\>
 
 List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
 
@@ -264,7 +264,7 @@ ___
 
 ### PermissionList
 
-• `Const` **PermissionList**: *FunctionComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
+• `Const` **PermissionList**: *FC*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
 Defined in: [components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
 
@@ -272,7 +272,7 @@ ___
 
 ### ProjectLink
 
-• `Const` **ProjectLink**: *FunctionComponent*<IProjectLinkProps\>
+• `Const` **ProjectLink**: *FC*<IProjectLinkProps\>
 
 Defined in: [components/ProjectLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L11)
 
@@ -280,7 +280,7 @@ ___
 
 ### ProjectTooltip
 
-• `Const` **ProjectTooltip**: *FunctionComponent*<IProjectTooltipProps\>
+• `Const` **ProjectTooltip**: *FC*<IProjectTooltipProps\>
 
 Defined in: [components/ProjectTooltip/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L10)
 
@@ -288,7 +288,7 @@ ___
 
 ### ScrollablePaneWrapper
 
-• `Const` **ScrollablePaneWrapper**: *FunctionComponent*<any\>
+• `Const` **ScrollablePaneWrapper**: *FC*<any\>
 
 Defined in: [components/ScrollablePaneWrapper/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L8)
 
@@ -312,7 +312,7 @@ ___
 
 ### Toast
 
-• `Const` **Toast**: *FunctionComponent*<IToastProps\>
+• `Const` **Toast**: *FC*<IToastProps\>
 
 A Toast component that shows a MessageBar with
 markdown using `react-markdown`
@@ -325,7 +325,7 @@ ___
 
 ### UserMessage
 
-• `Const` **UserMessage**: *FunctionComponent*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
+• `Const` **UserMessage**: *FC*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
 
 A component that supports a `<MessageBar />` with
 markdown using `react-markdown`.
@@ -338,7 +338,7 @@ ___
 
 ### UserColumn
 
-• `Const` **UserColumn**: *FunctionComponent*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
+• `Const` **UserColumn**: *FC*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
 
 User column
 

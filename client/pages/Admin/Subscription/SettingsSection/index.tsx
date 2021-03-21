@@ -3,7 +3,7 @@
 import { ToggleSection } from 'components/ToggleSection'
 import { getValue as get } from 'helpers'
 import { Slider, Toggle } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
@@ -12,7 +12,7 @@ import { ISettingsSectionProps } from './types'
 /**
  * @category SubscriptionSettings
  */
-export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
+export const SettingsSection: FC<ISettingsSectionProps> = (
   props: ISettingsSectionProps
 ) => {
   const { settings, onChange } = useContext(SubscriptionContext)

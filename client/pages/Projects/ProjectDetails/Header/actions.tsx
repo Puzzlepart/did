@@ -3,12 +3,7 @@ import { useMutation } from '@apollo/client'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
 import { DefaultButton } from 'office-ui-fabric-react'
-import React, {
-  FunctionComponent,
-  HTMLAttributes,
-  useContext,
-  useState
-} from 'react'
+import React, { FC, HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from '../../context'
@@ -20,9 +15,9 @@ import styles from './Header.module.scss'
 /**
  * @category Projects
  */
-export const ProjectActions: FunctionComponent<
-  HTMLAttributes<HTMLDivElement>
-> = (props: HTMLAttributes<HTMLDivElement>) => {
+export const ProjectActions: FC<HTMLAttributes<HTMLDivElement>> = (
+  props: HTMLAttributes<HTMLDivElement>
+) => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()

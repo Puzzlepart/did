@@ -7,7 +7,7 @@ import {
   List,
   SearchBox
 } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
 import styles from './Autocomplete.module.scss'
@@ -17,7 +17,7 @@ import { useAutocomplete } from './useAutocomplete'
 /**
  * @category Function Component
  */
-export const Autocomplete: FunctionComponent<IAutocompleteProps> = (
+export const Autocomplete: FC<IAutocompleteProps> = (
   props: IAutocompleteProps
 ) => {
   const {

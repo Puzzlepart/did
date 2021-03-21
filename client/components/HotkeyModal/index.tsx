@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IModalProps, Modal } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import FadeIn from 'react-fade-in'
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
@@ -10,9 +10,7 @@ export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 /**
  * @category Function Component
  */
-export const HotkeyModal: FunctionComponent<IHotkeyModal> = (
-  props: IHotkeyModal
-) => {
+export const HotkeyModal: FC<IHotkeyModal> = (props: IHotkeyModal) => {
   const { t } = useTranslation()
   return (
     <Modal

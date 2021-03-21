@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import get from 'get-value'
 import { Persona, PersonaSize } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { isBrowser, isMobile } from 'react-device-detect'
 import { IUserColumnProps } from './types'
 
@@ -12,7 +12,7 @@ import { IUserColumnProps } from './types'
  *
  * @category SummaryView
  */
-export const UserColumn: FunctionComponent<IUserColumnProps> = ({
+export const UserColumn: FC<IUserColumnProps> = ({
   user,
   persona = { size: PersonaSize.size24 }
 }: IUserColumnProps) => {
