@@ -4,6 +4,7 @@ import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import $date from 'DateUtils'
 import React, { useContext } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { ReportsContext } from '../context'
@@ -31,7 +32,7 @@ export const ReportsList: TabComponent = () => {
       <List
         enableShimmer={context.state.loading}
         items={context.state.subset}
-        height={window.innerHeight - 200}
+        height={isBrowser && window.innerHeight - 200}
         listGroupProps={{
           ...context.state.groupBy,
           totalFunc: (items) => {

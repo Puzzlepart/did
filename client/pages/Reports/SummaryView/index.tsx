@@ -2,6 +2,7 @@
 import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import React, { useContext } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { ReportsContext } from '../context'
@@ -31,7 +32,7 @@ export const SummaryView: TabComponent = () => {
           enableShimmer={state.loading}
           columns={columns}
           items={rows}
-          height={window.innerHeight - 200}
+          height={isBrowser && window.innerHeight - 200}
           headerClassName={styles.columnHeader}
         />
         <UserMessage
