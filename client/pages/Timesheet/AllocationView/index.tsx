@@ -25,13 +25,13 @@ import { useChartData } from './useChartData'
  */
 export const AllocationView: TabComponent = () => {
   const { t } = useTranslation()
-  const { loading, selectedPeriod } = useContext(TimesheetContext)
+  const { state } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>(null)
 
   const charts = useChartConfig()
   const data = useChartData(charts, container.current)
 
-  if (!loading && selectedPeriod?.totalDuration === 0) {
+  if (!state.loading && state.selectedPeriod?.totalDuration === 0) {
     return (
       <div className={styles.root} ref={container}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />

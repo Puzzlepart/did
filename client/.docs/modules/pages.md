@@ -39,6 +39,10 @@ All are built using React Function components and Hooks.
 - [ITimesheetParameters](../interfaces/pages.itimesheetparameters.md)
 - [ITimesheetState](../interfaces/pages.itimesheetstate.md)
 
+### Other Type aliases
+
+- [UseSubmitActionsHook](pages.md#usesubmitactionshook)
+
 ### Timesheet Type aliases
 
 - [TimesheetView](pages.md#timesheetview)
@@ -115,6 +119,16 @@ All are built using React Function components and Hooks.
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
+
+## Other Type aliases
+
+### UseSubmitActionsHook
+
+Ƭ **UseSubmitActionsHook**: *ReturnType*<*typeof* [*useSubmitActions*](pages.md#usesubmitactions)\>
+
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L8)
+
+___
 
 ## Timesheet Type aliases
 
@@ -391,7 +405,7 @@ ___
 
 • `Const` **TimesheetContext**: *Context*<[*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)\>
 
-Defined in: [pages/Timesheet/context.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L28)
+Defined in: [pages/Timesheet/context.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L31)
 
 ## Function Component Functions
 
@@ -672,7 +686,7 @@ Name | Type |
 `onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
 `onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L13)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L15)
 
 ___
 

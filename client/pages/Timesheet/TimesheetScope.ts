@@ -5,7 +5,10 @@ import { ITimesheetParameters } from './types'
 
 /**
  * Handles a scope, the period of time between
- * a startDateTime and endDateTime
+ * a `startDateTime` and `endDateTime`
+ *
+ * @remarks Look into creating a `react` hook
+ * that can ease working with the scope
  *
  * @category Timesheet
  */

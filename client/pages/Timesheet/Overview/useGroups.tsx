@@ -12,11 +12,11 @@ import { TimesheetContext } from '../context'
  */
 export function useGroups() {
   const { t } = useTranslation()
-  const { selectedPeriod } = useContext(TimesheetContext)
+  const { state } = useContext(TimesheetContext)
   return useMemo(
     () => ({
       fieldName: 'date',
-      groupNames: selectedPeriod?.weekdays(
+      groupNames: state.selectedPeriod?.weekdays(
         config.app.TIMESHEET_OVERVIEW_DAY_FORMAT
       ),
       totalFunc: (events: EventObject[]) => {
@@ -24,6 +24,6 @@ export function useGroups() {
         return ` (${$date.getDurationString(duration, t)})`
       }
     }),
-    [selectedPeriod]
+    [state.selectedPeriod]
   )
 }

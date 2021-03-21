@@ -4,12 +4,6 @@
 
 [Pages](../modules/pages.md).ITimesheetState
 
-## Hierarchy
-
-* **ITimesheetState**
-
-  ↳ [*ITimesheetContext*](pages.itimesheetcontext.md)
-
 ## Table of contents
 
 ### Properties

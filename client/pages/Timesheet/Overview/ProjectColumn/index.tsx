@@ -30,7 +30,7 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
 
 export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   const { t } = useTranslation()
-  const { dispatch, selectedPeriod } = useContext(TimesheetContext)
+  const { state, dispatch } = useContext(TimesheetContext)
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   if (event.isSystemIgnored) {
@@ -82,7 +82,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
           {!isEmpty(event.project.labels) && (
             <Icon iconName='Tag' className={styles.labelIcon} />
           )}
-          {event.manualMatch && !selectedPeriod.isConfirmed && (
+          {event.manualMatch && !state.selectedPeriod.isConfirmed && (
             <ClearManualMatchButton
               onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
               className={styles.clearButton}

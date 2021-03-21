@@ -6,9 +6,7 @@
 
 ## Hierarchy
 
-* [*ITimesheetState*](pages.itimesheetstate.md)
-
-* *ReturnType*<*typeof* [*useSubmitActions*](../modules/pages.md#usesubmitactions)\>
+* [*UseSubmitActionsHook*](../modules/pages.md#usesubmitactionshook)
 
   ↳ **ITimesheetContext**
 
@@ -17,17 +15,10 @@
 ### Properties
 
 - [dispatch](pages.itimesheetcontext.md#dispatch)
-- [error](pages.itimesheetcontext.md#error)
-- [loading](pages.itimesheetcontext.md#loading)
-- [navHistory](pages.itimesheetcontext.md#navhistory)
 - [onSubmitPeriod](pages.itimesheetcontext.md#onsubmitperiod)
 - [onUnsubmitPeriod](pages.itimesheetcontext.md#onunsubmitperiod)
-- [periods](pages.itimesheetcontext.md#periods)
 - [refetch](pages.itimesheetcontext.md#refetch)
-- [scope](pages.itimesheetcontext.md#scope)
-- [selectedPeriod](pages.itimesheetcontext.md#selectedperiod)
-- [selectedView](pages.itimesheetcontext.md#selectedview)
-- [showHotkeysModal](pages.itimesheetcontext.md#showhotkeysmodal)
+- [state](pages.itimesheetcontext.md#state)
 
 ## Properties
 
@@ -37,43 +28,7 @@
 
 Dispatch an action
 
-Defined in: [pages/Timesheet/context.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L17)
-
-___
-
-### error
-
-• `Optional` **error**: *any*
-
-Error
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[error](pages.itimesheetstate.md#error)
-
-Defined in: [pages/Timesheet/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L43)
-
-___
-
-### loading
-
-• `Optional` **loading**: *IProgressProps*
-
-Loading props
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[loading](pages.itimesheetstate.md#loading)
-
-Defined in: [pages/Timesheet/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L38)
-
-___
-
-### navHistory
-
-• `Optional` **navHistory**: *string*[]
-
-Navigation history
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[navHistory](pages.itimesheetstate.md#navhistory)
-
-Defined in: [pages/Timesheet/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L53)
+Defined in: [pages/Timesheet/context.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L20)
 
 ___
 
@@ -93,7 +48,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L21)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L23)
 
 ___
 
@@ -113,19 +68,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L32)
-
-___
-
-### periods
-
-• **periods**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)[]
-
-Periods for the seleted scope
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[periods](pages.itimesheetstate.md#periods)
-
-Defined in: [pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L34)
 
 ___
 
@@ -141,54 +84,16 @@ Refetch data
 
 **Returns:** *Promise*<ApolloQueryResult<any\>\>
 
-Defined in: [pages/Timesheet/context.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L22)
+Defined in: [pages/Timesheet/context.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L25)
 
-Defined in: [pages/Timesheet/context.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L22)
-
-___
-
-### scope
-
-• **scope**: [*TimesheetScope*](../classes/pages.timesheetscope.md)
-
-The current scope
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[scope](pages.itimesheetstate.md#scope)
-
-Defined in: [pages/Timesheet/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L33)
+Defined in: [pages/Timesheet/context.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L25)
 
 ___
 
-### selectedPeriod
+### state
 
-• `Optional` **selectedPeriod**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)
+• **state**: [*ITimesheetState*](pages.itimesheetstate.md)
 
-The currently selected period
+State
 
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[selectedPeriod](pages.itimesheetstate.md#selectedperiod)
-
-Defined in: [pages/Timesheet/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L23)
-
-___
-
-### selectedView
-
-• **selectedView**: [*TimesheetView*](../modules/pages.md#timesheetview)
-
-The currently seelcted view
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[selectedView](pages.itimesheetstate.md#selectedview)
-
-Defined in: [pages/Timesheet/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L28)
-
-___
-
-### showHotkeysModal
-
-• `Optional` **showHotkeysModal**: *boolean*
-
-Show hotkeys modal
-
-Inherited from: [ITimesheetState](pages.itimesheetstate.md).[showHotkeysModal](pages.itimesheetstate.md#showhotkeysmodal)
-
-Defined in: [pages/Timesheet/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L48)
+Defined in: [pages/Timesheet/context.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L15)

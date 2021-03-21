@@ -14,7 +14,7 @@ import { useMessages } from './useMessages'
  */
 export const StatusBar: FC = () => {
   if (isMobile) styles.root += ` ${styles.mobile}`
-  const { loading } = useContext(TimesheetContext)
+  const { state } = useContext(TimesheetContext)
 
   const defaultMessageProps: IUserMessageProps = {
     className: styles.message,
@@ -27,8 +27,8 @@ export const StatusBar: FC = () => {
   return (
     <FadeIn>
       <div className={styles.root} hidden={isEmpty(messages)}>
-        {loading ? (
-          <Progress {...loading} />
+        {state.loading ? (
+          <Progress {...state.loading} />
         ) : (
           <div className={styles.container} hidden={isEmpty(messages)}>
             {messages.map((message, key) => (

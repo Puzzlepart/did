@@ -20,7 +20,7 @@ import { WeekPickerCommand } from './WeekPickerCommand'
  */
 export const WeekPicker = () => {
   const { t } = useTranslation()
-  const { scope, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useContext(TimesheetContext)
   const [calendar, setCalendar] = useState(null)
   return (
     <>
@@ -52,7 +52,7 @@ export const WeekPicker = () => {
             firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
             dateRangeType={DateRangeType.Week}
             autoNavigateOnSelection={true}
-            value={scope.startDate.jsDate}
+            value={state.scope.startDate.jsDate}
           />
         </FocusTrapZone>
       </Callout>

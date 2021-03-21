@@ -14,21 +14,17 @@ import styles from './SummaryView.module.scss'
  */
 export const SummaryView: TabComponent = () => {
   const { t } = useTranslation()
-  const context = useContext(TimesheetContext)
-  const columns = createColumns(context.scope)
-  const events = context.selectedPeriod?.getEvents(false) || []
+  const { state } = useContext(TimesheetContext)
+  const columns = createColumns(state.scope)
+  const events = state.selectedPeriod?.getEvents(false) || []
   const items = [
     ...generateRows(events, columns),
     generateTotalRow(events, columns, t('common.sumLabel'))
   ]
 
   return (
-    <div key={`summary_${context.selectedPeriod?.id}`} className={styles.root}>
-      <List
-        items={items}
-        columns={columns}
-        enableShimmer={!!context?.loading}
-      />
+    <div key={`summary_${state.selectedPeriod?.id}`} className={styles.root}>
+      <List items={items} columns={columns} enableShimmer={!!state?.loading} />
     </div>
   )
 }

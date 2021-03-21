@@ -39,12 +39,12 @@ export function useChartData<T = any>(
   charts: IChartConfig[],
   container: HTMLDivElement
 ): ChartData<T> {
-  const { selectedPeriod } = useContext(TimesheetContext)
+  const { state } = useContext(TimesheetContext)
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {
         const d = getDataForChart(
-          selectedPeriod?.getEvents(),
+          state.selectedPeriod?.getEvents(),
           chart,
           container?.clientWidth
         )
@@ -53,6 +53,6 @@ export function useChartData<T = any>(
           [chart.key]: [`${chart.key}_${d.length}`, d]
         }
       }, {}),
-    [charts, container?.clientWidth, selectedPeriod]
+    [charts, container?.clientWidth, state.selectedPeriod]
   )
 }

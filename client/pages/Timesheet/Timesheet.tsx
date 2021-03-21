@@ -21,7 +21,7 @@ import { TimesheetContext, TimesheetView } from './types'
  */
 export const Timesheet: FC = () => {
   const { t } = useTranslation()
-  const { context } = useTimesheet()
+  const { state, dispatch, context } = useTimesheet()
   const { hotkeysProps } = useHotkeys(context)
 
   return (
@@ -29,17 +29,15 @@ export const Timesheet: FC = () => {
       <GlobalHotKeys {...hotkeysProps}>
         <div className={styles.root}>
           <ActionBar />
-          <ErrorBar error={context.error} />
+          <ErrorBar error={state.error} />
           <StatusBar />
           <TabContainer
-            selectedKey={context.selectedView}
+            selectedKey={state.selectedView}
             onLinkClick={({ props }) =>
-              context.dispatch(
-                CHANGE_VIEW({ view: props.itemKey as TimesheetView })
-              )
+              dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
             }
             itemProps={{
-              headerButtonProps: { disabled: !!context.error }
+              headerButtonProps: { disabled: !!state.error }
             }}>
             <Overview
               headerText={t('timesheet.overviewHeaderText')}
@@ -59,8 +57,8 @@ export const Timesheet: FC = () => {
         </div>
         <HotkeyModal
           {...hotkeysProps}
-          isOpen={context.showHotkeysModal}
-          onDismiss={() => context.dispatch(TOGGLE_SHORTCUTS())}
+          isOpen={state.showHotkeysModal}
+          onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
         />
       </GlobalHotKeys>
     </TimesheetContext.Provider>

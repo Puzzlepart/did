@@ -34,7 +34,7 @@ export function useTimesheet() {
 
   const context = useMemo<ITimesheetContext>(
     () => ({
-      ...state,
+      state,
       refetch,
       onSubmitPeriod,
       onUnsubmitPeriod,

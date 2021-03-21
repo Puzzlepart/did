@@ -9,10 +9,17 @@ import {
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
-import { filter, omit } from 'underscore'
+import { filter, omit, pick } from 'underscore'
 import { BrowserStorage } from 'utils'
 
 /**
+ * Handles a part of a `TimesheetScope`. Represented
+ * by the combination of weeek number, month index and
+ * year.
+ *
+ * @remarks Look into creating a `react` hook
+ * that can ease working with the periods
+ *
  * @category Timesheet
  */
 export class TimesheetPeriod {
@@ -74,8 +81,9 @@ export class TimesheetPeriod {
    * project/customer is set to null for the event
    *
    * @param event - Event object
-   * @memberof TimesheetPeriod
    * @returns an extended event object
+   *
+   * @memberof TimesheetPeriod
    */
   private _checkUiManualMatch(event: EventObject) {
     const manualMatch = this._uiMatchedEvents[event.id]
@@ -103,6 +111,7 @@ export class TimesheetPeriod {
    * Get events
    *
    * @param includeUnmatched - Include unmatched events
+   *
    * @memberof TimesheetPeriod
    */
   public getEvents(includeUnmatched: boolean = true): EventObject[] {
@@ -175,6 +184,7 @@ export class TimesheetPeriod {
    *
    * @param eventId - Event id
    * @param project - Project
+   *
    * @memberof TimesheetPeriod
    */
   public setManualMatch(eventId: string, project: Project) {
@@ -187,6 +197,7 @@ export class TimesheetPeriod {
    * Clear manual match from local storage
    *
    * @param eventId - Event id
+   *
    * @memberof TimesheetPeriod
    */
   public clearManualMatch(eventId: string) {
@@ -198,6 +209,7 @@ export class TimesheetPeriod {
    * Store ignored event in browser storage
    *
    * @param eventId - Event id
+   *
    * @memberof TimesheetPeriod
    */
   public ignoreEvent(eventId: string) {
@@ -220,7 +232,7 @@ export class TimesheetPeriod {
    *
    * @memberof TimesheetPeriod
    */
-  private get matchedEvents(): EventInput[] {
+  public get matchedEvents(): EventInput[] {
     const events = filter(
       [...this.getEvents()],
       (event) => !!event.project
@@ -236,50 +248,54 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Get data for the period
+   * Get data for the period. Returns
+   * `id`, `startDate`, `endDate`, `forecastedHours`
+   * and `matchedEvents`
+   *
+   * @returns Data for the period
    *
    * @memberof TimesheetPeriod
-   * @returns Data for the period
    */
   public get data(): TimesheetPeriodInput {
-    return {
-      id: this.id,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      forecastedHours: this.forecastedHours,
-      matchedEvents: this.matchedEvents
-    }
+    return pick(
+      this as any,
+      'id',
+      'startDate',
+      'endDate',
+      'forecastedHours',
+      'matchedEvents'
+    )
   }
 
   /**
    * Get weekdays in the specified format
    *
-   * @param dayFormat - Day format
+   * @param template - Template
+   *
    * @memberof TimesheetPeriod
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public weekdays(dayFormat: string = 'dddd DD'): string[] {
+  public weekdays(template: string = 'dddd DD'): string[] {
     if (!this.startDate) return []
-    return $date.getDays(this.startDate, this.endDate, dayFormat)
+    return $date.getDays(this.startDate, this.endDate, template)
   }
 
   /**
    * Returns URL path for the period
    *
+   * @example `11_3_2021` => `11/3/2021`
+   *
    * @memberof TimesheetPeriod
    */
   public get path(): string {
-    return this.id
-      .split('_')
-      .filter((p) => p)
-      .join('/')
+    return this.id.replace(/_/g, '/')
   }
 
   /**
    * Period is complete meaning all events are matched
    *
+   * @returns `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
+   *
    * @memberof TimesheetPeriod
-   * @returns true if the unmatched duration (unmatchedDuration) is equal to zero (0)
    */
   public get isComplete(): boolean {
     return this.unmatchedDuration === 0
@@ -287,6 +303,8 @@ export class TimesheetPeriod {
 
   /**
    * Period is in the past
+   *
+   * @returns `true` if the `endDate` is before today
    *
    * @memberof TimesheetPeriod
    */

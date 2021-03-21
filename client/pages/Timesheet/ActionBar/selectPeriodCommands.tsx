@@ -10,9 +10,9 @@ import { CHANGE_PERIOD } from '../reducer/actions'
  */
 export function usePeriodCommands() {
   const { t } = useTranslation()
-  const context = useContext(TimesheetContext)
-  if (context.periods.length === 1) return []
-  return context.periods.map(
+  const { state, dispatch } = useContext(TimesheetContext)
+  if (state.periods.length === 1) return []
+  return state.periods.map(
     (period, index) =>
       ({
         key: `SELECT_PERIOD_COMMANDS_${index}`,
@@ -20,8 +20,8 @@ export function usePeriodCommands() {
         style: isMobile ? {} : { padding: '12px 18px 12px 18px' },
         text: period.getName(t, true),
         canCheck: true,
-        checked: period.id === context.selectedPeriod.id,
-        onClick: () => context.dispatch(CHANGE_PERIOD({ id: period.id }))
+        checked: period.id === state.selectedPeriod.id,
+        onClick: () => dispatch(CHANGE_PERIOD({ id: period.id }))
       } as IContextualMenuItem)
   )
 }

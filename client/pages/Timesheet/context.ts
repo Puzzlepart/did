@@ -2,15 +2,18 @@
 import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, Dispatch } from 'react'
-import { useSubmitActions } from './hooks/useSubmitActions'
+import { UseSubmitActionsHook } from './hooks/useSubmitActions'
 import { ITimesheetState } from './types'
 
 /**
  * @category Timesheet
  */
-export interface ITimesheetContext
-  extends ITimesheetState,
-    ReturnType<typeof useSubmitActions> {
+export interface ITimesheetContext extends UseSubmitActionsHook {
+  /**
+   * State
+   */
+  state: ITimesheetState
+
   /**
    * Dispatch an action
    */

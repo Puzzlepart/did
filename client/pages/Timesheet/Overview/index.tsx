@@ -12,7 +12,7 @@ import { useGroups } from './useGroups'
  * @category Timesheet
  */
 export const Overview: TabComponent = () => {
-  const { loading, error, selectedPeriod } = useContext(TimesheetContext)
+  const { state } = useContext(TimesheetContext)
   const additionalColumns = useAdditionalColumns()
   const groups = useGroups()
   const className = [styles.root]
@@ -20,9 +20,9 @@ export const Overview: TabComponent = () => {
   return (
     <div className={className.join(' ')}>
       <EventList
-        hidden={!!error}
-        enableShimmer={!!loading}
-        items={selectedPeriod?.getEvents()}
+        hidden={!!state.error}
+        enableShimmer={!!state.loading}
+        items={state.selectedPeriod?.getEvents()}
         showEmptyDays={true}
         dateFormat={config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
         listGroupProps={groups}

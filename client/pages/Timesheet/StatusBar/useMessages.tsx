@@ -14,34 +14,37 @@ import { TimesheetContext } from '../context'
 export function useMessages(): IUserMessageProps[] {
   const { t } = useTranslation()
   const [, dismiss, isDismissed] = useArray<string>([])
-  const { selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
+  const { state, dispatch } = useContext(TimesheetContext)
 
-  if (!selectedPeriod) return []
+  if (!state.selectedPeriod) return []
 
   const messages: IUserMessageProps[] = []
 
-  if (!selectedPeriod.isConfirmed) {
+  if (!state.selectedPeriod.isConfirmed) {
     messages.push({
       id: 'weekhourssummary',
       text: t('timesheet.weekHoursSummaryText', {
-        hours: $date.getDurationString(selectedPeriod.totalDuration, t),
+        hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
         splitWeekInfoText:
-          periods.length > 1 ? t('timesheet.splitWeekInfoText') : ''
+          state.periods.length > 1 ? t('timesheet.splitWeekInfoText') : ''
       }),
       iconName: 'ReminderTime'
     })
   }
-  if (!selectedPeriod.isComplete && !selectedPeriod.isForecast) {
+  if (!state.selectedPeriod.isComplete && !state.selectedPeriod.isForecast) {
     messages.push({
       id: 'hoursnotmatched',
       text: t('timesheet.hoursNotMatchedText', {
-        hours: $date.getDurationString(selectedPeriod.unmatchedDuration, t)
+        hours: $date.getDurationString(
+          state.selectedPeriod.unmatchedDuration,
+          t
+        )
       }),
       type: MessageBarType.warning,
       iconName: 'BufferTimeBoth'
     })
   }
-  if (selectedPeriod.isComplete && !selectedPeriod.isConfirmed) {
+  if (state.selectedPeriod.isComplete && !state.selectedPeriod.isConfirmed) {
     messages.push({
       id: 'allhoursmatched',
       text: t('timesheet.allHoursMatchedText'),
@@ -49,34 +52,37 @@ export function useMessages(): IUserMessageProps[] {
       iconName: 'BufferTimeBoth'
     })
   }
-  if (selectedPeriod.isConfirmed) {
+  if (state.selectedPeriod.isConfirmed) {
     messages.push({
       id: 'periodConfirmed',
       text: t('timesheet.periodConfirmedText', {
-        hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
+        hours: $date.getDurationString(state.selectedPeriod.matchedDuration, t)
       }),
       type: MessageBarType.success,
       iconName: 'CheckMark'
     })
   }
-  if (selectedPeriod.isForecasted && !selectedPeriod.isConfirmed) {
+  if (state.selectedPeriod.isForecasted && !state.selectedPeriod.isConfirmed) {
     messages.push({
       id: 'periodforecasted',
       text: t('timesheet.periodForecastedText', {
-        hours: $date.getDurationString(selectedPeriod.forecastedHours, t)
+        hours: $date.getDurationString(state.selectedPeriod.forecastedHours, t)
       }),
       type: MessageBarType.info,
       iconName: 'BufferTimeBoth'
     })
   }
-  if (!isEmpty(selectedPeriod.ignoredEvents) && !selectedPeriod.isConfirmed) {
+  if (
+    !isEmpty(state.selectedPeriod.ignoredEvents) &&
+    !state.selectedPeriod.isConfirmed
+  ) {
     messages.push({
       id: 'ignoredevents',
       children: (
         <p>
           <span>
             {t('timesheet.ignoredEventsText', {
-              ignored_count: selectedPeriod.ignoredEvents.length
+              ignored_count: state.selectedPeriod.ignoredEvents.length
             })}
           </span>
           <a href='#' onClick={() => dispatch(CLEAR_IGNORES())}>
@@ -88,12 +94,12 @@ export function useMessages(): IUserMessageProps[] {
       iconName: 'DependencyRemove'
     })
   }
-  if (!isEmpty(selectedPeriod.errors)) {
+  if (!isEmpty(state.selectedPeriod.errors)) {
     messages.push({
       id: 'unresolvederror',
       type: MessageBarType.severeWarning,
       text: t('timesheet.unresolvedErrorText', {
-        count: selectedPeriod.errors.length
+        count: state.selectedPeriod.errors.length
       }),
       iconName: 'ErrorBadge'
     })

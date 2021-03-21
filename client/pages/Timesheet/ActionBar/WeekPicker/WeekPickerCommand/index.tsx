@@ -13,10 +13,9 @@ import styles from './WeekPickerCommand.module.scss'
  */
 export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
   const { t } = useTranslation()
-  const { loading, scope, periods, selectedPeriod } = useContext(
-    TimesheetContext
-  )
-  const showWeekNumber = periods.length === 1 && !loading && !isMobile
+  const { state } = useContext(TimesheetContext)
+  const showWeekNumber =
+    state.periods.length === 1 && !state.loading && !isMobile
   return (
     <>
       <MobileView viewClassName={`${styles.root} ${styles.mobile}`}>
@@ -26,11 +25,11 @@ export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
         <TextField
           className={styles.root}
           onClick={onClick}
-          value={scope.timespan}
+          value={state.scope.timespan}
           styles={{
             field: {
               color: 'rgb(120, 120, 120)',
-              cursor: !loading && 'pointer'
+              cursor: !state.loading && 'pointer'
             },
             root: {
               width: 180,
@@ -47,7 +46,7 @@ export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
       </BrowserView>
       {showWeekNumber && (
         <FadeIn className={styles.weekNumber}>
-          {selectedPeriod.getName(t)}
+          {state.selectedPeriod.getName(t)}
         </FadeIn>
       )}
     </>
