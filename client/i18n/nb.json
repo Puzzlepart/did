@@ -332,11 +332,11 @@
     "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent."
   },
   "navigation": {
-    "timesheet": "Timeliste",
-    "customers": "Kunder",
-    "projects": "Prosjekter",
-    "reports": "Rapporter",
-    "admin": "Admin"
+    "TimesheetPage": "Timeliste",
+    "CustomersPage": "Kunder",
+    "ProjectsPage": "Prosjekter",
+    "ReportsPage": "Rapporter",
+    "AdminPage": "Admin"
   },
   "permissions": {
     "accessTimesheet": "Tilgang til timeliste",

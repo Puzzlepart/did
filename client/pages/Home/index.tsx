@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import { PageComponent } from 'pages/types'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import styles from './Home.module.scss'
@@ -11,7 +12,7 @@ import { useHome } from './useHome'
 /**
  * @category Function Component
  */
-export const Home: FunctionComponent = () => {
+export const Home: PageComponent = () => {
   const { error, subscription } = useHome()
   const providers = useAuthProviders()
   const { t } = useTranslation()
@@ -53,3 +54,5 @@ export const Home: FunctionComponent = () => {
     </div>
   )
 }
+
+Home.path = '/'

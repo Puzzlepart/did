@@ -19,7 +19,7 @@ export const MobileBreadcrumb: FunctionComponent<IMobileBreadcrumbProps> = (
   const items: IBreadcrumbItem[] = [
     {
       key: 'current',
-      text: props.text,
+      text: props.page.displayName,
       isCurrentItem: nav.length === 0
     },
     ...nav.map((key, index) => ({

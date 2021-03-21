@@ -10,8 +10,8 @@ import {
 } from 'office-ui-fabric-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SET_SCOPE } from '../../../Timesheet/reducer/actions'
-import { TimesheetContext, TimesheetScope } from '../../../Timesheet/types'
+import { SET_SCOPE } from '../../reducer/actions'
+import { TimesheetContext, TimesheetScope } from '../../types'
 import styles from './WeekPicker.module.scss'
 import { WeekPickerCommand } from './WeekPickerCommand'
 

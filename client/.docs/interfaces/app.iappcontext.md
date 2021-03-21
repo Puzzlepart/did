@@ -16,7 +16,8 @@
 
 - [authProviders](app.iappcontext.md#authproviders)
 - [dispatch](app.iappcontext.md#dispatch)
-- [notificationsQuery](app.iappcontext.md#notificationsquery)
+- [notifications](app.iappcontext.md#notifications)
+- [pages](app.iappcontext.md#pages)
 - [state](app.iappcontext.md#state)
 - [subscription](app.iappcontext.md#subscription)
 - [user](app.iappcontext.md#user)
@@ -39,13 +40,13 @@ ___
 
 Application dispatcher
 
-Defined in: [app/context.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L21)
+Defined in: [app/context.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L27)
 
 ___
 
-### notificationsQuery
+### notifications
 
-• `Optional` **notificationsQuery**: *object*
+• `Optional` **notifications**: *object*
 
 Notifications query
 
@@ -53,10 +54,20 @@ Notifications query
 
 Name | Type |
 :------ | :------ |
-`notifications` | *Notification*[] |
+`data` | *Notification*[] |
 `refetch` | (`delay?`: *number*) => *void* |
 
-Defined in: [app/context.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L11)
+Defined in: [app/context.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L17)
+
+___
+
+### pages
+
+• `Optional` **pages**: *PageComponent*[]
+
+Pages
+
+Defined in: [app/context.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L12)
 
 ___
 
@@ -66,7 +77,7 @@ ___
 
 Application state
 
-Defined in: [app/context.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L16)
+Defined in: [app/context.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L22)
 
 ___
 

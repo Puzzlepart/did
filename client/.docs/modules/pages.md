@@ -8,6 +8,10 @@ All are built using React Function components and Hooks.
 
 ## Table of contents
 
+### Namespaces
+
+- [Home](pages.home.md)
+
 ### Timesheet Classes
 
 - [TimesheetPeriod](../classes/pages.timesheetperiod.md)
@@ -134,9 +138,9 @@ ___
 
 ### Home
 
-• `Const` **Home**: FunctionComponent
+• `Const` **Home**: PageComponent
 
-Defined in: [pages/Home/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L14)
+Defined in: [pages/Home/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L15)
 
 ___
 

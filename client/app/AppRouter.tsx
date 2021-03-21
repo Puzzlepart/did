@@ -4,7 +4,8 @@
  *
  * @module App
  */
-import { usePages } from 'pages/usePages'
+import { useAppContext } from 'AppContext'
+import { usePermissions } from 'hooks'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -19,8 +20,14 @@ import { ErrorFallback } from './ErrorFallback'
 import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
 
+/**
+ * App router
+ *
+ * @category Appx
+ */
 export const AppRouter: FunctionComponent = () => {
-  const { pages } = usePages()
+  const { pages } = useAppContext()
+  const { hasPermission } = usePermissions()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   return (
@@ -29,14 +36,16 @@ export const AppRouter: FunctionComponent = () => {
         <Navigation />
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Switch>
-            {pages.map((page, index) => (
-              <Route key={index} path={page.path}>
-                {page.hidden ? (
+            {pages.map((Page, index) => (
+              <Route key={index} path={Page.path}>
+                {!hasPermission(Page.permission) ? (
                   <Redirect to='/' />
                 ) : (
                   <>
-                    <MobileBreadcrumb text={page.text} />
-                    <div className={styles.container}>{page.component}</div>
+                    <MobileBreadcrumb page={Page} />
+                    <div className={styles.container}>
+                      <Page />
+                    </div>
                   </>
                 )}
               </Route>

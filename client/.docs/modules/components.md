@@ -126,7 +126,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FunctionComponent*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: components/TabContainer/types.ts:5
+Defined in: [components/TabContainer/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L5)
 
 ___
 
@@ -140,7 +140,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*TabItemProps*](components.md#tabitemprops) | *any* |
 
-Defined in: components/TabContainer/types.ts:50
+Defined in: [components/TabContainer/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L50)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 Ƭ **TabItemProps**: IPivotItemProps
 
-Defined in: components/TabContainer/types.ts:48
+Defined in: [components/TabContainer/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L48)
 
 ## Function Component Variables
 
@@ -311,7 +311,7 @@ Flexible tab container
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: components/TabContainer/index.tsx:16
+Defined in: [components/TabContainer/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L16)
 
 ___
 

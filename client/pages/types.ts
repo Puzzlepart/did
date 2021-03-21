@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { TabItem } from 'components'
 import { IPivotItemProps } from 'office-ui-fabric-react'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { PermissionScope } from 'security'
 
 /**
@@ -15,14 +15,25 @@ export interface IPageSectionComponent extends IPivotItemProps {
 }
 
 /**
- * Defines a page component
+ * Page component
  *
  * @category Pages
  */
-export interface IPageComponent extends React.HTMLAttributes<HTMLDivElement> {
-  text?: string
+export interface PageComponent extends FunctionComponent {
+  /**
+   * Icon that describe the page
+   *
+   * @see https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
+   */
   iconName?: string
-  path: string
-  component: JSX.Element
+
+  /**
+   * Path for routing
+   */
+  path?: string
+
+  /**
+   * Permision required to access the page
+   */
   permission?: PermissionScope
 }

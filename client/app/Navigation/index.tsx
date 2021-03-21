@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
-import { usePages } from 'pages/usePages'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
@@ -13,8 +12,7 @@ import { UserNotifications } from './UserNotifications'
  * @category Function Component
  */
 export const Navigation: FunctionComponent = () => {
-  const { nav } = usePages()
-  const { user } = useAppContext()
+  const { pages, user } = useAppContext()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   return (
@@ -27,10 +25,15 @@ export const Navigation: FunctionComponent = () => {
           did
         </Link>
         <ul className={styles.nav} hidden={!user}>
-          {nav.map(
-            (props, index) =>
-              !props.hidden && <NavItem key={index} {...props} />
-          )}
+          {pages.map((page, index) => (
+            <NavItem
+              key={index}
+              text={page.displayName}
+              iconName={page.iconName}
+              to={page.path}
+              permission={page.permission}
+            />
+          ))}
         </ul>
         <ul className={styles.navRight}>
           {!!user.id && <UserNotifications />}

@@ -26,7 +26,7 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await submitPeriod({ variables })
     refetch()
-    app.notificationsQuery.refetch(250)
+    app.notifications.refetch(250)
   }
 
   const onUnsubmitPeriod = async (forecast: boolean): Promise<void> => {
@@ -37,7 +37,7 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await unsubmitPeriod({ variables })
     refetch()
-    app.notificationsQuery.refetch(250)
+    app.notifications.refetch(250)
   }
 
   return {

@@ -1,5 +1,5 @@
 import { useMemo, useReducer } from 'react'
-import createReducer, { initState } from './'
+import createReducer, { initState } from '.'
 import { IProjectsReducerParameters } from './types'
 
 /**

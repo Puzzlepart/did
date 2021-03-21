@@ -4,7 +4,7 @@ import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { Notification } from 'types'
-import notificationsQuery from './notifications.gql'
+import notifications from './notifications.gql'
 
 /**
  * Notificatins query hook
@@ -16,9 +16,9 @@ import notificationsQuery from './notifications.gql'
 export function useNotificationsQuery(
   user: ContextUser,
   fetchPolicy: FetchPolicy = 'cache-first'
-): { notifications: Notification[]; refetch: (delay?: number) => void } {
+): { data: Notification[]; refetch: (delay?: number) => void } {
   const { t } = useTranslation()
-  const { data, refetch } = useQuery(notificationsQuery, {
+  const { data, refetch } = useQuery(notifications, {
     skip: !user.id,
     variables: {
       templates: t('notifications.templates', { returnObjects: true }),
@@ -27,7 +27,7 @@ export function useNotificationsQuery(
     fetchPolicy
   })
   return {
-    notifications: data?.notifications || [],
+    data: data?.notifications || [],
     refetch: (delay = 0) => {
       window.setTimeout(refetch, delay)
     }

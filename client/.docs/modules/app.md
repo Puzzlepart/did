@@ -19,11 +19,14 @@ The App component
 - [MobileBreadcrumb](app.md#mobilebreadcrumb)
 - [Navigation](app.md#navigation)
 
+### Appx Variables
+
+- [AppRouter](app.md#approuter)
+
 ### Other Variables
 
 - [App](app.md#app)
 - [AppContext](app.md#appcontext)
-- [AppRouter](app.md#approuter)
 
 ### Function Component Functions
 
@@ -47,7 +50,19 @@ ___
 
 • `Const` **Navigation**: FunctionComponent
 
-Defined in: [app/Navigation/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L15)
+Defined in: [app/Navigation/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L14)
+
+___
+
+## Appx Variables
+
+### AppRouter
+
+• `Const` **AppRouter**: FunctionComponent
+
+App router
+
+Defined in: [app/AppRouter.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L28)
 
 ___
 
@@ -57,7 +72,9 @@ ___
 
 • `Const` **App**: *FunctionComponent*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [app/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L18)
+App
+
+Defined in: [app/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L20)
 
 ___
 
@@ -65,15 +82,7 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
-
-___
-
-### AppRouter
-
-• `Const` **AppRouter**: FunctionComponent
-
-Defined in: [app/AppRouter.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L22)
+Defined in: [app/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L30)
 
 ## Function Component Functions
 
@@ -103,4 +112,4 @@ Returns app context
 
 **Returns:** [*IAppContext*](../interfaces/app.iappcontext.md)
 
-Defined in: [app/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L29)
+Defined in: [app/context.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L35)

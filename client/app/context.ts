@@ -1,4 +1,5 @@
 import { AnyAction } from '@reduxjs/toolkit'
+import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
 import { useNotificationsQuery } from '../hooks'
 import { ContextUser } from './ContextUser'
@@ -6,9 +7,14 @@ import { IAppProps, IAppState } from './types'
 
 export interface IAppContext extends IAppProps {
   /**
+   * Pages
+   */
+  pages?: PageComponent[]
+
+  /**
    * Notifications query
    */
-  notificationsQuery?: ReturnType<typeof useNotificationsQuery>
+  notifications?: ReturnType<typeof useNotificationsQuery>
 
   /**
    * Application state

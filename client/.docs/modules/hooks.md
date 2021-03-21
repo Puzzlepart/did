@@ -111,7 +111,7 @@ Name | Type | Default value | Description |
 
 Name | Type |
 :------ | :------ |
-`notifications` | Notification[] |
+`data` | Notification[] |
 `refetch` | (`delay?`: *number*) => *void* |
 
 Defined in: [hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)

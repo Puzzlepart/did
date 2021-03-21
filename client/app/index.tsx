@@ -5,28 +5,20 @@
  *
  * @module App
  */
-import React, { FunctionComponent, useMemo } from 'react'
-import { useNotificationsQuery } from '../hooks'
+import React, { FunctionComponent } from 'react'
 import { AppRouter } from './AppRouter'
 import { AppContext, IAppContext } from './context'
 import { ErrorFallback } from './ErrorFallback'
 import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
-import useAppReducer from './reducer'
 import { IAppProps } from './types'
+import { useApp } from './useApp'
 
+/**
+ * App
+ */
 export const App: FunctionComponent<IAppContext> = (props: IAppProps) => {
-  const [state, dispatch] = useAppReducer({})
-  const notificationsQuery = useNotificationsQuery(props.user)
-  const context = useMemo(
-    () => ({
-      ...props,
-      notificationsQuery,
-      state,
-      dispatch
-    }),
-    [state, notificationsQuery]
-  )
+  const context = useApp(props)
   return (
     <AppContext.Provider value={context}>
       <AppRouter />

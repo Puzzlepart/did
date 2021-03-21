@@ -7,6 +7,6 @@ import { PermissionScope } from 'security'
  */
 export interface INavItemProps extends NavLinkProps {
   text: string
-  iconName: string
+  iconName?: string
   permission?: PermissionScope
 }
