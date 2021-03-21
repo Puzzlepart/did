@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
-import { List } from 'components'
+import { List, TabComponent } from 'components'
 import React from 'react'
 import { LabelForm } from './LabelForm'
 import { useLabels } from './useLabels'
 
 /**
- * @category Function Component
+ * @category Tab Component
  */
-export const Labels = () => {
+export const Labels: TabComponent = () => {
   const { columns, form, setForm, query, t } = useLabels()
   return (
     <>

@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { List, useMessage, UserMessage } from 'components'
+import { List, TabComponent, useMessage, UserMessage } from 'components'
 import { Icon, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -22,9 +22,9 @@ import { useColumns } from './useColumns'
  * * Create new API tokens
  * * Delete existing API tokens
  *
- * @category Function Component
+ * @category Tab Component
  */
-export const ApiTokens: FunctionComponent = () => {
+export const ApiTokens: TabComponent = () => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
   const [deleteApiToken] = useMutation($deleteApiToken)

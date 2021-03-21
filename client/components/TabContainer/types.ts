@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { IPivotItemProps, IPivotProps } from 'office-ui-fabric-react'
 import { FunctionComponent } from 'react'
+import { PermissionScope } from 'security'
 
 export interface ITabContainerProps extends IPivotProps {
   /**
@@ -43,8 +44,35 @@ export interface ITabContainerProps extends IPivotProps {
   items?: IPivotItemProps[]
 }
 
-export type TabItemProps = IPivotItemProps
+export interface ITabItemProps extends Omit<IPivotItemProps, 'hidden'> {
+  /**
+   * The item key can be provided if you want to
+   * override the key retrieved from the component
+   * name.
+   */
+  itemKey?: string
+
+  /**
+   * The text for the tab link
+   */
+  headerText?: string
+
+  /**
+   * An optional icon to show next to the tab link.
+   */
+  iconName?: string
+
+  /**
+   * Permission required to show the tab link and the tab
+   * content
+   *
+   * If not provided it will be accessible to all users
+   */
+  permission?: PermissionScope
+}
 
 export type TabContainerComponent = FunctionComponent<ITabContainerProps>
 
-export type TabComponent<T extends TabItemProps = any> = FunctionComponent<T>
+export type TabComponent<
+  T extends ITabItemProps = ITabItemProps
+> = FunctionComponent<T>

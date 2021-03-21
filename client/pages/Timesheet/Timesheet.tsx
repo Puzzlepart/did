@@ -42,7 +42,6 @@ export const Timesheet: FunctionComponent = () => {
               headerButtonProps: { disabled: !!context.error }
             }}>
             <Overview
-              itemKey='overview'
               headerText={t('timesheet.overviewHeaderText')}
               itemIcon='CalendarWeek'
             />

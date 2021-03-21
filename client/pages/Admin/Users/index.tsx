@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { List } from 'components'
+import { List, TabComponent } from 'components'
 import { Spinner } from 'office-ui-fabric-react'
 import React from 'react'
 import { isEmpty } from 'underscore'
@@ -15,9 +15,9 @@ import { useUsers } from './useUsers'
  * * Add new users
  * * Edit users
  *
- * @category Function Component
+ * @category Tab Component
  */
-export const Users = () => {
+export const Users: TabComponent = () => {
   const {
     context,
     columns,

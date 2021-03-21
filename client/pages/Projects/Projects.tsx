@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { TabContainer } from 'components/TabContainer'
-import { usePermissions } from 'hooks'
 import React, { FunctionComponent } from 'react'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
@@ -15,7 +14,6 @@ import { ProjectsView } from './types'
  * @category Function Component
  */
 export const Projects: FunctionComponent = () => {
-  const { hasPermission } = usePermissions()
   const { state, dispatch, listProps, t, context } = useProjects()
 
   return (
@@ -41,13 +39,12 @@ export const Projects: FunctionComponent = () => {
           items={state.projects.filter((p) => !!p.outlookCategory)}>
           {state.selected && <ProjectDetails />}
         </ProjectList>
-        {hasPermission(PermissionScope.MANAGE_PROJECTS) && (
-          <ProjectForm
-            itemKey='new'
-            headerText={t('projects.createNewText')}
-            itemIcon='AddTo'
-          />
-        )}
+        <ProjectForm
+          itemKey='new'
+          headerText={t('projects.createNewText')}
+          itemIcon='AddTo'
+          permission={PermissionScope.MANAGE_PROJECTS}
+        />
       </TabContainer>
     </ProjectsContext.Provider>
   )

@@ -45,7 +45,6 @@ All are built using React Function components and Hooks.
 
 ### Function Component Variables
 
-- [ApiTokens](pages.md#apitokens)
 - [Customers](pages.md#customers)
 - [Projects](pages.md#projects)
 - [Timesheet](pages.md#timesheet)
@@ -77,6 +76,13 @@ All are built using React Function components and Hooks.
 
 - [ReportsContext](pages.md#reportscontext)
 
+### Tab Component Variables
+
+- [ApiTokens](pages.md#apitokens)
+- [Labels](pages.md#labels)
+- [Roles](pages.md#roles)
+- [Users](pages.md#users)
+
 ### Timesheet Variables
 
 - [TimesheetContext](pages.md#timesheetcontext)
@@ -84,9 +90,6 @@ All are built using React Function components and Hooks.
 ### Function Component Functions
 
 - [Admin](pages.md#admin)
-- [Labels](pages.md#labels)
-- [Roles](pages.md#roles)
-- [Users](pages.md#users)
 
 ### Reports Functions
 
@@ -122,25 +125,11 @@ Defined in: [pages/Timesheet/types.ts:9](https://github.com/Puzzlepart/did/blob/
 
 ## Function Component Variables
 
-### ApiTokens
-
-• `Const` **ApiTokens**: FunctionComponent
-
-Component for handling API tokens.
-
-* See created API tokens
-* Create new API tokens
-* Delete existing API tokens
-
-Defined in: [pages/Admin/ApiTokens/index.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/ApiTokens/index.tsx#L27)
-
-___
-
 ### Customers
 
 • `Const` **Customers**: [*TabComponent*](components.md#tabcomponent)<ICustomerFormProps\>
 
-Defined in: [pages/Customers/Customers.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L19)
+Defined in: [pages/Customers/Customers.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/Customers.tsx#L18)
 
 ___
 
@@ -148,7 +137,7 @@ ___
 
 • `Const` **Projects**: FunctionComponent
 
-Defined in: [pages/Projects/Projects.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L17)
+Defined in: [pages/Projects/Projects.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L16)
 
 ___
 
@@ -341,6 +330,52 @@ Defined in: [pages/Reports/context.ts:36](https://github.com/Puzzlepart/did/blob
 
 ___
 
+## Tab Component Variables
+
+### ApiTokens
+
+• `Const` **ApiTokens**: [*TabComponent*](components.md#tabcomponent)
+
+Component for handling API tokens.
+
+* See created API tokens
+* Create new API tokens
+* Delete existing API tokens
+
+Defined in: [pages/Admin/ApiTokens/index.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/ApiTokens/index.tsx#L27)
+
+___
+
+### Labels
+
+• `Const` **Labels**: [*TabComponent*](components.md#tabcomponent)
+
+Defined in: [pages/Admin/Labels/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Labels/index.tsx#L10)
+
+___
+
+### Roles
+
+• `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
+
+Defined in: [pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L14)
+
+___
+
+### Users
+
+• `Const` **Users**: [*TabComponent*](components.md#tabcomponent)
+
+Manage users
+
+* See active users
+* Add new users
+* Edit users
+
+Defined in: [pages/Admin/Users/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L20)
+
+___
+
 ## Timesheet Variables
 
 ### TimesheetContext
@@ -357,43 +392,7 @@ Defined in: [pages/Timesheet/context.ts:28](https://github.com/Puzzlepart/did/bl
 
 **Returns:** *Element*
 
-Defined in: [pages/Admin/Admin.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Admin.tsx#L12)
-
-___
-
-### Labels
-
-▸ `Const`**Labels**(): *Element*
-
-**Returns:** *Element*
-
-Defined in: [pages/Admin/Labels/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Labels/index.tsx#L10)
-
-___
-
-### Roles
-
-▸ `Const`**Roles**(): *Element*
-
-**Returns:** *Element*
-
-Defined in: [pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L14)
-
-___
-
-### Users
-
-▸ `Const`**Users**(): *Element*
-
-Manage users
-
-* See active users
-* Add new users
-* Edit users
-
-**Returns:** *Element*
-
-Defined in: [pages/Admin/Users/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L20)
+Defined in: [pages/Admin/Admin.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Admin.tsx#L18)
 
 ___
 

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { UserMessage } from 'components'
+import { TabComponent, UserMessage } from 'components'
 import { PrimaryButton, TextField } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,9 +9,9 @@ import styles from './SubscriptionSettings.module.scss'
 import { useSubscriptionSettings } from './useSubscriptionSettings'
 
 /**
- * @category Function Component
+ * @category Tab Component
  */
-export const SubscriptionSettings = () => {
+export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
   const {
     subscription,

@@ -23,6 +23,6 @@ ___
 
 ### user
 
-• **user**: *Pick*<User, *displayName* \| *mail* \| *photo* \| *role*\>
+• **user**: *Pick*<User, *role* \| *displayName* \| *mail* \| *photo*\>
 
 Defined in: [components/UserColumn/types.tsx:5](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L5)

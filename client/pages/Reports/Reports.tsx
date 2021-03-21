@@ -43,7 +43,7 @@ export const Reports: FunctionComponent = () => {
           headerText={t('admin.summary')}
           itemIcon='CalendarWeek'
         />
-        <PivotItem itemKey='default' headerButtonProps={{ disabled: true }}>
+        <PivotItem itemKey='default'>
           <UserMessage
             iconName='ReportDocument'
             text={t('reports.selectReportText')}

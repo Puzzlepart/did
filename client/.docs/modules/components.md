@@ -45,6 +45,7 @@ Reusable React Function components.
 
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
 - [ITabContainerProps](../interfaces/components.itabcontainerprops.md)
+- [ITabItemProps](../interfaces/components.itabitemprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
 
 ### PermissionList Interfaces
@@ -60,7 +61,6 @@ Reusable React Function components.
 - [IHotkeyModal](components.md#ihotkeymodal)
 - [TabComponent](components.md#tabcomponent)
 - [TabContainerComponent](components.md#tabcontainercomponent)
-- [TabItemProps](components.md#tabitemprops)
 
 ### Function Component Variables
 
@@ -130,9 +130,9 @@ ___
 
 Name | Type | Default |
 :------ | :------ | :------ |
-`T` | [*TabItemProps*](components.md#tabitemprops) | *any* |
+`T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [components/TabContainer/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L50)
+Defined in: [components/TabContainer/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L76)
 
 ___
 
@@ -140,15 +140,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FunctionComponent*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [components/TabContainer/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L48)
-
-___
-
-### TabItemProps
-
-Ƭ **TabItemProps**: IPivotItemProps
-
-Defined in: [components/TabContainer/types.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L46)
+Defined in: [components/TabContainer/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L74)
 
 ## Function Component Variables
 
@@ -311,7 +303,7 @@ Flexible tab container
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: [components/TabContainer/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L16)
+Defined in: [components/TabContainer/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L17)
 
 ___
 
@@ -332,9 +324,10 @@ ___
 
 • `Const` **UserMessage**: *FunctionComponent*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
 
-A component that supports a `<MessageBar />` with markdown using `react-markdown`
+A component that supports a `<MessageBar />` with
+markdown using `react-markdown`.
 
-Defined in: [components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
+Defined in: [components/UserMessage/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L19)
 
 ___
 

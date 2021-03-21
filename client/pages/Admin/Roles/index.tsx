@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { List } from 'components'
+import { List, TabComponent } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IRolePanelProps, RolePanel } from './RolePanel'
@@ -9,9 +9,9 @@ import styles from './Roles.module.scss'
 import { useColumns } from './useColumns'
 
 /**
- * @category Function Component
+ * @category Tab Component
  */
-export const Roles = () => {
+export const Roles: TabComponent = () => {
   const { t } = useTranslation()
   const { data, loading, refetch } = useQuery($roles)
   const [panel, setPanel] = useState<IRolePanelProps>(null)

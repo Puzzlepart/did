@@ -34,7 +34,7 @@ specify the actual width. If `true` is specified
 
 **`default`** false
 
-Defined in: [components/TabContainer/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L15)
+Defined in: [components/TabContainer/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L16)
 
 ___
 
@@ -46,7 +46,7 @@ Hide icons on mobile devices
 
 **`default`** true
 
-Defined in: [components/TabContainer/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L22)
+Defined in: [components/TabContainer/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L23)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 Item properties that will be shared between
 all items in the pivot
 
-Defined in: [components/TabContainer/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L35)
+Defined in: [components/TabContainer/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L36)
 
 ___
 
@@ -70,7 +70,7 @@ inside the Pivot. This can be used instead of
 using `useRef` and `children` when that doesn't
 work as expected.
 
-Defined in: [components/TabContainer/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L43)
+Defined in: [components/TabContainer/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L44)
 
 ___
 
@@ -82,4 +82,4 @@ Link height on mobile devices
 
 **`default`** 30
 
-Defined in: [components/TabContainer/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L29)
+Defined in: [components/TabContainer/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L30)

@@ -11,7 +11,8 @@ import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 
 /**
- * A component that supports a `<MessageBar />` with markdown using `react-markdown`
+ * A component that supports a `<MessageBar />` with
+ * markdown using `react-markdown`.
  *
  * @category Function Component
  */
