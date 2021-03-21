@@ -22,7 +22,7 @@ export interface IReportsContext {
   /**
    * Columns
    */
-  columns: IListColumn[]
+  columns?: IListColumn[]
 
   /**
    * Translate function

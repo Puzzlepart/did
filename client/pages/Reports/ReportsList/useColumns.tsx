@@ -13,7 +13,7 @@ import { UserColumn } from '../../../components/UserColumn'
  *
  * @category Reports Hooks
  */
-export function useColumns({ defaults }) {
+export function useColumns(defaults: Partial<IListColumn>) {
   const { t } = useTranslation()
   return useMemo<IListColumn[]>(
     () =>

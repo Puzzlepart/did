@@ -3,6 +3,7 @@
 /* eslint-disable tsdoc/syntax */
 import { IPivotItemProps, PivotItem } from 'office-ui-fabric-react'
 import React, { JSXElementConstructor, ReactElement } from 'react'
+import { isArray } from 'underscore'
 
 /**
  * Renders the items for the `<FlexiblePivot />`
@@ -15,8 +16,9 @@ export function renderPivotItems(
   itemProps: Partial<IPivotItemProps>
 ) {
   return items.map((item: ReactElement) => {
-    const type = item.type as JSXElementConstructor<any>
-    switch (type.name) {
+    if (isArray(item)) return renderPivotItems(item, itemProps)
+    const type = item?.type as JSXElementConstructor<any>
+    switch (type?.name) {
       case 'PivotItem':
         return item
       default: {

@@ -6,16 +6,16 @@ import {
 import React from 'react'
 import { isEmpty, omit } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
-import { IReportsContext } from './context'
+import { IReportsContext } from '../context'
 import {
   CLEAR_FILTERS,
   REMOVE_SELECTED_FILTER,
   SET_FILTER,
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
-} from './reducer/actions'
-import { SaveFilterForm } from './SaveFilterForm'
-import { getGroupByOptions } from './types'
+} from '../reducer/actions'
+import { SaveFilterForm } from '../SaveFilterForm'
+import { getGroupByOptions } from '../types'
 /**
  * Select group by command
  *

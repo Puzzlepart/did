@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
-import { useColumns } from './useColumns'
 import { useFilters } from './useFilters'
 import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
@@ -35,7 +34,6 @@ export function useReports() {
     }
   }, [state.preset, history])
 
-  const columns = useColumns({ defaults: { isResizable: true } })
   const filters = useFilters({ filter: state.filter })
 
   useUpdateUserConfiguration(
@@ -45,11 +43,10 @@ export function useReports() {
     !state.loading && !!state.filter?.text
   )
 
-  const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
+  const context = useMemo(() => ({ state, dispatch, t }), [state])
 
   return {
     queries,
-    columns,
     filters,
     context
   }

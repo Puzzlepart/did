@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { FlexiblePivotItem } from 'components/FlexiblePivot'
 import { ShimmeredDetailsList } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import FadeIn from 'react-fade-in'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import styles from './List.module.scss'
@@ -25,7 +26,7 @@ import { useList } from './useList'
  *
  * @category Function Component
  */
-export const List: FunctionComponent<IListProps> = (props: IListProps) => {
+export const List: FlexiblePivotItem<IListProps> = (props: IListProps) => {
   const { delay, transitionDuration, listProps } = useList({ props })
   return (
     <div className={styles.root} hidden={props.hidden}>

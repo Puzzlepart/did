@@ -90,7 +90,6 @@ All are built using React Function components and Hooks.
 
 ### Reports Hooks Functions
 
-- [useColumns](pages.md#usecolumns)
 - [useReports](pages.md#usereports)
 - [useReportsQuery](pages.md#usereportsquery)
 - [useReportsReducer](pages.md#usereportsreducer)
@@ -490,24 +489,6 @@ ___
 
 ## Reports Hooks Functions
 
-### useColumns
-
-▸ **useColumns**(`__namedParameters`: *Object*): *IListColumn*<IListColumnData\>[]
-
-Columns hook
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | *Object* |
-
-**Returns:** *IListColumn*<IListColumnData\>[]
-
-Defined in: [pages/Reports/hooks/useColumns.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useColumns.tsx#L16)
-
-___
-
 ### useReports
 
 ▸ **useReports**(): *object*
@@ -526,16 +507,14 @@ Component logic for `<Reports />`
 
 Name | Type |
 :------ | :------ |
-`columns` | *IListColumn*<IListColumnData\>[] |
 `context` | *object* |
-`context.columns` | *IListColumn*<IListColumnData\>[] |
 `context.dispatch` | *Dispatch*<AnyAction\> |
 `context.state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `context.t` | TFunction |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 
-Defined in: [pages/Reports/hooks/useReports.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L26)
+Defined in: [pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
 
 ___
 

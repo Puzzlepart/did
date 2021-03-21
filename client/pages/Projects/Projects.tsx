@@ -24,8 +24,7 @@ export const Projects: FunctionComponent = () => {
         selectedKey={state.view}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
-        }
-        styles={{ itemContainer: { paddingTop: 10 } }}>
+        }>
         <ProjectList
           {...listProps}
           itemKey='search'

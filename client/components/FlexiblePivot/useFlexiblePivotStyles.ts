@@ -23,6 +23,9 @@ export function useFlexiblePivotStyles({
     root: {
       display: 'flex',
       flexWrap: 'wrap'
+    },
+    itemContainer: {
+      paddingTop: 10
     }
   }
   if (!isMobile) return merge(styles_, styles as any)

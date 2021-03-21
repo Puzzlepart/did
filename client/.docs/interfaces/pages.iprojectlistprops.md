@@ -135,7 +135,7 @@ ___
 
 • `Optional` **hideColumns**: *string*[]
 
-Defined in: [pages/Projects/ProjectList/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L11)
+Defined in: [pages/Projects/ProjectList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L13)
 
 ___
 
@@ -193,7 +193,7 @@ ___
 
 • `Optional` **renderLink**: *boolean*
 
-Defined in: [pages/Projects/ProjectList/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L10)
+Defined in: [pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
 
 ___
 
