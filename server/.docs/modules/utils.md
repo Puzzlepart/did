@@ -69,9 +69,10 @@ ___
 
 ▸ **stripHtmlString**(`string`: *string*): *string*
 
-Strip html from string using string-strip-html
-Used when fetching events from ms graph
-Strips the html from event body
+Strip html from string using [string-strip-html](https://www.npmjs.com/package/string-strip-html)
+
+**`remarks`** Used when fetching events from Microsoft Graph
+or Google Calendar
 
 #### Parameters:
 
@@ -81,4 +82,4 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L10)
+Defined in: [utils/stripHtmlString.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L11)

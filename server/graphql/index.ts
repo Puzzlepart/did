@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable tsdoc/syntax */
 /**
- * [GraphQL](https://graphql.org/) server implementation using 
+ * [GraphQL](https://graphql.org/) server implementation using
  * [apollo-server-express](https://www.npmjs.com/package/apollo-server-express)
  *
  * @module GraphQL
@@ -42,7 +42,7 @@ import {
 const debug = createDebug('graphql')
 
 /**
- * Generate [GraphQL](https://graphql.org/) schema using 
+ * Generate [GraphQL](https://graphql.org/) schema using
  * [type-graphql](https://www.npmjs.com/package/type-graphql)
  *
  * * Setting up the schema to use Dependency injection using
@@ -121,14 +121,14 @@ export function generateClientInfo({
 }
 
 /**
- * Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express) 
+ * Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
  * application
  *
  * * Sets up reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs)
  * * Sets up plugin to reset the container for each request
- * 
+ *
  * #### Reporting needs the following environment keys: ####
- * 
+ *
  * * `APOLLO_KEY`
  * * `APOLLO_GRAPH_VARIANT`
  * * `APOLLO_SCHEMA_REPORTING`
