@@ -24,7 +24,7 @@ Makes it easier to work with `process.env` giving a type
 (`Environment`) for the available environment keys
 
 **`remarks`** Logs missing environment variables using the
-`debug` module
+[debug](https://www.npmjs.com/package/debug) module
 
 #### Type parameters:
 
