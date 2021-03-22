@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { googleStrategy } from './google'
@@ -7,6 +8,8 @@ import { azureAdStrategy } from './microsoft'
  * Setup passport to be used for authentication
  *
  * @param mcl - Mongo client
+ *
+ * @category Express middleware
  */
 export const passportMiddleware = (mcl: MongoClient) => {
   /**

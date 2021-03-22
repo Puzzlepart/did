@@ -1,34 +1,38 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-reduce */
 
 import get from 'get-value'
-import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { any } from 'underscore'
+import { ConfirmedPeriodsService, ForecastedPeriodsService } from '..'
 import { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 
+/**
+ * Notification service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 export class NotificationService {
-  private _confirmed_periods: Collection
-  private _forecasted_periods: Collection
-
   /**
-   * Constructor
+   * Constructor for `NotificationService`
    *
-   * @param context - Injected context through typedi
-   * @param _timesheetSvc - Timesheet service
+   * @param context - Injected context through `typedi`
+   * @param _timesheetSvc - Injected `TimesheetService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
-    private readonly _timesheetSvc: TimesheetService
-  ) {
-    this._confirmed_periods = this.context.db.collection('confirmed_periods')
-    this._forecasted_periods = this.context.db.collection('forecasted_periods')
-  }
+    private readonly _timesheetSvc: TimesheetService,
+    private readonly _cperiodSvc: ConfirmedPeriodsService,
+    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
+  ) {}
 
   /**
    * Get periods
@@ -65,11 +69,9 @@ export class NotificationService {
   private async _unconfirmedPeriods(template: string, locale: string) {
     const periods = this._getPeriods('-1w', 5, locale)
 
-    const confirmedPeriods = await this._confirmed_periods
-      .find({
-        userId: this.context.userId
-      })
-      .toArray()
+    const confirmedPeriods = await this._cperiodSvc.find({
+      userId: this.context.userId
+    })
 
     const nperiods: any[] = periods.reduce(($, period) => {
       const isConfirmed = any(confirmedPeriods, ({ _id }) => _id === period._id)
@@ -103,11 +105,9 @@ export class NotificationService {
       locale
     )
 
-    const forecastedPeriods = await this._forecasted_periods
-      .find({
-        userId: this.context.userId
-      })
-      .toArray()
+    const forecastedPeriods = await this._fperiodSvc.find({
+      userId: this.context.userId
+    })
 
     const nperiods: any[] = periods.reduce(($, period) => {
       const isForecasted = any(

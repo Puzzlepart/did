@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find } from 'underscore'
@@ -24,19 +25,24 @@ import {
 } from './types'
 import { mapMatchedEvents } from './utils'
 
+/**
+ * Timesheet service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 export class TimesheetService {
   /**
    * Constructor
    *
-   * @param context - Injected context through typedi
-   * @param _msgraphSvc - Injected `MSGraphService` through typedi
-   * @param _googleCalSvc - Injected `GoogleCalendarService` through typedi
-   * @param _projectSvc - Injected `ProjectService` through typedi
-   * @param _teSvc - Injected `TimeEntryService` through typedi
-   * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
-   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
-   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through typedi
+   * @param context - Injected context through `typedi`
+   * @param _msgraphSvc - Injected `MSGraphService` through `typedi`
+   * @param _googleCalSvc - Injected `GoogleCalendarService` through `typedi`
+   * @param _projectSvc - Injected `ProjectService` through `typedi`
+   * @param _teSvc - Injected `TimeEntryService` through `typedi`
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
@@ -46,7 +52,7 @@ export class TimesheetService {
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
-    private readonly _fperiodSvc: ForecastedPeriodsService
+    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
   ) {}
 
   /**
@@ -167,6 +173,9 @@ export class TimesheetService {
   /**
    * Get events from provider
    *
+   * - Provider `google` uses `_googleCalSvc` (`GoogleCalendarService`)
+   * - Default provider uses `_msgraphSvc` (`MSGraphService`)
+   *
    * @param params - Parameters
    *
    * @returns Events
@@ -180,22 +189,29 @@ export class TimesheetService {
     locale,
     engine = null
   }: IProviderEventsParameters) {
+    const startDateTimeIso = DateUtils.toISOString(
+      `${startDate}:00:00:00.000`,
+      tzOffset
+    )
+    const endDateTimeIso = DateUtils.toISOString(
+      `${endDate}:23:59:59.999`,
+      tzOffset
+    )
     let events: any[]
     switch (provider) {
       case 'google':
         {
           events = await this._googleCalSvc.getEvents(
-            startDate,
-            endDate,
-            tzOffset
+            startDateTimeIso,
+            endDateTimeIso
           )
         }
         break
       default: {
-        events = await this._msgraphSvc.getEvents(startDate, endDate, {
-          tzOffset,
-          returnIsoDates: false
-        })
+        events = await this._msgraphSvc.getEvents(
+          startDateTimeIso,
+          endDateTimeIso
+        )
       }
     }
     if (engine) {

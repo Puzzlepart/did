@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / OutlookCategoryResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / OutlookCategoryResolver
 
 # Class: OutlookCategoryResolver
 
-[graphql](../modules/graphql.md).OutlookCategoryResolver
+[GraphQL](../modules/graphql.md).OutlookCategoryResolver
 
 Resolver for `OutlookCategory`.
 
@@ -38,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** [*OutlookCategoryResolver*](graphql.outlookcategoryresolver.md)
 
-Defined in: [server/graphql/resolvers/outlookCategory/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L21)
+Defined in: [graphql/resolvers/outlookCategory/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L21)
 
 ## Methods
 
@@ -56,7 +56,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*CreateOutlookCategoryResult*](graphql.createoutlookcategoryresult.md)\>
 
-Defined in: [server/graphql/resolvers/outlookCategory/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L48)
+Defined in: [graphql/resolvers/outlookCategory/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L48)
 
 ___
 
@@ -68,4 +68,4 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/graphql/resolvers/outlookCategory/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L34)
+Defined in: [graphql/resolvers/outlookCategory/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L34)

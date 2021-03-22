@@ -4,6 +4,10 @@
   "out": "client/.docs",
   "readme": "none",
   "excludeInternal": true,
+  "excludeExternals": true,
+  "externalPattern": [
+    "node_modules/**/*.{ts,tsx}"
+  ],
   "hideGenerator": true,
   "gitRevision": "dev",
   "tsconfig": "./client/tsconfig.json",
@@ -16,7 +20,6 @@
     "client/graphql/index.ts",
     "client/helpers/index.ts",
     "client/utils/index.ts",
-    "client/config/security/index.ts",
     "client/app/index.tsx",
     "client/index.tsx"
   ]

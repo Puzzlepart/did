@@ -1,4 +1,4 @@
-[did-client - v0.9.9](../README.md) / GraphQL
+[did-client - v0.9.11](../README.md) / GraphQL
 
 # Module: GraphQL
 
@@ -12,6 +12,11 @@ GraphQL
 
 - [$usercontext](graphql.md#$usercontext)
 
+### GraphQL Interfaces
+
+- [IBaseResult](../interfaces/graphql.ibaseresult.md)
+- [IError](../interfaces/graphql.ierror.md)
+
 ### Variables
 
 - [client](graphql.md#client)
@@ -20,7 +25,7 @@ GraphQL
 
 ### $usercontext
 
-Renames and exports: [report\_current\_month](pages.md#report_current_month)
+Renames and exports: [default\_query](pages.md#default_query)
 
 ## Variables
 
@@ -34,4 +39,4 @@ Initializing our Apollo Client
 * Using url /graphql
 * Using cache-and-network as default fetchPolicy
 
-Defined in: [client/graphql/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L40)
+Defined in: [graphql/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L40)

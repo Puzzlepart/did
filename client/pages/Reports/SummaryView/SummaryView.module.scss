@@ -1,11 +1,13 @@
 .root {
   .container {
     padding: 10px 0 0 0;
+  }
 
-    .rangeSlider {
-      width: 400px;
-      margin-left: 10px;
-      align-self: 'center';
+  .columnHeader {
+    height: 65px;
+
+    [class*='ms-DetailsHeader-cell'] {
+      height: 65px;
     }
   }
 }

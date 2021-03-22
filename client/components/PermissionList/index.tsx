@@ -1,23 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { usePermissions } from 'hooks'
-import React, { FunctionComponent } from 'react'
+import { Icon } from 'office-ui-fabric-react'
+import React from 'react'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 
 /**
  * @category Function Component
  */
-export const PermissionList: FunctionComponent<IPermissionListProps> = ({
+export const PermissionList: React.FC<IPermissionListProps> = ({
   permissionIds
 }: IPermissionListProps) => {
-  const { permissions } = usePermissions(permissionIds)
+  const [permissions] = usePermissions(permissionIds)
   return (
     <div className={styles.root}>
       <div className={styles.container}>
         {permissions.map((perm) => (
           <div key={perm.id} className={styles.item} title={perm.description}>
-            {perm.name}
+            <Icon className={styles.icon} iconName={perm.iconName} />
+            <span>{perm.name}</span>
           </div>
         ))}
       </div>

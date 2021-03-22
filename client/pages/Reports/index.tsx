@@ -1,12 +1,20 @@
 /* eslint-disable tsdoc/syntax */
+import { PageComponent } from 'pages/types'
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Reports } from './Reports'
 
 /**
- * @ignore
+ * Reports page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
-export const ReportsPage = () => {
+export const ReportsPage: PageComponent = () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -20,11 +28,14 @@ export const ReportsPage = () => {
   )
 }
 
-export * from './commandBar'
+Object.assign(ReportsPage, {
+  iconName: 'ReportDocument',
+  permission: PermissionScope.ACCESS_REPORTS
+} as Partial<PageComponent>)
+
 export * from './context'
 export * from './hooks'
-export * from './hooks/queries'
-export * from './hooks/useColumns'
 export * from './reducer'
+export * from './ReportsList/commandBar'
 export * from './SaveFilterForm'
 export * from './types'

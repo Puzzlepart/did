@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Pivot, PivotItem } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'
 import { CHANGE_DETAILS_TAB } from '../reducer/actions'
@@ -12,7 +12,7 @@ import { TimeEntries } from './TimeEntries'
 /**
  * @category Projects
  */
-export const ProjectDetails: FunctionComponent = () => {
+export const ProjectDetails: React.FC = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ProjectsContext)
 

@@ -1,25 +1,27 @@
 /* eslint-disable tsdoc/syntax */
 import { List } from 'components'
-import React, { FunctionComponent } from 'react'
-import { useColumns } from './columns'
+import React from 'react'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
+import { useColumns } from './useColumns'
 
 /**
+ * Renders events in a list using `<List />` component
+ *
+ * Supports property `additionalColumns`
+ *
  * @category Function Component
  */
-export const EventList: FunctionComponent<IEventListProps> = (
-  props: IEventListProps
-): JSX.Element => {
+export const EventList: React.FC<IEventListProps> = (props) => {
   const columns = useColumns(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
       <List
         enableShimmer={props.enableShimmer}
         columns={columns}
-        items={props.events}
-        groups={props.groups}
-        groupProps={{ showEmptyGroups: props.showEmptyDays }}
+        items={props.items}
+        listGroupProps={props.listGroupProps}
+        listGroupRenderProps={{ showEmptyGroups: true }}
       />
     </div>
   )

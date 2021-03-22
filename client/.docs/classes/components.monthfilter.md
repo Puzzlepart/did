@@ -1,19 +1,12 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / MonthFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / MonthFilter
 
-# Class: MonthFilter<ItemType, KeyType\>
+# Class: MonthFilter
 
 [Components](../modules/components.md).MonthFilter
 
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
-
 ## Hierarchy
 
-* [*BaseFilter*](components.basefilter.md)<ItemType\>
+* [*BaseFilter*](components.basefilter.md)
 
   ↳ **MonthFilter**
 
@@ -25,9 +18,10 @@ Name | Default |
 
 ### Properties
 
-- [\_selectedKeys](components.monthfilter.md#_selectedkeys)
-- [fieldName](components.monthfilter.md#fieldname)
+- [keyFieldName](components.monthfilter.md#keyfieldname)
 - [name](components.monthfilter.md#name)
+- [selectedKeys](components.monthfilter.md#selectedkeys)
+- [valueFieldName](components.monthfilter.md#valuefieldname)
 
 ### Methods
 
@@ -38,43 +32,30 @@ Name | Default |
 
 ### constructor
 
-\+ **new MonthFilter**<ItemType, KeyType\>(`fieldName`: *string*, `name`: *string*): [*MonthFilter*](components.monthfilter.md)<ItemType, KeyType\>
+\+ **new MonthFilter**(`name`: *string*, `keyFieldName`: *string*): [*MonthFilter*](components.monthfilter.md)
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
+Constructor for `MonthFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`fieldName` | *string* |
-`name` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | *string* | Name   |
+`keyFieldName` | *string* | Field name for the item key    |
 
-**Returns:** [*MonthFilter*](components.monthfilter.md)<ItemType, KeyType\>
+**Returns:** [*MonthFilter*](components.monthfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/MonthFilter.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L14)
+Defined in: [components/FilterPanel/Filters/MonthFilter.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L12)
 
 ## Properties
 
-### \_selectedKeys
+### keyFieldName
 
-• `Private` **\_selectedKeys**: KeyType[]
+• **keyFieldName**: *string*
 
-Defined in: [client/components/FilterPanel/Filters/MonthFilter.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L14)
-
-___
-
-### fieldName
-
-• **fieldName**: *string*
-
-Inherited from: [BaseFilter](components.basefilter.md).[fieldName](components.basefilter.md#fieldname)
+Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
 ___
 
@@ -84,40 +65,62 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefilter.md#name)
 
+___
+
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
+### valueFieldName
+
+• `Optional` **valueFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
+
 ## Methods
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items`: *any*[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the MonthFilter
+Intialize the `MonthFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items` | *any*[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/MonthFilter.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L25)
+Defined in: [components/FilterPanel/Filters/MonthFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L28)
 
 ___
 
 ### setDefaults
 
-▸ **setDefaults**(`values`: { [key: string]: KeyType[];  }): [*MonthFilter*](components.monthfilter.md)<ItemType, KeyType\>
+▸ **setDefaults**(`values`: *any*): [*MonthFilter*](components.monthfilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *object* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*MonthFilter*](components.monthfilter.md)<ItemType, KeyType\>
+**Returns:** [*MonthFilter*](components.monthfilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+this
 
-Defined in: [client/components/FilterPanel/Filters/MonthFilter.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L43)
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

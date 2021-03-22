@@ -7,7 +7,7 @@ import {
   List,
   SearchBox
 } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
 import styles from './Autocomplete.module.scss'
@@ -15,11 +15,12 @@ import { SuggestionItem } from './SuggestionItem'
 import { useAutocomplete } from './useAutocomplete'
 
 /**
+ * Autocomplete component using `<SearchBox />`, `<Callout />`,
+ * `<FocusZone />` and `<List />` from `office-ui-fabric-react`.
+ *
  * @category Function Component
  */
-export const Autocomplete: FunctionComponent<IAutocompleteProps> = (
-  props: IAutocompleteProps
-) => {
+export const Autocomplete: React.FC<IAutocompleteProps> = (props) => {
   const {
     state,
     className,
@@ -91,3 +92,5 @@ export const Autocomplete: FunctionComponent<IAutocompleteProps> = (
     </div>
   )
 }
+
+export * from './types'

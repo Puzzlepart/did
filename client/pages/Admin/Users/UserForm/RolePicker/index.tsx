@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import { IRolePickerProps } from './types'
 
-export const RolePicker = (props: IRolePickerProps) => {
+export const RolePicker: React.FC<IRolePickerProps> = (props) => {
   const { t } = useTranslation()
   return (
     <div className={props.className}>

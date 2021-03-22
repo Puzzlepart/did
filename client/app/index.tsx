@@ -1,27 +1,32 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 /**
  * The App component
  *
  * @module App
  */
-import React, { FunctionComponent } from 'react'
-import { isMobile } from 'react-device-detect'
-import { AppContext, IAppContext } from '../AppContext'
-import { useNotificationsQuery } from '../hooks'
-import styles from './App.module.scss'
+import React from 'react'
 import { AppRouter } from './AppRouter'
+import { AppContext } from './context'
 import { ErrorFallback } from './ErrorFallback'
-import { MobileHeader } from './MobileHeader'
+import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
+import { IAppProps } from './types'
+import { useApp } from './useApp'
 
-export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
-  if (isMobile) styles.root += ` ${styles.mobile}`
-  const notificationsQuery = useNotificationsQuery(context.user)
+/**
+ * App
+ *
+ * @category App
+ */
+export const App: React.FC<IAppProps> = (props) => {
+  const context = useApp(props)
   return (
-    <AppContext.Provider value={{ ...context, notificationsQuery }}>
+    <AppContext.Provider value={context}>
       <AppRouter />
     </AppContext.Provider>
   )
 }
 
-export { ErrorFallback, MobileHeader, Navigation, AppRouter }
+export * from './context'
+export { ErrorFallback, MobileBreadcrumb, Navigation, AppRouter }

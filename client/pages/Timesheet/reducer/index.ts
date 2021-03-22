@@ -1,7 +1,11 @@
-import { createReducer } from '@reduxjs/toolkit'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createReducer, current } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import { useMemo, useReducer } from 'react'
-import { find, first, isEmpty } from 'underscore'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import { TimesheetPeriodObject } from 'types'
+import { find, first, isEmpty, last } from 'underscore'
 import {
   ITimesheetParameters,
   ITimesheetState,
@@ -16,6 +20,8 @@ import {
   DATA_UPDATED,
   IGNORE_EVENT,
   MANUAL_MATCH,
+  NEXT_PERIOD,
+  PREVIOUS_PERIOD,
   SET_SCOPE,
   SUBMITTING_PERIOD,
   TOGGLE_SHORTCUTS,
@@ -34,154 +40,156 @@ interface ITimesheetReducerParameters {
   t: TFunction
 }
 
-const initState = (url: ITimesheetParameters) => ({
+/**
+ * Initializes state based on url parameters
+ *
+ * @param url - Url parameters
+ * @returns Initial state
+ */
+const initState = (url: ITimesheetParameters): ITimesheetState => ({
   periods: [],
   scope: isEmpty(Object.keys(url))
     ? new TimesheetScope()
     : new TimesheetScope().fromParams(url),
-  selectedView: url.view || 'overview'
+  selectedView: url.view || 'overview',
+  navHistory: []
 })
 
 /**
  * Creating reducer for Timesheet using reduxjs/toolkit
  */
 const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
-  createReducer<ITimesheetState>(initState(url), {
-    [DATA_UPDATED.type]: (
-      state,
-      { payload }: ReturnType<typeof DATA_UPDATED>
-    ) => {
-      const { loading, data, error } = payload.query
-      state.loading = loading
-        ? {
-            label: t('timesheet.loadingTimesheetLabel'),
-            description: t('timesheet.loadingTimesheetDescription'),
-            iconProps: { iconName: 'RecurringEvent' }
+  createReducer<ITimesheetState>(initState(url), (builder) =>
+    builder
+      .addCase(DATA_UPDATED, (state, { payload }) => {
+        state.loading = payload.query.loading
+          ? {
+              label: t('timesheet.loadingTimesheetLabel'),
+              description: t('timesheet.loadingTimesheetDescription'),
+              iconProps: { iconName: 'RecurringEvent' }
+            }
+          : null
+        if (payload.query.data) {
+          const urlPeriodId = [url.week, url.month, url.year].join('_')
+          const selectedPeriodId = state.selectedPeriod?.id || urlPeriodId
+          state.periods = payload.query.data.periods.map(
+            (period: TimesheetPeriodObject) =>
+              new TimesheetPeriod().initialize(period)
+          )
+          const lastNav = last(state.navHistory)
+          state.selectedPeriod =
+            find(state.periods, (p) => p.id === selectedPeriodId) ||
+            (lastNav === 'PREVIOUS_PERIOD'
+              ? last(state.periods)
+              : first(state.periods))
+        }
+        state.error = payload.query.error
+      })
+      .addCase(SET_SCOPE, (state, { payload }) => {
+        state.scope =
+          typeof payload === 'string' ? state.scope.set(payload) : payload
+      })
+      .addCase(SUBMITTING_PERIOD, (state, { payload }) => {
+        if (payload.forecast) {
+          state.loading = {
+            label: t('timesheet.forecastingPeriodLabel'),
+            description: t('timesheet.forecastingPeriodDescription'),
+            iconProps: { iconName: 'PlanView' }
           }
-        : null
-      if (data) {
-        const selectedPeriodId =
-          state.selectedPeriod?.id || [url.week, url.month, url.year].join('_')
-        state.periods = data.timesheet.map((period) =>
-          new TimesheetPeriod().initialize(period)
+        } else {
+          state.loading = {
+            label: t('timesheet.confirmingPeriodLabel'),
+            description: t('timesheet.confirmingPeriodDescription'),
+            iconProps: { iconName: 'CheckMark' }
+          }
+        }
+      })
+      .addCase(UNSUBMITTING_PERIOD, (state, { payload }) => {
+        if (payload.forecast) {
+          state.loading = {
+            label: t('timesheet.unforecastingPeriodLabel'),
+            description: t('timesheet.unforecastingPeriodDescription'),
+            iconProps: { iconName: 'ClearFormattingEraser' }
+          }
+        } else {
+          state.loading = {
+            label: t('timesheet.unconfirmingPeriodLabel'),
+            description: t('timesheet.unconfirmingPeriodDescription'),
+            iconProps: { iconName: 'SkypeCircleArrow' }
+          }
+        }
+      })
+      .addCase(CHANGE_PERIOD, (state, { payload }) => {
+        state.selectedPeriod = find(
+          state.periods,
+          (p: TimesheetPeriod) => p.id === payload.id
         )
-        state.selectedPeriod =
-          find(state.periods, (p) => p.id === selectedPeriodId) ||
-          first(state.periods)
-      }
-      state.error = error
-    },
-
-    [SUBMITTING_PERIOD.type]: (
-      state,
-      { payload }: ReturnType<typeof SUBMITTING_PERIOD>
-    ) => {
-      if (payload.forecast) {
-        state.loading = {
-          label: t('timesheet.forecastingPeriodLabel'),
-          description: t('timesheet.forecastingPeriodDescription'),
-          iconProps: { iconName: 'PlanView' }
+      })
+      .addCase(PREVIOUS_PERIOD, (state) => {
+        state.navHistory.push(PREVIOUS_PERIOD.type)
+        const { periods, selectedPeriod } = current(state)
+        const index = periods.indexOf(selectedPeriod)
+        if (state.periods.length === 1 || index === 0) {
+          state.scope = state.scope.set('-1w')
+        } else {
+          state.selectedPeriod = find(
+            periods,
+            (p: TimesheetPeriod) => p.id !== selectedPeriod.id
+          )
         }
-      } else {
-        state.loading = {
-          label: t('timesheet.confirmingPeriodLabel'),
-          description: t('timesheet.confirmingPeriodDescription'),
-          iconProps: { iconName: 'CheckMark' }
+      })
+      .addCase(NEXT_PERIOD, (state) => {
+        state.navHistory.push(NEXT_PERIOD.type)
+        const { periods, selectedPeriod } = current(state)
+        const index = periods.indexOf(selectedPeriod)
+        if (state.periods.length === 1 || index === 1) {
+          state.scope = state.scope.set('1w')
+        } else {
+          state.selectedPeriod = find(
+            periods,
+            (p: TimesheetPeriod) => p.id !== selectedPeriod.id
+          )
         }
-      }
-    },
-
-    [UNSUBMITTING_PERIOD.type]: (
-      state,
-      { payload }: ReturnType<typeof UNSUBMITTING_PERIOD>
-    ) => {
-      if (payload.forecast) {
-        state.loading = {
-          label: t('timesheet.unforecastingPeriodLabel'),
-          description: t('timesheet.unforecastingPeriodDescription'),
-          iconProps: { iconName: 'ClearFormattingEraser' }
-        }
-      } else {
-        state.loading = {
-          label: t('timesheet.unconfirmingPeriodLabel'),
-          description: t('timesheet.unconfirmingPeriodDescription'),
-          iconProps: { iconName: 'SkypeCircleArrow' }
-        }
-      }
-    },
-
-    [SET_SCOPE.type]: (state, { payload }: ReturnType<typeof SET_SCOPE>) => {
-      state.scope = payload.scope
-    },
-
-    [CHANGE_PERIOD.type]: (
-      state,
-      { payload }: ReturnType<typeof CHANGE_PERIOD>
-    ) => {
-      state.selectedPeriod = find(
-        state.periods,
-        (p: TimesheetPeriod) => p.id === payload.id
-      )
-    },
-
-    [CHANGE_VIEW.type]: (
-      state,
-      { payload }: ReturnType<typeof CHANGE_VIEW>
-    ) => {
-      state.selectedView = payload.view
-    },
-
-    [MANUAL_MATCH.type]: (
-      state,
-      { payload }: ReturnType<typeof MANUAL_MATCH>
-    ) => {
-      const { eventId, project } = payload
-      state.selectedPeriod.setManualMatch(eventId, project)
-      state.periods = state.periods.map((p) =>
-        p.id === state.selectedPeriod.id ? state.selectedPeriod : p
-      )
-    },
-
-    [CLEAR_MANUAL_MATCH.type]: (
-      state,
-      { payload }: ReturnType<typeof CLEAR_MANUAL_MATCH>
-    ) => {
-      state.selectedPeriod.clearManualMatch(payload.id)
-      state.periods = state.periods.map((p) =>
-        p.id === state.selectedPeriod.id ? state.selectedPeriod : p
-      )
-    },
-
-    [IGNORE_EVENT.type]: (
-      state,
-      { payload }: ReturnType<typeof IGNORE_EVENT>
-    ) => {
-      state.selectedPeriod.ignoreEvent(payload.id)
-      state.periods = state.periods.map((p) =>
-        p.id === state.selectedPeriod.id ? state.selectedPeriod : p
-      )
-    },
-
-    [CLEAR_IGNORES.type]: (state) => {
-      state.selectedPeriod.clearIgnoredEvents()
-      state.periods = state.periods.map((p) =>
-        p.id === state.selectedPeriod.id ? state.selectedPeriod : p
-      )
-    },
-
-    [TOGGLE_SHORTCUTS.type]: (state) => {
-      state.showHotkeysModal = !state.showHotkeysModal
-    }
-  })
+      })
+      .addCase(CHANGE_VIEW, (state, { payload }) => {
+        state.selectedView = payload.view
+      })
+      .addCase(MANUAL_MATCH, (state, { payload }) => {
+        const { eventId, project } = payload
+        state.selectedPeriod.setManualMatch(eventId, project)
+        state.periods = state.periods.map((p) =>
+          p.id === state.selectedPeriod.id ? state.selectedPeriod : p
+        )
+      })
+      .addCase(CLEAR_MANUAL_MATCH, (state, { payload }) => {
+        state.selectedPeriod.clearManualMatch(payload.id)
+        state.periods = state.periods.map((p) =>
+          p.id === state.selectedPeriod.id ? state.selectedPeriod : p
+        )
+      })
+      .addCase(IGNORE_EVENT, (state, { payload }) => {
+        state.selectedPeriod.ignoreEvent(payload.id)
+        state.periods = state.periods.map((p) =>
+          p.id === state.selectedPeriod.id ? state.selectedPeriod : p
+        )
+      })
+      .addCase(CLEAR_IGNORES, (state) => {
+        state.selectedPeriod.clearIgnoredEvents()
+        state.periods = state.periods.map((p) =>
+          p.id === state.selectedPeriod.id ? state.selectedPeriod : p
+        )
+      })
+      .addCase(TOGGLE_SHORTCUTS, (state) => {
+        state.showHotkeysModal = !state.showHotkeysModal
+      })
+  )
 
 /**
  * Use Timesheet reducer
- *
- * @param params - Parameters
  */
-export function useTimesheetReducer(parameters: ITimesheetReducerParameters) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const reducer = useMemo(() => createTimesheetReducer(parameters), [])
-  const [state, dispatch] = useReducer(reducer, initState(parameters.url))
-  return { state, dispatch }
+export function useTimesheetReducer() {
+  const { t } = useTranslation()
+  const url = useParams<ITimesheetParameters>()
+  const reducer = useMemo(() => createTimesheetReducer({ t, url }), [])
+  return useReducer(reducer, initState(url))
 }

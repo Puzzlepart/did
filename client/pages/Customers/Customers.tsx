@@ -1,17 +1,12 @@
 /* eslint-disable tsdoc/syntax */
-import { PERMISSION } from 'config/security/permissions'
-import { usePermissions } from 'hooks'
-import {
-  MessageBar,
-  MessageBarType,
-  Pivot,
-  PivotItem
-} from 'office-ui-fabric-react'
+import { TabComponent, TabContainer } from 'components'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
+import { ICustomerFormProps } from './CustomerForm/types'
 import { CustomerList } from './CustomerList'
 import { useCustomers } from './hooks/useCustomers'
 import { CHANGE_VIEW } from './reducer/actions'
@@ -20,42 +15,31 @@ import { CustomersView } from './types'
 /**
  * @category Function Component
  */
-export const Customers: FunctionComponent = () => {
+export const Customers: TabComponent<ICustomerFormProps> = () => {
   const { t } = useTranslation()
-  const { hasPermission } = usePermissions()
   const { state, dispatch, context, view } = useCustomers()
 
   return (
     <CustomersContext.Provider value={context}>
-      <Pivot
+      <TabContainer
         selectedKey={view}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))
         }
         styles={{ itemContainer: { paddingTop: 10 } }}>
-        <PivotItem
-          itemID='search'
+        <CustomerList
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'>
-          {state.error && (
-            <MessageBar messageBarType={MessageBarType.error}>
-              {t('common.genericErrorText')}
-            </MessageBar>
-          )}
-          <CustomerList />
           {state.selected && <CustomerDetails />}
-        </PivotItem>
-        {hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
-          <PivotItem
-            itemID='new'
-            itemKey='new'
-            headerText={t('customers.createNewText')}
-            itemIcon='AddTo'>
-            <CustomerForm />
-          </PivotItem>
-        )}
-      </Pivot>
+        </CustomerList>
+        <CustomerForm
+          itemKey='new'
+          headerText={t('customers.createNewText')}
+          itemIcon='AddTo'
+          permission={PermissionScope.MANAGE_CUSTOMERS}
+        />
+      </TabContainer>
     </CustomersContext.Provider>
   )
 }

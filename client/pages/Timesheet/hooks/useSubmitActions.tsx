@@ -1,10 +1,11 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
-import { useContext } from 'react'
+import { useAppContext } from 'AppContext'
 import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
 import $submitPeriod from './submitPeriod.gql'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
+
+export type UseSubmitActionsHook = ReturnType<typeof useSubmitActions>
 
 /**
  * Hook for Timesheet submit actions
@@ -12,7 +13,7 @@ import $unsubmitPeriod from './unsubmitPeriod.gql'
  * @category Timesheet Hooks
  */
 export function useSubmitActions({ state, dispatch, refetch }) {
-  const app = useContext(AppContext)
+  const app = useAppContext()
 
   const [[submitPeriod], [unsubmitPeriod]] = [
     useMutation($submitPeriod),
@@ -27,7 +28,7 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await submitPeriod({ variables })
     refetch()
-    app.notificationsQuery.refetch(250)
+    app.notifications.refetch(250)
   }
 
   const onUnsubmitPeriod = async (forecast: boolean): Promise<void> => {
@@ -38,7 +39,7 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await unsubmitPeriod({ variables })
     refetch()
-    app.notificationsQuery.refetch(250)
+    app.notifications.refetch(250)
   }
 
   return {

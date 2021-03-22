@@ -1,14 +1,8 @@
-[did-client - v0.9.9](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
+[did-client - v0.9.11](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
 
 # Interface: ITimesheetState
 
 [Pages](../modules/pages.md).ITimesheetState
-
-## Hierarchy
-
-* **ITimesheetState**
-
-  ↳ [*ITimesheetContext*](pages.itimesheetcontext.md)
 
 ## Table of contents
 
@@ -16,6 +10,7 @@
 
 - [error](pages.itimesheetstate.md#error)
 - [loading](pages.itimesheetstate.md#loading)
+- [navHistory](pages.itimesheetstate.md#navhistory)
 - [periods](pages.itimesheetstate.md#periods)
 - [scope](pages.itimesheetstate.md#scope)
 - [selectedPeriod](pages.itimesheetstate.md#selectedperiod)
@@ -28,7 +23,9 @@
 
 • `Optional` **error**: *any*
 
-Defined in: [client/pages/Timesheet/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L20)
+Error
+
+Defined in: [pages/Timesheet/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L43)
 
 ___
 
@@ -36,7 +33,19 @@ ___
 
 • `Optional` **loading**: *IProgressProps*
 
-Defined in: [client/pages/Timesheet/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L19)
+Loading props
+
+Defined in: [pages/Timesheet/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L38)
+
+___
+
+### navHistory
+
+• `Optional` **navHistory**: *string*[]
+
+Navigation history
+
+Defined in: [pages/Timesheet/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L53)
 
 ___
 
@@ -44,7 +53,9 @@ ___
 
 • **periods**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)[]
 
-Defined in: [client/pages/Timesheet/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L15)
+Periods for the seleted scope
+
+Defined in: [pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
 
 ___
 
@@ -52,7 +63,9 @@ ___
 
 • **scope**: [*TimesheetScope*](../classes/pages.timesheetscope.md)
 
-Defined in: [client/pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
+The current scope
+
+Defined in: [pages/Timesheet/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L33)
 
 ___
 
@@ -60,7 +73,9 @@ ___
 
 • `Optional` **selectedPeriod**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)
 
-Defined in: [client/pages/Timesheet/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L16)
+The currently selected period
+
+Defined in: [pages/Timesheet/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L23)
 
 ___
 
@@ -68,7 +83,9 @@ ___
 
 • **selectedView**: [*TimesheetView*](../modules/pages.md#timesheetview)
 
-Defined in: [client/pages/Timesheet/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L17)
+The currently seelcted view
+
+Defined in: [pages/Timesheet/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L28)
 
 ___
 
@@ -76,4 +93,6 @@ ___
 
 • `Optional` **showHotkeysModal**: *boolean*
 
-Defined in: [client/pages/Timesheet/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L21)
+Show hotkeys modal
+
+Defined in: [pages/Timesheet/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L48)

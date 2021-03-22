@@ -1,17 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
-import initFilters from '../filters'
 import { useReportsReducer } from '../reducer'
-import { IReportsParameters } from '../types'
-import { useQueries } from './queries'
-import { useColumns } from './useColumns'
+import { useFilters } from './useFilters'
+import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
 
 /**
- * Hook for Reports
+ * Component logic for `<Reports />`
  *
  * * Get history using `useHistory`
  * * Get URL params using `useParams`
@@ -25,19 +24,17 @@ import { useReportsQuery } from './useReportsQuery'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const parameters = useParams<IReportsParameters>()
   const history = useHistory()
-  const queries = useQueries()
+  const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-  useReportsQuery({ state, dispatch, variables: state.preset?.variables })
+  useReportsQuery({ state, dispatch })
   useLayoutEffect(() => {
     if (state.preset) {
-      history.push(`/reports/${state.preset?.key || ''}`)
+      history.push(`/reports/${state.preset?.itemKey || ''}`)
     }
   }, [state.preset, history])
 
-  const columns = useColumns({ defaults: { isResizable: true } })
-  const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
+  const filters = useFilters({ filter: state.filter })
 
   useUpdateUserConfiguration(
     {
@@ -46,16 +43,13 @@ export function useReports() {
     !state.loading && !!state.filter?.text
   )
 
+  const context = useMemo(() => ({ state, dispatch, t }), [state])
+
   return {
-    state,
-    dispatch,
-    params: parameters,
     queries,
-    history,
-    columns,
     filters,
-    t
+    context
   }
 }
 
-export { useQueries }
+export { useReportsQueries as useQueries }

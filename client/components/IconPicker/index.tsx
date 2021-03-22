@@ -1,18 +1,19 @@
 /* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
 import { Autocomplete } from 'components/Autocomplete'
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { omit } from 'underscore'
 import { humanize } from 'underscore.string'
 import styles from './IconPicker.module.scss'
 import { IIconPickerProps } from './types'
 
 /**
+ * Icon picker using `<Autocomplete />` to select
+ * icons from `@uifabric/icons`
+ *
  * @category Function Component
  */
-export const IconPicker: FunctionComponent<IIconPickerProps> = (
-  props: IIconPickerProps
-) => {
+export const IconPicker: React.FC<IIconPickerProps> = (props) => {
   const items = useMemo(
     () =>
       getIcons().map((iconName) => ({

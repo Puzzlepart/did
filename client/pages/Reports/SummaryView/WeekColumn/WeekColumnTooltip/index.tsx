@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'
 import { IWeekColumnTooltipProps } from './types'
@@ -10,9 +10,7 @@ import styles from './WeekColumnTooltip.module.scss'
 /**
  * @category SummaryView
  */
-export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
-  props: IWeekColumnTooltipProps
-) => {
+export const WeekColumnTooltip: React.FC<IWeekColumnTooltipProps> = (props) => {
   const { week, month, year, customerTotals, t } = useWeekColumnTooltip(props)
   return (
     <div className={styles.root}>

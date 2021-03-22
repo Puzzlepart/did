@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / LabelService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / LabelService
 
 # Class: LabelService
 
-[services](../modules/services.md).LabelService
+[Services](../modules/services.md).LabelService
+
+Label service
 
 ## Hierarchy
 
@@ -40,25 +42,31 @@
 
 ### constructor
 
-\+ **new LabelService**(`context`: [*Context*](graphql_context.context.md)): [*LabelService*](services.labelservice.md)
+\+ **new LabelService**(`context`: *Context*): [*LabelService*](services.labelservice.md)
+
+Constructor for `LabelService`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*LabelService*](services.labelservice.md)
 
-Defined in: [server/services/mongo/label.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L14)
+Overrides: void
+
+Defined in: [services/mongo/label.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L21)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -66,13 +74,17 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*LabelObject*](graphql.labelobject.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -80,11 +92,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -102,7 +118,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/mongo/label.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L24)
+Defined in: [services/mongo/label.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L36)
 
 ___
 
@@ -120,7 +136,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
 
-Defined in: [server/services/mongo/label.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L47)
+Defined in: [services/mongo/label.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L59)
 
 ___
 
@@ -138,7 +154,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<DeleteWriteOpResultObject\>
 
-Defined in: [server/services/mongo/label.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L79)
+Defined in: [services/mongo/label.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L91)
 
 ___
 
@@ -165,7 +181,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -183,7 +201,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [server/services/mongo/label.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L33)
+Defined in: [services/mongo/label.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L45)
 
 ___
 
@@ -203,7 +221,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -225,7 +245,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -246,7 +268,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 
 ___
 
@@ -264,4 +288,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/label.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L66)
+Defined in: [services/mongo/label.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L78)

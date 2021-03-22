@@ -1,4 +1,4 @@
-[did-client - v0.9.9](../README.md) / Hooks
+[did-client - v0.9.11](../README.md) / Hooks
 
 # Module: Hooks
 
@@ -6,16 +6,59 @@ Reusable React Hooks
 
 ## Table of contents
 
+### React Hook Variables
+
+- [useNotificationsQuery](hooks.md#usenotificationsquery)
+
 ### React Hook Functions
 
+- [useArray](hooks.md#usearray)
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
-- [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
 - [useToggle](hooks.md#usetoggle)
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
 
+## React Hook Variables
+
+### useNotificationsQuery
+
+• `Const` **useNotificationsQuery**: *ReactHookFunction*<NotificationsQueryParams, NotificationsQuery\>
+
+Fetches notifications - returns the data and
+a function to refetch the data from the server.
+
+**`param`** Context user
+
+Defined in: [hooks/notifications/useNotificationsQuery.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L29)
+
 ## React Hook Functions
+
+### useArray
+
+▸ **useArray**<T\>(`initialValue?`: T[]): [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
+
+Returns the current state of the array, a function
+to push a new item to the array, and a function to
+check if the array contains the specified item
+
+#### Type parameters:
+
+Name |
+:------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`initialValue` | T[] |
+
+**Returns:** [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
+
+Defined in: [hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
+
+___
 
 ### useBrowserStorage
 
@@ -41,7 +84,7 @@ Name | Type |
 
 **Returns:** [T, (`value`: *any*) => *void*, () => *void*]
 
-Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
+Defined in: [hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
 
 ___
 
@@ -63,58 +106,32 @@ Name | Type |
 :------ | :------ |
 `onExport` | () => *Promise*<void\> |
 
-Defined in: [client/hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
-
-___
-
-### useNotificationsQuery
-
-▸ **useNotificationsQuery**(`user`: ContextUser, `fetchPolicy?`: FetchPolicy): *object*
-
-Notificatins query hook
-
-#### Parameters:
-
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`user` | ContextUser | - | Context user    |
-`fetchPolicy` | FetchPolicy | 'cache-first' | - |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`notifications` | Notification[] |
-`refetch` | (`delay?`: *number*) => *void* |
-
-Defined in: [client/hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)
+Defined in: [hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
 
 ___
 
 ### usePermissions
 
-▸ **usePermissions**(`permissionIds?`: *string*[]): *object*
+▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): [IPermission[], (`scope`: PermissionScope) => *boolean*]
 
-Permissions hook
+Permissions hook that returns atuple of the available
+permissions and a function to check if the current user
+has the specified permission
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`permissionIds?` | *string*[] | Permission IDs    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`scopeIds?` | *string*[] | - | Limit the returns permissions to the specified ids   |
+`api` | *boolean* | false | Only return permissions available to be called externally    |
 
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`hasPermission` | (`permission`: [*PERMISSION*](../enums/configuration.permission.md)) => *boolean* |
-`permissions` | IPermission[] |
+**Returns:** [IPermission[], (`scope`: PermissionScope) => *boolean*]
 
 Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [client/hooks/user/usePermissions.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L20)
+Defined in: [hooks/user/usePermissions.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L23)
 
 ___
 
@@ -134,7 +151,7 @@ Name | Type | Default value |
 
 **Returns:** [*boolean*, DispatchWithoutAction]
 
-Defined in: [client/hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
+Defined in: [hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
 
 ___
 
@@ -166,4 +183,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *void*
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L22)
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L22)

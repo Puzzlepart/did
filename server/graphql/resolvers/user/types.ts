@@ -6,7 +6,26 @@ import { Subscription } from '../subscription/types'
 import { Role } from '../types'
 
 /**
- * @category ObjectType
+ * A type that describes a User photo
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a User photo',
+  simpleResolvers: true
+})
+export class UserPhoto {
+  @Field({
+    description: 'Base64 representation of the User photo',
+    nullable: true
+  })
+  base64?: string
+}
+
+/**
+ * A type that describes a User
+ *
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a User',
@@ -57,6 +76,9 @@ export class User {
   @Field({ nullable: true })
   provider?: string
 
+  @Field({ nullable: true })
+  photo?: UserPhoto
+
   public create?(user: User): User {
     Object.assign(this, user)
     return this
@@ -64,7 +86,7 @@ export class User {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'Input object for Role used in Mutation addOrUpdateUser/addUsers'
@@ -108,7 +130,7 @@ export class UserInput {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({ description: 'Input object for User query' })
 export class UserQuery {

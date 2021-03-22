@@ -29,6 +29,7 @@ package-lock.json
 client/**/*.d.ts
 client/**/*js
 client/**/*js.map
+!client/global.d.ts
 
 doc/
 .DS_Store

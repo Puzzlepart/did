@@ -4,7 +4,7 @@ import { Field, InputType } from 'type-graphql'
 import { EventInput } from './EventInput'
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description:

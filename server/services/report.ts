@@ -1,8 +1,9 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import { find, first, omit, pick } from 'underscore'
 import { ProjectService, UserService } from '.'
-import { DateObject } from '../../shared/utils/date.dateObject'
+import { DateObject } from '../../shared/utils/DateObject'
 import { Context } from '../graphql/context'
 import {
   ConfirmedPeriodsQuery,
@@ -29,17 +30,22 @@ interface IGenerateReportParameters {
   customers: Customer[]
 }
 
+/**
+ * Report service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 export class ReportService {
   /**
    * Constructor for ReportsService
    *
-   * @param context - Injected context through typedi
-   * @param _projectSvc - Injected `ProjectService` through typedi
-   * @param _userSvc - Injected `UserService` through typedi
-   * @param _teSvc - Injected `TimeEntryService` through typedi
-   * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
-   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
+   * @param context - Injected context through `typedi`
+   * @param _projectSvc - Injected `ProjectService` through `typedi`
+   * @param _userSvc - Injected `UserService` through `typedi`
+   * @param _teSvc - Injected `TimeEntryService` through `typedi`
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
@@ -110,13 +116,7 @@ export class ReportService {
               ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
               project: pick(project, 'tag', 'name', 'description', 'icon'),
               customer: pick(customer, 'key', 'name', 'description', 'icon'),
-              resource: pick(
-                resource,
-                'givenName',
-                'surname',
-                'mail',
-                'displayName'
-              )
+              resource
             }
           ]
         }

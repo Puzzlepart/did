@@ -1,39 +1,32 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { contains, unique } from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import { unique } from 'underscore'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
 /**
+ * @extends BaseFilter
  * @category FilterPanel
  */
-export class ResourceFilter<
-  ItemType = any,
-  KeyType = any
-> extends BaseFilter<ItemType> {
-  private _selectedKeys: KeyType[]
-
+export class ResourceFilter extends BaseFilter {
   /**
-   * Constructor
+   * Constructor for `ResourceFilter`
    *
+   * @param name - Filter name
    * @param keyFieldName - Field name for the item key
    * @param valueFieldName - Field name for the item value
-   * @param name - Filter name
    */
-  constructor(
-    public keyFieldName: string,
-    public valueFieldName: string,
-    public name: string
-  ) {
-    super(keyFieldName, name)
+  constructor(name: string, keyFieldName: string, valueFieldName: string) {
+    super(name, keyFieldName, valueFieldName)
   }
 
   /**
-   * Intialize the ResourceFilter
+   * Intialize the `ResourceFilter`
    *
    * @param items - Items
    */
-  public initialize(items: ItemType[]): IFilter {
-    const _items = unique(
+  public initialize(items: any[]): IFilter {
+    const filterItems = unique(
       items.map((item_) => ({
         key: getValue(item_, this.keyFieldName, null),
         value: getValue(item_, this.valueFieldName, null)
@@ -44,18 +37,6 @@ export class ResourceFilter<
       if (a.value > b.value) return 1
       return 0
     })
-    return {
-      key: this.keyFieldName,
-      name: this.name,
-      items: _items,
-      selected: _items.filter((index) =>
-        contains(this._selectedKeys, index.key)
-      )
-    }
-  }
-
-  public setDefaults(values: { [key: string]: KeyType[] }) {
-    this._selectedKeys = getValue(values, this.keyFieldName) ?? []
-    return this
+    return super.initialize(filterItems)
   }
 }

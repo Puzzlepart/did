@@ -1,0 +1,94 @@
+name: Automatic chores
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - '.github/workflows/automatic_chores.yml'
+      - '.readme/*.md'
+      - '.readme/blueprint.json'
+      - '.changelog/*.md'
+      - '.changelog/blueprint.json'
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+
+jobs:
+  automatic_chores:
+    runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, 'docs: ')"
+    strategy:
+      matrix:
+        node-version: [12.18.3]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package.json') }}
+
+      - name: Install npm packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
+
+      - name: Generating documentation using typedoc
+        run: |
+          npx concurrently \
+          "node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logger none" \
+          "node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logger none" \
+          "node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logger none"
+
+      - name: ESLint and prettier
+        run: |
+          npx eslint --ext .ts,.tsx ./client ./server --color --fix
+          npx prettier '**/*.ts*' --write --loglevel silent
+
+      - name: Generating README and CHANGELOG using @appnest/readme
+        run: |
+          npx concurrently \
+          "npx @appnest/readme generate --config .readme/blueprint.json --silent" \
+          "npx @appnest/readme generate --config .changelog/blueprint.json --silent"
+
+      - name: Add all changes
+        run: |
+          git add -A
+
+      - name: Get git context
+        id: git_context
+        run: |
+          status=`git status --porcelain`
+          echo "::set-output name=status::$status"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Commit files as {github-automatic-chores} (if staged changes)
+        if: ${{ steps.git_context.outputs.status != '' }}
+        run: |
+          git config --local user.email "github-automatic-chores@users.noreply.github.com"
+          git config --local user.name "github-automatic-chores"
+          git commit --no-verify -m "docs: updated generated docs, \
+          readme and changelog (${{ steps.git_context.outputs.sha_short }})" \
+          -m "This is a commit done by the GitHub action \
+          https://github.com/Puzzlepart/did/blob/dev/.github/workflows/automatic_chores.yml. \
+          This way we avoid having to generate documentation, run eslint etc. locally before \
+          commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
+
+      - name: Push changes (if staged changes)
+        if: ${{ steps.git_context.outputs.status != '' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref }}

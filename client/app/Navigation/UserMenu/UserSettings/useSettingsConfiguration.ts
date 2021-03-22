@@ -1,21 +1,23 @@
+import { useAppContext } from 'AppContext'
+import { usePermissions } from 'hooks'
 import { config } from 'package'
-import { usePages } from 'pages/usePages'
 import { useTranslation } from 'react-i18next'
 import { IUserSetting, IUserSettingDropdown } from './types'
 
 export function useSettingsConfiguration() {
   const { t } = useTranslation()
-  const { nav } = usePages()
+  const [, hasPermission] = usePermissions()
+  const { pages } = useAppContext()
   return new Set<IUserSetting>([
     {
       key: 'startPage',
       label: t('common.startPageLabel'),
       type: 'dropdown',
-      options: nav
-        .filter(({ hidden }) => !hidden)
-        .map(({ text, to }) => ({
-          key: to,
-          text
+      options: pages
+        .filter(({ permission }) => permission && hasPermission(permission))
+        .map(({ displayName, path }) => ({
+          key: path,
+          text: displayName
         })),
       reloadAfterSave: true
     } as IUserSettingDropdown,

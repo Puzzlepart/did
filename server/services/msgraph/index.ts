@@ -1,23 +1,26 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { sortBy } from 'underscore'
-import DateUtils from '../../../shared/utils/date'
+import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
 import { CacheScope, CacheService } from '../cache'
-import OAuthService, { AccessTokenOptions } from '../oauth'
-import MSGraphEvent, {
-  MSGraphEventOptions,
-  MSGraphOutlookCategory
-} from './types'
+import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
+import { MSGraphOutlookCategory } from './types'
 
+/**
+ * Microsoft Graph service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 class MSGraphService {
   private _cache: CacheService = null
-  private _accessTokenOptions: AccessTokenOptions = {
+  private _accessTokenOptions: MSAccessTokenOptions = {
     clientId: environment('MICROSOFT_CLIENT_ID'),
     clientSecret: environment('MICROSOFT_CLIENT_SECRET'),
     tokenHost: 'https://login.microsoftonline.com/common/',
@@ -26,8 +29,8 @@ class MSGraphService {
   }
 
   constructor(
-    private _oauthService: OAuthService,
-    private _access_token?: string,
+    private _msOAuthSvc: MSOAuthService,
+    private _accessToken?: string,
     @Inject('CONTEXT') readonly context?: Context
   ) {
     this._cache = new CacheService(context, MSGraphService.name)
@@ -35,25 +38,54 @@ class MSGraphService {
 
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
+   *
+   * @memberof MSGraphService
    */
   private async _getClient(): Promise<MSGraphClient> {
-    this._access_token = (
-      await this._oauthService.getAccessToken(this._accessTokenOptions)
+    this._accessToken = (
+      await this._msOAuthSvc.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
       authProvider: (done: (error: Error, token: any) => void) => {
-        done(null, this._access_token)
+        done(null, this._accessToken)
       }
     })
     return client
   }
 
   /**
+   * Get user photo in base64 format
+   *
+   * @param size - Photo size
+   * @public
+   *
+   * @returns A base64 representation of the user photo
+   *
+   * @memberof MSGraphService
+   */
+  public async getUserPhoto(size: string): Promise<string> {
+    try {
+      const client = await this._getClient()
+      const blob = (await client.api(`/me/photos/${size}/$value`).get()) as Blob
+      const buffer = await blob.arrayBuffer()
+      return `data:${blob.type};base64,${Buffer.from(buffer).toString(
+        'base64'
+      )}`
+    } catch (error) {
+      throw new Error(`MSGraphService.getUserPhoto: ${error.message}`)
+    }
+  }
+
+  /**
    * Get current user properties
    *
    * @param properties - Properties to retrieve
+   *
+   * @public
+   *
+   * @memberof MSGraphService
    */
-  async getCurrentUser(properties: string[]): Promise<any> {
+  public async getCurrentUser(properties: string[]): Promise<any> {
     try {
       const client = await this._getClient()
       const value = await client.api('/me').select(properties).get()
@@ -65,6 +97,10 @@ class MSGraphService {
 
   /**
    * Get Azure Active Directory users
+   *
+   * @public
+   *
+   * @memberof MSGraphService
    */
   public getUsers(): Promise<any> {
     try {
@@ -101,6 +137,10 @@ class MSGraphService {
    * Create Outlook category
    *
    * @param category - Category
+   *
+   * @public
+   *
+   * @memberof MSGraphService
    */
   public async createOutlookCategory(
     category: string
@@ -127,6 +167,10 @@ class MSGraphService {
 
   /**
    * Get Outlook categories
+   *
+   * @public
+   *
+   * @memberof MSGraphService
    */
   public getOutlookCategories(): Promise<any[]> {
     try {
@@ -148,30 +192,26 @@ class MSGraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param startDate - Start date (YYYY-MM-DD)
-   * @param endDate - End date (YYYY-MM-DD)
-   * @param options - Options
+   * @param startDateTimeIso - Start date time in `ISO format`
+   * @param endDateTimeIso - End date time in `ISO format`
+   *
+   * @public
+   *
+   * @memberof MSGraphService
    */
   public async getEvents(
-    startDate: string,
-    endDate: string,
-    options: MSGraphEventOptions
-  ): Promise<MSGraphEvent[]> {
+    startDateTimeIso: string,
+    endDateTimeIso: string
+  ): Promise<EventObject[]> {
     try {
       const cacheOptions = {
-        key: ['events', startDate, endDate],
+        key: ['events', startDateTimeIso, endDateTimeIso],
         scope: CacheScope.USER
       }
       const events = await this._cache.usingCache(async () => {
         const query = {
-          startDateTime: DateUtils.toISOString(
-            `${startDate}:00:00:00.000`,
-            options.tzOffset
-          ),
-          endDateTime: DateUtils.toISOString(
-            `${endDate}:23:59:59.999`,
-            options.tzOffset
-          )
+          startDateTime: startDateTimeIso,
+          endDateTime: endDateTimeIso
         }
         const client = await this._getClient()
         const { value } = (await client
@@ -197,8 +237,20 @@ class MSGraphService {
         return value.filter((event) => !!event.subject)
       }, cacheOptions)
       return events
-        .map((event) => new MSGraphEvent(event, options))
-        .filter((event: MSGraphEvent) => event.duration <= 24)
+        .map(
+          (event) =>
+            new EventObject(
+              event.id,
+              event.subject,
+              event.body.content,
+              event.isOrganizer,
+              event.start,
+              event.end,
+              event.webLink,
+              event.categories
+            )
+        )
+        .filter((event: EventObject) => event.duration <= 24)
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useReducer } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import createReducer, { initState } from '.'
 import { ICustomersParameters } from '../types'
-import createReducer, { initState } from './'
 
 export function useCustomersReducer() {
   const history = useHistory()

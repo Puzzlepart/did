@@ -1,32 +1,39 @@
 /* eslint-disable tsdoc/syntax */
-import { List, UserMessage } from 'components'
-import { IColumn } from 'office-ui-fabric-react'
-import React from 'react'
+import { List, TabComponent, UserMessage } from 'components'
+import { Progress } from 'components/Progress'
+import React, { useContext } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
+import { ReportsContext } from '../context'
 import { useSummaryView } from './hooks/useSummaryView'
 import styles from './SummaryView.module.scss'
-import { WeekColumn } from './WeekColumn'
 
 /**
  * @category Function Component
  */
-export const SummaryView = (): JSX.Element => {
+export const SummaryView: TabComponent = () => {
   const { t } = useTranslation()
-  const { state, rows, columns } = useSummaryView({
-    onColumnRender: (item: any, _index: number, column: IColumn) => (
-      <WeekColumn user={item.user} periods={item[column.fieldName]} />
-    )
-  })
+  const context = useContext(ReportsContext)
+  const { state, rows, columns } = useSummaryView()
 
   return (
     <div className={styles.root}>
       <div className={styles.container}>
+        {context.state.loading && (
+          <Progress
+            label={t('reports.generatingReportLabel')}
+            description={t('reports.generatingReportDescription')}
+            iconProps={{ iconName: 'OEM' }}
+          />
+        )}
         <List
           hidden={!state.loading && isEmpty(rows)}
           enableShimmer={state.loading}
           columns={columns}
           items={rows}
+          height={isBrowser && window.innerHeight - 200}
+          headerClassName={styles.columnHeader}
         />
         <UserMessage
           hidden={!isEmpty(rows) || state.loading}

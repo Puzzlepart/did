@@ -1,29 +1,76 @@
-# Changelog
+<!-- ⚠️ This README has been generated from the file(s) ".changelog/CHANGELOG.md" ⚠️-->
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#changelog)
+
+# ➤ Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-an
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-![image-20210317094748280](assets/image-20210317094748280.png)
+<details>
+<summary>📖 Table of Contents</summary>
+<br />
 
-![image-20210317094740668](../../Library/Application Support/typora-user-images/image-20210317094740668.png)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#table-of-contents)
 
-d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## ➤ Table of Contents
 
-## 0.10.0 - TBA
+* [➤ Changelog](#-changelog)
+	* [➤ 0.10.0 - 12.04.2021](#-0100---12042021)
+		* [Added](#added)
+		* [Fixed](#fixed)
+		* [Changed](#changed)
+	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
+		* [Added](#added-1)
+		* [Fixed](#fixed-1)
+		* [Changed](#changed-1)
+		* [Removed](#removed)
+	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
+		* [Added](#added-2)
+		* [Fixed](#fixed-2)
+	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
+		* [Added](#added-3)
+		* [Fixed](#fixed-3)
+	* [➤ 0.6.0 - N/A](#-060---na)
+	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
+		* [Added](#added-4)
+		* [Fixed](#fixed-4)
+	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
+		* [Added](#added-5)
+		* [Fixed](#fixed-5)
+		* [Fixed](#fixed-6)
+	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
+		* [Added](#added-6)
+		* [Fixed](#fixed-7)
+	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+		* [Fixed](#fixed-8)
+	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+		* [Added](#added-7)
+</details>
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0100---12042021)
+
+## ➤ 0.10.0 - 12.04.2021
 
 ### Added
+
 - Support for split week, split year scenarios #753
 - Last year option added to reports #775
 - Support for deleting role #692
 - Improved Timesheet statusbar. Now showing on all tabs, and showing either shimmer or progress indicator. Not both. #831
-- Support for norsk (nynorsk) #864
+- Support for nb-NO (nynorsk) #864 (thanks to @paalolav ❤️)
 - Support for initial signin with email #884
 - Showing more details in the summary view on hover #886
 - Summary view moved to Reports
 - Support for start page user setting
+- Differentiating 0-hour weeks from unconfirmed weeks in Summary view #781
+- Synchronizes user photo from Azure AD #899
+- Added breadcrumb to mobile devices
 
 ### Fixed
+
 - Issue where sunday hours would not be displayed in the UI after confirming a week #785
 - Issue where moving an event from a confirmed week to an unconfirmed week would cause an error #766
 - Minor visual bug in unmatched hours #773
@@ -33,12 +80,20 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Issue with time entry queries in Reports #790
 - Issue with navigating to a customer from e.g. Timesheet #791
 - Issue with navigating directly to a page when not logged in #889
+- Consistent ignore/match buttons across devices in Timesheet #894
 
 ### Changed
+
 - Consolidated Server and Client date utils #771
 - Summary view now using datepicker instead of slider #777
+- Visual improvements on the admin sections
 
-## 0.9.0 - 15.12.2020
+
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#090---15122020)
+
+## ➤ 0.9.0 - 15.12.2020
 ### Added
 - Changes to forecast/confirm actions #605
 - Improvements to allocation view in Timesheet #644
@@ -76,7 +131,11 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ### Removed
 - Dependency on moment.js removed, now using day.js instead
 
-## 0.8.0 - 15.10.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#080---15102020)
+
+## ➤ 0.8.0 - 15.10.2020
 ### Added
 - Did now supports forecasting #355
 - Better mobile navigation with descriptive labels #539, #588
@@ -92,7 +151,11 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Could not open week picker in Timesheet under certain conditions #558
 - Did now properly matches ÆØÅ in customer and project keys #550
 
-## 0.7.0 - 09.09.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#070---09092020)
+
+## ➤ 0.7.0 - 09.09.2020
 ### Added
 - Rebrand to just "Did" #412
 - Improved reports landing page #505
@@ -107,10 +170,18 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Fixed soft match functionality (matching without (), [], {}) #489
 - Customer entries with leading/trailing spaces are un-matchable #426
 
-## 0.6.0 - N/A
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#060---na)
+
+## ➤ 0.6.0 - N/A
 Need details.
 
-## 0.5.0 - 22.5.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#050---2252020)
+
+## ➤ 0.5.0 - 22.5.2020
 
 ### Added
 - Added toggle for showing/hiding inactive projects andcustomers #285
@@ -124,7 +195,11 @@ Need details.
 ### Fixed
 - Fix for scrollbar glitching #302 
 
-## 0.4.0 - 11.5.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#040---1152020)
+
+## ➤ 0.4.0 - 11.5.2020
 
 ### Added
 - Support for split weeks #232
@@ -141,7 +216,11 @@ Need details.
 
 ### Fixed
 
-## 0.3.1 - 16.04.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#031---16042020)
+
+## ➤ 0.3.1 - 16.04.2020
 
 ### Added
 - Support for adding a project as a category in the users mailbox #202
@@ -152,13 +231,21 @@ Need details.
 - Using `get-value` module to get `project.inactive` and `customer.inactive` from event #212
 - Using `.isoWeek()` instead of `.week()` to calculate week from startTime in `timesheet` resolver #225
 
-## 0.3.0 - 20.03.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#030---20032020)
+
+## ➤ 0.3.0 - 20.03.2020
 
 ### Fixed
 - Set GraphService.getEvents to retrieve `500` items instead of just `50` #205
 - Fixed issue with events lasting until 00:00 #197
 
-## 0.2.0 - 05.03.2020
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#020---05032020)
+
+## ➤ 0.2.0 - 05.03.2020
 
 ### Added
 - Validation for new project form #163

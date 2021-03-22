@@ -1,12 +1,21 @@
+/* eslint-disable tsdoc/syntax */
 import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
-import MSGraphEvent from '../msgraph/types'
+import { ProjectMatch } from './types'
 
-type ProjectMatch = { id: string; key: string; customerKey: string }
-
-export default class {
+/**
+ * Timesheet matching engine
+ *
+ * @category TimesheetService
+ */
+export default class TimesheetMatchingEngine {
+  /**
+   * Constructor for `TimesheetMatchingEngine`
+   *
+   * @param _data - Projects data
+   */
   constructor(private _data: ProjectsData) {}
 
   /**
@@ -106,8 +115,11 @@ export default class {
   /**
    * Checks for project match in event
    *
-   * 1. Checks category/title/description for tokens
-   * 2. Checks title/description for key without any brackets/parantheses
+   * 1. Checks `category`, `title` and `description` for tokens
+   * 2. Checks `title` and `description` for key without any brackets/parantheses
+   * 3.If we found token matches in `srchStr` or `categoriesStr`
+   * We look through the matches and check if they match against
+   * a project
    *
    * @param event - Event
    */
@@ -123,9 +135,6 @@ export default class {
     const matches = this._findProjectMatches(srchString, categoriesString)
     let projectKey: string
 
-    // We found token matches in srchStr or categoriesStr
-    // We look through the matches and check if they match against
-    // a project
     if (!isEmpty(matches)) {
       for (const match of matches) {
         event.customer = find(
@@ -195,8 +204,10 @@ export default class {
    * Match events
    *
    * @param events - Events to match
+   *
+   * @returns Events matched to projects, customers and labels
    */
-  public matchEvents(events: MSGraphEvent[]): EventObject[] {
+  public matchEvents(events: EventObject[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))
   }
 }

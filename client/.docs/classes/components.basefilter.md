@@ -1,14 +1,8 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / BaseFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / BaseFilter
 
-# Class: BaseFilter<ItemType\>
+# Class: BaseFilter
 
 [Components](../modules/components.md).BaseFilter
-
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
 
 ## Hierarchy
 
@@ -34,8 +28,10 @@ Name | Default |
 
 ### Properties
 
-- [fieldName](components.basefilter.md#fieldname)
+- [keyFieldName](components.basefilter.md#keyfieldname)
 - [name](components.basefilter.md#name)
+- [selectedKeys](components.basefilter.md#selectedkeys)
+- [valueFieldName](components.basefilter.md#valuefieldname)
 
 ### Methods
 
@@ -46,30 +42,27 @@ Name | Default |
 
 ### constructor
 
-\+ **new BaseFilter**<ItemType\>(`fieldName`: *string*, `name`: *string*): [*BaseFilter*](components.basefilter.md)<ItemType\>
+\+ **new BaseFilter**(`name`: *string*, `keyFieldName`: *string*, `valueFieldName?`: *string*): [*BaseFilter*](components.basefilter.md)
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
+Constructor for `BaseFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`fieldName` | *string* |
-`name` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | *string* | Filter name   |
+`keyFieldName` | *string* | Field name for the item key   |
+`valueFieldName?` | *string* | Field name for the item value    |
 
-**Returns:** [*BaseFilter*](components.basefilter.md)<ItemType\>
+**Returns:** [*BaseFilter*](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L24)
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
 
 ## Properties
 
-### fieldName
+### keyFieldName
 
-• **fieldName**: *string*
+• **keyFieldName**: *string*
 
 ___
 
@@ -77,34 +70,56 @@ ___
 
 • **name**: *string*
 
+___
+
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
+### valueFieldName
+
+• `Optional` **valueFieldName**: *string*
+
 ## Methods
 
 ### initialize
 
-▸ `Abstract`**initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`filterItems`: [*IFilterItem*](../interfaces/components.ifilteritem.md)[]): [*IFilter*](../interfaces/components.ifilter.md)
+
+Initializes the filter returning `IFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`items` | ItemType[] |
+Name | Type | Description |
+:------ | :------ | :------ |
+`filterItems` | [*IFilterItem*](../interfaces/components.ifilteritem.md)[] | Filter items   |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L26)
+`IFilter`
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L34)
 
 ___
 
 ### setDefaults
 
-▸ `Abstract`**setDefaults**(`values`: *any*): [*BaseFilter*](components.basefilter.md)<ItemType\>
+▸ **setDefaults**(`values`: *any*): [*BaseFilter*](components.basefilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *any* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*BaseFilter*](components.basefilter.md)<ItemType\>
+**Returns:** [*BaseFilter*](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L27)
+this
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

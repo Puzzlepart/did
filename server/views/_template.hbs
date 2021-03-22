@@ -49,16 +49,8 @@
     <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5" />
     <meta name="mobile-web-app-capable" content="yes" />
     <style type="text/css">
-       @media screen and (min-width: 960px) {
-            html {
-                overflow-y: scroll;
-            }
-        }
-        
-        @media screen and (max-width: 600px) {
-            html {
-                overflow: auto;
-            }
+        html {
+            overflow-y: scroll;
         }
 
         body {
@@ -110,7 +102,8 @@
 
 <body ontouchstart="" style="min-height: 100vh">
     <main role='main'>
-        <div id="app" data-error='{{error}}'></div>
+        <div id="app">
+        </div>
     </main>
 </body>
 

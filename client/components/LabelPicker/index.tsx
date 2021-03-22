@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
 import { Icon, Label } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LabelPicker.module.scss'
 import { SelectCallout } from './SelectCallout'
@@ -11,9 +11,7 @@ import { useLabelPicker } from './useLabelPicker'
 /**
  * @category Function Component
  */
-export const LabelPicker: FunctionComponent<ILabelPickerProps> = (
-  props: ILabelPickerProps
-) => {
+export const LabelPicker: React.FC<ILabelPickerProps> = (props) => {
   const { t } = useTranslation()
   const {
     labels,

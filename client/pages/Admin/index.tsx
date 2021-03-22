@@ -1,12 +1,20 @@
 /* eslint-disable tsdoc/syntax */
+import { PageComponent } from 'pages/types'
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Admin } from './Admin'
 
 /**
- * @ignore
+ * Admin page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
-export const AdminPage = () => {
+export const AdminPage: PageComponent = () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -22,5 +30,10 @@ export const AdminPage = () => {
     </Switch>
   )
 }
+
+Object.assign(AdminPage, {
+  iconName: 'Settings',
+  permission: PermissionScope.ACCESS_ADMIN
+} as Partial<PageComponent>)
 
 export * from './Admin'

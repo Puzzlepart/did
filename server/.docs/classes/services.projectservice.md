@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / ProjectService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / ProjectService
 
 # Class: ProjectService
 
-[services](../modules/services.md).ProjectService
+[Services](../modules/services.md).ProjectService
+
+Project service
 
 ## Hierarchy
 
@@ -38,29 +40,33 @@
 
 ### constructor
 
-\+ **new ProjectService**(`context`: [*Context*](graphql_context.context.md), `_customerSvc`: [*CustomerService*](services.customerservice.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
+\+ **new ProjectService**(`context`: *Context*, `_customerSvc`: [*CustomerService*](services.customerservice.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
 
-Constructor for ProjectService
+Constructor for `ProjectService`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
-`_customerSvc` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through typedi   |
-`_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through typedi    |
+`context` | *Context* | Injected context through `typedi`   |
+`_customerSvc` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through `typedi`   |
+`_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through `typedi`    |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L21)
+Overrides: void
+
+Defined in: [services/mongo/project.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L28)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -68,13 +74,17 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*Project*](graphql.project.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -82,11 +92,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -106,7 +120,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L44)
+Defined in: [services/mongo/project.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L51)
 
 ___
 
@@ -133,7 +147,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Project*](graphql.project.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -155,7 +171,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L86)
+Defined in: [services/mongo/project.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L93)
 
 ___
 
@@ -175,7 +191,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -197,7 +215,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -218,7 +238,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 
 ___
 
@@ -238,4 +260,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L66)
+Defined in: [services/mongo/project.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L73)

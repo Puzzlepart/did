@@ -1,19 +1,12 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / ProjectFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / ProjectFilter
 
-# Class: ProjectFilter<ItemType, KeyType\>
+# Class: ProjectFilter
 
 [Components](../modules/components.md).ProjectFilter
 
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
-
 ## Hierarchy
 
-* [*BaseFilter*](components.basefilter.md)<ItemType\>
+* [*BaseFilter*](components.basefilter.md)
 
   ↳ **ProjectFilter**
 
@@ -25,9 +18,10 @@ Name | Default |
 
 ### Properties
 
-- [\_selectedKeys](components.projectfilter.md#_selectedkeys)
-- [fieldName](components.projectfilter.md#fieldname)
+- [keyFieldName](components.projectfilter.md#keyfieldname)
 - [name](components.projectfilter.md#name)
+- [selectedKeys](components.projectfilter.md#selectedkeys)
+- [valueFieldName](components.projectfilter.md#valuefieldname)
 
 ### Methods
 
@@ -38,43 +32,31 @@ Name | Default |
 
 ### constructor
 
-\+ **new ProjectFilter**<ItemType, KeyType\>(`fieldName`: *string*, `name`: *string*): [*ProjectFilter*](components.projectfilter.md)<ItemType, KeyType\>
+\+ **new ProjectFilter**(`name`: *string*, `keyFieldName`: *string*, `valueFieldName`: *string*): [*ProjectFilter*](components.projectfilter.md)
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
+Constructor for `ProjectFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`fieldName` | *string* |
-`name` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | *string* | Name   |
+`keyFieldName` | *string* | Field name for the item key   |
+`valueFieldName` | *string* | Field name for the item value    |
 
-**Returns:** [*ProjectFilter*](components.projectfilter.md)<ItemType, KeyType\>
+**Returns:** [*ProjectFilter*](components.projectfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/ProjectFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ProjectFilter.ts#L13)
+Defined in: [components/FilterPanel/Filters/ProjectFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ProjectFilter.ts#L11)
 
 ## Properties
 
-### \_selectedKeys
+### keyFieldName
 
-• `Private` **\_selectedKeys**: KeyType[]
+• **keyFieldName**: *string*
 
-Defined in: [client/components/FilterPanel/Filters/ProjectFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ProjectFilter.ts#L13)
-
-___
-
-### fieldName
-
-• **fieldName**: *string*
-
-Inherited from: [BaseFilter](components.basefilter.md).[fieldName](components.basefilter.md#fieldname)
+Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
 ___
 
@@ -84,40 +66,62 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefilter.md#name)
 
+___
+
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
+### valueFieldName
+
+• `Optional` **valueFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
+
 ## Methods
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items`: *any*[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the ProjectFilter
+Intialize the `ProjectFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items` | *any*[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/ProjectFilter.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ProjectFilter.ts#L24)
+Defined in: [components/FilterPanel/Filters/ProjectFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ProjectFilter.ts#L28)
 
 ___
 
 ### setDefaults
 
-▸ **setDefaults**(`values`: { [key: string]: KeyType[];  }): [*ProjectFilter*](components.projectfilter.md)<ItemType, KeyType\>
+▸ **setDefaults**(`values`: *any*): [*ProjectFilter*](components.projectfilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *object* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*ProjectFilter*](components.projectfilter.md)<ItemType, KeyType\>
+**Returns:** [*ProjectFilter*](components.projectfilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+this
 
-Defined in: [client/components/FilterPanel/Filters/ProjectFilter.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ProjectFilter.ts#L42)
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

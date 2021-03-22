@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components/UserMessage'
 import { Link, Panel } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext, useDebugValue } from 'react'
+import React, { useContext, useDebugValue } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { UserNotificationsContext } from '../context'
@@ -11,7 +11,7 @@ import styles from './UserNotificationsPanel.module.scss'
 /**
  * @category Function Component
  */
-export const NotificationsPanel: FunctionComponent = () => {
+export const NotificationsPanel: React.FC = () => {
   const { t } = useTranslation()
   const {
     notifications,

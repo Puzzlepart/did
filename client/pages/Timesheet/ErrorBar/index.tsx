@@ -1,11 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
 import { MessageBarType } from 'office-ui-fabric-react'
-import * as React from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
 
-export const ErrorBar = ({ error }: IErrorBarProps) => {
+/**
+ * @category Timesheet
+ */
+export const ErrorBar: React.FC<IErrorBarProps> = ({ error }) => {
   const { t } = useTranslation()
   if (!error) return null
   let messageProps: IUserMessageProps

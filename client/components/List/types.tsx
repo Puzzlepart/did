@@ -1,24 +1,73 @@
+/* eslint-disable tsdoc/syntax */
 import {
   CheckboxVisibility,
   IColumn,
   ICommandBarProps,
+  IDetailsColumnRenderTooltipProps,
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
   IRenderFunction,
   ISearchBoxProps,
+  IShimmeredDetailsListProps,
   SelectionMode
 } from 'office-ui-fabric-react'
+import { ExcelColumnType } from 'utils/exportExcel'
 
-export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
+/**
+ * @category List
+ */
+export interface IListColumnData {
+  /**
+   * Hidden column
+   */
+  hidden?: boolean
+
+  /**
+   * Optional sub text
+   */
+  subText?: string
+
+  /**
+   * Excel column format
+   */
+  excelColFormat?: ExcelColumnType
+
+  /**
+   * Hidden from Excel exports
+   */
+  hiddenFromExport?: boolean
+
+  /**
+   * Callback to render a tooltip for the column header
+   */
+  onRenderColumnHeader?: (
+    props: IDetailsColumnRenderTooltipProps
+  ) => JSX.Element
+}
+
+/**
+ * @category List
+ */
+export interface IListColumn<T = IListColumnData> extends IColumn {
+  /**
+   * Data for the column - `IListColumnData`
+   */
+  data?: T
+}
+
+/**
+ * @category List
+ */
+export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Items
    */
-  items?: T[]
+  items: T[]
 
   /**
    * Columns
    */
-  columns?: IColumn[]
+  columns?: IListColumn[]
 
   /**
    * Enable shimmer (normally while loading)
@@ -38,17 +87,17 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**
    * Selection
    */
-  selection?: IListSelection
-
-  /**
-   * Groups
-   */
-  groups?: IListGroups
+  selectionProps?: IListSelectionProps
 
   /**
    * Group props
    */
-  groupProps?: IDetailsGroupRenderProps
+  listGroupProps?: IListGroupProps
+
+  /**
+   * Group render props
+   */
+  listGroupRenderProps?: IDetailsGroupRenderProps
 
   /**
    * On render details header
@@ -66,6 +115,11 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   checkboxVisibility?: CheckboxVisibility
 
   /**
+   * Callback to render the column header
+   */
+  onRenderColumnHeader?: IRenderFunction<IDetailsColumnRenderTooltipProps>
+
+  /**
    * Fade in properties used by the FadeIn component (react-fade-in)
    *
    * [delay, transitionDuration]
@@ -76,8 +130,21 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
    * Filters
    */
   filters?: { [key: string]: any }
+
+  /**
+   * Hidden
+   */
+  hidden?: boolean
+
+  /**
+   * Overriding class name for header
+   */
+  headerClassName?: string
 }
 
+/**
+ * @category List
+ */
 export interface IListState<T = any> {
   /**
    * Search term
@@ -95,13 +162,18 @@ export interface IListState<T = any> {
   items?: T[]
 }
 
-export interface IListSelection {
+/**
+ * @category List
+ */
+export interface IListSelectionProps<T = any> {
   mode: SelectionMode
-  defaultSelectedKey?: string
-  onChanged: (selected: any) => void
+  onChanged: (selected: T) => void
 }
 
-export interface IListGroups {
+/**
+ * @category List
+ */
+export interface IListGroupProps {
   fieldName: string
   groupNames?: string[]
   emptyGroupName?: string

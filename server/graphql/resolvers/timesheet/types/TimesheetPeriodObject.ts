@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Field, ID, ObjectType } from 'type-graphql'
-import DateUtils from '../../../../../shared/utils/date'
+import $date from '../../../../../shared/utils/date'
 import { EventObject } from './EventObject'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a TimesheetPeriod',
@@ -90,12 +90,12 @@ export class TimesheetPeriodObject {
    * @param locale - User locale
    */
   constructor(startDate: string, endDate: string, locale: string) {
-    this.id = DateUtils.getPeriod(startDate)
+    this.id = $date.getPeriod(startDate)
     this.startDate = startDate
     this.endDate = endDate
-    this.week = DateUtils.getWeek(startDate)
-    this.month = DateUtils.formatDate(startDate, 'MMMM', locale)
-    this.isForecast = DateUtils.isAfterToday(startDate)
+    this.week = $date.getWeek(startDate)
+    this.month = $date.formatDate(startDate, 'MMMM', locale)
+    this.isForecast = $date.isAfterToday(startDate)
     this.isForecasted = false
     this.isConfirmed = false
   }

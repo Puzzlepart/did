@@ -1,19 +1,12 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / CustomerFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / CustomerFilter
 
-# Class: CustomerFilter<ItemType, KeyType\>
+# Class: CustomerFilter
 
 [Components](../modules/components.md).CustomerFilter
 
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
-
 ## Hierarchy
 
-* [*BaseFilter*](components.basefilter.md)<ItemType\>
+* [*BaseFilter*](components.basefilter.md)
 
   ↳ **CustomerFilter**
 
@@ -25,9 +18,10 @@ Name | Default |
 
 ### Properties
 
-- [\_selectedKeys](components.customerfilter.md#_selectedkeys)
-- [fieldName](components.customerfilter.md#fieldname)
+- [keyFieldName](components.customerfilter.md#keyfieldname)
 - [name](components.customerfilter.md#name)
+- [selectedKeys](components.customerfilter.md#selectedkeys)
+- [valueFieldName](components.customerfilter.md#valuefieldname)
 
 ### Methods
 
@@ -38,43 +32,31 @@ Name | Default |
 
 ### constructor
 
-\+ **new CustomerFilter**<ItemType, KeyType\>(`fieldName`: *string*, `name`: *string*): [*CustomerFilter*](components.customerfilter.md)<ItemType, KeyType\>
+\+ **new CustomerFilter**(`name`: *string*, `keyFieldName`: *string*, `valueFieldName`: *string*): [*CustomerFilter*](components.customerfilter.md)
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
+Constructor for `CustomerFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`fieldName` | *string* |
-`name` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | *string* | Name   |
+`keyFieldName` | *string* | Field name for the item key   |
+`valueFieldName` | *string* | Field name for the item value    |
 
-**Returns:** [*CustomerFilter*](components.customerfilter.md)<ItemType, KeyType\>
+**Returns:** [*CustomerFilter*](components.customerfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/CustomerFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/CustomerFilter.ts#L13)
+Defined in: [components/FilterPanel/Filters/CustomerFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/CustomerFilter.ts#L11)
 
 ## Properties
 
-### \_selectedKeys
+### keyFieldName
 
-• `Private` **\_selectedKeys**: KeyType[]
+• **keyFieldName**: *string*
 
-Defined in: [client/components/FilterPanel/Filters/CustomerFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/CustomerFilter.ts#L13)
-
-___
-
-### fieldName
-
-• **fieldName**: *string*
-
-Inherited from: [BaseFilter](components.basefilter.md).[fieldName](components.basefilter.md#fieldname)
+Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
 ___
 
@@ -84,40 +66,62 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefilter.md#name)
 
+___
+
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
+### valueFieldName
+
+• `Optional` **valueFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
+
 ## Methods
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items`: *any*[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the CustomerFilter
+Intialize the `CustomerFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items` | *any*[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/CustomerFilter.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/CustomerFilter.ts#L24)
+Defined in: [components/FilterPanel/Filters/CustomerFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/CustomerFilter.ts#L28)
 
 ___
 
 ### setDefaults
 
-▸ **setDefaults**(`values`: { [key: string]: KeyType[];  }): [*CustomerFilter*](components.customerfilter.md)<ItemType, KeyType\>
+▸ **setDefaults**(`values`: *any*): [*CustomerFilter*](components.customerfilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *object* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*CustomerFilter*](components.customerfilter.md)<ItemType, KeyType\>
+**Returns:** [*CustomerFilter*](components.customerfilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+this
 
-Defined in: [client/components/FilterPanel/Filters/CustomerFilter.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/CustomerFilter.ts#L42)
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

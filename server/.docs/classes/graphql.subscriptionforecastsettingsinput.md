@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / SubscriptionForecastSettingsInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionForecastSettingsInput
 
 # Class: SubscriptionForecastSettingsInput
 
-[graphql](../modules/graphql.md).SubscriptionForecastSettingsInput
+[GraphQL](../modules/graphql.md).SubscriptionForecastSettingsInput
 
 ## Table of contents
 
@@ -29,7 +29,7 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L82)
+Defined in: [graphql/resolvers/subscription/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L85)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **notifications**: *number*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L85)
+Defined in: [graphql/resolvers/subscription/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L88)

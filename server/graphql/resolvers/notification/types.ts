@@ -50,7 +50,7 @@ registerEnumType(NotificationType, {
 })
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a Notification',
@@ -74,7 +74,7 @@ export class Notification {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description:

@@ -1,23 +1,4 @@
 .root {
-  .container {
-    margin: 8px 0 0 0;
-
-    .progress {
-      padding: 10px;
-      display: flex;
-      flex-direction: row;
-
-      .icon {
-        padding: 8px 0 0 0;
-        font-size: 36px;
-      }
-
-      .indicator {
-        margin: 0 0 0 18px;
-      }
-    }
-  }
-
   [class*='ms-Pivot-link']:disabled {
     opacity: 0.5;
     -webkit-transition: opacity 1s ease-in-out;
@@ -27,9 +8,8 @@
     transition: opacity 1s ease-in-out;
   }
 
-
   [class*='ms-Pivot-link'] {
-    opacity: 1.0;
+    opacity: 1;
     -webkit-transition: opacity 1s ease-in-out;
     -moz-transition: opacity 1s ease-in-out;
     -ms-transition: opacity 1s ease-in-out;

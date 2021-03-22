@@ -1,32 +1,29 @@
 /* eslint-disable tsdoc/syntax */
-import { usePermissions } from 'hooks'
 import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
-import { isMobile } from 'react-device-detect'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
+import { useNavItem } from './useNavItem'
 
 /**
  * @category Navigation
  */
-export const NavItem: FunctionComponent<INavItemProps> = (
-  props: INavItemProps
-) => {
-  const { hasPermission } = usePermissions()
-  if (!hasPermission(props.permission)) return null
-  let className = styles.root
-  if (isMobile) className += ` ${styles.mobile}`
+export const NavItem: React.FC<INavItemProps> = (props) => {
+  const { className, onClick, shouldRender } = useNavItem(props)
   return (
-    <li className={className}>
-      <NavLink
-        to={props.to}
-        className={styles.link}
-        activeClassName={styles.active}>
-        <Icon iconName={props.iconName} className={styles.navIcon} />
-        <span className={styles.navText}>{props.text}</span>
-      </NavLink>
-    </li>
+    shouldRender && (
+      <li className={className}>
+        <NavLink
+          to={props.to}
+          className={styles.link}
+          activeClassName={styles.active}
+          onClick={onClick}>
+          <Icon iconName={props.iconName} className={styles.icon} />
+          <span className={styles.text}>{props.text}</span>
+        </NavLink>
+      </li>
+    )
   )
 }
 

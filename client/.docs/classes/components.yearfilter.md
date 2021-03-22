@@ -1,19 +1,12 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / YearFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / YearFilter
 
-# Class: YearFilter<ItemType, KeyType\>
+# Class: YearFilter
 
 [Components](../modules/components.md).YearFilter
 
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
-
 ## Hierarchy
 
-* [*BaseFilter*](components.basefilter.md)<ItemType\>
+* [*BaseFilter*](components.basefilter.md)
 
   ↳ **YearFilter**
 
@@ -25,9 +18,10 @@ Name | Default |
 
 ### Properties
 
-- [\_selectedKeys](components.yearfilter.md#_selectedkeys)
-- [fieldName](components.yearfilter.md#fieldname)
+- [keyFieldName](components.yearfilter.md#keyfieldname)
 - [name](components.yearfilter.md#name)
+- [selectedKeys](components.yearfilter.md#selectedkeys)
+- [valueFieldName](components.yearfilter.md#valuefieldname)
 
 ### Methods
 
@@ -38,43 +32,30 @@ Name | Default |
 
 ### constructor
 
-\+ **new YearFilter**<ItemType, KeyType\>(`fieldName`: *string*, `name`: *string*): [*YearFilter*](components.yearfilter.md)<ItemType, KeyType\>
+\+ **new YearFilter**(`name`: *string*, `keyFieldName`: *string*): [*YearFilter*](components.yearfilter.md)
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
+Constructor for `YearFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`fieldName` | *string* |
-`name` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | *string* | Filter name   |
+`keyFieldName` | *string* | Field name for the item key    |
 
-**Returns:** [*YearFilter*](components.yearfilter.md)<ItemType, KeyType\>
+**Returns:** [*YearFilter*](components.yearfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L13)
+Defined in: [components/FilterPanel/Filters/YearFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L10)
 
 ## Properties
 
-### \_selectedKeys
+### keyFieldName
 
-• `Private` **\_selectedKeys**: KeyType[]
+• **keyFieldName**: *string*
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L13)
-
-___
-
-### fieldName
-
-• **fieldName**: *string*
-
-Inherited from: [BaseFilter](components.basefilter.md).[fieldName](components.basefilter.md#fieldname)
+Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
 ___
 
@@ -84,40 +65,62 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefilter.md#name)
 
+___
+
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
+### valueFieldName
+
+• `Optional` **valueFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
+
 ## Methods
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items`: *any*[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the YearFilter
+Intialize the `YearFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items` | *any*[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L24)
+Defined in: [components/FilterPanel/Filters/YearFilter.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L26)
 
 ___
 
 ### setDefaults
 
-▸ **setDefaults**(`values`: { [key: string]: KeyType[];  }): [*YearFilter*](components.yearfilter.md)<ItemType, KeyType\>
+▸ **setDefaults**(`values`: *any*): [*YearFilter*](components.yearfilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *object* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*YearFilter*](components.yearfilter.md)<ItemType, KeyType\>
+**Returns:** [*YearFilter*](components.yearfilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+this
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L42)
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

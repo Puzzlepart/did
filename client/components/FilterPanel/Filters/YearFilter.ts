@@ -1,46 +1,36 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { contains, unique } from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import { unique } from 'underscore'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
 /**
  * @category FilterPanel
  */
-export class YearFilter<
-  ItemType = any,
-  KeyType = any
-> extends BaseFilter<ItemType> {
-  private _selectedKeys: KeyType[]
-
-  constructor(public fieldName: string, public name: string) {
-    super(fieldName, name)
+export class YearFilter extends BaseFilter {
+  /**
+   * Constructor for `YearFilter`
+   *
+   * @param name - Filter name
+   * @param keyFieldName - Field name for the item key
+   */
+  constructor(name: string, keyFieldName: string) {
+    super(name, keyFieldName)
   }
 
   /**
-   * Intialize the YearFilter
+   * Intialize the `YearFilter`
    *
    * @param items - Items
    */
-  public initialize(items: ItemType[]): IFilter {
+  public initialize(items: any[]): IFilter {
     const years = unique(
-      items.map((item_) => getValue(item_, this.fieldName, null))
+      items.map((item_) => getValue(item_, this.keyFieldName, null))
     ).sort()
     const _items = years.map((year) => ({
       key: year,
       value: year
     }))
-    return {
-      key: this.fieldName,
-      name: this.name,
-      items: _items,
-      selected: _items.filter((index) =>
-        contains(this._selectedKeys, index.key)
-      )
-    }
-  }
-
-  public setDefaults(values: { [key: string]: KeyType[] }) {
-    this._selectedKeys = getValue(values, this.fieldName) ?? []
-    return this
+    return super.initialize(_items)
   }
 }

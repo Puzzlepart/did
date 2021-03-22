@@ -24,7 +24,7 @@ const INITIAL_MODEL: IContextualMenuItem = {
 /**
  * @category Reports
  */
-export const SaveFilterForm = (props: ISaveFilterFormProps) => {
+export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
   const [model, setModel] = useState<IContextualMenuItem>(INITIAL_MODEL)

@@ -1,15 +1,13 @@
 import { Autocomplete } from 'components'
 import { Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
-import { pick } from 'underscore'
+import React from 'react'
+import { omit } from 'underscore'
 import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 import { useUserForm } from './useUserForm'
 
-export const UserForm: FunctionComponent<IUserFormProps> = (
-  props: IUserFormProps
-) => {
+export const UserForm: React.FC<IUserFormProps> = (props) => {
   const {
     inputProps,
     activeDirectoryUsers,
@@ -23,9 +21,8 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
 
   return (
     <Panel
-      {...pick(props, 'onDismiss', 'headerText', 'isOpen')}
+      {...omit(props, 'user')}
       className={styles.root}
-      customWidth='450px'
       isLightDismiss={true}>
       {!props.user && (
         <div className={styles.inputContainer}>

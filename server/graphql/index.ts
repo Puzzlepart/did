@@ -1,3 +1,11 @@
+/* eslint-disable unicorn/empty-brace-spaces */
+/* eslint-disable tsdoc/syntax */
+/**
+ * [GraphQL](https://graphql.org/) server implementation using
+ * [apollo-server-express](https://www.npmjs.com/package/apollo-server-express)
+ *
+ * @module GraphQL
+ */
 import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting
@@ -34,12 +42,14 @@ import {
 const debug = createDebug('graphql')
 
 /**
- * Generate GraphQL schema using type-graphql
+ * Generate [GraphQL](https://graphql.org/) schema using
+ * [type-graphql](https://www.npmjs.com/package/type-graphql)
  *
- * * Setting up the schema to use Dependency injection (https://typegraphql.com/docs/dependency-injection.html)
+ * * Setting up the schema to use Dependency injection using
+ *  [typedi](https://www.npmjs.com/package/typedi) (https://typegraphql.com/docs/dependency-injection.html)
  * * Turns of validation
  * * Sets auth checker
- * * Registers GraphQLDateTime scalar type
+ * * Registers `GraphQLDateTime` scalar type
  *
  * @see https://typegraphql.com/
  */
@@ -111,10 +121,17 @@ export function generateClientInfo({
 }
 
 /**
- * Set up GraphQL for the Express Application
+ * Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
+ * application
  *
- * * Sets up reporting to Apollo Studio
+ * * Sets up reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs)
  * * Sets up plugin to reset the container for each request
+ *
+ * #### Reporting needs the following environment keys: ####
+ *
+ * * `APOLLO_KEY`
+ * * `APOLLO_GRAPH_VARIANT`
+ * * `APOLLO_SCHEMA_REPORTING`
  *
  * @param app - Express application
  * @param client - Mongo client
@@ -126,6 +143,12 @@ export const setupGraphQL = async (
   try {
     const schema = await generateGraphQLSchema()
     const server = new ApolloServer({
+      logger: {
+        debug: () => null,
+        info: () => null,
+        warn: () => null,
+        error: () => null
+      },
       schema,
       rootValue: global,
       context: ({ req }) => createContext(req, client),

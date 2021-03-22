@@ -7,5 +7,9 @@
   "hideGenerator": true,
   "gitRevision": "dev",
   "tsconfig": "./client/tsconfig.json",
-  "categorizeByGroup": true
+  "categorizeByGroup": true,
+  "entryPoints": [
+    "shared/config/security/index.ts",
+    "shared/utils/date.ts"
+  ]
 }

@@ -3,18 +3,18 @@
 /**
  * Main entry point for the App
  *
- * @module .
+ * @module /
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
+import { IAppProps } from 'app/types'
 import 'core-js/stable'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import i18next from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
-import { App } from './app'
-import { ContextUser, IAppContext } from './AppContext'
+import { App, ContextUser } from './app'
 import { $usercontext, client } from './graphql'
 import './i18n'
 
@@ -29,31 +29,31 @@ export const boostrap = async () => {
   initializeIcons()
 
   /**
-   * Get app context
+   * Initialize app
    */
-  const getContext = async (): Promise<IAppContext> => {
-    const context: IAppContext = {}
+  const initializeApp = async (): Promise<IAppProps> => {
+    const _: IAppProps = {}
     try {
-      const { data } = await client.query<Partial<IAppContext>>({
+      const { data } = await client.query<Partial<IAppProps>>({
         query: $usercontext,
         fetchPolicy: 'cache-first'
       })
-      context.user = new ContextUser(data.user)
-      context.subscription = data?.subscription
-      context.authProviders = data?.authProviders
-      return context
+      _.user = new ContextUser(data.user)
+      _.subscription = data?.subscription
+      _.authProviders = data?.authProviders
+      return _
     } catch {
       return { user: new ContextUser() }
     }
   }
 
-  const context = await getContext()
-  DateUtils.setup(context.user.preferredLanguage)
-  i18next.changeLanguage(context.user.preferredLanguage)
+  const init = await initializeApp()
+  $date.setup(init.user.preferredLanguage)
+  i18next.changeLanguage(init.user.preferredLanguage)
 
   ReactDom.render(
     <ApolloProvider client={client}>
-      <App {...context} />
+      <App {...init} />
     </ApolloProvider>,
     document.querySelector('#app')
   )

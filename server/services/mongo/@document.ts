@@ -11,12 +11,12 @@ export class MongoDocumentService<T> {
   public collection: Collection<T>
 
   /**
-   * Constructs a new Mongo Document Service
+   * Constructer for `MongoDocumentService`
    *
-   * Specify cachePrefix to use an underlying CacheService
+   * Specify `cachePrefix` to use an underlying `CacheService`
    *
-   * @param context - Injected context through typedi
-   * @param collectionName - Colletion name
+   * @param context - Injected context through `typedi`
+   * @param collectionName - Collection name
    * @param cachePrefix - Cache prefix
    * @param database - Database
    */

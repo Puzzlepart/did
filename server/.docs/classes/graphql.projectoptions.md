@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / ProjectOptions
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ProjectOptions
 
 # Class: ProjectOptions
 
-[graphql](../modules/graphql.md).ProjectOptions
+[GraphQL](../modules/graphql.md).ProjectOptions
 
 ## Table of contents
 
@@ -28,4 +28,4 @@
 
 • `Optional` **createOutlookCategory**: *boolean*
 
-Defined in: [server/graphql/resolvers/project/types.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L108)
+Defined in: [graphql/resolvers/project/types.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L108)

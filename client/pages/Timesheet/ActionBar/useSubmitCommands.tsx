@@ -1,10 +1,12 @@
-import { AppContext } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import {
   IContextualMenuItem,
   IContextualMenuProps,
   PrimaryButton
 } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
 import { first, omit } from 'underscore'
 import { TimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
@@ -29,19 +31,22 @@ const submitItemBaseProps = (
  * Use submit commands
  */
 export function useSubmitCommands() {
-  const { subscription } = useContext(AppContext)
-  const context = useContext(TimesheetContext)
+  const { t } = useTranslation()
+  const { subscription } = useAppContext()
+  const { state, onSubmitPeriod, onUnsubmitPeriod } = useContext(
+    TimesheetContext
+  )
   return {
     key: 'SUBMIT_COMMANDS',
     onRender: () => {
-      if (!!context.error || !context.selectedPeriod) return null
+      if (!!state.error || !state.selectedPeriod) return null
       const {
         isComplete,
         isForecast,
         isForecasted,
         isConfirmed,
         isPast
-      } = context.selectedPeriod
+      } = state.selectedPeriod
       const cmd: { [key: string]: IContextualMenuItem } = {
         FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
           ...(submitItemBaseProps(
@@ -49,10 +54,10 @@ export function useSubmitCommands() {
             'BufferTimeBefore'
           ) as IContextualMenuItem),
           onClick: () => {
-            context.onSubmitPeriod(true)
+            onSubmitPeriod(true)
           },
-          text: context.t('timesheet.forecastHoursText'),
-          secondaryText: context.t('timesheet.forecastHoursSecondaryText')
+          text: t('timesheet.forecastHoursText'),
+          secondaryText: t('timesheet.forecastHoursSecondaryText')
         },
         UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
           ...(submitItemBaseProps(
@@ -60,10 +65,10 @@ export function useSubmitCommands() {
             'Cancel'
           ) as IContextualMenuItem),
           onClick: () => {
-            context.onUnsubmitPeriod(true)
+            onUnsubmitPeriod(true)
           },
-          text: context.t('timesheet.unforecastHoursText'),
-          secondaryText: context.t('timesheet.unforecastHoursSecondaryText')
+          text: t('timesheet.unforecastHoursText'),
+          secondaryText: t('timesheet.unforecastHoursSecondaryText')
         },
         CONFIRM_PERIOD: {
           ...(submitItemBaseProps(
@@ -72,10 +77,10 @@ export function useSubmitCommands() {
           ) as IContextualMenuItem),
           className: styles.confirmPeriodButton,
           onClick: () => {
-            context.onSubmitPeriod(false)
+            onSubmitPeriod(false)
           },
-          text: context.t('timesheet.confirmHoursText'),
-          secondaryText: context.t('timesheet.confirmHoursSecondaryText')
+          text: t('timesheet.confirmHoursText'),
+          secondaryText: t('timesheet.confirmHoursSecondaryText')
         },
         UNCONFIRM_PERIOD: {
           ...(submitItemBaseProps(
@@ -84,10 +89,10 @@ export function useSubmitCommands() {
           ) as IContextualMenuItem),
           className: styles.unconfirmPeriodButton,
           onClick: () => {
-            context.onUnsubmitPeriod(false)
+            onUnsubmitPeriod(false)
           },
-          text: context.t('timesheet.unconfirmHoursText'),
-          secondaryText: context.t('timesheet.unconfirmHoursSecondaryText')
+          text: t('timesheet.unconfirmHoursText'),
+          secondaryText: t('timesheet.unconfirmHoursSecondaryText')
         }
       }
 
@@ -118,22 +123,41 @@ export function useSubmitCommands() {
       commands = commands
         .filter((c) => c)
         .map((c) => ({
-          disabled: !!context.loading,
+          disabled: !!state.loading,
           ...c
         }))
 
       let menuProps: IContextualMenuProps = null
       if (commands.length > 1) {
         menuProps = {
-          items: commands.map((cmd, index) => ({
-            ...(omit(cmd, 'buttonStyles', 'iconProps') as IContextualMenuItem),
-            isChecked: index === 0
+          calloutProps: {
+            calloutWidth: 280
+          },
+          items: commands.map((command_) => ({
+            ...(omit(command_, 'buttonStyles') as IContextualMenuItem),
+            itemProps: {
+              styles: {
+                secondaryText: {
+                  fontSize: 10,
+                  color: 'rgb(96, 94, 92)'
+                },
+                checkmarkIcon: {
+                  display: 'none'
+                }
+              }
+            }
           }))
         }
       }
 
       return (
         <PrimaryButton
+          style={{
+            width: isMobile ? 160 : 180,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }}
           primary={false}
           {...(first(commands) as any)}
           menuProps={menuProps}

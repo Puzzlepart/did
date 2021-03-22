@@ -15,9 +15,13 @@ fragment TimeEntryFragment on TimeEntry {
     name
   }
   resource {
+    id
     givenName
     surname
     mail
     displayName
+    photo {
+      base64
+    }
   }
 }

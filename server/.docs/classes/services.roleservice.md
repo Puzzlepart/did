@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / RoleService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / RoleService
 
 # Class: RoleService
 
-[services](../modules/services.md).RoleService
+[Services](../modules/services.md).RoleService
+
+Role service
 
 ## Hierarchy
 
@@ -40,25 +42,31 @@
 
 ### constructor
 
-\+ **new RoleService**(`context`: [*Context*](graphql_context.context.md)): [*RoleService*](services.roleservice.md)
+\+ **new RoleService**(`context`: *Context*): [*RoleService*](services.roleservice.md)
+
+Constructor for `RoleService`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/role.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L9)
+Overrides: void
+
+Defined in: [services/mongo/role.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L16)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -66,13 +74,17 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*Role*](graphql.role.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -80,11 +92,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -102,7 +118,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Defined in: [server/services/mongo/role.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L47)
+Defined in: [services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L59)
 
 ___
 
@@ -120,7 +136,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L74)
+Defined in: [services/mongo/role.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L86)
 
 ___
 
@@ -147,7 +163,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -165,7 +183,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)\>
 
-Defined in: [server/services/mongo/role.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L33)
+Defined in: [services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L45)
 
 ___
 
@@ -183,7 +201,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/services/mongo/role.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L19)
+Defined in: [services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L31)
 
 ___
 
@@ -203,7 +221,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -225,7 +245,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -246,7 +268,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 
 ___
 
@@ -264,4 +288,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L61)
+Defined in: [services/mongo/role.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L73)

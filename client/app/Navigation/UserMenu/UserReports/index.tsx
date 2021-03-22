@@ -1,16 +1,16 @@
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
-import { ChoiceGroup, DefaultButton, Icon, Panel } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import { ChoiceGroup, DefaultButton, Panel } from 'office-ui-fabric-react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from '../UserMenu.module.scss'
+import { MenuItem } from '../MenuItem'
 import { useUserReports } from './useUserReports'
 
-export const UserReports: FunctionComponent = () => {
+export const UserReports: React.FC = () => {
   const { t } = useTranslation()
   const {
-    queryPreset,
-    setQueryPreset,
+    preset,
+    setPreset,
     queries,
     showPanel,
     togglePanel,
@@ -20,28 +20,29 @@ export const UserReports: FunctionComponent = () => {
 
   const { onExport } = useExcelExport({
     items: query?.data,
-    fileName: queryPreset?.exportFileName,
+    fileName: preset?.exportFileName,
     columns
   })
 
   return (
     <>
-      <a href='#' onClick={togglePanel} className={styles.menuItem}>
-        <Icon iconName='ReportDocument' className={styles.icon} />
-        <span>{t('common.userReports')}</span>
-      </a>
+      <MenuItem
+        iconProps={{ iconName: 'ReportDocument' }}
+        text={t('common.userReports')}
+        onClick={togglePanel}
+      />
       <Panel
         headerText={t('common.userReports')}
         isOpen={showPanel}
         onDismiss={togglePanel}
         isLightDismiss={true}>
         <ChoiceGroup
-          defaultSelectedKey={queryPreset?.key}
-          onChange={setQueryPreset}
+          defaultSelectedKey={preset?.key}
+          onChange={setPreset}
           options={queries}
         />
         <UserMessage
-          hidden={!queryPreset || query.loading}
+          hidden={!preset || query.loading}
           containerStyle={{ marginTop: 15 }}
           iconName='ReminderTime'
           text={t('common.userReportSummary', query)}
@@ -51,7 +52,7 @@ export const UserReports: FunctionComponent = () => {
           styles={{ root: { marginTop: 20, width: '100%' } }}
           iconProps={{ iconName: 'ExcelDocument' }}
           onClick={onExport}
-          disabled={!queryPreset || query.loading}
+          disabled={!preset || query.loading}
         />
       </Panel>
     </>

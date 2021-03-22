@@ -1,57 +1,33 @@
 /* eslint-disable tsdoc/syntax */
-import { useMutation, useQuery } from '@apollo/client'
-import { List } from 'components'
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { LabelObject } from 'types'
-import { LabelColumns as columns } from './columns'
-import $deleteLabel from './deleteLabel.gql'
-import { ILabelFormProps, LabelForm } from './LabelForm'
-import $labels from './labels.gql'
+import { List, TabComponent } from 'components'
+import React from 'react'
+import { LabelForm } from './LabelForm'
+import { useLabels } from './useLabels'
 
 /**
- * @category Function Component
+ * @category Tab Component
  */
-export const Labels = () => {
-  const { t } = useTranslation()
-  const { data, refetch } = useQuery($labels, {
-    fetchPolicy: 'cache-and-network'
-  })
-  const [deleteLabel] = useMutation($deleteLabel)
-  const [form, setForm] = useState<ILabelFormProps>(null)
-
-  const onEdit = (label: LabelObject) => setForm({ label })
-  const onDelete = (label: LabelObject) =>
-    deleteLabel({ variables: { name: label.name } }).then(refetch)
-
-  useEffect(() => {
-    refetch()
-  }, [refetch, form])
-
+export const Labels: TabComponent = () => {
+  const { columns, form, setForm, query, t } = useLabels()
   return (
     <>
       <List
-        items={data?.labels || []}
-        columns={columns(onEdit, onDelete, t)}
+        enableShimmer={query.loading}
+        items={query.data?.labels}
+        columns={columns}
         commandBar={{
           items: [
             {
               key: 'ADD_NEW_LABEL',
               name: t('admin.addNewLabel'),
               iconProps: { iconName: 'Add' },
-              onClick: () => setForm({})
+              onClick: () => setForm({ isOpen: true })
             }
           ],
           farItems: []
         }}
       />
-      {form && (
-        <LabelForm
-          {...form}
-          onSave={() => refetch().then(() => setForm(null))}
-          onDismiss={() => setForm(null)}
-        />
-      )}
+      <LabelForm {...form} />
     </>
   )
 }

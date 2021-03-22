@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / CustomerResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / CustomerResolver
 
 # Class: CustomerResolver
 
-[graphql](../modules/graphql.md).CustomerResolver
+[GraphQL](../modules/graphql.md).CustomerResolver
 
 Resolver for `Customer`.
 
@@ -39,13 +39,13 @@ Name | Type | Description |
 
 **Returns:** [*CustomerResolver*](graphql.customerresolver.md)
 
-Defined in: [server/graphql/resolvers/customer/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L23)
+Defined in: [graphql/resolvers/customer/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L24)
 
 ## Methods
 
 ### createOrUpdateCustomer
 
-▸ **createOrUpdateCustomer**(`customer`: [*CustomerInput*](graphql.customerinput.md), `update`: *boolean*): *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
+▸ **createOrUpdateCustomer**(`customer`: [*CustomerInput*](graphql.customerinput.md), `update`: *boolean*): *Promise*<{ `success`: *boolean* = true }\>
 
 Create or update customer
 
@@ -56,9 +56,9 @@ Name | Type | Description |
 `customer` | [*CustomerInput*](graphql.customerinput.md) | Customer   |
 `update` | *boolean* | Update    |
 
-**Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
+**Returns:** *Promise*<{ `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L50)
+Defined in: [graphql/resolvers/customer/index.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L51)
 
 ___
 
@@ -76,7 +76,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L38)
+Defined in: [graphql/resolvers/customer/index.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L39)
 
 ___
 
@@ -94,4 +94,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L68)
+Defined in: [graphql/resolvers/customer/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L69)

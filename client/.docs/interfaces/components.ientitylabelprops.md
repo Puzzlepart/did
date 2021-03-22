@@ -1,4 +1,4 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / IEntityLabelProps
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / IEntityLabelProps
 
 # Interface: IEntityLabelProps
 
@@ -9,7 +9,6 @@
 ### Properties
 
 - [label](components.ientitylabelprops.md#label)
-- [size](components.ientitylabelprops.md#size)
 
 ## Properties
 
@@ -17,12 +16,4 @@
 
 • **label**: *LabelObject* \| *LabelInput*
 
-Defined in: [client/components/EntityLabel/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.tsx#L8)
-
-___
-
-### size
-
-• `Optional` **size**: *xsmall* \| *small* \| *medium* \| *large*
-
-Defined in: [client/components/EntityLabel/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.tsx#L9)
+Defined in: [components/EntityLabel/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.tsx#L8)

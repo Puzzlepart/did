@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
+import { PermissionScope } from '../../../../shared/config/security'
 import {
   MSGraphService,
   SubscriptionService,
@@ -79,7 +80,7 @@ export class UserResolver {
    *
    * @param query - Query
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Query(() => [User], { description: 'Get users' })
   users(
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
@@ -93,7 +94,7 @@ export class UserResolver {
    * @param user - User
    * @param update - Update
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Add or update user' })
   async addOrUpdateUser(
     @Arg('user', () => UserInput) user: UserInput,
@@ -115,7 +116,7 @@ export class UserResolver {
    *
    * @param users - Users
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Add users' })
   async addUsers(
     @Arg('users', () => [UserInput]) users: UserInput[]

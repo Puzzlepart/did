@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { sign } from 'jsonwebtoken'
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
@@ -7,14 +8,25 @@ import { ApiToken } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
 
+/**
+ * API token service
+ *
+ * @extends MongoDocumentService
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
+  /**
+   * Constructor for `ApiTokenService`
+   *
+   * @param context - Injected context through `typedi`
+   */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(
       context,
       'api_tokens',
       null,
-      context?.mongoClient?.db(environment('MONGO_DB_DB_NAME'))
+      context?.mcl?.db(environment('MONGO_DB_DB_NAME'))
     )
   }
 

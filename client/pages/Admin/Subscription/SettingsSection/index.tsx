@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 
-import { ToggleSection } from 'components/ToggleSection'
+import { TabComponent } from 'components'
 import { getValue as get } from 'helpers'
-import { Slider, Toggle } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import { Slider, TextField, Toggle } from 'office-ui-fabric-react'
+import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
@@ -12,28 +12,33 @@ import { ISettingsSectionProps } from './types'
 /**
  * @category SubscriptionSettings
  */
-export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
-  props: ISettingsSectionProps
-) => {
+export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
   const { settings, onChange } = useContext(SubscriptionContext)
   return (
-    <ToggleSection
-      className={styles.root}
-      id={props.id}
-      headerText={props.name}>
+    <div className={styles.root}>
       {props.fields.map((field) => {
         const fieldProps = { ...field.props } as any
         fieldProps.disabled =
           field.disabledIf && field.disabledIf(settings || {})
         fieldProps.hidden = field.hiddenIf && field.hiddenIf(settings || {})
-        const key = `${props.id}.${field.id}`
+        const key = `${props.itemKey}.${field.id}`
         let fieldElement: JSX.Element
         switch (field.type) {
+          case 'text':
+            fieldElement = (
+              <TextField
+                {...fieldProps}
+                defaultValue={fieldProps.defaultValue}
+                onChange={(_event, value) => onChange(key, value)}
+              />
+            )
+            break
           case 'bool':
             fieldElement = (
               <Toggle
                 {...fieldProps}
                 defaultChecked={get(settings, key, false)}
+                inlineLabel={true}
                 onChange={(_event, value) => onChange(key, value)}
               />
             )
@@ -65,6 +70,6 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
           </div>
         )
       })}
-    </ToggleSection>
+    </div>
   )
 }

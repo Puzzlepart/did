@@ -10,7 +10,8 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, 'docs: ')"
     strategy:
       matrix:
         node-version: [12.18.3]
@@ -23,7 +24,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: node_modules
+        key: node_modules-${{ hashFiles('**/package.json') }}
+
     - name: Install npm packages
+      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
 

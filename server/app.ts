@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable tsdoc/syntax */
+/**
+ * NodeJS Express App
+ *
+ * @module App
+ */
 require('dotenv').config()
 import bodyParser from 'body-parser'
 import express from 'express'
@@ -20,7 +26,30 @@ import authRoute from './routes/auth'
 import { environment } from './utils'
 
 /**
- * Did Express.js App
+ * Did `express` App
+ *
+ * Defines our `express` app with our middleware
+ * for helmet, passport and redis.
+ *
+ * - Setting up session handling
+ * - Setting [hbs](https://www.npmjs.com/package/hbs) as view engine
+ * - Setting up static assets
+ * - Setting up auth with [passport](https://www.npmjs.com/package/passport)
+ * - Setting up [GraphQL](https://graphql.org/)
+ * - Setting up routes
+ * - Setting up error handling
+ *
+ * Uses the following modules directly:
+ *
+ * * [body-parser](https://www.npmjs.com/package/body-parser)
+ * * [express](https://www.npmjs.com/package/express)
+ * * [express-bearer-token](https://www.npmjs.com/package/express-bearer-token)
+ * * [express-favicon](https://www.npmjs.com/package/express-favicon)
+ * * [http-errors](https://www.npmjs.com/package/http-errors)
+ * * [passport](https://www.npmjs.com/package/passport)
+ * * [mongodb](https://www.npmjs.com/package/mongodb)
+ * * [morgan](https://www.npmjs.com/package/morgan)
+ * * [underscore](https://www.npmjs.com/package/underscore)
  */
 export class App {
   /**
@@ -38,7 +67,7 @@ export class App {
    */
   constructor() {
     this.instance = express()
-    this.instance.use(helmetMiddleware)
+    this.instance.use(helmetMiddleware())
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )
@@ -57,7 +86,7 @@ export class App {
    * * Setting up view engine
    * * Setting up static assets
    * * Setting up authentication
-   * * Setting up our GraphQL API
+   * * Setting up our [GraphQL](https://graphql.org/) API
    * * Setting up routes
    * * Setting up error handling
    */

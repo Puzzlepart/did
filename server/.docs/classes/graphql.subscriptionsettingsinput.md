@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / SubscriptionSettingsInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionSettingsInput
 
 # Class: SubscriptionSettingsInput
 
-[graphql](../modules/graphql.md).SubscriptionSettingsInput
+[GraphQL](../modules/graphql.md).SubscriptionSettingsInput
 
 ## Table of contents
 
@@ -29,7 +29,7 @@
 
 • `Optional` **adsync**: [*SubscriptionADSyncSettingsInput*](graphql.subscriptionadsyncsettingsinput.md)
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L111)
+Defined in: [graphql/resolvers/subscription/types.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L117)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **forecast**: [*SubscriptionForecastSettingsInput*](graphql.subscriptionforecastsettingsinput.md)
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L108)
+Defined in: [graphql/resolvers/subscription/types.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L114)

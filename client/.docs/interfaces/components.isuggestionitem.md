@@ -1,4 +1,4 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / ISuggestionItem
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / ISuggestionItem
 
 # Interface: ISuggestionItem<T\>
 
@@ -20,65 +20,23 @@ Name | Default |
 
 ### Properties
 
-- [ariaLabel](components.isuggestionitem.md#arialabel)
 - [data](components.isuggestionitem.md#data)
-- [disabled](components.isuggestionitem.md#disabled)
-- [hidden](components.isuggestionitem.md#hidden)
 - [iconName](components.isuggestionitem.md#iconname)
-- [id](components.isuggestionitem.md#id)
-- [index](components.isuggestionitem.md#index)
 - [isSelected](components.isuggestionitem.md#isselected)
-- [itemType](components.isuggestionitem.md#itemtype)
-- [key](components.isuggestionitem.md#key)
 - [searchValue](components.isuggestionitem.md#searchvalue)
 - [secondaryText](components.isuggestionitem.md#secondarytext)
-- [selected](components.isuggestionitem.md#selected)
 - [tag](components.isuggestionitem.md#tag)
-- [text](components.isuggestionitem.md#text)
-- [title](components.isuggestionitem.md#title)
 - [type](components.isuggestionitem.md#type)
 
 ## Properties
-
-### ariaLabel
-
-• `Optional` **ariaLabel**: *string*
-
-The aria label for the dropdown option. If not present, the `text` will be used.
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:29
-
-___
 
 ### data
 
 • `Optional` **data**: T
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L14)
+Overrides: void
 
-___
-
-### disabled
-
-• `Optional` **disabled**: *boolean*
-
-Whether the option is disabled
-
-**`defaultvalue`** false
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:36
-
-___
-
-### hidden
-
-• `Optional` **hidden**: *boolean*
-
-Defines whether the option is hidden or not.
-
-**`defaultvalue`** false
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:41
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L14)
 
 ___
 
@@ -86,27 +44,7 @@ ___
 
 • `Optional` **iconName**: *string*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L11)
-
-___
-
-### id
-
-• `Optional` **id**: *string*
-
-ID attribute associated with this option
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:9
-
-___
-
-### index
-
-• `Optional` **index**: *number*
-
-Index for this option
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:25
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L11)
 
 ___
 
@@ -114,27 +52,9 @@ ___
 
 • `Optional` **isSelected**: *boolean*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L15)
+Overrides: void
 
-___
-
-### itemType
-
-• `Optional` **itemType**: SelectableOptionMenuItemType
-
-Text to render for this option
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:21
-
-___
-
-### key
-
-• **key**: *string* \| *number*
-
-Arbitrary string associated with this option.
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:5
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L15)
 
 ___
 
@@ -142,7 +62,7 @@ ___
 
 • **searchValue**: *string*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L9)
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L9)
 
 ___
 
@@ -150,17 +70,7 @@ ___
 
 • `Optional` **secondaryText**: *string*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L10)
-
-___
-
-### selected
-
-• `Optional` **selected**: *boolean*
-
-If option is selected.
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:31
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L10)
 
 ___
 
@@ -168,27 +78,7 @@ ___
 
 • `Optional` **tag**: *any*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L13)
-
-___
-
-### text
-
-• **text**: *string*
-
-Text to render for this option
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:13
-
-___
-
-### title
-
-• `Optional` **title**: *string*
-
-Title attribute (built in tooltip) for a given option.
-
-Defined in: node_modules/office-ui-fabric-react/lib/utilities/selectableOption/SelectableOption.types.d.ts:17
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L13)
 
 ___
 
@@ -196,4 +86,4 @@ ___
 
 • `Optional` **type**: *string*
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L12)
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L12)

@@ -1,35 +1,7 @@
+@import '@primer/css/labels/index.scss';
+
 .root {
-  display: inline-block;
-  padding: 4px 8px;
-  margin: 0 4px 0 0;
-  font-size: 0.8em;
-  border-radius: 3px;
-  transition: opacity 0.2s linear;
-  font-weight: 600;
-
-  &.sizeXSmall {
-    padding: 2px 6px;
-    font-size: 0.7em;
-  }
-
-  &.sizeMedium {
-    padding: 6px 10px;
-    font-size: 0.85em;
-    font-weight: normal;
-  }
-
-  &.sizeLarge {
-    padding: 8px 12px;
-    font-size: 1.0em;
-    font-weight: normal;
-  }
-
-  .icon {
-    vertical-align: middle;
-  }
-
-  .text {
-    vertical-align: unset !important;
-    margin: 0 0 0 6px;
-  }
+  @include labels-base;
+  @include labels-large;
+  margin: 4px 4px 4px 0px;
 }

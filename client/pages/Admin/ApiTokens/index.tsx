@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { List, useMessage, UserMessage } from 'components'
+import { List, TabComponent, useMessage, UserMessage } from 'components'
 import { Icon, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -11,9 +11,9 @@ import { isNull } from 'underscore'
 import { ApiTokenForm } from './ApiTokenForm'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import styles from './ApiTokens.module.scss'
-import { ApiTokensColumns as columns } from './columns'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
+import { useColumns } from './useColumns'
 
 /**
  * Component for handling API tokens.
@@ -22,9 +22,9 @@ import $tokens from './tokens.gql'
  * * Create new API tokens
  * * Delete existing API tokens
  *
- * @category Function Component
+ * @category Tab Component
  */
-export const ApiTokens: FunctionComponent = () => {
+export const ApiTokens: TabComponent = () => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
   const [deleteApiToken] = useMutation($deleteApiToken)
@@ -64,6 +64,8 @@ export const ApiTokens: FunctionComponent = () => {
     refetch()
   }
 
+  const columns = useColumns({ onDeleteApiToken })
+
   return (
     <div className={styles.root}>
       {message && <UserMessage {...message} />}
@@ -80,7 +82,7 @@ export const ApiTokens: FunctionComponent = () => {
         </FadeIn>
       )}
       <List
-        columns={columns(onDeleteApiToken, t)}
+        columns={columns}
         items={data?.tokens}
         commandBar={{
           items: [

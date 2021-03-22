@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { Field, InputType } from 'type-graphql'
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'Input object for Event used in Mutation submitPeriod'

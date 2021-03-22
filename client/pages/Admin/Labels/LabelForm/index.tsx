@@ -1,54 +1,20 @@
-import { useMutation } from '@apollo/client'
+import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { IconPicker } from 'components/IconPicker'
 import {
-  DefaultButton,
   Label,
   Panel,
   PanelType,
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React, { useState } from 'react'
-import SketchPicker from 'react-color/lib/components/sketch/Sketch'
-import { useTranslation } from 'react-i18next'
-import { LabelInput } from 'types'
-import { omit } from 'underscore'
-import validator from 'validator'
-import $addOrUpdateLabel from './addOrUpdateLabel.gql'
+import React from 'react'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
+import { useLabelForm } from './useLabelForm'
 
-export const LabelForm = (props: ILabelFormProps) => {
-  const { t } = useTranslation()
-  const [model, setModel] = useState<LabelInput>(
-    props.label || {
-      name: '',
-      description: '',
-      color: '#F8E71C'
-    }
-  )
-  const [colorPickerVisible, setColorPickerVisible] = useState<boolean>(false)
-  const [addOrUpdateLabel] = useMutation($addOrUpdateLabel)
-
-  /**
-   * On save label
-   */
-  const onSave = async () => {
-    await addOrUpdateLabel({
-      variables: {
-        label: omit(model, '__typename'),
-        update: !!props.label
-      }
-    })
-    props.onSave(model)
-  }
-
-  /**
-   * Checks if form is valid
-   */
-  const isFormValid = (): boolean =>
-    !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
+export const LabelForm: React.FC<ILabelFormProps> = (props) => {
+  const { model, setModel, isFormValid, onSave, t } = useLabelForm({ props })
 
   return (
     <Panel
@@ -56,8 +22,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       type={PanelType.smallFixedFar}
       className={styles.root}
       headerText={!!props.label ? t('admin.editLabel') : t('admin.addNewLabel')}
-      isLightDismiss={true}
-      isOpen={true}>
+      isLightDismiss={true}>
       <TextField
         className={styles.inputField}
         spellCheck={false}
@@ -84,27 +49,15 @@ export const LabelForm = (props: ILabelFormProps) => {
         width={300}
         onSelected={(icon) => setModel({ ...model, icon })}
       />
-      <div className={styles.inputField}>
-        <Label>{t('common.colorLabel')}</Label>
-        <DefaultButton
-          text={
-            colorPickerVisible
-              ? t('common.closeColorPickerText')
-              : t('common.openColorPickerText')
-          }
-          iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
-          onClick={() => setColorPickerVisible(!colorPickerVisible)}
-        />
-        {colorPickerVisible && (
-          <SketchPicker
-            color={model.color}
-            onChange={({ hex }) => setModel({ ...model, color: hex })}
-          />
-        )}
-      </div>
+      <ColorPickerField
+        className={styles.inputField}
+        label={t('common.colorLabel')}
+        color={model.color}
+        onChanged={(color) => setModel({ ...model, color })}
+      />
       <div className={styles.inputField}>
         <Label>{t('common.previewText')}</Label>
-        <EntityLabel label={model} size='medium' />
+        <EntityLabel label={model} />
       </div>
       <PrimaryButton
         className={styles.saveBtn}

@@ -1,8 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 
+import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'
+import { SubscriptionSettingField } from './types'
 
 /**
  * Subscription config hook
@@ -10,11 +12,36 @@ import { ISettingsSectionProps } from './SettingsSection/types'
  * @ignore
  */
 export function useSubscriptionConfig() {
+  const { subscription } = useAppContext()
   const { t } = useTranslation()
   return [
     {
-      id: 'adsync',
-      name: t('admin.adsync'),
+      itemKey: 'info',
+      headerText: t('admin.subscriptionInfoHeader'),
+      fields: [
+        {
+          id: 'name',
+          type: 'text',
+          props: {
+            label: t('common.nameLabel'),
+            defaultValue: subscription.name
+          },
+          disabledIf: () => true
+        } as SubscriptionSettingField,
+        {
+          id: 'owner',
+          type: 'text',
+          props: {
+            label: t('common.ownerLabel'),
+            defaultValue: subscription.owner
+          },
+          disabledIf: () => true
+        } as SubscriptionSettingField
+      ]
+    },
+    {
+      itemKey: 'adsync',
+      headerText: t('admin.adsync'),
       fields: [
         {
           id: 'enabled',
@@ -23,7 +50,7 @@ export function useSubscriptionConfig() {
             label: t('admin.adUserSyncEnabledLabel'),
             description: t('admin.adUserSyncEnabledDescription')
           }
-        },
+        } as SubscriptionSettingField,
         {
           id: 'properties',
           type: 'checkbox',
@@ -43,12 +70,22 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.adsync?.enabled
-        }
+        } as SubscriptionSettingField,
+        {
+          id: 'syncUserPhoto',
+          type: 'bool',
+          props: {
+            label: t('admin.adUserSyncUserPhotoLabel'),
+            description: t('admin.adUserSyncUserPhotoDescription')
+          },
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.adsync?.enabled
+        } as SubscriptionSettingField
       ]
     },
     {
-      id: 'forecast',
-      name: t('admin.forecasting'),
+      itemKey: 'forecast',
+      headerText: t('admin.forecasting'),
       fields: [
         {
           id: 'enabled',
@@ -57,7 +94,7 @@ export function useSubscriptionConfig() {
             label: t('admin.forecastEnabledLabel'),
             description: t('admin.forecastEnabledDescription')
           }
-        },
+        } as SubscriptionSettingField,
         {
           id: 'notifications',
           type: 'number',
@@ -71,7 +108,7 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.forecast?.enabled
-        }
+        } as SubscriptionSettingField
       ]
     }
   ] as ISettingsSectionProps[]

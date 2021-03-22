@@ -21,7 +21,9 @@
     "baseUrl": "./",
     "paths": {
       "package": ["../package.json"],
-      "DateUtils": ["../shared/utils/date"]
+      "security": ["../shared/config/security"],
+      "DateUtils": ["../shared/utils/date"],
+      "AppContext": ["./app/context"]
     }
   }
 }

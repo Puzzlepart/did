@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / ApiTokenInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ApiTokenInput
 
 # Class: ApiTokenInput
 
-[graphql](../modules/graphql.md).ApiTokenInput
+[GraphQL](../modules/graphql.md).ApiTokenInput
 
 ## Table of contents
 
@@ -30,7 +30,7 @@
 
 • **expires**: Date
 
-Defined in: [server/graphql/resolvers/apiToken/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L41)
+Defined in: [graphql/resolvers/apiToken/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L41)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/graphql/resolvers/apiToken/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L38)
+Defined in: [graphql/resolvers/apiToken/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L38)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • **permissions**: *string*[]
 
-Defined in: [server/graphql/resolvers/apiToken/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L44)
+Defined in: [graphql/resolvers/apiToken/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L44)

@@ -1,8 +1,15 @@
-[did-client - v0.9.9](../README.md) / [Pages](../modules/pages.md) / TimesheetPeriod
+[did-client - v0.9.11](../README.md) / [Pages](../modules/pages.md) / TimesheetPeriod
 
 # Class: TimesheetPeriod
 
 [Pages](../modules/pages.md).TimesheetPeriod
+
+Handles a part of a `TimesheetScope`. Represented
+by the combination of weeek number, month index and
+year.
+
+**`remarks`** Look into creating a `react` hook
+that can ease working with the periods
 
 ## Table of contents
 
@@ -66,7 +73,7 @@
 
 • `Private` **\_uiIgnoredEvents**: *string*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L29)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L36)
 
 ___
 
@@ -74,7 +81,7 @@ ___
 
 • `Private` **\_uiIgnoredEventsStorage**: [*BrowserStorage*](utils.browserstorage.md)<string[]\>
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L32)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L39)
 
 ___
 
@@ -82,7 +89,7 @@ ___
 
 • `Private` **\_uiMatchedEvents**: *Record*<string, Project\>
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L30)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L37)
 
 ___
 
@@ -90,7 +97,7 @@ ___
 
 • `Private` **\_uiMatchedEventsStorage**: [*BrowserStorage*](utils.browserstorage.md)<Record<string, Project\>\>
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L31)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L38)
 
 ___
 
@@ -98,7 +105,7 @@ ___
 
 • `Private` `Readonly` **endDate**: *string*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L21)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L28)
 
 ___
 
@@ -106,7 +113,7 @@ ___
 
 • `Private` **events**: *EventObject*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L28)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L35)
 
 ___
 
@@ -114,7 +121,7 @@ ___
 
 • `Readonly` **forecastedHours**: *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L26)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L33)
 
 ___
 
@@ -122,7 +129,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L19)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L26)
 
 ___
 
@@ -130,7 +137,7 @@ ___
 
 • `Optional` `Readonly` **isConfirmed**: *boolean*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L23)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L30)
 
 ___
 
@@ -138,7 +145,7 @@ ___
 
 • `Readonly` **isForecast**: *boolean*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L25)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L32)
 
 ___
 
@@ -146,15 +153,15 @@ ___
 
 • `Readonly` **isForecasted**: *boolean*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L24)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L31)
 
 ___
 
 ### month
 
-• `Private` `Readonly` **month**: *string*
+• `Readonly` **month**: *string*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L27)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L34)
 
 ___
 
@@ -162,7 +169,7 @@ ___
 
 • `Private` `Readonly` **startDate**: *string*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L20)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L27)
 
 ___
 
@@ -170,7 +177,7 @@ ___
 
 • `Readonly` **week**: *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L22)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L29)
 
 ## Accessors
 
@@ -178,13 +185,17 @@ Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:22](https://github.com/Pu
 
 • get **data**(): *TimesheetPeriodInput*
 
-Get data for the period
+Get data for the period. Returns
+`id`, `startDate`, `endDate`, `forecastedHours`
+and `matchedEvents`
+
+**`memberof`** TimesheetPeriod
 
 **Returns:** *TimesheetPeriodInput*
 
 Data for the period
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:224](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L224)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:259](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L259)
 
 ___
 
@@ -192,9 +203,13 @@ ___
 
 • get **errors**(): *any*[]
 
+Get aggregated errors from the events in the period
+
+**`memberof`** TimesheetPeriod
+
 **Returns:** *any*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:130](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L130)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:145](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L145)
 
 ___
 
@@ -204,9 +219,11 @@ ___
 
 Get ignored events
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *string*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:123](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L123)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L136)
 
 ___
 
@@ -216,11 +233,13 @@ ___
 
 Period is complete meaning all events are matched
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *boolean*
 
-true if the unmatched duration (unmatchedDuration) is equal to zero (0)
+`true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:260](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L260)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:300](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L300)
 
 ___
 
@@ -230,9 +249,13 @@ ___
 
 Period is in the past
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *boolean*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:267](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L267)
+`true` if the `endDate` is before today
+
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:311](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L311)
 
 ___
 
@@ -240,21 +263,27 @@ ___
 
 • get **matchedDuration**(): *number*
 
+Get matched duration for the events in the period
+
+**`memberof`** TimesheetPeriod
+
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:147](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L147)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:166](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L166)
 
 ___
 
 ### matchedEvents
 
-• `Private`get **matchedEvents**(): *EventInput*[]
+• get **matchedEvents**(): *EventInput*[]
 
 Get matched events with properties
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *EventInput*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:204](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L204)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:235](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L235)
 
 ___
 
@@ -264,9 +293,13 @@ ___
 
 Returns URL path for the period
 
+**`example`** `11_3_2021` => `11/3/2021`
+
+**`memberof`** TimesheetPeriod
+
 **Returns:** *string*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:248](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L248)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:289](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L289)
 
 ___
 
@@ -276,9 +309,11 @@ ___
 
 Get total duration of events in the period
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:140](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L140)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L157)
 
 ___
 
@@ -288,9 +323,11 @@ ___
 
 Get unmatched duration for the events in the period
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L157)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:178](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L178)
 
 ## Methods
 
@@ -306,17 +343,19 @@ event
 If the event has manualMatch set, but it cannot be found in localStorage
 project/customer is set to null for the event
 
+**`memberof`** TimesheetPeriod
+
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`event` | *EventObject* | Event object    |
+`event` | *EventObject* | Event object   |
 
 **Returns:** *EventObject*
 
 an extended event object
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L79)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:88](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L88)
 
 ___
 
@@ -326,9 +365,11 @@ ___
 
 Clear ignored events from browser storage
 
+**`memberof`** TimesheetPeriod
+
 **Returns:** *void*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:196](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L196)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:225](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L225)
 
 ___
 
@@ -338,6 +379,8 @@ ___
 
 Clear manual match from local storage
 
+**`memberof`** TimesheetPeriod
+
 #### Parameters:
 
 Name | Type | Description |
@@ -346,7 +389,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:178](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L178)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:203](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L203)
 
 ___
 
@@ -356,6 +399,8 @@ ___
 
 Get events
 
+**`memberof`** TimesheetPeriod
+
 #### Parameters:
 
 Name | Type | Default value | Description |
@@ -364,7 +409,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *EventObject*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L106)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:117](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L117)
 
 ___
 
@@ -374,16 +419,18 @@ ___
 
 Get name of period
 
+**`memberof`** TimesheetPeriod
+
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `t` | TFunction | Translate function   |
-`includeMonth?` | *boolean* | Include month    |
+`includeMonth?` | *boolean* | Include month   |
 
 **Returns:** *string*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:60](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L60)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:68](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L68)
 
 ___
 
@@ -393,6 +440,8 @@ ___
 
 Store ignored event in browser storage
 
+**`memberof`** TimesheetPeriod
+
 #### Parameters:
 
 Name | Type | Description |
@@ -401,7 +450,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:188](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L188)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:215](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L215)
 
 ___
 
@@ -409,7 +458,7 @@ ___
 
 ▸ **initialize**(`period`: *TimesheetPeriodObject*): [*TimesheetPeriod*](pages.timesheetperiod.md)
 
-Initializes a new period instance
+Constructor for `TimesheetPeriod`
 
 #### Parameters:
 
@@ -419,7 +468,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriod*](pages.timesheetperiod.md)
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L39)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L46)
 
 ___
 
@@ -428,6 +477,8 @@ ___
 ▸ **setManualMatch**(`eventId`: *string*, `project`: *Project*): *void*
 
 Save manual match in browser storage
+
+**`memberof`** TimesheetPeriod
 
 #### Parameters:
 
@@ -438,22 +489,24 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L167)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:190](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L190)
 
 ___
 
 ### weekdays
 
-▸ **weekdays**(`dayFormat?`: *string*): *string*[]
+▸ **weekdays**(`template?`: *string*): *string*[]
 
 Get weekdays in the specified format
+
+**`memberof`** TimesheetPeriod
 
 #### Parameters:
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`dayFormat` | *string* | 'dddd DD' | Day format    |
+`template` | *string* | 'dddd DD' | Template    |
 
 **Returns:** *string*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:240](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L240)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:277](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L277)

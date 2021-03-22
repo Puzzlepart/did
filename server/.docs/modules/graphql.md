@@ -1,24 +1,13 @@
-[did-server - v0.9.9](../README.md) / graphql
+[did-server - v0.9.11](../README.md) / GraphQL
 
-# Module: graphql
+# Module: GraphQL
+
+[GraphQL](https://graphql.org/) server implementation using
+[apollo-server-express](https://www.npmjs.com/package/apollo-server-express)
 
 ## Table of contents
 
-### GraphQL Resolver Classes
-
-- [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
-- [CustomerResolver](../classes/graphql.customerresolver.md)
-- [LabelResolver](../classes/graphql.labelresolver.md)
-- [NotificationResolver](../classes/graphql.notificationresolver.md)
-- [OutlookCategoryResolver](../classes/graphql.outlookcategoryresolver.md)
-- [ProjectResolver](../classes/graphql.projectresolver.md)
-- [ReportsResolver](../classes/graphql.reportsresolver.md)
-- [RoleResolver](../classes/graphql.roleresolver.md)
-- [SubscriptionResolver](../classes/graphql.subscriptionresolver.md)
-- [TimesheetResolver](../classes/graphql.timesheetresolver.md)
-- [UserResolver](../classes/graphql.userresolver.md)
-
-### InputType Classes
+### GraphQL InputType Classes
 
 - [ApiTokenInput](../classes/graphql.apitokeninput.md)
 - [ConfirmedPeriodsQuery](../classes/graphql.confirmedperiodsquery.md)
@@ -39,7 +28,7 @@
 - [UserInput](../classes/graphql.userinput.md)
 - [UserQuery](../classes/graphql.userquery.md)
 
-### ObjectType Classes
+### GraphQL ObjectType Classes
 
 - [ApiToken](../classes/graphql.apitoken.md)
 - [CreateOrUpdateProjectResult](../classes/graphql.createorupdateprojectresult.md)
@@ -58,8 +47,23 @@
 - [TimeEntry](../classes/graphql.timeentry.md)
 - [TimesheetPeriodObject](../classes/graphql.timesheetperiodobject.md)
 - [User](../classes/graphql.user.md)
+- [UserPhoto](../classes/graphql.userphoto.md)
 
-### Type aliases
+### GraphQL Resolver Classes
+
+- [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
+- [CustomerResolver](../classes/graphql.customerresolver.md)
+- [LabelResolver](../classes/graphql.labelresolver.md)
+- [NotificationResolver](../classes/graphql.notificationresolver.md)
+- [OutlookCategoryResolver](../classes/graphql.outlookcategoryresolver.md)
+- [ProjectResolver](../classes/graphql.projectresolver.md)
+- [ReportsResolver](../classes/graphql.reportsresolver.md)
+- [RoleResolver](../classes/graphql.roleresolver.md)
+- [SubscriptionResolver](../classes/graphql.subscriptionresolver.md)
+- [TimesheetResolver](../classes/graphql.timesheetresolver.md)
+- [UserResolver](../classes/graphql.userresolver.md)
+
+### GraphQL Type Type aliases
 
 - [ReportsQueryPreset](graphql.md#reportsquerypreset)
 
@@ -69,7 +73,7 @@
 - [generateGraphQLSchema](graphql.md#generategraphqlschema)
 - [setupGraphQL](graphql.md#setupgraphql)
 
-## Type aliases
+## GraphQL Type Type aliases
 
 ### ReportsQueryPreset
 
@@ -77,13 +81,13 @@
 
 Reports query preset
 
-Defined in: [server/graphql/resolvers/reports/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L70)
+Defined in: [graphql/resolvers/reports/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L72)
 
 ## Functions
 
 ### generateClientInfo
 
-▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\>): *object*
+▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<Context\>): *object*
 
 Specify this function to provide Apollo Studio with client details
 for each processed request. Apollo Studio uses this information to
@@ -104,7 +108,7 @@ for Postman, Azure Logic Apps and Microsoft Flow.
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\> |
+`__namedParameters` | *GraphQLRequestContext*<Context\> |
 
 **Returns:** *object*
 
@@ -113,7 +117,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [server/graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
+Defined in: [graphql/index.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L99)
 
 ___
 
@@ -121,18 +125,20 @@ ___
 
 ▸ `Const`**generateGraphQLSchema**(): *Promise*<GraphQLSchema\>
 
-Generate GraphQL schema using type-graphql
+Generate [GraphQL](https://graphql.org/) schema using
+[type-graphql](https://www.npmjs.com/package/type-graphql)
 
-* Setting up the schema to use Dependency injection (https://typegraphql.com/docs/dependency-injection.html)
+* Setting up the schema to use Dependency injection using
+ [typedi](https://www.npmjs.com/package/typedi) (https://typegraphql.com/docs/dependency-injection.html)
 * Turns of validation
 * Sets auth checker
-* Registers GraphQLDateTime scalar type
+* Registers `GraphQLDateTime` scalar type
 
 **`see`** https://typegraphql.com/
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [server/graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
+Defined in: [graphql/index.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L56)
 
 ___
 
@@ -140,10 +146,17 @@ ___
 
 ▸ `Const`**setupGraphQL**(`app`: *Application*, `client`: *MongoClient*): *Promise*<void\>
 
-Set up GraphQL for the Express Application
+Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
+application
 
-* Sets up reporting to Apollo Studio
+* Sets up reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs)
 * Sets up plugin to reset the container for each request
+
+#### Reporting needs the following environment keys: ####
+
+* `APOLLO_KEY`
+* `APOLLO_GRAPH_VARIANT`
+* `APOLLO_SCHEMA_REPORTING`
 
 #### Parameters:
 
@@ -154,4 +167,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L122)
+Defined in: [graphql/index.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L139)

@@ -3,6 +3,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { PermissionScope } from '../../../../shared/config/security'
 import { CustomerService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
@@ -45,7 +46,7 @@ export class CustomerResolver {
    * @param customer - Customer
    * @param update - Update
    */
-  @Authorized<IAuthOptions>({ permission: '09909241' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_CUSTOMERS })
   @Mutation(() => BaseResult, { description: 'Create or update customer' })
   async createOrUpdateCustomer(
     @Arg('customer', () => CustomerInput) customer: CustomerInput,
@@ -55,7 +56,7 @@ export class CustomerResolver {
     await (update
       ? this._customer.updateCustomer(c)
       : this._customer.addCustomer(c))
-    return { success: true, error: null }
+    return { success: true }
   }
 
   /**
@@ -63,7 +64,7 @@ export class CustomerResolver {
    *
    * @param key - Key
    */
-  @Authorized({ permission: '8b39db3d' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.DELETE_CUSTOMER })
   @Mutation(() => BaseResult, { description: 'Delete customer' })
   deleteCustomer(@Arg('key') key: string) {
     return this._customer.deleteCustomer(key)

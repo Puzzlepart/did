@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / NotificationTemplates
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / NotificationTemplates
 
 # Class: NotificationTemplates
 
-[graphql](../modules/graphql.md).NotificationTemplates
+[GraphQL](../modules/graphql.md).NotificationTemplates
 
 ## Table of contents
 
@@ -29,7 +29,7 @@
 
 • **forecast**: *string*
 
-Defined in: [server/graphql/resolvers/notification/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L88)
+Defined in: [graphql/resolvers/notification/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L88)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • **unconfirmedPeriods**: *string*
 
-Defined in: [server/graphql/resolvers/notification/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L85)
+Defined in: [graphql/resolvers/notification/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L85)

@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / TimeEntryService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / TimeEntryService
 
 # Class: TimeEntryService
 
-[services](../modules/services.md).TimeEntryService
+[Services](../modules/services.md).TimeEntryService
+
+Time entry service
 
 ## Hierarchy
 
@@ -35,27 +37,31 @@
 
 ### constructor
 
-\+ **new TimeEntryService**(`context`: [*Context*](graphql_context.context.md)): [*TimeEntryService*](services.timeentryservice.md)
+\+ **new TimeEntryService**(`context`: *Context*): [*TimeEntryService*](services.timeentryservice.md)
 
-Constructor for TimeEntryService
+Constructor for `TimeEntryService`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*TimeEntryService*](services.timeentryservice.md)
 
-Defined in: [server/services/mongo/time_entry.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/time_entry.ts#L7)
+Overrides: void
+
+Defined in: [services/mongo/time_entry.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/time_entry.ts#L14)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -63,13 +69,17 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*TimeEntry*](graphql.timeentry.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -77,11 +87,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -108,7 +122,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -128,7 +144,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -150,7 +168,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -171,4 +191,6 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)

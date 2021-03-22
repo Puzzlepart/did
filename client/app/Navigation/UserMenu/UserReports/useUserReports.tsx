@@ -15,12 +15,12 @@ export function useUserReports() {
   const [queryPreset, setQueryPreset] = useState<any>(null)
   const [showPanel, togglePanel] = useToggle()
   const queries = useQueries()
-  const query = useUserReportQuery(queryPreset)
+  const query = useUserReportQuery({ preset: queryPreset })
   const columns = useColumns()
 
   return {
-    queryPreset,
-    setQueryPreset: (_event: any, queryPreset_: IChoiceGroupOption) =>
+    preset: queryPreset,
+    setPreset: (_event: any, queryPreset_: IChoiceGroupOption) =>
       setQueryPreset(queryPreset_),
     queries,
     showPanel,

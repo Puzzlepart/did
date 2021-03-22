@@ -1,10 +1,14 @@
-[did-client - v0.9.9](../README.md) / [Pages](../modules/pages.md) / TimesheetScope
+[did-client - v0.9.11](../README.md) / [Pages](../modules/pages.md) / TimesheetScope
 
 # Class: TimesheetScope
 
 [Pages](../modules/pages.md).TimesheetScope
 
-Handles a scope, the period of time between a startDateTime and endDateTime
+Handles a scope, the period of time between
+a `startDateTime` and `endDateTime`
+
+**`remarks`** Look into creating a `react` hook
+that can ease working with the scope
 
 ## Table of contents
 
@@ -35,7 +39,7 @@ Handles a scope, the period of time between a startDateTime and endDateTime
 
 \+ **new TimesheetScope**(`startDate?`: ConfigType): [*TimesheetScope*](pages.timesheetscope.md)
 
-Constructs a new TimesheetScope
+Constructs for `TimesheetScope`
 
 #### Parameters:
 
@@ -45,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L13)
+Defined in: [pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L17)
 
 ## Properties
 
@@ -53,7 +57,7 @@ Defined in: [client/pages/Timesheet/TimesheetScope.ts:13](https://github.com/Puz
 
 • `Optional` **endDate**: *DateObject*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L13)
+Defined in: [pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L17)
 
 ___
 
@@ -61,7 +65,7 @@ ___
 
 • `Optional` **startDate**: *DateObject*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L12)
+Defined in: [pages/Timesheet/TimesheetScope.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L16)
 
 ## Accessors
 
@@ -71,9 +75,11 @@ Defined in: [client/pages/Timesheet/TimesheetScope.ts:12](https://github.com/Puz
 
 Is the scope the current week
 
+**`memberof`** TimesheetScope
+
 **Returns:** *boolean*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:72](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L72)
+Defined in: [pages/Timesheet/TimesheetScope.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L82)
 
 ___
 
@@ -83,11 +89,11 @@ ___
 
 Get timespan string for the scope
 
-**`remarks`** Used in WeekPicker
+**`memberof`** TimesheetScope
 
 **Returns:** *string*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:81](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L81)
+Defined in: [pages/Timesheet/TimesheetScope.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L91)
 
 ## Methods
 
@@ -95,7 +101,9 @@ Defined in: [client/pages/Timesheet/TimesheetScope.ts:81](https://github.com/Puz
 
 ▸ **fromParams**(`parameters`: [*ITimesheetParameters*](../interfaces/pages.itimesheetparameters.md)): [*TimesheetScope*](pages.timesheetscope.md)
 
-Sets startDate/endDate from params
+Sets `startDate` and `endDate` from `params`
+
+**`memberof`** TimesheetScope
 
 #### Parameters:
 
@@ -105,7 +113,7 @@ Name | Type |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L30)
+Defined in: [pages/Timesheet/TimesheetScope.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L35)
 
 ___
 
@@ -115,15 +123,17 @@ ___
 
 Get a day in the scope by index
 
+**`memberof`** TimesheetScope
+
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`index` | *number* | Index    |
+`index` | *number* | Index   |
 
 **Returns:** *DateObject*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:65](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L65)
+Defined in: [pages/Timesheet/TimesheetScope.ts:73](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L73)
 
 ___
 
@@ -133,15 +143,17 @@ ___
 
 Get TimesheetQuery for the scope
 
+**`memberof`** TimesheetScope
+
 #### Parameters:
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`template` | *string* | 'YYYY-MM-DD' | Template    |
+`template` | *string* | 'YYYY-MM-DD' | Template   |
 
 **Returns:** *TimesheetQuery*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L41)
+Defined in: [pages/Timesheet/TimesheetScope.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L47)
 
 ___
 
@@ -151,12 +163,14 @@ ___
 
 Sets the scope and returns a cloned version of the TimesheetScope
 
+**`memberof`** TimesheetScope
+
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`add` | *string* | Add    |
+`add` | *string* | Add   |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:54](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L54)
+Defined in: [pages/Timesheet/TimesheetScope.ts:61](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L61)

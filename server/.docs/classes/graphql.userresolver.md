@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / UserResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / UserResolver
 
 # Class: UserResolver
 
-[graphql](../modules/graphql.md).UserResolver
+[GraphQL](../modules/graphql.md).UserResolver
 
 Resolver for `User`.
 
@@ -23,6 +23,7 @@ _dependendy injection_.
 - [activeDirectoryUsers](graphql.userresolver.md#activedirectoryusers)
 - [addOrUpdateUser](graphql.userresolver.md#addorupdateuser)
 - [addUsers](graphql.userresolver.md#addusers)
+- [authProviders](graphql.userresolver.md#authproviders)
 - [currentUser](graphql.userresolver.md#currentuser)
 - [updateUserConfiguration](graphql.userresolver.md#updateuserconfiguration)
 - [users](graphql.userresolver.md#users)
@@ -45,7 +46,7 @@ Name | Type | Description |
 
 **Returns:** [*UserResolver*](graphql.userresolver.md)
 
-Defined in: [server/graphql/resolvers/user/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L29)
+Defined in: [graphql/resolvers/user/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L30)
 
 ## Methods
 
@@ -57,7 +58,7 @@ Get Active Directory users
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L61)
+Defined in: [graphql/resolvers/user/index.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L74)
 
 ___
 
@@ -76,7 +77,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L86)
+Defined in: [graphql/resolvers/user/index.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L99)
 
 ___
 
@@ -94,13 +95,25 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L108)
+Defined in: [graphql/resolvers/user/index.ts:121](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L121)
+
+___
+
+### authProviders
+
+▸ **authProviders**(): *string*[]
+
+Get auth providers
+
+**Returns:** *string*[]
+
+Defined in: [graphql/resolvers/user/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L48)
 
 ___
 
 ### currentUser
 
-▸ **currentUser**(`context`: [*Context*](graphql_context.context.md)): *Promise*<[*User*](graphql.user.md)\>
+▸ **currentUser**(`context`: *Context*): *Promise*<[*User*](graphql.user.md)\>
 
 Get current user
 
@@ -108,11 +121,11 @@ Get current user
 
 Name | Type |
 :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+`context` | *Context* |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L49)
+Defined in: [graphql/resolvers/user/index.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L61)
 
 ___
 
@@ -130,7 +143,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:126](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L126)
+Defined in: [graphql/resolvers/user/index.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L139)
 
 ___
 
@@ -148,4 +161,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L72)
+Defined in: [graphql/resolvers/user/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L85)

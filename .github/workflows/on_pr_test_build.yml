@@ -7,8 +7,8 @@ on:
       - dev
   
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test_build:
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         node-version: [12.18.3]
@@ -35,11 +35,7 @@ jobs:
         run: |
           npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
 
-      - name: Lint
-        run: |
-          npm run lint
-
-      - name: Package client JS
+      - name: Package client
         run: |
           npm run package:client
         env:
@@ -51,10 +47,3 @@ jobs:
           npm run build:server
         env:
           NODE_ENV: production
-
-      - name: Tests
-        run: |
-          npm test
-        env:
-          NODE_ENV: production
-          TESTS_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.TESTS_AZURE_STORAGE_CONNECTION_STRING }}

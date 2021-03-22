@@ -1,15 +1,14 @@
-did-client - v0.9.9
+did-client - v0.9.11
 
-# did-client - v0.9.9
+# did-client - v0.9.11
 
 ## Table of contents
 
 ### Modules
 
-- [.](modules/_.md)
+- [/](modules/_.md)
 - [App](modules/app.md)
 - [Components](modules/components.md)
-- [Configuration](modules/configuration.md)
 - [GraphQL](modules/graphql.md)
 - [Helpers](modules/helpers.md)
 - [Hooks](modules/hooks.md)

@@ -1,10 +1,10 @@
 import { getValue } from 'helpers'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import FadeIn from 'react-fade-in'
 import styles from './AllocationView.module.scss'
 import { ICustomTooltipProps } from './types'
 
-export const CustomTooltip: FunctionComponent<ICustomTooltipProps> = ({
+export const CustomTooltip: React.FC<ICustomTooltipProps> = ({
   item,
   chart
 }: ICustomTooltipProps) => {

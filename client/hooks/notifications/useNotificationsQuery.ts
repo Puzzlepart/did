@@ -1,24 +1,38 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-console */
 /* eslint-disable tsdoc/syntax */
 import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { Notification } from 'types'
-import notificationsQuery from './notifications.gql'
+import { ReactHookFunction } from '../types'
+import notifications from './notifications.gql'
+
+type NotificationsQueryParams = {
+  user: ContextUser
+  fetchPolicy?: FetchPolicy
+}
+
+type NotificationsQuery = {
+  data: Notification[]
+  refetch: (delay?: number) => void
+}
 
 /**
- * Notificatins query hook
+ * Fetches notifications - returns the data and
+ * a function to refetch the data from the server.
  *
  * @param user - Context user
  *
  * @category React Hook
  */
-export function useNotificationsQuery(
-  user: ContextUser,
-  fetchPolicy: FetchPolicy = 'cache-first'
-): { notifications: Notification[]; refetch: (delay?: number) => void } {
+export const useNotificationsQuery: ReactHookFunction<
+  NotificationsQueryParams,
+  NotificationsQuery
+> = ({ user, fetchPolicy = 'cache-first' }) => {
   const { t } = useTranslation()
-  const { data, refetch } = useQuery(notificationsQuery, {
+  const { data, refetch } = useQuery(notifications, {
+    skip: !user.id,
     variables: {
       templates: t('notifications.templates', { returnObjects: true }),
       locale: user?.preferredLanguage
@@ -26,7 +40,7 @@ export function useNotificationsQuery(
     fetchPolicy
   })
   return {
-    notifications: data?.notifications || [],
+    data: data?.notifications || [],
     refetch: (delay = 0) => {
       window.setTimeout(refetch, delay)
     }

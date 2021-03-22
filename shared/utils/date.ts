@@ -1,3 +1,11 @@
+/* eslint-disable tsdoc/syntax */
+// shared/utils/date.ts
+/**
+ * Shared date utilities used by both
+ * the client and the server.
+ *
+ * @module DateUtils
+ */
 import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
@@ -13,26 +21,8 @@ import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
-import { DateObject } from './date.dateObject'
-
-interface IDateUtils {
-  /**
-   * Timezone offset
-   *
-   * Retrieved from Date.getTimezoneOffset()
-   */
-  tzOffset: number
-
-  /**
-   * Default month format
-   */
-  monthFormat: string
-
-  /**
-   * Use ISO week
-   */
-  isoWeek: boolean
-}
+import { DateObject } from './DateObject'
+import { DateWithTimezone, IDateUtils, TimeSpanStringOptions } from './types'
 
 export type DateInput = ConfigType
 
@@ -161,23 +151,45 @@ export class DateUtils {
   /**
    * Get timespan string
    *
-   * @param start - Start
-   * @param end - End
-   * @param monthFormat - Month format
+   * Supports either start and end dates, or week
+   * number and year. `monthFormat` and `yearFormat`
+   * are optional.
+   *
+   * Date formats are based on if the dates are the same
+   * month and year, and if the year is the current year.
+   *
+   * @param options - Timespan options
    */
-  public getTimespanString(
-    start: DateObject,
-    end: DateObject,
-    monthFormat: string = this.$.monthFormat
-  ): string {
-    const isSameMonth = start.isSameMonth(end)
-    const isSameYear = start.isSameYear(end)
-    const sFormat = ['DD']
-    if (!isSameMonth) sFormat.push(monthFormat)
-    if (!isSameYear) sFormat.push('YYYY')
+  public getTimespanString({
+    startDate,
+    endDate,
+    week,
+    year,
+    dayFormat = 'DD',
+    monthFormat = this.$.monthFormat,
+    yearFormat = this.$.yearFormat,
+    includeMonth,
+    includeTime
+  }: TimeSpanStringOptions): string {
+    startDate =
+      startDate || new DateObject().fromObject({ week, year }).startOfWeek
+    endDate = endDate || new DateObject().fromObject({ week, year }).endOfWeek
+    const startDateFormat = [dayFormat]
+    const endDateFormat = []
+    if (!startDate.isSameDay(endDate)) endDateFormat.push(dayFormat)
+    if (!startDate.isSameMonth(endDate) || includeMonth?.startDate)
+      startDateFormat.push(monthFormat)
+    if (!startDate.isSameMonth(endDate) || includeMonth?.endDate)
+      endDateFormat.push(monthFormat)
+    if (!startDate.isSameYear(endDate)) startDateFormat.push(yearFormat)
+    if (!startDate.isSameYear(new DateObject())) endDateFormat.push(yearFormat)
+    if (includeTime) {
+      startDateFormat.push(includeTime)
+      endDateFormat.push(includeTime)
+    }
     return [
-      start.format(sFormat.join(' ')),
-      end.format(`DD ${monthFormat} YYYY`)
+      startDate.format(startDateFormat.join(' ')),
+      endDate.format(endDateFormat.join(' '))
     ].join(' - ')
   }
 
@@ -356,12 +368,27 @@ export class DateUtils {
   public endOfMonth(date: DateObject): DateObject {
     return new DateObject(date.$.endOf('month'))
   }
+
+  /**
+   * Parse date with timezone
+   *
+   * @param date - Date with timezone
+   *
+   * @returns The JS date
+   */
+  public parseDateWithTimezone(date: DateWithTimezone): Date {
+    return $dayjs
+      .tz($dayjs(date.dateTime).format('YYYY-MM-DD HH:mm:ss'), date.timeZone)
+      .toDate()
+  }
 }
 
 export default new DateUtils({
   tzOffset: new Date().getTimezoneOffset(),
   monthFormat: 'MMMM',
+  yearFormat: 'YYYY',
   isoWeek: true
 })
 
-export { DateObject, $dayjs }
+export * from './types'
+export { $dayjs }

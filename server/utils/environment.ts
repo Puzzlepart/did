@@ -37,9 +37,13 @@ type Environment = {
 }
 
 /**
- * Get environment variable by key with optional fallbackvalue
+ * Get environment variable by key with optional fallback value
  *
- * Makes it easier to work with process.env.
+ * Makes it easier to work with `process.env` giving a type
+ * (`Environment`) for the available environment keys
+ *
+ * @remarks Logs missing environment variables using the
+ * [debug](https://www.npmjs.com/package/debug) module
  *
  * @param key - Key
  * @param fallbackValue - Fallback vaue if key is not found

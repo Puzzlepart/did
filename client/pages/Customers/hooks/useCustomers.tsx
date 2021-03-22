@@ -7,7 +7,7 @@ import $customers from '../customers.gql'
 import { DATA_UPDATED } from '../reducer/actions'
 import { useCustomersReducer } from '../reducer/useCustomersReducer'
 import { ICustomersParameters } from '../types'
-import { useHistoryUpdater } from './useHistoryUpdater'
+import { useCustomersHistory } from './useCustomersHistory'
 
 /**
  * Hook for Customers
@@ -26,7 +26,7 @@ export function useCustomers() {
 
   useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
-  useHistoryUpdater(state)
+  useCustomersHistory(state)
 
   const context: ICustomersContext = useMemo(
     () => ({

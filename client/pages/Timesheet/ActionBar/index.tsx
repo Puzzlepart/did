@@ -1,16 +1,27 @@
-import { CommandBar, ICommandBarProps } from 'office-ui-fabric-react'
+/* eslint-disable tsdoc/syntax */
+import {
+  CommandBar,
+  ICommandBarProps,
+  IContextualMenuItem
+} from 'office-ui-fabric-react'
 import React from 'react'
 import styles from './ActionBar.module.scss'
 import { usePeriodCommands } from './selectPeriodCommands'
 import { useNavigateCommands } from './useNavigateCommands'
 import { useSubmitCommands } from './useSubmitCommands'
-import { useWeekPickerCommand } from './WeekPicker'
+import { WeekPicker } from './WeekPicker'
 
+/**
+ * @category Timesheet
+ */
 export const ActionBar = () => {
   const navigateCommands = useNavigateCommands()
   const submitCommands = useSubmitCommands()
-  const weekPickerCommand = useWeekPickerCommand()
   const periodCommands = usePeriodCommands()
+  const weekPickerCommand: IContextualMenuItem = {
+    key: 'WEEK_PICKER_COMMAND',
+    onRender: () => <WeekPicker />
+  }
 
   const commandBarProps: ICommandBarProps = {
     styles: { root: { padding: 0 } },

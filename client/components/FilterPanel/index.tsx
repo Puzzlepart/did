@@ -1,48 +1,22 @@
 /* eslint-disable tsdoc/syntax */
 import { Panel } from 'office-ui-fabric-react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FilterItem } from './FilterItem'
 import styles from './FilterPanel.module.scss'
-import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
+import { useFilterPanel } from './useFilterPanel'
 
 /**
+ * Filter panel that renders filter items with more than
+ * 1 item.
+ *
+ * `shortListCount` defaults to **10**, meaning
+ * 10 items are shown before displaying a show more link.
+ *
  * @category Function Component
  */
-export const FilterPanel = (props: IFilterPanelProps) => {
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
-  )
-  useEffect(
-    () => setFilters(props.filters.map((f) => f.initialize(props.items))),
-    [props.items, props.filters]
-  )
-
-  /**
-   * On filter updated
-   *
-   * @param filter - Filter
-   * @param item - Item
-   * @param checked - Checked
-   */
-  const onFilterUpdated = (
-    filter: IFilter,
-    item: IFilterItem,
-    checked: boolean
-  ) => {
-    if (checked) filter.selected.push(item)
-    else filter.selected = filter.selected.filter((f) => f.key !== item.key)
-    const updatedFilters = filters.map((f) => {
-      if (f.key === filter.key) {
-        return filter
-      }
-      return f
-    })
-    setFilters(updatedFilters)
-    props.onFiltersUpdated(
-      updatedFilters.filter((filter) => filter.selected.length > 0)
-    )
-  }
+export const FilterPanel: React.FC<IFilterPanelProps> = (props) => {
+  const { filters, onFilterUpdated } = useFilterPanel(props)
 
   return (
     <Panel

@@ -1,11 +1,17 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
+import get from 'get-value'
 import { calendar_v3, google } from 'googleapis'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import DateUtils, { $dayjs } from '../../../shared/utils/date'
 import { EventObject } from '../../graphql'
 import { environment } from '../../utils/environment'
 
+/**
+ * Google calendar service
+ *
+ * @category Injectable Container Service
+ */
 @Service({ global: false })
 class GoogleCalendarService {
   private _cal: calendar_v3.Calendar
@@ -18,7 +24,7 @@ class GoogleCalendarService {
         redirectUri: environment('GOOGLE_REDIRECT_URI')
       })
       client.setCredentials({
-        access_token: this._request.user['tokenParams']['access_token']
+        access_token: get(this._request, 'user.tokenParams.access_token')
       })
       this._cal = new calendar_v3.Calendar({
         auth: client
@@ -27,55 +33,61 @@ class GoogleCalendarService {
   }
 
   /**
+   * Get calendars
+   *
+   * @param accessRole - Access role
+   * @returns Calendars with the specified `accessRole`
+   */
+  public async getCalendars(accessRole = 'owner') {
+    const calendarList = await this._cal.calendarList.list()
+    const calendars = calendarList.data.items.filter(
+      (cal) => cal.accessRole === accessRole
+    )
+    return calendars
+  }
+
+  /**
    * Get events for the specified period using Google APIs
    *
-   * @param startDate - Start date (YYYY-MM-DD)
-   * @param endDate - End date (YYYY-MM-DD)
-   * @param tzOffset - Timezone offset
+   * @param startDateTimeIso - Start date time in `ISO format`
+   * @param endDateTimeIso - End date time in `ISO format`
    */
-  public async getEvents(startDate: string, endDate: string, tzOffset: number) {
+  public async getEvents(startDateTimeIso: string, endDateTimeIso: string) {
     try {
       const query = {
-        timeMin: DateUtils.toISOString(`${startDate}:00:00:00.000`, tzOffset),
-        timeMax: DateUtils.toISOString(`${endDate}:23:59:59.999`, tzOffset),
-        calendarId: 'primary'
+        timeMin: startDateTimeIso,
+        timeMax: endDateTimeIso
       }
-      const { data } = await this._cal.events.list(query)
-      return data.items.map(
-        ({
-          id,
-          summary: title,
-          description: body,
-          organizer,
-          start,
-          end,
-          htmlLink: webLink
-        }) => {
-          const startDateTime = $dayjs
-            .tz(
-              $dayjs(start.dateTime).format('YYYY-MM-DD HH:mm:ss'),
-              start.timeZone
-            )
-            .toDate()
-          const endDateTime = $dayjs
-            .tz(
-              $dayjs(end.dateTime).format('YYYY-MM-DD HH:mm:ss'),
-              end.timeZone
-            )
-            .toDate()
-          return new EventObject({
-            id,
-            title,
-            body,
-            categories: [],
-            isOrganizer: organizer.self,
-            startDateTime,
-            endDateTime,
-            webLink,
-            duration: DateUtils.getDurationHours(startDateTime, endDateTime)
+      const calendars = await this.getCalendars()
+      const data = await Promise.all(
+        calendars.map((cal) =>
+          this._cal.events.list({
+            ...query,
+            calendarId: cal.id
           })
-        }
+        )
       )
+
+      const events = []
+      for (const [index, calendar] of calendars.entries()) {
+        events.push(
+          ...data[index].data.items
+            .filter((event) => event.start && event.end)
+            .map((event) => {
+              return new EventObject(
+                event.id,
+                event.summary,
+                [event.description, calendar.description].join(' '),
+                event.organizer.self,
+                event.start,
+                event.end,
+                event.htmlLink,
+                [calendar.summary]
+              )
+            })
+        )
+      }
+      return events
     } catch (error) {
       throw error
     }

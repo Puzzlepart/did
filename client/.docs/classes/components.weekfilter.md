@@ -1,19 +1,12 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / WeekFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / WeekFilter
 
-# Class: WeekFilter<ItemType, KeyType\>
+# Class: WeekFilter
 
 [Components](../modules/components.md).WeekFilter
 
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
-
 ## Hierarchy
 
-* [*BaseFilter*](components.basefilter.md)<ItemType\>
+* [*BaseFilter*](components.basefilter.md)
 
   ↳ **WeekFilter**
 
@@ -25,9 +18,10 @@ Name | Default |
 
 ### Properties
 
-- [\_selectedKeys](components.weekfilter.md#_selectedkeys)
-- [fieldName](components.weekfilter.md#fieldname)
+- [keyFieldName](components.weekfilter.md#keyfieldname)
 - [name](components.weekfilter.md#name)
+- [selectedKeys](components.weekfilter.md#selectedkeys)
+- [valueFieldName](components.weekfilter.md#valuefieldname)
 
 ### Methods
 
@@ -38,43 +32,30 @@ Name | Default |
 
 ### constructor
 
-\+ **new WeekFilter**<ItemType, KeyType\>(`fieldName`: *string*, `name`: *string*): [*WeekFilter*](components.weekfilter.md)<ItemType, KeyType\>
+\+ **new WeekFilter**(`name`: *string*, `keyFieldName`: *string*): [*WeekFilter*](components.weekfilter.md)
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
+Constructor for `WeekFilter`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`fieldName` | *string* |
-`name` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | *string* | Name   |
+`keyFieldName` | *string* | Field name for the item key    |
 
-**Returns:** [*WeekFilter*](components.weekfilter.md)<ItemType, KeyType\>
+**Returns:** [*WeekFilter*](components.weekfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/WeekFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L13)
+Defined in: [components/FilterPanel/Filters/WeekFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L11)
 
 ## Properties
 
-### \_selectedKeys
+### keyFieldName
 
-• `Private` **\_selectedKeys**: KeyType[]
+• **keyFieldName**: *string*
 
-Defined in: [client/components/FilterPanel/Filters/WeekFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L13)
-
-___
-
-### fieldName
-
-• **fieldName**: *string*
-
-Inherited from: [BaseFilter](components.basefilter.md).[fieldName](components.basefilter.md#fieldname)
+Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
 ___
 
@@ -84,40 +65,62 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefilter.md#name)
 
+___
+
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
+### valueFieldName
+
+• `Optional` **valueFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
+
 ## Methods
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items`: *any*[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the WeekFilter
+Intialize the `WeekFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items` | *any*[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/WeekFilter.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L24)
+Defined in: [components/FilterPanel/Filters/WeekFilter.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L27)
 
 ___
 
 ### setDefaults
 
-▸ **setDefaults**(`values`: { [key: string]: KeyType[];  }): [*WeekFilter*](components.weekfilter.md)<ItemType, KeyType\>
+▸ **setDefaults**(`values`: *any*): [*WeekFilter*](components.weekfilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *object* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*WeekFilter*](components.weekfilter.md)<ItemType, KeyType\>
+**Returns:** [*WeekFilter*](components.weekfilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+this
 
-Defined in: [client/components/FilterPanel/Filters/WeekFilter.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L42)
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

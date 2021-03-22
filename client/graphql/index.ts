@@ -12,7 +12,7 @@ import { ApolloClient, FetchPolicy } from '@apollo/client'
 import { InMemoryCache } from '@apollo/client/cache'
 
 /**
- * @ignore
+ * @category GraphQL
  */
 export interface IError {
   name: string
@@ -22,7 +22,7 @@ export interface IError {
 }
 
 /**
- * @ignore
+ * @category GraphQL
  */
 export interface IBaseResult {
   success: boolean

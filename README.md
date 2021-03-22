@@ -1,4 +1,4 @@
-<!-- ⚠️ This README has been generated from the file(s) "README.blueprint" ⚠️--><p align="center">
+<!-- ⚠️ This README has been generated from the file(s) ".readme/README.md" ⚠️--><p align="center">
   <img src="./server/public/images/favicon/android-chrome-192x192.png" alt="Logo" width="192" height="192" />
 </p> <p align="center">
   <b>The calendar is your Timesheet</b></br>
@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.9.9-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.9.11-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -26,7 +26,11 @@
 	* [Code structure](#code-structure)
 	* [Node version](#node-version)
 	* [Authentication](#authentication)
-	* [Commits and `commitlint`](#commits-and-commitlint)
+		* [Google](#google)
+	* [Commits and commitlint](#commits-and-commitlint)
+		* [Husky hooks](#husky-hooks)
+		* [Commitlint](#commitlint)
+		* [commit-changes.js](#commit-changesjs)
 	* [Branching / Deploying](#branching--deploying)
 		* [Main branch](#main-branch)
 		* [Dev branch](#dev-branch)
@@ -131,10 +135,13 @@ Now you need to set the required environment variables from this table:
 
 | Folder/File                   | Description                                                  |
 | ----------------------------- | ------------------------------------------------------------ |
+| `/shared`                     | Shared code between client and server                        |
+| `/shared/config/security`     | Shared security configuration used by both the client and the server |
+| `/shared/utils/date`          | Shared date utilities used by both the client and the server |
 | `/client`                     | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`. |
+| `/client/app`                 | React app entry point                                        |
 | `/client/common`              | Common elements like icons etc                               |
 | `/client/components`          | React components reusable throughout the solution            |
-| `/client/config`              | Conifguration                                                |
 | `/client/graphql`             | Graphql implementation for the client using `@apollo/client` |
 | `/client/helpers`             | Helper functions                                             |
 | `/client/pages`               | Main pages of the solution                                   |
@@ -169,9 +176,12 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 
 ![image-20210317094748280](assets/image-20210317094748280.png)
 
-### Commits and `commitlint`
+#### Google
+See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) for more details on using Did with Google.
 
-We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
+### Commits and commitlint
+#### Husky hooks
+We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `eslint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
 
 You ***can** (but shouldn't) bypass pre-commit and commit-msg hooks using Git `--no-verify` option:
 
@@ -185,9 +195,13 @@ For Git commands that don't have a `--no-verify` option, you can use HUSKY envir
 HUSKY=0 git push # yolo!
 ```
 
+#### Commitlint
 We are also using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
 
 See `commitlint` in [package.json](./package.json). The commit message needs to be lowercase and have a prefix.
+
+#### commit-changes.js
+We also have the node script `.tasks/commit-changes.js` that can be used. This prompts you for the prefix and commit message, lints all files, generates documentation using `typedoc`, then commits your changes.
 
 ### Branching / Deploying
 

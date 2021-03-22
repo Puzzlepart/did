@@ -1,16 +1,27 @@
-import { PERMISSION } from 'config/security'
-import { IPivotItemProps } from 'office-ui-fabric-react'
+/* eslint-disable tsdoc/syntax */
 import React from 'react'
+import { PermissionScope } from 'security'
 
-export interface IPageSectionComponent extends IPivotItemProps {
-  component: JSX.Element
-  permission?: PERMISSION
-}
-
-export interface IPageComponent extends React.HTMLAttributes<HTMLDivElement> {
-  text?: string
+/**
+ * Page component
+ *
+ * @category Pages
+ */
+export interface PageComponent extends React.FC {
+  /**
+   * Icon that describe the page
+   *
+   * @see https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
+   */
   iconName?: string
-  path: string
-  component: JSX.Element
-  permission?: PERMISSION
+
+  /**
+   * Path for routing
+   */
+  path?: string
+
+  /**
+   * Permision required to access the page
+   */
+  permission?: PermissionScope
 }

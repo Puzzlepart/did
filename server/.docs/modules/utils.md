@@ -1,6 +1,8 @@
-[did-server - v0.9.9](../README.md) / utils
+[did-server - v0.9.11](../README.md) / Utils
 
-# Module: utils
+# Module: Utils
+
+Utility functions
 
 ## Table of contents
 
@@ -14,11 +16,15 @@
 
 ### environment
 
-▸ **environment**<T\>(`key`: *string*, `fallbackValue?`: *string*, `options?`: EnvironmentParseOptions): T
+▸ **environment**<T\>(`key`: keyof Environment, `fallbackValue?`: T, `options?`: EnvironmentParseOptions): T
 
-Get environment variable by key with optional fallbackvalue
+Get environment variable by key with optional fallback value
 
-Makes it easier to work with process.env.
+Makes it easier to work with `process.env` giving a type
+(`Environment`) for the available environment keys
+
+**`remarks`** Logs missing environment variables using the
+[debug](https://www.npmjs.com/package/debug) module
 
 #### Type parameters:
 
@@ -30,13 +36,13 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`key` | *string* | Key   |
-`fallbackValue?` | *string* | Fallback vaue if key is not found   |
+`key` | keyof Environment | Key   |
+`fallbackValue?` | T | Fallback vaue if key is not found   |
 `options` | EnvironmentParseOptions | options    |
 
 **Returns:** T
 
-Defined in: [server/utils/environment.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L16)
+Defined in: [utils/environment.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L52)
 
 ___
 
@@ -55,7 +61,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/firstPart.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/firstPart.ts#L9)
+Defined in: [utils/firstPart.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/firstPart.ts#L9)
 
 ___
 
@@ -63,9 +69,10 @@ ___
 
 ▸ **stripHtmlString**(`string`: *string*): *string*
 
-Strip html from string using string-strip-html
-Used when fetching events from ms graph
-Strips the html from event body
+Strip html from string using [string-strip-html](https://www.npmjs.com/package/string-strip-html)
+
+**`remarks`** Used when fetching events from Microsoft Graph
+or Google Calendar
 
 #### Parameters:
 
@@ -75,4 +82,4 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L10)
+Defined in: [utils/stripHtmlString.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L11)

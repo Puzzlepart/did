@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / GoogleCalendarService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / GoogleCalendarService
 
 # Class: GoogleCalendarService
 
-[services](../modules/services.md).GoogleCalendarService
+[Services](../modules/services.md).GoogleCalendarService
+
+Google calendar service
 
 ## Table of contents
 
@@ -16,6 +18,7 @@
 
 ### Methods
 
+- [getCalendars](services.googlecalendarservice.md#getcalendars)
 - [getEvents](services.googlecalendarservice.md#getevents)
 
 ## Constructors
@@ -32,7 +35,7 @@ Name | Type |
 
 **Returns:** [*GoogleCalendarService*](services.googlecalendarservice.md)
 
-Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L11)
+Defined in: [services/google/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L17)
 
 ## Properties
 
@@ -40,22 +43,43 @@ Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/d
 
 • `Private` **\_cal**: *Calendar*
 
-Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L11)
+Defined in: [services/google/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L17)
 
 ## Methods
 
-### getEvents
+### getCalendars
 
-▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
+▸ **getCalendars**(`accessRole?`: *string*): *Promise*<Schema$CalendarListEntry[]\>
+
+Get calendars
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`startDate` | *string* |
-`endDate` | *string* |
-`tzOffset` | *number* |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`accessRole` | *string* | 'owner' | Access role   |
 
-**Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
+**Returns:** *Promise*<Schema$CalendarListEntry[]\>
 
-Defined in: [server/services/google/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L27)
+Calendars with the specified `accessRole`
+
+Defined in: [services/google/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L41)
+
+___
+
+### getEvents
+
+▸ **getEvents**(`startDateTimeIso`: *string*, `endDateTimeIso`: *string*): *Promise*<any[]\>
+
+Get events for the specified period using Google APIs
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`startDateTimeIso` | *string* | Start date time in `ISO format`   |
+`endDateTimeIso` | *string* | End date time in `ISO format`    |
+
+**Returns:** *Promise*<any[]\>
+
+Defined in: [services/google/index.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L55)

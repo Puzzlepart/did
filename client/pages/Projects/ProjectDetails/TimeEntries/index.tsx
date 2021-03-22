@@ -1,11 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { EventList, UserMessage } from 'components'
-import {
-  ActionButton,
-  MessageBarType,
-  ProgressIndicator
-} from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import { EventList, UserColumn, UserMessage } from 'components'
+import { Progress } from 'components/Progress'
+import { ActionButton, MessageBarType } from 'office-ui-fabric-react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { Summary } from './Summary'
@@ -15,7 +12,7 @@ import { useTimeEntries } from './useTimeEntries'
 /**
  * @category Projects
  */
-export const TimeEntries: FunctionComponent = () => {
+export const TimeEntries: React.FC = () => {
   const { t } = useTranslation()
   const { loading, timeentries, onExport, error } = useTimeEntries()
   return (
@@ -40,18 +37,23 @@ export const TimeEntries: FunctionComponent = () => {
         <UserMessage text={t('projects.noTimeEntriesText')} />
       )}
       {loading && (
-        <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />
+        <Progress
+          label={t('projects.timeEntriesLoadingLabel')}
+          description={t('projects.timeEntriesLoadingDescription')}
+          iconProps={{ iconName: 'TimelineMatrixView' }}
+        />
       )}
       {!isEmpty(timeentries) && (
         <EventList
-          events={timeentries}
+          items={timeentries}
           additionalColumns={[
             {
               key: 'resource.displayName',
               fieldName: 'resource.displayName',
               name: t('common.employeeLabel'),
               minWidth: 100,
-              maxWidth: 150
+              maxWidth: 150,
+              onRender: ({ resource }) => <UserColumn user={resource} />
             }
           ]}
           dateFormat='MMM DD YYYY HH:mm'

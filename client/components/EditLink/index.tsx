@@ -6,14 +6,19 @@ import styles from './EditLink.module.scss'
 import { IEditLinkProps } from './types'
 
 /**
+ * Renders a edit link using `<Icon />` and `<Link />`
+ * from `office-ui-fabric-react`
+ *
  * @category Function Component
  */
-export const EditLink = ({ iconName, hidden, onClick }: IEditLinkProps) => {
+export const EditLink: React.FC<IEditLinkProps> = (props) => {
   const { t } = useTranslation()
   return (
-    <div hidden={hidden}>
-      <Link className={styles.root} onClick={onClick}>
-        {iconName && <Icon className={styles.icon} iconName={iconName} />}
+    <div {...props}>
+      <Link className={styles.root} onClick={props.onClick}>
+        {props.iconName && (
+          <Icon className={styles.icon} iconName={props.iconName} />
+        )}
         <span className={styles.text}>{t('common.editLabel')}</span>
       </Link>
     </div>

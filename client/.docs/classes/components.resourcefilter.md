@@ -1,19 +1,12 @@
-[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / ResourceFilter
+[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / ResourceFilter
 
-# Class: ResourceFilter<ItemType, KeyType\>
+# Class: ResourceFilter
 
 [Components](../modules/components.md).ResourceFilter
 
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
-
 ## Hierarchy
 
-* [*BaseFilter*](components.basefilter.md)<ItemType\>
+* [*BaseFilter*](components.basefilter.md)
 
   ↳ **ResourceFilter**
 
@@ -25,10 +18,9 @@ Name | Default |
 
 ### Properties
 
-- [\_selectedKeys](components.resourcefilter.md#_selectedkeys)
-- [fieldName](components.resourcefilter.md#fieldname)
 - [keyFieldName](components.resourcefilter.md#keyfieldname)
 - [name](components.resourcefilter.md#name)
+- [selectedKeys](components.resourcefilter.md#selectedkeys)
 - [valueFieldName](components.resourcefilter.md#valuefieldname)
 
 ### Methods
@@ -40,52 +32,31 @@ Name | Default |
 
 ### constructor
 
-\+ **new ResourceFilter**<ItemType, KeyType\>(`keyFieldName`: *string*, `valueFieldName`: *string*, `name`: *string*): [*ResourceFilter*](components.resourcefilter.md)<ItemType, KeyType\>
+\+ **new ResourceFilter**(`name`: *string*, `keyFieldName`: *string*, `valueFieldName`: *string*): [*ResourceFilter*](components.resourcefilter.md)
 
-Constructor
-
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`ItemType` | *any* |
-`KeyType` | *any* |
+Constructor for `ResourceFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
+`name` | *string* | Filter name   |
 `keyFieldName` | *string* | Field name for the item key   |
-`valueFieldName` | *string* | Field name for the item value   |
-`name` | *string* | Filter name    |
+`valueFieldName` | *string* | Field name for the item value    |
 
-**Returns:** [*ResourceFilter*](components.resourcefilter.md)<ItemType, KeyType\>
+**Returns:** [*ResourceFilter*](components.resourcefilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L13)
+Defined in: [components/FilterPanel/Filters/ResourceFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L11)
 
 ## Properties
-
-### \_selectedKeys
-
-• `Private` **\_selectedKeys**: KeyType[]
-
-Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L13)
-
-___
-
-### fieldName
-
-• **fieldName**: *string*
-
-Inherited from: [BaseFilter](components.basefilter.md).[fieldName](components.basefilter.md#fieldname)
-
-___
 
 ### keyFieldName
 
 • **keyFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
 ___
 
@@ -97,44 +68,60 @@ Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefil
 
 ___
 
+### selectedKeys
+
+• **selectedKeys**: *string*[]
+
+Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+
+___
+
 ### valueFieldName
 
-• **valueFieldName**: *string*
+• `Optional` **valueFieldName**: *string*
+
+Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
 
 ## Methods
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items`: *any*[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the ResourceFilter
+Intialize the `ResourceFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items` | *any*[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L35)
+Defined in: [components/FilterPanel/Filters/ResourceFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L28)
 
 ___
 
 ### setDefaults
 
-▸ **setDefaults**(`values`: { [key: string]: KeyType[];  }): [*ResourceFilter*](components.resourcefilter.md)<ItemType, KeyType\>
+▸ **setDefaults**(`values`: *any*): [*ResourceFilter*](components.resourcefilter.md)
+
+Set defaults (`selectedKeys`) for the filter
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`values` | *object* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`values` | *any* | Values   |
 
-**Returns:** [*ResourceFilter*](components.resourcefilter.md)<ItemType, KeyType\>
+**Returns:** [*ResourceFilter*](components.resourcefilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+this
 
-Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L57)
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)

@@ -1,8 +1,9 @@
 /* eslint-disable tsdoc/syntax */
+import { TabContainer } from 'components'
 import { HotkeyModal } from 'components/HotkeyModal'
-import { Pivot, PivotItem } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
+import { useTranslation } from 'react-i18next'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
 import { ErrorBar } from './ErrorBar'
@@ -18,8 +19,9 @@ import { TimesheetContext, TimesheetView } from './types'
 /**
  * @category Function Component
  */
-export const Timesheet: FunctionComponent = () => {
-  const { state, dispatch, context, t } = useTimesheet()
+export const Timesheet: React.FC = () => {
+  const { t } = useTranslation()
+  const { state, dispatch, context } = useTimesheet()
   const { hotkeysProps } = useHotkeys(context)
 
   return (
@@ -27,42 +29,35 @@ export const Timesheet: FunctionComponent = () => {
       <GlobalHotKeys {...hotkeysProps}>
         <div className={styles.root}>
           <ActionBar />
-          <ErrorBar error={context.error} />
+          <ErrorBar error={state.error} />
           <StatusBar />
-          <Pivot
-            defaultSelectedKey={state.selectedView}
+          <TabContainer
+            selectedKey={state.selectedView}
             onLinkClick={({ props }) =>
               dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
-            }>
-            <PivotItem
-              key='overview'
-              itemKey='overview'
+            }
+            itemProps={{
+              headerButtonProps: { disabled: !!state.error }
+            }}>
+            <Overview
               headerText={t('timesheet.overviewHeaderText')}
               itemIcon='CalendarWeek'
-              headerButtonProps={{ disabled: !!context.error }}>
-              <Overview />
-            </PivotItem>
-            <PivotItem
-              key='summary'
+            />
+            <SummaryView
               itemKey='summary'
               headerText={t('timesheet.summaryHeaderText')}
               itemIcon='List'
-              headerButtonProps={{ disabled: !!context.error }}>
-              <SummaryView />
-            </PivotItem>
-            <PivotItem
-              key='allocation'
+            />
+            <AllocationView
               itemKey='allocation'
               headerText={t('timesheet.allocationHeaderText')}
               itemIcon='ReportDocument'
-              headerButtonProps={{ disabled: !!context.error }}>
-              <AllocationView />
-            </PivotItem>
-          </Pivot>
+            />
+          </TabContainer>
         </div>
         <HotkeyModal
           {...hotkeysProps}
-          isOpen={context.showHotkeysModal}
+          isOpen={state.showHotkeysModal}
           onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
         />
       </GlobalHotKeys>

@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { ActionButton } from 'office-ui-fabric-react'
+import { bugs } from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ErrorFallback.module.scss'
@@ -12,9 +13,8 @@ import { IErrorFallbackProps } from './types'
  * @param error - Error
  */
 export const generateNewIssueUrl = (error: Error) => {
-  const baseUrl = 'https://github.com/Puzzlepart/did/issues/new'
   return [
-    baseUrl,
+    `${bugs.url}/new`,
     '?',
     [
       'labels=bug',
@@ -26,6 +26,15 @@ export const generateNewIssueUrl = (error: Error) => {
 }
 
 /**
+ * Error fallback for `<ErrorBoundary />`  from
+ * `react-error-boundary`
+ *
+ * Shows the `error` message and provides two
+ * buttons. One that redirects the user to
+ * GitHub to create a new **bug** and one that
+ * executes `resetErrorBoundary` that might
+ * temporarily solve the issue.
+ *
  * @category Function Component
  */
 export const ErrorFallback = ({
@@ -36,8 +45,13 @@ export const ErrorFallback = ({
   return (
     <div role='alert' className={styles.root}>
       <div className={styles.header}>{t('common.errorFallbackHeader')}</div>
-      <pre>Time: {DateUtils.formatDate(new Date(), 'MMM DD, YYYY HH:mm')}</pre>
-      <pre>Error: {error.message}</pre>
+      <pre>
+        {t('common.timeLabel')}:{' '}
+        {$date.formatDate(new Date(), 'MMM DD, YYYY HH:mm')}
+      </pre>
+      <pre>
+        {t('common.error')}: {error.message}
+      </pre>
       <div>
         <ActionButton
           iconProps={{ iconName: 'GitGraph' }}

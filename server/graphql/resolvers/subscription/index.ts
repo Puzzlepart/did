@@ -4,6 +4,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { PermissionScope } from '../../../../shared/config/security'
 import { SubscriptionService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
@@ -46,7 +47,7 @@ export class SubscriptionResolver {
    *
    * @param settings - Settings
    */
-  @Authorized<IAuthOptions>({ permission: '67ba6efc' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_SUBSCRIPTION })
   @Mutation(() => BaseResult, { description: 'Update subscription' })
   async updateSubscription(
     @Arg('settings', () => SubscriptionSettingsInput)

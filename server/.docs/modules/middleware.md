@@ -1,31 +1,23 @@
-[did-server - v0.9.9](../README.md) / middleware
+[did-server - v0.9.11](../README.md) / Middleware
 
-# Module: middleware
+# Module: Middleware
+
+NodeJS Express App middleware
 
 ## Table of contents
 
-### Variables
+### Express middleware Variables
 
-- [helmetMiddleware](middleware.md#helmetmiddleware)
 - [redisMiddlware](middleware.md#redismiddlware)
 
-### Functions
+### Express middleware Functions
 
+- [helmetMiddleware](middleware.md#helmetmiddleware)
 - [passportMiddleware](middleware.md#passportmiddleware)
 - [redisSessionMiddleware](middleware.md#redissessionmiddleware)
 - [serveGzippedMiddleware](middleware.md#servegzippedmiddleware)
 
-## Variables
-
-### helmetMiddleware
-
-• `Const` **helmetMiddleware**: *any*
-
-Helmet configuration
-
-Defined in: [server/middleware/helmet/index.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L6)
-
-___
+## Express middleware Variables
 
 ### redisMiddlware
 
@@ -33,16 +25,32 @@ ___
 
 Redis client
 
-- Using hosname from env REDIS_CACHE_HOSTNAME
-- Using auth_pass from env REDIS_CACHE_KEY
-- Using tls.servername from env REDIS_CACHE_HOSTNAME
-- Using socket_keepalive to true
+- Using `hosname` from env `REDIS_CACHE_HOSTNAME`
+- Using `auth_pass` from env `REDIS_CACHE_KEY`
+- Using `tls.servername` from env `REDIS_CACHE_HOSTNAME`
+- Using `socket_keepalive` to true
 
 **`see`** https://github.com/Puzzlepart/did/issues/812
 
-Defined in: [server/middleware/redis/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L14)
+Defined in: [middleware/redis/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L17)
 
-## Functions
+## Express middleware Functions
+
+### helmetMiddleware
+
+▸ `Const`**helmetMiddleware**(): *any*
+
+Helmet configuration
+
+We allow framing from `https://teams.microsoft.com`
+
+**`see`** https://github.com/helmetjs/helmet
+
+**Returns:** *any*
+
+Defined in: [middleware/helmet/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L13)
+
+___
 
 ### passportMiddleware
 
@@ -58,7 +66,7 @@ Name | Type | Description |
 
 **Returns:** *PassportStatic*
 
-Defined in: [server/middleware/passport/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L11)
+Defined in: [middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L14)
 
 ___
 
@@ -82,7 +90,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [server/middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L14)
+Defined in: [middleware/session/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L17)
 
 ___
 
@@ -100,4 +108,4 @@ Name | Type | Description |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [server/middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L9)
+Defined in: [middleware/gzip/index.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L12)

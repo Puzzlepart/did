@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
-import getPermissions, { PERMISSION } from 'config/security/permissions'
-import { useContext, useMemo } from 'react'
+import { useAppContext } from 'AppContext'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getPermissions, IPermission, PermissionScope } from 'security'
 import { contains } from 'underscore'
 
 /**
- * Permissions hook
+ * Permissions hook that returns atuple of the available
+ * permissions and a function to check if the current user
+ * has the specified permission
  *
- * @param permissionIds - Permission IDs
+ * @param scopeIds - Limit the returns permissions to the specified ids
+ * @param api - Only return permissions available to be called externally
  *
  * @returns Permissions available based on specified permissionIds
  * and a function hasPermission that checks if the currently logged
@@ -17,23 +20,31 @@ import { contains } from 'underscore'
  *
  * @category React Hook
  */
-export function usePermissions(permissionIds?: string[]) {
+export function usePermissions(
+  scopeIds?: string[],
+  api = false
+): [IPermission[], (scope: PermissionScope) => boolean] {
   const { t } = useTranslation()
-  const context = useContext(AppContext)
+  const context = useAppContext()
 
   let permissions = getPermissions(t)
 
-  if (permissionIds) {
-    permissions = permissions.filter((perm) => contains(permissionIds, perm.id))
+  if (scopeIds) {
+    permissions = permissions.filter((perm) => contains(scopeIds, perm.id))
+  }
+
+  if (api) {
+    permissions = permissions.filter((perm) => perm.api)
   }
 
   return useMemo(
-    () => ({
+    () => [
       permissions,
-      hasPermission: (permission: PERMISSION) => {
-        return context?.user ? context.user.hasPermission(permission) : false
+      (scope: PermissionScope) => {
+        if (!scope) return true
+        return context?.user ? context.user.hasPermission(scope) : false
       }
-    }),
+    ],
     [context?.user]
   )
 }

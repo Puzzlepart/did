@@ -1,0 +1,36 @@
+.root {
+  margin-top: 0;
+  line-height: 44px;
+
+  &.mobile i {
+    margin: 0 4px 0 8px;
+  }
+
+  &:hover {
+    input {
+      background-color: rgb(243, 242, 241);
+      color: rgb(32, 31, 30);
+    }
+  }
+
+  [class*='ms-TextField-fieldGroup'] {
+    height: 44px;
+
+    i {
+      position: relative;
+      top: 0;
+      right: 20px;
+      align-self: center;
+    }
+  }
+
+  .actionBarIcon {
+    font-size: 12;
+    color: 'rgb(120, 120, 120)';
+  }
+}
+
+.weekNumber {
+  line-height: 44px;
+  padding: 0 8px 0 8px;
+}

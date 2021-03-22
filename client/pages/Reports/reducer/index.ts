@@ -24,8 +24,10 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
   createReducer<IReportsState>({}, (builder) =>
     builder
       .addCase(INIT, (state) => {
-        state.preset = find(queries, (q) => q.key === url.query) as any
-        state.savedFilters = get(app.user.configuration, 'reports.filters', {
+        if (url.query) {
+          state.preset = find(queries, (q) => q.itemKey === url.query) as any
+        }
+        state.savedFilters = get(app, 'user.configuration.reports.filters', {
           default: {}
         })
       })
@@ -96,7 +98,10 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         state.groupBy = payload.groupBy
       })
       .addCase(CHANGE_QUERY, (state, { payload }) => {
-        state.preset = find(queries, (q) => q.key === payload.key) as any
+        state.preset = find(
+          queries,
+          (q) => q.itemKey === payload.props?.itemKey
+        ) as any
         state.subset = null
       })
       .addCase(CLEAR_FILTERS, (state) => {

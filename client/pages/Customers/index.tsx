@@ -1,12 +1,20 @@
 /* eslint-disable tsdoc/syntax */
+import { PageComponent } from 'pages/types'
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Customers } from './Customers'
 
 /**
- * @ignore
+ * Customers page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
  */
-export const CustomersPage = () => {
+export const CustomersPage: PageComponent = () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -22,5 +30,10 @@ export const CustomersPage = () => {
     </Switch>
   )
 }
+
+Object.assign(CustomersPage, {
+  iconName: 'AccountActivity',
+  permission: PermissionScope.ACCESS_CUSTOMERS
+} as Partial<PageComponent>)
 
 export * from './Customers'

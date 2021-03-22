@@ -1,42 +1,62 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { Pivot, PivotItem } from 'office-ui-fabric-react'
-import React from 'react'
+import { TabContainer } from 'components/TabContainer'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import styles from './Admin.module.scss'
-import { useSections } from './useSections'
+import { ApiTokens } from './ApiTokens'
+import { Labels } from './Labels'
+import { Roles } from './Roles'
+import { SubscriptionSettings } from './Subscription'
+import { Users } from './Users'
 
 /**
  * @category Function Component
  */
 export const Admin = () => {
-  const sections = useSections()
-  const { view } = useParams<{ view: string }>()
+  const { t } = useTranslation()
+  const params = useParams<{ view: string }>()
+  const [view, setView] = useState(params.view || 'users')
   const history = useHistory()
 
-  const onPivotClick = ({ props }: PivotItem) =>
-    history.push(`/admin/${props.itemKey}`)
-
   return (
-    <div className={styles.root}>
-      <Pivot selectedKey={view || 'users'} onLinkClick={onPivotClick}>
-        {sections.map(
-          (section) =>
-            !section.hidden && (
-              <PivotItem
-                {...section}
-                key={section.itemKey}
-                className={styles.tab}>
-                {section.component}
-              </PivotItem>
-            )
-        )}
-      </Pivot>
-    </div>
+    <TabContainer
+      className={styles.root}
+      fixedLinkWidth={true}
+      onLinkClick={({ props }) => {
+        setView(props.itemKey)
+        history.push(`/admin/${props.itemKey}`)
+      }}
+      selectedKey={view}>
+      <Users
+        headerText={t('admin.users')}
+        itemIcon='FabricUserFolder'
+        permission={PermissionScope.MANAGE_USERS}
+      />
+      <Labels headerText={t('admin.labels')} itemIcon='Label' />
+      <Roles
+        headerText={t('admin.rolesPermissions')}
+        itemIcon='SecurityGroup'
+        permission={PermissionScope.MANAGE_ROLESPERMISSIONS}
+      />
+      <SubscriptionSettings
+        headerText={t('admin.subscriptionSettings')}
+        itemIcon='Subscribe'
+        permission={PermissionScope.MANAGE_SUBSCRIPTION}
+      />
+      <ApiTokens
+        headerText={t('admin.apiTokens.headerText')}
+        itemIcon='AuthenticatorApp'
+        permission={PermissionScope.MANAGE_SUBSCRIPTION}
+      />
+    </TabContainer>
   )
 }
 
-export * from '../Reports/SummaryView'
 export * from './ApiTokens'
 export * from './Labels'
 export * from './Roles'
+export * from './Subscription'
 export * from './Users'

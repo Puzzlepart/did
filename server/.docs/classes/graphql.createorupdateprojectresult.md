@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / CreateOrUpdateProjectResult
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / CreateOrUpdateProjectResult
 
 # Class: CreateOrUpdateProjectResult
 
-[graphql](../modules/graphql.md).CreateOrUpdateProjectResult
+[GraphQL](../modules/graphql.md).CreateOrUpdateProjectResult
 
 ## Table of contents
 
@@ -29,7 +29,7 @@
 
 • `Optional` **id**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L122)
+Defined in: [graphql/resolvers/project/types.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L122)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • **success**: *boolean*
 
-Defined in: [server/graphql/resolvers/project/types.ts:119](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L119)
+Defined in: [graphql/resolvers/project/types.ts:119](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L119)

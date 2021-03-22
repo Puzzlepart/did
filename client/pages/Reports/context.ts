@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { AnyAction } from '@reduxjs/toolkit'
+import { IListColumn } from 'components/List/types'
 import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { createContext } from 'react'
 import { IReportsState } from './types'
 
@@ -22,7 +22,7 @@ export interface IReportsContext {
   /**
    * Columns
    */
-  columns: IColumn[]
+  columns?: IListColumn[]
 
   /**
    * Translate function

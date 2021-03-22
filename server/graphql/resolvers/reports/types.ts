@@ -5,7 +5,7 @@ import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, Project, User } from '../types'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a TimeEntry',
@@ -66,6 +66,8 @@ export class TimeEntry {
 
 /**
  * Reports query preset
+ *
+ * @category GraphQL Type
  */
 export type ReportsQueryPreset =
   | 'LAST_MONTH'
@@ -75,7 +77,7 @@ export type ReportsQueryPreset =
   | 'FORECAST'
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType()
 export class ReportsQuery {
@@ -87,7 +89,7 @@ export class ReportsQuery {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType()
 export class ConfirmedPeriodsQuery {

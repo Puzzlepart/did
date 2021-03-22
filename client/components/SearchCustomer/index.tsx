@@ -8,9 +8,11 @@ import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
 
 /**
+ * Search for customers using `<Autocomplete />`
+ *
  * @category Function Component
  */
-export const SearchCustomer = (props: ISearchCustomerProps) => {
+export const SearchCustomer: React.FC<ISearchCustomerProps> = (props) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
     fetchPolicy: 'cache-first'

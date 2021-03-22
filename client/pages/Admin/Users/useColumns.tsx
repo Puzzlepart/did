@@ -1,49 +1,69 @@
 /* eslint-disable tsdoc/syntax */
-import { DeleteLink, DisableLink } from 'components'
-import { IColumn, Icon } from 'office-ui-fabric-react'
+import { IconText } from 'components'
+import { EditLink } from 'components/EditLink'
+import { IListColumn } from 'components/List/types'
+import { useUserListColumn } from 'components/UserColumn'
+import { ReactHookFunction } from 'hooks/types'
+import { PersonaSize } from 'office-ui-fabric-react'
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { Role, User } from 'types'
+import { User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
-import { EditLink } from '../../../components/EditLink'
+import { IUsersContext } from './context'
 
 /**
- * Columns hook
+ * Returns columns for the `Users` component
  *
  * @category Users
  */
-export function useColumns({ setUserForm }): IColumn[] {
+export const useColumns: ReactHookFunction<IUsersContext, IListColumn[]> = ({
+  setUserForm
+}) => {
   const { t } = useTranslation()
+  const userColumn = useUserListColumn(
+    { size: PersonaSize.size40 },
+    { maxWidth: 250 }
+  )
   return [
+    userColumn,
+    col('surname', t('common.surnameLabel'), {
+      maxWidth: 160,
+      data: { hidden: isMobile }
+    }),
+    col('givenName', t('common.givenNameLabel'), {
+      maxWidth: 160,
+      data: { hidden: isMobile }
+    }),
+    col('jobTitle', t('common.jobTitleLabel'), {
+      maxWidth: 140,
+      data: { hidden: isMobile }
+    }),
+    col('mail', t('common.mailLabel'), {
+      maxWidth: 180,
+      data: { hidden: isMobile }
+    }),
     col(
       'role.name',
       t('common.roleLabel'),
-      { maxWidth: 150 },
-      ({ role }: User) => (
-        <div title={(role as Role).description}>
-          <Icon style={{ marginRight: 8 }} iconName={(role as Role).icon} />
-          <span>{(role as Role).name}</span>
-        </div>
-      )
+      {
+        maxWidth: 150,
+        data: { hidden: isMobile }
+      },
+      ({ role }) => <IconText iconName={role.icon} text={role.name} />
     ),
-    col('displayName', t('common.displayNameLabel'), { maxWidth: 180 }),
-    col('surname', t('common.surnameLabel'), { maxWidth: 160 }),
-    col('givenName', t('common.givenNameLabel'), { maxWidth: 160 }),
-    col('jobTitle', t('common.jobTitleLabel'), { maxWidth: 140 }),
-    col('mail', t('common.mailLabel'), { maxWidth: 180 }),
     col('actions', '', { maxWidth: 100 }, (user: User) => (
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <div style={{ display: 'flex' }}>
         <EditLink
+          style={{ marginRight: 12 }}
           hidden={user.provider === 'google'}
-          onClick={() => {
+          onClick={() =>
             setUserForm({
               headerText: user.displayName,
               user
             })
-          }}
+          }
         />
-        <DisableLink disabled={true} />
-        <DeleteLink disabled={true} />
       </div>
     ))
   ]

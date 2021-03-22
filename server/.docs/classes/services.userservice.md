@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / UserService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / UserService
 
 # Class: UserService
 
-[services](../modules/services.md).UserService
+[Services](../modules/services.md).UserService
+
+User service
 
 ## Hierarchy
 
@@ -43,17 +45,21 @@
 
 ### constructor
 
-\+ **new UserService**(`context`: [*Context*](graphql_context.context.md)): [*UserService*](services.userservice.md)
+\+ **new UserService**(`context`: *Context*): [*UserService*](services.userservice.md)
+
+Constructor for `UserService`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/user.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L13)
+Overrides: void
+
+Defined in: [services/mongo/user.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L20)
 
 ## Properties
 
@@ -61,15 +67,17 @@ Defined in: [server/services/mongo/user.ts:13](https://github.com/Puzzlepart/did
 
 • `Private` **\_role**: [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/user.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L13)
+Defined in: [services/mongo/user.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L20)
 
 ___
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -77,13 +85,17 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*User*](graphql.user.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -91,11 +103,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -122,7 +138,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/user.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L28)
+Defined in: [services/mongo/user.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L40)
 
 ___
 
@@ -140,7 +156,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L80)
+Defined in: [services/mongo/user.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L94)
 
 ___
 
@@ -158,7 +174,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L94)
+Defined in: [services/mongo/user.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L108)
 
 ___
 
@@ -185,13 +201,15 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
 ### getById
 
-▸ **getById**(`id`: *string*): *Promise*<[*User*](graphql.user.md)\>
+▸ **getById**(`idOrMail`: *string*): *Promise*<[*User*](graphql.user.md)\>
 
 Get user by ID
 
@@ -201,11 +219,11 @@ Get user by ID
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`id` | *string* | User ID    |
+`idOrMail` | *string* | User ID or mail    |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
-Defined in: [server/services/mongo/user.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L61)
+Defined in: [services/mongo/user.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L73)
 
 ___
 
@@ -223,7 +241,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/services/mongo/user.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L37)
+Defined in: [services/mongo/user.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L49)
 
 ___
 
@@ -243,7 +261,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -265,7 +285,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -286,7 +308,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 
 ___
 
@@ -307,7 +331,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:124](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L124)
+Defined in: [services/mongo/user.ts:138](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L138)
 
 ___
 
@@ -325,4 +349,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L108)
+Defined in: [services/mongo/user.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L122)

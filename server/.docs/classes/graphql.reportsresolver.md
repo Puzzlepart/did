@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / ReportsResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ReportsResolver
 
 # Class: ReportsResolver
 
-[graphql](../modules/graphql.md).ReportsResolver
+[GraphQL](../modules/graphql.md).ReportsResolver
 
 Resolver for `TimeEntry`.
 
@@ -28,7 +28,7 @@ _dependendy injection_.
 
 ### constructor
 
-\+ **new ReportsResolver**(`_report`: [*ReportService*](services_report.reportservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
+\+ **new ReportsResolver**(`_report`: [*ReportService*](services.reportservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
 
 Constructor for ReportsResolver
 
@@ -36,11 +36,11 @@ Constructor for ReportsResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_report` | [*ReportService*](services_report.reportservice.md) | Report service    |
+`_report` | [*ReportService*](services.reportservice.md) | Report service    |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L29)
+Defined in: [graphql/resolvers/reports/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L29)
 
 ## Methods
 
@@ -58,7 +58,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L64)
+Defined in: [graphql/resolvers/reports/index.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L65)
 
 ___
 
@@ -70,7 +70,7 @@ Get forecast report
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L80)
+Defined in: [graphql/resolvers/reports/index.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L81)
 
 ___
 
@@ -90,13 +90,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L49)
+Defined in: [graphql/resolvers/reports/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L50)
 
 ___
 
 ### userReport
 
-▸ **userReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `context?`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
+▸ **userReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `context?`: *Context*): *Promise*<Report\>
 
 Get report
 
@@ -105,8 +105,8 @@ Get report
 Name | Type |
 :------ | :------ |
 `preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) |
-`context?` | [*Context*](graphql_context.context.md) |
+`context?` | *Context* |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L94)
+Defined in: [graphql/resolvers/reports/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L95)

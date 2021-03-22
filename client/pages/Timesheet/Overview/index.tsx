@@ -1,28 +1,30 @@
-import { EventList } from 'components'
+/* eslint-disable tsdoc/syntax */
+import { EventList, TabComponent } from 'components'
 import { config } from 'package'
-import React, { FunctionComponent, useContext } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
-import { TimesheetContext } from '../context'
+import { useTimesheetContext } from '../context'
 import styles from './Overview.module.scss'
 import { useAdditionalColumns } from './useAdditionalColumns'
 import { useGroups } from './useGroups'
 
-export const Overview: FunctionComponent = () => {
-  const { loading, error, selectedPeriod } = useContext(TimesheetContext)
+/**
+ * @category Timesheet
+ */
+export const Overview: TabComponent = () => {
+  const { state } = useTimesheetContext()
   const additionalColumns = useAdditionalColumns()
-  const groups = useGroups()
+  const listGroupProps = useGroups()
   const className = [styles.root]
   if (isMobile) className.push(styles.mobile)
-
   return (
     <div className={className.join(' ')}>
       <EventList
-        hidden={!!error}
-        enableShimmer={!!loading}
-        events={selectedPeriod?.getEvents()}
-        showEmptyDays={true}
+        hidden={!!state.error}
+        enableShimmer={!!state.loading}
+        items={state.selectedPeriod?.getEvents()}
         dateFormat={config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
-        groups={groups}
+        listGroupProps={listGroupProps}
         additionalColumns={additionalColumns}
       />
     </div>

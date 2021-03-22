@@ -1,4 +1,4 @@
-[did-client - v0.9.9](../README.md) / Utils
+[did-client - v0.9.11](../README.md) / Utils
 
 # Module: Utils
 
@@ -13,6 +13,7 @@ Reusable utility functions
 ### Functions
 
 - [generateColumn](utils.md#generatecolumn)
+- [getContrastColor](utils.md#getcontrastcolor)
 - [getSum](utils.md#getsum)
 - [loadScripts](utils.md#loadscripts)
 - [searchObject](utils.md#searchobject)
@@ -23,9 +24,9 @@ Reusable utility functions
 
 ### generateColumn
 
-▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<IColumn\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: IColumn) => *any*, `minWidth?`: *number*): IColumn
+▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Generate a IColumn defintion
+Generate a `IListColumn` defintion
 
 #### Parameters:
 
@@ -33,13 +34,35 @@ Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `fieldName` | *string* | - | Field name   |
 `name` | *string* | '' | -Name   |
-`props` | *Partial*<IColumn\> | - | Additional props   |
-`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: IColumn) => *any* | - | On render function   |
+`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\> | - | Additional props   |
+`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any* | - | Render function   |
 `minWidth` | *number* | 100 | Min width    |
 
-**Returns:** IColumn
+**Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Defined in: [client/utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
+Defined in: [utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
+
+___
+
+### getContrastColor
+
+▸ **getContrastColor**(`hexcolor`: *string*): *black* \| *white*
+
+Get the contrasting color for any hex color
+(c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
+Derived from work by Brian Suda, https://24ways.org/2010/calculating-color-contrast/
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`hexcolor` | *string* |
+
+**Returns:** *black* \| *white*
+
+The contrasting color (black or white)
+
+Defined in: [utils/getContrastColor.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L10)
 
 ___
 
@@ -58,33 +81,15 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [client/utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
+Defined in: [utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
 
 ___
 
 ### loadScripts
 
-▸ **loadScripts**(`scriptSource`: *string*[]): *Promise*<void\>
+▸ **loadScripts**<T\>(`scriptSource`: *string*[], `basePath?`: *string*, `globals`: *Record*<string, string\>): *Promise*<T\>
 
 Load scripts using document.createElement
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`scriptSource` | *string*[] |
-
-**Returns:** *Promise*<void\>
-
-Defined in: [client/utils/loadScripts.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L6)
-
-___
-
-### searchObject
-
-▸ **searchObject**<T\>(`item`: T, `searchString`: *string*): *boolean*
-
-Search object
 
 #### Type parameters:
 
@@ -94,14 +99,45 @@ Name | Default |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`item` | T | Item   |
-`searchString` | *string* | - |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`scriptSource` | *string*[] | - | - |
+`basePath` | *string* | '' | Base path   |
+`globals` | *Record*<string, string\> | - | Globals    |
+
+**Returns:** *Promise*<T\>
+
+Defined in: [utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
+
+___
+
+### searchObject
+
+▸ **searchObject**<T\>(`__namedParameters`: *SearchObjectOptions*<T\>): *boolean*
+
+Searces the object values for a match of `searchString`
+
+Available options (`SearchObjectOptions`)
+- `item` **required** - The item to search
+- `searchTerm` **required** The term to search for
+- `pick_` _optional_ - Properties to search in
+- `omit_` _optional_ - Properties to ignore
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *SearchObjectOptions*<T\> |
 
 **Returns:** *boolean*
 
-Defined in: [client/utils/searchObject.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L9)
+Defined in: [utils/searchObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L19)
 
 ___
 
@@ -119,7 +155,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [client/utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
+Defined in: [utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
 
 ___
 
@@ -145,4 +181,4 @@ Name | Type | Default value | Description |
 
 **Returns:** T
 
-Defined in: [client/utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)
+Defined in: [utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)

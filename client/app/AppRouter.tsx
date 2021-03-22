@@ -4,8 +4,9 @@
  *
  * @module App
  */
-import { usePages } from 'pages/usePages'
-import React, { FunctionComponent } from 'react'
+import { useAppContext } from 'AppContext'
+import { usePermissions } from 'hooks'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { ErrorBoundary } from 'react-error-boundary'
 import {
@@ -16,33 +17,41 @@ import {
 } from 'react-router-dom'
 import styles from './App.module.scss'
 import { ErrorFallback } from './ErrorFallback'
-import { MobileHeader } from './MobileHeader'
+import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
 
-export const AppRouter: FunctionComponent = () => {
-  const { pages } = usePages()
+/**
+ * App router
+ *
+ * @category App
+ */
+export const AppRouter: React.FC = () => {
+  const { pages } = useAppContext()
+  const [, hasPermission] = usePermissions()
+  let className = styles.root
+  if (isMobile) className += ` ${styles.mobile}`
   return (
     <Router>
-      <div className={styles.root}>
+      <div className={className}>
         <Navigation />
-        <div className={styles.container}>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Switch>
-              {pages.map((page, index) => (
-                <Route key={index} path={page.path}>
-                  {page.hidden ? (
-                    <Redirect to='/' />
-                  ) : (
-                    <>
-                      {isMobile && <MobileHeader text={page.text} />}
-                      {page.component}
-                    </>
-                  )}
-                </Route>
-              ))}
-            </Switch>
-          </ErrorBoundary>
-        </div>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Switch>
+            {pages.map((Page, index) => (
+              <Route key={index} path={Page.path}>
+                {!hasPermission(Page.permission) ? (
+                  <Redirect to='/' />
+                ) : (
+                  <>
+                    <MobileBreadcrumb page={Page} />
+                    <div className={styles.container}>
+                      <Page />
+                    </div>
+                  </>
+                )}
+              </Route>
+            ))}
+          </Switch>
+        </ErrorBoundary>
       </div>
     </Router>
   )

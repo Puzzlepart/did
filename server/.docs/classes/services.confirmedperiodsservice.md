@@ -1,8 +1,10 @@
-[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / ConfirmedPeriodsService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
 
 # Class: ConfirmedPeriodsService
 
-[services](../modules/services.md).ConfirmedPeriodsService
+[Services](../modules/services.md).ConfirmedPeriodsService
+
+Confirmed periods service
 
 ## Hierarchy
 
@@ -35,27 +37,31 @@
 
 ### constructor
 
-\+ **new ConfirmedPeriodsService**(`context`: [*Context*](graphql_context.context.md)): [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
+\+ **new ConfirmedPeriodsService**(`context`: *Context*): [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
 
-Constructor for ConfirmedPeriodsService
+Constructor for `ConfirmedPeriodsService`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi    |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
 
-Defined in: [server/services/mongo/confirmed_periods.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/confirmed_periods.ts#L6)
+Overrides: void
+
+Defined in: [services/mongo/confirmed_periods.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/confirmed_periods.ts#L13)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -63,13 +69,17 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<any\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -77,11 +87,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -108,7 +122,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -128,7 +144,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<any\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -150,7 +168,9 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<any\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -171,4 +191,6 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Inherited from: void
+
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)

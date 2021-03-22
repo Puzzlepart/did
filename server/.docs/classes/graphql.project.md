@@ -1,8 +1,8 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / Project
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / Project
 
 # Class: Project
 
-[graphql](../modules/graphql.md).Project
+[GraphQL](../modules/graphql.md).Project
 
 ## Table of contents
 
@@ -42,7 +42,7 @@ Name | Type | Description |
 
 **Returns:** [*Project*](graphql.project.md)
 
-Defined in: [server/graphql/resolvers/project/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L87)
+Defined in: [graphql/resolvers/project/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L87)
 
 ## Properties
 
@@ -50,7 +50,7 @@ Defined in: [server/graphql/resolvers/project/types.ts:87](https://github.com/Pu
 
 • **\_id**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L51)
+Defined in: [graphql/resolvers/project/types.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L51)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • `Optional` **customer**: [*Customer*](graphql.customer.md)
 
-Defined in: [server/graphql/resolvers/project/types.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L78)
+Defined in: [graphql/resolvers/project/types.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L78)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **customerKey**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L60)
+Defined in: [graphql/resolvers/project/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L60)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 • **description**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L66)
+Defined in: [graphql/resolvers/project/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L66)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 • `Optional` **externalSystemURL**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L75)
+Defined in: [graphql/resolvers/project/types.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L75)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • **icon**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L69)
+Defined in: [graphql/resolvers/project/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L69)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • `Optional` **inactive**: *boolean*
 
-Defined in: [server/graphql/resolvers/project/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L84)
+Defined in: [graphql/resolvers/project/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L84)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 • **key**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L57)
+Defined in: [graphql/resolvers/project/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L57)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 • `Optional` **labels**: *string*[] \| [*LabelObject*](graphql.labelobject.md)[]
 
-Defined in: [server/graphql/resolvers/project/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L87)
+Defined in: [graphql/resolvers/project/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L87)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L63)
+Defined in: [graphql/resolvers/project/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L63)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 • `Optional` **outlookCategory**: [*OutlookCategory*](graphql.outlookcategory.md)
 
-Defined in: [server/graphql/resolvers/project/types.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L81)
+Defined in: [graphql/resolvers/project/types.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L81)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 • `Optional` **tag**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L54)
+Defined in: [graphql/resolvers/project/types.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L54)
 
 ___
 
@@ -146,4 +146,4 @@ ___
 
 • `Optional` **webLink**: *string*
 
-Defined in: [server/graphql/resolvers/project/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L72)
+Defined in: [graphql/resolvers/project/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L72)

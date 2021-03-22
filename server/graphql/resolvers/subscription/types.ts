@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes Subscription forecast settings'
@@ -18,7 +18,7 @@ export class SubscriptionForecastSettings {
 }
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes Subscription AD sync settings'
@@ -29,10 +29,13 @@ export class SubscriptionADSyncSettings {
 
   @Field(() => [String], { nullable: true })
   properties?: string[]
+
+  @Field({ nullable: true })
+  syncUserPhoto?: boolean
 }
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
@@ -44,7 +47,7 @@ export class SubscriptionSettings {
 }
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a Subscription',
@@ -72,7 +75,7 @@ export class Subscription {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'A input that describes Subscription forecast settings'
@@ -86,7 +89,7 @@ export class SubscriptionForecastSettingsInput {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'A input that describes Subscription AD sync settings'
@@ -97,10 +100,13 @@ export class SubscriptionADSyncSettingsInput {
 
   @Field(() => [String], { nullable: true })
   properties?: string[]
+
+  @Field({ nullable: true })
+  syncUserPhoto?: boolean
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
