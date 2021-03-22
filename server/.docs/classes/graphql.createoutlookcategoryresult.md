@@ -30,6 +30,8 @@
 
 **Returns:** [*CreateOutlookCategoryResult*](graphql.createoutlookcategoryresult.md)
 
+Inherited from: void
+
 ## Properties
 
 ### data
@@ -44,6 +46,8 @@ ___
 
 • `Optional` **error**: *Error*
 
+Inherited from: void
+
 Defined in: [graphql/resolvers/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L37)
 
 ___
@@ -51,5 +55,7 @@ ___
 ### success
 
 • **success**: *boolean*
+
+Inherited from: void
 
 Defined in: [graphql/resolvers/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L34)

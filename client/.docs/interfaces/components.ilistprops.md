@@ -49,6 +49,8 @@ Name | Default |
 
 Check box visibility
 
+Overrides: void
+
 Defined in: [components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
 
 ___
@@ -58,6 +60,8 @@ ___
 • `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<[*IListColumnData*](components.ilistcolumndata.md)\>[]
 
 Columns
+
+Overrides: void
 
 Defined in: [components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
 
@@ -78,6 +82,8 @@ ___
 • `Optional` **enableShimmer**: *boolean*
 
 Enable shimmer (normally while loading)
+
+Overrides: void
 
 Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
 
@@ -143,6 +149,8 @@ ___
 
 Items
 
+Overrides: void
+
 Defined in: [components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
 
 ___
@@ -182,6 +190,8 @@ ___
 • `Optional` **onRenderDetailsHeader**: *IRenderFunction*<IDetailsHeaderProps\>
 
 On render details header
+
+Overrides: void
 
 Defined in: [components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
 

@@ -45,7 +45,7 @@ Name | Type | Description |
 
 **Returns:** [*YearFilter*](components.yearfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
 Defined in: [components/FilterPanel/Filters/YearFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L10)
 
