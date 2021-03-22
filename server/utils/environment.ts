@@ -43,7 +43,7 @@ type Environment = {
  * (`Environment`) for the available environment keys
  *
  * @remarks Logs missing environment variables using the
- * `debug` module
+ * [debug](https://www.npmjs.com/package/debug) module
  *
  * @param key - Key
  * @param fallbackValue - Fallback vaue if key is not found
