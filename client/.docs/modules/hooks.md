@@ -38,7 +38,7 @@ Defined in: [hooks/notifications/useNotificationsQuery.ts:29](https://github.com
 
 ▸ **useArray**<T\>(`initialValue?`: T[]): [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
 
-Returns the current state of the array, a function
+Returns the current `state` of the array, a function
 to push a new item to the array, and a function to
 check if the array contains the specified item
 
@@ -139,9 +139,10 @@ ___
 
 ▸ **useToggle**(`initialValue?`: *boolean*): [*boolean*, DispatchWithoutAction]
 
-Returns the tuple [state, dispatch]
-Normally with useReducer you pass a value to dispatch to indicate what action to
-take on the state, but in this case there's only one action.
+Returns the tuple `[state, dispatch]`
+
+Normally with `useReducer` you pass a value to `dispatch` to indicate what action to
+take on the `state`, but in this case there's only one action.
 
 #### Parameters:
 
@@ -151,7 +152,7 @@ Name | Type | Default value |
 
 **Returns:** [*boolean*, DispatchWithoutAction]
 
-Defined in: [hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
+Defined in: [hooks/common/useToggle.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L12)
 
 ___
 
