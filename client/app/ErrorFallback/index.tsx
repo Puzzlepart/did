@@ -26,9 +26,9 @@ export const generateNewIssueUrl = (error: Error) => {
 }
 
 /**
- * Error fallback for `<ErrorBoundary />`  from 
+ * Error fallback for `<ErrorBoundary />`  from
  * `react-error-boundary`
- * 
+ *
  * @category Function Component
  */
 export const ErrorFallback = ({
@@ -39,8 +39,13 @@ export const ErrorFallback = ({
   return (
     <div role='alert' className={styles.root}>
       <div className={styles.header}>{t('common.errorFallbackHeader')}</div>
-      <pre>{t('common.timeLabel')}: {$date.formatDate(new Date(), 'MMM DD, YYYY HH:mm')}</pre>
-      <pre>{t('common.error')}: {error.message}</pre>
+      <pre>
+        {t('common.timeLabel')}:{' '}
+        {$date.formatDate(new Date(), 'MMM DD, YYYY HH:mm')}
+      </pre>
+      <pre>
+        {t('common.error')}: {error.message}
+      </pre>
       <div>
         <ActionButton
           iconProps={{ iconName: 'GitGraph' }}

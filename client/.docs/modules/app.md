@@ -90,6 +90,9 @@ Defined in: [app/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/clien
 
 ▸ `Const`**ErrorFallback**(`__namedParameters`: IErrorFallbackProps): *Element*
 
+Error fallback for `<ErrorBoundary />`  from
+`react-error-boundary`
+
 #### Parameters:
 
 Name | Type |
@@ -98,7 +101,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [app/ErrorFallback/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L31)
+Defined in: [app/ErrorFallback/index.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L34)
 
 ___
 
