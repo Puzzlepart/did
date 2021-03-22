@@ -39,6 +39,20 @@ the `AppContext`
 
 Constructor for `ContextUser`
 
+Assigns the following properties
+from the User object:
+
+* id
+* displayName
+* mail
+* role
+* startPage
+* photo
+
+We can't extend the `User` class
+due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
+decorators.
+
 #### Parameters:
 
 Name | Type | Description |
@@ -119,7 +133,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: [app/ContextUser.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L43)
+Defined in: [app/ContextUser.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L57)
 
 ## Methods
 
@@ -137,4 +151,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [app/ContextUser.ts:64](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L64)
+Defined in: [app/ContextUser.ts:78](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L78)

@@ -4,7 +4,7 @@ import { config } from 'package'
 
 /**
  * Browser storage class
- * 
+ *
  * @remarks Should be replaced with the `useBrowserStorage`
  * hook in the future.
  */

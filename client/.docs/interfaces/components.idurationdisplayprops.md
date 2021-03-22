@@ -23,7 +23,7 @@
 
 • `Optional` **displayFormat**: *string*
 
-Defined in: [components/EventList/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L33)
+Defined in: [components/EventList/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L32)
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 • **duration**: *number*
 
-Defined in: [components/EventList/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L34)
+Defined in: [components/EventList/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L33)

@@ -43,7 +43,7 @@
 
 An array of additional columns to add
 
-Defined in: [components/EventList/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L14)
+Defined in: [components/EventList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L13)
 
 ___
 
@@ -61,11 +61,11 @@ ___
 
 ### columnWidths
 
-• `Optional` **columnWidths**: *ITypedHash*<number\>
+• `Optional` **columnWidths**: *Record*<string, number\>
 
 Column width overrides
 
-Defined in: [components/EventList/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L24)
+Defined in: [components/EventList/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L23)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 Date format
 
-Defined in: [components/EventList/types.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L19)
+Defined in: [components/EventList/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L18)
 
 ___
 
@@ -245,7 +245,7 @@ ___
 
 Resizable columns
 
-Defined in: [components/EventList/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L29)
+Defined in: [components/EventList/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L28)
 
 ___
 
