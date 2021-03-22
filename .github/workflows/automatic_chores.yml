@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04.2
     if: "!contains(github.event.head_commit.message, 'docs: ')"
     strategy:
       matrix:
@@ -57,7 +57,7 @@ jobs:
           npx eslint --ext .ts,.tsx ./client ./server --color --fix
           npx prettier '**/*.ts*' --write --loglevel silent
 
-      - name: Generating readme using @appnest/readme
+      - name: Generating README and CHANGELOG using @appnest/readme
         run: |
           npx concurrently \
           "npx @appnest/readme generate --config .readme/blueprint.json --silent" \
