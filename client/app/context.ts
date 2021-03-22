@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { AnyAction } from '@reduxjs/toolkit'
+import { ReactHookFunction } from 'hooks/types'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
 import { useNotificationsQuery } from '../hooks'
@@ -25,15 +27,28 @@ export interface IAppContext extends IAppProps {
    * Application dispatcher
    */
   dispatch?: React.Dispatch<AnyAction>
+
+  /**
+   * Is authenticated
+   */
+  isAuthenticated?: boolean
 }
 
 export const AppContext = createContext<IAppContext>(null)
 
 /**
- * Returns app context
+ * Returns the current context value for the app.
+ * 
+ * Uses `useContext` with `AppContext`
+ * 
+ * @returns `IAppContext`
  */
-export function useAppContext() {
-  return useContext(AppContext)
+export const useAppContext: ReactHookFunction<{}, IAppContext> = () => {
+  const context = useContext(AppContext)
+  return {
+    ...context,
+    isAuthenticated: !!context.user?.id
+  }
 }
 
 export { ContextUser }

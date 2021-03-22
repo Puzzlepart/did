@@ -28,9 +28,11 @@ export const MobileBreadcrumb: React.FC<IMobileBreadcrumbProps> = (props) => {
   ]
   if (isBrowser) return null
   return (
-    <FadeIn delay={250}>
-      <Breadcrumb className={styles.root} items={items} />
-    </FadeIn>
+    <div hidden={props.hidden}>
+      <FadeIn delay={250}>
+        <Breadcrumb className={styles.root} items={items} />
+      </FadeIn>
+    </div>
   )
 }
 

@@ -12,11 +12,11 @@ import { UserNotifications } from './UserNotifications'
  * @category Function Component
  */
 export const Navigation: React.FC = () => {
-  const { pages, user } = useAppContext()
+  const { pages, isAuthenticated } = useAppContext()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   return (
-    <nav className={className}>
+    <nav className={className} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link
           to='/'
@@ -24,7 +24,7 @@ export const Navigation: React.FC = () => {
           title='did - The Calendar is the Timesheet'>
           did
         </Link>
-        <ul className={styles.nav} hidden={!user}>
+        <ul className={styles.nav} hidden={!isAuthenticated}>
           {pages.map((page, index) => (
             <NavItem
               key={index}
@@ -36,7 +36,7 @@ export const Navigation: React.FC = () => {
           ))}
         </ul>
         <ul className={styles.navRight}>
-          {!!user.id && <UserNotifications />}
+          {isAuthenticated && <UserNotifications />}
           <UserMenu />
         </ul>
       </div>

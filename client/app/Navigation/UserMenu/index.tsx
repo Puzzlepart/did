@@ -73,7 +73,6 @@ export const UserMenu: React.FC = () => {
             />
           </MenuItem>
           <span hidden={isMobile}>
-            <Divider />
             <UserReports />
           </span>
           <Divider />

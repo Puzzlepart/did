@@ -42,7 +42,7 @@ export const AppRouter: React.FC = () => {
                   <Redirect to='/' />
                 ) : (
                   <>
-                    <MobileBreadcrumb page={Page} />
+                    <MobileBreadcrumb page={Page} hidden={Page.path === '/'} />
                     <div className={styles.container}>
                       <Page />
                     </div>
