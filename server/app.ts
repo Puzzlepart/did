@@ -2,10 +2,10 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * NodeJS Express App
- * 
+ *
  * Defines our `express` app with our middleware
  * for helmet, passport and redis.
- * 
+ *
  * - Setting up session handling
  * - Setting `hbs` as view engine
  * - Setting up static assets
@@ -13,9 +13,9 @@
  * - Setting up GraphQL
  * - Setting up routs
  * - Setting up error handling
- * 
+ *
  * Uses the following modules directly:
- * 
+ *
  * * `body-parser`
  * * `express`
  * * `express-bearer-token`
