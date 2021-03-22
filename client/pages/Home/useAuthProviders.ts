@@ -7,10 +7,13 @@ import { pick } from 'underscore'
 
 /**
  * Get auth providers
- * 
+ *
  * @returns button props for the enabled auth provider
  */
-export const useAuthProviders: ReactHookFunction<{}, Record<string, IButtonProps>> = () => {
+export const useAuthProviders: ReactHookFunction<
+  {},
+  Record<string, IButtonProps>
+> = () => {
   const { t } = useTranslation()
   const context = useAppContext()
   const authProviders: Record<string, IButtonProps> = {
