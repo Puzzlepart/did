@@ -3,6 +3,12 @@
   "description": "The calendar is your Timesheet",
   "version": "0.9.11",
   "private": true,
+  "repository": {
+    "url": "https://github.com/Puzzlepart/did"
+  },
+  "bugs": {
+    "url": "https://github.com/Puzzlepart/Puzzlepart/issues"
+  },
   "scripts": {
     "watch": "node .tasks/watch.js",
     "commit:changes": "node ./.tasks/commit-changes.js",

@@ -330,7 +330,8 @@
     "googleSignInText": "Logg på med Google",
     "activeDirectory": "Azure AD",
     "google": "Google",
-    "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent."
+    "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent.",
+    "error": "Feilmelding"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

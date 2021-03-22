@@ -331,7 +331,8 @@
     "googleSignInText": "Sign in with Google",
     "activeDirectory": "Azure AD",
     "google": "Google",
-    "signInDisabledMessage": "Sign in is currently disabled. Please hold on."
+    "signInDisabledMessage": "Sign in is currently disabled. Please hold on.",
+    "error": "Error"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
