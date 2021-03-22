@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Last year option added to reports #775
 - Support for deleting role #692
 - Improved Timesheet statusbar. Now showing on all tabs, and showing either shimmer or progress indicator. Not both. #831
-- Support for nb-NO (nynorsk) #864 (thanks to @paalolav <3>)
+- Support for nb-NO (nynorsk) #864 (thanks to @paalolav ❤️)
 - Support for initial signin with email #884
 - Showing more details in the summary view on hover #886
 - Summary view moved to Reports
