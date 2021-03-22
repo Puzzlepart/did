@@ -36,7 +36,7 @@ import { environment } from './utils'
  * - Setting up static assets
  * - Setting up auth with [passport](https://www.npmjs.com/package/passport)
  * - Setting up [GraphQL](https://graphql.org/)
- * - Setting up routess
+ * - Setting up routes
  * - Setting up error handling
  *
  * Uses the following modules directly:

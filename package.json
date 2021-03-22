@@ -316,7 +316,8 @@
           "i18n",
           "github",
           "readme",
-          "experimental"
+          "experimental",
+          "typo"
         ]
       ]
     }
