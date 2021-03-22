@@ -191,7 +191,7 @@ ___
 • `Const` **ColorPickerField**: *React.FC*<[*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)\>
 
 Field to pick an color using `<SketchPicker />` from
-`react-color`
+[react-color](https://www.npmjs.com/package/react-color)
 
 Defined in: [components/ColorPickerField/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L15)
 

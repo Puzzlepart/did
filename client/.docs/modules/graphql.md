@@ -33,10 +33,10 @@ Renames and exports: [default\_query](pages.md#default_query)
 
 • `Const` **client**: *ApolloClient*<NormalizedCacheObject\>
 
-Initializing our Apollo Client
+Defines our [Apollo Client](https://www.apollographql.com/docs/react/)
 
-* Using InMemoryCache
-* Using url /graphql
-* Using cache-and-network as default fetchPolicy
+* Using `InMemoryCache`
+* Using url `/graphql`
+* Using `cache-and-network` as default `fetchPolicy`
 
 Defined in: [graphql/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L40)
