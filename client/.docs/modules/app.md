@@ -67,9 +67,15 @@ ___
 
 • `Const` **AppRouter**: React.FC
 
-App router
+App router that uses `<Switch />` from
+[react-router-dom](https://www.npmjs.com/package/react-router-dom)
+to navigate between the different pages in the app.
 
-Defined in: [app/AppRouter.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L28)
+Also uses `<ErrorBoundary />` from
+[react-error-boundary](https://www.npmjs.com/package/react-error-boundary)
+to catch errors instead of making them break everything
+
+Defined in: [app/AppRouter.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L34)
 
 ___
 

@@ -21,10 +21,10 @@ import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
 
 /**
- * App router that uses `<Switch />` from 
+ * App router that uses `<Switch />` from
  * [react-router-dom](https://www.npmjs.com/package/react-router-dom)
  * to navigate between the different pages in the app.
- * 
+ *
  * Also uses `<ErrorBoundary />` from
  * [react-error-boundary](https://www.npmjs.com/package/react-error-boundary)
  * to catch errors instead of making them break everything
