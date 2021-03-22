@@ -16,6 +16,7 @@
 
 - [authProviders](app.iappcontext.md#authproviders)
 - [dispatch](app.iappcontext.md#dispatch)
+- [isAuthenticated](app.iappcontext.md#isauthenticated)
 - [notifications](app.iappcontext.md#notifications)
 - [pages](app.iappcontext.md#pages)
 - [state](app.iappcontext.md#state)
@@ -42,7 +43,17 @@ ___
 
 Application dispatcher
 
-Defined in: [app/context.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L27)
+Defined in: [app/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L29)
+
+___
+
+### isAuthenticated
+
+• `Optional` **isAuthenticated**: *boolean*
+
+Is authenticated
+
+Defined in: [app/context.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L34)
 
 ___
 
@@ -52,7 +63,7 @@ ___
 
 Notifications query
 
-Defined in: [app/context.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L17)
+Defined in: [app/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L19)
 
 ___
 
@@ -62,7 +73,7 @@ ___
 
 Pages
 
-Defined in: [app/context.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L12)
+Defined in: [app/context.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L14)
 
 ___
 
@@ -72,7 +83,7 @@ ___
 
 Application state
 
-Defined in: [app/context.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L22)
+Defined in: [app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
 
 ___
 

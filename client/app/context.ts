@@ -38,9 +38,9 @@ export const AppContext = createContext<IAppContext>(null)
 
 /**
  * Returns the current context value for the app.
- * 
+ *
  * Uses `useContext` with `AppContext`
- * 
+ *
  * @returns `IAppContext`
  */
 export const useAppContext: ReactHookFunction<{}, IAppContext> = () => {
