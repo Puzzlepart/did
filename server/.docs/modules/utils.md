@@ -18,9 +18,13 @@ Utility functions
 
 ▸ **environment**<T\>(`key`: keyof Environment, `fallbackValue?`: T, `options?`: EnvironmentParseOptions): T
 
-Get environment variable by key with optional fallbackvalue
+Get environment variable by key with optional fallback value
 
-Makes it easier to work with process.env.
+Makes it easier to work with `process.env` giving a type
+(`Environment`) for the available environment keys
+
+**`remarks`** Logs missing environment variables using the
+`debug` module
 
 #### Type parameters:
 
@@ -38,7 +42,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [utils/environment.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L48)
+Defined in: [utils/environment.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L52)
 
 ___
 
