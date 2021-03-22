@@ -1,4 +1,3 @@
-const concurrently = require('concurrently')
 const inquirer = require('inquirer')
 const util = require('util')
 const { cyan, white, red } = require('chalk')
@@ -27,10 +26,6 @@ async function commit_changes() {
             default: false
         }
     ])
-    await concurrently([
-        { command: 'npm run typedoc', name: 'typedoc' },
-        { command: 'npm run eslint:fix', name: 'eslint' }
-    ], {})
     const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {
         await exec('git add --all')
