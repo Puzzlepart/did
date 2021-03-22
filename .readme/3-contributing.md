@@ -5,7 +5,7 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 
 ### Getting started
 
-1. Check out the dev branch
+1. Check out the `dev` branch
 2. Run `npm install`
 3. Run `npm run-script create-env` to create your own `.env` file for local testing
 4. Set neccessary parameters in your new `.env` file (see `Set up .env` below)
@@ -73,8 +73,6 @@ Now you need to set the required environment variables from this table:
 | `/client/utils`               | Utility functions                                            |
 | `/client/index.tsx`           | Main entry point for the app                                 |
 | `/server/public`              | Public assets, static files hosted under "/"                 |
-| `/server/public/css`          | CSS files                                                    |
-| `/server/public/js`           | JS files (hidden from `vscode`, the react bundle ends up here) |
 | `/server/routes`              | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views |
 | `/server/graphql`             | [GraphQL](https://github.com/graphql/graphql-js/) implementation |
 | `/server/graphql/resolvers`   | GraphQL resolvers, queries and mutations                     |
@@ -103,29 +101,26 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 #### Google
 See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) for more details on using Did with Google.
 
-### Commits and commitlint
-#### Husky hooks
-We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `eslint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
+### Commiting to the repository
+#### Commitlint
+We are using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
 
-You ***can** (but shouldn't) bypass pre-commit and commit-msg hooks using Git `--no-verify` option:
+You _can_ (but shouldn't) bypass the `commit-msg` hooks using the git `--no-verify` option:
 
 ```shell
 git commit -m "yolo!" --no-verify
 ```
 
-For Git commands that don't have a `--no-verify` option, you can use HUSKY environment variable:
+For Git commands that don't have a `--no-verify` option, you can use `HUSKY` environment variable:
 
 ```shell
 HUSKY=0 git push # yolo!
 ```
 
-#### Commitlint
-We are also using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
-
 See `commitlint` in [package.json](./package.json). The commit message needs to be lowercase and have a prefix.
 
 #### commit-changes.js
-We also have the node script `.tasks/commit-changes.js` that can be used. This prompts you for the prefix and commit message, lints all files, generates documentation using `typedoc`, then commits your changes.
+We also have the node script `.tasks/commit-changes.js` that can be used. This script/task prompts you for the prefix and commit message, then commits your changes. It can also push the changes right away.
 
 ### Branching / Deploying
 
@@ -141,7 +136,7 @@ The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeli
 You are encouraged to branch with either of the following prefixes  
 *  **hotfix/**
 *  **bugfix/**
-*  **feature/**
+*  **feature/** or **feat/**
 
 #### See also
 See also [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)

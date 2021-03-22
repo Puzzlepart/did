@@ -20,6 +20,20 @@ export class ContextUser {
 
   /**
    * Constructor for `ContextUser`
+   * 
+   * Assigns the following properties
+   * from the User object:
+   * 
+   * * id
+   * * displayName
+   * * mail
+   * * role
+   * * startPage
+   * * photo
+   * 
+   * We can't extend the `User` class
+   * due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
+   * decorators.
    *
    * @param _user - User object
    */

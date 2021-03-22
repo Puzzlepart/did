@@ -1,5 +1,4 @@
 /* eslint-disable tsdoc/syntax */
-import { ITypedHash } from '@pnp/common'
 import { IListProps } from 'components/List/types'
 import { IColumn } from 'office-ui-fabric-react'
 import { HTMLProps } from 'react'
@@ -21,7 +20,7 @@ export interface IEventListProps extends IListProps {
   /**
    * Column width overrides
    */
-  columnWidths?: ITypedHash<number>
+  columnWidths?: Record<string, number>
 
   /**
    * Resizable columns
