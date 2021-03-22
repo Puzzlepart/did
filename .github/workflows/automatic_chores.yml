@@ -47,9 +47,10 @@ jobs:
 
       - name: Generating documentation using typedoc
         run: |
-          node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logger none
-          node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logger none
-          node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logger none
+          npx concurrently \
+          "node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logger none" \
+          "node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logger none" \
+          "node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logger none"
 
       - name: ESLint and prettier
         run: |
@@ -58,17 +59,29 @@ jobs:
 
       - name: Generating readme using @appnest/readme
         run: |
-          npx @appnest/readme generate --config .readme/blueprint.json --silent
-          npx @appnest/readme generate --config .changelog/blueprint.json --silent
+          npx concurrently \
+          "npx @appnest/readme generate --config .readme/blueprint.json --silent" \
+          "npx @appnest/readme generate --config .changelog/blueprint.json --silent"
 
-      - name: Commit files as github-automatic-chores
+      - name: Add all changes
+        run: |
+          git add -A
+
+      - name: Check for staged changes
+        id: check_for_staged_changes
+        run: |
+          porcelain=`git status --porcelain`
+          echo "::set-output name=porcelain::$porcelain"
+
+      - name: Commit files as {github-automatic-chores} (if staged changes)
+        if: ${{ steps.check_for_staged_changes.outputs.porcelain != '' }}
         run: |
           git config --local user.email "github-automatic-chores@users.noreply.github.com"
           git config --local user.name "github-automatic-chores"
-          git add --all
-          git commit -m "docs: updated generated docs, readme and changelog" -a
+          git commit --no-verify -m "docs: updated generated docs, readme and changelog" -m "This is a commit done by the GitHub action automatic_chores.yml. This way we avoid having to generate documentation, run eslint etc. locally before commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
 
-      - name: Push changes
+      - name: Push changes (if staged changes)
+        if: ${{ steps.check_for_staged_changes.outputs.porcelain != '' }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_TOKEN }}
