@@ -58,17 +58,19 @@ class MSGraphService {
    *
    * @param size - Photo size
    * @public
-   * @memberof MSGraphService
+   *
    * @returns A base64 representation of the user photo
+   *
+   * @memberof MSGraphService
    */
   public async getUserPhoto(size: string): Promise<string> {
     try {
       const client = await this._getClient()
-      const value = (await client
-        .api(`/me/photos/${size}/$value`)
-        .get()) as Blob
-      const buffer = await value.arrayBuffer()
-      return `data:image/jpeg;base64,${Buffer.from(buffer).toString('base64')}`
+      const blob = (await client.api(`/me/photos/${size}/$value`).get()) as Blob
+      const buffer = await blob.arrayBuffer()
+      return `data:${blob.type};base64,${Buffer.from(buffer).toString(
+        'base64'
+      )}`
     } catch (error) {
       throw new Error(`MSGraphService.getUserPhoto: ${error.message}`)
     }
