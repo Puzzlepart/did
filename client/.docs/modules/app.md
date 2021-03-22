@@ -93,6 +93,12 @@ Defined in: [app/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/clien
 Error fallback for `<ErrorBoundary />`  from
 `react-error-boundary`
 
+Shows the `error` message and provides two
+buttons. One that redirects the user to
+GitHub to create a new **bug** and one that
+executes `resetErrorBoundary` that might
+temporarily solve the issue.
+
 #### Parameters:
 
 Name | Type |
@@ -101,7 +107,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [app/ErrorFallback/index.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L34)
+Defined in: [app/ErrorFallback/index.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L40)
 
 ___
 
