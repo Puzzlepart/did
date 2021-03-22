@@ -17,7 +17,6 @@ on:
 jobs:
   automatic_chores:
     runs-on: ubuntu-20.04
-    if: "!contains(github.event.head_commit.message, 'docs: ')"
     strategy:
       matrix:
         node-version: [12.18.3]
@@ -80,7 +79,7 @@ jobs:
           git config --local user.email "github-automatic-chores@users.noreply.github.com"
           git config --local user.name "github-automatic-chores"
           git commit --no-verify -m "docs: updated generated docs, \
-          readme and changelog (${{ steps.git_context.outputs.sha_short }})" \
+          readme and changelog (${{ steps.git_context.outputs.sha_short }}) [no ci]" \
           -m "This is a commit done by the GitHub action \
           https://github.com/Puzzlepart/did/blob/dev/.github/workflows/automatic_chores.yml. \
           This way we avoid having to generate documentation, run eslint etc. locally before \

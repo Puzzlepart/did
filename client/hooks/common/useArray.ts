@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { contains } from 'underscore'
 
 /**
- * Returns the current state of the array, a function
+ * Returns the current `state` of the array, a function
  * to push a new item to the array, and a function to
  * check if the array contains the specified item
  *
