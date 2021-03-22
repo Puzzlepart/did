@@ -27,14 +27,11 @@ The App component
 ### Other Variables
 
 - [AppContext](app.md#appcontext)
+- [useAppContext](app.md#useappcontext)
 
 ### Function Component Functions
 
 - [ErrorFallback](app.md#errorfallback)
-
-### Other Functions
-
-- [useAppContext](app.md#useappcontext)
 
 ## Function Component Variables
 
@@ -82,7 +79,21 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [app/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L30)
+Defined in: [app/context.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L37)
+
+___
+
+### useAppContext
+
+• `Const` **useAppContext**: *ReactHookFunction*<{}, [*IAppContext*](../interfaces/app.iappcontext.md)\>
+
+Returns the current context value for the app.
+
+Uses `useContext` with `AppContext`
+
+**`returns`** `IAppContext`
+
+Defined in: [app/context.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L46)
 
 ## Function Component Functions
 
@@ -108,17 +119,3 @@ Name | Type |
 **Returns:** *Element*
 
 Defined in: [app/ErrorFallback/index.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L40)
-
-___
-
-## Other Functions
-
-### useAppContext
-
-▸ **useAppContext**(): [*IAppContext*](../interfaces/app.iappcontext.md)
-
-Returns app context
-
-**Returns:** [*IAppContext*](../interfaces/app.iappcontext.md)
-
-Defined in: [app/context.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L35)
