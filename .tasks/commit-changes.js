@@ -35,7 +35,8 @@ async function commit_changes() {
         } catch { }
         await exec(`git commit -m "${commit_message}" --amend --no-verify`)
         if (input.push) {
-            await exec('git push --no-verify')
+            await exec('git pull')
+            await exec('git push')
         }
         log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
     } catch (error) {
