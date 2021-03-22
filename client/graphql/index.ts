@@ -31,11 +31,11 @@ export interface IBaseResult {
 }
 
 /**
- * Initializing our Apollo Client
+ * Defines our [Apollo Client](https://www.apollographql.com/docs/react/)
  *
- * * Using InMemoryCache
- * * Using url /graphql
- * * Using cache-and-network as default fetchPolicy
+ * * Using `InMemoryCache`
+ * * Using url `/graphql`
+ * * Using `cache-and-network` as default `fetchPolicy`
  */
 export const client = new ApolloClient({
   cache: new InMemoryCache(),

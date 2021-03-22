@@ -46,7 +46,7 @@ export const Home: PageComponent = () => {
             <DefaultButton
               key={key}
               onClick={() => document.location.replace(`/auth/${key}/signin`)}
-              iconProps={{ iconName: providers[key].iconName }}
+              iconProps={providers[key].iconProps}
               style={{ marginTop: 10 }}
               text={providers[key].text}
             />

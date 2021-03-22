@@ -8,7 +8,7 @@ import { IColorPickerFieldProps } from './types'
 
 /**
  * Field to pick an color using `<SketchPicker />` from
- * `react-color`
+ * [react-color](https://www.npmjs.com/package/react-color)
  *
  * @category Function Component
  */
