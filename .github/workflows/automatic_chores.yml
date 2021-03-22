@@ -67,21 +67,24 @@ jobs:
         run: |
           git add -A
 
-      - name: Check for staged changes
-        id: check_for_staged_changes
+      - name: Get git context
+        id: git_context
         run: |
-          porcelain=`git status --porcelain`
-          echo "::set-output name=porcelain::$porcelain"
+          status=`git status --porcelain`
+          echo "::set-output name=status::$status"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Commit files as {github-automatic-chores} (if staged changes)
-        if: ${{ steps.check_for_staged_changes.outputs.porcelain != '' }}
+        if: ${{ steps.git_context.outputs.status != '' }}
         run: |
           git config --local user.email "github-automatic-chores@users.noreply.github.com"
           git config --local user.name "github-automatic-chores"
-          git commit --no-verify -m "docs: updated generated docs, readme and changelog" -m "This is a commit done by the GitHub action automatic_chores.yml. This way we avoid having to generate documentation, run eslint etc. locally before commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
+          git commit --no-verify -m "docs: updated generated docs, readme and changelog (${{ steps.git_context.outputs.sha_short }})" -m "This is a commit done by the GitHub action automatic_chores.yml. This way we avoid having to generate documentation, run eslint etc. locally before commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
+        env:
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
 
       - name: Push changes (if staged changes)
-        if: ${{ steps.check_for_staged_changes.outputs.porcelain != '' }}
+        if: ${{ steps.git_context.outputs.status != '' }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_TOKEN }}

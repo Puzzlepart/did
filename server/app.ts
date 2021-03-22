@@ -3,29 +3,6 @@
 /**
  * NodeJS Express App
  *
- * Defines our `express` app with our middleware
- * for helmet, passport and redis.
- *
- * - Setting up session handling
- * - Setting `hbs` as view engine
- * - Setting up static assets
- * - Setting up auth
- * - Setting up GraphQL
- * - Setting up routs
- * - Setting up error handling
- *
- * Uses the following modules directly:
- *
- * * `body-parser`
- * * `express`
- * * `express-bearer-token`
- * * `express-favicon`
- * * `http-errors`
- * * `mongodb`
- * * `morgan`
- * * `path`
- * * `underscore`
- *
  * @module App
  */
 require('dotenv').config()
@@ -49,7 +26,30 @@ import authRoute from './routes/auth'
 import { environment } from './utils'
 
 /**
- * Did Express.js App
+ * Did `express` App
+ *
+ * Defines our `express` app with our middleware
+ * for helmet, passport and redis.
+ *
+ * - Setting up session handling
+ * - Setting `hbs` as view engine
+ * - Setting up static assets
+ * - Setting up auth
+ * - Setting up GraphQL
+ * - Setting up routs
+ * - Setting up error handling
+ *
+ * Uses the following modules directly:
+ *
+ * * `body-parser`
+ * * `express`
+ * * `express-bearer-token`
+ * * `express-favicon`
+ * * `http-errors`
+ * * `mongodb`
+ * * `morgan`
+ * * `path`
+ * * `underscore`
  */
 export class App {
   /**

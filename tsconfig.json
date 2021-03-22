@@ -20,8 +20,7 @@
       "passport-azure-ad",
       "debug",
       "get-value",
-      "passport",
-      "@custom-types"
+      "passport"
     ],
     "outDir": "dist"
   },
