@@ -28,6 +28,12 @@ export const generateNewIssueUrl = (error: Error) => {
 /**
  * Error fallback for `<ErrorBoundary />`  from
  * `react-error-boundary`
+ * 
+ * Shows the `error` message and provides two 
+ * buttons. One that redirects the user to 
+ * GitHub to create a new **bug** and one that
+ * executes `resetErrorBoundary` that might 
+ * temporarily solve the issue.
  *
  * @category Function Component
  */
