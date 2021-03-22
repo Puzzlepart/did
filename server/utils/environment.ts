@@ -41,7 +41,7 @@ type Environment = {
  *
  * Makes it easier to work with `process.env` giving a type
  * (`Environment`) for the available environment keys
- * 
+ *
  * @remarks Logs missing environment variables using the
  * `debug` module
  *
