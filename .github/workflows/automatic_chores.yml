@@ -3,7 +3,7 @@ name: Automatic chores
 on:
   push:
     branches:
-      - feature/automatic-docs-action
+      - dev
     paths:
       - '.github/workflows/automatic_chores.yml'
       - '.readme/*.md'
