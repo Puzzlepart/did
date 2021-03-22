@@ -11,7 +11,7 @@ import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 
 /**
- * GraphQL context
+ * [GraphQL](https://graphql.org/) context
  */
 export class Context {
   /**
@@ -29,9 +29,9 @@ export class Context {
   /**
    * Provider
    *
-   * google or microsoft
+   * `google` or `azuread-openidconnect`
    */
-  provider?: 'google' | 'azuread-openidconnect'
+  public provider?: 'google' | 'azuread-openidconnect'
 
   /**
    * Subscription
@@ -44,14 +44,15 @@ export class Context {
   public container?: ContainerInstance
 
   /**
-   * Permissions
+   * Permissions for the logged in user, or
+   * the API key used by external calls
    */
   public permissions?: string[]
 
   /**
-   * Mongo client
+   * Mongo client instance
    */
-  public mongoClient?: MongoClient
+  public mcl?: MongoClient
 
   /**
    * Mongo database
@@ -77,18 +78,18 @@ export function generateUniqueRequestId() {
  *   dependency injection in the resolvers.
  *
  * @param request - Express request
- * @param mongoClient - Mongo client
+ * @param mcl - Mongo client
  */
 export const createContext = async (
   request: Express.Request,
-  mongoClient: MongoClient
+  mcl: MongoClient
 ): Promise<Context> => {
   try {
-    const database = mongoClient.db(environment('MONGO_DB_DB_NAME'))
+    const database = mcl.db(environment('MONGO_DB_DB_NAME'))
     const context: Context = {}
     context.requestId = generateUniqueRequestId()
     context.container = Container.of(context.requestId)
-    context.mongoClient = mongoClient
+    context.mcl = mcl
     context.subscription = get(request, 'user.subscription', { default: {} })
     const apiKey = get(request, 'api_key')
     if (apiKey) {
@@ -103,7 +104,7 @@ export const createContext = async (
       context.provider = get(request, 'user.provider')
       context.permissions = get(request, 'user.role.permissions')
     }
-    context.db = context.mongoClient.db(context.subscription.db)
+    context.db = context.mcl.db(context.subscription.db)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })
     debug(`Creating context for request ${context.requestId}`)

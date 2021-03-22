@@ -32,24 +32,24 @@ import { environment } from './utils'
  * for helmet, passport and redis.
  *
  * - Setting up session handling
- * - Setting `hbs` as view engine
+ * - Setting [hbs](https://www.npmjs.com/package/hbs) as view engine
  * - Setting up static assets
- * - Setting up auth
- * - Setting up GraphQL
- * - Setting up routs
+ * - Setting up auth with [passport](https://www.npmjs.com/package/passport)
+ * - Setting up [GraphQL](https://graphql.org/)
+ * - Setting up routess
  * - Setting up error handling
  *
  * Uses the following modules directly:
  *
- * * `body-parser`
- * * `express`
- * * `express-bearer-token`
- * * `express-favicon`
- * * `http-errors`
- * * `mongodb`
- * * `morgan`
- * * `path`
- * * `underscore`
+ * * [body-parser](https://www.npmjs.com/package/body-parser)
+ * * [express](https://www.npmjs.com/package/express)
+ * * [express-bearer-token](https://www.npmjs.com/package/express-bearer-token)
+ * * [express-favicon](https://www.npmjs.com/package/express-favicon)
+ * * [http-errors](https://www.npmjs.com/package/http-errors)
+ * * [passport](https://www.npmjs.com/package/passport)
+ * * [mongodb](https://www.npmjs.com/package/mongodb)
+ * * [morgan](https://www.npmjs.com/package/morgan)
+ * * [underscore](https://www.npmjs.com/package/underscore)
  */
 export class App {
   /**
@@ -86,7 +86,7 @@ export class App {
    * * Setting up view engine
    * * Setting up static assets
    * * Setting up authentication
-   * * Setting up our GraphQL API
+   * * Setting up our [GraphQL](https://graphql.org/) API
    * * Setting up routes
    * * Setting up error handling
    */

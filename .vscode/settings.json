@@ -12,6 +12,7 @@
     "dist": true,
     "server/.docs": true,
     "client/.docs": true,
+    "shared/.docs": true,
     "package-lock*": true,
     "README.md": true,
     "CHANGELOG.md": true,

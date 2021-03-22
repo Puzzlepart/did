@@ -26,7 +26,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
       context,
       'api_tokens',
       null,
-      context?.mongoClient?.db(environment('MONGO_DB_DB_NAME'))
+      context?.mcl?.db(environment('MONGO_DB_DB_NAME'))
     )
   }
 

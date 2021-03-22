@@ -27,7 +27,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
       context,
       'subscriptions',
       null,
-      context?.mongoClient?.db(environment('MONGO_DB_DB_NAME'))
+      context?.mcl?.db(environment('MONGO_DB_DB_NAME'))
     )
   }
 
