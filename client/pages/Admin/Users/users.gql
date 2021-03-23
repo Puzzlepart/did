@@ -25,6 +25,9 @@ query UsersAdmin {
       permissions
       readOnly
     }
+    photo {
+      base64
+    }
   }
   roles {
     name
