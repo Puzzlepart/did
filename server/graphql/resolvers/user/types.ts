@@ -79,9 +79,6 @@ export class User {
   @Field({ nullable: true })
   photo?: UserPhoto
 
-  @Field({ nullable: true })
-  stickyNavigation?: boolean
-
   public create?(user: User): User {
     Object.assign(this, user)
     return this
