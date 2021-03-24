@@ -13,13 +13,12 @@ import { UserNotifications } from './UserNotifications'
  * @category Function Component
  */
 export const Navigation: React.FC = () => {
-  const { pages, isAuthenticated, user } = useAppContext()
-  let className = styles.root
-  const isSticky = user.stickyNavigation
-  if (isMobile) className += ` ${styles.mobile}`
-  if(isSticky && !isMobile) className += ` ${styles.sticky}`
+  const { pages, isAuthenticated, getUserConfiguration } = useAppContext()
+  const classNames =[ styles.root]
+  if (isMobile) classNames.push(styles.mobile)
+  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) classNames.push(styles.sticky)
   return (
-    <nav className={className} hidden={isMobile && !isAuthenticated}>
+    <nav className={classNames.join(' ')} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link
           to='/'

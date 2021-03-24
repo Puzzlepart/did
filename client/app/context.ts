@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { AnyAction } from '@reduxjs/toolkit'
+import get from 'get-value'
 import { ReactHookFunction } from 'hooks/types'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
@@ -32,6 +33,11 @@ export interface IAppContext extends IAppProps {
    * Is authenticated
    */
   isAuthenticated?: boolean
+
+  /**
+   * Get user configuration
+   */
+   getUserConfiguration: <T = any>(path: string) => T
 }
 
 export const AppContext = createContext<IAppContext>(null)
@@ -45,9 +51,12 @@ export const AppContext = createContext<IAppContext>(null)
  */
 export const useAppContext: ReactHookFunction<{}, IAppContext> = () => {
   const context = useContext(AppContext)
+  const getUserConfiguration = (path: string) =>
+    get(context.user.configuration, path)
   return {
     ...context,
-    isAuthenticated: !!context.user?.id
+    isAuthenticated: !!context.user?.id,
+    getUserConfiguration,
   }
 }
 
