@@ -78,7 +78,7 @@ export class ReportService {
       CURRENT_YEAR: {
         year: d.toObject().year
       }
-    }[preset]
+    }[preset] || { month: -1 }
   }
 
   /**
@@ -146,17 +146,18 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      let q = this._generatePresetQuery(preset)
-      q = omit({ ...q, ...query }, 'preset')
-      const [timeEntries, { projects, customers }, users] = await Promise.all([
-        this._teSvc.find(q),
+      const query_ = omit({
+        ...this._generatePresetQuery(preset),
+        ...query
+      }, 'preset')
+      const [timeEntries, projectsData, users] = await Promise.all([
+        this._teSvc.find(query_),
         this._projectSvc.getProjectsData(),
-        this._userSvc.getUsers()
+        this._userSvc.getUsers({ hiddenFromReports: false })
       ])
       const report = this._generateReport({
+        ...projectsData,
         timeEntries,
-        projects,
-        customers,
         users,
         sortAsc
       })
@@ -171,19 +172,18 @@ export class ReportService {
    */
   public async getForecastReport(): Promise<Report> {
     try {
-      const [timeEntries, { projects, customers }, users] = await Promise.all([
+      const [timeEntries, projectsData, users] = await Promise.all([
         this._fteSvc.find({
           startDateTime: {
             $gte: new Date()
           }
         }),
         this._projectSvc.getProjectsData(),
-        this._userSvc.getUsers()
+        this._userSvc.getUsers({ hiddenFromReports: false })
       ])
       const report = this._generateReport({
+        ...projectsData,
         timeEntries,
-        projects,
-        customers,
         users,
         sortAsc: true
       })

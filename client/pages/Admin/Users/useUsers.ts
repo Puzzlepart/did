@@ -29,13 +29,12 @@ export function useUsers() {
   const [addUsers] = useMutation($addUsers)
   const context: IUsersContext = useMemo(
     () => ({
-      roles: query.data?.roles || [],
-      users: query.data?.users || [],
-      activeDirectoryUsers: query.data?.activeDirectoryUsers || [],
+      ...query.data,
       setUserForm
     }),
     [query.data]
   )
+  
   context.activeDirectoryUsers = filter(
     context.activeDirectoryUsers,
     (x) => !any(context.users, (y) => y.id === x.id)

@@ -31,7 +31,8 @@ export function useUserForm({ props }) {
             ...model,
             role: (model?.role as Role)?.name || 'User'
           },
-          '__typename'
+          '__typename',
+          'photo'
         ),
         update: !!props.user
       }
