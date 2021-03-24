@@ -296,6 +296,8 @@
       "closeButtonAriaLabel": "Lukk"
     },
     "preferredLanguageLabel": "Føretrekt språk",
+    "stickyNavigationLabel": "Fest menyen til toppen",
+    "stickyNavigationDescription": "Gjer at toppmenyen alltid er synleg sjøl om du blar",
     "showAllFiltersText": "Vis alle ({{count}})",
     "userReports": "Rapportane mine",
     "export": "Eksporter",

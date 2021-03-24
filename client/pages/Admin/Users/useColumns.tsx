@@ -3,7 +3,6 @@ import { IconText } from 'components'
 import { EditLink } from 'components/EditLink'
 import { IListColumn } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
-import { ReactHookFunction } from 'hooks/types'
 import { PersonaSize } from 'office-ui-fabric-react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -17,9 +16,7 @@ import { IUsersContext } from './context'
  *
  * @category Users
  */
-export const useColumns: ReactHookFunction<IUsersContext, IListColumn[]> = ({
-  setUserForm
-}) => {
+export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
   const { t } = useTranslation()
   const userColumn = useUserListColumn(
     { size: PersonaSize.size40 },

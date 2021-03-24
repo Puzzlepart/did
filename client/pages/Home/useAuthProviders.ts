@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { useAppContext } from 'AppContext'
-import { ReactHookFunction } from 'hooks/types'
 import { IButtonProps } from 'office-ui-fabric-react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
@@ -10,10 +9,7 @@ import { pick } from 'underscore'
  *
  * @returns button props for the enabled auth provider
  */
-export const useAuthProviders: ReactHookFunction<
-  {},
-  Record<string, IButtonProps>
-> = () => {
+export function useAuthProviders(): Record<string, IButtonProps> {
   const { t } = useTranslation()
   const context = useAppContext()
   const authProviders: Record<string, IButtonProps> = {

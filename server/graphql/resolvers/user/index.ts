@@ -141,13 +141,21 @@ export class UserResolver {
    * Update user configuration
    *
    * @param configuration - Configuration
+   * @param startPage - Start page
+   * @param preferredLanguage - Preferred language
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Update user configuration' })
   async updateUserConfiguration(
-    @Arg('configuration') configuration: string
+    @Arg('configuration', { nullable: true }) configuration: string,
+    @Arg('startPage', { nullable: true }) startPage?: string,
+    @Arg('preferredLanguage', { nullable: true }) preferredLanguage?: string
   ): Promise<BaseResult> {
-    await this._userSvc.updateCurrentUserConfiguration(configuration)
+    await this._userSvc.updateCurrentUserConfiguration(
+      configuration,
+      startPage,
+      preferredLanguage
+    )
     return { success: true }
   }
 

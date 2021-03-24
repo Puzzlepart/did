@@ -297,6 +297,8 @@
       "closeButtonAriaLabel": "Close"
     },
     "preferredLanguageLabel": "Preferred language",
+    "stickyNavigationLabel": "Sticky navigation",
+    "stickyNavigationDescription": "Makes the top navigation always visible even when you scroll down",
     "showAllFiltersText": "Show all ({{count}})",
     "userReports": "My reports",
     "export": "Export",

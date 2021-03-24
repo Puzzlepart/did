@@ -32,13 +32,16 @@ import { Navigation } from './Navigation'
  * @category App
  */
 export const AppRouter: React.FC = () => {
-  const { pages } = useAppContext()
+  const { pages, getUserConfiguration } = useAppContext()
   const [, hasPermission] = usePermissions()
-  let className = styles.root
-  if (isMobile) className += ` ${styles.mobile}`
+  const classNames =[ styles.root]
+  if (isMobile) classNames.push(styles.mobile)
+  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) {
+    classNames.push(styles.sticky)
+  }
   return (
     <Router>
-      <div className={className}>
+      <div className={classNames.join(' ')}>
         <Navigation />
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Switch>

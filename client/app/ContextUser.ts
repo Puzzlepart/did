@@ -69,7 +69,7 @@ export class ContextUser {
       }
     }
   }
-
+  
   /**
    * Checks if the user has the specified permission
    *

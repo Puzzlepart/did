@@ -1,6 +1,8 @@
 /* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import { Dropdown, Toggle } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
+import { isArray } from 'underscore'
 import { UserSettingsContext } from '../context'
 import { IUserSettingDropdown, IUserSettingInputProps } from '../types'
 import styles from './UserSettingInput.module.scss'
@@ -9,8 +11,9 @@ import styles from './UserSettingInput.module.scss'
  * @category UserMenu
  */
 export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
-  const { onUpdateUserSettings } = useContext(UserSettingsContext)
-  const defaultValue = user[setting.key] || setting.defaultValue
+  const { onUpdate } = useContext(UserSettingsContext)
+  const key = isArray(setting.key) ? setting.key.join('.') : setting.key
+  const defaultValue = get(user, key)
   let element: JSX.Element
   switch (setting.type) {
     case 'dropdown':
@@ -18,9 +21,10 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
         element = (
           <Dropdown
             {...(setting as IUserSettingDropdown)}
+            key={key}
             onChange={(_event, option) =>
-              onUpdateUserSettings(
-                setting.key,
+              onUpdate(
+                setting,
                 option.key.toString(),
                 setting.reloadAfterSave
               )
@@ -35,9 +39,10 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
         element = (
           <Toggle
             {...setting}
-            defaultValue={defaultValue}
+            key={key}
+            defaultChecked={defaultValue}
             onChange={(_event, bool) =>
-              onUpdateUserSettings(setting.key, bool, setting.reloadAfterSave)
+              onUpdate(setting, bool, setting.reloadAfterSave)
             }
           />
         )
