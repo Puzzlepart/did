@@ -16,7 +16,9 @@ export const Navigation: React.FC = () => {
   const { pages, isAuthenticated, getUserConfiguration } = useAppContext()
   const classNames =[ styles.root]
   if (isMobile) classNames.push(styles.mobile)
-  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) classNames.push(styles.sticky)
+  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) {
+    classNames.push(styles.sticky)
+  }
   return (
     <nav className={classNames.join(' ')} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
