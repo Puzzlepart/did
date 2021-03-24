@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
+import { useUpdateUserConfiguration } from 'hooks/user/useUpdateUserConfiguration'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,6 +13,7 @@ export function useUserSettings() {
   const { user } = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
+  const [updateUserConfiguration] = useUpdateUserConfiguration()
 
   /**
    * On update user
@@ -26,7 +28,10 @@ export function useUserSettings() {
     reloadAfterSave = false
   ) => {
     if (isArray(setting.key)) {
-      // Handle configuration update
+      const key = setting.key.splice(1).join('.')
+      await updateUserConfiguration({
+        [key]: value
+      })
     } else {
       await addOrUpdateUser({
         variables: {

@@ -40,7 +40,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
           <Toggle
             {...setting}
             key={key}
-            defaultValue={defaultValue}
+            defaultChecked={defaultValue}
             onChange={(_event, bool) =>
               onUpdateUser(setting, bool, setting.reloadAfterSave)
             }
