@@ -2,7 +2,6 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
-import { ReactHookFunction } from 'hooks/types'
 import { useCallback, useEffect } from 'react'
 import $updateUserConfiguration from './update-user-configuration.gql'
 
@@ -10,7 +9,6 @@ export type UseUpdateUserConfigurationParamType<T = any> = {
   config?: T
   autoUpdate?: boolean
 }
-
 
 export type UseUpdateUserConfigurationReturnType = {
   updateConfiguration?: (config: any) => Promise<void>
@@ -36,7 +34,7 @@ export type UseUpdateUserConfigurationReturnType = {
  *
  * @category React Hook
  */
-export const useUpdateUserConfiguration: ReactHookFunction<UseUpdateUserConfigurationParamType, UseUpdateUserConfigurationReturnType> = (params) => {
+export function useUpdateUserConfiguration(params: UseUpdateUserConfigurationParamType): UseUpdateUserConfigurationReturnType {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const stringValue = JSON.stringify(params?.config || {})
 
@@ -45,7 +43,7 @@ export const useUpdateUserConfiguration: ReactHookFunction<UseUpdateUserConfigur
       variables: { configuration: JSON.stringify(config_) }
     })
   }, [])
-  
+
   const updateStartPage = useCallback(async (startPage: string) => {
     await updateUserConfiguration({
       variables: {
