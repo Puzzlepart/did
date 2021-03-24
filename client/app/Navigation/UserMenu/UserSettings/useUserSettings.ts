@@ -13,13 +13,13 @@ export function useUserSettings() {
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
   /**
-   * On update user settings
+   * On update user
    *
    * @param setting - Setting
    * @param value - Value
    * @param reloadAfterSave - Reload after save
    */
-  const onUpdateUserSettings = async (
+  const onUpdateUser = async (
     setting: IUserSetting,
     value: string | boolean,
     reloadAfterSave = false
@@ -37,7 +37,7 @@ export function useUserSettings() {
 
   return {
     t,
-    context: { onUpdateUserSettings },
+    context: { onUpdateUser },
     openPanel: () => setIsOpen(true),
     dismissPanel: () => setIsOpen(false),
     isOpen,

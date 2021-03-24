@@ -319,7 +319,8 @@
           "github",
           "readme",
           "experimental",
-          "typo"
+          "typo",
+          "rename"
         ]
       ]
     }

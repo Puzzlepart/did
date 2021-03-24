@@ -2,7 +2,7 @@ import { createContext } from 'react'
 import { IUserSetting } from './types'
 
 export const UserSettingsContext = createContext<{
-  onUpdateUserSettings: (
+  onUpdateUser: (
     setting: IUserSetting,
     value: string | boolean,
     reloadAfterSave?: boolean
