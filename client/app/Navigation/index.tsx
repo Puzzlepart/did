@@ -20,10 +20,7 @@ export const Navigation: React.FC = () => {
   return (
     <nav className={className} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
-        <Link
-          to='/'
-          className={styles.logo}
-          title={`${name} - ${description}`}>
+        <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
           did
         </Link>
         <ul className={styles.nav} hidden={!isAuthenticated}>

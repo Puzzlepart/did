@@ -61,4 +61,3 @@ export const AppRouter: React.FC = () => {
     </Router>
   )
 }
-
