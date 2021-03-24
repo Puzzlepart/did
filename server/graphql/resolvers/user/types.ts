@@ -127,9 +127,6 @@ export class UserInput {
 
   @Field({ nullable: true })
   provider?: string
-
-  @Field({ nullable: true })
-  stickyNavigation?: boolean
 }
 /**
  * @category GraphQL InputType

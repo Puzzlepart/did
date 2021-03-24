@@ -17,7 +17,6 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
-  public stickyNavigation: boolean
 
   /**
    * Constructor for `ContextUser`
