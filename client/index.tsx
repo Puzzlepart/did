@@ -7,6 +7,7 @@
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
+import { loadTheme } from '@uifabric/styling'
 import { IAppProps } from 'app/types'
 import 'core-js/stable'
 import $date from 'DateUtils'
@@ -17,6 +18,7 @@ import 'regenerator-runtime/runtime.js'
 import { App, ContextUser } from './app'
 import { $usercontext, client } from './graphql'
 import './i18n'
+import { getTheme } from './theme'
 
 /**
  * Bootstrapping the App
@@ -50,6 +52,8 @@ export const boostrap = async () => {
   const init = await initializeApp()
   $date.setup(init.user.preferredLanguage)
   i18next.changeLanguage(init.user.preferredLanguage)
+  loadTheme(getTheme(init.user.theme))
+  document.body.className += `theme-${init.user.theme}`
 
   ReactDom.render(
     <ApolloProvider client={client}>

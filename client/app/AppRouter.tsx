@@ -34,11 +34,11 @@ import { Navigation } from './Navigation'
 export const AppRouter: React.FC = () => {
   const { pages } = useAppContext()
   const [, hasPermission] = usePermissions()
-  let className = styles.root
-  if (isMobile) className += ` ${styles.mobile}`
+  const classNames = [styles.root]
+  if (isMobile) classNames.push(styles.mobile)
   return (
     <Router>
-      <div className={className}>
+      <div className={classNames.join(' ')}>
         <Navigation />
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Switch>
