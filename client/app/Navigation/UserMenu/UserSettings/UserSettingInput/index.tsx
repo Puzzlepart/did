@@ -23,11 +23,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
             {...(setting as IUserSettingDropdown)}
             key={key}
             onChange={(_event, option) =>
-              onUpdate(
-                setting,
-                option.key.toString(),
-                setting.reloadAfterSave
-              )
+              onUpdate(setting, option.key.toString(), setting.reloadAfterSave)
             }
             defaultSelectedKey={defaultValue}
           />

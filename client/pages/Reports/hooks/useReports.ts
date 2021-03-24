@@ -37,13 +37,12 @@ export function useReports() {
   const filters = useFilters({ filter: state.filter })
 
   useUpdateUserConfiguration({
-    config:
-    {
+    config: {
       'reports.filters': state.savedFilters
     },
     autoUpdate: !state.loading && !!state.filter?.text
   })
-  
+
   const context = useMemo(() => ({ state, dispatch, t }), [state])
 
   return {

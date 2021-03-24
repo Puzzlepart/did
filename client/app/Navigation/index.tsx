@@ -14,7 +14,7 @@ import { UserNotifications } from './UserNotifications'
  */
 export const Navigation: React.FC = () => {
   const { pages, isAuthenticated, getUserConfiguration } = useAppContext()
-  const classNames =[ styles.root]
+  const classNames = [styles.root]
   if (isMobile) classNames.push(styles.mobile)
   if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) {
     classNames.push(styles.sticky)

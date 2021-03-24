@@ -22,7 +22,7 @@ export type UseUpdateUserConfigurationReturnType = {
  * Retrieves config JSON and update (boolean) and uses useMutation.
  * It will only execute the mutation if update is equal to true, and
  * the value has changed.
- * 
+ *
  * If `autoUpdate` is set to true, the mutation is ran on every
  * change to the specifie `config` using `useEffect`
  *
@@ -34,7 +34,9 @@ export type UseUpdateUserConfigurationReturnType = {
  *
  * @category React Hook
  */
-export function useUpdateUserConfiguration(params?: UseUpdateUserConfigurationParamType): UseUpdateUserConfigurationReturnType {
+export function useUpdateUserConfiguration(
+  params?: UseUpdateUserConfigurationParamType
+): UseUpdateUserConfigurationReturnType {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const stringValue = JSON.stringify(params?.config || {})
 
@@ -52,13 +54,16 @@ export function useUpdateUserConfiguration(params?: UseUpdateUserConfigurationPa
     })
   }, [])
 
-  const updatePreferredLanguage = useCallback(async (preferredLanguage: string) => {
-    await updateUserConfiguration({
-      variables: {
-        preferredLanguage
-      }
-    })
-  }, [])
+  const updatePreferredLanguage = useCallback(
+    async (preferredLanguage: string) => {
+      await updateUserConfiguration({
+        variables: {
+          preferredLanguage
+        }
+      })
+    },
+    []
+  )
 
   useEffect(() => {
     if (params?.autoUpdate) {

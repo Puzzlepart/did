@@ -25,7 +25,10 @@ type NotificationsQuery = {
  *
  * @category React Hook
  */
-export function useNotificationsQuery({ user, fetchPolicy = 'cache-first' }: NotificationsQueryParams): NotificationsQuery {
+export function useNotificationsQuery({
+  user,
+  fetchPolicy = 'cache-first'
+}: NotificationsQueryParams): NotificationsQuery {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notifications, {
     skip: !user.id,

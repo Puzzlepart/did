@@ -14,7 +14,7 @@ import { UserColumn } from '../../../components/UserColumn'
  *
  * @category Reports Hooks
  */
-export function useColumns(): IListColumn[]  {
+export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
   return [
     {

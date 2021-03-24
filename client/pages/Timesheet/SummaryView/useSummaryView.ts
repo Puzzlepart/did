@@ -15,7 +15,7 @@ import { generateTotalRow } from './generateTotalRow'
  *
  * @category Timesheet
  */
-export function useSummaryView ():IListProps {
+export function useSummaryView(): IListProps {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   const columns = createColumns(state.scope)
