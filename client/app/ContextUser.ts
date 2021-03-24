@@ -17,6 +17,7 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
+  public stickyNavigation: boolean
 
   /**
    * Constructor for `ContextUser`
@@ -41,7 +42,7 @@ export class ContextUser {
     if (_user) {
       Object.assign(
         this,
-        pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
+        pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo', 'stickyNavigation')
       )
       this.configuration = tryParseJson(_user.configuration, {})
     }
@@ -69,6 +70,17 @@ export class ContextUser {
       }
     }
   }
+
+  /**
+ * Sticky navigation
+ *
+ * - Default is `config.app.STICKY_NAVIGATION`
+ */
+  // public get stickyNavigation() {
+  //   if (!this._user) return config.app.STICKY_NAVIGATION
+  //   if (!this._user.stickyNavigation) return config.app.STICKY_NAVIGATION
+  //   return this._user.stickyNavigation
+  // }
 
   /**
    * Checks if the user has the specified permission

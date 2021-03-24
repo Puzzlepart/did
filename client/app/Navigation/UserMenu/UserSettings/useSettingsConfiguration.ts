@@ -42,6 +42,14 @@ export function useSettingsConfiguration() {
       ],
       reloadAfterSave: true,
       defaultValue: config.app.DEFAULT_USER_LANGUAGE
-    } as IUserSettingDropdown
+    } as IUserSettingDropdown,
+    {
+        key: 'stickyNavigation',
+        label: t('common.stickyNavigationLabel'),
+        description: t('common.stickyNavigationDescription'),
+        type: 'bool',
+        reloadAfterSave: true,
+        defaultValue: config.app.STICKY_NAVIGATION
+      }
   ])
 }

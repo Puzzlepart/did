@@ -32,10 +32,12 @@ import { Navigation } from './Navigation'
  * @category App
  */
 export const AppRouter: React.FC = () => {
-  const { pages } = useAppContext()
+  const { pages, user } = useAppContext()
   const [, hasPermission] = usePermissions()
   let className = styles.root
+  const isSticky = user.stickyNavigation
   if (isMobile) className += ` ${styles.mobile}`
+  if (isSticky && !isMobile) className += ` ${styles.sticky}`
   return (
     <Router>
       <div className={className}>

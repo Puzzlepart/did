@@ -49,7 +49,20 @@
     min-height: -webkit-fill-available;
 
     .container {
-       padding: 0 15px;
-       margin-top: 0;
+        padding: 0 15px;
+        margin-top: 0;
+
+        >div {
+            margin-top: 0;
+        }
+
+    }
+}
+
+.root.sticky {
+    .container {
+        >div {
+            margin-top: 65px;
+        }
     }
 }

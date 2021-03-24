@@ -173,7 +173,8 @@
       "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month",
       "DEFAULT_USER_LANGUAGE": "en-GB",
       "TIMESHEET_OVERVIEW_DAY_FORMAT": "dddd DD",
-      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm"
+      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm",
+      "STICKY_NAVIGATION": true
     }
   },
   "contributors": [
