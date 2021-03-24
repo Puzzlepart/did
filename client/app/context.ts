@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { AnyAction } from '@reduxjs/toolkit'
 import get from 'get-value'
-import { ReactHookFunction } from 'hooks/types'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
 import { useNotificationsQuery } from '../hooks'
@@ -37,7 +36,7 @@ export interface IAppContext extends IAppProps {
   /**
    * Get user configuration
    */
-   getUserConfiguration: <T = any>(path: string) => T
+  getUserConfiguration: <T = any>(path: string) => T
 }
 
 export const AppContext = createContext<IAppContext>(null)
@@ -49,7 +48,7 @@ export const AppContext = createContext<IAppContext>(null)
  *
  * @returns `IAppContext`
  */
-export const useAppContext: ReactHookFunction<{}, IAppContext> = () => {
+export function useAppContext(): IAppContext {
   const context = useContext(AppContext)
   const getUserConfiguration = (path: string) =>
     get(context.user.configuration, path)

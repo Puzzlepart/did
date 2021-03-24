@@ -34,7 +34,7 @@ export type UseUpdateUserConfigurationReturnType = {
  *
  * @category React Hook
  */
-export function useUpdateUserConfiguration(params: UseUpdateUserConfigurationParamType): UseUpdateUserConfigurationReturnType {
+export function useUpdateUserConfiguration(params?: UseUpdateUserConfigurationParamType): UseUpdateUserConfigurationReturnType {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const stringValue = JSON.stringify(params?.config || {})
 
