@@ -218,7 +218,7 @@ ___
 
 Home page
 
-Defined in: [pages/Home/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L17)
+Defined in: [pages/Home/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L18)
 
 ___
 

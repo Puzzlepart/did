@@ -25,10 +25,7 @@ export const UserMenu: React.FC = () => {
 
   return (
     <>
-      <span
-        ref={target}
-        className={styles.root}
-        onClick={() => toggleMenu()}>
+      <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
         <Persona
           className={styles.user}
           text={user.displayName}
