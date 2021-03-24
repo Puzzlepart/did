@@ -50,6 +50,22 @@ export function useSettingsConfiguration() {
       type: 'bool',
       reloadAfterSave: true,
       defaultValue: config.app.STICKY_NAVIGATION
+    },
+    {
+      key: ['configuration', 'ui', 'theme'],
+      label: t('common.uiThemeLabel'),
+      type: 'dropdown',
+      options: [
+        {
+          key: 'light',
+          text: t('common.light-theme')
+        },
+        {
+          key: 'dark',
+          text: t('common.dark-theme')
+        }
+      ],
+      reloadAfterSave: true
     }
   ])
 }

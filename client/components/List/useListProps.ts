@@ -61,7 +61,8 @@ export function useListProps({
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
       ...props.listGroupRenderProps,
-      onRenderHeader: ListGroupHeader
+      onRenderHeader: ListGroupHeader,
+      
     },
     onRenderItemColumn: (item: any, index: number, column: IColumn) => {
       if (!!column.onRender) return column.onRender(item, index, column)

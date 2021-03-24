@@ -52,8 +52,8 @@ export const boostrap = async () => {
   const init = await initializeApp()
   $date.setup(init.user.preferredLanguage)
   i18next.changeLanguage(init.user.preferredLanguage)
-  loadTheme(getTheme(init.user.theme))
-  document.body.className += `theme-${init.user.theme}`
+  loadTheme(getTheme(init.user.configuration?.ui?.theme))
+  document.body.className += `theme-${init.user.configuration?.ui?.theme}`
 
   ReactDom.render(
     <ApolloProvider client={client}>

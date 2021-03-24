@@ -332,7 +332,10 @@
     "activeDirectory": "Azure AD",
     "google": "Google",
     "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent.",
-    "error": "Feilmelding"
+    "error": "Feilmelding",
+    "uiThemeLabel": "Fargetema",
+    "dark-theme": "Mørkt tema",
+    "light-theme": "Lyst tema"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

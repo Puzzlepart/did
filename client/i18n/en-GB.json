@@ -333,7 +333,10 @@
     "activeDirectory": "Azure AD",
     "google": "Google",
     "signInDisabledMessage": "Sign in is currently disabled. Please hold on.",
-    "error": "Error"
+    "error": "Error",
+    "uiThemeLabel": "Theme",
+    "light-theme": "Light theme",
+    "dark-theme": "Dark theme"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
