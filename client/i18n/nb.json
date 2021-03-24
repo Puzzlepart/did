@@ -394,6 +394,7 @@
     "descriptionFieldDesc": "For å beskytte personvernet ditt, vennligst ikke ta med personlig eller sensitiv informasjon.",
     "mixed-feelings": "Blandede følelser",
     "typeFieldLabel": "Hvilken tilbakemelding vil du gi?",
-    "summaryFieldLabel": "Kort sammendrag"
+    "summaryFieldLabel": "Kort sammendrag",
+    "submitSuccessMessage": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse #{{ref}}."
   }
 }

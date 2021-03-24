@@ -395,6 +395,7 @@
     "cancelButtonLabel": "Cancel",
     "mixed-feelings": "Mixed feelings",
     "typeFieldLabel": "What feedback would you like to give?",
-    "summaryFieldLabel": "Short summary"
+    "summaryFieldLabel": "Short summary",
+    "submitSuccessMessage": "Your feedback was registered with reference #{{ref}}. Thank you for taking your time!"
   }
 }
