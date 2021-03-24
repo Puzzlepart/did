@@ -46,8 +46,15 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
         messageBarIconProps={props.iconName && { iconName: props.iconName }}
         onDismiss={props.onDismiss}
         actions={props.actions}>
-        {props.text && <ReactMarkdown source={props.text} escapeHtml={false} />}
-        {props.children && props.children}
+        <div style={props.innerStyle}>
+          {props.headerText && (
+            <div className={styles.header}>{props.headerText}</div>
+          )}
+          {props.text && (
+            <ReactMarkdown source={props.text} escapeHtml={false} />
+          )}
+          {props.children && props.children}
+        </div>
       </MessageBar>
     </div>
   )

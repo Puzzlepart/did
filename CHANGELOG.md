@@ -59,24 +59,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for split week, split year scenarios #753
 - Last year option added to reports #775
 - Support for deleting role #692
-- Improved Timesheet statusbar. Now showing on all tabs, and showing either shimmer or progress indicator. Not both. #831
-- Support for nb-NO (nynorsk) #864 (thanks to @paalolav ❤️)
+- Improved Timesheet statusbar: Now showing on all tabs, and showing either shimmer or progress indicator, not both. #831
+- Nynorsk (nn-no) language support #864 (thanks to @paalolav ❤️)
 - Support for initial signin with email #884
 - Showing more details in the summary view on hover #886
 - Summary view moved to Reports
-- Support for start page user setting
 - Differentiating 0-hour weeks from unconfirmed weeks in Summary view #781
-- Synchronizes user photo from Azure AD #899
-- Added breadcrumb to mobile devices
+- Synchronize user photo from Azure AD #899
+- Breadcrumb for mobile devices
+- New user setting: Start page 
+- New user setting: Sticky Navigation
+- Support for submitting feedback
 
 ### Fixed
 
-- Issue where sunday hours would not be displayed in the UI after confirming a week #785
 - Issue where moving an event from a confirmed week to an unconfirmed week would cause an error #766
-- Minor visual bug in unmatched hours #773
 - Issue where confirmed hours would be skewed forward one hour #760
 - Issue with navigating between tabs in Projects #749
+- Minor visual bug in unmatched hours #773
 - Issue with rogue customer matches in large event bodies #782
+- Issue where sunday hours would not be displayed in the UI after confirming a week #785
 - Issue with time entry queries in Reports #790
 - Issue with navigating to a customer from e.g. Timesheet #791
 - Issue with navigating directly to a page when not logged in #889
@@ -84,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Consolidated Server and Client date utils #771
+- Consolidated server and client date utils #771
 - Summary view now using datepicker instead of slider #777
 - Visual improvements on the admin sections
 

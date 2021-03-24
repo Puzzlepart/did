@@ -6,9 +6,14 @@ import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react'
  */
 export interface IUserMessageProps extends IMessageBarProps {
   /**
+   * Header text to show in **bold** _slightly larger_ font
+   */
+  headerText?: string
+
+  /**
    * Text to show in the message
    *
-   * NOTE: Supports markdown
+   * @remarks Supports markdown
    */
   text?: string
 
@@ -41,4 +46,9 @@ export interface IUserMessageProps extends IMessageBarProps {
    * To flex the message center, speficy a min height
    */
   fixedCenter?: number
+
+  /**
+   * Styles for the inner part of the message
+   */
+  innerStyle?: React.CSSProperties
 }

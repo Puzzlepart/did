@@ -6,6 +6,12 @@
     font-size: 14px;
   }
 
+  .header {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 0 8px 0;
+  }
+
   [class*="ms-MessageBar-icon"] {
     display: flex;
     align-self: center;

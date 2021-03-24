@@ -34,6 +34,12 @@ type Environment = {
   MONGO_DB_CONNECTION_STRING: string
   MONGO_DB_DB_NAME: string
   LOCALTUNNEL_SUBDOMAIN: string
+  GITHUB_APPID: string
+  GITHUB_INSTALLATION_ID: string
+  GITHUB_CLIENT_ID: string
+  GITHUB_CLIENT_SECRET: string
+  GITHUB_PRIVATE_KEY: string
+  GITHUB_FEEDBACK_REPO: string
 }
 
 /**

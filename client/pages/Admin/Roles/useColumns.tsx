@@ -25,7 +25,7 @@ export function useColumns({ setPanel }) {
         </div>
       )
     }),
-    col('description', t('common.descriptionLabel'), {
+    col('description', t('common.descriptionFieldLabel'), {
       maxWidth: 240,
       isMultiline: true,
       data: { hidden: isMobile }

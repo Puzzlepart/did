@@ -1,4 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { createAppAuth } from '@octokit/auth-app'
+import { request } from '@octokit/request'
+import createDebug from 'debug'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -9,10 +12,18 @@ import {
   SubscriptionService,
   UserService
 } from '../../../services'
+import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
-import { User, UserInput, UserQuery } from './types'
+import {
+  User,
+  UserFeedback,
+  UserFeedbackResult,
+  UserInput,
+  UserQuery
+} from './types'
+const debug = createDebug('graphql/resolvers/user')
 
 /**
  * Resolver for `User`.
@@ -133,14 +144,61 @@ export class UserResolver {
    * Update user configuration
    *
    * @param configuration - Configuration
+   * @param startPage - Start page
+   * @param preferredLanguage - Preferred language
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Update user configuration' })
   async updateUserConfiguration(
-    @Arg('configuration') configuration: string
+    @Arg('configuration', { nullable: true }) configuration: string,
+    @Arg('startPage', { nullable: true }) startPage?: string,
+    @Arg('preferredLanguage', { nullable: true }) preferredLanguage?: string
   ): Promise<BaseResult> {
-    await this._userSvc.updateCurrentUserConfiguration(configuration)
+    await this._userSvc.updateCurrentUserConfiguration(
+      configuration,
+      startPage,
+      preferredLanguage
+    )
     return { success: true }
+  }
+
+  /**
+   * Submit feedback
+   *
+   * @param feedback - Feedback model
+   */
+  @Mutation(() => UserFeedbackResult, { description: 'Submit feedback' })
+  async submitFeedback(
+    @Arg('feedback') feedback: UserFeedback
+  ): Promise<UserFeedbackResult> {
+    try {
+      const auth = createAppAuth({
+        appId: environment('GITHUB_APPID'),
+        installationId: environment('GITHUB_INSTALLATION_ID'),
+        privateKey: environment('GITHUB_PRIVATE_KEY'),
+        clientId: environment('GITHUB_CLIENT_ID'),
+        clientSecret: environment('GITHUB_CLIENT_SECRET')
+      })
+      const { token } = await auth({ type: 'installation' }) as any
+      const result = await request(
+        'POST /repos/{owner}/{repo}/issues',
+        {
+          owner: 'puzzlepart',
+          repo: environment<string>('GITHUB_FEEDBACK_REPO'),
+          ...feedback,
+          title: `${feedback.title} ${feedback.mood}`,
+          body: feedback.body,
+          labels: feedback.labels || [],
+          headers: {
+            authorization: `token ${token}`
+          }
+        }
+      )
+      return { success: true, ref: result.data.number }
+    } catch (error) {
+      debug('There was an issue submitting feedback to GitHub: ', error.message)
+      return { success: false }
+    }
   }
 }
 

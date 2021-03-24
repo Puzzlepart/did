@@ -16,6 +16,7 @@
 
 - [authProviders](app.iappcontext.md#authproviders)
 - [dispatch](app.iappcontext.md#dispatch)
+- [getUserConfiguration](app.iappcontext.md#getuserconfiguration)
 - [isAuthenticated](app.iappcontext.md#isauthenticated)
 - [notifications](app.iappcontext.md#notifications)
 - [pages](app.iappcontext.md#pages)
@@ -44,6 +45,36 @@ ___
 Application dispatcher
 
 Defined in: [app/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L29)
+
+___
+
+### getUserConfiguration
+
+• **getUserConfiguration**: <T\>(`path`: *string*) => T
+
+Get user configuration
+
+#### Type declaration:
+
+▸ <T\>(`path`: *string*): T
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`path` | *string* |
+
+**Returns:** T
+
+Defined in: [app/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L39)
+
+Defined in: [app/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L39)
 
 ___
 

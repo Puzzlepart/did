@@ -27,11 +27,14 @@ The App component
 ### Other Variables
 
 - [AppContext](app.md#appcontext)
-- [useAppContext](app.md#useappcontext)
 
 ### Function Component Functions
 
 - [ErrorFallback](app.md#errorfallback)
+
+### Other Functions
+
+- [useAppContext](app.md#useappcontext)
 
 ## Function Component Variables
 
@@ -47,7 +50,7 @@ ___
 
 • `Const` **Navigation**: React.FC
 
-Defined in: [app/Navigation/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L14)
+Defined in: [app/Navigation/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L15)
 
 ___
 
@@ -85,21 +88,7 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [app/context.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L37)
-
-___
-
-### useAppContext
-
-• `Const` **useAppContext**: *ReactHookFunction*<{}, [*IAppContext*](../interfaces/app.iappcontext.md)\>
-
-Returns the current context value for the app.
-
-Uses `useContext` with `AppContext`
-
-**`returns`** `IAppContext`
-
-Defined in: [app/context.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L46)
+Defined in: [app/context.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L42)
 
 ## Function Component Functions
 
@@ -125,3 +114,21 @@ Name | Type |
 **Returns:** *Element*
 
 Defined in: [app/ErrorFallback/index.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L40)
+
+___
+
+## Other Functions
+
+### useAppContext
+
+▸ **useAppContext**(): [*IAppContext*](../interfaces/app.iappcontext.md)
+
+Returns the current context value for the app.
+
+Uses `useContext` with `AppContext`
+
+**Returns:** [*IAppContext*](../interfaces/app.iappcontext.md)
+
+`IAppContext`
+
+Defined in: [app/context.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L51)

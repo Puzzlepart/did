@@ -297,6 +297,8 @@
       "closeButtonAriaLabel": "Close"
     },
     "preferredLanguageLabel": "Preferred language",
+    "stickyNavigationLabel": "Sticky navigation",
+    "stickyNavigationDescription": "Makes the top navigation always visible even when you scroll down",
     "showAllFiltersText": "Show all ({{count}})",
     "userReports": "My reports",
     "export": "Export",
@@ -305,7 +307,6 @@
     "exportTypeCurrentYear": "This year {{year}}",
     "subscription": "Subscription",
     "nameLabel": "Name",
-    "descriptionLabel": "Description",
     "expiresLabel": "Expires",
     "officeLocationLabel": "Office Location",
     "departmentLabel": "Department",
@@ -377,5 +378,29 @@
       "forecast": "Missing forecast for week {0} ({1})."
     },
     "clearDismissedText": "Click to show dismissed notifications."
+  },
+  "feedback": {
+    "headerText": "Feedback",
+    "report_a_problem": "Report a problem",
+    "have-a-suggestion": "Have a suggestion",
+    "give-a-compliment": "Give a compliment",
+    "something-else": "Something else",
+    "descriptionFieldLabel": "Please describe your feedback",
+    "descriptionFieldDesc": "To protect your privacy, please do not include personal or sensitive information.",
+    "ratingFieldLabel": "How would you rate your experience using did?",
+    "very-satisfied": "Very satisfied",
+    "satisfied": "Satisfied",
+    "very-dissatisfied": "Very dissatisfied",
+    "dissatisfied": "Dissatisfied",
+    "neutral": "Neutral",
+    "submitButtonText": "Submit",
+    "cancelButtonLabel": "Cancel",
+    "mixed-feelings": "Mixed feelings",
+    "typeFieldLabel": "What feedback would you like to give?",
+    "summaryFieldLabel": "Short summary",
+    "submitSuccessMessageText": "Your feedback was registered with reference **#{{ref}}**. Thank you for taking your time!",
+    "submitSuccessMessagHeader": "Thank you!",
+    "submitErrorMessageHeader": "Very sorry!",
+    "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend."
   }
 }

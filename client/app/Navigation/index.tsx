@@ -5,6 +5,7 @@ import { isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
+import { UserFeedback } from './UserFeedback'
 import { UserMenu } from './UserMenu'
 import { UserNotifications } from './UserNotifications'
 
@@ -12,11 +13,14 @@ import { UserNotifications } from './UserNotifications'
  * @category Function Component
  */
 export const Navigation: React.FC = () => {
-  const { pages, isAuthenticated } = useAppContext()
-  let className = styles.root
-  if (isMobile) className += ` ${styles.mobile}`
+  const { pages, isAuthenticated, getUserConfiguration } = useAppContext()
+  const classNames = [styles.root]
+  if (isMobile) classNames.push(styles.mobile)
+  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) {
+    classNames.push(styles.sticky)
+  }
   return (
-    <nav className={className} hidden={isMobile && !isAuthenticated}>
+    <nav className={classNames.join(' ')} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link
           to='/'
@@ -36,6 +40,7 @@ export const Navigation: React.FC = () => {
           ))}
         </ul>
         <ul className={styles.navRight}>
+          {isAuthenticated && <UserFeedback />}
           {isAuthenticated && <UserNotifications />}
           <UserMenu />
         </ul>

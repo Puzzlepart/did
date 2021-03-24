@@ -2,18 +2,19 @@ import { IDropdownOption } from 'office-ui-fabric-react'
 
 export interface IUserSettingInputProps {
   user: any
-  setting: IUserSetting
+  setting: IUserSettingInput
 }
 
-export interface IUserSetting {
-  key: string
+export interface IUserSettingInput {
+  key: string | string[]
   label: string
   type: 'dropdown' | 'bool'
   description?: string
   defaultValue?: any
+  configuration?: boolean
   reloadAfterSave?: boolean
 }
 
-export interface IUserSettingDropdown extends IUserSetting {
+export interface IUserSettingDropdown extends IUserSettingInput {
   options: IDropdownOption[]
 }

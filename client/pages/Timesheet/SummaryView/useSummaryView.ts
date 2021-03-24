@@ -2,7 +2,6 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-reduce */
 import { IListProps } from 'components/List/types'
-import { ReactHookFunction } from 'hooks/types'
 import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../context'
 import { createColumns } from './createColumns'
@@ -16,7 +15,7 @@ import { generateTotalRow } from './generateTotalRow'
  *
  * @category Timesheet
  */
-export const useSummaryView: ReactHookFunction<{}, IListProps> = () => {
+export function useSummaryView(): IListProps {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   const columns = createColumns(state.scope)

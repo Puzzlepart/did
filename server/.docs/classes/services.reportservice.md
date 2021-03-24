@@ -88,7 +88,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/report.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L89)
+Defined in: [services/report.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L91)
 
 ___
 
@@ -106,7 +106,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/report.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L132)
+Defined in: [services/report.ts:134](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L134)
 
 ___
 
@@ -118,7 +118,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L173)
+Defined in: [services/report.ts:178](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L178)
 
 ___
 
@@ -138,7 +138,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L143)
+Defined in: [services/report.ts:145](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L145)
 
 ___
 
@@ -158,4 +158,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L203)
+Defined in: [services/report.ts:208](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L208)
