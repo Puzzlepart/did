@@ -26,7 +26,7 @@ export function useUpdateUserConfiguration<T = any>(config?: T, autoUpdate = fal
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const stringValue = JSON.stringify(config)
 
-  const update = useCallback(async (config_: T) => {
+  const updateCallback = useCallback(async (config_: T) => {
     await updateUserConfiguration({
       variables: { configuration: JSON.stringify(config_) }
     })
@@ -40,5 +40,5 @@ export function useUpdateUserConfiguration<T = any>(config?: T, autoUpdate = fal
     }
   }, [stringValue])
 
-  return [update]
+  return [updateCallback]
 }
