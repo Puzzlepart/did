@@ -1,9 +1,9 @@
 import { createContext } from 'react'
-import { IUserSetting } from './types'
+import { IUserSettingInput } from './types'
 
 export const UserSettingsContext = createContext<{
   onUpdateUser: (
-    setting: IUserSetting,
+    setting: IUserSettingInput,
     value: string | boolean,
     reloadAfterSave?: boolean
   ) => void

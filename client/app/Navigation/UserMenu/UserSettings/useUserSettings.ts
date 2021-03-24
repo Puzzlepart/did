@@ -3,7 +3,7 @@ import { useAppContext } from 'AppContext'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IUserSetting } from './types'
+import { IUserSettingInput } from './types'
 import { useSettingsConfiguration } from './useSettingsConfiguration'
 
 export function useUserSettings() {
@@ -20,16 +20,20 @@ export function useUserSettings() {
    * @param reloadAfterSave - Reload after save
    */
   const onUpdateUser = async (
-    setting: IUserSetting,
+    setting: IUserSettingInput,
     value: string | boolean,
     reloadAfterSave = false
   ) => {
-    await addOrUpdateUser({
-      variables: {
-        user: { id: user.id, [setting.key]: value },
-        update: true
-      }
-    })
+    if (setting.configuration) {
+      // Handle configuration update
+    } else {
+      await addOrUpdateUser({
+        variables: {
+          user: { id: user.id, [setting.key]: value },
+          update: true
+        }
+      })
+    }
     if (reloadAfterSave) location.reload()
   }
 

@@ -2,13 +2,13 @@ import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { config } from 'package'
 import { useTranslation } from 'react-i18next'
-import { IUserSetting, IUserSettingDropdown } from './types'
+import { IUserSettingInput, IUserSettingDropdown } from './types'
 
 export function useSettingsConfiguration() {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { pages } = useAppContext()
-  return new Set<IUserSetting>([
+  return new Set<IUserSettingInput>([
     {
       key: 'startPage',
       label: t('common.startPageLabel'),
@@ -44,11 +44,12 @@ export function useSettingsConfiguration() {
       defaultValue: config.app.DEFAULT_USER_LANGUAGE
     } as IUserSettingDropdown,
     {
-        key: 'stickyNavigation',
+        key: 'ui.stickyNavigation',
         label: t('common.stickyNavigationLabel'),
         description: t('common.stickyNavigationDescription'),
         type: 'bool',
         reloadAfterSave: true,
+        configuration: true,
         defaultValue: config.app.STICKY_NAVIGATION
       }
   ])
