@@ -26,7 +26,6 @@ query UserContext {
     }
     startPage
     preferredLanguage
-    stickyNavigation
     configuration
     photo {
       base64
