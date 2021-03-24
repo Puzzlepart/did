@@ -5,7 +5,6 @@ import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { Notification } from 'types'
-import { ReactHookFunction } from '../types'
 import notifications from './notifications.gql'
 
 type NotificationsQueryParams = {
@@ -26,10 +25,7 @@ type NotificationsQuery = {
  *
  * @category React Hook
  */
-export const useNotificationsQuery: ReactHookFunction<
-  NotificationsQueryParams,
-  NotificationsQuery
-> = ({ user, fetchPolicy = 'cache-first' }) => {
+export function useNotificationsQuery({ user, fetchPolicy = 'cache-first' }: NotificationsQueryParams): NotificationsQuery {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notifications, {
     skip: !user.id,

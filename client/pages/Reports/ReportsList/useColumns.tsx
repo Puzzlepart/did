@@ -5,7 +5,6 @@ import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
 import { ProjectLink } from 'components/ProjectLink'
 import $date, { DateObject } from 'DateUtils'
-import { ReactHookFunction } from 'hooks/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserColumn } from '../../../components/UserColumn'
@@ -15,7 +14,7 @@ import { UserColumn } from '../../../components/UserColumn'
  *
  * @category Reports Hooks
  */
-export const useColumns: ReactHookFunction<{}, IListColumn[]> = () => {
+export function useColumns(): IListColumn[]  {
   const { t } = useTranslation()
   return [
     {
