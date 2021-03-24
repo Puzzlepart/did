@@ -63,22 +63,24 @@ export class ReportService {
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
     const d = new DateObject()
-    return {
-      LAST_MONTH: {
-        month: d.add('-1m').toObject().month - 1,
-        year: d.add('-1m').toObject().year
-      },
-      CURRENT_MONTH: {
-        month: d.toObject().month,
-        year: d.toObject().year
-      },
-      LAST_YEAR: {
-        year: d.toObject().year - 1
-      },
-      CURRENT_YEAR: {
-        year: d.toObject().year
-      }
-    }[preset] || { month: -1 }
+    return (
+      {
+        LAST_MONTH: {
+          month: d.add('-1m').toObject().month - 1,
+          year: d.add('-1m').toObject().year
+        },
+        CURRENT_MONTH: {
+          month: d.toObject().month,
+          year: d.toObject().year
+        },
+        LAST_YEAR: {
+          year: d.toObject().year - 1
+        },
+        CURRENT_YEAR: {
+          year: d.toObject().year
+        }
+      }[preset] || { month: -1 }
+    )
   }
 
   /**
@@ -146,10 +148,13 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const query_ = omit({
-        ...this._generatePresetQuery(preset),
-        ...query
-      }, 'preset')
+      const query_ = omit(
+        {
+          ...this._generatePresetQuery(preset),
+          ...query
+        },
+        'preset'
+      )
       const [timeEntries, projectsData, users] = await Promise.all([
         this._teSvc.find(query_),
         this._projectSvc.getProjectsData(),

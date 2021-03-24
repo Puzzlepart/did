@@ -34,7 +34,7 @@ export function useUsers() {
     }),
     [query.data]
   )
-  
+
   context.activeDirectoryUsers = filter(
     context.activeDirectoryUsers,
     (x) => !any(context.users, (y) => y.id === x.id)

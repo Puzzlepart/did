@@ -118,7 +118,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L172)
+Defined in: [services/report.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L173)
 
 ___
 
