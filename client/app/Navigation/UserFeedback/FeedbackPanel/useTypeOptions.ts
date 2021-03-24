@@ -1,6 +1,7 @@
+import { IDropdownOption } from 'office-ui-fabric-react'
 import { useTranslation } from 'react-i18next'
 
-export const useTypeOptions = () => {
+export const useTypeOptions = (): IDropdownOption[] => {
     const { t } = useTranslation()
     return [
         {
