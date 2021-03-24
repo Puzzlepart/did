@@ -1,6 +1,15 @@
 /* eslint-disable tsdoc/syntax */
 import { Toast } from 'components'
-import { ChoiceGroup, DefaultButton, Dropdown, IPanelProps, Panel, PanelType, PrimaryButton, TextField } from 'office-ui-fabric-react'
+import {
+  ChoiceGroup,
+  DefaultButton,
+  Dropdown,
+  IPanelProps,
+  Panel,
+  PanelType,
+  PrimaryButton,
+  TextField
+} from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './FeedbackPanel.module.scss'
@@ -21,11 +30,7 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
     typeOptions,
     moodOptions
   } = useFeedbackModel()
-  const {
-    onClick,
-    disabled,
-    toast
-  } = useSubmitFeedback(model, props)
+  const { onClick, disabled, toast } = useSubmitFeedback(model, props)
 
   return (
     <>
@@ -42,7 +47,8 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
             required={true}
             defaultSelectedKey={model.labels[0]}
             options={typeOptions}
-            onChange={(_event, option) => setType(option.key as string)} />
+            onChange={(_event, option) => setType(option.key as string)}
+          />
           <TextField
             label={t('feedback.summaryFieldLabel')}
             required={true}
@@ -64,17 +70,20 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
             required={true}
             defaultSelectedKey={model.mood}
             onChange={(_event, option) => setMood(option.key)}
-            options={moodOptions} />
+            options={moodOptions}
+          />
         </div>
         <div className={styles.footer}>
           <PrimaryButton
             text={t('feedback.submitButtonText')}
             onClick={onClick}
-            disabled={disabled} />
+            disabled={disabled}
+          />
           <DefaultButton
             text={t('feedback.cancelButtonLabel')}
             onClick={() => props.onDismiss()}
-            style={{ marginLeft: 8 }} />
+            style={{ marginLeft: 8 }}
+          />
         </div>
       </Panel>
       <Toast {...toast} />

@@ -158,7 +158,6 @@ export class UserFeedback {
   labels?: string[]
 }
 
-
 /**
  * @category GraphQL ObjectType
  */
