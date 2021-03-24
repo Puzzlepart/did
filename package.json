@@ -320,7 +320,8 @@
           "readme",
           "experimental",
           "typo",
-          "rename"
+          "rename",
+          "merge"
         ]
       ]
     }
