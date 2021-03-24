@@ -25,6 +25,7 @@
 - [TimesheetOptions](../classes/graphql.timesheetoptions.md)
 - [TimesheetPeriodInput](../classes/graphql.timesheetperiodinput.md)
 - [TimesheetQuery](../classes/graphql.timesheetquery.md)
+- [UserFeedback](../classes/graphql.userfeedback.md)
 - [UserInput](../classes/graphql.userinput.md)
 - [UserQuery](../classes/graphql.userquery.md)
 
@@ -47,6 +48,7 @@
 - [TimeEntry](../classes/graphql.timeentry.md)
 - [TimesheetPeriodObject](../classes/graphql.timesheetperiodobject.md)
 - [User](../classes/graphql.user.md)
+- [UserFeedbackResult](../classes/graphql.userfeedbackresult.md)
 - [UserPhoto](../classes/graphql.userphoto.md)
 
 ### GraphQL Resolver Classes

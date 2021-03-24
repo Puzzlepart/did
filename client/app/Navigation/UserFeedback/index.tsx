@@ -9,17 +9,15 @@ import styles from './UserFeedback.module.scss'
  */
 export const UserFeedback: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  if(process.env.GITHUB_FEEDBACK_ENABLED !== '1') return null
+  if (process.env.GITHUB_FEEDBACK_ENABLED !== '1') return null
   return (
-    <div className={styles.root} >
+    <div className={styles.root}>
       <a onClick={() => setIsOpen(true)}>
         <div className={styles.icon}>
           <Icon iconName='Emoji2' />
         </div>
       </a>
-      <FeedbackPanel
-        isOpen={isOpen}
-        onDismiss={() => setIsOpen(false)} />
+      <FeedbackPanel isOpen={isOpen} onDismiss={() => setIsOpen(false)} />
     </div>
   )
 }

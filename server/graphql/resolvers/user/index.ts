@@ -14,7 +14,13 @@ import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
-import { User, UserFeedback, UserFeedbackResult, UserInput, UserQuery } from './types'
+import {
+  User,
+  UserFeedback,
+  UserFeedbackResult,
+  UserInput,
+  UserQuery
+} from './types'
 
 /**
  * Resolver for `User`.
