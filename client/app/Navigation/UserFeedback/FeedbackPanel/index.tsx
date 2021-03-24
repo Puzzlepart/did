@@ -3,7 +3,6 @@ import { Toast } from 'components'
 import { ChoiceGroup, DefaultButton, Dropdown, IPanelProps, Panel, PanelType, PrimaryButton, TextField } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { omit } from 'underscore'
 import styles from './FeedbackPanel.module.scss'
 import { useFeedbackModel } from './useFeedbackModel'
 import { useSubmitFeedback } from './useSubmitFeedback'
@@ -22,7 +21,12 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
     typeOptions,
     moodOptions
   } = useFeedbackModel()
-  const submit = useSubmitFeedback(model, props)
+  const {
+    onClick,
+    disabled,
+    toast
+  } = useSubmitFeedback(model, props)
+
   return (
     <>
       <Panel
@@ -64,15 +68,16 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
         </div>
         <div className={styles.footer}>
           <PrimaryButton
-            {...omit(submit, 'toast')}
-            text={t('feedback.submitButtonText')} />
+            text={t('feedback.submitButtonText')}
+            onClick={onClick}
+            disabled={disabled} />
           <DefaultButton
             text={t('feedback.cancelButtonLabel')}
             onClick={() => props.onDismiss()}
             style={{ marginLeft: 8 }} />
         </div>
       </Panel>
-      <Toast {...submit.toast} />
+      <Toast {...toast} />
     </>
   )
 }

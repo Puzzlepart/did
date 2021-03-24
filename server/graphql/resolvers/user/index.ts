@@ -41,7 +41,7 @@ export class UserResolver {
     private readonly _msgraph: MSGraphService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService
-  ) { }
+  ) {}
 
   /**
    * Get auth providers
@@ -154,6 +154,9 @@ export class UserResolver {
   async submitFeedback(
     @Arg('feedback') feedback: UserFeedback
   ): Promise<UserFeedbackResult> {
+    if (environment('GITHUB_FEEDBACK_ENABLED') !== '1') {
+      return { success: false }
+    }
     try {
       const requestWithAuth = request.defaults({
         headers: {
