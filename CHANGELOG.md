@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Breadcrumb for mobile devices
 - New user setting: Start page 
 - New user setting: Sticky Navigation
+- Support for submitting feedback
 
 ### Fixed
 
@@ -85,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Consolidated Server and Client date utils #771
+- Consolidated server and client date utils #771
 - Summary view now using datepicker instead of slider #777
 - Visual improvements on the admin sections
 
