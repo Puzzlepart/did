@@ -134,23 +134,32 @@ export class UserService extends MongoDocumentService<User> {
    * to avoid typing the whole configuration object.
    *
    * @param configuration - Configuration
+   * @param startPage - Start page
+   * @param preferredLanguage - Preferred language
    */
-  public async updateCurrentUserConfiguration(configuration: string) {
+  public async updateCurrentUserConfiguration(
+    configuration?: string,
+    startPage?: string,
+    preferredLanguage?: string
+  ) {
     try {
       const filter = { _id: this.context.userId }
-      const user = await this.collection.findOne(filter)
-      const _configuration = JSON.parse(configuration)
-      // eslint-disable-next-line unicorn/no-array-reduce
-      const mergedConfiguration = Object.keys(_configuration).reduce(
-        (object, key) => {
-          set(object, key, _configuration[key])
-          return object
-        },
-        user.configuration || {}
-      )
-      await this.update(filter, {
-        configuration: mergedConfiguration
-      })
+      const $set: User = {}
+      if (configuration) {
+        const user = await this.collection.findOne(filter)
+        const _configuration = JSON.parse(configuration)
+        // eslint-disable-next-line unicorn/no-array-reduce
+        $set.configuration = Object.keys(_configuration).reduce(
+          (object, key) => {
+            set(object, key, _configuration[key])
+            return object
+          },
+          user.configuration || {}
+        )
+      }
+      if (startPage) $set.startPage = startPage
+      if (preferredLanguage) $set.preferredLanguage = preferredLanguage
+      await this.update(filter, $set)
     } catch (error) {
       throw error
     }

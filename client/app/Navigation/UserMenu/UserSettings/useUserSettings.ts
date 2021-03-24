@@ -1,7 +1,5 @@
-import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
 import { useUpdateUserConfiguration } from 'hooks/user/useUpdateUserConfiguration'
-import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isArray } from 'underscore'
@@ -12,8 +10,11 @@ export function useUserSettings() {
   const { t } = useTranslation()
   const { user } = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
-  const [addOrUpdateUser] = useMutation($addOrUpdateUser)
-  const [updateUserConfiguration] = useUpdateUserConfiguration()
+  const {
+    updateConfiguration,
+    updatePreferredLanguage,
+    updateStartPage
+  } = useUpdateUserConfiguration()
 
   /**
    * On update user
@@ -27,18 +28,19 @@ export function useUserSettings() {
     value: string | boolean,
     reloadAfterSave = false
   ) => {
-    if (isArray(setting.key)) {
-      const key = setting.key.splice(1).join('.')
-      await updateUserConfiguration({
-        [key]: value
-      })
-    } else {
-      await addOrUpdateUser({
-        variables: {
-          user: { id: user.id, [setting.key]: value },
-          update: true
+    switch (setting.key) {
+      case 'preferredLanguage':
+        await updatePreferredLanguage(value as string)
+        break
+      case 'startPage':
+        await updateStartPage(value as string)
+        break
+      default: {
+        if (isArray(setting.key)) {
+          const key = setting.key.splice(1).join('.')
+          await updateConfiguration({ [key]: value })
         }
-      })
+      }
     }
     if (reloadAfterSave) location.reload()
   }

@@ -1,8 +1,22 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
+import { ReactHookFunction } from 'hooks/types'
 import { useCallback, useEffect } from 'react'
 import $updateUserConfiguration from './update-user-configuration.gql'
+
+export type UseUpdateUserConfigurationParamType<T = any> = {
+  config?: T
+  autoUpdate?: boolean
+}
+
+
+export type UseUpdateUserConfigurationReturnType = {
+  updateConfiguration?: (config: any) => Promise<void>
+  updateStartPage?: (startPage: string) => Promise<void>
+  updatePreferredLanguage?: (preferredLanguage: string) => Promise<void>
+}
 
 /**
  * Update user configuration hook
@@ -22,23 +36,43 @@ import $updateUserConfiguration from './update-user-configuration.gql'
  *
  * @category React Hook
  */
-export function useUpdateUserConfiguration<T = any>(config?: T, autoUpdate = false) {
+export const useUpdateUserConfiguration: ReactHookFunction<UseUpdateUserConfigurationParamType, UseUpdateUserConfigurationReturnType> = (params) => {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
-  const stringValue = JSON.stringify(config)
+  const stringValue = JSON.stringify(params?.config || {})
 
-  const updateCallback = useCallback(async (config_: T) => {
+  const updateConfiguration = useCallback(async (config_: any) => {
     await updateUserConfiguration({
       variables: { configuration: JSON.stringify(config_) }
     })
   }, [])
+  
+  const updateStartPage = useCallback(async (startPage: string) => {
+    await updateUserConfiguration({
+      variables: {
+        startPage
+      }
+    })
+  }, [])
+
+  const updatePreferredLanguage = useCallback(async (preferredLanguage: string) => {
+    await updateUserConfiguration({
+      variables: {
+        preferredLanguage
+      }
+    })
+  }, [])
 
   useEffect(() => {
-    if (autoUpdate) {
+    if (params?.autoUpdate) {
       updateUserConfiguration({
         variables: { configuration: stringValue }
       })
     }
   }, [stringValue])
 
-  return [updateCallback]
+  return {
+    updateConfiguration,
+    updateStartPage,
+    updatePreferredLanguage
+  }
 }
