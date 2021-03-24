@@ -151,6 +151,9 @@ export class UserFeedback {
   @Field()
   body: string
 
+  @Field({ nullable: true })
+  mood?: string
+
   @Field(() => [String], { nullable: true })
   labels?: string[]
 }

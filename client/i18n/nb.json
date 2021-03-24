@@ -393,6 +393,7 @@
     "submitButtonText": "Send inn",
     "descriptionFieldDesc": "For å beskytte personvernet ditt, vennligst ikke ta med personlig eller sensitiv informasjon.",
     "mixed-feelings": "Blandede følelser",
-    "typeFieldLabel": "Hvilken tilbakemelding vil du gi?"
+    "typeFieldLabel": "Hvilken tilbakemelding vil du gi?",
+    "summaryFieldLabel": "Kort sammendrag"
   }
 }

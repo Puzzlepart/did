@@ -41,7 +41,7 @@ export class UserResolver {
     private readonly _msgraph: MSGraphService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService
-  ) {}
+  ) { }
 
   /**
    * Get auth providers
@@ -165,9 +165,9 @@ export class UserResolver {
         {
           owner: 'puzzlepart',
           repo: environment<string>('GITHUB_FEEDBACK_REPO'),
-          title: feedback.title,
+          title: `${feedback.title} ${feedback.mood}`,
           body: feedback.body,
-          labels: feedback.labels||[]
+          labels: feedback.labels || []
         }
       )
       return { success: true, ref: result.data.number }

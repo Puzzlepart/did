@@ -394,6 +394,7 @@
     "submitButtonText": "Submit",
     "cancelButtonLabel": "Cancel",
     "mixed-feelings": "Mixed feelings",
-    "typeFieldLabel": "What feedback would you like to give?"
+    "typeFieldLabel": "What feedback would you like to give?",
+    "summaryFieldLabel": "Short summary"
   }
 }

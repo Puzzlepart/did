@@ -1,0 +1,6 @@
+mutation($feedback: UserFeedback!) {
+  submitFeedback(feedback: $feedback) {
+    success
+    ref
+  }
+}

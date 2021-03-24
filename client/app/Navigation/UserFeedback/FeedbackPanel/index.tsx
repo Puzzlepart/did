@@ -3,94 +3,66 @@ import { ChoiceGroup, DefaultButton, Dropdown, IPanelProps, Panel, PanelType, Pr
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './FeedbackPanel.module.scss'
+import { useFeedbackModel } from './useFeedbackModel'
+import { useSubmitFeedback } from './useSubmitFeedback'
 
 /**
  * @category Function Component
  */
-export const FeedbackPanel: React.FC<IPanelProps> = () => {
+export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
   const { t } = useTranslation()
+  const {
+    model,
+    setType,
+    setTitle,
+    setBody,
+    setMood,
+    typeOptions,
+    moodOptions
+  } = useFeedbackModel()
+  const submitProps = useSubmitFeedback(model, props)
   return (
     <Panel
-      isOpen={true}
+      isOpen={props.isOpen}
       className={styles.root}
       headerText={t('feedback.headerText')}
       type={PanelType.smallFixedFar}
-      isLightDismiss={true}>
+      isLightDismiss={true}
+      onDismiss={props.onDismiss}>
       <div className={styles.body}>
         <Dropdown
           label={t('feedback.typeFieldLabel')}
           required={true}
-          options={[
-            {
-              key: 'report-a-problem',
-              text: t('feedback.report_a_problem')
-            },
-            {
-              key: 'have-a-suggestion',
-              text: t('feedback.have-a-suggestion')
-            },
-            {
-              key: 'give-a-compliment',
-              text: t('feedback.give-a-compliment')
-            },
-            {
-              key: 'something-else',
-              text: t('feedback.something-else')
-            }
-          ]} />
+          defaultSelectedKey={model.labels[0]}
+          options={typeOptions}
+          onChange={(_event, option) => setType(option.key as string)} />
+        <TextField
+          label={t('feedback.summaryFieldLabel')}
+          required={true}
+          value={model.title}
+          onChange={(_event, title) => setTitle(title)}
+        />
         <TextField
           label={t('feedback.descriptionFieldLabel')}
           description={t('feedback.descriptionFieldDesc')}
           multiline={true}
           required={true}
+          autoAdjustHeight={true}
+          styles={{ field: { height: 200 } }}
+          value={model.body}
+          onChange={(_event, body) => setBody(body)}
         />
         <ChoiceGroup
           label={t('feedback.ratingFieldLabel')}
           required={true}
-          options={[
-            {
-              key: 'very-satisfied',
-              text: t('feedback.very-satisfied'),
-              iconProps: { iconName: 'Emoji' }
-            },
-            {
-              key: 'satisfied',
-              text: t('feedback.satisfied'),
-              iconProps: { iconName: 'Emoji2' }
-            },
-            {
-              key: 'neutral',
-              text: t('feedback.neutral'),
-              iconProps: { iconName: 'EmojiNeutral' }
-            },
-            {
-              key: 'dissatisfied',
-              text: t('feedback.dissatisfied'),
-              iconProps: { iconName: 'Sad' }
-            },
-            {
-              key: 'very-dissatisfied',
-              text: t('feedback.very-dissatisfied'),
-              iconProps: { iconName: 'EmojiDisappointed' }
-            },
-            {
-              key: 'mixed-feelings',
-              text: t('feedback.mixed-feelings'),
-              iconProps: { iconName: 'EmojiTabSymbols' }
-            }
-          ].map(opt => ({
-            ...opt,
-            styles: {
-              labelWrapper: {
-                paddingTop: 5,
-                width: 120,
-                maxWidth: 120
-              }
-            }
-          }))} />
+          defaultSelectedKey={model.mood}
+          onChange={(_event, option) => setMood(option.key)}
+          options={moodOptions} />
       </div>
       <div className={styles.footer}>
-        <PrimaryButton text={t('feedback.submitButtonText')} />
+        <PrimaryButton
+        {...submitProps}
+         text={t('feedback.submitButtonText')}  />
         <DefaultButton text={t('feedback.cancelButtonLabel')} style={{ marginLeft: 8 }} />
       </div>
     </Panel>
