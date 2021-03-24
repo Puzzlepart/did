@@ -13,7 +13,7 @@ import styles from './UserSettingInput.module.scss'
 export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
   const { onUpdate } = useContext(UserSettingsContext)
   const key = isArray(setting.key) ? setting.key.join('.') : setting.key
-  const defaultValue = get(user, key)
+  const defaultValue = get(user, key) || setting.defaultValue
   let element: JSX.Element
   switch (setting.type) {
     case 'dropdown':
@@ -49,7 +49,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} hidden={setting.hidden}>
       {element}
       <div className={styles.description}>{setting.description}</div>
     </div>

@@ -1,5 +1,4 @@
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
-import { config } from 'package'
 import { PermissionScope } from 'security'
 import { Role, User, UserPhoto } from 'types'
 import { contains, pick } from 'underscore'
@@ -52,7 +51,7 @@ export class ContextUser {
    *
    * - `nb-no` are mapped to `nb`
    * - `nn-no` are mapped to `nn`
-   * - Default is `config.app.DEFAULT_USER_LANGUAGE`
+   * - Default is `en-GB`
    */
   public get preferredLanguage() {
     if (!this._user) return DEFAULT_LANGUAGE
@@ -65,7 +64,7 @@ export class ContextUser {
         if (contains(SUPPORTED_LANGUAGES, this._user?.preferredLanguage)) {
           return this._user.preferredLanguage
         }
-        return config.app.DEFAULT_USER_LANGUAGE
+        return 'en-GB'
       }
     }
   }
