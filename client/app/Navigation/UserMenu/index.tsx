@@ -24,7 +24,10 @@ export const UserMenu: React.FC = () => {
 
   return (
     <>
-      <span ref={target} className={styles.root}>
+      <span 
+ref={target} 
+className={styles.root}
+onClick={() => setMenuHidden(false)}>
         <Persona
           className={styles.user}
           text={user.displayName}
@@ -32,9 +35,9 @@ export const UserMenu: React.FC = () => {
           imageUrl={user.photo?.base64}
           size={PersonaSize.size32}
           hidePersonaDetails={isMobile}
-          onClick={() => setMenuHidden(false)}
         />
         <Icon
+  hidden={isMobile}
           iconName='ChevronDown'
           styles={{ root: { color: 'white', marginLeft: 6 } }}
         />
