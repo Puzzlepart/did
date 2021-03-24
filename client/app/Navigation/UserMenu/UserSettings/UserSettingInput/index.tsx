@@ -11,7 +11,7 @@ import styles from './UserSettingInput.module.scss'
  * @category UserMenu
  */
 export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
-  const { onUpdateUser } = useContext(UserSettingsContext)
+  const { onUpdate } = useContext(UserSettingsContext)
   const key = isArray(setting.key) ? setting.key.join('.') : setting.key
   const defaultValue = get(user, key)
   let element: JSX.Element
@@ -23,7 +23,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
             {...(setting as IUserSettingDropdown)}
             key={key}
             onChange={(_event, option) =>
-              onUpdateUser(
+              onUpdate(
                 setting,
                 option.key.toString(),
                 setting.reloadAfterSave
@@ -42,7 +42,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
             key={key}
             defaultChecked={defaultValue}
             onChange={(_event, bool) =>
-              onUpdateUser(setting, bool, setting.reloadAfterSave)
+              onUpdate(setting, bool, setting.reloadAfterSave)
             }
           />
         )

@@ -17,13 +17,13 @@ export function useUserSettings() {
   } = useUpdateUserConfiguration()
 
   /**
-   * On update user
+   * On update
    *
    * @param setting - Setting
    * @param value - Value
    * @param reloadAfterSave - Reload after save
    */
-  const onUpdateUser = async (
+  const onUpdate = async (
     setting: IUserSettingInput,
     value: string | boolean,
     reloadAfterSave = false
@@ -49,7 +49,7 @@ export function useUserSettings() {
 
   return {
     t,
-    context: { onUpdateUser },
+    context: { onUpdate },
     openPanel: () => setIsOpen(true),
     dismissPanel: () => setIsOpen(false),
     isOpen,
