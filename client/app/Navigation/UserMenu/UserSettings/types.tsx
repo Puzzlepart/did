@@ -6,7 +6,7 @@ export interface IUserSettingInputProps {
 }
 
 export interface IUserSettingInput {
-  key: string
+  key: string | string[]
   label: string
   type: 'dropdown' | 'bool'
   description?: string

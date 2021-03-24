@@ -44,13 +44,12 @@ export function useSettingsConfiguration() {
       defaultValue: config.app.DEFAULT_USER_LANGUAGE
     } as IUserSettingDropdown,
     {
-        key: 'ui.stickyNavigation',
-        label: t('common.stickyNavigationLabel'),
-        description: t('common.stickyNavigationDescription'),
-        type: 'bool',
-        reloadAfterSave: true,
-        configuration: true,
-        defaultValue: config.app.STICKY_NAVIGATION
-      }
+      key: ['configuration', 'ui', 'stickyNavigation'],
+      label: t('common.stickyNavigationLabel'),
+      description: t('common.stickyNavigationDescription'),
+      type: 'bool',
+      reloadAfterSave: true,
+      defaultValue: config.app.STICKY_NAVIGATION
+    }
   ])
 }

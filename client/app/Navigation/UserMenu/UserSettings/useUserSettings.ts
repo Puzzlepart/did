@@ -3,6 +3,7 @@ import { useAppContext } from 'AppContext'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isArray } from 'underscore'
 import { IUserSettingInput } from './types'
 import { useSettingsConfiguration } from './useSettingsConfiguration'
 
@@ -24,7 +25,7 @@ export function useUserSettings() {
     value: string | boolean,
     reloadAfterSave = false
   ) => {
-    if (setting.configuration) {
+    if (isArray(setting.key)) {
       // Handle configuration update
     } else {
       await addOrUpdateUser({
