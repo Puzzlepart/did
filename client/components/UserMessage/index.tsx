@@ -48,11 +48,11 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
         actions={props.actions}>
         <div style={props.innerStyle}>
           {props.headerText && (
-            <div className={styles.header}>
-              {props.headerText}
-            </div>
+            <div className={styles.header}>{props.headerText}</div>
           )}
-          {props.text && <ReactMarkdown source={props.text} escapeHtml={false} />}
+          {props.text && (
+            <ReactMarkdown source={props.text} escapeHtml={false} />
+          )}
           {props.children && props.children}
         </div>
       </MessageBar>

@@ -48,7 +48,7 @@ export interface IUserMessageProps extends IMessageBarProps {
   fixedCenter?: number
 
   /**
-   * Styles for the inner part of the message 
+   * Styles for the inner part of the message
    */
-   innerStyle?: React.CSSProperties
+  innerStyle?: React.CSSProperties
 }
