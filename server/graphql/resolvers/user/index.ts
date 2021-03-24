@@ -1,5 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { createAppAuth } from '@octokit/auth-app'
 import { request } from '@octokit/request'
+import createDebug from 'debug'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -21,6 +23,7 @@ import {
   UserInput,
   UserQuery
 } from './types'
+const debug = createDebug('graphql/resolvers/user')
 
 /**
  * Resolver for `User`.
@@ -169,23 +172,31 @@ export class UserResolver {
     @Arg('feedback') feedback: UserFeedback
   ): Promise<UserFeedbackResult> {
     try {
-      const requestWithAuth = request.defaults({
-        headers: {
-          authorization: `token ${environment('GITHUB_TOKEN')}`
-        }
+      const auth = createAppAuth({
+        appId: environment('GITHUB_APPID'),
+        installationId: environment('GITHUB_INSTALLATION_ID'),
+        privateKey: environment('GITHUB_PRIVATE_KEY'),
+        clientId: environment('GITHUB_CLIENT_ID'),
+        clientSecret: environment('GITHUB_CLIENT_SECRET')
       })
-      const result = await requestWithAuth(
+      const { token } = await auth({ type: 'installation' }) as any
+      const result = await request(
         'POST /repos/{owner}/{repo}/issues',
         {
           owner: 'puzzlepart',
           repo: environment<string>('GITHUB_FEEDBACK_REPO'),
+          ...feedback,
           title: `${feedback.title} ${feedback.mood}`,
           body: feedback.body,
-          labels: feedback.labels || []
+          labels: feedback.labels || [],
+          headers: {
+            authorization: `token ${token}`
+          }
         }
       )
       return { success: true, ref: result.data.number }
-    } catch {
+    } catch (error) {
+      debug('There was an issue submitting feedback to GitHub: ', error.message)
       return { success: false }
     }
   }

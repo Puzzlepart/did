@@ -1,14 +1,17 @@
+/* eslint-disable no-console */
 /* eslint-disable tsdoc/syntax */
 /**
- * Main entry point for the http server (using `http`)
+ * Main entry point for the http server (using [http](https://www.npmjs.com/package/http))
  *
  * @module /
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
+import chalk from 'chalk'
 import * as http from 'http'
 import app from './app'
 import { environment } from './utils/environment'
 const debug = require('debug')('server')
+const log = console.log
 
 /**
  * Start server on the specified port
@@ -43,7 +46,7 @@ export async function startServer(port: string) {
   }
 
   function onListening() {
-    debug('\u001B[32m', `Server listening on port [${port}]`)
+    log(chalk.cyan(`Did server listening on port [${port}] 🚀`))
   }
 
   server.listen(port)
