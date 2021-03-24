@@ -1,8 +1,9 @@
-import React from 'react'
+import { createContext } from 'react'
+import { IUserSetting } from './types'
 
-export const UserSettingsContext = React.createContext<{
+export const UserSettingsContext = createContext<{
   onUpdateUserSettings: (
-    key: string,
+    setting: IUserSetting,
     value: string | boolean,
     reloadAfterSave?: boolean
   ) => void

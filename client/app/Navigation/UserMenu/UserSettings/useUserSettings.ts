@@ -3,6 +3,7 @@ import { useAppContext } from 'AppContext'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IUserSetting } from './types'
 import { useSettingsConfiguration } from './useSettingsConfiguration'
 
 export function useUserSettings() {
@@ -14,18 +15,18 @@ export function useUserSettings() {
   /**
    * On update user settings
    *
-   * @param key - Key
+   * @param setting - Setting
    * @param value - Value
    * @param reloadAfterSave - Reload after save
    */
   const onUpdateUserSettings = async (
-    key: string,
+    setting: IUserSetting,
     value: string | boolean,
     reloadAfterSave = false
   ) => {
     await addOrUpdateUser({
       variables: {
-        user: { id: user.id, [key]: value },
+        user: { id: user.id, [setting.key]: value },
         update: true
       }
     })

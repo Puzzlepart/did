@@ -20,7 +20,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
             {...(setting as IUserSettingDropdown)}
             onChange={(_event, option) =>
               onUpdateUserSettings(
-                setting.key,
+                setting,
                 option.key.toString(),
                 setting.reloadAfterSave
               )
@@ -37,7 +37,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
             {...setting}
             defaultValue={defaultValue}
             onChange={(_event, bool) =>
-              onUpdateUserSettings(setting.key, bool, setting.reloadAfterSave)
+              onUpdateUserSettings(setting, bool, setting.reloadAfterSave)
             }
           />
         )
