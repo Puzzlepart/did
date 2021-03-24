@@ -10,6 +10,9 @@ import $updateUserConfiguration from './update-user-configuration.gql'
  * Retrieves config JSON and update (boolean) and uses useMutation.
  * It will only execute the mutation if update is equal to true, and
  * the value has changed.
+ * 
+ * If `autoUpdate` is set to true, the mutation is ran on every
+ * change to the specifie `config` using `useEffect`
  *
  * @remarks For now this is how we update user configuration,
  * but it might be better ways. For now this should do.
