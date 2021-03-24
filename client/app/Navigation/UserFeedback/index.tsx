@@ -10,8 +10,8 @@ import styles from './UserFeedback.module.scss'
 export const UserFeedback: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <div className={styles.root}>
-      <a onClick={() => setIsOpen(true)}>
+    <div className={styles.root} onClick={() => setIsOpen(true)}>
+      <a>
         <div className={styles.icon}>
           <Icon iconName='Emoji2' />
         </div>
