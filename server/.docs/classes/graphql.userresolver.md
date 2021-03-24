@@ -144,13 +144,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*UserFeedbackResult*](graphql.userfeedbackresult.md)\>
 
-Defined in: [graphql/resolvers/user/index.ts:160](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L160)
+Defined in: [graphql/resolvers/user/index.ts:168](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L168)
 
 ___
 
 ### updateUserConfiguration
 
-▸ **updateUserConfiguration**(`configuration`: *string*): *Promise*<BaseResult\>
+▸ **updateUserConfiguration**(`configuration`: *string*, `startPage?`: *string*, `preferredLanguage?`: *string*): *Promise*<BaseResult\>
 
 Update user configuration
 
@@ -158,11 +158,13 @@ Update user configuration
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`configuration` | *string* | Configuration    |
+`configuration` | *string* | Configuration   |
+`startPage?` | *string* | Start page   |
+`preferredLanguage?` | *string* | Preferred language    |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L147)
+Defined in: [graphql/resolvers/user/index.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L149)
 
 ___
 

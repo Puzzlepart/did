@@ -6,31 +6,57 @@ Reusable React Hooks
 
 ## Table of contents
 
-### React Hook Variables
+### Type aliases
 
-- [useNotificationsQuery](hooks.md#usenotificationsquery)
+- [UseUpdateUserConfigurationParamType](hooks.md#useupdateuserconfigurationparamtype)
+- [UseUpdateUserConfigurationReturnType](hooks.md#useupdateuserconfigurationreturntype)
 
 ### React Hook Functions
 
 - [useArray](hooks.md#usearray)
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
+- [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
 - [useToggle](hooks.md#usetoggle)
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
 
-## React Hook Variables
+## Type aliases
 
-### useNotificationsQuery
+### UseUpdateUserConfigurationParamType
 
-• `Const` **useNotificationsQuery**: *ReactHookFunction*<NotificationsQueryParams, NotificationsQuery\>
+Ƭ **UseUpdateUserConfigurationParamType**<T\>: *object*
 
-Fetches notifications - returns the data and
-a function to refetch the data from the server.
+#### Type parameters:
 
-**`param`** Context user
+Name | Default |
+:------ | :------ |
+`T` | *any* |
 
-Defined in: [hooks/notifications/useNotificationsQuery.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L29)
+#### Type declaration:
+
+Name | Type |
+:------ | :------ |
+`autoUpdate`? | *boolean* |
+`config`? | T |
+
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L8)
+
+___
+
+### UseUpdateUserConfigurationReturnType
+
+Ƭ **UseUpdateUserConfigurationReturnType**: *object*
+
+#### Type declaration:
+
+Name | Type |
+:------ | :------ |
+`updateConfiguration`? | (`config`: *any*) => *Promise*<void\> |
+`updatePreferredLanguage`? | (`preferredLanguage`: *string*) => *Promise*<void\> |
+`updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
+
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L13)
 
 ## React Hook Functions
 
@@ -110,6 +136,25 @@ Defined in: [hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did
 
 ___
 
+### useNotificationsQuery
+
+▸ **useNotificationsQuery**(`__namedParameters`: NotificationsQueryParams): NotificationsQuery
+
+Fetches notifications - returns the data and
+a function to refetch the data from the server.
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | NotificationsQueryParams |
+
+**Returns:** NotificationsQuery
+
+Defined in: [hooks/notifications/useNotificationsQuery.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L28)
+
+___
+
 ### usePermissions
 
 ▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): [IPermission[], (`scope`: PermissionScope) => *boolean*]
@@ -158,7 +203,7 @@ ___
 
 ### useUpdateUserConfiguration
 
-▸ **useUpdateUserConfiguration**<T\>(`config`: T, `update?`: *boolean*): *void*
+▸ **useUpdateUserConfiguration**(`params?`: [*UseUpdateUserConfigurationParamType*](hooks.md#useupdateuserconfigurationparamtype)): [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
 Update user configuration hook
 
@@ -166,22 +211,18 @@ Retrieves config JSON and update (boolean) and uses useMutation.
 It will only execute the mutation if update is equal to true, and
 the value has changed.
 
+If `autoUpdate` is set to true, the mutation is ran on every
+change to the specifie `config` using `useEffect`
+
 **`remarks`** For now this is how we update user configuration,
 but it might be better ways. For now this should do.
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | *any* |
-
 #### Parameters:
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`config` | T | - | Configuration   |
-`update` | *boolean* | true | Update    |
+Name | Type |
+:------ | :------ |
+`params?` | [*UseUpdateUserConfigurationParamType*](hooks.md#useupdateuserconfigurationparamtype) |
 
-**Returns:** *void*
+**Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L22)
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L37)

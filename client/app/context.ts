@@ -55,7 +55,7 @@ export function useAppContext(): IAppContext {
   return {
     ...context,
     isAuthenticated: !!context.user?.id,
-    getUserConfiguration,
+    getUserConfiguration
   }
 }
 

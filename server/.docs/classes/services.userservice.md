@@ -316,7 +316,7 @@ ___
 
 ### updateCurrentUserConfiguration
 
-▸ **updateCurrentUserConfiguration**(`configuration`: *string*): *Promise*<void\>
+▸ **updateCurrentUserConfiguration**(`configuration?`: *string*, `startPage?`: *string*, `preferredLanguage?`: *string*): *Promise*<void\>
 
 Update configuration for the current user
 
@@ -327,11 +327,13 @@ to avoid typing the whole configuration object.
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`configuration` | *string* | Configuration    |
+`configuration?` | *string* | Configuration   |
+`startPage?` | *string* | Start page   |
+`preferredLanguage?` | *string* | Preferred language    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:138](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L138)
+Defined in: [services/mongo/user.ts:140](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L140)
 
 ___
 

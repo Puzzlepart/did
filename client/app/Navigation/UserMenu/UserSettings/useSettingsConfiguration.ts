@@ -2,7 +2,7 @@ import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { config } from 'package'
 import { useTranslation } from 'react-i18next'
-import { IUserSettingInput, IUserSettingDropdown } from './types'
+import { IUserSettingDropdown, IUserSettingInput } from './types'
 
 export function useSettingsConfiguration() {
   const { t } = useTranslation()

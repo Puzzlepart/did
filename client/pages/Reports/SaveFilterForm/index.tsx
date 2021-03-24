@@ -33,7 +33,7 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
   /**
    * On save filter
    *
-   * @remarks Stringifies the saved filters (including the new one) 
+   * @remarks Stringifies the saved filters (including the new one)
    * and sends it to the mutation `updateUserConfiguration`.
    *
    * @returns Promise<void>
