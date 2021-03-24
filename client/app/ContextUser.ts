@@ -17,6 +17,7 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
+  public theme: 'light' |'dark'
 
   /**
    * Constructor for `ContextUser`
@@ -44,6 +45,8 @@ export class ContextUser {
         pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
       )
       this.configuration = tryParseJson(_user.configuration, {})
+      this.theme = 'dark'
+      
     }
   }
 
