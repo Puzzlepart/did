@@ -36,11 +36,12 @@ export const UserMenu: React.FC = () => {
           size={PersonaSize.size32}
           hidePersonaDetails={isMobile}
         />
+<span hidden={isMobile}>
         <Icon
-          hidden={isMobile}
-          iconName='ChevronDown'
+          iconName={menuHidden ? 'ChevronDown' : 'ChevronUp'}
           styles={{ root: { color: 'white', marginLeft: 6 } }}
         />
+</span>
       </span>
       <Callout
         hidden={menuHidden}
