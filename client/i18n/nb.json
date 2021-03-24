@@ -397,6 +397,9 @@
     "mixed-feelings": "Blandede følelser",
     "typeFieldLabel": "Hvilken tilbakemelding vil du gi?",
     "summaryFieldLabel": "Kort sammendrag",
-    "submitSuccessMessage": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse #{{ref}}."
+    "submitSuccessMessageText": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse **#{{ref}}**.",
+    "submitSuccessMessagHeader": "Takk skal du ha!",
+    "submitErrorMessageHeader": "Beklager!",
+    "submitErrorMessageText": "vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår."
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { Toast } from 'components'
 import {
@@ -10,7 +11,7 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './FeedbackPanel.module.scss'
 import { useFeedbackModel } from './useFeedbackModel'
@@ -22,6 +23,7 @@ import { useSubmitFeedback } from './useSubmitFeedback'
 export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
   const { t } = useTranslation()
   const {
+    initModel,
     model,
     setType,
     setTitle,
@@ -31,6 +33,8 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
     moodOptions
   } = useFeedbackModel()
   const { onClick, disabled, toast } = useSubmitFeedback(model, props)
+
+  useEffect(initModel, [props.isOpen])
 
   return (
     <>

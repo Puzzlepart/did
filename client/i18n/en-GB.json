@@ -398,6 +398,9 @@
     "mixed-feelings": "Mixed feelings",
     "typeFieldLabel": "What feedback would you like to give?",
     "summaryFieldLabel": "Short summary",
-    "submitSuccessMessage": "Your feedback was registered with reference #{{ref}}. Thank you for taking your time!"
+    "submitSuccessMessageText": "Your feedback was registered with reference **#{{ref}}**. Thank you for taking your time!",
+    "submitSuccessMessagHeader": "Thank you!",
+    "submitErrorMessageHeader": "Very sorry!",
+    "submitErrorMessageText": "we couldn't register your feedback. Something weird happend in our backend."
   }
 }
