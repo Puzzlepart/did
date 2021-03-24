@@ -9,7 +9,7 @@ import styles from './UserFeedback.module.scss'
  */
 export const UserFeedback: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  if (process.env.GITHUB_FEEDBACK_ENABLED !== '1') return null
+  if (!process.env.USER_FEEDBACK_ENABLED) return null
   return (
     <div className={styles.root}>
       <a onClick={() => setIsOpen(true)}>

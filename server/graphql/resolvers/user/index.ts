@@ -160,7 +160,7 @@ export class UserResolver {
   async submitFeedback(
     @Arg('feedback') feedback: UserFeedback
   ): Promise<UserFeedbackResult> {
-    if (environment('GITHUB_FEEDBACK_ENABLED') !== '1') {
+    if (environment('USER_FEEDBACK_ENABLED') !== '1') {
       return { success: false }
     }
     try {
