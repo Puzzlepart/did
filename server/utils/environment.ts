@@ -36,7 +36,6 @@ type Environment = {
   LOCALTUNNEL_SUBDOMAIN: string
   GITHUB_TOKEN: string
   GITHUB_FEEDBACK_REPO: string
-  USER_FEEDBACK_ENABLED: string
 }
 
 /**

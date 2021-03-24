@@ -108,8 +108,7 @@ const config = {
     }),
     new DefinePlugin({
       'process.env.VERSION': JSON.stringify(version),
-      'process.env.LOG_LEVEL': JSON.stringify(process.env.CLIENT_LOG_LEVEL || 'SILENT'),
-      'process.env.USER_FEEDBACK_ENABLED': JSON.stringify(process.env.USER_FEEDBACK_ENABLED === '1')
+      'process.env.LOG_LEVEL': JSON.stringify(process.env.CLIENT_LOG_LEVEL || 'SILENT')
     })
   ],
   stats: {
