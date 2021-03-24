@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px 0 12px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background-color: #787878;
+  }
+
+  .icon {
+    color: #fff;
+    font-size: 1.4rem;
+  }
+}

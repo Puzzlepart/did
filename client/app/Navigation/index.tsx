@@ -5,6 +5,7 @@ import { isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
+import { UserFeedback } from './UserFeedback'
 import { UserMenu } from './UserMenu'
 import { UserNotifications } from './UserNotifications'
 
@@ -38,6 +39,7 @@ export const Navigation: React.FC = () => {
           ))}
         </ul>
         <ul className={styles.navRight}>
+          {isAuthenticated && <UserFeedback />}
           {isAuthenticated && <UserNotifications />}
           <UserMenu />
         </ul>

@@ -306,7 +306,6 @@
     "exportTypeCurrentYear": "Inneverande år {{year}}",
     "subscription": "Abonnement",
     "nameLabel": "Namn",
-    "descriptionLabel": "Skildring",
     "expiresLabel": "Går ut på dato",
     "officeLocationLabel": "Kontorlokasjon",
     "departmentLabel": "Avdeling",
@@ -378,5 +377,26 @@
       "forecast": "Veke {0} ({1}) manglar prognose."
     },
     "clearDismissedText": "Klikk for å visa gøymde varslar."
+  },
+  "feedback": {
+    "headerText": "Tilbakemelding",
+    "report_a_problem": "Rapporter et problem",
+    "have-a-suggestion": "Forslag",
+    "give-a-compliment": "Gi et kompliment",
+    "something-else": "Noe annet",
+    "descriptionFieldLabel": "Beskriv tilbakemeldingen din",
+    "ratingFieldLabel": "Hvordan vil du rangere opplevelsen din med did?",
+    "very-satisfied": "Veldig fornøgd",
+    "satisfied": "Fornøgd",
+    "neutral": "Nøytral",
+    "very-dissatisfied": "Svært misfornøgd",
+    "dissatisfied": "Misfornøgd",
+    "cancelButtonLabel": "Avbryt",
+    "submitButtonText": "Send inn",
+    "descriptionFieldDesc": "For å beskytte personvernet ditt, vennligst ikke ta med personlig eller sensitiv informasjon.",
+    "mixed-feelings": "Blandede følelser",
+    "typeFieldLabel": "Hvilken tilbakemelding vil du gi?",
+    "summaryFieldLabel": "Kort sammendrag",
+    "submitSuccessMessage": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse #{{ref}}."
   }
 }
