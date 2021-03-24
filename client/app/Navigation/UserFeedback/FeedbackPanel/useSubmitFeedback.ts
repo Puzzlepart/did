@@ -2,7 +2,7 @@
 import { useMutation } from '@apollo/client'
 import { IUserMessageProps } from 'components'
 import { useToast } from 'components/Toast'
-import { IPanelProps } from 'office-ui-fabric-react'
+import { IPanelProps, MessageBarType } from 'office-ui-fabric-react'
 import { IButtonProps } from 'office-ui-fabric-react/lib/Button'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +20,9 @@ export const useSubmitFeedback = (
 ): UseSubmitFeedbackReturnType => {
   const { t } = useTranslation()
   const [submitFeedback] = useMutation($submit_feedback)
-  const [toast, setToast] = useToast(8000)
+  const [toast, setToast] = useToast(8000, {
+    innerStyle: { paddingLeft: 15 }
+  })
 
   /**
    * On submit feedback
@@ -36,7 +38,19 @@ export const useSubmitFeedback = (
     toast,
     onClick: async () => {
       const result = await onSubmitFeedback()
-      setToast({ text: t('feedback.submitSuccessMessage', result) })
+      if (result.success) {
+        setToast({
+          headerText: t('feedback.submitSuccessMessagHeader'),
+          text: t('feedback.submitSuccessMessageText', result),
+          type: MessageBarType.success
+        })
+      } else {
+        setToast({
+          headerText: t('feedback.submitErrorMessageHeader'),
+          text: t('feedback.submitErrorMessageText'),
+          type: MessageBarType.severeWarning
+        })
+      }
       panel.onDismiss()
     },
     disabled:
