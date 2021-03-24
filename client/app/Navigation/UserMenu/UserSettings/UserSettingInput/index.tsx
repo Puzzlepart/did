@@ -13,7 +13,7 @@ import styles from './UserSettingInput.module.scss'
 export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
   const { onUpdateUser } = useContext(UserSettingsContext)
   const key = isArray(setting.key) ? setting.key.join('.') : setting.key
-  const defaultValue = get(user, key) || setting.defaultValue
+  const defaultValue = get(user, key)
   let element: JSX.Element
   switch (setting.type) {
     case 'dropdown':
