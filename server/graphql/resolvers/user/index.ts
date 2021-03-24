@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { request } from '@octokit/request'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -9,10 +10,11 @@ import {
   SubscriptionService,
   UserService
 } from '../../../services'
+import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
-import { User, UserInput, UserQuery } from './types'
+import { User, UserFeedback, UserFeedbackResult, UserInput, UserQuery } from './types'
 
 /**
  * Resolver for `User`.
@@ -141,6 +143,37 @@ export class UserResolver {
   ): Promise<BaseResult> {
     await this._userSvc.updateCurrentUserConfiguration(configuration)
     return { success: true }
+  }
+
+  /**
+   * Submit feedback
+   *
+   * @param feedback - Feedback model
+   */
+  @Mutation(() => UserFeedbackResult, { description: 'Submit feedback' })
+  async submitFeedback(
+    @Arg('feedback') feedback: UserFeedback
+  ): Promise<UserFeedbackResult> {
+    try {
+      const requestWithAuth = request.defaults({
+        headers: {
+          authorization: `token ${environment('GITHUB_TOKEN')}`
+        }
+      })
+      const result = await requestWithAuth(
+        'POST /repos/{owner}/{repo}/issues',
+        {
+          owner: 'puzzlepart',
+          repo: environment<string>('GITHUB_FEEDBACK_REPO'),
+          title: feedback.title,
+          body: feedback.body,
+          labels: feedback.labels||[]
+        }
+      )
+      return { success: true, ref: result.data.number }
+    } catch {
+      return { success: false }
+    }
   }
 }
 

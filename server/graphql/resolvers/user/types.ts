@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
-import { Role } from '../types'
+import { BaseResult, Role } from '../types'
 
 /**
  * A type that describes a User photo
@@ -128,7 +128,6 @@ export class UserInput {
   @Field({ nullable: true })
   provider?: string
 }
-
 /**
  * @category GraphQL InputType
  */
@@ -139,4 +138,29 @@ export class UserQuery {
 
   @Field({ nullable: true })
   hiddenFromReports?: boolean
+}
+
+/**
+ * @category GraphQL InputType
+ */
+@InputType({ description: 'Input object for User feedback' })
+export class UserFeedback {
+  @Field()
+  title: string
+
+  @Field()
+  body: string
+
+  @Field(() => [String], { nullable: true })
+  labels?: string[]
+}
+
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({ description: 'A type that describes the User feedback result' })
+export class UserFeedbackResult extends BaseResult {
+  @Field({ nullable: true })
+  ref?: number
 }

@@ -34,6 +34,8 @@ type Environment = {
   MONGO_DB_CONNECTION_STRING: string
   MONGO_DB_DB_NAME: string
   LOCALTUNNEL_SUBDOMAIN: string
+  GITHUB_TOKEN: string
+  GITHUB_FEEDBACK_REPO: string
 }
 
 /**
