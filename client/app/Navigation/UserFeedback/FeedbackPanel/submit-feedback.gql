@@ -1,5 +1,5 @@
 mutation($feedback: UserFeedback!) {
-  submitFeedback(feedback: $feedback) {
+  result: submitFeedback(feedback: $feedback) {
     success
     ref
   }
