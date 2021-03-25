@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { omit } from 'underscore'
 import { UserMessage } from '../UserMessage'
 import styles from './Toast.module.scss'
@@ -14,10 +15,8 @@ import { IToastProps } from './types'
  * @category Function Component
  */
 export const Toast: React.FC<IToastProps> = (props) => {
-  const classNames = [styles.root]
-  if (props.hidden) classNames.push(styles.fadeOut)
   return (
-    <div className={classNames.join(' ')}>
+    <div className={styles.root} hidden={props.hidden}>
       <UserMessage
         {...omit(props, 'hidden')}
         styles={{ root: { padding: '20px 25px' } }}
@@ -30,3 +29,4 @@ export const Toast: React.FC<IToastProps> = (props) => {
 
 export * from './types'
 export * from './useToast'
+
