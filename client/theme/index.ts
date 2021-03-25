@@ -12,8 +12,13 @@ import { default as darkTheme } from './dark'
 export function getTheme(name: string): Theme {
     switch (name) {
         case 'dark': return darkTheme
+        case 'auto': return getAutoColorScheme()
         default: return lightTheme
     }
+}
+
+function getAutoColorScheme(): Theme {
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme
 }
 
 export { lightTheme, darkTheme }

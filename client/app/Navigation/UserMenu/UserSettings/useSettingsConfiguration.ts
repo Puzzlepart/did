@@ -63,6 +63,10 @@ export function useSettingsConfiguration() {
         {
           key: 'dark',
           text: t('common.dark-theme')
+        },
+        {
+          key: 'auto',
+          text: t('common.auto-theme')
         }
       ],
       reloadAfterSave: true,
