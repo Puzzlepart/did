@@ -56,6 +56,9 @@ export function useSubscriptionSettings() {
     toast,
     onSaveSettings,
     sections,
-    hasChanges: !isEqual(subscription.settings, omitTypename(context.subscription.settings))
+    hasChanges: !isEqual(
+      subscription.settings,
+      omitTypename(context.subscription.settings)
+    )
   }
 }
