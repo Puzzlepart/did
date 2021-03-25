@@ -1,5 +1,4 @@
 import { Theme } from '@fluentui/react'
-import { default as darkTheme } from './dark'
 import { default as lightTheme } from './light'
 
 /**
@@ -11,12 +10,8 @@ import { default as lightTheme } from './light'
  */
 export function getTheme(name: string): Theme {
     switch (name) {
-        case 'dark': return darkTheme
         default: return lightTheme
     }
 }
 
-export {
-    darkTheme,
-    lightTheme
-}
+export { lightTheme }
