@@ -23,24 +23,20 @@ async function commit_changes() {
             type: 'confirm',
             name: 'push',
             message: 'Do you want to push the changes right away?',
-            default: false
+            default: true
         }
     ])
     const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {
         await exec('git add --all')
-        try {
-            await exec(`git commit -m "${commit_message}"`)
-            await exec('git add --all')
-        } catch { }
-        await exec(`git commit -m "${commit_message}" --amend --no-verify`)
+        await exec(`git commit -m "${commit_message}"`)
         if (input.push) {
             await exec('git pull')
             await exec('git push')
         }
         log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
     } catch (error) {
-        console.log(error.stderr)
+        console.log(error)
         log(red('An error occured commiting your changes.'))
     } finally {
         process.exit(0)

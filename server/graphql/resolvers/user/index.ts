@@ -179,21 +179,18 @@ export class UserResolver {
         clientId: environment('GITHUB_CLIENT_ID'),
         clientSecret: environment('GITHUB_CLIENT_SECRET')
       })
-      const { token } = await auth({ type: 'installation' }) as any
-      const result = await request(
-        'POST /repos/{owner}/{repo}/issues',
-        {
-          owner: 'puzzlepart',
-          repo: environment<string>('GITHUB_FEEDBACK_REPO'),
-          ...feedback,
-          title: `${feedback.title} ${feedback.mood}`,
-          body: feedback.body,
-          labels: feedback.labels || [],
-          headers: {
-            authorization: `token ${token}`
-          }
+      const { token } = (await auth({ type: 'installation' })) as any
+      const result = await request('POST /repos/{owner}/{repo}/issues', {
+        owner: 'puzzlepart',
+        repo: environment<string>('GITHUB_FEEDBACK_REPO'),
+        ...feedback,
+        title: `${feedback.title} ${feedback.mood}`,
+        body: feedback.body,
+        labels: feedback.labels || [],
+        headers: {
+          authorization: `token ${token}`
         }
-      )
+      })
       return { success: true, ref: result.data.number }
     } catch (error) {
       debug('There was an issue submitting feedback to GitHub: ', error.message)

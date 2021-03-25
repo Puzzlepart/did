@@ -7,9 +7,9 @@ import { MessageBarType } from '@fluentui/react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'
-import { pick } from 'underscore'
+import { isEqual, pick } from 'underscore'
 import deepCopy from 'utils/deepCopy'
-import omitDeep from 'utils/omitDeep'
+import { omitTypename } from 'utils/omitTypename'
 import $updateSubscription from './updateSubscription.gql'
 import { useSubscriptionConfig } from './useSubscriptionConfig'
 
@@ -20,7 +20,7 @@ export function useSubscriptionSettings() {
   const { t } = useTranslation()
   const context = useAppContext()
   const [subscription, setSubscription] = useState<Subscription>(
-    omitDeep(deepCopy(context.subscription), '__typename')
+    omitTypename(context.subscription)
   )
   const [updateSubscription] = useMutation($updateSubscription)
   const [toast, setToast] = useToast(6000)
@@ -55,6 +55,10 @@ export function useSubscriptionSettings() {
     subscription,
     toast,
     onSaveSettings,
-    sections
+    sections,
+    hasChanges: !isEqual(
+      subscription.settings,
+      omitTypename(context.subscription.settings)
+    )
   }
 }

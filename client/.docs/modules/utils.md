@@ -16,6 +16,7 @@ Reusable utility functions
 - [getContrastColor](utils.md#getcontrastcolor)
 - [getSum](utils.md#getsum)
 - [loadScripts](utils.md#loadscripts)
+- [omitTypename](utils.md#omittypename)
 - [searchObject](utils.md#searchobject)
 - [sleep](utils.md#sleep)
 - [tryParseJson](utils.md#tryparsejson)
@@ -108,6 +109,24 @@ Name | Type | Default value | Description |
 **Returns:** *Promise*<T\>
 
 Defined in: [utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
+
+___
+
+### omitTypename
+
+▸ **omitTypename**(`object`: *any*): *any*
+
+Omits `__typename` from the `obj`
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`object` | *any* |
+
+**Returns:** *any*
+
+Defined in: [utils/omitTypename.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitTypename.ts#L9)
 
 ___
 

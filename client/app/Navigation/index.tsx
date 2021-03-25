@@ -1,8 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
+import { description, name } from 'package'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
+import { useAppClassName } from '../useAppClassName'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 import { UserFeedback } from './UserFeedback'
@@ -13,19 +15,12 @@ import { UserNotifications } from './UserNotifications'
  * @category Function Component
  */
 export const Navigation: React.FC = () => {
-  const { pages, isAuthenticated, getUserConfiguration } = useAppContext()
-  const classNames = [styles.root]
-  if (isMobile) classNames.push(styles.mobile)
-  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) {
-    classNames.push(styles.sticky)
-  }
+  const { pages, isAuthenticated } = useAppContext()
+  const className = useAppClassName(styles)
   return (
-    <nav className={classNames.join(' ')} hidden={isMobile && !isAuthenticated}>
+    <nav className={className} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
-        <Link
-          to='/'
-          className={styles.logo}
-          title='did - The Calendar is the Timesheet'>
+        <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
           did
         </Link>
         <ul className={styles.nav} hidden={!isAuthenticated}>

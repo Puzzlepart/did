@@ -7,7 +7,6 @@
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import { ErrorBoundary } from 'react-error-boundary'
 import {
   BrowserRouter as Router,
@@ -19,6 +18,7 @@ import styles from './App.module.scss'
 import { ErrorFallback } from './ErrorFallback'
 import { MobileBreadcrumb } from './MobileBreadcrumb'
 import { Navigation } from './Navigation'
+import { useAppClassName } from './useAppClassName'
 
 /**
  * App router that uses `<Switch />` from
@@ -32,16 +32,12 @@ import { Navigation } from './Navigation'
  * @category App
  */
 export const AppRouter: React.FC = () => {
-  const { pages, getUserConfiguration } = useAppContext()
+  const { pages } = useAppContext()
   const [, hasPermission] = usePermissions()
-  const classNames = [styles.root]
-  if (isMobile) classNames.push(styles.mobile)
-  if (getUserConfiguration<boolean>('ui.stickyNavigation') && !isMobile) {
-    classNames.push(styles.sticky)
-  }
+  const className = useAppClassName(styles)
   return (
     <Router>
-      <div className={classNames.join(' ')}>
+      <div className={className}>
         <Navigation />
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Switch>

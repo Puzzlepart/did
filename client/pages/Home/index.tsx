@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
-import { DefaultButton, MessageBarType } from '@fluentui/react'
+import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
+import { description, name } from 'package'
 import { PageComponent } from 'pages/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,8 +22,8 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.logo}>did</div>
-      <p className={styles.motto}>{t('common.motto')}</p>
+      <div className={styles.logo}>{name}</div>
+      <p className={styles.motto}>{description}</p>
       {error && (
         <UserMessage
           className={styles.error}

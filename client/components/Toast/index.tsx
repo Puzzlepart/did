@@ -14,10 +14,9 @@ import { IToastProps } from './types'
  * @category Function Component
  */
 export const Toast: React.FC<IToastProps> = (props) => {
-  const classNames = [styles.root]
-  if (props.hidden) classNames.push(styles.fadeOut)
+  if (!props.text) return null
   return (
-    <div className={classNames.join(' ')}>
+    <div className={styles.root}>
       <UserMessage
         {...omit(props, 'hidden')}
         styles={{ root: { padding: '20px 25px' } }}

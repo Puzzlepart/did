@@ -11,7 +11,7 @@ export interface IUserSettingInput {
   type: 'dropdown' | 'bool'
   description?: string
   defaultValue?: any
-  configuration?: boolean
+  hidden?: boolean
   reloadAfterSave?: boolean
 }
 
