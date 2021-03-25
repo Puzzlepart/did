@@ -21,7 +21,7 @@ export const Navigation: React.FC = () => {
     <nav className={className} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
-          did
+          {name}
         </Link>
         <ul className={styles.nav} hidden={!isAuthenticated}>
           {pages.map((page, index) => (
