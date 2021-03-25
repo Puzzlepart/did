@@ -34,9 +34,9 @@ export const Navigation: React.FC = () => {
             />
           ))}
         </ul>
-        <ul className={styles.navRight}>
-          {isAuthenticated && <UserFeedback />}
-          {isAuthenticated && <UserNotifications />}
+        <ul className={styles.navRight} hidden={!isAuthenticated}>
+          <UserFeedback />
+          <UserNotifications />
           <UserMenu />
         </ul>
       </div>
