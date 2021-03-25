@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
+import { Icon } from '@fluentui/react'
 import { List, TabComponent, useMessage, UserMessage } from 'components'
-import { Icon, MessageBarType } from '@fluentui/react'
 import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
@@ -40,7 +40,7 @@ export const ApiTokens: TabComponent = () => {
   async function onDeleteApiToken(token: ApiToken) {
     await deleteApiToken({ variables: { name: token.name } })
     setMessage({
-      type: MessageBarType.info,
+      type: 'info',
       text: t('admin.tokenDeletedText', token)
     })
     refetch()
@@ -58,7 +58,7 @@ export const ApiTokens: TabComponent = () => {
       setApiKey(generatedKey)
     } else
       setMessage({
-        type: MessageBarType.error,
+        type: 'error',
         text: t('admin.tokenErrorText')
       })
     refetch()
@@ -71,7 +71,7 @@ export const ApiTokens: TabComponent = () => {
       {message && <UserMessage {...message} />}
       {!isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
-          <UserMessage type={MessageBarType.success} iconName='Cloud'>
+          <UserMessage type={'success'} iconName='Cloud'>
             <span className={styles.text}>{apiKey}</span>
             <span className={styles.copy}>
               <CopyToClipboard text={apiKey}>

@@ -1,6 +1,6 @@
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
-import { config } from 'package'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { IUserSettingDropdown, IUserSettingInput } from './types'
 
@@ -41,15 +41,15 @@ export function useSettingsConfiguration() {
         }
       ],
       reloadAfterSave: true,
-      defaultValue: config.app.DEFAULT_USER_LANGUAGE
+      defaultValue: 'en-GB'
     } as IUserSettingDropdown,
     {
       key: ['configuration', 'ui', 'stickyNavigation'],
       label: t('common.stickyNavigationLabel'),
       description: t('common.stickyNavigationDescription'),
       type: 'bool',
-      reloadAfterSave: true,
-      defaultValue: config.app.STICKY_NAVIGATION
+      hidden: isMobile,
+      reloadAfterSave: true
     },
     {
       key: ['configuration', 'ui', 'theme'],
@@ -65,7 +65,8 @@ export function useSettingsConfiguration() {
           text: t('common.dark-theme')
         }
       ],
-      reloadAfterSave: true
+      reloadAfterSave: true,
+      hidden: true
     }
   ])
 }

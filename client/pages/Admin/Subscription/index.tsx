@@ -14,7 +14,13 @@ import { useSubscriptionSettings } from './useSubscriptionSettings'
 export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
   const [selectedKey, setSelectedKey] = useState('info')
-  const { toast, context, onSaveSettings, sections } = useSubscriptionSettings()
+  const {
+    toast,
+    context,
+    onSaveSettings,
+    sections,
+    hasChanges
+  } = useSubscriptionSettings()
 
   return (
     <SubscriptionContext.Provider value={context}>
@@ -31,7 +37,7 @@ export const SubscriptionSettings: TabComponent = () => {
         <PrimaryButton
           className={styles.saveButton}
           onClick={onSaveSettings}
-          disabled={!toast.hidden}
+          disabled={!!toast || !hasChanges}
           text={t('common.save')}
         />
       </div>

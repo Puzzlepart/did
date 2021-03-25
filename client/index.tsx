@@ -15,10 +15,11 @@ import i18next from 'i18next'
 import React from 'react'
 import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
+import { getTheme } from 'theme'
 import { App, ContextUser } from './app'
 import { $usercontext, client } from './graphql'
 import './i18n'
-import { getTheme } from './theme'
+import { lightTheme } from './theme'
 
 /**
  * Bootstrapping the App

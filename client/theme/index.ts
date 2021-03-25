@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui/react'
-import { default as dark } from './dark'
-import { default as light } from './light'
+import { default as lightTheme } from './light'
+import { default as darkTheme } from './dark'
 
 /**
  * Get theme by name
@@ -9,9 +9,11 @@ import { default as light } from './light'
  * 
  * @returns the theme with palette
  */
-export function getTheme(name: string):Theme {
+export function getTheme(name: string): Theme {
     switch (name) {
-        case 'dark': return dark
-        default: return light
+        case 'dark': return darkTheme
+        default: return lightTheme
     }
 }
+
+export { lightTheme, darkTheme }

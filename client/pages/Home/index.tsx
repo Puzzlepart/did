@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { DefaultButton } from '@fluentui/react'
 import { UserMessage } from 'components'
-import { DefaultButton, MessageBarType } from '@fluentui/react'
+import { description, name } from 'package'
 import { PageComponent } from 'pages/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,12 +22,12 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.logo}>did</div>
-      <p className={styles.motto}>{t('common.motto')}</p>
+      <div className={styles.logo}>{name}</div>
+      <p className={styles.motto}>{description}</p>
       {error && (
         <UserMessage
           className={styles.error}
-          type={MessageBarType.error}
+          type='error'
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
           onDismiss={() => {
@@ -36,7 +37,7 @@ export const Home: PageComponent = () => {
       )}
       {isEmpty(Object.keys(providers)) && (
         <UserMessage
-          type={MessageBarType.warning}
+          type='warning'
           text={t('common.signInDisabledMessage')}
         />
       )}

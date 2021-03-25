@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { useAppContext } from 'AppContext'
 import { Callout, Icon, Persona, PersonaSize } from '@fluentui/react'
-import React, { useRef, useState } from 'react'
+import { useAppContext } from 'AppContext'
+import { useToggle } from 'hooks'
+import React, { useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -17,14 +18,14 @@ import { UserSettings } from './UserSettings'
 export const UserMenu: React.FC = () => {
   const { t } = useTranslation()
   const { user, subscription } = useAppContext()
-  const [menuHidden, setMenuHidden] = useState(true)
+  const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
 
   if (!subscription) return null
 
   return (
     <>
-      <span ref={target} className={styles.root}>
+      <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
         <Persona
           className={styles.user}
           text={user.displayName}
@@ -32,17 +33,18 @@ export const UserMenu: React.FC = () => {
           imageUrl={user.photo?.base64}
           size={PersonaSize.size32}
           hidePersonaDetails={isMobile}
-          onClick={() => setMenuHidden(false)}
         />
-        <Icon
-          iconName='ChevronDown'
-          styles={{ root: { color: 'white', marginLeft: 6 } }}
-        />
+        <span hidden={isMobile}>
+          <Icon
+            iconName={menuHidden ? 'ChevronDown' : 'ChevronUp'}
+            styles={{ root: { color: 'white', marginLeft: 6 } }}
+          />
+        </span>
       </span>
       <Callout
         hidden={menuHidden}
         target={target?.current}
-        onDismiss={() => setMenuHidden(true)}
+        onDismiss={toggleMenu}
         gapSpace={-8}>
         <FadeIn className={styles.menu}>
           <MenuItem

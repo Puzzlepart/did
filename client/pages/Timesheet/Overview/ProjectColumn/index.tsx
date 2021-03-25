@@ -1,6 +1,6 @@
-import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
+import { Icon } from '@fluentui/react'
+import { ProjectLink, ProjectTooltip, UserMessage, UserMessageType } from 'components'
 import { TFunction } from 'i18next'
-import { Icon, MessageBarType } from '@fluentui/react'
 import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -19,12 +19,12 @@ import { IProjectColumnProps } from './types'
  * @param code - Error code
  * @param t - Translate function
  */
-function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
+function getErrorMessage(code: string, t: TFunction): [string, UserMessageType] {
   switch (code) {
     case 'PROJECT_INACTIVE':
-      return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
+      return [t('timesheet.projectInactiveErrorText'), 'error']
     case 'CUSTOMER_INACTIVE':
-      return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
+      return [t('timesheet.customerInactiveErrorText'), 'error']
   }
 }
 
@@ -55,7 +55,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
         <UserMessage
           containerStyle={{ marginTop: 10, width: '90%' }}
           isMultiline={true}
-          type={MessageBarType.warning}
+          type={'warning'}
           iconName='TagUnknown'
           text={t('timesheet.noProjectMatchFoundText')}
           actions={

@@ -1,6 +1,6 @@
 {
   "name": "did",
-  "description": "The calendar is your Timesheet",
+  "description": "The calendar is the timesheet",
   "version": "0.9.11",
   "private": true,
   "repository": {
@@ -24,8 +24,7 @@
     "@babel/compat-data": "7.8.0",
     "@babel/core": "7.8.6",
     "@babel/preset-env": "7.8.0",
-    "@fluentui/react": "^8.6.1",
-    "@fluentui/react-theme-provider": "^0.18.5",
+    "@fluentui/react": "8.6.1",
     "@microsoft/microsoft-graph-client": "2.0.0",
     "@octokit/auth-app": "3.3.0",
     "@octokit/request": "5.4.14",
@@ -174,10 +173,8 @@
       "CUSTOMER_NAME_MIN_LENGTH": 2,
       "BROWSER_STORAGE_KEY_PREFIX": "did",
       "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month",
-      "DEFAULT_USER_LANGUAGE": "en-GB",
       "TIMESHEET_OVERVIEW_DAY_FORMAT": "dddd DD",
-      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm",
-      "STICKY_NAVIGATION": true
+      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm"
     }
   },
   "contributors": [
@@ -322,7 +319,8 @@
           "experimental",
           "typo",
           "rename",
-          "merge"
+          "merge",
+          "migrate"
         ]
       ]
     }

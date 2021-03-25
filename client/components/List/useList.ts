@@ -20,7 +20,7 @@ export function useList({ props }: UseList) {
   const [state, dispatch] = useListReducer({
     origItems: props.items || [],
     items: props.items || [],
-    searchTerm: null
+    searchTerm: ''
   })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

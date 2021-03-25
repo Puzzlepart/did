@@ -1,9 +1,6 @@
+import { IIconProps} from '@fluentui/react'
+import { IUserMessageProps, UserMessageType } from 'components/UserMessage'
 import { TFunction } from 'i18next'
-import {
-  IIconProps,
-  IMessageBarProps,
-  MessageBarType
-} from '@fluentui/react'
 import { Notification } from 'types'
 
 export class NotificationModel {
@@ -26,16 +23,12 @@ export class NotificationModel {
     this.moreLink = notification.moreLink
   }
 
-  private get _messageType(): MessageBarType {
+  private get _messageType(): UserMessageType {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED':
-        return MessageBarType.warning
-
-      case 'MISSING_FORECAST':
-        return MessageBarType.info
-
+        return 'warning'
       default:
-        return MessageBarType.info
+        return 'info'
     }
   }
 
@@ -50,13 +43,13 @@ export class NotificationModel {
     }
   }
 
-  public get messageProps(): IMessageBarProps {
-    const messageBarProps: IMessageBarProps = {
+  public get messageProps(): IUserMessageProps {
+    const userMessageProps: IUserMessageProps = {
       itemID: this.id,
-      messageBarType: this._messageType,
+      type: this._messageType,
       messageBarIconProps: this._iconProps
     }
-    return messageBarProps
+    return userMessageProps
   }
 
   /**

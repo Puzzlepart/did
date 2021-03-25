@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components/Toast'
-import { MessageBarType } from '@fluentui/react'
 import { useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'
@@ -39,7 +38,7 @@ export function useCustomerForm({ props }) {
       else {
         setToast({
           text: t('customers.createSuccess', { name: state.model.name }),
-          type: MessageBarType.success
+          type: 'success'
         })
         dispatch({ type: 'RESET_FORM' })
         context.refetch()
@@ -47,7 +46,7 @@ export function useCustomerForm({ props }) {
     } catch {
       setToast({
         text: t('customers.createError'),
-        type: MessageBarType.error
+        type: 'error'
       })
     }
   }

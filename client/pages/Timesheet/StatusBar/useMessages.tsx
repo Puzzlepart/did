@@ -1,7 +1,6 @@
 import { IUserMessageProps } from 'components/UserMessage/types'
 import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
-import { MessageBarType } from '@fluentui/react'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -40,7 +39,7 @@ export function useMessages(): IUserMessageProps[] {
           t
         )
       }),
-      type: MessageBarType.warning,
+      type: 'warning',
       iconName: 'BufferTimeBoth'
     })
   }
@@ -48,7 +47,7 @@ export function useMessages(): IUserMessageProps[] {
     messages.push({
       id: 'allhoursmatched',
       text: t('timesheet.allHoursMatchedText'),
-      type: MessageBarType.success,
+      type: 'success',
       iconName: 'BufferTimeBoth'
     })
   }
@@ -58,7 +57,7 @@ export function useMessages(): IUserMessageProps[] {
       text: t('timesheet.periodConfirmedText', {
         hours: $date.getDurationString(state.selectedPeriod.matchedDuration, t)
       }),
-      type: MessageBarType.success,
+      type: 'success',
       iconName: 'CheckMark'
     })
   }
@@ -68,7 +67,6 @@ export function useMessages(): IUserMessageProps[] {
       text: t('timesheet.periodForecastedText', {
         hours: $date.getDurationString(state.selectedPeriod.forecastedHours, t)
       }),
-      type: MessageBarType.info,
       iconName: 'BufferTimeBoth'
     })
   }
@@ -90,14 +88,14 @@ export function useMessages(): IUserMessageProps[] {
           </a>
         </p>
       ),
-      type: MessageBarType.warning,
+      type: 'warning',
       iconName: 'DependencyRemove'
     })
   }
   if (!isEmpty(state.selectedPeriod.errors)) {
     messages.push({
       id: 'unresolvederror',
-      type: MessageBarType.severeWarning,
+      type: 'severeWarning',
       text: t('timesheet.unresolvedErrorText', {
         count: state.selectedPeriod.errors.length
       }),
