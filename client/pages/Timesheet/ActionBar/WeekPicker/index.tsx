@@ -51,7 +51,6 @@ export const WeekPicker: React.FC = () => {
             showWeekNumbers={true}
             firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
             dateRangeType={DateRangeType.Week}
-            autoNavigateOnSelection={true}
             value={state.scope.startDate.jsDate}
           />
         </FocusTrapZone>

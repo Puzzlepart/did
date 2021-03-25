@@ -7,7 +7,7 @@ import { IEditLinkProps } from './types'
 
 /**
  * Renders a edit link using `<Icon />` and `<Link />`
- * from `office-ui-fabric-react`
+ * from `@fluentui/react`
  *
  * @category Function Component
  */

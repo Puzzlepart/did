@@ -16,7 +16,7 @@ import { useAutocomplete } from './useAutocomplete'
 
 /**
  * Autocomplete component using `<SearchBox />`, `<Callout />`,
- * `<FocusZone />` and `<List />` from `office-ui-fabric-react`.
+ * `<FocusZone />` and `<List />` from ``.
  *
  * @category Function Component
  */

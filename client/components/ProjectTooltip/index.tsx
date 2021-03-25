@@ -6,7 +6,7 @@ import { IProjectTooltipProps } from './types'
 
 /**
  * Shows more details about the project in a
- * `<TooltipHost />` from `office-ui-fabric-react`
+ * `<TooltipHost />` from `@fluentui/react`
  *
  * @category Function Component
  */

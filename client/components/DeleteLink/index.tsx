@@ -7,7 +7,7 @@ import { IDeleteLinkProps } from './types'
 
 /**
  * Renders a delete link using `<Icon />` and `<Link />`
- * from `office-ui-fabric-react`
+ * from `@fluentui/react`
  *
  * @category Function Component
  */

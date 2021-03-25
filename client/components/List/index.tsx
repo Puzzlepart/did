@@ -8,7 +8,7 @@ import { IListProps } from './types'
 import { useList } from './useList'
 
 /**
- * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
+ * List component using `ShimmeredDetailsList` from `@fluentui/react`.
  *
  * Supports list groups, selection, search box
  * and custom column headers.
