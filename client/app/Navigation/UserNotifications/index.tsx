@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
+import { useToggle } from 'hooks/common/useToggle'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../UserMenu/MenuItem'
@@ -23,15 +24,16 @@ import { useUserNotifications } from './useUserNotifications'
 export const UserNotifications: React.FC<IUserNotificationsProps> = ({ renderAsMenuItem, iconName = 'Ringer' }) => {
   const { t } = useTranslation()
   const context = useUserNotifications()
+  const [isOpen, togglePanel] = useToggle(false)
   return (
     <UserNotificationsContext.Provider value={context}>
       {renderAsMenuItem ?
         <MenuItem
-          onClick={context.showPanel}
+          onClick={togglePanel}
           iconProps={{ iconName }}
           text={t('notifications.headerText')} />
         : (
-          <div className={styles.root} onClick={context.showPanel}>
+          <div className={styles.root} onClick={togglePanel}>
             <div className={styles.icon}>
               <Icon iconName={iconName} />
             </div>
@@ -39,7 +41,7 @@ export const UserNotifications: React.FC<IUserNotificationsProps> = ({ renderAsM
           </div>
         )
       }
-      <NotificationsPanel />
+      <NotificationsPanel isOpen={isOpen} onDismiss={togglePanel} />
     </UserNotificationsContext.Provider>
   )
 }
