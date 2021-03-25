@@ -35,8 +35,10 @@ export const Navigation: React.FC = () => {
           ))}
         </ul>
         <ul className={styles.navRight} hidden={!isAuthenticated}>
-          <UserFeedback />
-          <UserNotifications />
+          <span hidden={isMobile}>
+            <UserFeedback />
+            <UserNotifications />
+          </span>
           <UserMenu />
         </ul>
       </div>

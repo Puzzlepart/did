@@ -2,7 +2,6 @@
 import { Icon } from '@fluentui/react'
 import { useToggle } from 'hooks'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
@@ -22,7 +21,6 @@ import styles from './UserFeedback.module.scss'
 export const UserFeedback: React.FC<IUserFeedbackProps> = ({ renderAsMenuItem, iconName = 'Emoji2' }) => {
   const { t } = useTranslation()
   const [isOpen, togglePanel] = useToggle(false)
-  if (isMobile && !renderAsMenuItem) return null
   return (
     <>
       {renderAsMenuItem ?

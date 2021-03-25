@@ -3,7 +3,7 @@ import { Callout, Icon, Persona, PersonaSize } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useToggle } from 'hooks'
 import React, { useRef } from 'react'
-import { isBrowser, isMobile } from 'react-device-detect'
+import { BrowserView, isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from '../UserFeedback'
@@ -20,7 +20,7 @@ import { UserSettings } from './UserSettings'
 export const UserMenu: React.FC = () => {
   const { t } = useTranslation()
   const { user, subscription } = useAppContext()
-  const [menuHidden, toggleMenu] = useToggle(false)
+  const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
 
   if (!subscription) return null
@@ -76,17 +76,17 @@ export const UserMenu: React.FC = () => {
               styles={{ tertiaryText: { display: 'block', fontSize: 10 } }}
             />
           </MenuItem>
-          <span hidden={isMobile}>
+          <BrowserView renderWithFragment={true}>
             <UserReports />
-          </span>
+          </BrowserView>
           <Divider />
           <UserSettings />
-          <span hidden={isBrowser}>
+          <MobileView renderWithFragment={true}>
             <Divider />
-            <UserNotifications mobile={true} />
+            <UserNotifications renderAsMenuItem={true} />
             <Divider />
             <UserFeedback renderAsMenuItem={true} />
-          </span>
+          </MobileView>
           <Divider />
           <MenuItem
             href='/auth/signout'
