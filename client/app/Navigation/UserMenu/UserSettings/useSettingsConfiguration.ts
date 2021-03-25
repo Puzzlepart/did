@@ -65,6 +65,7 @@ export function useSettingsConfiguration() {
           text: t('common.dark-theme')
         }
       ],
+      hidden: true,
       reloadAfterSave: true
     }
   ])
