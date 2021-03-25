@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import { omit } from 'underscore'
 import { UserMessage } from '../UserMessage'
 import styles from './Toast.module.scss'
