@@ -334,7 +334,8 @@
     "error": "Feilmelding",
     "uiThemeLabel": "Fargetema",
     "dark-theme": "Mørkt tema",
-    "light-theme": "Lyst tema"
+    "light-theme": "Lyst tema",
+    "auto-theme": "System-tema"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

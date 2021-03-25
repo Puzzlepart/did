@@ -10,12 +10,22 @@ import { default as lightTheme } from './light'
  * @returns the theme with palette
  */
 export function getTheme(name: string): Theme {
-  switch (name) {
-    case 'dark':
-      return darkTheme
-    default:
-      return lightTheme
-  }
+    switch (name) {
+        case 'dark': return darkTheme
+        case 'auto': return getAutoColorScheme()
+        default: return lightTheme
+    }
+}
+
+/**
+ * Get color scheme based on client's system preference
+ *
+ * @see https://developer.mozilla.org/docs/Web/CSS/@media/prefers-color-scheme
+ * 
+ * @returns the system preferred color scheme, either darkTheme or lightTheme
+ */
+function getAutoColorScheme(): Theme {
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme
 }
 
 export { lightTheme, darkTheme }

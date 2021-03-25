@@ -335,7 +335,8 @@
     "error": "Error",
     "uiThemeLabel": "Theme",
     "light-theme": "Light theme",
-    "dark-theme": "Dark theme"
+    "dark-theme": "Dark theme",
+    "auto-theme": "System theme"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
