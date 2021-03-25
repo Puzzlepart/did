@@ -42,8 +42,6 @@ export function useList({ props }: UseList) {
 
   const [groups, items] = useListGroups([...state.items], props.listGroupProps)
 
-  const [delay, transitionDuration] = props.fadeIn || [0, 0]
-
   const listProps = useListProps({
     props,
     state,
@@ -54,8 +52,6 @@ export function useList({ props }: UseList) {
   })
 
   return {
-    delay,
-    transitionDuration,
     listProps
   }
 }

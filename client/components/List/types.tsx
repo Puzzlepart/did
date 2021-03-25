@@ -120,13 +120,6 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   onRenderColumnHeader?: IRenderFunction<IDetailsColumnRenderTooltipProps>
 
   /**
-   * Fade in properties used by the FadeIn component (react-fade-in)
-   *
-   * [delay, transitionDuration]
-   */
-  fadeIn?: [number, number]
-
-  /**
    * Filters
    */
   filters?: { [key: string]: any }
