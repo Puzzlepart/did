@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IPivotItemProps, IPivotProps } from '@fluentui/react-react'
+import { IPivotItemProps, IPivotProps } from '@fluentui/react'
 import { FC } from 'react'
 import { PermissionScope } from 'security'
 

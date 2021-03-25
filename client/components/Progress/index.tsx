@@ -1,4 +1,4 @@
-import { Icon, ProgressIndicator } from '@fluentui/react-react'
+import { Icon, ProgressIndicator } from '@fluentui/react'
 import React from 'react'
 import { omit } from 'underscore'
 import styles from './Progress.module.scss'

@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { List, TabComponent, useMessage, UserMessage } from 'components'
-import { Icon, MessageBarType } from '@fluentui/react-react'
+import { Icon, MessageBarType } from '@fluentui/react'
 import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'

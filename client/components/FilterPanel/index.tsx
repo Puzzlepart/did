@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Panel } from '@fluentui/react-react'
+import { Panel } from '@fluentui/react'
 import React from 'react'
 import { FilterItem } from './FilterItem'
 import styles from './FilterPanel.module.scss'

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react-react'
+import { Icon } from '@fluentui/react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'

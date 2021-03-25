@@ -1,4 +1,4 @@
-import { MessageBarButton } from '@fluentui/react-react'
+import { MessageBarButton } from '@fluentui/react'
 import { IGNORE_EVENT } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

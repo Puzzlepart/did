@@ -6,7 +6,7 @@ import {
   IColumn,
   IDetailsColumnRenderTooltipProps,
   PersonaSize
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import React, { useContext, useMemo } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

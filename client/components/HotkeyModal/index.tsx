@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IModalProps, Modal } from '@fluentui/react-react'
+import { IModalProps, Modal } from '@fluentui/react'
 import React from 'react'
 import FadeIn from 'react-fade-in'
 import { GlobalHotKeysProps } from 'react-hotkeys'

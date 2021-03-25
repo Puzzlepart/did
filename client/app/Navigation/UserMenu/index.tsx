@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
-import { Callout, Icon, Persona, PersonaSize } from '@fluentui/react-react'
+import { Callout, Icon, Persona, PersonaSize } from '@fluentui/react'
 import React, { useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'

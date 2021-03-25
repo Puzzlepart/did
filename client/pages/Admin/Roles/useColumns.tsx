@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { EditLink } from 'components'
 import { PermissionList } from 'components/PermissionList'
-import { Icon } from '@fluentui/react-react'
+import { Icon } from '@fluentui/react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

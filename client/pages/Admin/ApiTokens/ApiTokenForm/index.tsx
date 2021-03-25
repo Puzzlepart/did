@@ -4,7 +4,7 @@ import {
   Dropdown,
   Panel,
   TextField
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'

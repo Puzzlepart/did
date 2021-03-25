@@ -6,7 +6,7 @@ import {
   Label,
   List,
   SearchBox
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import React from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'

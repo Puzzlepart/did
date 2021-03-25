@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react/jsx-no-undef */
-import { Icon, TextField } from '@fluentui/react-react'
+import { Icon, TextField } from '@fluentui/react'
 import React, { HTMLAttributes } from 'react'
 import { BrowserView, isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'

@@ -1,5 +1,5 @@
 import { List, TabComponent } from 'components'
-import { Checkbox, SelectionMode } from '@fluentui/react-react'
+import { Checkbox, SelectionMode } from '@fluentui/react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon, Link } from '@fluentui/react-react'
+import { Icon, Link } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './EditLink.module.scss'

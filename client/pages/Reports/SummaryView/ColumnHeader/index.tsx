@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IDetailsColumnRenderTooltipProps } from '@fluentui/react-react'
+import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import React from 'react'
 import styles from './ColumnHeader.module.scss'
 

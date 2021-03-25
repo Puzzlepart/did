@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IDropdownOption } from '@fluentui/react-react'
+import { IDropdownOption } from '@fluentui/react'
 import { AutocompleteItemIcons } from '../types'
 
 /**

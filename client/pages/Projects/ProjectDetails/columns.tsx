@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IColumn } from '@fluentui/react-react'
+import { IColumn } from '@fluentui/react'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 const columns = (t: TFunction): IColumn[] => [

@@ -10,7 +10,7 @@ import {
   ISearchBoxProps,
   IShimmeredDetailsListProps,
   SelectionMode
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 /**

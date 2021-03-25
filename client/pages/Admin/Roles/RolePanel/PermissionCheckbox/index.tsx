@@ -1,4 +1,4 @@
-import { Checkbox, Icon } from '@fluentui/react-react'
+import { Checkbox, Icon } from '@fluentui/react'
 import React from 'react'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'

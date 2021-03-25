@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
-import { MessageBarType } from '@fluentui/react-react'
+import { MessageBarType } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ErrorBar.module.scss'

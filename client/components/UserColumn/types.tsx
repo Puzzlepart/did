@@ -1,4 +1,4 @@
-import { IPersonaProps } from '@fluentui/react-react'
+import { IPersonaProps } from '@fluentui/react'
 import { User } from 'types'
 
 export interface IUserColumnProps {

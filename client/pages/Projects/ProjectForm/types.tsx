@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
 import { ITabItemProps } from 'components/TabContainer'
-import { IPanelProps } from '@fluentui/react-react'
+import { IPanelProps } from '@fluentui/react'
 import {
   IFormValidation,
   LabelObject as Label,

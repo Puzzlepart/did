@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
-import { format } from '@fluentui/react-react'
+import { format } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { IDurationDisplayProps } from './types'

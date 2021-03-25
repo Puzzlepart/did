@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useToggle } from 'hooks'
-import { IChoiceGroupOption } from '@fluentui/react-react'
+import { IChoiceGroupOption } from '@fluentui/react'
 import { useState } from 'react'
 import { useQueries } from './queries'
 import { useColumns } from './useColumns'

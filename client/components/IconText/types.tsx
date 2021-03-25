@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IIconProps } from '@fluentui/react-react'
+import { IIconProps } from '@fluentui/react'
 
 /**
  * @category IconText

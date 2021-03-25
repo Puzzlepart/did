@@ -1,4 +1,4 @@
-import { GroupHeader, IDetailsGroupDividerProps } from '@fluentui/react-react'
+import { GroupHeader, IDetailsGroupDividerProps } from '@fluentui/react'
 import React from 'react'
 
 export const ListGroupHeader: React.FC<IDetailsGroupDividerProps> = (props) => {

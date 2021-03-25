@@ -1,4 +1,4 @@
-import { IBreadcrumbItem } from '@fluentui/react-react'
+import { IBreadcrumbItem } from '@fluentui/react'
 import { PageComponent } from 'pages/types'
 import { HTMLAttributes } from 'react'
 

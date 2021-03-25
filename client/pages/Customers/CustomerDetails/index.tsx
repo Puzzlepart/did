@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBar, MessageBarType } from '@fluentui/react-react'
+import { MessageBar, MessageBarType } from '@fluentui/react'
 import { ProjectList } from 'pages/Projects'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'

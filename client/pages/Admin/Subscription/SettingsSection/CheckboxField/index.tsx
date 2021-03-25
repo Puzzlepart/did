@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { Checkbox, Label } from '@fluentui/react-react'
+import { Checkbox, Label } from '@fluentui/react'
 import React, { useContext } from 'react'
 import { contains } from 'underscore'
 import { SubscriptionContext } from '../../context'

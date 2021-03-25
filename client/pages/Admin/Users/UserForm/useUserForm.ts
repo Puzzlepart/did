@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { ITextFieldProps } from '@fluentui/react-react'
+import { ITextFieldProps } from '@fluentui/react'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'

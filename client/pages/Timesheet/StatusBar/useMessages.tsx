@@ -1,7 +1,7 @@
 import { IUserMessageProps } from 'components/UserMessage/types'
 import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
-import { MessageBarType } from '@fluentui/react-react'
+import { MessageBarType } from '@fluentui/react'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

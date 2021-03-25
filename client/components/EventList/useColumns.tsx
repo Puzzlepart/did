@@ -1,7 +1,7 @@
 import { EntityLabel } from 'components/EntityLabel'
 import $date from 'DateUtils'
 import * as helpers from 'helpers'
-import { IColumn, Link } from '@fluentui/react-react'
+import { IColumn, Link } from '@fluentui/react'
 import React, { useMemo } from 'react'
 import { isBrowser, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

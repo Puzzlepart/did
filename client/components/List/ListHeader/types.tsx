@@ -3,7 +3,7 @@ import {
   IDetailsHeaderProps,
   IRenderFunction,
   ISearchBoxProps
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import { Dispatch } from 'react'
 import { IListState } from '../types'
 

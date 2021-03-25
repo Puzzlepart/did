@@ -1,4 +1,4 @@
-import { Icon } from '@fluentui/react-react'
+import { Icon } from '@fluentui/react'
 import * as React from 'react'
 import styles from './CustomerColumn.module.scss'
 import { ICustomerColumnProps } from './types'

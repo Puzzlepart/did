@@ -1,4 +1,4 @@
-import { IDetailsHeaderProps } from '@fluentui/react-react'
+import { IDetailsHeaderProps } from '@fluentui/react'
 import React, { Dispatch } from 'react'
 import { ListHeader } from '.'
 import { IListProps, IListState } from '../types'

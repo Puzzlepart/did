@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
-import { ActionButton } from '@fluentui/react-react'
+import { ActionButton } from '@fluentui/react'
 import { bugs } from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

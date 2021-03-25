@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components/Toast'
-import { MessageBarType } from '@fluentui/react-react'
+import { MessageBarType } from '@fluentui/react'
 import { useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Persona, PersonaSize } from '@fluentui/react-react'
+import { Persona, PersonaSize } from '@fluentui/react'
 import React from 'react'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react-react'
+import { Icon } from '@fluentui/react'
 import React from 'react'
 import styles from './MenuItem.module.scss'
 import { IMenuItemProps } from './types'

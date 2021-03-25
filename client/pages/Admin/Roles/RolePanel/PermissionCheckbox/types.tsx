@@ -1,4 +1,4 @@
-import { ICheckboxProps } from '@fluentui/react-react'
+import { ICheckboxProps } from '@fluentui/react'
 import { IPermission } from 'security'
 
 export interface IPermissionCheckboxProps extends ICheckboxProps {

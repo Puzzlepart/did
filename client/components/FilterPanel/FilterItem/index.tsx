@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Checkbox, SearchBox } from '@fluentui/react-react'
+import { Checkbox, SearchBox } from '@fluentui/react'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isBlank } from 'underscore.string'

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { TabComponent, TabContainer, Toast } from 'components'
-import { PrimaryButton } from '@fluentui/react-react'
+import { PrimaryButton } from '@fluentui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionContext } from './context'

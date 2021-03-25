@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
-import { Breadcrumb, IBreadcrumbItem } from '@fluentui/react-react'
+import { Breadcrumb, IBreadcrumbItem } from '@fluentui/react'
 import React from 'react'
 import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { ISpinnerProps } from '@fluentui/react-react'
+import { ISpinnerProps } from '@fluentui/react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { any, filter, omit } from 'underscore'

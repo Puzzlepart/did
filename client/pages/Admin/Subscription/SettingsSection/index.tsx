@@ -2,7 +2,7 @@
 
 import { TabComponent } from 'components'
 import { getValue as get } from 'helpers'
-import { Slider, TextField, Toggle } from '@fluentui/react-react'
+import { Slider, TextField, Toggle } from '@fluentui/react'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'

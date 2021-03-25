@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Panel } from '@fluentui/react-react'
+import { Panel } from '@fluentui/react'
 import React from 'react'
 import { MenuItem } from '../MenuItem'
 import { UserSettingsContext } from './context'

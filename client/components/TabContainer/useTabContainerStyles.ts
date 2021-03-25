@@ -4,7 +4,7 @@ import {
   IPivotStyles,
   IStyleFunctionOrObject,
   merge
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import { isMobile } from 'react-device-detect'
 import { ITabContainerProps } from './types'
 

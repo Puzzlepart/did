@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import get from 'get-value'
-import { Persona, PersonaSize } from '@fluentui/react-react'
+import { Persona, PersonaSize } from '@fluentui/react'
 import React from 'react'
 import { isBrowser, isMobile } from 'react-device-detect'
 import { IUserColumnProps } from './types'

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react-react'
+import { Icon } from '@fluentui/react'
 import React from 'react'
 import { isEmpty } from 'underscore'
 import { UserNotificationsContext } from './context'

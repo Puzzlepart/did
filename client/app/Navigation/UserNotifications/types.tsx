@@ -3,7 +3,7 @@ import {
   IIconProps,
   IMessageBarProps,
   MessageBarType
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import { Notification } from 'types'
 
 export class NotificationModel {

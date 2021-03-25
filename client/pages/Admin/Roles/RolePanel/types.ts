@@ -1,4 +1,4 @@
-import { IPanelProps } from '@fluentui/react-react'
+import { IPanelProps } from '@fluentui/react'
 import { Role } from 'types'
 
 export interface IRolePanelProps extends IPanelProps {

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { ShimmeredDetailsList } from '@fluentui/react-react'
+import { ShimmeredDetailsList } from '@fluentui/react'
 import React from 'react'
 import FadeIn from 'react-fade-in'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'

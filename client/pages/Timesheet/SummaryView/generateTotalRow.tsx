@@ -1,5 +1,5 @@
 import $date from 'DateUtils'
-import { IColumn } from '@fluentui/react-react'
+import { IColumn } from '@fluentui/react'
 
 /**
  * Generate total row

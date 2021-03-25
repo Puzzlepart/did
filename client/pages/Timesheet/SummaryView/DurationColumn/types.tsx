@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IColumn } from '@fluentui/react-react'
+import { IColumn } from '@fluentui/react'
 
 /**
  * @category DurationColumn

@@ -1,4 +1,4 @@
-import { IDropdownOption } from '@fluentui/react-react'
+import { IDropdownOption } from '@fluentui/react'
 
 export interface IUserSettingInputProps {
   user: any

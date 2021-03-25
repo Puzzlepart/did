@@ -1,4 +1,4 @@
-import { IChoiceGroupOption } from '@fluentui/react-react'
+import { IChoiceGroupOption } from '@fluentui/react'
 import { useTranslation } from 'react-i18next'
 
 export const useMoodOptions = (): IChoiceGroupOption[] => {

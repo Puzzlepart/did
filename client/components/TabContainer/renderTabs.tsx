@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { ContextUser } from 'AppContext'
-import { PivotItem } from '@fluentui/react-react'
+import { PivotItem } from '@fluentui/react'
 import React, { JSXElementConstructor, ReactElement } from 'react'
 import { isArray } from 'underscore'
 import { ITabItemProps } from './types'

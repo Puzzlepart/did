@@ -8,7 +8,7 @@ import {
   UserMessage
 } from 'components'
 import { Toast } from 'components/Toast'
-import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react-react'
+import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
 import { config } from 'package'
 import React from 'react'
 import { LabelObject as Label } from 'types'

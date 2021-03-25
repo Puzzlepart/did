@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IPanelProps } from '@fluentui/react-react'
+import { IPanelProps } from '@fluentui/react'
 import { BaseFilter, IFilter } from './Filters'
 
 /**

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
-import { DefaultButton, MessageBarType } from '@fluentui/react-react'
+import { DefaultButton, MessageBarType } from '@fluentui/react'
 import { PageComponent } from 'pages/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

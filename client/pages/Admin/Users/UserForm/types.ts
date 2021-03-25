@@ -1,4 +1,4 @@
-import { IPanelProps } from '@fluentui/react-react'
+import { IPanelProps } from '@fluentui/react'
 import { User } from 'types'
 
 export interface IUserFormProps extends IPanelProps {

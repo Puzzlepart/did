@@ -9,7 +9,7 @@ import {
   IObjectWithKey,
   Selection,
   SelectionMode
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import React from 'react'
 import { AnyAction } from 'redux'
 import { filter } from 'underscore'

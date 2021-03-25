@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Callout, Checkbox, Icon, SearchBox } from '@fluentui/react-react'
+import { Callout, Checkbox, Icon, SearchBox } from '@fluentui/react'
 import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
 import styles from './SelectCallout.module.scss'

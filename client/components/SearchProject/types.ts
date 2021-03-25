@@ -1,4 +1,4 @@
-import { ISearchBoxProps } from '@fluentui/react-react'
+import { ISearchBoxProps } from '@fluentui/react'
 import { Project } from 'types'
 
 export interface ISearchProjectProps extends ISearchBoxProps {

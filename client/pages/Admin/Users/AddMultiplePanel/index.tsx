@@ -5,7 +5,7 @@ import {
   PanelType,
   PrimaryButton,
   SelectionMode
-} from '@fluentui/react-react'
+} from '@fluentui/react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
