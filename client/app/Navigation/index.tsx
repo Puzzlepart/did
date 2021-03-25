@@ -17,13 +17,14 @@ import { UserNotifications } from './UserNotifications'
 export const Navigation: React.FC = () => {
   const { pages, isAuthenticated } = useAppContext()
   const className = useAppClassName(styles)
+  if (!isAuthenticated) return null
   return (
     <nav className={className} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
           {name}
         </Link>
-        <ul className={styles.nav} hidden={!isAuthenticated}>
+        <ul className={styles.nav}>
           {pages.map((page, index) => (
             <NavItem
               key={index}
@@ -34,7 +35,7 @@ export const Navigation: React.FC = () => {
             />
           ))}
         </ul>
-        <ul className={styles.navRight} hidden={!isAuthenticated}>
+        <ul className={styles.navRight}>
           <BrowserView renderWithFragment={true}>
             <UserFeedback />
             <UserNotifications />
