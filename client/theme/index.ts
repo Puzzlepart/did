@@ -18,6 +18,13 @@ export function getTheme(name: string): Theme {
     }
 }
 
+/**
+ * Get color scheme based on client's system preference
+ *
+ * @see https://developer.mozilla.org/docs/Web/CSS/@media/prefers-color-scheme
+ * 
+ * @returns the system preferred color scheme, either darkTheme or lightTheme
+ */
 function getAutoColorScheme(): Theme {
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme
 }
