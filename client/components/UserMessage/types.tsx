@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react'
+import { IMessageBarProps, MessageBarType } from '@fluentui/react-react'
 
 /**
  * @category UserMessage

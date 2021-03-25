@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { EventList, UserColumn, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
-import { ActionButton, MessageBarType } from 'office-ui-fabric-react'
+import { ActionButton, MessageBarType } from '@fluentui/react-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'

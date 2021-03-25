@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { KeyCodes } from 'office-ui-fabric-react'
+import { KeyCodes } from '@fluentui/react-react'
 import { find } from 'underscore'
 import {
   AutocompleteSelectCallback,

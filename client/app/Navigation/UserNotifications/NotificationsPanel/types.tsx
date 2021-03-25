@@ -1,4 +1,4 @@
-import { IPanelProps } from 'office-ui-fabric-react'
+import { IPanelProps } from '@fluentui/react-react'
 import { NotificationModel } from '../types'
 
 export interface INotificationsPanelProps extends IPanelProps {

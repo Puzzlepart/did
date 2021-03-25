@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { useAppContext } from 'AppContext'
-import { IButtonProps } from 'office-ui-fabric-react'
+import { IButtonProps } from '@fluentui/react-react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
 

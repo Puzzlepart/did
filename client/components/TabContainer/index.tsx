@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
-import { Pivot } from 'office-ui-fabric-react'
+import { Pivot } from '@fluentui/react-react'
 import React from 'react'
 import { renderTabs } from './renderTabs'
 import { TabContainerComponent } from './types'

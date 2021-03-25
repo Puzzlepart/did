@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { usePermissions } from 'hooks'
-import { Icon } from 'office-ui-fabric-react'
+import { Icon } from '@fluentui/react-react'
 import React from 'react'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'

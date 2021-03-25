@@ -1,6 +1,6 @@
 import { stringIsNullOrEmpty } from '@pnp/common'
 import { EntityLabel, ProjectLink } from 'components'
-import { Icon } from 'office-ui-fabric-react'
+import { Icon } from '@fluentui/react-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'

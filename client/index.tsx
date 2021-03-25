@@ -7,7 +7,7 @@
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
-import { loadTheme } from '@uifabric/styling'
+import { loadTheme, createTheme } from '@uifabric/styling'
 import { IAppProps } from 'app/types'
 import 'core-js/stable'
 import $date from 'DateUtils'

@@ -1,4 +1,4 @@
-import { ISearchBoxProps } from 'office-ui-fabric-react'
+import { ISearchBoxProps } from '@fluentui/react-react'
 
 export interface IIconPickerProps extends ISearchBoxProps {
   label?: string

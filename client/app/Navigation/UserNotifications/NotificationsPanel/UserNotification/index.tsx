@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Link, MessageBar } from 'office-ui-fabric-react'
+import { Link, MessageBar } from '@fluentui/react-react'
 import React, { useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'

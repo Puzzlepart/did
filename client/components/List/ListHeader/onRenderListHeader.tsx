@@ -1,4 +1,4 @@
-import { IDetailsHeaderProps } from 'office-ui-fabric-react'
+import { IDetailsHeaderProps } from '@fluentui/react-react'
 import React, { Dispatch } from 'react'
 import { ListHeader } from '.'
 import { IListProps, IListState } from '../types'

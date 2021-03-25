@@ -5,7 +5,7 @@ import {
   SearchBox,
   Sticky,
   StickyPositionType
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React, { useMemo, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'

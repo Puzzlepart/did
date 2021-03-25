@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { ISearchBoxProps } from 'office-ui-fabric-react'
+import { ISearchBoxProps } from '@fluentui/react-react'
 import { ISuggestionItem } from './SuggestionItem/types'
 
 /**

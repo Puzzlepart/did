@@ -1,4 +1,4 @@
-import { Icon } from 'office-ui-fabric-react'
+import { Icon } from '@fluentui/react-react'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ProjectColumn.module.scss'

@@ -1,4 +1,4 @@
-import { Dropdown, Icon, IDropdownOption } from 'office-ui-fabric-react'
+import { Dropdown, Icon, IDropdownOption } from '@fluentui/react-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'

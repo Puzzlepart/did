@@ -10,7 +10,7 @@ import {
   ISearchBoxProps,
   IShimmeredDetailsListProps,
   SelectionMode
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 /**

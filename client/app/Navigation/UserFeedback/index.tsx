@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from 'office-ui-fabric-react'
+import { Icon } from '@fluentui/react-react'
 import React, { useState } from 'react'
 import { FeedbackPanel } from './FeedbackPanel'
 import styles from './UserFeedback.module.scss'

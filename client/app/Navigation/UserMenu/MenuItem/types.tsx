@@ -1,4 +1,4 @@
-import { IIconProps } from 'office-ui-fabric-react'
+import { IIconProps } from '@fluentui/react-react'
 import { HTMLAttributes } from 'react'
 
 export interface IMenuItemProps extends HTMLAttributes<HTMLDivElement> {

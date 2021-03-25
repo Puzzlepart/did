@@ -2,7 +2,7 @@ import {
   ContextualMenuItemType,
   format,
   IContextualMenuItem
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React from 'react'
 import { isEmpty, omit } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'

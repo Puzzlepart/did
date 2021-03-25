@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { List, TabComponent } from 'components'
-import { Checkbox } from 'office-ui-fabric-react'
+import { Checkbox } from '@fluentui/react-react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

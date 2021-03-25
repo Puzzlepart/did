@@ -1,4 +1,4 @@
-import { IPanelProps } from 'office-ui-fabric-react'
+import { IPanelProps } from '@fluentui/react-react'
 import { LabelInput, LabelObject } from 'types'
 
 export interface ILabelFormProps extends IPanelProps {

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react'
+import { ScrollablePane, ScrollbarVisibility } from '@fluentui/react-react'
 import React from 'react'
 
 /**

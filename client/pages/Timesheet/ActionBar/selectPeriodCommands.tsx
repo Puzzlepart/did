@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { IContextualMenuItem } from '@fluentui/react-react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../context'

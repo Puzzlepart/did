@@ -1,4 +1,4 @@
-import { IDropdownOption } from 'office-ui-fabric-react'
+import { IDropdownOption } from '@fluentui/react-react'
 import { useTranslation } from 'react-i18next'
 
 export const useTypeOptions = (): IDropdownOption[] => {

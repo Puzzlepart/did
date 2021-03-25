@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IPanelProps } from 'office-ui-fabric-react'
+import { IPanelProps } from '@fluentui/react-react'
 import { BaseFilter, IFilter } from './Filters'
 
 /**

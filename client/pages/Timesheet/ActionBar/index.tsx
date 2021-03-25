@@ -3,7 +3,7 @@ import {
   CommandBar,
   ICommandBarProps,
   IContextualMenuItem
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React from 'react'
 import styles from './ActionBar.module.scss'
 import { usePeriodCommands } from './selectPeriodCommands'

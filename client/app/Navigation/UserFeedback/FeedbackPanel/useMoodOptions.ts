@@ -1,4 +1,4 @@
-import { IChoiceGroupOption } from 'office-ui-fabric-react'
+import { IChoiceGroupOption } from '@fluentui/react-react'
 import { useTranslation } from 'react-i18next'
 
 export const useMoodOptions = (): IChoiceGroupOption[] => {

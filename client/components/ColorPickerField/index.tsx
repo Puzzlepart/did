@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
-import { Label, TooltipHost } from 'office-ui-fabric-react'
+import { Label, TooltipHost } from '@fluentui/react-react'
 import React, { useRef } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import styles from './ColorPickerField.module.scss'

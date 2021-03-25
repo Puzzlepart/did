@@ -2,7 +2,7 @@
 import { useMutation } from '@apollo/client'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
-import { DefaultButton } from 'office-ui-fabric-react'
+import { DefaultButton } from '@fluentui/react-react'
 import React, { HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'

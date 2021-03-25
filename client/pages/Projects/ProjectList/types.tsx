@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IListProps } from 'components/List/types'
-import { IPivotItemProps } from 'office-ui-fabric-react'
+import { IPivotItemProps } from '@fluentui/react-react'
 import { Project } from 'types'
 
 /**

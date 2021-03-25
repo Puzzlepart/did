@@ -5,7 +5,7 @@ import {
   Panel,
   PrimaryButton,
   TextField
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'

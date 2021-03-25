@@ -7,7 +7,7 @@ import {
   PanelType,
   PrimaryButton,
   TextField
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React from 'react'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'

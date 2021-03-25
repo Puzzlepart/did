@@ -1,4 +1,4 @@
-import { SelectionMode } from 'office-ui-fabric-react'
+import { SelectionMode } from '@fluentui/react-react'
 import { useMemo } from 'react'
 import { Project } from 'types'
 import { IProjectListProps } from '../ProjectList/types'

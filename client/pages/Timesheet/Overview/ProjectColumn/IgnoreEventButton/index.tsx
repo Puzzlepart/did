@@ -1,4 +1,4 @@
-import { MessageBarButton } from 'office-ui-fabric-react'
+import { MessageBarButton } from '@fluentui/react-react'
 import { IGNORE_EVENT } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

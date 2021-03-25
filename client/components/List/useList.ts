@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Selection, SelectionMode } from 'office-ui-fabric-react'
+import { Selection, SelectionMode } from '@fluentui/react-react'
 import { useEffect, useMemo } from 'react'
 import { first } from 'underscore'
 import useListReducer, { PROPS_UPDATED } from './reducer'

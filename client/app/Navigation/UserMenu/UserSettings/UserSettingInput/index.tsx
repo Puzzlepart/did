@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import get from 'get-value'
-import { Dropdown, Toggle } from 'office-ui-fabric-react'
+import { Dropdown, Toggle } from '@fluentui/react-react'
 import React, { useContext } from 'react'
 import { isArray } from 'underscore'
 import { UserSettingsContext } from '../context'

@@ -1,4 +1,4 @@
-import { ICalloutProps } from 'office-ui-fabric-react'
+import { ICalloutProps } from '@fluentui/react-react'
 import { LabelObject } from 'types'
 
 export interface ISelectCalloutProps extends ICalloutProps {

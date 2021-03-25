@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
-import { Icon, Label } from 'office-ui-fabric-react'
+import { Icon, Label } from '@fluentui/react-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LabelPicker.module.scss'

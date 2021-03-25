@@ -3,7 +3,7 @@ import {
   IContextualMenuItem,
   IContextualMenuProps,
   PrimaryButton
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

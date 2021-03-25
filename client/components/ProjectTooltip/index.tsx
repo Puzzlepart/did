@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react'
+import { TooltipDelay, TooltipHost } from '@fluentui/react-react'
 import React from 'react'
 import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'

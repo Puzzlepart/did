@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { FilterPanel, TabContainer, UserMessage } from 'components'
-import { PivotItem } from 'office-ui-fabric-react'
+import { PivotItem } from '@fluentui/react-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from './context'

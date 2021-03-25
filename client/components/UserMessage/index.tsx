@@ -4,7 +4,7 @@ import {
   IMessageBarStyles,
   IStyleFunctionOrObject,
   MessageBar
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'

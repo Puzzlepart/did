@@ -1,4 +1,4 @@
-import { IBreadcrumbItem } from 'office-ui-fabric-react'
+import { IBreadcrumbItem } from '@fluentui/react-react'
 import { PageComponent } from 'pages/types'
 import { HTMLAttributes } from 'react'
 

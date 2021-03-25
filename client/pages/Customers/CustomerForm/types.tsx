@@ -1,6 +1,6 @@
 import { getIcons } from 'common/icons'
 import { ITabItemProps } from 'components/TabContainer'
-import { IPanelProps } from 'office-ui-fabric-react'
+import { IPanelProps } from '@fluentui/react-react'
 import { Customer, IFormValidation } from 'types'
 import { first } from 'underscore'
 

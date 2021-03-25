@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from 'office-ui-fabric-react'
+import { Icon } from '@fluentui/react-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ProjectLink.module.scss'

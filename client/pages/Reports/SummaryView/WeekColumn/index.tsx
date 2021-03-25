@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { TooltipHost } from 'office-ui-fabric-react'
+import { TooltipHost } from '@fluentui/react-react'
 import React, { useRef } from 'react'
 import { IWeekColumnProps } from './types'
 import { useWeekColumn } from './useWeekColumn'

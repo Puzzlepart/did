@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IListProps } from 'components/List/types'
-import { IColumn } from 'office-ui-fabric-react'
+import { IColumn } from '@fluentui/react-react'
 import { HTMLProps } from 'react'
 
 /**

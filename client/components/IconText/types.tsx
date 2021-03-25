@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IIconProps } from 'office-ui-fabric-react'
+import { IIconProps } from '@fluentui/react-react'
 
 /**
  * @category IconText

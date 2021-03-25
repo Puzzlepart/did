@@ -5,7 +5,7 @@ import {
   DefaultButton,
   IContextualMenuItem,
   TextField
-} from 'office-ui-fabric-react'
+} from '@fluentui/react-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'

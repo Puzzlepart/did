@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { usePermissions } from 'hooks'
-import { DefaultButton } from 'office-ui-fabric-react'
+import { DefaultButton } from '@fluentui/react-react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'

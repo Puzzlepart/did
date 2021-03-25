@@ -1,5 +1,5 @@
 import { ConditionalWrapper, IconPicker, Toast } from 'components'
-import { Panel, PrimaryButton, TextField } from 'office-ui-fabric-react'
+import { Panel, PrimaryButton, TextField } from '@fluentui/react-react'
 import { config } from 'package'
 import React from 'react'
 import styles from './CustomerForm.module.scss'

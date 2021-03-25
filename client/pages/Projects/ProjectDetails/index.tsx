@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Pivot, PivotItem } from 'office-ui-fabric-react'
+import { Pivot, PivotItem } from '@fluentui/react-react'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'

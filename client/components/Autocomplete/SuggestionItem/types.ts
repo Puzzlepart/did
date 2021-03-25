@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IDropdownOption } from 'office-ui-fabric-react'
+import { IDropdownOption } from '@fluentui/react-react'
 import { AutocompleteItemIcons } from '../types'
 
 /**

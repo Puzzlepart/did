@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IListColumn } from 'components/List/types'
-import { IPersonaProps } from 'office-ui-fabric-react'
+import { IPersonaProps } from '@fluentui/react-react'
 import React from 'react'
 import { UserColumn } from '.'
 

@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { IContextualMenuItem } from '@fluentui/react-react'
 import { useTranslation } from 'react-i18next'
 import { NEXT_PERIOD, PREVIOUS_PERIOD, SET_SCOPE } from '../reducer/actions'
 import { TimesheetScope, useTimesheetContext } from '../types'

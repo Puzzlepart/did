@@ -1,5 +1,5 @@
 import { IUserMessageProps } from 'components/UserMessage'
-import { IPanelProps } from 'office-ui-fabric-react'
+import { IPanelProps } from '@fluentui/react-react'
 
 export interface IApiTokenFormProps extends IPanelProps {
   setMessage?: (message: IUserMessageProps, duration?: number) => void
