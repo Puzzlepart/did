@@ -403,6 +403,7 @@
     "submitSuccessMessagHeader": "Takk skal du ha!",
     "submitErrorMessageHeader": "Beklager!",
     "": "vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
-    "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren somVvi ikke helt forstår."
+    "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren somVvi ikke helt forstår.",
+    "mobileFeedbackText": "Gi tilbakemelding"
   }
 }

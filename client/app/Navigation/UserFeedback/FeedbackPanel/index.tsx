@@ -39,12 +39,11 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
   return (
     <>
       <Panel
-        isOpen={props.isOpen}
+        {...props}
         className={styles.root}
         headerText={t('feedback.headerText')}
         type={PanelType.smallFixedFar}
-        isLightDismiss={true}
-        onDismiss={props.onDismiss}>
+        isLightDismiss={true}>
         <div className={styles.body}>
           <Dropdown
             label={t('feedback.typeFieldLabel')}

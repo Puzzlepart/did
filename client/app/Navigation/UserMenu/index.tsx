@@ -3,9 +3,12 @@ import { Callout, Icon, Persona, PersonaSize } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useToggle } from 'hooks'
 import React, { useRef } from 'react'
-import { isMobile } from 'react-device-detect'
+import { BrowserView, isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
+import { UserFeedback } from '../UserFeedback'
+import { UserNotifications } from '../UserNotifications'
+import { NotificationIndicator } from '../UserNotifications/NotificationIndicator'
 import { Divider } from './Divider'
 import { MenuItem } from './MenuItem'
 import styles from './UserMenu.module.scss'
@@ -20,9 +23,6 @@ export const UserMenu: React.FC = () => {
   const { user, subscription } = useAppContext()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
-
-  if (!subscription) return null
-
   return (
     <>
       <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
@@ -40,6 +40,9 @@ export const UserMenu: React.FC = () => {
             styles={{ root: { color: 'white', marginLeft: 6 } }}
           />
         </span>
+        <MobileView renderWithFragment={true}>
+          <NotificationIndicator />
+        </MobileView>
       </span>
       <Callout
         hidden={menuHidden}
@@ -74,11 +77,17 @@ export const UserMenu: React.FC = () => {
               styles={{ tertiaryText: { display: 'block', fontSize: 10 } }}
             />
           </MenuItem>
-          <span hidden={isMobile}>
+          <BrowserView renderWithFragment={true}>
             <UserReports />
-          </span>
+          </BrowserView>
           <Divider />
           <UserSettings />
+          <MobileView renderWithFragment={true}>
+            <Divider />
+            <UserNotifications renderAsMenuItem={true} />
+            <Divider />
+            <UserFeedback renderAsMenuItem={true} />
+          </MobileView>
           <Divider />
           <MenuItem
             href='/auth/signout'

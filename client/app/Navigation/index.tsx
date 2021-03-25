@@ -2,7 +2,7 @@
 import { useAppContext } from 'AppContext'
 import { description, name } from 'package'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
+import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { useAppClassName } from '../useAppClassName'
 import styles from './Navigation.module.scss'
@@ -21,7 +21,7 @@ export const Navigation: React.FC = () => {
     <nav className={className} hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
-          did
+          {name}
         </Link>
         <ul className={styles.nav} hidden={!isAuthenticated}>
           {pages.map((page, index) => (
@@ -34,9 +34,11 @@ export const Navigation: React.FC = () => {
             />
           ))}
         </ul>
-        <ul className={styles.navRight}>
-          {isAuthenticated && <UserFeedback />}
-          {isAuthenticated && <UserNotifications />}
+        <ul className={styles.navRight} hidden={!isAuthenticated}>
+          <BrowserView renderWithFragment={true}>
+            <UserFeedback />
+            <UserNotifications />
+          </BrowserView>
           <UserMenu />
         </ul>
       </div>
