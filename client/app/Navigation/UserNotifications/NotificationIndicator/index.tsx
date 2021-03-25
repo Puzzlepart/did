@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import React from 'react'
 import { isEmpty } from 'underscore'
-import styles from './NotificationIndicator.module.scss'
 import { useUserNotifications } from '../useUserNotifications'
+import styles from './NotificationIndicator.module.scss'
 
 /**
  * @category Function Component

@@ -90,10 +90,10 @@ ___
 
 ▸ **useBrowserStorage**<T\>(`__namedParameters`: *Object*): [T, (`value`: *any*) => *void*, () => *void*]
 
-Browser storage hook supporting arrays
+Browser storage hook supporting `arrays`
 
-**`remarks`** Supports arrays for now, but can
-support objects, string etc in the future
+**`remarks`** Supports `arrays` for now, but can
+support `objects`, `strings` etc in the future
 if needed.
 
 #### Type parameters:

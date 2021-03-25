@@ -6,7 +6,7 @@ import { NotificationModel } from './types'
 
 /**
  * Hook for UserNotifications
- * 
+ *
  * @category UserNotifications
  */
 export const useUserNotifications = () => {

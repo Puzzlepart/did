@@ -13,11 +13,9 @@ import styles from './UserNotificationsPanel.module.scss'
  */
 export const NotificationsPanel: React.FC<IPanelProps> = (props) => {
   const { t } = useTranslation()
-  const {
-    notifications,
-    dismissedCount,
-    clearDismissed
-  } = useContext(UserNotificationsContext)
+  const { notifications, dismissedCount, clearDismissed } = useContext(
+    UserNotificationsContext
+  )
   useDebugValue({ dismissedCount })
   return (
     <Panel
@@ -50,4 +48,3 @@ export const NotificationsPanel: React.FC<IPanelProps> = (props) => {
 
 export * from './types'
 export * from './UserNotification'
-

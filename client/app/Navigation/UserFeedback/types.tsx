@@ -1,4 +1,4 @@
 export interface IUserFeedbackProps {
-  renderAsMenuItem?: boolean;
-  iconName?: string;
+  renderAsMenuItem?: boolean
+  iconName?: string
 }
