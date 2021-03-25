@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'
 import { UserNotificationsContext } from './context'
 import { NotificationsPanel } from './NotificationsPanel'
@@ -14,7 +15,7 @@ export const UserNotifications: React.FC = () => {
   const context = useUserNotifications()
   return (
     <UserNotificationsContext.Provider value={context}>
-      <div className={styles.root} onClick={context.showPanel}>
+      <div className={styles.root} onClick={context.showPanel} hidden={isMobile}>
         <a>
           <div className={styles.icon}>
             <Icon iconName='Ringer' />
@@ -33,3 +34,4 @@ export const UserNotifications: React.FC = () => {
 
 export * from './NotificationsPanel'
 export * from './types'
+
