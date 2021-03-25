@@ -13,9 +13,10 @@ import { useUserNotifications } from './useUserNotifications'
  */
 export const UserNotifications: React.FC = () => {
   const context = useUserNotifications()
+  if(isMobile) return null
   return (
     <UserNotificationsContext.Provider value={context}>
-      <div className={styles.root} onClick={context.showPanel} hidden={isMobile}>
+      <div className={styles.root} onClick={context.showPanel}>
         <a>
           <div className={styles.icon}>
             <Icon iconName='Ringer' />
