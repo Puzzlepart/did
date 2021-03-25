@@ -1,39 +1,32 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useAppContext } from 'AppContext'
-import { useState } from 'react'
 import { useBrowserStorage } from '../../../hooks'
-import { IUserNotificationsState, NotificationModel } from './types'
+import { NotificationModel } from './types'
 
 /**
  * Hook for UserNotifications
+ *
+ * @category UserNotifications
  */
 export const useUserNotifications = () => {
-  const [state, dispatch] = useState<IUserNotificationsState>({})
-  const app = useAppContext()
-  const { data } = app.notifications
-
-  const showPanel = () => dispatch({ ...state, showPanel: true })
-  const dismissPanel = () => dispatch({ ...state, showPanel: false })
-
+  const { notifications } = useAppContext()
   const [dismissedIds, dismissNotification, clearDismissed] = useBrowserStorage<
     string[]
   >({
     key: 'did_dismissed_notifications',
     initialValue: []
   })
-
-  const notifications = data
+  const notifications_ = notifications.data
     .map((n) => new NotificationModel(n))
     .filter((n) => !dismissedIds.includes(n.id))
-
-  const dismissedCount = data.length - notifications.length
+  const count = notifications_.length
+  const dismissedCount = notifications.data.length - count
 
   return {
-    notifications,
+    notifications: notifications_,
+    count,
     dismissedCount,
-    panelOpen: state.showPanel,
-    showPanel,
-    dismissPanel,
     dismissNotification,
     clearDismissed
   }

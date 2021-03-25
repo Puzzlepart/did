@@ -1,4 +1,5 @@
 import { Theme } from '@fluentui/react'
+import { default as darkTheme } from './dark'
 import { default as lightTheme } from './light'
 import { default as darkTheme } from './dark'
 

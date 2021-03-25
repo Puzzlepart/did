@@ -72,6 +72,7 @@ export class NotificationModel {
   }
 }
 
-export interface IUserNotificationsState {
-  showPanel?: boolean
+export interface IUserNotificationsProps {
+  renderAsMenuItem?: boolean
+  iconName?: string
 }

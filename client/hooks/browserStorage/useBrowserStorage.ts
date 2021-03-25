@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { isArray } from 'underscore'
 
 /**
- * Browser storage hook supporting arrays
+ * Browser storage hook supporting `arrays`
  *
- * @remarks Supports arrays for now, but can
- * support objects, string etc in the future
+ * @remarks Supports `arrays` for now, but can
+ * support `objects`, `strings` etc in the future
  * if needed.
  *
  * @category React Hook

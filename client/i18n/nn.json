@@ -403,6 +403,7 @@
     "submitSuccessMessageText": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse **#{{ref}}**.",
     "submitSuccessMessagHeader": "Takk skal du ha!",
     "submitErrorMessageHeader": "Beklager!",
-    "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren somVvi ikke helt forstår."
+    "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren somVvi ikke helt forstår.",
+    "mobileFeedbackText": "Gi tilbakemelding"
   }
 }

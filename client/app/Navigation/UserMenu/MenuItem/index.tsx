@@ -26,10 +26,10 @@ export const MenuItem: React.FC<IMenuItemProps> = (props) => {
         <Icon
           {...props.iconProps}
           style={props.style}
-          className={styles.icon}
+          className={props.iconClassName || styles.icon}
         />
       )}
-      {props.text && <span>{props.text}</span>}
+      {props.text && <span hidden={props.hideText}>{props.text}</span>}
       {props.children}
     </div>
   )

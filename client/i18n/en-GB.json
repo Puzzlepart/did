@@ -404,6 +404,7 @@
     "submitSuccessMessageText": "Your feedback was registered with reference **#{{ref}}**. Thank you for taking your time!",
     "submitSuccessMessagHeader": "Thank you!",
     "submitErrorMessageHeader": "Very sorry!",
-    "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend."
+    "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend.",
+    "mobileFeedbackText": "Give feedback"
   }
 }
