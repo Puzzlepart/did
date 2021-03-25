@@ -26,7 +26,7 @@ export function useToast(
   defaultDuration = 5000,
   defaultProps: IToastProps = {}
 ): UseToast {
-  const [state, setState] = useState<IToastProps>({ hidden: true })
+  const [state, setState] = useState<IToastProps>(null)
 
   /**
    * Set message
@@ -38,7 +38,7 @@ export function useToast(
     const props = { ...defaultProps, ...message }
     setState(props)
     window.setTimeout(() => {
-      setState({ ...props, hidden: true })
+      setState(null)
     }, duration)
   }
 

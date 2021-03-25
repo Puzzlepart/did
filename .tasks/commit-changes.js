@@ -23,7 +23,7 @@ async function commit_changes() {
             type: 'confirm',
             name: 'push',
             message: 'Do you want to push the changes right away?',
-            default: false
+            default: true
         }
     ])
     const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`

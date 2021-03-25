@@ -164,7 +164,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
           className={styles.inputField}
           text={state.editMode ? t('common.save') : t('common.add')}
           onClick={onFormSubmit}
-          disabled={loading || !toast.hidden}
+          disabled={loading || !!toast}
         />
       </div>
     </ConditionalWrapper>

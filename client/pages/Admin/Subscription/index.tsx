@@ -31,7 +31,7 @@ export const SubscriptionSettings: TabComponent = () => {
         <PrimaryButton
           className={styles.saveButton}
           onClick={onSaveSettings}
-          disabled={!toast.hidden || !hasChanges}
+          disabled={!!toast || !hasChanges}
           text={t('common.save')}
         />
       </div>
