@@ -13,7 +13,6 @@ import { Overview } from './Overview'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { StatusBar } from './StatusBar'
 import { SummaryView } from './SummaryView'
-import styles from './Timesheet.module.scss'
 import { TimesheetContext, TimesheetView } from './types'
 
 /**
@@ -27,7 +26,7 @@ export const Timesheet: React.FC = () => {
   return (
     <TimesheetContext.Provider value={context}>
       <GlobalHotKeys {...hotkeysProps}>
-        <div className={styles.root}>
+        <div>
           <ActionBar />
           <ErrorBar error={state.error} />
           <StatusBar />
