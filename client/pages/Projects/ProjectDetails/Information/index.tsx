@@ -1,7 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBarType } from '@fluentui/react'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown/with-html'
@@ -24,7 +23,7 @@ export const Information: React.FC = () => {
           hidden={!state.selected.inactive}
           text={t('projects.inactiveText')}
           iconName='Warning'
-          type={MessageBarType.warning}
+          type={'warning'}
         />
       )}
       {state.selected.description && (

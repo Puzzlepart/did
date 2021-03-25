@@ -1,7 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components/Toast'
-import { MessageBarType } from '@fluentui/react'
 import { useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'
@@ -46,7 +45,7 @@ export function useProjectForm({ props }) {
             projectId: state.projectId,
             name: state.model.name
           }),
-          type: MessageBarType.success
+          type: 'success'
         })
         dispatch({ type: 'RESET_FORM' })
         context.refetch()
@@ -54,7 +53,7 @@ export function useProjectForm({ props }) {
     } catch {
       setToast({
         text: t('projects.createError'),
-        type: MessageBarType.error
+        type: 'error'
       })
     }
   }

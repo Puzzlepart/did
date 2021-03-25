@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
 import { useToast } from 'components/Toast'
 import { getValue, setValue } from 'helpers'
-import { MessageBarType } from '@fluentui/react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'
@@ -43,7 +42,7 @@ export function useSubscriptionSettings() {
     await updateSubscription({ variables })
     setToast({
       text: t('admin.subscriptionSettingsUpdateSuccess'),
-      type: MessageBarType.success
+      type: 'success'
     })
   }
 

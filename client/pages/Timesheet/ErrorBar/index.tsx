@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
-import { MessageBarType } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ErrorBar.module.scss'
@@ -19,7 +18,7 @@ export const ErrorBar: React.FC<IErrorBarProps> = ({ error }) => {
       {
         messageProps = {
           text: t('timesheet.exchangeLicenseErrorMessageText'),
-          type: MessageBarType.error,
+          type: 'error',
           iconName: 'SearchCalendar'
         }
       }
@@ -27,7 +26,7 @@ export const ErrorBar: React.FC<IErrorBarProps> = ({ error }) => {
     default: {
       messageProps = {
         text: t('timesheet.errorMessageText'),
-        type: MessageBarType.error
+        type: 'error'
       }
     }
   }

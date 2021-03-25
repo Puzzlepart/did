@@ -1,5 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import { IMessageBarProps, MessageBarType } from '@fluentui/react'
+import { IMessageBarProps } from '@fluentui/react'
+
+export type UserMessageType = 'success' | 'info' | 'warning' | 'error' | 'severeWarning'
 
 /**
  * @category UserMessage
@@ -28,9 +30,9 @@ export interface IUserMessageProps extends IMessageBarProps {
   onDismiss?: () => void
 
   /**
-   * Type (info, warning, erro etc)
+   * Type info, warning, error etc
    */
-  type?: MessageBarType
+  type?: UserMessageType
 
   /**
    * Icon to use if not default for the type

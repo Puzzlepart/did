@@ -50,6 +50,23 @@ export function useSettingsConfiguration() {
       type: 'bool',
       hidden: isMobile,
       reloadAfterSave: true
+    },
+    {
+      key: ['configuration', 'ui', 'theme'],
+      label: t('common.uiThemeLabel'),
+      type: 'dropdown',
+      options: [
+        {
+          key: 'light',
+          text: t('common.light-theme')
+        },
+        {
+          key: 'dark',
+          text: t('common.dark-theme')
+        }
+      ],
+      reloadAfterSave: true,
+      hidden: true
     }
   ])
 }

@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { ActionButton } from '@fluentui/react'
 import { EventList, UserColumn, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
-import { ActionButton, MessageBarType } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
@@ -29,7 +29,7 @@ export const TimeEntries: React.FC = () => {
       </div>
       {error && (
         <UserMessage
-          type={MessageBarType.error}
+          type={'error'}
           text={t('projects.timeEntriesErrorText')}
         />
       )}

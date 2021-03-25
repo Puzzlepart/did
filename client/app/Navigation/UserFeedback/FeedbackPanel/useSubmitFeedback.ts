@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
+import { IPanelProps } from '@fluentui/react'
+import { IButtonProps } from '@fluentui/react/lib/Button'
 import { IUserMessageProps } from 'components'
 import { useToast } from 'components/Toast'
-import { IPanelProps, MessageBarType } from '@fluentui/react'
-import { IButtonProps } from '@fluentui/react/lib/Button'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from 'types'
@@ -42,13 +42,13 @@ export const useSubmitFeedback = (
         setToast({
           headerText: t('feedback.submitSuccessMessagHeader'),
           text: t('feedback.submitSuccessMessageText', result),
-          type: MessageBarType.success
+          type: 'success'
         })
       } else {
         setToast({
           headerText: t('feedback.submitErrorMessageHeader'),
           text: t('feedback.submitErrorMessageText'),
-          type: MessageBarType.severeWarning
+          type: 'severeWarning'
         })
       }
       panel.onDismiss()
