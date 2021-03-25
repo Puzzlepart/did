@@ -6,7 +6,7 @@
  * @module /
  */
 import { ApolloProvider } from '@apollo/client'
-import { ThemeProvider } from '@fluentui/react-theme-provider'
+import { ThemeProvider } from '@fluentui/react'
 import { initializeIcons } from '@uifabric/icons'
 import { IAppProps } from 'app/types'
 import 'core-js/stable'

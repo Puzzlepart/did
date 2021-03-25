@@ -1,3 +1,5 @@
+import { Theme } from '@fluentui/react'
+
 export default {
     palette: {
       themePrimary: '#0078d4',
@@ -23,4 +25,4 @@ export default {
       black: '#1d1d1d',
       white: '#ffffff'
     }
-  }
+  } as Theme
