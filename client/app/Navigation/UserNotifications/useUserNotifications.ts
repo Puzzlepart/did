@@ -9,8 +9,7 @@ import { IUserNotificationsState, NotificationModel } from './types'
  */
 export const useUserNotifications = () => {
   const [state, dispatch] = useState<IUserNotificationsState>({})
-  const app = useAppContext()
-  const { data } = app.notifications
+  const { notifications } = useAppContext()
 
   const showPanel = () => dispatch({ ...state, showPanel: true })
   const dismissPanel = () => dispatch({ ...state, showPanel: false })
@@ -22,14 +21,14 @@ export const useUserNotifications = () => {
     initialValue: []
   })
 
-  const notifications = data
+  const notifications_ = notifications.data
     .map((n) => new NotificationModel(n))
     .filter((n) => !dismissedIds.includes(n.id))
 
-  const dismissedCount = data.length - notifications.length
+  const dismissedCount = notifications.data.length - notifications_.length
 
   return {
-    notifications,
+    notifications: notifications_,
     dismissedCount,
     panelOpen: state.showPanel,
     showPanel,

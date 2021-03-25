@@ -8,6 +8,7 @@ import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from '../UserFeedback'
 import { UserNotifications } from '../UserNotifications'
+import { useUserNotifications } from '../UserNotifications/useUserNotifications'
 import { Divider } from './Divider'
 import { MenuItem } from './MenuItem'
 import styles from './UserMenu.module.scss'
@@ -23,8 +24,10 @@ export const UserMenu: React.FC = () => {
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
 
-  if (!subscription) return null
+  const {notifications} = useUserNotifications()
 
+  // eslint-disable-next-line no-console
+  console.log(notifications)
   return (
     <>
       <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
