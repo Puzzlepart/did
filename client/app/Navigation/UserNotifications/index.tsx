@@ -11,9 +11,9 @@ import { useUserNotifications } from './useUserNotifications'
 /**
  * @category Function Component
  */
-export const UserNotifications: React.FC = () => {
+export const UserNotifications: React.FC<{ mobile?: boolean }> = ({ mobile }) => {
   const context = useUserNotifications()
-  if(isMobile) return null
+  if (isMobile && !mobile) return null
   return (
     <UserNotificationsContext.Provider value={context}>
       <div className={styles.root} onClick={context.showPanel}>

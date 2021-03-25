@@ -6,6 +6,8 @@ import React, { useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
+import { UserFeedback } from '../UserFeedback'
+import { UserNotifications } from '../UserNotifications'
 import { Divider } from './Divider'
 import { MenuItem } from './MenuItem'
 import styles from './UserMenu.module.scss'
@@ -79,6 +81,10 @@ export const UserMenu: React.FC = () => {
           </span>
           <Divider />
           <UserSettings />
+          <Divider />
+          <UserNotifications mobile={true} />
+          <Divider />
+          <UserFeedback mobile={true} />
           <Divider />
           <MenuItem
             href='/auth/signout'

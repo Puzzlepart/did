@@ -8,9 +8,9 @@ import styles from './UserFeedback.module.scss'
 /**
  * @category Function Component
  */
-export const UserFeedback: React.FC = () => {
+export const UserFeedback: React.FC<{mobile?: boolean}> = ({mobile}) => {
   const [isOpen, setIsOpen] = useState(false)
-  if(isMobile) return null
+  if(isMobile && !mobile) return null
   return (
     <div className={styles.root} onClick={() => setIsOpen(true)}>
       <a>
