@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Selection, SelectionMode } from 'office-ui-fabric-react'
+import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import { first } from 'underscore'
 import useListReducer, { PROPS_UPDATED } from './reducer'
@@ -20,7 +20,7 @@ export function useList({ props }: UseList) {
   const [state, dispatch] = useListReducer({
     origItems: props.items || [],
     items: props.items || [],
-    searchTerm: null
+    searchTerm: ''
   })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,8 +42,6 @@ export function useList({ props }: UseList) {
 
   const [groups, items] = useListGroups([...state.items], props.listGroupProps)
 
-  const [delay, transitionDuration] = props.fadeIn || [0, 0]
-
   const listProps = useListProps({
     props,
     state,
@@ -54,8 +52,6 @@ export function useList({ props }: UseList) {
   })
 
   return {
-    delay,
-    transitionDuration,
     listProps
   }
 }

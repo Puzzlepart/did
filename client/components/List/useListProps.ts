@@ -9,7 +9,7 @@ import {
   IObjectWithKey,
   Selection,
   SelectionMode
-} from 'office-ui-fabric-react'
+} from '@fluentui/react'
 import React from 'react'
 import { AnyAction } from 'redux'
 import { filter } from 'underscore'
@@ -61,7 +61,8 @@ export function useListProps({
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
       ...props.listGroupRenderProps,
-      onRenderHeader: ListGroupHeader
+      onRenderHeader: ListGroupHeader,
+      
     },
     onRenderItemColumn: (item: any, index: number, column: IColumn) => {
       if (!!column.onRender) return column.onRender(item, index, column)

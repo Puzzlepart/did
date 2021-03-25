@@ -10,7 +10,7 @@ import {
   ISearchBoxProps,
   IShimmeredDetailsListProps,
   SelectionMode
-} from 'office-ui-fabric-react'
+} from '@fluentui/react'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 /**
@@ -118,13 +118,6 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Callback to render the column header
    */
   onRenderColumnHeader?: IRenderFunction<IDetailsColumnRenderTooltipProps>
-
-  /**
-   * Fade in properties used by the FadeIn component (react-fade-in)
-   *
-   * [delay, transitionDuration]
-   */
-  fadeIn?: [number, number]
 
   /**
    * Filters

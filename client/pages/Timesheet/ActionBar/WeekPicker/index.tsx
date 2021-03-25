@@ -7,7 +7,7 @@ import {
   DirectionalHint,
   FirstWeekOfYear,
   FocusTrapZone
-} from 'office-ui-fabric-react'
+} from '@fluentui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SET_SCOPE } from '../../reducer/actions'
@@ -51,7 +51,6 @@ export const WeekPicker: React.FC = () => {
             showWeekNumbers={true}
             firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
             dateRangeType={DateRangeType.Week}
-            autoNavigateOnSelection={true}
             value={state.scope.startDate.jsDate}
           />
         </FocusTrapZone>

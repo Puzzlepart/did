@@ -6,17 +6,19 @@
  * @module /
  */
 import { ApolloProvider } from '@apollo/client'
+import { ThemeProvider } from '@fluentui/react'
 import { initializeIcons } from '@uifabric/icons'
 import { IAppProps } from 'app/types'
 import 'core-js/stable'
 import $date from 'DateUtils'
 import i18next from 'i18next'
-import * as React from 'react'
-import * as ReactDom from 'react-dom'
+import React from 'react'
+import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { App, ContextUser } from './app'
 import { $usercontext, client } from './graphql'
 import './i18n'
+import { lightTheme } from './theme'
 
 /**
  * Bootstrapping the App
@@ -51,10 +53,12 @@ export const boostrap = async () => {
   $date.setup(init.user.preferredLanguage)
   i18next.changeLanguage(init.user.preferredLanguage)
 
-  ReactDom.render(
-    <ApolloProvider client={client}>
-      <App {...init} />
-    </ApolloProvider>,
+  render(
+    <ThemeProvider applyTo='body' theme={lightTheme}>
+      <ApolloProvider client={client}>
+        <App {...init} />
+      </ApolloProvider>
+    </ThemeProvider>,
     document.querySelector('#app')
   )
 }

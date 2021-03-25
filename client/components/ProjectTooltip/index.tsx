@@ -1,12 +1,12 @@
 /* eslint-disable tsdoc/syntax */
-import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react'
+import { TooltipDelay, TooltipHost } from '@fluentui/react'
 import React from 'react'
 import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'
 
 /**
  * Shows more details about the project in a
- * `<TooltipHost />` from `office-ui-fabric-react`
+ * `<TooltipHost />` from `@fluentui/react`
  *
  * @category Function Component
  */

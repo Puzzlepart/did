@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon, Link } from 'office-ui-fabric-react'
+import { Icon, Link } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './EditLink.module.scss'
@@ -7,7 +7,7 @@ import { IEditLinkProps } from './types'
 
 /**
  * Renders a edit link using `<Icon />` and `<Link />`
- * from `office-ui-fabric-react`
+ * from `@fluentui/react`
  *
  * @category Function Component
  */
