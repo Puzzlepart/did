@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { IListProps } from 'components/List/types'
 import { IColumn } from '@fluentui/react'
+import { IListProps } from 'components/List/types'
 import { HTMLProps } from 'react'
 
 /**

@@ -1,4 +1,3 @@
-import { List } from 'components'
 import {
   CheckboxVisibility,
   Panel,
@@ -6,6 +5,7 @@ import {
   PrimaryButton,
   SelectionMode
 } from '@fluentui/react'
+import { List } from 'components'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'

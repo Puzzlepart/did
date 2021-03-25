@@ -1,5 +1,10 @@
 import { Icon } from '@fluentui/react'
-import { ProjectLink, ProjectTooltip, UserMessage, UserMessageType } from 'components'
+import {
+  ProjectLink,
+  ProjectTooltip,
+  UserMessage,
+  UserMessageType
+} from 'components'
 import { TFunction } from 'i18next'
 import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
@@ -19,7 +24,10 @@ import { IProjectColumnProps } from './types'
  * @param code - Error code
  * @param t - Translate function
  */
-function getErrorMessage(code: string, t: TFunction): [string, UserMessageType] {
+function getErrorMessage(
+  code: string,
+  t: TFunction
+): [string, UserMessageType] {
   switch (code) {
     case 'PROJECT_INACTIVE':
       return [t('timesheet.projectInactiveErrorText'), 'error']

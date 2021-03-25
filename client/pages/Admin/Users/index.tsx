@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { List, TabComponent } from 'components'
 import { Spinner } from '@fluentui/react'
+import { List, TabComponent } from 'components'
 import React from 'react'
 import { isEmpty } from 'underscore'
 import { AddMultiplePanel } from './AddMultiplePanel'

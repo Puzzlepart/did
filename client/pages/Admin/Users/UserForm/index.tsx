@@ -1,5 +1,5 @@
-import { Autocomplete } from 'components'
 import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
+import { Autocomplete } from 'components'
 import React from 'react'
 import { omit } from 'underscore'
 import { RolePicker } from './RolePicker'

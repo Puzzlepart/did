@@ -1,5 +1,5 @@
-import { EntityLabel } from 'components/EntityLabel'
 import { Icon } from '@fluentui/react'
+import { EntityLabel } from 'components/EntityLabel'
 import React from 'react'
 import { LabelObject as Label } from 'types'
 import { isEmpty } from 'underscore'

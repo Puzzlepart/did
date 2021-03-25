@@ -1,5 +1,4 @@
 /* eslint-disable tsdoc/syntax */
-import { getValue } from 'helpers'
 import {
   CheckboxVisibility,
   ConstrainMode,
@@ -10,6 +9,7 @@ import {
   Selection,
   SelectionMode
 } from '@fluentui/react'
+import { getValue } from 'helpers'
 import React from 'react'
 import { AnyAction } from 'redux'
 import { filter } from 'underscore'
@@ -61,8 +61,7 @@ export function useListProps({
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
       ...props.listGroupRenderProps,
-      onRenderHeader: ListGroupHeader,
-      
+      onRenderHeader: ListGroupHeader
     },
     onRenderItemColumn: (item: any, index: number, column: IColumn) => {
       if (!!column.onRender) return column.onRender(item, index, column)

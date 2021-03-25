@@ -1,5 +1,5 @@
-import { SearchProject, UserMessage } from 'components'
 import { MessageBarButton, Panel } from '@fluentui/react'
+import { SearchProject, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './MatchEventPanel.module.scss'

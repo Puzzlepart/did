@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { TFunction } from 'i18next'
 import { format, IColumn } from '@fluentui/react'
+import { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'
 import { isArray } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'

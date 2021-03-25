@@ -13,7 +13,7 @@ import { IUserMessageProps } from './types'
  *
  * @category Function Component
  */
-export function useUserMessage (props: IUserMessageProps) {
+export function useUserMessage(props: IUserMessageProps) {
   const messageBarStyles: IStyleFunctionOrObject<
     IMessageBarStyleProps,
     IMessageBarStyles

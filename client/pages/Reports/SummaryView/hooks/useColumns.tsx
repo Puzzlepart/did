@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IListColumn, IListColumnData } from 'components/List/types'
-import { useUserListColumn } from 'components/UserColumn'
-import $date from 'DateUtils'
 import {
   IColumn,
   IDetailsColumnRenderTooltipProps,
   PersonaSize
 } from '@fluentui/react'
+import { IListColumn, IListColumnData } from 'components/List/types'
+import { useUserListColumn } from 'components/UserColumn'
+import $date from 'DateUtils'
 import React, { useContext, useMemo } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

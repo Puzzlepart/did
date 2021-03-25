@@ -1,7 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { IMessageBarProps } from '@fluentui/react'
 
-export type UserMessageType = 'success' | 'info' | 'warning' | 'error' | 'severeWarning'
+export type UserMessageType =
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'severeWarning'
 
 /**
  * @category UserMessage

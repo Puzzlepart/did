@@ -1,5 +1,5 @@
-import { ProjectTooltip } from 'components'
 import { IColumn } from '@fluentui/react'
+import { ProjectTooltip } from 'components'
 import React from 'react'
 import { capitalize } from 'underscore.string'
 import { TimesheetScope } from '../TimesheetScope'

@@ -36,10 +36,7 @@ export const Home: PageComponent = () => {
         />
       )}
       {isEmpty(Object.keys(providers)) && (
-        <UserMessage
-          type='warning'
-          text={t('common.signInDisabledMessage')}
-        />
+        <UserMessage type='warning' text={t('common.signInDisabledMessage')} />
       )}
       {!subscription && !error && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>

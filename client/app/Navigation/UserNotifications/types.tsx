@@ -1,4 +1,4 @@
-import { IIconProps} from '@fluentui/react'
+import { IIconProps } from '@fluentui/react'
 import { IUserMessageProps, UserMessageType } from 'components/UserMessage'
 import { TFunction } from 'i18next'
 import { Notification } from 'types'

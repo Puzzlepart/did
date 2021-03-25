@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { IGroup } from '@fluentui/react'
 import * as arraySort from 'array-sort'
 import { getValue as get } from 'helpers'
-import { IGroup } from '@fluentui/react'
 import { isEmpty, unique } from 'underscore'
 import { IListGroupProps } from './types'
 

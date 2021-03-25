@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
+import { PersonaSize } from '@fluentui/react'
 import { IconText } from 'components'
 import { EditLink } from 'components/EditLink'
 import { IListColumn } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
-import { PersonaSize } from '@fluentui/react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

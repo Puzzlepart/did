@@ -28,10 +28,7 @@ export const TimeEntries: React.FC = () => {
         />
       </div>
       {error && (
-        <UserMessage
-          type={'error'}
-          text={t('projects.timeEntriesErrorText')}
-        />
+        <UserMessage type={'error'} text={t('projects.timeEntriesErrorText')} />
       )}
       {isEmpty(timeentries) && !loading && (
         <UserMessage text={t('projects.noTimeEntriesText')} />

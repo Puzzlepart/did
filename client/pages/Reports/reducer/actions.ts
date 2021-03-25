@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { QueryResult } from '@apollo/client'
+import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroupProps } from 'components/List/types'
-import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
 import { IReportsSavedFilter } from '../types'
 
 /**

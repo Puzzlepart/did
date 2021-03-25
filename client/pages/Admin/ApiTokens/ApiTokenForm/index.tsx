@@ -1,10 +1,5 @@
+import { DefaultButton, Dropdown, Panel, TextField } from '@fluentui/react'
 import { DateObject } from 'DateUtils'
-import {
-  DefaultButton,
-  Dropdown,
-  Panel,
-  TextField
-} from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'

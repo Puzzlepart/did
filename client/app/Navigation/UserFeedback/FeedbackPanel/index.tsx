@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { Toast } from 'components'
 import {
   ChoiceGroup,
   DefaultButton,
@@ -11,6 +10,7 @@ import {
   PrimaryButton,
   TextField
 } from '@fluentui/react'
+import { Toast } from 'components'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './FeedbackPanel.module.scss'
