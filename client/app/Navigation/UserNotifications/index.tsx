@@ -2,9 +2,9 @@
 import { Icon } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { UserNotificationsContext } from './context'
+import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
 import { IUserNotificationsProps } from './types'
 import styles from './UserNotifications.module.scss'
@@ -35,11 +35,7 @@ export const UserNotifications: React.FC<IUserNotificationsProps> = ({ renderAsM
             <div className={styles.icon}>
               <Icon iconName={iconName} />
             </div>
-            <div
-              style={{ opacity: isEmpty(context.notifications) ? 0 : 1 }}
-              className={styles.count}>
-              {context.notifications.length}
-            </div>
+            <NotificationIndicator />
           </div>
         )
       }

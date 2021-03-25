@@ -8,7 +8,7 @@ import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from '../UserFeedback'
 import { UserNotifications } from '../UserNotifications'
-import { useUserNotifications } from '../UserNotifications/useUserNotifications'
+import { NotificationIndicator } from '../UserNotifications/NotificationIndicator'
 import { Divider } from './Divider'
 import { MenuItem } from './MenuItem'
 import styles from './UserMenu.module.scss'
@@ -23,11 +23,6 @@ export const UserMenu: React.FC = () => {
   const { user, subscription } = useAppContext()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
-
-  const {notifications} = useUserNotifications()
-
-  // eslint-disable-next-line no-console
-  console.log(notifications)
   return (
     <>
       <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
@@ -45,6 +40,9 @@ export const UserMenu: React.FC = () => {
             styles={{ root: { color: 'white', marginLeft: 6 } }}
           />
         </span>
+        <MobileView renderWithFragment={true}>
+          <NotificationIndicator />
+        </MobileView>
       </span>
       <Callout
         hidden={menuHidden}

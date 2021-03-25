@@ -2,7 +2,7 @@
 import { useAppContext } from 'AppContext'
 import { description, name } from 'package'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
+import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { useAppClassName } from '../useAppClassName'
 import styles from './Navigation.module.scss'
@@ -35,10 +35,10 @@ export const Navigation: React.FC = () => {
           ))}
         </ul>
         <ul className={styles.navRight} hidden={!isAuthenticated}>
-          <span hidden={isMobile}>
+          <BrowserView renderWithFragment={true}>
             <UserFeedback />
             <UserNotifications />
-          </span>
+          </BrowserView>
           <UserMenu />
         </ul>
       </div>
