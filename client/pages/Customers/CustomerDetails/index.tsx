@@ -33,9 +33,7 @@ export const CustomerDetails: React.FC = () => {
       )}
       <div>
         {error && (
-          <UserMessage type='error'>
-            {t('common.genericErrorText')}
-          </UserMessage>
+          <UserMessage type='error'>{t('common.genericErrorText')}</UserMessage>
         )}
         {!error && (
           <ProjectList

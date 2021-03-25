@@ -8,6 +8,10 @@ All are built using React Function components and Hooks.
 
 ## Table of contents
 
+### References
+
+- [useReportsQueries](pages.md#usereportsqueries)
+
 ### Namespaces
 
 - [Home](pages.home.md)
@@ -110,7 +114,6 @@ All are built using React Function components and Hooks.
 - [lastYearQuery](pages.md#lastyearquery)
 - [summaryQuery](pages.md#summaryquery)
 - [useQueries](pages.md#usequeries)
-- [useReportsQueries](pages.md#usereportsqueries)
 
 ### Reports Hooks Functions
 
@@ -123,6 +126,12 @@ All are built using React Function components and Hooks.
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
+
+## References
+
+### useReportsQueries
+
+Renames and exports: [useQueries](pages.md#usequeries)
 
 ## Other Type aliases
 
@@ -278,7 +287,7 @@ ___
 
 • `Const` **Information**: React.FC
 
-Defined in: [pages/Projects/ProjectDetails/Information/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L16)
+Defined in: [pages/Projects/ProjectDetails/Information/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L15)
 
 ___
 
@@ -573,18 +582,6 @@ ___
 ### useQueries
 
 ▸ **useQueries**(): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
-
-Use queries
-
-**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
-
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:189](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L189)
-
-___
-
-### useReportsQueries
-
-▸ **useReportsQueries**(): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
 Use queries
 

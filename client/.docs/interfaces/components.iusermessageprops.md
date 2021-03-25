@@ -32,7 +32,7 @@
 
 Container style
 
-Defined in: [components/UserMessage/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L43)
+Defined in: [components/UserMessage/types.tsx:45](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L45)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 To flex the message center, speficy a min height
 
-Defined in: [components/UserMessage/types.tsx:48](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L48)
+Defined in: [components/UserMessage/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L50)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 Header text to show in **bold** _slightly larger_ font
 
-Defined in: [components/UserMessage/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L11)
+Defined in: [components/UserMessage/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L13)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 Icon to use if not default for the type
 
-Defined in: [components/UserMessage/types.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L38)
+Defined in: [components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 Styles for the inner part of the message
 
-Defined in: [components/UserMessage/types.tsx:53](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L53)
+Defined in: [components/UserMessage/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L55)
 
 ___
 
@@ -94,11 +94,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [components/UserMessage/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L23)
+Defined in: [components/UserMessage/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L25)
 
 Overrides: void
 
-Defined in: [components/UserMessage/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L23)
+Defined in: [components/UserMessage/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L25)
 
 ___
 
@@ -114,11 +114,11 @@ On dismiss handler for the message
 
 **Returns:** *void*
 
-Defined in: [components/UserMessage/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L28)
+Defined in: [components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
 
 Overrides: void
 
-Defined in: [components/UserMessage/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L28)
+Defined in: [components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
 
 ___
 
@@ -130,14 +130,14 @@ Text to show in the message
 
 **`remarks`** Supports markdown
 
-Defined in: [components/UserMessage/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L18)
+Defined in: [components/UserMessage/types.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L20)
 
 ___
 
 ### type
 
-• `Optional` **type**: MessageBarType
+• `Optional` **type**: [*UserMessageType*](../modules/components.md#usermessagetype)
 
-Type (info, warning, erro etc)
+Type info, warning, error etc
 
-Defined in: [components/UserMessage/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L33)
+Defined in: [components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)

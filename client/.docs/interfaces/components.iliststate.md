@@ -26,7 +26,7 @@ Name | Default |
 
 Current items
 
-Defined in: [components/List/types.tsx:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L162)
+Defined in: [components/List/types.tsx:155](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L155)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 Original items
 
-Defined in: [components/List/types.tsx:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L157)
+Defined in: [components/List/types.tsx:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L150)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 Search term
 
-Defined in: [components/List/types.tsx:152](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L152)
+Defined in: [components/List/types.tsx:145](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L145)

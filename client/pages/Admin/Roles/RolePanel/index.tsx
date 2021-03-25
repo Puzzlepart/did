@@ -1,11 +1,6 @@
+import { DefaultButton, Panel, PrimaryButton, TextField } from '@fluentui/react'
 import { UserMessage } from 'components'
 import { IconPicker } from 'components/IconPicker'
-import {
-  DefaultButton,
-  Panel,
-  PrimaryButton,
-  TextField
-} from '@fluentui/react'
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'

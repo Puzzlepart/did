@@ -20,7 +20,6 @@
 - [columns](pages.iprojectlistprops.md#columns)
 - [commandBar](pages.iprojectlistprops.md#commandbar)
 - [enableShimmer](pages.iprojectlistprops.md#enableshimmer)
-- [fadeIn](pages.iprojectlistprops.md#fadein)
 - [filters](pages.iprojectlistprops.md#filters)
 - [headerClassName](pages.iprojectlistprops.md#headerclassname)
 - [height](pages.iprojectlistprops.md#height)
@@ -85,20 +84,6 @@ Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blo
 
 ___
 
-### fadeIn
-
-• `Optional` **fadeIn**: [*number*, *number*]
-
-Fade in properties used by the FadeIn component (react-fade-in)
-
-[delay, transitionDuration]
-
-Inherited from: [IListProps](components.ilistprops.md).[fadeIn](components.ilistprops.md#fadein)
-
-Defined in: [components/List/types.tsx:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L127)
-
-___
-
 ### filters
 
 • `Optional` **filters**: *object*
@@ -109,7 +94,7 @@ Filters
 
 Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
 
-Defined in: [components/List/types.tsx:132](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L132)
+Defined in: [components/List/types.tsx:125](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L125)
 
 ___
 
@@ -121,7 +106,7 @@ Overriding class name for header
 
 Inherited from: [IListProps](components.ilistprops.md).[headerClassName](components.ilistprops.md#headerclassname)
 
-Defined in: [components/List/types.tsx:142](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L142)
+Defined in: [components/List/types.tsx:135](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L135)
 
 ___
 
@@ -145,7 +130,7 @@ Hidden
 
 Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
 
-Defined in: [components/List/types.tsx:137](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L137)
+Defined in: [components/List/types.tsx:130](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L130)
 
 ___
 

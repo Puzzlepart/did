@@ -1,6 +1,3 @@
-import { ColorPickerField } from 'components'
-import { EntityLabel } from 'components/EntityLabel'
-import { IconPicker } from 'components/IconPicker'
 import {
   Label,
   Panel,
@@ -8,6 +5,9 @@ import {
   PrimaryButton,
   TextField
 } from '@fluentui/react'
+import { ColorPickerField } from 'components'
+import { EntityLabel } from 'components/EntityLabel'
+import { IconPicker } from 'components/IconPicker'
 import React from 'react'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'

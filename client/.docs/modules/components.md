@@ -67,6 +67,7 @@ Reusable React Function components.
 - [IHotkeyModal](components.md#ihotkeymodal)
 - [TabComponent](components.md#tabcomponent)
 - [TabContainerComponent](components.md#tabcontainercomponent)
+- [UserMessageType](components.md#usermessagetype)
 
 ### Toast Type aliases
 
@@ -165,6 +166,14 @@ Defined in: [components/TabContainer/types.ts:81](https://github.com/Puzzlepart/
 
 ___
 
+### UserMessageType
+
+Ƭ **UserMessageType**: *success* \| *info* \| *warning* \| *error* \| *severeWarning*
+
+Defined in: [components/UserMessage/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L4)
+
+___
+
 ## Toast Type aliases
 
 ### IToastProps
@@ -180,7 +189,7 @@ Defined in: [components/Toast/types.tsx:7](https://github.com/Puzzlepart/did/blo
 • `Const` **Autocomplete**: *React.FC*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
 
 Autocomplete component using `<SearchBox />`, `<Callout />`,
-`<FocusZone />` and `<List />` from `office-ui-fabric-react`.
+`<FocusZone />` and `<List />` from ``.
 
 Defined in: [components/Autocomplete/Autocomplete.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L23)
 
@@ -223,7 +232,7 @@ ___
 • `Const` **EditLink**: *React.FC*<IEditLinkProps\>
 
 Renders a edit link using `<Icon />` and `<Link />`
-from `office-ui-fabric-react`
+from `@fluentui/react`
 
 Defined in: [components/EditLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L14)
 
@@ -321,7 +330,7 @@ ___
 
 • `Const` **List**: *React.FC*<[*IListProps*](../interfaces/components.ilistprops.md)\>
 
-List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
+List component using `ShimmeredDetailsList` from `@fluentui/react`.
 
 Supports list groups, selection, search box
 and custom column headers.
@@ -339,7 +348,7 @@ Used by the following components:
 * `<Reports />`
 * `<Timesheet />` => `<SummaryView />`
 
-Defined in: [components/List/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L31)
+Defined in: [components/List/index.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L30)
 
 ___
 
@@ -367,7 +376,7 @@ ___
 • `Const` **ProjectTooltip**: *React.FC*<IProjectTooltipProps\>
 
 Shows more details about the project in a
-`<TooltipHost />` from `office-ui-fabric-react`
+`<TooltipHost />` from `@fluentui/react`
 
 Defined in: [components/ProjectTooltip/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L13)
 
@@ -440,7 +449,7 @@ ___
 A component that supports a `<MessageBar />` with
 markdown using `react-markdown`.
 
-Defined in: [components/UserMessage/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L19)
+Defined in: [components/UserMessage/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L15)
 
 ___
 
@@ -473,7 +482,7 @@ Defined in: [components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/d
 ▸ `Const`**DeleteLink**(`__namedParameters`: *IDeleteLinkProps*): *Element*
 
 Renders a delete link using `<Icon />` and `<Link />`
-from `office-ui-fabric-react`
+from `@fluentui/react`
 
 #### Parameters:
 
@@ -564,9 +573,7 @@ Name | Type |
 
 Name | Type |
 :------ | :------ |
-`delay` | *number* |
 `listProps` | [*IListProps*](../interfaces/components.ilistprops.md)<any\> |
-`transitionDuration` | *number* |
 
 Defined in: [components/List/useList.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L19)
 

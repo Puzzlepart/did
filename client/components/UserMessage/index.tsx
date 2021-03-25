@@ -45,4 +45,3 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
 
 export * from './types'
 export * from './useMessage'
-

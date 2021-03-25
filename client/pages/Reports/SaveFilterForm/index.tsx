@@ -1,11 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
 import { getIcons } from 'common/icons'
 import { IconPicker } from 'components'
-import {
-  DefaultButton,
-  IContextualMenuItem,
-  TextField
-} from '@fluentui/react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'

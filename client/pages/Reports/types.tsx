@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
 import { IListGroupProps } from 'components/List/types'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
 import { Project, TimesheetPeriodObject, User } from 'types'
 
 /**

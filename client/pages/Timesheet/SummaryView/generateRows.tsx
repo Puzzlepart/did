@@ -1,5 +1,5 @@
-import $date from 'DateUtils'
 import { IColumn } from '@fluentui/react'
+import $date from 'DateUtils'
 import { EventObject, Project } from 'types'
 import { unique } from 'underscore'
 
