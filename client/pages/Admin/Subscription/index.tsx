@@ -14,7 +14,13 @@ import { useSubscriptionSettings } from './useSubscriptionSettings'
 export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
   const [selectedKey, setSelectedKey] = useState('info')
-  const { toast, context, onSaveSettings, sections, hasChanges } = useSubscriptionSettings()
+  const {
+    toast,
+    context,
+    onSaveSettings,
+    sections,
+    hasChanges
+  } = useSubscriptionSettings()
 
   return (
     <SubscriptionContext.Provider value={context}>
