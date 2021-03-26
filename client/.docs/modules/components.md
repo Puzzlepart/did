@@ -324,7 +324,7 @@ ___
 Icon picker using `<Autocomplete />` to select
 icons from `@uifabric/icons`
 
-Defined in: [components/IconPicker/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L17)
+Defined in: [components/IconPicker/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L16)
 
 ___
 
@@ -503,7 +503,7 @@ Defined in: [components/UserColumn/index.tsx:16](https://github.com/Puzzlepart/d
 
 ▸ **useAutocomplete**(`props`: [*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)): *object*
 
-Hook for Autocomplete
+Hook for `<Autocomplete />`
 
 #### Parameters:
 
@@ -526,7 +526,7 @@ Name | Type |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
 `suggestions` | { `data?`: *any* ; `iconName?`: *string* ; `isSelected`: *boolean* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `tag?`: *any* ; `type?`: *string*  }[] |
 
-Defined in: [components/Autocomplete/useAutocomplete.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L15)
+Defined in: [components/Autocomplete/useAutocomplete.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L17)
 
 ___
 
@@ -616,7 +616,7 @@ Name | Type |
 
 **Returns:** [*IListProps*](../interfaces/components.ilistprops.md)
 
-Defined in: [components/List/useListProps.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L32)
+Defined in: [components/List/useListProps.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L31)
 
 ___
 

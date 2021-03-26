@@ -32,7 +32,7 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
     onDismissCallout,
     onSetSelected,
     suggestions,
-    ref,
+    ref
   } = useAutocomplete(props)
 
   return (

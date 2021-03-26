@@ -11,14 +11,17 @@ import { humanize } from 'underscore.string'
  * @category React Hook
  */
 export function useFabricIcons(): ISuggestionItem[] {
-    return useMemo(() =>
-        icons
-            .filter(icon => !!icon.name)
-            .map(({ name }) => ({
-                key: name,
-                text: name,
-                searchValue: [name, humanize(name)].join(' '),
-                iconName: name,
-                data: name
-            })), [])
+  return useMemo(
+    () =>
+      icons
+        .filter((icon) => !!icon.name)
+        .map(({ name }) => ({
+          key: name,
+          text: name,
+          searchValue: [name, humanize(name)].join(' '),
+          iconName: name,
+          data: name
+        })),
+    []
+  )
 }

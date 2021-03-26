@@ -16,6 +16,7 @@ Reusable React Hooks
 - [useArray](hooks.md#usearray)
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
+- [useFabricIcons](hooks.md#usefabricicons)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
 - [useToggle](hooks.md#usetoggle)
@@ -133,6 +134,19 @@ Name | Type |
 `onExport` | () => *Promise*<void\> |
 
 Defined in: [hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
+
+___
+
+### useFabricIcons
+
+▸ **useFabricIcons**(): [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
+
+Returns all icons from [@uifabric/icons](https://www.npmjs.com/package/@uifabric/icons)
+as an array of `ISuggestionItem`
+
+**Returns:** [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
+
+Defined in: [hooks/common/useFabricIcons.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L13)
 
 ___
 
