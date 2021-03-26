@@ -11,7 +11,7 @@
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
-    "commit": "node ./.tasks/commit.js",
+    "commit": "sexy-commits",
     "start": "node ./dist/server/index.js",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
@@ -155,6 +155,7 @@
     "open": "7.2.1",
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "^1.1.1",
+    "sexy-commits": "git+https://github.com/Puzzlepart/sexy-commits.git",
     "typedoc": "^0.20.28",
     "typedoc-plugin-markdown": "^3.5.0",
     "webpack-build-notifier": "2.1.0",
