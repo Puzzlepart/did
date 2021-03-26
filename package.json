@@ -315,6 +315,7 @@
           "test",
           "dev",
           "i18n",
+          "changelog",
           "readme",
           "typo",
           "rename",
@@ -338,79 +339,83 @@
   "gitmoji": {
     "build": [
       "🏗️",
-      "Make architectural changes."
+      "Make architectural changes"
     ],
     "ci": [
       "👷",
-      "Add or update CI build system."
+      "Add or update CI build system"
     ],
     "chore": [
       "💄",
-      "Boring chores."
+      "Boring chores"
     ],
     "docs": [
       "📝",
-      "Added or updated documentation."
+      "Added or updated documentation"
     ],
     "feat": [
       "✨",
-      "Introduced new features."
+      "Introduced new features"
     ],
     "fix": [
       "🐛",
-      "Fixed a bug."
+      "Fixed a bug"
     ],
     "perf": [
       "⚡",
-      "Improved performance."
+      "Improved performance"
     ],
     "refactor": [
       "♻️",
-      "Refactored code."
+      "Refactored code"
     ],
     "revert": [
       "⏪",
-      "Reverted changes."
+      "Reverted changes"
     ],
     "style": [
       "💄",
-      "Added or updated the UI and style files."
+      "Added or updated the UI and style files"
     ],
     "test": [
       "✅",
-      "Add or update CI build system."
+      "Added or updated tests"
     ],
     "dev": [
       "🔨",
-      "Add or update CI build system."
+      "Add or update development scripts"
     ],
     "i18n": [
       "🌐",
-      "Add or update CI build system."
+      "Internationalization and localization"
+    ],
+    "changelog": [
+      "📓",
+      "Updated changelog"
     ],
     "readme": [
       "📝",
-      "Add or update CI build system."
+      "Updated readme"
     ],
     "typo": [
       "✏️",
-      "Add or update CI build system."
+      "Fixed typos"
     ],
     "rename": [
       "🚚",
-      "Add or update CI build system."
+      "Moved or renamed resources (e.g.: files, paths, routes)"
     ],
     "merge": [
       "🔀",
-      "Add or update CI build system."
+      "Merged a branch into this one"
     ],
     "auth": [
       "🛂",
-      "Add or update CI build system."
+      "Worked on code related to authorization, roles and permissions"
     ],
     "syntax": [
       "✏️",
-      "Add or update CI build system."
+      "Adjusted code syntax"
     ]
   }
 }

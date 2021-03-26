@@ -23,7 +23,7 @@ async function commit_changes() {
                     )
                     .map((type_enum) => ({
                         value: type_enum,
-                        name: `${gitmoji[type_enum][0]}\t${type_enum}`
+                        name: gitmoji[type_enum].join('\t')
                     }))
             },
         },
