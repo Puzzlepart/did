@@ -69,7 +69,8 @@ export function useSettingsConfiguration() {
           text: t('common.auto-theme')
         }
       ],
-      reloadAfterSave: true
+      reloadAfterSave: true,
+      hidden: true
     }
   ])
 }
