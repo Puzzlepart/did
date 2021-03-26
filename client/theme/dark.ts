@@ -2,13 +2,15 @@ import { PartialTheme } from '@fluentui/react'
 
 export default {
   semanticColors: {
-    bodyBackground: '#0d1117'
+    bodyBackground: '#0d1117',
+    successBackground: '#393d1b',
+    successText:'#fff'
   },
   palette: {
     themeDarker: '#fff',
     themeDark: '#fff',
     themeDarkAlt: '#dcdcdc',
-    themePrimary: '#dcdcdc',  
+    themePrimary: '#dcdcdc',
     themeSecondary: '#dcdcdc',
     themeTertiary: '#dcdcdc',
     themeLight: '#dcdcdc',

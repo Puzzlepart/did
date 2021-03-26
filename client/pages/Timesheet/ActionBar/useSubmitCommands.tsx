@@ -9,7 +9,6 @@ import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { first, omit } from 'underscore'
 import { TimesheetContext } from '../context'
-import styles from './ActionBar.module.scss'
 
 /**
  * Get base submit item props
@@ -75,7 +74,6 @@ export function useSubmitCommands() {
             'CONFIRM_PERIOD',
             'CheckMark'
           ) as IContextualMenuItem),
-          className: styles.confirmPeriodButton,
           onClick: () => {
             onSubmitPeriod(false)
           },
@@ -87,7 +85,6 @@ export function useSubmitCommands() {
             'UNCONFIRM_PERIOD',
             'Cancel'
           ) as IContextualMenuItem),
-          className: styles.unconfirmPeriodButton,
           onClick: () => {
             onUnsubmitPeriod(false)
           },

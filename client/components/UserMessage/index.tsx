@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { useUserMessage } from './useUserMessage'
+import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
  * A component that supports a `<MessageBar />` with
@@ -14,10 +15,11 @@ import { useUserMessage } from './useUserMessage'
  */
 export const UserMessage: React.FC<IUserMessageProps> = (props) => {
   const { container, message } = useUserMessage(props)
+  const classNames = useUserMessageStyles(props.type)
 
   return (
     <div {...container}>
-      <MessageBar {...message}>
+      <MessageBar {...message} className={classNames.root}>
         <div style={props.innerStyle}>
           {props.headerText && (
             <div className={styles.header}>{props.headerText}</div>
