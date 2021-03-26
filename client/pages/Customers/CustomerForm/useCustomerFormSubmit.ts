@@ -9,13 +9,16 @@ import { useCustomerModel } from './useCustomerModel'
 
 /**
  * Customer form submit
- * 
+ *
  * @param props - Props
  * @param model - Model
- * 
+ *
  * @returns `toast`, `onClick` and `disabled`
  */
-export function useCustomerFormSubmit(props: ICustomerFormProps, model: ReturnType<typeof useCustomerModel>) {
+export function useCustomerFormSubmit(
+  props: ICustomerFormProps,
+  model: ReturnType<typeof useCustomerModel>
+) {
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
   const [toast, setToast] = useToast(8000, { isMultiline: true })
@@ -36,8 +39,7 @@ export function useCustomerFormSubmit(props: ICustomerFormProps, model: ReturnTy
       })
       if (props.panel) {
         setTimeout(props.panel.onSave, 1000)
-      }
-      else {
+      } else {
         setToast({
           text: t('customers.createSuccess', model),
           type: 'success'

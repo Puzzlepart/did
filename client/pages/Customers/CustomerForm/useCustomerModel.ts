@@ -5,9 +5,9 @@ import { useCustomerFormValidation } from './useCustomerFormValidation'
 
 /**
  * Returns the initial model based on `props`
- * 
+ *
  * @param props - Props
- * 
+ *
  * @returns the initial model
  */
 export function useInitialModel(props: ICustomerFormProps): CustomerModel {
@@ -20,9 +20,9 @@ export function useInitialModel(props: ICustomerFormProps): CustomerModel {
 /**
  * Returns the model and functions to update
  * the `key`, `name`, `description` and `icon`
- * 
+ *
  * @param props - Props
- * 
+ *
  * @returns the initial model
  */
 export function useCustomerModel(props: ICustomerFormProps) {
@@ -31,7 +31,8 @@ export function useCustomerModel(props: ICustomerFormProps) {
   const reset = () => setModel(new CustomerModel())
   const setKey = (key: string) => setModel({ ...model, key: key.toUpperCase() })
   const setName = (name: string) => setModel({ ...model, name })
-  const setDescription = (description: string) => setModel({ ...model, description })
+  const setDescription = (description: string) =>
+    setModel({ ...model, description })
   const setIcon = (icon: string) => setModel({ ...model, icon })
 
   const valid = useCustomerFormValidation(model)

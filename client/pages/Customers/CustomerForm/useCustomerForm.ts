@@ -4,7 +4,7 @@ import { useCustomerModel } from './useCustomerModel'
 
 /**
  * Component logic hook for `<CustomerForm />`
- * 
+ *
  * @param props - Props
  * @returns `model` and `submit`
  */
