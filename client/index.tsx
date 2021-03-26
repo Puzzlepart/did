@@ -22,9 +22,9 @@ import './i18n'
 /**
  * Bootstrapping the App
  *
- * * Retrieves context using GraphQL query GET_CONTEXT
- * * Sets up i18n with the user language
- * * Sets up DateUtils with the user language
+ * * Retrieves context using GraphQL query `GET_CONTEXT`
+ * * Sets up `i18n` with the user language
+ * * Sets up `DateUtils` with the user language
  */
 export const boostrap = async () => {
   initializeIcons()
