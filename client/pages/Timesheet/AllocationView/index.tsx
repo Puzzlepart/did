@@ -10,13 +10,11 @@ import {
   BarChart,
   Cell,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis
 } from 'recharts'
 import { useTimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
-import { CustomTooltip } from './CustomTooltip'
 import { useChartConfig } from './useChartConfig'
 import { useChartData } from './useChartData'
 
@@ -56,11 +54,6 @@ export const AllocationView: TabComponent = () => {
                     angle: -90,
                     position: 'insideLeft'
                   }}
-                />
-                <Tooltip
-                  content={({ payload }) => (
-                    <CustomTooltip item={payload} chart={c} />
-                  )}
                 />
                 <Bar
                   dataKey='value'
