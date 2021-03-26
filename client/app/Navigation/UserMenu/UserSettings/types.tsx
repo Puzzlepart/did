@@ -1,20 +1,26 @@
-import { IDropdownOption } from '@fluentui/react'
+import { IDropdownProps, IToggleProps } from '@fluentui/react'
 
-export interface IUserSettingInputProps {
-  user: any
-  setting: IUserSettingInput
-}
-
-export interface IUserSettingInput {
-  key: string | string[]
-  label: string
-  type: 'dropdown' | 'bool'
+export interface IUserSetting extends Pick<React.HtmlHTMLAttributes<HTMLDivElement>, 'hidden'> {
+  fieldName?: string
+  type?: string
   description?: string
-  defaultValue?: any
-  hidden?: boolean
-  reloadAfterSave?: boolean
 }
 
-export interface IUserSettingDropdown extends IUserSettingInput {
-  options: IDropdownOption[]
+export interface IUserSettingDropdown extends IDropdownProps, IUserSetting { }
+export interface IUserSettingToggle extends IToggleProps, IUserSetting { }
+
+export const UserSettingDropdown = (fieldName: string, props: IUserSettingDropdown): IUserSettingDropdown => {
+  return {
+    fieldName,
+    type: 'dropdown',
+    ...props
+  }
+}
+
+export const UserSettingToggle = (fieldName: string, props: IUserSettingToggle): IUserSettingToggle => {
+  return {
+    fieldName,
+    type: 'toggle',
+    ...props
+  }
 }

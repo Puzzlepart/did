@@ -1,8 +1,10 @@
+import { Theme } from '@fluentui/react'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'
 import { Role, User, UserPhoto } from 'types'
 import { contains, pick } from 'underscore'
 import { tryParseJson } from 'utils'
+import { getTheme } from '../theme'
 
 /**
  * `ContextUser` is the user object used for
@@ -16,6 +18,7 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
+  public theme: Theme
 
   /**
    * Constructor for `ContextUser`
@@ -23,12 +26,12 @@ export class ContextUser {
    * Assigns the following properties
    * from the User object:
    *
-   * * id
-   * * displayName
-   * * mail
-   * * role
-   * * startPage
-   * * photo
+   * * `id`
+   * * `displayName`
+   * * `mail`
+   * * `role`
+   * * `startPage`
+   * * `photo`
    *
    * We can't extend the `User` class
    * due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
@@ -43,6 +46,7 @@ export class ContextUser {
         pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
       )
       this.configuration = tryParseJson(_user.configuration, {})
+      this.theme =  getTheme(this.configuration?.ui?.theme)
     }
   }
 

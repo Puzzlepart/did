@@ -17,7 +17,6 @@ export const UserSettings = () => {
     openPanel,
     dismissPanel,
     isOpen,
-    user,
     settings
   } = useUserSettings()
 
@@ -35,8 +34,8 @@ export const UserSettings = () => {
           isOpen={isOpen}
           onDismiss={dismissPanel}
           isLightDismiss={true}>
-          {[...settings].map((s, index) => (
-            <UserSettingInput key={index} user={user} setting={s} />
+          {settings.map((s, index) => (
+            <UserSettingInput key={index} setting={s} />
           ))}
         </Panel>
       </div>

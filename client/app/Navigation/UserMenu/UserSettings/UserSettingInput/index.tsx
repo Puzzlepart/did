@@ -1,51 +1,42 @@
 /* eslint-disable tsdoc/syntax */
-import { Dropdown, Toggle } from '@fluentui/react'
-import get from 'get-value'
+import { Dropdown, IDropdownProps, IToggleProps, Toggle } from '@fluentui/react'
 import React, { useContext } from 'react'
-import { isArray } from 'underscore'
 import { UserSettingsContext } from '../context'
-import { IUserSettingDropdown, IUserSettingInputProps } from '../types'
+import { IUserSetting } from '../types'
 import styles from './UserSettingInput.module.scss'
 
 /**
  * @category UserMenu
  */
-export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
+export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({ setting }) => {
   const { onUpdate } = useContext(UserSettingsContext)
-  const key = isArray(setting.key) ? setting.key.join('.') : setting.key
-  const defaultValue = get(user, key) || setting.defaultValue
   let element: JSX.Element
   switch (setting.type) {
     case 'dropdown':
       {
         element = (
           <Dropdown
-            {...(setting as IUserSettingDropdown)}
-            key={key}
+            {...setting as IDropdownProps}
             onChange={(_event, option) =>
-              onUpdate(setting, option.key.toString(), setting.reloadAfterSave)
+              onUpdate(setting.fieldName, option.key.toString())
             }
-            defaultSelectedKey={defaultValue}
           />
         )
       }
       break
-    case 'bool':
+    case 'toggle':
       {
         element = (
           <Toggle
-            {...setting}
-            key={key}
-            defaultChecked={defaultValue}
+            {...setting as IToggleProps}
             onChange={(_event, bool) =>
-              onUpdate(setting, bool, setting.reloadAfterSave)
+              onUpdate(setting.fieldName, bool)
             }
           />
         )
       }
       break
-    default:
-      element = null
+    default: element = null
   }
 
   return (

@@ -2,30 +2,26 @@ import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { IUserSettingDropdown, IUserSettingInput } from './types'
+import { IUserSetting, UserSettingDropdown, UserSettingToggle } from './types'
 
-export function useSettingsConfiguration() {
+export function useSettingsConfiguration(): IUserSetting[] {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
-  const { pages } = useAppContext()
-  return new Set<IUserSettingInput>([
-    {
-      key: 'startPage',
+  const { pages, getUserConfiguration, user } = useAppContext()
+  return [
+    UserSettingDropdown('startPage', {
       label: t('common.startPageLabel'),
-      type: 'dropdown',
       options: pages
         .filter(({ permission }) => permission && hasPermission(permission))
         .map(({ displayName, path }) => ({
           key: path,
           text: displayName
         })),
-      reloadAfterSave: true
-    } as IUserSettingDropdown,
-    {
-      key: 'preferredLanguage',
+      defaultSelectedKey: user.startPage
+    }),
+    UserSettingDropdown('preferredLanguage', {
       label: t('common.preferredLanguageLabel'),
       description: t('common.preferredLanguageDescription'),
-      type: 'dropdown',
       options: [
         {
           key: 'en-GB',
@@ -40,21 +36,16 @@ export function useSettingsConfiguration() {
           text: 'Norsk (nynorsk)'
         }
       ],
-      reloadAfterSave: true,
-      defaultValue: 'en-GB'
-    } as IUserSettingDropdown,
-    {
-      key: ['configuration', 'ui', 'stickyNavigation'],
+      defaultSelectedKey: user.preferredLanguage || 'en-GB'
+    }),
+    UserSettingToggle('ui.stickyNavigation', {
       label: t('common.stickyNavigationLabel'),
       description: t('common.stickyNavigationDescription'),
-      type: 'bool',
       hidden: isMobile,
-      reloadAfterSave: true
-    },
-    {
-      key: ['configuration', 'ui', 'theme'],
+      defaultChecked: getUserConfiguration('ui.stickyNavigation'),
+    }),
+    UserSettingDropdown('ui.theme', {
       label: t('common.uiThemeLabel'),
-      type: 'dropdown',
       options: [
         {
           key: 'light',
@@ -69,7 +60,8 @@ export function useSettingsConfiguration() {
           text: t('common.auto-theme')
         }
       ],
-      reloadAfterSave: true
-    }
-  ])
+      defaultSelectedKey: getUserConfiguration('ui.theme'),
+      hidden: true
+    })
+  ]
 }
