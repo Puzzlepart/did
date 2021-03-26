@@ -32,7 +32,7 @@ async function commit_changes() {
         if(gitmoji[input.commit_prefix]) {
             commit_message += ` ${gitmoji[input.commit_prefix]}`
         }
-        await exec(`git commit -m "${commit_message}"`)
+        await exec(`git commit -m "${commit_message}" --no-verify`)
         if (input.push) {
             await exec('git pull')
             await exec('git push')
