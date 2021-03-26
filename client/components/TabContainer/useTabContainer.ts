@@ -15,11 +15,12 @@ import { useTabContainerStyles } from './useTabContainerStyles'
  *
  * @returns The `ref` and `styles` to be used by the <TabContainer />`
  * component
+ * 
  * @category TabContainer
  */
 export function useTabContainer(
   props: ITabContainerProps
-): Partial<ITabContainerProps> {
+) {
   const styles = useTabContainerStyles(props)
   const ref = useMobileBreadcrumb({
     level: 2,

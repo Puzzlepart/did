@@ -46,7 +46,8 @@ export function useTabContainerStyles({
     ...link,
     ':before': { display: 'none' },
     ':hover': { backgroundColor: 'transparent' },
-    ':active': { backgroundColor: 'transparent' }
+    ':active': { backgroundColor: 'transparent' },
+    opacity: 1
   }
   if (hideIconsMobile) {
     styles_.icon = { display: 'none' }

@@ -27,6 +27,7 @@ export function useMobileBreadcrumb(props: ITabContainerProps) {
       return itemKey === props.selectedKey
     })
     const nav: IPivotItemProps = current_?.props || current_
+    console.log(items)
     if (state.nav !== nav) {
       dispatch(
         UPDATE_BREADCRUMB([
