@@ -4,7 +4,9 @@ export default {
   semanticColors: {
     bodyBackground: '#0d1117',
     successBackground: '#393d1b',
-    successText:'#fff'
+    successText: '#fff',
+    infoBackground: '#323130',
+    infoText: '#fff'
   },
   palette: {
     themeDarker: '#fff',
