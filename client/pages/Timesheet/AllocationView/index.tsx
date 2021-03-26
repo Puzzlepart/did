@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
+import { SubText } from 'components/SubText'
 import { TabComponent } from 'components/TabContainer/types'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
@@ -10,13 +11,11 @@ import {
   BarChart,
   Cell,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis
 } from 'recharts'
 import { useTimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
-import { CustomTooltip } from './CustomTooltip'
 import { useChartConfig } from './useChartConfig'
 import { useChartData } from './useChartData'
 
@@ -46,7 +45,13 @@ export const AllocationView: TabComponent = () => {
         return (
           <div key={k} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
-            <div className={styles.subTitle}>{c.subTitle}</div>
+            <SubText
+              font='small'
+              style={{
+                margin: '0 0 20px 0',
+                textAlign: 'center'
+              }}
+              text={c.subTitle} />
             <ResponsiveContainer width='100%' height={450}>
               <BarChart className={styles.chart} data={d}>
                 <XAxis interval={0} dataKey='label' />
@@ -56,11 +61,6 @@ export const AllocationView: TabComponent = () => {
                     angle: -90,
                     position: 'insideLeft'
                   }}
-                />
-                <Tooltip
-                  content={({ payload }) => (
-                    <CustomTooltip item={payload} chart={c} />
-                  )}
                 />
                 <Bar
                   dataKey='value'

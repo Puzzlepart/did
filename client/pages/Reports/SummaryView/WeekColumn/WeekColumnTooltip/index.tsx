@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize } from '@fluentui/react'
+import { SubText } from 'components'
 import React from 'react'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'
@@ -19,9 +20,7 @@ export const WeekColumnTooltip: React.FC<IWeekColumnTooltipProps> = (props) => {
           <div className={styles.text}>
             {t('common.weekColumnTooltipTitle', { week, year })}
           </div>
-          <div className={styles.subText}>
-            {month} {year}
-          </div>
+          <SubText text={`${month} ${year}`} />
         </div>
         <Persona
           className={styles.userInfo}

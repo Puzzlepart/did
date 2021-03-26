@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
+import { SubText } from 'components'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ProjectsContext } from '../../context'
@@ -18,7 +19,7 @@ export const Header: React.FC = () => {
       </div>
       <div className={styles.title}>
         <div className={styles.text}>{state.selected.name}</div>
-        <div className={styles.subText}>{state.selected.customer.name}</div>
+        <SubText text={state.selected.customer.name} />
       </div>
       <ProjectActions hidden={isMobile} />
     </div>

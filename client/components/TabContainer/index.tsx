@@ -15,7 +15,7 @@ import { useTabContainer } from './useTabContainer'
  * Adds styles **display: flex** and **flex-wrap: wrap**
  * to make the `<Pivot >` mobile friendly
  *
- * @category Function Component
+ * @category Reusable Component
  */
 export const TabContainer: TabContainerComponent = (props) => {
   const { user } = useAppContext()

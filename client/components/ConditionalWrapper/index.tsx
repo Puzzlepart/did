@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { ReusableComponent } from 'components/types'
 import { HTMLProps, ReactNode } from 'react'
 
 /**
@@ -12,9 +13,9 @@ export interface IConditionalWrapperProps extends HTMLProps<HTMLDivElement> {
 /**
  * Conditionally wraps `children` in `wrapper` based on `condition`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const ConditionalWrapper: React.FC<IConditionalWrapperProps> = ({
+export const ConditionalWrapper: ReusableComponent<IConditionalWrapperProps> = ({
   condition,
   wrapper,
   children

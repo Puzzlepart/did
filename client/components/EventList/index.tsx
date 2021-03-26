@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { List } from 'components'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
@@ -10,9 +11,9 @@ import { useColumns } from './useColumns'
  *
  * Supports property `additionalColumns`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const EventList: React.FC<IEventListProps> = (props) => {
+export const EventList: ReusableComponent<IEventListProps> = (props) => {
   const columns = useColumns(props)
   return (
     <div className={styles.root} hidden={props.hidden}>

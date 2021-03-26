@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
@@ -15,11 +16,11 @@ import { IEntityLabelProps } from './types'
  *
  * @see https://primer.style/components/Label
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const EntityLabel: React.FC<IEntityLabelProps> = ({
+export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
   label
-}: IEntityLabelProps) => {
+}) => {
   const { t } = useTranslation()
   const contrastColor = getContrastColor(label.color)
 

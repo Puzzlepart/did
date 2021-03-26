@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
+import { SubText } from 'components'
 import React from 'react'
 import styles from './ColumnHeader.module.scss'
 
@@ -12,8 +13,10 @@ export const ColumnHeader: React.FC<IDetailsColumnRenderTooltipProps> = (
   return (
     <div className={styles.root}>
       <div className={`${styles.container} ${props.hostClassName}`}>
-        <div className={styles.name}>{props.column.name}</div>
-        <div className={styles.subText}>{props.column.data?.subText}</div>
+        <h5 className={styles.name}>{props.column.name}</h5>
+        <SubText
+          style={{ marginTop: -24 }}
+          text={props.column.data?.subText} />
       </div>
     </div>
   )

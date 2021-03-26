@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { Link, MessageBar } from '@fluentui/react'
+import { Link } from '@fluentui/react'
+import { UserMessage } from 'components'
 import React, { useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -17,14 +18,14 @@ export const UserNotification: React.FC<IUserNotificationProps> = ({
   const { dismissNotification } = useContext(UserNotificationsContext)
   return (
     <FadeIn>
-      <MessageBar
+      <UserMessage
         {...model.messageProps}
-        onDismiss={() => dismissNotification(model.id)}
         className={styles.root}
+        onDismiss={() => dismissNotification(model.id)}
         styles={{ actions: { flexDirection: 'row', paddingLeft: 28 } }}
         actions={<Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>}>
         <span className={styles.text}>{model.text}</span>
-      </MessageBar>
+      </UserMessage>
     </FadeIn>
   )
 }

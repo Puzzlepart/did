@@ -1,5 +1,9 @@
 .root {
   margin: 0;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: 90px;
 
   .header {
     font-size: 22px;

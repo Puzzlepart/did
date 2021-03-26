@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import {
-  CheckboxVisibility,
   IColumn,
   ICommandBarProps,
   IDetailsColumnRenderTooltipProps,
@@ -58,7 +57,7 @@ export interface IListColumn<T = IListColumnData> extends IColumn {
 /**
  * @category List
  */
-export interface IListProps<T = any> extends IShimmeredDetailsListProps {
+export interface IListProps<T = any> extends Omit<IShimmeredDetailsListProps, 'onRenderDetailsHeader'> {
   /**
    * Items
    */
@@ -100,24 +99,9 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   listGroupRenderProps?: IDetailsGroupRenderProps
 
   /**
-   * On render details header
-   */
-  onRenderDetailsHeader?: IRenderFunction<IDetailsHeaderProps>
-
-  /**
    * Command bar props
    */
   commandBar?: ICommandBarProps
-
-  /**
-   * Check box visibility
-   */
-  checkboxVisibility?: CheckboxVisibility
-
-  /**
-   * Callback to render the column header
-   */
-  onRenderColumnHeader?: IRenderFunction<IDetailsColumnRenderTooltipProps>
 
   /**
    * Filters
@@ -130,9 +114,12 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   hidden?: boolean
 
   /**
-   * Overriding class name for header
+   * Column header
    */
-  headerClassName?: string
+   columnHeaderProps?: {
+    className?: string
+    onRender?: IRenderFunction<IDetailsHeaderProps>
+  }
 }
 
 /**

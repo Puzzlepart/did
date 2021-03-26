@@ -1,10 +1,12 @@
+/* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable tsdoc/syntax */
 import {
   CommandBar,
-  ICommandBarProps,
-  IContextualMenuItem
+  ICommandBarProps
 } from '@fluentui/react'
-import React from 'react'
+import { useToggle } from 'hooks'
+import React, { useRef } from 'react'
+import { useTimesheetContext } from '../context'
 import { usePeriodCommands } from './selectPeriodCommands'
 import { useNavigateCommands } from './useNavigateCommands'
 import { useSubmitCommands } from './useSubmitCommands'
@@ -17,20 +19,39 @@ export const ActionBar = () => {
   const navigateCommands = useNavigateCommands()
   const submitCommands = useSubmitCommands()
   const periodCommands = usePeriodCommands()
-  const weekPickerCommand: IContextualMenuItem = {
-    key: 'WEEK_PICKER_COMMAND',
-    onRender: () => <WeekPicker />
-  }
+  const { state } = useTimesheetContext()
+  const [showWeekPicker,toggleWeekPicker] = useToggle(false)
+  const target = useRef(null)
 
   const commandBarProps: ICommandBarProps = {
     styles: { root: { padding: 0 } },
-    items: [...navigateCommands, weekPickerCommand, ...periodCommands],
+    items: [
+      ...navigateCommands,
+      {
+        key: 'TOGGLE_WEEK_PICKER',
+        text: state.scope.timespan,
+        componentRef: target,
+        onClick: toggleWeekPicker,
+        buttonStyles:{
+          flexContainer:{
+            minWidth:200,
+            textAlign:'left'
+          }
+        }
+      },
+      ...periodCommands
+    ],
     farItems: [submitCommands]
   }
 
   return (
     <div>
       <CommandBar {...commandBarProps} />
+      <WeekPicker
+        target={target?.current?._buttonElement?.current}
+        hidden={!showWeekPicker}
+        onDismiss={toggleWeekPicker}
+      />
     </div>
   )
 }

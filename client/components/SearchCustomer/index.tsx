@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
+import { ReusableComponent } from 'components/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
@@ -10,9 +11,9 @@ import { ISearchCustomerProps } from './types'
 /**
  * Search for customers using `<Autocomplete />`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const SearchCustomer: React.FC<ISearchCustomerProps> = (props) => {
+export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (props) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
     fetchPolicy: 'cache-first'

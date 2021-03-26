@@ -9,7 +9,7 @@ import { IEditLinkProps } from './types'
  * Renders a edit link using `<Icon />` and `<Link />`
  * from `@fluentui/react`
  *
- * @category Function Component
+ * @category Reusable Component
  */
 export const EditLink: React.FC<IEditLinkProps> = (props) => {
   const { t } = useTranslation()

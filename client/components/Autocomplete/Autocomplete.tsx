@@ -7,9 +7,11 @@ import {
   List,
   SearchBox
 } from '@fluentui/react'
+import { SubText } from 'components/SubText'
 import React from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
+import { ReusableComponent } from '../types'
 import styles from './Autocomplete.module.scss'
 import { SuggestionItem } from './SuggestionItem'
 import { useAutocomplete } from './useAutocomplete'
@@ -18,9 +20,9 @@ import { useAutocomplete } from './useAutocomplete'
  * Autocomplete component using `<SearchBox />`, `<Callout />`,
  * `<FocusZone />` and `<List />` from ``.
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const Autocomplete: React.FC<IAutocompleteProps> = (props) => {
+export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
   const {
     state,
     className,
@@ -53,9 +55,7 @@ export const Autocomplete: React.FC<IAutocompleteProps> = (props) => {
           onChange={onSearch}
         />
       </div>
-      <div hidden={!props.description} className={styles.description}>
-        {props.description}
-      </div>
+      <SubText text={props.description} />
       <div hidden={!props.errorMessage} role='alert'>
         <p className={styles.errorMessage}>
           <span>{props.errorMessage}</span>

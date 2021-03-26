@@ -26,8 +26,7 @@ export function useMessages(): IUserMessageProps[] {
         hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
         splitWeekInfoText:
           state.periods.length > 1 ? t('timesheet.splitWeekInfoText') : ''
-      }),
-      iconName: 'ReminderTime'
+      })
     })
   }
   if (!state.selectedPeriod.isComplete && !state.selectedPeriod.isForecast) {
@@ -39,16 +38,14 @@ export function useMessages(): IUserMessageProps[] {
           t
         )
       }),
-      type: 'warning',
-      iconName: 'BufferTimeBoth'
+      type: 'warning'
     })
   }
   if (state.selectedPeriod.isComplete && !state.selectedPeriod.isConfirmed) {
     messages.push({
       id: 'allhoursmatched',
       text: t('timesheet.allHoursMatchedText'),
-      type: 'success',
-      iconName: 'BufferTimeBoth'
+      type: 'success'
     })
   }
   if (state.selectedPeriod.isConfirmed) {
@@ -57,8 +54,7 @@ export function useMessages(): IUserMessageProps[] {
       text: t('timesheet.periodConfirmedText', {
         hours: $date.getDurationString(state.selectedPeriod.matchedDuration, t)
       }),
-      type: 'success',
-      iconName: 'CheckMark'
+      type: 'success'
     })
   }
   if (state.selectedPeriod.isForecasted && !state.selectedPeriod.isConfirmed) {
@@ -66,8 +62,7 @@ export function useMessages(): IUserMessageProps[] {
       id: 'periodforecasted',
       text: t('timesheet.periodForecastedText', {
         hours: $date.getDurationString(state.selectedPeriod.forecastedHours, t)
-      }),
-      iconName: 'BufferTimeBoth'
+      })
     })
   }
   if (
@@ -88,8 +83,7 @@ export function useMessages(): IUserMessageProps[] {
           </a>
         </p>
       ),
-      type: 'warning',
-      iconName: 'DependencyRemove'
+      type: 'warning'
     })
   }
   if (!isEmpty(state.selectedPeriod.errors)) {
@@ -98,8 +92,7 @@ export function useMessages(): IUserMessageProps[] {
       type: 'severeWarning',
       text: t('timesheet.unresolvedErrorText', {
         count: state.selectedPeriod.errors.length
-      }),
-      iconName: 'ErrorBadge'
+      })
     })
   }
   return messages

@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
 import { Autocomplete } from 'components/Autocomplete'
+import { ReusableComponent } from 'components/types'
 import React, { useMemo } from 'react'
 import { omit } from 'underscore'
 import { humanize } from 'underscore.string'
@@ -11,9 +12,9 @@ import { IIconPickerProps } from './types'
  * Icon picker using `<Autocomplete />` to select
  * icons from `@uifabric/icons`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const IconPicker: React.FC<IIconPickerProps> = (props) => {
+export const IconPicker: ReusableComponent<IIconPickerProps> = (props) => {
   const items = useMemo(
     () =>
       getIcons().map((iconName) => ({

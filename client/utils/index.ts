@@ -5,6 +5,7 @@
  * @module Utils
  */
 export * from './browserStorage'
+export * from './cleanArray'
 export * from './generateColumn'
 export * from './getContrastColor'
 export * from './getSum'

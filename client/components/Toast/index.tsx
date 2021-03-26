@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { omit } from 'underscore'
 import { UserMessage } from '../UserMessage'
@@ -6,14 +7,14 @@ import styles from './Toast.module.scss'
 import { IToastProps } from './types'
 
 /**
- * A Toast component that shows a `<MessageBar />` with
+ * A Toast component that shows a `<UserMessage />` with
  * markdown using `react-markdown`
  *
  * @remarks Typically used with the `useToast` hook
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const Toast: React.FC<IToastProps> = (props) => {
+export const Toast: ReusableComponent<IToastProps> = (props) => {
   if (!props.text) return null
   return (
     <div className={styles.root}>
@@ -29,3 +30,4 @@ export const Toast: React.FC<IToastProps> = (props) => {
 
 export * from './types'
 export * from './useToast'
+

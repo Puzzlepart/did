@@ -1,10 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import { Icon, ProgressIndicator } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { omit } from 'underscore'
 import styles from './Progress.module.scss'
 import { IProgressProps } from './types'
 
-export const Progress: React.FC<IProgressProps> = (props) => {
+/**
+ * @category Reusable Component
+ */
+export const Progress: ReusableComponent<IProgressProps> = (props) => {
   return (
     <div className={styles.root}>
       <div className={styles.progress}>

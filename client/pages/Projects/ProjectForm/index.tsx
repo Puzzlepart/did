@@ -5,6 +5,7 @@ import {
   IconPicker,
   LabelPicker,
   SearchCustomer,
+  SubText,
   TabComponent,
   UserMessage
 } from 'components'
@@ -61,7 +62,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         />
         <UserMessage
           hidden={state.editMode}
-          className={styles.idPreviewText}
+          containerStyle={{ marginTop: 10 }}
           iconName='OutlookLogo'
           text={
             isBlank(state.projectId)
@@ -80,11 +81,9 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
               })
             }
           />
-          <span className={styles.inputDescription}>
-            {t('projects.createOutlookCategoryFieldDescription', {
-              id: state.projectId
-            })}
-          </span>
+          <SubText text={t('projects.createOutlookCategoryFieldDescription', {
+            id: state.projectId
+          })} />
         </div>
         <TextField
           className={styles.inputField}
@@ -140,9 +139,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
               })
             }
           />
-          <span className={styles.inputDescription}>
-            {t('projects.inactiveFieldDescription')}
-          </span>
+          <SubText text={t('projects.inactiveFieldDescription')} />
         </div>
         <LabelPicker
           className={styles.inputField}

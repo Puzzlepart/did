@@ -7,19 +7,17 @@ import { IListProps } from './types'
 import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 
-type UseList = {
-  props: IListProps
-}
-
 /**
  * Component logic hook for `<List />`
+ * 
+ * @param props - Props
  *
  * @category List
  */
-export function useList({ props }: UseList) {
+export function useList(props : IListProps) {
   const [state, dispatch] = useListReducer({
-    origItems: props.items || [],
-    items: props.items || [],
+    origItems: props.items,
+    items: props.items,
     searchTerm: ''
   })
 
@@ -52,6 +50,8 @@ export function useList({ props }: UseList) {
   })
 
   return {
-    listProps
+    listProps,
+    state,
+    dispatch
   }
 }

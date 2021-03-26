@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IPivotItemProps, IPivotProps } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import { FC } from 'react'
 import { PermissionScope } from 'security'
 
@@ -86,4 +87,4 @@ export interface ITabItemProps extends Omit<IPivotItemProps, 'hidden'> {
 
 export type TabContainerComponent = FC<ITabContainerProps>
 
-export type TabComponent<T extends ITabItemProps = ITabItemProps> = FC<T>
+export type TabComponent<T extends ITabItemProps = ITabItemProps> = ReusableComponent<T>
