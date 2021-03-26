@@ -32,20 +32,21 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
     onDismissCallout,
     onSetSelected,
     suggestions,
-    ref
+    ref,
   } = useAutocomplete(props)
 
   return (
     <div className={className} onKeyDown={onKeyDown}>
       {props.label && (
         <Label disabled={props.disabled} required={props.required}>
-          {props.label}
+          {props?.label}
         </Label>
       )}
       <div ref={ref}>
         <SearchBox
+          key={state.selectedItem?.key}
           className={styles.field}
-          value={state.value}
+          defaultValue={state.value}
           iconProps={{ iconName: state.selectedItem?.iconName || 'Search' }}
           placeholder={props.placeholder}
           disabled={props.disabled}
