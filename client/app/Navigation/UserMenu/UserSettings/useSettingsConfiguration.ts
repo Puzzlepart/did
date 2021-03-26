@@ -42,7 +42,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
       label: t('common.stickyNavigationLabel'),
       description: t('common.stickyNavigationDescription'),
       hidden: isMobile,
-      defaultChecked: getUserConfiguration('ui.stickyNavigation'),
+      defaultChecked: getUserConfiguration('ui.stickyNavigation')
     }),
     UserSettingDropdown('ui.theme', {
       label: t('common.uiThemeLabel'),

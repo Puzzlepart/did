@@ -19,10 +19,7 @@ export function useUserSettings() {
    * @param key - Key
    * @param value - Value
    */
-  const onUpdate = async (
-    key: string,
-    value: string | boolean
-  ) => {
+  const onUpdate = async (key: string, value: string | boolean) => {
     switch (key) {
       case 'preferredLanguage':
         await updatePreferredLanguage(value as string)

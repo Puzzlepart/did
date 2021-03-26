@@ -1,15 +1,19 @@
 import { IDropdownProps, IToggleProps } from '@fluentui/react'
 
-export interface IUserSetting extends Pick<React.HtmlHTMLAttributes<HTMLDivElement>, 'hidden'> {
+export interface IUserSetting
+  extends Pick<React.HtmlHTMLAttributes<HTMLDivElement>, 'hidden'> {
   fieldName?: string
   type?: string
   description?: string
 }
 
-export interface IUserSettingDropdown extends IDropdownProps, IUserSetting { }
-export interface IUserSettingToggle extends IToggleProps, IUserSetting { }
+export interface IUserSettingDropdown extends IDropdownProps, IUserSetting {}
+export interface IUserSettingToggle extends IToggleProps, IUserSetting {}
 
-export const UserSettingDropdown = (fieldName: string, props: IUserSettingDropdown): IUserSettingDropdown => {
+export const UserSettingDropdown = (
+  fieldName: string,
+  props: IUserSettingDropdown
+): IUserSettingDropdown => {
   return {
     fieldName,
     type: 'dropdown',
@@ -17,7 +21,10 @@ export const UserSettingDropdown = (fieldName: string, props: IUserSettingDropdo
   }
 }
 
-export const UserSettingToggle = (fieldName: string, props: IUserSettingToggle): IUserSettingToggle => {
+export const UserSettingToggle = (
+  fieldName: string,
+  props: IUserSettingToggle
+): IUserSettingToggle => {
   return {
     fieldName,
     type: 'toggle',
