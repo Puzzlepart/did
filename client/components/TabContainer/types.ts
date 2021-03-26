@@ -3,7 +3,8 @@ import { IPivotItemProps, IPivotProps } from '@fluentui/react'
 import { FC } from 'react'
 import { PermissionScope } from 'security'
 
-export interface ITabContainerProps extends Omit<IPivotProps, 'onLinkClick' | 'selectedKey'> {
+export interface ITabContainerProps
+  extends Omit<IPivotProps, 'onLinkClick' | 'selectedKey'> {
   /**
    * Fixed tab link width
    *

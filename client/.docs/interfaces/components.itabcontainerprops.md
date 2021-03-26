@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *IPivotProps*
+* *Omit*<IPivotProps, *onLinkClick* \| *selectedKey*\>
 
   ↳ **ITabContainerProps**
 
@@ -20,6 +20,7 @@
 - [items](components.itabcontainerprops.md#items)
 - [level](components.itabcontainerprops.md#level)
 - [linkHeight](components.itabcontainerprops.md#linkheight)
+- [onTabChanged](components.itabcontainerprops.md#ontabchanged)
 
 ## Properties
 
@@ -64,7 +65,7 @@ ___
 
 ### items
 
-• `Optional` **items**: *IPivotItemProps*[]
+• `Optional` **items**: *any*[] \| *IPivotItemProps*[]
 
 Optionally provide the item that are rendered
 inside the tab container. This can be used instead of
@@ -96,3 +97,27 @@ Tab link height on mobile devices
 **`default`** 30
 
 Defined in: [components/TabContainer/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L30)
+
+___
+
+### onTabChanged
+
+• `Optional` **onTabChanged**: (`itemKey`: *string*) => *void*
+
+On tab changd
+
+#### Type declaration:
+
+▸ (`itemKey`: *string*): *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`itemKey` | *string* |
+
+**Returns:** *void*
+
+Defined in: [components/TabContainer/types.ts:56](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L56)
+
+Defined in: [components/TabContainer/types.ts:56](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L56)

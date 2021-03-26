@@ -29,9 +29,7 @@ export const WeekPicker: React.FC = () => {
   return (
     <>
       <span style={{ display: 'flex' }} ref={target}>
-        <WeekPickerCommand
-          onClick={toggleCalendar}
-        />
+        <WeekPickerCommand onClick={toggleCalendar} />
       </span>
       <Callout
         hidden={hidden}
@@ -50,9 +48,9 @@ export const WeekPicker: React.FC = () => {
               toggleCalendar()
             }}
             firstDayOfWeek={DayOfWeek.Monday}
-            strings={
-              t<ICalendarStrings>('common.calendarStrings', { returnObjects: true })
-            }
+            strings={t<ICalendarStrings>('common.calendarStrings', {
+              returnObjects: true
+            })}
             showGoToToday={false}
             showWeekNumbers={true}
             isMonthPickerVisible={isBrowser}

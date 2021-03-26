@@ -16,12 +16,10 @@ import { useTabContainerStyles } from './useTabContainerStyles'
  *
  * @returns The `onLinkClick` and `styles` to be used by the <TabContainer />`
  * component
- * 
+ *
  * @category TabContainer
  */
-export function useTabContainer(
-  props: ITabContainerProps
-) {
+export function useTabContainer(props: ITabContainerProps) {
   const { dispatch } = useAppContext()
   const styles = useTabContainerStyles(props)
   const [selectedKey, setSelectedKey] = useState(props.defaultSelectedKey)
