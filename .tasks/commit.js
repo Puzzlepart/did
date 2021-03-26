@@ -1,4 +1,5 @@
 const inquirer = require('inquirer')
+inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 const util = require('util')
 const { cyan, white, red } = require('chalk')
 const log = console.log
@@ -9,10 +10,17 @@ const exec = util.promisify(child_process.exec)
 async function commit_changes() {
     const input = await inquirer.prompt([
         {
-            type: 'list',
+            type: 'autocomplete',
             name: 'commit_prefix',
             message: 'Select commit prefix',
-            choices: commitlint.rules['type-enum'][2]
+            choices: commitlint.rules['type-enum'][2],
+            source: async (_a, input) => {
+                const type_enums = commitlint.rules['type-enum'][2]
+                return type_enums.filter(
+                    (type_enum) =>
+                        type_enum.toLowerCase().indexOf((input || '').toLowerCase()) !== -1
+                )
+            },
         },
         {
             type: 'input',
@@ -29,7 +37,7 @@ async function commit_changes() {
     let commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {
         await exec('git add --all')
-        if(gitmoji[input.commit_prefix]) {
+        if (gitmoji[input.commit_prefix]) {
             commit_message += ` ${gitmoji[input.commit_prefix]}`
         }
         await exec(`git commit -m "${commit_message}" --no-verify`)

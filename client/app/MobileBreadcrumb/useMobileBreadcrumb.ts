@@ -1,44 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
-import { find, IPivotItemProps } from '@fluentui/react'
+import { IBreadcrumbItem } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import { ITabContainerProps } from 'components/TabContainer'
-import { useEffect, useRef } from 'react'
-import { UPDATE_BREADCRUMB } from '../../app/reducer'
+import { IMobileBreadcrumbProps } from '.'
 
 /**
- * Hook used by `<ITabContainer />` component to update the
- * app navigation state rendered by the `<MobileBreadcrumb />`
- * component.
- *
- * @remarks Currently only supports `<TabContainer />`, but can
- * be extended if it needs to support other components in the
- * future.
- *
- * @returns The `ref` to be used by the `<TabContainer />` component
+ * Returns the items that should be rendered by
+ * `<MobileBreadcrumb />`
  */
-export function useMobileBreadcrumb(props: ITabContainerProps) {
-  const ref = useRef(null)
-  const { state, dispatch } = useAppContext()
-  useEffect(() => {
-    const items: any[] = props.items || ref?.current?.props?.children
-    const current_ = find(items, (item) => {
-      const itemKey = item?.props?.itemKey || item.itemKey
-      return itemKey === props.selectedKey
-    })
-    const nav: IPivotItemProps = current_?.props || current_
-    if (state.nav !== nav) {
-      dispatch(
-        UPDATE_BREADCRUMB([
-          {
-            key: nav?.itemKey,
-            text: nav?.headerText,
-            level: props.level
-          },
-          !nav && [props.level]
-        ])
-      )
-    }
-  }, [props.selectedKey, props.items])
-  return ref
+export function useMobileBreadcrumb(props: IMobileBreadcrumbProps): IBreadcrumbItem[] {
+  const { state } = useAppContext()
+  const nav = Object.keys(state.nav || {})
+  const items = [
+    {
+      key: 'current',
+      text: props.page.displayName,
+      isCurrentItem: nav.length === 0
+    },
+    ...nav.map((key, index) => ({
+      key,
+      text: state.nav[key].text,
+      isCurrentItem: index === nav.length - 1
+    }))
+  ]
+  return items
 }

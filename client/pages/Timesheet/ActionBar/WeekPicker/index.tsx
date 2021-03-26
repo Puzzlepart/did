@@ -6,9 +6,12 @@ import {
   DayOfWeek,
   DirectionalHint,
   FirstWeekOfYear,
-  FocusTrapZone
+  FocusTrapZone,
+  ICalendarStrings
 } from '@fluentui/react'
-import React, { useState } from 'react'
+import { useToggle } from 'hooks'
+import React, { useRef } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { SET_SCOPE } from '../../reducer/actions'
 import { TimesheetScope, useTimesheetContext } from '../../types'
@@ -21,34 +24,38 @@ import { WeekPickerCommand } from './WeekPickerCommand'
 export const WeekPicker: React.FC = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const [calendar, setCalendar] = useState(null)
+  const target = useRef(null)
+  const [hidden, toggleCalendar] = useToggle(true)
   return (
     <>
-      <WeekPickerCommand
-        onClick={(event) => setCalendar(event.currentTarget)}
-      />
+      <span ref={target}>
+        <WeekPickerCommand
+          onClick={toggleCalendar}
+        />
+      </span>
       <Callout
-        hidden={!calendar}
+        hidden={hidden}
         isBeakVisible={false}
+        doNotLayer={false}
         className={styles.root}
         gapSpace={5}
-        doNotLayer={false}
-        target={calendar}
+        target={target}
         directionalHint={DirectionalHint.bottomLeftEdge}
-        onDismiss={() => setCalendar(null)}
+        onDismiss={toggleCalendar}
         setInitialFocus={true}>
         <FocusTrapZone isClickableOutsideFocusTrap={true}>
           <Calendar
             onSelectDate={(date) => {
               dispatch(SET_SCOPE(new TimesheetScope(date)))
-              setCalendar(null)
+              toggleCalendar()
             }}
             firstDayOfWeek={DayOfWeek.Monday}
             strings={
-              t('common.calendarStrings', { returnObjects: true }) as any
+              t<ICalendarStrings>('common.calendarStrings', { returnObjects: true })
             }
             showGoToToday={false}
             showWeekNumbers={true}
+            isMonthPickerVisible={isBrowser}
             firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
             dateRangeType={DateRangeType.Week}
             value={state.scope.startDate.jsDate}

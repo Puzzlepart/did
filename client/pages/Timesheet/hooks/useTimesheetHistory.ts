@@ -22,16 +22,13 @@ export function useTimesheetHistory(state: ITimesheetState) {
   /**
    * Dispatch `UPDATE_BREADCRUMB`
    */
-  const dispatchUpdateBreadcrumb = (text: string, level: number, omit = []) =>
+  const dispatchUpdateBreadcrumb = (text: string, level: number) =>
     dispatch(
-      UPDATE_BREADCRUMB([
-        {
-          key: text,
-          text,
-          level
-        },
-        omit
-      ])
+      UPDATE_BREADCRUMB({
+        key: text,
+        text,
+        level
+      })
     )
 
   useLayoutEffect(() => {
@@ -45,7 +42,7 @@ export function useTimesheetHistory(state: ITimesheetState) {
         dispatchUpdateBreadcrumb(capitalize(state.selectedPeriod.month), 3)
         dispatchUpdateBreadcrumb(state.selectedPeriod.getName(t), 4)
       } else {
-        dispatchUpdateBreadcrumb(state.selectedPeriod.getName(t), 3, [4])
+        dispatchUpdateBreadcrumb(state.selectedPeriod.getName(t), 3)
       }
     }
   }, [state.selectedView, state.selectedPeriod])

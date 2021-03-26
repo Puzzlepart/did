@@ -48,7 +48,7 @@ export interface ITabContainerProps extends IPivotProps {
    * using `useRef` and `children` when that doesn't
    * work as expected.
    */
-  items?: IPivotItemProps[]
+  items?: IPivotItemProps[] | any[]
 }
 
 export interface ITabItemProps extends Omit<IPivotItemProps, 'hidden'> {

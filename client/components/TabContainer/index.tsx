@@ -19,9 +19,13 @@ import { useTabContainer } from './useTabContainer'
  */
 export const TabContainer: TabContainerComponent = (props) => {
   const { user } = useAppContext()
-  const { styles, ref } = useTabContainer(props)
+  const { styles, onLinkClick, selectedKey } = useTabContainer(props)
   return (
-    <Pivot {...props} ref={ref} styles={styles}>
+    <Pivot
+      {...props}
+      onLinkClick={onLinkClick}
+      selectedKey={selectedKey}
+      styles={styles}>
       {renderTabs({
         tabs: props.children,
         props: props.itemProps,
