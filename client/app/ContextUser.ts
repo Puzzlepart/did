@@ -46,7 +46,7 @@ export class ContextUser {
         pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
       )
       this.configuration = tryParseJson(_user.configuration, {})
-      this.theme =  getTheme(this.configuration?.ui?.theme)
+      this.theme = getTheme(this.configuration?.ui?.theme)
     }
   }
 

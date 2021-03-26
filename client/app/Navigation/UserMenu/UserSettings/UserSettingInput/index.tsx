@@ -8,7 +8,9 @@ import styles from './UserSettingInput.module.scss'
 /**
  * @category UserMenu
  */
-export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({ setting }) => {
+export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
+  setting
+}) => {
   const { onUpdate } = useContext(UserSettingsContext)
   let element: JSX.Element
   switch (setting.type) {
@@ -16,7 +18,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({ setting 
       {
         element = (
           <Dropdown
-            {...setting as IDropdownProps}
+            {...(setting as IDropdownProps)}
             onChange={(_event, option) =>
               onUpdate(setting.fieldName, option.key.toString())
             }
@@ -28,15 +30,14 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({ setting 
       {
         element = (
           <Toggle
-            {...setting as IToggleProps}
-            onChange={(_event, bool) =>
-              onUpdate(setting.fieldName, bool)
-            }
+            {...(setting as IToggleProps)}
+            onChange={(_event, bool) => onUpdate(setting.fieldName, bool)}
           />
         )
       }
       break
-    default: element = null
+    default:
+      element = null
   }
 
   return (
