@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useState } from 'react'
-import { keys, pick } from 'underscore'
-import { CustomerModel, ICustomerFormProps } from './types'
+import { CustomerModel, ICustomerFormProps, _CustomerModel } from './types'
 import { useCustomerFormValidation } from './useCustomerFormValidation'
 
 /**
@@ -13,7 +12,7 @@ import { useCustomerFormValidation } from './useCustomerFormValidation'
  */
 export function useInitialModel(props: ICustomerFormProps): CustomerModel {
   return useMemo(() => {
-    if (props.edit) return pick(props.edit, keys(new CustomerModel())) as CustomerModel
+    if (props.edit) _CustomerModel.init(props.edit)
     return new CustomerModel()
   }, [props.edit])
 }
