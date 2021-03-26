@@ -100,7 +100,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
       .addCase(CHANGE_QUERY, (state, { payload }) => {
         state.preset = find(
           queries,
-          (q) => q.itemKey === payload.props?.itemKey
+          (q) => q.itemKey === payload?.itemKey
         ) as any
         state.subset = null
       })

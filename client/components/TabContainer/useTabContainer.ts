@@ -24,7 +24,7 @@ export function useTabContainer(
 ) {
   const { dispatch } = useAppContext()
   const styles = useTabContainerStyles(props)
-  const [selectedKey, setSelectedKey] = useState(props.selectedKey)
+  const [selectedKey, setSelectedKey] = useState(props.defaultSelectedKey)
 
   // eslint-disable-next-line unicorn/consistent-function-scoping
   function onLinkClick({ props: item }: PivotItem) {
@@ -36,6 +36,10 @@ export function useTabContainer(
       })
     )
     setSelectedKey(item.itemKey)
+
+    if (props.onTabChanged) {
+      props.onTabChanged(item.itemKey)
+    }
   }
 
   return {

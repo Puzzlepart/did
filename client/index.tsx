@@ -26,7 +26,7 @@ import './i18n'
  * * Sets up `i18n` with the user language
  * * Sets up `DateUtils` with the user language
  */
-export const boostrap = async () => {
+export const bootstrap = async () => {
   initializeIcons()
 
   /**
@@ -62,6 +62,6 @@ export const boostrap = async () => {
   )
 }
 
-boostrap()
+bootstrap()
 
 export { App }

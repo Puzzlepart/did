@@ -19,9 +19,9 @@ export const Projects: React.FC = () => {
   return (
     <ProjectsContext.Provider value={context}>
       <TabContainer
-        selectedKey={state.view}
-        onLinkClick={({ props }) =>
-          dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
+        defaultSelectedKey={state.view}
+        onTabChanged={(itemKey) =>
+          dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
         }>
         <ProjectList
           {...listProps}

@@ -18,8 +18,7 @@ export const StatusBar: React.FC = () => {
 
   const defaultMessageProps: IUserMessageProps = {
     className: styles.message,
-    fixedCenter: 65,
-    containerStyle: {}
+    fixedHeight: 65
   }
 
   const messages = useMessages()

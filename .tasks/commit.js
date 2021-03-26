@@ -1,6 +1,7 @@
 const inquirer = require('inquirer')
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 const util = require('util')
+const _ = require('underscore')
 const { cyan, white, red } = require('chalk')
 const log = console.log
 const { commitlint, gitmoji } = require('../package.json')
@@ -12,14 +13,19 @@ async function commit_changes() {
         {
             type: 'autocomplete',
             name: 'commit_prefix',
-            message: 'Select commit prefix',
+            message: 'What did you do?',
             choices: commitlint.rules['type-enum'][2],
             source: async (_a, input) => {
                 const type_enums = commitlint.rules['type-enum'][2]
-                return type_enums.filter(
-                    (type_enum) =>
-                        type_enum.toLowerCase().indexOf((input || '').toLowerCase()) !== -1
-                )
+                return type_enums
+                    .filter(
+                        (type_enum) =>
+                            type_enum.toLowerCase().indexOf((input || '').toLowerCase()) !== -1
+                    )
+                    .map((type_enum) => ({
+                        value: type_enum,
+                        name: gitmoji[type_enum].join('\t')
+                    }))
             },
         },
         {
@@ -38,16 +44,15 @@ async function commit_changes() {
     try {
         await exec('git add --all')
         if (gitmoji[input.commit_prefix]) {
-            commit_message += ` ${gitmoji[input.commit_prefix]}`
+            commit_message += ` ${_.first(gitmoji[input.commit_prefix])}`
         }
         await exec(`git commit -m "${commit_message}" --no-verify`)
         if (input.push) {
             await exec('git pull')
             await exec('git push')
         }
-        log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
+        log(cyan(`\nSuccesfully commited changes with message:\n\n${white(commit_message)}\n`))
     } catch (error) {
-        console.log(error)
         log(red('An error occured commiting your changes.'))
     } finally {
         process.exit(0)

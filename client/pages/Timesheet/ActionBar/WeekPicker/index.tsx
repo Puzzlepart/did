@@ -28,7 +28,7 @@ export const WeekPicker: React.FC = () => {
   const [hidden, toggleCalendar] = useToggle(true)
   return (
     <>
-      <span ref={target}>
+      <span style={{ display: 'flex' }} ref={target}>
         <WeekPickerCommand
           onClick={toggleCalendar}
         />

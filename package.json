@@ -1,6 +1,6 @@
 {
   "name": "did",
-  "description": "The calendar is the timesheet",
+  "description": "the calendar is your timesheet",
   "version": "0.9.11",
   "private": true,
   "repository": {
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
-    "commit": "node ./.tasks/commit.js",
+    "commit": "sexy-commits",
     "start": "node ./dist/server/index.js",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
@@ -155,6 +155,7 @@
     "open": "7.2.1",
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "^1.1.1",
+    "sexy-commits": "git+https://github.com/Puzzlepart/sexy-commits.git",
     "typedoc": "^0.20.28",
     "typedoc-plugin-markdown": "^3.5.0",
     "webpack-build-notifier": "2.1.0",
@@ -315,6 +316,7 @@
           "test",
           "dev",
           "i18n",
+          "changelog",
           "readme",
           "typo",
           "rename",
@@ -336,24 +338,85 @@
     "colours": true
   },
   "gitmoji": {
-    "build": "🏗️",
-    "ci": "👷",
-    "chore": "💄",
-    "docs": "📝",
-    "feat": "✨",
-    "fix": "🐛",
-    "perf": "⚡",
-    "refactor": "♻️",
-    "revert": "⏪",
-    "style": "💄",
-    "test": "✅",
-    "dev": "🔨",
-    "i18n": "🌐",
-    "readme": "📝",
-    "typo": "✏️",
-    "rename": "🚚",
-    "merge": "🔀",
-    "auth": "🛂",
-    "syntax": "🎨"
+    "build": [
+      "🏗️",
+      "Make architectural changes"
+    ],
+    "ci": [
+      "👷",
+      "Add or update CI build system"
+    ],
+    "chore": [
+      "💄",
+      "Boring chores"
+    ],
+    "docs": [
+      "📝",
+      "Added or updated documentation"
+    ],
+    "feat": [
+      "✨",
+      "Introduced new features"
+    ],
+    "fix": [
+      "🐛",
+      "Fixed a bug"
+    ],
+    "perf": [
+      "⚡",
+      "Improved performance"
+    ],
+    "refactor": [
+      "♻️",
+      "Refactored code"
+    ],
+    "revert": [
+      "⏪",
+      "Reverted changes"
+    ],
+    "style": [
+      "💄",
+      "Added or updated the UI and style files"
+    ],
+    "test": [
+      "✅",
+      "Added or updated tests"
+    ],
+    "dev": [
+      "🔨",
+      "Add or update development scripts"
+    ],
+    "i18n": [
+      "🌐",
+      "Internationalization and localization"
+    ],
+    "changelog": [
+      "📓",
+      "Updated changelog"
+    ],
+    "readme": [
+      "📝",
+      "Updated readme"
+    ],
+    "typo": [
+      "✏️",
+      "Fixed typos"
+    ],
+    "rename": [
+      "🚚",
+      "Moved or renamed resources (e.g.: files, paths, routes)"
+    ],
+    "merge": [
+      "🔀",
+      "Merged a branch into this one"
+    ],
+    "auth": [
+      "🛂",
+      "Worked on code related to authorization, roles and permissions"
+    ],
+    "syntax": [
+      "✏️",
+      "Adjusted code syntax"
+    ]
   }
 }

@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui/react'
+import { PartialTheme } from '@fluentui/react'
 import { default as darkTheme } from './dark'
 import { default as lightTheme } from './light'
 
@@ -9,7 +9,7 @@ import { default as lightTheme } from './light'
  *
  * @returns the theme with palette
  */
-export function getTheme(name: string): Theme {
+export function getTheme(name: string): PartialTheme {
   switch (name) {
     case 'dark':
       return darkTheme
@@ -23,11 +23,11 @@ export function getTheme(name: string): Theme {
 /**
  * Get color scheme based on client's system preference
  *
- * @see https://developer.mozilla.org/docs/Web/CSS/@media/prefers-color-scheme
+ * @see https://developer.mozilla.org/docs/Web/CSS/\@media/prefers-color-scheme
  *
  * @returns the system preferred color scheme, either darkTheme or lightTheme
  */
-function getAutoColorScheme(): Theme {
+function getAutoColorScheme(): PartialTheme {
   return window.matchMedia &&
     window.matchMedia('(prefers-color-scheme: dark)').matches
     ? darkTheme

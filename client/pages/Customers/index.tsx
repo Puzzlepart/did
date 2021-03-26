@@ -32,7 +32,7 @@ export const CustomersPage: PageComponent = () => {
 }
 
 Object.assign(CustomersPage, {
-  iconName: 'AccountActivity',
+  iconName: 'People',
   permission: PermissionScope.ACCESS_CUSTOMERS
 } as Partial<PageComponent>)
 

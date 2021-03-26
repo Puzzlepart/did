@@ -5,7 +5,6 @@ import {
   IContextualMenuItem
 } from '@fluentui/react'
 import React from 'react'
-import styles from './ActionBar.module.scss'
 import { usePeriodCommands } from './selectPeriodCommands'
 import { useNavigateCommands } from './useNavigateCommands'
 import { useSubmitCommands } from './useSubmitCommands'
@@ -30,7 +29,7 @@ export const ActionBar = () => {
   }
 
   return (
-    <div className={styles.root}>
+    <div>
       <CommandBar {...commandBarProps} />
     </div>
   )
