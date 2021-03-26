@@ -5,7 +5,8 @@ import { useAppContext } from 'AppContext'
 import { IMobileBreadcrumbProps } from '.'
 
 /**
- * TODO
+ * Returns the items that should be rendered by
+ * `<MobileBreadcrumb />`
  */
 export function useMobileBreadcrumb(props: IMobileBreadcrumbProps): IBreadcrumbItem[] {
   const { state } = useAppContext()
