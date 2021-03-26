@@ -46,15 +46,13 @@ async function commit_changes() {
         if (gitmoji[input.commit_prefix]) {
             commit_message += ` ${_.first(gitmoji[input.commit_prefix])}`
         }
-        console.log(commit_changes)
         await exec(`git commit -m "${commit_message}" --no-verify`)
         if (input.push) {
             await exec('git pull')
             await exec('git push')
         }
-        log(cyan(`Succesfully commited changes with message: ${white(commit_message)}`))
+        log(cyan(`Succesfully commited changes with message:\n ${white(commit_message)}`))
     } catch (error) {
-        console.log(error)
         log(red('An error occured commiting your changes.'))
     } finally {
         process.exit(0)
