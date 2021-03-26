@@ -31,7 +31,7 @@ import { useList } from './useList'
  * @category Function Component
  */
 export const List: React.FC<IListProps> = (props) => {
-  const { listProps, state, dispatch } = useList({ props })
+  const { listProps, state, dispatch } = useList(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
       <ListContext.Provider value={{ props, state, dispatch }}>
@@ -54,6 +54,15 @@ export const List: React.FC<IListProps> = (props) => {
       </ListContext.Provider>
     </div>
   )
+}
+
+List.defaultProps = {
+  items: [],
+  columns: [],
+  commandBar: {
+    items: [],
+    farItems: []
+  }
 }
 
 export * from './types'

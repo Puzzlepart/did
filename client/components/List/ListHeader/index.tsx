@@ -11,7 +11,7 @@ import {
 import React, { useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'
-import { cleanArray } from 'utils'
+import { cleanArray as clean } from 'utils'
 import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
 import { IListHeaderProps } from './types'
@@ -51,7 +51,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
 
   const commandBarProps: ICommandBarProps = {
     ...(props.commandBar || {}),
-    items: cleanArray([searchBoxItem, ...props.commandBar?.items]),
+    items: clean([searchBoxItem, ...props.commandBar?.items]),
     farItems: props.commandBar?.farItems || []
   }
 
