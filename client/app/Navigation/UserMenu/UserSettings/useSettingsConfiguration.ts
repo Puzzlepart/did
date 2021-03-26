@@ -60,8 +60,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
           text: t('common.auto-theme')
         }
       ],
-      defaultSelectedKey: getUserConfiguration('ui.theme'),
-      hidden: true
+      defaultSelectedKey: getUserConfiguration('ui.theme')
     })
   ]
 }
