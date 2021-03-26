@@ -15,7 +15,6 @@ import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { SET_SCOPE } from '../../reducer/actions'
 import { TimesheetScope, useTimesheetContext } from '../../types'
-import styles from './WeekPicker.module.scss'
 
 /**
  * @category Timesheet
@@ -28,7 +27,6 @@ export const WeekPicker: React.FC<ICalloutProps> = (props) => {
       {...props}
       isBeakVisible={false}
       doNotLayer={false}
-      className={styles.root}
       gapSpace={5}
       directionalHint={DirectionalHint.bottomAutoEdge}
       setInitialFocus={true}>
