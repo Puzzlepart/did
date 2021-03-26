@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   CommandBar,
+  ICommandBarItemProps,
   ICommandBarProps,
   merge,
   SearchBox,
@@ -10,6 +11,7 @@ import {
 import React, { useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'
+import { cleanArray } from 'utils'
 import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
 import { IListHeaderProps } from './types'
@@ -22,7 +24,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
   const mergedHeaderProps = merge(headerProps, props.columnHeaderProps)
   const root = useRef(null)
   const timeout = useRef(null)
-  const searchBoxItem = props.searchBox && {
+  const searchBoxItem: ICommandBarItemProps= props.searchBox && {
     key: 'SEARCH_BOX',
     onRender: () => (
       <SearchBox
@@ -49,9 +51,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
 
   const commandBarProps: ICommandBarProps = {
     ...(props.commandBar || {}),
-    items: [searchBoxItem, ...(props.commandBar?.items || [])].filter(
-      (item) => item
-    ),
+    items: cleanArray([searchBoxItem, ...props.commandBar?.items]),
     farItems: props.commandBar?.farItems || []
   }
 
@@ -63,8 +63,8 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
 
   return (
     <Sticky
-     ref={root}
-      stickyPosition={StickyPositionType.Header} 
+      ref={root}
+      stickyPosition={StickyPositionType.Header}
       isScrollSynced={true}>
       <CommandBar
         {...commandBarProps}
