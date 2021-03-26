@@ -28,7 +28,7 @@ export const ActionBar = () => {
     items: [
       ...navigateCommands,
       {
-        key: 'hellowrodl',
+        key: 'TOGGLE_WEEK_PICKER',
         text: state.scope.timespan,
         componentRef: target,
         onClick: toggleWeekPicker,
