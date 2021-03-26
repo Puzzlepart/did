@@ -13,7 +13,7 @@ import { useUserMessage } from './useUserMessage'
  * @category Function Component
  */
 export const UserMessage: React.FC<IUserMessageProps> = (props) => {
-  const { messageBarType } = useUserMessage(props)
+  const { messageBarStyles, messageBarType } = useUserMessage(props)
 
   return (
     <div
@@ -23,6 +23,7 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
       hidden={props.hidden}
       onClick={props.onClick}>
       <MessageBar
+        styles={messageBarStyles}
         isMultiline={props.isMultiline}
         messageBarType={messageBarType}
         messageBarIconProps={props.iconName && { iconName: props.iconName }}
@@ -33,7 +34,9 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
             <div className={styles.header}>{props.headerText}</div>
           )}
           {props.text && (
-            <ReactMarkdown source={props.text} escapeHtml={false} />
+            <ReactMarkdown
+              source={props.text}
+              escapeHtml={false} />
           )}
           {props.children && props.children}
         </div>
