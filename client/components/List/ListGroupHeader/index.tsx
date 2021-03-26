@@ -1,4 +1,4 @@
-import { GroupHeader, IDetailsGroupDividerProps } from '@fluentui/react'
+import { GroupHeader, IDetailsGroupDividerProps, useTheme } from '@fluentui/react'
 import React from 'react'
 
 export const ListGroupHeader: React.FC<IDetailsGroupDividerProps> = (props) => {
@@ -6,7 +6,9 @@ export const ListGroupHeader: React.FC<IDetailsGroupDividerProps> = (props) => {
     <GroupHeader
       {...props}
       styles={{
-        title: { cursor: 'initial' },
+        title: {
+          fontWeight: 'normal',
+        },
         expand: { cursor: 'pointer' },
         headerCount: { display: 'none' }
       }}></GroupHeader>
