@@ -13,7 +13,7 @@ import { UserMessageType } from './types'
  * 
  * @category UserMessage
  */
-export function useUserMessageStyles(type: UserMessageType) {
+export function useUserMessageStyles(type: UserMessageType = 'info') {
   return makeStyles(theme => ({
     root: {
       background: theme.semanticColors[`${type}Background`],
