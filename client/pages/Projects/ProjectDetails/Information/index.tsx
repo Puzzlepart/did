@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
+import { SubText } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import ReactMarkdown from 'react-markdown/with-html'
 import { LabelObject as Label } from 'types'
 import { isEmpty } from 'underscore'
 import { ProjectsContext } from '../../context'
@@ -26,13 +26,7 @@ export const Information: React.FC = () => {
           type={'warning'}
         />
       )}
-      {state.selected.description && (
-        <ReactMarkdown
-          className={styles.description}
-          source={state.selected.description}
-          escapeHtml={false}
-        />
-      )}
+      <SubText text={state.selected.description} />
       <div className={styles.labels}>
         {(state.selected.labels as Label[]).map((label, index) => (
           <EntityLabel key={index} label={label} />
