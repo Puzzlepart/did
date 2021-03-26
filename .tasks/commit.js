@@ -1,6 +1,7 @@
 const inquirer = require('inquirer')
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 const util = require('util')
+const _ = require('underscore')
 const { cyan, white, red } = require('chalk')
 const log = console.log
 const { commitlint, gitmoji } = require('../package.json')
@@ -44,7 +45,7 @@ async function commit_changes() {
     try {
         await exec('git add --all')
         if (gitmoji[input.commit_prefix]) {
-            commit_message += ` ${gitmoji[input.commit_prefix]}`
+            commit_message += ` ${_.first(gitmoji[input.commit_prefix])}`
         }
         await exec(`git commit -m "${commit_message}" --no-verify`)
         if (input.push) {
