@@ -7,6 +7,7 @@ import {
   List,
   SearchBox
 } from '@fluentui/react'
+import { SubText } from 'components/SubText'
 import React from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
@@ -53,9 +54,7 @@ export const Autocomplete: React.FC<IAutocompleteProps> = (props) => {
           onChange={onSearch}
         />
       </div>
-      <div hidden={!props.description} className={styles.description}>
-        {props.description}
-      </div>
+      <SubText text={props.description} />
       <div hidden={!props.errorMessage} role='alert'>
         <p className={styles.errorMessage}>
           <span>{props.errorMessage}</span>

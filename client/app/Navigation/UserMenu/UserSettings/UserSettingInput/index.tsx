@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Dropdown, IDropdownProps, IToggleProps, Toggle } from '@fluentui/react'
+import { SubText } from 'components'
 import React, { useContext } from 'react'
 import { UserSettingsContext } from '../context'
 import { IUserSetting } from '../types'
@@ -43,7 +44,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
   return (
     <div className={styles.root} hidden={setting.hidden}>
       {element}
-      <div className={styles.description}>{setting.description}</div>
+      <SubText text={setting.description} />
     </div>
   )
 }

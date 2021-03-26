@@ -5,6 +5,7 @@ import {
   IconPicker,
   LabelPicker,
   SearchCustomer,
+  SubText,
   TabComponent,
   UserMessage
 } from 'components'
@@ -80,11 +81,9 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
               })
             }
           />
-          <span className={styles.inputDescription}>
-            {t('projects.createOutlookCategoryFieldDescription', {
+          <SubText text={t('projects.createOutlookCategoryFieldDescription', {
               id: state.projectId
-            })}
-          </span>
+            })} />
         </div>
         <TextField
           className={styles.inputField}
@@ -140,9 +139,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
               })
             }
           />
-          <span className={styles.inputDescription}>
-            {t('projects.inactiveFieldDescription')}
-          </span>
+          <SubText text={t('projects.inactiveFieldDescription')} />
         </div>
         <LabelPicker
           className={styles.inputField}

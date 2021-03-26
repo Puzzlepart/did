@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 
 import { Slider, TextField, Toggle } from '@fluentui/react'
-import { TabComponent } from 'components'
+import { SubText, TabComponent } from 'components'
 import { getValue as get } from 'helpers'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
@@ -64,9 +64,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
             className={styles.inputField}
             hidden={fieldProps.hidden}>
             {fieldElement}
-            <span className={styles.inputDescription}>
-              {fieldProps.description}
-            </span>
+            <SubText text={fieldProps.description} />
           </div>
         )
       })}

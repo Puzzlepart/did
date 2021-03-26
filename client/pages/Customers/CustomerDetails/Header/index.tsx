@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
+import { SubText } from 'components'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
-import ReactMarkdown from 'react-markdown/with-html'
 import { CustomerActions } from './actions'
 import styles from './Header.module.scss'
 
@@ -19,11 +19,7 @@ export const Header: React.FC = () => {
           <Icon iconName={state.selected.icon || 'Page'} />
         </div>
         <div className={styles.text}>{state.selected.name}</div>
-        <ReactMarkdown
-          className={styles.subText}
-          source={state.selected.description}
-          escapeHtml={false}
-        />
+        <SubText text={state.selected.description} />
       </div>
       <CustomerActions hidden={isMobile} />
     </div>

@@ -1,5 +1,5 @@
 import { MessageBarButton, Panel } from '@fluentui/react'
-import { SearchProject, UserMessage } from 'components'
+import { SearchProject, SubText, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './MatchEventPanel.module.scss'
@@ -23,7 +23,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
-        <div className={styles.subText}>{event.title}</div>
+        <SubText text={event.title} />
         <UserMessage
           iconName='OutlookLogo'
           text={t('timesheet.matchOutlookInfoText', event)}

@@ -1,6 +1,6 @@
 import { Icon } from '@fluentui/react'
-import { stringIsNullOrEmpty } from '@pnp/common'
 import { EntityLabel, ProjectLink } from 'components'
+import { SubText } from 'components/SubText'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
@@ -25,11 +25,7 @@ export const ProjectTooltipContent: React.FC<IProjectTooltipProps> = ({
           </div>
         </div>
       </div>
-      <div className={styles.description}>
-        <p hidden={stringIsNullOrEmpty(project.description)}>
-          {project.description}
-        </p>
-      </div>
+      <SubText text={project.description} />
       {!isEmpty(project.labels) && (
         <div className={styles.labels}>
           {(project.labels as Label[]).map((label, index) => (
