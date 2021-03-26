@@ -23,7 +23,7 @@ export const TabContainer: TabContainerComponent = (props) => {
   return (
     <Pivot
       {...props}
-      onLinkClick={(item) => {
+      onLinkClick={({ props }) => {
         console.log(item)
       }}
       styles={styles}>

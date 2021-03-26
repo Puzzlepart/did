@@ -22,10 +22,7 @@ export function useTabContainer(
   props: ITabContainerProps
 ) {
   const styles = useTabContainerStyles(props)
-  const ref = useMobileBreadcrumb({
-    level: 2,
-    ...props
-  })
+  
   return {
     ref,
     styles
