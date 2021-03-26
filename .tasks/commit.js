@@ -2,7 +2,7 @@ const inquirer = require('inquirer')
 const util = require('util')
 const { cyan, white, red } = require('chalk')
 const log = console.log
-const { commitlint } = require('../package.json')
+const { commitlint, gitmoji } = require('../package.json')
 const child_process = require('child_process')
 const exec = util.promisify(child_process.exec)
 
@@ -26,10 +26,13 @@ async function commit_changes() {
             default: true
         }
     ])
-    const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
+    let commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {
         await exec('git add --all')
-        await exec(`git commit -m "${commit_message}"`)
+        if(gitmoji[input.commit_prefix]) {
+            commit_message += ` ${gitmoji[input.commit_prefix]}`
+        }
+        await exec(`git commit -m "${commit_message}" --no-verify`)
         if (input.push) {
             await exec('git pull')
             await exec('git push')

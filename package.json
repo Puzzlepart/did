@@ -11,7 +11,7 @@
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
-    "commit:changes": "node ./.tasks/commit-changes.js",
+    "commit": "node ./.tasks/commit.js",
     "start": "node ./dist/server/index.js",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
@@ -314,13 +314,12 @@
           "test",
           "dev",
           "i18n",
-          "github",
           "readme",
-          "experimental",
           "typo",
           "rename",
           "merge",
-          "migrate"
+          "auth",
+          "syntax"
         ]
       ]
     }
@@ -334,5 +333,26 @@
     "exec": "ts-node ./server/index.ts -T",
     "delay": 800,
     "colours": true
+  },
+  "gitmoji": {
+    "build": "🏗️",
+    "ci": "👷",
+    "chore": "💄",
+    "docs": "📝",
+    "feat": "✨",
+    "fix": "🐛",
+    "perf": "⚡",
+    "refactor": "♻️",
+    "revert": "⏪",
+    "style": "💄",
+    "test": "✅",
+    "dev": "🔨",
+    "i18n": "🌐",
+    "readme": "📝",
+    "typo": "✏️",
+    "rename": "🚚",
+    "merge": "🔀",
+    "auth": "🛂",
+    "syntax": "🎨"
   }
 }

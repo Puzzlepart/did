@@ -18,7 +18,6 @@ import 'regenerator-runtime/runtime.js'
 import { App, ContextUser } from './app'
 import { $usercontext, client } from './graphql'
 import './i18n'
-import { getTheme } from './theme'
 
 /**
  * Bootstrapping the App
@@ -54,9 +53,7 @@ export const boostrap = async () => {
   i18next.changeLanguage(init.user.preferredLanguage)
 
   render(
-    <ThemeProvider
-      applyTo='body'
-      theme={getTheme(init.user.configuration?.ui?.theme)}>
+    <ThemeProvider applyTo='body' theme={init.user.theme}>
       <ApolloProvider client={client}>
         <App {...init} />
       </ApolloProvider>
