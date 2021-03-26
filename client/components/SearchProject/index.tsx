@@ -12,7 +12,9 @@ import { ISearchProjectProps } from './types'
  *
  * @category Reusable Component
  */
-export const SearchProject: ReusableComponent<ISearchProjectProps> = (props) => {
+export const SearchProject: ReusableComponent<ISearchProjectProps> = (
+  props
+) => {
   const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-first'
   })

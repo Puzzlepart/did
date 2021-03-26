@@ -6,6 +6,10 @@ Reusable React Function components.
 
 ## Table of contents
 
+### Namespaces
+
+- [List](components.list.md)
+
 ### FilterPanel Classes
 
 - [BaseFilter](../classes/components.basefilter.md)
@@ -75,6 +79,14 @@ Reusable React Function components.
 
 ### Function Component Variables
 
+- [FilterItem](components.md#filteritem)
+
+### Autocomplete Variables
+
+- [SuggestionItem](components.md#suggestionitem)
+
+### Reusable Component Variables
+
 - [Autocomplete](components.md#autocomplete)
 - [ColorPickerField](components.md#colorpickerfield)
 - [ConditionalWrapper](components.md#conditionalwrapper)
@@ -82,7 +94,6 @@ Reusable React Function components.
 - [EditLink](components.md#editlink)
 - [EntityLabel](components.md#entitylabel)
 - [EventList](components.md#eventlist)
-- [FilterItem](components.md#filteritem)
 - [FilterPanel](components.md#filterpanel)
 - [HotkeyModal](components.md#hotkeymodal)
 - [IconPicker](components.md#iconpicker)
@@ -95,21 +106,14 @@ Reusable React Function components.
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
 - [SearchCustomer](components.md#searchcustomer)
 - [SearchProject](components.md#searchproject)
+- [SubText](components.md#subtext)
 - [TabContainer](components.md#tabcontainer)
 - [Toast](components.md#toast)
 - [UserMessage](components.md#usermessage)
 
-### Autocomplete Variables
-
-- [SuggestionItem](components.md#suggestionitem)
-
 ### SummaryView Variables
 
 - [UserColumn](components.md#usercolumn)
-
-### Function Component Functions
-
-- [DeleteLink](components.md#deletelink)
 
 ### Autocomplete Functions
 
@@ -126,6 +130,10 @@ Reusable React Function components.
 
 - [useUserListColumn](components.md#useuserlistcolumn)
 
+### Reusable Component Functions
+
+- [DeleteLink](components.md#deletelink)
+
 ### Toast Functions
 
 - [useToast](components.md#usetoast)
@@ -140,13 +148,13 @@ Reusable React Function components.
 
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
-Defined in: [components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+Defined in: [components/HotkeyModal/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L9)
 
 ___
 
 ### TabComponent
 
-Ƭ **TabComponent**<T\>: *FC*<T\>
+Ƭ **TabComponent**<T\>: *ReusableComponent*<T\>
 
 #### Type parameters:
 
@@ -154,7 +162,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [components/TabContainer/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L89)
+Defined in: [components/TabContainer/types.ts:90](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L90)
 
 ___
 
@@ -162,7 +170,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [components/TabContainer/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L87)
+Defined in: [components/TabContainer/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L88)
 
 ___
 
@@ -184,46 +192,66 @@ Defined in: [components/Toast/types.tsx:7](https://github.com/Puzzlepart/did/blo
 
 ## Function Component Variables
 
+### FilterItem
+
+• `Const` **FilterItem**: *React.FC*<IFilterItemProps\>
+
+Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
+
+___
+
+## Autocomplete Variables
+
+### SuggestionItem
+
+• `Const` **SuggestionItem**: *React.FC*<[*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)\>
+
+Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
+
+___
+
+## Reusable Component Variables
+
 ### Autocomplete
 
-• `Const` **Autocomplete**: *React.FC*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
+• `Const` **Autocomplete**: *ReusableComponent*<[*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)\>
 
 Autocomplete component using `<SearchBox />`, `<Callout />`,
 `<FocusZone />` and `<List />` from ``.
 
-Defined in: [components/Autocomplete/Autocomplete.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L23)
+Defined in: [components/Autocomplete/Autocomplete.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L25)
 
 ___
 
 ### ColorPickerField
 
-• `Const` **ColorPickerField**: *React.FC*<[*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)\>
+• `Const` **ColorPickerField**: *ReusableComponent*<[*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)\>
 
 Field to pick an color using `<SketchPicker />` from
 [react-color](https://www.npmjs.com/package/react-color)
 
-Defined in: [components/ColorPickerField/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L15)
+Defined in: [components/ColorPickerField/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L16)
 
 ___
 
 ### ConditionalWrapper
 
-• `Const` **ConditionalWrapper**: *React.FC*<IConditionalWrapperProps\>
+• `Const` **ConditionalWrapper**: *ReusableComponent*<IConditionalWrapperProps\>
 
 Conditionally wraps `children` in `wrapper` based on `condition`
 
-Defined in: [components/ConditionalWrapper/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L17)
+Defined in: [components/ConditionalWrapper/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L18)
 
 ___
 
 ### CustomerLink
 
-• `Const` **CustomerLink**: *React.FC*<ICustomerLinkProps\>
+• `Const` **CustomerLink**: *ReusableComponent*<ICustomerLinkProps\>
 
 Renders a `<Link />` from `react-router-dom` that
 navigates to the specified customer
 
-Defined in: [components/CustomerLink/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L12)
+Defined in: [components/CustomerLink/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L13)
 
 ___
 
@@ -240,7 +268,7 @@ ___
 
 ### EntityLabel
 
-• `Const` **EntityLabel**: *React.FC*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
+• `Const` **EntityLabel**: *ReusableComponent*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
 
 The `<EntityLabel />` component is used to add contextual metadata
 to a design. Visually it styles text, adds padding, and rounded corners.
@@ -249,33 +277,25 @@ Uses styles from `@primer/css`
 
 **`see`** https://primer.style/components/Label
 
-Defined in: [components/EntityLabel/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L20)
+Defined in: [components/EntityLabel/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L21)
 
 ___
 
 ### EventList
 
-• `Const` **EventList**: *React.FC*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
+• `Const` **EventList**: *ReusableComponent*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
 
 Renders events in a list using `<List />` component
 
 Supports property `additionalColumns`
 
-Defined in: [components/EventList/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L15)
-
-___
-
-### FilterItem
-
-• `Const` **FilterItem**: *React.FC*<IFilterItemProps\>
-
-Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
+Defined in: [components/EventList/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L16)
 
 ___
 
 ### FilterPanel
 
-• `Const` **FilterPanel**: *React.FC*<[*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)\>
+• `Const` **FilterPanel**: *ReusableComponent*<[*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)\>
 
 Filter panel that renders filter items with more than
 1 item.
@@ -283,52 +303,52 @@ Filter panel that renders filter items with more than
 `shortListCount` defaults to **10**, meaning
 10 items are shown before displaying a show more link.
 
-Defined in: [components/FilterPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L18)
+Defined in: [components/FilterPanel/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L19)
 
 ___
 
 ### HotkeyModal
 
-• `Const` **HotkeyModal**: *React.FC*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
+• `Const` **HotkeyModal**: *ReusableComponent*<[*IHotkeyModal*](components.md#ihotkeymodal)\>
 
 Modal that shows the available shortcuts in the current context.
 
-Defined in: [components/HotkeyModal/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L15)
+Defined in: [components/HotkeyModal/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L16)
 
 ___
 
 ### IconPicker
 
-• `Const` **IconPicker**: *React.FC*<IIconPickerProps\>
+• `Const` **IconPicker**: *ReusableComponent*<IIconPickerProps\>
 
 Icon picker using `<Autocomplete />` to select
 icons from `@uifabric/icons`
 
-Defined in: [components/IconPicker/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L16)
+Defined in: [components/IconPicker/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L17)
 
 ___
 
 ### IconText
 
-• `Const` **IconText**: *React.FC*<IIconTextProps\>
+• `Const` **IconText**: *ReusableComponent*<IIconTextProps\>
 
 Renders an inline `<Icon />` with text
 
-Defined in: [components/IconText/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconText/index.tsx#L13)
+Defined in: [components/IconText/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/IconText/index.tsx#L14)
 
 ___
 
 ### LabelPicker
 
-• `Const` **LabelPicker**: *React.FC*<ILabelPickerProps\>
+• `Const` **LabelPicker**: *ReusableComponent*<ILabelPickerProps\>
 
-Defined in: [components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
+Defined in: [components/LabelPicker/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L15)
 
 ___
 
 ### List
 
-• `Const` **List**: *React.FC*<[*IListProps*](../interfaces/components.ilistprops.md)\>
+• `Const` **List**: *ReusableComponent*<[*IListProps*](../interfaces/components.ilistprops.md)\>
 
 List component using `ShimmeredDetailsList` from `@fluentui/react`.
 
@@ -348,68 +368,80 @@ Used by the following components:
 * `<Reports />`
 * `<Timesheet />` => `<SummaryView />`
 
-Defined in: [components/List/index.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L30)
+Defined in: [components/List/index.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L34)
 
 ___
 
 ### PermissionList
 
-• `Const` **PermissionList**: *React.FC*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
+• `Const` **PermissionList**: *ReusableComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
-Defined in: [components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
+Defined in: [components/PermissionList/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L13)
 
 ___
 
 ### ProjectLink
 
-• `Const` **ProjectLink**: *React.FC*<IProjectLinkProps\>
+• `Const` **ProjectLink**: *ReusableComponent*<IProjectLinkProps\>
 
 Renders a `<Link />` from `react-router-dom` that
 navigates to the specified project
 
-Defined in: [components/ProjectLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L14)
+Defined in: [components/ProjectLink/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L15)
 
 ___
 
 ### ProjectTooltip
 
-• `Const` **ProjectTooltip**: *React.FC*<IProjectTooltipProps\>
+• `Const` **ProjectTooltip**: *ReusableComponent*<IProjectTooltipProps\>
 
 Shows more details about the project in a
 `<TooltipHost />` from `@fluentui/react`
 
-Defined in: [components/ProjectTooltip/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L13)
+Defined in: [components/ProjectTooltip/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L14)
 
 ___
 
 ### ScrollablePaneWrapper
 
-• `Const` **ScrollablePaneWrapper**: *React.FC*<any\>
+• `Const` **ScrollablePaneWrapper**: *ReusableComponent*<any\>
 
 Conditionally wraps `children` in `<ScrollablePane />` based
 on `condition`
 
-Defined in: [components/ScrollablePaneWrapper/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L11)
+Defined in: [components/ScrollablePaneWrapper/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L12)
 
 ___
 
 ### SearchCustomer
 
-• `Const` **SearchCustomer**: *React.FC*<ISearchCustomerProps\>
+• `Const` **SearchCustomer**: *ReusableComponent*<ISearchCustomerProps\>
 
 Search for customers using `<Autocomplete />`
 
-Defined in: [components/SearchCustomer/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L15)
+Defined in: [components/SearchCustomer/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L16)
 
 ___
 
 ### SearchProject
 
-• `Const` **SearchProject**: *React.FC*<ISearchProjectProps\>
+• `Const` **SearchProject**: *ReusableComponent*<ISearchProjectProps\>
 
 Search for projects using `<Autocomplete />`
 
-Defined in: [components/SearchProject/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L14)
+Defined in: [components/SearchProject/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L15)
+
+___
+
+### SubText
+
+• `Const` **SubText**: *ReusableComponent*<ISubTextProps\>
+
+Renders sub text using color `semanticColors.bodySubtext`
+
+**`remarks`** Has a default padding top of **4px**
+
+Defined in: [components/SubText/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L14)
 
 ___
 
@@ -431,35 +463,25 @@ ___
 
 ### Toast
 
-• `Const` **Toast**: *React.FC*<[*IToastProps*](components.md#itoastprops)\>
+• `Const` **Toast**: *ReusableComponent*<[*IToastProps*](components.md#itoastprops)\>
 
-A Toast component that shows a `<MessageBar />` with
+A Toast component that shows a `<UserMessage />` with
 markdown using `react-markdown`
 
 **`remarks`** Typically used with the `useToast` hook
 
-Defined in: [components/Toast/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L16)
+Defined in: [components/Toast/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L17)
 
 ___
 
 ### UserMessage
 
-• `Const` **UserMessage**: *React.FC*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
+• `Const` **UserMessage**: *ReusableComponent*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
 
 A component that supports a `<MessageBar />` with
 markdown using `react-markdown`.
 
-Defined in: [components/UserMessage/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L16)
-
-___
-
-## Autocomplete Variables
-
-### SuggestionItem
-
-• `Const` **SuggestionItem**: *React.FC*<[*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)\>
-
-Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
+Defined in: [components/UserMessage/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L17)
 
 ___
 
@@ -467,34 +489,13 @@ ___
 
 ### UserColumn
 
-• `Const` **UserColumn**: *React.FC*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
+• `Const` **UserColumn**: *ReusableComponent*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
 
 User column
 
 Renders a `<Persona />` component
 
-Defined in: [components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L15)
-
-## Function Component Functions
-
-### DeleteLink
-
-▸ `Const`**DeleteLink**(`__namedParameters`: *IDeleteLinkProps*): *Element*
-
-Renders a delete link using `<Icon />` and `<Link />`
-from `@fluentui/react`
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | *IDeleteLinkProps* |
-
-**Returns:** *Element*
-
-Defined in: [components/DeleteLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L14)
-
-___
+Defined in: [components/UserColumn/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L16)
 
 ## Autocomplete Functions
 
@@ -559,23 +560,25 @@ ___
 
 ### useList
 
-▸ **useList**(`__namedParameters`: UseList): *object*
+▸ **useList**(`props`: [*IListProps*](../interfaces/components.ilistprops.md)): *object*
 
 Component logic hook for `<List />`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`__namedParameters` | UseList |
+Name | Type | Description |
+:------ | :------ | :------ |
+`props` | [*IListProps*](../interfaces/components.ilistprops.md) | Props    |
 
 **Returns:** *object*
 
 Name | Type |
 :------ | :------ |
+`dispatch` | *Dispatch*<AnyAction\> |
 `listProps` | [*IListProps*](../interfaces/components.ilistprops.md)<any\> |
+`state` | [*IListState*](../interfaces/components.iliststate.md)<any\> |
 
-Defined in: [components/List/useList.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L19)
+Defined in: [components/List/useList.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L17)
 
 ___
 
@@ -613,7 +616,7 @@ Name | Type |
 
 **Returns:** [*IListProps*](../interfaces/components.ilistprops.md)
 
-Defined in: [components/List/useListProps.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L34)
+Defined in: [components/List/useListProps.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L32)
 
 ___
 
@@ -638,6 +641,27 @@ Name | Type |
 **Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Defined in: [components/UserColumn/useUserListColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L14)
+
+___
+
+## Reusable Component Functions
+
+### DeleteLink
+
+▸ `Const`**DeleteLink**(`__namedParameters`: *IDeleteLinkProps*): *Element*
+
+Renders a delete link using `<Icon />` and `<Link />`
+from `@fluentui/react`
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *IDeleteLinkProps* |
+
+**Returns:** *Element*
+
+Defined in: [components/DeleteLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L14)
 
 ___
 

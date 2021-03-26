@@ -13,7 +13,9 @@ import { ISearchCustomerProps } from './types'
  *
  * @category Reusable Component
  */
-export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (props) => {
+export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
     fetchPolicy: 'cache-first'

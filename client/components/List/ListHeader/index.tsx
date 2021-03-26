@@ -24,7 +24,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
   const mergedHeaderProps = merge(headerProps, props.columnHeaderProps)
   const root = useRef(null)
   const timeout = useRef(null)
-  const searchBoxItem: ICommandBarItemProps= props.searchBox && {
+  const searchBoxItem: ICommandBarItemProps = props.searchBox && {
     key: 'SEARCH_BOX',
     onRender: () => (
       <SearchBox

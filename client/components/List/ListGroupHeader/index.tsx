@@ -7,10 +7,11 @@ export const ListGroupHeader: React.FC<IDetailsGroupDividerProps> = (props) => {
       {...props}
       styles={{
         title: {
-          fontWeight: 'normal',
+          fontWeight: 'normal'
         },
         expand: { cursor: 'pointer' },
         headerCount: { display: 'none' }
-      }} />
+      }}
+    />
   )
 }

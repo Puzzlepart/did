@@ -87,4 +87,6 @@ export interface ITabItemProps extends Omit<IPivotItemProps, 'hidden'> {
 
 export type TabContainerComponent = FC<ITabContainerProps>
 
-export type TabComponent<T extends ITabItemProps = ITabItemProps> = ReusableComponent<T>
+export type TabComponent<
+  T extends ITabItemProps = ITabItemProps
+> = ReusableComponent<T>

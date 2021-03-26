@@ -22,7 +22,7 @@
 
 Excel column format
 
-Defined in: [components/List/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L33)
+Defined in: [components/List/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L32)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 Hidden column
 
-Defined in: [components/List/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L23)
+Defined in: [components/List/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L22)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 Hidden from Excel exports
 
-Defined in: [components/List/types.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L38)
+Defined in: [components/List/types.tsx:37](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L37)
 
 ___
 
@@ -64,9 +64,9 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [components/List/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L43)
+Defined in: [components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
 
-Defined in: [components/List/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L43)
+Defined in: [components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
 
 ___
 
@@ -76,4 +76,4 @@ ___
 
 Optional sub text
 
-Defined in: [components/List/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L28)
+Defined in: [components/List/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L27)

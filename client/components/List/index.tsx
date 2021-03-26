@@ -39,18 +39,16 @@ export const List: ReusableComponent<IListProps> = (props) => {
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList
             {...listProps}
-            onRenderDetailsHeader={(headerProps, defaultRender) =>
+            onRenderDetailsHeader={(headerProps, defaultRender) => (
               <ListHeader
                 headerProps={headerProps}
-                defaultRender={defaultRender} />
-            }
+                defaultRender={defaultRender}
+              />
+            )}
             onRenderItemColumn={(item, index, column) => (
-              <ItemColumn
-                item={item}
-                index={index}
-                column={column} />
-            )
-            } />
+              <ItemColumn item={item} index={index} column={column} />
+            )}
+          />
         </ScrollablePaneWrapper>
       </ListContext.Provider>
     </div>
@@ -70,4 +68,3 @@ export * from './types'
 export * from './useList'
 export * from './useListGroups'
 export * from './useListProps'
-

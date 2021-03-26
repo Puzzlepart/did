@@ -12,6 +12,7 @@ Reusable utility functions
 
 ### Functions
 
+- [cleanArray](utils.md#cleanarray)
 - [generateColumn](utils.md#generatecolumn)
 - [getContrastColor](utils.md#getcontrastcolor)
 - [getSum](utils.md#getsum)
@@ -22,6 +23,30 @@ Reusable utility functions
 - [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
+
+### cleanArray
+
+▸ **cleanArray**<T\>(`array`: T[]): T[]
+
+Cleans an array removing `undefined` and `null`
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`array` | T[] | Array    |
+
+**Returns:** T[]
+
+Defined in: [utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
+
+___
 
 ### generateColumn
 

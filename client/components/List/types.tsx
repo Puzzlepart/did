@@ -57,7 +57,8 @@ export interface IListColumn<T = IListColumnData> extends IColumn {
 /**
  * @category List
  */
-export interface IListProps<T = any> extends Omit<IShimmeredDetailsListProps, 'onRenderDetailsHeader'> {
+export interface IListProps<T = any>
+  extends Omit<IShimmeredDetailsListProps, 'onRenderDetailsHeader'> {
   /**
    * Items
    */
@@ -116,7 +117,7 @@ export interface IListProps<T = any> extends Omit<IShimmeredDetailsListProps, 'o
   /**
    * Column header
    */
-   columnHeaderProps?: {
+  columnHeaderProps?: {
     className?: string
     onRender?: IRenderFunction<IDetailsHeaderProps>
   }

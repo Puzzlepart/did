@@ -81,9 +81,11 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
               })
             }
           />
-          <SubText text={t('projects.createOutlookCategoryFieldDescription', {
-            id: state.projectId
-          })} />
+          <SubText
+            text={t('projects.createOutlookCategoryFieldDescription', {
+              id: state.projectId
+            })}
+          />
         </div>
         <TextField
           className={styles.inputField}

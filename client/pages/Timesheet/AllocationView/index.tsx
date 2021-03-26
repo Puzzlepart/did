@@ -51,7 +51,8 @@ export const AllocationView: TabComponent = () => {
                 margin: '0 0 20px 0',
                 textAlign: 'center'
               }}
-              text={c.subTitle} />
+              text={c.subTitle}
+            />
             <ResponsiveContainer width='100%' height={450}>
               <BarChart className={styles.chart} data={d}>
                 <XAxis interval={0} dataKey='label' />

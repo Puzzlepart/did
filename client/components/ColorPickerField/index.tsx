@@ -13,7 +13,9 @@ import { IColorPickerFieldProps } from './types'
  *
  * @category Reusable Component
  */
-export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (props) => {
+export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
+  props
+) => {
   const targetRef = useRef(null)
   return (
     <div className={`${props.className} ${styles.root}`}>

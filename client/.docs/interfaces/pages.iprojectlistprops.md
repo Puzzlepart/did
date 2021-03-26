@@ -16,35 +16,39 @@
 
 ### Properties
 
-- [checkboxVisibility](pages.iprojectlistprops.md#checkboxvisibility)
+- [columnHeaderProps](pages.iprojectlistprops.md#columnheaderprops)
 - [columns](pages.iprojectlistprops.md#columns)
 - [commandBar](pages.iprojectlistprops.md#commandbar)
 - [enableShimmer](pages.iprojectlistprops.md#enableshimmer)
 - [filters](pages.iprojectlistprops.md#filters)
-- [headerClassName](pages.iprojectlistprops.md#headerclassname)
 - [height](pages.iprojectlistprops.md#height)
 - [hidden](pages.iprojectlistprops.md#hidden)
 - [hideColumns](pages.iprojectlistprops.md#hidecolumns)
 - [items](pages.iprojectlistprops.md#items)
 - [listGroupProps](pages.iprojectlistprops.md#listgroupprops)
 - [listGroupRenderProps](pages.iprojectlistprops.md#listgrouprenderprops)
-- [onRenderColumnHeader](pages.iprojectlistprops.md#onrendercolumnheader)
-- [onRenderDetailsHeader](pages.iprojectlistprops.md#onrenderdetailsheader)
 - [renderLink](pages.iprojectlistprops.md#renderlink)
 - [searchBox](pages.iprojectlistprops.md#searchbox)
 - [selectionProps](pages.iprojectlistprops.md#selectionprops)
 
 ## Properties
 
-### checkboxVisibility
+### columnHeaderProps
 
-• `Optional` **checkboxVisibility**: CheckboxVisibility
+• `Optional` **columnHeaderProps**: *object*
 
-Check box visibility
+Column header
 
-Inherited from: [IListProps](components.ilistprops.md).[checkboxVisibility](components.ilistprops.md#checkboxvisibility)
+#### Type declaration:
 
-Defined in: [components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
+Name | Type |
+:------ | :------ |
+`className`? | *string* |
+`onRender`? | *IRenderFunction*<IDetailsHeaderProps\> |
+
+Inherited from: [IListProps](components.ilistprops.md).[columnHeaderProps](components.ilistprops.md#columnheaderprops)
+
+Defined in: [components/List/types.tsx:119](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L119)
 
 ___
 
@@ -56,7 +60,7 @@ Columns
 
 Inherited from: [IListProps](components.ilistprops.md).[columns](components.ilistprops.md#columns)
 
-Defined in: [components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
+Defined in: [components/List/types.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L69)
 
 ___
 
@@ -68,7 +72,7 @@ Command bar props
 
 Inherited from: [IListProps](components.ilistprops.md).[commandBar](components.ilistprops.md#commandbar)
 
-Defined in: [components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
+Defined in: [components/List/types.tsx:104](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L104)
 
 ___
 
@@ -80,7 +84,7 @@ Enable shimmer (normally while loading)
 
 Inherited from: [IListProps](components.ilistprops.md).[enableShimmer](components.ilistprops.md#enableshimmer)
 
-Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
+Defined in: [components/List/types.tsx:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L74)
 
 ___
 
@@ -94,19 +98,7 @@ Filters
 
 Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
 
-Defined in: [components/List/types.tsx:125](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L125)
-
-___
-
-### headerClassName
-
-• `Optional` **headerClassName**: *string*
-
-Overriding class name for header
-
-Inherited from: [IListProps](components.ilistprops.md).[headerClassName](components.ilistprops.md#headerclassname)
-
-Defined in: [components/List/types.tsx:135](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L135)
+Defined in: [components/List/types.tsx:109](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L109)
 
 ___
 
@@ -118,7 +110,7 @@ Fixed height
 
 Inherited from: [IListProps](components.ilistprops.md).[height](components.ilistprops.md#height)
 
-Defined in: [components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
+Defined in: [components/List/types.tsx:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L79)
 
 ___
 
@@ -130,7 +122,7 @@ Hidden
 
 Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
 
-Defined in: [components/List/types.tsx:130](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L130)
+Defined in: [components/List/types.tsx:114](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L114)
 
 ___
 
@@ -150,7 +142,7 @@ Items
 
 Inherited from: [IListProps](components.ilistprops.md).[items](components.ilistprops.md#items)
 
-Defined in: [components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
+Defined in: [components/List/types.tsx:64](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L64)
 
 ___
 
@@ -162,7 +154,7 @@ Group props
 
 Inherited from: [IListProps](components.ilistprops.md).[listGroupProps](components.ilistprops.md#listgroupprops)
 
-Defined in: [components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
+Defined in: [components/List/types.tsx:94](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L94)
 
 ___
 
@@ -174,31 +166,7 @@ Group render props
 
 Inherited from: [IListProps](components.ilistprops.md).[listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
 
-Defined in: [components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
-
-___
-
-### onRenderColumnHeader
-
-• `Optional` **onRenderColumnHeader**: *IRenderFunction*<IDetailsColumnRenderTooltipProps\>
-
-Callback to render the column header
-
-Inherited from: [IListProps](components.ilistprops.md).[onRenderColumnHeader](components.ilistprops.md#onrendercolumnheader)
-
-Defined in: [components/List/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L120)
-
-___
-
-### onRenderDetailsHeader
-
-• `Optional` **onRenderDetailsHeader**: *IRenderFunction*<IDetailsHeaderProps\>
-
-On render details header
-
-Inherited from: [IListProps](components.ilistprops.md).[onRenderDetailsHeader](components.ilistprops.md#onrenderdetailsheader)
-
-Defined in: [components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
+Defined in: [components/List/types.tsx:99](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L99)
 
 ___
 
@@ -218,7 +186,7 @@ Search box props
 
 Inherited from: [IListProps](components.ilistprops.md).[searchBox](components.ilistprops.md#searchbox)
 
-Defined in: [components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
+Defined in: [components/List/types.tsx:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L84)
 
 ___
 
@@ -230,4 +198,4 @@ Selection
 
 Inherited from: [IListProps](components.ilistprops.md).[selectionProps](components.ilistprops.md#selectionprops)
 
-Defined in: [components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
+Defined in: [components/List/types.tsx:89](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L89)

@@ -1,7 +1,4 @@
-import {
-  IDetailsHeaderProps,
-  IRenderFunction
-} from '@fluentui/react'
+import { IDetailsHeaderProps, IRenderFunction } from '@fluentui/react'
 
 export interface IListHeaderProps {
   headerProps: IDetailsHeaderProps

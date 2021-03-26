@@ -9,12 +9,12 @@ import { useListProps } from './useListProps'
 
 /**
  * Component logic hook for `<List />`
- * 
+ *
  * @param props - Props
  *
  * @category List
  */
-export function useList(props : IListProps) {
+export function useList(props: IListProps) {
   const [state, dispatch] = useListReducer({
     origItems: props.items,
     items: props.items,

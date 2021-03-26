@@ -3,7 +3,6 @@ import {
   CheckboxVisibility,
   ConstrainMode,
   DetailsListLayoutMode,
-
   IGroup,
   IObjectWithKey,
   Selection,

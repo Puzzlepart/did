@@ -12,7 +12,7 @@ Name | Default |
 
 ## Hierarchy
 
-* *IShimmeredDetailsListProps*
+* *Omit*<IShimmeredDetailsListProps, *onRenderDetailsHeader*\>
 
   ↳ **IListProps**
 
@@ -24,33 +24,35 @@ Name | Default |
 
 ### Properties
 
-- [checkboxVisibility](components.ilistprops.md#checkboxvisibility)
+- [columnHeaderProps](components.ilistprops.md#columnheaderprops)
 - [columns](components.ilistprops.md#columns)
 - [commandBar](components.ilistprops.md#commandbar)
 - [enableShimmer](components.ilistprops.md#enableshimmer)
 - [filters](components.ilistprops.md#filters)
-- [headerClassName](components.ilistprops.md#headerclassname)
 - [height](components.ilistprops.md#height)
 - [hidden](components.ilistprops.md#hidden)
 - [items](components.ilistprops.md#items)
 - [listGroupProps](components.ilistprops.md#listgroupprops)
 - [listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
-- [onRenderColumnHeader](components.ilistprops.md#onrendercolumnheader)
-- [onRenderDetailsHeader](components.ilistprops.md#onrenderdetailsheader)
 - [searchBox](components.ilistprops.md#searchbox)
 - [selectionProps](components.ilistprops.md#selectionprops)
 
 ## Properties
 
-### checkboxVisibility
+### columnHeaderProps
 
-• `Optional` **checkboxVisibility**: CheckboxVisibility
+• `Optional` **columnHeaderProps**: *object*
 
-Check box visibility
+Column header
 
-Overrides: void
+#### Type declaration:
 
-Defined in: [components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
+Name | Type |
+:------ | :------ |
+`className`? | *string* |
+`onRender`? | *IRenderFunction*<IDetailsHeaderProps\> |
+
+Defined in: [components/List/types.tsx:119](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L119)
 
 ___
 
@@ -62,7 +64,7 @@ Columns
 
 Overrides: void
 
-Defined in: [components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
+Defined in: [components/List/types.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L69)
 
 ___
 
@@ -72,7 +74,7 @@ ___
 
 Command bar props
 
-Defined in: [components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
+Defined in: [components/List/types.tsx:104](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L104)
 
 ___
 
@@ -84,7 +86,7 @@ Enable shimmer (normally while loading)
 
 Overrides: void
 
-Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
+Defined in: [components/List/types.tsx:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L74)
 
 ___
 
@@ -96,17 +98,7 @@ Filters
 
 #### Type declaration:
 
-Defined in: [components/List/types.tsx:125](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L125)
-
-___
-
-### headerClassName
-
-• `Optional` **headerClassName**: *string*
-
-Overriding class name for header
-
-Defined in: [components/List/types.tsx:135](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L135)
+Defined in: [components/List/types.tsx:109](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L109)
 
 ___
 
@@ -116,7 +108,7 @@ ___
 
 Fixed height
 
-Defined in: [components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
+Defined in: [components/List/types.tsx:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L79)
 
 ___
 
@@ -126,7 +118,7 @@ ___
 
 Hidden
 
-Defined in: [components/List/types.tsx:130](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L130)
+Defined in: [components/List/types.tsx:114](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L114)
 
 ___
 
@@ -138,7 +130,7 @@ Items
 
 Overrides: void
 
-Defined in: [components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
+Defined in: [components/List/types.tsx:64](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L64)
 
 ___
 
@@ -148,7 +140,7 @@ ___
 
 Group props
 
-Defined in: [components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
+Defined in: [components/List/types.tsx:94](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L94)
 
 ___
 
@@ -158,29 +150,7 @@ ___
 
 Group render props
 
-Defined in: [components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
-
-___
-
-### onRenderColumnHeader
-
-• `Optional` **onRenderColumnHeader**: *IRenderFunction*<IDetailsColumnRenderTooltipProps\>
-
-Callback to render the column header
-
-Defined in: [components/List/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L120)
-
-___
-
-### onRenderDetailsHeader
-
-• `Optional` **onRenderDetailsHeader**: *IRenderFunction*<IDetailsHeaderProps\>
-
-On render details header
-
-Overrides: void
-
-Defined in: [components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
+Defined in: [components/List/types.tsx:99](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L99)
 
 ___
 
@@ -190,7 +160,7 @@ ___
 
 Search box props
 
-Defined in: [components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
+Defined in: [components/List/types.tsx:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L84)
 
 ___
 
@@ -200,4 +170,4 @@ ___
 
 Selection
 
-Defined in: [components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
+Defined in: [components/List/types.tsx:89](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L89)

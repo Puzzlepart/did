@@ -4,6 +4,12 @@
 
 [Components](../modules/components.md).IUserColumnProps
 
+## Hierarchy
+
+* *HTMLAttributes*<HTMLDivElement\>
+
+  ↳ **IUserColumnProps**
+
 ## Table of contents
 
 ### Properties
@@ -17,7 +23,7 @@
 
 • `Optional` **persona**: *IPersonaProps*
 
-Defined in: [components/UserColumn/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L6)
+Defined in: [components/UserColumn/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L7)
 
 ___
 
@@ -25,4 +31,4 @@ ___
 
 • **user**: *Pick*<User, *role* \| *displayName* \| *mail* \| *photo*\>
 
-Defined in: [components/UserColumn/types.tsx:5](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L5)
+Defined in: [components/UserColumn/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L6)

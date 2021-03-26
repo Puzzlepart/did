@@ -1,9 +1,6 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable tsdoc/syntax */
-import {
-  CommandBar,
-  ICommandBarProps
-} from '@fluentui/react'
+import { CommandBar, ICommandBarProps } from '@fluentui/react'
 import { useToggle } from 'hooks'
 import React, { useRef } from 'react'
 import { useTimesheetContext } from '../context'
@@ -20,7 +17,7 @@ export const ActionBar = () => {
   const submitCommands = useSubmitCommands()
   const periodCommands = usePeriodCommands()
   const { state } = useTimesheetContext()
-  const [showWeekPicker,toggleWeekPicker] = useToggle(false)
+  const [showWeekPicker, toggleWeekPicker] = useToggle(false)
   const target = useRef(null)
 
   const commandBarProps: ICommandBarProps = {
@@ -32,10 +29,10 @@ export const ActionBar = () => {
         text: state.scope.timespan,
         componentRef: target,
         onClick: toggleWeekPicker,
-        buttonStyles:{
-          flexContainer:{
-            minWidth:200,
-            textAlign:'left'
+        buttonStyles: {
+          flexContainer: {
+            minWidth: 200,
+            textAlign: 'left'
           }
         }
       },

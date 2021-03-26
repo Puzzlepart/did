@@ -14,9 +14,7 @@ export const ColumnHeader: React.FC<IDetailsColumnRenderTooltipProps> = (
     <div className={styles.root}>
       <div className={`${styles.container} ${props.hostClassName}`}>
         <h5 className={styles.name}>{props.column.name}</h5>
-        <SubText
-          style={{ marginTop: -24 }}
-          text={props.column.data?.subText} />
+        <SubText style={{ marginTop: -24 }} text={props.column.data?.subText} />
       </div>
     </div>
   )

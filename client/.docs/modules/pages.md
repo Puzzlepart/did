@@ -279,7 +279,7 @@ ___
 
 • `Const` **Header**: React.FC
 
-Defined in: [pages/Projects/ProjectDetails/Header/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L12)
+Defined in: [pages/Projects/ProjectDetails/Header/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L13)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 • `Const` **ProjectForm**: [*TabComponent*](components.md#tabcomponent)<IProjectFormProps\>
 
-Defined in: [pages/Projects/ProjectForm/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/index.tsx#L23)
+Defined in: [pages/Projects/ProjectForm/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/index.tsx#L24)
 
 ___
 

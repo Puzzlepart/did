@@ -30,4 +30,3 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
 
 export * from './types'
 export * from './useToast'
-

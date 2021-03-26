@@ -5,7 +5,7 @@ import { IItemColumnProps } from './types'
 export const ItemColumn: React.FC<IItemColumnProps> = ({
   column,
   item,
-  index,
+  index
 }) => {
   if (!!column.onRender) {
     return column.onRender(item, index, column)
