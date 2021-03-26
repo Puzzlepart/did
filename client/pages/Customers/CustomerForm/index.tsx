@@ -2,50 +2,36 @@ import { Panel, PrimaryButton, TextField } from '@fluentui/react'
 import { ConditionalWrapper, IconPicker, Toast } from 'components'
 import { config } from 'package'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from './CustomerForm.module.scss'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 
 export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
-  const { loading, state, dispatch, toast, onFormSubmit, t } = useCustomerForm({
-    props
-  })
-
+  const { t } = useTranslation()
+  const { model, submit } = useCustomerForm(props)
   return (
     <ConditionalWrapper
       condition={!!props.panel}
       wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
       <div className={styles.root}>
-        <Toast {...toast} />
+        <Toast {...submit.toast} />
         <TextField
           className={styles.inputField}
-          disabled={state.editMode}
+          disabled={!!props.edit}
           label={t('customers.keyFieldLabel')}
           description={t('customers.keyFieldDescription', config.app)}
           required={true}
-          errorMessage={state.validation.errors.key}
-          onChange={(_event, value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-
-              payload: ['key', value.toUpperCase()]
-            })
-          }
-          value={state.model.key}
+          onChange={(_event, value) => model.setKey(value)}
+          value={model.key}
         />
         <TextField
           className={styles.inputField}
           label={t('common.nameFieldLabel')}
           description={t('customers.nameFieldDescription', config.app)}
           required={true}
-          errorMessage={state.validation.errors.name}
-          onChange={(_event, value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['name', value]
-            })
-          }
-          value={state.model.name}
+          onChange={(_event, value) => model.setName(value)}
+          value={model.name}
         />
         <TextField
           className={styles.inputField}
@@ -53,34 +39,24 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
           description={t('customers.descriptionFieldDescription')}
           multiline={true}
           autoAdjustHeight={true}
-          errorMessage={state.validation.errors.description}
-          onChange={(_event, value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['description', value]
-            })
-          }
-          value={state.model.description}
+          onChange={(_event, value) => model.setDescription(value)}
+          value={model.description}
         />
         <IconPicker
           className={styles.inputField}
-          defaultSelected={state.model.icon}
+          defaultSelected={model.icon}
           label={t('common.iconFieldLabel')}
           description={t('customers.iconFieldDescription')}
           placeholder={t('common.iconSearchPlaceholder')}
           width={300}
-          onSelected={(value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['icon', value]
-            })
-          }
+          onSelected={(value) => model.setIcon(value)}
+          required={true}
         />
         <PrimaryButton
           className={styles.inputField}
-          text={state.editMode ? t('common.save') : t('common.add')}
-          onClick={onFormSubmit}
-          disabled={loading || !!toast}
+          text={!!props.edit ? t('common.save') : t('common.add')}
+          onClick={submit.onClick}
+          disabled={submit.disabled}
         />
       </div>
     </ConditionalWrapper>

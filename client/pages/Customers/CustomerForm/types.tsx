@@ -1,19 +1,14 @@
 import { IPanelProps } from '@fluentui/react'
 import { ITabItemProps } from 'components/TabContainer'
-import { Customer, IFormValidation } from 'types'
+import { Customer } from 'types'
 
 export class CustomerModel {
-  public key: string
-  public name: string
-  public description: string
-  public icon: string
-
-  constructor(customer?: Customer) {
-    this.key = customer?.key || ''
-    this.name = customer?.name || ''
-    this.description = customer?.description || ''
-    this.icon = customer?.icon
-  }
+  constructor(
+    public key: string = '',
+    public name: string = '',
+    public description: string = '',
+    public icon: string = ''
+  ) {}
 }
 
 interface ICustomerFormPanelProps extends IPanelProps {
@@ -30,10 +25,4 @@ export interface ICustomerFormProps extends ITabItemProps {
    * Customer to edit
    */
   edit?: Customer
-}
-
-export interface ICustomerFormState {
-  model: CustomerModel
-  editMode: boolean
-  validation?: IFormValidation
 }

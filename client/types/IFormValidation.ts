@@ -1,6 +1,6 @@
 export interface IFormValidation {
-  errors: {
+  errors?: {
     [key: string]: string
   }
-  invalid: boolean
+  invalid?: boolean
 }
