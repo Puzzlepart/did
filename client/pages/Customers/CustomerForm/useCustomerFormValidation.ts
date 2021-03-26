@@ -5,7 +5,7 @@ import { CustomerModel } from './types'
  * Validate form
  *
  * @param model - Model
- * 
+ *
  * @returns `true` if the model is valid
  */
 export function useCustomerFormValidation(model: CustomerModel): boolean {
