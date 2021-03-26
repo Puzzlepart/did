@@ -41,12 +41,12 @@ async function commit_changes() {
         }
     ])
     let commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
-    console.log(commit_changes)
     try {
         await exec('git add --all')
         if (gitmoji[input.commit_prefix]) {
             commit_message += ` ${_.first(gitmoji[input.commit_prefix])}`
         }
+        console.log(commit_changes)
         await exec(`git commit -m "${commit_message}" --no-verify`)
         if (input.push) {
             await exec('git pull')
