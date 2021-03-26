@@ -51,7 +51,7 @@ async function commit_changes() {
             await exec('git pull')
             await exec('git push')
         }
-        log(cyan(`Succesfully commited changes with message:\n\n${white(commit_message)}\n`))
+        log(cyan(`\nSuccesfully commited changes with message:\n\n${white(commit_message)}\n`))
     } catch (error) {
         log(red('An error occured commiting your changes.'))
     } finally {
