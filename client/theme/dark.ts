@@ -41,8 +41,8 @@ export default {
     /**
      * Timesheet border, hover color. same as background for now
      */
-    neutralLighter: '#0d1117',
-    neutralLighterAlt: '#282828',
+    neutralLighter: '#3f3f3f',
+    neutralLighterAlt: '#252422',
     accent: '#dcdcdc',
     /**
      * This is the page background
