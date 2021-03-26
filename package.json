@@ -320,7 +320,8 @@
           "typo",
           "rename",
           "merge",
-          "migrate"
+          "auth",
+          "syntax"
         ]
       ]
     }
@@ -348,14 +349,14 @@
     "style": "💄",
     "test": "💄",
     "dev": "💄",
-    "i18n": "💄",
+    "i18n": "🌐",
     "github": "💄",
     "readme": "💄",
     "experimental": "💄",
     "typo": "💄",
     "rename": "💄",
     "merge": "💄",
-    "migrate": "💄",
+    "auth": "🛂",
     "syntax": "🎨"
   }
 }
