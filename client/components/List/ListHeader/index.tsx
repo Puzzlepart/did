@@ -1,47 +1,54 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   CommandBar,
   ICommandBarProps,
-  IContextualMenuItem,
+
   SearchBox,
   Sticky,
   StickyPositionType
 } from '@fluentui/react'
-import React, { useMemo, useRef } from 'react'
+import React, { useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import { isEmpty } from 'underscore'
+import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
-import styles from './ListHeader.module.scss'
 import { IListHeaderProps } from './types'
 
-export const ListHeader: React.FC<IListHeaderProps> = (
-  props: IListHeaderProps
-) => {
+export const ListHeader: React.FC<IListHeaderProps> = ({
+  headerProps,
+  defaultRender
+}) => {
+  const { props, state, dispatch } = useListContext()
   const root = useRef(null)
   const timeout = useRef(null)
+  const searchBoxItem = props.searchBox && {
+    key: 'SEARCH_BOX',
+    onRender: () => (
+      <SearchBox
+        {...props.searchBox}
+        styles={{
+          root: { width: isMobile ? root?.current?.clientWidth : 500 }
+        }}
+        defaultValue={state.searchTerm}
+        onChange={(_event, searchTerm) => {
+          clearTimeout(timeout.current)
+          timeout.current = setTimeout(() => {
+            if (props.searchBox.onChange)
+              props.searchBox.onChange(_event, searchTerm)
+            dispatch(EXECUTE_SEARCH({ searchTerm }))
+          }, 250)
+        }}
+      />
+    )
+  }
 
-  const searchBoxItem = useMemo(() => {
-    if (!props.searchBox) return null
-    return {
-      key: 'SEARCH_BOX',
-      onRender: () => (
-        <SearchBox
-          {...props.searchBox}
-          styles={{
-            root: { width: isMobile ? root?.current?.clientWidth : 500 }
-          }}
-          value={props.state.searchTerm}
-          onChange={(_event, searchTerm) => {
-            clearTimeout(timeout.current)
-            timeout.current = setTimeout(() => {
-              if (props.searchBox.onChange)
-                props.searchBox.onChange(_event, searchTerm)
-              props.dispatch(EXECUTE_SEARCH({ searchTerm }))
-            }, 250)
-          }}
-        />
-      )
-    } as IContextualMenuItem
-  }, [props])
+  if (!!props.onRenderDetailsHeader) {
+    return (
+      <ListHeader
+        headerProps={headerProps}
+        defaultRender={defaultRender} />
+    )
+  }
 
   const commandBarProps: ICommandBarProps = {
     ...(props.commandBar || {}),
@@ -51,24 +58,22 @@ export const ListHeader: React.FC<IListHeaderProps> = (
     farItems: props.commandBar?.farItems || []
   }
 
-  props.headerProps.onRenderColumnHeaderTooltip = (props, defaultRender) => {
+  headerProps.onRenderColumnHeaderTooltip = (props, defaultRender) => {
     const onRenderColumnHeader = props?.column?.data?.onRenderColumnHeader
     if (!onRenderColumnHeader) return defaultRender(props)
     return onRenderColumnHeader(props)
   }
 
   return (
-    <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
-      <div className={styles.root} ref={root}>
-        <CommandBar
-          {...commandBarProps}
-          hidden={
-            isEmpty(commandBarProps.items) && isEmpty(commandBarProps.farItems)
-          }
-          styles={{ root: { margin: 0, padding: 0 } }}
-        />
-        {props.defaultRender(props.headerProps)}
-      </div>
+    <Sticky ref={root} stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
+      <CommandBar
+        {...commandBarProps}
+        hidden={
+          isEmpty(commandBarProps.items) && isEmpty(commandBarProps.farItems)
+        }
+        styles={{ root: { margin: 0, padding: 0 } }}
+      />
+      {defaultRender(headerProps)}
     </Sticky>
   )
 }

@@ -3,18 +3,16 @@ import {
   CheckboxVisibility,
   ConstrainMode,
   DetailsListLayoutMode,
-  IColumn,
+
   IGroup,
   IObjectWithKey,
   Selection,
   SelectionMode
 } from '@fluentui/react'
-import { getValue } from 'helpers'
 import React from 'react'
 import { AnyAction } from 'redux'
 import { filter } from 'underscore'
 import { ListGroupHeader } from './ListGroupHeader'
-import { onRenderListHeader } from './ListHeader/onRenderListHeader'
 import { IListProps, IListState } from './types'
 
 type UseListProps<T = any> = {
@@ -33,8 +31,6 @@ type UseListProps<T = any> = {
  */
 export function useListProps({
   props,
-  state,
-  dispatch,
   selection,
   groups,
   items
@@ -63,21 +59,6 @@ export function useListProps({
       ...props.listGroupRenderProps,
       onRenderHeader: ListGroupHeader
     },
-    onRenderItemColumn: (item: any, index: number, column: IColumn) => {
-      if (!!column.onRender) return column.onRender(item, index, column)
-      return getValue(item, column.fieldName)
-    },
-    onRenderDetailsHeader: (headerProps, defaultRender) =>
-      onRenderListHeader({
-        headerProps: {
-          ...headerProps,
-          className: props.headerClassName
-        },
-        defaultRender,
-        props,
-        state,
-        dispatch
-      }),
     checkboxVisibility: props.checkboxVisibility || CheckboxVisibility.hidden
   } as IListProps
 }

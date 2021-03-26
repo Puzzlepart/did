@@ -52,6 +52,8 @@ export function useList({ props }: UseList) {
   })
 
   return {
-    listProps
+    listProps,
+    state,
+    dispatch
   }
 }

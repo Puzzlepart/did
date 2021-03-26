@@ -122,6 +122,7 @@ if (IS_DEVELOPMENT) {
   const { BundleAnalyzerPlugin } = tryRequire('webpack-bundle-analyzer')
   const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
   const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
+  config.devtool = 'eval'
   config.watch = true
   config.watchOptions = { aggregateTimeout: 500 }
   config.plugins.push(

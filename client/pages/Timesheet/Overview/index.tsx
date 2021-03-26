@@ -25,8 +25,7 @@ export const Overview: TabComponent = () => {
         items={state.selectedPeriod?.getEvents()}
         dateFormat={config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
         listGroupProps={listGroupProps}
-        additionalColumns={additionalColumns}
-      />
+        additionalColumns={additionalColumns} />
     </div>
   )
 }
