@@ -13,7 +13,7 @@ import { useUserMessage } from './useUserMessage'
  * @category Function Component
  */
 export const UserMessage: React.FC<IUserMessageProps> = (props) => {
-  const { messageBarStyles, messageBarType } = useUserMessage(props)
+  const { messageBarType } = useUserMessage(props)
 
   return (
     <div
@@ -23,7 +23,6 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
       hidden={props.hidden}
       onClick={props.onClick}>
       <MessageBar
-        styles={messageBarStyles}
         isMultiline={props.isMultiline}
         messageBarType={messageBarType}
         messageBarIconProps={props.iconName && { iconName: props.iconName }}
