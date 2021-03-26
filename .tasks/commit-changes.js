@@ -26,7 +26,7 @@ async function commit_changes() {
             default: true
         }
     ])
-    const commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
+    let commit_message = `${input.commit_prefix}: ${input.commit_message.toLowerCase()}`
     try {
         await exec('git add --all')
         if(gitmoji[input.commit_prefix]) {
