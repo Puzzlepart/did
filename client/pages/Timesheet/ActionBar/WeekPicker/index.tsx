@@ -9,6 +9,7 @@ import {
   FocusTrapZone
 } from '@fluentui/react'
 import React, { useState } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { SET_SCOPE } from '../../reducer/actions'
 import { TimesheetScope, useTimesheetContext } from '../../types'
@@ -30,9 +31,9 @@ export const WeekPicker: React.FC = () => {
       <Callout
         hidden={!calendar}
         isBeakVisible={false}
+        doNotLayer={false}
         className={styles.root}
         gapSpace={5}
-        doNotLayer={false}
         target={calendar}
         directionalHint={DirectionalHint.bottomLeftEdge}
         onDismiss={() => setCalendar(null)}
@@ -49,6 +50,7 @@ export const WeekPicker: React.FC = () => {
             }
             showGoToToday={false}
             showWeekNumbers={true}
+            isMonthPickerVisible={isBrowser}
             firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
             dateRangeType={DateRangeType.Week}
             value={state.scope.startDate.jsDate}
