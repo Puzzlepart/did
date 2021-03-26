@@ -15,7 +15,7 @@
 ### Properties
 
 - [containerStyle](components.iusermessageprops.md#containerstyle)
-- [fixedCenter](components.iusermessageprops.md#fixedcenter)
+- [fixedHeight](components.iusermessageprops.md#fixedheight)
 - [headerText](components.iusermessageprops.md#headertext)
 - [iconName](components.iusermessageprops.md#iconname)
 - [innerStyle](components.iusermessageprops.md#innerstyle)
@@ -36,11 +36,11 @@ Defined in: [components/UserMessage/types.tsx:50](https://github.com/Puzzlepart/
 
 ___
 
-### fixedCenter
+### fixedHeight
 
-• `Optional` **fixedCenter**: *number*
+• `Optional` **fixedHeight**: *number*
 
-To flex the message center, speficy a min height
+To flex the message center with a fixed height
 
 Defined in: [components/UserMessage/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L55)
 

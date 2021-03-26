@@ -56,9 +56,7 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
  *
  * @category Reports Actions
  */
-export const CHANGE_QUERY = createAction<{ itemKey: string }>(
-  'FILTER_UPDATED'
-)
+export const CHANGE_QUERY = createAction<{ itemKey: string }>('FILTER_UPDATED')
 
 /**
  * A utility function to create an action creator for the given action type string.

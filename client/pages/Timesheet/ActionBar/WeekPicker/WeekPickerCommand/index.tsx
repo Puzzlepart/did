@@ -11,7 +11,7 @@ import styles from './WeekPickerCommand.module.scss'
 /**
  * @category Timesheet
  */
-export const WeekPickerCommand = ({ onClick, }: HTMLAttributes<any>) => {
+export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   const showWeekNumber =

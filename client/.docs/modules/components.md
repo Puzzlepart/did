@@ -154,7 +154,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [components/TabContainer/types.ts:83](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L83)
+Defined in: [components/TabContainer/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L88)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [components/TabContainer/types.ts:81](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L81)
+Defined in: [components/TabContainer/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L86)
 
 ___
 
@@ -449,7 +449,7 @@ ___
 A component that supports a `<MessageBar />` with
 markdown using `react-markdown`.
 
-Defined in: [components/UserMessage/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L15)
+Defined in: [components/UserMessage/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L16)
 
 ___
 

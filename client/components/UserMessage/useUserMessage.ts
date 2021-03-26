@@ -39,16 +39,16 @@ export function useUserMessage(props: IUserMessageProps) {
     className: [styles.root, props.className].join(' '),
     style: props.containerStyle,
     hidden: props.hidden,
-    onClick: props.onClick,
+    onClick: props.onClick
   }
 
   const message: IMessageBarProps = {
     styles: messageBarStyles,
-        isMultiline: props.isMultiline,
-        messageBarType,
-        messageBarIconProps: props.iconName && { iconName: props.iconName },
-        onDismiss: props.onDismiss,
-        actions: props.actions
+    isMultiline: props.isMultiline,
+    messageBarType,
+    messageBarIconProps: props.iconName && { iconName: props.iconName },
+    onDismiss: props.onDismiss,
+    actions: props.actions
   }
 
   return {

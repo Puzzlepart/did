@@ -71,6 +71,6 @@ export default {
     tealLight: '#dcdcdc',
     greenDark: '#dcdcdc',
     green: 'green',
-    greenLight: '#dcdcdc',
+    greenLight: '#dcdcdc'
   }
 } as PartialTheme

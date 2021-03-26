@@ -8,7 +8,9 @@ import { IMobileBreadcrumbProps } from '.'
  * Returns the items that should be rendered by
  * `<MobileBreadcrumb />`
  */
-export function useMobileBreadcrumb(props: IMobileBreadcrumbProps): IBreadcrumbItem[] {
+export function useMobileBreadcrumb(
+  props: IMobileBreadcrumbProps
+): IBreadcrumbItem[] {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
   const items = [

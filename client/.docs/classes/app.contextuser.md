@@ -124,7 +124,7 @@ ___
 
 ### theme
 
-• **theme**: Theme
+• **theme**: PartialTheme
 
 Defined in: [app/ContextUser.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L21)
 
