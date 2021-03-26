@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Panel } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { FilterItem } from './FilterItem'
 import styles from './FilterPanel.module.scss'
@@ -13,9 +14,9 @@ import { useFilterPanel } from './useFilterPanel'
  * `shortListCount` defaults to **10**, meaning
  * 10 items are shown before displaying a show more link.
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const FilterPanel: React.FC<IFilterPanelProps> = (props) => {
+export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   const { filters, onFilterUpdated } = useFilterPanel(props)
 
   return (

@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { ShimmeredDetailsList } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { ListContext } from './context'
@@ -28,9 +29,9 @@ import { useList } from './useList'
  * * `<Reports />`
  * * `<Timesheet />` => `<SummaryView />`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const List: React.FC<IListProps> = (props) => {
+export const List: ReusableComponent<IListProps> = (props) => {
   const { listProps, state, dispatch } = useList(props)
   return (
     <div className={styles.root} hidden={props.hidden}>

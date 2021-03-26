@@ -1,14 +1,15 @@
 /* eslint-disable tsdoc/syntax */
 import { ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 
 /**
  * Conditionally wraps `children` in `<ScrollablePane />` based
  * on `condition`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const ScrollablePaneWrapper: React.FC<any> = ({
+export const ScrollablePaneWrapper: ReusableComponent<any> = ({
   children,
   condition,
   height

@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon, Label } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LabelPicker.module.scss'
@@ -9,9 +10,9 @@ import { ILabelPickerProps } from './types'
 import { useLabelPicker } from './useLabelPicker'
 
 /**
- * @category Function Component
+ * @category Reusable Component
  */
-export const LabelPicker: React.FC<ILabelPickerProps> = (props) => {
+export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
   const { t } = useTranslation()
   const {
     labels,

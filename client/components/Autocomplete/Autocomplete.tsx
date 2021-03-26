@@ -11,6 +11,7 @@ import { SubText } from 'components/SubText'
 import React from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
+import { ReusableComponent } from '../types'
 import styles from './Autocomplete.module.scss'
 import { SuggestionItem } from './SuggestionItem'
 import { useAutocomplete } from './useAutocomplete'
@@ -19,9 +20,9 @@ import { useAutocomplete } from './useAutocomplete'
  * Autocomplete component using `<SearchBox />`, `<Callout />`,
  * `<FocusZone />` and `<List />` from ``.
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const Autocomplete: React.FC<IAutocompleteProps> = (props) => {
+export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
   const {
     state,
     className,

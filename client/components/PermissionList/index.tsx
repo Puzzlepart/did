@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import { usePermissions } from 'hooks'
 import React from 'react'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 
 /**
- * @category Function Component
+ * @category Reusable Component
  */
-export const PermissionList: React.FC<IPermissionListProps> = ({
+export const PermissionList: ReusableComponent<IPermissionListProps> = ({
   permissionIds
-}: IPermissionListProps) => {
+}) => {
   const [permissions] = usePermissions(permissionIds)
   return (
     <div className={styles.root}>

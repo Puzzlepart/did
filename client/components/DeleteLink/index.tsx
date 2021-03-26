@@ -9,7 +9,7 @@ import { IDeleteLinkProps } from './types'
  * Renders a delete link using `<Icon />` and `<Link />`
  * from `@fluentui/react`
  *
- * @category Function Component
+ * @category Reusable Component
  */
 export const DeleteLink = ({
   iconName = 'Delete',

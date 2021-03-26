@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { IDurationDisplayProps } from './types'
 
 /**
- * @category Function Component
+ * @category Reusable Component
  */
 export const DurationDisplay: React.FC<IDurationDisplayProps> = (
   props

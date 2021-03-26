@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { Project } from 'types'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
@@ -9,9 +10,9 @@ import { ISearchProjectProps } from './types'
 /**
  * Search for projects using `<Autocomplete />`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const SearchProject: React.FC<ISearchProjectProps> = (props) => {
+export const SearchProject: ReusableComponent<ISearchProjectProps> = (props) => {
   const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-first'
   })

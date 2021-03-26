@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { TooltipDelay, TooltipHost } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'
@@ -8,11 +9,11 @@ import { IProjectTooltipProps } from './types'
  * Shows more details about the project in a
  * `<TooltipHost />` from `@fluentui/react`
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const ProjectTooltip: React.FC<IProjectTooltipProps> = (
+export const ProjectTooltip: ReusableComponent<IProjectTooltipProps> = (
   props
-): JSX.Element => {
+) => {
   return (
     <TooltipHost
       tooltipProps={{

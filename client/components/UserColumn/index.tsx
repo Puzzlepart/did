@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import get from 'get-value'
 import React from 'react'
 import { isBrowser, isMobile } from 'react-device-detect'
@@ -12,10 +13,10 @@ import { IUserColumnProps } from './types'
  *
  * @category SummaryView
  */
-export const UserColumn: React.FC<IUserColumnProps> = ({
+export const UserColumn: ReusableComponent<IUserColumnProps> = ({
   user,
   persona = { size: PersonaSize.size24 }
-}: IUserColumnProps) => {
+}) => {
   return (
     <div>
       <Persona

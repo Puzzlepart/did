@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IModalProps, Modal } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import FadeIn from 'react-fade-in'
 import { GlobalHotKeysProps } from 'react-hotkeys'
@@ -10,9 +11,9 @@ export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 /**
  * Modal that shows the available shortcuts in the current context.
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const HotkeyModal: React.FC<IHotkeyModal> = (props) => {
+export const HotkeyModal: ReusableComponent<IHotkeyModal> = (props) => {
   const { t } = useTranslation()
   return (
     <Modal

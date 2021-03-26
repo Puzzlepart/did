@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { MessageBar } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'
@@ -11,9 +12,9 @@ import { useUserMessageStyles } from './useUserMessageStyles'
  * A component that supports a `<MessageBar />` with
  * markdown using `react-markdown`.
  *
- * @category Function Component
+ * @category Reusable Component
  */
-export const UserMessage: React.FC<IUserMessageProps> = (props) => {
+export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
   const { container, message } = useUserMessage(props)
   const classNames = useUserMessageStyles(props.type)
 
