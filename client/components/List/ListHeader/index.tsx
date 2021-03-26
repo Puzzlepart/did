@@ -2,7 +2,7 @@
 import {
   CommandBar,
   ICommandBarProps,
-
+  merge,
   SearchBox,
   Sticky,
   StickyPositionType
@@ -19,6 +19,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
   defaultRender
 }) => {
   const { props, state, dispatch } = useListContext()
+  const mergedHeaderProps = merge(headerProps, props.columnHeaderProps)
   const root = useRef(null)
   const timeout = useRef(null)
   const searchBoxItem = props.searchBox && {
@@ -42,12 +43,8 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
     )
   }
 
-  if (!!props.onRenderDetailsHeader) {
-    return (
-      <ListHeader
-        headerProps={headerProps}
-        defaultRender={defaultRender} />
-    )
+  if (!!props.columnHeaderProps?.onRender) {
+    return props.columnHeaderProps.onRender(mergedHeaderProps, defaultRender)
   }
 
   const commandBarProps: ICommandBarProps = {
@@ -65,7 +62,10 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
   }
 
   return (
-    <Sticky ref={root} stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
+    <Sticky
+     ref={root}
+      stickyPosition={StickyPositionType.Header} 
+      isScrollSynced={true}>
       <CommandBar
         {...commandBarProps}
         hidden={
@@ -73,7 +73,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
         }
         styles={{ root: { margin: 0, padding: 0 } }}
       />
-      {defaultRender(headerProps)}
+      {defaultRender(mergedHeaderProps)}
     </Sticky>
   )
 }

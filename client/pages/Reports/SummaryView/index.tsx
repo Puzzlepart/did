@@ -33,8 +33,9 @@ export const SummaryView: TabComponent = () => {
           columns={columns}
           items={rows}
           height={isBrowser && window.innerHeight - 200}
-          headerClassName={styles.columnHeader}
-        />
+          columnHeaderProps={{
+            className: styles.columnHeader
+          }} />
         <UserMessage
           hidden={!isEmpty(rows) || state.loading}
           text={t('admin.noTimeEntriesText')}

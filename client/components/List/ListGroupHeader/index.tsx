@@ -11,6 +11,6 @@ export const ListGroupHeader: React.FC<IDetailsGroupDividerProps> = (props) => {
         },
         expand: { cursor: 'pointer' },
         headerCount: { display: 'none' }
-      }}></GroupHeader>
+      }} />
   )
 }
