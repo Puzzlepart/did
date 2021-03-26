@@ -2,8 +2,9 @@ import { PartialTheme } from '@fluentui/react'
 
 export default {
   fonts: {
-    large: { 'font-size': '32x' },
-    medium: { 'font-size': '16px' }, // tab button text
-    small: { 'font-size': '14px' } //  table titles: timesheet, customers,
+    large: { fontSize: 32 },
+    medium: { fontSize: 16 },
+    small: { fontSize: 14 },
+    xSmall: { fontSize: 10 }
   }
 } as PartialTheme
