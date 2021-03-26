@@ -334,5 +334,28 @@
     "exec": "ts-node ./server/index.ts -T",
     "delay": 800,
     "colours": true
+  },
+  "gitmoji": {
+    "build": "🏗️",
+    "ci": "👷",
+    "chore": "💄",
+    "docs": "💄",
+    "feat": "💄",
+    "fix": "💄",
+    "perf": "💄",
+    "refactor": "♻️",
+    "revert": "💄",
+    "style": "💄",
+    "test": "💄",
+    "dev": "💄",
+    "i18n": "💄",
+    "github": "💄",
+    "readme": "💄",
+    "experimental": "💄",
+    "typo": "💄",
+    "rename": "💄",
+    "merge": "💄",
+    "migrate": "💄",
+    "syntax": "🎨"
   }
 }
