@@ -62,7 +62,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         />
         <UserMessage
           hidden={state.editMode}
-          className={styles.idPreviewText}
+          containerStyle={{ marginTop: 10 }}
           iconName='OutlookLogo'
           text={
             isBlank(state.projectId)
@@ -82,8 +82,8 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
             }
           />
           <SubText text={t('projects.createOutlookCategoryFieldDescription', {
-              id: state.projectId
-            })} />
+            id: state.projectId
+          })} />
         </div>
         <TextField
           className={styles.inputField}
