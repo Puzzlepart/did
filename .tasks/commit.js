@@ -16,10 +16,15 @@ async function commit_changes() {
             choices: commitlint.rules['type-enum'][2],
             source: async (_a, input) => {
                 const type_enums = commitlint.rules['type-enum'][2]
-                return type_enums.filter(
-                    (type_enum) =>
-                        type_enum.toLowerCase().indexOf((input || '').toLowerCase()) !== -1
-                )
+                return type_enums
+                    .filter(
+                        (type_enum) =>
+                            type_enum.toLowerCase().indexOf((input || '').toLowerCase()) !== -1
+                    )
+                    .map((type_enum) => ({
+                        value: type_enum,
+                        name: `${gitmoji[type_enum]}\t${type_enum}`
+                    }))
             },
         },
         {
