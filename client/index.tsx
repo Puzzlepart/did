@@ -53,9 +53,7 @@ export const boostrap = async () => {
   i18next.changeLanguage(init.user.preferredLanguage)
 
   render(
-    <ThemeProvider
-      applyTo='body'
-      theme={init.user.theme}>
+    <ThemeProvider applyTo='body' theme={init.user.theme}>
       <ApolloProvider client={client}>
         <App {...init} />
       </ApolloProvider>
