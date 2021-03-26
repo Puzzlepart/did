@@ -2,10 +2,10 @@ import { Theme } from '@fluentui/react'
 
 export default {
   palette: {
-    themeDarker: '#dcdcdc',
-    themeDark: '#dcdcdc',
+    themeDarker: '#fff',
+    themeDark: '#fff',
     themeDarkAlt: '#dcdcdc',
-    themePrimary: '#dcdcdc',
+    themePrimary: '#dcdcdc',  
     themeSecondary: '#dcdcdc',
     themeTertiary: '#dcdcdc',
     themeLight: '#dcdcdc',
@@ -15,7 +15,7 @@ export default {
      * Strongest color, very light in dark theme
      */
     black: '#f8f8f8',
-    blackTranslucent40: '#dcdcdc',
+    blackTranslucent40: '#000000aa',
     neutralDark: '#f4f4f4',
 
     /**
@@ -40,7 +40,7 @@ export default {
      * This is the page background
      */
     white: '#0d1117',
-    whiteTranslucent40: '#dcdcdc',
+    whiteTranslucent40: '#1f1f1f88',
     yellowDark: '#dcdcdc',
     yellow: '#dcdcdc',
     yellowLight: '#dcdcdc',
