@@ -27,8 +27,8 @@ export const SubscriptionSettings: TabComponent = () => {
       <div className={styles.root}>
         <Toast {...toast} />
         <TabContainer
-          onLinkClick={({ props }) => setSelectedKey(props.itemKey)}
-          selectedKey={selectedKey}
+          onTabChanged={(itemKey) => setSelectedKey(itemKey)}
+          defaultSelectedKey={selectedKey}
           level={3}>
           {sections.map((section) => {
             return <SettingsSection {...section} key={section.itemKey} />

@@ -3,7 +3,7 @@ import { IPivotItemProps, IPivotProps } from '@fluentui/react'
 import { FC } from 'react'
 import { PermissionScope } from 'security'
 
-export interface ITabContainerProps extends IPivotProps {
+export interface ITabContainerProps extends Omit<IPivotProps, 'onLinkClick' | 'selectedKey'> {
   /**
    * Fixed tab link width
    *
@@ -49,6 +49,11 @@ export interface ITabContainerProps extends IPivotProps {
    * work as expected.
    */
   items?: IPivotItemProps[] | any[]
+
+  /**
+   * On tab changd
+   */
+  onTabChanged?: (itemKey: string) => void
 }
 
 export interface ITabItemProps extends Omit<IPivotItemProps, 'hidden'> {

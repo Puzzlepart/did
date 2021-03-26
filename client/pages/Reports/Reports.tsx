@@ -26,13 +26,13 @@ export const Reports: React.FC = () => {
     <ReportsContext.Provider value={context}>
       <TabContainer
         className={styles.root}
-        selectedKey={context.state.preset?.itemKey || 'default'}
+        defaultSelectedKey={context.state.preset?.itemKey || 'default'}
         items={queries}
         fixedLinkWidth={true}
         itemProps={{
           headerButtonProps: { disabled: context.state.loading }
         }}
-        onLinkClick={({ props }) => context.dispatch(CHANGE_QUERY({ props }))}>
+        onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}>
         {queries
           .filter((q) => !q.hidden)
           .map((props, index) => (

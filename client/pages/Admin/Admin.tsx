@@ -25,11 +25,11 @@ export const Admin = () => {
     <TabContainer
       className={styles.root}
       fixedLinkWidth={true}
-      onLinkClick={({ props }) => {
-        setView(props.itemKey)
-        history.push(`/admin/${props.itemKey}`)
+      onTabChanged={(itemKey) => {
+        setView(itemKey)
+        history.push(`/admin/${itemKey}`)
       }}
-      selectedKey={view}>
+      defaultSelectedKey={view}>
       <Users
         headerText={t('admin.users')}
         itemIcon='FabricUserFolder'

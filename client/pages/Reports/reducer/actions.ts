@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { QueryResult } from '@apollo/client'
-import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
+import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroupProps } from 'components/List/types'
@@ -56,7 +56,7 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
  *
  * @category Reports Actions
  */
-export const CHANGE_QUERY = createAction<{ props: IPivotItemProps }>(
+export const CHANGE_QUERY = createAction<{ itemKey: string }>(
   'FILTER_UPDATED'
 )
 

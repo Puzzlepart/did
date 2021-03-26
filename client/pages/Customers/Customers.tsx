@@ -22,9 +22,9 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
   return (
     <CustomersContext.Provider value={context}>
       <TabContainer
-        selectedKey={view}
-        onLinkClick={({ props }) =>
-          dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))
+        defaultSelectedKey={view}
+        onTabChanged={(itemKey) =>
+          dispatch(CHANGE_VIEW({ view: itemKey as CustomersView }))
         }
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <CustomerList
