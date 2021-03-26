@@ -8,7 +8,8 @@ export default {
     successBackground: '#393d1b',
     successText: '#fff',
     infoBackground: '#323130',
-    infoText: '#fff'
+    infoText: '#fff',
+    bodySubtext: '#c9d1d9'
   },
   palette: {
     themeDarker: '#0d1117',

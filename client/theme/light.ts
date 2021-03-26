@@ -4,7 +4,8 @@ import fonts from './fonts'
 export default {
   semanticColors: {
     menuHeader: '#161b22',
-    bodyBackground: '#ffffff'
+    bodyBackground: '#ffffff',
+    bodySubtext: '#605e5c'
   },
   palette: {
     themePrimary: '#0078d4',
