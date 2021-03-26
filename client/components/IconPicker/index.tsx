@@ -1,10 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { getIcons } from 'common/icons'
 import { Autocomplete } from 'components/Autocomplete'
 import { ReusableComponent } from 'components/types'
-import React, { useMemo } from 'react'
+import { useFabricIcons } from 'hooks'
+import React from 'react'
 import { omit } from 'underscore'
-import { humanize } from 'underscore.string'
 import styles from './IconPicker.module.scss'
 import { IIconPickerProps } from './types'
 
@@ -15,25 +14,14 @@ import { IIconPickerProps } from './types'
  * @category Reusable Component
  */
 export const IconPicker: ReusableComponent<IIconPickerProps> = (props) => {
-  const items = useMemo(
-    () =>
-      getIcons().map((iconName) => ({
-        key: iconName,
-        text: humanize(iconName),
-        searchValue: [iconName, humanize(iconName)].join(' '),
-        iconName: iconName,
-        data: iconName
-      })),
-    []
-  )
-
+  const icons = useFabricIcons()
   return (
     <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
       <Autocomplete
         {...omit(props, 'className')}
         defaultSelectedKey={props.defaultSelected}
         required={props.required}
-        items={items}
+        items={icons}
         itemIcons={{ style: {} }}
         width={props.width}
         placeholder={props.placeholder}

@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { IPanelProps } from '@fluentui/react'
-import { getIcons } from 'common/icons'
 import { ITabItemProps } from 'components/TabContainer'
 import {
   IFormValidation,
@@ -8,7 +7,6 @@ import {
   Project,
   ProjectOptions
 } from 'types'
-import { first } from 'underscore'
 
 /**
  * @category Projects
@@ -33,7 +31,7 @@ export class ProjectModel {
     this.customerKey = project?.customerKey || ''
     this.description = project?.description || ''
     this.inactive = project?.inactive || false
-    this.icon = project?.icon || first(getIcons(1))
+    this.icon = project?.icon
     this.labels = ((project?.labels || []) as Label[]).map(
       (label) => label.name
     )

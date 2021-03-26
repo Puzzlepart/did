@@ -1,8 +1,6 @@
 import { IPanelProps } from '@fluentui/react'
-import { getIcons } from 'common/icons'
 import { ITabItemProps } from 'components/TabContainer'
 import { Customer, IFormValidation } from 'types'
-import { first } from 'underscore'
 
 export class CustomerModel {
   public key: string
@@ -14,7 +12,7 @@ export class CustomerModel {
     this.key = customer?.key || ''
     this.name = customer?.name || ''
     this.description = customer?.description || ''
-    this.icon = customer?.icon || first(getIcons(1))
+    this.icon = customer?.icon
   }
 }
 

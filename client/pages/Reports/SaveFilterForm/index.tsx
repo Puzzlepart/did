@@ -1,10 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
-import { getIcons } from 'common/icons'
 import { IconPicker } from 'components'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { first } from 'underscore'
 import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
@@ -14,7 +12,7 @@ const INITIAL_MODEL: IContextualMenuItem = {
   key: '',
   text: '',
   secondaryText: '',
-  iconProps: { iconName: first(getIcons(1)) }
+  iconProps: { iconName: 'Page' }
 }
 
 /**
