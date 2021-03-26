@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui/react'
+import { PartialTheme } from '@fluentui/react'
 
 export default {
   palette: {
@@ -26,4 +26,4 @@ export default {
     white: '#ffffff',
     whiteTranslucent40: '#ffffff88',
   }
-} as Theme
+} as PartialTheme

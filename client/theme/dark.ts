@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui/react'
+import { PartialTheme } from '@fluentui/react'
 
 export default {
   palette: {
@@ -66,4 +66,4 @@ export default {
     green: 'green',
     greenLight: '#dcdcdc',
   }
-} as Theme
+} as PartialTheme
