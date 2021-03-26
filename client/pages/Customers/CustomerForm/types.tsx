@@ -1,7 +1,7 @@
 import { IPanelProps } from '@fluentui/react'
 import { ITabItemProps } from 'components/TabContainer'
 import { Customer } from 'types'
-import { pick, keys } from 'underscore'
+import { keys, pick } from 'underscore'
 
 export class CustomerModel {
   constructor(
