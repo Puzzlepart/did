@@ -16,7 +16,7 @@ export default {
     themeDark: '#005a9e',
     themeDarker: '#004578',
     neutralLighterAlt: '#f8f8f8',
-    neutralLighter: '#fff',
+    neutralLighter: '#f4f4f4',
     neutralLight: '#eaeaea',
     neutralQuaternaryAlt: '#dadada',
     neutralQuaternary: '#d0d0d0',
