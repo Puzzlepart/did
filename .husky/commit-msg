@@ -1,5 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "test"
+echo "This works too, but please use npm script commit 🚀"
+
 npx --no-install commitlint --edit $1

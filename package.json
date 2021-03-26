@@ -11,7 +11,7 @@
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
-    "commit:changes": "node ./.tasks/commit-changes.js",
+    "commit": "node ./.tasks/commit-changes.js",
     "start": "node ./dist/server/index.js",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
