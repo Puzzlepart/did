@@ -29,7 +29,7 @@ The text for the tab link
 
 Overrides: void
 
-Defined in: [components/TabContainer/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L70)
+Defined in: [components/TabContainer/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L71)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 An optional icon to show next to the tab link.
 
-Defined in: [components/TabContainer/types.ts:75](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L75)
+Defined in: [components/TabContainer/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L76)
 
 ___
 
@@ -53,7 +53,7 @@ name.
 
 Overrides: void
 
-Defined in: [components/TabContainer/types.ts:65](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L65)
+Defined in: [components/TabContainer/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L66)
 
 ___
 
@@ -66,4 +66,4 @@ content
 
 If not provided it will be accessible to all users
 
-Defined in: [components/TabContainer/types.ts:83](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L83)
+Defined in: [components/TabContainer/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L84)
