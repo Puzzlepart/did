@@ -25,7 +25,9 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
             <div className={styles.header}>{props.headerText}</div>
           )}
           {props.text && (
-            <ReactMarkdown source={props.text} escapeHtml={false} />
+            <ReactMarkdown
+              source={props.text}
+              escapeHtml={false} />
           )}
           {props.children}
         </div>
@@ -36,3 +38,4 @@ export const UserMessage: React.FC<IUserMessageProps> = (props) => {
 
 export * from './types'
 export * from './useMessage'
+

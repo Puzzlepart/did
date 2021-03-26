@@ -1,8 +1,9 @@
 import { PartialTheme } from '@fluentui/react'
+import fonts from './fonts'
 
 export default {
   semanticColors: {
-    bodyBackground: '#ffffff'
+    bodyBackground: '#ffffff',
   },
   palette: {
     themePrimary: '#0078d4',
@@ -27,6 +28,7 @@ export default {
     neutralDark: '#272727',
     black: '#1d1d1d',
     white: '#ffffff',
-    whiteTranslucent40: '#ffffff88'
-  }
+    whiteTranslucent40: '#ffffff88',
+  },
+  fonts
 } as PartialTheme
