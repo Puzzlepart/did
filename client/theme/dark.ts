@@ -3,6 +3,7 @@ import fonts from './fonts'
 
 export default {
   semanticColors: {
+    menuHeader: '#161b22',
     bodyBackground: '#0d1117',
     successBackground: '#393d1b',
     successText: '#fff',
@@ -10,8 +11,8 @@ export default {
     infoText: '#fff'
   },
   palette: {
-    themeDarker: '#fff',
-    themeDark: '#fff',
+    themeDarker: '#0d1117',
+    themeDark: '#0d1117',
     themeDarkAlt: '#dcdcdc',
     themePrimary: '#dcdcdc',
     themeSecondary: '#dcdcdc',
@@ -32,7 +33,7 @@ export default {
     neutralPrimary: '#c9d1d9',
     neutralPrimaryAlt: '#dadada',
     neutralSecondary: '#c9d1d9',
-    neutralSecondaryAlt: '#dcdcdc',
+    neutralSecondaryAlt: '#ff0000',
     neutralTertiary: '#c8c8c8',
     neutralTertiaryAlt: '#6d6d6d',
     neutralQuaternary: '#4f4f4f',
@@ -43,25 +44,25 @@ export default {
      */
     neutralLighter: '#3f3f3f',
     neutralLighterAlt: '#252422',
-    accent: '#dcdcdc',
+    accent: '#ff0000',
     /**
      * This is the page background
      */
     white: '#0d1117',
     whiteTranslucent40: '#1f1f1f88',
     yellowDark: '#dcdcdc',
-    yellow: '#dcdcdc',
+    yellow: 'yellow',
     yellowLight: '#dcdcdc',
-    orange: '#dcdcdc',
+    orange: 'orange',
     orangeLight: '#dcdcdc',
     orangeLighter: '#dcdcdc',
     redDark: '#dcdcdc',
-    red: '#dcdcdc',
+    red: 'red',
     magentaDark: '#dcdcdc',
     magenta: 'magenta',
     magentaLight: '#dcdcdc',
     purpleDark: '#dcdcdc',
-    purple: '#dcdcdc',
+    purple: 'purple',
     purpleLight: '#dcdcdc',
     blueDark: '#dcdcdc',
     blueMid: '#dcdcdc',

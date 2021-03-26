@@ -26,21 +26,10 @@ export const WeekPickerCommand = ({ onClick }: HTMLAttributes<any>) => {
           className={styles.root}
           onClick={onClick}
           value={state.scope.timespan}
-          styles={{
-            field: {
-              color: 'rgb(120, 120, 120)',
-              cursor: !state.loading && 'pointer'
-            },
-            root: {
-              width: 180,
-              marginTop: 6
-            }
-          }}
           readOnly
           borderless
           iconProps={{
-            iconName: 'ChevronDown',
-            className: styles.actionBarIcon
+            iconName: 'ChevronDown'
           }}
         />
       </BrowserView>

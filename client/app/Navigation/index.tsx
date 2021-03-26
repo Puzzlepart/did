@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { useTheme } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { description, name } from 'package'
 import React from 'react'
@@ -17,9 +18,13 @@ import { UserNotifications } from './UserNotifications'
 export const Navigation: React.FC = () => {
   const { pages, isAuthenticated } = useAppContext()
   const className = useAppClassName(styles)
+  const theme = useTheme()
   if (!isAuthenticated) return null
   return (
-    <nav className={className} hidden={isMobile && !isAuthenticated}>
+    <nav
+      className={className}
+      style={{ background: theme.semanticColors.menuHeader }}
+      hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
         <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
           {name}

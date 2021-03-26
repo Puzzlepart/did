@@ -3,6 +3,7 @@ import fonts from './fonts'
 
 export default {
   semanticColors: {
+    menuHeader: '#161b22',
     bodyBackground: '#ffffff'
   },
   palette: {
