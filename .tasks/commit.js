@@ -12,7 +12,7 @@ async function commit_changes() {
         {
             type: 'autocomplete',
             name: 'commit_prefix',
-            message: 'Select commit prefix',
+            message: 'What did you do?',
             choices: commitlint.rules['type-enum'][2],
             source: async (_a, input) => {
                 const type_enums = commitlint.rules['type-enum'][2]
@@ -23,7 +23,7 @@ async function commit_changes() {
                     )
                     .map((type_enum) => ({
                         value: type_enum,
-                        name: `${gitmoji[type_enum]}\t${type_enum}`
+                        name: `${gitmoji[type_enum][0]}\t${type_enum}`
                     }))
             },
         },

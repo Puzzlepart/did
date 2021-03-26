@@ -336,24 +336,81 @@
     "colours": true
   },
   "gitmoji": {
-    "build": "🏗️",
-    "ci": "👷",
-    "chore": "💄",
-    "docs": "📝",
-    "feat": "✨",
-    "fix": "🐛",
-    "perf": "⚡",
-    "refactor": "♻️",
-    "revert": "⏪",
-    "style": "💄",
-    "test": "✅",
-    "dev": "🔨",
-    "i18n": "🌐",
-    "readme": "📝",
-    "typo": "✏️",
-    "rename": "🚚",
-    "merge": "🔀",
-    "auth": "🛂",
-    "syntax": "✏️"
+    "build": [
+      "🏗️",
+      "Make architectural changes."
+    ],
+    "ci": [
+      "👷",
+      "Add or update CI build system."
+    ],
+    "chore": [
+      "💄",
+      "Boring chores."
+    ],
+    "docs": [
+      "📝",
+      "Added or updated documentation."
+    ],
+    "feat": [
+      "✨",
+      "Introduced new features."
+    ],
+    "fix": [
+      "🐛",
+      "Fixed a bug."
+    ],
+    "perf": [
+      "⚡",
+      "Improved performance."
+    ],
+    "refactor": [
+      "♻️",
+      "Refactored code."
+    ],
+    "revert": [
+      "⏪",
+      "Reverted changes."
+    ],
+    "style": [
+      "💄",
+      "Added or updated the UI and style files."
+    ],
+    "test": [
+      "✅",
+      "Add or update CI build system."
+    ],
+    "dev": [
+      "🔨",
+      "Add or update CI build system."
+    ],
+    "i18n": [
+      "🌐",
+      "Add or update CI build system."
+    ],
+    "readme": [
+      "📝",
+      "Add or update CI build system."
+    ],
+    "typo": [
+      "✏️",
+      "Add or update CI build system."
+    ],
+    "rename": [
+      "🚚",
+      "Add or update CI build system."
+    ],
+    "merge": [
+      "🔀",
+      "Add or update CI build system."
+    ],
+    "auth": [
+      "🛂",
+      "Add or update CI build system."
+    ],
+    "syntax": [
+      "✏️",
+      "Add or update CI build system."
+    ]
   }
 }
