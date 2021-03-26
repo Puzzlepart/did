@@ -23,10 +23,10 @@ export default {
      neutralQuaternary: '#4f4f4f',
      neutralQuaternaryAlt: '#484848',
      neutralLight: '#3f3f3f',
-     neutralLighter: '#252422', // timesheet border, hover color. same as background for now
+     neutralLighter: '#0d1117', // timesheet border, hover color. same as background for now
      neutralLighterAlt: '#282828',
      accent: '#dcdcdc',
-     white: '#252422', // This is the page background.
+     white: '#0d1117', // This is the page background.
      whiteTranslucent40: '#dcdcdc',
      yellowDark: '#dcdcdc',
      yellow: '#dcdcdc',
