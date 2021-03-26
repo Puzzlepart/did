@@ -25,17 +25,15 @@ export function useTabContainer(
   const { dispatch } = useAppContext()
   const styles = useTabContainerStyles(props)
   const [selectedKey, setSelectedKey] = useState(props.selectedKey)
-  
+
   // eslint-disable-next-line unicorn/consistent-function-scoping
   function onLinkClick({ props: item }: PivotItem) {
     dispatch(
-      UPDATE_BREADCRUMB([
-        {
-          key: item.itemKey,
-          text: item.headerText,
-          level: props.level || 2
-        }
-      ])
+      UPDATE_BREADCRUMB({
+        key: item.itemKey,
+        text: item.headerText,
+        level: props.level || 2
+      })
     )
     setSelectedKey(item.itemKey)
   }
