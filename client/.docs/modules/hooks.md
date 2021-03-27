@@ -180,7 +180,7 @@ Name | Type |
 `set` | (`key`: K, `value`: V) => *void* |
 `value` | (`key`: K) => *Record*<any, any\>[K] |
 
-Defined in: [hooks/common/useMap.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L12)
+Defined in: [hooks/common/useMap.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L11)
 
 ___
 
