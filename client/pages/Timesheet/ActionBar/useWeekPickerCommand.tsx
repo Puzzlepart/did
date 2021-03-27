@@ -18,7 +18,9 @@ export function useWeekPickerCommand(onClick: React.DispatchWithoutAction) {
     style: { paddingRight: 15 }
   }
   if (state.periods.length === 1) {
-    browserProps.text += `${state.selectedPeriod.getName(t)} (${state.scope.timespan})`
+    browserProps.text += `${state.selectedPeriod.getName(t)} (${
+      state.scope.timespan
+    })`
   } else {
     browserProps.text = state.scope.timespan
   }

@@ -19,11 +19,7 @@ export function useActionBar() {
 
   const commandBarProps: ICommandBarProps = {
     styles: { root: { padding: 0 } },
-    items: [
-      ...navigateCommands,
-      weekPickerCommand,
-      ...periodCommands
-    ],
+    items: [...navigateCommands, weekPickerCommand, ...periodCommands],
     farItems: [submitCommands]
   }
 
