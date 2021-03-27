@@ -74,7 +74,7 @@
     "createSuccess": "The project **{{name}}** was succesfully created. Use **{{projectId}}** to tag your events in Outlook.",
     "editLabel": "Edit project",
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed.",
-    "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{id}}**. You can automatically create a category in Outlook by checking **Automatically create category in Outlook**.",
+    "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{projectId}}**. You can automatically create a category in Outlook by checking **Automatically create category in Outlook**.",
     "createOutlookCategoryFieldLabel": "Automatically create category in Outlook",
     "createOutlookCategoryFieldDescription": "Create category {{id}} in Outlook. \nThis makes it easier to associate your Outlook events with the right project and customer.",
     "keyFieldLabel": "Project key",

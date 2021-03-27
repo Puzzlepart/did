@@ -22,7 +22,7 @@ export function useCustomerFormSubmit(
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
   const [toast, setToast] = useToast(8000, { isMultiline: true })
-  const [createOrUpdateCustomer, { loading }] = useMutation(
+  const [mutate, { loading }] = useMutation(
     $create_or_update_customer
   )
 
@@ -31,7 +31,7 @@ export function useCustomerFormSubmit(
    */
   async function onClick() {
     try {
-      await createOrUpdateCustomer({
+      await mutate({
         variables: {
           customer: model.$,
           update: !!props.edit

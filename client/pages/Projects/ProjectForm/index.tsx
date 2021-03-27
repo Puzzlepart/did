@@ -12,9 +12,10 @@ import {
 import { Toast } from 'components/Toast'
 import { config } from 'package'
 import React from 'react'
-import { LabelObject as Label } from 'types'
+import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import styles from './ProjectForm.module.scss'
+import { ProjectFormOptions } from './ProjectFormOptions'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
 
@@ -22,124 +23,73 @@ import { useProjectForm } from './useProjectForm'
  * @category Projects
  */
 export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
-  const { state, loading, dispatch, onFormSubmit, toast, t } = useProjectForm({
-    props
-  })
+  const { t } = useTranslation()
+  const { model, submit, options } = useProjectForm(props)
   return (
     <ConditionalWrapper
       condition={!!props.panel}
       wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
       <div className={styles.root}>
-        <Toast {...toast} />
+        <Toast {...submit.toast} />
         <SearchCustomer
-          hidden={state.editMode}
+          hidden={!!props.edit}
           label={t('common.customer')}
           required={true}
           className={styles.inputField}
           placeholder={t('common.searchPlaceholder')}
-          errorMessage={state.validation.errors.customerKey}
-          onSelected={(customer) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['customerKey', customer?.key]
-            })
-          }
+          onSelected={(customer) => model.set('customerKey', customer.key)}
         />
         <TextField
-          disabled={state.editMode}
+          disabled={!!props.edit}
           className={styles.inputField}
           label={t('projects.keyFieldLabel')}
           description={t('projects.keyFieldDescription', config.app)}
           required={true}
-          errorMessage={state.validation.errors.key}
-          onChange={(_event, value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['key', value.toUpperCase()]
-            })
-          }
-          value={state.model.key}
+          onChange={(_event, value) => model.set('key', value.toUpperCase())}
+          value={model.value('key')}
         />
         <UserMessage
-          hidden={state.editMode}
+          hidden={!!props.edit}
           containerStyle={{ marginTop: 10 }}
           iconName='OutlookLogo'
           text={
-            isBlank(state.projectId)
+            isBlank(model.value('key'))
               ? t('projects.idPreviewBlankText')
-              : t('projects.idPreviewText', { id: state.projectId })
+              : t('projects.idPreviewText', model)
           }
         />
-        <div className={styles.inputField} hidden={state.editMode}>
-          <Toggle
-            label={t('projects.createOutlookCategoryFieldLabel')}
-            checked={state.options.createOutlookCategory}
-            onChange={(_event, value) =>
-              dispatch({
-                type: 'UPDATE_OPTIONS',
-                payload: ['createOutlookCategory', value]
-              })
-            }
-          />
-          <SubText
-            text={t('projects.createOutlookCategoryFieldDescription', {
-              id: state.projectId
-            })}
-          />
-        </div>
         <TextField
           className={styles.inputField}
           label={t('common.nameFieldLabel')}
           description={t('projects.nameFieldDescription', config.app)}
           required={true}
-          errorMessage={state.validation.errors.name}
-          onChange={(_event, value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['name', value]
-            })
-          }
-          value={state.model.name}
+          onChange={(_event, value) => model.set('name', value)}
+          value={model.value('name')}
         />
         <TextField
           className={styles.inputField}
           label={t('common.descriptionFieldLabel')}
           description={t('projects.descriptionFieldDescription')}
-          errorMessage={state.validation.errors.description}
           multiline={true}
           autoAdjustHeight={true}
-          onChange={(_event, value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['description', value]
-            })
-          }
-          value={state.model.description}
+          onChange={(_event, value) => model.set('description', value)}
+          value={model.value('description')}
         />
         <IconPicker
           className={styles.inputField}
-          defaultSelected={state.model.icon}
+          defaultSelected={model.value('icon')}
           label={t('common.iconFieldLabel')}
           description={t('projects.iconFieldDescription')}
           placeholder={t('common.iconSearchPlaceholder')}
           width={300}
-          onSelected={(value) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['icon', value]
-            })
-          }
+          required={true}
+          onSelected={(value) => model.set('icon', value)}
         />
-        <div className={styles.inputField} hidden={!state.editMode}>
+        <div className={styles.inputField} hidden={!props.edit}>
           <Toggle
             label={t('common.inactiveFieldLabel')}
-            checked={state.model.inactive}
-            onChange={(_event, value) =>
-              dispatch({
-                type: 'UPDATE_MODEL',
-                payload: ['inactive', value]
-              })
-            }
+            checked={model.value('inactive')}
+            onChange={(_event, value) => model.set('inactive', value)}
           />
           <SubText text={t('projects.inactiveFieldDescription')} />
         </div>
@@ -147,23 +97,18 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
           className={styles.inputField}
           label={t('admin.labels')}
           placeholder={t('admin.filterLabels')}
-          defaultSelectedKeys={
-            state.editMode
-              ? (props.edit.labels as Label[]).map((lbl) => lbl.name)
-              : []
-          }
-          onChange={(labels) =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['labels', labels.map((lbl) => lbl.name)]
-            })
-          }
+          defaultSelectedKeys={[]}
+          onChange={(labels) => model.set('labels', labels.map((lbl) => lbl.name))}
         />
+        <ProjectFormOptions
+          model={model}
+          options={options}
+          hidden={!!props.edit} />
         <PrimaryButton
           className={styles.inputField}
-          text={state.editMode ? t('common.save') : t('common.add')}
-          onClick={onFormSubmit}
-          disabled={loading || !!toast}
+          text={!!props.edit ? t('common.save') : t('common.add')}
+          onClick={submit.onClick}
+          disabled={submit.disabled}
         />
       </div>
     </ConditionalWrapper>

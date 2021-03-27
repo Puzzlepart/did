@@ -1,7 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { Callout, Checkbox, Icon, SearchBox } from '@fluentui/react'
+import { SubText } from 'components/SubText'
 import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
+import { truncateString } from 'utils/truncateString'
 import styles from './SelectCallout.module.scss'
 import { ISelectCalloutProps } from './types'
 
@@ -53,7 +55,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
                   />
                   <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
                 </div>
-                <div>{lbl.description}</div>
+                <SubText text={truncateString(lbl.description, 80)} />  
               </div>
             </div>
           </li>

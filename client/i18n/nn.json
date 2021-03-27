@@ -74,7 +74,7 @@
     "createSuccess": "Prosjektet **{{name}}** vart oppretta. Bruk **{{projectId}}** til å tagga kalenderoppføringane dine i Outlook.",
     "editLabel": "Rediger prosjekt",
     "inactiveFieldDescription": "Marker prosjektet som inaktivt. Det kan ikkje lenger stadfestast timar for prosjektet.",
-    "idPreviewText": "Du taggar kalenderoppføringane dine i Outlook med **{{id}}**. Du kan automatisk oppretta ein kategori i Outlook ved å huke av for **Opprett automatisk kategori i Outlook**.",
+    "idPreviewText": "Du taggar kalenderoppføringane dine i Outlook med **{{projectId}}**. Du kan automatisk oppretta ein kategori i Outlook ved å huke av for **Opprett automatisk kategori i Outlook**.",
     "createOutlookCategoryFieldLabel": "Opprett kategori automatisk i Outlook",
     "createOutlookCategoryFieldDescription": "Opprett kategori {{id}} i Outlook. Dette gjer det lettare å assosiera kalenderoppføringane dine i Outlook med riktig prosjekt og kunde.",
     "keyFieldLabel": "Prosjektnøkkel",

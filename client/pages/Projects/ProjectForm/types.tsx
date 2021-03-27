@@ -7,36 +7,39 @@ import {
   Project,
   ProjectOptions
 } from 'types'
+import { pick, keys, omit } from 'underscore'
 
 /**
  * @category Projects
  */
 export class ProjectModel {
-  public name: string
-  public key: string
-  public customerKey: string
-  public description: string
-  public inactive: boolean
-  public icon: string
-  public labels: string[]
-
   /**
-   * Constructs a new ProjectModel from a Project object
-   *
-   * @param project - Project object
+   * Constructs a new `ProjectModel`
    */
-  constructor(project?: Project) {
-    this.name = project?.name || ''
-    this.key = project?.key || ''
-    this.customerKey = project?.customerKey || ''
-    this.description = project?.description || ''
-    this.inactive = project?.inactive || false
-    this.icon = project?.icon
+  constructor(
+    public name: string = '',
+    public key: string = '',
+    public customerKey: string = '',
+    public description: string = '',
+    public inactive: boolean = false,
+    public icon: string = '',
+    public labels: string[] = []
+  ) {}
+
+
+  init?(project: Project): ProjectModel {
+    Object.assign(this, pick(project, omit(keys(this), 'labels')))
     this.labels = ((project?.labels || []) as Label[]).map(
       (label) => label.name
     )
+    return this
   }
 }
+
+/**
+ * Empty initialization of `ProjectModel`
+ */
+ export const _ProjectModel = new ProjectModel()
 
 /**
  * @category Projects
