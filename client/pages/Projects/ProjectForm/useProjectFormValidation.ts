@@ -2,7 +2,11 @@ import { useMap } from 'hooks'
 import { config } from 'package'
 
 /**
- * Validate form
+ * Validate project form.
+ * 
+ * * We check that project key matches our regex
+ * * We check that the name length is longer than `PROJECT_NAME_MIN_LENGTH`
+ * * We check that a icon is selected
  *
  * @param model - Model
  */

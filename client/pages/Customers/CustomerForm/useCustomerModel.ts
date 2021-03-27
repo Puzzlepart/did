@@ -32,7 +32,7 @@ import { useCustomerFormValidation } from './useCustomerFormValidation'
  */
 export function useCustomerModel(props: ICustomerFormProps) {
   const map = useMap<keyof CustomerModel>()
-  const valid = useCustomerFormValidation(map.$)
+  const valid = useCustomerFormValidation(map)
 
   useInitModel(map, props)
 
