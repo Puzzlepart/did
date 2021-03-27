@@ -1,19 +1,22 @@
 /* eslint-disable tsdoc/syntax */
 import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
 import { IconPicker } from 'components'
+import { Json } from 'components/Json'
+import { useMap } from 'hooks'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { capitalize, underscored } from 'underscore.string'
+import { toMap } from 'utils/toMap'
 import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
 
-const INITIAL_MODEL: IContextualMenuItem = {
+const INITIAL_MODEL = toMap({
   key: '',
   text: '',
-  secondaryText: '',
   iconProps: { iconName: 'Page' }
-}
+})
 
 /**
  * @category Reports
@@ -21,7 +24,7 @@ const INITIAL_MODEL: IContextualMenuItem = {
 export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
-  const [model, setModel] = useState<IContextualMenuItem>(INITIAL_MODEL)
+  const { $, set, $set, value } = useMap<keyof IContextualMenuItem>(INITIAL_MODEL)
   const [inputVisible, setInputVisible] = useState(false)
 
   /**
@@ -29,20 +32,14 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
    *
    * @remarks Stringifies the saved filters (including the new one)
    * and sends it to the mutation `updateUserConfiguration`.
-   *
-   * @returns Promise<void>
    */
-  function onSave() {
-    if (inputVisible) {
-      const _model = {
-        ...model,
-        key: model.text
-      }
-      dispatch(ADD_FILTER({ model: _model }))
-      setModel(INITIAL_MODEL)
-    } else {
+  function onSave(): void {
+    if (!inputVisible) {
       setInputVisible(true)
+      return
     }
+    dispatch(ADD_FILTER({ model: $ as IContextualMenuItem }))
+    $set(INITIAL_MODEL)
   }
 
   return (
@@ -50,19 +47,22 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
       className={styles.root}
       style={props?.style}
       hidden={!state.isFiltered || !!state.filter?.text}>
+      <Json obj={$} />
       <div hidden={!inputVisible}>
         <TextField
-          value={model.text}
+          value={value('text')}
           placeholder={t('reports.filterNamePlaceholder')}
-          onChange={(_, text) => setModel({ ...model, text })}
+          required={true}
+          onChange={(_event, value) => {
+            set('text', capitalize(value))
+            set('key', underscored(value))
+          }}
         />
       </div>
       <div hidden={!inputVisible}>
         <IconPicker
-          defaultSelected={model.iconProps?.iconName}
-          onSelected={(iconName) =>
-            setModel({ ...model, iconProps: { iconName } })
-          }
+          defaultSelected={value('iconProps').iconName}
+          onSelected={(iconName) => set('iconProps', { iconName })}
         />
       </div>
       <div className={styles.footer}>
@@ -70,7 +70,7 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
           <DefaultButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
-            disabled={model.text.length < 2 && inputVisible}
+            disabled={value('text').length < 2 && inputVisible}
             onClick={onSave}
           />
         </div>

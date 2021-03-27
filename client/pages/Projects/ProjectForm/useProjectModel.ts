@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
 import { useEffect } from 'react'
+import { toMap } from 'utils/toMap'
 import { ProjectModel } from './ProjectModel'
 import { IProjectFormProps } from './types'
 import { useProjectFormValidation } from './useProjectFormValidation'
@@ -21,7 +22,7 @@ export function useInitModel(
 ) {
   useEffect(() => {
     const model = new ProjectModel().init(props.edit)
-    const _map = new Map(Object.entries(model))
+    const _map = toMap(model)
     map.$set(_map)
   }, [props.edit])
 }

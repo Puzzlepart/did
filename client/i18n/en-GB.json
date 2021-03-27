@@ -169,7 +169,8 @@
     "filterNamePlaceholder": "Enter filter name...",
     "cancelSaveFilterText": "Cancel",
     "removeSelectedFilterText": "Remove selected filter",
-    "filterPanelHeaderText": "Filters"
+    "filterPanelHeaderText": "Filters",
+    "filterDescriptionPlaceholder": "Note"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

@@ -4,8 +4,9 @@ import {
   IContextualMenuItem
 } from '@fluentui/react'
 import React from 'react'
-import { isEmpty, omit } from 'underscore'
+import { isEmpty, omit, truncate } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
+import { truncateString } from 'utils/truncateString'
 import { IReportsContext } from '../context'
 import {
   CLEAR_FILTERS,
@@ -22,23 +23,23 @@ import { getGroupByOptions } from '../types'
  * @param context - Context
  */
 const selectGroupByCmd = (context: IReportsContext) =>
-  ({
-    key: 'SELECT_GROUP_BY',
-    text: context.t('common.groupBy'),
-    iconProps: { iconName: 'GroupList' },
-    subMenuProps: {
-      items: getGroupByOptions(context.t).map(
-        ({ key, text, props: groupBy }) =>
-          ({
-            key,
-            text,
-            canCheck: true,
-            checked: context.state.groupBy.fieldName === groupBy.fieldName,
-            onClick: () => context.dispatch(SET_GROUP_BY({ groupBy }))
-          } as IContextualMenuItem)
-      )
-    }
-  } as IContextualMenuItem)
+({
+  key: 'SELECT_GROUP_BY',
+  text: context.t('common.groupBy'),
+  iconProps: { iconName: 'GroupList' },
+  subMenuProps: {
+    items: getGroupByOptions(context.t).map(
+      ({ key, text, props: groupBy }) =>
+      ({
+        key,
+        text,
+        canCheck: true,
+        checked: context.state.groupBy.fieldName === groupBy.fieldName,
+        onClick: () => context.dispatch(SET_GROUP_BY({ groupBy }))
+      } as IContextualMenuItem)
+    )
+  }
+} as IContextualMenuItem)
 
 /**
  * Export to Excel command
@@ -46,21 +47,21 @@ const selectGroupByCmd = (context: IReportsContext) =>
  * @param context - Context
  */
 const exportToExcelCmd = ({ state, columns, t }: IReportsContext) =>
-  ({
-    key: 'EXPORT_TO_EXCEL',
-    text: t('reports.exportToExcel'),
-    onClick: () => {
-      const fileName = format(
-        state.preset.exportFileName,
-        new Date().toDateString().split(' ').join('-')
-      )
-      exportExcel(state.subset, {
-        columns,
-        fileName
-      })
-    },
-    iconProps: { iconName: 'ExcelDocument' }
-  } as IContextualMenuItem)
+({
+  key: 'EXPORT_TO_EXCEL',
+  text: t('reports.exportToExcel'),
+  onClick: () => {
+    const fileName = format(
+      state.preset.exportFileName,
+      new Date().toDateString().split(' ').join('-')
+    )
+    exportExcel(state.subset, {
+      columns,
+      fileName
+    })
+  },
+  iconProps: { iconName: 'ExcelDocument' }
+} as IContextualMenuItem)
 
 /**
  * Open filter panel command
@@ -68,12 +69,12 @@ const exportToExcelCmd = ({ state, columns, t }: IReportsContext) =>
  * @param context - Context
  */
 const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
-  ({
-    key: 'OPEN_FILTER_PANEL',
-    iconProps: { iconName: 'Filter' },
-    iconOnly: true,
-    onClick: () => dispatch(TOGGLE_FILTER_PANEL())
-  } as IContextualMenuItem)
+({
+  key: 'OPEN_FILTER_PANEL',
+  iconProps: { iconName: 'Filter' },
+  iconOnly: true,
+  onClick: () => dispatch(TOGGLE_FILTER_PANEL())
+} as IContextualMenuItem)
 
 /**
  * Clear filters
@@ -81,13 +82,13 @@ const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
  * @param context - Context
  */
 const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
-  ({
-    key: 'CLEAR_FILTERS',
-    iconProps: { iconName: 'ClearFilter' },
-    iconOnly: true,
-    disabled: !state.isFiltered,
-    onClick: () => dispatch(CLEAR_FILTERS())
-  } as IContextualMenuItem)
+({
+  key: 'CLEAR_FILTERS',
+  iconProps: { iconName: 'ClearFilter' },
+  iconOnly: true,
+  disabled: !state.isFiltered,
+  onClick: () => dispatch(CLEAR_FILTERS())
+} as IContextualMenuItem)
 
 /**
  * Save filter  command
@@ -99,44 +100,44 @@ const saveFilterCmd = ({
   dispatch,
   t
 }: IReportsContext): IContextualMenuItem =>
-  ({
-    key: 'SAVED_FILTERS',
-    text: state.filter?.text || t('reports.savedFilters'),
-    iconProps: state.filter?.iconProps || { iconName: 'ChromeRestore' },
-    subMenuProps: {
-      items: [
-        {
-          key: 'SAVE_FILTER',
-          onRender: () => (
-            <SaveFilterForm style={{ padding: '12px 12px 6px 32px' }} />
-          )
-        },
-        {
-          key: 'DIVIDER_O',
-          itemType: ContextualMenuItemType.Divider
-        },
-        state.filter?.text && {
-          key: 'REMOVE_SELECTED_FILTER',
-          text: t('reports.removeSelectedFilterText'),
-          iconProps: { iconName: 'RemoveFilter' },
-          onClick: () => dispatch(REMOVE_SELECTED_FILTER())
-        },
-        {
-          key: 'DIVIDER_1',
-          itemType: ContextualMenuItemType.Divider
-        },
-        ...Object.keys(state.savedFilters).map((key) => {
-          const filter = state.savedFilters[key]
-          return {
-            ...(omit(filter, 'values') as IContextualMenuItem),
-            canCheck: true,
-            checked: filter.text === state.filter?.text,
-            onClick: () => dispatch(SET_FILTER({ filter }))
-          }
-        })
-      ].filter((index) => index)
-    }
-  } as IContextualMenuItem)
+({
+  key: 'SAVED_FILTERS',
+  text: state.filter?.text || t('reports.savedFilters'),
+  iconProps: state.filter?.iconProps || { iconName: 'ChromeRestore' },
+  subMenuProps: {
+    items: [
+      {
+        key: 'SAVE_FILTER',
+        onRender: () => (
+          <SaveFilterForm style={{ padding: '12px 12px 6px 32px' }} />
+        )
+      },
+      {
+        key: 'DIVIDER_O',
+        itemType: ContextualMenuItemType.Divider
+      },
+      state.filter?.text && {
+        key: 'REMOVE_SELECTED_FILTER',
+        text: t('reports.removeSelectedFilterText'),
+        iconProps: { iconName: 'RemoveFilter' },
+        onClick: () => dispatch(REMOVE_SELECTED_FILTER())
+      },
+      {
+        key: 'DIVIDER_1',
+        itemType: ContextualMenuItemType.Divider
+      },
+      ...Object.keys(state.savedFilters).map((key) => {
+        const filter = state.savedFilters[key]
+        return {
+          ...(omit(filter, 'values') as IContextualMenuItem),
+          canCheck: true,
+          checked: filter.text === state.filter?.text,
+          onClick: () => dispatch(SET_FILTER({ filter })),
+        }
+      })
+    ].filter((index) => index)
+  }
+} as IContextualMenuItem)
 
 export default (context: IReportsContext) => ({
   items:
@@ -146,10 +147,10 @@ export default (context: IReportsContext) => ({
   farItems:
     !!context.state.preset && !context.state.loading
       ? [
-          exportToExcelCmd(context),
-          !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
-          openFilterPanelCmd(context),
-          clearFiltersCmd(context)
-        ].filter((index) => index)
+        exportToExcelCmd(context),
+        !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
+        openFilterPanelCmd(context),
+        clearFiltersCmd(context)
+      ].filter((index) => index)
       : []
 })

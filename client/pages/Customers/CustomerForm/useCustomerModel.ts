@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
 import { useEffect } from 'react'
+import { toMap } from 'utils/toMap'
 import { CustomerModel } from './CustomerModel'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormValidation } from './useCustomerFormValidation'
@@ -19,7 +20,7 @@ export function useInitModel(
 ) {
   useEffect(() => {
     const model = new CustomerModel().init(props.edit)
-    const _map = new Map(Object.entries(model))
+    const _map = toMap(model)
     map.$set(_map)
   }, [props.edit])
 }

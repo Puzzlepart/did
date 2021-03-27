@@ -168,7 +168,8 @@
     "filterNamePlaceholder": "Skriv inn filternavnet ...",
     "cancelSaveFilterText": "Avbryt",
     "removeSelectedFilterText": "Fjern valgt filter",
-    "filterPanelHeaderText": "Filtre"
+    "filterPanelHeaderText": "Filtre",
+    "filterDescriptionPlaceholder": "Merknad"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
