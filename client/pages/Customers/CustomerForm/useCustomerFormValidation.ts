@@ -7,7 +7,7 @@ import { config } from 'package'
  *
  * @returns `true` if the model is valid
  */
-export function useCustomerFormValidation(model: Record<any,any>): boolean {
+export function useCustomerFormValidation(model: Record<any, any>): boolean {
   const {
     CUSTOMER_KEY_MIN_LENGTH,
     CUSTOMER_KEY_MAX_LENGTH,
