@@ -17,6 +17,7 @@ Reusable React Hooks
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
 - [useFabricIcons](hooks.md#usefabricicons)
+- [useMap](hooks.md#usemap)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
 - [useToggle](hooks.md#usetoggle)
@@ -147,6 +148,39 @@ as an array of `ISuggestionItem`
 **Returns:** [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
 
 Defined in: [hooks/common/useFabricIcons.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L13)
+
+___
+
+### useMap
+
+▸ **useMap**<K, V\>(`map?`: *Map*<any, any\>): *object*
+
+Use `Map` state
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`K` | *any* |
+`V` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`map` | *Map*<any, any\> | Intitial map    |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`$` | *Record*<any, any\> |
+`$set` | *Dispatch*<SetStateAction<Map<K, V\>\>\> |
+`reset` | () => *void* |
+`set` | (`key`: K, `value`: V) => *void* |
+`value` | (`key`: K) => *Record*<any, any\>[K] |
+
+Defined in: [hooks/common/useMap.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L12)
 
 ___
 

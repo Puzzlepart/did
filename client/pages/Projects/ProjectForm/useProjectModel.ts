@@ -3,19 +3,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
 import { useEffect } from 'react'
-import { IProjectFormProps } from './types'
 import { ProjectModel } from './ProjectModel'
+import { IProjectFormProps } from './types'
 import { useProjectFormValidation } from './useProjectFormValidation'
 
 /**
  * Initializes the model based on `props.edit`
- * 
+ *
  * @param map - Map
  * @param props - Props
  *
  * @returns the initial model
  */
-export function useInitModel(map: ReturnType<typeof useMap>, props: IProjectFormProps) {
+export function useInitModel(
+  map: ReturnType<typeof useMap>,
+  props: IProjectFormProps
+) {
   useEffect(() => {
     const model = new ProjectModel().init(props.edit)
     const _map = new Map(Object.entries(model))
@@ -42,8 +45,9 @@ export function useProjectModel(props: IProjectFormProps) {
    * sent to GraphQL but it's needed for display
    * in the form.
    */
-  const projectId = map.value('key')?.length > 1
-    && [map.value('customerKey'), map.value('key')].join(' ')
+  const projectId =
+    map.value('key')?.length > 1 &&
+    [map.value('customerKey'), map.value('key')].join(' ')
 
   return {
     ...map,

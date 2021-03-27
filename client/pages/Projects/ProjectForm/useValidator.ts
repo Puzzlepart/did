@@ -16,7 +16,7 @@ export function useValidator(): (model: ProjectModel) => boolean {
     if (!model?.customerKey) return false
     if (model?.name?.length < config.app.PROJECT_NAME_MIN_LENGTH) return false
     if (!PROJECT_KEY_REGEX.test(model?.key)) return false
-    if(!model.icon) return false
+    if (!model.icon) return false
     return true
   }, [])
   return validator

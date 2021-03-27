@@ -27,9 +27,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, submit, register, options } = useProjectForm(props)
   return (
-    <FormControl
-      {...props}
-      submitProps={submit}>
+    <FormControl {...props} submitProps={submit}>
       <SearchCustomer
         hidden={!!props.edit}
         label={t('common.customer')}
@@ -38,31 +36,28 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         onSelected={(customer) => model.set('customerKey', customer.key)}
       />
       <TextControl
-        {
-        ...register<TextControlOptions>('key', { casing: 'upper' })
-        }
+        {...register<TextControlOptions>('key', { casing: 'upper' })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
         description={t('projects.keyFieldDescription', config.app)}
-        required={true} />
-      <TagPreview
-        hidden={!!props.edit}
-        projectId={model.projectId} />
+        required={true}
+      />
+      <TagPreview hidden={!!props.edit} projectId={model.projectId} />
       <TextControl
-        {
-        ...register<TextControlOptions>('name', { casing: 'capitalized' })
-        }
+        {...register<TextControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
         description={t('projects.nameFieldDescription', config.app)}
-        required={true} />
+        required={true}
+      />
       <TextControl
-        {
-        ...register<TextControlOptions>('description', { casing: 'capitalized' })
-        }
+        {...register<TextControlOptions>('description', {
+          casing: 'capitalized'
+        })}
         label={t('common.descriptionFieldLabel')}
         description={t('projects.descriptionFieldDescription')}
         multiline={true}
-        autoAdjustHeight={true} />
+        autoAdjustHeight={true}
+      />
       <IconPicker
         name='icon'
         model={model}
@@ -70,7 +65,8 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
-        required={true} />
+        required={true}
+      />
       <div hidden={!props.edit}>
         <Toggle
           label={t('common.inactiveFieldLabel')}
@@ -83,7 +79,12 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         label={t('admin.labels')}
         placeholder={t('admin.filterLabels')}
         defaultSelectedKeys={model.value('labels')}
-        onChange={(labels) => model.set('labels', labels.map((lbl) => lbl.name))}
+        onChange={(labels) =>
+          model.set(
+            'labels',
+            labels.map((lbl) => lbl.name)
+          )
+        }
       />
       <ProjectFormOptions
         model={model}

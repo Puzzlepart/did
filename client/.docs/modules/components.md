@@ -8,6 +8,7 @@ Reusable React Function components.
 
 ### Namespaces
 
+- [LabelPicker](components.labelpicker.md)
 - [List](components.list.md)
 
 ### FilterPanel Classes
@@ -324,7 +325,10 @@ ___
 Icon picker using `<Autocomplete />` to select
 icons from `@uifabric/icons`
 
-Defined in: [components/IconPicker/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L16)
+**`remarks`** Can be controlled with a model using props
+`model` and `name`
+
+Defined in: [components/IconPicker/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L18)
 
 ___
 

@@ -6,9 +6,9 @@ import { config } from 'package'
  *
  * @param model - Model
  */
-export function useProjectFormValidation(
-  { $ }: ReturnType<typeof useMap>
-): boolean {
+export function useProjectFormValidation({
+  $
+}: ReturnType<typeof useMap>): boolean {
   const PROJECT_KEY_REGEX = new RegExp(
     `(^[A-ZÆØÅ0-9-]{${config.app.PROJECT_KEY_MIN_LENGTH},${config.app.PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'

@@ -32,12 +32,15 @@ export function useIconPicker(props: IIconPickerProps) {
     if (model && name) model.set(name, item.data)
   }
 
-  return omit({
-    ...props,
-    items,
-    defaultSelectedKey: getDefaultSelectedKey(),
-    onSelected,
-    onClear,
-    itemIcons: true
-  }, 'className')
+  return omit(
+    {
+      ...props,
+      items,
+      defaultSelectedKey: getDefaultSelectedKey(),
+      onSelected,
+      onClear,
+      itemIcons: true
+    },
+    'className'
+  )
 }

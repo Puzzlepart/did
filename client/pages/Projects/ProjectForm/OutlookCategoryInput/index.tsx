@@ -13,16 +13,21 @@ interface IOutlookCategoryInputProps extends IToggleProps {
 /**
  * @category Projects
  */
-export const OutlookCategoryInput: ReusableComponent<IOutlookCategoryInputProps> = (props) => {
+export const OutlookCategoryInput: ReusableComponent<IOutlookCategoryInputProps> = (
+  props
+) => {
   const { t } = useTranslation()
   return (
     <div>
       <Toggle
-        label={t('projects.createOutlookCategoryFieldLabel')} 
+        label={t('projects.createOutlookCategoryFieldLabel')}
         defaultChecked={props.defaultChecked}
-        onChange={props.onChange}/>
+        onChange={props.onChange}
+      />
       <SubText
-        text={t('projects.createOutlookCategoryFieldDescription', { id: 'TEST' })}
+        text={t('projects.createOutlookCategoryFieldDescription', {
+          id: 'TEST'
+        })}
       />
     </div>
   )

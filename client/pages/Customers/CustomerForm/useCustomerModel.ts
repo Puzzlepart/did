@@ -5,16 +5,18 @@ import { CustomerModel } from './CustomerModel'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormValidation } from './useCustomerFormValidation'
 
-
 /**
  * Initializes the model based on `props.edit`
- * 
+ *
  * @param map - Map
  * @param props - Props
  *
  * @returns the initial model
  */
- export function useInitModel(map: ReturnType<typeof useMap>, props: ICustomerFormProps) {
+export function useInitModel(
+  map: ReturnType<typeof useMap>,
+  props: ICustomerFormProps
+) {
   useEffect(() => {
     const model = new CustomerModel().init(props.edit)
     const _map = new Map(Object.entries(model))
