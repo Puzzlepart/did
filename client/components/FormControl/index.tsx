@@ -19,8 +19,8 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
       wrapper={(children) => <Panel {...props.panelProps}>{children}</Panel>}>
       <div className={styles.root}>
         {props.children}
-        <div>
-          <PrimaryButton {...props?.submitProps} />
+        <div hidden={!props.submitProps?.text}>
+          <PrimaryButton {...props.submitProps} />
         </div>
         <Toast {...props.submitProps?.toast} />
       </div>

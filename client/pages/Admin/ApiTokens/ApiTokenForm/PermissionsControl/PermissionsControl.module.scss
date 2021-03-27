@@ -1,14 +1,10 @@
 .root {
-  .sectionTitle {
+  .title {
     font-size: 16px;
-    margin: 0 0 8px 0;
+    margin: 0 0 18px 0;
   }
 
-  .inputContainer {
-    margin: 8px 0 8px 0;
-  }
-  
-  .permissions {
+  .body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -38,7 +38,7 @@ export interface ISubmitProps extends IButtonProps  {
 }
 
 export interface IFormControlPanelProps extends IPanelProps {
-  onSave: () => void
+  onSave?: () => void
 }
 
 export interface IFormControlBaseProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {

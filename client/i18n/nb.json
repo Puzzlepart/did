@@ -113,9 +113,9 @@
     "apiTokens": {
       "permissionsTitle": "Tillatelser",
       "headerText": "API-nøkler",
-      "tokenExpiryPlaceholder": "Varighet for nøkkel",
+      "tokenExpiryLabel": "Varighet for nøkkel",
       "addNew": "Lag API-nøkkel",
-      "tokenNamePlaceholder": "Fyll inn navn",
+      "tokenNameLabel": "Navn",
       "oneMonth": "En måned",
       "monthPlural": "{{months}} måneder",
       "oneYear": "1 år",
