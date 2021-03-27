@@ -29,7 +29,7 @@ const submitItemBaseProps = (
 /**
  * Use submit commands
  */
-export function useSubmitCommands() {
+export function useSubmitCommands(): IContextualMenuItem {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const { state, onSubmitPeriod, onUnsubmitPeriod } = useContext(
