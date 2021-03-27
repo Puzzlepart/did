@@ -9,15 +9,13 @@ import { PermissionScope } from 'security'
 import { ProjectsContext } from '../../context'
 import { ProjectForm } from '../../ProjectForm'
 import { SET_SELECTED_PROJECT } from '../../reducer/actions'
-import $createOutlookCategory from './createOutlookCategory.gql'
 import styles from './Actions.module.scss'
+import $createOutlookCategory from './createOutlookCategory.gql'
 
 /**
  * @category Projects
  */
-export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()

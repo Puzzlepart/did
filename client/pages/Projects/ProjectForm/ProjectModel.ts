@@ -1,8 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {
-  LabelObject as Label,
-  Project
-} from 'types'
+import { LabelObject as Label, Project } from 'types'
 import { keys, pick } from 'underscore'
 
 export class ProjectModel {
@@ -28,8 +25,7 @@ export class ProjectModel {
    * @returns this
    */
   init?(project?: Project): ProjectModel {
-    if (!project)
-      return this
+    if (!project) return this
     Object.assign(this, pick(project, keys(this)))
     this.labels = ((project?.labels || []) as Label[]).map(
       (label) => label.name

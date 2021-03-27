@@ -11,9 +11,7 @@ import styles from './Actions.module.scss'
 /**
  * @category Customers
  */
-export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { state, loading, refetch } = useContext(CustomersContext)

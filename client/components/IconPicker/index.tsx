@@ -9,7 +9,7 @@ import { useIconPicker } from './useIconPicker'
 /**
  * Icon picker using `<Autocomplete />` to select
  * icons from `@uifabric/icons`
- * 
+ *
  * @remarks Can be controlled with a model using props
  * `model` and `name`
  *

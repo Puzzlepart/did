@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
-import { isEqual } from 'underscore'
 
 /**
  * Use `Map` state

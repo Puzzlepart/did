@@ -19,9 +19,7 @@ export const Header: React.FC = () => {
           <Icon iconName={state.selected.icon || 'Page'} />
         </div>
         <div className={styles.text}>{state.selected.name}</div>
-        <SubText 
-        text={state.selected.description}
-        font='medium' />
+        <SubText text={state.selected.description} font='medium' />
       </div>
       <Actions hidden={isMobile} />
     </div>

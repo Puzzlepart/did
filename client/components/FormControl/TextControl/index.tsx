@@ -9,7 +9,7 @@ import { useTextControlChange } from './useTextControlChange'
 
 /**
  * Text field based on `<TextField />` from [@fluentui/react](@fluentui/react)
- * 
+ *
  * @category Reusable Component
  */
 export const TextControl: ReusableComponent<ITextControlProps> = (props) => {
@@ -24,5 +24,3 @@ export const TextControl: ReusableComponent<ITextControlProps> = (props) => {
     </div>
   )
 }
-
-
