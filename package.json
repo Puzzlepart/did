@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.9.11",
+  "version": "0.9.12",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
@@ -323,7 +323,8 @@
           "rename",
           "merge",
           "auth",
-          "syntax"
+          "syntax",
+          "tag"
         ]
       ]
     }
@@ -418,6 +419,10 @@
     "syntax": [
       "✏️",
       "Adjusted code syntax"
+    ],
+    "tag":[
+      "🔖",
+      "Release / version tag"
     ]
   }
 }
