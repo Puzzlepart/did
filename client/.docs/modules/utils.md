@@ -20,6 +20,7 @@ Reusable utility functions
 - [omitTypename](utils.md#omittypename)
 - [searchObject](utils.md#searchobject)
 - [sleep](utils.md#sleep)
+- [toMap](utils.md#tomap)
 - [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
@@ -200,6 +201,30 @@ Name | Type | Description |
 **Returns:** *Promise*<unknown\>
 
 Defined in: [utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
+
+___
+
+### toMap
+
+▸ **toMap**<V\>(`object`: *Record*<string, V\>): *Map*<string, V\>
+
+Converts an `object` to a `Map`
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`V` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`object` | *Record*<string, V\> | Object    |
+
+**Returns:** *Map*<string, V\>
+
+Defined in: [utils/toMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/toMap.ts#L6)
 
 ___
 

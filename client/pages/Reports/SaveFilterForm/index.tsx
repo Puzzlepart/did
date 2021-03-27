@@ -24,7 +24,9 @@ const INITIAL_MODEL = toMap({
 export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
-  const { $, set, $set, value } = useMap<keyof IContextualMenuItem>(INITIAL_MODEL)
+  const { $, set, $set, value } = useMap<keyof IContextualMenuItem>(
+    INITIAL_MODEL
+  )
   const [inputVisible, setInputVisible] = useState(false)
 
   /**
