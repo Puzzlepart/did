@@ -30,7 +30,6 @@ export function useReports() {
 
   useReportsQuery({ state, dispatch })
 
-
   // useLayoutEffect(() => dispatch(INIT({app, queries})), [])
 
   useLayoutEffect(() => {

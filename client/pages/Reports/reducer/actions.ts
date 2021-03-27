@@ -2,11 +2,9 @@
 import { QueryResult } from '@apollo/client'
 import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
-import { IAppContext } from 'AppContext'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroupProps } from 'components/List/types'
-import { IReportsParameters, IReportsSavedFilter } from '../types'
-
+import { IReportsSavedFilter } from '../types'
 
 /**
  * @category Reports Actions

@@ -40,7 +40,10 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
           <EntityLabel key={lbl.name} label={lbl} />
         ))}
       </div>
-      <UserMessage hidden={selectedLabels.length > 0} text={props.noSelectionText} />
+      <UserMessage
+        hidden={selectedLabels.length > 0}
+        text={props.noSelectionText}
+      />
       <SelectCallout
         target={ref.current}
         hidden={!showCallout}

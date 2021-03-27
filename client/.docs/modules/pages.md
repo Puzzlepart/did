@@ -657,7 +657,7 @@ Name | Type | Description |
 
 **Returns:** [[*IReportsState*](../interfaces/pages.ireportsstate.md), *Dispatch*<AnyAction\>]
 
-Defined in: [pages/Reports/reducer/useReportsReducer.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/reducer/useReportsReducer.ts#L16)
+Defined in: [pages/Reports/reducer/useReportsReducer.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/reducer/useReportsReducer.ts#L19)
 
 ___
 
