@@ -1,6 +1,4 @@
-import {
-  Label
-} from '@fluentui/react'
+import { Label } from '@fluentui/react'
 import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { FormControl } from 'components/FormControl'
@@ -21,38 +19,39 @@ export const LabelForm: React.FC<ILabelFormProps> = (props) => {
       submitProps={submit}
       panelProps={{
         ...omit(props, 'onSave'),
-        headerText: !!props.edit ? t('admin.editLabel') : t('admin.addNewLabel'),
+        headerText: !!props.edit
+          ? t('admin.editLabel')
+          : t('admin.addNewLabel'),
         isLightDismiss: true
       }}>
       <TextControl
-        {
-        ...register<TextControlOptions>('name', {
+        {...register<TextControlOptions>('name', {
           casing: 'lower',
           replace: [/["#$%&'()*+,./:<>?\\{}~-]/g, ' ']
-        })
-        }
+        })}
         spellCheck={false}
         maxLength={20}
         label={t('admin.labelNameLabel')}
         placeholder={t('admin.labelNamePlaceholder')}
         description={t('admin.labelNameDescription')}
         required={!props.edit}
-        disabled={!!props.edit}/>
+        disabled={!!props.edit}
+      />
       <TextControl
-        {
-        ...register<TextControlOptions>('description', { casing: 'capitalized' })
-        }
+        {...register<TextControlOptions>('description', {
+          casing: 'capitalized'
+        })}
         spellCheck={false}
         label={t('common.descriptionFieldLabel')}
         placeholder={t('common.descriptionOptionalFieldLabel')}
-        multiline={true} />
+        multiline={true}
+      />
       <IconPicker
-        {
-        ...register('icon')
-        }
+        {...register('icon')}
         label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300} />
+        width={300}
+      />
       <ColorPickerField
         label={t('common.colorLabel')}
         color={model.value('color')}

@@ -3,7 +3,7 @@ import { List, TabComponent } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { any, filter, isEmpty } from 'underscore'
+import { any } from 'underscore'
 import { useCustomerList } from './useCustomerList'
 
 export const CustomerList: TabComponent = (props) => {
@@ -35,7 +35,10 @@ export const CustomerList: TabComponent = (props) => {
             {
               key: 'TOGGLE_INACTIVE',
               onRender: () => (
-                <div hidden={isMobile || !any(state.customers, (index) => index.inactive)}>
+                <div
+                  hidden={
+                    isMobile || !any(state.customers, (index) => index.inactive)
+                  }>
                   <Checkbox
                     styles={{ root: { margin: '6px 0 0 8px' } }}
                     checked={showInactive}

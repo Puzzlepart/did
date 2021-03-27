@@ -32,7 +32,10 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
             {
               key: 'TOGGLE_INACTIVE',
               onRender: () => (
-                <div hidden={isMobile || !any(props.items, (index) => index.inactive)}>
+                <div
+                  hidden={
+                    isMobile || !any(props.items, (index) => index.inactive)
+                  }>
                   <Checkbox
                     disabled={isEmpty(
                       filter(props.items, (index) => index.inactive)

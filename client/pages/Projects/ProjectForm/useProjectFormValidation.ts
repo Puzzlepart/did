@@ -1,4 +1,3 @@
-import { useMap } from 'hooks'
 import { config } from 'package'
 import { ProjectModel } from './ProjectModel'
 
@@ -12,7 +11,10 @@ import { ProjectModel } from './ProjectModel'
  * @param model - Model
  * @param isEditMode -Is edit mode
  */
-export function useProjectFormValidation(model: ProjectModel, isEditMode = false): boolean {
+export function useProjectFormValidation(
+  model: ProjectModel,
+  isEditMode = false
+): boolean {
   const PROJECT_KEY_REGEX = new RegExp(
     `(^[A-ZÆØÅ0-9-]{${config.app.PROJECT_KEY_MIN_LENGTH},${config.app.PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'

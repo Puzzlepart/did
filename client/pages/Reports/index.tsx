@@ -16,12 +16,10 @@ import { Reports } from './Reports'
  * @category Page Component
  */
 export const ReportsPage: PageComponent = () => {
-  const matches = useRouteMatches(
-    'query'
-  )
+  const matches = useRouteMatches('query')
   return (
     <Switch>
-      {matches.map(path => (
+      {matches.map((path) => (
         <Route key={path} path={path}>
           <Reports />
         </Route>
@@ -41,4 +39,3 @@ export * from './reducer'
 export * from './ReportsList/commandBar'
 export * from './SaveFilterForm'
 export * from './types'
-

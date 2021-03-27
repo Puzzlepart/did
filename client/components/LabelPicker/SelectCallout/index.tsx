@@ -1,5 +1,13 @@
 /* eslint-disable tsdoc/syntax */
-import { Callout, Checkbox, Icon, ScrollablePane, SearchBox, Sticky, StickyPositionType } from '@fluentui/react'
+import {
+  Callout,
+  Checkbox,
+  Icon,
+  ScrollablePane,
+  SearchBox,
+  Sticky,
+  StickyPositionType
+} from '@fluentui/react'
 import { SubText } from 'components/SubText'
 import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
@@ -51,7 +59,10 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
               <li key={label.name}>
                 <div className={styles.itemContainer}>
                   <Checkbox
-                    checked={any(props.selectedLabels, ({ name }) => name === label.name)}
+                    checked={any(
+                      props.selectedLabels,
+                      ({ name }) => name === label.name
+                    )}
                     className={styles.itemCheckbox}
                     onRenderLabel={() => (
                       <div style={{ marginLeft: 8 }}>

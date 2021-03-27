@@ -73,7 +73,7 @@ ___
 
 ### getContrastColor
 
-▸ **getContrastColor**(`hexcolor`: *string*): *black* \| *white*
+▸ **getContrastColor**(`hexColor`: *string*): *string*
 
 Get the contrasting color for any hex color
 (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -81,15 +81,15 @@ Derived from work by Brian Suda, https://24ways.org/2010/calculating-color-contr
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`hexcolor` | *string* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`hexColor` | *string* | A hexcolor value    |
 
-**Returns:** *black* \| *white*
+**Returns:** *string*
 
 The contrasting color (black or white)
 
-Defined in: [utils/getContrastColor.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L10)
+Defined in: [utils/getContrastColor.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L11)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 ### toMap
 
-▸ **toMap**<V\>(`object`: *Record*<string, V\>): *Map*<string, V\>
+▸ **toMap**<KeyType\>(`object`: *Record*<string, any\>): *Map*<KeyType, any\>
 
 Converts an `object` to a `Map`
 
@@ -214,15 +214,15 @@ Converts an `object` to a `Map`
 
 Name | Default |
 :------ | :------ |
-`V` | *any* |
+`KeyType` | *string* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`object` | *Record*<string, V\> | Object    |
+`object` | *Record*<string, any\> | Object    |
 
-**Returns:** *Map*<string, V\>
+**Returns:** *Map*<KeyType, any\>
 
 Defined in: [utils/toMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/toMap.ts#L6)
 

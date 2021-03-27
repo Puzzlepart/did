@@ -2,7 +2,7 @@
 import { useRouteMatches } from 'hooks/route/useRouteMatches'
 import { PageComponent } from 'pages/types'
 import React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { PermissionScope } from 'security'
 import { Projects } from './Projects'
 
@@ -17,14 +17,10 @@ import { Projects } from './Projects'
  * @category Page Component
  */
 export const ProjectsPage: PageComponent = () => {
-  const matches = useRouteMatches(
-    'view',
-    'key',
-    'detailsTab'
-  )
+  const matches = useRouteMatches('view', 'key', 'detailsTab')
   return (
     <Switch>
-      {matches.map(path => (
+      {matches.map((path) => (
         <Route key={path} path={path}>
           <Projects />
         </Route>

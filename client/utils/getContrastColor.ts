@@ -5,7 +5,7 @@
  * Derived from work by Brian Suda, https://24ways.org/2010/calculating-color-contrast/
  *
  * @param hexColor - A hexcolor value
- * 
+ *
  * @returns The contrasting color (black or white)
  */
 export function getContrastColor(hexColor: string) {

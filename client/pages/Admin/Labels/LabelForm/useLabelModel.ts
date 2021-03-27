@@ -27,7 +27,6 @@ export function useLabelModel(props: ILabelFormProps) {
     }
   }, [props?.isOpen])
 
-
   return {
     ...map,
     reset: () => map.$set(INITIAL_MODEL)

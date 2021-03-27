@@ -13,4 +13,5 @@ did-client - v0.9.11
 - [Helpers](modules/helpers.md)
 - [Hooks](modules/hooks.md)
 - [Pages](modules/pages.md)
+- [Parts](modules/parts.md)
 - [Utils](modules/utils.md)

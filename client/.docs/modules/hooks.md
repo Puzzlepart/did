@@ -153,7 +153,7 @@ ___
 
 ### useMap
 
-▸ **useMap**<K, V\>(`map?`: *Map*<any, any\>): *object*
+▸ **useMap**<KeyType, ObjectType\>(`map?`: *Map*<any, any\>): *object*
 
 Use `Map` state
 
@@ -161,8 +161,8 @@ Use `Map` state
 
 Name | Default |
 :------ | :------ |
-`K` | *any* |
-`V` | *any* |
+`KeyType` | *string* |
+`ObjectType` | *Record*<any, any\> |
 
 #### Parameters:
 
@@ -174,11 +174,11 @@ Name | Type | Description |
 
 Name | Type |
 :------ | :------ |
-`$` | *Record*<any, any\> |
-`$set` | *Dispatch*<SetStateAction<Map<K, V\>\>\> |
+`$` | ObjectType |
+`$set` | *Dispatch*<SetStateAction<Map<KeyType, ObjectType\>\>\> |
 `reset` | () => *void* |
-`set` | (`key`: K, `value`: V) => *void* |
-`value` | (`key`: K) => *Record*<any, any\>[K] |
+`set` | (`key`: KeyType, `value`: *any*) => *void* |
+`value` | (`key`: KeyType, `\_default`: *any*) => *any* |
 
 Defined in: [hooks/common/useMap.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L11)
 

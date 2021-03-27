@@ -8,7 +8,9 @@ import { useState } from 'react'
  *
  * @category React Hook
  */
-export function useMap<KeyType = string, ObjectType = Record<any, any>>(map = new Map()) {
+export function useMap<KeyType = string, ObjectType = Record<any, any>>(
+  map = new Map()
+) {
   const [$map, $set] = useState<Map<KeyType, ObjectType>>(map)
   const reset = () => $set(new Map<KeyType, ObjectType>())
 
@@ -36,10 +38,11 @@ export function useMap<KeyType = string, ObjectType = Record<any, any>>(map = ne
    *
    * @param key - Key of the value to retriee
    * @param _default - Default value
-   * 
+   *
    * @returns
    */
-  const value = (key: KeyType, _default = null): any => ($ as any)[key] || _default
+  const value = (key: KeyType, _default = null): any =>
+    ($ as any)[key] || _default
 
   return {
     $set,
