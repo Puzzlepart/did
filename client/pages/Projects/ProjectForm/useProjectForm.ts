@@ -10,12 +10,10 @@ import { useProjectModel } from './useProjectModel'
 export function useProjectForm(props: IProjectFormProps) {
   const model = useProjectModel(props)
   const options = useProjectFormOptions()
-  const submit = useProjectFormSubmit(props, model,options)
+  const submit = useProjectFormSubmit(props, model, options)
   return {
     model,
     submit,
     options
   }
 }
-
-

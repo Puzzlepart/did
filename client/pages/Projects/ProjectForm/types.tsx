@@ -7,7 +7,7 @@ import {
   Project,
   ProjectOptions
 } from 'types'
-import { pick, keys, omit } from 'underscore'
+import { keys, omit, pick } from 'underscore'
 
 /**
  * @category Projects
@@ -26,7 +26,6 @@ export class ProjectModel {
     public labels: string[] = []
   ) {}
 
-
   init?(project: Project): ProjectModel {
     Object.assign(this, pick(project, omit(keys(this), 'labels')))
     this.labels = ((project?.labels || []) as Label[]).map(
@@ -39,7 +38,7 @@ export class ProjectModel {
 /**
  * Empty initialization of `ProjectModel`
  */
- export const _ProjectModel = new ProjectModel()
+export const _ProjectModel = new ProjectModel()
 
 /**
  * @category Projects

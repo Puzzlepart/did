@@ -36,13 +36,13 @@ export function useProjectModel(props: IProjectFormProps) {
   const map = useMap<keyof ProjectModel>(_model)
 
   const valid = useProjectFormValidation(map.$)
-  
+
   /**
    * Project ID is not included the mutation
    * sent to GraphQL but it's needed for display
    * in the form.
    */
-  const projectId = [map.value('customerKey'),map.value('key')].join(' ')
+  const projectId = [map.value('customerKey'), map.value('key')].join(' ')
 
   return {
     ...map,

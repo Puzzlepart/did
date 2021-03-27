@@ -55,7 +55,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
                   />
                   <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
                 </div>
-                <SubText text={truncateString(lbl.description, 80)} />  
+                <SubText text={truncateString(lbl.description, 80)} />
               </div>
             </div>
           </li>

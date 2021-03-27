@@ -98,12 +98,18 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
           label={t('admin.labels')}
           placeholder={t('admin.filterLabels')}
           defaultSelectedKeys={[]}
-          onChange={(labels) => model.set('labels', labels.map((lbl) => lbl.name))}
+          onChange={(labels) =>
+            model.set(
+              'labels',
+              labels.map((lbl) => lbl.name)
+            )
+          }
         />
         <ProjectFormOptions
           model={model}
           options={options}
-          hidden={!!props.edit} />
+          hidden={!!props.edit}
+        />
         <PrimaryButton
           className={styles.inputField}
           text={!!props.edit ? t('common.save') : t('common.add')}

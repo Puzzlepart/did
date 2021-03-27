@@ -22,9 +22,7 @@ export function useCustomerFormSubmit(
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
   const [toast, setToast] = useToast(8000, { isMultiline: true })
-  const [mutate, { loading }] = useMutation(
-    $create_or_update_customer
-  )
+  const [mutate, { loading }] = useMutation($create_or_update_customer)
 
   /**
    * On form submit

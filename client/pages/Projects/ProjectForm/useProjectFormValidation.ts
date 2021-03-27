@@ -7,7 +7,9 @@ import { ProjectModel } from './types'
  * @param model - Model
  * @param t - Translate function
  */
-export function useProjectFormValidation(model: Record<keyof ProjectModel, any>): boolean {
+export function useProjectFormValidation(
+  model: Record<keyof ProjectModel, any>
+): boolean {
   const PROJECT_KEY_REGEX = new RegExp(
     `(^[A-ZÆØÅ0-9-]{${config.app.PROJECT_KEY_MIN_LENGTH},${config.app.PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'

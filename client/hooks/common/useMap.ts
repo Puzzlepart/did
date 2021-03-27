@@ -3,9 +3,9 @@ import { useState } from 'react'
 
 /**
  * Use `Map` state
- * 
+ *
  * @param map - Intitial map
- * 
+ *
  * @category React Hook
  */
 export function useMap<K = any, V = any>(map = new Map()) {
@@ -20,24 +20,22 @@ export function useMap<K = any, V = any>(map = new Map()) {
     return object
   }, {} as any)
 
-
-
   /**
    * Set `key` of `model`
-   * 
+   *
    * @param key - Key
    * @param value - Value
    */
-   const set = (key: K, value: V) => {
+  const set = (key: K, value: V) => {
     setState((_state) => new Map(_state).set(key, value))
   }
 
   /**
    * Get model value. The value is retrived
    * from the converted object
-   * 
+   *
    * @param key - Key of the value to retriee
-   * @returns 
+   * @returns
    */
   const value = (key: K) => $[key]
 
