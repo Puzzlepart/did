@@ -9,7 +9,7 @@ import { PermissionScope } from 'security'
  */
 export interface PageComponent extends React.FC {
   /**
-   * Icon that describe the page
+   * Icon that describe the page in the navigation
    *
    * @see https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
    */

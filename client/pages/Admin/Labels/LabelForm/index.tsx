@@ -1,71 +1,68 @@
 import {
-  Label,
-  Panel,
-  PanelType,
-  PrimaryButton,
-  TextField
+  Label
 } from '@fluentui/react'
 import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
+import { FormControl } from 'components/FormControl'
+import { TextControl } from 'components/FormControl/TextControl'
+import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import { IconPicker } from 'components/IconPicker'
 import React from 'react'
-import styles from './LabelForm.module.scss'
+import { useTranslation } from 'react-i18next'
+import { omit } from 'underscore'
 import { ILabelFormProps } from './types'
 import { useLabelForm } from './useLabelForm'
 
 export const LabelForm: React.FC<ILabelFormProps> = (props) => {
-  const { model, setModel, isFormValid, onSave, t } = useLabelForm({ props })
-
+  const { t } = useTranslation()
+  const { model, register, submit } = useLabelForm(props)
   return (
-    <Panel
-      {...props}
-      type={PanelType.smallFixedFar}
-      className={styles.root}
-      headerText={!!props.label ? t('admin.editLabel') : t('admin.addNewLabel')}
-      isLightDismiss={true}>
-      <TextField
-        className={styles.inputField}
+    <FormControl
+      submitProps={submit}
+      panelProps={{
+        ...omit(props, 'onSave'),
+        headerText: !!props.edit ? t('admin.editLabel') : t('admin.addNewLabel'),
+        isLightDismiss: true
+      }}>
+      <TextControl
+        {
+        ...register<TextControlOptions>('name', {
+          casing: 'lower',
+          replace: [/["#$%&'()*+,./:<>?\\{}~-]/g, ' ']
+        })
+        }
         spellCheck={false}
-        maxLength={18}
-        label={t('common.nameFieldLabel')}
-        value={model.name}
-        required={true}
-        disabled={!!props.label}
-        onChange={(_, name) => setModel({ ...model, name })}
-      />
-      <TextField
-        className={styles.inputField}
+        maxLength={20}
+        label={t('admin.labelNameLabel')}
+        placeholder={t('admin.labelNamePlaceholder')}
+        description={t('admin.labelNameDescription')}
+        required={!props.edit}
+        disabled={!!props.edit}/>
+      <TextControl
+        {
+        ...register<TextControlOptions>('description', { casing: 'capitalized' })
+        }
         spellCheck={false}
         label={t('common.descriptionFieldLabel')}
-        value={model.description}
-        multiline={true}
-        onChange={(_, description) => setModel({ ...model, description })}
-      />
+        placeholder={t('common.descriptionOptionalFieldLabel')}
+        multiline={true} />
       <IconPicker
-        className={styles.inputField}
-        defaultSelected={model.icon}
+        {
+        ...register('icon')
+        }
         label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
-        onSelected={(icon) => setModel({ ...model, icon })}
-      />
+        width={300} />
       <ColorPickerField
-        className={styles.inputField}
         label={t('common.colorLabel')}
-        color={model.color}
-        onChanged={(color) => setModel({ ...model, color })}
+        color={model.value('color')}
+        onChanged={(value) => model.set('color', value)}
       />
-      <div className={styles.inputField}>
+      <div>
         <Label>{t('common.previewText')}</Label>
-        <EntityLabel label={model} />
+        <EntityLabel label={model.$} />
       </div>
-      <PrimaryButton
-        className={styles.saveBtn}
-        text={t('common.save')}
-        disabled={!isFormValid()}
-        onClick={onSave}
-      />
-    </Panel>
+    </FormControl>
   )
 }
 

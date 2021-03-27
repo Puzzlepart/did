@@ -3,6 +3,6 @@ import { LabelInput, LabelObject } from 'types'
 
 export interface ILabelFormProps extends IPanelProps {
   title?: string
-  label?: LabelObject
+  edit?: LabelObject
   onSave?: (label: LabelInput) => void
 }

@@ -3,6 +3,6 @@
  *
  * @param object - Object
  */
-export function toMap<V = any>(object: Record<string, V>): Map<string, V> {
-  return new Map(Object.entries(object))
+export function toMap<KeyType = string>(object: Record<string, any>): Map<KeyType, any> {
+  return new Map<KeyType, any>(Object.entries(object) as any)
 }

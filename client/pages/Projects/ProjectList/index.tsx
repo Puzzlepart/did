@@ -4,7 +4,7 @@ import { List, TabComponent } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { filter, isEmpty } from 'underscore'
+import { any, filter, isEmpty } from 'underscore'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
 
@@ -32,7 +32,7 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
             {
               key: 'TOGGLE_INACTIVE',
               onRender: () => (
-                <div hidden={isMobile}>
+                <div hidden={isMobile || !any(props.items, (index) => index.inactive)}>
                   <Checkbox
                     disabled={isEmpty(
                       filter(props.items, (index) => index.inactive)

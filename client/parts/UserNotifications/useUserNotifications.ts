@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useAppContext } from 'AppContext'
-import { useBrowserStorage } from '../../../hooks'
+import { useBrowserStorage } from '../../hooks'
 import { NotificationModel } from './types'
 
 /**

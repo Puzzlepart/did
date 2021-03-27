@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { useRouteMatches } from 'hooks/route/useRouteMatches'
 import { PageComponent } from 'pages/types'
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
@@ -15,18 +16,17 @@ import { Customers } from './Customers'
  * @category Page Component
  */
 export const CustomersPage: PageComponent = () => {
-  const match = useRouteMatch()
+  const matches = useRouteMatches(
+    'view',
+    'key'
+  )
   return (
     <Switch>
-      <Route path={`${match.path}/:view/:key`}>
-        <Customers />
-      </Route>
-      <Route path={`${match.path}/:view`}>
-        <Customers />
-      </Route>
-      <Route path={match.path}>
-        <Customers />
-      </Route>
+      {matches.map(path => (
+        <Route key={path} path={path}>
+          <Customers />
+        </Route>
+      ))}
     </Switch>
   )
 }

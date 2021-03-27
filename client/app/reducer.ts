@@ -3,7 +3,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
 import { pick } from 'underscore'
-import { IMobileBreadcrumbItem } from './MobileBreadcrumb'
+import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 import { IAppState } from './types'
 
 export const UPDATE_BREADCRUMB = createAction<IMobileBreadcrumbItem>(

@@ -87,7 +87,8 @@
     "iconFieldDescription": "Bruk eit ikon for å gjera prosjektet meir gjenkjenneleg i timelista og på prosjektsida. \nEit tilfeldig ikon vil bli valt viss du ikkje vel eit sjølv.",
     "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
     "timeEntriesLoadingDescription": "Ta en slurk kaffe hvis du har vært opptatt den siste tiden ...",
-    "noLabelsSelectedText": "Legg til etiketter på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system."
+    "noLabelsSelectedText": "Legg til merkelapper på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
+    "applyLabelsHeaderText": "Legg til merkelapper på dette prosjektet"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -120,7 +121,7 @@
     "filterLabels": "Filtrer merkelappar...",
     "rolesPermissions": "Roller og tilgangar",
     "addNewUser": "Legg til ny",
-    "defaultLabelTitle": "Ny merkelapp",
+    "defaultLabelTitle": "ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
     "editLabel": "Rediger merkelapp",
     "addNewRole": "Legg til ei ny rolle",
@@ -153,7 +154,13 @@
     "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did.",
     "adUserSyncUserPhotoLabel": "Synkroniser profilbilete",
     "adUserSyncUserPhotoDescription": "Synkroniser profilbilete fra Azure Active Directory når brukarane loggar på.",
-    "subscriptionInfoHeader": "Grunnleggende informasjon"
+    "subscriptionInfoHeader": "Grunnleggende informasjon",
+    "labelNameLabel": "Etikettnavn",
+    "labelNamePlaceholder": "Etikettnavn",
+    "labelNameDescription": "Etikettnavn. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
+    "labelCreateError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
+    "labelCreateSuccess": "Den nye merkelappen din **{{name}}** ble opprettet uten noen særlige problemer.",
+    "labelUpdateSuccess": "Etiketten din **{{name}}** ble oppdatert uten noen videre problemer."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -331,7 +338,8 @@
     "uiThemeLabel": "Fargetema",
     "dark-theme": "Mørkt tema",
     "light-theme": "Lyst tema",
-    "auto-theme": "System-tema"
+    "auto-theme": "System-tema",
+    "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

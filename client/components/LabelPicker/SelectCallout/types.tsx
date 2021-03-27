@@ -4,8 +4,9 @@ import { ILabelPickerProps } from '../types'
 
 export interface ISelectCalloutProps
   extends ICalloutProps,
-    Pick<ILabelPickerProps, 'defaultSelectedKeys'> {
+    Pick<ILabelPickerProps, 'headerText'> {
   placeholder: string
   labels: Label[]
+  selectedLabels: Label[]
   onToggleLabel: (label: Label) => void
 }

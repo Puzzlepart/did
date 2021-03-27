@@ -48,9 +48,10 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
         target={ref.current}
         hidden={!showCallout}
         labels={labels}
+        selectedLabels={selectedLabels}
         placeholder={props.placeholder}
+        headerText={props.headerText}
         onToggleLabel={onToggleLabel}
-        defaultSelectedKeys={props.defaultSelectedKeys}
         onDismiss={() => setShowCallout(false)}
       />
     </div>

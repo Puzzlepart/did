@@ -2,7 +2,7 @@
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { isMobile } from 'react-device-detect'
-import { PAGE_NAVIGATE } from '../../reducer'
+import { PAGE_NAVIGATE } from '../../../app/reducer'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 

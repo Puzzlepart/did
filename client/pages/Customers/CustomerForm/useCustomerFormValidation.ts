@@ -1,5 +1,5 @@
-import { useMap } from 'hooks/common/useMap'
 import { config } from 'package'
+import { CustomerModel } from './CustomerModel'
 
 /**
  * Validate customer form.
@@ -12,9 +12,7 @@ import { config } from 'package'
  *
  * @returns `true` if the model is valid
  */
-export function useCustomerFormValidation({
-  $
-}: ReturnType<typeof useMap>): boolean {
+export function useCustomerFormValidation(model: CustomerModel): boolean {
   const {
     CUSTOMER_KEY_MIN_LENGTH,
     CUSTOMER_KEY_MAX_LENGTH,
@@ -24,8 +22,8 @@ export function useCustomerFormValidation({
     `(^[A-ZÆØÅ0-9]{${CUSTOMER_KEY_MIN_LENGTH},${CUSTOMER_KEY_MAX_LENGTH}}$)`,
     'gm'
   )
-  if ($?.name?.length < CUSTOMER_NAME_MIN_LENGTH) return false
-  if (!CUSTOMER_KEY_REGEX.test($?.key)) return false
-  if (!$?.icon) return false
+  if (model?.name?.length < CUSTOMER_NAME_MIN_LENGTH) return false
+  if (!CUSTOMER_KEY_REGEX.test(model?.key)) return false
+  if (!model?.icon) return false
   return true
 }

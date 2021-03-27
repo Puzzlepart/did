@@ -24,6 +24,10 @@ function transformValue(value: string, options: TextControlOptions) {
       _value = capitalize(_value)
       break
   }
+  if (options?.replace) {
+    const [regex, $] = options?.replace
+    _value = _value.replace(regex, $)
+  }
   return _value
 }
 

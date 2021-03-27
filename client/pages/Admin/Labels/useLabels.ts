@@ -31,7 +31,7 @@ export function useLabels() {
     query.refetch().then(() => setForm({ isOpen: false }))
   }
   const onEdit = (label: LabelObject) => {
-    setForm({ isOpen: true, label })
+    setForm({ isOpen: true, edit: label })
   }
   const onDelete = (label: LabelObject) =>
     deleteLabel({ variables: { name: label.name } }).then(query.refetch)

@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { useRouteMatches } from 'hooks/route/useRouteMatches'
 import { PageComponent } from 'pages/types'
-import * as React from 'react'
+import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { PermissionScope } from 'security'
 import { Projects } from './Projects'
@@ -9,27 +10,25 @@ import { Projects } from './Projects'
  * Projects page
  *
  * Using `Switch`, `Route` and `useRouteMatch` from
- * `react-router-dom` to support navigating between
+ * [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+ * to support navigating between
  * sub components
  *
  * @category Page Component
  */
 export const ProjectsPage: PageComponent = () => {
-  const match = useRouteMatch()
+  const matches = useRouteMatches(
+    'view',
+    'key',
+    'detailsTab'
+  )
   return (
     <Switch>
-      <Route path={`${match.path}/:view/:key/:detailsTab`}>
-        <Projects />
-      </Route>
-      <Route path={`${match.path}/:view/:key`}>
-        <Projects />
-      </Route>
-      <Route path={`${match.path}/:view`}>
-        <Projects />
-      </Route>
-      <Route path={match.path}>
-        <Projects />
-      </Route>
+      {matches.map(path => (
+        <Route key={path} path={path}>
+          <Projects />
+        </Route>
+      ))}
     </Switch>
   )
 }

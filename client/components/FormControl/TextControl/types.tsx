@@ -6,6 +6,11 @@ export type TextControlOptions = {
    * Force value casing
    */
   casing?: 'upper' | 'lower' | 'capitalized'
+
+  /**
+   * Regex replacer
+   */
+  replace?: [RegExp, string]
 }
 
 export interface ITextControlProps

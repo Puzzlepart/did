@@ -1,6 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { ReusableComponent } from 'components/types'
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
+
+interface IJsonDebugProps extends HTMLAttributes<HTMLDivElement> {
+  obj: any
+  replacer?: (this: any, key: string, value: any) => any
+  space?: number | string
+}
 
 /**
  * Simple componet showing the specified obj in a
@@ -8,7 +14,7 @@ import React from 'react'
  *
  * @category Reusable Component
  */
-export const Json: ReusableComponent<any> = ({
+export const JsonDebug: ReusableComponent<IJsonDebugProps> = ({
   obj,
   replacer = null,
   space = 4

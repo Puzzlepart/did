@@ -36,8 +36,9 @@ export function useInitModel(
  * @returns the initial model
  */
 export function useProjectModel(props: IProjectFormProps) {
-  const map = useMap<keyof ProjectModel>()
-  const valid = useProjectFormValidation(map)
+  const map = useMap<keyof ProjectModel, ProjectModel>()
+
+  const valid = useProjectFormValidation(map.$, !!props.edit)
 
   useInitModel(map, props)
 

@@ -78,6 +78,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       <LabelPicker
         label={t('admin.labels')}
         placeholder={t('admin.filterLabels')}
+        headerText={t('projects.applyLabelsHeaderText')}
         noSelectionText={t('projects.noLabelsSelectedText')}
         defaultSelectedKeys={model.value('labels')}
         onChange={(labels) =>

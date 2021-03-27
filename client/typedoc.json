@@ -15,6 +15,7 @@
   "categoryOrder": ["Function Component", "*"],
   "entryPoints": [
     "client/components/index.ts",
+    "client/parts/index.ts",
     "client/pages/index.ts",
     "client/hooks/index.ts",
     "client/graphql/index.ts",

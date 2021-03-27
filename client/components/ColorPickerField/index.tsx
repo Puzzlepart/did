@@ -16,13 +16,13 @@ import { IColorPickerFieldProps } from './types'
 export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
   props
 ) => {
-  const targetRef = useRef(null)
+  const target = useRef<any>(null)
   return (
     <div className={`${props.className} ${styles.root}`}>
       <Label>{props.label}</Label>
       <TooltipHost
-        calloutProps={{ target: targetRef?.current }}
         tooltipProps={{
+          targetElement: target as any,
           onRenderContent: () => (
             <SketchPicker
               color={props.color}
@@ -31,7 +31,7 @@ export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
           )
         }}>
         <span
-          ref={targetRef}
+          ref={target}
           className={styles.colorPreview}
           style={{ backgroundColor: props.color }}></span>
       </TooltipHost>

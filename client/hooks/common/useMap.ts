@@ -8,14 +8,14 @@ import { useState } from 'react'
  *
  * @category React Hook
  */
-export function useMap<K = any, V = any>(map = new Map()) {
-  const [state, setState] = useState<Map<K, V>>(map)
-  const reset = () => setState(new Map())
+export function useMap<KeyType = string, ObjectType = Record<any, any>>(map = new Map()) {
+  const [$map, $set] = useState<Map<KeyType, ObjectType>>(map)
+  const reset = () => $set(new Map<KeyType, ObjectType>())
 
   /**
    * Object representation of the `Map`
    */
-  const $: Record<any, any> = [...state].reduce((object, [key, value]) => {
+  const $: ObjectType = [...$map].reduce((object, [key, value]) => {
     object[key] = value
     return object
   }, {} as any)
@@ -26,8 +26,8 @@ export function useMap<K = any, V = any>(map = new Map()) {
    * @param key - Key
    * @param value - Value
    */
-  const set = (key: K, value: V) => {
-    setState((_state) => new Map(_state).set(key, value))
+  const set = (key: KeyType, value: any) => {
+    $set((_state) => new Map(_state).set(key, value))
   }
 
   /**
@@ -35,12 +35,14 @@ export function useMap<K = any, V = any>(map = new Map()) {
    * from the converted object
    *
    * @param key - Key of the value to retriee
+   * @param _default - Default value
+   * 
    * @returns
    */
-  const value = (key: K) => $[key]
+  const value = (key: KeyType, _default = null): any => ($ as any)[key] || _default
 
   return {
-    $set: setState,
+    $set,
     $,
     set,
     value,

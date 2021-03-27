@@ -5,12 +5,12 @@ import { description, name } from 'package'
 import React from 'react'
 import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
-import { useAppClassName } from '../useAppClassName'
+import { useAppClassName } from '../../app/useAppClassName'
+import { UserFeedback } from '../UserFeedback'
+import { UserMenu } from '../UserMenu'
+import { UserNotifications } from '../UserNotifications'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
-import { UserFeedback } from './UserFeedback'
-import { UserMenu } from './UserMenu'
-import { UserNotifications } from './UserNotifications'
 
 /**
  * @category Function Component

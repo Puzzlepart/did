@@ -43,7 +43,7 @@ export function useLabelPicker({
     }
   }, [data])
 
-  const reference = useRef(null)
+  const ref = useRef(null)
 
   return {
     onToggleLabel,
@@ -51,6 +51,6 @@ export function useLabelPicker({
     setShowCallout,
     labels,
     selectedLabels,
-    ref: reference
+    ref
   }
 }

@@ -14,10 +14,8 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import { ErrorFallback, MobileBreadcrumb, Navigation } from '../parts'
 import styles from './App.module.scss'
-import { ErrorFallback } from './ErrorFallback'
-import { MobileBreadcrumb } from './MobileBreadcrumb'
-import { Navigation } from './Navigation'
 import { useAppClassName } from './useAppClassName'
 
 /**

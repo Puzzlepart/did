@@ -34,8 +34,8 @@ export function useInitModel(
  * @returns the initial model
  */
 export function useCustomerModel(props: ICustomerFormProps) {
-  const map = useMap<keyof CustomerModel>()
-  const valid = useCustomerFormValidation(map)
+  const map = useMap<keyof CustomerModel, CustomerModel>()
+  const valid = useCustomerFormValidation(map.$)
 
   useInitModel(map, props)
 

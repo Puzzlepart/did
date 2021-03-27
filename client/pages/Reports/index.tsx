@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
+import { useRouteMatches } from 'hooks/route/useRouteMatches'
 import { PageComponent } from 'pages/types'
 import * as React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { PermissionScope } from 'security'
 import { Reports } from './Reports'
 
@@ -15,15 +16,16 @@ import { Reports } from './Reports'
  * @category Page Component
  */
 export const ReportsPage: PageComponent = () => {
-  const match = useRouteMatch()
+  const matches = useRouteMatches(
+    'query'
+  )
   return (
     <Switch>
-      <Route path={`${match.path}/:query`}>
-        <Reports />
-      </Route>
-      <Route path={match.path}>
-        <Reports />
-      </Route>
+      {matches.map(path => (
+        <Route key={path} path={path}>
+          <Reports />
+        </Route>
+      ))}
     </Switch>
   )
 }
@@ -39,3 +41,4 @@ export * from './reducer'
 export * from './ReportsList/commandBar'
 export * from './SaveFilterForm'
 export * from './types'
+

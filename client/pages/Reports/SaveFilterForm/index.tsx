@@ -1,7 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
 import { IconPicker } from 'components'
-import { Json } from 'components/Json'
 import { useMap } from 'hooks'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -24,7 +23,7 @@ const INITIAL_MODEL = toMap({
 export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
-  const { $, set, $set, value } = useMap<keyof IContextualMenuItem>(
+  const { $, set, $set, value } = useMap<keyof IContextualMenuItem, IContextualMenuItem>(
     INITIAL_MODEL
   )
   const [inputVisible, setInputVisible] = useState(false)
@@ -49,7 +48,6 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
       className={styles.root}
       style={props?.style}
       hidden={!state.isFiltered || !!state.filter?.text}>
-      <Json obj={$} />
       <div hidden={!inputVisible}>
         <TextField
           value={value('text')}

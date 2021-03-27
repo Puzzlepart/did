@@ -267,7 +267,9 @@
           "checkProperties": false,
           "replacements": {
             "args": false,
-            "props": false
+            "props": false,
+            "ref": false,
+            "target": false
           }
         }
       ],

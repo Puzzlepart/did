@@ -1,6 +1,6 @@
 import { Subscription } from 'types'
 import { ContextUser } from './ContextUser'
-import { IMobileBreadcrumbItem } from './MobileBreadcrumb'
+import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 
 export interface IAppProps {
   /**

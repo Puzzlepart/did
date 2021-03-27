@@ -15,8 +15,7 @@ import { PageComponent } from './types'
 /**
  * Get all available pages in the app
  *
- * @returns The available page instances (`pages`), and
- * `nav` used for the navigation
+ * @returns The available page components
  *
  * @category React Hook
  */

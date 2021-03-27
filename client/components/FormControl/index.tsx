@@ -14,17 +14,19 @@ import { IFormControlProps } from './types'
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   return (
-    <ConditionalWrapper
-      condition={!!props.panelProps}
-      wrapper={(children) => <Panel {...props.panelProps}>{children}</Panel>}>
-      <div className={styles.root}>
-        {props.children}
-        <div hidden={!props.submitProps?.text}>
-          <PrimaryButton {...props.submitProps} />
+    <>
+      <ConditionalWrapper
+        condition={!!props.panelProps}
+        wrapper={(children) => <Panel {...props.panelProps}>{children}</Panel>}>
+        <div className={styles.root}>
+          {props.children}
+          <div hidden={!props.submitProps?.text}>
+            <PrimaryButton {...props.submitProps} />
+          </div>
         </div>
-        <Toast {...props.submitProps?.toast} />
-      </div>
-    </ConditionalWrapper>
+      </ConditionalWrapper>
+      <Toast {...props.submitProps?.toast} />
+    </>
   )
 }
 
