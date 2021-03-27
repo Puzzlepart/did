@@ -1,5 +1,4 @@
 import { createReducer, current } from '@reduxjs/toolkit'
-import get from 'get-value'
 import { getValue } from 'helpers'
 import { filter, find, omit } from 'underscore'
 import { IReportsState } from '../types'
@@ -9,33 +8,23 @@ import {
   CLEAR_FILTERS,
   DATA_UPDATED,
   FILTERS_UPDATED,
-  INIT,
   REMOVE_SELECTED_FILTER,
   SET_FILTER,
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from './actions'
-import { IReportsReducerParameters } from './types'
 
 /**
- * Creating reducer for Reports using reduxjs/toolkit
+ * Creating reducer for `Reports` using [reduxjs/toolkit]
  */
-export default ({ app, url, queries }: IReportsReducerParameters) =>
-  createReducer<IReportsState>({}, (builder) =>
+export default ({ initialState, queries }) =>
+  createReducer<IReportsState>(initialState, (builder) =>
     builder
-      .addCase(INIT, (state) => {
-        if (url.query) {
-          state.preset = find(queries, (q) => q.itemKey === url.query) as any
-        }
-        state.savedFilters = get(app, 'user.configuration.reports.filters', {
-          default: {}
-        })
-      })
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.query.loading
         if (payload.query?.data) {
           state.data = { ...state.data, ...payload.query.data }
-          state.subset = state.data.timeEntries
+          state.subset = current(state).data.timeEntries
         }
       })
       .addCase(SET_FILTER, (state, { payload }) => {
@@ -102,7 +91,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
           queries,
           (q) => q.itemKey === payload?.itemKey
         ) as any
-        state.subset = null
+        state.subset = []
       })
       .addCase(CLEAR_FILTERS, (state) => {
         state.filter = null

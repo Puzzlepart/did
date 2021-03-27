@@ -2,7 +2,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { useLayoutEffect } from 'react'
-import { DATA_UPDATED, INIT } from '../reducer/actions'
+import { DATA_UPDATED } from '../reducer/actions'
 import { default_query } from './useReportsQueries'
 /**
  * Hook for Reports Query.
@@ -15,9 +15,8 @@ import { default_query } from './useReportsQueries'
 export function useReportsQuery({ state, dispatch }) {
   const query = useQuery(state.preset?.query || default_query, {
     skip: !state.preset,
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-and-network',
     variables: state.preset?.variables || {}
   })
-  useLayoutEffect(() => dispatch(INIT()), [])
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query.loading])
 }

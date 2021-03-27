@@ -27,7 +27,12 @@ export function useReports() {
   const history = useHistory()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
+
   useReportsQuery({ state, dispatch })
+
+
+  // useLayoutEffect(() => dispatch(INIT({app, queries})), [])
+
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.itemKey || ''}`)
