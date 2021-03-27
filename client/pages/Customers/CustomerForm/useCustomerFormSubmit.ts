@@ -39,7 +39,7 @@ export function useCustomerFormSubmit(
         setTimeout(props.panel.onSave, 1000)
       } else {
         setToast({
-          text: t('customers.createSuccess', model),
+          text: t('customers.createSuccess', model.$),
           type: 'success'
         })
         model.reset()

@@ -1,20 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMemo, useState } from 'react'
+import { useMap } from 'hooks/common/useMap'
+import { useMemo } from 'react'
+import { Customer } from 'types'
+import { keys, pick } from 'underscore'
 import { CustomerModel, ICustomerFormProps, _CustomerModel } from './types'
 import { useCustomerFormValidation } from './useCustomerFormValidation'
 
 /**
- * Returns the initial model based on `props`
+ * Returns the initial model based on `edit`
+ * from `props`
  *
- * @param props - Props
+ * @param edit - Customer
  *
  * @returns the initial model
  */
-export function useInitialModel(props: ICustomerFormProps): CustomerModel {
+export function useInitialModel(edit: Customer): Map<any, any> {
   return useMemo(() => {
-    if (props.edit) _CustomerModel.init(props.edit)
-    return new CustomerModel()
-  }, [props.edit])
+    const model = edit || _CustomerModel
+    return new Map(Object.entries(pick(model, keys(_CustomerModel))))
+  }, [edit])
 }
 
 /**
@@ -26,24 +30,11 @@ export function useInitialModel(props: ICustomerFormProps): CustomerModel {
  * @returns the initial model
  */
 export function useCustomerModel(props: ICustomerFormProps) {
-  const _model = useInitialModel(props)
-  const [model, setModel] = useState<CustomerModel>(_model)
-  const reset = () => setModel(new CustomerModel())
-  const setKey = (key: string) => setModel({ ...model, key: key.toUpperCase() })
-  const setName = (name: string) => setModel({ ...model, name })
-  const setDescription = (description: string) =>
-    setModel({ ...model, description })
-  const setIcon = (icon: string) => setModel({ ...model, icon })
-
-  const valid = useCustomerFormValidation(model)
+  const _model = useInitialModel(props.edit)
+  const map = useMap<keyof CustomerModel>(_model)
+  const valid = useCustomerFormValidation(map.$)
   return {
-    ...model,
-    $: model,
-    reset,
-    setKey,
-    setName,
-    setDescription,
-    setIcon,
+    ...map,
     valid
   }
 }

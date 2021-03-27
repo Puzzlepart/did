@@ -22,16 +22,16 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
           label={t('customers.keyFieldLabel')}
           description={t('customers.keyFieldDescription', config.app)}
           required={true}
-          onChange={(_event, value) => model.setKey(value)}
-          value={model.key}
+          onChange={(_event, value) => model.set('key', value.toUpperCase())}
+          value={model.value('key')}
         />
         <TextField
           className={styles.inputField}
           label={t('common.nameFieldLabel')}
           description={t('customers.nameFieldDescription', config.app)}
           required={true}
-          onChange={(_event, value) => model.setName(value)}
-          value={model.name}
+          onChange={(_event, value) => model.set('name', value)}
+          value={model.value('name')}
         />
         <TextField
           className={styles.inputField}
@@ -39,17 +39,17 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
           description={t('customers.descriptionFieldDescription')}
           multiline={true}
           autoAdjustHeight={true}
-          onChange={(_event, value) => model.setDescription(value)}
-          value={model.description}
+          onChange={(_event, value) => model.set('description', value)}
+          value={model.value('description')}
         />
         <IconPicker
           className={styles.inputField}
-          defaultSelected={model.icon}
+          defaultSelected={model.value('icon')}
           label={t('common.iconFieldLabel')}
           description={t('customers.iconFieldDescription')}
           placeholder={t('common.iconSearchPlaceholder')}
           width={300}
-          onSelected={(value) => model.setIcon(value)}
+          onSelected={(value) => model.set('icon', value)}
           required={true}
         />
         <PrimaryButton
