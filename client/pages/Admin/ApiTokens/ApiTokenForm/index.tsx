@@ -28,13 +28,14 @@ export const ApiTokenForm = ({
       submitProps={{
         text: t('common.save'),
         onClick: onAddApiToken,
-        disabled: isBlank(token.name) || !token.expires || isEmpty(token.permissions)
+        disabled:
+          isBlank(token.name) || !token.expires || isEmpty(token.permissions)
       }}
       panelProps={{
         headerText: t('admin.apiTokens.addNew'),
         isOpen,
         isLightDismiss: true,
-        onDismiss,
+        onDismiss
       }}>
       <TextField
         label={t('admin.apiTokens.tokenNameLabel')}
@@ -56,9 +57,7 @@ export const ApiTokenForm = ({
           text: expiryOptions[key]
         }))}
       />
-      <PermissionsControl
-        token={token}
-        onToggle={togglePermission} />
+      <PermissionsControl token={token} onToggle={togglePermission} />
     </FormControl>
   )
 }

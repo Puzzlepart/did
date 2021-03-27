@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client'
-import { usePermissions } from 'hooks'
 import { useState } from 'react'
 import { ApiTokenInput } from 'types'
 import $addApiToken from './addApiToken.gql'
