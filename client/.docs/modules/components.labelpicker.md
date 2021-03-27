@@ -1,4 +1,4 @@
-[did-client - v0.9.11](../README.md) / [Components](components.md) / LabelPicker
+[did-client - v0.9.12](../README.md) / [Components](components.md) / LabelPicker
 
 # Namespace: LabelPicker
 

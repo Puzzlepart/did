@@ -1,4 +1,4 @@
-[did-shared - v0.9.11](../README.md) / [Security](../modules/security.md) / IPermission
+[did-shared - v0.9.12](../README.md) / [Security](../modules/security.md) / IPermission
 
 # Interface: IPermission
 

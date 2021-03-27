@@ -1,4 +1,4 @@
-[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ReportsResolver
+[did-server - v0.9.12](../README.md) / [GraphQL](../modules/graphql.md) / ReportsResolver
 
 # Class: ReportsResolver
 

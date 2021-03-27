@@ -1,4 +1,4 @@
-[did-client - v0.9.11](../README.md) / [Components](../modules/components.md) / IFilter
+[did-client - v0.9.12](../README.md) / [Components](../modules/components.md) / IFilter
 
 # Interface: IFilter
 

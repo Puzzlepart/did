@@ -1,4 +1,4 @@
-[did-server - v0.9.11](../README.md) / Utils
+[did-server - v0.9.12](../README.md) / Utils
 
 # Module: Utils
 
