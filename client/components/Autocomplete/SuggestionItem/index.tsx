@@ -14,6 +14,10 @@ export const SuggestionItem: React.FC<ISuggestionItemProps> = (props) => {
   }
 
   const classNames = [styles.root, props.item.isSelected && styles.isSelected]
+  let iconStyles = {}
+  if (typeof props.itemIcons !== 'boolean') {
+    iconStyles = props.itemIcons?.style
+  }
 
   return (
     <div
@@ -23,7 +27,7 @@ export const SuggestionItem: React.FC<ISuggestionItemProps> = (props) => {
       <div className={styles.container}>
         <div
           className={styles.icon}
-          style={props.itemIcons?.style}
+          style={iconStyles}
           hidden={!props.itemIcons}>
           <Icon iconName={props.item.iconName || 'Page'} />
         </div>

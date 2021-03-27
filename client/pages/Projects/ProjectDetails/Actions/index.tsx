@@ -10,13 +10,13 @@ import { ProjectsContext } from '../../context'
 import { ProjectForm } from '../../ProjectForm'
 import { SET_SELECTED_PROJECT } from '../../reducer/actions'
 import $createOutlookCategory from './createOutlookCategory.gql'
-import styles from './Header.module.scss'
+import styles from './Actions.module.scss'
 
 /**
  * @category Projects
  */
-export const ProjectActions: React.FC<HTMLAttributes<HTMLDivElement>> = (
-  props: HTMLAttributes<HTMLDivElement>
+export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (
+  props
 ) => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
   const [, hasPermission] = usePermissions()
@@ -41,7 +41,7 @@ export const ProjectActions: React.FC<HTMLAttributes<HTMLDivElement>> = (
   }
 
   return (
-    <div className={styles.actions} hidden={props.hidden}>
+    <div className={styles.root} hidden={props.hidden}>
       <div className={styles.container}>
         <div className={styles.actionItem} hidden={!state.selected.webLink}>
           <DefaultButton
@@ -70,7 +70,7 @@ export const ProjectActions: React.FC<HTMLAttributes<HTMLDivElement>> = (
           <ProjectForm
             key={state.selected.tag}
             edit={state.selected}
-            panel={{
+            panelProps={{
               isOpen: showEditPanel,
               headerText: state.selected.name,
               isLightDismiss: true,

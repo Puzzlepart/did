@@ -1,9 +1,9 @@
 import { ICalloutProps } from '@fluentui/react'
-import { LabelObject } from 'types'
+import { LabelObject as Label } from 'types'
+import { ILabelPickerProps } from '../types'
 
-export interface ISelectCalloutProps extends ICalloutProps {
-  labels: LabelObject[]
+export interface ISelectCalloutProps extends ICalloutProps, Pick<ILabelPickerProps, 'defaultSelectedKeys'> {
   placeholder: string
-  defaultSelectedKeys?: string[]
-  onToggleLabel: (label: LabelObject) => void
+  labels: Label[]
+  onToggleLabel: (label: Label) => void
 }

@@ -1,3 +1,4 @@
+import { useFormControls } from 'components/FormControl'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormSubmit } from './useCustomerFormSubmit'
 import { useCustomerModel } from './useCustomerModel'
@@ -11,8 +12,10 @@ import { useCustomerModel } from './useCustomerModel'
 export function useCustomerForm(props: ICustomerFormProps) {
   const model = useCustomerModel(props)
   const submit = useCustomerFormSubmit(props, model)
+  const register = useFormControls(model)
   return {
     model,
-    submit
+    submit,
+    register
   }
 }

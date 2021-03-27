@@ -4,7 +4,7 @@ import { SubText } from 'components'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
-import { CustomerActions } from './actions'
+import { Actions } from '../Actions'
 import styles from './Header.module.scss'
 
 /**
@@ -19,9 +19,11 @@ export const Header: React.FC = () => {
           <Icon iconName={state.selected.icon || 'Page'} />
         </div>
         <div className={styles.text}>{state.selected.name}</div>
-        <SubText text={state.selected.description} />
+        <SubText 
+        text={state.selected.description}
+        font='medium' />
       </div>
-      <CustomerActions hidden={isMobile} />
+      <Actions hidden={isMobile} />
     </div>
   )
 }

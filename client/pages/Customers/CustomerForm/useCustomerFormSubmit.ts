@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client'
+import { ISubmitProps } from 'components/FormControl'
 import { useToast } from 'components/Toast'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +9,7 @@ import { ICustomerFormProps } from './types'
 import { useCustomerModel } from './useCustomerModel'
 
 /**
- * Customer form submit
+ * Returns submit props used by `<FormControl />`
  *
  * @param props - Props
  * @param model - Model
@@ -18,7 +19,7 @@ import { useCustomerModel } from './useCustomerModel'
 export function useCustomerFormSubmit(
   props: ICustomerFormProps,
   model: ReturnType<typeof useCustomerModel>
-) {
+): ISubmitProps {
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
   const [toast, setToast] = useToast(8000, { isMultiline: true })
@@ -35,8 +36,8 @@ export function useCustomerFormSubmit(
           update: !!props.edit
         }
       })
-      if (props.panel) {
-        setTimeout(props.panel.onSave, 1000)
+      if (props.panelProps) {
+        setTimeout(props.panelProps.onSave, 1000)
       } else {
         setToast({
           text: t('customers.createSuccess', model.$),
@@ -54,6 +55,7 @@ export function useCustomerFormSubmit(
   }
   return {
     toast,
+    text: !!props.edit ? t('common.save') : t('common.add'),
     onClick,
     disabled: loading || !model.valid || !!toast
   }

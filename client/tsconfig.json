@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "inlineSources": false,
     "strictNullChecks": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "resolveJsonModule": true,
     "pretty": true,
     "typeRoots": ["../node_modules/@types"],

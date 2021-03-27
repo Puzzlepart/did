@@ -6,20 +6,20 @@ import React, { HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { CustomerForm } from '../../CustomerForm'
-import styles from './Header.module.scss'
+import styles from './Actions.module.scss'
 
 /**
  * @category Customers
  */
-export const CustomerActions: React.FC<HTMLAttributes<HTMLDivElement>> = (
-  props: HTMLAttributes<HTMLDivElement>
+export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (
+  props
 ) => {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { state, loading, refetch } = useContext(CustomersContext)
   const [showEditPanel, setShowEditPanel] = useState(false)
   return (
-    <div className={styles.actions} hidden={props.hidden}>
+    <div className={styles.root} hidden={props.hidden}>
       <div className={styles.container}>
         <div
           className={styles.actionItem}
@@ -50,7 +50,7 @@ export const CustomerActions: React.FC<HTMLAttributes<HTMLDivElement>> = (
           <CustomerForm
             key={state.selected.key}
             edit={state.selected}
-            panel={{
+            panelProps={{
               isOpen: showEditPanel,
               headerText: state.selected.name,
               isLightDismiss: true,

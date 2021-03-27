@@ -2,25 +2,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
-import { useMemo } from 'react'
-import { Project } from 'types'
-import { keys, pick } from 'underscore'
-import { IProjectFormProps, ProjectModel, _ProjectModel } from './types'
+import { useEffect } from 'react'
+import { IProjectFormProps } from './types'
+import { ProjectModel } from './ProjectModel'
 import { useProjectFormValidation } from './useProjectFormValidation'
 
 /**
- * Returns the initial model based on `edit`
- * from `props`
- *
- * @param edit - Project
+ * Initializes the model based on `props.edit`
+ * 
+ * @param map - Map
+ * @param props - Props
  *
  * @returns the initial model
  */
-export function useInitialModel(edit: Project): Map<any, any> {
-  return useMemo(() => {
-    const model = edit || _ProjectModel
-    return new Map(Object.entries(pick(model, keys(_ProjectModel))))
-  }, [edit])
+export function useInitModel(map: ReturnType<typeof useMap>, props: IProjectFormProps) {
+  useEffect(() => {
+    const model = new ProjectModel().init(props.edit)
+    const _map = new Map(Object.entries(model))
+    map.$set(_map)
+  }, [props.edit])
 }
 
 /**
@@ -32,17 +32,18 @@ export function useInitialModel(edit: Project): Map<any, any> {
  * @returns the initial model
  */
 export function useProjectModel(props: IProjectFormProps) {
-  const _model = useInitialModel(props.edit)
-  const map = useMap<keyof ProjectModel>(_model)
+  const map = useMap<keyof ProjectModel>()
+  const valid = useProjectFormValidation(map)
 
-  const valid = useProjectFormValidation(map.$)
+  useInitModel(map, props)
 
   /**
    * Project ID is not included the mutation
    * sent to GraphQL but it's needed for display
    * in the form.
    */
-  const projectId = [map.value('customerKey'), map.value('key')].join(' ')
+  const projectId = map.value('key')?.length > 1
+    && [map.value('customerKey'), map.value('key')].join(' ')
 
   return {
     ...map,

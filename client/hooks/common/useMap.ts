@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
+import { isEqual } from 'underscore'
 
 /**
  * Use `Map` state
@@ -15,7 +16,7 @@ export function useMap<K = any, V = any>(map = new Map()) {
   /**
    * Object representation of the `Map`
    */
-  const $: Record<any, V> = [...state].reduce((object, [key, value]) => {
+  const $: Record<any, any> = [...state].reduce((object, [key, value]) => {
     object[key] = value
     return object
   }, {} as any)
@@ -40,6 +41,7 @@ export function useMap<K = any, V = any>(map = new Map()) {
   const value = (key: K) => $[key]
 
   return {
+    $set: setState,
     $,
     set,
     value,

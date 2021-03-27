@@ -1,64 +1,53 @@
-import { Panel, PrimaryButton, TextField } from '@fluentui/react'
-import { ConditionalWrapper, IconPicker, Toast } from 'components'
+import { IconPicker } from 'components'
+import { FormControl } from 'components/FormControl'
+import { TextControl } from 'components/FormControl/TextControl'
+import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import { config } from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './CustomerForm.module.scss'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 
 export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, submit } = useCustomerForm(props)
+  const { submit, register } = useCustomerForm(props)
   return (
-    <ConditionalWrapper
-      condition={!!props.panel}
-      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
-      <div className={styles.root}>
-        <Toast {...submit.toast} />
-        <TextField
-          className={styles.inputField}
-          disabled={!!props.edit}
-          label={t('customers.keyFieldLabel')}
-          description={t('customers.keyFieldDescription', config.app)}
-          required={true}
-          onChange={(_event, value) => model.set('key', value.toUpperCase())}
-          value={model.value('key')}
-        />
-        <TextField
-          className={styles.inputField}
-          label={t('common.nameFieldLabel')}
-          description={t('customers.nameFieldDescription', config.app)}
-          required={true}
-          onChange={(_event, value) => model.set('name', value)}
-          value={model.value('name')}
-        />
-        <TextField
-          className={styles.inputField}
-          label={t('common.descriptionFieldLabel')}
-          description={t('customers.descriptionFieldDescription')}
-          multiline={true}
-          autoAdjustHeight={true}
-          onChange={(_event, value) => model.set('description', value)}
-          value={model.value('description')}
-        />
-        <IconPicker
-          className={styles.inputField}
-          defaultSelected={model.value('icon')}
-          label={t('common.iconFieldLabel')}
-          description={t('customers.iconFieldDescription')}
-          placeholder={t('common.iconSearchPlaceholder')}
-          width={300}
-          onSelected={(value) => model.set('icon', value)}
-          required={true}
-        />
-        <PrimaryButton
-          className={styles.inputField}
-          text={!!props.edit ? t('common.save') : t('common.add')}
-          onClick={submit.onClick}
-          disabled={submit.disabled}
-        />
-      </div>
-    </ConditionalWrapper>
+    <FormControl
+    {...props}
+    submitProps={submit}>
+      <TextControl
+        {
+        ...register<TextControlOptions>('key', { casing: 'upper' })
+        }
+        disabled={!!props.edit}
+        label={t('customers.keyFieldLabel')}
+        description={t('customers.keyFieldDescription', config.app)}
+        required={true} />
+      <TextControl
+        {
+        ...register<TextControlOptions>('name', { casing: 'capitalized' })
+        }
+        label={t('common.nameFieldLabel')}
+        description={t('customers.nameFieldDescription', config.app)}
+        required={true} />
+      <TextControl
+        {
+        ...register<TextControlOptions>('description', { casing: 'capitalized' })
+        }
+        label={t('common.descriptionFieldLabel')}
+        description={t('customers.descriptionFieldDescription')}
+        multiline={true}
+        autoAdjustHeight={true} />
+      <IconPicker
+        {
+        ...register('icon')
+        }
+        label={t('common.iconFieldLabel')}
+        description={t('customers.iconFieldDescription')}
+        placeholder={t('common.iconSearchPlaceholder')}
+        width={300}
+        required={true}
+      />
+    </FormControl>
   )
 }

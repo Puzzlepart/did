@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { ISearchBoxProps } from '@fluentui/react'
+import { IRefObject, ISearchBoxProps } from '@fluentui/react'
 import { ISuggestionItem } from './SuggestionItem/types'
 
 /**
@@ -22,7 +22,7 @@ export type AutocompleteItemIcons = {
 export interface IAutocompleteProps<T = any> extends ISearchBoxProps {
   label?: string
   description?: string
-  itemIcons?: AutocompleteItemIcons
+  itemIcons?: AutocompleteItemIcons | boolean
   onSelected: AutocompleteSelectCallback<T>
   items?: ISuggestionItem<T>[]
   noSuggestionsText?: string

@@ -26,7 +26,9 @@ export const Information: React.FC = () => {
           type={'warning'}
         />
       )}
-      <SubText text={state.selected.description} />
+      <SubText
+        text={state.selected.description}
+        font='medium' />
       <div className={styles.labels}>
         {(state.selected.labels as Label[]).map((label, index) => (
           <EntityLabel key={index} label={label} />

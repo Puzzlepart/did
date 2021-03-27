@@ -4,7 +4,7 @@ import { SubText } from 'components'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ProjectsContext } from '../../context'
-import { ProjectActions } from './actions'
+import { Actions } from '../Actions'
 import styles from './Header.module.scss'
 
 /**
@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
         <div className={styles.text}>{state.selected.name}</div>
         <SubText text={state.selected.customer.name} />
       </div>
-      <ProjectActions hidden={isMobile} />
+      <Actions hidden={isMobile} />
     </div>
   )
 }

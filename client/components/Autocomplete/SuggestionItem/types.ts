@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IDropdownOption } from '@fluentui/react'
-import { AutocompleteItemIcons } from '../types'
+import { IAutocompleteProps } from '../types'
 
 /**
  * @category Autocomplete
@@ -18,7 +18,6 @@ export interface ISuggestionItem<T = any> extends IDropdownOption {
 /**
  * @category Autocomplete
  */
-export interface ISuggestionItemProps extends React.HTMLProps<HTMLDivElement> {
+export interface ISuggestionItemProps extends React.HTMLProps<HTMLDivElement>, Pick<IAutocompleteProps, 'itemIcons'> {
   item: ISuggestionItem
-  itemIcons: AutocompleteItemIcons
 }

@@ -1,24 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
-import { useMemo } from 'react'
-import { Customer } from 'types'
-import { keys, pick } from 'underscore'
-import { CustomerModel, ICustomerFormProps, _CustomerModel } from './types'
+import { useEffect } from 'react'
+import { CustomerModel } from './CustomerModel'
+import { ICustomerFormProps } from './types'
 import { useCustomerFormValidation } from './useCustomerFormValidation'
 
+
 /**
- * Returns the initial model based on `edit`
- * from `props`
- *
- * @param edit - Customer
+ * Initializes the model based on `props.edit`
+ * 
+ * @param map - Map
+ * @param props - Props
  *
  * @returns the initial model
  */
-export function useInitialModel(edit: Customer): Map<any, any> {
-  return useMemo(() => {
-    const model = edit || _CustomerModel
-    return new Map(Object.entries(pick(model, keys(_CustomerModel))))
-  }, [edit])
+ export function useInitModel(map: ReturnType<typeof useMap>, props: ICustomerFormProps) {
+  useEffect(() => {
+    const model = new CustomerModel().init(props.edit)
+    const _map = new Map(Object.entries(model))
+    map.$set(_map)
+  }, [props.edit])
 }
 
 /**
@@ -30,9 +31,11 @@ export function useInitialModel(edit: Customer): Map<any, any> {
  * @returns the initial model
  */
 export function useCustomerModel(props: ICustomerFormProps) {
-  const _model = useInitialModel(props.edit)
-  const map = useMap<keyof CustomerModel>(_model)
+  const map = useMap<keyof CustomerModel>()
   const valid = useCustomerFormValidation(map.$)
+
+  useInitModel(map, props)
+
   return {
     ...map,
     valid

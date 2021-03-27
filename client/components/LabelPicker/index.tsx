@@ -54,3 +54,7 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
     </div>
   )
 }
+
+LabelPicker.defaultProps = {
+  defaultSelectedKeys: []
+}
