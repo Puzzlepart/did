@@ -6,5 +6,6 @@ export interface ILabelPickerProps
   label: string
   placeholder: string
   defaultSelectedKeys?: string[]
+  noSelectionText?: string
   onChange: (labels: LabelObject[]) => void
 }

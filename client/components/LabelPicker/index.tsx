@@ -2,6 +2,7 @@
 import { Icon, Label } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
 import { ReusableComponent } from 'components/types'
+import { UserMessage } from 'components/UserMessage'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LabelPicker.module.scss'
@@ -39,9 +40,7 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
           <EntityLabel key={lbl.name} label={lbl} />
         ))}
       </div>
-      <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>
-        {t('common.noneSelectedMessage')}
-      </span>
+      <UserMessage hidden={selectedLabels.length > 0} text={props.noSelectionText} />
       <SelectCallout
         target={ref.current}
         hidden={!showCallout}
