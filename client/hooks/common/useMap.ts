@@ -16,6 +16,9 @@ export function useMap<KeyType = string, ObjectType = Record<any, any>>(
 
   /**
    * Object representation of the `Map`
+   * 
+   * The `Map` is converted to an object using
+   * `[...$map].reduce`
    */
   const $: ObjectType = [...$map].reduce((object, [key, value]) => {
     object[key] = value
