@@ -10,7 +10,7 @@ import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting
 } from 'apollo-server-core'
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer, AuthenticationError } from 'apollo-server-express'
 import {
   ApolloServerPlugin,
   GraphQLRequestContext
@@ -23,22 +23,10 @@ import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
 import UAParser from 'ua-parser-js'
-import { find, isEmpty } from 'underscore'
+import { find, isEmpty, pick } from 'underscore'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
-import {
-  ApiTokenResolver,
-  CustomerResolver,
-  LabelResolver,
-  NotificationResolver,
-  OutlookCategoryResolver,
-  ProjectResolver,
-  ReportsResolver,
-  RoleResolver,
-  SubscriptionResolver,
-  TimesheetResolver,
-  UserResolver
-} from './resolvers'
+import resolvers from './resolvers'
 const debug = createDebug('graphql')
 
 /**
@@ -55,25 +43,14 @@ const debug = createDebug('graphql')
  */
 export const generateGraphQLSchema = async () => {
   const schema = await buildSchema({
-    resolvers: [
-      ApiTokenResolver,
-      CustomerResolver,
-      LabelResolver,
-      NotificationResolver,
-      ReportsResolver,
-      TimesheetResolver,
-      ProjectResolver,
-      OutlookCategoryResolver,
-      UserResolver,
-      RoleResolver,
-      SubscriptionResolver
-    ],
+    resolvers,
     container: ({ context }: ResolverData<Context>) => context.container,
     emitSchemaFile: true,
     validate: false,
     authChecker,
+    authMode: 'error',
     dateScalarMode: 'isoDate',
-    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
+    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }],
   })
   return schema
 }
@@ -151,6 +128,7 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
+      formatError: (error) => pick(error, 'message'),
       context: ({ req }) => createContext(req, client),
       plugins: [
         ApolloServerPluginUsageReporting({
@@ -171,8 +149,8 @@ export const setupGraphQL = async (
               Container.reset(requestContext.context.requestId)
               const instancesIds = ((Container as any)
                 .instances as ContainerInstance[]).map(
-                (instance) => instance.id
-              )
+                  (instance) => instance.id
+                )
               debug('Container instances left in memory: ', instancesIds)
             }
           })
@@ -185,17 +163,4 @@ export const setupGraphQL = async (
   }
 }
 
-export * from './resolvers/types'
-export {
-  ApiTokenResolver,
-  CustomerResolver,
-  LabelResolver,
-  NotificationResolver,
-  OutlookCategoryResolver,
-  ProjectResolver,
-  ReportsResolver,
-  RoleResolver,
-  SubscriptionResolver,
-  TimesheetResolver,
-  UserResolver
-}
+export * from './resolvers'
