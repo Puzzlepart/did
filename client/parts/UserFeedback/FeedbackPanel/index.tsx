@@ -7,7 +7,6 @@ import {
   TextControl,
   TextControlOptions
 } from 'components/FormControl'
-import { JsonDebug } from 'components/Json'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { first, pick } from 'underscore'
@@ -35,7 +34,6 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
         headerText: t('feedback.headerText'),
         isLightDismiss: true
       }}>
-      <JsonDebug obj={model.$} />
       <Dropdown
         label={t('feedback.typeFieldLabel')}
         required={true}
