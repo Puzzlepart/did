@@ -46,10 +46,10 @@ export class TimesheetPeriod {
   initialize(period: TimesheetPeriodObject) {
     Object.assign(this, period)
     this._uiMatchedEventsStorage = new BrowserStorage(
-      `ui_matched_events_${this.id}`
+      `timesheet_matched_events_${this.id}`
     )
     this._uiIgnoredEventsStorage = new BrowserStorage(
-      `ui_ignored_events_${this.id}`
+      `timesheet_ignored_events_${this.id}`
     )
     this._uiMatchedEvents = this._uiMatchedEventsStorage.get({})
     this._uiIgnoredEvents = this._uiIgnoredEventsStorage.get([])
