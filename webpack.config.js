@@ -6,6 +6,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const debug = require('debug')('webpack')
+const { CustomCompileHooks } = require('./webpack-compile-hooks')
 
 const {
   MODE,
@@ -16,8 +17,29 @@ const {
   HTML_PLUGIN_TEMPLATE,
   HTML_PLUGIN_FILE_NAME,
   SRC_PATH,
+  TSCONFIG_PATH,
+  TSCONFIG_COMPILER_OPTIONS,
   DEFINITIONS
 } = require('./webpack.constants')
+
+function getResolves() {
+  const { baseUrl, paths } = TSCONFIG_COMPILER_OPTIONS
+  const alias = Object.keys(paths).reduce((aliases, key) => {
+    aliases[key] = path.resolve('./client', baseUrl, paths[key][0])
+    return aliases
+  }, {})
+  return {
+    alias,
+    extensions: [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.css',
+      '.scss',
+      '.gql'
+    ],
+  }
+}
 
 function getPluginsForEnvironment() {
   let plugins = [
@@ -32,6 +54,14 @@ function getPluginsForEnvironment() {
     const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
     const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
     plugins.push(
+      new CustomCompileHooks({
+        url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
+        localtunnel: {
+          port: process.env.PORT || 9001,
+          subdomain: process.env.LOCALTUNNEL_SUBDOMAIN,
+          callback: '{0}/auth/azuread-openidconnect/callback'
+        }
+      }),
       new LiveReloadPlugin(),
       new WebpackBuildNotifierPlugin({
         logo: path.resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
@@ -46,8 +76,17 @@ function getPluginsForEnvironment() {
 
 function getOptimizationForEnvironment() {
   let optimization = {
+    // Automatically split vendor and commons
+    // https://twitter.com/wSokra/status/969633336732905474
+    // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
     splitChunks: {
       chunks: 'all'
+    },
+    // Keep the runtime chunk separated to enable long term caching
+    // https://twitter.com/wSokra/status/969679223278505985
+    // https://github.com/facebook/create-react-app/issues/5358
+    runtimeChunk: {
+      name: entrypoint => `runtime-${entrypoint.name}`,
     },
     minimize: false,
     minimizer: [],
@@ -74,7 +113,6 @@ function getOptimizationForEnvironment() {
   return optimization
 }
 
-/** CONFIG */
 const config = {
   mode: MODE,
   entry: './client',
@@ -99,7 +137,7 @@ const config = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, 'client/tsconfig.json')
+              configFile: TSCONFIG_PATH
             }
           },
         ],
@@ -120,31 +158,7 @@ const config = {
       },
     ],
   },
-  resolve: {
-    alias: {
-      package: path.resolve(SRC_PATH, '../package.json'),
-      security: path.resolve(__dirname, 'shared/config/security'),
-      common: path.resolve(SRC_PATH, 'common'),
-      components: path.resolve(SRC_PATH, 'components'),
-      config: path.resolve(SRC_PATH, 'config'),
-      helpers: path.resolve(SRC_PATH, 'helpers'),
-      hooks: path.resolve(SRC_PATH, 'hooks'),
-      i18n: path.resolve(SRC_PATH, 'i18n'),
-      pages: path.resolve(SRC_PATH, 'pages'),
-      types: path.resolve(SRC_PATH, 'types'),
-      utils: path.resolve(SRC_PATH, 'utils'),
-      AppContext: path.resolve(SRC_PATH, 'app/context'),
-      DateUtils: path.resolve(__dirname, 'shared/utils/date'),
-    },
-    extensions: [
-      '.ts',
-      '.tsx',
-      '.js',
-      '.css',
-      '.scss',
-      '.gql'
-    ],
-  },
+  resolve: getResolves(),
   plugins: getPluginsForEnvironment(),
   stats: {
     warnings: false,
