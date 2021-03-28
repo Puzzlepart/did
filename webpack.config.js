@@ -72,7 +72,8 @@ function getPluginsForEnvironment() {
         typescript: {
           configFile: TSCONFIG_PATH,
           profile: process.env.FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE === '1'
-        }
+        },
+        logger: { infrastructure: 'silent', issues: 'console' }
       }),
       new ForkTsCheckerNotifierWebpackPlugin({ skipSuccessful: true }),
       new CustomCompileHooks({
