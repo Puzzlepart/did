@@ -11,11 +11,11 @@ import { contains } from 'underscore'
  */
 export function useArray<T>(
   initialValue: T[] = []
-): [T[], (item: T) => void, (item: T) => boolean] {
+) {
   const [state, setState] = useState(initialValue)
   return [
     state,
     (item: T) => setState((_) => [..._, item]),
     (item: T) => contains(state, item)
-  ]
+  ] as const
 }

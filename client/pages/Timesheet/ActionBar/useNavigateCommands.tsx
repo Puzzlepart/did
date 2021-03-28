@@ -7,7 +7,7 @@ import { TimesheetScope, useTimesheetContext } from '../types'
  * Returns Timesheet navigation commands based on
  * `state` from `TimesheetContext`.
  */
-export function useNavigateCommands(): IContextualMenuItem[] {
+export function useNavigateCommands() {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const navigateCurrentWeek: IContextualMenuItem = {

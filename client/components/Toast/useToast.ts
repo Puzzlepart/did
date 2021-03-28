@@ -2,18 +2,6 @@
 import { useState } from 'react'
 import { IToastProps } from './types'
 
-type UseToast = [
-  IToastProps,
-
-  /**
-   * Set message
-   *
-   * @param message - Message
-   * @param duration - Duration in ms (defaults to 5000)
-   */
-  (message: IToastProps, duration?: number) => void
-]
-
 /**
  * Hook used to show a temporarily `<Toast />`
  *
@@ -25,7 +13,7 @@ type UseToast = [
 export function useToast(
   defaultDuration = 5000,
   defaultProps: IToastProps = {}
-): UseToast {
+) {
   const [state, setState] = useState<IToastProps>(null)
 
   /**
@@ -42,5 +30,5 @@ export function useToast(
     }, duration)
   }
 
-  return [state, set]
+  return [state, set] as const
 }

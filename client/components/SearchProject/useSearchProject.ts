@@ -10,7 +10,7 @@ import $projects from './projects.gql'
 /**
  * Component logic hook for `<SearchProject />`
  */
-export function useSearchProject(): [ISuggestionItem<Project>[], boolean] {
+export function useSearchProject() {
   const { data, loading } = useQuery($projects, {
     fetchPolicy: 'cache-first'
   })
@@ -27,5 +27,5 @@ export function useSearchProject(): [ISuggestionItem<Project>[], boolean] {
       })
     ), [data])
 
-  return [items, loading]
+  return [items, loading] as const
 }

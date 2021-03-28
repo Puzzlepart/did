@@ -5,8 +5,6 @@ import { getValue as get } from 'helpers'
 import { isEmpty, unique } from 'underscore'
 import { IListGroupProps } from './types'
 
-type GenerateListGroups = [IGroup[], any[]]
-
 /**
  * Returns list groups based on property
  * `listGroupProps` on the `<List />` component
@@ -16,7 +14,7 @@ type GenerateListGroups = [IGroup[], any[]]
 export function useListGroups(
   items: any[],
   props: IListGroupProps
-): GenerateListGroups {
+) {
   if (!props) return [null, items]
   const { fieldName, emptyGroupName, totalFunc } = props
   if (isEmpty(items) && !props.groupNames) return [null, []]
@@ -46,5 +44,5 @@ export function useListGroups(
     }
     return group
   })
-  return [groups, items]
+  return [groups, items] as const
 }
