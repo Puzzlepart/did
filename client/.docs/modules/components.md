@@ -433,7 +433,7 @@ ___
 
 Search for projects using `<Autocomplete />`
 
-Defined in: [components/SearchProject/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L15)
+Defined in: [components/SearchProject/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L14)
 
 ___
 
@@ -522,9 +522,9 @@ Name | Type |
 `className` | *string* |
 `dispatch` | *Dispatch*<AnyAction\> |
 `onClear` | () => *void* |
-`onDismissCallout` | (`item`: *any*) => *void* |
+`onDismissCallout` | (`item`: [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)<any\>) => *void* |
 `onKeyDown` | () => (`event`: *KeyboardEvent*<HTMLDivElement\>) => *any* |
-`onSearch` | (`\_`: *any*, `searchTerm`: *string*) => *any* |
+`onSearch` | (`\_event`: *any*, `searchTerm`: *string*) => *any* |
 `onSetSelected` | (`index`: *number*) => *any* |
 `ref` | *MutableRefObject*<HTMLDivElement\> |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
@@ -551,12 +551,12 @@ Name | Type |
 Name | Type |
 :------ | :------ |
 `onClear` | () => *void* |
-`onDismissCallout` | (`item`: *any*) => *void* |
+`onDismissCallout` | (`item`: [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)<any\>) => *void* |
 `onKeyDown` | () => (`event`: *KeyboardEvent*<HTMLDivElement\>) => *any* |
-`onSearch` | (`\_`: *any*, `searchTerm`: *string*) => *any* |
+`onSearch` | (`\_event`: *any*, `searchTerm`: *string*) => *any* |
 `onSetSelected` | (`index`: *number*) => *any* |
 
-Defined in: [components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
+Defined in: [components/Autocomplete/useAutocompleteEvents.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L16)
 
 ___
 

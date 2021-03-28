@@ -23,9 +23,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
-        <SubText 
-        text={event.title}
-        font='mediumPlus' />
+        <SubText text={event.title} font='mediumPlus' />
         <UserMessage
           containerStyle={{ marginTop: 25 }}
           iconName='OutlookLogo'
@@ -54,7 +52,6 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           width='100%'
           className={styles.searchProject}
           onSelected={(project) => onMatch(project)}
-
           placeholder={t('timesheet.matchEventPanelSearchPlaceholder')}
         />
       </Panel>

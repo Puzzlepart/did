@@ -15,17 +15,20 @@ export function useSearchProject(): [ISuggestionItem<Project>[], boolean] {
     fetchPolicy: 'cache-first'
   })
 
-  const items: ISuggestionItem<Project>[] = useMemo(() =>
-    arrayMap<any>(data?.projects,
-      (project) => ({
+  const items: ISuggestionItem<Project>[] = useMemo(
+    () =>
+      arrayMap<any>(data?.projects, (project) => ({
         key: project.tag,
         text: project.name,
         secondaryText: project.tag,
-        searchValue: [project.tag, project.name, project.customer.name].join(' '),
+        searchValue: [project.tag, project.name, project.customer.name].join(
+          ' '
+        ),
         data: project,
         iconName: project.icon
-      })
-    ), [data])
+      })),
+    [data]
+  )
 
   return [items, loading]
 }
