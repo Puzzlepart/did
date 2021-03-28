@@ -8,7 +8,8 @@ import {
   FirstWeekOfYear,
   FocusTrapZone,
   ICalendarStrings,
-  ICalloutProps
+  ICalloutProps,
+  useTheme
 } from '@fluentui/react'
 import React from 'react'
 import { isBrowser } from 'react-device-detect'
@@ -22,6 +23,7 @@ import { TimesheetScope, useTimesheetContext } from '../../types'
 export const WeekPicker: React.FC<ICalloutProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
+  const { palette } = useTheme()
   return (
     <Callout
       {...props}
@@ -48,6 +50,13 @@ export const WeekPicker: React.FC<ICalloutProps> = (props) => {
           firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
           dateRangeType={DateRangeType.Week}
           value={state.scope.startDate.jsDate}
+          calendarMonthProps={{
+            styles: {
+              currentItemButton: {
+                color: palette.neutralPrimary
+              }
+            }
+          }}
         />
       </FocusTrapZone>
     </Callout>
