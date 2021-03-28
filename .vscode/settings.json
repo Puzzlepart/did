@@ -19,7 +19,6 @@
     "schema.gql": true,
     "*.dmm": true,
     ".husky": true,
-    ".localtunnel": true,
     ".gitattributes": true,
     ".nvmrc": true
   },

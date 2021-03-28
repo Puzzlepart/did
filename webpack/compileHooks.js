@@ -48,12 +48,12 @@ class CustomCompileHooks {
             port,
           })
           await writeFileAsync(
-            path.resolve(__dirname, '.localtunnel'),
+            './.localtunnel',
             format(callback, tunnel.url)
           )
           this.url = tunnel.url
         } else {
-          await writeFileAsync(path.resolve(__dirname, '.localtunnel'), '')
+          await writeFileAsync('./.localtunnel', '')
         }
         callback()
       }
@@ -75,6 +75,7 @@ class CustomCompileHooks {
         log()
         log(`🎉 You can now view ${chalk.bold('did')} in the browser at ${chalk.bold(this.url)} 🎉`)
         log()
+        log()
         log(`📓 Note that the development build ${chalk.bold('is not')} optimized.`)
         log()
         log()
@@ -84,9 +85,12 @@ class CustomCompileHooks {
         )
         log()
         log()
-        log()
         if (this.options.launchBrowser) {
           open(this.url)
+        } else {
+          log(`Set ${chalk.bold.cyan('LAUNCH_BROWSER')} to ${chalk.bold.cyan('1')} in your ${chalk.magenta.bold('.env')} file to automatially launch your browser.`)
+          log()
+          log()
         }
         this.isFirstRun = false
         callback()

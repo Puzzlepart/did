@@ -30,7 +30,7 @@ log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
 
 rmdir(dir, () => {
   concurrently([
-    { command: 'nodemon ', name: 'server' },
-    { command: 'webpack --watch', name: 'client' }
+    { command: 'nodemon', name: 'server' },
+    { command: 'webpack  --config webpack/config.js --watch', name: 'client' }
   ], {})
 })
