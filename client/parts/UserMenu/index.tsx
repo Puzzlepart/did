@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Callout, Icon, Persona, PersonaSize } from '@fluentui/react'
+import { Callout, Icon, Persona, PersonaSize, useTheme } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useToggle } from 'hooks'
 import React, { useRef } from 'react'
@@ -21,6 +21,7 @@ import { UserSettings } from './UserSettings'
 export const UserMenu: React.FC = () => {
   const { t } = useTranslation()
   const { user, subscription } = useAppContext()
+  const { semanticColors,palette } = useTheme()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
   return (
@@ -46,15 +47,22 @@ export const UserMenu: React.FC = () => {
       </span>
       <Callout
         hidden={menuHidden}
+        styles={{
+          calloutMain: {
+            background: semanticColors.menuBackground,
+            borderRadius:6
+          }
+        }}
         target={target?.current}
         onDismiss={toggleMenu}
+        isBeakVisible={false}
         gapSpace={-8}>
         <FadeIn className={styles.menu}>
           <MenuItem
             text={subscription.name}
             style={{
               padding: '0 2px 2px 12px',
-              color: 'rgb(96, 94, 92)',
+              color: palette.neutralSecondary,
               fontSize: 10
             }}
           />

@@ -16,6 +16,7 @@ export default {
     }
   },
   semanticColors: {
+    menuBackground: '#161b22',
     menuHeader: '#161b22',
     bodyBackground: '#0d1117',
     successBackground: '#C9F7E8',
