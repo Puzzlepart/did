@@ -47,6 +47,8 @@ export class ContextUser {
       )
       this.configuration = tryParseJson(_user.configuration, {})
       this.theme = getTheme(this.configuration?.ui?.theme)
+    } else {
+      this.theme = getTheme('auto')
     }
   }
 

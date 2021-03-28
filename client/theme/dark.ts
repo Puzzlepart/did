@@ -20,8 +20,11 @@ export default {
     bodyBackground: '#0d1117',
     successBackground: '#393d1b',
     successText: '#fff',
+    successIcon:'#fff',
     infoBackground: '#323130',
     infoText: '#fff',
+    errorBackground: '#442726',
+    errorText: '#fff',
     bodySubtext: '#c9d1d9'
   },
   palette: {
@@ -47,7 +50,7 @@ export default {
     neutralPrimary: '#c9d1d9',
     neutralPrimaryAlt: '#dadada',
     neutralSecondary: '#c9d1d9',
-    neutralSecondaryAlt: '#ff0000',
+    neutralSecondaryAlt: '#777',
     neutralTertiary: '#c8c8c8',
     neutralTertiaryAlt: '#6d6d6d',
     neutralQuaternary: '#4f4f4f',
@@ -58,7 +61,7 @@ export default {
      */
     neutralLighter: '#3f3f3f',
     neutralLighterAlt: '#252422',
-    accent: '#ff0000',
+    accent: '#777',
     /**
      * This is the page background
      */

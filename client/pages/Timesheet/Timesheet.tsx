@@ -31,6 +31,7 @@ export const Timesheet: React.FC = () => {
           <ErrorBar error={state.error} />
           <StatusBar />
           <TabContainer
+            hidden={!!state.error}
             defaultSelectedKey={state.selectedView}
             onTabChanged={(itemKey) =>
               dispatch(CHANGE_VIEW({ view: itemKey as TimesheetView }))
