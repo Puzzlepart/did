@@ -45,14 +45,14 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
       })
       .addCase(RESET, (state) => {
         state.selectedItem = null
-        state.value = null
+        state.value = ''
         state.suggestions = []
       })
       .addCase(ON_SEARCH, (state, { payload }) => {
         state.selectedIndex = -1
         state.value = payload.searchTerm || ''
         state.suggestions =
-          state.value.length > 1
+          state.value.length > 0
             ? state.items.filter((index) =>
                 index.searchValue
                   .toLowerCase()

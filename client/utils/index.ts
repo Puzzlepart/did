@@ -4,6 +4,7 @@
  *
  * @module Utils
  */
+export * from './arrayMap'
 export * from './browserStorage'
 export * from './cleanArray'
 export * from './generateColumn'

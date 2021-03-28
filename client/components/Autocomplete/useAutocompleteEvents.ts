@@ -6,6 +6,7 @@ import {
   RESET,
   SET_SELECTED_INDEX
 } from './reducer'
+import { ISuggestionItem } from './types'
 
 /**
  * Use Autocomplete events
@@ -14,12 +15,12 @@ import {
  */
 export function useAutocompleteEvents({ dispatch, props }) {
   return {
-    onDismissCallout: (item: any) => {
+    onDismissCallout: (item: ISuggestionItem) => {
       dispatch(DISMISS_CALLOUT({ item }))
       props.onSelected(item)
     },
     onSetSelected: (index: number) => dispatch(SET_SELECTED_INDEX({ index })),
-    onSearch: (_: any, searchTerm: string) =>
+    onSearch: (_event: any, searchTerm: string) =>
       dispatch(ON_SEARCH({ searchTerm })),
     onClear: () => {
       dispatch(RESET())
