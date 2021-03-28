@@ -89,9 +89,7 @@ export function useSubmitCommands(): IContextualMenuItem {
       else if (isForecast) {
         if (isComplete) commands.push(CONFIRM_PERIOD)
         if (subscription.settings?.forecast?.enabled) {
-          commands.push(
-            isForecasted ? UNFORECAST_PERIOD : FORECAST_PERIOD
-          )
+          commands.push(isForecasted ? UNFORECAST_PERIOD : FORECAST_PERIOD)
         }
       } else {
         if (isComplete) {
@@ -111,9 +109,12 @@ export function useSubmitCommands(): IContextualMenuItem {
 
       commands = arrayExtend(commands, (element) => ({
         disabled: !!state.loading,
-        styles: merge({
-          root: { height: 44, marginLeft: 4 }
-        }, element.styles || {}),
+        styles: merge(
+          {
+            root: { height: 44, marginLeft: 4 }
+          },
+          element.styles || {}
+        )
       }))
 
       let menuProps: IContextualMenuProps = null
@@ -146,7 +147,7 @@ export function useSubmitCommands(): IContextualMenuItem {
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            border:'none'
+            border: 'none'
           }}
           primary={false}
           {...(first(commands) as any)}

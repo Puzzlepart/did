@@ -1,6 +1,8 @@
 import { arrayMap } from './arrayMap'
 
-type ArrayExtendProps<T> = Record<keyof T, any> | ((element: T) => Record<keyof T, any>)
+type ArrayExtendProps<T> =
+  | Record<keyof T, any>
+  | ((element: T) => Record<keyof T, any>)
 
 /**
  * Extends all items in the `array` with `props`
