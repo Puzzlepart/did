@@ -29,7 +29,7 @@ Reusable utility functions
 
 ### arrayExtend
 
-▸ **arrayExtend**<T\>(`array`: T[], `props?`: *Record*<keyof T, any\>, `condition?`: *boolean*): T[]
+▸ **arrayExtend**<T\>(`array`: T[], `props?`: *ArrayExtendProps*<T\>, `condition?`: *boolean*): T[]
 
 Extends all items in the `array` with `props`
 if `condition` equals `true`
@@ -45,12 +45,12 @@ Name | Default |
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `array` | T[] | - | Array   |
-`props?` | *Record*<keyof T, any\> | - | Props to set   |
+`props?` | *ArrayExtendProps*<T\> | - | Props to set   |
 `condition` | *boolean* | true | Condition    |
 
 **Returns:** T[]
 
-Defined in: [utils/arrayExtend.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L11)
+Defined in: [utils/arrayExtend.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L13)
 
 ___
 
