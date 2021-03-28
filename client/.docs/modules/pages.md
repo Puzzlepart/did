@@ -8,6 +8,10 @@ All are built using React Function components and Hooks.
 
 ## Table of contents
 
+### References
+
+- [useReportsQueries](pages.md#usereportsqueries)
+
 ### Namespaces
 
 - [Home](pages.home.md)
@@ -110,7 +114,6 @@ All are built using React Function components and Hooks.
 - [lastYearQuery](pages.md#lastyearquery)
 - [summaryQuery](pages.md#summaryquery)
 - [useQueries](pages.md#usequeries)
-- [useReportsQueries](pages.md#usereportsqueries)
 
 ### Reports Hooks Functions
 
@@ -123,6 +126,12 @@ All are built using React Function components and Hooks.
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
+
+## References
+
+### useReportsQueries
+
+Renames and exports: [useQueries](pages.md#usequeries)
 
 ## Other Type aliases
 
@@ -583,18 +592,6 @@ Defined in: [pages/Reports/hooks/useReportsQueries.ts:189](https://github.com/Pu
 
 ___
 
-### useReportsQueries
-
-▸ **useReportsQueries**(): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
-
-Use queries
-
-**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
-
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:189](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L189)
-
-___
-
 ## Reports Hooks Functions
 
 ### useReports
@@ -618,7 +615,7 @@ Name | Type |
 `context` | *object* |
 `context.dispatch` | *Dispatch*<AnyAction\> |
 `context.state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
-`context.t` | TFunction |
+`context.t` | *TFunction*<*translation*\> |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 
@@ -720,7 +717,7 @@ ___
 
 ### useTimesheetQuery
 
-▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>): () => *Promise*<ApolloQueryResult<any\>\>
+▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>): *function*
 
 Use Timesheet query
 
@@ -731,6 +728,6 @@ Name | Type | Description |
 `state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | State   |
 `dispatch` | *Dispatch*<AnyAction\> | Dispatch    |
 
-**Returns:** *function*
+**Returns:** () => *Promise*<ApolloQueryResult<any\>\>
 
 Defined in: [pages/Timesheet/hooks/useTimesheetQuery.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L18)

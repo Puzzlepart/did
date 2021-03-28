@@ -25,6 +25,8 @@
 - [PluginFunc](dateutils._dayjs.md#pluginfunc)
 - [QUnitType](dateutils._dayjs.md#qunittype)
 - [UnitType](dateutils._dayjs.md#unittype)
+- [UnitTypeLong](dateutils._dayjs.md#unittypelong)
+- [UnitTypeLongPlural](dateutils._dayjs.md#unittypelongplural)
 - [UnitTypeShort](dateutils._dayjs.md#unittypeshort)
 - [WeekdayNames](dateutils._dayjs.md#weekdaynames)
 
@@ -69,9 +71,9 @@ ___
 
 ### OpUnitType
 
-Ƭ **OpUnitType**: [*UnitType*](dateutils._dayjs.md#unittype) \| *week* \| *w*
+Ƭ **OpUnitType**: [*UnitType*](dateutils._dayjs.md#unittype) \| *week* \| *weeks* \| *w*
 
-Defined in: node_modules/dayjs/index.d.ts:19
+Defined in: node_modules/dayjs/index.d.ts:24
 
 ___
 
@@ -107,23 +109,39 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: node_modules/dayjs/index.d.ts:405
+Defined in: node_modules/dayjs/index.d.ts:410
 
 ___
 
 ### QUnitType
 
-Ƭ **QUnitType**: [*UnitType*](dateutils._dayjs.md#unittype) \| *quarter* \| *Q*
+Ƭ **QUnitType**: [*UnitType*](dateutils._dayjs.md#unittype) \| *quarter* \| *quarters* \| *Q*
 
-Defined in: node_modules/dayjs/index.d.ts:20
+Defined in: node_modules/dayjs/index.d.ts:25
 
 ___
 
 ### UnitType
 
-Ƭ **UnitType**: *millisecond* \| *second* \| *minute* \| *hour* \| *day* \| *month* \| *year* \| *date* \| [*UnitTypeShort*](dateutils._dayjs.md#unittypeshort)
+Ƭ **UnitType**: [*UnitTypeLong*](dateutils._dayjs.md#unittypelong) \| [*UnitTypeLongPlural*](dateutils._dayjs.md#unittypelongplural) \| [*UnitTypeShort*](dateutils._dayjs.md#unittypeshort)
 
-Defined in: node_modules/dayjs/index.d.ts:17
+Defined in: node_modules/dayjs/index.d.ts:22
+
+___
+
+### UnitTypeLong
+
+Ƭ **UnitTypeLong**: *millisecond* \| *second* \| *minute* \| *hour* \| *day* \| *month* \| *year* \| *date*
+
+Defined in: node_modules/dayjs/index.d.ts:18
+
+___
+
+### UnitTypeLongPlural
+
+Ƭ **UnitTypeLongPlural**: *milliseconds* \| *seconds* \| *minutes* \| *hours* \| *days* \| *months* \| *years* \| *dates*
+
+Defined in: node_modules/dayjs/index.d.ts:20
 
 ___
 
@@ -149,7 +167,7 @@ Defined in: node_modules/dayjs/plugin/localeData.d.ts:7
 
 #### Type declaration:
 
-Defined in: node_modules/dayjs/index.d.ts:415
+Defined in: node_modules/dayjs/index.d.ts:420
 
 ___
 
@@ -157,24 +175,48 @@ ___
 
 • `Const` **tz**: [*DayjsTimezone*](../interfaces/dateutils._dayjs.dayjstimezone.md)
 
-Defined in: node_modules/dayjs/plugin/timezone.d.ts:18
+Defined in: node_modules/dayjs/plugin/timezone.d.ts:19
 
 ## Functions
 
 ### duration
 
-▸ **duration**(`input?`: plugin.DurationInputType, `unit?`: *string*): plugin.Duration
+▸ `Const`**duration**(`units`: *Partial*<{ `days`:  ; `hours`:  ; `milliseconds`:  ; `minutes`:  ; `months`:  ; `seconds`:  ; `weeks`:  ; `years`:   }\>): Duration
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`input?` | plugin.DurationInputType |
-`unit?` | *string* |
+`units` | *Partial*<{ `days`:  ; `hours`:  ; `milliseconds`:  ; `minutes`:  ; `months`:  ; `seconds`:  ; `weeks`:  ; `years`:   }\> |
 
-**Returns:** plugin.Duration
+**Returns:** Duration
 
-Defined in: node_modules/dayjs/plugin/duration.d.ts:64
+Defined in: node_modules/dayjs/plugin/duration.d.ts:76
+
+▸ `Const`**duration**(`time`: *number*, `unit?`: DurationUnitType): Duration
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`time` | *number* | If unit is not present, time treated as number of milliseconds    |
+`unit?` | DurationUnitType | - |
+
+**Returns:** Duration
+
+Defined in: node_modules/dayjs/plugin/duration.d.ts:76
+
+▸ `Const`**duration**(`ISO_8601`: *string*): Duration
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`ISO_8601` | *string* |
+
+**Returns:** Duration
+
+Defined in: node_modules/dayjs/plugin/duration.d.ts:76
 
 ___
 
@@ -197,7 +239,7 @@ Name | Type |
 
 **Returns:** [*Dayjs*](../classes/dateutils._dayjs.dayjs.md)
 
-Defined in: node_modules/dayjs/index.d.ts:407
+Defined in: node_modules/dayjs/index.d.ts:412
 
 ___
 
@@ -213,7 +255,7 @@ Name | Type |
 
 **Returns:** d is Dayjs
 
-Defined in: node_modules/dayjs/index.d.ts:411
+Defined in: node_modules/dayjs/index.d.ts:416
 
 ___
 
@@ -229,7 +271,7 @@ Name | Type |
 
 **Returns:** d is Duration
 
-Defined in: node_modules/dayjs/plugin/duration.d.ts:65
+Defined in: node_modules/dayjs/plugin/duration.d.ts:77
 
 ___
 
@@ -247,7 +289,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: node_modules/dayjs/index.d.ts:409
+Defined in: node_modules/dayjs/index.d.ts:414
 
 ___
 
@@ -293,7 +335,7 @@ Name | Type |
 
 **Returns:** [*Dayjs*](../classes/dateutils._dayjs.dayjs.md)
 
-Defined in: node_modules/dayjs/index.d.ts:413
+Defined in: node_modules/dayjs/index.d.ts:418
 
 ___
 

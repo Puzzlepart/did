@@ -43,7 +43,7 @@ export class BrowserStorage<T = unknown> {
    */
   public merge(value: T): void {
     const currentValue = this.get()
-    const newValue =  { ...currentValue, ...value }
+    const newValue = { ...currentValue, ...value }
     this._store.set(newValue)
   }
 }

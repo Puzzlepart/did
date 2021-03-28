@@ -26,7 +26,10 @@ export const Navigation: React.FC = () => {
       style={{ background: theme.semanticColors.menuHeader }}
       hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
-        <Link to='/' className={styles.logo} title={`${__package.name} - ${__package.description}`}>
+        <Link
+          to='/'
+          className={styles.logo}
+          title={`${__package.name} - ${__package.description}`}>
           {__package.name}
         </Link>
         <ul className={styles.nav}>

@@ -26,7 +26,7 @@
 
 ### fixedLinkWidth
 
-• `Optional` **fixedLinkWidth**: PrimitiveType
+• `Optional` **fixedLinkWidth**: *string* \| *number* \| *boolean*
 
 Fixed tab link width
 

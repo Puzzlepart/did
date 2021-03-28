@@ -1,4 +1,3 @@
-
 import { PartialTheme } from '@fluentui/react/lib/Theme'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'

@@ -24,4 +24,3 @@ export type GetAllocationViewData = (
   chart: IChartConfig,
   width: number
 ) => IChartItem<any>[]
-

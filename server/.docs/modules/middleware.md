@@ -96,7 +96,7 @@ ___
 
 ### serveGzippedMiddleware
 
-▸ `Const`**serveGzippedMiddleware**(`contentType`: *string*): (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
+▸ `Const`**serveGzippedMiddleware**(`contentType`: *string*): *function*
 
 Serve gzipped
 
@@ -106,6 +106,6 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `contentType` | *string* | Content type    |
 
-**Returns:** *function*
+**Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
 Defined in: [middleware/gzip/index.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L12)
