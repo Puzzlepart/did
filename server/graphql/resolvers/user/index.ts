@@ -51,7 +51,7 @@ export class UserResolver {
     private readonly _msgraph: MSGraphService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService
-  ) { }
+  ) {}
 
   /**
    * Get auth providers
@@ -190,7 +190,11 @@ export class UserResolver {
       }
       if (feedback.reporter && environment('GITHUB_FEEDBACK_REPORTER_INFO')) {
         const template = environment('GITHUB_FEEDBACK_REPORTER_INFO')
-        issue.body += `\n\n${Format(template, feedback.reporter.displayName, feedback.reporter.mail)}`
+        issue.body += `\n\n${Format(
+          template,
+          feedback.reporter.displayName,
+          feedback.reporter.mail
+        )}`
       }
       const result = await request('POST /repos/{owner}/{repo}/issues', {
         owner: environment<string>('GITHUB_FEEDBACK_OWNER'),

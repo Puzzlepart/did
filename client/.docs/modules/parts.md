@@ -51,7 +51,7 @@ App components
 
 • `Const` **FeedbackPanel**: *React.FC*<IPanelProps\>
 
-Defined in: [parts/UserFeedback/FeedbackPanel/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L20)
+Defined in: [parts/UserFeedback/FeedbackPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L18)
 
 ___
 
