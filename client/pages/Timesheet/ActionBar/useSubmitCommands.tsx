@@ -1,30 +1,17 @@
 import {
   IContextualMenuItem,
   IContextualMenuProps,
-  PrimaryButton
+  merge,
+  PrimaryButton,
+  useTheme
 } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { first, omit } from 'underscore'
+import { arrayExtend } from 'utils'
 import { TimesheetContext } from '../context'
-
-/**
- * Get base submit item props
- *
- * @param key - Key
- * @param iconName - Icon name
- */
-const submitItemBaseProps = (
-  key: string,
-  iconName: string
-): Partial<IContextualMenuItem> => ({
-  key,
-  styles: { root: { height: 44, marginLeft: 4 } },
-  iconProps: { iconName },
-  canCheck: true
-})
 
 /**
  * Use submit commands
@@ -32,6 +19,7 @@ const submitItemBaseProps = (
 export function useSubmitCommands(): IContextualMenuItem {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
+  const { semanticColors } = useTheme()
   const { state, onSubmitPeriod, onUnsubmitPeriod } = useContext(
     TimesheetContext
   )
@@ -46,83 +34,87 @@ export function useSubmitCommands(): IContextualMenuItem {
         isConfirmed,
         isPast
       } = state.selectedPeriod
-      const cmd: { [key: string]: IContextualMenuItem } = {
-        FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-          ...(submitItemBaseProps(
-            'FORECAST_PERIOD',
-            'BufferTimeBefore'
-          ) as IContextualMenuItem),
-          onClick: () => {
-            onSubmitPeriod(true)
-          },
-          text: t('timesheet.forecastHoursText'),
-          secondaryText: t('timesheet.forecastHoursSecondaryText')
+      const FORECAST_PERIOD: IContextualMenuItem = {
+        key: 'FORECAST_PERIOD',
+        iconProps: { iconName: 'BufferTimeBefore' },
+        onClick: () => {
+          onSubmitPeriod(true)
         },
-        UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-          ...(submitItemBaseProps(
-            'UNFORECAST_PERIOD',
-            'Cancel'
-          ) as IContextualMenuItem),
-          onClick: () => {
-            onUnsubmitPeriod(true)
-          },
-          text: t('timesheet.unforecastHoursText'),
-          secondaryText: t('timesheet.unforecastHoursSecondaryText')
+        text: t('timesheet.forecastHoursText'),
+        secondaryText: t('timesheet.forecastHoursSecondaryText')
+      }
+      const UNFORECAST_PERIOD: IContextualMenuItem = {
+        key: 'UNFORECAST_PERIOD',
+        iconProps: { iconName: 'Cancel' },
+        onClick: () => {
+          onUnsubmitPeriod(true)
         },
-        CONFIRM_PERIOD: {
-          ...(submitItemBaseProps(
-            'CONFIRM_PERIOD',
-            'CheckMark'
-          ) as IContextualMenuItem),
-          onClick: () => {
-            onSubmitPeriod(false)
-          },
-          text: t('timesheet.confirmHoursText'),
-          secondaryText: t('timesheet.confirmHoursSecondaryText')
+        text: t('timesheet.unforecastHoursText'),
+        secondaryText: t('timesheet.unforecastHoursSecondaryText')
+      }
+      const CONFIRM_PERIOD: IContextualMenuItem = {
+        key: 'CONFIRM_PERIOD',
+        iconProps: { iconName: 'CheckMark' },
+        styles: {
+          root: {
+            background: semanticColors.successBackground,
+            color: semanticColors.successText
+          }
         },
-        UNCONFIRM_PERIOD: {
-          ...(submitItemBaseProps(
-            'UNCONFIRM_PERIOD',
-            'Cancel'
-          ) as IContextualMenuItem),
-          onClick: () => {
-            onUnsubmitPeriod(false)
-          },
-          text: t('timesheet.unconfirmHoursText'),
-          secondaryText: t('timesheet.unconfirmHoursSecondaryText')
-        }
+        onClick: () => {
+          onSubmitPeriod(false)
+        },
+        text: t('timesheet.confirmHoursText'),
+        secondaryText: t('timesheet.confirmHoursSecondaryText')
+      }
+      const UNCONFIRM_PERIOD: IContextualMenuItem = {
+        key: 'UNCONFIRM_PERIOD',
+        iconProps: { iconName: 'Cancel' },
+        styles: {
+          root: {
+            background: semanticColors.errorBackground,
+            color: semanticColors.errorText
+          }
+        },
+        onClick: () => {
+          onUnsubmitPeriod(false)
+        },
+        text: t('timesheet.unconfirmHoursText'),
+        secondaryText: t('timesheet.unconfirmHoursSecondaryText')
       }
 
       let commands: IContextualMenuItem[] = []
 
-      if (isConfirmed) commands.push(cmd.UNCONFIRM_PERIOD)
+      if (isConfirmed) commands.push(UNCONFIRM_PERIOD)
       else if (isForecast) {
-        if (isComplete) commands.push(cmd.CONFIRM_PERIOD)
-        commands.push(
-          isForecasted ? cmd.UNFORECAST_PERIOD : cmd.FORECAST_PERIOD
-        )
+        if (isComplete) commands.push(CONFIRM_PERIOD)
+        if (subscription.settings?.forecast?.enabled) {
+          commands.push(
+            isForecasted ? UNFORECAST_PERIOD : FORECAST_PERIOD
+          )
+        }
       } else {
         if (isComplete) {
-          commands.push(cmd.CONFIRM_PERIOD)
-          if (!isPast) {
-            if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
-            else commands.push(cmd.FORECAST_PERIOD)
+          commands.push(CONFIRM_PERIOD)
+          if (!isPast && subscription.settings?.forecast?.enabled) {
+            if (isForecasted) commands.push(UNFORECAST_PERIOD)
+            else commands.push(FORECAST_PERIOD)
           }
         } else {
-          if (!isPast) {
-            if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
-            else commands.push(cmd.FORECAST_PERIOD)
+          if (!isPast && subscription.settings?.forecast?.enabled) {
+            if (isForecasted) commands.push(UNFORECAST_PERIOD)
+            else commands.push(FORECAST_PERIOD)
           }
-          commands.push({ ...cmd.CONFIRM_PERIOD, disabled: true })
+          commands.push({ ...CONFIRM_PERIOD, disabled: true })
         }
       }
 
-      commands = commands
-        .filter((c) => c)
-        .map((c) => ({
-          disabled: !!state.loading,
-          ...c
-        }))
+      commands = arrayExtend(commands, (element) => ({
+        disabled: !!state.loading,
+        styles: merge({
+          root: { height: 44, marginLeft: 4 }
+        }, element.styles || {}),
+      }))
 
       let menuProps: IContextualMenuProps = null
       if (commands.length > 1) {
@@ -153,7 +145,8 @@ export function useSubmitCommands(): IContextualMenuItem {
             width: isMobile ? 160 : 180,
             whiteSpace: 'nowrap',
             overflow: 'hidden',
-            textOverflow: 'ellipsis'
+            textOverflow: 'ellipsis',
+            border:'none'
           }}
           primary={false}
           {...(first(commands) as any)}

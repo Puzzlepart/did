@@ -18,9 +18,9 @@ export default {
   semanticColors: {
     menuHeader: '#161b22',
     bodyBackground: '#0d1117',
-    successBackground: '#393d1b',
-    successText: '#fff',
-    successIcon: '#fff',
+    successBackground: '#C9F7E8',
+    successText: '#444',
+    successIcon: '#444',
     infoBackground: '#323130',
     infoText: '#fff',
     errorBackground: '#442726',

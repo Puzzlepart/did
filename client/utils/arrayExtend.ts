@@ -1,5 +1,7 @@
 import { arrayMap } from './arrayMap'
 
+type ArrayExtendProps<T> = Record<keyof T, any> | ((element: T) => Record<keyof T, any>)
+
 /**
  * Extends all items in the `array` with `props`
  * if `condition` equals `true`
@@ -10,12 +12,20 @@ import { arrayMap } from './arrayMap'
  */
 export function arrayExtend<T = any>(
   array: T[],
-  props?: Record<keyof T, any>,
+  props?: ArrayExtendProps<T>,
   condition = true
 ): T[] {
   if (!condition) return array
-  return arrayMap(array, (element) => ({
-    ...element,
-    ...props
-  }))
+  return arrayMap(array, (element) => {
+    if (typeof props === 'function') {
+      return {
+        ...element,
+        ...props(element)
+      }
+    }
+    return {
+      ...element,
+      ...props
+    }
+  })
 }

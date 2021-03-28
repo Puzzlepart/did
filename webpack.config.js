@@ -36,8 +36,8 @@ function getPluginsForEnvironment() {
       new WebpackBuildNotifierPlugin({
         logo: path.resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
         sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
-        suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
-        showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
+        suppressWarning: true,
+        showDuration: true
       })
     )
   }
