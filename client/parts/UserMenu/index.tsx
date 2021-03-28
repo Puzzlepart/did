@@ -21,7 +21,7 @@ import { UserSettings } from './UserSettings'
 export const UserMenu: React.FC = () => {
   const { t } = useTranslation()
   const { user, subscription } = useAppContext()
-  const { semanticColors,palette } = useTheme()
+  const { semanticColors, palette } = useTheme()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
   return (
@@ -50,7 +50,7 @@ export const UserMenu: React.FC = () => {
         styles={{
           calloutMain: {
             background: semanticColors.menuBackground,
-            borderRadius:6
+            borderRadius: 6
           }
         }}
         target={target?.current}

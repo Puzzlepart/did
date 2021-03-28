@@ -50,7 +50,7 @@ Name | Type | Default value | Description |
 
 **Returns:** T[]
 
-Defined in: [utils/arrayExtend.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L13)
+Defined in: [utils/arrayExtend.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L15)
 
 ___
 
