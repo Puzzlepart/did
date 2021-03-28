@@ -588,7 +588,7 @@ ___
 
 ### useListGroups
 
-▸ **useListGroups**(`items`: *any*[], `props`: [*IListGroupProps*](../interfaces/components.ilistgroupprops.md)): GenerateListGroups
+▸ **useListGroups**(`items`: *any*[], `props`: [*IListGroupProps*](../interfaces/components.ilistgroupprops.md)): *any*[][] \| readonly [IGroup[], *any*[]]
 
 Returns list groups based on property
 `listGroupProps` on the `<List />` component
@@ -600,9 +600,9 @@ Name | Type |
 `items` | *any*[] |
 `props` | [*IListGroupProps*](../interfaces/components.ilistgroupprops.md) |
 
-**Returns:** GenerateListGroups
+**Returns:** *any*[][] \| readonly [IGroup[], *any*[]]
 
-Defined in: [components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
+Defined in: [components/List/useListGroups.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L14)
 
 ___
 
@@ -673,7 +673,7 @@ ___
 
 ### useToast
 
-▸ **useToast**(`defaultDuration?`: *number*, `defaultProps?`: [*IToastProps*](components.md#itoastprops)): UseToast
+▸ **useToast**(`defaultDuration?`: *number*, `defaultProps?`: [*IToastProps*](components.md#itoastprops)): readonly [[*IUserMessageProps*](../interfaces/components.iusermessageprops.md), (`message`: [*IToastProps*](components.md#itoastprops), `duration`: *number*) => *void*]
 
 Hook used to show a temporarily `<Toast />`
 
@@ -684,9 +684,9 @@ Name | Type | Default value | Description |
 `defaultDuration` | *number* | 5000 | Default duration   |
 `defaultProps` | [*IToastProps*](components.md#itoastprops) | - | Default props    |
 
-**Returns:** UseToast
+**Returns:** readonly [[*IUserMessageProps*](../interfaces/components.iusermessageprops.md), (`message`: [*IToastProps*](components.md#itoastprops), `duration`: *number*) => *void*]
 
-Defined in: [components/Toast/useToast.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/useToast.ts#L25)
+Defined in: [components/Toast/useToast.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/useToast.ts#L13)
 
 ___
 

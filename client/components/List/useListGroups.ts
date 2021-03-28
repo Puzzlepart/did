@@ -11,10 +11,7 @@ import { IListGroupProps } from './types'
  *
  * @category List
  */
-export function useListGroups(
-  items: any[],
-  props: IListGroupProps
-) {
+export function useListGroups(items: any[], props: IListGroupProps) {
   if (!props) return [null, items]
   const { fieldName, emptyGroupName, totalFunc } = props
   if (isEmpty(items) && !props.groupNames) return [null, []]
