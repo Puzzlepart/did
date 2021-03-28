@@ -37,7 +37,9 @@ class CustomCompileHooks {
     compiler.hooks.watchRun.tapAsync(
       CustomCompileHooks.name,
       async ({ compilation }, callback) => {
-        if (!this.isFirstRun) return
+        if (!this.isFirstRun) {
+          return callback()
+        }
         if (this.options.localtunnel.subdomain) {
           const { port, subdomain, callback } = this.options.localtunnel
           log(`[${CustomCompileHooks.name}] Setting up localtunnel at ${subdomain}:${port}`)
@@ -65,7 +67,9 @@ class CustomCompileHooks {
     compiler.hooks.done.tapAsync(
       CustomCompileHooks.name,
       ({ compilation }, callback) => {
-        if (!this.isFirstRun) return
+        if (!this.isFirstRun) {
+          return callback()
+        }
         log()
         log()
         log()

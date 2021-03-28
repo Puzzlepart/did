@@ -64,8 +64,17 @@ function getPluginsForEnvironment() {
   if (IS_DEVELOPMENT) {
     const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
     const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
+    const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
+    const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
     const { CustomCompileHooks } = require('./webpack-compile-hooks')
     plugins.push(
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          configFile: TSCONFIG_PATH,
+          profile: process.env.FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE === '1'
+        }
+      }),
+      new ForkTsCheckerNotifierWebpackPlugin({ skipSuccessful: true }),
       new CustomCompileHooks({
         url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
         localtunnel: {
@@ -150,7 +159,8 @@ const config = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: TSCONFIG_PATH
+              configFile: TSCONFIG_PATH,
+              transpileOnly: IS_DEVELOPMENT
             }
           },
         ],
@@ -177,6 +187,11 @@ const config = {
     warnings: false,
     modules: false,
     assets: false
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   }
 }
 
