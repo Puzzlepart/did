@@ -11,60 +11,31 @@ const {
   HTML_PLUGIN_TEMPLATE,
   HTML_PLUGIN_FILE_NAME,
   SRC_PATH,
+  TSCONFIG_COMPILER_OPTIONS,
   TSCONFIG_PATH,
   DEFINITIONS
 } = require('./constants')
 const { getResolves } = require('./getResolves')
 const { getPluginsForEnvironment } = require('./getPluginsForEnvironment')
 const { getOptimizationForEnvironment } = require('./getOptimizationForEnvironment')
+const { getRules } = require('./getRules')
 
 const config = {
   mode: MODE,
-  entry: SRC_PATH,
+  entry:  SRC_PATH,
   output: {
     path: PUBLIC_JS_PATH,
     filename: BUNDLE_FILE_NAME,
     publicPath: '/js',
   },
-  optimization: getOptimizationForEnvironment(),
+  optimization: getOptimizationForEnvironment(IS_DEVELOPMENT),
   module: {
-    rules: [
-      {
-        test: /\.ts(x?)$/,
-        exclude: /(node_modules)/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
-          },
-          {
-            loader: 'ts-loader',
-            options: {
-              configFile: TSCONFIG_PATH,
-              transpileOnly: IS_DEVELOPMENT
-            }
-          },
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-modules-typescript-loader' },
-          { loader: 'css-loader', options: { modules: true } },
-          { loader: 'sass-loader' },
-        ],
-      },
-      {
-        test: /\.(graphql|gql)$/,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader'
-      },
-    ],
+    rules: getRules(
+      TSCONFIG_PATH,
+      IS_DEVELOPMENT
+    )
   },
-  resolve: getResolves(),
+  resolve: getResolves(TSCONFIG_COMPILER_OPTIONS),
   plugins: getPluginsForEnvironment(),
   stats: {
     warnings: false,

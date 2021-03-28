@@ -8,7 +8,7 @@ const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? './server' : './dist/server'
 const PUBLIC_JS_PATH = path.resolve(SERVER_DIST, 'public/js')
-const BUNDLE_FILE_NAME = `${__package.name}.${__package.version}.[contenthash].js`
+const BUNDLE_FILE_NAME = 'did.[name].[fullhash].js'
 const HTML_PLUGIN_TEMPLATE = path.resolve('./server/views/_template.hbs')
 const HTML_PLUGIN_FILE_NAME = path.resolve(SERVER_DIST, 'views/index.hbs')
 const TSCONFIG_PATH = path.resolve(SRC_PATH, 'tsconfig.json')

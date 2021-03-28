@@ -1,24 +1,31 @@
-const { IS_DEVELOPMENT } = require('./constants')
-
+/* eslint-disable unicorn/better-regex */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /**
  * Get optimization config for webpack based on
  * node environment
+ * 
+ * @param isDevelopment - Is development
  *
  * @returns optimization config for webpack
  */
-function getOptimizationForEnvironment() {
+function getOptimizationForEnvironment(isDevelopment) {
   let optimization = {
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
     splitChunks: {
-      chunks: 'all'
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        }
+      }
     },
     minimize: false,
-    minimizer: [],
-    moduleIds: 'deterministic'
+    minimizer: []
   }
-  if (!IS_DEVELOPMENT) {
+  if (!isDevelopment) {
     const TerserPlugin = require('terser-webpack-plugin')
     optimization.minimize = true
     optimization.minimizer.push(new TerserPlugin({

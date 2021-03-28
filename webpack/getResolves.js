@@ -8,8 +8,7 @@ const { TSCONFIG_COMPILER_OPTIONS } = require('./constants')
  *
  * @returns resolve config for webpack
  */
-function getResolves() {
-  const { baseUrl, paths } = TSCONFIG_COMPILER_OPTIONS
+function getResolves({ baseUrl, paths }) {
   const alias = Object.keys(paths).reduce((aliases, key) => {
     aliases[key] = path.resolve('./client', baseUrl, paths[key][0])
     return aliases

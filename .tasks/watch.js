@@ -26,7 +26,11 @@ log(chalk.white(`
 
 const dir = path.resolve(__dirname, '../', 'server', 'public', 'js')
 
+log()
+log()
 log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
+log()
+log()
 
 rmdir(dir, () => {
   concurrently([
