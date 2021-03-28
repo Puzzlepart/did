@@ -9,9 +9,7 @@ import { contains } from 'underscore'
  *
  * @category React Hook
  */
-export function useArray<T>(
-  initialValue: T[] = []
-) {
+export function useArray<T>(initialValue: T[] = []) {
   const [state, setState] = useState(initialValue)
   return [
     state,
