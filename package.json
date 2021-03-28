@@ -13,7 +13,7 @@
     "watch": "node .tasks/watch.js",
     "commit": "sexy-commits",
     "start": "node ./dist/server/index.js",
-    "package:client": "webpack",
+    "package:client": "webpack --config webpack/config.js",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
     "debug:server": "npm run build:server; ts-node ./server/index.ts -T --inspect --wait",
     "create-env": "node .tasks/create-dot-env.js",
