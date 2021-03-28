@@ -409,6 +409,7 @@
     "submitErrorMessageHeader": "Beklager!",
     "": "vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
     "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren somVvi ikke helt forstår.",
-    "mobileFeedbackText": "Gi tilbakemelding"
+    "mobileFeedbackText": "Gi tilbakemelding",
+    "reportAnonymouslyFieldLabel": "Rapporter anonymt"
   }
 }

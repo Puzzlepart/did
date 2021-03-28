@@ -34,5 +34,8 @@ FormControl.defaultProps = {
   submitProps: {}
 }
 
-export * from './types'
+export * from './DropdownControl'
+export * from './TextControl'
 export { useFormControls } from './useFormControls'
+export * from './types'
+

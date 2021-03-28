@@ -143,6 +143,18 @@ export class UserQuery {
 /**
  * @category GraphQL InputType
  */
+@InputType({ description: 'Input object for User feedback report' })
+export class UserFeedbackReporter {
+  @Field({ nullable: true })
+  displayName?: string
+
+  @Field({ nullable: true })
+  mail?: string
+}
+
+/**
+ * @category GraphQL InputType
+ */
 @InputType({ description: 'Input object for User feedback' })
 export class UserFeedback {
   @Field()
@@ -156,6 +168,9 @@ export class UserFeedback {
 
   @Field(() => [String], { nullable: true })
   labels?: string[]
+
+  @Field(() => UserFeedbackReporter, { nullable: true })
+  reporter?: UserFeedbackReporter
 }
 
 /**

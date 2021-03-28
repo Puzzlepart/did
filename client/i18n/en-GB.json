@@ -409,6 +409,7 @@
     "submitSuccessMessagHeader": "Thank you!",
     "submitErrorMessageHeader": "Very sorry!",
     "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend.",
-    "mobileFeedbackText": "Give feedback"
+    "mobileFeedbackText": "Give feedback",
+    "reportAnonymouslyFieldLabel": "Report anonymously"
   }
 }

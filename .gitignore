@@ -35,3 +35,4 @@ doc/
 .DS_Store
 .localtunnel
 schema.gql
+*.mp3

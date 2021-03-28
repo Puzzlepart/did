@@ -40,6 +40,8 @@ type Environment = {
   GITHUB_CLIENT_SECRET: string
   GITHUB_PRIVATE_KEY: string
   GITHUB_FEEDBACK_REPO: string
+  SERVER_LISTENING_SOUND: string
+  SERVER_STOPPED_SOUND: string
 }
 
 /**

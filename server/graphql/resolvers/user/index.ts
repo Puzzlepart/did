@@ -5,7 +5,7 @@ import createDebug from 'debug'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
+import { omit, pick } from 'underscore'
 import { PermissionScope } from '../../../../shared/config/security'
 import {
   MSGraphService,
@@ -180,13 +180,20 @@ export class UserResolver {
         clientSecret: environment('GITHUB_CLIENT_SECRET')
       })
       const { token } = (await auth({ type: 'installation' })) as any
-      const result = await request('POST /repos/{owner}/{repo}/issues', {
-        owner: 'puzzlepart',
-        repo: environment<string>('GITHUB_FEEDBACK_REPO'),
-        ...feedback,
+
+      const issue = {
+        ...omit(feedback, 'reporter'),
         title: `${feedback.title} ${feedback.mood}`,
         body: feedback.body,
         labels: feedback.labels || [],
+      }
+      if (feedback.reporter) {
+        issue.body += `\n\n_Reported by 👤 ${feedback.reporter.displayName} (${feedback.reporter.mail})_`
+      }
+      const result = await request('POST /repos/{owner}/{repo}/issues', {
+        owner: 'puzzlepart',
+        repo: environment<string>('GITHUB_FEEDBACK_REPO'),
+        ...issue,
         headers: {
           authorization: `token ${token}`
         }

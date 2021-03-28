@@ -3,7 +3,7 @@ import { ReportsContext } from 'pages'
 import { useContext, useMemo } from 'react'
 import { Project } from 'types'
 import { find } from 'underscore'
-import { firstPart } from '../../../../../server/utils'
+import { firstPart } from '../../../../../shared/utils/firstPart'
 import { IWeekColumnProps } from './types'
 
 export interface IUseWeekColumnResult {

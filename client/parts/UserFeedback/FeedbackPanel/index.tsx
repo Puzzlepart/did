@@ -2,94 +2,82 @@
 /* eslint-disable tsdoc/syntax */
 import {
   ChoiceGroup,
-  DefaultButton,
   Dropdown,
   IPanelProps,
-  Panel,
-  PanelType,
-  PrimaryButton,
-  TextField
+  Toggle
 } from '@fluentui/react'
-import { Toast } from 'components'
-import React, { useEffect } from 'react'
+import { useAppContext } from 'AppContext'
+import { FormControl, TextControl, TextControlOptions } from 'components/FormControl'
+import { JsonDebug } from 'components/Json'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './FeedbackPanel.module.scss'
-import { useFeedbackModel } from './useFeedbackModel'
-import { useSubmitFeedback } from './useSubmitFeedback'
+import { first, pick, values } from 'underscore'
+import { useFeedbackPanel } from './useFeedbackPanel'
 
 /**
  * @category Function Component
  */
 export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
   const { t } = useTranslation()
+  const { user } = useAppContext()
   const {
-    initModel,
     model,
-    setType,
-    setTitle,
-    setBody,
-    setMood,
     typeOptions,
-    moodOptions
-  } = useFeedbackModel()
-  const { onClick, disabled, toast } = useSubmitFeedback(model, props)
-
-  useEffect(initModel, [props.isOpen])
+    moodOptions,
+    register,
+    submit,
+  } = useFeedbackPanel(props)
 
   return (
-    <>
-      <Panel
-        {...props}
-        className={styles.root}
-        headerText={t('feedback.headerText')}
-        type={PanelType.smallFixedFar}
-        isLightDismiss={true}>
-        <div className={styles.body}>
-          <Dropdown
-            label={t('feedback.typeFieldLabel')}
-            required={true}
-            defaultSelectedKey={model.labels[0]}
-            options={typeOptions}
-            onChange={(_event, option) => setType(option.key as string)}
-          />
-          <TextField
-            label={t('feedback.summaryFieldLabel')}
-            required={true}
-            value={model.title}
-            onChange={(_event, title) => setTitle(title)}
-          />
-          <TextField
-            label={t('feedback.descriptionFieldLabel')}
-            description={t('feedback.descriptionFieldDesc')}
-            multiline={true}
-            required={true}
-            autoAdjustHeight={true}
-            styles={{ field: { height: 200 } }}
-            value={model.body}
-            onChange={(_event, body) => setBody(body)}
-          />
-          <ChoiceGroup
-            label={t('feedback.ratingFieldLabel')}
-            required={true}
-            defaultSelectedKey={model.mood}
-            onChange={(_event, option) => setMood(option.key)}
-            options={moodOptions}
-          />
-        </div>
-        <div className={styles.footer}>
-          <PrimaryButton
-            text={t('feedback.submitButtonText')}
-            onClick={onClick}
-            disabled={disabled}
-          />
-          <DefaultButton
-            text={t('feedback.cancelButtonLabel')}
-            onClick={() => props.onDismiss()}
-            style={{ marginLeft: 8 }}
-          />
-        </div>
-      </Panel>
-      <Toast {...toast} />
-    </>
+    <FormControl
+      submitProps={submit}
+      panelProps={{
+        ...props,
+        headerText: t('feedback.headerText'),
+        isLightDismiss: true
+      }}>
+      <JsonDebug obj={model.$} />
+      <Dropdown
+        label={t('feedback.typeFieldLabel')}
+        required={true}
+        defaultSelectedKey={first(model.value('labels'))}
+        options={typeOptions}
+        onChange={(_event, option) => model.set('labels', [option.key])}
+      />
+      <TextControl
+        {
+        ...register<TextControlOptions>('title', { casing: 'capitalized' })
+        }
+        label={t('feedback.summaryFieldLabel')}
+        required={true} />
+      <TextControl
+        {
+        ...register<TextControlOptions>('body', { casing: 'capitalized' })
+        }
+        label={t('feedback.descriptionFieldLabel')}
+        description={t('feedback.descriptionFieldDesc')}
+        multiline={true}
+        required={true}
+        autoAdjustHeight={true}
+        styles={{ field: { height: 200 } }} />
+      <ChoiceGroup
+        label={t('feedback.ratingFieldLabel')}
+        required={true}
+        defaultSelectedKey={model.value('mood')}
+        onChange={(_event, option) => model.set('mood', option.key)}
+        options={moodOptions}
+      />
+      <Toggle
+        label={t('feedback.reportAnonymouslyFieldLabel')}
+        defaultChecked={!model.value('reporter')}
+        onChange={(_event, checked) => {
+          if (checked) {
+            model.set('reporter', null)
+          } else {
+            model.set('reporter', pick(user, 'displayName', 'mail'))
+          }
+        }}
+      />
+    </FormControl>
   )
 }

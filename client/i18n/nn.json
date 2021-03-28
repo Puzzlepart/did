@@ -408,6 +408,7 @@
     "submitSuccessMessagHeader": "Takk skal du ha!",
     "submitErrorMessageHeader": "Beklagar!",
     "submitErrorMessageText": "Vi kunne ikje registrere tilbakemeldinga di. \nNoko rart hende på serveren som vi ikje heilt forstår.",
-    "mobileFeedbackText": "Gje tilbakemelding"
+    "mobileFeedbackText": "Gje tilbakemelding",
+    "reportAnonymouslyFieldLabel": "Rapporter anonymt"
   }
 }

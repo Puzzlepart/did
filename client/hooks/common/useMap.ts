@@ -14,11 +14,11 @@ import { useState } from 'react'
  *
  * @category React Hook
  */
-export function useMap<KeyType = string, ObjectType = Record<any, any>>(
+export function useMap<KeyType = string, ObjectType = Record<any, any>, ValueType = any>(
   map = new Map()
 ) {
-  const [$map, $set] = useState<Map<KeyType, ObjectType>>(map)
-  const reset = () => $set(new Map<KeyType, ObjectType>())
+  const [$map, $set] = useState<Map<KeyType, ValueType>>(map)
+  const reset = () => $set(new Map())
 
   /**
    * Object representation of the `Map`
@@ -37,7 +37,7 @@ export function useMap<KeyType = string, ObjectType = Record<any, any>>(
    * @param key - Key
    * @param value - Value
    */
-  const set = (key: KeyType, value: any) => {
+  const set = (key: KeyType, value: ValueType) => {
     $set((_state) => new Map(_state).set(key, value))
   }
 

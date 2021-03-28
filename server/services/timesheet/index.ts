@@ -4,9 +4,9 @@ import { Inject, Service } from 'typedi'
 import { find } from 'underscore'
 import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
+import { firstPart } from '../../../shared/utils/firstPart'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
-import { firstPart } from '../../utils'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,

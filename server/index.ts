@@ -9,6 +9,7 @@
 import chalk from 'chalk'
 import * as http from 'http'
 import app from './app'
+import { sound } from './utils'
 import { environment } from './utils/environment'
 const debug = require('debug')('server')
 const log = console.log
@@ -31,6 +32,10 @@ export async function startServer(port: string) {
 
     const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
 
+    if (environment('SERVER_STOPPED_SOUND')) {
+      sound(__dirname, environment('SERVER_STOPPED_SOUND'))
+    }
+
     switch (error.code) {
       case 'EACCES':
         debug('\u001B[31m', `${bind} requires elevated privileges`)
@@ -45,7 +50,17 @@ export async function startServer(port: string) {
     }
   }
 
+  /**
+   * On listening handler for the server
+   * 
+   * @remarks If `NODE_ENV` is **development** and `SERVER_LISTENING_SOUND` is set,
+   * a sound will be play when the server is listening. This can be helpful when 
+   * developing. But the *.mp3 files on the root server folder.
+   */
   function onListening() {
+    if (environment('SERVER_LISTENING_SOUND')) {
+      sound(__dirname, environment('SERVER_LISTENING_SOUND'))
+    }
     log(chalk.cyan(`Did server listening on port [${port}] 🚀`))
   }
 

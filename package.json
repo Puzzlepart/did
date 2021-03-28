@@ -149,6 +149,7 @@
     "husky": "5.2.0",
     "localtunnel": "2.0.1",
     "open": "8.0.4",
+    "play-sound": "1.1.3",
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "1.1.1",
     "rimraf": "3.0.2",

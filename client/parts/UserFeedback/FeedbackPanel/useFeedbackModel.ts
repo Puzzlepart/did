@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useAppContext } from 'AppContext'
+import { useMap } from 'hooks'
 import { UserFeedback } from 'types'
+import { pick } from 'underscore'
+import { toMap } from 'utils'
 import { useMoodOptions } from './useMoodOptions'
 import { useTypeOptions } from './useTypeOptions'
 
-const initialModel = {
+const INITIAL_MODEL = {
   title: '',
   body: '',
   labels: ['feedback:suggestion'],
@@ -11,21 +14,23 @@ const initialModel = {
 }
 
 export const useFeedbackModel = () => {
-  const [model, setModel] = useState<UserFeedback>(initialModel)
-
-  const initModel = () => setModel(initialModel)
+  const { user } = useAppContext()
+  const reporter = pick(user, 'displayName', 'mail')
+  const modelWithReporter: Map<any, any> = toMap({
+    ...INITIAL_MODEL,
+    reporter
+  })
+  const map = useMap<keyof UserFeedback, UserFeedback>(modelWithReporter)
 
   const typeOptions = useTypeOptions()
   const moodOptions = useMoodOptions()
 
   return {
-    initModel,
-    model,
-    setTitle: (title: string) => setModel({ ...model, title }),
-    setBody: (body: string) => setModel({ ...model, body }),
-    setType: (type: string) => setModel({ ...model, labels: [type] }),
-    setMood: (mood: string) => setModel({ ...model, mood }),
+    model: {
+      ...map,
+      reset: () => map.$set(modelWithReporter)
+    },
     typeOptions,
-    moodOptions
-  }
+    moodOptions,
+  } as const
 }
