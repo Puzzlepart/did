@@ -27,6 +27,8 @@
 
 The text for the tab link
 
+Overrides: void
+
 Defined in: [components/TabContainer/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L72)
 
 ___
@@ -48,6 +50,8 @@ ___
 The item key can be provided if you want to
 override the key retrieved from the component
 name.
+
+Overrides: void
 
 Defined in: [components/TabContainer/types.ts:67](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L67)
 

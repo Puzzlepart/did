@@ -85,7 +85,7 @@ ___
 
 ### \_getScopedCacheKey
 
-▸ `Private`**_getScopedCacheKey**(`key`: *string* \| *string*[], `scope?`: [*CacheScope*](../enums/services.cachescope.md)): *string*
+▸ `Private`**_getScopedCacheKey**(`key`: [*CacheKey*](../modules/services.md#cachekey), `scope?`: [*CacheScope*](../enums/services.cachescope.md)): *string*
 
 Get scoped cache key
 
@@ -97,7 +97,7 @@ values and joined by :.
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`key` | *string* \| *string*[] | Cache key   |
+`key` | [*CacheKey*](../modules/services.md#cachekey) | Cache key   |
 `scope` | [*CacheScope*](../enums/services.cachescope.md) | Cache scope    |
 
 **Returns:** *string*

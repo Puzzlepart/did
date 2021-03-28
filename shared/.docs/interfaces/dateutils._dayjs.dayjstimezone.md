@@ -17,7 +17,7 @@ Name | Type |
 
 **Returns:** [*Dayjs*](../classes/dateutils._dayjs.dayjs.md)
 
-Defined in: node_modules/dayjs/plugin/timezone.d.ts:11
+Defined in: node_modules/dayjs/plugin/timezone.d.ts:12
 
 ▸ **DayjsTimezone**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `format`: *string*, `timezone?`: *string*): [*Dayjs*](../classes/dateutils._dayjs.dayjs.md)
 
@@ -31,7 +31,7 @@ Name | Type |
 
 **Returns:** [*Dayjs*](../classes/dateutils._dayjs.dayjs.md)
 
-Defined in: node_modules/dayjs/plugin/timezone.d.ts:12
+Defined in: node_modules/dayjs/plugin/timezone.d.ts:13
 
 ## Table of contents
 
@@ -48,7 +48,7 @@ Defined in: node_modules/dayjs/plugin/timezone.d.ts:12
 
 **Returns:** *string*
 
-Defined in: node_modules/dayjs/plugin/timezone.d.ts:14
+Defined in: node_modules/dayjs/plugin/timezone.d.ts:15
 
 ___
 
@@ -64,4 +64,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: node_modules/dayjs/plugin/timezone.d.ts:15
+Defined in: node_modules/dayjs/plugin/timezone.d.ts:16

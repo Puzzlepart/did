@@ -45,7 +45,7 @@ Name | Type | Description |
 
 **Returns:** [*WeekFilter*](components.weekfilter.md)
 
-Inherited from: [BaseFilter](components.basefilter.md)
+Overrides: [BaseFilter](components.basefilter.md)
 
 Defined in: [components/FilterPanel/Filters/WeekFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/WeekFilter.ts#L11)
 

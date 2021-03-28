@@ -37,9 +37,11 @@ export const WeekPicker: React.FC<ICalloutProps> = (props) => {
             props.onDismiss()
           }}
           firstDayOfWeek={DayOfWeek.Monday}
-          strings={t('common.calendarStrings', {
-            returnObjects: true
-          }) as ICalendarStrings}
+          strings={
+            t('common.calendarStrings', {
+              returnObjects: true
+            }) as ICalendarStrings
+          }
           showGoToToday={false}
           showWeekNumbers={true}
           isMonthPickerVisible={isBrowser}

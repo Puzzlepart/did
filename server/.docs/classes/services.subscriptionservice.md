@@ -55,6 +55,8 @@ Name | Type | Description |
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
+Overrides: void
+
 Defined in: [services/mongo/subscription.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L19)
 
 ## Properties
@@ -62,6 +64,8 @@ Defined in: [services/mongo/subscription.ts:19](https://github.com/Puzzlepart/di
 ### cache
 
 • **cache**: [*CacheService*](services.cacheservice.md)= null
+
+Inherited from: void
 
 Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
@@ -71,11 +75,15 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
+Inherited from: void
+
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*Subscription*](graphql.subscription.md)\>
+
+Inherited from: void
 
 Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
@@ -85,11 +93,15 @@ ___
 
 • **collectionName**: *string*
 
+Inherited from: void
+
 ___
 
 ### context
 
 • `Readonly` **context**: *Context*
+
+Inherited from: void
 
 ## Methods
 
@@ -158,6 +170,8 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)[]\>
 
+Inherited from: void
+
 Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
@@ -219,6 +233,8 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
+Inherited from: void
+
 Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
@@ -240,6 +256,8 @@ Name | Type | Description |
 `documents_` | *any*[] | Documents    |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+
+Inherited from: void
 
 Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
@@ -280,6 +298,8 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
+
+Inherited from: void
 
 Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 

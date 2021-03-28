@@ -32,6 +32,8 @@
 
 Auth providers
 
+Inherited from: void
+
 Defined in: [app/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L19)
 
 ___
@@ -122,6 +124,8 @@ ___
 
 Subscription
 
+Inherited from: void
+
 Defined in: [app/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L14)
 
 ___
@@ -131,5 +135,7 @@ ___
 • `Optional` **user**: [*ContextUser*](../classes/app.contextuser.md)
 
 The currently logged in user
+
+Inherited from: void
 
 Defined in: [app/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L9)

@@ -43,7 +43,6 @@ App components
 
 ### Other Functions
 
-- [generateNewIssueUrl](parts.md#generatenewissueurl)
 - [useMobileBreadcrumb](parts.md#usemobilebreadcrumb)
 
 ## Function Component Variables
@@ -157,29 +156,11 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [parts/ErrorFallback/index.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L40)
+Defined in: [parts/ErrorFallback/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L21)
 
 ___
 
 ## Other Functions
-
-### generateNewIssueUrl
-
-▸ `Const`**generateNewIssueUrl**(`error`: Error): *string*
-
-Generate new issue GitHub URL
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`error` | Error | Error    |
-
-**Returns:** *string*
-
-Defined in: [parts/ErrorFallback/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L15)
-
-___
 
 ### useMobileBreadcrumb
 
