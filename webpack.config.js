@@ -21,6 +21,12 @@ const {
   DEFINITIONS
 } = require('./webpack.constants')
 
+/**
+ * Get resolve config for webpack based on
+ * node environment
+ * 
+ * @returns resolve config for webpack
+ */
 function getResolves() {
   const { baseUrl, paths } = TSCONFIG_COMPILER_OPTIONS
   const alias = Object.keys(paths).reduce((aliases, key) => {
@@ -40,6 +46,12 @@ function getResolves() {
   }
 }
 
+/**
+ * Get plugins config for webpack based on
+ * node environment
+ * 
+ * @returns plugins config for webpack
+ */
 function getPluginsForEnvironment() {
   let plugins = [
     new HtmlWebpackPlugin({
@@ -60,7 +72,8 @@ function getPluginsForEnvironment() {
           port: process.env.PORT || 9001,
           subdomain: process.env.LOCALTUNNEL_SUBDOMAIN,
           callback: '{0}/auth/azuread-openidconnect/callback'
-        }
+        },
+        launchBrowser: process.env.LAUNCH_BROWSER === '1'
       }),
       new LiveReloadPlugin(),
       new WebpackBuildNotifierPlugin({
@@ -74,6 +87,12 @@ function getPluginsForEnvironment() {
   return plugins
 }
 
+/**
+ * Get optimization config for webpack based on
+ * node environment
+ * 
+ * @returns optimization config for webpack
+ */
 function getOptimizationForEnvironment() {
   let optimization = {
     // Automatically split vendor and commons

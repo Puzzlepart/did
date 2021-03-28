@@ -13,6 +13,10 @@ const localtunnel = require('localtunnel')
 const open = require('open')
 const log = console.log
 
+/**
+ * Custom compile hooks for `watchRun`
+ * and `done`
+ */
 class CustomCompileHooks {
   constructor(options) {
     this.options = options
@@ -20,7 +24,16 @@ class CustomCompileHooks {
     this.url = this.options.url
   }
 
+  /**
+   * Applies our hooks to the compiler
+   * 
+   * @param compiler - Compiler
+   */
   apply(compiler) {
+    /**
+     * Adding our `watchRun` hook that checks if 
+     * `localtunnel` should be set up.
+     */
     compiler.hooks.watchRun.tapAsync(
       CustomCompileHooks.name,
       async ({ compilation }, callback) => {
@@ -43,6 +56,12 @@ class CustomCompileHooks {
         callback()
       }
     )
+
+    /**
+     * Adding our `done` hook that opens
+     * the `url` in the browser using `open`
+     * if `options.open` is specified.
+     */
     compiler.hooks.done.tapAsync(
       CustomCompileHooks.name,
       ({ compilation }, callback) => {
@@ -62,7 +81,9 @@ class CustomCompileHooks {
         log()
         log()
         log()
-        open(this.url)
+        if (this.options.launchBrowser) {
+          open(this.url)
+        }
         this.isFirstRun = false
         callback()
       }
