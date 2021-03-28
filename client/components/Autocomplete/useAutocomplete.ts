@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import styles from './Autocomplete.module.scss'
 import { INIT, useAutocompleteReducer } from './reducer'
 import { IAutocompleteProps } from './types'

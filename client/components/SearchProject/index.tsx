@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { ReusableComponent } from 'components/types'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Project } from 'types'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import $projects from './projects.gql'
@@ -15,11 +16,11 @@ import { ISearchProjectProps } from './types'
 export const SearchProject: ReusableComponent<ISearchProjectProps> = (
   props
 ) => {
-  const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
+  const query = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-first'
   })
 
-  const searchData: ISuggestionItem<Project>[] = (data?.projects || []).map(
+  const searchData: ISuggestionItem<Project>[] = useMemo(() => (query.data?.projects || []).map(
     (project) => ({
       key: project.tag,
       text: project.name,
@@ -28,12 +29,12 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
       data: project,
       iconName: project.icon
     })
-  )
+  ), [query.data])
 
   return (
     <Autocomplete
       {...props}
-      disabled={loading}
+      disabled={query.loading}
       items={searchData}
       itemIcons={{
         style: {

@@ -1,4 +1,4 @@
-import { MessageBarButton, Panel } from '@fluentui/react'
+import { Link, MessageBarButton, Panel } from '@fluentui/react'
 import { SearchProject, SubText, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -23,8 +23,11 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
-        <SubText text={event.title} />
+        <SubText 
+        text={event.title}
+        font='mediumPlus' />
         <UserMessage
+          containerStyle={{ marginTop: 25 }}
           iconName='OutlookLogo'
           text={t('timesheet.matchOutlookInfoText', event)}
         />
@@ -34,9 +37,9 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           iconName='Lightbulb'>
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
-            <a href='#' onClick={() => onMatch(event.suggestedProject)}>
+            <Link onClick={() => onMatch(event.suggestedProject)}>
               {event.suggestedProject?.tag}
-            </a>
+            </Link>
             ?
           </p>
         </UserMessage>
@@ -51,6 +54,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           width='100%'
           className={styles.searchProject}
           onSelected={(project) => onMatch(project)}
+
           placeholder={t('timesheet.matchEventPanelSearchPlaceholder')}
         />
       </Panel>
