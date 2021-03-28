@@ -26,6 +26,7 @@
 - [TimesheetPeriodInput](../classes/graphql.timesheetperiodinput.md)
 - [TimesheetQuery](../classes/graphql.timesheetquery.md)
 - [UserFeedback](../classes/graphql.userfeedback.md)
+- [UserFeedbackReporter](../classes/graphql.userfeedbackreporter.md)
 - [UserInput](../classes/graphql.userinput.md)
 - [UserQuery](../classes/graphql.userquery.md)
 

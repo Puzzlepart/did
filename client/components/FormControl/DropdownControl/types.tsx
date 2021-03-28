@@ -4,6 +4,6 @@ import { FormInputControlBase } from '../types'
 
 export interface IDropdownControlProps
   extends Omit<FormInputControlBase<{}>, 'options'>,
-  Omit<IDropdownProps, 'name' | 'value' | 'onChange'> {
+    Omit<IDropdownProps, 'name' | 'value' | 'onChange'> {
   setValue?: 'data' | 'key'
 }

@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import {
-  ChoiceGroup,
-  Dropdown,
-  IPanelProps,
-  Toggle
-} from '@fluentui/react'
+import { ChoiceGroup, Dropdown, IPanelProps, Toggle } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import { FormControl, TextControl, TextControlOptions } from 'components/FormControl'
+import {
+  FormControl,
+  TextControl,
+  TextControlOptions
+} from 'components/FormControl'
 import { JsonDebug } from 'components/Json'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { first, pick, values } from 'underscore'
+import { first, pick } from 'underscore'
 import { useFeedbackPanel } from './useFeedbackPanel'
 
 /**
@@ -25,7 +24,7 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
     typeOptions,
     moodOptions,
     register,
-    submit,
+    submit
   } = useFeedbackPanel(props)
 
   return (
@@ -45,21 +44,19 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
         onChange={(_event, option) => model.set('labels', [option.key])}
       />
       <TextControl
-        {
-        ...register<TextControlOptions>('title', { casing: 'capitalized' })
-        }
+        {...register<TextControlOptions>('title', { casing: 'capitalized' })}
         label={t('feedback.summaryFieldLabel')}
-        required={true} />
+        required={true}
+      />
       <TextControl
-        {
-        ...register<TextControlOptions>('body', { casing: 'capitalized' })
-        }
+        {...register<TextControlOptions>('body', { casing: 'capitalized' })}
         label={t('feedback.descriptionFieldLabel')}
         description={t('feedback.descriptionFieldDesc')}
         multiline={true}
         required={true}
         autoAdjustHeight={true}
-        styles={{ field: { height: 200 } }} />
+        styles={{ field: { height: 200 } }}
+      />
       <ChoiceGroup
         label={t('feedback.ratingFieldLabel')}
         required={true}

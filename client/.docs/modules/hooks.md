@@ -153,7 +153,7 @@ ___
 
 ### useMap
 
-▸ **useMap**<KeyType, ObjectType\>(`map?`: *Map*<any, any\>): *object*
+▸ **useMap**<KeyType, ObjectType, ValueType\>(`map?`: *Map*<any, any\>): *object*
 
 Use a Map as state
 
@@ -163,6 +163,7 @@ Name | Default |
 :------ | :------ |
 `KeyType` | *string* |
 `ObjectType` | *Record*<any, any\> |
+`ValueType` | *any* |
 
 #### Parameters:
 
@@ -175,9 +176,9 @@ Name | Type | Description |
 Name | Type |
 :------ | :------ |
 `$` | ObjectType |
-`$set` | *Dispatch*<SetStateAction<Map<KeyType, ObjectType\>\>\> |
+`$set` | *Dispatch*<SetStateAction<Map<KeyType, ValueType\>\>\> |
 `reset` | () => *void* |
-`set` | (`key`: KeyType, `value`: *any*) => *void* |
+`set` | (`key`: KeyType, `value`: ValueType) => *void* |
 `value` | (`key`: KeyType, `\_default`: *any*) => *any* |
 
 a `$set` function to set the map, a `set´

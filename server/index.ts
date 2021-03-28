@@ -52,9 +52,9 @@ export async function startServer(port: string) {
 
   /**
    * On listening handler for the server
-   * 
+   *
    * @remarks If `NODE_ENV` is **development** and `SERVER_LISTENING_SOUND` is set,
-   * a sound will be play when the server is listening. This can be helpful when 
+   * a sound will be play when the server is listening. This can be helpful when
    * developing. But the *.mp3 files on the root server folder.
    */
   function onListening() {

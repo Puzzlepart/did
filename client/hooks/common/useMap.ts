@@ -14,9 +14,11 @@ import { useState } from 'react'
  *
  * @category React Hook
  */
-export function useMap<KeyType = string, ObjectType = Record<any, any>, ValueType = any>(
-  map = new Map()
-) {
+export function useMap<
+  KeyType = string,
+  ObjectType = Record<any, any>,
+  ValueType = any
+>(map = new Map()) {
   const [$map, $set] = useState<Map<KeyType, ValueType>>(map)
   const reset = () => $set(new Map())
 

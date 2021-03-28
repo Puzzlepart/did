@@ -11,7 +11,9 @@ import { IDropdownControlProps } from './types'
  *
  * @category Reusable Component
  */
-export const DropdownControl: ReusableComponent<IDropdownControlProps> = (props) => {
+export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
+  props
+) => {
   return (
     <div {...pick(props, 'hidden')}>
       <Dropdown

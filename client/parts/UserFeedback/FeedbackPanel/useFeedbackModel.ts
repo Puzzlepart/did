@@ -31,6 +31,6 @@ export const useFeedbackModel = () => {
       reset: () => map.$set(modelWithReporter)
     },
     typeOptions,
-    moodOptions,
+    moodOptions
   } as const
 }

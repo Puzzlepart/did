@@ -9,7 +9,7 @@ Utility functions
 ### Functions
 
 - [environment](utils.md#environment)
-- [firstPart](utils.md#firstpart)
+- [sound](utils.md#sound)
 - [stripHtmlString](utils.md#striphtmlstring)
 
 ## Functions
@@ -42,26 +42,28 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [utils/environment.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L58)
+Defined in: [utils/environment.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L60)
 
 ___
 
-### firstPart
+### sound
 
-▸ **firstPart**(`string_?`: *string*, `separarator?`: *string*): *string*
+▸ **sound**(`dir`: *string*, `file`: *string*): *void*
 
-Get first part in the the string separated by separarator
+Plays a mp3 file using `play-sound`
+
+**`remarks`** Only works if `NODE_ENV` is set to **development**
 
 #### Parameters:
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`string_` | *string* | '' | String   |
-`separarator` | *string* | ' ' | Separator, defaults to space    |
+Name | Type | Description |
+:------ | :------ | :------ |
+`dir` | *string* | Directory   |
+`file` | *string* | Sound file (.mp3) to play    |
 
-**Returns:** *string*
+**Returns:** *void*
 
-Defined in: [utils/firstPart.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/firstPart.ts#L9)
+Defined in: [utils/sound.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/utils/sound.ts#L13)
 
 ___
 

@@ -6,11 +6,7 @@ import { useFeedbackModel } from './useFeedbackModel'
 import { useSubmitFeedback } from './useSubmitFeedback'
 
 export function useFeedbackPanel(props: IPanelProps) {
-  const {
-    model,
-    typeOptions,
-    moodOptions
-  } = useFeedbackModel()
+  const { model, typeOptions, moodOptions } = useFeedbackModel()
   const register = useFormControls(model)
   const submit = useSubmitFeedback(model.$, props)
 
@@ -21,6 +17,6 @@ export function useFeedbackPanel(props: IPanelProps) {
     typeOptions,
     moodOptions,
     register,
-    submit,
+    submit
   }
 }

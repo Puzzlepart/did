@@ -30,7 +30,7 @@ export const useSubmitFeedback = (
   }, [feedback])
 
   return {
-    text:t('feedback.submitButtonText'),
+    text: t('feedback.submitButtonText'),
     toast,
     onClick: async () => {
       const result = await onSubmitFeedback()

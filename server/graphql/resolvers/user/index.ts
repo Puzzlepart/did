@@ -185,7 +185,7 @@ export class UserResolver {
         ...omit(feedback, 'reporter'),
         title: `${feedback.title} ${feedback.mood}`,
         body: feedback.body,
-        labels: feedback.labels || [],
+        labels: feedback.labels || []
       }
       if (feedback.reporter) {
         issue.body += `\n\n_Reported by 👤 ${feedback.reporter.displayName} (${feedback.reporter.mail})_`
