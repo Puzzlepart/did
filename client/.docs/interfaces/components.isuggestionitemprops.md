@@ -33,6 +33,4 @@ ___
 
 • `Optional` **itemIcons**: *boolean* \| AutocompleteItemIcons
 
-Inherited from: void
-
 Defined in: [components/Autocomplete/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L25)

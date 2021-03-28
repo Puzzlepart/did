@@ -96,8 +96,6 @@ Name | Type |
 
 Defined in: [components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
 
-Overrides: void
-
 Defined in: [components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
 
 ___
@@ -115,8 +113,6 @@ On dismiss handler for the message
 **Returns:** *void*
 
 Defined in: [components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)
-
-Overrides: void
 
 Defined in: [components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)
 

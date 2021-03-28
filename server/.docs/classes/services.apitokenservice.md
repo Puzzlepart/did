@@ -52,8 +52,6 @@ Name | Type | Description |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Overrides: void
-
 Defined in: [services/mongo/api_token.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L18)
 
 ## Properties
@@ -61,8 +59,6 @@ Defined in: [services/mongo/api_token.ts:18](https://github.com/Puzzlepart/did/b
 ### cache
 
 • **cache**: [*CacheService*](services.cacheservice.md)= null
-
-Inherited from: void
 
 Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
@@ -72,15 +68,11 @@ ___
 
 • `Optional` **cachePrefix**: *string*
 
-Inherited from: void
-
 ___
 
 ### collection
 
 • **collection**: *Collection*<[*ApiToken*](graphql.apitoken.md)\>
-
-Inherited from: void
 
 Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
@@ -90,15 +82,11 @@ ___
 
 • **collectionName**: *string*
 
-Inherited from: void
-
 ___
 
 ### context
 
 • `Readonly` **context**: *Context*
-
-Inherited from: void
 
 ## Methods
 
@@ -163,8 +151,6 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Inherited from: void
-
 Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
@@ -203,8 +189,6 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
-Inherited from: void
-
 Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
@@ -227,8 +211,6 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
-Inherited from: void
-
 Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
@@ -249,7 +231,5 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
-
-Inherited from: void
 
 Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)

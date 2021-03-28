@@ -30,6 +30,4 @@ Name | Default |
 
 Data for the column - `IListColumnData`
 
-Overrides: void
-
 Defined in: [components/List/types.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L54)

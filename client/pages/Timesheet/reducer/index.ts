@@ -90,34 +90,30 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
           typeof payload === 'string' ? state.scope.set(payload) : payload
       })
       .addCase(SUBMITTING_PERIOD, (state, { payload }) => {
-        if (payload.forecast) {
-          state.loading = {
-            label: t('timesheet.forecastingPeriodLabel'),
-            description: t('timesheet.forecastingPeriodDescription'),
-            iconProps: { iconName: 'PlanView' }
-          }
-        } else {
-          state.loading = {
-            label: t('timesheet.confirmingPeriodLabel'),
-            description: t('timesheet.confirmingPeriodDescription'),
-            iconProps: { iconName: 'CheckMark' }
-          }
-        }
+        state.loading = payload.forecast
+          ? {
+              label: t('timesheet.forecastingPeriodLabel'),
+              description: t('timesheet.forecastingPeriodDescription'),
+              iconProps: { iconName: 'PlanView' }
+            }
+          : {
+              label: t('timesheet.confirmingPeriodLabel'),
+              description: t('timesheet.confirmingPeriodDescription'),
+              iconProps: { iconName: 'CheckMark' }
+            }
       })
       .addCase(UNSUBMITTING_PERIOD, (state, { payload }) => {
-        if (payload.forecast) {
-          state.loading = {
-            label: t('timesheet.unforecastingPeriodLabel'),
-            description: t('timesheet.unforecastingPeriodDescription'),
-            iconProps: { iconName: 'ClearFormattingEraser' }
-          }
-        } else {
-          state.loading = {
-            label: t('timesheet.unconfirmingPeriodLabel'),
-            description: t('timesheet.unconfirmingPeriodDescription'),
-            iconProps: { iconName: 'SkypeCircleArrow' }
-          }
-        }
+        state.loading = payload.forecast
+          ? {
+              label: t('timesheet.unforecastingPeriodLabel'),
+              description: t('timesheet.unforecastingPeriodDescription'),
+              iconProps: { iconName: 'ClearFormattingEraser' }
+            }
+          : {
+              label: t('timesheet.unconfirmingPeriodLabel'),
+              description: t('timesheet.unconfirmingPeriodDescription'),
+              iconProps: { iconName: 'SkypeCircleArrow' }
+            }
       })
       .addCase(CHANGE_PERIOD, (state, { payload }) => {
         state.selectedPeriod = find(

@@ -62,8 +62,6 @@ ___
 
 Columns
 
-Overrides: void
-
 Defined in: [components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
 
 ___
@@ -83,8 +81,6 @@ ___
 • `Optional` **enableShimmer**: *boolean*
 
 Enable shimmer (normally while loading)
-
-Overrides: void
 
 Defined in: [components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
 
@@ -127,8 +123,6 @@ ___
 • **items**: T[]
 
 Items
-
-Overrides: void
 
 Defined in: [components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
 

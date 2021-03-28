@@ -50,8 +50,6 @@ Name | Type |
 
 Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L23)
 
-Inherited from: void
-
 ___
 
 ### onUnsubmitPeriod
@@ -71,8 +69,6 @@ Name | Type |
 **Returns:** *Promise*<void\>
 
 Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L34)
-
-Inherited from: void
 
 ___
 

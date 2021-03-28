@@ -64,7 +64,7 @@ Defined in: [hooks/user/useUpdateUserConfiguration.ts:13](https://github.com/Puz
 
 ### useArray
 
-▸ **useArray**<T\>(`initialValue?`: T[]): readonly [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
+▸ **useArray**<T\>(`initialValue?`: T[]): readonly T[][]
 
 Returns the current `state` of the array, a function
 to push a new item to the array, and a function to
@@ -82,7 +82,7 @@ Name | Type |
 :------ | :------ |
 `initialValue` | T[] |
 
-**Returns:** readonly [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
+**Returns:** readonly T[][]
 
 Defined in: [hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
 
@@ -90,7 +90,7 @@ ___
 
 ### useBrowserStorage
 
-▸ **useBrowserStorage**<T\>(`__namedParameters`: *Object*): readonly [T, (`value`: *any*) => *void*, () => *void*]
+▸ **useBrowserStorage**<T\>(`__namedParameters`: *Object*): readonly T[]
 
 Browser storage hook supporting `arrays`
 
@@ -110,7 +110,7 @@ Name | Type |
 :------ | :------ |
 `__namedParameters` | *Object* |
 
-**Returns:** readonly [T, (`value`: *any*) => *void*, () => *void*]
+**Returns:** readonly T[]
 
 Defined in: [hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
 

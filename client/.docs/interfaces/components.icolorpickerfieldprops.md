@@ -24,8 +24,6 @@
 
 • **color**: *string*
 
-Overrides: void
-
 Defined in: [components/ColorPickerField/types.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/types.ts#L6)
 
 ___

@@ -34,8 +34,6 @@ Name | Default |
 
 • `Optional` **data**: T
 
-Overrides: void
-
 Defined in: [components/Autocomplete/SuggestionItem/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L14)
 
 ___
@@ -51,8 +49,6 @@ ___
 ### isSelected
 
 • `Optional` **isSelected**: *boolean*
-
-Overrides: void
 
 Defined in: [components/Autocomplete/SuggestionItem/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L15)
 

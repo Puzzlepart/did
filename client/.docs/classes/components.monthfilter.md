@@ -45,7 +45,7 @@ Name | Type | Description |
 
 **Returns:** [*MonthFilter*](components.monthfilter.md)
 
-Overrides: [BaseFilter](components.basefilter.md)
+Inherited from: [BaseFilter](components.basefilter.md)
 
 Defined in: [components/FilterPanel/Filters/MonthFilter.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/MonthFilter.ts#L12)
 

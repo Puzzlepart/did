@@ -31,7 +31,7 @@ Defined in: [routes/auth.ts:16](https://github.com/Puzzlepart/did/blob/dev/serve
 
 ### authCallbackHandler
 
-▸ `Const`**authCallbackHandler**(`strategy`: AuthProvider): *function*
+▸ `Const`**authCallbackHandler**(`strategy`: AuthProvider): (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
 Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
 
@@ -41,7 +41,7 @@ Name | Type |
 :------ | :------ |
 `strategy` | AuthProvider |
 
-**Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
+**Returns:** *function*
 
 Defined in: [routes/auth.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L48)
 
@@ -49,7 +49,7 @@ ___
 
 ### signInHandler
 
-▸ `Const`**signInHandler**(`strategy`: AuthProvider, `options`: AuthenticateOptions): *function*
+▸ `Const`**signInHandler**(`strategy`: AuthProvider, `options`: AuthenticateOptions): (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
 Handler for `/auth/azuread-openidconnect/signin` and `/auth/google/signin
 
@@ -63,7 +63,7 @@ Name | Type |
 `strategy` | AuthProvider |
 `options` | AuthenticateOptions |
 
-**Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
+**Returns:** *function*
 
 Defined in: [routes/auth.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L31)
 
