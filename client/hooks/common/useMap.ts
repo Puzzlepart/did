@@ -16,7 +16,7 @@ export function useMap<KeyType = string, ObjectType = Record<any, any>>(
 
   /**
    * Object representation of the `Map`
-   * 
+   *
    * The `Map` is converted to an object using
    * `[...$map].reduce`
    */
