@@ -1,8 +1,10 @@
 const concurrently = require('concurrently')
-const { cyan, white } = require('chalk')
+const chalk = require('chalk')
+const rmdir = require('rimraf')
+const path = require('path')
 const log = console.log
 
-log(white(`                                                              
+log(chalk.white(`                                                              
                 ddddddd                     ddddddd            
                 d:::::d   iiii              d:::::d            
                 d:::::d  i::::i             d:::::d            
@@ -18,13 +20,19 @@ log(white(`
      d::::::::::::::::d  i::::i d:::::::::::::::::d            
        dddddddddddddddd  iiiiii   ddddddddddddddddd 
        
-       ${cyan('Watching client and server changes concurrently...')}
+       ${chalk.cyan('Watching client and server changes concurrently...')}
        
        `))
 
-concurrently([
+const dir = path.resolve(__dirname, '../', 'server', 'public', 'js')
+
+log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
+
+rmdir(dir, () => {
+  concurrently([
     { command: 'nodemon ', name: 'server' },
-    { command: 'webpack', name: 'client' },
+    { command: 'webpack --watch', name: 'client' },
     { command: 'node .tasks/open.js', name: 'open' },
     { command: 'node .tasks/localtunnel.js', name: 'localtunnel' },
-], {})
+  ], {})
+})

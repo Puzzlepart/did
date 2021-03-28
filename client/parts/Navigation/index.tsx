@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import { useTheme } from '@fluentui/react'
+import { useTheme } from '@fluentui/react/lib/Theme'
 import { useAppContext } from 'AppContext'
-import { description, name } from 'package'
+import __package from 'package'
 import React from 'react'
 import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
@@ -26,8 +26,8 @@ export const Navigation: React.FC = () => {
       style={{ background: theme.semanticColors.menuHeader }}
       hidden={isMobile && !isAuthenticated}>
       <div className={styles.container}>
-        <Link to='/' className={styles.logo} title={`${name} - ${description}`}>
-          {name}
+        <Link to='/' className={styles.logo} title={`${__package.name} - ${__package.description}`}>
+          {__package.name}
         </Link>
         <ul className={styles.nav}>
           {pages.map((page, index) => (

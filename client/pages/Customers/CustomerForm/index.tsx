@@ -2,7 +2,7 @@ import { IconPicker } from 'components'
 import { FormControl } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
-import { config } from 'package'
+import __package from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ICustomerFormProps } from './types'
@@ -17,13 +17,13 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
         {...register<TextControlOptions>('key', { casing: 'upper' })}
         disabled={!!props.edit}
         label={t('customers.keyFieldLabel')}
-        description={t('customers.keyFieldDescription', config.app)}
+        description={t('customers.keyFieldDescription', __package.config.app)}
         required={true}
       />
       <TextControl
         {...register<TextControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
-        description={t('customers.nameFieldDescription', config.app)}
+        description={t('customers.nameFieldDescription', __package.config.app)}
         required={true}
       />
       <TextControl

@@ -1,44 +1,89 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 const tryRequire = require('try-require')
 const path = require('path')
-const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const DefinePlugin = require('webpack').DefinePlugin
-const { name, version } = require('./package.json')
+const webpack = require('webpack')
 const debug = require('debug')('webpack')
 
-/** CONSTANTS */
-const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development'
-const IS_DEVELOPMENT = MODE === 'development'
-const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist/server'
-const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
-const HTML_PLUGIN_TEMPLATE = path.resolve(__dirname, 'server/views/_template.hbs')
-const HTML_PLUGIN_FILE_NAME = path.resolve(__dirname, SERVER_DIST, 'views/index.hbs')
-const SRC_PATH = path.resolve(__dirname, 'client/')
+const {
+  MODE,
+  IS_DEVELOPMENT,
+  SERVER_DIST,
+  PUBLIC_JS_PATH,
+  BUNDLE_FILE_NAME,
+  HTML_PLUGIN_TEMPLATE,
+  HTML_PLUGIN_FILE_NAME,
+  SRC_PATH,
+  DEFINITIONS
+} = require('./webpack.constants')
 
-/** PRINTING HEADER */
-debug('Compiling Did bundle')
-debug('[MODE]: %s', MODE.toUpperCase())
-debug('[SERVER DIST]: %s', SERVER_DIST.toUpperCase())
-debug('[FILENAME]: %s', BUNDLE_FILE_NAME)
+function getPluginsForEnvironment() {
+  let plugins = [
+    new HtmlWebpackPlugin({
+      template: HTML_PLUGIN_TEMPLATE,
+      filename: HTML_PLUGIN_FILE_NAME,
+      inject: true,
+    }),
+    new webpack.DefinePlugin(DEFINITIONS)
+  ]
+  if (IS_DEVELOPMENT) {
+    const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
+    const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
+    plugins.push(
+      new LiveReloadPlugin(),
+      new WebpackBuildNotifierPlugin({
+        logo: path.resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
+        sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
+        suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+        showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
+      })
+    )
+  }
+  return plugins
+}
 
-/** CONFIG */
-const config = {
-  mode: MODE,
-  entry: { [name]: './client' },
-  output: {
-    path: path.resolve(__dirname, SERVER_DIST, 'public/js'),
-    filename: BUNDLE_FILE_NAME,
-    publicPath: '/js',
-  },
-  optimization: {
+function getOptimizationForEnvironment() {
+  let optimization = {
     splitChunks: {
       chunks: 'all'
     },
     minimize: false,
-    minimizer: []
+    minimizer: [],
+    moduleIds: 'deterministic'
+  }
+  if (!IS_DEVELOPMENT) {
+    const TerserPlugin = require('terser-webpack-plugin')
+    optimization.minimize = true
+    optimization.minimizer.push(new TerserPlugin({
+      parallel: true,
+      extractComments: false,
+      terserOptions: {
+        mangle: true,
+        keep_classnames: false,
+        keep_fnames: true,
+        ie8: false,
+        safari10: false,
+        format: {
+          comments: false,
+        }
+      },
+    }))
+  }
+  return optimization
+}
+
+/** CONFIG */
+const config = {
+  mode: MODE,
+  entry: './client',
+  output: {
+    path: PUBLIC_JS_PATH,
+    filename: BUNDLE_FILE_NAME,
+    publicPath: '/js',
   },
+  optimization: getOptimizationForEnvironment(),
   module: {
     rules: [
       {
@@ -100,57 +145,12 @@ const config = {
       '.gql'
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: HTML_PLUGIN_TEMPLATE,
-      filename: HTML_PLUGIN_FILE_NAME,
-      inject: true,
-    }),
-    new DefinePlugin({
-      'process.env.VERSION': JSON.stringify(version),
-      'process.env.LOG_LEVEL': JSON.stringify(process.env.CLIENT_LOG_LEVEL || 'SILENT')
-    })
-  ],
+  plugins: getPluginsForEnvironment(),
   stats: {
     warnings: false,
     modules: false,
     assets: false
   }
-}
-
-if (IS_DEVELOPMENT) {
-  const { BundleAnalyzerPlugin } = tryRequire('webpack-bundle-analyzer')
-  const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
-  const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
-  config.devtool = 'eval'
-  config.watch = true
-  config.watchOptions = { aggregateTimeout: 500 }
-  config.plugins.push(
-    new LiveReloadPlugin(),
-    new WebpackBuildNotifierPlugin({
-      logo: path.resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
-      sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
-      suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
-      showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
-    }),
-    new BundleAnalyzerPlugin({ analyzerMode: process.env.BUNDLE_ANALYZER_MODE })
-  )
-} else {
-  config.optimization.minimize = true
-  config.optimization.minimizer.push(new TerserPlugin({
-    parallel: true,
-    extractComments: false,
-    terserOptions: {
-      mangle: true,
-      keep_classnames: false,
-      keep_fnames: true,
-      ie8: false,
-      safari10: false,
-      format: {
-        comments: false,
-      }
-    },
-  }))
 }
 
 module.exports = config

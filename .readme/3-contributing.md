@@ -48,7 +48,6 @@ Now you need to set the required environment variables from this table:
 | `MONGO_DB_CONNECTION_STRING` | Connection string for MongoDB                                | **Yes**  |
 | `MONGO_DB_DB_NAME` | Database name for MongoDB                                    | **Yes**  |
 | `API_TOKEN_SECRET` | Secret to generate API tokens                                | **Yes**  |
-| `BUNDLE_ANALYZER_MODE`          | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
 | `OPEN_DELAY`                    | Delay in seconds for opening Did in browser when running `watch`. | No       |
 | `DEBUG`                         | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
 | `NO_BROWSER`                    | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |

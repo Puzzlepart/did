@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { DefaultButton } from '@fluentui/react'
 import { UserMessage } from 'components'
-import { description, name } from 'package'
+import __package from 'package'
 import { PageComponent } from 'pages/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -22,8 +22,8 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.logo}>{name}</div>
-      <p className={styles.motto}>{description}</p>
+      <div className={styles.logo}>{__package.name}</div>
+      <p className={styles.motto}>{__package.description}</p>
       {error && (
         <UserMessage
           className={styles.error}

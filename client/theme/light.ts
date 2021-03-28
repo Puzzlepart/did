@@ -1,4 +1,4 @@
-import { PartialTheme } from '@fluentui/react'
+import { PartialTheme } from '@fluentui/react/lib/Theme'
 import fonts from './fonts'
 
 export default {

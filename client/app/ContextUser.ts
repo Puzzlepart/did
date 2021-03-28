@@ -1,4 +1,5 @@
-import { PartialTheme } from '@fluentui/react'
+
+import { PartialTheme } from '@fluentui/react/lib/Theme'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'
 import { Role, User, UserPhoto } from 'types'

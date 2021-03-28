@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-array-reduce */
 /* eslint-disable react-hooks/exhaustive-deps */
 import $date from 'DateUtils'
-import { config } from 'package'
+import __package from 'package'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
@@ -17,7 +17,7 @@ export function useGroups() {
     () => ({
       fieldName: 'date',
       groupNames: state.selectedPeriod?.weekdays(
-        config.app.TIMESHEET_OVERVIEW_DAY_FORMAT
+        __package.config.app.TIMESHEET_OVERVIEW_DAY_FORMAT
       ),
       totalFunc: (events: EventObject[]) => {
         const duration = events.reduce((sum, index) => sum + index.duration, 0)

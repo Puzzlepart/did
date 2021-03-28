@@ -1,4 +1,4 @@
-import { PartialTheme } from '@fluentui/react'
+import { PartialTheme } from '@fluentui/react/lib/Theme'
 import { default as darkTheme } from './dark'
 import { default as lightTheme } from './light'
 
