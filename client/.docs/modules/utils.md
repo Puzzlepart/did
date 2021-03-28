@@ -12,6 +12,7 @@ Reusable utility functions
 
 ### Functions
 
+- [arrayMap](utils.md#arraymap)
 - [cleanArray](utils.md#cleanarray)
 - [generateColumn](utils.md#generatecolumn)
 - [getContrastColor](utils.md#getcontrastcolor)
@@ -24,6 +25,31 @@ Reusable utility functions
 - [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
+
+### arrayMap
+
+▸ **arrayMap**<T\>(`arr`: T[], `callbackfn`: (`value`: T, `index`: *number*) => T): T[]
+
+Array map with `null` / `undefined` check
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`arr` | T[] | Array   |
+`callbackfn` | (`value`: T, `index`: *number*) => T | Map callback function    |
+
+**Returns:** T[]
+
+Defined in: [utils/arrayMap.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayMap.ts#L8)
+
+___
 
 ### cleanArray
 
