@@ -20,7 +20,7 @@ export default {
     bodyBackground: '#0d1117',
     successBackground: '#393d1b',
     successText: '#fff',
-    successIcon:'#fff',
+    successIcon: '#fff',
     infoBackground: '#323130',
     infoText: '#fff',
     errorBackground: '#442726',

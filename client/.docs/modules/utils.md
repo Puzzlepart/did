@@ -12,6 +12,7 @@ Reusable utility functions
 
 ### Functions
 
+- [arrayExtend](utils.md#arrayextend)
 - [arrayMap](utils.md#arraymap)
 - [cleanArray](utils.md#cleanarray)
 - [generateColumn](utils.md#generatecolumn)
@@ -25,6 +26,33 @@ Reusable utility functions
 - [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
+
+### arrayExtend
+
+▸ **arrayExtend**<T\>(`array`: T[], `props?`: *Record*<keyof T, any\>, `condition?`: *boolean*): T[]
+
+Extends all items in the `array` with `props`
+if `condition` equals `true`
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`array` | T[] | - | Array   |
+`props?` | *Record*<keyof T, any\> | - | Props to set   |
+`condition` | *boolean* | true | Condition    |
+
+**Returns:** T[]
+
+Defined in: [utils/arrayExtend.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L11)
+
+___
 
 ### arrayMap
 

@@ -8,7 +8,11 @@ import { arrayMap } from './arrayMap'
  * @param props - Props to set
  * @param condition - Condition
  */
-export function arrayExtend<T = any>(array: T[], props?: Record<keyof T, any>, condition = true): T[] {
+export function arrayExtend<T = any>(
+  array: T[],
+  props?: Record<keyof T, any>,
+  condition = true
+): T[] {
   if (!condition) return array
   return arrayMap(array, (element) => ({
     ...element,

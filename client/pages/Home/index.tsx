@@ -23,8 +23,16 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.logo} style={components.logo.styles as CSSProperties}>{__package.name}</div>
-      <div className={styles.motto} style={components.motto.styles as CSSProperties}>{__package.description}</div>
+      <div
+        className={styles.logo}
+        style={components.logo.styles as CSSProperties}>
+        {__package.name}
+      </div>
+      <div
+        className={styles.motto}
+        style={components.motto.styles as CSSProperties}>
+        {__package.description}
+      </div>
       {error && (
         <UserMessage
           className={styles.error}
