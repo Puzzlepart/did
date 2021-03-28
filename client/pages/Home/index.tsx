@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { DefaultButton } from '@fluentui/react'
+import { DefaultButton, useTheme } from '@fluentui/react'
 import { UserMessage } from 'components'
 import __package from 'package'
 import { PageComponent } from 'pages/types'
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import styles from './Home.module.scss'
@@ -19,11 +19,12 @@ export const Home: PageComponent = () => {
   const { error, subscription } = useHome()
   const providers = useAuthProviders()
   const { t } = useTranslation()
+  const { components } = useTheme()
 
   return (
     <div className={styles.root}>
-      <div className={styles.logo}>{__package.name}</div>
-      <p className={styles.motto}>{__package.description}</p>
+      <div className={styles.logo} style={components.logo.styles as CSSProperties}>{__package.name}</div>
+      <div className={styles.motto} style={components.motto.styles as CSSProperties}>{__package.description}</div>
       {error && (
         <UserMessage
           className={styles.error}

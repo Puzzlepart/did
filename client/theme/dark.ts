@@ -2,6 +2,19 @@ import { PartialTheme } from '@fluentui/react/lib/Theme'
 import fonts from './fonts'
 
 export default {
+  components: {
+    logo: {
+      styles: {
+        background: '#fff',
+        color: '#252422'
+      }
+    },
+    motto: {
+      styles: {
+        color: '#999999'
+      }
+    }
+  },
   semanticColors: {
     menuHeader: '#161b22',
     bodyBackground: '#0d1117',
