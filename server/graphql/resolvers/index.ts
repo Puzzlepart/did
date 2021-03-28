@@ -12,31 +12,30 @@ import { TimesheetResolver } from './timesheet'
 import { UserResolver } from './user'
 
 export * from './types'
-
 export {
-    ApiTokenResolver,
-    CustomerResolver,
-    LabelResolver,
-    NotificationResolver,
-    OutlookCategoryResolver,
-    ProjectResolver,
-    ReportsResolver,
-    RoleResolver,
-    SubscriptionResolver,
-    TimesheetResolver,
-    UserResolver
+  ApiTokenResolver,
+  CustomerResolver,
+  LabelResolver,
+  NotificationResolver,
+  OutlookCategoryResolver,
+  ProjectResolver,
+  ReportsResolver,
+  RoleResolver,
+  SubscriptionResolver,
+  TimesheetResolver,
+  UserResolver
 }
 
 export default [
-    ApiTokenResolver,
-    CustomerResolver,
-    LabelResolver,
-    NotificationResolver,
-    OutlookCategoryResolver,
-    ProjectResolver,
-    ReportsResolver,
-    RoleResolver,
-    SubscriptionResolver,
-    TimesheetResolver,
-    UserResolver
+  ApiTokenResolver,
+  CustomerResolver,
+  LabelResolver,
+  NotificationResolver,
+  OutlookCategoryResolver,
+  ProjectResolver,
+  ReportsResolver,
+  RoleResolver,
+  SubscriptionResolver,
+  TimesheetResolver,
+  UserResolver
 ] as NonEmptyArray<any>

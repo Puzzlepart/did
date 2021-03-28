@@ -10,7 +10,7 @@ import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting
 } from 'apollo-server-core'
-import { ApolloServer, AuthenticationError } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-express'
 import {
   ApolloServerPlugin,
   GraphQLRequestContext
@@ -50,7 +50,7 @@ export const generateGraphQLSchema = async () => {
     authChecker,
     authMode: 'error',
     dateScalarMode: 'isoDate',
-    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }],
+    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
   })
   return schema
 }
@@ -149,8 +149,8 @@ export const setupGraphQL = async (
               Container.reset(requestContext.context.requestId)
               const instancesIds = ((Container as any)
                 .instances as ContainerInstance[]).map(
-                  (instance) => instance.id
-                )
+                (instance) => instance.id
+              )
               debug('Container instances left in memory: ', instancesIds)
             }
           })
