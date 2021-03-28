@@ -3,6 +3,7 @@ import { createAppAuth } from '@octokit/auth-app'
 import { request } from '@octokit/request'
 import createDebug from 'debug'
 import 'reflect-metadata'
+import Format from 'string-format'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { omit, pick } from 'underscore'
@@ -50,7 +51,7 @@ export class UserResolver {
     private readonly _msgraph: MSGraphService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService
-  ) {}
+  ) { }
 
   /**
    * Get auth providers
@@ -187,11 +188,12 @@ export class UserResolver {
         body: feedback.body,
         labels: feedback.labels || []
       }
-      if (feedback.reporter) {
-        issue.body += `\n\n_Reported by 👤 ${feedback.reporter.displayName} (${feedback.reporter.mail})_`
+      if (feedback.reporter && environment('GITHUB_FEEDBACK_REPORTER_INFO')) {
+        const template = environment('GITHUB_FEEDBACK_REPORTER_INFO')
+        issue.body += `\n\n${Format(template, feedback.reporter.displayName, feedback.reporter.mail)}`
       }
       const result = await request('POST /repos/{owner}/{repo}/issues', {
-        owner: 'puzzlepart',
+        owner: environment<string>('GITHUB_FEEDBACK_OWNER'),
         repo: environment<string>('GITHUB_FEEDBACK_REPO'),
         ...issue,
         headers: {
