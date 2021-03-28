@@ -6,7 +6,7 @@ import { useState } from 'react'
  *
  * @param map - Intitial map
  *
- * @returns a `$set` function to set the map, a `set´ 
+ * @returns a `$set` function to set the map, a `set´
  * function to set a key on the map, a `value`function
  * to return the value of the specified key, a `$` object
  * that is a object representation of the map and a `reset`

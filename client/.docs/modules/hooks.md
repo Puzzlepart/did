@@ -155,7 +155,7 @@ ___
 
 ▸ **useMap**<KeyType, ObjectType\>(`map?`: *Map*<any, any\>): *object*
 
-Use `Map` state
+Use a Map as state
 
 #### Type parameters:
 
@@ -180,7 +180,13 @@ Name | Type |
 `set` | (`key`: KeyType, `value`: *any*) => *void* |
 `value` | (`key`: KeyType, `\_default`: *any*) => *any* |
 
-Defined in: [hooks/common/useMap.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L11)
+a `$set` function to set the map, a `set´
+function to set a key on the map, a `value`function
+to return the value of the specified key, a `$` object
+that is a object representation of the map and a `reset`
+function for clearing the map.
+
+Defined in: [hooks/common/useMap.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L17)
 
 ___
 
