@@ -1,6 +1,26 @@
 {
   "files.exclude": {
-    "node_modules": true
+    "node_modules": true,
+    "client/**/*.js": true,
+    "client/**/*.js.map": true,
+    "client/**/*.d.ts": true,
+    "client/**/global.d.ts": false,
+    "server/**/*.js": true,
+    "server/**/*.js.map": true,
+    "server/views/index.hbs": true,
+    "server/public/js": true,
+    "dist": true,
+    "server/.docs": true,
+    "client/.docs": true,
+    "shared/.docs": true,
+    "package-lock*": true,
+    "README.md": true,
+    "CHANGELOG.md": true,
+    "schema.gql": true,
+    "*.dmm": true,
+    ".husky": true,
+    ".gitattributes": true,
+    ".nvmrc": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
