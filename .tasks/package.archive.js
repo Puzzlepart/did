@@ -43,11 +43,6 @@ async function run() {
 
     log('Archiving node_modules...')
     archive.directory(path.resolve(__dirname, '../node_modules'), 'node_modules')
-    // const dependencies = Object.keys(package.dependencies)
-    // dependencies.forEach((dep, idx) => {
-    //     log(`\t(${idx + 1} of ${dependencies.length}) Archiving dependency ${dep}`)
-    //     archive.directory(path.resolve(__dirname, `../node_modules/${dep}`), `node_modules/${dep}`)
-    // })
     log('Archiving dist/server...')
     archive.directory(path.resolve(__dirname, '../dist/server'), 'server')
     log('Archiving dist/shared...')
