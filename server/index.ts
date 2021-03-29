@@ -88,4 +88,4 @@ export async function startServer(port: string) {
 
 export * from './app'
 
-startServer(environment('PORT', '9001'))
+startServer(environment('PORT', '8080'))
