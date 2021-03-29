@@ -46,7 +46,6 @@ jobs:
         NODE_ENV: production
 
     - uses: actions/upload-artifact@v2
-      if: failure()
       with:
         name: did-package
         path: ./did-package.zip
