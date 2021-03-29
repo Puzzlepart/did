@@ -9,7 +9,7 @@ import {
 } from '@fluentui/react'
 import { SubText } from 'components/SubText'
 import React from 'react'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { IAutocompleteProps } from '.'
 import { ReusableComponent } from '../types'
 import styles from './Autocomplete.module.scss'
@@ -65,7 +65,7 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
       <Callout
         gapSpace={2}
         alignTargetEdge={true}
-        hidden={isEmpty(state.suggestions)}
+        hidden={_.isEmpty(state.suggestions)}
         onDismiss={() => onDismissCallout(null)}
         calloutMaxHeight={props.maxHeight || 450}
         style={{ width: ref.current?.clientWidth }}

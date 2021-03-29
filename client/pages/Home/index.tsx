@@ -5,7 +5,7 @@ import __package from 'package'
 import { PageComponent } from 'pages/types'
 import React, { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import styles from './Home.module.scss'
 import { useAuthProviders } from './useAuthProviders'
 import { useHome } from './useHome'
@@ -44,7 +44,7 @@ export const Home: PageComponent = () => {
           }}
         />
       )}
-      {isEmpty(Object.keys(providers)) && (
+      {_.isEmpty(Object.keys(providers)) && (
         <UserMessage type='warning' text={t('common.signInDisabledMessage')} />
       )}
       {!subscription && !error && (

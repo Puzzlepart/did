@@ -4,7 +4,7 @@ import { EventList, UserColumn, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { Summary } from './Summary'
 import styles from './TimeEntries.module.scss'
 import { useTimeEntries } from './useTimeEntries'
@@ -17,10 +17,10 @@ export const TimeEntries: React.FC = () => {
   const { loading, timeentries, onExport, error } = useTimeEntries()
   return (
     <div className={styles.root}>
-      {!isEmpty(timeentries) && !loading && (
+      {!_.isEmpty(timeentries) && !loading && (
         <Summary loading={loading} timeentries={timeentries} />
       )}
-      <div hidden={isEmpty(timeentries)}>
+      <div hidden={_.isEmpty(timeentries)}>
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
@@ -30,7 +30,7 @@ export const TimeEntries: React.FC = () => {
       {error && (
         <UserMessage type={'error'} text={t('projects.timeEntriesErrorText')} />
       )}
-      {isEmpty(timeentries) && !loading && (
+      {_.isEmpty(timeentries) && !loading && (
         <UserMessage text={t('projects.noTimeEntriesText')} />
       )}
       {loading && (
@@ -40,7 +40,7 @@ export const TimeEntries: React.FC = () => {
           iconProps={{ iconName: 'TimelineMatrixView' }}
         />
       )}
-      {!isEmpty(timeentries) && (
+      {!_.isEmpty(timeentries) && (
         <EventList
           items={timeentries}
           additionalColumns={[

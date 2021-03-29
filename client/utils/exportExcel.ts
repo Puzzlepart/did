@@ -1,7 +1,7 @@
 import { IListColumn } from 'components/List/types'
 import { DateObject } from 'DateUtils'
 import { getValue as get } from 'helpers'
-import { humanize } from 'underscore.string'
+import s from 'underscore.string'
 import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {
@@ -55,7 +55,7 @@ export async function exportExcel(
       .map((fieldName) => ({
         key: fieldName,
         fieldName,
-        name: humanize(fieldName),
+        name: s.humanize(fieldName),
         minWidth: 0
       }))
   }

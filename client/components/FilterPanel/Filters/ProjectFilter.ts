@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { unique } from 'underscore'
+import _  from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
 
@@ -26,7 +26,7 @@ export class ProjectFilter extends BaseFilter {
    * @param items - Items
    */
   public initialize(items: any[]): IFilter {
-    const filterItems = unique(
+    const filterItems = _.unique(
       items.map((item_) => ({
         key: getValue(item_, this.keyFieldName, null),
         value: getValue(item_, this.valueFieldName, null)

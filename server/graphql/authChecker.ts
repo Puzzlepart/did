@@ -1,5 +1,5 @@
 import { AuthChecker, ResolverData } from 'type-graphql'
-import { contains } from 'underscore'
+import _  from 'underscore'
 import { PermissionScope } from '../../shared/config/security'
 import { Context } from './context'
 
@@ -32,6 +32,6 @@ export const authChecker: AuthChecker<Context, IAuthOptions> = (
     return !!context.userId
   }
   if (authOptions.scope) {
-    return contains(context.permissions, authOptions.scope)
+    return _.contains(context.permissions, authOptions.scope)
   }
 }

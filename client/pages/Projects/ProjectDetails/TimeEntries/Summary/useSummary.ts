@@ -1,6 +1,6 @@
 import $date from 'DateUtils'
 import { useTranslation } from 'react-i18next'
-import { filter } from 'underscore'
+import _  from 'underscore'
 import { getSum } from 'utils/getSum'
 
 /**
@@ -15,7 +15,7 @@ export function useSummary(timeentries: any[]) {
       label: t('common.hoursCurrentMonth'),
       value: $date.getDurationString(
         getSum(
-          filter(
+          _.filter(
             timeentries,
             (entry) =>
               entry.month === new Date().getMonth() + 1 &&
@@ -30,7 +30,7 @@ export function useSummary(timeentries: any[]) {
       label: t('common.hoursPrevMonth'),
       value: $date.getDurationString(
         getSum(
-          filter(
+          _.filter(
             timeentries,
             (entry) =>
               entry.month === new Date().getMonth() &&
@@ -45,7 +45,7 @@ export function useSummary(timeentries: any[]) {
       label: t('common.hoursCurrentYear'),
       value: $date.getDurationString(
         getSum(
-          filter(
+          _.filter(
             timeentries,
             (entry) => entry.year === new Date().getFullYear()
           ),

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import React from 'react'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { useUserNotifications } from '../useUserNotifications'
 import styles from './NotificationIndicator.module.scss'
 
@@ -12,7 +12,7 @@ export const NotificationIndicator: React.FC = () => {
   return (
     <div
       className={styles.root}
-      style={{ opacity: isEmpty(notifications) ? 0 : 1 }}>
+      style={{ opacity: _.isEmpty(notifications) ? 0 : 1 }}>
       {notifications.length}
     </div>
   )

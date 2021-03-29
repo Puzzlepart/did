@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import React from 'react'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import styles from './SuggestionItem.module.scss'
 import { ISuggestionItemProps } from './types'
 
@@ -21,7 +21,7 @@ export const SuggestionItem: React.FC<ISuggestionItemProps> = (props) => {
 
   return (
     <div
-      {...omit(props, 'itemIcons', 'item')}
+      {..._.omit(props, 'itemIcons', 'item')}
       className={classNames.join(' ')}
       data-is-focusable={true}>
       <div className={styles.container}>

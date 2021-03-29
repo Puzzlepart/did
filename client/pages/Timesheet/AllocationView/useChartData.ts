@@ -1,6 +1,6 @@
 import getValue from 'get-value'
 import { useMemo } from 'react'
-import { find } from 'underscore'
+import _  from 'underscore'
 import { truncateString } from 'utils/truncateString'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
 import { useTimesheetContext } from '../context'
@@ -15,7 +15,7 @@ function getDataForChart(
   const items = events.reduce((_items, entry) => {
     const data = getValue(entry, chart.key, null)
     if (!data) return _items
-    const item = find(_items, ({ id }) => id === data[chart.idKey])
+    const item = _.find(_items, ({ id }) => id === data[chart.idKey])
     const value = getValue(entry, chart.valueKey)
     if (item) item.value += value
     else _items.push({ id: data[chart.idKey], chart, data, value })

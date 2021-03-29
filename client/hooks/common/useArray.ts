@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
-import { contains } from 'underscore'
+import _  from 'underscore'
 
 /**
  * Returns the current `state` of the array, a function
@@ -14,6 +14,6 @@ export function useArray<T>(initialValue: T[] = []) {
   return [
     state,
     (item: T) => setState((_) => [..._, item]),
-    (item: T) => contains(state, item)
+    (item: T) => _.contains(state, item)
   ] as const
 }

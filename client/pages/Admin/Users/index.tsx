@@ -2,7 +2,7 @@
 import { Spinner } from '@fluentui/react'
 import { List, TabComponent } from 'components'
 import React from 'react'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
 import { UserForm } from './UserForm'
@@ -34,7 +34,7 @@ export const Users: TabComponent = () => {
   return (
     <UsersContext.Provider value={context}>
       <List
-        enableShimmer={query.loading && isEmpty(context.activeDirectoryUsers)}
+        enableShimmer={query.loading && _.isEmpty(context.activeDirectoryUsers)}
         items={context.users}
         columns={columns}
         commandBar={{
@@ -43,14 +43,14 @@ export const Users: TabComponent = () => {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
               iconProps: { iconName: 'AddFriend' },
-              disabled: isEmpty(context.activeDirectoryUsers),
+              disabled: _.isEmpty(context.activeDirectoryUsers),
               onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
-              disabled: isEmpty(context.activeDirectoryUsers),
+              disabled: _.isEmpty(context.activeDirectoryUsers),
               onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {

@@ -6,7 +6,7 @@ import { useToast } from 'components/Toast'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from 'types'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import $submit_feedback from './submit-feedback.gql'
 
 export const useSubmitFeedback = (
@@ -50,6 +50,6 @@ export const useSubmitFeedback = (
       panel.onDismiss()
     },
     disabled:
-      isEmpty(feedback.title) || isEmpty(feedback.body) || !feedback.mood
+      _.isEmpty(feedback.title) || _.isEmpty(feedback.body) || !feedback.mood
   }
 }

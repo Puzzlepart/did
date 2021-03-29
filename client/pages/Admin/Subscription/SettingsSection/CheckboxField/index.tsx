@@ -2,7 +2,7 @@
 import { Checkbox, Label } from '@fluentui/react'
 import { getValue } from 'helpers'
 import React, { useContext } from 'react'
-import { contains } from 'underscore'
+import _  from 'underscore'
 import { SubscriptionContext } from '../../context'
 import { ICheckboxFieldProps } from './types'
 
@@ -19,7 +19,7 @@ export const CheckboxField = ({
     <div>
       <Label>{props.label}</Label>
       {Object.keys(options).map((key) => {
-        const defaultChecked = contains(
+        const defaultChecked = _.contains(
           getValue(settings, settingsKey, []),
           key
         )

@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { filter, find, pick } from 'underscore'
+import _  from 'underscore'
 import { CustomerService } from '.'
 import { Context } from '../../graphql/context'
 import {
@@ -73,7 +73,7 @@ export class ProjectService extends MongoDocumentService<Project> {
   public async updateProject(project: Project): Promise<boolean> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
-      const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
+      const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
       const { result } = await this.update(filter, project)
       return result.ok === 1
     } catch (error) {
@@ -104,9 +104,10 @@ export class ProjectService extends MongoDocumentService<Project> {
           const _projects = projects
             .map((p) => {
               p.customer =
-                find(customers, (c) => c.key === p.customerKey) || null
-              p.labels = filter(labels, ({ name }) => {
-                return !!find(p.labels, (l) => name === l)
+                _.find(customers, (c) => c.key === p.customerKey) || null
+              p.labels = _.filter(labels, ({ name }) => {
+                // eslint-disable-next-line unicorn/prefer-array-some
+                return !!_.find(p.labels, (l) => name === l)
               })
               return p
             })

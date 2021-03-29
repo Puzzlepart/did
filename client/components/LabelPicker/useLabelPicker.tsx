@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/client'
 import { useEffect, useRef, useState } from 'react'
 import { LabelObject } from 'types'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import $labels from '../../pages/Admin/Labels/labels.gql'
 import { ILabelPickerProps } from './types'
 
@@ -31,7 +31,7 @@ export function useLabelPicker({
   useEffect(() => {
     if (data?.labels) {
       const _labels: LabelObject[] = data.labels.map((lbl: any) =>
-        omit(lbl, '__typename')
+        _.omit(lbl, '__typename')
       )
       setLabels(_labels)
       if (defaultSelectedKeys) {

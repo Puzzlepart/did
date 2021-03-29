@@ -4,7 +4,7 @@ import { Progress } from 'components/Progress'
 import React, { useContext } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { ReportsContext } from '../context'
 import { useSummaryView } from './hooks/useSummaryView'
 import styles from './SummaryView.module.scss'
@@ -28,7 +28,7 @@ export const SummaryView: TabComponent = () => {
           />
         )}
         <List
-          hidden={!state.loading && isEmpty(rows)}
+          hidden={!state.loading && _.isEmpty(rows)}
           enableShimmer={state.loading}
           columns={columns}
           items={rows}
@@ -38,7 +38,7 @@ export const SummaryView: TabComponent = () => {
           }}
         />
         <UserMessage
-          hidden={!isEmpty(rows) || state.loading}
+          hidden={!_.isEmpty(rows) || state.loading}
           text={t('admin.noTimeEntriesText')}
         />
       </div>

@@ -1,4 +1,4 @@
-import { filter } from 'underscore'
+import _  from 'underscore'
 
 /**
  * Cleans an array removing `undefined` and `null`
@@ -6,5 +6,5 @@ import { filter } from 'underscore'
  * @param array - Array
  */
 export function cleanArray<T = any>(array: T[]): T[] {
-  return filter(array, (element) => !!element)
+  return _.filter(array, (element) => !!element)
 }

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
-import { isArray } from 'underscore'
+import _  from 'underscore'
 
 /**
  * Browser storage hook supporting `arrays`
@@ -31,7 +31,7 @@ export function useBrowserStorage<T = any>({
    * @param value - Value to append to the array
    */
   const append = (value: any) => {
-    if (!isArray(storedValue)) return
+    if (!_.isArray(storedValue)) return
     try {
       const valueToStore = ([...storedValue, value] as unknown) as T
       setStoredValue(valueToStore)

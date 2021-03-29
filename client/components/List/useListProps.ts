@@ -10,7 +10,7 @@ import {
 } from '@fluentui/react'
 import React from 'react'
 import { AnyAction } from 'redux'
-import { filter } from 'underscore'
+import _  from 'underscore'
 import { ListGroupHeader } from './ListGroupHeader'
 import { IListProps, IListState } from './types'
 
@@ -34,7 +34,7 @@ export function useListProps({
   groups,
   items
 }: UseListProps): IListProps {
-  const columns = filter(props.columns, (col) => {
+  const columns = _.filter(props.columns, (col) => {
     const groupBy = props.listGroupProps?.fieldName
     if (col.data?.hidden) return false
     if (groupBy && col.fieldName === groupBy) return false

@@ -3,7 +3,7 @@ import createDebug from 'debug'
 import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
 import { Inject, Service } from 'typedi'
-import { pick } from 'underscore'
+import _  from 'underscore'
 const debug = createDebug('services/msoauth')
 
 export interface MSAccessTokenOptions {
@@ -67,7 +67,7 @@ class MSOAuthService {
           )}`
         )
         accessToken = await accessToken.refresh(
-          pick(accessToken.token, 'scope')
+          _.pick(accessToken.token, 'scope')
         )
         debug(
           `Successfully refreshed token expiring ${accessToken.token.expires_at}.`

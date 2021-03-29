@@ -7,7 +7,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
-import { isNull } from 'underscore'
+import _  from 'underscore'
 import { ApiTokenForm } from './ApiTokenForm'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import styles from './ApiTokens.module.scss'
@@ -69,7 +69,7 @@ export const ApiTokens: TabComponent = () => {
   return (
     <div className={styles.root}>
       {message && <UserMessage {...message} />}
-      {!isNull(apiKey) && (
+      {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
           <UserMessage type={'success'} iconName='Cloud'>
             <span className={styles.text}>{apiKey}</span>

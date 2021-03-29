@@ -11,7 +11,7 @@ import {
 import { SubText } from 'components/SubText'
 import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
-import { any } from 'underscore'
+import _  from 'underscore'
 import { truncateString } from 'utils/truncateString'
 import styles from './SelectCallout.module.scss'
 import { ISelectCalloutProps } from './types'
@@ -59,7 +59,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
               <li key={label.name}>
                 <div className={styles.itemContainer}>
                   <Checkbox
-                    checked={any(
+                    checked={_.any(
                       props.selectedLabels,
                       ({ name }) => name === label.name
                     )}

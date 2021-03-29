@@ -4,7 +4,7 @@ import { List, TabComponent } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { any, filter, isEmpty } from 'underscore'
+import _  from 'underscore'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
 
@@ -34,11 +34,11 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
               onRender: () => (
                 <div
                   hidden={
-                    isMobile || !any(props.items, (index) => index.inactive)
+                    isMobile || !_.any(props.items, (index) => index.inactive)
                   }>
                   <Checkbox
-                    disabled={isEmpty(
-                      filter(props.items, (index) => index.inactive)
+                    disabled={_.isEmpty(
+                      _.filter(props.items, (index) => index.inactive)
                     )}
                     styles={{ root: { margin: '6px 0 0 8px' } }}
                     checked={showInactive}

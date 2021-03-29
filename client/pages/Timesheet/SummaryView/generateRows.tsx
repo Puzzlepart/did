@@ -1,7 +1,7 @@
 import { IColumn } from '@fluentui/react'
 import $date from 'DateUtils'
 import { EventObject, Project } from 'types'
-import { unique } from 'underscore'
+import _  from 'underscore'
 
 /**
  * Generate rows from events and columns
@@ -10,7 +10,7 @@ import { unique } from 'underscore'
  * @param columns - Columns
  */
 export function generateRows(events: EventObject[], columns: IColumn[]) {
-  const projects = unique(
+  const projects = _.unique(
     events.map((event_) => event_.project),
     (p: Project) => p.tag
   )

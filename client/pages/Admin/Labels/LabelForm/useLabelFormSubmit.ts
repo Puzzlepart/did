@@ -3,8 +3,8 @@ import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
 import { ISubmitProps } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
-import { omit } from 'underscore'
-import validator from 'validator'
+import _  from 'underscore'
+import s from 'underscore.string'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import { ILabelFormProps } from './types'
 import { useLabelModel } from './useLabelModel'
@@ -24,7 +24,7 @@ export function useLabelFormSubmit(
     try {
       await mutate({
         variables: {
-          label: omit(model.$, '__typename'),
+          label: _.omit(model.$, '__typename'),
           update: !!props.edit
         }
       })
@@ -50,8 +50,8 @@ export function useLabelFormSubmit(
    * Checks if form is valid
    */
   const isFormValid = (): boolean =>
-    !validator.isEmpty(model.value('name', '')) &&
-    !validator.isEmpty(model.value('color', ''))
+    !s.isBlank(model.value('name', '')) &&
+    !s.isBlank(model.value('color', ''))
 
   return {
     toast,

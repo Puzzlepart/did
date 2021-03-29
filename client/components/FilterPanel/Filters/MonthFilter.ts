@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
 import { getValue } from 'helpers'
-import { contains, indexOf, unique } from 'underscore'
+import _  from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
 
@@ -26,13 +26,13 @@ export class MonthFilter extends BaseFilter {
    * @param items - Items
    */
   public initialize(items: any[]): IFilter {
-    const values = unique(
+    const values = _.unique(
       items.map((item_) => getValue(item_, this.keyFieldName, null))
     )
     const monthNames = $date.getMonthNames()
     const filterItems = monthNames
-      .filter((_, index) => contains(values, index + 1))
-      .map((value) => ({ key: indexOf(monthNames, value) + 1, value }))
+      .filter((_item, index) => _.contains(values, index + 1))
+      .map((value) => ({ key: _.indexOf(monthNames, value) + 1, value }))
     return super.initialize(filterItems)
   }
 }

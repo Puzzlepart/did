@@ -4,7 +4,7 @@ import { IconPicker } from 'components'
 import { useMap } from 'hooks'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { capitalize, underscored } from 'underscore.string'
+import s from 'underscore.string'
 import { toMap } from 'utils/toMap'
 import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer/actions'
@@ -55,8 +55,8 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
           placeholder={t('reports.filterNamePlaceholder')}
           required={true}
           onChange={(_event, value) => {
-            set('text', capitalize(value))
-            set('key', underscored(value))
+            set('text', s.capitalize(value))
+            set('key', s.underscored(value))
           }}
         />
       </div>

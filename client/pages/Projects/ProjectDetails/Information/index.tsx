@@ -5,7 +5,7 @@ import { UserMessage } from 'components/UserMessage'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
 
@@ -33,7 +33,7 @@ export const Information: React.FC = () => {
         ))}
       </div>
       <UserMessage
-        hidden={!!state.selected.description || !isEmpty(state.selected.labels)}
+        hidden={!!state.selected.description || !_.isEmpty(state.selected.labels)}
         containerStyle={{ margin: '15px 0 15px 0' }}
         text={t('projects.noInformationAvailable')}
         iconName='Info'

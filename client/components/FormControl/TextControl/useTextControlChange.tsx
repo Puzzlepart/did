@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react'
-import { capitalize } from 'underscore.string'
+import s from 'underscore.string'
 import { ITextControlProps, TextControlOptions } from './types'
 
 /**
@@ -21,7 +21,7 @@ function transformValue(value: string, options: TextControlOptions) {
       _value = _value.toLowerCase()
       break
     case 'capitalized':
-      _value = capitalize(_value)
+      _value = s.capitalize(_value)
       break
   }
   if (options?.replace) {

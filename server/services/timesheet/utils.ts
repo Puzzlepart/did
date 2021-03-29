@@ -1,4 +1,4 @@
-import { find, pick } from 'underscore'
+import _  from 'underscore'
 import { EventInput, EventObject } from '../../graphql'
 import { ITimesheetPeriodData } from './types'
 
@@ -30,7 +30,7 @@ export function mapMatchedEvents(
 ) {
   const events_ = []
   const hours = matchedEvents.reduce((hours, m: any) => {
-    const event = find(events, ({ id }) => id === m.id)
+    const event = _.find(events, ({ id }) => id === m.id)
     if (!event) return null
     const _id = createUniqueEventId(event.id, event.startDateTime as Date)
     events_.push({
@@ -49,7 +49,7 @@ export function mapMatchedEvents(
    */
   const getEvents = (includeAdditionalData = false) => {
     if (includeAdditionalData) {
-      const additionalData = pick(period, 'userId', 'week', 'month', 'year')
+      const additionalData = _.pick(period, 'userId', 'week', 'month', 'year')
       return events_.map((entry) => ({
         ...entry,
         ...additionalData,

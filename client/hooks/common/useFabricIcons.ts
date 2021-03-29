@@ -2,7 +2,7 @@
 import icons from '@uifabric/icons/lib/data/AllIconNames.json'
 import { ISuggestionItem } from 'components'
 import { useMemo } from 'react'
-import { humanize } from 'underscore.string'
+import s from 'underscore.string'
 
 /**
  * Returns all icons from [@uifabric/icons](https://www.npmjs.com/package/@uifabric/icons)
@@ -18,7 +18,7 @@ export function useFabricIcons(): ISuggestionItem[] {
         .map(({ name }) => ({
           key: name,
           text: name,
-          searchValue: [name, humanize(name)].join(' '),
+          searchValue: [name, s.humanize(name)].join(' '),
           iconName: name,
           data: name
         })),

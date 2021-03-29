@@ -2,7 +2,7 @@ import { PartialTheme } from '@fluentui/react/lib/Theme'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'
 import { Role, User, UserPhoto } from 'types'
-import { contains, pick } from 'underscore'
+import _ from 'underscore'
 import { tryParseJson } from 'utils'
 import { getTheme } from '../theme'
 
@@ -43,7 +43,7 @@ export class ContextUser {
     if (_user) {
       Object.assign(
         this,
-        pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
+        _.pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
       )
       this.configuration = tryParseJson(_user.configuration, {})
       this.theme = getTheme(this.configuration?.ui?.theme)
@@ -67,7 +67,7 @@ export class ContextUser {
       case 'nn-no':
         return 'nn'
       default: {
-        if (contains(SUPPORTED_LANGUAGES, this._user?.preferredLanguage)) {
+        if (_.contains(SUPPORTED_LANGUAGES, this._user?.preferredLanguage)) {
           return this._user.preferredLanguage
         }
         return 'en-GB'
@@ -82,6 +82,6 @@ export class ContextUser {
    */
   public hasPermission?(permission?: PermissionScope): boolean {
     if (!permission) return true
-    return contains(this.role?.permissions, permission)
+    return _.contains(this.role?.permissions, permission)
   }
 }

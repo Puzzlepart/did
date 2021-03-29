@@ -2,7 +2,7 @@
 import { sign } from 'jsonwebtoken'
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import { Context } from '../../graphql/context'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'
@@ -58,7 +58,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
       token.subscriptionId = subscriptionId
       token.created = new Date()
       const apiKey = sign(
-        omit(token, 'created'),
+        _.omit(token, 'created'),
         environment('API_TOKEN_SECRET')
       )
       await this.insert({

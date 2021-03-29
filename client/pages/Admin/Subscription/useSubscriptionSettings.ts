@@ -6,7 +6,7 @@ import { getValue, setValue } from 'helpers'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'
-import { isEqual, pick } from 'underscore'
+import _  from 'underscore'
 import deepCopy from 'utils/deepCopy'
 import { omitTypename } from 'utils/omitTypename'
 import $updateSubscription from './updateSubscription.gql'
@@ -38,7 +38,7 @@ export function useSubscriptionSettings() {
   }
 
   const onSaveSettings = async () => {
-    const variables = pick(subscription, 'settings')
+    const variables = _.pick(subscription, 'settings')
     await updateSubscription({ variables })
     setToast({
       text: t('admin.subscriptionSettingsUpdateSuccess'),
@@ -55,7 +55,7 @@ export function useSubscriptionSettings() {
     toast,
     onSaveSettings,
     sections,
-    hasChanges: !isEqual(
+    hasChanges: !_.isEqual(
       subscription.settings,
       omitTypename(context.subscription.settings)
     )
