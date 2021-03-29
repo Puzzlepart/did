@@ -21,7 +21,7 @@ async function run() {
     })
 
     output.on('end', () => {
-        log(`Failed to archive ${filename}: Data has been drained`)
+        log(`Failed to archive ${filename}: data has been drained.`)
     })
 
     archive.on('warning', (error) => {
@@ -50,10 +50,8 @@ async function run() {
     log('Archiving dist/shared...')
     archive.directory(path.resolve(__dirname, '../dist/shared'), 'shared')
 
-    log('Piping output...')
     archive.pipe(output)
 
-    log('Finalizing...')
     await archive.finalize()
 }
 

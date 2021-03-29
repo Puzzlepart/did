@@ -9,26 +9,6 @@ const package_archive = require('./package.archive')
 const log = console.log
 
 async function run() {
-  log(chalk.white(`                                                              
-                ddddddd                     ddddddd            
-                d:::::d   iiii              d:::::d            
-                d:::::d  i::::i             d:::::d            
-                d:::::d   iiii              d:::::d            
-                d:::::d                     d:::::d            
-       ddddddddd::::::d  iiiiii    ddddddddd::::::d            
-     d::::::::::::::::d  i::::i  d::::::::::::::::d            
-    d:::::::ddddd:::::d  i::::i d:::::::ddddd:::::d            
-    d::::::d    d:::::d  i::::i d::::::d    d:::::d            
-    d:::::d     d:::::d  i::::i d:::::d     d:::::d            
-    d:::::d     d:::::d  i::::i d:::::d     d:::::d            
-    d::::::ddddd::::::d  i::::i d::::::ddddd::::::d            
-     d::::::::::::::::d  i::::i d:::::::::::::::::d            
-       dddddddddddddddd  iiiiii   ddddddddddddddddd 
-       
-       ${chalk.cyan('Packing client and server...')}
-
-  `))
-
   if (process.env.CI !== 'true') {
     const dir = path.resolve(__dirname, '../', 'dist')
     log()
@@ -42,7 +22,9 @@ async function run() {
   await concurrently([
     { command: 'npm run package:client', name: 'package:client' },
     { command: "npm run build:server", name: 'build:server' }
-  ], {})
+  ], {
+    prefix: 'none'
+  })
   await package_archive()
 }
 run()
