@@ -9,18 +9,19 @@ const package = require('../package.json')
 const log = console.log
 
 async function run() {
-    log(chalk.cyan('Creating archive'))
-    const output = fs.createWriteStream(`./${package.name}-package.zip`)
+    const filename = `./${package.name}-package.zip`
+    log(chalk.cyan(`Creating archive ${filename}`))
+    const output = fs.createWriteStream(filename)
     const archive = archiver('zip', {
         zlib: { level: 9 }
     })
 
     output.on('close', () => {
-        log(`Archive has been finalized and the output file is ready with ${archive.pointer()} total bytes.`)
+        log(`Archive ${filename} has been finalized and the output file is ready with ${archive.pointer()} total bytes.`)
     })
 
     output.on('end', () => {
-        log('Data has been drained')
+        log(`Failed to archive ${filename}: Data has been drained`)
     })
 
     archive.on('warning', (error) => {
@@ -43,11 +44,11 @@ async function run() {
     log('Archiving dependencies...')
     const dependencies = Object.keys(package.dependencies)
     dependencies.forEach((dep, idx) => {
-        log(`\t(${idx + 1} of ${dependencies.legth}) Archiving dependency ${dep}`)
-        archive.directory(`node_modules/${dep}`, `node_modules/${dep}`)
+        log(`\t(${idx + 1} of ${dependencies.length}) Archiving dependency ${dep}`)
+        archive.directory(path.resolve(__dirname, `node_modules/${dep}`), `node_modules/${dep}`)
     })
     log('Archiving dist...')
-    archive.directory('dist', 'dist')
+    archive.directory(path.resolve(__dirname, '../dist'), 'dist')
 
     log('Piping output...')
     archive.pipe(output)
