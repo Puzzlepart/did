@@ -3,12 +3,13 @@
 /* eslint-disable unicorn/no-array-for-each */
 const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
 const archiver = require('archiver')
 const package = require('../package.json')
 const log = console.log
 
 async function run() {
-    log('Creating archive')
+    log(chalk.cyan('Creating archive'))
     const output = fs.createWriteStream(`./${package.name}-package.zip`)
     const archive = archiver('zip', {
         zlib: { level: 9 }
