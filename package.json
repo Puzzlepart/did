@@ -11,6 +11,7 @@
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
+    "package": "node .tasks/package.js",
     "commit": "sexy-commits",
     "start": "node ./dist/server/index.js",
     "package:client": "webpack --config webpack/config.js",
@@ -59,6 +60,7 @@
     "@types/webpack-env": "1.16.0",
     "@uifabric/icons": "7.5.23",
     "apollo-server-express": "2.22.1",
+    "archiver": "^5.3.0",
     "array-sort": "1.0.0",
     "babel-loader": "8.2.2",
     "body-parser": "1.19.0",
