@@ -11,7 +11,7 @@ import {
 import { SubText } from 'components/SubText'
 import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import { truncateString } from 'utils/truncateString'
 import styles from './SelectCallout.module.scss'
 import { ISelectCalloutProps } from './types'

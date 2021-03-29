@@ -1,5 +1,5 @@
 import { AuthChecker, ResolverData } from 'type-graphql'
-import _  from 'underscore'
+import _ from 'underscore'
 import { PermissionScope } from '../../shared/config/security'
 import { Context } from './context'
 

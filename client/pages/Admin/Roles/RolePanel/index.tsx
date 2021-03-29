@@ -3,7 +3,7 @@ import { UserMessage } from 'components'
 import { IconPicker } from 'components/IconPicker'
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { PermissionCheckbox } from './PermissionCheckbox'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
@@ -51,7 +51,7 @@ export const RolePanel: React.FC<IRolePanelProps> = (props) => {
           {permissions.map((permission, index) => (
             <PermissionCheckbox
               key={index}
-              checked={ _.contains(model.permissions, permission.id)}
+              checked={_.contains(model.permissions, permission.id)}
               permission={permission}
               onToggle={togglePermission}
             />

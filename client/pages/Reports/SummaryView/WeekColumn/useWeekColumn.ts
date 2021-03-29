@@ -2,7 +2,7 @@
 import { ReportsContext } from 'pages'
 import { useContext, useMemo } from 'react'
 import { Project } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import { firstPart } from '../../../../../shared/utils/firstPart'
 import { IWeekColumnProps } from './types'
 

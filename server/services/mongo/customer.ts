@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { Context } from '../../graphql/context'
 import { Customer } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'

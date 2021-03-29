@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { findBestMatch } from 'string-similarity'
-import _  from 'underscore'
+import _ from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
 import { ProjectMatch } from './types'
@@ -33,7 +33,7 @@ export default class TimesheetMatchingEngine {
       const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
       const { target } = bestMatch
-      const suggestion =  _.first(
+      const suggestion = _.first(
         customerProjects.filter((p) => p.key === target.toUpperCase())
       )
       return suggestion
@@ -109,7 +109,9 @@ export default class TimesheetMatchingEngine {
    * @param categories - Categories
    */
   private _findLabels(categories: string[]) {
-    return _.filter(this._data.labels, (lbl) => _.contains(categories, lbl.name))
+    return _.filter(this._data.labels, (lbl) =>
+      _.contains(categories, lbl.name)
+    )
   }
 
   /**

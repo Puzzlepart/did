@@ -3,7 +3,7 @@ import createDebug from 'debug'
 import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 const debug = createDebug('services/msoauth')
 
 export interface MSAccessTokenOptions {

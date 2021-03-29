@@ -2,7 +2,7 @@
 import { Icon, ProgressIndicator } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import styles from './Progress.module.scss'
 import { IProgressProps } from './types'
 

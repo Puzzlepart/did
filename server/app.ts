@@ -14,7 +14,7 @@ import createError from 'http-errors'
 import { MongoClient } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
-import _  from 'underscore'
+import _ from 'underscore'
 import { setupGraphQL } from './graphql'
 import {
   helmetMiddleware,

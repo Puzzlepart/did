@@ -10,7 +10,7 @@ import {
 } from '@fluentui/react'
 import React from 'react'
 import { AnyAction } from 'redux'
-import _  from 'underscore'
+import _ from 'underscore'
 import { ListGroupHeader } from './ListGroupHeader'
 import { IListProps, IListState } from './types'
 

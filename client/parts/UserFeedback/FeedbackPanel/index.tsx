@@ -9,7 +9,7 @@ import {
 } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { useFeedbackPanel } from './useFeedbackPanel'
 
 /**
@@ -37,7 +37,7 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
       <Dropdown
         label={t('feedback.typeFieldLabel')}
         required={true}
-        defaultSelectedKey={ _.first(model.value('labels'))}
+        defaultSelectedKey={_.first(model.value('labels'))}
         options={typeOptions}
         onChange={(_event, option) => model.set('labels', [option.key])}
       />

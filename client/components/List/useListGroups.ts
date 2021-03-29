@@ -2,7 +2,7 @@
 import { IGroup } from '@fluentui/react'
 import * as arraySort from 'array-sort'
 import { getValue as get } from 'helpers'
-import _  from 'underscore'
+import _ from 'underscore'
 import { IListGroupProps } from './types'
 
 /**

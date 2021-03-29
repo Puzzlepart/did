@@ -10,7 +10,7 @@ import {
 } from '@fluentui/react'
 import React, { useRef } from 'react'
 import { isMobile } from 'react-device-detect'
-import _  from 'underscore'
+import _ from 'underscore'
 import { cleanArray as clean } from 'utils'
 import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
@@ -69,7 +69,8 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
       <CommandBar
         {...commandBarProps}
         hidden={
-          _.isEmpty(commandBarProps.items) && _.isEmpty(commandBarProps.farItems)
+          _.isEmpty(commandBarProps.items) &&
+          _.isEmpty(commandBarProps.farItems)
         }
         styles={{ root: { margin: 0, padding: 0 } }}
       />

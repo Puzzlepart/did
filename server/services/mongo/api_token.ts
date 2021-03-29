@@ -2,7 +2,7 @@
 import { sign } from 'jsonwebtoken'
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { Context } from '../../graphql/context'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'

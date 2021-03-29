@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
-import _  from 'underscore'
+import _ from 'underscore'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
 

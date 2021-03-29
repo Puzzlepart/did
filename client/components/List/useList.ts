@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
 import { useListGroups } from './useListGroups'
@@ -30,7 +30,7 @@ export function useList(props: IListProps) {
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
         if (props.selectionProps?.mode === SelectionMode.single) {
-          props.selectionProps.onChanged( _.first(_selection))
+          props.selectionProps.onChanged(_.first(_selection))
         } else {
           props.selectionProps.onChanged(_selection)
         }

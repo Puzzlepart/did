@@ -135,21 +135,22 @@ Now you need to set the required environment variables from this table:
 | `/shared/config/security`     | Shared security configuration used by both the client and the server |
 | `/shared/utils/date`          | Shared date utilities used by both the client and the server |
 | `/client`                     | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`. |
-| `/client/app`                 | React app entry point                                        |
+| `/client/app`                 | [React](https://reactjs.org/) app entry point                                        |
+| `/client/app`                 | [React](https://reactjs.org/) app parts                                      |
 | `/client/common`              | Common elements like icons etc                               |
-| `/client/components`          | React components reusable throughout the solution            |
-| `/client/graphql`             | Graphql implementation for the client using `@apollo/client` |
+| `/client/components`          | [React](https://reactjs.org/) components reusable throughout the solution            |
+| `/client/graphql`             | Graphql implementation for the client using [@apollo/client](https://www.npmjs.com/package/@apollo/client) |
 | `/client/helpers`             | Helper functions                                             |
 | `/client/pages`               | Main pages of the solution                                   |
 | `/client/types`               | Types, models and interfaces                                 |
 | `/client/utils`               | Utility functions                                            |
 | `/client/index.tsx`           | Main entry point for the app                                 |
 | `/server/public`              | Public assets, static files hosted under "/"                 |
-| `/server/routes`              | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views |
+| `/server/routes`              | [expressjs](https://expressjs.com/) routes using [hbs](https://handlebarsjs.com/) views |
 | `/server/graphql`             | [GraphQL](https://github.com/graphql/graphql-js/) implementation |
 | `/server/graphql/resolvers`   | GraphQL resolvers, queries and mutations                     |
 | `/server/middleware`          | Server side Express middleware functions                     |
-| `/server/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware |
+| `/server/middleware/passport` | [passport](http://www.passportjs.org/) authentication middleware |
 | `/server/services`            | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/)) |
 | `/server/utils`               | Utilities                                                    |
 | `/server/views`               | Express HBS views                                            |

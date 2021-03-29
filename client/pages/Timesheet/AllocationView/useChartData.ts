@@ -1,6 +1,6 @@
 import getValue from 'get-value'
 import { useMemo } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { truncateString } from 'utils/truncateString'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
 import { useTimesheetContext } from '../context'

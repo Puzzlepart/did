@@ -1,5 +1,5 @@
 import createDebug from 'debug'
-import _  from 'underscore'
+import _ from 'underscore'
 import { User } from '../../../graphql'
 import { MSGraphService, UserService } from '../../../services'
 import MSOAuthService from '../../../services/msoauth'

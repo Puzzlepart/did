@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { useUserNotifications } from '../useUserNotifications'
 import styles from './NotificationIndicator.module.scss'
 

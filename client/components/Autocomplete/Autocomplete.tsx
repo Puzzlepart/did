@@ -9,7 +9,7 @@ import {
 } from '@fluentui/react'
 import { SubText } from 'components/SubText'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { IAutocompleteProps } from '.'
 import { ReusableComponent } from '../types'
 import styles from './Autocomplete.module.scss'

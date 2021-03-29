@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/DateObject'
 import { Context } from '../graphql/context'
@@ -109,13 +109,20 @@ export class ReportService {
         const project = _.find(projects, ({ _id }) => _id === entry.projectId)
         const customer = _.find(
           customers,
-          (c) => c.key ===  _.first(entry.projectId.split(' '))
+          (c) => c.key === _.first(entry.projectId.split(' '))
         )
         if (project && customer && resource) {
           return [
             ...timeEntries_,
             {
-              ..._.omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
+              ..._.omit(
+                entry,
+                '_id',
+                'userId',
+                'periodId',
+                'projectId',
+                'body'
+              ),
               project: _.pick(project, 'tag', 'name', 'description', 'icon'),
               customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
               resource

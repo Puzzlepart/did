@@ -8,7 +8,7 @@ import {
 import { List } from 'components'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
 import { IAddMultiplePanel } from './types'

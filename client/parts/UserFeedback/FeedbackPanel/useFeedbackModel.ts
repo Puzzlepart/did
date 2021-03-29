@@ -1,7 +1,7 @@
 import { useAppContext } from 'AppContext'
 import { useMap } from 'hooks'
 import { UserFeedback } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import { toMap } from 'utils'
 import { useMoodOptions } from './useMoodOptions'
 import { useTypeOptions } from './useTypeOptions'

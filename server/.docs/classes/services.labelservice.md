@@ -162,7 +162,7 @@ ___
 
 ▸ **find**<S\>(`query`: *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\>, `sort?`: S): *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Wrapper on find().toArray()
+Wrapper on _.find().toArray()
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
 

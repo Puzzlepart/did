@@ -7,7 +7,7 @@ import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import { IconPicker } from 'components/IconPicker'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { ILabelFormProps } from './types'
 import { useLabelForm } from './useLabelForm'
 

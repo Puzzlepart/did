@@ -45,8 +45,7 @@ export function useUserForm({ props }) {
    * Checks if form is valid
    */
   const isFormValid = () =>
-    !s.isBlank(model?.id || '') &&
-    !s.isBlank(model?.displayName || '')
+    !s.isBlank(model?.id || '') && !s.isBlank(model?.displayName || '')
 
   const adSync = subscription?.settings?.adsync || { properties: [] }
 

@@ -5,7 +5,7 @@ import { useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { TimesheetPeriodObject } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import {
   ITimesheetParameters,
   ITimesheetState,
@@ -81,7 +81,7 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
             _.find(state.periods, (p) => p.id === selectedPeriodId) ||
             (lastNav === 'PREVIOUS_PERIOD'
               ? _.last(state.periods)
-              :  _.first(state.periods))
+              : _.first(state.periods))
         }
         state.error = payload.query.error
       })

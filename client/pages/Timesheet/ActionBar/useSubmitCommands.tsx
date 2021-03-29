@@ -9,7 +9,7 @@ import { useAppContext } from 'AppContext'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { arrayExtend } from 'utils'
 import { TimesheetContext } from '../context'
 
@@ -150,7 +150,7 @@ export function useSubmitCommands(): IContextualMenuItem {
             border: 'none'
           }}
           primary={false}
-          {...( _.first(commands) as any)}
+          {...(_.first(commands) as any)}
           menuProps={menuProps}
         />
       )

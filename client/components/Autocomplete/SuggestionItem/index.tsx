@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import styles from './SuggestionItem.module.scss'
 import { ISuggestionItemProps } from './types'
 

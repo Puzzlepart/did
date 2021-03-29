@@ -2,7 +2,7 @@ import { usePermissions } from 'hooks/user/usePermissions'
 import { PermissionCheckbox } from 'pages/Admin/Roles/RolePanel/PermissionCheckbox'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import styles from './PermissionsControl.module.scss'
 import { IPermissionsControlProps } from './types'
 
@@ -21,7 +21,7 @@ export const PermissionsControl: React.FC<IPermissionsControlProps> = ({
         {permissions.map((permission, index) => (
           <PermissionCheckbox
             key={index}
-            checked={ _.contains(token.permissions, permission.id)}
+            checked={_.contains(token.permissions, permission.id)}
             permission={permission}
             onToggle={onToggle}
           />

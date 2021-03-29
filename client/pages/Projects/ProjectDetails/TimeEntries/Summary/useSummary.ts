@@ -1,6 +1,6 @@
 import $date from 'DateUtils'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { getSum } from 'utils/getSum'
 
 /**

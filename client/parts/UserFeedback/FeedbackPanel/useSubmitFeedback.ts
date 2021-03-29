@@ -6,7 +6,7 @@ import { useToast } from 'components/Toast'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import $submit_feedback from './submit-feedback.gql'
 
 export const useSubmitFeedback = (

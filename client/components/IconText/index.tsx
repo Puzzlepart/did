@@ -2,7 +2,7 @@
 import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import styles from './IconText.module.scss'
 import { IIconTextProps } from './types'
 

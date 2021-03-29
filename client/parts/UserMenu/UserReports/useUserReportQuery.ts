@@ -2,7 +2,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { getSum } from 'utils/getSum'
 import { default_query } from './queries'
 

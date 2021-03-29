@@ -4,7 +4,7 @@ import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getPermissions, IPermission, PermissionScope } from 'security'
-import _  from 'underscore'
+import _ from 'underscore'
 
 /**
  * Permissions hook that returns atuple of the available

@@ -1,4 +1,4 @@
-import _  from 'underscore'
+import _ from 'underscore'
 import { EventInput, EventObject } from '../../graphql'
 import { ITimesheetPeriodData } from './types'
 

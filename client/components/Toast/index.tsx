@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { UserMessage } from '../UserMessage'
 import styles from './Toast.module.scss'
 import { IToastProps } from './types'

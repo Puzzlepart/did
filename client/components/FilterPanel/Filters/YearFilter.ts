@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import _  from 'underscore'
+import _ from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
 

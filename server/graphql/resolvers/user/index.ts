@@ -6,7 +6,7 @@ import 'reflect-metadata'
 import Format from 'string-format'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { PermissionScope } from '../../../../shared/config/security'
 import {
   MSGraphService,

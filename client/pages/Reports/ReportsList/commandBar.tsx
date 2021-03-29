@@ -4,7 +4,7 @@ import {
   IContextualMenuItem
 } from '@fluentui/react'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import { IReportsContext } from '../context'
 import {

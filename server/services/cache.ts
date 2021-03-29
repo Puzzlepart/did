@@ -3,7 +3,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { Context } from '../graphql/context'
 import { redisMiddlware } from '../middleware/redis'
 const log = require('debug')('server/services/cache')

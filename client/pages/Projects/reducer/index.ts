@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit'
 import copy from 'fast-copy'
-import _  from 'underscore'
+import _ from 'underscore'
 import {
   CHANGE_DETAILS_TAB,
   CHANGE_VIEW,

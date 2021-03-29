@@ -1,7 +1,7 @@
 import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
 import { Autocomplete } from 'components'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'

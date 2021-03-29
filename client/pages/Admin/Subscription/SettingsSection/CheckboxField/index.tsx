@@ -2,7 +2,7 @@
 import { Checkbox, Label } from '@fluentui/react'
 import { getValue } from 'helpers'
 import React, { useContext } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { SubscriptionContext } from '../../context'
 import { ICheckboxFieldProps } from './types'
 

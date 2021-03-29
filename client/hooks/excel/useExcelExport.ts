@@ -2,7 +2,7 @@
 import { format, IColumn } from '@fluentui/react'
 import { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 
 interface IUseExcelExportOptions {

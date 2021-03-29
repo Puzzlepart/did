@@ -144,7 +144,7 @@ ___
 
 ▸ **find**<S\>(`query`: *FilterQuery*<[*Role*](graphql.role.md)\>, `sort?`: S): *Promise*<[*Role*](graphql.role.md)[]\>
 
-Wrapper on find().toArray()
+Wrapper on _.find().toArray()
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
 

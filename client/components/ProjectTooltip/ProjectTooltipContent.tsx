@@ -4,7 +4,7 @@ import { SubText } from 'components/SubText'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 

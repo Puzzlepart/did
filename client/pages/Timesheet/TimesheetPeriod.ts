@@ -9,7 +9,7 @@ import {
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import { BrowserStorage } from 'utils'
 
 /**

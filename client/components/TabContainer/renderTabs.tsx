@@ -4,7 +4,7 @@
 import { PivotItem } from '@fluentui/react'
 import { ContextUser } from 'AppContext'
 import React, { JSXElementConstructor, ReactElement } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { ITabItemProps } from './types'
 
 type RenderTabs = {

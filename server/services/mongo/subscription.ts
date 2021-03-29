@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { Context } from '../../graphql/context'
 import {
   Subscription,

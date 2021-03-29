@@ -143,7 +143,7 @@ ___
 
 ▸ **find**<S\>(`query`: *FilterQuery*<[*Customer*](graphql.customer.md)\>, `sort?`: S): *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Wrapper on find().toArray()
+Wrapper on _.find().toArray()
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
 

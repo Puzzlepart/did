@@ -3,7 +3,7 @@
 import { Dropdown } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { IDropdownControlProps } from './types'
 
 /**

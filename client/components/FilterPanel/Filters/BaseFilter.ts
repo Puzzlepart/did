@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { getValue as get } from 'helpers'
-import _  from 'underscore'
+import _ from 'underscore'
 import { IFilter, IFilterItem } from './types'
 
 /**

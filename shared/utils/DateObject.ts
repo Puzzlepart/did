@@ -1,5 +1,5 @@
 import { Dayjs, OpUnitType } from 'dayjs'
-import _  from 'underscore'
+import _ from 'underscore'
 import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {

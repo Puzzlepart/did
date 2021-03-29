@@ -1,5 +1,5 @@
 import { Customer } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 
 export class CustomerModel {
   constructor(

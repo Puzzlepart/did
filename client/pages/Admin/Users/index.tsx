@@ -2,7 +2,7 @@
 import { Spinner } from '@fluentui/react'
 import { List, TabComponent } from 'components'
 import React from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
 import { UserForm } from './UserForm'

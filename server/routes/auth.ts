@@ -9,7 +9,7 @@
  */
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
-import _  from 'underscore'
+import _ from 'underscore'
 import url from 'url'
 import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import { environment } from '../utils'
@@ -95,7 +95,7 @@ const authProviders = environment<string[]>('AUTH_PROVIDERS', [], {
   splitBy: ' '
 })
 
-if ( _.contains(authProviders, 'azuread-openidconnect')) {
+if (_.contains(authProviders, 'azuread-openidconnect')) {
   auth.get(
     '/azuread-openidconnect/signin',
     signInHandler('azuread-openidconnect', {
@@ -109,7 +109,7 @@ if ( _.contains(authProviders, 'azuread-openidconnect')) {
   )
 }
 
-if ( _.contains(authProviders, 'google')) {
+if (_.contains(authProviders, 'google')) {
   auth.get(
     '/google/signin',
     signInHandler('google', {

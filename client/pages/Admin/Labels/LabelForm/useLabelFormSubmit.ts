@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
 import { ISubmitProps } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import s from 'underscore.string'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import { ILabelFormProps } from './types'
@@ -50,8 +50,7 @@ export function useLabelFormSubmit(
    * Checks if form is valid
    */
   const isFormValid = (): boolean =>
-    !s.isBlank(model.value('name', '')) &&
-    !s.isBlank(model.value('color', ''))
+    !s.isBlank(model.value('name', '')) && !s.isBlank(model.value('color', ''))
 
   return {
     toast,

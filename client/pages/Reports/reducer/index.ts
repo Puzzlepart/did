@@ -1,6 +1,6 @@
 import { createReducer, current } from '@reduxjs/toolkit'
 import { getValue } from 'helpers'
-import _  from 'underscore'
+import _ from 'underscore'
 import { IReportsState } from '../types'
 import {
   ADD_FILTER,

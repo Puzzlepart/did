@@ -2,7 +2,7 @@
 import { IButtonProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 
 /**
  * Get auth providers

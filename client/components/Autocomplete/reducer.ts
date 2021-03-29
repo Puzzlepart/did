@@ -2,7 +2,7 @@
 import { KeyCodes } from '@fluentui/react'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 import {
   AutocompleteSelectCallback,
   IAutocompleteProps,

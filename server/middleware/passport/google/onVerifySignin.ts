@@ -2,7 +2,7 @@
 import { MongoClient } from 'mongodb'
 import { VerifyCallback } from 'passport-azure-ad'
 import { Profile } from 'passport-google-oauth20'
-import _  from 'underscore'
+import _ from 'underscore'
 import { SubscriptionService, UserService } from '../../../services/mongo'
 import { environment } from '../../../utils'
 import { TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
@@ -22,7 +22,7 @@ export const onVerifySignin = async (
   done: VerifyCallback
 ) => {
   try {
-    const mail =  _.first(profile.emails)
+    const mail = _.first(profile.emails)
     const id = mail?.value || profile.id
     const subSrv = new SubscriptionService({
       db: mcl.db(environment('MONGO_DB_DB_NAME'))

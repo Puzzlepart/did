@@ -4,7 +4,7 @@ import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { useTimesheetContext } from '../context'
 
 /**

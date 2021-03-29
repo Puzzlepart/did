@@ -1,7 +1,7 @@
 import { IColumn } from '@fluentui/react'
 import $date from 'DateUtils'
 import { EventObject, Project } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 
 /**
  * Generate rows from events and columns

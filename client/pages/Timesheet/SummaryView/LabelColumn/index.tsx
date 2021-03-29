@@ -2,7 +2,7 @@ import { Icon } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
 import React from 'react'
 import { LabelObject as Label } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { ILabelColumnProps } from './types'
 

@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'

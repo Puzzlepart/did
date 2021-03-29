@@ -4,7 +4,7 @@ import { List, TabComponent } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import _  from 'underscore'
+import _ from 'underscore'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
 

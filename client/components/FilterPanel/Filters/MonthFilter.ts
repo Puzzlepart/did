@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
 import { getValue } from 'helpers'
-import _  from 'underscore'
+import _ from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
 

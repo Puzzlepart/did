@@ -103,7 +103,7 @@ Inherited from: void
 
 ▸ **find**<S\>(`query`: *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>, `sort?`: S): *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Wrapper on find().toArray()
+Wrapper on _.find().toArray()
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
 

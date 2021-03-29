@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
-import _  from 'underscore'
+import _ from 'underscore'
 
 /**
  * Returns the current `state` of the array, a function

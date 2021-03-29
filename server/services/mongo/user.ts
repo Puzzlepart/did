@@ -3,7 +3,7 @@
 import { FilterQuery } from 'mongodb'
 import set from 'set-value'
 import { Inject, Service } from 'typedi'
-import _  from 'underscore'
+import _ from 'underscore'
 import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'

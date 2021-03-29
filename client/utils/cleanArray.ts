@@ -1,4 +1,4 @@
-import _  from 'underscore'
+import _ from 'underscore'
 
 /**
  * Cleans an array removing `undefined` and `null`

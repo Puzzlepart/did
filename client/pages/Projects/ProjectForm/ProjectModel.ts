@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { LabelObject as Label, Project } from 'types'
-import _  from 'underscore'
+import _ from 'underscore'
 
 export class ProjectModel {
   constructor(
