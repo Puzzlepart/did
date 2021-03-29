@@ -24,7 +24,7 @@ dist
 
 # Lock files
 pnpm-lock.yaml
-yarn
+yarn.lock
 package-lock.json
 
 client/**/*.d.ts
