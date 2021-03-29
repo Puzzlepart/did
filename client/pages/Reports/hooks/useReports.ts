@@ -66,6 +66,12 @@ export function useReports() {
         },
         labelWrapper: {
           maxWidth: 'none'
+        },
+        field: {
+          border: 'none',
+          ':before': {
+            display: 'none'
+          }
         }
       }
     })) as IChoiceGroupOption[],
