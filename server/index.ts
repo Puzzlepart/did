@@ -15,7 +15,7 @@ const debug = require('debug')('server')
 const log = console.log
 
 /**
- * Start server on the specified port
+ * Start server on the specified `port`
  *
  * @param port - Port
  */
@@ -25,6 +25,12 @@ export async function startServer(port: string) {
 
   const server = http.createServer(app.instance)
 
+  /**
+   * On error handler for the [http](https://www.npmjs.com/package/http)
+   * server.
+   * 
+   * @param error - Error
+   */
   function onError(error: any) {
     if (error.syscall !== 'listen') {
       throw error
@@ -37,22 +43,27 @@ export async function startServer(port: string) {
     }
 
     switch (error.code) {
-      case 'EACCES':
-        debug('\u001B[31m', `${bind} requires elevated privileges`)
+      case 'EACCES': {
+        log()
+        log(chalk.red(`😭 Did server error: ${bind} requires elevated privileges 😭`))
+        log()
         process.exit(1)
-        break
-      case 'EADDRINUSE':
-        debug('\u001B[31m', `${bind} is already in use`)
+      }
+      case 'EADDRINUSE': {
+        log()
+        log(chalk.red(`😭 Did server error: ${bind} is already in use 😭`))
+        log()
         process.exit(1)
-        break
+      }
       default:
         throw error
     }
   }
 
   /**
-   * On listening handler for the server
-   *
+   * On listening handler for the [http](https://www.npmjs.com/package/http)
+   * server.
+   * 
    * @remarks If `NODE_ENV` is **development** and `SERVER_LISTENING_SOUND` is set,
    * a sound will be play when the server is listening. This can be helpful when
    * developing. But the *.mp3 files on the root server folder.
@@ -61,7 +72,9 @@ export async function startServer(port: string) {
     if (environment('SERVER_LISTENING_SOUND')) {
       sound(__dirname, environment('SERVER_LISTENING_SOUND'))
     }
+    log()
     log(chalk.cyan(`Did server listening on port [${port}] 🚀`))
+    log()
   }
 
   server.listen(port)
@@ -71,4 +84,6 @@ export async function startServer(port: string) {
 
 export * from './app'
 
-startServer(environment('PORT', '8080'))
+startServer(
+  environment('PORT', '9001')
+)
