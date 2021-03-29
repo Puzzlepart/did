@@ -2,7 +2,10 @@ const concurrently = require('concurrently')
 const chalk = require('chalk')
 const rmdir = require('rimraf')
 const path = require('path')
+const _ = require('underscore')
 const log = console.log
+
+const analyzeMode = _.contains(process.argv, 'analyze')
 
 log(chalk.white(`                                                              
                 ddddddd                     ddddddd            
@@ -21,8 +24,11 @@ log(chalk.white(`
        dddddddddddddddd  iiiiii   ddddddddddddddddd 
        
        ${chalk.cyan('Watching client and server changes concurrently...')}
+
        
-       `))
+       ${analyzeMode ? chalk.magenta('[Running webpack in analyze mode]') : ''}
+
+  `))
 
 const dir = path.resolve(__dirname, '../', 'server', 'public', 'js')
 
@@ -32,9 +38,15 @@ log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
 log()
 log()
 
+let webpackCmd = 'webpack --config webpack/config.js --watch'
+
+if (_.contains(process.argv, 'analyze')) {
+  webpackCmd += ' --analyze'
+}
+
 rmdir(dir, () => {
   concurrently([
     { command: 'nodemon', name: 'server' },
-    { command: 'webpack --config webpack/config.js --watch', name: 'client' }
+    { command: webpackCmd, name: 'client' }
   ], {})
 })
