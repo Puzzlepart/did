@@ -45,7 +45,13 @@ jobs:
       env:
         NODE_ENV: production
 
-    - name: 'Deploy to didapp/dev'
+    - uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: did-package
+        path: ./did-package.zip
+
+    - name: 'Deploy package to didapp/dev'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'

@@ -24,10 +24,12 @@ async function run() {
     d::::::ddddd::::::d  i::::i d::::::ddddd::::::d            
      d::::::::::::::::d  i::::i d:::::::::::::::::d            
        dddddddddddddddd  iiiiii   ddddddddddddddddd 
+       
+       ${chalk.cyan('Packing client and server...')}
 
   `))
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.CI !== 'true') {
     const dir = path.resolve(__dirname, '../', 'dist')
     log()
     log()
