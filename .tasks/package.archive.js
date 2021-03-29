@@ -9,7 +9,7 @@ const log = console.log
 
 async function run() {
     log('Creating archive')
-    const output = fs.createWriteStream(`./${package.name}.zip`)
+    const output = fs.createWriteStream(`./${package.name}-package.zip`)
     const archive = archiver('zip', {
         zlib: { level: 9 }
     })
