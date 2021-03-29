@@ -166,7 +166,7 @@
     "generatingReportLabel": "Genererer rapport",
     "generatingReportDescription": "For å gi deg dei ferskaste resultata, generererVvi rapporten frå nyast muleg data ...",
     "noEntriesText": "Det er ingen tidsoppføringar for dette tidspunktet.",
-    "selectReportText": "Vel ein rapport over. \nVer merksam på at nokre rapportar kan ta fleire minutt å lasta inn.",
+    "selectReportText": "Vel ein rapport under. \nVer merksam på at nokre rapportar kan ta fleire minutt å lasta inn.",
     "selectReportLabel": "Vel rapport",
     "forecast": "Prognose",
     "exportToExcel": "Eksporterer til Excel",

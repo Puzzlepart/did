@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { PivotItem } from '@fluentui/react'
+import { ChoiceGroup, PivotItem } from '@fluentui/react'
 import { FilterPanel, TabContainer, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,23 +21,35 @@ import { SummaryView } from './SummaryView'
  */
 export const Reports: React.FC = () => {
   const { t } = useTranslation()
-  const { queries, filters, context } = useReports()
+  const {
+    defaultSelectedKey,
+    queries,
+    options,
+    filters,
+    context
+  } = useReports()
   return (
     <ReportsContext.Provider value={context}>
       <TabContainer
         className={styles.root}
-        defaultSelectedKey={context.state.preset?.itemKey || 'default'}
+        defaultSelectedKey={defaultSelectedKey}
         items={queries}
         fixedLinkWidth={true}
+        styles={{
+          link: {
+            display: defaultSelectedKey === 'default' ? 'none' : 'initial'
+          }
+        }}
         itemProps={{
-          headerButtonProps: { disabled: context.state.loading }
+          headerButtonProps: {
+            hidden: true,
+            disabled: context.state.loading
+          }
         }}
         onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}>
-        {queries
-          .filter((q) => !q.hidden)
-          .map((props, index) => (
-            <ReportsList {...props} key={index} />
-          ))}
+        {queries.map((props, index) => (
+          <ReportsList {...props} key={index} />
+        ))}
         <SummaryView
           itemKey='summary'
           headerText={t('admin.summary')}
@@ -45,8 +57,12 @@ export const Reports: React.FC = () => {
         />
         <PivotItem itemKey='default'>
           <UserMessage
+            containerStyle={{ marginBottom: 20 }}
             iconName='ReportDocument'
             text={t('reports.selectReportText')}
+          />
+          <ChoiceGroup
+            options={options}
           />
         </PivotItem>
       </TabContainer>

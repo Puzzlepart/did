@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
+import { IChoiceGroupOption } from '@fluentui/react'
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
+import { CHANGE_QUERY } from '../reducer/actions'
 import { useFilters } from './useFilters'
 import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
@@ -50,7 +52,23 @@ export function useReports() {
   const context = useMemo(() => ({ state, dispatch, t }), [state])
 
   return {
-    queries,
+    defaultSelectedKey: state.preset?.itemKey || 'default',
+    queries: queries.filter((q) => !q.hidden),
+    options: queries.map((query) => ({
+      key: query.itemKey,
+      text: query.headerText,
+      iconProps: { iconName: query.itemIcon },
+      onClick: () => context.dispatch(CHANGE_QUERY({ itemKey: query.itemKey })),
+      styles: {
+        root: {
+          padding: 25,
+          maxWidth: 180
+        },
+        labelWrapper: {
+          maxWidth: 'none'
+        }
+      }
+    })) as IChoiceGroupOption[],
     filters,
     context
   }
