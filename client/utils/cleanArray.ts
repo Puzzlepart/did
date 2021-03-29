@@ -6,5 +6,5 @@ import _ from 'underscore'
  * @param array - Array
  */
 export function cleanArray<T = any>(array: T[]): T[] {
-  return _.filter(array, (element) => !!element)
+  return _.filter(array, Boolean)
 }
