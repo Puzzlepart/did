@@ -41,14 +41,17 @@ async function run() {
     log('Archiving package.json...')
     archive.file('package.json')
 
-    log('Archiving dependencies...')
-    const dependencies = Object.keys(package.dependencies)
-    dependencies.forEach((dep, idx) => {
-        log(`\t(${idx + 1} of ${dependencies.length}) Archiving dependency ${dep}`)
-        archive.directory(path.resolve(__dirname, `../node_modules/${dep}`), `node_modules/${dep}`)
-    })
-    log('Archiving dist...')
-    archive.directory(path.resolve(__dirname, '../dist'), 'dist')
+    log('Archiving node_modules...')
+    archive.directory(path.resolve(__dirname, '../node_modules'), 'node_modules')
+    // const dependencies = Object.keys(package.dependencies)
+    // dependencies.forEach((dep, idx) => {
+    //     log(`\t(${idx + 1} of ${dependencies.length}) Archiving dependency ${dep}`)
+    //     archive.directory(path.resolve(__dirname, `../node_modules/${dep}`), `node_modules/${dep}`)
+    // })
+    log('Archiving dist/server...')
+    archive.directory(path.resolve(__dirname, '../dist/server'), 'server')
+    log('Archiving dist/shared...')
+    archive.directory(path.resolve(__dirname, '../dist/shared'), 'shared')
 
     log('Piping output...')
     archive.pipe(output)
