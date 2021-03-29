@@ -41,7 +41,9 @@ async function run() {
     archive.file('package.json')
 
     log('Archiving dependencies...')
-    Object.keys(package.dependencies).forEach(dep => {
+    const dependencies = Object.keys(package.dependencies)
+    dependencies.forEach((dep, idx) => {
+        log(`\t(${idx + 1} of ${dependencies.legth}) Archiving dependency ${dep}`)
         archive.directory(`node_modules/${dep}`, `node_modules/${dep}`)
     })
     log('Archiving dist...')
