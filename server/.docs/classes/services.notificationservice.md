@@ -57,7 +57,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ForecastNotification[]\>
 
-Defined in: [services/notification/index.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L93)
+Defined in: [services/notification/index.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L96)
 
 ___
 
@@ -115,4 +115,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/notification/index.ts:130](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L130)
+Defined in: [services/notification/index.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L133)
