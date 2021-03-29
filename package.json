@@ -298,7 +298,8 @@
     }
   },
   "eslintIgnore": [
-    "client/**/*.d.ts"
+    "client/**/*.d.ts",
+    "**/*.test.ts"
   ],
   "prettier": {
     "tabWidth": 2,
