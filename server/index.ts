@@ -28,7 +28,7 @@ export async function startServer(port: string) {
   /**
    * On error handler for the [http](https://www.npmjs.com/package/http)
    * server.
-   * 
+   *
    * @param error - Error
    */
   function onError(error: any) {
@@ -45,7 +45,11 @@ export async function startServer(port: string) {
     switch (error.code) {
       case 'EACCES': {
         log()
-        log(chalk.red(`😭 Did server error: ${bind} requires elevated privileges 😭`))
+        log(
+          chalk.red(
+            `😭 Did server error: ${bind} requires elevated privileges 😭`
+          )
+        )
         log()
         process.exit(1)
       }
@@ -63,7 +67,7 @@ export async function startServer(port: string) {
   /**
    * On listening handler for the [http](https://www.npmjs.com/package/http)
    * server.
-   * 
+   *
    * @remarks If `NODE_ENV` is **development** and `SERVER_LISTENING_SOUND` is set,
    * a sound will be play when the server is listening. This can be helpful when
    * developing. But the *.mp3 files on the root server folder.
@@ -84,6 +88,4 @@ export async function startServer(port: string) {
 
 export * from './app'
 
-startServer(
-  environment('PORT', '9001')
-)
+startServer(environment('PORT', '9001'))
