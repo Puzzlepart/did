@@ -27,13 +27,11 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
