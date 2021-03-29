@@ -52,7 +52,7 @@ function getPluginsForEnvironment() {
     }),
     new LiveReloadPlugin(),
     new WebpackBuildNotifierPlugin({
-      logo: '/server/public/images/favicon/mstile-150x150.png',
+      logo: path.resolve('./server/public/images/favicon/apple-touch-icon.png'),
       sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
       suppressWarning: true,
       showDuration: true
