@@ -120,6 +120,17 @@ export class TimesheetService {
 
   /**
    * Submit period
+   * 
+   * Events for the period are fetched from 
+   * Microsoft Graph using `MSGraphService`. We
+   * then generate the period data (`ITimesheetPeriodData`),
+   * map the events to their corresponding projects based
+   * on `projectId` from the client. 
+   * 
+   * We add the period to the correct collection based on 
+   * if it's a forecast or an actual confirm. We embed the 
+   * events in the period document, as well as adding them 
+   * separetely to their corresponding time entry collection.
    *
    * @param parameters - Submit period params
    */
