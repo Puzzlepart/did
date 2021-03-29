@@ -37,7 +37,7 @@ jobs:
     - name: Install npm packages
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
+        npm install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund
 
     - name: Create package
       run: |
