@@ -142,8 +142,6 @@ export class TimesheetService {
         parameters.period.matchedEvents,
         events
       )
-      // eslint-disable-next-line no-console
-      console.log(parameters.period, hours)
       period.hours = hours
       period.events = getEvents(false)
       const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
