@@ -26,39 +26,38 @@ function getPluginsForEnvironment() {
     }),
     new webpack.DefinePlugin(DEFINITIONS)
   ]
-  if (IS_DEVELOPMENT) {
-    const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
-    const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
-    const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
-    const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
-    const { CustomCompileHooks } = require('./compileHooks')
-    plugins.push(
-      new ForkTsCheckerWebpackPlugin({
-        typescript: {
-          configFile: TSCONFIG_PATH,
-          profile: process.env.FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE === '1'
-        },
-        logger: { infrastructure: 'silent', issues: 'console' }
-      }),
-      new ForkTsCheckerNotifierWebpackPlugin({ skipSuccessful: true }),
-      new CustomCompileHooks({
-        url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
-        localtunnel: {
-          port: process.env.PORT || 9001,
-          subdomain: process.env.LOCALTUNNEL_SUBDOMAIN,
-          callback: '{0}/auth/azuread-openidconnect/callback'
-        },
-        launchBrowser: process.env.LAUNCH_BROWSER === '1'
-      }),
-      new LiveReloadPlugin(),
-      new WebpackBuildNotifierPlugin({
-        logo: '/server/public/images/favicon/mstile-150x150.png',
-        sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
-        suppressWarning: true,
-        showDuration: true
-      })
-    )
-  }
+  if (!IS_DEVELOPMENT) return plugins
+  const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
+  const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
+  const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
+  const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
+  const { CustomCompileHooks } = require('./compileHooks')
+  plugins.push(
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: TSCONFIG_PATH,
+        profile: process.env.FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE === '1'
+      },
+      logger: { infrastructure: 'silent', issues: 'console' }
+    }),
+    new ForkTsCheckerNotifierWebpackPlugin({ skipSuccessful: true }),
+    new CustomCompileHooks({
+      url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
+      localtunnel: {
+        port: process.env.PORT || 9001,
+        subdomain: process.env.LOCALTUNNEL_SUBDOMAIN,
+        callback: '{0}/auth/azuread-openidconnect/callback'
+      },
+      launchBrowser: process.env.LAUNCH_BROWSER === '1'
+    }),
+    new LiveReloadPlugin(),
+    new WebpackBuildNotifierPlugin({
+      logo: '/server/public/images/favicon/mstile-150x150.png',
+      sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
+      suppressWarning: true,
+      showDuration: true
+    })
+  )
   return plugins
 }
 exports.getPluginsForEnvironment = getPluginsForEnvironment

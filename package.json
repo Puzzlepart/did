@@ -429,5 +429,19 @@
       "⬆️",
       "Upgrade dependencies"
     ]
+  },
+  "terser": {
+    "parallel": true,
+    "extractComments": false,
+    "terserOptions": {
+      "mangle": true,
+      "keep_classnames": false,
+      "keep_fnames": true,
+      "ie8": false,
+      "safari10": false,
+      "format": {
+        "comments": false
+      }
+    }
   }
 }
