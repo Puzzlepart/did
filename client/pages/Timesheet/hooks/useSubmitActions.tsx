@@ -5,7 +5,7 @@ import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
 import $submitPeriod from './submitPeriod.gql'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 
-export type UseSubmitActionsHook = ReturnType<typeof useSubmitActions>
+export type UseSubmitActionsResult = ReturnType<typeof useSubmitActions>
 
 /**
  * Hook for Timesheet submit actions

@@ -53,10 +53,23 @@ export class TimesheetService {
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
+   * 
+   * Retrieves periods between `parameters.startDate`
+   * and `parameters.endDate` using `getPeriods`. Then
+   * retrieves project data using `getProjectsData` from
+   * `ProjectService`.
+   * 
+   * For each period we're checking both the confirmed periods
+   * and forecasted periods section for a entry. If a match is
+   * found for a confirmed period, this period with the events
+   * are returned. 
+   * 
+   * If no confirmed period is found, events are fetched from
+   * Microsoft Graph using `MSGraphService`
    *
    * @param params - Timesheet params
    */
@@ -92,8 +105,8 @@ export class TimesheetService {
         } else {
           const engine = new MatchingEngine(data)
           periods[index].events = await this._getEventsFromProvider({
-            ...periods[index],
             ...parameters,
+            ...periods[index],
             provider: this.context.provider,
             engine
           })
@@ -129,6 +142,8 @@ export class TimesheetService {
         parameters.period.matchedEvents,
         events
       )
+      // eslint-disable-next-line no-console
+      console.log(parameters.period, hours)
       period.hours = hours
       period.events = getEvents(false)
       const teSvc = parameters.forecast ? this._fteSvc : this._teSvc

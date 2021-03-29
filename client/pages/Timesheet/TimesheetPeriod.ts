@@ -79,6 +79,11 @@ export class TimesheetPeriod {
    * project/customer is set to null for the event
    *
    * @param event - Event object
+   * 
+   * @remarks A bit hacky this one, but it works for now.
+   * Should be refactored in the near future though. Probably
+   * using hooks or something similiar.
+   * 
    * @returns an extended event object
    *
    * @memberof TimesheetPeriod
@@ -127,7 +132,7 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Get ignored events
+   * Get ignored events for the period
    *
    * @memberof TimesheetPeriod
    */
