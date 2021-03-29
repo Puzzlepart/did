@@ -1,5 +1,5 @@
 import createDebug from 'debug'
-import { isBlank } from 'underscore.string'
+import s from 'underscore.string'
 const debug = createDebug('environment')
 
 type EnvironmentParseOptions = { splitBy?: string }
@@ -65,7 +65,7 @@ export function environment<T = string>(
   options: EnvironmentParseOptions = {}
 ): T {
   const value = process.env[key]
-  if (isBlank(value)) {
+  if (s.isBlank(value)) {
     debug(
       'Missing environment variable %s. Using %s instead.',
       key,

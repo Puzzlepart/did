@@ -1,7 +1,7 @@
 import { IColumn } from '@fluentui/react'
 import { ProjectTooltip } from 'components'
 import React from 'react'
-import { capitalize } from 'underscore.string'
+import s from 'underscore.string'
 import { TimesheetScope } from '../TimesheetScope'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
@@ -20,7 +20,7 @@ export function createColumns(scope: TimesheetScope): IColumn[] {
     return {
       key: day.format('YYYY-MM-DD'),
       fieldName: day.format('YYYY-MM-DD'),
-      name: capitalize(day.format('ddd DD')),
+      name: s.capitalize(day.format('ddd DD')),
       minWidth: 70,
       maxWidth: 70,
       onRender

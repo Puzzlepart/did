@@ -2,7 +2,7 @@
 import { KeyCodes } from '@fluentui/react'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
-import { find } from 'underscore'
+import _  from 'underscore'
 import {
   AutocompleteSelectCallback,
   IAutocompleteProps,
@@ -37,7 +37,7 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
       .addCase(INIT, (state, { payload }) => {
         state.items = payload.props.items
         state.suggestions = []
-        state.selectedItem = find(
+        state.selectedItem = _.find(
           state.items,
           (item) => item.key === payload.props.defaultSelectedKey
         )

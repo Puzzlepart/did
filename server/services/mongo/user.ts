@@ -3,7 +3,7 @@
 import { FilterQuery } from 'mongodb'
 import set from 'set-value'
 import { Inject, Service } from 'typedi'
-import { find, omit } from 'underscore'
+import _  from 'underscore'
 import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
@@ -38,7 +38,7 @@ export class UserService extends MongoDocumentService<User> {
    * @param user - User
    */
   private _replaceId<T>(user: User): T {
-    return ({ ...omit(user, 'id'), _id: user.id } as unknown) as T
+    return ({ ..._.omit(user, 'id'), _id: user.id } as unknown) as T
   }
 
   /**
@@ -55,7 +55,7 @@ export class UserService extends MongoDocumentService<User> {
       return users.map((user) => ({
         ...user,
         id: user['_id'],
-        role: find(roles, (role) => role.name === user.role),
+        role: _.find(roles, (role) => role.name === user.role),
         configuration: JSON.stringify(user.configuration)
       }))
     } catch (error) {

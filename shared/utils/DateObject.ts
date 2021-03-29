@@ -1,5 +1,5 @@
 import { Dayjs, OpUnitType } from 'dayjs'
-import { isEmpty, pick } from 'underscore'
+import _  from 'underscore'
 import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {
@@ -179,6 +179,6 @@ export class DateObject {
       year: DateUtils.getYear(this.$),
       monthName: this.format('MMMM')
     }
-    return isEmpty(include) ? dateObject : pick(dateObject, ...include)
+    return _.isEmpty(include) ? dateObject : _.pick(dateObject, ...include)
   }
 }

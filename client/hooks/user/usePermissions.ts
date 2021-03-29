@@ -4,7 +4,7 @@ import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getPermissions, IPermission, PermissionScope } from 'security'
-import { contains } from 'underscore'
+import _  from 'underscore'
 
 /**
  * Permissions hook that returns atuple of the available
@@ -30,7 +30,7 @@ export function usePermissions(
   let permissions = getPermissions(t)
 
   if (scopeIds) {
-    permissions = permissions.filter((perm) => contains(scopeIds, perm.id))
+    permissions = permissions.filter((perm) => _.contains(scopeIds, perm.id))
   }
 
   if (api) {

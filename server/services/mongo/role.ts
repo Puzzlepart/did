@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { Context } from '../../graphql/context'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
@@ -72,7 +72,7 @@ export class RoleService extends MongoDocumentService<Role> {
    */
   public async updateRole(role: Role): Promise<void> {
     try {
-      await this.collection.updateOne(pick(role, 'name'), role)
+      await this.collection.updateOne(_.pick(role, 'name'), role)
     } catch (error) {
       throw error
     }

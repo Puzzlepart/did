@@ -2,7 +2,7 @@
 import { ReportsContext } from 'pages'
 import { useContext, useMemo } from 'react'
 import { Project } from 'types'
-import { find } from 'underscore'
+import _  from 'underscore'
 import { firstPart } from '../../../../../shared/utils/firstPart'
 import { IWeekColumnProps } from './types'
 
@@ -41,7 +41,7 @@ export function useWeekColumn({
             if (!sum_.project[customerKey]) {
               sum_.project[customerKey] = {
                 hours: 0,
-                details: find(
+                details: _.find(
                   state.data.projects,
                   (p) => p.customerKey === customerKey
                 )

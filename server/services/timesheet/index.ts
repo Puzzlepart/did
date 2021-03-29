@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find } from 'underscore'
+import _  from 'underscore'
 import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'
@@ -299,8 +299,8 @@ export class TimesheetService {
     return events.map((event) => ({
       id: event._id,
       ...event,
-      project: find(projects, ({ _id }) => _id === event.projectId),
-      customer: find(
+      project: _.find(projects, ({ _id }) => _id === event.projectId),
+      customer: _.find(
         customers,
         ({ key }) => key === firstPart(event.projectId)
       ),

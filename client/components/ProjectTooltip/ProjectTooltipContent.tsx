@@ -4,7 +4,7 @@ import { SubText } from 'components/SubText'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 
@@ -26,7 +26,7 @@ export const ProjectTooltipContent: React.FC<IProjectTooltipProps> = ({
         </div>
       </div>
       <SubText text={project.description} />
-      {!isEmpty(project.labels) && (
+      {!_.isEmpty(project.labels) && (
         <div className={styles.labels}>
           {(project.labels as Label[]).map((label, index) => (
             <EntityLabel key={index} label={label} />

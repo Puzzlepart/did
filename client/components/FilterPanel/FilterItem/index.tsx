@@ -2,7 +2,7 @@
 import { Checkbox, SearchBox } from '@fluentui/react'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains, isBlank } from 'underscore.string'
+import s from 'underscore.string'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
 
@@ -17,9 +17,9 @@ export const FilterItem: React.FC<IFilterItemProps> = (props) => {
 
   const items = useMemo(() => {
     return props.filter.items.filter((item) =>
-      isBlank(searchTerm)
+      s.isBlank(searchTerm)
         ? true
-        : contains(item.value.toLowerCase(), searchTerm.toLowerCase())
+        : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
     )
   }, [searchTerm, props.filter.items])
 

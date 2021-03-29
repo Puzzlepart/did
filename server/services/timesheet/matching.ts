@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { findBestMatch } from 'string-similarity'
-import { contains, filter, find, first, isEmpty } from 'underscore'
+import _  from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
 import { ProjectMatch } from './types'
@@ -33,7 +33,7 @@ export default class TimesheetMatchingEngine {
       const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
       const { target } = bestMatch
-      const suggestion = first(
+      const suggestion =  _.first(
         customerProjects.filter((p) => p.key === target.toUpperCase())
       )
       return suggestion
@@ -53,7 +53,7 @@ export default class TimesheetMatchingEngine {
    * @param event - Event to check for ignore
    */
   private _findIgnore(event: EventObject) {
-    const ignoreCategory = find(
+    const ignoreCategory = _.find(
       event.categories,
       (c) => c.toLowerCase() === 'ignore'
     )
@@ -109,7 +109,7 @@ export default class TimesheetMatchingEngine {
    * @param categories - Categories
    */
   private _findLabels(categories: string[]) {
-    return filter(this._data.labels, (lbl) => contains(categories, lbl.name))
+    return _.filter(this._data.labels, (lbl) => _.contains(categories, lbl.name))
   }
 
   /**
@@ -135,14 +135,14 @@ export default class TimesheetMatchingEngine {
     const matches = this._findProjectMatches(srchString, categoriesString)
     let projectKey: string
 
-    if (!isEmpty(matches)) {
+    if (!_.isEmpty(matches)) {
       for (const match of matches) {
-        event.customer = find(
+        event.customer = _.find(
           this._data.customers,
           (c) => match.customerKey === c.key
         )
         if (event.customer) {
-          event.project = find(
+          event.project = _.find(
             this._data.projects,
             ({ _id }) => _id === match.id
           )
@@ -160,11 +160,12 @@ export default class TimesheetMatchingEngine {
     // We search the whole srchStr for match in non-strict/soft mode
     else {
       const softMatches = this._searchString(srchString, false)
-      event.project = find(
+      event.project = _.find(
         this._data.projects,
-        ({ _id }) => !!find(softMatches, (m) => m.id === _id)
+        // eslint-disable-next-line unicorn/prefer-array-some
+        ({ _id }) => !!_.find(softMatches, (m) => m.id === _id)
       )
-      event.customer = find(
+      event.customer = _.find(
         this._data.customers,
         ({ key }) => key === event.project?.customerKey
       )

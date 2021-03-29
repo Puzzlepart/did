@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
 
@@ -61,7 +61,7 @@ export class MongoDocumentService<T> {
   }
 
   /**
-   * Wrapper on find().toArray()
+   * Wrapper on _.find().toArray()
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
@@ -82,7 +82,7 @@ export class MongoDocumentService<T> {
    * @param documents_ - Documents
    */
   public insertMultiple(documents_: OptionalId<any>[]) {
-    if (isEmpty(documents_)) return
+    if (_.isEmpty(documents_)) return
     const documents = documents_.map((document_) => ({
       ...document_,
       createdAt: new Date(),

@@ -20,7 +20,7 @@ import timezonePlugin from 'dayjs/plugin/timezone'
 import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
-import { capitalize } from 'underscore.string'
+import s from 'underscore.string'
 import { DateObject } from './DateObject'
 import { DateWithTimezone, IDateUtils, TimeSpanStringOptions } from './types'
 
@@ -129,7 +129,7 @@ export class DateUtils {
     let startDateObject = new DateObject(start)
     const endDateObject = new DateObject(end)
     while (startDateObject.isBeforeOrSame(endDateObject)) {
-      days.push(capitalize(startDateObject.format(template)))
+      days.push(s.capitalize(startDateObject.format(template)))
       startDateObject = startDateObject.add('1d')
     }
     return days
@@ -197,7 +197,7 @@ export class DateUtils {
    * Get month names in a year
    */
   public getMonthNames(): string[] {
-    return $dayjs.months().map((m) => capitalize(m))
+    return $dayjs.months().map((m) => s.capitalize(m))
   }
 
   /**

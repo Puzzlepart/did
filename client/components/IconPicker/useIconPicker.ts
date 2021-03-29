@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { ISuggestionItem } from 'components/Autocomplete'
 import { useFabricIcons } from 'hooks'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import { IIconPickerProps } from './types'
 
 /**
@@ -32,7 +32,7 @@ export function useIconPicker(props: IIconPickerProps) {
     if (model && name) model.set(name, item.data)
   }
 
-  return omit(
+  return _.omit(
     {
       ...props,
       items,

@@ -2,7 +2,7 @@
 import { format, IColumn } from '@fluentui/react'
 import { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'
-import { isArray } from 'underscore'
+import _  from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 
 interface IUseExcelExportOptions {
@@ -27,7 +27,7 @@ export function useExcelExport({
 
   const onExport = async () => {
     const blob = await exportExcel(items, {
-      columns: isArray(columns) ? columns : columns(t),
+      columns: _.isArray(columns) ? columns : columns(t),
       fileName: format(fileName, new Date().toDateString().split(' ').join('-'))
     })
     if (callback) {

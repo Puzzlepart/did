@@ -10,7 +10,7 @@ import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { useTimesheetContext } from '../../context'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { IgnoreEventButton } from './IgnoreEventButton'
@@ -87,7 +87,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
           <div className={styles.link}>
             <ProjectLink project={event.project} />
           </div>
-          {!isEmpty(event.project.labels) && (
+          {!_.isEmpty(event.project.labels) && (
             <Icon iconName='Tag' className={styles.labelIcon} />
           )}
           {event.manualMatch && !state.selectedPeriod.isConfirmed && (

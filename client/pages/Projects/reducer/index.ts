@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit'
 import copy from 'fast-copy'
-import { find } from 'underscore'
+import _  from 'underscore'
 import {
   CHANGE_DETAILS_TAB,
   CHANGE_VIEW,
@@ -23,13 +23,13 @@ export default ({ url: parameters }: IProjectsReducerParameters) =>
         state.outlookCategories = payload.data.outlookCategories
         state.projects = payload.data.projects.map((p) => {
           const _p = copy(p)
-          _p.outlookCategory = find(
+          _p.outlookCategory = _.find(
             state.outlookCategories,
             (c) => c.displayName === p.tag
           )
           return _p
         })
-        state.selected = find(state.projects, (p) =>
+        state.selected = _.find(state.projects, (p) =>
           JSON.stringify(parameters).toLowerCase().includes(p.tag.toLowerCase())
         )
       }

@@ -2,7 +2,7 @@
 import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import styles from './IconText.module.scss'
 import { IIconTextProps } from './types'
 
@@ -14,7 +14,7 @@ import { IIconTextProps } from './types'
 export const IconText: ReusableComponent<IIconTextProps> = (props) => {
   return (
     <div className={styles.root}>
-      <Icon {...omit(props, 'text')} iconName={props.iconName || 'Page'} />
+      <Icon {..._.omit(props, 'text')} iconName={props.iconName || 'Page'} />
       <span style={{ marginLeft: 6, verticalAlign: 'top' }}>{props.text}</span>
     </div>
   )

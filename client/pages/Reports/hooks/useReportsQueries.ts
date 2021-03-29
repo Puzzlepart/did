@@ -5,7 +5,7 @@ import { TFunction } from 'i18next'
 import { useMemo } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { capitalize } from 'underscore.string'
+import s from 'underscore.string'
 import { IReportsQuery } from '../types'
 import report_current_month from './queries/report-current-month.gql'
 import report_current_year from './queries/report-current-year.gql'
@@ -38,7 +38,7 @@ export function lastMonthQuery(
     }),
     itemIcon: 'CalendarDay',
     query,
-    exportFileName: `TimeEntries-${capitalize(monthName)}-{0}.xlsx`
+    exportFileName: `TimeEntries-${s.capitalize(monthName)}-{0}.xlsx`
   } as IReportsQuery
 }
 
@@ -66,7 +66,7 @@ export function currentMonthQuery(
     }),
     itemIcon: 'Calendar',
     query,
-    exportFileName: `TimeEntries-${capitalize(monthName)}-{0}.xlsx`
+    exportFileName: `TimeEntries-${s.capitalize(monthName)}-{0}.xlsx`
   } as IReportsQuery
 }
 

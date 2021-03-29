@@ -4,7 +4,7 @@ global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { sortBy } from 'underscore'
+import _  from 'underscore'
 import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
@@ -123,7 +123,7 @@ class MSGraphService {
             ])
             .top(999)
             .get()
-          const users = sortBy(value, 'displayName')
+          const users = _.sortBy(value, 'displayName')
           return users
         },
         { key: 'getusers' }

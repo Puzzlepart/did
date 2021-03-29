@@ -1,5 +1,5 @@
 import createDebug from 'debug'
-import { isEmpty, isEqual, pick } from 'underscore'
+import _  from 'underscore'
 import { User } from '../../../graphql'
 import { MSGraphService, UserService } from '../../../services'
 import MSOAuthService from '../../../services/msoauth'
@@ -17,7 +17,7 @@ export async function synchronizeUserProfile(
   userSvc: UserService
 ): Promise<void> {
   const { properties, syncUserPhoto } = user?.subscription?.settings?.adsync
-  if (isEmpty(properties)) {
+  if (_.isEmpty(properties)) {
     debug(
       'User profile synchronization is turned on, but no properties are selected.'
     )
@@ -27,11 +27,11 @@ export async function synchronizeUserProfile(
     msgraphSrv.getCurrentUser(properties),
     msgraphSrv.getUserPhoto('48x48')
   ])
-  const needSync = !isEqual(pick(user, [...properties, 'photo']), {
+  const needSync = !_.isEqual(_.pick(user, [...properties, 'photo']), {
     photo: {
       base64: photoBase64
     },
-    ...pick(data, [...properties, 'photo'])
+    ..._.pick(data, [...properties, 'photo'])
   })
   if (syncUserPhoto) {
     user.photo = {
@@ -47,8 +47,8 @@ export async function synchronizeUserProfile(
     properties.join(', ')
   )
   await userSvc.updateUser({
-    ...pick(user, 'id', 'photo'),
-    ...pick(data, [...properties, 'photo'])
+    ..._.pick(user, 'id', 'photo'),
+    ..._.pick(data, [...properties, 'photo'])
   })
   debug('User profile properties synchronized from Azure AD.')
 }

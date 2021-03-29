@@ -3,7 +3,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { filter, isArray } from 'underscore'
+import _  from 'underscore'
 import { Context } from '../graphql/context'
 import { redisMiddlware } from '../middleware/redis'
 const log = require('debug')('server/services/cache')
@@ -52,7 +52,7 @@ export class CacheService {
    * @param scope - Cache scope
    */
   private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope) {
-    key = isArray(key) ? filter(key, (k) => !!k) : [key]
+    key = _.isArray(key) ? _.filter(key, (k) => !!k) : [key]
     return [
       this.prefix,
       ...key,

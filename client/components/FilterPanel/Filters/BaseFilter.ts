@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 import { getValue as get } from 'helpers'
-import { contains } from 'underscore'
+import _  from 'underscore'
 import { IFilter, IFilterItem } from './types'
 
 /**
@@ -37,7 +37,7 @@ export class BaseFilter {
       name: this.name,
       items: filterItems,
       selected: filterItems.filter((item) =>
-        contains(this.selectedKeys, item.key)
+        _.contains(this.selectedKeys, item.key)
       )
     }
   }

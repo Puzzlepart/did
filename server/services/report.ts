@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
-import { find, first, omit, pick } from 'underscore'
+import _  from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/DateObject'
 import { Context } from '../graphql/context'
@@ -104,20 +104,20 @@ export class ReportService {
       .reduce((timeEntries_, entry) => {
         if (!entry.projectId) return timeEntries_
         const resource = users
-          ? find(users, (user) => user.id === entry.userId)
+          ? _.find(users, (user) => user.id === entry.userId)
           : {}
-        const project = find(projects, ({ _id }) => _id === entry.projectId)
-        const customer = find(
+        const project = _.find(projects, ({ _id }) => _id === entry.projectId)
+        const customer = _.find(
           customers,
-          (c) => c.key === first(entry.projectId.split(' '))
+          (c) => c.key ===  _.first(entry.projectId.split(' '))
         )
         if (project && customer && resource) {
           return [
             ...timeEntries_,
             {
-              ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
-              project: pick(project, 'tag', 'name', 'description', 'icon'),
-              customer: pick(customer, 'key', 'name', 'description', 'icon'),
+              ..._.omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
+              project: _.pick(project, 'tag', 'name', 'description', 'icon'),
+              customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
               resource
             }
           ]
@@ -148,7 +148,7 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const query_ = omit(
+      const query_ = _.omit(
         {
           ...this._generatePresetQuery(preset),
           ...query

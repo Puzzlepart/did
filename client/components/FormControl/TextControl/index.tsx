@@ -4,7 +4,7 @@
 import { TextField } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { ITextControlProps } from './types'
 import { useTextControlChange } from './useTextControlChange'
 
@@ -17,7 +17,7 @@ import { useTextControlChange } from './useTextControlChange'
 export const TextControl: ReusableComponent<ITextControlProps> = (props) => {
   const onChange = useTextControlChange(props)
   return (
-    <div {...pick(props, 'hidden')}>
+    <div {..._.pick(props, 'hidden')}>
       <TextField
         {...props}
         onChange={onChange}

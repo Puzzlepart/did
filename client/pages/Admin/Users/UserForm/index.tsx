@@ -1,7 +1,7 @@
 import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
 import { Autocomplete } from 'components'
 import React from 'react'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
@@ -21,7 +21,7 @@ export const UserForm: React.FC<IUserFormProps> = (props) => {
 
   return (
     <Panel
-      {...omit(props, 'user')}
+      {..._.omit(props, 'user')}
       className={styles.root}
       isLightDismiss={true}>
       {!props.user && (

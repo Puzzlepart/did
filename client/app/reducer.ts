@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 import { IAppState } from './types'
 
@@ -34,7 +34,7 @@ export default function useAppReducer(initialState: IAppState) {
             const keys = Object.keys(nav).filter(
               (l) => Number.parseInt(l) <= item.level
             )
-            state.nav = pick(nav, keys)
+            state.nav = _.pick(nav, keys)
           })
           .addCase(PAGE_NAVIGATE, (state) => {
             state.nav = null

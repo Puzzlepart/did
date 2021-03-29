@@ -3,7 +3,7 @@ import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isBlank } from 'underscore.string'
+import s from 'underscore.string'
 import { getContrastColor } from 'utils'
 import styles from './EntityLabel.module.scss'
 import { IEntityLabelProps } from './types'
@@ -39,7 +39,7 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
         />
       )}
       <span style={{ color: contrastColor }}>
-        {isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}
+        {s.isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}
       </span>
     </div>
   )

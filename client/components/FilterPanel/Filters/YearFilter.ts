@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { unique } from 'underscore'
+import _  from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
 
@@ -24,7 +24,7 @@ export class YearFilter extends BaseFilter {
    * @param items - Items
    */
   public initialize(items: any[]): IFilter {
-    const years = unique(
+    const years = _.unique(
       items.map((item_) => getValue(item_, this.keyFieldName, null))
     ).sort()
     const _items = years.map((year) => ({

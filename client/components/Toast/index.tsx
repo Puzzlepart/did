@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import { UserMessage } from '../UserMessage'
 import styles from './Toast.module.scss'
 import { IToastProps } from './types'
@@ -19,7 +19,7 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
   return (
     <div className={styles.root}>
       <UserMessage
-        {...omit(props, 'hidden')}
+        {..._.omit(props, 'hidden')}
         styles={{ root: { padding: '20px 25px' } }}
         className={styles.message}
         containerStyle={{ maxWidth: 550, lineHeight: 20 }}

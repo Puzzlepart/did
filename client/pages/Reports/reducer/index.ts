@@ -1,6 +1,6 @@
 import { createReducer, current } from '@reduxjs/toolkit'
 import { getValue } from 'helpers'
-import { filter, find, omit } from 'underscore'
+import _  from 'underscore'
 import { IReportsState } from '../types'
 import {
   ADD_FILTER,
@@ -29,9 +29,9 @@ export default ({ initialState, queries }) =>
       })
       .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any
-        state.subset = filter(state.data?.timeEntries, (entry) => {
+        state.subset = _.filter(state.data?.timeEntries, (entry) => {
           return (
-            filter(Object.keys(payload.filter.values), (key) => {
+            _.filter(Object.keys(payload.filter.values), (key) => {
               return payload.filter.values[key].includes(
                 getValue(entry, key, '')
               )
@@ -53,7 +53,7 @@ export default ({ initialState, queries }) =>
         state.filter = newFilter
       })
       .addCase(REMOVE_SELECTED_FILTER, (state) => {
-        state.savedFilters = omit(state.savedFilters, state.filter.key)
+        state.savedFilters = _.omit(state.savedFilters, state.filter.key)
         state.filter = null
         state.subset = state.data?.timeEntries
         state.isFiltered = false
@@ -72,9 +72,9 @@ export default ({ initialState, queries }) =>
             {}
           )
         }
-        state.subset = filter(state.data?.timeEntries, (entry) => {
+        state.subset = _.filter(state.data?.timeEntries, (entry) => {
           return (
-            filter(payload.filters, (f) => {
+            _.filter(payload.filters, (f) => {
               const selectedKeys = f.selected.map((s) => s.key)
               return selectedKeys.includes(getValue(entry, f.key, ''))
             }).length === payload.filters.length
@@ -87,7 +87,7 @@ export default ({ initialState, queries }) =>
         state.groupBy = payload.groupBy
       })
       .addCase(CHANGE_QUERY, (state, { payload }) => {
-        state.preset = find(
+        state.preset = _.find(
           queries,
           (q) => q.itemKey === payload?.itemKey
         ) as any

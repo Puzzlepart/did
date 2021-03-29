@@ -5,7 +5,7 @@ import { useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { TimesheetPeriodObject } from 'types'
-import { find, first, isEmpty, last } from 'underscore'
+import _  from 'underscore'
 import {
   ITimesheetParameters,
   ITimesheetState,
@@ -48,7 +48,7 @@ interface ITimesheetReducerParameters {
  */
 const initState = (url: ITimesheetParameters): ITimesheetState => ({
   periods: [],
-  scope: isEmpty(Object.keys(url))
+  scope: _.isEmpty(Object.keys(url))
     ? new TimesheetScope()
     : new TimesheetScope().fromParams(url),
   selectedView: url.view || 'overview',
@@ -76,12 +76,12 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
             (period: TimesheetPeriodObject) =>
               new TimesheetPeriod().initialize(period)
           )
-          const lastNav = last(state.navHistory)
+          const lastNav = _.last(state.navHistory)
           state.selectedPeriod =
-            find(state.periods, (p) => p.id === selectedPeriodId) ||
+            _.find(state.periods, (p) => p.id === selectedPeriodId) ||
             (lastNav === 'PREVIOUS_PERIOD'
-              ? last(state.periods)
-              : first(state.periods))
+              ? _.last(state.periods)
+              :  _.first(state.periods))
         }
         state.error = payload.query.error
       })
@@ -116,7 +116,7 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
             }
       })
       .addCase(CHANGE_PERIOD, (state, { payload }) => {
-        state.selectedPeriod = find(
+        state.selectedPeriod = _.find(
           state.periods,
           (p: TimesheetPeriod) => p.id === payload.id
         )
@@ -128,7 +128,7 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
         if (state.periods.length === 1 || index === 0) {
           state.scope = state.scope.set('-1w')
         } else {
-          state.selectedPeriod = find(
+          state.selectedPeriod = _.find(
             periods,
             (p: TimesheetPeriod) => p.id !== selectedPeriod.id
           )
@@ -141,7 +141,7 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
         if (state.periods.length === 1 || index === 1) {
           state.scope = state.scope.set('1w')
         } else {
-          state.selectedPeriod = find(
+          state.selectedPeriod = _.find(
             periods,
             (p: TimesheetPeriod) => p.id !== selectedPeriod.id
           )

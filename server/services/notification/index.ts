@@ -4,7 +4,7 @@
 import get from 'get-value'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { any } from 'underscore'
+import _  from 'underscore'
 import { ConfirmedPeriodsService, ForecastedPeriodsService } from '..'
 import { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
@@ -74,7 +74,7 @@ export class NotificationService {
     })
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      const isConfirmed = any(confirmedPeriods, ({ _id }) => _id === period._id)
+      const isConfirmed = _.any(confirmedPeriods, ({ _id }) => _id === period._id)
       if (!isConfirmed) $.push(period)
       return $
     }, [])
@@ -110,7 +110,7 @@ export class NotificationService {
     })
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      const isForecasted = any(
+      const isForecasted = _.any(
         forecastedPeriods,
         ({ _id }) => _id === period._id
       )

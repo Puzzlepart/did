@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { unique } from 'underscore'
+import _  from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
 
@@ -25,7 +25,7 @@ export class WeekFilter extends BaseFilter {
    * @param items - Items
    */
   public initialize(items: any[]): IFilter {
-    const weeks = unique(
+    const weeks = _.unique(
       items.map((item_) => getValue(item_, this.keyFieldName, null))
     ).sort((a, b) => a - b)
     const _items = weeks.map((week) => ({

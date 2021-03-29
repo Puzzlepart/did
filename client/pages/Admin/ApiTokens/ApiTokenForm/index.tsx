@@ -3,8 +3,8 @@ import { FormControl } from 'components/FormControl'
 import { DateObject } from 'DateUtils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
-import { isBlank } from 'underscore.string'
+import _  from 'underscore'
+import s from 'underscore.string'
 import { PermissionsControl } from './PermissionsControl'
 import { IApiTokenFormProps } from './types'
 import { useApiTokenForm } from './useApiTokenForm'
@@ -29,7 +29,7 @@ export const ApiTokenForm = ({
         text: t('common.save'),
         onClick: onAddApiToken,
         disabled:
-          isBlank(token.name) || !token.expires || isEmpty(token.permissions)
+          s.isBlank(token.name) || !token.expires || _.isEmpty(token.permissions)
       }}
       panelProps={{
         headerText: t('admin.apiTokens.addNew'),

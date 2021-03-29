@@ -14,7 +14,7 @@ import createError from 'http-errors'
 import { MongoClient } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { setupGraphQL } from './graphql'
 import {
   helmetMiddleware,
@@ -183,7 +183,7 @@ export class App {
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
         response.render('index', {
-          error: JSON.stringify(pick(error, 'name', 'message', 'status'))
+          error: JSON.stringify(_.pick(error, 'name', 'message', 'status'))
         })
       }
     )

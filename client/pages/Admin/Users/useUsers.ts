@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { ISpinnerProps } from '@fluentui/react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { any, filter, omit } from 'underscore'
+import _  from 'underscore'
 import { IAddMultiplePanel } from './AddMultiplePanel'
 import $addUsers from './addUsers.gql'
 import { IUsersContext } from './context'
@@ -35,9 +35,9 @@ export function useUsers() {
     [query.data]
   )
 
-  context.activeDirectoryUsers = filter(
+  context.activeDirectoryUsers = _.filter(
     context.activeDirectoryUsers,
-    (x) => !any(context.users, (y) => y.id === x.id)
+    (x) => !_.any(context.users, (y) => y.id === x.id)
   )
 
   /**
@@ -54,7 +54,7 @@ export function useUsers() {
     await addUsers({
       variables: {
         users: users.map((u) => ({
-          ...omit(u, '__typename'),
+          ..._.omit(u, '__typename'),
           provider: 'azuread-openidconnect'
         }))
       }

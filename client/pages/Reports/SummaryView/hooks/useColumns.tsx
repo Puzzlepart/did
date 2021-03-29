@@ -10,7 +10,7 @@ import $date from 'DateUtils'
 import React, { useContext, useMemo } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { first } from 'underscore'
+import _  from 'underscore'
 import { ReportsContext } from '../../context'
 import { ColumnHeader } from '../ColumnHeader'
 import { WeekColumn } from '../WeekColumn'
@@ -32,7 +32,7 @@ export function useColumns(): IListColumn[] {
       ...periods.map((period) => {
         const key = period.join('_')
         const [week, year] = period
-        const name = t('common.weekColumnTooltipTitle', { week: first(period) })
+        const name = t('common.weekColumnTooltipTitle', { week:  _.first(period) })
         const data: IListColumnData = {}
         data.subText = $date.getTimespanString({
           week,

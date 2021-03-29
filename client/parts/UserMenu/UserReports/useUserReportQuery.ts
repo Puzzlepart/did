@@ -2,7 +2,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
-import { unique } from 'underscore'
+import _  from 'underscore'
 import { getSum } from 'utils/getSum'
 import { default_query } from './queries'
 
@@ -25,7 +25,7 @@ export function useUserReportQuery({ preset }) {
       loading,
       preset: (preset?.text || '').toLowerCase(),
       hours: getSum(data_, 'duration'),
-      projects: unique(data_, (t) => t.project?.name).length
+      projects: _.unique(data_, (t) => t.project?.name).length
     }),
     [data_]
   )

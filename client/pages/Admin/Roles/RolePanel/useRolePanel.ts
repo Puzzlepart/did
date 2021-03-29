@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { usePermissions } from 'hooks'
 import { useEffect, useState } from 'react'
 import { RoleInput } from 'types'
-import { isEmpty, isEqual, omit } from 'underscore'
+import _  from 'underscore'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
 import $deleteRole from './deleteRole.gql'
 import $users from './users.gql'
@@ -21,9 +21,9 @@ export function useRolePanel({ props }) {
   const [model, setModel] = useState<RoleInput>({})
   const [permissions] = usePermissions()
   const saveDisabled =
-    isEmpty(model.name) ||
-    isEmpty(model.icon) ||
-    isEqual(model.permissions, props.model?.permissions)
+    _.isEmpty(model.name) ||
+    _.isEmpty(model.icon) ||
+    _.isEqual(model.permissions, props.model?.permissions)
 
   useEffect(() => {
     if (props.model) setModel(props.model)
@@ -49,7 +49,7 @@ export function useRolePanel({ props }) {
   async function onSave() {
     await addOrUpdateRole({
       variables: {
-        role: omit(model, '__typename'),
+        role: _.omit(model, '__typename'),
         update: !!props.model
       }
     })

@@ -1,4 +1,4 @@
-import { contains } from 'underscore'
+import _  from 'underscore'
 import { IProjectsParameters, IProjectsState } from '../types'
 
 /**
@@ -7,7 +7,7 @@ import { IProjectsParameters, IProjectsState } from '../types'
  * @param url - Params
  */
 export const initState = (url: IProjectsParameters): IProjectsState => ({
-  view: contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
+  view: _.contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
   detailsTab: url.detailsTab,
   projects: [],
   outlookCategories: []

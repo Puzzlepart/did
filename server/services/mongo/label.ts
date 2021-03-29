@@ -6,7 +6,7 @@ import {
   WithId
 } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { Context } from '../../graphql/context'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
@@ -77,7 +77,7 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
-      await this.update(pick(label, 'name'), label)
+      await this.update(_.pick(label, 'name'), label)
     } catch (error) {
       throw error
     }

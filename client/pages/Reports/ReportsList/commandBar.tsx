@@ -4,7 +4,7 @@ import {
   IContextualMenuItem
 } from '@fluentui/react'
 import React from 'react'
-import { isEmpty, omit } from 'underscore'
+import _  from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import { IReportsContext } from '../context'
 import {
@@ -128,7 +128,7 @@ const saveFilterCmd = ({
         ...Object.keys(state.savedFilters).map((key) => {
           const filter = state.savedFilters[key]
           return {
-            ...(omit(filter, 'values') as IContextualMenuItem),
+            ...(_.omit(filter, 'values') as IContextualMenuItem),
             canCheck: true,
             checked: filter.text === state.filter?.text,
             onClick: () => dispatch(SET_FILTER({ filter }))
@@ -147,7 +147,7 @@ export default (context: IReportsContext) => ({
     !!context.state.preset && !context.state.loading
       ? [
           exportToExcelCmd(context),
-          !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
+          !_.isEmpty(context.state.savedFilters) && saveFilterCmd(context),
           openFilterPanelCmd(context),
           clearFiltersCmd(context)
         ].filter((index) => index)

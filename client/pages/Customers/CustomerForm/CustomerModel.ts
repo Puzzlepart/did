@@ -1,5 +1,5 @@
 import { Customer } from 'types'
-import { keys, pick } from 'underscore'
+import _  from 'underscore'
 
 export class CustomerModel {
   constructor(
@@ -21,7 +21,7 @@ export class CustomerModel {
    * @returns this
    */
   init?(customer: Customer): CustomerModel {
-    Object.assign(this, pick(customer, keys(this)))
+    Object.assign(this, _.pick(customer, _.keys(this)))
     return this
   }
 }

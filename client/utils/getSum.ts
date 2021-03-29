@@ -1,5 +1,5 @@
 import { getValue } from 'helpers'
-import { reduce } from 'underscore'
+import _  from 'underscore'
 
 type Item = { [key: string]: any }
 
@@ -10,7 +10,7 @@ type Item = { [key: string]: any }
  * @param property - Property key
  */
 export function getSum(items: Item[], property: string): number {
-  return reduce(
+  return _.reduce(
     items,
     (memo, item) => (memo += getValue<number>(item, property, 0)),
     0

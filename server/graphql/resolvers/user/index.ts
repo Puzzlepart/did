@@ -6,7 +6,7 @@ import 'reflect-metadata'
 import Format from 'string-format'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { omit, pick } from 'underscore'
+import _  from 'underscore'
 import { PermissionScope } from '../../../../shared/config/security'
 import {
   MSGraphService,
@@ -75,7 +75,7 @@ export class UserResolver {
     if (!user) return null
     return {
       ...user,
-      subscription: pick(context.subscription, 'id', 'name', 'owner')
+      subscription: _.pick(context.subscription, 'id', 'name', 'owner')
     }
   }
 
@@ -183,7 +183,7 @@ export class UserResolver {
       const { token } = (await auth({ type: 'installation' })) as any
 
       const issue = {
-        ...omit(feedback, 'reporter'),
+        ..._.omit(feedback, 'reporter'),
         title: `${feedback.title} ${feedback.mood}`,
         body: feedback.body,
         labels: feedback.labels || []

@@ -4,7 +4,7 @@ import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { useTimesheetContext } from '../context'
 
 /**
@@ -66,7 +66,7 @@ export function useMessages(): IUserMessageProps[] {
     })
   }
   if (
-    !isEmpty(state.selectedPeriod.ignoredEvents) &&
+    !_.isEmpty(state.selectedPeriod.ignoredEvents) &&
     !state.selectedPeriod.isConfirmed
   ) {
     messages.push({
@@ -86,7 +86,7 @@ export function useMessages(): IUserMessageProps[] {
       type: 'warning'
     })
   }
-  if (!isEmpty(state.selectedPeriod.errors)) {
+  if (!_.isEmpty(state.selectedPeriod.errors)) {
     messages.push({
       id: 'unresolvederror',
       type: 'severeWarning',

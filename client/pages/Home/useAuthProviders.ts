@@ -2,7 +2,7 @@
 import { IButtonProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
-import { pick } from 'underscore'
+import _  from 'underscore'
 
 /**
  * Get auth providers
@@ -22,5 +22,5 @@ export function useAuthProviders(): Record<string, IButtonProps> {
       iconProps: { iconName: 'Mail' }
     }
   }
-  return pick(authProviders, context.authProviders)
+  return _.pick(authProviders, context.authProviders)
 }

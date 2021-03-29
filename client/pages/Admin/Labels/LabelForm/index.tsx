@@ -7,7 +7,7 @@ import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import { IconPicker } from 'components/IconPicker'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import { ILabelFormProps } from './types'
 import { useLabelForm } from './useLabelForm'
 
@@ -18,7 +18,7 @@ export const LabelForm: React.FC<ILabelFormProps> = (props) => {
     <FormControl
       submitProps={submit}
       panelProps={{
-        ...omit(props, 'onSave'),
+        ..._.omit(props, 'onSave'),
         headerText: !!props.edit
           ? t('admin.editLabel')
           : t('admin.addNewLabel'),

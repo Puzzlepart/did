@@ -3,7 +3,7 @@
 import { Dropdown } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { IDropdownControlProps } from './types'
 
 /**
@@ -15,7 +15,7 @@ export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
   props
 ) => {
   return (
-    <div {...pick(props, 'hidden')}>
+    <div {..._.pick(props, 'hidden')}>
       <Dropdown
         {...props}
         onChange={(_event, option) => {

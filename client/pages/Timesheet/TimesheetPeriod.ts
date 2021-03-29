@@ -9,7 +9,7 @@ import {
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
-import { filter, omit, pick } from 'underscore'
+import _  from 'underscore'
 import { BrowserStorage } from 'utils'
 
 /**
@@ -142,7 +142,7 @@ export class TimesheetPeriod {
    */
   public get errors(): any[] {
     if (!this.getEvents) return []
-    return filter(this.getEvents(), (event) => !!event.error).map(
+    return _.filter(this.getEvents(), (event) => !!event.error).map(
       (event) => event.error
     )
   }
@@ -162,7 +162,7 @@ export class TimesheetPeriod {
    * @memberof TimesheetPeriod
    */
   public get matchedDuration(): number {
-    return filter(this.getEvents(), (event) => !!event.project).reduce(
+    return _.filter(this.getEvents(), (event) => !!event.project).reduce(
       (sum, event) => sum + event.duration,
       0
     )
@@ -199,7 +199,7 @@ export class TimesheetPeriod {
    * @memberof TimesheetPeriod
    */
   public clearManualMatch(eventId: string) {
-    this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
+    this._uiMatchedEvents = _.omit(this._uiMatchedEvents, eventId)
     this._uiMatchedEventsStorage.set(this._uiMatchedEvents)
   }
 
@@ -231,7 +231,7 @@ export class TimesheetPeriod {
    * @memberof TimesheetPeriod
    */
   public get matchedEvents(): EventInput[] {
-    const events = filter(
+    const events = _.filter(
       [...this.getEvents()],
       (event) => !!event.project
     ).map(
@@ -255,7 +255,7 @@ export class TimesheetPeriod {
    * @memberof TimesheetPeriod
    */
   public get data(): TimesheetPeriodInput {
-    return pick(
+    return _.pick(
       this as any,
       'id',
       'startDate',

@@ -1,7 +1,7 @@
 import { useAppContext } from 'AppContext'
 import { useMap } from 'hooks'
 import { UserFeedback } from 'types'
-import { pick } from 'underscore'
+import _  from 'underscore'
 import { toMap } from 'utils'
 import { useMoodOptions } from './useMoodOptions'
 import { useTypeOptions } from './useTypeOptions'
@@ -15,7 +15,7 @@ const INITIAL_MODEL = {
 
 export const useFeedbackModel = () => {
   const { user } = useAppContext()
-  const reporter = pick(user, 'displayName', 'mail')
+  const reporter = _.pick(user, 'displayName', 'mail')
   const modelWithReporter: Map<any, any> = toMap({
     ...INITIAL_MODEL,
     reporter

@@ -23,7 +23,7 @@ import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
 import UAParser from 'ua-parser-js'
-import { find, isEmpty, pick } from 'underscore'
+import _  from 'underscore'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import resolvers from './resolvers'
@@ -77,19 +77,19 @@ export function generateClientInfo({
   request
 }: GraphQLRequestContext<Context>) {
   const userAgent = request.http.headers.get('user-agent') || ''
-  if (isEmpty(userAgent)) return null
+  if (_.isEmpty(userAgent)) return null
   if (userAgent.indexOf('PostmanRuntime') === 0) {
     const [, clientVersion] = userAgent.split('/')
     return { clientName: 'Postman Runtime', clientVersion }
   }
   const parts = userAgent.split(' ')
   if (userAgent.includes('microsoft-flow')) {
-    const part = find(parts, (p) => p.includes('microsoft-flow'))
+    const part = _.find(parts, (p) => p.includes('microsoft-flow'))
     const [, clientVersion] = part.split('/')
     return { clientName: 'Microsoft Flow', clientVersion }
   }
   if (userAgent.includes('azure-logic-apps')) {
-    const part = find(parts, (p) => p.includes('azure-logic-apps'))
+    const part = _.find(parts, (p) => p.includes('azure-logic-apps'))
     const [, clientVersion] = part.split('/')
     return { clientName: 'Azure Logic Apps', clientVersion }
   }
@@ -128,7 +128,7 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
-      formatError: (error) => pick(error, 'message'),
+      formatError: (error) => _.pick(error, 'message'),
       context: ({ req }) => createContext(req, client),
       plugins: [
         ApolloServerPluginUsageReporting({

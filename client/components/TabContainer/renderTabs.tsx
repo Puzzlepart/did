@@ -4,7 +4,7 @@
 import { PivotItem } from '@fluentui/react'
 import { ContextUser } from 'AppContext'
 import React, { JSXElementConstructor, ReactElement } from 'react'
-import { isArray } from 'underscore'
+import _  from 'underscore'
 import { ITabItemProps } from './types'
 
 type RenderTabs = {
@@ -18,7 +18,7 @@ type RenderTabs = {
  */
 export function renderTabs({ tabs, props, user }: RenderTabs) {
   return tabs.map((item: ReactElement) => {
-    if (isArray(item)) return renderTabs({ tabs: item, props, user })
+    if (_.isArray(item)) return renderTabs({ tabs: item, props, user })
     if (item.props.hidden) return null
     if (item.props.permission && !user.hasPermission(item.props.permission)) {
       return null

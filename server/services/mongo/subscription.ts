@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Inject, Service } from 'typedi'
-import { omit } from 'underscore'
+import _  from 'underscore'
 import { Context } from '../../graphql/context'
 import {
   Subscription,
@@ -38,7 +38,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   private _replaceId<T>(subscription: Subscription): T {
     return ({
-      ...omit(subscription, 'id'),
+      ..._.omit(subscription, 'id'),
       _id: subscription.id
     } as unknown) as T
   }

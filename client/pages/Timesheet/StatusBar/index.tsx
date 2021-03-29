@@ -4,7 +4,7 @@ import { IUserMessageProps, UserMessage } from 'components/UserMessage'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { useTimesheetContext } from '../context'
 import styles from './StatusBar.module.scss'
 import { useMessages } from './useMessages'
@@ -25,11 +25,11 @@ export const StatusBar: React.FC = () => {
 
   return (
     <FadeIn>
-      <div className={styles.root} hidden={isEmpty(messages)}>
+      <div className={styles.root} hidden={_.isEmpty(messages)}>
         {state.loading ? (
           <Progress {...state.loading} />
         ) : (
-          <div className={styles.container} hidden={isEmpty(messages)}>
+          <div className={styles.container} hidden={_.isEmpty(messages)}>
             {messages.map((message, key) => (
               <UserMessage key={key} {...defaultMessageProps} {...message} />
             ))}

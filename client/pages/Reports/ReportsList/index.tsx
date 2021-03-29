@@ -6,7 +6,7 @@ import $date from 'DateUtils'
 import React, { useContext } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import _  from 'underscore'
 import { ReportsContext } from '../context'
 import commandBar from './commandBar'
 import { useColumns } from './useColumns'
@@ -50,7 +50,7 @@ export const ReportsList: TabComponent = () => {
       />
       <UserMessage
         hidden={
-          !isEmpty(context.state.data.timeEntries) ||
+          !_.isEmpty(context.state.data.timeEntries) ||
           context.state.loading ||
           !context.state.preset
         }

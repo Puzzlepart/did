@@ -1,4 +1,4 @@
-import { isEmpty, omit, pick } from 'underscore'
+import _  from 'underscore'
 
 type SearchObjectOptions<T> = {
   item: T
@@ -22,10 +22,10 @@ export function searchObject<T = any>({
   pick_,
   omit_ = ['__typename']
 }: SearchObjectOptions<T>) {
-  if (isEmpty(searchTerm)) return true
+  if (_.isEmpty(searchTerm)) return true
   try {
-    let item_ = (omit(item, omit_) as unknown) as T
-    if (pick_) item_ = (pick(item, pick_) as unknown) as T
+    let item_ = (_.omit(item, omit_) as unknown) as T
+    if (pick_) item_ = (_.pick(item, pick_) as unknown) as T
     const _values = JSON.stringify(Object.values(item_)).toLowerCase()
     return _values.includes(searchTerm.toLowerCase())
   } catch {
