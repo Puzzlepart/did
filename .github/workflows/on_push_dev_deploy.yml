@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - dev
-    paths-ignore:
-      - '**.md'
-      - '**.yml'
+    paths:
+      - '.github/workflows/on_push_dev_deploy.yml'
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+      - 'webpack/**'
+      - 'package.json'
 
 jobs:
   build-and-deploy:
@@ -18,13 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Select node version 12.8.3
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Cache node modules
-      uses: actions/cache@v2
+    - uses: actions/cache@v2
       env:
         cache-name: cache-node-modules
       with:
