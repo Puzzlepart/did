@@ -27,20 +27,20 @@ async function run() {
 
   `))
 
-  // if (process.env.NODE_ENV === 'development') {
-  // const dir = path.resolve(__dirname, '../', 'dist')
-  // log()
-  // log()
-  // log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
-  // log()
-  // log()
-  // await rmdir(dir)
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    const dir = path.resolve(__dirname, '../', 'dist')
+    log()
+    log()
+    log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
+    log()
+    log()
+    await rmdir(dir)
+  }
 
-  // await concurrently([
-  //   { command: 'npm run package:client', name: 'package:client' },
-  //   { command: "npm run build:server", name: 'build:server' }
-  // ], {})
+  await concurrently([
+    { command: 'npm run package:client', name: 'package:client' },
+    { command: "npm run build:server", name: 'build:server' }
+  ], {})
   await package_archive()
 }
 run()
