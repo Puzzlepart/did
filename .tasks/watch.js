@@ -1,3 +1,4 @@
+require('dotenv').config()
 const concurrently = require('concurrently')
 const chalk = require('chalk')
 const rmdir = require('rimraf')

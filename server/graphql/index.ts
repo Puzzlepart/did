@@ -45,7 +45,7 @@ export const generateGraphQLSchema = async () => {
   const schema = await buildSchema({
     resolvers,
     container: ({ context }: ResolverData<Context>) => context.container,
-    emitSchemaFile: true,
+    emitSchemaFile: false,
     validate: false,
     authChecker,
     authMode: 'error',
