@@ -65,7 +65,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:292](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L292)
+Defined in: [services/timesheet/index.ts:316](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L316)
 
 ___
 
@@ -88,7 +88,7 @@ Name | Type |
 
 Events
 
-Defined in: [services/timesheet/index.ts:183](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L183)
+Defined in: [services/timesheet/index.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L207)
 
 ___
 
@@ -110,7 +110,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [services/timesheet/index.ts:235](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L235)
+Defined in: [services/timesheet/index.ts:259](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L259)
 
 ___
 
@@ -131,7 +131,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:254](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L254)
+Defined in: [services/timesheet/index.ts:278](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L278)
 
 ___
 
@@ -141,6 +141,19 @@ ___
 
 Get timesheet
 
+Retrieves periods between `parameters.startDate`
+and `parameters.endDate` using `getPeriods`. Then
+retrieves project data using `getProjectsData` from
+`ProjectService`.
+
+For each period we're checking both the confirmed periods
+and forecasted periods section for a entry. If a match is
+found for a confirmed period, this period with the events
+are returned.
+
+If no confirmed period is found, events are fetched from
+Microsoft Graph using `MSGraphService`
+
 #### Parameters:
 
 Name | Type |
@@ -149,7 +162,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/timesheet/index.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L63)
+Defined in: [services/timesheet/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L76)
 
 ___
 
@@ -159,6 +172,17 @@ ___
 
 Submit period
 
+Events for the period are fetched from
+Microsoft Graph using `MSGraphService`. We
+then generate the period data (`ITimesheetPeriodData`),
+map the events to their corresponding projects based
+on `projectId` from the client.
+
+We add the period to the correct collection based on
+if it's a forecast or an actual confirm. We embed the
+events in the period document, as well as adding them
+separetely to their corresponding time entry collection.
+
 #### Parameters:
 
 Name | Type | Description |
@@ -167,7 +191,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L113)
+Defined in: [services/timesheet/index.ts:137](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L137)
 
 ___
 
@@ -185,4 +209,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L152)
+Defined in: [services/timesheet/index.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L176)

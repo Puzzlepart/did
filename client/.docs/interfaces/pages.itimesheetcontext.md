@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* [*UseSubmitActionsHook*](../modules/pages.md#usesubmitactionshook)
+* [*UseSubmitActionsResult*](../modules/pages.md#usesubmitactionsresult)
 
   ↳ **ITimesheetContext**
 

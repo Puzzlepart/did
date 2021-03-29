@@ -53,21 +53,21 @@ export class TimesheetService {
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
-   * 
+   *
    * Retrieves periods between `parameters.startDate`
    * and `parameters.endDate` using `getPeriods`. Then
    * retrieves project data using `getProjectsData` from
    * `ProjectService`.
-   * 
+   *
    * For each period we're checking both the confirmed periods
    * and forecasted periods section for a entry. If a match is
    * found for a confirmed period, this period with the events
-   * are returned. 
-   * 
+   * are returned.
+   *
    * If no confirmed period is found, events are fetched from
    * Microsoft Graph using `MSGraphService`
    *
@@ -120,16 +120,16 @@ export class TimesheetService {
 
   /**
    * Submit period
-   * 
-   * Events for the period are fetched from 
+   *
+   * Events for the period are fetched from
    * Microsoft Graph using `MSGraphService`. We
    * then generate the period data (`ITimesheetPeriodData`),
    * map the events to their corresponding projects based
-   * on `projectId` from the client. 
-   * 
-   * We add the period to the correct collection based on 
-   * if it's a forecast or an actual confirm. We embed the 
-   * events in the period document, as well as adding them 
+   * on `projectId` from the client.
+   *
+   * We add the period to the correct collection based on
+   * if it's a forecast or an actual confirm. We embed the
+   * events in the period document, as well as adding them
    * separetely to their corresponding time entry collection.
    *
    * @param parameters - Submit period params

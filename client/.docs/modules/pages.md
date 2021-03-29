@@ -45,7 +45,7 @@ All are built using React Function components and Hooks.
 
 ### Other Type aliases
 
-- [UseSubmitActionsHook](pages.md#usesubmitactionshook)
+- [UseSubmitActionsResult](pages.md#usesubmitactionsresult)
 
 ### Timesheet Type aliases
 
@@ -135,9 +135,9 @@ Renames and exports: [useQueries](pages.md#usequeries)
 
 ## Other Type aliases
 
-### UseSubmitActionsHook
+### UseSubmitActionsResult
 
-Ƭ **UseSubmitActionsHook**: *ReturnType*<*typeof* [*useSubmitActions*](pages.md#usesubmitactions)\>
+Ƭ **UseSubmitActionsResult**: *ReturnType*<*typeof* [*useSubmitActions*](pages.md#usesubmitactions)\>
 
 Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L8)
 
