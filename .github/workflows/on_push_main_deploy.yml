@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/on_push_main_deploy.yml'
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+      - 'webpack/**'
+      - 'package.json'
 
 jobs:
   build-and-deploy:
@@ -19,18 +26,24 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: npm install, build and package
+    - name: Install npm packages
       run: |
-        npm install
-        npm run package:client
-        npm run build:server
+        npm install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund
+
+    - name: Create package
+      run: |
+        npm run package
       env:
-        DEBUG: webpack*
         NODE_ENV: production
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: did-package
+        path: ./did-package.zip
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
         publish-profile: ${{ secrets.DIDAPP_PUBLISH_PROFILE }}
-        package: .
+        package: ./did-package.zip
