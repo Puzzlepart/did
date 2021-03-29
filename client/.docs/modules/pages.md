@@ -588,7 +588,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:189](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L189)
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:190](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L190)
 
 ___
 
@@ -616,10 +616,12 @@ Name | Type |
 `context.dispatch` | *Dispatch*<AnyAction\> |
 `context.state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `context.t` | *TFunction*<*translation*\> |
+`defaultSelectedKey` | *string* |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
+`options` | *IChoiceGroupOption*[] |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 
-Defined in: [pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
+Defined in: [pages/Reports/hooks/useReports.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L27)
 
 ___
 

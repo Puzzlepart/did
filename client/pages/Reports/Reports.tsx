@@ -61,9 +61,7 @@ export const Reports: React.FC = () => {
             iconName='ReportDocument'
             text={t('reports.selectReportText')}
           />
-          <ChoiceGroup
-            options={options}
-          />
+          <ChoiceGroup options={options} />
         </PivotItem>
       </TabContainer>
       <FilterPanel
