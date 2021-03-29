@@ -30,12 +30,19 @@ class CustomCompileHooks {
    * @param compiler - Compiler
    */
   apply(compiler) {
-    /**
-     * Adding our `watchRun` hook that checks if 
-     * `localtunnel` should be set up.
-     */
     compiler.hooks.watchRun.tapAsync(
       CustomCompileHooks.name,
+      /**
+       * Adding our `watchRun` hook that checks if 
+       * `localtunnel` should be set up. If 
+       * `this.options.localtunnel` is specified,
+       * the localtunnel is started with on the 
+       * specified `subdomain` and `port`.
+       * 
+       * The actual callback url used by the
+       * backend is persisted to a file on 
+       * the root of the project **.localtunnel**
+       */
       async ({ compilation }, callback) => {
         if (!this.isFirstRun) {
           return callback()
@@ -58,14 +65,13 @@ class CustomCompileHooks {
         callback()
       }
     )
-
-    /**
-     * Adding our `done` hook that opens
-     * the `url` in the browser using `open`
-     * if `options.open` is specified.
-     */
     compiler.hooks.done.tapAsync(
       CustomCompileHooks.name,
+      /**
+       * Adding our `done` hook that opens
+       * the `url` in the browser using `open`
+       * if `options.open` is specified.
+       */
       ({ compilation }, callback) => {
         if (!this.isFirstRun) {
           return callback()
