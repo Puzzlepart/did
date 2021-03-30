@@ -6,7 +6,7 @@ test('DateObject.fromObject yields the correct date', t => {
     week: 11,
     year: 2021
   })
-  t.is(date.jsDate.toISOString(), '2021-03-14T23:00:00.000Z')
+  t.is(date.format(undefined, 'en-GB'), '2021-03-14')
 })
 
 test('DateObject.format yields the correct date format', t => {
