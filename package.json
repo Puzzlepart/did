@@ -10,16 +10,17 @@
     "url": "https://github.com/Puzzlepart/Puzzlepart/issues"
   },
   "ava": {
-		"extensions": {
-			"ts": "module"
-		},
-		"nonSemVerExperiments": {
-			"configurableModuleFormat": true
-		},
-		"nodeArguments": [
-			"--loader=ts-node/esm"
-		]
-	},
+    "extensions": {
+      "ts": "module"
+    },
+    "nonSemVerExperiments": {
+      "configurableModuleFormat": true
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm",
+      "--no-warnings"
+    ]
+  },
   "scripts": {
     "watch": "node .tasks/watch.js",
     "package": "node .tasks/package.js",
