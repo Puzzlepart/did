@@ -10,16 +10,16 @@
     "url": "https://github.com/Puzzlepart/Puzzlepart/issues"
   },
   "ava": {
-		"extensions": {
-			"ts": "module"
-		},
-		"nonSemVerExperiments": {
-			"configurableModuleFormat": true
-		},
-		"nodeArguments": [
-			"--loader=ts-node/esm"
-		]
-	},
+    "extensions": {
+      "ts": "module"
+    },
+    "nonSemVerExperiments": {
+      "configurableModuleFormat": true
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm"
+    ]
+  },
   "scripts": {
     "watch": "node .tasks/watch.js",
     "package": "node .tasks/package.js",
@@ -168,7 +168,7 @@
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "1.1.1",
     "rimraf": "3.0.2",
-    "sexy-commits": "git+https://github.com/Puzzlepart/sexy-commits.git",
+    "sexy-commits": "0.3.1",
     "terser-webpack-plugin": "^5.1.1",
     "typedoc": "0.20.34",
     "typedoc-plugin-markdown": "3.6.0",
@@ -368,7 +368,11 @@
     ],
     "chore": [
       "🥢",
-      "Boring chores"
+      "Boring chores",
+      [
+        "chores",
+        "boring"
+      ]
     ],
     "docs": [
       "📝",
