@@ -1,12 +1,12 @@
 import test from 'ava'
 import { DateObject } from './DateObject'
 
-test('DateObject.fromObject yields the correct date', t => {
+test('DateObject.fromObject yields the correct date for no-NB', t => {
   const date = new DateObject().fromObject({
     week: 11,
     year: 2021
   })
-  t.is(date.format(undefined, 'en-GB'), '2021-03-14')
+  t.is(date.format(undefined, 'no-NB'), '2021-03-14')
 })
 
 test('DateObject.format yields the correct date format', t => {
