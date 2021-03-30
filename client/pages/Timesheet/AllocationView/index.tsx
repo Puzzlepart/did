@@ -2,7 +2,7 @@
 import { UserMessage } from 'components'
 import { SubText } from 'components/SubText'
 import { TabComponent } from 'components/TabContainer/types'
-import { getValue } from 'helpers'
+import get from 'get-value'
 import color from 'randomcolor'
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -69,9 +69,9 @@ export const AllocationView: TabComponent = () => {
                   animationDuration={1200}>
                   {d.map((entry) => (
                     <Cell
-                      key={getValue(entry.data, c.idKey)}
+                      key={get(entry.data, c.idKey)}
                       fill={color({
-                        seed: getValue(entry.data, c.textKey),
+                        seed: get(entry.data, c.textKey),
                         luminosity: c.colors
                       })}
                     />

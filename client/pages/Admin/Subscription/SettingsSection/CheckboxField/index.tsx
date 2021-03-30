@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Checkbox, Label } from '@fluentui/react'
-import { getValue } from 'helpers'
+import get from 'get-value'
 import React, { useContext } from 'react'
 import _ from 'underscore'
 import { SubscriptionContext } from '../../context'
@@ -20,7 +20,7 @@ export const CheckboxField = ({
       <Label>{props.label}</Label>
       {Object.keys(options).map((key) => {
         const defaultChecked = _.contains(
-          getValue(settings, settingsKey, []),
+          get(settings, settingsKey, { default: [] }),
           key
         )
         return (

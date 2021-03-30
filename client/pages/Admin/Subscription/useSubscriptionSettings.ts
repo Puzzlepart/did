@@ -2,9 +2,10 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
 import { useToast } from 'components/Toast'
-import { getValue, setValue } from 'helpers'
+import get from 'get-value'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import set from 'set-value'
 import { Subscription } from 'types'
 import _ from 'underscore'
 import deepCopy from 'utils/deepCopy'
@@ -31,9 +32,9 @@ export function useSubscriptionSettings() {
   ) => {
     const _subscription = deepCopy(subscription)
     if (typeof value === 'function') {
-      value = value(getValue(_subscription, `settings.${key}`))
+      value = value(get(_subscription, `settings.${key}`))
     }
-    setValue(_subscription, `settings.${key}`, value)
+    set(_subscription, `settings.${key}`, value)
     setSubscription(_subscription)
   }
 

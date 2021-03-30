@@ -1,4 +1,4 @@
-import getValue from 'get-value'
+import get from 'get-value'
 import { useMemo } from 'react'
 import _ from 'underscore'
 import { truncateString } from 'utils/truncateString'
@@ -13,10 +13,10 @@ function getDataForChart(
 ) {
   if (!width) return []
   const items = events.reduce((_items, entry) => {
-    const data = getValue(entry, chart.key, null)
+    const data = get(entry, chart.key)
     if (!data) return _items
     const item = _.find(_items, ({ id }) => id === data[chart.idKey])
-    const value = getValue(entry, chart.valueKey)
+    const value = get(entry, chart.valueKey)
     if (item) item.value += value
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items

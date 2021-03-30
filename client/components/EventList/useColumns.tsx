@@ -1,7 +1,7 @@
 import { IColumn, Link } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
 import $date from 'DateUtils'
-import * as helpers from 'helpers'
+import get from 'get-value'
 import React, { useMemo } from 'react'
 import { isBrowser, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -26,8 +26,8 @@ function getSizing(
   defMaxWidth: number
 ): { minWidth: number; maxWidth: number } {
   return {
-    minWidth: helpers.getValue(props, `columnWidths.${fieldName}`, defMinWidth),
-    maxWidth: helpers.getValue(props, `columnWidths.${fieldName}`, defMaxWidth)
+    minWidth: get(props, `columnWidths.${fieldName}`, {default:defMinWidth}),
+    maxWidth: get(props, `columnWidths.${fieldName}`, {default:defMaxWidth})
   }
 }
 /**

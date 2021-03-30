@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { getValue } from 'helpers'
+import get from 'get-value'
 import _ from 'underscore'
 import { BaseFilter } from './BaseFilter'
 import { IFilter } from './types'
@@ -28,8 +28,8 @@ export class CustomerFilter extends BaseFilter {
   public initialize(items: any[]): IFilter {
     const filterItems = _.unique(
       items.map((item_) => ({
-        key: getValue(item_, this.keyFieldName, null),
-        value: getValue(item_, this.valueFieldName, null)
+        key: get(item_, this.keyFieldName),
+        value: get(item_, this.valueFieldName)
       })),
       (item) => item.key
     ).sort((a, b) => {
