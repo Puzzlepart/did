@@ -17,7 +17,8 @@
       "configurableModuleFormat": true
     },
     "nodeArguments": [
-      "--loader=ts-node/esm"
+      "--loader=ts-node/esm",
+      "--no-warnings"
     ]
   },
   "scripts": {
@@ -436,7 +437,8 @@
     ],
     "auth": [
       "🛂",
-      "Worked on code related to authorization, roles and permissions"
+      "Worked on code related to authorization, roles and permissions",
+      ["permissions"]
     ],
     "syntax": [
       "✏️",
