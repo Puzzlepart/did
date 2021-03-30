@@ -1,5 +1,5 @@
-import deepCopy from './deepCopy'
-import omitDeep from './omitDeep'
+import { deepCopy } from './deepCopy'
+import { omitDeep } from './omitDeep'
 
 /**
  * Omits `__typename` from the `obj`

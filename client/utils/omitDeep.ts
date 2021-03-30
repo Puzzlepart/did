@@ -6,7 +6,7 @@
  * @param value - Value
  * @param key - Key to omit
  */
-export default function omitDeep(value: any, key: string) {
+export function omitDeep(value: any, key: string) {
   if (Array.isArray(value)) return value.map((index) => omitDeep(index, key))
   else if (typeof value === 'object' && value !== null) {
     return Object.keys(value).reduce((newObject, k) => {
