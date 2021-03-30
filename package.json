@@ -169,7 +169,7 @@
     "prettier": "2.2.1",
     "prettier-plugin-organize-imports": "1.1.1",
     "rimraf": "3.0.2",
-    "sexy-commits": "0.3.1",
+    "sexy-commits": "0.3.2",
     "terser-webpack-plugin": "^5.1.1",
     "typedoc": "0.20.34",
     "typedoc-plugin-markdown": "3.6.0",
@@ -438,7 +438,9 @@
     "auth": [
       "🛂",
       "Worked on code related to authorization, roles and permissions",
-      ["permissions"]
+      [
+        "permissions"
+      ]
     ],
     "syntax": [
       "✏️",
