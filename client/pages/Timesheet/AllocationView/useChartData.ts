@@ -1,7 +1,7 @@
 import get from 'get-value'
 import { useMemo } from 'react'
 import _ from 'underscore'
-import { truncateString } from 'utils/truncateString'
+import s from 'underscore.string'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
 import { useTimesheetContext } from '../context'
 import { IChartConfig } from './types'
@@ -25,7 +25,7 @@ function getDataForChart(
   const truncateLength = width / (items.length || 1) / 6
   return items.map((index) => ({
     ...index,
-    label: truncateString(index.data[chart.textKey], truncateLength),
+    label: s.prune(index.data[chart.textKey], truncateLength),
     value: Number.parseFloat(index.value.toFixed(1))
   }))
 }
