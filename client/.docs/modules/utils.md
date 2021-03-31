@@ -15,13 +15,16 @@ Reusable utility functions
 - [arrayExtend](utils.md#arrayextend)
 - [arrayMap](utils.md#arraymap)
 - [cleanArray](utils.md#cleanarray)
+- [deepCopy](utils.md#deepcopy)
 - [generateColumn](utils.md#generatecolumn)
 - [getContrastColor](utils.md#getcontrastcolor)
 - [getSum](utils.md#getsum)
 - [loadScripts](utils.md#loadscripts)
+- [omitDeep](utils.md#omitdeep)
 - [omitTypename](utils.md#omittypename)
 - [searchObject](utils.md#searchobject)
 - [sleep](utils.md#sleep)
+- [sortAlphabetically](utils.md#sortalphabetically)
 - [toMap](utils.md#tomap)
 - [tryParseJson](utils.md#tryparsejson)
 
@@ -103,6 +106,24 @@ Defined in: [utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/c
 
 ___
 
+### deepCopy
+
+▸ **deepCopy**(`object`: *any*): *any*
+
+Makes a deep copy of the object
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`object` | *any* |
+
+**Returns:** *any*
+
+Defined in: [utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
+
+___
+
 ### generateColumn
 
 ▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
@@ -151,7 +172,7 @@ ___
 
 ▸ **getSum**(`items`: Item[], `property`: *string*): *number*
 
-Get sum for a property in the array using _.reduce.
+Get sum for a property in the array using `_.reduce`.
 
 #### Parameters:
 
@@ -162,7 +183,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
+Defined in: [utils/getSum.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L13)
 
 ___
 
@@ -189,6 +210,27 @@ Name | Type | Default value | Description |
 **Returns:** *Promise*<T\>
 
 Defined in: [utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
+
+___
+
+### omitDeep
+
+▸ **omitDeep**(`value`: *any*, `key`: *string*): *any*
+
+Omit deep, used to remove __typename from GraphQL responses
+
+**`see`** https://gist.github.com/Billy-/d94b65998501736bfe6521eadc1ab538
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`value` | *any* | Value   |
+`key` | *string* | Key to omit    |
+
+**Returns:** *any*
+
+Defined in: [utils/omitDeep.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitDeep.ts#L9)
 
 ___
 
@@ -258,6 +300,24 @@ Defined in: [utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client
 
 ___
 
+### sortAlphabetically
+
+▸ **sortAlphabetically**(`stringArray`: *string*[]): *string*[]
+
+Sort alphabetically
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`stringArray` | *string*[] |
+
+**Returns:** *string*[]
+
+Defined in: [utils/sortAlphabetically.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sortAlphabetically.ts#L6)
+
+___
+
 ### toMap
 
 ▸ **toMap**<KeyType\>(`object`: *Record*<string, any\>): *Map*<KeyType, any\>
@@ -286,8 +346,8 @@ ___
 
 ▸ **tryParseJson**<T\>(`string_`: *string*, `fallbackValue?`: T): T
 
-Attempts to parse JSON string, and falls back to the specified fallbackValue if
-the parse fails.
+Attempts to parse JSON string, and falls back
+to the specified fallbackValue if the parse fails.
 
 #### Type parameters:
 

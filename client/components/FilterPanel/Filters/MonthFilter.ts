@@ -26,9 +26,7 @@ export class MonthFilter extends BaseFilter {
    * @param items - Items
    */
   public initialize(items: any[]): IFilter {
-    const values = _.unique(
-      items.map((item_) => get(item_, this.keyFieldName))
-    )
+    const values = _.unique(items.map((item_) => get(item_, this.keyFieldName)))
     const monthNames = $date.getMonthNames()
     const filterItems = monthNames
       .filter((_item, index) => _.contains(values, index + 1))

@@ -1,5 +1,5 @@
 /**
- * Attempts to parse JSON string, and falls back 
+ * Attempts to parse JSON string, and falls back
  * to the specified fallbackValue if the parse fails.
  *
  * @param string_ - String to parse

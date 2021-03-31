@@ -32,9 +32,7 @@ export default ({ initialState, queries }) =>
         state.subset = _.filter(state.data?.timeEntries, (entry) => {
           return (
             _.filter(Object.keys(payload.filter.values), (key) => {
-              return payload.filter.values[key].includes(
-                get(entry, key, '')
-              )
+              return payload.filter.values[key].includes(get(entry, key, ''))
             }).length === Object.keys(payload.filter.values).length
           )
         })
