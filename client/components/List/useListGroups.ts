@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { IGroup } from '@fluentui/react'
 import * as arraySort from 'array-sort'
-import { getValue as get } from 'helpers'
+import get from 'get-value'
 import _ from 'underscore'
 import { IListGroupProps } from './types'
 
@@ -18,13 +18,13 @@ export function useListGroups(items: any[], props: IListGroupProps) {
   const itemsSort = { props: [fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames = items.map((g) =>
-    get(g, fieldName, emptyGroupName).toString()
+    get(g, fieldName, { default: emptyGroupName }).toString()
   )
   const uniqueGroupNames =
     props.groupNames || _.unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
   const groups = uniqueGroupNames.map((name) => {
     const items_ = items.filter((item) => {
-      const itemValue = `${get(item, fieldName, emptyGroupName)}`
+      const itemValue = `${get(item, fieldName, { default: emptyGroupName })}`
       return `${itemValue}`.toLowerCase() === name.toLowerCase()
     })
     const total = totalFunc ? props.totalFunc(items_) : ''

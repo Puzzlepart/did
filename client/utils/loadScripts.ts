@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { getValue as get } from 'helpers'
+import get from 'get-value'
 
 /**
  * Load scripts using document.createElement

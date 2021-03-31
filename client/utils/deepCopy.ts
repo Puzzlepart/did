@@ -3,6 +3,6 @@
  *
  * @param obj - Object
  */
-export default function deepCopy(object: any): any {
+export function deepCopy(object: any): any {
   return JSON.parse(JSON.stringify(object))
 }

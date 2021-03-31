@@ -1,6 +1,6 @@
 import { IListColumn } from 'components/List/types'
 import { DateObject } from 'DateUtils'
-import { getValue as get } from 'helpers'
+import get from 'get-value'
 import s from 'underscore.string'
 import { loadScripts } from './loadScripts'
 
@@ -71,7 +71,7 @@ export async function exportExcel(
         columns.map((column_) => column_.name),
         ...items.map((item) =>
           columns.map((col) => {
-            const fieldValue = get<string>(item, col.fieldName)
+            const fieldValue = get(item, col.fieldName)
             switch (col?.data?.excelColFormat) {
               case 'date':
                 return {

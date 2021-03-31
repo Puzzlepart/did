@@ -1,5 +1,5 @@
 import { createReducer, current } from '@reduxjs/toolkit'
-import { getValue } from 'helpers'
+import get from 'get-value'
 import _ from 'underscore'
 import { IReportsState } from '../types'
 import {
@@ -33,7 +33,7 @@ export default ({ initialState, queries }) =>
           return (
             _.filter(Object.keys(payload.filter.values), (key) => {
               return payload.filter.values[key].includes(
-                getValue(entry, key, '')
+                get(entry, key, '')
               )
             }).length === Object.keys(payload.filter.values).length
           )
@@ -76,7 +76,7 @@ export default ({ initialState, queries }) =>
           return (
             _.filter(payload.filters, (f) => {
               const selectedKeys = f.selected.map((s) => s.key)
-              return selectedKeys.includes(getValue(entry, f.key, ''))
+              return selectedKeys.includes(get(entry, f.key, { default: '' }))
             }).length === payload.filters.length
           )
         })

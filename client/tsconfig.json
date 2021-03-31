@@ -29,7 +29,6 @@
       "pages": ["./pages"],
       "hooks": ["./hooks"],
       "utils": ["./utils"],
-      "helpers": ["./helpers"],
       "i18n": ["./i18n"]
     }
   }

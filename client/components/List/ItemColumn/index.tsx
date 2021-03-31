@@ -1,4 +1,4 @@
-import { getValue } from 'helpers'
+import get from 'get-value'
 import React from 'react'
 import { IItemColumnProps } from './types'
 
@@ -10,5 +10,5 @@ export const ItemColumn: React.FC<IItemColumnProps> = ({
   if (!!column.onRender) {
     return column.onRender(item, index, column)
   }
-  return getValue(item, column.fieldName)
+  return get(item, column.fieldName)
 }

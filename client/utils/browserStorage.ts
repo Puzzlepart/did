@@ -1,4 +1,3 @@
-import { DateObject } from 'DateUtils'
 import __package from 'package'
 import { tryParseJson } from './tryParseJson'
 
@@ -10,9 +9,6 @@ import { tryParseJson } from './tryParseJson'
  */
 export class BrowserStorage<T = unknown> {
   private _key: string
-  private _defaultExpire = new DateObject().add(
-    __package.config.app.BROWSER_STORAGE_DEFAULT_EXPIRE
-  ).jsDate
 
   constructor(key: string, private _store = localStorage) {
     this._key = `${__package.config.app.BROWSER_STORAGE_KEY_PREFIX}_${key}`

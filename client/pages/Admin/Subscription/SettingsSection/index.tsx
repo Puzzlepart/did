@@ -2,7 +2,7 @@
 
 import { Slider, TextField, Toggle } from '@fluentui/react'
 import { SubText, TabComponent } from 'components'
-import { getValue as get } from 'helpers'
+import get from 'get-value'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'
@@ -37,7 +37,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
             fieldElement = (
               <Toggle
                 {...fieldProps}
-                defaultChecked={get(settings, key, false)}
+                defaultChecked={get(settings, key, { default: false })}
                 inlineLabel={true}
                 onChange={(_event, value) => onChange(key, value)}
               />
@@ -47,7 +47,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
             fieldElement = (
               <Slider
                 {...fieldProps}
-                defaultValue={get(settings, key, 1)}
+                defaultValue={get(settings, key, { default: 1 })}
                 onChange={(value) => onChange(key, value)}
               />
             )

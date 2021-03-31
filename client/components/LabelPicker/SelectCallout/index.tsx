@@ -12,7 +12,7 @@ import { SubText } from 'components/SubText'
 import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
 import _ from 'underscore'
-import { truncateString } from 'utils/truncateString'
+import s from 'underscore.string'
 import styles from './SelectCallout.module.scss'
 import { ISelectCalloutProps } from './types'
 
@@ -73,7 +73,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
                           />
                           <span style={{ paddingLeft: 5 }}>{label.name}</span>
                         </div>
-                        <SubText text={truncateString(label.description, 80)} />
+                        <SubText text={s.prune(label.description, 80)} />
                       </div>
                     )}
                     onChange={() => {
