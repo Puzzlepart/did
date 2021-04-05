@@ -20,11 +20,8 @@ export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
 export const SET_SCOPE = createAction<TimesheetScope | string>('SET_SCOPE')
 
 /**
- * A utility function to create an action creator for the given action type string.
- * The action creator accepts a single argument, which will be included in the action object
- * as a field called payload. The action creator function will also have its toString()
- * overriden so that it returns the action type, allowing it to be used in reducer logic that is looking for that action type.
- *
+ * Submitting period
+ * 
  * @category Timesheet Actions
  */
 export const SUBMITTING_PERIOD = createAction<{ forecast: boolean }>(
