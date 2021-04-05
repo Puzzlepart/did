@@ -183,7 +183,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [utils/getSum.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L13)
+Defined in: [utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
 
 ___
 

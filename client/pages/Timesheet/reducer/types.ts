@@ -5,10 +5,10 @@ export interface ITimesheetReducerParameters {
   /**
    * URL parameters
    */
-  url: ITimesheetParameters;
+  url: ITimesheetParameters
 
   /**
    * Translate function
    */
-  t: TFunction;
+  t: TFunction
 }

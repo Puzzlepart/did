@@ -3,8 +3,8 @@ import { useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { ITimesheetParameters } from '../types'
-import { initState } from './initState'
 import { createTimesheetReducer } from './createTimesheetReducer'
+import { initState } from './initState'
 
 /**
  * Use Timesheet reducer
