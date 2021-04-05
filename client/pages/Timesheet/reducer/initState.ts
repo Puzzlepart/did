@@ -1,9 +1,5 @@
 import _ from 'underscore'
-import {
-  ITimesheetParameters,
-  ITimesheetState,
-  TimesheetScope
-} from '../types'
+import { ITimesheetParameters, ITimesheetState, TimesheetScope } from '../types'
 
 /**
  * Initializes state based on url parameters
@@ -13,12 +9,12 @@ import {
  */
 
 export function initState(url: ITimesheetParameters): ITimesheetState {
-  return ({
+  return {
     periods: [],
     scope: _.isEmpty(Object.keys(url))
       ? new TimesheetScope()
       : new TimesheetScope().fromParams(url),
     selectedView: url.view || 'overview',
     navHistory: []
-  })
+  }
 }

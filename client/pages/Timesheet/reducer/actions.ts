@@ -21,7 +21,7 @@ export const SET_SCOPE = createAction<TimesheetScope | string>('SET_SCOPE')
 
 /**
  * Submitting period
- * 
+ *
  * @category Timesheet Actions
  */
 export const SUBMITTING_PERIOD = createAction<{ forecast: boolean }>(
