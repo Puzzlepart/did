@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* [*UseSubmitActionsResult*](../modules/pages.md#usesubmitactionsresult)
+* *ReturnType*<*typeof* [*useSubmitActions*](../modules/pages.md#usesubmitactions)\>
 
   ↳ **ITimesheetContext**
 
@@ -48,7 +48,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L23)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L30)
 
 Inherited from: void
 
@@ -70,7 +70,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L34)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:41](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L41)
 
 Inherited from: void
 

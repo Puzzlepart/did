@@ -45,7 +45,7 @@ All are built using React Function components and Hooks.
 
 ### Other Type aliases
 
-- [UseSubmitActionsResult](pages.md#usesubmitactionsresult)
+- [UseSubmitActionsParams](pages.md#usesubmitactionsparams)
 
 ### Timesheet Type aliases
 
@@ -135,11 +135,19 @@ Renames and exports: [useQueries](pages.md#usequeries)
 
 ## Other Type aliases
 
-### UseSubmitActionsResult
+### UseSubmitActionsParams
 
-Ƭ **UseSubmitActionsResult**: *ReturnType*<*typeof* [*useSubmitActions*](pages.md#usesubmitactions)\>
+Ƭ **UseSubmitActionsParams**: *object*
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L8)
+#### Type declaration:
+
+Name | Type |
+:------ | :------ |
+`dispatch` | *Dispatch*<AnyAction\> |
+`refetch` | () => *Promise*<ApolloQueryResult<any\>\> |
+`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) |
+
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L13)
 
 ___
 
@@ -668,15 +676,15 @@ ___
 
 ### useSubmitActions
 
-▸ **useSubmitActions**(`__namedParameters`: *Object*): *object*
+▸ **useSubmitActions**(`__namedParameters`: [*UseSubmitActionsParams*](pages.md#usesubmitactionsparams)): *object*
 
-Hook for Timesheet submit actions
+Timesheet submit action callbacks using `React.useCallback`
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | *Object* |
+`__namedParameters` | [*UseSubmitActionsParams*](pages.md#usesubmitactionsparams) |
 
 **Returns:** *object*
 
@@ -685,7 +693,7 @@ Name | Type |
 `onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
 `onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L15)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L24)
 
 ___
 

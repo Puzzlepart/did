@@ -21,33 +21,43 @@ export type UseSubmitActionsParams = {
  *
  * @category Timesheet Hooks
  */
-export function useSubmitActions({ state, dispatch, refetch }: UseSubmitActionsParams) {
+export function useSubmitActions({
+  state,
+  dispatch,
+  refetch
+}: UseSubmitActionsParams) {
   const app = useAppContext()
 
   const [submitPeriod] = useMutation($submitPeriod)
   const [unsubmitPeriod] = useMutation($unsubmitPeriod)
 
-  const onSubmitPeriod = useCallback(async (forecast: boolean): Promise<void> => {
-    dispatch(SUBMITTING_PERIOD({ forecast }))
-    const variables = {
-      period: state.selectedPeriod.data,
-      options: { forecast, tzOffset: new Date().getTimezoneOffset() }
-    }
-    await submitPeriod({ variables })
-    refetch()
-    app.notifications.refetch(250)
-  }, [state.selectedPeriod])
+  const onSubmitPeriod = useCallback(
+    async (forecast: boolean): Promise<void> => {
+      dispatch(SUBMITTING_PERIOD({ forecast }))
+      const variables = {
+        period: state.selectedPeriod.data,
+        options: { forecast, tzOffset: new Date().getTimezoneOffset() }
+      }
+      await submitPeriod({ variables })
+      refetch()
+      app.notifications.refetch(250)
+    },
+    [state.selectedPeriod]
+  )
 
-  const onUnsubmitPeriod = useCallback(async (forecast: boolean): Promise<void> => {
-    dispatch(UNSUBMITTING_PERIOD({ forecast }))
-    const variables = {
-      period: state.selectedPeriod.data,
-      options: { forecast }
-    }
-    await unsubmitPeriod({ variables })
-    refetch()
-    app.notifications.refetch(250)
-  }, [state.selectedPeriod])
+  const onUnsubmitPeriod = useCallback(
+    async (forecast: boolean): Promise<void> => {
+      dispatch(UNSUBMITTING_PERIOD({ forecast }))
+      const variables = {
+        period: state.selectedPeriod.data,
+        options: { forecast }
+      }
+      await unsubmitPeriod({ variables })
+      refetch()
+      app.notifications.refetch(250)
+    },
+    [state.selectedPeriod]
+  )
 
   return {
     onSubmitPeriod,
