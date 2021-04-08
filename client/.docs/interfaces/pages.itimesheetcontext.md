@@ -48,7 +48,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L30)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L34)
 
 Inherited from: void
 
@@ -70,7 +70,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:41](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L41)
+Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L48)
 
 Inherited from: void
 
