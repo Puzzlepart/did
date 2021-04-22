@@ -71,7 +71,7 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
           <DefaultButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
-            disabled={value('text').length < 2 && inputVisible}
+            disabled={value('text')?.length < 2 && inputVisible}
             onClick={onSave}
           />
         </div>
