@@ -73,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Issue where filtering on a report would crash the page #938
 - Issue where moving an event from a confirmed week to an unconfirmed week would cause an error #766
 - Issue where confirmed hours would be skewed forward one hour #760
 - Issue with navigating between tabs in Projects #749
