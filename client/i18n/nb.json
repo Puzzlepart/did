@@ -174,7 +174,7 @@
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn filternavnet ...",
     "cancelSaveFilterText": "Avbryt",
-    "removeSelectedFilterText": "Fjern valgt filter",
+    "deleteFilterText": "Slett dette filteret",
     "filterPanelHeaderText": "Filtre",
     "filterDescriptionPlaceholder": "Merknad"
   },

@@ -175,7 +175,7 @@
     "saveFilterText": "Save filter",
     "filterNamePlaceholder": "Enter filter name...",
     "cancelSaveFilterText": "Cancel",
-    "removeSelectedFilterText": "Remove selected filter",
+    "deleteFilterText": "Delete this filter",
     "filterPanelHeaderText": "Filters",
     "filterDescriptionPlaceholder": "Note"
   },
