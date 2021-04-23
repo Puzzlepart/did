@@ -79,7 +79,7 @@ export class ReportService {
         CURRENT_YEAR: {
           year: d.toObject().year
         }
-      }[preset] || { month: -1 }
+      }[preset] || {}
     )
   }
 
