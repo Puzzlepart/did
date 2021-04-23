@@ -117,7 +117,7 @@ const saveFilterCmd = ({
         },
         state.filter?.text && {
           key: 'REMOVE_SELECTED_FILTER',
-          text: t('reports.removeSelectedFilterText'),
+          text: t('reports.deleteFilterText'),
           iconProps: { iconName: 'RemoveFilter' },
           onClick: () => dispatch(REMOVE_SELECTED_FILTER())
         },
