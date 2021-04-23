@@ -121,7 +121,7 @@ export function useSubmitCommands(): IContextualMenuItem {
       if (commands.length > 1) {
         menuProps = {
           calloutProps: {
-            calloutWidth: 280
+            calloutWidth: 300
           },
           items: commands.map((command_) => ({
             ...(_.omit(command_, 'buttonStyles') as IContextualMenuItem),
