@@ -72,35 +72,6 @@ export function currentMonthQuery(
 
 /**
  * Returns query properties for preset
- * **LAST_YEAR**
- *
- * @remarks Made as generic so it can also be used by
- * `<UserReports />` which are using `IChoiceGroupOption`
- *
- * @param t - Translate
- * @param query - GraphQL query
- *
- * @category Reports
- */
-export function lastYearQuery(
-  t: TFunction,
-  query = report_last_year
-): IReportsQuery {
-  const object = new DateObject().toObject('year')
-  const year = object.year - 1
-  return {
-    itemKey: 'last_year',
-    headerText: t('common.exportTypeLastYear', {
-      year: isBrowser ? `(${year})` : ''
-    }),
-    itemIcon: 'Previous',
-    query,
-    exportFileName: `TimeEntries-${year}-{0}.xlsx`
-  } as IReportsQuery
-}
-
-/**
- * Returns query properties for preset
  * **CURRENT_YEAR**
  *
  * @remarks Made as generic so it can also be used by
@@ -194,7 +165,6 @@ export function useReportsQueries(): IReportsQuery[] {
       [
         lastMonthQuery,
         currentMonthQuery,
-        lastYearQuery,
         currentYearQuery,
         forecastQuery,
         summaryQuery
