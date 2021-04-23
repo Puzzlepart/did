@@ -24,7 +24,7 @@ export function useUserReportQuery({ preset }) {
       data: data_,
       loading,
       preset: (preset?.text || '').toLowerCase(),
-      hours:  getSum(data_, 'duration').toFixed(0),
+      hours: getSum(data_, 'duration').toFixed(0),
       projects: _.unique(data_, (t) => t.project?.name).length
     }),
     [data_]

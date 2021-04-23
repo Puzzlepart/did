@@ -111,7 +111,6 @@ All are built using React Function components and Hooks.
 - [currentYearQuery](pages.md#currentyearquery)
 - [forecastQuery](pages.md#forecastquery)
 - [lastMonthQuery](pages.md#lastmonthquery)
-- [lastYearQuery](pages.md#lastyearquery)
 - [summaryQuery](pages.md#summaryquery)
 - [useQueries](pages.md#usequeries)
 
@@ -496,7 +495,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:114](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L114)
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L85)
 
 ___
 
@@ -519,7 +518,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:142](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L142)
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:113](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L113)
 
 ___
 
@@ -546,29 +545,6 @@ Defined in: [pages/Reports/hooks/useReportsQueries.ts:29](https://github.com/Puz
 
 ___
 
-### lastYearQuery
-
-▸ **lastYearQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
-
-Returns query properties for preset
-**LAST_YEAR**
-
-**`remarks`** Made as generic so it can also be used by
-`<UserReports />` which are using `IChoiceGroupOption`
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`t` | TFunction | Translate   |
-`query` | *any* | GraphQL query    |
-
-**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
-
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L85)
-
-___
-
 ### summaryQuery
 
 ▸ **summaryQuery**(`t`: TFunction): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
@@ -584,7 +560,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:163](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L163)
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:134](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L134)
 
 ___
 
@@ -596,7 +572,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [pages/Reports/hooks/useReportsQueries.ts:190](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L190)
+Defined in: [pages/Reports/hooks/useReportsQueries.ts:161](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L161)
 
 ___
 
