@@ -13,10 +13,10 @@ import { default_query } from './useReportsQueries'
  * @category Reports Hooks
  */
 export function useReportsQuery({ state, dispatch }) {
-  const query = useQuery(state.preset?.query || default_query, {
+  const query = state.preset?.query || default_query
+  const result = useQuery(query, {
     skip: !state.preset,
-    fetchPolicy: 'cache-and-network',
     variables: state.preset?.variables || {}
   })
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query.loading])
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ result })), [result.loading])
 }

@@ -21,9 +21,9 @@ export default ({ initialState, queries }) =>
   createReducer<IReportsState>(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.loading = payload.query.loading
-        if (payload.query?.data) {
-          state.data = { ...state.data, ...payload.query.data }
+        state.loading = payload.result.loading
+        if (payload.result?.data) {
+          state.data = { ...state.data, ...payload.result.data }
           state.subset = current(state).data.timeEntries
         }
       })
