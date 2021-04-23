@@ -33,7 +33,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "3.3.13",
+    "@apollo/client": "3.2.0",
     "@babel/compat-data": "7.13.12",
     "@babel/core": "7.13.13",
     "@babel/preset-env": "7.13.12",

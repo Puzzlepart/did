@@ -183,7 +183,7 @@ export function summaryQuery(t: TFunction): IReportsQuery {
 }
 
 /**
- * Use queries
+ * Use Reports queries
  *
  * @category Reports
  */
@@ -198,9 +198,9 @@ export function useReportsQueries(): IReportsQuery[] {
         currentYearQuery,
         forecastQuery,
         summaryQuery
-      ].map((queryFunction) => {
-        return queryFunction(t)
-      }),
+      ].map((queryFunction) =>
+        queryFunction(t)
+      ),
     []
   )
 }
