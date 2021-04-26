@@ -46,5 +46,5 @@ export default {
     white: '#ffffff',
     whiteTranslucent40: '#ffffff88'
   },
-  fonts
+  ...fonts
 } as PartialTheme

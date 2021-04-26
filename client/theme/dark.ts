@@ -93,5 +93,5 @@ export default {
     green: 'green',
     greenLight: '#dcdcdc'
   },
-  fonts
+  ...fonts
 } as PartialTheme
