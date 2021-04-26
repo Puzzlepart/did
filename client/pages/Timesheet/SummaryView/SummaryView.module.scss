@@ -1,7 +1,6 @@
 .root {
   [class*="ms-DetailsRow-cell"] {
     background: transparent;
-    font-size: 1.2em;
     align-self: center;
     padding: 0px 12px;
 
@@ -18,7 +17,6 @@
       border: none;
       background: transparent;
       [class*="ms-DetailsRow-cell"] {
-        font-size: 1.2em;
         display: flex;
         align-items: center;
 
