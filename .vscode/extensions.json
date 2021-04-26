@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "mikestead.dotenv",
+    "lokalise.i18n-ally",
+    "wix.vscode-import-cost"
+  ]
+}
