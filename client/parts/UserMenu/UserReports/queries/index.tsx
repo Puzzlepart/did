@@ -14,7 +14,6 @@ import user_report_current_year from './user-report-current-year.gql'
 import user_report_last_month from './user-report-last-month.gql'
 import user_report_last_year from './user-report-last-year.gql'
 
-
 /**
  * Returns query properties for preset
  * **LAST_YEAR**
@@ -24,10 +23,7 @@ import user_report_last_year from './user-report-last-year.gql'
  *
  * @category UserReports
  */
-export function lastYearQuery(
-  t: TFunction,
-  query: any
-) {
+export function lastYearQuery(t: TFunction, query: any) {
   const object = new DateObject().toObject('year')
   const year = object.year - 1
   return {

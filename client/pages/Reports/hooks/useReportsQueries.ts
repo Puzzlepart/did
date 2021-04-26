@@ -11,7 +11,6 @@ import report_current_month from './queries/report-current-month.gql'
 import report_current_year from './queries/report-current-year.gql'
 import report_forecast from './queries/report-forecast.gql'
 import report_last_month from './queries/report-last-month.gql'
-import report_last_year from './queries/report-last-year.gql'
 import report_summary from './queries/report-summary.gql'
 
 /**
