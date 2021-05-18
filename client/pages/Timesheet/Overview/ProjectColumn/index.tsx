@@ -1,11 +1,17 @@
-import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
+import { Icon } from '@fluentui/react'
+import {
+  ProjectLink,
+  ProjectTooltip,
+  UserMessage,
+  UserMessageType
+} from 'components'
 import { TFunction } from 'i18next'
-import { Icon, MessageBarType } from 'office-ui-fabric'
-import React, { useContext } from 'react'
+import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
-import { TimesheetContext } from '../../context'
+import _ from 'underscore'
+import { useTimesheetContext } from '../../context'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { IgnoreEventButton } from './IgnoreEventButton'
 import { MatchEventPanel } from './MatchEventPanel'
@@ -15,21 +21,24 @@ import { IProjectColumnProps } from './types'
 /**
  * Get error message
  *
- * @param {string} code Error code
- * @param {TFunction} t Translate function
+ * @param code - Error code
+ * @param t - Translate function
  */
-function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
+function getErrorMessage(
+  code: string,
+  t: TFunction
+): [string, UserMessageType] {
   switch (code) {
     case 'PROJECT_INACTIVE':
-      return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
+      return [t('timesheet.projectInactiveErrorText'), 'error']
     case 'CUSTOMER_INACTIVE':
-      return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
+      return [t('timesheet.customerInactiveErrorText'), 'error']
   }
 }
 
-const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
+export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   const { t } = useTranslation()
-  const { dispatch, selectedPeriod } = useContext(TimesheetContext)
+  const { state, dispatch } = useTimesheetContext()
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   if (event.isSystemIgnored) {
@@ -52,9 +61,9 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     return (
       <div className={className}>
         <UserMessage
-          containerStyle={{ marginTop: 10 }}
+          containerStyle={{ marginTop: 10, width: '90%' }}
           isMultiline={true}
-          type={MessageBarType.warning}
+          type={'warning'}
           iconName='TagUnknown'
           text={t('timesheet.noProjectMatchFoundText')}
           actions={
@@ -78,10 +87,12 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
           <div className={styles.link}>
             <ProjectLink project={event.project} />
           </div>
-          {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
-          {event.manualMatch && !selectedPeriod.isConfirmed && (
+          {!_.isEmpty(event.project.labels) && (
+            <Icon iconName='Tag' className={styles.labelIcon} />
+          )}
+          {event.manualMatch && !state.selectedPeriod.isConfirmed && (
             <ClearManualMatchButton
-              onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: event.id })}
+              onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
               className={styles.clearButton}
             />
           )}
@@ -90,5 +101,3 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     </ProjectTooltip>
   )
 }
-
-export default ProjectColumn

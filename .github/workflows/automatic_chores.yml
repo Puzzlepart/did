@@ -1,0 +1,83 @@
+name: Automatic chores
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - '.github/workflows/automatic_chores.yml'
+      - '.readme/*.md'
+      - '.readme/blueprint.json'
+      - '.changelog/*.md'
+      - '.changelog/blueprint.json'
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+      - 'package.json'
+
+jobs:
+  automatic_chores:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [12.18.3]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+ 
+      - run: |
+          npm ci
+
+      - name: Generating documentation using typedoc
+        run: |
+          npx concurrently \
+          "node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logger none" \
+          "node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logger none" \
+          "node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logger none"
+
+      - name: ESLint and prettier
+        run: |
+          npx eslint --ext .ts,.tsx ./client ./server --color --fix
+          npx prettier '**/*.ts*' --write --loglevel silent
+
+      - name: Generating README and CHANGELOG using @appnest/readme
+        run: |
+          npx concurrently \
+          "npx @appnest/readme generate --config .readme/blueprint.json --silent" \
+          "npx @appnest/readme generate --config .changelog/blueprint.json --silent"
+
+      - name: Add all changes
+        run: |
+          git add -A
+
+      - name: Get git context
+        id: git_context
+        run: |
+          status=`git status --porcelain`
+          echo "::set-output name=status::$status"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Commit files as {github-automatic-chores} (if staged changes)
+        if: ${{ steps.git_context.outputs.status != '' }}
+        run: |
+          git config --local user.email "github-automatic-chores@users.noreply.github.com"
+          git config --local user.name "github-automatic-chores"
+          git commit --no-verify -m "docs: updated generated docs, \
+          readme and changelog (${{ steps.git_context.outputs.sha_short }}) 📝 [no ci]" \
+          -m "This is a commit done by the GitHub action \
+          https://github.com/Puzzlepart/did/blob/dev/.github/workflows/automatic_chores.yml. \
+          This way we avoid having to generate documentation, run eslint etc. locally before \
+          commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
+
+      - name: Push changes (if staged changes)
+        if: ${{ steps.git_context.outputs.status != '' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref }}

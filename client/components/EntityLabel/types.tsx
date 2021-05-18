@@ -1,6 +1,10 @@
-import { LabelObject } from 'types'
+/* eslint-disable tsdoc/syntax */
+import { HTMLAttributes } from 'react'
+import { LabelInput, LabelObject } from 'types'
 
-export interface IEntityLabelProps {
-  label: LabelObject
-  size?: 'xsmall' | 'small' | 'medium' | 'large'
+/**
+ * @category EntityLabel
+ */
+export interface IEntityLabelProps extends HTMLAttributes<HTMLDivElement> {
+  label: LabelObject | LabelInput
 }

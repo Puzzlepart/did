@@ -1,0 +1,19 @@
+.root {
+  .title {
+    font-size: 16px;
+    margin: 0 0 18px 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    .permissionItem {
+      width: auto;
+      margin-bottom: 8px;
+    }
+  }
+}

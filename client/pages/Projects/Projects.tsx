@@ -1,123 +1,51 @@
-import { useQuery } from '@apollo/client'
-import { AppContext } from 'AppContext'
-import { UserMessage } from 'components/UserMessage'
-import { PERMISSION } from 'config/security/permissions'
-import { MessageBarType, Pivot, PivotItem, SelectionMode } from 'office-ui-fabric'
-import { ProjectForm } from 'pages/Projects/ProjectForm'
-import React, { FunctionComponent, useContext, useLayoutEffect, useMemo, useReducer } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
-import { IProjectsContext, ProjectsContext } from './context'
+/* eslint-disable tsdoc/syntax */
+import { TabContainer } from 'components/TabContainer'
+import React from 'react'
+import { PermissionScope } from 'security'
+import { ProjectsContext } from './context'
+import { useProjects } from './hooks/useProjects'
 import { ProjectDetails } from './ProjectDetails'
-import ProjectList from './ProjectList'
-import { IProjectListProps } from './ProjectList/types'
-import $projects from './projects.gql'
-import createReducer, {
-  CHANGE_VIEW,
-  DATA_UPDATED,
-  initState,
-  SET_SELECTED_PROJECT
-} from './reducer'
-import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
+import { ProjectForm } from './ProjectForm'
+import { ProjectList } from './ProjectList'
+import { CHANGE_VIEW } from './reducer/actions'
+import { ProjectsView } from './types'
 
-export const Projects: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const { user } = useContext(AppContext)
-  const history = useHistory()
-  const params = useParams<IProjectsParams>()
-  const reducer = useMemo(() => createReducer({ params, history }), [])
-  const [state, dispatch] = useReducer(reducer, initState(params))
-  const query = useQuery<ProjectsQueryResult>($projects, {
-    variables: { sortBy: 'name' },
-    fetchPolicy: 'cache-and-network'
-  })
-
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
-  useLayoutEffect(() => {
-    const paths = [state.view, state.selected?.id || params.key, state.detailsTab]
-    const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
-    history.push(path)
-  }, [state.view, state.selected, state.detailsTab])
-
-  const context = useMemo<IProjectsContext>(
-    () => ({
-      state,
-      dispatch,
-      refetch: query.refetch
-    }),
-    [state]
-  )
-
-  const listProps = useMemo<IProjectListProps>(
-    () => ({
-      enableShimmer: query.loading,
-      searchBox: {
-        placeholder:
-          state.view === 'my'
-            ? t('projects.myProjectsSearchPlaceholder')
-            : t('common.searchPlaceholder'),
-        onChange: () => dispatch(SET_SELECTED_PROJECT({ project: null }))
-      },
-      selection: {
-        mode: SelectionMode.single,
-        onChanged: (selected) => {
-          dispatch(SET_SELECTED_PROJECT({ project: selected }))
-        }
-      },
-      height: state.selected && 400
-    }),
-    [state]
-  )
+/**
+ * @category Function Component
+ */
+export const Projects: React.FC = () => {
+  const { state, dispatch, listProps, t, context } = useProjects()
 
   return (
     <ProjectsContext.Provider value={context}>
-      <Pivot
-        selectedKey={state.view}
-        onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))}
-        styles={{ itemContainer: { paddingTop: 10 } }}>
-        <PivotItem
-          itemID='search'
+      <TabContainer
+        defaultSelectedKey={state.view}
+        onTabChanged={(itemKey) =>
+          dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
+        }>
+        <ProjectList
+          {...listProps}
           itemKey='search'
           headerText={t('common.search')}
-          itemIcon='FabricFolderSearch'>
-          <UserMessage
-            hidden={!query.error}
-            type={MessageBarType.error}
-            text={t('common.genericErrorText')}
-          />
-          <ProjectList {...listProps} items={state.projects} />
+          itemIcon='FabricFolderSearch'
+          items={state.projects}>
           {state.selected && <ProjectDetails />}
-        </PivotItem>
-        <PivotItem
-          itemID='my'
+        </ProjectList>
+        <ProjectList
+          {...listProps}
           itemKey='my'
           headerText={t('projects.myProjectsText')}
-          itemIcon='FabricUserFolder'>
-          <UserMessage
-            hidden={!query.error}
-            type={MessageBarType.error}
-            text={t('common.genericErrorText')}
-          />
-          <UserMessage
-            containerStyle={{ marginBottom: 12 }}
-            iconName='OutlookLogoInverse'
-            text={t('projects.outlookCategoryInfoText')}
-          />
-          <ProjectList {...listProps} items={state.projects.filter((p) => !!p.outlookCategory)} />
+          itemIcon='FabricUserFolder'
+          items={state.projects.filter((p) => !!p.outlookCategory)}>
           {state.selected && <ProjectDetails />}
-        </PivotItem>
-        {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
-          <PivotItem
-            itemID='new'
-            itemKey='new'
-            headerText={t('projects.createNewText')}
-            itemIcon='AddTo'>
-            <ProjectForm />
-          </PivotItem>
-        )}
-      </Pivot>
+        </ProjectList>
+        <ProjectForm
+          itemKey='new'
+          headerText={t('projects.createNewText')}
+          itemIcon='AddTo'
+          permission={PermissionScope.MANAGE_PROJECTS}
+        />
+      </TabContainer>
     </ProjectsContext.Provider>
   )
 }
-
-export { ProjectList, ProjectDetails, ProjectForm }

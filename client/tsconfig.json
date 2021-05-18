@@ -14,14 +14,22 @@
     "skipLibCheck": true,
     "inlineSources": false,
     "strictNullChecks": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "resolveJsonModule": true,
     "pretty": true,
     "typeRoots": ["../node_modules/@types"],
     "baseUrl": "./",
     "paths": {
-      "AppConfig": ["./App.config.json"],
-      "DateUtils": ["../shared/utils/date"]
+      "package": ["../package.json"],
+      "security": ["../shared/config/security"],
+      "DateUtils": ["../shared/utils/date"],
+      "AppContext": ["./app/context"],
+      "components": ["./components"],
+      "parts": ["./parts"],
+      "pages": ["./pages"],
+      "hooks": ["./hooks"],
+      "utils": ["./utils"],
+      "i18n": ["./i18n"]
     }
   }
 }

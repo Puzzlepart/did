@@ -1,23 +1,36 @@
+/* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
-import { getValue } from 'helpers'
+import { SubText } from 'components/SubText'
+import { TabComponent } from 'components/TabContainer/types'
+import get from 'get-value'
 import color from 'randomcolor'
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { EventObject } from 'types'
-import { find } from 'underscore'
-import { truncateString } from 'utils/truncateString'
-import { TimesheetContext } from '../context'
+import {
+  Bar,
+  BarChart,
+  Cell,
+  ResponsiveContainer,
+  XAxis,
+  YAxis
+} from 'recharts'
+import { useTimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
-import { CustomTooltip } from './CustomTooltip'
-import { GetAllocationViewData, IChartConfig } from './types'
+import { useChartConfig } from './useChartConfig'
+import { useChartData } from './useChartData'
 
-export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Element => {
+/**
+ * @category Timesheet
+ */
+export const AllocationView: TabComponent = () => {
   const { t } = useTranslation()
-  const { loading, selectedPeriod } = useContext(TimesheetContext)
-  const container = useRef<HTMLDivElement>()
+  const { state } = useTimesheetContext()
+  const container = useRef<HTMLDivElement>(null)
 
-  if (!loading && selectedPeriod?.totalDuration === 0) {
+  const charts = useChartConfig()
+  const data = useChartData(charts, container.current)
+
+  if (!state.loading && state.selectedPeriod?.totalDuration === 0) {
     return (
       <div className={styles.root} ref={container}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />
@@ -25,40 +38,23 @@ export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Elemen
     )
   }
 
-  const charts: IChartConfig[] = [
-    {
-      key: 'project',
-      title: t('timesheet.allocation.projectChartTitle'),
-      subTitle: t('timesheet.allocation.projectChartDescription'),
-      colors: 'light',
-      idKey: 'name',
-      valueKey: 'duration',
-      valuePostfix: t('common.hours'),
-      textKey: 'name',
-      subTextKey: 'customer.name'
-    },
-    {
-      key: 'customer',
-      title: t('timesheet.allocation.customerChartTitle'),
-      subTitle: t('timesheet.allocation.customerChartDescription'),
-      colors: 'light',
-      idKey: 'name',
-      valueKey: 'duration',
-      valuePostfix: t('common.hours'),
-      textKey: 'name'
-    }
-  ]
-
   return (
-    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
+    <div className={styles.root} ref={container}>
       {charts.map((c) => {
-        const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
+        const [k, d] = data[c.key]
         return (
-          <div key={c.key} className={styles.chartContainer}>
+          <div key={k} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
-            <div className={styles.subTitle}>{c.subTitle}</div>
+            <SubText
+              font='small'
+              style={{
+                margin: '0 0 20px 0',
+                textAlign: 'center'
+              }}
+              text={c.subTitle}
+            />
             <ResponsiveContainer width='100%' height={450}>
-              <BarChart className={styles.chart} data={[...data]}>
+              <BarChart className={styles.chart} data={d}>
                 <XAxis interval={0} dataKey='label' />
                 <YAxis
                   label={{
@@ -67,13 +63,15 @@ export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Elemen
                     position: 'insideLeft'
                   }}
                 />
-                <Tooltip content={({ payload }) => <CustomTooltip item={payload} chart={c} />} />
-                <Bar dataKey='value' animationEasing='ease-in-out' animationDuration={1200}>
-                  {data.map((entry) => (
+                <Bar
+                  dataKey='value'
+                  animationEasing='ease-in-out'
+                  animationDuration={1200}>
+                  {d.map((entry) => (
                     <Cell
-                      key={getValue(entry.data, c.idKey)}
+                      key={get(entry.data, c.idKey)}
                       fill={color({
-                        seed: getValue(entry.data, c.textKey),
+                        seed: get(entry.data, c.textKey),
                         luminosity: c.colors
                       })}
                     />
@@ -87,22 +85,3 @@ export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Elemen
     </div>
   )
 }
-
-export default AllocationView((events: EventObject[], chart: IChartConfig, width: number) => {
-  if (!width) return []
-  const items = events.reduce((_items, entry) => {
-    const data = getValue(entry, chart.key, null)
-    if (!data) return _items
-    const item = find(_items, ({ id }) => id === data[chart.idKey])
-    const value = getValue(entry, chart.valueKey)
-    if (item) item.value += value
-    else _items.push({ id: data[chart.idKey], chart, data, value })
-    return _items
-  }, [])
-  const truncateLength = width / (items.length || 1) / 6
-  return items.map((i) => ({
-    ...i,
-    label: truncateString(i.data[chart.textKey], truncateLength),
-    value: parseFloat(i.value.toFixed(1))
-  }))
-})

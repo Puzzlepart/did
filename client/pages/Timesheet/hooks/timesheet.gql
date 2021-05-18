@@ -1,0 +1,47 @@
+#import "../../../graphql/fragments/project-fragment.gql"
+
+query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
+  periods: timesheet(query: $query, options: $options) {
+    id
+    week
+    month
+    startDate
+    endDate
+    events {
+      id
+      title
+      isOrganizer
+      webLink
+      duration
+      startDateTime
+      endDateTime
+      date
+      isSystemIgnored
+      error {
+        code
+      }
+      project {
+        ...ProjectFragment
+      }
+      suggestedProject {
+        ...ProjectFragment
+      }
+      customer {
+        key
+        name
+        icon
+        inactive
+      }
+      labels {
+        name
+        description
+        color
+        icon
+      }
+    }
+    isConfirmed
+    isForecasted
+    isForecast
+    forecastedHours
+  }
+}

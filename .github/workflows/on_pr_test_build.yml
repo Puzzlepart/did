@@ -1,0 +1,46 @@
+name: Test build
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    branches:
+      - master
+      - dev
+    paths-ignore:
+      - '**.md'
+      - '**.yml'
+  
+jobs:
+  test_build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [12.18.3]
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: |
+          npm ci
+
+      - name: Ava tests
+        run: |
+          npm test
+
+      - name: Package client
+        run: |
+          npm run package:client
+        env:
+          DEBUG: webpack*
+          NODE_ENV: production
+
+      - name: Build server
+        run: |
+          npm run build:server
+        env:
+          NODE_ENV: production

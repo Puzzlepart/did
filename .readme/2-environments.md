@@ -1,0 +1,6 @@
+## Environments
+
+| Environment | URL                                                          | Branch   | CI                                                           | Status                                                       |
+| ----------- | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Production  | [https://did.puzzlepart.com/](https://did.puzzlepart.com)    | **main** | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | ![Build and deploy to didapp](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/badge.svg?branch=main) |
+| Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | **dev**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | ![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/dev/badge.svg?branch=dev) |

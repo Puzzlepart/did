@@ -1,8 +1,20 @@
-import * as React from 'react'
+/* eslint-disable tsdoc/syntax */
+import { PageComponent } from 'pages/types'
+import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Timesheet } from './Timesheet'
 
-const _ = () => {
+/**
+ * Timesheet page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
+ */
+export const TimesheetPage: PageComponent = () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -16,6 +28,13 @@ const _ = () => {
   )
 }
 
-export default _
+Object.assign(TimesheetPage, {
+  iconName: 'TimeSheet',
+  permission: PermissionScope.ACCESS_TIMESHEET
+} as Partial<PageComponent>)
 
-export * from './context'
+export * from './hooks'
+export * from './Timesheet'
+export * from './TimesheetPeriod'
+export * from './TimesheetScope'
+export * from './types'

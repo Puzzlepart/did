@@ -1,7 +1,22 @@
-export * from './sleep'
+/* eslint-disable tsdoc/syntax */
+/**
+ * Reusable utility functions
+ *
+ * @module Utils
+ */
+export * from './arrayExtend'
+export * from './arrayMap'
+export * from './browserStorage'
+export * from './cleanArray'
+export * from './deepCopy'
 export * from './generateColumn'
-export * from './getHash'
+export * from './getContrastColor'
 export * from './getSum'
 export * from './loadScripts'
-export { default as logger } from './log'
+export * from './omitDeep'
+export * from './omitTypename'
 export * from './searchObject'
+export * from './sleep'
+export * from './sortAlphabetically'
+export * from './toMap'
+export * from './tryParseJson'

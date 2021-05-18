@@ -1,4 +1,4 @@
-mutation($user: UserInput!, $update: Boolean) {
+mutation AddOrUpdateUser ($user: UserInput!, $update: Boolean) {
   addOrUpdateUser(user: $user, update: $update) {
     success
     error {

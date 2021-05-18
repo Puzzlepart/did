@@ -1,37 +1,25 @@
-import { getIcons } from 'common/icons'
+/* eslint-disable tsdoc/syntax */
 import { Autocomplete } from 'components/Autocomplete'
-import React, { FunctionComponent, useMemo } from 'react'
-import { omit } from 'underscore'
-import { humanize } from 'underscore.string'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import styles from './IconPicker.module.scss'
 import { IIconPickerProps } from './types'
+import { useIconPicker } from './useIconPicker'
 
-export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPickerProps) => {
-  const items = useMemo(
-    () =>
-      getIcons().map((iconName) => ({
-        key: iconName,
-        text: humanize(iconName),
-        searchValue: [iconName, humanize(iconName)].join(' '),
-        iconName: iconName,
-        data: iconName
-      })),
-    []
-  )
-
+/**
+ * Icon picker using `<Autocomplete />` to select
+ * icons from `@uifabric/icons`
+ *
+ * @remarks Can be controlled with a model using props
+ * `model` and `name`
+ *
+ * @category Reusable Component
+ */
+export const IconPicker: ReusableComponent<IIconPickerProps> = (props) => {
+  const props_ = useIconPicker(props)
   return (
     <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
-      <Autocomplete
-        {...omit(props, 'className')}
-        defaultSelectedKey={props.defaultSelected}
-        required={props.required}
-        items={items}
-        itemIcons={{ style: {} }}
-        width={props.width}
-        placeholder={props.placeholder}
-        onClear={() => props.onSelected(null)}
-        onSelected={(item) => props.onSelected(item.data)}
-      />
+      <Autocomplete {...props_} />
     </div>
   )
 }

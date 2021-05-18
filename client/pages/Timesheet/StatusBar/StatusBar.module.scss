@@ -1,0 +1,62 @@
+.root {
+  min-height: 65px;
+  box-sizing: border-box;
+  margin: 10px 0 10px 0;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+
+    .message {
+      flex-grow: 1;
+      flex-basis: 0;
+      justify-content: space-evenly;
+      color: #323130;
+
+      strong em {
+        font-size: 1.2em;
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .progress {
+    padding: 0 0 0 10px;
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+      padding: 10px 0 0 0;
+      font-size: 42px;
+    }
+
+    .indicator {
+      margin: 0 0 0 18px;
+      flex-grow: 1;
+    }
+  }
+}
+
+.root.mobile {
+  .container {
+    flex-direction: column;
+
+    .message {
+      margin-top: 10px;
+
+      strong {
+        font-style: normal;
+        font-size: 1.2em;
+      }
+
+      margin-right: 0;
+    }
+  }
+}

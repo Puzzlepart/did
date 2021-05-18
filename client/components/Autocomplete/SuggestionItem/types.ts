@@ -1,6 +1,10 @@
-import { IDropdownOption } from 'office-ui-fabric'
-import { AutocompleteItemIcons } from '../types'
+/* eslint-disable tsdoc/syntax */
+import { IDropdownOption } from '@fluentui/react'
+import { IAutocompleteProps } from '../types'
 
+/**
+ * @category Autocomplete
+ */
 export interface ISuggestionItem<T = any> extends IDropdownOption {
   searchValue: string
   secondaryText?: string
@@ -11,7 +15,11 @@ export interface ISuggestionItem<T = any> extends IDropdownOption {
   isSelected?: boolean
 }
 
-export interface ISuggestionItemProps extends React.HTMLProps<HTMLDivElement> {
+/**
+ * @category Autocomplete
+ */
+export interface ISuggestionItemProps
+  extends React.HTMLProps<HTMLDivElement>,
+    Pick<IAutocompleteProps, 'itemIcons'> {
   item: ISuggestionItem
-  itemIcons: AutocompleteItemIcons
 }

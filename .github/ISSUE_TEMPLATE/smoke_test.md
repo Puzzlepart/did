@@ -96,6 +96,12 @@ You can see active smoke test issues [here](https://github.com/Puzzlepart/did/is
 - [ ] I can generate the report `Forecast`, and content appears valid **$4.1.5**
   - [ ] I have tried filtering the report
   - [ ] I have tried downloading the report as excel
+- [ ] I can generate the report `Last year`, and content appears valid **$4.1.6**
+  - [ ] I have tried filtering the report
+  - [ ] I have tried downloading the report as excel
+- [ ] I can create my own filter and it's persisted cross devices **$4.1.7**
+- [ ] I can select the filter I created and it filters the result appears valid **$4.1.8**
+- [ ] I can remove the filter I created  **$4.1.9**
 
 ## Admin $4.2
 

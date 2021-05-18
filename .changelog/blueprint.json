@@ -1,0 +1,13 @@
+{
+  "blueprint": ".changelog/CHANGELOG.md",
+  "input": ".changelog/CHANGELOG.md",
+  "output": "CHANGELOG.md",
+  "package": "package.json",
+  "placeholder": ["[[", "]]"],
+  "documentationConfig": {
+    "markdown": {
+      "titleLevel": 2
+    }
+  },
+  "line": "rainbow"
+}

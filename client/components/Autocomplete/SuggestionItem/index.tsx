@@ -1,23 +1,34 @@
-import { Icon } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { Icon } from '@fluentui/react'
 import React from 'react'
-import { omit } from 'underscore'
+import _ from 'underscore'
 import styles from './SuggestionItem.module.scss'
 import { ISuggestionItemProps } from './types'
 
-export function SuggestionItem(props: ISuggestionItemProps) {
+/**
+ * @category Autocomplete
+ */
+export const SuggestionItem: React.FC<ISuggestionItemProps> = (props) => {
   if (props.item.key === -1) {
     return <div data-is-focusable={true}>{props.item.text}</div>
   }
 
   const classNames = [styles.root, props.item.isSelected && styles.isSelected]
+  let iconStyles = {}
+  if (typeof props.itemIcons !== 'boolean') {
+    iconStyles = props.itemIcons?.style
+  }
 
   return (
     <div
-      {...omit(props, 'itemIcons', 'item')}
+      {..._.omit(props, 'itemIcons', 'item')}
       className={classNames.join(' ')}
       data-is-focusable={true}>
       <div className={styles.container}>
-        <div className={styles.icon} style={props.itemIcons?.style} hidden={!props.itemIcons}>
+        <div
+          className={styles.icon}
+          style={iconStyles}
+          hidden={!props.itemIcons}>
           <Icon iconName={props.item.iconName || 'Page'} />
         </div>
         <div className={styles.content}>

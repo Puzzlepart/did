@@ -1,15 +1,25 @@
-import { IModalProps, Modal } from 'office-ui-fabric'
-import * as React from 'react'
+/* eslint-disable tsdoc/syntax */
+import { IModalProps, Modal } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import FadeIn from 'react-fade-in'
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import styles from './HotkeyModal.module.scss'
 export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 
-export const HotkeyModal = (props: IHotkeyModal) => {
+/**
+ * Modal that shows the available shortcuts in the current context.
+ *
+ * @category Reusable Component
+ */
+export const HotkeyModal: ReusableComponent<IHotkeyModal> = (props) => {
   const { t } = useTranslation()
   return (
-    <Modal isOpen={props.isOpen} onDismiss={props.onDismiss} containerClassName={styles.root}>
+    <Modal
+      isOpen={props.isOpen}
+      onDismiss={props.onDismiss}
+      containerClassName={styles.root}>
       <div className={styles.container}>
         <div className={styles.title}>{t('common.shortcuts')}</div>
         <FadeIn>

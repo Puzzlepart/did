@@ -1,19 +1,12 @@
-import { ITypedHash } from '@pnp/common'
-import { IListGroups } from 'components/List/types'
-import { EventObject } from 'types'
-import { IColumn } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { IColumn } from '@fluentui/react'
+import { IListProps } from 'components/List/types'
+import { HTMLProps } from 'react'
 
-export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
-  /**
-   * List of events
-   */
-  events: EventObject[]
-
-  /**
-   * Enable shimmer
-   */
-  enableShimmer?: boolean
-
+/**
+ * @category EventList
+ */
+export interface IEventListProps extends IListProps {
   /**
    * An array of additional columns to add
    */
@@ -25,22 +18,17 @@ export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
   dateFormat?: string
 
   /**
-   * Groups to render
-   */
-  groups?: IListGroups
-
-  /**
-   * Show empty days
-   */
-  showEmptyDays?: boolean
-
-  /**
    * Column width overrides
    */
-  columnWidths?: ITypedHash<number>
+  columnWidths?: Record<string, number>
 
   /**
    * Resizable columns
    */
   resizableColumns?: boolean
+}
+
+export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
+  displayFormat?: string
+  duration: number
 }

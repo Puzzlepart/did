@@ -1,115 +1,80 @@
-import { useQuery } from '@apollo/client'
-import { FilterPanel, List, UserMessage } from 'components'
-import { Pivot, PivotItem, Spinner } from 'office-ui-fabric'
-import React, { useLayoutEffect, useMemo, useReducer } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable tsdoc/syntax */
+import { ChoiceGroup, PivotItem } from '@fluentui/react'
+import { FilterPanel, TabContainer, UserMessage } from 'components'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
-import { isEmpty } from 'underscore'
-import DateUtils from 'DateUtils'
-import getColumns from './columns'
-import commandBar from './commandBar'
-import { filters } from './filters'
-import { getQueries } from './queries'
-import createReducer, {
+import { ReportsContext } from './context'
+import { useReports } from './hooks'
+import {
   CHANGE_QUERY,
-  DATA_UPDATED,
   FILTERS_UPDATED,
-  INIT,
   TOGGLE_FILTER_PANEL
-} from './reducer'
+} from './reducer/actions'
 import styles from './Reports.module.scss'
-import $timeentries from './timeentries.gql'
-import { IReportsParams } from './types'
+import { ReportsList } from './ReportsList'
+import { SaveFilterForm } from './SaveFilterForm'
+import { SummaryView } from './SummaryView'
 
-export const Reports = () => {
+/**
+ * @category Function Component
+ */
+export const Reports: React.FC = () => {
   const { t } = useTranslation()
-  const history = useHistory()
-  const params = useParams<IReportsParams>()
-  const queries = getQueries(t)
-  const reducer = useMemo(() => createReducer({ params, queries }), [])
-  const [state, dispatch] = useReducer(reducer, {
-    loading: true,
-    timeentries: [],
-    groupBy: {
-      fieldName: '.',
-      emptyGroupName: t('common.all')
-    }
-  })
-  const query = useQuery($timeentries, {
-    skip: !state.query,
-    fetchPolicy: 'cache-first',
-    variables: state.query?.variables
-  })
-  const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
-
-  useLayoutEffect(() => dispatch(INIT()), [])
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
-  useLayoutEffect(() => {
-    state.query?.key && history.push(`/reports/${state.query.key}`)
-  }, [state.query])
-
+  const {
+    defaultSelectedKey,
+    queries,
+    options,
+    filters,
+    context
+  } = useReports()
   return (
-    <div className={styles.root}>
-      <Pivot
-        defaultSelectedKey={params.query || 'default'}
-        onLinkClick={(item) => dispatch(CHANGE_QUERY({ key: item.props.itemKey }))}>
-        {queries.map((query) => (
-          <PivotItem
-            key={query.key}
-            itemKey={query.key}
-            headerText={query.text}
-            itemIcon={query.iconName}>
-            <div className={styles.container}>
-              {state.loading && (
-                <Spinner
-                  className={styles.spinner}
-                  labelPosition='right'
-                  label={t('reports.generatingReportLabel')}
-                />
-              )}
-              {!state.loading && !isEmpty(state.timeentries) && (
-                <List
-                  fadeIn={[200, 500]}
-                  items={state.subset}
-                  groups={{
-                    ...state.groupBy,
-                    totalFunc: (items) => {
-                      const durationHrs = items.reduce(
-                        (sum, item) => sum + item.duration,
-                        0
-                      ) as number
-                      return t('common.headerTotalDuration', {
-                        duration: DateUtils.getDurationString(durationHrs, t)
-                      })
-                    }
-                  }}
-                  columns={columns}
-                  commandBar={commandBar({ state, dispatch, t })}
-                />
-              )}
-              <UserMessage
-                hidden={!isEmpty(state.timeentries) || state.loading || !state.query}
-                text={t('reports.noEntriesText')}
-              />
-              <FilterPanel
-                isOpen={state.isFiltersOpen}
-                filters={filters(t)}
-                items={state.timeentries}
-                onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
-                onFiltersUpdated={(filters) => dispatch(FILTERS_UPDATED({ filters }))}
-                shortListCount={10}
-              />
-            </div>
-          </PivotItem>
+    <ReportsContext.Provider value={context}>
+      <TabContainer
+        className={styles.root}
+        defaultSelectedKey={defaultSelectedKey}
+        items={queries}
+        fixedLinkWidth={true}
+        styles={{
+          link: {
+            display: defaultSelectedKey === 'default' ? 'none' : 'initial'
+          }
+        }}
+        itemProps={{
+          headerButtonProps: {
+            hidden: true,
+            disabled: context.state.loading
+          }
+        }}
+        onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}>
+        {queries.map((props, index) => (
+          <ReportsList {...props} key={index} />
         ))}
-        <PivotItem itemKey='default' headerButtonProps={{ disabled: true }}>
+        <SummaryView
+          itemKey='summary'
+          headerText={t('admin.summary')}
+          itemIcon='CalendarWeek'
+        />
+        <PivotItem itemKey='default'>
           <UserMessage
-            className={styles.container}
+            containerStyle={{ marginBottom: 20 }}
             iconName='ReportDocument'
             text={t('reports.selectReportText')}
           />
+          <ChoiceGroup options={options} />
         </PivotItem>
-      </Pivot>
-    </div>
+      </TabContainer>
+      <FilterPanel
+        isOpen={context.state.isFiltersOpen}
+        headerText={t('reports.filterPanelHeaderText')}
+        filters={filters}
+        items={context.state.data.timeEntries}
+        onDismiss={() => context.dispatch(TOGGLE_FILTER_PANEL())}
+        onFiltersUpdated={(filters) =>
+          context.dispatch(FILTERS_UPDATED({ filters }))
+        }>
+        <SaveFilterForm />
+      </FilterPanel>
+    </ReportsContext.Provider>
   )
 }

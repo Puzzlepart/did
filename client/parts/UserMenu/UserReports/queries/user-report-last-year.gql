@@ -1,0 +1,7 @@
+#import "./user-report-time-entry-fragment"
+
+query UserLastYearReport {
+  userReport(preset: "LAST_YEAR") {
+    ...UserReportTimeEntryFragment
+  }
+}

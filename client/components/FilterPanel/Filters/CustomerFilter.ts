@@ -1,28 +1,42 @@
-import { getValue } from 'helpers'
+/* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import _ from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
+/**
+ * @extends BaseFilter
+ * @category FilterPanel
+ */
 export class CustomerFilter extends BaseFilter {
-  constructor(public fieldName: string, public name: string) {
-    super(fieldName)
+  /**
+   * Constructor for `CustomerFilter`
+   *
+   * @param name - Name
+   * @param keyFieldName - Field name for the item key
+   * @param valueFieldName - Field name for the item value
+   */
+  constructor(name: string, keyFieldName: string, valueFieldName: string) {
+    super(name, keyFieldName, valueFieldName)
   }
 
   /**
-   * Intialize the ResourceFilter
+   * Intialize the `CustomerFilter`
    *
-   * @param {any[]} entries Entries
+   * @param items - Items
    */
-  public initialize(entries: any[]): IFilter {
-    const customers = _.unique(entries.map((e) => getValue(e, this.fieldName, null))).sort()
-    const items = customers.map((resource) => ({
-      key: resource,
-      value: resource
-    }))
-    return {
-      key: this.fieldName,
-      name: this.name,
-      items,
-      selected: []
-    }
+  public initialize(items: any[]): IFilter {
+    const filterItems = _.unique(
+      items.map((item_) => ({
+        key: get(item_, this.keyFieldName),
+        value: get(item_, this.valueFieldName)
+      })),
+      (item) => item.key
+    ).sort((a, b) => {
+      if (a.value < b.value) return -1
+      if (a.value > b.value) return 1
+      return 0
+    })
+    return super.initialize(filterItems)
   }
 }

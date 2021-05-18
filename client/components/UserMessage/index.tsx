@@ -1,47 +1,35 @@
-import {
-  IMessageBarStyleProps,
-  IMessageBarStyles,
-  IStyleFunctionOrObject,
-  MessageBar
-} from 'office-ui-fabric'
-import React, { FunctionComponent } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { MessageBar } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
+import { useUserMessage } from './useUserMessage'
+import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
- * A component that supports a MessageBar with markdown using react-markdown
+ * A component that supports a `<MessageBar />` with
+ * markdown using `react-markdown`.
  *
- * @category UserMessage
+ * @category Reusable Component
  */
-export const UserMessage: FunctionComponent<IUserMessageProps> = (props: IUserMessageProps) => {
-  const _styles: IStyleFunctionOrObject<IMessageBarStyleProps, IMessageBarStyles> = {}
-
-  if (props.fixedCenter) {
-    _styles.root = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: props.fixedCenter
-    }
-  }
+export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
+  const { container, message } = useUserMessage(props)
+  const classNames = useUserMessageStyles(props.type)
 
   return (
-    <div
-      id={props.id}
-      className={`${styles.root} ${props.className}`}
-      style={props.containerStyle}
-      hidden={props.hidden}
-      onClick={props.onClick}>
-      <MessageBar
-        styles={_styles}
-        isMultiline={props.isMultiline}
-        messageBarType={props.type}
-        messageBarIconProps={props.iconName && { iconName: props.iconName }}
-        onDismiss={props.onDismiss}
-        actions={props.actions}>
-        {props.text && <ReactMarkdown source={props.text} escapeHtml={false} />}
-        {props.children && props.children}
+    <div {...container}>
+      <MessageBar {...message} className={classNames.root}>
+        <div style={props.innerStyle}>
+          {props.headerText && (
+            <div className={styles.header}>{props.headerText}</div>
+          )}
+          {props.text && (
+            <ReactMarkdown source={props.text} escapeHtml={false} />
+          )}
+          {props.children}
+        </div>
       </MessageBar>
     </div>
   )

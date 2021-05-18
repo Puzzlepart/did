@@ -1,8 +1,6 @@
+import { ITabItemProps } from 'components'
 import { SubscriptionSettingField } from '../types'
 
-export interface ISettingsSectionProps {
-  id: string
-  name: string
+export interface ISettingsSectionProps extends ITabItemProps {
   fields: SubscriptionSettingField[]
-  defaultExpanded?: boolean
 }

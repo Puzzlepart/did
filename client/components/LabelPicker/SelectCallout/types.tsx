@@ -1,9 +1,12 @@
-import { ICalloutProps } from 'office-ui-fabric'
-import { LabelObject } from 'types'
+import { ICalloutProps } from '@fluentui/react'
+import { LabelObject as Label } from 'types'
+import { ILabelPickerProps } from '../types'
 
-export interface ISelectCalloutProps extends ICalloutProps {
-  labels: LabelObject[]
+export interface ISelectCalloutProps
+  extends ICalloutProps,
+    Pick<ILabelPickerProps, 'headerText'> {
   placeholder: string
-  defaultSelectedKeys?: string[]
-  onToggleLabel: (label: LabelObject) => void
+  labels: Label[]
+  selectedLabels: Label[]
+  onToggleLabel: (label: Label) => void
 }

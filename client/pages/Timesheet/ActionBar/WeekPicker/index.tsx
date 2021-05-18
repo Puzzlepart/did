@@ -1,75 +1,64 @@
+/* eslint-disable tsdoc/syntax */
 import {
   Calendar,
   Callout,
   DateRangeType,
-  FirstWeekOfYear,
   DayOfWeek,
   DirectionalHint,
+  FirstWeekOfYear,
   FocusTrapZone,
-  TextField
-} from 'office-ui-fabric'
-import { TimesheetContext } from 'pages/Timesheet'
-import { TimesheetScope } from 'pages/Timesheet/types'
-import React, { useContext, useState } from 'react'
+  ICalendarStrings,
+  ICalloutProps,
+  useTheme
+} from '@fluentui/react'
+import React from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import styles from './WeekPicker.module.scss'
+import { SET_SCOPE } from '../../reducer/actions'
+import { TimesheetScope, useTimesheetContext } from '../../types'
 
-export const WeekPicker = () => {
+/**
+ * @category Timesheet
+ */
+export const WeekPicker: React.FC<ICalloutProps> = (props) => {
   const { t } = useTranslation()
-  const { loading, scope, dispatch } = useContext(TimesheetContext)
-  const [calendar, setCalendar] = useState(null)
+  const { state, dispatch } = useTimesheetContext()
+  const { palette } = useTheme()
   return (
-    <>
-      <div>
-        <TextField
-          className={styles.root}
-          onClick={(event) => setCalendar(event.currentTarget)}
-          value={scope.timespan}
-          styles={{
-            field: {
-              color: 'rgb(120, 120, 120)',
-              cursor: !loading && 'pointer'
-            },
-            root: {
-              width: 280,
-              marginTop: 6
+    <Callout
+      {...props}
+      isBeakVisible={false}
+      doNotLayer={false}
+      gapSpace={5}
+      directionalHint={DirectionalHint.bottomAutoEdge}
+      setInitialFocus={true}>
+      <FocusTrapZone isClickableOutsideFocusTrap={true}>
+        <Calendar
+          onSelectDate={(date) => {
+            dispatch(SET_SCOPE(new TimesheetScope(date)))
+            props.onDismiss()
+          }}
+          firstDayOfWeek={DayOfWeek.Monday}
+          strings={
+            t('common.calendarStrings', {
+              returnObjects: true
+            }) as ICalendarStrings
+          }
+          showGoToToday={false}
+          showWeekNumbers={true}
+          isMonthPickerVisible={isBrowser}
+          firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
+          dateRangeType={DateRangeType.Week}
+          value={state.scope.startDate.jsDate}
+          calendarMonthProps={{
+            styles: {
+              currentItemButton: {
+                color: palette.neutralPrimary
+              }
             }
           }}
-          readOnly
-          borderless
-          iconProps={{ iconName: 'ChevronDown', className: styles.actionBarIcon }}
         />
-      </div>
-      {calendar && (
-        <Callout
-          isBeakVisible={false}
-          className={styles.callout}
-          gapSpace={5}
-          doNotLayer={false}
-          target={calendar}
-          directionalHint={DirectionalHint.bottomLeftEdge}
-          onDismiss={() => setCalendar(null)}
-          setInitialFocus={true}>
-          <FocusTrapZone isClickableOutsideFocusTrap={true}>
-            <Calendar
-              onSelectDate={(date) => {
-                dispatch({ type: 'SET_SCOPE', scope: new TimesheetScope(date) })
-                setCalendar(null)
-              }}
-              firstDayOfWeek={DayOfWeek.Monday}
-              strings={t('common.calendarStrings', { returnObjects: true }) as any}
-              showGoToToday={false}
-              showWeekNumbers={true}
-              firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
-              dateRangeType={DateRangeType.Week}
-              autoNavigateOnSelection={true}
-              value={scope.startDate.jsDate}
-            />
-          </FocusTrapZone>
-        </Callout>
-      )}
-    </>
+      </FocusTrapZone>
+    </Callout>
   )
 }
-
-export { default as weekPickerCommand } from './weekPickerCommand'

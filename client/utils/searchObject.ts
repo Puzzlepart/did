@@ -1,15 +1,34 @@
-import { isEmpty } from 'underscore'
+import _ from 'underscore'
+
+type SearchObjectOptions<T> = {
+  item: T
+  searchTerm: string
+  pick_?: string[]
+  omit_?: string[]
+}
+
 /**
- * Search object
+ * Searces the object values for a match of `searchString`
  *
- * @param {string} item Item
- * @param {string} searchStr The string to search for
+ * Available options (`SearchObjectOptions`)
+ * - `item` **required** - The item to search
+ * - `searchTerm` **required** The term to search for
+ * - `pick_` _optional_ - Properties to search in
+ * - `omit_` _optional_ - Properties to ignore
  */
-export function searchObject<T = any>(item: T, searchStr: string) {
-  if (isEmpty(searchStr)) return true
+export function searchObject<T = any>({
+  item,
+  searchTerm,
+  pick_,
+  omit_ = ['__typename']
+}: SearchObjectOptions<T>) {
+  if (_.isEmpty(searchTerm)) return true
   try {
-    return JSON.stringify(item).toLowerCase().indexOf(searchStr.toLowerCase()) !== -1
-  } catch (error) {
+    let item_ = (_.omit(item, omit_) as unknown) as T
+    if (pick_) item_ = (_.pick(item, pick_) as unknown) as T
+    const _values = JSON.stringify(Object.values(item_)).toLowerCase()
+    return _values.includes(searchTerm.toLowerCase())
+  } catch {
     return false
   }
 }

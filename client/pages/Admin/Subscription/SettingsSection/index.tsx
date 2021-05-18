@@ -1,58 +1,73 @@
-import { ToggleSection } from 'components/ToggleSection'
-import { getValue } from 'helpers'
-import { Slider, Toggle } from 'office-ui-fabric'
-import React, { FunctionComponent, useContext } from 'react'
+/* eslint-disable tsdoc/syntax */
+
+import { Slider, TextField, Toggle } from '@fluentui/react'
+import { SubText, TabComponent } from 'components'
+import get from 'get-value'
+import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 
-export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
-  props: ISettingsSectionProps
-) => {
-  const { settings, onSettingsChanged } = useContext(SubscriptionContext)
+/**
+ * @category SubscriptionSettings
+ */
+export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
+  const { settings, onChange } = useContext(SubscriptionContext)
   return (
-    <ToggleSection className={styles.root} id={props.id} headerText={props.name}>
+    <div className={styles.root}>
       {props.fields.map((field) => {
-        field.props.set('disabled', field.disabledIf && field.disabledIf(settings || {}))
-        field.props.set('hidden', field.hiddenIf && field.hiddenIf(settings || {}))
-        const _ = Array.from(field.props).reduce(
-          (obj, [key, value]) => ({ ...obj, [key]: value }),
-          {} as any
-        )
-        const key = `${props.id}.${field.id}`
+        const fieldProps = { ...field.props } as any
+        fieldProps.disabled =
+          field.disabledIf && field.disabledIf(settings || {})
+        fieldProps.hidden = field.hiddenIf && field.hiddenIf(settings || {})
+        const key = `${props.itemKey}.${field.id}`
         let fieldElement: JSX.Element
-        // eslint-disable-next-line default-case
         switch (field.type) {
+          case 'text':
+            fieldElement = (
+              <TextField
+                {...fieldProps}
+                defaultValue={fieldProps.defaultValue}
+                onChange={(_event, value) => onChange(key, value)}
+              />
+            )
+            break
           case 'bool':
             fieldElement = (
               <Toggle
-                {..._}
-                defaultChecked={getValue(settings, key, false)}
-                onChange={(_e, value) => onSettingsChanged(key, value)}
+                {...fieldProps}
+                defaultChecked={get(settings, key, { default: false })}
+                inlineLabel={true}
+                onChange={(_event, value) => onChange(key, value)}
               />
             )
             break
           case 'number':
             fieldElement = (
               <Slider
-                {..._}
-                defaultValue={getValue(settings, key, 1)}
-                onChange={(value) => onSettingsChanged(key, value)}
+                {...fieldProps}
+                defaultValue={get(settings, key, { default: 1 })}
+                onChange={(value) => onChange(key, value)}
               />
             )
             break
           case 'checkbox':
-            fieldElement = <CheckboxField {...field} settingsKey={key} settings={settings} />
+            fieldElement = (
+              <CheckboxField {...field} settingsKey={key} settings={settings} />
+            )
             break
         }
         return (
-          <div key={field.id} className={styles.inputField} hidden={_.hidden}>
+          <div
+            key={field.id}
+            className={styles.inputField}
+            hidden={fieldProps.hidden}>
             {fieldElement}
-            <span className={styles.inputDescription}>{_.description}</span>
+            <SubText text={fieldProps.description} />
           </div>
         )
       })}
-    </ToggleSection>
+    </div>
   )
 }

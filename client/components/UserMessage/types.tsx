@@ -1,10 +1,26 @@
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { IMessageBarProps } from '@fluentui/react'
 
+export type UserMessageType =
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'severeWarning'
+
+/**
+ * @category UserMessage
+ */
 export interface IUserMessageProps extends IMessageBarProps {
+  /**
+   * Header text to show in **bold** _slightly larger_ font
+   */
+  headerText?: string
+
   /**
    * Text to show in the message
    *
-   * NOTE: Supports markdown
+   * @remarks Supports markdown
    */
   text?: string
 
@@ -19,9 +35,9 @@ export interface IUserMessageProps extends IMessageBarProps {
   onDismiss?: () => void
 
   /**
-   * Type (info, warning, erro etc)
+   * Type info, warning, error etc
    */
-  type?: MessageBarType
+  type?: UserMessageType
 
   /**
    * Icon to use if not default for the type
@@ -34,7 +50,12 @@ export interface IUserMessageProps extends IMessageBarProps {
   containerStyle?: React.CSSProperties
 
   /**
-   * To flex the message center, speficy a min height
+   * To flex the message center with a fixed height
    */
-  fixedCenter?: number
+  fixedHeight?: number
+
+  /**
+   * Styles for the inner part of the message
+   */
+  innerStyle?: React.CSSProperties
 }

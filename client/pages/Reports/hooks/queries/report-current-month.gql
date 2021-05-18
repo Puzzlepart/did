@@ -1,0 +1,7 @@
+#import "../../../../graphql/fragments/timeentry-fragment.gql"
+
+query CurrentMonthReport {
+  timeEntries: report(preset: "CURRENT_MONTH") {
+    ...TimeEntryFragment
+  }
+}

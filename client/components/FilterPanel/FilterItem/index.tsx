@@ -1,21 +1,27 @@
-import { Checkbox, SearchBox } from 'office-ui-fabric'
-import React, { useState, useMemo } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { Checkbox, SearchBox } from '@fluentui/react'
+import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import s from 'underscore.string'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
-import { contains, isBlank } from 'underscore.string'
-import { useTranslation } from 'react-i18next'
 
-export const FilterItem = (props: IFilterItemProps) => {
+/**
+ * @category Function Component
+ */
+export const FilterItem: React.FC<IFilterItemProps> = (props) => {
   const { t } = useTranslation()
-  const selectedKeys = props.filter.selected.map((f) => f.key)
+  const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
   const [searchTerm, onSearch] = useState<string>('')
-  const [showCount, setShowCount] = useState(props.shortListCount)
+  const [showCount, setShowCount] = useState(props.shortListCount || 10)
 
   const items = useMemo(() => {
     return props.filter.items.filter((item) =>
-      isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase())
+      s.isBlank(searchTerm)
+        ? true
+        : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
     )
-  }, [searchTerm])
+  }, [searchTerm, props.filter.items])
 
   return (
     <div className={styles.root}>
@@ -30,8 +36,10 @@ export const FilterItem = (props: IFilterItemProps) => {
         <div key={item.key} className={styles.item}>
           <Checkbox
             label={item.value}
-            checked={selectedKeys.indexOf(item.key) !== -1}
-            onChange={(_, checked) => props.onFilterUpdated(props.filter, item, checked)}
+            checked={selectedKeys.has(item.key)}
+            onChange={(_, checked) =>
+              props.onFilterUpdated(props.filter, item, checked)
+            }
           />
         </div>
       ))}

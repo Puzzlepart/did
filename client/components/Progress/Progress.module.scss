@@ -1,0 +1,17 @@
+.root {
+  .progress {
+    padding: 0 0 0 10px;
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+      padding: 10px 0 0 0;
+      font-size: 42px;
+    }
+
+    .indicator {
+      margin: 0 0 0 18px;
+      flex-grow: 1;
+    }
+  }
+}

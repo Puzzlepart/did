@@ -1,9 +1,14 @@
+/* eslint-disable tsdoc/syntax */
 import DateUtils, { DateInput, DateObject } from 'DateUtils'
 import { TimesheetQuery } from 'types'
-import { ITimesheetParams } from './types'
+import { ITimesheetParameters } from './types'
 
 /**
- * Handles a scope, the period of time between a startDateTime and endDateTime
+ * Handles a scope, the period of time between
+ * a `startDateTime` and `endDateTime`
+ *
+ * @remarks Look into creating a `react` hook
+ * that can ease working with the scope
  *
  * @category Timesheet
  */
@@ -12,9 +17,9 @@ export class TimesheetScope {
   public endDate?: DateObject
 
   /**
-   * Constructs a new TimesheetScope
+   * Constructs for `TimesheetScope`
    *
-   * @param {DateInput} startDate Optional start date
+   * @param startDate - Optional start date
    */
   constructor(startDate?: DateInput) {
     this.startDate = new DateObject(startDate).startOfWeek
@@ -22,12 +27,13 @@ export class TimesheetScope {
   }
 
   /**
-   * Sets startDate/endDate from params
+   * Sets `startDate` and `endDate` from `params`
    *
-   * @param {ITimesheetParams} params Params
+   * @param params - Params
+   * @memberof TimesheetScope
    */
-  fromParams(params: ITimesheetParams): TimesheetScope {
-    this.startDate = new DateObject().fromObject(params)
+  fromParams(parameters: ITimesheetParameters): TimesheetScope {
+    this.startDate = new DateObject().fromObject(parameters)
     this.endDate = this.startDate.endOfWeek
     return this
   }
@@ -35,7 +41,8 @@ export class TimesheetScope {
   /**
    * Get TimesheetQuery for the scope
    *
-   * @param {string} template Template
+   * @param template - Template
+   * @memberof TimesheetScope
    */
   public query(template: string = 'YYYY-MM-DD'): TimesheetQuery {
     if (!this.startDate) return null
@@ -46,20 +53,22 @@ export class TimesheetScope {
   }
 
   /**
-   * Sets the scope
+   * Sets the scope and returns a cloned version of the TimesheetScope
    *
-   * @param {string} add Add
+   * @param add - Add
+   * @memberof TimesheetScope
    */
   public set(add: string): TimesheetScope {
     this.startDate = this.startDate.add(add)
     this.endDate = this.startDate.endOfWeek
-    return this
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
   }
 
   /**
    * Get a day in the scope by index
    *
-   * @param {number} index Index
+   * @param index - Index
+   * @memberof TimesheetScope
    */
   public getDay(index: number): DateObject {
     return this.startDate.add(`${index}d`)
@@ -67,6 +76,8 @@ export class TimesheetScope {
 
   /**
    * Is the scope the current week
+   *
+   * @memberof TimesheetScope
    */
   public get isCurrentWeek(): boolean {
     return this.startDate.isCurrentWeek
@@ -75,9 +86,15 @@ export class TimesheetScope {
   /**
    * Get timespan string for the scope
    *
-   * Used in @WeekPicker
+   * @memberof TimesheetScope
    */
   public get timespan(): string {
-    return DateUtils.getTimespanString(this.startDate, this.endDate)
+    return DateUtils.getTimespanString({
+      startDate: this.startDate,
+      endDate: this.endDate,
+      includeMonth: {
+        endDate: true
+      }
+    })
   }
 }

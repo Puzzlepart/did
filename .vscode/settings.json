@@ -4,12 +4,22 @@
     "client/**/*.js": true,
     "client/**/*.js.map": true,
     "client/**/*.d.ts": true,
+    "client/**/global.d.ts": false,
     "server/**/*.js": true,
     "server/**/*.js.map": true,
     "server/views/index.hbs": true,
     "server/public/js": true,
     "dist": true,
-    ".assets": true
+    "server/.docs": true,
+    "client/.docs": true,
+    "shared/.docs": true,
+    "README.md": true,
+    "CHANGELOG.md": true,
+    "schema.gql": true,
+    "*.dmm": true,
+    ".husky": true,
+    ".gitattributes": true,
+    ".nvmrc": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
@@ -18,5 +28,6 @@
   "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB",
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
-  "editor.folding": true
+"editor.folding": true,
+"editor.tabSize": 2
 }

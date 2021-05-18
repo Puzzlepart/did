@@ -1,59 +1,67 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable tsdoc/syntax */
+/**
+ * Main entry point for the App
+ *
+ * @module /
+ */
 import { ApolloProvider } from '@apollo/client'
+import { ThemeProvider } from '@fluentui/react/lib/utilities/ThemeProvider'
 import { initializeIcons } from '@uifabric/icons'
+import { IAppProps } from 'app/types'
 import 'core-js/stable'
-import i18n from 'i18next'
-import * as React from 'react'
-import * as ReactDom from 'react-dom'
+import $date from 'DateUtils'
+import i18next from 'i18next'
+import React from 'react'
+import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
-import { logger } from 'utils'
-import DateUtils from 'DateUtils'
-import { App } from './App'
-import { ContextUser, IAppContext } from './AppContext'
-import { client, $context } from './graphql'
+import { App, ContextUser } from './app'
+import { $usercontext, client } from './graphql'
 import './i18n'
 
 /**
  * Bootstrapping the App
  *
- * * Retrieves context using GraphQL query GET_CONTEXT
- * * Sets up i18n with the user language
- * * Sets up DateUtils with the user language
+ * * Retrieves context using GraphQL query `GET_CONTEXT`
+ * * Sets up `i18n` with the user language
+ * * Sets up `DateUtils` with the user language
  */
-const boostrap = async () => {
+export const bootstrap = async () => {
   initializeIcons()
 
   /**
-   * Get app context
+   * Initialize app
    */
-  const getContext = async (): Promise<IAppContext> => {
-    const context: IAppContext = {}
+  const initializeApp = async (): Promise<IAppProps> => {
+    const _: IAppProps = {}
     try {
-      const { data } = await client.query<Partial<IAppContext>>({
-        query: $context,
+      const { data } = await client.query<Partial<IAppProps>>({
+        query: $usercontext,
         fetchPolicy: 'cache-first'
       })
-      context.user = new ContextUser(data.user)
-      context.subscription = data?.subscription
-      return context
-    } catch (error) {
-      // We return an "empty" user with preferred language en-GB (default)
+      _.user = new ContextUser(data.user)
+      _.subscription = data?.subscription
+      _.authProviders = data?.authProviders
+      return _
+    } catch {
       return { user: new ContextUser() }
     }
   }
 
-  const context = await getContext()
-  const container = document.getElementById('app')
-  DateUtils.setup(context.user.language)
-  i18n.changeLanguage(context.user.language)
+  const init = await initializeApp()
+  $date.setup(init.user.preferredLanguage)
+  i18next.changeLanguage(init.user.preferredLanguage)
 
-  logger.info(`App initialized with language ${context.user.language}`)
-
-  ReactDom.render(
-    <ApolloProvider client={client}>
-      <App {...context} />
-    </ApolloProvider>,
-    container
+  render(
+    <ThemeProvider applyTo='body' theme={init.user.theme}>
+      <ApolloProvider client={client}>
+        <App {...init} />
+      </ApolloProvider>
+    </ThemeProvider>,
+    document.querySelector('#app')
   )
 }
 
-boostrap()
+bootstrap()
+
+export { App }

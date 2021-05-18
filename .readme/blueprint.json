@@ -1,0 +1,19 @@
+{
+  "package": "package.json",
+  "blueprint": ".readme/README.md",
+  "input": ".readme/README.md",
+  "output": "README.md",
+  "text": "Keep your calendar up-to-date with what you work on, and that's it. You're done.",
+  "logo": {
+    "src": "./server/public/images/favicon/android-chrome-192x192.png",
+    "width": 192,
+    "height": 192
+  },
+  "placeholder": ["[[", "]]"],
+  "documentationConfig": {
+    "markdown": {
+      "titleLevel": 2
+    }
+  },
+  "line": "rainbow"
+}

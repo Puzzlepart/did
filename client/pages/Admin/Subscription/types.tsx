@@ -1,8 +1,12 @@
 interface ISubscriptionSettingBase {
   id: string
-  props: Map<string, any>
   disabledIf?: (settings: any) => boolean
   hiddenIf?: (settings: any) => boolean
+  props: { [key: string]: any }
+}
+
+export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
+  type: 'text'
 }
 
 export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {
@@ -20,6 +24,7 @@ export interface ISubscriptionSettingCheckbox extends ISubscriptionSettingBase {
 }
 
 export type SubscriptionSettingField =
+  | ISubscriptionSettingText
   | ISubscriptionSettingBool
   | ISubscriptionSettingNumber
   | ISubscriptionSettingCheckbox

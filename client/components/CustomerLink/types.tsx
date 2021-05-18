@@ -1,5 +1,10 @@
+/* eslint-disable tsdoc/syntax */
+import { HTMLAttributes } from 'react'
 import { Customer } from 'types'
 
-export interface ICustomerLinkProps {
+/**
+ * @ignore
+ */
+export interface ICustomerLinkProps extends HTMLAttributes<HTMLDivElement> {
   customer: Customer
 }

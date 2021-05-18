@@ -1,8 +1,19 @@
-import { ISearchBoxProps } from 'office-ui-fabric'
+import { ISearchBoxProps, ITextFieldProps } from '@fluentui/react'
+import { FormInputControlBase } from 'components/FormControl/types'
 
-export interface IIconPickerProps extends ISearchBoxProps {
-  label?: string
-  description?: string
+export interface IIconPickerProps
+  extends Pick<ITextFieldProps, 'label' | 'description'>,
+    ISearchBoxProps,
+    FormInputControlBase {
+  /**
+   * Default selected icon
+   */
   defaultSelected?: string
-  onSelected: (icon: string) => void
+
+  /**
+   * On selected callback for the icon picker.
+   * If not specified `model` and `name` should
+   * be specified instead.
+   */
+  onSelected?: (icon: string) => void
 }

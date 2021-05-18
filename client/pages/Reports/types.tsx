@@ -1,36 +1,81 @@
-import { IListGroups } from 'components/List/types'
+/* eslint-disable tsdoc/syntax */
+import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
+import { IListGroupProps } from 'components/List/types'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric'
-import { TimeEntriesQuery } from 'types'
+import { Project, TimesheetPeriodObject, User } from 'types'
 
-export interface IReportsQuery extends IContextualMenuItem {
+/**
+ * @category Reports
+ */
+export interface IReportsQuery extends IPivotItemProps {
   /**
-   * Variables used for graphl query
+   * GraphQL query
    */
-  variables: {
-    query: TimeEntriesQuery
-    forecast?: boolean
-    sortAsc?: boolean
-  }
+  query: any
+
+  /**
+   * GraphQL query variables
+   */
+  variables?: any
 
   /**
    * Export file name
    */
-  exportFileName: string
+  exportFileName?: string
+
+  [key: string]: any
 }
 
+/**
+ * @ignore
+ */
 export interface IGroupByOption extends IContextualMenuItem {
-  props: IListGroups
+  props: IListGroupProps
 }
 
-export interface IReportsState {
+/**
+ * @category Reports
+ */
+export interface IReportsSavedFilter extends IContextualMenuItem {
+  values: { [key: string]: any }
+}
+
+/**
+ * @category Reports
+ */
+export interface IReportsData {
   /**
    * Time entries
    */
-  timeentries?: any[]
+  timeEntries: any[]
 
   /**
-   * Filtered subset
+   * Users
+   */
+  users: User[]
+
+  /**
+   * Periods
+   */
+  periods: TimesheetPeriodObject[]
+
+  /**
+   * Projects
+   */
+  projects: Project[]
+}
+
+/**
+ * @category Reports
+ */
+export interface IReportsState {
+  /**
+   * Data
+   */
+  data?: IReportsData
+
+  /**
+   * Filtered subset of data.timeEntries
    */
   subset?: any[]
 
@@ -40,25 +85,42 @@ export interface IReportsState {
   isFiltersOpen?: boolean
 
   /**
-   * Query
+   * Query preset
    */
-  query?: IReportsQuery
+  preset?: IReportsQuery
 
   /**
    * Group by properties
    */
-  groupBy?: IListGroups
+  groupBy?: IListGroupProps
 
   /**
    * Loading
    */
   loading?: boolean
+
+  /**
+   * Is filtered
+   */
+  isFiltered?: boolean
+
+  /**
+   * Saved filters
+   */
+  savedFilters?: { [key: string]: IReportsSavedFilter }
+
+  /**
+   * Active filter
+   */
+  filter?: IReportsSavedFilter
 }
 
 /**
  * Get group by options
  *
- * @param {TFunction} t Translate function
+ * @ignore
+ *
+ * @param t - Translate function
  */
 export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
   {
@@ -94,15 +156,18 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
     }
   },
   {
-    key: 'weekNumber',
+    key: 'week',
     text: t('common.weekNumberLabel'),
     props: {
-      fieldName: 'weekNumber',
+      fieldName: 'week',
       emptyGroupName: ' '
     }
   }
 ]
 
-export interface IReportsParams {
+/**
+ * @category Reports
+ */
+export interface IReportsParameters {
   query: string
 }

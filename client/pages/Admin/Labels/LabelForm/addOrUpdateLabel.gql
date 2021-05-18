@@ -1,5 +1,5 @@
 
-mutation($label: LabelInput!, $update: Boolean) {
+mutation AddOrUpdateLabel ($label: LabelInput!, $update: Boolean) {
   addOrUpdateLabel(label: $label, update: $update) {
     success
     error {

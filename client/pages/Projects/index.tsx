@@ -1,26 +1,42 @@
-import * as React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+/* eslint-disable tsdoc/syntax */
+import { useRouteMatches } from 'hooks/route/useRouteMatches'
+import { PageComponent } from 'pages/types'
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Projects } from './Projects'
-export { ProjectList } from './Projects'
 
-const _ = (): React.ReactElement<Switch> => {
-  const match = useRouteMatch()
+/**
+ * Projects page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+ * to support navigating between
+ * sub components
+ *
+ * @category Page Component
+ */
+export const ProjectsPage: PageComponent = () => {
+  const matches = useRouteMatches('view', 'key', 'detailsTab')
   return (
     <Switch>
-      <Route path={`${match.path}/:view/:key/:detailsTab`}>
-        <Projects />
-      </Route>
-      <Route path={`${match.path}/:view/:key`}>
-        <Projects />
-      </Route>
-      <Route path={`${match.path}/:view`}>
-        <Projects />
-      </Route>
-      <Route path={match.path}>
-        <Projects />
-      </Route>
+      {matches.map((path) => (
+        <Route key={path} path={path}>
+          <Projects />
+        </Route>
+      ))}
     </Switch>
   )
 }
 
-export default _
+Object.assign(ProjectsPage, {
+  iconName: 'ProjectCollection',
+  permission: PermissionScope.ACCESS_PROJECTS
+} as Partial<PageComponent>)
+
+export * from './context'
+export * from './ProjectDetails'
+export * from './ProjectForm'
+export * from './ProjectList'
+export * from './Projects'
+export * from './types'
