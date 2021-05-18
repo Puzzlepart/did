@@ -1,22 +1,30 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { useMessage, UserMessage } from 'components'
-import List from 'components/List'
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Icon } from '@fluentui/react'
+import { List, TabComponent, useMessage, UserMessage } from 'components'
 import React, { useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
-import { isNull } from 'underscore'
+import _ from 'underscore'
 import { ApiTokenForm } from './ApiTokenForm'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import styles from './ApiTokens.module.scss'
-import { ApiTokensColumns as columns } from './columns'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { Icon } from 'office-ui-fabric'
+import { useColumns } from './useColumns'
 
-export const ApiTokens = () => {
+/**
+ * Component for handling API tokens.
+ *
+ * * See created API tokens
+ * * Create new API tokens
+ * * Delete existing API tokens
+ *
+ * @category Tab Component
+ */
+export const ApiTokens: TabComponent = () => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
   const [deleteApiToken] = useMutation($deleteApiToken)
@@ -27,34 +35,43 @@ export const ApiTokens = () => {
   /**
    * On delete API token
    *
-   * @param {ApiToken} token The token to dete
+   * @param token - The token to dete
    */
   async function onDeleteApiToken(token: ApiToken) {
     await deleteApiToken({ variables: { name: token.name } })
-    setMessage({ type: MessageBarType.info, text: t('admin.tokenDeletedText', token) })
+    setMessage({
+      type: 'info',
+      text: t('admin.tokenDeletedText', token)
+    })
     refetch()
   }
 
   /**
    * On key added
    *
-   * @param {string} generatedKey Generated API key
+   * @param generatedKey - Generated API key
    */
   function onKeyAdded(generatedKey: string) {
     setForm({})
     if (generatedKey) {
       setMessage({ text: t('admin.tokenGeneratedText') }, 20000)
       setApiKey(generatedKey)
-    } else setMessage({ type: MessageBarType.error, text: t('admin.tokenErrorText') })
+    } else
+      setMessage({
+        type: 'error',
+        text: t('admin.tokenErrorText')
+      })
     refetch()
   }
+
+  const columns = useColumns({ onDeleteApiToken })
 
   return (
     <div className={styles.root}>
       {message && <UserMessage {...message} />}
-      {!isNull(apiKey) && (
+      {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
-          <UserMessage type={MessageBarType.success} iconName='Cloud'>
+          <UserMessage type={'success'} iconName='Cloud'>
             <span className={styles.text}>{apiKey}</span>
             <span className={styles.copy}>
               <CopyToClipboard text={apiKey}>
@@ -65,7 +82,7 @@ export const ApiTokens = () => {
         </FadeIn>
       )}
       <List
-        columns={columns(onDeleteApiToken, t)}
+        columns={columns}
         items={data?.tokens}
         commandBar={{
           items: [
@@ -79,7 +96,11 @@ export const ApiTokens = () => {
         }}
       />
       {form.isOpen && (
-        <ApiTokenForm {...form} onAdded={onKeyAdded} onDismiss={() => setForm({ isOpen: false })} />
+        <ApiTokenForm
+          {...form}
+          onAdded={onKeyAdded}
+          onDismiss={() => setForm({ isOpen: false })}
+        />
       )}
     </div>
   )

@@ -24,5 +24,8 @@ Please describe your pull request.
 ### Related issues
 _Use e.g. `Closes #1000` to link issue 1000 to the PR. Remove section if no related issues._
 
+### Related discussions
+_Remove section if no related discussions._
+
 ### Related PRs
 _Remove section if not._

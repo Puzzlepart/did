@@ -1,10 +1,9 @@
-import stringStripHtml from 'string-strip-html'
-
+/* eslint-disable tsdoc/syntax */
 /**
- * Strip html from string using string-strip-html
- * Used when fetching events from ms graph
- * Strips the html from event body
+ * Utility functions
  *
- * @param {string} str String
+ * @module Utils
  */
-export const stripHtmlString = (str: string): string => stringStripHtml(str).result
+export * from './environment'
+export * from './sound'
+export * from './stripHtmlString'

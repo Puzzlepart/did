@@ -1,6 +1,5 @@
-query {
+query Customers {
   customers(sortBy: "name") {
-    id
     key
     name
     description

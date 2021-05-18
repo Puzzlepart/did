@@ -6,7 +6,7 @@
     "target": "es2018",
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es2018", "esnext.asynciterable", "DOM"],
@@ -15,17 +15,15 @@
     "types": [
       "express",
       "node",
-      "mocha",
       "express-bearer-token",
       "express-session",
       "passport-azure-ad",
       "debug",
       "get-value",
-      "passport",
-      "@custom-types"
+      "passport"
     ],
     "outDir": "dist"
   },
   "include": ["./server/**/*.ts"],
-  "exclude": ["./node_modules"]
+  "exclude": ["./node_modules"],
 }

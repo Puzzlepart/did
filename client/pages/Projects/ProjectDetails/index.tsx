@@ -1,14 +1,18 @@
-import { Pivot, PivotItem } from 'office-ui-fabric'
-import React, { FunctionComponent, useContext } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { Pivot, PivotItem } from '@fluentui/react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'
-import { CHANGE_DETAILS_TAB } from '../reducer'
+import { CHANGE_DETAILS_TAB } from '../reducer/actions'
 import { Header } from './Header'
 import { Information } from './Information'
 import styles from './ProjectDetails.module.scss'
 import { TimeEntries } from './TimeEntries'
 
-export const ProjectDetails: FunctionComponent = () => {
+/**
+ * @category Projects
+ */
+export const ProjectDetails: React.FC = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ProjectsContext)
 
@@ -17,7 +21,9 @@ export const ProjectDetails: FunctionComponent = () => {
       <Header />
       <Pivot
         defaultSelectedKey={state.detailsTab}
-        onLinkClick={({ props }) => dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))}>
+        onLinkClick={({ props }) =>
+          dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))
+        }>
         <PivotItem
           headerText={t('projects.informationHeaderText')}
           itemKey='information'
@@ -34,3 +40,7 @@ export const ProjectDetails: FunctionComponent = () => {
     </div>
   )
 }
+
+export * from './Header'
+export * from './Information'
+export * from './TimeEntries'

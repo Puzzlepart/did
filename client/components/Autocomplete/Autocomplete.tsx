@@ -1,71 +1,62 @@
-import { Callout, FocusZone, FocusZoneDirection, Label, List, SearchBox } from 'office-ui-fabric'
-import React, { useLayoutEffect, useMemo, useReducer, useRef } from 'react'
-import { isEmpty } from 'underscore'
+/* eslint-disable tsdoc/syntax */
+import {
+  Callout,
+  FocusZone,
+  FocusZoneDirection,
+  Label,
+  List,
+  SearchBox
+} from '@fluentui/react'
+import { SubText } from 'components/SubText'
+import React from 'react'
+import _ from 'underscore'
 import { IAutocompleteProps } from '.'
+import { ReusableComponent } from '../types'
 import styles from './Autocomplete.module.scss'
-import createReducer, {
-  DISMISS_CALLOUT,
-  INIT,
-  ON_KEY_DOWN,
-  ON_SEARCH,
-  RESET,
-  SET_SELECTED_INDEX
-} from './reducer'
 import { SuggestionItem } from './SuggestionItem'
+import { useAutocomplete } from './useAutocomplete'
 
-export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
-  const reducer = useMemo(() => createReducer(), [])
-  const [state, dispatch] = useReducer(reducer, { selectedIndex: -1, suggestions: [] })
-  const field = useRef<HTMLDivElement>()
-
-  useLayoutEffect(() => dispatch(INIT({ props })), [props])
-
-  const classNames = [styles.root, props.errorMessage && styles.hasError]
-
-  const suggestions = useMemo(
-    () =>
-      state.suggestions.map((s, idx) => ({
-        ...s,
-        isSelected: idx === state.selectedIndex
-      })),
-    [state.suggestions, state.selectedIndex]
-  )
+/**
+ * Autocomplete component using `<SearchBox />`, `<Callout />`,
+ * `<FocusZone />` and `<List />` from ``.
+ *
+ * @category Reusable Component
+ */
+export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
+  const {
+    state,
+    className,
+    onClear,
+    onSearch,
+    onKeyDown,
+    onDismissCallout,
+    onSetSelected,
+    suggestions,
+    ref
+  } = useAutocomplete(props)
 
   return (
-    <div
-      className={classNames.join(' ')}
-      onKeyDown={(event) =>
-        dispatch(
-          ON_KEY_DOWN({
-            key: event.which,
-            onEnter: (item) => props.onSelected(item)
-          })
-        )
-      }>
+    <div className={className} onKeyDown={onKeyDown}>
       {props.label && (
         <Label disabled={props.disabled} required={props.required}>
-          {props.label}
+          {props?.label}
         </Label>
       )}
-      <div ref={field}>
+      <div ref={ref}>
         <SearchBox
+          key={state.selectedItem?.key}
           className={styles.field}
-          value={state.value}
+          defaultValue={state.value}
           iconProps={{ iconName: state.selectedItem?.iconName || 'Search' }}
           placeholder={props.placeholder}
           disabled={props.disabled}
           autoComplete='off'
           autoCorrect='off'
-          onClear={() => {
-            dispatch(RESET())
-            props.onClear()
-          }}
-          onChange={(_event, searchTerm) => dispatch(ON_SEARCH({ searchTerm }))}
+          onClear={onClear}
+          onChange={onSearch}
         />
       </div>
-      <div hidden={!props.description} className={styles.description}>
-        {props.description}
-      </div>
+      <SubText text={props.description} />
       <div hidden={!props.errorMessage} role='alert'>
         <p className={styles.errorMessage}>
           <span>{props.errorMessage}</span>
@@ -74,11 +65,11 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
       <Callout
         gapSpace={2}
         alignTargetEdge={true}
-        hidden={isEmpty(state.suggestions)}
-        onDismiss={() => dispatch(DISMISS_CALLOUT({ item: null }))}
+        hidden={_.isEmpty(state.suggestions)}
+        onDismiss={() => onDismissCallout(null)}
         calloutMaxHeight={props.maxHeight || 450}
-        style={{ width: field.current?.clientWidth }}
-        target={field?.current}
+        style={{ width: ref.current?.clientWidth }}
+        target={ref?.current}
         directionalHint={5}
         isBeakVisible={false}>
         <div>
@@ -86,16 +77,13 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
             <List
               tabIndex={0}
               items={suggestions}
-              onRenderCell={(item, idx) => (
+              onRenderCell={(item, index) => (
                 <SuggestionItem
                   key={item.key}
                   item={item}
                   itemIcons={props.itemIcons}
-                  onClick={() => {
-                    dispatch(DISMISS_CALLOUT({ item }))
-                    props.onSelected(item)
-                  }}
-                  onMouseOver={() => dispatch(SET_SELECTED_INDEX({ index: idx }))}
+                  onClick={() => onDismissCallout(item)}
+                  onMouseOver={() => onSetSelected(index)}
                 />
               )}
             />
@@ -105,3 +93,5 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
     </div>
   )
 }
+
+export * from './types'

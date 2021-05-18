@@ -1,25 +1,28 @@
-import { Icon } from 'office-ui-fabric'
-import * as React from 'react'
-import { isEmpty } from 'underscore'
-import styles from './LabelColumn.module.scss'
+import { Icon } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
-import { LabelObject } from 'types'
+import React from 'react'
+import { LabelObject as Label } from 'types'
+import _ from 'underscore'
+import styles from './LabelColumn.module.scss'
 import { ILabelColumnProps } from './types'
 
-export const LabelColumn = (props: ILabelColumnProps) => {
+export const LabelColumn: React.FC<ILabelColumnProps> = (props) => {
   if (props.project) {
     return (
       <div className={styles.root}>
         <div className={styles.iconContainer}>
-          <Icon iconName={props.project.icon} styles={{ root: { fontSize: 18 } }} />
+          <Icon
+            iconName={props.project.icon}
+            styles={{ root: { fontSize: 18 } }}
+          />
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{props.project.name}</div>
           <div className={styles.description}>for {props.customer.name}</div>
-          {!isEmpty(props.project.labels) && (
+          {!_.isEmpty(props.project.labels) && (
             <div className={styles.labels}>
-              {props.project.labels.map((label: LabelObject, idx: number) => (
-                <EntityLabel key={idx} label={label} size='xsmall' />
+              {(props.project.labels as Label[]).map((label, index: number) => (
+                <EntityLabel key={index} label={label} />
               ))}
             </div>
           )}

@@ -1,29 +1,36 @@
-import { getValue } from 'helpers'
-import { unique, contains, indexOf } from 'underscore'
-import DateUtils from 'DateUtils'
-import { BaseFilter, IFilter } from './BaseFilter'
+/* eslint-disable tsdoc/syntax */
+import $date from 'DateUtils'
+import get from 'get-value'
+import _ from 'underscore'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
+/**
+ * @extends BaseFilter
+ * @category FilterPanel
+ */
 export class MonthFilter extends BaseFilter {
-  constructor(fieldName: string, public name: string) {
-    super(fieldName)
+  /**
+   * Constructor for `MonthFilter`
+   *
+   * @param name - Name
+   * @param keyFieldName - Field name for the item key
+   */
+  constructor(name: string, keyFieldName: string) {
+    super(name, keyFieldName)
   }
 
   /**
-   * Intialize the MonthFilter
+   * Intialize the `MonthFilter`
    *
-   * @param {any[]} entries Entries
+   * @param items - Items
    */
-  public initialize(entries: any[]): IFilter {
-    const values = unique(entries.map((e) => getValue(e, this.fieldName, null)))
-    const monthNames = DateUtils.getMonthNames()
-    const items = monthNames
-      .filter((_, idx) => contains(values, idx + 1))
-      .map((value) => ({ key: indexOf(monthNames, value) + 1, value }))
-    return {
-      key: this.fieldName,
-      name: this.name,
-      items,
-      selected: []
-    }
+  public initialize(items: any[]): IFilter {
+    const values = _.unique(items.map((item_) => get(item_, this.keyFieldName)))
+    const monthNames = $date.getMonthNames()
+    const filterItems = monthNames
+      .filter((_item, index) => _.contains(values, index + 1))
+      .map((value) => ({ key: _.indexOf(monthNames, value) + 1, value }))
+    return super.initialize(filterItems)
   }
 }

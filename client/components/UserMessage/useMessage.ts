@@ -1,8 +1,11 @@
-import { IUserMessageProps } from './types'
+/* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
+import { IUserMessageProps } from './types'
 
 /**
- * Used to show a temporarily message
+ * Hook used to show a temporarily message
+ *
+ * @category UserMessage
  */
 export function useMessage(): [
   IUserMessageProps,
@@ -13,8 +16,8 @@ export function useMessage(): [
   /**
    * Set message
    *
-   * @param {IUserMessageProps} message Message
-   * @param {number} duration Duration in ms (defaults to 5000)
+   * @param message - Message
+   * @param duration - Duration in ms (defaults to 5000)
    */
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   function set(message: IUserMessageProps, duration: number = 5000) {

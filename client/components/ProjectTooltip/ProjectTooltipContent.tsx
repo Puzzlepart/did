@@ -1,13 +1,14 @@
-import { stringIsNullOrEmpty } from '@pnp/common'
+import { Icon } from '@fluentui/react'
 import { EntityLabel, ProjectLink } from 'components'
-import { Icon } from 'office-ui-fabric'
-import React, { FunctionComponent } from 'react'
+import { SubText } from 'components/SubText'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import { LabelObject as Label } from 'types'
+import _ from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 
-export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
+export const ProjectTooltipContent: React.FC<IProjectTooltipProps> = ({
   project
 }: IProjectTooltipProps) => {
   const { t } = useTranslation()
@@ -24,22 +25,24 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
           </div>
         </div>
       </div>
-      <div className={styles.description}>
-        <p hidden={stringIsNullOrEmpty(project.description)}>{project.description}</p>
-      </div>
-      {!isEmpty(project.labels) && (
+      <SubText text={project.description} />
+      {!_.isEmpty(project.labels) && (
         <div className={styles.labels}>
-          {project.labels.map((label, idx) => (
-            <EntityLabel key={idx} label={label} />
+          {(project.labels as Label[]).map((label, index) => (
+            <EntityLabel key={index} label={label} />
           ))}
         </div>
       )}
       <div className={styles.footer}>
         <div className={styles.link}>
-          <ProjectLink project={project} text={t('projects.navigateText')} icon='NavigateForward' />
+          <ProjectLink
+            project={project}
+            text={t('projects.navigateText')}
+            icon='NavigateForward'
+          />
         </div>
         <div className={styles.tag}>
-          <span>{project.id}</span>
+          <span>{project.tag}</span>
         </div>
       </div>
     </div>

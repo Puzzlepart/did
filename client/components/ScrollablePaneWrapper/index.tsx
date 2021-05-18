@@ -1,7 +1,19 @@
-import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
 import React from 'react'
 
-export const ScrollablePaneWrapper = ({ children, condition, height }) =>
+/**
+ * Conditionally wraps `children` in `<ScrollablePane />` based
+ * on `condition`
+ *
+ * @category Reusable Component
+ */
+export const ScrollablePaneWrapper: ReusableComponent<any> = ({
+  children,
+  condition,
+  height
+}) =>
   condition ? (
     <div style={{ position: 'relative', height }}>
       <ScrollablePane

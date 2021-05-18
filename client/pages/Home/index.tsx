@@ -1,34 +1,67 @@
-import { AppContext } from 'AppContext'
+/* eslint-disable tsdoc/syntax */
+import { DefaultButton, useTheme } from '@fluentui/react'
 import { UserMessage } from 'components'
-import { DefaultButton, MessageBarType } from 'office-ui-fabric'
-import React, { useContext } from 'react'
+import __package from 'package'
+import { PageComponent } from 'pages/types'
+import React, { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
+import _ from 'underscore'
 import styles from './Home.module.scss'
+import { useAuthProviders } from './useAuthProviders'
+import { useHome } from './useHome'
 
-export default (): React.ReactElement<HTMLDivElement> => {
-  const { subscription } = useContext(AppContext)
+/**
+ * Home page
+ *
+ * @category Page Component
+ */
+export const Home: PageComponent = () => {
+  const { error, subscription } = useHome()
+  const providers = useAuthProviders()
   const { t } = useTranslation()
-  const error = JSON.parse(document.getElementById('app').getAttribute('data-error') || null)
+  const { components } = useTheme()
 
   return (
     <div className={styles.root}>
-      <div className={styles.logo}>did</div>
-      <p className={styles.motto}>{t('common.motto')}</p>
+      <div
+        className={styles.logo}
+        style={components.logo.styles as CSSProperties}>
+        {__package.name}
+      </div>
+      <div
+        className={styles.motto}
+        style={components.motto.styles as CSSProperties}>
+        {__package.description}
+      </div>
       {error && (
         <UserMessage
           className={styles.error}
-          type={MessageBarType.error}
+          type='error'
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
+          onDismiss={() => {
+            window.location.href = window.location.href.split('?')[0]
+          }}
         />
       )}
-      <div hidden={!!subscription || !!error}>
-        <DefaultButton
-          className={styles.signinbutton}
-          href='/auth/signin'
-          text={t('common.signInText')}
-        />
-      </div>
+      {_.isEmpty(Object.keys(providers)) && (
+        <UserMessage type='warning' text={t('common.signInDisabledMessage')} />
+      )}
+      {!subscription && !error && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {Object.keys(providers).map((key) => (
+            <DefaultButton
+              key={key}
+              onClick={() => document.location.replace(`/auth/${key}/signin`)}
+              iconProps={providers[key].iconProps}
+              style={{ marginTop: 10 }}
+              text={providers[key].text}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
+
+Home.path = '/'

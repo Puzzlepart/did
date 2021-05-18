@@ -1,0 +1,19 @@
+.root {
+  height: 65px;
+  min-height: 65px;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 65px;
+    min-height: 65px;
+    padding: 0 4px 0 8px;
+    box-sizing: border-box;
+
+    .name {
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

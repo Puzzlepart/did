@@ -1,50 +1,39 @@
+/* eslint-disable tsdoc/syntax */
 import { ApolloQueryResult } from '@apollo/client'
-import { TFunction } from 'i18next'
-import { createContext } from 'react'
-import { TimesheetAction } from './reducer'
+import { AnyAction } from '@reduxjs/toolkit'
+import { createContext, Dispatch, useContext } from 'react'
+import { useSubmitActions } from './hooks/useSubmitActions'
 import { ITimesheetState } from './types'
 
-export interface ITimesheetContext extends ITimesheetState {
+/**
+ * @category Timesheet
+ */
+export interface ITimesheetContext extends ReturnType<typeof useSubmitActions> {
   /**
-   * On submit period
-   *
-   * Action depends on parameter forecast
-   *
-   * - If set to true: Forecast the period
-   *
-   * - If set to false: Confirms the period
-   *
-   * @param {boolean} forecast Forecast
+   * State
    */
-  onSubmitPeriod: (forecast: boolean) => void
-
-  /**
-   * On unsubmit period
-   *
-   * Action depends on parameter forecast
-   *
-   * - If set to true: Removes forecast for period
-   *
-   * - If set to false: Unconfirms the period
-   *
-   * @param {boolean} forecast Forecast
-   */
-  onUnsubmitPeriod: (forecast: boolean) => void
+  state: ITimesheetState
 
   /**
    * Dispatch an action
    */
-  dispatch?: React.Dispatch<TimesheetAction>
+  dispatch?: Dispatch<AnyAction>
 
   /**
    * Refetch data
    */
   refetch?: () => Promise<ApolloQueryResult<any>>
-
-  /**
-   * Translate function
-   */
-  t: TFunction
 }
 
+/**
+ * @category Timesheet
+ */
 export const TimesheetContext = createContext<ITimesheetContext>(null)
+
+/**
+ * Returns the current context value for Timesheet using
+ * `useContext` from `react`
+ *
+ * @returns `TimesheetContext`
+ */
+export const useTimesheetContext = () => useContext(TimesheetContext)

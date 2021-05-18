@@ -1,5 +1,5 @@
+import { IPanelProps } from '@fluentui/react'
 import { User } from 'types'
-import { IPanelProps } from 'office-ui-fabric'
 
 export interface IUserFormProps extends IPanelProps {
   /**

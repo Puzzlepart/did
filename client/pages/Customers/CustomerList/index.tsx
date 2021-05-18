@@ -1,51 +1,59 @@
-import List from 'components/List'
-import { Checkbox, SelectionMode } from 'office-ui-fabric'
-import React, { useContext, useEffect, useState } from 'react'
+import { Checkbox, SelectionMode } from '@fluentui/react'
+import { List, TabComponent } from 'components'
+import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { filter, isEmpty } from 'underscore'
-import { CustomersContext } from '../context'
-import { SET_SELECTED_CUSTOMER } from '../reducer'
-import { columns } from './columns'
+import _ from 'underscore'
+import { useCustomerList } from './useCustomerList'
 
-export const CustomerList = () => {
+export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
-  const { dispatch, state, loading } = useContext(CustomersContext)
-  const [items, setItems] = useState([...state.customers])
-  const [showInactive, setShowInactive] = useState(false)
-
-  useEffect(
-    () => setItems([...state.customers].filter((p) => (showInactive ? true : !p.inactive))),
-    [state.customers, showInactive]
-  )
+  const {
+    state,
+    loading,
+    items,
+    columns,
+    showInactive,
+    setShowInactive,
+    setSelectedCustomer
+  } = useCustomerList()
 
   return (
-    <List
-      searchBox={{ placeholder: t('common.searchPlaceholder') }}
-      selection={{
-        mode: SelectionMode.single,
-        onChanged: (selected) => dispatch(SET_SELECTED_CUSTOMER({ customer: selected }))
-      }}
-      height={state.selected && 400}
-      enableShimmer={loading}
-      items={items}
-      columns={columns(t)}
-      commandBar={{
-        items: [
-          {
-            key: 'TOGGLE_INACTIVE',
-            onRender: () => (
-              <Checkbox
-                styles={{ root: { margin: '6px 0 0 8px' } }}
-                disabled={isEmpty(filter(state.customers, (i) => i.inactive))}
-                checked={showInactive}
-                label={t('common.toggleInactiveText')}
-                onChange={(_event, checked) => setShowInactive(checked)}
-              />
-            )
-          }
-        ],
-        farItems: []
-      }}
-    />
+    <>
+      <List
+        searchBox={{ placeholder: t('common.searchPlaceholder') }}
+        selectionProps={{
+          mode: SelectionMode.single,
+          onChanged: setSelectedCustomer
+        }}
+        height={state.selected && 400}
+        enableShimmer={loading}
+        items={items}
+        columns={columns}
+        commandBar={{
+          items: [
+            {
+              key: 'TOGGLE_INACTIVE',
+              onRender: () => (
+                <div
+                  hidden={
+                    isMobile ||
+                    !_.any(state.customers, (index) => index.inactive)
+                  }>
+                  <Checkbox
+                    styles={{ root: { margin: '6px 0 0 8px' } }}
+                    checked={showInactive}
+                    label={t('common.toggleInactiveText')}
+                    onChange={(_event, checked) => setShowInactive(checked)}
+                  />
+                </div>
+              )
+            }
+          ],
+          farItems: []
+        }}
+      />
+      {props.children}
+    </>
   )
 }

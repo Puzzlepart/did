@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { KeyCodes } from '@fluentui/react'
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { KeyCodes } from 'office-ui-fabric'
-import { find } from 'underscore'
+import { useMemo, useReducer } from 'react'
+import _ from 'underscore'
 import {
   AutocompleteSelectCallback,
   IAutocompleteProps,
@@ -11,39 +13,54 @@ import {
 export const INIT = createAction<{ props: IAutocompleteProps }>('INIT')
 export const RESET = createAction('RESET')
 export const ON_SEARCH = createAction<{ searchTerm: string }>('ON_SEARCH')
-export const ON_KEY_DOWN = createAction<{ key: number; onEnter: AutocompleteSelectCallback }>(
-  'ON_KEY_DOWN'
+export const ON_KEY_DOWN = createAction<{
+  key: number
+  onEnter: AutocompleteSelectCallback
+}>('ON_KEY_DOWN')
+export const SET_SELECTED_INDEX = createAction<{ index: number }>(
+  'SET_SELECTED_INDEX'
 )
-export const SET_SELECTED_INDEX = createAction<{ index: number }>('SET_SELECTED_INDEX')
-export const DISMISS_CALLOUT = createAction<{ item: ISuggestionItem<any> }>('DISMISS_CALLOUT')
+export const DISMISS_CALLOUT = createAction<{ item: ISuggestionItem<any> }>(
+  'DISMISS_CALLOUT'
+)
 
-export default () =>
-  createReducer<IAutocompleteState>(
-    {},
-    {
-      [INIT.type]: (state, { payload }: ReturnType<typeof INIT>) => {
+/**
+ * Creates reducer using `createReducer` from [\@reduxjs/toolkit](https://www.npmjs.com/package/\@reduxjs/toolkit)
+ *
+ * @param initialState - Initial state
+ *
+ * @returns `Reducer<IAutocompleteState<any>, AnyAction>`
+ */
+export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
+  createReducer<IAutocompleteState>(initialState, (builder) =>
+    builder
+      .addCase(INIT, (state, { payload }) => {
         state.items = payload.props.items
         state.suggestions = []
-        state.selectedItem = find(
+        state.selectedItem = _.find(
           state.items,
           (item) => item.key === payload.props.defaultSelectedKey
         )
         state.value = state.selectedItem?.text
-      },
-      [RESET.type]: (state) => {
-        state.value = null
+      })
+      .addCase(RESET, (state) => {
+        state.selectedItem = null
+        state.value = ''
         state.suggestions = []
-      },
-
-      [ON_SEARCH.type]: (state, { payload }: ReturnType<typeof ON_SEARCH>) => {
+      })
+      .addCase(ON_SEARCH, (state, { payload }) => {
         state.selectedIndex = -1
-        state.suggestions = state.items.filter((i) =>
-          i.searchValue.toLowerCase().includes(payload.searchTerm.toLowerCase())
-        )
-        state.value = payload.searchTerm
-      },
-
-      [ON_KEY_DOWN.type]: (state, { payload }: ReturnType<typeof ON_KEY_DOWN>) => {
+        state.value = payload.searchTerm || ''
+        state.suggestions =
+          state.value.length > 0
+            ? state.items.filter((index) =>
+                index.searchValue
+                  .toLowerCase()
+                  .includes(payload.searchTerm.toLowerCase())
+              )
+            : []
+      })
+      .addCase(ON_KEY_DOWN, (state, { payload }) => {
         switch (payload.key) {
           case KeyCodes.up:
             state.selectedIndex--
@@ -60,15 +77,25 @@ export default () =>
             }
             break
         }
-      },
-
-      [SET_SELECTED_INDEX.type]: (state, { payload }: ReturnType<typeof SET_SELECTED_INDEX>) => {
+      })
+      .addCase(SET_SELECTED_INDEX, (state, { payload }) => {
         state.selectedIndex = payload.index
-      },
-
-      [DISMISS_CALLOUT.type]: (state, { payload }: ReturnType<typeof DISMISS_CALLOUT>) => {
+      })
+      .addCase(DISMISS_CALLOUT, (state, { payload }) => {
         state.suggestions = []
         state.value = payload?.item?.text
-      }
-    }
+        state.selectedItem = payload?.item
+      })
   )
+
+/**
+ * Auto complete reducer using `useReducer`
+ *
+ * @param initialState - Initial state
+ *
+ * @returns [state, dispatch]
+ */
+export function useAutocompleteReducer(initialState: IAutocompleteState) {
+  const reducer = useMemo(() => createAutocompleteReducer(initialState), [])
+  return useReducer(reducer, initialState)
+}

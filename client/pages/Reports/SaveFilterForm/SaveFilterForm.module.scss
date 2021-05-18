@@ -1,0 +1,10 @@
+.root {
+  .footer {
+    display: flex;
+    flex-direction: row;
+    
+    .saveBtn {
+      margin: 4px 4px 0 0;
+    }
+  }
+}

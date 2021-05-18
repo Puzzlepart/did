@@ -1,13 +1,13 @@
 
-  query($query: TimeEntriesQuery!) {
-    timeentries(query: $query) {
+  query ProjectReport ($query: ReportsQuery!) {
+    report(query: $query) {
       title
       duration
+      week
+      month
+      year
       startDateTime
       endDateTime
-      weekNumber
-      monthNumber
-      year
       resource {
         givenName
         surname

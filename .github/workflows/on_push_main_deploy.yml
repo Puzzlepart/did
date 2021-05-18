@@ -4,10 +4,17 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/on_push_main_deploy.yml'
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+      - 'webpack/**'
+      - 'package.json'
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         node-version: [12.18.3]
@@ -15,23 +22,27 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
-    - name: Select node version 12.8.3
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: npm install, build and package
+    - run: |
+        npm ci
+
+    - name: Create package
       run: |
-        npm install
-        npm run package:client
-        npm run build:server
+        npm run package
       env:
-        DEBUG: webpack*
         NODE_ENV: production
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: did-package
+        path: ./did-package.zip
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
         publish-profile: ${{ secrets.DIDAPP_PUBLISH_PROFILE }}
-        package: .
+        package: ./did-package.zip

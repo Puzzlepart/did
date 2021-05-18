@@ -1,26 +1,26 @@
-import { DefaultButton, IContextualMenuItem } from 'office-ui-fabric'
-import * as React from 'react'
-import { ITimesheetContext } from '../context'
-import styles from './ActionBar.module.scss'
+import { IContextualMenuItem } from '@fluentui/react'
+import { isMobile } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
+import { useTimesheetContext } from '../context'
+import { CHANGE_PERIOD } from '../reducer/actions'
 
-export default ({
-  periods,
-  selectedPeriod,
-  dispatch,
-  t
-}: ITimesheetContext): IContextualMenuItem[] => {
-  if (periods.length === 1) return []
-  return periods.map((period, idx) => ({
-    key: `SELECT_PERIOD_COMMANDS_${idx}`,
-    onRender: () => (
-      <DefaultButton
-        iconProps={{ iconName: 'DateTime' }}
-        onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
-        text={period.getName(t, true)}
-        styles={{ root: { height: 44, marginLeft: 4, borderRadius: 15 } }}
-        className={styles.selectPeriodButton}
-        checked={period.id === selectedPeriod.id}
-      />
-    )
-  }))
+/**
+ * Period commands hook
+ */
+export function usePeriodCommands() {
+  const { t } = useTranslation()
+  const { state, dispatch } = useTimesheetContext()
+  if (state.periods.length === 1) return []
+  return state.periods.map(
+    (period, index) =>
+      ({
+        key: `SELECT_PERIOD_COMMANDS_${index}`,
+        iconProps: !isMobile && { iconName: 'DateTime' },
+        style: isMobile ? {} : { padding: '12px 18px 12px 18px' },
+        text: period.getName(t, true),
+        canCheck: true,
+        checked: period.id === state.selectedPeriod.id,
+        onClick: () => dispatch(CHANGE_PERIOD({ id: period.id }))
+      } as IContextualMenuItem)
+  )
 }

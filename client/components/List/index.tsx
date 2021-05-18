@@ -1,102 +1,70 @@
-import { getValue } from 'helpers'
-import {
-  CheckboxVisibility,
-  ConstrainMode,
-  DetailsListLayoutMode,
-  IColumn,
-  Selection,
-  SelectionMode,
-  ShimmeredDetailsList
-} from 'office-ui-fabric'
-import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
-import FadeIn from 'react-fade-in'
-import { filter, first } from 'underscore'
-import { withDefaultProps } from 'with-default-props'
+/* eslint-disable tsdoc/syntax */
+import { ShimmeredDetailsList } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
-import { generateListGroups } from './generateListGroups'
+import { ListContext } from './context'
+import { ItemColumn } from './ItemColumn'
 import styles from './List.module.scss'
-import { ListGroupHeader } from './ListGroupHeader'
-import { onRenderListHeader } from './onRenderListHeader'
-import reducer from './reducer'
+import { ListHeader } from './ListHeader'
 import { IListProps } from './types'
+import { useList } from './useList'
 
-const List: FunctionComponent<IListProps> = (props: IListProps) => {
-  const [state, dispatch] = useReducer(reducer, {
-    origItems: props.items || [],
-    items: props.items || [],
-    searchTerm: null
-  })
-
-  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items])
-
-  const selection = useMemo(() => {
-    if (!props.selection) return null
-    return new Selection({
-      onSelectionChanged: () => {
-        const _selection = selection.getSelection()
-        switch (props.selection?.mode) {
-          case SelectionMode.single:
-            props.selection.onChanged(first(_selection))
-            break
-          case SelectionMode.multiple:
-            props.selection.onChanged(_selection)
-            break
-        }
-      }
-    })
-  }, [props.selection])
-
-  let groups = null
-  let items = [...state.items]
-  if (props.groups) [groups, items] = generateListGroups(items, props.groups)
-
-  const [delay, transitionDuration] = props.fadeIn
-
+/**
+ * List component using `ShimmeredDetailsList` from `@fluentui/react`.
+ *
+ * Supports list groups, selection, search box
+ * and custom column headers.
+ *
+ * Used by the following components:
+ *
+ * * `<EventList />`
+ * * `<Admin />` => `<ApiTokens />`
+ * * `<Admin />` => `<Roles />`
+ * * `<Admin />` => `<SummaryView />`
+ * * `<Admin />` => `<Users />` => `<AddMultiplePanel />`
+ * * `<Admin />` => `<Users />`
+ * * `<Customers />` => `<CustomerList />`
+ * * `<Projects />` => `<ProjectList />`
+ * * `<Reports />`
+ * * `<Timesheet />` => `<SummaryView />`
+ *
+ * @category Reusable Component
+ */
+export const List: ReusableComponent<IListProps> = (props) => {
+  const { listProps, state, dispatch } = useList(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
-      <FadeIn delay={delay} transitionDuration={transitionDuration}>
+      <ListContext.Provider value={{ props, state, dispatch }}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList
-            getKey={(_item, index) => `list_item_${index}`}
-            setKey={'list'}
-            enableShimmer={props.enableShimmer}
-            isPlaceholderData={props.enableShimmer}
-            selection={selection}
-            columns={filter(props.columns, (col) => !col.data?.hidden)}
-            items={items}
-            groups={groups}
-            selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
-            constrainMode={ConstrainMode.horizontalConstrained}
-            layoutMode={DetailsListLayoutMode.justified}
-            groupProps={{ ...props.groupProps, onRenderHeader: ListGroupHeader }}
-            onRenderItemColumn={(item, index, column) => {
-              if (!!column.onRender) return column.onRender(item, index, column)
-              return getValue(item, column.fieldName)
-            }}
-            onRenderDetailsHeader={(headerProps, defaultRender) =>
-              onRenderListHeader({
-                headerProps,
-                defaultRender,
-                props,
-                state,
-                dispatch
-              })
-            }
-            checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden}
+            {...listProps}
+            onRenderDetailsHeader={(headerProps, defaultRender) => (
+              <ListHeader
+                headerProps={headerProps}
+                defaultRender={defaultRender}
+              />
+            )}
+            onRenderItemColumn={(item, index, column) => (
+              <ItemColumn item={item} index={index} column={column} />
+            )}
           />
         </ScrollablePaneWrapper>
-      </FadeIn>
+      </ListContext.Provider>
     </div>
   )
 }
 
-export default withDefaultProps(List, {
-  fadeIn: [0, 0],
+List.defaultProps = {
   items: [],
+  columns: [],
   commandBar: {
     items: [],
     farItems: []
   }
-} as IListProps)
+}
 
-export { SelectionMode, IColumn }
+export * from './types'
+export * from './useList'
+export * from './useListGroups'
+export * from './useListProps'

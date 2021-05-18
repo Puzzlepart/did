@@ -1,6 +1,6 @@
 import { Customer } from 'types'
 
-export interface ICustomersParams {
+export interface ICustomersParameters {
   key: string
   view: string
 }
@@ -11,4 +11,5 @@ export interface ICustomersState {
   view?: CustomersView
   selected?: Customer
   customers?: Customer[]
+  error?: any
 }

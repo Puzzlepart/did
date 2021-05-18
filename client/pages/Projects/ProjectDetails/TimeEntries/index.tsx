@@ -1,52 +1,56 @@
-import { useQuery } from '@apollo/client'
-import EventList from 'components/EventList'
-import { UserMessage } from 'components/UserMessage'
-import { ActionButton, MessageBarType, ProgressIndicator } from 'office-ui-fabric'
-import React, { FunctionComponent, useContext } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { ActionButton } from '@fluentui/react'
+import { EventList, UserColumn, UserMessage } from 'components'
+import { Progress } from 'components/Progress'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
-import { ProjectsContext } from '../../context'
-import { onExportExcel } from './exportToExcel'
+import _ from 'underscore'
 import { Summary } from './Summary'
-import $timeentries from './timeentries.gql'
 import styles from './TimeEntries.module.scss'
+import { useTimeEntries } from './useTimeEntries'
 
-export const TimeEntries: FunctionComponent = () => {
+/**
+ * @category Projects
+ */
+export const TimeEntries: React.FC = () => {
   const { t } = useTranslation()
-  const { state } = useContext(ProjectsContext)
-  const { loading, error, data } = useQuery($timeentries, {
-    variables: {
-      query: { projectId: state.selected.id }
-    }
-  })
-  const timeentries = data?.timeentries || []
-  const empty = isEmpty(timeentries)
-
+  const { loading, timeentries, onExport, error } = useTimeEntries()
   return (
     <div className={styles.root}>
-      <Summary hidden={empty} timeentries={timeentries} />
-      <div hidden={isEmpty(timeentries)}>
+      {!_.isEmpty(timeentries) && !loading && (
+        <Summary loading={loading} timeentries={timeentries} />
+      )}
+      <div hidden={_.isEmpty(timeentries)}>
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
-          onClick={() => onExportExcel(state.selected, timeentries, t)}
+          onClick={() => onExport()}
         />
       </div>
       {error && (
-        <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />
+        <UserMessage type={'error'} text={t('projects.timeEntriesErrorText')} />
       )}
-      {empty && !loading && <UserMessage text={t('projects.noTimeEntriesText')} />}
-      {loading && <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />}
-      {!empty && (
+      {_.isEmpty(timeentries) && !loading && (
+        <UserMessage text={t('projects.noTimeEntriesText')} />
+      )}
+      {loading && (
+        <Progress
+          label={t('projects.timeEntriesLoadingLabel')}
+          description={t('projects.timeEntriesLoadingDescription')}
+          iconProps={{ iconName: 'TimelineMatrixView' }}
+        />
+      )}
+      {!_.isEmpty(timeentries) && (
         <EventList
-          events={timeentries}
+          items={timeentries}
           additionalColumns={[
             {
               key: 'resource.displayName',
               fieldName: 'resource.displayName',
               name: t('common.employeeLabel'),
               minWidth: 100,
-              maxWidth: 150
+              maxWidth: 150,
+              onRender: ({ resource }) => <UserColumn user={resource} />
             }
           ]}
           dateFormat='MMM DD YYYY HH:mm'

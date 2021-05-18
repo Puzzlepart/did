@@ -1,19 +1,55 @@
-export interface IFilterItem {
-  key: string | number
-  value: string
-}
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable tsdoc/syntax */
+import get from 'get-value'
+import _ from 'underscore'
+import { IFilter, IFilterItem } from './types'
 
-export interface IFilter {
-  key: string
-  name: string
-  items: IFilterItem[]
-  selected: IFilterItem[]
-}
+/**
+ * @category FilterPanel
+ */
+export class BaseFilter {
+  public selectedKeys: string[]
 
-export abstract class BaseFilter {
-  public name: string
+  /**
+   * Constructor for `BaseFilter`
+   *
+   * @param name - Filter name
+   * @param keyFieldName - Field name for the item key
+   * @param valueFieldName - Field name for the item value
+   */
+  constructor(
+    public name: string,
+    public keyFieldName: string,
+    public valueFieldName?: string
+  ) {
+    this.valueFieldName = valueFieldName || keyFieldName
+  }
 
-  constructor(public fieldName: string) {}
+  /**
+   * Initializes the filter returning `IFilter`
+   *
+   * @param filterItems - Filter items
+   * @returns `IFilter`
+   */
+  public initialize(filterItems: IFilterItem[]): IFilter {
+    return {
+      key: this.keyFieldName,
+      name: this.name,
+      items: filterItems,
+      selected: filterItems.filter((item) =>
+        _.contains(this.selectedKeys, item.key)
+      )
+    }
+  }
 
-  public abstract initialize(entries: any[]): IFilter
+  /**
+   * Set defaults (`selectedKeys`) for the filter
+   *
+   * @param values - Values
+   * @returns this
+   */
+  public setDefaults(values: any) {
+    this.selectedKeys = get(values, this.keyFieldName) ?? []
+    return this
+  }
 }

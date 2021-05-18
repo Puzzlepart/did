@@ -1,28 +1,25 @@
-import { useQuery } from '@apollo/client'
-import * as React from 'react'
-import { Project } from 'types'
-import { Autocomplete, ISuggestionItem } from '../Autocomplete'
-import $projects from './projects.gql'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable tsdoc/syntax */
+import { ReusableComponent } from 'components/types'
+import React from 'react'
+import { Autocomplete } from '../Autocomplete'
 import { ISearchProjectProps } from './types'
+import { useSearchProject } from './useSearchProject'
 
-export const SearchProject = (props: ISearchProjectProps) => {
-  const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
-    fetchPolicy: 'cache-first'
-  })
-
-  const items: ISuggestionItem<Project>[] = (data?.projects || []).map((project) => ({
-    key: project.id,
-    text: project.name,
-    secondaryText: project.id,
-    searchValue: [project.id, project.name, project.customer.name].join(' '),
-    data: project,
-    iconName: project.icon
-  }))
+/**
+ * Search for projects using `<Autocomplete />`
+ *
+ * @category Reusable Component
+ */
+export const SearchProject: ReusableComponent<ISearchProjectProps> = (
+  props
+) => {
+  const [items, disabled] = useSearchProject()
 
   return (
-    <Autocomplete<Project>
+    <Autocomplete
       {...props}
-      disabled={loading}
+      disabled={disabled}
       items={items}
       itemIcons={{
         style: {

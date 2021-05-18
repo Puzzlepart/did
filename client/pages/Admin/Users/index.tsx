@@ -1,111 +1,87 @@
-import { useMutation, useQuery } from '@apollo/client'
-import List from 'components/List'
-import { ISpinnerProps, Spinner } from 'office-ui-fabric'
-import React, { useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { User } from 'types'
-import { any, filter, isEmpty, omit } from 'underscore'
-import $bulkImport from './bulkImport.gql'
-import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
-import { UserColumns as columns } from './columns'
-import { IUsersContext, UsersContext } from './context'
-import { IUserFormProps, UserForm } from './UserForm'
-import $users from './users.gql'
+/* eslint-disable tsdoc/syntax */
+import { Spinner } from '@fluentui/react'
+import { List, TabComponent } from 'components'
+import React from 'react'
+import _ from 'underscore'
+import { AddMultiplePanel } from './AddMultiplePanel'
+import { UsersContext } from './context'
+import { UserForm } from './UserForm'
+import { useUsers } from './useUsers'
 
-export const Users = () => {
-  const { t } = useTranslation()
-  const [userForm, setUserForm] = useState<IUserFormProps>(null)
-  const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
-  const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-  const { data, refetch, loading } = useQuery($users, { fetchPolicy: 'cache-and-network' })
-  const [bulkImport] = useMutation($bulkImport)
-  const ctxValue: IUsersContext = useMemo(
-    () => ({
-      roles: data?.roles || [],
-      users: data?.users || [],
-      adUsers: data?.adUsers || []
-    }),
-    [data]
-  )
-  ctxValue.adUsers = filter(ctxValue.adUsers, (x) => !any(ctxValue.users, (y) => y.id === x.id))
-
-  /**
-   * On edit user
-   *
-   * @param {User} user User to edit
-   */
-  const onEdit = (user: User) =>
-    setUserForm({
-      headerText: user.displayName,
-      user
-    })
-
-  /**
-   * On import users
-   *
-   * @param {any[]} users Users to import
-   */
-  const onBulkImport = async (users: any[]) => {
-    setBulkImportPanel(null)
-    setProgressProps({
-      label: t('admin.bulkImportingUsersLabel', { count: users.length }),
-      labelPosition: 'right'
-    })
-    await bulkImport({ variables: { users: users.map((u) => omit(u, '__typename')) } })
-    setProgressProps(null)
-    refetch()
-  }
+/**
+ * Manage users
+ *
+ * * See active users
+ * * Add new users
+ * * Edit users
+ *
+ * @category Tab Component
+ */
+export const Users: TabComponent = () => {
+  const {
+    context,
+    columns,
+    query,
+    progress,
+    userForm,
+    setUserForm,
+    addMultiplePanel,
+    setAddMultiplePanel,
+    onAddUsers,
+    t
+  } = useUsers()
 
   return (
-    <UsersContext.Provider value={ctxValue}>
+    <UsersContext.Provider value={context}>
       <List
-        enableShimmer={loading}
-        items={ctxValue.users}
-        columns={columns(onEdit, t)}
+        enableShimmer={query.loading && _.isEmpty(context.activeDirectoryUsers)}
+        items={context.users}
+        columns={columns}
         commandBar={{
           items: [
             {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
               iconProps: { iconName: 'AddFriend' },
-              disabled: isEmpty(ctxValue.adUsers),
+              disabled: _.isEmpty(context.activeDirectoryUsers),
               onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
-              disabled: isEmpty(ctxValue.adUsers),
-              onClick: () => setBulkImportPanel({ isOpen: true })
+              disabled: _.isEmpty(context.activeDirectoryUsers),
+              onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {
               key: 'SPINNER',
               name: '',
               onRender: () =>
-                progressProps && (
-                  <Spinner styles={{ root: { marginLeft: 15 } }} {...progressProps} />
+                progress && (
+                  <Spinner
+                    styles={{ root: { marginLeft: 15 } }}
+                    {...progress}
+                  />
                 )
             }
           ],
           farItems: []
         }}
       />
-      {userForm && (
-        <UserForm
-          {...userForm}
-          onDismiss={(event) => {
-            setUserForm(null)
-            !event && refetch()
-          }}
-        />
-      )}
-      {bulkImportPanel && (
-        <BulkImportPanel
-          {...bulkImportPanel}
-          onImport={onBulkImport}
-          onDismiss={() => setBulkImportPanel(null)}
-        />
-      )}
+      <UserForm
+        {...userForm}
+        isOpen={!!userForm}
+        onDismiss={(event) => {
+          setUserForm(null)
+          !event && query.refetch()
+        }}
+      />
+      <AddMultiplePanel
+        {...addMultiplePanel}
+        isOpen={!!addMultiplePanel}
+        onAdd={onAddUsers}
+        onDismiss={() => setAddMultiplePanel(null)}
+      />
     </UsersContext.Provider>
   )
 }

@@ -1,8 +1,0 @@
-mutation($period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
-  result: unsubmitPeriod(period: $period, options: $options) {
-    success
-    error {
-      message
-    }
-  }
-}

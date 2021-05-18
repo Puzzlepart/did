@@ -1,20 +1,36 @@
+/* eslint-disable tsdoc/syntax */
+import { useRouteMatches } from 'hooks/route/useRouteMatches'
+import { PageComponent } from 'pages/types'
 import * as React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Admin } from './Admin'
 
-export default () => {
-  const match = useRouteMatch()
+/**
+ * Admin page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
+ */
+export const AdminPage: PageComponent = () => {
+  const matches = useRouteMatches('view')
   return (
     <Switch>
-      <Route path={`${match.path}/:view/:year`}>
-        <Admin />
-      </Route>
-      <Route path={`${match.path}/:view`}>
-        <Admin />
-      </Route>
-      <Route path={match.path}>
-        <Admin />
-      </Route>
+      {matches.map((path) => (
+        <Route key={path} path={path}>
+          <Admin />
+        </Route>
+      ))}
     </Switch>
   )
 }
+
+Object.assign(AdminPage, {
+  iconName: 'Settings',
+  permission: PermissionScope.ACCESS_ADMIN
+} as Partial<PageComponent>)
+
+export * from './Admin'

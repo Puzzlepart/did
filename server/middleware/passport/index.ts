@@ -1,46 +1,31 @@
-import fs from 'fs'
+/* eslint-disable tsdoc/syntax */
+import { MongoClient } from 'mongodb'
 import passport from 'passport'
-import onVerifySignin from './onVerifySignin'
-import { OIDCStrategy } from 'passport-azure-ad'
-import env from '../../utils/env'
-
-passport.serializeUser((user, done) => done(null, user))
-passport.deserializeUser((user, done) => done(null, user))
+import { googleStrategy } from './google'
+import { azureAdStrategy } from './microsoft'
 
 /**
- * Get redirect URL
+ * Setup passport to be used for authentication
+ *
+ * @param mcl - Mongo client
+ *
+ * @category Express middleware
  */
-function getRedirectUrl() {
-  let redirectUrl = env('OAUTH_REDIRECT_URI')
-  if (env('LOCALTUNNEL_SUBDOMAIN')) {
-    const _redirectUrl = fs.readFileSync('.localtunnel', 'utf-8')
-    if (_redirectUrl) {
-      redirectUrl = _redirectUrl
-    }
-  }
-  return redirectUrl
+export const passportMiddleware = (mcl: MongoClient) => {
+  /**
+   * In a typical web application, the credentials used to authenticate
+   * a user will only be transmitted during the login request. If
+   * authentication succeeds, a session will be established and maintained
+   * via a cookie set in the user's browser.
+   * Each subsequent request will not contain credentials, but rather the
+   * unique cookie that identifies the session. In order to support login sessions,
+   * Passport will serialize and deserialize user instances to and from the session.
+   */
+  passport.serializeUser((user, done) => done(null, user))
+  passport.deserializeUser((user, done) => done(null, user))
+
+  passport.use(azureAdStrategy(mcl))
+  passport.use(googleStrategy(mcl))
+
+  return passport
 }
-
-const strategy = () => {
-  const redirectUrl = getRedirectUrl()
-  return new OIDCStrategy(
-    {
-      identityMetadata:
-        'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-      clientID: env('OAUTH_APP_ID'),
-      responseType: 'code id_token',
-      responseMode: 'form_post',
-      redirectUrl,
-      allowHttpForRedirectUrl: true,
-      clientSecret: env('OAUTH_APP_PASSWORD'),
-      validateIssuer: false,
-      passReqToCallback: false,
-      scope: env('OAUTH_SCOPES').split(' ')
-    },
-    onVerifySignin
-  )
-}
-
-passport.use(strategy())
-
-export default passport

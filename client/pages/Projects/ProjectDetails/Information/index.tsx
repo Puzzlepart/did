@@ -1,14 +1,18 @@
+/* eslint-disable tsdoc/syntax */
+import { SubText } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBarType } from 'office-ui-fabric'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
+import { LabelObject as Label } from 'types'
+import _ from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
-import ReactMarkdown from 'react-markdown/with-html'
 
-export const Information: FunctionComponent = () => {
+/**
+ * @category Projects
+ */
+export const Information: React.FC = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)
 
@@ -19,23 +23,19 @@ export const Information: FunctionComponent = () => {
           hidden={!state.selected.inactive}
           text={t('projects.inactiveText')}
           iconName='Warning'
-          type={MessageBarType.warning}
+          type={'warning'}
         />
       )}
-      {state.selected.description && (
-        <ReactMarkdown
-          className={styles.description}
-          source={state.selected.description}
-          escapeHtml={false}
-        />
-      )}
+      <SubText text={state.selected.description} font='medium' />
       <div className={styles.labels}>
-        {state.selected.labels.map((label, idx) => (
-          <EntityLabel key={idx} label={label} size='medium' />
+        {(state.selected.labels as Label[]).map((label, index) => (
+          <EntityLabel key={index} label={label} />
         ))}
       </div>
       <UserMessage
-        hidden={!!state.selected.description || !isEmpty(state.selected.labels)}
+        hidden={
+          !!state.selected.description || !_.isEmpty(state.selected.labels)
+        }
         containerStyle={{ margin: '15px 0 15px 0' }}
         text={t('projects.noInformationAvailable')}
         iconName='Info'

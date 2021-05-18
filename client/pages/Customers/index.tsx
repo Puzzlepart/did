@@ -1,20 +1,36 @@
+/* eslint-disable tsdoc/syntax */
+import { useRouteMatches } from 'hooks/route/useRouteMatches'
+import { PageComponent } from 'pages/types'
 import * as React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import { PermissionScope } from 'security'
 import { Customers } from './Customers'
 
-export default () => {
-  const match = useRouteMatch()
+/**
+ * Customers page
+ *
+ * Using `Switch`, `Route` and `useRouteMatch` from
+ * `react-router-dom` to support navigating between
+ * sub components
+ *
+ * @category Page Component
+ */
+export const CustomersPage: PageComponent = () => {
+  const matches = useRouteMatches('view', 'key')
   return (
     <Switch>
-      <Route path={`${match.path}/:view/:key`}>
-        <Customers />
-      </Route>
-      <Route path={`${match.path}/:view`}>
-        <Customers />
-      </Route>
-      <Route path={match.path}>
-        <Customers />
-      </Route>
+      {matches.map((path) => (
+        <Route key={path} path={path}>
+          <Customers />
+        </Route>
+      ))}
     </Switch>
   )
 }
+
+Object.assign(CustomersPage, {
+  iconName: 'People',
+  permission: PermissionScope.ACCESS_CUSTOMERS
+} as Partial<PageComponent>)
+
+export * from './Customers'

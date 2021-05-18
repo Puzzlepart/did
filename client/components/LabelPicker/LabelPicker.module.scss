@@ -1,8 +1,18 @@
 .root {
   position: inherit;
 
-  .label {
+  .inputLabel {
     margin: 0 0 8px 0;
+  }
+
+  .selectedLabels {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    >div {
+      margin-bottom: 5px;
+    }
   }
 
   .toggleIcon {

@@ -1,9 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import styles from './SelectCallout.module.scss'
-import { SearchBox, Checkbox, Callout, Icon } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import {
+  Callout,
+  Checkbox,
+  Icon,
+  ScrollablePane,
+  SearchBox,
+  Sticky,
+  StickyPositionType
+} from '@fluentui/react'
+import { SubText } from 'components/SubText'
+import React, { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
+import _ from 'underscore'
+import s from 'underscore.string'
+import styles from './SelectCallout.module.scss'
 import { ISelectCalloutProps } from './types'
 
+/**
+ * @category Function Component
+ */
 export const SelectCallout = (props: ISelectCalloutProps) => {
   const [labels, setLabels] = useState<LabelObject[]>(props.labels)
 
@@ -12,7 +27,9 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
   function onSearch(value: string) {
     let _labels = [...props.labels]
     if (value.length > 0) {
-      _labels = _labels.filter((lbl) => lbl.name.toLowerCase().indexOf(value.toLowerCase()) !== -1)
+      _labels = _labels.filter((lbl) =>
+        lbl.name.toLowerCase().includes(value.toLowerCase())
+      )
     }
     setLabels(_labels)
   }
@@ -20,36 +37,55 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
   return (
     <Callout
       hidden={props.hidden}
-      className={styles.root}
       isBeakVisible={false}
       gapSpace={10}
       onDismiss={props.onDismiss}
       target={props.target}>
-      <SearchBox
-        className={styles.searchBox}
-        placeholder={props.placeholder}
-        onChange={(_evt, value) => onSearch(value)}
-      />
-      <ul>
-        {labels.map((lbl) => (
-          <li key={lbl.name}>
-            <div className={styles.itemContainer}>
-              <Checkbox
-                defaultChecked={props.defaultSelectedKeys.indexOf(lbl.name) !== -1}
-                className={styles.itemCheckbox}
-                onChange={() => props.onToggleLabel(lbl)}
-              />
-              <div>
-                <div>
-                  <Icon iconName='CircleFill' style={{ color: lbl.color, fontSize: 10 }} />
-                  <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
-                </div>
-                <div>{lbl.description}</div>
-              </div>
+      <div className={styles.root}>
+        <ScrollablePane>
+          <Sticky stickyPosition={StickyPositionType.Header}>
+            <div className={styles.header} hidden={!props.headerText}>
+              {props.headerText}
             </div>
-          </li>
-        ))}
-      </ul>
+            <SearchBox
+              className={styles.searchBox}
+              placeholder={props.placeholder}
+              styles={{ field: { padding: '4px 6px' } }}
+              onChange={(_event, value) => onSearch(value)}
+            />
+          </Sticky>
+          <ul>
+            {labels.map((label) => (
+              <li key={label.name}>
+                <div className={styles.itemContainer}>
+                  <Checkbox
+                    checked={_.any(
+                      props.selectedLabels,
+                      ({ name }) => name === label.name
+                    )}
+                    className={styles.itemCheckbox}
+                    onRenderLabel={() => (
+                      <div style={{ marginLeft: 8 }}>
+                        <div>
+                          <Icon
+                            iconName='CircleFill'
+                            style={{ color: label.color, fontSize: 10 }}
+                          />
+                          <span style={{ paddingLeft: 5 }}>{label.name}</span>
+                        </div>
+                        <SubText text={s.prune(label.description, 80)} />
+                      </div>
+                    )}
+                    onChange={() => {
+                      props.onToggleLabel(label)
+                    }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </ScrollablePane>
+      </div>
     </Callout>
   )
 }

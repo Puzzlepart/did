@@ -1,38 +1,33 @@
-import { Panel } from 'office-ui-fabric'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+/* eslint-disable tsdoc/syntax */
+import { Panel } from '@fluentui/react'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import { FilterItem } from './FilterItem'
-import { IFilter, IFilterItem } from './Filters'
+import styles from './FilterPanel.module.scss'
 import { IFilterPanelProps } from './types'
+import { useFilterPanel } from './useFilterPanel'
 
-export const FilterPanel = (props: IFilterPanelProps) => {
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
-  )
-  useEffect(() => setFilters(props.filters.map((f) => f.initialize(props.items))), [props.items])
-
-  /**
-   * On filter updated
-   *
-   * @param {IFilter} filter
-   * @param {IFilterItem} item
-   * @param {boolean} checked
-   */
-  const onFilterUpdated = (filter: IFilter, item: IFilterItem, checked: boolean) => {
-    if (checked) filter.selected.push(item)
-    else filter.selected = filter.selected.filter((f) => f.key !== item.key)
-    const updatedFilters = filters.map((f) => {
-      if (f.key === filter.key) {
-        return filter
-      }
-      return f
-    })
-    setFilters(updatedFilters)
-    props.onFiltersUpdated(updatedFilters.filter((filter) => filter.selected.length > 0))
-  }
+/**
+ * Filter panel that renders filter items with more than
+ * 1 item.
+ *
+ * `shortListCount` defaults to **10**, meaning
+ * 10 items are shown before displaying a show more link.
+ *
+ * @category Reusable Component
+ */
+export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
+  const { filters, onFilterUpdated } = useFilterPanel(props)
 
   return (
-    <Panel isOpen={props.isOpen} isLightDismiss={true} onDismiss={props.onDismiss}>
+    <Panel
+      isOpen={props.isOpen}
+      className={styles.root}
+      headerText={props.headerText}
+      headerClassName={styles.header}
+      isLightDismiss={true}
+      onDismiss={props.onDismiss}>
+      {props.children}
       {filters
         .filter((filter) => filter.items.length > 1)
         .map((filter) => (

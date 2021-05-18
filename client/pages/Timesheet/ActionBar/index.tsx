@@ -1,29 +1,29 @@
-import { AppContext } from 'AppContext'
-import { CommandBar, ICommandBarProps } from 'office-ui-fabric'
-import React, { useContext } from 'react'
-import { TimesheetContext } from '../'
-import styles from './ActionBar.module.scss'
-import navigateCommands from './navigateCommands'
-import selectPeriodCommands from './selectPeriodCommands'
-import submitCommands from './submitCommands'
-import { weekPickerCommand } from './WeekPicker'
+/* eslint-disable unicorn/prefer-query-selector */
+/* eslint-disable tsdoc/syntax */
+import { CommandBar } from '@fluentui/react'
+import React from 'react'
+import { useActionBar } from './useActionBar'
+import { WeekPicker } from './WeekPicker'
 
+/**
+ * @category Timesheet
+ */
 export const ActionBar = () => {
-  const { subscription } = useContext(AppContext)
-  const context = useContext(TimesheetContext)
-  const commandBarProps: ICommandBarProps = {
-    styles: { root: { padding: 0 } },
-    items: [
-      ...navigateCommands(context),
-      weekPickerCommand(context),
-      ...selectPeriodCommands(context)
-    ],
-    farItems: [submitCommands(context, subscription)]
-  }
+  const {
+    commandBarProps,
+    showWeekPicker,
+    toggleWeekPicker,
+    target
+  } = useActionBar()
 
   return (
-    <div className={styles.root}>
+    <div>
       <CommandBar {...commandBarProps} />
+      <WeekPicker
+        target={target}
+        hidden={!showWeekPicker}
+        onDismiss={toggleWeekPicker}
+      />
     </div>
   )
 }

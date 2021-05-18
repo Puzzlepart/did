@@ -1,6 +1,13 @@
 .root {
-  padding: 0;
+  margin: 12px 8px 12px 8px;
   width: 280px;
+  height: 320px;
+
+  .header {
+    padding: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
 
   .searchBox,
   .searchBox * {
@@ -20,6 +27,8 @@
 
       .itemContainer {
         display: flex;
+        cursor: pointer;
+        width: 100%;
 
         .itemCheckbox {
           margin: 0 10px 0 0;

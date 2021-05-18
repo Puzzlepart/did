@@ -1,21 +1,21 @@
-import { IColumn } from 'office-ui-fabric'
+import { IListColumn } from 'components/List/types'
 
 /**
- * Generate a IColumn defintion
+ * Generate a `IListColumn` defintion
  *
- * @param {string} fieldName Field name
- * @param {string} name Name
- * @param {Partial<IColumn>} props Additional props
- * @param {function} onRender On render function (optional)
- * @param {number} minWidth Min width (defaults to 100)
+ * @param fieldName - Field name
+ * @param name -Name
+ * @param props - Additional props
+ * @param onRender - Render function
+ * @param minWidth - Min width
  */
 export function generateColumn(
   fieldName: string,
   name = '',
-  props: Partial<IColumn> = {},
-  onRender?: (item?: any, index?: number, column?: IColumn) => any,
+  props: Partial<IListColumn> = {},
+  onRender?: (item?: any, index?: number, column?: IListColumn) => any,
   minWidth = 100
-): IColumn {
+): IListColumn {
   return {
     key: fieldName,
     fieldName,
@@ -24,5 +24,5 @@ export function generateColumn(
     onRender,
     isResizable: true,
     ...{ data: {}, ...props }
-  } as IColumn
+  } as IListColumn
 }

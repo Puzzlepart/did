@@ -1,0 +1,8 @@
+mutation AddUsers ($users: [UserInput!]!) {
+  addUsers(users: $users) {
+    success
+    error {
+      message
+    }
+  }
+}

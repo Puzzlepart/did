@@ -1,30 +1,37 @@
-import { getValue } from 'helpers'
+/* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import _ from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
+/**
+ * @extends BaseFilter
+ * @category FilterPanel
+ */
 export class WeekFilter extends BaseFilter {
-  constructor(fieldName: string, public name: string) {
-    super(fieldName)
+  /**
+   * Constructor for `WeekFilter`
+   *
+   * @param name - Name
+   * @param keyFieldName - Field name for the item key
+   */
+  constructor(name: string, keyFieldName: string) {
+    super(name, keyFieldName)
   }
 
   /**
-   * Intialize the WeekFilter
+   * Intialize the `WeekFilter`
    *
-   * @param {any[]} entries Entries
+   * @param items - Items
    */
-  public initialize(entries: any[]): IFilter {
-    const weeks = _.unique(entries.map((e) => getValue(e, this.fieldName, null))).sort(
-      (a, b) => a - b
-    )
-    const items = weeks.map((week) => ({
+  public initialize(items: any[]): IFilter {
+    const weeks = _.unique(
+      items.map((item_) => get(item_, this.keyFieldName))
+    ).sort((a, b) => a - b)
+    const _items = weeks.map((week) => ({
       key: week,
       value: week
     }))
-    return {
-      key: this.fieldName,
-      name: this.name,
-      items,
-      selected: []
-    }
+    return super.initialize(_items)
   }
 }

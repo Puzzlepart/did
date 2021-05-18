@@ -1,5 +1,16 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * Sign in error
+ *
+ * @extends Error
+ */
 export class SigninError extends Error {
-  constructor(public code: string, public name: string, message: string, public icon?: string) {
+  constructor(
+    public code: string,
+    public name: string,
+    message: string,
+    public icon?: string
+  ) {
     super(message)
   }
 
@@ -15,11 +26,6 @@ export class SigninError extends Error {
   }
 }
 
-/**
- * Error for no user ID found
- *
- * Markdown is supported
- */
 export const NO_OID_FOUND = new SigninError(
   '0f8fc199',
   'Sorry to break it to you..',
@@ -27,23 +33,13 @@ export const NO_OID_FOUND = new SigninError(
   'BlockedSite'
 )
 
-/**
- * Error for no subscription found for the tenant ID
- *
- * Markdown is supported
- */
 export const TENANT_NOT_ENROLLED = new SigninError(
   'de72e4da',
-  'I hate to be the one telling you this...',
-  '... but your company is not enrolled in did.<br/><br/> Please contact <a href="mailto:did@puzzlepart.com">did@puzzlepart.com</a> for more information.',
+  'Your company is not enrolled in did',
+  'Please contact<a href="mailto:did@puzzlepart.com">did@puzzlepart.com</a> for more information.',
   'Phone'
 )
 
-/**
- * Error for user not found in subscription directory
- *
- * Markdown is supported
- */
 export const USER_NOT_ENROLLED = new SigninError(
   'cee991f0',
   'I promised to keep it a secret...',
@@ -52,13 +48,9 @@ export const USER_NOT_ENROLLED = new SigninError(
   'Sad'
 )
 
-/**
- * Error for sign in failed, and we're not really sure why
- *
- * Markdown is supported
- */
 export const SIGNIN_FAILED = new SigninError(
   'e0666582',
-  'An error occured',
-  'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> Hope you can forgive us at some point.'
+  'An error occured signing you in',
+  'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> It can help to clear your browser cache.',
+  'Dislike'
 )

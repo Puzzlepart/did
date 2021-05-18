@@ -1,28 +1,36 @@
-import { getValue } from 'helpers'
+/* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import _ from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
+/**
+ * @category FilterPanel
+ */
 export class YearFilter extends BaseFilter {
-  constructor(public fieldName: string, public name: string) {
-    super(fieldName)
+  /**
+   * Constructor for `YearFilter`
+   *
+   * @param name - Filter name
+   * @param keyFieldName - Field name for the item key
+   */
+  constructor(name: string, keyFieldName: string) {
+    super(name, keyFieldName)
   }
 
   /**
-   * Intialize the YearFilter
+   * Intialize the `YearFilter`
    *
-   * @param {any[]} entries Entries
+   * @param items - Items
    */
-  public initialize(entries: any[]): IFilter {
-    const years = _.unique(entries.map((e) => getValue(e, this.fieldName, null))).sort()
-    const items = years.map((year) => ({
+  public initialize(items: any[]): IFilter {
+    const years = _.unique(
+      items.map((item_) => get(item_, this.keyFieldName))
+    ).sort()
+    const _items = years.map((year) => ({
       key: year,
       value: year
     }))
-    return {
-      key: this.fieldName,
-      name: this.name,
-      items,
-      selected: []
-    }
+    return super.initialize(_items)
   }
 }

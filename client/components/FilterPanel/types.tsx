@@ -1,6 +1,10 @@
-import { IPanelProps } from 'office-ui-fabric'
+/* eslint-disable tsdoc/syntax */
+import { IPanelProps } from '@fluentui/react'
 import { BaseFilter, IFilter } from './Filters'
 
+/**
+ * @category FilterPanel
+ */
 export interface IFilterPanelProps extends IPanelProps {
   /**
    * Filters to show
@@ -19,6 +23,8 @@ export interface IFilterPanelProps extends IPanelProps {
 
   /**
    * Number of items to show by default (can show all with Show all link)
+   *
+   * @default 10
    */
-  shortListCount: number
+  shortListCount?: number
 }
