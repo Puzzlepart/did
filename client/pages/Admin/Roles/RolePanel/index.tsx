@@ -22,18 +22,6 @@ export const RolePanel: React.FC<IRolePanelProps> = (props) => {
     togglePermission
   } = useRolePanel({ props })
 
-  /**
-   * On delete role
-   */
-  async function onDelete() {
-    await deleteRole({
-      variables: {
-        name: model.name
-      }
-    })
-    props.onSave()
-  }
-
   return (
     <Panel
       className={styles.root}
