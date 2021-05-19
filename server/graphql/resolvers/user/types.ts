@@ -79,6 +79,9 @@ export class User {
   @Field({ nullable: true })
   photo?: UserPhoto
 
+  @Field({ nullable: true })
+  lastLogin?: Date
+
   public create?(user: User): User {
     Object.assign(this, user)
     return this

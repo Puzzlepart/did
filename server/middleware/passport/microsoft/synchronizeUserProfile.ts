@@ -38,6 +38,10 @@ export async function synchronizeUserProfile(
       base64: photoBase64
     }
   }
+  debug('Updating lastLogin time for user')
+  user.lastLogin = new Date()
+  await userSvc.updateUser({ ..._.pick(user, 'id', 'lastLogin') })
+
   if (!needSync) {
     debug('User profile properties are up to date!')
     return
