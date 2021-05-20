@@ -1,4 +1,4 @@
-[did-client - v0.9.12](../README.md) / [Components](../modules/components.md) / IAutocompleteState
+[did-client - v0.10.1](../README.md) / [Components](../modules/components.md) / IAutocompleteState
 
 # Interface: IAutocompleteState<T\>
 
