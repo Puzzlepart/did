@@ -37,13 +37,15 @@ export class ReportsResolver {
 
   /**
    * Get report
+   * 
+   * @remarks Temporarily removed auth options. See discussion #969
+   * and issue #967.
    *
    * @param preset - Query
    * @param query - Query
    * @param sortAsc - Sort ascending
    * @param ctx - GraphQL context
    */
-  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
   @Query(() => [TimeEntry], {
     description: 'Get a preset report, or use custom filters.'
   })
