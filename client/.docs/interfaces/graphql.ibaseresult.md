@@ -1,4 +1,4 @@
-[did-client - v0.9.12](../README.md) / [GraphQL](../modules/graphql.md) / IBaseResult
+[did-client - v0.10.1](../README.md) / [GraphQL](../modules/graphql.md) / IBaseResult
 
 # Interface: IBaseResult
 
