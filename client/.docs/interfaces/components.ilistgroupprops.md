@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / [Components](../modules/components.md) / IListGroupProps
+[did-client - v0.10.2](../README.md) / [Components](../modules/components.md) / IListGroupProps
 
 # Interface: IListGroupProps
 

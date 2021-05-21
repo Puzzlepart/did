@@ -1,4 +1,4 @@
-[did-server - v0.10.1](../README.md) / [GraphQL](../modules/graphql.md) / ReportsResolver
+[did-server - v0.10.2](../README.md) / [GraphQL](../modules/graphql.md) / ReportsResolver
 
 # Class: ReportsResolver
 
@@ -58,7 +58,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
 
-Defined in: [graphql/resolvers/reports/index.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L65)
+Defined in: [graphql/resolvers/reports/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L67)
 
 ___
 
@@ -70,7 +70,7 @@ Get forecast report
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [graphql/resolvers/reports/index.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L81)
+Defined in: [graphql/resolvers/reports/index.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L83)
 
 ___
 
@@ -79,6 +79,9 @@ ___
 ▸ **report**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
 Get report
+
+**`remarks`** Temporarily removed auth options. See discussion #969
+and issue #967.
 
 #### Parameters:
 
@@ -90,7 +93,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [graphql/resolvers/reports/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L50)
+Defined in: [graphql/resolvers/reports/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L52)
 
 ___
 
@@ -109,4 +112,4 @@ Name | Type |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [graphql/resolvers/reports/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L95)
+Defined in: [graphql/resolvers/reports/index.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L97)

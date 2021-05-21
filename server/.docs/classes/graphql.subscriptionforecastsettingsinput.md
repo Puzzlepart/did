@@ -1,4 +1,4 @@
-[did-server - v0.10.1](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionForecastSettingsInput
+[did-server - v0.10.2](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionForecastSettingsInput
 
 # Class: SubscriptionForecastSettingsInput
 

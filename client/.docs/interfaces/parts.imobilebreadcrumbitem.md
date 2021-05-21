@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / [Parts](../modules/parts.md) / IMobileBreadcrumbItem
+[did-client - v0.10.2](../README.md) / [Parts](../modules/parts.md) / IMobileBreadcrumbItem
 
 # Interface: IMobileBreadcrumbItem
 

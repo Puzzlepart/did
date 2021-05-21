@@ -1,4 +1,4 @@
-[did-shared - v0.10.1](../README.md) / [Security](../modules/security.md) / PermissionScope
+[did-shared - v0.10.2](../README.md) / [Security](../modules/security.md) / PermissionScope
 
 # Enumeration: PermissionScope
 
