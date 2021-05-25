@@ -55,6 +55,10 @@ export async function synchronizeUserProfile(
     })
     debug('User profile properties synchronized from Azure AD for %s.', user.id)
   } catch (error) {
-    debug('Failed to sync user profile properties from Azure AD for %s: %s', user.id, error.message)
+    debug(
+      'Failed to sync user profile properties from Azure AD for %s: %s',
+      user.id,
+      error.message
+    )
   }
 }
