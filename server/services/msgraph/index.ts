@@ -71,8 +71,8 @@ class MSGraphService {
       return `data:${blob.type};base64,${Buffer.from(buffer).toString(
         'base64'
       )}`
-    } catch (error) {
-      throw new Error(`MSGraphService.getUserPhoto: ${error.message}`)
+    } catch {
+      return null
     }
   }
 
