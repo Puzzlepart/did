@@ -11,7 +11,6 @@ import * as http from 'http'
 import app from './app'
 import { sound } from './utils'
 import { environment } from './utils/environment'
-const debug = require('debug')('server')
 const log = console.log
 
 /**

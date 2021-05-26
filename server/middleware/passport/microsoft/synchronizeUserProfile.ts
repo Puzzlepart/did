@@ -25,19 +25,19 @@ export async function synchronizeUserProfile(
   }
   try {
     const msgraphSrv = new MSGraphService(new MSOAuthService({ user }))
-    const [data, photoBase64] = await Promise.all([
+    const [data, userPhoto] = await Promise.all([
       msgraphSrv.getCurrentUser(properties),
       msgraphSrv.getUserPhoto('48x48')
     ])
     const needSync = !_.isEqual(_.pick(user, [...properties, 'photo']), {
       photo: {
-        base64: photoBase64
+        base64: userPhoto
       },
       ..._.pick(data, [...properties, 'photo'])
     })
-    if (syncUserPhoto) {
+    if (syncUserPhoto && userPhoto) {
       user.photo = {
-        base64: photoBase64
+        base64: userPhoto
       }
     }
     if (!needSync) {
