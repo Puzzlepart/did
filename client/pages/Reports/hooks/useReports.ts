@@ -32,8 +32,6 @@ export function useReports() {
 
   useReportsQuery({ state, dispatch })
 
-  // useLayoutEffect(() => dispatch(INIT({app, queries})), [])
-
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.itemKey || ''}`)
