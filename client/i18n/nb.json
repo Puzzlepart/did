@@ -339,7 +339,8 @@
     "dark-theme": "Mørkt tema",
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
-    "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)"
+    "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
+    "clearFilters": "Fjern filtre"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
