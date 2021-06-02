@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / Pages
+[did-client - v0.10.3](../README.md) / Pages
 
 # Module: Pages
 
@@ -602,6 +602,7 @@ Name | Type |
 `context.t` | *TFunction*<*translation*\> |
 `defaultSelectedKey` | *string* |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
+`onClearFilters` | *any* |
 `options` | *IChoiceGroupOption*[] |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 

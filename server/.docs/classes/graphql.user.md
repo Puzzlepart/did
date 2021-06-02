@@ -1,4 +1,4 @@
-[did-server - v0.10.1](../README.md) / [GraphQL](../modules/graphql.md) / User
+[did-server - v0.10.3](../README.md) / [GraphQL](../modules/graphql.md) / User
 
 # Class: User
 

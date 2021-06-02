@@ -59,7 +59,8 @@ class MSGraphService {
    * @param size - Photo size
    * @public
    *
-   * @returns A base64 representation of the user photo
+   * @returns A base64 representation of the user photo, or null if
+   * the user photo is not found.
    *
    * @memberof MSGraphService
    */
@@ -71,8 +72,8 @@ class MSGraphService {
       return `data:${blob.type};base64,${Buffer.from(buffer).toString(
         'base64'
       )}`
-    } catch (error) {
-      throw new Error(`MSGraphService.getUserPhoto: ${error.message}`)
+    } catch {
+      return null
     }
   }
 

@@ -27,4 +27,9 @@ export interface IFilterPanelProps extends IPanelProps {
    * @default 10
    */
   shortListCount?: number
+
+  /**
+   * On reset filters
+   */
+  onClearFilters?: () => void
 }

@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / [Components](../modules/components.md) / IFilterPanelProps
+[did-client - v0.10.3](../README.md) / [Components](../modules/components.md) / IFilterPanelProps
 
 # Interface: IFilterPanelProps
 
@@ -16,6 +16,7 @@
 
 - [filters](components.ifilterpanelprops.md#filters)
 - [items](components.ifilterpanelprops.md#items)
+- [onClearFilters](components.ifilterpanelprops.md#onclearfilters)
 - [onFiltersUpdated](components.ifilterpanelprops.md#onfiltersupdated)
 - [shortListCount](components.ifilterpanelprops.md#shortlistcount)
 
@@ -38,6 +39,24 @@ ___
 Items to filter
 
 Defined in: [components/FilterPanel/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L17)
+
+___
+
+### onClearFilters
+
+• `Optional` **onClearFilters**: () => *void*
+
+On reset filters
+
+#### Type declaration:
+
+▸ (): *void*
+
+**Returns:** *void*
+
+Defined in: [components/FilterPanel/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L34)
+
+Defined in: [components/FilterPanel/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L34)
 
 ___
 

@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / [Pages](../modules/pages.md) / IReportsQuery
+[did-client - v0.10.3](../README.md) / [Pages](../modules/pages.md) / IReportsQuery
 
 # Interface: IReportsQuery
 

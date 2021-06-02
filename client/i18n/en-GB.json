@@ -340,7 +340,8 @@
     "light-theme": "Light theme",
     "dark-theme": "Dark theme",
     "auto-theme": "System theme",
-    "descriptionOptionalFieldLabel": "Description (optional)"
+    "descriptionOptionalFieldLabel": "Description (optional)",
+    "clearFilters": "Clear filters"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

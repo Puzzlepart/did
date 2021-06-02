@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / [App](../modules/app.md) / ContextUser
+[did-client - v0.10.3](../README.md) / [App](../modules/app.md) / ContextUser
 
 # Class: ContextUser
 

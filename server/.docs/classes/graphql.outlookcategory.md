@@ -1,4 +1,4 @@
-[did-server - v0.10.1](../README.md) / [GraphQL](../modules/graphql.md) / OutlookCategory
+[did-server - v0.10.3](../README.md) / [GraphQL](../modules/graphql.md) / OutlookCategory
 
 # Class: OutlookCategory
 

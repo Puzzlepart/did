@@ -1,4 +1,4 @@
-[did-client - v0.10.1](../README.md) / [Components](../modules/components.md) / IColorPickerFieldProps
+[did-client - v0.10.3](../README.md) / [Components](../modules/components.md) / IColorPickerFieldProps
 
 # Interface: IColorPickerFieldProps
 

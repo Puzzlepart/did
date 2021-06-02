@@ -37,7 +37,7 @@ export class ReportsResolver {
 
   /**
    * Get report
-   * 
+   *
    * @remarks Temporarily removed auth options. See discussion #969
    * and issue #967.
    *

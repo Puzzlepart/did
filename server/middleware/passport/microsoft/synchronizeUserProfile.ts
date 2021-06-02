@@ -21,34 +21,44 @@ export async function synchronizeUserProfile(
     debug(
       'User profile synchronization is turned on, but no properties are selected.'
     )
-  }
-  const msgraphSrv = new MSGraphService(new MSOAuthService({ user }))
-  const [data, photoBase64] = await Promise.all([
-    msgraphSrv.getCurrentUser(properties),
-    msgraphSrv.getUserPhoto('48x48')
-  ])
-  const needSync = !_.isEqual(_.pick(user, [...properties, 'photo']), {
-    photo: {
-      base64: photoBase64
-    },
-    ..._.pick(data, [...properties, 'photo'])
-  })
-  if (syncUserPhoto) {
-    user.photo = {
-      base64: photoBase64
-    }
-  }
-  if (!needSync) {
-    debug('User profile properties are up to date!')
     return
   }
-  debug(
-    'Synchronizing user profile properties %s from Azure AD.',
-    properties.join(', ')
-  )
-  await userSvc.updateUser({
-    ..._.pick(user, 'id', 'photo'),
-    ..._.pick(data, [...properties, 'photo'])
-  })
-  debug('User profile properties synchronized from Azure AD.')
+  try {
+    const msgraphSrv = new MSGraphService(new MSOAuthService({ user }))
+    const [data, userPhoto] = await Promise.all([
+      msgraphSrv.getCurrentUser(properties),
+      msgraphSrv.getUserPhoto('48x48')
+    ])
+    const needSync = !_.isEqual(_.pick(user, [...properties, 'photo']), {
+      photo: {
+        base64: userPhoto
+      },
+      ..._.pick(data, [...properties, 'photo'])
+    })
+    if (syncUserPhoto && userPhoto) {
+      user.photo = {
+        base64: userPhoto
+      }
+    }
+    if (!needSync) {
+      debug('User profile properties for %s are up to date!', user.id)
+      return
+    }
+    debug(
+      'Synchronizing user profile properties %s from Azure AD for %s.',
+      properties.join(', '),
+      user.id
+    )
+    await userSvc.updateUser({
+      ..._.pick(user, 'id', 'photo'),
+      ..._.pick(data, [...properties, 'photo'])
+    })
+    debug('User profile properties synchronized from Azure AD for %s.', user.id)
+  } catch (error) {
+    debug(
+      'Failed to sync user profile properties from Azure AD for %s: %s',
+      user.id,
+      error.message
+    )
+  }
 }
