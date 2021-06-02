@@ -1,5 +1,8 @@
-query SummaryReport($userQuery: UserQuery, $queries: [ConfirmedPeriodsQuery!]!) {
-  periods: confirmedPeriods(queries:$queries) {
+query SummaryReport(
+  $userQuery: UserQuery
+  $queries: [ConfirmedPeriodsQuery!]!
+) {
+  periods: confirmedPeriods(queries: $queries) {
     userId
     week
     year
