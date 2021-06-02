@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { Panel } from '@fluentui/react'
+import { ActionButton, DefaultButton, Panel } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { FilterItem } from './FilterItem'
 import styles from './FilterPanel.module.scss'
 import { IFilterPanelProps } from './types'
@@ -17,6 +18,7 @@ import { useFilterPanel } from './useFilterPanel'
  * @category Reusable Component
  */
 export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
+  const { t } = useTranslation()
   const { filters, onFilterUpdated } = useFilterPanel(props)
 
   return (
@@ -28,6 +30,13 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
       isLightDismiss={true}
       onDismiss={props.onDismiss}>
       {props.children}
+      {props.onClearFilters && (
+        <ActionButton
+          styles={{ root: { marginTop: 15 } }}
+          iconProps={{ iconName: 'ClearFilter' }}
+          text={t('common.clearFilters')}
+          onClick={props.onClearFilters} />
+      )}
       {filters
         .filter((filter) => filter.items.length > 1)
         .map((filter) => (

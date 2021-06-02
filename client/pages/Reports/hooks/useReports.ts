@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
-import { CHANGE_QUERY } from '../reducer/actions'
+import { CHANGE_QUERY, CLEAR_FILTERS } from '../reducer/actions'
 import { useFilters } from './useFilters'
 import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
@@ -32,8 +32,6 @@ export function useReports() {
 
   useReportsQuery({ state, dispatch })
 
-  // useLayoutEffect(() => dispatch(INIT({app, queries})), [])
-
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.itemKey || ''}`)
@@ -50,6 +48,11 @@ export function useReports() {
   })
 
   const context = useMemo(() => ({ state, dispatch, t }), [state])
+
+  let onClearFilters = null
+  if(state.filter) {
+    onClearFilters = () => dispatch(CLEAR_FILTERS())
+  }
 
   return {
     defaultSelectedKey: state.preset?.itemKey || 'default',
@@ -76,7 +79,8 @@ export function useReports() {
       }
     })) as IChoiceGroupOption[],
     filters,
-    context
+    context,
+    onClearFilters
   }
 }
 
