@@ -1,4 +1,4 @@
-[did-client - v0.10.2](../README.md) / [Pages](pages.md) / Home
+[did-client - v0.10.3](../README.md) / [Pages](pages.md) / Home
 
 # Namespace: Home
 

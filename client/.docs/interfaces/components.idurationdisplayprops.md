@@ -1,4 +1,4 @@
-[did-client - v0.10.2](../README.md) / [Components](../modules/components.md) / IDurationDisplayProps
+[did-client - v0.10.3](../README.md) / [Components](../modules/components.md) / IDurationDisplayProps
 
 # Interface: IDurationDisplayProps
 

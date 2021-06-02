@@ -1,4 +1,4 @@
-[did-server - v0.10.2](../README.md) / [GraphQL](../modules/graphql.md) / CreateOutlookCategoryResult
+[did-server - v0.10.3](../README.md) / [GraphQL](../modules/graphql.md) / CreateOutlookCategoryResult
 
 # Class: CreateOutlookCategoryResult
 

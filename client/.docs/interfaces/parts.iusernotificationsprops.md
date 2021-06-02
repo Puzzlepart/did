@@ -1,4 +1,4 @@
-[did-client - v0.10.2](../README.md) / [Parts](../modules/parts.md) / IUserNotificationsProps
+[did-client - v0.10.3](../README.md) / [Parts](../modules/parts.md) / IUserNotificationsProps
 
 # Interface: IUserNotificationsProps
 

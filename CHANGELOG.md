@@ -19,35 +19,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * [➤ Changelog](#-changelog)
 	* [➤ 0.11.0 - TBA](#-0110---tba)
 		* [Added](#added)
+		* [Fixed](#fixed)
 		* [Changed](#changed)
 	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added-1)
-		* [Fixed](#fixed)
+		* [Fixed](#fixed-1)
 		* [Changed](#changed-1)
 	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-2)
-		* [Fixed](#fixed-1)
+		* [Fixed](#fixed-2)
 		* [Changed](#changed-2)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-3)
-		* [Fixed](#fixed-2)
+		* [Fixed](#fixed-3)
 	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
 		* [Added](#added-4)
-		* [Fixed](#fixed-3)
+		* [Fixed](#fixed-4)
 	* [➤ 0.6.0 - N/A](#-060---na)
 	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
 		* [Added](#added-5)
-		* [Fixed](#fixed-4)
+		* [Fixed](#fixed-5)
 	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
 		* [Added](#added-6)
-		* [Fixed](#fixed-5)
 		* [Fixed](#fixed-6)
+		* [Fixed](#fixed-7)
 	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
 		* [Added](#added-7)
-		* [Fixed](#fixed-7)
-	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
 		* [Fixed](#fixed-8)
+	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+		* [Fixed](#fixed-9)
 	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
 		* [Added](#added-8)
 </details>
@@ -58,6 +59,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ 0.11.0 - TBA
 ### Added
 - Project code as filter to Reports #978
+
+### Fixed
+- Project reports includes week number #975
 
 ### Changed
 - Summary report shows current week #980
