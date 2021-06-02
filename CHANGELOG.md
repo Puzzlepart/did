@@ -17,14 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
+	* [➤ 0.11.0 - TBA](#-0110---tba)
+		* [Changed](#changed)
 	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added)
 		* [Fixed](#fixed)
-		* [Changed](#changed)
+		* [Changed](#changed-1)
 	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-1)
 		* [Fixed](#fixed-1)
-		* [Changed](#changed-1)
+		* [Changed](#changed-2)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-2)
@@ -48,6 +50,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
 		* [Added](#added-7)
 </details>
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0110---tba)
+
+## ➤ 0.11.0 - TBA
+
+### Changed
+
+- Summary report shows current week #980
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0100---27042021)
