@@ -134,9 +134,9 @@ export function summaryQuery(t: TFunction): IReportsQuery {
   const periods = []
   let now = new DateObject()
   for (let index = 0; index < 8; index++) {
-    now = now.add('-1w')
     const { week, year } = now.toObject()
     periods.unshift([week, year])
+    now = now.add('-1w')
   }
   return {
     itemKey: 'summary',
