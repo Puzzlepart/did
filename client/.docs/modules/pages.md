@@ -602,6 +602,7 @@ Name | Type |
 `context.t` | *TFunction*<*translation*\> |
 `defaultSelectedKey` | *string* |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
+`onClearFilters` | *any* |
 `options` | *IChoiceGroupOption*[] |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 

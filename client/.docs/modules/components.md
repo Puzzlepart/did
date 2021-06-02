@@ -304,7 +304,7 @@ Filter panel that renders filter items with more than
 `shortListCount` defaults to **10**, meaning
 10 items are shown before displaying a show more link.
 
-Defined in: [components/FilterPanel/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L19)
+Defined in: [components/FilterPanel/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L20)
 
 ___
 

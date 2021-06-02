@@ -18,46 +18,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * [➤ Changelog](#-changelog)
 	* [➤ 0.11.0 - TBA](#-0110---tba)
+		* [Added](#added)
 		* [Changed](#changed)
 	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
-		* [Added](#added)
+		* [Added](#added-1)
 		* [Fixed](#fixed)
 		* [Changed](#changed-1)
 	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
-		* [Added](#added-1)
+		* [Added](#added-2)
 		* [Fixed](#fixed-1)
 		* [Changed](#changed-2)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
-		* [Added](#added-2)
+		* [Added](#added-3)
 		* [Fixed](#fixed-2)
 	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
-		* [Added](#added-3)
+		* [Added](#added-4)
 		* [Fixed](#fixed-3)
 	* [➤ 0.6.0 - N/A](#-060---na)
 	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
-		* [Added](#added-4)
+		* [Added](#added-5)
 		* [Fixed](#fixed-4)
 	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
-		* [Added](#added-5)
+		* [Added](#added-6)
 		* [Fixed](#fixed-5)
 		* [Fixed](#fixed-6)
 	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
-		* [Added](#added-6)
+		* [Added](#added-7)
 		* [Fixed](#fixed-7)
 	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
 		* [Fixed](#fixed-8)
 	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
-		* [Added](#added-7)
+		* [Added](#added-8)
 </details>
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0110---tba)
 
 ## ➤ 0.11.0 - TBA
+### Added
+- Project code as filter to Reports #978
 
 ### Changed
-
 - Summary report shows current week #980
 
 
@@ -66,7 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ 0.10.0 - 27.04.2021
 
 ### Added
-
 - Support for split week, split year scenarios #753
 - Last year option added to reports #775
 - Support for deleting role #692
@@ -83,7 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for submitting feedback
 
 ### Fixed
-
 - Issue where filtering on a report would crash the page #938
 - Issue where moving an event from a confirmed week to an unconfirmed week would cause an error #766
 - Issue where confirmed hours would be skewed forward one hour #760
@@ -97,7 +97,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Consistent ignore/match buttons across devices in Timesheet #894
 
 ### Changed
-
 - Consolidated server and client date utils #771
 - Summary view now using datepicker instead of slider #777
 - Visual improvements on the admin sections

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { ActionButton, DefaultButton, Panel } from '@fluentui/react'
+import { ActionButton, Panel } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -35,7 +35,8 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
           styles={{ root: { marginTop: 15 } }}
           iconProps={{ iconName: 'ClearFilter' }}
           text={t('common.clearFilters')}
-          onClick={props.onClearFilters} />
+          onClick={props.onClearFilters}
+        />
       )}
       {filters
         .filter((filter) => filter.items.length > 1)

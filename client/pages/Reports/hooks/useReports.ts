@@ -50,7 +50,7 @@ export function useReports() {
   const context = useMemo(() => ({ state, dispatch, t }), [state])
 
   let onClearFilters = null
-  if(state.filter) {
+  if (state.filter) {
     onClearFilters = () => dispatch(CLEAR_FILTERS())
   }
 
