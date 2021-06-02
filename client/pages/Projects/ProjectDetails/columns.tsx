@@ -30,8 +30,8 @@ const columns = (t: TFunction): IColumn[] => [
     data: { excelColFormat: 'date' as ExcelColumnType }
   },
   {
-    key: 'weekNumber',
-    fieldName: 'weekNumber',
+    key: 'week',
+    fieldName: 'week',
     name: t('common.weekLabel'),
     minWidth: 100
   },
