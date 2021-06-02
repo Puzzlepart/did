@@ -26,8 +26,7 @@ export const Reports: React.FC = () => {
     queries,
     options,
     filters,
-    context,
-    onClearFilters
+    context
   } = useReports()
   return (
     <ReportsContext.Provider value={context}>
@@ -69,12 +68,11 @@ export const Reports: React.FC = () => {
         isOpen={context.state.isFiltersOpen}
         headerText={t('reports.filterPanelHeaderText')}
         filters={filters}
-        items={context.state.subset}
+        items={context.state.data.timeEntries}
         onDismiss={() => context.dispatch(TOGGLE_FILTER_PANEL())}
         onFiltersUpdated={(filters) =>
           context.dispatch(FILTERS_UPDATED({ filters }))
-        }
-        onClearFilters={onClearFilters}>
+        }>
         <SaveFilterForm />
       </FilterPanel>
     </ReportsContext.Provider>
