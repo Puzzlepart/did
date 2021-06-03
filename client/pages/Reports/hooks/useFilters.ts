@@ -8,7 +8,7 @@ import {
 import { useTranslation } from 'react-i18next'
 
 /**
- * Returns filter config for Reports
+ * Returns filter configuration for Reports
  */
 export function useFilters({ filter }) {
   const { t } = useTranslation()
@@ -27,6 +27,11 @@ export function useFilters({ filter }) {
       t('common.project'),
       'project.tag',
       'project.name'
+    ) as BaseFilter,
+    new ProjectFilter(
+      t('projects.keyFieldLabel'),
+      'project.tag',
+      'project.tag'
     ) as BaseFilter
   ].map((filter_) => filter_.setDefaults(filter?.values))
 }

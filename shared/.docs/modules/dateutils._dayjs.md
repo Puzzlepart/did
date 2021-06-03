@@ -1,4 +1,4 @@
-[did-shared - v0.9.12](../README.md) / [DateUtils](dateutils.md) / %24dayjs
+[did-shared - v0.10.3](../README.md) / [DateUtils](dateutils.md) / %24dayjs
 
 # Namespace: $dayjs
 
