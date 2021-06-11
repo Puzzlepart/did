@@ -1,7 +1,7 @@
 import { OperationVariables, QueryResult } from '@apollo/client'
 import { createReducer, current, Draft } from '@reduxjs/toolkit'
 import get from 'get-value'
-import _, { find } from 'underscore'
+import _, { filter, find } from 'underscore'
 import { IReportsState } from '../types'
 import {
   ADD_FILTER,
@@ -16,20 +16,20 @@ import {
 } from './actions'
 
 /**
- * Function to parse the data retrieved with GraphQL. Handles
- * inclusion of all resource data in the time entry objects.
- * 
- * @param state - Draft state
- * @param query - Query result
+ * Reducer action for `DATA_UPDATED`.
+
+ * Joins the data retrieved with GraphQL. Handles inclusion of 
+ * all resource data in the time entry objects.
  */
-function parseQueryData(state: Draft<IReportsState>, query: QueryResult<any, OperationVariables>) {
-  if (query?.data) {
-    state.data = { ...state.data, ...query.data }
+function dataUpdated(state: Draft<IReportsState>, { payload }) {
+  state.loading = payload.query.loading
+  if (payload.query?.data) {
+    state.data = { ...state.data, ...payload.query.data }
     const { timeEntries, users } = state.data
     if (timeEntries) {
       state.data.timeEntries = timeEntries.map(entry => ({
         ...entry,
-        resource: find(users, u => u.id === entry.resource?.id)
+        resource: find(users, u => u.id === entry.resource.id)
       }))
       state.subset = current(state).data.timeEntries
     }
@@ -42,10 +42,7 @@ function parseQueryData(state: Draft<IReportsState>, query: QueryResult<any, Ope
 export default ({ initialState, queries }) =>
   createReducer<IReportsState>(initialState, (builder) =>
     builder
-      .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.loading = payload.query.loading
-        parseQueryData(state, payload.query)
-      })
+      .addCase(DATA_UPDATED, dataUpdated)
       .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any
         state.subset = _.filter(state.data?.timeEntries, (entry) => {
