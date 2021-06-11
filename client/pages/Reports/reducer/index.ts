@@ -22,16 +22,17 @@ import {
  * @param state - Draft state
  * @param query - Query result
  */
-function parseData(state: Draft<IReportsState>, query: QueryResult<any, OperationVariables>) {
+function parseQueryData(state: Draft<IReportsState>, query: QueryResult<any, OperationVariables>) {
   if (query?.data) {
     state.data = { ...state.data, ...query.data }
-    if (state.data.timeEntries) {
-      state.data.timeEntries = state.data.timeEntries.map(entry => ({
+    const { timeEntries, users } = state.data
+    if (timeEntries) {
+      state.data.timeEntries = timeEntries.map(entry => ({
         ...entry,
-        resource: find(state.data.users, u => u.id === entry.resource.id)
+        resource: find(users, u => u.id === entry.resource?.id)
       }))
+      state.subset = current(state).data.timeEntries
     }
-    state.subset = current(state).data.timeEntries
   }
 }
 
@@ -43,7 +44,7 @@ export default ({ initialState, queries }) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.query.loading
-        parseData(state, payload.query)
+        parseQueryData(state, payload.query)
       })
       .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any

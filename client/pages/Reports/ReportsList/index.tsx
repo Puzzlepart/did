@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
+import { CheckboxVisibility } from '@fluentui/react'
 import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import $date from 'DateUtils'
@@ -31,6 +32,7 @@ export const ReportsList: TabComponent = () => {
       )}
       <List
         enableShimmer={context.state.loading}
+        checkboxVisibility={CheckboxVisibility.always}
         items={context.state.subset}
         height={isBrowser && window.innerHeight - 200}
         listGroupProps={{
