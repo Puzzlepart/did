@@ -21,7 +21,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
         <div className={styles.root}>
           {props.children}
           <div hidden={!props.submitProps?.text}>
-            <PrimaryButton {...props.submitProps} />
+            <PrimaryButton   {...props.submitProps} />
           </div>
         </div>
       </ConditionalWrapper>
