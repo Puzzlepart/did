@@ -43,7 +43,8 @@ export const UserFeedback: React.FC<IUserFeedbackProps> = ({
         isOpen={isOpen}
         onDismiss={() => {
           if (isOpen) togglePanel()
-        }} />
+        }}
+      />
     </>
   )
 }

@@ -14,7 +14,7 @@ export const useSubmitFeedback = (
   panel: IPanelProps
 ): ISubmitProps => {
   const { t } = useTranslation()
-  const [disabled,setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false)
   const [submitFeedback] = useMutation($submit_feedback)
   const [toast, setToast] = useToast(8000, {
     innerStyle: { paddingLeft: 15 }
@@ -52,6 +52,9 @@ export const useSubmitFeedback = (
       panel.onDismiss()
     },
     disabled:
-      _.isEmpty(feedback.title) || _.isEmpty(feedback.body) || !feedback.mood || disabled
+      _.isEmpty(feedback.title) ||
+      _.isEmpty(feedback.body) ||
+      !feedback.mood ||
+      disabled
   }
 }
