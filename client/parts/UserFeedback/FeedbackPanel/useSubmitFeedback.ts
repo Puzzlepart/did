@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { IPanelProps } from '@fluentui/react'
 import { ISubmitProps } from 'components/FormControl'
 import { useToast } from 'components/Toast'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserFeedback } from 'types'
 import _ from 'underscore'
@@ -14,6 +14,7 @@ export const useSubmitFeedback = (
   panel: IPanelProps
 ): ISubmitProps => {
   const { t } = useTranslation()
+  const [disabled, setDisabled] = useState(false)
   const [submitFeedback] = useMutation($submit_feedback)
   const [toast, setToast] = useToast(8000, {
     innerStyle: { paddingLeft: 15 }
@@ -23,6 +24,7 @@ export const useSubmitFeedback = (
    * On submit feedback
    */
   const onSubmitFeedback = useCallback(async () => {
+    setDisabled(true)
     const { data } = await submitFeedback({
       variables: { feedback }
     })
@@ -50,6 +52,9 @@ export const useSubmitFeedback = (
       panel.onDismiss()
     },
     disabled:
-      _.isEmpty(feedback.title) || _.isEmpty(feedback.body) || !feedback.mood
+      _.isEmpty(feedback.title) ||
+      _.isEmpty(feedback.body) ||
+      !feedback.mood ||
+      disabled
   }
 }
