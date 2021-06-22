@@ -1,4 +1,4 @@
-[did-client - v0.10.3](../README.md) / [Components](../modules/components.md) / YearFilter
+[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / YearFilter
 
 # Class: YearFilter
 

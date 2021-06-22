@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { QueryResult } from '@apollo/client'
+import { LazyQueryResult } from '@apollo/client'
 import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
@@ -14,7 +14,7 @@ export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 /**
  * category Reports Actions
  */
-export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<{ result: LazyQueryResult<any, any> }>('DATA_UPDATED')
 
 /**
  * @category Reports Actions
