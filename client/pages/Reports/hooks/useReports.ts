@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { IChoiceGroupOption } from '@fluentui/react'
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
-import { CHANGE_QUERY, CLEAR_FILTERS } from '../reducer/actions'
+import { CLEAR_FILTERS } from '../reducer/actions'
 import { useFilters } from './useFilters'
 import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
@@ -20,8 +19,8 @@ import { useReportsQueryOptions } from './useReportsQueryOptions'
  * * Get queries using `useQueries`
  * * Using reducer `useReportsReducer`
  * * Using `useReportQuery`
- * * Layout effect (`useLayoutEffect`) for updating URL 
- *   and executing the lazy query in `useReportQuery` when 
+ * * Layout effect (`useLayoutEffect`) for updating URL
+ *   and executing the lazy query in `useReportQuery` when
  *   changing query
  *   when the query is reloaded
  *
@@ -57,8 +56,6 @@ export function useReports() {
   if (state.filter) {
     onClearFilters = () => dispatch(CLEAR_FILTERS())
   }
-
-
 
   return {
     defaultSelectedKey: state.preset?.itemKey || 'default',

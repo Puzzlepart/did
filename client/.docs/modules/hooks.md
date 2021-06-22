@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / Hooks
+[did-client - v0.10.5](../README.md) / Hooks
 
 # Module: Hooks
 
@@ -42,7 +42,7 @@ Name | Type |
 `autoUpdate`? | *boolean* |
 `config`? | T |
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L8)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L8)
 
 ___
 
@@ -58,7 +58,7 @@ Name | Type |
 `updatePreferredLanguage`? | (`preferredLanguage`: *string*) => *Promise*<void\> |
 `updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L13)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L13)
 
 ## React Hook Functions
 
@@ -84,7 +84,7 @@ Name | Type |
 
 **Returns:** readonly [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
 
-Defined in: [hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
+Defined in: [client/hooks/common/useArray.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L12)
 
 ___
 
@@ -112,7 +112,7 @@ Name | Type |
 
 **Returns:** readonly [T, (`value`: *any*) => *void*, () => *void*]
 
-Defined in: [hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
+Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
 
 ___
 
@@ -134,7 +134,7 @@ Name | Type |
 :------ | :------ |
 `onExport` | () => *Promise*<void\> |
 
-Defined in: [hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
+Defined in: [client/hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
 
 ___
 
@@ -147,7 +147,7 @@ as an array of `ISuggestionItem`
 
 **Returns:** [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
 
-Defined in: [hooks/common/useFabricIcons.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L13)
+Defined in: [client/hooks/common/useFabricIcons.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L13)
 
 ___
 
@@ -187,7 +187,7 @@ to return the value of the specified key, a `$` object
 that is a object representation of the map and a `reset`
 function for clearing the map.
 
-Defined in: [hooks/common/useMap.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L17)
+Defined in: [client/hooks/common/useMap.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L17)
 
 ___
 
@@ -206,7 +206,7 @@ Name | Type |
 
 **Returns:** NotificationsQuery
 
-Defined in: [hooks/notifications/useNotificationsQuery.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L28)
+Defined in: [client/hooks/notifications/useNotificationsQuery.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L28)
 
 ___
 
@@ -231,7 +231,7 @@ Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [hooks/user/usePermissions.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L23)
+Defined in: [client/hooks/user/usePermissions.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L23)
 
 ___
 
@@ -252,7 +252,7 @@ Name | Type | Default value |
 
 **Returns:** [*boolean*, DispatchWithoutAction]
 
-Defined in: [hooks/common/useToggle.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L12)
+Defined in: [client/hooks/common/useToggle.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L12)
 
 ___
 
@@ -280,4 +280,4 @@ Name | Type |
 
 **Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L37)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L37)

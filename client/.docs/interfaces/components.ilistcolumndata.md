@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / IListColumnData
+[did-client - v0.10.5](../README.md) / [Components](../modules/components.md) / IListColumnData
 
 # Interface: IListColumnData
 
@@ -22,7 +22,7 @@
 
 Excel column format
 
-Defined in: [components/List/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L32)
+Defined in: [client/components/List/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L32)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 Hidden column
 
-Defined in: [components/List/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L22)
+Defined in: [client/components/List/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L22)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 Hidden from Excel exports
 
-Defined in: [components/List/types.tsx:37](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L37)
+Defined in: [client/components/List/types.tsx:37](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L37)
 
 ___
 
@@ -64,9 +64,9 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
+Defined in: [client/components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
 
-Defined in: [components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
+Defined in: [client/components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
 
 ___
 
@@ -76,4 +76,4 @@ ___
 
 Optional sub text
 
-Defined in: [components/List/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L27)
+Defined in: [client/components/List/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L27)

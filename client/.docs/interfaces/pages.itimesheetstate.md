@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
+[did-client - v0.10.5](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
 
 # Interface: ITimesheetState
 
@@ -25,7 +25,7 @@
 
 Error
 
-Defined in: [pages/Timesheet/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L43)
+Defined in: [client/pages/Timesheet/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L43)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 Loading props
 
-Defined in: [pages/Timesheet/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L38)
+Defined in: [client/pages/Timesheet/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L38)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 Navigation history
 
-Defined in: [pages/Timesheet/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L53)
+Defined in: [client/pages/Timesheet/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L53)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 Periods for the seleted scope
 
-Defined in: [pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
+Defined in: [client/pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 The current scope
 
-Defined in: [pages/Timesheet/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L33)
+Defined in: [client/pages/Timesheet/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L33)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 The currently selected period
 
-Defined in: [pages/Timesheet/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L23)
+Defined in: [client/pages/Timesheet/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L23)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 The currently seelcted view
 
-Defined in: [pages/Timesheet/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L28)
+Defined in: [client/pages/Timesheet/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L28)
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 Show hotkeys modal
 
-Defined in: [pages/Timesheet/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L48)
+Defined in: [client/pages/Timesheet/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L48)

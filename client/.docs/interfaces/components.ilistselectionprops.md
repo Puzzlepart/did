@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / IListSelectionProps
+[did-client - v0.10.5](../README.md) / [Components](../modules/components.md) / IListSelectionProps
 
 # Interface: IListSelectionProps<T\>
 
@@ -23,7 +23,7 @@ Name | Default |
 
 • **mode**: SelectionMode
 
-Defined in: [components/List/types.tsx:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L150)
+Defined in: [client/components/List/types.tsx:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L150)
 
 ___
 
@@ -43,6 +43,6 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [components/List/types.tsx:151](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L151)
+Defined in: [client/components/List/types.tsx:151](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L151)
 
-Defined in: [components/List/types.tsx:151](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L151)
+Defined in: [client/components/List/types.tsx:151](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L151)

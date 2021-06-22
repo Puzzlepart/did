@@ -20,7 +20,10 @@ import {
  * Joins the data retrieved with GraphQL. Handles inclusion of 
  * all resource data in the time entry objects.
  */
-function dataUpdatedCaseReducer(state: Draft<IReportsState>, { payload }: ReturnType<typeof DATA_UPDATED>) {
+function dataUpdatedCaseReducer(
+  state: Draft<IReportsState>,
+  { payload }: ReturnType<typeof DATA_UPDATED>
+) {
   state.loading = payload.result.loading
   if (payload.result?.data) {
     state.data = { ...state.data, ...payload.result.data }

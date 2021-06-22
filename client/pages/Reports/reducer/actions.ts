@@ -14,7 +14,9 @@ export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 /**
  * category Reports Actions
  */
-export const DATA_UPDATED = createAction<{ result: LazyQueryResult<any, any> }>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<{ result: LazyQueryResult<any, any> }>(
+  'DATA_UPDATED'
+)
 
 /**
  * @category Reports Actions

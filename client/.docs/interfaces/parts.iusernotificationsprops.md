@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Parts](../modules/parts.md) / IUserNotificationsProps
+[did-client - v0.10.5](../README.md) / [Parts](../modules/parts.md) / IUserNotificationsProps
 
 # Interface: IUserNotificationsProps
 
@@ -17,7 +17,7 @@
 
 • `Optional` **iconName**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:77](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L77)
+Defined in: [client/parts/UserNotifications/types.tsx:77](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L77)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • `Optional` **renderAsMenuItem**: *boolean*
 
-Defined in: [parts/UserNotifications/types.tsx:76](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L76)
+Defined in: [client/parts/UserNotifications/types.tsx:76](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L76)
