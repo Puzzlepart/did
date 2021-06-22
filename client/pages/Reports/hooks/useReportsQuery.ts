@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { useLazyQuery } from '@apollo/client'
+import { FetchPolicy, useLazyQuery } from '@apollo/client'
 import { useLayoutEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'
 import { default_query } from './useReportsQueries'
@@ -9,12 +9,15 @@ import { default_query } from './useReportsQueries'
  *
  * Using `useLazyQuery` and `useLayoutEffect` and dispatches
  * `DATA_UPDATED` action on query changes.
+ * 
+ * @param param0 - State and dispatch
+ * @param fetchPolicy - Fetch policy (defaults to `no-cache`)
  *
  * @category Reports Hooks
  */
-export function useReportsQuery({ state, dispatch }) {
+export function useReportsQuery({ state, dispatch }, fetchPolicy: FetchPolicy = 'no-cache') {
   const [query, result] = useLazyQuery(state.preset?.query || default_query, {
-    fetchPolicy: 'no-cache',
+    fetchPolicy,
     variables: state.preset?.variables || {}
   })
   useLayoutEffect(() => dispatch(DATA_UPDATED({ result })), [result.loading])
