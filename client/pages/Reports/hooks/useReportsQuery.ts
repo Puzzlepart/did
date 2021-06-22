@@ -15,8 +15,9 @@ import { default_query } from './useReportsQueries'
 export function useReportsQuery({ state, dispatch }) {
   const query = useQuery(state.preset?.query || default_query, {
     skip: !state.preset,
-    fetchPolicy: 'cache-and-network',
-    variables: state.preset?.variables || {}
+    fetchPolicy: 'no-cache',
+    variables: state.preset?.variables || {},
+    pollInterval: 0
   })
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query.loading])
 }
