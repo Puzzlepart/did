@@ -1,7 +1,6 @@
-import { OperationVariables, QueryResult } from '@apollo/client'
 import { createReducer, current, Draft } from '@reduxjs/toolkit'
 import get from 'get-value'
-import _, { filter, find } from 'underscore'
+import _, { find } from 'underscore'
 import { IReportsState } from '../types'
 import {
   ADD_FILTER,
@@ -27,9 +26,9 @@ function dataUpdated(state: Draft<IReportsState>, { payload }) {
     state.data = { ...state.data, ...payload.query.data }
     const { timeEntries, users } = state.data
     if (timeEntries) {
-      state.data.timeEntries = timeEntries.map(entry => ({
+      state.data.timeEntries = timeEntries.map((entry) => ({
         ...entry,
-        resource: find(users, u => u.id === entry.resource.id)
+        resource: find(users, (u) => u.id === entry.resource.id)
       }))
       state.subset = current(state).data.timeEntries
     }
