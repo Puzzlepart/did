@@ -3,7 +3,8 @@ import { IChoiceGroupOption } from '@fluentui/react'
 import { CHANGE_QUERY } from '../reducer/actions'
 
 /**
- * Use query options
+ * Returns queries from `useReportsQueries` as choice group options
+ * to be used in `<ChoiceGroup />` component.
  *
  * @category Reports
  */
