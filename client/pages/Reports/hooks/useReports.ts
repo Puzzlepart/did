@@ -19,7 +19,9 @@ import { useReportsQuery } from './useReportsQuery'
  * * Get queries using `useQueries`
  * * Using reducer `useReportsReducer`
  * * Using `useReportQuery`
- * * Layout effect (`useLayoutEffect`) for updating URL when changing query
+ * * Layout effect (`useLayoutEffect`) for updating URL 
+ *   and executing the lazy query in `useReportQuery` when 
+ *   changing query
  *   when the query is reloaded
  *
  * @category Reports Hooks
@@ -30,13 +32,14 @@ export function useReports() {
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
 
-  useReportsQuery({ state, dispatch })
+  const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.itemKey || ''}`)
+      query({ variables: state.preset?.variables })
     }
-  }, [state.preset, history])
+  }, [state.preset])
 
   const filters = useFilters({ filter: state.filter })
 
@@ -54,30 +57,32 @@ export function useReports() {
     onClearFilters = () => dispatch(CLEAR_FILTERS())
   }
 
+  const options: IChoiceGroupOption[] = queries.map(({ itemKey, headerText, itemIcon }) => ({
+    key: itemKey,
+    text: headerText,
+    iconProps: { iconName: itemIcon },
+    onClick: () => context.dispatch(CHANGE_QUERY({ itemKey })),
+    styles: {
+      root: {
+        padding: 25,
+        maxWidth: 180
+      },
+      labelWrapper: {
+        maxWidth: 'none'
+      },
+      field: {
+        border: 'none',
+        ':before': {
+          display: 'none'
+        }
+      }
+    }
+  }))
+
   return {
     defaultSelectedKey: state.preset?.itemKey || 'default',
     queries: queries.filter((q) => !q.hidden),
-    options: queries.map((query) => ({
-      key: query.itemKey,
-      text: query.headerText,
-      iconProps: { iconName: query.itemIcon },
-      onClick: () => context.dispatch(CHANGE_QUERY({ itemKey: query.itemKey })),
-      styles: {
-        root: {
-          padding: 25,
-          maxWidth: 180
-        },
-        labelWrapper: {
-          maxWidth: 'none'
-        },
-        field: {
-          border: 'none',
-          ':before': {
-            display: 'none'
-          }
-        }
-      }
-    })) as IChoiceGroupOption[],
+    options,
     filters,
     context,
     onClearFilters
