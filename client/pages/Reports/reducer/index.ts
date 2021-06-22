@@ -15,15 +15,15 @@ import {
 } from './actions'
 
 /**
- * Reducer action for `DATA_UPDATED`.
+ * Case reducer for action `DATA_UPDATED`.
 
  * Joins the data retrieved with GraphQL. Handles inclusion of 
  * all resource data in the time entry objects.
  */
-function dataUpdated(state: Draft<IReportsState>, { payload }) {
-  state.loading = payload.query.loading
-  if (payload.query?.data) {
-    state.data = { ...state.data, ...payload.query.data }
+function dataUpdatedCaseReducer(state: Draft<IReportsState>, { payload }: ReturnType<typeof DATA_UPDATED>) {
+  state.loading = payload.result.loading
+  if (payload.result?.data) {
+    state.data = { ...state.data, ...payload.result.data }
     const { timeEntries, users } = state.data
     if (timeEntries) {
       state.data.timeEntries = timeEntries.map((entry) => ({
@@ -41,7 +41,7 @@ function dataUpdated(state: Draft<IReportsState>, { payload }) {
 export default ({ initialState, queries }) =>
   createReducer<IReportsState>(initialState, (builder) =>
     builder
-      .addCase(DATA_UPDATED, dataUpdated)
+      .addCase(DATA_UPDATED, dataUpdatedCaseReducer)
       .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any
         state.subset = _.filter(state.data?.timeEntries, (entry) => {
