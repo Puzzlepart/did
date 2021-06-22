@@ -1,4 +1,4 @@
-[did-client - v0.10.3](../README.md) / [Components](../modules/components.md) / IEntityLabelProps
+[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / IEntityLabelProps
 
 # Interface: IEntityLabelProps
 

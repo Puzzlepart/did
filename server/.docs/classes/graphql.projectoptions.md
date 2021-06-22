@@ -1,4 +1,4 @@
-[did-server - v0.10.3](../README.md) / [GraphQL](../modules/graphql.md) / ProjectOptions
+[did-server - v0.10.4](../README.md) / [GraphQL](../modules/graphql.md) / ProjectOptions
 
 # Class: ProjectOptions
 
