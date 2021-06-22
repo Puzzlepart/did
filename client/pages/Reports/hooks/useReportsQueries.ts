@@ -37,7 +37,10 @@ export function lastMonthQuery(
     }),
     itemIcon: 'CalendarDay',
     query,
-    exportFileName: `TimeEntries-${s.capitalize(monthName)}-{0}.xlsx`
+    exportFileName: `TimeEntries-${s.capitalize(monthName)}-{0}.xlsx`,
+    variables: {
+      userQuery: { hiddenFromReports: false }
+    }
   } as IReportsQuery
 }
 
@@ -65,7 +68,10 @@ export function currentMonthQuery(
     }),
     itemIcon: 'Calendar',
     query,
-    exportFileName: `TimeEntries-${s.capitalize(monthName)}-{0}.xlsx`
+    exportFileName: `TimeEntries-${s.capitalize(monthName)}-{0}.xlsx`,
+    variables: {
+      userQuery: { hiddenFromReports: false }
+    }
   } as IReportsQuery
 }
 
@@ -93,7 +99,10 @@ export function currentYearQuery(
     }),
     itemIcon: 'CalendarReply',
     query,
-    exportFileName: `TimeEntries-${year}-{0}.xlsx`
+    exportFileName: `TimeEntries-${year}-{0}.xlsx`,
+    variables: {
+      userQuery: { hiddenFromReports: false }
+    }
   } as IReportsQuery
 }
 
@@ -118,7 +127,10 @@ export function forecastQuery(
     headerText: t('reports.forecast'),
     itemIcon: 'TimeSheet',
     query,
-    exportFileName: 'Forecast-{0}.xlsx'
+    exportFileName: 'Forecast-{0}.xlsx',
+    variables: {
+      userQuery: { hiddenFromReports: false }
+    }
   } as IReportsQuery
 }
 
