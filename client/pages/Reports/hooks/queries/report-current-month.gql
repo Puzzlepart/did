@@ -1,7 +1,15 @@
 #import "../../../../graphql/fragments/timeentry-fragment.gql"
 
-query CurrentMonthReport {
+query LastMonthReport {
   timeEntries: report(preset: "CURRENT_MONTH") {
     ...TimeEntryFragment
+  }
+  users: users {
+    id
+    displayName
+    mail
+    photo {
+      base64
+    }
   }
 }

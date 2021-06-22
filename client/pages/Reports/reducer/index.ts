@@ -1,6 +1,7 @@
-import { createReducer, current } from '@reduxjs/toolkit'
+import { OperationVariables, QueryResult } from '@apollo/client'
+import { createReducer, current, Draft } from '@reduxjs/toolkit'
 import get from 'get-value'
-import _ from 'underscore'
+import _, { filter, find } from 'underscore'
 import { IReportsState } from '../types'
 import {
   ADD_FILTER,
@@ -15,18 +16,33 @@ import {
 } from './actions'
 
 /**
+ * Reducer action for `DATA_UPDATED`.
+
+ * Joins the data retrieved with GraphQL. Handles inclusion of 
+ * all resource data in the time entry objects.
+ */
+function dataUpdated(state: Draft<IReportsState>, { payload }) {
+  state.loading = payload.query.loading
+  if (payload.query?.data) {
+    state.data = { ...state.data, ...payload.query.data }
+    const { timeEntries, users } = state.data
+    if (timeEntries) {
+      state.data.timeEntries = timeEntries.map(entry => ({
+        ...entry,
+        resource: find(users, u => u.id === entry.resource.id)
+      }))
+      state.subset = current(state).data.timeEntries
+    }
+  }
+}
+
+/**
  * Creating reducer for `Reports` using [reduxjs/toolkit]
  */
 export default ({ initialState, queries }) =>
   createReducer<IReportsState>(initialState, (builder) =>
     builder
-      .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.loading = payload.query.loading
-        if (payload.query?.data) {
-          state.data = { ...state.data, ...payload.query.data }
-          state.subset = current(state).data.timeEntries
-        }
-      })
+      .addCase(DATA_UPDATED, dataUpdated)
       .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any
         state.subset = _.filter(state.data?.timeEntries, (entry) => {
