@@ -10,6 +10,7 @@ import { CHANGE_QUERY, CLEAR_FILTERS } from '../reducer/actions'
 import { useFilters } from './useFilters'
 import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
+import { useReportsQueryOptions } from './useReportsQueryOptions'
 
 /**
  * Component logic for `<Reports />`
@@ -31,7 +32,7 @@ export function useReports() {
   const history = useHistory()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-
+  const options = useReportsQueryOptions({ queries, dispatch })
   const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
@@ -57,27 +58,7 @@ export function useReports() {
     onClearFilters = () => dispatch(CLEAR_FILTERS())
   }
 
-  const options: IChoiceGroupOption[] = queries.map(({ itemKey, headerText, itemIcon }) => ({
-    key: itemKey,
-    text: headerText,
-    iconProps: { iconName: itemIcon },
-    onClick: () => context.dispatch(CHANGE_QUERY({ itemKey })),
-    styles: {
-      root: {
-        padding: 25,
-        maxWidth: 180
-      },
-      labelWrapper: {
-        maxWidth: 'none'
-      },
-      field: {
-        border: 'none',
-        ':before': {
-          display: 'none'
-        }
-      }
-    }
-  }))
+
 
   return {
     defaultSelectedKey: state.preset?.itemKey || 'default',
