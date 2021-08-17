@@ -1,4 +1,4 @@
-[did-server - v0.10.3](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetQuery
+[did-server - v0.10.5](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetQuery
 
 # Class: TimesheetQuery
 

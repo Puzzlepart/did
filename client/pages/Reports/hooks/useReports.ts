@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { IChoiceGroupOption } from '@fluentui/react'
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import { useReportsReducer } from '../reducer'
-import { CHANGE_QUERY, CLEAR_FILTERS } from '../reducer/actions'
+import { CLEAR_FILTERS } from '../reducer/actions'
 import { useFilters } from './useFilters'
 import { useReportsQueries } from './useReportsQueries'
 import { useReportsQuery } from './useReportsQuery'
+import { useReportsQueryOptions } from './useReportsQueryOptions'
 
 /**
  * Component logic for `<Reports />`
@@ -19,7 +19,9 @@ import { useReportsQuery } from './useReportsQuery'
  * * Get queries using `useQueries`
  * * Using reducer `useReportsReducer`
  * * Using `useReportQuery`
- * * Layout effect (`useLayoutEffect`) for updating URL when changing query
+ * * Layout effect (`useLayoutEffect`) for updating URL
+ *   and executing the lazy query in `useReportQuery` when
+ *   changing query
  *   when the query is reloaded
  *
  * @category Reports Hooks
@@ -29,14 +31,15 @@ export function useReports() {
   const history = useHistory()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-
-  useReportsQuery({ state, dispatch })
+  const options = useReportsQueryOptions({ queries, dispatch })
+  const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.itemKey || ''}`)
+      query({ variables: state.preset?.variables })
     }
-  }, [state.preset, history])
+  }, [state.preset])
 
   const filters = useFilters({ filter: state.filter })
 
@@ -57,27 +60,7 @@ export function useReports() {
   return {
     defaultSelectedKey: state.preset?.itemKey || 'default',
     queries: queries.filter((q) => !q.hidden),
-    options: queries.map((query) => ({
-      key: query.itemKey,
-      text: query.headerText,
-      iconProps: { iconName: query.itemIcon },
-      onClick: () => context.dispatch(CHANGE_QUERY({ itemKey: query.itemKey })),
-      styles: {
-        root: {
-          padding: 25,
-          maxWidth: 180
-        },
-        labelWrapper: {
-          maxWidth: 'none'
-        },
-        field: {
-          border: 'none',
-          ':before': {
-            display: 'none'
-          }
-        }
-      }
-    })) as IChoiceGroupOption[],
+    options,
     filters,
     context,
     onClearFilters

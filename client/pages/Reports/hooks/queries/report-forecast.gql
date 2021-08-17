@@ -1,7 +1,15 @@
 #import "../../../../graphql/fragments/timeentry-fragment.gql"
 
-query ForecastReport {
+query LastMonthReport {
   timeEntries: forecastedReport {
     ...TimeEntryFragment
+  }
+  users: users {
+    id
+    displayName
+    mail
+    photo {
+      base64
+    }
   }
 }

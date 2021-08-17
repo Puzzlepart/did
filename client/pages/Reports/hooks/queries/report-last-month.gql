@@ -4,4 +4,12 @@ query LastMonthReport {
   timeEntries: report(preset: "LAST_MONTH") {
     ...TimeEntryFragment
   }
+  users: users {
+    id
+    displayName
+    mail
+    photo {
+      base64
+    }
+  }
 }

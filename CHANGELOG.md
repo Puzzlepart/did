@@ -62,6 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Project reports includes week number #975
+- Reports performance issues #984
+- Reports infinite loops #994
 
 ### Changed
 - Summary report shows current week #980

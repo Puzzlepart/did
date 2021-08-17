@@ -39,7 +39,12 @@ export const UserFeedback: React.FC<IUserFeedbackProps> = ({
           </div>
         </div>
       )}
-      <FeedbackPanel isOpen={isOpen} onDismiss={togglePanel} />
+      <FeedbackPanel
+        isOpen={isOpen}
+        onDismiss={() => {
+          if (isOpen) togglePanel()
+        }}
+      />
     </>
   )
 }
