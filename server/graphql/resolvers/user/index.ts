@@ -153,11 +153,13 @@ export class UserResolver {
   async updateUserConfiguration(
     @Arg('configuration', { nullable: true }) configuration: string,
     @Arg('startPage', { nullable: true }) startPage?: string,
+    @Arg('lastActive', { nullable: true }) lastActive?: string,
     @Arg('preferredLanguage', { nullable: true }) preferredLanguage?: string
   ): Promise<BaseResult> {
     await this._userSvc.updateCurrentUserConfiguration(
       configuration,
       startPage,
+      lastActive,
       preferredLanguage
     )
     return { success: true }

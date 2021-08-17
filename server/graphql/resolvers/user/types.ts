@@ -80,7 +80,7 @@ export class User {
   photo?: UserPhoto
 
   @Field({ nullable: true })
-  lastActive?: Date
+  lastActive?: string
 
   public create?(user: User): User {
     Object.assign(this, user)
@@ -118,6 +118,9 @@ export class UserInput {
 
   @Field({ nullable: true })
   startPage?: string
+
+  @Field({ nullable: true })
+  lastActive?: string
 
   @Field({ nullable: true })
   preferredLanguage?: string

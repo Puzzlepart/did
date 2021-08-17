@@ -340,7 +340,8 @@
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
-    "clearFilters": "Fjern filtre"
+    "clearFilters": "Fjern filtre",
+    "lastActiveLabel": "Sist pålogget"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

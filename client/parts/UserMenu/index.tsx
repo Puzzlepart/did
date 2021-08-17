@@ -109,7 +109,7 @@ export const UserMenu: React.FC = () => {
               padding: 8,
               color: 'rgb(96, 94, 92)'
             }}
-            text={`v${process.env.VERSION}`}
+            text={`v${process.env.VERSION} - ${new Date(user.lastActive).toLocaleString() || ''} `}
           />
         </FadeIn>
       </Callout>

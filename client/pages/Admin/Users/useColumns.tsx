@@ -25,11 +25,11 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
   return [
     userColumn,
     col('surname', t('common.surnameLabel'), {
-      maxWidth: 160,
+      maxWidth: 100,
       data: { hidden: isMobile }
     }),
     col('givenName', t('common.givenNameLabel'), {
-      maxWidth: 160,
+      maxWidth: 120,
       data: { hidden: isMobile }
     }),
     col('jobTitle', t('common.jobTitleLabel'), {
@@ -49,6 +49,11 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
       },
       ({ role }) => <IconText iconName={role.icon} text={role.name} />
     ),
+    col('lastActive', t('common.lastActiveLabel'), {
+      maxWidth: 180,
+      data: { hidden: isMobile },
+      onRender: (row) => row.lastActive ? new Date(row.lastActive).toLocaleString() : ''
+    }),
     col('actions', '', { maxWidth: 100 }, (user: User) => (
       <div style={{ display: 'flex' }}>
         <EditLink
