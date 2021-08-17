@@ -80,7 +80,7 @@ export class User {
   photo?: UserPhoto
 
   @Field({ nullable: true })
-  lastLogin?: Date
+  lastActive?: Date
 
   public create?(user: User): User {
     Object.assign(this, user)
