@@ -7,6 +7,7 @@ import { useNotificationsQuery } from '../hooks'
 import { useUpdateUserConfiguration } from '../hooks/user/useUpdateUserConfiguration'
 import useAppReducer from './reducer'
 import { IAppProps } from './types'
+import { BrowserStorage } from 'utils'
 
 /**
  * Component logic for `App`
@@ -30,9 +31,10 @@ export function useApp(props: IAppProps) {
   )
 
   const { updateLastActive } = useUpdateUserConfiguration()
-  const timeSinceUpdate = Math.floor((Date.now() - new Date(context.user.lastActive).getTime()) / 1000)
+  const lastActiveCached = new BrowserStorage<string>('lastActive_time', localStorage)
+  const timeSinceUpdate = Math.floor(Date.now() - new Date(lastActiveCached.get()).getTime()) / 1000
   if (!timeSinceUpdate || timeSinceUpdate > 60) {
-    // Update lastActive time on page refresh if lastActive is NaN or stale
+    lastActiveCached.set(new Date().toISOString())
     updateLastActive(new Date().toISOString())
   }
 
