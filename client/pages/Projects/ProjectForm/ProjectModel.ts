@@ -1,4 +1,4 @@
-/* eslint-disable tsdoc/syntax */
+import { getIcon } from '@fluentui/react'
 import { LabelObject as Label, Project } from 'types'
 import _ from 'underscore'
 
