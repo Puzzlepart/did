@@ -34,7 +34,6 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
     suggestions,
     ref
   } = useAutocomplete(props)
-
   return (
     <div className={className} onKeyDown={onKeyDown}>
       {props.label && (
