@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
+import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
 import { useEffect } from 'react'
 import { toMap } from 'utils/toMap'
 import { ProjectModel } from './ProjectModel'
@@ -9,21 +10,22 @@ import { IProjectFormProps } from './types'
 import { useProjectFormValidation } from './useProjectFormValidation'
 
 /**
- * Initializes the model based on `props.edit`
+ * Initializes the model based on `props.edit`. Sets a random
+ * fabric icon using hook `useRandomFabricIcon`.
  *
  * @param map - Map
  * @param props - Props
- *
- * @returns the initial model
  */
 export function useInitModel(
   map: ReturnType<typeof useMap>,
   props: IProjectFormProps
-) {
+): void {
+  const icon = useRandomFabricIcon()
   useEffect(() => {
     const model = new ProjectModel().init(props.edit)
     const _map = toMap(model)
     map.$set(_map)
+    map.set('icon', icon)
   }, [props.edit])
 }
 
@@ -37,9 +39,7 @@ export function useInitModel(
  */
 export function useProjectModel(props: IProjectFormProps) {
   const map = useMap<keyof ProjectModel, ProjectModel>()
-
   const valid = useProjectFormValidation(map.$, !!props.edit)
-
   useInitModel(map, props)
 
   /**
