@@ -46,7 +46,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [services/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L34)
+Defined in: [services/timesheet/index.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L38)
 
 ## Methods
 
@@ -66,7 +66,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:316](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L316)
+Defined in: [services/timesheet/index.ts:320](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L320)
 
 ___
 
@@ -89,7 +89,7 @@ Name | Type |
 
 Events
 
-Defined in: [services/timesheet/index.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L207)
+Defined in: [services/timesheet/index.ts:211](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L211)
 
 ___
 
@@ -111,7 +111,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [services/timesheet/index.ts:259](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L259)
+Defined in: [services/timesheet/index.ts:263](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L263)
 
 ___
 
@@ -132,7 +132,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:278](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L278)
+Defined in: [services/timesheet/index.ts:282](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L282)
 
 ___
 
@@ -163,7 +163,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/timesheet/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L76)
+Defined in: [services/timesheet/index.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L80)
 
 ___
 
@@ -181,7 +181,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [services/timesheet/index.ts:340](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L340)
+Defined in: [services/timesheet/index.ts:344](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L344)
 
 ___
 
@@ -210,7 +210,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:137](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L137)
+Defined in: [services/timesheet/index.ts:141](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L141)
 
 ___
 
@@ -228,4 +228,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L176)
+Defined in: [services/timesheet/index.ts:180](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L180)

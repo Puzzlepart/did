@@ -59,7 +59,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L86)
+Defined in: [graphql/resolvers/timesheet/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L89)
 
 ___
 
@@ -97,7 +97,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L115)
+Defined in: [graphql/resolvers/timesheet/index.ts:118](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L118)
 
 ___
 
@@ -117,4 +117,4 @@ Name | Type |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L67)
+Defined in: [graphql/resolvers/timesheet/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L68)

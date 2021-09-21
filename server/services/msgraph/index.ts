@@ -242,7 +242,7 @@ class MSGraphService {
     endDateTimeIso: string
   ): Promise<EventObject[]> {
     try {
-      const cacheOptions: CacheOptions= {
+      const cacheOptions: CacheOptions = {
         key: ['events', startDateTimeIso, endDateTimeIso],
         scope: CacheScope.USER,
         expiry: 20

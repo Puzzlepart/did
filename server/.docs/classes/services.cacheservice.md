@@ -43,7 +43,7 @@ Name | Type | Description |
 
 **Returns:** [*CacheService*](services.cacheservice.md)
 
-Defined in: [services/cache.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L30)
+Defined in: [services/cache.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L44)
 
 ## Properties
 
@@ -61,7 +61,7 @@ ___
 
 ### \_get
 
-▸ `Private`**_get**<T\>(`__namedParameters`: CacheOptions): *Promise*<T\>
+▸ `Private`**_get**<T\>(`__namedParameters`: [*CacheOptions*](../modules/services.md#cacheoptions)): *Promise*<T\>
 
 Get from cache by key
 
@@ -75,11 +75,11 @@ Name | Default |
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | CacheOptions |
+`__namedParameters` | [*CacheOptions*](../modules/services.md#cacheoptions) |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L73)
+Defined in: [services/cache.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L87)
 
 ___
 
@@ -102,13 +102,13 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [services/cache.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L54)
+Defined in: [services/cache.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L68)
 
 ___
 
 ### \_set
 
-▸ `Private`**_set**<T\>(`__namedParameters`: CacheOptions, `value`: T): *Promise*<unknown\>
+▸ `Private`**_set**<T\>(`__namedParameters`: [*CacheOptions*](../modules/services.md#cacheoptions), `value`: T): *Promise*<unknown\>
 
 Set value in cache
 
@@ -122,18 +122,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`__namedParameters` | CacheOptions | - |
+`__namedParameters` | [*CacheOptions*](../modules/services.md#cacheoptions) | - |
 `value` | T | Cache value    |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L95)
+Defined in: [services/cache.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L109)
 
 ___
 
 ### clear
 
-▸ **clear**(`__namedParameters`: CacheOptions): *Promise*<unknown\>
+▸ **clear**(`__namedParameters`: [*CacheOptions*](../modules/services.md#cacheoptions)): *Promise*<unknown\>
 
 Clear cache for the specified key and scope
 
@@ -141,17 +141,17 @@ Clear cache for the specified key and scope
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | CacheOptions |
+`__namedParameters` | [*CacheOptions*](../modules/services.md#cacheoptions) |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L125)
+Defined in: [services/cache.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L139)
 
 ___
 
 ### usingCache
 
-▸ **usingCache**<T\>(`function_`: () => *Promise*<T\>, `__namedParameters`: CacheOptions): *Promise*<T\>
+▸ **usingCache**<T\>(`function_`: () => *Promise*<T\>, `__namedParameters`: [*CacheOptions*](../modules/services.md#cacheoptions)): *Promise*<T\>
 
 Using cache
 
@@ -166,8 +166,8 @@ Name | Default |
 Name | Type |
 :------ | :------ |
 `function_` | () => *Promise*<T\> |
-`__namedParameters` | CacheOptions |
+`__namedParameters` | [*CacheOptions*](../modules/services.md#cacheoptions) |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L142)
+Defined in: [services/cache.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L156)
