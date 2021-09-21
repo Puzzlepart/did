@@ -34,7 +34,7 @@ export const UserMenu: React.FC = () => {
           secondaryText={user.mail}
           imageUrl={user.photo?.base64}
           size={PersonaSize.size32}
-          hidePersonaDetails={isMobile}
+          hidePersonaDetails={isMobile} 
         />
         <span hidden={isMobile}>
           <Icon

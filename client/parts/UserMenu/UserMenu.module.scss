@@ -12,13 +12,13 @@
   }
 
   .user {
-    div[class*='ms-Persona-primaryText'] {
-      color: #fff;
+    div[class*='-primaryText'] {
+      color: #fff !important;
     }
-    div[class*='ms-Persona-secondaryText'] {
-      color: #fff;
+    div[class*='-secondaryText'] {
+      color: #fff !important;
       display: block;
-      font-size: 10px;
+      font-size: 10px !important;
     }
   }
 }
