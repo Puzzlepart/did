@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
+import { Context } from '../../../graphql/context'
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
@@ -63,8 +64,10 @@ export class TimesheetResolver {
   @Query(() => VacationSummary, {
     description: 'Get vacation summary. Total vacation days, used and remaining.'
   })
-  async vacation() {
+  async vacation(@Ctx() context: Context) {
     try {
+      // eslint-disable-next-line no-console
+      console.log(context.subscription.settings)
       return await this._timesheet.getVacation()
     } catch (error) {
       throw error

@@ -338,15 +338,18 @@ export class TimesheetService {
    * For now `category` param for `MSGraphService.getVacation` is hardcoded
    * to **IAM VAC** and total vacation days to **25**. Should use subscription 
    * settings.
+   * 
+   * @param category - Category (hardcoded to **IAM VAC**)
+   * @param totalDays - Total vacation days (hardcoded to to **25**)
    */
-  public async getVacation(): Promise<VacationSummary> {
+  public async getVacation(category = 'IAM VAC', totalDays = 25): Promise<VacationSummary> {
     try {
-      const events = await this._msgraphSvc.getVacation('IAM VAC')
+      const events = await this._msgraphSvc.getVacation(category)
       const used = (events.reduce((sum, event) => sum + event.duration, 0) / 8)
       return {
-        total: 25,
+        total: totalDays,
         used,
-        remaining: 25 - used
+        remaining: totalDays - used
       }
     } catch (error) {
       throw error
