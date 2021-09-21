@@ -6,7 +6,7 @@ import { MenuItem } from '../MenuItem'
 import $vacation from './vacation.gql'
 
 /**
- * 
+ * @category UserMenu
  */
 export const UserVacation: React.FC = () => {
   const { t } = useTranslation()
