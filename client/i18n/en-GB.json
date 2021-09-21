@@ -341,7 +341,8 @@
     "dark-theme": "Dark theme",
     "auto-theme": "System theme",
     "descriptionOptionalFieldLabel": "Description (optional)",
-    "clearFilters": "Clear filters"
+    "clearFilters": "Clear filters",
+    "vacationSummaryText": "{{used}} of {{total}} vacation days booked"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
