@@ -66,9 +66,7 @@ export class TimesheetResolver {
   })
   async vacation(@Ctx() context: Context) {
     try {
-      // eslint-disable-next-line no-console
-      console.log(context.subscription.settings)
-      return await this._timesheet.getVacation()
+      return await this._timesheet.getVacation(context.subscription.settings.vacation)
     } catch (error) {
       throw error
     }

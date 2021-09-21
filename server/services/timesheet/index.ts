@@ -6,7 +6,7 @@ import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'
 import { Context } from '../../graphql/context'
-import { TimesheetPeriodObject, VacationSummary } from '../../graphql/resolvers/types'
+import { SubscriptionVacationSettings, TimesheetPeriodObject, VacationSummary } from '../../graphql/resolvers/types'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
@@ -335,21 +335,16 @@ export class TimesheetService {
   /**
    * Get vacation
    * 
-   * For now `category` param for `MSGraphService.getVacation` is hardcoded
-   * to **IAM VAC** and total vacation days to **25**. Should use subscription 
-   * settings.
-   * 
-   * @param category - Category (hardcoded to **IAM VAC**)
-   * @param totalDays - Total vacation days (hardcoded to to **25**)
+   * @param settings - Subscription vacation settings
    */
-  public async getVacation(category = 'IAM VAC', totalDays = 25): Promise<VacationSummary> {
+  public async getVacation(settings: SubscriptionVacationSettings): Promise<VacationSummary> {
     try {
-      const events = await this._msgraphSvc.getVacation(category)
+      const events = await this._msgraphSvc.getVacation(settings.eventCategory)
       const used = (events.reduce((sum, event) => sum + event.duration, 0) / 8)
       return {
-        total: totalDays,
+        total: settings.totalDays,
         used,
-        remaining: totalDays - used
+        remaining: settings.totalDays - used
       }
     } catch (error) {
       throw error

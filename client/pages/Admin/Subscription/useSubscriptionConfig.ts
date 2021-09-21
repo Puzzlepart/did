@@ -110,6 +110,32 @@ export function useSubscriptionConfig() {
             !settings?.forecast?.enabled
         } as SubscriptionSettingField
       ]
+    },
+    {
+      itemKey: 'vacation',
+      headerText: t('admin.vacation'),
+      fields: [
+        {
+          id: 'totalDays',
+          type: 'number',
+          props: {
+            label: t('admin.vacationTotalDaysLabel'),
+            description: t('admin.vacationTotalDaysDescription'),
+            defaultValue: 25,
+            min: 20,
+            max: 40,
+            step: 1
+          },
+        } as SubscriptionSettingField,
+        {
+          id: 'eventCategory',
+          type: 'text',
+          props: {
+            label: t('admin.vacationEventCategoryLabel'),
+            description: t('admin.vacationEventCategoryDescription')
+          }
+        } as SubscriptionSettingField,
+      ]
     }
   ] as ISettingsSectionProps[]
 }
