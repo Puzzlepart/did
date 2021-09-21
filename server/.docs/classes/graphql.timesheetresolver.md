@@ -22,6 +22,7 @@ _dependendy injection_.
 - [submitPeriod](graphql.timesheetresolver.md#submitperiod)
 - [timesheet](graphql.timesheetresolver.md#timesheet)
 - [unsubmitPeriod](graphql.timesheetresolver.md#unsubmitperiod)
+- [vacation](graphql.timesheetresolver.md#vacation)
 
 ## Constructors
 
@@ -39,7 +40,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetResolver*](graphql.timesheetresolver.md)
 
-Defined in: [graphql/resolvers/timesheet/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L27)
+Defined in: [graphql/resolvers/timesheet/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L29)
 
 ## Methods
 
@@ -58,7 +59,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L67)
+Defined in: [graphql/resolvers/timesheet/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L86)
 
 ___
 
@@ -77,7 +78,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L45)
+Defined in: [graphql/resolvers/timesheet/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L47)
 
 ___
 
@@ -96,4 +97,24 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L96)
+Defined in: [graphql/resolvers/timesheet/index.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L115)
+
+___
+
+### vacation
+
+▸ **vacation**(`context`: *Context*): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+
+Get vacation summary
+
+Total vacation days, used and remaining.
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`context` | *Context* |
+
+**Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+
+Defined in: [graphql/resolvers/timesheet/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L67)

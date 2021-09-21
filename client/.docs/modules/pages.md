@@ -608,7 +608,7 @@ Name | Type |
 `options` | *IChoiceGroupOption*[] |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 
-Defined in: [client/pages/Reports/hooks/useReports.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L30)
+Defined in: [client/pages/Reports/hooks/useReports.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L29)
 
 ___
 

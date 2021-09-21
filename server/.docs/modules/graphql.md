@@ -22,6 +22,7 @@
 - [SubscriptionADSyncSettingsInput](../classes/graphql.subscriptionadsyncsettingsinput.md)
 - [SubscriptionForecastSettingsInput](../classes/graphql.subscriptionforecastsettingsinput.md)
 - [SubscriptionSettingsInput](../classes/graphql.subscriptionsettingsinput.md)
+- [SubscriptionVacationSettingsInput](../classes/graphql.subscriptionvacationsettingsinput.md)
 - [TimesheetOptions](../classes/graphql.timesheetoptions.md)
 - [TimesheetPeriodInput](../classes/graphql.timesheetperiodinput.md)
 - [TimesheetQuery](../classes/graphql.timesheetquery.md)
@@ -46,11 +47,13 @@
 - [SubscriptionADSyncSettings](../classes/graphql.subscriptionadsyncsettings.md)
 - [SubscriptionForecastSettings](../classes/graphql.subscriptionforecastsettings.md)
 - [SubscriptionSettings](../classes/graphql.subscriptionsettings.md)
+- [SubscriptionVacationSettings](../classes/graphql.subscriptionvacationsettings.md)
 - [TimeEntry](../classes/graphql.timeentry.md)
 - [TimesheetPeriodObject](../classes/graphql.timesheetperiodobject.md)
 - [User](../classes/graphql.user.md)
 - [UserFeedbackResult](../classes/graphql.userfeedbackresult.md)
 - [UserPhoto](../classes/graphql.userphoto.md)
+- [VacationSummary](../classes/graphql.vacationsummary.md)
 
 ### GraphQL Resolver Classes
 

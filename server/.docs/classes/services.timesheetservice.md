@@ -19,6 +19,7 @@ Timesheet service
 - [\_getPeriodData](services.timesheetservice.md#_getperioddata)
 - [getPeriods](services.timesheetservice.md#getperiods)
 - [getTimesheet](services.timesheetservice.md#gettimesheet)
+- [getVacation](services.timesheetservice.md#getvacation)
 - [submitPeriod](services.timesheetservice.md#submitperiod)
 - [unsubmitPeriod](services.timesheetservice.md#unsubmitperiod)
 
@@ -163,6 +164,24 @@ Name | Type |
 **Returns:** *Promise*<any[]\>
 
 Defined in: [services/timesheet/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L76)
+
+___
+
+### getVacation
+
+▸ **getVacation**(`settings`: [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md)): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+
+Get vacation
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`settings` | [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md) | Subscription vacation settings    |
+
+**Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+
+Defined in: [services/timesheet/index.ts:340](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L340)
 
 ___
 

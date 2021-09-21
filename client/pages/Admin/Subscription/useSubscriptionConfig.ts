@@ -128,7 +128,7 @@ export function useSubscriptionConfig() {
             min: 20,
             max: 40,
             step: 1
-          },
+          }
         } as SubscriptionSettingField,
         {
           id: 'eventCategory',
@@ -137,7 +137,7 @@ export function useSubscriptionConfig() {
             label: t('admin.vacationEventCategoryLabel'),
             description: t('admin.vacationEventCategoryDescription')
           }
-        } as SubscriptionSettingField,
+        } as SubscriptionSettingField
       ]
     }
   ] as ISettingsSectionProps[]

@@ -125,7 +125,7 @@ export class SubscriptionADSyncSettingsInput {
 /**
  * @category GraphQL InputType
  */
- @InputType({
+@InputType({
   description: 'A input that describes Subscription vacation settings'
 })
 export class SubscriptionVacationSettingsInput {

@@ -3,9 +3,9 @@
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
-import { DateObject } from '../../../shared/utils/DateObject'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
+import { DateObject } from '../../../shared/utils/DateObject'
 import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
@@ -80,13 +80,14 @@ class MSGraphService {
 
   /**
    * Get vacation for the current user
-   * 
+   *
    * @param category - Category for vacation
    */
   public async getVacation(category: string): Promise<EventObject[]> {
     try {
       const client = await this._getClient()
-      const { value } = await client.api('/me/calendar/calendarView')
+      const { value } = await client
+        .api('/me/calendar/calendarView')
         .query({
           startDateTime: new DateObject().$.startOf('year').toISOString(),
           endDateTime: new DateObject().$.endOf('year').toISOString()
@@ -95,20 +96,19 @@ class MSGraphService {
         .filter(`categories/any(a:a+eq+\'${category}\')`)
         .top(999)
         .get()
-      return value
-        .map(
-          (event: any) =>
-            new EventObject(
-              event.id,
-              event.subject,
-              '',
-              true,
-              event.start,
-              event.end,
-              event.webLink,
-              event.categories
-            )
-        )
+      return value.map(
+        (event: any) =>
+          new EventObject(
+            event.id,
+            event.subject,
+            '',
+            true,
+            event.start,
+            event.end,
+            event.webLink,
+            event.categories
+          )
+      )
     } catch (error) {
       throw new Error(`MSGraphService.getVacation: ${error.message}`)
     }

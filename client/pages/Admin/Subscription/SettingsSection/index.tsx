@@ -28,7 +28,9 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
             fieldElement = (
               <TextField
                 {...omit(fieldProps, ['description'])}
-                defaultValue={get(settings, key, { default: fieldProps.defaultValue })}
+                defaultValue={get(settings, key, {
+                  default: fieldProps.defaultValue
+                })}
                 onChange={(_event, value) => onChange(key, value)}
               />
             )
