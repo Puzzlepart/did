@@ -14,6 +14,7 @@ import { MenuItem } from './MenuItem'
 import styles from './UserMenu.module.scss'
 import { UserReports } from './UserReports'
 import { UserSettings } from './UserSettings'
+import { UserVacation } from './UserVacation'
 
 /**
  * @category Function Component
@@ -85,9 +86,8 @@ export const UserMenu: React.FC = () => {
               styles={{ tertiaryText: { display: 'block', fontSize: 10 } }}
             />
           </MenuItem>
-          <BrowserView renderWithFragment={true}>
-            <UserReports />
-          </BrowserView>
+          <UserVacation />
+          <UserReports />
           <Divider />
           <UserSettings />
           <MobileView renderWithFragment={true}>
