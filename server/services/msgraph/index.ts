@@ -9,7 +9,7 @@ import { DateObject } from '../../../shared/utils/DateObject'
 import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
-import { CacheScope, CacheService } from '../cache'
+import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
 import { MSGraphOutlookCategory } from './types'
 
@@ -242,9 +242,10 @@ class MSGraphService {
     endDateTimeIso: string
   ): Promise<EventObject[]> {
     try {
-      const cacheOptions = {
+      const cacheOptions: CacheOptions= {
         key: ['events', startDateTimeIso, endDateTimeIso],
-        scope: CacheScope.USER
+        scope: CacheScope.USER,
+        expiry: 20
       }
       const events = await this._cache.usingCache(async () => {
         const query = {
