@@ -9,7 +9,8 @@ import {
   TimesheetOptions,
   TimesheetPeriodInput,
   TimesheetPeriodObject,
-  TimesheetQuery
+  TimesheetQuery,
+  VacationSummary
 } from './types'
 
 /**
@@ -48,6 +49,23 @@ export class TimesheetResolver {
   ) {
     try {
       return await this._timesheet.getTimesheet({ ...query, ...options })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
+   * Get vacation summary
+   * 
+   * Total vacation days, used and remaining.
+   */
+  @Authorized<IAuthOptions>({ userContext: true })
+  @Query(() => VacationSummary, {
+    description: 'Get vacation summary. Total vacation days, used and remaining.'
+  })
+  async vacation() {
+    try {
+      return await this._timesheet.getVacation()
     } catch (error) {
       throw error
     }
