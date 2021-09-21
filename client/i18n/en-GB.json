@@ -342,7 +342,7 @@
     "auto-theme": "System theme",
     "descriptionOptionalFieldLabel": "Description (optional)",
     "clearFilters": "Clear filters",
-    "vacationSummaryText": "{{used}} of {{total}} vacation days booked"
+    "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

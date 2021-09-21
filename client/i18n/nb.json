@@ -341,7 +341,7 @@
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
     "clearFilters": "Fjern filtre",
-    "vacationSummaryText": "{{used}} av {{total}} feriedager satt av"
+    "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
