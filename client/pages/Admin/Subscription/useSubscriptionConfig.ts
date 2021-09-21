@@ -18,6 +18,7 @@ export function useSubscriptionConfig() {
     {
       itemKey: 'info',
       headerText: t('admin.subscriptionInfoHeader'),
+      itemIcon: 'Info2',
       fields: [
         {
           id: 'name',
@@ -41,6 +42,7 @@ export function useSubscriptionConfig() {
     },
     {
       itemKey: 'adsync',
+      itemIcon: 'UserSync',
       headerText: t('admin.adsync'),
       fields: [
         {
@@ -85,6 +87,7 @@ export function useSubscriptionConfig() {
     },
     {
       itemKey: 'forecast',
+      itemIcon: 'BufferTimeBefore',
       headerText: t('admin.forecasting'),
       fields: [
         {
@@ -114,6 +117,7 @@ export function useSubscriptionConfig() {
     {
       itemKey: 'vacation',
       headerText: t('admin.vacation'),
+      itemIcon: 'Vacation',
       fields: [
         {
           id: 'totalDays',
@@ -121,7 +125,6 @@ export function useSubscriptionConfig() {
           props: {
             label: t('admin.vacationTotalDaysLabel'),
             description: t('admin.vacationTotalDaysDescription'),
-            defaultValue: 25,
             min: 20,
             max: 40,
             step: 1

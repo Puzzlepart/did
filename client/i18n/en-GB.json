@@ -162,7 +162,7 @@
     "labelCreateSuccess": "Your new label **{{name}}** was succesfully created.",
     "labelCreateError": "We can't update the label at the moment. Please try again later.",
     "labelUpdateSuccess": "Your label **{{name}}** was succesfully updated.",
-    "vacation": "Ferie og fravær",
+    "vacation": "Holidays and absence",
     "vacationTotalDaysLabel": "Vacation days",
     "vacationTotalDaysDescription": "Total number of vacation days for each employee in the company.",
     "vacationEventCategoryLabel": "Outlook event category",
