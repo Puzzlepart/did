@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 
-import { Slider, TextField, Toggle } from '@fluentui/react'
+import { omit, Slider, TextField, Toggle } from '@fluentui/react'
 import { SubText, TabComponent } from 'components'
 import get from 'get-value'
 import React, { useContext } from 'react'
@@ -27,8 +27,8 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
           case 'text':
             fieldElement = (
               <TextField
-                {...fieldProps}
-                defaultValue={fieldProps.defaultValue}
+                {...omit(fieldProps, ['description'])}
+                defaultValue={get(settings, key, { default: fieldProps.defaultValue })}
                 onChange={(_event, value) => onChange(key, value)}
               />
             )

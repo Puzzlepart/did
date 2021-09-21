@@ -160,7 +160,12 @@
     "labelNameDescription": "Navn på merkelapp. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
     "labelCreateError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
     "labelCreateSuccess": "Den nye merkelappen din **{{name}}** ble opprettet",
-    "labelUpdateSuccess": "Merkelappen din **{{name}}** ble oppdatert"
+    "labelUpdateSuccess": "Merkelappen din **{{name}}** ble oppdatert",
+    "vacationEventCategoryLabel": "Hendelseskategori i Outlook",
+    "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
+    "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
+    "vacationTotalDaysLabel": "Feriedager",
+    "vacation": "Ferie og fravær"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -340,7 +345,8 @@
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
-    "clearFilters": "Fjern filtre"
+    "clearFilters": "Fjern filtre",
+    "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

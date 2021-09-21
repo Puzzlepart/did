@@ -18,6 +18,7 @@ export function useSubscriptionConfig() {
     {
       itemKey: 'info',
       headerText: t('admin.subscriptionInfoHeader'),
+      itemIcon: 'Info2',
       fields: [
         {
           id: 'name',
@@ -41,6 +42,7 @@ export function useSubscriptionConfig() {
     },
     {
       itemKey: 'adsync',
+      itemIcon: 'UserSync',
       headerText: t('admin.adsync'),
       fields: [
         {
@@ -85,6 +87,7 @@ export function useSubscriptionConfig() {
     },
     {
       itemKey: 'forecast',
+      itemIcon: 'BufferTimeBefore',
       headerText: t('admin.forecasting'),
       fields: [
         {
@@ -109,6 +112,32 @@ export function useSubscriptionConfig() {
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.forecast?.enabled
         } as SubscriptionSettingField
+      ]
+    },
+    {
+      itemKey: 'vacation',
+      headerText: t('admin.vacation'),
+      itemIcon: 'Vacation',
+      fields: [
+        {
+          id: 'totalDays',
+          type: 'number',
+          props: {
+            label: t('admin.vacationTotalDaysLabel'),
+            description: t('admin.vacationTotalDaysDescription'),
+            min: 20,
+            max: 40,
+            step: 1
+          },
+        } as SubscriptionSettingField,
+        {
+          id: 'eventCategory',
+          type: 'text',
+          props: {
+            label: t('admin.vacationEventCategoryLabel'),
+            description: t('admin.vacationEventCategoryDescription')
+          }
+        } as SubscriptionSettingField,
       ]
     }
   ] as ISettingsSectionProps[]
