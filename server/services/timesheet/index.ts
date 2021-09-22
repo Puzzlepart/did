@@ -6,7 +6,11 @@ import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'
 import { Context } from '../../graphql/context'
-import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
+import {
+  SubscriptionVacationSettings,
+  TimesheetPeriodObject,
+  VacationSummary
+} from '../../graphql/resolvers/types'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
@@ -330,5 +334,26 @@ export class TimesheetService {
       ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
+  }
+
+  /**
+   * Get vacation
+   *
+   * @param settings - Subscription vacation settings
+   */
+  public async getVacation(
+    settings: SubscriptionVacationSettings
+  ): Promise<VacationSummary> {
+    try {
+      const events = await this._msgraphSvc.getVacation(settings.eventCategory)
+      const used = events.reduce((sum, event) => sum + event.duration, 0) / 8
+      return {
+        total: settings.totalDays,
+        used,
+        remaining: settings.totalDays - used
+      }
+    } catch (error) {
+      throw error
+    }
   }
 }

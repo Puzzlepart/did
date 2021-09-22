@@ -15,9 +15,23 @@ export enum CacheScope {
 
 export type CacheKey = string | string[]
 
-type CacheOptions = {
+/**
+ * Cache options
+ */
+export type CacheOptions = {
+  /**
+   * Cache key
+   */
   key: CacheKey
+
+  /**
+   * Cache expiry in seconds
+   */
   expiry?: number
+
+  /**
+   * Cache scope
+   */
   scope?: CacheScope
 }
 

@@ -38,6 +38,7 @@ Services used by `GraphQL`
 ### Type aliases
 
 - [CacheKey](services.md#cachekey)
+- [CacheOptions](services.md#cacheoptions)
 
 ## Type aliases
 
@@ -46,3 +47,21 @@ Services used by `GraphQL`
 Ƭ **CacheKey**: *string* \| *string*[]
 
 Defined in: [services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)
+
+___
+
+### CacheOptions
+
+Ƭ **CacheOptions**: *object*
+
+Cache options
+
+#### Type declaration:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`expiry`? | *number* | Cache expiry in seconds   |
+`key` | [*CacheKey*](services.md#cachekey) | Cache key   |
+`scope`? | [*CacheScope*](../enums/services.cachescope.md) | Cache scope   |
+
+Defined in: [services/cache.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L21)
