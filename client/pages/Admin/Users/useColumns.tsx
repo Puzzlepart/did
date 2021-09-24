@@ -4,6 +4,7 @@ import { IconText } from 'components'
 import { EditLink } from 'components/EditLink'
 import { IListColumn } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
+import $date from 'DateUtils'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -49,11 +50,13 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
       },
       ({ role }) => <IconText iconName={role.icon} text={role.name} />
     ),
-    col('lastActive', t('common.lastActiveLabel'), {
-      maxWidth: 180,
-      data: { hidden: isMobile },
-      onRender: (row) => row.lastActive ? new Date(row.lastActive).toLocaleString() : ''
-    }),
+    col('lastActive',
+      t('common.lastActiveLabel'),
+      {
+        maxWidth: 180,
+        data: { hidden: isMobile },
+        onRender: (row) => $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
+      }),
     col('actions', '', { maxWidth: 100 }, (user: User) => (
       <div style={{ display: 'flex' }}>
         <EditLink

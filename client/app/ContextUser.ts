@@ -19,7 +19,7 @@ export class ContextUser {
   public configuration: Record<string, any>
   public photo: UserPhoto
   public theme: PartialTheme
-  public lastActive: string
+  public lastActive: Date
 
   /**
    * Constructor for `ContextUser`

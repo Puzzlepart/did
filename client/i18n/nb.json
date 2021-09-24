@@ -346,7 +346,7 @@
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
     "clearFilters": "Fjern filtre",
-    "lastActiveLabel": "Sist pålogget",
+    "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående"
   },
   "navigation": {
