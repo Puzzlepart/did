@@ -160,7 +160,7 @@ export class UserService extends MongoDocumentService<User> {
       }
       if (startPage) $set.startPage = startPage
       if (preferredLanguage) $set.preferredLanguage = preferredLanguage
-      if (lastActive) $set.lastActive = lastActive
+      if (lastActive) $set.lastActive = new Date(lastActive)
       await this.update(filter, $set)
     } catch (error) {
       throw error
