@@ -21,7 +21,7 @@ function useLastActiveUpdater() {
   const { updateLastActive } = useUpdateUserConfiguration()
   useEffect(() => {
     const activityDetector = createActivityDetector()
-    activityDetector.on('active', () => updateLastActive(new Date().toISOString()))
+    activityDetector.on('active', updateLastActive)
   }, [])
 }
 
