@@ -70,6 +70,7 @@
     "@types/underscore.string": "0.0.38",
     "@types/webpack-env": "1.16.0",
     "@uifabric/icons": "7.5.23",
+    "activity-detector": "^3.0.0",
     "apollo-server-express": "2.22.1",
     "archiver": "^5.3.0",
     "array-sort": "1.0.0",

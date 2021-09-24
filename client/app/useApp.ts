@@ -2,12 +2,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IAppContext } from 'AppContext'
 import { usePages } from 'pages/usePages'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useNotificationsQuery } from '../hooks'
 import { useUpdateUserConfiguration } from '../hooks/user/useUpdateUserConfiguration'
 import useAppReducer from './reducer'
 import { IAppProps } from './types'
-import { BrowserStorage } from 'utils'
+import createActivityDetector from 'activity-detector'
+
+/**
+ * Update `last_active` property for the user.
+ * 
+ * Using React `useEffect` hook and `createActivityDetector` 
+ * to limit number of executions.
+ *
+ * @category App Hooks
+ */
+function useLastActiveUpdater() {
+  const { updateLastActive } = useUpdateUserConfiguration()
+  useEffect(() => {
+    const activityDetector = createActivityDetector()
+    activityDetector.on('active', () => updateLastActive(new Date().toISOString()))
+  }, [])
+}
 
 /**
  * Component logic for `App`
@@ -30,13 +46,7 @@ export function useApp(props: IAppProps) {
     [state, notifications]
   )
 
-  const { updateLastActive } = useUpdateUserConfiguration()
-  const lastActiveCached = new BrowserStorage<string>('lastActive_time', localStorage)
-  const timeSinceUpdate = Math.floor(Date.now() - new Date(lastActiveCached.get()).getTime()) / 1000
-  if (!timeSinceUpdate || timeSinceUpdate > 60) {
-    lastActiveCached.set(new Date().toISOString())
-    updateLastActive(new Date().toISOString())
-  }
+  useLastActiveUpdater()
 
   return context
 }
