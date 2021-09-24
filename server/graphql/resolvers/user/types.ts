@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
 import { BaseResult, Role } from '../types'
-import { GraphQLDate } from 'graphql-iso-date'
+import { GraphQLDateTime } from 'graphql-iso-date'
 
 /**
  * A type that describes a User photo
@@ -80,7 +80,7 @@ export class User {
   @Field({ nullable: true })
   photo?: UserPhoto
 
-  @Field(() => GraphQLDate, { nullable: true })
+  @Field(() => GraphQLDateTime, { nullable: true })
   lastActive?: Date
 
   public create?(user: User): User {
@@ -120,7 +120,7 @@ export class UserInput {
   @Field({ nullable: true })
   startPage?: string
 
-  @Field(() => GraphQLDate, { nullable: true })
+  @Field(() => GraphQLDateTime, { nullable: true })
   lastActive?: Date
 
   @Field({ nullable: true })
