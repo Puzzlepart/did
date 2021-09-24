@@ -55,10 +55,10 @@ export function useUpdateUserConfiguration(
     })
   }, [])
 
-  const updateLastActive = useCallback(async (lastActive: string) => {
+  const updateLastActive = useCallback(async (lastActiveIsoDate: string) => {
     await updateUserConfiguration({
       variables: {
-        lastActive
+        lastActive: lastActiveIsoDate
       }
     })
   }, [])
