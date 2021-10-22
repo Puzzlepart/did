@@ -18,6 +18,7 @@ the `AppContext`
 - [configuration](app.contextuser.md#configuration)
 - [displayName](app.contextuser.md#displayname)
 - [id](app.contextuser.md#id)
+- [lastActive](app.contextuser.md#lastactive)
 - [mail](app.contextuser.md#mail)
 - [photo](app.contextuser.md#photo)
 - [role](app.contextuser.md#role)
@@ -49,6 +50,7 @@ from the User object:
 * `role`
 * `startPage`
 * `photo`
+* `lastActive`
 
 We can't extend the `User` class
 due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
@@ -62,7 +64,7 @@ Name | Type | Description |
 
 **Returns:** [*ContextUser*](app.contextuser.md)
 
-Defined in: [client/app/ContextUser.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L21)
+Defined in: [client/app/ContextUser.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L22)
 
 ## Properties
 
@@ -87,6 +89,14 @@ ___
 • **id**: *string*
 
 Defined in: [client/app/ContextUser.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L14)
+
+___
+
+### lastActive
+
+• **lastActive**: Date
+
+Defined in: [client/app/ContextUser.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L22)
 
 ___
 
@@ -142,7 +152,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: [client/app/ContextUser.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L62)
+Defined in: [client/app/ContextUser.ts:64](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L64)
 
 ## Methods
 
@@ -160,4 +170,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [client/app/ContextUser.ts:83](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L83)
+Defined in: [client/app/ContextUser.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L85)

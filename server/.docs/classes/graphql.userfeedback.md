@@ -32,7 +32,7 @@
 
 • **body**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:164](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L164)
+Defined in: [graphql/resolvers/user/types.ts:171](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L171)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • `Optional` **labels**: *string*[]
 
-Defined in: [graphql/resolvers/user/types.ts:170](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L170)
+Defined in: [graphql/resolvers/user/types.ts:177](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L177)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • `Optional` **mood**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L167)
+Defined in: [graphql/resolvers/user/types.ts:174](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L174)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • `Optional` **reporter**: [*UserFeedbackReporter*](graphql.userfeedbackreporter.md)
 
-Defined in: [graphql/resolvers/user/types.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L173)
+Defined in: [graphql/resolvers/user/types.ts:180](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L180)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 • **title**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:161](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L161)
+Defined in: [graphql/resolvers/user/types.ts:168](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L168)

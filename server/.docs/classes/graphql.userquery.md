@@ -29,7 +29,7 @@
 
 • `Optional` **hiddenFromReports**: *boolean*
 
-Defined in: [graphql/resolvers/user/types.ts:140](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L140)
+Defined in: [graphql/resolvers/user/types.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L147)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **role**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:137](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L137)
+Defined in: [graphql/resolvers/user/types.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L144)

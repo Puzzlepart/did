@@ -316,7 +316,7 @@ ___
 
 ### updateCurrentUserConfiguration
 
-▸ **updateCurrentUserConfiguration**(`configuration?`: *string*, `startPage?`: *string*, `preferredLanguage?`: *string*): *Promise*<void\>
+▸ **updateCurrentUserConfiguration**(`configuration?`: *string*, `startPage?`: *string*, `lastActive?`: *string*, `preferredLanguage?`: *string*): *Promise*<void\>
 
 Update configuration for the current user
 
@@ -329,6 +329,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `configuration?` | *string* | Configuration   |
 `startPage?` | *string* | Start page   |
+`lastActive?` | *string* | - |
 `preferredLanguage?` | *string* | Preferred language    |
 
 **Returns:** *Promise*<void\>

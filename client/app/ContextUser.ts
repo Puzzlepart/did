@@ -45,7 +45,16 @@ export class ContextUser {
     if (_user) {
       Object.assign(
         this,
-        _.pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo', 'lastActive')
+        _.pick(
+          _user,
+          'id',
+          'displayName',
+          'mail',
+          'role',
+          'startPage',
+          'photo',
+          'lastActive'
+        )
       )
       this.configuration = tryParseJson(_user.configuration, {})
       this.theme = getTheme(this.configuration?.ui?.theme)

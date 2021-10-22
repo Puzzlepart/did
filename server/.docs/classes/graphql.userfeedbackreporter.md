@@ -29,7 +29,7 @@
 
 • `Optional` **displayName**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L149)
+Defined in: [graphql/resolvers/user/types.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L156)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **mail**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L152)
+Defined in: [graphql/resolvers/user/types.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L159)

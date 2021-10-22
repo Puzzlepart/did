@@ -55,6 +55,7 @@ ___
 Name | Type |
 :------ | :------ |
 `updateConfiguration`? | (`config`: *any*) => *Promise*<void\> |
+`updateLastActive`? | () => *Promise*<void\> |
 `updatePreferredLanguage`? | (`preferredLanguage`: *string*) => *Promise*<void\> |
 `updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
 
@@ -280,4 +281,4 @@ Name | Type |
 
 **Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L37)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L38)

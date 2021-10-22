@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
+import { GraphQLDateTime } from 'graphql-iso-date'
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
 import { BaseResult, Role } from '../types'
-import { GraphQLDateTime } from 'graphql-iso-date'
 
 /**
  * A type that describes a User photo

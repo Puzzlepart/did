@@ -63,13 +63,16 @@ export function useUpdateUserConfiguration(
     })
   }, [])
 
-  const updatePreferredLanguage = useCallback(async (preferredLanguage: string) => {
-    await updateUserConfiguration({
-      variables: {
-        preferredLanguage
-      }
-    })
-  }, [])
+  const updatePreferredLanguage = useCallback(
+    async (preferredLanguage: string) => {
+      await updateUserConfiguration({
+        variables: {
+          preferredLanguage
+        }
+      })
+    },
+    []
+  )
 
   useEffect(() => {
     if (params?.autoUpdate) {

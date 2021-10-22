@@ -50,13 +50,11 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
       },
       ({ role }) => <IconText iconName={role.icon} text={role.name} />
     ),
-    col('lastActive',
-      t('common.lastActiveLabel'),
-      {
-        maxWidth: 180,
-        data: { hidden: isMobile },
-        onRender: (row) => $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
-      }),
+    col('lastActive', t('common.lastActiveLabel'), {
+      maxWidth: 180,
+      data: { hidden: isMobile },
+      onRender: (row) => $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
+    }),
     col('actions', '', { maxWidth: 100 }, (user: User) => (
       <div style={{ display: 'flex' }}>
         <EditLink
