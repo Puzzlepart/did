@@ -347,6 +347,7 @@
     "auto-theme": "System theme",
     "descriptionOptionalFieldLabel": "Description (optional)",
     "clearFilters": "Clear filters",
+    "lastActiveLabel": "Last active",
     "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining"
   },
   "navigation": {

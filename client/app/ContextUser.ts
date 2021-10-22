@@ -19,6 +19,7 @@ export class ContextUser {
   public configuration: Record<string, any>
   public photo: UserPhoto
   public theme: PartialTheme
+  public lastActive: Date
 
   /**
    * Constructor for `ContextUser`
@@ -32,6 +33,7 @@ export class ContextUser {
    * * `role`
    * * `startPage`
    * * `photo`
+   * * `lastActive`
    *
    * We can't extend the `User` class
    * due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
@@ -43,7 +45,7 @@ export class ContextUser {
     if (_user) {
       Object.assign(
         this,
-        _.pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo')
+        _.pick(_user, 'id', 'displayName', 'mail', 'role', 'startPage', 'photo', 'lastActive')
       )
       this.configuration = tryParseJson(_user.configuration, {})
       this.theme = getTheme(this.configuration?.ui?.theme)

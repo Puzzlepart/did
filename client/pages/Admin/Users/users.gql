@@ -18,6 +18,7 @@ query UsersAdmin {
     mail
     hiddenFromReports
     provider
+    lastActive
     role {
       name
       description

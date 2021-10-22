@@ -283,15 +283,7 @@
         "Fredag",
         "Laurdag"
       ],
-      "shortDays": [
-        "S",
-        "M",
-        "T",
-        "O",
-        "T",
-        "F",
-        "S"
-      ],
+      "shortDays": ["S", "M", "T", "O", "T", "F", "S"],
       "goToToday": "Gå til dagens dato",
       "weekNumberFormatString": "Vekenummer {0}",
       "prevMonthAriaLabel": "Førre månad",
@@ -346,6 +338,7 @@
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
     "clearFilters": "Fjern filtre",
+    "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående"
   },
   "navigation": {

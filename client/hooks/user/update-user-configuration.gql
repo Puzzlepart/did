@@ -1,5 +1,15 @@
-mutation UpdateUserConfiguration ($configuration: String, $preferredLanguage: String, $startPage: String) {
-  result: updateUserConfiguration(configuration: $configuration, preferredLanguage: $preferredLanguage, startPage: $startPage) {
+mutation UpdateUserConfiguration(
+  $configuration: String
+  $preferredLanguage: String
+  $startPage: String
+  $lastActive: String
+) {
+  result: updateUserConfiguration(
+    configuration: $configuration
+    preferredLanguage: $preferredLanguage
+    startPage: $startPage
+    lastActive: $lastActive
+  ) {
     success
   }
 }

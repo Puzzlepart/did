@@ -83,6 +83,7 @@ export class DateUtils {
    * @param locale - Locale
    */
   formatDate(dateTime: ConfigType, template: string, locale?: string): string {
+    if (!dateTime) return null
     if (locale) return $dayjs(dateTime).locale(locale).format(template)
     return $dayjs(dateTime).format(template)
   }

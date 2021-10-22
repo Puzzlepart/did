@@ -29,6 +29,7 @@ query UserContext {
       permissions
     }
     startPage
+    lastActive
     preferredLanguage
     configuration
     photo {
