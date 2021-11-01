@@ -152,7 +152,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: [client/app/ContextUser.ts:64](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L64)
+Defined in: [client/app/ContextUser.ts:73](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L73)
 
 ## Methods
 
@@ -170,4 +170,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [client/app/ContextUser.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L85)
+Defined in: [client/app/ContextUser.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L94)
