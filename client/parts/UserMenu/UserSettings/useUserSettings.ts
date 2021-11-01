@@ -20,7 +20,11 @@ export function useUserSettings() {
    * @param value - Value
    * @param skipReload - Skip reload
    */
-  const onUpdate = async (key: string, value: string | number | boolean, skipReload = false) => {
+  const onUpdate = async (
+    key: string,
+    value: string | number | boolean,
+    skipReload = false
+  ) => {
     switch (key) {
       case 'preferredLanguage':
         await updatePreferredLanguage(value as string)

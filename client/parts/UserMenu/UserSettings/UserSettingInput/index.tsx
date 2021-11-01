@@ -1,5 +1,12 @@
 /* eslint-disable tsdoc/syntax */
-import { Dropdown, IDropdownProps, ITextField, ITextFieldProps, IToggleProps, TextField, Toggle } from '@fluentui/react'
+import {
+  Dropdown,
+  IDropdownProps,
+  ITextFieldProps,
+  IToggleProps,
+  TextField,
+  Toggle
+} from '@fluentui/react'
 import { SubText } from 'components'
 import React, { useContext } from 'react'
 import { UserSettingsContext } from '../context'
@@ -42,7 +49,9 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
         element = (
           <TextField
             {...(setting as ITextFieldProps)}
-            onChange={(_event, value) => onUpdate(setting.fieldName, Number.parseInt(value) ?? 0, true)}
+            onChange={(_event, value) =>
+              onUpdate(setting.fieldName, Number.parseInt(value) ?? 0, true)
+            }
           />
         )
       }

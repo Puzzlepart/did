@@ -1,5 +1,3 @@
-import stringStripHtml from 'string-strip-html'
-
 /**
  * Try parse JSON
  *

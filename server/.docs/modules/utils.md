@@ -11,6 +11,8 @@ Utility functions
 - [environment](utils.md#environment)
 - [sound](utils.md#sound)
 - [stripHtmlString](utils.md#striphtmlstring)
+- [toFixed](utils.md#tofixed)
+- [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
 
@@ -85,3 +87,47 @@ Name | Type |
 **Returns:** *string*
 
 Defined in: [utils/stripHtmlString.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L11)
+
+___
+
+### toFixed
+
+▸ **toFixed**(`num`: *number*, `fractionDigits?`: *number*): *number*
+
+Returns the number in fixed-point notation.
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`num` | *number* | - | Number value   |
+`fractionDigits` | *number* | 0 | Fraction digits    |
+
+**Returns:** *number*
+
+Defined in: [utils/toFixed.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/utils/toFixed.ts#L10)
+
+___
+
+### tryParseJson
+
+▸ **tryParseJson**<T\>(`string`: *string*, `fallbackValue?`: {}): T
+
+Try parse JSON
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`string` | *string* | - |
+`fallbackValue` | *object* | Fallback value when `JSON.parse` fails    |
+
+**Returns:** T
+
+Defined in: [utils/tryParseJson.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/tryParseJson.ts#L9)

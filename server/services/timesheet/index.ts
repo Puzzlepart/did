@@ -62,8 +62,8 @@ export class TimesheetService {
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService
-    // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) // eslint-disable-next-line unicorn/empty-brace-spaces
+  {}
 
   /**
    * Get timesheet
@@ -352,7 +352,9 @@ export class TimesheetService {
     settings: SubscriptionVacationSettings
   ): Promise<VacationSummary> {
     try {
-      const userConfiguration = await this._userSvc.getUserConfiguration(this.context.userId)
+      const userConfiguration = await this._userSvc.getUserConfiguration(
+        this.context.userId
+      )
       const transferredDaysKey = `vacation.transferredDays_${new Date().getFullYear()}`
       const transferredDays = get(userConfiguration, transferredDaysKey)
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
