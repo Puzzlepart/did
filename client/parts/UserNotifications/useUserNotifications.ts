@@ -24,7 +24,7 @@ export const useUserNotifications = () => {
   const dismissedCount = notifications.data.length - count
   return {
     notifications: notifications_,
-    count: count,
+    count,
     dismissedCount,
     dismissNotification,
     clearDismissed
