@@ -27,11 +27,6 @@ export class Context {
   public userId?: string
 
   /**
-   * User configuration
-   */
-  public userConfiguration?: { [key: string]: any }
-
-  /**
    * Provider
    *
    * `google` or `azuread-openidconnect`
@@ -106,7 +101,6 @@ export const createContext = async (
       context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
-      context.userConfiguration = tryParseJson(get(request, 'user.configuration'))
       context.provider = get(request, 'user.provider')
       context.permissions = get(request, 'user.role.permissions')
     }
