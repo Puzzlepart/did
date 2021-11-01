@@ -12,6 +12,7 @@ import {
   TimesheetPeriodObject,
   VacationSummary
 } from '../../graphql/resolvers/types'
+import { toFixed } from '../../utils'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
@@ -352,8 +353,8 @@ export class TimesheetService {
       const totalDays = settings.totalDays + (transferredDays ?? 0)
       return {
         total: totalDays,
-        used,
-        remaining: totalDays - used
+        used: toFixed(used, 2),
+        remaining: toFixed(totalDays - used, 2)
       }
     } catch (error) {
       throw error
