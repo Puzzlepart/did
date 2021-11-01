@@ -62,7 +62,7 @@ export class TimesheetService {
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService
-  // eslint-disable-next-line unicorn/empty-brace-spaces
+    // eslint-disable-next-line unicorn/empty-brace-spaces
   ) { }
 
   /**
@@ -343,7 +343,8 @@ export class TimesheetService {
   }
 
   /**
-   * Get vacation
+   * Get vacation summary for the current user. `vacation.transferredDays_*` is added
+   * to the `totalDays from subscription settings.
    *
    * @param settings - Subscription vacation settings
    */
