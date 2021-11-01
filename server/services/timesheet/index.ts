@@ -18,7 +18,8 @@ import {
   ForecastedPeriodsService,
   ForecastedTimeEntryService,
   ProjectService,
-  TimeEntryService
+  TimeEntryService,
+  UserService
 } from '../mongo'
 import MatchingEngine from './matching'
 import {
@@ -49,6 +50,7 @@ export class TimesheetService {
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
    * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
+   * @param _userSvc - Injected `UserService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
@@ -58,7 +60,9 @@ export class TimesheetService {
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
-    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
+    private readonly _fperiodSvc: ForecastedPeriodsService,
+    private readonly _userSvc: UserService
+  // eslint-disable-next-line unicorn/empty-brace-spaces
   ) { }
 
   /**
@@ -347,7 +351,9 @@ export class TimesheetService {
     settings: SubscriptionVacationSettings
   ): Promise<VacationSummary> {
     try {
-      const transferredDays = get(this.context.userConfiguration, `vacation.transferredDays_${new Date().getFullYear()}`)
+      const userConfiguration = await this._userSvc.getUserConfiguration(this.context.userId)
+      const transferredDaysKey = `vacation.transferredDays_${new Date().getFullYear()}`
+      const transferredDays = get(userConfiguration, transferredDaysKey)
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
       const used = events.reduce((sum, event) => sum + event.duration, 0) / 8
       const totalDays = settings.totalDays + (transferredDays ?? 0)

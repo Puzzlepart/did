@@ -87,6 +87,25 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
+   * Get configuration by user ID
+   *
+   * @remarks Returns null if no user is found.
+   *
+   * @param idOrMail - User ID or mail
+   */
+  public async getUserConfiguration(idOrMail: string): Promise<any> {
+    try {
+      const user = await this.collection.findOne({
+        $or: [{ _id: idOrMail }, { mail: idOrMail }]
+      })
+      if (!user) return null
+      return user.configuration
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
    * Add the specified user object
    *
    * @param user - User
