@@ -347,7 +347,8 @@
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
     "clearFilters": "Fjern filtre",
     "lastActiveLabel": "Sist aktiv",
-    "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående"
+    "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
+    "vacationTransferredDaysLabel": "Overførte feriedager"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

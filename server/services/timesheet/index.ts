@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
@@ -11,12 +12,14 @@ import {
   TimesheetPeriodObject,
   VacationSummary
 } from '../../graphql/resolvers/types'
+import { toFixed } from '../../utils'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
   ForecastedTimeEntryService,
   ProjectService,
-  TimeEntryService
+  TimeEntryService,
+  UserService
 } from '../mongo'
 import MatchingEngine from './matching'
 import {
@@ -47,6 +50,7 @@ export class TimesheetService {
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
    * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
+   * @param _userSvc - Injected `UserService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
@@ -56,8 +60,10 @@ export class TimesheetService {
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
-    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+    private readonly _fperiodSvc: ForecastedPeriodsService,
+    private readonly _userSvc: UserService
+    // eslint-disable-next-line unicorn/empty-brace-spaces
+  ) { }
 
   /**
    * Get timesheet
@@ -337,7 +343,8 @@ export class TimesheetService {
   }
 
   /**
-   * Get vacation
+   * Get vacation summary for the current user. `vacation.transferredDays_*` is added
+   * to the `totalDays from subscription settings.
    *
    * @param settings - Subscription vacation settings
    */
@@ -345,12 +352,16 @@ export class TimesheetService {
     settings: SubscriptionVacationSettings
   ): Promise<VacationSummary> {
     try {
+      const userConfiguration = await this._userSvc.getUserConfiguration(this.context.userId)
+      const transferredDaysKey = `vacation.transferredDays_${new Date().getFullYear()}`
+      const transferredDays = get(userConfiguration, transferredDaysKey)
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
       const used = events.reduce((sum, event) => sum + event.duration, 0) / 8
+      const totalDays = settings.totalDays + (transferredDays ?? 0)
       return {
-        total: settings.totalDays,
-        used,
-        remaining: settings.totalDays - used
+        total: totalDays,
+        used: toFixed(used, 2),
+        remaining: toFixed(totalDays - used, 2)
       }
     } catch (error) {
       throw error
