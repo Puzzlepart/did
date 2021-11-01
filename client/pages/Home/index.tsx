@@ -52,9 +52,9 @@ export const Home: PageComponent = () => {
           {Object.keys(providers).map((key) => (
             <DefaultButton
               key={key}
+              className={styles.signInButton}
               onClick={() => document.location.replace(`/auth/${key}/signin`)}
               iconProps={providers[key].iconProps}
-              style={{ marginTop: 10 }}
               text={providers[key].text}
             />
           ))}
