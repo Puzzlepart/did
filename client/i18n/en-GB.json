@@ -348,7 +348,8 @@
     "descriptionOptionalFieldLabel": "Description (optional)",
     "clearFilters": "Clear filters",
     "lastActiveLabel": "Last active",
-    "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining"
+    "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining",
+    "vacationTransferredDaysLabel": "Transferred days"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

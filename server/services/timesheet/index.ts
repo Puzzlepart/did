@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
@@ -57,7 +58,7 @@ export class TimesheetService {
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -345,12 +346,14 @@ export class TimesheetService {
     settings: SubscriptionVacationSettings
   ): Promise<VacationSummary> {
     try {
+      const transferredDays = get(this.context.userConfiguration, `vacation.transferredDays_${new Date().getFullYear()}`)
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
       const used = events.reduce((sum, event) => sum + event.duration, 0) / 8
+      const totalDays = settings.totalDays + (transferredDays ?? 0)
       return {
-        total: settings.totalDays,
+        total: totalDays,
         used,
-        remaining: settings.totalDays - used
+        remaining: totalDays - used
       }
     } catch (error) {
       throw error

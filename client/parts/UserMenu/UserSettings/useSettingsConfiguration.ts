@@ -2,7 +2,7 @@ import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { IUserSetting, UserSettingDropdown, UserSettingToggle } from './types'
+import { IUserSetting, UserSettingDropdown, UserSettingNumber, UserSettingToggle } from './types'
 
 export function useSettingsConfiguration(): IUserSetting[] {
   const { t } = useTranslation()
@@ -61,6 +61,12 @@ export function useSettingsConfiguration(): IUserSetting[] {
         }
       ],
       defaultSelectedKey: getUserConfiguration('ui.theme')
+    }),
+    UserSettingNumber(`vacation.transferredDays_${new Date().getFullYear()}`, {
+      label: t('common.vacationTransferredDaysLabel'),
+      min: 0,
+      max: 50,
+      defaultValue: getUserConfiguration(`vacation.transferredDays_${new Date().getFullYear()}`)
     })
   ]
 }
