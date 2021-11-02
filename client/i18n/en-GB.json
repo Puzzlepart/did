@@ -349,7 +349,8 @@
     "clearFilters": "Clear filters",
     "lastActiveLabel": "Last active",
     "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining",
-    "vacationTransferredDaysLabel": "Transferred days"
+    "vacationTotalDaysLabel": "Total vacation days",
+    "vacationTotalDaysDescription": "Total vacation days for the year. Includes transferred days from last year."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

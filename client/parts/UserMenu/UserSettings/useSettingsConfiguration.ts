@@ -67,12 +67,13 @@ export function useSettingsConfiguration(): IUserSetting[] {
       ],
       defaultSelectedKey: getUserConfiguration('ui.theme')
     }),
-    UserSettingNumber(`vacation.transferredDays_${new Date().getFullYear()}`, {
-      label: t('common.vacationTransferredDaysLabel'),
+    UserSettingNumber('vacation.totalDays', {
+      label: t('common.vacationTotalDaysLabel'),
+      description: t('common.vacationTotalDaysDescription'),
       min: 0,
       max: 50,
       defaultValue: getUserConfiguration(
-        `vacation.transferredDays_${new Date().getFullYear()}`
+        'vacation.totalDays'
       )
     })
   ]

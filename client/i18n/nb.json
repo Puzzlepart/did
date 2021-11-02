@@ -348,7 +348,8 @@
     "clearFilters": "Fjern filtre",
     "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
-    "vacationTransferredDaysLabel": "Overførte feriedager"
+    "vacationTotalDaysLabel": "Antal feriedager",
+    "vacationTotalDaysDescription": "Totalt antall feriedager for året. \nInkluderer overførte dager fra i fjor."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
