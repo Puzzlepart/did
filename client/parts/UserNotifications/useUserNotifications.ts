@@ -22,7 +22,6 @@ export const useUserNotifications = () => {
     .filter((n) => !dismissedIds.includes(n.id))
   const count = notifications_.length
   const dismissedCount = notifications.data.length - count
-
   return {
     notifications: notifications_,
     count,
