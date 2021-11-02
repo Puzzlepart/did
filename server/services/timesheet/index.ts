@@ -61,9 +61,8 @@ export class TimesheetService {
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService,
-    private readonly _userSvc: UserService
-  ) // eslint-disable-next-line unicorn/empty-brace-spaces
-  {}
+    private readonly _userSvc: UserService // eslint-disable-next-line unicorn/empty-brace-spaces
+  ) {}
 
   /**
    * Get timesheet

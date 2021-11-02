@@ -105,7 +105,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *number*
 
-Defined in: [utils/toFixed.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/utils/toFixed.ts#L10)
+Defined in: [utils/toFixed.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/toFixed.ts#L9)
 
 ___
 
@@ -130,4 +130,4 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [utils/tryParseJson.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/tryParseJson.ts#L9)
+Defined in: [utils/tryParseJson.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/utils/tryParseJson.ts#L7)
