@@ -2,6 +2,8 @@ query UserVacation {
   vacation {
     total
     used
+    usedHours
+    category
     remaining
   }
 }

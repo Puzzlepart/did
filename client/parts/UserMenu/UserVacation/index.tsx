@@ -14,6 +14,7 @@ export const UserVacation: React.FC = () => {
   return (
     <MenuItem
       iconProps={{ iconName: 'Vacation' }}
+      title={t('common.vacationSummaryTooltip', data?.vacation)}
       text={t('common.vacationSummaryText', data?.vacation)}
     />
   )

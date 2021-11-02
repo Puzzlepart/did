@@ -355,11 +355,14 @@ export class TimesheetService {
       )
       const totalDays = get(userConfiguration, 'vacation.totalDays', { default: settings.totalDays })
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
-      const used = events.reduce((sum, event) => sum + event.duration, 0) / 8
+      const usedHours = events.reduce((sum, event) => sum + event.duration, 0)
+      const used = usedHours / 8
       return {
+        category: settings.eventCategory,
         total: totalDays,
+        usedHours: toFixed(usedHours, 2),
         used: toFixed(used, 2),
-        remaining: toFixed(totalDays - used, 2)
+        remaining: toFixed(totalDays - used, 2),
       }
     } catch (error) {
       throw error
