@@ -72,9 +72,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
       description: t('common.vacationTotalDaysDescription'),
       min: 0,
       max: 50,
-      defaultValue: getUserConfiguration(
-        'vacation.totalDays'
-      )
+      defaultValue: getUserConfiguration('vacation.totalDays')
     })
   ]
 }

@@ -67,7 +67,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:326](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L326)
+Defined in: [services/timesheet/index.ts:325](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L325)
 
 ___
 
@@ -90,7 +90,7 @@ Name | Type |
 
 Events
 
-Defined in: [services/timesheet/index.ts:217](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L217)
+Defined in: [services/timesheet/index.ts:216](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L216)
 
 ___
 
@@ -112,7 +112,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [services/timesheet/index.ts:269](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L269)
+Defined in: [services/timesheet/index.ts:268](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L268)
 
 ___
 
@@ -133,7 +133,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:288](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L288)
+Defined in: [services/timesheet/index.ts:287](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L287)
 
 ___
 
@@ -164,7 +164,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/timesheet/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L86)
+Defined in: [services/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L85)
 
 ___
 
@@ -172,8 +172,7 @@ ___
 
 ▸ **getVacation**(`settings`: [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md)): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Get vacation summary for the current user. `vacation.transferredDays_*` is added
-to the `totalDays from subscription settings.
+Get vacation summary for the current user.
 
 #### Parameters:
 
@@ -183,7 +182,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [services/timesheet/index.ts:351](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L351)
+Defined in: [services/timesheet/index.ts:349](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L349)
 
 ___
 
@@ -212,7 +211,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L147)
+Defined in: [services/timesheet/index.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L146)
 
 ___
 
@@ -230,4 +229,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:186](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L186)
+Defined in: [services/timesheet/index.ts:185](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L185)

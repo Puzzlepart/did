@@ -62,7 +62,7 @@ export class TimesheetService {
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -353,7 +353,9 @@ export class TimesheetService {
       const userConfiguration = await this._userSvc.getUserConfiguration(
         this.context.userId
       )
-      const totalDays = get(userConfiguration, 'vacation.totalDays', { default: settings.totalDays })
+      const totalDays = get(userConfiguration, 'vacation.totalDays', {
+        default: settings.totalDays
+      })
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
       const usedHours = events.reduce((sum, event) => sum + event.duration, 0)
       const used = usedHours / 8
@@ -362,7 +364,7 @@ export class TimesheetService {
         total: totalDays,
         usedHours: toFixed(usedHours, 2),
         used: toFixed(used, 2),
-        remaining: toFixed(totalDays - used, 2),
+        remaining: toFixed(totalDays - used, 2)
       }
     } catch (error) {
       throw error
