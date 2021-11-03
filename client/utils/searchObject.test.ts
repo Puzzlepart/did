@@ -1,5 +1,5 @@
 import test from 'ava'
-import { searchObject } from 'utils'
+import { searchObject } from './searchObject'
 
 test('searchObject searches the specified item for the specified searchTerm', (t) => {
   const result = searchObject({
