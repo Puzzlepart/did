@@ -287,7 +287,11 @@
           }
         }
       ],
-      "unicorn/no-process-exit": 0
+      "unicorn/no-process-exit": 0,
+      "unicorn/prefer-module": 0,
+      "unicorn/prefer-object-from-entries": 0,
+      "unicorn/no-array-method-this-argument": 0,
+      "unicorn/prefer-spread": 0
     },
     "settings": {
       "react": {
