@@ -7,7 +7,7 @@ import { Project } from 'types'
  * @category Projects
  */
 export interface IProjectListProps
-  extends IListProps<Project>,
+  extends Omit<IListProps<Project>, 'role'>,
     Omit<IPivotItemProps, 'componentRef'> {
   renderLink?: boolean
   hideColumns?: string[]
