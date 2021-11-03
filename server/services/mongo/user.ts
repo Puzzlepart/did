@@ -38,7 +38,7 @@ export class UserService extends MongoDocumentService<User> {
    * @param user - User
    */
   private _replaceId<T>(user: User): T {
-    return ({ ..._.omit(user, 'id'), _id: user.id } as unknown) as T
+    return { ..._.omit(user, 'id'), _id: user.id } as unknown as T
   }
 
   /**

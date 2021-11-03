@@ -40,7 +40,8 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
       isBeakVisible={false}
       gapSpace={10}
       onDismiss={props.onDismiss}
-      target={props.target}>
+      target={props.target}
+    >
       <div className={styles.root}>
         <ScrollablePane>
           <Sticky stickyPosition={StickyPositionType.Header}>

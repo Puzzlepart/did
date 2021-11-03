@@ -76,7 +76,8 @@ export default class TimesheetMatchingEngine {
   ): ProjectMatch[] {
     let regex = /((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}))/gim
     if (strictMode)
-      regex = /[([{]((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}?))[)\]}]/gim
+      regex =
+        /[([{]((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}?))[)\]}]/gim
     const matches = []
     let match: RegExpExecArray
     while ((match = regex.exec(inputString)) !== null) {

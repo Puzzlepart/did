@@ -31,7 +31,8 @@ export const WeekPicker: React.FC<ICalloutProps> = (props) => {
       doNotLayer={false}
       gapSpace={5}
       directionalHint={DirectionalHint.bottomAutoEdge}
-      setInitialFocus={true}>
+      setInitialFocus={true}
+    >
       <FocusTrapZone isClickableOutsideFocusTrap={true}>
         <Calendar
           onSelectDate={(date) => {

@@ -18,13 +18,8 @@ import { useFeedbackPanel } from './useFeedbackPanel'
 export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
   const { t } = useTranslation()
   const { user } = useAppContext()
-  const {
-    model,
-    typeOptions,
-    moodOptions,
-    register,
-    submit
-  } = useFeedbackPanel(props)
+  const { model, typeOptions, moodOptions, register, submit } =
+    useFeedbackPanel(props)
 
   return (
     <FormControl
@@ -33,7 +28,8 @@ export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
         ...props,
         headerText: t('feedback.headerText'),
         isLightDismiss: true
-      }}>
+      }}
+    >
       <Dropdown
         label={t('feedback.typeFieldLabel')}
         required={true}

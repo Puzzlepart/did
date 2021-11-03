@@ -601,7 +601,7 @@ Name | Type |
 `context` | *object* |
 `context.dispatch` | *Dispatch*<AnyAction\> |
 `context.state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
-`context.t` | *TFunction*<*translation*\> |
+`context.t` | *TFunction*<*translation*, undefined\> |
 `defaultSelectedKey` | *string* |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
 `onClearFilters` | *any* |

@@ -21,7 +21,8 @@ export const Summary: React.FC<ISummaryProps> = ({
           <div
             key={index}
             className={styles.item}
-            style={{ opacity: loading ? 0 : 1 }}>
+            style={{ opacity: loading ? 0 : 1 }}
+          >
             <div className={styles.value}>{value}</div>
             <div className={styles.label}>{label}</div>
           </div>

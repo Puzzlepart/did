@@ -71,8 +71,8 @@ export function environment<T = string>(
       key,
       fallbackValue
     )
-    return (fallbackValue as unknown) as T
+    return fallbackValue as unknown as T
   }
-  if (options.splitBy) return (value.split(options.splitBy) as unknown) as T
-  return (value as unknown) as T
+  if (options.splitBy) return value.split(options.splitBy) as unknown as T
+  return value as unknown as T
 }

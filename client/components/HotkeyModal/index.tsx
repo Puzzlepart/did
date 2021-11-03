@@ -19,7 +19,8 @@ export const HotkeyModal: ReusableComponent<IHotkeyModal> = (props) => {
     <Modal
       isOpen={props.isOpen}
       onDismiss={props.onDismiss}
-      containerClassName={styles.root}>
+      containerClassName={styles.root}
+    >
       <div className={styles.container}>
         <div className={styles.title}>{t('common.shortcuts')}</div>
         <FadeIn>

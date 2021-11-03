@@ -6,6 +6,5 @@ import { HTMLAttributes } from 'react'
  *
  * @extends React.FunctionComponent
  */
-export type ReusableComponent<
-  T extends Omit<HTMLAttributes<any>, 'onChange'>
-> = React.FunctionComponent<T>
+export type ReusableComponent<T extends Omit<HTMLAttributes<any>, 'onChange'>> =
+  React.FunctionComponent<T>

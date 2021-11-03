@@ -20,20 +20,14 @@ export function useSubmitCommands(): IContextualMenuItem {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const { semanticColors } = useTheme()
-  const { state, onSubmitPeriod, onUnsubmitPeriod } = useContext(
-    TimesheetContext
-  )
+  const { state, onSubmitPeriod, onUnsubmitPeriod } =
+    useContext(TimesheetContext)
   return {
     key: 'SUBMIT_COMMANDS',
     onRender: () => {
       if (!!state.error || !state.selectedPeriod) return null
-      const {
-        isComplete,
-        isForecast,
-        isForecasted,
-        isConfirmed,
-        isPast
-      } = state.selectedPeriod
+      const { isComplete, isForecast, isForecasted, isConfirmed, isPast } =
+        state.selectedPeriod
       const FORECAST_PERIOD: IContextualMenuItem = {
         key: 'FORECAST_PERIOD',
         iconProps: { iconName: 'BufferTimeBefore' },

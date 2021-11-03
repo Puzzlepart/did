@@ -16,9 +16,8 @@ import { useProjectList } from './useProjectList'
  */
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const { t } = useTranslation()
-  const { items, columns, showInactive, setShowInactive } = useProjectList(
-    props
-  )
+  const { items, columns, showInactive, setShowInactive } =
+    useProjectList(props)
   return (
     <>
       <List
@@ -35,7 +34,8 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
                 <div
                   hidden={
                     isMobile || !_.any(props.items, (index) => index.inactive)
-                  }>
+                  }
+                >
                   <Checkbox
                     disabled={_.isEmpty(
                       _.filter(props.items, (index) => index.inactive)

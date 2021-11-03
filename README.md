@@ -159,7 +159,7 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: Did should be developed with node >=12.18.3**
+**NB: Did should be developed with node >=14.18.1**
 
 ### Authentication
 

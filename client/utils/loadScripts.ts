@@ -32,7 +32,7 @@ export function loadScripts<T = any>(
         }),
         {}
       )
-      resolve((_globals as unknown) as T)
+      resolve(_globals as unknown as T)
     })
   })
 }

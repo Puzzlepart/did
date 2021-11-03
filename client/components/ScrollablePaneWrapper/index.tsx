@@ -18,7 +18,8 @@ export const ScrollablePaneWrapper: ReusableComponent<any> = ({
     <div style={{ position: 'relative', height }}>
       <ScrollablePane
         scrollbarVisibility={ScrollbarVisibility.auto}
-        styles={{ contentContainer: { overflowX: 'hidden' } }}>
+        styles={{ contentContainer: { overflowX: 'hidden' } }}
+      >
         {children}
       </ScrollablePane>
     </div>

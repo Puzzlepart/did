@@ -26,8 +26,12 @@ function getSizing(
   defaultMaxWidth: number
 ): { minWidth: number; maxWidth: number } {
   return {
-    minWidth: get(props, `columnWidths.${fieldName}`, { default: defaultMinWidth }),
-    maxWidth: get(props, `columnWidths.${fieldName}`, { default: defaultMaxWidth })
+    minWidth: get(props, `columnWidths.${fieldName}`, {
+      default: defaultMinWidth
+    }),
+    maxWidth: get(props, `columnWidths.${fieldName}`, {
+      default: defaultMaxWidth
+    })
   }
 }
 /**

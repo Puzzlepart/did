@@ -21,13 +21,8 @@ import { SummaryView } from './SummaryView'
  */
 export const Reports: React.FC = () => {
   const { t } = useTranslation()
-  const {
-    defaultSelectedKey,
-    queries,
-    options,
-    filters,
-    context
-  } = useReports()
+  const { defaultSelectedKey, queries, options, filters, context } =
+    useReports()
   return (
     <ReportsContext.Provider value={context}>
       <TabContainer
@@ -46,7 +41,8 @@ export const Reports: React.FC = () => {
             disabled: context.state.loading
           }
         }}
-        onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}>
+        onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}
+      >
         {queries.map((props, index) => (
           <ReportsList {...props} key={index} />
         ))}
@@ -72,7 +68,8 @@ export const Reports: React.FC = () => {
         onDismiss={() => context.dispatch(TOGGLE_FILTER_PANEL())}
         onFiltersUpdated={(filters) =>
           context.dispatch(FILTERS_UPDATED({ filters }))
-        }>
+        }
+      >
         <SaveFilterForm />
       </FilterPanel>
     </ReportsContext.Provider>

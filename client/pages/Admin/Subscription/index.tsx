@@ -14,13 +14,8 @@ import { useSubscriptionSettings } from './useSubscriptionSettings'
 export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
   const [selectedKey, setSelectedKey] = useState('info')
-  const {
-    toast,
-    context,
-    onSaveSettings,
-    sections,
-    hasChanges
-  } = useSubscriptionSettings()
+  const { toast, context, onSaveSettings, sections, hasChanges } =
+    useSubscriptionSettings()
 
   return (
     <SubscriptionContext.Provider value={context}>
@@ -29,7 +24,8 @@ export const SubscriptionSettings: TabComponent = () => {
         <TabContainer
           onTabChanged={(itemKey) => setSelectedKey(itemKey)}
           defaultSelectedKey={selectedKey}
-          level={3}>
+          level={3}
+        >
           {sections.map((section) => {
             return <SettingsSection {...section} key={section.itemKey} />
           })}

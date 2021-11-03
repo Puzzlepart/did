@@ -8,9 +8,9 @@
  * @module AuthRoute
  */
 import { NextFunction, Request, Response, Router } from 'express'
+import url from 'node:url'
 import passport from 'passport'
 import _ from 'underscore'
-import url from 'url'
 import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import { environment } from '../utils'
 const auth = Router()
@@ -28,15 +28,14 @@ type AuthProvider = 'azuread-openidconnect' | 'google'
  * @param response - Response
  * @param next - Next function
  */
-export const signInHandler = (
-  strategy: AuthProvider,
-  options: passport.AuthenticateOptions
-) => (request: Request, response: Response, next: NextFunction) => {
-  request.session.regenerate(() => {
-    request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
-    passport.authenticate(strategy, options)(request, response, next)
-  })
-}
+export const signInHandler =
+  (strategy: AuthProvider, options: passport.AuthenticateOptions) =>
+  (request: Request, response: Response, next: NextFunction) => {
+    request.session.regenerate(() => {
+      request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
+      passport.authenticate(strategy, options)(request, response, next)
+    })
+  }
 
 /**
  * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
@@ -45,37 +44,35 @@ export const signInHandler = (
  * @param response - Response
  * @param next - Next function
  */
-export const authCallbackHandler = (strategy: AuthProvider) => (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
-  passport.authenticate(strategy, (error: Error, user: Express.User) => {
-    if (error || !user) {
-      const _error = error instanceof SigninError ? error : SIGNIN_FAILED
-      return response.redirect(
-        url.format({
-          pathname: '/',
-          query: {
-            name: _error?.name,
-            message: _error?.message,
-            icon: _error?.icon
-          }
-        })
-      )
-    }
-    request.logIn(user, (error_) => {
-      if (error_) {
-        return response.render('index', { error: JSON.stringify(error_) })
+export const authCallbackHandler =
+  (strategy: AuthProvider) =>
+  (request: Request, response: Response, next: NextFunction) => {
+    passport.authenticate(strategy, (error: Error, user: Express.User) => {
+      if (error || !user) {
+        const _error = error instanceof SigninError ? error : SIGNIN_FAILED
+        return response.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              name: _error?.name,
+              message: _error?.message,
+              icon: _error?.icon
+            }
+          })
+        )
       }
-      const redirectUrl =
-        request.session[REDIRECT_URL_PROPERTY] ||
-        user['startPage'] ||
-        '/timesheet'
-      return response.redirect(redirectUrl)
-    })
-  })(request, response, next)
-}
+      request.logIn(user, (error_) => {
+        if (error_) {
+          return response.render('index', { error: JSON.stringify(error_) })
+        }
+        const redirectUrl =
+          request.session[REDIRECT_URL_PROPERTY] ||
+          user['startPage'] ||
+          '/timesheet'
+        return response.redirect(redirectUrl)
+      })
+    })(request, response, next)
+  }
 
 /**
  * Handler for `/auth/signout`

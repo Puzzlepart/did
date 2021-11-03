@@ -36,13 +36,8 @@ export function useAutocomplete(props: IAutocompleteProps) {
     [state.suggestions, state.selectedIndex]
   )
 
-  const {
-    onDismissCallout,
-    onSetSelected,
-    onSearch,
-    onClear,
-    onKeyDown
-  } = useAutocompleteEvents({ props, dispatch })
+  const { onDismissCallout, onSetSelected, onSearch, onClear, onKeyDown } =
+    useAutocompleteEvents({ props, dispatch })
 
   return {
     state,

@@ -50,7 +50,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
   }
 
   const commandBarProps: ICommandBarProps = {
-    ...(props.commandBar || {}),
+    ...props.commandBar,
     items: clean([searchBoxItem, ...props.commandBar?.items]),
     farItems: props.commandBar?.farItems || []
   }
@@ -65,7 +65,8 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
     <Sticky
       ref={root}
       stickyPosition={StickyPositionType.Header}
-      isScrollSynced={true}>
+      isScrollSynced={true}
+    >
       <CommandBar
         {...commandBarProps}
         hidden={

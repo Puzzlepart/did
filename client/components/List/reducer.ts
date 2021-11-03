@@ -5,9 +5,8 @@ import { searchObject } from 'utils'
 import { IListProps, IListState } from './types'
 
 export const PROPS_UPDATED = createAction<IListProps>('PROPS_UPDATED')
-export const EXECUTE_SEARCH = createAction<{ searchTerm: string }>(
-  'EXECUTE_SEARCH'
-)
+export const EXECUTE_SEARCH =
+  createAction<{ searchTerm: string }>('EXECUTE_SEARCH')
 
 /**
  * Reducer for Timesheet

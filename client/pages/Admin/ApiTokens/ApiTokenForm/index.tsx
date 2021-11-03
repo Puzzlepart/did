@@ -15,13 +15,8 @@ export const ApiTokenForm = ({
   onDismiss
 }: IApiTokenFormProps) => {
   const { t } = useTranslation()
-  const {
-    token,
-    setToken,
-    expiryOptions,
-    onAddApiToken,
-    togglePermission
-  } = useApiTokenForm({ onAdded })
+  const { token, setToken, expiryOptions, onAddApiToken, togglePermission } =
+    useApiTokenForm({ onAdded })
 
   return (
     <FormControl
@@ -38,7 +33,8 @@ export const ApiTokenForm = ({
         isOpen,
         isLightDismiss: true,
         onDismiss
-      }}>
+      }}
+    >
       <TextField
         label={t('admin.apiTokens.tokenNameLabel')}
         required={true}

@@ -17,6 +17,7 @@ export const CustomerHours = ({ hours, customer }) => {
           hours: hours.toFixed(0),
           customer
         })
-      }}></div>
+      }}
+    ></div>
   )
 }

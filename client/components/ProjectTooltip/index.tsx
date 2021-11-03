@@ -21,7 +21,8 @@ export const ProjectTooltip: ReusableComponent<IProjectTooltipProps> = (
       }}
       delay={TooltipDelay.long}
       closeDelay={TooltipDelay.long}
-      calloutProps={{ gapSpace: 0 }}>
+      calloutProps={{ gapSpace: 0 }}
+    >
       {props.children}
     </TooltipHost>
   )

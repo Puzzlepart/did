@@ -22,7 +22,8 @@ export const NotificationsPanel: React.FC<IPanelProps> = (props) => {
       {...props}
       className={styles.root}
       headerText={t('notifications.headerText')}
-      isLightDismiss={true}>
+      isLightDismiss={true}
+    >
       <div className={styles.body}>
         <div hidden={!_.isEmpty(notifications)}>
           <UserMessage

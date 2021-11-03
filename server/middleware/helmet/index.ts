@@ -17,7 +17,7 @@ export const helmetMiddleware = () =>
       domain: 'https://teams.microsoft.com'
     },
     hidePoweredBy: true,
-    hsts: helmet.hsts({ maxAge: 5184000 }),
+    hsts: helmet.hsts({ maxAge: 5_184_000 }),
     ieNoOpen: true,
     noSniff: true
   })

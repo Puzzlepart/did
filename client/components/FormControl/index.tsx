@@ -17,7 +17,8 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
     <>
       <ConditionalWrapper
         condition={!!props.panelProps}
-        wrapper={(children) => <Panel {...props.panelProps}>{children}</Panel>}>
+        wrapper={(children) => <Panel {...props.panelProps}>{children}</Panel>}
+      >
         <div className={styles.root}>
           {props.children}
           <div hidden={!props.submitProps?.text}>

@@ -39,7 +39,8 @@ export const CustomerList: TabComponent = (props) => {
                   hidden={
                     isMobile ||
                     !_.any(state.customers, (index) => index.inactive)
-                  }>
+                  }
+                >
                   <Checkbox
                     styles={{ root: { margin: '6px 0 0 8px' } }}
                     checked={showInactive}

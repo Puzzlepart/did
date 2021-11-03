@@ -38,7 +38,8 @@ export const Timesheet: React.FC = () => {
             }
             itemProps={{
               headerButtonProps: { disabled: !!state.error }
-            }}>
+            }}
+          >
             <Overview
               headerText={t('timesheet.overviewHeaderText')}
               itemIcon='CalendarWeek'
