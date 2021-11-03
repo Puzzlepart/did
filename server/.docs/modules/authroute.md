@@ -1,4 +1,4 @@
-[did-server - v0.10.5](../README.md) / AuthRoute
+[did-server - v0.10.6](../README.md) / AuthRoute
 
 # Module: AuthRoute
 
@@ -43,7 +43,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L48)
+Defined in: [routes/auth.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L47)
 
 ___
 
@@ -84,4 +84,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L87)
+Defined in: [routes/auth.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L84)

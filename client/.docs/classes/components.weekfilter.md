@@ -1,4 +1,4 @@
-[did-client - v0.10.5](../README.md) / [Components](../modules/components.md) / WeekFilter
+[did-client - v0.10.6](../README.md) / [Components](../modules/components.md) / WeekFilter
 
 # Class: WeekFilter
 

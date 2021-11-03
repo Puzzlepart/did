@@ -7,7 +7,7 @@
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import chalk from 'chalk'
-import * as http from 'http'
+import * as http from 'node:http'
 import app from './app'
 import { sound } from './utils'
 import { environment } from './utils/environment'
