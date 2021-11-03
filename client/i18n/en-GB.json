@@ -349,7 +349,9 @@
     "clearFilters": "Clear filters",
     "lastActiveLabel": "Last active",
     "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining",
-    "vacationTransferredDaysLabel": "Transferred days"
+    "vacationTotalDaysLabel": "Total vacation days",
+    "vacationTotalDaysDescription": "Total vacation days for the year. Includes transferred days from last year.",
+    "vacationSummaryTooltip": "The estimate is based on having logged {{usedHours}} hours on {{category}} (each vacation day is 8 hours) and includes the whole year."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

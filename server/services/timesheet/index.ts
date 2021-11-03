@@ -62,7 +62,7 @@ export class TimesheetService {
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -342,8 +342,7 @@ export class TimesheetService {
   }
 
   /**
-   * Get vacation summary for the current user. `vacation.transferredDays_*` is added
-   * to the `totalDays from subscription settings.
+   * Get vacation summary for the current user.
    *
    * @param settings - Subscription vacation settings
    */
@@ -354,15 +353,16 @@ export class TimesheetService {
       const userConfiguration = await this._userSvc.getUserConfiguration(
         this.context.userId
       )
-      const transferredDaysKey = `vacation.transferredDays_${new Date().getFullYear()}`
-      const transferredDays = get(userConfiguration, transferredDaysKey)
+      const totalDays = get(userConfiguration, 'vacation.totalDays', { default: settings.totalDays })
       const events = await this._msgraphSvc.getVacation(settings.eventCategory)
-      const used = events.reduce((sum, event) => sum + event.duration, 0) / 8
-      const totalDays = settings.totalDays + (transferredDays ?? 0)
+      const usedHours = events.reduce((sum, event) => sum + event.duration, 0)
+      const used = usedHours / 8
       return {
+        category: settings.eventCategory,
         total: totalDays,
+        usedHours: toFixed(usedHours, 2),
         used: toFixed(used, 2),
-        remaining: toFixed(totalDays - used, 2)
+        remaining: toFixed(totalDays - used, 2),
       }
     } catch (error) {
       throw error

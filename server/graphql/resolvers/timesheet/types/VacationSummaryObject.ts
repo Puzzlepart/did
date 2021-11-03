@@ -12,11 +12,17 @@ import { Field, Float, ObjectType } from 'type-graphql'
   simpleResolvers: true
 })
 export class VacationSummary {
+  @Field(() => String)
+  category?: string
+
   @Field(() => Float)
   total?: number
 
   @Field(() => Float)
   used?: number
+
+  @Field(() => Float)
+  usedHours?: number
 
   @Field(() => Float)
   remaining?: number
