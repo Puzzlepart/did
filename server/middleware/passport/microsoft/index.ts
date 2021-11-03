@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb'
-import fs from 'node:fs'
+import fs from 'fs'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
 import { environment } from '../../../utils'
 import { onVerifySignin } from './onVerifySignin'
