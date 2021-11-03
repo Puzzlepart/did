@@ -26,7 +26,8 @@ export const JsonDebug: ReusableComponent<IJsonDebugProps> = ({
       padding: 20,
       marginBottom: 20,
       marginTop: 20
-    }}>
+    }}
+  >
     <pre>{JSON.stringify(obj, replacer, space)}</pre>
   </div>
 )

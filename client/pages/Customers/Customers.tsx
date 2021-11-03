@@ -26,11 +26,13 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
         onTabChanged={(itemKey) =>
           dispatch(CHANGE_VIEW({ view: itemKey as CustomersView }))
         }
-        styles={{ itemContainer: { paddingTop: 10 } }}>
+        styles={{ itemContainer: { paddingTop: 10 } }}
+      >
         <CustomerList
           itemKey='search'
           headerText={t('common.search')}
-          itemIcon='FabricFolderSearch'>
+          itemIcon='FabricFolderSearch'
+        >
           {state.selected && <CustomerDetails />}
         </CustomerList>
         <CustomerForm

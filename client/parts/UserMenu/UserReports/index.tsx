@@ -9,15 +9,8 @@ import { useUserReports } from './useUserReports'
 
 export const UserReports: React.FC = () => {
   const { t } = useTranslation()
-  const {
-    preset,
-    setPreset,
-    queries,
-    showPanel,
-    togglePanel,
-    query,
-    columns
-  } = useUserReports()
+  const { preset, setPreset, queries, showPanel, togglePanel, query, columns } =
+    useUserReports()
 
   const { onExport } = useExcelExport({
     items: query?.data,
@@ -36,7 +29,8 @@ export const UserReports: React.FC = () => {
         headerText={t('common.userReports')}
         isOpen={showPanel}
         onDismiss={togglePanel}
-        isLightDismiss={true}>
+        isLightDismiss={true}
+      >
         <ChoiceGroup
           defaultSelectedKey={preset?.key}
           onChange={setPreset}

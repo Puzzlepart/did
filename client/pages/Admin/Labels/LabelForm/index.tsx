@@ -23,7 +23,8 @@ export const LabelForm: React.FC<ILabelFormProps> = (props) => {
           ? t('admin.editLabel')
           : t('admin.addNewLabel'),
         isLightDismiss: true
-      }}>
+      }}
+    >
       <TextControl
         {...register<TextControlOptions>('name', {
           casing: 'lower',

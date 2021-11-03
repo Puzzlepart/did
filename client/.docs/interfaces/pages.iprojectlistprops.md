@@ -6,9 +6,7 @@
 
 ## Hierarchy
 
-* [*IListProps*](components.ilistprops.md)<Project\>
-
-* *Omit*<IPivotItemProps, *componentRef*\>
+* *Omit*<[*IListProps*](components.ilistprops.md)<Project\>, *role*\>
 
   ↳ **IProjectListProps**
 
@@ -46,7 +44,7 @@ Name | Type |
 `className`? | *string* |
 `onRender`? | *IRenderFunction*<IDetailsHeaderProps\> |
 
-Inherited from: [IListProps](components.ilistprops.md).[columnHeaderProps](components.ilistprops.md#columnheaderprops)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L120)
 
@@ -58,7 +56,7 @@ ___
 
 Columns
 
-Inherited from: [IListProps](components.ilistprops.md).[columns](components.ilistprops.md#columns)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
 
@@ -70,7 +68,7 @@ ___
 
 Command bar props
 
-Inherited from: [IListProps](components.ilistprops.md).[commandBar](components.ilistprops.md#commandbar)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
 
@@ -82,7 +80,7 @@ ___
 
 Enable shimmer (normally while loading)
 
-Inherited from: [IListProps](components.ilistprops.md).[enableShimmer](components.ilistprops.md#enableshimmer)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
 
@@ -96,7 +94,7 @@ Filters
 
 #### Type declaration:
 
-Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
 
@@ -108,7 +106,7 @@ ___
 
 Fixed height
 
-Inherited from: [IListProps](components.ilistprops.md).[height](components.ilistprops.md#height)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
 
@@ -120,7 +118,7 @@ ___
 
 Hidden
 
-Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
 
@@ -140,7 +138,7 @@ ___
 
 Items
 
-Inherited from: [IListProps](components.ilistprops.md).[items](components.ilistprops.md#items)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
 
@@ -152,7 +150,7 @@ ___
 
 Group props
 
-Inherited from: [IListProps](components.ilistprops.md).[listGroupProps](components.ilistprops.md#listgroupprops)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
 
@@ -164,7 +162,7 @@ ___
 
 Group render props
 
-Inherited from: [IListProps](components.ilistprops.md).[listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
 
@@ -184,7 +182,7 @@ ___
 
 Search box props
 
-Inherited from: [IListProps](components.ilistprops.md).[searchBox](components.ilistprops.md#searchbox)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
 
@@ -196,6 +194,6 @@ ___
 
 Selection
 
-Inherited from: [IListProps](components.ilistprops.md).[selectionProps](components.ilistprops.md#selectionprops)
+Inherited from: void
 
 Defined in: [client/components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)

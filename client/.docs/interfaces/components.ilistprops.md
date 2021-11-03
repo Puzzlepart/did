@@ -18,8 +18,6 @@ Name | Default |
 
   ↳↳ [*IEventListProps*](components.ieventlistprops.md)
 
-  ↳↳ [*IProjectListProps*](pages.iprojectlistprops.md)
-
 ## Table of contents
 
 ### Properties

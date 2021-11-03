@@ -23,17 +23,20 @@ export const ProjectDetails: React.FC = () => {
         defaultSelectedKey={state.detailsTab}
         onLinkClick={({ props }) =>
           dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))
-        }>
+        }
+      >
         <PivotItem
           headerText={t('projects.informationHeaderText')}
           itemKey='information'
-          itemIcon='Info'>
+          itemIcon='Info'
+        >
           <Information />
         </PivotItem>
         <PivotItem
           headerText={t('projects.timeEntriesHeaderText')}
           itemKey='timeentries'
-          itemIcon='ReminderTime'>
+          itemIcon='ReminderTime'
+        >
           <TimeEntries />
         </PivotItem>
       </Pivot>

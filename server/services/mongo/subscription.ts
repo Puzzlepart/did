@@ -37,10 +37,10 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @param subscription - Subscription
    */
   private _replaceId<T>(subscription: Subscription): T {
-    return ({
+    return {
       ..._.omit(subscription, 'id'),
       _id: subscription.id
-    } as unknown) as T
+    } as unknown as T
   }
 
   /**

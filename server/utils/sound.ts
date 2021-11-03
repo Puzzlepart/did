@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import path from 'path'
+import path from 'node:path'
 import { environment } from './environment'
 
 /**

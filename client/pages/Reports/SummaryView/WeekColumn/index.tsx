@@ -22,7 +22,8 @@ export const WeekColumn: React.FC<IWeekColumnProps> = (props) => {
       }}
       tooltipProps={{
         onRenderContent: () => <WeekColumnTooltip {...props} hours={hours} />
-      }}>
+      }}
+    >
       <div className={styles.root}>
         <div ref={target}>{hours.total.toFixed(0)}</div>
       </div>

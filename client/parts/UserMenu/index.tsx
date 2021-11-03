@@ -58,7 +58,8 @@ export const UserMenu: React.FC = () => {
         target={target?.current}
         onDismiss={toggleMenu}
         isBeakVisible={false}
-        gapSpace={-8}>
+        gapSpace={-8}
+      >
         <FadeIn className={styles.menu}>
           <MenuItem
             text={subscription.name}

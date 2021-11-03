@@ -18,7 +18,7 @@ export const redisSessionMiddleware = session({
   name: environment('SESSION_NAME', 'connect.sid'),
   store: new RedisStore({
     client: redisMiddlware,
-    ttl: 1209600
+    ttl: 1_209_600
   }),
   cookie: { secure: false },
   secret: environment('SESSION_SIGNING_KEY'),

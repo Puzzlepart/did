@@ -28,7 +28,8 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
     <div
       className={styles.root}
       style={{ backgroundColor: label.color }}
-      title={label.description}>
+      title={label.description}
+    >
       {label.icon && (
         <Icon
           iconName={label.icon}

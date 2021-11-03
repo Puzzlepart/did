@@ -16,6 +16,7 @@ export const TotalHours = ({ hours }) => {
         __html: t('common.weekColumnTooltipHoursTotal', {
           hours: hours.toFixed(0)
         })
-      }}></div>
+      }}
+    ></div>
   )
 }

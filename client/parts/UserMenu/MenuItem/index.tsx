@@ -25,7 +25,8 @@ export const MenuItem: React.FC<IMenuItemProps> = (props) => {
       className={className.join(' ')}
       title={props.title}
       style={props.style}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       {props.iconProps && (
         <Icon
           {...props.iconProps}

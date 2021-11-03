@@ -70,7 +70,8 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
         style={{ width: ref.current?.clientWidth }}
         target={ref?.current}
         directionalHint={5}
-        isBeakVisible={false}>
+        isBeakVisible={false}
+      >
         <div>
           <FocusZone direction={FocusZoneDirection.vertical}>
             <List

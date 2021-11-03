@@ -9,12 +9,8 @@ import { WeekPicker } from './WeekPicker'
  * @category Timesheet
  */
 export const ActionBar = () => {
-  const {
-    commandBarProps,
-    showWeekPicker,
-    toggleWeekPicker,
-    target
-  } = useActionBar()
+  const { commandBarProps, showWeekPicker, toggleWeekPicker, target } =
+    useActionBar()
 
   return (
     <div>

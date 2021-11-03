@@ -64,7 +64,8 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
           <div
             key={field.id}
             className={styles.inputField}
-            hidden={fieldProps.hidden}>
+            hidden={fieldProps.hidden}
+          >
             {fieldElement}
             <SubText text={fieldProps.description} />
           </div>

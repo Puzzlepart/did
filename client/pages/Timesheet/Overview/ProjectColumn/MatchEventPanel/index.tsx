@@ -8,9 +8,8 @@ import { useMatchEventPanel } from './useMatchEventPanel'
 
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
   const { t } = useTranslation()
-  const { isPanelOpen, showPanel, hidePanel, onMatch } = useMatchEventPanel(
-    event
-  )
+  const { isPanelOpen, showPanel, hidePanel, onMatch } =
+    useMatchEventPanel(event)
   return (
     <>
       <MessageBarButton
@@ -22,7 +21,8 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         isOpen={isPanelOpen}
         isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
-        onDismiss={hidePanel}>
+        onDismiss={hidePanel}
+      >
         <SubText text={event.title} font='mediumPlus' />
         <UserMessage
           containerStyle={{ marginTop: 25 }}
@@ -32,7 +32,8 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         <UserMessage
           hidden={!event.suggestedProject}
           containerStyle={{ marginTop: 10 }}
-          iconName='Lightbulb'>
+          iconName='Lightbulb'
+        >
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
             <Link onClick={() => onMatch(event.suggestedProject)}>

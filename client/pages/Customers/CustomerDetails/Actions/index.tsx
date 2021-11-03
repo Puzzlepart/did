@@ -21,7 +21,8 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
       <div className={styles.container}>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected.webLink}>
+          hidden={loading || !state.selected.webLink}
+        >
           <DefaultButton
             text={t('customers.webLinkText')}
             href={state.selected.webLink}
@@ -30,7 +31,8 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         </div>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected.externalSystemURL}>
+          hidden={loading || !state.selected.externalSystemURL}
+        >
           <DefaultButton
             text={t('customers.externalSystemUrlText')}
             href={state.selected.externalSystemURL}
@@ -39,7 +41,8 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         </div>
         <div
           className={styles.actionItem}
-          hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}>
+          hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
+        >
           <DefaultButton
             text={t('common.editLabel')}
             iconProps={{ iconName: 'Edit' }}

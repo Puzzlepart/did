@@ -7,11 +7,8 @@ import { useSettingsConfiguration } from './useSettingsConfiguration'
 export function useUserSettings() {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const {
-    updateConfiguration,
-    updatePreferredLanguage,
-    updateStartPage
-  } = useUpdateUserConfiguration()
+  const { updateConfiguration, updatePreferredLanguage, updateStartPage } =
+    useUpdateUserConfiguration()
 
   /**
    * On update

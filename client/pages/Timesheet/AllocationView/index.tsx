@@ -66,7 +66,8 @@ export const AllocationView: TabComponent = () => {
                 <Bar
                   dataKey='value'
                   animationEasing='ease-in-out'
-                  animationDuration={1200}>
+                  animationDuration={1200}
+                >
                   {d.map((entry) => (
                     <Cell
                       key={get(entry.data, c.idKey)}

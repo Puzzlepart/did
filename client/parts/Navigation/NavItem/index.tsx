@@ -18,7 +18,8 @@ export const NavItem: React.FC<INavItemProps> = (props) => {
           to={props.to}
           className={styles.link}
           activeClassName={styles.active}
-          onClick={onClick}>
+          onClick={onClick}
+        >
           <Icon iconName={props.iconName} className={styles.icon} />
           <span className={styles.text}>{props.text}</span>
         </NavLink>

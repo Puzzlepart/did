@@ -6,9 +6,8 @@ import _ from 'underscore'
 import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 import { IAppState } from './types'
 
-export const UPDATE_BREADCRUMB = createAction<IMobileBreadcrumbItem>(
-  'UPDATE_BREADCRUMB'
-)
+export const UPDATE_BREADCRUMB =
+  createAction<IMobileBreadcrumbItem>('UPDATE_BREADCRUMB')
 export const PAGE_NAVIGATE = createAction('PAGE_NAVIGATE')
 
 /**

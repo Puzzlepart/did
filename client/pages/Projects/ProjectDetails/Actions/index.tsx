@@ -50,7 +50,8 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         </div>
         <div
           className={styles.actionItem}
-          hidden={!!state.selected.outlookCategory}>
+          hidden={!!state.selected.outlookCategory}
+        >
           <DefaultButton
             text={t('projects.createOutlookCategoryLabel')}
             iconProps={{ iconName: 'OutlookLogoInverse' }}
@@ -59,7 +60,8 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         </div>
         <div
           className={styles.actionItem}
-          hidden={!hasPermission(PermissionScope.MANAGE_PROJECTS)}>
+          hidden={!hasPermission(PermissionScope.MANAGE_PROJECTS)}
+        >
           <DefaultButton
             text={t('common.editLabel')}
             iconProps={{ iconName: 'Edit' }}

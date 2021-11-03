@@ -46,7 +46,8 @@ export const FilterItem: React.FC<IFilterItemProps> = (props) => {
       <div
         className={styles.showAllLink}
         hidden={items.length < 10 || showCount === props.filter.items.length}
-        onClick={() => setShowCount(props.filter.items.length)}>
+        onClick={() => setShowCount(props.filter.items.length)}
+      >
         {t('common.showAllFiltersText', { count: props.filter.items.length })}
       </div>
     </div>

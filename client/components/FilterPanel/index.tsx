@@ -28,7 +28,8 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
       headerText={props.headerText}
       headerClassName={styles.header}
       isLightDismiss={true}
-      onDismiss={props.onDismiss}>
+      onDismiss={props.onDismiss}
+    >
       {props.children}
       {props.onClearFilters && (
         <ActionButton

@@ -22,13 +22,15 @@ export const Projects: React.FC = () => {
         defaultSelectedKey={state.view}
         onTabChanged={(itemKey) =>
           dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
-        }>
+        }
+      >
         <ProjectList
           {...listProps}
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'
-          items={state.projects}>
+          items={state.projects}
+        >
           {state.selected && <ProjectDetails />}
         </ProjectList>
         <ProjectList
@@ -36,7 +38,8 @@ export const Projects: React.FC = () => {
           itemKey='my'
           headerText={t('projects.myProjectsText')}
           itemIcon='FabricUserFolder'
-          items={state.projects.filter((p) => !!p.outlookCategory)}>
+          items={state.projects.filter((p) => !!p.outlookCategory)}
+        >
           {state.selected && <ProjectDetails />}
         </ProjectList>
         <ProjectForm
