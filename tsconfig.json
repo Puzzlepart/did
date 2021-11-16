@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
