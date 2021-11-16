@@ -8,9 +8,9 @@
  * @module AuthRoute
  */
 import { NextFunction, Request, Response, Router } from 'express'
-import url from 'url'
 import passport from 'passport'
 import _ from 'underscore'
+import url from 'url'
 import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import { environment } from '../utils'
 const auth = Router()

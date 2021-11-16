@@ -275,23 +275,28 @@ class MSGraphService {
           .get()) as { value: any[] }
         return value.filter((event) => !!event.subject)
       }, cacheOptions)
-      return events
-        .map(
-          (event) =>
-            new EventObject(
-              event.id,
-              event.subject,
-              event.body.content,
-              event.isOrganizer,
-              event.start,
-              event.end,
-              event.webLink,
-              event.categories
-            )
-        )
-        .filter((event: EventObject) => event.duration <= 24)
-        // Removing events that start before the start of the timesheet period, since they've been picked up by the previous period. See #1009 for details
-        .filter((event: EventObject) => event.startDateTime >= new Date(startDateTimeIso))
+      return (
+        events
+          .map(
+            (event) =>
+              new EventObject(
+                event.id,
+                event.subject,
+                event.body.content,
+                event.isOrganizer,
+                event.start,
+                event.end,
+                event.webLink,
+                event.categories
+              )
+          )
+          .filter((event: EventObject) => event.duration <= 24)
+          // Removing events that start before the start of the timesheet period, since they've been picked up by the previous period. See #1009 for details
+          .filter(
+            (event: EventObject) =>
+              event.startDateTime >= new Date(startDateTimeIso)
+          )
+      )
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }
