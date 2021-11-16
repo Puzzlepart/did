@@ -13,7 +13,7 @@ import favicon from 'express-favicon'
 import createError from 'http-errors'
 import { MongoClient } from 'mongodb'
 import logger from 'morgan'
-import path from 'path'
+import path from 'node:path'
 import _ from 'underscore'
 import { setupGraphQL } from './graphql'
 import {
