@@ -290,6 +290,8 @@ class MSGraphService {
             )
         )
         .filter((event: EventObject) => event.duration <= 24)
+        // Removing events that start before the start of the timesheet period, since they've been picked up by the previous period. See #1009 for details
+        .filter((event: EventObject) => event.startDateTime >= new Date(startDateTimeIso))
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }
