@@ -43,7 +43,7 @@ jobs:
 
       - name: ESLint and prettier
         run: |
-          npx eslint --ext .ts,.tsx ./client ./server --color --fix
+          npx eslint --ext .ts,.tsx ./client ./server --color --fix --rule 'unicorn/prefer-node-protocol: 0'
           npx prettier '**/*.ts*' --write --loglevel silent
 
       - name: Generating README and CHANGELOG using @appnest/readme
