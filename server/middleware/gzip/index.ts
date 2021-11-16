@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import express from 'express'
-import fs from 'node:fs'
+import fs from 'fs'
 
 /**
  * Serve gzipped
