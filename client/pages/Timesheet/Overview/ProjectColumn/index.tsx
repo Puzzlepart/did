@@ -61,7 +61,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     return (
       <div className={className}>
         <UserMessage
-          containerStyle={{ marginTop: 10, width: '90%' }}
+          containerStyle={{ marginTop: 0, width: 'calc(100% - 10px)' }}
           isMultiline={true}
           type={'warning'}
           iconName='TagUnknown'

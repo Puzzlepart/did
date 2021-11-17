@@ -1,34 +1,46 @@
 .root {
-    .container {
-        width: auto;
+  [class="ms-List"] {
+    [class="ms-List-surface"] {
+      border: 0px solid transparent !important;
+      margin-top: 0 !important;
+
+      [class*="ms-List-page"] {
+        margin-top: 15px; // should only be used on timesheet
+        border: 1px solid #d0d7de; // same
+        border-radius: 6px;
+      }
+    }
+  }
+
+  &.mobile {
+
+    [class*="ms-DetailsList-headerWrapper"],
+    [class*="ms-GroupSpacer"],
+    [class*="ms-GroupHeader-expand"] {
+      display: none !important;
     }
 
-    &.mobile {
-        [class*="ms-DetailsList-headerWrapper"],[class*="ms-GroupSpacer"],[class*="ms-GroupHeader-expand"] {
-            display: none !important;
-        }
-
-        [class*="ms-DetailsRow-fields"] {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: flex-start;
-            margin: 0 0 15px 0;
-        }
-
-        [class*="ms-DetailsRow-cell"] {
-            display: inherit !important;
-            align-items: unset !important;
-            align-self: unset !important;
-            min-height: auto !important;
-            width: auto !important;
-        }
-
-        [class*="ms-FocusZone"],
-        [class*="ms-SelectionZone"] {
-            min-width: auto !important;
-            overflow-x: hidden;
-        }
+    [class*="ms-DetailsRow-fields"] {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin: 0 0 15px 0;
     }
+
+    [class*="ms-DetailsRow-cell"] {
+      display: inherit !important;
+      align-items: unset !important;
+      align-self: unset !important;
+      min-height: auto !important;
+      width: auto !important;
+    }
+
+    [class*="ms-FocusZone"],
+    [class*="ms-SelectionZone"] {
+      min-width: auto !important;
+      overflow-x: hidden;
+    }
+  }
 }

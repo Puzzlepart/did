@@ -2,7 +2,74 @@
   margin: 0 0 25px 0;
   position: relative;
 
-  [class*="ms-DetailsRow-fields"]{
-      align-items: center;
+  [class*="ms-DetailsRow-fields"] {
+    align-items: center;
+  }
+
+  .list {
+
+    [class*="ms-Persona-details"] {
+      // vertically center persona details on admin page
+      align-self: flex-start;
+    }
+
+    background-color: transparent;
+    margin-right: -6px;
+
+    [class="ms-List"] {
+      [class="ms-List-surface"] {
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        margin-top: 15px;
+        [class*="ms-List-page"] {
+          // margin-top: 15px; // should only be used on timesheet
+          // border: 1px solid #d0d7de; // same
+          border-radius: 6px;
+
+          [class*="ms-List-cell"] {
+            border-radius: 6px;
+            border: 1px solid #0000;
+
+            &:last-of-type {
+              [id*="row"] {
+                border-bottom: none;
+                border-radius: 0 0 6px 6px;
+              }
+            }
+          }
+        }
+      }
+
+      [id*="GroupedListSection"] {
+        [class="ms-List-surface"] {
+          [class*="ms-List-page"] {
+            margin-top: 0px;
+            border: 0px solid transparent;
+            border-top: 1px solid #d0d7de;
+            border-radius: 0;
+          }
+        }
+      }
+
+      div[class*="ms-GroupHeader"] {
+        border-bottom: 0px solid transparent;
+
+        &[aria-expanded="true"] {
+          border-bottom: 0px solid transparent;
+        }
+
+        &:hover {
+          border-radius: 6px;
+
+          button {
+            border-radius: 6px 0 0 6px;
+
+            &[aria-expanded="true"] {
+              border-radius: 6px 0 0 0px;
+            }
+          }
+        }
+      }
+    }
   }
 }

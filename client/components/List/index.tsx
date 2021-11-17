@@ -39,6 +39,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList
             {...listProps}
+            className={styles.list}
             onRenderDetailsHeader={(headerProps, defaultRender) => (
               <ListHeader
                 headerProps={headerProps}

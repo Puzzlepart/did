@@ -18,7 +18,7 @@ export default {
   semanticColors: {
     menuBackground: '#fff',
     menuHeader: '#161b22',
-    bodyBackground: '#ffffff',
+    bodyBackground: '#f6f8fa',
     bodySubtext: '#605e5c'
   },
   palette: {
@@ -30,10 +30,10 @@ export default {
     themeSecondary: '#2b88d8',
     themeDarkAlt: '#106ebe',
     themeDark: '#005a9e',
-    themeDarker: '#004578',
+    themeDarker: '#0d1117',
     neutralLighterAlt: '#f8f8f8',
     neutralLighter: '#f4f4f4',
-    neutralLight: '#eaeaea',
+    neutralLight: '#d0d7de',
     neutralQuaternaryAlt: '#dadada',
     neutralQuaternary: '#d0d0d0',
     neutralTertiaryAlt: '#c8c8c8',
