@@ -192,8 +192,7 @@
       "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm"
     }
   },
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Carl Joakim Damsleth",
       "email": "carl.joakim.damsleth@puzzlepart.com",
       "img": "https://avatars.githubusercontent.com/u/7300548?&size=130"
@@ -292,7 +291,8 @@
       "unicorn/prefer-module": 0,
       "unicorn/prefer-object-from-entries": 0,
       "unicorn/no-array-method-this-argument": 0,
-      "unicorn/prefer-spread": 0
+      "unicorn/prefer-spread": 0,
+      "unicorn/prefer-node-protocol": 0
     },
     "settings": {
       "react": {
