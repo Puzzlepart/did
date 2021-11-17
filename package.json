@@ -292,7 +292,7 @@
       "unicorn/prefer-object-from-entries": 0,
       "unicorn/no-array-method-this-argument": 0,
       "unicorn/prefer-spread": 0,
-      "unicorn/prefer-node-protocol": 0,
+      "unicorn/prefer-node-protocol": 0
     },
     "settings": {
       "react": {
