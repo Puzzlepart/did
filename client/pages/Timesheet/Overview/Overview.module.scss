@@ -5,9 +5,14 @@
       margin-top: 0 !important;
 
       [class*="ms-List-page"] {
-        margin-top: 15px; // should only be used on timesheet
-        border: 1px solid #d0d7de; // same
+        margin-top: 20px; 
+        border: 1px solid #d0d7de;
         border-radius: 6px;
+        margin-right: 2px;
+        [class="ms-List-cell"] {
+          border: none !important;
+          border-radius: 0 !important;
+        }
       }
     }
   }
