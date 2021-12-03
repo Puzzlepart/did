@@ -350,7 +350,7 @@
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
     "vacationTotalDaysLabel": "Antal feriedager",
     "vacationTotalDaysDescription": "Totalt antall feriedager for året. \nInkluderer overførte dager fra i fjor.",
-    "vacationSummaryTooltip": "Anslaget er basert på å ha logget {{usedHours}} timer på {{category}} (hver feriedag er 8 timer) og inkluderer hele året."
+    "vacationSummaryTooltip": "Ferieanslaget gjelder for hele året, og er basert på at du har kategorisert {{usedHours}} timer med {{category}}\n(hver feriedag er 8 timer)"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

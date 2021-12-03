@@ -30,7 +30,7 @@ export function useSubmitCommands(): IContextualMenuItem {
         state.selectedPeriod
       const FORECAST_PERIOD: IContextualMenuItem = {
         key: 'FORECAST_PERIOD',
-        iconProps: { iconName: 'BufferTimeBefore' },
+        iconProps: { iconName: 'Buffe rTimeBefore' },
         onClick: () => {
           onSubmitPeriod(true)
         },
@@ -101,13 +101,13 @@ export function useSubmitCommands(): IContextualMenuItem {
         }
       }
 
-      commands = arrayExtend(commands, (element) => ({
-        disabled: !!state.loading,
+      commands = arrayExtend(commands, (cmd) => ({
+        disabled: !!state.loading || cmd.disabled,
         styles: merge(
           {
             root: { height: 44, marginLeft: 4 }
           },
-          element.styles || {}
+          cmd.styles || {}
         )
       }))
 
