@@ -16,7 +16,7 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
       <TextControl
         {...register<TextControlOptions>('key', {
           casing: 'upper',
-          replace: [new RegExp('[^a-zA-Z0-9\s:]'), '']
+          replace: [new RegExp('[^a-zA-Z0-9s:]'), '']
         })}
         disabled={!!props.edit}
         label={t('customers.keyFieldLabel')}
