@@ -38,7 +38,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       <TextControl
         {...register<TextControlOptions>('key', {
           casing: 'upper',
-          replace: [new RegExp('[^a-zA-Z0-9s:]'), '']
+          replace: [new RegExp('[^a-zA-Z0-9]'), '']
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
