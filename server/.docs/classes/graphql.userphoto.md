@@ -1,4 +1,4 @@
-[did-server - v0.10.6](../README.md) / [GraphQL](../modules/graphql.md) / UserPhoto
+[did-server - v0.10.7](../README.md) / [GraphQL](../modules/graphql.md) / UserPhoto
 
 # Class: UserPhoto
 
