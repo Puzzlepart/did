@@ -161,7 +161,12 @@
     "labelNameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
     "labelCreateSuccess": "Your new label **{{name}}** was succesfully created.",
     "labelCreateError": "We can't update the label at the moment. Please try again later.",
-    "labelUpdateSuccess": "Your label **{{name}}** was succesfully updated."
+    "labelUpdateSuccess": "Your label **{{name}}** was succesfully updated.",
+    "vacation": "Holidays and absence",
+    "vacationTotalDaysLabel": "Vacation days",
+    "vacationTotalDaysDescription": "Total number of vacation days for each employee in the company.",
+    "vacationEventCategoryLabel": "Outlook event category",
+    "vacationEventCategoryDescription": "Category to be used for tagging events in Outlook as vacation."
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -341,7 +346,12 @@
     "dark-theme": "Dark theme",
     "auto-theme": "System theme",
     "descriptionOptionalFieldLabel": "Description (optional)",
-    "clearFilters": "Clear filters"
+    "clearFilters": "Clear filters",
+    "lastActiveLabel": "Last active",
+    "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining",
+    "vacationTotalDaysLabel": "Total vacation days",
+    "vacationTotalDaysDescription": "Total vacation days for the year. Includes transferred days from last year.",
+    "vacationSummaryTooltip": "The vacation estimate is for the whole year,\nand is based on your categorisation of {{usedHours}} hours with {{category}}\n(each vacation day is 8 hours)"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

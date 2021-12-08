@@ -29,11 +29,13 @@ export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
               onChange={({ hex }) => props.onChanged(hex)}
             />
           )
-        }}>
+        }}
+      >
         <span
           ref={target}
           className={styles.colorPreview}
-          style={{ backgroundColor: props.color }}></span>
+          style={{ backgroundColor: props.color }}
+        ></span>
       </TooltipHost>
     </div>
   )

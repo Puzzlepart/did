@@ -36,7 +36,10 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         onSelected={(customer) => model.set('customerKey', customer.key)}
       />
       <TextControl
-        {...register<TextControlOptions>('key', { casing: 'upper' })}
+        {...register<TextControlOptions>('key', {
+          casing: 'upper',
+          replace: [new RegExp('[^a-zA-Z0-9]'), '']
+        })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
         description={t('projects.keyFieldDescription', __package.config.app)}

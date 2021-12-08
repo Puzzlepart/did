@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import get from 'get-value'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
@@ -6,13 +7,19 @@ import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'
 import { Context } from '../../graphql/context'
-import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
+import {
+  SubscriptionVacationSettings,
+  TimesheetPeriodObject,
+  VacationSummary
+} from '../../graphql/resolvers/types'
+import { toFixed } from '../../utils'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
   ForecastedTimeEntryService,
   ProjectService,
-  TimeEntryService
+  TimeEntryService,
+  UserService
 } from '../mongo'
 import MatchingEngine from './matching'
 import {
@@ -43,6 +50,7 @@ export class TimesheetService {
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
    * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
+   * @param _userSvc - Injected `UserService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
@@ -52,7 +60,8 @@ export class TimesheetService {
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
-    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
+    private readonly _fperiodSvc: ForecastedPeriodsService,
+    private readonly _userSvc: UserService // eslint-disable-next-line unicorn/empty-brace-spaces
   ) {}
 
   /**
@@ -330,5 +339,35 @@ export class TimesheetService {
       ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
+  }
+
+  /**
+   * Get vacation summary for the current user.
+   *
+   * @param settings - Subscription vacation settings
+   */
+  public async getVacation(
+    settings: SubscriptionVacationSettings
+  ): Promise<VacationSummary> {
+    try {
+      const userConfiguration = await this._userSvc.getUserConfiguration(
+        this.context.userId
+      )
+      const totalDays = get(userConfiguration, 'vacation.totalDays', {
+        default: settings.totalDays
+      })
+      const events = await this._msgraphSvc.getVacation(settings.eventCategory)
+      const usedHours = events.reduce((sum, event) => sum + event.duration, 0)
+      const used = usedHours / 8
+      return {
+        category: settings.eventCategory,
+        total: totalDays,
+        usedHours: toFixed(usedHours, 2),
+        used: toFixed(used, 2),
+        remaining: toFixed(totalDays - used, 2)
+      }
+    } catch (error) {
+      throw error
+    }
   }
 }

@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / ITabContainerProps
+[did-client - v0.10.6](../README.md) / [Components](../modules/components.md) / ITabContainerProps
 
 # Interface: ITabContainerProps
 
@@ -36,7 +36,7 @@ specify the actual width. If `true` is specified
 
 **`default`** false
 
-Defined in: [components/TabContainer/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L18)
+Defined in: [client/components/TabContainer/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L18)
 
 ___
 
@@ -48,7 +48,7 @@ Hide tab link icons on mobile devices
 
 **`default`** true
 
-Defined in: [components/TabContainer/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L25)
+Defined in: [client/components/TabContainer/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L25)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 Item properties that will be shared between
 all tabs in the container
 
-Defined in: [components/TabContainer/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L38)
+Defined in: [client/components/TabContainer/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L38)
 
 ___
 
@@ -72,7 +72,7 @@ inside the tab container. This can be used instead of
 using `useRef` and `children` when that doesn't
 work as expected.
 
-Defined in: [components/TabContainer/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L53)
+Defined in: [client/components/TabContainer/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L53)
 
 ___
 
@@ -84,7 +84,7 @@ Level in the navigation hierarchy
 
 **`default`** 2
 
-Defined in: [components/TabContainer/types.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L45)
+Defined in: [client/components/TabContainer/types.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L45)
 
 ___
 
@@ -96,7 +96,7 @@ Tab link height on mobile devices
 
 **`default`** 30
 
-Defined in: [components/TabContainer/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L32)
+Defined in: [client/components/TabContainer/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L32)
 
 ___
 
@@ -118,6 +118,6 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [components/TabContainer/types.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L58)
+Defined in: [client/components/TabContainer/types.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L58)
 
-Defined in: [components/TabContainer/types.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L58)
+Defined in: [client/components/TabContainer/types.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L58)

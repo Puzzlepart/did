@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Pages](../modules/pages.md) / TimesheetScope
+[did-client - v0.10.6](../README.md) / [Pages](../modules/pages.md) / TimesheetScope
 
 # Class: TimesheetScope
 
@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L17)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L17)
 
 ## Properties
 
@@ -57,7 +57,7 @@ Defined in: [pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart
 
 • `Optional` **endDate**: *DateObject*
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L17)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L17)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • `Optional` **startDate**: *DateObject*
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L16)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L16)
 
 ## Accessors
 
@@ -79,7 +79,7 @@ Is the scope the current week
 
 **Returns:** *boolean*
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L82)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L82)
 
 ___
 
@@ -93,7 +93,7 @@ Get timespan string for the scope
 
 **Returns:** *string*
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L91)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L91)
 
 ## Methods
 
@@ -113,7 +113,7 @@ Name | Type |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L35)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L35)
 
 ___
 
@@ -133,7 +133,7 @@ Name | Type | Description |
 
 **Returns:** *DateObject*
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:73](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L73)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:73](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L73)
 
 ___
 
@@ -153,7 +153,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *TimesheetQuery*
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L47)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L47)
 
 ___
 
@@ -173,4 +173,4 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 
-Defined in: [pages/Timesheet/TimesheetScope.ts:61](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L61)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:61](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L61)

@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
+[did-server - v0.10.6](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
 
 # Class: TimesheetPeriodInput
 

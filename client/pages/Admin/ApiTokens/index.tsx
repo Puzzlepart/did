@@ -54,7 +54,7 @@ export const ApiTokens: TabComponent = () => {
   function onKeyAdded(generatedKey: string) {
     setForm({})
     if (generatedKey) {
-      setMessage({ text: t('admin.tokenGeneratedText') }, 20000)
+      setMessage({ text: t('admin.tokenGeneratedText') }, 20_000)
       setApiKey(generatedKey)
     } else
       setMessage({

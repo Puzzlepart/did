@@ -23,6 +23,7 @@ export function generateColumn(
     minWidth,
     onRender,
     isResizable: true,
-    ...{ data: {}, ...props }
+    data: {},
+    ...props
   } as IListColumn
 }

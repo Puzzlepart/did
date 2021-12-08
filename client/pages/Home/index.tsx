@@ -25,12 +25,14 @@ export const Home: PageComponent = () => {
     <div className={styles.root}>
       <div
         className={styles.logo}
-        style={components.logo.styles as CSSProperties}>
+        style={components.logo.styles as CSSProperties}
+      >
         {__package.name}
       </div>
       <div
         className={styles.motto}
-        style={components.motto.styles as CSSProperties}>
+        style={components.motto.styles as CSSProperties}
+      >
         {__package.description}
       </div>
       {error && (
@@ -52,9 +54,9 @@ export const Home: PageComponent = () => {
           {Object.keys(providers).map((key) => (
             <DefaultButton
               key={key}
+              className={styles.signInButton}
               onClick={() => document.location.replace(`/auth/${key}/signin`)}
               iconProps={providers[key].iconProps}
-              style={{ marginTop: 10 }}
               text={providers[key].text}
             />
           ))}

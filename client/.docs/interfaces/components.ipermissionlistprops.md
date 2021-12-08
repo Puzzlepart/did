@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / IPermissionListProps
+[did-client - v0.10.6](../README.md) / [Components](../modules/components.md) / IPermissionListProps
 
 # Interface: IPermissionListProps
 
@@ -22,4 +22,4 @@
 
 • **permissionIds**: *string*[]
 
-Defined in: [components/PermissionList/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/types.tsx#L8)
+Defined in: [client/components/PermissionList/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/types.tsx#L8)

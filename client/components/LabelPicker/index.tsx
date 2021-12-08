@@ -31,7 +31,8 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
         <span
           className={styles.toggleIcon}
           onClick={() => setShowCallout(!showCallout)}
-          ref={ref}>
+          ref={ref}
+        >
           <Icon iconName='Settings' />
         </span>
       </Label>

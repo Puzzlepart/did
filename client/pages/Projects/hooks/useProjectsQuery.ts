@@ -16,11 +16,9 @@ export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
     variables: { sortBy: 'name' },
     fetchPolicy: 'cache-and-network'
   })
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ data, error, loading })), [
-    data,
-    error,
-    loading,
-    dispatch
-  ])
+  useLayoutEffect(
+    () => dispatch(DATA_UPDATED({ data, error, loading })),
+    [data, error, loading, dispatch]
+  )
   return { refetch, loading }
 }

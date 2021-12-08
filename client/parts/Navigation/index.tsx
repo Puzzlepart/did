@@ -24,12 +24,14 @@ export const Navigation: React.FC = () => {
     <nav
       className={className}
       style={{ background: theme.semanticColors.menuHeader }}
-      hidden={isMobile && !isAuthenticated}>
+      hidden={isMobile && !isAuthenticated}
+    >
       <div className={styles.container}>
         <Link
           to='/'
           className={styles.logo}
-          title={`${__package.name} - ${__package.description}`}>
+          title={`${__package.name} - ${__package.description}`}
+        >
           {__package.name}
         </Link>
         <ul className={styles.nav}>

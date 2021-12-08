@@ -23,7 +23,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
   })
   const ref = useRef<HTMLDivElement>()
 
-  useLayoutEffect(() => dispatch(INIT({ props })), [props.items])
+  useLayoutEffect(() => dispatch(INIT({ props })), [props.defaultSelectedKey])
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
 
@@ -36,13 +36,8 @@ export function useAutocomplete(props: IAutocompleteProps) {
     [state.suggestions, state.selectedIndex]
   )
 
-  const {
-    onDismissCallout,
-    onSetSelected,
-    onSearch,
-    onClear,
-    onKeyDown
-  } = useAutocompleteEvents({ props, dispatch })
+  const { onDismissCallout, onSetSelected, onSearch, onClear, onKeyDown } =
+    useAutocompleteEvents({ props, dispatch })
 
   return {
     state,

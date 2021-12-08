@@ -33,7 +33,7 @@ export function useBrowserStorage<T = any>({
   const append = (value: any) => {
     if (!_.isArray(storedValue)) return
     try {
-      const valueToStore = ([...storedValue, value] as unknown) as T
+      const valueToStore = [...storedValue, value] as unknown as T
       setStoredValue(valueToStore)
       store.setItem(key, JSON.stringify(valueToStore))
     } catch {}

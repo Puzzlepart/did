@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [Services](../modules/services.md) / NotificationService
+[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / NotificationService
 
 # Class: NotificationService
 
@@ -102,7 +102,7 @@ ___
 
 ### getNotifications
 
-▸ **getNotifications**(`templates`: [*NotificationTemplates*](graphql.notificationtemplates.md), `locale`: *string*): *Promise*<any\>
+▸ **getNotifications**(`templates`: [*NotificationTemplates*](graphql.notificationtemplates.md), `locale`: *string*): *Promise*<ForecastNotification[]\>
 
 Get notifications
 
@@ -113,6 +113,6 @@ Name | Type | Description |
 `templates` | [*NotificationTemplates*](graphql.notificationtemplates.md) | Templats   |
 `locale` | *string* | User locale    |
 
-**Returns:** *Promise*<any\>
+**Returns:** *Promise*<ForecastNotification[]\>
 
 Defined in: [services/notification/index.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L133)

@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Components](../modules/components.md) / IUserColumnProps
+[did-client - v0.10.6](../README.md) / [Components](../modules/components.md) / IUserColumnProps
 
 # Interface: IUserColumnProps
 
@@ -23,7 +23,7 @@
 
 • `Optional` **persona**: *IPersonaProps*
 
-Defined in: [components/UserColumn/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L7)
+Defined in: [client/components/UserColumn/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L7)
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 • **user**: *Pick*<User, *role* \| *displayName* \| *mail* \| *photo*\>
 
-Defined in: [components/UserColumn/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L6)
+Defined in: [client/components/UserColumn/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L6)

@@ -19,9 +19,8 @@ import $users from './users.gql'
 export function useUsers() {
   const { t } = useTranslation()
   const [userForm, setUserForm] = useState<IUserFormProps>(null)
-  const [addMultiplePanel, setAddMultiplePanel] = useState<IAddMultiplePanel>(
-    null
-  )
+  const [addMultiplePanel, setAddMultiplePanel] =
+    useState<IAddMultiplePanel>(null)
   const [progress, setProgress] = useState<ISpinnerProps>(null)
   const query = useQuery($users, {
     fetchPolicy: 'cache-and-network'

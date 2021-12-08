@@ -24,7 +24,8 @@ export const AddMultiplePanel: React.FC<IAddMultiplePanel> = (props) => {
       headerText={t('admin.bulkImportUsersLabel')}
       type={PanelType.medium}
       isLightDismiss={true}
-      className={styles.root}>
+      className={styles.root}
+    >
       <div className={styles.container}>
         <PrimaryButton
           text={t('admin.bulkImportUsersLabel')}

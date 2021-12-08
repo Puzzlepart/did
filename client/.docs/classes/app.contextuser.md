@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [App](../modules/app.md) / ContextUser
+[did-client - v0.10.6](../README.md) / [App](../modules/app.md) / ContextUser
 
 # Class: ContextUser
 
@@ -18,6 +18,7 @@ the `AppContext`
 - [configuration](app.contextuser.md#configuration)
 - [displayName](app.contextuser.md#displayname)
 - [id](app.contextuser.md#id)
+- [lastActive](app.contextuser.md#lastactive)
 - [mail](app.contextuser.md#mail)
 - [photo](app.contextuser.md#photo)
 - [role](app.contextuser.md#role)
@@ -49,6 +50,7 @@ from the User object:
 * `role`
 * `startPage`
 * `photo`
+* `lastActive`
 
 We can't extend the `User` class
 due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
@@ -62,7 +64,7 @@ Name | Type | Description |
 
 **Returns:** [*ContextUser*](app.contextuser.md)
 
-Defined in: [app/ContextUser.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L21)
+Defined in: [client/app/ContextUser.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L22)
 
 ## Properties
 
@@ -70,7 +72,7 @@ Defined in: [app/ContextUser.ts:21](https://github.com/Puzzlepart/did/blob/dev/c
 
 • **configuration**: *Record*<string, any\>
 
-Defined in: [app/ContextUser.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L19)
+Defined in: [client/app/ContextUser.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L19)
 
 ___
 
@@ -78,7 +80,7 @@ ___
 
 • **displayName**: *string*
 
-Defined in: [app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
+Defined in: [client/app/ContextUser.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L15)
 
 ___
 
@@ -86,7 +88,15 @@ ___
 
 • **id**: *string*
 
-Defined in: [app/ContextUser.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L14)
+Defined in: [client/app/ContextUser.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L14)
+
+___
+
+### lastActive
+
+• **lastActive**: Date
+
+Defined in: [client/app/ContextUser.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L22)
 
 ___
 
@@ -94,7 +104,7 @@ ___
 
 • **mail**: *string*
 
-Defined in: [app/ContextUser.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L17)
+Defined in: [client/app/ContextUser.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L17)
 
 ___
 
@@ -102,7 +112,7 @@ ___
 
 • **photo**: *UserPhoto*
 
-Defined in: [app/ContextUser.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L20)
+Defined in: [client/app/ContextUser.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L20)
 
 ___
 
@@ -110,7 +120,7 @@ ___
 
 • **role**: *Role*
 
-Defined in: [app/ContextUser.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L16)
+Defined in: [client/app/ContextUser.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L16)
 
 ___
 
@@ -118,7 +128,7 @@ ___
 
 • **startPage**: *string*
 
-Defined in: [app/ContextUser.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L18)
+Defined in: [client/app/ContextUser.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L18)
 
 ___
 
@@ -126,7 +136,7 @@ ___
 
 • **theme**: PartialTheme
 
-Defined in: [app/ContextUser.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L21)
+Defined in: [client/app/ContextUser.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L21)
 
 ## Accessors
 
@@ -142,7 +152,7 @@ Preferred user language
 
 **Returns:** *string*
 
-Defined in: [app/ContextUser.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L62)
+Defined in: [client/app/ContextUser.ts:73](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L73)
 
 ## Methods
 
@@ -160,4 +170,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [app/ContextUser.ts:83](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L83)
+Defined in: [client/app/ContextUser.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L94)

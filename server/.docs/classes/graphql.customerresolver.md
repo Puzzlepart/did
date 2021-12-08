@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [GraphQL](../modules/graphql.md) / CustomerResolver
+[did-server - v0.10.6](../README.md) / [GraphQL](../modules/graphql.md) / CustomerResolver
 
 # Class: CustomerResolver
 

@@ -11,14 +11,8 @@ import { useUserSettings } from './useUserSettings'
  * @category UserMenu
  */
 export const UserSettings = () => {
-  const {
-    t,
-    context,
-    openPanel,
-    dismissPanel,
-    isOpen,
-    settings
-  } = useUserSettings()
+  const { t, context, openPanel, dismissPanel, isOpen, settings } =
+    useUserSettings()
 
   return (
     <UserSettingsContext.Provider value={context}>
@@ -33,7 +27,8 @@ export const UserSettings = () => {
           headerText={t('common.settings')}
           isOpen={isOpen}
           onDismiss={dismissPanel}
-          isLightDismiss={true}>
+          isLightDismiss={true}
+        >
           {settings.map((s, index) => (
             <UserSettingInput key={index} setting={s} />
           ))}

@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [Services](../modules/services.md) / TimesheetService
+[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / TimesheetService
 
 # Class: TimesheetService
 
@@ -19,6 +19,7 @@ Timesheet service
 - [\_getPeriodData](services.timesheetservice.md#_getperioddata)
 - [getPeriods](services.timesheetservice.md#getperiods)
 - [getTimesheet](services.timesheetservice.md#gettimesheet)
+- [getVacation](services.timesheetservice.md#getvacation)
 - [submitPeriod](services.timesheetservice.md#submitperiod)
 - [unsubmitPeriod](services.timesheetservice.md#unsubmitperiod)
 
@@ -26,7 +27,7 @@ Timesheet service
 
 ### constructor
 
-\+ **new TimesheetService**(`context`: *Context*, `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_googleCalSvc`: [*GoogleCalendarService*](services.googlecalendarservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*TimesheetService*](services.timesheetservice.md)
+\+ **new TimesheetService**(`context`: *Context*, `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_googleCalSvc`: [*GoogleCalendarService*](services.googlecalendarservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md), `_userSvc`: [*UserService*](services.userservice.md)): [*TimesheetService*](services.timesheetservice.md)
 
 Constructor
 
@@ -41,11 +42,12 @@ Name | Type | Description |
 `_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through `typedi`   |
 `_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through `typedi`   |
 `_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through `typedi`   |
-`_fperiodSvc` | [*ForecastedPeriodsService*](services.forecastedperiodsservice.md) | Injected `ForecastedPeriodsService` through `typedi`    |
+`_fperiodSvc` | [*ForecastedPeriodsService*](services.forecastedperiodsservice.md) | Injected `ForecastedPeriodsService` through `typedi`   |
+`_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through `typedi`    |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [services/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L34)
+Defined in: [services/timesheet/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L41)
 
 ## Methods
 
@@ -65,7 +67,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:316](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L316)
+Defined in: [services/timesheet/index.ts:325](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L325)
 
 ___
 
@@ -88,7 +90,7 @@ Name | Type |
 
 Events
 
-Defined in: [services/timesheet/index.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L207)
+Defined in: [services/timesheet/index.ts:216](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L216)
 
 ___
 
@@ -110,7 +112,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [services/timesheet/index.ts:259](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L259)
+Defined in: [services/timesheet/index.ts:268](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L268)
 
 ___
 
@@ -131,7 +133,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:278](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L278)
+Defined in: [services/timesheet/index.ts:287](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L287)
 
 ___
 
@@ -162,7 +164,25 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/timesheet/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L76)
+Defined in: [services/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L85)
+
+___
+
+### getVacation
+
+▸ **getVacation**(`settings`: [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md)): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+
+Get vacation summary for the current user.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`settings` | [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md) | Subscription vacation settings    |
+
+**Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+
+Defined in: [services/timesheet/index.ts:349](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L349)
 
 ___
 
@@ -191,7 +211,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:137](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L137)
+Defined in: [services/timesheet/index.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L146)
 
 ___
 
@@ -209,4 +229,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L176)
+Defined in: [services/timesheet/index.ts:185](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L185)

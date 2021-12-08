@@ -38,7 +38,7 @@ export class UserService extends MongoDocumentService<User> {
    * @param user - User
    */
   private _replaceId<T>(user: User): T {
-    return ({ ..._.omit(user, 'id'), _id: user.id } as unknown) as T
+    return { ..._.omit(user, 'id'), _id: user.id } as unknown as T
   }
 
   /**
@@ -81,6 +81,25 @@ export class UserService extends MongoDocumentService<User> {
       user.role = await this._role.getByName(user.role as string)
       user.configuration = JSON.stringify(user.configuration)
       return user
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
+   * Get configuration by user ID
+   *
+   * @remarks Returns null if no user is found.
+   *
+   * @param idOrMail - User ID or mail
+   */
+  public async getUserConfiguration(idOrMail: string): Promise<any> {
+    try {
+      const user = await this.collection.findOne({
+        $or: [{ _id: idOrMail }, { mail: idOrMail }]
+      })
+      if (!user) return null
+      return user.configuration
     } catch (error) {
       throw error
     }
@@ -140,6 +159,7 @@ export class UserService extends MongoDocumentService<User> {
   public async updateCurrentUserConfiguration(
     configuration?: string,
     startPage?: string,
+    lastActive?: string,
     preferredLanguage?: string
   ) {
     try {
@@ -159,6 +179,7 @@ export class UserService extends MongoDocumentService<User> {
       }
       if (startPage) $set.startPage = startPage
       if (preferredLanguage) $set.preferredLanguage = preferredLanguage
+      if (lastActive) $set.lastActive = new Date(lastActive)
       await this.update(filter, $set)
     } catch (error) {
       throw error

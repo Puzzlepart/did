@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [GraphQL](../modules/graphql.md) / UserFeedbackResult
+[did-server - v0.10.6](../README.md) / [GraphQL](../modules/graphql.md) / UserFeedbackResult
 
 # Class: UserFeedbackResult
 
@@ -48,7 +48,7 @@ ___
 
 • `Optional` **ref**: *number*
 
-Defined in: [graphql/resolvers/user/types.ts:182](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L182)
+Defined in: [graphql/resolvers/user/types.ts:189](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L189)
 
 ___
 

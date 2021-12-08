@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [Services](../modules/services.md) / UserService
+[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / UserService
 
 # Class: UserService
 
@@ -34,6 +34,7 @@ User service
 - [addUsers](services.userservice.md#addusers)
 - [find](services.userservice.md#find)
 - [getById](services.userservice.md#getbyid)
+- [getUserConfiguration](services.userservice.md#getuserconfiguration)
 - [getUsers](services.userservice.md#getusers)
 - [insert](services.userservice.md#insert)
 - [insertMultiple](services.userservice.md#insertmultiple)
@@ -156,7 +157,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [services/mongo/user.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L94)
+Defined in: [services/mongo/user.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L113)
 
 ___
 
@@ -174,7 +175,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [services/mongo/user.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L108)
+Defined in: [services/mongo/user.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L127)
 
 ___
 
@@ -224,6 +225,26 @@ Name | Type | Description |
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
 Defined in: [services/mongo/user.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L73)
+
+___
+
+### getUserConfiguration
+
+▸ **getUserConfiguration**(`idOrMail`: *string*): *Promise*<any\>
+
+Get configuration by user ID
+
+**`remarks`** Returns null if no user is found.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`idOrMail` | *string* | User ID or mail    |
+
+**Returns:** *Promise*<any\>
+
+Defined in: [services/mongo/user.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L96)
 
 ___
 
@@ -316,7 +337,7 @@ ___
 
 ### updateCurrentUserConfiguration
 
-▸ **updateCurrentUserConfiguration**(`configuration?`: *string*, `startPage?`: *string*, `preferredLanguage?`: *string*): *Promise*<void\>
+▸ **updateCurrentUserConfiguration**(`configuration?`: *string*, `startPage?`: *string*, `lastActive?`: *string*, `preferredLanguage?`: *string*): *Promise*<void\>
 
 Update configuration for the current user
 
@@ -329,11 +350,12 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `configuration?` | *string* | Configuration   |
 `startPage?` | *string* | Start page   |
+`lastActive?` | *string* | - |
 `preferredLanguage?` | *string* | Preferred language    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:140](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L140)
+Defined in: [services/mongo/user.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L159)
 
 ___
 
@@ -351,4 +373,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L122)
+Defined in: [services/mongo/user.ts:141](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L141)

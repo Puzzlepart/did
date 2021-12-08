@@ -24,7 +24,8 @@ export const SubText: ReusableComponent<ISubTextProps> = ({
         fontSize: fonts[font].fontSize,
         color: semanticColors.bodySubtext,
         ...style
-      }}>
+      }}
+    >
       {text}
     </div>
   )

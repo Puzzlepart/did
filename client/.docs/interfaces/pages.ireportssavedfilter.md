@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Pages](../modules/pages.md) / IReportsSavedFilter
+[did-client - v0.10.6](../README.md) / [Pages](../modules/pages.md) / IReportsSavedFilter
 
 # Interface: IReportsSavedFilter
 
@@ -24,4 +24,4 @@
 
 #### Type declaration:
 
-Defined in: [pages/Reports/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L40)
+Defined in: [client/pages/Reports/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L40)

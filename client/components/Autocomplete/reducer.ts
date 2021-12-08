@@ -17,12 +17,10 @@ export const ON_KEY_DOWN = createAction<{
   key: number
   onEnter: AutocompleteSelectCallback
 }>('ON_KEY_DOWN')
-export const SET_SELECTED_INDEX = createAction<{ index: number }>(
-  'SET_SELECTED_INDEX'
-)
-export const DISMISS_CALLOUT = createAction<{ item: ISuggestionItem<any> }>(
-  'DISMISS_CALLOUT'
-)
+export const SET_SELECTED_INDEX =
+  createAction<{ index: number }>('SET_SELECTED_INDEX')
+export const DISMISS_CALLOUT =
+  createAction<{ item: ISuggestionItem<any> }>('DISMISS_CALLOUT')
 
 /**
  * Creates reducer using `createReducer` from [\@reduxjs/toolkit](https://www.npmjs.com/package/\@reduxjs/toolkit)

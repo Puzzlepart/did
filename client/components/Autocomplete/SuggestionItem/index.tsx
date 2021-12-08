@@ -23,12 +23,14 @@ export const SuggestionItem: React.FC<ISuggestionItemProps> = (props) => {
     <div
       {..._.omit(props, 'itemIcons', 'item')}
       className={classNames.join(' ')}
-      data-is-focusable={true}>
+      data-is-focusable={true}
+    >
       <div className={styles.container}>
         <div
           className={styles.icon}
           style={iconStyles}
-          hidden={!props.itemIcons}>
+          hidden={!props.itemIcons}
+        >
           <Icon iconName={props.item.iconName || 'Page'} />
         </div>
         <div className={styles.content}>

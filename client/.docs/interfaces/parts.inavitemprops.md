@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Parts](../modules/parts.md) / INavItemProps
+[did-client - v0.10.6](../README.md) / [Parts](../modules/parts.md) / INavItemProps
 
 # Interface: INavItemProps
 
@@ -24,7 +24,7 @@
 
 • `Optional` **iconName**: *string*
 
-Defined in: [parts/Navigation/NavItem/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L10)
+Defined in: [client/parts/Navigation/NavItem/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L10)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • `Optional` **permission**: PermissionScope
 
-Defined in: [parts/Navigation/NavItem/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L11)
+Defined in: [client/parts/Navigation/NavItem/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L11)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 • **text**: *string*
 
-Defined in: [parts/Navigation/NavItem/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L9)
+Defined in: [client/parts/Navigation/NavItem/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L9)

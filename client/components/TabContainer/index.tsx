@@ -25,7 +25,8 @@ export const TabContainer: TabContainerComponent = (props) => {
       {...props}
       onLinkClick={onLinkClick}
       selectedKey={selectedKey}
-      styles={styles}>
+      styles={styles}
+    >
       {renderTabs({
         tabs: props.children,
         props: props.itemProps,

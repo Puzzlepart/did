@@ -29,7 +29,8 @@ export const Admin = () => {
         setView(itemKey)
         history.push(`/admin/${itemKey}`)
       }}
-      defaultSelectedKey={view}>
+      defaultSelectedKey={view}
+    >
       <Users
         headerText={t('admin.users')}
         itemIcon='FabricUserFolder'

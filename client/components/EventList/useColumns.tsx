@@ -16,18 +16,22 @@ import { IEventListProps } from './types'
  *
  * @param props - Props
  * @param Column - field name
- * @param defMinWidth - Default min width
- * @param defMaxWidth - Default max width
+ * @param defaultMinWidth - Default min width
+ * @param defaultMaxWidth - Default max width
  */
 function getSizing(
   props: IEventListProps,
   fieldName: string,
-  defMinWidth: number,
-  defMaxWidth: number
+  defaultMinWidth: number,
+  defaultMaxWidth: number
 ): { minWidth: number; maxWidth: number } {
   return {
-    minWidth: get(props, `columnWidths.${fieldName}`, { default: defMinWidth }),
-    maxWidth: get(props, `columnWidths.${fieldName}`, { default: defMaxWidth })
+    minWidth: get(props, `columnWidths.${fieldName}`, {
+      default: defaultMinWidth
+    }),
+    maxWidth: get(props, `columnWidths.${fieldName}`, {
+      default: defaultMaxWidth
+    })
   }
 }
 /**

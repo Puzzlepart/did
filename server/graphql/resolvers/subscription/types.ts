@@ -37,6 +37,20 @@ export class SubscriptionADSyncSettings {
 /**
  * @category GraphQL ObjectType
  */
+@ObjectType({
+  description: 'A type that describes Subscription vacation settings'
+})
+export class SubscriptionVacationSettings {
+  @Field({ nullable: true, defaultValue: 25 })
+  totalDays?: number
+
+  @Field({ nullable: true })
+  eventCategory?: string
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
   @Field(() => SubscriptionForecastSettings, { nullable: true })
@@ -44,6 +58,9 @@ export class SubscriptionSettings {
 
   @Field(() => SubscriptionADSyncSettings, { nullable: true })
   adsync?: SubscriptionADSyncSettings
+
+  @Field(() => SubscriptionVacationSettings, { nullable: true })
+  vacation?: SubscriptionVacationSettings
 }
 
 /**
@@ -108,6 +125,20 @@ export class SubscriptionADSyncSettingsInput {
 /**
  * @category GraphQL InputType
  */
+@InputType({
+  description: 'A input that describes Subscription vacation settings'
+})
+export class SubscriptionVacationSettingsInput {
+  @Field({ nullable: true, defaultValue: 25 })
+  totalDays?: number
+
+  @Field({ nullable: true })
+  eventCategory?: string
+}
+
+/**
+ * @category GraphQL InputType
+ */
 @InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
   @Field(() => SubscriptionForecastSettingsInput, { nullable: true })
@@ -115,4 +146,7 @@ export class SubscriptionSettingsInput {
 
   @Field(() => SubscriptionADSyncSettingsInput, { nullable: true })
   adsync?: SubscriptionADSyncSettingsInput
+
+  @Field(() => SubscriptionVacationSettingsInput, { nullable: true })
+  vacation?: SubscriptionVacationSettingsInput
 }

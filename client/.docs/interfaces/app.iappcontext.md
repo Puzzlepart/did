@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [App](../modules/app.md) / IAppContext
+[did-client - v0.10.6](../README.md) / [App](../modules/app.md) / IAppContext
 
 # Interface: IAppContext
 
@@ -34,7 +34,7 @@ Auth providers
 
 Inherited from: void
 
-Defined in: [app/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L19)
+Defined in: [client/app/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L19)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 Application dispatcher
 
-Defined in: [app/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L29)
+Defined in: [client/app/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L29)
 
 ___
 
@@ -72,9 +72,9 @@ Name | Type |
 
 **Returns:** T
 
-Defined in: [app/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L39)
+Defined in: [client/app/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L39)
 
-Defined in: [app/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L39)
+Defined in: [client/app/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L39)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 Is authenticated
 
-Defined in: [app/context.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L34)
+Defined in: [client/app/context.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L34)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 Notifications query
 
-Defined in: [app/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L19)
+Defined in: [client/app/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L19)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 Pages
 
-Defined in: [app/context.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L14)
+Defined in: [client/app/context.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L14)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 Application state
 
-Defined in: [app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
+Defined in: [client/app/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L24)
 
 ___
 
@@ -126,7 +126,7 @@ Subscription
 
 Inherited from: void
 
-Defined in: [app/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L14)
+Defined in: [client/app/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L14)
 
 ___
 
@@ -138,4 +138,4 @@ The currently logged in user
 
 Inherited from: void
 
-Defined in: [app/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L9)
+Defined in: [client/app/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/app/types.ts#L9)

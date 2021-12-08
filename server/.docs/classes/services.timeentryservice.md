@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [Services](../modules/services.md) / TimeEntryService
+[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / TimeEntryService
 
 # Class: TimeEntryService
 

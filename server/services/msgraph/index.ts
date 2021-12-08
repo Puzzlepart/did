@@ -5,10 +5,11 @@ import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
+import { DateObject } from '../../../shared/utils/DateObject'
 import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
-import { CacheScope, CacheService } from '../cache'
+import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
 import { MSGraphOutlookCategory } from './types'
 
@@ -74,6 +75,42 @@ class MSGraphService {
       )}`
     } catch {
       return null
+    }
+  }
+
+  /**
+   * Get vacation for the current user
+   *
+   * @param category - Category for vacation
+   */
+  public async getVacation(category: string): Promise<EventObject[]> {
+    try {
+      const client = await this._getClient()
+      const { value } = await client
+        .api('/me/calendar/calendarView')
+        .query({
+          startDateTime: new DateObject().$.startOf('year').toISOString(),
+          endDateTime: new DateObject().$.endOf('year').toISOString()
+        })
+        .select(['id', 'subject', 'start', 'end', 'webLink', 'categories'])
+        .filter(`categories/any(a:a+eq+\'${category}\')`)
+        .top(999)
+        .get()
+      return value.map(
+        (event: any) =>
+          new EventObject(
+            event.id,
+            event.subject,
+            '',
+            true,
+            event.start,
+            event.end,
+            event.webLink,
+            event.categories
+          )
+      )
+    } catch (error) {
+      throw new Error(`MSGraphService.getVacation: ${error.message}`)
     }
   }
 
@@ -205,9 +242,10 @@ class MSGraphService {
     endDateTimeIso: string
   ): Promise<EventObject[]> {
     try {
-      const cacheOptions = {
+      const cacheOptions: CacheOptions = {
         key: ['events', startDateTimeIso, endDateTimeIso],
-        scope: CacheScope.USER
+        scope: CacheScope.USER,
+        expiry: 20
       }
       const events = await this._cache.usingCache(async () => {
         const query = {
@@ -237,21 +275,28 @@ class MSGraphService {
           .get()) as { value: any[] }
         return value.filter((event) => !!event.subject)
       }, cacheOptions)
-      return events
-        .map(
-          (event) =>
-            new EventObject(
-              event.id,
-              event.subject,
-              event.body.content,
-              event.isOrganizer,
-              event.start,
-              event.end,
-              event.webLink,
-              event.categories
-            )
-        )
-        .filter((event: EventObject) => event.duration <= 24)
+      return (
+        events
+          .map(
+            (event) =>
+              new EventObject(
+                event.id,
+                event.subject,
+                event.body.content,
+                event.isOrganizer,
+                event.start,
+                event.end,
+                event.webLink,
+                event.categories
+              )
+          )
+          .filter((event: EventObject) => event.duration <= 24)
+          // Removing events that start before the start of the timesheet period, since they've been picked up by the previous period. See #1009 for details
+          .filter(
+            (event: EventObject) =>
+              event.startDateTime >= new Date(startDateTimeIso)
+          )
+      )
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }

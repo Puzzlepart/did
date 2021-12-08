@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Pages](../modules/pages.md) / ITimesheetContext
+[did-client - v0.10.6](../README.md) / [Pages](../modules/pages.md) / ITimesheetContext
 
 # Interface: ITimesheetContext
 
@@ -28,7 +28,7 @@
 
 Dispatch an action
 
-Defined in: [pages/Timesheet/context.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L20)
+Defined in: [client/pages/Timesheet/context.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L20)
 
 ___
 
@@ -48,7 +48,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L34)
+Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L34)
 
 Inherited from: void
 
@@ -70,7 +70,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [pages/Timesheet/hooks/useSubmitActions.tsx:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L48)
+Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L48)
 
 Inherited from: void
 
@@ -88,9 +88,9 @@ Refetch data
 
 **Returns:** *Promise*<ApolloQueryResult<any\>\>
 
-Defined in: [pages/Timesheet/context.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L25)
+Defined in: [client/pages/Timesheet/context.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L25)
 
-Defined in: [pages/Timesheet/context.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L25)
+Defined in: [client/pages/Timesheet/context.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L25)
 
 ___
 
@@ -100,4 +100,4 @@ ___
 
 State
 
-Defined in: [pages/Timesheet/context.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L15)
+Defined in: [client/pages/Timesheet/context.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L15)

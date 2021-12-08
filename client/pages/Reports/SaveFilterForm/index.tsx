@@ -48,7 +48,8 @@ export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
     <div
       className={styles.root}
       style={props?.style}
-      hidden={!state.isFiltered || !!state.filter?.text}>
+      hidden={!state.isFiltered || !!state.filter?.text}
+    >
       <div hidden={!inputVisible}>
         <TextField
           value={value('text')}

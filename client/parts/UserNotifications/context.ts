@@ -5,6 +5,5 @@ export type UserNotificationsContextType = ReturnType<
   typeof useUserNotifications
 >
 
-export const UserNotificationsContext = createContext<UserNotificationsContextType>(
-  null
-)
+export const UserNotificationsContext =
+  createContext<UserNotificationsContextType>(null)

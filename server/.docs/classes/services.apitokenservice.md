@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [Services](../modules/services.md) / ApiTokenService
+[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / ApiTokenService
 
 # Class: ApiTokenService
 

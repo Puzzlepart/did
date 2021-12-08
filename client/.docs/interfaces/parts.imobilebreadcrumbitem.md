@@ -1,4 +1,4 @@
-[did-client - v0.10.4](../README.md) / [Parts](../modules/parts.md) / IMobileBreadcrumbItem
+[did-client - v0.10.6](../README.md) / [Parts](../modules/parts.md) / IMobileBreadcrumbItem
 
 # Interface: IMobileBreadcrumbItem
 
@@ -22,4 +22,4 @@
 
 • **level**: *number*
 
-Defined in: [parts/MobileBreadcrumb/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/types.tsx#L6)
+Defined in: [client/parts/MobileBreadcrumb/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/types.tsx#L6)

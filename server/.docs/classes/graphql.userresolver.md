@@ -1,4 +1,4 @@
-[did-server - v0.10.4](../README.md) / [GraphQL](../modules/graphql.md) / UserResolver
+[did-server - v0.10.6](../README.md) / [GraphQL](../modules/graphql.md) / UserResolver
 
 # Class: UserResolver
 
@@ -144,13 +144,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*UserFeedbackResult*](graphql.userfeedbackresult.md)\>
 
-Defined in: [graphql/resolvers/user/index.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L172)
+Defined in: [graphql/resolvers/user/index.ts:174](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L174)
 
 ___
 
 ### updateUserConfiguration
 
-▸ **updateUserConfiguration**(`configuration`: *string*, `startPage?`: *string*, `preferredLanguage?`: *string*): *Promise*<BaseResult\>
+▸ **updateUserConfiguration**(`configuration`: *string*, `startPage?`: *string*, `lastActive?`: *string*, `preferredLanguage?`: *string*): *Promise*<BaseResult\>
 
 Update user configuration
 
@@ -160,6 +160,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `configuration` | *string* | Configuration   |
 `startPage?` | *string* | Start page   |
+`lastActive?` | *string* | - |
 `preferredLanguage?` | *string* | Preferred language    |
 
 **Returns:** *Promise*<BaseResult\>

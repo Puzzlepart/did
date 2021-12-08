@@ -14,6 +14,7 @@ export type UseUpdateUserConfigurationReturnType = {
   updateConfiguration?: (config: any) => Promise<void>
   updateStartPage?: (startPage: string) => Promise<void>
   updatePreferredLanguage?: (preferredLanguage: string) => Promise<void>
+  updateLastActive?: () => Promise<void>
 }
 
 /**
@@ -54,6 +55,14 @@ export function useUpdateUserConfiguration(
     })
   }, [])
 
+  const updateLastActive = useCallback(async () => {
+    await updateUserConfiguration({
+      variables: {
+        lastActive: new Date()
+      }
+    })
+  }, [])
+
   const updatePreferredLanguage = useCallback(
     async (preferredLanguage: string) => {
       await updateUserConfiguration({
@@ -76,6 +85,7 @@ export function useUpdateUserConfiguration(
   return {
     updateConfiguration,
     updateStartPage,
+    updateLastActive,
     updatePreferredLanguage
   }
 }

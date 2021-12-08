@@ -28,7 +28,8 @@ export const RolePanel: React.FC<IRolePanelProps> = (props) => {
       headerText={props.headerText}
       isOpen={true}
       isLightDismiss={true}
-      onDismiss={props.onDismiss}>
+      onDismiss={props.onDismiss}
+    >
       <div className={styles.container}>
         <TextField
           className={styles.inputField}

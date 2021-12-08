@@ -23,7 +23,8 @@ export const UserForm: React.FC<IUserFormProps> = (props) => {
     <Panel
       {..._.omit(props, 'user')}
       className={styles.root}
-      isLightDismiss={true}>
+      isLightDismiss={true}
+    >
       {!props.user && (
         <div className={styles.inputContainer}>
           <Autocomplete

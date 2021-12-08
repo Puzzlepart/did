@@ -139,7 +139,7 @@ export class NotificationService {
       this._forecast(templates.forecast, locale)
     ])
     // eslint-disable-next-line prefer-spread
-    return [].concat.apply([], notifications)
+    return notifications.flat()
   }
 }
 

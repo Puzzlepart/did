@@ -24,9 +24,8 @@ export const SET_SCOPE = createAction<TimesheetScope | string>('SET_SCOPE')
  *
  * @category Timesheet Actions
  */
-export const SUBMITTING_PERIOD = createAction<{ forecast: boolean }>(
-  'SUBMITTING_PERIOD'
-)
+export const SUBMITTING_PERIOD =
+  createAction<{ forecast: boolean }>('SUBMITTING_PERIOD')
 
 /**
  * Submittng period action
@@ -70,18 +69,16 @@ export const CHANGE_VIEW = createAction<{ view: TimesheetView }>('CHANGE_VIEW')
  *
  * @category Timesheet Actions
  */
-export const MANUAL_MATCH = createAction<{ eventId: string; project: Project }>(
-  'MANUAL_MATCH'
-)
+export const MANUAL_MATCH =
+  createAction<{ eventId: string; project: Project }>('MANUAL_MATCH')
 
 /**
  * Clear manual match action
  *
  * @category Timesheet Actions
  */
-export const CLEAR_MANUAL_MATCH = createAction<{ id: string }>(
-  'CLEAR_MANUAL_MATCH'
-)
+export const CLEAR_MANUAL_MATCH =
+  createAction<{ id: string }>('CLEAR_MANUAL_MATCH')
 
 /**
  * Ignore event action

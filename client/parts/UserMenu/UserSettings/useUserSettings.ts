@@ -7,19 +7,21 @@ import { useSettingsConfiguration } from './useSettingsConfiguration'
 export function useUserSettings() {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const {
-    updateConfiguration,
-    updatePreferredLanguage,
-    updateStartPage
-  } = useUpdateUserConfiguration()
+  const { updateConfiguration, updatePreferredLanguage, updateStartPage } =
+    useUpdateUserConfiguration()
 
   /**
    * On update
    *
    * @param key - Key
    * @param value - Value
+   * @param skipReload - Skip reload
    */
-  const onUpdate = async (key: string, value: string | boolean) => {
+  const onUpdate = async (
+    key: string,
+    value: string | number | boolean,
+    skipReload = false
+  ) => {
     switch (key) {
       case 'preferredLanguage':
         await updatePreferredLanguage(value as string)
@@ -31,7 +33,7 @@ export function useUserSettings() {
         await updateConfiguration({ [key]: value })
       }
     }
-    location.reload()
+    if (!skipReload) location.reload()
   }
 
   const settings = useSettingsConfiguration()

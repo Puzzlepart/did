@@ -9,13 +9,16 @@ import { default_query } from './useReportsQueries'
  *
  * Using `useLazyQuery` and `useLayoutEffect` and dispatches
  * `DATA_UPDATED` action on query changes.
- * 
+ *
  * @param param0 - State and dispatch
  * @param fetchPolicy - Fetch policy (defaults to `no-cache`)
  *
  * @category Reports Hooks
  */
-export function useReportsQuery({ state, dispatch }, fetchPolicy: FetchPolicy = 'no-cache') {
+export function useReportsQuery(
+  { state, dispatch },
+  fetchPolicy: FetchPolicy = 'no-cache'
+) {
   const [query, result] = useLazyQuery(state.preset?.query || default_query, {
     fetchPolicy,
     variables: state.preset?.variables || {}
