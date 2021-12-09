@@ -98,7 +98,7 @@ ___
 
 • `Const` **UserMenu**: React.FC
 
-Defined in: [client/parts/UserMenu/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L23)
+Defined in: [client/parts/UserMenu/index.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L25)
 
 ___
 
@@ -121,7 +121,7 @@ is set to `true`.
 
 An icon name is optional and defaults to **Ringer**
 
-Defined in: [client/parts/UserNotifications/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L24)
+Defined in: [client/parts/UserNotifications/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L22)
 
 ___
 

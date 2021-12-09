@@ -48,4 +48,3 @@ export const UserNotifications: React.FC<IUserNotificationsProps> = ({
 
 export * from './NotificationsPanel'
 export * from './types'
-
