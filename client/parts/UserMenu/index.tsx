@@ -2,6 +2,8 @@
 import { Callout, Icon, Persona, PersonaSize, useTheme } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useToggle } from 'hooks'
+import { UserNotificationsContext } from 'parts/UserNotifications/context'
+import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
 import React, { useRef } from 'react'
 import { isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
@@ -26,8 +28,9 @@ export const UserMenu: React.FC = () => {
   const { semanticColors, palette } = useTheme()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
+  const userNotificationsContextValue = useUserNotifications()
   return (
-    <>
+    <UserNotificationsContext.Provider value={userNotificationsContextValue}>
       <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
         <Persona
           className={styles.user}
@@ -97,6 +100,6 @@ export const UserMenu: React.FC = () => {
           />
         </FadeIn>
       </Callout>
-    </>
+    </UserNotificationsContext.Provider>
   )
 }

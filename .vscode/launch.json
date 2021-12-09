@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Node v.12.9.0",
+      "name": "Debug Node v.14.18.1",
       "type": "node",
-      "runtimeVersion": "12.19.0",
+      "runtimeVersion": "14.18.1",
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "runtimeArgs": ["-r", "ts-node/register"],

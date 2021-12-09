@@ -4,12 +4,10 @@ import { useToggle } from 'hooks/common/useToggle'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../UserMenu/MenuItem'
-import { UserNotificationsContext } from './context'
 import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
 import { IUserNotificationsProps } from './types'
 import styles from './UserNotifications.module.scss'
-import { useUserNotifications } from './useUserNotifications'
 
 /**
  * User notifications
@@ -26,10 +24,9 @@ export const UserNotifications: React.FC<IUserNotificationsProps> = ({
   iconName = 'Ringer'
 }) => {
   const { t } = useTranslation()
-  const context = useUserNotifications()
   const [isOpen, togglePanel] = useToggle(false)
   return (
-    <UserNotificationsContext.Provider value={context}>
+    <>
       {renderAsMenuItem ? (
         <MenuItem
           onClick={togglePanel}
@@ -45,9 +42,10 @@ export const UserNotifications: React.FC<IUserNotificationsProps> = ({
         </div>
       )}
       <NotificationsPanel isOpen={isOpen} onDismiss={togglePanel} />
-    </UserNotificationsContext.Provider>
+    </>
   )
 }
 
 export * from './NotificationsPanel'
 export * from './types'
+
