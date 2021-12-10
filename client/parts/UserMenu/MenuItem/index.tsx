@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon, useTheme } from '@fluentui/react'
+import { Icon } from '@fluentui/react'
 import React from 'react'
 import styles from './MenuItem.module.scss'
 import { IMenuItemProps } from './types'
@@ -8,7 +8,6 @@ import { IMenuItemProps } from './types'
  * @category UserMenu
  */
 export const MenuItem: React.FC<IMenuItemProps> = (props) => {
-  const { semanticColors } = useTheme()
   const className = [styles.root]
   let onClick = props.onClick
   if (props.href) {
@@ -37,7 +36,7 @@ export const MenuItem: React.FC<IMenuItemProps> = (props) => {
       )}
       {props.text && (
         <span
-          style={{ color: semanticColors.bodyText }}
+          style={{ color: props.color }}
           hidden={props.hideText}
         >
           {props.text}

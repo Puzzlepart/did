@@ -7,4 +7,5 @@ export interface IMenuItemProps extends HTMLAttributes<HTMLDivElement> {
   hideText?: boolean
   href?: string
   iconClassName?: string
+  textColor?: string
 }
