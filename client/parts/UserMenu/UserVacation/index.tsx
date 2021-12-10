@@ -12,13 +12,15 @@ import $vacation from './vacation.gql'
 export const UserVacation: React.FC = () => {
   const { t } = useTranslation()
   const { data } = useQuery($vacation, { fetchPolicy: 'cache-first' })
-  const { semanticColors } = useTheme()
+  const { palette } = useTheme()
   return (
     <MenuItem
       iconProps={{ iconName: 'Vacation' }}
       title={t('common.vacationSummaryTooltip', data?.vacation)}
       text={t('common.vacationSummaryText', data?.vacation)}
-      textColor={semanticColors.bodyText}
+      textStyle={{
+        color: palette.neutralPrimary
+      }}
     />
   )
 }
