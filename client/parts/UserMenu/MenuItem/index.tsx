@@ -35,10 +35,7 @@ export const MenuItem: React.FC<IMenuItemProps> = (props) => {
         />
       )}
       {props.text && (
-        <span
-          style={{ color: props.color }}
-          hidden={props.hideText}
-        >
+        <span style={{ color: props.color }} hidden={props.hideText}>
           {props.text}
         </span>
       )}
