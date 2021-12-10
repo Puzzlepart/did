@@ -67,7 +67,7 @@ ___
 
 • `Const` **Navigation**: React.FC
 
-Defined in: [client/parts/Navigation/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L18)
+Defined in: [client/parts/Navigation/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L20)
 
 ___
 

@@ -2,8 +2,6 @@
 import { Callout, Icon, Persona, PersonaSize, useTheme } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useToggle } from 'hooks'
-import { UserNotificationsContext } from 'parts/UserNotifications/context'
-import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
 import React, { useRef } from 'react'
 import { isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
