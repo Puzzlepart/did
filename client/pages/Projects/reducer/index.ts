@@ -29,9 +29,7 @@ export default ({ url: parameters }: IProjectsReducerParameters) =>
           )
           return _p
         })
-        state.selected = _.find(state.projects, (p) =>
-          JSON.stringify(parameters).toLowerCase().includes(p.tag.toLowerCase())
-        )
+        state.selected = _.find(state.projects, (p) => p.tag?.toLowerCase() === parameters?.key?.toLowerCase())
       }
       state.error = payload.error
     },
