@@ -98,7 +98,7 @@ ___
 
 • `Const` **UserMenu**: React.FC
 
-Defined in: [client/parts/UserMenu/index.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L25)
+Defined in: [client/parts/UserMenu/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L23)
 
 ___
 

@@ -35,7 +35,14 @@ export const MenuItem: React.FC<IMenuItemProps> = (props) => {
           className={props.iconClassName || styles.icon}
         />
       )}
-      {props.text && <span style={{ color: semanticColors.bodyText }} hidden={props.hideText}>{props.text}</span>}
+      {props.text && (
+        <span
+          style={{ color: semanticColors.bodyText }}
+          hidden={props.hideText}
+        >
+          {props.text}
+        </span>
+      )}
       {props.children}
     </div>
   )
