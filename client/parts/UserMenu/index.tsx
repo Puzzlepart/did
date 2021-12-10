@@ -28,9 +28,8 @@ export const UserMenu: React.FC = () => {
   const { semanticColors, palette } = useTheme()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
-  const userNotificationsContextValue = useUserNotifications()
   return (
-    <UserNotificationsContext.Provider value={userNotificationsContextValue}>
+    <>
       <span ref={target} className={styles.root} onClick={() => toggleMenu()}>
         <Persona
           className={styles.user}
@@ -100,6 +99,6 @@ export const UserMenu: React.FC = () => {
           />
         </FadeIn>
       </Callout>
-    </UserNotificationsContext.Provider>
+    </>
   )
 }

@@ -8,15 +8,13 @@ import styles from './NotificationIndicator.module.scss'
  * @category Function Component
  */
 export const NotificationIndicator: React.FC = () => {
-  const context = useContext(UserNotificationsContext)
-  // eslint-disable-next-line no-console
-  console.log(context)
+  const { notifications, count } = useContext(UserNotificationsContext)
   return (
     <div
       className={styles.root}
-      style={{ opacity: _.isEmpty(context.notifications) ? 0 : 1 }}
+      style={{ opacity: _.isEmpty(notifications) ? 0 : 1 }}
     >
-      {context.count}
+      {count}
     </div>
   )
 }
