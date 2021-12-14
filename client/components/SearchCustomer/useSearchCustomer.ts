@@ -15,13 +15,13 @@ export function useSearchCustomer() {
     () =>
       (data?.customers || []).map(
         (customer) =>
-        ({
-          key: customer.key,
-          text: customer.name,
-          searchValue: [customer.key, customer.name].join(' '),
-          data: customer,
-          iconName: customer.icon || 'Page'
-        } as ISuggestionItem<Customer>)
+          ({
+            key: customer.key,
+            text: customer.name,
+            searchValue: [customer.key, customer.name].join(' '),
+            data: customer,
+            iconName: customer.icon || 'Page'
+          } as ISuggestionItem<Customer>)
       ),
     [data]
   )

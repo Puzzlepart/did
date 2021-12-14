@@ -23,7 +23,10 @@ export function useAutocomplete(props: IAutocompleteProps) {
   })
   const ref = useRef<HTMLDivElement>()
 
-  useLayoutEffect(() => dispatch(INIT({ props })), [props.defaultSelectedKey, props.items])
+  useLayoutEffect(
+    () => dispatch(INIT({ props })),
+    [props.defaultSelectedKey, props.items]
+  )
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
 
