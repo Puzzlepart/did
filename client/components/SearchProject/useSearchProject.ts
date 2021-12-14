@@ -12,7 +12,7 @@ import $projects from './projects.gql'
  */
 export function useSearchProject() {
   const { data, loading } = useQuery($projects, {
-    fetchPolicy: 'cache-first'
+    fetchPolicy: 'cache-and-network'
   })
 
   const items: ISuggestionItem<Project>[] = useMemo(
