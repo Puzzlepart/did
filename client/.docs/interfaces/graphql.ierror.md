@@ -1,4 +1,4 @@
-[did-client - v0.10.6](../README.md) / [GraphQL](../modules/graphql.md) / IError
+[did-client - v0.10.7](../README.md) / [GraphQL](../modules/graphql.md) / IError
 
 # Interface: IError
 

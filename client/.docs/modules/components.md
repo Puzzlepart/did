@@ -1,4 +1,4 @@
-[did-client - v0.10.6](../README.md) / Components
+[did-client - v0.10.7](../README.md) / Components
 
 # Module: Components
 
@@ -423,7 +423,7 @@ ___
 
 Search for customers using `<Autocomplete />`
 
-Defined in: [client/components/SearchCustomer/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L16)
+Defined in: [client/components/SearchCustomer/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L13)
 
 ___
 

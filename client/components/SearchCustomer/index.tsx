@@ -1,12 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
 import { ReusableComponent } from 'components/types'
-import React, { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Customer } from 'types'
-import $customers from '../../pages/Customers/customers.gql'
-import { Autocomplete, ISuggestionItem } from '../Autocomplete'
+import React from 'react'
+import { Autocomplete } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
+import { useSearchCustomer } from './useSearchCustomer'
 
 /**
  * Search for customers using `<Autocomplete />`
@@ -16,32 +13,14 @@ import { ISearchCustomerProps } from './types'
 export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (
   props
 ) => {
-  const { t } = useTranslation()
-  const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
-    fetchPolicy: 'cache-first'
-  })
-
-  const searchData: ISuggestionItem<Customer>[] = useMemo(
-    () =>
-      (data?.customers || []).map(
-        (customer) =>
-          ({
-            key: customer.key,
-            text: customer.name,
-            searchValue: [customer.key, customer.name].join(' '),
-            data: customer,
-            iconName: customer.icon || 'Page'
-          } as ISuggestionItem<Customer>)
-      ),
-    [data]
-  )
+  const [items, disabled] = useSearchCustomer()
 
   return (
     <div hidden={props.hidden}>
       <Autocomplete
         {...props}
-        disabled={loading}
-        items={searchData}
+        disabled={disabled}
+        items={items}
         itemIcons={{
           style: {
             marginTop: 8,
@@ -49,7 +28,7 @@ export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (
           }
         }}
         width={550}
-        placeholder={t('common.searchPlaceholder')}
+        placeholder={props.placeholder}
         onClear={() => props.onSelected(null)}
         onSelected={(item) => props.onSelected(item)}
       />
