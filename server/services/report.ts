@@ -57,7 +57,7 @@ export class ReportService {
   ) {}
 
   /**
-   * Generate preset query
+   * Generate preset query.
    *
    * @param preset - Query preset
    */
