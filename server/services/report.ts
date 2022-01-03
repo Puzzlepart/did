@@ -66,10 +66,8 @@ export class ReportService {
     return (
       {
         LAST_MONTH: {
-          month:
-            d.toObject().month === 1 ? 12 : d.add('-1m').toObject().month - 1,
-          year:
-            d.toObject().month === 1 ? d.toObject().year - 1 : d.toObject().year
+          month: d.toObject().month === 1 ? 12 : d.add('-1m').toObject().month - 1,
+          year: d.toObject().month === 1 ? d.toObject().year - 1 : d.toObject().year
         },
         CURRENT_MONTH: {
           month: d.toObject().month,
@@ -81,8 +79,7 @@ export class ReportService {
         CURRENT_YEAR: {
           year: d.toObject().year
         }
-      }[preset] || {}
-    )
+      }[preset] || {})
   }
 
   /**
