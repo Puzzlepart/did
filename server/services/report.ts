@@ -66,8 +66,10 @@ export class ReportService {
     return (
       {
         LAST_MONTH: {
-          month: d.add('-1m').toObject().month - 1,
-          year: d.add('-1m').toObject().year
+          month:
+            d.toObject().month === 1 ? 12 : d.add('-1m').toObject().month - 1,
+          year:
+            d.toObject().month === 1 ? d.toObject().year - 1 : d.toObject().year
         },
         CURRENT_MONTH: {
           month: d.toObject().month,
