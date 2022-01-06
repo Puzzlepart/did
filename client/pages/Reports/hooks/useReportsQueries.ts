@@ -12,6 +12,7 @@ import report_current_year from './queries/report-current-year.gql'
 import report_forecast from './queries/report-forecast.gql'
 import report_last_month from './queries/report-last-month.gql'
 import report_summary from './queries/report-summary.gql'
+import report_last_year from './queries/report-last-year.gql'
 
 /**
  * Returns query properties for preset
@@ -74,6 +75,36 @@ export function currentMonthQuery(
     }
   } as IReportsQuery
 }
+
+/**
+ * Returns query properties for preset
+ * **LAST_YEAR**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
+ *
+ * @param t - Translate
+ * @param query - GraphQL query
+ *
+ * @category Reports
+ */
+export function lastYearQuery(
+  t: TFunction,
+  query = report_last_year
+): IReportsQuery {
+  const object = new DateObject().toObject('year')
+  const year = object.year - 1
+  return {
+    itemKey: 'last_year',
+    headerText: t('common.exportTypeLastYear', {
+      year: isBrowser ? `(${year})` : ''
+    }),
+    itemIcon: 'Previous',
+    query,
+    exportFileName: `TimeEntries-${year}-{0}.xlsx`
+  } as IReportsQuery
+}
+
 
 /**
  * Returns query properties for preset
@@ -177,6 +208,7 @@ export function useReportsQueries(): IReportsQuery[] {
         lastMonthQuery,
         currentMonthQuery,
         currentYearQuery,
+        lastYearQuery,
         forecastQuery,
         summaryQuery
       ].map((queryFunction) => {
