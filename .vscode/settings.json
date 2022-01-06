@@ -18,8 +18,6 @@
     "schema.gql": true,
     "*.dmm": true,
     ".husky": true,
-    ".gitattributes": true,
-    ".nvmrc": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
@@ -28,6 +26,6 @@
   "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB",
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
-"editor.folding": true,
-"editor.tabSize": 2
+  "editor.folding": true,
+  "editor.tabSize": 2
 }
