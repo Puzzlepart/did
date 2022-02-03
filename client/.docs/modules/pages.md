@@ -496,7 +496,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L121)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:120](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L120)
 
 ___
 
@@ -519,7 +519,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:152](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L152)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:151](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L151)
 
 ___
 
@@ -584,7 +584,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:176](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L176)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:175](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L175)
 
 ___
 
@@ -596,7 +596,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:203](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L203)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:202](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L202)
 
 ___
 
