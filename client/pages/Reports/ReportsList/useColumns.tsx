@@ -41,6 +41,13 @@ export function useColumns(): IListColumn[] {
       onRender: ({ customer }) => <CustomerLink customer={customer} />
     } as IListColumn,
     {
+      key: 'projecttag',
+      fieldName: 'project.tag',
+      name: t('projects.keyFieldLabel'),
+      minWidth: 60,
+      maxWidth: 100
+    } as IListColumn,
+    {
       key: 'startEndDateTime',
       fieldName: 'startEndDateTime',
       name: t('common.timeLabel'),
