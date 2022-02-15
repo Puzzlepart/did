@@ -1,5 +1,6 @@
 import { IColumn } from '@fluentui/react'
 import $date from 'DateUtils'
+import { TFunction } from 'react-i18next'
 import { EventObject, Project } from 'types'
 import _ from 'underscore'
 
@@ -8,15 +9,16 @@ import _ from 'underscore'
  *
  * @param events - Events
  * @param columns - Columns
+ * @param t - Translate function
  */
-export function generateRows(events: EventObject[], columns: IColumn[]) {
-  const projects = _.unique(
-    events.map((event_) => event_.project),
-    (p: Project) => p.tag
-  )
+export function generateRows(events: EventObject[], columns: IColumn[], t: TFunction) {
+  const projects = [..._.unique(
+    _.filter(events.map((event_) => event_.project), p => !!p),
+    (p: Project) => p?.tag
+  ), { name: t('common.unconfirmedHours'), customer: { name: '' }, tag: null }]
   return projects.map((project) => {
     const projectEvents = events.filter(
-      (event) => event.project.tag === project.tag
+      (event) => (event.project?.tag === project.tag) || (!project.tag && !event.project)
     )
     return [...columns].splice(1, columns.length - 2).reduce(
       (object, col) => {

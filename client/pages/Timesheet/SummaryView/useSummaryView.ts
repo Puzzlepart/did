@@ -19,9 +19,9 @@ export function useSummaryView(): IListProps {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   const columns = createColumns(state.scope)
-  const events = state.selectedPeriod?.getEvents(false) || []
+  const events = state.selectedPeriod?.getEvents(true) || []
   const items = [
-    ...generateRows(events, columns),
+    ...generateRows(events, columns, t),
     generateTotalRow(events, columns, t('common.sumLabel'))
   ]
   return {
