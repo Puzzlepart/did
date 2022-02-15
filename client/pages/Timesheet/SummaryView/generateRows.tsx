@@ -11,14 +11,25 @@ import _ from 'underscore'
  * @param columns - Columns
  * @param t - Translate function
  */
-export function generateRows(events: EventObject[], columns: IColumn[], t: TFunction) {
-  const projects = [..._.unique(
-    _.filter(events.map((event_) => event_.project), p => !!p),
-    (p: Project) => p?.tag
-  ), { name: t('common.unconfirmedHours'), customer: { name: '' }, tag: null }]
+export function generateRows(
+  events: EventObject[],
+  columns: IColumn[],
+  t: TFunction
+) {
+  const projects = [
+    ..._.unique(
+      _.filter(
+        events.map((event_) => event_.project),
+        (p) => !!p
+      ),
+      (p: Project) => p?.tag
+    ),
+    { name: t('common.unconfirmedHours'), customer: { name: '' }, tag: null }
+  ]
   return projects.map((project) => {
     const projectEvents = events.filter(
-      (event) => (event.project?.tag === project.tag) || (!project.tag && !event.project)
+      (event) =>
+        event.project?.tag === project.tag || (!project.tag && !event.project)
     )
     return [...columns].splice(1, columns.length - 2).reduce(
       (object, col) => {

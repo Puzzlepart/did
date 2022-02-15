@@ -9,7 +9,7 @@ import { IChartConfig } from './types'
 
 /**
  * Get data for chart
- * 
+ *
  * @param events - Events
  * @param chart - Chart
  * @param width - Client width
@@ -32,7 +32,7 @@ function getDataForChart(
     return _items
   }, [])
   const unconfirmedHours: number = events
-    .filter(entry => !get(entry, chart.key))
+    .filter((entry) => !get(entry, chart.key))
     .reduce((sum, entry) => sum + get(entry, chart.valueKey), 0)
   items.push({
     id: t('common.unconfirmedHours'),
@@ -52,7 +52,7 @@ type ChartData<T> = { [key: string]: [string, T[]] }
 
 /**
  * Hook for chart data
- * 
+ *
  * @param charts - Charts
  * @param container - HTML container
  */
