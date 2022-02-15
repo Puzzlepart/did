@@ -1,5 +1,7 @@
+/* eslint-disable unicorn/explicit-length-check */
 import get from 'get-value'
 import { useMemo } from 'react'
+import { TFunction, useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
@@ -9,7 +11,8 @@ import { IChartConfig } from './types'
 function getDataForChart(
   events: EventObject[] = [],
   chart: IChartConfig,
-  width: number
+  width: number,
+  t: TFunction
 ) {
   if (!width) return []
   const items = events.reduce((_items, entry) => {
@@ -21,7 +24,15 @@ function getDataForChart(
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
-  // eslint-disable-next-line unicorn/explicit-length-check
+  const unconfirmedHours = events
+    .filter(entry => !get(entry, chart.key))
+    .reduce((sum, entry) => sum + get(entry, chart.valueKey), 0)
+  items.push({
+    id: t('common.unconfirmedHours'),
+    data: { name: t('common.unconfirmedHours') },
+    value: unconfirmedHours,
+    chart
+  })
   const truncateLength = width / (items.length || 1) / 6
   return items.map((index) => ({
     ...index,
@@ -39,20 +50,22 @@ export function useChartData<T = any>(
   charts: IChartConfig[],
   container: HTMLDivElement
 ): ChartData<T> {
+  const { t } = useTranslation()
   const { state } = useTimesheetContext()
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {
         const d = getDataForChart(
-          state.selectedPeriod?.getEvents(),
+          state.selectedPeriod?.getEvents(true),
           chart,
-          container?.clientWidth
+          container?.clientWidth,
+          t
         )
         return {
           ..._data,
           [chart.key]: [`${chart.key}_${d.length}`, d]
         }
       }, {}),
-    [charts, container?.clientWidth, state.selectedPeriod]
+    [charts, container?.clientWidth, state.selectedPeriod, t]
   )
 }
