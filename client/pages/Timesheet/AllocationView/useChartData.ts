@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/explicit-length-check */
 import get from 'get-value'
 import { useMemo } from 'react'
 import { TFunction, useTranslation } from 'react-i18next'
@@ -8,6 +7,14 @@ import { EventObject } from '../../../../server/graphql/resolvers/types'
 import { useTimesheetContext } from '../context'
 import { IChartConfig } from './types'
 
+/**
+ * Get data for chart
+ * 
+ * @param events - Events
+ * @param chart - Chart
+ * @param width - Client width
+ * @param t - Translate function
+ */
 function getDataForChart(
   events: EventObject[] = [],
   chart: IChartConfig,
@@ -24,7 +31,7 @@ function getDataForChart(
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
-  const unconfirmedHours = events
+  const unconfirmedHours: number = events
     .filter(entry => !get(entry, chart.key))
     .reduce((sum, entry) => sum + get(entry, chart.valueKey), 0)
   items.push({
@@ -33,7 +40,7 @@ function getDataForChart(
     value: unconfirmedHours,
     chart
   })
-  const truncateLength = width / (items.length || 1) / 6
+  const truncateLength = width / (items.length ?? 1) / 6
   return items.map((index) => ({
     ...index,
     label: s.prune(index.data[chart.textKey], truncateLength),
@@ -45,6 +52,9 @@ type ChartData<T> = { [key: string]: [string, T[]] }
 
 /**
  * Hook for chart data
+ * 
+ * @param charts - Charts
+ * @param container - HTML container
  */
 export function useChartData<T = any>(
   charts: IChartConfig[],
