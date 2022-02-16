@@ -165,7 +165,8 @@
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
-    "vacation": "Ferie og fravær"
+    "vacation": "Ferie og fravær",
+    "roleDeletedMessage": "Rollen {{name}} ble slettet."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
