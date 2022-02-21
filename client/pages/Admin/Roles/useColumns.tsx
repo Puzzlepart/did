@@ -46,9 +46,7 @@ export function useColumns({ setPanel, onDelete }) {
             })
           }}
         />
-        <DeleteLink
-          hidden={role.readOnly}
-          onClick={() => onDelete(role)} />
+        <DeleteLink hidden={role.readOnly} onClick={() => onDelete(role)} />
       </div>
     ))
   ]

@@ -389,7 +389,7 @@ ___
 
 • `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
 
-Defined in: [client/pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L14)
+Defined in: [client/pages/Admin/Roles/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L12)
 
 ___
 
