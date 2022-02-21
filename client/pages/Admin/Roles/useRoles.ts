@@ -1,14 +1,14 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
+import { useToast } from 'components/Toast'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import $deleteRole from './deleteRole.gql'
 import { IRolePanelProps } from './RolePanel/types'
 import $roles from './roles.gql'
-import $users from './users.gql'
 import { useColumns } from './useColumns'
-import { useToast } from 'components/Toast'
-import { useTranslation } from 'react-i18next'
+import $users from './users.gql'
 
 /**
  * Component logic hook for `<Roles />`

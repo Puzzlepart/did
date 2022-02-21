@@ -11,15 +11,8 @@ import { useRoles } from './useRoles'
  */
 export const Roles: TabComponent = () => {
   const { t } = useTranslation()
-  const {
-    loading,
-    roles,
-    refetch,
-    columns,
-    panel,
-    setPanel,
-    toast
-  } = useRoles()
+  const { loading, roles, refetch, columns, panel, setPanel, toast } =
+    useRoles()
   return (
     <div className={styles.root}>
       <Toast {...toast} />
