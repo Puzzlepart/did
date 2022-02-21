@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
-import { EditLink } from 'components'
+import { DeleteLink, EditLink } from 'components'
 import { PermissionList } from 'components/PermissionList'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -11,10 +11,8 @@ import styles from './Roles.module.scss'
 
 /**
  * Columns hook for Roles
- *
- * @category Roles
  */
-export function useColumns({ setPanel }) {
+export function useColumns({ setPanel, onDelete }) {
   const { t } = useTranslation()
   return [
     col('name', '', { maxWidth: 150 }, (role: Role) => {
@@ -36,16 +34,22 @@ export function useColumns({ setPanel }) {
       { minWidth: 200, isMultiline: true },
       (role: Role) => <PermissionList permissionIds={role.permissions} />
     ),
-    col('edit', null, { maxWidth: 100 }, (role: Role) => (
-      <EditLink
-        hidden={role.readOnly}
-        onClick={() => {
-          setPanel({
-            headerText: t('admin.editRole'),
-            model: role
-          })
-        }}
-      />
+    col(null, null, { minWidth: 180 }, (role: Role) => (
+      <div style={{ display: 'flex' }}>
+        <EditLink
+          style={{ marginRight: 12 }}
+          hidden={role.readOnly}
+          onClick={() => {
+            setPanel({
+              headerText: t('admin.editRole'),
+              model: role
+            })
+          }}
+        />
+        <DeleteLink
+          hidden={role.readOnly}
+          onClick={() => onDelete(role)} />
+      </div>
     ))
   ]
 }
