@@ -1,23 +1,18 @@
-import { useMutation, useQuery } from '@apollo/client'
+/* eslint-disable tsdoc/syntax */
+import { useMutation } from '@apollo/client'
 import { usePermissions } from 'hooks'
 import { useEffect, useState } from 'react'
 import { RoleInput } from 'types'
 import _ from 'underscore'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
-import $deleteRole from './deleteRole.gql'
-import $users from './users.gql'
 
+/**
+ * Component logic hook for `<RolePanel />`
+ *
+ * @category Roles
+ */
 export function useRolePanel({ props }) {
-  const { data } = useQuery($users, {
-    variables: {
-      query: {
-        role: props.model?.name
-      }
-    },
-    fetchPolicy: 'cache-and-network'
-  })
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
-  const [deleteRole] = useMutation($deleteRole)
   const [model, setModel] = useState<RoleInput>({})
   const [permissions] = usePermissions()
   const saveDisabled =
@@ -56,25 +51,11 @@ export function useRolePanel({ props }) {
     props.onSave()
   }
 
-  /**
-   * On delete role
-   */
-  async function onDelete() {
-    await deleteRole({
-      variables: {
-        name: model.name
-      }
-    })
-    props.onSave()
-  }
-
   return {
-    data,
     permissions,
     model,
     setModel,
     togglePermission,
-    onDelete,
     onSave,
     saveDisabled
   }

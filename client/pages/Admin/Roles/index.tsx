@@ -1,27 +1,31 @@
 /* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
-import { List, TabComponent } from 'components'
-import React, { useState } from 'react'
+import { List, TabComponent, Toast } from 'components'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { IRolePanelProps, RolePanel } from './RolePanel'
-import $roles from './roles.gql'
+import { RolePanel } from './RolePanel'
 import styles from './Roles.module.scss'
-import { useColumns } from './useColumns'
+import { useRoles } from './useRoles'
 
 /**
  * @category Tab Component
  */
 export const Roles: TabComponent = () => {
   const { t } = useTranslation()
-  const { data, loading, refetch } = useQuery($roles)
-  const [panel, setPanel] = useState<IRolePanelProps>(null)
-  const columns = useColumns({ setPanel })
-
+  const {
+    loading,
+    roles,
+    refetch,
+    columns,
+    panel,
+    setPanel,
+    toast
+  } = useRoles()
   return (
     <div className={styles.root}>
+      <Toast {...toast} />
       <List
         enableShimmer={loading}
-        items={data?.roles || []}
+        items={roles}
         columns={columns}
         commandBar={{
           items: [

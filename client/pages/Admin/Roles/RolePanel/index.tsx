@@ -1,7 +1,6 @@
-import { DefaultButton, Panel, PrimaryButton, TextField } from '@fluentui/react'
-import { UserMessage } from 'components'
+import { Panel, PrimaryButton, TextField } from '@fluentui/react'
 import { IconPicker } from 'components/IconPicker'
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { PermissionCheckbox } from './PermissionCheckbox'
@@ -12,11 +11,9 @@ import { useRolePanel } from './useRolePanel'
 export const RolePanel: React.FC<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
   const {
-    data,
     permissions,
     model,
     setModel,
-    onDelete,
     onSave,
     saveDisabled,
     togglePermission
@@ -59,24 +56,6 @@ export const RolePanel: React.FC<IRolePanelProps> = (props) => {
           ))}
         </div>
         <div className={styles.actions}>
-          {props.model && (
-            <Fragment>
-              {_.isEmpty(data?.users) ? (
-                <DefaultButton
-                  className={styles.deleteBtn}
-                  text={t('common.delete')}
-                  iconProps={{ iconName: 'Delete' }}
-                  onClick={onDelete}
-                />
-              ) : (
-                <UserMessage
-                  text={t('admin.roleInUseMessage', {
-                    count: data?.users?.length
-                  })}
-                />
-              )}
-            </Fragment>
-          )}
           <PrimaryButton
             className={styles.saveBtn}
             text={t('common.save')}

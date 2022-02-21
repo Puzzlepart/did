@@ -7,7 +7,7 @@ import { LabelObject } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 
 /**
- * Returns the columns for the Label list
+ * Columns hook for Labels
  */
 export function useColumns({ onEdit, onDelete }) {
   const { t } = useTranslation()
