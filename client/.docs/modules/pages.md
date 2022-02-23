@@ -1,4 +1,4 @@
-[did-client - v0.10.6](../README.md) / Pages
+[did-client - v0.10.7](../README.md) / Pages
 
 # Module: Pages
 
@@ -111,6 +111,7 @@ All are built using React Function components and Hooks.
 - [currentYearQuery](pages.md#currentyearquery)
 - [forecastQuery](pages.md#forecastquery)
 - [lastMonthQuery](pages.md#lastmonthquery)
+- [lastYearQuery](pages.md#lastyearquery)
 - [summaryQuery](pages.md#summaryquery)
 - [useQueries](pages.md#usequeries)
 
@@ -388,7 +389,7 @@ ___
 
 • `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
 
-Defined in: [client/pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L14)
+Defined in: [client/pages/Admin/Roles/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L12)
 
 ___
 
@@ -472,7 +473,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:59](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L59)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:60](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L60)
 
 ___
 
@@ -495,7 +496,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:90](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L90)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:120](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L120)
 
 ___
 
@@ -518,7 +519,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L121)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:151](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L151)
 
 ___
 
@@ -541,7 +542,30 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L28)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L29)
+
+___
+
+### lastYearQuery
+
+▸ **lastYearQuery**(`t`: TFunction, `query?`: *any*): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
+
+Returns query properties for preset
+**LAST_YEAR**
+
+**`remarks`** Made as generic so it can also be used by
+`<UserReports />` which are using `IChoiceGroupOption`
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate   |
+`query` | *any* | GraphQL query    |
+
+**Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
+
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L91)
 
 ___
 
@@ -560,7 +584,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:145](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L145)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:175](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L175)
 
 ___
 
@@ -572,7 +596,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L172)
+Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:202](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L202)
 
 ___
 

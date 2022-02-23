@@ -1,4 +1,4 @@
-[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / ForecastedPeriodsService
+[did-server - v0.10.7](../README.md) / [Services](../modules/services.md) / ForecastedPeriodsService
 
 # Class: ForecastedPeriodsService
 

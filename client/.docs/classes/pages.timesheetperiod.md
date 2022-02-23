@@ -1,4 +1,4 @@
-[did-client - v0.10.6](../README.md) / [Pages](../modules/pages.md) / TimesheetPeriod
+[did-client - v0.10.7](../README.md) / [Pages](../modules/pages.md) / TimesheetPeriod
 
 # Class: TimesheetPeriod
 

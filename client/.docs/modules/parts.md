@@ -1,4 +1,4 @@
-[did-client - v0.10.6](../README.md) / Parts
+[did-client - v0.10.7](../README.md) / Parts
 
 # Module: Parts
 
@@ -67,7 +67,7 @@ ___
 
 • `Const` **Navigation**: React.FC
 
-Defined in: [client/parts/Navigation/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L18)
+Defined in: [client/parts/Navigation/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L20)
 
 ___
 
@@ -121,7 +121,7 @@ is set to `true`.
 
 An icon name is optional and defaults to **Ringer**
 
-Defined in: [client/parts/UserNotifications/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L24)
+Defined in: [client/parts/UserNotifications/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L22)
 
 ___
 

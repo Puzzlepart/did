@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/numeric-separators-style */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()

@@ -14,7 +14,10 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
   return (
     <FormControl {...props} submitProps={submit}>
       <TextControl
-        {...register<TextControlOptions>('key', { casing: 'upper' })}
+        {...register<TextControlOptions>('key', {
+          casing: 'upper',
+          replace: [new RegExp('[^a-zA-Z0-9]'), '']
+        })}
         disabled={!!props.edit}
         label={t('customers.keyFieldLabel')}
         description={t('customers.keyFieldDescription', __package.config.app)}

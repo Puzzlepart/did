@@ -1,6 +1,6 @@
-did-shared - v0.10.6
+did-shared - v0.10.7
 
-# did-shared - v0.10.6
+# did-shared - v0.10.7
 
 ## Table of contents
 

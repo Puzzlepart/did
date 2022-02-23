@@ -1,4 +1,4 @@
-[did-server - v0.10.6](../README.md) / [Services](../modules/services.md) / RoleService
+[did-server - v0.10.7](../README.md) / [Services](../modules/services.md) / RoleService
 
 # Class: RoleService
 
