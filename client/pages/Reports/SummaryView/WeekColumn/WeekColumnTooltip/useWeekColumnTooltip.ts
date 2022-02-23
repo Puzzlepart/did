@@ -8,7 +8,6 @@ import { IWeekColumnTooltipProps } from './types'
  * @ignore
  */
 export function useWeekColumnTooltip(props: IWeekColumnTooltipProps) {
-  const { t } = useTranslation()
   const { week, year } = _.first(props.periods)
   const customerTotals = Object.keys(props.hours.project)
     .map((key) => {
@@ -24,7 +23,6 @@ export function useWeekColumnTooltip(props: IWeekColumnTooltipProps) {
     week,
     year,
     month: new DateObject().fromObject({ week, year }).format('MMM'),
-    customerTotals,
-    t
+    customerTotals
   }
 }
