@@ -2,12 +2,13 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { LabelObject } from 'types'
 import $deleteLabel from './deleteLabel.gql'
 import { ILabelFormProps } from './LabelForm'
 import $labels from './labels.gql'
 import { useColumns } from './useColumns'
+import { useTranslation } from 'react-i18next'
 
 /**
  * Component logic hook for `<Labels />`
@@ -23,6 +24,7 @@ export function useLabels() {
   const [form, setForm] = useState<ILabelFormProps>({
     isOpen: false
   })
+  const [confirmDeleteDialog, getConfirmDeleteResponse] = useConfirmationDialog()
 
   const onDismiss = () => {
     setForm({ isOpen: false })
@@ -33,8 +35,19 @@ export function useLabels() {
   const onEdit = (label: LabelObject) => {
     setForm({ isOpen: true, edit: label })
   }
-  const onDelete = (label: LabelObject) =>
-    deleteLabel({ variables: { name: label.name } }).then(query.refetch)
+  const onDelete = (label: LabelObject) => {
+    const response = getConfirmDeleteResponse({
+      title: t('admin.confirmDeleteLabelTitle'),
+      subText: t('admin.confirmDeleteLabelSubText', label),
+      responses: [[t('common.yes'), true, true], [t('common.no'), false]]
+    })
+    // eslint-disable-next-line no-console
+    console.log(response)
+    
+    if(response) {
+     //deleteLabel({ variables: { name: label.name } }).then(query.refetch)
+    }
+  }
 
   useEffect(() => {
     query.refetch()
@@ -50,6 +63,6 @@ export function useLabels() {
     },
     setForm,
     query,
-    t
+    confirmDeleteDialog
   }
 }
