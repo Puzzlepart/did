@@ -1,8 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { Spinner } from '@fluentui/react'
 import { List, TabComponent } from 'components'
+import { usePermissions } from 'hooks/user/usePermissions'
 import React from 'react'
 import _ from 'underscore'
+import { PermissionScope } from '../../../../shared/config/security/permissions'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
 import { UserForm } from './UserForm'
@@ -28,6 +30,7 @@ export const Users: TabComponent = () => {
     onAddUsers,
     t
   } = useUsers()
+  const [, hasPermission] = usePermissions()
 
   return (
     <UsersContext.Provider value={context}>
@@ -41,14 +44,14 @@ export const Users: TabComponent = () => {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
               iconProps: { iconName: 'AddFriend' },
-              disabled: _.isEmpty(context.activeDirectoryUsers),
+              disabled: _.isEmpty(context.activeDirectoryUsers) || !hasPermission(PermissionScope.LIST_USERS),
               onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
-              disabled: _.isEmpty(context.activeDirectoryUsers),
+              disabled: _.isEmpty(context.activeDirectoryUsers) || !hasPermission(PermissionScope.LIST_USERS),
               onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {

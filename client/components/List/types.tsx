@@ -52,6 +52,11 @@ export interface IListColumn<T = IListColumnData> extends IColumn {
    * Data for the column - `IListColumnData`
    */
   data?: T
+
+  /**
+   * The column should be hidden
+   */
+  hidden?: boolean
 }
 
 /**
