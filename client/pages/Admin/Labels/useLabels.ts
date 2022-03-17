@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { LabelObject } from 'types'
 import $deleteLabel from './deleteLabel.gql'
@@ -26,28 +26,28 @@ export function useLabels() {
   })
   const [confirmDeleteDialog, getConfirmDeleteResponse] = useConfirmationDialog()
 
-  const onDismiss = () => {
+  const onDismiss = useCallback(() => {
     setForm({ isOpen: false })
-  }
-  const onSave = () => {
+  }, [])
+
+  const onSave = useCallback(() => {
     query.refetch().then(() => setForm({ isOpen: false }))
-  }
-  const onEdit = (label: LabelObject) => {
+  }, [query])
+
+  const onEdit = useCallback((label: LabelObject) => {
     setForm({ isOpen: true, edit: label })
-  }
-  const onDelete = (label: LabelObject) => {
-    const response = getConfirmDeleteResponse({
+  }, [])
+
+  const onDelete = useCallback(async (label: LabelObject) => {
+    const response = await getConfirmDeleteResponse({
       title: t('admin.confirmDeleteLabelTitle'),
       subText: t('admin.confirmDeleteLabelSubText', label),
       responses: [[t('common.yes'), true, true], [t('common.no'), false]]
     })
-    // eslint-disable-next-line no-console
-    console.log(response)
-    
-    if(response) {
-     //deleteLabel({ variables: { name: label.name } }).then(query.refetch)
+    if (response) {
+      deleteLabel({ variables: { name: label.name } }).then(query.refetch)
     }
-  }
+  }, [deleteLabel])
 
   useEffect(() => {
     query.refetch()
