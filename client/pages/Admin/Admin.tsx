@@ -32,7 +32,7 @@ export const Admin = () => {
       defaultSelectedKey={view}
     >
       <Users
-        headerText={t('admin.users')}
+        headerText={t('admin.users.headerText')}
         itemIcon='FabricUserFolder'
         permission={PermissionScope.MANAGE_USERS}
       />

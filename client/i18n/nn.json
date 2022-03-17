@@ -104,7 +104,6 @@
     "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne."
   },
   "admin": {
-    "users": "Brukarar",
     "summary": "Samandrag",
     "apiTokens": {
       "permissionsTitle": "Løyve",
@@ -178,6 +177,9 @@
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser"
+    },
+    "users": {
+      "headerText": "Brukarar"
     }
   },
   "reports": {

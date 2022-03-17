@@ -104,7 +104,6 @@
     "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen."
   },
   "admin": {
-    "users": "Brukere",
     "summary": "Sammendrag",
     "apiTokens": {
       "permissionsTitle": "Tillatelser",
@@ -176,6 +175,9 @@
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser"
+    },
+    "users": {
+      "headerText": "Brukere"
     }
   },
   "reports": {

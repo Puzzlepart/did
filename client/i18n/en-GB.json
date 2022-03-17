@@ -105,7 +105,6 @@
     "createError": "We can't create the customer at the moment. Please try again later."
   },
   "admin": {
-    "users": "Users",
     "summary": "Summary",
     "apiTokens": {
       "permissionsTitle": "Permissions",
@@ -177,6 +176,9 @@
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions"
+    },
+    "users": {
+      "headerText": "Users"
     }
   },
   "reports": {
