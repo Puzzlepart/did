@@ -57,6 +57,7 @@
     "matchEventPanelSearchPlaceholder": "Søk i prosjekter..."
   },
   "projects": {
+    "filterLabels": "Filtrer merkelapper...",
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
     "searchPlaceholder": "Søk i prosjekter...",
     "categoryOutlookText": "Dette prosjektet har en Outlook-kategori.",
@@ -117,7 +118,6 @@
       "confirmDeleteTitle": "Slett API-nøkkel",
       "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?"
     },
-    "filterLabels": "Filtrer merkelapper...",
     "addNewUser": "Legg til ny",
     "defaultLabelTitle": "ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",

@@ -57,6 +57,7 @@
     "matchEventPanelSearchPlaceholder": "Search projects..."
   },
   "projects": {
+    "filterLabels": "Filter labels...",
     "inactiveText": "This project has been marked as inactive.",
     "searchPlaceholder": "Search in projects...",
     "categoryOutlookText": "This project has a category in your Outlook.",
@@ -118,7 +119,6 @@
       "confirmDeleteTitle": "Delete API-key",
       "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
     },
-    "filterLabels": "Filter labels...",
     "addNewUser": "Add new",
     "defaultLabelTitle": "my new label",
     "addNewLabel": "Add new label",
