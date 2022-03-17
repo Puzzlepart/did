@@ -166,7 +166,9 @@
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
     "vacation": "Ferie og fravær",
-    "roleDeletedMessage": "Rollen {{name}} ble slettet."
+    "roleDeletedMessage": "Rollen {{name}} ble slettet.",
+    "confirmDeleteLabelTitle": "Slett merkelapp",
+    "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -352,7 +354,9 @@
     "vacationTotalDaysLabel": "Antal feriedager",
     "vacationTotalDaysDescription": "Totalt antall feriedager for året. \nInkluderer overførte dager fra i fjor.",
     "vacationSummaryTooltip": "Ferieanslaget gjelder for hele året, og er basert på at du har kategorisert {{usedHours}} timer med {{category}}\n(hver feriedag er 8 timer)",
-    "unconfirmedHours": " Ubekreftede timer"
+    "unconfirmedHours": " Ubekreftede timer",
+    "yes": "Ja",
+    "no": "Nei"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
