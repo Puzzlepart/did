@@ -176,9 +176,6 @@
     },
     "users": {
       "headerText": "Users"
-    },
-    "reports": {
-      "summaryHeaderText": "Summary"
     }
   },
   "reports": {
@@ -195,7 +192,8 @@
     "cancelSaveFilterText": "Cancel",
     "deleteFilterText": "Delete this filter",
     "filterPanelHeaderText": "Filters",
-    "filterDescriptionPlaceholder": "Note"
+    "filterDescriptionPlaceholder": "Note",
+    "summaryHeaderText": "Summary"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

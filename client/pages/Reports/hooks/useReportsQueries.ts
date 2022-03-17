@@ -182,7 +182,7 @@ export function summaryQuery(t: TFunction): IReportsQuery {
   }
   return {
     itemKey: 'summary',
-    headerText: t('admin.reports.summaryHeaderText'),
+    headerText: t('reports.summaryHeaderText'),
     itemIcon: 'CalendarWeek',
     hidden: true,
     periods,

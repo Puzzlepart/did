@@ -48,7 +48,7 @@ export const Reports: React.FC = () => {
         ))}
         <SummaryView
           itemKey='summary'
-          headerText={t('admin.reports.summaryHeaderText')}
+          headerText={t('reports.summaryHeaderText')}
           itemIcon='CalendarWeek'
         />
         <PivotItem itemKey='default'>

@@ -175,9 +175,6 @@
     },
     "users": {
       "headerText": "Brukarar"
-    },
-    "reports": {
-      "summaryHeaderText": "Samandrag"
     }
   },
   "reports": {
@@ -194,7 +191,8 @@
     "cancelSaveFilterText": "Avbryt",
     "deleteFilterText": "Slett dette filteret",
     "filterPanelHeaderText": "Filter",
-    "filterDescriptionPlaceholder": "Merknad"
+    "filterDescriptionPlaceholder": "Merknad",
+    "summaryHeaderText": "Samandrag"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
