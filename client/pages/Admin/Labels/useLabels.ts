@@ -17,9 +17,7 @@ import { useTranslation } from 'react-i18next'
  */
 export function useLabels() {
   const { t } = useTranslation()
-  const query = useQuery($labels, {
-    fetchPolicy: 'cache-first'
-  })
+  const query = useQuery($labels, { fetchPolicy: 'cache-first' })
   const [deleteLabel] = useMutation($deleteLabel)
   const [form, setForm] = useState<ILabelFormProps>({
     isOpen: false
@@ -42,7 +40,7 @@ export function useLabels() {
     const response = await getConfirmDeleteResponse({
       title: t('admin.confirmDeleteLabelTitle'),
       subText: t('admin.confirmDeleteLabelSubText', label),
-      responses: [[t('common.yes'), true, true], [t('common.no'), false]]
+      responses: [[t('common.yes'), true, true], [t('common.no')]]
     })
     if (response) {
       deleteLabel({ variables: { name: label.name } }).then(query.refetch)
