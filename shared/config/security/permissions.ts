@@ -11,6 +11,7 @@ export enum PermissionScope {
   MANAGE_CUSTOMERS = '09909241',
   DELETE_CUSTOMER = '8b39db3d',
   MANAGE_USERS = '15e40e99',
+  LIST_USERS = '1a1db774',
   MANAGE_ROLESPERMISSIONS = 'cd52a735',
   MANAGE_SUBSCRIPTION = '67ba6efc'
 }
@@ -125,6 +126,13 @@ export function getPermissions(t: TFunction): IPermission[] {
       name: t('permissions.manageUsers'),
       description: t('permissions.manageUsersDescription'),
       iconName: 'ManagerSelfService',
+      api: true
+    },
+    {
+      id: PermissionScope.LIST_USERS,
+      name: t('permissions.listUsers'),
+      description: t('permissions.listUsersDescription'),
+      iconName: 'ContactList',
       api: true
     },
     {
