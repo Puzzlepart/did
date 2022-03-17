@@ -106,7 +106,6 @@
   "admin": {
     "users": "Brukere",
     "summary": "Sammendrag",
-    "labels": "Merkelapper",
     "apiTokens": {
       "permissionsTitle": "Tillatelser",
       "headerText": "API-nøkler",
@@ -116,7 +115,9 @@
       "oneMonth": "En måned",
       "monthPlural": "{{months}} måneder",
       "oneYear": "1 år",
-      "neverExpiresText": "Utløper aldri"
+      "neverExpiresText": "Utløper aldri",
+      "confirmDeleteTitle": "Slett API-nøkkel",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?"
     },
     "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
@@ -168,7 +169,11 @@
     "vacation": "Ferie og fravær",
     "roleDeletedMessage": "Rollen {{name}} ble slettet.",
     "confirmDeleteLabelTitle": "Slett merkelapp",
-    "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?"
+    "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?",
+    "labels": {
+      "headerText": "Merkelapper",
+      "confirmDeleteTitle": "Slett API-nøkkel"
+    }
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

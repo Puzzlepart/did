@@ -107,7 +107,6 @@
   "admin": {
     "users": "Users",
     "summary": "Summary",
-    "labels": "Labels",
     "apiTokens": {
       "permissionsTitle": "Permissions",
       "headerText": "API Tokens",
@@ -117,7 +116,9 @@
       "oneMonth": "One month",
       "monthPlural": "{{months}} months",
       "oneYear": "1 year",
-      "neverExpiresText": "Never expires"
+      "neverExpiresText": "Never expires",
+      "confirmDeleteTitle": "Delete API-key",
+      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
     },
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
@@ -169,7 +170,11 @@
     "vacationEventCategoryDescription": "Category to be used for tagging events in Outlook as vacation.",
     "roleDeletedMessage": "Role {{name}} was successfully deleted.",
     "confirmDeleteLabelTitle": "Delete label",
-    "confirmDeleteLabelSubText": "Are you sure you want to delete the label \"{{name}}\"?"
+    "confirmDeleteLabelSubText": "Are you sure you want to delete the label \"{{name}}\"?",
+    "labels": {
+      "headerText": "Labels",
+      "confirmDeleteTitle": "Delete API key"
+    }
   },
   "reports": {
     "generatingReportLabel": "Generating report",
