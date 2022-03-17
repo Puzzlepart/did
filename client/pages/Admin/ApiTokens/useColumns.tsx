@@ -8,7 +8,7 @@ import { ApiToken } from 'types'
 /**
  * Returns the columns for the ApiTokens list
  */
-export function useColumns({ onDeleteApiToken }): IListColumn[] {
+export function useColumns({ onDelete }): IListColumn[] {
   const { t } = useTranslation()
   return [
     {
@@ -24,7 +24,7 @@ export function useColumns({ onDeleteApiToken }): IListColumn[] {
       minWidth: 100,
       maxWidth: 180,
       onRender: (token: ApiToken) =>
-        new DateObject(token.created).format('MMMM D, YYYY	')
+        new DateObject(token.created).format('MMMM D, YYYY')
     },
     {
       key: 'expires',
@@ -38,7 +38,7 @@ export function useColumns({ onDeleteApiToken }): IListColumn[] {
       name: '',
       minWidth: 150,
       onRender: (token: ApiToken) => (
-        <DeleteLink onClick={() => onDeleteApiToken(token)} />
+        <DeleteLink onClick={() => onDelete(token)} />
       )
     }
   ]

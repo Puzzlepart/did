@@ -36,7 +36,7 @@ export const Admin = () => {
         itemIcon='FabricUserFolder'
         permission={PermissionScope.MANAGE_USERS}
       />
-      <Labels headerText={t('admin.labels')} itemIcon='Label' />
+      <Labels headerText={t('admin.labels.headerText')} itemIcon='Label' />
       <Roles
         headerText={t('admin.rolesPermissions')}
         itemIcon='SecurityGroup'

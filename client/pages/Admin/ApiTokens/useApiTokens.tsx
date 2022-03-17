@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { useMessage } from 'components'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
 import { useColumns } from './useColumns'
+import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 
 /**
  * Component logic hook for `<ApiTokens />`
@@ -21,26 +23,24 @@ export function useApiTokens() {
     const query = useQuery($tokens)
     const [apiKey, setApiKey] = useState(null)
     const [form, setForm] = useState<IApiTokenFormProps>({ setMessage })
+    const [ConfirmationDialog, getResponse] = useConfirmationDialog()
 
-    /**
-     * On delete API token
-     *
-     * @param token - The token to dete
-     */
-    async function onDeleteApiToken(token: ApiToken) {
-        await deleteApiToken({ variables: { name: token.name } })
-        setMessage({
-            type: 'info',
-            text: t('admin.tokenDeletedText', token)
+    const onDelete = useCallback(async (token: ApiToken) => {
+        const response = await getResponse({
+            title: t('admin.apiTokens.confirmDeleteTitle'),
+            subText: t('admin.apiTokens.confirmDeleteSubText', token),
+            responses: [[t('common.yes'), true, true], [t('common.no'), false]]
         })
-        query.refetch()
-    }
+        if (response) {
+            await deleteApiToken({ variables: { name: token.name } })
+            setMessage({
+                type: 'info',
+                text: t('admin.tokenDeletedText', token)
+            })
+            query.refetch()
+        }
+    }, [])
 
-    /**
-     * On key added
-     *
-     * @param generatedKey - Generated API key
-     */
     function onKeyAdded(generatedKey: string) {
         setForm({})
         if (generatedKey) {
@@ -54,7 +54,7 @@ export function useApiTokens() {
         query.refetch()
     }
 
-    const columns = useColumns({ onDeleteApiToken })
+    const columns = useColumns({ onDelete })
 
     return {
         query,
@@ -63,6 +63,7 @@ export function useApiTokens() {
         apiKey,
         message,
         columns,
-        onKeyAdded
+        onKeyAdded,
+        ConfirmationDialog
     }
 }

@@ -26,7 +26,8 @@ export const ApiTokens: TabComponent = () => {
     apiKey,
     message,
     columns,
-    onKeyAdded
+    onKeyAdded,
+    ConfirmationDialog
   } = useApiTokens()
 
   return (
@@ -34,7 +35,7 @@ export const ApiTokens: TabComponent = () => {
       {message && <UserMessage {...message} />}
       {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
-          <UserMessage type={'success'} iconName='Cloud'>
+          <UserMessage type='success' iconName='Cloud'>
             <span className={styles.text}>{apiKey}</span>
             <span className={styles.copy}>
               <CopyToClipboard text={apiKey}>
@@ -65,6 +66,7 @@ export const ApiTokens: TabComponent = () => {
           onDismiss={() => setForm({ isOpen: false })}
         />
       )}
+      {ConfirmationDialog}
     </div>
   )
 }
