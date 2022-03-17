@@ -5,7 +5,7 @@ import { TimesheetPeriodObject } from 'types'
 
 /**
  * Generate column data from periods collection
- * 
+ *
  * @param periods - Periods collection
  */
 function generateColumnData(periods: TimesheetPeriodObject[]) {
@@ -22,23 +22,21 @@ function generateColumnData(periods: TimesheetPeriodObject[]) {
  * Rows hook for SummaryView
  */
 export function useRows({ data }: IReportsState) {
-  return useMemo(
-    () => {
-      return [
-        ...data.users.map((user) => {
-          const periods = data.periods.filter(
-            (period) => period.userId === user.id
-          )
-          return {
-            user,
-            ...generateColumnData(periods)
-          }
-        }),
-        {
-          isTotalRow: true,
-          ...generateColumnData(data.periods)
+  return useMemo(() => {
+    return [
+      ...data.users.map((user) => {
+        const periods = data.periods.filter(
+          (period) => period.userId === user.id
+        )
+        return {
+          user,
+          ...generateColumnData(periods)
         }
-      ]
-    }, [data.periods]
-  )
+      }),
+      {
+        isTotalRow: true,
+        ...generateColumnData(data.periods)
+      }
+    ]
+  }, [data.periods])
 }

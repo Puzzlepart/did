@@ -65,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reports performance issues #984
 - Reports infinite loops #994
 - Unconfirmed hours included in summary view #1031
+- Added total row to summary report #932
 
 ### Changed
 - Summary report shows current week #980

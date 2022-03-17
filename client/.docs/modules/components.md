@@ -633,7 +633,8 @@ ___
 Returns list column definition for `<UserColumn >`
 
 The user object needs to be the item itself, or be
-on the item with key `user`
+on the item with key `user`. Alternatively `isTotalRow`
+set to `true` to render a total column.
 
 #### Parameters:
 
@@ -644,7 +645,7 @@ Name | Type |
 
 **Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Defined in: [client/components/UserColumn/useUserListColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L14)
+Defined in: [client/components/UserColumn/useUserListColumn.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L16)
 
 ___
 

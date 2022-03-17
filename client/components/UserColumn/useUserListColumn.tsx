@@ -26,8 +26,12 @@ export function useUserListColumn(
     fieldName: 'user',
     name: null,
     onRender: (item) => {
-      if(item.isTotalRow) {
-        return <span><strong>{t('common.sumLabel')}</strong></span>
+      if (item.isTotalRow) {
+        return (
+          <span>
+            <strong>{t('common.sumLabel')}</strong>
+          </span>
+        )
       }
       return <UserColumn user={item?.user || item} persona={persona} />
     }

@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { DateObject } from 'DateUtils'
-import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { IWeekColumnTooltipProps } from './types'
 
