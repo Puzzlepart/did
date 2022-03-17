@@ -21,8 +21,6 @@ import { useColumns } from './useColumns'
  * * See created API tokens
  * * Create new API tokens
  * * Delete existing API tokens
- *
- * @category Tab Component
  */
 export const ApiTokens: TabComponent = () => {
   const { t } = useTranslation()

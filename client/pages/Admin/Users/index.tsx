@@ -14,8 +14,6 @@ import { useUsers } from './useUsers'
  * * See active users
  * * Add new users
  * * Edit users
- *
- * @category Tab Component
  */
 export const Users: TabComponent = () => {
   const {
