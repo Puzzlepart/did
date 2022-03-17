@@ -169,11 +169,10 @@
     "vacationEventCategoryLabel": "Outlook event category",
     "vacationEventCategoryDescription": "Category to be used for tagging events in Outlook as vacation.",
     "roleDeletedMessage": "Role {{name}} was successfully deleted.",
-    "confirmDeleteLabelTitle": "Delete label",
-    "confirmDeleteLabelSubText": "Are you sure you want to delete the label \"{{name}}\"?",
     "labels": {
       "headerText": "Labels",
-      "confirmDeleteTitle": "Delete API key"
+      "confirmDeleteTitle": "Delete label",
+      "confirmDeleteSubText": "Are you sure you want to delete the label \"{{name}}\"?"
     }
   },
   "reports": {

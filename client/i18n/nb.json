@@ -172,7 +172,8 @@
     "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?",
     "labels": {
       "headerText": "Merkelapper",
-      "confirmDeleteTitle": "Slett API-nøkkel"
+      "confirmDeleteTitle": "Slett merkelapp",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?"
     }
   },
   "reports": {

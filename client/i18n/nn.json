@@ -106,7 +106,6 @@
   "admin": {
     "users": "Brukarar",
     "summary": "Samandrag",
-    "labels": "Merkelappar",
     "apiTokens": {
       "permissionsTitle": "Løyve",
       "headerText": "API-nøklar",
