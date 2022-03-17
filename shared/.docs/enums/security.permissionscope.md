@@ -15,6 +15,7 @@
 - [ACCESS\_TIMESHEET](security.permissionscope.md#access_timesheet)
 - [DELETE\_CUSTOMER](security.permissionscope.md#delete_customer)
 - [DELETE\_PROJECTS](security.permissionscope.md#delete_projects)
+- [LIST\_USERS](security.permissionscope.md#list_users)
 - [MANAGE\_CUSTOMERS](security.permissionscope.md#manage_customers)
 - [MANAGE\_PROJECTS](security.permissionscope.md#manage_projects)
 - [MANAGE\_ROLESPERMISSIONS](security.permissionscope.md#manage_rolespermissions)
@@ -79,6 +80,14 @@ Defined in: [shared/config/security/permissions.ts:10](https://github.com/Puzzle
 
 ___
 
+### LIST\_USERS
+
+• **LIST\_USERS**: = "1a1db774"
+
+Defined in: [shared/config/security/permissions.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L14)
+
+___
+
 ### MANAGE\_CUSTOMERS
 
 • **MANAGE\_CUSTOMERS**: = "09909241"
@@ -99,7 +108,7 @@ ___
 
 • **MANAGE\_ROLESPERMISSIONS**: = "cd52a735"
 
-Defined in: [shared/config/security/permissions.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L14)
+Defined in: [shared/config/security/permissions.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L15)
 
 ___
 
@@ -107,7 +116,7 @@ ___
 
 • **MANAGE\_SUBSCRIPTION**: = "67ba6efc"
 
-Defined in: [shared/config/security/permissions.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L15)
+Defined in: [shared/config/security/permissions.ts:16](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L16)
 
 ___
 

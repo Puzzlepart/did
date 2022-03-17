@@ -23,7 +23,7 @@ Name | Default |
 
 • **mode**: SelectionMode
 
-Defined in: [client/components/List/types.tsx:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L150)
+Defined in: [client/components/List/types.tsx:155](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L155)
 
 ___
 
@@ -43,6 +43,6 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/List/types.tsx:151](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L151)
+Defined in: [client/components/List/types.tsx:156](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L156)
 
-Defined in: [client/components/List/types.tsx:151](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L151)
+Defined in: [client/components/List/types.tsx:156](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L156)

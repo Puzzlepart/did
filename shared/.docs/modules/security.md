@@ -37,4 +37,4 @@ Name | Type | Description |
 
 **Returns:** [*IPermission*](../interfaces/security.ipermission.md)[]
 
-Defined in: [shared/config/security/permissions.ts:59](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L59)
+Defined in: [shared/config/security/permissions.ts:60](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L60)

@@ -23,7 +23,7 @@
 
 Callable from external API
 
-Defined in: [shared/config/security/permissions.ts:44](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L44)
+Defined in: [shared/config/security/permissions.ts:45](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L45)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 Description of the permission
 
-Defined in: [shared/config/security/permissions.ts:32](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L32)
+Defined in: [shared/config/security/permissions.ts:33](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L33)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 Disabled (not available)
 
-Defined in: [shared/config/security/permissions.ts:49](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L49)
+Defined in: [shared/config/security/permissions.ts:50](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L50)
 
 ___
 
@@ -55,7 +55,7 @@ Icon that describe the permission
 
 **`see`** https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
 
-Defined in: [shared/config/security/permissions.ts:39](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L39)
+Defined in: [shared/config/security/permissions.ts:40](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L40)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 Permission ID
 
-Defined in: [shared/config/security/permissions.ts:22](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L22)
+Defined in: [shared/config/security/permissions.ts:23](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L23)
 
 ___
 
@@ -75,4 +75,4 @@ ___
 
 Name of the permission
 
-Defined in: [shared/config/security/permissions.ts:27](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L27)
+Defined in: [shared/config/security/permissions.ts:28](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L28)

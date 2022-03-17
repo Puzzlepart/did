@@ -210,7 +210,7 @@ ___
 
 • `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
 
-Defined in: [client/pages/Admin/Roles/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L9)
+Defined in: [client/pages/Admin/Roles/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L8)
 
 ___
 
@@ -232,7 +232,7 @@ Manage users
 * Add new users
 * Edit users
 
-Defined in: [client/pages/Admin/Users/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L18)
+Defined in: [client/pages/Admin/Users/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L20)
 
 ___
 

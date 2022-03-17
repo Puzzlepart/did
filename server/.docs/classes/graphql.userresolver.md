@@ -59,7 +59,7 @@ Get Active Directory users
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [graphql/resolvers/user/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L86)
+Defined in: [graphql/resolvers/user/index.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L87)
 
 ___
 
@@ -78,7 +78,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:111](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L111)
+Defined in: [graphql/resolvers/user/index.ts:112](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L112)
 
 ___
 
@@ -96,7 +96,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L133)
+Defined in: [graphql/resolvers/user/index.ts:134](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L134)
 
 ___
 
@@ -144,7 +144,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*UserFeedbackResult*](graphql.userfeedbackresult.md)\>
 
-Defined in: [graphql/resolvers/user/index.ts:174](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L174)
+Defined in: [graphql/resolvers/user/index.ts:175](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L175)
 
 ___
 
@@ -165,7 +165,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:153](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L153)
+Defined in: [graphql/resolvers/user/index.ts:154](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L154)
 
 ___
 
@@ -183,4 +183,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [graphql/resolvers/user/index.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L97)
+Defined in: [graphql/resolvers/user/index.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L98)

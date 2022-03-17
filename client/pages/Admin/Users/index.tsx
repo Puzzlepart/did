@@ -44,14 +44,18 @@ export const Users: TabComponent = () => {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
               iconProps: { iconName: 'AddFriend' },
-              disabled: _.isEmpty(context.activeDirectoryUsers) || !hasPermission(PermissionScope.LIST_USERS),
+              disabled:
+                _.isEmpty(context.activeDirectoryUsers) ||
+                !hasPermission(PermissionScope.LIST_USERS),
               onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
-              disabled: _.isEmpty(context.activeDirectoryUsers) || !hasPermission(PermissionScope.LIST_USERS),
+              disabled:
+                _.isEmpty(context.activeDirectoryUsers) ||
+                !hasPermission(PermissionScope.LIST_USERS),
               onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {

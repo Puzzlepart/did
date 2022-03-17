@@ -58,19 +58,24 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
       data: { hidden: isMobile },
       onRender: (row) => $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
     }),
-    col('actions', '', { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) }, (user: User) => (
-      <div style={{ display: 'flex' }}>
-        <EditLink
-          style={{ marginRight: 12 }}
-          hidden={user.provider === 'google'}
-          onClick={() =>
-            setUserForm({
-              headerText: user.displayName,
-              user
-            })
-          }
-        />
-      </div>
-    ))
-  ].filter(col => !col.hidden)
+    col(
+      'actions',
+      '',
+      { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
+      (user: User) => (
+        <div style={{ display: 'flex' }}>
+          <EditLink
+            style={{ marginRight: 12 }}
+            hidden={user.provider === 'google'}
+            onClick={() =>
+              setUserForm({
+                headerText: user.displayName,
+                user
+              })
+            }
+          />
+        </div>
+      )
+    )
+  ].filter((col) => !col.hidden)
 }
