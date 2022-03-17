@@ -1,4 +1,4 @@
-[did-server - v0.10.7](../README.md) / [Services](../modules/services.md) / ProjectService
+[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / ProjectService
 
 # Class: ProjectService
 

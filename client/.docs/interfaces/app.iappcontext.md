@@ -1,4 +1,4 @@
-[did-client - v0.10.7](../README.md) / [App](../modules/app.md) / IAppContext
+[did-client - v0.10.9](../README.md) / [App](../modules/app.md) / IAppContext
 
 # Interface: IAppContext
 

@@ -62,4 +62,3 @@ export default ({ url }: IProjectsReducerParameters) =>
 
 export * from './initState'
 export * from './useProjectsReducer'
-

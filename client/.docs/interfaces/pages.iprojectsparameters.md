@@ -1,4 +1,4 @@
-[did-client - v0.10.7](../README.md) / [Pages](../modules/pages.md) / IProjectsParameters
+[did-client - v0.10.9](../README.md) / [Pages](../modules/pages.md) / IProjectsParameters
 
 # Interface: IProjectsParameters
 

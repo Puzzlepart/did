@@ -9,10 +9,7 @@ import { ICustomersParameters } from '../types'
  */
 export function useCustomersReducer() {
   const parameters = useParams<ICustomersParameters>()
-  const reducer = useMemo(
-    () => createReducer({ params: parameters }),
-    []
-  )
+  const reducer = useMemo(() => createReducer({ params: parameters }), [])
   const [state, dispatch] = useReducer(reducer, initState(parameters))
   return { state, dispatch }
 }

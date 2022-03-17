@@ -1,4 +1,4 @@
-[did-client - v0.10.7](../README.md) / [Components](../modules/components.md) / IListState
+[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / IListState
 
 # Interface: IListState<T\>
 

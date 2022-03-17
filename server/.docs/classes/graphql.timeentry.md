@@ -1,4 +1,4 @@
-[did-server - v0.10.7](../README.md) / [GraphQL](../modules/graphql.md) / TimeEntry
+[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / TimeEntry
 
 # Class: TimeEntry
 

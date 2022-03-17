@@ -1,4 +1,4 @@
-[did-shared - v0.10.7](../README.md) / DateUtils
+[did-shared - v0.10.9](../README.md) / DateUtils
 
 # Module: DateUtils
 

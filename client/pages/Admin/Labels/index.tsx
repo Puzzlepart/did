@@ -7,13 +7,7 @@ import { useLabels } from './useLabels'
 
 export const Labels: TabComponent = () => {
   const { t } = useTranslation()
-  const {
-    columns,
-    form,
-    setForm,
-    query,
-    ConfirmationDialog
-  } = useLabels()
+  const { columns, form, setForm, query, ConfirmationDialog } = useLabels()
 
   return (
     <>

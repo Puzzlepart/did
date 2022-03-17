@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit'
-import * as H from 'history'
 import _ from 'underscore'
 import { CustomersView, ICustomersParameters, ICustomersState } from '../types'
 import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'

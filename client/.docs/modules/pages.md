@@ -1,4 +1,4 @@
-[did-client - v0.10.7](../README.md) / Pages
+[did-client - v0.10.9](../README.md) / Pages
 
 # Module: Pages
 
@@ -59,6 +59,11 @@ All are built using React Function components and Hooks.
 
 ### Other Variables
 
+- [ApiTokens](pages.md#apitokens)
+- [Labels](pages.md#labels)
+- [Roles](pages.md#roles)
+- [SubscriptionSettings](pages.md#subscriptionsettings)
+- [Users](pages.md#users)
 - [default\_query](pages.md#default_query)
 
 ### Page Component Variables
@@ -84,14 +89,6 @@ All are built using React Function components and Hooks.
 
 - [ReportsContext](pages.md#reportscontext)
 - [SaveFilterForm](pages.md#savefilterform)
-
-### Tab Component Variables
-
-- [ApiTokens](pages.md#apitokens)
-- [Labels](pages.md#labels)
-- [Roles](pages.md#roles)
-- [SubscriptionSettings](pages.md#subscriptionsettings)
-- [Users](pages.md#users)
 
 ### Timesheet Variables
 
@@ -186,6 +183,58 @@ Defined in: [client/pages/Timesheet/Timesheet.tsx:21](https://github.com/Puzzlep
 ___
 
 ## Other Variables
+
+### ApiTokens
+
+• `Const` **ApiTokens**: [*TabComponent*](components.md#tabcomponent)
+
+Component for handling API tokens.
+
+* See created API tokens
+* Create new API tokens
+* Delete existing API tokens
+
+Defined in: [client/pages/Admin/ApiTokens/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/ApiTokens/index.tsx#L20)
+
+___
+
+### Labels
+
+• `Const` **Labels**: [*TabComponent*](components.md#tabcomponent)
+
+Defined in: [client/pages/Admin/Labels/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Labels/index.tsx#L8)
+
+___
+
+### Roles
+
+• `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
+
+Defined in: [client/pages/Admin/Roles/index.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L9)
+
+___
+
+### SubscriptionSettings
+
+• `Const` **SubscriptionSettings**: [*TabComponent*](components.md#tabcomponent)
+
+Defined in: [client/pages/Admin/Subscription/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Subscription/index.tsx#L11)
+
+___
+
+### Users
+
+• `Const` **Users**: [*TabComponent*](components.md#tabcomponent)
+
+Manage users
+
+* See active users
+* Add new users
+* Edit users
+
+Defined in: [client/pages/Admin/Users/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L18)
+
+___
 
 ### default\_query
 
@@ -358,60 +407,6 @@ ___
 • `Const` **SaveFilterForm**: *React.FC*<ISaveFilterFormProps\>
 
 Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L23)
-
-___
-
-## Tab Component Variables
-
-### ApiTokens
-
-• `Const` **ApiTokens**: [*TabComponent*](components.md#tabcomponent)
-
-Component for handling API tokens.
-
-* See created API tokens
-* Create new API tokens
-* Delete existing API tokens
-
-Defined in: [client/pages/Admin/ApiTokens/index.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/ApiTokens/index.tsx#L27)
-
-___
-
-### Labels
-
-• `Const` **Labels**: [*TabComponent*](components.md#tabcomponent)
-
-Defined in: [client/pages/Admin/Labels/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Labels/index.tsx#L10)
-
-___
-
-### Roles
-
-• `Const` **Roles**: [*TabComponent*](components.md#tabcomponent)
-
-Defined in: [client/pages/Admin/Roles/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L12)
-
-___
-
-### SubscriptionSettings
-
-• `Const` **SubscriptionSettings**: [*TabComponent*](components.md#tabcomponent)
-
-Defined in: [client/pages/Admin/Subscription/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Subscription/index.tsx#L14)
-
-___
-
-### Users
-
-• `Const` **Users**: [*TabComponent*](components.md#tabcomponent)
-
-Manage users
-
-* See active users
-* Add new users
-* Edit users
-
-Defined in: [client/pages/Admin/Users/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L20)
 
 ___
 

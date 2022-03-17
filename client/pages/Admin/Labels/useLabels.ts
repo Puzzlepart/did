@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { useCallback, useEffect, useState } from 'react'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
+import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
 import $deleteLabel from './deleteLabel.gql'
 import { ILabelFormProps } from './LabelForm'
 import $labels from './labels.gql'
 import { useColumns } from './useColumns'
-import { useTranslation } from 'react-i18next'
 
 /**
  * Component logic hook for `<Labels />`
@@ -36,16 +36,19 @@ export function useLabels() {
     setForm({ isOpen: true, edit: label })
   }, [])
 
-  const onDelete = useCallback(async (label: LabelObject) => {
-    const response = await getResponse({
-      title: t('admin.labels.confirmDeleteTitle'),
-      subText: t('admin.labels.confirmDeleteSubText', label),
-      responses: [[t('common.yes'), true, true], [t('common.no')]]
-    })
-    if (response === true) {
-      deleteLabel({ variables: { name: label.name } }).then(query.refetch)
-    }
-  }, [deleteLabel])
+  const onDelete = useCallback(
+    async (label: LabelObject) => {
+      const response = await getResponse({
+        title: t('admin.labels.confirmDeleteTitle'),
+        subText: t('admin.labels.confirmDeleteSubText', label),
+        responses: [[t('common.yes'), true, true], [t('common.no')]]
+      })
+      if (response === true) {
+        deleteLabel({ variables: { name: label.name } }).then(query.refetch)
+      }
+    },
+    [deleteLabel]
+  )
 
   useEffect(() => {
     query.refetch()

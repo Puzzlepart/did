@@ -1,7 +1,7 @@
 import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { IProjectsContext } from '../context'
 import { useProjectsReducer } from '../reducer'
 import { IProjectsParameters } from '../types'

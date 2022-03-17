@@ -1,4 +1,4 @@
-[did-server - v0.10.7](../README.md) / [GraphQL](../modules/graphql.md) / NotificationResolver
+[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / NotificationResolver
 
 # Class: NotificationResolver
 
@@ -43,7 +43,7 @@ Defined in: [graphql/resolvers/notification/index.ts:21](https://github.com/Puzz
 
 ### notifications
 
-▸ **notifications**(`templates`: [*NotificationTemplates*](graphql.notificationtemplates.md), `locale`: *string*): *Promise*<ForecastNotification[]\>
+▸ **notifications**(`templates`: [*NotificationTemplates*](graphql.notificationtemplates.md), `locale`: *string*): *Promise*<(UnconfirmedPeriodNotification \| ForecastNotification)[]\>
 
 Get notifications
 
@@ -54,6 +54,6 @@ Name | Type | Description |
 `templates` | [*NotificationTemplates*](graphql.notificationtemplates.md) | Templates   |
 `locale` | *string* | Locale    |
 
-**Returns:** *Promise*<ForecastNotification[]\>
+**Returns:** *Promise*<(UnconfirmedPeriodNotification \| ForecastNotification)[]\>
 
 Defined in: [graphql/resolvers/notification/index.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L37)

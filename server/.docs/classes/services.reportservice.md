@@ -1,4 +1,4 @@
-[did-server - v0.10.7](../README.md) / [Services](../modules/services.md) / ReportService
+[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / ReportService
 
 # Class: ReportService
 
@@ -60,7 +60,7 @@ Defined in: [services/report.ts:39](https://github.com/Puzzlepart/did/blob/dev/s
 
 ▸ `Private`**_generatePresetQuery**(`preset`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset)): *any*
 
-Generate preset query
+Generate preset query.
 
 #### Parameters:
 

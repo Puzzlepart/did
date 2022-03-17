@@ -1,4 +1,4 @@
-[did-server - v0.10.7](../README.md) / GraphQL
+[did-server - v0.10.9](../README.md) / GraphQL
 
 # Module: GraphQL
 
