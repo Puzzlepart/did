@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import { useMessage } from 'components'
+import { useMessage, useToast } from 'components'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
@@ -18,11 +18,11 @@ import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/Confirm
  */
 export function useApiTokens() {
     const { t } = useTranslation()
-    const [message, setMessage] = useMessage()
+    const [toast, setToast] = useToast(8000, { isMultiline: true })
     const [deleteApiToken] = useMutation($deleteApiToken)
     const query = useQuery($tokens)
     const [apiKey, setApiKey] = useState(null)
-    const [form, setForm] = useState<IApiTokenFormProps>({ setMessage })
+    const [form, setForm] = useState<IApiTokenFormProps>({})
     const [ConfirmationDialog, getResponse] = useConfirmationDialog()
 
     const onDelete = useCallback(async (token: ApiToken) => {
@@ -33,7 +33,7 @@ export function useApiTokens() {
         })
         if (response === true) {
             await deleteApiToken({ variables: { name: token.name } })
-            setMessage({
+            setToast({
                 type: 'info',
                 text: t('admin.tokenDeletedText', token)
             })
@@ -41,18 +41,19 @@ export function useApiTokens() {
         }
     }, [])
 
-    function onKeyAdded(generatedKey: string) {
+    const onKeyAdded = useCallback((generatedKey: string) => {
         setForm({})
         if (generatedKey) {
-            setMessage({ text: t('admin.tokenGeneratedText') }, 20_000)
+            setToast({ text: t('admin.tokenGeneratedText') }, 20_000)
             setApiKey(generatedKey)
-        } else
-            setMessage({
+        } else {
+            setToast({
                 type: 'error',
                 text: t('admin.tokenErrorText')
             })
+        }
         query.refetch()
-    }
+    }, [])
 
     const columns = useColumns({ onDelete })
 
@@ -61,7 +62,7 @@ export function useApiTokens() {
         form,
         setForm,
         apiKey,
-        message,
+        toast,
         columns,
         onKeyAdded,
         ConfirmationDialog

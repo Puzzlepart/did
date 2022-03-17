@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
-import { List, TabComponent, UserMessage } from 'components'
+import { List, TabComponent, Toast, UserMessage } from 'components'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
@@ -24,7 +24,7 @@ export const ApiTokens: TabComponent = () => {
     form,
     setForm,
     apiKey,
-    message,
+    toast,
     columns,
     onKeyAdded,
     ConfirmationDialog
@@ -32,7 +32,7 @@ export const ApiTokens: TabComponent = () => {
 
   return (
     <div className={styles.root}>
-      {message && <UserMessage {...message} />}
+    <Toast {...toast} />
       {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
           <UserMessage type='success' iconName='Cloud'>
