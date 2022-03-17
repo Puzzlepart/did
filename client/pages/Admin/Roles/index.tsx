@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { List, TabComponent, Toast } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,14 +7,14 @@ import { useRoles } from './useRoles'
 
 export const Roles: TabComponent = () => {
   const { t } = useTranslation()
-  const { loading, roles, refetch, columns, panel, setPanel, toast } =
+  const { query, columns, panel, setPanel, toast } =
     useRoles()
   return (
     <div className={styles.root}>
       <Toast {...toast} />
       <List
-        enableShimmer={loading}
-        items={roles}
+        enableShimmer={query.loading}
+        items={query?.data?.roles}
         columns={columns}
         commandBar={{
           items: [
@@ -33,7 +32,7 @@ export const Roles: TabComponent = () => {
         <RolePanel
           {...panel}
           onSave={async () => {
-            await refetch()
+            await query.refetch()
             setPanel(null)
           }}
           onDismiss={() => setPanel(null)}
