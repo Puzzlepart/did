@@ -32,18 +32,18 @@ export const Admin = () => {
       defaultSelectedKey={view}
     >
       <Users
-        headerText={t('admin.users')}
+        headerText={t('admin.users.headerText')}
         itemIcon='FabricUserFolder'
         permission={PermissionScope.MANAGE_USERS}
       />
-      <Labels headerText={t('admin.labels')} itemIcon='Label' />
+      <Labels headerText={t('admin.labels.headerText')} itemIcon='Label' />
       <Roles
-        headerText={t('admin.rolesPermissions')}
+        headerText={t('admin.rolesPermissions.headerText')}
         itemIcon='SecurityGroup'
         permission={PermissionScope.MANAGE_ROLESPERMISSIONS}
       />
       <SubscriptionSettings
-        headerText={t('admin.subscriptionSettings')}
+        headerText={t('admin.subscriptionSettings.headerText')}
         itemIcon='Subscribe'
         permission={PermissionScope.MANAGE_SUBSCRIPTION}
       />

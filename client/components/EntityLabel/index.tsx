@@ -40,7 +40,7 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
         />
       )}
       <span style={{ color: contrastColor }}>
-        {s.isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}
+        {s.isBlank(label.name) ? t('admin.labels.defaultTitle') : label.name}
       </span>
     </div>
   )

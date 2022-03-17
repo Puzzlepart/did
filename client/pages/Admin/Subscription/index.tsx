@@ -8,9 +8,6 @@ import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
 import { useSubscriptionSettings } from './useSubscriptionSettings'
 
-/**
- * @category Tab Component
- */
 export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
   const [selectedKey, setSelectedKey] = useState('info')

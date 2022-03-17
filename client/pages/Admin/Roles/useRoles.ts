@@ -43,7 +43,7 @@ export function useRoles() {
       })
       await roleQuery.refetch()
       setToast({
-        text: t('admin.roleDeletedMessage', {
+        text: t('admin.rolesPermissions.deleteSuccess', {
           name: role.name
         }),
         type: 'success'

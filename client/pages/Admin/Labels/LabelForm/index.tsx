@@ -20,8 +20,8 @@ export const LabelForm: React.FC<ILabelFormProps> = (props) => {
       panelProps={{
         ..._.omit(props, 'onSave'),
         headerText: !!props.edit
-          ? t('admin.editLabel')
-          : t('admin.addNewLabel'),
+          ? t('admin.labels.editText')
+          : t('admin.labels.addNewText'),
         isLightDismiss: true
       }}
     >
@@ -32,9 +32,9 @@ export const LabelForm: React.FC<ILabelFormProps> = (props) => {
         })}
         spellCheck={false}
         maxLength={20}
-        label={t('admin.labelNameLabel')}
-        placeholder={t('admin.labelNamePlaceholder')}
-        description={t('admin.labelNameDescription')}
+        label={t('admin.labels.nameLabel')}
+        placeholder={t('admin.labels.namePlaceholder')}
+        description={t('admin.labels.nameDescription')}
         required={!props.edit}
         disabled={!!props.edit}
       />

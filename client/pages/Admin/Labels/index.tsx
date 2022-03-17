@@ -1,14 +1,20 @@
 /* eslint-disable tsdoc/syntax */
 import { List, TabComponent } from 'components'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { LabelForm } from './LabelForm'
 import { useLabels } from './useLabels'
 
-/**
- * @category Tab Component
- */
 export const Labels: TabComponent = () => {
-  const { columns, form, setForm, query, t } = useLabels()
+  const { t } = useTranslation()
+  const {
+    columns,
+    form,
+    setForm,
+    query,
+    ConfirmationDialog
+  } = useLabels()
+
   return (
     <>
       <List
@@ -19,7 +25,7 @@ export const Labels: TabComponent = () => {
           items: [
             {
               key: 'ADD_NEW_LABEL',
-              name: t('admin.addNewLabel'),
+              name: t('admin.labels.addNewText'),
               iconProps: { iconName: 'Add' },
               onClick: () => setForm({ isOpen: true })
             }
@@ -28,6 +34,7 @@ export const Labels: TabComponent = () => {
         }}
       />
       <LabelForm {...form} />
+      {ConfirmationDialog}
     </>
   )
 }

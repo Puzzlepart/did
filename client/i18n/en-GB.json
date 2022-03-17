@@ -57,6 +57,7 @@
     "matchEventPanelSearchPlaceholder": "Search projects..."
   },
   "projects": {
+    "filterLabels": "Filter labels...",
     "inactiveText": "This project has been marked as inactive.",
     "searchPlaceholder": "Search in projects...",
     "categoryOutlookText": "This project has a category in your Outlook.",
@@ -105,9 +106,6 @@
     "createError": "We can't create the customer at the moment. Please try again later."
   },
   "admin": {
-    "users": "Users",
-    "summary": "Summary",
-    "labels": "Labels",
     "apiTokens": {
       "permissionsTitle": "Permissions",
       "headerText": "API Tokens",
@@ -117,14 +115,11 @@
       "oneMonth": "One month",
       "monthPlural": "{{months}} months",
       "oneYear": "1 year",
-      "neverExpiresText": "Never expires"
+      "neverExpiresText": "Never expires",
+      "confirmDeleteTitle": "Delete API-key",
+      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
     },
-    "filterLabels": "Filter labels...",
-    "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
-    "defaultLabelTitle": "my new label",
-    "addNewLabel": "Add new label",
-    "editLabel": "Edit label",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months/weeks in the selected year.",
@@ -141,7 +136,6 @@
     "forecastEnabledDescription": "Enable/disable forecasting.",
     "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
     "forecastNotificationsLabel": "Notifications",
-    "subscriptionSettings": "Subscription",
     "summaryRangeValueFormat": "Showing {{value}} months",
     "adsync": "Azure AD Sync",
     "adUserSyncEnabledLabel": "Synchronize user properties",
@@ -150,24 +144,39 @@
     "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
     "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
     "userHiddenFromReportsLabel": "Hidden from reports",
-    "summaryViewProgressLabel": "Loading summary",
-    "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data...",
     "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did.",
     "adUserSyncUserPhotoLabel": "Synchronize user photo",
     "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in.",
     "subscriptionInfoHeader": "Basic info",
-    "labelNameLabel": "Label name",
-    "labelNamePlaceholder": "Label name",
-    "labelNameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
-    "labelCreateSuccess": "Your new label **{{name}}** was succesfully created.",
-    "labelCreateError": "We can't update the label at the moment. Please try again later.",
-    "labelUpdateSuccess": "Your label **{{name}}** was succesfully updated.",
     "vacation": "Holidays and absence",
     "vacationTotalDaysLabel": "Vacation days",
     "vacationTotalDaysDescription": "Total number of vacation days for each employee in the company.",
     "vacationEventCategoryLabel": "Outlook event category",
     "vacationEventCategoryDescription": "Category to be used for tagging events in Outlook as vacation.",
-    "roleDeletedMessage": "Role {{name}} was successfully deleted."
+    "labels": {
+      "headerText": "Labels",
+      "confirmDeleteTitle": "Delete label",
+      "confirmDeleteSubText": "Are you sure you want to delete the label \"{{name}}\"?",
+      "nameLabel": "Label name",
+      "namePlaceholder": "Label name",
+      "nameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
+      "createSuccess": "Your new label **{{name}}** was succesfully created.",
+      "createError": "We can't update the label at the moment. Please try again later.",
+      "updateSuccess": "Your label **{{name}}** was succesfully updated.",
+      "defaultTitle": "my new label",
+      "addNewText": "Add new label",
+      "editText": "Edit label"
+    },
+    "subscriptionSettings": {
+      "headerText": "Subscription"
+    },
+    "rolesPermissions": {
+      "headerText": "Roles and permissions",
+      "deleteSuccess": "Role {{name}} was successfully deleted."
+    },
+    "users": {
+      "headerText": "Users"
+    }
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -183,7 +192,8 @@
     "cancelSaveFilterText": "Cancel",
     "deleteFilterText": "Delete this filter",
     "filterPanelHeaderText": "Filters",
-    "filterDescriptionPlaceholder": "Note"
+    "filterDescriptionPlaceholder": "Note",
+    "summaryHeaderText": "Summary"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -353,7 +363,9 @@
     "vacationTotalDaysLabel": "Total vacation days",
     "vacationTotalDaysDescription": "Total vacation days for the year. Includes transferred days from last year.",
     "vacationSummaryTooltip": "The vacation estimate is for the whole year,\nand is based on your categorisation of {{usedHours}} hours with {{category}}\n(each vacation day is 8 hours)",
-    "unconfirmedHours": "Unconfirmed hours"
+    "unconfirmedHours": "Unconfirmed hours",
+    "yes": "Yes",
+    "no": "No"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

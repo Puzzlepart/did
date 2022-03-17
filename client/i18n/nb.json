@@ -57,6 +57,7 @@
     "matchEventPanelSearchPlaceholder": "Søk i prosjekter..."
   },
   "projects": {
+    "filterLabels": "Filtrer merkelapper...",
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
     "searchPlaceholder": "Søk i prosjekter...",
     "categoryOutlookText": "Dette prosjektet har en Outlook-kategori.",
@@ -104,9 +105,6 @@
     "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen."
   },
   "admin": {
-    "users": "Brukere",
-    "summary": "Sammendrag",
-    "labels": "Merkelapper",
     "apiTokens": {
       "permissionsTitle": "Tillatelser",
       "headerText": "API-nøkler",
@@ -116,14 +114,11 @@
       "oneMonth": "En måned",
       "monthPlural": "{{months}} måneder",
       "oneYear": "1 år",
-      "neverExpiresText": "Utløper aldri"
+      "neverExpiresText": "Utløper aldri",
+      "confirmDeleteTitle": "Slett API-nøkkel",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?"
     },
-    "filterLabels": "Filtrer merkelapper...",
-    "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
-    "defaultLabelTitle": "ny merkelapp",
-    "addNewLabel": "Opprett ny merkelapp",
-    "editLabel": "Rediger merkelapp",
     "addNewRole": "Legg til ny rolle",
     "roleNameLabel": "Rollenavn",
     "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene/ukene i det valgte året.",
@@ -140,7 +135,6 @@
     "forecastEnabledDescription": "Aktiver/deaktiver prognoser.",
     "forecastNotificationsDescription": "Hvor mange uker fram i tid skal brukerne prognosere?",
     "forecastNotificationsLabel": "Varsler",
-    "subscriptionSettings": "Abonnement",
     "summaryRangeValueFormat": "Viser {{value}} måneder",
     "adsync": "Synkronisering med Azure AD",
     "adUserSyncEnabledLabel": "Synkroniser brukeregenskaper",
@@ -149,24 +143,39 @@
     "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory.",
     "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes.",
     "userHiddenFromReportsLabel": "Skjult fra timeoversikt",
-    "summaryViewProgressLabel": "Laster sammendrag",
-    "summaryViewProgressDescription": "For å gi deg de ferskeste resultatene, genererer vi et sammendrag fra de nyeste dataene... ",
     "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did.",
     "adUserSyncUserPhotoLabel": "Synkroniser profilbilde",
     "adUserSyncUserPhotoDescription": "Synkroniser profilbilde fra Azure Active Directory når brukerne logger på.",
     "subscriptionInfoHeader": "Grunnleggende informasjon",
-    "labelNameLabel": "Navn på merkelapp",
-    "labelNamePlaceholder": "Navn på merkelapp",
-    "labelNameDescription": "Navn på merkelapp. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
-    "labelCreateError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
-    "labelCreateSuccess": "Den nye merkelappen din **{{name}}** ble opprettet",
-    "labelUpdateSuccess": "Merkelappen din **{{name}}** ble oppdatert",
     "vacationEventCategoryLabel": "Hendelseskategori i Outlook",
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
     "vacation": "Ferie og fravær",
-    "roleDeletedMessage": "Rollen {{name}} ble slettet."
+    "labels": {
+      "headerText": "Merkelapper",
+      "confirmDeleteTitle": "Slett merkelapp",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
+      "nameLabel": "Navn på merkelapp",
+      "namePlaceholder": "Navn på merkelapp",
+      "nameDescription": "Navn på merkelapp. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
+      "createError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
+      "createSuccess": "Den nye merkelappen din **{{name}}** ble opprettet",
+      "updateSuccess": "Merkelappen din **{{name}}** ble oppdatert",
+      "defaultTitle": "ny merkelapp",
+      "addNewText": "Opprett ny merkelapp",
+      "editText": "Rediger merkelapp"
+    },
+    "subscriptionSettings": {
+      "headerText": "Abonnement"
+    },
+    "rolesPermissions": {
+      "headerText": "Roller og tillatelser",
+      "deleteSuccess": "Rollen {{name}} ble slettet."
+    },
+    "users": {
+      "headerText": "Brukere"
+    }
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -182,7 +191,8 @@
     "cancelSaveFilterText": "Avbryt",
     "deleteFilterText": "Slett dette filteret",
     "filterPanelHeaderText": "Filtre",
-    "filterDescriptionPlaceholder": "Merknad"
+    "filterDescriptionPlaceholder": "Merknad",
+    "summaryHeaderText": "Sammendrag"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -352,7 +362,9 @@
     "vacationTotalDaysLabel": "Antal feriedager",
     "vacationTotalDaysDescription": "Totalt antall feriedager for året. \nInkluderer overførte dager fra i fjor.",
     "vacationSummaryTooltip": "Ferieanslaget gjelder for hele året, og er basert på at du har kategorisert {{usedHours}} timer med {{category}}\n(hver feriedag er 8 timer)",
-    "unconfirmedHours": " Ubekreftede timer"
+    "unconfirmedHours": " Ubekreftede timer",
+    "yes": "Ja",
+    "no": "Nei"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

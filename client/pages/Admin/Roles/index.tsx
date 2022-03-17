@@ -6,9 +6,6 @@ import { RolePanel } from './RolePanel'
 import styles from './Roles.module.scss'
 import { useRoles } from './useRoles'
 
-/**
- * @category Tab Component
- */
 export const Roles: TabComponent = () => {
   const { t } = useTranslation()
   const { loading, roles, refetch, columns, panel, setPanel, toast } =
