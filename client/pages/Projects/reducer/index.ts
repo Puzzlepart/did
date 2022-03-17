@@ -13,8 +13,8 @@ import { IProjectsReducerParameters } from './types'
 /**
  * Create reducer for Projects
  */
-export default ({ url: parameters }: IProjectsReducerParameters) =>
-  createReducer(initState(parameters), {
+export default ({ url }: IProjectsReducerParameters) =>
+  createReducer(initState(url), {
     [DATA_UPDATED.type]: (
       state,
       { payload }: ReturnType<typeof DATA_UPDATED>
@@ -31,7 +31,7 @@ export default ({ url: parameters }: IProjectsReducerParameters) =>
         })
         state.selected = _.find(
           state.projects,
-          (p) => p.tag?.toLowerCase() === parameters?.key?.toLowerCase()
+          (p) => p.tag?.toLowerCase() === url?.key?.toLowerCase()
         )
       }
       state.error = payload.error
@@ -62,3 +62,4 @@ export default ({ url: parameters }: IProjectsReducerParameters) =>
 
 export * from './initState'
 export * from './useProjectsReducer'
+

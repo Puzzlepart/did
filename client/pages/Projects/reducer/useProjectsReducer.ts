@@ -5,7 +5,7 @@ import { IProjectsReducerParameters } from './types'
 /**
  * Use Projects reducer
  *
- * @param params - Params
+ * @param parameters - Reducer parameters
  */
 export function useProjectsReducer(parameters: IProjectsReducerParameters) {
   const reducer = useMemo(() => createReducer(parameters), [parameters])

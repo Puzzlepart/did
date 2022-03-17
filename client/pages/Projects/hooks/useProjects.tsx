@@ -22,9 +22,8 @@ import { useProjectsQuery } from './useProjectsQuery'
 export function useProjects() {
   const { t } = useTranslation()
   const { user } = useAppContext()
-  const history = useHistory()
   const url = useParams<IProjectsParameters>()
-  const { state, dispatch } = useProjectsReducer({ url, history })
+  const { state, dispatch } = useProjectsReducer({ url })
   const { refetch, loading } = useProjectsQuery(dispatch)
 
   useProjecstHistory(state)

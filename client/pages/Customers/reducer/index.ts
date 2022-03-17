@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { History } from 'history'
+import * as H from 'history'
 import _ from 'underscore'
 import { CustomersView, ICustomersParameters, ICustomersState } from '../types'
 import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
@@ -7,7 +7,7 @@ import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 /**
  * Initialize state
  *
- * @param params - Params
+ * @param parameters - Parameters
  */
 export const initState = (
   parameters: ICustomersParameters
@@ -20,7 +20,6 @@ export const initState = (
 
 interface ICreateReducerParameters {
   params: ICustomersParameters
-  history: History
 }
 
 /**
