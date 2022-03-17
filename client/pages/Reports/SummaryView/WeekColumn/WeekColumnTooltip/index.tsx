@@ -2,6 +2,7 @@
 import { Persona, PersonaSize } from '@fluentui/react'
 import { SubText } from 'components'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'
 import { IWeekColumnTooltipProps } from './types'
@@ -12,7 +13,8 @@ import styles from './WeekColumnTooltip.module.scss'
  * @category SummaryView
  */
 export const WeekColumnTooltip: React.FC<IWeekColumnTooltipProps> = (props) => {
-  const { week, month, year, customerTotals, t } = useWeekColumnTooltip(props)
+  const { t } = useTranslation()
+  const { week, month, year, customerTotals } = useWeekColumnTooltip(props)
   return (
     <div className={styles.root}>
       <div className={styles.header}>
@@ -24,8 +26,8 @@ export const WeekColumnTooltip: React.FC<IWeekColumnTooltipProps> = (props) => {
         </div>
         <Persona
           className={styles.userInfo}
-          text={props.user.displayName}
-          secondaryText={props.user.mail}
+          text={props.user?.displayName}
+          secondaryText={props.user?.mail}
           size={PersonaSize.size40}
         />
       </div>
