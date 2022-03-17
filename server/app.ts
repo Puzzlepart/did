@@ -179,7 +179,7 @@ export class App {
    * Setup error handling using http-errors
    */
   setupErrorHandling() {
-    this.instance.use((_request, _response, next) => next(createError()))
+    this.instance.use((_request, _response, next) => next(createError(401)))
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
         response.render('index', {

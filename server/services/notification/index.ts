@@ -32,7 +32,7 @@ export class NotificationService {
     private readonly _timesheetSvc: TimesheetService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get periods
@@ -138,8 +138,7 @@ export class NotificationService {
       this._unconfirmedPeriods(templates.unconfirmedPeriods, locale),
       this._forecast(templates.forecast, locale)
     ])
-    // eslint-disable-next-line prefer-spread
-    return notifications.flat()
+    return _.flatten(notifications, 1)
   }
 }
 
