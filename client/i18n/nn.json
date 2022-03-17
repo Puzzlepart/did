@@ -157,7 +157,6 @@
     "vacationTotalDaysLabel": "Feriedager",
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacation": "Ferie og fravær",
-    "roleDeletedMessage": "Rollen {{name}} vart sletta.",
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
       "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
@@ -173,7 +172,8 @@
       "headerText": "Abonnement"
     },
     "rolesPermissions": {
-      "headerText": "Roller og tillatelser"
+      "headerText": "Roller og tillatelser",
+      "deleteSuccess": "Rollen {{name}} vart sletta."
     },
     "users": {
       "headerText": "Brukarar"

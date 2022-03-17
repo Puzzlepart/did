@@ -157,7 +157,6 @@
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
     "vacation": "Ferie og fravær",
-    "roleDeletedMessage": "Rollen {{name}} ble slettet.",
     "labels": {
       "headerText": "Merkelapper",
       "confirmDeleteTitle": "Slett merkelapp",
@@ -173,7 +172,8 @@
       "headerText": "Abonnement"
     },
     "rolesPermissions": {
-      "headerText": "Roller og tillatelser"
+      "headerText": "Roller og tillatelser",
+      "deleteSuccess": "Rollen {{name}} ble slettet."
     },
     "users": {
       "headerText": "Brukere"

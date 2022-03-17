@@ -158,7 +158,6 @@
     "vacationTotalDaysDescription": "Total number of vacation days for each employee in the company.",
     "vacationEventCategoryLabel": "Outlook event category",
     "vacationEventCategoryDescription": "Category to be used for tagging events in Outlook as vacation.",
-    "roleDeletedMessage": "Role {{name}} was successfully deleted.",
     "labels": {
       "headerText": "Labels",
       "confirmDeleteTitle": "Delete label",
@@ -174,7 +173,8 @@
       "headerText": "Subscription"
     },
     "rolesPermissions": {
-      "headerText": "Roles and permissions"
+      "headerText": "Roles and permissions",
+      "deleteSuccess": "Role {{name}} was successfully deleted."
     },
     "users": {
       "headerText": "Users"
