@@ -25,7 +25,7 @@ export const Labels: TabComponent = () => {
           items: [
             {
               key: 'ADD_NEW_LABEL',
-              name: t('admin.addNewLabel'),
+              name: t('admin.labels.addNewText'),
               iconProps: { iconName: 'Add' },
               onClick: () => setForm({ isOpen: true })
             }

@@ -120,9 +120,6 @@
       "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
     },
     "addNewUser": "Add new",
-    "defaultLabelTitle": "my new label",
-    "addNewLabel": "Add new label",
-    "editLabel": "Edit label",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months/weeks in the selected year.",
@@ -165,7 +162,10 @@
       "nameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
       "createSuccess": "Your new label **{{name}}** was succesfully created.",
       "createError": "We can't update the label at the moment. Please try again later.",
-      "updateSuccess": "Your label **{{name}}** was succesfully updated."
+      "updateSuccess": "Your label **{{name}}** was succesfully updated.",
+      "defaultTitle": "my new label",
+      "addNewText": "Add new label",
+      "editText": "Edit label"
     },
     "subscriptionSettings": {
       "headerText": "Subscription"

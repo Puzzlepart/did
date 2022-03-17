@@ -119,9 +119,6 @@
       "confirmDeleteTitle": "Slett API-nøkkel"
     },
     "addNewUser": "Legg til ny",
-    "defaultLabelTitle": "ny merkelapp",
-    "addNewLabel": "Opprett ny merkelapp",
-    "editLabel": "Rediger merkelapp",
     "addNewRole": "Legg til ei ny rolle",
     "roleNameLabel": "Rollenamn",
     "noTimeEntriesText": "Det finst ikkje stadfesta timar for dei valde månadene/vekene i det valde året.",
@@ -164,7 +161,10 @@
       "nameDescription": "Namn på merkelapp. \nIngen spesialtegn. \nKun bokstavar og mellomrom.",
       "createError": "Vi kan ikkje oppdatere merkelappen for øyeblikket. \nForsøk igjen seinare.",
       "createSuccess": "Den nye merkelappen din **{{name}}** vert oppretta.",
-      "updateSuccess": "Merkelappen din **{{name}}** vert oppdatert"
+      "updateSuccess": "Merkelappen din **{{name}}** vart oppdatert",
+      "defaultTitle": "ny merkelapp",
+      "addNewText": "Opprett ny merkelapp",
+      "editText": "Rediger merkelapp"
     },
     "subscriptionSettings": {
       "headerText": "Abonnement"

@@ -20,8 +20,8 @@ export const LabelForm: React.FC<ILabelFormProps> = (props) => {
       panelProps={{
         ..._.omit(props, 'onSave'),
         headerText: !!props.edit
-          ? t('admin.editLabel')
-          : t('admin.addNewLabel'),
+          ? t('admin.labels.editText')
+          : t('admin.labels.addNewText'),
         isLightDismiss: true
       }}
     >
