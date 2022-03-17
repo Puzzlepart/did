@@ -22,7 +22,7 @@ export function useLabels() {
   const [form, setForm] = useState<ILabelFormProps>({
     isOpen: false
   })
-  const [confirmDeleteDialog, getConfirmDeleteResponse] = useConfirmationDialog()
+  const [ConfirmationDialog, getResponse] = useConfirmationDialog()
 
   const onDismiss = useCallback(() => {
     setForm({ isOpen: false })
@@ -37,12 +37,12 @@ export function useLabels() {
   }, [])
 
   const onDelete = useCallback(async (label: LabelObject) => {
-    const response = await getConfirmDeleteResponse({
-      title: t('admin.confirmDeleteLabelTitle'),
-      subText: t('admin.confirmDeleteLabelSubText', label),
+    const response = await getResponse({
+      title: t('admin.labels.confirmDeleteTitle'),
+      subText: t('admin.labels.confirmDeleteSubText', label),
       responses: [[t('common.yes'), true, true], [t('common.no')]]
     })
-    if (response) {
+    if (response === true) {
       deleteLabel({ variables: { name: label.name } }).then(query.refetch)
     }
   }, [deleteLabel])
@@ -61,6 +61,6 @@ export function useLabels() {
     },
     setForm,
     query,
-    confirmDeleteDialog
+    ConfirmationDialog
   }
 }

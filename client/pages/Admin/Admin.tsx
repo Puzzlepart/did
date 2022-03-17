@@ -38,12 +38,12 @@ export const Admin = () => {
       />
       <Labels headerText={t('admin.labels.headerText')} itemIcon='Label' />
       <Roles
-        headerText={t('admin.rolesPermissions')}
+        headerText={t('admin.rolesPermissions.headerText')}
         itemIcon='SecurityGroup'
         permission={PermissionScope.MANAGE_ROLESPERMISSIONS}
       />
       <SubscriptionSettings
-        headerText={t('admin.subscriptionSettings')}
+        headerText={t('admin.subscriptionSettings.headerText')}
         itemIcon='Subscribe'
         permission={PermissionScope.MANAGE_SUBSCRIPTION}
       />

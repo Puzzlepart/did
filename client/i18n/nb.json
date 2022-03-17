@@ -120,7 +120,6 @@
       "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?"
     },
     "filterLabels": "Filtrer merkelapper...",
-    "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
     "defaultLabelTitle": "ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
@@ -141,7 +140,6 @@
     "forecastEnabledDescription": "Aktiver/deaktiver prognoser.",
     "forecastNotificationsDescription": "Hvor mange uker fram i tid skal brukerne prognosere?",
     "forecastNotificationsLabel": "Varsler",
-    "subscriptionSettings": "Abonnement",
     "summaryRangeValueFormat": "Viser {{value}} måneder",
     "adsync": "Synkronisering med Azure AD",
     "adUserSyncEnabledLabel": "Synkroniser brukeregenskaper",
@@ -156,24 +154,28 @@
     "adUserSyncUserPhotoLabel": "Synkroniser profilbilde",
     "adUserSyncUserPhotoDescription": "Synkroniser profilbilde fra Azure Active Directory når brukerne logger på.",
     "subscriptionInfoHeader": "Grunnleggende informasjon",
-    "labelNameLabel": "Navn på merkelapp",
-    "labelNamePlaceholder": "Navn på merkelapp",
-    "labelNameDescription": "Navn på merkelapp. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
-    "labelCreateError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
-    "labelCreateSuccess": "Den nye merkelappen din **{{name}}** ble opprettet",
-    "labelUpdateSuccess": "Merkelappen din **{{name}}** ble oppdatert",
     "vacationEventCategoryLabel": "Hendelseskategori i Outlook",
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
     "vacation": "Ferie og fravær",
     "roleDeletedMessage": "Rollen {{name}} ble slettet.",
-    "confirmDeleteLabelTitle": "Slett merkelapp",
-    "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?",
     "labels": {
       "headerText": "Merkelapper",
       "confirmDeleteTitle": "Slett merkelapp",
-      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?"
+      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
+      "nameLabel": "Navn på merkelapp",
+      "namePlaceholder": "Navn på merkelapp",
+      "nameDescription": "Navn på merkelapp. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
+      "createError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
+      "createSuccess": "Den nye merkelappen din **{{name}}** ble opprettet",
+      "updateSuccess": "Merkelappen din **{{name}}** ble oppdatert"
+    },
+    "subscriptionSettings": {
+      "headerText": "Abonnement"
+    },
+    "rolesPermissions": {
+      "headerText": "Roller og tillatelser"
     }
   },
   "reports": {

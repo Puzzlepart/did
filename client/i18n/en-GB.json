@@ -121,7 +121,6 @@
       "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
     },
     "filterLabels": "Filter labels...",
-    "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
     "defaultLabelTitle": "my new label",
     "addNewLabel": "Add new label",
@@ -142,7 +141,6 @@
     "forecastEnabledDescription": "Enable/disable forecasting.",
     "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
     "forecastNotificationsLabel": "Notifications",
-    "subscriptionSettings": "Subscription",
     "summaryRangeValueFormat": "Showing {{value}} months",
     "adsync": "Azure AD Sync",
     "adUserSyncEnabledLabel": "Synchronize user properties",
@@ -157,12 +155,6 @@
     "adUserSyncUserPhotoLabel": "Synchronize user photo",
     "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in.",
     "subscriptionInfoHeader": "Basic info",
-    "labelNameLabel": "Label name",
-    "labelNamePlaceholder": "Label name",
-    "labelNameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
-    "labelCreateSuccess": "Your new label **{{name}}** was succesfully created.",
-    "labelCreateError": "We can't update the label at the moment. Please try again later.",
-    "labelUpdateSuccess": "Your label **{{name}}** was succesfully updated.",
     "vacation": "Holidays and absence",
     "vacationTotalDaysLabel": "Vacation days",
     "vacationTotalDaysDescription": "Total number of vacation days for each employee in the company.",
@@ -172,7 +164,19 @@
     "labels": {
       "headerText": "Labels",
       "confirmDeleteTitle": "Delete label",
-      "confirmDeleteSubText": "Are you sure you want to delete the label \"{{name}}\"?"
+      "confirmDeleteSubText": "Are you sure you want to delete the label \"{{name}}\"?",
+      "nameLabel": "Label name",
+      "namePlaceholder": "Label name",
+      "nameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
+      "createSuccess": "Your new label **{{name}}** was succesfully created.",
+      "createError": "We can't update the label at the moment. Please try again later.",
+      "updateSuccess": "Your label **{{name}}** was succesfully updated."
+    },
+    "subscriptionSettings": {
+      "headerText": "Subscription"
+    },
+    "rolesPermissions": {
+      "headerText": "Roles and permissions"
     }
   },
   "reports": {

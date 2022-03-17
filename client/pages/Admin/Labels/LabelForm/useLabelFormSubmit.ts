@@ -30,8 +30,8 @@ export function useLabelFormSubmit(
       })
       setToast({
         text: !props.edit
-          ? t('admin.labelCreateSuccess', model.$)
-          : t('admin.labelUpdateSuccess', model.$),
+          ? t('admin.labels.createSuccess', model.$)
+          : t('admin.labels.updateSuccess', model.$),
         type: 'success'
       })
       model.reset()
@@ -39,8 +39,8 @@ export function useLabelFormSubmit(
     } catch {
       setToast({
         text: !props.edit
-          ? t('admin.labelCreateError')
-          : t('admin.labelCreateError'),
+          ? t('admin.labels.createError')
+          : t('admin.labels.createError'),
         type: 'error'
       })
     }

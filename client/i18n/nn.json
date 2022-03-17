@@ -115,7 +115,9 @@
       "oneMonth": "Ein månad",
       "monthPlural": "{{months}} månader",
       "oneYear": "1 år",
-      "neverExpiresText": "Går aldri ut på dato"
+      "neverExpiresText": "Går aldri ut på dato",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?",
+      "confirmDeleteTitle": "Slett API-nøkkel"
     },
     "filterLabels": "Filtrer merkelappar...",
     "rolesPermissions": "Roller og tilgangar",
@@ -167,7 +169,11 @@
     "vacation": "Ferie og fravær",
     "roleDeletedMessage": "Rollen {{name}} vart sletta.",
     "confirmDeleteLabelTitle": "Slett merkelapp",
-    "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?"
+    "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?",
+    "labels": {
+      "confirmDeleteTitle": "Slett merkelapp",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?"
+    }
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

@@ -12,7 +12,7 @@ export const Labels: TabComponent = () => {
     form,
     setForm,
     query,
-    confirmDeleteDialog
+    ConfirmationDialog
   } = useLabels()
 
   return (
@@ -34,7 +34,7 @@ export const Labels: TabComponent = () => {
         }}
       />
       <LabelForm {...form} />
-      {confirmDeleteDialog}
+      {ConfirmationDialog}
     </>
   )
 }

@@ -29,9 +29,9 @@ export function useApiTokens() {
         const response = await getResponse({
             title: t('admin.apiTokens.confirmDeleteTitle'),
             subText: t('admin.apiTokens.confirmDeleteSubText', token),
-            responses: [[t('common.yes'), true, true], [t('common.no'), false]]
+            responses: [[t('common.yes'), true, true], [t('common.no')]]
         })
-        if (response) {
+        if (response === true) {
             await deleteApiToken({ variables: { name: token.name } })
             setMessage({
                 type: 'info',
