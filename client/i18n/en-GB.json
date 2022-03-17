@@ -147,8 +147,6 @@
     "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
     "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
     "userHiddenFromReportsLabel": "Hidden from reports",
-    "summaryViewProgressLabel": "Loading summary",
-    "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data...",
     "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did.",
     "adUserSyncUserPhotoLabel": "Synchronize user photo",
     "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in.",
