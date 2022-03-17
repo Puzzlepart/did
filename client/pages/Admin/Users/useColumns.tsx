@@ -5,11 +5,13 @@ import { EditLink } from 'components/EditLink'
 import { IListColumn } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
 import $date from 'DateUtils'
+import { usePermissions } from 'hooks/user/usePermissions'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
+import { PermissionScope } from '../../../../shared/config/security/permissions'
 import { IUsersContext } from './context'
 
 /**
@@ -23,6 +25,7 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
     { size: PersonaSize.size40 },
     { maxWidth: 250 }
   )
+  const [, hasPermission] = usePermissions()
   return [
     userColumn,
     col('surname', t('common.surnameLabel'), {
@@ -55,7 +58,7 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
       data: { hidden: isMobile },
       onRender: (row) => $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
     }),
-    col('actions', '', { maxWidth: 100 }, (user: User) => (
+    col('actions', '', { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) }, (user: User) => (
       <div style={{ display: 'flex' }}>
         <EditLink
           style={{ marginRight: 12 }}
@@ -69,5 +72,5 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
         />
       </div>
     ))
-  ]
+  ].filter(col => !col.hidden)
 }

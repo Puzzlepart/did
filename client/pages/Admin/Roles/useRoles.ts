@@ -54,8 +54,7 @@ export function useRoles() {
   const columns = useColumns({ setPanel, onDelete })
 
   return {
-    ...roleQuery,
-    roles: roleQuery.data?.roles || [],
+    query: roleQuery,
     columns,
     panel,
     setPanel,

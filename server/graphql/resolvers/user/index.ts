@@ -82,6 +82,7 @@ export class UserResolver {
   /**
    * Get Active Directory users
    */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [User], { description: 'Get all users from Active Directory' })
   activeDirectoryUsers(): Promise<User[]> {
     return this._msgraph.getUsers()
@@ -92,7 +93,7 @@ export class UserResolver {
    *
    * @param query - Query
    */
-  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [User], { description: 'Get users' })
   users(
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery

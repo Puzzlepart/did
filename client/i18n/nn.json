@@ -397,7 +397,9 @@
     "manageUsersDescription": "Administrer brukarar på administratorsida. \nLegg til nye brukarar, éin etter éin eller i bulk, og endre rollar for eksisterande brukarar.",
     "manageRolesPermissionsDescription": "Administrer roller og løyve på administratorsida. \nLag nye roller og rediger eksisterande.",
     "manageSubscription": "Administrer abonnementet",
-    "manageSubscriptionDescription": "Administrer abonnementsinnstillingar og faktureringsinformasjon."
+    "manageSubscriptionDescription": "Administrer abonnementsinnstillingar og faktureringsinformasjon.",
+    "listUsers": "Hente brukere",
+    "listUsersDescription": "Hente ut alle brukere for abonnementet."
   },
   "notifications": {
     "moreLinkText": "Les meir her",

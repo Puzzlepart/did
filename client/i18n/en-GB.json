@@ -398,7 +398,9 @@
     "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
     "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting.",
     "manageSubscription": "Manage subscription",
-    "manageSubscriptionDescription": "Manage subscription settings and billing information."
+    "manageSubscriptionDescription": "Manage subscription settings and billing information.",
+    "listUsers": "List users",
+    "listUsersDescription": "Retrieve the list of all users in the subscription."
   },
   "notifications": {
     "moreLinkText": "Read more here",
