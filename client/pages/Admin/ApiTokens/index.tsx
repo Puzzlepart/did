@@ -24,15 +24,15 @@ export const ApiTokens: TabComponent = () => {
     form,
     setForm,
     apiKey,
-    toast,
     columns,
     onKeyAdded,
-    ConfirmationDialog
+    confirmationDialog,
+    toast
   } = useApiTokens()
 
   return (
     <div className={styles.root}>
-    <Toast {...toast} />
+      <Toast {...toast} />
       {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
           <UserMessage type='success' iconName='Cloud'>
@@ -66,7 +66,7 @@ export const ApiTokens: TabComponent = () => {
           onDismiss={() => setForm({ isOpen: false })}
         />
       )}
-      {ConfirmationDialog}
+      {confirmationDialog}
     </div>
   )
 }

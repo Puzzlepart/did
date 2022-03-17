@@ -23,7 +23,7 @@ export function useApiTokens() {
     const query = useQuery($tokens)
     const [apiKey, setApiKey] = useState(null)
     const [form, setForm] = useState<IApiTokenFormProps>({})
-    const [ConfirmationDialog, getResponse] = useConfirmationDialog()
+    const [confirmationDialog, getResponse] = useConfirmationDialog()
 
     const onDelete = useCallback(async (token: ApiToken) => {
         const response = await getResponse({
@@ -65,6 +65,6 @@ export function useApiTokens() {
         toast,
         columns,
         onKeyAdded,
-        ConfirmationDialog
+        confirmationDialog
     }
 }
