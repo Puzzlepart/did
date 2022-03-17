@@ -120,7 +120,6 @@
       "confirmDeleteTitle": "Slett API-nøkkel"
     },
     "filterLabels": "Filtrer merkelappar...",
-    "rolesPermissions": "Roller og tilgangar",
     "addNewUser": "Legg til ny",
     "defaultLabelTitle": "ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
@@ -141,7 +140,6 @@
     "forecastEnabledDescription": "Aktiver/deaktiver prognosar.",
     "forecastNotificationsDescription": "Kor mange veker fram i tid skal brukarane prognosere?",
     "forecastNotificationsLabel": "Varsel",
-    "subscriptionSettings": "Abonnement",
     "summaryRangeValueFormat": "Viser {{value}} månader",
     "adsync": "Synkronisering med Azure AD",
     "adUserSyncEnabledLabel": "Synkroniser brukareigenskapar",
@@ -172,7 +170,14 @@
     "confirmDeleteLabelSubText": "Er du sikker på at du vil slette etiketten \"{{name}}\"?",
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
-      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?"
+      "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
+      "headerText": "Merkelappar"
+    },
+    "subscriptionSettings": {
+      "headerText": "Abonnement"
+    },
+    "rolesPermissions": {
+      "headerText": "Roller og tillatelser"
     }
   },
   "reports": {
