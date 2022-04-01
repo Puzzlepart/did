@@ -36,7 +36,7 @@ export class CustomerResolver {
    **/
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
-  customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
+  customers() {
     return this._customer.getCustomers()
   }
 

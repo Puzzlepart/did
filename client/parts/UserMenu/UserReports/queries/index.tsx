@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import {
   currentMonthQuery,
   currentYearQuery,
