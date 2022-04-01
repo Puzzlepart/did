@@ -64,15 +64,9 @@ ___
 
 ### customers
 
-▸ **customers**(`sortBy`: *string*): *Promise*<[*Customer*](graphql.customer.md)[]\>
+▸ **customers**(): *Promise*<[*Customer*](graphql.customer.md)[]\>
 
 Get customers
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`sortBy` | *string* | Sort by    |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
