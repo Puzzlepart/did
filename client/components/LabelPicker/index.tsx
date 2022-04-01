@@ -14,7 +14,6 @@ import { useLabelPicker } from './useLabelPicker'
  * @category Reusable Component
  */
 export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
-  const { t } = useTranslation()
   const {
     labels,
     selectedLabels,
