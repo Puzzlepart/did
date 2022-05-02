@@ -346,7 +346,7 @@ ___
 
 • `Const` **LabelPicker**: *ReusableComponent*<ILabelPickerProps\>
 
-Defined in: [client/components/LabelPicker/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L16)
+Defined in: [client/components/LabelPicker/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L15)
 
 ___
 
