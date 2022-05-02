@@ -3,16 +3,6 @@ import { EventInput, EventObject } from '../../graphql'
 import { ITimesheetPeriodData } from './types'
 
 /**
- * Create unique ID consisting of event ID + event start date time
- *
- * @param eventId - Event ID
- * @param startDateTime - Start date time
- */
-function createUniqueEventId(eventId: string, startDateTime: Date) {
-  return `${eventId}${startDateTime.getTime()}`.replace(/[^\dA-Za-z]/g, '')
-}
-
-/**
  * Map matched events. Takes the matched events retrieved from the client, and combines
  * the event data with the actual events from Microsoft Graph. Also adds additional data
  * to the events from the period.
@@ -32,11 +22,9 @@ export function mapMatchedEvents(
   const hours = matchedEvents.reduce((hours, m: any) => {
     const event = _.find(events, ({ id }) => id === m.id)
     if (!event) return null
-    const _id = createUniqueEventId(event.id, event.startDateTime as Date)
     events_.push({
       ...m,
-      ...event,
-      _id
+      ...event
     })
     return hours + event.duration
   }, 0)
