@@ -22,7 +22,7 @@ export function useProjectListProps(context: IProjectsContext, enableShimmer: bo
       enableShimmer,
       searchBox: {
         placeholder:
-        context.state.view === 'my'
+          context.state.view === 'my'
             ? t('projects.myProjectsSearchPlaceholder')
             : t('common.searchPlaceholder'),
         onChange: () => context.dispatch(SET_SELECTED_PROJECT({ project: null }))
@@ -30,6 +30,7 @@ export function useProjectListProps(context: IProjectsContext, enableShimmer: bo
       selectionProps: {
         mode: SelectionMode.single,
         onChanged: (project: Project) => {
+          if (!project) return
           context.dispatch(SET_SELECTED_PROJECT({ project }))
         }
       }
