@@ -15,11 +15,11 @@ export const Header: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.icon}>
-        <Icon iconName={state.selected.icon} />
+        <Icon iconName={state.selected?.icon} />
       </div>
       <div className={styles.title}>
-        <div className={styles.text}>{state.selected.name}</div>
-        <SubText text={state.selected.customer.name} />
+        <div className={styles.text}>{state.selected?.name}</div>
+        <SubText text={state.selected?.customer.name} />
       </div>
       <Actions hidden={isMobile} />
     </div>

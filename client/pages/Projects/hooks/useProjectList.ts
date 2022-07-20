@@ -1,5 +1,6 @@
 import { SelectionMode } from '@fluentui/react'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Project } from 'types'
 import { IProjectListProps } from '../ProjectList/types'
 import { SET_SELECTED_PROJECT } from '../reducer/actions'
@@ -7,7 +8,8 @@ import { SET_SELECTED_PROJECT } from '../reducer/actions'
 /**
  * Use Project list
  */
-export function useProjectList({ state, dispatch, loading, t }) {
+export function useProjectList({ state, dispatch, loading }) {
+  const { t } = useTranslation()
   const listProps = useMemo<IProjectListProps>(
     () => ({
       items: null,
@@ -24,8 +26,7 @@ export function useProjectList({ state, dispatch, loading, t }) {
         onChanged: (project: Project) => {
           dispatch(SET_SELECTED_PROJECT({ project }))
         }
-      },
-      height: state.selected && 400
+      }
     }),
     [state, dispatch, loading, t]
   )

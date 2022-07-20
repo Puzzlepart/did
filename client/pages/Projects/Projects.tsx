@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { TabContainer } from 'components/TabContainer'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
 import { useProjects } from './hooks/useProjects'
@@ -14,8 +15,8 @@ import { ProjectsView } from './types'
  * @category Function Component
  */
 export const Projects: React.FC = () => {
-  const { state, dispatch, listProps, t, context } = useProjects()
-
+  const { t } = useTranslation()
+  const { state, dispatch, listProps, context } = useProjects()
   return (
     <ProjectsContext.Provider value={context}>
       <TabContainer
@@ -31,7 +32,7 @@ export const Projects: React.FC = () => {
           itemIcon='FabricFolderSearch'
           items={state.projects}
         >
-          {state.selected && <ProjectDetails />}
+          <ProjectDetails />
         </ProjectList>
         <ProjectList
           {...listProps}
@@ -40,7 +41,7 @@ export const Projects: React.FC = () => {
           itemIcon='FabricUserFolder'
           items={state.projects.filter((p) => !!p.outlookCategory)}
         >
-          {state.selected && <ProjectDetails />}
+          <ProjectDetails />
         </ProjectList>
         <ProjectForm
           itemKey='new'

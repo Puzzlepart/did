@@ -41,16 +41,16 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   return (
     <div className={styles.root} hidden={props.hidden}>
       <div className={styles.container}>
-        <div className={styles.actionItem} hidden={!state.selected.webLink}>
+        <div className={styles.actionItem} hidden={!state.selected?.webLink}>
           <DefaultButton
             text={t('projects.workspaceLabel')}
-            onClick={() => window.location.replace(state.selected.webLink)}
+            onClick={() => window.location.replace(state.selected?.webLink)}
             iconProps={{ iconName: 'Website' }}
           />
         </div>
         <div
           className={styles.actionItem}
-          hidden={!!state.selected.outlookCategory}
+          hidden={!!state.selected?.outlookCategory}
         >
           <DefaultButton
             text={t('projects.createOutlookCategoryLabel')}
@@ -68,11 +68,11 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
             onClick={() => setShowEditPanel(true)}
           />
           <ProjectForm
-            key={state.selected.tag}
+            key={state.selected?.tag}
             edit={state.selected}
             panelProps={{
               isOpen: showEditPanel,
-              headerText: state.selected.name,
+              headerText: state.selected?.name,
               isLightDismiss: true,
               onLightDismissClick: () => setShowEditPanel(false),
               onDismiss: () => setShowEditPanel(false),

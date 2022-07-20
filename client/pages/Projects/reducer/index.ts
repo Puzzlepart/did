@@ -41,7 +41,9 @@ export default ({ url }: IProjectsReducerParameters) =>
       state,
       { payload }: ReturnType<typeof SET_SELECTED_PROJECT>
     ) => {
-      state.selected = payload.project
+      if (payload.project !== undefined) {
+        state.selected = payload.project
+      }
     },
 
     [CHANGE_VIEW.type]: (

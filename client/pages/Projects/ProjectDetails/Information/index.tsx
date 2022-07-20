@@ -18,7 +18,7 @@ export const Information: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      {state.selected.inactive && (
+      {state.selected?.inactive && (
         <UserMessage
           hidden={!state.selected.inactive}
           text={t('projects.inactiveText')}
@@ -26,22 +26,22 @@ export const Information: React.FC = () => {
           type={'warning'}
         />
       )}
-      <SubText text={state.selected.description} font='medium' />
+      <SubText text={state.selected?.description} font='medium' />
       <div className={styles.labels}>
-        {(state.selected.labels as Label[]).map((label, index) => (
+        {((state.selected?.labels ?? []) as Label[]).map((label, index) => (
           <EntityLabel key={index} label={label} />
         ))}
       </div>
       <UserMessage
         hidden={
-          !!state.selected.description || !_.isEmpty(state.selected.labels)
+          !!state.selected?.description || !_.isEmpty(state.selected?.labels)
         }
         containerStyle={{ margin: '15px 0 15px 0' }}
         text={t('projects.noInformationAvailable')}
         iconName='Info'
       />
       <UserMessage
-        hidden={!state.selected.outlookCategory}
+        hidden={!state.selected?.outlookCategory}
         containerStyle={{ margin: '15px 0 15px 0' }}
         text={t('projects.categoryOutlookText')}
         iconName='OutlookLogoInverse'

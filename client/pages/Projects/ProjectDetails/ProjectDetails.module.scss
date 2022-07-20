@@ -1,5 +1,8 @@
 .root {
   display: flex;
   flex-direction: column;
-  padding-bottom: 150px;
+  
+  .container {
+    padding: 20px 20px 150px 20px;
+  }
 }

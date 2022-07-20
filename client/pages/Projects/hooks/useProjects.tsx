@@ -1,6 +1,5 @@
 import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { IProjectsContext } from '../context'
 import { useProjectsReducer } from '../reducer'
@@ -20,7 +19,6 @@ import { useProjectsQuery } from './useProjectsQuery'
  *   when the query is reloaded
  */
 export function useProjects() {
-  const { t } = useTranslation()
   const { user } = useAppContext()
   const url = useParams<IProjectsParameters>()
   const { state, dispatch } = useProjectsReducer({ url })
@@ -37,14 +35,13 @@ export function useProjects() {
     [state, dispatch, refetch]
   )
 
-  const { listProps } = useProjectList({ state, dispatch, loading, t })
+  const { listProps } = useProjectList({ state, dispatch, loading })
 
   return {
     state,
     dispatch,
     listProps,
     user,
-    t,
     context
-  }
+  } as const
 }

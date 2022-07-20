@@ -49,7 +49,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
     col(
       'name',
       t('common.nameFieldLabel'),
-      { maxWidth: 220 },
+      { maxWidth: 320 },
       (project: Project) => (
         <ColumnWrapper project={project}>
           <NameLabel project={project} renderLink={props.renderLink} />
@@ -59,7 +59,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
     col(
       'customer',
       t('common.customer'),
-      { maxWidth: 220 },
+      { maxWidth: 320 },
       (project: Project) => {
         if (!project.customer) return null
         return (
