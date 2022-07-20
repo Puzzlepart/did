@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
@@ -5,9 +6,9 @@ import { IProjectsContext } from '../context'
 import { useProjectsReducer } from '../reducer'
 import { IProjectsParameters } from '../types'
 import { useProjecstHistory } from './useProjecstHistory'
-import { useProjectList } from './useProjectList'
+import { useProjectListProps } from './useProjectListProps'
 import { useProjectsQuery } from './useProjectsQuery'
-
+ 
 /**
  * Hook for Projects
  *
@@ -35,7 +36,7 @@ export function useProjects() {
     [state, dispatch, refetch]
   )
 
-  const { listProps } = useProjectList({ state, dispatch, loading })
+  const listProps  = useProjectListProps(context, loading)
 
   return {
     state,

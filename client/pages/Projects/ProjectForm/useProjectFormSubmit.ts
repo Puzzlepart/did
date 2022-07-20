@@ -23,7 +23,7 @@ export function useProjectFormSubmit(
   options: ReturnType<typeof useProjectFormOptions>
 ): ISubmitProps {
   const { t } = useTranslation()
-  const { refetch } = useContext(ProjectsContext)
+  const { fetchProjects } = useContext(ProjectsContext)
   const [toast, setToast] = useToast(8000, { isMultiline: true })
   const [mutate, { loading }] = useMutation($create_or_update_project)
 
@@ -49,7 +49,7 @@ export function useProjectFormSubmit(
           }),
           type: 'success'
         })
-        refetch()
+        fetchProjects()
         model.reset()
       }
     } catch {

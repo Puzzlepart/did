@@ -14,10 +14,11 @@ export function useProjectList(props: IProjectListProps) {
   const columns = useColumns(props)
 
   useEffect(
-    () =>
+    () => {
       setItems(
         [...props.items].filter((p) => (showInactive ? true : !p.inactive))
-      ),
+      )
+    },
     [props.items, showInactive]
   )
 

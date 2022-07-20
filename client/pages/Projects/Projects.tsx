@@ -30,19 +30,13 @@ export const Projects: React.FC = () => {
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'
-          items={state.projects}
-        >
-          <ProjectDetails />
-        </ProjectList>
+          items={state.projects} />
         <ProjectList
           {...listProps}
           itemKey='my'
           headerText={t('projects.myProjectsText')}
           itemIcon='FabricUserFolder'
-          items={state.projects.filter((p) => !!p.outlookCategory)}
-        >
-          <ProjectDetails />
-        </ProjectList>
+          items={state.projects.filter((p) => !!p.outlookCategory)} />
         <ProjectForm
           itemKey='new'
           headerText={t('projects.createNewText')}
@@ -50,6 +44,7 @@ export const Projects: React.FC = () => {
           permission={PermissionScope.MANAGE_PROJECTS}
         />
       </TabContainer>
+      <ProjectDetails />
     </ProjectsContext.Provider>
   )
 }
