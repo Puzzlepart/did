@@ -21,21 +21,21 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
       <div className={styles.container}>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected.webLink}
+          hidden={loading || !state.selected?.webLink}
         >
           <DefaultButton
             text={t('customers.webLinkText')}
-            href={state.selected.webLink}
+            href={state.selected?.webLink}
             iconProps={{ iconName: 'Website' }}
           />
         </div>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected.externalSystemURL}
+          hidden={loading || !state.selected?.externalSystemURL}
         >
           <DefaultButton
             text={t('customers.externalSystemUrlText')}
-            href={state.selected.externalSystemURL}
+            href={state.selected?.externalSystemURL}
             iconProps={{ iconName: 'System' }}
           />
         </div>
@@ -49,11 +49,11 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
             onClick={() => setShowEditPanel(true)}
           />
           <CustomerForm
-            key={state.selected.key}
+            key={state.selected?.key}
             edit={state.selected}
             panelProps={{
               isOpen: showEditPanel,
-              headerText: state.selected.name,
+              headerText: state.selected?.name,
               isLightDismiss: true,
               onLightDismissClick: () => setShowEditPanel(false),
               onDismiss: () => setShowEditPanel(false),

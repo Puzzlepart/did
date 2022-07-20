@@ -17,8 +17,7 @@ import { CustomersView } from './types'
  */
 export const Customers: TabComponent<ICustomerFormProps> = () => {
   const { t } = useTranslation()
-  const { state, dispatch, context, view } = useCustomers()
-
+  const { dispatch, context, view } = useCustomers()
   return (
     <CustomersContext.Provider value={context}>
       <TabContainer
@@ -31,10 +30,7 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
         <CustomerList
           itemKey='search'
           headerText={t('common.search')}
-          itemIcon='FabricFolderSearch'
-        >
-          {state.selected && <CustomerDetails />}
-        </CustomerList>
+          itemIcon='FabricFolderSearch' />
         <CustomerForm
           itemKey='new'
           headerText={t('customers.createNewText')}
@@ -42,6 +38,7 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
           permission={PermissionScope.MANAGE_CUSTOMERS}
         />
       </TabContainer>
+      <CustomerDetails />
     </CustomersContext.Provider>
   )
 }
