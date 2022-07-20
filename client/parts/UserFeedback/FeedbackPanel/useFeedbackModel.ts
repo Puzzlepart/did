@@ -14,11 +14,13 @@ const INITIAL_MODEL = {
 }
 
 export interface IFeedbackModel {
-  readonly reset: () => void;
-  readonly $set: React.Dispatch<React.SetStateAction<Map<keyof UserFeedback, any>>>;
-  readonly $: UserFeedback;
-  readonly set: (key: keyof UserFeedback, value: any) => void;
-  readonly value: (key: keyof UserFeedback, _default?: any) => any;
+  readonly reset: () => void
+  readonly $set: React.Dispatch<
+    React.SetStateAction<Map<keyof UserFeedback, any>>
+  >
+  readonly $: UserFeedback
+  readonly set: (key: keyof UserFeedback, value: any) => void
+  readonly value: (key: keyof UserFeedback, _default?: any) => any
 }
 
 export const useFeedbackModel = () => {
