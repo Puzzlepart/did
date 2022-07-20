@@ -4,7 +4,7 @@ import { Customer } from 'types'
 import { CustomersView } from '../types'
 
 export const DATA_UPDATED =
-  createAction<{ query: QueryResult<any> }>('DATA_UPDATED')
+  createAction<QueryResult<any>>('DATA_UPDATED')
 export const SET_SELECTED_CUSTOMER = createAction<{ customer: Customer }>(
   'SET_SELECTED_CUSTOMER'
 )

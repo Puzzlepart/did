@@ -17,6 +17,6 @@ export function useCustomersQuery(dispatch: Dispatch<AnyAction>): QueryResult<an
     fetchPolicy: 'cache-and-network'
   })
 
-  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  useEffect(() => dispatch(DATA_UPDATED(query)), [query])
   return query
 }

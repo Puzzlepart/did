@@ -3,7 +3,7 @@ import { createAction } from '@reduxjs/toolkit'
 import { Project } from 'types'
 import { ProjectsView } from '../types'
 
-export const DATA_UPDATED = createAction<QueryResult>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<QueryResult<any>>('DATA_UPDATED')
 export const SET_SELECTED_PROJECT = createAction<{ project: Project }>(
   'SET_SELECTED_PROJECT'
 )

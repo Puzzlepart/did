@@ -1,5 +1,4 @@
 /* eslint-disable tsdoc/syntax */
-import { ApolloError } from '@apollo/client'
 import { OutlookCategory, Project } from 'types'
 
 /**
@@ -25,5 +24,5 @@ export interface IProjectsState {
   selected?: Project
   projects?: Project[]
   outlookCategories?: OutlookCategory[]
-  error?: ApolloError
+  error?: any
 }

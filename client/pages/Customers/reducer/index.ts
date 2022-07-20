@@ -28,11 +28,14 @@ export default ({ params }: ICreateReducerParameters) =>
   createReducer(initState(params), (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.customers = payload.query.data?.customers || []
-        state.selected = _.find(
-          state.customers,
-          (c) => params.key?.toLowerCase() === c.key.toLowerCase()
-        )
+        if (payload.data) {
+          state.customers = payload.data.customers || []
+          state.selected = _.find(
+            state.customers,
+            (c) => params.key?.toLowerCase() === c.key.toLowerCase()
+          )
+        }
+        state.error = payload.error
       })
       .addCase(SET_SELECTED_CUSTOMER, (state, { payload }) => {
         state.selected = payload.customer

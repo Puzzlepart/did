@@ -27,7 +27,9 @@ export const useCustomerList = () => {
     columns,
     showInactive,
     setShowInactive,
-    setSelectedCustomer: (customer: Customer) =>
+    setSelectedCustomer: (customer: Customer) => {
+      if (!customer) return
       dispatch(SET_SELECTED_CUSTOMER({ customer }))
+    }
   }
 }
