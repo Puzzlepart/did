@@ -18,13 +18,8 @@ import { Projects } from './Projects'
 export const ProjectsPage: PageComponent = () => {
   return (
     <Switch>
-      <Route key='/projects/:view/:key/:detailsTab' path='/projects/:view/:key/:detailsTab'>
-        <Projects />
-      </Route>
-      <Route key='/projects' path='/projects'>
-        <Projects />
-      </Route>
-    </Switch>
+      <Route path='/projects/:view?/:key?/:detailsTab?' component={Projects} />
+    </Switch >
   )
 }
 

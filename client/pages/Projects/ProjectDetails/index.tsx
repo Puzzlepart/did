@@ -25,30 +25,28 @@ export const ProjectDetails: React.FC = () => {
         history.push(`/projects/${state.view}`)
       }}
       containerClassName={styles.root}>
-      <div className={styles.container}>
-        <Header />
-        <Pivot
-          defaultSelectedKey={state.detailsTab}
-          onLinkClick={({ props }) =>
-            dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))
-          }
+      <Header />
+      <Pivot
+        defaultSelectedKey={state.detailsTab}
+        onLinkClick={({ props }) =>
+          dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))
+        }
+      >
+        <PivotItem
+          headerText={t('projects.informationHeaderText')}
+          itemKey='information'
+          itemIcon='Info'
         >
-          <PivotItem
-            headerText={t('projects.informationHeaderText')}
-            itemKey='information'
-            itemIcon='Info'
-          >
-            <Information />
-          </PivotItem>
-          <PivotItem
-            headerText={t('projects.timeEntriesHeaderText')}
-            itemKey='timeentries'
-            itemIcon='ReminderTime'
-          >
-            <TimeEntries />
-          </PivotItem>
-        </Pivot>
-      </div>
+          <Information />
+        </PivotItem>
+        <PivotItem
+          headerText={t('projects.timeEntriesHeaderText')}
+          itemKey='timeentries'
+          itemIcon='ReminderTime'
+        >
+          <TimeEntries />
+        </PivotItem>
+      </Pivot>
     </Modal>
   )
 }
