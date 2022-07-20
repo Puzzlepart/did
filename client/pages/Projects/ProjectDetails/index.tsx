@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Modal, Pivot, PivotItem } from '@fluentui/react'
+import { Modal, Pivot, PivotItem, ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -24,7 +24,8 @@ export const ProjectDetails: React.FC = () => {
         dispatch(SET_SELECTED_PROJECT({ project: null }))
         history.push(`/projects/${state.view}`)
       }}
-      containerClassName={styles.root}>
+      containerClassName={styles.root}
+      scrollableContentClassName={styles.content}>
       <Header />
       <Pivot
         defaultSelectedKey={state.detailsTab}
@@ -43,8 +44,14 @@ export const ProjectDetails: React.FC = () => {
           headerText={t('projects.timeEntriesHeaderText')}
           itemKey='timeentries'
           itemIcon='ReminderTime'
+          className={styles.timeEntries}
         >
-          <TimeEntries />
+          <ScrollablePane
+            scrollbarVisibility={ScrollbarVisibility.auto}
+            styles={{ contentContainer: { overflowX: 'hidden' } }}
+          >
+            <TimeEntries />
+          </ScrollablePane>
         </PivotItem>
       </Pivot>
     </Modal>

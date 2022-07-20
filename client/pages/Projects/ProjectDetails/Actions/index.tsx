@@ -29,7 +29,7 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
     const {
       data: { result }
     } = await createOutlookCategory({
-      variables: { category: state.selected.tag }
+      variables: { category: state.selected?.tag }
     })
     if (result.success) {
       const project = copy(state.selected)

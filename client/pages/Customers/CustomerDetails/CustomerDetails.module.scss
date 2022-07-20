@@ -1,7 +1,10 @@
 .root {
-  display: flex;
-  flex-direction: column;
   width: 65%;
-  max-height: 80%;
-  padding: 20px 20px 150px 20px;
+  height: 800px;
+  padding: 45px 45px 150px 45px;
+
+  .content {
+    height: 500px;
+    position: relative;
+  }
 }

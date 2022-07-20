@@ -30,33 +30,34 @@ export const TimeEntries: React.FC = () => {
       {error && (
         <UserMessage type={'error'} text={t('projects.timeEntriesErrorText')} />
       )}
-      {_.isEmpty(timeentries) && !loading && (
-        <UserMessage text={t('projects.noTimeEntriesText')} />
-      )}
-      {loading && (
+      {loading ? (
         <Progress
           label={t('projects.timeEntriesLoadingLabel')}
           description={t('projects.timeEntriesLoadingDescription')}
           iconProps={{ iconName: 'TimelineMatrixView' }}
         />
-      )}
-      {!_.isEmpty(timeentries) && (
-        <EventList
-          items={timeentries}
-          additionalColumns={[
-            {
-              key: 'resource.displayName',
-              fieldName: 'resource.displayName',
-              name: t('common.employeeLabel'),
-              minWidth: 100,
-              maxWidth: 150,
-              onRender: ({ resource }) => <UserColumn user={resource} />
-            }
-          ]}
-          dateFormat='MMM DD YYYY HH:mm'
-          columnWidths={{ time: 250 }}
-        />
-      )}
+      ) : (
+        (_.isEmpty(timeentries) ? (
+          <UserMessage text={t('projects.noTimeEntriesText')} />
+        )
+          : (
+            <EventList
+              items={timeentries}
+              additionalColumns={[
+                {
+                  key: 'resource.displayName',
+                  fieldName: 'resource.displayName',
+                  name: t('common.employeeLabel'),
+                  minWidth: 100,
+                  maxWidth: 150,
+                  onRender: ({ resource }) => <UserColumn user={resource} />
+                }
+              ]}
+              dateFormat='MMM DD YYYY HH:mm'
+              columnWidths={{ time: 250 }} />
+          )
+        ))}
+
     </div>
   )
 }

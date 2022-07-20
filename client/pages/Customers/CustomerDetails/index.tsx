@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { Modal } from '@fluentui/react'
+import { Modal, ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
 import { UserMessage } from 'components/UserMessage'
 import { ProjectList } from 'pages/Projects'
 import React, { useContext } from 'react'
@@ -34,27 +34,33 @@ export const CustomerDetails: React.FC = () => {
       }}
       containerClassName={styles.root}>
       <Header />
-      {state.selected?.inactive && (
-        <UserMessage
-          text={t('customers.inactiveText')}
-          iconName='Warning'
-          type={'warning'}
-        />
-      )}
-      <div>
-        {error && (
-          <UserMessage type='error'>{t('common.genericErrorText')}</UserMessage>
-        )}
-        {!error && (
-          <ProjectList
-            items={data?.projects || []}
-            hideColumns={['customer']}
-            enableShimmer={loading}
-            searchBox={{ placeholder: t('common.searchPlaceholder') }}
-            renderLink={true}
-            height={300}
-          />
-        )}
+
+      <div className={styles.content}>
+        <ScrollablePane
+          scrollbarVisibility={ScrollbarVisibility.auto}
+          styles={{ contentContainer: { overflowX: 'hidden' } }}
+        >
+          {state.selected?.inactive && (
+            <UserMessage
+              text={t('customers.inactiveText')}
+              iconName='Warning'
+              type={'warning'}
+            />
+          )}
+          <div>
+            {error && (
+              <UserMessage type='error'>{t('common.genericErrorText')}</UserMessage>
+            )}
+            {!error && (
+              <ProjectList
+                items={data?.projects || []}
+                hideColumns={['customer']}
+                enableShimmer={loading}
+                searchBox={{ placeholder: t('customers.searchProjectsPlaceholder', state.selected) }}
+                renderLink={true} />
+            )}
+          </div>
+        </ScrollablePane>
       </div>
     </Modal>
   )

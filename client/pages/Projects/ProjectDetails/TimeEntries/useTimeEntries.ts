@@ -13,10 +13,10 @@ export function useTimeEntries() {
   const { state } = useContext(ProjectsContext)
   const { loading, error, data } = useQuery($timeentries, {
     variables: {
-      query: { projectId: state.selected.tag }
+      query: { projectId: state.selected?.tag }
     }
   })
-  const fileName = `TimeEntries-${state.selected.tag.replace(
+  const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
     '-'
   )}-{0}.xlsx`
