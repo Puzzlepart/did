@@ -28,7 +28,6 @@ export const useSubmitFeedback = (
     const { data } = await submitFeedback({
       variables: { feedback: model.$ }
     })
-    model.reset()
     setDisabled(false)
     return data.result
   }, [model.$])
