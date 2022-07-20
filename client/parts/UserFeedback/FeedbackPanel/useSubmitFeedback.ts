@@ -5,12 +5,12 @@ import { ISubmitProps } from 'components/FormControl'
 import { useToast } from 'components/Toast'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { UserFeedback } from 'types'
 import _ from 'underscore'
 import $submit_feedback from './submit-feedback.gql'
+import { IFeedbackModel } from './useFeedbackModel'
 
 export const useSubmitFeedback = (
-  feedback: UserFeedback,
+  model: IFeedbackModel,
   panel: IPanelProps
 ): ISubmitProps => {
   const { t } = useTranslation()
@@ -26,10 +26,11 @@ export const useSubmitFeedback = (
   const onSubmitFeedback = useCallback(async () => {
     setDisabled(true)
     const { data } = await submitFeedback({
-      variables: { feedback }
+      variables: { feedback: model.$ }
     })
+    setDisabled(false)
     return data.result
-  }, [feedback])
+  }, [model.$])
 
   return {
     text: t('feedback.submitButtonText'),
@@ -52,9 +53,9 @@ export const useSubmitFeedback = (
       panel.onDismiss()
     },
     disabled:
-      _.isEmpty(feedback.title) ||
-      _.isEmpty(feedback.body) ||
-      !feedback.mood ||
+      _.isEmpty(model.$.title) ||
+      _.isEmpty(model.$.body) ||
+      !model.$.mood ||
       disabled
   }
 }

@@ -8,7 +8,7 @@ import { useSubmitFeedback } from './useSubmitFeedback'
 export function useFeedbackPanel(props: IPanelProps) {
   const { model, typeOptions, moodOptions } = useFeedbackModel()
   const register = useFormControls(model)
-  const submit = useSubmitFeedback(model.$, props)
+  const submit = useSubmitFeedback(model, props)
 
   useEffect(model.reset, [props.isOpen])
 
