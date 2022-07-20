@@ -15,6 +15,13 @@ import { ExcelColumnType } from 'utils/exportExcel'
 /**
  * @category List
  */
+ export interface IListSearchBox extends ISearchBoxProps {
+  searchDelayMs?: number
+ }
+
+/**
+ * @category List
+ */
 export interface IListColumnData {
   /**
    * Hidden column
@@ -87,7 +94,7 @@ export interface IListProps<T = any>
   /**
    * Search box props
    */
-  searchBox?: ISearchBoxProps
+  searchBox?: IListSearchBox
 
   /**
    * Selection

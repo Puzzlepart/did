@@ -39,7 +39,7 @@ export const ListHeader: React.FC<IListHeaderProps> = ({
             if (props.searchBox.onChange)
               props.searchBox.onChange(_event, searchTerm)
             dispatch(EXECUTE_SEARCH({ searchTerm }))
-          }, 250)
+          }, props.searchBox.searchDelayMs ?? 750)
         }}
       />
     )
