@@ -13,6 +13,14 @@ const INITIAL_MODEL = {
   mood: null
 }
 
+export interface IFeedbackModel {
+  readonly reset: () => void;
+  readonly $set: React.Dispatch<React.SetStateAction<Map<keyof UserFeedback, any>>>;
+  readonly $: UserFeedback;
+  readonly set: (key: keyof UserFeedback, value: any) => void;
+  readonly value: (key: keyof UserFeedback, _default?: any) => any;
+}
+
 export const useFeedbackModel = () => {
   const { user } = useAppContext()
   const reporter = _.pick(user, 'displayName', 'mail')
@@ -29,7 +37,7 @@ export const useFeedbackModel = () => {
     model: {
       ...map,
       reset: () => map.$set(modelWithReporter)
-    },
+    } as IFeedbackModel,
     typeOptions,
     moodOptions
   } as const
