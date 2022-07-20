@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { ActionButton, Modal, Pivot, PivotItem } from '@fluentui/react'
+import { Modal, Pivot, PivotItem } from '@fluentui/react'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 import { ProjectsContext } from '../context'
 import { CHANGE_DETAILS_TAB, SET_SELECTED_PROJECT } from '../reducer/actions'
 import { Header } from './Header'
@@ -14,16 +15,16 @@ import { TimeEntries } from './TimeEntries'
  */
 export const ProjectDetails: React.FC = () => {
   const { t } = useTranslation()
+  const history = useHistory()
   const { state, dispatch } = useContext(ProjectsContext)
-
   return (
     <Modal
       isOpen={!!state.selected}
-      onDismiss={(event) => {
-        // eslint-disable-next-line no-console
-        console.log(event)
+      onDismiss={() => {
+        dispatch(SET_SELECTED_PROJECT({ project: null }))
+        history.push(`/projects/${state.view}`)
       }}
-      className={styles.root}>
+      containerClassName={styles.root}>
       <div className={styles.container}>
         <Header />
         <Pivot
@@ -47,9 +48,6 @@ export const ProjectDetails: React.FC = () => {
             <TimeEntries />
           </PivotItem>
         </Pivot>
-        <ActionButton text='Test close' onClick={() => {
-          dispatch(SET_SELECTED_PROJECT({ project: null }))
-        }} />
       </div>
     </Modal>
   )
