@@ -34,7 +34,7 @@ export default ({ url }: IProjectsReducerParameters) =>
           (p) => p.tag?.toLowerCase() === url?.key?.toLowerCase()
         )
       }
-      state.error = payload.error
+      state.error = (payload.error as any)
     },
 
     [SET_SELECTED_PROJECT.type]: (
