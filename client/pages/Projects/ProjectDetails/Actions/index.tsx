@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
-import { DefaultButton } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
 import React, { HTMLAttributes, useContext, useState } from 'react'
@@ -42,7 +42,7 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
     <div className={styles.root} hidden={props.hidden}>
       <div className={styles.container}>
         <div className={styles.actionItem} hidden={!state.selected?.webLink}>
-          <DefaultButton
+          <ActionButton
             text={t('projects.workspaceLabel')}
             onClick={() => window.location.replace(state.selected?.webLink)}
             iconProps={{ iconName: 'Website' }}
@@ -52,7 +52,7 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           className={styles.actionItem}
           hidden={!!state.selected?.outlookCategory}
         >
-          <DefaultButton
+          <ActionButton
             text={t('projects.createOutlookCategoryLabel')}
             iconProps={{ iconName: 'OutlookLogoInverse' }}
             onClick={() => onCreateCategory()}
@@ -62,7 +62,7 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           className={styles.actionItem}
           hidden={!hasPermission(PermissionScope.MANAGE_PROJECTS)}
         >
-          <DefaultButton
+          <ActionButton
             text={t('common.editLabel')}
             iconProps={{ iconName: 'Edit' }}
             onClick={() => setShowEditPanel(true)}
