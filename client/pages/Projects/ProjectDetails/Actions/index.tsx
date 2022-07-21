@@ -44,7 +44,7 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         <div className={styles.actionItem} hidden={!state.selected?.webLink}>
           <ActionButton
             text={t('projects.workspaceLabel')}
-            onClick={() => window.location.replace(state.selected?.webLink)}
+            href={state.selected?.webLink}
             iconProps={{ iconName: 'Website' }}
           />
         </div>
