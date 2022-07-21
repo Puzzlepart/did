@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { Modal, ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
 import { UserMessage } from 'components/UserMessage'
@@ -13,9 +12,6 @@ import styles from './CustomerDetails.module.scss'
 import { Header } from './Header'
 import $projects from './projects.gql'
 
-/**
- * @category Customers
- */
 export const CustomerDetails: React.FC = () => {
   const { t } = useTranslation()
   const history = useHistory()

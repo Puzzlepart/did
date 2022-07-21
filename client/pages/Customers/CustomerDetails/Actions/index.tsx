@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ActionButton } from '@fluentui/react'
 import { usePermissions } from 'hooks'
 import { CustomersContext } from 'pages/Customers/context'
@@ -8,9 +7,6 @@ import { PermissionScope } from 'security'
 import { CustomerForm } from '../../CustomerForm'
 import styles from './Actions.module.scss'
 
-/**
- * @category Customers
- */
 export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()

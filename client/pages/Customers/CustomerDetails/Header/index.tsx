@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { SubText } from 'components'
 import { CustomersContext } from 'pages/Customers/context'
@@ -7,9 +6,6 @@ import { isMobile } from 'react-device-detect'
 import { Actions } from '../Actions'
 import styles from './Header.module.scss'
 
-/**
- * @category Customers
- */
 export const Header: React.FC = () => {
   const { state } = useContext(CustomersContext)
   return (
