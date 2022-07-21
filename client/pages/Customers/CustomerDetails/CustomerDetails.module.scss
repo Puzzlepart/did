@@ -3,6 +3,12 @@
   height: 800px;
   padding: 45px 45px 150px 45px;
 
+  &.isMobile {
+    width: 80%;
+    height: 75%;
+    padding: 5%;
+  }
+
   .content {
     height: 500px;
     position: relative;

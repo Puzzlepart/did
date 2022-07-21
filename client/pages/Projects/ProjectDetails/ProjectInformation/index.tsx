@@ -11,7 +11,6 @@ import styles from './ProjectInformation.module.scss'
 export const ProjectInformation: React.FC = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)
-
   return (
     <div className={styles.root}>
       {state.selected?.inactive && (

@@ -4,6 +4,7 @@ import { Modal, ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
 import { UserMessage } from 'components/UserMessage'
 import { ProjectList } from 'pages/Projects'
 import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { CustomersContext } from '../context'
@@ -24,17 +25,17 @@ export const CustomerDetails: React.FC = () => {
       customerKey: state.selected?.key
     }
   })
-
+  const containerClassName = [styles.root]
+  if (isMobile) containerClassName.push(styles.isMobile)
   return (
     <Modal
       isOpen={!!state.selected}
+      containerClassName={containerClassName.join(' ')}
       onDismiss={() => {
         dispatch(SET_SELECTED_CUSTOMER({ customer: null }))
         history.push(`/customers/${state.view}`)
-      }}
-      containerClassName={styles.root}>
+      }}>
       <Header />
-
       <div className={styles.content}>
         <ScrollablePane
           scrollbarVisibility={ScrollbarVisibility.auto}
@@ -54,7 +55,7 @@ export const CustomerDetails: React.FC = () => {
             {!error && (
               <ProjectList
                 items={data?.projects || []}
-                hideColumns={['customer']}
+                hideColumns={['customer', isMobile && 'key']}
                 enableShimmer={loading}
                 searchBox={{ placeholder: t('customers.searchProjectsPlaceholder', state.selected) }}
                 renderLink={true} />
