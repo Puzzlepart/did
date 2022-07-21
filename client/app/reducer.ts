@@ -8,6 +8,8 @@ import { IAppState } from './types'
 
 export const UPDATE_BREADCRUMB =
   createAction<IMobileBreadcrumbItem>('UPDATE_BREADCRUMB')
+  export const RESET_BREADCRUMB =
+    createAction('RESET_BREADCRUMB')
 export const PAGE_NAVIGATE = createAction('PAGE_NAVIGATE')
 
 /**
@@ -34,6 +36,9 @@ export default function useAppReducer(initialState: IAppState) {
               (l) => Number.parseInt(l) <= item.level
             )
             state.nav = _.pick(nav, keys)
+          })
+          .addCase(RESET_BREADCRUMB, (state) => {
+            state.nav = {}
           })
           .addCase(PAGE_NAVIGATE, (state) => {
             state.nav = null
