@@ -5,18 +5,17 @@ import React, { useEffect } from 'react'
 import {
   Redirect,
   Route,
-  Switch,
-  useHistory
+  Switch, useLocation
 } from 'react-router-dom'
 import { MobileBreadcrumb } from '../parts'
 import styles from './App.module.scss'
 import { RESET_BREADCRUMB } from './reducer'
 
 export const AppSwitch: React.FC = () => {
-  const history = useHistory()
+  const location = useLocation()
   const { pages, dispatch } = useAppContext()
   const [, hasPermission] = usePermissions()
-  const page = history?.location?.pathname.split('/')[1]
+  const page = location?.pathname.split('/')[1]
 
   useEffect(() => dispatch(RESET_BREADCRUMB()), [page])
 
