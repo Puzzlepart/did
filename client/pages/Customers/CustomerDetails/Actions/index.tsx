@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { DefaultButton } from '@fluentui/react'
+import { Link } from '@fluentui/react'
 import { usePermissions } from 'hooks'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { HTMLAttributes, useContext, useState } from 'react'
@@ -21,33 +21,25 @@ export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
       <div className={styles.container}>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected?.webLink}
-        >
-          <DefaultButton
-            text={t('customers.webLinkText')}
-            href={state.selected?.webLink}
-            iconProps={{ iconName: 'Website' }}
-          />
+          hidden={loading || !state.selected?.webLink}>
+          <Link href={state.selected?.webLink}>
+            {t('customers.webLinkText')}
+          </Link>
         </div>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected?.externalSystemURL}
-        >
-          <DefaultButton
-            text={t('customers.externalSystemUrlText')}
-            href={state.selected?.externalSystemURL}
-            iconProps={{ iconName: 'System' }}
-          />
+          hidden={loading || !state.selected?.externalSystemURL}>
+          <Link href={state.selected?.externalSystemURL}>
+            {t('customers.externalSystemUrlText')}
+          </Link>
         </div>
         <div
           className={styles.actionItem}
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
         >
-          <DefaultButton
-            text={t('common.editLabel')}
-            iconProps={{ iconName: 'Edit' }}
-            onClick={() => setShowEditPanel(true)}
-          />
+          <Link onClick={() => setShowEditPanel(true)}>
+            {t('common.editLabel')}
+          </Link>
           <CustomerForm
             key={state.selected?.key}
             edit={state.selected}

@@ -94,7 +94,7 @@
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
-    "webLinkText": "Website",
+    "webLinkText": "Go to website",
     "externalSystemUrlText": "External LOB system",
     "keyFieldDescription": "A unique identifier for the customer. Keep it short, between {{CUSTOMER_KEY_MIN_LENGTH}} and {{CUSTOMER_KEY_MAX_LENGTH}} characters and only capital letters.",
     "createSuccess": "The customer **{{name}}** was succesfully created.",

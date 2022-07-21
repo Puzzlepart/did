@@ -93,7 +93,7 @@
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
-    "webLinkText": "Webside",
+    "webLinkText": "Gå til webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
     "keyFieldDescription": "Ein unik identifikator for kunden. Haldt det kort, mellom {{CUSTOMER_KEY_MIN_LENGTH}} og {{CUSTOMER_KEY_MAX_LENGTH}} teikn. Bruk berre store bokstavar.",
     "createSuccess": "Kunden **{{name}}** vart oppretta.",
