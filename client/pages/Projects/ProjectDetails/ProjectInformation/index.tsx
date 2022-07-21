@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { SubText } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
@@ -7,12 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
 import _ from 'underscore'
 import { ProjectsContext } from '../../context'
-import styles from './Information.module.scss'
+import styles from './ProjectInformation.module.scss'
 
-/**
- * @category Projects
- */
-export const Information: React.FC = () => {
+export const ProjectInformation: React.FC = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)
 
