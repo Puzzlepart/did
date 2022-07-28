@@ -2,17 +2,16 @@
 import $date from 'DateUtils'
 import _ from 'underscore'
 import s from 'underscore.string'
-import { IPeriodColumnTooltipProps } from './types'
 
 /**
  * @ignore
  */
-export function usePeriodColumnTooltip(props: IPeriodColumnTooltipProps) {
-  const { week, month, year } = _.first(props.periods)
-  const customerTotals = Object.keys(props.hours.project)
+export function usePeriodColumnTooltip({ periods, hours }) {
+  const { week, month, year } = _.first(periods)
+  const customerTotals = Object.keys(hours.project)
     .map((key) => {
-      const { hours, details } = props.hours.project[key]
-      return { customer: details.customer.name, hours }
+      const { hours: hours_, details } = hours.project[key]
+      return { customer: details.customer.name, hours: hours_ }
     })
     .sort(({ customer: a }, { customer: b }) => {
       if (a < b) return -1

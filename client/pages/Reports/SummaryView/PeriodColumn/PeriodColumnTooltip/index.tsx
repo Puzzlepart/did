@@ -6,15 +6,15 @@ import { useTranslation } from 'react-i18next'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'
 import { IPeriodColumnTooltipProps } from './types'
-import {  usePeriodColumnTooltip } from './usePeriodColumnTooltip'
+import { usePeriodColumnTooltip } from './usePeriodColumnTooltip'
 import styles from './PeriodColumnTooltip.module.scss'
 
 /**
  * @category SummaryView
  */
-export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = (props) => {
+export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = ({ periods, hours, user }) => {
   const { t } = useTranslation()
-  const { week, month, monthName, year, customerTotals } = usePeriodColumnTooltip(props)
+  const { week, month, monthName, year, customerTotals } = usePeriodColumnTooltip({ periods, hours })
   return (
     <div className={styles.root}>
       <div className={styles.header}>
@@ -24,12 +24,15 @@ export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = (props) 
           </div>
           <SubText text={`${monthName} ${year}`} />
         </div>
-        <Persona
-          className={styles.userInfo}
-          text={props.user?.displayName}
-          secondaryText={props.user?.mail}
-          size={PersonaSize.size40}
-        />
+        {user && (
+          <Persona
+            className={styles.userInfo}
+            text={user?.displayName}
+            secondaryText={user?.mail}
+            imageUrl={user?.photo?.base64}
+            size={PersonaSize.size40}
+          />
+        )}
       </div>
       <div className={styles.customerTotals}>
         {customerTotals.map(({ customer, hours }, index) => {
@@ -37,7 +40,7 @@ export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = (props) 
           return <CustomerHours key={index} customer={customer} hours={hours} />
         })}
       </div>
-      <TotalHours hours={props.hours.total} />
+      <TotalHours hours={hours.total} />
     </div>
   )
 }

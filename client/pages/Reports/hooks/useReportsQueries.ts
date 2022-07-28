@@ -173,11 +173,11 @@ export function forecastQuery(
  * @category Reports
  */
 export function summaryQuery(t: TFunction): IReportsQuery {
-  const periods = []
+  const weeks = []
   let now = new DateObject()
   for (let index = 0; index < 8; index++) {
     const { week, year } = now.toObject()
-    periods.unshift([week, year])
+    weeks.unshift([week, year])
     now = now.add('-1w')
   }
   return {
@@ -185,11 +185,11 @@ export function summaryQuery(t: TFunction): IReportsQuery {
     headerText: t('reports.summaryHeaderText'),
     itemIcon: 'CalendarWeek',
     hidden: true,
-    periods,
+    weeks,
     query: report_summary,
     variables: {
       userQuery: { hiddenFromReports: false },
-      queries: periods.map(([week, year]) => ({ week, year }))
+      queries: weeks.map(([week, year]) => ({ week, year }))
     }
   } as IReportsQuery
 }
