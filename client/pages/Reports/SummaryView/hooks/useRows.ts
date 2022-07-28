@@ -10,7 +10,7 @@ import { TimesheetPeriodObject } from 'types'
  */
 function generateColumnData(periods: TimesheetPeriodObject[]) {
   return periods.reduce((data, period) => {
-    const key = `${period.week}_${period.year}`
+    const key = [period.week, period.month, period.year].join('_')
     return {
       ...data,
       [key]: [...(data[key] || []), period]
