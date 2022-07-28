@@ -147,7 +147,7 @@ export class DateUtils {
     monthIndex?: number,
     template: string = this.$.monthFormat
   ): string {
-    return $dayjs().set('month', monthIndex).format(template)
+    return s.capitalize($dayjs().set('month', monthIndex).format(template))
   }
 
   /**
