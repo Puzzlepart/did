@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/require-number-to-fixed-digits-argument */
 /* eslint-disable tsdoc/syntax */
 // shared/utils/date.ts
 /**
