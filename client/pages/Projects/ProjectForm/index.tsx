@@ -12,7 +12,7 @@ import {
 import { FormControl } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
-import __package from 'package'
+import packageFile from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectFormOptions } from './ProjectFormOptions'
@@ -42,14 +42,14 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
-        description={t('projects.keyFieldDescription', __package.config.app)}
+        description={t('projects.keyFieldDescription', packageFile.config.app)}
         required={true}
       />
       <TagPreview hidden={!!props.edit} projectId={model.projectId} />
       <TextControl
         {...register<TextControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
-        description={t('projects.nameFieldDescription', __package.config.app)}
+        description={t('projects.nameFieldDescription', packageFile.config.app)}
         required={true}
       />
       <TextControl

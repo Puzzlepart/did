@@ -1,4 +1,4 @@
-import __package from 'package'
+import packageFile from 'package'
 import { ProjectModel } from './ProjectModel'
 
 /**
@@ -16,11 +16,11 @@ export function useProjectFormValidation(
   isEditMode = false
 ): boolean {
   const PROJECT_KEY_REGEX = new RegExp(
-    `(^[A-ZÆØÅ0-9-]{${__package.config.app.PROJECT_KEY_MIN_LENGTH},${__package.config.app.PROJECT_KEY_MAX_LENGTH}}$)`,
+    `(^[A-ZÆØÅ0-9-]{${packageFile.config.app.PROJECT_KEY_MIN_LENGTH},${packageFile.config.app.PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'
   )
   if (!model.customerKey) return false
-  if (model.name.length < __package.config.app.PROJECT_NAME_MIN_LENGTH)
+  if (model.name.length < packageFile.config.app.PROJECT_NAME_MIN_LENGTH)
     return false
   if (!PROJECT_KEY_REGEX.test(model.key) && !isEditMode) return false
   if (!model.icon) return false

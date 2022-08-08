@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useTheme } from '@fluentui/react/lib/Theme'
 import { useAppContext } from 'AppContext'
-import __package from 'package'
+import packageFile from 'package'
 import { UserNotificationsContext } from 'parts/UserNotifications/context'
 import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
 import React from 'react'
@@ -34,9 +34,9 @@ export const Navigation: React.FC = () => {
           <Link
             to='/'
             className={styles.logo}
-            title={`${__package.name} - ${__package.description}`}
+            title={`${packageFile.name} - ${packageFile.description}`}
           >
-            {__package.name}
+            {packageFile.name}
           </Link>
           <ul className={styles.nav}>
             {pages.map((page, index) => (

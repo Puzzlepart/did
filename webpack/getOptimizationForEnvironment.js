@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/better-regex */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const __package = require('../package.json')
+const packageFile = require('../package.json')
 
 /**
  * Get optimization config for webpack based on
@@ -31,7 +31,7 @@ function getOptimizationForEnvironment(isDevelopment) {
   if (!isDevelopment) {
     const TerserPlugin = require('terser-webpack-plugin')
     optimization.minimize = true
-    optimization.minimizer.push(new TerserPlugin(__package.terser))
+    optimization.minimizer.push(new TerserPlugin(packageFile.terser))
   }
   return optimization
 }

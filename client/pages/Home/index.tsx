@@ -2,7 +2,7 @@
 import { DefaultButton, useTheme } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { UserMessage } from 'components'
-import __package from 'package'
+import packageFile from 'package'
 import { PageComponent } from 'pages/types'
 import React, { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -34,13 +34,13 @@ export const Home: PageComponent = () => {
         className={styles.logo}
         style={components.logo.styles as CSSProperties}
       >
-        {__package.name}
+        {packageFile.name}
       </div>
       <div
         className={styles.motto}
         style={components.motto.styles as CSSProperties}
       >
-        {__package.description}
+        {packageFile.description}
       </div>
       {error && (
         <UserMessage

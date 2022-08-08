@@ -1,4 +1,4 @@
-import __package from 'package'
+import packageFile from 'package'
 import { CustomerModel } from './CustomerModel'
 
 /**
@@ -17,7 +17,7 @@ export function useCustomerFormValidation(model: CustomerModel): boolean {
     CUSTOMER_KEY_MIN_LENGTH,
     CUSTOMER_KEY_MAX_LENGTH,
     CUSTOMER_NAME_MIN_LENGTH
-  } = __package.config.app
+  } = packageFile.config.app
   const CUSTOMER_KEY_REGEX = new RegExp(
     `(^[A-ZÆØÅ0-9]{${CUSTOMER_KEY_MIN_LENGTH},${CUSTOMER_KEY_MAX_LENGTH}}$)`,
     'gm'
