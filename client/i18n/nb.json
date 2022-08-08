@@ -364,7 +364,8 @@
     "vacationSummaryTooltip": "Ferieanslaget gjelder for hele året, og er basert på at du har kategorisert {{usedHours}} timer med {{category}}\n(hver feriedag er 8 timer)",
     "unconfirmedHours": " Ubekreftede timer",
     "yes": "Ja",
-    "no": "Nei"
+    "no": "Nei",
+    "homePage": "Hjem"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

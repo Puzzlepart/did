@@ -1,10 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { DefaultButton, useTheme } from '@fluentui/react'
+import { useAppContext } from 'AppContext'
 import { UserMessage } from 'components'
 import __package from 'package'
 import { PageComponent } from 'pages/types'
 import React, { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Redirect } from 'react-router-dom'
 import _ from 'underscore'
 import styles from './Home.module.scss'
 import { useAuthProviders } from './useAuthProviders'
@@ -20,6 +22,11 @@ export const Home: PageComponent = () => {
   const providers = useAuthProviders()
   const { t } = useTranslation()
   const { components } = useTheme()
+  const { user } = useAppContext()
+
+  if (user.startPage && user.startPage !== '/') {
+    return <Redirect to={user.startPage} />
+  }
 
   return (
     <div className={styles.root}>
