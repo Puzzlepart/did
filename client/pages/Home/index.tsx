@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { DefaultButton, useTheme } from '@fluentui/react'
-import { useAppContext } from 'AppContext'
 import { UserMessage } from 'components'
 import packageFile from 'package'
 import { PageComponent } from 'pages/types'
@@ -18,14 +17,13 @@ import { useHome } from './useHome'
  * @category Page Component
  */
 export const Home: PageComponent = () => {
-  const { error, subscription } = useHome()
-  const providers = useAuthProviders()
   const { t } = useTranslation()
+  const { error, subscription, redirectPage } = useHome()
+  const providers = useAuthProviders()
   const { components } = useTheme()
-  const { user } = useAppContext()
 
-  if (user.startPage && user.startPage !== '/') {
-    return <Redirect to={user.startPage} />
+  if (redirectPage) {
+    return <Redirect to={redirectPage} />
   }
 
   return (

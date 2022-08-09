@@ -32,7 +32,7 @@ export const Navigation: React.FC = () => {
       >
         <div className={styles.container}>
           <Link
-            to='/'
+            to={{ pathname: '/', state: { prevPath: location.pathname } }}
             className={styles.logo}
             title={`${packageFile.name} - ${packageFile.description}`}
           >
@@ -44,7 +44,7 @@ export const Navigation: React.FC = () => {
                 key={index}
                 text={page.displayName}
                 iconName={page.iconName}
-                to={page.path}
+                to={{ pathname: page.path, state: { prevPath: location.pathname } }}
                 permission={page.permission}
               />
             ))}
