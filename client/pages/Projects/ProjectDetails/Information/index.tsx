@@ -1,13 +1,12 @@
 /* eslint-disable tsdoc/syntax */
-import { SubText } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
-import _ from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
+import { InformationProperty } from './InformationProperty'
 
 /**
  * @category Projects
@@ -26,20 +25,15 @@ export const Information: React.FC = () => {
           type={'warning'}
         />
       )}
-      <SubText text={state.selected.description} font='medium' />
-      <div className={styles.labels}>
-        {(state.selected.labels as Label[]).map((label, index) => (
-          <EntityLabel key={index} label={label} />
-        ))}
-      </div>
-      <UserMessage
-        hidden={
-          !!state.selected.description || !_.isEmpty(state.selected.labels)
-        }
-        containerStyle={{ margin: '15px 0 15px 0' }}
-        text={t('projects.noInformationAvailable')}
-        iconName='Info'
-      />
+      <InformationProperty title={t('common.descriptionFieldLabel')} value={state.selected.description} />
+      <InformationProperty title={t('projects.tagLabel')} value={state.selected.tag} />
+      {(state.selected?.labels?.length > 0) && (
+        <InformationProperty title={t('admin.labels.headerText')}>
+          {(state.selected.labels as Label[]).map((label, index) => (
+            <EntityLabel key={index} label={label} />
+          ))}
+        </InformationProperty>
+      )}
       <UserMessage
         hidden={!state.selected.outlookCategory}
         containerStyle={{ margin: '15px 0 15px 0' }}

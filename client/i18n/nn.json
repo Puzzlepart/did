@@ -89,7 +89,8 @@
     "createError": "Vi får dessverre ikkje oppretta prosjektet akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
     "timeEntriesLoadingDescription": "Ta deg ein slurk kaffe. Er det mykje data å laste inn, kan du ta deg ein slurk til.",
     "noLabelsSelectedText": "Legg til merkelappar på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
-    "applyLabelsHeaderText": "Legg til merkelappar på dette prosjektet"
+    "applyLabelsHeaderText": "Legg til merkelappar på dette prosjektet",
+    "tagLabel": "Nøkkel"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

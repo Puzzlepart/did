@@ -89,7 +89,8 @@
     "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
     "timeEntriesLoadingDescription": "Ta deg en slurk kaffe hvis det har vært travelt i det siste ...",
     "noLabelsSelectedText": "Legg til merkelapper på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
-    "applyLabelsHeaderText": "Legg til merkelapper på dette prosjektet"
+    "applyLabelsHeaderText": "Legg til merkelapper på dette prosjektet",
+    "tagLabel": "Nøkkel"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

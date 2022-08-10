@@ -90,7 +90,8 @@
     "createError": "We can't create the project at the moment. Please try again later.",
     "timeEntriesLoadingDescription": "Take a sip of coffee if you've been busy lately...",
     "noLabelsSelectedText": "Add labels to the projects for categorization. For example internal projects or projects that requires submitting hours in a separate system.",
-    "applyLabelsHeaderText": "Apply labels to this project"
+    "applyLabelsHeaderText": "Apply labels to this project",
+    "tagLabel": "Key"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
