@@ -16,12 +16,18 @@ export function useSettingsConfiguration(): IUserSetting[] {
   return [
     UserSettingDropdown('startPage', {
       label: t('common.startPageLabel'),
-      options: pages
+      options: [
+        {
+          key: '/',
+          text: t('common.homePage')
+        },
+        ...pages
         .filter(({ permission }) => permission && hasPermission(permission))
         .map(({ displayName, path }) => ({
           key: path,
           text: displayName
-        })),
+        }))
+      ],
       defaultSelectedKey: user.startPage
     }),
     UserSettingDropdown('preferredLanguage', {

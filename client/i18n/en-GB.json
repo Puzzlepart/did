@@ -365,7 +365,8 @@
     "vacationSummaryTooltip": "The vacation estimate is for the whole year,\nand is based on your categorisation of {{usedHours}} hours with {{category}}\n(each vacation day is 8 hours)",
     "unconfirmedHours": "Unconfirmed hours",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "homePage": "Home"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

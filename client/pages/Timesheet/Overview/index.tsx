@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { EventList, TabComponent } from 'components'
-import __package from 'package'
+import packageFile from 'package'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTimesheetContext } from '../context'
@@ -23,7 +23,7 @@ export const Overview: TabComponent = () => {
         hidden={!!state.error}
         enableShimmer={!!state.loading}
         items={state.selectedPeriod?.getEvents()}
-        dateFormat={__package.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
+        dateFormat={packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
         listGroupProps={listGroupProps}
         additionalColumns={additionalColumns}
       />

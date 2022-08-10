@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useTheme } from '@fluentui/react/lib/Theme'
 import { useAppContext } from 'AppContext'
-import __package from 'package'
+import packageFile from 'package'
 import { UserNotificationsContext } from 'parts/UserNotifications/context'
 import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
 import React from 'react'
@@ -32,11 +32,11 @@ export const Navigation: React.FC = () => {
       >
         <div className={styles.container}>
           <Link
-            to='/'
+            to={{ pathname: '/', state: { prevPath: location.pathname } }}
             className={styles.logo}
-            title={`${__package.name} - ${__package.description}`}
+            title={`${packageFile.name} - ${packageFile.description}`}
           >
-            {__package.name}
+            {packageFile.name}
           </Link>
           <ul className={styles.nav}>
             {pages.map((page, index) => (
@@ -44,7 +44,7 @@ export const Navigation: React.FC = () => {
                 key={index}
                 text={page.displayName}
                 iconName={page.iconName}
-                to={page.path}
+                to={{ pathname: page.path, state: { prevPath: location.pathname } }}
                 permission={page.permission}
               />
             ))}
