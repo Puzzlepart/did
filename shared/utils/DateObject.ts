@@ -192,33 +192,43 @@ export class DateObject {
 
   /**
    * Get periods in the date's week.
-   * 
+   *
    * If a week is split between months, we want to return them as two separate
    * periods.
    */
   public getPeriods(): IDatePeriod[] {
     const startOfWeek = this.startOfWeek
     const endOfWeek = this.endOfWeek
-    return startOfWeek.$.month() === endOfWeek.$.month() ? [
-      {
-        id: DateUtils.getPeriod(startOfWeek.$),
-        name: startOfWeek.$.isoWeek().toString(),
-        startDate: startOfWeek,
-        endDate: endOfWeek
-      }
-    ] : [
-      {
-        id: DateUtils.getPeriod(startOfWeek.$),
-        name: `${startOfWeek.$.isoWeek()}/${pad((startOfWeek.$.month() + 1).toString(), 2, '0')}`,
-        startDate: startOfWeek,
-        endDate: startOfWeek.endOfMonth
-      },
-      {
-        id: DateUtils.getPeriod(endOfWeek.$),
-        name: `${endOfWeek.$.isoWeek()}/${pad((endOfWeek.$.month() + 1).toString(), 2, '0')}`,
-        startDate: endOfWeek.startOfMonth,
-        endDate: endOfWeek
-      }
-    ]
+    return startOfWeek.$.month() === endOfWeek.$.month()
+      ? [
+          {
+            id: DateUtils.getPeriod(startOfWeek.$),
+            name: startOfWeek.$.isoWeek().toString(),
+            startDate: startOfWeek,
+            endDate: endOfWeek
+          }
+        ]
+      : [
+          {
+            id: DateUtils.getPeriod(startOfWeek.$),
+            name: `${startOfWeek.$.isoWeek()}/${pad(
+              (startOfWeek.$.month() + 1).toString(),
+              2,
+              '0'
+            )}`,
+            startDate: startOfWeek,
+            endDate: startOfWeek.endOfMonth
+          },
+          {
+            id: DateUtils.getPeriod(endOfWeek.$),
+            name: `${endOfWeek.$.isoWeek()}/${pad(
+              (endOfWeek.$.month() + 1).toString(),
+              2,
+              '0'
+            )}`,
+            startDate: endOfWeek.startOfMonth,
+            endDate: endOfWeek
+          }
+        ]
   }
 }

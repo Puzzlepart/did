@@ -4,17 +4,22 @@ import { SubText } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomerHours } from './CustomerHours'
+import styles from './PeriodColumnTooltip.module.scss'
 import { TotalHours } from './TotalHours'
 import { IPeriodColumnTooltipProps } from './types'
 import { usePeriodColumnTooltip } from './usePeriodColumnTooltip'
-import styles from './PeriodColumnTooltip.module.scss'
 
 /**
  * @category SummaryView
  */
-export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = ({ periods, hours, user }) => {
+export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = ({
+  periods,
+  hours,
+  user
+}) => {
   const { t } = useTranslation()
-  const { week, month, monthName, year, customerTotals } = usePeriodColumnTooltip({ periods, hours })
+  const { week, month, monthName, year, customerTotals } =
+    usePeriodColumnTooltip({ periods, hours })
   return (
     <div className={styles.root}>
       <div className={styles.header}>

@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { TooltipHost } from '@fluentui/react'
 import React, { useRef } from 'react'
-import { IPeriodColumnProps } from './types'
-import { usePeriodColumn } from './usePeriodColumn'
 import styles from './PeriodColumn.module.scss'
 import { PeriodColumnTooltip } from './PeriodColumnTooltip'
+import { IPeriodColumnProps } from './types'
+import { usePeriodColumn } from './usePeriodColumn'
 
 /**
  * @category SummaryView
