@@ -13,7 +13,7 @@ export const TotalHours = ({ hours }) => {
   return (
     <div
       dangerouslySetInnerHTML={{
-        __html: t('common.weekColumnTooltipHoursTotal', {
+        __html: t('common.periodColumnTooltipHoursTotal', {
           hours: hours.toFixed(0)
         })
       }}

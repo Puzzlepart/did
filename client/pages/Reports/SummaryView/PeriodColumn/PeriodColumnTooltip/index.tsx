@@ -5,31 +5,34 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'
-import { IWeekColumnTooltipProps } from './types'
-import { useWeekColumnTooltip } from './useWeekColumnTooltip'
-import styles from './WeekColumnTooltip.module.scss'
+import { IPeriodColumnTooltipProps } from './types'
+import { usePeriodColumnTooltip } from './usePeriodColumnTooltip'
+import styles from './PeriodColumnTooltip.module.scss'
 
 /**
  * @category SummaryView
  */
-export const WeekColumnTooltip: React.FC<IWeekColumnTooltipProps> = (props) => {
+export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = ({ periods, hours, user }) => {
   const { t } = useTranslation()
-  const { week, month, year, customerTotals } = useWeekColumnTooltip(props)
+  const { week, month, monthName, year, customerTotals } = usePeriodColumnTooltip({ periods, hours })
   return (
     <div className={styles.root}>
       <div className={styles.header}>
         <div className={styles.title}>
           <div className={styles.text}>
-            {t('common.weekColumnTooltipTitle', { week, year })}
+            {t('common.periodColumnTooltipTitle', { week, month })}
           </div>
-          <SubText text={`${month} ${year}`} />
+          <SubText text={`${monthName} ${year}`} />
         </div>
-        <Persona
-          className={styles.userInfo}
-          text={props.user?.displayName}
-          secondaryText={props.user?.mail}
-          size={PersonaSize.size40}
-        />
+        {user && (
+          <Persona
+            className={styles.userInfo}
+            text={user?.displayName}
+            secondaryText={user?.mail}
+            imageUrl={user?.photo?.base64}
+            size={PersonaSize.size40}
+          />
+        )}
       </div>
       <div className={styles.customerTotals}>
         {customerTotals.map(({ customer, hours }, index) => {
@@ -37,7 +40,7 @@ export const WeekColumnTooltip: React.FC<IWeekColumnTooltipProps> = (props) => {
           return <CustomerHours key={index} customer={customer} hours={hours} />
         })}
       </div>
-      <TotalHours hours={props.hours.total} />
+      <TotalHours hours={hours.total} />
     </div>
   )
 }

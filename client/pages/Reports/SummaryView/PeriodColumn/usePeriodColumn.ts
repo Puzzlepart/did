@@ -4,9 +4,9 @@ import { useContext, useMemo } from 'react'
 import { Project } from 'types'
 import _ from 'underscore'
 import { firstPart } from '../../../../../shared/utils/firstPart'
-import { IWeekColumnProps } from './types'
+import { IPeriodColumnProps } from './types'
 
-export interface IUseWeekColumnResult {
+export interface IUsePeriodColumnResult {
   total: number
   project?: {
     [key: string]: {
@@ -17,17 +17,17 @@ export interface IUseWeekColumnResult {
 }
 
 /**
- * Hook for WeekColumn
+ * Hook for PeriodColumn
  *
  * Calculates total hours and hours per project/customer.
  *
- * This is displayed in the `<WeekColumnTooltip />` component.
+ * This is displayed in the `<PeriodColumnTooltip />` component.
  *
  * @param props - Component props
  */
-export function useWeekColumn({
+export function usePeriodColumn({
   periods = []
-}: IWeekColumnProps): IUseWeekColumnResult {
+}: IPeriodColumnProps): IUsePeriodColumnResult {
   const { state } = useContext(ReportsContext)
   return useMemo(
     () =>

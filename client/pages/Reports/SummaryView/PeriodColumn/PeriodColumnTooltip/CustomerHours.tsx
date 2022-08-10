@@ -13,7 +13,7 @@ export const CustomerHours = ({ hours, customer }) => {
   return (
     <div
       dangerouslySetInnerHTML={{
-        __html: t('common.weekColumnTooltipHoursCustomer', {
+        __html: t('common.periodColumnTooltipHoursCustomer', {
           hours: hours.toFixed(0),
           customer
         })

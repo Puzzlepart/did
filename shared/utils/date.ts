@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/require-number-to-fixed-digits-argument */
 /* eslint-disable tsdoc/syntax */
 // shared/utils/date.ts
 /**
@@ -146,7 +147,7 @@ export class DateUtils {
     monthIndex?: number,
     template: string = this.$.monthFormat
   ): string {
-    return $dayjs().set('month', monthIndex).format(template)
+    return s.capitalize($dayjs().set('month', monthIndex).format(template))
   }
 
   /**
