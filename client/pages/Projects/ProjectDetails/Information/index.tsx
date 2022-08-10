@@ -25,9 +25,15 @@ export const Information: React.FC = () => {
           type={'warning'}
         />
       )}
-      <InformationProperty title={t('common.descriptionFieldLabel')} value={state.selected.description} />
-      <InformationProperty title={t('projects.tagLabel')} value={state.selected.tag} />
-      {(state.selected?.labels?.length > 0) && (
+      <InformationProperty
+        title={t('common.descriptionFieldLabel')}
+        value={state.selected.description}
+      />
+      <InformationProperty
+        title={t('projects.tagLabel')}
+        value={state.selected.tag}
+      />
+      {state.selected?.labels?.length > 0 && (
         <InformationProperty title={t('admin.labels.headerText')}>
           {(state.selected.labels as Label[]).map((label, index) => (
             <EntityLabel key={index} label={label} />

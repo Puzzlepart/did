@@ -274,7 +274,7 @@ Using `Switch`, `Route` and `useRouteMatch` from
 `react-router-dom` to support navigating between
 sub components
 
-Defined in: [client/pages/Customers/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/index.tsx#L18)
+Defined in: [client/pages/Customers/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Customers/index.tsx#L17)
 
 ___
 
@@ -299,7 +299,7 @@ Using `Switch`, `Route` and `useRouteMatch` from
 to support navigating between
 sub components
 
-Defined in: [client/pages/Projects/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/index.tsx#L19)
+Defined in: [client/pages/Projects/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/index.tsx#L18)
 
 ___
 
@@ -345,7 +345,7 @@ ___
 
 • `Const` **Information**: React.FC
 
-Defined in: [client/pages/Projects/ProjectDetails/Information/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L15)
+Defined in: [client/pages/Projects/ProjectDetails/Information/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L14)
 
 ___
 
