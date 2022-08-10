@@ -27,11 +27,13 @@ export const Information: React.FC = () => {
       )}
       <InformationProperty title={t('common.descriptionFieldLabel')} value={state.selected.description} />
       <InformationProperty title={t('projects.tagLabel')} value={state.selected.tag} />
-      <InformationProperty title={t('admin.labels.headerText')}>
-        {(state.selected.labels as Label[]).map((label, index) => (
-          <EntityLabel key={index} label={label} />
-        ))}
-      </InformationProperty>
+      {(state.selected?.labels?.length > 0) && (
+        <InformationProperty title={t('admin.labels.headerText')}>
+          {(state.selected.labels as Label[]).map((label, index) => (
+            <EntityLabel key={index} label={label} />
+          ))}
+        </InformationProperty>
+      )}
       <UserMessage
         hidden={!state.selected.outlookCategory}
         containerStyle={{ margin: '15px 0 15px 0' }}
