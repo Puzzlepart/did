@@ -14,7 +14,12 @@ export function useHome() {
     message: urlParameters.get('message'),
     icon: urlParameters.get('icon')
   }
-  const redirectPage = (user.startPage && user.startPage !== '/' && location.state?.prevPath === undefined) ? user.startPage : null
+  const redirectPage =
+    user.startPage &&
+    user.startPage !== '/' &&
+    location.state?.prevPath === undefined
+      ? user.startPage
+      : null
   return {
     error,
     subscription,

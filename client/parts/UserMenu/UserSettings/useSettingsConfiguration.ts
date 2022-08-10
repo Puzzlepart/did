@@ -22,11 +22,11 @@ export function useSettingsConfiguration(): IUserSetting[] {
           text: t('common.homePage')
         },
         ...pages
-        .filter(({ permission }) => permission && hasPermission(permission))
-        .map(({ displayName, path }) => ({
-          key: path,
-          text: displayName
-        }))
+          .filter(({ permission }) => permission && hasPermission(permission))
+          .map(({ displayName, path }) => ({
+            key: path,
+            text: displayName
+          }))
       ],
       defaultSelectedKey: user.startPage
     }),

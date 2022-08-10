@@ -44,7 +44,10 @@ export const Navigation: React.FC = () => {
                 key={index}
                 text={page.displayName}
                 iconName={page.iconName}
-                to={{ pathname: page.path, state: { prevPath: location.pathname } }}
+                to={{
+                  pathname: page.path,
+                  state: { prevPath: location.pathname }
+                }}
                 permission={page.permission}
               />
             ))}

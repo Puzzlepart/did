@@ -26,7 +26,10 @@ export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
       <TextControl
         {...register<TextControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
-        description={t('customers.nameFieldDescription', packageFile.config.app)}
+        description={t(
+          'customers.nameFieldDescription',
+          packageFile.config.app
+        )}
         required={true}
       />
       <TextControl

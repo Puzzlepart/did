@@ -284,7 +284,7 @@ ___
 
 Home page
 
-Defined in: [client/pages/Home/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L18)
+Defined in: [client/pages/Home/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L19)
 
 ___
 
