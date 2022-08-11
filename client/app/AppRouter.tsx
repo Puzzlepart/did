@@ -6,9 +6,7 @@
  */
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import {
-  BrowserRouter as Router
-} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { ErrorFallback, Navigation } from '../parts'
 import styles from './App.module.scss'
 import { AppSwitch } from './AppSwitch'

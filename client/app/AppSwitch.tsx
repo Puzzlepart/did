@@ -2,11 +2,7 @@
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import React, { useEffect } from 'react'
-import {
-  Redirect,
-  Route,
-  Switch, useLocation
-} from 'react-router-dom'
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { MobileBreadcrumb } from '../parts'
 import styles from './App.module.scss'
 import { RESET_BREADCRUMB } from './reducer'
