@@ -31,14 +31,17 @@ export const UserNotifications: React.FC<IUserNotificationsProps> = ({
         <MenuItem
           onClick={togglePanel}
           iconProps={{ iconName }}
-          text={t('notifications.headerText')}>
-          <NotificationIndicator style={{
-            top: 8,
-            left: 22,
-            height: 12,
-            width: 14,
-            fontSize: 8
-          }} />
+          text={t('notifications.headerText')}
+        >
+          <NotificationIndicator
+            style={{
+              top: 8,
+              left: 22,
+              height: 12,
+              width: 14,
+              fontSize: 8
+            }}
+          />
         </MenuItem>
       ) : (
         <div className={styles.root} onClick={togglePanel}>

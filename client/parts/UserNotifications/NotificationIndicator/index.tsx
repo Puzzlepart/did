@@ -5,14 +5,15 @@ import { UserNotificationsContext } from '../context'
 import styles from './NotificationIndicator.module.scss'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface INotificationIndicatorProps extends React.HTMLProps<HTMLDivElement> {
-
-}
+export interface INotificationIndicatorProps
+  extends React.HTMLProps<HTMLDivElement> {}
 
 /**
  * @category Function Component
  */
-export const NotificationIndicator: React.FC<INotificationIndicatorProps> = (props) => {
+export const NotificationIndicator: React.FC<INotificationIndicatorProps> = (
+  props
+) => {
   const { notifications, count } = useContext(UserNotificationsContext)
   return (
     <div
