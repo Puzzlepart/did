@@ -181,7 +181,8 @@
       "headerText": "Manglende bekreftelser",
       "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
       "teamsReminderButtonText": "Send påminnelse i Teams",
-      "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did."
+      "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did.",
+      "teamsReminderTopicTemplate": "Uke {{name}} i did"
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Aktiver Teams-funksjonalitet",

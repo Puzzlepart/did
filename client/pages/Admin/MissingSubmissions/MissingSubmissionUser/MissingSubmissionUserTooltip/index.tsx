@@ -1,9 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize, TooltipHost } from '@fluentui/react'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import styles from './MissingSubmissionUserTooltip.module.scss'
-import { TeamsReminderButton } from './TeamsReminderButton'
+import { TeamsReminderButton } from '../../TeamsReminderButton'
 import { IMissingSubmissionUserTooltipProps } from './types'
 import { UserMissingPeriods } from './UserMissingPeriods'
 
@@ -21,7 +20,7 @@ export const MissingSubmissionUserTooltip: React.FC<IMissingSubmissionUserToolti
                 size={PersonaSize.size56}
               />
               <UserMissingPeriods {...props} />
-              <TeamsReminderButton {...props} />
+              <TeamsReminderButton period={props.period} users={[props.user]} />
             </div>
           )
         }}

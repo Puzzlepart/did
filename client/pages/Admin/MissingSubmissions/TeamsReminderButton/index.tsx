@@ -3,23 +3,24 @@ import { ActionButton } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import React from 'react'
 import { TFunction, useTranslation } from 'react-i18next'
+import { first } from 'underscore'
 import { createTeamsConversationLink } from 'utils/createTeamsConversationLink'
 import { ITeamsReminderButtonProps } from './types'
 
 const onNotifyTeams = (
-  { user, period }: ITeamsReminderButtonProps,
+  { users, period, topic }: ITeamsReminderButtonProps,
   t: TFunction
 ) => {
   let message = t(
     'admin.missingSubmissions.teamsReminderMessageSinglePeriodTemplate',
     { period: period?.name }
   )
-  if (user.periods) {
+  if (first(users).periods) {
     message = t('admin.missingSubmissions.teamsReminderMessageTemplate', {
-      periods: user.periods.map((p) => p.name).join(', ')
+      periods: first(users).periods.map((p) => p.name).join(', ')
     })
   }
-  const url = createTeamsConversationLink([user.email], message)
+  const url = createTeamsConversationLink(users.map(u => u.email).filter(Boolean), message, topic)
   window.open(url, '_blank')
 }
 
