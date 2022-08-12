@@ -183,7 +183,7 @@
       "teamsReminderButtonText": "Send påminnelse i Teams",
       "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did.",
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
-      "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som mangler uke {{name}}"
+      "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som ikke har bekreftet uke {{name}}"
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Aktiver Teams-funksjonalitet",
