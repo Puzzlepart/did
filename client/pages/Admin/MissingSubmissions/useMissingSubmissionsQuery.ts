@@ -6,7 +6,7 @@ import $missingSubmissions from './missing-submissions.gql'
 export function useMissingSubmissionsQuery() {
   const { queries } = useTimesheetPeriods()
   const query = useQuery($missingSubmissions, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-and-network',
     variables: { queries }
   })
   return {

@@ -12,7 +12,7 @@ export function useMissingSubmissionUserTooltip({
   const onNotifyTeams = () => {
     let message = t(
       'admin.missingSubmissions.teamsReminderMessageSinglePeriodTemplate',
-      { period: period.name }
+      { period: period?.name }
     )
     if (user.periods) {
       message = t('admin.missingSubmissions.teamsReminderMessageTemplate', {

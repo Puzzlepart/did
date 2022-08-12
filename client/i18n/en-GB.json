@@ -377,7 +377,9 @@
     "yes": "Yes",
     "no": "No",
     "homePage": "Home",
-    "missingWeeksLabel": "Missing weeks"
+    "missingWeeksLabel": "Missing weeks",
+    "allWeeks": "All weeks",
+    "periodName": "Week {{name}}"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

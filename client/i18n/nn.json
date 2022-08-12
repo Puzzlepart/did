@@ -376,7 +376,9 @@
     "yes": "Ja",
     "no": "Nei",
     "homePage": "Heim",
-    "missingWeeksLabel": "Mangler veker"
+    "missingWeeksLabel": "Mangler veker",
+    "allWeeks": "Alle veker",
+    "periodName": "Veke {{name}}"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
