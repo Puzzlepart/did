@@ -379,7 +379,7 @@
     "missingWeeksLabel": "Mangler veker",
     "allWeeks": "Alle veker",
     "periodName": "Veke {{name}}",
-    "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}."
+    "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

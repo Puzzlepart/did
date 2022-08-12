@@ -23,7 +23,7 @@ function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
     secondaryText: user.mail,
     imageUrl: user.photo?.base64,
     email: user.mail,
-    lastActive: new Date(user.lastActive),
+    lastActive: user.lastActive && new Date(user.lastActive),
     periods
   }
 }
@@ -42,11 +42,11 @@ function getPeriodsWithMissingSubmissions(
     return {
       ...p,
       users: data.users
-        .filter(({ id }) => {
+        .filter((user) => {
           return !any(
             data.periods,
             ({ userId, week, month, year }) =>
-              userId === id && [week, month, year].join('_') === p.id
+              userId === user.id && [week, month, year].join('_') === p.id
           )
         })
         .map((user) => mapUser(user))
@@ -64,17 +64,19 @@ function getUsersWithMissingPeriods(
   data: ReturnType<typeof useMissingSubmissionsQuery>,
   datePeriods: IDatePeriod[]
 ): IMissingSubmissionUser[] {
-  return data.users.map((user) => {
-    const missingPeriods = datePeriods.filter(
-      ({ id }) =>
-        !any(
-          data.periods,
-          ({ userId, week, month, year }) =>
-            userId === user.id && [week, month, year].join('_') === id
-        )
-    )
-    return mapUser(user, missingPeriods)
-  })
+  return data.users
+    .map((user) => {
+      const missingPeriods = datePeriods.filter(
+        ({ id }) =>
+          !any(
+            data.periods,
+            ({ userId, week, month, year }) =>
+              userId === user.id && [week, month, year].join('_') === id
+          )
+      )
+      return missingPeriods.length > 0 && mapUser(user, missingPeriods)
+    })
+    .filter(Boolean)
 }
 
 /**

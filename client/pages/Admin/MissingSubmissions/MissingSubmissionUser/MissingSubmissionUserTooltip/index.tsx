@@ -1,61 +1,51 @@
 /* eslint-disable tsdoc/syntax */
 import {
-  ActionButton,
   Label,
   MessageBar,
   Persona,
   PersonaSize,
   TooltipHost
 } from '@fluentui/react'
-import { useAppContext } from 'AppContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './MissingSubmissionUserTooltip.module.scss'
+import { TeamsReminderButton } from './TeamsReminderButton'
 import { IMissingSubmissionUserTooltipProps } from './types'
-import { useMissingSubmissionUserTooltip } from './useMissingSubmissionUserTooltip'
 
 export const MissingSubmissionUserTooltip: React.FC<IMissingSubmissionUserTooltipProps> =
-  ({ user, period, children }) => {
+  (props) => {
     const { t } = useTranslation()
-    const { onNotifyTeams } = useMissingSubmissionUserTooltip({ user, period })
-    const { subscription } = useAppContext()
     return (
       <TooltipHost
         tooltipProps={{
           onRenderContent: () => (
             <div className={styles.root}>
               <Persona
-                {...user}
+                {...props.user}
                 className={styles.persona}
                 showOverflowTooltip={false}
                 size={PersonaSize.size56}
               />
-              {user.lastActive && (
+              {props.user.lastActive && (
                 <MessageBar>
                   {t('common.userLastActiveText', {
-                    lastActive: user.lastActive.toLocaleDateString()
+                    lastActive: props.user.lastActive.toLocaleDateString()
                   })}
                 </MessageBar>
               )}
-              {user.periods && (
+              {props.user.periods && (
                 <div className={styles.periods}>
                   <Label>{t('common.missingWeeksLabel')}</Label>
-                  {user.periods.map((p) => p.name).join(', ')}
+                  {props.user.periods.map((p) => p.name).join(', ')}
                 </div>
               )}
-              {subscription.settings?.teams?.enabled && (
-                <ActionButton
-                  text={t('admin.missingSubmissions.teamsReminderButtonText')}
-                  iconProps={{ iconName: 'TeamsLogo' }}
-                  onClick={onNotifyTeams}
-                />
-              )}
+              <TeamsReminderButton {...props} />
             </div>
           )
         }}
         calloutProps={{ gapSpace: 0 }}
       >
-        {children}
+        {props.children}
       </TooltipHost>
     )
   }

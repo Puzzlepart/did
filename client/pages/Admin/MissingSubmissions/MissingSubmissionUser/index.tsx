@@ -14,6 +14,7 @@ export const MissingSubmissionUser: React.FC<IMissingSubmissionUserProps> = ({
       <MissingSubmissionUserTooltip user={user} period={period}>
         <Persona
           {...user}
+          className={styles.persona}
           showOverflowTooltip={false}
           size={PersonaSize.size40}
         />
