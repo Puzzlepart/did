@@ -51,6 +51,17 @@ export class SubscriptionVacationSettings {
 /**
  * @category GraphQL ObjectType
  */
+@ObjectType({
+  description: 'A type that describes Subscription Teams settings'
+})
+export class SubscriptionTeamsSettings {
+  @Field({ nullable: true })
+  enabled?: boolean
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
 @ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
   @Field(() => SubscriptionForecastSettings, { nullable: true })
@@ -61,6 +72,9 @@ export class SubscriptionSettings {
 
   @Field(() => SubscriptionVacationSettings, { nullable: true })
   vacation?: SubscriptionVacationSettings
+
+  @Field(() => SubscriptionTeamsSettings, { nullable: true })
+  teams?: SubscriptionTeamsSettings
 }
 
 /**
@@ -139,6 +153,17 @@ export class SubscriptionVacationSettingsInput {
 /**
  * @category GraphQL InputType
  */
+@InputType({
+  description: 'A input that describes Subscription Teams settings'
+})
+export class SubscriptionTeamsSettingsInput {
+  @Field({ nullable: true })
+  enabled?: boolean
+}
+
+/**
+ * @category GraphQL InputType
+ */
 @InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
   @Field(() => SubscriptionForecastSettingsInput, { nullable: true })
@@ -149,4 +174,7 @@ export class SubscriptionSettingsInput {
 
   @Field(() => SubscriptionVacationSettingsInput, { nullable: true })
   vacation?: SubscriptionVacationSettingsInput
+
+  @Field(() => SubscriptionTeamsSettingsInput, { nullable: true })
+  teams?: SubscriptionTeamsSettingsInput
 }
