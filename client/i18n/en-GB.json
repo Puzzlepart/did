@@ -183,7 +183,8 @@
       "teamsReminderMessageTemplate": "You must confirm the following weeks in did: {{periods}}",
       "teamsReminderButtonText": "Send reminder in Teams",
       "teamsReminderMessageSinglePeriodTemplate": "You must confirm week {{period}} in did.",
-      "teamsReminderTopicTemplate": "Week {{name}} in did"
+      "teamsReminderTopicTemplate": "Week {{name}} in did",
+      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}"
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",

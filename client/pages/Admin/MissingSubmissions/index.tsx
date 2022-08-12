@@ -29,6 +29,7 @@ export const MissingSubmissions: TabComponent = () => {
           >
             <div className={styles.itemContainer}>
               <TeamsReminderButton
+                title={t('admin.missingSubmissions.teamsReminderButtonTooltiop', period)}
                 period={period}
                 users={period.users}
                 topic={t('admin.missingSubmissions.teamsReminderTopicTemplate', period)} />
