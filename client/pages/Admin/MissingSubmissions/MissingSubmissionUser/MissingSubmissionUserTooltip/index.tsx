@@ -2,6 +2,7 @@
 import {
   ActionButton,
   Label,
+  MessageBar,
   Persona,
   PersonaSize,
   TooltipHost
@@ -29,8 +30,15 @@ export const MissingSubmissionUserTooltip: React.FC<IMissingSubmissionUserToolti
                 showOverflowTooltip={false}
                 size={PersonaSize.size56}
               />
+              {user.lastActive && (
+                <MessageBar>
+                  {t('common.userLastActiveText', {
+                    lastActive: user.lastActive.toLocaleDateString()
+                  })}
+                </MessageBar>
+              )}
               {user.periods && (
-                <div>
+                <div className={styles.periods}>
                   <Label>{t('common.missingWeeksLabel')}</Label>
                   {user.periods.map((p) => p.name).join(', ')}
                 </div>

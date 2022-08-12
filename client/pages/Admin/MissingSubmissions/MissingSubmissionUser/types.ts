@@ -3,6 +3,7 @@ import { IDatePeriod } from 'DateUtils'
 
 export interface IMissingSubmissionUser extends IPersonaProps {
   email?: string
+  lastActive?: Date
   periods?: IDatePeriod[]
 }
 

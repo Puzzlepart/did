@@ -379,7 +379,8 @@
     "homePage": "Home",
     "missingWeeksLabel": "Missing weeks",
     "allWeeks": "All weeks",
-    "periodName": "Week {{name}}"
+    "periodName": "Week {{name}}",
+    "userLastActiveText": "The user was last active {{lastActive}}."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

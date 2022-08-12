@@ -12,6 +12,7 @@ query MissingSubmissions (
     id
     displayName
     mail
+    lastActive
     photo {
       base64
     }

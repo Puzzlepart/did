@@ -12,9 +12,7 @@ export const MissingSubmissions: TabComponent = () => {
   return (
     <>
       <Pivot defaultSelectedKey='all'>
-        <PivotItem
-          itemKey='all'
-          headerText={t('common.allWeeks')}>
+        <PivotItem itemKey='all' headerText={t('common.allWeeks')}>
           {users.map((user, index) => (
             <MissingSubmissionUser key={index} user={user} />
           ))}
@@ -23,7 +21,8 @@ export const MissingSubmissions: TabComponent = () => {
           <PivotItem
             key={index}
             itemKey={period.id}
-            headerText={t('common.periodName', { name: period.name })}>
+            headerText={t('common.periodName', { name: period.name })}
+          >
             {period.users.map((user, index) => (
               <MissingSubmissionUser key={index} user={user} period={period} />
             ))}

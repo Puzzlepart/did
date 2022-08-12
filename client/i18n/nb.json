@@ -378,7 +378,8 @@
     "homePage": "Hjem",
     "missingWeeksLabel": "Mangler uker",
     "allWeeks": "Alle uker",
-    "periodName": "Uke {{name}}"
+    "periodName": "Uke {{name}}",
+    "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

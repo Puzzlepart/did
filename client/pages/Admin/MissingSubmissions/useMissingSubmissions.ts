@@ -1,5 +1,6 @@
 import { IDatePeriod } from 'DateUtils'
 import { useTimesheetPeriods } from 'hooks'
+import { User } from 'types'
 import { any } from 'underscore'
 import { IMissingSubmissionUser } from './MissingSubmissionUser'
 import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
@@ -9,12 +10,35 @@ interface IMissingSubmissionPeriod extends IDatePeriod {
 }
 
 /**
- * Component logic hook for `<MissingSubmissions />`
+ * Maps `User` to `IMissingSubmissionUser`. We don't want to extend
+ * classes that have the `ObjectType` decorator.
+ *
+ * @param user - User
+ * @param periods - Date periods
+ * @returns
  */
-export function useMissingSubmissions() {
-  const { periods: _periods } = useTimesheetPeriods()
-  const data = useMissingSubmissionsQuery()
-  const periods: IMissingSubmissionPeriod[] = _periods.map((p) => {
+function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
+  return {
+    text: user.displayName,
+    secondaryText: user.mail,
+    imageUrl: user.photo?.base64,
+    email: user.mail,
+    lastActive: new Date(user.lastActive),
+    periods
+  }
+}
+
+/**
+ * Get date periods with missing submissions.
+ *
+ * @param data - Data returned by `useMissingSubmissionsQuery`
+ * @param datePeriods - Date periods
+ */
+function getPeriodsWithMissingSubmissions(
+  data: ReturnType<typeof useMissingSubmissionsQuery>,
+  datePeriods: IDatePeriod[]
+): IMissingSubmissionPeriod[] {
+  return datePeriods.map((p) => {
     return {
       ...p,
       users: data.users
@@ -25,16 +49,23 @@ export function useMissingSubmissions() {
               userId === id && [week, month, year].join('_') === p.id
           )
         })
-        .map((user) => ({
-          text: user.displayName,
-          secondaryText: user.mail,
-          imageUrl: user.photo?.base64,
-          email: user.mail
-        }))
+        .map((user) => mapUser(user))
     }
   })
-  const users: IMissingSubmissionUser[] = data.users.map((user) => {
-    const userMissingPeriods = _periods.filter(
+}
+
+/**
+ * Get users and their missing confirmed periods
+ *
+ * @param data - Data returned by `useMissingSubmissionsQuery`
+ * @param datePeriods - Date periods
+ */
+function getUsersWithMissingPeriods(
+  data: ReturnType<typeof useMissingSubmissionsQuery>,
+  datePeriods: IDatePeriod[]
+): IMissingSubmissionUser[] {
+  return data.users.map((user) => {
+    const missingPeriods = datePeriods.filter(
       ({ id }) =>
         !any(
           data.periods,
@@ -42,13 +73,17 @@ export function useMissingSubmissions() {
             userId === user.id && [week, month, year].join('_') === id
         )
     )
-    return {
-      text: user.displayName,
-      secondaryText: user.mail,
-      imageUrl: user.photo?.base64,
-      email: user.mail,
-      periods: userMissingPeriods
-    }
+    return mapUser(user, missingPeriods)
   })
+}
+
+/**
+ * Component logic hook for `<MissingSubmissions />`
+ */
+export function useMissingSubmissions() {
+  const { periods: datePeriods } = useTimesheetPeriods()
+  const data = useMissingSubmissionsQuery()
+  const periods = getPeriodsWithMissingSubmissions(data, datePeriods)
+  const users = getUsersWithMissingPeriods(data, datePeriods)
   return { periods, users } as const
 }
