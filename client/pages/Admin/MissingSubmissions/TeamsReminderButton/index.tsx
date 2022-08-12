@@ -7,7 +7,7 @@ import { first } from 'underscore'
 import { createTeamsConversationLink } from 'utils/createTeamsConversationLink'
 import { ITeamsReminderButtonProps } from './types'
 
-const onNotifyTeams = (
+const startTeamsConversation = (
   { users, period, topic }: ITeamsReminderButtonProps,
   t: TFunction
 ) => {
@@ -34,7 +34,7 @@ export const TeamsReminderButton: React.FC<ITeamsReminderButtonProps> = (
     <ActionButton
       text={t('admin.missingSubmissions.teamsReminderButtonText')}
       iconProps={{ iconName: 'TeamsLogo' }}
-      onClick={() => onNotifyTeams(props, t)}
+      onClick={() => startTeamsConversation(props, t)}
     />
   )
 }
