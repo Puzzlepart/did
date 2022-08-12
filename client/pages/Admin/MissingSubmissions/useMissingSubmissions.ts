@@ -23,7 +23,6 @@ function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
     secondaryText: user.mail,
     imageUrl: user.photo?.base64,
     email: user.mail,
-    lastActive: user.lastActive && new Date(user.lastActive),
     periods
   }
 }

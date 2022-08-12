@@ -1,20 +1,14 @@
 /* eslint-disable tsdoc/syntax */
-import {
-  Label,
-  MessageBar,
-  Persona,
-  PersonaSize,
-  TooltipHost
-} from '@fluentui/react'
+import { Persona, PersonaSize, TooltipHost } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './MissingSubmissionUserTooltip.module.scss'
 import { TeamsReminderButton } from './TeamsReminderButton'
 import { IMissingSubmissionUserTooltipProps } from './types'
+import { UserMissingPeriods } from './UserMissingPeriods'
 
 export const MissingSubmissionUserTooltip: React.FC<IMissingSubmissionUserTooltipProps> =
   (props) => {
-    const { t } = useTranslation()
     return (
       <TooltipHost
         tooltipProps={{
@@ -26,19 +20,7 @@ export const MissingSubmissionUserTooltip: React.FC<IMissingSubmissionUserToolti
                 showOverflowTooltip={false}
                 size={PersonaSize.size56}
               />
-              {props.user.lastActive && (
-                <MessageBar>
-                  {t('common.userLastActiveText', {
-                    lastActive: props.user.lastActive.toLocaleDateString()
-                  })}
-                </MessageBar>
-              )}
-              {props.user.periods && (
-                <div className={styles.periods}>
-                  <Label>{t('common.missingWeeksLabel')}</Label>
-                  {props.user.periods.map((p) => p.name).join(', ')}
-                </div>
-              )}
+              <UserMissingPeriods {...props} />
               <TeamsReminderButton {...props} />
             </div>
           )
