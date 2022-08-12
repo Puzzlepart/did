@@ -393,4 +393,5 @@ export default new DateUtils({
 })
 
 export * from './types'
+export { IDatePeriod } from './DateObject'
 export { $dayjs }
