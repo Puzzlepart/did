@@ -13,9 +13,15 @@ export const startTeamsConversation = (
   )
   if (first(users).periods) {
     message = t('admin.missingSubmissions.teamsReminderMessageTemplate', {
-      periods: first(users).periods.map((p) => p.name).join(', ')
+      periods: first(users)
+        .periods.map((p) => p.name)
+        .join(', ')
     })
   }
-  const url = createTeamsConversationLink(users.map(u => u.email).filter(Boolean), message, topic)
+  const url = createTeamsConversationLink(
+    users.map((u) => u.email).filter(Boolean),
+    message,
+    topic
+  )
   window.open(url, '_blank')
 }

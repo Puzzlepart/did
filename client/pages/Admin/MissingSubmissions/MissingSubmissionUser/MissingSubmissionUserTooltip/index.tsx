@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize, TooltipHost } from '@fluentui/react'
 import React from 'react'
-import styles from './MissingSubmissionUserTooltip.module.scss'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
+import styles from './MissingSubmissionUserTooltip.module.scss'
 import { IMissingSubmissionUserTooltipProps } from './types'
 import { UserMissingPeriods } from './UserMissingPeriods'
 

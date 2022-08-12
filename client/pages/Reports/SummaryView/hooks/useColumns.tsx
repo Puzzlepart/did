@@ -36,9 +36,9 @@ export function useColumns(): IListColumn[] {
           endDate: true
         }
       })
-      data.onRenderColumnHeader = (
-        props: IDetailsColumnRenderTooltipProps
-      ) => <ColumnHeader {...props} />
+      data.onRenderColumnHeader = (props: IDetailsColumnRenderTooltipProps) => (
+        <ColumnHeader {...props} />
+      )
       columns.push({
         key: p.id,
         fieldName: p.id,

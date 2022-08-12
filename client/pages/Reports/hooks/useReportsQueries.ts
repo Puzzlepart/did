@@ -24,9 +24,7 @@ import report_summary from './queries/report-summary.gql'
  *
  * @category Reports
  */
-export function useLastMonthQuery(
-  query = report_last_month
-): IReportsQuery {
+export function useLastMonthQuery(query = report_last_month): IReportsQuery {
   const { t } = useTranslation()
   const { monthName } = new DateObject().add('-1month').toObject()
   return {
@@ -84,9 +82,7 @@ export function useCurrentMonthQuery(
  *
  * @category Reports
  */
-export function useLastYearQuery(
-  query = report_last_year
-): IReportsQuery {
+export function useLastYearQuery(query = report_last_year): IReportsQuery {
   const { t } = useTranslation()
   const object = new DateObject().toObject('year')
   const year = object.year - 1
@@ -142,9 +138,7 @@ export function useCurrentYearQuery(
  *
  * @category Reports
  */
-export function useForecastQuery(
-  query = report_forecast
-): IReportsQuery {
+export function useForecastQuery(query = report_forecast): IReportsQuery {
   const { t } = useTranslation()
   return {
     itemKey: 'forecast',
@@ -199,7 +193,7 @@ export function useReportsQueries(): IReportsQuery[] {
     currentYearQuery,
     lastYearQuery,
     forecastQuery,
-    summaryQuery,
+    summaryQuery
   ]
 }
 
