@@ -44,7 +44,6 @@ export class ReportsResolver {
    * @param preset - Query
    * @param query - Query
    * @param sortAsc - Sort ascending
-   * @param ctx - GraphQL context
    */
   @Query(() => [TimeEntry], {
     description: 'Get a preset report, or use custom filters.'
