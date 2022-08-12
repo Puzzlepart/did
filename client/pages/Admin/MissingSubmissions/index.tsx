@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { Persona, PersonaSize, Pivot, PivotItem } from '@fluentui/react'
+import { Pivot, PivotItem } from '@fluentui/react'
 import { TabComponent } from 'components'
 import React from 'react'
 import { MissingSubmissionUser } from './MissingSubmissionUser'
@@ -17,15 +17,8 @@ export const MissingSubmissions: TabComponent = () => {
         </PivotItem>
         {periods.map((p, index) => (
           <PivotItem key={index} headerText={`Uke ${p.name}`}>
-            {(p?.users ?? []).map((u, index) => (
-              <Persona
-                key={index}
-                text={u.displayName}
-                secondaryText={u.mail}
-                imageUrl={u.photo?.base64}
-                size={PersonaSize.size40}
-                styles={{ root: { marginTop: 15 } }}
-              />
+            {p.users.map((user, index) => (
+              <MissingSubmissionUser key={index} user={user} period={p} />
             ))}
           </PivotItem>
         ))}

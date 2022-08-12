@@ -181,7 +181,8 @@
     "missingSubmissions": {
       "headerText": "Missing submissions",
       "teamsReminderMessageTemplate": "You must confirm the following weeks in did: {{periods}}",
-      "teamsReminderButtonText": "Send reminder in Teams"
+      "teamsReminderButtonText": "Send reminder in Teams",
+      "teamsReminderMessageSinglePeriodTemplate": "You must confirm week {{period}} in did."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",

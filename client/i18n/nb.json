@@ -180,7 +180,8 @@
     "missingSubmissions": {
       "headerText": "Manglende bekreftelser",
       "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
-      "teamsReminderButtonText": "Send påminnelse i Teams"
+      "teamsReminderButtonText": "Send påminnelse i Teams",
+      "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Aktiver Teams-funksjonalitet",
