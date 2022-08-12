@@ -24,7 +24,7 @@ function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
     imageUrl: user.photo?.base64,
     email: user.mail,
     periods
-  }
+  } as IMissingSubmissionUser
 }
 
 /**
