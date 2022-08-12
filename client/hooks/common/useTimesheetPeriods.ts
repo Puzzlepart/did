@@ -3,9 +3,9 @@ import { ConfirmedPeriodsQuery } from 'types'
 
 /**
  * Get Timesheet periods
- * 
+ *
  * @param weeksCount - Number of weeks to retrieve
- * 
+ *
  * @returns Timesheet periods for a number of weeks in the past
  */
 export function useTimesheetPeriods(weeksCount = 8) {
@@ -23,6 +23,9 @@ export function useTimesheetPeriods(weeksCount = 8) {
       periods.push(p)
     }
   }
-  const queries:ConfirmedPeriodsQuery[] = weeks.map(([week, year]) => ({ week, year }))
+  const queries: ConfirmedPeriodsQuery[] = weeks.map(([week, year]) => ({
+    week,
+    year
+  }))
   return { weeks, periods, queries } as const
 }

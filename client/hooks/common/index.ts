@@ -1,5 +1,5 @@
 export * from './useArray'
 export * from './useFabricIcons'
 export * from './useMap'
-export * from './useToggle'
 export * from './useTimesheetPeriods'
+export * from './useToggle'
