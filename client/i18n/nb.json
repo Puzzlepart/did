@@ -176,6 +176,9 @@
     },
     "users": {
       "headerText": "Brukere"
+    },
+    "missingSubmissions": {
+      "headerText": "Manglende bekreftelser"
     }
   },
   "reports": {

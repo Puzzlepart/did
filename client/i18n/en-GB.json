@@ -177,6 +177,9 @@
     },
     "users": {
       "headerText": "Users"
+    },
+    "missingSubmissions": {
+      "headerText": "Missing submissions"
     }
   },
   "reports": {
