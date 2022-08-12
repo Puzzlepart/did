@@ -178,8 +178,13 @@
       "headerText": "Brukarar"
     },
     "missingSubmissions": {
-      "headerText": "Manglende bekreftelser"
-    }
+      "headerText": "Manglende bekreftelser",
+      "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
+      "teamsReminderButtonText": "Send påminnelse i Teams"
+    },
+    "teams": "Teams",
+    "teamsEnabledLabel": "Aktiver Teams-funksjonalitet",
+    "teamsEnabledDescription": "Aktiver Teams-funksjonalitet som å minne brukere om manglende uker osv."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -369,7 +374,8 @@
     "unconfirmedHours": "Ubekreftede timer",
     "yes": "Ja",
     "no": "Nei",
-    "homePage": "Heim"
+    "homePage": "Heim",
+    "missingWeeksLabel": "Mangler veker"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
