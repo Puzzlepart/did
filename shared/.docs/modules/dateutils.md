@@ -18,6 +18,7 @@ the client and the server.
 
 ### Interfaces
 
+- [IDatePeriod](../interfaces/dateutils.idateperiod.md)
 - [IDateUtils](../interfaces/dateutils.idateutils.md)
 
 ### Type aliases

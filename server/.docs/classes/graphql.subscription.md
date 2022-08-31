@@ -33,7 +33,7 @@
 
 • `Optional` **\_id**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L74)
+Defined in: [graphql/resolvers/subscription/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L88)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 Database name
 
-Defined in: [graphql/resolvers/subscription/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L91)
+Defined in: [graphql/resolvers/subscription/types.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L105)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:77](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L77)
+Defined in: [graphql/resolvers/subscription/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L91)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L80)
+Defined in: [graphql/resolvers/subscription/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L94)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **owner**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L83)
+Defined in: [graphql/resolvers/subscription/types.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L97)
 
 ___
 
@@ -75,4 +75,4 @@ ___
 
 • `Optional` **settings**: [*SubscriptionSettings*](graphql.subscriptionsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L86)
+Defined in: [graphql/resolvers/subscription/types.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L100)

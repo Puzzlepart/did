@@ -114,9 +114,9 @@ Makes a deep copy of the object
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`object` | *any* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`object` | *any* | Object    |
 
 **Returns:** *any*
 

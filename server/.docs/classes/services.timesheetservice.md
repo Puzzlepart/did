@@ -158,9 +158,9 @@ Microsoft Graph using `MSGraphService`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`parameters` | IGetTimesheetParameters |
+Name | Type | Description |
+:------ | :------ | :------ |
+`parameters` | IGetTimesheetParameters | Timesheet params    |
 
 **Returns:** *Promise*<any[]\>
 

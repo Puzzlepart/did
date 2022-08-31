@@ -7,8 +7,7 @@ import { EventInput } from './EventInput'
  * @category GraphQL InputType
  */
 @InputType({
-  description:
-    'Input object for TimesheetPeriod'
+  description: 'Input object for TimesheetPeriod'
 })
 export class TimesheetPeriodInput {
   @Field()

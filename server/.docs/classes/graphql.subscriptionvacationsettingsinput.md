@@ -29,7 +29,7 @@
 
 • `Optional` **eventCategory**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L136)
+Defined in: [graphql/resolvers/subscription/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L150)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **totalDays**: *number*
 
-Defined in: [graphql/resolvers/subscription/types.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L133)
+Defined in: [graphql/resolvers/subscription/types.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L147)

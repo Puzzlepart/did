@@ -58,7 +58,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
 
-Defined in: [graphql/resolvers/reports/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L67)
+Defined in: [graphql/resolvers/reports/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L66)
 
 ___
 
@@ -70,7 +70,7 @@ Get forecast report
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [graphql/resolvers/reports/index.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L83)
+Defined in: [graphql/resolvers/reports/index.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L80)
 
 ___
 
@@ -89,11 +89,11 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Query   |
 `query?` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
-`sortAsc?` | *boolean* | Sort ascending   |
+`sortAsc?` | *boolean* | Sort ascending    |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [graphql/resolvers/reports/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L52)
+Defined in: [graphql/resolvers/reports/index.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L51)
 
 ___
 
@@ -105,11 +105,11 @@ Get report
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) |
-`context?` | *Context* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Report preset   |
+`context?` | *Context* | GraphQL context    |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [graphql/resolvers/reports/index.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L97)
+Defined in: [graphql/resolvers/reports/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L94)

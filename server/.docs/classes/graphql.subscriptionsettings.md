@@ -14,6 +14,7 @@
 
 - [adsync](graphql.subscriptionsettings.md#adsync)
 - [forecast](graphql.subscriptionsettings.md#forecast)
+- [teams](graphql.subscriptionsettings.md#teams)
 - [vacation](graphql.subscriptionsettings.md#vacation)
 
 ## Constructors
@@ -30,7 +31,7 @@
 
 • `Optional` **adsync**: [*SubscriptionADSyncSettings*](graphql.subscriptionadsyncsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L60)
+Defined in: [graphql/resolvers/subscription/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L71)
 
 ___
 
@@ -38,7 +39,15 @@ ___
 
 • `Optional` **forecast**: [*SubscriptionForecastSettings*](graphql.subscriptionforecastsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L57)
+Defined in: [graphql/resolvers/subscription/types.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L68)
+
+___
+
+### teams
+
+• `Optional` **teams**: [*SubscriptionTeamsSettings*](graphql.subscriptionteamssettings.md)
+
+Defined in: [graphql/resolvers/subscription/types.ts:77](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L77)
 
 ___
 
@@ -46,4 +55,4 @@ ___
 
 • `Optional` **vacation**: [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L63)
+Defined in: [graphql/resolvers/subscription/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L74)

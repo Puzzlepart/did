@@ -229,14 +229,14 @@ ___
 
 ### getPeriods
 
-▸ **getPeriods**(): IDatePeriod[]
+▸ **getPeriods**(): [*IDatePeriod*](../interfaces/dateutils.idateperiod.md)[]
 
 Get periods in the date's week.
 
 If a week is split between months, we want to return them as two separate
 periods.
 
-**Returns:** IDatePeriod[]
+**Returns:** [*IDatePeriod*](../interfaces/dateutils.idateperiod.md)[]
 
 Defined in: [shared/utils/DateObject.ts:199](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L199)
 

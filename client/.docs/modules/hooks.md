@@ -11,6 +11,10 @@ Reusable React Hooks
 - [UseUpdateUserConfigurationParamType](hooks.md#useupdateuserconfigurationparamtype)
 - [UseUpdateUserConfigurationReturnType](hooks.md#useupdateuserconfigurationreturntype)
 
+### Other Functions
+
+- [useTimesheetPeriods](hooks.md#usetimesheetperiods)
+
 ### React Hook Functions
 
 - [useArray](hooks.md#usearray)
@@ -60,6 +64,35 @@ Name | Type |
 `updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
 
 Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L13)
+
+## Other Functions
+
+### useTimesheetPeriods
+
+▸ **useTimesheetPeriods**(`weeksCount?`: *number*, `descending?`: *boolean*): *object*
+
+Get Timesheet periods
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`weeksCount` | *number* | 8 | Number of weeks to retrieve   |
+`descending` | *boolean* | false | Return weeks/periods in descending order    |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`periods` | IDatePeriod[] |
+`queries` | *ConfirmedPeriodsQuery*[] |
+`weeks` | [*number*, *number*][] |
+
+Timesheet periods for a number of weeks in the past
+
+Defined in: [client/hooks/common/useTimesheetPeriods.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useTimesheetPeriods.ts#L12)
+
+___
 
 ## React Hook Functions
 
