@@ -8,7 +8,7 @@ import { EventInput } from './EventInput'
  */
 @InputType({
   description:
-    'Input object for TimesheetPeriod used in Mutation unsubmitPeriod'
+    'Input object for TimesheetPeriod'
 })
 export class TimesheetPeriodInput {
   @Field()

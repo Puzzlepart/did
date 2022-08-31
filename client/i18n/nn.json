@@ -176,7 +176,18 @@
     },
     "users": {
       "headerText": "Brukarar"
-    }
+    },
+    "missingSubmissions": {
+      "headerText": "Manglende bekreftelser",
+      "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
+      "teamsReminderButtonText": "Send påminnelse i Teams",
+      "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did.",
+      "teamsReminderTopicTemplate": "Uke {{name}} i did",
+      "teamsReminderButtonTooltiop": "Send påminning i Teams til alle brukarar som ikkje har bekreftet veke {{name}}"
+    },
+    "teams": "Teams",
+    "teamsEnabledLabel": "Aktiver Teams-funksjonalitet",
+    "teamsEnabledDescription": "Aktiver Teams-funksjonalitet som å minne brukere om manglende uker osv."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -366,7 +377,11 @@
     "unconfirmedHours": "Ubekreftede timer",
     "yes": "Ja",
     "no": "Nei",
-    "homePage": "Heim"
+    "homePage": "Heim",
+    "missingWeeksLabel": "Mangler veker",
+    "allWeeks": "Alle veker",
+    "periodName": "Veke {{name}}",
+    "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

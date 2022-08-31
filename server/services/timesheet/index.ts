@@ -80,7 +80,7 @@ export class TimesheetService {
    * If no confirmed period is found, events are fetched from
    * Microsoft Graph using `MSGraphService`
    *
-   * @param params - Timesheet params
+   * @param parameters - Timesheet params
    */
   public async getTimesheet(
     parameters: IGetTimesheetParameters

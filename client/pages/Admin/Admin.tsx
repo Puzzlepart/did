@@ -8,6 +8,7 @@ import { PermissionScope } from 'security'
 import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
+import { MissingSubmissions } from './MissingSubmissions'
 import { Roles } from './Roles'
 import { SubscriptionSettings } from './Subscription'
 import { Users } from './Users'
@@ -35,6 +36,10 @@ export const Admin = () => {
         headerText={t('admin.users.headerText')}
         itemIcon='FabricUserFolder'
         permission={PermissionScope.LIST_USERS}
+      />
+      <MissingSubmissions
+        headerText={t('admin.missingSubmissions.headerText')}
+        itemIcon='EventDateMissed12'
       />
       <Labels headerText={t('admin.labels.headerText')} itemIcon='Label' />
       <Roles

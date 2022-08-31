@@ -139,6 +139,21 @@ export function useSubscriptionConfig() {
           }
         } as SubscriptionSettingField
       ]
+    },
+    {
+      itemKey: 'teams',
+      headerText: t('admin.teams'),
+      itemIcon: 'TeamsLogo',
+      fields: [
+        {
+          id: 'enabled',
+          type: 'bool',
+          props: {
+            label: t('admin.teamsEnabledLabel'),
+            description: t('admin.teamsEnabledDescription')
+          }
+        }
+      ]
     }
   ] as ISettingsSectionProps[]
 }

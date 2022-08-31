@@ -177,7 +177,18 @@
     },
     "users": {
       "headerText": "Users"
-    }
+    },
+    "missingSubmissions": {
+      "headerText": "Missing submissions",
+      "teamsReminderMessageTemplate": "You must confirm the following weeks in did: {{periods}}",
+      "teamsReminderButtonText": "Send reminder in Teams",
+      "teamsReminderMessageSinglePeriodTemplate": "You must confirm week {{period}} in did.",
+      "teamsReminderTopicTemplate": "Week {{name}} in did",
+      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}"
+    },
+    "teams": "Teams",
+    "teamsEnabledLabel": "Enable Teams functionality",
+    "teamsEnabledDescription": "Enable Teams functionality like reminding users about missing submissions etc."
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -367,7 +378,11 @@
     "unconfirmedHours": "Unconfirmed hours",
     "yes": "Yes",
     "no": "No",
-    "homePage": "Home"
+    "homePage": "Home",
+    "missingWeeksLabel": "Missing weeks",
+    "allWeeks": "All weeks",
+    "periodName": "Week {{name}}",
+    "userLastActiveText": "The user was last active {{lastActive}}."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

@@ -1,15 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import {
-  currentMonthQuery,
-  currentYearQuery,
-  lastMonthQuery,
-  lastYearQuery
+  useCurrentMonthQuery,
+  useCurrentYearQuery,
+  useLastMonthQuery,
+  useLastYearQuery
 } from 'pages/Reports/hooks/useReportsQueries'
-import { useTranslation } from 'react-i18next'
 import user_report_current_month from './user-report-current-month.gql'
-import user_report_current_year from './user-report-current-year.gql'
 import user_report_last_month from './user-report-last-month.gql'
-import user_report_last_year from './user-report-last-year.gql'
 
 /**
  * Query hook
@@ -17,12 +14,15 @@ import user_report_last_year from './user-report-last-year.gql'
  * @category UserReports
  */
 export function useQueries(): any[] {
-  const { t } = useTranslation()
+  const lastMonthQuery = useLastMonthQuery(user_report_last_month)
+  const currentMonthQuery = useCurrentMonthQuery(user_report_last_month)
+  const lastYearQuery = useLastYearQuery(user_report_last_month)
+  const currentYearQuery = useCurrentYearQuery(user_report_last_month)
   return [
-    lastMonthQuery(t, user_report_last_month),
-    currentMonthQuery(t, user_report_current_month),
-    lastYearQuery(t, user_report_last_year),
-    currentYearQuery(t, user_report_current_year)
+    lastMonthQuery,
+    currentMonthQuery,
+    lastYearQuery,
+    currentYearQuery
   ].map((query) => ({
     ...query,
     key: query.itemKey,

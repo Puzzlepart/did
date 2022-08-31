@@ -392,5 +392,6 @@ export default new DateUtils({
   isoWeek: true
 })
 
+export { IDatePeriod } from './DateObject'
 export * from './types'
 export { $dayjs }

@@ -1,0 +1,20 @@
+query MissingSubmissions (
+  $queries: [ConfirmedPeriodsQuery!]!
+) {
+  periods: confirmedPeriods(queries: $queries) {
+    userId
+    week
+    year
+    month
+    hours
+  }
+  users {
+    id
+    displayName
+    mail
+    lastActive
+    photo {
+      base64
+    }
+  }
+}

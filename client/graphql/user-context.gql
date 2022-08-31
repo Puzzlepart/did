@@ -17,6 +17,9 @@ query UserContext {
         totalDays
         eventCategory
       }
+      teams {
+        enabled
+      }
     }
   }
   user: currentUser {

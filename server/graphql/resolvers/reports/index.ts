@@ -44,7 +44,6 @@ export class ReportsResolver {
    * @param preset - Query
    * @param query - Query
    * @param sortAsc - Sort ascending
-   * @param ctx - GraphQL context
    */
   @Query(() => [TimeEntry], {
     description: 'Get a preset report, or use custom filters.'
@@ -73,8 +72,6 @@ export class ReportsResolver {
 
   /**
    * Get forecast report
-   *
-   * @param query - Query
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
   @Query(() => [TimeEntry], {
@@ -87,8 +84,8 @@ export class ReportsResolver {
   /**
    * Get report
    *
-   * @param query - Query
-   * @param ctx - GraphQL context
+   * @param preset - Report preset
+   * @param context - GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimeEntry], {

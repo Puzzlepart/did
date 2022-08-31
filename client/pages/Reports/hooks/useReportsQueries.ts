@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { DateObject } from 'DateUtils'
-import { TFunction } from 'i18next'
-import { useMemo } from 'react'
+import { useTimesheetPeriods } from 'hooks'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
@@ -21,15 +20,12 @@ import report_summary from './queries/report-summary.gql'
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param t - Translate function
  * @param query - GraphQL query
  *
  * @category Reports
  */
-export function lastMonthQuery(
-  t: TFunction,
-  query = report_last_month
-): IReportsQuery {
+export function useLastMonthQuery(query = report_last_month): IReportsQuery {
+  const { t } = useTranslation()
   const { monthName } = new DateObject().add('-1month').toObject()
   return {
     itemKey: 'last_month',
@@ -52,15 +48,14 @@ export function lastMonthQuery(
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param t - Translate function
  * @param query - GraphQL query
  *
  * @category Reports
  */
-export function currentMonthQuery(
-  t: TFunction,
+export function useCurrentMonthQuery(
   query = report_current_month
 ): IReportsQuery {
+  const { t } = useTranslation()
   const { monthName } = new DateObject().toObject()
   return {
     itemKey: 'current_month',
@@ -83,15 +78,12 @@ export function currentMonthQuery(
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param t - Translate
  * @param query - GraphQL query
  *
  * @category Reports
  */
-export function lastYearQuery(
-  t: TFunction,
-  query = report_last_year
-): IReportsQuery {
+export function useLastYearQuery(query = report_last_year): IReportsQuery {
+  const { t } = useTranslation()
   const object = new DateObject().toObject('year')
   const year = object.year - 1
   return {
@@ -112,15 +104,14 @@ export function lastYearQuery(
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param t - Translate function
  * @param query - GraphQL query
  *
  * @category Reports
  */
-export function currentYearQuery(
-  t: TFunction,
+export function useCurrentYearQuery(
   query = report_current_year
 ): IReportsQuery {
+  const { t } = useTranslation()
   const { year } = new DateObject().toObject('year')
   return {
     itemKey: 'current_year',
@@ -143,15 +134,12 @@ export function currentYearQuery(
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param t - Translate function
  * @param query - GraphQL query
  *
  * @category Reports
  */
-export function forecastQuery(
-  t: TFunction,
-  query = report_forecast
-): IReportsQuery {
+export function useForecastQuery(query = report_forecast): IReportsQuery {
+  const { t } = useTranslation()
   return {
     itemKey: 'forecast',
     headerText: t('reports.forecast'),
@@ -168,28 +156,21 @@ export function forecastQuery(
  * Returns query properties for
  * Summary view
  *
- * @param t - Translate function
- *
  * @category Reports
  */
-export function summaryQuery(t: TFunction): IReportsQuery {
-  const weeks = []
-  let now = new DateObject()
-  for (let index = 0; index < 8; index++) {
-    const { week, year } = now.toObject()
-    weeks.unshift([week, year])
-    now = now.add('-1w')
-  }
+export function useSummaryQuery(): IReportsQuery {
+  const { t } = useTranslation()
+  const { periods, queries } = useTimesheetPeriods(8, true)
   return {
     itemKey: 'summary',
     headerText: t('reports.summaryHeaderText'),
     itemIcon: 'CalendarWeek',
     hidden: true,
-    weeks,
+    periods,
     query: report_summary,
     variables: {
       userQuery: { hiddenFromReports: false },
-      queries: weeks.map(([week, year]) => ({ week, year }))
+      queries
     }
   } as IReportsQuery
 }
@@ -200,21 +181,20 @@ export function summaryQuery(t: TFunction): IReportsQuery {
  * @category Reports
  */
 export function useReportsQueries(): IReportsQuery[] {
-  const { t } = useTranslation()
-  return useMemo(
-    () =>
-      [
-        lastMonthQuery,
-        currentMonthQuery,
-        currentYearQuery,
-        lastYearQuery,
-        forecastQuery,
-        summaryQuery
-      ].map((queryFunction) => {
-        return queryFunction(t)
-      }),
-    []
-  )
+  const lastMonthQuery = useLastMonthQuery()
+  const currentMonthQuery = useCurrentMonthQuery()
+  const currentYearQuery = useCurrentYearQuery()
+  const lastYearQuery = useLastYearQuery()
+  const forecastQuery = useForecastQuery()
+  const summaryQuery = useSummaryQuery()
+  return [
+    lastMonthQuery,
+    currentMonthQuery,
+    currentYearQuery,
+    lastYearQuery,
+    forecastQuery,
+    summaryQuery
+  ]
 }
 
 export { report_current_month as default_query }
