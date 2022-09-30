@@ -18,7 +18,7 @@ export const DurationDisplay: React.FC<IDurationDisplayProps> = (
   let displayValue = $date.getDurationString(event.duration, t)
   if (displayFormat)
     displayValue = format(displayFormat, displayValue)
-  if(event['_originalDuration']) {
+  if (event['_originalDuration']) {
     originalValue = $date.getDurationString(event['_originalDuration'], t)
   }
   return (
@@ -26,7 +26,7 @@ export const DurationDisplay: React.FC<IDurationDisplayProps> = (
       {displayValue}
       {event['_originalDuration'] && (
         <TooltipHost content={`Hendelsens varighet har automatisk blitt endret fra ${originalValue} til ${displayValue}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.`}>
-          <Icon style={{ marginLeft: 4 }} iconName='Info' />
+          <Icon style={{ marginLeft: 8 }} iconName='DoubleChevronUp' />
         </TooltipHost>
       )}
     </span>

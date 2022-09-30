@@ -255,14 +255,16 @@ export class TimesheetService {
     }
     // eslint-disable-next-line unicorn/prevent-abbreviations
     events = events.map(e => {
-      if(e.duration === (55/60)) {
+      if(e.duration === (55/60) || e.duration === (50/60)) {
         e._originalDuration = e.duration
         e.duration = 1
       }
+      if(e.duration === (25/60)) {
+        e._originalDuration = e.duration
+        e.duration = 0.5
+      }
       return e
     })
-    // eslint-disable-next-line no-console
-    console.log(events[0])
     return events
   }
 
