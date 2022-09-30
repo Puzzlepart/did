@@ -2,6 +2,7 @@
 import { IColumn } from '@fluentui/react'
 import { IListProps } from 'components/List/types'
 import { HTMLProps } from 'react'
+import { EventObject, TimeEntry } from 'types'
 
 /**
  * @category EventList
@@ -30,5 +31,5 @@ export interface IEventListProps extends IListProps {
 
 export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
   displayFormat?: string
-  duration: number
+  event: TimeEntry | EventObject
 }

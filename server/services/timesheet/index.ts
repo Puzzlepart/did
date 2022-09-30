@@ -248,11 +248,21 @@ export class TimesheetService {
       }
     }
     if (engine) {
-      return engine.matchEvents(events).map((event_) => ({
+      events = engine.matchEvents(events).map((event_) => ({
         ...event_,
         date: DateUtils.formatDate(event_.startDateTime, dateFormat, locale)
       }))
     }
+    // eslint-disable-next-line unicorn/prevent-abbreviations
+    events = events.map(e => {
+      if(e.duration === (55/60)) {
+        e._originalDuration = e.duration
+        e.duration = 1
+      }
+      return e
+    })
+    // eslint-disable-next-line no-console
+    console.log(events[0])
     return events
   }
 
