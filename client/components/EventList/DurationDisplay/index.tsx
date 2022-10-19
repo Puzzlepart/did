@@ -1,14 +1,15 @@
 /* eslint-disable tsdoc/syntax */
-import { format, Icon, TooltipHost } from '@fluentui/react'
+import { format } from '@fluentui/react'
 import $date from 'DateUtils'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ModifiedDuration } from './ModifiedDuration'
 import { IDurationDisplayProps } from './types'
 
 /**
  * @category Reusable Component
  */
-export const DurationDisplay: React.FC<IDurationDisplayProps> = ({
+export const DurationDisplay: FC<IDurationDisplayProps> = ({
   event,
   displayFormat,
   style
@@ -24,11 +25,7 @@ export const DurationDisplay: React.FC<IDurationDisplayProps> = ({
     <span style={style}>
       {displayValue}
       {event['_originalDuration'] && (
-        <TooltipHost
-          content={`Hendelsens varighet har automatisk blitt endret fra ${originalValue} til ${displayValue}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.`}
-        >
-          <Icon style={{ marginLeft: 8 }} iconName='DoubleChevronUp' />
-        </TooltipHost>
+        <ModifiedDuration displayValue={displayValue} originalValue={originalValue} />
       )}
     </span>
   )
