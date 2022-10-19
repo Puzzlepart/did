@@ -11,6 +11,8 @@ import { ProjectMatch } from './types'
  * @category TimesheetService
  */
 export default class TimesheetMatchingEngine {
+  protected _configuration?: Record<string, any>
+
   /**
    * Constructor for `TimesheetMatchingEngine`
    *
@@ -207,16 +209,18 @@ export default class TimesheetMatchingEngine {
   }
 
   /**
-   * Fixes duration for events with a duration of 25, 50 or 55 minutes.
+   * Fixes duration for events with a duration of 25, 50 or 55 minutes if
+   * user configuration `timesheet.roundUpEvents` is set to `true`.
    *
    * @param event - Event
    */
   private _fixDuration(event: EventObject) {
-    if (event.duration === (55 / 60) || event.duration === (50 / 60)) {
+    if (!this._configuration?.roundUpEvents) return event
+    if (event.duration === 55 / 60 || event.duration === 50 / 60) {
       event._originalDuration = event.duration
       event.duration = 1
     }
-    if (event.duration === (25 / 60)) {
+    if (event.duration === 25 / 60) {
       event._originalDuration = event.duration
       event.duration = 0.5
     }
@@ -227,10 +231,12 @@ export default class TimesheetMatchingEngine {
    * Match events
    *
    * @param events - Events to match
+   * @param configuration - Configuration
    *
    * @returns Events matched to projects, customers and labels
    */
-  public matchEvents(events: EventObject[]): EventObject[] {
+  public matchEvents(events: EventObject[], configuration?: Record<string, any>): EventObject[] {
+    this._configuration = configuration
     return events.map(this._matchEvent.bind(this))
   }
 }

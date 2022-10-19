@@ -69,8 +69,6 @@ export class DateUtils {
       hours: Math.floor(hoursPrecise)
     })
     const minsString = t('common.minutesShortFormat', { minutes })
-    // eslint-disable-next-line no-console
-    console.log(hoursPrecise, minutes)
     if (minutes === 0) return hrsString
     if (Math.floor(hoursPrecise) === 0) return minsString
     return [hrsString, minsString].join(' ')

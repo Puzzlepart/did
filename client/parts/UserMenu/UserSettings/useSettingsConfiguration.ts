@@ -79,6 +79,11 @@ export function useSettingsConfiguration(): IUserSetting[] {
       min: 0,
       max: 50,
       defaultValue: getUserConfiguration('vacation.totalDays')
+    }),
+    UserSettingToggle('timesheet.roundUpEvents', {
+      label: t('common.roundUpEventsLabel'),
+      description: t('common.roundUpEventsDescription'),
+      defaultChecked: getUserConfiguration('timesheet.roundUpEvents')
     })
   ]
 }

@@ -13,6 +13,7 @@ export interface IGetTimesheetParameters {
   tzOffset: number
   locale?: string
   dateFormat?: string
+  configuration?: Record<string, any>
 }
 
 export interface IProviderEventsParameters extends IGetTimesheetParameters {

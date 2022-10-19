@@ -382,7 +382,9 @@
     "missingWeeksLabel": "Missing weeks",
     "allWeeks": "All weeks",
     "periodName": "Week {{name}}",
-    "userLastActiveText": "The user was last active {{lastActive}}."
+    "userLastActiveText": "The user was last active {{lastActive}}.",
+    "roundUpEventsLabel": "Round events to nearest 30 minutes",
+    "roundUpEventsDescription": "As part of their initiative to promote mental health and give workers an opportunity to breathe between Teams meetings, Microsoft introduced the option to allow people to end meetings early or start them late. This is an excellent feature which encourages us to get up, go to the bathroom etc between meetings. Did does however count the minutes as written, meaning a 25-minute meeting will count as 25 minutes logged. With manual time tracking, this appointment would be counted as 30 minutes. Likewise, a meeting lasting 50 minutes or 1h 50 m should be counted as 1 hour or 2 hours, respectively."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

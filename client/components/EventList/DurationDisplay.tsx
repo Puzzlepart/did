@@ -8,16 +8,15 @@ import { IDurationDisplayProps } from './types'
 /**
  * @category Reusable Component
  */
-export const DurationDisplay: React.FC<IDurationDisplayProps> = (
-  { event, displayFormat, style }
-): JSX.Element => {
-  // eslint-disable-next-line no-console
-  console.log(event['_originalDuration'])
+export const DurationDisplay: React.FC<IDurationDisplayProps> = ({
+  event,
+  displayFormat,
+  style
+}) => {
   const { t } = useTranslation()
   let originalValue = null
   let displayValue = $date.getDurationString(event.duration, t)
-  if (displayFormat)
-    displayValue = format(displayFormat, displayValue)
+  if (displayFormat) displayValue = format(displayFormat, displayValue)
   if (event['_originalDuration']) {
     originalValue = $date.getDurationString(event['_originalDuration'], t)
   }
@@ -25,7 +24,9 @@ export const DurationDisplay: React.FC<IDurationDisplayProps> = (
     <span style={style}>
       {displayValue}
       {event['_originalDuration'] && (
-        <TooltipHost content={`Hendelsens varighet har automatisk blitt endret fra ${originalValue} til ${displayValue}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.`}>
+        <TooltipHost
+          content={`Hendelsens varighet har automatisk blitt endret fra ${originalValue} til ${displayValue}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.`}
+        >
           <Icon style={{ marginLeft: 8 }} iconName='DoubleChevronUp' />
         </TooltipHost>
       )}
