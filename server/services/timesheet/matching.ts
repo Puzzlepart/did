@@ -16,7 +16,8 @@ export default class TimesheetMatchingEngine {
    *
    * @param _data - Projects data
    */
-  constructor(private _data: ProjectsData) {}
+  // eslint-disable-next-line unicorn/empty-brace-spaces
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -184,6 +185,7 @@ export default class TimesheetMatchingEngine {
 
     event.labels = this._findLabels(event.categories)
     event = this._checkInactive(event)
+    event = this._fixDuration(event)
     return event
   }
 
@@ -200,6 +202,23 @@ export default class TimesheetMatchingEngine {
       if (inactiveCustomer) event.error = { code: 'CUSTOMER_INACTIVE' }
       event.project = null
       event.customer = null
+    }
+    return event
+  }
+
+  /**
+   * Fixes duration for events with a duration of 25, 50 or 55 minutes.
+   *
+   * @param event - Event
+   */
+  private _fixDuration(event: EventObject) {
+    if (event.duration === (55 / 60) || event.duration === (50 / 60)) {
+      event._originalDuration = event.duration
+      event.duration = 1
+    }
+    if (event.duration === (25 / 60)) {
+      event._originalDuration = event.duration
+      event.duration = 0.5
     }
     return event
   }
