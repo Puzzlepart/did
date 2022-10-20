@@ -3,7 +3,8 @@ import {
   Dropdown,
   IDropdownProps,
   ITextFieldProps,
-  IToggleProps, TextField,
+  IToggleProps,
+  TextField,
   Toggle
 } from '@fluentui/react'
 import { SubText } from 'components'

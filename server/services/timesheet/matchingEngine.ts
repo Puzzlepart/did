@@ -217,13 +217,28 @@ export default class TimesheetMatchingEngine {
    */
   private _fixDuration(event: EventObject) {
     if (!this._configuration?.roundUpEvents) return event
-    const startMintues = new Date(event.startDateTime).getMinutes()
+    const startMinutes = new Date(event.startDateTime).getMinutes()
     const endMinutes = new Date(event.endDateTime).getMinutes()
-    if ([5].includes(startMintues) || [25, 50, 55].includes(endMinutes)) {
+    if ([5].includes(startMinutes) || [25, 50, 55].includes(endMinutes)) {
       event.originalDuration = event.duration
       event.duration = Math.round(event.duration * 2) / 2
-      event.adjustedMinutes =
-        event.duration * 60 - event.originalDuration * 60
+      event.adjustedMinutes = event.duration * 60 - event.originalDuration * 60
+      if (startMinutes === 5) {
+        const newStartDateTime = new Date(event.startDateTime)
+        newStartDateTime.setMinutes(0)
+        event.startDateTime = newStartDateTime
+      }
+      if (endMinutes === 25) {
+        const newEndDateTime = new Date(event.endDateTime)
+        newEndDateTime.setMinutes(30)
+        event.endDateTime = newEndDateTime
+      }
+      if ([50, 55].includes(endMinutes)) {
+        const newEndDateTime = new Date(event.endDateTime)
+        newEndDateTime.setMinutes(0)
+        newEndDateTime.setHours(newEndDateTime.getHours() + 1)
+        event.endDateTime = newEndDateTime
+      }
     }
     return event
   }

@@ -71,6 +71,9 @@ export class User {
   @Field(() => Subscription, { nullable: true })
   subscription?: Subscription
 
+  /**
+   * User configuration is stored as a JSON string.
+   */
   @Field(() => String, { nullable: true })
   configuration?: any
 

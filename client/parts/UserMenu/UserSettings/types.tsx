@@ -10,7 +10,9 @@ export interface IUserSetting
 
 export interface IUserSettingDropdown extends IDropdownProps, IUserSetting {}
 export interface IUserSettingToggle extends IToggleProps, IUserSetting {}
-export interface IUserSettingNumber extends Omit<ITextFieldProps, 'type'>, IUserSetting {}
+export interface IUserSettingNumber
+  extends Omit<ITextFieldProps, 'type'>,
+    IUserSetting {}
 
 export const UserSettingDropdown = (
   fieldName: string,
