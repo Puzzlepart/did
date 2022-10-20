@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - dev
-      - feat/round-up-duration
     paths:
       - '.github/workflows/on_push_dev_deploy.yml'
       - 'server/**'
