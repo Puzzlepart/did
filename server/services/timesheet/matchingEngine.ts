@@ -222,7 +222,7 @@ export default class TimesheetMatchingEngine {
     if ([5].includes(startMintues) || [25, 50, 55].includes(endMinutes)) {
       event._originalDuration = event.duration
       event.duration = Math.round(event.duration * 2) / 2
-      event._adjustedMinutes =
+      event.adjustedMinutes =
         event.duration * 60 - event._originalDuration * 60
     }
     return event

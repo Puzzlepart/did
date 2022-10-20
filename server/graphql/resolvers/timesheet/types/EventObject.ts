@@ -46,7 +46,7 @@ export class EventObject {
   _originalDuration?: number
 
   @Field(() => Int, { nullable: true })
-  _adjustedMinutes?: number
+  adjustedMinutes?: number
 
   @Field({ nullable: true })
   projectId?: string

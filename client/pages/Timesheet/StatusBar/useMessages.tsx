@@ -98,12 +98,12 @@ export function useMessages(): IUserMessageProps[] {
   if (
     any(
       state.selectedPeriod.getEvents(true),
-      (event) => !!event['_adjustedMinutes']
+      (event) => !!event['adjustedMinutes']
     )
   ) {
     const adjustedMinutes = reduce(
       state.selectedPeriod.getEvents(true),
-      (sum, event) => (sum += event['_adjustedMinutes'] ?? 0),
+      (sum, event) => (sum += event['adjustedMinutes'] ?? 0),
       0
     )
     messages.push({
