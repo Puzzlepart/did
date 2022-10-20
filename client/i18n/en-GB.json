@@ -393,7 +393,7 @@
     "userLastActiveText": "The user was last active {{lastActive}}.",
     "roundUpEventsLabel": "Round events to nearest 30 minutes",
     "roundUpEventsDescription": "Microsoft supports the ability to end meetings early or start late, typically by 5 or 10 minutes. This function allows us to round the duration of events to the nearest half hour. The setting won't take effect before next login.",
-    "roundUpEventsPostSaveMessage": "Your changes for \"Round events to nearest 30 minutes\" were saved successfully. The setting won't take effect before next login."
+    "roundUpEventsPostSaveMessage": "Your change for \"Round events to nearest 30 minutes\" were saved successfully. The setting won't take effect before next login."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

@@ -51,7 +51,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
             {...(setting as ITextFieldProps)}
             description={null}
             onChange={(_event, value) =>
-              onUpdate(setting, Number.parseInt(value) ?? 0, true)
+              onUpdate(setting, Number.parseInt(value) ?? 0)
             }
           />
         )

@@ -3,9 +3,8 @@ import { IUserSetting } from './types'
 
 export interface IUserSettingsContext {
   onUpdate: (
-    setting: IUserSetting ,
-    value: string | number | boolean,
-    skipReload?: boolean
+    setting: IUserSetting,
+    value: string | number | boolean
   ) => void
 }
 

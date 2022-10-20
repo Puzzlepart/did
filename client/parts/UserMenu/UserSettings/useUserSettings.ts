@@ -1,6 +1,8 @@
+import { useSetTimeout } from '@fluentui/react-hooks'
 import { useUpdateUserConfiguration } from 'hooks/user/useUpdateUserConfiguration'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { sleep } from 'utils'
 import { IUserSetting } from './types'
 import { useSettingsConfiguration } from './useSettingsConfiguration'
 
@@ -9,32 +11,39 @@ export function useUserSettings() {
   const [isOpen, setIsOpen] = useState(false)
   const { updateConfiguration, updatePreferredLanguage, updateStartPage } =
     useUpdateUserConfiguration()
+  const { setTimeout, clearTimeout } = useSetTimeout()
+  const timeout: Record<string, number> = {}
 
   /**
    * On update
    *
    * @param setting - Setting
    * @param value - Value
-   * @param skipReload - Skip reload
    */
-  const onUpdate = async (
+  const onUpdate = (
     setting: IUserSetting,
-    value: string | number | boolean,
-    skipReload = false
+    value: string | number | boolean
   ) => {
-    switch (setting.fieldName) {
-      case 'preferredLanguage':
-        await updatePreferredLanguage(value as string)
-        break
-      case 'startPage':
-        await updateStartPage(value as string)
-        break
-      default: {
-        await updateConfiguration({ [setting.fieldName]: value })
+    clearTimeout(timeout[setting.fieldName])
+    timeout[setting.fieldName] = setTimeout(async () => {
+      switch (setting.fieldName) {
+        case 'preferredLanguage':
+          await updatePreferredLanguage(value as string)
+          break
+        case 'startPage':
+          await updateStartPage(value as string)
+          break
+        default: {
+          await updateConfiguration({ [setting.fieldName]: value })
+        }
       }
-    }
-    if (setting.postSaveMessage) sessionStorage.setItem('did_on_load_user_menu_mesage', setting.postSaveMessage)
-    if (!skipReload) location.reload()
+      if (setting.postSaveMessage) {
+        sessionStorage.setItem(
+          'did_on_load_user_menu_mesage',
+          setting.postSaveMessage
+        )
+      }
+    }, 1500)
   }
 
   const settings = useSettingsConfiguration()
@@ -43,8 +52,12 @@ export function useUserSettings() {
     t,
     context: { onUpdate },
     openPanel: () => setIsOpen(true),
-    dismissPanel: () => setIsOpen(false),
+    dismissPanel: async () => {
+      setIsOpen(false)
+      await sleep(1)
+      location.reload()
+    },
     isOpen,
-    settings,
+    settings
   } as const
 }

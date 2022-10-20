@@ -29,12 +29,13 @@ export const UserMenu: React.FC = () => {
   const target = useRef(null)
   const [toast, setToast] = useToast(8000, { isMultiline: true })
 
-
-
   useEffect(() => {
-    setToast({ text: sessionStorage.did_on_load_user_menu_mesage, type:'success' })
+    setToast({
+      text: sessionStorage.did_on_load_user_menu_mesage,
+      type: 'success'
+    })
     sessionStorage.removeItem('did_on_load_user_menu_mesage')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
