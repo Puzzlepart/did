@@ -54,7 +54,8 @@
       "customerChartDescription": "Shows allocation per customer for the period",
       "projectChartDescription": "Shows allocation per project for the period"
     },
-    "matchEventPanelSearchPlaceholder": "Search projects..."
+    "matchEventPanelSearchPlaceholder": "Search projects...",
+    "eventDurationModifiedMessage": "The event's duration has been automatically changed from {{originalDuration}} to {{modifiedDuration}}. If you do not want this to happen in the future, the function can be turned off in the user settings."
   },
   "projects": {
     "filterLabels": "Filter labels...",
@@ -266,6 +267,8 @@
     "endTimeLabel": "End time",
     "hoursShortFormat": "{{hours}}h",
     "minutesShortFormat": "{{minutes}}min",
+    "hoursLongFormat": "{{hours}} hours",
+    "minutesLongFormat": "{{minutes}} minutes",
     "editLabel": "Edit",
     "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",

@@ -54,7 +54,8 @@
       "customerChartDescription": "Viser allokering per kunde for perioden",
       "projectChartDescription": "Viser allokering per prosjekt for perioden"
     },
-    "matchEventPanelSearchPlaceholder": "Søk i prosjekter..."
+    "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
+    "eventDurationModifiedMessage": "Hendelsens varighet har automatisk blitt endret fra {{originalDuration}} til {{modifiedDuration}}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger."
   },
   "projects": {
     "filterLabels": "Filtrer merkelapper...",
@@ -265,6 +266,8 @@
     "endTimeLabel": "Sluttid",
     "hoursShortFormat": "{{hours}}t",
     "minutesShortFormat": "{{minutes}}min",
+    "hoursLongFormat": "{{hours}} timer",
+    "minutesLongFormat": "{{minutes}} minutter",
     "editLabel": "Rediger",
     "iconSearchPlaceholder": "Søk i ikoner...",
     "inactiveFieldLabel": "Inaktivt",
