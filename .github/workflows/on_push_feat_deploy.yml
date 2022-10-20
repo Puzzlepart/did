@@ -45,6 +45,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
-        slot-name: 'dev'
-        publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
+        slot-name: 'feat'
+        publish-profile: ${{ secrets.DIDAPP_FEAT_PUBLISH_PROFILE }}
         package: ./did-package.zip
