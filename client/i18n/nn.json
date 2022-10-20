@@ -390,7 +390,7 @@
     "periodName": "Veke {{name}}",
     "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}.",
     "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
-    "roundUpEventsDescription": "Som en del av deres initiativ for å fremme mental helse og gi arbeidere en mulighet til å puste mellom Teams-møtene, introduserte Microsoft muligheten til å la folk avslutte møter tidlig eller starte dem sent. \nDette er en utmerket funksjon som oppmuntrer oss til å stå opp, gå på do osv. mellom møtene. \nDid teller imidlertid referatene som skrevet, noe som betyr at et 25-minutters møte vil telle som 25 minutter logget. \nMed manuell tidsregistrering vil denne avtalen bli regnet som 30 minutter. \nLikeledes skal et møte på 50 minutter eller 1t 50 m regnes som henholdsvis 1 time eller 2 timer."
+    "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

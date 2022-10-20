@@ -45,5 +45,5 @@ export function useUserSettings() {
     dismissPanel: () => setIsOpen(false),
     isOpen,
     settings
-  }
+  } as const
 }
