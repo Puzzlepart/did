@@ -19,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) {}
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -209,27 +209,20 @@ export default class TimesheetMatchingEngine {
   }
 
   /**
-   * Fixes duration for events with a duration of 25, 50 or 55 minutes if
-   * user configuration `timesheet.roundUpEvents` is set to `true`.
+   * Fixes duration (rounds up to nearest 30 minutes) for events starting at xx:05 or 
+   * ending at either xx:25, xx:50 or xx:55 if user configuration `timesheet.roundUpEvents` 
+   * is set to `true`.
    *
    * @param event - Event
    */
   private _fixDuration(event: EventObject) {
     if (!this._configuration?.roundUpEvents) return event
-    if (event.duration === 55 / 60) {
+    const startMintues = new Date(event.startDateTime).getMinutes()
+    const endMinutes = new Date(event.endDateTime).getMinutes()
+    if ([5].includes(startMintues) || [25, 50, 55].includes(endMinutes)) {
       event._originalDuration = event.duration
-      event._adjustedMinutes = 5
-      event.duration = 1
-    }
-    if (event.duration === 50 / 60) {
-      event._originalDuration = event.duration
-      event._adjustedMinutes = 10
-      event.duration = 1
-    }
-    if (event.duration === 25 / 60) {
-      event._originalDuration = event.duration
-      event._adjustedMinutes = 5
-      event.duration = 0.5
+      event.duration = (Math.round(event.duration * 2) / 2)
+      event._adjustedMinutes = (event.duration * 60) - (event._originalDuration * 60)
     }
     return event
   }
