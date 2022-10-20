@@ -55,7 +55,8 @@
       "projectChartDescription": "Viser allokering per prosjekt for perioden"
     },
     "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
-    "eventDurationModifiedMessage": "Hendelsens varighet har automatisk blitt endret fra {{originalDuration}} til {{modifiedDuration}}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger."
+    "eventDurationModifiedMessage": "Hendelsens varighet har automatisk blitt endret fra {{originalDuration}} til {{modifiedDuration}}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.",
+    "adjustedEventDurationsInfoText": "Avrunding til nærmeste 30 min er skrudd på. Totalt har registrerte timer blitt justert med {{adjustedMinutes}} minutter."
   },
   "projects": {
     "filterLabels": "Filtrer merkelapper...",

@@ -55,7 +55,8 @@
       "projectChartDescription": "Shows allocation per project for the period"
     },
     "matchEventPanelSearchPlaceholder": "Search projects...",
-    "eventDurationModifiedMessage": "The event's duration has been automatically changed from {{originalDuration}} to {{modifiedDuration}}. If you do not want this to happen in the future, the function can be turned off in the user settings."
+    "eventDurationModifiedMessage": "The event's duration has been automatically changed from {{originalDuration}} to {{modifiedDuration}}. If you do not want this to happen in the future, the function can be turned off in the user settings.",
+    "adjustedEventDurationsInfoText": "Rounding to the nearest 30 min is switched on. In total, recorded hours have been adjusted by {{adjustedMinutes}} minutes."
   },
   "projects": {
     "filterLabels": "Filter labels...",

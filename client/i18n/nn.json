@@ -55,7 +55,8 @@
       "projectChartDescription": "Viser allokering per prosjekt for perioden"
     },
     "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
-    "eventDurationModifiedMessage": "Hendelsens varighet har automatisk blitt endret fra {{originalDuration}} til {{modifiedDuration}}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger."
+    "eventDurationModifiedMessage": "Varigheita til hendinga har automatisk vorte endra frå {{originalDuration}} til {{modifiedDuration}}. Om du ikkje vil at dette skal skje i framtida, kan funksjonen skruast av i brukarinnstillingar.",
+    "adjustedEventDurationsInfoText": "Avrunding til næraste 30 min er skrudd på. Totalt har registrerte timar vorte justerte med {{adjustedMinutes}} minutt."
   },
   "projects": {
     "filterLabels": "Filtrer merkelappar...",
@@ -271,7 +272,7 @@
     "hoursLongFormat_singular": "{{hours}} time",
     "minutesLongFormat_singular": "{{minutes}} minutt",
     "hoursLongFormat_plural": "{{hours}} timer",
-    "minutesLongFormat_plural": "{{minutes}} minutter",
+    "minutesLongFormat_plural": "{{minutes}} minutt",
     "editLabel": "Rediger",
     "iconSearchPlaceholder": "Søk i ikon...",
     "inactiveFieldLabel": "Inaktivt",
@@ -389,8 +390,8 @@
     "allWeeks": "Alle veker",
     "periodName": "Veke {{name}}",
     "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}.",
-    "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
-    "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime."
+    "roundUpEventsLabel": "Avrund hendingar til næraste 30 minutt",
+    "roundUpEventsDescription": "Microsoft gir deg no høve til å avslutte møter tidlegare enn planlagt, eller starte seinare, typisk med 5 eller 10 minutt. Denne funksjonen lar oss runde av lengda på møta til nærmaste halvtime"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

@@ -14,6 +14,7 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
       webLink
       duration
       _originalDuration
+      _adjustedMinutes
       startDateTime
       endDateTime
       date

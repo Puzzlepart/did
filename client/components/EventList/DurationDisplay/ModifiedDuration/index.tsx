@@ -23,15 +23,24 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
       className={styles.root}
       content={
         <div className={styles.content}>
-          <Icon className={styles.icon} iconName='DoubleChevronUp' />
-          {t('timesheet.eventDurationModifiedMessage', {
-            modifiedDuration,
-            originalDuration
-          })}
+          <Icon {...props.iconProps} />
+          <span>
+            {t('timesheet.eventDurationModifiedMessage', {
+              modifiedDuration,
+              originalDuration
+            })}
+          </span>
         </div>
       }
     >
-      <Icon className={styles.icon} iconName='DoubleChevronUp' />
+      <Icon {...props.iconProps} />
     </TooltipHost>
   )
+}
+
+ModifiedDuration.defaultProps = {
+  iconProps: {
+    className: styles.icon,
+    iconName: 'DoubleChevronUp'
+  }
 }

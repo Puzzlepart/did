@@ -216,12 +216,19 @@ export default class TimesheetMatchingEngine {
    */
   private _fixDuration(event: EventObject) {
     if (!this._configuration?.roundUpEvents) return event
-    if (event.duration === 55 / 60 || event.duration === 50 / 60) {
+    if (event.duration === 55 / 60) {
       event._originalDuration = event.duration
+      event._adjustedMinutes = 5
+      event.duration = 1
+    }
+    if (event.duration === 50 / 60) {
+      event._originalDuration = event.duration
+      event._adjustedMinutes = 10
       event.duration = 1
     }
     if (event.duration === 25 / 60) {
       event._originalDuration = event.duration
+      event._adjustedMinutes = 5
       event.duration = 0.5
     }
     return event

@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import { Field, Float, ID, ObjectType } from 'type-graphql'
+import { Field, Float, ID, Int, ObjectType } from 'type-graphql'
 import DateUtils, { DateWithTimezone } from '../../../../../shared/utils/date'
 import { stripHtmlString } from '../../../../utils/stripHtmlString'
 import { Customer, EventError, LabelObject, Project } from '../../types'
@@ -44,6 +44,9 @@ export class EventObject {
 
   @Field(() => Float, { nullable: true })
   _originalDuration?: number
+
+  @Field(() => Int, { nullable: true })
+  _adjustedMinutes?: number
 
   @Field({ nullable: true })
   projectId?: string

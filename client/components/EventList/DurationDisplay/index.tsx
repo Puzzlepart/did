@@ -17,7 +17,7 @@ export const DurationDisplay: FC<IDurationDisplayProps> = (props) => {
   return (
     <span style={props.style}>
       {displayValue}
-      {props.event['_originalDuration'] && (
+      {props.event['_adjustedMinutes'] && (
         <ModifiedDuration event={props.event} />
       )}
     </span>
