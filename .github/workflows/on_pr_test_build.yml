@@ -11,7 +11,7 @@ on:
   
 jobs:
   test_build:
-    name: Test build on Node v14.18.1
+    name: Test build
     runs-on: ubuntu-20.04
     strategy:
       matrix:
