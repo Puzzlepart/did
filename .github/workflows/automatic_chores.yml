@@ -33,7 +33,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
  
       - run: |
-          npm ci
+          npm ci --no-audit --no-fund --loglevel=error
 
       - name: Generating documentation using typedoc
         run: |
