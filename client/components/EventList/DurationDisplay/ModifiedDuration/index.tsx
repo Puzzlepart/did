@@ -1,14 +1,37 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon, TooltipHost } from '@fluentui/react'
+import $date from 'DateUtils'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
+import styles from './ModifiedDuration.module.scss'
+import { IModifiedDurationProps } from './types'
 
-export const ModifiedDuration: FC<any> = ({
-    originalValue,
-    displayValue
-}) => (
+export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
+  const { t } = useTranslation()
+  const originalDuration = $date.getDurationString(
+    props.event['_originalDuration'],
+    t,
+    'LongFormat'
+  )
+  const modifiedDuration = $date.getDurationString(
+    props.event.duration,
+    t,
+    'LongFormat'
+  )
+  return (
     <TooltipHost
-        content={`Hendelsens varighet har automatisk blitt endret fra ${originalValue} til ${displayValue}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.`}
+      hostClassName={styles.host}
+      className={styles.root}
+      content={
+        <div className={styles.content}>
+          <Icon className={styles.icon} iconName='DoubleChevronUp' />
+          {t('timesheet.eventDurationModifiedMessage', {
+            modifiedDuration,
+            originalDuration
+          })}
+        </div>
+      }
     >
-        <Icon style={{ marginLeft: 8 }} iconName='DoubleChevronUp' />
+      <Icon className={styles.icon} iconName='DoubleChevronUp' />
     </TooltipHost>
-)
+  )
+}
