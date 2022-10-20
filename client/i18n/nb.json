@@ -391,7 +391,8 @@
     "periodName": "Uke {{name}}",
     "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}.",
     "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
-    "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime. Innstillingen trer ikke i kraft før neste pålogging."
+    "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime. Innstillingen trer ikke i kraft før neste pålogging.",
+    "roundUpEventsPostSaveMessage": "Endringene dine for \"Avrund hendelser til nærmeste 30 minutter\" ble lagret. \nInnstillingen trer ikke i kraft før neste pålogging."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

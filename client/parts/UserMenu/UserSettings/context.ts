@@ -1,8 +1,9 @@
 import { createContext } from 'react'
+import { IUserSetting } from './types'
 
 export interface IUserSettingsContext {
   onUpdate: (
-    key: string,
+    setting: IUserSetting ,
     value: string | number | boolean,
     skipReload?: boolean
   ) => void

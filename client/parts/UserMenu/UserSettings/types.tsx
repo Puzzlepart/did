@@ -5,6 +5,7 @@ export interface IUserSetting
   fieldName?: string
   type?: string
   description?: string
+  postSaveMessage?: string
 }
 
 export interface IUserSettingDropdown extends IDropdownProps, IUserSetting {}

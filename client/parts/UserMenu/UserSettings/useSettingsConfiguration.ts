@@ -83,6 +83,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
     UserSettingToggle('timesheet.roundUpEvents', {
       label: t('common.roundUpEventsLabel'),
       description: t('common.roundUpEventsDescription'),
+      postSaveMessage: t('common.roundUpEventsPostSaveMessage'),
       defaultChecked: getUserConfiguration('timesheet.roundUpEvents')
     })
   ]

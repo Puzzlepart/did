@@ -28,7 +28,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
           <Dropdown
             {...(setting as IDropdownProps)}
             onChange={(_event, option) =>
-              onUpdate(setting.fieldName, option.key.toString())
+              onUpdate(setting, option.key.toString())
             }
           />
         )
@@ -39,7 +39,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
         element = (
           <Toggle
             {...(setting as IToggleProps)}
-            onChange={(_event, bool) => onUpdate(setting.fieldName, bool)}
+            onChange={(_event, bool) => onUpdate(setting, bool)}
           />
         )
       }
@@ -51,7 +51,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
             {...(setting as ITextFieldProps)}
             description={null}
             onChange={(_event, value) =>
-              onUpdate(setting.fieldName, Number.parseInt(value) ?? 0, true)
+              onUpdate(setting, Number.parseInt(value) ?? 0, true)
             }
           />
         )
