@@ -7,6 +7,7 @@ import { IModifiedDurationProps } from './types'
 
 export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
   const { t } = useTranslation()
+  if (!props.event['_adjustedMinutes']) return <>{props.children}</>
   const originalDuration = $date.getDurationString(
     props.event['_originalDuration'],
     t,
@@ -33,6 +34,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
         </div>
       }
     >
+      {props.children}
       <Icon {...props.iconProps} />
     </TooltipHost>
   )
