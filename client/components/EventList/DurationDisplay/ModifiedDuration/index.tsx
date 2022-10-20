@@ -1,5 +1,5 @@
 import { Icon, TooltipHost } from '@fluentui/react'
-import $date from 'DateUtils'
+import $date, { DurationStringFormat } from 'DateUtils'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ModifiedDuration.module.scss'
@@ -11,12 +11,12 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
   const originalDuration = $date.getDurationString(
     props.event['_originalDuration'],
     t,
-    'LongFormat'
+    DurationStringFormat.Long
   )
   const modifiedDuration = $date.getDurationString(
     props.event.duration,
     t,
-    'LongFormat'
+    DurationStringFormat.Long
   )
   return (
     <TooltipHost
@@ -24,7 +24,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
       className={styles.root}
       content={
         <div className={styles.content}>
-          <Icon {...props.iconProps} />
+          <Icon {...props.iconProps} style={{ color: 'rgb(16, 124, 16)' }} />
           <span>
             {t('timesheet.eventDurationModifiedMessage', {
               modifiedDuration,
@@ -43,6 +43,6 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
 ModifiedDuration.defaultProps = {
   iconProps: {
     className: styles.icon,
-    iconName: 'DoubleChevronUp'
+    iconName: 'SortUp'
   }
 }

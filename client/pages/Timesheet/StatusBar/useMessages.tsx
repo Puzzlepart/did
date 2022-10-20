@@ -118,7 +118,7 @@ export function useMessages(): IUserMessageProps[] {
         </p>
       ),
       type: 'info',
-      iconName: 'DoubleChevronUp'
+      iconName: 'SortUp'
     })
   }
   return messages

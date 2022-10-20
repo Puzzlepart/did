@@ -27,6 +27,11 @@ import { DateWithTimezone, IDateUtils, TimeSpanStringOptions } from './types'
 
 export type DateInput = ConfigType
 
+export enum DurationStringFormat {
+  Short = 'ShortFormat',
+  Long = 'LongFormat'
+}
+
 export class DateUtils {
   constructor(private $: IDateUtils) {
     $dayjs.extend<PluginFunc>(weekOfYearPlugin)
@@ -52,19 +57,19 @@ export class DateUtils {
   /**
    * Get duration string
    *
-   * E.g. 15.75 = 15h 45min with `ShortFormat` and 15 hours 45 minutes with `LongFormat`
+   * E.g. 15.75 = 15h 45min with `DurationStringFormat.Short` and 15 hours 45 minutes with `DurationStringFormat.Long`
    *
    * Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
    * to handle floating point number precision.
    *
    * @param hours - Duration in hours
    * @param t - Translate function
-   * @param format - Format (`ShortFormat` or `LongFormat`)
+   * @param format - Format (`DurationStringFormat.Short` or `DurationStringFormat.Long`)
    */
   public getDurationString(
     hours: number,
     t: TFunction,
-    format: 'ShortFormat' | 'LongFormat' = 'ShortFormat'
+    format: DurationStringFormat = DurationStringFormat.Short
   ): string {
     let hoursPrecision = Number.parseFloat(
       Number.parseFloat(hours.toString()).toPrecision(5)
