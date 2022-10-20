@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - dev
-      - feat/*
     paths:
       - '.github/workflows/on_push_dev_deploy.yml'
       - 'server/**'
@@ -37,7 +36,7 @@ jobs:
       env:
         NODE_ENV: production
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: did-package
         path: ./did-package.zip
