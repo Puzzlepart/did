@@ -3,14 +3,13 @@ import {
   Dropdown,
   IDropdownProps,
   ITextFieldProps,
-  IToggleProps,
-  TextField,
+  IToggleProps, TextField,
   Toggle
 } from '@fluentui/react'
 import { SubText } from 'components'
 import React, { useContext } from 'react'
 import { UserSettingsContext } from '../context'
-import { IUserSetting } from '../types'
+import { IUserSetting, UserSettingInputType } from '../types'
 import styles from './UserSettingInput.module.scss'
 
 /**
@@ -22,7 +21,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
   const { onUpdate } = useContext(UserSettingsContext)
   let element: JSX.Element
   switch (setting.type) {
-    case 'dropdown':
+    case UserSettingInputType.Dropdown:
       {
         element = (
           <Dropdown
@@ -34,7 +33,7 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
         )
       }
       break
-    case 'toggle':
+    case UserSettingInputType.Toggle:
       {
         element = (
           <Toggle
@@ -44,11 +43,11 @@ export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
         )
       }
       break
-    case 'number':
+    case UserSettingInputType.Number:
       {
         element = (
           <TextField
-            {...(setting as ITextFieldProps)}
+            {...(setting as Omit<ITextFieldProps, 'type'>)}
             description={null}
             onChange={(_event, value) =>
               onUpdate(setting, Number.parseInt(value) ?? 0)
