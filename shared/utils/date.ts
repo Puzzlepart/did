@@ -52,25 +52,37 @@ export class DateUtils {
   /**
    * Get duration string
    *
-   * E.g. 15.75 = 15 hours 45 minutes
+   * E.g. 15.75 = 15h 45min with `ShortFormat` and 15 hours 45 minutes with `LongFormat`
    *
    * Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
    * to handle floating point number precision.
    *
    * @param hours - Duration in hours
    * @param t - Translate function
+   * @param format - Format (`ShortFormat` or `LongFormat`)
    */
-  public getDurationString(hours: number, t: TFunction): string {
-    const hoursPrecise = Number.parseFloat(
+  public getDurationString(
+    hours: number,
+    t: TFunction,
+    format: 'ShortFormat' | 'LongFormat' = 'ShortFormat'
+  ): string {
+    let hoursPrecision = Number.parseFloat(
       Number.parseFloat(hours.toString()).toPrecision(5)
     )
-    const minutes = Number.parseInt(((hoursPrecise % 1) * 60).toFixed())
-    const hrsString = t('common.hoursShortFormat', {
-      hours: Math.floor(hoursPrecise)
-    })
-    const minsString = t('common.minutesShortFormat', { minutes })
+    const minutes = Number.parseInt(((hoursPrecision % 1) * 60).toFixed())
+    hoursPrecision = Math.floor(hoursPrecision)
+    const hrsString = t(
+      `common.hours${format}_${hoursPrecision === 1 ? 'singular' : 'plural'}`,
+      {
+        hours: hoursPrecision
+      }
+    )
+    const minsString = t(
+      `common.minutes${format}_${minutes === 1 ? 'singular' : 'plural'}`,
+      { minutes }
+    )
     if (minutes === 0) return hrsString
-    if (Math.floor(hoursPrecise) === 0) return minsString
+    if (hoursPrecision === 0) return minsString
     return [hrsString, minsString].join(' ')
   }
 
