@@ -17,6 +17,7 @@ on:
 
 jobs:
   automatic_chores:
+    name: Automatic chores
     runs-on: ubuntu-20.04
     strategy:
       matrix:
