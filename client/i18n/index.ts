@@ -10,18 +10,16 @@ const __RESOURCES = {
 }
 export const SUPPORTED_LANGUAGES = Object.keys(__RESOURCES)
 
-i18next
-  .use(initReactI18next)
-  .init({
-    resources: __RESOURCES,
-    fallbackLng: DEFAULT_LANGUAGE,
-    debug: false,
-    interpolation: {
-      escapeValue: false
-    },
-    ns: Object.keys(__RESOURCES[DEFAULT_LANGUAGE]),
-    nsSeparator: '.',
-    keySeparator: ':'
-  })
+i18next.use(initReactI18next).init({
+  resources: __RESOURCES,
+  fallbackLng: DEFAULT_LANGUAGE,
+  debug: false,
+  interpolation: {
+    escapeValue: false
+  },
+  ns: Object.keys(__RESOURCES[DEFAULT_LANGUAGE]),
+  nsSeparator: '.',
+  keySeparator: ':'
+})
 
 export default i18next

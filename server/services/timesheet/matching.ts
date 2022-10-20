@@ -19,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -235,7 +235,10 @@ export default class TimesheetMatchingEngine {
    *
    * @returns Events matched to projects, customers and labels
    */
-  public matchEvents(events: EventObject[], configuration?: Record<string, any>): EventObject[] {
+  public matchEvents(
+    events: EventObject[],
+    configuration?: Record<string, any>
+  ): EventObject[] {
     this._configuration = configuration
     return events.map(this._matchEvent.bind(this))
   }
