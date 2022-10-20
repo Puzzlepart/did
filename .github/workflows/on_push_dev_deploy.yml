@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - feat/*
     paths:
       - '.github/workflows/on_push_dev_deploy.yml'
       - 'server/**'
