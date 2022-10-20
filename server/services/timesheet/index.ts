@@ -21,7 +21,7 @@ import {
   TimeEntryService,
   UserService
 } from '../mongo'
-import MatchingEngine from './matching'
+import MatchingEngine from './matchingEngine'
 import {
   IConnectEventsParameters,
   IGetTimesheetParameters,
