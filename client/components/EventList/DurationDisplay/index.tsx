@@ -9,23 +9,16 @@ import { IDurationDisplayProps } from './types'
 /**
  * @category Reusable Component
  */
-export const DurationDisplay: FC<IDurationDisplayProps> = ({
-  event,
-  displayFormat,
-  style
-}) => {
+export const DurationDisplay: FC<IDurationDisplayProps> = (props) => {
   const { t } = useTranslation()
-  let originalValue = null
-  let displayValue = $date.getDurationString(event.duration, t)
-  if (displayFormat) displayValue = format(displayFormat, displayValue)
-  if (event['_originalDuration']) {
-    originalValue = $date.getDurationString(event['_originalDuration'], t)
-  }
+  let displayValue = $date.getDurationString(props.event.duration, t)
+  if (props.displayFormat)
+    displayValue = format(props.displayFormat, displayValue)
   return (
-    <span style={style}>
+    <span style={props.style}>
       {displayValue}
-      {event['_originalDuration'] && (
-        <ModifiedDuration displayValue={displayValue} originalValue={originalValue} />
+      {props.event['_originalDuration'] && (
+        <ModifiedDuration event={props.event} />
       )}
     </span>
   )
