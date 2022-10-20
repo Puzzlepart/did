@@ -220,10 +220,10 @@ export default class TimesheetMatchingEngine {
     const startMintues = new Date(event.startDateTime).getMinutes()
     const endMinutes = new Date(event.endDateTime).getMinutes()
     if ([5].includes(startMintues) || [25, 50, 55].includes(endMinutes)) {
-      event._originalDuration = event.duration
+      event.originalDuration = event.duration
       event.duration = Math.round(event.duration * 2) / 2
       event.adjustedMinutes =
-        event.duration * 60 - event._originalDuration * 60
+        event.duration * 60 - event.originalDuration * 60
     }
     return event
   }

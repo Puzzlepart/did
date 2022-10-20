@@ -9,7 +9,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
   const { t } = useTranslation()
   if (!props.event['adjustedMinutes']) return <>{props.children}</>
   const originalDuration = $date.getDurationString(
-    props.event['_originalDuration'],
+    props.event['originalDuration'],
     t,
     DurationStringFormat.Long
   )

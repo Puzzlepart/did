@@ -13,7 +13,7 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
       isOrganizer
       webLink
       duration
-      _originalDuration
+      originalDuration
       adjustedMinutes
       startDateTime
       endDateTime

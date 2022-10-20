@@ -43,7 +43,7 @@ export class EventObject {
   duration?: number
 
   @Field(() => Float, { nullable: true })
-  _originalDuration?: number
+  originalDuration?: number
 
   @Field(() => Int, { nullable: true })
   adjustedMinutes?: number
