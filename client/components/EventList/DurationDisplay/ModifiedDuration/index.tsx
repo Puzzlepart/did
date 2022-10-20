@@ -24,7 +24,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
       className={styles.root}
       content={
         <div className={styles.content}>
-          <Icon {...props.iconProps} style={{ color: 'rgb(16, 124, 16)' }} />
+          <Icon {...props.iconProps} />
           <span>
             {t('timesheet.eventDurationModifiedMessage', {
               modifiedDuration,
