@@ -83,7 +83,7 @@ const timeColumn = (props: IEventListProps, name: string): IColumn =>
           <MobileView renderWithFragment={true}>
             <DurationDisplay
               displayFormat='({0})'
-              duration={event.duration}
+              event={event}
               style={{ marginLeft: 4 }}
             />
           </MobileView>
@@ -103,7 +103,7 @@ const durationColumn = (props: IEventListProps, name: string): IColumn =>
     'duration',
     name,
     { ...getSizing(props, 'duration', 75, 75) },
-    (event: TimeEntry) => <DurationDisplay duration={event.duration} />
+    (event: TimeEntry) => <DurationDisplay event={event} />
   )
 
 export function useColumns(props: IEventListProps) {

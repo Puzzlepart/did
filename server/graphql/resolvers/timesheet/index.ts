@@ -32,6 +32,7 @@ export class TimesheetResolver {
    *
    * @param _timesheet - Timesheet service
    */
+  // eslint-disable-next-line unicorn/empty-brace-spaces
   constructor(private readonly _timesheet: TimesheetService) {}
 
   /**
@@ -45,11 +46,16 @@ export class TimesheetResolver {
     description: 'Get timesheet for startDate - endDate'
   })
   async timesheet(
+    @Ctx() context: Context,
     @Arg('query') query: TimesheetQuery,
     @Arg('options') options: TimesheetOptions
   ) {
     try {
-      return await this._timesheet.getTimesheet({ ...query, ...options })
+      return await this._timesheet.getTimesheet({
+        ...query,
+        ...options,
+        configuration: context.userConfiguration?.timesheet || {}
+      })
     } catch (error) {
       throw error
     }

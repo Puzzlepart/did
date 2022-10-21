@@ -54,7 +54,9 @@
       "customerChartDescription": "Viser allokering per kunde for perioden",
       "projectChartDescription": "Viser allokering per prosjekt for perioden"
     },
-    "matchEventPanelSearchPlaceholder": "Søk i prosjekter..."
+    "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
+    "eventDurationModifiedMessage": "Hendelsens varighet har automatisk blitt endret fra {{originalDuration}} til {{modifiedDuration}}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.",
+    "adjustedEventDurationsInfoText": "Avrunding til nærmeste 30 min er skrudd på. Totalt har registrerte timer blitt justert med {{adjustedMinutes}} minutter."
   },
   "projects": {
     "filterLabels": "Filtrer merkelapper...",
@@ -263,8 +265,14 @@
     "customer": "Kunde",
     "startTimeLabel": "Starttid",
     "endTimeLabel": "Sluttid",
-    "hoursShortFormat": "{{hours}}t",
-    "minutesShortFormat": "{{minutes}}min",
+    "hoursShortFormat_singular": "{{hours}}t",
+    "minutesShortFormat_singular": "{{minutes}}min",
+    "hoursShortFormat_plural": "{{hours}}t",
+    "minutesShortFormat_plural": "{{minutes}}min",
+    "hoursLongFormat_singular": "{{hours}} time",
+    "minutesLongFormat_singular": "{{minutes}} minutt",
+    "hoursLongFormat_plural": "{{hours}} timer",
+    "minutesLongFormat_plural": "{{minutes}} minutter",
     "editLabel": "Rediger",
     "iconSearchPlaceholder": "Søk i ikoner...",
     "inactiveFieldLabel": "Inaktivt",
@@ -381,7 +389,10 @@
     "missingWeeksLabel": "Mangler uker",
     "allWeeks": "Alle uker",
     "periodName": "Uke {{name}}",
-    "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}."
+    "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}.",
+    "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
+    "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime. Innstillingen trer ikke i kraft før neste pålogging.",
+    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendelser til nærmeste 30 minutter\" ble lagret. \nInnstillingen trer ikke i kraft før neste pålogging."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

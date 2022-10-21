@@ -11,6 +11,7 @@ on:
   
 jobs:
   test_build:
+    name: Test build
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -26,7 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: |
-          npm ci
+         npm ci --no-audit --no-fund --loglevel=error
 
       - name: Ava tests
         run: |

@@ -14,6 +14,7 @@ on:
 
 jobs:
   build-and-deploy:
+    name: Build and deploy
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -27,7 +28,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - run: |
-        npm ci
+        npm ci --no-audit --no-fund --loglevel=error
 
     - name: Create package
       run: |
@@ -35,7 +36,7 @@ jobs:
       env:
         NODE_ENV: production
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: did-package
         path: ./did-package.zip

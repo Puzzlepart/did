@@ -6,7 +6,7 @@ import { Db as MongoDatabase, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
-import { environment } from '../utils'
+import { environment, tryParseJson } from '../utils'
 import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 
@@ -25,6 +25,11 @@ export class Context {
    * User ID
    */
   public userId?: string
+
+  /**
+   * User configuration
+   */
+  public userConfiguration?: Record<string, any>
 
   /**
    * Provider
@@ -101,6 +106,10 @@ export const createContext = async (
       context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
+      context.userConfiguration = tryParseJson<Record<string, any>>(
+        get(request, 'user.configuration'),
+        {}
+      )
       context.provider = get(request, 'user.provider')
       context.permissions = get(request, 'user.role.permissions')
     }
@@ -118,7 +127,7 @@ export const createContext = async (
  * Handle token authentication
  *
  * @param apiKey -Api key
- * @param db - Mongodb database
+ * @param database - Mongodb database
  */
 const handleTokenAuthentication = async (
   apiKey: string,

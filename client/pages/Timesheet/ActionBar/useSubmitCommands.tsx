@@ -30,7 +30,7 @@ export function useSubmitCommands(): IContextualMenuItem {
         state.selectedPeriod
       const FORECAST_PERIOD: IContextualMenuItem = {
         key: 'FORECAST_PERIOD',
-        iconProps: { iconName: 'Buffe rTimeBefore' },
+        iconProps: { iconName: 'BufferTimeBefore' },
         onClick: () => {
           onSubmitPeriod(true)
         },

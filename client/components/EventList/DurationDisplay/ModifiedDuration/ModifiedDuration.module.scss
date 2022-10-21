@@ -1,0 +1,25 @@
+.root {
+  padding: 20px;
+
+  .content {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      margin: 0 14px 0 0;
+      font-size: 22px;
+      color: rgb(16, 124, 16);
+    }
+  }
+}
+
+.host {
+  cursor: help;
+  .icon {
+    margin: 0 0 0 6px;
+    font-size: 10px;
+    color: rgb(16, 124, 16);
+  }
+}

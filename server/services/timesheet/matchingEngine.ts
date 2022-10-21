@@ -11,12 +11,15 @@ import { ProjectMatch } from './types'
  * @category TimesheetService
  */
 export default class TimesheetMatchingEngine {
+  protected _configuration?: Record<string, any>
+
   /**
    * Constructor for `TimesheetMatchingEngine`
    *
    * @param _data - Projects data
    */
-  constructor(private _data: ProjectsData) {}
+  // eslint-disable-next-line unicorn/empty-brace-spaces
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -184,6 +187,7 @@ export default class TimesheetMatchingEngine {
 
     event.labels = this._findLabels(event.categories)
     event = this._checkInactive(event)
+    event = this._fixDuration(event)
     return event
   }
 
@@ -205,13 +209,53 @@ export default class TimesheetMatchingEngine {
   }
 
   /**
+   * Fixes duration (rounds up to nearest 30 minutes) for events starting at xx:05 or
+   * ending at either XX:20, XX:25, XX:50 or XX:55 if user configuration `timesheet.roundUpEvents`
+   * is set to `true`.
+   *
+   * @param event - Event
+   */
+  private _fixDuration(event: EventObject) {
+    if (!this._configuration?.roundUpEvents) return event
+    const startMinutes = new Date(event.startDateTime).getMinutes()
+    const endMinutes = new Date(event.endDateTime).getMinutes()
+    if ([5].includes(startMinutes) || [20, 25, 50, 55].includes(endMinutes)) {
+      event.originalDuration = event.duration
+      event.duration = Math.round(event.duration * 2) / 2
+      event.adjustedMinutes = event.duration * 60 - event.originalDuration * 60
+      if (startMinutes === 5) {
+        const newStartDateTime = new Date(event.startDateTime)
+        newStartDateTime.setMinutes(0)
+        event.startDateTime = newStartDateTime
+      }
+      if ([20, 25].includes(endMinutes)) {
+        const newEndDateTime = new Date(event.endDateTime)
+        newEndDateTime.setMinutes(30)
+        event.endDateTime = newEndDateTime
+      }
+      if ([50, 55].includes(endMinutes)) {
+        const newEndDateTime = new Date(event.endDateTime)
+        newEndDateTime.setMinutes(0)
+        newEndDateTime.setHours(newEndDateTime.getHours() + 1)
+        event.endDateTime = newEndDateTime
+      }
+    }
+    return event
+  }
+
+  /**
    * Match events
    *
    * @param events - Events to match
+   * @param configuration - Configuration
    *
    * @returns Events matched to projects, customers and labels
    */
-  public matchEvents(events: EventObject[]): EventObject[] {
+  public matchEvents(
+    events: EventObject[],
+    configuration?: Record<string, any>
+  ): EventObject[] {
+    this._configuration = configuration
     return events.map(this._matchEvent.bind(this))
   }
 }

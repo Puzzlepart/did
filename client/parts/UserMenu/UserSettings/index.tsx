@@ -27,6 +27,7 @@ export const UserSettings = () => {
           headerText={t('common.settings')}
           isOpen={isOpen}
           onDismiss={dismissPanel}
+          onLightDismissClick={dismissPanel}
           isLightDismiss={true}
         >
           {settings.map((s, index) => (

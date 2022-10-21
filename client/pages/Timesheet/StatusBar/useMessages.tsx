@@ -4,7 +4,7 @@ import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
+import _, { any, reduce } from 'underscore'
 import { useTimesheetContext } from '../context'
 
 /**
@@ -93,6 +93,32 @@ export function useMessages(): IUserMessageProps[] {
       text: t('timesheet.unresolvedErrorText', {
         count: state.selectedPeriod.errors.length
       })
+    })
+  }
+  if (
+    any(
+      state.selectedPeriod.getEvents(true),
+      (event) => !!event['adjustedMinutes']
+    )
+  ) {
+    const adjustedMinutes = reduce(
+      state.selectedPeriod.getEvents(true),
+      (sum, event) => (sum += event['adjustedMinutes'] ?? 0),
+      0
+    )
+    messages.push({
+      id: 'adjustedevents',
+      children: (
+        <p>
+          <span>
+            {t('timesheet.adjustedEventDurationsInfoText', {
+              adjustedMinutes
+            })}
+          </span>
+        </p>
+      ),
+      type: 'info',
+      iconName: 'SortUp'
     })
   }
   return messages

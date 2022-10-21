@@ -54,7 +54,9 @@
       "customerChartDescription": "Shows allocation per customer for the period",
       "projectChartDescription": "Shows allocation per project for the period"
     },
-    "matchEventPanelSearchPlaceholder": "Search projects..."
+    "matchEventPanelSearchPlaceholder": "Search projects...",
+    "eventDurationModifiedMessage": "The event's duration has been automatically changed from {{originalDuration}} to {{modifiedDuration}}. If you do not want this to happen in the future, the function can be turned off in the user settings.",
+    "adjustedEventDurationsInfoText": "Rounding to the nearest 30 min is switched on. In total, recorded hours have been adjusted by {{adjustedMinutes}} minutes."
   },
   "projects": {
     "filterLabels": "Filter labels...",
@@ -264,8 +266,14 @@
     "customer": "Customer",
     "startTimeLabel": "Start time",
     "endTimeLabel": "End time",
-    "hoursShortFormat": "{{hours}}h",
-    "minutesShortFormat": "{{minutes}}min",
+    "hoursShortFormat_singular": "{{hours}}h",
+    "minutesShortFormat_singular": "{{minutes}}min",
+    "hoursShortFormat_plural": "{{hours}}h",
+    "minutesShortFormat_plural": "{{minutes}}min",
+    "hoursLongFormat_singular": "{{hours}} hour",
+    "minutesLongFormat_singular": "{{minutes}} minute",
+    "hoursLongFormat_plural": "{{hours}} hours",
+    "minutesLongFormat_plural": "{{minutes}} minutes",
     "editLabel": "Edit",
     "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",
@@ -382,7 +390,10 @@
     "missingWeeksLabel": "Missing weeks",
     "allWeeks": "All weeks",
     "periodName": "Week {{name}}",
-    "userLastActiveText": "The user was last active {{lastActive}}."
+    "userLastActiveText": "The user was last active {{lastActive}}.",
+    "roundUpEventsLabel": "Round events to nearest 30 minutes",
+    "roundUpEventsDescription": "Microsoft supports the ability to end meetings early or start late, typically by 5 or 10 minutes. This function allows us to round the duration of events to the nearest half hour. The setting won't take effect before next login.",
+    "roundUpEventsPostSaveMessage": "Your change for \"Round events to nearest 30 minutes\" were saved successfully. The setting won't take effect before next login."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

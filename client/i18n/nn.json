@@ -54,7 +54,9 @@
       "customerChartDescription": "Viser allokering per kunde for perioden",
       "projectChartDescription": "Viser allokering per prosjekt for perioden"
     },
-    "matchEventPanelSearchPlaceholder": "Søk i prosjekter..."
+    "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
+    "eventDurationModifiedMessage": "Varigheita til hendinga har automatisk vorte endra frå {{originalDuration}} til {{modifiedDuration}}. Om du ikkje vil at dette skal skje i framtida, kan funksjonen skruast av i brukarinnstillingar.",
+    "adjustedEventDurationsInfoText": "Avrunding til næraste 30 min er skrudd på. Totalt har registrerte timar vorte justerte med {{adjustedMinutes}} minutt."
   },
   "projects": {
     "filterLabels": "Filtrer merkelappar...",
@@ -149,8 +151,8 @@
     "adUserSyncUserPhotoDescription": "Synkroniser profilbilete frå Azure Active Directory når brukarane loggar seg på.",
     "subscriptionInfoHeader": "Grunnleggjande informasjon",
     "vacationEventCategoryLabel": "Hendelseskategori i Outlook",
-    "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
-    "vacationTotalDaysLabel": "Feriedager",
+    "vacationTotalDaysDescription": "Det samla talet feriedagar for kvar tilsett i selskapet.",
+    "vacationTotalDaysLabel": "Feriedagar",
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacation": "Ferie og fravær",
     "labels": {
@@ -263,8 +265,14 @@
     "customer": "Kunde",
     "startTimeLabel": "Starttid",
     "endTimeLabel": "Sluttid",
-    "hoursShortFormat": "{{hours}}t",
-    "minutesShortFormat": "{{minutes}}min",
+    "hoursShortFormat_singular": "{{hours}}t",
+    "minutesShortFormat_singular": "{{minutes}}min",
+    "hoursShortFormat_plural": "{{hours}}t",
+    "minutesShortFormat_plural": "{{minutes}}min",
+    "hoursLongFormat_singular": "{{hours}} time",
+    "minutesLongFormat_singular": "{{minutes}} minutt",
+    "hoursLongFormat_plural": "{{hours}} timer",
+    "minutesLongFormat_plural": "{{minutes}} minutt",
     "editLabel": "Rediger",
     "iconSearchPlaceholder": "Søk i ikon...",
     "inactiveFieldLabel": "Inaktivt",
@@ -370,9 +378,9 @@
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
     "clearFilters": "Fjern filtre",
     "lastActiveLabel": "Sist aktiv",
-    "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
-    "vacationTotalDaysLabel": "Antal feriedager",
-    "vacationTotalDaysDescription": "Totalt antall feriedager for året. \nInkluderar overførde dagar frå i fjor.",
+    "vacationSummaryText": "{{remaining}} av {{total}} feriedagar gjenståande",
+    "vacationTotalDaysLabel": "Antal feriedagar",
+    "vacationTotalDaysDescription": "Totalt antall feriedagar for året. \nInkluderar overførde dagar frå i fjor.",
     "vacationSummaryTooltip": "Ferieanslaget gjeld heile året, og er basert på at du har kategorisert {{usedHours}} timar med {{category}}\n(kvar feriedag er 8 timar)",
     "unconfirmedHours": "Ubekreftede timer",
     "yes": "Ja",
@@ -381,7 +389,10 @@
     "missingWeeksLabel": "Mangler veker",
     "allWeeks": "Alle veker",
     "periodName": "Veke {{name}}",
-    "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}."
+    "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}.",
+    "roundUpEventsLabel": "Avrund hendingar til næraste 30 minutt",
+    "roundUpEventsDescription": "Microsoft gir deg no høve til å avslutte møter tidlegare enn planlagt, eller starte seinare, typisk med 5 eller 10 minutt. Denne funksjonen lar oss runde av lengda på møta til nærmaste halvtime. Innstillinga trer ikkje i kraft før neste pålogging.",
+    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendingar til næraste 30 minutt\" blei lagra. Innstillinga trer ikkje i kraft før neste pålogging."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

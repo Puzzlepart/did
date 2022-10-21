@@ -3,13 +3,16 @@ import { IDropdownProps, ITextFieldProps, IToggleProps } from '@fluentui/react'
 export interface IUserSetting
   extends Pick<React.HtmlHTMLAttributes<HTMLDivElement>, 'hidden'> {
   fieldName?: string
-  type?: string
+  type?: UserSettingInputType
   description?: string
+  postSaveMessage?: string
 }
 
 export interface IUserSettingDropdown extends IDropdownProps, IUserSetting {}
 export interface IUserSettingToggle extends IToggleProps, IUserSetting {}
-export interface IUserSettingNumber extends ITextFieldProps, IUserSetting {}
+export interface IUserSettingNumber
+  extends Omit<ITextFieldProps, 'type'>,
+    IUserSetting {}
 
 export const UserSettingDropdown = (
   fieldName: string,
@@ -17,7 +20,7 @@ export const UserSettingDropdown = (
 ): IUserSettingDropdown => {
   return {
     fieldName,
-    type: 'dropdown',
+    type: UserSettingInputType.Dropdown,
     ...props
   }
 }
@@ -28,7 +31,7 @@ export const UserSettingToggle = (
 ): IUserSettingToggle => {
   return {
     fieldName,
-    type: 'toggle',
+    type: UserSettingInputType.Toggle,
     ...props
   }
 }
@@ -39,7 +42,13 @@ export const UserSettingNumber = (
 ): IUserSettingNumber => {
   return {
     fieldName,
-    type: 'number',
+    type: UserSettingInputType.Number,
     ...props
   }
+}
+
+export enum UserSettingInputType {
+  Dropdown,
+  Toggle,
+  Number
 }

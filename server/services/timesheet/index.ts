@@ -21,7 +21,7 @@ import {
   TimeEntryService,
   UserService
 } from '../mongo'
-import MatchingEngine from './matching'
+import MatchingEngine from './matchingEngine'
 import {
   IConnectEventsParameters,
   IGetTimesheetParameters,
@@ -220,7 +220,8 @@ export class TimesheetService {
     tzOffset,
     dateFormat,
     locale,
-    engine = null
+    engine = null,
+    configuration
   }: IProviderEventsParameters) {
     const startDateTimeIso = DateUtils.toISOString(
       `${startDate}:00:00:00.000`,
@@ -248,7 +249,7 @@ export class TimesheetService {
       }
     }
     if (engine) {
-      return engine.matchEvents(events).map((event_) => ({
+      events = engine.matchEvents(events, configuration).map((event_) => ({
         ...event_,
         date: DateUtils.formatDate(event_.startDateTime, dateFormat, locale)
       }))
