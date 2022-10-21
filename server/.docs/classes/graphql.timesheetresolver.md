@@ -59,13 +59,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L89)
+Defined in: [graphql/resolvers/timesheet/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L95)
 
 ___
 
 ### timesheet
 
-▸ **timesheet**(`query`: [*TimesheetQuery*](graphql.timesheetquery.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<any[]\>
+▸ **timesheet**(`context`: *Context*, `query`: [*TimesheetQuery*](graphql.timesheetquery.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<any[]\>
 
 Get timesheet
 
@@ -73,12 +73,13 @@ Get timesheet
 
 Name | Type | Description |
 :------ | :------ | :------ |
+`context` | *Context* | - |
 `query` | [*TimesheetQuery*](graphql.timesheetquery.md) | Query   |
 `options` | [*TimesheetOptions*](graphql.timesheetoptions.md) | Options    |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L47)
+Defined in: [graphql/resolvers/timesheet/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L48)
 
 ___
 
@@ -97,7 +98,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:118](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L118)
+Defined in: [graphql/resolvers/timesheet/index.ts:124](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L124)
 
 ___
 
@@ -117,4 +118,4 @@ Name | Type |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L68)
+Defined in: [graphql/resolvers/timesheet/index.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L74)

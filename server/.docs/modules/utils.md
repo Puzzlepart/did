@@ -125,7 +125,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`string` | *string* | - |
+`string` | *string* | JSON string to parse   |
 `fallbackValue` | *object* | Fallback value when `JSON.parse` fails    |
 
 **Returns:** T

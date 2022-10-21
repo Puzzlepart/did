@@ -11,6 +11,10 @@ the client and the server.
 
 - [$dayjs](dateutils._dayjs.md)
 
+### Enumerations
+
+- [DurationStringFormat](../enums/dateutils.durationstringformat.md)
+
 ### Classes
 
 - [DateObject](../classes/dateutils.dateobject.md)

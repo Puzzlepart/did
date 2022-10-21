@@ -52,7 +52,7 @@ Name | Type |
 
 **Returns:** [*DateUtils*](dateutils.dateutils-1.md)
 
-Defined in: [shared/utils/date.ts:30](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L30)
+Defined in: [shared/utils/date.ts:35](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L35)
 
 ## Methods
 
@@ -70,7 +70,7 @@ Name | Type | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: [shared/utils/date.ts:370](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L370)
+Defined in: [shared/utils/date.ts:387](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L387)
 
 ___
 
@@ -89,7 +89,7 @@ Name | Type | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: [shared/utils/date.ts:111](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L111)
+Defined in: [shared/utils/date.ts:128](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L128)
 
 ___
 
@@ -111,7 +111,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:86](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L86)
+Defined in: [shared/utils/date.ts:103](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L103)
 
 ___
 
@@ -131,7 +131,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*[]
 
-Defined in: [shared/utils/date.ts:125](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L125)
+Defined in: [shared/utils/date.ts:142](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L142)
 
 ___
 
@@ -150,17 +150,17 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [shared/utils/date.ts:292](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L292)
+Defined in: [shared/utils/date.ts:309](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L309)
 
 ___
 
 ### getDurationString
 
-▸ **getDurationString**(`hours`: *number*, `t`: TFunction): *string*
+▸ **getDurationString**(`hours`: *number*, `t`: TFunction, `format?`: [*DurationStringFormat*](../enums/dateutils.durationstringformat.md)): *string*
 
 Get duration string
 
-E.g. 15.75 = 15 hours 45 minutes
+E.g. 15.75 = 15h 45min with `DurationStringFormat.Short` and 15 hours 45 minutes with `DurationStringFormat.Long`
 
 Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
 to handle floating point number precision.
@@ -170,11 +170,12 @@ to handle floating point number precision.
 Name | Type | Description |
 :------ | :------ | :------ |
 `hours` | *number* | Duration in hours   |
-`t` | TFunction | Translate function    |
+`t` | TFunction | Translate function   |
+`format` | [*DurationStringFormat*](../enums/dateutils.durationstringformat.md) | Format (`DurationStringFormat.Short` or `DurationStringFormat.Long`)    |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:63](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L63)
+Defined in: [shared/utils/date.ts:69](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L69)
 
 ___
 
@@ -195,7 +196,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [shared/utils/date.ts:224](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L224)
+Defined in: [shared/utils/date.ts:241](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L241)
 
 ___
 
@@ -215,7 +216,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [shared/utils/date.ts:242](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L242)
+Defined in: [shared/utils/date.ts:259](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L259)
 
 ___
 
@@ -234,7 +235,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:146](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L146)
+Defined in: [shared/utils/date.ts:163](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L163)
 
 ___
 
@@ -246,7 +247,7 @@ Get month names in a year
 
 **Returns:** *string*[]
 
-Defined in: [shared/utils/date.ts:201](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L201)
+Defined in: [shared/utils/date.ts:218](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L218)
 
 ___
 
@@ -264,7 +265,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:341](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L341)
+Defined in: [shared/utils/date.ts:358](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L358)
 
 ___
 
@@ -289,7 +290,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:165](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L165)
+Defined in: [shared/utils/date.ts:182](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L182)
 
 ___
 
@@ -309,7 +310,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:316](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L316)
+Defined in: [shared/utils/date.ts:333](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L333)
 
 ___
 
@@ -329,7 +330,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [shared/utils/date.ts:212](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L212)
+Defined in: [shared/utils/date.ts:229](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L229)
 
 ___
 
@@ -349,7 +350,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [shared/utils/date.ts:253](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L253)
+Defined in: [shared/utils/date.ts:270](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L270)
 
 ___
 
@@ -367,7 +368,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [shared/utils/date.ts:332](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L332)
+Defined in: [shared/utils/date.ts:349](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L349)
 
 ___
 
@@ -386,7 +387,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [shared/utils/date.ts:282](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L282)
+Defined in: [shared/utils/date.ts:299](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L299)
 
 ___
 
@@ -404,7 +405,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [shared/utils/date.ts:262](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L262)
+Defined in: [shared/utils/date.ts:279](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L279)
 
 ___
 
@@ -423,7 +424,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [shared/utils/date.ts:272](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L272)
+Defined in: [shared/utils/date.ts:289](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L289)
 
 ___
 
@@ -442,7 +443,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [shared/utils/date.ts:352](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L352)
+Defined in: [shared/utils/date.ts:369](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L369)
 
 ___
 
@@ -462,7 +463,7 @@ Name | Type | Description |
 
 The JS date
 
-Defined in: [shared/utils/date.ts:381](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L381)
+Defined in: [shared/utils/date.ts:398](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L398)
 
 ___
 
@@ -480,7 +481,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [shared/utils/date.ts:48](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L48)
+Defined in: [shared/utils/date.ts:53](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L53)
 
 ___
 
@@ -498,7 +499,7 @@ Name | Type | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: [shared/utils/date.ts:361](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L361)
+Defined in: [shared/utils/date.ts:378](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L378)
 
 ___
 
@@ -517,7 +518,7 @@ Name | Type | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: [shared/utils/date.ts:98](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L98)
+Defined in: [shared/utils/date.ts:115](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L115)
 
 ___
 
@@ -536,4 +537,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [shared/utils/date.ts:305](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L305)
+Defined in: [shared/utils/date.ts:322](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L322)

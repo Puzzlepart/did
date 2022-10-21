@@ -60,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Project code as filter to Reports #978
 - Added permission scope LIST_USERS #968
+- Support end early/start late: round appointments to nearest half hours #1056
 
 ### Fixed
 - Project reports includes week number #975

@@ -54,7 +54,6 @@ Reusable React Function components.
 ### Other Interfaces
 
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
-- [IDurationDisplayProps](../interfaces/components.idurationdisplayprops.md)
 - [ITabContainerProps](../interfaces/components.itabcontainerprops.md)
 - [ITabItemProps](../interfaces/components.itabitemprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
