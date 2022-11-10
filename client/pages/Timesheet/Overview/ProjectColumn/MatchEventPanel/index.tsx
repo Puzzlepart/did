@@ -1,12 +1,12 @@
 import { Link, MessageBarButton, Panel } from '@fluentui/react'
 import { SearchProject, SubText, UserMessage } from 'components'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
 import { useMatchEventPanel } from './useMatchEventPanel'
 
-export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
+export const MatchEventPanel: FC<IMatchEventPanelProps> = ({ event }) => {
   const { t } = useTranslation()
   const { isPanelOpen, showPanel, hidePanel, onMatch } =
     useMatchEventPanel(event)
@@ -54,6 +54,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           className={styles.searchProject}
           onSelected={(project) => onMatch(project)}
           placeholder={t('timesheet.matchEventPanelSearchPlaceholder')}
+          autoFocus
         />
       </Panel>
     </>

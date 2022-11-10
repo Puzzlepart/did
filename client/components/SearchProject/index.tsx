@@ -31,6 +31,7 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
       placeholder={props.placeholder}
       onClear={() => props.onSelected(null)}
       onSelected={(item) => props.onSelected(item.data)}
+      autoFocus={props.autoFocus}
     />
   )
 }

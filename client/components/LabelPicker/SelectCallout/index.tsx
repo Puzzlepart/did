@@ -9,7 +9,7 @@ import {
   StickyPositionType
 } from '@fluentui/react'
 import { SubText } from 'components/SubText'
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { LabelObject } from 'types'
 import _ from 'underscore'
 import s from 'underscore.string'
@@ -19,7 +19,7 @@ import { ISelectCalloutProps } from './types'
 /**
  * @category Function Component
  */
-export const SelectCallout = (props: ISelectCalloutProps) => {
+export const SelectCallout: FC<ISelectCalloutProps> = (props) => {
   const [labels, setLabels] = useState<LabelObject[]>(props.labels)
 
   useEffect(() => setLabels(props.labels), [props.labels])

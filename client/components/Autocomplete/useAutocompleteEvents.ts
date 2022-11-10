@@ -5,7 +5,7 @@ import {
   ON_SEARCH,
   RESET,
   SET_SELECTED_INDEX
-} from './reducer'
+} from './actions'
 import { ISuggestionItem } from './types'
 
 /**
@@ -26,13 +26,11 @@ export function useAutocompleteEvents({ dispatch, props }) {
       dispatch(RESET())
       props.onClear()
     },
-    // eslint-disable-next-line unicorn/consistent-function-scoping
-    onKeyDown: () => (event: React.KeyboardEvent<HTMLDivElement>) =>
-      dispatch(
-        ON_KEY_DOWN({
-          key: event.which,
-          onEnter: (item) => props.onSelected(item)
-        })
-      )
+    onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => dispatch(
+      ON_KEY_DOWN({
+        key: event.key,
+        onEnter: (item) => props.onSelected(item)
+      })
+    )
   }
 }

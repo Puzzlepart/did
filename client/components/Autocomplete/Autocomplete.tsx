@@ -2,8 +2,7 @@
 import {
   Callout,
   FocusZone,
-  FocusZoneDirection,
-  Label,
+  FocusZoneDirection, Label,
   List,
   SearchBox
 } from '@fluentui/react'
@@ -25,14 +24,15 @@ import { useAutocomplete } from './useAutocomplete'
 export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
   const {
     state,
+    ref,
+    searchBoxRef,
     className,
-    onClear,
-    onSearch,
-    onKeyDown,
+    suggestions,
     onDismissCallout,
     onSetSelected,
-    suggestions,
-    ref
+    onSearch,
+    onClear,
+    onKeyDown
   } = useAutocomplete(props)
   return (
     <div className={className} onKeyDown={onKeyDown}>
@@ -43,6 +43,7 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
       )}
       <div ref={ref}>
         <SearchBox
+          componentRef={searchBoxRef}
           key={state.selectedItem?.key}
           className={styles.field}
           defaultValue={state.value}
