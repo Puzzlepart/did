@@ -15,7 +15,7 @@ import { IEventListProps } from './types'
  * Get sizing for column
  *
  * @param props - Props
- * @param Column - field name
+ * @param fieldName - Field name
  * @param defaultMinWidth - Default min width
  * @param defaultMaxWidth - Default max width
  */
