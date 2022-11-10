@@ -1,26 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { KeyCodes } from '@fluentui/react'
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
 import _ from 'underscore'
+import { INIT, RESET, ON_SEARCH, ON_KEY_DOWN, SET_SELECTED_INDEX, DISMISS_CALLOUT } from './actions'
 import {
-  AutocompleteSelectCallback,
-  IAutocompleteProps,
-  IAutocompleteState,
-  ISuggestionItem
+  IAutocompleteState
 } from './types'
-
-export const INIT = createAction<{ props: IAutocompleteProps }>('INIT')
-export const RESET = createAction('RESET')
-export const ON_SEARCH = createAction<{ searchTerm: string }>('ON_SEARCH')
-export const ON_KEY_DOWN = createAction<{
-  key: number
-  onEnter: AutocompleteSelectCallback
-}>('ON_KEY_DOWN')
-export const SET_SELECTED_INDEX =
-  createAction<{ index: number }>('SET_SELECTED_INDEX')
-export const DISMISS_CALLOUT =
-  createAction<{ item: ISuggestionItem<any> }>('DISMISS_CALLOUT')
 
 /**
  * Creates reducer using `createReducer` from [\@reduxjs/toolkit](https://www.npmjs.com/package/\@reduxjs/toolkit)
@@ -60,13 +45,13 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
       })
       .addCase(ON_KEY_DOWN, (state, { payload }) => {
         switch (payload.key) {
-          case KeyCodes.up:
+          case 'ArrowUp':
             state.selectedIndex--
             break
-          case KeyCodes.down:
+          case 'ArrowDown':
             state.selectedIndex++
             break
-          case KeyCodes.enter:
+          case 'Enter':
             {
               const item = state.suggestions[state.selectedIndex]
               if (item) payload.onEnter(JSON.parse(JSON.stringify(item)))
