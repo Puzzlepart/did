@@ -1,7 +1,8 @@
 import { createAction } from '@reduxjs/toolkit'
 import {
-    AutocompleteSelectCallback,
-    IAutocompleteProps, ISuggestionItem
+  AutocompleteSelectCallback,
+  IAutocompleteProps,
+  ISuggestionItem
 } from './types'
 
 export const INIT = createAction<{ props: IAutocompleteProps }>('INIT')

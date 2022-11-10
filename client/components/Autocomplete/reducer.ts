@@ -2,10 +2,15 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
 import _ from 'underscore'
-import { INIT, RESET, ON_SEARCH, ON_KEY_DOWN, SET_SELECTED_INDEX, DISMISS_CALLOUT } from './actions'
 import {
-  IAutocompleteState
-} from './types'
+  DISMISS_CALLOUT,
+  INIT,
+  ON_KEY_DOWN,
+  ON_SEARCH,
+  RESET,
+  SET_SELECTED_INDEX
+} from './actions'
+import { IAutocompleteState } from './types'
 
 /**
  * Creates reducer using `createReducer` from [\@reduxjs/toolkit](https://www.npmjs.com/package/\@reduxjs/toolkit)

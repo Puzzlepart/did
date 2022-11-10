@@ -219,7 +219,7 @@ ___
 Autocomplete component using `<SearchBox />`, `<Callout />`,
 `<FocusZone />` and `<List />` from ``.
 
-Defined in: [client/components/Autocomplete/Autocomplete.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L25)
+Defined in: [client/components/Autocomplete/Autocomplete.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L24)
 
 ___
 
@@ -519,17 +519,17 @@ Name | Type | Description |
 Name | Type |
 :------ | :------ |
 `className` | *string* |
-`dispatch` | *Dispatch*<AnyAction\> |
 `onClear` | () => *void* |
 `onDismissCallout` | (`item`: [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)<any\>) => *void* |
-`onKeyDown` | () => (`event`: *KeyboardEvent*<HTMLDivElement\>) => *any* |
+`onKeyDown` | (`event`: *KeyboardEvent*<HTMLDivElement\>) => *any* |
 `onSearch` | (`\_event`: *any*, `searchTerm`: *string*) => *any* |
 `onSetSelected` | (`index`: *number*) => *any* |
 `ref` | *MutableRefObject*<HTMLDivElement\> |
+`searchBoxRef` | *MutableRefObject*<ISearchBox\> |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
 `suggestions` | { `data?`: *any* ; `iconName?`: *string* ; `isSelected`: *boolean* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `tag?`: *any* ; `type?`: *string*  }[] |
 
-Defined in: [client/components/Autocomplete/useAutocomplete.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L17)
+Defined in: [client/components/Autocomplete/useAutocomplete.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L19)
 
 ___
 
@@ -551,7 +551,7 @@ Name | Type |
 :------ | :------ |
 `onClear` | () => *void* |
 `onDismissCallout` | (`item`: [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)<any\>) => *void* |
-`onKeyDown` | () => (`event`: *KeyboardEvent*<HTMLDivElement\>) => *any* |
+`onKeyDown` | (`event`: *KeyboardEvent*<HTMLDivElement\>) => *any* |
 `onSearch` | (`\_event`: *any*, `searchTerm`: *string*) => *any* |
 `onSetSelected` | (`index`: *number*) => *any* |
 

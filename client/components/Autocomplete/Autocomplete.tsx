@@ -2,7 +2,8 @@
 import {
   Callout,
   FocusZone,
-  FocusZoneDirection, Label,
+  FocusZoneDirection,
+  Label,
   List,
   SearchBox
 } from '@fluentui/react'
