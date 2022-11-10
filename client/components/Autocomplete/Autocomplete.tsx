@@ -3,12 +3,13 @@ import {
   Callout,
   FocusZone,
   FocusZoneDirection,
+  ISearchBox,
   Label,
   List,
   SearchBox
 } from '@fluentui/react'
 import { SubText } from 'components/SubText'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import _ from 'underscore'
 import { IAutocompleteProps } from '.'
 import { ReusableComponent } from '../types'
@@ -34,6 +35,10 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
     suggestions,
     ref
   } = useAutocomplete(props)
+  const searchBoxRef = useRef<ISearchBox>()
+  useEffect(() => {
+    if (props.autoFocus) searchBoxRef?.current.focus()
+  }, [props])
   return (
     <div className={className} onKeyDown={onKeyDown}>
       {props.label && (
@@ -43,6 +48,7 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
       )}
       <div ref={ref}>
         <SearchBox
+          componentRef={searchBoxRef}
           key={state.selectedItem?.key}
           className={styles.field}
           defaultValue={state.value}
