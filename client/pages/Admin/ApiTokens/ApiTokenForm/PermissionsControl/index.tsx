@@ -6,10 +6,7 @@ import _ from 'underscore'
 import styles from './PermissionsControl.module.scss'
 import { IPermissionsControlProps } from './types'
 
-export const PermissionsControl: FC<IPermissionsControlProps> = ({
-  token,
-  onToggle
-}) => {
+export const PermissionsControl: FC<IPermissionsControlProps> = (props) => {
   const { t } = useTranslation()
   const [permissions] = usePermissions(null, true)
   return (
@@ -21,9 +18,9 @@ export const PermissionsControl: FC<IPermissionsControlProps> = ({
         {permissions.map((permission, index) => (
           <PermissionCheckbox
             key={index}
-            checked={_.contains(token.permissions, permission.id)}
+            checked={_.contains(props.token.permissions, permission.id)}
             permission={permission}
-            onToggle={onToggle}
+            onToggle={props.onToggle}
           />
         ))}
       </div>
