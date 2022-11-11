@@ -10,6 +10,11 @@ import { ITimesheetState } from '../types'
 import $submitPeriod from './submitPeriod.gql'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 
+/**
+ * Parameters type for `useSubmitActions`
+ *
+ * @category Timesheet Hooks
+ */
 export type UseSubmitActionsParams = {
   state: ITimesheetState
   dispatch: Dispatch<AnyAction>
