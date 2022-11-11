@@ -7,7 +7,7 @@ import {
   TextControl,
   TextControlOptions
 } from 'components/FormControl'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useFeedbackPanel } from './useFeedbackPanel'
@@ -15,7 +15,7 @@ import { useFeedbackPanel } from './useFeedbackPanel'
 /**
  * @category Function Component
  */
-export const FeedbackPanel: React.FC<IPanelProps> = (props) => {
+export const FeedbackPanel: FC<IPanelProps> = (props) => {
   const { t } = useTranslation()
   const { user } = useAppContext()
   const { model, typeOptions, moodOptions, register, submit } =

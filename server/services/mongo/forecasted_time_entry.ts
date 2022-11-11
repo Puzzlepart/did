@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
 import { TimeEntry } from '../../graphql/resolvers/types'

@@ -6,14 +6,14 @@ import {
   SelectionMode
 } from '@fluentui/react'
 import { List } from 'components'
-import React, { useContext, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
 import { IAddMultiplePanel } from './types'
 
-export const AddMultiplePanel: React.FC<IAddMultiplePanel> = (props) => {
+export const AddMultiplePanel: FC<IAddMultiplePanel> = (props) => {
   const { activeDirectoryUsers } = useContext(UsersContext)
   const { t } = useTranslation()
   const [selectedUsers, setSelectedUsers] = useState([])

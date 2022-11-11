@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IPivotItemProps } from '@fluentui/react'
 import { IListProps } from 'components/List/types'
 import { Project } from 'types'

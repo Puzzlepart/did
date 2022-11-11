@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { MobileBreadcrumb } from '../parts'
 import styles from './App.module.scss'
 import { RESET_BREADCRUMB } from './reducer'
 
-export const AppSwitch: React.FC = () => {
+export const AppSwitch: FC = () => {
   const location = useLocation()
   const { pages, dispatch } = useAppContext()
   const [, hasPermission] = usePermissions()

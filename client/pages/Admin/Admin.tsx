@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { TabContainer } from 'components/TabContainer'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'

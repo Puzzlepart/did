@@ -4,7 +4,7 @@ import { useAppContext } from 'AppContext'
 import packageFile from 'package'
 import { UserNotificationsContext } from 'parts/UserNotifications/context'
 import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
-import React from 'react'
+import React, { FC } from 'react'
 import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { useAppClassName } from '../../app/useAppClassName'
@@ -17,7 +17,7 @@ import { NavItem } from './NavItem'
 /**
  * @category Function Component
  */
-export const Navigation: React.FC = () => {
+export const Navigation: FC = () => {
   const { pages, isAuthenticated } = useAppContext()
   const className = useAppClassName(styles)
   const theme = useTheme()

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ActionButton, Panel } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { LazyQueryResult } from '@apollo/client'
 import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'

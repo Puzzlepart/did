@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IProgressProps } from 'components/Progress/types'
 import { TimesheetPeriod } from './TimesheetPeriod'
 import { TimesheetScope } from './TimesheetScope'

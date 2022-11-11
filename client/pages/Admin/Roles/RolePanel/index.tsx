@@ -1,6 +1,6 @@
 import { Panel, PrimaryButton, TextField } from '@fluentui/react'
 import { IconPicker } from 'components/IconPicker'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { PermissionCheckbox } from './PermissionCheckbox'
@@ -8,7 +8,7 @@ import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import { useRolePanel } from './useRolePanel'
 
-export const RolePanel: React.FC<IRolePanelProps> = (props) => {
+export const RolePanel: FC<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
   const {
     permissions,

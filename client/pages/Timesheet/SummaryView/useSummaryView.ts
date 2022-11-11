@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-reduce */
 import { IListProps } from 'components/List/types'
 import { useTranslation } from 'react-i18next'

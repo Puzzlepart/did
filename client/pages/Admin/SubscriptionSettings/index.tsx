@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { PrimaryButton } from '@fluentui/react'
 import { TabComponent, TabContainer, Toast } from 'components'
 import React, { useState } from 'react'

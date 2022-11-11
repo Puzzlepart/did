@@ -3,7 +3,7 @@ import { Callout, Icon, Persona, PersonaSize, useTheme } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { Toast, useToast } from 'components/Toast'
 import { useToggle } from 'hooks'
-import React, { useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import { isMobile, MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +21,7 @@ import { UserVacation } from './UserVacation'
 /**
  * @category Function Component
  */
-export const UserMenu: React.FC = () => {
+export const UserMenu: FC = () => {
   const { t } = useTranslation()
   const { user, subscription } = useAppContext()
   const { semanticColors, palette } = useTheme()

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import get from 'get-value'

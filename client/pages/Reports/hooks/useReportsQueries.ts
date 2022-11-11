@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { DateObject } from 'DateUtils'
 import { useTimesheetPeriods } from 'hooks'
 import { isBrowser } from 'react-device-detect'

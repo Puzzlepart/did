@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import React, { useContext } from 'react'

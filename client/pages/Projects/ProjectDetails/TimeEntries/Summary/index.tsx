@@ -1,5 +1,4 @@
-/* eslint-disable tsdoc/syntax */
-import React from 'react'
+import React, { FC } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import styles from './Summary.module.scss'
@@ -9,7 +8,7 @@ import { useSummary } from './useSummary'
 /**
  * @category Projects
  */
-export const Summary: React.FC<ISummaryProps> = ({
+export const Summary: FC<ISummaryProps> = ({
   timeentries,
   loading
 }: ISummaryProps) => {

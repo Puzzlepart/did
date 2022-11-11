@@ -1,10 +1,10 @@
 import { Checkbox, Icon } from '@fluentui/react'
 import { SubText } from 'components'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'
 
-export const PermissionCheckbox: React.FC<IPermissionCheckboxProps> = (
+export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (
   props
 ) => {
   return (

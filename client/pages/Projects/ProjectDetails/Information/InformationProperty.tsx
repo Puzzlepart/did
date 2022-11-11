@@ -1,12 +1,9 @@
-import { ILabelProps, Label as LabelElement } from '@fluentui/react'
-import React from 'react'
+import { Label as LabelElement } from '@fluentui/react'
+import React, { FC } from 'react'
+import { IInformationPropertyProps } from './types'
 import styles from './Information.module.scss'
 
-interface IInformationPropertyProps extends ILabelProps {
-  value?: string
-}
-
-export const InformationProperty: React.FC<IInformationPropertyProps> = (
+export const InformationProperty: FC<IInformationPropertyProps> = (
   props
 ) => {
   return (

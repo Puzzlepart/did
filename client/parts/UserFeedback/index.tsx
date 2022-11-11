@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { useToggle } from 'hooks'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
@@ -18,7 +18,7 @@ import styles from './UserFeedback.module.scss'
  *
  * @category Function Component
  */
-export const UserFeedback: React.FC<IUserFeedbackProps> = ({
+export const UserFeedback: FC<IUserFeedbackProps> = ({
   renderAsMenuItem,
   iconName = 'Emoji2'
 }) => {

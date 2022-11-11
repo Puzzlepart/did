@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Field, Float, ObjectType } from 'type-graphql'
 

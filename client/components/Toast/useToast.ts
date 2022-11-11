@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
 import { IToastProps } from './types'
 

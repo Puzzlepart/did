@@ -1,7 +1,6 @@
-/* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
 import { ProjectsContext } from '../../context'
@@ -11,7 +10,7 @@ import { InformationProperty } from './InformationProperty'
 /**
  * @category Projects
  */
-export const Information: React.FC = () => {
+export const Information: FC = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)
 

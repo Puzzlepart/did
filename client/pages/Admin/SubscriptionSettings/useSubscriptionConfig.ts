@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'

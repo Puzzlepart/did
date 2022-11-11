@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
 import { Customer } from 'types'

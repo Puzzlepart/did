@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Spinner } from '@fluentui/react'
 import { List, TabComponent } from 'components'
 import { usePermissions } from 'hooks/user/usePermissions'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { useToast } from 'components/Toast'
 import { useState } from 'react'

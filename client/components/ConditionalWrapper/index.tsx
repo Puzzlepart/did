@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ReusableComponent } from 'components/types'
 import { HTMLProps, ReactNode } from 'react'
 

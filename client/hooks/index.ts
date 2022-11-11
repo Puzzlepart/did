@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /**
  * Reusable React Hooks
  *

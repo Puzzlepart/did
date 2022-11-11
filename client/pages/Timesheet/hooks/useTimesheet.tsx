@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
 import { useTimesheetReducer } from '../reducer'

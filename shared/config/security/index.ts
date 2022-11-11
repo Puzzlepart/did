@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 // shared/config/security/index.ts
 /**
  * Shared security configuration used by

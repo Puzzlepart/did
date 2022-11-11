@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useContext } from 'react'
 import { ReportsContext } from '../../context'
 import { useColumns } from './useColumns'

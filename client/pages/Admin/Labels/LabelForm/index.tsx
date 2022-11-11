@@ -5,13 +5,13 @@ import { FormControl } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import { IconPicker } from 'components/IconPicker'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ILabelFormProps } from './types'
 import { useLabelForm } from './useLabelForm'
 
-export const LabelForm: React.FC<ILabelFormProps> = (props) => {
+export const LabelForm: FC<ILabelFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, register, submit } = useLabelForm(props)
   return (

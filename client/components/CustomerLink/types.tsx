@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { HTMLAttributes } from 'react'
 import { Customer } from 'types'
 

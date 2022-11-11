@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import DateUtils, { DateInput, DateObject } from 'DateUtils'
 import { TimesheetQuery } from 'types'
 import { ITimesheetParameters } from './types'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ReusableComponent } from 'components/types'
 import React, { HTMLAttributes } from 'react'
 

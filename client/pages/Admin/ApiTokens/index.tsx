@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { List, TabComponent, Toast, UserMessage } from 'components'
 import React from 'react'

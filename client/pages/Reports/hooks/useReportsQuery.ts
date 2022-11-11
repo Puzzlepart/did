@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { FetchPolicy, useLazyQuery } from '@apollo/client'
 import { useLayoutEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'

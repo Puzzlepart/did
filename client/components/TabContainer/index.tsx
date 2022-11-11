@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Pivot } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import React from 'react'

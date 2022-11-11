@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
 import get from 'get-value'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IDurationColumnProps } from './types'
 
 /**
  * @category Function Component
  */
-export const DurationColumn: React.FC<IDurationColumnProps> = ({
+export const DurationColumn: FC<IDurationColumnProps> = ({
   row,
   column
 }: IDurationColumnProps) => {

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { ISpinnerProps } from '@fluentui/react'
 import { useMemo, useState } from 'react'

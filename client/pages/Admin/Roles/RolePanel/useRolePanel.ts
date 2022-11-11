@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { usePermissions } from 'hooks'
 import { useEffect, useState } from 'react'

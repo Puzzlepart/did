@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Field, Float, ID, Int, ObjectType } from 'type-graphql'
 import DateUtils, { DateWithTimezone } from '../../../../../shared/utils/date'

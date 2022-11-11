@@ -1,7 +1,6 @@
-/* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize } from '@fluentui/react'
 import { SubText } from 'components'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomerHours } from './CustomerHours'
 import styles from './PeriodColumnTooltip.module.scss'
@@ -12,7 +11,7 @@ import { usePeriodColumnTooltip } from './usePeriodColumnTooltip'
 /**
  * @category SummaryView
  */
-export const PeriodColumnTooltip: React.FC<IPeriodColumnTooltipProps> = ({
+export const PeriodColumnTooltip: FC<IPeriodColumnTooltipProps> = ({
   periods,
   hours,
   user

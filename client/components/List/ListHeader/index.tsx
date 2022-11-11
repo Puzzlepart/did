@@ -8,7 +8,7 @@ import {
   Sticky,
   StickyPositionType
 } from '@fluentui/react'
-import React, { useRef } from 'react'
+import React, { FC, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import _ from 'underscore'
 import { cleanArray as clean } from 'utils'
@@ -16,7 +16,7 @@ import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
 import { IListHeaderProps } from './types'
 
-export const ListHeader: React.FC<IListHeaderProps> = ({
+export const ListHeader: FC<IListHeaderProps> = ({
   headerProps,
   defaultRender
 }) => {

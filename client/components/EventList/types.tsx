@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IColumn } from '@fluentui/react'
 import { IListProps } from 'components/List/types'
 

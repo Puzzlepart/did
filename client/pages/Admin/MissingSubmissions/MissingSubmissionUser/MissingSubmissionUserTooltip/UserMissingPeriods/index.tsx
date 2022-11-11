@@ -1,11 +1,10 @@
-/* eslint-disable tsdoc/syntax */
 import { Label } from '@fluentui/react'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IUserMissingPeriodsProps } from './types'
 import styles from './UserMissingPeriods.module.scss'
 
-export const UserMissingPeriods: React.FC<IUserMissingPeriodsProps> = (
+export const UserMissingPeriods: FC<IUserMissingPeriodsProps> = (
   props
 ) => {
   const { t } = useTranslation()

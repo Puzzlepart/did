@@ -1,8 +1,7 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { SubText } from 'components'
 import { CustomersContext } from 'pages/Customers/context'
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Actions } from '../Actions'
 import styles from './Header.module.scss'
@@ -10,7 +9,7 @@ import styles from './Header.module.scss'
 /**
  * @category Customers
  */
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   const { state } = useContext(CustomersContext)
   return (
     <div className={styles.root}>

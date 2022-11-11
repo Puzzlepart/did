@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IChoiceGroupOption } from '@fluentui/react'
 import { useToggle } from 'hooks'
 import { useState } from 'react'

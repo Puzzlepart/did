@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ApolloError } from '@apollo/client'
 import { OutlookCategory, Project } from 'types'
 

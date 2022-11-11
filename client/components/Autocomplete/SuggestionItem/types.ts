@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IDropdownOption } from '@fluentui/react'
 import { IAutocompleteProps } from '../types'
 

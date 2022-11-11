@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 // client/pages/index.ts
 /**
  * This module contains the main pages.

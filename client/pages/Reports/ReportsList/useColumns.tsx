@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'

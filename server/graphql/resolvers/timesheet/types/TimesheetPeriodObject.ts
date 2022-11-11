@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Field, ID, ObjectType } from 'type-graphql'
 import $date from '../../../../../shared/utils/date'

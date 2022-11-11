@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { useTheme } from '@fluentui/react'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../MenuItem'
 import $vacation from './vacation.gql'
@@ -9,7 +9,7 @@ import $vacation from './vacation.gql'
 /**
  * @category UserMenu
  */
-export const UserVacation: React.FC = () => {
+export const UserVacation: FC = () => {
   const { t } = useTranslation()
   const { data } = useQuery($vacation, { fetchPolicy: 'cache-first' })
   const { palette } = useTheme()

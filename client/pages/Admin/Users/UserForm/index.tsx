@@ -1,13 +1,13 @@
 import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
 import { Autocomplete } from 'components'
-import React from 'react'
+import React, { FC } from 'react'
 import _ from 'underscore'
 import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 import { useUserForm } from './useUserForm'
 
-export const UserForm: React.FC<IUserFormProps> = (props) => {
+export const UserForm: FC<IUserFormProps> = (props) => {
   const {
     inputProps,
     activeDirectoryUsers,

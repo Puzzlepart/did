@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { useExcelExport } from 'hooks'
 import { useContext } from 'react'

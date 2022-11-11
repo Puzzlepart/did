@@ -1,14 +1,14 @@
 import { Icon } from '@fluentui/react'
 import { EntityLabel, ProjectLink } from 'components'
 import { SubText } from 'components/SubText'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
 import _ from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 
-export const ProjectTooltipContent: React.FC<IProjectTooltipProps> = ({
+export const ProjectTooltipContent: FC<IProjectTooltipProps> = ({
   project
 }: IProjectTooltipProps) => {
   const { t } = useTranslation()

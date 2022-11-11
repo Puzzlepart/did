@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /**
  * NodeJS `express` auth route
  *

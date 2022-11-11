@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { useToggle } from 'hooks/common/useToggle'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { NotificationIndicator } from './NotificationIndicator'
@@ -19,7 +19,7 @@ import styles from './UserNotifications.module.scss'
  *
  * @category Function Component
  */
-export const UserNotifications: React.FC<IUserNotificationsProps> = ({
+export const UserNotifications: FC<IUserNotificationsProps> = ({
   renderAsMenuItem,
   iconName = 'Ringer'
 }) => {

@@ -1,6 +1,5 @@
-/* eslint-disable tsdoc/syntax */
 import { Pivot, PivotItem } from '@fluentui/react'
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'
 import { CHANGE_DETAILS_TAB } from '../reducer/actions'
@@ -12,7 +11,7 @@ import { TimeEntries } from './TimeEntries'
 /**
  * @category Projects
  */
-export const ProjectDetails: React.FC = () => {
+export const ProjectDetails: FC = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ProjectsContext)
 

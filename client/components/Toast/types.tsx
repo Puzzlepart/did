@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IUserMessageProps } from '../UserMessage'
 
 /**

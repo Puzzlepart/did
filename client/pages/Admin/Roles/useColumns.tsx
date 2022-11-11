@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { DeleteLink, EditLink } from 'components'
 import { PermissionList } from 'components/PermissionList'

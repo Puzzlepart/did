@@ -1,9 +1,8 @@
-/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { DefaultButton } from '@fluentui/react'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
-import React, { HTMLAttributes, useContext, useState } from 'react'
+import React, { FC, HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from '../../context'
@@ -15,7 +14,7 @@ import $createOutlookCategory from './createOutlookCategory.gql'
 /**
  * @category Projects
  */
-export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { findBestMatch } from 'string-similarity'
 import _ from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'

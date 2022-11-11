@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppContext } from 'AppContext'
 import { useLayoutEffect } from 'react'

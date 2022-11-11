@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { PivotItem } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useState } from 'react'

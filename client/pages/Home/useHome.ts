@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
 import { useLocation } from 'react-router-dom'
 

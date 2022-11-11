@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import get from 'get-value'
 import _ from 'underscore'
 import { BaseFilter } from './BaseFilter'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'

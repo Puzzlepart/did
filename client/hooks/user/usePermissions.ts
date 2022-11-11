@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { IContextualMenuItem } from '@fluentui/react'
 import { useTimesheetContext } from 'pages'
 import { useRef } from 'react'

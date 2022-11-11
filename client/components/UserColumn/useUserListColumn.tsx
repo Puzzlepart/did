@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IPersonaProps } from '@fluentui/react'
 import { IListColumn } from 'components/List/types'

@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { PivotItem } from '@fluentui/react'
 import { ContextUser } from 'AppContext'
 import React, { JSXElementConstructor, ReactElement } from 'react'

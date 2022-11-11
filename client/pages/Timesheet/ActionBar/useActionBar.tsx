@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prefer-query-selector */
-/* eslint-disable tsdoc/syntax */
 import { ICommandBarProps } from '@fluentui/react'
 import { useToggle } from 'hooks'
 import { arrayExtend } from 'utils/arrayExtend'

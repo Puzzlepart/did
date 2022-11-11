@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon, Link } from '@fluentui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

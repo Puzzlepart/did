@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { useToast } from 'components'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'

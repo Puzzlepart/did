@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IPanelProps } from '@fluentui/react'
 import { BaseFilter, IFilter } from './Filters'
 

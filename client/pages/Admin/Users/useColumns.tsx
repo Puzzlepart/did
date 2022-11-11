@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { PersonaSize } from '@fluentui/react'
 import { IconText } from 'components'
 import { EditLink } from 'components/EditLink'

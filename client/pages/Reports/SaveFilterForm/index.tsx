@@ -1,8 +1,7 @@
-/* eslint-disable tsdoc/syntax */
 import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
 import { IconPicker } from 'components'
 import { useMap } from 'hooks'
-import React, { useContext, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
 import { toMap } from 'utils/toMap'
@@ -11,6 +10,9 @@ import { ADD_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
 
+/**
+ * @ignore
+ */
 const INITIAL_MODEL = toMap({
   key: '',
   text: '',
@@ -20,7 +22,7 @@ const INITIAL_MODEL = toMap({
 /**
  * @category Reports
  */
-export const SaveFilterForm: React.FC<ISaveFilterFormProps> = (props) => {
+export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)
   const { $, set, $set, value } = useMap<

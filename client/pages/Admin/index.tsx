@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useRouteMatches } from 'hooks/route/useRouteMatches'
 import { PageComponent } from 'pages/types'
 import * as React from 'react'

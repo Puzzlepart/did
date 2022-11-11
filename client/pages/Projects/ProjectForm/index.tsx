@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable tsdoc/syntax */
 import { Toggle } from '@fluentui/react'
 import {
   IconPicker,

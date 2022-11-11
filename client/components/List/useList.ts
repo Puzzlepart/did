@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'

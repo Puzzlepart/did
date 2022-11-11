@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { format } from '@fluentui/react'
 import $date from 'DateUtils'
 import React, { FC } from 'react'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon, Label } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
 import { ReusableComponent } from 'components/types'

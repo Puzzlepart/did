@@ -1,12 +1,12 @@
 import { usePermissions } from 'hooks/user/usePermissions'
 import { PermissionCheckbox } from 'pages/Admin/Roles/RolePanel/PermissionCheckbox'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import styles from './PermissionsControl.module.scss'
 import { IPermissionsControlProps } from './types'
 
-export const PermissionsControl: React.FC<IPermissionsControlProps> = ({
+export const PermissionsControl: FC<IPermissionsControlProps> = ({
   token,
   onToggle
 }) => {

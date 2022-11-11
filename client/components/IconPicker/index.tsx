@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Autocomplete } from 'components/Autocomplete'
 import { ReusableComponent } from 'components/types'
 import React from 'react'

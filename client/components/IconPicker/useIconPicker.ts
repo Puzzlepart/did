@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ISuggestionItem } from 'components/Autocomplete'
 import { useFabricIcons } from 'hooks'
 import _ from 'underscore'

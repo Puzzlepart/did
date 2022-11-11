@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import get from 'get-value'
 import { calendar_v3, google } from 'googleapis'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import get from 'get-value'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'

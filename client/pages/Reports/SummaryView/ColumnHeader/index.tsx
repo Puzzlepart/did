@@ -1,13 +1,12 @@
-/* eslint-disable tsdoc/syntax */
 import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import { SubText } from 'components'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './ColumnHeader.module.scss'
 
 /**
  * @category List
  */
-export const ColumnHeader: React.FC<IDetailsColumnRenderTooltipProps> = (
+export const ColumnHeader: FC<IDetailsColumnRenderTooltipProps> = (
   props
 ) => {
   return (

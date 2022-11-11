@@ -3,12 +3,12 @@ import { FormControl } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import packageFile from 'package'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 
-export const CustomerForm: React.FC<ICustomerFormProps> = (props) => {
+export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
   const { submit, register } = useCustomerForm(props)
   return (

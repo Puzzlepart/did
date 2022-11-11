@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { ChoiceGroup, PivotItem } from '@fluentui/react'
 import { FilterPanel, TabContainer, UserMessage } from 'components'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from './context'
 import { useReports } from './hooks'
@@ -19,7 +18,7 @@ import { SummaryView } from './SummaryView'
 /**
  * @category Function Component
  */
-export const Reports: React.FC = () => {
+export const Reports: FC = () => {
   const { t } = useTranslation()
   const { defaultSelectedKey, queries, options, filters, context } =
     useReports()

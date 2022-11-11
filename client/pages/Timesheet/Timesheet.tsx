@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { TabContainer } from 'components'
 import { HotkeyModal } from 'components/HotkeyModal'
-import React from 'react'
+import React, { FC } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { ActionBar } from './ActionBar'
@@ -18,7 +18,7 @@ import { TimesheetContext, TimesheetView } from './types'
 /**
  * @category Function Component
  */
-export const Timesheet: React.FC = () => {
+export const Timesheet: FC = () => {
   const { t } = useTranslation()
   const { state, dispatch, context } = useTimesheet()
   const { hotkeysProps } = useHotkeys(context)

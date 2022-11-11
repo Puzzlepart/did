@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import {
   DISMISS_CALLOUT,
   ON_KEY_DOWN,

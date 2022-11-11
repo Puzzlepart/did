@@ -1,8 +1,7 @@
-/* eslint-disable tsdoc/syntax */
 import { DefaultButton } from '@fluentui/react'
 import { usePermissions } from 'hooks'
 import { CustomersContext } from 'pages/Customers/context'
-import React, { HTMLAttributes, useContext, useState } from 'react'
+import React, { FC, HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { CustomerForm } from '../../CustomerForm'
@@ -11,7 +10,7 @@ import styles from './Actions.module.scss'
 /**
  * @category Customers
  */
-export const Actions: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { state, loading, refetch } = useContext(CustomersContext)

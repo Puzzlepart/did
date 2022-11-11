@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-reduce */
 
 import get from 'get-value'
