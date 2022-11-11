@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { sign } from 'jsonwebtoken'
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'

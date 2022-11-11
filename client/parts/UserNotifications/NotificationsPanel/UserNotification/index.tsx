@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Link } from '@fluentui/react'
 import { UserMessage } from 'components'
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { UserNotificationsContext } from '../../context'
@@ -11,7 +11,7 @@ import styles from './UserNotificationMessage.module.scss'
 /**
  * @category Function Component
  */
-export const UserNotification: React.FC<IUserNotificationProps> = ({
+export const UserNotification: FC<IUserNotificationProps> = ({
   model
 }: IUserNotificationProps) => {
   const { t } = useTranslation()

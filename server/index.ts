@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable tsdoc/syntax */
 /**
  * Main entry point for the http server (using [http](https://www.npmjs.com/package/http))
  *

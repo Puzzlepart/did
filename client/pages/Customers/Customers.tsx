@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { TabComponent, TabContainer } from 'components'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React from 'react'

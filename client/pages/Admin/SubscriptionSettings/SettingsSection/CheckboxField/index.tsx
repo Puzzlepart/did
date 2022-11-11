@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Checkbox, Label } from '@fluentui/react'
 import get from 'get-value'
 import React, { useContext } from 'react'

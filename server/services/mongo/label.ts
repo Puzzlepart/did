@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import {
   DeleteWriteOpResultObject,
   FilterQuery,

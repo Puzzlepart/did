@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Panel } from '@fluentui/react'
 import React from 'react'
 import { MenuItem } from '../MenuItem'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { googleStrategy } from './google'

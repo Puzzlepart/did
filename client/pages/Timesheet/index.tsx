@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { PageComponent } from 'pages/types'
 import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'

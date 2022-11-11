@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { createClient as createRedisClient } from 'redis'
 import { environment } from '../../utils'
 

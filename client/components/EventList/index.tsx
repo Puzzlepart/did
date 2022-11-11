@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { List } from 'components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'

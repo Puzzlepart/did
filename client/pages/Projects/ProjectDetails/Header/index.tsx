@@ -1,7 +1,6 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { SubText } from 'components'
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ProjectsContext } from '../../context'
 import { Actions } from '../Actions'
@@ -10,7 +9,7 @@ import styles from './Header.module.scss'
 /**
  * @category Projects
  */
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   const { state } = useContext(ProjectsContext)
   return (
     <div className={styles.root}>

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import { GraphQLDateTime } from 'graphql-iso-date'
 import 'reflect-metadata'

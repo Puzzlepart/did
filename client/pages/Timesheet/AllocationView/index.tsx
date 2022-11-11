@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
 import { SubText } from 'components/SubText'
 import { TabComponent } from 'components/TabContainer/types'

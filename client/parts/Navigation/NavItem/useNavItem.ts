@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { isMobile } from 'react-device-detect'

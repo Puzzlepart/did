@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { EventList, TabComponent } from 'components'
 import packageFile from 'package'
 import React from 'react'

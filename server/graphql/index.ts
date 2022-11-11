@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/empty-brace-spaces */
-/* eslint-disable tsdoc/syntax */
 /**
  * [GraphQL](https://graphql.org/) server implementation using
  * [apollo-server-express](https://www.npmjs.com/package/apollo-server-express)

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import $date from 'DateUtils'
 import { TFunction } from 'i18next'

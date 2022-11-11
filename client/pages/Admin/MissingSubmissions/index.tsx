@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Pivot, PivotItem } from '@fluentui/react'
 import { TabComponent } from 'components'
 import React from 'react'

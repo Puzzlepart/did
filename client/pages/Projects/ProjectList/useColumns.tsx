@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IconText } from 'components'
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'

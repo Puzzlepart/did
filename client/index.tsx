@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 /**
  * Main entry point for the App
  *

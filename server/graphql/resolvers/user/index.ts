@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { createAppAuth } from '@octokit/auth-app'
 import { request } from '@octokit/request'
 import createDebug from 'debug'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, useContext } from 'react'
 import { IListProps, IListState } from './types'

@@ -1,8 +1,8 @@
 import get from 'get-value'
-import React from 'react'
+import { FC } from 'react'
 import { IItemColumnProps } from './types'
 
-export const ItemColumn: React.FC<IItemColumnProps> = ({
+export const ItemColumn: FC<IItemColumnProps> = ({
   column,
   item,
   index

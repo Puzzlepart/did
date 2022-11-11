@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import { usePermissions } from 'hooks'

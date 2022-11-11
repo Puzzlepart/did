@@ -8,7 +8,7 @@ import {
   Toggle
 } from '@fluentui/react'
 import { SubText } from 'components'
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { UserSettingsContext } from '../context'
 import { IUserSetting, UserSettingInputType } from '../types'
 import styles from './UserSettingInput.module.scss'
@@ -16,7 +16,7 @@ import styles from './UserSettingInput.module.scss'
 /**
  * @category UserMenu
  */
-export const UserSettingInput: React.FC<{ setting: IUserSetting }> = ({
+export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
   setting
 }) => {
   const { onUpdate } = useContext(UserSettingsContext)

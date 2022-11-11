@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import get from 'get-value'
 import _ from 'underscore'
 import { IFilter, IFilterItem } from './types'

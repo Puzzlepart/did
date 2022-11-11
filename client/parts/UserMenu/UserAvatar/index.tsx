@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon, Persona, PersonaSize } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import React from 'react'
+import React, { FC } from 'react'
 import { MenuItem } from '../MenuItem'
 
 /**
  * @category UserMenu
  */
-export const UserAvatar: React.FC = () => {
+export const UserAvatar: FC = () => {
   const { user } = useAppContext()
   return (
     <MenuItem>

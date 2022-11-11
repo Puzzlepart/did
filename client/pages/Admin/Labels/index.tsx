@@ -1,10 +1,12 @@
-/* eslint-disable tsdoc/syntax */
 import { List, TabComponent } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelForm } from './LabelForm'
 import { useLabels } from './useLabels'
 
+/**
+ * @ignore
+ */
 export const Labels: TabComponent = () => {
   const { t } = useTranslation()
   const { columns, form, setForm, query, ConfirmationDialog } = useLabels()

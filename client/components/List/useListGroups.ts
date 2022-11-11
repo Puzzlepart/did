@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IGroup } from '@fluentui/react'
 import * as arraySort from 'array-sort'
 import get from 'get-value'

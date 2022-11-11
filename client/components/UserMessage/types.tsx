@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IMessageBarProps } from '@fluentui/react'
 
 export type UserMessageType =

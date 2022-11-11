@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Checkbox } from '@fluentui/react'
 import { List, TabComponent } from 'components'
 import React from 'react'

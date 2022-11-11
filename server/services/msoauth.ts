@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import createDebug from 'debug'
 import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'

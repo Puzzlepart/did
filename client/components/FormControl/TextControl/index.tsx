@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { TextField } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'

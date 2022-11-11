@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /**
  * Sign in error
  *

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { AnyAction } from '@reduxjs/toolkit'
 import { IListColumn } from 'components/List/types'
 import { TFunction } from 'i18next'

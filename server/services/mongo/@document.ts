@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'

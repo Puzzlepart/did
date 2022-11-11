@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useEffect, useState } from 'react'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'

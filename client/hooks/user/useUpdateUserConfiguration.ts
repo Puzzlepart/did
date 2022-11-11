@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { useCallback, useEffect } from 'react'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 // client/components/index.ts
 /**
  * Reusable React Function components.

@@ -1,13 +1,13 @@
 import { Icon } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
 import _ from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { ILabelColumnProps } from './types'
 
-export const LabelColumn: React.FC<ILabelColumnProps> = (props) => {
+export const LabelColumn: FC<ILabelColumnProps> = (props) => {
   const { t } = useTranslation()
   if (props.project) {
     if (!props.project.tag) {

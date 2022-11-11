@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { FilterQuery } from 'mongodb'
 import set from 'set-value'

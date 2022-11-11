@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Spinner } from '@fluentui/react'
 import { List, TabComponent } from 'components'
 import { usePermissions } from 'hooks/user/usePermissions'
@@ -16,6 +15,8 @@ import { useUsers } from './useUsers'
  * * See active users
  * * Add new users
  * * Edit users
+ * 
+ * @ignore
  */
 export const Users: TabComponent = () => {
   const {

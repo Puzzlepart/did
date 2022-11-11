@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { makeStyles } from '@fluentui/react'
 import { UserMessageType } from './types'
 

@@ -1,12 +1,12 @@
 import { ActionButton } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
 import { startTeamsConversation } from './startTeamsConversation'
 import { ITeamsReminderButtonProps } from './types'
 
-export const TeamsReminderButton: React.FC<ITeamsReminderButtonProps> = (
+export const TeamsReminderButton: FC<ITeamsReminderButtonProps> = (
   props
 ) => {
   const { t } = useTranslation()

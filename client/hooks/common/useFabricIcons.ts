@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import icons from '@uifabric/icons/lib/data/AllIconNames.json'
 import { ISuggestionItem } from 'components'
 import { useMemo } from 'react'

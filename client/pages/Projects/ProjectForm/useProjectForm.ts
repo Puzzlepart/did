@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useFormControls } from 'components/FormControl'
 import { IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'

@@ -1,13 +1,13 @@
 import { ChoiceGroup, DefaultButton, Panel } from '@fluentui/react'
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
-import React from 'react'
+import React, { FC } from 'react'
 import { BrowserView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../MenuItem'
 import { useUserReports } from './useUserReports'
 
-export const UserReports: React.FC = () => {
+export const UserReports: FC = () => {
   const { t } = useTranslation()
   const { preset, setPreset, queries, showPanel, togglePanel, query, columns } =
     useUserReports()

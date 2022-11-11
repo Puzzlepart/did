@@ -5,6 +5,9 @@ import { RolePanel } from './RolePanel'
 import styles from './Roles.module.scss'
 import { useRoles } from './useRoles'
 
+/**
+ * @ignore
+ */
 export const Roles: TabComponent = () => {
   const { t } = useTranslation()
   const { query, columns, panel, setPanel, toast } = useRoles()

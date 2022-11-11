@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { useEffect, useState } from 'react'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'

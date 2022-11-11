@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { QueryResult } from '@apollo/client'
 import { createAction } from '@reduxjs/toolkit'
 import { Project } from 'types'

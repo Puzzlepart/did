@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 
 import { omit, Slider, TextField, Toggle } from '@fluentui/react'
 import { SubText, TabComponent } from 'components'

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable tsdoc/syntax */
 /**
  * NodeJS Express App
  *

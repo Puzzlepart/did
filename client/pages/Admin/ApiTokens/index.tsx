@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
 import { List, TabComponent, Toast, UserMessage } from 'components'
 import React from 'react'
@@ -16,6 +15,8 @@ import { useApiTokens } from './useApiTokens'
  * * See created API tokens
  * * Create new API tokens
  * * Delete existing API tokens
+ * 
+ * @ignore
  */
 export const ApiTokens: TabComponent = () => {
   const { t } = useTranslation()

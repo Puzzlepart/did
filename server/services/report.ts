@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { DefaultButton, useTheme } from '@fluentui/react'
 import { UserMessage } from 'components'
 import packageFile from 'package'

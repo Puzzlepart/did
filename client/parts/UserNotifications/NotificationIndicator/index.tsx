@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import _ from 'underscore'
 import { UserNotificationsContext } from '../context'
 import styles from './NotificationIndicator.module.scss'
@@ -11,7 +11,7 @@ export interface INotificationIndicatorProps
 /**
  * @category Function Component
  */
-export const NotificationIndicator: React.FC<INotificationIndicatorProps> = (
+export const NotificationIndicator: FC<INotificationIndicatorProps> = (
   props
 ) => {
   const { notifications, count } = useContext(UserNotificationsContext)

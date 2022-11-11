@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-console */
-/* eslint-disable tsdoc/syntax */
 import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'

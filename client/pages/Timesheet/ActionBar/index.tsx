@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prefer-query-selector */
-/* eslint-disable tsdoc/syntax */
 import { CommandBar } from '@fluentui/react'
 import React from 'react'
 import { useActionBar } from './useActionBar'

@@ -1,10 +1,9 @@
-/* eslint-disable tsdoc/syntax */
 /**
  * The App component
  *
  * @module App
  */
-import React from 'react'
+import React, { FC } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ErrorFallback, Navigation } from '../parts'
@@ -23,7 +22,7 @@ import { useAppClassName } from './useAppClassName'
  *
  * @category App
  */
-export const AppRouter: React.FC = () => {
+export const AppRouter: FC = () => {
   const className = useAppClassName(styles)
   return (
     <Router>

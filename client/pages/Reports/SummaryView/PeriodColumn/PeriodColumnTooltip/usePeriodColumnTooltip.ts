@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import $date from 'DateUtils'
 import _ from 'underscore'
 import s from 'underscore.string'

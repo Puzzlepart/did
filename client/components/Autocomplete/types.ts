@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ISearchBoxProps } from '@fluentui/react'
 import { ISuggestionItem } from './SuggestionItem/types'
 

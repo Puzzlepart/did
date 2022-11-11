@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ApolloQueryResult, useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'

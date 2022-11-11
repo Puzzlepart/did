@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { List, TabComponent } from 'components'
 import React from 'react'
 import styles from './SummaryView.module.scss'

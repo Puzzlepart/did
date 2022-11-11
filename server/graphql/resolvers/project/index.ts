@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'

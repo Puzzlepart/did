@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable tsdoc/syntax */
 import { ISearchBox } from '@fluentui/react'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { INIT } from './actions'

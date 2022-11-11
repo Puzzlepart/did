@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useAppContext } from 'AppContext'
 import { useBrowserStorage } from '../../hooks'

@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { IFilter, IFilterItem } from '../Filters'
 
 export interface IFilterItemProps {

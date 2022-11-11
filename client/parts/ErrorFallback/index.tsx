@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { ActionButton } from '@fluentui/react'
 import $date from 'DateUtils'
 import React from 'react'

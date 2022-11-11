@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { Label, TooltipHost } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React, { useRef } from 'react'
