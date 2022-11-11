@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { List, TabComponent, Toast } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -5,6 +6,9 @@ import { RolePanel } from './RolePanel'
 import styles from './Roles.module.scss'
 import { useRoles } from './useRoles'
 
+/**
+ * @ignore
+ */
 export const Roles: TabComponent = () => {
   const { t } = useTranslation()
   const { query, columns, panel, setPanel, toast } = useRoles()

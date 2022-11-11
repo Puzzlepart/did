@@ -16,6 +16,8 @@ import { useUsers } from './useUsers'
  * * See active users
  * * Add new users
  * * Edit users
+ * 
+ * @ignore
  */
 export const Users: TabComponent = () => {
   const {

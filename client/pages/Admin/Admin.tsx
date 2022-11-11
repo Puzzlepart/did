@@ -10,7 +10,7 @@ import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { MissingSubmissions } from './MissingSubmissions'
 import { Roles } from './Roles'
-import { SubscriptionSettings } from './Subscription'
+import { SubscriptionSettings } from './SubscriptionSettings'
 import { Users } from './Users'
 
 /**
@@ -64,5 +64,5 @@ export const Admin = () => {
 export * from './ApiTokens'
 export * from './Labels'
 export * from './Roles'
-export * from './Subscription'
+export * from './SubscriptionSettings'
 export * from './Users'
