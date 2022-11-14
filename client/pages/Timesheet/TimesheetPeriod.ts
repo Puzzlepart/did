@@ -23,18 +23,38 @@ import { BrowserStorage } from 'utils'
  */
 export class TimesheetPeriod {
   public id: string
-  private readonly startDate: string
-  private readonly endDate: string
+  public readonly startDate: string
+  public readonly endDate: string
   public readonly week: number
   public readonly isConfirmed?: boolean
   public readonly isForecasted: boolean
   public readonly isForecast: boolean
   public readonly forecastedHours: number
   public readonly month: string
+
+  /**
+   * Events for the period
+   */
   private events: EventObject[] = []
+
+  /**
+   * UI ignored events for the period
+   */
   private _uiIgnoredEvents: string[] = []
+
+  /**
+   * UI matched events for the period
+   */
   private _uiMatchedEvents: Record<string, Project> = {}
+
+  /**
+   * Matched events for the period persisted in browser storage
+   */
   private _uiMatchedEventsStorage: BrowserStorage<Record<string, Project>>
+
+  /**
+   * Ignored events for the period persisted in browser storage
+   */
   private _uiIgnoredEventsStorage: BrowserStorage<string[]>
 
   /**

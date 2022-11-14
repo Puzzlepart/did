@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.10.9",
+  "version": "0.11.0",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
@@ -274,7 +274,7 @@
       "default-case": 0,
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "tsdoc/syntax": "none",
+      "tsdoc/syntax": "off",
       "unicorn/filename-case": 0,
       "unicorn/no-array-reduce": 0,
       "unicorn/no-null": 0,

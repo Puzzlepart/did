@@ -33,6 +33,7 @@ export function mapMatchedEvents(
    * Get events with optional additional data
    *
    * @param includeAdditionalData - Include additional data from the period
+   *
    * @returns Entries with or without additional data from the period
    */
   const getEvents = (includeAdditionalData = false) => {
@@ -50,5 +51,5 @@ export function mapMatchedEvents(
   return {
     getEvents,
     hours
-  }
+  } as const
 }

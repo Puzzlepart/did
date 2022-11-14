@@ -79,7 +79,7 @@ export class TimesheetService {
    * If no confirmed period is found, events are fetched from
    * Microsoft Graph using `MSGraphService`
    *
-   * @param parameters - Timesheet params
+   * @param parameters - Timesheet parameters
    */
   public async getTimesheet(
     parameters: IGetTimesheetParameters
@@ -89,7 +89,8 @@ export class TimesheetService {
         parameters.startDate,
         parameters.endDate,
         parameters.locale,
-        this.context.userId
+        this.context.userId,
+        parameters.includeSplitWeeks
       )
       const data = await this._projectSvc.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
@@ -277,37 +278,48 @@ export class TimesheetService {
   }
 
   /**
-   * Get periods between startDate and endDate
+   * Get periods between `startDate` and `endDate`
    *
    * @param startDate - Start date
    * @param endDate - End date
    * @param locale - Locale
    * @param userId - User ID
+   * @param includeSplitWeeks - Include split weeks (defaults to `true`)
    */
   public getPeriods(
     startDate: string,
     endDate: string,
     locale: string,
-    userId: string
+    userId: string,
+    includeSplitWeeks = true
   ): TimesheetPeriodObject[] {
-    const isSplit = !DateUtils.isSameMonth(startDate, endDate)
-    const periods: TimesheetPeriodObject[] = [
-      new TimesheetPeriodObject(
-        startDate,
-        isSplit
-          ? new DateObject(startDate).endOfMonth.format('YYYY-MM-DD')
-          : endDate,
-        locale
-      )
-    ]
-    if (isSplit) {
+    const range = {
+      startDate: new DateObject(startDate),
+      endDate: new DateObject(startDate).endOfWeek
+    }
+    const periods: TimesheetPeriodObject[] = []
+    while (range.startDate.isBeforeOrSame(new DateObject(endDate))) {
+      const isSplit = !range.startDate.isSameMonth(range.endDate)
       periods.push(
         new TimesheetPeriodObject(
-          new DateObject(endDate).startOfMonth.format('YYYY-MM-DD'),
-          endDate,
+          range.startDate.format('YYYY-MM-DD'),
+          isSplit
+            ? range.startDate.endOfMonth.format('YYYY-MM-DD')
+            : range.endDate.format('YYYY-MM-DD'),
           locale
         )
       )
+      if (isSplit && includeSplitWeeks) {
+        periods.push(
+          new TimesheetPeriodObject(
+            range.endDate.startOfMonth.format('YYYY-MM-DD'),
+            range.endDate.format('YYYY-MM-DD'),
+            locale
+          )
+        )
+      }
+      range.startDate = range.startDate.add('7d').startOfWeek
+      range.endDate = range.startDate.endOfWeek
     }
 
     return periods.map((period) => {

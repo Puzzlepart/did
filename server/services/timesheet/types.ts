@@ -14,6 +14,7 @@ export interface IGetTimesheetParameters {
   locale?: string
   dateFormat?: string
   configuration?: Record<string, any>
+  includeSplitWeeks?: boolean
 }
 
 export interface IProviderEventsParameters extends IGetTimesheetParameters {

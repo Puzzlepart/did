@@ -8,10 +8,7 @@ import { ITagPreviewProps } from './types'
 /**
  * @category Projects
  */
-export const TagPreview: FC<ITagPreviewProps> = ({
-  projectId,
-  hidden
-}) => {
+export const TagPreview: FC<ITagPreviewProps> = ({ projectId, hidden }) => {
   const { t } = useTranslation()
   return (
     <div hidden={hidden}>

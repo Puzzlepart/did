@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/prefer-query-selector */
 import { CommandBar } from '@fluentui/react'
 import React from 'react'
+import { DateRangePicker } from './DateRangePicker'
 import { useActionBar } from './useActionBar'
-import { WeekPicker } from './WeekPicker'
 
 /**
  * @category Timesheet
@@ -14,7 +14,7 @@ export const ActionBar = () => {
   return (
     <div>
       <CommandBar {...commandBarProps} />
-      <WeekPicker
+      <DateRangePicker
         target={target}
         hidden={!showWeekPicker}
         onDismiss={toggleWeekPicker}

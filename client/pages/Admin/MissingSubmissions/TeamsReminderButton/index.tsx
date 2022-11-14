@@ -6,9 +6,7 @@ import { pick } from 'underscore'
 import { startTeamsConversation } from './startTeamsConversation'
 import { ITeamsReminderButtonProps } from './types'
 
-export const TeamsReminderButton: FC<ITeamsReminderButtonProps> = (
-  props
-) => {
+export const TeamsReminderButton: FC<ITeamsReminderButtonProps> = (props) => {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   if (!subscription.settings?.teams?.enabled) return null

@@ -1,11 +1,9 @@
 import { Label as LabelElement } from '@fluentui/react'
 import React, { FC } from 'react'
-import { IInformationPropertyProps } from './types'
 import styles from './Information.module.scss'
+import { IInformationPropertyProps } from './types'
 
-export const InformationProperty: FC<IInformationPropertyProps> = (
-  props
-) => {
+export const InformationProperty: FC<IInformationPropertyProps> = (props) => {
   return (
     <div
       className={styles.property}

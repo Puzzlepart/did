@@ -280,6 +280,15 @@ export class DateUtils {
   }
 
   /**
+   * Is current month
+   *
+   * @param date - Date
+   */
+  public isCurrentMonth(date: DateObject): boolean {
+    return date.$.month() === $dayjs().month()
+  }
+
+  /**
    * Is current year
    *
    * @param date - Date

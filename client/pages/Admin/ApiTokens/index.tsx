@@ -15,7 +15,7 @@ import { useApiTokens } from './useApiTokens'
  * * See created API tokens
  * * Create new API tokens
  * * Delete existing API tokens
- * 
+ *
  * @ignore
  */
 export const ApiTokens: TabComponent = () => {

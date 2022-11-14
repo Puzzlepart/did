@@ -4,9 +4,7 @@ import React, { FC } from 'react'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'
 
-export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (
-  props
-) => {
+export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (props) => {
   return (
     <div className={styles.root} style={{ opacity: props.checked ? 1 : 0.6 }}>
       <Checkbox

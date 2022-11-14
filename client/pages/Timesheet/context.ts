@@ -32,7 +32,7 @@ export const TimesheetContext = createContext<ITimesheetContext>(null)
 /**
  * Returns the current context value for Timesheet using
  * `useContext` from `react`
- * 
+ *
  * @category Timesheet
  *
  * @returns `TimesheetContext`

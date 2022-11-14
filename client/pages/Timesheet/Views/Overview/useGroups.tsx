@@ -5,7 +5,7 @@ import packageFile from 'package'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import { useTimesheetContext } from '../context'
+import { useTimesheetContext } from '../../context'
 
 /**
  * Use groups

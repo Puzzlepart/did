@@ -2,7 +2,7 @@ import { MessageBarButton } from '@fluentui/react'
 import { IGNORE_EVENT } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useTimesheetContext } from '../../../types'
+import { useTimesheetContext } from '../../../../types'
 import { IIgnoreEventButtonProps } from './types'
 
 export const IgnoreEventButton = ({

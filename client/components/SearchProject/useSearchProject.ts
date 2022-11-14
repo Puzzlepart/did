@@ -20,7 +20,7 @@ export function useSearchProject() {
         key: project.tag,
         text: project.name,
         secondaryText: project.tag,
-        searchValue: [project.tag, project.name, project.customer.name].join(
+        searchValue: [project.tag, project.name, project?.customer?.name].join(
           ' '
         ),
         data: project,

@@ -17,4 +17,7 @@ export class TimesheetOptions {
 
   @Field({ nullable: true })
   forecast?: boolean
+
+  @Field({ nullable: true })
+  includeSplitWeeks?: boolean
 }

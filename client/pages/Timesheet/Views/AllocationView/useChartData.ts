@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { DateRangeType } from '@fluentui/react'
 import get from 'get-value'
 import { useMemo } from 'react'
 import { TFunction, useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
-import { EventObject } from '../../../../server/graphql/resolvers/types'
-import { useTimesheetContext } from '../context'
+import { EventObject } from '../../../../../server/graphql/resolvers/types'
+import { useTimesheetContext } from '../../context'
 import { IChartConfig } from './types'
 
 /**
@@ -62,20 +64,19 @@ export function useChartData<T = any>(
 ): ChartData<T> {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
+  let events = state.selectedPeriod?.getEvents(true)
+  if (state.dateRangeType === DateRangeType.Month) {
+    events = state.periods.flatMap((period) => period.getEvents(true))
+  }
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {
-        const d = getDataForChart(
-          state.selectedPeriod?.getEvents(true),
-          chart,
-          container?.clientWidth,
-          t
-        )
+        const d = getDataForChart(events, chart, container?.clientWidth, t)
         return {
           ..._data,
           [chart.key]: [`${chart.key}_${d.length}`, d]
         }
       }, {}),
-    [charts, container?.clientWidth, state.selectedPeriod, t]
+    [charts, container?.clientWidth, state.selectedPeriod, events]
   )
 }

@@ -1,20 +1,47 @@
+import { DateRangeType } from '@fluentui/react'
 import _ from 'underscore'
-import { ITimesheetParameters, ITimesheetState, TimesheetScope } from '../types'
+import { ITimesheetState, TimesheetDateRange, TimesheetView } from '../types'
+import { ITimesheetReducerParameters } from './types'
+
+/**
+ * Convert string value to `DateRangeType`
+ *
+ * @param dateRangeTypeString - Date range type in string format
+ */
+function convertStringToDateRangeType(dateRangeTypeString: string) {
+  switch (dateRangeTypeString) {
+    case 'week':
+      return DateRangeType.Week
+    case 'month':
+      return DateRangeType.Month
+    default:
+      return DateRangeType.Week
+  }
+}
 
 /**
  * Initializes state based on url parameters
  *
- * @param url - Url parameters
+ * @param parameters - Timesheet reducer parameters
+ *
  * @returns Initial state
  */
-
-export function initState(url: ITimesheetParameters): ITimesheetState {
+export function initState(
+  parameters: ITimesheetReducerParameters
+): ITimesheetState {
+  const periods = []
+  const dateRangeType = convertStringToDateRangeType(parameters.url.dateRange)
+  const scope = _.isEmpty(Object.keys(parameters.url))
+    ? new TimesheetDateRange(undefined, dateRangeType)
+    : new TimesheetDateRange(undefined, dateRangeType).fromParams(
+        parameters.url
+      )
   return {
-    periods: [],
-    scope: _.isEmpty(Object.keys(url))
-      ? new TimesheetScope()
-      : new TimesheetScope().fromParams(url),
-    selectedView: url.view || 'overview',
+    periods,
+    dateRange: scope,
+    dateRangeType,
+    selectedView:
+      (parameters.url.view as TimesheetView) ?? TimesheetView.Overview,
     navHistory: []
   }
 }

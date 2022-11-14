@@ -6,9 +6,7 @@ import styles from './ColumnHeader.module.scss'
 /**
  * @category List
  */
-export const ColumnHeader: FC<IDetailsColumnRenderTooltipProps> = (
-  props
-) => {
+export const ColumnHeader: FC<IDetailsColumnRenderTooltipProps> = (props) => {
   return (
     <div className={styles.root}>
       <div className={`${styles.container} ${props.hostClassName}`}>

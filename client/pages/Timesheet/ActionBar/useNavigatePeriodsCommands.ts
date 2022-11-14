@@ -7,7 +7,7 @@ import { CHANGE_PERIOD } from '../reducer/actions'
 /**
  * Period commands hook
  */
-export function usePeriodCommands() {
+export function useNavigatePeriodsCommands() {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   if (state.periods.length === 1) return []
@@ -19,7 +19,7 @@ export function usePeriodCommands() {
         style: isMobile ? {} : { padding: '12px 18px 12px 18px' },
         text: period.getName(t, true),
         canCheck: true,
-        checked: period.id === state.selectedPeriod.id,
+        checked: period.id === state.selectedPeriod?.id,
         onClick: () => dispatch(CHANGE_PERIOD({ id: period.id }))
       } as IContextualMenuItem)
   )

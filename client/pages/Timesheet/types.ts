@@ -1,11 +1,16 @@
+import { DateRangeType } from '@fluentui/react'
 import { IProgressProps } from 'components/Progress/types'
+import { TimesheetDateRange } from './TimesheetDateRange'
 import { TimesheetPeriod } from './TimesheetPeriod'
-import { TimesheetScope } from './TimesheetScope'
 
 /**
  * @category Timesheet
  */
-export type TimesheetView = 'overview' | 'summary' | 'allocation'
+export enum TimesheetView {
+  Overview = 'overview',
+  Summary = 'summary',
+  Allocation = 'allocation'
+}
 
 /**
  * @category Timesheet
@@ -27,9 +32,14 @@ export interface ITimesheetState {
   selectedView: TimesheetView
 
   /**
-   * The current scope
+   * The current date range
    */
-  scope: TimesheetScope
+  dateRange: TimesheetDateRange
+
+  /**
+   * The current date range type
+   */
+  dateRangeType: DateRangeType
 
   /**
    * Loading props
@@ -56,12 +66,13 @@ export interface ITimesheetState {
  * @category Timesheet
  */
 export interface ITimesheetParameters {
-  view: TimesheetView
+  dateRange: string
+  view: string
   week: string
   month: string
   year: string
 }
 
 export * from './context'
+export * from './TimesheetDateRange'
 export * from './TimesheetPeriod'
-export * from './TimesheetScope'

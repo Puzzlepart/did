@@ -5,6 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "lib": ["es2019", "dom"],
     "jsx": "react",
     "declaration": false,
     "sourceMap": false,

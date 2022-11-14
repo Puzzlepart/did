@@ -13,6 +13,6 @@ import { getHotkeys } from './config'
  */
 export function useHotkeys(context: ITimesheetContext) {
   const { t } = useTranslation()
-  const hotkeysProps = useMemo(() => getHotkeys(context.dispatch, t), [])
+  const hotkeysProps = useMemo(() => getHotkeys(context, t), [])
   return { hotkeysProps }
 }

@@ -11,7 +11,7 @@
     "allocationHeaderText": "Allocation",
     "confirmHoursText": "Confirm hours",
     "unconfirmHoursText": "Unconfirm hours",
-    "goToCurrentWeek": "Go to current week",
+    "goToCurrentWeek": "Go to current week or month",
     "goToPrevWeek": "Go to previous period",
     "goToNextWeek": "Go to next period",
     "weekHoursSummaryText": "**{{hours}}** this week. {{splitWeekInfoText}}",
@@ -52,11 +52,16 @@
       "projectChartTitle": "Projects",
       "noDataText": "No data to show for the selected period.",
       "customerChartDescription": "Shows allocation per customer for the period",
-      "projectChartDescription": "Shows allocation per project for the period"
+      "projectChartDescription": "Shows allocation per project for the period",
+      "loadingLabel": "Loading data and generating charts..."
     },
     "matchEventPanelSearchPlaceholder": "Search projects...",
     "eventDurationModifiedMessage": "The event's duration has been automatically changed from {{originalDuration}} to {{modifiedDuration}}. If you do not want this to happen in the future, the function can be turned off in the user settings.",
-    "adjustedEventDurationsInfoText": "Rounding to the nearest 30 min is switched on. In total, recorded hours have been adjusted by {{adjustedMinutes}} minutes."
+    "adjustedEventDurationsInfoText": "Rounding to the nearest 30 min is switched on. In total, recorded hours have been adjusted by {{adjustedMinutes}} minutes.",
+    "dateRangeWeek": "Week",
+    "dateRangeMonth": "Month",
+    "monthForecastedText": "The month is forecasted with {{hours}}.",
+    "monthConfirmedText": "A total of **{{hours}}** confirmed this month. You have confirmed {{confirmedPeriodsCount}} out of {{periodsCount}} periods. You need to be in the **Overview** view to do adjustments."
   },
   "projects": {
     "filterLabels": "Filter labels...",

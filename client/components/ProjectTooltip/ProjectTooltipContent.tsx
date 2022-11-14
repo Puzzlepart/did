@@ -20,9 +20,11 @@ export const ProjectTooltipContent: FC<IProjectTooltipProps> = ({
         </div>
         <div className={styles.title}>
           <span>{project.name}</span>
-          <div className={styles.subTitle}>
-            <span>for {project.customer.name}</span>
-          </div>
+          {project.customer && (
+            <div className={styles.subTitle}>
+              <span>for {project.customer.name}</span>
+            </div>
+          )}
         </div>
       </div>
       <SubText text={project.description} />
@@ -33,18 +35,20 @@ export const ProjectTooltipContent: FC<IProjectTooltipProps> = ({
           ))}
         </div>
       )}
-      <div className={styles.footer}>
-        <div className={styles.link}>
-          <ProjectLink
-            project={project}
-            text={t('projects.navigateText')}
-            icon='NavigateForward'
-          />
+      {project.tag && (
+        <div className={styles.footer}>
+          <div className={styles.link}>
+            <ProjectLink
+              project={project}
+              text={t('projects.navigateText')}
+              icon='NavigateForward'
+            />
+          </div>
+          <div className={styles.tag}>
+            <span>{project.tag}</span>
+          </div>
         </div>
-        <div className={styles.tag}>
-          <span>{project.tag}</span>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

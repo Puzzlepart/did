@@ -1,12 +1,12 @@
 /* eslint-disable unicorn/prefer-query-selector */
-import { ICommandBarProps } from '@fluentui/react'
+import { DateRangeType, ICommandBarProps } from '@fluentui/react'
 import { useToggle } from 'hooks'
-import { arrayExtend } from 'utils/arrayExtend'
+import { TimesheetView } from '..'
 import { useTimesheetContext } from '../context'
-import { usePeriodCommands } from './selectPeriodCommands'
+import { useDateRangePickerCommand } from './DateRangePicker/useDateRangePickerCommand'
 import { useNavigateCommands } from './useNavigateCommands'
+import { useNavigatePeriodsCommands } from './useNavigatePeriodsCommands'
 import { useSubmitCommands } from './useSubmitCommands'
-import { useWeekPickerCommand } from './useWeekPickerCommand'
 
 /**
  * @category Timesheet
@@ -15,18 +15,27 @@ export function useActionBar() {
   const { state } = useTimesheetContext()
   const navigateCommands = useNavigateCommands()
   const submitCommands = useSubmitCommands()
-  const periodCommands = usePeriodCommands()
+  const navigatePeriodsCommands = useNavigatePeriodsCommands()
   const [showWeekPicker, toggleWeekPicker] = useToggle(false)
-  const { weekPickerCommand, target } = useWeekPickerCommand(toggleWeekPicker)
+  const { dateRangePickerCommands, target } =
+    useDateRangePickerCommand(toggleWeekPicker)
 
   const commandBarProps: ICommandBarProps = {
     styles: { root: { padding: 0 } },
-    items: arrayExtend(
-      [...navigateCommands, weekPickerCommand, ...periodCommands],
-      { disabled: true },
-      !!state.error
-    ),
-    farItems: arrayExtend([submitCommands], { disabled: true }, !!state.error)
+    items: [...navigateCommands, ...dateRangePickerCommands],
+    farItems: []
+  }
+
+  if (
+    state.dateRangeType === DateRangeType.Month &&
+    state.selectedView === TimesheetView.Overview
+  ) {
+    commandBarProps.farItems.push(submitCommands)
+  }
+
+  if (state.dateRangeType === DateRangeType.Week) {
+    commandBarProps.items.push(...navigatePeriodsCommands)
+    commandBarProps.farItems.push(submitCommands)
   }
 
   return {

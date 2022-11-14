@@ -10,5 +10,5 @@ export interface ITimesheetReducerParameters {
   /**
    * Translate function
    */
-  t: TFunction
+  t?: TFunction
 }

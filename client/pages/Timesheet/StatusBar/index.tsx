@@ -12,8 +12,8 @@ import { useMessages } from './useMessages'
  * @category Timesheet
  */
 export const StatusBar: FC = () => {
-  if (isMobile) styles.root += ` ${styles.mobile}`
   const { state } = useTimesheetContext()
+  if (isMobile) styles.root += ` ${styles.mobile}`
 
   const defaultMessageProps: IUserMessageProps = {
     className: styles.message,

@@ -8,7 +8,6 @@ import { useSummaryView } from './useSummaryView'
  */
 export const SummaryView: TabComponent = () => {
   const props = useSummaryView()
-
   return (
     <div className={styles.root}>
       <List {...props} />

@@ -17,7 +17,7 @@ export const TimesheetPage: PageComponent = () => {
   const match = useRouteMatch()
   return (
     <Switch>
-      <Route path={`${match.path}/:view/:week/:month/:year`}>
+      <Route path={`${match.path}/:dateRange/:view/:week/:month/:year`}>
         <Timesheet />
       </Route>
       <Route path={match.path}>
@@ -34,6 +34,6 @@ Object.assign(TimesheetPage, {
 
 export * from './hooks'
 export * from './Timesheet'
+export * from './TimesheetDateRange'
 export * from './TimesheetPeriod'
-export * from './TimesheetScope'
 export * from './types'

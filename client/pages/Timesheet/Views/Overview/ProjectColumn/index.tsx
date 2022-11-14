@@ -11,7 +11,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { useTimesheetContext } from '../../context'
+import { useTimesheetContext } from '../../../context'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { IgnoreEventButton } from './IgnoreEventButton'
 import { MatchEventPanel } from './MatchEventPanel'
@@ -78,26 +78,26 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   }
 
   return (
-    <ProjectTooltip project={event.project}>
-      <div className={className}>
-        <div className={styles.iconContainer}>
-          <Icon iconName={event.project.icon} />
-        </div>
-        <div className={styles.content}>
+    <div className={className}>
+      <div className={styles.iconContainer}>
+        <Icon iconName={event.project.icon} />
+      </div>
+      <div className={styles.content}>
+        <ProjectTooltip project={event.project}>
           <div className={styles.link}>
             <ProjectLink project={event.project} />
           </div>
-          {!_.isEmpty(event.project.labels) && (
-            <Icon iconName='Tag' className={styles.labelIcon} />
-          )}
-          {event.manualMatch && !state.selectedPeriod.isConfirmed && (
-            <ClearManualMatchButton
-              onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
-              className={styles.clearButton}
-            />
-          )}
-        </div>
+        </ProjectTooltip>
+        {!_.isEmpty(event.project.labels) && (
+          <Icon iconName='Tag' className={styles.labelIcon} />
+        )}
+        {event.manualMatch && !state.selectedPeriod.isConfirmed && (
+          <ClearManualMatchButton
+            onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
+            className={styles.clearButton}
+          />
+        )}
       </div>
-    </ProjectTooltip>
+    </div>
   )
 }

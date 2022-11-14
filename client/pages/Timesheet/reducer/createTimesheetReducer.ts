@@ -1,8 +1,10 @@
+import { DateRangeType } from '@fluentui/react'
 import { createReducer, current } from '@reduxjs/toolkit'
 import { TimesheetPeriodObject } from 'types'
 import _ from 'underscore'
-import { ITimesheetState, TimesheetPeriod } from '../types'
+import { ITimesheetState, TimesheetDateRange, TimesheetPeriod } from '../types'
 import {
+  CHANGE_DATE_RANGE_TYPE,
   CHANGE_PERIOD,
   CHANGE_VIEW,
   CLEAR_IGNORES,
@@ -12,7 +14,7 @@ import {
   MANUAL_MATCH,
   NEXT_PERIOD,
   PREVIOUS_PERIOD,
-  SET_SCOPE,
+  SET_DATE_RANGE,
   SUBMITTING_PERIOD,
   TOGGLE_SHORTCUTS,
   UNSUBMITTING_PERIOD
@@ -21,25 +23,31 @@ import { initState } from './initState'
 import { ITimesheetReducerParameters } from './types'
 
 /**
- * Creating reducer for Timesheet using reduxjs/toolkit
+ * Creating reducer for `<Timesheet />` using `reduxjs/toolkit`
+ *
+ * @param parameters - Timesheet reducer parameters
  */
-
-export function createTimesheetReducer({
-  url,
-  t
-}: ITimesheetReducerParameters) {
-  return createReducer<ITimesheetState>(initState(url), (builder) =>
+export function createTimesheetReducer(
+  parameters: ITimesheetReducerParameters
+) {
+  return createReducer<ITimesheetState>(initState(parameters), (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.query.loading
           ? {
-              label: t('timesheet.loadingTimesheetLabel'),
-              description: t('timesheet.loadingTimesheetDescription'),
+              label: parameters.t('timesheet.loadingTimesheetLabel'),
+              description: parameters.t(
+                'timesheet.loadingTimesheetDescription'
+              ),
               iconProps: { iconName: 'RecurringEvent' }
             }
           : null
         if (payload.query.data) {
-          const urlPeriodId = [url.week, url.month, url.year].join('_')
+          const urlPeriodId = [
+            parameters.url.week,
+            parameters.url.month,
+            parameters.url.year
+          ].join('_')
           const selectedPeriodId = state.selectedPeriod?.id || urlPeriodId
           state.periods = payload.query.data.periods.map(
             (period: TimesheetPeriodObject) =>
@@ -54,33 +62,41 @@ export function createTimesheetReducer({
         }
         state.error = payload.query.error
       })
-      .addCase(SET_SCOPE, (state, { payload }) => {
-        state.scope =
-          typeof payload === 'string' ? state.scope.set(payload) : payload
+      .addCase(SET_DATE_RANGE, (state, { payload }) => {
+        state.dateRange =
+          typeof payload === 'string' ? state.dateRange.set(payload) : payload
       })
       .addCase(SUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-              label: t('timesheet.forecastingPeriodLabel'),
-              description: t('timesheet.forecastingPeriodDescription'),
+              label: parameters.t('timesheet.forecastingPeriodLabel'),
+              description: parameters.t(
+                'timesheet.forecastingPeriodDescription'
+              ),
               iconProps: { iconName: 'PlanView' }
             }
           : {
-              label: t('timesheet.confirmingPeriodLabel'),
-              description: t('timesheet.confirmingPeriodDescription'),
+              label: parameters.t('timesheet.confirmingPeriodLabel'),
+              description: parameters.t(
+                'timesheet.confirmingPeriodDescription'
+              ),
               iconProps: { iconName: 'CheckMark' }
             }
       })
       .addCase(UNSUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-              label: t('timesheet.unforecastingPeriodLabel'),
-              description: t('timesheet.unforecastingPeriodDescription'),
+              label: parameters.t('timesheet.unforecastingPeriodLabel'),
+              description: parameters.t(
+                'timesheet.unforecastingPeriodDescription'
+              ),
               iconProps: { iconName: 'ClearFormattingEraser' }
             }
           : {
-              label: t('timesheet.unconfirmingPeriodLabel'),
-              description: t('timesheet.unconfirmingPeriodDescription'),
+              label: parameters.t('timesheet.unconfirmingPeriodLabel'),
+              description: parameters.t(
+                'timesheet.unconfirmingPeriodDescription'
+              ),
               iconProps: { iconName: 'SkypeCircleArrow' }
             }
       })
@@ -92,32 +108,62 @@ export function createTimesheetReducer({
       })
       .addCase(PREVIOUS_PERIOD, (state) => {
         state.navHistory.push(PREVIOUS_PERIOD.type)
-        const { periods, selectedPeriod } = current(state)
+        const { periods, selectedPeriod, dateRangeType } = current(state)
         const index = periods.indexOf(selectedPeriod)
-        if (state.periods.length === 1 || index === 0) {
-          state.scope = state.scope.set('-1w')
-        } else {
-          state.selectedPeriod = _.find(
-            periods,
-            (p: TimesheetPeriod) => p.id !== selectedPeriod.id
-          )
+        switch (dateRangeType) {
+          case DateRangeType.Week:
+            {
+              if (state.periods.length === 1 || index === 0) {
+                state.dateRange = state.dateRange.set('-1w')
+              } else {
+                state.selectedPeriod = _.find(
+                  periods,
+                  (p: TimesheetPeriod) => p.id !== selectedPeriod.id
+                )
+              }
+            }
+            break
+          case DateRangeType.Month:
+            {
+              state.dateRange = state.dateRange.set('-1month')
+            }
+            break
         }
       })
       .addCase(NEXT_PERIOD, (state) => {
         state.navHistory.push(NEXT_PERIOD.type)
-        const { periods, selectedPeriod } = current(state)
+        const { periods, selectedPeriod, dateRangeType } = current(state)
         const index = periods.indexOf(selectedPeriod)
-        if (state.periods.length === 1 || index === 1) {
-          state.scope = state.scope.set('1w')
-        } else {
-          state.selectedPeriod = _.find(
-            periods,
-            (p: TimesheetPeriod) => p.id !== selectedPeriod.id
-          )
+        switch (dateRangeType) {
+          case DateRangeType.Week:
+            {
+              if (state.periods.length === 1 || index === 1) {
+                state.dateRange = state.dateRange.set('1w')
+              } else {
+                state.selectedPeriod = _.find(
+                  periods,
+                  (p: TimesheetPeriod) => p.id !== selectedPeriod.id
+                )
+              }
+            }
+            break
+          case DateRangeType.Month:
+            {
+              state.dateRange = state.dateRange.set('1month')
+            }
+            break
         }
       })
       .addCase(CHANGE_VIEW, (state, { payload }) => {
         state.selectedView = payload.view
+      })
+      .addCase(CHANGE_DATE_RANGE_TYPE, (state, { payload }) => {
+        state.dateRangeType = payload.dateRangeType
+        state.dateRange = new TimesheetDateRange(
+          state.selectedPeriod.endDate,
+          payload.dateRangeType
+        )
+        state.periods = []
       })
       .addCase(MANUAL_MATCH, (state, { payload }) => {
         const { eventId, project } = payload

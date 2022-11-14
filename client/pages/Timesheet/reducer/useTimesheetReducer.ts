@@ -9,10 +9,9 @@ import { initState } from './initState'
 /**
  * Use Timesheet reducer
  */
-
 export function useTimesheetReducer() {
   const { t } = useTranslation()
   const url = useParams<ITimesheetParameters>()
   const reducer = useMemo(() => createTimesheetReducer({ t, url }), [])
-  return useReducer(reducer, initState(url))
+  return useReducer(reducer, initState({ url }))
 }

@@ -94,6 +94,13 @@ export class DateObject {
   }
 
   /**
+   * Is current month
+   */
+  public get isCurrentMonth() {
+    return DateUtils.isCurrentMonth(this)
+  }
+
+  /**
    * Get the formatted date according to the string of tokens passed in.
    *
    * To escape characters, wrap them in square brackets (e.g. [MM]).

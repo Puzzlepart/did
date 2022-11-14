@@ -1,5 +1,5 @@
-import { ILabelProps } from '@fluentui/react';
+import { ILabelProps } from '@fluentui/react'
 
 export interface IInformationPropertyProps extends ILabelProps {
-  value?: string;
+  value?: string
 }

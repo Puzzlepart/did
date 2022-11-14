@@ -41,7 +41,7 @@ export function useTabContainer(props: ITabContainerProps) {
 
   return {
     styles,
-    selectedKey,
+    selectedKey: props.selectedKey ?? selectedKey,
     onLinkClick
   }
 }

@@ -1,7 +1,6 @@
 import {
   Calendar,
   Callout,
-  DateRangeType,
   DayOfWeek,
   DirectionalHint,
   FirstWeekOfYear,
@@ -13,13 +12,13 @@ import {
 import React, { FC } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { SET_SCOPE } from '../../reducer/actions'
-import { TimesheetScope, useTimesheetContext } from '../../types'
+import { SET_DATE_RANGE } from '../../reducer/actions'
+import { TimesheetDateRange, useTimesheetContext } from '../../types'
 
 /**
  * @category Timesheet
  */
-export const WeekPicker: FC<ICalloutProps> = (props) => {
+export const DateRangePicker: FC<ICalloutProps> = (props) => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const { palette } = useTheme()
@@ -35,7 +34,9 @@ export const WeekPicker: FC<ICalloutProps> = (props) => {
       <FocusTrapZone isClickableOutsideFocusTrap={true}>
         <Calendar
           onSelectDate={(date) => {
-            dispatch(SET_SCOPE(new TimesheetScope(date)))
+            dispatch(
+              SET_DATE_RANGE(new TimesheetDateRange(date, state.dateRangeType))
+            )
             props.onDismiss()
           }}
           firstDayOfWeek={DayOfWeek.Monday}
@@ -48,8 +49,8 @@ export const WeekPicker: FC<ICalloutProps> = (props) => {
           showWeekNumbers={true}
           isMonthPickerVisible={isBrowser}
           firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
-          dateRangeType={DateRangeType.Week}
-          value={state.scope.startDate.jsDate}
+          dateRangeType={state.dateRangeType}
+          value={state.dateRange.startDate.jsDate}
           calendarMonthProps={{
             styles: {
               currentItemButton: {
