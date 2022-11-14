@@ -35,9 +35,7 @@ export function useMessages(): IUserMessageProps[] {
       text: t('timesheet.monthConfirmedText', {
         hours: $date.getDurationString(confirmedDuration, t),
         periodsCount: state.periods.length,
-        confirmedPeriodsCount:state.periods.filter(
-          (p) => p.isConfirmed
-        ).length
+        confirmedPeriodsCount: state.periods.filter((p) => p.isConfirmed).length
       }),
       type: 'info'
     })
