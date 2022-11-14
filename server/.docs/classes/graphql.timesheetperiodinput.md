@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
 
 # Class: TimesheetPeriodInput
 
@@ -32,7 +32,7 @@
 
 • **endDate**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L20)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L19)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **forecastedHours**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L26)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L25)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L14)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L13)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **matchedEvents**: [*EventInput*](graphql.eventinput.md)[]
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L23)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L22)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 • **startDate**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L17)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L16)

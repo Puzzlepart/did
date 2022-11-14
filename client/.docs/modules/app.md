@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / App
+[did-client - v0.11.0](../README.md) / App
 
 # Module: App
 
@@ -30,11 +30,11 @@ The App component
 
 ### App
 
-• `Const` **App**: *React.FC*<IAppProps\>
+• `Const` **App**: *FC*<IAppProps\>
 
 App
 
-Defined in: [client/app/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L19)
+Defined in: [client/app/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L18)
 
 ___
 

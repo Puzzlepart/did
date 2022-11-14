@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetQuery
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetQuery
 
 # Class: TimesheetQuery
 
@@ -29,7 +29,7 @@
 
 • **endDate**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetQuery.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L14)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetQuery.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L13)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • **startDate**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/TimesheetQuery.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L11)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetQuery.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L10)

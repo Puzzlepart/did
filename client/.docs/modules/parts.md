@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / Parts
+[did-client - v0.11.0](../README.md) / Parts
 
 # Module: Parts
 
@@ -49,7 +49,7 @@ App components
 
 ### FeedbackPanel
 
-• `Const` **FeedbackPanel**: *React.FC*<IPanelProps\>
+• `Const` **FeedbackPanel**: *FC*<IPanelProps\>
 
 Defined in: [client/parts/UserFeedback/FeedbackPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L18)
 
@@ -57,7 +57,7 @@ ___
 
 ### MobileBreadcrumb
 
-• `Const` **MobileBreadcrumb**: *React.FC*<[*IMobileBreadcrumbProps*](../interfaces/parts.imobilebreadcrumbprops.md)\>
+• `Const` **MobileBreadcrumb**: *FC*<[*IMobileBreadcrumbProps*](../interfaces/parts.imobilebreadcrumbprops.md)\>
 
 Defined in: [client/parts/MobileBreadcrumb/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/index.tsx#L14)
 
@@ -65,7 +65,7 @@ ___
 
 ### Navigation
 
-• `Const` **Navigation**: React.FC
+• `Const` **Navigation**: FC
 
 Defined in: [client/parts/Navigation/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L20)
 
@@ -73,7 +73,7 @@ ___
 
 ### NotificationsPanel
 
-• `Const` **NotificationsPanel**: *React.FC*<IPanelProps\>
+• `Const` **NotificationsPanel**: *FC*<IPanelProps\>
 
 Defined in: [client/parts/UserNotifications/NotificationsPanel/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/index.tsx#L14)
 
@@ -81,7 +81,7 @@ ___
 
 ### UserFeedback
 
-• `Const` **UserFeedback**: *React.FC*<IUserFeedbackProps\>
+• `Const` **UserFeedback**: *FC*<IUserFeedbackProps\>
 
 User feedback
 
@@ -96,7 +96,7 @@ ___
 
 ### UserMenu
 
-• `Const` **UserMenu**: React.FC
+• `Const` **UserMenu**: FC
 
 Defined in: [client/parts/UserMenu/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L24)
 
@@ -104,7 +104,7 @@ ___
 
 ### UserNotification
 
-• `Const` **UserNotification**: *React.FC*<[*IUserNotificationProps*](../interfaces/parts.iusernotificationprops.md)\>
+• `Const` **UserNotification**: *FC*<[*IUserNotificationProps*](../interfaces/parts.iusernotificationprops.md)\>
 
 Defined in: [client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx#L14)
 
@@ -112,7 +112,7 @@ ___
 
 ### UserNotifications
 
-• `Const` **UserNotifications**: *React.FC*<[*IUserNotificationsProps*](../interfaces/parts.iusernotificationsprops.md)\>
+• `Const` **UserNotifications**: *FC*<[*IUserNotificationsProps*](../interfaces/parts.iusernotificationsprops.md)\>
 
 User notifications
 
@@ -129,7 +129,7 @@ ___
 
 ### NavItem
 
-• `Const` **NavItem**: *React.FC*<[*INavItemProps*](../interfaces/parts.inavitemprops.md)\>
+• `Const` **NavItem**: *FC*<[*INavItemProps*](../interfaces/parts.inavitemprops.md)\>
 
 Defined in: [client/parts/Navigation/NavItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/index.tsx#L12)
 
@@ -156,7 +156,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/parts/ErrorFallback/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L21)
+Defined in: [client/parts/ErrorFallback/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L20)
 
 ___
 

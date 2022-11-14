@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / ProjectService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / ProjectService
 
 # Class: ProjectService
 
@@ -56,7 +56,7 @@ Name | Type | Description |
 
 Overrides: void
 
-Defined in: [services/mongo/project.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L28)
+Defined in: [services/mongo/project.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L27)
 
 ## Properties
 
@@ -66,7 +66,7 @@ Defined in: [services/mongo/project.ts:28](https://github.com/Puzzlepart/did/blo
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -120,7 +120,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [services/mongo/project.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L51)
+Defined in: [services/mongo/project.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L50)
 
 ___
 
@@ -149,7 +149,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L70)
 
 ___
 
@@ -171,7 +171,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [services/mongo/project.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L93)
+Defined in: [services/mongo/project.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L92)
 
 ___
 
@@ -193,7 +193,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L100)
 
 ___
 
@@ -217,7 +217,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L83)
 
 ___
 
@@ -240,7 +240,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L116)
 
 ___
 
@@ -260,4 +260,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [services/mongo/project.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L73)
+Defined in: [services/mongo/project.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L72)

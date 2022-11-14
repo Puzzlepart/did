@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / IListColumnData
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / IListColumnData
 
 # Interface: IListColumnData
 
@@ -22,7 +22,7 @@
 
 Excel column format
 
-Defined in: [client/components/List/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L32)
+Defined in: [client/components/List/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L31)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 Hidden column
 
-Defined in: [client/components/List/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L22)
+Defined in: [client/components/List/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L21)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 Hidden from Excel exports
 
-Defined in: [client/components/List/types.tsx:37](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L37)
+Defined in: [client/components/List/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L36)
 
 ___
 
@@ -64,9 +64,9 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
+Defined in: [client/components/List/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L41)
 
-Defined in: [client/components/List/types.tsx:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L42)
+Defined in: [client/components/List/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L41)
 
 ___
 
@@ -76,4 +76,4 @@ ___
 
 Optional sub text
 
-Defined in: [client/components/List/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L27)
+Defined in: [client/components/List/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L26)

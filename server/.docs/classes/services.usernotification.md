@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / UserNotification
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / UserNotification
 
 # Class: UserNotification
 
@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*UserNotification*](services.usernotification.md)
 
-Defined in: [services/notification/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L17)
+Defined in: [services/notification/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L16)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [services/notification/types.ts:17](https://github.com/Puzzlepart/di
 
 Notification ID
 
-Defined in: [services/notification/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L12)
+Defined in: [services/notification/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L11)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 Notification text
 
-Defined in: [services/notification/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L17)
+Defined in: [services/notification/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L16)
 
 ___
 
@@ -91,7 +91,7 @@ More link
 
 **Returns:** *string*
 
-Defined in: [services/notification/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L44)
+Defined in: [services/notification/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L43)
 
 ## Methods
 
@@ -109,4 +109,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [services/notification/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L35)
+Defined in: [services/notification/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L34)

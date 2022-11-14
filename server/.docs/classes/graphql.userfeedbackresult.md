@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / UserFeedbackResult
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / UserFeedbackResult
 
 # Class: UserFeedbackResult
 
@@ -40,7 +40,7 @@ Inherited from: void
 
 Inherited from: void
 
-Defined in: [graphql/resolvers/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L37)
+Defined in: [graphql/resolvers/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L36)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • `Optional` **ref**: *number*
 
-Defined in: [graphql/resolvers/user/types.ts:192](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L192)
+Defined in: [graphql/resolvers/user/types.ts:191](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L191)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 Inherited from: void
 
-Defined in: [graphql/resolvers/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L34)
+Defined in: [graphql/resolvers/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L33)

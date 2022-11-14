@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / CustomerService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / CustomerService
 
 # Class: CustomerService
 
@@ -55,7 +55,7 @@ Name | Type | Description |
 
 Overrides: void
 
-Defined in: [services/mongo/customer.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L16)
+Defined in: [services/mongo/customer.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L15)
 
 ## Properties
 
@@ -65,7 +65,7 @@ Defined in: [services/mongo/customer.ts:16](https://github.com/Puzzlepart/did/bl
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -117,7 +117,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L31)
+Defined in: [services/mongo/customer.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L30)
 
 ___
 
@@ -135,7 +135,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L62)
+Defined in: [services/mongo/customer.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L61)
 
 ___
 
@@ -164,7 +164,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L70)
 
 ___
 
@@ -182,7 +182,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [services/mongo/customer.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L76)
+Defined in: [services/mongo/customer.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L75)
 
 ___
 
@@ -204,7 +204,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L100)
 
 ___
 
@@ -228,7 +228,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L83)
 
 ___
 
@@ -251,7 +251,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L116)
 
 ___
 
@@ -269,4 +269,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L48)
+Defined in: [services/mongo/customer.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L47)

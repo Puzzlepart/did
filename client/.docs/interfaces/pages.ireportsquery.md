@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Pages](../modules/pages.md) / IReportsQuery
+[did-client - v0.11.0](../README.md) / [Pages](../modules/pages.md) / IReportsQuery
 
 # Interface: IReportsQuery
 
@@ -30,7 +30,7 @@
 
 Export file name
 
-Defined in: [client/pages/Reports/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L24)
+Defined in: [client/pages/Reports/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L23)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 GraphQL query
 
-Defined in: [client/pages/Reports/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L14)
+Defined in: [client/pages/Reports/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L13)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 GraphQL query variables
 
-Defined in: [client/pages/Reports/types.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L19)
+Defined in: [client/pages/Reports/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L18)

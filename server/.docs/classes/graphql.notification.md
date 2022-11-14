@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / Notification
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / Notification
 
 # Class: Notification
 
@@ -32,7 +32,7 @@
 
 • **id**: *string*
 
-Defined in: [graphql/resolvers/notification/types.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L61)
+Defined in: [graphql/resolvers/notification/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L60)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **moreLink**: *string*
 
-Defined in: [graphql/resolvers/notification/types.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L73)
+Defined in: [graphql/resolvers/notification/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L72)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **severity**: *string*
 
-Defined in: [graphql/resolvers/notification/types.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L67)
+Defined in: [graphql/resolvers/notification/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L66)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **text**: *string*
 
-Defined in: [graphql/resolvers/notification/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L70)
+Defined in: [graphql/resolvers/notification/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L69)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 • **type**: *string*
 
-Defined in: [graphql/resolvers/notification/types.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L64)
+Defined in: [graphql/resolvers/notification/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L63)

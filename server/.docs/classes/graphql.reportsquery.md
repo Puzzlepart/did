@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / ReportsQuery
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / ReportsQuery
 
 # Class: ReportsQuery
 
@@ -30,4 +30,4 @@
 
 ID of the project to filter on
 
-Defined in: [graphql/resolvers/reports/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L88)
+Defined in: [graphql/resolvers/reports/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L87)

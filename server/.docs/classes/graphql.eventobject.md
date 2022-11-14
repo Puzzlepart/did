@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / EventObject
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / EventObject
 
 # Class: EventObject
 
@@ -61,7 +61,7 @@ Name | Type | Description |
 
 **Returns:** [*EventObject*](graphql.eventobject.md)
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L84)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L83)
 
 ## Properties
 
@@ -69,7 +69,7 @@ Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:84](https://github
 
 • `Optional` **adjustedMinutes**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L49)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L48)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • `Optional` **body**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L28)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L27)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • `Optional` **categories**: *string*[]
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L84)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L83)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 • `Optional` **customer**: [*Customer*](graphql.customer.md)
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L61)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L60)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • `Optional` **customerKey**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L67)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L66)
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • `Optional` **date**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L40)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L39)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 • `Optional` **day**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L22)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L21)
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 • `Optional` **duration**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L43)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L42)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 • `Optional` **endDateTime**: Date
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L37)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L36)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 • `Optional` **error**: *EventError*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L76)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L75)
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L19)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L18)
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 • `Optional` **isOrganizer**: *boolean*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L31)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L30)
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 • `Optional` **isSystemIgnored**: *boolean*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L82)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L81)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 • `Optional` **labels**: [*LabelObject*](graphql.labelobject.md)[]
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L73)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L72)
 
 ___
 
@@ -181,7 +181,7 @@ ___
 
 • `Optional` **manualMatch**: *boolean*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L79)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L78)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 • `Optional` **originalDuration**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L46)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L45)
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 • `Optional` **project**: [*Project*](graphql.project.md)
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L55)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L54)
 
 ___
 
@@ -205,7 +205,7 @@ ___
 
 • `Optional` **projectId**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L52)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L51)
 
 ___
 
@@ -213,7 +213,7 @@ ___
 
 • `Optional` **projectKey**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L64)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L63)
 
 ___
 
@@ -221,7 +221,7 @@ ___
 
 • `Optional` **startDateTime**: Date
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L34)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L33)
 
 ___
 
@@ -229,7 +229,7 @@ ___
 
 • `Optional` **suggestedProject**: [*Project*](graphql.project.md)
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L58)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L57)
 
 ___
 
@@ -237,7 +237,7 @@ ___
 
 • `Optional` **title**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L25)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L24)
 
 ___
 
@@ -245,4 +245,4 @@ ___
 
 • `Optional` **webLink**: *string*
 
-Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L70)
+Defined in: [graphql/resolvers/timesheet/types/EventObject.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L69)

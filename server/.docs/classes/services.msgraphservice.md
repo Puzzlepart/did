@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / MSGraphService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / MSGraphService
 
 # Class: MSGraphService
 
@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [services/msgraph/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L30)
+Defined in: [services/msgraph/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L29)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [services/msgraph/index.ts:30](https://github.com/Puzzlepart/did/blo
 
 • `Private` **\_accessTokenOptions**: MSAccessTokenOptions
 
-Defined in: [services/msgraph/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L24)
+Defined in: [services/msgraph/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L23)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **\_cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [services/msgraph/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L23)
+Defined in: [services/msgraph/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L22)
 
 ___
 
@@ -81,7 +81,7 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [services/msgraph/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L45)
+Defined in: [services/msgraph/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L44)
 
 ___
 
@@ -101,7 +101,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [services/msgraph/index.ts:183](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L183)
+Defined in: [services/msgraph/index.ts:182](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L182)
 
 ___
 
@@ -121,7 +121,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:126](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L126)
+Defined in: [services/msgraph/index.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L125)
 
 ___
 
@@ -142,7 +142,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:240](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L240)
+Defined in: [services/msgraph/index.ts:239](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L239)
 
 ___
 
@@ -156,7 +156,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/msgraph/index.ts:213](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L213)
+Defined in: [services/msgraph/index.ts:212](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L212)
 
 ___
 
@@ -179,7 +179,7 @@ Name | Type | Description |
 A base64 representation of the user photo, or null if
 the user photo is not found.
 
-Defined in: [services/msgraph/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L68)
+Defined in: [services/msgraph/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L67)
 
 ___
 
@@ -193,7 +193,7 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L143)
+Defined in: [services/msgraph/index.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L142)
 
 ___
 
@@ -211,4 +211,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L86)
+Defined in: [services/msgraph/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L85)

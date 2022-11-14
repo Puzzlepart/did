@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionSettingsInput
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionSettingsInput
 
 # Class: SubscriptionSettingsInput
 
@@ -31,7 +31,7 @@
 
 • `Optional` **adsync**: [*SubscriptionADSyncSettingsInput*](graphql.subscriptionadsyncsettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L173)
+Defined in: [graphql/resolvers/subscription/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L172)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • `Optional` **forecast**: [*SubscriptionForecastSettingsInput*](graphql.subscriptionforecastsettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:170](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L170)
+Defined in: [graphql/resolvers/subscription/types.ts:169](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L169)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • `Optional` **teams**: [*SubscriptionTeamsSettingsInput*](graphql.subscriptionteamssettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:179](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L179)
+Defined in: [graphql/resolvers/subscription/types.ts:178](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L178)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 • `Optional` **vacation**: [*SubscriptionVacationSettingsInput*](graphql.subscriptionvacationsettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L176)
+Defined in: [graphql/resolvers/subscription/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L175)

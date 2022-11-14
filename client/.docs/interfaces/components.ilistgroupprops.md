@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / IListGroupProps
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / IListGroupProps
 
 # Interface: IListGroupProps
 
@@ -19,7 +19,7 @@
 
 • `Optional` **emptyGroupName**: *string*
 
-Defined in: [client/components/List/types.tsx:165](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L165)
+Defined in: [client/components/List/types.ts:164](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L164)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **fieldName**: *string*
 
-Defined in: [client/components/List/types.tsx:163](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L163)
+Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • `Optional` **groupNames**: *string*[]
 
-Defined in: [client/components/List/types.tsx:164](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L164)
+Defined in: [client/components/List/types.ts:163](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L163)
 
 ___
 
@@ -55,6 +55,6 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [client/components/List/types.tsx:166](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L166)
+Defined in: [client/components/List/types.ts:165](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L165)
 
-Defined in: [client/components/List/types.tsx:166](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L166)
+Defined in: [client/components/List/types.ts:165](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L165)

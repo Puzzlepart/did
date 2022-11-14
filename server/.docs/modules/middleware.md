@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / Middleware
+[did-server - v0.11.0](../README.md) / Middleware
 
 # Module: Middleware
 
@@ -32,7 +32,7 @@ Redis client
 
 **`see`** https://github.com/Puzzlepart/did/issues/812
 
-Defined in: [middleware/redis/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L17)
+Defined in: [middleware/redis/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L16)
 
 ## Express middleware Functions
 
@@ -48,7 +48,7 @@ We allow framing from `https://teams.microsoft.com`
 
 **Returns:** *any*
 
-Defined in: [middleware/helmet/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L13)
+Defined in: [middleware/helmet/index.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L12)
 
 ___
 
@@ -66,7 +66,7 @@ Name | Type | Description |
 
 **Returns:** *PassportStatic*
 
-Defined in: [middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L14)
+Defined in: [middleware/passport/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L13)
 
 ___
 
@@ -90,7 +90,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [middleware/session/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L17)
+Defined in: [middleware/session/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L16)
 
 ___
 
@@ -108,4 +108,4 @@ Name | Type | Description |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
-Defined in: [middleware/gzip/index.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L12)
+Defined in: [middleware/gzip/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L11)

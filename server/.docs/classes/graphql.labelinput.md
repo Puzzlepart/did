@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / LabelInput
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / LabelInput
 
 # Class: LabelInput
 
@@ -31,7 +31,7 @@
 
 • **color**: *string*
 
-Defined in: [graphql/resolvers/label/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L20)
+Defined in: [graphql/resolvers/label/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L19)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **description**: *string*
 
-Defined in: [graphql/resolvers/label/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L17)
+Defined in: [graphql/resolvers/label/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L16)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • `Optional` **icon**: *string*
 
-Defined in: [graphql/resolvers/label/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L23)
+Defined in: [graphql/resolvers/label/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L22)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/label/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L14)
+Defined in: [graphql/resolvers/label/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L13)

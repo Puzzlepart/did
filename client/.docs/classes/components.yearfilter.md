@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / YearFilter
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / YearFilter
 
 # Class: YearFilter
 
@@ -47,7 +47,7 @@ Name | Type | Description |
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L10)
+Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L9)
 
 ## Properties
 
@@ -73,7 +73,7 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L10)
 
 ___
 
@@ -101,7 +101,7 @@ Name | Type | Description |
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L26)
+Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L25)
 
 ___
 
@@ -123,4 +123,4 @@ this
 
 Inherited from: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L50)

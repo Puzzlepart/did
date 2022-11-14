@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / ConfirmedPeriodsQuery
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / ConfirmedPeriodsQuery
 
 # Class: ConfirmedPeriodsQuery
 
@@ -29,7 +29,7 @@
 
 • `Optional` **week**: *number*
 
-Defined in: [graphql/resolvers/reports/types.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L97)
+Defined in: [graphql/resolvers/reports/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L96)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **year**: *number*
 
-Defined in: [graphql/resolvers/reports/types.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L100)
+Defined in: [graphql/resolvers/reports/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L99)

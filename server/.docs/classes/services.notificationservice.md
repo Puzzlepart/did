@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / NotificationService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / NotificationService
 
 # Class: NotificationService
 
@@ -38,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationService*](services.notificationservice.md)
 
-Defined in: [services/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L21)
+Defined in: [services/notification/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L20)
 
 ## Methods
 
@@ -57,7 +57,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ForecastNotification[]\>
 
-Defined in: [services/notification/index.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L96)
+Defined in: [services/notification/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L95)
 
 ___
 
@@ -77,7 +77,7 @@ Name | Type | Description |
 
 **Returns:** *any*[]
 
-Defined in: [services/notification/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L44)
+Defined in: [services/notification/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L43)
 
 ___
 
@@ -96,7 +96,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UnconfirmedPeriodNotification[]\>
 
-Defined in: [services/notification/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L69)
+Defined in: [services/notification/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L68)
 
 ___
 
@@ -115,4 +115,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<(UnconfirmedPeriodNotification \| ForecastNotification)[]\>
 
-Defined in: [services/notification/index.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L133)
+Defined in: [services/notification/index.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L132)

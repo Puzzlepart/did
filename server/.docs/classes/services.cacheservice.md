@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / CacheService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / CacheService
 
 # Class: CacheService
 
@@ -43,7 +43,7 @@ Name | Type | Description |
 
 **Returns:** [*CacheService*](services.cacheservice.md)
 
-Defined in: [services/cache.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L44)
+Defined in: [services/cache.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L43)
 
 ## Properties
 
@@ -79,7 +79,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L87)
+Defined in: [services/cache.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L86)
 
 ___
 
@@ -102,7 +102,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [services/cache.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L68)
+Defined in: [services/cache.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L67)
 
 ___
 
@@ -127,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L109)
+Defined in: [services/cache.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L108)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L139)
+Defined in: [services/cache.ts:138](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L138)
 
 ___
 
@@ -170,4 +170,4 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L156)
+Defined in: [services/cache.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L155)

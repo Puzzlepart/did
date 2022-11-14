@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetResolver
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetResolver
 
 # Class: TimesheetResolver
 
@@ -40,7 +40,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetResolver*](graphql.timesheetresolver.md)
 
-Defined in: [graphql/resolvers/timesheet/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L29)
+Defined in: [graphql/resolvers/timesheet/index.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L28)
 
 ## Methods
 
@@ -59,7 +59,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L95)
+Defined in: [graphql/resolvers/timesheet/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L94)
 
 ___
 
@@ -79,7 +79,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L48)
+Defined in: [graphql/resolvers/timesheet/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L47)
 
 ___
 
@@ -98,7 +98,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:124](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L124)
+Defined in: [graphql/resolvers/timesheet/index.ts:123](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L123)
 
 ___
 
@@ -118,4 +118,4 @@ Name | Type |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L74)
+Defined in: [graphql/resolvers/timesheet/index.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L73)

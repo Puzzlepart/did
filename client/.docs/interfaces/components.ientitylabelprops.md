@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / IEntityLabelProps
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / IEntityLabelProps
 
 # Interface: IEntityLabelProps
 
@@ -22,4 +22,4 @@
 
 • **label**: *LabelObject* \| *LabelInput*
 
-Defined in: [client/components/EntityLabel/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.tsx#L9)
+Defined in: [client/components/EntityLabel/types.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.ts#L8)

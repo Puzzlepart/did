@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / IFilterPanelProps
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / IFilterPanelProps
 
 # Interface: IFilterPanelProps
 
@@ -28,7 +28,7 @@
 
 Filters to show
 
-Defined in: [client/components/FilterPanel/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L12)
+Defined in: [client/components/FilterPanel/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L11)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 Items to filter
 
-Defined in: [client/components/FilterPanel/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L17)
+Defined in: [client/components/FilterPanel/types.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L16)
 
 ___
 
@@ -54,9 +54,9 @@ On reset filters
 
 **Returns:** *void*
 
-Defined in: [client/components/FilterPanel/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L34)
+Defined in: [client/components/FilterPanel/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L33)
 
-Defined in: [client/components/FilterPanel/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L34)
+Defined in: [client/components/FilterPanel/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L33)
 
 ___
 
@@ -78,9 +78,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/FilterPanel/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L22)
+Defined in: [client/components/FilterPanel/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L21)
 
-Defined in: [client/components/FilterPanel/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L22)
+Defined in: [client/components/FilterPanel/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L21)
 
 ___
 
@@ -92,4 +92,4 @@ Number of items to show by default (can show all with Show all link)
 
 **`default`** 10
 
-Defined in: [client/components/FilterPanel/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L29)
+Defined in: [client/components/FilterPanel/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L28)

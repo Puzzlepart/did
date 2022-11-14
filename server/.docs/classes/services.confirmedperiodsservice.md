@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
 
 # Class: ConfirmedPeriodsService
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 Overrides: void
 
-Defined in: [services/mongo/confirmed_periods.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/confirmed_periods.ts#L13)
+Defined in: [services/mongo/confirmed_periods.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/confirmed_periods.ts#L12)
 
 ## Properties
 
@@ -61,7 +61,7 @@ Defined in: [services/mongo/confirmed_periods.ts:13](https://github.com/Puzzlepa
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -124,7 +124,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L70)
 
 ___
 
@@ -146,7 +146,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L100)
 
 ___
 
@@ -170,7 +170,7 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L83)
 
 ___
 
@@ -193,4 +193,4 @@ Name | Type | Description |
 
 Inherited from: void
 
-Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L116)

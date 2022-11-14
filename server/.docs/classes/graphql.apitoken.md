@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / ApiToken
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / ApiToken
 
 # Class: ApiToken
 
@@ -33,7 +33,7 @@
 
 • `Optional` **apiKey**: *string*
 
-Defined in: [graphql/resolvers/apiToken/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L26)
+Defined in: [graphql/resolvers/apiToken/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L25)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • `Optional` **created**: Date
 
-Defined in: [graphql/resolvers/apiToken/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L18)
+Defined in: [graphql/resolvers/apiToken/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L17)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **expires**: Date
 
-Defined in: [graphql/resolvers/apiToken/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L21)
+Defined in: [graphql/resolvers/apiToken/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L20)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/apiToken/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L15)
+Defined in: [graphql/resolvers/apiToken/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L14)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **permissions**: *string*[]
 
-Defined in: [graphql/resolvers/apiToken/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L24)
+Defined in: [graphql/resolvers/apiToken/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L23)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 • `Optional` **subscriptionId**: *string*
 
-Defined in: [graphql/resolvers/apiToken/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L27)
+Defined in: [graphql/resolvers/apiToken/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L26)

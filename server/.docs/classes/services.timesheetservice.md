@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / TimesheetService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / TimesheetService
 
 # Class: TimesheetService
 
@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [services/timesheet/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L41)
+Defined in: [services/timesheet/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L40)
 
 ## Methods
 
@@ -67,7 +67,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:326](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L326)
+Defined in: [services/timesheet/index.ts:337](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L337)
 
 ___
 
@@ -118,22 +118,23 @@ ___
 
 ### getPeriods
 
-▸ **getPeriods**(`startDate`: *string*, `endDate`: *string*, `locale`: *string*, `userId`: *string*): [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
+▸ **getPeriods**(`startDate`: *string*, `endDate`: *string*, `locale`: *string*, `userId`: *string*, `includeSplitWeeks?`: *boolean*): [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Get periods between startDate and endDate
+Get periods between `startDate` and `endDate`
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`startDate` | *string* | Start date   |
-`endDate` | *string* | End date   |
-`locale` | *string* | Locale   |
-`userId` | *string* | User ID    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`startDate` | *string* | - | Start date   |
+`endDate` | *string* | - | End date   |
+`locale` | *string* | - | Locale   |
+`userId` | *string* | - | User ID   |
+`includeSplitWeeks` | *boolean* | true | Include split weeks (defaults to `true`)    |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:288](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L288)
+Defined in: [services/timesheet/index.ts:289](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L289)
 
 ___
 
@@ -160,11 +161,11 @@ Microsoft Graph using `MSGraphService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`parameters` | IGetTimesheetParameters | Timesheet params    |
+`parameters` | IGetTimesheetParameters | Timesheet parameters    |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L85)
+Defined in: [services/timesheet/index.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L84)
 
 ___
 
@@ -182,7 +183,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [services/timesheet/index.ts:350](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L350)
+Defined in: [services/timesheet/index.ts:361](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L361)
 
 ___
 

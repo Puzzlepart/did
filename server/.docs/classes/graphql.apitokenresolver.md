@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / ApiTokenResolver
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / ApiTokenResolver
 
 # Class: ApiTokenResolver
 
@@ -39,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
-Defined in: [graphql/resolvers/apiToken/index.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L25)
+Defined in: [graphql/resolvers/apiToken/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L24)
 
 ## Methods
 
@@ -58,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [graphql/resolvers/apiToken/index.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L54)
+Defined in: [graphql/resolvers/apiToken/index.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L53)
 
 ___
 
@@ -76,7 +76,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [graphql/resolvers/apiToken/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L40)
+Defined in: [graphql/resolvers/apiToken/index.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L39)
 
 ___
 
@@ -95,4 +95,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/apiToken/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L69)
+Defined in: [graphql/resolvers/apiToken/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L68)

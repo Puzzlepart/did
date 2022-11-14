@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / LabelResolver
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / LabelResolver
 
 # Class: LabelResolver
 
@@ -39,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*LabelResolver*](graphql.labelresolver.md)
 
-Defined in: [graphql/resolvers/label/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L23)
+Defined in: [graphql/resolvers/label/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L22)
 
 ## Methods
 
@@ -58,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/label/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L48)
+Defined in: [graphql/resolvers/label/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L47)
 
 ___
 
@@ -76,7 +76,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/label/index.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L64)
+Defined in: [graphql/resolvers/label/index.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L63)
 
 ___
 
@@ -88,4 +88,4 @@ Get labels
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [graphql/resolvers/label/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L36)
+Defined in: [graphql/resolvers/label/index.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L35)

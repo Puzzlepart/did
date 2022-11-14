@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / AuthRoute
+[did-server - v0.11.0](../README.md) / AuthRoute
 
 # Module: AuthRoute
 
@@ -25,7 +25,7 @@ Handles authentication with providers/strategies
 
 • `Const` **default**: *Router*
 
-Defined in: [routes/auth.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L16)
+Defined in: [routes/auth.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L15)
 
 ## Functions
 
@@ -43,7 +43,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L47)
+Defined in: [routes/auth.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L46)
 
 ___
 
@@ -65,7 +65,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L31)
+Defined in: [routes/auth.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L30)
 
 ___
 
@@ -84,4 +84,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L84)
+Defined in: [routes/auth.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L83)

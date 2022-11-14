@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / BaseFilter
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / BaseFilter
 
 # Class: BaseFilter
 
@@ -56,7 +56,7 @@ Name | Type | Description |
 
 **Returns:** [*BaseFilter*](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L10)
 
 ## Properties
 
@@ -76,7 +76,7 @@ ___
 
 • **selectedKeys**: *string*[]
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L10)
 
 ___
 
@@ -102,7 +102,7 @@ Name | Type | Description |
 
 `IFilter`
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L34)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L33)
 
 ___
 
@@ -122,4 +122,4 @@ Name | Type | Description |
 
 this
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L51)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L50)

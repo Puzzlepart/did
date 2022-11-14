@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / MSOAuthService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / MSOAuthService
 
 # Class: MSOAuthService
 
@@ -33,7 +33,7 @@ Name | Type |
 
 **Returns:** [*MSOAuthService*](services.msoauthservice.md)
 
-Defined in: [services/msoauth.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L26)
+Defined in: [services/msoauth.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L25)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *AuthorizationCode*<*client_id*\>
 
-Defined in: [services/msoauth.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L34)
+Defined in: [services/msoauth.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L33)
 
 ___
 
@@ -72,4 +72,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: [services/msoauth.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L58)
+Defined in: [services/msoauth.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L57)

@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / Services
+[did-server - v0.11.0](../README.md) / Services
 
 # Module: Services
 
@@ -46,7 +46,7 @@ Services used by `GraphQL`
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)
+Defined in: [services/cache.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L15)
 
 ___
 
@@ -64,4 +64,4 @@ Name | Type | Description |
 `key` | [*CacheKey*](services.md#cachekey) | Cache key   |
 `scope`? | [*CacheScope*](../enums/services.cachescope.md) | Cache scope   |
 
-Defined in: [services/cache.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L21)
+Defined in: [services/cache.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L20)

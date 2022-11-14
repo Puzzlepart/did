@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [Services](../modules/services.md) / GoogleCalendarService
+[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / GoogleCalendarService
 
 # Class: GoogleCalendarService
 
@@ -35,7 +35,7 @@ Name | Type |
 
 **Returns:** [*GoogleCalendarService*](services.googlecalendarservice.md)
 
-Defined in: [services/google/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L17)
+Defined in: [services/google/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L16)
 
 ## Properties
 
@@ -43,7 +43,7 @@ Defined in: [services/google/index.ts:17](https://github.com/Puzzlepart/did/blob
 
 • `Private` **\_cal**: *Calendar*
 
-Defined in: [services/google/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L17)
+Defined in: [services/google/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L16)
 
 ## Methods
 
@@ -63,7 +63,7 @@ Name | Type | Default value | Description |
 
 Calendars with the specified `accessRole`
 
-Defined in: [services/google/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L41)
+Defined in: [services/google/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L40)
 
 ___
 
@@ -82,4 +82,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/google/index.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L55)
+Defined in: [services/google/index.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L54)

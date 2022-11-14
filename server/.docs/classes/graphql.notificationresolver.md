@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / NotificationResolver
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / NotificationResolver
 
 # Class: NotificationResolver
 
@@ -37,7 +37,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationResolver*](graphql.notificationresolver.md)
 
-Defined in: [graphql/resolvers/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L21)
+Defined in: [graphql/resolvers/notification/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L20)
 
 ## Methods
 
@@ -56,4 +56,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<(UnconfirmedPeriodNotification \| ForecastNotification)[]\>
 
-Defined in: [graphql/resolvers/notification/index.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L37)
+Defined in: [graphql/resolvers/notification/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L36)

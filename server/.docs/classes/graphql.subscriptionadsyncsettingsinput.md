@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionADSyncSettingsInput
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionADSyncSettingsInput
 
 # Class: SubscriptionADSyncSettingsInput
 
@@ -30,7 +30,7 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [graphql/resolvers/subscription/types.ts:130](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L130)
+Defined in: [graphql/resolvers/subscription/types.ts:129](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L129)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • `Optional` **properties**: *string*[]
 
-Defined in: [graphql/resolvers/subscription/types.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L133)
+Defined in: [graphql/resolvers/subscription/types.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L132)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • `Optional` **syncUserPhoto**: *boolean*
 
-Defined in: [graphql/resolvers/subscription/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L136)
+Defined in: [graphql/resolvers/subscription/types.ts:135](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L135)

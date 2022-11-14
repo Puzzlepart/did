@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Components](../modules/components.md) / IEventListProps
+[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / IEventListProps
 
 # Interface: IEventListProps
 
@@ -39,7 +39,7 @@
 
 An array of additional columns to add
 
-Defined in: [client/components/EventList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L12)
+Defined in: [client/components/EventList/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L11)
 
 ___
 
@@ -58,7 +58,7 @@ Name | Type |
 
 Inherited from: [IListProps](components.ilistprops.md).[columnHeaderProps](components.ilistprops.md#columnheaderprops)
 
-Defined in: [client/components/List/types.tsx:125](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L125)
+Defined in: [client/components/List/types.ts:124](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L124)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 Column width overrides
 
-Defined in: [client/components/EventList/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L22)
+Defined in: [client/components/EventList/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L21)
 
 ___
 
@@ -80,7 +80,7 @@ Columns
 
 Inherited from: [IListProps](components.ilistprops.md).[columns](components.ilistprops.md#columns)
 
-Defined in: [client/components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
+Defined in: [client/components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
 
 ___
 
@@ -92,7 +92,7 @@ Command bar props
 
 Inherited from: [IListProps](components.ilistprops.md).[commandBar](components.ilistprops.md#commandbar)
 
-Defined in: [client/components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
+Defined in: [client/components/List/types.ts:109](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L109)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 Date format
 
-Defined in: [client/components/EventList/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L17)
+Defined in: [client/components/EventList/types.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L16)
 
 ___
 
@@ -114,7 +114,7 @@ Enable shimmer (normally while loading)
 
 Inherited from: [IListProps](components.ilistprops.md).[enableShimmer](components.ilistprops.md#enableshimmer)
 
-Defined in: [client/components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
+Defined in: [client/components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)
 
 ___
 
@@ -128,7 +128,7 @@ Filters
 
 Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
 
-Defined in: [client/components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
+Defined in: [client/components/List/types.ts:114](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L114)
 
 ___
 
@@ -140,7 +140,7 @@ Fixed height
 
 Inherited from: [IListProps](components.ilistprops.md).[height](components.ilistprops.md#height)
 
-Defined in: [client/components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
+Defined in: [client/components/List/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L84)
 
 ___
 
@@ -152,7 +152,7 @@ Hidden
 
 Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
 
-Defined in: [client/components/List/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L120)
+Defined in: [client/components/List/types.ts:119](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L119)
 
 ___
 
@@ -164,7 +164,7 @@ Items
 
 Inherited from: [IListProps](components.ilistprops.md).[items](components.ilistprops.md#items)
 
-Defined in: [client/components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
+Defined in: [client/components/List/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L69)
 
 ___
 
@@ -176,7 +176,7 @@ Group props
 
 Inherited from: [IListProps](components.ilistprops.md).[listGroupProps](components.ilistprops.md#listgroupprops)
 
-Defined in: [client/components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
+Defined in: [client/components/List/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L99)
 
 ___
 
@@ -188,7 +188,7 @@ Group render props
 
 Inherited from: [IListProps](components.ilistprops.md).[listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
 
-Defined in: [client/components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
+Defined in: [client/components/List/types.ts:104](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L104)
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 Resizable columns
 
-Defined in: [client/components/EventList/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L27)
+Defined in: [client/components/EventList/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/types.tsx#L26)
 
 ___
 
@@ -210,7 +210,7 @@ Search box props
 
 Inherited from: [IListProps](components.ilistprops.md).[searchBox](components.ilistprops.md#searchbox)
 
-Defined in: [client/components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
+Defined in: [client/components/List/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L89)
 
 ___
 
@@ -222,4 +222,4 @@ Selection
 
 Inherited from: [IListProps](components.ilistprops.md).[selectionProps](components.ilistprops.md#selectionprops)
 
-Defined in: [client/components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
+Defined in: [client/components/List/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L94)

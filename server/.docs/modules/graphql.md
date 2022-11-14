@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / GraphQL
+[did-server - v0.11.0](../README.md) / GraphQL
 
 # Module: GraphQL
 
@@ -89,7 +89,7 @@
 
 Reports query preset
 
-Defined in: [graphql/resolvers/reports/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L72)
+Defined in: [graphql/resolvers/reports/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L71)
 
 ## Functions
 
@@ -125,7 +125,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [graphql/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L76)
+Defined in: [graphql/index.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L75)
 
 ___
 
@@ -146,7 +146,7 @@ Generate [GraphQL](https://graphql.org/) schema using
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [graphql/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L44)
+Defined in: [graphql/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L43)
 
 ___
 
@@ -175,4 +175,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [graphql/index.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L116)
+Defined in: [graphql/index.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L115)

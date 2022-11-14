@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / UserQuery
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / UserQuery
 
 # Class: UserQuery
 
@@ -29,7 +29,7 @@
 
 • `Optional` **hiddenFromReports**: *boolean*
 
-Defined in: [graphql/resolvers/user/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L150)
+Defined in: [graphql/resolvers/user/types.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L149)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **role**: *string*
 
-Defined in: [graphql/resolvers/user/types.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L147)
+Defined in: [graphql/resolvers/user/types.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L146)

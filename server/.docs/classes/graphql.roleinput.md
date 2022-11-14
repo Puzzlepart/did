@@ -1,4 +1,4 @@
-[did-server - v0.10.9](../README.md) / [GraphQL](../modules/graphql.md) / RoleInput
+[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / RoleInput
 
 # Class: RoleInput
 
@@ -32,7 +32,7 @@
 
 • `Optional` **description**: *string*
 
-Defined in: [graphql/resolvers/role/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L41)
+Defined in: [graphql/resolvers/role/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L40)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • `Optional` **icon**: *string*
 
-Defined in: [graphql/resolvers/role/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L44)
+Defined in: [graphql/resolvers/role/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L43)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • `Optional` **name**: *string*
 
-Defined in: [graphql/resolvers/role/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L38)
+Defined in: [graphql/resolvers/role/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L37)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • `Optional` **permissions**: *string*[]
 
-Defined in: [graphql/resolvers/role/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L47)
+Defined in: [graphql/resolvers/role/types.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L46)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 • `Optional` **readOnly**: *boolean*
 
-Defined in: [graphql/resolvers/role/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L50)
+Defined in: [graphql/resolvers/role/types.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/types.ts#L49)

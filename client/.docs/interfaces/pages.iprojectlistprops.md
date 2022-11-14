@@ -1,4 +1,4 @@
-[did-client - v0.10.9](../README.md) / [Pages](../modules/pages.md) / IProjectListProps
+[did-client - v0.11.0](../README.md) / [Pages](../modules/pages.md) / IProjectListProps
 
 # Interface: IProjectListProps
 
@@ -46,7 +46,7 @@ Name | Type |
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:125](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L125)
+Defined in: [client/components/List/types.ts:124](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L124)
 
 ___
 
@@ -58,7 +58,7 @@ Columns
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
+Defined in: [client/components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
 
 ___
 
@@ -70,7 +70,7 @@ Command bar props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L110)
+Defined in: [client/components/List/types.ts:109](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L109)
 
 ___
 
@@ -82,7 +82,7 @@ Enable shimmer (normally while loading)
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
+Defined in: [client/components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)
 
 ___
 
@@ -96,7 +96,7 @@ Filters
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L115)
+Defined in: [client/components/List/types.ts:114](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L114)
 
 ___
 
@@ -108,7 +108,7 @@ Fixed height
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
+Defined in: [client/components/List/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L84)
 
 ___
 
@@ -120,7 +120,7 @@ Hidden
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L120)
+Defined in: [client/components/List/types.ts:119](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L119)
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • `Optional` **hideColumns**: *string*[]
 
-Defined in: [client/pages/Projects/ProjectList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L13)
+Defined in: [client/pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
 
 ___
 
@@ -140,7 +140,7 @@ Items
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
+Defined in: [client/components/List/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L69)
 
 ___
 
@@ -152,7 +152,7 @@ Group props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
+Defined in: [client/components/List/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L99)
 
 ___
 
@@ -164,7 +164,7 @@ Group render props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
+Defined in: [client/components/List/types.ts:104](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L104)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 • `Optional` **renderLink**: *boolean*
 
-Defined in: [client/pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
+Defined in: [client/pages/Projects/ProjectList/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L11)
 
 ___
 
@@ -184,7 +184,7 @@ Search box props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
+Defined in: [client/components/List/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L89)
 
 ___
 
@@ -196,4 +196,4 @@ Selection
 
 Inherited from: void
 
-Defined in: [client/components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
+Defined in: [client/components/List/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L94)

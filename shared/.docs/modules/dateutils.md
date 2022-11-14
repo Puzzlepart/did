@@ -1,4 +1,4 @@
-[did-shared - v0.10.9](../README.md) / DateUtils
+[did-shared - v0.11.0](../README.md) / DateUtils
 
 # Module: DateUtils
 
@@ -45,7 +45,7 @@ the client and the server.
 
 Ƭ **DateInput**: [*ConfigType*](dateutils._dayjs.md#configtype)
 
-Defined in: [shared/utils/date.ts:28](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L28)
+Defined in: [shared/utils/date.ts:27](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L27)
 
 ___
 
