@@ -25,35 +25,32 @@ export function useMessages(): IUserMessageProps[] {
     state.dateRangeType === DateRangeType.Month &&
     state.selectedView !== TimesheetView.Overview
   ) {
-    const forecastedHours = state.periods.reduce(
-      (sum, period) => (sum += period.forecastedHours),
-      0
-    )
     const confirmedDuration = state.periods.reduce(
       (sum, period) =>
         period.isConfirmed ? (sum += period.matchedDuration) : sum,
       0
     )
-    const confirmedPeriodsCount = state.periods.filter(
-      (p) => p.isConfirmed
-    ).length
+    messages.push({
+      id: 'monthconfirmedstatus',
+      text: t('timesheet.monthConfirmedText', {
+        hours: $date.getDurationString(confirmedDuration, t),
+        periodsCount: state.periods.length,
+        confirmedPeriodsCount:state.periods.filter(
+          (p) => p.isConfirmed
+        ).length
+      }),
+      type: 'info'
+    })
+    const forecastedHours = state.periods.reduce(
+      (sum, period) => (sum += period.forecastedHours),
+      0
+    )
     if (forecastedHours > 0) {
       messages.push({
-        id: 'monthForecasted',
+        id: 'monthforecasted',
         text: t('timesheet.monthForecastedText', {
           hours: $date.getDurationString(forecastedHours, t)
         })
-      })
-    }
-    if (confirmedDuration > 0) {
-      messages.push({
-        id: 'monthConfirmed',
-        text: t('timesheet.monthConfirmedText', {
-          hours: $date.getDurationString(confirmedDuration, t),
-          periodsCount: state.periods.length,
-          confirmedPeriodsCount
-        }),
-        type: 'info'
       })
     }
   } else {
@@ -91,7 +88,7 @@ export function useMessages(): IUserMessageProps[] {
     }
     if (state.selectedPeriod.isConfirmed) {
       messages.push({
-        id: 'periodConfirmed',
+        id: 'periodconfirmed',
         text: t('timesheet.periodConfirmedText', {
           hours: $date.getDurationString(
             state.selectedPeriod.matchedDuration,
