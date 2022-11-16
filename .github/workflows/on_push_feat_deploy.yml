@@ -15,7 +15,7 @@ on:
 jobs:
   build-and-deploy:
     name: Build and deploy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.18.1]
