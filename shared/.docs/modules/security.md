@@ -1,4 +1,4 @@
-[did-shared - v0.11.1](../README.md) / Security
+[did-shared - v0.11.2](../README.md) / Security
 
 # Module: Security
 

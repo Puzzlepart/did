@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / [GraphQL](../modules/graphql.md) / CreateOrUpdateProjectResult
+[did-server - v0.11.2](../README.md) / [GraphQL](../modules/graphql.md) / CreateOrUpdateProjectResult
 
 # Class: CreateOrUpdateProjectResult
 

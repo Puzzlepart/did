@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Components](../modules/components.md) / IListColumnData
+[did-client - v0.11.2](../README.md) / [Components](../modules/components.md) / IListColumnData
 
 # Interface: IListColumnData
 

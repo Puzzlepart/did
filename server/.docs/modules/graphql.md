@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / GraphQL
+[did-server - v0.11.2](../README.md) / GraphQL
 
 # Module: GraphQL
 
@@ -10,9 +10,9 @@
 ### GraphQL InputType Classes
 
 - [ApiTokenInput](../classes/graphql.apitokeninput.md)
+- [ClientEventInput](../classes/graphql.clienteventinput.md)
 - [ConfirmedPeriodsQuery](../classes/graphql.confirmedperiodsquery.md)
 - [CustomerInput](../classes/graphql.customerinput.md)
-- [EventInput](../classes/graphql.eventinput.md)
 - [LabelInput](../classes/graphql.labelinput.md)
 - [NotificationTemplates](../classes/graphql.notificationtemplates.md)
 - [ProjectInput](../classes/graphql.projectinput.md)
