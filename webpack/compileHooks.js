@@ -3,12 +3,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 const fs = require('fs')
-const path = require('path')
 const chalk = require('chalk')
 const { promisify } = require('util')
 const format = require('string-format')
 const writeFileAsync = promisify(fs.writeFile)
-const readFileAsync = promisify(fs.readFile)
 const localtunnel = require('localtunnel')
 const open = require('open')
 const log = console.log

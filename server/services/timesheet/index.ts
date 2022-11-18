@@ -96,13 +96,8 @@ export class TimesheetService {
         parameters.includeSplitWeeks
       )
       const holidays = await this._holidaysService.find({
-        date: {
-          $gte: new Date(parameters.startDate),
-          $lt: new Date(parameters.endDate).setDate(new Date(parameters.endDate).getDate() + 1)
-        }
+        periodId: { $in: periods.map(p => p.id) }
       })
-      // eslint-disable-next-line no-console
-      console.log(holidays, new Date(parameters.endDate).setDate(new Date(parameters.endDate).getDate() + 1), periods[0])
       const data = await this._projectSvc.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
         let period = periods[index]
@@ -116,7 +111,7 @@ export class TimesheetService {
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = forecasted?.hours ?? 0
-        period.holidays = holidays
+        period.holidays = holidays.filter(h => h.periodId === period.id)
         if (confirmed) {
           period = {
             ...period,

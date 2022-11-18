@@ -5,15 +5,11 @@ require('dotenv').config()
 const {
   MODE,
   IS_DEVELOPMENT,
-  SERVER_DIST,
   PUBLIC_JS_PATH,
   BUNDLE_FILE_NAME,
-  HTML_PLUGIN_TEMPLATE,
-  HTML_PLUGIN_FILE_NAME,
   SRC_PATH,
   TSCONFIG_COMPILER_OPTIONS,
   TSCONFIG_PATH,
-  DEFINITIONS
 } = require('./constants')
 const { getResolves } = require('./getResolves')
 const { getPluginsForEnvironment } = require('./getPluginsForEnvironment')
