@@ -1,4 +1,4 @@
-[did-client - v0.11.0](../README.md) / [Components](../modules/components.md) / IListSelectionProps
+[did-client - v0.11.1](../README.md) / [Components](../modules/components.md) / IListSelectionProps
 
 # Interface: IListSelectionProps<T\>
 

@@ -1,4 +1,4 @@
-[did-server - v0.11.0](../README.md) / [GraphQL](../modules/graphql.md) / LabelObject
+[did-server - v0.11.1](../README.md) / [GraphQL](../modules/graphql.md) / LabelObject
 
 # Class: LabelObject
 

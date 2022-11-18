@@ -1,4 +1,4 @@
-[did-client - v0.11.0](../README.md) / [Pages](../modules/pages.md) / IReportsState
+[did-client - v0.11.1](../README.md) / [Pages](../modules/pages.md) / IReportsState
 
 # Interface: IReportsState
 

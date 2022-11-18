@@ -1,4 +1,4 @@
-[did-server - v0.11.0](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
+[did-server - v0.11.1](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
 
 # Class: ConfirmedPeriodsService
 

@@ -1,4 +1,4 @@
-[did-client - v0.11.0](../README.md) / GraphQL
+[did-client - v0.11.1](../README.md) / GraphQL
 
 # Module: GraphQL
 

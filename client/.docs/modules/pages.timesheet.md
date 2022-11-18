@@ -1,4 +1,4 @@
-[did-client - v0.11.0](../README.md) / [Pages](pages.md) / Timesheet
+[did-client - v0.11.1](../README.md) / [Pages](pages.md) / Timesheet
 
 # Namespace: Timesheet
 

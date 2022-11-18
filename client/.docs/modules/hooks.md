@@ -1,4 +1,4 @@
-[did-client - v0.11.0](../README.md) / Hooks
+[did-client - v0.11.1](../README.md) / Hooks
 
 # Module: Hooks
 
@@ -213,7 +213,7 @@ Name | Type |
 `$set` | *Dispatch*<SetStateAction<Map<KeyType, ValueType\>\>\> |
 `reset` | () => *void* |
 `set` | (`key`: KeyType, `value`: ValueType) => *void* |
-`value` | (`key`: KeyType, `\_default`: *any*) => *any* |
+`value` | <T\>(`key`: KeyType, `\_defaultValue`: T) => T |
 
 a `$set` function to set the map, a `set´
 function to set a key on the map, a `value`function
