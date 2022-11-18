@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
@@ -61,24 +62,25 @@ export class ReportService {
    * @param preset - Query preset
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
-    const d = new DateObject()
+    const date = new DateObject().toObject()
     return (
       {
         LAST_MONTH: {
           month:
-            d.toObject().month === 1 ? 12 : d.add('-1m').toObject().month - 1,
-          year:
-            d.toObject().month === 1 ? d.toObject().year - 1 : d.toObject().year
+            date.month === 1
+              ? 12
+              : new DateObject().add('-1m').toObject().month - 1,
+          year: date.month === 1 ? date.year - 1 : date.year
         },
         CURRENT_MONTH: {
-          month: d.toObject().month,
-          year: d.toObject().year
+          month: date.month,
+          year: date.year
         },
         LAST_YEAR: {
-          year: d.toObject().year - 1
+          year: date.year - 1
         },
         CURRENT_YEAR: {
-          year: d.toObject().year
+          year: date.year
         }
       }[preset] || {}
     )
