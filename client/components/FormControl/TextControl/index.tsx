@@ -20,7 +20,7 @@ export const TextControl: ReusableComponent<ITextControlProps> = (props) => {
       <TextField
         {...props}
         onChange={onChange}
-        value={props.model.value(props.name) as string}
+        value={props.model.value<string>(props.name, '')}
       />
     </div>
   )

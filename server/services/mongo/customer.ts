@@ -76,7 +76,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
     try {
       return this.cache.usingCache<Customer[]>(
         async () => {
-          const customers = await this.find(query)
+          const customers = await this.find(query, { name: 1 })
           return customers
         },
         { key: 'getcustomers' }

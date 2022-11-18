@@ -47,12 +47,13 @@ export function useMap<
    * from the converted object
    *
    * @param key - Key of the value to retriee
-   * @param _default - Default value
+   * @param _defaultValue - Default value
    *
-   * @returns
+   * @returns Model value from the converted object
    */
-  const value = (key: KeyType, _default = null): any =>
-    ($ as any)[key] || _default
+  function value<T = any>(key: KeyType, _defaultValue: T = null): T {
+    return ($ as any)[key] ?? _defaultValue
+  }
 
   return {
     $set,
@@ -60,5 +61,5 @@ export function useMap<
     set,
     value,
     reset
-  }
+  } as const
 }

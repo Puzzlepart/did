@@ -30,8 +30,6 @@ export class CustomerResolver {
 
   /**
    * Get customers
-   *
-   * @param sortBy - Sort by
    **/
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
