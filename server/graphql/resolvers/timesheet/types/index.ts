@@ -1,4 +1,4 @@
-export * from './EventInput'
+export * from './ClientEventInput'
 export * from './EventObject'
 export * from './TimesheetOptions'
 export * from './TimesheetPeriodInput'

@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { Field, InputType } from 'type-graphql'
-import { EventInput } from './EventInput'
+import { ClientEventInput } from './ClientEventInput'
 
 /**
  * @category GraphQL InputType
@@ -18,8 +18,8 @@ export class TimesheetPeriodInput {
   @Field()
   endDate: string
 
-  @Field(() => [EventInput])
-  matchedEvents: EventInput[]
+  @Field(() => [ClientEventInput])
+  matchedEvents: ClientEventInput[]
 
   @Field({ nullable: true })
   forecastedHours: number

@@ -2,13 +2,13 @@
 import $date from 'DateUtils'
 import { TFunction } from 'i18next'
 import {
-  EventInput,
+  ClientEventInput,
   EventObject,
   Project,
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
-import _ from 'underscore'
+import _, { pick } from 'underscore'
 import { BrowserStorage } from 'utils'
 
 /**
@@ -62,7 +62,7 @@ export class TimesheetPeriod {
    *
    * @param period - Period
    */
-  initialize(period: TimesheetPeriodObject) {
+  public initialize(period: TimesheetPeriodObject) {
     Object.assign(this, period)
     this._uiMatchedEventsStorage = new BrowserStorage(
       `timesheet_matched_events_${this.id}`
@@ -254,18 +254,31 @@ export class TimesheetPeriod {
    *
    * @memberof TimesheetPeriod
    */
-  public get matchedEvents(): EventInput[] {
+  public get matchedEvents(): ClientEventInput[] {
     const events = _.filter(
       [...this.getEvents()],
       (event) => !!event.project
-    ).map(
-      (event) =>
-        ({
-          id: event.id,
-          projectId: event.project.tag,
-          manualMatch: event.manualMatch
-        } as EventInput)
-    )
+    ).map((event) => {
+      let eventInput: ClientEventInput = {
+        id: event.id,
+        projectId: event.project.tag,
+        manualMatch: event.manualMatch
+      }
+      if (event.adjustedMinutes) {
+        eventInput = {
+          ...eventInput,
+          ...pick(
+            event,
+            'originalDuration',
+            'startDateTime',
+            'endDateTime',
+            'duration',
+            'adjustedMinutes'
+          )
+        }
+      }
+      return eventInput
+    })
     return events
   }
 
