@@ -8,9 +8,9 @@ import { EventObject } from 'types'
 import { useTimesheetContext } from '../../context'
 
 /**
- * Use groups
+ * Use list group props
  */
-export function useGroups() {
+export function useListGroupProps() {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   return useMemo(
