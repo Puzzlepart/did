@@ -31,6 +31,7 @@ export class TimesheetPeriod {
   public readonly isForecast: boolean
   public readonly forecastedHours: number
   public readonly month: string
+  public readonly holidays: any[]
 
   /**
    * Events for the period
@@ -296,9 +297,9 @@ export class TimesheetPeriod {
    *
    * @memberof TimesheetPeriod
    */
-  public weekdays(template: string = 'dddd DD'): string[] {
+  public weekdays<T = string>(template: string = 'dddd DD'): T[] {
     if (!this.startDate) return []
-    return $date.getDays(this.startDate, this.endDate, template)
+    return $date.getDays(this.startDate, this.endDate, template) as T[]
   }
 
   /**

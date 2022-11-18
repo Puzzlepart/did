@@ -55,7 +55,9 @@ export function useListProps({
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
       ...props.listGroupRenderProps,
-      onRenderHeader: ListGroupHeader
+      onRenderHeader: (props) => {
+        return <ListGroupHeader {...props} />
+      }
     },
     checkboxVisibility: props.checkboxVisibility || CheckboxVisibility.hidden
   } as IListProps
