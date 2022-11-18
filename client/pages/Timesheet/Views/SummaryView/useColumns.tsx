@@ -31,7 +31,11 @@ export function useColumns(): IColumn[] {
               name: s.capitalize(day.format('ddd DD')),
               minWidth: 70,
               maxWidth: 70,
-              onRender
+              onRender,
+              onRenderHeader: (props, defaultRender) => {
+                const holiday = day.isHoliday(state.selectedPeriod.holidays)
+                return <div style={{ color: holiday && 'red' }}>{defaultRender(props)}</div>
+              }
             }
           }
         )
