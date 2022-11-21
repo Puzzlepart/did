@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / Parts
+[did-client - v0.11.2](../README.md) / Parts
 
 # Module: Parts
 

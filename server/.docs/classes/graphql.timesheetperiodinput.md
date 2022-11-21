@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
+[did-server - v0.11.2](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
 
 # Class: TimesheetPeriodInput
 
@@ -54,7 +54,7 @@ ___
 
 ### matchedEvents
 
-• **matchedEvents**: [*EventInput*](graphql.eventinput.md)[]
+• **matchedEvents**: [*ClientEventInput*](graphql.clienteventinput.md)[]
 
 Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L22)
 

@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
+[did-client - v0.11.2](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
 
 # Interface: ITimesheetState
 
