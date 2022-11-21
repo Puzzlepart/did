@@ -199,11 +199,12 @@ export class DateObject {
   }
 
   /**
-   * Checks if the date is a holiday
+   * Checks if the date is a national holiday and returns the holiday object if 
+   * the date/day is a national holiday.
    * 
    * @param holidays Collection of holidays to check towards
    */
-  public isHoliday(holidays: HolidayObject[]): HolidayObject {
+  public isNationalHoliday(holidays: HolidayObject[] = []): HolidayObject {
     return _.find(holidays, ({ date }) => {
       return new DateObject(date).isSameDay(this)
     })

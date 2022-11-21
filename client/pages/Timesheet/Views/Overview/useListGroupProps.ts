@@ -21,7 +21,7 @@ export function useListGroupProps() {
         packageFile.config.app.TIMESHEET_OVERVIEW_DAY_FORMAT
       ),
       groupData: state.selectedPeriod?.weekdays<DateObject>('DateObject').map(date => ({
-        holiday: date.isHoliday(state.selectedPeriod.holidays)
+        holiday: date.isNationalHoliday(state.selectedPeriod?.holidays)
       })),
       totalFunc: (events: EventObject[]) => {
         const duration = events.reduce((sum, index) => sum + index.duration, 0)

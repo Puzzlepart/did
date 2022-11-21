@@ -33,8 +33,8 @@ export function useColumns(): IColumn[] {
               maxWidth: 70,
               onRender,
               onRenderHeader: (props, defaultRender) => {
-                const holiday = day.isHoliday(state.selectedPeriod.holidays)
-                return <div style={{ color: holiday && 'red' }}>{defaultRender(props)}</div>
+                const holiday = day.isNationalHoliday(state.selectedPeriod?.holidays)
+                return <div title={holiday?.name} style={{ color: holiday && '#CC0000' }}>{defaultRender(props)}</div>
               }
             }
           }
