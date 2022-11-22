@@ -178,8 +178,36 @@ export class DateObject {
    * @param date - Date   *
    * @param unit - Unit
    */
-  diff(date: DateObject, unit: OpUnitType) {
+  public diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
+  }
+
+  /**
+  * Returns the ISO week number for this date.
+  * 
+  * @returns ISO 8601 week number.
+  */
+  public isoWeek(dowOffset = 1) {
+    const date = this.jsDate
+    const newYear = new Date(date.getFullYear(), 0, 1)
+    let day = newYear.getDay() - dowOffset
+    day = (day >= 0 ? day : day + 7)
+    const daynum = Math.floor((date.getTime() - newYear.getTime() -
+      (date.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60_000) / 86_400_000) + 1
+    let weeknum: number, nYear: Date, nday: number
+    if (day < 4) {
+      weeknum = Math.floor((daynum + day - 1) / 7) + 1
+      if (weeknum > 52) {
+        nYear = new Date(date.getFullYear() + 1, 0, 1)
+        nday = nYear.getDay() - dowOffset
+        nday = nday >= 0 ? nday : nday + 7
+        weeknum = nday < 4 ? 1 : 53
+      }
+    }
+    else {
+      weeknum = Math.floor((daynum + day - 1) / 7)
+    }
+    return weeknum
   }
 
   /**
@@ -187,7 +215,7 @@ export class DateObject {
    *
    * @param include - Properties to include
    */
-  toObject(...include: string[]) {
+  public toObject(...include: string[]) {
     const dateObject = {
       week: DateUtils.getWeek(this.$),
       month: DateUtils.getMonthIndex(this.$),
@@ -208,34 +236,34 @@ export class DateObject {
     const endOfWeek = this.endOfWeek
     return startOfWeek.$.month() === endOfWeek.$.month()
       ? [
-          {
-            id: DateUtils.getPeriod(startOfWeek.$),
-            name: startOfWeek.$.isoWeek().toString(),
-            startDate: startOfWeek,
-            endDate: endOfWeek
-          }
-        ]
+        {
+          id: DateUtils.getPeriod(startOfWeek.$),
+          name: startOfWeek.$.isoWeek().toString(),
+          startDate: startOfWeek,
+          endDate: endOfWeek
+        }
+      ]
       : [
-          {
-            id: DateUtils.getPeriod(startOfWeek.$),
-            name: `${startOfWeek.$.isoWeek()}/${pad(
-              (startOfWeek.$.month() + 1).toString(),
-              2,
-              '0'
-            )}`,
-            startDate: startOfWeek,
-            endDate: startOfWeek.endOfMonth
-          },
-          {
-            id: DateUtils.getPeriod(endOfWeek.$),
-            name: `${endOfWeek.$.isoWeek()}/${pad(
-              (endOfWeek.$.month() + 1).toString(),
-              2,
-              '0'
-            )}`,
-            startDate: endOfWeek.startOfMonth,
-            endDate: endOfWeek
-          }
-        ]
+        {
+          id: DateUtils.getPeriod(startOfWeek.$),
+          name: `${startOfWeek.$.isoWeek()}/${pad(
+            (startOfWeek.$.month() + 1).toString(),
+            2,
+            '0'
+          )}`,
+          startDate: startOfWeek,
+          endDate: startOfWeek.endOfMonth
+        },
+        {
+          id: DateUtils.getPeriod(endOfWeek.$),
+          name: `${endOfWeek.$.isoWeek()}/${pad(
+            (endOfWeek.$.month() + 1).toString(),
+            2,
+            '0'
+          )}`,
+          startDate: endOfWeek.startOfMonth,
+          endDate: endOfWeek
+        }
+      ]
   }
 }
