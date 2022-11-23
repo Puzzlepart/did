@@ -10,6 +10,7 @@ import {
   CLEAR_IGNORES,
   CLEAR_MANUAL_MATCH,
   DATA_UPDATED,
+  IGNORE_ALL,
   IGNORE_EVENT,
   MANUAL_MATCH,
   NEXT_PERIOD,
@@ -186,6 +187,12 @@ export function createTimesheetReducer(
       })
       .addCase(CLEAR_IGNORES, (state) => {
         state.selectedPeriod.clearIgnoredEvents()
+        state.periods = state.periods.map((p) =>
+          p.id === state.selectedPeriod.id ? state.selectedPeriod : p
+        )
+      })
+      .addCase(IGNORE_ALL, (state) => {
+        state.selectedPeriod.ignoreAllEvents()
         state.periods = state.periods.map((p) =>
           p.id === state.selectedPeriod.id ? state.selectedPeriod : p
         )

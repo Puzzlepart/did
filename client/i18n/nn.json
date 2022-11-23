@@ -61,7 +61,8 @@
     "dateRangeWeek": "Veke",
     "dateRangeMonth": "Månad",
     "monthForecastedText": "Månaden er prognosert med {{hours}}.",
-    "monthConfirmedText": "Totalt **{{hours}}** stadfesta denne månaden. Du har stadfesta {{confirmedPeriodsCount}} av {{periodsCount}} periodar. Du må vere i *Oversikt*-visninga for å gjere justeringar."
+    "monthConfirmedText": "Totalt **{{hours}}** stadfesta denne månaden. Du har stadfesta {{confirmedPeriodsCount}} av {{periodsCount}} periodar. Du må vere i *Oversikt*-visninga for å gjere justeringar.",
+    "ignoreAllText": "Ignorer alle"
   },
   "projects": {
     "filterLabels": "Filtrer merkelappar...",
