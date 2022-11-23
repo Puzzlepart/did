@@ -18,6 +18,7 @@ export const Projects: FC = () => {
   return (
     <ProjectsContext.Provider value={context}>
       <TabContainer
+        hidden={!!state.selected}
         defaultSelectedKey={state.view}
         onTabChanged={(itemKey) =>
           dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
@@ -28,19 +29,13 @@ export const Projects: FC = () => {
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'
-          items={state.projects}
-        >
-          {state.selected && <ProjectDetails />}
-        </ProjectList>
+          items={state.projects} />
         <ProjectList
           {...listProps}
           itemKey='my'
           headerText={t('projects.myProjectsText')}
           itemIcon='FabricUserFolder'
-          items={state.projects.filter((p) => !!p.outlookCategory)}
-        >
-          {state.selected && <ProjectDetails />}
-        </ProjectList>
+          items={state.projects.filter((p) => !!p.outlookCategory)} />
         <ProjectForm
           itemKey='new'
           headerText={t('projects.createNewText')}
@@ -48,6 +43,7 @@ export const Projects: FC = () => {
           permission={PermissionScope.MANAGE_PROJECTS}
         />
       </TabContainer>
+      {state.selected && <ProjectDetails />}
     </ProjectsContext.Provider>
   )
 }

@@ -1,5 +1,4 @@
-import { Icon } from '@fluentui/react'
-import { SubText } from 'components'
+import { Breadcrumb } from '@fluentui/react'
 import React, { FC, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ProjectsContext } from '../../context'
@@ -13,12 +12,21 @@ export const Header: FC = () => {
   const { state } = useContext(ProjectsContext)
   return (
     <div className={styles.root}>
-      <div className={styles.icon}>
-        <Icon iconName={state.selected.icon} />
-      </div>
       <div className={styles.title}>
-        <div className={styles.text}>{state.selected.name}</div>
-        <SubText text={state.selected.customer.name} />
+        <Breadcrumb items={[
+          {
+            key: 'projects',
+            text: 'Prosjekter'
+          },
+          {
+            key: 'customer',
+            text: state.selected.customer.name
+          },
+          {
+            key: 'project',
+            text: state.selected.name
+          }
+        ]} />
       </div>
       <Actions hidden={isMobile} />
     </div>
