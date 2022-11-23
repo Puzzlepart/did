@@ -7,7 +7,7 @@ import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { ICustomerFormProps } from './CustomerForm/types'
 import { CustomerList } from './CustomerList'
-import { useCustomers } from './hooks/useCustomers'
+import { useCustomers } from './useCustomers'
 import { CHANGE_VIEW } from './reducer/actions'
 import { CustomersView } from './types'
 

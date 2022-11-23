@@ -26,7 +26,6 @@ export const CustomerList: TabComponent = (props) => {
           mode: SelectionMode.single,
           onChanged: setSelectedCustomer
         }}
-        height={state.selected && 400}
         enableShimmer={loading}
         items={items}
         columns={columns}

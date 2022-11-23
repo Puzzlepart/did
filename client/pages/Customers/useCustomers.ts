@@ -2,12 +2,12 @@
 import { useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { ICustomersContext } from '../context'
+import { ICustomersContext } from './context'
 import $customers from '../customers.gql'
-import { DATA_UPDATED } from '../reducer/actions'
-import { useCustomersReducer } from '../reducer/useCustomersReducer'
-import { ICustomersParameters } from '../types'
-import { useCustomersHistory } from './useCustomersHistory'
+import { DATA_UPDATED } from './reducer/actions'
+import { useCustomersReducer } from './reducer/useCustomersReducer'
+import { ICustomersParameters } from './types'
+import { useCustomersHistory } from './hooks/useCustomersHistory'
 
 /**
  * Hook for Customers

@@ -24,8 +24,7 @@ export function useProjectList({ state, dispatch, loading, t }) {
         onChanged: (project: Project) => {
           dispatch(SET_SELECTED_PROJECT({ project }))
         }
-      },
-      height: state.selected && 400
+      }
     }),
     [state, dispatch, loading, t]
   )
