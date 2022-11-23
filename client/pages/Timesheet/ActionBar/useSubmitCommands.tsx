@@ -134,6 +134,8 @@ export function useSubmitCommands(): IContextualMenuItem {
         }
       }
 
+      if (_.isEmpty(commands)) return null
+
       return (
         <PrimaryButton
           style={{
