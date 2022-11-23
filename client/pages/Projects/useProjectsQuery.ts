@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Dispatch, useLayoutEffect } from 'react'
-import { DATA_UPDATED } from '../reducer/actions'
+import { DATA_UPDATED } from './reducer/actions'
 import $projects_outlook from './projects-outlook.gql'
 
 /**

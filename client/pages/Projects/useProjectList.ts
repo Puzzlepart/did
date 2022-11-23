@@ -1,8 +1,8 @@
 import { SelectionMode } from '@fluentui/react'
 import { useMemo } from 'react'
 import { Project } from 'types'
-import { IProjectListProps } from '../ProjectList/types'
-import { SET_SELECTED_PROJECT } from '../reducer/actions'
+import { IProjectListProps } from './ProjectList/types'
+import { SET_SELECTED_PROJECT } from './reducer/actions'
 
 /**
  * Use Project list
@@ -22,7 +22,7 @@ export function useProjectList({ state, dispatch, loading, t }) {
       selectionProps: {
         mode: SelectionMode.single,
         onChanged: (project: Project) => {
-          dispatch(SET_SELECTED_PROJECT({ project }))
+          if (project) dispatch(SET_SELECTED_PROJECT({ project }))
         }
       }
     }),

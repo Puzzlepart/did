@@ -3,9 +3,9 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { IProjectsContext } from './context'
-import { useProjecstHistory } from './hooks/useProjecstHistory'
-import { useProjectList } from './hooks/useProjectList'
-import { useProjectsQuery } from './hooks/useProjectsQuery'
+import { useProjectsHistory } from './useProjectsHistory'
+import { useProjectList } from './useProjectList'
+import { useProjectsQuery } from './useProjectsQuery'
 import { useProjectsReducer } from './reducer'
 import { IProjectsParameters } from './types'
 
@@ -26,7 +26,7 @@ export function useProjects() {
   const { state, dispatch } = useProjectsReducer({ url })
   const { refetch, loading } = useProjectsQuery(dispatch)
 
-  useProjecstHistory(state)
+  useProjectsHistory(state)
 
   const context = useMemo<IProjectsContext>(
     () => ({
