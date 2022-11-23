@@ -29,7 +29,7 @@ Report service
 
 ### constructor
 
-\+ **new ReportService**(`context`: *Context*, `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services.reportservice.md)
+\+ **new ReportService**(`context`: *Context*, `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_timeEntrySvc`: [*TimeEntryService*](services.timeentryservice.md), `_forecastTimeEntrySvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_confirmedPeriodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services.reportservice.md)
 
 Constructor for ReportsService
 
@@ -40,13 +40,13 @@ Name | Type | Description |
 `context` | *Context* | Injected context through `typedi`   |
 `_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through `typedi`   |
 `_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through `typedi`   |
-`_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through `typedi`   |
-`_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through `typedi`   |
-`_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through `typedi`    |
+`_timeEntrySvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through `typedi`   |
+`_forecastTimeEntrySvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through `typedi`   |
+`_confirmedPeriodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through `typedi`    |
 
 **Returns:** [*ReportService*](services.reportservice.md)
 
-Defined in: [services/report.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L38)
+Defined in: [services/report.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L39)
 
 ## Properties
 
@@ -70,7 +70,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [services/report.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L63)
+Defined in: [services/report.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L64)
 
 ___
 
@@ -88,7 +88,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/report.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L92)
+Defined in: [services/report.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L94)
 
 ___
 
@@ -106,7 +106,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/report.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L142)
+Defined in: [services/report.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L144)
 
 ___
 
@@ -118,7 +118,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:186](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L186)
+Defined in: [services/report.ts:188](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L188)
 
 ___
 
@@ -138,7 +138,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:153](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L153)
+Defined in: [services/report.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L155)
 
 ___
 
@@ -158,4 +158,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [services/report.ts:216](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L216)
+Defined in: [services/report.ts:218](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L218)

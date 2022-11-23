@@ -60,7 +60,7 @@ export function useMessages(): IUserMessageProps[] {
           hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
           splitWeekInfoText:
             state.periods.length > 1 &&
-              state.dateRangeType === DateRangeType.Week
+            state.dateRangeType === DateRangeType.Week
               ? t('timesheet.splitWeekInfoText')
               : ''
         })

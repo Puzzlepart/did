@@ -6,7 +6,7 @@ import _ from 'underscore'
 import { IListGroupProps } from './types'
 
 /**
- * Returns list groups based on property `listGroupProps` on 
+ * Returns list groups based on property `listGroupProps` on
  * the `<List />` component
  *
  * @category List

@@ -143,14 +143,20 @@ export class TimesheetPeriod {
    *
    * @memberof TimesheetPeriod
    */
-  public getEvents(option: GetEventsOption = GetEventsOption.AllEvents): EventObject[] {
+  public getEvents(
+    option: GetEventsOption = GetEventsOption.AllEvents
+  ): EventObject[] {
     return [...(this.events || [])]
       .filter((event) => {
-        if (this._uiIgnoredEvents.includes(event.id) || event.isSystemIgnored) return false
+        if (this._uiIgnoredEvents.includes(event.id) || event.isSystemIgnored)
+          return false
         switch (option) {
-          case GetEventsOption.AllEvents: return true
-          case GetEventsOption.MatchedEvents: return !!event.project
-          case GetEventsOption.UnmatchedEvents: return !event.project
+          case GetEventsOption.AllEvents:
+            return true
+          case GetEventsOption.MatchedEvents:
+            return !!event.project
+          case GetEventsOption.UnmatchedEvents:
+            return !event.project
         }
       })
       .map((event) => this._checkUiManualMatch(event))
@@ -261,7 +267,9 @@ export class TimesheetPeriod {
    * @memberof TimesheetPeriod
    */
   public ignoreAllEvents() {
-    this._uiIgnoredEvents = this.getEvents(GetEventsOption.UnmatchedEvents).map(event => event.id)
+    this._uiIgnoredEvents = this.getEvents(GetEventsOption.UnmatchedEvents).map(
+      (event) => event.id
+    )
     this._uiIgnoredEventsStorage.set(this._uiIgnoredEvents)
   }
 
@@ -368,7 +376,7 @@ export class TimesheetPeriod {
    */
   public get startDateIndex() {
     const startDate = new Date(this.startDate)
-    return ((startDate.getDay() + 6) % 7)
+    return (startDate.getDay() + 6) % 7
   }
 
   /**
@@ -376,6 +384,6 @@ export class TimesheetPeriod {
    */
   public get endDateIndex() {
     const endDate = new Date(this.endDate)
-    return ((endDate.getDay() + 6) % 7)
+    return (endDate.getDay() + 6) % 7
   }
 }

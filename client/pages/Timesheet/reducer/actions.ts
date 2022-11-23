@@ -112,7 +112,6 @@ export const CLEAR_IGNORES = createAction('CLEAR_IGNORES')
  */
 export const IGNORE_ALL = createAction('IGNORE_ALL')
 
-
 /**
  * Toggle shortcuts action
  *

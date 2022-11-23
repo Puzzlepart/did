@@ -39,6 +39,7 @@
 - [CreateOutlookCategoryResult](../classes/graphql.createoutlookcategoryresult.md)
 - [Customer](../classes/graphql.customer.md)
 - [EventObject](../classes/graphql.eventobject.md)
+- [HolidayObject](../classes/graphql.holidayobject.md)
 - [LabelObject](../classes/graphql.labelobject.md)
 - [Notification](../classes/graphql.notification.md)
 - [OutlookCategory](../classes/graphql.outlookcategory.md)

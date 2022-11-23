@@ -39,4 +39,4 @@ Defines our [Apollo Client](https://www.apollographql.com/docs/react/)
 * Using url `/graphql`
 * Using `cache-and-network` as default `fetchPolicy`
 
-Defined in: [client/graphql/index.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L39)
+Defined in: [client/graphql/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L41)

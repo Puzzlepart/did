@@ -70,32 +70,34 @@ export function useRowGenerator(columns: IColumn[]) {
       case DateRangeType.Week: {
         const events = state.selectedPeriod?.getEvents() || []
         const projectRows = getUniqueProjectRows(events, t)
-        const rows = projectRows.map((project) => {
-          const projectEvents = events.filter(
-            (event) =>
-              event.project?.tag === project.tag ||
-              (!project.tag && !event.project)
-          )
-          return [...columns].splice(1, columns.length - 2).reduce(
-            (object, col) => {
-              const sum = [...projectEvents]
-                .filter(
-                  (event) =>
-                    $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
-                    col.fieldName
-                )
-                .reduce((sum, event) => (sum += event.duration), 0)
-              object[col.fieldName] = sum
-              object.sum += sum
-              return object
-            },
-            {
-              sum: 0,
-              project,
-              customer: project.customer
-            }
-          )
-        }).filter(row => row.sum > 0)
+        const rows = projectRows
+          .map((project) => {
+            const projectEvents = events.filter(
+              (event) =>
+                event.project?.tag === project.tag ||
+                (!project.tag && !event.project)
+            )
+            return [...columns].splice(1, columns.length - 2).reduce(
+              (object, col) => {
+                const sum = [...projectEvents]
+                  .filter(
+                    (event) =>
+                      $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+                      col.fieldName
+                  )
+                  .reduce((sum, event) => (sum += event.duration), 0)
+                object[col.fieldName] = sum
+                object.sum += sum
+                return object
+              },
+              {
+                sum: 0,
+                project,
+                customer: project.customer
+              }
+            )
+          })
+          .filter((row) => row.sum > 0)
         return rows
       }
       case DateRangeType.Month: {

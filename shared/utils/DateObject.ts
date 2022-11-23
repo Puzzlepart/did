@@ -1,7 +1,7 @@
 import { Dayjs, OpUnitType } from 'dayjs'
-import { HolidayObject } from '../../server/graphql'
 import _ from 'underscore'
 import s from 'underscore.string'
+import { HolidayObject } from '../../server/graphql'
 import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {
@@ -199,9 +199,9 @@ export class DateObject {
   }
 
   /**
-   * Checks if the date is a national holiday and returns the holiday object if 
+   * Checks if the date is a national holiday and returns the holiday object if
    * the date/day is a national holiday.
-   * 
+   *
    * @param holidays Collection of holidays to check towards
    */
   public isNationalHoliday(holidays: HolidayObject[] = []): HolidayObject {
@@ -221,34 +221,34 @@ export class DateObject {
     const endOfWeek = this.endOfWeek
     return startOfWeek.$.month() === endOfWeek.$.month()
       ? [
-        {
-          id: DateUtils.getPeriod(startOfWeek.$),
-          name: startOfWeek.$.isoWeek().toString(),
-          startDate: startOfWeek,
-          endDate: endOfWeek
-        }
-      ]
+          {
+            id: DateUtils.getPeriod(startOfWeek.$),
+            name: startOfWeek.$.isoWeek().toString(),
+            startDate: startOfWeek,
+            endDate: endOfWeek
+          }
+        ]
       : [
-        {
-          id: DateUtils.getPeriod(startOfWeek.$),
-          name: `${startOfWeek.$.isoWeek()}/${s.pad(
-            (startOfWeek.$.month() + 1).toString(),
-            2,
-            '0'
-          )}`,
-          startDate: startOfWeek,
-          endDate: startOfWeek.endOfMonth
-        },
-        {
-          id: DateUtils.getPeriod(endOfWeek.$),
-          name: `${endOfWeek.$.isoWeek()}/${s.pad(
-            (endOfWeek.$.month() + 1).toString(),
-            2,
-            '0'
-          )}`,
-          startDate: endOfWeek.startOfMonth,
-          endDate: endOfWeek
-        }
-      ]
+          {
+            id: DateUtils.getPeriod(startOfWeek.$),
+            name: `${startOfWeek.$.isoWeek()}/${s.pad(
+              (startOfWeek.$.month() + 1).toString(),
+              2,
+              '0'
+            )}`,
+            startDate: startOfWeek,
+            endDate: startOfWeek.endOfMonth
+          },
+          {
+            id: DateUtils.getPeriod(endOfWeek.$),
+            name: `${endOfWeek.$.isoWeek()}/${s.pad(
+              (endOfWeek.$.month() + 1).toString(),
+              2,
+              '0'
+            )}`,
+            startDate: endOfWeek.startOfMonth,
+            endDate: endOfWeek
+          }
+        ]
   }
 }

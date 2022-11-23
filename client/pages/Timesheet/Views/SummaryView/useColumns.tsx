@@ -23,7 +23,11 @@ export function useColumns(): IColumn[] {
   switch (state.dateRangeType) {
     case DateRangeType.Week:
       {
-        for (let i = state.selectedPeriod?.startDateIndex; i <= state.selectedPeriod?.endDateIndex; i++) {
+        for (
+          let i = state.selectedPeriod?.startDateIndex;
+          i <= state.selectedPeriod?.endDateIndex;
+          i++
+        ) {
           const day = state.dateRange.getDay(i)
           columns.push({
             key: day.format('YYYY-MM-DD'),
@@ -33,8 +37,17 @@ export function useColumns(): IColumn[] {
             maxWidth: 70,
             onRender,
             onRenderHeader: (props, defaultRender) => {
-              const holiday = day.isNationalHoliday(state.selectedPeriod?.holidays)
-              return <div title={holiday?.name} style={{ color: holiday && '#CC0000' }}>{defaultRender(props)}</div>
+              const holiday = day.isNationalHoliday(
+                state.selectedPeriod?.holidays
+              )
+              return (
+                <div
+                  title={holiday?.name}
+                  style={{ color: holiday && '#CC0000' }}
+                >
+                  {defaultRender(props)}
+                </div>
+              )
             }
           })
         }

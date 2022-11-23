@@ -17,6 +17,10 @@ All are built using React Function components and Hooks.
 - [Home](pages.home.md)
 - [Timesheet](pages.timesheet.md)
 
+### Other Enumerations
+
+- [GetEventsOption](../enums/pages.geteventsoption.md)
+
 ### Timesheet Enumerations
 
 - [TimesheetView](../enums/pages.timesheetview.md)
