@@ -69,7 +69,6 @@ export interface ITimesheetParameters {
   dateRange: string
   view: string
   startDate: string
-  endDate: string
 }
 
 export * from './context'

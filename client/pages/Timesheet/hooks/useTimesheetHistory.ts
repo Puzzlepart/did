@@ -51,7 +51,7 @@ export function useTimesheetHistory(state: ITimesheetState) {
       '/timesheet',
       convertDateRangeTypeToString(state.dateRangeType),
       state.selectedView,
-      ...state.selectedPeriod.path
+      state.selectedPeriod.startDate
     ].join('/')
     history.push(location)
     if (state.selectedPeriod) {

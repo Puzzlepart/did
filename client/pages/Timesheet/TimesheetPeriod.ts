@@ -315,15 +315,6 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Returns URL path for the period
-   *
-   * @memberof TimesheetPeriod
-   */
-  public get path(): string[] {
-    return [this.startDate, this.endDate]
-  }
-
-  /**
    * Period is complete meaning all events are matched
    *
    * @returns `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
