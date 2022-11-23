@@ -2,7 +2,8 @@ import {
   DefaultButton,
   IContextualMenuItem,
   IContextualMenuProps,
-  merge, useTheme
+  merge,
+  useTheme
 } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import React, { useContext } from 'react'
