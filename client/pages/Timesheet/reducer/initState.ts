@@ -31,7 +31,8 @@ export function initState(
   const periods = []
   const dateRangeType = convertStringToDateRangeType(parameters.url.dateRange)
   const scope = new TimesheetDateRange(parameters.url.startDate, dateRangeType)
-  const selectedView = (parameters.url.view as TimesheetView) ?? TimesheetView.Overview
+  const selectedView =
+    (parameters.url.view as TimesheetView) ?? TimesheetView.Overview
   return {
     periods,
     dateRange: scope,

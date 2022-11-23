@@ -50,7 +50,10 @@ export function createTimesheetReducer(
           const lastNav = _.last(state.navHistory)
           state.selectedPeriod =
             _.find(state.periods, (p) => p.id === state.selectedPeriod?.id) ??
-            _.find(state.periods, (p) => p.startDate === parameters.url.startDate) ??
+            _.find(
+              state.periods,
+              (p) => p.startDate === parameters.url.startDate
+            ) ??
             (lastNav === 'PREVIOUS_PERIOD'
               ? _.last(state.periods)
               : _.first(state.periods))

@@ -47,7 +47,7 @@ export function useTimesheetHistory(state: ITimesheetState) {
 
   useLayoutEffect(() => {
     if (!state.selectedPeriod) return
-    const location =   [
+    const location = [
       '/timesheet',
       convertDateRangeTypeToString(state.dateRangeType),
       state.selectedView,
