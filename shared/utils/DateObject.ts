@@ -181,39 +181,6 @@ export class DateObject {
   public diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
   }
-
-  /**
-   * Returns the ISO week number for this date.
-   *
-   * @returns ISO 8601 week number.
-   */
-  public isoWeek(dowOffset = 1) {
-    const date = this.jsDate
-    const newYear = new Date(date.getFullYear(), 0, 1)
-    let day = newYear.getDay() - dowOffset
-    day = day >= 0 ? day : day + 7
-    const daynum =
-      Math.floor(
-        (date.getTime() -
-          newYear.getTime() -
-          (date.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60_000) /
-          86_400_000
-      ) + 1
-    let weeknum: number, nYear: Date, nday: number
-    if (day < 4) {
-      weeknum = Math.floor((daynum + day - 1) / 7) + 1
-      if (weeknum > 52) {
-        nYear = new Date(date.getFullYear() + 1, 0, 1)
-        nday = nYear.getDay() - dowOffset
-        nday = nday >= 0 ? nday : nday + 7
-        weeknum = nday < 4 ? 1 : 53
-      }
-    } else {
-      weeknum = Math.floor((daynum + day - 1) / 7)
-    }
-    return weeknum
-  }
-
   /**
    * Returns an object representation of the DateObject
    *
