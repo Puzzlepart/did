@@ -2,7 +2,6 @@ import { DateRangeType } from '@fluentui/react'
 import DateUtils, { DateInput, DateObject } from 'DateUtils'
 import { TimesheetQuery } from 'types'
 import { capitalize } from 'underscore.string'
-import { ITimesheetParameters } from './types'
 
 /**
  * Handles a date range, the period of time between
@@ -46,19 +45,6 @@ export class TimesheetDateRange {
       this._dateRangeType === DateRangeType.Week
         ? this.startDate.endOfWeek
         : this.startDate.endOfMonth
-  }
-
-  /**
-   * Sets `startDate` and `endDate` from `params`
-   *
-   * @param parameters - Params
-   *
-   * @memberof TimesheetDateRange
-   */
-  public fromParams(parameters: ITimesheetParameters): TimesheetDateRange {
-    const startDate = new DateObject().fromObject(parameters).jsDate
-    this._init(startDate)
-    return this
   }
 
   /**
