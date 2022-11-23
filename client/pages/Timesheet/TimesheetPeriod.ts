@@ -8,8 +8,14 @@ import {
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
-import _, { pick } from 'underscore'
+import _ from 'underscore'
 import { BrowserStorage } from 'utils'
+
+export enum GetEventsOption {
+  AllEvents,
+  MatchedEvents,
+  UnmatchedEvents
+}
 
 /**
  * Handles a part of a `TimesheetScope`. Represented
@@ -31,6 +37,7 @@ export class TimesheetPeriod {
   public readonly isForecast: boolean
   public readonly forecastedHours: number
   public readonly month: string
+  public readonly holidays: any[]
 
   /**
    * Events for the period
@@ -132,20 +139,19 @@ export class TimesheetPeriod {
   /**
    * Get events
    *
-   * @param includeUnmatched - Include unmatched events
+   * @param option - Get events option
    *
    * @memberof TimesheetPeriod
    */
-  public getEvents(includeUnmatched: boolean = true): EventObject[] {
+  public getEvents(option: GetEventsOption = GetEventsOption.AllEvents): EventObject[] {
     return [...(this.events || [])]
       .filter((event) => {
-        const isUiIgnored = this._uiIgnoredEvents.includes(event.id)
-        const isMatched = !!event.project
-        return (
-          !event.isSystemIgnored &&
-          !isUiIgnored &&
-          (!includeUnmatched ? isMatched : true)
-        )
+        if (this._uiIgnoredEvents.includes(event.id) || event.isSystemIgnored) return false
+        switch (option) {
+          case GetEventsOption.AllEvents: return true
+          case GetEventsOption.MatchedEvents: return !!event.project
+          case GetEventsOption.UnmatchedEvents: return !event.project
+        }
       })
       .map((event) => this._checkUiManualMatch(event))
   }
@@ -250,6 +256,16 @@ export class TimesheetPeriod {
   }
 
   /**
+   * Ignore all unmatched events
+   *
+   * @memberof TimesheetPeriod
+   */
+  public ignoreAllEvents() {
+    this._uiIgnoredEvents = this.getEvents(GetEventsOption.UnmatchedEvents).map(event => event.id)
+    this._uiIgnoredEventsStorage.set(this._uiIgnoredEvents)
+  }
+
+  /**
    * Get matched events with properties
    *
    * @memberof TimesheetPeriod
@@ -267,7 +283,7 @@ export class TimesheetPeriod {
       if (event.adjustedMinutes) {
         eventInput = {
           ...eventInput,
-          ...pick(
+          ..._.pick(
             event,
             'originalDuration',
             'startDateTime',
@@ -309,9 +325,9 @@ export class TimesheetPeriod {
    *
    * @memberof TimesheetPeriod
    */
-  public weekdays(template: string = 'dddd DD'): string[] {
+  public weekdays<T = string>(template: string = 'dddd DD'): T[] {
     if (!this.startDate) return []
-    return $date.getDays(this.startDate, this.endDate, template)
+    return $date.getDays(this.startDate, this.endDate, template) as T[]
   }
 
   /**
@@ -345,5 +361,21 @@ export class TimesheetPeriod {
    */
   public get isPast(): boolean {
     return $date.isBefore(this.endDate)
+  }
+
+  /**
+   * Get start date index with Monday = 0
+   */
+  public get startDateIndex() {
+    const startDate = new Date(this.startDate)
+    return ((startDate.getDay() + 6) % 7)
+  }
+
+  /**
+   * Get end date index with Monday = 0
+   */
+  public get endDateIndex() {
+    const endDate = new Date(this.endDate)
+    return ((endDate.getDay() + 6) % 7)
   }
 }

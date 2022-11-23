@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
-const { TSCONFIG_COMPILER_OPTIONS } = require('./constants')
 
 /**
  * Get resolve config for webpack based on

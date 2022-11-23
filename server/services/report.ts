@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
@@ -42,17 +43,17 @@ export class ReportService {
    * @param context - Injected context through `typedi`
    * @param _projectSvc - Injected `ProjectService` through `typedi`
    * @param _userSvc - Injected `UserService` through `typedi`
-   * @param _teSvc - Injected `TimeEntryService` through `typedi`
-   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
-   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _timeEntrySvc - Injected `TimeEntryService` through `typedi`
+   * @param _forecastTimeEntrySvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _confirmedPeriodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
     private readonly _projectSvc: ProjectService,
     private readonly _userSvc: UserService,
-    private readonly _teSvc: TimeEntryService,
-    private readonly _fteSvc: ForecastedTimeEntryService,
-    private readonly _cperiodSvc: ConfirmedPeriodsService
+    private readonly _timeEntrySvc: TimeEntryService,
+    private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
+    private readonly _confirmedPeriodSvc: ConfirmedPeriodsService
   ) {}
 
   /**
@@ -61,24 +62,25 @@ export class ReportService {
    * @param preset - Query preset
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
-    const d = new DateObject()
+    const date = new DateObject().toObject()
     return (
       {
         LAST_MONTH: {
           month:
-            d.toObject().month === 1 ? 12 : d.add('-1m').toObject().month - 1,
-          year:
-            d.toObject().month === 1 ? d.toObject().year - 1 : d.toObject().year
+            date.month === 1
+              ? 12
+              : new DateObject().add('-1m').toObject().month - 1,
+          year: date.month === 1 ? date.year - 1 : date.year
         },
         CURRENT_MONTH: {
-          month: d.toObject().month,
-          year: d.toObject().year
+          month: date.month,
+          year: date.year
         },
         LAST_YEAR: {
-          year: d.toObject().year - 1
+          year: date.year - 1
         },
         CURRENT_YEAR: {
-          year: d.toObject().year
+          year: date.year
         }
       }[preset] || {}
     )
@@ -140,7 +142,7 @@ export class ReportService {
    * @param queries - Queries
    */
   public async getConfirmedPeriods(queries: ConfirmedPeriodsQuery[]) {
-    return await this._cperiodSvc.find({ $or: queries })
+    return await this._confirmedPeriodSvc.find({ $or: queries })
   }
 
   /**
@@ -164,7 +166,7 @@ export class ReportService {
         'preset'
       )
       const [timeEntries, projectsData, users] = await Promise.all([
-        this._teSvc.find(query_),
+        this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
         this._userSvc.getUsers({ hiddenFromReports: false })
       ])
@@ -186,7 +188,7 @@ export class ReportService {
   public async getForecastReport(): Promise<Report> {
     try {
       const [timeEntries, projectsData, users] = await Promise.all([
-        this._fteSvc.find({
+        this._forecastTimeEntrySvc.find({
           startDateTime: {
             $gte: new Date()
           }
@@ -224,7 +226,7 @@ export class ReportService {
         ...this._generatePresetQuery(preset)
       }
       const [timeEntries, { projects, customers }] = await Promise.all([
-        this._teSvc.find(q),
+        this._timeEntrySvc.find(q),
         this._projectSvc.getProjectsData()
       ])
       const report = this._generateReport({

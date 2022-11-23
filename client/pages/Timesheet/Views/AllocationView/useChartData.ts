@@ -64,9 +64,9 @@ export function useChartData<T = any>(
 ): ChartData<T> {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
-  let events = state.selectedPeriod?.getEvents(true)
+  let events = state.selectedPeriod?.getEvents()
   if (state.dateRangeType === DateRangeType.Month) {
-    events = state.periods.flatMap((period) => period.getEvents(true))
+    events = state.periods.flatMap((period) => period.getEvents())
   }
   return useMemo(
     () =>

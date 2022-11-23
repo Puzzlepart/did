@@ -7,6 +7,10 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
     month
     startDate
     endDate
+    holidays {
+      date
+      name
+    }
     events {
       id
       title
