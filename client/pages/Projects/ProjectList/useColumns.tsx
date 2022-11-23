@@ -64,7 +64,11 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
       { maxWidth: 220 },
       (project: Project) => (
         <ColumnWrapper project={project}>
-          <NameLabel project={project} renderLink={props.renderLink} />
+          <NameLabel project={project} renderLink={props.renderLink} onClick={() => {
+            if (props.linkOnClick) {
+              props.linkOnClick(project)
+            }
+          }} />
         </ColumnWrapper>
       )
     ),

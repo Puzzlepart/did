@@ -1,4 +1,3 @@
-import { SelectionMode } from '@fluentui/react'
 import { useMemo } from 'react'
 import { Project } from 'types'
 import { IProjectListProps } from './ProjectList/types'
@@ -12,18 +11,18 @@ export function useProjectList({ state, dispatch, loading, t }) {
     () => ({
       items: null,
       enableShimmer: loading,
+      renderLink: true,
+      linkOnClick: (project: Project) => {
+        // eslint-disable-next-line no-console
+        console.log(project)
+        dispatch(SET_SELECTED_PROJECT({ project }))
+      },
       searchBox: {
         placeholder:
           state.view === 'my'
             ? t('projects.myProjectsSearchPlaceholder')
             : t('common.searchPlaceholder'),
         onChange: () => dispatch(SET_SELECTED_PROJECT({ project: null }))
-      },
-      selectionProps: {
-        mode: SelectionMode.single,
-        onChanged: (project: Project) => {
-          if (project) dispatch(SET_SELECTED_PROJECT({ project }))
-        }
       }
     }),
     [state, dispatch, loading, t]
