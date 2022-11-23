@@ -21,6 +21,7 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
   return (
     <CustomersContext.Provider value={context}>
       <TabContainer
+        hidden={!!state.selected}
         defaultSelectedKey={view}
         onTabChanged={(itemKey) =>
           dispatch(CHANGE_VIEW({ view: itemKey as CustomersView }))
@@ -30,10 +31,7 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
         <CustomerList
           itemKey='search'
           headerText={t('common.search')}
-          itemIcon='FabricFolderSearch'
-        >
-          {state.selected && <CustomerDetails />}
-        </CustomerList>
+          itemIcon='FabricFolderSearch' />
         <CustomerForm
           itemKey='new'
           headerText={t('customers.createNewText')}
@@ -41,6 +39,7 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
           permission={PermissionScope.MANAGE_CUSTOMERS}
         />
       </TabContainer>
+      {state.selected && <CustomerDetails />}
     </CustomersContext.Provider>
   )
 }

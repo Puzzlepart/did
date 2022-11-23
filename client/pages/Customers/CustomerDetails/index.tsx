@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
 import { Header } from './Header'
+import { Information } from './Information'
 import $projects from './projects.gql'
 
 /**
@@ -23,13 +24,7 @@ export const CustomerDetails: FC = () => {
   return (
     <div className={styles.root}>
       <Header />
-      {state.selected.inactive && (
-        <UserMessage
-          text={t('customers.inactiveText')}
-          iconName='Warning'
-          type={'warning'}
-        />
-      )}
+      <Information />
       <div>
         {error && (
           <UserMessage type='error'>{t('common.genericErrorText')}</UserMessage>
@@ -39,10 +34,8 @@ export const CustomerDetails: FC = () => {
             items={data?.projects || []}
             hideColumns={['customer']}
             enableShimmer={loading}
-            searchBox={{ placeholder: t('common.searchPlaceholder') }}
-            renderLink={true}
-            height={300}
-          />
+            searchBox={{ placeholder: t('customers.searchProjectsPlaceholder', state.selected) }}
+            renderLink={true} />
         )}
       </div>
     </div>
