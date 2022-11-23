@@ -45,7 +45,6 @@ that can ease working with the periods
 - [isPast](pages.timesheetperiod.md#ispast)
 - [matchedDuration](pages.timesheetperiod.md#matchedduration)
 - [matchedEvents](pages.timesheetperiod.md#matchedevents)
-- [path](pages.timesheetperiod.md#path)
 - [startDateIndex](pages.timesheetperiod.md#startdateindex)
 - [totalDuration](pages.timesheetperiod.md#totalduration)
 - [unmatchedDuration](pages.timesheetperiod.md#unmatchedduration)
@@ -229,7 +228,7 @@ Get end date index with Monday = 0
 
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:385](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L385)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:374](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L374)
 
 ___
 
@@ -273,7 +272,7 @@ Period is complete meaning all events are matched
 
 `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:359](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L359)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:348](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L348)
 
 ___
 
@@ -289,7 +288,7 @@ Period is in the past
 
 `true` if the `endDate` is before today
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:370](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L370)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:359](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L359)
 
 ___
 
@@ -321,22 +320,6 @@ Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:281](https://github.com/P
 
 ___
 
-### path
-
-• get **path**(): *string*
-
-Returns URL path for the period
-
-**`example`** `11_3_2021` => `11/3/2021`
-
-**`memberof`** TimesheetPeriod
-
-**Returns:** *string*
-
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:348](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L348)
-
-___
-
 ### startDateIndex
 
 • get **startDateIndex**(): *number*
@@ -345,7 +328,7 @@ Get start date index with Monday = 0
 
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:377](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L377)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:366](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L366)
 
 ___
 
