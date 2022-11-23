@@ -252,7 +252,7 @@ periods.
 
 **Returns:** [*IDatePeriod*](../interfaces/dateutils.idateperiod.md)[]
 
-Defined in: [shared/utils/DateObject.ts:219](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L219)
+Defined in: [shared/utils/DateObject.ts:218](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L218)
 
 ___
 
@@ -301,7 +301,7 @@ Name | Type | Description |
 
 **Returns:** *HolidayObject*
 
-Defined in: [shared/utils/DateObject.ts:207](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L207)
+Defined in: [shared/utils/DateObject.ts:206](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L206)
 
 ___
 
@@ -373,4 +373,4 @@ Name | Type | Description |
 
 **Returns:** *Partial*<{ `month`: *number* ; `monthName`: *string* ; `week`: *number* ; `year`: *number*  }\>
 
-Defined in: [shared/utils/DateObject.ts:191](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L191)
+Defined in: [shared/utils/DateObject.ts:190](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L190)

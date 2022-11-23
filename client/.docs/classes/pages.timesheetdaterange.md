@@ -29,7 +29,6 @@ that can ease working with the scope
 ### Methods
 
 - [\_init](pages.timesheetdaterange.md#_init)
-- [fromParams](pages.timesheetdaterange.md#fromparams)
 - [getDay](pages.timesheetdaterange.md#getday)
 - [query](pages.timesheetdaterange.md#query)
 - [set](pages.timesheetdaterange.md#set)
@@ -53,7 +52,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetDateRange*](pages.timesheetdaterange.md)
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L18)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L17)
 
 ## Properties
 
@@ -61,7 +60,7 @@ Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:18](https://github.com
 
 • `Optional` **endDate**: *DateObject*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L18)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L17)
 
 ___
 
@@ -69,7 +68,7 @@ ___
 
 • `Optional` **startDate**: *DateObject*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L17)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L16)
 
 ## Accessors
 
@@ -83,7 +82,7 @@ Is the scope the current week or month
 
 **Returns:** *boolean*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:108](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L108)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L94)
 
 ___
 
@@ -97,7 +96,7 @@ Get timespan string for the scope
 
 **Returns:** *string*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:122](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L122)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:108](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L108)
 
 ## Methods
 
@@ -115,27 +114,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L40)
-
-___
-
-### fromParams
-
-▸ **fromParams**(`parameters`: [*ITimesheetParameters*](../interfaces/pages.itimesheetparameters.md)): [*TimesheetDateRange*](pages.timesheetdaterange.md)
-
-Sets `startDate` and `endDate` from `params`
-
-**`memberof`** TimesheetDateRange
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`parameters` | [*ITimesheetParameters*](../interfaces/pages.itimesheetparameters.md) | Params    |
-
-**Returns:** [*TimesheetDateRange*](pages.timesheetdaterange.md)
-
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L58)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L39)
 
 ___
 
@@ -155,7 +134,7 @@ Name | Type | Description |
 
 **Returns:** *DateObject*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:99](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L99)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L85)
 
 ___
 
@@ -175,7 +154,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *TimesheetQuery*
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:71](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L71)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L57)
 
 ___
 
@@ -195,4 +174,4 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetDateRange*](pages.timesheetdaterange.md)
 
-Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:86](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L86)
+Defined in: [client/pages/Timesheet/TimesheetDateRange.ts:72](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetDateRange.ts#L72)
