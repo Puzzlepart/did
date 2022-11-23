@@ -13,9 +13,9 @@ export function useProjecstHistory(state: IProjectsState) {
   const url = useParams<IProjectsParameters>()
 
   useLayoutEffect(() => {
-    const paths = [state.view, state.selected?.tag || url.key, state.detailsTab]
+    const paths = [state.view, state.selected?.tag ?? url.key, state.detailsTab]
     const path = `/${['projects', ...paths]
-      .filter((p) => p)
+      .filter(Boolean)
       .join('/')}`.toLowerCase()
     history.push(path)
   }, [state.view, state.selected, state.detailsTab, history, url.key])

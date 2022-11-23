@@ -1,32 +1,19 @@
 import { Breadcrumb } from '@fluentui/react'
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { isMobile } from 'react-device-detect'
-import { ProjectsContext } from '../../context'
 import { Actions } from '../Actions'
 import styles from './Header.module.scss'
+import { useHeader } from './useHeader'
 
 /**
  * @category Projects
  */
 export const Header: FC = () => {
-  const { state } = useContext(ProjectsContext)
+  const { breadcrumb } = useHeader()
   return (
     <div className={styles.root}>
-      <div className={styles.title}>
-        <Breadcrumb items={[
-          {
-            key: 'projects',
-            text: 'Prosjekter'
-          },
-          {
-            key: 'customer',
-            text: state.selected.customer.name
-          },
-          {
-            key: 'project',
-            text: state.selected.name
-          }
-        ]} />
+      <div className={styles.breadcrumb}>
+        <Breadcrumb {...breadcrumb} />
       </div>
       <Actions hidden={isMobile} />
     </div>

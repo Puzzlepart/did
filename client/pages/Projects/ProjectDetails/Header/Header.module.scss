@@ -2,20 +2,12 @@
   display: flex;
   flex-direction: row;
   margin: 0 0 15px 0;
-
-  .icon {
-    color: #787878;
-    font-size: 45px;
-    margin: 0 25px 0 0;
-  }
-
-  .title {
+  
+  .breadcrumb {
     flex: 1 1 0;
 
-    .text {
-      font-size: 1.6rem;
-      font-weight: 500;
-      margin-bottom: 0;
+    a {
+      color: inherit !important
     }
   }
 }
