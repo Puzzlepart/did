@@ -25,10 +25,6 @@ export const Information: FC = () => {
         />
       )}
       <InformationProperty
-        title={t('common.descriptionFieldLabel')}
-        value={state.selected.description}
-      />
-      <InformationProperty
         title={t('projects.tagLabel')}
         value={state.selected.tag}
       />

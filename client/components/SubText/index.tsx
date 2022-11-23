@@ -14,11 +14,13 @@ import s from 'underscore.string'
 export const SubText: ReusableComponent<ISubTextProps> = ({
   font = 'xSmall',
   text,
+  className,
   style
 }) => {
   const { fonts, semanticColors } = useTheme()
   return (
     <div
+    className={className}
       style={{
         paddingTop: 4,
         fontSize: fonts[font].fontSize,
