@@ -1,3 +1,4 @@
+import { SubText } from 'components/SubText'
 import { UserMessage } from 'components/UserMessage'
 import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,6 +15,7 @@ export const Information: FC = () => {
 
   return (
     <div className={styles.root}>
+      <SubText text={state.selected.description} font='medium' />
       {state.selected.inactive && (
         <UserMessage
           text={t('customers.inactiveText')}
@@ -21,10 +23,6 @@ export const Information: FC = () => {
           type={'warning'}
         />
       )}
-      <InformationProperty
-        title={t('common.descriptionFieldLabel')}
-        value={state.selected.description}
-      />
       <InformationProperty
         title={t('projects.tagLabel')}
         value={state.selected.key}
