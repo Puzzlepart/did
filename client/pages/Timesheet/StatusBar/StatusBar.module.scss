@@ -13,6 +13,11 @@
       justify-content: space-evenly;
       color: #323130;
 
+      p {
+        margin: 0;
+        display: inline;
+      }
+
       strong em {
         font-size: 1.2em;
         font-weight: bold;

@@ -138,16 +138,28 @@ export class DateUtils {
    * @param end - End
    * @param template - Date template
    */
-  public getDays(
+  public getDays<T = string>(
     start: DateInput,
     end: DateInput,
     template: string = 'dddd DD'
-  ): string[] {
+  ): T[] {
     const days = []
     let startDateObject = new DateObject(start)
     const endDateObject = new DateObject(end)
     while (startDateObject.isBeforeOrSame(endDateObject)) {
-      days.push(s.capitalize(startDateObject.format(template)))
+      switch (template) {
+        case 'jsDate': {
+          days.push(startDateObject.jsDate)
+        }
+          break
+          case 'DateObject': {
+            days.push(startDateObject)
+          }
+            break
+        default: {
+          days.push(s.capitalize(startDateObject.format(template)))
+        }
+      }
       startDateObject = startDateObject.add('1d')
     }
     return days

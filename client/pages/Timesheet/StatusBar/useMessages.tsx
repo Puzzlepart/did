@@ -2,9 +2,10 @@ import { DateRangeType } from '@fluentui/react'
 import { IUserMessageProps } from 'components/UserMessage/types'
 import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
-import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
+import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
 import _ from 'underscore'
 import { useTimesheetContext } from '../context'
 import { TimesheetView } from '../types'
@@ -59,7 +60,7 @@ export function useMessages(): IUserMessageProps[] {
           hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
           splitWeekInfoText:
             state.periods.length > 1 &&
-            state.dateRangeType === DateRangeType.Week
+              state.dateRangeType === DateRangeType.Week
               ? t('timesheet.splitWeekInfoText')
               : ''
         })
@@ -68,12 +69,21 @@ export function useMessages(): IUserMessageProps[] {
     if (!state.selectedPeriod.isComplete && !state.selectedPeriod.isForecast) {
       messages.push({
         id: 'hoursnotmatched',
-        text: t('timesheet.hoursNotMatchedText', {
-          hours: $date.getDurationString(
-            state.selectedPeriod.unmatchedDuration,
-            t
-          )
-        }),
+        children: (
+          <span>
+            <ReactMarkdown>
+              {t('timesheet.hoursNotMatchedText', {
+                hours: $date.getDurationString(
+                  state.selectedPeriod.unmatchedDuration,
+                  t
+                )
+              })}
+            </ReactMarkdown>
+            <a href='#' onClick={() => dispatch(IGNORE_ALL())}>
+              {t('timesheet.ignoreAllText')}
+            </a>
+          </span>
+        ),
         type: 'warning'
       })
     }
@@ -142,12 +152,12 @@ export function useMessages(): IUserMessageProps[] {
     }
     if (
       _.any(
-        state.selectedPeriod.getEvents(true),
+        state.selectedPeriod.getEvents(),
         (event) => !!event['adjustedMinutes']
       )
     ) {
       const adjustedMinutes = _.reduce(
-        state.selectedPeriod.getEvents(true),
+        state.selectedPeriod.getEvents(),
         (sum, event) => (sum += event['adjustedMinutes'] ?? 0),
         0
       )

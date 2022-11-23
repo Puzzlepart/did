@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-destructuring */
 import { IGroup } from '@fluentui/react'
 import * as arraySort from 'array-sort'
 import get from 'get-value'
@@ -5,8 +6,8 @@ import _ from 'underscore'
 import { IListGroupProps } from './types'
 
 /**
- * Returns list groups based on property
- * `listGroupProps` on the `<List />` component
+ * Returns list groups based on property `listGroupProps` on 
+ * the `<List />` component
  *
  * @category List
  */
@@ -21,7 +22,7 @@ export function useListGroups(items: any[], props: IListGroupProps) {
   )
   const uniqueGroupNames =
     props.groupNames || _.unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
-  const groups = uniqueGroupNames.map((name) => {
+  const groups = uniqueGroupNames.map((name, index) => {
     const items_ = items.filter((item) => {
       const itemValue = `${get(item, fieldName, { default: emptyGroupName })}`
       return `${itemValue}`.toLowerCase() === name.toLowerCase()
@@ -36,7 +37,8 @@ export function useListGroups(items: any[], props: IListGroupProps) {
       count: items_.length,
       isShowingAll: items_.length === items.length,
       isDropEnabled: false,
-      isCollapsed: false
+      isCollapsed: false,
+      data: props.groupData[index]
     }
     return group
   })

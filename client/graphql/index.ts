@@ -7,8 +7,10 @@
  * @see https://graphql.org/
  */
 
-import { ApolloClient, FetchPolicy } from '@apollo/client'
+import { ApolloClient, ApolloLink, FetchPolicy } from '@apollo/client'
 import { InMemoryCache } from '@apollo/client/cache'
+import apolloLink from './apolloLink'
+import httpLink from './httpLink'
 
 /**
  * @category GraphQL
@@ -37,6 +39,7 @@ export interface IBaseResult {
  * * Using `cache-and-network` as default `fetchPolicy`
  */
 export const client = new ApolloClient({
+  link: ApolloLink.from([apolloLink, httpLink]),
   cache: new InMemoryCache(),
   uri: `${document.location.origin}/graphql`,
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
@@ -47,3 +50,4 @@ export { default as $usercontext } from './user-context.gql'
  * @ignore
  */
 export { FetchPolicy }
+

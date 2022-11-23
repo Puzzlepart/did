@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import { Field, ID, ObjectType } from 'type-graphql'
 import $date from '../../../../../shared/utils/date'
 import { EventObject } from './EventObject'
+import { HolidayObject } from './HolidayObject'
 
 /**
  * @category GraphQL ObjectType
@@ -80,6 +81,9 @@ export class TimesheetPeriodObject {
 
   @Field({ nullable: true })
   public forecastedHours?: number
+
+  @Field(() => [HolidayObject], { nullable: true })
+  public holidays?: HolidayObject[]
 
   /**
    * Constructs a new instance of TimesheetPeriodObject

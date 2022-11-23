@@ -16,6 +16,7 @@ import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
   ForecastedTimeEntryService,
+  HolidaysService,
   ProjectService,
   TimeEntryService,
   UserService
@@ -45,23 +46,25 @@ export class TimesheetService {
    * @param _msgraphSvc - Injected `MSGraphService` through `typedi`
    * @param _googleCalSvc - Injected `GoogleCalendarService` through `typedi`
    * @param _projectSvc - Injected `ProjectService` through `typedi`
-   * @param _teSvc - Injected `TimeEntryService` through `typedi`
-   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
-   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
-   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
+   * @param _timeEntrySvc - Injected `TimeEntryService` through `typedi`
+   * @param _forecastTimeEntrySvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _confirmedPeriodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _forecastPeriodSvc - Injected `ForecastedPeriodsService` through `typedi`
    * @param _userSvc - Injected `UserService` through `typedi`
+   * @param _holidaysService - Injected `HolidaysService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
     private readonly _msgraphSvc: MSGraphService,
     private readonly _googleCalSvc: GoogleCalendarService,
     private readonly _projectSvc: ProjectService,
-    private readonly _teSvc: TimeEntryService,
-    private readonly _fteSvc: ForecastedTimeEntryService,
-    private readonly _cperiodSvc: ConfirmedPeriodsService,
-    private readonly _fperiodSvc: ForecastedPeriodsService,
-    private readonly _userSvc: UserService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+    private readonly _timeEntrySvc: TimeEntryService,
+    private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
+    private readonly _confirmedPeriodSvc: ConfirmedPeriodsService,
+    private readonly _forecastPeriodSvc: ForecastedPeriodsService,
+    private readonly _userSvc: UserService,
+    private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
+  ) { }
 
   /**
    * Get timesheet
@@ -92,18 +95,26 @@ export class TimesheetService {
         this.context.userId,
         parameters.includeSplitWeeks
       )
+      const holidays = await this._holidaysService.find({
+        periodId: { $in: periods.map(p => p.id) }
+      })
       const data = await this._projectSvc.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
-        const { _id } = periods[index]
+        let period = periods[index]
         const [confirmed, forecasted] = await Promise.all([
-          this._cperiodSvc.collection.findOne({ _id }),
-          this._fperiodSvc.collection.findOne({ _id })
+          this._confirmedPeriodSvc.collection.findOne<TimesheetPeriodObject>({
+            _id: period._id
+          }),
+          this._forecastPeriodSvc.collection.findOne<TimesheetPeriodObject>({
+            _id: period._id
+          })
         ])
-        periods[index].isForecasted = !!forecasted
-        periods[index].forecastedHours = forecasted?.hours || 0
+        period.isForecasted = !!forecasted
+        period.forecastedHours = forecasted?.hours ?? 0
+        period.holidays = holidays.filter(h => h.periodId === period.id)
         if (confirmed) {
-          periods[index] = {
-            ...periods[index],
+          period = {
+            ...period,
             isConfirmed: true,
             events: this._connectEvents({
               ...parameters,
@@ -113,13 +124,14 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          periods[index].events = await this._getEventsFromProvider({
+          period.events = await this._getEventsFromProvider({
             ...parameters,
             ...periods[index],
             provider: this.context.provider,
             engine
           })
         }
+        periods[index] = period
       }
       return periods
     } catch (error) {
@@ -164,10 +176,12 @@ export class TimesheetService {
       )
       period.hours = hours
       period.events = getEvents(false)
-      const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
+      const teSvc = parameters.forecast
+        ? this._forecastTimeEntrySvc
+        : this._timeEntrySvc
       const periodSvc = parameters.forecast
-        ? this._fperiodSvc
-        : this._cperiodSvc
+        ? this._forecastPeriodSvc
+        : this._confirmedPeriodSvc
       await Promise.all([
         teSvc.insertMultiple(getEvents(true)),
         periodSvc.insert(period)
@@ -186,10 +200,12 @@ export class TimesheetService {
     parameters: IUnsubmitPeriodParameters
   ): Promise<void> {
     try {
-      const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
+      const teSvc = parameters.forecast
+        ? this._forecastTimeEntrySvc
+        : this._timeEntrySvc
       const periodSvc = parameters.forecast
-        ? this._fperiodSvc
-        : this._cperiodSvc
+        ? this._forecastPeriodSvc
+        : this._confirmedPeriodSvc
       const { _id } = this._getPeriodData(
         parameters.period.id,
         this.context.userId
