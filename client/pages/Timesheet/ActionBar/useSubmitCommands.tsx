@@ -1,9 +1,8 @@
 import {
+  DefaultButton,
   IContextualMenuItem,
   IContextualMenuProps,
-  merge,
-  PrimaryButton,
-  useTheme
+  merge, useTheme
 } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import React, { useContext } from 'react'
@@ -137,7 +136,7 @@ export function useSubmitCommands(): IContextualMenuItem {
       if (_.isEmpty(commands)) return null
 
       return (
-        <PrimaryButton
+        <DefaultButton
           style={{
             width: isMobile ? 160 : 180,
             whiteSpace: 'nowrap',
@@ -145,7 +144,6 @@ export function useSubmitCommands(): IContextualMenuItem {
             textOverflow: 'ellipsis',
             border: 'none'
           }}
-          primary={false}
           {...(_.first(commands) as any)}
           menuProps={menuProps}
         />
