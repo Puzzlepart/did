@@ -1,5 +1,5 @@
 /**
- * Creates an URL path
+ * Creates an URL path from the specified `parts`.
  *
  * @param parts - Parts
  */
