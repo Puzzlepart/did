@@ -347,4 +347,14 @@ export class TimesheetPeriod {
   public get isPast(): boolean {
     return $date.isBefore(this.endDate)
   }
+
+  public get startDateIndex() {
+    const startDate = new Date(this.startDate)
+    return ((startDate.getDay() + 6) % 7)
+  }
+
+  public get endDateIndex() {
+    const endDate = new Date(this.endDate)
+    return ((endDate.getDay() + 6) % 7)
+  }
 }
