@@ -68,9 +68,7 @@ export interface ITimesheetState {
 export interface ITimesheetParameters {
   dateRange: string
   view: string
-  week: string
-  month: string
-  year: string
+  startDate: string
 }
 
 export * from './context'

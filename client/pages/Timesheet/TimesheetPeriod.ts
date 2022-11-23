@@ -339,17 +339,6 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Returns URL path for the period
-   *
-   * @example `11_3_2021` => `11/3/2021`
-   *
-   * @memberof TimesheetPeriod
-   */
-  public get path(): string {
-    return this.id.replace(/_/g, '/')
-  }
-
-  /**
    * Period is complete meaning all events are matched
    *
    * @returns `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)

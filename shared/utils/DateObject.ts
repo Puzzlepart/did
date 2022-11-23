@@ -179,16 +179,15 @@ export class DateObject {
    * @param date - Date   *
    * @param unit - Unit
    */
-  diff(date: DateObject, unit: OpUnitType) {
+  public diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
   }
-
   /**
    * Returns an object representation of the DateObject
    *
    * @param include - Properties to include
    */
-  toObject(...include: string[]) {
+  public toObject(...include: string[]) {
     const dateObject = {
       week: DateUtils.getWeek(this.$),
       month: DateUtils.getMonthIndex(this.$),

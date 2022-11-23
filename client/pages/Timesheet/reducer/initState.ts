@@ -1,5 +1,4 @@
 import { DateRangeType } from '@fluentui/react'
-import _ from 'underscore'
 import { ITimesheetState, TimesheetDateRange, TimesheetView } from '../types'
 import { ITimesheetReducerParameters } from './types'
 
@@ -31,17 +30,14 @@ export function initState(
 ): ITimesheetState {
   const periods = []
   const dateRangeType = convertStringToDateRangeType(parameters.url.dateRange)
-  const scope = _.isEmpty(Object.keys(parameters.url))
-    ? new TimesheetDateRange(undefined, dateRangeType)
-    : new TimesheetDateRange(undefined, dateRangeType).fromParams(
-        parameters.url
-      )
+  const scope = new TimesheetDateRange(parameters.url.startDate, dateRangeType)
+  const selectedView =
+    (parameters.url.view as TimesheetView) ?? TimesheetView.Overview
   return {
     periods,
     dateRange: scope,
     dateRangeType,
-    selectedView:
-      (parameters.url.view as TimesheetView) ?? TimesheetView.Overview,
+    selectedView,
     navHistory: []
   }
 }
