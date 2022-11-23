@@ -2,12 +2,12 @@ import { TabContainer } from 'components/TabContainer'
 import React, { FC } from 'react'
 import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
-import { useProjects } from './useProjects'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
 import { CHANGE_VIEW } from './reducer/actions'
 import { ProjectsView } from './types'
+import { useProjects } from './useProjects'
 
 /**
  * @category Function Component
@@ -29,13 +29,15 @@ export const Projects: FC = () => {
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'
-          items={state.projects} />
+          items={state.projects}
+        />
         <ProjectList
           {...listProps}
           itemKey='my'
           headerText={t('projects.myProjectsText')}
           itemIcon='FabricUserFolder'
-          items={state.projects.filter((p) => !!p.outlookCategory)} />
+          items={state.projects.filter((p) => !!p.outlookCategory)}
+        />
         <ProjectForm
           itemKey='new'
           headerText={t('projects.createNewText')}

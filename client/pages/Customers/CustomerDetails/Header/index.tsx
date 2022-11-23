@@ -5,7 +5,6 @@ import { Actions } from '../Actions'
 import styles from './Header.module.scss'
 import { useHeader } from './useHeader'
 
-
 /**
  * @category Customers
  */

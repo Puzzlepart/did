@@ -13,16 +13,22 @@ export function useHeader() {
     items: [
       {
         key: 'back',
-        text: state.view === 'search' ? t('navigation.ProjectsPage') : t('projects.myProjectsText'),
+        text:
+          state.view === 'search'
+            ? t('navigation.ProjectsPage')
+            : t('projects.myProjectsText'),
         onClick: () => {
           dispatch(SET_SELECTED_PROJECT({ project: null }))
-          history.replace([...history.location.pathname.split('/')].slice(0, - 1).join('/'))
+          history.replace(
+            [...history.location.pathname.split('/')].slice(0, -1).join('/')
+          )
         }
       },
       {
         key: 'customer',
         text: state.selected.customer.name,
-        onClick: () => history.replace(`/customers/search/${state.selected.customer.key}`)
+        onClick: () =>
+          history.replace(`/customers/search/${state.selected.customer.key}`)
       },
       {
         key: 'selected',

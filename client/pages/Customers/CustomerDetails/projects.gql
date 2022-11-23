@@ -3,6 +3,7 @@ query CustomerProjects ($customerKey: String) {
     tag
     key
     name
+    description
     icon
     inactive
     labels {

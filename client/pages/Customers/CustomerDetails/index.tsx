@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
 import { ProjectList } from 'pages/Projects'
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
@@ -14,6 +14,7 @@ import $projects from './projects.gql'
  */
 export const CustomerDetails: FC = () => {
   const { t } = useTranslation()
+  const ref = useRef<HTMLDivElement>()
   const { state } = useContext(CustomersContext)
   const { loading, error, data } = useQuery($projects, {
     variables: {
@@ -22,7 +23,7 @@ export const CustomerDetails: FC = () => {
   })
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} ref={ref}>
       <Header />
       <Information />
       <div>
@@ -34,8 +35,17 @@ export const CustomerDetails: FC = () => {
             items={data?.projects || []}
             hideColumns={['customer']}
             enableShimmer={loading}
-            searchBox={{ placeholder: t('customers.searchProjectsPlaceholder', state.selected) }}
-            renderLink={true} />
+            searchBox={{
+              styles: {
+                root: { width: ref.current?.clientWidth-200 }
+              },
+              placeholder: t(
+                'customers.searchProjectsPlaceholder',
+                state.selected
+              )
+            }}
+            renderLink={true}
+          />
         )}
       </div>
     </div>

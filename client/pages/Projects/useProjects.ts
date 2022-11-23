@@ -3,11 +3,11 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { IProjectsContext } from './context'
-import { useProjectsReducer } from './reducer'
-import { IProjectsParameters } from './types'
 import { useProjecstHistory } from './hooks/useProjecstHistory'
 import { useProjectList } from './hooks/useProjectList'
 import { useProjectsQuery } from './hooks/useProjectsQuery'
+import { useProjectsReducer } from './reducer'
+import { IProjectsParameters } from './types'
 
 /**
  * Hook for Projects

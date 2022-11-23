@@ -31,7 +31,8 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
         <CustomerList
           itemKey='search'
           headerText={t('common.search')}
-          itemIcon='FabricFolderSearch' />
+          itemIcon='FabricFolderSearch'
+        />
         <CustomerForm
           itemKey='new'
           headerText={t('customers.createNewText')}

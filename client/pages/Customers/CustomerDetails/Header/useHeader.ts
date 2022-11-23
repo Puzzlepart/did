@@ -16,7 +16,9 @@ export function useHeader() {
         text: t('navigation.CustomersPage'),
         onClick: () => {
           dispatch(SET_SELECTED_CUSTOMER({ customer: null }))
-          history.replace([...history.location.pathname.split('/')].slice(0, -1).join('/'))
+          history.replace(
+            [...history.location.pathname.split('/')].slice(0, -1).join('/')
+          )
         }
       },
       {
