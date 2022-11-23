@@ -39,10 +39,9 @@ export function useColumns(): IListColumn[] {
       { maxWidth: 300 },
       (customer: Customer) => <CustomerLink customer={customer} />
     ),
-    col(
-      'description',
-      t('common.descriptionFieldLabel'),
-      { maxWidth: 300, isMultiline: true }
-    )
+    col('description', t('common.descriptionFieldLabel'), {
+      maxWidth: 300,
+      isMultiline: true
+    })
   ]
 }

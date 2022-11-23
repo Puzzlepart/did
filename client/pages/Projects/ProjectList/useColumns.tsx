@@ -68,11 +68,10 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         </ColumnWrapper>
       )
     ),
-    col(
-      'description',
-      t('common.descriptionFieldLabel'),
-      { maxWidth: 220, isMultiline: true }
-    ),
+    col('description', t('common.descriptionFieldLabel'), {
+      maxWidth: 220,
+      isMultiline: true
+    }),
     col('labels', '', {}, (project) => (
       <ColumnWrapper project={project}>
         {project.labels.map((label: LabelObject, index: number) => (
