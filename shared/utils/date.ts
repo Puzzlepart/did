@@ -148,14 +148,16 @@ export class DateUtils {
     const endDateObject = new DateObject(end)
     while (startDateObject.isBeforeOrSame(endDateObject)) {
       switch (template) {
-        case 'jsDate': {
-          days.push(startDateObject.jsDate)
-        }
+        case 'jsDate':
+          {
+            days.push(startDateObject.jsDate)
+          }
           break
-          case 'DateObject': {
+        case 'DateObject':
+          {
             days.push(startDateObject)
           }
-            break
+          break
         default: {
           days.push(s.capitalize(startDateObject.format(template)))
         }

@@ -64,7 +64,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -96,7 +96,7 @@ export class TimesheetService {
         parameters.includeSplitWeeks
       )
       const holidays = await this._holidaysService.find({
-        periodId: { $in: periods.map(p => p.id) }
+        periodId: { $in: periods.map((p) => p.id) }
       })
       const data = await this._projectSvc.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
@@ -111,7 +111,7 @@ export class TimesheetService {
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = forecasted?.hours ?? 0
-        period.holidays = holidays.filter(h => h.periodId === period.id)
+        period.holidays = holidays.filter((h) => h.periodId === period.id)
         if (confirmed) {
           period = {
             ...period,

@@ -13,7 +13,7 @@ export const ListGroupHeader: FC<IDetailsGroupDividerProps> = (props) => {
             color: holiday && '#CC0000'
           },
           expand: { cursor: 'pointer' },
-          headerCount: { display: 'none' },
+          headerCount: { display: 'none' }
         }}
       />
     </div>

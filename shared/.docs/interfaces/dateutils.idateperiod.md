@@ -19,7 +19,7 @@
 
 • **endDate**: [*DateObject*](../classes/dateutils.dateobject.md)
 
-Defined in: [shared/utils/DateObject.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L15)
+Defined in: [shared/utils/DateObject.ts:16](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L16)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [shared/utils/DateObject.ts:12](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L12)
+Defined in: [shared/utils/DateObject.ts:13](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L13)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [shared/utils/DateObject.ts:13](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L13)
+Defined in: [shared/utils/DateObject.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L14)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **startDate**: [*DateObject*](../classes/dateutils.dateobject.md)
 
-Defined in: [shared/utils/DateObject.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L14)
+Defined in: [shared/utils/DateObject.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L15)

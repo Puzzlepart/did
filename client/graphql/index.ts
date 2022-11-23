@@ -50,4 +50,3 @@ export { default as $usercontext } from './user-context.gql'
  * @ignore
  */
 export { FetchPolicy }
-

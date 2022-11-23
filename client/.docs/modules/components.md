@@ -589,8 +589,8 @@ ___
 
 ▸ **useListGroups**(`items`: *any*[], `props`: [*IListGroupProps*](../interfaces/components.ilistgroupprops.md)): *any*[][] \| readonly [IGroup[], *any*[]]
 
-Returns list groups based on property
-`listGroupProps` on the `<List />` component
+Returns list groups based on property `listGroupProps` on
+the `<List />` component
 
 #### Parameters:
 
@@ -601,7 +601,7 @@ Name | Type |
 
 **Returns:** *any*[][] \| readonly [IGroup[], *any*[]]
 
-Defined in: [client/components/List/useListGroups.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L13)
+Defined in: [client/components/List/useListGroups.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L14)
 
 ___
 
@@ -619,7 +619,7 @@ Name | Type |
 
 **Returns:** [*IListProps*](../interfaces/components.ilistprops.md)
 
-Defined in: [client/components/List/useListProps.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L30)
+Defined in: [client/components/List/useListProps.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.tsx#L30)
 
 ___
 
