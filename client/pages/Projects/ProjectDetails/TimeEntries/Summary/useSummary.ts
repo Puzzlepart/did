@@ -9,22 +9,24 @@ import { ISummaryProps } from './types'
  */
 export function useSummary(props: ISummaryProps) {
   const { t } = useTranslation()
-  const year = new Date().getFullYear(), month = new Date().getMonth()
+  const year = new Date().getFullYear(),
+    month = new Date().getMonth()
   const config: Record<string, (entry: any) => boolean> = {
-    [t('common.hoursCurrentMonth')]: (entry) => (entry.month === (month + 1) && entry.year === year),
-    [t('common.hoursPrevMonth')]: (entry) => entry.month === month && entry.year === year,
-    [t('common.hoursCurrentYear',{year})]: (entry) => entry.year === year,
-    [t('common.hoursYear', { year: (year - 1) })]: (entry) => entry.year === (year - 1),
-    [t('common.hoursYear', { year: (year - 2) })]: (entry) => entry.year === (year - 2),
-    [t('common.totalHours')]: () => true,
+    [t('common.hoursCurrentMonth')]: (entry) =>
+      entry.month === month + 1 && entry.year === year,
+    [t('common.hoursPrevMonth')]: (entry) =>
+      entry.month === month && entry.year === year,
+    [t('common.hoursCurrentYear', { year })]: (entry) => entry.year === year,
+    [t('common.hoursYear', { year: year - 1 })]: (entry) =>
+      entry.year === year - 1,
+    [t('common.hoursYear', { year: year - 2 })]: (entry) =>
+      entry.year === year - 2,
+    [t('common.totalHours')]: () => true
   }
-  return Object.keys(config).map(label => {
+  return Object.keys(config).map((label) => {
     const filterFunction = config[label]
     const hours = getSum(
-      _.filter(
-        props.timeentries,
-        filterFunction
-      ),
+      _.filter(props.timeentries, filterFunction),
       'duration'
     )
     return {

@@ -1,5 +1,9 @@
 import _ from 'underscore'
-import { CustomersView, ICustomersUrlParameters, ICustomersState } from '../types'
+import {
+  CustomersView,
+  ICustomersState,
+  ICustomersUrlParameters
+} from '../types'
 
 /**
  * Initialize state
@@ -7,7 +11,9 @@ import { CustomersView, ICustomersUrlParameters, ICustomersState } from '../type
  * @param parameters - Parameters
  */
 
-export function initState(parameters: ICustomersUrlParameters): ICustomersState {
+export function initState(
+  parameters: ICustomersUrlParameters
+): ICustomersState {
   return {
     view: (_.contains(['search', 'new'], parameters.view)
       ? parameters.view
