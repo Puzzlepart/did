@@ -28,7 +28,6 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
           onTabChanged={(tab: CustomersTab) =>
             context.dispatch(CHANGE_TAB({ tab }))
           }
-          styles={{ itemContainer: { paddingTop: 10 }, link: { fontSize: 18 } }}
         >
           <CustomerList
             itemKey='s'

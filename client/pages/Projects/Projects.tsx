@@ -28,7 +28,6 @@ export const Projects: FC = () => {
           onTabChanged={(tab: ProjectsTab) =>
             context.dispatch(CHANGE_TAB({ tab }))
           }
-          styles={{ link: { fontSize: 18 } }}
         >
           <ProjectList
             {...listProps}

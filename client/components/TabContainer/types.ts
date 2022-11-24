@@ -3,7 +3,8 @@ import { ReusableComponent } from 'components/types'
 import { FC } from 'react'
 import { PermissionScope } from 'security'
 
-export interface ITabContainerProps<T = string> extends Omit<IPivotProps, 'onLinkClick'> {
+export interface ITabContainerProps<T = string>
+  extends Omit<IPivotProps, 'onLinkClick'> {
   /**
    * Fixed tab link width
    *

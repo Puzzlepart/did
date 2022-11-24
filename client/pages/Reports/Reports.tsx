@@ -3,6 +3,7 @@ import { ChoiceGroup, PivotItem } from '@fluentui/react'
 import { FilterPanel, TabContainer, UserMessage } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import _ from 'underscore'
 import { ReportsContext } from './context'
 import {
   CHANGE_QUERY,
@@ -29,11 +30,6 @@ export const Reports: FC = () => {
         defaultSelectedKey={defaultSelectedKey}
         items={queries}
         fixedLinkWidth={true}
-        styles={{
-          link: {
-            display: defaultSelectedKey === 'default' ? 'none' : 'initial'
-          }
-        }}
         itemProps={{
           headerButtonProps: {
             hidden: true,
@@ -43,12 +39,11 @@ export const Reports: FC = () => {
         onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}
       >
         {queries.map((props, index) => (
-          <ReportsList {...props} key={index} />
+          <ReportsList {..._.omit(props, 'itemIcon')} key={index} />
         ))}
         <SummaryView
           itemKey='summary'
           headerText={t('reports.summaryHeaderText')}
-          itemIcon='CalendarWeek'
         />
         <PivotItem itemKey='default'>
           <UserMessage
