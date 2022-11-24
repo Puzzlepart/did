@@ -1,7 +1,7 @@
 import { Breadcrumb } from '@fluentui/react'
 import React, { FC } from 'react'
 import { isMobile } from 'react-device-detect'
-import { Actions } from '../Actions'
+import { Actions } from './Actions'
 import styles from './Header.module.scss'
 import { useHeader } from './useHeader'
 

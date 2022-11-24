@@ -1,10 +1,10 @@
-import { DefaultButton } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
 import { usePermissions } from 'hooks'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FC, HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { CustomerForm } from '../../CustomerForm'
+import { CustomerForm } from '../../../CustomerForm'
 import styles from './Actions.module.scss'
 
 /**
@@ -22,7 +22,7 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           className={styles.actionItem}
           hidden={loading || !state.selected.webLink}
         >
-          <DefaultButton
+          <ActionButton
             text={t('customers.webLinkText')}
             href={state.selected.webLink}
             iconProps={{ iconName: 'Website' }}
@@ -32,7 +32,7 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           className={styles.actionItem}
           hidden={loading || !state.selected.externalSystemURL}
         >
-          <DefaultButton
+          <ActionButton
             text={t('customers.externalSystemUrlText')}
             href={state.selected.externalSystemURL}
             iconProps={{ iconName: 'System' }}
@@ -42,7 +42,7 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           className={styles.actionItem}
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
         >
-          <DefaultButton
+          <ActionButton
             text={t('common.editLabel')}
             iconProps={{ iconName: 'Edit' }}
             onClick={() => setShowEditPanel(true)}

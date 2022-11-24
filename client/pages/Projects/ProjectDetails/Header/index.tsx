@@ -3,7 +3,7 @@ import { SubText } from 'components/SubText'
 import { ProjectsContext } from 'pages/Projects/context'
 import React, { FC, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
-import { Actions } from '../Actions'
+import { Actions } from './Actions'
 import styles from './Header.module.scss'
 import { useHeader } from './useHeader'
 
