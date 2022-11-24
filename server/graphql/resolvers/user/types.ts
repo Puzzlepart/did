@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { GraphQLDateTime } from 'graphql-iso-date'
+import { GraphQLDateTime } from 'graphql-scalars'
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
