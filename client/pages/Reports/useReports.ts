@@ -2,13 +2,15 @@
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
-import { useReportsReducer } from '../reducer'
-import { CLEAR_FILTERS } from '../reducer/actions'
-import { useFilters } from './useFilters'
-import { useReportsQueries } from './useReportsQueries'
-import { useReportsQuery } from './useReportsQuery'
-import { useReportsQueryOptions } from './useReportsQueryOptions'
+import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
+import {
+  useFilters,
+  useReportsQueries,
+  useReportsQuery,
+  useReportsQueryOptions
+} from './hooks'
+import { useReportsReducer } from './reducer'
+import { CLEAR_FILTERS } from './reducer/actions'
 
 /**
  * Component logic for `<Reports />`
@@ -40,7 +42,7 @@ export function useReports() {
     }
   }, [state.preset])
 
-  const filters = useFilters({ filter: state.filter })
+  const filters = useFilters(state.filter)
 
   useUpdateUserConfiguration({
     config: {
@@ -65,5 +67,3 @@ export function useReports() {
     onClearFilters
   }
 }
-
-export { useReportsQueries as useQueries }
