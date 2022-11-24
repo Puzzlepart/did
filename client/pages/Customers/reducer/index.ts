@@ -18,7 +18,7 @@ export default ({ params }: ICreateReducerParameters) =>
         state.customers = payload.query.data?.customers || []
         state.selected = _.find(
           state.customers,
-          (c) => params.key?.toLowerCase() === c.key.toLowerCase()
+          (c) => params.customerKey?.toLowerCase() === c.key.toLowerCase()
         )
       })
       .addCase(SET_SELECTED_CUSTOMER, (state, { payload }) => {

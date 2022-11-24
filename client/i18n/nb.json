@@ -112,7 +112,7 @@
     "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer.",
     "descriptionFieldDescription": "En kort beskrivelse av kunden.",
     "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
-    "searchProjectsPlaceholder": "Søk i prosjekter for kunde {{name}}..."
+    "searchProjectsPlaceholder": "Søk i prosjekter..."
   },
   "admin": {
     "apiTokens": {

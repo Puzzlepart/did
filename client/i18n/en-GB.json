@@ -113,7 +113,7 @@
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
     "descriptionFieldDescription": "A short description for the customer.",
     "createError": "We can't create the customer at the moment. Please try again later.",
-    "searchProjectsPlaceholder": "Search in projects for customer {{name}}..."
+    "searchProjectsPlaceholder": "Search in projects..."
   },
   "admin": {
     "apiTokens": {

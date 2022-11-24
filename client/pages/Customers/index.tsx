@@ -15,7 +15,10 @@ import { Customers } from './Customers'
  */
 export const CustomersPage: PageComponent = () => (
   <Switch>
-    <Route path='/customers/:view?/:key?' component={Customers} />
+    <Route
+      path='/customers/:currentView?/:customerKey?'
+      component={Customers}
+    />
   </Switch>
 )
 

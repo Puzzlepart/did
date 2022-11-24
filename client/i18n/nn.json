@@ -112,7 +112,7 @@
     "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} teikn",
     "descriptionFieldDescription": "Ei kort skildring av kunden.",
     "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
-    "searchProjectsPlaceholder": "Søk i prosjekter for kunde {{name}}..."
+    "searchProjectsPlaceholder": "Søk i prosjekter..."
   },
   "admin": {
     "apiTokens": {

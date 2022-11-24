@@ -1,8 +1,8 @@
 import { Customer } from 'types'
 
 export interface ICustomersUrlParameters {
-  key: string
-  view: string
+  currentView: string
+  customerKey: string
 }
 
 export type CustomersView = 'search' | 'new'

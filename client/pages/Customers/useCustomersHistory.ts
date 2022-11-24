@@ -14,8 +14,8 @@ export function useCustomersHistory(state: ICustomersState) {
   const url = useParams<ICustomersUrlParameters>()
 
   useLayoutEffect(() => {
-    const paths = [state.view, state.selected?.key || url.key]
+    const paths = [state.view, state.selected?.key || url.customerKey]
     const path = createPath(['customers', ...paths])
     history.push(path)
-  }, [state.view, state.selected, url.key])
+  }, [state.view, state.selected, url.customerKey])
 }

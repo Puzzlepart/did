@@ -38,11 +38,11 @@ export function useCustomers() {
     [state, dispatch]
   )
 
-  const renderDetails = !!state.selected || !!urlParameters.key
+  const renderDetails = !!state.selected || !!urlParameters.customerKey
 
   return {
     context,
-    view: urlParameters.view ?? 'search',
+    view: urlParameters.currentView ?? 'search',
     renderDetails
   } as const
 }

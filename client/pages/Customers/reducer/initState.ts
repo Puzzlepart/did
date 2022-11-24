@@ -15,8 +15,8 @@ export function initState(
   parameters: ICustomersUrlParameters
 ): ICustomersState {
   return {
-    view: (_.contains(['search', 'new'], parameters.view)
-      ? parameters.view
+    view: (_.contains(['search', 'new'], parameters.currentView)
+      ? parameters.currentView
       : 'search') as CustomersView,
     customers: []
   }
