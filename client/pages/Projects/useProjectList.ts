@@ -1,32 +1,33 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Project } from 'types'
+import { IProjectsContext } from './context'
 import { IProjectListProps } from './ProjectList/types'
 import { SET_SELECTED_PROJECT } from './reducer/actions'
 
 /**
  * Use Project list
+ * 
+ * @param context Context
  */
-export function useProjectList({ state, dispatch, loading, t }) {
+export function useProjectList(context: IProjectsContext): IProjectListProps {
+  const { t } = useTranslation()
   const listProps = useMemo<IProjectListProps>(
     () => ({
       items: null,
-      enableShimmer: loading,
+      enableShimmer: context.loading,
       renderLink: true,
-      linkOnClick: (project: Project) => {
-        // eslint-disable-next-line no-console
-        console.log(project)
-        dispatch(SET_SELECTED_PROJECT({ project }))
-      },
+      linkOnClick: (project: Project) => context.dispatch(SET_SELECTED_PROJECT({ project })),
       searchBox: {
         placeholder:
-          state.view === 'my'
+          context.state.view === 'my'
             ? t('projects.myProjectsSearchPlaceholder')
             : t('common.searchPlaceholder'),
-        onChange: () => dispatch(SET_SELECTED_PROJECT({ project: null }))
+        onChange: () => context.dispatch(SET_SELECTED_PROJECT({ project: null }))
       }
     }),
-    [state, dispatch, loading, t]
+    [context, t]
   )
 
-  return { listProps }
+  return listProps
 }

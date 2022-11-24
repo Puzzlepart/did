@@ -13,7 +13,7 @@ import { TimeEntries } from './TimeEntries'
  */
 export const ProjectDetails: FC = () => {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(ProjectsContext)
+  const { state, dispatch, loading } = useContext(ProjectsContext)
 
   return (
     <div className={styles.root}>
@@ -28,6 +28,7 @@ export const ProjectDetails: FC = () => {
           headerText={t('projects.informationHeaderText')}
           itemKey='information'
           itemIcon='Info'
+          headerButtonProps={{ disabled: loading, style: { opacity: loading ? 0.2 : 1 } }}
         >
           <Information />
         </PivotItem>
@@ -35,6 +36,7 @@ export const ProjectDetails: FC = () => {
           headerText={t('projects.timeEntriesHeaderText')}
           itemKey='timeentries'
           itemIcon='ReminderTime'
+          headerButtonProps={{ disabled: loading, style: { opacity: loading ? 0.2 : 1 } }}
         >
           <TimeEntries />
         </PivotItem>

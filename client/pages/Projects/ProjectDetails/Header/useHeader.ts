@@ -20,19 +20,19 @@ export function useHeader() {
         onClick: () => {
           dispatch(SET_SELECTED_PROJECT({ project: null }))
           history.replace(
-            [...history.location.pathname.split('/')].slice(0, -1).join('/')
+            history.location.pathname.split('/').slice(0, -1).join('/')
           )
         }
       },
       {
         key: 'customer',
-        text: state.selected.customer.name,
+        text: state.selected?.customer.name,
         onClick: () =>
-          history.replace(`/customers/search/${state.selected.customer.key}`)
+          history.replace(`/customers/search/${state.selected?.customer.key}`)
       },
       {
         key: 'selected',
-        text: state.selected.name,
+        text: state.selected?.name,
         isCurrentItem: true
       }
     ]

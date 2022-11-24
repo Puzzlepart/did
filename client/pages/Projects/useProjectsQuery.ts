@@ -20,5 +20,5 @@ export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
     () => dispatch(DATA_UPDATED({ data, error, loading })),
     [data, error, loading, dispatch]
   )
-  return { refetch, loading }
+  return { refetch, loading } as const
 }

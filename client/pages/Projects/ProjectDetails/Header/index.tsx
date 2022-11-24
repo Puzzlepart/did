@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@fluentui/react'
+import { Breadcrumb, Shimmer } from '@fluentui/react'
 import { SubText } from 'components/SubText'
 import { ProjectsContext } from 'pages/Projects/context'
 import React, { FC, useContext } from 'react'
@@ -11,17 +11,19 @@ import { useHeader } from './useHeader'
  * @category Projects
  */
 export const Header: FC = () => {
-  const { state } = useContext(ProjectsContext)
+  const { state, loading } = useContext(ProjectsContext)
   const { breadcrumb } = useHeader()
   return (
-    <div className={styles.root}>
-      <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Breadcrumb {...breadcrumb} />
+    <Shimmer className={styles.root} isDataLoaded={!loading}>
+      <div>
+        <div className={styles.container}>
+          <div className={styles.breadcrumb}>
+            <Breadcrumb {...breadcrumb} />
+          </div>
+          <Actions hidden={isMobile} />
         </div>
-        <Actions hidden={isMobile} />
+        <SubText className={styles.description} text={state.selected?.description} font='medium' />
       </div>
-      <SubText className={styles.description} text={state.selected.description} font='medium' />
-    </div>
+    </Shimmer>
   )
 }

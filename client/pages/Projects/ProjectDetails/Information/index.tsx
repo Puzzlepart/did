@@ -16,9 +16,9 @@ export const Information: FC = () => {
 
   return (
     <div className={styles.root}>
-      {state.selected.inactive && (
+      {state.selected?.inactive && (
         <UserMessage
-          hidden={!state.selected.inactive}
+          hidden={!state.selected?.inactive}
           text={t('projects.inactiveText')}
           iconName='Warning'
           type={'warning'}
@@ -26,17 +26,15 @@ export const Information: FC = () => {
       )}
       <InformationProperty
         title={t('projects.tagLabel')}
-        value={state.selected.tag}
+        value={state.selected?.tag}
       />
-      {state.selected?.labels?.length > 0 && (
-        <InformationProperty title={t('admin.labels.headerText')}>
-          {(state.selected.labels as Label[]).map((label, index) => (
-            <EntityLabel key={index} label={label} />
-          ))}
-        </InformationProperty>
-      )}
+      <InformationProperty title={t('admin.labels.headerText')}>
+        {((state.selected?.labels ?? []) as Label[]).map((label, index) => (
+          <EntityLabel key={index} label={label} />
+        ))}
+      </InformationProperty>
       <UserMessage
-        hidden={!state.selected.outlookCategory}
+        hidden={!state.selected?.outlookCategory}
         containerStyle={{ margin: '15px 0 15px 0' }}
         text={t('projects.categoryOutlookText')}
         iconName='OutlookLogoInverse'
