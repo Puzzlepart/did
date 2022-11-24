@@ -17,7 +17,7 @@ import { Projects } from './Projects'
 export const ProjectsPage: PageComponent = () => {
   return (
     <Switch>
-      <Route path='/projects/:currentView?/:projectKey?' component={Projects} />
+      <Route path='/projects/:currentTab?/:projectKey?' component={Projects} />
     </Switch>
   )
 }

@@ -35,24 +35,22 @@ export const Timesheet: FC = () => {
             onTabChanged={(itemKey) => {
               dispatch(CHANGE_VIEW({ view: itemKey as TimesheetView }))
             }}
+            level={3}
           >
             <Overview
               headerButtonProps={headerButtonProps}
               itemKey={TimesheetView.Overview}
               headerText={t('timesheet.overviewHeaderText')}
-              itemIcon='CalendarWeek'
             />
             <SummaryView
               headerButtonProps={headerButtonProps}
               itemKey={TimesheetView.Summary}
               headerText={t('timesheet.summaryHeaderText')}
-              itemIcon='List'
             />
             <AllocationView
               headerButtonProps={headerButtonProps}
               itemKey={TimesheetView.Allocation}
               headerText={t('timesheet.allocationHeaderText')}
-              itemIcon='ReportDocument'
             />
           </TabContainer>
         </div>

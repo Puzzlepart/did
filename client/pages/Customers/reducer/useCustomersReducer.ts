@@ -1,16 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useReducer } from 'react'
-import { useParams } from 'react-router-dom'
 import createReducer from '.'
 import { ICustomersUrlParameters } from '../types'
-import { initState } from './initState'
+import createInitialState from './initState'
 
 /**
- * Customers reducer hook
+ * Use Projects reducer
+ *
+ * @param urlParameters - URL parameters
  */
-export function useCustomersReducer() {
-  const parameters = useParams<ICustomersUrlParameters>()
-  const reducer = useMemo(() => createReducer({ params: parameters }), [])
-  const [state, dispatch] = useReducer(reducer, initState(parameters))
+export function useCustomersReducer(urlParameters: ICustomersUrlParameters) {
+  const reducer = useMemo(() => createReducer(urlParameters), [])
+  const [state, dispatch] = useReducer(
+    reducer,
+    createInitialState(urlParameters)
+  )
   return { state, dispatch } as const
 }

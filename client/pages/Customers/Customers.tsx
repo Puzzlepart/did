@@ -7,8 +7,8 @@ import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { ICustomerFormProps } from './CustomerForm/types'
 import { CustomerList } from './CustomerList'
-import { CHANGE_VIEW } from './reducer/actions'
-import { CustomersView } from './types'
+import { CHANGE_TAB } from './reducer/actions'
+import { CustomersTab } from './types'
 import { useCustomers } from './useCustomers'
 
 /**
@@ -25,20 +25,14 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
       ) : (
         <TabContainer
           defaultSelectedKey={view}
-          onTabChanged={(itemKey) =>
-            context.dispatch(CHANGE_VIEW({ view: itemKey as CustomersView }))
+          onTabChanged={(tab: CustomersTab) =>
+            context.dispatch(CHANGE_TAB({ tab }))
           }
-          styles={{ itemContainer: { paddingTop: 10 } }}
         >
-          <CustomerList
-            itemKey='search'
-            headerText={t('common.search')}
-            itemIcon='FabricFolderSearch'
-          />
+          <CustomerList itemKey='s' headerText={t('common.search')} />
           <CustomerForm
             itemKey='new'
             headerText={t('customers.createNewText')}
-            itemIcon='AddTo'
             permission={PermissionScope.MANAGE_CUSTOMERS}
           />
         </TabContainer>

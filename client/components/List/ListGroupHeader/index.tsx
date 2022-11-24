@@ -2,7 +2,7 @@ import { GroupHeader, IDetailsGroupDividerProps } from '@fluentui/react'
 import React, { FC } from 'react'
 
 export const ListGroupHeader: FC<IDetailsGroupDividerProps> = (props) => {
-  const { holiday } = props.group.data
+  const { holiday } = props.group?.data ?? {}
   return (
     <div title={holiday?.name}>
       <GroupHeader

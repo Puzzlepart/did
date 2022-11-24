@@ -6,8 +6,8 @@ import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
-import { CHANGE_VIEW } from './reducer/actions'
-import { ProjectsView } from './types'
+import { CHANGE_TAB } from './reducer/actions'
+import { ProjectsTab } from './types'
 import { useProjects } from './useProjects'
 
 /**
@@ -24,29 +24,26 @@ export const Projects: FC = () => {
       ) : (
         <TabContainer
           hidden={!!context.state.selected}
-          defaultSelectedKey={context.state.view}
-          onTabChanged={(itemKey) =>
-            context.dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
+          defaultSelectedKey={context.state.currentTab}
+          onTabChanged={(tab: ProjectsTab) =>
+            context.dispatch(CHANGE_TAB({ tab }))
           }
         >
           <ProjectList
             {...listProps}
-            itemKey='search'
+            itemKey='s'
             headerText={t('common.search')}
-            itemIcon='FabricFolderSearch'
             items={context.state.projects}
           />
           <ProjectList
             {...listProps}
-            itemKey='my'
+            itemKey='m'
             headerText={t('projects.myProjectsText')}
-            itemIcon='FabricUserFolder'
             items={context.state.projects.filter((p) => !!p.outlookCategory)}
           />
           <ProjectForm
             itemKey='new'
             headerText={t('projects.createNewText')}
-            itemIcon='AddTo'
             permission={PermissionScope.MANAGE_PROJECTS}
           />
         </TabContainer>

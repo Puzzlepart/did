@@ -2,15 +2,17 @@ import _ from 'underscore'
 import { IProjectsState, IProjectsUrlParameters } from '../types'
 
 /**
- * Initialize state URL params
+ * Initialize state from URL parameters
  *
- * @param url - Params
+ * @param urlParameters - URL parameters
  */
-export function initState(url: IProjectsUrlParameters): IProjectsState {
+export default function initState(
+  urlParameters: IProjectsUrlParameters
+): IProjectsState {
   return {
-    view: _.contains(['search', 'my', 'new'], url.currentView)
-      ? url.currentView
-      : 'search',
+    currentTab: _.contains(['s', 'm', 'new'], urlParameters.currentTab)
+      ? urlParameters.currentTab
+      : 's',
     projects: [],
     outlookCategories: []
   }

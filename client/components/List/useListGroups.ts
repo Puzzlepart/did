@@ -38,7 +38,7 @@ export function useListGroups(items: any[], props: IListGroupProps) {
       isShowingAll: items_.length === items.length,
       isDropEnabled: false,
       isCollapsed: false,
-      data: props.groupData[index]
+      data: props.groupData && props.groupData[index]
     }
     return group
   })

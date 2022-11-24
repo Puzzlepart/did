@@ -17,11 +17,11 @@ export function useHeader() {
         {
           key: 'back',
           text:
-            state.view === 'search'
+            state.currentTab === 's'
               ? t('navigation.ProjectsPage')
               : t('projects.myProjectsText'),
           onClick: () => {
-            history.replace(`/projects/${state.view}`)
+            history.replace(`/projects/${state.currentTab}`)
             dispatch(SET_SELECTED_PROJECT({ project: null }))
           }
         },

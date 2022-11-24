@@ -35,4 +35,11 @@ export const TabContainer: TabContainerComponent = (props) => {
   )
 }
 
+TabContainer.defaultProps = {
+  level: 2,
+  fixedLinkWidth: false,
+  linkHeight: 30,
+  hideIconsMobile: true
+}
+
 export * from './types'
