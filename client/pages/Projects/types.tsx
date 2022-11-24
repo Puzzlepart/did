@@ -19,7 +19,6 @@ export type ProjectsView = 'search' | 'my' | 'new'
  */
 export interface IProjectsState {
   view?: ProjectsView
-  detailsTab?: string
   selected?: Project
   projects?: Project[]
   outlookCategories?: OutlookCategory[]

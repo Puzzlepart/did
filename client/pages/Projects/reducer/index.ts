@@ -2,12 +2,7 @@ import { createReducer } from '@reduxjs/toolkit'
 import copy from 'fast-copy'
 import _ from 'underscore'
 import { IProjectsUrlParameters } from '../types'
-import {
-  CHANGE_DETAILS_TAB,
-  CHANGE_VIEW,
-  DATA_UPDATED,
-  SET_SELECTED_PROJECT
-} from './actions'
+import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_PROJECT } from './actions'
 import { initState } from './initState'
 
 /**
@@ -51,13 +46,6 @@ export default (urlParameters: IProjectsUrlParameters) =>
     ) => {
       state.view = payload.view
       state.selected = null
-    },
-
-    [CHANGE_DETAILS_TAB.type]: (
-      state,
-      { payload }: ReturnType<typeof CHANGE_DETAILS_TAB>
-    ) => {
-      state.detailsTab = payload.detailsTab
     }
   })
 

@@ -15,11 +15,11 @@ export function useProjectsHistory(state: IProjectsState) {
 
   useLayoutEffect(() => {
     const paths = [
+      'projects',
       state.view,
-      state.selected?.tag ?? url.projectKey,
-      state.detailsTab
+      state.selected?.tag ?? url.projectKey
     ]
-    const path = createPath(['projects', ...paths])
+    const path = createPath(paths)
     history.push(path)
-  }, [state.view, state.selected, state.detailsTab, history, url.projectKey])
+  }, [state.view, state.selected, history, url.projectKey])
 }

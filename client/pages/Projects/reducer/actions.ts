@@ -16,5 +16,3 @@ export const SET_SELECTED_PROJECT = createAction<{ project: Project }>(
   'SET_SELECTED_PROJECT'
 )
 export const CHANGE_VIEW = createAction<{ view: ProjectsView }>('CHANGE_VIEW')
-export const CHANGE_DETAILS_TAB =
-  createAction<{ detailsTab: string }>('CHANGE_DETAILS_TAB')

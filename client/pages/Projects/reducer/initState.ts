@@ -11,7 +11,6 @@ export function initState(url: IProjectsUrlParameters): IProjectsState {
     view: _.contains(['search', 'my', 'new'], url.currentView)
       ? url.currentView
       : 'search',
-    detailsTab: url.detailsTab,
     projects: [],
     outlookCategories: []
   }
