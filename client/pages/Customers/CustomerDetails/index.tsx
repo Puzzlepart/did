@@ -37,7 +37,7 @@ export const CustomerDetails: FC = () => {
                 'customers.searchProjectsPlaceholder',
                 state.selected
               ),
-              disabled: true
+              disabled: loading
             }}
             renderLink={true}
           />
