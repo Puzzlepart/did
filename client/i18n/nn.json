@@ -87,7 +87,7 @@
     "keyFieldLabel": "Prosjektnøkkel",
     "createNewText": "Opprett nytt",
     "nameFieldDescription": "Namnet på prosjektet. \nDette vil vera synleg i timelista og i prosjektoversikta. \nMinimum {{PROJECT_NAME_MIN_LENGTH}} teikn.",
-    "descriptionFieldDescription": "Beskriv prosjektet meir detaljert.",
+    "descriptionFieldDescription": "Beskriv prosjektet meir detaljert. Det er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "idPreviewBlankText": "Du nyttar ein kombinasjon av kundenøkkel og prosjektnøkkel for å merke kalenderoppføringane dine i Outlook. \nDu kan automatisk opprette ein kategori i Outlook ved å huke av for **Opprett automatisk kategori i Outlook**.",
     "informationHeaderText": "Informasjon",
     "timeEntriesHeaderText": "Tidsoppføringar",
@@ -110,7 +110,7 @@
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk eit ikon for å gjere kunden meir synleg på timelista og kundesida. \nEit tilfeldig ikon blir valt for deg viss du ikkje vel eit sjølv.",
     "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} teikn",
-    "descriptionFieldDescription": "Ei kort skildring av kunden.",
+    "descriptionFieldDescription": "Ei kort skildring av kunden. Det er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
     "searchProjectsPlaceholder": "Søk i prosjekter..."
   },

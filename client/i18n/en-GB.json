@@ -88,7 +88,7 @@
     "unknownErrorText": "An unknown",
     "createNewText": "Create new",
     "nameFieldDescription": "The name of the project. This will be visible in your Timesheet, and in the project overview. Minimum {{PROJECT_NAME_MIN_LENGTH}} characters.",
-    "descriptionFieldDescription": "Describe the project in more detail.",
+    "descriptionFieldDescription": "Describe the project in more detail. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported.",
     "idPreviewBlankText": "You will use a combination of customer key and project key to tag your events in Outlook. You can automatically create a category in Outlook by checking **Automatically create category in Outlook**.",
     "informationHeaderText": "Information",
     "timeEntriesHeaderText": "Time entries",
@@ -111,7 +111,7 @@
     "keyFieldLabel": "Customer key",
     "iconFieldDescription": "Use an icon to make the customer more recognizable in the Timesheet and Customer pages. A random icon will be selected if you dont' pick one yourself.",
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
-    "descriptionFieldDescription": "A short description for the customer.",
+    "descriptionFieldDescription": "A short description for the customer. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported.",
     "createError": "We can't create the customer at the moment. Please try again later.",
     "searchProjectsPlaceholder": "Search in projects..."
   },

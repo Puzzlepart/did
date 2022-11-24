@@ -40,6 +40,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         description={t('customers.descriptionFieldDescription')}
         multiline={true}
         autoAdjustHeight={true}
+        rows={14}
       />
       <IconPicker
         {...register('icon')}
