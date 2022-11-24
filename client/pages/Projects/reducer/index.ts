@@ -31,7 +31,8 @@ export default (urlParameters: IProjectsUrlParameters) =>
         })
         state.selected = _.find(
           state.projects,
-          (p) => p.tag?.toLowerCase() === urlParameters?.key?.toLowerCase()
+          (p) =>
+            p.tag?.toLowerCase() === urlParameters?.projectKey?.toLowerCase()
         )
       }
       state.error = payload.error

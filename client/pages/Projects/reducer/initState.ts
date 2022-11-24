@@ -8,7 +8,9 @@ import { IProjectsState, IProjectsUrlParameters } from '../types'
  */
 export function initState(url: IProjectsUrlParameters): IProjectsState {
   return {
-    view: _.contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
+    view: _.contains(['search', 'my', 'new'], url.currentView)
+      ? url.currentView
+      : 'search',
     detailsTab: url.detailsTab,
     projects: [],
     outlookCategories: []

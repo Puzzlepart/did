@@ -18,10 +18,8 @@ export function useHeader() {
             ? t('navigation.ProjectsPage')
             : t('projects.myProjectsText'),
         onClick: () => {
+          history.replace(`/projects/${state.view}`)
           dispatch(SET_SELECTED_PROJECT({ project: null }))
-          history.replace(
-            history.location.pathname.split('/').slice(0, -1).join('/')
-          )
         }
       },
       {

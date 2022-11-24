@@ -35,7 +35,7 @@ export function useProjects() {
   )
 
   const listProps = useProjectList(context)
-  const renderDetails = !!state.selected || !!urlParameters.key
+  const renderDetails = !!state.selected || !!urlParameters.projectKey
 
   return { listProps, context, renderDetails } as const
 }
