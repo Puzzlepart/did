@@ -21,7 +21,7 @@ export function useProjectList(context: IProjectsContext): IProjectListProps {
         context.dispatch(SET_SELECTED_PROJECT({ project })),
       searchBox: {
         placeholder:
-          context.state.view === 'my'
+          context.state.currentTab === 'm'
             ? t('projects.myProjectsSearchPlaceholder')
             : t('common.searchPlaceholder'),
         onChange: () =>

@@ -5,22 +5,22 @@ import { useParams } from 'react-router-dom'
 import _ from 'underscore'
 import { ICustomersContext } from './context'
 import $customers from './customers.gql'
+import { useCustomersReducer } from './reducer'
 import { DATA_UPDATED } from './reducer/actions'
-import { useCustomersReducer } from './reducer/useCustomersReducer'
 import { ICustomersUrlParameters } from './types'
 import { useCustomersHistory } from './useCustomersHistory'
 
 /**
- * Hook for Customers
+ * Component logic hook for `<Customers />`
  *
- * * Using useCustomersReducer
- * * Querying customers using useQuery
- * * Dispatching DATA_UPDATED when query changes
- * * Building our Customers context
+ * * Using `useCustomersReducer`
+ * * Querying customers using `useQuery`
+ * * Dispatching `DATA_UPDATED` when query changes
+ * * Building our `CustomersContext` object
  */
 export function useCustomers() {
   const urlParameters = useParams<ICustomersUrlParameters>()
-  const { state, dispatch } = useCustomersReducer()
+  const { state, dispatch } = useCustomersReducer(urlParameters)
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
   })
@@ -42,7 +42,7 @@ export function useCustomers() {
 
   return {
     context,
-    view: urlParameters.currentView ?? 'search',
+    view: urlParameters.currentTab ?? 's',
     renderDetails
   } as const
 }

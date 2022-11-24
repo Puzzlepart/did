@@ -19,7 +19,7 @@ export function useHeader() {
           text: t('navigation.CustomersPage'),
           onClick: () => {
             dispatch(SET_SELECTED_CUSTOMER({ customer: null }))
-            history.replace(`/customers/${state.view}`)
+            history.replace(`/customers/${state.currentTab}`)
           }
         },
         {

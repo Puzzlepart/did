@@ -1,23 +1,22 @@
 import _ from 'underscore'
 import {
-  CustomersView,
+  CustomersTab,
   ICustomersState,
   ICustomersUrlParameters
 } from '../types'
 
 /**
- * Initialize state
+ * Initialize state from URL parameters
  *
- * @param parameters - Parameters
+ * @param urlParameters - URL parameters
  */
-
-export function initState(
-  parameters: ICustomersUrlParameters
+export default function initState(
+  urlParameters: ICustomersUrlParameters
 ): ICustomersState {
   return {
-    view: (_.contains(['search', 'new'], parameters.currentView)
-      ? parameters.currentView
-      : 'search') as CustomersView,
+    currentTab: (_.contains(['s', 'new'], urlParameters.currentTab)
+      ? urlParameters.currentTab
+      : 's') as CustomersTab,
     customers: []
   }
 }
