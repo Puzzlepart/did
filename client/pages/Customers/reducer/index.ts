@@ -4,7 +4,6 @@ import { ICustomersUrlParameters } from '../types'
 import { CHANGE_TAB, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 import createInitialState from './initState'
 
-
 /**
  * Create reducer for `<Customers />` using `@reduxjs/toolkit`.
  */
@@ -15,7 +14,8 @@ export default (urlParameters: ICustomersUrlParameters) =>
         state.customers = payload.query.data?.customers || []
         state.selected = _.find(
           state.customers,
-          (c) => urlParameters.customerKey?.toLowerCase() === c.key.toLowerCase()
+          (c) =>
+            urlParameters.customerKey?.toLowerCase() === c.key.toLowerCase()
         )
       })
       .addCase(SET_SELECTED_CUSTOMER, (state, { payload }) => {
@@ -27,4 +27,4 @@ export default (urlParameters: ICustomersUrlParameters) =>
       })
   )
 
-  export * from './useCustomersReducer'
+export * from './useCustomersReducer'

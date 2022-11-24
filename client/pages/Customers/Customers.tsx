@@ -29,10 +29,7 @@ export const Customers: TabComponent<ICustomerFormProps> = () => {
             context.dispatch(CHANGE_TAB({ tab }))
           }
         >
-          <CustomerList
-            itemKey='s'
-            headerText={t('common.search')}
-          />
+          <CustomerList itemKey='s' headerText={t('common.search')} />
           <CustomerForm
             itemKey='new'
             headerText={t('customers.createNewText')}

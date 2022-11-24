@@ -10,6 +10,9 @@ import createInitialState from './initState'
  */
 export function useProjectsReducer(urlParameters: IProjectsUrlParameters) {
   const reducer = useMemo(() => createReducer(urlParameters), [urlParameters])
-  const [state, dispatch] = useReducer(reducer, createInitialState(urlParameters))
+  const [state, dispatch] = useReducer(
+    reducer,
+    createInitialState(urlParameters)
+  )
   return { state, dispatch }
 }

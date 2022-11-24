@@ -6,7 +6,9 @@ import { IProjectsState, IProjectsUrlParameters } from '../types'
  *
  * @param urlParameters - URL parameters
  */
-export default function initState(urlParameters: IProjectsUrlParameters): IProjectsState {
+export default function initState(
+  urlParameters: IProjectsUrlParameters
+): IProjectsState {
   return {
     currentTab: _.contains(['s', 'm', 'new'], urlParameters.currentTab)
       ? urlParameters.currentTab
