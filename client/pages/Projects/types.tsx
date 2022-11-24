@@ -4,7 +4,7 @@ import { OutlookCategory, Project } from 'types'
 /**
  * @category Projects
  */
-export interface IProjectsParameters {
+export interface IProjectsUrlParameters {
   key: string
   view: ProjectsView
   detailsTab: string

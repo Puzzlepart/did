@@ -8,7 +8,7 @@ export const InformationProperty: FC<IInformationPropertyProps> = (props) => {
   const { loading } = useContext(ProjectsContext)
   return (
     <Shimmer className={styles.property} isDataLoaded={!loading}>
-      <div hidden={props.value === null || props.value === ''}  >
+      <div hidden={props.value === null || props.value === ''}>
         <LabelElement>{props.title}:</LabelElement>
         <span>{props.value}</span>
         {props.children}

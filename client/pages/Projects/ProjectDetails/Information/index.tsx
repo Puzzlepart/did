@@ -3,6 +3,7 @@ import { UserMessage } from 'components/UserMessage'
 import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
+import _ from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
 import { InformationProperty } from './InformationProperty'
@@ -28,11 +29,13 @@ export const Information: FC = () => {
         title={t('projects.tagLabel')}
         value={state.selected?.tag}
       />
-      <InformationProperty title={t('admin.labels.headerText')}>
-        {((state.selected?.labels ?? []) as Label[]).map((label, index) => (
-          <EntityLabel key={index} label={label} />
-        ))}
-      </InformationProperty>
+      {!_.isEmpty(state.selected?.labels) && (
+        <InformationProperty title={t('admin.labels.headerText')}>
+          {(state.selected?.labels as Label[]).map((label, index) => (
+            <EntityLabel key={index} label={label} />
+          ))}
+        </InformationProperty>
+      )}
       <UserMessage
         hidden={!state.selected?.outlookCategory}
         containerStyle={{ margin: '15px 0 15px 0' }}

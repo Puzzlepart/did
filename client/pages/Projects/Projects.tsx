@@ -19,38 +19,38 @@ export const Projects: FC = () => {
 
   return (
     <ProjectsContext.Provider value={context}>
-      {renderDetails
-        ? <ProjectDetails />
-        : (
-          <TabContainer
-            hidden={!!context.state.selected}
-            defaultSelectedKey={context.state.view}
-            onTabChanged={(itemKey) =>
-              context.dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
-            }
-          >
-            <ProjectList
-              {...listProps}
-              itemKey='search'
-              headerText={t('common.search')}
-              itemIcon='FabricFolderSearch'
-              items={context.state.projects}
-            />
-            <ProjectList
-              {...listProps}
-              itemKey='my'
-              headerText={t('projects.myProjectsText')}
-              itemIcon='FabricUserFolder'
-              items={context.state.projects.filter((p) => !!p.outlookCategory)}
-            />
-            <ProjectForm
-              itemKey='new'
-              headerText={t('projects.createNewText')}
-              itemIcon='AddTo'
-              permission={PermissionScope.MANAGE_PROJECTS}
-            />
-          </TabContainer>
-        )}
+      {renderDetails ? (
+        <ProjectDetails />
+      ) : (
+        <TabContainer
+          hidden={!!context.state.selected}
+          defaultSelectedKey={context.state.view}
+          onTabChanged={(itemKey) =>
+            context.dispatch(CHANGE_VIEW({ view: itemKey as ProjectsView }))
+          }
+        >
+          <ProjectList
+            {...listProps}
+            itemKey='search'
+            headerText={t('common.search')}
+            itemIcon='FabricFolderSearch'
+            items={context.state.projects}
+          />
+          <ProjectList
+            {...listProps}
+            itemKey='my'
+            headerText={t('projects.myProjectsText')}
+            itemIcon='FabricUserFolder'
+            items={context.state.projects.filter((p) => !!p.outlookCategory)}
+          />
+          <ProjectForm
+            itemKey='new'
+            headerText={t('projects.createNewText')}
+            itemIcon='AddTo'
+            permission={PermissionScope.MANAGE_PROJECTS}
+          />
+        </TabContainer>
+      )}
     </ProjectsContext.Provider>
   )
 }

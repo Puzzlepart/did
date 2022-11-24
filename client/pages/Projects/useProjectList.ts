@@ -7,7 +7,7 @@ import { SET_SELECTED_PROJECT } from './reducer/actions'
 
 /**
  * Use Project list
- * 
+ *
  * @param context Context
  */
 export function useProjectList(context: IProjectsContext): IProjectListProps {
@@ -17,13 +17,15 @@ export function useProjectList(context: IProjectsContext): IProjectListProps {
       items: null,
       enableShimmer: context.loading,
       renderLink: true,
-      linkOnClick: (project: Project) => context.dispatch(SET_SELECTED_PROJECT({ project })),
+      linkOnClick: (project: Project) =>
+        context.dispatch(SET_SELECTED_PROJECT({ project })),
       searchBox: {
         placeholder:
           context.state.view === 'my'
             ? t('projects.myProjectsSearchPlaceholder')
             : t('common.searchPlaceholder'),
-        onChange: () => context.dispatch(SET_SELECTED_PROJECT({ project: null }))
+        onChange: () =>
+          context.dispatch(SET_SELECTED_PROJECT({ project: null }))
       }
     }),
     [context, t]

@@ -23,7 +23,7 @@ export function useHeader() {
       },
       {
         key: 'selected',
-        text: state.selected.name,
+        text: state.selected?.name,
         isCurrentItem: true
       }
     ]

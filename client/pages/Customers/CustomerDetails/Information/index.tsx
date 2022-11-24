@@ -15,8 +15,8 @@ export const Information: FC = () => {
 
   return (
     <div className={styles.root}>
-      <SubText text={state.selected.description} font='medium' />
-      {state.selected.inactive && (
+      <SubText text={state.selected?.description} font='medium' />
+      {state.selected?.inactive && (
         <UserMessage
           text={t('customers.inactiveText')}
           iconName='Warning'
@@ -25,7 +25,7 @@ export const Information: FC = () => {
       )}
       <InformationProperty
         title={t('projects.tagLabel')}
-        value={state.selected.key}
+        value={state.selected?.key}
       />
     </div>
   )

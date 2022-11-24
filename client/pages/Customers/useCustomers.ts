@@ -2,6 +2,7 @@
 import { useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+import _ from 'underscore'
 import { ICustomersContext } from './context'
 import $customers from './customers.gql'
 import { DATA_UPDATED } from './reducer/actions'
@@ -18,7 +19,7 @@ import { useCustomersHistory } from './useCustomersHistory'
  * * Building our Customers context
  */
 export function useCustomers() {
-  const parameters = useParams<ICustomersParameters>()
+  const urlParameters = useParams<ICustomersParameters>()
   const { state, dispatch } = useCustomersReducer()
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
@@ -28,20 +29,20 @@ export function useCustomers() {
 
   useCustomersHistory(state)
 
-  const context: ICustomersContext = useMemo(
+  const context = useMemo<ICustomersContext>(
     () => ({
+      ..._.pick(query, 'loading', 'refetch'),
       state,
-      dispatch,
-      refetch: query.refetch,
-      loading: query.loading
+      dispatch
     }),
     [state, dispatch]
   )
 
+  const renderDetails = !!state.selected || !!urlParameters.key
+
   return {
-    state,
-    dispatch,
     context,
-    view: parameters.view || 'search'
+    view: urlParameters.view ?? 'search',
+    renderDetails
   } as const
 }

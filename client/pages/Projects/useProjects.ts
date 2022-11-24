@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { IProjectsContext } from './context'
 import { useProjectsReducer } from './reducer'
-import { IProjectsParameters } from './types'
+import { IProjectsUrlParameters } from './types'
 import { useProjectList } from './useProjectList'
 import { useProjectsHistory } from './useProjectsHistory'
 import { useProjectsQuery } from './useProjectsQuery'
@@ -18,8 +18,8 @@ import { useProjectsQuery } from './useProjectsQuery'
  *   when the query is reloaded
  */
 export function useProjects() {
-  const url = useParams<IProjectsParameters>()
-  const { state, dispatch } = useProjectsReducer({ url })
+  const urlParameters = useParams<IProjectsUrlParameters>()
+  const { state, dispatch } = useProjectsReducer(urlParameters)
   const { refetch, loading } = useProjectsQuery(dispatch)
 
   useProjectsHistory(state)
@@ -35,7 +35,7 @@ export function useProjects() {
   )
 
   const listProps = useProjectList(context)
-  const renderDetails = !!state.selected || !!url.key
+  const renderDetails = !!state.selected || !!urlParameters.key
 
   return { listProps, context, renderDetails } as const
 }

@@ -1,14 +1,14 @@
 import { useMemo, useReducer } from 'react'
 import createReducer, { initState } from '.'
-import { IProjectsReducerParameters } from './types'
+import { IProjectsUrlParameters } from '../types'
 
 /**
  * Use Projects reducer
  *
- * @param parameters - Reducer parameters
+ * @param urlParameters - URL parameters
  */
-export function useProjectsReducer(parameters: IProjectsReducerParameters) {
-  const reducer = useMemo(() => createReducer(parameters), [parameters])
-  const [state, dispatch] = useReducer(reducer, initState(parameters.url))
+export function useProjectsReducer(urlParameters: IProjectsUrlParameters) {
+  const reducer = useMemo(() => createReducer(urlParameters), [urlParameters])
+  const [state, dispatch] = useReducer(reducer, initState(urlParameters))
   return { state, dispatch }
 }

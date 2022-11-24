@@ -28,7 +28,10 @@ export const ProjectDetails: FC = () => {
           headerText={t('projects.informationHeaderText')}
           itemKey='information'
           itemIcon='Info'
-          headerButtonProps={{ disabled: loading, style: { opacity: loading ? 0.2 : 1 } }}
+          headerButtonProps={{
+            disabled: loading,
+            style: { opacity: loading ? 0.2 : 1 }
+          }}
         >
           <Information />
         </PivotItem>
@@ -36,7 +39,10 @@ export const ProjectDetails: FC = () => {
           headerText={t('projects.timeEntriesHeaderText')}
           itemKey='timeentries'
           itemIcon='ReminderTime'
-          headerButtonProps={{ disabled: loading, style: { opacity: loading ? 0.2 : 1 } }}
+          headerButtonProps={{
+            disabled: loading,
+            style: { opacity: loading ? 0.2 : 1 }
+          }}
         >
           <TimeEntries />
         </PivotItem>
@@ -48,4 +54,3 @@ export const ProjectDetails: FC = () => {
 export * from './Header'
 export * from './Information'
 export * from './TimeEntries'
-

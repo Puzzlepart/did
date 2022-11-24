@@ -1,8 +1,8 @@
 import { useTheme } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { ISubTextProps } from './types'
 import s from 'underscore.string'
+import { ISubTextProps } from './types'
 
 /**
  * Renders sub text using color `semanticColors.bodySubtext`
@@ -20,7 +20,7 @@ export const SubText: ReusableComponent<ISubTextProps> = ({
   const { fonts, semanticColors } = useTheme()
   return (
     <div
-    className={className}
+      className={className}
       style={{
         paddingTop: 4,
         fontSize: fonts[font].fontSize,
