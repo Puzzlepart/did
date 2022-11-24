@@ -14,8 +14,7 @@ export function useTimeEntries() {
     variables: {
       query: { projectId: state.selected?.tag }
     },
-    skip: !state.selected,
-    fetchPolicy: 'cache-first'
+    skip: !state.selected
   })
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
@@ -34,5 +33,5 @@ export function useTimeEntries() {
     data,
     onExport,
     timeentries: data?.report || []
-  }
+  } as const
 }

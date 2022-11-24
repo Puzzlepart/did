@@ -1,6 +1,6 @@
+import { Shimmer } from '@fluentui/react'
 import React, { FC } from 'react'
 import { isMobile } from 'react-device-detect'
-import FadeIn from 'react-fade-in'
 import styles from './Summary.module.scss'
 import { ISummaryProps } from './types'
 import { useSummary } from './useSummary'
@@ -11,19 +11,15 @@ import { useSummary } from './useSummary'
 export const Summary: FC<ISummaryProps> = (props) => {
   const items = useSummary(props)
   return (
-    <div hidden={isMobile}>
-      <FadeIn className={styles.root}>
-        {items.map(({ label, value }, index) => (
-          <div
-            key={index}
-            className={styles.item}
-            style={{ opacity: props.loading ? 0 : 1 }}
-          >
-            <div className={styles.value}>{value}</div>
-            <div className={styles.label}>{label}</div>
-          </div>
-        ))}
-      </FadeIn>
+    <div className={styles.root } hidden={isMobile}>
+      {items.map(({ label, value }, index) => (
+        <div
+          key={index}
+          className={styles.item}>
+          <Shimmer isDataLoaded={!props.loading} className={styles.value}>{value}</Shimmer>
+          <div className={styles.label}>{label}</div>
+        </div>
+      ))}
     </div>
   )
 }

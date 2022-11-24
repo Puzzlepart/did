@@ -19,8 +19,6 @@ export function useSummary(props: ISummaryProps) {
     [t('common.hoursCurrentYear', { year })]: (entry) => entry.year === year,
     [t('common.hoursYear', { year: year - 1 })]: (entry) =>
       entry.year === year - 1,
-    [t('common.hoursYear', { year: year - 2 })]: (entry) =>
-      entry.year === year - 2,
     [t('common.totalHours')]: () => true
   }
   return Object.keys(config).map((label) => {
