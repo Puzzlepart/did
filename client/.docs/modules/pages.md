@@ -34,8 +34,8 @@ All are built using React Function components and Hooks.
 
 - [IProjectListProps](../interfaces/pages.iprojectlistprops.md)
 - [IProjectsContext](../interfaces/pages.iprojectscontext.md)
-- [IProjectsParameters](../interfaces/pages.iprojectsparameters.md)
 - [IProjectsState](../interfaces/pages.iprojectsstate.md)
+- [IProjectsUrlParameters](../interfaces/pages.iprojectsurlparameters.md)
 
 ### Reports Interfaces
 
@@ -162,7 +162,7 @@ ___
 
 • `Const` **Projects**: FC
 
-Defined in: [client/pages/Projects/Projects.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L15)
+Defined in: [client/pages/Projects/Projects.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L16)
 
 ___
 
@@ -277,7 +277,7 @@ ___
 
 • `Const` **Header**: FC
 
-Defined in: [client/pages/Projects/ProjectDetails/Header/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L12)
+Defined in: [client/pages/Projects/ProjectDetails/Header/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L13)
 
 ___
 
@@ -285,7 +285,7 @@ ___
 
 • `Const` **Information**: FC
 
-Defined in: [client/pages/Projects/ProjectDetails/Information/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L13)
+Defined in: [client/pages/Projects/ProjectDetails/Information/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L14)
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 • `Const` **ProjectDetails**: FC
 
-Defined in: [client/pages/Projects/ProjectDetails/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/index.tsx#L14)
+Defined in: [client/pages/Projects/ProjectDetails/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/index.tsx#L13)
 
 ___
 
@@ -320,7 +320,7 @@ ___
 
 • `Const` **ProjectsContext**: *Context*<[*IProjectsContext*](../interfaces/pages.iprojectscontext.md)\>
 
-Defined in: [client/pages/Projects/context.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L18)
+Defined in: [client/pages/Projects/context.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L19)
 
 ___
 

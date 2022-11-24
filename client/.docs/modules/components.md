@@ -10,6 +10,7 @@ Reusable React Function components.
 
 - [LabelPicker](components.labelpicker.md)
 - [List](components.list.md)
+- [SubText](components.subtext.md)
 
 ### FilterPanel Classes
 
@@ -440,11 +441,12 @@ ___
 
 • `Const` **SubText**: *ReusableComponent*<ISubTextProps\>
 
-Renders sub text using color `semanticColors.bodySubtext`
+Renders sub text using color `semanticColors.bodySubtext`. Supports markdown
+using `ReactMarkdown`.
 
 **`remarks`** Has a default padding top of **4px**
 
-Defined in: [client/components/SubText/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L13)
+Defined in: [client/components/SubText/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L17)
 
 ___
 

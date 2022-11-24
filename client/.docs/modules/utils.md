@@ -15,6 +15,7 @@ Reusable utility functions
 - [arrayExtend](utils.md#arrayextend)
 - [arrayMap](utils.md#arraymap)
 - [cleanArray](utils.md#cleanarray)
+- [createPath](utils.md#createpath)
 - [deepCopy](utils.md#deepcopy)
 - [generateColumn](utils.md#generatecolumn)
 - [getContrastColor](utils.md#getcontrastcolor)
@@ -103,6 +104,24 @@ Name | Type | Description |
 **Returns:** T[]
 
 Defined in: [client/utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
+
+___
+
+### createPath
+
+▸ **createPath**(`parts`: *string*[]): *any*
+
+Creates an URL path from the specified `parts`.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`parts` | *string*[] | Parts    |
+
+**Returns:** *any*
+
+Defined in: [client/utils/createPath.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/createPath.ts#L6)
 
 ___
 

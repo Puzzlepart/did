@@ -9,6 +9,7 @@
 ### Properties
 
 - [dispatch](pages.iprojectscontext.md#dispatch)
+- [loading](pages.iprojectscontext.md#loading)
 - [state](pages.iprojectscontext.md#state)
 
 ### Methods
@@ -22,6 +23,14 @@
 • **dispatch**: *Dispatch*<AnyAction\>
 
 Defined in: [client/pages/Projects/context.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L11)
+
+___
+
+### loading
+
+• **loading**: *boolean*
+
+Defined in: [client/pages/Projects/context.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L13)
 
 ___
 

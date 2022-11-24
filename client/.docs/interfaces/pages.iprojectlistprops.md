@@ -23,6 +23,7 @@
 - [hidden](pages.iprojectlistprops.md#hidden)
 - [hideColumns](pages.iprojectlistprops.md#hidecolumns)
 - [items](pages.iprojectlistprops.md#items)
+- [linkOnClick](pages.iprojectlistprops.md#linkonclick)
 - [listGroupProps](pages.iprojectlistprops.md#listgroupprops)
 - [listGroupRenderProps](pages.iprojectlistprops.md#listgrouprenderprops)
 - [renderLink](pages.iprojectlistprops.md#renderlink)
@@ -128,7 +129,7 @@ ___
 
 • `Optional` **hideColumns**: *string*[]
 
-Defined in: [client/pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
+Defined in: [client/pages/Projects/ProjectList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L13)
 
 ___
 
@@ -141,6 +142,28 @@ Items
 Inherited from: void
 
 Defined in: [client/components/List/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L69)
+
+___
+
+### linkOnClick
+
+• `Optional` **linkOnClick**: (`project`: *Project*) => *void*
+
+#### Type declaration:
+
+▸ (`project`: *Project*): *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`project` | *Project* |
+
+**Returns:** *void*
+
+Defined in: [client/pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
+
+Defined in: [client/pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
 
 ___
 
