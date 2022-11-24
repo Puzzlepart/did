@@ -7,7 +7,7 @@ import { ICustomersContext } from './context'
 import $customers from './customers.gql'
 import { DATA_UPDATED } from './reducer/actions'
 import { useCustomersReducer } from './reducer/useCustomersReducer'
-import { ICustomersParameters } from './types'
+import { ICustomersUrlParameters } from './types'
 import { useCustomersHistory } from './useCustomersHistory'
 
 /**
@@ -19,7 +19,7 @@ import { useCustomersHistory } from './useCustomersHistory'
  * * Building our Customers context
  */
 export function useCustomers() {
-  const urlParameters = useParams<ICustomersParameters>()
+  const urlParameters = useParams<ICustomersUrlParameters>()
   const { state, dispatch } = useCustomersReducer()
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'

@@ -1,11 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit'
 import _ from 'underscore'
-import { ICustomersParameters } from '../types'
+import { ICustomersUrlParameters } from '../types'
 import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 import { initState } from './initState'
 
 interface ICreateReducerParameters {
-  params: ICustomersParameters
+  params: ICustomersUrlParameters
 }
 
 /**

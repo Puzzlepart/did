@@ -2,7 +2,7 @@
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { createPath } from 'utils/createPath'
-import { ICustomersParameters, ICustomersState } from './types'
+import { ICustomersUrlParameters, ICustomersState } from './types'
 
 /**
  * Update history using `useHistory` on `state` change
@@ -11,7 +11,7 @@ import { ICustomersParameters, ICustomersState } from './types'
  */
 export function useCustomersHistory(state: ICustomersState) {
   const history = useHistory()
-  const url = useParams<ICustomersParameters>()
+  const url = useParams<ICustomersUrlParameters>()
 
   useLayoutEffect(() => {
     const paths = [state.view, state.selected?.key || url.key]

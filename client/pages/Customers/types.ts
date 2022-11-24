@@ -1,6 +1,6 @@
 import { Customer } from 'types'
 
-export interface ICustomersParameters {
+export interface ICustomersUrlParameters {
   key: string
   view: string
 }
