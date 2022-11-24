@@ -10,51 +10,52 @@ import { ITabContainerProps } from './types'
 /**
  * Returns tab container styles
  *
- * @param props - Component props
+ * @param props Component props
  */
-export function useTabContainerStyles({
-  styles,
-  fixedLinkWidth = false,
-  linkHeight = 30,
-  hideIconsMobile = true
-}: ITabContainerProps) {
-  const styles_: IStyleFunctionOrObject<IPivotStyleProps, IPivotStyles> = {
+export function useTabContainerStyles(props: ITabContainerProps) {
+  const fontSize = {
+    [2]: 18,
+    [3]: 14
+  }[props.level]
+  const styles: IStyleFunctionOrObject<IPivotStyleProps, IPivotStyles> = {
     root: {
       display: 'flex',
       flexWrap: 'wrap'
     },
     itemContainer: {
       paddingTop: 10
-    }
+    },
+    link: { fontSize }
   }
-  if (!isMobile) return merge(styles_, styles as any)
+  if (!isMobile) return merge(styles, props.styles as any)
 
   const link = {
-    height: linkHeight,
-    lineHeight: linkHeight,
+    height: props.linkHeight,
+    lineHeight: props.linkHeight,
     textAlign: 'left',
     margin: 0,
     width: 'auto'
   }
-  styles_.linkContent = { height: linkHeight }
-  styles_.link = {
+  styles.linkContent = { height: props.linkHeight }
+  styles.link = {
     ...link,
     opacity: 0.4
   }
-  styles_.linkIsSelected = {
+  styles.linkIsSelected = {
     ...link,
     ':before': { display: 'none' },
     ':hover': { backgroundColor: 'transparent' },
     ':active': { backgroundColor: 'transparent' },
     opacity: 1
   }
-  if (hideIconsMobile) {
-    styles_.icon = { display: 'none' }
+  if (props.hideIconsMobile) {
+    styles.icon = { display: 'none' }
   }
-  if (fixedLinkWidth) {
-    const linkWidth = fixedLinkWidth === true ? '45%' : fixedLinkWidth
-    styles_.link.width = linkWidth
-    styles_.linkIsSelected.width = linkWidth
+  if (props.fixedLinkWidth) {
+    const linkWidth =
+      props.fixedLinkWidth === true ? '45%' : props.fixedLinkWidth
+    styles.link.width = linkWidth
+    styles.linkIsSelected.width = linkWidth
   }
-  return merge(styles_, styles as any)
+  return merge(styles, props.styles as any)
 }

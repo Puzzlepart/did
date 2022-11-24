@@ -35,6 +35,7 @@ export const Timesheet: FC = () => {
             onTabChanged={(itemKey) => {
               dispatch(CHANGE_VIEW({ view: itemKey as TimesheetView }))
             }}
+            level={3}
           >
             <Overview
               headerButtonProps={headerButtonProps}
