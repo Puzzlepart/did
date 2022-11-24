@@ -3,6 +3,7 @@ import { FetchPolicy, useLazyQuery } from '@apollo/client'
 import { useLayoutEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'
 import { default_query } from './useReportsQueries'
+
 /**
  * Hook for Reports Query.
  *

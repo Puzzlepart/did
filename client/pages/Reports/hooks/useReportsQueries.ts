@@ -196,4 +196,4 @@ export function useReportsQueries(): IReportsQuery[] {
   ]
 }
 
-export { report_current_month as default_query }
+export { default as default_query } from './queries/report-current-month.gql'

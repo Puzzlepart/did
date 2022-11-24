@@ -4,7 +4,6 @@ import { FilterPanel, TabContainer, UserMessage } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from './context'
-import { useReports } from './hooks'
 import {
   CHANGE_QUERY,
   FILTERS_UPDATED,
@@ -14,6 +13,7 @@ import styles from './Reports.module.scss'
 import { ReportsList } from './ReportsList'
 import { SaveFilterForm } from './SaveFilterForm'
 import { SummaryView } from './SummaryView'
+import { useReports } from './useReports'
 
 /**
  * @category Function Component

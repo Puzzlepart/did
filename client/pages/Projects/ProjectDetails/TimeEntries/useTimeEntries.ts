@@ -1,28 +1,22 @@
-import { useQuery } from '@apollo/client'
 import { useExcelExport } from 'hooks'
 import { useContext } from 'react'
 import { ProjectsContext } from '../../context'
 import columns from '../columns'
-import $timeentries from './timeentries.gql'
+import { useTimeEntriesQuery } from './useTimeEntriesQuery'
 
 /**
  * @category Projects
  */
 export function useTimeEntries() {
   const { state } = useContext(ProjectsContext)
-  const { loading, error, data } = useQuery($timeentries, {
-    variables: {
-      query: { projectId: state.selected?.tag }
-    },
-    skip: !state.selected
-  })
+  const { loading, error, timeEntries } = useTimeEntriesQuery()
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
     '-'
   )}-{0}.xlsx`
 
   const { onExport } = useExcelExport({
-    items: data?.report,
+    items: timeEntries,
     fileName,
     columns
   })
@@ -30,8 +24,7 @@ export function useTimeEntries() {
   return {
     loading,
     error,
-    data,
     onExport,
-    timeentries: data?.report || []
+    timeEntries
   } as const
 }

@@ -1,6 +1,6 @@
 
   query ProjectReport ($query: ReportsQuery!) {
-    report(query: $query) {
+    timeEntries: report(query: $query) {
       title
       duration
       week
@@ -9,13 +9,17 @@
       startDateTime
       endDateTime
       resource {
-        photo {
+        id
+      }
+    }
+    users: users {
+      id
+      givenName
+      surname
+      mail
+      displayName
+      photo {
           base64
-        }
-        givenName
-        surname
-        mail
-        displayName
       }
     }
   }

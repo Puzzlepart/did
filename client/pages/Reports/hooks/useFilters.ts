@@ -5,11 +5,12 @@ import {
   ResourceFilter
 } from 'components/FilterPanel/Filters'
 import { useTranslation } from 'react-i18next'
+import { IReportsSavedFilter } from '../types'
 
 /**
  * Returns filter configuration for Reports
  */
-export function useFilters({ filter }) {
+export function useFilters(filter: IReportsSavedFilter) {
   const { t } = useTranslation()
   return [
     new ResourceFilter(
