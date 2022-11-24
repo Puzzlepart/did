@@ -10,6 +10,7 @@ export interface IProjectsContext {
   state: IProjectsState
   dispatch: React.Dispatch<AnyAction>
   refetch(variables?: any): Promise<ApolloQueryResult<any>>
+  loading: boolean
 }
 
 /**

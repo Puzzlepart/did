@@ -1,20 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit'
 import copy from 'fast-copy'
 import _ from 'underscore'
-import {
-  CHANGE_DETAILS_TAB,
-  CHANGE_VIEW,
-  DATA_UPDATED,
-  SET_SELECTED_PROJECT
-} from './actions'
+import { IProjectsUrlParameters } from '../types'
+import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_PROJECT } from './actions'
 import { initState } from './initState'
-import { IProjectsReducerParameters } from './types'
 
 /**
  * Create reducer for Projects
  */
-export default ({ url }: IProjectsReducerParameters) =>
-  createReducer(initState(url), {
+export default (urlParameters: IProjectsUrlParameters) =>
+  createReducer(initState(urlParameters), {
     [DATA_UPDATED.type]: (
       state,
       { payload }: ReturnType<typeof DATA_UPDATED>
@@ -31,7 +26,8 @@ export default ({ url }: IProjectsReducerParameters) =>
         })
         state.selected = _.find(
           state.projects,
-          (p) => p.tag?.toLowerCase() === url?.key?.toLowerCase()
+          (p) =>
+            p.tag?.toLowerCase() === urlParameters?.projectKey?.toLowerCase()
         )
       }
       state.error = payload.error
@@ -50,13 +46,6 @@ export default ({ url }: IProjectsReducerParameters) =>
     ) => {
       state.view = payload.view
       state.selected = null
-    },
-
-    [CHANGE_DETAILS_TAB.type]: (
-      state,
-      { payload }: ReturnType<typeof CHANGE_DETAILS_TAB>
-    ) => {
-      state.detailsTab = payload.detailsTab
     }
   })
 

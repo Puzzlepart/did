@@ -1,10 +1,10 @@
-import { DefaultButton } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
 import { usePermissions } from 'hooks'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FC, HTMLAttributes, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { CustomerForm } from '../../CustomerForm'
+import { CustomerForm } from '../../../CustomerForm'
 import styles from './Actions.module.scss'
 
 /**
@@ -20,21 +20,21 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
       <div className={styles.container}>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected.webLink}
+          hidden={loading || !state.selected?.webLink}
         >
-          <DefaultButton
+          <ActionButton
             text={t('customers.webLinkText')}
-            href={state.selected.webLink}
+            href={state.selected?.webLink}
             iconProps={{ iconName: 'Website' }}
           />
         </div>
         <div
           className={styles.actionItem}
-          hidden={loading || !state.selected.externalSystemURL}
+          hidden={loading || !state.selected?.externalSystemURL}
         >
-          <DefaultButton
+          <ActionButton
             text={t('customers.externalSystemUrlText')}
-            href={state.selected.externalSystemURL}
+            href={state.selected?.externalSystemURL}
             iconProps={{ iconName: 'System' }}
           />
         </div>
@@ -42,17 +42,17 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           className={styles.actionItem}
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
         >
-          <DefaultButton
+          <ActionButton
             text={t('common.editLabel')}
             iconProps={{ iconName: 'Edit' }}
             onClick={() => setShowEditPanel(true)}
           />
           <CustomerForm
-            key={state.selected.key}
+            key={state.selected?.key}
             edit={state.selected}
             panelProps={{
               isOpen: showEditPanel,
-              headerText: state.selected.name,
+              headerText: state.selected?.name,
               isLightDismiss: true,
               onLightDismissClick: () => setShowEditPanel(false),
               onDismiss: () => setShowEditPanel(false),

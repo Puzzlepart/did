@@ -30,7 +30,8 @@ export const ListHeader: FC<IListHeaderProps> = ({
       <SearchBox
         {...props.searchBox}
         styles={{
-          root: { width: isMobile ? root?.current?.clientWidth : 500 }
+          root: { width: isMobile ? root?.current?.clientWidth : 500 },
+          ...props.searchBox.styles
         }}
         defaultValue={state.searchTerm}
         onChange={(_event, searchTerm) => {

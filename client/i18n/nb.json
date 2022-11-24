@@ -111,7 +111,8 @@
     "iconFieldDescription": "Bruk et ikon for å gjøre kunden mer gjenkjennelig på timelisten og kundesiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv.",
     "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer.",
     "descriptionFieldDescription": "En kort beskrivelse av kunden.",
-    "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen."
+    "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
+    "searchProjectsPlaceholder": "Søk i prosjekter..."
   },
   "admin": {
     "apiTokens": {
@@ -224,7 +225,7 @@
     "currentYear": "Dette året",
     "hoursCurrentMonth": "Timer denne måneden",
     "hoursPrevMonth": "Timer forrige måned",
-    "hoursCurrentYear": "Timer i år",
+    "hoursCurrentYear": "Timer i år ({{year}})",
     "deviceViewNotSupported": "Denne visningen er ikke tilgjengelig på din enhet.",
     "hours": "Timer",
     "showShortcutsText": "Vis tilgjengelige snarveier",
@@ -398,7 +399,8 @@
     "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}.",
     "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
     "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime. Innstillingen trer ikke i kraft før neste pålogging.",
-    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendelser til nærmeste 30 minutter\" ble lagret. \nInnstillingen trer ikke i kraft før neste pålogging."
+    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendelser til nærmeste 30 minutter\" ble lagret. \nInnstillingen trer ikke i kraft før neste pålogging.",
+    "hoursYear": "Timer {{year}}"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

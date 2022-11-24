@@ -1,8 +1,8 @@
 import { Customer } from 'types'
 
-export interface ICustomersParameters {
-  key: string
-  view: string
+export interface ICustomersUrlParameters {
+  currentView: string
+  customerKey: string
 }
 
 export type CustomersView = 'search' | 'new'

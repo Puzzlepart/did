@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { ICustomersParameters, ICustomersState } from '../types'
+import { createPath } from 'utils/createPath'
+import { ICustomersState, ICustomersUrlParameters } from './types'
 
 /**
  * Update history using `useHistory` on `state` change
@@ -10,13 +11,11 @@ import { ICustomersParameters, ICustomersState } from '../types'
  */
 export function useCustomersHistory(state: ICustomersState) {
   const history = useHistory()
-  const url = useParams<ICustomersParameters>()
+  const url = useParams<ICustomersUrlParameters>()
 
   useLayoutEffect(() => {
-    const paths = [state.view, state.selected?.key || url.key]
-    const path = `/${['customers', ...paths]
-      .filter((p) => p)
-      .join('/')}`.toLowerCase()
+    const paths = [state.view, state.selected?.key || url.customerKey]
+    const path = createPath(['customers', ...paths])
     history.push(path)
-  }, [state.view, state.selected, url.key])
+  }, [state.view, state.selected, url.customerKey])
 }

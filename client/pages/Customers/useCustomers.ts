@@ -2,11 +2,12 @@
 import { useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { ICustomersContext } from '../context'
-import $customers from '../customers.gql'
-import { DATA_UPDATED } from '../reducer/actions'
-import { useCustomersReducer } from '../reducer/useCustomersReducer'
-import { ICustomersParameters } from '../types'
+import _ from 'underscore'
+import { ICustomersContext } from './context'
+import $customers from './customers.gql'
+import { DATA_UPDATED } from './reducer/actions'
+import { useCustomersReducer } from './reducer/useCustomersReducer'
+import { ICustomersUrlParameters } from './types'
 import { useCustomersHistory } from './useCustomersHistory'
 
 /**
@@ -18,7 +19,7 @@ import { useCustomersHistory } from './useCustomersHistory'
  * * Building our Customers context
  */
 export function useCustomers() {
-  const parameters = useParams<ICustomersParameters>()
+  const urlParameters = useParams<ICustomersUrlParameters>()
   const { state, dispatch } = useCustomersReducer()
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
@@ -28,20 +29,20 @@ export function useCustomers() {
 
   useCustomersHistory(state)
 
-  const context: ICustomersContext = useMemo(
+  const context = useMemo<ICustomersContext>(
     () => ({
+      ..._.pick(query, 'loading', 'refetch'),
       state,
-      dispatch,
-      refetch: query.refetch,
-      loading: query.loading
+      dispatch
     }),
     [state, dispatch]
   )
 
+  const renderDetails = !!state.selected || !!urlParameters.customerKey
+
   return {
-    state,
-    dispatch,
     context,
-    view: parameters.view || 'search'
-  }
+    view: urlParameters.currentView ?? 'search',
+    renderDetails
+  } as const
 }

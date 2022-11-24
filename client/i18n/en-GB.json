@@ -112,7 +112,8 @@
     "iconFieldDescription": "Use an icon to make the customer more recognizable in the Timesheet and Customer pages. A random icon will be selected if you dont' pick one yourself.",
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
     "descriptionFieldDescription": "A short description for the customer.",
-    "createError": "We can't create the customer at the moment. Please try again later."
+    "createError": "We can't create the customer at the moment. Please try again later.",
+    "searchProjectsPlaceholder": "Search in projects..."
   },
   "admin": {
     "apiTokens": {
@@ -225,7 +226,7 @@
     "currentYear": "This year",
     "hoursCurrentMonth": "Hours this month",
     "hoursPrevMonth": "Hours last month",
-    "hoursCurrentYear": "Hours this year",
+    "hoursCurrentYear": "Hours this year ({{year}})",
     "deviceViewNotSupported": "This view is not available on your device.",
     "hours": "Hours",
     "showShortcutsText": "Display keyboard shortcuts",
@@ -399,7 +400,8 @@
     "userLastActiveText": "The user was last active {{lastActive}}.",
     "roundUpEventsLabel": "Round events to nearest 30 minutes",
     "roundUpEventsDescription": "Microsoft supports the ability to end meetings early or start late, typically by 5 or 10 minutes. This function allows us to round the duration of events to the nearest half hour. The setting won't take effect before next login.",
-    "roundUpEventsPostSaveMessage": "Your change for \"Round events to nearest 30 minutes\" were saved successfully. The setting won't take effect before next login."
+    "roundUpEventsPostSaveMessage": "Your change for \"Round events to nearest 30 minutes\" were saved successfully. The setting won't take effect before next login.",
+    "hoursYear": "Hours {{year}}"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

@@ -13,13 +13,14 @@ import { Customers } from './Customers'
  *
  * @category Page Component
  */
-export const CustomersPage: PageComponent = () => {
-  return (
-    <Switch>
-      <Route path='/customers/:view?/:key?' component={Customers} />
-    </Switch>
-  )
-}
+export const CustomersPage: PageComponent = () => (
+  <Switch>
+    <Route
+      path='/customers/:currentView?/:customerKey?'
+      component={Customers}
+    />
+  </Switch>
+)
 
 Object.assign(CustomersPage, {
   iconName: 'People',

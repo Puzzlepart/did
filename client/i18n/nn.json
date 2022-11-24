@@ -111,7 +111,8 @@
     "iconFieldDescription": "Bruk eit ikon for å gjere kunden meir synleg på timelista og kundesida. \nEit tilfeldig ikon blir valt for deg viss du ikkje vel eit sjølv.",
     "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} teikn",
     "descriptionFieldDescription": "Ei kort skildring av kunden.",
-    "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne."
+    "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
+    "searchProjectsPlaceholder": "Søk i prosjekter..."
   },
   "admin": {
     "apiTokens": {
@@ -224,7 +225,7 @@
     "currentYear": "Dette året",
     "hoursCurrentMonth": "Timar denne månaden",
     "hoursPrevMonth": "Timar førre månad",
-    "hoursCurrentYear": "Timar i år",
+    "hoursCurrentYear": "Timar i år ({{year}})",
     "deviceViewNotSupported": "Denne visninga er ikkje tilgjengeleg på einheita di.",
     "hours": "Timar",
     "showShortcutsText": "Vis tilgjengelege snarvegar",
@@ -398,12 +399,13 @@
     "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}.",
     "roundUpEventsLabel": "Avrund hendingar til næraste 30 minutt",
     "roundUpEventsDescription": "Microsoft gir deg no høve til å avslutte møter tidlegare enn planlagt, eller starte seinare, typisk med 5 eller 10 minutt. Denne funksjonen lar oss runde av lengda på møta til nærmaste halvtime. Innstillinga trer ikkje i kraft før neste pålogging.",
-    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendingar til næraste 30 minutt\" blei lagra. Innstillinga trer ikkje i kraft før neste pålogging."
+    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendingar til næraste 30 minutt\" blei lagra. Innstillinga trer ikkje i kraft før neste pålogging.",
+    "hoursYear": "Timar {{year}}"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
     "CustomersPage": "Kundar",
-    "ProjectsPage": "Prosjekt",
+    "ProjectsPage": "Prosjekter",
     "ReportsPage": "Rapportar",
     "AdminPage": "Admin"
   },

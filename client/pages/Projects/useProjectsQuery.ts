@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Dispatch, useLayoutEffect } from 'react'
-import { DATA_UPDATED } from '../reducer/actions'
 import $projects_outlook from './projects-outlook.gql'
+import { DATA_UPDATED } from './reducer/actions'
 
 /**
  * Use Projects query
@@ -20,5 +20,5 @@ export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
     () => dispatch(DATA_UPDATED({ data, error, loading })),
     [data, error, loading, dispatch]
   )
-  return { refetch, loading }
+  return { refetch, loading } as const
 }
