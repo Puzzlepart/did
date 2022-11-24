@@ -29,7 +29,7 @@ export function useTabContainer(props: ITabContainerProps) {
       UPDATE_BREADCRUMB({
         key: item.itemKey,
         text: item.headerText,
-        level: props.level || 2
+        level: props.level
       })
     )
     setSelectedKey(item.itemKey)
@@ -38,10 +38,16 @@ export function useTabContainer(props: ITabContainerProps) {
       props.onTabChanged(item.itemKey)
     }
   }
+  
+  const fontSize = {
+    [2]: 18,
+    [3]: 14
+  }[props.level]
 
   return {
     styles,
     selectedKey: props.selectedKey ?? selectedKey,
-    onLinkClick
+    onLinkClick,
+    fontSize
   }
 }

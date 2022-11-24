@@ -40,19 +40,16 @@ export const Timesheet: FC = () => {
               headerButtonProps={headerButtonProps}
               itemKey={TimesheetView.Overview}
               headerText={t('timesheet.overviewHeaderText')}
-              itemIcon='CalendarWeek'
             />
             <SummaryView
               headerButtonProps={headerButtonProps}
               itemKey={TimesheetView.Summary}
               headerText={t('timesheet.summaryHeaderText')}
-              itemIcon='List'
             />
             <AllocationView
               headerButtonProps={headerButtonProps}
               itemKey={TimesheetView.Allocation}
               headerText={t('timesheet.allocationHeaderText')}
-              itemIcon='ReportDocument'
             />
           </TabContainer>
         </div>

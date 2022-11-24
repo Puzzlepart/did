@@ -18,13 +18,13 @@ import { useTabContainer } from './useTabContainer'
  */
 export const TabContainer: TabContainerComponent = (props) => {
   const { user } = useAppContext()
-  const { styles, onLinkClick, selectedKey } = useTabContainer(props)
+  const { styles, onLinkClick, selectedKey,fontSize } = useTabContainer(props)
   return (
     <Pivot
       {...props}
       onLinkClick={onLinkClick}
       selectedKey={selectedKey}
-      styles={{ link: { fontSize: 18 }, ...styles }}
+      styles={{ link: { fontSize }, ...styles }}
     >
       {renderTabs({
         tabs: props.children,
@@ -33,6 +33,10 @@ export const TabContainer: TabContainerComponent = (props) => {
       })}
     </Pivot>
   )
+}
+
+TabContainer.defaultProps = {
+  level: 2
 }
 
 export * from './types'

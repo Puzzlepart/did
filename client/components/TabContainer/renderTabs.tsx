@@ -24,8 +24,9 @@ export function renderTabs({ tabs, props, user }: RenderTabs) {
     }
     const type = item?.type as JSXElementConstructor<any>
     switch (type?.name) {
-      case 'PivotItem':
+      case 'PivotItem': {
         return item
+      }
       default: {
         const mergedProps = {
           itemKey: type?.name.toLowerCase(),
