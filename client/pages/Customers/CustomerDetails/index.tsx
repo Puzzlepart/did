@@ -31,7 +31,7 @@ export const CustomerDetails: FC = () => {
             enableShimmer={loading}
             searchBox={{
               styles: {
-                root: { width: ref.current?.clientWidth - 110 }
+                root: { width: ref.current?.clientWidth - 120 }
               },
               placeholder: t(
                 'customers.searchProjectsPlaceholder',
