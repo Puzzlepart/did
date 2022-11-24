@@ -10,23 +10,26 @@ export function useHeader() {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(CustomersContext)
   const history = useHistory()
-  const breadcrumb = useMemo<IBreadcrumbProps>(() => ({
-    styles: { root: { margin: 0 } },
-    items: [
-      {
-        key: 'back',
-        text: t('navigation.CustomersPage'),
-        onClick: () => {
-          dispatch(SET_SELECTED_CUSTOMER({ customer: null }))
-          history.replace(`/customers/${state.view}`)
+  const breadcrumb = useMemo<IBreadcrumbProps>(
+    () => ({
+      styles: { root: { margin: 0 } },
+      items: [
+        {
+          key: 'back',
+          text: t('navigation.CustomersPage'),
+          onClick: () => {
+            dispatch(SET_SELECTED_CUSTOMER({ customer: null }))
+            history.replace(`/customers/${state.view}`)
+          }
+        },
+        {
+          key: 'selected',
+          text: state.selected?.name,
+          isCurrentItem: true
         }
-      },
-      {
-        key: 'selected',
-        text: state.selected?.name,
-        isCurrentItem: true
-      }
-    ]
-  }), [state.selected])
+      ]
+    }),
+    [state.selected]
+  )
   return { breadcrumb } as const
 }
