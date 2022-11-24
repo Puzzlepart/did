@@ -9,14 +9,14 @@ import { useTimeEntriesQuery } from './useTimeEntriesQuery'
  */
 export function useTimeEntries() {
   const { state } = useContext(ProjectsContext)
-  const { loading, error, timeentries } = useTimeEntriesQuery()
+  const { loading, error, timeEntries } = useTimeEntriesQuery()
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
     '-'
   )}-{0}.xlsx`
 
   const { onExport } = useExcelExport({
-    items: timeentries,
+    items: timeEntries,
     fileName,
     columns
   })
@@ -25,6 +25,6 @@ export function useTimeEntries() {
     loading,
     error,
     onExport,
-    timeentries
+    timeEntries
   } as const
 }

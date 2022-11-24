@@ -6,6 +6,8 @@ import { ISummaryProps } from './types'
 
 /**
  * Component logic hook for `<Summary />`
+ *
+ * @category Projects
  */
 export function useSummary(props: ISummaryProps) {
   const { t } = useTranslation()
@@ -24,7 +26,7 @@ export function useSummary(props: ISummaryProps) {
   return Object.keys(config).map((label) => {
     const filterFunction = config[label]
     const hours = getSum(
-      _.filter(props.timeentries, filterFunction),
+      _.filter(props.timeEntries, filterFunction),
       'duration'
     )
     return {

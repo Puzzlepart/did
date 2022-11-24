@@ -15,7 +15,7 @@ export function useTimeEntriesQuery() {
   const { state } = useContext(ProjectsContext)
   const { loading, error, data } = useQuery<{
     users: User[]
-    report: TimeEntry[]
+    timeEntries: TimeEntry[]
   }>(timeentriesQuery, {
     variables: {
       query: { projectId: state.selected?.tag }
@@ -23,9 +23,9 @@ export function useTimeEntriesQuery() {
     skip: !state.selected
   })
   const users: User[] = data?.users ?? []
-  const timeentries = (data?.report ?? []).map((entry) => ({
+  const timeEntries = (data?.timeEntries ?? []).map((entry) => ({
     ...entry,
     resource: _.find(users, (user) => user.id === entry.resource?.id)
   }))
-  return { loading, error, timeentries } as const
+  return { loading, error, timeEntries } as const
 }

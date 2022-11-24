@@ -13,22 +13,22 @@ import { useTimeEntries } from './useTimeEntries'
  */
 export const TimeEntries: FC = () => {
   const { t } = useTranslation()
-  const { loading, timeentries, onExport, error } = useTimeEntries()
+  const { loading, timeEntries, onExport, error } = useTimeEntries()
   return (
     <div className={styles.root}>
       {error ? (
         <UserMessage type={'error'} text={t('projects.timeEntriesErrorText')} />
       ) : (
         <>
-          <Summary loading={loading} timeentries={timeentries} />
-          <div hidden={_.isEmpty(timeentries)}>
+          <Summary loading={loading} timeEntries={timeEntries} />
+          <div hidden={_.isEmpty(timeEntries)}>
             <ActionButton
               text={t('projects.exportTimeEntriesLabel')}
               iconProps={{ iconName: 'ExcelDocument' }}
               onClick={() => onExport()}
             />
           </div>
-          {_.isEmpty(timeentries) && !loading && (
+          {_.isEmpty(timeEntries) && !loading && (
             <UserMessage text={t('projects.noTimeEntriesText')} />
           )}
           {loading && (
@@ -39,7 +39,7 @@ export const TimeEntries: FC = () => {
             />
           )}
           <EventList
-            items={timeentries}
+            items={timeEntries}
             enableShimmer={loading}
             additionalColumns={[
               {

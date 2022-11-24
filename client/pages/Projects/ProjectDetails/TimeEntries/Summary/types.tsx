@@ -1,6 +1,7 @@
 import { HTMLProps } from 'react'
+import { TimeEntry } from 'types'
 
 export interface ISummaryProps extends HTMLProps<HTMLDivElement> {
-  timeentries: any[]
+  timeEntries: TimeEntry[]
   loading: boolean
 }
