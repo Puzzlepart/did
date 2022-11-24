@@ -13,7 +13,9 @@ export function useTimeEntries() {
   const { loading, error, data } = useQuery($timeentries, {
     variables: {
       query: { projectId: state.selected?.tag }
-    }
+    },
+    skip: !state.selected,
+    fetchPolicy: 'cache-first'
   })
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,

@@ -9,6 +9,9 @@
       startDateTime
       endDateTime
       resource {
+        photo {
+          base64
+        }
         givenName
         surname
         mail

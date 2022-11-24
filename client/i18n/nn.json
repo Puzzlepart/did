@@ -225,7 +225,7 @@
     "currentYear": "Dette året",
     "hoursCurrentMonth": "Timar denne månaden",
     "hoursPrevMonth": "Timar førre månad",
-    "hoursCurrentYear": "Timar i år",
+    "hoursCurrentYear": "Timar i år ({{year}})",
     "deviceViewNotSupported": "Denne visninga er ikkje tilgjengeleg på einheita di.",
     "hours": "Timar",
     "showShortcutsText": "Vis tilgjengelege snarvegar",
@@ -399,7 +399,8 @@
     "userLastActiveText": "Brukaren var sist aktiv {{lastActive}}.",
     "roundUpEventsLabel": "Avrund hendingar til næraste 30 minutt",
     "roundUpEventsDescription": "Microsoft gir deg no høve til å avslutte møter tidlegare enn planlagt, eller starte seinare, typisk med 5 eller 10 minutt. Denne funksjonen lar oss runde av lengda på møta til nærmaste halvtime. Innstillinga trer ikkje i kraft før neste pålogging.",
-    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendingar til næraste 30 minutt\" blei lagra. Innstillinga trer ikkje i kraft før neste pålogging."
+    "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendingar til næraste 30 minutt\" blei lagra. Innstillinga trer ikkje i kraft før neste pålogging.",
+    "hoursYear": "Timar {{year}}"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
