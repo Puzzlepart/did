@@ -19,18 +19,15 @@ export const CustomerDetails: FC = () => {
       <Header />
       <Information />
       <div>
-        {error && (
+        {error ? (
           <UserMessage type='error'>{t('common.genericErrorText')}</UserMessage>
-        )}
-        {!error && (
+        ) : (
           <ProjectList
             items={projects}
             hideColumns={['customer']}
             enableShimmer={loading}
             searchBox={{
-              placeholder: t(
-                'customers.searchProjectsPlaceholder'
-              ),
+              placeholder: t('customers.searchProjectsPlaceholder'),
               disabled: loading
             }}
             renderLink={true}
