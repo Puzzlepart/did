@@ -11,6 +11,7 @@ Reusable React Function components.
 - [LabelPicker](components.labelpicker.md)
 - [List](components.list.md)
 - [SubText](components.subtext.md)
+- [TabContainer](components.tabcontainer.md)
 
 ### FilterPanel Classes
 
@@ -163,7 +164,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [client/components/TabContainer/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L88)
+Defined in: [client/components/TabContainer/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L89)
 
 ___
 
@@ -171,7 +172,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [client/components/TabContainer/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L86)
+Defined in: [client/components/TabContainer/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L87)
 
 ___
 

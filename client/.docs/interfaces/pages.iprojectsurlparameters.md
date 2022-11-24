@@ -8,14 +8,14 @@
 
 ### Properties
 
-- [currentView](pages.iprojectsurlparameters.md#currentview)
+- [currentTab](pages.iprojectsurlparameters.md#currenttab)
 - [projectKey](pages.iprojectsurlparameters.md#projectkey)
 
 ## Properties
 
-### currentView
+### currentTab
 
-• **currentView**: ProjectsView
+• **currentTab**: ProjectsTab
 
 Defined in: [client/pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)
 

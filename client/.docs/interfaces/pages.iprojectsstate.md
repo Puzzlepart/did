@@ -8,13 +8,21 @@
 
 ### Properties
 
+- [currentTab](pages.iprojectsstate.md#currenttab)
 - [error](pages.iprojectsstate.md#error)
 - [outlookCategories](pages.iprojectsstate.md#outlookcategories)
 - [projects](pages.iprojectsstate.md#projects)
 - [selected](pages.iprojectsstate.md#selected)
-- [view](pages.iprojectsstate.md#view)
 
 ## Properties
+
+### currentTab
+
+• `Optional` **currentTab**: ProjectsTab
+
+Defined in: [client/pages/Projects/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L21)
+
+___
 
 ### error
 
@@ -45,11 +53,3 @@ ___
 • `Optional` **selected**: *Project*
 
 Defined in: [client/pages/Projects/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L22)
-
-___
-
-### view
-
-• `Optional` **view**: ProjectsView
-
-Defined in: [client/pages/Projects/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L21)
