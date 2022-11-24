@@ -9,13 +9,17 @@
       startDateTime
       endDateTime
       resource {
-        photo {
+        id
+      }
+    }
+    users {
+      id
+      givenName
+      surname
+      mail
+      displayName
+      photo {
           base64
-        }
-        givenName
-        surname
-        mail
-        displayName
       }
     }
   }
