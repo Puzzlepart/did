@@ -33,7 +33,9 @@ export const UserReports: FC = () => {
       >
         <ChoiceGroup
           defaultSelectedKey={preset?.key}
-          onChange={setPreset}
+          onChange={(_, option) => {
+            setPreset(option)
+          }}
           options={queries}
         />
         <UserMessage

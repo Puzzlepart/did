@@ -1,4 +1,3 @@
-import { IChoiceGroupOption } from '@fluentui/react'
 import { useToggle } from 'hooks'
 import { useState } from 'react'
 import { useQueries } from './queries'
@@ -11,16 +10,15 @@ import { useUserReportQuery } from './useUserReportQuery'
  * @category UserReports Hooks
  */
 export function useUserReports() {
-  const [queryPreset, setQueryPreset] = useState<any>(null)
+  const [preset, setPreset] = useState<any>(null)
   const [showPanel, togglePanel] = useToggle()
   const queries = useQueries()
-  const query = useUserReportQuery({ preset: queryPreset })
+  const query = useUserReportQuery(preset)
   const columns = useColumns()
 
   return {
-    preset: queryPreset,
-    setPreset: (_event: any, queryPreset_: IChoiceGroupOption) =>
-      setQueryPreset(queryPreset_),
+    preset,
+    setPreset,
     queries,
     showPanel,
     togglePanel,
