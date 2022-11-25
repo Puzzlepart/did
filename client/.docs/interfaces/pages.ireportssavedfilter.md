@@ -20,8 +20,6 @@
 
 ### values
 
-• **values**: *object*
-
-#### Type declaration:
+• **values**: *Record*<string, any\>
 
 Defined in: [client/pages/Reports/types.tsx:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L39)

@@ -9,8 +9,12 @@
 ### Properties
 
 - [excelColFormat](components.ilistcolumndata.md#excelcolformat)
+- [filterType](components.ilistcolumndata.md#filtertype)
 - [hidden](components.ilistcolumndata.md#hidden)
 - [hiddenFromExport](components.ilistcolumndata.md#hiddenfromexport)
+- [isFilterable](components.ilistcolumndata.md#isfilterable)
+- [isGroupable](components.ilistcolumndata.md#isgroupable)
+- [isSortable](components.ilistcolumndata.md#issortable)
 - [onRenderColumnHeader](components.ilistcolumndata.md#onrendercolumnheader)
 - [subText](components.ilistcolumndata.md#subtext)
 
@@ -22,7 +26,25 @@
 
 Excel column format
 
-Defined in: [client/components/List/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L31)
+Defined in: [client/components/List/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L32)
+
+___
+
+### filterType
+
+• `Optional` **filterType**: () => [*BaseFilter*](../classes/components.basefilter.md)
+
+Filter type. Should be a class that extends `BaseFilter`
+
+#### Type declaration:
+
+\+ **new IListColumnData**(): [*BaseFilter*](../classes/components.basefilter.md)
+
+**Returns:** [*BaseFilter*](../classes/components.basefilter.md)
+
+Defined in: [client/components/List/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L57)
+
+Defined in: [client/components/List/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L57)
 
 ___
 
@@ -32,7 +54,7 @@ ___
 
 Hidden column
 
-Defined in: [client/components/List/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L21)
+Defined in: [client/components/List/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L22)
 
 ___
 
@@ -42,7 +64,37 @@ ___
 
 Hidden from Excel exports
 
-Defined in: [client/components/List/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L36)
+Defined in: [client/components/List/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L37)
+
+___
+
+### isFilterable
+
+• `Optional` **isFilterable**: *boolean*
+
+Is the column filterable?
+
+Defined in: [client/components/List/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L47)
+
+___
+
+### isGroupable
+
+• `Optional` **isGroupable**: *boolean*
+
+Is the column groupable?
+
+Defined in: [client/components/List/types.ts:52](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L52)
+
+___
+
+### isSortable
+
+• `Optional` **isSortable**: *boolean*
+
+Is the column sortable?
+
+Defined in: [client/components/List/types.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L42)
 
 ___
 
@@ -64,9 +116,9 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/List/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L41)
+Defined in: [client/components/List/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L62)
 
-Defined in: [client/components/List/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L41)
+Defined in: [client/components/List/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L62)
 
 ___
 
@@ -76,4 +128,4 @@ ___
 
 Optional sub text
 
-Defined in: [client/components/List/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L26)
+Defined in: [client/components/List/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L27)

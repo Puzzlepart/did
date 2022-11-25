@@ -308,10 +308,10 @@ but it might be better ways. For now this should do.
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`params?` | [*UseUpdateUserConfigurationParamType*](hooks.md#useupdateuserconfigurationparamtype) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`params?` | [*UseUpdateUserConfigurationParamType*](hooks.md#useupdateuserconfigurationparamtype) | Parameters    |
 
 **Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L37)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L36)

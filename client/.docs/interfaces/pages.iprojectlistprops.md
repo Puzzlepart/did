@@ -17,7 +17,11 @@
 - [columnHeaderProps](pages.iprojectlistprops.md#columnheaderprops)
 - [columns](pages.iprojectlistprops.md#columns)
 - [commandBar](pages.iprojectlistprops.md#commandbar)
+- [defaultSearchBoxWidth](pages.iprojectlistprops.md#defaultsearchboxwidth)
 - [enableShimmer](pages.iprojectlistprops.md#enableshimmer)
+- [exportFileName](pages.iprojectlistprops.md#exportfilename)
+- [filterPanelActions](pages.iprojectlistprops.md#filterpanelactions)
+- [filterValues](pages.iprojectlistprops.md#filtervalues)
 - [filters](pages.iprojectlistprops.md#filters)
 - [height](pages.iprojectlistprops.md#height)
 - [hidden](pages.iprojectlistprops.md#hidden)
@@ -26,6 +30,7 @@
 - [linkOnClick](pages.iprojectlistprops.md#linkonclick)
 - [listGroupProps](pages.iprojectlistprops.md#listgroupprops)
 - [listGroupRenderProps](pages.iprojectlistprops.md#listgrouprenderprops)
+- [onFilter](pages.iprojectlistprops.md#onfilter)
 - [renderLink](pages.iprojectlistprops.md#renderlink)
 - [searchBox](pages.iprojectlistprops.md#searchbox)
 - [selectionProps](pages.iprojectlistprops.md#selectionprops)
@@ -47,19 +52,19 @@ Name | Type |
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:124](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L124)
+Defined in: [client/components/List/types.ts:146](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L146)
 
 ___
 
 ### columns
 
-• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<[*IListColumnData*](components.ilistcolumndata.md)\>[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)[]
 
 Columns
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
+Defined in: [client/components/List/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L96)
 
 ___
 
@@ -71,7 +76,21 @@ Command bar props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:109](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L109)
+Defined in: [client/components/List/types.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L131)
+
+___
+
+### defaultSearchBoxWidth
+
+• `Optional` **defaultSearchBoxWidth**: *number*
+
+Default search box width
+
+**`default`** 500
+
+Inherited from: void
+
+Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
 
 ___
 
@@ -83,7 +102,44 @@ Enable shimmer (normally while loading)
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)
+Defined in: [client/components/List/types.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L101)
+
+___
+
+### exportFileName
+
+• `Optional` **exportFileName**: *string*
+
+Export file name. Set this property to enable Excel export of the
+list data.
+
+Inherited from: void
+
+Defined in: [client/components/List/types.ts:155](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L155)
+
+___
+
+### filterPanelActions
+
+• `Optional` **filterPanelActions**: *Element* \| *Element*[]
+
+Filter panel actions
+
+Inherited from: void
+
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+
+___
+
+### filterValues
+
+• `Optional` **filterValues**: *Record*<string, any\>
+
+Filter values
+
+Inherited from: void
+
+Defined in: [client/components/List/types.ts:177](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L177)
 
 ___
 
@@ -97,7 +153,7 @@ Filters
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:114](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L114)
+Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
 
 ___
 
@@ -109,7 +165,7 @@ Fixed height
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L84)
+Defined in: [client/components/List/types.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L106)
 
 ___
 
@@ -121,7 +177,7 @@ Hidden
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:119](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L119)
+Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
 
 ___
 
@@ -141,7 +197,7 @@ Items
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L69)
+Defined in: [client/components/List/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L91)
 
 ___
 
@@ -175,7 +231,7 @@ Group props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L99)
+Defined in: [client/components/List/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L121)
 
 ___
 
@@ -187,7 +243,33 @@ Group render props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:104](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L104)
+Defined in: [client/components/List/types.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L126)
+
+___
+
+### onFilter
+
+• `Optional` **onFilter**: (`filterState`: [*ListFilterState*](../modules/components.md#listfilterstate)) => *void*
+
+On filter callback returning `filters` and `isFiltered`.
+
+#### Type declaration:
+
+▸ (`filterState`: [*ListFilterState*](../modules/components.md#listfilterstate)): *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`filterState` | [*ListFilterState*](../modules/components.md#listfilterstate) |
+
+**Returns:** *void*
+
+Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+
+Inherited from: void
+
+Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
 
 ___
 
@@ -207,7 +289,7 @@ Search box props
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L89)
+Defined in: [client/components/List/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L111)
 
 ___
 
@@ -219,4 +301,4 @@ Selection
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L94)
+Defined in: [client/components/List/types.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L116)

@@ -15,6 +15,7 @@ Reusable utility functions
 - [arrayExtend](utils.md#arrayextend)
 - [arrayMap](utils.md#arraymap)
 - [cleanArray](utils.md#cleanarray)
+- [convertToMap](utils.md#converttomap)
 - [createPath](utils.md#createpath)
 - [deepCopy](utils.md#deepcopy)
 - [generateColumn](utils.md#generatecolumn)
@@ -26,7 +27,6 @@ Reusable utility functions
 - [searchObject](utils.md#searchobject)
 - [sleep](utils.md#sleep)
 - [sortAlphabetically](utils.md#sortalphabetically)
-- [toMap](utils.md#tomap)
 - [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
@@ -104,6 +104,30 @@ Name | Type | Description |
 **Returns:** T[]
 
 Defined in: [client/utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
+
+___
+
+### convertToMap
+
+▸ **convertToMap**<KeyType\>(`object`: *Record*<string, any\>): *Map*<KeyType, any\>
+
+Converts an `object` to a `Map`
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`KeyType` | *string* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`object` | *Record*<string, any\> | Object    |
+
+**Returns:** *Map*<KeyType, any\>
+
+Defined in: [client/utils/convertToMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/convertToMap.ts#L6)
 
 ___
 
@@ -334,30 +358,6 @@ Name | Type |
 **Returns:** *string*[]
 
 Defined in: [client/utils/sortAlphabetically.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sortAlphabetically.ts#L6)
-
-___
-
-### toMap
-
-▸ **toMap**<KeyType\>(`object`: *Record*<string, any\>): *Map*<KeyType, any\>
-
-Converts an `object` to a `Map`
-
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`KeyType` | *string* |
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`object` | *Record*<string, any\> | Object    |
-
-**Returns:** *Map*<KeyType, any\>
-
-Defined in: [client/utils/toMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/toMap.ts#L6)
 
 ___
 
