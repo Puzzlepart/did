@@ -79,7 +79,7 @@ export interface IListColumn extends IColumn {
   hidden?: boolean
 }
 
-export type ListFilterState = {filters: IFilter[], isFiltered: boolean}
+export type ListFilterState = { filters: IFilter[]; isFiltered: boolean }
 
 /**
  * @category List

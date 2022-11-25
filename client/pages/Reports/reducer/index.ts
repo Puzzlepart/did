@@ -55,7 +55,7 @@ export default ({ initialState, queries }) =>
       })
       .addCase(SET_FILTER_STATE, (state, { payload }) => {
         state.filterState = payload
-        if(!payload.isFiltered) state.activeFilter = null
+        if (!payload.isFiltered) state.activeFilter = null
       })
   )
 

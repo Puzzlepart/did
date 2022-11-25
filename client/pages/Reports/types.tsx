@@ -106,7 +106,7 @@ export interface IReportsState {
   /**
    * Current filter state
    */
-   filterState?: ListFilterState
+  filterState?: ListFilterState
 }
 
 /**

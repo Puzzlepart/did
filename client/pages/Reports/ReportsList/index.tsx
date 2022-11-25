@@ -53,7 +53,9 @@ export const ReportsList: TabComponent = () => {
         commandBar={commandBar}
         exportFileName={context.state.preset?.exportFileName}
         onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
-        filterPanelActions={<SaveFilterForm disabled={!context.state.filterState?.isFiltered } />}
+        filterPanelActions={
+          <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
+        }
       />
       <UserMessage
         hidden={

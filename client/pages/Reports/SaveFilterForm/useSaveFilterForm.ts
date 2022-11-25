@@ -26,6 +26,7 @@ export function useSaveFilterForm() {
     }
     dispatch(ADD_SAVED_FILTER({ model: $ }))
     $set(INITIAL_MODEL)
+    setInputVisible(false)
   }
 
   return { inputVisible, setInputVisible, value, set, onSave } as const

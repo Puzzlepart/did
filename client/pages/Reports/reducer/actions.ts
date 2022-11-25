@@ -37,6 +37,5 @@ export const REMOVE_SAVED_FILTER = createAction<{ key: string }>(
 /**
  * @category Reports Actions
  */
-export const SET_FILTER_STATE = createAction<ListFilterState>(
-  'SET_FILTER_STATE'
-)
+export const SET_FILTER_STATE =
+  createAction<ListFilterState>('SET_FILTER_STATE')

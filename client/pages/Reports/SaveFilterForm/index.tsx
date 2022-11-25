@@ -39,7 +39,9 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
           <ActionButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
-            disabled={(value('text')?.length < 2 && inputVisible) || props.disabled}
+            disabled={
+              (value('text')?.length < 2 && inputVisible) || props.disabled
+            }
             iconProps={{ iconName: 'SaveTemplate' }}
             onClick={onSave}
           />
