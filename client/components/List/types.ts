@@ -149,7 +149,8 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   }
 
   /**
-   * Export file name
+   * Export file name. Set this property to enable Excel export of the
+   * list data.
    */
   exportFileName?: string
 

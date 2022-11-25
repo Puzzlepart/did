@@ -54,10 +54,12 @@ export function useList(props: IListProps) {
   })
 
   useEffect(() => {
-    props.onFilter({
-      filters: state.filters,
-      isFiltered: state.items.length !== state.origItems.length
-    })
+    if (props.onFilter) {
+      props.onFilter({
+        filters: state.filters,
+        isFiltered: state.items.length !== state.origItems.length
+      })
+    }
   }, [state.items])
 
   return { listProps, context } as const

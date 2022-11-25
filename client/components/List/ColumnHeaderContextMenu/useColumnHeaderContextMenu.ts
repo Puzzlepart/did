@@ -20,19 +20,19 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
   const columnData: IListColumnData = column.data ?? {}
   const items: IContextualMenuItem[] = [
     columnData.isSortable && {
-      key: 'sortDesc',
+      key: 'SORT_DESC',
       text: t('common.sortDesc')
     },
     columnData.isSortable && {
-      key: 'sortAsc',
+      key: 'SORT_ASC',
       text: t('common.sortAsc')
     },
     columnData.isFilterable && {
-      key: 'separator',
+      key: 'DIVIDER_0',
       itemType: ContextualMenuItemType.Divider
     },
     columnData.isFilterable && {
-      key: 'filterBy',
+      key: 'FILTER_BY',
       text: t('common.filterByColumn', column),
       canCheck: true,
       checked: context.state.filterBy?.fieldName === column.fieldName,
@@ -41,12 +41,12 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
       }
     },
     columnData.isGroupable && {
-      key: 'separator',
+      key: 'DIVIDER_1',
       itemType: ContextualMenuItemType.Divider
     },
     columnData.isGroupable &&
       ({
-        key: 'groupBy',
+        key: 'GROUP_BY',
         text: t('common.groupByColumn', column),
         canCheck: true,
         checked: context.state.groupBy?.fieldName === column.fieldName,

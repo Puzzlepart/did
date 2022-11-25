@@ -49,6 +49,7 @@ List.defaultProps = {
   items: [],
   columns: [],
   commandBar: {
+    hidden: true,
     items: [],
     farItems: []
   },

@@ -2,6 +2,7 @@ import { Persona, PersonaSize } from '@fluentui/react'
 import { SubText } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import _ from 'underscore'
 import { CustomerHours } from './CustomerHours'
 import styles from './PeriodColumnTooltip.module.scss'
 import { TotalHours } from './TotalHours'
@@ -19,6 +20,7 @@ export const PeriodColumnTooltip: FC<IPeriodColumnTooltipProps> = ({
   const { t } = useTranslation()
   const { week, month, monthName, year, customerTotals } =
     usePeriodColumnTooltip({ periods, hours })
+  if (_.isEmpty(periods)) return null
   return (
     <div className={styles.root}>
       <div className={styles.header}>

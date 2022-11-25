@@ -102,7 +102,7 @@ export const ListHeader: FC<IListHeaderProps> = ({
       ...context.props.commandBar?.farItems,
       toggleFilterPanelItem,
       clearFiltersItem,
-      excelExportItem
+      context.props.exportFileName && excelExportItem
     ])
   }
 
@@ -119,11 +119,11 @@ export const ListHeader: FC<IListHeaderProps> = ({
       isScrollSynced={true}
     >
       <CommandBar
-        {...commandBarProps}
         hidden={
           _.isEmpty(commandBarProps.items) &&
           _.isEmpty(commandBarProps.farItems)
         }
+        {...commandBarProps}
         styles={{ root: { margin: 0, padding: 0 } }}
       />
       {defaultRender(mergedHeaderProps)}
