@@ -4,7 +4,7 @@
 import { useMap } from 'hooks/common/useMap'
 import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
 import { useEffect } from 'react'
-import { toMap } from 'utils/toMap'
+import { convertToMap } from 'utils/convertToMap'
 import { ProjectModel } from './ProjectModel'
 import { IProjectFormProps } from './types'
 import { useProjectFormValidation } from './useProjectFormValidation'
@@ -23,7 +23,7 @@ export function useInitModel(
   const icon = useRandomFabricIcon()
   useEffect(() => {
     const model = new ProjectModel().init(props.edit)
-    const _map = toMap(model)
+    const _map = convertToMap(model)
     map.$set(_map)
     map.set('icon', icon)
   }, [props.edit])

@@ -2,7 +2,7 @@ import { useAppContext } from 'AppContext'
 import { useMap } from 'hooks'
 import { UserFeedback } from 'types'
 import _ from 'underscore'
-import { toMap } from 'utils'
+import { convertToMap } from 'utils/convertToMap'
 import { useMoodOptions } from './useMoodOptions'
 import { useTypeOptions } from './useTypeOptions'
 
@@ -26,7 +26,7 @@ export interface IFeedbackModel {
 export const useFeedbackModel = () => {
   const { user } = useAppContext()
   const reporter = _.pick(user, 'displayName', 'mail')
-  const modelWithReporter: Map<any, any> = toMap({
+  const modelWithReporter: Map<any, any> = convertToMap({
     ...INITIAL_MODEL,
     reporter
   })

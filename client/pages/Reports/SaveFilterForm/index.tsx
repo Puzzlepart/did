@@ -4,20 +4,10 @@ import { useMap } from 'hooks'
 import React, { FC, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
-import { toMap } from 'utils/toMap'
 import { ReportsContext } from '../context'
 import { ADD_SAVED_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
-import { ISaveFilterFormProps } from './types'
-
-/**
- * @ignore
- */
-const INITIAL_MODEL = toMap({
-  key: '',
-  text: '',
-  iconProps: { iconName: 'Page' }
-})
+import { INITIAL_MODEL, ISaveFilterFormProps } from './types'
 
 /**
  * @category Reports
@@ -42,7 +32,7 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
       setInputVisible(true)
       return
     }
-    dispatch(ADD_SAVED_FILTER({ model: $ as IContextualMenuItem }))
+    dispatch(ADD_SAVED_FILTER({ model: $ }))
     $set(INITIAL_MODEL)
   }
 

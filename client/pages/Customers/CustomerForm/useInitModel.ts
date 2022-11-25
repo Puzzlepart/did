@@ -2,7 +2,7 @@
 import { useMap } from 'hooks/common/useMap'
 import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
 import { useEffect } from 'react'
-import { toMap } from 'utils/toMap'
+import { convertToMap } from 'utils/convertToMap'
 import { CustomerModel } from './CustomerModel'
 import { ICustomerFormProps } from './types'
 
@@ -22,7 +22,7 @@ export function useInitModel(
 
   useEffect(() => {
     const model = new CustomerModel().init(props.edit)
-    const _map = toMap(model)
+    const _map = convertToMap(model)
     map.$set(_map)
     if (!props.edit) map.set('icon', randomFabricIcon)
   }, [props.edit])

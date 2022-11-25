@@ -1,8 +1,8 @@
 import test from 'ava'
-import { toMap } from './toMap'
+import { convertToMap } from './convertToMap'
 
 test('toMap converts an object to a Map', (t) => {
-  const result = toMap({
+  const result = convertToMap({
     name: 'Ole',
     age: 38
   })
