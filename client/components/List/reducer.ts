@@ -53,7 +53,10 @@ export default (initialState: IListState) => {
           state.columnHeaderContextMenu = null
         })
         .addCase(SET_GROUP_BY, (state, { payload }) => {
-          state.groupBy = payload.groupBy
+          state.groupBy =
+            payload.groupBy?.fieldName === state.groupBy?.fieldName
+              ? null
+              : payload.groupBy
         })
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps

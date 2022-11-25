@@ -5,6 +5,7 @@ import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { ListContext } from './context'
 import styles from './List.module.scss'
+import { ListFilterPanel } from './ListFilterPanel'
 import { IListProps } from './types'
 import { useList } from './useList'
 
@@ -37,6 +38,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList {...listProps} />
           <ColumnHeaderContextMenu />
+          <ListFilterPanel />
         </ScrollablePaneWrapper>
       </ListContext.Provider>
     </div>

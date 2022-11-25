@@ -9,6 +9,7 @@ import {
   IShimmeredDetailsListProps,
   SelectionMode
 } from '@fluentui/react'
+import { BaseFilter } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 /**
@@ -49,6 +50,11 @@ export interface IListColumnData {
    * Is the column groupable?
    */
   isGroupable?: boolean
+
+  /**
+   * Filter type. Should be a class that extends `BaseFilter`
+   */
+  filterType?: new () => BaseFilter
 
   /**
    * Callback to render a tooltip for the column header

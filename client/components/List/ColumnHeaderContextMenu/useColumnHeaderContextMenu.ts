@@ -39,6 +39,8 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
       ({
         key: 'groupBy',
         text: t('common.groupByColumn', column),
+        canCheck: true,
+        checked: context.state.groupBy?.fieldName === column.fieldName,
         onClick: () => {
           context.dispatch(SET_GROUP_BY({ groupBy: column }))
         }
