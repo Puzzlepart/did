@@ -14,13 +14,25 @@
 
 ### Properties
 
+- [actions](components.ifilterpanelprops.md#actions)
 - [filters](components.ifilterpanelprops.md#filters)
 - [items](components.ifilterpanelprops.md#items)
 - [onClearFilters](components.ifilterpanelprops.md#onclearfilters)
 - [onFiltersUpdated](components.ifilterpanelprops.md#onfiltersupdated)
+- [selectedFilter](components.ifilterpanelprops.md#selectedfilter)
 - [shortListCount](components.ifilterpanelprops.md#shortlistcount)
 
 ## Properties
+
+### actions
+
+• `Optional` **actions**: *Element* \| *Element*[]
+
+Actions
+
+Defined in: [client/components/FilterPanel/types.tsx:43](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L43)
+
+___
 
 ### filters
 
@@ -81,6 +93,16 @@ Name | Type |
 Defined in: [client/components/FilterPanel/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L21)
 
 Defined in: [client/components/FilterPanel/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L21)
+
+___
+
+### selectedFilter
+
+• `Optional` **selectedFilter**: IColumn
+
+Selected filter
+
+Defined in: [client/components/FilterPanel/types.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/types.tsx#L38)
 
 ___
 

@@ -96,7 +96,7 @@ All are built using React Function components and Hooks.
 
 ### Other Functions
 
-- [useFilters](pages.md#usefilters)
+- [useCommands](pages.md#usecommands)
 
 ### Reports Functions
 
@@ -340,7 +340,7 @@ ___
 
 • `Const` **SaveFilterForm**: *FC*<ISaveFilterFormProps\>
 
-Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L25)
+Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L13)
 
 ___
 
@@ -366,21 +366,13 @@ ___
 
 ## Other Functions
 
-### useFilters
+### useCommands
 
-▸ **useFilters**(`filter`: [*IReportsSavedFilter*](../interfaces/pages.ireportssavedfilter.md)): [*BaseFilter*](../classes/components.basefilter.md)[]
+▸ **useCommands**(): ICommandBarProps
 
-Returns filter configuration for Reports
+**Returns:** ICommandBarProps
 
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`filter` | [*IReportsSavedFilter*](../interfaces/pages.ireportssavedfilter.md) |
-
-**Returns:** [*BaseFilter*](../classes/components.basefilter.md)[]
-
-Defined in: [client/pages/Reports/hooks/useFilters.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useFilters.ts#L13)
+Defined in: [client/pages/Reports/ReportsList/useCommands.tsx:71](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/ReportsList/useCommands.tsx#L71)
 
 ___
 
