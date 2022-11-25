@@ -2,7 +2,7 @@
 import { DateRangeType, IContextualMenuItem } from '@fluentui/react'
 import { useTimesheetContext } from 'pages'
 import { useRef } from 'react'
-import { isMobile } from 'react-device-detect'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { CHANGE_DATE_RANGE_TYPE } from '../../reducer/actions'
 import styles from './DateRangePicker.module.scss'
@@ -41,7 +41,7 @@ export function useDateRangePickerCommand(
       disabled: !!state.loading,
       ...(isMobile ? mobileProps : browserProps)
     },
-    {
+    isBrowser && {
       key: 'DATE_RANGE_WEEK',
       iconProps: { iconName: 'CalendarWeek' },
       text: t('timesheet.dateRangeWeek'),
@@ -53,7 +53,7 @@ export function useDateRangePickerCommand(
       className: styles.dateRangeItem,
       disabled: !!state.loading
     },
-    {
+    isBrowser && {
       key: 'DATE_RANGE_MONTH',
       iconProps: { iconName: 'Calendar' },
       text: t('timesheet.dateRangeMonth'),
@@ -65,7 +65,7 @@ export function useDateRangePickerCommand(
       className: styles.dateRangeItem,
       disabled: !!state.loading
     }
-  ]
+  ].filter(Boolean)
   return {
     dateRangePickerCommands,
     target: componentRef?.current?._buttonElement?.current
