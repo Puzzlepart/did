@@ -1,4 +1,4 @@
-[did-client - v0.11.2](../README.md) / [Parts](../modules/parts.md) / INotificationsPanelProps
+[did-client - v0.11.3](../README.md) / [Parts](../modules/parts.md) / INotificationsPanelProps
 
 # Interface: INotificationsPanelProps
 

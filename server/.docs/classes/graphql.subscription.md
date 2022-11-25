@@ -1,4 +1,4 @@
-[did-server - v0.11.2](../README.md) / [GraphQL](../modules/graphql.md) / Subscription
+[did-server - v0.11.3](../README.md) / [GraphQL](../modules/graphql.md) / Subscription
 
 # Class: Subscription
 

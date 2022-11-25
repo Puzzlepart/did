@@ -1,4 +1,4 @@
-[did-client - v0.11.2](../README.md) / [Components](../modules/components.md) / ITabContainerProps
+[did-client - v0.11.3](../README.md) / [Components](../modules/components.md) / ITabContainerProps
 
 # Interface: ITabContainerProps<T\>
 

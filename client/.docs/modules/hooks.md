@@ -1,4 +1,4 @@
-[did-client - v0.11.2](../README.md) / Hooks
+[did-client - v0.11.3](../README.md) / Hooks
 
 # Module: Hooks
 

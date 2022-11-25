@@ -1,4 +1,4 @@
-[did-server - v0.11.2](../README.md) / AuthRoute
+[did-server - v0.11.3](../README.md) / AuthRoute
 
 # Module: AuthRoute
 
