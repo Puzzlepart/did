@@ -27,7 +27,6 @@ export function useReportsReducer(queries: IReportsQuery[]) {
       periods: [],
       projects: []
     },
-    subset: [],
     savedFilters: null,
     groupBy: {
       fieldName: '.',

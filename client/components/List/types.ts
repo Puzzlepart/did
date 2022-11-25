@@ -180,6 +180,11 @@ export interface IListState<T = any> {
    * Group by column
    */
   groupBy?: IListColumn
+
+  /**
+   * Is filter panel open
+   */
+  isFilterPanelOpen?: boolean
 }
 
 /**

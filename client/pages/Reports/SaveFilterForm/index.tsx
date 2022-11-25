@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
 import { toMap } from 'utils/toMap'
 import { ReportsContext } from '../context'
-import { ADD_FILTER } from '../reducer/actions'
+import { ADD_SAVED_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
 
@@ -42,7 +42,7 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
       setInputVisible(true)
       return
     }
-    dispatch(ADD_FILTER({ model: $ as IContextualMenuItem }))
+    dispatch(ADD_SAVED_FILTER({ model: $ as IContextualMenuItem }))
     $set(INITIAL_MODEL)
   }
 
@@ -50,7 +50,7 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
     <div
       className={styles.root}
       style={props?.style}
-      hidden={!state.isFiltered || !!state.filter?.text}
+      hidden={!!state.filter?.text}
     >
       <div hidden={!inputVisible}>
         <TextField

@@ -8,9 +8,10 @@ export function useFilterItem(props: IFilterItemProps) {
   const [showCount, setShowCount] = useState(props.shortListCount)
 
   const items = useMemo(() => {
-    return props.filter.items.filter((item) => s.isBlank(searchTerm)
-      ? true
-      : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
+    return props.filter.items.filter((item) =>
+      s.isBlank(searchTerm)
+        ? true
+        : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
     )
   }, [searchTerm, props.filter.items])
   return {

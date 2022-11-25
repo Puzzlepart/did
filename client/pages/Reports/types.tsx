@@ -74,11 +74,6 @@ export interface IReportsState {
   data?: IReportsData
 
   /**
-   * Filtered subset of data.timeEntries
-   */
-  subset?: any[]
-
-  /**
    * Filter panel open
    */
   isFiltersOpen?: boolean
@@ -97,11 +92,6 @@ export interface IReportsState {
    * Loading
    */
   loading?: boolean
-
-  /**
-   * Is filtered
-   */
-  isFiltered?: boolean
 
   /**
    * Saved filters

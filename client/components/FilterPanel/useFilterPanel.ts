@@ -18,6 +18,9 @@ export function useFilterPanel(props: IFilterPanelProps) {
     [props.items, props.filters]
   )
 
+  // eslint-disable-next-line no-console
+  console.log(filters[0])
+
   /**
    * On filter updated
    *
