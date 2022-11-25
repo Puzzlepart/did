@@ -51,7 +51,8 @@ List.defaultProps = {
   commandBar: {
     items: [],
     farItems: []
-  }
+  },
+  defaultSearchBoxWidth: 500
 }
 
 export * from './types'

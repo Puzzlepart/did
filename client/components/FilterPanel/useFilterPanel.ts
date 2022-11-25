@@ -1,25 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
+import { useFilterPanelFilters } from './useFilterPanelFilters'
 
 /**
- * Component logic hook for FilterPanel
+ * Component logic hook for `<FilterPanel />`
  *
  * @param props - Props
  *
  * @category FilterPanel
  */
 export function useFilterPanel(props: IFilterPanelProps) {
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
-  )
-  useEffect(
-    () => setFilters(props.filters.map((f) => f.initialize(props.items))),
-    [props.items, props.filters]
-  )
-
-  // eslint-disable-next-line no-console
-  console.log(filters[0])
+  const { t } = useTranslation()
+  const { filters, setFilters } = useFilterPanelFilters(props)
 
   /**
    * On filter updated
@@ -47,8 +40,13 @@ export function useFilterPanel(props: IFilterPanelProps) {
     )
   }
 
+  const headerText = props.selectedFilter
+    ? t('common.filterByColumn', props.selectedFilter)
+    : props.headerText
+
   return {
     filters,
-    onFilterUpdated
-  }
+    onFilterUpdated,
+    headerText
+  } as const
 }

@@ -49,6 +49,7 @@ export const ReportsList: TabComponent = () => {
         }}
         columns={columns}
         commandBar={commandBar}
+        exportFileName={context.state.preset?.exportFileName}
       />
       <UserMessage
         hidden={

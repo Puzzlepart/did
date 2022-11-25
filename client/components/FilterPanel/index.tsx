@@ -18,34 +18,36 @@ import { useFilterPanel } from './useFilterPanel'
  */
 export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   const { t } = useTranslation()
-  const { filters, onFilterUpdated } = useFilterPanel(props)
+  const { filters, onFilterUpdated, headerText } = useFilterPanel(props)
 
   return (
     <Panel
       isOpen={props.isOpen}
       className={styles.root}
-      headerText={props.headerText}
+      headerText={headerText}
       headerClassName={styles.header}
       isLightDismiss={true}
       onDismiss={props.onDismiss}
     >
       {props.children}
-      {props.onClearFilters && (
-        <ActionButton
-          styles={{ root: { marginTop: 15 } }}
-          iconProps={{ iconName: 'ClearFilter' }}
-          text={t('common.clearFilters')}
-          onClick={props.onClearFilters}
-        />
-      )}
+      <ActionButton
+        iconProps={{ iconName: 'ClearFilter' }}
+        text={t('common.clearFilters')}
+        onClick={props.onClearFilters}
+        disabled={!props.onClearFilters}
+      />
       {filters
+        .filter((filter) =>
+          props.selectedFilter ? props.selectedFilter?.key === filter.key : true
+        )
         .filter((filter) => filter.items.length > 1)
-        .map((filter) => (
+        .map<JSX.Element>((filter) => (
           <FilterItem
             key={filter.key}
             filter={filter}
             onFilterUpdated={onFilterUpdated}
             shortListCount={props.shortListCount}
+            hideHeader={!!props.selectedFilter}
           />
         ))}
     </Panel>

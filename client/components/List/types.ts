@@ -145,6 +145,18 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
     className?: string
     onRender?: IRenderFunction<IDetailsHeaderProps>
   }
+
+  /**
+   * Export file name
+   */
+  exportFileName?: string
+
+  /**
+   * Default search box width
+   * 
+   * @default 500
+   */
+   defaultSearchBoxWidth?: number
 }
 
 export type ColumnHeaderContextMenu = {
@@ -180,6 +192,11 @@ export interface IListState<T = any> {
    * Group by column
    */
   groupBy?: IListColumn
+
+  /**
+   * Filter by column
+   */
+  filterBy?: IListColumn
 
   /**
    * Is filter panel open

@@ -15,7 +15,9 @@ export const FilterItem: FC<IFilterItemProps> = (props) => {
     useFilterItem(props)
   return (
     <div className={styles.root}>
-      <div className={styles.name}>{props.filter.name}</div>
+      <div className={styles.header} hidden={props.hideHeader}>
+        <span>{props.filter.name}</span>
+      </div>
       <div className={styles.searchBox} hidden={props.filter.items.length < 10}>
         <SearchBox
           placeholder={t('common.searchPlaceholder')}

@@ -20,10 +20,13 @@ export const DISMISS_COLUMN_HEADER_CONTEXT_MENU = createAction(
   'DISMISS_COLUMN_HEADER_CONTEXT_MENU'
 )
 export const SET_GROUP_BY =
-  createAction<{ groupBy: IListColumn }>('SET_GROUP_BY')
+  createAction<{ column: IListColumn }>('SET_GROUP_BY')
+export const SET_FILTER_BY =
+  createAction<{ column: IListColumn }>('SET_FILTER_BY')
 export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 export const FILTERS_UPDATED =
   createAction<{ filters: IFilter[] }>('FILTERS_UPDATED')
+export const CLEAR_FILTERS = createAction('CLEAR_FILTERS')
 
 /**
  * Reducer for Timesheet
@@ -60,12 +63,19 @@ export default (initialState: IListState) => {
         })
         .addCase(SET_GROUP_BY, (state, { payload }) => {
           state.groupBy =
-            payload.groupBy?.fieldName === state.groupBy?.fieldName
+            payload.column?.fieldName === state.groupBy?.fieldName
               ? null
-              : payload.groupBy
+              : payload.column
+        })
+        .addCase(SET_FILTER_BY, (state, { payload }) => {
+          state.filterBy = payload.column
+          state.isFilterPanelOpen = true
         })
         .addCase(TOGGLE_FILTER_PANEL, (state) => {
           state.isFilterPanelOpen = !state.isFilterPanelOpen
+          if (!state.isFilterPanelOpen) {
+            state.filterBy = null
+          }
         })
         .addCase(FILTERS_UPDATED, (state, { payload }) => {
           state.items = _.filter(state.origItems, (entry) => {
@@ -76,6 +86,9 @@ export default (initialState: IListState) => {
               }).length === payload.filters.length
             )
           })
+        })
+        .addCase(CLEAR_FILTERS, (state) => {
+          state.items = state.origItems
         })
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps

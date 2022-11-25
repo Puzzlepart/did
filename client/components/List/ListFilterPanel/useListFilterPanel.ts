@@ -2,7 +2,7 @@ import { BaseFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useListContext } from '../context'
-import { FILTERS_UPDATED } from '../reducer'
+import { CLEAR_FILTERS, FILTERS_UPDATED, TOGGLE_FILTER_PANEL } from '../reducer'
 
 export function useListFilterPanel() {
   const { t } = useTranslation()
@@ -20,7 +20,12 @@ export function useListFilterPanel() {
     filters,
     items: context.state.origItems,
     onFiltersUpdated: (filters) =>
-      context.dispatch(FILTERS_UPDATED({ filters }))
+      context.dispatch(FILTERS_UPDATED({ filters })),
+    onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
+    selectedFilter: context.state.filterBy
+  }
+  if (context.state.origItems.length !== context.state.items.length) {
+    filterPanelProps.onClearFilters = () => context.dispatch(CLEAR_FILTERS())
   }
   return { filterPanelProps } as const
 }

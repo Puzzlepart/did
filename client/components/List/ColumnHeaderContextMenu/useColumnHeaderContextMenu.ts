@@ -5,7 +5,11 @@ import {
 } from '@fluentui/react'
 import { useTranslation } from 'react-i18next'
 import { useListContext } from '../context'
-import { DISMISS_COLUMN_HEADER_CONTEXT_MENU, SET_GROUP_BY } from '../reducer'
+import {
+  DISMISS_COLUMN_HEADER_CONTEXT_MENU,
+  SET_FILTER_BY,
+  SET_GROUP_BY
+} from '../reducer'
 import { IListColumnData } from '../types'
 
 export function useColumnHeaderContextMenu(): IContextualMenuProps {
@@ -29,7 +33,12 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
     },
     columnData.isFilterable && {
       key: 'filterBy',
-      text: t('common.filterByColumn', column)
+      text: t('common.filterByColumn', column),
+      canCheck: true,
+      checked: context.state.filterBy?.fieldName === column.fieldName,
+      onClick: () => {
+        context.dispatch(SET_FILTER_BY({ column }))
+      }
     },
     columnData.isGroupable && {
       key: 'separator',
@@ -42,7 +51,7 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
         canCheck: true,
         checked: context.state.groupBy?.fieldName === column.fieldName,
         onClick: () => {
-          context.dispatch(SET_GROUP_BY({ groupBy: column }))
+          context.dispatch(SET_GROUP_BY({ column }))
         }
       } as IContextualMenuItem)
   ].filter(Boolean)

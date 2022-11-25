@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   CommandBar,
+  format,
   ICommandBarItemProps,
   ICommandBarProps,
   merge,
@@ -10,27 +11,38 @@ import {
 } from '@fluentui/react'
 import React, { FC, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { cleanArray as clean } from 'utils'
+import { exportExcel } from 'utils/exportExcel'
 import { useListContext } from '../context'
-import { EXECUTE_SEARCH } from '../reducer'
+import { CLEAR_FILTERS, EXECUTE_SEARCH, TOGGLE_FILTER_PANEL } from '../reducer'
 import { IListHeaderProps } from './types'
 
 export const ListHeader: FC<IListHeaderProps> = ({
   headerProps,
   defaultRender
 }) => {
+  const { t } = useTranslation()
   const context = useListContext()
   const mergedHeaderProps = merge(headerProps, context.props.columnHeaderProps)
   const root = useRef(null)
   const timeout = useRef(null)
+
+  if (!!context.props.columnHeaderProps?.onRender) {
+    return context.props.columnHeaderProps.onRender(
+      mergedHeaderProps,
+      defaultRender
+    )
+  }
+
   const searchBoxItem: ICommandBarItemProps = context.props.searchBox && {
     key: 'SEARCH_BOX',
     onRender: () => (
       <SearchBox
         {...context.props.searchBox}
         styles={{
-          root: { width: isMobile ? root?.current?.clientWidth : 500 },
+          root: { width: isMobile ? root?.current?.clientWidth : context.props.defaultSearchBoxWidth },
           ...context.props.searchBox.styles
         }}
         defaultValue={context.state.searchTerm}
@@ -45,18 +57,49 @@ export const ListHeader: FC<IListHeaderProps> = ({
       />
     )
   }
+  const toggleFilterPanelItem: ICommandBarItemProps = {
+    key: 'TOGGLE_FILTER_PANEL',
+    iconProps: { iconName: 'Filter' },
+    iconOnly: true,
+    onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
+  }
 
-  if (!!context.props.columnHeaderProps?.onRender) {
-    return context.props.columnHeaderProps.onRender(
-      mergedHeaderProps,
-      defaultRender
-    )
+  const excelExportItem: ICommandBarItemProps = {
+    key: 'EXPORT_TO_EXCEL',
+    text: t('reports.exportToExcel'),
+    onClick: () => {
+      const fileName = format(
+        context.props.exportFileName,
+        new Date().toDateString().split(' ').join('-')
+      )
+      exportExcel(context.state.items, {
+        columns: context.props.columns,
+        fileName
+      })
+    },
+    iconProps: {
+      iconName: 'ExcelDocument',
+      styles: { root: { color: 'green' } }
+    }
+  }
+
+  const clearFiltersItem: ICommandBarItemProps = {
+    key: 'CLEAR_FILTERS',
+    iconProps: { iconName: 'ClearFilter' },
+    iconOnly: true,
+    disabled: context.state.origItems.length === context.state.items.length,
+    onClick: () => context.dispatch(CLEAR_FILTERS())
   }
 
   const commandBarProps: ICommandBarProps = {
     ...context.props.commandBar,
     items: clean([searchBoxItem, ...context.props.commandBar?.items]),
-    farItems: context.props.commandBar?.farItems || []
+    farItems: clean([
+      ...context.props.commandBar?.farItems,
+      toggleFilterPanelItem,
+      clearFiltersItem,
+      excelExportItem
+    ])
   }
 
   headerProps.onRenderColumnHeaderTooltip = (props, defaultRender) => {

@@ -384,7 +384,7 @@
     "dark-theme": "Dark theme",
     "auto-theme": "System theme",
     "descriptionOptionalFieldLabel": "Description (optional)",
-    "clearFilters": "Clear filters",
+    "clearFilters": "Clear all filters",
     "lastActiveLabel": "Last active",
     "vacationSummaryText": "{{remaining}} of {{total}} vacation days remaining",
     "vacationTotalDaysLabel": "Total vacation days",

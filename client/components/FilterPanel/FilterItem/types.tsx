@@ -21,4 +21,9 @@ export interface IFilterItemProps {
    * @default 10
    */
   shortListCount: number
+
+  /**
+   * Hide the filter item header
+   */
+  hideHeader?: boolean
 }
