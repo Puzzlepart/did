@@ -37,12 +37,12 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: did-package
-        path: ./did-package.zip
+        name: did-release-package
+        path: ./did-release-package.zip
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
         publish-profile: ${{ secrets.DIDAPP_PUBLISH_PROFILE }}
-        package: ./did-package.zip
+        package: ./did-release-package.zip
