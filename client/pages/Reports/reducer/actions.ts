@@ -18,8 +18,7 @@ export const CHANGE_QUERY = createAction<{ itemKey: string }>('FILTER_UPDATED')
 /**
  * @category Reports Actions
  */
-export const SET_FILTER =
-  createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
+export const SET_FILTER = createAction<IReportsSavedFilter>('SET_FILTER')
 
 /**
  * @category Reports Actions
@@ -30,9 +29,7 @@ export const ADD_SAVED_FILTER =
 /**
  * @category Reports Actions
  */
-export const REMOVE_SAVED_FILTER = createAction<{ key: string }>(
-  'REMOVE_SAVED_FILTER'
-)
+export const REMOVE_SAVED_FILTER = createAction<string>('REMOVE_SAVED_FILTER')
 
 /**
  * @category Reports Actions

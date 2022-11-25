@@ -169,6 +169,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * On filter callback returning `filters` and `isFiltered`.
    */
   onFilter?: (filterState: ListFilterState) => void
+
+  /**
+   * Filter values
+   */
+  filterValues?: Record<string, any>
 }
 
 export type ColumnHeaderContextMenu = {

@@ -6,7 +6,7 @@ import {
 import { useContext } from 'react'
 import _ from 'underscore'
 import { IReportsContext, ReportsContext } from '../context'
-import { REMOVE_SAVED_FILTER } from '../reducer/actions'
+import { REMOVE_SAVED_FILTER, SET_FILTER } from '../reducer/actions'
 
 /**
  * Save filter  command
@@ -29,26 +29,35 @@ const saveFilterCmd = (context: IReportsContext): IContextualMenuItem =>
         },
         ...Object.keys(context.state.savedFilters).map<IContextualMenuItem>(
           (key) => {
-            const filter = _.omit(context.state.savedFilters[key], 'values')
+            const filter = context.state.savedFilters[key]
             return {
               key,
-              ...filter,
-              canCheck: true,
-              checked: filter.text === context.state.activeFilter?.text,
+              ..._.omit(filter, 'values'),
+              iconProps: {
+                ...filter.iconProps,
+                styles: { root: { color: '#444' } }
+              },
               subMenuProps: {
                 items: [
                   {
                     key: 'USE_FILTER',
                     text: context.t('reports.applyFilterText'),
-                    iconProps: { iconName: 'Play' },
-                    onClick: () => context.dispatch(REMOVE_SAVED_FILTER())
+                    canCheck: true,
+                    checked: filter.text === context.state.activeFilter?.text,
+                    iconProps: {
+                      iconName: 'Play',
+                      styles: { root: { color: 'green' } }
+                    },
+                    onClick: () => context.dispatch(SET_FILTER(filter))
                   },
                   {
-                    key: 'REMOVE_FILTE#R',
+                    key: 'REMOVE_FILTER',
                     text: context.t('reports.deleteFilterText'),
-                    iconProps: { iconName: 'RemoveFilter' },
-                    onClick: () =>
-                      context.dispatch(REMOVE_SAVED_FILTER({ key }))
+                    iconProps: {
+                      iconName: 'RemoveFilter',
+                      styles: { root: { color: 'red' } }
+                    },
+                    onClick: () => context.dispatch(REMOVE_SAVED_FILTER(key))
                   }
                 ]
               }

@@ -30,11 +30,18 @@ export default ({ initialState, queries }) =>
         }
       })
       .addCase(SET_FILTER, (state, { payload }) => {
-        state.activeFilter = payload.filter as any
+        state.activeFilter =
+          state.activeFilter?.key !== payload.key ? (payload as any) : null
       })
       .addCase(ADD_SAVED_FILTER, (state, { payload }) => {
         const newFilter: any = {
-          ...current(state).activeFilter,
+          values: current(state).filterState?.filters?.reduce(
+            (object, f) => ({
+              ...object,
+              [f.key]: f.selected.map((index) => index.key)
+            }),
+            {}
+          ),
           ...payload.model
         }
         state.savedFilters = {
@@ -44,7 +51,7 @@ export default ({ initialState, queries }) =>
         state.activeFilter = newFilter
       })
       .addCase(REMOVE_SAVED_FILTER, (state, { payload }) => {
-        state.savedFilters = _.omit(state.savedFilters, payload.key)
+        state.savedFilters = _.omit(state.savedFilters, payload)
         state.activeFilter = null
       })
       .addCase(CHANGE_QUERY, (state, { payload }) => {

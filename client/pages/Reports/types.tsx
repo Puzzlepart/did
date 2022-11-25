@@ -36,7 +36,7 @@ export interface IGroupByOption extends IContextualMenuItem {
  * @category Reports
  */
 export interface IReportsSavedFilter extends IContextualMenuItem {
-  values: { [key: string]: any }
+  values: Record<string, any>
 }
 
 /**

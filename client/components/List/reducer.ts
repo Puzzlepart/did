@@ -39,12 +39,20 @@ export default (initialState: IListState) => {
       builder
         .addCase(PROPS_UPDATED, (state, { payload }) => {
           state.origItems = payload.items ?? []
-          state.items = state.origItems.filter((item) =>
-            searchObject({
-              item,
-              searchTerm: state.searchTerm
+          state.items = state.origItems
+            .filter((item) =>
+              searchObject({
+                item,
+                searchTerm: state.searchTerm
+              })
+            )
+            .filter((item) => {
+              return (
+                _.filter(Object.keys(payload.filterValues), (key) => {
+                  return payload.filterValues[key].includes(get(item, key, ''))
+                }).length === Object.keys(payload.filterValues).length
+              )
             })
-          )
         })
         .addCase(EXECUTE_SEARCH, (state, { payload }) => {
           state.items = current(state).origItems.filter((item) =>

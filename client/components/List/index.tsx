@@ -52,7 +52,8 @@ List.defaultProps = {
     items: [],
     farItems: []
   },
-  defaultSearchBoxWidth: 500
+  defaultSearchBoxWidth: 500,
+  filterValues: {}
 }
 
 export * from './types'

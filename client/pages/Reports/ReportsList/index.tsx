@@ -52,6 +52,7 @@ export const ReportsList: TabComponent = () => {
         columns={columns}
         commandBar={commandBar}
         exportFileName={context.state.preset?.exportFileName}
+        filterValues={context.state?.activeFilter?.values}
         onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
         filterPanelActions={
           <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />

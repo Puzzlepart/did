@@ -23,7 +23,10 @@ export function useList(props: IListProps) {
     searchTerm: ''
   })
 
-  useEffect(() => dispatch(PROPS_UPDATED(props)), [props.items])
+  useEffect(
+    () => dispatch(PROPS_UPDATED(props)),
+    [props.items, props.filterValues]
+  )
 
   const selection = useMemo(() => {
     if (!props.selectionProps) return null
