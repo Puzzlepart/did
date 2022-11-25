@@ -78,6 +78,7 @@ export default (initialState: IListState) => {
           }
         })
         .addCase(FILTERS_UPDATED, (state, { payload }) => {
+          state.filters = payload.filters
           state.items = _.filter(state.origItems, (entry) => {
             return (
               _.filter(payload.filters, (f) => {

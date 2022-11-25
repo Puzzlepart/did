@@ -30,14 +30,14 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
       onDismiss={props.onDismiss}
     >
       {props.children}
-      <div className={styles.actions}>
-      {props.actions}
-      <ActionButton
-        iconProps={{ iconName: 'ClearFilter' }}
-        text={t('common.clearFilters')}
-        onClick={props.onClearFilters}
-        disabled={!props.onClearFilters}
-      />
+      <div className={styles.actions} hidden={!!props.selectedFilter}>
+        {props.actions}
+        <ActionButton
+          iconProps={{ iconName: 'ClearFilter' }}
+          text={t('common.clearFilters')}
+          onClick={props.onClearFilters}
+          disabled={!props.onClearFilters}
+        />
       </div>
       {filters
         .filter((filter) =>

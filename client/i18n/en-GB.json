@@ -211,10 +211,11 @@
     "saveFilterText": "Save filter",
     "filterNamePlaceholder": "Enter filter name...",
     "cancelSaveFilterText": "Cancel",
-    "deleteFilterText": "Delete this filter",
+    "deleteFilterText": "Delete",
     "filterPanelHeaderText": "Filters",
     "filterDescriptionPlaceholder": "Note",
-    "summaryHeaderText": "Summary"
+    "summaryHeaderText": "Summary",
+    "applyFilterText": "Apply filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

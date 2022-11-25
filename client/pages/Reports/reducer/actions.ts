@@ -1,6 +1,7 @@
 import { LazyQueryResult } from '@apollo/client'
 import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
+import { ListFilterState } from 'components/List/types'
 import { IReportsSavedFilter } from '../types'
 
 /**
@@ -29,6 +30,13 @@ export const ADD_SAVED_FILTER =
 /**
  * @category Reports Actions
  */
-export const REMOVE_SELECTED_SAVED_FILTER = createAction(
-  'REMOVE_SELECTED_SAVED_FILTER'
+export const REMOVE_SAVED_FILTER = createAction<{ key: string }>(
+  'REMOVE_SAVED_FILTER'
+)
+
+/**
+ * @category Reports Actions
+ */
+export const SET_FILTER_STATE = createAction<ListFilterState>(
+  'SET_FILTER_STATE'
 )

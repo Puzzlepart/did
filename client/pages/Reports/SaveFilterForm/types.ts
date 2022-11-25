@@ -6,8 +6,8 @@ export interface ISaveFilterFormProps extends React.HTMLProps<HTMLDivElement> {}
 /**
  * @ignore
  */
- export const INITIAL_MODEL = convertToMap({
-    key: '',
-    text: '',
-    iconProps: { iconName: 'Page' }
-  })
+export const INITIAL_MODEL = convertToMap({
+  key: '',
+  text: '',
+  iconProps: { iconName: 'Page' }
+})

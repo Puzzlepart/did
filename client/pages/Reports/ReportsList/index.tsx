@@ -8,6 +8,7 @@ import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from '../context'
+import { SET_FILTER_STATE } from '../reducer/actions'
 import { SaveFilterForm } from '../SaveFilterForm'
 import { useColumns } from './useColumns'
 import { useCommands } from './useCommands'
@@ -51,7 +52,8 @@ export const ReportsList: TabComponent = () => {
         columns={columns}
         commandBar={commandBar}
         exportFileName={context.state.preset?.exportFileName}
-        filterPanelActions={<SaveFilterForm />}
+        onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
+        filterPanelActions={<SaveFilterForm disabled={!context.state.filterState?.isFiltered } />}
       />
       <UserMessage
         hidden={

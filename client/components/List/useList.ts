@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'
@@ -22,7 +23,6 @@ export function useList(props: IListProps) {
     searchTerm: ''
   })
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(PROPS_UPDATED(props)), [props.items])
 
   const selection = useMemo(() => {
@@ -49,6 +49,10 @@ export function useList(props: IListProps) {
     items,
     selection
   })
+
+  useEffect(() => {
+    props.onFilter({ filters: state.filters, isFiltered: state.items.length !== state.origItems.length })
+  }, [state.items])
 
   return { listProps, context } as const
 }

@@ -206,14 +206,15 @@
     "selectReportLabel": "Vel rapport",
     "forecast": "Prognose",
     "exportToExcel": "Eksporter til Excel",
-    "savedFilters": "Lagre filter",
+    "savedFilters": "Lagrede filtre",
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn eit filternamn ...",
     "cancelSaveFilterText": "Avbryt",
-    "deleteFilterText": "Slett dette filteret",
+    "deleteFilterText": "Slett",
     "filterPanelHeaderText": "Filter",
     "filterDescriptionPlaceholder": "Merknad",
-    "summaryHeaderText": "Samandrag"
+    "summaryHeaderText": "Samandrag",
+    "applyFilterText": "Bruk filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

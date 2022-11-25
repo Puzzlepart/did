@@ -40,5 +40,5 @@ export interface IFilterPanelProps extends IPanelProps {
   /**
    * Actions
    */
-   actions?: JSX.Element | JSX.Element[]
+  actions?: JSX.Element | JSX.Element[]
 }

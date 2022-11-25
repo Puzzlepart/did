@@ -44,7 +44,7 @@ export function useReports() {
     config: {
       'reports.filters': state.savedFilters
     },
-    autoUpdate: !state.loading && !!state.filter?.text
+    autoUpdate: !state.loading && !!state.activeFilter?.text
   })
 
   const context = useMemo(() => ({ state, dispatch, t }), [state])

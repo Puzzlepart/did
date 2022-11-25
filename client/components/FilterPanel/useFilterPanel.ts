@@ -26,13 +26,11 @@ export function useFilterPanel(props: IFilterPanelProps) {
     item: IFilterItem,
     checked: boolean
   ) => {
-    if (checked) filter.selected.push(item)
-    else filter.selected = filter.selected.filter((f) => f.key !== item.key)
+    let selected = [...filter.selected]
+    if (checked) selected.push(item)
+    else selected = selected.filter((f) => f.key !== item.key)
     const updatedFilters = filters.map((f) => {
-      if (f.key === filter.key) {
-        return filter
-      }
-      return f
+      return f.key === filter.key ? { ...filter, selected } : f
     })
     setFilters(updatedFilters)
     props.onFiltersUpdated(

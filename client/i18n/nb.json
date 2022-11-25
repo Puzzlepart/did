@@ -210,10 +210,11 @@
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn filternavnet ...",
     "cancelSaveFilterText": "Avbryt",
-    "deleteFilterText": "Slett dette filteret",
+    "deleteFilterText": "Slett",
     "filterPanelHeaderText": "Filtre",
     "filterDescriptionPlaceholder": "Merknad",
-    "summaryHeaderText": "Sammendrag"
+    "summaryHeaderText": "Sammendrag",
+    "applyFilterText": "Bruk filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

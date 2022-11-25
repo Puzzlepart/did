@@ -1,5 +1,5 @@
 import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
-import { IListGroupProps } from 'components/List/types'
+import { IListGroupProps, ListFilterState } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { Project, TimesheetPeriodObject, User } from 'types'
 
@@ -101,7 +101,12 @@ export interface IReportsState {
   /**
    * Active filter
    */
-  filter?: IReportsSavedFilter
+  activeFilter?: IReportsSavedFilter
+
+  /**
+   * Current filter state
+   */
+   filterState?: ListFilterState
 }
 
 /**

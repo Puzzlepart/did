@@ -42,7 +42,11 @@ export const ListHeader: FC<IListHeaderProps> = ({
       <SearchBox
         {...context.props.searchBox}
         styles={{
-          root: { width: isMobile ? root?.current?.clientWidth : context.props.defaultSearchBoxWidth },
+          root: {
+            width: isMobile
+              ? root?.current?.clientWidth
+              : context.props.defaultSearchBoxWidth
+          },
           ...context.props.searchBox.styles
         }}
         defaultValue={context.state.searchTerm}

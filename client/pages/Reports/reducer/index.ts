@@ -5,8 +5,9 @@ import {
   ADD_SAVED_FILTER,
   CHANGE_QUERY,
   DATA_UPDATED,
-  REMOVE_SELECTED_SAVED_FILTER,
-  SET_FILTER
+  REMOVE_SAVED_FILTER,
+  SET_FILTER,
+  SET_FILTER_STATE
 } from './actions'
 
 /**
@@ -29,28 +30,32 @@ export default ({ initialState, queries }) =>
         }
       })
       .addCase(SET_FILTER, (state, { payload }) => {
-        state.filter = payload.filter as any
+        state.activeFilter = payload.filter as any
       })
       .addCase(ADD_SAVED_FILTER, (state, { payload }) => {
         const newFilter: any = {
-          ...current(state).filter,
+          ...current(state).activeFilter,
           ...payload.model
         }
         state.savedFilters = {
           ...state.savedFilters,
           [newFilter.key]: newFilter
         }
-        state.filter = newFilter
+        state.activeFilter = newFilter
       })
-      .addCase(REMOVE_SELECTED_SAVED_FILTER, (state) => {
-        state.savedFilters = _.omit(state.savedFilters, state.filter.key)
-        state.filter = null
+      .addCase(REMOVE_SAVED_FILTER, (state, { payload }) => {
+        state.savedFilters = _.omit(state.savedFilters, payload.key)
+        state.activeFilter = null
       })
       .addCase(CHANGE_QUERY, (state, { payload }) => {
         state.preset = _.find(
           queries,
           (q) => q.itemKey === payload?.itemKey
         ) as any
+      })
+      .addCase(SET_FILTER_STATE, (state, { payload }) => {
+        state.filterState = payload
+        if(!payload.isFiltered) state.activeFilter = null
       })
   )
 
