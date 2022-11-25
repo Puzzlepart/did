@@ -11,34 +11,9 @@ import {
   CLEAR_FILTERS,
   REMOVE_SELECTED_FILTER,
   SET_FILTER,
-  SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from '../reducer/actions'
 import { SaveFilterForm } from '../SaveFilterForm'
-import { getGroupByOptions } from '../types'
-/**
- * Select group by command
- *
- * @param context - Context
- */
-const selectGroupByCmd = (context: IReportsContext) =>
-  ({
-    key: 'SELECT_GROUP_BY',
-    text: context.t('common.groupBy'),
-    iconProps: { iconName: 'GroupList' },
-    subMenuProps: {
-      items: getGroupByOptions(context.t).map(
-        ({ key, text, props: groupBy }) =>
-          ({
-            key,
-            text,
-            canCheck: true,
-            checked: context.state.groupBy.fieldName === groupBy.fieldName,
-            onClick: () => context.dispatch(SET_GROUP_BY({ groupBy }))
-          } as IContextualMenuItem)
-      )
-    }
-  } as IContextualMenuItem)
 
 /**
  * Export to Excel command
@@ -139,10 +114,7 @@ const saveFilterCmd = ({
   } as IContextualMenuItem)
 
 export default (context: IReportsContext) => ({
-  items:
-    !!context.state.preset && !context.state.loading
-      ? [selectGroupByCmd(context)]
-      : [],
+  items: [],
   farItems:
     !!context.state.preset && !context.state.loading
       ? [

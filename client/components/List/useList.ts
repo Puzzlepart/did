@@ -39,9 +39,9 @@ export function useList(props: IListProps) {
     })
   }, [props.selectionProps])
 
-  const [groups, items] = useListGroups([...state.items], props.listGroupProps)
-
   const context: IListContext = { props, state, dispatch }
+
+  const [groups, items] = useListGroups(context)
 
   const listProps = useListProps({
     context,

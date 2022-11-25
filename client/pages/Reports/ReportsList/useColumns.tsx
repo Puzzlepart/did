@@ -127,7 +127,7 @@ export function useColumns(): IListColumn[] {
       name: t('common.weekLabel'),
       minWidth: 50,
       maxWidth: 50,
-      data:{
+      data: {
         isGroupable: true
       }
     } as IListColumn,

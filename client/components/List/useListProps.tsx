@@ -75,7 +75,7 @@ export function useListProps({
       context.dispatch(
         INIT_COLUMN_HEADER_CONTEXT_MENU({
           column,
-          targetElement: event.currentTarget
+          target: event.currentTarget
         })
       )
     }

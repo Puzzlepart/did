@@ -1,19 +1,23 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { ContextualMenuItemType } from '@fluentui/react'
 import { createAction, createReducer, current } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
-import _ from 'underscore'
 import { searchObject } from 'utils'
-import { IListColumn, IListColumnData, IListProps, IListState } from './types'
+import {
+  ColumnHeaderContextMenu,
+  IListColumn,
+  IListProps,
+  IListState
+} from './types'
 
 export const PROPS_UPDATED = createAction<IListProps>('PROPS_UPDATED')
 export const EXECUTE_SEARCH =
   createAction<{ searchTerm: string }>('EXECUTE_SEARCH')
-export const INIT_COLUMN_HEADER_CONTEXT_MENU = createAction<{
-  column: IListColumn
-  targetElement: EventTarget & HTMLElement
-}>('INIT_COLUMN_HEADER_CONTEXT_MENU')
-export const DISMISS_COLUMN_HEADER_CONTEXT_MENU = createAction('DISMISS_COLUMN_HEADER_CONTEXT_MENU')
+export const INIT_COLUMN_HEADER_CONTEXT_MENU =
+  createAction<ColumnHeaderContextMenu>('INIT_COLUMN_HEADER_CONTEXT_MENU')
+export const DISMISS_COLUMN_HEADER_CONTEXT_MENU = createAction(
+  'DISMISS_COLUMN_HEADER_CONTEXT_MENU'
+)
+export const SET_GROUP_BY =
+  createAction<{ groupBy: IListColumn }>('SET_GROUP_BY')
 
 /**
  * Reducer for Timesheet
@@ -43,42 +47,16 @@ export default (initialState: IListState) => {
           state.searchTerm = payload.searchTerm
         })
         .addCase(INIT_COLUMN_HEADER_CONTEXT_MENU, (state, { payload }) => {
-          const columnData: IListColumnData = payload.column.data ?? {}
-          const columnHeaderContextMenu = {
-            target: payload.targetElement as any,
-            items: [
-              columnData.isSortable && {
-                key: 'sortDesc',
-                text: 'A til Å'
-              },
-              columnData.isSortable && {
-                key: 'sortAsc',
-                text: 'Å til A'
-              },
-              columnData.isFilterable && {
-                key: 'separator',
-                itemType: ContextualMenuItemType.Divider
-              },
-              columnData.isFilterable && {
-                key: 'filterBy',
-                text: 'Filtrer etter'
-              },
-              columnData.isGroupable && {
-                key: 'separator',
-                itemType: ContextualMenuItemType.Divider
-              },
-              columnData.isGroupable && {
-                key: 'groupBy',
-                text: `Grupper etter ${payload.column.name}`
-              }
-            ].filter(Boolean)
-          }
-          if (!_.isEmpty(columnHeaderContextMenu.items)) state.columnHeaderContextMenu = columnHeaderContextMenu
+          state.columnHeaderContextMenu = payload as any
         })
         .addCase(DISMISS_COLUMN_HEADER_CONTEXT_MENU, (state) => {
-state.columnHeaderContextMenu = null
+          state.columnHeaderContextMenu = null
+        })
+        .addCase(SET_GROUP_BY, (state, { payload }) => {
+          state.groupBy = payload.groupBy
         })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return useReducer(reducer, initialState)
 }

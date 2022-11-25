@@ -1,10 +1,10 @@
-import { ContextualMenu, ShimmeredDetailsList } from '@fluentui/react'
+import { ShimmeredDetailsList } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
+import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { ListContext } from './context'
 import styles from './List.module.scss'
-import { DISMISS_COLUMN_HEADER_CONTEXT_MENU } from './reducer'
 import { IListProps } from './types'
 import { useList } from './useList'
 
@@ -36,11 +36,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
       <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList {...listProps} />
-          {context.state.columnHeaderContextMenu && (
-            <ContextualMenu 
-            {...context.state.columnHeaderContextMenu}
-            onDismiss={() => context.dispatch(DISMISS_COLUMN_HEADER_CONTEXT_MENU())} />
-          )}
+          <ColumnHeaderContextMenu />
         </ScrollablePaneWrapper>
       </ListContext.Provider>
     </div>
@@ -60,4 +56,3 @@ export * from './types'
 export * from './useList'
 export * from './useListGroups'
 export * from './useListProps'
-

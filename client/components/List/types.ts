@@ -1,7 +1,6 @@
 import {
   IColumn,
   ICommandBarProps,
-  IContextualMenuProps,
   IDetailsColumnRenderTooltipProps,
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
@@ -36,8 +35,19 @@ export interface IListColumnData {
    */
   hiddenFromExport?: boolean
 
+  /**
+   * Is the column sortable?
+   */
   isSortable?: boolean
+
+  /**
+   * Is the column filterable?
+   */
   isFilterable?: boolean
+
+  /**
+   * Is the column groupable?
+   */
   isGroupable?: boolean
 
   /**
@@ -131,6 +141,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   }
 }
 
+export type ColumnHeaderContextMenu = {
+  column: IListColumn
+  target: EventTarget & HTMLElement
+}
+
 /**
  * @category List
  */
@@ -151,9 +166,14 @@ export interface IListState<T = any> {
   items?: T[]
 
   /**
-   * Column header context menu
+   * Column header context menu `column` and `targetElement`
    */
-  columnHeaderContextMenu?: IContextualMenuProps
+  columnHeaderContextMenu?: ColumnHeaderContextMenu
+
+  /**
+   * Group by column
+   */
+  groupBy?: IListColumn
 }
 
 /**

@@ -20,40 +20,43 @@ export const ListHeader: FC<IListHeaderProps> = ({
   headerProps,
   defaultRender
 }) => {
-  const { props, state, dispatch } = useListContext()
-  const mergedHeaderProps = merge(headerProps, props.columnHeaderProps)
+  const context = useListContext()
+  const mergedHeaderProps = merge(headerProps, context.props.columnHeaderProps)
   const root = useRef(null)
   const timeout = useRef(null)
-  const searchBoxItem: ICommandBarItemProps = props.searchBox && {
+  const searchBoxItem: ICommandBarItemProps = context.props.searchBox && {
     key: 'SEARCH_BOX',
     onRender: () => (
       <SearchBox
-        {...props.searchBox}
+        {...context.props.searchBox}
         styles={{
           root: { width: isMobile ? root?.current?.clientWidth : 500 },
-          ...props.searchBox.styles
+          ...context.props.searchBox.styles
         }}
-        defaultValue={state.searchTerm}
+        defaultValue={context.state.searchTerm}
         onChange={(_event, searchTerm) => {
           clearTimeout(timeout.current)
           timeout.current = setTimeout(() => {
-            if (props.searchBox.onChange)
-              props.searchBox.onChange(_event, searchTerm)
-            dispatch(EXECUTE_SEARCH({ searchTerm }))
+            if (context.props.searchBox.onChange)
+              context.props.searchBox.onChange(_event, searchTerm)
+            context.dispatch(EXECUTE_SEARCH({ searchTerm }))
           }, 250)
         }}
       />
     )
   }
 
-  if (!!props.columnHeaderProps?.onRender) {
-    return props.columnHeaderProps.onRender(mergedHeaderProps, defaultRender)
+  if (!!context.props.columnHeaderProps?.onRender) {
+    return context.props.columnHeaderProps.onRender(
+      mergedHeaderProps,
+      defaultRender
+    )
   }
 
   const commandBarProps: ICommandBarProps = {
-    ...props.commandBar,
-    items: clean([searchBoxItem, ...props.commandBar?.items]),
-    farItems: props.commandBar?.farItems || []
+    ...context.props.commandBar,
+    items: clean([searchBoxItem, ...context.props.commandBar?.items]),
+    farItems: context.props.commandBar?.farItems || []
   }
 
   headerProps.onRenderColumnHeaderTooltip = (props, defaultRender) => {
