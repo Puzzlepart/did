@@ -1,6 +1,7 @@
 import {
   IColumn,
   ICommandBarProps,
+  IContextualMenuProps,
   IDetailsColumnRenderTooltipProps,
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
@@ -35,6 +36,10 @@ export interface IListColumnData {
    */
   hiddenFromExport?: boolean
 
+  isSortable?: boolean
+  isFilterable?: boolean
+  isGroupable?: boolean
+
   /**
    * Callback to render a tooltip for the column header
    */
@@ -46,11 +51,11 @@ export interface IListColumnData {
 /**
  * @category List
  */
-export interface IListColumn<T = IListColumnData> extends IColumn {
+export interface IListColumn extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */
-  data?: T
+  data?: IListColumnData
 
   /**
    * The column should be hidden
@@ -61,8 +66,7 @@ export interface IListColumn<T = IListColumnData> extends IColumn {
 /**
  * @category List
  */
-export interface IListProps<T = any>
-  extends Omit<IShimmeredDetailsListProps, 'onRenderDetailsHeader'> {
+export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Items
    */
@@ -145,6 +149,11 @@ export interface IListState<T = any> {
    * Current items
    */
   items?: T[]
+
+  /**
+   * Column header context menu
+   */
+  columnHeaderContextMenu?: IContextualMenuProps
 }
 
 /**

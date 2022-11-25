@@ -126,7 +126,10 @@ export function useColumns(): IListColumn[] {
       fieldName: 'week',
       name: t('common.weekLabel'),
       minWidth: 50,
-      maxWidth: 50
+      maxWidth: 50,
+      data:{
+        isGroupable: true
+      }
     } as IListColumn,
     {
       key: 'month',
@@ -143,5 +146,5 @@ export function useColumns(): IListColumn[] {
       minWidth: 60,
       maxWidth: 60
     } as IListColumn
-  ].map((col: IListColumn) => ({ ...col, isResizable: true }))
+  ].map<IListColumn>((col) => ({ ...col, isResizable: true }))
 }

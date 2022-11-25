@@ -1,11 +1,10 @@
-import { ShimmeredDetailsList } from '@fluentui/react'
+import { ContextualMenu, ShimmeredDetailsList } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { ListContext } from './context'
-import { ItemColumn } from './ItemColumn'
 import styles from './List.module.scss'
-import { ListHeader } from './ListHeader'
+import { DISMISS_COLUMN_HEADER_CONTEXT_MENU } from './reducer'
 import { IListProps } from './types'
 import { useList } from './useList'
 
@@ -31,23 +30,17 @@ import { useList } from './useList'
  * @category Reusable Component
  */
 export const List: ReusableComponent<IListProps> = (props) => {
-  const { listProps, state, dispatch } = useList(props)
+  const { listProps, context } = useList(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
-      <ListContext.Provider value={{ props, state, dispatch }}>
+      <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          <ShimmeredDetailsList
-            {...listProps}
-            onRenderDetailsHeader={(headerProps, defaultRender) => (
-              <ListHeader
-                headerProps={headerProps}
-                defaultRender={defaultRender}
-              />
-            )}
-            onRenderItemColumn={(item, index, column) => (
-              <ItemColumn item={item} index={index} column={column} />
-            )}
-          />
+          <ShimmeredDetailsList {...listProps} />
+          {context.state.columnHeaderContextMenu && (
+            <ContextualMenu 
+            {...context.state.columnHeaderContextMenu}
+            onDismiss={() => context.dispatch(DISMISS_COLUMN_HEADER_CONTEXT_MENU())} />
+          )}
         </ScrollablePaneWrapper>
       </ListContext.Provider>
     </div>
@@ -67,3 +60,4 @@ export * from './types'
 export * from './useList'
 export * from './useListGroups'
 export * from './useListProps'
+

@@ -1,13 +1,15 @@
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'
+import { IListContext } from './context'
 import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
 import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 
 /**
- * Component logic hook for `<List />`
+ * Component logic hook for `<List />
+`
  *
  * @param props - Props
  *
@@ -39,18 +41,14 @@ export function useList(props: IListProps) {
 
   const [groups, items] = useListGroups([...state.items], props.listGroupProps)
 
+  const context: IListContext = { props, state, dispatch }
+
   const listProps = useListProps({
-    props,
-    state,
-    dispatch,
+    context,
     groups,
     items,
     selection
   })
 
-  return {
-    listProps,
-    state,
-    dispatch
-  }
+  return { listProps, context } as const
 }
