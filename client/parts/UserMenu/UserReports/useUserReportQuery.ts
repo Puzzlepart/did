@@ -12,7 +12,9 @@ import { default_query } from './queries'
  *
  * @category UserReports Hooks
  */
-export function useUserReportQuery({ preset }) {
+export function useUserReportQuery(preset: any) {
+  // eslint-disable-next-line no-console
+  console.log(preset)
   const { data, loading } = useQuery(preset?.query || default_query, {
     skip: !preset?.query,
     fetchPolicy: 'cache-first'
