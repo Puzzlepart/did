@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
+import { IColumn } from '@fluentui/react'
 import get from 'get-value'
 import _ from 'underscore'
 import { IFilter, IFilterItem } from './types'
@@ -17,11 +18,18 @@ export class BaseFilter {
    * @param valueFieldName - Field name for the item value
    */
   constructor(
-    public name: string,
-    public keyFieldName: string,
+    public name?: string,
+    public keyFieldName?: string,
     public valueFieldName?: string
   ) {
-    this.valueFieldName = valueFieldName || keyFieldName
+    this.valueFieldName = valueFieldName ?? keyFieldName
+  }
+
+  public fromColumn(column: IColumn) {
+    this.name = column.name
+    this.keyFieldName = column.fieldName
+    this.valueFieldName = column.fieldName
+    return this
   }
 
   /**

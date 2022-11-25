@@ -52,6 +52,10 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   )
 }
 
+FilterPanel.defaultProps = {
+  shortListCount: 10
+}
+
 export * from './FilterItem'
 export * from './Filters'
 export * from './types'
