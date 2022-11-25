@@ -29,8 +29,7 @@ export type UseUpdateUserConfigurationReturnType = {
  * @remarks For now this is how we update user configuration,
  * but it might be better ways. For now this should do.
  *
- * @param config - Configuration
- * @param autoUpdate - Auto update on value change
+ * @param params Parameters
  *
  * @category React Hook
  */
@@ -86,5 +85,5 @@ export function useUpdateUserConfiguration(
     updateStartPage,
     updateLastActive,
     updatePreferredLanguage
-  }
+  } as const
 }

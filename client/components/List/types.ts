@@ -9,7 +9,7 @@ import {
   IShimmeredDetailsListProps,
   SelectionMode
 } from '@fluentui/react'
-import { BaseFilter } from 'components/FilterPanel'
+import { BaseFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 /**
@@ -157,6 +157,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * @default 500
    */
    defaultSearchBoxWidth?: number
+
+   /**
+    * Filter panel actions
+    */
+    filterPanelActions?: JSX.Element | JSX.Element[]
 }
 
 export type ColumnHeaderContextMenu = {

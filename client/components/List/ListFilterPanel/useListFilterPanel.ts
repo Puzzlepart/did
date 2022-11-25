@@ -22,7 +22,8 @@ export function useListFilterPanel() {
     onFiltersUpdated: (filters) =>
       context.dispatch(FILTERS_UPDATED({ filters })),
     onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
-    selectedFilter: context.state.filterBy
+    selectedFilter: context.state.filterBy,
+    actions: context.props.filterPanelActions
   }
   if (context.state.origItems.length !== context.state.items.length) {
     filterPanelProps.onClearFilters = () => context.dispatch(CLEAR_FILTERS())

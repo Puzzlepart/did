@@ -36,4 +36,9 @@ export interface IFilterPanelProps extends IPanelProps {
    * Selected filter
    */
   selectedFilter?: IColumn
+
+  /**
+   * Actions
+   */
+   actions?: JSX.Element | JSX.Element[]
 }

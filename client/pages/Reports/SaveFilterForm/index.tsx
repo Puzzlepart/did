@@ -1,4 +1,4 @@
-import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
+import { ActionButton, IContextualMenuItem, TextField } from '@fluentui/react'
 import { IconPicker } from 'components'
 import { useMap } from 'hooks'
 import React, { FC, useContext, useState } from 'react'
@@ -61,17 +61,19 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
       </div>
       <div className={styles.footer}>
         <div className={styles.saveBtn}>
-          <DefaultButton
+          <ActionButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
             disabled={value('text')?.length < 2 && inputVisible}
+            iconProps={{iconName:'SaveTemplate'}}
             onClick={onSave}
           />
         </div>
         <div hidden={!inputVisible}>
-          <DefaultButton
+          <ActionButton
             className={styles.saveBtn}
             text={t('reports.cancelSaveFilterText')}
+            iconProps={{iconName:'Cancel    '}}
             onClick={() => setInputVisible(false)}
           />
         </div>
