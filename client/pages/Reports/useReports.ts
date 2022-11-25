@@ -4,13 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
 import {
-  useFilters,
   useReportsQueries,
   useReportsQuery,
   useReportsQueryOptions
 } from './hooks'
 import { useReportsReducer } from './reducer'
-import { CLEAR_FILTERS } from './reducer/actions'
 
 /**
  * Component logic for `<Reports />`
@@ -42,28 +40,19 @@ export function useReports() {
     }
   }, [state.preset])
 
-  const filters = useFilters(state.filter)
-
   useUpdateUserConfiguration({
     config: {
       'reports.filters': state.savedFilters
     },
-    autoUpdate: !state.loading && !!state.filter?.text
+    autoUpdate: !state.loading && !!state.activeFilter?.text
   })
 
   const context = useMemo(() => ({ state, dispatch, t }), [state])
-
-  let onClearFilters = null
-  if (state.filter) {
-    onClearFilters = () => dispatch(CLEAR_FILTERS())
-  }
 
   return {
     defaultSelectedKey: state.preset?.itemKey || 'default',
     queries: queries.filter((q) => !q.hidden),
     options,
-    filters,
-    context,
-    onClearFilters
-  }
+    context
+  } as const
 }

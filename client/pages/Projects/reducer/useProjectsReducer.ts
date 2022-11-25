@@ -14,5 +14,5 @@ export function useProjectsReducer(urlParameters: IProjectsUrlParameters) {
     reducer,
     createInitialState(urlParameters)
   )
-  return { state, dispatch }
+  return { state, dispatch } as const
 }

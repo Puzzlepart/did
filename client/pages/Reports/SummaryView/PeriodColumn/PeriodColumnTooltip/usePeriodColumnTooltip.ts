@@ -23,5 +23,5 @@ export function usePeriodColumnTooltip({ periods, hours }) {
     month: s.pad(month, 2, '0'),
     monthName: $date.getMonthName(Number.parseInt(month) - 1, 'MMM'),
     customerTotals
-  }
+  } as const
 }

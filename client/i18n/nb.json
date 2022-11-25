@@ -210,10 +210,11 @@
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn filternavnet ...",
     "cancelSaveFilterText": "Avbryt",
-    "deleteFilterText": "Slett dette filteret",
+    "deleteFilterText": "Slett",
     "filterPanelHeaderText": "Filtre",
     "filterDescriptionPlaceholder": "Merknad",
-    "summaryHeaderText": "Sammendrag"
+    "summaryHeaderText": "Sammendrag",
+    "applyFilterText": "Bruk filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -383,7 +384,7 @@
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
-    "clearFilters": "Fjern filtre",
+    "clearFilters": "Fjern alle filtre",
     "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
     "vacationTotalDaysLabel": "Antal feriedager",
@@ -400,7 +401,11 @@
     "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
     "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime. Innstillingen trer ikke i kraft før neste pålogging.",
     "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendelser til nærmeste 30 minutter\" ble lagret. \nInnstillingen trer ikke i kraft før neste pålogging.",
-    "hoursYear": "Timer {{year}}"
+    "hoursYear": "Timer {{year}}",
+    "groupByColumn": "Grupper etter {{name}}",
+    "filterByColumn": "Filtrer etter {{name}}",
+    "sortDesc": "A til Å",
+    "sortAsc": "Å til A"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

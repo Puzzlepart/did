@@ -1,18 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ChoiceGroup, PivotItem } from '@fluentui/react'
-import { FilterPanel, TabContainer, UserMessage } from 'components'
+import { TabContainer, UserMessage } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from './context'
-import {
-  CHANGE_QUERY,
-  FILTERS_UPDATED,
-  TOGGLE_FILTER_PANEL
-} from './reducer/actions'
+import { CHANGE_QUERY } from './reducer/actions'
 import styles from './Reports.module.scss'
 import { ReportsList } from './ReportsList'
-import { SaveFilterForm } from './SaveFilterForm'
 import { SummaryView } from './SummaryView'
 import { useReports } from './useReports'
 
@@ -21,8 +16,7 @@ import { useReports } from './useReports'
  */
 export const Reports: FC = () => {
   const { t } = useTranslation()
-  const { defaultSelectedKey, queries, options, filters, context } =
-    useReports()
+  const { defaultSelectedKey, queries, options, context } = useReports()
   return (
     <ReportsContext.Provider value={context}>
       <TabContainer
@@ -39,7 +33,13 @@ export const Reports: FC = () => {
         onTabChanged={(itemKey) => context.dispatch(CHANGE_QUERY({ itemKey }))}
       >
         {queries.map((props, index) => (
-          <ReportsList {..._.omit(props, 'itemIcon')} key={index} />
+          <ReportsList
+            key={index}
+            {..._.omit(props, 'itemIcon')}
+            headerButtonProps={{
+              disabled: context.state.loading
+            }}
+          />
         ))}
         <SummaryView
           itemKey='summary'
@@ -54,18 +54,6 @@ export const Reports: FC = () => {
           <ChoiceGroup options={options} />
         </PivotItem>
       </TabContainer>
-      <FilterPanel
-        isOpen={context.state.isFiltersOpen}
-        headerText={t('reports.filterPanelHeaderText')}
-        filters={filters}
-        items={context.state.data.timeEntries}
-        onDismiss={() => context.dispatch(TOGGLE_FILTER_PANEL())}
-        onFiltersUpdated={(filters) =>
-          context.dispatch(FILTERS_UPDATED({ filters }))
-        }
-      >
-        <SaveFilterForm />
-      </FilterPanel>
     </ReportsContext.Provider>
   )
 }

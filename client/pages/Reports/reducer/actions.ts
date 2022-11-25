@@ -1,14 +1,8 @@
 import { LazyQueryResult } from '@apollo/client'
 import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
-import { IFilter } from 'components/FilterPanel'
-import { IListGroupProps } from 'components/List/types'
+import { ListFilterState } from 'components/List/types'
 import { IReportsSavedFilter } from '../types'
-
-/**
- * @category Reports Actions
- */
-export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 
 /**
  * category Reports Actions
@@ -19,38 +13,26 @@ export const DATA_UPDATED =
 /**
  * @category Reports Actions
  */
-export const FILTERS_UPDATED =
-  createAction<{ filters: IFilter[] }>('FILTERS_UPDATED')
-
-/**
- * @category Reports Actions
- */
 export const CHANGE_QUERY = createAction<{ itemKey: string }>('FILTER_UPDATED')
 
 /**
  * @category Reports Actions
  */
-export const SET_GROUP_BY =
-  createAction<{ groupBy: IListGroupProps }>('SET_GROUP_BY')
+export const SET_FILTER = createAction<IReportsSavedFilter>('SET_FILTER')
 
 /**
  * @category Reports Actions
  */
-export const SET_FILTER =
-  createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
+export const ADD_SAVED_FILTER =
+  createAction<{ model: IContextualMenuItem }>('ADD_SAVED_FILTER')
 
 /**
  * @category Reports Actions
  */
-export const ADD_FILTER =
-  createAction<{ model: IContextualMenuItem }>('ADD_FILTER')
+export const REMOVE_SAVED_FILTER = createAction<string>('REMOVE_SAVED_FILTER')
 
 /**
  * @category Reports Actions
  */
-export const CLEAR_FILTERS = createAction('CLEAR_FILTERS')
-
-/**
- * @category Reports Actions
- */
-export const REMOVE_SELECTED_FILTER = createAction('REMOVE_SELECTED_FILTER')
+export const SET_FILTER_STATE =
+  createAction<ListFilterState>('SET_FILTER_STATE')

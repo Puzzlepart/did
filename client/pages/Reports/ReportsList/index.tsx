@@ -8,8 +8,10 @@ import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from '../context'
-import commandBar from './commandBar'
+import { SET_FILTER_STATE } from '../reducer/actions'
+import { SaveFilterForm } from '../SaveFilterForm'
 import { useColumns } from './useColumns'
+import { useCommands } from './useCommands'
 
 /**
  * Reports list
@@ -20,6 +22,7 @@ export const ReportsList: TabComponent = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const columns = useColumns()
+  const commandBar = useCommands()
   return (
     <div>
       {context.state.loading && (
@@ -32,7 +35,7 @@ export const ReportsList: TabComponent = () => {
       <List
         enableShimmer={context.state.loading}
         checkboxVisibility={CheckboxVisibility.always}
-        items={context.state.subset}
+        items={context.state.data.timeEntries}
         height={isBrowser && window.innerHeight - 200}
         listGroupProps={{
           ...context.state.groupBy,
@@ -47,7 +50,13 @@ export const ReportsList: TabComponent = () => {
           }
         }}
         columns={columns}
-        commandBar={commandBar({ ...context, columns })}
+        commandBar={commandBar}
+        exportFileName={context.state.preset?.exportFileName}
+        filterValues={context.state?.activeFilter?.values}
+        onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
+        filterPanelActions={
+          <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
+        }
       />
       <UserMessage
         hidden={

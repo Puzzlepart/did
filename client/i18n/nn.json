@@ -205,15 +205,16 @@
     "selectReportText": "Vel ein rapport under. \nVer merksam på at nokre rapportar kan ta fleire minutt å lasta inn.",
     "selectReportLabel": "Vel rapport",
     "forecast": "Prognose",
-    "exportToExcel": "Eksporterer til Excel",
-    "savedFilters": "Lagre filter",
+    "exportToExcel": "Eksporter til Excel",
+    "savedFilters": "Lagrede filtre",
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn eit filternamn ...",
     "cancelSaveFilterText": "Avbryt",
-    "deleteFilterText": "Slett dette filteret",
+    "deleteFilterText": "Slett",
     "filterPanelHeaderText": "Filter",
     "filterDescriptionPlaceholder": "Merknad",
-    "summaryHeaderText": "Samandrag"
+    "summaryHeaderText": "Samandrag",
+    "applyFilterText": "Bruk filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -383,7 +384,7 @@
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
-    "clearFilters": "Fjern filtre",
+    "clearFilters": "Fjern alle filtre",
     "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedagar gjenståande",
     "vacationTotalDaysLabel": "Antal feriedagar",
@@ -400,7 +401,11 @@
     "roundUpEventsLabel": "Avrund hendingar til næraste 30 minutt",
     "roundUpEventsDescription": "Microsoft gir deg no høve til å avslutte møter tidlegare enn planlagt, eller starte seinare, typisk med 5 eller 10 minutt. Denne funksjonen lar oss runde av lengda på møta til nærmaste halvtime. Innstillinga trer ikkje i kraft før neste pålogging.",
     "roundUpEventsPostSaveMessage": "Endringen din for \"Avrund hendingar til næraste 30 minutt\" blei lagra. Innstillinga trer ikkje i kraft før neste pålogging.",
-    "hoursYear": "Timar {{year}}"
+    "hoursYear": "Timar {{year}}",
+    "groupByColumn": "Grupper etter {{name}}",
+    "filterByColumn": "Filtrer etter {{name}}",
+    "sortDesc": "A til Å",
+    "sortAsc": "Å til A"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
