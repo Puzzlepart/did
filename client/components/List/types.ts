@@ -131,11 +131,6 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   commandBar?: ICommandBarProps
 
   /**
-   * Filters
-   */
-  filters?: { [key: string]: any }
-
-  /**
    * Hidden
    */
   hidden?: boolean

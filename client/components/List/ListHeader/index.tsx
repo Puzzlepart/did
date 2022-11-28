@@ -61,11 +61,21 @@ export const ListHeader: FC<IListHeaderProps> = ({
       />
     )
   }
+
   const toggleFilterPanelItem: ICommandBarItemProps = {
     key: 'TOGGLE_FILTER_PANEL',
     iconProps: { iconName: 'Filter' },
     iconOnly: true,
     onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
+  }
+
+
+  const clearFiltersItem: ICommandBarItemProps = {
+    key: 'CLEAR_FILTERS',
+    iconProps: { iconName: 'ClearFilter' },
+    iconOnly: true,
+    disabled: context.state.origItems.length === context.state.items.length,
+    onClick: () => context.dispatch(CLEAR_FILTERS())
   }
 
   const excelExportItem: ICommandBarItemProps = {
@@ -87,21 +97,15 @@ export const ListHeader: FC<IListHeaderProps> = ({
     }
   }
 
-  const clearFiltersItem: ICommandBarItemProps = {
-    key: 'CLEAR_FILTERS',
-    iconProps: { iconName: 'ClearFilter' },
-    iconOnly: true,
-    disabled: context.state.origItems.length === context.state.items.length,
-    onClick: () => context.dispatch(CLEAR_FILTERS())
-  }
+  const hasFilterableColumns = _.any(context.props.columns, (col) => col?.data?.isFilterable)
 
   const commandBarProps: ICommandBarProps = {
     ...context.props.commandBar,
     items: clean([searchBoxItem, ...context.props.commandBar?.items]),
     farItems: clean([
       ...context.props.commandBar?.farItems,
-      toggleFilterPanelItem,
-      clearFiltersItem,
+      hasFilterableColumns && toggleFilterPanelItem,
+      hasFilterableColumns && clearFiltersItem,
       context.props.exportFileName && excelExportItem
     ])
   }
