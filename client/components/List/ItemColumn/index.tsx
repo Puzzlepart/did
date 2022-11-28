@@ -1,7 +1,6 @@
 import { TooltipHost } from '@fluentui/react'
 import get from 'get-value'
-import React from 'react'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { IItemColumnProps } from './types'
 
@@ -11,11 +10,12 @@ export const ItemColumn: FC<IItemColumnProps> = (props) => {
     return (
       <TooltipHost
         styles={{ root: { cursor: 'pointer' } }}
-        content={(
+        content={
           <div style={{ padding: '8px 20px' }}>
             <ReactMarkdown>{fieldValue}</ReactMarkdown>
           </div>
-        )}>
+        }
+      >
         {fieldValue.slice(0, 80) + '...'}
       </TooltipHost>
     )

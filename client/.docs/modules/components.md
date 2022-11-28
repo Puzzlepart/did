@@ -390,8 +390,8 @@ ___
 
 List component using `ShimmeredDetailsList` from `@fluentui/react`.
 
-Supports list groups, selection, search box
-and custom column headers.
+Supports list groups, filters, group by,
+selection, search box and custom column headers.
 
 Used by the following components:
 
