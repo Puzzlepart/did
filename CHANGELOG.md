@@ -85,7 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ 0.11.3 - 25.11.2022
 
 ### Fixed
-- Fixed issue with user reports #1077
+- Fixed issue with user reports [#1077](https://github.com/Puzzlepart/did/issues/1077)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0112---18112022)

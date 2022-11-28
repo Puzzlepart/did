@@ -30,7 +30,6 @@ Name | Default |
 - [exportFileName](components.ilistprops.md#exportfilename)
 - [filterPanelActions](components.ilistprops.md#filterpanelactions)
 - [filterValues](components.ilistprops.md#filtervalues)
-- [filters](components.ilistprops.md#filters)
 - [height](components.ilistprops.md#height)
 - [hidden](components.ilistprops.md#hidden)
 - [items](components.ilistprops.md#items)
@@ -55,7 +54,7 @@ Name | Type |
 `className`? | *string* |
 `onRender`? | *IRenderFunction*<IDetailsHeaderProps\> |
 
-Defined in: [client/components/List/types.ts:146](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L146)
+Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
 
 ___
 
@@ -89,7 +88,7 @@ Default search box width
 
 **`default`** 500
 
-Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+Defined in: [client/components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
 
 ___
 
@@ -112,7 +111,7 @@ ___
 Export file name. Set this property to enable Excel export of the
 list data.
 
-Defined in: [client/components/List/types.ts:155](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L155)
+Defined in: [client/components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
 
 ___
 
@@ -122,7 +121,7 @@ ___
 
 Filter panel actions
 
-Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
 
 ___
 
@@ -132,19 +131,7 @@ ___
 
 Filter values
 
-Defined in: [client/components/List/types.ts:177](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L177)
-
-___
-
-### filters
-
-• `Optional` **filters**: *object*
-
-Filters
-
-#### Type declaration:
-
-Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
+Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
 
 ___
 
@@ -164,7 +151,7 @@ ___
 
 Hidden
 
-Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
+Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
 
 ___
 
@@ -218,9 +205,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 ___
 

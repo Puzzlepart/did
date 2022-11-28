@@ -22,7 +22,6 @@
 - [exportFileName](pages.iprojectlistprops.md#exportfilename)
 - [filterPanelActions](pages.iprojectlistprops.md#filterpanelactions)
 - [filterValues](pages.iprojectlistprops.md#filtervalues)
-- [filters](pages.iprojectlistprops.md#filters)
 - [height](pages.iprojectlistprops.md#height)
 - [hidden](pages.iprojectlistprops.md#hidden)
 - [hideColumns](pages.iprojectlistprops.md#hidecolumns)
@@ -52,7 +51,7 @@ Name | Type |
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:146](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L146)
+Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
 
 ___
 
@@ -90,7 +89,7 @@ Default search box width
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+Defined in: [client/components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
 
 ___
 
@@ -115,7 +114,7 @@ list data.
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:155](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L155)
+Defined in: [client/components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
 
 ___
 
@@ -127,7 +126,7 @@ Filter panel actions
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
 
 ___
 
@@ -139,21 +138,7 @@ Filter values
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:177](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L177)
-
-___
-
-### filters
-
-• `Optional` **filters**: *object*
-
-Filters
-
-#### Type declaration:
-
-Inherited from: void
-
-Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
+Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
 
 ___
 
@@ -177,7 +162,7 @@ Hidden
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
+Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
 
 ___
 
@@ -265,11 +250,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 Inherited from: void
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 ___
 

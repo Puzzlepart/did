@@ -25,7 +25,6 @@
 - [exportFileName](components.ieventlistprops.md#exportfilename)
 - [filterPanelActions](components.ieventlistprops.md#filterpanelactions)
 - [filterValues](components.ieventlistprops.md#filtervalues)
-- [filters](components.ieventlistprops.md#filters)
 - [height](components.ieventlistprops.md#height)
 - [hidden](components.ieventlistprops.md#hidden)
 - [items](components.ieventlistprops.md#items)
@@ -63,7 +62,7 @@ Name | Type |
 
 Inherited from: [IListProps](components.ilistprops.md).[columnHeaderProps](components.ilistprops.md#columnheaderprops)
 
-Defined in: [client/components/List/types.ts:146](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L146)
+Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
 
 ___
 
@@ -121,7 +120,7 @@ Default search box width
 
 Inherited from: [IListProps](components.ilistprops.md).[defaultSearchBoxWidth](components.ilistprops.md#defaultsearchboxwidth)
 
-Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+Defined in: [client/components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
 
 ___
 
@@ -146,7 +145,7 @@ list data.
 
 Inherited from: [IListProps](components.ilistprops.md).[exportFileName](components.ilistprops.md#exportfilename)
 
-Defined in: [client/components/List/types.ts:155](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L155)
+Defined in: [client/components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
 
 ___
 
@@ -158,7 +157,7 @@ Filter panel actions
 
 Inherited from: [IListProps](components.ilistprops.md).[filterPanelActions](components.ilistprops.md#filterpanelactions)
 
-Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
 
 ___
 
@@ -170,21 +169,7 @@ Filter values
 
 Inherited from: [IListProps](components.ilistprops.md).[filterValues](components.ilistprops.md#filtervalues)
 
-Defined in: [client/components/List/types.ts:177](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L177)
-
-___
-
-### filters
-
-• `Optional` **filters**: *object*
-
-Filters
-
-#### Type declaration:
-
-Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
-
-Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
+Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
 
 ___
 
@@ -208,7 +193,7 @@ Hidden
 
 Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
 
-Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
+Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
 
 ___
 
@@ -266,11 +251,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 Inherited from: [IListProps](components.ilistprops.md).[onFilter](components.ilistprops.md#onfilter)
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 ___
 

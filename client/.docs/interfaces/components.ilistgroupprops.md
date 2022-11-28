@@ -20,7 +20,7 @@
 
 • `Optional` **emptyGroupName**: *string*
 
-Defined in: [client/components/List/types.ts:245](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L245)
+Defined in: [client/components/List/types.ts:240](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L240)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **fieldName**: *string*
 
-Defined in: [client/components/List/types.ts:242](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L242)
+Defined in: [client/components/List/types.ts:237](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L237)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 • `Optional` **groupData**: *any*[]
 
-Defined in: [client/components/List/types.ts:244](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L244)
+Defined in: [client/components/List/types.ts:239](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L239)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Optional` **groupNames**: *string*[]
 
-Defined in: [client/components/List/types.ts:243](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L243)
+Defined in: [client/components/List/types.ts:238](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L238)
 
 ___
 
@@ -64,6 +64,6 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [client/components/List/types.ts:246](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L246)
+Defined in: [client/components/List/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L241)
 
-Defined in: [client/components/List/types.ts:246](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L246)
+Defined in: [client/components/List/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L241)
