@@ -160,7 +160,7 @@ Name | Type |
 `column` | [*IListColumn*](../interfaces/components.ilistcolumn.md) |
 `target` | EventTarget & HTMLElement |
 
-Defined in: [client/components/List/types.ts:180](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L180)
+Defined in: [client/components/List/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L175)
 
 ___
 

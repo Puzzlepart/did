@@ -69,7 +69,6 @@ export const ListHeader: FC<IListHeaderProps> = ({
     onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
   }
 
-
   const clearFiltersItem: ICommandBarItemProps = {
     key: 'CLEAR_FILTERS',
     iconProps: { iconName: 'ClearFilter' },
@@ -97,7 +96,10 @@ export const ListHeader: FC<IListHeaderProps> = ({
     }
   }
 
-  const hasFilterableColumns = _.any(context.props.columns, (col) => col?.data?.isFilterable)
+  const hasFilterableColumns = _.any(
+    context.props.columns,
+    (col) => col?.data?.isFilterable
+  )
 
   const commandBarProps: ICommandBarProps = {
     ...context.props.commandBar,
