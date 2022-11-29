@@ -105,7 +105,7 @@ export const ListHeader: FC<IListHeaderProps> = ({
     ...context.props.commandBar,
     items: clean([searchBoxItem, ...context.props.commandBar?.items]),
     farItems: clean([
-      ...context.props.commandBar?.farItems,
+      ...context.props.commandBar?.farItems ?? [],
       hasFilterableColumns && toggleFilterPanelItem,
       hasFilterableColumns && clearFiltersItem,
       context.props.exportFileName && excelExportItem
