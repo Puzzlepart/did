@@ -185,8 +185,8 @@
     },
     "users": {
       "headerText": "Brukarar",
-      "activeHeaderText": "Aktive brukere",
-      "disabledHeaderText": "Deaktiverte brukere"
+      "activeHeaderText": "Aktive brukarar",
+      "disabledHeaderText": "Deaktiverte brukarar"
     },
     "missingSubmissions": {
       "headerText": "Manglende bekreftelser",
