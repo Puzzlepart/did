@@ -6,7 +6,12 @@ import _ from 'underscore'
 import $addUsers from './addUsers.gql'
 import { IUsersContext } from './context'
 import { useUsersReducer } from './reducer'
-import { CLEAR_PROGRESS, DATA_UPDATED, HIDE_ADD_MULTIPLE_PANEL, SET_PROGRESS } from './reducer/actions'
+import {
+  CLEAR_PROGRESS,
+  DATA_UPDATED,
+  HIDE_ADD_MULTIPLE_PANEL,
+  SET_PROGRESS
+} from './reducer/actions'
 import { useColumns } from './useColumns'
 import $users from './users.gql'
 import { useUsersCommands } from './useUsersCommands'
@@ -40,10 +45,12 @@ export function useUsers() {
    */
   const onAddUsers = async (users: any[]) => {
     dispatch(HIDE_ADD_MULTIPLE_PANEL())
-    dispatch(SET_PROGRESS({
-      label: t('admin.bulkImportingUsersLabel', { count: users.length }),
-      labelPosition: 'right'
-    }))
+    dispatch(
+      SET_PROGRESS({
+        label: t('admin.bulkImportingUsersLabel', { count: users.length }),
+        labelPosition: 'right'
+      })
+    )
     await addUsers({
       variables: {
         users: users.map((u) => ({

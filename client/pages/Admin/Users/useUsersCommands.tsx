@@ -19,7 +19,8 @@ export function useUsersCommands(context: IUsersContext) {
         disabled:
           _.isEmpty(context.state.availableAdUsers) ||
           !hasPermission(PermissionScope.LIST_USERS),
-        onClick: () => context.dispatch(SET_USER_FORM({ headerText: t('admin.addNewUser') }))
+        onClick: () =>
+          context.dispatch(SET_USER_FORM({ headerText: t('admin.addNewUser') }))
       },
       {
         key: 'BULK_IMPORT_USERS',
@@ -28,7 +29,8 @@ export function useUsersCommands(context: IUsersContext) {
         disabled:
           _.isEmpty(context.state.availableAdUsers) ||
           !hasPermission(PermissionScope.LIST_USERS),
-        onClick: () => context.dispatch(SET_ADD_MULTIPLE_PANEL({ isOpen: true }))
+        onClick: () =>
+          context.dispatch(SET_ADD_MULTIPLE_PANEL({ isOpen: true }))
       },
       {
         key: 'SPINNER',

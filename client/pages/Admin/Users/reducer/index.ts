@@ -1,7 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit'
 import _ from 'underscore'
 import { IUsersState } from '../types'
-import { CLEAR_PROGRESS, DATA_UPDATED, HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM, SET_ADD_MULTIPLE_PANEL, SET_PROGRESS, SET_USER_FORM } from './actions'
+import {
+  CLEAR_PROGRESS,
+  DATA_UPDATED,
+  HIDE_ADD_MULTIPLE_PANEL,
+  HIDE_USER_FORM,
+  SET_ADD_MULTIPLE_PANEL,
+  SET_PROGRESS,
+  SET_USER_FORM
+} from './actions'
 
 export const initialState: IUsersState = {
   loading: true,

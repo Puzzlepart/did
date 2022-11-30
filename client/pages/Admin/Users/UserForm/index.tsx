@@ -12,13 +12,8 @@ import { useUserForm } from './useUserForm'
 export const UserForm: FC<IUserFormProps> = (props) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
-  const {
-    inputProps,
-    model,
-    setModel,
-    isFormValid,
-    onSave,
-  } = useUserForm(props)
+  const { inputProps, model, setModel, isFormValid, onSave } =
+    useUserForm(props)
 
   return (
     <Panel

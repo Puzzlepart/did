@@ -20,18 +20,15 @@ import { useUsers } from './useUsers'
  */
 export const Users: TabComponent = () => {
   const { t } = useTranslation()
-  const {
-    context,
-    columns,
-    onAddUsers,
-    commandBar,
-    refetch
-  } = useUsers()
+  const { context, columns, onAddUsers, commandBar, refetch } = useUsers()
 
   return (
     <UsersContext.Provider value={context}>
       <TabContainer level={3}>
-        <PivotItem itemKey='active' headerText={t('admin.users.activeHeaderText')}>
+        <PivotItem
+          itemKey='active'
+          headerText={t('admin.users.activeHeaderText')}
+        >
           <List
             enableShimmer={context.state.loading}
             items={context.state.activeUsers}
@@ -39,11 +36,15 @@ export const Users: TabComponent = () => {
             commandBar={commandBar}
           />
         </PivotItem>
-        <PivotItem itemKey='disabled' headerText={t('admin.users.disabledHeaderText')}>
+        <PivotItem
+          itemKey='disabled'
+          headerText={t('admin.users.disabledHeaderText')}
+        >
           <List
             enableShimmer={context.state.loading}
             items={context.state.disabledUsers}
-            columns={columns} />
+            columns={columns}
+          />
         </PivotItem>
       </TabContainer>
       <UserForm

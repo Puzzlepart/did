@@ -68,10 +68,12 @@ export function useColumns(context: IUsersContext): IListColumn[] {
             style={{ marginRight: 12 }}
             hidden={user.provider === 'google'}
             onClick={() =>
-              context.dispatch(SET_USER_FORM({
-                headerText: user.displayName,
-                user
-              }))
+              context.dispatch(
+                SET_USER_FORM({
+                  headerText: user.displayName,
+                  user
+                })
+              )
             }
           />
         </div>
