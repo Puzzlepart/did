@@ -70,9 +70,6 @@ export class User {
   @Field(() => Subscription, { nullable: true })
   subscription?: Subscription
 
-  /**
-   * User configuration is stored as a JSON string.
-   */
   @Field(() => String, { nullable: true })
   configuration?: any
 
@@ -84,6 +81,9 @@ export class User {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   lastActive?: Date
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
 
   public create?(user: User): User {
     Object.assign(this, user)

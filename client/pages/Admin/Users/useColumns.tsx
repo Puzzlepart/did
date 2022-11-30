@@ -12,13 +12,14 @@ import { User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 import { PermissionScope } from '../../../../shared/config/security/permissions'
 import { IUsersContext } from './context'
+import { SET_USER_FORM } from './reducer/actions'
 
 /**
  * Returns columns for the `Users` component
  *
  * @category Users
  */
-export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
+export function useColumns(context: IUsersContext): IListColumn[] {
   const { t } = useTranslation()
   const userColumn = useUserListColumn(
     { size: PersonaSize.size40 },
@@ -67,10 +68,10 @@ export function useColumns({ setUserForm }: IUsersContext): IListColumn[] {
             style={{ marginRight: 12 }}
             hidden={user.provider === 'google'}
             onClick={() =>
-              setUserForm({
+              context.dispatch(SET_USER_FORM({
                 headerText: user.displayName,
                 user
-              })
+              }))
             }
           />
         </div>

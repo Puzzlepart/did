@@ -14,8 +14,8 @@ import styles from './AddMultiplePanel.module.scss'
 import { IAddMultiplePanel } from './types'
 
 export const AddMultiplePanel: FC<IAddMultiplePanel> = (props) => {
-  const { activeDirectoryUsers } = useContext(UsersContext)
   const { t } = useTranslation()
+  const context = useContext(UsersContext)
   const [selectedUsers, setSelectedUsers] = useState([])
 
   return (
@@ -33,7 +33,7 @@ export const AddMultiplePanel: FC<IAddMultiplePanel> = (props) => {
           onClick={() => props.onAdd(selectedUsers)}
         />
         <List
-          items={activeDirectoryUsers}
+          items={context.state.availableAdUsers}
           selectionProps={{
             mode: SelectionMode.multiple,
             onChanged: (selected) => setSelectedUsers(selected)

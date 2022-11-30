@@ -1,18 +1,17 @@
 import { useMutation } from '@apollo/client'
 import { ITextFieldProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
 import _ from 'underscore'
 import s from 'underscore.string'
-import { UsersContext } from '../context'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
+import { IUserFormProps } from './types'
 
-export function useUserForm({ props }) {
+export function useUserForm(props: IUserFormProps) {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
-  const { activeDirectoryUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>({})
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
@@ -59,14 +58,11 @@ export function useUserForm({ props }) {
   })
 
   return {
-    t,
     adSync,
-    activeDirectoryUsers,
-    roles,
     model,
     setModel,
     onSave,
     isFormValid,
     inputProps
-  }
+  } as const
 }

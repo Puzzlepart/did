@@ -184,7 +184,9 @@
       "deleteSuccess": "Rollen {{name}} vart sletta."
     },
     "users": {
-      "headerText": "Brukarar"
+      "headerText": "Brukarar",
+      "activeHeaderText": "Aktive brukere",
+      "disabledHeaderText": "Deaktiverte brukere"
     },
     "missingSubmissions": {
       "headerText": "Manglende bekreftelser",

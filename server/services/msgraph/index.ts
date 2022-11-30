@@ -156,7 +156,8 @@ class MSGraphService {
               'displayName',
               'mobilePhone',
               'mail',
-              'preferredLanguage'
+              'preferredLanguage',
+              'accountEnabled'
             ])
             .top(999)
             .get()

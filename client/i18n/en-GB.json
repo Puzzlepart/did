@@ -185,7 +185,9 @@
       "deleteSuccess": "Role {{name}} was successfully deleted."
     },
     "users": {
-      "headerText": "Users"
+      "headerText": "Users",
+      "activeHeaderText": "Active users",
+      "disabledHeaderText": "Disabled users"
     },
     "missingSubmissions": {
       "headerText": "Missing submissions",
