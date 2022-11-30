@@ -20,7 +20,7 @@ import { useUsers } from './useUsers'
  */
 export const Users: TabComponent = () => {
   const { t } = useTranslation()
-  const { context, columns, onAddUsers, commandBar, refetch } = useUsers()
+  const { context, columns, onAddUsers, commandBar } = useUsers()
 
   return (
     <UsersContext.Provider value={context}>
@@ -52,7 +52,7 @@ export const Users: TabComponent = () => {
         isOpen={!!context.state.userForm}
         onDismiss={(event) => {
           context.dispatch(HIDE_USER_FORM())
-          !event && refetch()
+          !event && context.refetch()
         }}
       />
       <AddMultiplePanel

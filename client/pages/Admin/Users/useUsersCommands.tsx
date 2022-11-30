@@ -1,4 +1,4 @@
-import { Spinner } from '@fluentui/react'
+import { ICommandBarProps, Spinner } from '@fluentui/react'
 import { usePermissions } from 'hooks/user/usePermissions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -45,5 +45,5 @@ export function useUsersCommands(context: IUsersContext) {
       }
     ],
     farItems: []
-  }
+  } as ICommandBarProps
 }

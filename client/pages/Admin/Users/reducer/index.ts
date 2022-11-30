@@ -26,10 +26,9 @@ export default () =>
   createReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        const { data } = payload.query ?? {}
-        // eslint-disable-next-line no-console
-        console.log(data)
-        state.activeUsers = data?.users ?? []
+        const { data } = payload.query ?? {}  
+        state.activeUsers = _.filter((data?.users ?? []), u => u.accountEnabled !== false)
+        state.disabledUsers = _.filter((data?.users ?? []), u => u.accountEnabled === false)
         state.roles = data?.roles ?? []
         state.availableAdUsers = _.filter(
           data?.activeDirectoryUsers ?? [],

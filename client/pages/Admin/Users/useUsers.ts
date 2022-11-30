@@ -28,12 +28,13 @@ export function useUsers() {
     fetchPolicy: 'cache-and-network'
   })
   const [addUsers] = useMutation($addUsers)
-  const context = useMemo<IUsersContext>(
+  const context = useMemo(
     () => ({
       state,
-      dispatch
-    }),
-    [state]
+      dispatch,
+      refetch: query.refetch
+    } as IUsersContext),
+    [state, query.refetch]
   )
 
   useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
