@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
+import get from 'get-value'
 import _ from 'underscore'
 import { IUsersState } from '../types'
 import {
@@ -26,13 +27,19 @@ export default () =>
   createReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        const { data } = payload.query ?? {}  
-        state.activeUsers = _.filter((data?.users ?? []), u => u.accountEnabled !== false)
-        state.disabledUsers = _.filter((data?.users ?? []), u => u.accountEnabled === false)
-        state.roles = data?.roles ?? []
+        const users = get(payload, 'query.data.users', { default: [] })
+        const activeDirectoryUsers = get(
+          payload,
+          'query.data.activeDirectoryUsers',
+          { default: [] }
+        )
+        const roles = get(payload, 'query.data.roles', { default: [] })
+        state.activeUsers = _.filter(users, (u) => u.accountEnabled !== false)
+        state.disabledUsers = _.filter(users, (u) => u.accountEnabled === false)
+        state.roles = roles
         state.availableAdUsers = _.filter(
-          data?.activeDirectoryUsers ?? [],
-          (x) => !_.any(data?.users ?? [], (y) => y.id === x.id)
+          activeDirectoryUsers,
+          (x) => !_.any(users, (y) => y.id === x.id)
         )
         state.loading = payload.query.loading
       })

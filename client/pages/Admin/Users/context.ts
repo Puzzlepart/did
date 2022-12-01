@@ -6,7 +6,9 @@ import { IUsersState } from './types'
 export interface IUsersContext {
   state: IUsersState
   dispatch: React.Dispatch<AnyAction>
-  refetch: (variables?: Partial<OperationVariables>) => Promise<ApolloQueryResult<any>>
+  refetch: (
+    variables?: Partial<OperationVariables>
+  ) => Promise<ApolloQueryResult<any>>
 }
 
 export const UsersContext = createContext<IUsersContext>(null)

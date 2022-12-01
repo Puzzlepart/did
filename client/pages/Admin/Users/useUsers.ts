@@ -29,11 +29,12 @@ export function useUsers() {
   })
   const [addUsers] = useMutation($addUsers)
   const context = useMemo(
-    () => ({
-      state,
-      dispatch,
-      refetch: query.refetch
-    } as IUsersContext),
+    () =>
+      ({
+        state,
+        dispatch,
+        refetch: query.refetch
+      } as IUsersContext),
     [state, query.refetch]
   )
 
