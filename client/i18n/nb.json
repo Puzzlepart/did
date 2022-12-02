@@ -135,7 +135,8 @@
       "bulkImportUsersLabel": "Importer i bulk",
       "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent...",
       "addNewUser": "Legg til ny",
-      "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did."
+      "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did.",
+      "syncUsersLabel": "Synkroniser brukeregenskaper"
     },
     "labels": {
       "headerText": "Merkelapper",

@@ -157,7 +157,8 @@
       "bulkImportUsersLabel": "Bulk import",
       "bulkImportingUsersLabel": "Importing {{count}} users. Please wait..",
       "addNewUser": "Add new",
-      "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did."
+      "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did.",
+      "syncUsersLabel": "Synchronize user properties"
     },
     "missingSubmissions": {
       "headerText": "Missing submissions",
