@@ -7,6 +7,7 @@ export interface IUsersState {
   loading: boolean
   activeUsers: User[]
   disabledUsers: User[]
+  adUsers: User[]
   availableAdUsers: User[]
   roles: Role[]
   userForm?: IUserFormProps

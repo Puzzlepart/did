@@ -32,7 +32,7 @@ export const Users: TabComponent = () => {
           <List
             enableShimmer={context.state.loading}
             items={context.state.activeUsers}
-            columns={columns}
+            columns={columns('active')}
             commandBar={commandBar}
           />
         </PivotItem>
@@ -43,7 +43,7 @@ export const Users: TabComponent = () => {
           <List
             enableShimmer={context.state.loading}
             items={context.state.disabledUsers}
-            columns={columns}
+            columns={columns('disabled')}
           />
         </PivotItem>
       </TabContainer>

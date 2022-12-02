@@ -23,6 +23,44 @@ export class UserPhoto {
 }
 
 /**
+ * A type that describes a ActiveDirectoryUser
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a ActiveDirectoryUser',
+  simpleResolvers: true
+})
+export class ActiveDirectoryUser {
+  @Field(() => ID)
+  id?: string
+
+  @Field({ nullable: true })
+  displayName?: string
+
+  @Field({ nullable: true })
+  givenName?: string
+
+  @Field({ nullable: true })
+  surname?: string
+
+  @Field({ nullable: true })
+  jobTitle?: string
+
+  @Field({ nullable: true })
+  mobilePhone?: string
+
+  @Field({ nullable: true })
+  mail?: string
+
+  @Field({ nullable: true })
+  preferredLanguage?: string
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
+}
+
+/**
  * A type that describes a User
  *
  * @category GraphQL ObjectType
@@ -136,6 +174,9 @@ export class UserInput {
 
   @Field({ nullable: true })
   provider?: string
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
 }
 /**
  * @category GraphQL InputType

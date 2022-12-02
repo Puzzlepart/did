@@ -21,14 +21,14 @@ export const AddMultiplePanel: FC<IAddMultiplePanel> = (props) => {
   return (
     <Panel
       {..._.pick(props, 'onDismiss', 'isOpen')}
-      headerText={t('admin.bulkImportUsersLabel')}
+      headerText={t('admin.users.bulkImportUsersLabel')}
       type={PanelType.medium}
       isLightDismiss={true}
       className={styles.root}
     >
       <div className={styles.container}>
         <PrimaryButton
-          text={t('admin.bulkImportUsersLabel')}
+          text={t('admin.users.bulkImportUsersLabel')}
           disabled={selectedUsers.length === 0}
           onClick={() => props.onAdd(selectedUsers)}
         />

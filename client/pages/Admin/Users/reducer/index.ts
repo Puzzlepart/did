@@ -16,6 +16,7 @@ export const initialState: IUsersState = {
   loading: true,
   activeUsers: [],
   disabledUsers: [],
+  adUsers: [],
   availableAdUsers: [],
   roles: []
 }
@@ -37,6 +38,7 @@ export default () =>
         state.activeUsers = _.filter(users, (u) => u.accountEnabled !== false)
         state.disabledUsers = _.filter(users, (u) => u.accountEnabled === false)
         state.roles = roles
+        state.adUsers = activeDirectoryUsers
         state.availableAdUsers = _.filter(
           activeDirectoryUsers,
           (x) => !_.any(users, (y) => y.id === x.id)

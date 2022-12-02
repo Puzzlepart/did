@@ -4,7 +4,12 @@ import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../../services/mongo'
 import { environment } from '../../../utils'
-import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_ACCOUNT_DISABLED, USER_NOT_ENROLLED } from '../errors'
+import {
+  NO_OID_FOUND,
+  TENANT_NOT_ENROLLED,
+  USER_ACCOUNT_DISABLED,
+  USER_NOT_ENROLLED
+} from '../errors'
 import { synchronizeUserProfile } from './synchronizeUserProfile'
 
 /**
@@ -38,7 +43,7 @@ export const onVerifySignin = async (
     if (!subscription) {
       throw TENANT_NOT_ENROLLED
     }
-    const isOwner = (subscription.owner === mail)
+    const isOwner = subscription.owner === mail
 
     const userSrv = new UserService({
       db: mcl.db(subscription.db)

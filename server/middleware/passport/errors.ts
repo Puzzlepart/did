@@ -17,11 +17,13 @@ export class SigninError extends Error {
    * Returns a base64 string representation of the `SigninError`
    */
   public toString() {
-    return Buffer.from(JSON.stringify({
-      name: this.name,
-      message: this.message,
-      icon: this.icon
-    })).toString('base64')
+    return Buffer.from(
+      JSON.stringify({
+        name: this.name,
+        message: this.message,
+        icon: this.icon
+      })
+    ).toString('base64')
   }
 }
 

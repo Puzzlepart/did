@@ -10,7 +10,7 @@ import { useUsersSync } from './useUsersSync'
 
 /**
  * Commands hook for `Users`
- * 
+ *
  * @param context Context
  */
 export function useUsersCommands(context: IUsersContext) {
@@ -24,18 +24,22 @@ export function useUsersCommands(context: IUsersContext) {
         name: t('admin.users.addNewUser'),
         iconProps: { iconName: 'AddFriend' },
         disabled:
+          context.state.loading ||
           _.isEmpty(context.state.availableAdUsers) ||
           !hasPermission(PermissionScope.LIST_USERS),
         onClick: () =>
-          context.dispatch(SET_USER_FORM({ headerText: t('admin.users.addNewUser') }))
+          context.dispatch(
+            SET_USER_FORM({ headerText: t('admin.users.addNewUser') })
+          )
       },
       {
         key: 'BULK_IMPORT_USERS',
         name: t('admin.users.bulkImportUsersLabel'),
         iconProps: { iconName: 'CloudImportExport' },
         disabled:
+          context.state.loading ||
           _.isEmpty(context.state.availableAdUsers) ||
-          !hasPermission(PermissionScope.LIST_USERS),
+          !hasPermission(PermissionScope.MANAGE_USERS),
         onClick: () =>
           context.dispatch(SET_ADD_MULTIPLE_PANEL({ isOpen: true }))
       },
@@ -43,6 +47,8 @@ export function useUsersCommands(context: IUsersContext) {
         key: 'SYNC_USERS',
         name: t('admin.users.syncUsersLabel'),
         iconProps: { iconName: 'UserSync' },
+        disabled:
+          context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS),
         onClick: () => {
           syncUsers(['accountEnabled'])
         }

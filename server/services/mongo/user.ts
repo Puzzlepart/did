@@ -133,6 +133,21 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
+   * Update multiple users in bulk
+   *
+   * @param users - Users
+   */
+  public async updateUsers(users: User[]) {
+    try {
+      for (const user of users) {
+        await this.updateUser(user)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
    * Update the specified user
    *
    * @param user - User to update

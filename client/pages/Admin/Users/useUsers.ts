@@ -49,7 +49,9 @@ export function useUsers() {
     dispatch(HIDE_ADD_MULTIPLE_PANEL())
     dispatch(
       SET_PROGRESS({
-        label: t('admin.users.bulkImportingUsersLabel', { count: users.length }),
+        label: t('admin.users.bulkImportingUsersLabel', {
+          count: users.length
+        }),
         labelPosition: 'right'
       })
     )
