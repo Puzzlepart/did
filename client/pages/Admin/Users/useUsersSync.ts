@@ -10,8 +10,8 @@ import $updateUsers from './updateUsers.gql'
  */
 export function useUsersSync(context: IUsersContext) {
   const [updateUsers] = useMutation($updateUsers)
-  return async (properties: string[]) => {
-    const users = context.state.activeUsers
+  return async (properties = ['accountEnabled']) => {
+    const users = context.state.users
       .map((user) => {
         const adUser = _.find(context.state.adUsers, (a) => a.id === user.id)
         if (!adUser) return null
@@ -28,7 +28,9 @@ export function useUsersSync(context: IUsersContext) {
         return userUpdate ? { id: user.id, ...userUpdate } : null
       })
       .filter(Boolean)
-    await updateUsers({ variables: { users } })
-    context.refetch()
+    if (!_.isEmpty(users)) {
+      await updateUsers({ variables: { users } })
+      context.refetch()
+    }
   }
 }

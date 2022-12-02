@@ -11,9 +11,9 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
-import { IAddMultiplePanel } from './types'
+import { IAddMultiplePanelProps } from './types'
 
-export const AddMultiplePanel: FC<IAddMultiplePanel> = (props) => {
+export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
   const [selectedUsers, setSelectedUsers] = useState([])

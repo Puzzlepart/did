@@ -14,6 +14,7 @@ import {
 
 export const initialState: IUsersState = {
   loading: true,
+  users: [],
   activeUsers: [],
   disabledUsers: [],
   adUsers: [],
@@ -35,6 +36,7 @@ export default () =>
           { default: [] }
         )
         const roles = get(payload, 'query.data.roles', { default: [] })
+        state.users = users
         state.activeUsers = _.filter(users, (u) => u.accountEnabled !== false)
         state.disabledUsers = _.filter(users, (u) => u.accountEnabled === false)
         state.roles = roles

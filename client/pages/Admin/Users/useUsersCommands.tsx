@@ -5,7 +5,12 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { PermissionScope } from '../../../../shared/config/security/permissions'
 import { IUsersContext } from './context'
-import { SET_ADD_MULTIPLE_PANEL, SET_USER_FORM } from './reducer/actions'
+import {
+  CLEAR_PROGRESS,
+  SET_ADD_MULTIPLE_PANEL,
+  SET_PROGRESS,
+  SET_USER_FORM
+} from './reducer/actions'
 import { useUsersSync } from './useUsersSync'
 
 /**
@@ -49,8 +54,15 @@ export function useUsersCommands(context: IUsersContext) {
         iconProps: { iconName: 'UserSync' },
         disabled:
           context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS),
-        onClick: () => {
-          syncUsers(['accountEnabled'])
+        onClick: async () => {
+          context.dispatch(
+            SET_PROGRESS({
+              label: t('admin.users.synchronizingUserProperties'),
+              labelPosition: 'right'
+            })
+          )
+          await syncUsers()
+          context.dispatch(CLEAR_PROGRESS())
         }
       },
       {

@@ -136,7 +136,8 @@
       "bulkImportingUsersLabel": "Importerer {{count}} brukarar. Ver vennleg å vent...",
       "addNewUser": "Legg til ny",
       "userFieldAdSync": "Feltet blir synkronisert automatisk frå Azure AD når brukaren loggar seg på, og kan ikkje endrast i Did.",
-      "syncUsersLabel": "Synkroniser brukeregenskaper"
+      "syncUsersLabel": "Synkroniser brukeregenskaper",
+      "synchronizingUserProperties": "Synkroniserer brukaregenskaper..."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
