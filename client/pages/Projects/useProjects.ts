@@ -8,7 +8,7 @@ import { useProjectsHistory } from './useProjectsHistory'
 import { useProjectsQuery } from './useProjectsQuery'
 
 /**
- * Hook for Projects
+ * Component logic for `Projects`
  *
  * * Get history using `useHistory`
  * * Get URL params using `useParams`

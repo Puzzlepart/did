@@ -17,7 +17,7 @@ import $users from './users.gql'
 import { useUsersCommands } from './useUsersCommands'
 
 /**
- * Users hook
+ * Component logic for `Users`
  *
  * @category Users
  */
@@ -49,14 +49,14 @@ export function useUsers() {
     dispatch(HIDE_ADD_MULTIPLE_PANEL())
     dispatch(
       SET_PROGRESS({
-        label: t('admin.bulkImportingUsersLabel', { count: users.length }),
+        label: t('admin.users.bulkImportingUsersLabel', { count: users.length }),
         labelPosition: 'right'
       })
     )
     await addUsers({
       variables: {
-        users: users.map((u) => ({
-          ..._.omit(u, '__typename'),
+        users: users.map((user) => ({
+          ..._.omit(user, '__typename'),
           provider: 'azuread-openidconnect'
         }))
       }

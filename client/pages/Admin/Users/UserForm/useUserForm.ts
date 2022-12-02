@@ -52,7 +52,7 @@ export function useUserForm(props: IUserFormProps) {
     label,
     disabled: _.contains(adSync?.properties, key),
     description:
-      _.contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
+      _.contains(adSync?.properties, key) && t('admin.users.userFieldAdSync'),
     value: model[key],
     onChange: (_event, value) => setModel({ ...model, [key]: value })
   })
