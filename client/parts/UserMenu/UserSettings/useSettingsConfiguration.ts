@@ -87,6 +87,10 @@ export function useSettingsConfiguration(): IUserSetting[] {
           key: 'planned',
           text: t('common.vacationCalculationTypePlanned'),
           data: {
+            iconProps: {
+              iconName: 'DietPlanNotebook',
+              styles: { root: { fontSize: 18, color: 'blue' } }
+            },
             description: t('common.vacationCalculationTypePlannedDescription')
           }
         },
@@ -94,6 +98,10 @@ export function useSettingsConfiguration(): IUserSetting[] {
           key: 'confirmed',
           text: t('common.vacationCalculationTypeConfirmed'),
           data: {
+            iconProps: {
+              iconName: 'WaitlistConfirm',
+              styles: { root: { fontSize: 18, color: 'green' } }
+            },
             description: t('common.vacationCalculationTypeConfirmedDescription')
           }
         }
