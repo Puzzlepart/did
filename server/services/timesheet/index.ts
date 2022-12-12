@@ -64,7 +64,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -384,16 +384,30 @@ export class TimesheetService {
       const totalDays = get(userConfiguration, 'vacation.totalDays', {
         default: settings.totalDays
       })
-      const events = await this._msgraphSvc.getVacation(settings.eventCategory)
-      const usedHours = events.reduce((sum, event) => sum + event.duration, 0)
-      const used = usedHours / 8
+      const calculationType = get(userConfiguration, 'vacation.calculationType', {
+        default: 'planned'
+      })
+      let usedHours: number = 0
+      switch (calculationType) {
+        case 'confirmed': {
+          const entries = await this._timeEntrySvc.find({ projectId: settings.eventCategory, year: new Date().getFullYear() })
+          usedHours = entries.reduce((sum, event) => sum + event.duration, 0)
+        }
+          break
+        case 'planned': {
+          const events = await this._msgraphSvc.getVacation(settings.eventCategory)
+          usedHours = events.reduce((sum, event) => sum + event.duration, 0)
+        }
+          break
+      }
       return {
         category: settings.eventCategory,
         total: totalDays,
+        calculationType,
         usedHours: toFixed(usedHours, 2),
-        used: toFixed(used, 2),
-        remaining: toFixed(totalDays - used, 2)
-      }
+        used: toFixed((usedHours / 8), 2),
+        remaining: toFixed(totalDays - (usedHours / 8), 2)
+      } as VacationSummary
     } catch (error) {
       throw error
     }

@@ -14,6 +14,9 @@ export class VacationSummary {
   @Field(() => String)
   category?: string
 
+  @Field(() => String)
+  calculationType?: string
+
   @Field(() => Float)
   total?: number
 
