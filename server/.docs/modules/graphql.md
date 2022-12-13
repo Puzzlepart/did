@@ -34,6 +34,7 @@
 
 ### GraphQL ObjectType Classes
 
+- [ActiveDirectoryUser](../classes/graphql.activedirectoryuser.md)
 - [ApiToken](../classes/graphql.apitoken.md)
 - [CreateOrUpdateProjectResult](../classes/graphql.createorupdateprojectresult.md)
 - [CreateOutlookCategoryResult](../classes/graphql.createoutlookcategoryresult.md)

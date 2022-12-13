@@ -43,7 +43,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L46)
+Defined in: [routes/auth.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L38)
 
 ___
 
@@ -65,7 +65,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L30)
+Defined in: [routes/auth.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L26)
 
 ___
 
@@ -80,8 +80,8 @@ Handler for `/auth/signout`
 Name | Type | Description |
 :------ | :------ | :------ |
 `request` | *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\> | Request   |
-`response` | *Response*<any, Record<string, any\>\> | Response   |
+`response` | *Response*<any, Record<string, any\>\> | Response    |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L83)
+Defined in: [routes/auth.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L72)
