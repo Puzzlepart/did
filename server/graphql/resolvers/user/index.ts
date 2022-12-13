@@ -17,6 +17,7 @@ import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
 import {
+  ActiveDirectoryUser,
   User,
   UserFeedback,
   UserFeedbackResult,
@@ -82,8 +83,10 @@ export class UserResolver {
    * Get Active Directory users
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
-  @Query(() => [User], { description: 'Get all users from Active Directory' })
-  activeDirectoryUsers(): Promise<User[]> {
+  @Query(() => [ActiveDirectoryUser], {
+    description: 'Get all users from Active Directory'
+  })
+  activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
     return this._msgraph.getUsers()
   }
 
@@ -138,6 +141,20 @@ export class UserResolver {
       role: 'User'
     }))
     await this._userSvc.addUsers(users)
+    return { success: true, error: null }
+  }
+
+  /**
+   * Update users
+   *
+   * @param users - Users
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => BaseResult, { description: 'Update users' })
+  async updateUsers(
+    @Arg('users', () => [UserInput]) users: UserInput[]
+  ): Promise<BaseResult> {
+    await this._userSvc.updateUsers(users)
     return { success: true, error: null }
   }
 

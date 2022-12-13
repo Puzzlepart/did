@@ -47,7 +47,10 @@ export const UserReports: FC = () => {
         <DefaultButton
           text={t('common.exportExcel')}
           styles={{ root: { marginTop: 20, width: '100%' } }}
-          iconProps={{ iconName: 'ExcelDocument' }}
+          iconProps={{
+            iconName: 'ExcelDocument',
+            styles: { root: { color: 'green' } }
+          }}
           onClick={onExport}
           disabled={!preset || query.loading}
         />

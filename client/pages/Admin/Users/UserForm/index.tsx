@@ -1,23 +1,19 @@
 import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
 import { Autocomplete } from 'components'
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
+import { UsersContext } from '../context'
 import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 import { useUserForm } from './useUserForm'
 
 export const UserForm: FC<IUserFormProps> = (props) => {
-  const {
-    inputProps,
-    activeDirectoryUsers,
-    roles,
-    model,
-    setModel,
-    isFormValid,
-    onSave,
-    t
-  } = useUserForm({ props })
+  const { t } = useTranslation()
+  const context = useContext(UsersContext)
+  const { inputProps, model, setModel, isFormValid, onSave } =
+    useUserForm(props)
 
   return (
     <Panel
@@ -29,7 +25,7 @@ export const UserForm: FC<IUserFormProps> = (props) => {
         <div className={styles.inputContainer}>
           <Autocomplete
             placeholder={t('common.searchPlaceholder')}
-            items={activeDirectoryUsers.map((u) => ({
+            items={context.state.availableAdUsers.map((u) => ({
               key: u.id,
               text: u.displayName,
               searchValue: u.displayName,
@@ -72,7 +68,7 @@ export const UserForm: FC<IUserFormProps> = (props) => {
       />
       <RolePicker
         className={styles.inputContainer}
-        roles={roles}
+        roles={context.state.roles}
         model={model}
         onChanged={(role) => setModel({ ...model, role })}
       />

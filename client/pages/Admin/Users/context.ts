@@ -1,28 +1,14 @@
+import { ApolloQueryResult, OperationVariables } from '@apollo/client'
+import { AnyAction } from '@reduxjs/toolkit'
 import { createContext } from 'react'
-import { Role, User } from 'types'
-import { IUserFormProps } from './UserForm/types'
+import { IUsersState } from './types'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IUsersContext {
-  /**
-   * Available roles
-   */
-  roles: Role[]
-
-  /**
-   * Registered users
-   */
-  users: User[]
-
-  /**
-   * Active Directory users
-   */
-  activeDirectoryUsers: User[]
-
-  /**
-   * Set user form
-   */
-  setUserForm: React.Dispatch<React.SetStateAction<IUserFormProps>>
+  state: IUsersState
+  dispatch: React.Dispatch<AnyAction>
+  refetch: (
+    variables?: Partial<OperationVariables>
+  ) => Promise<ApolloQueryResult<any>>
 }
 
 export const UsersContext = createContext<IUsersContext>(null)

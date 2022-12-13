@@ -1,11 +1,10 @@
-import { Spinner } from '@fluentui/react'
-import { List, TabComponent } from 'components'
-import { usePermissions } from 'hooks/user/usePermissions'
+import { PivotItem } from '@fluentui/react'
+import { List, TabComponent, TabContainer } from 'components'
 import React from 'react'
-import _ from 'underscore'
-import { PermissionScope } from '../../../../shared/config/security/permissions'
+import { useTranslation } from 'react-i18next'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
+import { HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM } from './reducer/actions'
 import { UserForm } from './UserForm'
 import { useUsers } from './useUsers'
 
@@ -13,80 +12,54 @@ import { useUsers } from './useUsers'
  * Manage users
  *
  * * See active users
+ * * See disabled users
  * * Add new users
  * * Edit users
  *
  * @ignore
  */
 export const Users: TabComponent = () => {
-  const {
-    context,
-    columns,
-    query,
-    progress,
-    userForm,
-    setUserForm,
-    addMultiplePanel,
-    setAddMultiplePanel,
-    onAddUsers,
-    t
-  } = useUsers()
-  const [, hasPermission] = usePermissions()
+  const { t } = useTranslation()
+  const { context, columns, onAddUsers, commandBar } = useUsers()
 
   return (
     <UsersContext.Provider value={context}>
-      <List
-        enableShimmer={query.loading && _.isEmpty(context.activeDirectoryUsers)}
-        items={context.users}
-        columns={columns}
-        commandBar={{
-          items: [
-            {
-              key: 'ADD_NEW_USER',
-              name: t('admin.addNewUser'),
-              iconProps: { iconName: 'AddFriend' },
-              disabled:
-                _.isEmpty(context.activeDirectoryUsers) ||
-                !hasPermission(PermissionScope.LIST_USERS),
-              onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
-            },
-            {
-              key: 'BULK_IMPORT_USERS',
-              name: t('admin.bulkImportUsersLabel'),
-              iconProps: { iconName: 'CloudImportExport' },
-              disabled:
-                _.isEmpty(context.activeDirectoryUsers) ||
-                !hasPermission(PermissionScope.LIST_USERS),
-              onClick: () => setAddMultiplePanel({ isOpen: true })
-            },
-            {
-              key: 'SPINNER',
-              name: '',
-              onRender: () =>
-                progress && (
-                  <Spinner
-                    styles={{ root: { marginLeft: 15 } }}
-                    {...progress}
-                  />
-                )
-            }
-          ],
-          farItems: []
-        }}
-      />
+      <TabContainer level={3}>
+        <PivotItem
+          itemKey='active'
+          headerText={t('admin.users.activeHeaderText')}
+        >
+          <List
+            enableShimmer={context.state.loading}
+            items={context.state.activeUsers}
+            columns={columns('active')}
+            commandBar={commandBar}
+          />
+        </PivotItem>
+        <PivotItem
+          itemKey='disabled'
+          headerText={t('admin.users.disabledHeaderText')}
+        >
+          <List
+            enableShimmer={context.state.loading}
+            items={context.state.disabledUsers}
+            columns={columns('disabled')}
+          />
+        </PivotItem>
+      </TabContainer>
       <UserForm
-        {...userForm}
-        isOpen={!!userForm}
+        {...context.state.userForm}
+        isOpen={!!context.state.userForm}
         onDismiss={(event) => {
-          setUserForm(null)
-          !event && query.refetch()
+          context.dispatch(HIDE_USER_FORM())
+          !event && context.refetch()
         }}
       />
       <AddMultiplePanel
-        {...addMultiplePanel}
-        isOpen={!!addMultiplePanel}
+        {...context.state.addMultiplePanel}
+        isOpen={!!context.state.addMultiplePanel}
         onAdd={onAddUsers}
-        onDismiss={() => setAddMultiplePanel(null)}
+        onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
       />
     </UsersContext.Provider>
   )

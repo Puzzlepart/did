@@ -144,7 +144,7 @@ class MSGraphService {
       return this._cache.usingCache(
         async () => {
           const client = await this._getClient()
-          const { value } = await client
+          const response = await client
             .api('/users')
             // eslint-disable-next-line quotes
             .filter("userType eq 'Member'")
@@ -156,12 +156,12 @@ class MSGraphService {
               'displayName',
               'mobilePhone',
               'mail',
-              'preferredLanguage'
+              'preferredLanguage',
+              'accountEnabled'
             ])
             .top(999)
             .get()
-          const users = _.sortBy(value, 'displayName')
-          return users
+          return _.sortBy(response.value, 'displayName')
         },
         { key: 'getusers' }
       )

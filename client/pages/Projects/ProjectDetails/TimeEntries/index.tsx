@@ -24,7 +24,10 @@ export const TimeEntries: FC = () => {
           <div hidden={_.isEmpty(timeEntries)}>
             <ActionButton
               text={t('projects.exportTimeEntriesLabel')}
-              iconProps={{ iconName: 'ExcelDocument' }}
+              iconProps={{
+                iconName: 'ExcelDocument',
+                styles: { root: { color: 'green' } }
+              }}
               onClick={() => onExport()}
             />
           </div>

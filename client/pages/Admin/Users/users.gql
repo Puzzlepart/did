@@ -8,6 +8,7 @@ query UsersAdmin {
     mobilePhone
     mail
     preferredLanguage
+    accountEnabled
   }
   users {
     id
@@ -19,6 +20,7 @@ query UsersAdmin {
     hiddenFromReports
     provider
     lastActive
+    accountEnabled
     role {
       name
       description

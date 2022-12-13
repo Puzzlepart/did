@@ -1,0 +1,8 @@
+mutation SyncUsers ($users: [UserInput!]!) {
+  updateUsers(users: $users) {
+    success
+    error {
+      message
+    }
+  }
+}

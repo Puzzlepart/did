@@ -1,42 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation, useQuery } from '@apollo/client'
-import { ISpinnerProps } from '@fluentui/react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { IAddMultiplePanel } from './AddMultiplePanel'
 import $addUsers from './addUsers.gql'
 import { IUsersContext } from './context'
+import { useUsersReducer } from './reducer'
+import {
+  CLEAR_PROGRESS,
+  DATA_UPDATED,
+  HIDE_ADD_MULTIPLE_PANEL,
+  SET_PROGRESS
+} from './reducer/actions'
 import { useColumns } from './useColumns'
-import { IUserFormProps } from './UserForm'
 import $users from './users.gql'
+import { useUsersCommands } from './useUsersCommands'
 
 /**
- * Users hook
+ * Component logic for `Users`
  *
  * @category Users
  */
 export function useUsers() {
   const { t } = useTranslation()
-  const [userForm, setUserForm] = useState<IUserFormProps>(null)
-  const [addMultiplePanel, setAddMultiplePanel] =
-    useState<IAddMultiplePanel>(null)
-  const [progress, setProgress] = useState<ISpinnerProps>(null)
+  const { state, dispatch } = useUsersReducer()
   const query = useQuery($users, {
     fetchPolicy: 'cache-and-network'
   })
   const [addUsers] = useMutation($addUsers)
-  const context: IUsersContext = useMemo(
-    () => ({
-      ...query.data,
-      setUserForm
-    }),
-    [query.data]
+  const context = useMemo(
+    () =>
+      ({
+        state,
+        dispatch,
+        refetch: query.refetch
+      } as IUsersContext),
+    [state, query.refetch]
   )
 
-  context.activeDirectoryUsers = _.filter(
-    context.activeDirectoryUsers,
-    (x) => !_.any(context.users, (y) => y.id === x.id)
-  )
+  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
   /**
    * On add users
@@ -44,36 +46,35 @@ export function useUsers() {
    * @param users - Users to add
    */
   const onAddUsers = async (users: any[]) => {
-    setAddMultiplePanel(null)
-    setProgress({
-      label: t('admin.bulkImportingUsersLabel', { count: users.length }),
-      labelPosition: 'right'
-    })
+    dispatch(HIDE_ADD_MULTIPLE_PANEL())
+    dispatch(
+      SET_PROGRESS({
+        label: t('admin.users.bulkImportingUsersLabel', {
+          count: users.length
+        }),
+        labelPosition: 'right'
+      })
+    )
     await addUsers({
       variables: {
-        users: users.map((u) => ({
-          ..._.omit(u, '__typename'),
+        users: users.map((user) => ({
+          ..._.omit(user, '__typename'),
           provider: 'azuread-openidconnect'
         }))
       }
     })
-    setProgress(null)
+    dispatch(CLEAR_PROGRESS())
     query.refetch()
   }
 
   const columns = useColumns(context)
+  const commandBar = useUsersCommands(context)
 
   return {
     context,
-    query,
+    refetch: query.refetch,
     columns,
     onAddUsers,
-    progress,
-    setProgress,
-    userForm,
-    setUserForm,
-    addMultiplePanel,
-    setAddMultiplePanel,
-    t
-  }
+    commandBar
+  } as const
 }
