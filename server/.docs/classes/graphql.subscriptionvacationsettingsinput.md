@@ -12,6 +12,7 @@
 
 ### Properties
 
+- [calculationType](graphql.subscriptionvacationsettingsinput.md#calculationtype)
 - [eventCategory](graphql.subscriptionvacationsettingsinput.md#eventcategory)
 - [totalDays](graphql.subscriptionvacationsettingsinput.md#totaldays)
 
@@ -25,11 +26,19 @@
 
 ## Properties
 
+### calculationType
+
+• `Optional` **calculationType**: *string*
+
+Defined in: [graphql/resolvers/subscription/types.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L152)
+
+___
+
 ### eventCategory
 
 • `Optional` **eventCategory**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L149)
+Defined in: [graphql/resolvers/subscription/types.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L155)
 
 ___
 
@@ -37,4 +46,4 @@ ___
 
 • `Optional` **totalDays**: *number*
 
-Defined in: [graphql/resolvers/subscription/types.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L146)
+Defined in: [graphql/resolvers/subscription/types.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L149)
