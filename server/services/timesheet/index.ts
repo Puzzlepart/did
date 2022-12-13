@@ -399,7 +399,10 @@ export class TimesheetService {
               projectId: settings.eventCategory,
               year: new Date().getFullYear()
             })
-            usedHours = toFixed(entries.reduce((sum, event) => sum + event.duration, 0), 2)
+            usedHours = toFixed(
+              entries.reduce((sum, event) => sum + event.duration, 0),
+              2
+            )
           }
           break
         case 'planned':
@@ -407,7 +410,10 @@ export class TimesheetService {
             const events = await this._msgraphSvc.getVacation(
               settings.eventCategory
             )
-            usedHours =  toFixed(events.reduce((sum, event) => sum + event.duration, 0), 2)
+            usedHours = toFixed(
+              events.reduce((sum, event) => sum + event.duration, 0),
+              2
+            )
           }
           break
       }
