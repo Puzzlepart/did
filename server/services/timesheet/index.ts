@@ -384,16 +384,49 @@ export class TimesheetService {
       const totalDays = get(userConfiguration, 'vacation.totalDays', {
         default: settings.totalDays
       })
-      const events = await this._msgraphSvc.getVacation(settings.eventCategory)
-      const usedHours = events.reduce((sum, event) => sum + event.duration, 0)
-      const used = usedHours / 8
+      const calculationType = get(
+        userConfiguration,
+        'vacation.calculationType',
+        {
+          default: 'planned'
+        }
+      )
+      let usedHours: number = 0
+      switch (calculationType) {
+        case 'confirmed':
+          {
+            const entries = await this._timeEntrySvc.find({
+              projectId: settings.eventCategory,
+              year: new Date().getFullYear()
+            })
+            usedHours = toFixed(
+              entries.reduce((sum, event) => sum + event.duration, 0),
+              2
+            )
+          }
+          break
+        case 'planned':
+          {
+            const events = await this._msgraphSvc.getVacation(
+              settings.eventCategory
+            )
+            usedHours = toFixed(
+              events.reduce((sum, event) => sum + event.duration, 0),
+              2
+            )
+          }
+          break
+      }
+      const used = toFixed(usedHours / 8, 2)
+      const remaining = toFixed(totalDays - usedHours / 8, 2)
       return {
         category: settings.eventCategory,
         total: totalDays,
-        usedHours: toFixed(usedHours, 2),
-        used: toFixed(used, 2),
-        remaining: toFixed(totalDays - used, 2)
-      }
+        calculationType,
+        usedHours,
+        used,
+        remaining
+      } as VacationSummary
     } catch (error) {
       throw error
     }

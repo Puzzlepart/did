@@ -1,9 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { useTheme } from '@fluentui/react'
+import { TooltipHost, useTheme } from '@fluentui/react'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../MenuItem'
+import { UserVacationTooltipContent } from './UserVacationTooltipContent'
 import $vacation from './vacation.gql'
 
 /**
@@ -14,13 +15,17 @@ export const UserVacation: FC = () => {
   const { data } = useQuery($vacation, { fetchPolicy: 'cache-first' })
   const { palette } = useTheme()
   return (
-    <MenuItem
-      iconProps={{ iconName: 'Vacation' }}
-      title={t('common.vacationSummaryTooltip', data?.vacation)}
-      text={t('common.vacationSummaryText', data?.vacation)}
-      textStyle={{
-        color: palette.neutralPrimary
-      }}
-    />
+    <TooltipHost
+      content={<UserVacationTooltipContent {...(data?.vacation ?? {})} />}
+    >
+      <MenuItem
+        style={{ cursor: 'help' }}
+        iconProps={{ iconName: 'Vacation' }}
+        text={t('common.vacationSummaryText', data?.vacation)}
+        textStyle={{
+          color: palette.neutralPrimary
+        }}
+      />
+    </TooltipHost>
   )
 }
