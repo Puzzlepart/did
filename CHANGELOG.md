@@ -78,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Improved Project and Customer pages [#1069](https://github.com/Puzzlepart/did/pull/1069)
 - Visual upgrade for lists [#1076](https://github.com/Puzzlepart/did/pull/1076)
+- Adjustments to calculation/estimation of vacation [#1080](https://github.com/Puzzlepart/did/pull/1080)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0113---25112022)
