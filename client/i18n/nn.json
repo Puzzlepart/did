@@ -405,7 +405,13 @@
     "groupByColumn": "Grupper etter {{name}}",
     "filterByColumn": "Filtrer etter {{name}}",
     "sortDesc": "A til Å",
-    "sortAsc": "Å til A"
+    "sortAsc": "Å til A",
+    "vacationCalculationTypePlanned": "Planlagt ferie",
+    "vacationCalculationTypeLabel": "Ferieberegningstype",
+    "vacationCalculationTypeConfirmed": "Bekreftet ferie",
+    "vacationCalculationTypePlannedDescription": "Alt i kalenderen din er kategorisert med IAM VAC.",
+    "vacationCalculationTypeConfirmedDescription": "Ferie bekreftet som en del av timelisten din.",
+    "vacationSummaryTooltipConfirmed": "Ferieberekninga er for heile året, og er basert på {{usedHours}} timar ferie stadfesta som ein del av timelista di (kvar feriedag er 8 timar)."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
