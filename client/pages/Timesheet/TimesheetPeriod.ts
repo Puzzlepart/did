@@ -267,9 +267,12 @@ export class TimesheetPeriod {
    * @memberof TimesheetPeriod
    */
   public ignoreAllEvents() {
-    this._uiIgnoredEvents = this.getEvents(GetEventsOption.UnmatchedEvents).map(
-      (event) => event.id
-    )
+    this._uiIgnoredEvents = _.uniq([
+      ...this._uiIgnoredEvents,
+      ...this.getEvents(GetEventsOption.UnmatchedEvents).map(
+        (event) => event.id
+      )
+    ])
     this._uiIgnoredEventsStorage.set(this._uiIgnoredEvents)
   }
 
