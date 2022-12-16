@@ -216,7 +216,7 @@ and `matchedEvents`
 
 Data for the period
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:318](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L318)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:321](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L321)
 
 ___
 
@@ -228,7 +228,7 @@ Get end date index with Monday = 0
 
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:374](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L374)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:377](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L377)
 
 ___
 
@@ -272,7 +272,7 @@ Period is complete meaning all events are matched
 
 `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:348](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L348)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:351](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L351)
 
 ___
 
@@ -288,7 +288,7 @@ Period is in the past
 
 `true` if the `endDate` is before today
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:359](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L359)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:362](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L362)
 
 ___
 
@@ -316,7 +316,7 @@ Get matched events with properties
 
 **Returns:** *ClientEventInput*[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:281](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L281)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:284](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L284)
 
 ___
 
@@ -328,7 +328,7 @@ Get start date index with Monday = 0
 
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:366](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L366)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:369](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L369)
 
 ___
 
@@ -562,4 +562,4 @@ Name | Type | Default value | Description |
 
 **Returns:** T[]
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:336](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L336)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:339](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L339)
