@@ -19,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -166,7 +166,6 @@ export default class TimesheetMatchingEngine {
     // We check if title is blank, and return an error
     else if (s.isBlank(event.title))
       return { ...event, error: { code: 'EVENT_NO_TITLE' } }
-
     // We search the whole searchString for match in non-strict/soft mode
     else {
       const softMatches = this._searchString(searchString, false)

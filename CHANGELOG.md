@@ -79,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved Project and Customer pages [#1069](https://github.com/Puzzlepart/did/pull/1069)
 - Visual upgrade for lists [#1076](https://github.com/Puzzlepart/did/pull/1076)
 - Adjustments to calculation/estimation of vacation [#1080](https://github.com/Puzzlepart/did/pull/1080)
+- Events without subject/title is now visible to the end user and displayed as an error that needs to be resolved before submitting [#1082](https://github.com/Puzzlepart/did/issues/1082)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0113---25112022)
