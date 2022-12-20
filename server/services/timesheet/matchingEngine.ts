@@ -19,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -130,7 +130,8 @@ export default class TimesheetMatchingEngine {
    * @param event - Event
    */
   private _matchEvent(event: EventObject) {
-    if (s.isBlank(event.title)) return { ...event, error: { code: 'EVENT_NO_TITLE' } }
+    if (s.isBlank(event.title))
+      return { ...event, error: { code: 'EVENT_NO_TITLE' } }
     const ignore = this._findIgnore(event)
     if (ignore === 'category') {
       return { ...event, isSystemIgnored: true }
