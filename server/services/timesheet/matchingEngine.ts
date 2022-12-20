@@ -19,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) {}
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -123,24 +123,22 @@ export default class TimesheetMatchingEngine {
    *
    * 1. Checks `category`, `title` and `description` for tokens
    * 2. Checks `title` and `description` for key without any brackets/parantheses
-   * 3. If we found token matches in `srchStr` or `categoriesStr`
+   * 3. If we found token matches in `searchString` or `categoriesString`
    * We look through the matches and check if they match against
    * a project
    *
    * @param event - Event
    */
   private _matchEvent(event: EventObject) {
-    if (s.isBlank(event.title))
-      return { ...event, error: { code: 'EVENT_NO_TITLE' } }
     const ignore = this._findIgnore(event)
     if (ignore === 'category') {
       return { ...event, isSystemIgnored: true }
     }
     const categoriesString = event.categories.join('|').toUpperCase()
-    const srchString = [event.title, event.body, categoriesString]
+    const searchString = [event.title, event.body, categoriesString]
       .join('|')
       .toUpperCase()
-    const matches = this._findProjectMatches(srchString, categoriesString)
+    const matches = this._findProjectMatches(searchString, categoriesString)
     let projectKey: string
 
     if (!_.isEmpty(matches)) {
@@ -165,9 +163,13 @@ export default class TimesheetMatchingEngine {
       return { ...event, isSystemIgnored: true }
     }
 
-    // We search the whole srchStr for match in non-strict/soft mode
+    // We check if title is blank, and return an error
+    else if (s.isBlank(event.title))
+      return { ...event, error: { code: 'EVENT_NO_TITLE' } }
+
+    // We search the whole searchString for match in non-strict/soft mode
     else {
-      const softMatches = this._searchString(srchString, false)
+      const softMatches = this._searchString(searchString, false)
       event.project = _.find(
         this._data.projects,
         // eslint-disable-next-line unicorn/prefer-array-some
