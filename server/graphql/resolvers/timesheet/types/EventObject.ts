@@ -20,7 +20,7 @@ export class EventObject {
   @Field()
   day?: string
 
-  @Field()
+  @Field({ nullable: true })
   title?: string
 
   @Field({ nullable: true })

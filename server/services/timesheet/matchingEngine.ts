@@ -1,5 +1,6 @@
 import { findBestMatch } from 'string-similarity'
 import _ from 'underscore'
+import s from 'underscore.string'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
 import { ProjectMatch } from './types'
@@ -18,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) {}
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -122,13 +123,14 @@ export default class TimesheetMatchingEngine {
    *
    * 1. Checks `category`, `title` and `description` for tokens
    * 2. Checks `title` and `description` for key without any brackets/parantheses
-   * 3.If we found token matches in `srchStr` or `categoriesStr`
+   * 3. If we found token matches in `srchStr` or `categoriesStr`
    * We look through the matches and check if they match against
    * a project
    *
    * @param event - Event
    */
   private _matchEvent(event: EventObject) {
+    if (s.isBlank(event.title)) return event
     const ignore = this._findIgnore(event)
     if (ignore === 'category') {
       return { ...event, isSystemIgnored: true }
