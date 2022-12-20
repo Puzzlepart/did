@@ -33,6 +33,8 @@ function getErrorMessage(
       return [t('timesheet.projectInactiveErrorText'), 'error']
     case 'CUSTOMER_INACTIVE':
       return [t('timesheet.customerInactiveErrorText'), 'error']
+    case 'EVENT_NO_TITLE':
+      return [t('timesheet.eventNoTitleErrorText'), 'error']
   }
 }
 

@@ -96,8 +96,8 @@ export default class TimesheetMatchingEngine {
   /**
    * Find project match in title/body/categories
    *
-   * @param inputStr - The String object or string literal on which to perform the search.
-   * @param categoriesStr - Categories string
+   * @param inputString The String object or string literal on which to perform the search.
+   * @param categoriesString Categories string
    */
   private _findProjectMatches(
     inputString: string,
@@ -130,7 +130,7 @@ export default class TimesheetMatchingEngine {
    * @param event - Event
    */
   private _matchEvent(event: EventObject) {
-    if (s.isBlank(event.title)) return event
+    if (s.isBlank(event.title)) return { ...event, error: { code: 'EVENT_NO_TITLE' } }
     const ignore = this._findIgnore(event)
     if (ignore === 'category') {
       return { ...event, isSystemIgnored: true }
