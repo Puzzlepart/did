@@ -62,7 +62,8 @@
     "dateRangeMonth": "Month",
     "monthForecastedText": "The month is forecasted with {{hours}}.",
     "monthConfirmedText": "A total of **{{hours}}** confirmed this month. You have confirmed {{confirmedPeriodsCount}} out of {{periodsCount}} periods. You need to be in the **Overview** view to do adjustments.",
-    "ignoreAllText": "Ignore all"
+    "ignoreAllText": "Ignore all",
+    "eventNoTitleErrorText": "Please enter a subject for this event. Events without a subject will not be included in the timesheet."
   },
   "projects": {
     "filterLabels": "Filter labels...",

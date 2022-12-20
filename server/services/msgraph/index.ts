@@ -252,27 +252,28 @@ class MSGraphService {
           endDateTime: endDateTimeIso
         }
         const client = await this._getClient()
-        const { value } = (await client
-          .api('/me/calendar/calendarView')
-          .query(query)
-          .select([
-            'id',
-            'subject',
-            'body',
-            'start',
-            'end',
-            'categories',
-            'webLink',
-            'isOrganizer'
-          ])
-          .filter(
-            // eslint-disable-next-line quotes
-            "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
-          )
-          .orderby('start/dateTime asc')
-          .top(500)
-          .get()) as { value: any[] }
-        return value.filter((event) => !!event.subject)
+        return (
+          await client
+            .api('/me/calendar/calendarView')
+            .query(query)
+            .select([
+              'id',
+              'subject',
+              'body',
+              'start',
+              'end',
+              'categories',
+              'webLink',
+              'isOrganizer'
+            ])
+            .filter(
+              // eslint-disable-next-line quotes
+              "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
+            )
+            .orderby('start/dateTime asc')
+            .top(500)
+            .get()
+        ).value
       }, cacheOptions)
       return (
         events

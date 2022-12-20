@@ -62,7 +62,8 @@
     "dateRangeMonth": "Måned",
     "monthForecastedText": "Måneden er prognosert med {{hours}}.",
     "monthConfirmedText": "Totalt **{{hours}}** bekreftet denne måneden. Du har bekreftet {{confirmedPeriodsCount}} av {{periodsCount}} perioder. Du må være i **Oversikt**-visningen for å gjøre justeringer.",
-    "ignoreAllText": "Ignorer alle"
+    "ignoreAllText": "Ignorer alle",
+    "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten."
   },
   "projects": {
     "filterLabels": "Filtrer merkelapper...",
