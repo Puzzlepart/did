@@ -19,7 +19,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) {}
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -118,16 +118,28 @@ export default class TimesheetMatchingEngine {
     )
   }
 
+
   /**
-   * Checks for project match in event
+   * The method takes an event object as its parameter. It first checks if 
+   * the event should be ignored based on certain criteria, and if so, 
+   * it returns the event object with a property indicating that it is system-ignored. 
+   * Otherwise, it creates a search string by concatenating the event's title, body, 
+   * and categories in upper case, and uses this search string to find project matches. 
+   * If there are matches, it sets the customer and project properties of the event 
+   * object to the corresponding customer and project objects. If no matches are found, 
+   * but the event should be ignored based on the body of the event, it returns the event 
+   * object with a property indicating that it is system-ignored. If no matches are found 
+   * and the event should not be ignored, it searches the entire search string for matches 
+   * in non-strict/soft mode and sets the project property of the event object to the 
+   * matching project object. If a customer is found but no project is found, 
+   * it looks for project suggestions based on the customer and a project key. 
+   * Finally, it sets the labels property of the event object to the labels 
+   * that are found based on the categories of the event and checks if the event is inactive. 
+   * It also fixes the duration of the event if necessary and returns the modified event object.
    *
-   * 1. Checks `category`, `title` and `description` for tokens
-   * 2. Checks `title` and `description` for key without any brackets/parantheses
-   * 3. If we found token matches in `searchString` or `categoriesString`
-   * We look through the matches and check if they match against
-   * a project
-   *
-   * @param event - Event
+   * @param event - The event object to be matched.
+   * 
+   * @returns The modified event object with customer, project, labels, and possibly other properties set.
    */
   private _matchEvent(event: EventObject) {
     const ignore = this._findIgnore(event)
@@ -138,11 +150,18 @@ export default class TimesheetMatchingEngine {
     const searchString = [event.title, event.body, categoriesString]
       .join('|')
       .toUpperCase()
-    const matches = this._findProjectMatches(searchString, categoriesString)
+
+    // Find project matches based on the search string
+    const projectMatches = this._findProjectMatches(searchString, categoriesString)
+
     let projectKey: string
 
-    if (!_.isEmpty(matches)) {
-      for (const match of matches) {
+    // We check if title is blank, and return an error
+    if (s.isBlank(event.title) && !ignore)
+      return { ...event, error: { code: 'EVENT_NO_TITLE' } }
+
+    else if (!_.isEmpty(projectMatches)) {
+      for (const match of projectMatches) {
         event.customer = _.find(
           this._data.customers,
           (c) => match.customerKey === c.key
@@ -163,9 +182,6 @@ export default class TimesheetMatchingEngine {
       return { ...event, isSystemIgnored: true }
     }
 
-    // We check if title is blank, and return an error
-    else if (s.isBlank(event.title))
-      return { ...event, error: { code: 'EVENT_NO_TITLE' } }
     // We search the whole searchString for match in non-strict/soft mode
     else {
       const softMatches = this._searchString(searchString, false)
@@ -180,16 +196,19 @@ export default class TimesheetMatchingEngine {
       )
     }
 
-    // We look for project suggestions in case of e.g. typo
+    // If a customer is found but no project is found, look for project 
+    // suggestions based on the customer and a project key
     if (event.customer && !event.project) {
-      event.suggestedProject = this._findProjectSuggestion(
-        event.customer,
-        projectKey
-      )
+      event.suggestedProject = this._findProjectSuggestion(event.customer, projectKey)
     }
 
+    // Set the labels property of the event object based on the categories of the event
     event.labels = this._findLabels(event.categories)
+
+    // Check if the event is inactive
     event = this._checkInactive(event)
+
+    // Fix the duration of the event if necessary
     event = this._fixDuration(event)
     return event
   }
