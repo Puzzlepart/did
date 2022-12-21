@@ -12,7 +12,11 @@ export function createTeamsConversationLink(
   message: string,
   topicName?: string
 ): string {
-  const parameters = { users: users.join(','), topicName, message }
+  const parameters: Record<string, string> = {
+    users: users.join(','),
+    topicName,
+    message
+  }
   const queryString = Object.keys(parameters)
     .map((key) => parameters[key] && `${key}=${parameters[key]}`)
     .filter(Boolean)

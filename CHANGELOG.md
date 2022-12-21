@@ -17,48 +17,92 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
-		* [Fixed](#fixed)
-	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
+	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added)
-		* [Fixed](#fixed-1)
+		* [Fixed](#fixed)
 		* [Changed](#changed)
-	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
-		* [Added](#added-1)
+	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
+		* [Fixed](#fixed-1)
+	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
 		* [Fixed](#fixed-2)
-		* [Changed](#changed-1)
-	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
-		* [Added](#added-2)
+	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
 		* [Fixed](#fixed-3)
+	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
+		* [Added](#added-1)
+		* [Fixed](#fixed-4)
+		* [Changed](#changed-1)
+	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
+		* [Added](#added-2)
+		* [Fixed](#fixed-5)
 		* [Changed](#changed-2)
+	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
+		* [Added](#added-3)
+		* [Fixed](#fixed-6)
+		* [Changed](#changed-3)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
-		* [Added](#added-3)
-		* [Fixed](#fixed-4)
-	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
 		* [Added](#added-4)
-		* [Fixed](#fixed-5)
+		* [Fixed](#fixed-7)
+	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
+		* [Added](#added-5)
+		* [Fixed](#fixed-8)
 	* [➤ 0.6.0 - N/A](#-060---na)
 	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
-		* [Added](#added-5)
-		* [Fixed](#fixed-6)
-	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
 		* [Added](#added-6)
-		* [Fixed](#fixed-7)
-		* [Fixed](#fixed-8)
-	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
-		* [Added](#added-7)
 		* [Fixed](#fixed-9)
-	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
+		* [Added](#added-7)
 		* [Fixed](#fixed-10)
-	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+		* [Fixed](#fixed-11)
+	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
 		* [Added](#added-8)
+		* [Fixed](#fixed-12)
+	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+		* [Fixed](#fixed-13)
+	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+		* [Added](#added-9)
 </details>
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0114---21122022)
+
+## ➤ 0.11.4 - 21.12.2022
+
+### Added
+- Visualize if a day is a public holiday [#1064](https://github.com/Puzzlepart/did/issues/1064)
+
+### Fixed
+- Fixed an issue with Timesheet navigation that makes it sometimes skip a year [#1028](https://github.com/Puzzlepart/did/issues/1028)
+- Fixed an issue with submit commands when there's no submit actions available [#1070](https://github.com/Puzzlepart/did/issues/1070)
+
+### Changed
+- Improved Project and Customer pages [#1069](https://github.com/Puzzlepart/did/pull/1069)
+- Visual upgrade for lists [#1076](https://github.com/Puzzlepart/did/pull/1076)
+- Adjustments to calculation/estimation of vacation [#1080](https://github.com/Puzzlepart/did/pull/1080)
+- Events without subject/title is now visible to the end user and displayed as an error that needs to be resolved before submitting [#1082](https://github.com/Puzzlepart/did/issues/1082)
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0113---25112022)
+
+## ➤ 0.11.3 - 25.11.2022
+
+### Fixed
+- Fixed issue with user reports [#1077](https://github.com/Puzzlepart/did/issues/1077)
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0112---18112022)
+
+## ➤ 0.11.2 - 18.11.2022
+
+### Fixed
+- Fixed issue with rounding of events [#1065](https://github.com/Puzzlepart/did/issues/1065)
+
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0111---18112022)
 
 ## ➤ 0.11.1 - 18.11.2022
+
 ### Fixed
 - Fixed issues with retrieving customers affecting Project creation etc [#1062](https://github.com/Puzzlepart/did/issues/1062)
 
@@ -67,6 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0110---16112022)
 
 ## ➤ 0.11.0 - 16.11.2022
+
 ### Added
 - Project code as filter to Reports [#978](https://github.com/Puzzlepart/did/issues/978)
 - Added permission scope LIST_USERS [#968](https://github.com/Puzzlepart/did/issues/968)

@@ -3,10 +3,10 @@ import { useMap } from 'hooks'
 import color from 'randomcolor'
 import { useEffect } from 'react'
 import { LabelInput } from 'types'
-import { toMap } from 'utils'
+import { convertToMap } from 'utils/convertToMap'
 import { ILabelFormProps } from '.'
 
-const INITIAL_MODEL = toMap<keyof LabelInput>({
+const INITIAL_MODEL = convertToMap<keyof LabelInput>({
   name: '',
   description: '',
   color: color({
@@ -18,7 +18,7 @@ export function useLabelModel(props: ILabelFormProps) {
   const map = useMap<keyof LabelInput, LabelInput>(new Map())
 
   useEffect(() => {
-    if (props.edit) map.$set(toMap(props.edit))
+    if (props.edit) map.$set(convertToMap(props.edit))
   }, [props.edit])
 
   useEffect(() => {

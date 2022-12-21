@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Pages](../modules/pages.md) / ITimesheetParameters
+[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / ITimesheetParameters
 
 # Interface: ITimesheetParameters
 
@@ -9,10 +9,8 @@
 ### Properties
 
 - [dateRange](pages.itimesheetparameters.md#daterange)
-- [month](pages.itimesheetparameters.md#month)
+- [startDate](pages.itimesheetparameters.md#startdate)
 - [view](pages.itimesheetparameters.md#view)
-- [week](pages.itimesheetparameters.md#week)
-- [year](pages.itimesheetparameters.md#year)
 
 ## Properties
 
@@ -24,11 +22,11 @@ Defined in: [client/pages/Timesheet/types.ts:69](https://github.com/Puzzlepart/d
 
 ___
 
-### month
+### startDate
 
-• **month**: *string*
+• **startDate**: *string*
 
-Defined in: [client/pages/Timesheet/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L72)
+Defined in: [client/pages/Timesheet/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L71)
 
 ___
 
@@ -37,19 +35,3 @@ ___
 • **view**: *string*
 
 Defined in: [client/pages/Timesheet/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L70)
-
-___
-
-### week
-
-• **week**: *string*
-
-Defined in: [client/pages/Timesheet/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L71)
-
-___
-
-### year
-
-• **year**: *string*
-
-Defined in: [client/pages/Timesheet/types.ts:73](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L73)

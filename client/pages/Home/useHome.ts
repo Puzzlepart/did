@@ -2,17 +2,15 @@ import { useAppContext } from 'AppContext'
 import { useLocation } from 'react-router-dom'
 
 /**
- * @ignore
+ * Component logic for `Home`
  */
 export function useHome() {
   const { user, subscription } = useAppContext()
   const location = useLocation<{ prevPath: string }>()
-  const urlParameters = new URLSearchParams(document.location.search)
-  const error = urlParameters.get('name') && {
-    name: urlParameters.get('name'),
-    message: urlParameters.get('message'),
-    icon: urlParameters.get('icon')
-  }
+  const urlSearchParameters = new URLSearchParams(document.location.search)
+  const error =
+    urlSearchParameters.get('error') &&
+    JSON.parse(atob(urlSearchParameters.get('error')))
   const redirectPage =
     user.startPage &&
     user.startPage !== '/' &&
@@ -23,5 +21,5 @@ export function useHome() {
     error,
     subscription,
     redirectPage
-  }
+  } as const
 }

@@ -4,7 +4,12 @@ import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../../services/mongo'
 import { environment } from '../../../utils'
-import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
+import {
+  NO_OID_FOUND,
+  TENANT_NOT_ENROLLED,
+  USER_ACCOUNT_DISABLED,
+  USER_NOT_ENROLLED
+} from '../errors'
 import { synchronizeUserProfile } from './synchronizeUserProfile'
 
 /**
@@ -17,7 +22,7 @@ import { synchronizeUserProfile } from './synchronizeUserProfile'
  *
  * @param mcl - Mongo client
  * @param profile - User profile object
- * @param tokenParams - Token params
+ * @param tokenParameters - Token params
  * @param done - Done callback
  */
 export const onVerifySignin = async (
@@ -32,9 +37,7 @@ export const onVerifySignin = async (
   try {
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
 
-    if (!userId) {
-      throw NO_OID_FOUND
-    }
+    if (!userId) throw NO_OID_FOUND
 
     const subscription = await subSrv.getById(subId)
     if (!subscription) {
@@ -48,11 +51,11 @@ export const onVerifySignin = async (
 
     let user_ = await userSrv.getById(userId)
 
-    if (!user_ && !isOwner) {
-      throw USER_NOT_ENROLLED
-    }
+    if (!user_ && !isOwner) throw USER_NOT_ENROLLED
 
-    if (!user_ && isOwner) {
+    const shouldAddUser = !user_ && isOwner
+
+    if (shouldAddUser) {
       user_ = {
         id: userId,
         mail,
@@ -62,6 +65,9 @@ export const onVerifySignin = async (
       }
       await userSrv.addUser(user_)
     }
+
+    if (user_?.accountEnabled === false) throw USER_ACCOUNT_DISABLED
+
     const user: any = {
       ...user_,
       subscription,

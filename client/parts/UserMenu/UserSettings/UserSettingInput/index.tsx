@@ -11,6 +11,7 @@ import { SubText } from 'components'
 import React, { FC, useContext } from 'react'
 import { UserSettingsContext } from '../context'
 import { IUserSetting, UserSettingInputType } from '../types'
+import { onRenderOption } from './onRenderOption'
 import styles from './UserSettingInput.module.scss'
 
 /**
@@ -30,6 +31,7 @@ export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
             onChange={(_event, option) =>
               onUpdate(setting, option.key.toString())
             }
+            onRenderOption={onRenderOption}
           />
         )
       }

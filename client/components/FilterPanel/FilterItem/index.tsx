@@ -1,31 +1,23 @@
 /* eslint-disable tsdoc/syntax */
 import { Checkbox, SearchBox } from '@fluentui/react'
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import s from 'underscore.string'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
+import { useFilterItem } from './useFilterItem'
 
 /**
  * @category Function Component
  */
 export const FilterItem: FC<IFilterItemProps> = (props) => {
   const { t } = useTranslation()
-  const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
-  const [searchTerm, onSearch] = useState<string>('')
-  const [showCount, setShowCount] = useState(props.shortListCount || 10)
-
-  const items = useMemo(() => {
-    return props.filter.items.filter((item) =>
-      s.isBlank(searchTerm)
-        ? true
-        : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
-    )
-  }, [searchTerm, props.filter.items])
-
+  const { onSearch, items, showCount, setShowCount, selectedKeys } =
+    useFilterItem(props)
   return (
     <div className={styles.root}>
-      <div className={styles.name}>{props.filter.name}</div>
+      <div className={styles.header} hidden={props.hideHeader}>
+        <span>{props.filter.name}</span>
+      </div>
       <div className={styles.searchBox} hidden={props.filter.items.length < 10}>
         <SearchBox
           placeholder={t('common.searchPlaceholder')}

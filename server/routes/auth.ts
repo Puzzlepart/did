@@ -22,10 +22,6 @@ type AuthProvider = 'azuread-openidconnect' | 'google'
  *
  * @remarks Regenerates the session before authenticating with the provided
  * strategy using `request.session.regenerate`.
- *
- * @param request - Request
- * @param response - Response
- * @param next - Next function
  */
 export const signInHandler =
   (strategy: AuthProvider, options: passport.AuthenticateOptions) =>
@@ -38,10 +34,6 @@ export const signInHandler =
 
 /**
  * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
- *
- * @param request - Request
- * @param response - Response
- * @param next - Next function
  */
 export const authCallbackHandler =
   (strategy: AuthProvider) =>
@@ -53,9 +45,7 @@ export const authCallbackHandler =
           url.format({
             pathname: '/',
             query: {
-              name: _error?.name,
-              message: _error?.message,
-              icon: _error?.icon
+              error: _error?.toString()
             }
           })
         )
@@ -78,7 +68,6 @@ export const authCallbackHandler =
  *
  * @param request - Request
  * @param response - Response
- * @param next - Next function
  */
 export const signOutHandler = (request: Request, response: Response) => {
   request.session.destroy(() => {

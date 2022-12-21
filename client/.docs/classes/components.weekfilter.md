@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Components](../modules/components.md) / WeekFilter
+[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / WeekFilter
 
 # Class: WeekFilter
 
@@ -25,6 +25,7 @@
 
 ### Methods
 
+- [fromColumn](components.weekfilter.md#fromcolumn)
 - [initialize](components.weekfilter.md#initialize)
 - [setDefaults](components.weekfilter.md#setdefaults)
 
@@ -53,7 +54,7 @@ Defined in: [client/components/FilterPanel/Filters/WeekFilter.ts:10](https://git
 
 ### keyFieldName
 
-• **keyFieldName**: *string*
+• `Optional` **keyFieldName**: *string*
 
 Inherited from: [BaseFilter](components.basefilter.md).[keyFieldName](components.basefilter.md#keyfieldname)
 
@@ -61,7 +62,7 @@ ___
 
 ### name
 
-• **name**: *string*
+• `Optional` **name**: *string*
 
 Inherited from: [BaseFilter](components.basefilter.md).[name](components.basefilter.md#name)
 
@@ -73,7 +74,7 @@ ___
 
 Inherited from: [BaseFilter](components.basefilter.md).[selectedKeys](components.basefilter.md#selectedkeys)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L10)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
 
 ___
 
@@ -84,6 +85,24 @@ ___
 Inherited from: [BaseFilter](components.basefilter.md).[valueFieldName](components.basefilter.md#valuefieldname)
 
 ## Methods
+
+### fromColumn
+
+▸ **fromColumn**(`column`: IColumn): [*WeekFilter*](components.weekfilter.md)
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`column` | IColumn |
+
+**Returns:** [*WeekFilter*](components.weekfilter.md)
+
+Inherited from: [BaseFilter](components.basefilter.md)
+
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L28)
+
+___
 
 ### initialize
 
@@ -123,4 +142,4 @@ this
 
 Inherited from: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L50)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L58)

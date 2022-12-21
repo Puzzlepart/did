@@ -1,13 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'
+import { IListContext } from './context'
 import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
 import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 
 /**
- * Component logic hook for `<List />`
+ * Component logic hook for `<List />
+`
  *
  * @param props - Props
  *
@@ -20,8 +23,10 @@ export function useList(props: IListProps) {
     searchTerm: ''
   })
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch(PROPS_UPDATED(props)), [props.items])
+  useEffect(
+    () => dispatch(PROPS_UPDATED(props)),
+    [props.items, props.filterValues]
+  )
 
   const selection = useMemo(() => {
     if (!props.selectionProps) return null
@@ -37,20 +42,25 @@ export function useList(props: IListProps) {
     })
   }, [props.selectionProps])
 
-  const [groups, items] = useListGroups([...state.items], props.listGroupProps)
+  const context: IListContext = { props, state, dispatch }
+
+  const [groups, items] = useListGroups(context)
 
   const listProps = useListProps({
-    props,
-    state,
-    dispatch,
+    context,
     groups,
     items,
     selection
   })
 
-  return {
-    listProps,
-    state,
-    dispatch
-  }
+  useEffect(() => {
+    if (props.onFilter) {
+      props.onFilter({
+        filters: state.filters,
+        isFiltered: state.items.length !== state.origItems.length
+      })
+    }
+  }, [state.items])
+
+  return { listProps, context } as const
 }

@@ -1,57 +1,22 @@
-import { DefaultButton, IContextualMenuItem, TextField } from '@fluentui/react'
+import { ActionButton, TextField } from '@fluentui/react'
 import { IconPicker } from 'components'
-import { useMap } from 'hooks'
-import React, { FC, useContext, useState } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
-import { toMap } from 'utils/toMap'
-import { ReportsContext } from '../context'
-import { ADD_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
-
-/**
- * @ignore
- */
-const INITIAL_MODEL = toMap({
-  key: '',
-  text: '',
-  iconProps: { iconName: 'Page' }
-})
+import { useSaveFilterForm } from './useSaveFilterForm'
 
 /**
  * @category Reports
  */
 export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(ReportsContext)
-  const { $, set, $set, value } = useMap<
-    keyof IContextualMenuItem,
-    IContextualMenuItem
-  >(INITIAL_MODEL)
-  const [inputVisible, setInputVisible] = useState(false)
-
-  /**
-   * On save filter
-   *
-   * @remarks Stringifies the saved filters (including the new one)
-   * and sends it to the mutation `updateUserConfiguration`.
-   */
-  function onSave(): void {
-    if (!inputVisible) {
-      setInputVisible(true)
-      return
-    }
-    dispatch(ADD_FILTER({ model: $ as IContextualMenuItem }))
-    $set(INITIAL_MODEL)
-  }
+  const { inputVisible, setInputVisible, value, set, onSave } =
+    useSaveFilterForm()
 
   return (
-    <div
-      className={styles.root}
-      style={props?.style}
-      hidden={!state.isFiltered || !!state.filter?.text}
-    >
+    <div className={styles.root} style={props?.style}>
       <div hidden={!inputVisible}>
         <TextField
           value={value('text')}
@@ -71,17 +36,21 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
       </div>
       <div className={styles.footer}>
         <div className={styles.saveBtn}>
-          <DefaultButton
+          <ActionButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
-            disabled={value('text')?.length < 2 && inputVisible}
+            disabled={
+              (value('text')?.length < 2 && inputVisible) || props.disabled
+            }
+            iconProps={{ iconName: 'SaveTemplate' }}
             onClick={onSave}
           />
         </div>
         <div hidden={!inputVisible}>
-          <DefaultButton
+          <ActionButton
             className={styles.saveBtn}
             text={t('reports.cancelSaveFilterText')}
+            iconProps={{ iconName: 'Cancel' }}
             onClick={() => setInputVisible(false)}
           />
         </div>

@@ -43,6 +43,9 @@ export class SubscriptionVacationSettings {
   @Field({ nullable: true, defaultValue: 25 })
   totalDays?: number
 
+  @Field({ nullable: true, defaultValue: 'planned' })
+  calculationType?: string
+
   @Field({ nullable: true })
   eventCategory?: string
 }
@@ -144,6 +147,9 @@ export class SubscriptionADSyncSettingsInput {
 export class SubscriptionVacationSettingsInput {
   @Field({ nullable: true, defaultValue: 25 })
   totalDays?: number
+
+  @Field({ nullable: true, defaultValue: 'planned' })
+  calculationType?: string
 
   @Field({ nullable: true })
   eventCategory?: string

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import { DateRangeType, IColumn } from '@fluentui/react'
 import { ProjectTooltip } from 'components'
 import React from 'react'
@@ -18,23 +19,38 @@ export function useColumns(): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  let columns = []
+  let columns: IColumn[] = []
   switch (state.dateRangeType) {
     case DateRangeType.Week:
       {
-        columns = [...Array.from({ length: 7 }).keys()].map<IColumn>(
-          (index) => {
-            const day = state.dateRange.getDay(index)
-            return {
-              key: day.format('YYYY-MM-DD'),
-              fieldName: day.format('YYYY-MM-DD'),
-              name: s.capitalize(day.format('ddd DD')),
-              minWidth: 70,
-              maxWidth: 70,
-              onRender
+        for (
+          let i = state.selectedPeriod?.startDateIndex;
+          i <= state.selectedPeriod?.endDateIndex;
+          i++
+        ) {
+          const day = state.dateRange.getDay(i)
+          columns.push({
+            key: day.format('YYYY-MM-DD'),
+            fieldName: day.format('YYYY-MM-DD'),
+            name: s.capitalize(day.format('ddd DD')),
+            minWidth: 70,
+            maxWidth: 70,
+            onRender,
+            onRenderHeader: (props, defaultRender) => {
+              const holiday = day.isNationalHoliday(
+                state.selectedPeriod?.holidays
+              )
+              return (
+                <div
+                  title={holiday?.name}
+                  style={{ color: holiday && '#CC0000' }}
+                >
+                  {defaultRender(props)}
+                </div>
+              )
             }
-          }
-        )
+          })
+        }
       }
       break
     case DateRangeType.Month:

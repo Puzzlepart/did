@@ -10,6 +10,7 @@ import {
   CLEAR_IGNORES,
   CLEAR_MANUAL_MATCH,
   DATA_UPDATED,
+  IGNORE_ALL,
   IGNORE_EVENT,
   MANUAL_MATCH,
   NEXT_PERIOD,
@@ -43,19 +44,17 @@ export function createTimesheetReducer(
             }
           : null
         if (payload.query.data) {
-          const urlPeriodId = [
-            parameters.url.week,
-            parameters.url.month,
-            parameters.url.year
-          ].join('_')
-          const selectedPeriodId = state.selectedPeriod?.id || urlPeriodId
           state.periods = payload.query.data.periods.map(
             (period: TimesheetPeriodObject) =>
               new TimesheetPeriod().initialize(period)
           )
           const lastNav = _.last(state.navHistory)
           state.selectedPeriod =
-            _.find(state.periods, (p) => p.id === selectedPeriodId) ||
+            _.find(state.periods, (p) => p.id === state.selectedPeriod?.id) ??
+            _.find(
+              state.periods,
+              (p) => p.startDate === parameters.url.startDate
+            ) ??
             (lastNav === 'PREVIOUS_PERIOD'
               ? _.last(state.periods)
               : _.first(state.periods))
@@ -186,6 +185,12 @@ export function createTimesheetReducer(
       })
       .addCase(CLEAR_IGNORES, (state) => {
         state.selectedPeriod.clearIgnoredEvents()
+        state.periods = state.periods.map((p) =>
+          p.id === state.selectedPeriod.id ? state.selectedPeriod : p
+        )
+      })
+      .addCase(IGNORE_ALL, (state) => {
+        state.selectedPeriod.ignoreAllEvents()
         state.periods = state.periods.map((p) =>
           p.id === state.selectedPeriod.id ? state.selectedPeriod : p
         )

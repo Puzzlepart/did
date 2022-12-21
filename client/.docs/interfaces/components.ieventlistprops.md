@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Components](../modules/components.md) / IEventListProps
+[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IEventListProps
 
 # Interface: IEventListProps
 
@@ -20,13 +20,17 @@
 - [columns](components.ieventlistprops.md#columns)
 - [commandBar](components.ieventlistprops.md#commandbar)
 - [dateFormat](components.ieventlistprops.md#dateformat)
+- [defaultSearchBoxWidth](components.ieventlistprops.md#defaultsearchboxwidth)
 - [enableShimmer](components.ieventlistprops.md#enableshimmer)
-- [filters](components.ieventlistprops.md#filters)
+- [exportFileName](components.ieventlistprops.md#exportfilename)
+- [filterPanelActions](components.ieventlistprops.md#filterpanelactions)
+- [filterValues](components.ieventlistprops.md#filtervalues)
 - [height](components.ieventlistprops.md#height)
 - [hidden](components.ieventlistprops.md#hidden)
 - [items](components.ieventlistprops.md#items)
 - [listGroupProps](components.ieventlistprops.md#listgroupprops)
 - [listGroupRenderProps](components.ieventlistprops.md#listgrouprenderprops)
+- [onFilter](components.ieventlistprops.md#onfilter)
 - [resizableColumns](components.ieventlistprops.md#resizablecolumns)
 - [searchBox](components.ieventlistprops.md#searchbox)
 - [selectionProps](components.ieventlistprops.md#selectionprops)
@@ -58,7 +62,7 @@ Name | Type |
 
 Inherited from: [IListProps](components.ilistprops.md).[columnHeaderProps](components.ilistprops.md#columnheaderprops)
 
-Defined in: [client/components/List/types.ts:124](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L124)
+Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
 
 ___
 
@@ -74,13 +78,13 @@ ___
 
 ### columns
 
-• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<[*IListColumnData*](components.ilistcolumndata.md)\>[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)[]
 
 Columns
 
 Inherited from: [IListProps](components.ilistprops.md).[columns](components.ilistprops.md#columns)
 
-Defined in: [client/components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
+Defined in: [client/components/List/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L96)
 
 ___
 
@@ -92,7 +96,7 @@ Command bar props
 
 Inherited from: [IListProps](components.ilistprops.md).[commandBar](components.ilistprops.md#commandbar)
 
-Defined in: [client/components/List/types.ts:109](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L109)
+Defined in: [client/components/List/types.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L131)
 
 ___
 
@@ -106,6 +110,20 @@ Defined in: [client/components/EventList/types.tsx:16](https://github.com/Puzzle
 
 ___
 
+### defaultSearchBoxWidth
+
+• `Optional` **defaultSearchBoxWidth**: *number*
+
+Default search box width
+
+**`default`** 500
+
+Inherited from: [IListProps](components.ilistprops.md).[defaultSearchBoxWidth](components.ilistprops.md#defaultsearchboxwidth)
+
+Defined in: [client/components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
+
+___
+
 ### enableShimmer
 
 • `Optional` **enableShimmer**: *boolean*
@@ -114,21 +132,44 @@ Enable shimmer (normally while loading)
 
 Inherited from: [IListProps](components.ilistprops.md).[enableShimmer](components.ilistprops.md#enableshimmer)
 
-Defined in: [client/components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)
+Defined in: [client/components/List/types.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L101)
 
 ___
 
-### filters
+### exportFileName
 
-• `Optional` **filters**: *object*
+• `Optional` **exportFileName**: *string*
 
-Filters
+Export file name. Set this property to enable Excel export of the
+list data.
 
-#### Type declaration:
+Inherited from: [IListProps](components.ilistprops.md).[exportFileName](components.ilistprops.md#exportfilename)
 
-Inherited from: [IListProps](components.ilistprops.md).[filters](components.ilistprops.md#filters)
+Defined in: [client/components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
 
-Defined in: [client/components/List/types.ts:114](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L114)
+___
+
+### filterPanelActions
+
+• `Optional` **filterPanelActions**: *Element* \| *Element*[]
+
+Filter panel actions
+
+Inherited from: [IListProps](components.ilistprops.md).[filterPanelActions](components.ilistprops.md#filterpanelactions)
+
+Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+
+___
+
+### filterValues
+
+• `Optional` **filterValues**: *Record*<string, any\>
+
+Filter values
+
+Inherited from: [IListProps](components.ilistprops.md).[filterValues](components.ilistprops.md#filtervalues)
+
+Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
 
 ___
 
@@ -140,7 +181,7 @@ Fixed height
 
 Inherited from: [IListProps](components.ilistprops.md).[height](components.ilistprops.md#height)
 
-Defined in: [client/components/List/types.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L84)
+Defined in: [client/components/List/types.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L106)
 
 ___
 
@@ -152,7 +193,7 @@ Hidden
 
 Inherited from: [IListProps](components.ilistprops.md).[hidden](components.ilistprops.md#hidden)
 
-Defined in: [client/components/List/types.ts:119](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L119)
+Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
 
 ___
 
@@ -164,7 +205,7 @@ Items
 
 Inherited from: [IListProps](components.ilistprops.md).[items](components.ilistprops.md#items)
 
-Defined in: [client/components/List/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L69)
+Defined in: [client/components/List/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L91)
 
 ___
 
@@ -176,7 +217,7 @@ Group props
 
 Inherited from: [IListProps](components.ilistprops.md).[listGroupProps](components.ilistprops.md#listgroupprops)
 
-Defined in: [client/components/List/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L99)
+Defined in: [client/components/List/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L121)
 
 ___
 
@@ -188,7 +229,33 @@ Group render props
 
 Inherited from: [IListProps](components.ilistprops.md).[listGroupRenderProps](components.ilistprops.md#listgrouprenderprops)
 
-Defined in: [client/components/List/types.ts:104](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L104)
+Defined in: [client/components/List/types.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L126)
+
+___
+
+### onFilter
+
+• `Optional` **onFilter**: (`filterState`: [*ListFilterState*](../modules/components.md#listfilterstate)) => *void*
+
+On filter callback returning `filters` and `isFiltered`.
+
+#### Type declaration:
+
+▸ (`filterState`: [*ListFilterState*](../modules/components.md#listfilterstate)): *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`filterState` | [*ListFilterState*](../modules/components.md#listfilterstate) |
+
+**Returns:** *void*
+
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+
+Inherited from: [IListProps](components.ilistprops.md).[onFilter](components.ilistprops.md#onfilter)
+
+Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 ___
 
@@ -210,7 +277,7 @@ Search box props
 
 Inherited from: [IListProps](components.ilistprops.md).[searchBox](components.ilistprops.md#searchbox)
 
-Defined in: [client/components/List/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L89)
+Defined in: [client/components/List/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L111)
 
 ___
 
@@ -222,4 +289,4 @@ Selection
 
 Inherited from: [IListProps](components.ilistprops.md).[selectionProps](components.ilistprops.md#selectionprops)
 
-Defined in: [client/components/List/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L94)
+Defined in: [client/components/List/types.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L116)

@@ -7,40 +7,36 @@ import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { ICustomerFormProps } from './CustomerForm/types'
 import { CustomerList } from './CustomerList'
-import { useCustomers } from './hooks/useCustomers'
-import { CHANGE_VIEW } from './reducer/actions'
-import { CustomersView } from './types'
+import { CHANGE_TAB } from './reducer/actions'
+import { CustomersTab } from './types'
+import { useCustomers } from './useCustomers'
 
 /**
  * @category Function Component
  */
 export const Customers: TabComponent<ICustomerFormProps> = () => {
   const { t } = useTranslation()
-  const { state, dispatch, context, view } = useCustomers()
+  const { context, view, renderDetails } = useCustomers()
 
   return (
     <CustomersContext.Provider value={context}>
-      <TabContainer
-        defaultSelectedKey={view}
-        onTabChanged={(itemKey) =>
-          dispatch(CHANGE_VIEW({ view: itemKey as CustomersView }))
-        }
-        styles={{ itemContainer: { paddingTop: 10 } }}
-      >
-        <CustomerList
-          itemKey='search'
-          headerText={t('common.search')}
-          itemIcon='FabricFolderSearch'
+      {renderDetails ? (
+        <CustomerDetails />
+      ) : (
+        <TabContainer
+          defaultSelectedKey={view}
+          onTabChanged={(tab: CustomersTab) =>
+            context.dispatch(CHANGE_TAB({ tab }))
+          }
         >
-          {state.selected && <CustomerDetails />}
-        </CustomerList>
-        <CustomerForm
-          itemKey='new'
-          headerText={t('customers.createNewText')}
-          itemIcon='AddTo'
-          permission={PermissionScope.MANAGE_CUSTOMERS}
-        />
-      </TabContainer>
+          <CustomerList itemKey='s' headerText={t('common.search')} />
+          <CustomerForm
+            itemKey='new'
+            headerText={t('customers.createNewText')}
+            permission={PermissionScope.MANAGE_CUSTOMERS}
+          />
+        </TabContainer>
+      )}
     </CustomersContext.Provider>
   )
 }

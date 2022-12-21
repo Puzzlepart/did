@@ -1,26 +1,27 @@
-import { Icon } from '@fluentui/react'
-import { SubText } from 'components'
+import { Breadcrumb, Shimmer } from '@fluentui/react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FC, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
-import { Actions } from '../Actions'
+import { Actions } from './Actions'
 import styles from './Header.module.scss'
+import { useHeader } from './useHeader'
 
 /**
  * @category Customers
  */
 export const Header: FC = () => {
-  const { state } = useContext(CustomersContext)
+  const { loading } = useContext(CustomersContext)
+  const { breadcrumb } = useHeader()
   return (
-    <div className={styles.root}>
-      <div className={styles.title}>
-        <div className={styles.iconContainer}>
-          <Icon iconName={state.selected.icon || 'Page'} />
-        </div>
-        <div className={styles.text}>{state.selected.name}</div>
-        <SubText text={state.selected.description} font='medium' />
+    <Shimmer
+      className={styles.root}
+      isDataLoaded={!loading}
+      styles={{ dataWrapper: { width: '100%', display: 'flex' } }}
+    >
+      <div className={styles.breadcrumb}>
+        <Breadcrumb {...breadcrumb} />
       </div>
       <Actions hidden={isMobile} />
-    </div>
+    </Shimmer>
   )
 }

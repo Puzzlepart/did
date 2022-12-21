@@ -9,7 +9,7 @@ import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD } from '../../reducer/actions'
 import styles from './Overview.module.scss'
 import { useAdditionalColumns } from './useAdditionalColumns'
-import { useGroups } from './useGroups'
+import { useListGroupProps } from './useListGroupProps'
 
 /**
  * @category Timesheet
@@ -18,7 +18,7 @@ export const Overview: TabComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const additionalColumns = useAdditionalColumns()
-  const listGroupProps = useGroups()
+  const listGroupProps = useListGroupProps()
   const className = [styles.root]
   if (isMobile) className.push(styles.mobile)
   switch (state.dateRangeType) {

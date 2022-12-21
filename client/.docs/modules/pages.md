@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / Pages
+[did-client - v0.11.4](../README.md) / Pages
 
 # Module: Pages
 
@@ -8,14 +8,14 @@ All are built using React Function components and Hooks.
 
 ## Table of contents
 
-### References
-
-- [useReportsQueries](pages.md#usereportsqueries)
-
 ### Namespaces
 
 - [Home](pages.home.md)
 - [Timesheet](pages.timesheet.md)
+
+### Other Enumerations
+
+- [GetEventsOption](../enums/pages.geteventsoption.md)
 
 ### Timesheet Enumerations
 
@@ -30,8 +30,8 @@ All are built using React Function components and Hooks.
 
 - [IProjectListProps](../interfaces/pages.iprojectlistprops.md)
 - [IProjectsContext](../interfaces/pages.iprojectscontext.md)
-- [IProjectsParameters](../interfaces/pages.iprojectsparameters.md)
 - [IProjectsState](../interfaces/pages.iprojectsstate.md)
+- [IProjectsUrlParameters](../interfaces/pages.iprojectsurlparameters.md)
 
 ### Reports Interfaces
 
@@ -94,6 +94,10 @@ All are built using React Function components and Hooks.
 
 - [Admin](pages.md#admin)
 
+### Other Functions
+
+- [useCommands](pages.md#usecommands)
+
 ### Reports Functions
 
 - [useCurrentMonthQuery](pages.md#usecurrentmonthquery)
@@ -101,12 +105,12 @@ All are built using React Function components and Hooks.
 - [useForecastQuery](pages.md#useforecastquery)
 - [useLastMonthQuery](pages.md#uselastmonthquery)
 - [useLastYearQuery](pages.md#uselastyearquery)
-- [useQueries](pages.md#usequeries)
+- [useReportsQueries](pages.md#usereportsqueries)
+- [useReportsQueryOptions](pages.md#usereportsqueryoptions)
 - [useSummaryQuery](pages.md#usesummaryquery)
 
 ### Reports Hooks Functions
 
-- [useReports](pages.md#usereports)
 - [useReportsQuery](pages.md#usereportsquery)
 - [useReportsReducer](pages.md#usereportsreducer)
 
@@ -119,12 +123,6 @@ All are built using React Function components and Hooks.
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
-
-## References
-
-### useReportsQueries
-
-Renames and exports: [useQueries](pages.md#usequeries)
 
 ## Timesheet Hooks Type aliases
 
@@ -158,7 +156,7 @@ ___
 
 • `Const` **Projects**: FC
 
-Defined in: [client/pages/Projects/Projects.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L15)
+Defined in: [client/pages/Projects/Projects.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L16)
 
 ___
 
@@ -273,7 +271,7 @@ ___
 
 • `Const` **Header**: FC
 
-Defined in: [client/pages/Projects/ProjectDetails/Header/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L12)
+Defined in: [client/pages/Projects/ProjectDetails/Header/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Header/index.tsx#L13)
 
 ___
 
@@ -281,7 +279,7 @@ ___
 
 • `Const` **Information**: FC
 
-Defined in: [client/pages/Projects/ProjectDetails/Information/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L13)
+Defined in: [client/pages/Projects/ProjectDetails/Information/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/Information/index.tsx#L14)
 
 ___
 
@@ -289,7 +287,7 @@ ___
 
 • `Const` **ProjectDetails**: FC
 
-Defined in: [client/pages/Projects/ProjectDetails/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/index.tsx#L14)
+Defined in: [client/pages/Projects/ProjectDetails/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/index.tsx#L13)
 
 ___
 
@@ -316,7 +314,7 @@ ___
 
 • `Const` **ProjectsContext**: *Context*<[*IProjectsContext*](../interfaces/pages.iprojectscontext.md)\>
 
-Defined in: [client/pages/Projects/context.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L18)
+Defined in: [client/pages/Projects/context.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L19)
 
 ___
 
@@ -342,7 +340,7 @@ ___
 
 • `Const` **SaveFilterForm**: *FC*<ISaveFilterFormProps\>
 
-Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L25)
+Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L13)
 
 ___
 
@@ -363,6 +361,18 @@ Defined in: [client/pages/Timesheet/context.ts:30](https://github.com/Puzzlepart
 **Returns:** *Element*
 
 Defined in: [client/pages/Admin/Admin.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Admin.tsx#L18)
+
+___
+
+## Other Functions
+
+### useCommands
+
+▸ **useCommands**(): ICommandBarProps
+
+**Returns:** ICommandBarProps
+
+Defined in: [client/pages/Reports/ReportsList/useCommands.tsx:71](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/ReportsList/useCommands.tsx#L71)
 
 ___
 
@@ -478,15 +488,34 @@ Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:84](https://github.
 
 ___
 
-### useQueries
+### useReportsQueries
 
-▸ **useQueries**(): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
+▸ **useReportsQueries**(): [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
 Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
 Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:182](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueries.ts#L182)
+
+___
+
+### useReportsQueryOptions
+
+▸ **useReportsQueryOptions**(`__namedParameters`: *Object*): IChoiceGroupOption[]
+
+Returns queries from `useReportsQueries` as choice group options
+to be used in `<ChoiceGroup />` component.
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *Object* |
+
+**Returns:** IChoiceGroupOption[]
+
+Defined in: [client/pages/Reports/hooks/useReportsQueryOptions.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQueryOptions.ts#L10)
 
 ___
 
@@ -504,40 +533,6 @@ Defined in: [client/pages/Reports/hooks/useReportsQueries.ts:160](https://github
 ___
 
 ## Reports Hooks Functions
-
-### useReports
-
-▸ **useReports**(): *object*
-
-Component logic for `<Reports />`
-
-* Get history using `useHistory`
-* Get URL params using `useParams`
-* Get queries using `useQueries`
-* Using reducer `useReportsReducer`
-* Using `useReportQuery`
-* Layout effect (`useLayoutEffect`) for updating URL
-  and executing the lazy query in `useReportQuery` when
-  changing query
-  when the query is reloaded
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`context` | *object* |
-`context.dispatch` | *Dispatch*<AnyAction\> |
-`context.state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
-`context.t` | *TFunction*<*translation*, undefined\> |
-`defaultSelectedKey` | *string* |
-`filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
-`onClearFilters` | *any* |
-`options` | *IChoiceGroupOption*[] |
-`queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
-
-Defined in: [client/pages/Reports/hooks/useReports.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L28)
-
-___
 
 ### useReportsQuery
 
@@ -557,7 +552,7 @@ Name | Type | Default value | Description |
 
 **Returns:** (`options?`: *QueryLazyOptions*<any\>) => *void*
 
-Defined in: [client/pages/Reports/hooks/useReportsQuery.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L17)
+Defined in: [client/pages/Reports/hooks/useReportsQuery.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L18)
 
 ___
 

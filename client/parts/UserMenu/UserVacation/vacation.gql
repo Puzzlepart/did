@@ -4,6 +4,7 @@ query UserVacation {
     used
     usedHours
     category
+    calculationType
     remaining
   }
 }

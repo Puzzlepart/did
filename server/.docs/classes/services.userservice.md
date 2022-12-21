@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / [Services](../modules/services.md) / UserService
+[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / UserService
 
 # Class: UserService
 
@@ -41,6 +41,7 @@ User service
 - [update](services.userservice.md#update)
 - [updateCurrentUserConfiguration](services.userservice.md#updatecurrentuserconfiguration)
 - [updateUser](services.userservice.md#updateuser)
+- [updateUsers](services.userservice.md#updateusers)
 
 ## Constructors
 
@@ -355,7 +356,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:158](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L158)
+Defined in: [services/mongo/user.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L173)
 
 ___
 
@@ -370,6 +371,24 @@ Update the specified user
 Name | Type | Description |
 :------ | :------ | :------ |
 `user` | [*User*](graphql.user.md) | User to update    |
+
+**Returns:** *Promise*<void\>
+
+Defined in: [services/mongo/user.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L155)
+
+___
+
+### updateUsers
+
+▸ **updateUsers**(`users`: [*User*](graphql.user.md)[]): *Promise*<void\>
+
+Update multiple users in bulk
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`users` | [*User*](graphql.user.md)[] | Users    |
 
 **Returns:** *Promise*<void\>
 

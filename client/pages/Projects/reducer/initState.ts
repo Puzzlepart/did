@@ -1,14 +1,19 @@
 import _ from 'underscore'
-import { IProjectsParameters, IProjectsState } from '../types'
+import { IProjectsState, IProjectsUrlParameters } from '../types'
 
 /**
- * Initialize state URL params
+ * Initialize state from URL parameters
  *
- * @param url - Params
+ * @param urlParameters - URL parameters
  */
-export const initState = (url: IProjectsParameters): IProjectsState => ({
-  view: _.contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
-  detailsTab: url.detailsTab,
-  projects: [],
-  outlookCategories: []
-})
+export default function initState(
+  urlParameters: IProjectsUrlParameters
+): IProjectsState {
+  return {
+    currentTab: _.contains(['s', 'm', 'new'], urlParameters.currentTab)
+      ? urlParameters.currentTab
+      : 's',
+    projects: [],
+    outlookCategories: []
+  }
+}

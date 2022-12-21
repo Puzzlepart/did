@@ -80,6 +80,38 @@ export function useSettingsConfiguration(): IUserSetting[] {
       max: 50,
       defaultValue: getUserConfiguration('vacation.totalDays')
     }),
+    UserSettingDropdown('vacation.calculationType', {
+      label: t('common.vacationCalculationTypeLabel'),
+      options: [
+        {
+          key: 'planned',
+          text: t('common.vacationCalculationTypePlanned'),
+          data: {
+            iconProps: {
+              iconName: 'DietPlanNotebook',
+              styles: { root: { fontSize: 18, color: 'blue' } }
+            },
+            description: t('common.vacationCalculationTypePlannedDescription')
+          }
+        },
+        {
+          key: 'confirmed',
+          text: t('common.vacationCalculationTypeConfirmed'),
+          data: {
+            iconProps: {
+              iconName: 'WaitlistConfirm',
+              styles: { root: { fontSize: 18, color: 'green' } }
+            },
+            description: t('common.vacationCalculationTypeConfirmedDescription')
+          }
+        }
+      ],
+      defaultSelectedKey: getUserConfiguration('vacation.calculationType'),
+      styles: {
+        dropdownItem: { minHeight: 60 },
+        dropdownItemSelected: { minHeight: 60 }
+      }
+    }),
     UserSettingToggle('timesheet.roundUpEvents', {
       label: t('common.roundUpEventsLabel'),
       description: t('common.roundUpEventsDescription'),

@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / Components
+[did-client - v0.11.4](../README.md) / Components
 
 # Module: Components
 
@@ -8,8 +8,11 @@ Reusable React Function components.
 
 ### Namespaces
 
+- [FilterPanel](components.filterpanel.md)
 - [LabelPicker](components.labelpicker.md)
 - [List](components.list.md)
+- [SubText](components.subtext.md)
+- [TabContainer](components.tabcontainer.md)
 
 ### FilterPanel Classes
 
@@ -68,7 +71,9 @@ Reusable React Function components.
 
 ### Other Type aliases
 
+- [ColumnHeaderContextMenu](components.md#columnheadercontextmenu)
 - [IHotkeyModal](components.md#ihotkeymodal)
+- [ListFilterState](components.md#listfilterstate)
 - [TabComponent](components.md#tabcomponent)
 - [TabContainerComponent](components.md#tabcontainercomponent)
 - [UserMessageType](components.md#usermessagetype)
@@ -144,11 +149,41 @@ Reusable React Function components.
 
 ## Other Type aliases
 
+### ColumnHeaderContextMenu
+
+Ƭ **ColumnHeaderContextMenu**: *object*
+
+#### Type declaration:
+
+Name | Type |
+:------ | :------ |
+`column` | [*IListColumn*](../interfaces/components.ilistcolumn.md) |
+`target` | EventTarget & HTMLElement |
+
+Defined in: [client/components/List/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L175)
+
+___
+
 ### IHotkeyModal
 
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
 Defined in: [client/components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+
+___
+
+### ListFilterState
+
+Ƭ **ListFilterState**: *object*
+
+#### Type declaration:
+
+Name | Type |
+:------ | :------ |
+`filters` | [*IFilter*](../interfaces/components.ifilter.md)[] |
+`isFiltered` | *boolean* |
+
+Defined in: [client/components/List/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L82)
 
 ___
 
@@ -162,7 +197,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [client/components/TabContainer/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L88)
+Defined in: [client/components/TabContainer/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L89)
 
 ___
 
@@ -170,7 +205,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [client/components/TabContainer/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L86)
+Defined in: [client/components/TabContainer/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L87)
 
 ___
 
@@ -355,8 +390,8 @@ ___
 
 List component using `ShimmeredDetailsList` from `@fluentui/react`.
 
-Supports list groups, selection, search box
-and custom column headers.
+Supports list groups, filters, group by,
+selection, search box and custom column headers.
 
 Used by the following components:
 
@@ -440,11 +475,12 @@ ___
 
 • `Const` **SubText**: *ReusableComponent*<ISubTextProps\>
 
-Renders sub text using color `semanticColors.bodySubtext`
+Renders sub text using color `semanticColors.bodySubtext`. Supports markdown
+using `ReactMarkdown`.
 
 **`remarks`** Has a default padding top of **4px**
 
-Defined in: [client/components/SubText/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L13)
+Defined in: [client/components/SubText/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L17)
 
 ___
 
@@ -565,7 +601,8 @@ ___
 
 ▸ **useList**(`props`: [*IListProps*](../interfaces/components.ilistprops.md)): *object*
 
-Component logic hook for `<List />`
+Component logic hook for `<List />
+`
 
 #### Parameters:
 
@@ -577,31 +614,29 @@ Name | Type | Description |
 
 Name | Type |
 :------ | :------ |
-`dispatch` | *Dispatch*<AnyAction\> |
+`context` | IListContext |
 `listProps` | [*IListProps*](../interfaces/components.ilistprops.md)<any\> |
-`state` | [*IListState*](../interfaces/components.iliststate.md)<any\> |
 
-Defined in: [client/components/List/useList.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L16)
+Defined in: [client/components/List/useList.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L19)
 
 ___
 
 ### useListGroups
 
-▸ **useListGroups**(`items`: *any*[], `props`: [*IListGroupProps*](../interfaces/components.ilistgroupprops.md)): *any*[][] \| readonly [IGroup[], *any*[]]
+▸ **useListGroups**(`context`: IListContext): *any*[][] \| readonly [IGroup[], *any*[]]
 
-Returns list groups based on property
-`listGroupProps` on the `<List />` component
+Returns list groups based on property `listGroupProps` on
+the `<List />` component
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`items` | *any*[] |
-`props` | [*IListGroupProps*](../interfaces/components.ilistgroupprops.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | IListContext | Context    |
 
 **Returns:** *any*[][] \| readonly [IGroup[], *any*[]]
 
-Defined in: [client/components/List/useListGroups.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L13)
+Defined in: [client/components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
 
 ___
 
@@ -619,7 +654,7 @@ Name | Type |
 
 **Returns:** [*IListProps*](../interfaces/components.ilistprops.md)
 
-Defined in: [client/components/List/useListProps.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.ts#L30)
+Defined in: [client/components/List/useListProps.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.tsx#L31)
 
 ___
 

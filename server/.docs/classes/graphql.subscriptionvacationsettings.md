@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionVacationSettings
+[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionVacationSettings
 
 # Class: SubscriptionVacationSettings
 
@@ -12,6 +12,7 @@
 
 ### Properties
 
+- [calculationType](graphql.subscriptionvacationsettings.md#calculationtype)
 - [eventCategory](graphql.subscriptionvacationsettings.md#eventcategory)
 - [totalDays](graphql.subscriptionvacationsettings.md#totaldays)
 
@@ -25,11 +26,19 @@
 
 ## Properties
 
+### calculationType
+
+• `Optional` **calculationType**: *string*
+
+Defined in: [graphql/resolvers/subscription/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L47)
+
+___
+
 ### eventCategory
 
 • `Optional` **eventCategory**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L47)
+Defined in: [graphql/resolvers/subscription/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L50)
 
 ___
 

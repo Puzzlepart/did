@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / [Services](../modules/services.md) / SubscriptionService
+[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / SubscriptionService
 
 # Class: SubscriptionService
 

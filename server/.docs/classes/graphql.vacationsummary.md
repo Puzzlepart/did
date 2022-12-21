@@ -1,4 +1,4 @@
-[did-server - v0.11.1](../README.md) / [GraphQL](../modules/graphql.md) / VacationSummary
+[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / VacationSummary
 
 # Class: VacationSummary
 
@@ -14,6 +14,7 @@ An Object type that describes a VacationSummary
 
 ### Properties
 
+- [calculationType](graphql.vacationsummary.md#calculationtype)
 - [category](graphql.vacationsummary.md#category)
 - [remaining](graphql.vacationsummary.md#remaining)
 - [total](graphql.vacationsummary.md#total)
@@ -30,6 +31,14 @@ An Object type that describes a VacationSummary
 
 ## Properties
 
+### calculationType
+
+• `Optional` **calculationType**: *string*
+
+Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L18)
+
+___
+
 ### category
 
 • `Optional` **category**: *string*
@@ -42,7 +51,7 @@ ___
 
 • `Optional` **remaining**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L27)
+Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L30)
 
 ___
 
@@ -50,7 +59,7 @@ ___
 
 • `Optional` **total**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L18)
+Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L21)
 
 ___
 
@@ -58,7 +67,7 @@ ___
 
 • `Optional` **used**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L21)
+Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L24)
 
 ___
 
@@ -66,4 +75,4 @@ ___
 
 • `Optional` **usedHours**: *number*
 
-Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L24)
+Defined in: [graphql/resolvers/timesheet/types/VacationSummaryObject.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/VacationSummaryObject.ts#L27)

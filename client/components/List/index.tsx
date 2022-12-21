@@ -2,18 +2,18 @@ import { ShimmeredDetailsList } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
+import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { ListContext } from './context'
-import { ItemColumn } from './ItemColumn'
 import styles from './List.module.scss'
-import { ListHeader } from './ListHeader'
+import { ListFilterPanel } from './ListFilterPanel'
 import { IListProps } from './types'
 import { useList } from './useList'
 
 /**
  * List component using `ShimmeredDetailsList` from `@fluentui/react`.
  *
- * Supports list groups, selection, search box
- * and custom column headers.
+ * Supports list groups, filters, group by,
+ * selection, search box and custom column headers.
  *
  * Used by the following components:
  *
@@ -31,23 +31,14 @@ import { useList } from './useList'
  * @category Reusable Component
  */
 export const List: ReusableComponent<IListProps> = (props) => {
-  const { listProps, state, dispatch } = useList(props)
+  const { listProps, context } = useList(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
-      <ListContext.Provider value={{ props, state, dispatch }}>
+      <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          <ShimmeredDetailsList
-            {...listProps}
-            onRenderDetailsHeader={(headerProps, defaultRender) => (
-              <ListHeader
-                headerProps={headerProps}
-                defaultRender={defaultRender}
-              />
-            )}
-            onRenderItemColumn={(item, index, column) => (
-              <ItemColumn item={item} index={index} column={column} />
-            )}
-          />
+          <ShimmeredDetailsList {...listProps} />
+          <ColumnHeaderContextMenu />
+          <ListFilterPanel />
         </ScrollablePaneWrapper>
       </ListContext.Provider>
     </div>
@@ -58,9 +49,12 @@ List.defaultProps = {
   items: [],
   columns: [],
   commandBar: {
+    hidden: true,
     items: [],
     farItems: []
-  }
+  },
+  defaultSearchBoxWidth: 500,
+  filterValues: {}
 }
 
 export * from './types'

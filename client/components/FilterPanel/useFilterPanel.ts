@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
+import { useFilterPanelFilters } from './useFilterPanelFilters'
 
 /**
- * Component logic hook for FilterPanel
+ * Component logic hook for `<FilterPanel />`
  *
  * @param props - Props
  *
  * @category FilterPanel
  */
 export function useFilterPanel(props: IFilterPanelProps) {
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
-  )
-  useEffect(
-    () => setFilters(props.filters.map((f) => f.initialize(props.items))),
-    [props.items, props.filters]
-  )
+  const { t } = useTranslation()
+  const { filters, setFilters } = useFilterPanelFilters(props)
 
   /**
    * On filter updated
@@ -30,13 +26,11 @@ export function useFilterPanel(props: IFilterPanelProps) {
     item: IFilterItem,
     checked: boolean
   ) => {
-    if (checked) filter.selected.push(item)
-    else filter.selected = filter.selected.filter((f) => f.key !== item.key)
+    let selected = [...filter.selected]
+    if (checked) selected.push(item)
+    else selected = selected.filter((f) => f.key !== item.key)
     const updatedFilters = filters.map((f) => {
-      if (f.key === filter.key) {
-        return filter
-      }
-      return f
+      return f.key === filter.key ? { ...filter, selected } : f
     })
     setFilters(updatedFilters)
     props.onFiltersUpdated(
@@ -44,8 +38,13 @@ export function useFilterPanel(props: IFilterPanelProps) {
     )
   }
 
+  const headerText = props.selectedFilter
+    ? t('common.filterByColumn', props.selectedFilter)
+    : props.headerText
+
   return {
     filters,
-    onFilterUpdated
-  }
+    onFilterUpdated,
+    headerText
+  } as const
 }

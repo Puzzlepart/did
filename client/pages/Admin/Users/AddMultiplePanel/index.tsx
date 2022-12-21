@@ -11,29 +11,29 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
-import { IAddMultiplePanel } from './types'
+import { IAddMultiplePanelProps } from './types'
 
-export const AddMultiplePanel: FC<IAddMultiplePanel> = (props) => {
-  const { activeDirectoryUsers } = useContext(UsersContext)
+export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
   const { t } = useTranslation()
+  const context = useContext(UsersContext)
   const [selectedUsers, setSelectedUsers] = useState([])
 
   return (
     <Panel
       {..._.pick(props, 'onDismiss', 'isOpen')}
-      headerText={t('admin.bulkImportUsersLabel')}
+      headerText={t('admin.users.bulkImportUsersLabel')}
       type={PanelType.medium}
       isLightDismiss={true}
       className={styles.root}
     >
       <div className={styles.container}>
         <PrimaryButton
-          text={t('admin.bulkImportUsersLabel')}
+          text={t('admin.users.bulkImportUsersLabel')}
           disabled={selectedUsers.length === 0}
           onClick={() => props.onAdd(selectedUsers)}
         />
         <List
-          items={activeDirectoryUsers}
+          items={context.state.availableAdUsers}
           selectionProps={{
             mode: SelectionMode.multiple,
             onChanged: (selected) => setSelectedUsers(selected)

@@ -9,5 +9,6 @@ export interface IProjectListProps
   extends Omit<IListProps<Project>, 'role'>,
     Omit<IPivotItemProps, 'componentRef'> {
   renderLink?: boolean
+  linkOnClick?: (project: Project) => void
   hideColumns?: string[]
 }

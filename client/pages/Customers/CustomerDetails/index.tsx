@@ -1,47 +1,36 @@
-import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
 import { ProjectList } from 'pages/Projects'
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
 import { Header } from './Header'
-import $projects from './projects.gql'
+import { Information } from './Information'
+import { useCustomerList } from './useCustomerList'
 
 /**
  * @category Customers
  */
 export const CustomerDetails: FC = () => {
   const { t } = useTranslation()
-  const { state } = useContext(CustomersContext)
-  const { loading, error, data } = useQuery($projects, {
-    variables: {
-      customerKey: state.selected?.key
-    }
-  })
+  const { error, projects, loading } = useCustomerList()
 
   return (
     <div className={styles.root}>
       <Header />
-      {state.selected.inactive && (
-        <UserMessage
-          text={t('customers.inactiveText')}
-          iconName='Warning'
-          type={'warning'}
-        />
-      )}
+      <Information />
       <div>
-        {error && (
+        {error ? (
           <UserMessage type='error'>{t('common.genericErrorText')}</UserMessage>
-        )}
-        {!error && (
+        ) : (
           <ProjectList
-            items={data?.projects || []}
+            items={projects}
             hideColumns={['customer']}
             enableShimmer={loading}
-            searchBox={{ placeholder: t('common.searchPlaceholder') }}
+            searchBox={{
+              placeholder: t('customers.searchProjectsPlaceholder'),
+              disabled: loading
+            }}
             renderLink={true}
-            height={300}
           />
         )}
       </div>

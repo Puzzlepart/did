@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Components](../modules/components.md) / IListGroupProps
+[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IListGroupProps
 
 # Interface: IListGroupProps
 
@@ -10,6 +10,7 @@
 
 - [emptyGroupName](components.ilistgroupprops.md#emptygroupname)
 - [fieldName](components.ilistgroupprops.md#fieldname)
+- [groupData](components.ilistgroupprops.md#groupdata)
 - [groupNames](components.ilistgroupprops.md#groupnames)
 - [totalFunc](components.ilistgroupprops.md#totalfunc)
 
@@ -19,7 +20,7 @@
 
 • `Optional` **emptyGroupName**: *string*
 
-Defined in: [client/components/List/types.ts:164](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L164)
+Defined in: [client/components/List/types.ts:240](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L240)
 
 ___
 
@@ -27,7 +28,15 @@ ___
 
 • **fieldName**: *string*
 
-Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+Defined in: [client/components/List/types.ts:237](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L237)
+
+___
+
+### groupData
+
+• `Optional` **groupData**: *any*[]
+
+Defined in: [client/components/List/types.ts:239](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L239)
 
 ___
 
@@ -35,7 +44,7 @@ ___
 
 • `Optional` **groupNames**: *string*[]
 
-Defined in: [client/components/List/types.ts:163](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L163)
+Defined in: [client/components/List/types.ts:238](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L238)
 
 ___
 
@@ -55,6 +64,6 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [client/components/List/types.ts:165](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L165)
+Defined in: [client/components/List/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L241)
 
-Defined in: [client/components/List/types.ts:165](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L165)
+Defined in: [client/components/List/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L241)

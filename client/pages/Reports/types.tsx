@@ -1,5 +1,5 @@
 import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
-import { IListGroupProps } from 'components/List/types'
+import { IListGroupProps, ListFilterState } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { Project, TimesheetPeriodObject, User } from 'types'
 
@@ -36,7 +36,7 @@ export interface IGroupByOption extends IContextualMenuItem {
  * @category Reports
  */
 export interface IReportsSavedFilter extends IContextualMenuItem {
-  values: { [key: string]: any }
+  values: Record<string, any>
 }
 
 /**
@@ -74,11 +74,6 @@ export interface IReportsState {
   data?: IReportsData
 
   /**
-   * Filtered subset of data.timeEntries
-   */
-  subset?: any[]
-
-  /**
    * Filter panel open
    */
   isFiltersOpen?: boolean
@@ -99,11 +94,6 @@ export interface IReportsState {
   loading?: boolean
 
   /**
-   * Is filtered
-   */
-  isFiltered?: boolean
-
-  /**
    * Saved filters
    */
   savedFilters?: { [key: string]: IReportsSavedFilter }
@@ -111,7 +101,12 @@ export interface IReportsState {
   /**
    * Active filter
    */
-  filter?: IReportsSavedFilter
+  activeFilter?: IReportsSavedFilter
+
+  /**
+   * Current filter state
+   */
+  filterState?: ListFilterState
 }
 
 /**

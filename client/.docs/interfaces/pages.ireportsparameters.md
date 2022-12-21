@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Pages](../modules/pages.md) / IReportsParameters
+[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IReportsParameters
 
 # Interface: IReportsParameters
 
@@ -16,4 +16,4 @@
 
 • **query**: *string*
 
-Defined in: [client/pages/Reports/types.tsx:171](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L171)
+Defined in: [client/pages/Reports/types.tsx:166](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L166)

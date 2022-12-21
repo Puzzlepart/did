@@ -5,8 +5,8 @@ import {
   useLastYearQuery
 } from 'pages/Reports/hooks/useReportsQueries'
 import user_report_current_month from './user-report-current-month.gql'
-import user_report_last_month from './user-report-last-month.gql'
 import user_report_current_year from './user-report-current-year.gql'
+import user_report_last_month from './user-report-last-month.gql'
 import user_report_last_year from './user-report-last-year.gql'
 
 /**
@@ -23,7 +23,7 @@ export function useQueries(): any[] {
     lastMonthQuery,
     currentMonthQuery,
     currentYearQuery,
-    lastYearQuery,
+    lastYearQuery
   ].map((query) => ({
     ...query,
     key: query.itemKey,

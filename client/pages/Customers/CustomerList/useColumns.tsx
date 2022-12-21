@@ -14,7 +14,7 @@ export function useColumns(): IListColumn[] {
   return [
     col(
       'key',
-      '',
+      t('common.keyFieldLabel'),
       {
         minWidth: 125,
         maxWidth: 125
@@ -38,6 +38,10 @@ export function useColumns(): IListColumn[] {
       t('common.nameFieldLabel'),
       { maxWidth: 300 },
       (customer: Customer) => <CustomerLink customer={customer} />
-    )
+    ),
+    col('description', t('common.descriptionFieldLabel'), {
+      maxWidth: 300,
+      isMultiline: true
+    })
   ]
 }

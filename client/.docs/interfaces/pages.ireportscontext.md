@@ -1,4 +1,4 @@
-[did-client - v0.11.1](../README.md) / [Pages](../modules/pages.md) / IReportsContext
+[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IReportsContext
 
 # Interface: IReportsContext
 
@@ -17,7 +17,7 @@
 
 ### columns
 
-• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<[*IListColumnData*](components.ilistcolumndata.md)\>[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)[]
 
 Columns
 

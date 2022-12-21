@@ -4,23 +4,21 @@ import { OutlookCategory, Project } from 'types'
 /**
  * @category Projects
  */
-export interface IProjectsParameters {
-  key: string
-  view: ProjectsView
-  detailsTab: string
+export interface IProjectsUrlParameters {
+  projectKey: string
+  currentTab: ProjectsTab
 }
 
 /**
  * @ignore
  */
-export type ProjectsView = 'search' | 'my' | 'new'
+export type ProjectsTab = 's' | 'm' | 'new'
 
 /**
  * @category Projects
  */
 export interface IProjectsState {
-  view?: ProjectsView
-  detailsTab?: string
+  currentTab?: ProjectsTab
   selected?: Project
   projects?: Project[]
   outlookCategories?: OutlookCategory[]

@@ -59,6 +59,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         description={t('projects.descriptionFieldDescription')}
         multiline={true}
         autoAdjustHeight={true}
+        rows={14}
       />
       <IconPicker
         name='icon'

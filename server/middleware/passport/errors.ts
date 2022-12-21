@@ -14,14 +14,16 @@ export class SigninError extends Error {
   }
 
   /**
-   * Returns a string representation of the SigninError
+   * Returns a base64 string representation of the `SigninError`
    */
-  toString() {
-    return JSON.stringify({
-      name: this.name,
-      message: this.message,
-      icon: this.icon
-    })
+  public toString() {
+    return Buffer.from(
+      JSON.stringify({
+        name: this.name,
+        message: this.message,
+        icon: this.icon
+      })
+    ).toString('base64')
   }
 }
 
@@ -52,4 +54,11 @@ export const SIGNIN_FAILED = new SigninError(
   'An error occured signing you in',
   'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> It can help to clear your browser cache.',
   'Dislike'
+)
+
+export const USER_ACCOUNT_DISABLED = new SigninError(
+  'e0666582',
+  'An error occured signing you in',
+  'Your account is disabled.',
+  'Cancel'
 )

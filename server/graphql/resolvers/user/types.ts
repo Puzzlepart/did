@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { GraphQLDateTime } from 'graphql-iso-date'
+import { GraphQLDateTime } from 'graphql-scalars'
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
@@ -20,6 +20,44 @@ export class UserPhoto {
     nullable: true
   })
   base64?: string
+}
+
+/**
+ * A type that describes a ActiveDirectoryUser
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a ActiveDirectoryUser',
+  simpleResolvers: true
+})
+export class ActiveDirectoryUser {
+  @Field(() => ID)
+  id?: string
+
+  @Field({ nullable: true })
+  displayName?: string
+
+  @Field({ nullable: true })
+  givenName?: string
+
+  @Field({ nullable: true })
+  surname?: string
+
+  @Field({ nullable: true })
+  jobTitle?: string
+
+  @Field({ nullable: true })
+  mobilePhone?: string
+
+  @Field({ nullable: true })
+  mail?: string
+
+  @Field({ nullable: true })
+  preferredLanguage?: string
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
 }
 
 /**
@@ -70,9 +108,6 @@ export class User {
   @Field(() => Subscription, { nullable: true })
   subscription?: Subscription
 
-  /**
-   * User configuration is stored as a JSON string.
-   */
   @Field(() => String, { nullable: true })
   configuration?: any
 
@@ -84,6 +119,9 @@ export class User {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   lastActive?: Date
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
 
   public create?(user: User): User {
     Object.assign(this, user)
@@ -136,6 +174,9 @@ export class UserInput {
 
   @Field({ nullable: true })
   provider?: string
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
 }
 /**
  * @category GraphQL InputType

@@ -2,61 +2,36 @@ import $date from 'DateUtils'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { getSum } from 'utils/getSum'
+import { ISummaryProps } from './types'
 
 /**
- * Use summary hook
+ * Component logic hook for `<Summary />`
  *
- * @param timeentries - Time entries
+ * @category Projects
  */
-export function useSummary(timeentries: any[]) {
+export function useSummary(props: ISummaryProps) {
   const { t } = useTranslation()
-  return [
-    {
-      label: t('common.hoursCurrentMonth'),
-      value: $date.getDurationString(
-        getSum(
-          _.filter(
-            timeentries,
-            (entry) =>
-              entry.month === new Date().getMonth() + 1 &&
-              entry.year === new Date().getFullYear()
-          ),
-          'duration'
-        ),
-        t
-      )
-    },
-    {
-      label: t('common.hoursPrevMonth'),
-      value: $date.getDurationString(
-        getSum(
-          _.filter(
-            timeentries,
-            (entry) =>
-              entry.month === new Date().getMonth() &&
-              entry.year === new Date().getFullYear()
-          ),
-          'duration'
-        ),
-        t
-      )
-    },
-    {
-      label: t('common.hoursCurrentYear'),
-      value: $date.getDurationString(
-        getSum(
-          _.filter(
-            timeentries,
-            (entry) => entry.year === new Date().getFullYear()
-          ),
-          'duration'
-        ),
-        t
-      )
-    },
-    {
-      label: t('common.totalHours'),
-      value: $date.getDurationString(getSum(timeentries, 'duration'), t)
+  const year = new Date().getFullYear(),
+    month = new Date().getMonth()
+  const config: Record<string, (entry: any) => boolean> = {
+    [t('common.hoursCurrentMonth')]: (entry) =>
+      entry.month === month + 1 && entry.year === year,
+    [t('common.hoursPrevMonth')]: (entry) =>
+      entry.month === month && entry.year === year,
+    [t('common.hoursCurrentYear', { year })]: (entry) => entry.year === year,
+    [t('common.hoursYear', { year: year - 1 })]: (entry) =>
+      entry.year === year - 1,
+    [t('common.totalHours')]: () => true
+  }
+  return Object.keys(config).map((label) => {
+    const filterFunction = config[label]
+    const hours = getSum(
+      _.filter(props.timeEntries, filterFunction),
+      'duration'
+    )
+    return {
+      label,
+      value: $date.getDurationString(hours, t)
     }
-  ]
+  })
 }

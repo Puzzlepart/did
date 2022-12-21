@@ -1,14 +1,8 @@
-[did-client - v0.11.1](../README.md) / [Components](../modules/components.md) / IListColumn
+[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IListColumn
 
-# Interface: IListColumn<T\>
+# Interface: IListColumn
 
 [Components](../modules/components.md).IListColumn
-
-## Type parameters
-
-Name | Default |
-:------ | :------ |
-`T` | [*IListColumnData*](components.ilistcolumndata.md) |
 
 ## Hierarchy
 
@@ -27,13 +21,13 @@ Name | Default |
 
 ### data
 
-• `Optional` **data**: T
+• `Optional` **data**: [*IListColumnData*](components.ilistcolumndata.md)
 
 Data for the column - `IListColumnData`
 
 Overrides: void
 
-Defined in: [client/components/List/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L53)
+Defined in: [client/components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
 
 ___
 
@@ -43,4 +37,4 @@ ___
 
 The column should be hidden
 
-Defined in: [client/components/List/types.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L58)
+Defined in: [client/components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)

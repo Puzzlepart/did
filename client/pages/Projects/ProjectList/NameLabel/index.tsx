@@ -1,16 +1,16 @@
 import { ProjectLink } from 'components/ProjectLink'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './NameLabel.module.scss'
 import { INameLabelProps } from './types'
 
-export const NameLabel = ({ project, renderLink }: INameLabelProps) => {
+export const NameLabel: FC<INameLabelProps> = (props) => {
   return (
     <div className={styles.root}>
-      {renderLink ? (
-        <ProjectLink project={project} />
+      {props.renderLink ? (
+        <ProjectLink project={props.project} onClick={props.onClick} />
       ) : (
         <div>
-          <span>{project.name}</span>
+          <span>{props.project.name}</span>
         </div>
       )}
     </div>

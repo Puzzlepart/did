@@ -1,6 +1,7 @@
 import { Dayjs, OpUnitType } from 'dayjs'
 import _ from 'underscore'
-import { pad } from 'underscore.string'
+import s from 'underscore.string'
+import { HolidayObject } from '../../server/graphql'
 import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {
@@ -178,16 +179,15 @@ export class DateObject {
    * @param date - Date   *
    * @param unit - Unit
    */
-  diff(date: DateObject, unit: OpUnitType) {
+  public diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
   }
-
   /**
    * Returns an object representation of the DateObject
    *
    * @param include - Properties to include
    */
-  toObject(...include: string[]) {
+  public toObject(...include: string[]) {
     const dateObject = {
       week: DateUtils.getWeek(this.$),
       month: DateUtils.getMonthIndex(this.$),
@@ -195,6 +195,18 @@ export class DateObject {
       monthName: this.format('MMMM')
     }
     return _.isEmpty(include) ? dateObject : _.pick(dateObject, ...include)
+  }
+
+  /**
+   * Checks if the date is a national holiday and returns the holiday object if
+   * the date/day is a national holiday.
+   *
+   * @param holidays Collection of holidays to check towards
+   */
+  public isNationalHoliday(holidays: HolidayObject[] = []): HolidayObject {
+    return _.find(holidays, ({ date }) => {
+      return new DateObject(date).isSameDay(this)
+    })
   }
 
   /**
@@ -218,7 +230,7 @@ export class DateObject {
       : [
           {
             id: DateUtils.getPeriod(startOfWeek.$),
-            name: `${startOfWeek.$.isoWeek()}/${pad(
+            name: `${startOfWeek.$.isoWeek()}/${s.pad(
               (startOfWeek.$.month() + 1).toString(),
               2,
               '0'
@@ -228,7 +240,7 @@ export class DateObject {
           },
           {
             id: DateUtils.getPeriod(endOfWeek.$),
-            name: `${endOfWeek.$.isoWeek()}/${pad(
+            name: `${endOfWeek.$.isoWeek()}/${s.pad(
               (endOfWeek.$.month() + 1).toString(),
               2,
               '0'

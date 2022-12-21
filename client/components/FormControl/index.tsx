@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable unicorn/prevent-abbreviations */
 import { Panel, PrimaryButton } from '@fluentui/react'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { Toast } from 'components/Toast'

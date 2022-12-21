@@ -9,6 +9,7 @@ import {
   IShimmeredDetailsListProps,
   SelectionMode
 } from '@fluentui/react'
+import { BaseFilter, IFilter } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 /**
@@ -36,6 +37,26 @@ export interface IListColumnData {
   hiddenFromExport?: boolean
 
   /**
+   * Is the column sortable?
+   */
+  isSortable?: boolean
+
+  /**
+   * Is the column filterable?
+   */
+  isFilterable?: boolean
+
+  /**
+   * Is the column groupable?
+   */
+  isGroupable?: boolean
+
+  /**
+   * Filter type. Should be a class that extends `BaseFilter`
+   */
+  filterType?: new () => BaseFilter
+
+  /**
    * Callback to render a tooltip for the column header
    */
   onRenderColumnHeader?: (
@@ -46,11 +67,11 @@ export interface IListColumnData {
 /**
  * @category List
  */
-export interface IListColumn<T = IListColumnData> extends IColumn {
+export interface IListColumn extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */
-  data?: T
+  data?: IListColumnData
 
   /**
    * The column should be hidden
@@ -58,11 +79,12 @@ export interface IListColumn<T = IListColumnData> extends IColumn {
   hidden?: boolean
 }
 
+export type ListFilterState = { filters: IFilter[]; isFiltered: boolean }
+
 /**
  * @category List
  */
-export interface IListProps<T = any>
-  extends Omit<IShimmeredDetailsListProps, 'onRenderDetailsHeader'> {
+export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Items
    */
@@ -109,11 +131,6 @@ export interface IListProps<T = any>
   commandBar?: ICommandBarProps
 
   /**
-   * Filters
-   */
-  filters?: { [key: string]: any }
-
-  /**
    * Hidden
    */
   hidden?: boolean
@@ -125,6 +142,39 @@ export interface IListProps<T = any>
     className?: string
     onRender?: IRenderFunction<IDetailsHeaderProps>
   }
+
+  /**
+   * Export file name. Set this property to enable Excel export of the
+   * list data.
+   */
+  exportFileName?: string
+
+  /**
+   * Default search box width
+   *
+   * @default 500
+   */
+  defaultSearchBoxWidth?: number
+
+  /**
+   * Filter panel actions
+   */
+  filterPanelActions?: JSX.Element | JSX.Element[]
+
+  /**
+   * On filter callback returning `filters` and `isFiltered`.
+   */
+  onFilter?: (filterState: ListFilterState) => void
+
+  /**
+   * Filter values
+   */
+  filterValues?: Record<string, any>
+}
+
+export type ColumnHeaderContextMenu = {
+  column: IListColumn
+  target: EventTarget & HTMLElement
 }
 
 /**
@@ -145,6 +195,31 @@ export interface IListState<T = any> {
    * Current items
    */
   items?: T[]
+
+  /**
+   * Current filters
+   */
+  filters?: IFilter[]
+
+  /**
+   * Column header context menu `column` and `targetElement`
+   */
+  columnHeaderContextMenu?: ColumnHeaderContextMenu
+
+  /**
+   * Group by column
+   */
+  groupBy?: IListColumn
+
+  /**
+   * Filter by column
+   */
+  filterBy?: IListColumn
+
+  /**
+   * Is filter panel open
+   */
+  isFilterPanelOpen?: boolean
 }
 
 /**
@@ -161,6 +236,7 @@ export interface IListSelectionProps<T = any> {
 export interface IListGroupProps {
   fieldName: string
   groupNames?: string[]
+  groupData?: any[]
   emptyGroupName?: string
   totalFunc?: (items: any[]) => string
 }

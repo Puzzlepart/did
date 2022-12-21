@@ -16,7 +16,7 @@ import {
 } from 'apollo-server-plugin-base'
 import createDebug from 'debug'
 import express from 'express'
-import { GraphQLDateTime } from 'graphql-iso-date'
+import { GraphQLDateTime } from 'graphql-scalars'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
