@@ -1,4 +1,4 @@
-[did-server - v0.11.3](../README.md) / [GraphQL](../modules/graphql.md) / EventObject
+[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / EventObject
 
 # Class: EventObject
 

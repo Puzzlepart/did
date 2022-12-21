@@ -1,4 +1,4 @@
-[did-client - v0.11.3](../README.md) / [Parts](../modules/parts.md) / INavItemProps
+[did-client - v0.11.4](../README.md) / [Parts](../modules/parts.md) / INavItemProps
 
 # Interface: INavItemProps
 

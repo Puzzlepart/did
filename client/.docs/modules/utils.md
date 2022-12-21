@@ -1,4 +1,4 @@
-[did-client - v0.11.3](../README.md) / Utils
+[did-client - v0.11.4](../README.md) / Utils
 
 # Module: Utils
 
