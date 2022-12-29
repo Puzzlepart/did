@@ -1,7 +1,8 @@
-import { GroupHeader, IDetailsGroupDividerProps } from '@fluentui/react'
+import { GroupHeader, IDetailsGroupDividerProps, useTheme } from '@fluentui/react'
 import React, { FC } from 'react'
 
 export const ListGroupHeader: FC<IDetailsGroupDividerProps> = (props) => {
+  const theme = useTheme()
   const { holiday } = props.group?.data ?? {}
   return (
     <div title={holiday?.name}>
@@ -10,7 +11,7 @@ export const ListGroupHeader: FC<IDetailsGroupDividerProps> = (props) => {
         styles={{
           title: {
             fontWeight: 'normal',
-            color: holiday && '#CC0000'
+            color: holiday && theme.palette.red
           },
           expand: { cursor: 'pointer' },
           headerCount: { display: 'none' }

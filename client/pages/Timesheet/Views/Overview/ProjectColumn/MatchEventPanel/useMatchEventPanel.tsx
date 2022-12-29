@@ -4,7 +4,8 @@ import { useContext, useState } from 'react'
 import { EventObject, Project } from 'types'
 
 /**
- * Hook for MatchEventPanel
+ * Hook for MatchEventPanel component. Handles panel state and dispatches
+ * action type MANUAL_MATCH.
  *
  * @param event - Event
  */

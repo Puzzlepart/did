@@ -7,7 +7,7 @@ import {
 } from 'components'
 import { TFunction } from 'i18next'
 import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
-import React from 'react'
+import React, { FC } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -19,7 +19,9 @@ import styles from './ProjectColumn.module.scss'
 import { IProjectColumnProps } from './types'
 
 /**
- * Get error message
+ * Get error message for the event by error code. Translate function 
+ * from i18next is passed as a parameter due to the fact that this function
+ * is called from the component and the hook can't be called inside the loop.
  *
  * @param code - Error code
  * @param t - Translate function
@@ -38,7 +40,10 @@ function getErrorMessage(
   }
 }
 
-export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
+/**
+ * Component that renders the project column for the event list.
+ */
+export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   let className = styles.root

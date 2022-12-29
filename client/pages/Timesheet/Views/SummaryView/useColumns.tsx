@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { DateRangeType, IColumn } from '@fluentui/react'
+import { DateRangeType, IColumn, useTheme } from '@fluentui/react'
 import { ProjectTooltip } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,6 +15,7 @@ import { ILabelColumnProps, LabelColumn } from './LabelColumn'
  */
 export function useColumns(): IColumn[] {
   const { t } = useTranslation()
+  const theme = useTheme()
   const { state, dispatch } = useTimesheetContext()
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
@@ -43,7 +44,7 @@ export function useColumns(): IColumn[] {
               return (
                 <div
                   title={holiday?.name}
-                  style={{ color: holiday && '#CC0000' }}
+                  style={{ color: holiday && theme.palette.red }}
                 >
                   {defaultRender(props)}
                 </div>

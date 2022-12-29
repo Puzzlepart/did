@@ -6,6 +6,9 @@ import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
 import { useMatchEventPanel } from './useMatchEventPanel'
 
+/**
+ * Component that renders the panel for matching the event with a project.
+ */
 export const MatchEventPanel: FC<IMatchEventPanelProps> = ({ event }) => {
   const { t } = useTranslation()
   const { isPanelOpen, showPanel, hidePanel, onMatch } =
