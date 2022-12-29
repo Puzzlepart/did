@@ -5,9 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../../../../types'
 import { IIgnoreEventButtonProps } from './types'
 
-export const IgnoreEventButton: FC<IIgnoreEventButtonProps> = ({
-  event
-}) => {
+export const IgnoreEventButton: FC<IIgnoreEventButtonProps> = ({ event }) => {
   const { t } = useTranslation()
   const { dispatch } = useTimesheetContext()
   return (

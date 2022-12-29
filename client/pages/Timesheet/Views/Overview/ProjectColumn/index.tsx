@@ -19,7 +19,7 @@ import styles from './ProjectColumn.module.scss'
 import { IProjectColumnProps } from './types'
 
 /**
- * Get error message for the event by error code. Translate function 
+ * Get error message for the event by error code. Translate function
  * from i18next is passed as a parameter due to the fact that this function
  * is called from the component and the hook can't be called inside the loop.
  *

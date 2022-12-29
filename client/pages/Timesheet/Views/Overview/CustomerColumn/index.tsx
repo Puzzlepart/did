@@ -3,9 +3,7 @@ import React, { FC } from 'react'
 import styles from './CustomerColumn.module.scss'
 import { ICustomerColumnProps } from './types'
 
-export const CustomerColumn: FC<ICustomerColumnProps> = ({
-  event
-}) => {
+export const CustomerColumn: FC<ICustomerColumnProps> = ({ event }) => {
   if (!event.project?.customer) return null
   return (
     <div className={styles.root}>
