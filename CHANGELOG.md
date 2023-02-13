@@ -17,10 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
+	* [➤ 0.11.4 - TBA](#-0114---tba)
+		* [Changed](#changed)
 	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added)
 		* [Fixed](#fixed)
-		* [Changed](#changed)
+		* [Changed](#changed-1)
 	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
 		* [Fixed](#fixed-1)
 	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
@@ -30,15 +32,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
 		* [Added](#added-1)
 		* [Fixed](#fixed-4)
-		* [Changed](#changed-1)
+		* [Changed](#changed-2)
 	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added-2)
 		* [Fixed](#fixed-5)
-		* [Changed](#changed-2)
+		* [Changed](#changed-3)
 	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-3)
 		* [Fixed](#fixed-6)
-		* [Changed](#changed-3)
+		* [Changed](#changed-4)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-4)
@@ -62,6 +64,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
 		* [Added](#added-9)
 </details>
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0114---tba)
+
+## ➤ 0.11.4 - TBA
+
+### Changed
+- Missing submissions is not showing hidden users [#1089](https://github.com/Puzzlepart/did/pull/1089)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0114---21122022)
