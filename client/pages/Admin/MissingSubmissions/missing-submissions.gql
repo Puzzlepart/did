@@ -8,7 +8,7 @@ query MissingSubmissions (
     month
     hours
   }
-  users {
+  users(query: { hiddenFromReports: false }) {
     id
     displayName
     mail
