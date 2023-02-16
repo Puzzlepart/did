@@ -101,6 +101,8 @@
     "redis": "3.0.2",
     "reflect-metadata": "0.1.13",
     "regenerator-runtime": "0.13.7",
+    "rehype-raw": "^6.1.1",
+    "rehype-sanitize": "^5.0.1",
     "sass-loader": "13.2.0",
     "set-value": "3.0.2",
     "simple-oauth2": "4.1.0",
