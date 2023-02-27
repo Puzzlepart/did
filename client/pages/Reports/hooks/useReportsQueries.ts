@@ -190,7 +190,9 @@ export function useSummaryQuery(): IReportsQuery {
 }
 
 /**
- * Use queries
+ * Use Reports Queries. Returns all queries
+ * used in reports. Each query is generated
+ * by a separate hook.
  *
  * @category Reports
  */

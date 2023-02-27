@@ -20,9 +20,9 @@ export default ({ initialState, queries }) =>
        * Update state with new data from the queries.
        */
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.loading = payload.result.loading
-        if (payload.result?.data) {
-          state.data = { ...state.data, ...payload.result.data }
+        state.loading = payload.queryResult.loading
+        if (payload.queryResult?.data) {
+          state.data = { ...state.data, ...payload.queryResult.data }
           const { timeEntries, users } = state.data
           if (timeEntries) {
             state.data.timeEntries = timeEntries.map((entry) => ({

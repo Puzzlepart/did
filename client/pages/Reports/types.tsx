@@ -18,7 +18,10 @@ export interface IReportsQuery extends IPivotItemProps {
   variables?: any
 
   /**
-   * Export file name
+   * Export file name template. {0} will be replaced
+   * with the current date and time.
+   * 
+   * @example TimeEntries-{0}.xlsx
    */
   exportFileName?: string
 
@@ -87,17 +90,17 @@ export interface IReportsState {
   data?: IReportsData
 
   /**
-   * All report links
+   * Report links
    */
   reportLinks?: ReportLink[]
 
   /**
-   * Filter panel open
+   * Whether the filter panel is open
    */
   isFiltersOpen?: boolean
 
   /**
-   * Query preset
+   * Selected query preset
    */
   queryPreset?: IReportsQuery
 

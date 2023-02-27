@@ -14,6 +14,7 @@ export type UseReportsQueryOptions = {
   state: IReportsState
   dispatch: React.Dispatch<AnyAction>
 }
+
 /**
  * Returns queries from `useReportsQueries` as choice group options
  * to be used in `<ChoiceGroup />` component. Also appends promoted
