@@ -82,10 +82,16 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         label={t('admin.reportLinks.monthLabel')}
         placeholder={t('admin.reportLinks.monthPlaceholder')}
         description={t('admin.reportLinks.monthDescription')}
-        options={$date.getMonthNames().map((month, index) => ({
-          key: index,
-          text: month
-        }))}
+        options={[
+          {
+            key: null,
+            text: ''
+          },
+          ...$date.getMonthNames().map((month, index) => ({
+            key: index,
+            text: month
+          }))
+        ]}
       />
       <ToggleControl
         {...register<ToggleControlOptions>('published')}
