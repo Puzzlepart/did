@@ -236,7 +236,7 @@
       "monthDescription": "Choose the month for the report if applicable. If the report is for a whole year, leave this blank.",
       "promotedDescription": "When the report is promoted, it will be displayed on the Reports front page.",
       "promotedLabel": "Promoted",
-      "iconDescription": "An icon to illustrate the report link. Defaults to ExcelDocument.",
+      "iconDescription": "An icon to illustrate the report link.",
       "iconColorLabel": "Icon color",
       "iconColorPlaceholder": "Enter an icon color",
       "iconColorDescription": "An icon color makes the report link stand out more from the preset queries if the link should be promoted."

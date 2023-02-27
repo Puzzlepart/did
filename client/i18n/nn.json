@@ -203,7 +203,7 @@
       "monthDescription": "Velg måneden for rapporten hvis det er aktuelt. Hvis rapporten gjelder et helt år, la dette stå tomt.",
       "promotedDescription": "Når rapporten er promotert, vil den vises på rapportens forside.",
       "promotedLabel": "Promotert",
-      "iconDescription": "Et ikon for å illustrere rapportlenken. Standard er ExcelDocument.",
+      "iconDescription": "Eit ikon for å illustrere rapportlenkja.",
       "iconColorLabel": "Ikonfarge",
       "iconColorPlaceholder": "Angi en ikonfarge",
       "iconColorDescription": "En ikonfarge gjør at rapportlenken skiller seg mer ut fra de forhåndsinnstilte spørringene hvis koblingen skal promoteres."
