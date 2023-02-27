@@ -6,10 +6,15 @@ import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 
+type UseColumns = {
+  onEdit: (reportLink: ReportLink) => void
+  onDelete: (reportLink: ReportLink) => void
+}
+
 /**
- * Columns hook for report link list
+ * Columns hook for report link list.
  */
-export function useColumns({ onEdit, onDelete }) {
+export function useColumns({ onEdit, onDelete }: UseColumns) {
   const { t } = useTranslation()
   return [
     col(
