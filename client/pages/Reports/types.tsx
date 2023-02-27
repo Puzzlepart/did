@@ -20,7 +20,7 @@ export interface IReportsQuery extends IPivotItemProps {
   /**
    * Export file name template. {0} will be replaced
    * with the current date and time.
-   * 
+   *
    * @example TimeEntries-{0}.xlsx
    */
   exportFileName?: string

@@ -15,7 +15,6 @@ export const SummaryView: TabComponent = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const { state, rows, columns } = useSummaryView()
-
   return (
     <div className={styles.root}>
       <div className={styles.container}>
