@@ -1,15 +1,4 @@
 {
   "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug Node v.14.18.1",
-      "type": "node",
-      "runtimeVersion": "14.18.1",
-      "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "runtimeArgs": ["-r", "ts-node/register"],
-      "args": ["${workspaceRoot}/server/index.ts"],
-      "outFiles": ["${workspaceRoot}/server/**/*.ts"]
-    }
-  ]
+  "configurations": []
 }
