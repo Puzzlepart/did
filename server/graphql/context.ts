@@ -68,7 +68,7 @@ export class Context {
 /**
  * Generate unique ID for the request
  */
-export function generateUniqueRequestId() {
+function generateUniqueRequestId() {
   return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
 }
 
