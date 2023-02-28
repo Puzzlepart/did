@@ -19,7 +19,7 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
       submitProps={submit}
       panelProps={{
         ..._.omit(props, 'onSave'),
-        headerText: !!props.edit
+        headerText: props.edit
           ? t('admin.labels.editText')
           : t('admin.labels.addNewText'),
         isLightDismiss: true

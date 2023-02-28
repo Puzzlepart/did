@@ -9,12 +9,15 @@ import { ITimesheetReducerParameters } from './types'
  */
 function convertStringToDateRangeType(dateRangeTypeString: string) {
   switch (dateRangeTypeString) {
-    case 'week':
+    case 'week': {
       return DateRangeType.Week
-    case 'month':
+    }
+    case 'month': {
       return DateRangeType.Month
-    default:
+    }
+    default: {
       return DateRangeType.Week
+    }
   }
 }
 

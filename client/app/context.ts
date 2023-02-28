@@ -4,7 +4,6 @@ import get from 'get-value'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
 import { useNotificationsQuery } from '../hooks'
-import { ContextUser } from './ContextUser'
 import { IAppProps, IAppState } from './types'
 
 export interface IAppContext extends IAppProps {
@@ -56,7 +55,7 @@ export function useAppContext(): IAppContext {
     ...context,
     isAuthenticated: !!context.user?.id,
     getUserConfiguration
-  }
+  } as const
 }
 
-export { ContextUser }
+export { ContextUser } from './ContextUser'

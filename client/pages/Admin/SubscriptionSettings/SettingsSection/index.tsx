@@ -22,7 +22,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
         const key = `${props.itemKey}.${field.id}`
         let fieldElement: JSX.Element
         switch (field.type) {
-          case 'text':
+          case 'text': {
             fieldElement = (
               <TextField
                 {...omit(fieldProps, ['description'])}
@@ -33,7 +33,8 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
               />
             )
             break
-          case 'bool':
+          }
+          case 'bool': {
             fieldElement = (
               <Toggle
                 {...fieldProps}
@@ -43,7 +44,8 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
               />
             )
             break
-          case 'number':
+          }
+          case 'number': {
             fieldElement = (
               <Slider
                 {...fieldProps}
@@ -52,11 +54,13 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
               />
             )
             break
-          case 'checkbox':
+          }
+          case 'checkbox': {
             fieldElement = (
               <CheckboxField {...field} settingsKey={key} settings={settings} />
             )
             break
+          }
         }
         return (
           <div

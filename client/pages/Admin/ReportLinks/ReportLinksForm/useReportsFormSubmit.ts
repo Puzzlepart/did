@@ -22,7 +22,7 @@ const isValidUrl = (urlString: string) => {
   inputElement.type = 'url'
   inputElement.value = urlString
 
-  return !inputElement.checkValidity() ? false : true
+  return inputElement.checkValidity() ? true : false
 }
 
 /**
@@ -52,18 +52,18 @@ export function useReportsFormSubmit(
         }
       })
       setToast({
-        text: !props.edit
-          ? t('admin.reportLinks.createSuccess', model.$)
-          : t('admin.reportLinks.updateSuccess', model.$),
+        text: props.edit
+          ? t('admin.reportLinks.updateSuccess', model.$)
+          : t('admin.reportLinks.createSuccess', model.$),
         type: 'success'
       })
       model.reset()
       props.onSave(model.$)
     } catch {
       setToast({
-        text: !props.edit
-          ? t('admin.reportLinks.createError')
-          : t('admin.reportLinks.updateError'),
+        text: props.edit
+          ? t('admin.reportLinks.updateError')
+          : t('admin.reportLinks.createError'),
         type: 'error'
       })
     }

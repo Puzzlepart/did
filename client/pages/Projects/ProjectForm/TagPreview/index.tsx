@@ -16,9 +16,9 @@ export const TagPreview: FC<ITagPreviewProps> = ({ projectId, hidden }) => {
         containerStyle={{ marginTop: 10 }}
         iconName='OutlookLogo'
         text={
-          !projectId
-            ? t('projects.idPreviewBlankText')
-            : t('projects.idPreviewText', { projectId })
+          projectId
+            ? t('projects.idPreviewText', { projectId })
+            : t('projects.idPreviewBlankText')
         }
       />
     </div>

@@ -14,15 +14,18 @@ import { ITextControlProps, TextControlOptions } from './types'
 function transformValue(value: string, options: TextControlOptions) {
   let _value = value
   switch (options?.casing) {
-    case 'upper':
+    case 'upper': {
       _value = _value.toUpperCase()
       break
-    case 'lower':
+    }
+    case 'lower': {
       _value = _value.toLowerCase()
       break
-    case 'capitalized':
+    }
+    case 'capitalized': {
       _value = s.capitalize(_value)
       break
+    }
   }
   if (options?.replace) {
     const [regex, $] = options?.replace

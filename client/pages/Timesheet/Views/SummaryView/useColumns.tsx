@@ -22,7 +22,7 @@ export function useColumns(): IColumn[] {
   )
   let columns: IColumn[] = []
   switch (state.dateRangeType) {
-    case DateRangeType.Week:
+    case DateRangeType.Week: {
       {
         for (
           let i = state.selectedPeriod?.startDateIndex;
@@ -54,7 +54,8 @@ export function useColumns(): IColumn[] {
         }
       }
       break
-    case DateRangeType.Month:
+    }
+    case DateRangeType.Month: {
       {
         columns = state.periods.map<IColumn>((period) => ({
           key: period.id,
@@ -71,6 +72,7 @@ export function useColumns(): IColumn[] {
         }))
       }
       break
+    }
   }
   return [
     {

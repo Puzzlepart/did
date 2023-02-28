@@ -107,7 +107,7 @@ export class TimesheetDateRange {
    */
   public get timespan(): string {
     switch (this._dateRangeType) {
-      case DateRangeType.Week:
+      case DateRangeType.Week: {
         return DateUtils.getTimespanString({
           startDate: this.startDate,
           endDate: this.endDate,
@@ -115,8 +115,10 @@ export class TimesheetDateRange {
             endDate: true
           }
         })
-      case DateRangeType.Month:
+      }
+      case DateRangeType.Month: {
         return capitalize(this.startDate.format('MMMM'))
+      }
     }
   }
 }

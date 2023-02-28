@@ -45,7 +45,7 @@ export function useTimesheet() {
 
   const headerButtonProps = {
     disabled: !!state.error || !!state.loading,
-    style: !!state.loading ? { opacity: 0.4 } : {}
+    style: state.loading ? { opacity: 0.4 } : {}
   }
 
   return {

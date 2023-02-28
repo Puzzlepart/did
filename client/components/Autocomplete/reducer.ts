@@ -50,13 +50,15 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
       })
       .addCase(ON_KEY_DOWN, (state, { payload }) => {
         switch (payload.key) {
-          case 'ArrowUp':
+          case 'ArrowUp': {
             state.selectedIndex--
             break
-          case 'ArrowDown':
+          }
+          case 'ArrowDown': {
             state.selectedIndex++
             break
-          case 'Enter':
+          }
+          case 'Enter': {
             {
               const item = state.suggestions[state.selectedIndex]
               if (item) payload.onEnter(JSON.parse(JSON.stringify(item)))
@@ -64,6 +66,7 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
               state.value = item.text
             }
             break
+          }
         }
       })
       .addCase(SET_SELECTED_INDEX, (state, { payload }) => {
