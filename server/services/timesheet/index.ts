@@ -370,7 +370,13 @@ export class TimesheetService {
   }
 
   /**
-   * Get vacation summary for the current user.
+   * Get vacation summary for the current user. Retrieves the total vacation days
+   * from the user configuration and the used vacation days from the time entries
+   * for the current year. If the calculation type is set to `planned`, the
+   * used vacation days are calculated from all time entries for the current
+   * year using Microsoft Graph. If the calculation type is set to `confirmed`,
+   * the used vacation days are calculated from all confirmed time entries for
+   * the current year.
    *
    * @param settings - Subscription vacation settings
    */
