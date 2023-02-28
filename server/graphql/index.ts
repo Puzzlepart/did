@@ -127,6 +127,7 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
+      playground: false,
       formatError: (error) => _.pick(error, 'message'),
       context: ({ req }) => createContext(req, client),
       plugins: [

@@ -1,7 +1,5 @@
-import { useRouteMatches } from 'hooks/route/useRouteMatches'
 import { PageComponent } from 'pages/types'
 import * as React from 'react'
-import { Route, Switch } from 'react-router-dom'
 import { PermissionScope } from 'security'
 import { Reports } from './Reports'
 
@@ -15,16 +13,7 @@ import { Reports } from './Reports'
  * @category Page Component
  */
 export const ReportsPage: PageComponent = () => {
-  const matches = useRouteMatches('query')
-  return (
-    <Switch>
-      {matches.map((path) => (
-        <Route key={path} path={path}>
-          <Reports />
-        </Route>
-      ))}
-    </Switch>
-  )
+  return <Reports />
 }
 
 Object.assign(ReportsPage, {

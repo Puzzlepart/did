@@ -1,0 +1,17 @@
+.root {
+  padding: 12px 16px;
+  .name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .description {
+    color: rgb(96, 94, 92);
+    font-size: 14px;
+  }
+
+  .updated {
+    color: rgb(96, 94, 92);
+    font-size: 12px;
+  }
+}

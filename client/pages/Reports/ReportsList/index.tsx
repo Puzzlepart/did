@@ -32,40 +32,38 @@ export const ReportsList: TabComponent = () => {
           iconProps={{ iconName: 'OEM' }}
         />
       )}
-      <List
-        enableShimmer={context.state.loading}
-        checkboxVisibility={CheckboxVisibility.always}
-        items={context.state.data.timeEntries}
-        height={isBrowser && window.innerHeight - 200}
-        listGroupProps={{
-          ...context.state.groupBy,
-          totalFunc: (items) => {
-            const hrs = items.reduce(
-              (sum, item) => sum + item.duration,
-              0
-            ) as number
-            return t('common.headerTotalDuration', {
-              duration: $date.getDurationString(hrs, t)
-            })
+      {_.isEmpty(context.state.data.timeEntries) &&
+      !context.state.loading &&
+      context.state.queryPreset ? (
+        <UserMessage text={t('reports.noEntriesText')} />
+      ) : (
+        <List
+          enableShimmer={context.state.loading}
+          checkboxVisibility={CheckboxVisibility.always}
+          items={context.state.data.timeEntries}
+          height={isBrowser && window.innerHeight - 200}
+          listGroupProps={{
+            ...context.state.groupBy,
+            totalFunc: (items) => {
+              const hrs = items.reduce(
+                (sum, item) => sum + item.duration,
+                0
+              ) as number
+              return t('common.headerTotalDuration', {
+                duration: $date.getDurationString(hrs, t)
+              })
+            }
+          }}
+          columns={columns}
+          commandBar={commandBar}
+          exportFileName={context.state.queryPreset?.exportFileName}
+          filterValues={context.state?.activeFilter?.values}
+          onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
+          filterPanelActions={
+            <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
           }
-        }}
-        columns={columns}
-        commandBar={commandBar}
-        exportFileName={context.state.preset?.exportFileName}
-        filterValues={context.state?.activeFilter?.values}
-        onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
-        filterPanelActions={
-          <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
-        }
-      />
-      <UserMessage
-        hidden={
-          !_.isEmpty(context.state.data.timeEntries) ||
-          context.state.loading ||
-          !context.state.preset
-        }
-        text={t('reports.noEntriesText')}
-      />
+        />
+      )}
     </div>
   )
 }
