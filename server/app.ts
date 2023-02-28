@@ -59,7 +59,7 @@ export class App {
   /**
    * Mongo client
    */
-  private _mongoClient: MongoClient
+  private _mcl: MongoClient
 
   /**
    * Bootstrapping the express application
@@ -90,7 +90,7 @@ export class App {
    * * Setting up error handling
    */
   public async setup() {
-    this._mongoClient = await MongoClient.connect(
+    this._mcl = await MongoClient.connect(
       environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
@@ -140,7 +140,7 @@ export class App {
    * * Setting up auth route at `/auth`
    */
   setupAuth() {
-    const _passport = passportMiddleware(this._mongoClient)
+    const _passport = passportMiddleware(this._mcl)
     this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
@@ -151,7 +151,7 @@ export class App {
    * Setup GraphQL API with MongoDB Client
    */
   async setupGraphQL() {
-    await setupGraphQL(this.instance, this._mongoClient)
+    await setupGraphQL(this.instance, this._mcl)
   }
 
   /**
