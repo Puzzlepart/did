@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IProjectsUrlParameters
+[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / IProjectsUrlParameters
 
 # Interface: IProjectsUrlParameters
 
@@ -17,7 +17,7 @@
 
 • **currentTab**: ProjectsTab
 
-Defined in: [client/pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)
+Defined in: [pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **projectKey**: *string*
 
-Defined in: [client/pages/Projects/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L8)
+Defined in: [pages/Projects/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L8)

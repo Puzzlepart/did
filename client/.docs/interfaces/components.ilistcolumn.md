@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IListColumn
+[did-client - v0.11.5](../README.md) / [Components](../modules/components.md) / IListColumn
 
 # Interface: IListColumn
 
@@ -27,7 +27,7 @@ Data for the column - `IListColumnData`
 
 Overrides: void
 
-Defined in: [client/components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
+Defined in: [components/List/types.ts:74](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L74)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 The column should be hidden
 
-Defined in: [client/components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)
+Defined in: [components/List/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L79)

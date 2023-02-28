@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / ProjectResolver
+[did-server - v0.11.5](../README.md) / [GraphQL](../modules/graphql.md) / ProjectResolver
 
 # Class: ProjectResolver
 
@@ -47,7 +47,7 @@ Defined in: [graphql/resolvers/project/index.ts:27](https://github.com/Puzzlepar
 
 ▸ **createOrUpdateProject**(`project`: [*ProjectInput*](graphql.projectinput.md), `options`: [*ProjectOptions*](graphql.projectoptions.md), `update`: *boolean*): *Promise*<[*CreateOrUpdateProjectResult*](graphql.createorupdateprojectresult.md)\>
 
-Create or update project
+Create or update project. Permission scope `MANAGE_PROJECTS` is required.
 
 #### Parameters:
 

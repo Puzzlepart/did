@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IFilterItem
+[did-client - v0.11.5](../README.md) / [Components](../modules/components.md) / IFilterItem
 
 # Interface: IFilterItem
 
@@ -17,7 +17,7 @@
 
 • **key**: *string* \| *number*
 
-Defined in: [client/components/FilterPanel/Filters/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L5)
+Defined in: [components/FilterPanel/Filters/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L5)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **value**: *string*
 
-Defined in: [client/components/FilterPanel/Filters/types.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L6)
+Defined in: [components/FilterPanel/Filters/types.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L6)

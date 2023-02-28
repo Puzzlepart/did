@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IProjectsContext
+[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / IProjectsContext
 
 # Interface: IProjectsContext
 
@@ -22,7 +22,7 @@
 
 • **dispatch**: *Dispatch*<AnyAction\>
 
-Defined in: [client/pages/Projects/context.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L11)
+Defined in: [pages/Projects/context.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L11)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **loading**: *boolean*
 
-Defined in: [client/pages/Projects/context.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L13)
+Defined in: [pages/Projects/context.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L13)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **state**: [*IProjectsState*](pages.iprojectsstate.md)
 
-Defined in: [client/pages/Projects/context.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L10)
+Defined in: [pages/Projects/context.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L10)
 
 ## Methods
 
@@ -54,4 +54,4 @@ Name | Type |
 
 **Returns:** *Promise*<ApolloQueryResult<any\>\>
 
-Defined in: [client/pages/Projects/context.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L12)
+Defined in: [pages/Projects/context.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L12)

@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IReportsData
+[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / IReportsData
 
 # Interface: IReportsData
 
@@ -21,7 +21,7 @@
 
 Periods
 
-Defined in: [client/pages/Reports/types.tsx:59](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L59)
+Defined in: [pages/Reports/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L75)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 Projects
 
-Defined in: [client/pages/Reports/types.tsx:64](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L64)
+Defined in: [pages/Reports/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L80)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 Time entries
 
-Defined in: [client/pages/Reports/types.tsx:49](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L49)
+Defined in: [pages/Reports/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L65)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 Users
 
-Defined in: [client/pages/Reports/types.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L54)
+Defined in: [pages/Reports/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L70)

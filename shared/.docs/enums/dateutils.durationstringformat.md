@@ -1,4 +1,4 @@
-[did-shared - v0.11.4](../README.md) / [DateUtils](../modules/dateutils.md) / DurationStringFormat
+[did-shared - v0.11.5](../README.md) / [DateUtils](../modules/dateutils.md) / DurationStringFormat
 
 # Enumeration: DurationStringFormat
 

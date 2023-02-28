@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / Middleware
+[did-server - v0.11.5](../README.md) / Middleware
 
 # Module: Middleware
 

@@ -1,4 +1,4 @@
-[did-shared - v0.11.4](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / InstanceLocaleDataReturn
+[did-shared - v0.11.5](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / InstanceLocaleDataReturn
 
 # Interface: InstanceLocaleDataReturn
 

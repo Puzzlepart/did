@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / HolidaysService
+[did-server - v0.11.5](../README.md) / [Services](../modules/services.md) / HolidaysService
 
 # Class: HolidaysService
 
