@@ -9,6 +9,12 @@ import {
   UserSettingToggle
 } from './types'
 
+/**
+ * Hook for getting the user settings configuration for the current user. This
+ * hook is used by the UserSettings component.
+ *
+ * @returns An array of user settings (`IUserSetting`)
+ */
 export function useSettingsConfiguration(): IUserSetting[] {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
@@ -48,7 +54,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
           text: 'Norsk (nynorsk)'
         }
       ],
-      defaultSelectedKey: user.preferredLanguage || 'en-GB'
+      defaultSelectedKey: user.preferredLanguage ?? 'en-GB'
     }),
     UserSettingToggle('ui.stickyNavigation', {
       label: t('common.stickyNavigationLabel'),
