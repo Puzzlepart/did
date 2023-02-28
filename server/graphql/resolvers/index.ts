@@ -39,3 +39,6 @@ export default [
   UserResolver,
   ReportLinkResolver
 ] as NonEmptyArray<any>
+
+export {UserResolver} from './user'
+export {ReportLinkResolver} from './reportLink'

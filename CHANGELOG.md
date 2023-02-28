@@ -76,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Missing submissions is not showing hidden users [#1089](https://github.com/Puzzlepart/did/pull/1089)
+- Vacation days reset per year by changing the user configuration format [#1086](https://github.com/Puzzlepart/did/pull/1086)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0114---21122022)

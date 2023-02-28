@@ -9,10 +9,17 @@ import {
   UserSettingToggle
 } from './types'
 
+/**
+ * Hook for getting the user settings configuration for the current user. This
+ * hook is used by the UserSettings component.
+ *
+ * @returns An array of user settings (`IUserSetting`)
+ */
 export function useSettingsConfiguration(): IUserSetting[] {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { pages, getUserConfiguration, user } = useAppContext()
+  const vacationTotalDaysKey = `vacation.totalDays.${new Date().getFullYear()}`
   return [
     UserSettingDropdown('startPage', {
       label: t('common.startPageLabel'),
@@ -47,7 +54,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
           text: 'Norsk (nynorsk)'
         }
       ],
-      defaultSelectedKey: user.preferredLanguage || 'en-GB'
+      defaultSelectedKey: user.preferredLanguage ?? 'en-GB'
     }),
     UserSettingToggle('ui.stickyNavigation', {
       label: t('common.stickyNavigationLabel'),
@@ -73,12 +80,12 @@ export function useSettingsConfiguration(): IUserSetting[] {
       ],
       defaultSelectedKey: getUserConfiguration('ui.theme')
     }),
-    UserSettingNumber('vacation.totalDays', {
+    UserSettingNumber(vacationTotalDaysKey, {
       label: t('common.vacationTotalDaysLabel'),
       description: t('common.vacationTotalDaysDescription'),
       min: 0,
       max: 50,
-      defaultValue: getUserConfiguration('vacation.totalDays')
+      defaultValue: getUserConfiguration(vacationTotalDaysKey)
     }),
     UserSettingDropdown('vacation.calculationType', {
       label: t('common.vacationCalculationTypeLabel'),

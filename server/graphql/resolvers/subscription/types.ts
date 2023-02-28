@@ -40,12 +40,21 @@ export class SubscriptionADSyncSettings {
   description: 'A type that describes Subscription vacation settings'
 })
 export class SubscriptionVacationSettings {
+  /**
+   * Total number of vacation days per year
+   */
   @Field({ nullable: true, defaultValue: 25 })
   totalDays?: number
 
+  /**
+   * Vacation calculation type (`planned` or `actual`)
+   */
   @Field({ nullable: true, defaultValue: 'planned' })
   calculationType?: string
 
+  /**
+   * Event category to use for vacation events
+   */
   @Field({ nullable: true })
   eventCategory?: string
 }

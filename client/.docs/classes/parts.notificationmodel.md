@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Parts](../modules/parts.md) / NotificationModel
+[did-client - v0.11.5](../README.md) / [Parts](../modules/parts.md) / NotificationModel
 
 # Class: NotificationModel
 
@@ -44,7 +44,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationModel*](parts.notificationmodel.md)
 
-Defined in: [client/parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
+Defined in: [parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
 
 ## Properties
 
@@ -52,7 +52,7 @@ Defined in: [client/parts/UserNotifications/types.tsx:11](https://github.com/Puz
 
 • **id**: *string*
 
-Defined in: [client/parts/UserNotifications/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L7)
+Defined in: [parts/UserNotifications/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L7)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • **moreLink**: *string*
 
-Defined in: [client/parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
+Defined in: [parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **severity**: *string*
 
-Defined in: [client/parts/UserNotifications/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L9)
+Defined in: [parts/UserNotifications/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L9)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 • **text**: *string*
 
-Defined in: [client/parts/UserNotifications/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L10)
+Defined in: [parts/UserNotifications/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L10)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • **type**: *string*
 
-Defined in: [client/parts/UserNotifications/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L8)
+Defined in: [parts/UserNotifications/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L8)
 
 ## Accessors
 
@@ -94,7 +94,7 @@ Defined in: [client/parts/UserNotifications/types.tsx:8](https://github.com/Puzz
 
 **Returns:** *IIconProps*
 
-Defined in: [client/parts/UserNotifications/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L35)
+Defined in: [parts/UserNotifications/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L35)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 **Returns:** [*UserMessageType*](../modules/components.md#usermessagetype)
 
-Defined in: [client/parts/UserNotifications/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L26)
+Defined in: [parts/UserNotifications/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L26)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 **Returns:** [*IUserMessageProps*](../interfaces/components.iusermessageprops.md)
 
-Defined in: [client/parts/UserNotifications/types.tsx:46](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L46)
+Defined in: [parts/UserNotifications/types.tsx:46](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L46)
 
 ## Methods
 
@@ -132,4 +132,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [client/parts/UserNotifications/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L60)
+Defined in: [parts/UserNotifications/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L60)

@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / GraphQL
+[did-server - v0.11.5](../README.md) / GraphQL
 
 # Module: GraphQL
 
@@ -17,6 +17,8 @@
 - [NotificationTemplates](../classes/graphql.notificationtemplates.md)
 - [ProjectInput](../classes/graphql.projectinput.md)
 - [ProjectOptions](../classes/graphql.projectoptions.md)
+- [ReportLinkInput](../classes/graphql.reportlinkinput.md)
+- [ReportLinkQuery](../classes/graphql.reportlinkquery.md)
 - [ReportsQuery](../classes/graphql.reportsquery.md)
 - [RoleInput](../classes/graphql.roleinput.md)
 - [SubscriptionADSyncSettingsInput](../classes/graphql.subscriptionadsyncsettingsinput.md)
@@ -45,6 +47,7 @@
 - [Notification](../classes/graphql.notification.md)
 - [OutlookCategory](../classes/graphql.outlookcategory.md)
 - [Project](../classes/graphql.project.md)
+- [ReportLink](../classes/graphql.reportlink.md)
 - [Role](../classes/graphql.role.md)
 - [Subscription](../classes/graphql.subscription.md)
 - [SubscriptionADSyncSettings](../classes/graphql.subscriptionadsyncsettings.md)
@@ -67,6 +70,7 @@
 - [NotificationResolver](../classes/graphql.notificationresolver.md)
 - [OutlookCategoryResolver](../classes/graphql.outlookcategoryresolver.md)
 - [ProjectResolver](../classes/graphql.projectresolver.md)
+- [ReportLinkResolver](../classes/graphql.reportlinkresolver.md)
 - [ReportsResolver](../classes/graphql.reportsresolver.md)
 - [RoleResolver](../classes/graphql.roleresolver.md)
 - [SubscriptionResolver](../classes/graphql.subscriptionresolver.md)

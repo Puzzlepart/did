@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Parts](../modules/parts.md) / IUserNotificationProps
+[did-client - v0.11.5](../README.md) / [Parts](../modules/parts.md) / IUserNotificationProps
 
 # Interface: IUserNotificationProps
 
@@ -16,4 +16,4 @@
 
 • **model**: [*NotificationModel*](../classes/parts.notificationmodel.md)
 
-Defined in: [client/parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx#L4)
+Defined in: [parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx#L4)

@@ -59,7 +59,7 @@ export class App {
   /**
    * Mongo client
    */
-  private _mongoClient: MongoClient
+  private _mcl: MongoClient
 
   /**
    * Bootstrapping the express application
@@ -90,7 +90,7 @@ export class App {
    * * Setting up error handling
    */
   public async setup() {
-    this._mongoClient = await MongoClient.connect(
+    this._mcl = await MongoClient.connect(
       environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
@@ -135,12 +135,12 @@ export class App {
   /**
    * Setup authentication
    *
-   * * Using passport for user login
-   * * Using express-bearer-token package to support external API calls
-   * * Setting up auth route at /auth
+   * * Using `passport` for user login
+   * * Using `express-bearer-token` package to support external API calls
+   * * Setting up auth route at `/auth`
    */
   setupAuth() {
-    const _passport = passportMiddleware(this._mongoClient)
+    const _passport = passportMiddleware(this._mcl)
     this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
@@ -148,17 +148,19 @@ export class App {
   }
 
   /**
-   * Setup graphql
+   * Setup GraphQL API with MongoDB Client
    */
   async setupGraphQL() {
-    await setupGraphQL(this.instance, this._mongoClient)
+    await setupGraphQL(this.instance, this._mcl)
   }
 
   /**
    * Setup routes
    *
-   * * Setting up * to use our index route giving the React
-   * Router full control of the routing.
+   * Configuring `/` to redirect to the login page
+   * if the user is not authenticated, and `*` to use
+   * our index route giving the React Router full
+   * control of the routing.
    */
   setupRoutes() {
     const index = express.Router()
@@ -175,7 +177,7 @@ export class App {
   }
 
   /**
-   * Setup error handling using http-errors
+   * Setup error handling using `http-errors`
    */
   setupErrorHandling() {
     this.instance.use((_request, _response, next) => next(createError(401)))
