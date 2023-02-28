@@ -27,12 +27,14 @@ export function useUserSettings() {
     clearTimeout(timeout[setting.fieldName])
     timeout[setting.fieldName] = setTimeout(async () => {
       switch (setting.fieldName) {
-        case 'preferredLanguage':
+        case 'preferredLanguage': {
           await updatePreferredLanguage(value as string)
           break
-        case 'startPage':
+        }
+        case 'startPage': {
           await updateStartPage(value as string)
           break
+        }
         default: {
           await updateConfiguration({ [setting.fieldName]: value })
         }

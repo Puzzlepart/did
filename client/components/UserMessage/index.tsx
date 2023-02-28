@@ -2,12 +2,12 @@ import { MessageBar } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { useUserMessage } from './useUserMessage'
 import { useUserMessageStyles } from './useUserMessageStyles'
-import rehypeRaw from 'rehype-raw'
-import rehypeSanitize from 'rehype-sanitize'
 
 /**
  * A component that supports a `<MessageBar />` with

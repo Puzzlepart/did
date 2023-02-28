@@ -64,8 +64,8 @@ export const authCallbackHandler =
   }
 
 /**
- * Handler for `/auth/signout`. Destroys the session using 
- * `request.session.destroy`, logs out the user using `request.logOut`, 
+ * Handler for `/auth/signout`. Destroys the session using
+ * `request.session.destroy`, logs out the user using `request.logOut`,
  * then redirects the user to the root path.
  *
  * @param request - Request

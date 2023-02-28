@@ -249,7 +249,7 @@ export class TimesheetService {
     )
     let events: any[]
     switch (provider) {
-      case 'google':
+      case 'google': {
         {
           events = await this._googleCalSvc.getEvents(
             startDateTimeIso,
@@ -257,6 +257,7 @@ export class TimesheetService {
           )
         }
         break
+      }
       default: {
         events = await this._msgraphSvc.getEvents(
           startDateTimeIso,
@@ -393,7 +394,7 @@ export class TimesheetService {
       )
       let usedHours: number = 0
       switch (calculationType) {
-        case 'confirmed':
+        case 'confirmed': {
           {
             const entries = await this._timeEntrySvc.find({
               projectId: settings.eventCategory,
@@ -405,7 +406,8 @@ export class TimesheetService {
             )
           }
           break
-        case 'planned':
+        }
+        case 'planned': {
           {
             const events = await this._msgraphSvc.getVacation(
               settings.eventCategory
@@ -416,6 +418,7 @@ export class TimesheetService {
             )
           }
           break
+        }
       }
       const used = toFixed(usedHours / 8, 2)
       const remaining = toFixed(totalDays - usedHours / 8, 2)

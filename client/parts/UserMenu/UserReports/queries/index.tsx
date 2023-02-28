@@ -31,4 +31,4 @@ export function useQueries(): any[] {
   }))
 }
 
-export { user_report_current_month as default_query }
+export { default as default_query } from './user-report-current-month.gql'

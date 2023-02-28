@@ -31,7 +31,7 @@ export default ({ initialState, queries }) =>
       })
       .addCase(SET_FILTER, (state, { payload }) => {
         state.activeFilter =
-          state.activeFilter?.key !== payload.key ? (payload as any) : null
+          state.activeFilter?.key === payload.key ? null : (payload as any)
       })
       .addCase(ADD_SAVED_FILTER, (state, { payload }) => {
         const newFilter: any = {

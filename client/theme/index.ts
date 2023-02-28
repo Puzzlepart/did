@@ -11,12 +11,15 @@ import { default as lightTheme } from './light'
  */
 export function getTheme(name: string): PartialTheme {
   switch (name) {
-    case 'dark':
+    case 'dark': {
       return darkTheme
-    case 'auto':
+    }
+    case 'auto': {
       return getAutoColorScheme()
-    default:
+    }
+    default: {
       return lightTheme
+    }
   }
 }
 
@@ -34,4 +37,5 @@ function getAutoColorScheme(): PartialTheme {
     : lightTheme
 }
 
-export { lightTheme, darkTheme }
+export { default as darkTheme } from './dark'
+export { default as lightTheme } from './light'

@@ -57,8 +57,9 @@ export async function startServer(port: string) {
         log()
         process.exit(1)
       }
-      default:
+      default: {
         throw error
+      }
     }
   }
 
@@ -86,4 +87,5 @@ export async function startServer(port: string) {
 
 export * from './app'
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 startServer(environment('PORT', '9001'))
