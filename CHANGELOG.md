@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.11.4 - TBA](#-0114---tba)
+	* [➤ 0.11.5 - TBA](#-0115---tba)
 		* [Changed](#changed)
 	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added)
@@ -66,12 +66,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0114---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0115---tba)
 
-## ➤ 0.11.4 - TBA
+## ➤ 0.11.5 - TBA
 
 ### Changed
 - Missing submissions is not showing hidden users [#1089](https://github.com/Puzzlepart/did/pull/1089)
+- Vacation days reset per year by changing the user configuration format [#1086](https://github.com/Puzzlepart/did/pull/1086)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0114---21122022)

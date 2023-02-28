@@ -64,7 +64,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -381,9 +381,13 @@ export class TimesheetService {
       const userConfiguration = await this._userSvc.getUserConfiguration(
         this.context.userId
       )
-      const totalDays = get(userConfiguration, `vacation.totalDays.${new Date().getFullYear()}`, {
-        default: settings.totalDays
-      })
+      const totalDays = get(
+        userConfiguration,
+        `vacation.totalDays.${new Date().getFullYear()}`,
+        {
+          default: settings.totalDays
+        }
+      )
       const calculationType = get(
         userConfiguration,
         'vacation.calculationType',
