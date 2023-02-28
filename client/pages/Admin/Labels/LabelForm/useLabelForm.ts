@@ -11,5 +11,5 @@ export function useLabelForm(props: ILabelFormProps) {
     model,
     register,
     submit
-  }
+  } as const
 }

@@ -1,7 +1,11 @@
 import { useState } from 'react'
 
 /**
- * Use a Map as state
+ * Hook for using a `Map` as a state object. A set of
+ * functions are returned for setting the map, setting
+ * a key on the map, getting the value of a key, getting
+ * an object representation of the map and clearing the
+ * map.
  *
  * @param map - Intitial map
  *

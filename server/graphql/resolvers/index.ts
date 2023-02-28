@@ -5,6 +5,7 @@ import { LabelResolver } from './label'
 import { NotificationResolver } from './notification'
 import { OutlookCategoryResolver } from './outlookCategory'
 import { ProjectResolver } from './project'
+import { ReportLinkResolver } from './reportLink'
 import { ReportsResolver } from './reports'
 import { RoleResolver } from './role'
 import { SubscriptionResolver } from './subscription'
@@ -35,5 +36,6 @@ export default [
   RoleResolver,
   SubscriptionResolver,
   TimesheetResolver,
-  UserResolver
+  UserResolver,
+  ReportLinkResolver
 ] as NonEmptyArray<any>

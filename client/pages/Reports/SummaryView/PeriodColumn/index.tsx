@@ -12,7 +12,6 @@ export const PeriodColumn: FC<IPeriodColumnProps> = (props) => {
   const target = useRef()
   const hours = usePeriodColumn(props)
   if (hours.total === null) return null
-
   return (
     <TooltipHost
       calloutProps={{

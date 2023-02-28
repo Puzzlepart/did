@@ -53,7 +53,7 @@ export class ProjectResolver {
   }
 
   /**
-   * Create or update project
+   * Create or update project. Permission scope `MANAGE_PROJECTS` is required.
    *
    * @param project - Project
    * @param options - Options
