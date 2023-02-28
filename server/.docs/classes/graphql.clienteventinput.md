@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / ClientEventInput
+[did-server - v0.11.5](../README.md) / [GraphQL](../modules/graphql.md) / ClientEventInput
 
 # Class: ClientEventInput
 

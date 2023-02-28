@@ -1,0 +1,9 @@
+
+mutation AddOrUpdateReportLink ($reportLink: ReportLinkInput!, $update: Boolean) {
+  addOrUpdateReportLink(reportLink: $reportLink, update: $update) {
+    success
+    error {
+      message
+    }
+  }
+}

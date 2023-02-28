@@ -1,0 +1,16 @@
+query ReportLinks {
+  reportLinks(query: { published: true }) {
+    name
+    description
+    icon
+    iconColor
+    externalUrl
+    linkRef
+    createdAt
+    updatedAt
+    createdBy
+    updatedBy
+    published
+    promoted
+  }
+}

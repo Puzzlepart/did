@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetOptions
+[did-server - v0.11.5](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetOptions
 
 # Class: TimesheetOptions
 

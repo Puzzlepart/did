@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IProjectsState
+[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / IProjectsState
 
 # Interface: IProjectsState
 
@@ -20,7 +20,7 @@
 
 • `Optional` **currentTab**: ProjectsTab
 
-Defined in: [client/pages/Projects/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L21)
+Defined in: [pages/Projects/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L21)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • `Optional` **error**: *ApolloError*
 
-Defined in: [client/pages/Projects/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L25)
+Defined in: [pages/Projects/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L25)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 • `Optional` **outlookCategories**: *OutlookCategory*[]
 
-Defined in: [client/pages/Projects/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L24)
+Defined in: [pages/Projects/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L24)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Optional` **projects**: *Project*[]
 
-Defined in: [client/pages/Projects/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L23)
+Defined in: [pages/Projects/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L23)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 • `Optional` **selected**: *Project*
 
-Defined in: [client/pages/Projects/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L22)
+Defined in: [pages/Projects/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L22)

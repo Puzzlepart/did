@@ -15,19 +15,6 @@ import { useList } from './useList'
  * Supports list groups, filters, group by,
  * selection, search box and custom column headers.
  *
- * Used by the following components:
- *
- * * `<EventList />`
- * * `<Admin />` => `<ApiTokens />`
- * * `<Admin />` => `<Roles />`
- * * `<Admin />` => `<SummaryView />`
- * * `<Admin />` => `<Users />` => `<AddMultiplePanel />`
- * * `<Admin />` => `<Users />`
- * * `<Customers />` => `<CustomerList />`
- * * `<Projects />` => `<ProjectList />`
- * * `<Reports />`
- * * `<Timesheet />` => `<SummaryView />`
- *
  * @category Reusable Component
  */
 export const List: ReusableComponent<IListProps> = (props) => {

@@ -1,0 +1,15 @@
+query ReportLinks {
+  reportLinks {
+    name
+    description
+    icon
+    iconColor
+    externalUrl
+    year 
+    month
+    createdAt
+    updatedAt
+    published
+    promoted
+  }
+}

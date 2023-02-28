@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IReportsSavedFilter
+[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / IReportsSavedFilter
 
 # Interface: IReportsSavedFilter
 
@@ -22,4 +22,4 @@
 
 • **values**: *Record*<string, any\>
 
-Defined in: [client/pages/Reports/types.tsx:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L39)
+Defined in: [pages/Reports/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L55)

@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / Components
+[did-client - v0.11.5](../README.md) / Components
 
 # Module: Components
 
@@ -160,7 +160,7 @@ Name | Type |
 `column` | [*IListColumn*](../interfaces/components.ilistcolumn.md) |
 `target` | EventTarget & HTMLElement |
 
-Defined in: [client/components/List/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L175)
+Defined in: [components/List/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L175)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
-Defined in: [client/components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+Defined in: [components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
 
 ___
 
@@ -183,7 +183,7 @@ Name | Type |
 `filters` | [*IFilter*](../interfaces/components.ifilter.md)[] |
 `isFiltered` | *boolean* |
 
-Defined in: [client/components/List/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L82)
+Defined in: [components/List/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L82)
 
 ___
 
@@ -197,7 +197,7 @@ Name | Type | Default |
 :------ | :------ | :------ |
 `T` | [*ITabItemProps*](../interfaces/components.itabitemprops.md) | [*ITabItemProps*](../interfaces/components.itabitemprops.md) |
 
-Defined in: [client/components/TabContainer/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L89)
+Defined in: [components/TabContainer/types.ts:89](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L89)
 
 ___
 
@@ -205,7 +205,7 @@ ___
 
 Ƭ **TabContainerComponent**: *FC*<[*ITabContainerProps*](../interfaces/components.itabcontainerprops.md)\>
 
-Defined in: [client/components/TabContainer/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L87)
+Defined in: [components/TabContainer/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/types.ts#L87)
 
 ___
 
@@ -213,7 +213,7 @@ ___
 
 Ƭ **UserMessageType**: *success* \| *info* \| *warning* \| *error* \| *severeWarning*
 
-Defined in: [client/components/UserMessage/types.tsx:3](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L3)
+Defined in: [components/UserMessage/types.tsx:3](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L3)
 
 ___
 
@@ -223,7 +223,7 @@ ___
 
 Ƭ **IToastProps**: [*IUserMessageProps*](../interfaces/components.iusermessageprops.md)
 
-Defined in: [client/components/Toast/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/types.tsx#L6)
+Defined in: [components/Toast/types.tsx:6](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/types.tsx#L6)
 
 ## Function Component Variables
 
@@ -231,7 +231,7 @@ Defined in: [client/components/Toast/types.tsx:6](https://github.com/Puzzlepart/
 
 • `Const` **FilterItem**: *FC*<IFilterItemProps\>
 
-Defined in: [client/components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
+Defined in: [components/FilterPanel/FilterItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/FilterItem/index.tsx#L12)
 
 ___
 
@@ -241,7 +241,7 @@ ___
 
 • `Const` **SuggestionItem**: *FC*<[*ISuggestionItemProps*](../interfaces/components.isuggestionitemprops.md)\>
 
-Defined in: [client/components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
+Defined in: [components/Autocomplete/SuggestionItem/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/index.tsx#L11)
 
 ___
 
@@ -254,7 +254,7 @@ ___
 Autocomplete component using `<SearchBox />`, `<Callout />`,
 `<FocusZone />` and `<List />` from ``.
 
-Defined in: [client/components/Autocomplete/Autocomplete.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L24)
+Defined in: [components/Autocomplete/Autocomplete.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/Autocomplete.tsx#L24)
 
 ___
 
@@ -265,7 +265,7 @@ ___
 Field to pick an color using `<SketchPicker />` from
 [react-color](https://www.npmjs.com/package/react-color)
 
-Defined in: [client/components/ColorPickerField/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L15)
+Defined in: [components/ColorPickerField/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L15)
 
 ___
 
@@ -275,7 +275,7 @@ ___
 
 Conditionally wraps `children` in `wrapper` based on `condition`
 
-Defined in: [client/components/ConditionalWrapper/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L17)
+Defined in: [components/ConditionalWrapper/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ConditionalWrapper/index.tsx#L17)
 
 ___
 
@@ -286,7 +286,7 @@ ___
 Renders a `<Link />` from `react-router-dom` that
 navigates to the specified customer
 
-Defined in: [client/components/CustomerLink/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L12)
+Defined in: [components/CustomerLink/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/CustomerLink/index.tsx#L12)
 
 ___
 
@@ -297,7 +297,7 @@ ___
 Renders a edit link using `<Icon />` and `<Link />`
 from `@fluentui/react`
 
-Defined in: [client/components/EditLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L14)
+Defined in: [components/EditLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L14)
 
 ___
 
@@ -312,7 +312,7 @@ Uses styles from `@primer/css`
 
 **`see`** https://primer.style/components/Label
 
-Defined in: [client/components/EntityLabel/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L20)
+Defined in: [components/EntityLabel/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L20)
 
 ___
 
@@ -324,7 +324,7 @@ Renders events in a list using `<List />` component
 
 Supports property `additionalColumns`
 
-Defined in: [client/components/EventList/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L15)
+Defined in: [components/EventList/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L15)
 
 ___
 
@@ -338,7 +338,7 @@ Filter panel that renders filter items with more than
 `shortListCount` defaults to **10**, meaning
 10 items are shown before displaying a show more link.
 
-Defined in: [client/components/FilterPanel/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L19)
+Defined in: [components/FilterPanel/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L19)
 
 ___
 
@@ -348,7 +348,7 @@ ___
 
 Modal that shows the available shortcuts in the current context.
 
-Defined in: [client/components/HotkeyModal/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L15)
+Defined in: [components/HotkeyModal/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L15)
 
 ___
 
@@ -362,7 +362,7 @@ icons from `@uifabric/icons`
 **`remarks`** Can be controlled with a model using props
 `model` and `name`
 
-Defined in: [client/components/IconPicker/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L17)
+Defined in: [components/IconPicker/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/IconPicker/index.tsx#L17)
 
 ___
 
@@ -372,7 +372,7 @@ ___
 
 Renders an inline `<Icon />` with text
 
-Defined in: [client/components/IconText/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconText/index.tsx#L13)
+Defined in: [components/IconText/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/IconText/index.tsx#L13)
 
 ___
 
@@ -380,7 +380,7 @@ ___
 
 • `Const` **LabelPicker**: *ReusableComponent*<ILabelPickerProps\>
 
-Defined in: [client/components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
+Defined in: [components/LabelPicker/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/LabelPicker/index.tsx#L14)
 
 ___
 
@@ -393,20 +393,7 @@ List component using `ShimmeredDetailsList` from `@fluentui/react`.
 Supports list groups, filters, group by,
 selection, search box and custom column headers.
 
-Used by the following components:
-
-* `<EventList />`
-* `<Admin />` => `<ApiTokens />`
-* `<Admin />` => `<Roles />`
-* `<Admin />` => `<SummaryView />`
-* `<Admin />` => `<Users />` => `<AddMultiplePanel />`
-* `<Admin />` => `<Users />`
-* `<Customers />` => `<CustomerList />`
-* `<Projects />` => `<ProjectList />`
-* `<Reports />`
-* `<Timesheet />` => `<SummaryView />`
-
-Defined in: [client/components/List/index.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L33)
+Defined in: [components/List/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L20)
 
 ___
 
@@ -414,7 +401,7 @@ ___
 
 • `Const` **PermissionList**: *ReusableComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
-Defined in: [client/components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
+Defined in: [components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
 
 ___
 
@@ -425,7 +412,7 @@ ___
 Renders a `<Link />` from `react-router-dom` that
 navigates to the specified project
 
-Defined in: [client/components/ProjectLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L14)
+Defined in: [components/ProjectLink/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectLink/index.tsx#L14)
 
 ___
 
@@ -436,7 +423,7 @@ ___
 Shows more details about the project in a
 `<TooltipHost />` from `@fluentui/react`
 
-Defined in: [client/components/ProjectTooltip/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L13)
+Defined in: [components/ProjectTooltip/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L13)
 
 ___
 
@@ -447,7 +434,7 @@ ___
 Conditionally wraps `children` in `<ScrollablePane />` based
 on `condition`
 
-Defined in: [client/components/ScrollablePaneWrapper/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L11)
+Defined in: [components/ScrollablePaneWrapper/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L11)
 
 ___
 
@@ -457,7 +444,7 @@ ___
 
 Search for customers using `<Autocomplete />`
 
-Defined in: [client/components/SearchCustomer/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L12)
+Defined in: [components/SearchCustomer/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchCustomer/index.tsx#L12)
 
 ___
 
@@ -467,7 +454,7 @@ ___
 
 Search for projects using `<Autocomplete />`
 
-Defined in: [client/components/SearchProject/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L13)
+Defined in: [components/SearchProject/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/SearchProject/index.tsx#L13)
 
 ___
 
@@ -480,7 +467,7 @@ using `ReactMarkdown`.
 
 **`remarks`** Has a default padding top of **4px**
 
-Defined in: [client/components/SubText/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L17)
+Defined in: [components/SubText/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/SubText/index.tsx#L17)
 
 ___
 
@@ -496,7 +483,7 @@ to use `TabComponent`
 Adds styles **display: flex** and **flex-wrap: wrap**
 to make the `<Pivot >` mobile friendly
 
-Defined in: [client/components/TabContainer/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L19)
+Defined in: [components/TabContainer/index.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/TabContainer/index.tsx#L19)
 
 ___
 
@@ -509,7 +496,7 @@ markdown using `react-markdown`
 
 **`remarks`** Typically used with the `useToast` hook
 
-Defined in: [client/components/Toast/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L16)
+Defined in: [components/Toast/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L16)
 
 ___
 
@@ -520,7 +507,7 @@ ___
 A component that supports a `<MessageBar />` with
 markdown using `react-markdown`.
 
-Defined in: [client/components/UserMessage/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L16)
+Defined in: [components/UserMessage/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L16)
 
 ___
 
@@ -534,7 +521,7 @@ User column
 
 Renders a `<Persona />` component
 
-Defined in: [client/components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L15)
+Defined in: [components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L15)
 
 ## Autocomplete Functions
 
@@ -565,7 +552,7 @@ Name | Type |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
 `suggestions` | { `data?`: *any* ; `iconName?`: *string* ; `isSelected`: *boolean* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `tag?`: *any* ; `type?`: *string*  }[] |
 
-Defined in: [client/components/Autocomplete/useAutocomplete.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L18)
+Defined in: [components/Autocomplete/useAutocomplete.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L18)
 
 ___
 
@@ -591,7 +578,7 @@ Name | Type |
 `onSearch` | (`\_event`: *any*, `searchTerm`: *string*) => *any* |
 `onSetSelected` | (`index`: *number*) => *any* |
 
-Defined in: [client/components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
+Defined in: [components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
 
 ___
 
@@ -617,7 +604,7 @@ Name | Type |
 `context` | IListContext |
 `listProps` | [*IListProps*](../interfaces/components.ilistprops.md)<any\> |
 
-Defined in: [client/components/List/useList.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L19)
+Defined in: [components/List/useList.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useList.ts#L19)
 
 ___
 
@@ -636,7 +623,7 @@ Name | Type | Description |
 
 **Returns:** *any*[][] \| readonly [IGroup[], *any*[]]
 
-Defined in: [client/components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
+Defined in: [components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
 
 ___
 
@@ -654,7 +641,7 @@ Name | Type |
 
 **Returns:** [*IListProps*](../interfaces/components.ilistprops.md)
 
-Defined in: [client/components/List/useListProps.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.tsx#L31)
+Defined in: [components/List/useListProps.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListProps.tsx#L31)
 
 ___
 
@@ -679,7 +666,7 @@ Name | Type |
 
 **Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Defined in: [client/components/UserColumn/useUserListColumn.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L15)
+Defined in: [components/UserColumn/useUserListColumn.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/useUserListColumn.tsx#L15)
 
 ___
 
@@ -700,7 +687,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/components/DeleteLink/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L13)
+Defined in: [components/DeleteLink/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L13)
 
 ___
 
@@ -721,7 +708,7 @@ Name | Type | Default value | Description |
 
 **Returns:** readonly [[*IUserMessageProps*](../interfaces/components.iusermessageprops.md), (`message`: [*IToastProps*](components.md#itoastprops), `duration`: *number*) => *void*]
 
-Defined in: [client/components/Toast/useToast.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/useToast.ts#L12)
+Defined in: [components/Toast/useToast.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/useToast.ts#L12)
 
 ___
 
@@ -735,4 +722,4 @@ Hook used to show a temporarily message
 
 **Returns:** [[*IUserMessageProps*](../interfaces/components.iusermessageprops.md), (`message`: [*IUserMessageProps*](../interfaces/components.iusermessageprops.md), `duration?`: *number*) => *void*]
 
-Defined in: [client/components/UserMessage/useMessage.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/useMessage.ts#L9)
+Defined in: [components/UserMessage/useMessage.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/useMessage.ts#L9)

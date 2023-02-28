@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / Services
+[did-server - v0.11.5](../README.md) / Services
 
 # Module: Services
 
@@ -25,6 +25,7 @@ Services used by `GraphQL`
 - [MSOAuthService](../classes/services.msoauthservice.md)
 - [NotificationService](../classes/services.notificationservice.md)
 - [ProjectService](../classes/services.projectservice.md)
+- [ReportLinkService](../classes/services.reportlinkservice.md)
 - [ReportService](../classes/services.reportservice.md)
 - [RoleService](../classes/services.roleservice.md)
 - [SubscriptionService](../classes/services.subscriptionservice.md)

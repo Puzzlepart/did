@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import _ from 'underscore'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
 import {
   useReportsQueries,
@@ -27,18 +27,16 @@ import { useReportsReducer } from './reducer'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const history = useHistory()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-  const options = useReportsQueryOptions({ queries, dispatch })
+  const options = useReportsQueryOptions({ queries, state, dispatch })
   const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
-    if (state.preset) {
-      history.push(`/reports/${state.preset?.itemKey || ''}`)
-      query({ variables: state.preset?.variables })
+    if (state.queryPreset && _.isEmpty(state.queryPreset?.reportLinks)) {
+      query({ variables: state.queryPreset?.variables })
     }
-  }, [state.preset])
+  }, [state.queryPreset?.reportLinks])
 
   useUpdateUserConfiguration({
     config: {
@@ -50,9 +48,10 @@ export function useReports() {
   const context = useMemo(() => ({ state, dispatch, t }), [state])
 
   return {
-    defaultSelectedKey: state.preset?.itemKey || 'default',
+    defaultSelectedKey: state.queryPreset?.itemKey || 'default',
     queries: queries.filter((q) => !q.hidden),
     options,
-    context
+    context,
+    reportLinks: state.reportLinks
   } as const
 }

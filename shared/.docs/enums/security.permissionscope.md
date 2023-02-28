@@ -1,4 +1,4 @@
-[did-shared - v0.11.4](../README.md) / [Security](../modules/security.md) / PermissionScope
+[did-shared - v0.11.5](../README.md) / [Security](../modules/security.md) / PermissionScope
 
 # Enumeration: PermissionScope
 
@@ -18,6 +18,7 @@
 - [LIST\_USERS](security.permissionscope.md#list_users)
 - [MANAGE\_CUSTOMERS](security.permissionscope.md#manage_customers)
 - [MANAGE\_PROJECTS](security.permissionscope.md#manage_projects)
+- [MANAGE\_REPORT\_LINKS](security.permissionscope.md#manage_report_links)
 - [MANAGE\_ROLESPERMISSIONS](security.permissionscope.md#manage_rolespermissions)
 - [MANAGE\_SUBSCRIPTION](security.permissionscope.md#manage_subscription)
 - [MANAGE\_USERS](security.permissionscope.md#manage_users)
@@ -101,6 +102,14 @@ ___
 • **MANAGE\_PROJECTS**: = "ef4032fb"
 
 Defined in: [shared/config/security/permissions.ts:9](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L9)
+
+___
+
+### MANAGE\_REPORT\_LINKS
+
+• **MANAGE\_REPORT\_LINKS**: = "8de5215e"
+
+Defined in: [shared/config/security/permissions.ts:17](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L17)
 
 ___
 

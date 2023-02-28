@@ -1,0 +1,8 @@
+mutation DeleteReportLink ($name: String!) {
+  deleteReportLink(name: $name) {
+    success
+    error {
+      message
+    }
+  }
+}

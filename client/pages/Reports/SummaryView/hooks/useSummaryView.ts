@@ -4,7 +4,8 @@ import { useColumns } from './useColumns'
 import { useRows } from './useRows'
 
 /**
- * Component logic hook for SummaryView
+ * Component logic hook for SummaryView. Returns all data required for
+ * SummaryView component.
  *
  * @category SummaryView
  */
@@ -16,5 +17,5 @@ export function useSummaryView() {
     state,
     rows,
     columns
-  }
+  } as const
 }

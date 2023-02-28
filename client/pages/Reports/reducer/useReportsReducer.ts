@@ -34,7 +34,7 @@ export function useReportsReducer(queries: IReportsQuery[]) {
     }
   }
   if (url.query) {
-    initialState.preset = _.find(queries, (q) => q.itemKey === url.query)
+    initialState.queryPreset = _.find(queries, (q) => q.itemKey === url.query)
   }
   initialState.savedFilters = getUserConfiguration('reports.filters') || {}
   const reducer = useMemo(() => createReducer({ initialState, queries }), [])

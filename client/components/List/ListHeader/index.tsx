@@ -66,6 +66,7 @@ export const ListHeader: FC<IListHeaderProps> = ({
     key: 'TOGGLE_FILTER_PANEL',
     iconProps: { iconName: 'Filter' },
     iconOnly: true,
+    disabled: context.props.enableShimmer,
     onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
   }
 
@@ -90,6 +91,7 @@ export const ListHeader: FC<IListHeaderProps> = ({
         fileName
       })
     },
+    disabled: context.props.enableShimmer,
     iconProps: {
       iconName: 'ExcelDocument',
       styles: { root: { color: 'green' } }

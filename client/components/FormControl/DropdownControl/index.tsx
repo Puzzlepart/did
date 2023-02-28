@@ -2,7 +2,9 @@
 import { Dropdown } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import _ from 'underscore'
+import styles from './DropdownControl.module.scss'
 import { IDropdownControlProps } from './types'
 
 /**
@@ -14,7 +16,7 @@ export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
   props
 ) => {
   return (
-    <div {..._.pick(props, 'hidden')}>
+    <div className={styles.root} {..._.pick(props, 'hidden')}>
       <Dropdown
         {...props}
         onChange={(_event, option) => {
@@ -22,6 +24,9 @@ export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
         }}
         defaultSelectedKey={props.model.value(props.name) as string}
       />
+      <div className={styles.description}>
+        <ReactMarkdown>{props.description}</ReactMarkdown>
+      </div>
     </div>
   )
 }
