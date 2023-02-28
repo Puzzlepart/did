@@ -79,15 +79,17 @@ export function generateUniqueRequestId() {
 /**
  * Create GraphQL context
  *
- * * Sets the default mongodb instance on the context
+ * * Sets the default `mongodb` instance on the context
  * * Sets the user subscription on the context
- * * Checks token auth using handleTokenAuthentication
- * * Generates a random request ID using Math random
- * * Sets CONTEXT and REQUEST on the container to enable
+ * * Checks token auth using `handleTokenAuthentication`
+ * * Generates a random request ID using `Math random`
+ * * Sets `CONTEXT` and `REQUEST` on the container to enable
  *   dependency injection in the resolvers.
  *
  * @param request - Express request
  * @param mcl - Mongo client
+ *
+ * @returns GraphQL context object
  */
 export const createContext = async (
   request: Express.Request,

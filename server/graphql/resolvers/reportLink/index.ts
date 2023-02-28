@@ -43,8 +43,9 @@ export class ReportLinkResolver {
   }
 
   /**
-   * Add or update report link. Permission scope `MANAGE_REPORT_LINKS` is
-   * required.
+   * Add or update report link. The `update` flag determines if the
+   * report link is added or updated. Permission scope `MANAGE_REPORT_LINKS`
+   * is required.
    *
    * @param reportLink - Report link
    * @param update - Update flag
