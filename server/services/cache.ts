@@ -7,6 +7,9 @@ import { Context } from '../graphql/context'
 import { redisMiddlware } from '../middleware/redis'
 const log = require('debug')('server/services/cache')
 
+/**
+ * Cache scope - `USER` or `SUBSCRIPTION`
+ */
 export enum CacheScope {
   USER,
   SUBSCRIPTION
