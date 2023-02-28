@@ -13,6 +13,7 @@ export function useSettingsConfiguration(): IUserSetting[] {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { pages, getUserConfiguration, user } = useAppContext()
+  const vacationTotalDaysKey = `vacation.totalDays.${new Date().getFullYear()}`
   return [
     UserSettingDropdown('startPage', {
       label: t('common.startPageLabel'),
@@ -73,12 +74,12 @@ export function useSettingsConfiguration(): IUserSetting[] {
       ],
       defaultSelectedKey: getUserConfiguration('ui.theme')
     }),
-    UserSettingNumber('vacation.totalDays', {
+    UserSettingNumber(vacationTotalDaysKey, {
       label: t('common.vacationTotalDaysLabel'),
       description: t('common.vacationTotalDaysDescription'),
       min: 0,
       max: 50,
-      defaultValue: getUserConfiguration('vacation.totalDays')
+      defaultValue: getUserConfiguration(vacationTotalDaysKey)
     }),
     UserSettingDropdown('vacation.calculationType', {
       label: t('common.vacationCalculationTypeLabel'),
