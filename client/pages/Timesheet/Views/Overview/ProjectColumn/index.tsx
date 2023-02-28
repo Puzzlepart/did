@@ -31,12 +31,15 @@ function getErrorMessage(
   t: TFunction
 ): [string, UserMessageType] {
   switch (code) {
-    case 'PROJECT_INACTIVE':
+    case 'PROJECT_INACTIVE': {
       return [t('timesheet.projectInactiveErrorText'), 'error']
-    case 'CUSTOMER_INACTIVE':
+    }
+    case 'CUSTOMER_INACTIVE': {
       return [t('timesheet.customerInactiveErrorText'), 'error']
-    case 'EVENT_NO_TITLE':
+    }
+    case 'EVENT_NO_TITLE': {
       return [t('timesheet.eventNoTitleErrorText'), 'error']
+    }
   }
 }
 

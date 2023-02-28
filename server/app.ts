@@ -158,8 +158,8 @@ export class App {
    * Setup routes
    *
    * Configuring `/` to redirect to the login page
-   * if the user is not authenticated, and `*` to use 
-   * our index route giving the React Router full 
+   * if the user is not authenticated, and `*` to use
+   * our index route giving the React Router full
    * control of the routing.
    */
   setupRoutes() {

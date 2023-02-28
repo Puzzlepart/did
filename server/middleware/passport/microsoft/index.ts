@@ -10,7 +10,7 @@ import { onVerifySignin } from './onVerifySignin'
 function getRedirectUrl() {
   let redirectUrl = environment('MICROSOFT_REDIRECT_URI')
   if (environment('LOCALTUNNEL_SUBDOMAIN')) {
-    const _redirectUrl = fs.readFileSync('.localtunnel', 'utf-8')
+    const _redirectUrl = fs.readFileSync('.localtunnel', 'utf8')
     if (_redirectUrl) {
       redirectUrl = _redirectUrl
     }

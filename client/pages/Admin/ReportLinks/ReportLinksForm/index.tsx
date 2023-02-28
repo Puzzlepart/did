@@ -21,7 +21,7 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
       submitProps={submit}
       panelProps={{
         ..._.omit(props, 'onSave'),
-        headerText: !!props.edit
+        headerText: props.edit
           ? t('admin.reportLinks.editReportLinkText')
           : t('admin.reportLinks.addNewReportText'),
         isLightDismiss: true

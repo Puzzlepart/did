@@ -22,4 +22,4 @@ i18next.use(initReactI18next).init({
   keySeparator: ':'
 })
 
-export default i18next
+export { default } from 'i18next'

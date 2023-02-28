@@ -15,10 +15,12 @@ import { ITimesheetState } from '../types'
  */
 function convertDateRangeTypeToString(dateRangeType: DateRangeType) {
   switch (dateRangeType) {
-    case DateRangeType.Week:
+    case DateRangeType.Week: {
       return 'week'
-    case DateRangeType.Month:
+    }
+    case DateRangeType.Month: {
       return 'month'
+    }
   }
 }
 

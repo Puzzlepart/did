@@ -64,7 +64,7 @@ const saveFilterCmd = (context: IReportsContext): IContextualMenuItem =>
             }
           }
         )
-      ].filter((index) => index)
+      ].filter(Boolean)
     }
   } as IContextualMenuItem)
 

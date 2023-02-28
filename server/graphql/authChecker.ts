@@ -5,7 +5,7 @@ import { Context } from './context'
 
 /**
  * GraphQL API authentication options.
- * 
+ *
  * Contains the following options:
  * - `userContext` - Requires user context and can cannot be called with an API token
  * - `scope` - Permission scope required for the resolver
@@ -23,7 +23,7 @@ export interface IAuthOptions {
 }
 
 /**
- * Checks auth for the `context`. 
+ * Checks auth for the `context`.
  *
  * @param param0 - Resolver data
  * @param param1 - Authentication options

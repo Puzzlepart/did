@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-await-expression-member */
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
@@ -186,6 +187,7 @@ class MSGraphService {
       const colorIndex =
         category
           .split('')
+          // eslint-disable-next-line unicorn/prefer-code-point
           .map((c) => c.charCodeAt(0))
           .reduce((a, b) => a + b) % 24
       const content = JSON.stringify({
