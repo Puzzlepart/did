@@ -26,7 +26,7 @@ export interface IAutocompleteProps<T = any> extends ISearchBoxProps {
 
   /**
    * Provide the key of the selected item. This will be used to clear
-   * the selection when the provided key is `null` or `undefined`.
+   * the selection when the provided key is `null`.
    */
   selectedKey?: string
 

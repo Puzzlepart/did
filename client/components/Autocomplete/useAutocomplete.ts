@@ -40,7 +40,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
   )
 
   useEffect(() => {
-    if (!props.selectedKey) dispatch(RESET())
+    if (props.selectedKey === null) dispatch(RESET())
   }, [props.selectedKey])
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
