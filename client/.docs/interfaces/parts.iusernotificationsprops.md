@@ -17,7 +17,7 @@
 
 • `Optional` **iconName**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:77](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L77)
+Defined in: [parts/UserNotifications/types.tsx:83](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L83)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • `Optional` **renderAsMenuItem**: *boolean*
 
-Defined in: [parts/UserNotifications/types.tsx:76](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L76)
+Defined in: [parts/UserNotifications/types.tsx:82](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L82)

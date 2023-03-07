@@ -44,7 +44,7 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [app/context.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L42)
+Defined in: [app/context.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L41)
 
 ## Functions
 
@@ -60,4 +60,4 @@ Uses `useContext` with `AppContext`
 
 `IAppContext`
 
-Defined in: [app/context.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L51)
+Defined in: [app/context.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L50)

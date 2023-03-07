@@ -94,7 +94,7 @@ Defined in: [parts/UserNotifications/types.tsx:8](https://github.com/Puzzlepart/
 
 **Returns:** *IIconProps*
 
-Defined in: [parts/UserNotifications/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L35)
+Defined in: [parts/UserNotifications/types.tsx:37](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L37)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 **Returns:** [*IUserMessageProps*](../interfaces/components.iusermessageprops.md)
 
-Defined in: [parts/UserNotifications/types.tsx:46](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L46)
+Defined in: [parts/UserNotifications/types.tsx:51](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L51)
 
 ## Methods
 
@@ -132,4 +132,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [parts/UserNotifications/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L60)
+Defined in: [parts/UserNotifications/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L65)

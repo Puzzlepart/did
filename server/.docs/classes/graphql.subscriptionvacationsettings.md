@@ -30,7 +30,9 @@
 
 • `Optional` **calculationType**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L47)
+Vacation calculation type (`planned` or `actual`)
+
+Defined in: [graphql/resolvers/subscription/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L53)
 
 ___
 
@@ -38,7 +40,9 @@ ___
 
 • `Optional` **eventCategory**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L50)
+Event category to use for vacation events
+
+Defined in: [graphql/resolvers/subscription/types.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L59)
 
 ___
 
@@ -46,4 +50,6 @@ ___
 
 • `Optional` **totalDays**: *number*
 
-Defined in: [graphql/resolvers/subscription/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L44)
+Total number of vacation days per year
+
+Defined in: [graphql/resolvers/subscription/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L47)
