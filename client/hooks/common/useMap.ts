@@ -48,10 +48,11 @@ export function useMap<
 
   /**
    * Get model value. The value is retrived
-   * from the converted object
+   * from the converted object. If the value
+   * is `undefined` the default value is returned.
    *
-   * @param key - Key of the value to retriee
-   * @param _defaultValue - Default value
+   * @param key - Key of the value to retrieve
+   * @param _defaultValue - Default value (default: `null`)
    *
    * @returns Model value from the converted object
    */

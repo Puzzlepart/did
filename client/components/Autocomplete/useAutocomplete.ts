@@ -2,14 +2,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ISearchBox } from '@fluentui/react'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
-import { INIT } from './actions'
+import { INIT, RESET } from './actions'
 import styles from './Autocomplete.module.scss'
 import { useAutocompleteReducer } from './reducer'
 import { IAutocompleteProps } from './types'
 import { useAutocompleteEvents } from './useAutocompleteEvents'
 
 /**
- * Hook for `<Autocomplete />`
+ * Component logic hook for Autocomplete component. This hook is responsible for
+ * managing the state of the component and providing the necessary callbacks.
+ * 
+ * - Uses `useAutocompleteReducer` to manage the state of the component.
+ * - Uses `useAutocompleteEvents` to provide the necessary callbacks.
+ * - Uses `useLayoutEffect` to initialize the state of the component when 
+ * `props.items` or `props.defaultSelectedKey` changes.
+ * - Uses `useEffect` to reset the state of the component when `props.selectedKey` 
+ * is `null` or `undefined`.
+ * - Uses `useMemo` to memoize the `suggestions` array.
+ * - Uses `useRef` and `useEffect` to focus the search box when `props.autoFocus` is `true`.
  *
  * @param props - Props
  *
@@ -28,6 +38,10 @@ export function useAutocomplete(props: IAutocompleteProps) {
     () => dispatch(INIT({ props })),
     [props.defaultSelectedKey, props.items]
   )
+
+  useEffect(() => {
+    if (props.selectedKey === null) dispatch(RESET())
+  }, [props.selectedKey])
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
 

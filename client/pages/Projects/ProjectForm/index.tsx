@@ -32,6 +32,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         label={t('common.customer')}
         required={true}
         placeholder={t('common.searchPlaceholder')}
+        selectedKey={model.value('customerKey')}
         onSelected={(customer) => model.set('customerKey', customer.key)}
       />
       <TextControl
