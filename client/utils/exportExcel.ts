@@ -25,7 +25,6 @@ export default function stringToArrayBuffer(binaryString: string) {
   const buffer = new Uint8Array(length)
 
   for (let index = 0; index < length; index++) {
-    // eslint-disable-next-line unicorn/prefer-code-point
     buffer[index] = binaryString.charCodeAt(index)
   }
 
