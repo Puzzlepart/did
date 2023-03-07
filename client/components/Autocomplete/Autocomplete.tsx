@@ -34,6 +34,8 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
     onClear,
     onKeyDown
   } = useAutocomplete(props)
+  // eslint-disable-next-line no-console
+  console.log(state.selectedItem, props.label)
   return (
     <div className={className} onKeyDown={onKeyDown}>
       {props.label && (

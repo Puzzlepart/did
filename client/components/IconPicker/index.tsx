@@ -15,10 +15,10 @@ import { useIconPicker } from './useIconPicker'
  * @category Reusable Component
  */
 export const IconPicker: ReusableComponent<IIconPickerProps> = (props) => {
-  const props_ = useIconPicker(props)
+  const autoCompleteProps = useIconPicker(props)
   return (
     <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
-      <Autocomplete {...props_} />
+      <Autocomplete {...autoCompleteProps} />
     </div>
   )
 }
