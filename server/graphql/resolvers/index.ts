@@ -22,8 +22,8 @@ export { ReportsResolver } from './reports'
 export { RoleResolver } from './role'
 export { SubscriptionResolver } from './subscription'
 export { TimesheetResolver } from './timesheet'
-export { UserResolver } from './user'
 export * from './types'
+export { UserResolver } from './user'
 
 export default [
   ApiTokenResolver,

@@ -48,7 +48,7 @@ Services used by `GraphQL`
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [services/cache.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L15)
+Defined in: [services/cache.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L18)
 
 ___
 
@@ -66,4 +66,4 @@ Name | Type | Description |
 `key` | [*CacheKey*](services.md#cachekey) | Cache key   |
 `scope`? | [*CacheScope*](../enums/services.cachescope.md) | Cache scope   |
 
-Defined in: [services/cache.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L20)
+Defined in: [services/cache.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L23)
