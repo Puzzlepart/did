@@ -42,9 +42,11 @@ class MSGraphService {
    * @memberof MSGraphService
    */
   private async _getClient(): Promise<MSGraphClient> {
-    this._accessToken = (
-      await this._msOAuthSvc.getAccessToken(this._accessTokenOptions)
-    ).access_token
+    this._accessToken =
+      // eslint-disable-next-line unicorn/no-await-expression-member
+      (
+        await this._msOAuthSvc.getAccessToken(this._accessTokenOptions)
+      ).access_token
     const client = MSGraphClient.init({
       authProvider: (done: (error: Error, token: any) => void) => {
         done(null, this._accessToken)

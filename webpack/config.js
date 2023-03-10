@@ -18,11 +18,12 @@ const { getRules } = require('./getRules')
 
 const config = {
   mode: MODE,
-  entry:  SRC_PATH,
+  entry: SRC_PATH,
   output: {
     path: PUBLIC_JS_PATH,
     filename: BUNDLE_FILE_NAME,
     publicPath: '/js',
+    hashFunction: 'xxhash64'
   },
   optimization: getOptimizationForEnvironment(IS_DEVELOPMENT),
   module: {

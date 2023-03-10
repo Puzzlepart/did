@@ -11,7 +11,6 @@ import { RoleResolver } from './role'
 import { SubscriptionResolver } from './subscription'
 import { TimesheetResolver } from './timesheet'
 import { UserResolver } from './user'
-
 export { ApiTokenResolver } from './apiToken'
 export { CustomerResolver } from './customer'
 export { LabelResolver } from './label'
@@ -23,8 +22,8 @@ export { ReportsResolver } from './reports'
 export { RoleResolver } from './role'
 export { SubscriptionResolver } from './subscription'
 export { TimesheetResolver } from './timesheet'
-export * from './types'
 export { UserResolver } from './user'
+export * from './types'
 
 export default [
   ApiTokenResolver,
