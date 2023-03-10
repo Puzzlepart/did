@@ -161,7 +161,7 @@
     "eslint-plugin-unicorn": "45.0.2",
     "eslint-plugin-unused-imports": "^2.0.0",
     "fork-ts-checker-notifier-webpack-plugin": "6.0.0",
-    "fork-ts-checker-webpack-plugin": "7.3.0",
+    "fork-ts-checker-webpack-plugin": "8.0.0",
     "localtunnel": "2.0.1",
     "open": "8.0.4",
     "play-sound": "1.1.3",

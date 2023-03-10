@@ -11,13 +11,23 @@ import {
 } from './actions'
 
 /**
- * Creating reducer for `Reports` using [reduxjs/toolkit]
+ * Creating reducer for `Reports` using [reduxjs/toolkit].
+ * 
+ * [reduxjs/toolkit]: https://redux-toolkit.js.org/
+ * 
+ * Handles the following actions:
+ * - `DATA_UPDATED` - Update state with new data from the queries.
+ * - `SET_FILTER` - Add new saved filter to the list of saved filters.
+ * - `ADD_SAVED_FILTER` - Add new saved filter to the list of saved filters.
+ * - `REMOVE_SAVED_FILTER` - Remove saved filter from the list of saved filters.
+ * - `CHANGE_QUERY` - Change query preset and update report links based on the new preset.
+ * - `SET_FILTER_STATE` - Set filter state and update active filter if filter is not active.  
  */
 export default ({ initialState, queries }) =>
   createReducer<IReportsState>(initialState, (builder) =>
     builder
       /**
-       * Update state with new data from the queries.
+       * `DATA_UPDATED`: Update state with new data from the queries.
        */
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.queryResult.loading
@@ -41,7 +51,7 @@ export default ({ initialState, queries }) =>
       })
 
       /**
-       * Add new saved filter to the list of saved filters.
+       * `ADD_SAVED_FILTER`: Add new saved filter to the list of saved filters.
        */
       .addCase(ADD_SAVED_FILTER, (state, { payload }) => {
         const newFilter: any = {
@@ -62,7 +72,7 @@ export default ({ initialState, queries }) =>
       })
 
       /**
-       * Remove saved filter from the list of saved filters.
+       * `REMOVE_SAVED_FILTER`: Remove saved filter from the list of saved filters.
        */
       .addCase(REMOVE_SAVED_FILTER, (state, { payload }) => {
         state.savedFilters = _.omit(state.savedFilters, payload)
@@ -70,7 +80,7 @@ export default ({ initialState, queries }) =>
       })
 
       /**
-       * Change query preset and update report links based on the new preset.
+       * `CHANGE_QUERY`: Change query preset and update report links based on the new preset.
        */
       .addCase(CHANGE_QUERY, (state, { payload }) => {
         const queryPreset = _.find<IReportsQuery>(
@@ -89,7 +99,7 @@ export default ({ initialState, queries }) =>
       })
 
       /**
-       * Set filter state and update active filter if filter is not active.
+       * `SET_FILTER_STATE`: Set filter state and update active filter if filter is not active.
        */
       .addCase(SET_FILTER_STATE, (state, { payload }) => {
         state.filterState = payload

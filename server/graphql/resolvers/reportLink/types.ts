@@ -135,11 +135,12 @@ export class ReportLink {
   month: number
 
   /**
-   * Link reference. The format is `YYYY_MM` where January is `1` (not zero-indexed)
+   * Link reference. The format is `YYYY_MM` where January is `1` (not zero-indexed).
+   * If the report is not associated with a month (but with the year as a whole), the format is `YYYY`.
    */
   @Field({ nullable: true, defaultValue: null })
   get linkRef(): string {
-    return [this.year, this.month + 1].filter(Boolean).join('_')
+    return [this.year, this.month && (this.month + 1)].filter(Boolean).join('_')
   }
 
   /**
