@@ -158,7 +158,7 @@ ___
 
 ### setupGraphQL
 
-▸ `Const`**setupGraphQL**(`app`: *Application*, `client`: *MongoClient*): *Promise*<void\>
+▸ `Const`**setupGraphQL**(`app`: *Application*, `mcl`: *MongoClient*): *Promise*<void\>
 
 Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
 application
@@ -177,7 +177,7 @@ application
 Name | Type | Description |
 :------ | :------ | :------ |
 `app` | *Application* | Express application   |
-`client` | *MongoClient* | Mongo client    |
+`mcl` | *MongoClient* | Mongo client    |
 
 **Returns:** *Promise*<void\>
 

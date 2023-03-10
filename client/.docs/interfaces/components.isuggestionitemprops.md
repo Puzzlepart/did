@@ -33,6 +33,8 @@ ___
 
 • `Optional` **itemIcons**: *boolean* \| AutocompleteItemIcons
 
+Icons to be displayed next to each item.
+
 Inherited from: void
 
-Defined in: [components/Autocomplete/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L24)
+Defined in: [components/Autocomplete/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L41)

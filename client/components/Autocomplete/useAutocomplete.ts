@@ -11,12 +11,12 @@ import { useAutocompleteEvents } from './useAutocompleteEvents'
 /**
  * Component logic hook for Autocomplete component. This hook is responsible for
  * managing the state of the component and providing the necessary callbacks.
- * 
+ *
  * - Uses `useAutocompleteReducer` to manage the state of the component.
  * - Uses `useAutocompleteEvents` to provide the necessary callbacks.
- * - Uses `useLayoutEffect` to initialize the state of the component when 
+ * - Uses `useLayoutEffect` to initialize the state of the component when
  * `props.items` or `props.defaultSelectedKey` changes.
- * - Uses `useEffect` to reset the state of the component when `props.selectedKey` 
+ * - Uses `useEffect` to reset the state of the component when `props.selectedKey`
  * is `null` or `undefined`.
  * - Uses `useMemo` to memoize the `suggestions` array.
  * - Uses `useRef` and `useEffect` to focus the search box when `props.autoFocus` is `true`.

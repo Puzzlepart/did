@@ -529,7 +529,17 @@ Defined in: [components/UserColumn/index.tsx:15](https://github.com/Puzzlepart/d
 
 ▸ **useAutocomplete**(`props`: [*IAutocompleteProps*](../interfaces/components.iautocompleteprops.md)): *object*
 
-Hook for `<Autocomplete />`
+Component logic hook for Autocomplete component. This hook is responsible for
+managing the state of the component and providing the necessary callbacks.
+
+- Uses `useAutocompleteReducer` to manage the state of the component.
+- Uses `useAutocompleteEvents` to provide the necessary callbacks.
+- Uses `useLayoutEffect` to initialize the state of the component when
+`props.items` or `props.defaultSelectedKey` changes.
+- Uses `useEffect` to reset the state of the component when `props.selectedKey`
+is `null` or `undefined`.
+- Uses `useMemo` to memoize the `suggestions` array.
+- Uses `useRef` and `useEffect` to focus the search box when `props.autoFocus` is `true`.
 
 #### Parameters:
 
@@ -552,7 +562,7 @@ Name | Type |
 `state` | [*IAutocompleteState*](../interfaces/components.iautocompletestate.md)<any\> |
 `suggestions` | { `data?`: *any* ; `iconName?`: *string* ; `isSelected`: *boolean* ; `searchValue`: *string* ; `secondaryText?`: *string* ; `tag?`: *any* ; `type?`: *string*  }[] |
 
-Defined in: [components/Autocomplete/useAutocomplete.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L18)
+Defined in: [components/Autocomplete/useAutocomplete.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocomplete.ts#L28)
 
 ___
 

@@ -170,4 +170,4 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: [app/ContextUser.ts:94](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L94)
+Defined in: [app/ContextUser.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/app/ContextUser.ts#L96)
