@@ -304,7 +304,9 @@
           "args": "after-used",
           "argsIgnorePattern": "^_"
         }
-      ]
+      ],
+      "unicorn/prefer-code-point": 0,
+      "unicorn/no-await-expression-member": 0
     },
     "settings": {
       "react": {
