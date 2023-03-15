@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportLink*](graphql.reportlink.md)
 
-Defined in: [graphql/resolvers/reportLink/types.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L156)
+Defined in: [graphql/resolvers/reportLink/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L157)
 
 ## Properties
 
@@ -140,7 +140,7 @@ ___
 Whether the report is promoted or not (`true` or `false`). If the
 report is promoted, it will be shown on the Reports front page.
 
-Defined in: [graphql/resolvers/reportLink/types.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L156)
+Defined in: [graphql/resolvers/reportLink/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L157)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 Whether the report is published or not (`true` or `false`)
 
-Defined in: [graphql/resolvers/reportLink/types.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L149)
+Defined in: [graphql/resolvers/reportLink/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L150)
 
 ___
 
@@ -188,8 +188,9 @@ Defined in: [graphql/resolvers/reportLink/types.ts:129](https://github.com/Puzzl
 
 • get **linkRef**(): *string*
 
-Link reference. The format is `YYYY_MM` where January is `1` (not zero-indexed)
+Link reference. The format is `YYYY_MM` where January is `1` (not zero-indexed).
+If the report is not associated with a month (but with the year as a whole), the format is `YYYY`.
 
 **Returns:** *string*
 
-Defined in: [graphql/resolvers/reportLink/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L141)
+Defined in: [graphql/resolvers/reportLink/types.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reportLink/types.ts#L142)
