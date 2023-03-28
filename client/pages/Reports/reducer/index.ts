@@ -12,16 +12,16 @@ import {
 
 /**
  * Creating reducer for `Reports` using [reduxjs/toolkit].
- * 
+ *
  * [reduxjs/toolkit]: https://redux-toolkit.js.org/
- * 
+ *
  * Handles the following actions:
  * - `DATA_UPDATED` - Update state with new data from the queries.
  * - `SET_FILTER` - Add new saved filter to the list of saved filters.
  * - `ADD_SAVED_FILTER` - Add new saved filter to the list of saved filters.
  * - `REMOVE_SAVED_FILTER` - Remove saved filter from the list of saved filters.
  * - `CHANGE_QUERY` - Change query preset and update report links based on the new preset.
- * - `SET_FILTER_STATE` - Set filter state and update active filter if filter is not active.  
+ * - `SET_FILTER_STATE` - Set filter state and update active filter if filter is not active.
  */
 export default ({ initialState, queries }) =>
   createReducer<IReportsState>(initialState, (builder) =>

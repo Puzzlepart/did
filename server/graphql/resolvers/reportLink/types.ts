@@ -140,7 +140,7 @@ export class ReportLink {
    */
   @Field({ nullable: true, defaultValue: null })
   get linkRef(): string {
-    return [this.year, this.month && (this.month + 1)].filter(Boolean).join('_')
+    return [this.year, this.month && this.month + 1].filter(Boolean).join('_')
   }
 
   /**
