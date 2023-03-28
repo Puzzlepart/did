@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.11.5 - TBA](#-0115---tba)
+	* [➤ 0.12.0 - TBA](#-0120---tba)
 		* [Added](#added)
 		* [Fixed](#fixed)
 		* [Changed](#changed)
@@ -68,12 +68,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0115---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0120---tba)
 
-## ➤ 0.11.5 - TBA
+## ➤ 0.12.0 - TBA
 
 ### Added
-- Added support for uploading formatted reports and displaying them to endusers [#1096](https://github.com/Puzzlepart/did/issues/1096)
+- Added support for uploading formatted reports and displaying them to end-users [#1096](https://github.com/Puzzlepart/did/issues/1096)
 
 ### Fixed
 - Fix for [#1100](https://github.com/Puzzlepart/did/issues/1100)

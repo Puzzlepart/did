@@ -1,4 +1,4 @@
-[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / ITimesheetContext
+[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / ITimesheetContext
 
 # Interface: ITimesheetContext
 

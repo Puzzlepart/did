@@ -1,4 +1,4 @@
-[did-client - v0.11.5](../README.md) / [Pages](../modules/pages.md) / IProjectListProps
+[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / IProjectListProps
 
 # Interface: IProjectListProps
 

@@ -1,4 +1,4 @@
-[did-shared - v0.11.5](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / Dayjs
+[did-shared - v0.12.0](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / Dayjs
 
 # Class: Dayjs
 

@@ -1,4 +1,4 @@
-[did-client - v0.11.5](../README.md) / [Utils](../modules/utils.md) / BrowserStorage
+[did-client - v0.12.0](../README.md) / [Utils](../modules/utils.md) / BrowserStorage
 
 # Class: BrowserStorage<T\>
 

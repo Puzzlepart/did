@@ -1,4 +1,4 @@
-[did-client - v0.11.5](../README.md) / [Components](components.md) / List
+[did-client - v0.12.0](../README.md) / [Components](components.md) / List
 
 # Namespace: List
 
