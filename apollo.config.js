@@ -1,6 +1,6 @@
 module.exports = {
   client: {
-    service: 'Did-dev@v0.9.11',
+    service: 'Did-dev@v0.12.0',
     includes: ['./client/**/*.gql']
   }
 }
