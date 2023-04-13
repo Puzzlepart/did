@@ -34,7 +34,7 @@ export class NotificationService {
   ) {}
 
   /**
-   * Get periods
+   * Get Timesheet periods for the next {count} weeks with the given {add} value.
    *
    * @param add - Add
    * @param count - Count
