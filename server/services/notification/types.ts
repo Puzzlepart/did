@@ -27,7 +27,7 @@ export class UserNotification {
   }
 
   /**
-   * Generates a unique notification id
+   * Generates a unique notification ID
    *
    * @param id - Id
    */
@@ -36,12 +36,10 @@ export class UserNotification {
   }
 
   /**
-   * More link
-   *
-   * @remarks This could be handled on the client in the future
+   * More link for the notification in the format `/timesheet/week/overview/{startDate}`.
    */
   public get moreLink() {
-    return ['', 'timesheet/overview', ...this._period.id.split('_')].join('/')
+    return ['', 'timesheet/week/overview', this._period.startDate].join('/')
   }
 }
 
