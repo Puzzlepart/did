@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.12.0 - TBA](#-0120---tba)
+	* [➤ 0.12.0 - 13.04.2023](#-0120---13042023)
 		* [Added](#added)
 		* [Fixed](#fixed)
 		* [Changed](#changed)
@@ -68,15 +68,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0120---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0120---13042023)
 
-## ➤ 0.12.0 - TBA
+## ➤ 0.12.0 - 13.04.2023
 
 ### Added
 - Added support for uploading formatted reports and displaying them to end-users [#1096](https://github.com/Puzzlepart/did/issues/1096)
 
 ### Fixed
 - Fix for [#1100](https://github.com/Puzzlepart/did/issues/1100)
+- Fix for notification links [#1106](https://github.com/Puzzlepart/did/issues/1106)
 
 ### Changed
 - Missing submissions is not showing hidden users [#1089](https://github.com/Puzzlepart/did/pull/1089)

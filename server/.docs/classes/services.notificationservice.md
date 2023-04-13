@@ -65,7 +65,7 @@ ___
 
 ▸ `Private`**_getPeriods**(`add`: *string*, `count`: *number*, `locale`: *string*): *any*[]
 
-Get periods
+Get Timesheet periods for the next {count} weeks with the given {add} value.
 
 #### Parameters:
 
