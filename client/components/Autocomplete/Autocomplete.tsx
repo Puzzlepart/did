@@ -47,7 +47,10 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
           key={state.selectedItem?.key}
           className={styles.field}
           defaultValue={state.value}
-          iconProps={{ iconName: state.selectedItem?.iconName || 'Search' }}
+          iconProps={{
+            ...props.iconProps,
+            iconName: state.selectedItem?.iconName || 'Search'
+          }}
           placeholder={props.placeholder}
           disabled={props.disabled}
           autoComplete='off'

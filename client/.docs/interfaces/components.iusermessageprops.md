@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IUserMessageProps
+[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IUserMessageProps
 
 # Interface: IUserMessageProps
 
@@ -32,7 +32,7 @@
 
 Container style
 
-Defined in: [client/components/UserMessage/types.tsx:49](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L49)
+Defined in: [components/UserMessage/types.tsx:49](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L49)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 To flex the message center with a fixed height
 
-Defined in: [client/components/UserMessage/types.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L54)
+Defined in: [components/UserMessage/types.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L54)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 Header text to show in **bold** _slightly larger_ font
 
-Defined in: [client/components/UserMessage/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L17)
+Defined in: [components/UserMessage/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L17)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 Icon to use if not default for the type
 
-Defined in: [client/components/UserMessage/types.tsx:44](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L44)
+Defined in: [components/UserMessage/types.tsx:44](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L44)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 Styles for the inner part of the message
 
-Defined in: [client/components/UserMessage/types.tsx:59](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L59)
+Defined in: [components/UserMessage/types.tsx:59](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L59)
 
 ___
 
@@ -94,11 +94,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/UserMessage/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L29)
+Defined in: [components/UserMessage/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L29)
 
 Overrides: void
 
-Defined in: [client/components/UserMessage/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L29)
+Defined in: [components/UserMessage/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L29)
 
 ___
 
@@ -114,11 +114,11 @@ On dismiss handler for the message
 
 **Returns:** *void*
 
-Defined in: [client/components/UserMessage/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L34)
+Defined in: [components/UserMessage/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L34)
 
 Overrides: void
 
-Defined in: [client/components/UserMessage/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L34)
+Defined in: [components/UserMessage/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L34)
 
 ___
 
@@ -130,7 +130,7 @@ Text to show in the message
 
 **`remarks`** Supports markdown
 
-Defined in: [client/components/UserMessage/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L24)
+Defined in: [components/UserMessage/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L24)
 
 ___
 
@@ -140,4 +140,4 @@ ___
 
 Type info, warning, error etc
 
-Defined in: [client/components/UserMessage/types.tsx:39](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L39)
+Defined in: [components/UserMessage/types.tsx:39](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L39)

@@ -13,7 +13,8 @@ const {
 
 /**
  * Get plugins config for webpack based on
- * node environment
+ * node environment. If development, add
+ * plugins for live reload, notifications, etc.
  *
  * @returns plugins config for webpack
  */
@@ -38,7 +39,12 @@ function getPluginsForEnvironment() {
         configFile: TSCONFIG_PATH,
         profile: process.env.FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE === '1'
       },
-      logger: { infrastructure: 'silent', issues: 'console' }
+      logger: {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        log: () => {},
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        error: () => {}
+      }
     }),
     new ForkTsCheckerNotifierWebpackPlugin({ skipSuccessful: true }),
     new CustomCompileHooks({

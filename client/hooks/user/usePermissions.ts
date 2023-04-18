@@ -5,16 +5,21 @@ import { useTranslation } from 'react-i18next'
 import { getPermissions, IPermission, PermissionScope } from 'security'
 import _ from 'underscore'
 
+type UsePermissionsReturnType = [
+  IPermission[],
+  (scope: PermissionScope) => boolean
+]
+
 /**
- * Permissions hook that returns atuple of the available
+ * Permissions hook that returns  tuple of the available
  * permissions and a function to check if the current user
- * has the specified permission
+ * has the specified permission.
  *
  * @param scopeIds - Limit the returns permissions to the specified ids
  * @param api - Only return permissions available to be called externally
  *
- * @returns Permissions available based on specified permissionIds
- * and a function hasPermission that checks if the currently logged
+ * @returns Permissions available based on specified `permissionIds`
+ * and a function `hasPermission` that checks if the currently logged
  * on user has the specified permission.
  *
  * @category React Hook
@@ -22,7 +27,7 @@ import _ from 'underscore'
 export function usePermissions(
   scopeIds?: string[],
   api = false
-): [IPermission[], (scope: PermissionScope) => boolean] {
+): UsePermissionsReturnType {
   const { t } = useTranslation()
   const context = useAppContext()
 

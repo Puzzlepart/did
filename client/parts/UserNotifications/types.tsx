@@ -25,21 +25,26 @@ export class NotificationModel {
 
   private get _messageType(): UserMessageType {
     switch (this.type) {
-      case 'WEEK_NOT_CONFIRMED':
+      case 'WEEK_NOT_CONFIRMED': {
         return 'warning'
-      default:
+      }
+      default: {
         return 'info'
+      }
     }
   }
 
   private get _iconProps(): IIconProps {
     switch (this.type) {
-      case 'WEEK_NOT_CONFIRMED':
+      case 'WEEK_NOT_CONFIRMED': {
         return { iconName: 'CalendarWorkWeek' }
-      case 'MISSING_FORECAST':
+      }
+      case 'MISSING_FORECAST': {
         return { iconName: 'BufferTimeBefore' }
-      default:
+      }
+      default: {
         return
+      }
     }
   }
 
@@ -66,8 +71,9 @@ export class NotificationModel {
         return t('notifications.goToPeriodText')
       }
 
-      default:
+      default: {
         return t('notifications.moreLinkText')
+      }
     }
   }
 }

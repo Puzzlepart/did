@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / Hooks
+[did-client - v0.12.0](../README.md) / Hooks
 
 # Module: Hooks
 
@@ -46,7 +46,7 @@ Name | Type |
 `autoUpdate`? | *boolean* |
 `config`? | T |
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L7)
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L7)
 
 ___
 
@@ -63,7 +63,7 @@ Name | Type |
 `updatePreferredLanguage`? | (`preferredLanguage`: *string*) => *Promise*<void\> |
 `updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L12)
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L12)
 
 ## Other Functions
 
@@ -90,7 +90,7 @@ Name | Type |
 
 Timesheet periods for a number of weeks in the past
 
-Defined in: [client/hooks/common/useTimesheetPeriods.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useTimesheetPeriods.ts#L12)
+Defined in: [hooks/common/useTimesheetPeriods.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useTimesheetPeriods.ts#L12)
 
 ___
 
@@ -118,7 +118,7 @@ Name | Type |
 
 **Returns:** readonly [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
 
-Defined in: [client/hooks/common/useArray.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L11)
+Defined in: [hooks/common/useArray.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L11)
 
 ___
 
@@ -146,7 +146,7 @@ Name | Type |
 
 **Returns:** readonly [T, (`value`: *any*) => *void*, () => *void*]
 
-Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L13)
+Defined in: [hooks/browserStorage/useBrowserStorage.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L13)
 
 ___
 
@@ -168,7 +168,7 @@ Name | Type |
 :------ | :------ |
 `onExport` | () => *Promise*<void\> |
 
-Defined in: [client/hooks/excel/useExcelExport.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L19)
+Defined in: [hooks/excel/useExcelExport.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L19)
 
 ___
 
@@ -181,7 +181,7 @@ as an array of `ISuggestionItem`
 
 **Returns:** [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
 
-Defined in: [client/hooks/common/useFabricIcons.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L12)
+Defined in: [hooks/common/useFabricIcons.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L12)
 
 ___
 
@@ -189,7 +189,11 @@ ___
 
 ▸ **useMap**<KeyType, ObjectType, ValueType\>(`map?`: *Map*<any, any\>): *object*
 
-Use a Map as state
+Hook for using a `Map` as a state object. A set of
+functions are returned for setting the map, setting
+a key on the map, getting the value of a key, getting
+an object representation of the map and clearing the
+map.
 
 #### Type parameters:
 
@@ -221,7 +225,7 @@ to return the value of the specified key, a `$` object
 that is a object representation of the map and a `reset`
 function for clearing the map.
 
-Defined in: [client/hooks/common/useMap.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L16)
+Defined in: [hooks/common/useMap.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L20)
 
 ___
 
@@ -240,17 +244,17 @@ Name | Type |
 
 **Returns:** NotificationsQuery
 
-Defined in: [client/hooks/notifications/useNotificationsQuery.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L27)
+Defined in: [hooks/notifications/useNotificationsQuery.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L27)
 
 ___
 
 ### usePermissions
 
-▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): [IPermission[], (`scope`: PermissionScope) => *boolean*]
+▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): UsePermissionsReturnType
 
-Permissions hook that returns atuple of the available
+Permissions hook that returns  tuple of the available
 permissions and a function to check if the current user
-has the specified permission
+has the specified permission.
 
 #### Parameters:
 
@@ -259,13 +263,13 @@ Name | Type | Default value | Description |
 `scopeIds?` | *string*[] | - | Limit the returns permissions to the specified ids   |
 `api` | *boolean* | false | Only return permissions available to be called externally    |
 
-**Returns:** [IPermission[], (`scope`: PermissionScope) => *boolean*]
+**Returns:** UsePermissionsReturnType
 
-Permissions available based on specified permissionIds
-and a function hasPermission that checks if the currently logged
+Permissions available based on specified `permissionIds`
+and a function `hasPermission` that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [client/hooks/user/usePermissions.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L22)
+Defined in: [hooks/user/usePermissions.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L27)
 
 ___
 
@@ -286,7 +290,7 @@ Name | Type | Default value |
 
 **Returns:** [*boolean*, DispatchWithoutAction]
 
-Defined in: [client/hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
+Defined in: [hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
 
 ___
 
@@ -314,4 +318,4 @@ Name | Type | Description |
 
 **Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L36)
+Defined in: [hooks/user/useUpdateUserConfiguration.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L36)

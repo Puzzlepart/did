@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / Subscription
+[did-server - v0.12.0](../README.md) / [GraphQL](../modules/graphql.md) / Subscription
 
 # Class: Subscription
 
@@ -33,7 +33,7 @@
 
 • `Optional` **\_id**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L90)
+Defined in: [graphql/resolvers/subscription/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L99)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 Database name
 
-Defined in: [graphql/resolvers/subscription/types.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L107)
+Defined in: [graphql/resolvers/subscription/types.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L116)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L93)
+Defined in: [graphql/resolvers/subscription/types.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L102)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L96)
+Defined in: [graphql/resolvers/subscription/types.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L105)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **owner**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L99)
+Defined in: [graphql/resolvers/subscription/types.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L108)
 
 ___
 
@@ -75,4 +75,4 @@ ___
 
 • `Optional` **settings**: [*SubscriptionSettings*](graphql.subscriptionsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L102)
+Defined in: [graphql/resolvers/subscription/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L111)

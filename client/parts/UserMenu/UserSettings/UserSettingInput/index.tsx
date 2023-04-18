@@ -23,7 +23,7 @@ export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
   const { onUpdate } = useContext(UserSettingsContext)
   let element: JSX.Element
   switch (setting.type) {
-    case UserSettingInputType.Dropdown:
+    case UserSettingInputType.Dropdown: {
       {
         element = (
           <Dropdown
@@ -36,7 +36,8 @@ export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
         )
       }
       break
-    case UserSettingInputType.Toggle:
+    }
+    case UserSettingInputType.Toggle: {
       {
         element = (
           <Toggle
@@ -46,7 +47,8 @@ export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
         )
       }
       break
-    case UserSettingInputType.Number:
+    }
+    case UserSettingInputType.Number: {
       {
         element = (
           <TextField
@@ -59,8 +61,10 @@ export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
         )
       }
       break
-    default:
+    }
+    default: {
       element = null
+    }
   }
 
   return (

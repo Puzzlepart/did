@@ -73,13 +73,15 @@ export async function exportExcel(
           columns.map((col) => {
             const fieldValue = get(item, col.fieldName)
             switch (col?.data?.excelColFormat) {
-              case 'date':
+              case 'date': {
                 return {
                   v: new DateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
                   t: 'd'
                 }
-              default:
+              }
+              default: {
                 return fieldValue
+              }
             }
           })
         )

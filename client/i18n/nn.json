@@ -169,6 +169,45 @@
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
       "teamsReminderButtonTooltiop": "Send påminning i Teams til alle brukarar som ikkje har bekreftet veke {{name}}"
     },
+    "reportLinks": {
+      "headerText": "Rapportkoblinger",
+      "addNewReportsLink": "Legg til ny rapportkobling",
+      "editReportLinkText": "Rediger rapportkobling",
+      "addNewReportText": "Legg til ny rapportkobling",
+      "nameLabel": "Rapportnavn",
+      "namePlaceholder": "Navn på rapporten",
+      "nameDescription": "Skriv inn et navn for rapporten. \nDette vil bli brukt til å identifisere rapporten i rapportlisten.",
+      "descriptionLabel": "Beskrivelse",
+      "descriptionPlaceholder": "Beskrivelse av rapporten",
+      "descriptionDescription": "Beskriv rapporten. Inneholder den noen spesifikk funksjonalitet? Formatering?",
+      "externalUrlLabel": "Ekstern URL",
+      "externalUrlPlaceholder": "Ekstern URL for rapporten",
+      "externalUrlDescription": "Skriv inn en ekstern URL til rapporten. Dette kan være en kobling til en Power BI-rapport, en kobling til en PDF-rapport eller en kobling til en rapport i et annet system.",
+      "publishedLabel": "Publisert",
+      "publishedDescription": "Når rapporten er publisert, vil den være tilgjengelig for alle brukere på Rapporter-siden.",
+      "createSuccess": "Din nye rapportkobling **{{name}}** ble opprettet.",
+      "updateSuccess": "Rapportlenken din **{{name}}** ble oppdatert.",
+      "updateError": "Vi kan ikke oppdatere rapportlenken for øyeblikket. \nPrøv igjen senere.",
+      "createError": "Vi kan ikke opprette rapportkoblingen for øyeblikket. \nPrøv igjen senere.",
+      "confirmDeleteTitle": "Slett rapportkobling",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette rapportkoblingen {{name}}?",
+      "displayLabel": "Visningsmodus",
+      "displayPlaceholder": "Velg visningsmodus",
+      "displayWelcomePage": "Forsida",
+      "displayDescription": "Hvor du vil vise rapportlenken til brukerne. På forsiden eller i en av rapportfanene.",
+      "yearLabel": "År",
+      "yearPlaceholder": "Velg år",
+      "yearDescription": "Velg år for rapporten. Hvis rapporten er for en bestemt måned, velg måneden nedenfor.",
+      "monthLabel": "Måned",
+      "monthPlaceholder": "Velg måned",
+      "monthDescription": "Velg måneden for rapporten hvis det er aktuelt. Hvis rapporten gjelder et helt år, la dette stå tomt.",
+      "promotedDescription": "Når rapporten er promotert, vil den vises på rapportens forside.",
+      "promotedLabel": "Promotert",
+      "iconDescription": "Eit ikon for å illustrere rapportlenkja.",
+      "iconColorLabel": "Ikonfarge",
+      "iconColorPlaceholder": "Angi en ikonfarge",
+      "iconColorDescription": "En ikonfarge gjør at rapportlenken skiller seg mer ut fra de forhåndsinnstilte spørringene hvis koblingen skal promoteres."
+    },
     "teams": "Teams",
     "teamsEnabledLabel": "Aktiver Teams-funksjonalitet",
     "teamsEnabledDescription": "Aktiver Teams-funksjonalitet som å minne brukere om manglende uker osv.",
@@ -207,7 +246,7 @@
     "generatingReportLabel": "Genererer rapport",
     "generatingReportDescription": "For å gi deg dei ferskaste resultata, genererer vi rapporten frå nyast mulege data ...",
     "noEntriesText": "Det er ingen tidsoppføringar for dette tidspunktet.",
-    "selectReportText": "Vel ein rapport under. \nVer merksam på at nokre rapportar kan ta fleire minutt å lasta inn.",
+    "selectReportText": "Vel ein rapport nedanfor. Ver merksam på at enkelte rapportar kan ta fleire minutt å laste. For nokre rapportar kan det kan vere ein førehandsgenerert versjon tilgjengeleg med formatering og layout.",
     "selectReportLabel": "Vel rapport",
     "forecast": "Prognose",
     "exportToExcel": "Eksporter til Excel",
@@ -219,7 +258,10 @@
     "filterPanelHeaderText": "Filter",
     "filterDescriptionPlaceholder": "Merknad",
     "summaryHeaderText": "Samandrag",
-    "applyFilterText": "Bruk filter"
+    "applyFilterText": "Bruk filter",
+    "availableReportLinks": "Det er rapporter tilgjengelig for denne spørringen. Bruk knappene nedenfor for å laste ned rapportene, eller klikk nedenfor for å hente ferske data fra serveren.",
+    "fetchDataButton": "Hent ferske data fra serveren",
+    "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}."
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -416,7 +458,8 @@
     "vacationCalculationTypeConfirmed": "Bekreftet ferie",
     "vacationCalculationTypePlannedDescription": "Alt i kalenderen din er kategorisert med IAM VAC.",
     "vacationCalculationTypeConfirmedDescription": "Ferie bekreftet som en del av timelisten din.",
-    "vacationSummaryTooltipConfirmed": "Ferieberekninga er for heile året, og er basert på {{usedHours}} timar ferie stadfesta som ein del av timelista di (kvar feriedag er 8 timar)."
+    "vacationSummaryTooltipConfirmed": "Ferieberekninga er for heile året, og er basert på {{usedHours}} timar ferie stadfesta som ein del av timelista di (kvar feriedag er 8 timar).",
+    "updatedLabel": "Oppdatert"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -451,7 +494,9 @@
     "manageSubscription": "Administrer abonnementet",
     "manageSubscriptionDescription": "Administrer abonnementsinnstillingar og faktureringsinformasjon.",
     "listUsers": "Hente brukere",
-    "listUsersDescription": "Hente ut alle brukere for abonnementet."
+    "listUsersDescription": "Hente ut alle brukere for abonnementet.",
+    "manageReportLinks": "Administrer rapportkoblinger",
+    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger."
   },
   "notifications": {
     "moreLinkText": "Les meir her",

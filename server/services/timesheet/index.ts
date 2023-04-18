@@ -249,7 +249,7 @@ export class TimesheetService {
     )
     let events: any[]
     switch (provider) {
-      case 'google':
+      case 'google': {
         {
           events = await this._googleCalSvc.getEvents(
             startDateTimeIso,
@@ -257,6 +257,7 @@ export class TimesheetService {
           )
         }
         break
+      }
       default: {
         events = await this._msgraphSvc.getEvents(
           startDateTimeIso,
@@ -370,7 +371,13 @@ export class TimesheetService {
   }
 
   /**
-   * Get vacation summary for the current user.
+   * Get vacation summary for the current user. Retrieves the total vacation days
+   * from the user configuration and the used vacation days from the time entries
+   * for the current year. If the calculation type is set to `planned`, the
+   * used vacation days are calculated from all time entries for the current
+   * year using Microsoft Graph. If the calculation type is set to `confirmed`,
+   * the used vacation days are calculated from all confirmed time entries for
+   * the current year.
    *
    * @param settings - Subscription vacation settings
    */
@@ -381,9 +388,13 @@ export class TimesheetService {
       const userConfiguration = await this._userSvc.getUserConfiguration(
         this.context.userId
       )
-      const totalDays = get(userConfiguration, 'vacation.totalDays', {
-        default: settings.totalDays
-      })
+      const totalDays = get(
+        userConfiguration,
+        `vacation.totalDays.${new Date().getFullYear()}`,
+        {
+          default: settings.totalDays
+        }
+      )
       const calculationType = get(
         userConfiguration,
         'vacation.calculationType',
@@ -393,7 +404,7 @@ export class TimesheetService {
       )
       let usedHours: number = 0
       switch (calculationType) {
-        case 'confirmed':
+        case 'confirmed': {
           {
             const entries = await this._timeEntrySvc.find({
               projectId: settings.eventCategory,
@@ -405,7 +416,8 @@ export class TimesheetService {
             )
           }
           break
-        case 'planned':
+        }
+        case 'planned': {
           {
             const events = await this._msgraphSvc.getVacation(
               settings.eventCategory
@@ -416,6 +428,7 @@ export class TimesheetService {
             )
           }
           break
+        }
       }
       const used = toFixed(usedHours / 8, 2)
       const remaining = toFixed(totalDays - usedHours / 8, 2)

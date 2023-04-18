@@ -63,4 +63,4 @@ export const bootstrap = async () => {
 
 bootstrap()
 
-export { App }
+export { App } from './app'

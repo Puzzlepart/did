@@ -18,12 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.18.1]
+        node-version: [18.12.0]
 
     steps:
     - uses: actions/checkout@master
 
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 

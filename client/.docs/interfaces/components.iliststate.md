@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IListState
+[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IListState
 
 # Interface: IListState<T\>
 
@@ -31,7 +31,7 @@ Name | Default |
 
 Column header context menu `column` and `targetElement`
 
-Defined in: [client/components/List/types.ts:207](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L207)
+Defined in: [components/List/types.ts:207](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L207)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 Filter by column
 
-Defined in: [client/components/List/types.ts:217](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L217)
+Defined in: [components/List/types.ts:217](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L217)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 Current filters
 
-Defined in: [client/components/List/types.ts:202](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L202)
+Defined in: [components/List/types.ts:202](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L202)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 Group by column
 
-Defined in: [client/components/List/types.ts:212](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L212)
+Defined in: [components/List/types.ts:212](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L212)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 Is filter panel open
 
-Defined in: [client/components/List/types.ts:222](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L222)
+Defined in: [components/List/types.ts:222](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L222)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 Current items
 
-Defined in: [client/components/List/types.ts:197](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L197)
+Defined in: [components/List/types.ts:197](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L197)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 Original items
 
-Defined in: [client/components/List/types.ts:192](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L192)
+Defined in: [components/List/types.ts:192](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L192)
 
 ___
 
@@ -101,4 +101,4 @@ ___
 
 Search term
 
-Defined in: [client/components/List/types.ts:187](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L187)
+Defined in: [components/List/types.ts:187](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L187)

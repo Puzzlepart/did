@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / Parts
+[did-client - v0.12.0](../README.md) / Parts
 
 # Module: Parts
 
@@ -51,7 +51,7 @@ App components
 
 • `Const` **FeedbackPanel**: *FC*<IPanelProps\>
 
-Defined in: [client/parts/UserFeedback/FeedbackPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L18)
+Defined in: [parts/UserFeedback/FeedbackPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L18)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • `Const` **MobileBreadcrumb**: *FC*<[*IMobileBreadcrumbProps*](../interfaces/parts.imobilebreadcrumbprops.md)\>
 
-Defined in: [client/parts/MobileBreadcrumb/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/index.tsx#L14)
+Defined in: [parts/MobileBreadcrumb/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/index.tsx#L14)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • `Const` **Navigation**: FC
 
-Defined in: [client/parts/Navigation/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L20)
+Defined in: [parts/Navigation/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L20)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 • `Const` **NotificationsPanel**: *FC*<IPanelProps\>
 
-Defined in: [client/parts/UserNotifications/NotificationsPanel/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/index.tsx#L14)
+Defined in: [parts/UserNotifications/NotificationsPanel/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/index.tsx#L14)
 
 ___
 
@@ -90,7 +90,7 @@ is set to `true`.
 
 An icon name is optional and defaults to **Emoji2**
 
-Defined in: [client/parts/UserFeedback/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/index.tsx#L21)
+Defined in: [parts/UserFeedback/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/index.tsx#L21)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • `Const` **UserMenu**: FC
 
-Defined in: [client/parts/UserMenu/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L24)
+Defined in: [parts/UserMenu/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L24)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 • `Const` **UserNotification**: *FC*<[*IUserNotificationProps*](../interfaces/parts.iusernotificationprops.md)\>
 
-Defined in: [client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx#L14)
+Defined in: [parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx#L14)
 
 ___
 
@@ -121,7 +121,7 @@ is set to `true`.
 
 An icon name is optional and defaults to **Ringer**
 
-Defined in: [client/parts/UserNotifications/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L22)
+Defined in: [parts/UserNotifications/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L22)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 • `Const` **NavItem**: *FC*<[*INavItemProps*](../interfaces/parts.inavitemprops.md)\>
 
-Defined in: [client/parts/Navigation/NavItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/index.tsx#L12)
+Defined in: [parts/Navigation/NavItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/index.tsx#L12)
 
 ## Function Component Functions
 
@@ -156,7 +156,7 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [client/parts/ErrorFallback/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L20)
+Defined in: [parts/ErrorFallback/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L20)
 
 ___
 
@@ -177,4 +177,4 @@ Name | Type |
 
 **Returns:** IBreadcrumbItem[]
 
-Defined in: [client/parts/MobileBreadcrumb/useMobileBreadcrumb.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/useMobileBreadcrumb.ts#L11)
+Defined in: [parts/MobileBreadcrumb/useMobileBreadcrumb.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/useMobileBreadcrumb.ts#L11)

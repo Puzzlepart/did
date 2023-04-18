@@ -110,7 +110,7 @@ export function createTimesheetReducer(
         const { periods, selectedPeriod, dateRangeType } = current(state)
         const index = periods.indexOf(selectedPeriod)
         switch (dateRangeType) {
-          case DateRangeType.Week:
+          case DateRangeType.Week: {
             {
               if (state.periods.length === 1 || index === 0) {
                 state.dateRange = state.dateRange.set('-1w')
@@ -122,11 +122,13 @@ export function createTimesheetReducer(
               }
             }
             break
-          case DateRangeType.Month:
+          }
+          case DateRangeType.Month: {
             {
               state.dateRange = state.dateRange.set('-1month')
             }
             break
+          }
         }
       })
       .addCase(NEXT_PERIOD, (state) => {
@@ -134,7 +136,7 @@ export function createTimesheetReducer(
         const { periods, selectedPeriod, dateRangeType } = current(state)
         const index = periods.indexOf(selectedPeriod)
         switch (dateRangeType) {
-          case DateRangeType.Week:
+          case DateRangeType.Week: {
             {
               if (state.periods.length === 1 || index === 1) {
                 state.dateRange = state.dateRange.set('1w')
@@ -146,11 +148,13 @@ export function createTimesheetReducer(
               }
             }
             break
-          case DateRangeType.Month:
+          }
+          case DateRangeType.Month: {
             {
               state.dateRange = state.dateRange.set('1month')
             }
             break
+          }
         }
       })
       .addCase(CHANGE_VIEW, (state, { payload }) => {

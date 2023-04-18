@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / ISuggestionItemProps
+[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / ISuggestionItemProps
 
 # Interface: ISuggestionItemProps
 
@@ -25,7 +25,7 @@
 
 • **item**: [*ISuggestionItem*](components.isuggestionitem.md)<any\>
 
-Defined in: [client/components/Autocomplete/SuggestionItem/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L23)
+Defined in: [components/Autocomplete/SuggestionItem/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L23)
 
 ___
 
@@ -33,6 +33,8 @@ ___
 
 • `Optional` **itemIcons**: *boolean* \| AutocompleteItemIcons
 
+Icons to be displayed next to each item.
+
 Inherited from: void
 
-Defined in: [client/components/Autocomplete/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L24)
+Defined in: [components/Autocomplete/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L41)

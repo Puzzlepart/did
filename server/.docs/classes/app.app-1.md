@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [App](../modules/app.md) / App
+[did-server - v0.12.0](../README.md) / [App](../modules/app.md) / App
 
 # Class: App
 
@@ -37,7 +37,7 @@ Uses the following modules directly:
 
 ### Properties
 
-- [\_mongoClient](app.app-1.md#_mongoclient)
+- [\_mcl](app.app-1.md#_mcl)
 - [instance](app.app-1.md#instance)
 
 ### Methods
@@ -65,9 +65,9 @@ Defined in: [app.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/app.ts
 
 ## Properties
 
-### \_mongoClient
+### \_mcl
 
-• `Private` **\_mongoClient**: *MongoClient*
+• `Private` **\_mcl**: *MongoClient*
 
 Mongo client
 
@@ -127,9 +127,9 @@ ___
 
 Setup authentication
 
-* Using passport for user login
-* Using express-bearer-token package to support external API calls
-* Setting up auth route at /auth
+* Using `passport` for user login
+* Using `express-bearer-token` package to support external API calls
+* Setting up auth route at `/auth`
 
 **Returns:** *void*
 
@@ -141,11 +141,11 @@ ___
 
 ▸ **setupErrorHandling**(): *void*
 
-Setup error handling using http-errors
+Setup error handling using `http-errors`
 
 **Returns:** *void*
 
-Defined in: [app.ts:180](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L180)
+Defined in: [app.ts:182](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L182)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **setupGraphQL**(): *Promise*<void\>
 
-Setup graphql
+Setup GraphQL API with MongoDB Client
 
 **Returns:** *Promise*<void\>
 
@@ -167,12 +167,14 @@ ___
 
 Setup routes
 
-* Setting up * to use our index route giving the React
-Router full control of the routing.
+Configuring `/` to redirect to the login page
+if the user is not authenticated, and `*` to use
+our index route giving the React Router full
+control of the routing.
 
 **Returns:** *void*
 
-Defined in: [app.ts:163](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L163)
+Defined in: [app.ts:165](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L165)
 
 ___
 

@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / TimesheetService
+[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / TimesheetService
 
 # Class: TimesheetService
 
@@ -68,7 +68,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:353](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L353)
+Defined in: [services/timesheet/index.ts:354](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L354)
 
 ___
 
@@ -113,7 +113,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [services/timesheet/index.ts:285](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L285)
+Defined in: [services/timesheet/index.ts:286](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L286)
 
 ___
 
@@ -135,7 +135,7 @@ Name | Type | Default value | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:305](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L305)
+Defined in: [services/timesheet/index.ts:306](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L306)
 
 ___
 
@@ -174,7 +174,13 @@ ___
 
 ▸ **getVacation**(`settings`: [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md)): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Get vacation summary for the current user.
+Get vacation summary for the current user. Retrieves the total vacation days
+from the user configuration and the used vacation days from the time entries
+for the current year. If the calculation type is set to `planned`, the
+used vacation days are calculated from all time entries for the current
+year using Microsoft Graph. If the calculation type is set to `confirmed`,
+the used vacation days are calculated from all confirmed time entries for
+the current year.
 
 #### Parameters:
 
@@ -184,7 +190,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [services/timesheet/index.ts:377](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L377)
+Defined in: [services/timesheet/index.ts:384](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L384)
 
 ___
 

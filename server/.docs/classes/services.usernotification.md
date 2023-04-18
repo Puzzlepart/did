@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / UserNotification
+[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / UserNotification
 
 # Class: UserNotification
 
@@ -85,13 +85,11 @@ ___
 
 • get **moreLink**(): *string*
 
-More link
-
-**`remarks`** This could be handled on the client in the future
+More link for the notification in the format `/timesheet/week/overview/{startDate}`.
 
 **Returns:** *string*
 
-Defined in: [services/notification/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L43)
+Defined in: [services/notification/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L41)
 
 ## Methods
 
@@ -99,7 +97,7 @@ Defined in: [services/notification/types.ts:43](https://github.com/Puzzlepart/di
 
 ▸ `Private`**_generateId**(`id`: *string*): *string*
 
-Generates a unique notification id
+Generates a unique notification ID
 
 #### Parameters:
 

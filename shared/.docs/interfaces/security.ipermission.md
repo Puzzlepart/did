@@ -1,4 +1,4 @@
-[did-shared - v0.11.4](../README.md) / [Security](../modules/security.md) / IPermission
+[did-shared - v0.12.0](../README.md) / [Security](../modules/security.md) / IPermission
 
 # Interface: IPermission
 
@@ -23,7 +23,7 @@
 
 Callable from external API
 
-Defined in: [shared/config/security/permissions.ts:45](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L45)
+Defined in: [shared/config/security/permissions.ts:46](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L46)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 Description of the permission
 
-Defined in: [shared/config/security/permissions.ts:33](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L33)
+Defined in: [shared/config/security/permissions.ts:34](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L34)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 Disabled (not available)
 
-Defined in: [shared/config/security/permissions.ts:50](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L50)
+Defined in: [shared/config/security/permissions.ts:51](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L51)
 
 ___
 
@@ -55,7 +55,7 @@ Icon that describe the permission
 
 **`see`** https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
 
-Defined in: [shared/config/security/permissions.ts:40](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L40)
+Defined in: [shared/config/security/permissions.ts:41](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L41)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 Permission ID
 
-Defined in: [shared/config/security/permissions.ts:23](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L23)
+Defined in: [shared/config/security/permissions.ts:24](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L24)
 
 ___
 
@@ -75,4 +75,4 @@ ___
 
 Name of the permission
 
-Defined in: [shared/config/security/permissions.ts:28](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L28)
+Defined in: [shared/config/security/permissions.ts:29](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L29)

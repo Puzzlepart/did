@@ -13,7 +13,8 @@ export enum PermissionScope {
   MANAGE_USERS = '15e40e99',
   LIST_USERS = '1a1db774',
   MANAGE_ROLESPERMISSIONS = 'cd52a735',
-  MANAGE_SUBSCRIPTION = '67ba6efc'
+  MANAGE_SUBSCRIPTION = '67ba6efc',
+  MANAGE_REPORT_LINKS = '8de5215e'
 }
 
 export interface IPermission {
@@ -149,6 +150,13 @@ export function getPermissions(t: TFunction): IPermission[] {
       iconName: 'SubstitutionsIn',
       api: false,
       disabled: true
+    },
+    {
+      id: PermissionScope.MANAGE_REPORT_LINKS,
+      name: t('permissions.manageReportLinks'),
+      description: t('permissions.manageReportLinksDescription'),
+      iconName: 'AnalyticsReport',
+      api: false
     }
   ]
 }

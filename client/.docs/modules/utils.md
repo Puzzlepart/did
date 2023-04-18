@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / Utils
+[did-client - v0.12.0](../README.md) / Utils
 
 # Module: Utils
 
@@ -54,7 +54,7 @@ Name | Type | Default value | Description |
 
 **Returns:** T[]
 
-Defined in: [client/utils/arrayExtend.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L15)
+Defined in: [utils/arrayExtend.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L15)
 
 ___
 
@@ -79,7 +79,7 @@ Name | Type | Description |
 
 **Returns:** T[]
 
-Defined in: [client/utils/arrayMap.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayMap.ts#L8)
+Defined in: [utils/arrayMap.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayMap.ts#L8)
 
 ___
 
@@ -103,7 +103,7 @@ Name | Type | Description |
 
 **Returns:** T[]
 
-Defined in: [client/utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
+Defined in: [utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
 
 ___
 
@@ -127,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Map*<KeyType, any\>
 
-Defined in: [client/utils/convertToMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/convertToMap.ts#L6)
+Defined in: [utils/convertToMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/convertToMap.ts#L6)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [client/utils/createPath.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/createPath.ts#L6)
+Defined in: [utils/createPath.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/createPath.ts#L6)
 
 ___
 
@@ -163,7 +163,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [client/utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
+Defined in: [utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
 
 ___
 
@@ -185,7 +185,7 @@ Name | Type | Default value | Description |
 
 **Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Defined in: [client/utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
+Defined in: [utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
 
 ___
 
@@ -207,7 +207,7 @@ Name | Type | Description |
 
 The contrasting color (black or white)
 
-Defined in: [client/utils/getContrastColor.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L11)
+Defined in: [utils/getContrastColor.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L11)
 
 ___
 
@@ -226,7 +226,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [client/utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
+Defined in: [utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
 
 ___
 
@@ -252,7 +252,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [client/utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
+Defined in: [utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
 
 ___
 
@@ -273,7 +273,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [client/utils/omitDeep.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitDeep.ts#L9)
+Defined in: [utils/omitDeep.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitDeep.ts#L9)
 
 ___
 
@@ -291,7 +291,7 @@ Name | Type |
 
 **Returns:** *any*
 
-Defined in: [client/utils/omitTypename.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitTypename.ts#L9)
+Defined in: [utils/omitTypename.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitTypename.ts#L9)
 
 ___
 
@@ -321,7 +321,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [client/utils/searchObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L19)
+Defined in: [utils/searchObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L19)
 
 ___
 
@@ -339,7 +339,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [client/utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
+Defined in: [utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
 
 ___
 
@@ -357,7 +357,7 @@ Name | Type |
 
 **Returns:** *string*[]
 
-Defined in: [client/utils/sortAlphabetically.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sortAlphabetically.ts#L6)
+Defined in: [utils/sortAlphabetically.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sortAlphabetically.ts#L6)
 
 ___
 
@@ -383,4 +383,4 @@ Name | Type | Default value | Description |
 
 **Returns:** T
 
-Defined in: [client/utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)
+Defined in: [utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)

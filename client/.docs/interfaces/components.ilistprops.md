@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](../modules/components.md) / IListProps
+[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IListProps
 
 # Interface: IListProps<T\>
 
@@ -54,7 +54,7 @@ Name | Type |
 `className`? | *string* |
 `onRender`? | *IRenderFunction*<IDetailsHeaderProps\> |
 
-Defined in: [client/components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
+Defined in: [components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
 
 ___
 
@@ -66,7 +66,7 @@ Columns
 
 Overrides: void
 
-Defined in: [client/components/List/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L96)
+Defined in: [components/List/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L96)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 Command bar props
 
-Defined in: [client/components/List/types.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L131)
+Defined in: [components/List/types.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L131)
 
 ___
 
@@ -88,7 +88,7 @@ Default search box width
 
 **`default`** 500
 
-Defined in: [client/components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
+Defined in: [components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
 
 ___
 
@@ -100,7 +100,7 @@ Enable shimmer (normally while loading)
 
 Overrides: void
 
-Defined in: [client/components/List/types.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L101)
+Defined in: [components/List/types.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L101)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 Export file name. Set this property to enable Excel export of the
 list data.
 
-Defined in: [client/components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
+Defined in: [components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 Filter panel actions
 
-Defined in: [client/components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+Defined in: [components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 Filter values
 
-Defined in: [client/components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 Fixed height
 
-Defined in: [client/components/List/types.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L106)
+Defined in: [components/List/types.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L106)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 Hidden
 
-Defined in: [client/components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
+Defined in: [components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
 
 ___
 
@@ -163,7 +163,7 @@ Items
 
 Overrides: void
 
-Defined in: [client/components/List/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L91)
+Defined in: [components/List/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L91)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 Group props
 
-Defined in: [client/components/List/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L121)
+Defined in: [components/List/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L121)
 
 ___
 
@@ -183,7 +183,7 @@ ___
 
 Group render props
 
-Defined in: [client/components/List/types.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L126)
+Defined in: [components/List/types.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L126)
 
 ___
 
@@ -205,9 +205,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
-Defined in: [client/components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
 
 ___
 
@@ -217,7 +217,7 @@ ___
 
 Search box props
 
-Defined in: [client/components/List/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L111)
+Defined in: [components/List/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L111)
 
 ___
 
@@ -227,4 +227,4 @@ ___
 
 Selection
 
-Defined in: [client/components/List/types.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L116)
+Defined in: [components/List/types.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L116)

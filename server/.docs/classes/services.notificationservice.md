@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / NotificationService
+[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / NotificationService
 
 # Class: NotificationService
 
@@ -65,7 +65,7 @@ ___
 
 ▸ `Private`**_getPeriods**(`add`: *string*, `count`: *number*, `locale`: *string*): *any*[]
 
-Get periods
+Get Timesheet periods for the next {count} weeks with the given {add} value.
 
 #### Parameters:
 

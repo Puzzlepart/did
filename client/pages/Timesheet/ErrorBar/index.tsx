@@ -13,7 +13,7 @@ export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
   let messageProps: IUserMessageProps
   const code = error.graphQLErrors[0]?.extensions?.code
   switch (code) {
-    case 'ResourceNotFound':
+    case 'ResourceNotFound': {
       {
         messageProps = {
           text: t('timesheet.exchangeLicenseErrorMessageText'),
@@ -22,6 +22,7 @@ export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
         }
       }
       break
+    }
     default: {
       messageProps = {
         text: t('timesheet.errorMessageText'),

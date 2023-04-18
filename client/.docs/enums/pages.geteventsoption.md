@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / GetEventsOption
+[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / GetEventsOption
 
 # Enumeration: GetEventsOption
 
@@ -18,7 +18,7 @@
 
 • **AllEvents**: = 0
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L15)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L15)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **MatchedEvents**: = 1
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L16)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L16)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 • **UnmatchedEvents**: = 2
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L17)
+Defined in: [pages/Timesheet/TimesheetPeriod.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L17)

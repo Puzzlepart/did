@@ -5,9 +5,11 @@ import { useTranslation } from 'react-i18next'
 export const UserVacationTooltipContent: FC<any> = (props) => {
   const { t } = useTranslation()
   switch (props.calculationType) {
-    case 'planned':
+    case 'planned': {
       return <span>{t('common.vacationSummaryTooltip', props)}</span>
-    case 'confirmed':
+    }
+    case 'confirmed': {
       return <span>{t('common.vacationSummaryTooltipConfirmed', props)}</span>
+    }
   }
 }

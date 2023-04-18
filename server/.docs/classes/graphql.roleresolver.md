@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / RoleResolver
+[did-server - v0.12.0](../README.md) / [GraphQL](../modules/graphql.md) / RoleResolver
 
 # Class: RoleResolver
 

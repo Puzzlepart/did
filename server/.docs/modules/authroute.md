@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / AuthRoute
+[did-server - v0.12.0](../README.md) / AuthRoute
 
 # Module: AuthRoute
 
@@ -73,7 +73,9 @@ ___
 
 ▸ `Const`**signOutHandler**(`request`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `response`: *Response*<any, Record<string, any\>\>): *void*
 
-Handler for `/auth/signout`
+Handler for `/auth/signout`. Destroys the session using
+`request.session.destroy`, logs out the user using `request.logOut`,
+then redirects the user to the root path.
 
 #### Parameters:
 
@@ -84,4 +86,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L72)
+Defined in: [routes/auth.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L74)

@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Parts](../modules/parts.md) / IMobileBreadcrumbProps
+[did-client - v0.12.0](../README.md) / [Parts](../modules/parts.md) / IMobileBreadcrumbProps
 
 # Interface: IMobileBreadcrumbProps
 
@@ -22,4 +22,4 @@
 
 • **page**: *PageComponent*
 
-Defined in: [client/parts/MobileBreadcrumb/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/types.tsx#L10)
+Defined in: [parts/MobileBreadcrumb/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/types.tsx#L10)

@@ -25,7 +25,7 @@ export function useInitModel(
     const model = new ProjectModel().init(props.edit)
     const _map = convertToMap(model)
     map.$set(_map)
-    map.set('icon', icon)
+    if (!props.edit) map.set('icon', icon)
   }, [props.edit])
 }
 

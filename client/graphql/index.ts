@@ -7,7 +7,7 @@
  * @see https://graphql.org/
  */
 
-import { ApolloClient, ApolloLink, FetchPolicy } from '@apollo/client'
+import { ApolloClient, ApolloLink } from '@apollo/client'
 import { InMemoryCache } from '@apollo/client/cache'
 import apolloLink from './apolloLink'
 import httpLink from './httpLink'
@@ -45,8 +45,8 @@ export const client = new ApolloClient({
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
 })
 
-export { default as $usercontext } from './user-context.gql'
 /**
  * @ignore
  */
-export { FetchPolicy }
+export { FetchPolicy } from '@apollo/client'
+export { default as $usercontext } from './user-context.gql'

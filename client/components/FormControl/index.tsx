@@ -34,5 +34,6 @@ FormControl.defaultProps = {
 
 export * from './DropdownControl'
 export * from './TextControl'
+export * from './ToggleControl'
 export * from './types'
 export { useFormControls } from './useFormControls'

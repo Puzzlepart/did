@@ -110,11 +110,11 @@ export function generateClientInfo({
  * * `APOLLO_SCHEMA_REPORTING`
  *
  * @param app - Express application
- * @param client - Mongo client
+ * @param mcl - Mongo client
  */
 export const setupGraphQL = async (
   app: express.Application,
-  client: MongoClient
+  mcl: MongoClient
 ): Promise<void> => {
   try {
     const schema = await generateGraphQLSchema()
@@ -127,8 +127,9 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
+      playground: false,
       formatError: (error) => _.pick(error, 'message'),
-      context: ({ req }) => createContext(req, client),
+      context: ({ req }) => createContext(req, mcl),
       plugins: [
         ApolloServerPluginUsageReporting({
           rewriteError: (error) => error,

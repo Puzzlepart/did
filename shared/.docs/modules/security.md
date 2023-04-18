@@ -1,4 +1,4 @@
-[did-shared - v0.11.4](../README.md) / Security
+[did-shared - v0.12.0](../README.md) / Security
 
 # Module: Security
 
@@ -37,4 +37,4 @@ Name | Type | Description |
 
 **Returns:** [*IPermission*](../interfaces/security.ipermission.md)[]
 
-Defined in: [shared/config/security/permissions.ts:60](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L60)
+Defined in: [shared/config/security/permissions.ts:61](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L61)

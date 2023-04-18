@@ -151,12 +151,15 @@ export class TimesheetPeriod {
         if (this._uiIgnoredEvents.includes(event.id) || event.isSystemIgnored)
           return false
         switch (option) {
-          case GetEventsOption.AllEvents:
+          case GetEventsOption.AllEvents: {
             return true
-          case GetEventsOption.MatchedEvents:
+          }
+          case GetEventsOption.MatchedEvents: {
             return !!event.project
-          case GetEventsOption.UnmatchedEvents:
+          }
+          case GetEventsOption.UnmatchedEvents: {
             return !event.project
+          }
         }
       })
       .map((event) => this._checkUiManualMatch(event))

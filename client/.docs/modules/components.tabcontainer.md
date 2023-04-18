@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Components](components.md) / TabContainer
+[did-client - v0.12.0](../README.md) / [Components](components.md) / TabContainer
 
 # Namespace: TabContainer
 

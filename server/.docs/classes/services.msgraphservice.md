@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [Services](../modules/services.md) / MSGraphService
+[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / MSGraphService
 
 # Class: MSGraphService
 
@@ -101,7 +101,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [services/msgraph/index.ts:182](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L182)
+Defined in: [services/msgraph/index.ts:184](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L184)
 
 ___
 
@@ -121,7 +121,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L125)
+Defined in: [services/msgraph/index.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L127)
 
 ___
 
@@ -142,7 +142,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:239](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L239)
+Defined in: [services/msgraph/index.ts:241](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L241)
 
 ___
 
@@ -156,7 +156,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/msgraph/index.ts:212](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L212)
+Defined in: [services/msgraph/index.ts:214](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L214)
 
 ___
 
@@ -179,7 +179,7 @@ Name | Type | Description |
 A base64 representation of the user photo, or null if
 the user photo is not found.
 
-Defined in: [services/msgraph/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L67)
+Defined in: [services/msgraph/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L69)
 
 ___
 
@@ -193,7 +193,7 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L142)
+Defined in: [services/msgraph/index.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L144)
 
 ___
 
@@ -211,4 +211,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L85)
+Defined in: [services/msgraph/index.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L87)

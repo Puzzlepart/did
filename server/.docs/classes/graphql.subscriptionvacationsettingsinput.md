@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionVacationSettingsInput
+[did-server - v0.12.0](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionVacationSettingsInput
 
 # Class: SubscriptionVacationSettingsInput
 
@@ -30,7 +30,7 @@
 
 • `Optional` **calculationType**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L152)
+Defined in: [graphql/resolvers/subscription/types.ts:161](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L161)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • `Optional` **eventCategory**: *string*
 
-Defined in: [graphql/resolvers/subscription/types.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L155)
+Defined in: [graphql/resolvers/subscription/types.ts:164](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L164)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • `Optional` **totalDays**: *number*
 
-Defined in: [graphql/resolvers/subscription/types.ts:149](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L149)
+Defined in: [graphql/resolvers/subscription/types.ts:158](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L158)

@@ -48,13 +48,11 @@ export class MongoDocumentService<T> {
   private _extendQuery(query: FilterQuery<T>) {
     return Object.keys(query || {}).reduce((q, key) => {
       const isFalse = query[key] === false
-      if (isFalse) {
-        q[key] = {
-          $in: [false, null]
-        }
-      } else {
-        q[key] = query[key]
-      }
+      q[key] = isFalse
+        ? {
+            $in: [false, null]
+          }
+        : query[key]
       return q
     }, {})
   }

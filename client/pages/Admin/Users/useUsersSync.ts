@@ -4,7 +4,11 @@ import { IUsersContext } from './context'
 import $updateUsers from './updateUsers.gql'
 
 /**
- * Sync users hook for `Users`
+ * Sync users hook for `Users`. Returns a function that can be used to
+ * sync users with the backend. The function takes an array of
+ * properties to sync. If no properties are provided, all properties
+ * will be synced. The hook is using the mutation `updateUsers` to
+ * update the users.
  *
  * @param context Context
  */

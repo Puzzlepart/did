@@ -1,7 +1,9 @@
 import { MessageBar } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import ReactMarkdown from 'react-markdown/with-html'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { useUserMessage } from './useUserMessage'
@@ -25,7 +27,11 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
             <div className={styles.header}>{props.headerText}</div>
           )}
           {props.text && (
-            <ReactMarkdown source={props.text} escapeHtml={false} />
+            // Change after upgrading ReactMarkdown from 6 to 8 - with-html is deprecated
+            // see https://github.com/remarkjs/react-markdown/blob/bd8e53b4969a0a6f5cfd0fb1d4fe5d97d2cfa630/changelog.md#remove-buggy-html-in-markdown-parser
+            <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+              {props.text}
+            </ReactMarkdown>
           )}
           {props.children}
         </div>

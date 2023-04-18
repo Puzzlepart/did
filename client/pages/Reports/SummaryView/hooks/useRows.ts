@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IReportsState } from 'pages/Reports/types'
-import { useMemo } from 'react'
 import { TimesheetPeriodObject } from 'types'
 
 /**
@@ -19,24 +18,20 @@ function generateColumnData(periods: TimesheetPeriodObject[]) {
 }
 
 /**
- * Rows hook for SummaryView
+ * Hooks for generating rows data from `state` data.
  */
 export function useRows({ data }: IReportsState) {
-  return useMemo(() => {
-    return [
-      ...data.users.map((user) => {
-        const periods = data.periods.filter(
-          (period) => period.userId === user.id
-        )
-        return {
-          user,
-          ...generateColumnData(periods)
-        }
-      }),
-      {
-        isTotalRow: true,
-        ...generateColumnData(data.periods)
+  return [
+    ...data.users.map((user) => {
+      const periods = data.periods.filter((period) => period.userId === user.id)
+      return {
+        user,
+        ...generateColumnData(periods)
       }
-    ]
-  }, [data.periods])
+    }),
+    {
+      isTotalRow: true,
+      ...generateColumnData(data.periods)
+    }
+  ]
 }

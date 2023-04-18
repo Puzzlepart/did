@@ -14,15 +14,18 @@ import { ITextControlProps, TextControlOptions } from './types'
 function transformValue(value: string, options: TextControlOptions) {
   let _value = value
   switch (options?.casing) {
-    case 'upper':
+    case 'upper': {
       _value = _value.toUpperCase()
       break
-    case 'lower':
+    }
+    case 'lower': {
       _value = _value.toLowerCase()
       break
-    case 'capitalized':
+    }
+    case 'capitalized': {
       _value = s.capitalize(_value)
       break
+    }
   }
   if (options?.replace) {
     const [regex, $] = options?.replace
@@ -31,12 +34,24 @@ function transformValue(value: string, options: TextControlOptions) {
   return _value
 }
 
+/**
+ * Hook for `TextControl` change handler. Returns a callback that can be used
+ * as `onChange` handler. If the type of the control is `number`, the value
+ * will be returned as is. Otherwise, the value will be transformed based on
+ * the `TextControlOptions`.
+ */
 export function useTextControlChange({
   model,
   name,
-  options
+  options,
+  type
 }: ITextControlProps) {
   return useCallback((_event, value) => {
-    model.set(name, transformValue(value, options))
+    model.set(
+      name,
+      type === 'number'
+        ? Number.parseInt(value)
+        : transformValue(value, options)
+    )
   }, [])
 }

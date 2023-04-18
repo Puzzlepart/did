@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / IReportsContext
+[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / IReportsContext
 
 # Interface: IReportsContext
 
@@ -21,7 +21,7 @@
 
 Columns
 
-Defined in: [client/pages/Reports/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L24)
+Defined in: [pages/Reports/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L24)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 Dispatch an action
 
-Defined in: [client/pages/Reports/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L19)
+Defined in: [pages/Reports/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L19)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 State
 
-Defined in: [client/pages/Reports/context.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L14)
+Defined in: [pages/Reports/context.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L14)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 Translate function
 
-Defined in: [client/pages/Reports/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L29)
+Defined in: [pages/Reports/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L29)

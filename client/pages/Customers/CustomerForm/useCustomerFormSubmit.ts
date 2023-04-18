@@ -55,7 +55,7 @@ export function useCustomerFormSubmit(
   }
   return {
     toast,
-    text: !!props.edit ? t('common.save') : t('common.add'),
+    text: props.edit ? t('common.save') : t('common.add'),
     onClick,
     disabled: loading || !model.valid || !!toast
   }

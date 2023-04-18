@@ -19,15 +19,15 @@ export const AppSwitch: FC = () => {
     <Switch>
       {pages.map((Page, index) => (
         <Route key={index} path={Page.path}>
-          {!hasPermission(Page.permission) ? (
-            <Redirect to='/' />
-          ) : (
+          {hasPermission(Page.permission) ? (
             <>
               <MobileBreadcrumb page={Page} hidden={Page.path === '/'} />
               <div className={styles.container}>
                 <Page />
               </div>
             </>
+          ) : (
+            <Redirect to='/' />
           )}
         </Route>
       ))}

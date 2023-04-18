@@ -1,6 +1,6 @@
-did-server - v0.11.4
+did-server - v0.12.0
 
-# did-server - v0.11.4
+# did-server - v0.12.0
 
 ## Table of contents
 

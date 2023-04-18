@@ -27,6 +27,10 @@ export class Context {
   public userId?: string
 
   /**
+   * User object
+   */
+  public user?: Record<string, any>
+  /**
    * User configuration
    */
   public userConfiguration?: Record<string, any>
@@ -68,22 +72,24 @@ export class Context {
 /**
  * Generate unique ID for the request
  */
-export function generateUniqueRequestId() {
+function generateUniqueRequestId() {
   return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
 }
 
 /**
  * Create GraphQL context
  *
- * * Sets the default mongodb instance on the context
+ * * Sets the default `mongodb` instance on the context
  * * Sets the user subscription on the context
- * * Checks token auth using handleTokenAuthentication
- * * Generates a random request ID using Math random
- * * Sets CONTEXT and REQUEST on the container to enable
+ * * Checks token auth using `handleTokenAuthentication`
+ * * Generates a random request ID using `Math random`
+ * * Sets `CONTEXT` and `REQUEST` on the container to enable
  *   dependency injection in the resolvers.
  *
  * @param request - Express request
  * @param mcl - Mongo client
+ *
+ * @returns GraphQL context object
  */
 export const createContext = async (
   request: Express.Request,
@@ -105,6 +111,7 @@ export const createContext = async (
       context.permissions = permissions
       context.subscription = subscription
     } else {
+      context.user = get(request, 'user')
       context.userId = get(request, 'user.id')
       context.userConfiguration = tryParseJson<Record<string, any>>(
         get(request, 'user.configuration'),

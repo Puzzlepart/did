@@ -1,4 +1,4 @@
-[did-client - v0.11.4](../README.md) / [Pages](../modules/pages.md) / TimesheetView
+[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / TimesheetView
 
 # Enumeration: TimesheetView
 
@@ -18,7 +18,7 @@
 
 • **Allocation**: = "allocation"
 
-Defined in: [client/pages/Timesheet/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L12)
+Defined in: [pages/Timesheet/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L12)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **Overview**: = "overview"
 
-Defined in: [client/pages/Timesheet/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L10)
+Defined in: [pages/Timesheet/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L10)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 • **Summary**: = "summary"
 
-Defined in: [client/pages/Timesheet/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L11)
+Defined in: [pages/Timesheet/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L11)

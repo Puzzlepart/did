@@ -1,4 +1,4 @@
-[did-server - v0.11.4](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionSettings
+[did-server - v0.12.0](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionSettings
 
 # Class: SubscriptionSettings
 
@@ -31,7 +31,7 @@
 
 • `Optional` **adsync**: [*SubscriptionADSyncSettings*](graphql.subscriptionadsyncsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L73)
+Defined in: [graphql/resolvers/subscription/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L82)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • `Optional` **forecast**: [*SubscriptionForecastSettings*](graphql.subscriptionforecastsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L70)
+Defined in: [graphql/resolvers/subscription/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L79)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • `Optional` **teams**: [*SubscriptionTeamsSettings*](graphql.subscriptionteamssettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L79)
+Defined in: [graphql/resolvers/subscription/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L88)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 • `Optional` **vacation**: [*SubscriptionVacationSettings*](graphql.subscriptionvacationsettings.md)
 
-Defined in: [graphql/resolvers/subscription/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L76)
+Defined in: [graphql/resolvers/subscription/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L85)
