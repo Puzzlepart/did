@@ -15,7 +15,7 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => (
   <Link
     className={styles.root}
     to={`/projects/search/${props.project?.tag}`.toLowerCase()}
-    onClick={() => props.onClick(null)}
+    onClick={() => props.onClick && props.onClick(null)}
   >
     {props.icon && <Icon className={styles.icon} iconName={props.icon} />}
     <span>{props.text || props.project?.name}</span>
