@@ -293,14 +293,17 @@ export class TimesheetService {
     }
   }
 
+  
   /**
-   * Get periods between `startDate` and `endDate`
-   *
-   * @param startDate - Start date
-   * @param endDate - End date
-   * @param locale - Locale
-   * @param userId - User ID
-   * @param includeSplitWeeks - Include split weeks (defaults to `true`)
+   * Returns an array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
+   * 
+   * @param startDate - The start date of the period range.
+   * @param endDate - The end date of the period range.
+   * @param locale - The locale to use for formatting the period dates.
+   * @param userId - The ID of the user whose timesheet periods are being retrieved.
+   * @param includeSplitWeeks - Whether to include periods that span multiple months.
+   * 
+   * @returns An array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
    */
   public getPeriods(
     startDate: string,
