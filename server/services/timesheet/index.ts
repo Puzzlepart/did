@@ -11,6 +11,7 @@ import {
   TimesheetPeriodObject,
   VacationSummary
 } from '../../graphql/resolvers/types'
+import { toFixed } from '../../utils'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
@@ -414,7 +415,7 @@ export class TimesheetService {
               year: new Date().getFullYear(),
               userId: this.context.userId,
             })
-            usedHours = Math.round(
+            usedHours = toFixed(
               entries.reduce((sum, event) => sum + event.duration, 0)
             )
           }
@@ -423,15 +424,15 @@ export class TimesheetService {
         case 'planned': {
           {
             const events = await this._msgraphSvc.getVacation(category)
-            usedHours = Math.round(
+            usedHours = toFixed(
               events.reduce((sum, event) => sum + event.duration, 0)
             )
           }
           break
         }
       }
-      const used = Math.round(usedHours / 8)
-      const remaining = Math.round(totalDays - usedHours / 8)
+      const used = toFixed(usedHours / 8)
+      const remaining = toFixed(totalDays - usedHours / 8)
       return {
         category,
         total: totalDays,
