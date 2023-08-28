@@ -64,7 +64,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -111,7 +111,9 @@ export class TimesheetService {
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = forecasted?.hours ?? 0
-        period.holidays = holidays.filter(({ periodId }) => periodId === period.id)
+        period.holidays = holidays.filter(
+          ({ periodId }) => periodId === period.id
+        )
         if (confirmed) {
           period = {
             ...period,
@@ -294,16 +296,15 @@ export class TimesheetService {
     }
   }
 
-
   /**
    * Returns an array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
-   * 
+   *
    * @param startDate - The start date of the period range.
    * @param endDate - The end date of the period range.
    * @param locale - The locale to use for formatting the period dates.
    * @param userId - The ID of the user whose timesheet periods are being retrieved.
    * @param includeSplitWeeks - Whether to include periods that span multiple months.
-   * 
+   *
    * @returns An array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
    */
   public getPeriods(
@@ -413,7 +414,7 @@ export class TimesheetService {
             const entries = await this._timeEntrySvc.find({
               projectId: category,
               year: new Date().getFullYear(),
-              userId: this.context.userId,
+              userId: this.context.userId
             })
             usedHours = toFixed(
               entries.reduce((sum, event) => sum + event.duration, 0)

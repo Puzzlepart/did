@@ -68,7 +68,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:354](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L354)
+Defined in: [services/timesheet/index.ts:357](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L357)
 
 ___
 
@@ -121,21 +121,23 @@ ___
 
 ▸ **getPeriods**(`startDate`: *string*, `endDate`: *string*, `locale`: *string*, `userId`: *string*, `includeSplitWeeks?`: *boolean*): [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Get periods between `startDate` and `endDate`
+Returns an array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
 
 #### Parameters:
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`startDate` | *string* | - | Start date   |
-`endDate` | *string* | - | End date   |
-`locale` | *string* | - | Locale   |
-`userId` | *string* | - | User ID   |
-`includeSplitWeeks` | *boolean* | true | Include split weeks (defaults to `true`)    |
+`startDate` | *string* | - | The start date of the period range.   |
+`endDate` | *string* | - | The end date of the period range.   |
+`locale` | *string* | - | The locale to use for formatting the period dates.   |
+`userId` | *string* | - | The ID of the user whose timesheet periods are being retrieved.   |
+`includeSplitWeeks` | *boolean* | true | Whether to include periods that span multiple months.    |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [services/timesheet/index.ts:306](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L306)
+An array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
+
+Defined in: [services/timesheet/index.ts:309](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L309)
 
 ___
 
@@ -190,7 +192,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [services/timesheet/index.ts:384](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L384)
+Defined in: [services/timesheet/index.ts:387](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L387)
 
 ___
 

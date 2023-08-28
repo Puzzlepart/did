@@ -136,15 +136,14 @@ export const createContext = async (
   }
 }
 
-
 /**
  * Authenticates a user based on an API key and retrieves their subscription and permissions.
- * 
+ *
  * @param apiKey - The API key to authenticate the user with.
  * @param database - The MongoDatabase instance to use for database operations.
- * 
+ *
  * @returns An object containing the user's subscription and permissions.
- * 
+ *
  * @throws If the specified token is expired or authentication fails.
  */
 const handleTokenAuthentication = async (
