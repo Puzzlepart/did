@@ -384,6 +384,7 @@ export class TimesheetService {
   public async getVacation(
     settings: SubscriptionVacationSettings
   ): Promise<VacationSummary> {
+    const category = settings.eventCategory
     try {
       const userConfiguration = await this._userSvc.getUserConfiguration(
         this.context.userId
@@ -407,7 +408,7 @@ export class TimesheetService {
         case 'confirmed': {
           {
             const entries = await this._timeEntrySvc.find({
-              projectId: settings.eventCategory,
+              projectId: category,
               year: new Date().getFullYear(),
               userId: this.context.userId,
             })
@@ -419,9 +420,7 @@ export class TimesheetService {
         }
         case 'planned': {
           {
-            const events = await this._msgraphSvc.getVacation(
-              settings.eventCategory
-            )
+            const events = await this._msgraphSvc.getVacation(category)
             usedHours = Math.round(
               events.reduce((sum, event) => sum + event.duration, 0)
             )
@@ -432,7 +431,7 @@ export class TimesheetService {
       const used = Math.round(usedHours / 8)
       const remaining = Math.round(totalDays - usedHours / 8)
       return {
-        category: settings.eventCategory,
+        category,
         total: totalDays,
         calculationType,
         usedHours,
