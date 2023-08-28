@@ -408,7 +408,8 @@ export class TimesheetService {
           {
             const entries = await this._timeEntrySvc.find({
               projectId: settings.eventCategory,
-              year: new Date().getFullYear()
+              year: new Date().getFullYear(),
+              userId: this.context.userId,
             })
             usedHours = toFixed(
               entries.reduce((sum, event) => sum + event.duration, 0),

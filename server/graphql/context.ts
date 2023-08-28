@@ -13,6 +13,11 @@ const debug = createDebug('graphql/context')
 /**
  * [GraphQL](https://graphql.org/) context
  */
+/**
+ * The context object provides access to various resources and information
+ * for the current request, such as the user ID, user object, user configuration,
+ * provider, subscription, container instance, permissions, and MongoDB client and database.
+ */
 export class Context {
   /**
    * Request ID
@@ -30,6 +35,7 @@ export class Context {
    * User object
    */
   public user?: Record<string, any>
+
   /**
    * User configuration
    */
@@ -130,11 +136,16 @@ export const createContext = async (
   }
 }
 
+
 /**
- * Handle token authentication
- *
- * @param apiKey -Api key
- * @param database - Mongodb database
+ * Authenticates a user based on an API key and retrieves their subscription and permissions.
+ * 
+ * @param apiKey - The API key to authenticate the user with.
+ * @param database - The MongoDatabase instance to use for database operations.
+ * 
+ * @returns An object containing the user's subscription and permissions.
+ * 
+ * @throws If the specified token is expired or authentication fails.
  */
 const handleTokenAuthentication = async (
   apiKey: string,
