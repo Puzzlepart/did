@@ -11,7 +11,6 @@ import {
   TimesheetPeriodObject,
   VacationSummary
 } from '../../graphql/resolvers/types'
-import { toFixed } from '../../utils'
 import {
   ConfirmedPeriodsService,
   ForecastedPeriodsService,
