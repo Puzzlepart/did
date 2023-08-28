@@ -64,7 +64,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -111,7 +111,7 @@ export class TimesheetService {
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = forecasted?.hours ?? 0
-        period.holidays = holidays.filter((h) => h.periodId === period.id)
+        period.holidays = holidays.filter(({ periodId }) => periodId === period.id)
         if (confirmed) {
           period = {
             ...period,
@@ -294,14 +294,17 @@ export class TimesheetService {
     }
   }
 
+
   /**
-   * Get periods between `startDate` and `endDate`
-   *
-   * @param startDate - Start date
-   * @param endDate - End date
-   * @param locale - Locale
-   * @param userId - User ID
-   * @param includeSplitWeeks - Include split weeks (defaults to `true`)
+   * Returns an array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
+   * 
+   * @param startDate - The start date of the period range.
+   * @param endDate - The end date of the period range.
+   * @param locale - The locale to use for formatting the period dates.
+   * @param userId - The ID of the user whose timesheet periods are being retrieved.
+   * @param includeSplitWeeks - Whether to include periods that span multiple months.
+   * 
+   * @returns An array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
    */
   public getPeriods(
     startDate: string,
@@ -384,6 +387,7 @@ export class TimesheetService {
   public async getVacation(
     settings: SubscriptionVacationSettings
   ): Promise<VacationSummary> {
+    const category = settings.eventCategory
     try {
       const userConfiguration = await this._userSvc.getUserConfiguration(
         this.context.userId
@@ -407,33 +411,30 @@ export class TimesheetService {
         case 'confirmed': {
           {
             const entries = await this._timeEntrySvc.find({
-              projectId: settings.eventCategory,
-              year: new Date().getFullYear()
+              projectId: category,
+              year: new Date().getFullYear(),
+              userId: this.context.userId,
             })
             usedHours = toFixed(
-              entries.reduce((sum, event) => sum + event.duration, 0),
-              2
+              entries.reduce((sum, event) => sum + event.duration, 0)
             )
           }
           break
         }
         case 'planned': {
           {
-            const events = await this._msgraphSvc.getVacation(
-              settings.eventCategory
-            )
+            const events = await this._msgraphSvc.getVacation(category)
             usedHours = toFixed(
-              events.reduce((sum, event) => sum + event.duration, 0),
-              2
+              events.reduce((sum, event) => sum + event.duration, 0)
             )
           }
           break
         }
       }
-      const used = toFixed(usedHours / 8, 2)
-      const remaining = toFixed(totalDays - usedHours / 8, 2)
+      const used = toFixed(usedHours / 8)
+      const remaining = toFixed(totalDays - usedHours / 8)
       return {
-        category: settings.eventCategory,
+        category,
         total: totalDays,
         calculationType,
         usedHours,
