@@ -411,9 +411,8 @@ export class TimesheetService {
               year: new Date().getFullYear(),
               userId: this.context.userId,
             })
-            usedHours = toFixed(
-              entries.reduce((sum, event) => sum + event.duration, 0),
-              2
+            usedHours = Math.round(
+              entries.reduce((sum, event) => sum + event.duration, 0)
             )
           }
           break
@@ -423,16 +422,15 @@ export class TimesheetService {
             const events = await this._msgraphSvc.getVacation(
               settings.eventCategory
             )
-            usedHours = toFixed(
-              events.reduce((sum, event) => sum + event.duration, 0),
-              2
+            usedHours = Math.round(
+              events.reduce((sum, event) => sum + event.duration, 0)
             )
           }
           break
         }
       }
-      const used = toFixed(usedHours / 8, 2)
-      const remaining = toFixed(totalDays - usedHours / 8, 2)
+      const used = Math.round(usedHours / 8)
+      const remaining = Math.round(totalDays - usedHours / 8)
       return {
         category: settings.eventCategory,
         total: totalDays,
