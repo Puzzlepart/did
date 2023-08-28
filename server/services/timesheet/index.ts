@@ -64,7 +64,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -111,7 +111,7 @@ export class TimesheetService {
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = forecasted?.hours ?? 0
-        period.holidays = holidays.filter((h) => h.periodId === period.id)
+        period.holidays = holidays.filter(({ periodId }) => periodId === period.id)
         if (confirmed) {
           period = {
             ...period,
@@ -294,7 +294,7 @@ export class TimesheetService {
     }
   }
 
-  
+
   /**
    * Returns an array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
    * 
