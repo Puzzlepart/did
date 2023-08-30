@@ -1,4 +1,5 @@
-import { ActionButton, Panel } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
+import { BasePanel } from 'components/BasePanel'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +22,7 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   const { filters, onFilterUpdated, headerText } = useFilterPanel(props)
 
   return (
-    <Panel
+    <BasePanel
       isOpen={props.isOpen}
       className={styles.root}
       headerText={headerText}
@@ -53,7 +54,7 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
             hideHeader={!!props.selectedFilter}
           />
         ))}
-    </Panel>
+    </BasePanel>
   )
 }
 
@@ -64,3 +65,4 @@ FilterPanel.defaultProps = {
 export * from './FilterItem'
 export * from './Filters'
 export * from './types'
+

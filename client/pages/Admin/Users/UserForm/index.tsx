@@ -1,12 +1,12 @@
-import { Panel, PrimaryButton, TextField, Toggle } from '@fluentui/react'
-import { Autocomplete } from 'components'
+import { PrimaryButton, TextField, Toggle } from '@fluentui/react'
+import { Autocomplete, BasePanel } from 'components'
 import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import { RolePicker } from './RolePicker'
-import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
+import { IUserFormProps } from './types'
 import { useUserForm } from './useUserForm'
 
 export const UserForm: FC<IUserFormProps> = (props) => {
@@ -16,7 +16,7 @@ export const UserForm: FC<IUserFormProps> = (props) => {
     useUserForm(props)
 
   return (
-    <Panel
+    <BasePanel
       {..._.omit(props, 'user')}
       className={styles.root}
       isLightDismiss={true}
@@ -85,7 +85,7 @@ export const UserForm: FC<IUserFormProps> = (props) => {
         disabled={!isFormValid()}
         onClick={onSave}
       />
-    </Panel>
+    </BasePanel>
   )
 }
 

@@ -18,8 +18,8 @@ import { useUserMessage } from './useUserMessage'
  * @category Reusable Component
  */
 export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
-  const {className, container } = useUserMessage(props)
-
+  const { className, container } = useUserMessage(props)
+  
   return (
     <div {...container}>
       <ConditionalWrapper

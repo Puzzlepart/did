@@ -52,7 +52,7 @@ export function useTimesheetHistory(state: ITimesheetState) {
     const location = [
       '/timesheet',
       convertDateRangeTypeToString(state.dateRangeType),
-      state.selectedView,
+      state.selectedView.id,
       state.selectedPeriod.startDate
     ].join('/')
     history.push(location)

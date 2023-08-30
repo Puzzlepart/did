@@ -1,4 +1,5 @@
-import { Icon, Link } from '@fluentui/react'
+import { Icon } from '@fluentui/react'
+import { Link } from '@fluentui/react-components'
 import { DeleteLink, EditLink } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'

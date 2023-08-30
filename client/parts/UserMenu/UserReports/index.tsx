@@ -1,4 +1,5 @@
-import { ChoiceGroup, DefaultButton, Panel } from '@fluentui/react'
+import { ChoiceGroup, DefaultButton } from '@fluentui/react'
+import { BasePanel } from 'components'
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
 import React, { FC } from 'react'
@@ -25,7 +26,7 @@ export const UserReports: FC = () => {
         text={t('common.userReports')}
         onClick={togglePanel}
       />
-      <Panel
+      <BasePanel
         headerText={t('common.userReports')}
         isOpen={showPanel}
         onDismiss={togglePanel}
@@ -54,7 +55,7 @@ export const UserReports: FC = () => {
           onClick={onExport}
           disabled={!preset || query.loading}
         />
-      </Panel>
+      </BasePanel>
     </BrowserView>
   )
 }

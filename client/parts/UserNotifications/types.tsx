@@ -1,6 +1,7 @@
-import { IIconProps } from '@fluentui/react'
-import { IUserMessageProps, UserMessageType } from 'components/UserMessage'
+import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { CalendarWeekNumbers24Filled, CalendarWeekNumbers24Regular, Timer224Filled, Timer224Regular, bundleIcon } from '@fluentui/react-icons'
 import { TFunction } from 'i18next'
+import React from 'react'
 import { Notification } from 'types'
 
 export class NotificationModel {
@@ -23,7 +24,7 @@ export class NotificationModel {
     this.moreLink = notification.moreLink
   }
 
-  private get _messageType(): UserMessageType {
+  private get _notificationIntent(): AlertProps['intent'] {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
         return 'warning'
@@ -34,27 +35,27 @@ export class NotificationModel {
     }
   }
 
-  private get _iconProps(): IIconProps {
+  private get _icon() {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
-        return { iconName: 'CalendarWorkWeek' }
+        return bundleIcon(CalendarWeekNumbers24Filled, CalendarWeekNumbers24Regular)
       }
       case 'MISSING_FORECAST': {
-        return { iconName: 'BufferTimeBefore' }
+        return bundleIcon(Timer224Filled, Timer224Regular)
       }
       default: {
-        return
+        return null
       }
     }
   }
 
-  public get messageProps(): IUserMessageProps {
-    const userMessageProps: IUserMessageProps = {
+  public get alertProps(): AlertProps {
+    const Icon = this._icon
+   return {
       itemID: this.id,
-      type: this._messageType,
-      messageBarIconProps: this._iconProps
+      intent: this._notificationIntent,
+      icon: <Icon />
     }
-    return userMessageProps
   }
 
   /**

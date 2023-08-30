@@ -1,4 +1,5 @@
-import { Panel, PrimaryButton, TextField } from '@fluentui/react'
+import { PrimaryButton, TextField } from '@fluentui/react'
+import { BasePanel } from 'components'
 import { IconPicker } from 'components/IconPicker'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +21,7 @@ export const RolePanel: FC<IRolePanelProps> = (props) => {
   } = useRolePanel({ props })
 
   return (
-    <Panel
+    <BasePanel
       className={styles.root}
       headerText={props.headerText}
       isOpen={true}
@@ -64,7 +65,7 @@ export const RolePanel: FC<IRolePanelProps> = (props) => {
           />
         </div>
       </div>
-    </Panel>
+    </BasePanel>
   )
 }
 

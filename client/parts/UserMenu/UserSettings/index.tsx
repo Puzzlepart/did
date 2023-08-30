@@ -1,9 +1,9 @@
-import { Panel } from '@fluentui/react'
+import { BasePanel } from 'components'
 import React from 'react'
 import { MenuItem } from '../MenuItem'
-import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
+import { UserSettingsContext } from './context'
 import { useUserSettings } from './useUserSettings'
 
 /**
@@ -21,7 +21,7 @@ export const UserSettings = () => {
           text={t('common.settings')}
           onClick={openPanel}
         />
-        <Panel
+        <BasePanel
           className={styles.panel}
           headerText={t('common.settings')}
           isOpen={isOpen}
@@ -32,7 +32,7 @@ export const UserSettings = () => {
           {settings.map((s, index) => (
             <UserSettingInput key={index} setting={s} />
           ))}
-        </Panel>
+        </BasePanel>
       </div>
     </UserSettingsContext.Provider>
   )

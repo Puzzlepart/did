@@ -1,11 +1,10 @@
 import {
   CheckboxVisibility,
-  Panel,
   PanelType,
   PrimaryButton,
   SelectionMode
 } from '@fluentui/react'
-import { List } from 'components'
+import { BasePanel, List } from 'components'
 import React, { FC, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -19,7 +18,7 @@ export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
   const [selectedUsers, setSelectedUsers] = useState([])
 
   return (
-    <Panel
+    <BasePanel
       {..._.pick(props, 'onDismiss', 'isOpen')}
       headerText={t('admin.users.bulkImportUsersLabel')}
       type={PanelType.medium}
@@ -49,7 +48,7 @@ export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
           ]}
         />
       </div>
-    </Panel>
+    </BasePanel>
   )
 }
 

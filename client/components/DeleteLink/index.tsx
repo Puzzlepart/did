@@ -1,4 +1,5 @@
-import { Icon, Link } from '@fluentui/react'
+import { Icon } from '@fluentui/react'
+import { Link } from '@fluentui/react-components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './DeleteLink.module.scss'

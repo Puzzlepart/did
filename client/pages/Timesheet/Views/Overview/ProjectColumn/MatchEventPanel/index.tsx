@@ -1,4 +1,4 @@
-import { Link } from '@fluentui/react'
+import { Link } from '@fluentui/react-components'
 import { BasePanel, SearchProject, SubText, UserMessage } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'

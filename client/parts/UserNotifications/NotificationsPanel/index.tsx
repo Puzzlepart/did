@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { IPanelProps, Link, Panel } from '@fluentui/react'
+import { IPanelProps } from '@fluentui/react'
+import { BasePanel } from 'components'
 import { UserMessage } from 'components/UserMessage'
-import React, { FC, useContext, useDebugValue } from 'react'
+import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { UserNotificationsContext } from '../context'
@@ -16,9 +17,8 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
   const { notifications, dismissedCount, clearDismissed } = useContext(
     UserNotificationsContext
   )
-  useDebugValue({ dismissedCount })
   return (
-    <Panel
+    <BasePanel
       {...props}
       className={styles.root}
       headerText={t('notifications.headerText')}
@@ -28,13 +28,12 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
         <div hidden={!_.isEmpty(notifications)}>
           <UserMessage
             text={t('notifications.emptyText', { dismissedCount })}
-            actions={
-              <div hidden={dismissedCount === 0}>
-                <Link onClick={clearDismissed}>
-                  {t('notifications.clearDismissedText')}
-                </Link>
-              </div>
-            }
+            actions={dismissedCount > 0 ? [
+              {
+                content: t('notifications.clearDismissedText'),
+                onClick: clearDismissed
+              }
+            ] : []}
           />
         </div>
         <div>
@@ -43,9 +42,10 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
           ))}
         </div>
       </div>
-    </Panel>
+    </BasePanel>
   )
 }
 
-export * from './types'
 export * from './UserNotification'
+export * from './types'
+
