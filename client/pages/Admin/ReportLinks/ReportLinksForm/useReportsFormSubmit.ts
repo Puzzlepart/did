@@ -38,7 +38,7 @@ export function useReportsFormSubmit(
 ): ISubmitProps {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateReportLink)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
 
   /**
    * On save report link function callback.
@@ -55,7 +55,7 @@ export function useReportsFormSubmit(
         text: props.edit
           ? t('admin.reportLinks.updateSuccess', model.$)
           : t('admin.reportLinks.createSuccess', model.$),
-        type: 'success'
+        intent: 'success'
       })
       model.reset()
       props.onSave(model.$)
@@ -64,7 +64,7 @@ export function useReportsFormSubmit(
         text: props.edit
           ? t('admin.reportLinks.updateError')
           : t('admin.reportLinks.createError'),
-        type: 'error'
+        intent: 'error'
       })
     }
   }

@@ -17,7 +17,7 @@ import { useColumns } from './useColumns'
  */
 export function useApiTokens() {
   const { t } = useTranslation()
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
   const [deleteApiToken] = useMutation($deleteApiToken)
   const query = useQuery($tokens)
   const [apiKey, setApiKey] = useState(null)
@@ -33,7 +33,7 @@ export function useApiTokens() {
     if (response === true) {
       await deleteApiToken({ variables: { name: token.name } })
       setToast({
-        type: 'info',
+        intent: 'info',
         text: t('admin.tokenDeletedText', token)
       })
       query.refetch()
@@ -47,7 +47,7 @@ export function useApiTokens() {
       setApiKey(generatedKey)
     } else {
       setToast({
-        type: 'error',
+        intent: 'error',
         text: t('admin.tokenErrorText')
       })
     }

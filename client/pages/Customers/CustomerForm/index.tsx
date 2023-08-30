@@ -38,8 +38,6 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         })}
         label={t('common.descriptionFieldLabel')}
         description={t('customers.descriptionFieldDescription')}
-        multiline={true}
-        autoAdjustHeight={true}
         rows={14}
       />
       <IconPicker

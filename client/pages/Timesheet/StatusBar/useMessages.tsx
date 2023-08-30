@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import _ from 'underscore'
 import { useTimesheetContext } from '../context'
-import { TimesheetView } from '../types'
+import { Overview } from '../Views/Overview'
 
 /**
  * Returns the active messages
@@ -24,7 +24,7 @@ export function useMessages(): IUserMessageProps[] {
 
   if (
     state.dateRangeType === DateRangeType.Month &&
-    state.selectedView !== TimesheetView.Overview
+    state.selectedView?.id !== Overview?.id
   ) {
     const confirmedDuration = state.periods.reduce(
       (sum, period) =>
@@ -38,7 +38,7 @@ export function useMessages(): IUserMessageProps[] {
         periodsCount: state.periods.length,
         confirmedPeriodsCount: state.periods.filter((p) => p.isConfirmed).length
       }),
-      type: 'info'
+      intent: 'info'
     })
     const forecastedHours = state.periods.reduce(
       (sum, period) => (sum += period.forecastedHours),
@@ -84,14 +84,14 @@ export function useMessages(): IUserMessageProps[] {
             </a>
           </span>
         ),
-        type: 'warning'
+        intent: 'warning'
       })
     }
     if (state.selectedPeriod.isComplete && !state.selectedPeriod.isConfirmed) {
       messages.push({
         id: 'allhoursmatched',
         text: t('timesheet.allHoursMatchedText'),
-        type: 'success'
+        intent: 'success'
       })
     }
     if (state.selectedPeriod.isConfirmed) {
@@ -103,7 +103,7 @@ export function useMessages(): IUserMessageProps[] {
             t
           )
         }),
-        type: 'success'
+        intent: 'success'
       })
     }
     if (
@@ -138,13 +138,13 @@ export function useMessages(): IUserMessageProps[] {
             </a>
           </p>
         ),
-        type: 'warning'
+        intent: 'warning'
       })
     }
     if (!_.isEmpty(state.selectedPeriod.errors)) {
       messages.push({
         id: 'unresolvederror',
-        type: 'severeWarning',
+        intent: 'warning',
         text: t('timesheet.unresolvedErrorText', {
           count: state.selectedPeriod.errors.length
         })
@@ -172,7 +172,7 @@ export function useMessages(): IUserMessageProps[] {
             </span>
           </p>
         ),
-        type: 'info',
+        intent: 'info',
         iconName: 'SortUp'
       })
     }

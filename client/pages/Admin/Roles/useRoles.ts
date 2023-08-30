@@ -32,7 +32,7 @@ export function useRoles() {
         text: t('admin.roleInUseMessage', {
           count: data?.users?.length
         }),
-        type: 'error'
+        intent: 'error'
       })
     } else {
       await deleteRole({
@@ -45,7 +45,7 @@ export function useRoles() {
         text: t('admin.rolesPermissions.deleteSuccess', {
           name: role.name
         }),
-        type: 'success'
+        intent: 'success'
       })
     }
   }

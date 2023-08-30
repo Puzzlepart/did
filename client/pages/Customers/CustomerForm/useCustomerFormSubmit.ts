@@ -22,7 +22,7 @@ export function useCustomerFormSubmit(
 ): ISubmitProps {
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_customer)
 
   /**
@@ -41,7 +41,7 @@ export function useCustomerFormSubmit(
       } else {
         setToast({
           text: t('customers.createSuccess', model.$),
-          type: 'success'
+          intent: 'success'
         })
         model.reset()
         refetch()
@@ -49,7 +49,7 @@ export function useCustomerFormSubmit(
     } catch {
       setToast({
         text: t('customers.createError'),
-        type: 'error'
+        intent: 'error'
       })
     }
   }

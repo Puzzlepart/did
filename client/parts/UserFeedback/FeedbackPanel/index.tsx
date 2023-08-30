@@ -46,10 +46,7 @@ export const FeedbackPanel: FC<IPanelProps> = (props) => {
         {...register<TextControlOptions>('body', { casing: 'capitalized' })}
         label={t('feedback.descriptionFieldLabel')}
         description={t('feedback.descriptionFieldDesc')}
-        multiline={true}
         required={true}
-        autoAdjustHeight={true}
-        styles={{ field: { height: 200 } }}
       />
       <ChoiceGroup
         label={t('feedback.ratingFieldLabel')}

@@ -45,7 +45,6 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
         spellCheck={false}
         label={t('common.descriptionFieldLabel')}
         placeholder={t('common.descriptionOptionalFieldLabel')}
-        multiline={true}
       />
       <IconPicker
         {...register('icon')}

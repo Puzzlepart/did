@@ -15,7 +15,7 @@ export function useLabelFormSubmit(
 ): ISubmitProps {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateLabel)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
 
   /**
    * On save label
@@ -32,7 +32,7 @@ export function useLabelFormSubmit(
         text: props.edit
           ? t('admin.labels.updateSuccess', model.$)
           : t('admin.labels.createSuccess', model.$),
-        type: 'success'
+        intent: 'success'
       })
       model.reset()
       props.onSave(model.$)
@@ -41,7 +41,7 @@ export function useLabelFormSubmit(
         text: props.edit
           ? t('admin.labels.createError')
           : t('admin.labels.createError'),
-        type: 'error'
+        intent: 'error'
       })
     }
   }

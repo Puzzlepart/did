@@ -42,7 +42,7 @@ export function useSubscriptionSettings() {
     await updateSubscription({ variables })
     setToast({
       text: t('admin.subscriptionSettingsUpdateSuccess'),
-      type: 'success'
+      intent: 'success'
     })
   }
 

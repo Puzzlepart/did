@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
 import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD, CHANGE_VIEW } from '../../reducer/actions'
-import { TimesheetView } from '../../types'
+import { Overview } from '../Overview'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 
@@ -66,7 +66,7 @@ export function useColumns(): IColumn[] {
           onRender,
           styles: { root: { cursor: 'pointer' } },
           onColumnClick: () => {
-            dispatch(CHANGE_VIEW({ view: TimesheetView.Overview }))
+            dispatch(CHANGE_VIEW({ view: Overview }))
             dispatch(CHANGE_PERIOD({ id: period.id }))
           }
         }))

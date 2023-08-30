@@ -27,12 +27,12 @@ export const UserMenu: FC = () => {
   const { semanticColors, palette } = useTheme()
   const [menuHidden, toggleMenu] = useToggle(true)
   const target = useRef(null)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
 
   useEffect(() => {
     setToast({
       text: sessionStorage.did_on_load_user_menu_mesage,
-      type: 'success'
+      intent: 'success'
     })
     sessionStorage.removeItem('did_on_load_user_menu_mesage')
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -41,13 +41,13 @@ export const useSubmitFeedback = (
         setToast({
           headerText: t('feedback.submitSuccessMessagHeader'),
           text: t('feedback.submitSuccessMessageText', result),
-          type: 'success'
+          intent: 'success'
         })
       } else {
         setToast({
           headerText: t('feedback.submitErrorMessageHeader'),
           text: t('feedback.submitErrorMessageText'),
-          type: 'severeWarning'
+          intent: 'warning'
         })
       }
       panel.onDismiss()

@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/prefer-query-selector */
 import { DateRangeType, ICommandBarProps } from '@fluentui/react'
 import { useToggle } from 'hooks'
-import { TimesheetView } from '..'
 import { useTimesheetContext } from '../context'
+import { Overview } from '../Views/Overview'
 import { useDateRangePickerCommand } from './DateRangePicker/useDateRangePickerCommand'
 import { useNavigateCommands } from './useNavigateCommands'
 import { useNavigatePeriodsCommands } from './useNavigatePeriodsCommands'
@@ -28,7 +28,7 @@ export function useActionBar() {
 
   if (
     state.dateRangeType === DateRangeType.Month &&
-    state.selectedView === TimesheetView.Overview
+    state.selectedView?.id === Overview?.id
   ) {
     commandBarProps.farItems.push(submitCommands)
   }

@@ -24,7 +24,7 @@ export function useProjectFormSubmit(
 ): ISubmitProps {
   const { t } = useTranslation()
   const { refetch } = useContext(ProjectsContext)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_project)
 
   /**
@@ -47,7 +47,7 @@ export function useProjectFormSubmit(
             projectId: model.projectId,
             name: model.$.name
           }),
-          type: 'success'
+          intent: 'success'
         })
         refetch()
         model.reset()
@@ -55,7 +55,7 @@ export function useProjectFormSubmit(
     } catch {
       setToast({
         text: t('projects.createError'),
-        type: 'error'
+        intent: 'error'
       })
     }
   }
