@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react'
-import { IToggleControlProps, ToggleControlOptions } from './types'
+import { ICheckboxControlProps, ChecboxControlOptions } from './types'
 
 /**
  * Transform based on `ToggleControlOptions`
@@ -10,7 +10,7 @@ import { IToggleControlProps, ToggleControlOptions } from './types'
  *
  * @returns transformed value
  */
-function transformValue(value: string, _options: ToggleControlOptions) {
+function transformValue(value: string, _options: ChecboxControlOptions) {
   return value
 }
 
@@ -18,7 +18,7 @@ export function useToggleControlChange({
   model,
   name,
   options
-}: IToggleControlProps) {
+}: ICheckboxControlProps) {
   return useCallback((_event, value) => {
     model.set(name, transformValue(value, options))
   }, [])

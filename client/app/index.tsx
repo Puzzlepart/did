@@ -4,6 +4,7 @@
  *
  * @module App
  */
+import { FluentProvider, webLightTheme } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { AppRouter } from './AppRouter'
 import { AppContext } from './context'
@@ -18,9 +19,11 @@ import { useApp } from './useApp'
 export const App: FC<IAppProps> = (props) => {
   const context = useApp(props)
   return (
-    <AppContext.Provider value={context}>
-      <AppRouter />
-    </AppContext.Provider>
+    <FluentProvider theme={webLightTheme}>
+      <AppContext.Provider value={context}>
+        <AppRouter />
+      </AppContext.Provider>
+    </FluentProvider>
   )
 }
 

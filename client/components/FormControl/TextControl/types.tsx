@@ -1,4 +1,4 @@
-import { ITextFieldProps } from '@fluentui/react'
+import { TextareaProps } from '@fluentui/react-components'
 import { FormInputControlBase } from '../types'
 
 export type TextControlOptions = {
@@ -15,4 +15,7 @@ export type TextControlOptions = {
 
 export interface ITextControlProps
   extends FormInputControlBase<TextControlOptions>,
-    Omit<ITextFieldProps, 'name' | 'value' | 'onChange'> {}
+  Omit<TextareaProps, 'name' | 'value' | 'onChange'> {
+  label?: string
+  description?: string
+}

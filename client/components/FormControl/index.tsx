@@ -1,4 +1,5 @@
 import { Panel, PrimaryButton } from '@fluentui/react'
+import { FluentProvider, webLightTheme } from '@fluentui/react-components'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
@@ -14,7 +15,13 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
     <>
       <ConditionalWrapper
         condition={!!props.panelProps}
-        wrapper={(children) => <Panel {...props.panelProps}>{children}</Panel>}
+        wrapper={(children) => (
+          <Panel {...props.panelProps}>
+            <FluentProvider theme={webLightTheme}>
+              {children}
+            </FluentProvider>
+          </Panel>
+        )}
       >
         <div className={styles.root}>
           {props.children}
@@ -32,8 +39,9 @@ FormControl.defaultProps = {
   submitProps: {}
 }
 
+export * from './CheckboxControl'
 export * from './DropdownControl'
 export * from './TextControl'
-export * from './ToggleControl'
 export * from './types'
 export { useFormControls } from './useFormControls'
+

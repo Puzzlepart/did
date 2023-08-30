@@ -34,6 +34,7 @@
     "@babel/core": "7.13.13",
     "@babel/preset-env": "7.13.12",
     "@fluentui/react": "8.40.0",
+    "@fluentui/react-components": "9.30.0",
     "@microsoft/microsoft-graph-client": "2.2.1",
     "@octokit/auth-app": "3.3.0",
     "@octokit/request": "5.4.14",

@@ -1,14 +1,12 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Toggle } from '@fluentui/react'
 import {
   IconPicker,
   LabelPicker,
   SearchCustomer,
-  SubText,
   TabComponent
 } from 'components'
-import { FormControl } from 'components/FormControl'
+import { ChecboxControlOptions, CheckboxControl, FormControl } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import packageFile from 'package'
@@ -58,8 +56,6 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         })}
         label={t('common.descriptionFieldLabel')}
         description={t('projects.descriptionFieldDescription')}
-        multiline={true}
-        autoAdjustHeight={true}
         rows={14}
       />
       <IconPicker
@@ -71,14 +67,12 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         width={300}
         required={true}
       />
-      <div hidden={!props.edit}>
-        <Toggle
-          label={t('common.inactiveFieldLabel')}
-          checked={model.value('inactive')}
-          onChange={(_event, value) => model.set('inactive', value)}
-        />
-        <SubText text={t('projects.inactiveFieldDescription')} />
-      </div>
+      <CheckboxControl
+        {...register<ChecboxControlOptions>('inactive')}
+        label={t('common.inactiveFieldLabel')}
+        description={t('projects.inactiveFieldDescription')}
+        hidden={!props.edit}
+      />
       <LabelPicker
         label={t('admin.labels.headerText')}
         placeholder={t('projects.filterLabels')}

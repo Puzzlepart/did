@@ -1,27 +1,26 @@
-import { Toggle } from '@fluentui/react'
+import { Checkbox } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import _ from 'underscore'
-import styles from './ToggleControl.module.scss'
-import { IToggleControlProps } from './types'
+import styles from './CheckboxControl.module.scss'
+import { ICheckboxControlProps } from './types'
 import { useToggleControlChange } from './useToggleControlChange'
 
 /**
- * Text field based on `<Toggle />` from [@fluentui/react](@fluentui/react)
+ * Text field based on `<Checkbox />` from `@fluentui/react-components`
  * but also supports binding to a `model`
  *
  * @category Reusable Component
  */
-export const ToggleControl: ReusableComponent<IToggleControlProps> = (
+export const CheckboxControl: ReusableComponent<ICheckboxControlProps> = (
   props
 ) => {
   const onChange = useToggleControlChange(props)
   return (
-    <div className={styles.root} {..._.pick(props, 'hidden')}>
-      <Toggle
+    <div className={styles.root} hidden={props.hidden}>
+      <Checkbox
         {...props}
-        onChange={onChange}
+        onChange={(event, data) => onChange(event, data.checked)}
         checked={props.model.value<boolean>(props.name, false)}
       />
       <div className={styles.description}>

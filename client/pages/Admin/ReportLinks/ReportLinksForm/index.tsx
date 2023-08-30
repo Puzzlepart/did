@@ -3,9 +3,9 @@ import { DropdownControl, FormControl } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import {
-  ToggleControl,
-  ToggleControlOptions
-} from 'components/FormControl/ToggleControl'
+  CheckboxControl,
+  ChecboxControlOptions
+} from 'components/FormControl/CheckboxControl'
 import $date from 'DateUtils'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -93,13 +93,13 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
           }))
         ]}
       />
-      <ToggleControl
-        {...register<ToggleControlOptions>('published')}
+      <CheckboxControl
+        {...register<ChecboxControlOptions>('published')}
         label={t('admin.reportLinks.publishedLabel')}
         description={t('admin.reportLinks.publishedDescription')}
       />
-      <ToggleControl
-        {...register<ToggleControlOptions>('promoted')}
+      <CheckboxControl
+        {...register<ChecboxControlOptions>('promoted')}
         label={t('admin.reportLinks.promotedLabel')}
         description={t('admin.reportLinks.promotedDescription')}
       />
