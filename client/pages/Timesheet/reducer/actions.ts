@@ -1,7 +1,7 @@
 import { QueryResult } from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
-import { Project } from 'types'
+import { EventObject, Project } from 'types'
 import { TimesheetDateRange } from '../TimesheetDateRange'
 import { TimesheetView } from '../types'
 
@@ -90,6 +90,14 @@ export const MANUAL_MATCH =
  */
 export const CLEAR_MANUAL_MATCH =
   createAction<{ id: string }>('CLEAR_MANUAL_MATCH')
+
+/**
+ * Open manual match panel action
+ * 
+ * @category Timesheet Actions
+ */
+export const TOGGLE_MANUAL_MATCH_PANEL =
+  createAction<{ event: EventObject }>('TOGGLE_MANUAL_MATCH_PANEL')
 
 /**
  * Ignore event action

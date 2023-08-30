@@ -5,6 +5,7 @@
  * @module Components
  */
 export * from './Autocomplete'
+export * from './BasePanel'
 export * from './ColorPickerField'
 export * from './ConditionalWrapper'
 export * from './CustomerLink'

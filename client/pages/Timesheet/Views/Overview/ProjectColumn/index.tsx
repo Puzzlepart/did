@@ -1,22 +1,21 @@
 import { Icon } from '@fluentui/react'
+import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { AddCircle24Regular, CalendarCancel24Regular } from '@fluentui/react-icons'
 import {
   ProjectLink,
   ProjectTooltip,
   UserMessage,
-  UserMessageType
 } from 'components'
 import { TFunction } from 'i18next'
-import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React, { FC } from 'react'
-import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { useTimesheetContext } from '../../../context'
+import { CLEAR_MANUAL_MATCH, IGNORE_EVENT, TOGGLE_MANUAL_MATCH_PANEL } from '../../../reducer/actions'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
-import { IgnoreEventButton } from './IgnoreEventButton'
 import { MatchEventPanel } from './MatchEventPanel'
 import styles from './ProjectColumn.module.scss'
 import { IProjectColumnProps } from './types'
+import { useProjectColumn } from './useProjectColumn'
 
 /**
  * Get error message for the event by error code. Translate function
@@ -29,7 +28,7 @@ import { IProjectColumnProps } from './types'
 function getErrorMessage(
   code: string,
   t: TFunction
-): [string, UserMessageType] {
+): [string, AlertProps['intent']] {
   switch (code) {
     case 'PROJECT_INACTIVE': {
       return [t('timesheet.projectInactiveErrorText'), 'error']
@@ -48,21 +47,19 @@ function getErrorMessage(
  */
 export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
   const { t } = useTranslation()
-  const { state, dispatch } = useTimesheetContext()
-  let className = styles.root
-  if (isMobile) className += ` ${styles.mobile}`
+  const { state, dispatch, className } = useProjectColumn()
+
   if (event.isSystemIgnored) {
     return null
   }
   if (!event.project) {
     if (event.error) {
-      const [text, type] = getErrorMessage(event.error.code, t)
+      const [text, intent] = getErrorMessage(event.error.code, t)
       return (
         <div className={className}>
           <UserMessage
             containerStyle={{ marginTop: 10 }}
-            isMultiline={false}
-            type={type}
+            intent={intent}
             text={text}
           />
         </div>
@@ -72,17 +69,27 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
       <div className={className}>
         <UserMessage
           containerStyle={{ marginTop: 10, width: '90%' }}
-          isMultiline={true}
-          type={'warning'}
+          intent='warning'
           iconName='TagUnknown'
           text={t('timesheet.noProjectMatchFoundText')}
-          actions={
-            <div className={styles.eventActions}>
-              <MatchEventPanel event={event} />
-              <IgnoreEventButton event={event} />
-            </div>
-          }
+          actions={[
+            {
+              content: t('timesheet.resolveProjectButtonLabel'),
+              icon: <AddCircle24Regular />,
+              onClick: () => {
+                dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))
+              }
+            },
+            {
+              content: t('timesheet.ignoreEventButtonLabel'),
+              icon: <CalendarCancel24Regular />,
+              onClick: () => {
+                dispatch(IGNORE_EVENT({ id: event.id }))
+              }
+            }
+          ]}
         />
+        <MatchEventPanel />
       </div>
     )
   }

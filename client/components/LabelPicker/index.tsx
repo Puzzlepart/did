@@ -1,4 +1,4 @@
-import { Icon, Label } from '@fluentui/react'
+import { Icon } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
 import { ReusableComponent } from 'components/types'
 import { UserMessage } from 'components/UserMessage'
@@ -7,6 +7,7 @@ import styles from './LabelPicker.module.scss'
 import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 import { useLabelPicker } from './useLabelPicker'
+import { Label } from '@fluentui/react-components'
 
 /**
  * @category Reusable Component
@@ -23,7 +24,7 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
 
   return (
     <div className={`${styles.root} ${props.className}`}>
-      <Label className={styles.inputLabel}>
+      <Label weight='semibold' className={styles.inputLabel}>
         <span>{props.label}</span>
         <span
           className={styles.toggleIcon}

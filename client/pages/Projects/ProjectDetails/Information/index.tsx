@@ -21,8 +21,7 @@ export const Information: FC = () => {
         <UserMessage
           hidden={!state.selected?.inactive}
           text={t('projects.inactiveText')}
-          iconName='Warning'
-          type={'warning'}
+          intent='warning'
         />
       )}
       <InformationProperty

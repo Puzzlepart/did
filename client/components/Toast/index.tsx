@@ -19,7 +19,6 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
     <div className={styles.root}>
       <UserMessage
         {..._.omit(props, 'hidden')}
-        styles={{ root: { padding: '20px 25px' } }}
         className={styles.message}
         containerStyle={{ maxWidth: 550, lineHeight: 20 }}
       />

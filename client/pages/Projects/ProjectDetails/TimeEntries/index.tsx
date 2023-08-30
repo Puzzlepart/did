@@ -17,7 +17,7 @@ export const TimeEntries: FC = () => {
   return (
     <div className={styles.root}>
       {error ? (
-        <UserMessage type={'error'} text={t('projects.timeEntriesErrorText')} />
+        <UserMessage intent='error' text={t('projects.timeEntriesErrorText')} />
       ) : (
         <>
           <Summary loading={loading} timeEntries={timeEntries} />

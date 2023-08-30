@@ -14,6 +14,7 @@ import {
   IGNORE_EVENT,
   MANUAL_MATCH,
   NEXT_PERIOD,
+  TOGGLE_MANUAL_MATCH_PANEL,
   PREVIOUS_PERIOD,
   SET_DATE_RANGE,
   SUBMITTING_PERIOD,
@@ -174,6 +175,10 @@ export function createTimesheetReducer(
         state.periods = state.periods.map((p) =>
           p.id === state.selectedPeriod.id ? state.selectedPeriod : p
         )
+        state.eventToMatch = null
+      })
+      .addCase(TOGGLE_MANUAL_MATCH_PANEL, (state, { payload }) => {
+          state.eventToMatch = payload?.event ?? null
       })
       .addCase(CLEAR_MANUAL_MATCH, (state, { payload }) => {
         state.selectedPeriod.clearManualMatch(payload.id)

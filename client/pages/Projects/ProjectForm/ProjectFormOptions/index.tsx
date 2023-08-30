@@ -1,4 +1,4 @@
-import { Toggle } from '@fluentui/react'
+import { Checkbox } from '@fluentui/react-components'
 import { SubText } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,11 +16,11 @@ export const ProjectFormOptions: FC<IProjectFormOptionsProps> = ({
   const { t } = useTranslation()
   return (
     <div className={styles.root} hidden={hidden}>
-      <Toggle
+      <Checkbox
         label={t('projects.createOutlookCategoryFieldLabel')}
         checked={options.value('createOutlookCategory')}
-        onChange={(_event, value) =>
-          options.set('createOutlookCategory', value)
+        onChange={(_event, data) =>
+          options.set('createOutlookCategory', data?.checked ?? false)
         }
       />
       <SubText

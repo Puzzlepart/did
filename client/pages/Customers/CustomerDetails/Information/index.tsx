@@ -19,8 +19,7 @@ export const Information: FC = () => {
       {state.selected?.inactive && (
         <UserMessage
           text={t('customers.inactiveText')}
-          iconName='Warning'
-          type={'warning'}
+          intent='warning'
         />
       )}
       <InformationProperty

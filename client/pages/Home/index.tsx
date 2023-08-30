@@ -42,7 +42,7 @@ export const Home: PageComponent = () => {
       {error && (
         <UserMessage
           className={styles.error}
-          type='error'
+          intent='error'
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
           onDismiss={() => {
@@ -51,7 +51,7 @@ export const Home: PageComponent = () => {
         />
       )}
       {_.isEmpty(Object.keys(providers)) && (
-        <UserMessage type='warning' text={t('common.signInDisabledMessage')} />
+        <UserMessage intent='warning' text={t('common.signInDisabledMessage')} />
       )}
       {!subscription && !error && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
