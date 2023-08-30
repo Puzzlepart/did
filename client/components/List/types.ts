@@ -170,6 +170,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Filter values
    */
   filterValues?: Record<string, any>
+
+  /**
+   * Use `DataGrid` from `@fluentui/react-components` instead of `ShimmeredDetailsList` from `@fluentui/react`
+   */
+  usePreview?: boolean
 }
 
 export type ColumnHeaderContextMenu = {

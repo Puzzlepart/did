@@ -8,6 +8,7 @@ import styles from './List.module.scss'
 import { ListFilterPanel } from './ListFilterPanel'
 import { IListProps } from './types'
 import { useList } from './useList'
+import { PreviewList } from './PreviewList'
 
 /**
  * List component using `ShimmeredDetailsList` from `@fluentui/react`.
@@ -23,7 +24,11 @@ export const List: ReusableComponent<IListProps> = (props) => {
     <div className={styles.root} hidden={props.hidden}>
       <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          <ShimmeredDetailsList {...listProps} />
+          {
+            props.usePreview
+              ? <PreviewList {...listProps} />
+              : <ShimmeredDetailsList {...listProps} />
+          }
           <ColumnHeaderContextMenu />
           <ListFilterPanel />
         </ScrollablePaneWrapper>
