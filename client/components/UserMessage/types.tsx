@@ -1,16 +1,11 @@
-import { IMessageBarProps } from '@fluentui/react'
+import { MenuItemProps } from '@fluentui/react-components'
+import { AlertProps } from '@fluentui/react-components/dist/unstable'
 
-export type UserMessageType =
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'severeWarning'
 
 /**
  * @category UserMessage
  */
-export interface IUserMessageProps extends IMessageBarProps {
+export interface IUserMessageProps extends AlertProps {
   /**
    * Header text to show in **bold** _slightly larger_ font
    */
@@ -34,11 +29,6 @@ export interface IUserMessageProps extends IMessageBarProps {
   onDismiss?: () => void
 
   /**
-   * Type info, warning, error etc
-   */
-  type?: UserMessageType
-
-  /**
    * Icon to use if not default for the type
    */
   iconName?: string
@@ -57,4 +47,14 @@ export interface IUserMessageProps extends IMessageBarProps {
    * Styles for the inner part of the message
    */
   innerStyle?: React.CSSProperties
+
+  /**
+   * Actions to show in a menu
+   */
+  actions?: MenuItemProps[]
+
+  /**
+   * Whether to open the actions menu on hover
+   */
+  openActionsOnHover?: boolean
 }

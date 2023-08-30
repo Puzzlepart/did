@@ -1,13 +1,7 @@
-import {
-  IMessageBarProps,
-  IMessageBarStyleProps,
-  IMessageBarStyles,
-  IStyleFunctionOrObject,
-  MessageBarType
-} from '@fluentui/react'
 import { HTMLAttributes } from 'react'
-import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
+import { IUserMessageProps } from './types'
+import _ from 'lodash'
 
 /**
  * A component that supports a `<MessageBar />` with
@@ -16,23 +10,6 @@ import styles from './UserMessage.module.scss'
  * @category Function Component
  */
 export function useUserMessage(props: IUserMessageProps) {
-  const messageBarStyles: IStyleFunctionOrObject<
-    IMessageBarStyleProps,
-    IMessageBarStyles
-  > = props.styles || {}
-
-  const messageBarType = MessageBarType[props.type] || MessageBarType.info
-
-  if (props.fixedHeight) {
-    messageBarStyles['root'] = {
-      ...messageBarStyles['root'],
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: props.fixedHeight
-    }
-  }
-
   const container: HTMLAttributes<HTMLDivElement> = {
     id: props.id,
     className: [styles.root, props.className].join(' '),
@@ -40,18 +17,11 @@ export function useUserMessage(props: IUserMessageProps) {
     hidden: props.hidden,
     onClick: props.onClick
   }
-
-  const message: IMessageBarProps = {
-    styles: messageBarStyles,
-    isMultiline: props.isMultiline,
-    messageBarType,
-    messageBarIconProps: props.iconName && { iconName: props.iconName },
-    onDismiss: props.onDismiss,
-    actions: props.actions
-  }
+  
+  const className = [styles.root, !_.isEmpty(props.actions) && styles.hasActions].filter(Boolean).join(' ')
 
   return {
-    container,
-    message
+    className,
+    container
   }
 }
