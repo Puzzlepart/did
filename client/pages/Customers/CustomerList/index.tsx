@@ -52,6 +52,7 @@ export const CustomerList: TabComponent = (props) => {
           ],
           farItems: []
         }}
+        usePreview
       />
       {props.children}
     </>

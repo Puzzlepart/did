@@ -1,5 +1,11 @@
-import { omit, TextField } from '@fluentui/react'
-import { Checkbox, useId } from '@fluentui/react-components'
+import { omit } from '@fluentui/react'
+import {
+  Checkbox,
+  Field,
+  Input,
+  Label,
+  useId
+} from '@fluentui/react-components'
 import { SubText, TabComponent } from 'components'
 import get from 'get-value'
 import React, { useContext } from 'react'
@@ -27,13 +33,12 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
         switch (field.type) {
           case 'text': {
             fieldElement = (
-              <TextField
-                {...omit(fieldProps, ['description'])}
-                defaultValue={get(settings, key, {
-                  default: fieldProps.defaultValue
-                })}
-                onChange={(_event, value) => onChange(key, value)}
-              />
+              <Field>
+                <Label htmlFor={id} weight='semibold'>
+                  {fieldProps.label}
+                </Label>
+                <Input {...omit(fieldProps, ['description'])} />
+              </Field>
             )
             break
           }
