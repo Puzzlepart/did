@@ -1,30 +1,37 @@
-interface ISubscriptionSettingBase {
+import { ITextFieldProps } from '@fluentui/react'
+import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+
+interface ISubscriptionSettingBase<T = any> {
   id: string
   disabledIf?: (settings: any) => boolean
   hiddenIf?: (settings: any) => boolean
-  props: { [key: string]: any }
+  props: T
 }
 
-export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingText<T = ITextFieldProps>
+  extends ISubscriptionSettingBase<T> {
   type: 'text'
 }
 
-export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingBool<T = CheckboxProps>
+  extends ISubscriptionSettingBase<T> {
   type: 'bool'
 }
 
-export interface ISubscriptionSettingNumber extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingNumber<T = SliderProps>
+  extends ISubscriptionSettingBase<T> {
   type: 'number'
 }
 
-export interface ISubscriptionSettingCheckbox extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingCheckbox<T = any>
+  extends ISubscriptionSettingBase<T> {
   id: string
   type: 'checkbox'
   options: Record<string, string>
 }
 
-export type SubscriptionSettingField =
-  | ISubscriptionSettingText
-  | ISubscriptionSettingBool
-  | ISubscriptionSettingNumber
-  | ISubscriptionSettingCheckbox
+export type SubscriptionSettingField<T = any> =
+  | ISubscriptionSettingText<T>
+  | ISubscriptionSettingBool<T>
+  | ISubscriptionSettingNumber<T>
+  | ISubscriptionSettingCheckbox<T>

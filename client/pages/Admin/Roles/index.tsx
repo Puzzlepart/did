@@ -22,13 +22,14 @@ export const Roles: TabComponent = () => {
           items: [
             {
               key: 'ADD_NEW_ROLE',
-              name: t('admin.addNewRole'),
+              text: t('admin.addNewRole'),
               onClick: () => setPanel({ headerText: t('admin.addNewRole') }),
               iconProps: { iconName: 'Permissions' }
             }
           ],
           farItems: []
         }}
+        usePreview
       />
       {panel && (
         <RolePanel

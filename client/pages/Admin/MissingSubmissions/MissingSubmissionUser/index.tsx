@@ -1,21 +1,15 @@
-import { Persona, PersonaSize } from '@fluentui/react'
+import { Persona } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import styles from './MissingSubmissionUser.module.scss'
 import { MissingSubmissionUserTooltip } from './MissingSubmissionUserTooltip'
 import { IMissingSubmissionUserProps } from './types'
 
-export const MissingSubmissionUser: FC<IMissingSubmissionUserProps> = ({
-  user,
-  period
-}) => (
+export const MissingSubmissionUser: FC<IMissingSubmissionUserProps> = (
+  props
+) => (
   <div className={styles.root}>
-    <MissingSubmissionUserTooltip user={user} period={period}>
-      <Persona
-        {...user}
-        className={styles.persona}
-        showOverflowTooltip={false}
-        size={PersonaSize.size40}
-      />
+    <MissingSubmissionUserTooltip {...props}>
+      <Persona {...props.user} className={styles.persona} size='medium' />
     </MissingSubmissionUserTooltip>
   </div>
 )

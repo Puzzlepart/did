@@ -1,7 +1,7 @@
-import { IPersonaProps } from '@fluentui/react'
+import { PersonaProps } from '@fluentui/react-components'
 import { IDatePeriod } from 'DateUtils'
 
-export interface IMissingSubmissionUser extends IPersonaProps {
+export interface IMissingSubmissionUser extends PersonaProps {
   email?: string
   periods?: IDatePeriod[]
 }

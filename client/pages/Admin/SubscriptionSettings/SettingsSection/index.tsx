@@ -1,10 +1,12 @@
-import { omit, Slider, TextField, Toggle } from '@fluentui/react'
+import { omit, TextField } from '@fluentui/react'
+import { Checkbox, useId } from '@fluentui/react-components'
 import { SubText, TabComponent } from 'components'
 import get from 'get-value'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
+import { SliderField } from './SliderField'
 import { ISettingsSectionProps } from './types'
 
 /**
@@ -12,6 +14,7 @@ import { ISettingsSectionProps } from './types'
  */
 export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
   const { settings, onChange } = useContext(SubscriptionContext)
+  const id = useId()
   return (
     <div className={styles.root}>
       {props.fields.map((field) => {
@@ -36,7 +39,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
           }
           case 'bool': {
             fieldElement = (
-              <Toggle
+              <Checkbox
                 {...fieldProps}
                 defaultChecked={get(settings, key, { default: false })}
                 inlineLabel={true}
@@ -46,13 +49,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
             break
           }
           case 'number': {
-            fieldElement = (
-              <Slider
-                {...fieldProps}
-                defaultValue={get(settings, key, { default: 1 })}
-                onChange={(value) => onChange(key, value)}
-              />
-            )
+            fieldElement = <SliderField {...fieldProps} settingsKey={key} />
             break
           }
           case 'checkbox': {
@@ -65,6 +62,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
         return (
           <div
             key={field.id}
+            style={{ width: '100%' }}
             className={styles.inputField}
             hidden={fieldProps.hidden}
           >

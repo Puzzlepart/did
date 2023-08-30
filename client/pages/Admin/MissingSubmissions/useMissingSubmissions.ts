@@ -19,7 +19,7 @@ interface IMissingSubmissionPeriod extends IDatePeriod {
  */
 function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
   return {
-    text: user.displayName,
+    name: user.displayName,
     secondaryText: user.mail,
     imageUrl: user.photo?.base64,
     email: user.mail,

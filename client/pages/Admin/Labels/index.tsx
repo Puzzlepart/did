@@ -21,13 +21,14 @@ export const Labels: TabComponent = () => {
           items: [
             {
               key: 'ADD_NEW_LABEL',
-              name: t('admin.labels.addNewText'),
+              text: t('admin.labels.addNewText'),
               iconProps: { iconName: 'Add' },
               onClick: () => setForm({ isOpen: true })
             }
           ],
           farItems: []
         }}
+        usePreview
       />
       <LabelForm {...form} />
       {ConfirmationDialog}

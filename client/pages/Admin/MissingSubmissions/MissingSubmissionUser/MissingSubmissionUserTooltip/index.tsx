@@ -1,4 +1,9 @@
-import { Persona, PersonaSize, TooltipHost } from '@fluentui/react'
+import { TooltipHost } from '@fluentui/react'
+import {
+  FluentProvider,
+  Persona,
+  webLightTheme
+} from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserTooltip.module.scss'
@@ -10,16 +15,15 @@ export const MissingSubmissionUserTooltip: FC<IMissingSubmissionUserTooltipProps
     <TooltipHost
       tooltipProps={{
         onRenderContent: () => (
-          <div className={styles.root}>
+          <FluentProvider theme={webLightTheme} className={styles.root}>
             <Persona
               {...props.user}
               className={styles.persona}
-              showOverflowTooltip={false}
-              size={PersonaSize.size56}
+              size='extra-large'
             />
             <UserMissingPeriods {...props} />
             <TeamsReminderButton period={props.period} users={[props.user]} />
-          </div>
+          </FluentProvider>
         )
       }}
       calloutProps={{ gapSpace: 0 }}

@@ -1,4 +1,4 @@
-import { PrimaryButton } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
 import { TabComponent, TabContainer, Toast } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -29,12 +29,14 @@ export const SubscriptionSettings: TabComponent = () => {
             return <SettingsSection {...section} key={section.itemKey} />
           })}
         </TabContainer>
-        <PrimaryButton
+        <Button
+          appearance='primary'
           className={styles.saveButton}
           onClick={onSaveSettings}
           disabled={!!toast || !hasChanges}
-          text={t('common.save')}
-        />
+        >
+          {t('common.save')}
+        </Button>
       </div>
     </SubscriptionContext.Provider>
   )

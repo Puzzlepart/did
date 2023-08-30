@@ -7,8 +7,7 @@ import styles from './EditLink.module.scss'
 import { IEditLinkProps } from './types'
 
 /**
- * Renders a edit link using `<Icon />` and `<Link />`
- * from `@fluentui/react`
+ * Renders a edit link using `<Button />` component from `@fluentui/react-components`
  *
  * @category Reusable Component
  */

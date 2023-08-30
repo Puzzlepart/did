@@ -21,7 +21,7 @@ export const ReportLinks: TabComponent = () => {
           items: [
             {
               key: 'ADD_NEW_REPORT_LINK',
-              name: t('admin.reportLinks.addNewReportsLink'),
+              text: t('admin.reportLinks.addNewReportsLink'),
               iconProps: { iconName: 'Add' },
               onClick: () => {
                 setForm({ isOpen: true })
@@ -30,6 +30,7 @@ export const ReportLinks: TabComponent = () => {
           ],
           farItems: []
         }}
+        usePreview
       />
       <ReportLinksForm {...form} />
       {ConfirmationDialog}

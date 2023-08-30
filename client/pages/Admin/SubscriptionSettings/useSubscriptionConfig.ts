@@ -1,3 +1,4 @@
+import { CheckboxProps, SliderProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
@@ -50,7 +51,7 @@ export function useSubscriptionConfig() {
             label: t('admin.adUserSyncEnabledLabel'),
             description: t('admin.adUserSyncEnabledDescription')
           }
-        } as SubscriptionSettingField,
+        } as SubscriptionSettingField<CheckboxProps>,
         {
           id: 'properties',
           type: 'checkbox',
@@ -80,7 +81,7 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.adsync?.enabled
-        } as SubscriptionSettingField
+        } as SubscriptionSettingField<CheckboxProps>
       ]
     },
     {
@@ -109,7 +110,7 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.forecast?.enabled
-        } as SubscriptionSettingField
+        } as SubscriptionSettingField<SliderProps>
       ]
     },
     {

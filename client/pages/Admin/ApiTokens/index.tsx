@@ -53,12 +53,13 @@ export const ApiTokens: TabComponent = () => {
           items: [
             {
               key: 'ADD_NEW_TOKEN',
-              name: t('admin.apiTokens.addNew'),
+              text: t('admin.apiTokens.addNew'),
               iconProps: { iconName: 'Add' },
               onClick: () => setForm({ isOpen: true })
             }
           ]
         }}
+        usePreview
       />
       {form.isOpen && (
         <ApiTokenForm

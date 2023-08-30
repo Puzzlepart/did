@@ -17,11 +17,12 @@ export function useColumns({ onEdit, onDelete }) {
     )),
     col('description', t('common.descriptionFieldLabel'), {
       isMultiline: true,
+      minWidth: 180,
       data: { hidden: isMobile }
     }),
     col(null, null, { minWidth: 180 }, (label: LabelObject) => (
       <div style={{ display: 'flex' }}>
-        <EditLink style={{ marginRight: 12 }} onClick={() => onEdit(label)} />
+        <EditLink style={{ marginRight: 6 }} onClick={() => onEdit(label)} />
         <DeleteLink onClick={() => onDelete(label)} />
       </div>
     ))
