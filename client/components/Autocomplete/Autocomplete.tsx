@@ -2,10 +2,10 @@ import {
   Callout,
   FocusZone,
   FocusZoneDirection,
-  Label,
   List,
-  SearchBox
 } from '@fluentui/react'
+import { Label } from '@fluentui/react-components'
+import { SearchBox } from '@fluentui/react-search-preview'
 import { SubText } from 'components/SubText'
 import React from 'react'
 import _ from 'underscore'
@@ -31,31 +31,28 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
     onDismissCallout,
     onSetSelected,
     onSearch,
-    onClear,
     onKeyDown
   } = useAutocomplete(props)
   return (
     <div className={className} onKeyDown={onKeyDown}>
       {props.label && (
-        <Label disabled={props.disabled} required={props.required}>
+        <Label
+          weight='semibold'
+          disabled={props.disabled}
+          required={props.required}>
           {props?.label}
         </Label>
       )}
       <div ref={ref}>
         <SearchBox
-          componentRef={searchBoxRef}
+          ref={searchBoxRef}
           key={state.selectedItem?.key}
           className={styles.field}
           defaultValue={state.value}
-          iconProps={{
-            ...props.iconProps,
-            iconName: state.selectedItem?.iconName || 'Search'
-          }}
           placeholder={props.placeholder}
           disabled={props.disabled}
           autoComplete='off'
           autoCorrect='off'
-          onClear={onClear}
           onChange={onSearch}
         />
       </div>

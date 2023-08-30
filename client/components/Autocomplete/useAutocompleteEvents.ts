@@ -1,8 +1,9 @@
+import { InputOnChangeData } from '@fluentui/react-components'
+import { ChangeEvent } from 'react'
 import {
   DISMISS_CALLOUT,
   ON_KEY_DOWN,
   ON_SEARCH,
-  RESET,
   SET_SELECTED_INDEX
 } from './actions'
 import { ISuggestionItem } from './types'
@@ -19,12 +20,8 @@ export function useAutocompleteEvents({ dispatch, props }) {
       props.onSelected(item)
     },
     onSetSelected: (index: number) => dispatch(SET_SELECTED_INDEX({ index })),
-    onSearch: (_event: any, searchTerm: string) =>
-      dispatch(ON_SEARCH({ searchTerm })),
-    onClear: () => {
-      dispatch(RESET())
-      props.onClear()
-    },
+    onSearch: (_: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) =>
+      dispatch(ON_SEARCH({ searchTerm: data?.value })),
     onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) =>
       dispatch(
         ON_KEY_DOWN({

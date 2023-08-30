@@ -1,9 +1,8 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ISearchBox } from '@fluentui/react'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
-import { INIT, RESET } from './actions'
 import styles from './Autocomplete.module.scss'
+import { INIT, RESET } from './actions'
 import { useAutocompleteReducer } from './reducer'
 import { IAutocompleteProps } from './types'
 import { useAutocompleteEvents } from './useAutocompleteEvents'
@@ -54,10 +53,10 @@ export function useAutocomplete(props: IAutocompleteProps) {
     [state.suggestions, state.selectedIndex]
   )
 
-  const { onDismissCallout, onSetSelected, onSearch, onClear, onKeyDown } =
+  const { onDismissCallout, onSetSelected, onSearch, onKeyDown } =
     useAutocompleteEvents({ props, dispatch })
 
-  const searchBoxRef = useRef<ISearchBox>()
+  const searchBoxRef = useRef<any>()
   useEffect(() => {
     if (props.autoFocus) searchBoxRef?.current.focus()
   }, [props])
@@ -71,7 +70,6 @@ export function useAutocomplete(props: IAutocompleteProps) {
     onDismissCallout,
     onSetSelected,
     onSearch,
-    onClear,
     onKeyDown
   } as const
 }

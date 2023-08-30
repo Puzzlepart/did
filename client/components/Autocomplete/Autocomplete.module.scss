@@ -1,9 +1,13 @@
 .root {
+  width: 100%;
+  box-sizing: border-box;
   padding: 8px 0 0 0;
 
-  &.hasError {
-    .field {
-      border: 1px solid rgb(164, 38, 44);
+  .field {
+    width: 100%;
+    max-width: none;
+    &.hasError {
+        border: 1px solid rgb(164, 38, 44);
     }
   }
 
