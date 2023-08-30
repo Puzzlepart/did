@@ -1,7 +1,7 @@
-import { HTMLAttributes } from 'react'
-import styles from './UserMessage.module.scss'
-import { IUserMessageProps } from './types'
 import _ from 'lodash'
+import { HTMLAttributes } from 'react'
+import { IUserMessageProps } from './types'
+import styles from './UserMessage.module.scss'
 
 /**
  * A component that supports a `<MessageBar />` with
@@ -17,8 +17,13 @@ export function useUserMessage(props: IUserMessageProps) {
     hidden: props.hidden,
     onClick: props.onClick
   }
-  
-  const className = [styles.root, !_.isEmpty(props.actions) && styles.hasActions].filter(Boolean).join(' ')
+
+  const className = [
+    styles.root,
+    !_.isEmpty(props.actions) && styles.hasActions
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return {
     className,

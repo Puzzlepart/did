@@ -51,7 +51,10 @@ export const Home: PageComponent = () => {
         />
       )}
       {_.isEmpty(Object.keys(providers)) && (
-        <UserMessage intent='warning' text={t('common.signInDisabledMessage')} />
+        <UserMessage
+          intent='warning'
+          text={t('common.signInDisabledMessage')}
+        />
       )}
       {!subscription && !error && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>

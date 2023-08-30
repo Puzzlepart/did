@@ -1,9 +1,4 @@
-import {
-  Callout,
-  FocusZone,
-  FocusZoneDirection,
-  List,
-} from '@fluentui/react'
+import { Callout, FocusZone, FocusZoneDirection, List } from '@fluentui/react'
 import { Label } from '@fluentui/react-components'
 import { SearchBox } from '@fluentui/react-search-preview'
 import { SubText } from 'components/SubText'
@@ -39,7 +34,8 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
         <Label
           weight='semibold'
           disabled={props.disabled}
-          required={props.required}>
+          required={props.required}
+        >
           {props?.label}
         </Label>
       )}

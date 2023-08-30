@@ -26,7 +26,7 @@ export function useUsersCommands(context: IUsersContext) {
     items: [
       {
         key: 'ADD_NEW_USER',
-        name: t('admin.users.addNewUser'),
+        text: t('admin.users.addNewUser'),
         iconProps: { iconName: 'AddFriend' },
         disabled:
           context.state.loading ||
@@ -39,7 +39,7 @@ export function useUsersCommands(context: IUsersContext) {
       },
       {
         key: 'BULK_IMPORT_USERS',
-        name: t('admin.users.bulkImportUsersLabel'),
+        text: t('admin.users.bulkImportUsersLabel'),
         iconProps: { iconName: 'CloudImportExport' },
         disabled:
           context.state.loading ||
@@ -50,7 +50,7 @@ export function useUsersCommands(context: IUsersContext) {
       },
       {
         key: 'SYNC_USERS',
-        name: t('admin.users.syncUsersLabel'),
+        text: t('admin.users.syncUsersLabel'),
         iconProps: { iconName: 'UserSync' },
         disabled:
           context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS),
@@ -67,7 +67,7 @@ export function useUsersCommands(context: IUsersContext) {
       },
       {
         key: 'SPINNER',
-        name: '',
+        text: '',
         onRender: () =>
           context.state.progress && (
             <Spinner

@@ -10,14 +10,14 @@ import { IListProps } from '../types'
  * @returns An object with sizing options for each column.
  */
 export function useColumnSizingOptions(columns: IListProps['columns']) {
-    return useMemo<TableColumnSizingOptions>(() => {
-        return columns.reduce((columnSizingOptions, column) => {
-            columnSizingOptions[column.key] = {
-                minWidth: column.minWidth,
-                defaultWidth: column.minWidth,
-                idealWidth: column.maxWidth,
-            }
-            return columnSizingOptions
-        }, {} as TableColumnSizingOptions)
-    }, [columns])
+  return useMemo<TableColumnSizingOptions>(() => {
+    return columns.reduce((columnSizingOptions, column) => {
+      columnSizingOptions[column.key] = {
+        minWidth: column.minWidth,
+        defaultWidth: column.minWidth,
+        idealWidth: column.maxWidth
+      }
+      return columnSizingOptions
+    }, {} as TableColumnSizingOptions)
+  }, [columns])
 }

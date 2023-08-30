@@ -1,6 +1,6 @@
 import { DateRangeType } from '@fluentui/react'
-import { Overview } from '../Views/Overview'
 import { ITimesheetState, TimesheetDateRange } from '../types'
+import { Overview } from '../Views/Overview'
 import { ITimesheetReducerParameters } from './types'
 
 /**

@@ -6,7 +6,11 @@ import {
   SearchCustomer,
   TabComponent
 } from 'components'
-import { ChecboxControlOptions, CheckboxControl, FormControl } from 'components/FormControl'
+import {
+  ChecboxControlOptions,
+  CheckboxControl,
+  FormControl
+} from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import packageFile from 'package'

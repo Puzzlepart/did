@@ -19,8 +19,7 @@ export const ReportLinks: FC = () => {
   const context = useContext(ReportsContext)
   return (
     <div className={styles.root}>
-      <UserMessage text={t('reports.availableReportLinks')}
-      />
+      <UserMessage text={t('reports.availableReportLinks')} />
       {context.state.queryPreset.reportLinks.map((link, index) => (
         <ReportLinkTooltip key={index} link={link}>
           <ActionButton

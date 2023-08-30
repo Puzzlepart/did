@@ -34,6 +34,7 @@ export const Users: TabComponent = () => {
             items={context.state.activeUsers}
             columns={columns('active')}
             commandBar={commandBar}
+            usePreview
           />
         </PivotItem>
         <PivotItem
@@ -44,6 +45,7 @@ export const Users: TabComponent = () => {
             enableShimmer={context.state.loading}
             items={context.state.disabledUsers}
             columns={columns('disabled')}
+            usePreview
           />
         </PivotItem>
       </TabContainer>

@@ -1,12 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  merge,
-  Sticky,
-  StickyPositionType
-} from '@fluentui/react'
+import { merge, Sticky, StickyPositionType } from '@fluentui/react'
 import React, { FC, useRef } from 'react'
 import { useListContext } from '../context'
-import { Toolbar } from '../Toolbar'
+import { ListToolbar } from '../ListToolbar'
 import { IListHeaderProps } from './types'
 
 export const ListHeader: FC<IListHeaderProps> = ({
@@ -36,7 +32,7 @@ export const ListHeader: FC<IListHeaderProps> = ({
       stickyPosition={StickyPositionType.Header}
       isScrollSynced={true}
     >
-      <Toolbar root={root} />
+      <ListToolbar root={root} />
       {defaultRender(mergedHeaderProps)}
     </Sticky>
   )

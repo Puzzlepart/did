@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
-import styles from './Autocomplete.module.scss'
 import { INIT, RESET } from './actions'
+import styles from './Autocomplete.module.scss'
 import { useAutocompleteReducer } from './reducer'
 import { IAutocompleteProps } from './types'
 import { useAutocompleteEvents } from './useAutocompleteEvents'

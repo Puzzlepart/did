@@ -1,4 +1,11 @@
-import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, Title3 } from '@fluentui/react-components'
+import {
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuPopover,
+  MenuTrigger,
+  Title3
+} from '@fluentui/react-components'
 import { Alert } from '@fluentui/react-components/unstable'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { ReusableComponent } from 'components/types'
@@ -7,8 +14,8 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import _ from 'underscore'
-import styles from './UserMessage.module.scss'
 import { IUserMessageProps } from './types'
+import styles from './UserMessage.module.scss'
 import { useUserMessage } from './useUserMessage'
 
 /**
@@ -19,28 +26,24 @@ import { useUserMessage } from './useUserMessage'
  */
 export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
   const { className, container } = useUserMessage(props)
-  
+
   return (
     <div {...container}>
       <ConditionalWrapper
         condition={!_.isEmpty(props.actions)}
         wrapper={(children: any) => (
           <Menu openOnHover={props.openActionsOnHover}>
-            <MenuTrigger disableButtonEnhancement>
-              {children}
-            </MenuTrigger>
+            <MenuTrigger disableButtonEnhancement>{children}</MenuTrigger>
             <MenuPopover>
               <MenuList>
                 {props.actions.map((action, index) => (
-                  <MenuItem
-                    {...action}
-                    key={index}
-                  />
+                  <MenuItem {...action} key={index} />
                 ))}
               </MenuList>
             </MenuPopover>
           </Menu>
-        )}>
+        )}
+      >
         <Alert {...props} className={className}>
           <div style={props.innerStyle}>
             {props.headerText && (
@@ -66,4 +69,3 @@ UserMessage.defaultProps = {
 
 export * from './types'
 export * from './useMessage'
-

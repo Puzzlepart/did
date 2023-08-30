@@ -13,9 +13,18 @@ export type TextControlOptions = {
   replace?: [RegExp, string]
 }
 
-export interface ITextControlProps
-  extends FormInputControlBase<TextControlOptions>,
-  Omit<TextareaProps, 'name' | 'value' | 'onChange'> {
+export interface ITextFieldProps extends TextareaProps {
+  /**
+   * Label for the control
+   */
   label?: string
+
+  /**
+   * Description for the control
+   */
   description?: string
 }
+
+export interface ITextControlProps
+  extends FormInputControlBase<TextControlOptions>,
+    Omit<ITextFieldProps, 'name' | 'value' | 'onChange'> {}

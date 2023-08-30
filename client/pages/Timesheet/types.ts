@@ -69,7 +69,6 @@ export interface ITimesheetParameters {
   startDate: string
 }
 
+export * from './context'
 export * from './TimesheetDateRange'
 export * from './TimesheetPeriod'
-export * from './context'
-

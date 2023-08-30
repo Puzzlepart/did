@@ -65,4 +65,3 @@ FilterPanel.defaultProps = {
 export * from './FilterItem'
 export * from './Filters'
 export * from './types'
-

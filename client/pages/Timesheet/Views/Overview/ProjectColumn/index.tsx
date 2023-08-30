@@ -1,16 +1,19 @@
 import { Icon } from '@fluentui/react'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
-import { AddCircle24Regular, CalendarCancel24Regular } from '@fluentui/react-icons'
 import {
-  ProjectLink,
-  ProjectTooltip,
-  UserMessage,
-} from 'components'
+  AddCircle24Regular,
+  CalendarCancel24Regular
+} from '@fluentui/react-icons'
+import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
 import { TFunction } from 'i18next'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { CLEAR_MANUAL_MATCH, IGNORE_EVENT, TOGGLE_MANUAL_MATCH_PANEL } from '../../../reducer/actions'
+import {
+  CLEAR_MANUAL_MATCH,
+  IGNORE_EVENT,
+  TOGGLE_MANUAL_MATCH_PANEL
+} from '../../../reducer/actions'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { MatchEventPanel } from './MatchEventPanel'
 import styles from './ProjectColumn.module.scss'

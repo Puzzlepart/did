@@ -1,11 +1,11 @@
 import { IconPicker } from 'components'
 import { DropdownControl, FormControl } from 'components/FormControl'
+import {
+  ChecboxControlOptions,
+  CheckboxControl
+} from 'components/FormControl/CheckboxControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
-import {
-  CheckboxControl,
-  ChecboxControlOptions
-} from 'components/FormControl/CheckboxControl'
 import $date from 'DateUtils'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'

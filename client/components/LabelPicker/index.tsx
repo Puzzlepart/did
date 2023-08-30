@@ -1,4 +1,5 @@
 import { Icon } from '@fluentui/react'
+import { Label } from '@fluentui/react-components'
 import { EntityLabel } from 'components/EntityLabel'
 import { ReusableComponent } from 'components/types'
 import { UserMessage } from 'components/UserMessage'
@@ -7,7 +8,6 @@ import styles from './LabelPicker.module.scss'
 import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 import { useLabelPicker } from './useLabelPicker'
-import { Label } from '@fluentui/react-components'
 
 /**
  * @category Reusable Component

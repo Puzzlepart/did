@@ -6,19 +6,19 @@ import React, { FC } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { ActionBar } from './ActionBar'
 import { ErrorBar } from './ErrorBar'
-import { StatusBar } from './StatusBar'
-import { View, useViews } from './Views'
 import { useTimesheet } from './hooks'
 import { useHotkeys } from './hotkeys/useHotkeys'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
+import { StatusBar } from './StatusBar'
 import { TimesheetContext } from './types'
+import { useViews, View } from './Views'
 
 /**
  * @category Function Component
  */
 export const Timesheet: FC = () => {
   const { state, dispatch, context } = useTimesheet()
-  const {views, getViewById} = useViews()
+  const { views, getViewById } = useViews()
   const { hotkeysProps } = useHotkeys(context)
 
   return (
@@ -35,13 +35,8 @@ export const Timesheet: FC = () => {
             }}
           >
             {views.map(({ id, displayName }, index) => (
-              <Tab
-                key={index}
-                value={id}
-                content={displayName}
-              />
-            ))
-            }
+              <Tab key={index} value={id} content={displayName} />
+            ))}
           </TabList>
           <View component={state.selectedView} />
         </div>

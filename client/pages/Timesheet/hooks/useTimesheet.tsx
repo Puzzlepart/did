@@ -47,6 +47,6 @@ export function useTimesheet() {
     dispatch,
     context,
     onSubmitPeriod,
-    onUnsubmitPeriod,
+    onUnsubmitPeriod
   }
 }

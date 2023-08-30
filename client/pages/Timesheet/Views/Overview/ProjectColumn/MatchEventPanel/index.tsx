@@ -11,7 +11,7 @@ import { useMatchEventPanel } from './useMatchEventPanel'
 export const MatchEventPanel: FC = () => {
   const { t } = useTranslation()
   const { event, isOpen, onDismiss, onMatch } = useMatchEventPanel()
-  if(!isOpen) return null
+  if (!isOpen) return null
   return (
     <BasePanel
       isOpen={true}

@@ -17,10 +17,7 @@ export const Information: FC = () => {
     <div className={styles.root}>
       <SubText text={state.selected?.description} font='medium' />
       {state.selected?.inactive && (
-        <UserMessage
-          text={t('customers.inactiveText')}
-          intent='warning'
-        />
+        <UserMessage text={t('customers.inactiveText')} intent='warning' />
       )}
       <InformationProperty
         title={t('projects.tagLabel')}

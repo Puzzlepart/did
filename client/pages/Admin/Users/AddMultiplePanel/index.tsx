@@ -1,9 +1,5 @@
-import {
-  CheckboxVisibility,
-  PanelType,
-  PrimaryButton,
-  SelectionMode
-} from '@fluentui/react'
+import { CheckboxVisibility, PanelType, SelectionMode } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
 import { BasePanel, List } from 'components'
 import React, { FC, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -26,11 +22,13 @@ export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
       className={styles.root}
     >
       <div className={styles.container}>
-        <PrimaryButton
-          text={t('admin.users.bulkImportUsersLabel')}
+        <Button
+          appearance='primary'
           disabled={selectedUsers.length === 0}
           onClick={() => props.onAdd(selectedUsers)}
-        />
+        >
+          {t('admin.users.bulkImportUsersLabel')}
+        </Button>
         <List
           items={context.state.availableAdUsers}
           selectionProps={{

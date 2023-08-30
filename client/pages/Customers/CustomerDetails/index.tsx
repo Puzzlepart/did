@@ -20,7 +20,9 @@ export const CustomerDetails: FC = () => {
       <Information />
       <div>
         {error ? (
-          <UserMessage intent='error'>{t('common.genericErrorText')}</UserMessage>
+          <UserMessage intent='error'>
+            {t('common.genericErrorText')}
+          </UserMessage>
         ) : (
           <ProjectList
             items={projects}

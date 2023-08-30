@@ -5,10 +5,10 @@ import {
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
   IRenderFunction,
-  ISearchBoxProps,
   IShimmeredDetailsListProps,
   SelectionMode
 } from '@fluentui/react'
+import { SearchBoxProps } from '@fluentui/react-search-preview'
 import { BaseFilter, IFilter } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
 
@@ -108,7 +108,7 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Search box props
    */
-  searchBox?: ISearchBoxProps
+  searchBox?: SearchBoxProps
 
   /**
    * Selection

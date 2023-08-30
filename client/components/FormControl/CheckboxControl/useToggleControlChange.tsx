@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react'
-import { ICheckboxControlProps, ChecboxControlOptions } from './types'
+import { ChecboxControlOptions, ICheckboxControlProps } from './types'
 
 /**
  * Transform based on `ToggleControlOptions`

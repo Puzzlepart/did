@@ -1,12 +1,18 @@
-import { PrimaryButton, TextField, Toggle } from '@fluentui/react'
+import {
+  Button,
+  Checkbox,
+  FluentProvider,
+  webLightTheme
+} from '@fluentui/react-components'
 import { Autocomplete, BasePanel } from 'components'
+import { TextField } from 'components/FormControl'
 import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import { RolePicker } from './RolePicker'
-import styles from './UserFormModal.module.scss'
 import { IUserFormProps } from './types'
+import styles from './UserFormModal.module.scss'
 import { useUserForm } from './useUserForm'
 
 export const UserForm: FC<IUserFormProps> = (props) => {
@@ -20,6 +26,27 @@ export const UserForm: FC<IUserFormProps> = (props) => {
       {..._.omit(props, 'user')}
       className={styles.root}
       isLightDismiss={true}
+      onRenderFooterContent={() => {
+        return (
+          <FluentProvider theme={webLightTheme} className={styles.footer}>
+            <Button
+              appearance='primary'
+              style={{ flex: 1 }}
+              disabled={!isFormValid()}
+              onClick={onSave}
+            >
+              {t('common.save')}
+            </Button>
+            <Button
+              appearance='secondary'
+              style={{ marginLeft: 8 }}
+              onClick={props.onDismiss}
+            >
+              {t('common.cancelButtonLabel')}
+            </Button>
+          </FluentProvider>
+        )
+      }}
     >
       {!props.user && (
         <div className={styles.inputContainer}>
@@ -31,36 +58,34 @@ export const UserForm: FC<IUserFormProps> = (props) => {
               searchValue: u.displayName,
               data: u
             }))}
-            onSelected={(item) =>
+            onSelected={(item) => {
+              // eslint-disable-next-line no-console
+              console.log(item)
               setModel({
                 ...model,
                 ...item.data
               })
-            }
+            }}
             onClear={() => setModel({ ...model, id: '', displayName: '' })}
           />
         </div>
       )}
       <TextField
-        className={styles.inputContainer}
         {...inputProps({ key: 'surname', label: t('common.surnameLabel') })}
       />
       <TextField
-        className={styles.inputContainer}
         {...inputProps({
           key: 'givenName',
           label: t('common.givenNameLabel')
         })}
       />
       <TextField
-        className={styles.inputContainer}
         {...inputProps({
           key: 'displayName',
           label: t('common.displayNameLabel')
         })}
       />
       <TextField
-        className={styles.inputContainer}
         {...inputProps({
           key: 'jobTitle',
           label: t('common.jobTitleLabel')
@@ -72,19 +97,15 @@ export const UserForm: FC<IUserFormProps> = (props) => {
         model={model}
         onChanged={(role) => setModel({ ...model, role })}
       />
-      <Toggle
-        label={t('admin.userHiddenFromReportsLabel')}
-        defaultChecked={model.hiddenFromReports}
-        onChange={(_event, hiddenFromReports) =>
-          setModel({ ...model, hiddenFromReports })
-        }
-      />
-      <PrimaryButton
-        className={styles.saveBtn}
-        text={t('common.save')}
-        disabled={!isFormValid()}
-        onClick={onSave}
-      />
+      <div className={styles.inputContainer}>
+        <Checkbox
+          label={t('admin.userHiddenFromReportsLabel')}
+          defaultChecked={model.hiddenFromReports}
+          onChange={(_event, data) =>
+            setModel({ ...model, hiddenFromReports: data?.checked as boolean })
+          }
+        />
+      </div>
     </BasePanel>
   )
 }

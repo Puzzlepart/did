@@ -10,14 +10,10 @@ import React from 'react'
  *
  * @category Reusable Component
  */
-export const BasePanel: ReusableComponent<IPanelProps> = (
-    props
-) => {
-    return (
-        <Panel {...props}>
-            <FluentProvider theme={webLightTheme}>
-                {props.children}
-            </FluentProvider>
-        </Panel>
-    )
+export const BasePanel: ReusableComponent<IPanelProps> = (props) => {
+  return (
+    <Panel {...props}>
+      <FluentProvider theme={webLightTheme}>{props.children}</FluentProvider>
+    </Panel>
+  )
 }

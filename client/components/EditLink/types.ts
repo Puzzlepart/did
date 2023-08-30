@@ -1,5 +1,5 @@
 import { HTMLProps } from 'react'
 
-export interface IEditLinkProps extends HTMLProps<HTMLDivElement> {
+export interface IEditLinkProps extends HTMLProps<any> {
   iconName?: string
 }

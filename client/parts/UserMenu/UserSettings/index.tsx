@@ -1,9 +1,9 @@
 import { BasePanel } from 'components'
 import React from 'react'
 import { MenuItem } from '../MenuItem'
+import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
-import { UserSettingsContext } from './context'
 import { useUserSettings } from './useUserSettings'
 
 /**

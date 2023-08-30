@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
-import { ITextFieldProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
+import { ITextFieldProps } from 'components/FormControl'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
@@ -50,10 +50,12 @@ export function useUserForm(props: IUserFormProps) {
 
   const inputProps = ({ key, label }): ITextFieldProps => ({
     label,
+    description: _.contains(adSync?.properties, key)
+      ? t('admin.users.userFieldAdSync')
+      : null,
+    rows: 1,
     disabled: _.contains(adSync?.properties, key),
-    description:
-      _.contains(adSync?.properties, key) && t('admin.users.userFieldAdSync'),
-    value: model[key],
+    value: model[key] ?? '',
     onChange: (_event, value) => setModel({ ...model, [key]: value })
   })
 

@@ -1,11 +1,14 @@
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
-import { MANUAL_MATCH, TOGGLE_MANUAL_MATCH_PANEL } from 'pages/Timesheet/reducer/actions'
+import {
+  MANUAL_MATCH,
+  TOGGLE_MANUAL_MATCH_PANEL
+} from 'pages/Timesheet/reducer/actions'
 import { useContext } from 'react'
 import { Project } from 'types'
 
 /**
  * Hook that returns the necessary props and functions for the manual match panel.
- * 
+ *
  * @returns An object containing the following properties:
  * - isOpen: A boolean indicating whether the manual match panel is open.
  * - onDismiss: A callback function to dismiss the manual match panel.

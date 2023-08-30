@@ -1,7 +1,6 @@
 import { MenuItemProps } from '@fluentui/react-components'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
 
-
 /**
  * @category UserMessage
  */

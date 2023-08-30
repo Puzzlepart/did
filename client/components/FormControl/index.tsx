@@ -17,9 +17,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
         condition={!!props.panelProps}
         wrapper={(children) => (
           <Panel {...props.panelProps}>
-            <FluentProvider theme={webLightTheme}>
-              {children}
-            </FluentProvider>
+            <FluentProvider theme={webLightTheme}>{children}</FluentProvider>
           </Panel>
         )}
       >
@@ -44,4 +42,3 @@ export * from './DropdownControl'
 export * from './TextControl'
 export * from './types'
 export { useFormControls } from './useFormControls'
-

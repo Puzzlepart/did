@@ -1,8 +1,7 @@
-import { PersonaSize } from '@fluentui/react'
+import { Persona } from '@fluentui/react-components'
 import { IconText } from 'components'
 import { EditLink } from 'components/EditLink'
 import { IListColumn } from 'components/List/types'
-import { useUserListColumn } from 'components/UserColumn'
 import $date from 'DateUtils'
 import { usePermissions } from 'hooks/user/usePermissions'
 import React from 'react'
@@ -23,14 +22,29 @@ export function useColumns(
   context: IUsersContext
 ): (type: 'active' | 'disabled') => IListColumn[] {
   const { t } = useTranslation()
-  const userColumn = useUserListColumn(
-    { size: PersonaSize.size40 },
-    { maxWidth: 250 }
-  )
   const [, hasPermission] = usePermissions()
   return (type) => {
     return [
-      userColumn,
+      col(
+        'avatar',
+        '',
+        {
+          minWidth: 240,
+          maxWidth: 240
+        },
+        (user: User) => (
+          <Persona
+            name={user.displayName}
+            secondaryText={user.mail}
+            avatar={{
+              image: {
+                src: user.photo?.base64
+              }
+            }}
+            size='medium'
+          />
+        )
+      ),
       col('surname', t('common.surnameLabel'), {
         maxWidth: 100,
         data: { hidden: isMobile }
@@ -41,10 +55,6 @@ export function useColumns(
       }),
       col('jobTitle', t('common.jobTitleLabel'), {
         maxWidth: 140,
-        data: { hidden: isMobile }
-      }),
-      col('mail', t('common.mailLabel'), {
-        maxWidth: 180,
         data: { hidden: isMobile }
       }),
       type === 'active' &&

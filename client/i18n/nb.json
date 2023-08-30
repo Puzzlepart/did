@@ -459,7 +459,8 @@
     "vacationCalculationTypePlannedDescription": "Alt i kalenderen din er kategorisert med IAM VAC.",
     "vacationCalculationTypeConfirmedDescription": "Ferie bekreftet som en del av timelisten din.",
     "vacationSummaryTooltipConfirmed": "Ferieberegningen er for hele året, og er basert på {{usedHours}} timer ferie bekreftet som en del av timelisten din (hver feriedag er 8 timer).",
-    "updatedLabel": "Oppdatert"
+    "updatedLabel": "Oppdatert",
+    "cancelButtonLabel": "Avbryt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

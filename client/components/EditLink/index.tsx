@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon, Link } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
+import { PeopleEdit24Regular } from '@fluentui/react-icons'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './EditLink.module.scss'
@@ -15,12 +16,14 @@ export const EditLink: FC<IEditLinkProps> = (props) => {
   const { t } = useTranslation()
   return (
     <div {...props}>
-      <Link className={styles.root} onClick={props.onClick}>
-        {props.iconName && (
-          <Icon className={styles.icon} iconName={props.iconName} />
-        )}
+      <Button
+        className={styles.root}
+        onClick={props.onClick}
+        appearance='subtle'
+        icon={<PeopleEdit24Regular />}
+      >
         <span className={styles.text}>{t('common.editLabel')}</span>
-      </Link>
+      </Button>
     </div>
   )
 }
