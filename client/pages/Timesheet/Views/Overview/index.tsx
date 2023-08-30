@@ -1,5 +1,5 @@
 import { DateRangeType, Pivot, PivotItem } from '@fluentui/react'
-import { EventList, TabComponent } from 'components'
+import { EventList } from 'components'
 import packageFile from 'package'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD } from '../../reducer/actions'
+import { TimesheetViewComponent } from '../types'
 import styles from './Overview.module.scss'
 import { useAdditionalColumns } from './useAdditionalColumns'
 import { useListGroupProps } from './useListGroupProps'
@@ -14,7 +15,7 @@ import { useListGroupProps } from './useListGroupProps'
 /**
  * @category Timesheet
  */
-export const Overview: TabComponent = () => {
+export const Overview: TimesheetViewComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const additionalColumns = useAdditionalColumns()
@@ -81,3 +82,5 @@ export const Overview: TabComponent = () => {
     }
   }
 }
+
+Overview.id = 'overview'

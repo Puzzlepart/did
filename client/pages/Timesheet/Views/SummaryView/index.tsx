@@ -1,12 +1,13 @@
-import { List, TabComponent } from 'components'
+import { List } from 'components'
 import React from 'react'
+import { TimesheetViewComponent } from '../types'
 import styles from './SummaryView.module.scss'
 import { useSummaryView } from './useSummaryView'
 
 /**
  * @category Timesheet
  */
-export const SummaryView: TabComponent = () => {
+export const SummaryView: TimesheetViewComponent = () => {
   const props = useSummaryView()
   return (
     <div className={styles.root}>
@@ -14,3 +15,5 @@ export const SummaryView: TabComponent = () => {
     </div>
   )
 }
+
+SummaryView.id = 'summary'

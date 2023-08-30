@@ -4,6 +4,7 @@ import { createAction } from '@reduxjs/toolkit'
 import { EventObject, Project } from 'types'
 import { TimesheetDateRange } from '../TimesheetDateRange'
 import { TimesheetView } from '../types'
+import { TimesheetViewComponent } from '../Views/types'
 
 /**
  * Data updated action
@@ -64,7 +65,7 @@ export const NEXT_PERIOD = createAction('NEXT_PERIOD')
  *
  * @category Timesheet Actions
  */
-export const CHANGE_VIEW = createAction<{ view: TimesheetView }>('CHANGE_VIEW')
+export const CHANGE_VIEW = createAction<{ view: TimesheetViewComponent }>('CHANGE_VIEW')
 
 /**
  * Change date range type action

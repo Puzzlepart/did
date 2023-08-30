@@ -1,17 +1,9 @@
 import { DateRangeType } from '@fluentui/react'
 import { IProgressProps } from 'components/Progress/types'
+import { EventObject } from '../../../server/graphql'
 import { TimesheetDateRange } from './TimesheetDateRange'
 import { TimesheetPeriod } from './TimesheetPeriod'
-import { EventObject } from '../../../server/graphql'
-
-/**
- * @category Timesheet
- */
-export enum TimesheetView {
-  Overview = 'overview',
-  Summary = 'summary',
-  Allocation = 'allocation'
-}
+import { TimesheetViewComponent } from './Views/types'
 
 /**
  * @category Timesheet
@@ -28,9 +20,9 @@ export interface ITimesheetState {
   selectedPeriod?: TimesheetPeriod
 
   /**
-   * The currently seelcted view
+   * The currently selected view
    */
-  selectedView: TimesheetView
+  selectedView: TimesheetViewComponent
 
   /**
    * The current date range
@@ -77,6 +69,7 @@ export interface ITimesheetParameters {
   startDate: string
 }
 
-export * from './context'
 export * from './TimesheetDateRange'
 export * from './TimesheetPeriod'
+export * from './context'
+
