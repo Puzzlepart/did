@@ -28,12 +28,16 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
         <div hidden={!_.isEmpty(notifications)}>
           <UserMessage
             text={t('notifications.emptyText', { dismissedCount })}
-            actions={dismissedCount > 0 ? [
-              {
-                content: t('notifications.clearDismissedText'),
-                onClick: clearDismissed
-              }
-            ] : []}
+            actions={
+              dismissedCount > 0
+                ? [
+                    {
+                      content: t('notifications.clearDismissedText'),
+                      onClick: clearDismissed
+                    }
+                  ]
+                : []
+            }
           />
         </div>
         <div>
@@ -46,6 +50,5 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
   )
 }
 
-export * from './UserNotification'
 export * from './types'
-
+export * from './UserNotification'

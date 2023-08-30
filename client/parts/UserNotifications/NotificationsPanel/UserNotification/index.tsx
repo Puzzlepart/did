@@ -4,13 +4,13 @@ import React, { FC, useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { UserNotificationsContext } from '../../context'
-import styles from './UserNotificationMessage.module.scss'
 import { IUserNotificationProps } from './types'
+import styles from './UserNotificationMessage.module.scss'
 
 /**
  * @category Function Component
  */
-export const UserNotification: FC<IUserNotificationProps> = ({model}) => {
+export const UserNotification: FC<IUserNotificationProps> = ({ model }) => {
   const { t } = useTranslation()
   const { dismissNotification } = useContext(UserNotificationsContext)
   return (
