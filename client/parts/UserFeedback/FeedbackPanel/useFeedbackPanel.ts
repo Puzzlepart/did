@@ -5,6 +5,13 @@ import { useEffect } from 'react'
 import { useFeedbackModel } from './useFeedbackModel'
 import { useSubmitFeedback } from './useSubmitFeedback'
 
+/**
+ * Hook that returns the necessary props for the FeedbackPanel component.
+ * 
+ * @param props - The props passed to the FeedbackPanel component.
+ * 
+ * @returns An object containing the necessary props for the FeedbackPanel component.
+ */
 export function useFeedbackPanel(props: IPanelProps) {
   const { model, typeOptions, moodOptions } = useFeedbackModel()
   const register = useFormControls(model)
