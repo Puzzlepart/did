@@ -2,15 +2,12 @@ import { DateRangeType, Pivot, PivotItem } from '@fluentui/react'
 import { EventList } from 'components'
 import packageFile from 'package'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD } from '../../reducer/actions'
 import { TimesheetViewComponent } from '../types'
-import styles from './Overview.module.scss'
-import { useAdditionalColumns } from './useAdditionalColumns'
-import { useListGroupProps } from './useListGroupProps'
+import { useOverview } from './useOverview'
 
 /**
  * @category Timesheet
@@ -18,15 +15,13 @@ import { useListGroupProps } from './useListGroupProps'
 export const Overview: TimesheetViewComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const additionalColumns = useAdditionalColumns()
-  const listGroupProps = useListGroupProps()
-  const className = [styles.root]
-  if (isMobile) className.push(styles.mobile)
+  const { additionalColumns, listGroupProps, className } = useOverview()
   switch (state.dateRangeType) {
     case DateRangeType.Week: {
       return (
-        <div className={className.join(' ')}>
+        <div className={className}>
           <EventList
+            disablePreview
             hidden={!!state.error}
             enableShimmer={!!state.loading}
             items={state.selectedPeriod?.getEvents()}
@@ -40,7 +35,7 @@ export const Overview: TimesheetViewComponent = () => {
     case DateRangeType.Month: {
       if (state.loading && _.isEmpty(state.periods)) {
         return (
-          <div className={className.join(' ')}>
+          <div className={className}>
             <EventList
               disablePreview
               enableShimmer={true}
@@ -52,7 +47,7 @@ export const Overview: TimesheetViewComponent = () => {
         )
       }
       return (
-        <div className={className.join(' ')}>
+        <div className={className}>
           <Pivot
             selectedKey={state.selectedPeriod?.id}
             onLinkClick={(item) => {

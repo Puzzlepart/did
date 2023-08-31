@@ -1,4 +1,5 @@
-import { IColumn, Link } from '@fluentui/react'
+import { IColumn } from '@fluentui/react'
+import { Link } from '@fluentui/react-components'
 import { EntityLabel } from 'components/EntityLabel'
 import $date from 'DateUtils'
 import get from 'get-value'

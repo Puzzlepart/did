@@ -1,7 +1,12 @@
-import { IIconProps } from '@fluentui/react'
+import {
+  ArrowSortUpFilled,
+  ArrowSortUpRegular,
+  bundleIcon
+} from '@fluentui/react-icons'
 import { EventObject, TimeEntry } from 'types'
 
 export interface IModifiedDurationProps {
   event: TimeEntry | EventObject
-  iconProps?: IIconProps
 }
+
+export const Icon = bundleIcon(ArrowSortUpFilled, ArrowSortUpRegular)
