@@ -11,19 +11,17 @@ import { useFilterItem } from './useFilterItem'
  */
 export const FilterItem: FC<IFilterItemProps> = (props) => {
   const { t } = useTranslation()
-  const {
-    onSearch,
-    items,
-    showCount,
-    setShowCount,
-    selectedKeys
-  } = useFilterItem(props)
+  const { onSearch, items, showCount, setShowCount, selectedKeys } =
+    useFilterItem(props)
   return (
     <div className={styles.root}>
       <div className={styles.header} hidden={props.hideHeader}>
         <span>{props.filter.name}</span>
       </div>
-      <div className={styles.searchBox} hidden={props.filter.items.length < props.shortListCount}>
+      <div
+        className={styles.searchBox}
+        hidden={props.filter.items.length < props.shortListCount}
+      >
         <SearchBox
           placeholder={t('common.searchPlaceholder')}
           onChange={(_event, { value }) => onSearch(value)}

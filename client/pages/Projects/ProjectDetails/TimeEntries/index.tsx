@@ -34,13 +34,7 @@ export const TimeEntries: FC = () => {
           {_.isEmpty(timeEntries) && !loading && (
             <UserMessage text={t('projects.noTimeEntriesText')} />
           )}
-          {loading && (
-            <Progress
-              label={t('projects.timeEntriesLoadingLabel')}
-              description={t('projects.timeEntriesLoadingDescription')}
-              iconProps={{ iconName: 'TimelineMatrixView' }}
-            />
-          )}
+          {loading && <Progress text={t('projects.timeEntriesLoadingLabel')} />}
           <EventList
             items={timeEntries}
             enableShimmer={loading}

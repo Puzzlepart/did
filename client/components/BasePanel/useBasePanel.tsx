@@ -19,7 +19,9 @@ export function useBasePanel(props: IBasePanelProps) {
 
   if (!_.isEmpty(props.footerActions)) {
     isFooterAtBottom = true
-    onRenderFooterContent = () => <Footer actions={props.footerActions} />
+    onRenderFooterContent = () => (
+      <Footer actions={props.footerActions} onDismiss={props.onDismiss} />
+    )
   }
   if (!_.isEmpty(props.headerActions)) {
     onRenderHeaderContent = () => <Header actions={props.headerActions} />
@@ -31,7 +33,7 @@ export function useBasePanel(props: IBasePanelProps) {
     isFooterAtBottom,
     styles: {
       scrollableContent: {
-        overflow: 'visible'
+        overflow: props.scroll ? 'auto' : 'visible'
       }
     }
   } as IPanelProps

@@ -25,9 +25,8 @@ export const ReportsList: TabComponent = () => {
     <div>
       {context.state.loading && (
         <Progress
-          label={t('reports.generatingReportLabel')}
-          description={t('reports.generatingReportDescription')}
-          iconProps={{ iconName: 'OEM' }}
+          text={t('reports.generatingReportProgressText')}
+          padding='10px 0 20px 18px'
         />
       )}
       {_.isEmpty(context.state.data.timeEntries) &&

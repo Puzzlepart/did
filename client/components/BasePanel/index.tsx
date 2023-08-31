@@ -27,5 +27,6 @@ export const BasePanel: ReusableComponent<IBasePanelProps> = (props) => {
 BasePanel.defaultProps = {
   headerActions: [],
   footerActions: [],
-  isLightDismiss: true
+  isLightDismiss: true,
+  scroll: false
 }

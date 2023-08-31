@@ -7,7 +7,7 @@ import {
   DataGridRow,
   Label
 } from '@fluentui/react-components'
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import { ListToolbar } from '../ListToolbar'
 import { IListProps } from '../types'
 import styles from './PreviewList.module.scss'
@@ -19,7 +19,7 @@ import { usePreviewList } from './usePreviewList'
  */
 export const PreviewList: FC<IListProps<any>> = (props) => {
   const { dataGridProps } = usePreviewList(props)
-  const root = React.useRef(null)
+  const root = useRef(null)
   return (
     <div ref={root} className={styles.root}>
       <ListToolbar root={root} />

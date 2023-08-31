@@ -246,7 +246,7 @@
     "addPermissions": "Angi tilganger "
   },
   "reports": {
-    "generatingReportLabel": "Genererer rapport",
+    "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
     "generatingReportDescription": "For å gi deg dei ferskaste resultata, genererer vi rapporten frå nyast mulege data ...",
     "noEntriesText": "Det er ingen tidsoppføringar for dette tidspunktet.",
     "selectReportText": "Vel ein rapport nedanfor. Ver merksam på at enkelte rapportar kan ta fleire minutt å laste. For nokre rapportar kan det kan vere ein førehandsgenerert versjon tilgjengeleg med formatering og layout.",

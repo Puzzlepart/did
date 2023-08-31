@@ -1,5 +1,5 @@
-import { IPanelProps } from '@fluentui/react'
 import { ButtonProps } from '@fluentui/react-components'
+import { IBasePanelProps } from 'components/BasePanel/types'
 import { IToastProps } from 'components/Toast'
 import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
@@ -44,7 +44,7 @@ export interface ISubmitProps
   toast?: IToastProps
 }
 
-export interface IFormControlPanelProps extends IPanelProps {
+export interface IFormControlPanelProps extends IBasePanelProps {
   onSave?: () => void
 }
 

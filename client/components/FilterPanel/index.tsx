@@ -18,7 +18,8 @@ import { useFilterPanel } from './useFilterPanel'
  */
 export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   const { t } = useTranslation()
-  const { filtersToRender, onFilterUpdated, headerText, onClearFilters } = useFilterPanel(props)
+  const { filtersToRender, onFilterUpdated, headerText, onClearFilters } =
+    useFilterPanel(props)
 
   return (
     <BasePanel

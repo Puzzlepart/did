@@ -24,7 +24,7 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         headerText: props.edit
           ? t('admin.reportLinks.editReportLinkText')
           : t('admin.reportLinks.addNewReportText'),
-        isLightDismiss: true
+        scroll: true
       }}
     >
       <TextControl

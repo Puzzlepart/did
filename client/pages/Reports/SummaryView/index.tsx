@@ -19,11 +19,7 @@ export const SummaryView: TabComponent = () => {
     <div className={styles.root}>
       <div className={styles.container}>
         {context.state.loading && (
-          <Progress
-            label={t('reports.generatingReportLabel')}
-            description={t('reports.generatingReportDescription')}
-            iconProps={{ iconName: 'OEM' }}
-          />
+          <Progress text={t('reports.generatingReportProgressText')} />
         )}
         <List
           disablePreview

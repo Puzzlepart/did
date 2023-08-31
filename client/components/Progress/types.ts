@@ -1,5 +1,6 @@
-import { IIconProps, IProgressIndicatorProps } from '@fluentui/react'
+import { ProgressBarProps } from '@fluentui/react-components'
 
-export interface IProgressProps extends IProgressIndicatorProps {
-  iconProps?: IIconProps
+export interface IProgressProps extends ProgressBarProps {
+  text: string
+  padding?: string | number
 }

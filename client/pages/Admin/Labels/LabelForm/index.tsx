@@ -21,8 +21,7 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
         ..._.omit(props, 'onSave'),
         headerText: props.edit
           ? t('admin.labels.editText')
-          : t('admin.labels.addNewText'),
-        isLightDismiss: true
+          : t('admin.labels.addNewText')
       }}
     >
       <TextControl

@@ -1,5 +1,10 @@
 import { Icon } from '@fluentui/react'
 import { Link } from '@fluentui/react-components'
+import {
+  bundleIcon,
+  CheckmarkFilled,
+  CheckmarkRegular
+} from '@fluentui/react-icons'
 import { DeleteLink, EditLink } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -7,33 +12,30 @@ import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 
+const CheckmarkIcon = bundleIcon(CheckmarkFilled, CheckmarkRegular)
+
 type UseColumns = {
   onEdit: (reportLink: ReportLink) => void
   onDelete: (reportLink: ReportLink) => void
 }
 
-/**
- * Columns hook for report link list.
- */
 export function useColumns({ onEdit, onDelete }: UseColumns) {
   const { t } = useTranslation()
   return [
     col(
       'published',
       t('admin.reportLinks.publishedLabel'),
+
       {
         minWidth: 75,
         maxWidth: 75
       },
-      (reportLink: ReportLink) => (
-        <div style={{ textAlign: 'center' }}>
-          {reportLink.published ? (
-            <Icon iconName='CheckMark' style={{ color: 'green' }} />
-          ) : (
-            <Icon iconName='Cancel' style={{ color: 'red' }} />
-          )}
-        </div>
-      )
+      (reportLink: ReportLink) =>
+        reportLink.published ? (
+          <div style={{ textAlign: 'center' }}>
+            <CheckmarkIcon style={{ color: '#107c10' }} />
+          </div>
+        ) : null
     ),
     col(
       'promoted',
@@ -42,15 +44,12 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
         minWidth: 75,
         maxWidth: 75
       },
-      (reportLink: ReportLink) => (
-        <div style={{ textAlign: 'center' }}>
-          {reportLink.promoted ? (
-            <Icon iconName='CheckMark' style={{ color: 'green' }} />
-          ) : (
-            <Icon iconName='Cancel' style={{ color: 'red' }} />
-          )}
-        </div>
-      )
+      (reportLink: ReportLink) =>
+        reportLink.promoted ? (
+          <div style={{ textAlign: 'center' }}>
+            <CheckmarkIcon style={{ color: '#107c10' }} />
+          </div>
+        ) : null
     ),
     col(
       'name',
