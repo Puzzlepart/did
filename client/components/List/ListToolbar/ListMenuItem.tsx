@@ -193,6 +193,13 @@ export class ListMenuItem {
     return this
   }
 
+  /**
+   * Sets a custom render function for the command bar item associated with this list menu item.
+   * 
+   * @param onRender - The custom render function for the command bar item.
+   * 
+   * @returns The updated ListMenuItem instance.
+   */
   public setCustomRender(onRender: ICommandBarItemProps['onRender']) {
     this.onRender = onRender
     return this
@@ -200,6 +207,8 @@ export class ListMenuItem {
 
   /**
    * Creates an icon component based on the provided list menu item.
+   * Supports both `FluentIcon` from `@fluentui/react-icons` and
+   * `Icon` from `@fluentui/react`.
    *
    * @param item - The list menu item to create the icon for.
    *

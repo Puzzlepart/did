@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ICommandBarProps } from '@fluentui/react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import _ from 'underscore'
 import { useListContext } from '../context'
 import { ListMenuItem } from './ListMenuItem'
@@ -29,7 +30,7 @@ export function useListToolbar(root: React.MutableRefObject<any>) {
     (col) => col?.data?.isFilterable
   )
 
-  const commandBarProps: ICommandBarProps = {
+  const commandBarProps = useMemo<ICommandBarProps>(() => ({
     ...context.props.commandBar,
     items: [searchBoxItem, ...context.props.commandBar?.items].filter(Boolean),
     farItems: [
@@ -38,21 +39,21 @@ export function useListToolbar(root: React.MutableRefObject<any>) {
       hasFilterableColumns && filterCommands.clear.commandBarItem,
       context.props.exportFileName && excelExportCommandBarItem
     ].filter(Boolean)
-  }
+  }), [context.props.commandBar, hasFilterableColumns])
 
-  const menuItems = _.isEmpty(context.props.menuItems)
+  const menuItems = useMemo(() => _.isEmpty(context.props.menuItems)
     ? ListMenuItem.convert([
-        ...commandBarProps.items,
-        ...commandBarProps.farItems
-      ])
+      ...commandBarProps.items,
+      ...commandBarProps.farItems
+    ])
     : [
-        searchBoxMenuItem,
-        ...context.props.menuItems,
-        filterCommands.toggle.menuItem,
-        filterCommands.clear.menuItem,
-        excelExportMenuItem
-      ].filter(Boolean)
-
+      searchBoxMenuItem,
+      ...context.props.menuItems,
+      filterCommands.toggle.menuItem,
+      filterCommands.clear.menuItem,
+      excelExportMenuItem
+    ].filter(Boolean)
+    , [])
   return {
     commandBarProps,
     menuItems
