@@ -11,9 +11,9 @@ import { ITextControlProps, TextControlOptions } from './types'
  *
  * @returns transformed value
  */
-function transformValue(value: string, options: TextControlOptions) {
+function transformValue(value: string, options: TextControlOptions = {}) {
   let _value = value
-  switch (options?.casing) {
+  switch (options.casing) {
     case 'upper': {
       _value = _value.toUpperCase()
       break

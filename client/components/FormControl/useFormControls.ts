@@ -23,6 +23,16 @@ function registerControl<O = any>(
   }
 }
 
+/**
+ * A callback function that registers a form input control with the given name and options.
+ * 
+ * @template O The type of options for the form input control.
+ * 
+ * @param name The name of the form input control.
+ * @param options The options for the form input control.
+ * 
+ * @returns A `FormInputControlBase` instance with the given options.
+ */
 export type RegisterControlCallback = <O>(
   name: string,
   options?: O

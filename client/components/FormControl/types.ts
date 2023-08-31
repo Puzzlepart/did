@@ -6,14 +6,9 @@ import { HTMLAttributes } from 'react'
 
 export type UseFormOptions = {
   /**
-   * Validator
+   * Validator function to use when submitting.
    */
   validator: (model: Record<string, any>) => boolean
-
-  /**
-   * Intial model
-   */
-  intitialModel?: any
 
   /**
    * The mutation to use when submitting
@@ -50,6 +45,12 @@ export interface IFormControlPanelProps extends IBasePanelProps {
 
 export interface IFormControlBaseProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
+
+  /**
+   * Specify the model used for the form control.
+   */
+  model?: ReturnType<typeof useMap>
+  
   /**
    * Submit  props
    */

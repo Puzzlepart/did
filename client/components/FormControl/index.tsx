@@ -4,13 +4,14 @@ import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './FormControl.module.scss'
+import { FormControlContext } from './context'
 import { IFormControlProps } from './types'
 
 /**
  * @category Reusable Component
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
-  <>
+  <FormControlContext.Provider value={{ model: props.model }}>
     <ConditionalWrapper
       condition={!!props.panelProps}
       wrapper={(children) => (
@@ -31,7 +32,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
       <div className={styles.root}>{props.children}</div>
     </ConditionalWrapper>
     <Toast {...props.submitProps?.toast} />
-  </>
+  </FormControlContext.Provider>
 )
 
 FormControl.defaultProps = {
@@ -44,4 +45,6 @@ export * from './CheckboxControl'
 export * from './DropdownControl'
 export * from './TextControl'
 export * from './types'
-export { useFormControls } from './useFormControls'
+export * from './context'
+export * from './useFormControls'
+

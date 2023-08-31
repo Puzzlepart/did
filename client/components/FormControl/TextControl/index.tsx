@@ -1,4 +1,4 @@
-import { Label, Textarea } from '@fluentui/react-components'
+import { Input, Label, Textarea } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -7,8 +7,9 @@ import { ITextControlProps, ITextFieldProps } from './types'
 import { useTextControlChange } from './useTextControlChange'
 
 /**
- * A reusable component for an `<Textarea />` from `@fluentui/react-components`
- * with a label and description with support for markdown.
+ * A reusable component that renders a text input field. If the specified
+ * `rows` is greater than 1, a `Textarea` will be rendered, otherwise, an
+ * `Input` will be rendered.
  *
  * @returns A React component that renders an uncontrolled text input field.
  */
@@ -18,12 +19,23 @@ export const TextField: ReusableComponent<ITextFieldProps> = (props) => {
       <div>
         <Label weight='semibold'>{props.label}</Label>
       </div>
-      <Textarea {...props} className={styles.field} />
+      {props.rows > 1 ? (
+        <Textarea {...props} className={styles.field} />
+      ) : (
+        <Input
+          value={props.value}
+          onChange={props.onChange}
+          className={styles.field} />
+      )}
       <div className={styles.description}>
         <ReactMarkdown>{props.description}</ReactMarkdown>
       </div>
     </div>
   )
+}
+
+TextField.defaultProps = {
+  rows: 1
 }
 
 /**
