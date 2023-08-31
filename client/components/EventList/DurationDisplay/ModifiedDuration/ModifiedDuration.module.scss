@@ -10,20 +10,27 @@
 }
 
 .content {
-  padding: 20px;
+  padding: 12px;
+  box-sizing: border-box;
+
   .header {
-    padding: 10px 20px 10px 0;
-    font-size: 18px;
-  }
-  .body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 0 10px 0;
 
     .icon {
-      padding: 0 14px 0 0;
-      font-size: 22px;
+      padding: 0 6px 0 0;
+      font-size: 28px;
     }
+
+    .title {
+      font-size: 18px;
+      line-height: 1.2em;
+    }
+  }
+  .body {
+    display: inherit;
   }
 }
 

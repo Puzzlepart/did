@@ -1,3 +1,4 @@
+import type { TooltipProps } from '@fluentui/react-components'
 import {
   ArrowSortUpFilled,
   ArrowSortUpRegular,
@@ -5,7 +6,7 @@ import {
 } from '@fluentui/react-icons'
 import { EventObject, TimeEntry } from 'types'
 
-export interface IModifiedDurationProps {
+export interface IModifiedDurationProps extends Partial<TooltipProps> {
   event: TimeEntry | EventObject
 }
 

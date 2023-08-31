@@ -12,23 +12,23 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
   if (!isAdjusted) return <>{props.children}</>
   return (
     <Tooltip
-      withArrow={true}
-      relationship='description'
+      relationship={props.relationship}
+      withArrow={props.withArrow}
       content={
-        <div>
+        <div className={styles.content}>
           <div className={styles.header}>
-            {t('timesheet.eventDurationModifiedTitle')}
-          </div>
-          <div className={styles.content}>
             <div className={styles.icon}>
               <Icon />
             </div>
-            <div>
-              {t('timesheet.eventDurationModifiedMessage', {
-                modifiedDuration,
-                originalDuration
-              })}
+            <div className={styles.title}>
+              {t('timesheet.eventDurationModifiedTitle')}
             </div>
+          </div>
+          <div className={styles.body}>
+            {t('timesheet.eventDurationModifiedMessage', {
+              modifiedDuration,
+              originalDuration
+            })}
           </div>
         </div>
       }
@@ -39,4 +39,9 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
       </div>
     </Tooltip>
   )
+}
+
+ModifiedDuration.defaultProps = {
+  withArrow: true,
+  relationship: 'description'
 }
