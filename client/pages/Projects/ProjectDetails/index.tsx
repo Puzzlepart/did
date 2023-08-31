@@ -1,7 +1,7 @@
 import { Pivot, PivotItem } from '@fluentui/react'
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ProjectsContext } from '../context'
+import { useProjectsContext } from '../context'
 import { Header } from './Header'
 import { Information } from './Information'
 import styles from './ProjectDetails.module.scss'
@@ -12,7 +12,7 @@ import { TimeEntries } from './TimeEntries'
  */
 export const ProjectDetails: FC = () => {
   const { t } = useTranslation()
-  const { loading } = useContext(ProjectsContext)
+  const { loading } = useProjectsContext()
 
   return (
     <div className={styles.root}>

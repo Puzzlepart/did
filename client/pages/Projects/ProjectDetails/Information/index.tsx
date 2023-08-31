@@ -1,10 +1,10 @@
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
 import _ from 'underscore'
-import { ProjectsContext } from '../../context'
+import { useProjectsContext } from '../../context'
 import styles from './Information.module.scss'
 import { InformationProperty } from './InformationProperty'
 
@@ -13,7 +13,7 @@ import { InformationProperty } from './InformationProperty'
  */
 export const Information: FC = () => {
   const { t } = useTranslation()
-  const { state } = useContext(ProjectsContext)
+  const { state } = useProjectsContext()
 
   return (
     <div className={styles.root}>

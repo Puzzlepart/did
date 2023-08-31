@@ -1,7 +1,7 @@
 import { Breadcrumb, Shimmer } from '@fluentui/react'
 import { SubText } from 'components/SubText'
-import { ProjectsContext } from 'pages/Projects/context'
-import React, { FC, useContext } from 'react'
+import { useProjectsContext } from 'pages/Projects/context'
+import React, { FC } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Actions } from './Actions'
 import styles from './Header.module.scss'
@@ -11,7 +11,7 @@ import { useHeader } from './useHeader'
  * @category Projects
  */
 export const Header: FC = () => {
-  const { state, loading } = useContext(ProjectsContext)
+  const { state, loading } = useProjectsContext()
   const { breadcrumb } = useHeader()
   return (
     <Shimmer

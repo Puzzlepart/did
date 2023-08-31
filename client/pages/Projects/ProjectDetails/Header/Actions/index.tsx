@@ -2,10 +2,10 @@ import { useMutation } from '@apollo/client'
 import { ActionButton, DefaultButton } from '@fluentui/react'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
-import React, { FC, useContext, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { ProjectsContext } from '../../../context'
+import { useProjectsContext } from '../../../context'
 import { ProjectForm } from '../../../ProjectForm'
 import { SET_SELECTED_PROJECT } from '../../../reducer/actions'
 import styles from './Actions.module.scss'
@@ -16,7 +16,7 @@ import { IActionsProps } from './types'
  * @category Projects
  */
 export const Actions: FC<IActionsProps> = (props) => {
-  const { refetch, state, dispatch } = useContext(ProjectsContext)
+  const { refetch, state, dispatch } = useProjectsContext()
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
   const [showEditPanel, setShowEditPanel] = useState(false)

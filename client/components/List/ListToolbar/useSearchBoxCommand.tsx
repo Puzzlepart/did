@@ -4,11 +4,12 @@ import React, { MutableRefObject, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
+import { ListMenuItem } from './ListMenuItem'
 
 export function useSearchBoxCommand(root: MutableRefObject<any>) {
   const context = useListContext()
   const timeout = useRef(null)
-  const commandBarItem: ICommandBarItemProps = context.props.searchBox && {
+  const commandBarItem: ICommandBarItemProps = {
     key: 'SEARCH_BOX',
     onRender: () => (
       <SearchBox
@@ -30,5 +31,11 @@ export function useSearchBoxCommand(root: MutableRefObject<any>) {
       />
     )
   }
-  return { commandBarItem }
+  if (context.props.searchBox) {
+    return {
+      commandBarItem,
+      menuItem: new ListMenuItem().setCustomRender(commandBarItem.onRender)
+    }
+  }
+  return { commandBarItem: null, menuItem: null }
 }

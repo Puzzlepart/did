@@ -1,9 +1,8 @@
 import { useMutation } from '@apollo/client'
 import { ISubmitProps } from 'components/FormControl'
 import { useToast } from 'components/Toast'
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ProjectsContext } from '../context'
+import { useProjectsContext } from '../context'
 import $create_or_update_project from './create-or-update-project.gql'
 import { IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'
@@ -23,7 +22,7 @@ export function useProjectFormSubmit(
   options: ReturnType<typeof useProjectFormOptions>
 ): ISubmitProps {
   const { t } = useTranslation()
-  const { refetch } = useContext(ProjectsContext)
+  const { refetch } = useProjectsContext()
   const [toast, setToast] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_project)
 

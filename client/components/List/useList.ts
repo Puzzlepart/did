@@ -9,12 +9,11 @@ import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 
 /**
- * Component logic hook for `<List />
-`
+ * Hook that returns a list of items and selection state for a given set of props.
  *
- * @param props - Props
+ * @param props The props for the list.
  *
- * @category List
+ * @returns An object containing the list props and context.
  */
 export function useList(props: IListProps) {
   const [state, dispatch] = useListReducer({
@@ -42,7 +41,7 @@ export function useList(props: IListProps) {
     })
   }, [props.selectionProps])
 
-  const context: IListContext = { props, state, dispatch }
+  const context = { props, state, dispatch } as IListContext
 
   const [groups, items] = useListGroups(context)
 

@@ -1,41 +1,17 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-import { CommandBar, ICommandBarProps } from '@fluentui/react'
+import { CommandBar } from '@fluentui/react'
 import { Toolbar } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import _ from 'underscore'
 import { useListContext } from '../context'
-import { ListMenuItem } from './ListMenuItem'
 import { ListToolbarItem } from './ListToolbarItem'
-import { useExcelExportCommand } from './useExcelExportCommand'
-import { useFiltersCommand } from './useFiltersCommand'
-import { useSearchBoxCommand } from './useSearchBoxCommand'
+import { useListToolbar } from './useListToolbar'
 
 export const ListToolbar: FC<{ root: React.MutableRefObject<any> }> = ({
   root
 }) => {
   const context = useListContext()
-  const {
-    commandBarItem: excelExportCommandBarItem,
-    menuItem: excelExportMenuItem
-  } = useExcelExportCommand()
-  const { commandBarItem: searchBoxItem } = useSearchBoxCommand(root)
-  const filterCommands = useFiltersCommand()
-
-  const hasFilterableColumns = _.any(
-    context.props.columns,
-    (col) => col?.data?.isFilterable
-  )
-
-  const commandBarProps: ICommandBarProps = {
-    ...context.props.commandBar,
-    items: [searchBoxItem, ...context.props.commandBar?.items].filter(Boolean),
-    farItems: [
-      ...(context.props.commandBar?.farItems ?? []),
-      hasFilterableColumns && filterCommands.toggle.commandBarItem,
-      hasFilterableColumns && filterCommands.clear.commandBarItem,
-      context.props.exportFileName && excelExportCommandBarItem
-    ].filter(Boolean)
-  }
+  const { commandBarProps, menuItems } = useListToolbar(root)
 
   if (context.props.disablePreview) {
     return (
@@ -49,20 +25,9 @@ export const ListToolbar: FC<{ root: React.MutableRefObject<any> }> = ({
       />
     )
   }
-  const items = _.isEmpty(context.props.menuItems)
-    ? ListMenuItem.convert([
-        ...commandBarProps.items,
-        ...commandBarProps.farItems
-      ])
-    : [
-        ...context.props.menuItems,
-        filterCommands.toggle.menuItem,
-        filterCommands.clear.menuItem,
-        excelExportMenuItem
-      ]
   return (
     <Toolbar>
-      {items.map((item, index) => (
+      {menuItems.map((item, index) => (
         <ListToolbarItem key={index} item={item} />
       ))}
     </Toolbar>

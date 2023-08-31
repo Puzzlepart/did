@@ -1,11 +1,36 @@
-import { Checkbox } from '@fluentui/react'
 import { List, TabComponent } from 'components'
+import { ListMenuItem } from 'components/List/ListToolbar'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
-import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
+
+// TODO: Add TOGGLE_INACTIVE action to menuItems
+
+// commandBar={{
+//   items: [
+//     {
+//       key: 'TOGGLE_INACTIVE',
+//       onRender: () => (
+//         <div
+//           hidden={
+//             isMobile || !_.any(props.items, (index) => index.inactive)
+//           }
+//         >
+//           <Checkbox
+//             disabled={_.isEmpty(
+//               _.filter(props.items, (index) => index.inactive)
+//             )}
+//             styles={{ root: { margin: '6px 0 0 8px' } }}
+//             checked={showInactive}
+//             label={t('common.toggleInactiveText')}
+//             onChange={(_event, checked) => setShowInactive(checked)}
+//           />
+//         </div>
+//       )
+//     }
+//   ],
+//   farItems: []
+// }}
 
 /**
  * Project list component used by `<Projects />`. Renders
@@ -14,9 +39,7 @@ import { useProjectList } from './useProjectList'
  * @category Projects
  */
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
-  const { t } = useTranslation()
-  const { items, columns, showInactive, setShowInactive } =
-    useProjectList(props)
+  const { items, columns } = useProjectList(props)
   return (
     <>
       <List
@@ -25,31 +48,7 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
         columns={columns}
         groups={props.groups}
         selectionProps={props.selectionProps}
-        commandBar={{
-          items: [
-            {
-              key: 'TOGGLE_INACTIVE',
-              onRender: () => (
-                <div
-                  hidden={
-                    isMobile || !_.any(props.items, (index) => index.inactive)
-                  }
-                >
-                  <Checkbox
-                    disabled={_.isEmpty(
-                      _.filter(props.items, (index) => index.inactive)
-                    )}
-                    styles={{ root: { margin: '6px 0 0 8px' } }}
-                    checked={showInactive}
-                    label={t('common.toggleInactiveText')}
-                    onChange={(_event, checked) => setShowInactive(checked)}
-                  />
-                </div>
-              )
-            }
-          ],
-          farItems: []
-        }}
+        menuItems={[new ListMenuItem().setDisabled(true)]}
       />
       {props.children}
     </>

@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { useContext } from 'react'
 import { TimeEntry, User } from 'types'
 import _ from 'underscore'
-import { ProjectsContext } from '../../context'
+import { useProjectsContext } from '../../context'
 import timeentriesQuery from './timeentries.gql'
 
 /**
@@ -12,7 +11,7 @@ import timeentriesQuery from './timeentries.gql'
  * @category Projects
  */
 export function useTimeEntriesQuery() {
-  const { state } = useContext(ProjectsContext)
+  const { state } = useProjectsContext()
   const { loading, error, data } = useQuery<{
     users: User[]
     timeEntries: TimeEntry[]

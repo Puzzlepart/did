@@ -67,6 +67,8 @@ export class ListMenuItem {
    */
   items?: ListMenuItem[]
 
+  onRender?: ICommandBarItemProps['onRender']
+
   /**
    * Creates a new instance of ListMenuItem.
    *
@@ -191,18 +193,9 @@ export class ListMenuItem {
     return this
   }
 
-  public createProps(componentName: string, style: CSSProperties = {}) {
-    switch (componentName) {
-      case 'ToolbarButton': {
-        return {
-          text: this.text,
-          icon: ListMenuItem.createIcon(this),
-          style: { ...this.style, ...style },
-          onClick: this.onClick,
-          disabled: this.disabled
-        }
-      }
-    }
+  public setCustomRender(onRender: ICommandBarItemProps['onRender']) {
+    this.onRender = onRender
+    return this
   }
 
   /**

@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IBreadcrumbProps } from '@fluentui/react'
 import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer/actions'
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import { ProjectsContext } from '../../context'
+import { useProjectsContext } from '../../context'
 
 export function useHeader() {
   const { t } = useTranslation()
-  const { state, dispatch } = useContext(ProjectsContext)
+  const { state, dispatch } = useProjectsContext()
   const history = useHistory()
   const breadcrumb = useMemo<IBreadcrumbProps>(
     () => ({
