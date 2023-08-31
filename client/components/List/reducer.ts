@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createAction, createReducer, current } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import get from 'get-value'
@@ -98,9 +99,9 @@ export default (initialState: IListState) => {
         })
         .addCase(CLEAR_FILTERS, (state) => {
           state.items = state.origItems
+          state.filters = []
         })
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return useReducer(reducer, initialState)
 }

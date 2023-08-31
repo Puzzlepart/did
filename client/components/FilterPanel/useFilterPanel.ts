@@ -12,7 +12,7 @@ import { useFilterPanelFilters } from './useFilterPanelFilters'
  */
 export function useFilterPanel(props: IFilterPanelProps) {
   const { t } = useTranslation()
-  const { filters, setFilters } = useFilterPanelFilters(props)
+  const [filters, setFilters] = useFilterPanelFilters(props)
 
   /**
    * On filter updated
@@ -42,9 +42,25 @@ export function useFilterPanel(props: IFilterPanelProps) {
     ? t('common.filterByColumn', props.selectedFilter)
     : props.headerText
 
+  const filtersToRender = filters
+    .filter((filter) =>
+      props.selectedFilter ? props.selectedFilter?.key === filter.key : true
+    )
+    .filter((filter) => filter.items.length > 1)
+
+  let onClearFilters = null
+
+  if (props.onClearFilters) {
+    onClearFilters = () => {
+      setFilters((filters) => filters.map((f) => ({ ...f, selected: [] })))
+      props.onClearFilters()
+    }
+  }
+
   return {
-    filters,
+    filtersToRender,
     onFilterUpdated,
-    headerText
-  } as const
+    headerText,
+    onClearFilters
+  }
 }

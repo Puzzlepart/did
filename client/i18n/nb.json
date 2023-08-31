@@ -434,7 +434,7 @@
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
-    "clearFilters": "Fjern alle filtre",
+    "clearFilters": "Nullstill alle filtre",
     "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
     "vacationTotalDaysLabel": "Antal feriedager",

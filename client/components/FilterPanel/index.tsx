@@ -1,4 +1,3 @@
-import { ActionButton } from '@fluentui/react'
 import { BasePanel } from 'components/BasePanel'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
@@ -19,41 +18,36 @@ import { useFilterPanel } from './useFilterPanel'
  */
 export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   const { t } = useTranslation()
-  const { filters, onFilterUpdated, headerText } = useFilterPanel(props)
+  const { filtersToRender, onFilterUpdated, headerText, onClearFilters } = useFilterPanel(props)
 
   return (
     <BasePanel
-      isOpen={props.isOpen}
+      {...props}
       className={styles.root}
       headerText={headerText}
       headerClassName={styles.header}
-      isLightDismiss={true}
       onDismiss={props.onDismiss}
+      footerActions={[
+        {
+          text: t('common.clearFilters'),
+          onClick: onClearFilters,
+          disabled: !onClearFilters
+        }
+      ]}
     >
       {props.children}
       <div className={styles.actions} hidden={!!props.selectedFilter}>
         {props.actions}
-        <ActionButton
-          iconProps={{ iconName: 'ClearFilter' }}
-          text={t('common.clearFilters')}
-          onClick={props.onClearFilters}
-          disabled={!props.onClearFilters}
-        />
       </div>
-      {filters
-        .filter((filter) =>
-          props.selectedFilter ? props.selectedFilter?.key === filter.key : true
-        )
-        .filter((filter) => filter.items.length > 1)
-        .map<JSX.Element>((filter) => (
-          <FilterItem
-            key={filter.key}
-            filter={filter}
-            onFilterUpdated={onFilterUpdated}
-            shortListCount={props.shortListCount}
-            hideHeader={!!props.selectedFilter}
-          />
-        ))}
+      {filtersToRender.map((filter) => (
+        <FilterItem
+          key={filter.key}
+          filter={filter}
+          onFilterUpdated={onFilterUpdated}
+          shortListCount={props.shortListCount}
+          hideHeader={!!props.selectedFilter}
+        />
+      ))}
     </BasePanel>
   )
 }

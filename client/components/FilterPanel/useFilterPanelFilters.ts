@@ -19,5 +19,5 @@ export function useFilterPanelFilters(props: IFilterPanelProps) {
     () => setFilters(props.filters.map((f) => f.initialize(props.items))),
     [props.items, props.filters]
   )
-  return { filters, setFilters } as const
+  return [filters, setFilters] as const
 }
