@@ -20,7 +20,6 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
       <UserMessage
         {..._.omit(props, 'hidden')}
         className={styles.message}
-        containerStyle={{ maxWidth: 550, lineHeight: 20 }}
       />
     </div>
   )
@@ -28,3 +27,4 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
 
 export * from './types'
 export * from './useToast'
+
