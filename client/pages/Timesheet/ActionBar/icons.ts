@@ -6,10 +6,14 @@ import {
   bundleIcon,
   CalendarCancel24Filled,
   CalendarCancel24Regular,
+  CalendarMonth24Filled,
+  CalendarMonth24Regular,
   CalendarSync24Filled,
   CalendarSync24Regular,
   CalendarToday24Filled,
   CalendarToday24Regular,
+  CalendarWorkWeek24Filled,
+  CalendarWorkWeek24Regular,
   Timer24Filled,
   Timer24Regular
 } from '@fluentui/react-icons'
@@ -29,6 +33,11 @@ const CalendarCancel = bundleIcon(
   CalendarCancel24Regular
 )
 const CalendarSync = bundleIcon(CalendarSync24Filled, CalendarSync24Regular)
+const CalendarWorkWeek = bundleIcon(
+  CalendarWorkWeek24Filled,
+  CalendarWorkWeek24Regular
+)
+const CalendarMonth = bundleIcon(CalendarMonth24Filled, CalendarMonth24Regular)
 
 export {
   ArrowCircleLeft,
@@ -36,5 +45,7 @@ export {
   CalendarCancel,
   CalendarSync,
   CalendarToday,
-  Timer
+  Timer,
+  CalendarWorkWeek,
+  CalendarMonth
 }

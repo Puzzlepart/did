@@ -162,10 +162,10 @@ export function createTimesheetReducer(
         state.selectedView = payload.view
       })
       .addCase(CHANGE_DATE_RANGE_TYPE, (state, { payload }) => {
-        state.dateRangeType = payload.dateRangeType
+        state.dateRangeType = payload
         state.dateRange = new TimesheetDateRange(
           state.selectedPeriod.endDate,
-          payload.dateRangeType
+          payload
         )
         state.periods = []
       })

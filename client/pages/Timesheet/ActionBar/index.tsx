@@ -1,46 +1,29 @@
 /* eslint-disable unicorn/prefer-query-selector */
+import { DateRangeType } from '@fluentui/react'
 import { Toolbar, ToolbarButton } from '@fluentui/react-components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../context'
-import {
-  NEXT_PERIOD,
-  PREVIOUS_PERIOD,
-  SET_DATE_RANGE
-} from '../reducer/actions'
-import { TimesheetDateRange } from '../types'
+import { NEXT_PERIOD, PREVIOUS_PERIOD } from '../reducer/actions'
+import { ConfirmButtons } from './ConfirmButtons'
+import { DateRangeButton } from './DateRangeButton'
 import { DateRangePicker } from './DateRangePicker'
-import {
-  ArrowCircleLeft,
-  ArrowCircleRight,
-  CalendarCancel,
-  CalendarSync,
-  CalendarToday,
-  Timer
-} from './icons'
+import { ForecastButtons } from './ForecastButtons'
+import { ArrowCircleLeft, ArrowCircleRight } from './icons'
+import { NavigatePeriodsButtons } from './NavigatePeriodsButtons'
+import { TodayButton } from './TodayButton'
 
 /**
  * @category Timesheet
  */
 export const ActionBar = () => {
   const { t } = useTranslation()
-  const { state, dispatch, onSubmitPeriod, onUnsubmitPeriod } =
-    useTimesheetContext()
+  const { state, dispatch } = useTimesheetContext()
 
   return (
     <div>
       <Toolbar size='large'>
-        <ToolbarButton
-          icon={<CalendarToday />}
-          onClick={() => {
-            dispatch(
-              SET_DATE_RANGE(
-                new TimesheetDateRange(new Date(), state.dateRangeType)
-              )
-            )
-          }}
-          disabled={state.dateRange.isCurrent || !!state.loading}
-        />
+        <TodayButton />
         <ToolbarButton
           icon={<ArrowCircleLeft />}
           onClick={() => dispatch(PREVIOUS_PERIOD())}
@@ -52,34 +35,17 @@ export const ActionBar = () => {
           disabled={!!state.loading}
         />
         <DateRangePicker />
-        <ToolbarButton
-          icon={<Timer />}
-          onClick={() => onSubmitPeriod(true)}
-          disabled={!!state.loading}
-        >
-          {t('timesheet.forecastHoursText')}
-        </ToolbarButton>
-        <ToolbarButton
-          icon={<CalendarCancel />}
-          onClick={() => onUnsubmitPeriod(true)}
-          disabled={!!state.loading}
-        >
-          {t('timesheet.unforecastHoursText')}
-        </ToolbarButton>
-        <ToolbarButton
-          icon={<CalendarSync />}
-          onClick={() => onSubmitPeriod(false)}
-          disabled={!!state.loading}
-        >
-          {t('timesheet.confirmHoursText')}
-        </ToolbarButton>
-        <ToolbarButton
-          icon={<CalendarCancel />}
-          onClick={() => onUnsubmitPeriod(false)}
-          disabled={!!state.loading}
-        >
-          {t('timesheet.unconfirmHoursText')}
-        </ToolbarButton>
+        <DateRangeButton
+          dateRangeType={DateRangeType.Week}
+          text={t('timesheet.dateRangeWeek')}
+        />
+        <DateRangeButton
+          dateRangeType={DateRangeType.Month}
+          text={t('timesheet.dateRangeMonth')}
+        />
+        <NavigatePeriodsButtons />
+        <ForecastButtons />
+        <ConfirmButtons />
       </Toolbar>
     </div>
   )
