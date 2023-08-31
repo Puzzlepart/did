@@ -1,7 +1,7 @@
-import { ToolbarButton, ToolbarButtonProps } from '@fluentui/react-components'
+import { ToolbarButton } from '@fluentui/react-components'
 import React, { CSSProperties, FC } from 'react'
-import { ListMenuItem } from './ListMenuItem'
 import { createStyle } from './createStyle'
+import { ListMenuItem } from './ListMenuItem'
 
 /**
  * Renders a toolbar button based on the provided list menu item.
@@ -13,8 +13,8 @@ import { createStyle } from './createStyle'
  * @returns The rendered toolbar button component.
  */
 export const ListToolbarButton: FC<{
-  item: ListMenuItem,
-  buttonStyle?: CSSProperties,
+  item: ListMenuItem
+  buttonStyle?: CSSProperties
   labelStyle?: CSSProperties
 }> = (props) => {
   return (

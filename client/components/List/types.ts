@@ -11,6 +11,7 @@ import {
 import { SearchBoxProps } from '@fluentui/react-search-preview'
 import { BaseFilter, IFilter } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
+import { ListMenuItem } from './ListToolbar'
 
 /**
  * @category List
@@ -172,10 +173,15 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   filterValues?: Record<string, any>
 
   /**
-   * If `disablePreview` is set to `true`, `<ShimmeredDetailsList />` from `@fluentui/react` will 
+   * If `disablePreview` is set to `true`, `<ShimmeredDetailsList />` from `@fluentui/react` will
    * be used instead of `<DataGrid />` from `@fluentui/react-components`.
    */
   disablePreview?: boolean
+
+  /**
+   * Menu items to show in `<Toolbar />` if using the preview mode.
+   */
+  menuItems?: ListMenuItem[]
 }
 
 export type ColumnHeaderContextMenu = {

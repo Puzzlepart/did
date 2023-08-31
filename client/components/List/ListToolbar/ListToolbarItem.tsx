@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/prefer-ternary */
 import React, { FC } from 'react'
 import { ListMenuItem } from './ListMenuItem'
-import { ListToolbarMenu } from './ListToolbarMenu'
 import { ListToolbarButton } from './ListToolbarButton'
+import { ListToolbarMenu } from './ListToolbarMenu'
 
 /**
  * Renders a toolbar item.

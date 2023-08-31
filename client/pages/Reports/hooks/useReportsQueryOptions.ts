@@ -30,7 +30,8 @@ export type UseReportsQueryOptions = {
   dispatch: React.Dispatch<AnyAction>
 }
 
-export interface ReportsQueryButton extends Pick<ButtonProps, 'title' | 'onClick'> {
+export interface ReportsQueryButton
+  extends Pick<ButtonProps, 'title' | 'onClick'> {
   text: string
   iconProps?: IIconProps
 }
@@ -65,20 +66,26 @@ export function useReportsQueryButtons({
     }
   }
   return [
-    ...queries.map<ReportsQueryButton>(({ itemKey, headerText, itemIcon }) => ({
-      text: headerText,
-      iconProps: { iconName: itemIcon },
-      onClick: () => dispatch(CHANGE_QUERY({ itemKey })),
-      styles
-    } as ReportsQueryButton)),
-    ...promotedReportLinks.map<ReportsQueryButton>((link) => ({
-      text: link.name,
-      title: link.description,
-      iconProps: {
-        iconName: link.icon,
-        styles: { root: { color: link.iconColor } }
-      },
-      onClick: () => window.open(link.externalUrl, '_blank'),
-    } as ReportsQueryButton))
+    ...queries.map<ReportsQueryButton>(
+      ({ itemKey, headerText, itemIcon }) =>
+        ({
+          text: headerText,
+          iconProps: { iconName: itemIcon },
+          onClick: () => dispatch(CHANGE_QUERY({ itemKey })),
+          styles
+        } as ReportsQueryButton)
+    ),
+    ...promotedReportLinks.map<ReportsQueryButton>(
+      (link) =>
+        ({
+          text: link.name,
+          title: link.description,
+          iconProps: {
+            iconName: link.icon,
+            styles: { root: { color: link.iconColor } }
+          },
+          onClick: () => window.open(link.externalUrl, '_blank')
+        } as ReportsQueryButton)
+    )
   ]
 }

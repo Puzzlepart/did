@@ -1,8 +1,5 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-import {
-  CommandBar,
-  ICommandBarProps
-} from '@fluentui/react'
+import { CommandBar, ICommandBarProps } from '@fluentui/react'
 import { Toolbar } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import _ from 'underscore'
@@ -17,7 +14,10 @@ export const ListToolbar: FC<{ root: React.MutableRefObject<any> }> = ({
   root
 }) => {
   const context = useListContext()
-  const { commandBarItem: excelExportCommandBarItem, menuItem: excelExportMenuItem } = useExcelExportCommand()
+  const {
+    commandBarItem: excelExportCommandBarItem,
+    menuItem: excelExportMenuItem
+  } = useExcelExportCommand()
   const { commandBarItem: searchBoxItem } = useSearchBoxCommand(root)
   const filterCommands = useFiltersCommand()
 
@@ -50,16 +50,21 @@ export const ListToolbar: FC<{ root: React.MutableRefObject<any> }> = ({
     )
   }
   const items = _.isEmpty(context.props.menuItems)
-    ? ListMenuItem.convert([...commandBarProps.items, ...commandBarProps.farItems])
+    ? ListMenuItem.convert([
+        ...commandBarProps.items,
+        ...commandBarProps.farItems
+      ])
     : [
-      ...context.props.menuItems,
-      filterCommands.toggle.menuItem,
-      filterCommands.clear.menuItem,
-      excelExportMenuItem
-    ]
+        ...context.props.menuItems,
+        filterCommands.toggle.menuItem,
+        filterCommands.clear.menuItem,
+        excelExportMenuItem
+      ]
   return (
     <Toolbar>
-      {items.map((item, index) => <ListToolbarItem key={index} item={item} />)}
+      {items.map((item, index) => (
+        <ListToolbarItem key={index} item={item} />
+      ))}
     </Toolbar>
   )
 }

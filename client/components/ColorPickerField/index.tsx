@@ -1,5 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Label, Popover, PopoverSurface, PopoverTrigger } from '@fluentui/react-components'
+import {
+  Label,
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
@@ -16,13 +21,14 @@ import { useColorPickerField } from './useColorPickerField'
 export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
   props
 ) => {
-  const {ref, positioningRef} = useColorPickerField()
+  const { ref, positioningRef } = useColorPickerField()
   return (
     <div className={`${props.className} ${styles.root}`}>
       <Popover
         positioning={{ positioningRef }}
         trapFocus={true}
-        withArrow={true}>
+        withArrow={true}
+      >
         <PopoverTrigger disableButtonEnhancement>
           <div>
             <Label weight='semibold'>{props.label}</Label>

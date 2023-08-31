@@ -26,7 +26,8 @@ export function useSearchBoxCommand(root: MutableRefObject<any>) {
               context.props.searchBox.onChange(_event, data)
             context.dispatch(EXECUTE_SEARCH({ searchTerm: data?.value }))
           }, 250)
-        }} />
+        }}
+      />
     )
   }
   return { commandBarItem }

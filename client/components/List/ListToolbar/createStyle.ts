@@ -9,7 +9,10 @@ import { ListMenuItem } from './ListMenuItem'
  *
  * @returns A `CSSProperties` object.
  */
-export function createStyle(item: ListMenuItem, additionalStyle?: CSSProperties) {
+export function createStyle(
+  item: ListMenuItem,
+  additionalStyle?: CSSProperties
+) {
   const style: CSSProperties = {
     ...item.style,
     ...additionalStyle

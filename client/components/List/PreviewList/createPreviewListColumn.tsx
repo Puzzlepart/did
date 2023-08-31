@@ -1,4 +1,5 @@
 import { createTableColumn } from '@fluentui/react-components'
+import get from 'get-value'
 import { IListColumn } from '../types'
 
 /**
@@ -9,17 +10,15 @@ import { IListColumn } from '../types'
  * @returns The created table column.
  */
 export function createPreviewListColumn(column: IListColumn) {
-  return createTableColumn({
+  return createTableColumn<any>({
     columnId: column.fieldName,
     renderHeaderCell: () => column.name,
     renderCell: (item) => {
       if (column.onRender) {
         return column.onRender(item)
       }
-      return item[column.fieldName]
+      return get(item, column.fieldName)
     },
-    compare: (a, b) => {
-      return a[column.fieldName] > b[column.fieldName] ? 1 : -1
-    }
+    compare: (a, b) => (a[column.fieldName] > b[column.fieldName] ? 1 : -1)
   })
 }

@@ -2,16 +2,14 @@
 import { CheckboxVisibility } from '@fluentui/react'
 import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
-import $date from 'DateUtils'
 import React, { useContext } from 'react'
-import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
 import { SaveFilterForm } from '../SaveFilterForm'
 import { useColumns } from './useColumns'
-import { useCommands } from './useCommands'
+import { useMenuItems } from './useMenuItems'
 
 /**
  * Reports list
@@ -22,7 +20,7 @@ export const ReportsList: TabComponent = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const columns = useColumns()
-  const commandBar = useCommands()
+  const menuItems = useMenuItems()
   return (
     <div>
       {context.state.loading && (
@@ -41,21 +39,8 @@ export const ReportsList: TabComponent = () => {
           enableShimmer={context.state.loading}
           checkboxVisibility={CheckboxVisibility.always}
           items={context.state.data.timeEntries}
-          height={isBrowser && window.innerHeight - 200}
-          listGroupProps={{
-            ...context.state.groupBy,
-            totalFunc: (items) => {
-              const hrs = items.reduce(
-                (sum, item) => sum + item.duration,
-                0
-              ) as number
-              return t('common.headerTotalDuration', {
-                duration: $date.getDurationString(hrs, t)
-              })
-            }
-          }}
           columns={columns}
-          commandBar={commandBar}
+          menuItems={menuItems}
           exportFileName={context.state.queryPreset?.exportFileName}
           filterValues={context.state?.activeFilter?.values}
           onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}

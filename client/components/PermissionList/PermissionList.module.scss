@@ -3,23 +3,17 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: -2px -4px;
+    padding: 6px;
 
     .item {
-      width: 225px;
+      width: auto;
       height: 30px;
+      margin: 2px 4px;
 
       .icon {
         margin: 0 4px 0 0;
-      }
-
-      &:hover {
-        font-weight: 600;
-        color: #cf5f00;
-        -webkit-transition: color 300ms linear, color 1s linear;
-        -moz-transition: color 300ms linear, color 1s linear;
-        -o-transition: color 300ms linear, color 1s linear;
-        -ms-transition: color 300ms linear, color 1s linear;
-        transition: color 300ms linear, color 1s linear;
       }
     }
   }

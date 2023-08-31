@@ -1,12 +1,12 @@
 import { ICommandBarItemProps } from '@fluentui/react'
+import { useTranslation } from 'react-i18next'
 import { useListContext } from '../context'
 import { CLEAR_FILTERS, TOGGLE_FILTER_PANEL } from '../reducer'
 import { ListMenuItem } from './ListMenuItem'
-import { useTranslation } from 'react-i18next'
 
 /**
  * Returns an object containing two command bar items for toggling and clearing filters in a list.
- * 
+ *
  * @returns An object containing two properties: `toggle` and `clear`, each with a `commandBarItem` property.
  */
 export function useFiltersCommand() {

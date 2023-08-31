@@ -1,4 +1,5 @@
-import { IButtonProps, IPanelProps } from '@fluentui/react'
+import { IPanelProps } from '@fluentui/react'
+import { ButtonProps } from '@fluentui/react-components'
 import { IToastProps } from 'components/Toast'
 import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
@@ -37,7 +38,9 @@ export type UseFormOptions = {
   errorMessage?: string
 }
 
-export interface ISubmitProps extends IButtonProps {
+export interface ISubmitProps
+  extends Pick<ButtonProps, 'onClick' | 'disabled'> {
+  text: string
   toast?: IToastProps
 }
 

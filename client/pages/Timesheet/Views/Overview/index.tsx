@@ -74,7 +74,8 @@ export const Overview: TimesheetViewComponent = () => {
                     packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT
                   }
                   listGroupProps={listGroupProps}
-                  additionalColumns={additionalColumns} />
+                  additionalColumns={additionalColumns}
+                />
               </PivotItem>
             ))}
           </Pivot>

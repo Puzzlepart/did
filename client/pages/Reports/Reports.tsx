@@ -5,11 +5,11 @@ import { TabContainer, UserMessage } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { ReportTab } from './ReportTab'
-import styles from './Reports.module.scss'
-import { SummaryView } from './SummaryView'
 import { ReportsContext } from './context'
 import { CHANGE_QUERY } from './reducer/actions'
+import styles from './Reports.module.scss'
+import { ReportTab } from './ReportTab'
+import { SummaryView } from './SummaryView'
 import { useReports } from './useReports'
 
 /**
@@ -59,7 +59,8 @@ export const Reports: FC = () => {
                   key={index}
                   title={button.title}
                   icon={<Icon {...button.iconProps} />}
-                  onClick={button.onClick as any}>
+                  onClick={button.onClick as any}
+                >
                   {button.text}
                 </Button>
               ))}

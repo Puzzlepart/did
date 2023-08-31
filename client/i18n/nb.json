@@ -240,7 +240,9 @@
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke kalenderoppføringer i Outlook som ferie.",
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
-    "vacation": "Ferie og fravær"
+    "vacation": "Ferie og fravær",
+    "editPermissions": "Endre tilganger",
+    "addPermissions": "Angi tillatelser"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -460,7 +462,8 @@
     "vacationCalculationTypeConfirmedDescription": "Ferie bekreftet som en del av timelisten din.",
     "vacationSummaryTooltipConfirmed": "Ferieberegningen er for hele året, og er basert på {{usedHours}} timer ferie bekreftet som en del av timelisten din (hver feriedag er 8 timer).",
     "updatedLabel": "Oppdatert",
-    "cancelButtonLabel": "Avbryt"
+    "cancelButtonLabel": "Avbryt",
+    "toggleFilterPanel": "Filter"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

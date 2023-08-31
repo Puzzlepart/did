@@ -1,42 +1,43 @@
-import { PrimaryButton, TextField } from '@fluentui/react'
+import { Field, Input } from '@fluentui/react-components'
 import { BasePanel } from 'components'
 import { IconPicker } from 'components/IconPicker'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
-import { PermissionCheckbox } from './PermissionCheckbox'
+import { EditPermissions } from './EditPermissions'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import { useRolePanel } from './useRolePanel'
 
 export const RolePanel: FC<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
-  const {
-    permissions,
-    model,
-    setModel,
-    onSave,
-    saveDisabled,
-    togglePermission
-  } = useRolePanel({ props })
+  const { model, setModel, onSave, isSaveDisabled, isEdit } =
+    useRolePanel(props)
 
   return (
     <BasePanel
-      className={styles.root}
       headerText={props.headerText}
       isOpen={true}
-      isLightDismiss={true}
+      footerActions={[
+        {
+          text: t('common.save'),
+          onClick: onSave,
+          disabled: isSaveDisabled,
+          appearance: 'primary'
+        }
+      ]}
       onDismiss={props.onDismiss}
     >
-      <div className={styles.container}>
-        <TextField
-          className={styles.inputField}
-          label={t('admin.roleNameLabel')}
-          defaultValue={props.model ? props.model.name : ''}
-          disabled={!!props.model}
-          required={true}
-          onChange={(_event, name) => setModel({ ...model, name })}
-        />
+      <div className={styles.root}>
+        <Field label={t('admin.roleNameLabel')} required={true}>
+          <Input
+            defaultValue={props.model ? props.model.name : ''}
+            disabled={!!props.model}
+            required={true}
+            onChange={(_event, data) =>
+              setModel({ ...model, name: data?.value })
+            }
+          />
+        </Field>
         <IconPicker
           label={t('common.iconFieldLabel')}
           required={true}
@@ -45,25 +46,13 @@ export const RolePanel: FC<IRolePanelProps> = (props) => {
           onSelected={(icon) => setModel({ ...model, icon })}
           className={styles.inputField}
         />
-        <div className={styles.subHeader}>{t('admin.permissonsLabel')}</div>
-        <div className={styles.permissions}>
-          {permissions.map((permission, index) => (
-            <PermissionCheckbox
-              key={index}
-              checked={_.contains(model.permissions, permission.id)}
-              permission={permission}
-              onToggle={togglePermission}
-            />
-          ))}
-        </div>
-        <div className={styles.actions}>
-          <PrimaryButton
-            className={styles.saveBtn}
-            text={t('common.save')}
-            onClick={onSave}
-            disabled={saveDisabled}
-          />
-        </div>
+        <EditPermissions
+          label={
+            isEdit ? t('admin.editPermissions') : t('admin.addPermissions')
+          }
+          onChange={(permissions) => setModel({ ...model, permissions })}
+          selectedPermissions={model.permissions}
+        />
       </div>
     </BasePanel>
   )

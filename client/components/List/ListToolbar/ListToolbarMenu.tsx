@@ -10,8 +10,8 @@ import {
 } from '@fluentui/react-components'
 import React, { FC, useState } from 'react'
 import { createStyle } from './createStyle'
-import { ListToolbarButton } from './ListToolbarButton'
 import { ListMenuItem } from './ListMenuItem'
+import { ListToolbarButton } from './ListToolbarButton'
 
 /**
  * Renders a menu item based on the provided `IListMenuItem`.
@@ -24,8 +24,11 @@ import { ListMenuItem } from './ListMenuItem'
  *
  * @returns The rendered `MenuItem`, `MenuItemCheckbox`, or `Menu` (if `item` has `items`).
  */
-export const ListToolbarMenuItem: FC<{ item: ListMenuItem, closeMenu?: () => void }> = (props) => {
-  const {item, closeMenu} = props
+export const ListToolbarMenuItem: FC<{
+  item: ListMenuItem
+  closeMenu?: () => void
+}> = (props) => {
+  const { item, closeMenu } = props
   if (item.value) {
     return (
       <MenuItemCheckbox
@@ -85,7 +88,13 @@ export const ListToolbarMenu: FC<{ item: ListMenuItem }> = ({ item }) => {
       </MenuTrigger>
       <MenuPopover>
         <MenuList>
-          {items.map((menuItem, index) => <ListToolbarMenuItem key={index} item={menuItem} closeMenu={() => setOpen(false)} />)}
+          {items.map((menuItem, index) => (
+            <ListToolbarMenuItem
+              key={index}
+              item={menuItem}
+              closeMenu={() => setOpen(false)}
+            />
+          ))}
         </MenuList>
       </MenuPopover>
     </Menu>

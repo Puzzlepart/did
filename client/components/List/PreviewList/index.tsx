@@ -10,8 +10,8 @@ import {
 import React, { FC } from 'react'
 import { ListToolbar } from '../ListToolbar'
 import { IListProps } from '../types'
-import { usePreviewList } from './usePreviewList'
 import styles from './PreviewList.module.scss'
+import { usePreviewList } from './usePreviewList'
 
 /**
  * The PreviewList component displays items in a `DataGrid` component

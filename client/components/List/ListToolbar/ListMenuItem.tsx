@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/consistent-function-scoping */
-import React, { MouseEventHandler, CSSProperties } from 'react'
-import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
 import { ICommandBarItemProps, Icon } from '@fluentui/react'
+import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
+import React, { CSSProperties, MouseEventHandler } from 'react'
 
 /**
  * Represents a menu item in the `ListMenuItem` component. Supports
@@ -170,7 +170,10 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setItems(items: ListMenuItem['items'], checkedValues?: ListMenuItem['checkedValues']) {
+  public setItems(
+    items: ListMenuItem['items'],
+    checkedValues?: ListMenuItem['checkedValues']
+  ) {
     this.items = items
     if (checkedValues) this.checkedValues = checkedValues
     return this
@@ -203,12 +206,12 @@ export class ListMenuItem {
   }
 
   /**
-  * Creates an icon component based on the provided list menu item.
-  *
-  * @param item - The list menu item to create the icon for.
-  *
-  * @returns The icon component.
-  */
+   * Creates an icon component based on the provided list menu item.
+   *
+   * @param item - The list menu item to create the icon for.
+   *
+   * @returns The icon component.
+   */
   public static createIcon(item: ListMenuItem) {
     let IconElement = () => null
     if (typeof item.icon === 'string') {
@@ -220,9 +223,9 @@ export class ListMenuItem {
 
   /**
    * Converts an array of ICommandBarItemProps to an array of ListMenuItem.
-   * 
+   *
    * @param items - The array of ICommandBarItemProps to convert.
-   * 
+   *
    * @returns An array of ListMenuItem.
    */
   public static convert(items: ICommandBarItemProps[]) {
@@ -247,4 +250,5 @@ export const ListMenuItemDivider = new ListMenuItem().setType('divider')
  *
  * @returns A new ListMenuItem with the specified text as a header and a font size of 10.
  */
-export const ListMenuItemHeader = (text: string) => new ListMenuItem(text).setType('header')
+export const ListMenuItemHeader = (text: string) =>
+  new ListMenuItem(text).setType('header')
