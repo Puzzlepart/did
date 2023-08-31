@@ -26,6 +26,7 @@ export const SummaryView: TabComponent = () => {
           />
         )}
         <List
+          disablePreview
           hidden={!state.loading && _.isEmpty(rows)}
           enableShimmer={state.loading}
           columns={columns}

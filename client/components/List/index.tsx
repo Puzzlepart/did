@@ -24,10 +24,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
     <div className={styles.root} hidden={props.hidden}>
       <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          {props.usePreview ? (
-            <PreviewList {...listProps} />
-          ) : (
+          {props.disablePreview ? (
             <ShimmeredDetailsList {...listProps} />
+          ) : (
+            <PreviewList {...listProps} />
           )}
           <ColumnHeaderContextMenu />
           <ListFilterPanel />

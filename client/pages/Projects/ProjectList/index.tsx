@@ -50,7 +50,6 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
           ],
           farItems: []
         }}
-        usePreview
       />
       {props.children}
     </>

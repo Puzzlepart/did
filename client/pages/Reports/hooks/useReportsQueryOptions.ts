@@ -1,33 +1,50 @@
 import {
-  IChoiceGroupOption,
   IChoiceGroupOptionStyleProps,
   IChoiceGroupOptionStyles,
+  IIconProps,
   IStyleFunctionOrObject
 } from '@fluentui/react'
+import { ButtonProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import { CHANGE_QUERY } from '../reducer/actions'
 import { IReportsState } from '../types'
 import { useReportsQueries } from './useReportsQueries'
 
+/**
+ * Options for the useReportsQuery hook.
+ */
 export type UseReportsQueryOptions = {
+  /**
+   * The queries returned by the useReportsQueries hook.
+   */
   queries: ReturnType<typeof useReportsQueries>
+
+  /**
+   * The current state of the reports.
+   */
   state: IReportsState
+
+  /**
+   * The dispatch function for updating the state of the reports.
+   */
   dispatch: React.Dispatch<AnyAction>
 }
 
+export interface ReportsQueryButton extends Pick<ButtonProps, 'title' | 'onClick'> {
+  text: string
+  iconProps?: IIconProps
+}
+
 /**
- * Returns queries from `useReportsQueries` as choice group options
- * to be used in `<ChoiceGroup />` component. Also appends promoted
- * report links (`promoted` property is `true`). Promoted report links
- * are added to the end of the list.
+ * Returns queries from `useReportsQueries` as `ReportsQueryButton` objects.
  *
  * @category Reports
  */
-export function useReportsQueryOptions({
+export function useReportsQueryButtons({
   queries,
   state,
   dispatch
-}: UseReportsQueryOptions): IChoiceGroupOption[] {
+}: UseReportsQueryOptions): ReportsQueryButton[] {
   const promotedReportLinks = state.reportLinks?.filter((l) => l.promoted) ?? []
   const styles: IStyleFunctionOrObject<
     IChoiceGroupOptionStyleProps,
@@ -48,15 +65,13 @@ export function useReportsQueryOptions({
     }
   }
   return [
-    ...queries.map<IChoiceGroupOption>(({ itemKey, headerText, itemIcon }) => ({
-      key: itemKey,
+    ...queries.map<ReportsQueryButton>(({ itemKey, headerText, itemIcon }) => ({
       text: headerText,
       iconProps: { iconName: itemIcon },
       onClick: () => dispatch(CHANGE_QUERY({ itemKey })),
       styles
-    })),
-    ...promotedReportLinks.map<IChoiceGroupOption>((link) => ({
-      key: link.name,
+    } as ReportsQueryButton)),
+    ...promotedReportLinks.map<ReportsQueryButton>((link) => ({
       text: link.name,
       title: link.description,
       iconProps: {
@@ -64,7 +79,6 @@ export function useReportsQueryOptions({
         styles: { root: { color: link.iconColor } }
       },
       onClick: () => window.open(link.externalUrl, '_blank'),
-      styles
-    }))
+    } as ReportsQueryButton))
   ]
 }

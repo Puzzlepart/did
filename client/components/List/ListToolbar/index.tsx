@@ -98,29 +98,30 @@ export const ListToolbar: FC<{ root: React.MutableRefObject<any> }> = ({
     ].filter(Boolean)
   }
 
-  if (context.props.usePreview) {
-    const items = [...commandBarProps.items, ...commandBarProps.farItems]
+  if (context.props.disablePreview) {
     return (
-      <Toolbar>
-        {items.map((item, index) => (
-          <ToolbarButton
-            key={index}
-            icon={<Icon {...item.iconProps} />}
-            onClick={item.onClick}
-          >
-            {item.text}
-          </ToolbarButton>
-        ))}
-      </Toolbar>
+      <CommandBar
+        hidden={
+          _.isEmpty(commandBarProps.items) && _.isEmpty(commandBarProps.farItems)
+        }
+        {...commandBarProps}
+        styles={{ root: { margin: 0, padding: 0 } }}
+      />
     )
   }
+  const items = [...commandBarProps.items, ...commandBarProps.farItems]
   return (
-    <CommandBar
-      hidden={
-        _.isEmpty(commandBarProps.items) && _.isEmpty(commandBarProps.farItems)
-      }
-      {...commandBarProps}
-      styles={{ root: { margin: 0, padding: 0 } }}
-    />
+    <Toolbar>
+      {items.map((item, index) => (
+        <ToolbarButton
+          key={index}
+          icon={<Icon {...item.iconProps} />}
+          onClick={item.onClick}
+          disabled={item.disabled}
+        >
+          {item.text}
+        </ToolbarButton>
+      ))}
+    </Toolbar>
   )
 }

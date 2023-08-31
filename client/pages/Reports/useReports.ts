@@ -6,7 +6,7 @@ import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfig
 import {
   useReportsQueries,
   useReportsQuery,
-  useReportsQueryOptions
+  useReportsQueryButtons
 } from './hooks'
 import { useReportsReducer } from './reducer'
 
@@ -29,7 +29,7 @@ export function useReports() {
   const { t } = useTranslation()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-  const options = useReportsQueryOptions({ queries, state, dispatch })
+  const buttons = useReportsQueryButtons({ queries, state, dispatch })
   const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
@@ -50,7 +50,7 @@ export function useReports() {
   return {
     defaultSelectedKey: state.queryPreset?.itemKey || 'default',
     queries: queries.filter((q) => !q.hidden),
-    options,
+    buttons,
     context,
     reportLinks: state.reportLinks
   } as const

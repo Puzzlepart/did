@@ -59,7 +59,6 @@ export const ApiTokens: TabComponent = () => {
             }
           ]
         }}
-        usePreview
       />
       {form.isOpen && (
         <ApiTokenForm

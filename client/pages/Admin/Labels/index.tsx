@@ -28,7 +28,6 @@ export const Labels: TabComponent = () => {
           ],
           farItems: []
         }}
-        usePreview
       />
       <LabelForm {...form} />
       {ConfirmationDialog}

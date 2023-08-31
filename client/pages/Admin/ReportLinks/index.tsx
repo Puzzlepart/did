@@ -30,7 +30,6 @@ export const ReportLinks: TabComponent = () => {
           ],
           farItems: []
         }}
-        usePreview
       />
       <ReportLinksForm {...form} />
       {ConfirmationDialog}

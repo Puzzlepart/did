@@ -13,8 +13,12 @@ import { IIconTextProps } from './types'
 export const IconText: ReusableComponent<IIconTextProps> = (props) => {
   return (
     <div className={styles.root}>
-      <Icon {..._.omit(props, 'text')} iconName={props.iconName || 'Page'} />
+      <Icon {..._.omit(props, 'text')} iconName={props.iconName} />
       <span style={{ marginLeft: 6, verticalAlign: 'top' }}>{props.text}</span>
     </div>
   )
+}
+
+IconText.defaultProps = {
+  iconName: 'Page'
 }

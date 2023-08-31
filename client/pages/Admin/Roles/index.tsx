@@ -29,7 +29,6 @@ export const Roles: TabComponent = () => {
           ],
           farItems: []
         }}
-        usePreview
       />
       {panel && (
         <RolePanel

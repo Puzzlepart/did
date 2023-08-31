@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ChoiceGroup, PivotItem } from '@fluentui/react'
+import { Icon, PivotItem } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
 import { TabContainer, UserMessage } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
+import { ReportTab } from './ReportTab'
+import styles from './Reports.module.scss'
+import { SummaryView } from './SummaryView'
 import { ReportsContext } from './context'
 import { CHANGE_QUERY } from './reducer/actions'
-import styles from './Reports.module.scss'
-import { ReportTab } from './ReportTab'
-import { SummaryView } from './SummaryView'
 import { useReports } from './useReports'
 
 /**
@@ -16,7 +17,7 @@ import { useReports } from './useReports'
  */
 export const Reports: FC = () => {
   const { t } = useTranslation()
-  const { defaultSelectedKey, queries, options, context } = useReports()
+  const { defaultSelectedKey, queries, buttons, context } = useReports()
   return (
     <ReportsContext.Provider value={context}>
       <TabContainer
@@ -46,12 +47,24 @@ export const Reports: FC = () => {
           headerText={t('reports.summaryHeaderText')}
         />
         <PivotItem itemKey='default'>
-          <UserMessage
-            containerStyle={{ marginBottom: 20 }}
-            iconName='ReportDocument'
-            text={t('reports.selectReportText')}
-          />
-          <ChoiceGroup options={options} />
+          <div className={styles.defaultTab}>
+            <UserMessage
+              containerStyle={{ marginBottom: 20 }}
+              iconName='ReportDocument'
+              text={t('reports.selectReportText')}
+            />
+            <div className={styles.reportButtons}>
+              {buttons.map((button, index) => (
+                <Button
+                  key={index}
+                  title={button.title}
+                  icon={<Icon {...button.iconProps} />}
+                  onClick={button.onClick as any}>
+                  {button.text}
+                </Button>
+              ))}
+            </div>
+          </div>
         </PivotItem>
       </TabContainer>
     </ReportsContext.Provider>

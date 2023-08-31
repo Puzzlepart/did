@@ -131,12 +131,12 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   commandBar?: ICommandBarProps
 
   /**
-   * Hidden
+   * Hidden state of the list
    */
   hidden?: boolean
 
   /**
-   * Column header
+   * Column header props
    */
   columnHeaderProps?: {
     className?: string
@@ -172,9 +172,10 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   filterValues?: Record<string, any>
 
   /**
-   * Use `DataGrid` from `@fluentui/react-components` instead of `ShimmeredDetailsList` from `@fluentui/react`
+   * If `disablePreview` is set to `true`, `<ShimmeredDetailsList />` from `@fluentui/react` will 
+   * be used instead of `<DataGrid />` from `@fluentui/react-components`.
    */
-  usePreview?: boolean
+  disablePreview?: boolean
 }
 
 export type ColumnHeaderContextMenu = {

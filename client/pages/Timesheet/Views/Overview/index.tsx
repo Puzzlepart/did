@@ -42,6 +42,7 @@ export const Overview: TimesheetViewComponent = () => {
         return (
           <div className={className.join(' ')}>
             <EventList
+              disablePreview
               enableShimmer={true}
               items={[]}
               listGroupProps={listGroupProps}
@@ -65,6 +66,7 @@ export const Overview: TimesheetViewComponent = () => {
                 headerText={period.getName(t)}
               >
                 <EventList
+                  disablePreview
                   hidden={!!state.error}
                   enableShimmer={!!state.loading}
                   items={period.getEvents()}
@@ -72,8 +74,7 @@ export const Overview: TimesheetViewComponent = () => {
                     packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT
                   }
                   listGroupProps={listGroupProps}
-                  additionalColumns={additionalColumns}
-                />
+                  additionalColumns={additionalColumns} />
               </PivotItem>
             ))}
           </Pivot>
