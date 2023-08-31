@@ -11,7 +11,7 @@ import { ListToolbarButton } from './ListToolbarButton'
  *
  * @returns The rendered toolbar item.
  */
-export const ListToolbarItem: FC<{ item: ListMenuItem }> = ({ item }) => {
-  if (item.items) return <ListToolbarMenu item={item} />
-  else return <ListToolbarButton item={item} />
+export const ListToolbarItem: FC<{ item: ListMenuItem }> = (props) => {
+  if (props.item.items) return <ListToolbarMenu {...props} />
+  else return <ListToolbarButton {...props} />
 }

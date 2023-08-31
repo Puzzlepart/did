@@ -188,6 +188,20 @@ export class ListMenuItem {
     return this
   }
 
+  public createProps(componentName: string, style: CSSProperties = {}) {
+    switch (componentName) {
+      case 'ToolbarButton': {
+        return {
+          text: this.text,
+          icon: ListMenuItem.createIcon(this),
+          style: { ...this.style, ...style },
+          onClick: this.onClick,
+          disabled: this.disabled
+        }
+      }
+    }
+  }
+
   /**
   * Creates an icon component based on the provided list menu item.
   *

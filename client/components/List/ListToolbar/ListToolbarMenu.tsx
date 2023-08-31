@@ -24,7 +24,8 @@ import { ListMenuItem } from './ListMenuItem'
  *
  * @returns The rendered `MenuItem`, `MenuItemCheckbox`, or `Menu` (if `item` has `items`).
  */
-export const ListToolbarMenuItem: FC<{ item: ListMenuItem, closeMenu?: () => void }> = ({ item, closeMenu }) => {
+export const ListToolbarMenuItem: FC<{ item: ListMenuItem, closeMenu?: () => void }> = (props) => {
+  const {item, closeMenu} = props
   if (item.value) {
     return (
       <MenuItemCheckbox
@@ -41,7 +42,7 @@ export const ListToolbarMenuItem: FC<{ item: ListMenuItem, closeMenu?: () => voi
       />
     )
   }
-  if (item.items) return <ListToolbarMenu item={item} />
+  if (item.items) return <ListToolbarMenu {...props} />
   return (
     <MenuItem
       content={item.text}
