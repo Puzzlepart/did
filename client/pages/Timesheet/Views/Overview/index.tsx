@@ -22,6 +22,7 @@ export const Overview: TimesheetViewComponent = () => {
         <div className={className}>
           <EventList
             disablePreview
+            hideToolbar={true}
             hidden={!!state.error}
             enableShimmer={!!state.loading}
             items={state.selectedPeriod?.getEvents()}
@@ -38,6 +39,7 @@ export const Overview: TimesheetViewComponent = () => {
           <div className={className}>
             <EventList
               disablePreview
+              hideToolbar={true}
               enableShimmer={true}
               items={[]}
               listGroupProps={listGroupProps}
@@ -62,6 +64,7 @@ export const Overview: TimesheetViewComponent = () => {
               >
                 <EventList
                   disablePreview
+                  hideToolbar={true}
                   hidden={!!state.error}
                   enableShimmer={!!state.loading}
                   items={period.getEvents()}

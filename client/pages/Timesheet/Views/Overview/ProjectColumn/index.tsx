@@ -4,7 +4,7 @@ import {
   AddCircle24Regular,
   CalendarCancel24Regular
 } from '@fluentui/react-icons'
-import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
+import { ProjectLink, ProjectPopover, UserMessage } from 'components'
 import { TFunction } from 'i18next'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -98,15 +98,12 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
 
   return (
     <div className={className}>
-      <div className={styles.iconContainer}>
-        <Icon iconName={event.project.icon} />
-      </div>
       <div className={styles.content}>
-        <ProjectTooltip project={event.project}>
+        <ProjectPopover project={event.project}>
           <div className={styles.link}>
             <ProjectLink project={event.project} />
           </div>
-        </ProjectTooltip>
+        </ProjectPopover>
         {!_.isEmpty(event.project.labels) && (
           <Icon iconName='Tag' className={styles.labelIcon} />
         )}

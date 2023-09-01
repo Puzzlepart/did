@@ -11,7 +11,7 @@ export const SummaryView: TimesheetViewComponent = () => {
   const props = useSummaryView()
   return (
     <div className={styles.root}>
-      <List {...props} />
+      <List disablePreview {...props} />
     </div>
   )
 }

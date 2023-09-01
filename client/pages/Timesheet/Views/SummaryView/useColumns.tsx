@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { DateRangeType, IColumn, useTheme } from '@fluentui/react'
-import { ProjectTooltip } from 'components'
+import { ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
@@ -86,9 +86,9 @@ export function useColumns(): IColumn[] {
       onRender: (row: ILabelColumnProps) => {
         if (row.project) {
           return (
-            <ProjectTooltip project={row.project}>
+            <ProjectPopover project={row.project}>
               <LabelColumn {...row} />
-            </ProjectTooltip>
+            </ProjectPopover>
           )
         }
         return <LabelColumn {...row} />

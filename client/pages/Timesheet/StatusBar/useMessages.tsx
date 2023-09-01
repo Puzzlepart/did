@@ -5,8 +5,8 @@ import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import ReactMarkdown from 'react-markdown'
 import _ from 'underscore'
+import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../context'
 import { Overview } from '../Views/Overview'
 
@@ -69,21 +69,35 @@ export function useMessages(): IUserMessageProps[] {
     if (!state.selectedPeriod.isComplete && !state.selectedPeriod.isForecast) {
       messages.push({
         id: 'hoursnotmatched',
-        children: (
-          <span>
-            <ReactMarkdown>
-              {t('timesheet.hoursNotMatchedText', {
-                hours: $date.getDurationString(
-                  state.selectedPeriod.unmatchedDuration,
-                  t
-                )
-              })}
-            </ReactMarkdown>
-            <a href='#' onClick={() => dispatch(IGNORE_ALL())}>
-              {t('timesheet.ignoreAllText')}
-            </a>
-          </span>
-        ),
+        text: t('timesheet.hoursNotMatchedText', {
+          hours: $date.getDurationString(
+            state.selectedPeriod.unmatchedDuration,
+            t
+          )
+        }),
+        actions: [
+          {
+            key: 'ignore',
+            content: t('timesheet.ignoreAllText'),
+            onClick: () => dispatch(IGNORE_ALL()),
+            icon: getFluentIcon('CalendarCancel')
+          }
+        ],
+        // children: (
+        //   <p>
+        //     <ReactMarkdown>
+        //       {t('timesheet.hoursNotMatchedText', {
+        //         hours: $date.getDurationString(
+        //           state.selectedPeriod.unmatchedDuration,
+        //           t
+        //         )
+        //       })}
+        //     </ReactMarkdown>
+        //     <Link onClick={() => dispatch(IGNORE_ALL())}>
+        //       {t('timesheet.ignoreAllText')}
+        //     </Link>
+        //   </p>
+        // ),
         intent: 'warning'
       })
     }
@@ -126,18 +140,17 @@ export function useMessages(): IUserMessageProps[] {
     ) {
       messages.push({
         id: 'ignoredevents',
-        children: (
-          <p>
-            <span>
-              {t('timesheet.ignoredEventsText', {
-                ignored_count: state.selectedPeriod.ignoredEvents.length
-              })}
-            </span>
-            <a href='#' onClick={() => dispatch(CLEAR_IGNORES())}>
-              {t('timesheet.undoIgnoreText')}
-            </a>
-          </p>
-        ),
+        text: t('timesheet.ignoredEventsText', {
+          ignored_count: state.selectedPeriod.ignoredEvents.length
+        }),
+        actions: [
+          {
+            key: 'undo-ignore',
+            content: t('timesheet.undoIgnoreText'),
+            onClick: () => dispatch(CLEAR_IGNORES()),
+            icon: getFluentIcon('ArrowUndo')
+          }
+        ],
         intent: 'warning'
       })
     }
