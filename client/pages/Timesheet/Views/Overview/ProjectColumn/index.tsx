@@ -71,7 +71,6 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
     return (
       <div className={className}>
         <UserMessage
-          containerStyle={{ marginTop: 10, width: '90%' }}
           intent='warning'
           iconName='TagUnknown'
           text={t('timesheet.noProjectMatchFoundText')}

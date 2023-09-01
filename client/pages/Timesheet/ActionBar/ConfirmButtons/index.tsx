@@ -8,7 +8,8 @@ import { useConfirmButtons } from './useConfirmButtons'
  * @returns A React functional component.
  */
 export const ConfirmButtons: FC = () => {
-  const { buttonProps, buttonText } = useConfirmButtons()
+  const { buttonProps, buttonText, isConfirmDisabled } = useConfirmButtons()
+  if (isConfirmDisabled) return null
   return (
     <>
       <ToolbarButton {...buttonProps}>{buttonText}</ToolbarButton>

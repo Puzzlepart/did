@@ -1,4 +1,6 @@
+import { DateRangeType } from '@fluentui/react'
 import { ToolbarButtonProps } from '@fluentui/react-components'
+import { Overview } from 'pages/Timesheet/Views/Overview'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../../context'
@@ -28,5 +30,9 @@ export function useConfirmButtons() {
     ? t('timesheet.unconfirmHoursText')
     : t('timesheet.confirmHoursText')
 
-  return { buttonProps, buttonText }
+  const isRangeWeek = state.dateRangeType === DateRangeType.Week
+  const isOverview = state.selectedView?.id === Overview.id
+  const isConfirmDisabled = !isRangeWeek && !isOverview
+
+  return { buttonProps, buttonText, isConfirmDisabled }
 }
