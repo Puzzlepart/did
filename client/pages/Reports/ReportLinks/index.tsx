@@ -1,10 +1,11 @@
-import { ActionButton } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
 import { UserMessage } from 'components'
 import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
-import styles from './ReportLinks.module.scss'
 import { ReportLinkTooltip } from './ReportLinkTooltip'
+import styles from './ReportLinks.module.scss'
+import { Icon } from '@fluentui/react'
 
 /**
  * Report links. This component is used when the report links are available.
@@ -21,13 +22,12 @@ export const ReportLinks: FC = () => {
       <UserMessage text={t('reports.availableReportLinks')} />
       {context.state.queryPreset.reportLinks.map((link, index) => (
         <ReportLinkTooltip key={index} link={link}>
-          <ActionButton
+          <Button
             className={styles.link}
-            text={link.name}
-            href={link.externalUrl}
-            target='_blank'
-            iconProps={{ iconName: 'ExcelDocument' }}
-          />
+            onClick={() => window.open(link.externalUrl, '_blank')}
+            icon={<Icon iconName='ExcelDocument' />}>
+            {link.name}
+          </Button>
         </ReportLinkTooltip>
       ))}
     </div>

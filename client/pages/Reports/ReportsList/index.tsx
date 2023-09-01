@@ -1,6 +1,7 @@
 import { CheckboxVisibility } from '@fluentui/react'
-import { List, TabComponent, UserMessage } from 'components'
+import { List, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
+import { TabComponent } from 'components/Tabs'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'

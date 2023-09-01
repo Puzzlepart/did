@@ -1,13 +1,14 @@
+import { TabItems } from 'components/Tabs'
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
-import {
-  useReportsQueries,
-  useReportsQuery,
-  useReportsQueryButtons
-} from './hooks'
+import { IReportsContext } from './context'
+import { useReportsQueries, useReportsQuery } from './hooks'
 import { useReportsReducer } from './reducer'
+import { SummaryView } from './SummaryView'
+import { WelcomeTab } from './WelcomeTab'
+import { ReportTab } from './ReportTab'
 
 /**
  * Component logic for `<Reports />`
@@ -28,7 +29,6 @@ export function useReports() {
   const { t } = useTranslation()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-  const buttons = useReportsQueryButtons({ queries, state, dispatch })
   const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
@@ -44,12 +44,36 @@ export function useReports() {
     autoUpdate: !state.loading && !!state.activeFilter?.text
   })
 
-  const context = useMemo(() => ({ state, dispatch, t }), [state])
+  const context = useMemo<IReportsContext>(
+    () => ({ state, dispatch, queries }),
+    [state]
+  )
+
+  const queryTabs = useMemo(
+    () =>
+      _.reduce(
+        _.filter(queries, (q) => !q.hidden),
+        (tabs, query) => {
+          const { id, text: title } = query
+          tabs[id] = [ReportTab, title]
+          return tabs
+        },
+        {} as TabItems
+      ),
+    [queries]
+  )
+
+  // eslint-disable-next-line no-console
+  console.log(queryTabs)
+
+  const tabs: TabItems = useMemo(() => ({
+    default: [WelcomeTab, ''],
+    ...queryTabs,
+    summary: [SummaryView, t('reports.summaryHeaderText')]
+  }), [queryTabs])
 
   return {
-    defaultSelectedKey: state.queryPreset?.itemKey || 'default',
-    queries: queries.filter((q) => !q.hidden),
-    buttons,
+    tabs,
     context,
     reportLinks: state.reportLinks
   } as const
