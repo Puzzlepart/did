@@ -58,14 +58,12 @@ export const UserForm: FC<IUserFormProps> = (props) => {
               searchValue: u.displayName,
               data: u
             }))}
-            onSelected={(item) => {
-              // eslint-disable-next-line no-console
-              console.log(item)
+            onSelected={(item) =>
               setModel({
                 ...model,
                 ...item.data
               })
-            }}
+            }
             onClear={() => setModel({ ...model, id: '', displayName: '' })}
           />
         </div>

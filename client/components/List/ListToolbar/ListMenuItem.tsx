@@ -195,9 +195,9 @@ export class ListMenuItem {
 
   /**
    * Sets a custom render function for the command bar item associated with this list menu item.
-   * 
+   *
    * @param onRender - The custom render function for the command bar item.
-   * 
+   *
    * @returns The updated ListMenuItem instance.
    */
   public setCustomRender(onRender: ICommandBarItemProps['onRender']) {

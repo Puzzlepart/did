@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { IUserMessageProps } from './types'
 
 /**
- * Hook used to show a temporarily message
+ * Hook used to show a temporarily message for a
+ * set amount of time.
  *
  * @category UserMessage
  */

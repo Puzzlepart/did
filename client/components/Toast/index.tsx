@@ -17,14 +17,10 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
   if (!props.text) return null
   return (
     <div className={styles.root}>
-      <UserMessage
-        {..._.omit(props, 'hidden')}
-        className={styles.message}
-      />
+      <UserMessage {..._.omit(props, 'hidden')} className={styles.message} />
     </div>
   )
 }
 
 export * from './types'
 export * from './useToast'
-

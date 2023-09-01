@@ -21,7 +21,7 @@ import { useUserMessage } from './useUserMessage'
 /**
  * A component that uses `Alert` from [@fluentui/react-components](@fluentui/react-components),
  * conditionally renders a `Menu` from [@fluentui/react-components](@fluentui/react-components).
- * 
+ *
  * @category Reusable Component
  */
 export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {

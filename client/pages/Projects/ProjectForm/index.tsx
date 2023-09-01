@@ -28,7 +28,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, submit, register, options } = useProjectForm(props)
   return (
-    <FormControl {...props} submitProps={submit}>
+    <FormControl {...props} model={model} submitProps={submit}>
       <SearchCustomer
         hidden={!!props.edit}
         label={t('common.customer')}
@@ -47,7 +47,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         description={t('projects.keyFieldDescription', packageFile.config.app)}
         required={true}
       />
-      <TagPreview hidden={!!props.edit} projectId={model.projectId} />
+      <TagPreview hidden={!!props.edit} />
       <TextControl
         {...register<TextControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
@@ -60,7 +60,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         })}
         label={t('common.descriptionFieldLabel')}
         description={t('projects.descriptionFieldDescription')}
-        rows={14}
+        rows={8}
       />
       <IconPicker
         name='icon'

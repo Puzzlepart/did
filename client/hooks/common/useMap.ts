@@ -25,7 +25,7 @@ export function useMap<
   ValueType = any
 >(initialMap = new Map()): TypedMap<KeyType, ObjectType, ValueType> {
   const [$map, $set] = useState<Map<KeyType, ValueType>>(initialMap)
-  
+
   const reset = () => $set(initialMap)
 
   /**
@@ -65,9 +65,9 @@ export function useMap<
 
   /**
    * Checks if all the specified keys have a non-blank value in the map.
-   * 
+   *
    * @param keys The keys to check.
-   * 
+   *
    * @returns True if all the keys have a non-blank value, false otherwise.
    */
   function isSet(...keys: KeyType[]): boolean {

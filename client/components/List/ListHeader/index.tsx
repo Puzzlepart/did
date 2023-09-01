@@ -12,17 +12,20 @@ export const ListHeader: FC<IListHeaderProps> = ({
   const context = useListContext()
   const mergedHeaderProps = merge(headerProps, context.props.columnHeaderProps)
   const root = useRef(null)
-  const stickyHeader = useMemo(() => (
-    <Sticky
-      ref={root}
-      key='ListHeader'
-      stickyPosition={StickyPositionType.Header}
-      isScrollSynced={true}
-    >
-      <ListToolbar root={root} />
-      {defaultRender(mergedHeaderProps)}
-    </Sticky>
-  ), [])
+  const stickyHeader = useMemo(
+    () => (
+      <Sticky
+        ref={root}
+        key='ListHeader'
+        stickyPosition={StickyPositionType.Header}
+        isScrollSynced={true}
+      >
+        <ListToolbar root={root} />
+        {defaultRender(mergedHeaderProps)}
+      </Sticky>
+    ),
+    []
+  )
 
   if (!!context.props.columnHeaderProps?.onRender) {
     return context.props.columnHeaderProps.onRender(

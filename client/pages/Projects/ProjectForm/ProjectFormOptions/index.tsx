@@ -8,24 +8,20 @@ import { IProjectFormOptionsProps } from './types'
 /**
  * @category Projects
  */
-export const ProjectFormOptions: FC<IProjectFormOptionsProps> = ({
-  model,
-  options,
-  hidden
-}) => {
+export const ProjectFormOptions: FC<IProjectFormOptionsProps> = (props) => {
   const { t } = useTranslation()
   return (
-    <div className={styles.root} hidden={hidden}>
+    <div className={styles.root} hidden={props.hidden}>
       <Checkbox
         label={t('projects.createOutlookCategoryFieldLabel')}
-        checked={options.value('createOutlookCategory')}
+        checked={props.options.value('createOutlookCategory')}
         onChange={(_event, data) =>
-          options.set('createOutlookCategory', data?.checked ?? false)
+          props.options.set('createOutlookCategory', data?.checked ?? false)
         }
       />
       <SubText
         text={t('projects.createOutlookCategoryFieldDescription', {
-          id: model.projectId
+          id: props.model.projectId
         })}
       />
     </div>

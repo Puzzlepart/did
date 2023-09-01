@@ -30,30 +30,38 @@ export function useListToolbar(root: React.MutableRefObject<any>) {
     (col) => col?.data?.isFilterable
   )
 
-  const commandBarProps = useMemo<ICommandBarProps>(() => ({
-    ...context.props.commandBar,
-    items: [searchBoxItem, ...context.props.commandBar?.items].filter(Boolean),
-    farItems: [
-      ...(context.props.commandBar?.farItems ?? []),
-      hasFilterableColumns && filterCommands.toggle.commandBarItem,
-      hasFilterableColumns && filterCommands.clear.commandBarItem,
-      context.props.exportFileName && excelExportCommandBarItem
-    ].filter(Boolean)
-  }), [context.props.commandBar, hasFilterableColumns])
+  const commandBarProps = useMemo<ICommandBarProps>(
+    () => ({
+      ...context.props.commandBar,
+      items: [searchBoxItem, ...context.props.commandBar?.items].filter(
+        Boolean
+      ),
+      farItems: [
+        ...(context.props.commandBar?.farItems ?? []),
+        hasFilterableColumns && filterCommands.toggle.commandBarItem,
+        hasFilterableColumns && filterCommands.clear.commandBarItem,
+        context.props.exportFileName && excelExportCommandBarItem
+      ].filter(Boolean)
+    }),
+    [context.props.commandBar, hasFilterableColumns]
+  )
 
-  const menuItems = useMemo(() => _.isEmpty(context.props.menuItems)
-    ? ListMenuItem.convert([
-      ...commandBarProps.items,
-      ...commandBarProps.farItems
-    ])
-    : [
-      searchBoxMenuItem,
-      ...context.props.menuItems,
-      filterCommands.toggle.menuItem,
-      filterCommands.clear.menuItem,
-      excelExportMenuItem
-    ].filter(Boolean)
-    , [])
+  const menuItems = useMemo(
+    () =>
+      _.isEmpty(context.props.menuItems)
+        ? ListMenuItem.convert([
+            ...commandBarProps.items,
+            ...commandBarProps.farItems
+          ])
+        : [
+            searchBoxMenuItem,
+            ...context.props.menuItems,
+            filterCommands.toggle.menuItem,
+            filterCommands.clear.menuItem,
+            excelExportMenuItem
+          ].filter(Boolean),
+    []
+  )
   return {
     commandBarProps,
     menuItems
