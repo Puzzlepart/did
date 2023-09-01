@@ -1,5 +1,9 @@
+import { SelectionMode } from '@fluentui/react'
+import { List } from 'components/List'
+import { Tabs } from 'components/Tabs'
 import { ITabProps } from 'components/Tabs/types'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
@@ -18,47 +22,59 @@ import { useUsers } from './useUsers'
  * @ignore
  */
 export const Users: FC<ITabProps> = () => {
-  const { context, onAddUsers } = useUsers()
+  const { t } = useTranslation()
+  const { context, columns, menuItems, onAddUsers } = useUsers()
+
+  // eslint-disable-next-line no-console
+  console.log({
+    items: context.state.activeUsers,
+    columns: columns('active'),
+    menuItems,
+    selectionMode: SelectionMode.multiple
+  })
 
   return (
     <UsersContext.Provider value={context}>
-      {/* <TabContainer level={3}>
-        <PivotItem
-          itemKey='active'
-          headerText={t('admin.users.activeHeaderText')}
-        >
-          <List
-            enableShimmer={context.state.loading}
-            items={context.state.activeUsers}
-            columns={columns('active')}
-            commandBar={commandBar}
-          />
-        </PivotItem>
-        <PivotItem
-          itemKey='disabled'
-          headerText={t('admin.users.disabledHeaderText')}
-        >
-          <List
-            enableShimmer={context.state.loading}
-            items={context.state.disabledUsers}
-            columns={columns('disabled')}
-          />
-        </PivotItem>
-      </TabContainer> */}
-      <UserForm
-        {...context.state.userForm}
-        isOpen={!!context.state.userForm}
-        onDismiss={(event) => {
-          context.dispatch(HIDE_USER_FORM())
-          !event && context.refetch()
+      <Tabs
+        level={3}
+        items={{
+          active: [
+            List,
+            t('admin.users.activeHeaderText'),
+            {
+              items: context.state.activeUsers,
+              columns: columns('active'),
+              menuItems,
+              selectionMode: SelectionMode.multiple
+            }
+          ],
+          disabled: [
+            List,
+            t('admin.users.disabledHeaderText'),
+            {
+              items: context.state.disabledUsers,
+              columns: columns('disabled'),
+              menuItems,
+              selectionMode: SelectionMode.multiple
+            }
+          ]
         }}
-      />
-      <AddMultiplePanel
-        {...context.state.addMultiplePanel}
-        isOpen={!!context.state.addMultiplePanel}
-        onAdd={onAddUsers}
-        onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
-      />
+      >
+        <UserForm
+          {...context.state.userForm}
+          isOpen={!!context.state.userForm}
+          onDismiss={(event) => {
+            context.dispatch(HIDE_USER_FORM())
+            !event && context.refetch()
+          }}
+        />
+        <AddMultiplePanel
+          {...context.state.addMultiplePanel}
+          isOpen={!!context.state.addMultiplePanel}
+          onAdd={onAddUsers}
+          onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
+        />
+      </Tabs>
     </UsersContext.Provider>
   )
 }

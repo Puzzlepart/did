@@ -12,6 +12,9 @@ import {
   SET_USER_FORM
 } from './actions'
 
+/**
+ * The initial state for the users reducer.
+ */
 export const initialState: IUsersState = {
   loading: true,
   users: [],
@@ -47,14 +50,14 @@ export default () =>
         )
         state.loading = payload.query.loading
       })
-      .addCase(SET_PROGRESS, (state, { payload }) => {
-        state.progress = payload
-      })
       .addCase(SET_USER_FORM, (state, { payload }) => {
         state.userForm = payload
       })
       .addCase(SET_ADD_MULTIPLE_PANEL, (state, { payload }) => {
         state.addMultiplePanel = payload
+      })
+      .addCase(SET_PROGRESS, (state, { payload }) => {
+        state.progress = payload
       })
       .addCase(CLEAR_PROGRESS, (state) => {
         state.progress = null

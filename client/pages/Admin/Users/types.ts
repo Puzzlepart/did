@@ -1,4 +1,3 @@
-import { ISpinnerProps } from '@fluentui/react'
 import { ActiveDirectoryUser, Role, User } from 'types'
 import { IAddMultiplePanelProps } from './AddMultiplePanel/types'
 import { IUserFormProps } from './UserForm/types'
@@ -47,7 +46,7 @@ export interface IUsersState {
   addMultiplePanel?: IAddMultiplePanelProps
 
   /**
-   * Properties for `Spinner`
+   * Text for the Progress bar
    */
-  progress?: ISpinnerProps
+  progress?: string
 }

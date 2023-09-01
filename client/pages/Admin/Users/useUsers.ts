@@ -13,7 +13,7 @@ import {
 } from './reducer/actions'
 import { useColumns } from './useColumns'
 import $users from './users.gql'
-import { useUsersCommands } from './useUsersCommands'
+import { useUsersMenuItems } from './useUsersMenuItems'
 
 /**
  * Component logic for `Users`
@@ -47,12 +47,11 @@ export function useUsers() {
   const onAddUsers = async (users: any[]) => {
     dispatch(HIDE_ADD_MULTIPLE_PANEL())
     dispatch(
-      SET_PROGRESS({
-        label: t('admin.users.bulkImportingUsersLabel', {
+      SET_PROGRESS(
+        t('admin.users.bulkImportingUsersLabel', {
           count: users.length
-        }),
-        labelPosition: 'right'
-      })
+        })
+      )
     )
     await addUsers({
       variables: {
@@ -67,13 +66,13 @@ export function useUsers() {
   }
 
   const columns = useColumns(context)
-  const commandBar = useUsersCommands(context)
+  const menuItems = useUsersMenuItems(context)
 
   return {
     context,
     refetch: query.refetch,
     columns,
-    onAddUsers,
-    commandBar
+    menuItems,
+    onAddUsers
   } as const
 }

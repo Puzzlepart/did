@@ -1,9 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  FluentProvider,
-  webLightTheme
-} from '@fluentui/react-components'
+import { Checkbox } from '@fluentui/react-components'
 import { Autocomplete, BasePanel } from 'components'
 import { TextField } from 'components/FormControl'
 import React, { FC, useContext } from 'react'
@@ -26,27 +21,14 @@ export const UserForm: FC<IUserFormProps> = (props) => {
       {..._.omit(props, 'user')}
       className={styles.root}
       isLightDismiss={true}
-      onRenderFooterContent={() => {
-        return (
-          <FluentProvider theme={webLightTheme} className={styles.footer}>
-            <Button
-              appearance='primary'
-              style={{ flex: 1 }}
-              disabled={!isFormValid()}
-              onClick={onSave}
-            >
-              {t('common.save')}
-            </Button>
-            <Button
-              appearance='secondary'
-              style={{ marginLeft: 8 }}
-              onClick={props.onDismiss}
-            >
-              {t('common.cancelButtonLabel')}
-            </Button>
-          </FluentProvider>
-        )
-      }}
+      footerActions={[
+        {
+          appearance: 'primary',
+          text: t('common.save'),
+          disabled: !isFormValid(),
+          onClick: onSave
+        }
+      ]}
     >
       {!props.user && (
         <div className={styles.inputContainer}>
