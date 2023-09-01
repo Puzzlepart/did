@@ -1,11 +1,9 @@
 import {
-  IChoiceGroupOptionStyleProps,
-  IChoiceGroupOptionStyles,
-  IIconProps,
-  IStyleFunctionOrObject
+  IIconProps
 } from '@fluentui/react'
 import { ButtonProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
+import { useReportsContext } from '../context'
 import { CHANGE_QUERY } from '../reducer/actions'
 import { IReportsState } from '../types'
 import { useReportsQueries } from './useReportsQueries'
@@ -31,8 +29,9 @@ export type UseReportsQueryOptions = {
 }
 
 export interface ReportsQueryButton
-  extends Pick<ButtonProps, 'title' | 'onClick'> {
+  extends Pick<ButtonProps, 'onClick'> {
   text: string
+  title?: string
   iconProps?: IIconProps
 }
 
@@ -41,51 +40,29 @@ export interface ReportsQueryButton
  *
  * @category Reports
  */
-export function useReportsQueryButtons({
-  queries,
-  state,
-  dispatch
-}: UseReportsQueryOptions): ReportsQueryButton[] {
+export function useReportsQueryButtons(): ReportsQueryButton[] {
+  const { state, queries, dispatch } = useReportsContext()
   const promotedReportLinks = state.reportLinks?.filter((l) => l.promoted) ?? []
-  const styles: IStyleFunctionOrObject<
-    IChoiceGroupOptionStyleProps,
-    IChoiceGroupOptionStyles
-  > = {
-    root: {
-      padding: 25,
-      maxWidth: 180
-    },
-    labelWrapper: {
-      maxWidth: 'none'
-    },
-    field: {
-      border: 'none',
-      ':before': {
-        display: 'none'
-      }
-    }
-  }
   return [
     ...queries.map<ReportsQueryButton>(
-      ({ itemKey, headerText, itemIcon }) =>
-        ({
-          text: headerText,
-          iconProps: { iconName: itemIcon },
-          onClick: () => dispatch(CHANGE_QUERY({ itemKey })),
-          styles
-        } as ReportsQueryButton)
+      ({ id, text, icon }) =>
+      ({
+        text,
+        iconProps: { iconName: icon },
+        onClick: () => dispatch(CHANGE_QUERY({ id }))
+      } as ReportsQueryButton)
     ),
     ...promotedReportLinks.map<ReportsQueryButton>(
       (link) =>
-        ({
-          text: link.name,
-          title: link.description,
-          iconProps: {
-            iconName: link.icon,
-            styles: { root: { color: link.iconColor } }
-          },
-          onClick: () => window.open(link.externalUrl, '_blank')
-        } as ReportsQueryButton)
+      ({
+        text: link.name,
+        title: link.description,
+        iconProps: {
+          iconName: link.icon,
+          styles: { root: { color: link.iconColor } }
+        },
+        onClick: () => window.open(link.externalUrl, '_blank')
+      } as ReportsQueryButton)
     )
   ]
 }

@@ -28,11 +28,11 @@ export function useLastMonthQuery(query = report_last_month): IReportsQuery {
   const { t } = useTranslation()
   const dateObject = new DateObject().add('-1month').toObject()
   return {
-    itemKey: 'last_month',
-    headerText: t('common.exportTypeLastMonth', {
+    id: 'last_month',
+    text: t('common.exportTypeLastMonth', {
       monthName: isBrowser ? `(${dateObject.monthName})` : ''
     }),
-    itemIcon: 'CalendarDay',
+    icon: 'CalendarDay',
     query,
     exportFileName: `TimeEntries-${s.capitalize(
       dateObject.monthName
@@ -63,11 +63,11 @@ export function useCurrentMonthQuery(
   const { t } = useTranslation()
   const dateObject = new DateObject().toObject()
   return {
-    itemKey: 'current_month',
-    headerText: t('common.exportTypeCurrentMonth', {
+    id: 'current_month',
+    text: t('common.exportTypeCurrentMonth', {
       monthName: isBrowser ? `(${dateObject.monthName})` : ''
     }),
-    itemIcon: 'Calendar',
+    icon: 'Calendar',
     query,
     exportFileName: `TimeEntries-${s.capitalize(
       dateObject.monthName
@@ -97,11 +97,11 @@ export function useLastYearQuery(query = report_last_year): IReportsQuery {
   const dateObject = new DateObject().toObject('year')
   const year = dateObject.year - 1
   return {
-    itemKey: 'last_year',
-    headerText: t('common.exportTypeLastYear', {
+    id: 'last_year',
+    text: t('common.exportTypeLastYear', {
       year: isBrowser ? `(${year})` : ''
     }),
-    itemIcon: 'Previous',
+    icon: 'Previous',
     query,
     exportFileName: `TimeEntries-${year}-{0}.xlsx`,
     reportLinkRef: year.toString()
@@ -127,11 +127,11 @@ export function useCurrentYearQuery(
   const { t } = useTranslation()
   const { year } = new DateObject().toObject('year')
   return {
-    itemKey: 'current_year',
-    headerText: t('common.exportTypeCurrentYear', {
+    id: 'current_year',
+    text: t('common.exportTypeCurrentYear', {
       year: isBrowser ? `(${year})` : ''
     }),
-    itemIcon: 'CalendarReply',
+    icon: 'CalendarReply',
     query,
     exportFileName: `TimeEntries-${year}-{0}.xlsx`,
     variables: {
@@ -155,9 +155,9 @@ export function useCurrentYearQuery(
 export function useForecastQuery(query = report_forecast): IReportsQuery {
   const { t } = useTranslation()
   return {
-    itemKey: 'forecast',
-    headerText: t('reports.forecast'),
-    itemIcon: 'TimeSheet',
+    id: 'forecast',
+    text: t('reports.forecast'),
+    icon: 'TimeSheet',
     query,
     exportFileName: 'Forecast-{0}.xlsx',
     variables: {
@@ -175,9 +175,9 @@ export function useSummaryQuery(): IReportsQuery {
   const { t } = useTranslation()
   const { periods, queries } = useTimesheetPeriods(8, true)
   return {
-    itemKey: 'summary',
-    headerText: t('reports.summaryHeaderText'),
-    itemIcon: 'CalendarWeek',
+    id: 'summary',
+    text: t('reports.summaryHeaderText'),
+    icon: 'CalendarWeek',
     hidden: true,
     periods,
     query: report_summary,
