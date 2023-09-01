@@ -26,8 +26,8 @@ export function useQueries(): any[] {
     lastYearQuery
   ].map((query) => ({
     ...query,
-    key: query.itemKey,
-    text: query.headerText
+    key: query.id,
+    text: query.text
   }))
 }
 
