@@ -1,9 +1,9 @@
 import { IContextualMenuItem } from '@fluentui/react'
 import { IListGroupProps, ListFilterState } from 'components/List/types'
 import { ITabProps } from 'components/Tabs'
+import { IDatePeriod } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { Project, ReportLink, TimesheetPeriodObject, User } from 'types'
-import { IDatePeriod } from 'DateUtils'
 
 /**
  * @category Reports

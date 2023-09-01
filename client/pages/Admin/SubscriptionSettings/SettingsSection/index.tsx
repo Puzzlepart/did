@@ -7,6 +7,7 @@ import {
   useId
 } from '@fluentui/react-components'
 import { SubText } from 'components'
+import { TabComponent } from 'components/Tabs'
 import get from 'get-value'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
@@ -14,7 +15,6 @@ import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { SliderField } from './SliderField'
 import { ISettingsSectionProps } from './types'
-import { TabComponent } from 'components/Tabs'
 
 /**
  * @category SubscriptionSettings

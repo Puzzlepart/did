@@ -24,7 +24,7 @@ import { useUsers } from './useUsers'
 export const Users: FC<ITabProps> = () => {
   const { t } = useTranslation()
   const { context, columns, menuItems, onAddUsers } = useUsers()
-  
+
   return (
     <UsersContext.Provider value={context}>
       <Tabs

@@ -1,9 +1,9 @@
 import { List } from 'components'
+import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelForm } from './LabelForm'
 import { useLabels } from './useLabels'
-import { TabComponent } from 'components/Tabs'
 
 /**
  * @ignore

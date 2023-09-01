@@ -3,8 +3,8 @@ import { Toast } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './SubscriptionSettings.module.scss'
 import { SubscriptionContext } from './context'
+import styles from './SubscriptionSettings.module.scss'
 import { useSubscriptionSettings } from './useSubscriptionSettings'
 
 /**

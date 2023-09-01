@@ -1,10 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  IconPicker,
-  LabelPicker,
-  SearchCustomer,
-} from 'components'
+import { IconPicker, LabelPicker, SearchCustomer } from 'components'
 import {
   ChecboxControlOptions,
   CheckboxControl,
@@ -12,6 +8,7 @@ import {
 } from 'components/FormControl'
 import { TextControl } from 'components/FormControl/TextControl'
 import { TextControlOptions } from 'components/FormControl/TextControl/types'
+import { TabComponent } from 'components/Tabs'
 import packageFile from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +17,6 @@ import { ProjectFormOptions } from './ProjectFormOptions'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
-import { TabComponent } from 'components/Tabs'
 
 /**
  * @category Projects

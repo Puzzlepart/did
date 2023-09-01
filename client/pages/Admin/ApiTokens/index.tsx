@@ -1,5 +1,6 @@
 import { Icon } from '@fluentui/react'
 import { List, Toast, UserMessage } from 'components'
+import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
@@ -8,7 +9,6 @@ import _ from 'underscore'
 import { ApiTokenForm } from './ApiTokenForm'
 import styles from './ApiTokens.module.scss'
 import { useApiTokens } from './useApiTokens'
-import { TabComponent } from 'components/Tabs'
 
 /**
  * Component for handling API tokens.

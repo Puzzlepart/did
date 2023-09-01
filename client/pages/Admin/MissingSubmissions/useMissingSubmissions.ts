@@ -1,11 +1,15 @@
 import { IDatePeriod } from 'DateUtils'
-import { useTimesheetPeriods } from 'hooks'
+import { TabItems } from 'components/Tabs'
+import { ComponentLogicHook, useTimesheetPeriods } from 'hooks'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { any } from 'underscore'
+import { List } from './List'
 import { IMissingSubmissionUser } from './MissingSubmissionUser'
 import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
 
-interface IMissingSubmissionPeriod extends IDatePeriod {
+export interface IMissingSubmissionPeriod extends IDatePeriod {
   users?: IMissingSubmissionUser[]
 }
 
@@ -81,10 +85,20 @@ function getUsersWithMissingPeriods(
 /**
  * Component logic hook for `<MissingSubmissions />`
  */
-export function useMissingSubmissions() {
+export const useMissingSubmissions: ComponentLogicHook<null, {
+  tabs: TabItems
+}> = () => {
+  const { t } = useTranslation()
   const { periods: datePeriods } = useTimesheetPeriods()
   const data = useMissingSubmissionsQuery()
   const periods = getPeriodsWithMissingSubmissions(data, datePeriods)
   const users = getUsersWithMissingPeriods(data, datePeriods)
-  return { periods, users } as const
+  const tabs = useMemo<TabItems>(() => ({
+    all: [List, t('common.allWeeks'), { users }],
+    ...periods.reduce<TabItems>((tabs, period) => {
+      tabs[period.id] = [List, period.name, {   period  }]
+      return tabs
+    }, {})
+  }), [periods, users])
+  return { tabs } as const
 }
