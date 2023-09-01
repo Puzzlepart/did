@@ -4,10 +4,15 @@ import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
 
 export const Tabs: FC<ITabsProps> = (props) => {
-  const { itemKeys, selectedValue, onTabSelect, Component } = useTabs(props)
+  const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =
+    useTabs(props)
   return (
     <div>
-      <TabList selectedValue={selectedValue} onTabSelect={onTabSelect}>
+      <TabList
+        vertical={props.vertical}
+        selectedValue={selectedValue}
+        onTabSelect={onTabSelect}
+      >
         {itemKeys.map((key) => {
           const [, title] = props.items[key]
           return (
@@ -17,12 +22,14 @@ export const Tabs: FC<ITabsProps> = (props) => {
           )
         })}
       </TabList>
-      <Component id={selectedValue} />
+      <Component {...componentProps} />
+      {props.children}
     </div>
   )
 }
 
 Tabs.defaultProps = {
   items: {},
-  level: 2
+  level: 2,
+  vertical: false
 }
