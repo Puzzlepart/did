@@ -33,4 +33,4 @@ export interface ITextFieldProps extends Omit<TextareaProps, 'onChange'> {
 
 export interface ITextControlProps
   extends FormInputControlBase<TextControlOptions>,
-  Omit<ITextFieldProps, 'name' | 'value' | 'onChange'> { }
+    Omit<ITextFieldProps, 'name' | 'value' | 'onChange'> {}

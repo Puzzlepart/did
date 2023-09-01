@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react'
 import { IFormControlProps } from './types'
 
 export interface IFormControlContext {
-    model: IFormControlProps['model']
+  model: IFormControlProps['model']
 }
 
 export const FormControlContext = createContext<IFormControlContext>(null)

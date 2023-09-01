@@ -25,7 +25,8 @@ export const TextField: ReusableComponent<ITextFieldProps> = (props) => {
         <Input
           value={props.value}
           onChange={props.onChange}
-          className={styles.field} />
+          className={styles.field}
+        />
       )}
       <div className={styles.description}>
         <ReactMarkdown>{props.description}</ReactMarkdown>

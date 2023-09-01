@@ -3,8 +3,8 @@ import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import styles from './FormControl.module.scss'
 import { FormControlContext } from './context'
+import styles from './FormControl.module.scss'
 import { IFormControlProps } from './types'
 
 /**
@@ -42,9 +42,8 @@ FormControl.defaultProps = {
 }
 
 export * from './CheckboxControl'
+export * from './context'
 export * from './DropdownControl'
 export * from './TextControl'
 export * from './types'
-export * from './context'
 export * from './useFormControls'
-
