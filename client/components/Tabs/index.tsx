@@ -6,6 +6,7 @@ import { useTabs } from './useTabs'
 export const Tabs: FC<ITabsProps> = (props) => {
   const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =
     useTabs(props)
+
   return (
     <div>
       <TabList

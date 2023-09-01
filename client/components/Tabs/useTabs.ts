@@ -29,6 +29,9 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = ({
   const { dispatch } = useAppContext()
   const itemKeys = Object.keys(items)
   const [selectedValue, setSelectedValue] = useState(itemKeys[0])
+  const [selectedComponent, selectedText, selectedComponentProps] = items[
+    selectedValue
+  ] ?? [null, null, {}]
 
   const onTabSelect = useCallback<SelectTabEventHandler>(
     (_, data) => {
@@ -37,7 +40,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = ({
       dispatch(
         UPDATE_BREADCRUMB({
           key: key,
-          text: items[key][1],
+          text: selectedText,
           level
         })
       )
@@ -46,13 +49,13 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = ({
   )
 
   const Component = useMemo<FunctionComponent<ITabProps>>(
-    () => items[selectedValue][0],
+    () => selectedComponent,
     [items, selectedValue]
   )
 
   const componentProps = useMemo<any>(
     () => ({
-      ...items[selectedValue][2],
+      ...selectedComponentProps,
       id: selectedValue
     }),
     [items, selectedValue]
