@@ -2,14 +2,14 @@ import { ToolbarButton } from '@fluentui/react-components'
 import { SET_DATE_RANGE } from 'pages/Timesheet/reducer/actions'
 import { TimesheetDateRange } from 'pages/Timesheet/TimesheetDateRange'
 import React, { FC } from 'react'
+import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../../context'
-import { CalendarToday } from '../icons'
 
 export const TodayButton: FC = () => {
   const { state, dispatch } = useTimesheetContext()
   return (
     <ToolbarButton
-      icon={<CalendarToday />}
+      icon={getFluentIcon('CalendarToday')}
       onClick={() => {
         dispatch(
           SET_DATE_RANGE(

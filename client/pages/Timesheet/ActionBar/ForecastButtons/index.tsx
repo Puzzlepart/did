@@ -4,8 +4,8 @@ import { useAppContext } from 'AppContext'
 import { Overview } from 'pages/Timesheet/Views/Overview'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../../context'
-import { CalendarCancel, Timer } from '../icons'
 
 /**
  * Renders the forecast buttons for the timesheet action bar.
@@ -26,7 +26,7 @@ export const ForecastButtons: FC = () => {
   return (
     <>
       <ToolbarButton
-        icon={<Timer />}
+        icon={getFluentIcon('Timer')}
         onClick={() => onSubmitPeriod(true)}
         disabled={!!state.loading}
         style={{ margin: '0 0 0 6px' }}
@@ -34,7 +34,7 @@ export const ForecastButtons: FC = () => {
         {t('timesheet.forecastHoursText')}
       </ToolbarButton>
       <ToolbarButton
-        icon={<CalendarCancel />}
+        icon={getFluentIcon('CalendarCancel')}
         onClick={() => onUnsubmitPeriod(true)}
         disabled={!!state.loading}
         style={{ margin: '0 0 0 6px' }}

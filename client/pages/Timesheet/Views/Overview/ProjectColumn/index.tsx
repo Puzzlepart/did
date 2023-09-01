@@ -1,14 +1,11 @@
 import { Icon } from '@fluentui/react'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
-import {
-  AddCircle24Regular,
-  CalendarCancel24Regular
-} from '@fluentui/react-icons'
 import { ProjectLink, ProjectPopover, UserMessage } from 'components'
 import { TFunction } from 'i18next'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
+import { getFluentIcon } from 'utils'
 import {
   CLEAR_MANUAL_MATCH,
   IGNORE_EVENT,
@@ -77,14 +74,14 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
           actions={[
             {
               content: t('timesheet.resolveProjectButtonLabel'),
-              icon: <AddCircle24Regular />,
+              icon: getFluentIcon('AddCircle'),
               onClick: () => {
                 dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))
               }
             },
             {
               content: t('timesheet.ignoreEventButtonLabel'),
-              icon: <CalendarCancel24Regular />,
+              icon: getFluentIcon('CalendarCancel'),
               onClick: () => {
                 dispatch(IGNORE_EVENT({ id: event.id }))
               }

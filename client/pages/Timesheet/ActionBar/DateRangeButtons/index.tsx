@@ -4,7 +4,7 @@ import {
   ToolbarRadioGroup
 } from '@fluentui/react-components'
 import React, { FC } from 'react'
-import { CalendarMonth, CalendarWorkWeek } from '../icons'
+import { getFluentIcon } from 'utils'
 
 export const DateRangeButtons: FC = () => {
   return (
@@ -12,12 +12,12 @@ export const DateRangeButtons: FC = () => {
       <ToolbarRadioButton
         name='dateRange'
         value={DateRangeType.Week.toString()}
-        icon={<CalendarMonth />}
+        icon={getFluentIcon('CalendarMonth')}
       />
       <ToolbarRadioButton
         name='dateRange'
         value={DateRangeType.Month.toString()}
-        icon={<CalendarWorkWeek />}
+        icon={getFluentIcon('CalendarWorkWeek')}
         style={{ margin: '0 0 0 6px' }}
       />
     </ToolbarRadioGroup>

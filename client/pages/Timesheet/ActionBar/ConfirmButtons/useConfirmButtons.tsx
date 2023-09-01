@@ -1,10 +1,10 @@
 import { DateRangeType } from '@fluentui/react'
 import { ToolbarButtonProps } from '@fluentui/react-components'
 import { Overview } from 'pages/Timesheet/Views/Overview'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../../context'
-import { CalendarCancel, CalendarSync } from '../icons'
 
 /**
  * Custom hook that returns button properties and text for confirming or unconfirming timesheet hours.
@@ -14,13 +14,12 @@ import { CalendarCancel, CalendarSync } from '../icons'
 export function useConfirmButtons() {
   const { t } = useTranslation()
   const { state, onSubmitPeriod, onUnsubmitPeriod } = useTimesheetContext()
+  const iconName = state.selectedPeriod?.isConfirmed
+    ? 'CalendarCancel'
+    : 'CalendarSync'
   const buttonProps: ToolbarButtonProps = useMemo(
     () => ({
-      icon: state.selectedPeriod?.isConfirmed ? (
-        <CalendarCancel />
-      ) : (
-        <CalendarSync />
-      ),
+      icon: getFluentIcon(iconName),
       disabled: !!state.loading,
       onClick: () => {
         if (state.selectedPeriod?.isConfirmed) {

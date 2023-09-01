@@ -1,18 +1,12 @@
 import { Icon } from '@fluentui/react'
 import { Link } from '@fluentui/react-components'
-import {
-  bundleIcon,
-  CheckmarkFilled,
-  CheckmarkRegular
-} from '@fluentui/react-icons'
 import { DeleteLink, EditLink } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
+import { getFluentIcon } from 'utils'
 import { generateColumn as col } from 'utils/generateColumn'
-
-const CheckmarkIcon = bundleIcon(CheckmarkFilled, CheckmarkRegular)
 
 type UseColumns = {
   onEdit: (reportLink: ReportLink) => void
@@ -33,7 +27,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       (reportLink: ReportLink) =>
         reportLink.published ? (
           <div style={{ textAlign: 'center' }}>
-            <CheckmarkIcon style={{ color: '#107c10' }} />
+            {getFluentIcon('Checkmark', true, '#107c10')}
           </div>
         ) : null
     ),
@@ -47,7 +41,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       (reportLink: ReportLink) =>
         reportLink.promoted ? (
           <div style={{ textAlign: 'center' }}>
-            <CheckmarkIcon style={{ color: '#107c10' }} />
+            {getFluentIcon('Checkmark', true, '#107c10')}
           </div>
         ) : null
     ),

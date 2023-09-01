@@ -1,18 +1,12 @@
 import { Button } from '@fluentui/react-components'
-import {
-  bundleIcon,
-  PeopleTeam24Filled,
-  PeopleTeam24Regular
-} from '@fluentui/react-icons'
 import { useAppContext } from 'AppContext'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
+import { getFluentIcon } from 'utils'
 import styles from './TeamsReminderButton.module.scss'
 import { ITeamsReminderButtonProps } from './types'
 import { useStartTeamsConversation } from './useStartTeamsConversation'
-
-const Icon = bundleIcon(PeopleTeam24Filled, PeopleTeam24Regular)
 
 export const TeamsReminderButton: FC<ITeamsReminderButtonProps> = (props) => {
   const { t } = useTranslation()
@@ -23,7 +17,7 @@ export const TeamsReminderButton: FC<ITeamsReminderButtonProps> = (props) => {
     <div className={styles.root}>
       <Button
         appearance='primary'
-        icon={<Icon />}
+        icon={getFluentIcon('PeopleTeam')}
         onClick={() => startTeamsConversation()}
         {...pick(props, 'title', 'text')}
       >

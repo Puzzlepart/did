@@ -1,11 +1,3 @@
-import {
-  ArrowImport24Filled,
-  ArrowImport24Regular,
-  PeopleAdd24Filled,
-  PeopleAdd24Regular,
-  PersonSync24Filled,
-  PersonSync24Regular
-} from '@fluentui/react-icons'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { Progress } from 'components/Progress'
 import { usePermissions } from 'hooks/user/usePermissions'
@@ -36,7 +28,7 @@ export function useUsersMenuItems(context: IUsersContext) {
   return useMemo(() => {
     return [
       new ListMenuItem(t('admin.users.addNewUser'))
-        .withIcon(PeopleAdd24Regular, PeopleAdd24Filled)
+        .withIcon('PeopleAdd', true)
         .setDisabled(
           context.state.loading ||
             _.isEmpty(context.state.availableAdUsers) ||
@@ -46,13 +38,13 @@ export function useUsersMenuItems(context: IUsersContext) {
           headerText: t('admin.users.addNewUser')
         }),
       new ListMenuItem(t('admin.users.bulkImportUsersLabel'))
-        .withIcon(ArrowImport24Regular, ArrowImport24Filled)
+        .withIcon('ArrowImport', true)
         .setDisabled(
           context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS)
         )
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
-        .withIcon(PersonSync24Regular, PersonSync24Filled)
+        .withIcon('PersonSync', true)
         .setDisabled(
           context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS)
         )

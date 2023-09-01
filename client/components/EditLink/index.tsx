@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { Button } from '@fluentui/react-components'
-import { PeopleEdit24Regular } from '@fluentui/react-icons'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils'
 import styles from './EditLink.module.scss'
 import { IEditLinkProps } from './types'
 
@@ -19,7 +19,7 @@ export const EditLink: FC<IEditLinkProps> = (props) => {
         className={styles.root}
         onClick={props.onClick}
         appearance='subtle'
-        icon={<PeopleEdit24Regular />}
+        icon={getFluentIcon('PeopleEdit')}
       >
         <span className={styles.text}>{t('common.editLabel')}</span>
       </Button>

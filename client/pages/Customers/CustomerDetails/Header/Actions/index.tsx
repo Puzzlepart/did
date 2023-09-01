@@ -23,7 +23,8 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           <Button
             appearance='transparent'
             icon={getFluentIcon('WebAsset')}
-            onClick={() => window.open(state.selected?.webLink, '_blank')}>
+            onClick={() => window.open(state.selected?.webLink, '_blank')}
+          >
             {t('customers.webLinkText')}
           </Button>
         )}
@@ -31,7 +32,10 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           <Button
             appearance='transparent'
             icon={getFluentIcon('System')}
-            onClick={() => window.open(state.selected?.externalSystemURL, '_blank')}>
+            onClick={() =>
+              window.open(state.selected?.externalSystemURL, '_blank')
+            }
+          >
             {t('customers.externalSystemUrlText')}
           </Button>
         )}
@@ -40,7 +44,8 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
             <Button
               appearance='transparent'
               icon={getFluentIcon('TableEdit')}
-              onClick={toggleEditPanel}>
+              onClick={toggleEditPanel}
+            >
               {t('customers.editButtonLabel')}
             </Button>
             <CustomerForm

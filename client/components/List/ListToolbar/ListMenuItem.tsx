@@ -1,9 +1,8 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import { ICommandBarItemProps, Icon } from '@fluentui/react'
-import { bundleIcon } from '@fluentui/react-icons'
-import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
+import { FluentIconName, getFluentIcon } from 'utils'
 
 /**
  * Represents a menu item in the `ListMenuItem` component. Supports
@@ -32,7 +31,7 @@ export class ListMenuItem {
    * the `<Icon />` component from `@fluentui/react`
    * will be used.
    */
-  icon?: FluentIcon | string
+  icon?: string | JSX.Element
 
   /**
    * On click event handler.
@@ -83,16 +82,17 @@ export class ListMenuItem {
   /**
    * Sets the icon for the `ListMenuItem`.
    *
-   * @param icon The FluentIcon or string representing the icon to set.@
-   * @param filledIcon The filled FluentIcon to set, will be bundled
+   * @param icon The FluentIcon or string representing the icon to set.
+   * @param useFluentIcon Whether to use FluentIcon or not. Defaults to false.
+   *
    * with the FluentIcon provided in `icon` (optional).
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public withIcon(icon: ListMenuItem['icon'], filledIcon?: FluentIcon) {
+  public withIcon(icon: string, useFluentIcon?: boolean) {
     this.icon = icon
-    if (typeof icon !== 'string' && filledIcon) {
-      this.icon = bundleIcon(icon, filledIcon)
+    if (useFluentIcon) {
+      this.icon = getFluentIcon(icon as FluentIconName)
     }
     return this
   }

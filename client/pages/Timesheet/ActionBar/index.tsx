@@ -1,6 +1,7 @@
 import { Toolbar, ToolbarButton } from '@fluentui/react-components'
 import { Progress } from 'components/Progress'
 import React from 'react'
+import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../context'
 import { NEXT_PERIOD, PREVIOUS_PERIOD } from '../reducer/actions'
 import styles from './ActionBar.module.scss'
@@ -8,7 +9,6 @@ import { ConfirmButtons } from './ConfirmButtons'
 import { DateRangeButtons } from './DateRangeButtons'
 import { DateRangePicker } from './DateRangePicker'
 import { ForecastButtons } from './ForecastButtons'
-import { ArrowCircleLeft, ArrowCircleRight } from './icons'
 import { NavigatePeriodsButtons } from './NavigatePeriodsButtons'
 import { TodayButton } from './TodayButton'
 import { useActionBar } from './useActionBar'
@@ -37,12 +37,12 @@ export const ActionBar = () => {
         >
           <TodayButton />
           <ToolbarButton
-            icon={<ArrowCircleLeft />}
+            icon={getFluentIcon('ArrowCircleLeft')}
             onClick={() => dispatch(PREVIOUS_PERIOD())}
             disabled={!!state.loading}
           />
           <ToolbarButton
-            icon={<ArrowCircleRight />}
+            icon={getFluentIcon('ArrowCircleRight')}
             onClick={() => dispatch(NEXT_PERIOD())}
             disabled={!!state.loading}
           />
