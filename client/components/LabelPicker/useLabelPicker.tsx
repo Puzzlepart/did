@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useQuery } from '@apollo/client'
 import { useEffect, useRef, useState } from 'react'
 import { LabelObject } from 'types'

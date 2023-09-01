@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DataGridProps } from '@fluentui/react-components'
 import { useMemo } from 'react'
 import { IListProps } from '../types'

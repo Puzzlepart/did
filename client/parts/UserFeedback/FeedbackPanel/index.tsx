@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { ChoiceGroup, Dropdown, IPanelProps, Toggle } from '@fluentui/react'
 import { useAppContext } from 'AppContext'

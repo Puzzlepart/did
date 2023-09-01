@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { Autocomplete } from '../Autocomplete'

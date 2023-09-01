@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerLink } from 'components/CustomerLink'
 import { ProjectLink } from 'components/ProjectLink'
 import $date from 'DateUtils'

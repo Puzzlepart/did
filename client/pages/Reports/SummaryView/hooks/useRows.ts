@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { IReportsState } from 'pages/Reports/types'
 import { TimesheetPeriodObject } from 'types'
 

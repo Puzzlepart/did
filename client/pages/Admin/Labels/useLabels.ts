@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation, useQuery } from '@apollo/client'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { useCallback, useEffect, useState } from 'react'

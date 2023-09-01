@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { UserMessage } from 'components'
 import { useFormControlContext } from 'components/FormControl'

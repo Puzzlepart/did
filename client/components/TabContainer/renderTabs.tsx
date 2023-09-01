@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
 import { PivotItem } from '@fluentui/react'
 import { ContextUser } from 'AppContext'

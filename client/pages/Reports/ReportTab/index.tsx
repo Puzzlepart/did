@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { TabComponent } from 'components'
 import React, { useContext } from 'react'
 import _ from 'underscore'

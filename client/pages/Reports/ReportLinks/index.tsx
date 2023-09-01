@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ActionButton } from '@fluentui/react'
 import { UserMessage } from 'components'
 import React, { FC, useContext } from 'react'

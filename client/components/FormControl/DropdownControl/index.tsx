@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Dropdown } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'

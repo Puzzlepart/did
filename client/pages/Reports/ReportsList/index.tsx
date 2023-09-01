@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { CheckboxVisibility } from '@fluentui/react'
 import { List, TabComponent, UserMessage } from 'components'
 import { Progress } from 'components/Progress'

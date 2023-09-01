@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useMap } from 'hooks/common/useMap'
 import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
 import { useEffect } from 'react'

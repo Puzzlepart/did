@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useState } from 'react'
 import s from 'underscore.string'
 import { IFilterItemProps } from './types'

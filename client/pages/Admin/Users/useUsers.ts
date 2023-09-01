@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation, useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'

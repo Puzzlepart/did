@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ICommandBarProps } from '@fluentui/react'
 import React, { useMemo } from 'react'
 import _ from 'underscore'

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppContext } from 'AppContext'
 import { useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ReportsContext } from 'pages'
 import { useContext } from 'react'
 import { Project } from 'types'

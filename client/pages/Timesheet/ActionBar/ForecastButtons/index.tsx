@@ -29,6 +29,7 @@ export const ForecastButtons: FC = () => {
         icon={<Timer />}
         onClick={() => onSubmitPeriod(true)}
         disabled={!!state.loading}
+        style={{ margin: '0 0 0 6px' }}
       >
         {t('timesheet.forecastHoursText')}
       </ToolbarButton>
@@ -36,6 +37,7 @@ export const ForecastButtons: FC = () => {
         icon={<CalendarCancel />}
         onClick={() => onUnsubmitPeriod(true)}
         disabled={!!state.loading}
+        style={{ margin: '0 0 0 6px' }}
       >
         {t('timesheet.unforecastHoursText')}
       </ToolbarButton>

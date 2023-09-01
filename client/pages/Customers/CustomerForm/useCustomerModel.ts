@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
 import { CustomerModel } from './CustomerModel'
 import { ICustomerFormProps } from './types'

@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-array-reduce */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import $date, { DateObject } from 'DateUtils'
 import packageFile from 'package'
 import { useMemo } from 'react'

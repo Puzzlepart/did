@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import createActivityDetector from 'activity-detector'
 import { IAppContext } from 'AppContext'
 import { usePages } from 'pages/usePages'

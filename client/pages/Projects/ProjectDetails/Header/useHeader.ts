@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { IBreadcrumbProps } from '@fluentui/react'
 import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer/actions'
 import { useMemo } from 'react'

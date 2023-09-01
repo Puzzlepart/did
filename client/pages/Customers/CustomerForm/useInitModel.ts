@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks/common/useMap'
 import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
 import { useEffect } from 'react'

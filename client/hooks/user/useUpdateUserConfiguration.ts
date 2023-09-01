@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useMutation } from '@apollo/client'
 import { useCallback, useEffect } from 'react'
 import $updateUserConfiguration from './update-user-configuration.gql'

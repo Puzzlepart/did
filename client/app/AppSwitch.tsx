@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import React, { FC, useEffect } from 'react'

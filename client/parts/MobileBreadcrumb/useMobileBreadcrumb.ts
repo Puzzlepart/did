@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unicorn/prevent-abbreviations */
 import { IBreadcrumbItem } from '@fluentui/react'
 import { useAppContext } from 'AppContext'

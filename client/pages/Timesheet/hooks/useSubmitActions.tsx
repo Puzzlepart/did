@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { ApolloQueryResult, useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
 import { Dispatch, useCallback } from 'react'

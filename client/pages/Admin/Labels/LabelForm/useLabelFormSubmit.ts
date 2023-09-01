@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
 import { ISubmitProps } from 'components/FormControl'

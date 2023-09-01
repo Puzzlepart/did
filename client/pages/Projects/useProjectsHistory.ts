@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { createPath } from 'utils/createPath'

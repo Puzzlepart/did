@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { IBreadcrumbProps } from '@fluentui/react'
 import { CustomersContext } from 'pages/Customers/context'
 import { SET_SELECTED_CUSTOMER } from 'pages/Customers/reducer/actions'

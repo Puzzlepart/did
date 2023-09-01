@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Icon, PivotItem } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { TabContainer, UserMessage } from 'components'

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
 import _ from 'underscore'

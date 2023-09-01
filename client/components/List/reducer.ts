@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { createAction, createReducer, current } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import get from 'get-value'

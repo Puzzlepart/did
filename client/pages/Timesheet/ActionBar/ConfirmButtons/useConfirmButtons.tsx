@@ -24,7 +24,8 @@ export function useConfirmButtons() {
       } else {
         onSubmitPeriod(false)
       }
-    }
+    },
+    style: { margin: '0 0 0 6px' }
   }
   const buttonText = isConfirmed
     ? t('timesheet.unconfirmHoursText')

@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { INIT, RESET } from './actions'
 import styles from './Autocomplete.module.scss'

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks'
 import color from 'randomcolor'
 import { useEffect } from 'react'

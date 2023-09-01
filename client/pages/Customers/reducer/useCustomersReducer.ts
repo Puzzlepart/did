@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useReducer } from 'react'
 import createReducer from '.'
 import { ICustomersUrlParameters } from '../types'

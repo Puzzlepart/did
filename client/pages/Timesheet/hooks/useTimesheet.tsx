@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
 import { useTimesheetReducer } from '../reducer'
 import { ITimesheetContext } from '../types'

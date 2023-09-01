@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { BaseFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'

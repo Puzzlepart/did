@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DateRangeType } from '@fluentui/react'
 import get from 'get-value'
 import { useMemo } from 'react'

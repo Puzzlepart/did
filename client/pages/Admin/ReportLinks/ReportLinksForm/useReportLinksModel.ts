@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks'
 import { useEffect } from 'react'
 import { convertToMap } from 'utils/convertToMap'

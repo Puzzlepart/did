@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { merge, Sticky, StickyPositionType } from '@fluentui/react'
 import React, { FC, useMemo, useRef } from 'react'
 import { useListContext } from '../context'

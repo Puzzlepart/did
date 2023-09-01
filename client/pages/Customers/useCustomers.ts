@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'

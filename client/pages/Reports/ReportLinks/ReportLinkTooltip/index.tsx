@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { TooltipHost } from '@fluentui/react'
 import $date from 'DateUtils'
 import React, { FC } from 'react'

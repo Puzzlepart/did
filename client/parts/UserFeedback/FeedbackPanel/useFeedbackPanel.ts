@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { IPanelProps } from '@fluentui/react'
 import { useFormControls } from 'components/FormControl'
 import { useEffect } from 'react'

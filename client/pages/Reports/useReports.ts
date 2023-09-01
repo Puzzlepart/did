@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'

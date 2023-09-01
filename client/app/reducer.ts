@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { useMemo, useReducer } from 'react'
 import _ from 'underscore'

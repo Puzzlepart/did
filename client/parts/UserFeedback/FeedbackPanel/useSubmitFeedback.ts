@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { IPanelProps } from '@fluentui/react'
 import { ISubmitProps } from 'components/FormControl'
