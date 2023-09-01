@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import { PermissionScope } from 'security'
 
 /**
  * Props for the Tabs component.
@@ -16,4 +17,19 @@ export interface ITabsProps {
    * @default 2
    */
   level?: number
+}
+
+/**
+ * Props for a single tab in a tabbed interface.
+ */
+export interface ITabProps {
+  /**
+   * An optional ID for the tab.
+   */
+  id?: string
+
+  /**
+   * Permission scope required to view the tab.
+   */
+  permission?: PermissionScope
 }

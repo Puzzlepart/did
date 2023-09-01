@@ -1,7 +1,6 @@
-import { PivotItem } from '@fluentui/react'
-import { List, TabComponent, TabContainer } from 'components'
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import { ITabProps } from 'components/Tabs/types'
+import React, { FC } from 'react'
+import { PermissionScope } from 'security'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
 import { HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM } from './reducer/actions'
@@ -18,13 +17,12 @@ import { useUsers } from './useUsers'
  *
  * @ignore
  */
-export const Users: TabComponent = () => {
-  const { t } = useTranslation()
-  const { context, columns, onAddUsers, commandBar } = useUsers()
+export const Users: FC<ITabProps> = () => {
+  const { context, onAddUsers } = useUsers()
 
   return (
     <UsersContext.Provider value={context}>
-      <TabContainer level={3}>
+      {/* <TabContainer level={3}>
         <PivotItem
           itemKey='active'
           headerText={t('admin.users.activeHeaderText')}
@@ -46,7 +44,7 @@ export const Users: TabComponent = () => {
             columns={columns('disabled')}
           />
         </PivotItem>
-      </TabContainer>
+      </TabContainer> */}
       <UserForm
         {...context.state.userForm}
         isOpen={!!context.state.userForm}
@@ -63,4 +61,8 @@ export const Users: TabComponent = () => {
       />
     </UsersContext.Provider>
   )
+}
+
+Users.defaultProps = {
+  permission: PermissionScope.LIST_USERS
 }

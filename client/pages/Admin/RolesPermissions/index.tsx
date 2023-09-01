@@ -1,5 +1,6 @@
-import { List, TabComponent, Toast } from 'components'
-import React from 'react'
+import { List, Toast } from 'components'
+import { ITabProps } from 'components/Tabs/types'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RolePanel } from './RolePanel'
 import styles from './Roles.module.scss'
@@ -8,7 +9,7 @@ import { useRoles } from './useRoles'
 /**
  * @ignore
  */
-export const Roles: TabComponent = () => {
+export const RolesPermissions: FC<ITabProps> = () => {
   const { t } = useTranslation()
   const { query, columns, panel, setPanel, toast } = useRoles()
   return (

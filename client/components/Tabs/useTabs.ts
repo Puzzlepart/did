@@ -3,7 +3,7 @@ import { useAppContext } from 'AppContext'
 import { ComponentLogicHook } from 'hooks'
 import { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
-import { ITabsProps } from './types'
+import { ITabProps, ITabsProps } from './types'
 
 /**
  * A custom hook that manages the state of a tabbed interface.
@@ -20,7 +20,7 @@ export const useTabs: ComponentLogicHook<
     itemKeys: string[]
     selectedValue: string
     onTabSelect: SelectTabEventHandler
-    Component: FunctionComponent<{ id: string }>
+    Component: FunctionComponent<ITabProps>
   }
 > = ({ level, items }) => {
   const { dispatch } = useAppContext()
@@ -42,7 +42,7 @@ export const useTabs: ComponentLogicHook<
     [setSelectedValue]
   )
 
-  const Component = useMemo<FunctionComponent<{ id: string }>>(
+  const Component = useMemo<FunctionComponent<ITabProps>>(
     () => items[selectedValue][0],
     [items, selectedValue]
   )
