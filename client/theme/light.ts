@@ -5,7 +5,6 @@ export default {
   components: {
     logo: {
       styles: {
-        background: '#252422',
         color: '#fff'
       }
     },

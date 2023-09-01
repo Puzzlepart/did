@@ -5,8 +5,7 @@ export default {
   components: {
     logo: {
       styles: {
-        background: '#fff',
-        color: '#252422'
+        color: '#252422',
       }
     },
     motto: {
