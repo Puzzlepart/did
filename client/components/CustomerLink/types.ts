@@ -6,4 +6,5 @@ import { Customer } from 'types'
  */
 export interface ICustomerLinkProps extends HTMLAttributes<HTMLDivElement> {
   customer: Customer
+  text?: string
 }

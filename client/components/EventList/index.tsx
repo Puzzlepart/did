@@ -18,6 +18,7 @@ export const EventList: ReusableComponent<IEventListProps> = (props) => {
     <div className={styles.root} hidden={props.hidden}>
       <List
         disablePreview={props.disablePreview}
+        hideToolbar={props.hideToolbar}
         enableShimmer={props.enableShimmer}
         columns={columns}
         items={props.items}

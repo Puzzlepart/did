@@ -1,5 +1,5 @@
-import { merge, Sticky, StickyPositionType } from '@fluentui/react'
-import React, { FC, useMemo, useRef } from 'react'
+import { merge } from '@fluentui/react'
+import React, { FC, useRef } from 'react'
 import { useListContext } from '../context'
 import { ListToolbar } from '../ListToolbar'
 import { IListHeaderProps } from './types'
@@ -11,20 +11,10 @@ export const ListHeader: FC<IListHeaderProps> = ({
   const context = useListContext()
   const mergedHeaderProps = merge(headerProps, context.props.columnHeaderProps)
   const root = useRef(null)
-  const stickyHeader = useMemo(
-    () => (
-      <Sticky
-        ref={root}
-        key='ListHeader'
-        stickyPosition={StickyPositionType.Header}
-        isScrollSynced={true}
-      >
-        <ListToolbar root={root} />
-        {defaultRender(mergedHeaderProps)}
-      </Sticky>
-    ),
-    []
-  )
+  const hideToolbar =
+    context.props.menuItems?.length === 0 &&
+    context.props.commandBar?.items?.length === 0 &&
+    context.props.commandBar?.farItems?.length === 0
 
   if (!!context.props.columnHeaderProps?.onRender) {
     return context.props.columnHeaderProps.onRender(
@@ -39,5 +29,12 @@ export const ListHeader: FC<IListHeaderProps> = ({
     return onRenderColumnHeader(props)
   }
 
-  return stickyHeader
+  return hideToolbar ? (
+    defaultRender(mergedHeaderProps)
+  ) : (
+    <div ref={root}>
+      <ListToolbar root={root} />
+      {defaultRender(mergedHeaderProps)}
+    </div>
+  )
 }

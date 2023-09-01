@@ -182,6 +182,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Menu items to show in `<Toolbar />` if using the preview mode.
    */
   menuItems?: ListMenuItem[]
+
+  /**
+   * Hide the toolbar
+   */
+  hideToolbar?: boolean
 }
 
 export type ColumnHeaderContextMenu = {

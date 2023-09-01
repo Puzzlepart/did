@@ -11,13 +11,19 @@ import { IProjectLinkProps } from './types'
  *
  * @category Reusable Component
  */
-export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => (
-  <Link
-    className={styles.root}
-    to={`/projects/search/${props.project?.tag}`.toLowerCase()}
-    onClick={() => props.onClick && props.onClick(null)}
-  >
-    {props.icon && <Icon className={styles.icon} iconName={props.icon} />}
-    <span>{props.text || props.project?.name}</span>
-  </Link>
-)
+export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
+  const iconName = props.icon ?? props.project?.icon
+  const to = `/projects/search/${props.project?.tag}`.toLowerCase()
+  return (
+    <div className={styles.root}>
+      <Icon className={styles.icon} iconName={iconName} />
+      <Link
+        className={styles.link}
+        to={to}
+        onClick={() => props.onClick && props.onClick(null)}
+      >
+        <span>{props.text ?? props.project?.name}</span>
+      </Link>
+    </div>
+  )
+}
