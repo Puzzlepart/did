@@ -63,9 +63,6 @@ export function useReports() {
     [queries]
   )
 
-  // eslint-disable-next-line no-console
-  console.log(queryTabs)
-
   const tabs: TabItems = useMemo(
     () => ({
       default: [WelcomeTab, ''],

@@ -1,11 +1,11 @@
 import { Pivot, PivotItem } from '@fluentui/react'
-import { TabComponent } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './MissingSubmissions.module.scss'
 import { MissingSubmissionUser } from './MissingSubmissionUser'
 import { TeamsReminderButton } from './TeamsReminderButton'
 import { useMissingSubmissions } from './useMissingSubmissions'
+import { TabComponent } from 'components/Tabs'
 
 export const MissingSubmissions: TabComponent = () => {
   const { t } = useTranslation()

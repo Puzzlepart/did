@@ -1,7 +1,7 @@
 import { IFormControlProps } from 'components/FormControl'
-import { ITabItemProps } from 'components/TabContainer'
+import { ITabProps } from 'components/Tabs'
 
 /**
  * @category Projects
  */
-export interface IProjectFormProps extends ITabItemProps, IFormControlProps {}
+export interface IProjectFormProps extends ITabProps, IFormControlProps {}

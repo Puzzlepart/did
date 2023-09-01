@@ -15,9 +15,9 @@ export function useSubscriptionConfig() {
   const { t } = useTranslation()
   return [
     {
-      itemKey: 'info',
-      headerText: t('admin.subscriptionInfoHeader'),
-      itemIcon: 'Info2',
+      id: 'info',
+      text: t('admin.subscriptionInfoHeader'),
+      icon: 'Info2',
       fields: [
         {
           id: 'name',
@@ -40,9 +40,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'adsync',
-      itemIcon: 'UserSync',
-      headerText: t('admin.adsync'),
+      id: 'adsync',
+      icon: 'UserSync',
+      text: t('admin.adsync'),
       fields: [
         {
           id: 'enabled',
@@ -85,9 +85,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'forecast',
-      itemIcon: 'BufferTimeBefore',
-      headerText: t('admin.forecasting'),
+      id: 'forecast',
+      icon: 'BufferTimeBefore',
+      text: t('admin.forecasting'),
       fields: [
         {
           id: 'enabled',
@@ -114,9 +114,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'vacation',
-      headerText: t('admin.vacation'),
-      itemIcon: 'Vacation',
+      id: 'vacation',
+      text: t('admin.vacation'),
+      icon: 'Vacation',
       fields: [
         {
           id: 'totalDays',
@@ -140,9 +140,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'teams',
-      headerText: t('admin.teams'),
-      itemIcon: 'TeamsLogo',
+      id: 'teams',
+      text: t('admin.teams'),
+      icon: 'TeamsLogo',
       fields: [
         {
           id: 'enabled',

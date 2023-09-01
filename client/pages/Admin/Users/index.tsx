@@ -24,15 +24,7 @@ import { useUsers } from './useUsers'
 export const Users: FC<ITabProps> = () => {
   const { t } = useTranslation()
   const { context, columns, menuItems, onAddUsers } = useUsers()
-
-  // eslint-disable-next-line no-console
-  console.log({
-    items: context.state.activeUsers,
-    columns: columns('active'),
-    menuItems,
-    selectionMode: SelectionMode.multiple
-  })
-
+  
   return (
     <UsersContext.Provider value={context}>
       <Tabs

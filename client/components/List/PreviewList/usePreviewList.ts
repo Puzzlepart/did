@@ -31,8 +31,6 @@ export function usePreviewList(props: IListProps<any>) {
         selectionMode = null
       }
     }
-    // eslint-disable-next-line no-console
-    console.log(props.selectionMode, selectionMode)
     return {
       items: props.items,
       columns: props.columns.map((column) => createPreviewListColumn(column)),

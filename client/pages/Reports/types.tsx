@@ -3,13 +3,14 @@ import { IListGroupProps, ListFilterState } from 'components/List/types'
 import { ITabProps } from 'components/Tabs'
 import { TFunction } from 'i18next'
 import { Project, ReportLink, TimesheetPeriodObject, User } from 'types'
+import { IDatePeriod } from 'DateUtils'
 
 /**
  * @category Reports
  */
 export interface IReportsQuery extends ITabProps {
   /**
-   * Query ID
+   * Unique query identifier
    */
   id: string
 
@@ -45,6 +46,8 @@ export interface IReportsQuery extends ITabProps {
    * report link.
    */
   reportLinks?: ReportLink[]
+
+  periods?: IDatePeriod[]
 }
 
 /**

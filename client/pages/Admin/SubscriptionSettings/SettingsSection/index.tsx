@@ -6,7 +6,7 @@ import {
   Label,
   useId
 } from '@fluentui/react-components'
-import { SubText, TabComponent } from 'components'
+import { SubText } from 'components'
 import get from 'get-value'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../context'
@@ -14,6 +14,7 @@ import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { SliderField } from './SliderField'
 import { ISettingsSectionProps } from './types'
+import { TabComponent } from 'components/Tabs'
 
 /**
  * @category SubscriptionSettings
@@ -28,7 +29,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
         fieldProps.disabled =
           field.disabledIf && field.disabledIf(settings || {})
         fieldProps.hidden = field.hiddenIf && field.hiddenIf(settings || {})
-        const key = `${props.itemKey}.${field.id}`
+        const key = `${props.id}.${field.id}`
         let fieldElement: JSX.Element
         switch (field.type) {
           case 'text': {

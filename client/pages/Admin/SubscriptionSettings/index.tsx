@@ -1,10 +1,10 @@
 import { Button } from '@fluentui/react-components'
-import { TabComponent, TabContainer, Toast } from 'components'
-import React, { useState } from 'react'
+import { Toast } from 'components'
+import { TabComponent } from 'components/Tabs'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { SubscriptionContext } from './context'
-import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
+import { SubscriptionContext } from './context'
 import { useSubscriptionSettings } from './useSubscriptionSettings'
 
 /**
@@ -12,15 +12,14 @@ import { useSubscriptionSettings } from './useSubscriptionSettings'
  */
 export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
-  const [selectedKey, setSelectedKey] = useState('info')
-  const { toast, context, onSaveSettings, sections, hasChanges } =
+  const { toast, context, onSaveSettings, hasChanges } =
     useSubscriptionSettings()
 
   return (
     <SubscriptionContext.Provider value={context}>
       <div className={styles.root}>
         <Toast {...toast} />
-        <TabContainer
+        {/* <TabContainer
           onTabChanged={(itemKey) => setSelectedKey(itemKey)}
           defaultSelectedKey={selectedKey}
           level={3}
@@ -28,7 +27,7 @@ export const SubscriptionSettings: TabComponent = () => {
           {sections.map((section) => {
             return <SettingsSection {...section} key={section.itemKey} />
           })}
-        </TabContainer>
+        </TabContainer> */}
         <Button
           appearance='primary'
           className={styles.saveButton}

@@ -1,5 +1,6 @@
-import { List, TabComponent } from 'components'
+import { List } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
+import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'

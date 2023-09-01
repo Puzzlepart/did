@@ -20,7 +20,7 @@ export const WelcomeTab: TabComponent = () => {
         {buttons.map((button, index) => (
           <Button
             key={index}
-            text={button.text}
+            title={button.title}
             icon={<Icon {...button.iconProps} />}
             onClick={button.onClick as any}
           >

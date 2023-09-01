@@ -4,7 +4,6 @@ import {
   IconPicker,
   LabelPicker,
   SearchCustomer,
-  TabComponent
 } from 'components'
 import {
   ChecboxControlOptions,
@@ -21,6 +20,7 @@ import { ProjectFormOptions } from './ProjectFormOptions'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
+import { TabComponent } from 'components/Tabs'
 
 /**
  * @category Projects
