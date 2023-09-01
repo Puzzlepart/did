@@ -14,7 +14,8 @@ export const ListHeader: FC<IListHeaderProps> = ({
   const hideToolbar =
     context.props.menuItems?.length === 0 &&
     context.props.commandBar?.items?.length === 0 &&
-    context.props.commandBar?.farItems?.length === 0
+    context.props.commandBar?.farItems?.length === 0 &&
+    !context.props.searchBox
 
   if (!!context.props.columnHeaderProps?.onRender) {
     return context.props.columnHeaderProps.onRender(

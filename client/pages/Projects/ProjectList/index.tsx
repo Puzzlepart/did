@@ -13,12 +13,13 @@ import { useProjectList } from './useProjectList'
  * @category Projects
  */
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
-  const { listProps } = useProjectsContext()
+  const context = useProjectsContext()
   const { items, columns } = useProjectList(props)
   return (
     <>
       <List
-        {...listProps}
+        {...(context?.listProps ?? {})}
+        {...props}
         items={items}
         columns={columns}
         groups={props.groups}

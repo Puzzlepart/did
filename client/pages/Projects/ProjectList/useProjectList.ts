@@ -11,12 +11,12 @@ import { useColumns } from './useColumns'
 export function useProjectList(props: IProjectListProps) {
   const context = useProjectsContext()
   const initialItems = useMemo(() => {
-    let items = context.state.projects
+    let items = context?.state?.projects ?? props.items
     if (props.id === 'm') {
       items = items.filter(({ outlookCategory }) => !!outlookCategory)
     }
     return items
-  }, [context.state.projects, props.id])
+  }, [context?.state?.projects, props.items, props.id])
   const [items, setItems] = useState(initialItems)
   const [showInactive, setShowInactive] = useState(false)
   const columns = useColumns(props)
@@ -26,7 +26,7 @@ export function useProjectList(props: IProjectListProps) {
       setItems(
         [...initialItems].filter((p) => (showInactive ? true : !p.inactive))
       ),
-    [context.state.projects, props.id, showInactive]
+    [initialItems, props.id, showInactive]
   )
 
   return {

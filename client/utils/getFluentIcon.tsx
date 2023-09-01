@@ -24,6 +24,8 @@ const iconCatalog = {
   }
 }
 
+export type FluentIconName = keyof typeof iconCatalog
+
 /**
  * Returns the Fluent icon with the specified name.
  *
@@ -32,7 +34,7 @@ const iconCatalog = {
  *
  * @returns The specified Fluent icon.
  */
-export function getFluentIcon(name: keyof typeof iconCatalog, bundle = true) {
+export function getFluentIcon(name: FluentIconName, bundle = true) {
   const icon = iconCatalog[name]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
   return <Icon />
