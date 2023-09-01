@@ -30,16 +30,18 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
         </BasePanel>
       )}
     >
-      <div className={styles.root}>{props.children}</div>
-      <Footer
-        actions={[
-          {
-            ...props.submitProps,
-            hidden: !props.submitProps?.text,
-            appearance: 'primary'
-          }
-        ]}
-      />
+      <div className={styles.root}>
+        <div className={styles.body}>{props.children}</div>
+        <Footer
+          actions={[
+            {
+              ...props.submitProps,
+              hidden: !props.submitProps?.text,
+              appearance: 'primary'
+            }
+          ]}
+        />
+      </div>
     </ConditionalWrapper>
     <Toast {...props.submitProps?.toast} />
   </FormControlContext.Provider>

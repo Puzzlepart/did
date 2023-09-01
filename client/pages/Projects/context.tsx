@@ -1,6 +1,7 @@
 import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, useContext } from 'react'
+import { IProjectListProps } from './ProjectList'
 import { IProjectsState } from './types'
 
 /**
@@ -11,10 +12,11 @@ export interface IProjectsContext {
   dispatch: React.Dispatch<AnyAction>
   refetch(variables?: any): Promise<ApolloQueryResult<any>>
   loading: boolean
+  listProps?: IProjectListProps
 }
 
 /**
- * @category Projects
+ * Context object for the Projects component.
  */
 export const ProjectsContext = createContext<IProjectsContext>(null)
 

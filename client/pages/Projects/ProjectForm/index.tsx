@@ -16,6 +16,7 @@ import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import packageFile from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { ProjectFormOptions } from './ProjectFormOptions'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
@@ -97,4 +98,8 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       />
     </FormControl>
   )
+}
+
+ProjectForm.defaultProps = {
+  permission: PermissionScope.MANAGE_PROJECTS
 }

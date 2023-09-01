@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'
 
@@ -8,16 +9,24 @@ import { useColumns } from './useColumns'
  * @category Projects
  */
 export function useProjectList(props: IProjectListProps) {
-  const [items, setItems] = useState([...(props.items || [])])
+  const context = useProjectsContext()
+  const initialItems = useMemo(() => {
+    let items = context.state.projects
+    if (props.id === 'm') {
+      items = items.filter(({ outlookCategory }) => !!outlookCategory)
+    }
+    return items
+  }, [context.state.projects, props.id])
+  const [items, setItems] = useState(initialItems)
   const [showInactive, setShowInactive] = useState(false)
   const columns = useColumns(props)
 
   useEffect(
     () =>
       setItems(
-        [...props.items].filter((p) => (showInactive ? true : !p.inactive))
+        [...initialItems].filter((p) => (showInactive ? true : !p.inactive))
       ),
-    [props.items, showInactive]
+    [context.state.projects, props.id, showInactive]
   )
 
   return {

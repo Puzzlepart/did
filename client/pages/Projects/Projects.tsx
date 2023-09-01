@@ -1,13 +1,10 @@
-import { TabContainer } from 'components/TabContainer'
+import { Tabs } from 'components/Tabs'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
-import { CHANGE_TAB } from './reducer/actions'
-import { ProjectsTab } from './types'
 import { useProjects } from './useProjects'
 
 /**
@@ -18,35 +15,20 @@ export const Projects: FC = () => {
   const { listProps, context, renderDetails } = useProjects()
 
   return (
-    <ProjectsContext.Provider value={context}>
+    <ProjectsContext.Provider value={{ ...context, listProps }}>
       {renderDetails ? (
         <ProjectDetails />
       ) : (
-        <TabContainer
-          hidden={!!context.state.selected}
-          defaultSelectedKey={context.state.currentTab}
-          onTabChanged={(tab: ProjectsTab) =>
-            context.dispatch(CHANGE_TAB({ tab }))
-          }
-        >
-          <ProjectList
-            {...listProps}
-            itemKey='s'
-            headerText={t('common.search')}
-            items={context.state.projects}
-          />
-          <ProjectList
-            {...listProps}
-            itemKey='m'
-            headerText={t('projects.myProjectsText')}
-            items={context.state.projects.filter((p) => !!p.outlookCategory)}
-          />
-          <ProjectForm
-            itemKey='new'
-            headerText={t('projects.createNewText')}
-            permission={PermissionScope.MANAGE_PROJECTS}
-          />
-        </TabContainer>
+        <Tabs
+          // onTabChanged={(tab: ProjectsTab) =>
+          //   context.dispatch(CHANGE_TAB({ tab }))
+          // }
+          items={{
+            s: [ProjectList, t('common.search')],
+            m: [ProjectList, t('projects.myProjectsText')],
+            new: [ProjectForm, t('projects.createNewText')]
+          }}
+        ></Tabs>
       )}
     </ProjectsContext.Provider>
   )

@@ -40,7 +40,5 @@ export function useActionBar() {
         }
       }
     }, [])
-  // eslint-disable-next-line no-console
-  console.log(defaultCheckedValues)
   return { defaultCheckedValues, onCheckedValueChange }
 }

@@ -11,13 +11,6 @@ export const TagPreview: FC<HTMLProps<HTMLDivElement>> = (props) => {
   const { t } = useTranslation()
   const { model } = useFormControlContext()
   const hasValidProjectId = model.value('key') && model.value('customerKey')
-  // eslint-disable-next-line no-console
-  console.log(
-    hasValidProjectId,
-    model.value('key'),
-    model.value('customerKey'),
-    model.isSet('key', 'customerKey')
-  )
   return (
     <div hidden={props.hidden}>
       <UserMessage
