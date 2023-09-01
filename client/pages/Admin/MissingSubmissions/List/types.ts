@@ -3,6 +3,6 @@ import { IMissingSubmissionUser } from '../MissingSubmissionUser'
 import { IMissingSubmissionPeriod } from '../useMissingSubmissions'
 
 export interface IListProps extends ITabProps {
-    users?: IMissingSubmissionUser[]
-    period?: IMissingSubmissionPeriod
+  users?: IMissingSubmissionUser[]
+  period?: IMissingSubmissionPeriod
 }
