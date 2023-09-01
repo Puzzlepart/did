@@ -19,18 +19,18 @@ export function useMenuItems(): ListMenuItem[] {
   const { savedFilters, activeFilter } = context.state
   return [
     new ListMenuItem(activeFilter?.text ?? context.t('reports.savedFilters'))
-      .setIcon(ContentView24Regular)
+      .withIcon(ContentView24Regular)
       .setItems(
         Object.keys(savedFilters).map((key) => {
           const filter = savedFilters[key]
           return new ListMenuItem(filter.text)
-            .setIcon(filter.iconProps?.iconName)
+            .withIcon(filter.iconProps?.iconName)
             .setItems([
               new ListMenuItem(context.t('reports.applyFilterText'))
-                .setIcon(Play24Regular)
+                .withIcon(Play24Regular)
                 .setOnClick(() => context.dispatch(SET_FILTER(filter))),
               new ListMenuItem(context.t('reports.deleteFilterText'))
-                .setIcon(Delete24Regular)
+                .withIcon(Delete24Regular)
                 .setOnClick(() => context.dispatch(REMOVE_SAVED_FILTER(key)))
             ])
         }),
