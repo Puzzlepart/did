@@ -22,7 +22,7 @@ export const Tabs: FC<ITabsProps> = (props) => {
           )
         })}
       </TabList>
-      <Component {...componentProps} />
+      {Component && <Component {...componentProps} />}
       {props.children}
     </div>
   )

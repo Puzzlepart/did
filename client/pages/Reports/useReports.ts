@@ -6,9 +6,9 @@ import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfig
 import { IReportsContext } from './context'
 import { useReportsQueries, useReportsQuery } from './hooks'
 import { useReportsReducer } from './reducer'
+import { ReportTab } from './ReportTab'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
-import { ReportTab } from './ReportTab'
 
 /**
  * Component logic for `<Reports />`
@@ -66,11 +66,14 @@ export function useReports() {
   // eslint-disable-next-line no-console
   console.log(queryTabs)
 
-  const tabs: TabItems = useMemo(() => ({
-    default: [WelcomeTab, ''],
-    ...queryTabs,
-    summary: [SummaryView, t('reports.summaryHeaderText')]
-  }), [queryTabs])
+  const tabs: TabItems = useMemo(
+    () => ({
+      default: [WelcomeTab, ''],
+      ...queryTabs,
+      summary: [SummaryView, t('reports.summaryHeaderText')]
+    }),
+    [queryTabs]
+  )
 
   return {
     tabs,

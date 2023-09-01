@@ -1,5 +1,6 @@
 import { DefaultButton } from '@fluentui/react'
 import { UserMessage } from 'components'
+import { Logo } from 'components/Logo'
 import { PageComponent } from 'pages/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +9,6 @@ import _ from 'underscore'
 import styles from './Home.module.scss'
 import { useAuthProviders } from './useAuthProviders'
 import { useHome } from './useHome'
-import { Logo } from 'components/Logo'
 
 /**
  * Home page
@@ -26,10 +26,7 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={styles.root}>
-      <Logo
-        showMotto={true}
-        dropShadow={true}
-      />
+      <Logo showMotto={true} dropShadow={true} />
       {error && (
         <UserMessage
           className={styles.error}

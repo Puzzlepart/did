@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import _ from 'underscore'
+import { useReportsContext } from '../context'
 import { ReportLinks } from '../ReportLinks'
 import { ReportsList } from '../ReportsList'
-import { useReportsContext } from '../context'
 
 /**
  * Report tab

@@ -12,7 +12,7 @@ export interface IReportsQuery extends ITabProps {
    * Query ID
    */
   id: string
-  
+
   /**
    * GraphQL query
    */
@@ -32,7 +32,7 @@ export interface IReportsQuery extends ITabProps {
   exportFileName?: string
 
   /**
-   * Report link reference. String in the format 
+   * Report link reference. String in the format
    * `{year}_{month}`. This is used to match
    * report links to queries.
    */

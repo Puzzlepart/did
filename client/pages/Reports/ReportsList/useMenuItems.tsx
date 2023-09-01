@@ -5,9 +5,9 @@ import {
 } from '@fluentui/react-icons'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
 import { REMOVE_SAVED_FILTER, SET_FILTER } from '../reducer/actions'
-import { useTranslation } from 'react-i18next'
 
 /**
  * Returns an array of `ListMenuItem` objects to be used in the ReportsList component's menu.

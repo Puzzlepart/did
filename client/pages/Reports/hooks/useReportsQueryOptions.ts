@@ -1,6 +1,4 @@
-import {
-  IIconProps
-} from '@fluentui/react'
+import { IIconProps } from '@fluentui/react'
 import { ButtonProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useReportsContext } from '../context'
@@ -28,8 +26,7 @@ export type UseReportsQueryOptions = {
   dispatch: React.Dispatch<AnyAction>
 }
 
-export interface ReportsQueryButton
-  extends Pick<ButtonProps, 'onClick'> {
+export interface ReportsQueryButton extends Pick<ButtonProps, 'onClick'> {
   text: string
   title?: string
   iconProps?: IIconProps
@@ -46,23 +43,23 @@ export function useReportsQueryButtons(): ReportsQueryButton[] {
   return [
     ...queries.map<ReportsQueryButton>(
       ({ id, text, icon }) =>
-      ({
-        text,
-        iconProps: { iconName: icon },
-        onClick: () => dispatch(CHANGE_QUERY({ id }))
-      } as ReportsQueryButton)
+        ({
+          text,
+          iconProps: { iconName: icon },
+          onClick: () => dispatch(CHANGE_QUERY({ id }))
+        } as ReportsQueryButton)
     ),
     ...promotedReportLinks.map<ReportsQueryButton>(
       (link) =>
-      ({
-        text: link.name,
-        title: link.description,
-        iconProps: {
-          iconName: link.icon,
-          styles: { root: { color: link.iconColor } }
-        },
-        onClick: () => window.open(link.externalUrl, '_blank')
-      } as ReportsQueryButton)
+        ({
+          text: link.name,
+          title: link.description,
+          iconProps: {
+            iconName: link.icon,
+            styles: { root: { color: link.iconColor } }
+          },
+          onClick: () => window.open(link.externalUrl, '_blank')
+        } as ReportsQueryButton)
     )
   ]
 }

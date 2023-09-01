@@ -23,15 +23,16 @@ export const ReportLinkTooltip: FC<IReportLinkTooltipProps> = (props) => {
           <p className={styles.updated}>
             {t('reports.reportLinkUpdatedText', {
               ...props.link,
-              updatedAt: $date.formatDate(props.link.updatedAt, 'MMM DD, YYYY HH:mm')
+              updatedAt: $date.formatDate(
+                props.link.updatedAt,
+                'MMM DD, YYYY HH:mm'
+              )
             })}
           </p>
         </div>
       }
     >
-      <div>
-        {props.children}
-      </div>
+      <div>{props.children}</div>
     </Tooltip>
   )
 }
