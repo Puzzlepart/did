@@ -16,7 +16,9 @@ export interface IBasePanelProps extends IPanelProps {
   footerActions?: IBasePanelAction[]
 
   /**
-   * Whether or not the panel should have a scroll bar.
+   * Whether or not the panel should have a scroll bar. If set to
+   * `true`, the scrollable content container will have `overflow`
+   * set to `auto`, otherwise it will be set to `visible`.
    */
   scroll?: boolean
 }
@@ -28,6 +30,7 @@ export interface IHeaderProps {
 export interface IFooterProps {
   actions?: IBasePanelAction[]
   onDismiss?: IBasePanelProps['onDismiss']
+  cancelAction?: boolean
 }
 
 export interface IBasePanelAction {

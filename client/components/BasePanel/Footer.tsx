@@ -9,12 +9,13 @@ export const Footer: FC<IFooterProps> = (props) => {
   const { t } = useTranslation()
   const actions = [
     ...props.actions,
-    {
-      text: t('common.cancelButtonLabel'),
-      appearance: 'subtle',
-      onClick: props.onDismiss
-    } as IBasePanelAction
-  ]
+    props.cancelAction &&
+      ({
+        text: t('common.cancelButtonLabel'),
+        appearance: 'subtle',
+        onClick: props.onDismiss
+      } as IBasePanelAction)
+  ].filter(Boolean)
   return (
     <FluentProvider theme={webLightTheme} className={styles.footer}>
       <div className={styles.actions}>
@@ -27,5 +28,6 @@ export const Footer: FC<IFooterProps> = (props) => {
 }
 
 Footer.defaultProps = {
-  actions: []
+  actions: [],
+  cancelAction: false
 }

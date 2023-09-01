@@ -20,7 +20,11 @@ export function useBasePanel(props: IBasePanelProps) {
   if (!_.isEmpty(props.footerActions)) {
     isFooterAtBottom = true
     onRenderFooterContent = () => (
-      <Footer actions={props.footerActions} onDismiss={props.onDismiss} />
+      <Footer
+        actions={props.footerActions}
+        onDismiss={props.onDismiss}
+        cancelAction
+      />
     )
   }
   if (!_.isEmpty(props.headerActions)) {

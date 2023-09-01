@@ -1,4 +1,5 @@
 import { BasePanel } from 'components/BasePanel'
+import { Footer } from 'components/BasePanel/Footer'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
@@ -30,6 +31,15 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
       )}
     >
       <div className={styles.root}>{props.children}</div>
+      <Footer
+        actions={[
+          {
+            ...props.submitProps,
+            hidden: !props.submitProps?.text,
+            appearance: 'primary'
+          }
+        ]}
+      />
     </ConditionalWrapper>
     <Toast {...props.submitProps?.toast} />
   </FormControlContext.Provider>

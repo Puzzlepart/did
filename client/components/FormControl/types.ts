@@ -43,7 +43,7 @@ export interface IFormControlPanelProps extends IBasePanelProps {
   onSave?: () => void
 }
 
-export interface IFormControlBaseProps
+export interface IFormControlProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
   /**
    * Specify the model used for the form control.
@@ -66,8 +66,6 @@ export interface IFormControlBaseProps
    */
   edit?: any
 }
-
-export type IFormControlProps = IFormControlBaseProps
 
 export type FormInputControlBase<O = any> = {
   /**
