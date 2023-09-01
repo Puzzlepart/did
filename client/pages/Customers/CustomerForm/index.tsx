@@ -5,6 +5,7 @@ import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import packageFile from 'package'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 
@@ -50,4 +51,8 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
       />
     </FormControl>
   )
+}
+
+CustomerForm.defaultProps = {
+  permission: PermissionScope.MANAGE_CUSTOMERS
 }

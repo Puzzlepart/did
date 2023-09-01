@@ -41,7 +41,6 @@ export function useCustomers() {
 
   return {
     context,
-    view: urlParameters.currentTab ?? 's',
     renderDetails
   } as const
 }
