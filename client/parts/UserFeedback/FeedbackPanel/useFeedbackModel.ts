@@ -13,10 +13,9 @@ const INITIAL_MODEL = {
   mood: null
 }
 
-
 /**
  * Hook that returns the feedback model and options for type and mood.
- * 
+ *
  * @returns An object containing the feedback model, type options, and mood options.
  */
 export const useFeedbackModel = () => {
