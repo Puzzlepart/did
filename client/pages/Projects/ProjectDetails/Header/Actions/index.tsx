@@ -76,6 +76,7 @@ export const Actions: FC<IActionsProps> = (props) => {
               key={state.selected?.tag}
               edit={state.selected}
               panelProps={{
+                scroll: true,
                 isOpen: showEditPanel,
                 headerText: state.selected?.name,
                 onDismiss: toggleEditPanel,

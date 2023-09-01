@@ -5,7 +5,6 @@
  * @module /
  */
 import { ApolloProvider } from '@apollo/client'
-import { ThemeProvider } from '@fluentui/react/lib/utilities/ThemeProvider'
 import { initializeIcons } from '@uifabric/icons'
 import { IAppProps } from 'app/types'
 import 'core-js/stable'
@@ -17,6 +16,7 @@ import 'regenerator-runtime/runtime.js'
 import { App, ContextUser } from './app'
 import { $usercontext, client } from './graphql'
 import './i18n'
+import { Themed } from './theme/Themed'
 
 /**
  * Bootstrapping the App
@@ -52,11 +52,11 @@ export const bootstrap = async () => {
   i18next.changeLanguage(init.user.preferredLanguage)
 
   render(
-    <ThemeProvider applyTo='body' theme={init.user.theme}>
+    <Themed theme={init.user.theme}>
       <ApolloProvider client={client}>
         <App {...init} />
       </ApolloProvider>
-    </ThemeProvider>,
+    </Themed>,
     document.querySelector('#app')
   )
 }

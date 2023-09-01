@@ -1,3 +1,4 @@
+import { Theme } from '@fluentui/react-components'
 import { PartialTheme } from '@fluentui/react/lib/Theme'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'
@@ -18,7 +19,7 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
-  public theme: PartialTheme
+  public theme: [PartialTheme, Theme]
   public lastActive: Date
 
   /**

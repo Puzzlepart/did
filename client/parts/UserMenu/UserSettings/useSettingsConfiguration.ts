@@ -78,7 +78,8 @@ export function useSettingsConfiguration(): IUserSetting[] {
           text: t('common.auto-theme')
         }
       ],
-      defaultSelectedKey: getUserConfiguration('ui.theme')
+      defaultSelectedKey: getUserConfiguration('ui.theme'),
+      disabled: true
     }),
     UserSettingNumber(vacationTotalDaysKey, {
       label: t('common.vacationTotalDaysLabel'),
