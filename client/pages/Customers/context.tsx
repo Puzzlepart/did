@@ -1,12 +1,30 @@
 import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { createContext } from 'react'
+import { createContext, Dispatch } from 'react'
 import { ICustomersState } from './types'
 
+/**
+ * Interface for the Customers context object.
+ */
 export interface ICustomersContext {
+  /**
+   * The current state of the Customers component.
+   */
   state: ICustomersState
-  dispatch: React.Dispatch<AnyAction>
+
+  /**
+   * The dispatch function for the Customers component.
+   */
+  dispatch: Dispatch<AnyAction>
+
+  /**
+   * Refetches the query.
+   */
   refetch(variables?: any): Promise<ApolloQueryResult<any>>
+
+  /**
+   * Whether the component is loading.
+   */
   loading?: boolean
 }
 

@@ -33,6 +33,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
       <div className={styles.root}>
         <div className={styles.body}>{props.children}</div>
         <Footer
+          hidden={!!props.panelProps}
           actions={[
             {
               ...props.submitProps,

@@ -17,7 +17,11 @@ export const Footer: FC<IFooterProps> = (props) => {
       } as IBasePanelAction)
   ].filter(Boolean)
   return (
-    <FluentProvider theme={webLightTheme} className={styles.footer}>
+    <FluentProvider
+      theme={webLightTheme}
+      className={styles.footer}
+      hidden={props.hidden}
+    >
       <div className={styles.actions}>
         {actions.map((action, index) => (
           <PanelAction key={index} {...action} />

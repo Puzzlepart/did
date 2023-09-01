@@ -100,7 +100,8 @@
     "timeEntriesLoadingDescription": "Take a sip of coffee if you've been busy lately...",
     "noLabelsSelectedText": "Add labels to the projects for categorization. For example internal projects or projects that requires submitting hours in a separate system.",
     "applyLabelsHeaderText": "Apply labels to this project",
-    "tagLabel": "Key"
+    "tagLabel": "Key",
+    "editButtonLabel": "Edit project"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -114,7 +115,8 @@
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
     "descriptionFieldDescription": "A short description for the customer. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported.",
     "createError": "We can't create the customer at the moment. Please try again later.",
-    "searchProjectsPlaceholder": "Search in projects..."
+    "searchProjectsPlaceholder": "Search in projects...",
+    "editButtonLabel": "Edit customer"
   },
   "admin": {
     "apiTokens": {

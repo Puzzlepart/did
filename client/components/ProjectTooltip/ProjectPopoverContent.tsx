@@ -13,8 +13,6 @@ export const ProjectPopoverContent: FC<IProjectPopoverProps> = ({
   project
 }) => {
   const { t } = useTranslation()
-  // eslint-disable-next-line no-console
-  console.log(project)
   return (
     <FadeIn>
       <div className={styles.root}>

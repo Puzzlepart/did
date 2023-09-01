@@ -100,7 +100,8 @@
     "timeEntriesLoadingDescription": "Ta deg ein slurk kaffe. Er det mykje data å laste inn, kan du ta deg ein slurk til.",
     "noLabelsSelectedText": "Legg til merkelappar på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
     "applyLabelsHeaderText": "Legg til merkelappar på dette prosjektet",
-    "tagLabel": "Nøkkel"
+    "tagLabel": "Nøkkel",
+    "editButtonLabel": "Rediger prosjekt"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -114,7 +115,8 @@
     "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} teikn",
     "descriptionFieldDescription": "Ei kort skildring av kunden. Det er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
-    "searchProjectsPlaceholder": "Søk i prosjekter..."
+    "searchProjectsPlaceholder": "Søk i prosjekter...",
+    "editButtonLabel": "Rediger kunde"
   },
   "admin": {
     "apiTokens": {

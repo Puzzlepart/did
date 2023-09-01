@@ -1,5 +1,6 @@
 import { IPanelProps } from '@fluentui/react'
 import { ButtonProps } from '@fluentui/react-components'
+import { HTMLAttributes } from 'react'
 
 /**
  * Props for the BasePanel component.
@@ -23,12 +24,11 @@ export interface IBasePanelProps extends IPanelProps {
   scroll?: boolean
 }
 
-export interface IHeaderProps {
+export interface IHeaderProps extends HTMLAttributes<HTMLDivElement> {
   actions?: IBasePanelAction[]
 }
 
-export interface IFooterProps {
-  actions?: IBasePanelAction[]
+export interface IFooterProps extends IHeaderProps {
   onDismiss?: IBasePanelProps['onDismiss']
   cancelAction?: boolean
 }

@@ -1,12 +1,14 @@
 import { useMutation } from '@apollo/client'
-import { ActionButton, DefaultButton } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { useProjectsContext } from '../../../context'
+import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
+import { getFluentIcon } from 'utils/getFluentIcon'
 import { ProjectForm } from '../../../ProjectForm'
+import { useProjectsContext } from '../../../context'
 import { SET_SELECTED_PROJECT } from '../../../reducer/actions'
 import styles from './Actions.module.scss'
 import $createOutlookCategory from './createOutlookCategory.gql'
@@ -19,8 +21,8 @@ export const Actions: FC<IActionsProps> = (props) => {
   const { refetch, state, dispatch } = useProjectsContext()
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
-  const [showEditPanel, setShowEditPanel] = useState(false)
   const [createOutlookCategory] = useMutation($createOutlookCategory)
+  const { value: showEditPanel, toggle: toggleEditPanel } = useBoolean(false)
 
   /**
    * On create category in Outlook
@@ -41,48 +43,45 @@ export const Actions: FC<IActionsProps> = (props) => {
   return (
     <div className={styles.root} hidden={props.hidden}>
       <div className={styles.container}>
-        <div className={styles.actionItem} hidden={!state.selected?.webLink}>
-          <DefaultButton
-            text={t('projects.workspaceLabel')}
-            onClick={() => window.location.replace(state.selected?.webLink)}
-            iconProps={{ iconName: 'Website' }}
-          />
-        </div>
-        <div
-          className={styles.actionItem}
-          hidden={!!state.selected?.outlookCategory}
-        >
-          <ActionButton
-            text={t('projects.createOutlookCategoryLabel')}
-            iconProps={{ iconName: 'OutlookLogoInverse' }}
-            onClick={() => onCreateCategory()}
-          />
-        </div>
-        <div
-          className={styles.actionItem}
-          hidden={!hasPermission(PermissionScope.MANAGE_PROJECTS)}
-        >
-          <ActionButton
-            text={t('common.editLabel')}
-            iconProps={{ iconName: 'Edit' }}
-            onClick={() => setShowEditPanel(true)}
-          />
-          <ProjectForm
-            key={state.selected?.tag}
-            edit={state.selected}
-            panelProps={{
-              isOpen: showEditPanel,
-              headerText: state.selected?.name,
-              isLightDismiss: true,
-              onLightDismissClick: () => setShowEditPanel(false),
-              onDismiss: () => setShowEditPanel(false),
-              onSave: () => {
-                setShowEditPanel(false)
-                refetch()
-              }
-            }}
-          />
-        </div>
+        {state.selected?.webLink && (
+          <Button
+            appearance='transparent'
+            icon={getFluentIcon('WebAsset')}
+            onClick={() => window.open(state.selected?.externalSystemURL, '_blank')}>
+            {t('projects.workspaceLabel')}
+          </Button>
+        )}
+        {!state.selected?.outlookCategory && (
+          <Button
+            appearance='transparent'
+            icon={getFluentIcon('CalendarAdd')}
+            onClick={() => onCreateCategory()}>
+            {t('projects.createOutlookCategoryLabel')}
+          </Button>
+        )}
+        {hasPermission(PermissionScope.MANAGE_PROJECTS) && (
+          <>
+            <Button
+              appearance='transparent'
+              icon={getFluentIcon('TableEdit')}
+              onClick={toggleEditPanel}>
+              {t('projects.editButtonLabel')}
+            </Button>
+            <ProjectForm
+              key={state.selected?.tag}
+              edit={state.selected}
+              panelProps={{
+                isOpen: showEditPanel,
+                headerText: state.selected?.name,
+                onDismiss: toggleEditPanel,
+                onSave: () => {
+                  toggleEditPanel()
+                  refetch()
+                }
+              }}
+            />
+          </>
+        )}
       </div>
     </div>
   )
