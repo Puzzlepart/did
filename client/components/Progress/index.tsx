@@ -9,7 +9,11 @@ import { IProgressProps } from './types'
  */
 export const Progress: ReusableComponent<IProgressProps> = (props) => {
   return (
-    <div className={styles.root} style={{ padding: props.padding }}>
+    <div
+      className={styles.root}
+      style={{ width: props.width, padding: props.padding }}
+      hidden={props.hidden}
+    >
       <Field validationMessage={props.text} validationState='none'>
         <ProgressBar />
       </Field>
@@ -18,5 +22,6 @@ export const Progress: ReusableComponent<IProgressProps> = (props) => {
 }
 
 Progress.defaultProps = {
-  padding: '10px 0'
+  padding: '10px 0',
+  width: '100%'
 }
