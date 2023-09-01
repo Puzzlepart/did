@@ -33,3 +33,5 @@ Tabs.defaultProps = {
   level: 2,
   vertical: false
 }
+
+export * from './types'
