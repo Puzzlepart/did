@@ -1,7 +1,7 @@
 import { DateRangeType } from '@fluentui/react'
 import { ToolbarButtonProps } from '@fluentui/react-components'
 import { Overview } from 'pages/Timesheet/Views/Overview'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../../context'
 import { CalendarCancel, CalendarSync } from '../icons'
@@ -14,20 +14,26 @@ import { CalendarCancel, CalendarSync } from '../icons'
 export function useConfirmButtons() {
   const { t } = useTranslation()
   const { state, onSubmitPeriod, onUnsubmitPeriod } = useTimesheetContext()
-  const isConfirmed = state.selectedPeriod?.isConfirmed
-  const buttonProps: ToolbarButtonProps = {
-    icon: isConfirmed ? <CalendarCancel /> : <CalendarSync />,
-    disabled: !!state.loading,
-    onClick: () => {
-      if (isConfirmed) {
-        onUnsubmitPeriod(false)
-      } else {
-        onSubmitPeriod(false)
-      }
-    },
-    style: { margin: '0 0 0 6px' }
-  }
-  const buttonText = isConfirmed
+  const buttonProps: ToolbarButtonProps = useMemo(
+    () => ({
+      icon: state.selectedPeriod?.isConfirmed ? (
+        <CalendarCancel />
+      ) : (
+        <CalendarSync />
+      ),
+      disabled: !!state.loading,
+      onClick: () => {
+        if (state.selectedPeriod?.isConfirmed) {
+          onUnsubmitPeriod(false)
+        } else {
+          onSubmitPeriod(false)
+        }
+      },
+      style: { margin: '0 0 0 6px' }
+    }),
+    [state.loading, state.selectedPeriod?.isConfirmed]
+  )
+  const buttonText = state.selectedPeriod?.isConfirmed
     ? t('timesheet.unconfirmHoursText')
     : t('timesheet.confirmHoursText')
 
