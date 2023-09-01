@@ -12,6 +12,14 @@ import { ListMenuItem } from './ListMenuItem'
 export function useExcelExportCommand() {
   const { t } = useTranslation()
   const context = useListContext()
+
+  if (!context.props.exportFileName) {
+    return {
+      commandBarItem: undefined,
+      menuItem: undefined
+    }
+  }
+
   const commandBarItem: ICommandBarItemProps = {
     key: 'EXPORT_TO_EXCEL',
     text: t('reports.exportToExcel'),
@@ -32,7 +40,7 @@ export function useExcelExportCommand() {
     }
   }
   const menuItem = new ListMenuItem(commandBarItem.text)
-    .setIcon('ExcelLogoInverse')
+    .withIcon('ExcelLogoInverse')
     .setOnClick(commandBarItem.onClick)
     .setDisabled(commandBarItem.disabled)
   return { commandBarItem, menuItem }

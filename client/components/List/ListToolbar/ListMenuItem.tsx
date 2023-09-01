@@ -1,7 +1,9 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import { ICommandBarItemProps, Icon } from '@fluentui/react'
+import { bundleIcon } from '@fluentui/react-icons'
 import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
-import React, { CSSProperties, MouseEventHandler } from 'react'
+import { AnyAction } from '@reduxjs/toolkit'
+import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
 
 /**
  * Represents a menu item in the `ListMenuItem` component. Supports
@@ -81,12 +83,17 @@ export class ListMenuItem {
   /**
    * Sets the icon for the `ListMenuItem`.
    *
-   * @param icon The FluentIcon or string representing the icon to set.
+   * @param icon The FluentIcon or string representing the icon to set.@
+   * @param filledIcon The filled FluentIcon to set, will be bundled
+   * with the FluentIcon provided in `icon` (optional).
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setIcon(icon: ListMenuItem['icon']) {
+  public withIcon(icon: ListMenuItem['icon'], filledIcon?: FluentIcon) {
     this.icon = icon
+    if (typeof icon !== 'string' && filledIcon) {
+      this.icon = bundleIcon(icon, filledIcon)
+    }
     return this
   }
 
@@ -99,6 +106,21 @@ export class ListMenuItem {
    */
   public setOnClick(onClick: ListMenuItem['onClick']) {
     this.onClick = onClick
+    return this
+  }
+
+  /**
+   * Attaches a dispatch function to the onClick event of the ListMenuItem component.
+   *
+   * @param context - The context object containing the dispatch function.
+   * @param action - The action to be dispatched.
+   * @param payload - The payload to be passed to the action.
+   *
+   * @returns The updated ListMenuItem component with the dispatch function attached to its onClick event.
+   */
+  public withDispatch(context: any, action: any, payload: any = null) {
+    const dispatcher = context.dispatch as Dispatch<AnyAction>
+    this.onClick = () => dispatcher(action(payload))
     return this
   }
 
@@ -233,7 +255,7 @@ export class ListMenuItem {
   public static convert(items: ICommandBarItemProps[]) {
     return items.map((item) =>
       new ListMenuItem(item.text)
-        .setIcon(item.iconProps?.iconName)
+        .withIcon(item.iconProps?.iconName)
         .setOnClick(item.onClick)
         .setDisabled(item.disabled)
     )

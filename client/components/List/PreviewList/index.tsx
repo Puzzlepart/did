@@ -20,6 +20,9 @@ import { usePreviewList } from './usePreviewList'
 export const PreviewList: FC<IListProps<any>> = (props) => {
   const { dataGridProps } = usePreviewList(props)
   const root = useRef(null)
+
+  // eslint-disable-next-line no-console
+  console.log(props, dataGridProps)
   return (
     <div ref={root} className={styles.root}>
       <ListToolbar root={root} />

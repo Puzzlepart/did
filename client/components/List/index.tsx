@@ -11,7 +11,9 @@ import { IListProps } from './types'
 import { useList } from './useList'
 
 /**
- * List component using `ShimmeredDetailsList` from `@fluentui/react`.
+ * List component using `<DataGrid />` from `@fluentui/react-components`,
+ * with fallback to `<ShimmeredDetailsList />` from `@fluentui/react` if
+ * `disablePreview` is set to `true`.
  *
  * Supports list groups, filters, group by,
  * selection, search box and custom column headers.

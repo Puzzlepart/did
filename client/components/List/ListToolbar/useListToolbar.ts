@@ -16,18 +16,10 @@ import { useSearchBoxCommand } from './useSearchBoxCommand'
  */
 export function useListToolbar(root: React.MutableRefObject<any>) {
   const context = useListContext()
-  const {
-    commandBarItem: excelExportCommandBarItem,
-    menuItem: excelExportMenuItem
-  } = useExcelExportCommand()
+  const excelExportCommands = useExcelExportCommand()
   const { commandBarItem: searchBoxItem, menuItem: searchBoxMenuItem } =
     useSearchBoxCommand(root)
   const filterCommands = useFiltersCommand()
-
-  const hasFilterableColumns = _.any(
-    context.props.columns,
-    (col) => col?.data?.isFilterable
-  )
 
   const commandBarProps = useMemo<ICommandBarProps>(
     () => ({
@@ -37,12 +29,12 @@ export function useListToolbar(root: React.MutableRefObject<any>) {
       ),
       farItems: [
         ...(context.props.commandBar?.farItems ?? []),
-        hasFilterableColumns && filterCommands.toggle.commandBarItem,
-        hasFilterableColumns && filterCommands.clear.commandBarItem,
-        context.props.exportFileName && excelExportCommandBarItem
+        filterCommands.toggle?.commandBarItem,
+        filterCommands.clear?.commandBarItem,
+        excelExportCommands?.commandBarItem
       ].filter(Boolean)
     }),
-    [context.props.commandBar, hasFilterableColumns]
+    [context.props.commandBar]
   )
 
   const menuItems = useMemo(
@@ -55,11 +47,11 @@ export function useListToolbar(root: React.MutableRefObject<any>) {
         : [
             searchBoxMenuItem,
             ...context.props.menuItems,
-            filterCommands.toggle.menuItem,
-            filterCommands.clear.menuItem,
-            excelExportMenuItem
+            filterCommands.toggle?.menuItem,
+            filterCommands.clear?.menuItem,
+            excelExportCommands?.menuItem
           ].filter(Boolean),
-    []
+    [context.props.menuItems]
   )
   return {
     commandBarProps,
