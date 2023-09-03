@@ -1,3 +1,4 @@
+import { Caption1 } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import packageFile from 'package'
 import React from 'react'
@@ -7,15 +8,18 @@ import { ILogoProps } from './types'
 /**
  * @category Reusable Component
  */
-export const Logo: ReusableComponent<ILogoProps> = ({
-  showMotto = false,
-  color = '#ffffff',
-  backgroundColor = '#252422',
-  dropShadow = false
-}) => {
+export const Logo: ReusableComponent<ILogoProps> = (props) => {
   return (
     <div className={styles.root}>
-      <div className={`${styles.logo} ${dropShadow ? styles.dropShadow : ''}`}>
+      <div
+        className={`${styles.logo} ${
+          props.dropShadow ? styles.dropShadow : ''
+        }`}
+        style={{
+          width: props.width,
+          height: props.height
+        }}
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -42,24 +46,36 @@ export const Logo: ReusableComponent<ILogoProps> = ({
             <g transform='matrix(2,0,0,2,0,0)'>
               <rect
                 id='background'
-                width='140'
-                height='80'
-                fill={backgroundColor}
+                width={props.width}
+                height={props.height}
+                fill={props.backgroundColor}
               />
             </g>
             <g mask='url(#logotext)'>
               <g transform='matrix(2,0,0,2,0,0)'>
-                <rect id='textcolor' width='140' height='80' fill={color} />
+                <rect
+                  id='textcolor'
+                  width={props.width}
+                  height={props.height}
+                  fill={props.color}
+                />
               </g>
             </g>
           </g>
         </svg>
       </div>
-      {showMotto && (
-        <div className={styles.motto}>{packageFile.description}</div>
-      )}
+      {props.showMotto && <Caption1>{packageFile.description}</Caption1>}
     </div>
   )
+}
+
+Logo.defaultProps = {
+  showMotto: false,
+  color: '#ffffff',
+  backgroundColor: '#252422',
+  dropShadow: false,
+  width: 160,
+  height: 80
 }
 
 export * from './types'
