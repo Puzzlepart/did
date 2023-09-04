@@ -1,4 +1,12 @@
 import {
+  DrinkMargarita24Regular,
+  DrinkMargarita24Filled,
+  EditSettings24Regular,
+  EditSettings24Filled,
+  DocumentDatabase24Regular,
+  DocumentDatabase24Filled,
+  SignOut24Regular,
+  SignOut24Filled,
   AddCircle24Filled,
   AddCircle24Regular,
   ArrowCircleLeft24Filled,
@@ -61,6 +69,18 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  DrinkMargarita: {
+    regular: DrinkMargarita24Regular,
+    filled: DrinkMargarita24Filled
+  },
+  EditSettings: {
+    regular: EditSettings24Regular,
+    filled: EditSettings24Filled
+  },
+  DocumentDatabase: {
+    regular: DocumentDatabase24Regular,
+    filled: DocumentDatabase24Filled
+  },
   Key: {
     regular: Key24Regular,
     filled: Key24Filled
@@ -164,6 +184,10 @@ const iconCatalog = {
   System: {
     regular: System24Regular,
     filled: System24Filled
+  },
+  SignOut: {
+    regular: SignOut24Regular,
+    filled: SignOut24Filled
   },
   CalendarAdd: {
     regular: CalendarAdd24Regular,
