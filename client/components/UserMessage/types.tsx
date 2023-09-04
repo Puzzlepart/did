@@ -1,5 +1,6 @@
 import { MenuItemProps } from '@fluentui/react-components'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { CSSProperties, HTMLAttributes } from 'react'
 
 /**
  * @category UserMessage
@@ -28,11 +29,6 @@ export interface IUserMessageProps extends AlertProps {
   onDismiss?: () => void
 
   /**
-   * Icon to use if not default for the type
-   */
-  iconName?: string
-
-  /**
    * To flex the message center with a fixed height
    */
   fixedHeight?: number
@@ -46,4 +42,21 @@ export interface IUserMessageProps extends AlertProps {
    * Whether to open the actions menu on hover
    */
   openActionsOnHover?: boolean
+}
+
+/**
+ * Props for the UserMessageContainer component.
+ */
+export interface IUserMessageContainerProps
+  extends HTMLAttributes<HTMLDivElement>,
+  Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
+  /**
+   * Vertical direction for the items in the container.
+   */
+  vertical?: boolean
+
+  /**
+   * How to spread the items in the container.
+   */
+  spread?: 'evenly' | 'around' | 'between'
 }

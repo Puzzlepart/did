@@ -5,7 +5,6 @@
 
   .alert {
     padding: 10px;
-    box-sizing: border-box;
     max-width: 100%;
 
     .text {
@@ -21,8 +20,8 @@
     }
   }
 
-  &.hasActions {
-    cursor: pointer;
+  &.hasContextMenu {
+    cursor: context-menu;
   }
 
   .header {
