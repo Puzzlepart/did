@@ -1,7 +1,9 @@
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useMemo } from 'react'
 import { IUserMessageProps } from './types'
-import { useUserMessageStyles } from './useUserMessageStyles'
 import styles from './UserMessage.module.scss'
+import { useUserMessageStyles } from './useUserMessageStyles'
+import { MenuItemProps } from '@fluentui/react-components'
+import { getFluentIcon } from 'utils'
 
 /**
  * A component that supports a `<MessageBar />` with
@@ -16,11 +18,14 @@ export function useUserMessage(props: IUserMessageProps) {
     id: props.id,
     hidden: props.hidden,
     onClick: props.onClick,
-    className: [
-      styles.root,
-      hasContextMenu && styles.hasContextMenu,
-    ].filter(Boolean).join(' '),
+    className: [styles.root, hasContextMenu && styles.hasContextMenu]
+      .filter(Boolean)
+      .join(' ')
   }
+  const actions = useMemo<MenuItemProps[]>(() => props.actions.map((action) => ({
+    ...action,
+    icon: getFluentIcon(action.iconName),
+  })), [props.actions])
 
-  return { containerProps, alertStyle }
+  return { containerProps, alertStyle, actions }
 }

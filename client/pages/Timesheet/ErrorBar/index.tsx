@@ -1,9 +1,9 @@
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
+import get from 'get-value'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
-import get from 'get-value'
 
 /**
  * @category Timesheet

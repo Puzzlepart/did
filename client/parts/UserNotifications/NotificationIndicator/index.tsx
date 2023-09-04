@@ -1,17 +1,14 @@
 /* eslint-disable tsdoc/syntax */
-import React, { FC, useContext } from 'react'
+import React, { FC, HTMLProps, useContext } from 'react'
 import _ from 'underscore'
 import { UserNotificationsContext } from '../context'
 import styles from './NotificationIndicator.module.scss'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface INotificationIndicatorProps
-  extends React.HTMLProps<HTMLDivElement> {}
 
 /**
  * @category Function Component
  */
-export const NotificationIndicator: FC<INotificationIndicatorProps> = (
+export const NotificationIndicator: FC<HTMLProps<HTMLDivElement>> = (
   props
 ) => {
   const { notifications, count } = useContext(UserNotificationsContext)

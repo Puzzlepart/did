@@ -1,6 +1,11 @@
 import { MenuItemProps } from '@fluentui/react-components'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
-import { CSSProperties, HTMLAttributes } from 'react'
+import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
+import { FluentIconName } from 'utils'
+
+export interface IUserMessageAction extends Omit<MenuItemProps,'icon'> {
+  iconName?: FluentIconName
+}
 
 /**
  * @category UserMessage
@@ -21,7 +26,7 @@ export interface IUserMessageProps extends AlertProps {
   /**
    * On click handler for the message
    */
-  onClick?: (event: React.MouseEvent<any>) => void
+  onClick?: (event: MouseEvent<any>) => void
 
   /**
    * On dismiss handler for the message
@@ -36,7 +41,7 @@ export interface IUserMessageProps extends AlertProps {
   /**
    * Actions to show in a menu
    */
-  actions?: MenuItemProps[]
+  actions?: IUserMessageAction[]
 
   /**
    * Whether to open the actions menu on hover
@@ -49,7 +54,7 @@ export interface IUserMessageProps extends AlertProps {
  */
 export interface IUserMessageContainerProps
   extends HTMLAttributes<HTMLDivElement>,
-  Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
+    Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
   /**
    * Vertical direction for the items in the container.
    */

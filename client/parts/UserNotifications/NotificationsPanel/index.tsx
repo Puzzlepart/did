@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { IPanelProps } from '@fluentui/react'
 import { BasePanel } from 'components'
-import { UserMessage } from 'components/UserMessage'
+import { UserMessage, UserMessageContainer } from 'components/UserMessage'
 import React, { FC, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -40,11 +40,11 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
             }
           />
         </div>
-        <div>
+        <UserMessageContainer vertical>
           {...notifications.map((n, index) => (
             <UserNotification key={index} model={n} />
           ))}
-        </div>
+        </UserMessageContainer>
       </div>
     </BasePanel>
   )

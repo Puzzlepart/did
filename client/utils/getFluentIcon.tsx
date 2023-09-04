@@ -1,5 +1,7 @@
 import { Icon } from '@fluentui/react'
 import {
+  CalendarClock24Regular,
+  CalendarClock24Filled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -82,6 +84,10 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  CalendarClock: {
+    regular: CalendarClock24Regular,
+    filled: CalendarClock24Filled
+  },
   Emoji: {
     regular: Emoji24Regular,
     filled: Emoji24Filled
@@ -251,6 +257,7 @@ export function getFluentIcon(
   bundle = true,
   color?: string
 ) {
+  if (!iconCatalog[name]) return null
   const icon = iconCatalog[name]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
   if (!color) return <Icon />
@@ -259,14 +266,18 @@ export function getFluentIcon(
 
 /**
  * Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
- * 
+ *
  * @param name - The name of the icon to retrieve.
  * @param bundle - Whether to bundle the icon with other icons.
  * @param color - The color of the icon.
- * 
+ *
  * @returns A Fluent UI icon component or a default icon component if the requested icon is not found.
  */
-export function getFluentIconWithFallback(name: string, bundle = true, color?: string) {
+export function getFluentIconWithFallback(
+  name: string,
+  bundle = true,
+  color?: string
+) {
   if (iconCatalog[name]) {
     return getFluentIcon(name as FluentIconName, bundle, color)
   }

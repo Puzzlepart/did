@@ -1,20 +1,20 @@
 import { DateRangeType } from '@fluentui/react'
-import $date from 'DateUtils'
 import { IUserMessageProps } from 'components/UserMessage/types'
+import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
-import { Overview } from '../Views/Overview'
 import { useTimesheetContext } from '../context'
+import { Overview } from '../Views/Overview'
 
 /**
  * A custom hook that returns an array of user messages to be displayed in the status bar.
  * The messages are based on the current state of the timesheet and are localized using the `useTranslation` hook.
  * The messages can be dismissed by the user and are stored in an array using the `useArray` hook.
- * 
+ *
  * @returns An array of `IUserMessageProps` objects representing the user messages to be displayed in the status bar.
  */
 export function useStatusBar(): IUserMessageProps[] {
@@ -63,7 +63,7 @@ export function useStatusBar(): IUserMessageProps[] {
           hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
           splitWeekInfoText:
             state.periods.length > 1 &&
-              state.dateRangeType === DateRangeType.Week
+            state.dateRangeType === DateRangeType.Week
               ? t('timesheet.splitWeekInfoText')
               : ''
         })
@@ -172,7 +172,7 @@ export function useStatusBar(): IUserMessageProps[] {
               })}
             </span>
           </p>
-        ),
+        )
         // iconName: 'SortUp'
       })
     }
