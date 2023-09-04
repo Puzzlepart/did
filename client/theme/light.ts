@@ -21,13 +21,12 @@ export default {
     bodySubtext: '#605e5c',
     successBackground: '#C9F7E8',
     successText: '#444',
-    successIcon: '#444',
     infoBackground: '#fff',
     infoText: '#444',
-    errorBackground: '#442726',
+    errorBackground: 'var(--colorPaletteRedForeground1)',
     errorText: '#fff',
     warningBackground: '#fff4ce',
-    warningText: '#444',
+    warningText: '#444'
   },
   palette: {
     themePrimary: '#0078d4',

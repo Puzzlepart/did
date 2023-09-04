@@ -21,7 +21,6 @@ export default {
     bodySubtext: '#c9d1d9',
     successBackground: '#C9F7E8',
     successText: '#444',
-    successIcon: '#444',
     infoBackground: '#323130',
     infoText: '#fff',
     errorBackground: '#442726',
