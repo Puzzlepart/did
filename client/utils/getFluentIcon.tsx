@@ -49,11 +49,26 @@ import {
   Timer24Filled,
   Timer24Regular,
   WebAsset24Filled,
-  WebAsset24Regular
+  WebAsset24Regular,
+  StoreMicrosoft24Regular,
+  StoreMicrosoft24Filled,
+  Key24Regular,
+  Key24Filled
 } from '@fluentui/react-icons'
 import React from 'react'
 
+/**
+ * An object containing the available Fluent icons and their corresponding regular and filled versions.
+ */
 const iconCatalog = {
+  Key: {
+    regular: Key24Regular,
+    filled: Key24Filled
+  },
+  StoreMicrosoft: {
+    regular: StoreMicrosoft24Regular,
+    filled: StoreMicrosoft24Filled
+  },
   ArrowSortUp: {
     regular: ArrowSortUpRegular,
     filled: ArrowSortUpFilled
@@ -156,6 +171,9 @@ const iconCatalog = {
   }
 }
 
+/**
+ * Represents the name of a Fluent UI icon.
+ */
 export type FluentIconName = keyof typeof iconCatalog
 
 /**

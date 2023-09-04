@@ -1,4 +1,4 @@
-import { DefaultButton } from '@fluentui/react'
+import { Button } from '@fluentui/react-components'
 import { UserMessage } from 'components'
 import { Logo } from 'components/Logo'
 import { PageComponent } from 'pages/types'
@@ -45,15 +45,15 @@ export const Home: PageComponent = () => {
         />
       )}
       {!subscription && !error && (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {Object.keys(providers).map((key) => (
-            <DefaultButton
+        <div className={styles.signIn}>
+          {Object.keys(providers).map((key, index) => (
+            <Button
               key={key}
-              className={styles.signInButton}
-              onClick={() => document.location.replace(`/auth/${key}/signin`)}
-              iconProps={providers[key].iconProps}
-              text={providers[key].text}
-            />
+              appearance={index === 0 ? 'primary' : 'secondary'}
+              icon={providers[key].icon}
+              onClick={() => document.location.replace(`/auth/${key}/signin`)}>
+              {providers[key].text}
+            </Button>
           ))}
         </div>
       )}
