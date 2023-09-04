@@ -1,6 +1,6 @@
 import { BasePanel } from 'components'
 import React from 'react'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../MenuItem'
 import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
@@ -19,7 +19,7 @@ export const UserSettings = () => {
       <div className={styles.root}>
         <MenuItem
           text={t('common.settings')}
-          icon={getFluentIcon('EditSettings')}
+          icon={icon('EditSettings')}
           onClick={openPanel}
         />
         <BasePanel

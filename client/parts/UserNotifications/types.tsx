@@ -1,7 +1,7 @@
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
 import { TFunction } from 'i18next'
 import { Notification } from 'types'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 
 export class NotificationModel {
   public id: string
@@ -42,10 +42,10 @@ export class NotificationModel {
   private get _icon() {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
-        return getFluentIcon('CalendarWeekNumbers')
+        return icon('CalendarWeekNumbers')
       }
       case 'MISSING_FORECAST': {
-        return getFluentIcon('Timer2')
+        return icon('Timer2')
       }
       default: {
         return null

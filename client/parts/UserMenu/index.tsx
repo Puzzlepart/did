@@ -12,7 +12,7 @@ import { useToggle } from 'hooks'
 import React, { FC, useEffect, useRef } from 'react'
 import { isMobile, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils/getFluentIcon'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { UserFeedback } from '../UserFeedback'
 import { UserNotifications } from '../UserNotifications'
 import { NotificationIndicator } from '../UserNotifications/NotificationIndicator'
@@ -94,7 +94,7 @@ export const UserMenu: FC = () => {
         <Divider />
         <MenuItem
           href='/auth/signout'
-          icon={getFluentIcon('SignOut')}
+          icon={icon('SignOut')}
           text={t('common.signOutText')}
         />
         <MenuItem

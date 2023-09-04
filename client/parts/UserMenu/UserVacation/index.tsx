@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { TooltipHost, useTheme } from '@fluentui/react'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../MenuItem'
 import { UserVacationTooltipContent } from './UserVacationTooltipContent'
 import $vacation from './vacation.gql'
@@ -22,7 +22,7 @@ export const UserVacation: FC = () => {
       <MenuItem
         style={{ cursor: 'help' }}
         text={t('common.vacationSummaryText', data?.vacation)}
-        icon={getFluentIcon('DrinkMargarita')}
+        icon={icon('DrinkMargarita')}
         textStyle={{
           color: palette.neutralPrimary
         }}

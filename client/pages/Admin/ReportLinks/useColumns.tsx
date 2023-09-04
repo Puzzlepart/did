@@ -5,7 +5,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { generateColumn as col } from 'utils/generateColumn'
 
 type UseColumns = {
@@ -27,7 +27,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       (reportLink: ReportLink) =>
         reportLink.published ? (
           <div style={{ textAlign: 'center' }}>
-            {getFluentIcon('Checkmark', true, '#107c10')}
+            {icon('Checkmark', true, '#107c10')}
           </div>
         ) : null
     ),
@@ -41,7 +41,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       (reportLink: ReportLink) =>
         reportLink.promoted ? (
           <div style={{ textAlign: 'center' }}>
-            {getFluentIcon('Checkmark', true, '#107c10')}
+            {icon('Checkmark', true, '#107c10')}
           </div>
         ) : null
     ),

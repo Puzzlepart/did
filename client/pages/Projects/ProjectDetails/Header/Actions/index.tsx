@@ -6,7 +6,7 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
-import { getFluentIcon } from 'utils/getFluentIcon'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { useProjectsContext } from '../../../context'
 import { ProjectForm } from '../../../ProjectForm'
 import { SET_SELECTED_PROJECT } from '../../../reducer/actions'
@@ -46,7 +46,7 @@ export const Actions: FC<IActionsProps> = (props) => {
         {state.selected?.webLink && (
           <Button
             appearance='transparent'
-            icon={getFluentIcon('WebAsset')}
+            icon={icon('WebAsset')}
             onClick={() =>
               window.open(state.selected?.externalSystemURL, '_blank')
             }
@@ -57,7 +57,7 @@ export const Actions: FC<IActionsProps> = (props) => {
         {!state.selected?.outlookCategory && (
           <Button
             appearance='transparent'
-            icon={getFluentIcon('CalendarAdd')}
+            icon={icon('CalendarAdd')}
             onClick={() => onCreateCategory()}
           >
             {t('projects.createOutlookCategoryLabel')}
@@ -67,7 +67,7 @@ export const Actions: FC<IActionsProps> = (props) => {
           <>
             <Button
               appearance='transparent'
-              icon={getFluentIcon('TableEdit')}
+              icon={icon('TableEdit')}
               onClick={toggleEditPanel}
             >
               {t('projects.editButtonLabel')}

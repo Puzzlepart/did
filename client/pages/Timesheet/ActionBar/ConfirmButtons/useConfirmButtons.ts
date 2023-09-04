@@ -3,7 +3,7 @@ import { ToolbarButtonProps } from '@fluentui/react-components'
 import { Overview } from 'pages/Timesheet/Views/Overview'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils'
+import { FluentIconName, getFluentIcon as icon } from 'utils'
 import { useTimesheetContext } from '../../context'
 
 /**
@@ -14,12 +14,12 @@ import { useTimesheetContext } from '../../context'
 export function useConfirmButtons() {
   const { t } = useTranslation()
   const { state, onSubmitPeriod, onUnsubmitPeriod } = useTimesheetContext()
-  const iconName = state.selectedPeriod?.isConfirmed
-    ? 'CalendarCancel'
-    : 'CalendarSync'
+  const iconName: FluentIconName = state.selectedPeriod?.isConfirmed
+    ? 'BinRecycle'
+    : 'CheckmarkCircle'
   const buttonProps: ToolbarButtonProps = useMemo(
     () => ({
-      icon: getFluentIcon(iconName),
+      icon: icon(iconName),
       disabled: !!state.loading,
       onClick: () => {
         if (state.selectedPeriod?.isConfirmed) {

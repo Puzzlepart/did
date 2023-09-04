@@ -5,7 +5,7 @@ import React, { FC, HTMLAttributes, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { CustomerForm } from '../../../CustomerForm'
 import styles from './Actions.module.scss'
 /**
@@ -22,7 +22,7 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         {state.selected?.webLink && (
           <Button
             appearance='transparent'
-            icon={getFluentIcon('WebAsset')}
+            icon={icon('WebAsset')}
             onClick={() => window.open(state.selected?.webLink, '_blank')}
           >
             {t('customers.webLinkText')}
@@ -31,7 +31,7 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
         {state.selected?.externalSystemURL && (
           <Button
             appearance='transparent'
-            icon={getFluentIcon('System')}
+            icon={icon('System')}
             onClick={() =>
               window.open(state.selected?.externalSystemURL, '_blank')
             }
@@ -43,7 +43,7 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
           <>
             <Button
               appearance='transparent'
-              icon={getFluentIcon('TableEdit')}
+              icon={icon('TableEdit')}
               onClick={toggleEditPanel}
             >
               {t('customers.editButtonLabel')}

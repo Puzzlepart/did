@@ -1,7 +1,11 @@
-import { Toolbar, ToolbarButton } from '@fluentui/react-components'
+import {
+  Toolbar,
+  ToolbarButton,
+  ToolbarGroup
+} from '@fluentui/react-components'
 import { Progress } from 'components/Progress'
 import React from 'react'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { useTimesheetContext } from '../context'
 import { NEXT_PERIOD, PREVIOUS_PERIOD } from '../reducer/actions'
 import styles from './ActionBar.module.scss'
@@ -31,26 +35,32 @@ export const ActionBar = () => {
     <div className={styles.root}>
       {state.selectedPeriod ? (
         <Toolbar
-          size='large'
+          style={{
+            justifyContent: 'space-between'
+          }}
           defaultCheckedValues={defaultCheckedValues}
           onCheckedValueChange={onCheckedValueChange}
         >
-          <TodayButton />
-          <ToolbarButton
-            icon={getFluentIcon('ArrowCircleLeft')}
-            onClick={() => dispatch(PREVIOUS_PERIOD())}
-            disabled={!!state.loading}
-          />
-          <ToolbarButton
-            icon={getFluentIcon('ArrowCircleRight')}
-            onClick={() => dispatch(NEXT_PERIOD())}
-            disabled={!!state.loading}
-          />
-          <DateRangePicker />
-          <DateRangeButtons />
-          <NavigatePeriodsButtons />
-          <ForecastButtons />
-          <ConfirmButtons />
+          <ToolbarGroup style={{ flex: 1 }}>
+            <TodayButton />
+            <ToolbarButton
+              icon={icon('ArrowCircleLeft')}
+              onClick={() => dispatch(PREVIOUS_PERIOD())}
+              disabled={!!state.loading}
+            />
+            <ToolbarButton
+              icon={icon('ArrowCircleRight')}
+              onClick={() => dispatch(NEXT_PERIOD())}
+              disabled={!!state.loading}
+            />
+            <DateRangePicker />
+            <DateRangeButtons name='dateRange' />
+            <NavigatePeriodsButtons name='period' />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ForecastButtons />
+            <ConfirmButtons />
+          </ToolbarGroup>
         </Toolbar>
       ) : null}
     </div>

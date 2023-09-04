@@ -3,7 +3,7 @@ import { useAppContext } from 'AppContext'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './TeamsReminderButton.module.scss'
 import { ITeamsReminderButtonProps } from './types'
 import { useStartTeamsConversation } from './useStartTeamsConversation'
@@ -17,7 +17,7 @@ export const TeamsReminderButton: FC<ITeamsReminderButtonProps> = (props) => {
     <div className={styles.root}>
       <Button
         appearance='primary'
-        icon={getFluentIcon('PeopleTeam')}
+        icon={icon('PeopleTeam')}
         onClick={() => startTeamsConversation()}
         {...pick(props, 'title', 'text')}
       >

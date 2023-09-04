@@ -2,7 +2,7 @@
 import { useToggle } from 'hooks'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
 import { IUserFeedbackProps } from './types'
@@ -26,12 +26,12 @@ export const UserFeedback: FC<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
       {renderAsMenuItem ? (
         <MenuItem
           onClick={togglePanel}
-          icon={getFluentIcon('Emoji')}
+          icon={icon('Emoji')}
           text={t('feedback.mobileFeedbackText')}
         />
       ) : (
         <div className={styles.root} onClick={togglePanel}>
-          <div className={styles.icon}>{getFluentIcon('Emoji')}</div>
+          <div className={styles.icon}>{icon('Emoji')}</div>
         </div>
       )}
       <FeedbackPanel

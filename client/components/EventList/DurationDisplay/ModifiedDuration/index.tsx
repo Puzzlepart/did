@@ -1,7 +1,7 @@
 import { Tooltip } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ModifiedDuration.module.scss'
 import { IModifiedDurationProps } from './types'
 import { useModifiedDuration } from './useModifiedDuration'
@@ -18,7 +18,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
       content={
         <div className={styles.content}>
           <div className={styles.header}>
-            <div className={styles.icon}>{getFluentIcon('ArrowSortUp')}</div>
+            <div className={styles.icon}>{icon('ArrowSortUp')}</div>
             <div className={styles.title}>
               {t('timesheet.eventDurationModifiedTitle')}
             </div>
@@ -34,7 +34,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
     >
       <div className={styles.root}>
         {props.children}
-        <div className={styles.icon}>{getFluentIcon('ArrowSortUp')}</div>
+        <div className={styles.icon}>{icon('ArrowSortUp')}</div>
       </div>
     </Tooltip>
   )

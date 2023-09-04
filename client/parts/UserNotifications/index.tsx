@@ -2,7 +2,7 @@
 import { useToggle } from 'hooks/common/useToggle'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
@@ -29,7 +29,7 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
       {renderAsMenuItem ? (
         <MenuItem
           onClick={togglePanel}
-          icon={getFluentIcon('Alert')}
+          icon={icon('Alert')}
           text={t('notifications.headerText')}
         >
           <NotificationIndicator
@@ -44,7 +44,7 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
         </MenuItem>
       ) : (
         <div className={styles.root} onClick={togglePanel}>
-          <div className={styles.icon}>{getFluentIcon('Alert')}</div>
+          <div className={styles.icon}>{icon('Alert')}</div>
           <NotificationIndicator />
         </div>
       )}

@@ -6,7 +6,7 @@ import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { useTimesheetContext } from '../context'
 import { Overview } from '../Views/Overview'
 
@@ -80,7 +80,7 @@ export function useMessages(): IUserMessageProps[] {
             key: 'ignore',
             content: t('timesheet.ignoreAllText'),
             onClick: () => dispatch(IGNORE_ALL()),
-            icon: getFluentIcon('CalendarCancel')
+            icon: icon('CalendarCancel')
           }
         ],
         // children: (
@@ -148,7 +148,7 @@ export function useMessages(): IUserMessageProps[] {
             key: 'undo-ignore',
             content: t('timesheet.undoIgnoreText'),
             onClick: () => dispatch(CLEAR_IGNORES()),
-            icon: getFluentIcon('ArrowUndo')
+            icon: icon('ArrowUndo')
           }
         ],
         intent: 'warning'

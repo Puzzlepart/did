@@ -2,7 +2,7 @@
 import { ICommandBarItemProps, Icon } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
-import { FluentIconName, getFluentIcon } from 'utils'
+import { FluentIconName, getFluentIcon as icon } from 'utils'
 
 /**
  * Represents a menu item in the `ListMenuItem` component. Supports
@@ -82,17 +82,17 @@ export class ListMenuItem {
   /**
    * Sets the icon for the `ListMenuItem`.
    *
-   * @param icon The FluentIcon or string representing the icon to set.
+   * @param iconName The FluentIcon or string representing the icon to set.
    * @param useFluentIcon Whether to use FluentIcon or not. Defaults to false.
    *
    * with the FluentIcon provided in `icon` (optional).
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public withIcon(icon: string, useFluentIcon?: boolean) {
-    this.icon = icon
+  public withIcon(iconName: string, useFluentIcon?: boolean) {
+    this.icon = iconName
     if (useFluentIcon) {
-      this.icon = getFluentIcon(icon as FluentIconName)
+      this.icon = icon(iconName as FluentIconName)
     }
     return this
   }

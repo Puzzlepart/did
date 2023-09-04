@@ -15,6 +15,8 @@ import {
   ArrowSortUpRegular,
   ArrowUndo24Filled,
   ArrowUndo24Regular,
+  BinRecycle24Filled,
+  BinRecycle24Regular,
   bundleIcon,
   CalendarAdd24Filled,
   CalendarAdd24Regular,
@@ -30,10 +32,14 @@ import {
   CalendarWeekNumbers24Regular,
   CalendarWorkWeek24Filled,
   CalendarWorkWeek24Regular,
+  CheckmarkCircle24Filled,
+  CheckmarkCircle24Regular,
   CheckmarkFilled,
   CheckmarkRegular,
   Delete24Filled,
   Delete24Regular,
+  DeleteDismiss24Filled,
+  DeleteDismiss24Regular,
   DocumentDatabase24Filled,
   DocumentDatabase24Regular,
   DrinkMargarita24Filled,
@@ -163,6 +169,10 @@ const iconCatalog = {
     regular: CalendarWorkWeek24Regular,
     filled: CalendarWorkWeek24Filled
   },
+  CheckmarkCircle: {
+    regular: CheckmarkCircle24Regular,
+    filled: CheckmarkCircle24Filled
+  },
   Timer: {
     regular: Timer24Regular,
     filled: Timer24Filled
@@ -210,6 +220,14 @@ const iconCatalog = {
   CalendarAdd: {
     regular: CalendarAdd24Regular,
     filled: CalendarAdd24Filled
+  },
+  BinRecycle: {
+    regular: BinRecycle24Regular,
+    filled: BinRecycle24Filled
+  },
+  DeleteDismiss: {
+    regular: DeleteDismiss24Regular,
+    filled: DeleteDismiss24Filled
   }
 }
 
@@ -227,8 +245,13 @@ export type FluentIconName = keyof typeof iconCatalog
  *
  * @returns The specified Fluent icon.
  */
-export function getFluentIcon(name: FluentIconName, bundle = true, color?) {
+export function getFluentIcon(
+  name: FluentIconName,
+  bundle = true,
+  color?: string
+) {
   const icon = iconCatalog[name]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
+  if (!color) return <Icon />
   return <Icon style={{ color }} />
 }
