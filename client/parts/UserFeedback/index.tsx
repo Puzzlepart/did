@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react'
 import { useToggle } from 'hooks'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
 import { IUserFeedbackProps } from './types'
@@ -18,10 +18,7 @@ import styles from './UserFeedback.module.scss'
  *
  * @category Function Component
  */
-export const UserFeedback: FC<IUserFeedbackProps> = ({
-  renderAsMenuItem,
-  iconName = 'Emoji2'
-}) => {
+export const UserFeedback: FC<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
   const { t } = useTranslation()
   const [isOpen, togglePanel] = useToggle(false)
   return (
@@ -29,14 +26,12 @@ export const UserFeedback: FC<IUserFeedbackProps> = ({
       {renderAsMenuItem ? (
         <MenuItem
           onClick={togglePanel}
-          iconProps={{ iconName: 'Emoji2' }}
+          icon={getFluentIcon('Emoji')}
           text={t('feedback.mobileFeedbackText')}
         />
       ) : (
         <div className={styles.root} onClick={togglePanel}>
-          <div className={styles.icon}>
-            <Icon iconName={iconName} />
-          </div>
+          <div className={styles.icon}>{getFluentIcon('Emoji')}</div>
         </div>
       )}
       <FeedbackPanel

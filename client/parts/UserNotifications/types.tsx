@@ -23,6 +23,11 @@ export class NotificationModel {
     this.moreLink = notification.moreLink
   }
 
+  /**
+   * Returns the intent of the notification based on its type.
+   *
+   * @returns The intent of the notification.
+   */
   private get _notificationIntent(): AlertProps['intent'] {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
@@ -79,5 +84,4 @@ export class NotificationModel {
 
 export interface IUserNotificationsProps {
   renderAsMenuItem?: boolean
-  iconName?: string
 }

@@ -1,6 +1,8 @@
 import {
   AddCircle24Filled,
   AddCircle24Regular,
+  Alert24Filled,
+  Alert24Regular,
   ArrowCircleLeft24Filled,
   ArrowCircleLeft24Regular,
   ArrowCircleRight24Filled,
@@ -38,6 +40,8 @@ import {
   DrinkMargarita24Regular,
   EditSettings24Filled,
   EditSettings24Regular,
+  Emoji24Filled,
+  Emoji24Regular,
   FastForward24Filled,
   FastForward24Regular,
   Key24Filled,
@@ -71,6 +75,14 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Emoji: {
+    regular: Emoji24Regular,
+    filled: Emoji24Filled
+  },
+  Alert: {
+    regular: Alert24Regular,
+    filled: Alert24Filled
+  },
   ArrowExportUp: {
     regular: ArrowExportUp24Regular,
     filled: ArrowExportUp24Filled
