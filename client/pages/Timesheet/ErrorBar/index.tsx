@@ -17,8 +17,7 @@ export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
       {
         messageProps = {
           text: t('timesheet.exchangeLicenseErrorMessageText'),
-          intent: 'error',
-          iconName: 'SearchCalendar'
+          intent: 'error'
         }
       }
       break

@@ -57,11 +57,7 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
       const [text, intent] = getErrorMessage(event.error.code, t)
       return (
         <div className={className}>
-          <UserMessage
-            containerStyle={{ marginTop: 10 }}
-            intent={intent}
-            text={text}
-          />
+          <UserMessage intent={intent} text={text} />
         </div>
       )
     }
@@ -69,7 +65,7 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
       <div className={className}>
         <UserMessage
           intent='warning'
-          iconName='TagUnknown'
+          // iconName='TagUnknown'
           text={t('timesheet.noProjectMatchFoundText')}
           actions={[
             {

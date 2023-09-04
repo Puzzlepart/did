@@ -21,14 +21,12 @@ export const MatchEventPanel: FC = () => {
     >
       <SubText text={event.title} font='mediumPlus' />
       <UserMessage
-        containerStyle={{ marginTop: 25 }}
-        iconName='OutlookLogo'
+        // iconName='OutlookLogo'
         text={t('timesheet.matchOutlookInfoText', event)}
       />
       <UserMessage
         hidden={!event.suggestedProject}
-        containerStyle={{ marginTop: 10 }}
-        iconName='Lightbulb'
+        // iconName='Lightbulb'
       >
         <p>
           <span>{t('timesheet.didYouMeanText')}</span>
@@ -40,7 +38,6 @@ export const MatchEventPanel: FC = () => {
       </UserMessage>
       <UserMessage
         hidden={!event.customer || !!event.suggestedProject}
-        containerStyle={{ marginTop: 10 }}
         text={t('timesheet.eventNotFullyMatchedText', {
           name: event.customer?.name
         })}

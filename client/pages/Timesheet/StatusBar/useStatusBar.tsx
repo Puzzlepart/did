@@ -1,19 +1,23 @@
 import { DateRangeType } from '@fluentui/react'
-import { IUserMessageProps } from 'components/UserMessage/types'
 import $date from 'DateUtils'
+import { IUserMessageProps } from 'components/UserMessage/types'
 import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
-import { useTimesheetContext } from '../context'
 import { Overview } from '../Views/Overview'
+import { useTimesheetContext } from '../context'
 
 /**
- * Returns the active messages
+ * A custom hook that returns an array of user messages to be displayed in the status bar.
+ * The messages are based on the current state of the timesheet and are localized using the `useTranslation` hook.
+ * The messages can be dismissed by the user and are stored in an array using the `useArray` hook.
+ * 
+ * @returns An array of `IUserMessageProps` objects representing the user messages to be displayed in the status bar.
  */
-export function useMessages(): IUserMessageProps[] {
+export function useStatusBar(): IUserMessageProps[] {
   const { t } = useTranslation()
   const [, dismiss, isDismissed] = useArray<string>([])
   const { state, dispatch } = useTimesheetContext()
@@ -37,8 +41,7 @@ export function useMessages(): IUserMessageProps[] {
         hours: $date.getDurationString(confirmedDuration, t),
         periodsCount: state.periods.length,
         confirmedPeriodsCount: state.periods.filter((p) => p.isConfirmed).length
-      }),
-      intent: 'info'
+      })
     })
     const forecastedHours = state.periods.reduce(
       (sum, period) => (sum += period.forecastedHours),
@@ -60,7 +63,7 @@ export function useMessages(): IUserMessageProps[] {
           hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
           splitWeekInfoText:
             state.periods.length > 1 &&
-            state.dateRangeType === DateRangeType.Week
+              state.dateRangeType === DateRangeType.Week
               ? t('timesheet.splitWeekInfoText')
               : ''
         })
@@ -83,21 +86,6 @@ export function useMessages(): IUserMessageProps[] {
             icon: icon('CalendarCancel')
           }
         ],
-        // children: (
-        //   <p>
-        //     <ReactMarkdown>
-        //       {t('timesheet.hoursNotMatchedText', {
-        //         hours: $date.getDurationString(
-        //           state.selectedPeriod.unmatchedDuration,
-        //           t
-        //         )
-        //       })}
-        //     </ReactMarkdown>
-        //     <Link onClick={() => dispatch(IGNORE_ALL())}>
-        //       {t('timesheet.ignoreAllText')}
-        //     </Link>
-        //   </p>
-        // ),
         intent: 'warning'
       })
     }
@@ -185,8 +173,7 @@ export function useMessages(): IUserMessageProps[] {
             </span>
           </p>
         ),
-        intent: 'info',
-        iconName: 'SortUp'
+        // iconName: 'SortUp'
       })
     }
   }
