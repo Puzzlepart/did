@@ -1,6 +1,5 @@
-/* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react'
-import React, { FC } from 'react'
+import { Button } from '@fluentui/react-components'
+import React, { FC, MouseEventHandler } from 'react'
 import styles from './MenuItem.module.scss'
 import { IMenuItemProps } from './types'
 
@@ -9,15 +8,11 @@ import { IMenuItemProps } from './types'
  */
 export const MenuItem: FC<IMenuItemProps> = (props) => {
   const className = [styles.root]
-  let onClick = props.onClick
+  let onClick: MouseEventHandler<any> = props.onClick
   if (props.href) {
     onClick = () => {
       window.location.replace(props.href)
     }
-  }
-
-  if (onClick) {
-    className.push(styles.clickable)
   }
 
   return (
@@ -28,20 +23,22 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
         ...props.style,
         position: 'relative'
       }}
-      onClick={onClick}
     >
-      {props.iconProps && (
-        <Icon
-          {...props.iconProps}
-          style={props.style}
-          className={props.iconClassName || styles.icon}
-        />
-      )}
-      {props.text && (
-        <span style={props.textStyle} hidden={props.hideText}>
-          {props.text}
-        </span>
-      )}
+      {onClick ?
+        (
+          <Button
+            appearance='subtle'
+            onClick={onClick}
+            icon={props.icon}
+            style={{ width: '100%' }}>
+            {props.text}
+          </Button>
+        ) : (
+          <span className={styles.text} style={props.textStyle} hidden={props.hideText}>
+            {props.icon && <span>{props.icon}</span>}
+            {props.text}
+          </span>
+        )}
       {props.children}
     </div>
   )
