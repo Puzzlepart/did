@@ -1,7 +1,8 @@
 import { ToolbarButton } from '@fluentui/react-components'
 import React, { CSSProperties, FC } from 'react'
-import { createStyle } from './createStyle'
+import { getFluentIconWithFallback } from 'utils'
 import { ListMenuItem } from './ListMenuItem'
+import { createStyle } from './createStyle'
 
 /**
  * Renders a toolbar button based on the provided list menu item.
@@ -19,7 +20,7 @@ export const ListToolbarButton: FC<{
 }> = (props) => {
   return (
     <ToolbarButton
-      icon={ListMenuItem.createIcon(props.item)}
+      icon={getFluentIconWithFallback(props.item.icon)}
       title={props.item.text}
       style={createStyle(props.item, props.buttonStyle)}
       onClick={props.item.onClick}

@@ -2,7 +2,6 @@
 import { ICommandBarItemProps, Icon } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
-import { FluentIconName, getFluentIcon as icon } from 'utils'
 
 /**
  * Represents a menu item in the `ListMenuItem` component. Supports
@@ -26,12 +25,10 @@ export class ListMenuItem {
   value?: string
 
   /**
-   * The icon to display in the menu item. Could either be a
-   * `FluentIcon` or a string representing the icon name. Then
-   * the `<Icon />` component from `@fluentui/react`
-   * will be used.
+   * The icon to display in the menu item. A string representing a FluentIcon
+   * or an Icon from `@fluentui/react` can be provided.
    */
-  icon?: string | JSX.Element
+  icon?: string
 
   /**
    * On click event handler.
@@ -83,17 +80,13 @@ export class ListMenuItem {
    * Sets the icon for the `ListMenuItem`.
    *
    * @param iconName The FluentIcon or string representing the icon to set.
-   * @param useFluentIcon Whether to use FluentIcon or not. Defaults to false.
    *
    * with the FluentIcon provided in `icon` (optional).
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public withIcon(iconName: string, useFluentIcon?: boolean) {
+  public withIcon(iconName: string) {
     this.icon = iconName
-    if (useFluentIcon) {
-      this.icon = icon(iconName as FluentIconName)
-    }
     return this
   }
 
@@ -242,6 +235,8 @@ export class ListMenuItem {
       return <Icon iconName={item.icon} />
     }
     if (item.icon) IconElement = item.icon as any
+    // eslint-disable-next-line no-console
+    console.log(item.icon, IconElement)
     return <IconElement />
   }
 
