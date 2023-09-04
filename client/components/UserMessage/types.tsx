@@ -3,8 +3,19 @@ import { AlertProps } from '@fluentui/react-components/dist/unstable'
 import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
 import { FluentIconName } from 'utils'
 
-export interface IUserMessageAction extends Omit<MenuItemProps,'icon'> {
+/**
+ * Represents an action that can be performed on a user message.
+ */
+export interface IUserMessageAction extends Omit<MenuItemProps, 'icon'> {
+  /**
+   * The name of the Fluent UI icon to display for the action (optional).
+   */
   iconName?: FluentIconName
+
+  /**
+   * The color of the icon to display for the action (optional).
+   */
+  iconColor?: string
 }
 
 /**
@@ -27,11 +38,6 @@ export interface IUserMessageProps extends AlertProps {
    * On click handler for the message
    */
   onClick?: (event: MouseEvent<any>) => void
-
-  /**
-   * On dismiss handler for the message
-   */
-  onDismiss?: () => void
 
   /**
    * To flex the message center with a fixed height

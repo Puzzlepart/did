@@ -29,13 +29,13 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
   return (
     <div {...containerProps}>
       <ConditionalWrapper
-        condition={!_.isEmpty(props.actions)}
-        wrapper={(children: any) => (
+        condition={!_.isEmpty(actions)}
+        wrapper={(children) => (
           <Menu openOnHover={props.openActionsOnHover}>
             <MenuTrigger disableButtonEnhancement>{children}</MenuTrigger>
             <MenuPopover>
               <MenuList>
-                {props.actions.map((action, index) => (
+                {actions.map((action, index) => (
                   <MenuItem {...action} key={index} />
                 ))}
               </MenuList>

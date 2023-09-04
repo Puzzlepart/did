@@ -4,13 +4,10 @@ import _ from 'underscore'
 import { UserNotificationsContext } from '../context'
 import styles from './NotificationIndicator.module.scss'
 
-
 /**
  * @category Function Component
  */
-export const NotificationIndicator: FC<HTMLProps<HTMLDivElement>> = (
-  props
-) => {
+export const NotificationIndicator: FC<HTMLProps<HTMLDivElement>> = (props) => {
   const { notifications, count } = useContext(UserNotificationsContext)
   return (
     <div

@@ -1,5 +1,4 @@
-/* eslint-disable tsdoc/syntax */
-import { HTMLAttributes } from 'react'
+import { FC, HTMLAttributes } from 'react'
 
 /**
  * Did reusable functional component
@@ -8,4 +7,4 @@ import { HTMLAttributes } from 'react'
  */
 export type ReusableComponent<
   T extends Omit<HTMLAttributes<any>, 'onChange' | 'defaultChecked'>
-> = React.FunctionComponent<T>
+> = FC<T>

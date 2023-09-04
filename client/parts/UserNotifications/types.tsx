@@ -9,6 +9,7 @@ export class NotificationModel {
   public severity: string
   public text: string
   public moreLink: string
+  public iconName?: string
 
   /**
    * Constructs a new instance of UserNotificationMessageModel
@@ -21,6 +22,7 @@ export class NotificationModel {
     this.severity = notification.severity
     this.text = notification.text
     this.moreLink = notification.moreLink
+    this.iconName = notification.iconName
   }
 
   /**

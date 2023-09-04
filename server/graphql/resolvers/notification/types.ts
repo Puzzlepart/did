@@ -70,6 +70,9 @@ export class Notification {
 
   @Field()
   moreLink: string
+
+  @Field({ nullable: true })
+  iconName?: string
 }
 
 /**

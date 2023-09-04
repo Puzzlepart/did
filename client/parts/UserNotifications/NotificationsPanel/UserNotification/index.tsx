@@ -18,11 +18,17 @@ export const UserNotification: FC<IUserNotificationProps> = ({ model }) => {
       <UserMessage
         {...model.alertProps}
         className={styles.root}
-        onDismiss={() => dismissNotification(model.id)}
         actions={[
           {
             content: model.getMoreLinkText(t),
-            onClick: () => window.open(model.moreLink)
+            onClick: () => window.open(model.moreLink, '_self'),
+            iconName: 'CalendarPlay'
+          },
+          {
+            content: t('notifications.dismissText'),
+            onClick: () => dismissNotification(model.id),
+            iconName: 'DeleteDismiss',
+            iconColor: 'var(--colorPaletteRedForeground1)'
           }
         ]}
       >

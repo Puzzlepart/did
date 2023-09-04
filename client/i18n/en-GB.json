@@ -515,7 +515,8 @@
       "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
       "forecast": "Missing forecast for week {0} ({1})."
     },
-    "clearDismissedText": "Click to show dismissed notifications."
+    "clearDismissedText": "Click to show dismissed notifications.",
+    "dismissText": "Dismiss notification"
   },
   "feedback": {
     "headerText": "Feedback",

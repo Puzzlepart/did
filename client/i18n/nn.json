@@ -515,7 +515,8 @@
       "unconfirmedPeriods": "Veke {0} ({1}) manglar stadfesting.",
       "forecast": "Veke {0} ({1}) manglar prognose."
     },
-    "clearDismissedText": "Klikk for å visa gøymde varslar."
+    "clearDismissedText": "Klikk for å visa gøymde varslar.",
+    "dismissText": "Avvis varsel"
   },
   "feedback": {
     "headerText": "Tilbakemelding",

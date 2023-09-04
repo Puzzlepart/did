@@ -1,7 +1,5 @@
 import { Icon } from '@fluentui/react'
 import {
-  CalendarClock24Regular,
-  CalendarClock24Filled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -25,8 +23,12 @@ import {
   CalendarAdd24Regular,
   CalendarCancel24Filled,
   CalendarCancel24Regular,
+  CalendarClock24Filled,
+  CalendarClock24Regular,
   CalendarMonth24Filled,
   CalendarMonth24Regular,
+  CalendarPlay24Filled,
+  CalendarPlay24Regular,
   CalendarSync24Filled,
   CalendarSync24Regular,
   CalendarToday24Filled,
@@ -84,6 +86,10 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  CalendarPlay: {
+    regular: CalendarPlay24Regular,
+    filled: CalendarPlay24Filled
+  },
   CalendarClock: {
     regular: CalendarClock24Regular,
     filled: CalendarClock24Filled

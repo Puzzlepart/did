@@ -40,7 +40,7 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
             }
           />
         </div>
-        <UserMessageContainer vertical>
+        <UserMessageContainer vertical gap={12}>
           {...notifications.map((n, index) => (
             <UserNotification key={index} model={n} />
           ))}

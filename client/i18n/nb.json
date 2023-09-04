@@ -515,7 +515,8 @@
       "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse.",
       "forecast": "Uke {0} ({1}) mangler prognose."
     },
-    "clearDismissedText": "Klikk for å vise gjemte varsler."
+    "clearDismissedText": "Klikk for å vise gjemte varsler.",
+    "dismissText": "Avvis varsel"
   },
   "feedback": {
     "headerText": "Tilbakemelding",

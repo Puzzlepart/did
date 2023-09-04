@@ -41,3 +41,7 @@ h4 {
 h5 {
     font-size: 1.2em;
 }
+
+.fui-FluentProvider {
+    background-color: transparent !important;
+}
