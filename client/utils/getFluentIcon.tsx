@@ -1,3 +1,4 @@
+import { Icon } from '@fluentui/react'
 import {
   AddCircle24Filled,
   AddCircle24Regular,
@@ -254,4 +255,20 @@ export function getFluentIcon(
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
   if (!color) return <Icon />
   return <Icon style={{ color }} />
+}
+
+/**
+ * Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
+ * 
+ * @param name - The name of the icon to retrieve.
+ * @param bundle - Whether to bundle the icon with other icons.
+ * @param color - The color of the icon.
+ * 
+ * @returns A Fluent UI icon component or a default icon component if the requested icon is not found.
+ */
+export function getFluentIconWithFallback(name: string, bundle = true, color?: string) {
+  if (iconCatalog[name]) {
+    return getFluentIcon(name as FluentIconName, bundle, color)
+  }
+  return <Icon iconName={name} style={{ color }} />
 }

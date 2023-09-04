@@ -37,7 +37,9 @@ export const ApiTokens: TabComponent = () => {
       <Toast {...toast} />
       {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
-          <UserMessage intent='success' iconName='Cloud'>
+          <UserMessage intent='success' 
+          // iconName='Cloud'
+          >
             <span className={styles.text}>{apiKey}</span>
             <span className={styles.copy}>
               <CopyToClipboard text={apiKey}>

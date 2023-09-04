@@ -5,8 +5,8 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { generateColumn as col } from 'utils/generateColumn'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 
 type UseColumns = {
   onEdit: (reportLink: ReportLink) => void

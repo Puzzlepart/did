@@ -52,7 +52,6 @@ export const UserReports: FC = () => {
         />
         <UserMessage
           hidden={!preset || query.loading}
-          iconName='ReminderTime'
           text={t('common.userReportSummary', query)}
         />
       </BasePanel>

@@ -28,7 +28,7 @@ export function useUsersMenuItems(context: IUsersContext) {
   return useMemo(() => {
     return [
       new ListMenuItem(t('admin.users.addNewUser'))
-        .withIcon('PeopleAdd', true)
+        .withIcon('PeopleAdd')
         .setDisabled(
           context.state.loading ||
             _.isEmpty(context.state.availableAdUsers) ||
@@ -38,13 +38,13 @@ export function useUsersMenuItems(context: IUsersContext) {
           headerText: t('admin.users.addNewUser')
         }),
       new ListMenuItem(t('admin.users.bulkImportUsersLabel'))
-        .withIcon('ArrowImport', true)
+        .withIcon('ArrowImport')
         .setDisabled(
           context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS)
         )
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
-        .withIcon('PersonSync', true)
+        .withIcon('PersonSync')
         .setDisabled(
           context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS)
         )

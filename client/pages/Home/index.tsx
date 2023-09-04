@@ -31,7 +31,7 @@ export const Home: PageComponent = () => {
         <UserMessage
           className={styles.error}
           intent='error'
-          iconName={error.icon}
+          // iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
           onDismiss={() => {
             window.location.href = window.location.href.split('?')[0]

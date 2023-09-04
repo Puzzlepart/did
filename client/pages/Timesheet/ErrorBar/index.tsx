@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
+import get from 'get-value'
 
 /**
  * @category Timesheet
@@ -11,7 +12,7 @@ export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
   const { t } = useTranslation()
   if (!error) return null
   let messageProps: IUserMessageProps
-  const code = error.graphQLErrors[0]?.extensions?.code
+  const code = get(error, 'graphQLErrors.0.extensions.code', { default: '' })
   switch (code) {
     case 'ResourceNotFound': {
       {

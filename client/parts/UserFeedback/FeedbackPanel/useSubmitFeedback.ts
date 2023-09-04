@@ -23,9 +23,7 @@ export const useSubmitFeedback = (
   const { t } = useTranslation()
   const [disabled, setDisabled] = useState(false)
   const [submitFeedback] = useMutation($submit_feedback)
-  const [toast, setToast] = useToast(8000, {
-    innerStyle: { paddingLeft: 15 }
-  })
+  const [toast, setToast] = useToast(8000)
 
   /**
    * On submit feedback

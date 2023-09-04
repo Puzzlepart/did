@@ -13,7 +13,7 @@ export const WelcomeTab: TabComponent = () => {
   return (
     <div className={styles.root}>
       <UserMessage
-        iconName='ReportDocument'
+        // iconName='ReportDocument'
         text={t('reports.selectReportText')}
       />
       <div className={styles.reportButtons}>

@@ -37,9 +37,8 @@ export const Information: FC = () => {
       )}
       <UserMessage
         hidden={!state.selected?.outlookCategory}
-        containerStyle={{ margin: '15px 0 15px 0' }}
         text={t('projects.categoryOutlookText')}
-        iconName='OutlookLogoInverse'
+        // iconName='OutlookLogoInverse'
       />
     </div>
   )
