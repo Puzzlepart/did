@@ -26,6 +26,7 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
     >
       {onClick ? (
         <Button
+        className={styles.button}
           appearance='subtle'
           onClick={onClick}
           icon={props.icon}
