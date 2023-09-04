@@ -5,6 +5,7 @@ import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { useUserSettings } from './useUserSettings'
+import { getFluentIcon } from 'utils'
 
 /**
  * @category UserMenu
@@ -17,8 +18,8 @@ export const UserSettings = () => {
     <UserSettingsContext.Provider value={context}>
       <div className={styles.root}>
         <MenuItem
-          iconProps={{ iconName: 'Settings' }}
           text={t('common.settings')}
+          icon={getFluentIcon('EditSettings')}
           onClick={openPanel}
         />
         <BasePanel

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../MenuItem'
 import { UserVacationTooltipContent } from './UserVacationTooltipContent'
 import $vacation from './vacation.gql'
+import { getFluentIcon } from 'utils'
 
 /**
  * @category UserMenu
@@ -20,8 +21,8 @@ export const UserVacation: FC = () => {
     >
       <MenuItem
         style={{ cursor: 'help' }}
-        iconProps={{ iconName: 'Vacation' }}
         text={t('common.vacationSummaryText', data?.vacation)}
+        icon={getFluentIcon('DrinkMargarita')}
         textStyle={{
           color: palette.neutralPrimary
         }}

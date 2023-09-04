@@ -1,4 +1,6 @@
 import {
+  ArrowExportUp24Regular,
+  ArrowExportUp24Filled,
   DrinkMargarita24Regular,
   DrinkMargarita24Filled,
   EditSettings24Regular,
@@ -69,6 +71,10 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  ArrowExportUp: {
+    regular: ArrowExportUp24Regular,
+    filled: ArrowExportUp24Filled
+  },
   DrinkMargarita: {
     regular: DrinkMargarita24Regular,
     filled: DrinkMargarita24Filled
