@@ -18,6 +18,7 @@ export default {
     menuBackground: '#161b22',
     menuHeader: '#161b22',
     bodyBackground: '#0d1117',
+    bodySubtext: '#c9d1d9',
     successBackground: '#C9F7E8',
     successText: '#444',
     successIcon: '#444',
@@ -25,7 +26,8 @@ export default {
     infoText: '#fff',
     errorBackground: '#442726',
     errorText: '#fff',
-    bodySubtext: '#c9d1d9'
+    warningBackground: '#fff4ce',
+    warningText: '#444'
   },
   palette: {
     themeDarker: '#0d1117',

@@ -18,7 +18,16 @@ export default {
     menuBackground: '#fff',
     menuHeader: '#161b22',
     bodyBackground: '#ffffff',
-    bodySubtext: '#605e5c'
+    bodySubtext: '#605e5c',
+    successBackground: '#C9F7E8',
+    successText: '#444',
+    successIcon: '#444',
+    infoBackground: '#fff',
+    infoText: '#444',
+    errorBackground: '#442726',
+    errorText: '#fff',
+    warningBackground: '#fff4ce',
+    warningText: '#444',
   },
   palette: {
     themePrimary: '#0078d4',
