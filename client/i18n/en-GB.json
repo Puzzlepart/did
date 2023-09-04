@@ -466,7 +466,8 @@
     "vacationSummaryTooltipConfirmed": "The vacation calculation is for the whole year, and is based on {{usedHours}} hours of vacation confirmed as part of your timesheet (each vacation day is 8 hours).",
     "updatedLabel": "Updated",
     "cancelButtonLabel": "Cancel",
-    "toggleFilterPanel": "Filter"
+    "toggleFilterPanel": "Filter",
+    "userSettingsPanelHeaderText": "User settings"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

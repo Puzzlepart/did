@@ -1,11 +1,11 @@
 import { BasePanel } from 'components'
 import React from 'react'
+import { getFluentIcon } from 'utils'
 import { MenuItem } from '../MenuItem'
 import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { useUserSettings } from './useUserSettings'
-import { getFluentIcon } from 'utils'
 
 /**
  * @category UserMenu
@@ -24,11 +24,16 @@ export const UserSettings = () => {
         />
         <BasePanel
           className={styles.panel}
-          headerText={t('common.settings')}
+          headerText={t('common.userSettingsPanelHeaderText')}
           isOpen={isOpen}
           onDismiss={dismissPanel}
-          onLightDismissClick={dismissPanel}
-          isLightDismiss={true}
+          footerActions={[
+            {
+              text: t('common.save'),
+              appearance: 'primary',
+              disabled: true
+            }
+          ]}
         >
           {settings.map((s, index) => (
             <UserSettingInput key={index} setting={s} />

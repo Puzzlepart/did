@@ -466,7 +466,8 @@
     "vacationSummaryTooltipConfirmed": "Ferieberegningen er for hele året, og er basert på {{usedHours}} timer ferie bekreftet som en del av timelisten din (hver feriedag er 8 timer).",
     "updatedLabel": "Oppdatert",
     "cancelButtonLabel": "Avbryt",
-    "toggleFilterPanel": "Filter"
+    "toggleFilterPanel": "Filter",
+    "userSettingsPanelHeaderText": "Brukerinstillinger"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

@@ -24,21 +24,25 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
         position: 'relative'
       }}
     >
-      {onClick ?
-        (
-          <Button
-            appearance='subtle'
-            onClick={onClick}
-            icon={props.icon}
-            style={{ width: '100%' }}>
-            {props.text}
-          </Button>
-        ) : (
-          <span className={styles.text} style={props.textStyle} hidden={props.hideText}>
-            {props.icon && <span>{props.icon}</span>}
-            {props.text}
-          </span>
-        )}
+      {onClick ? (
+        <Button
+          appearance='subtle'
+          onClick={onClick}
+          icon={props.icon}
+          style={{ width: '100%' }}
+        >
+          {props.text}
+        </Button>
+      ) : (
+        <span
+          className={styles.text}
+          style={props.textStyle}
+          hidden={props.hideText}
+        >
+          {props.icon && <span>{props.icon}</span>}
+          {props.text}
+        </span>
+      )}
       {props.children}
     </div>
   )

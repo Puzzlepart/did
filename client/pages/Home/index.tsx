@@ -51,7 +51,8 @@ export const Home: PageComponent = () => {
               key={key}
               appearance={index === 0 ? 'primary' : 'secondary'}
               icon={providers[key].icon}
-              onClick={() => document.location.replace(`/auth/${key}/signin`)}>
+              onClick={() => document.location.replace(`/auth/${key}/signin`)}
+            >
               {providers[key].text}
             </Button>
           ))}

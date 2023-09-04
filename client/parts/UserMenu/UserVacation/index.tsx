@@ -3,10 +3,10 @@ import { useQuery } from '@apollo/client'
 import { TooltipHost, useTheme } from '@fluentui/react'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils'
 import { MenuItem } from '../MenuItem'
 import { UserVacationTooltipContent } from './UserVacationTooltipContent'
 import $vacation from './vacation.gql'
-import { getFluentIcon } from 'utils'
 
 /**
  * @category UserMenu

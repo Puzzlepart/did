@@ -1,12 +1,18 @@
 /* eslint-disable tsdoc/syntax */
 import { Icon, useTheme } from '@fluentui/react'
-import { Persona, Popover, PopoverSurface, PopoverTrigger } from '@fluentui/react-components'
+import {
+  Persona,
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { Toast, useToast } from 'components/Toast'
 import { useToggle } from 'hooks'
 import React, { FC, useEffect, useRef } from 'react'
-import { MobileView, isMobile } from 'react-device-detect'
+import { isMobile, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils/getFluentIcon'
 import { UserFeedback } from '../UserFeedback'
 import { UserNotifications } from '../UserNotifications'
 import { NotificationIndicator } from '../UserNotifications/NotificationIndicator'
@@ -17,7 +23,6 @@ import styles from './UserMenu.module.scss'
 import { UserReports } from './UserReports'
 import { UserSettings } from './UserSettings'
 import { UserVacation } from './UserVacation'
-import { getFluentIcon } from 'utils/getFluentIcon'
 
 /**
  * @category Function Component

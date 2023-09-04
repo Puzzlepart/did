@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { getFluentIcon } from 'utils'
 
-interface IAuthProviderLoginButton extends Pick<ButtonProps, 'icon'|'onClick' | 'appearance'> {
+interface IAuthProviderLoginButton
+  extends Pick<ButtonProps, 'icon' | 'onClick' | 'appearance'> {
   text: string
 }
 
@@ -20,7 +21,7 @@ export function useAuthProviders(): Record<string, IAuthProviderLoginButton> {
   const authProviders: Record<string, IAuthProviderLoginButton> = {
     'azuread-openidconnect': {
       text: t('common.ms365signInText'),
-      icon: getFluentIcon('StoreMicrosoft'),
+      icon: getFluentIcon('StoreMicrosoft')
     },
     google: {
       text: t('common.googleSignInText'),

@@ -18,7 +18,8 @@ export const UserAvatar: FC = () => {
             src: user.photo?.base64
           }
         }}
-        size='large' />
+        size='large'
+      />
     </MenuItem>
   )
 }
