@@ -2,9 +2,9 @@ import { Button } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './DeleteLink.module.scss'
 import { IDeleteLinkProps } from './types'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 /**
  * Renders a delete link using `<Button />` component from `@fluentui/react-components`
  *
