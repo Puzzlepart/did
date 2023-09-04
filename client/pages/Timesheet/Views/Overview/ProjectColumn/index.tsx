@@ -5,7 +5,6 @@ import { TFunction } from 'i18next'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import {
   CLEAR_MANUAL_MATCH,
   IGNORE_EVENT,
@@ -70,14 +69,14 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
           actions={[
             {
               content: t('timesheet.resolveProjectButtonLabel'),
-              icon: icon('AddCircle'),
+              iconName: 'AddCircle',
               onClick: () => {
                 dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))
               }
             },
             {
               content: t('timesheet.ignoreEventButtonLabel'),
-              icon: icon('CalendarCancel'),
+              iconName: 'CalendarCancel',
               onClick: () => {
                 dispatch(IGNORE_EVENT({ id: event.id }))
               }
