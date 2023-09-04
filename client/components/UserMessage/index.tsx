@@ -14,9 +14,10 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import _ from 'underscore'
-import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
+import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
+
 
 /**
  * A component that uses `Alert` from [@fluentui/react-components](@fluentui/react-components),
@@ -25,10 +26,9 @@ import { useUserMessage } from './useUserMessage'
  * @category Reusable Component
  */
 export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
-  const { className, container } = useUserMessage(props)
-
+  const { container } = useUserMessage(props)
   return (
-    <div {...container}>
+    <div className={styles.root} {...container}>
       <ConditionalWrapper
         condition={!_.isEmpty(props.actions)}
         wrapper={(children: any) => (
@@ -44,18 +44,18 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
           </Menu>
         )}
       >
-        <Alert {...props} className={className}>
-          <div style={props.innerStyle}>
-            {props.headerText && (
-              <Title3 className={styles.header}>{props.headerText}</Title3>
-            )}
-            {props.text && (
-              <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
-                {props.text}
-              </ReactMarkdown>
-            )}
-            {props.children}
-          </div>
+        <Alert {...props} className={styles.alert}>
+          {props.headerText && (
+            <Title3 className={styles.header}>{props.headerText}</Title3>
+          )}
+          {props.text && (
+            <ReactMarkdown
+              className={styles.text}
+              rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+              {props.text}
+            </ReactMarkdown>
+          )}
+          {props.children}
         </Alert>
       </ConditionalWrapper>
     </div>
@@ -69,3 +69,4 @@ UserMessage.defaultProps = {
 
 export * from './types'
 export * from './useMessage'
+

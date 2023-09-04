@@ -1,5 +1,6 @@
-import { makeStyles } from '@fluentui/react'
+import { makeStyles } from '@fluentui/react-components'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { useAppContext } from 'AppContext'
 
 /**
  * We use `makeStyles` to get our `background` and `color`
@@ -13,7 +14,9 @@ import { AlertProps } from '@fluentui/react-components/dist/unstable'
  * @category UserMessage
  */
 export function useUserMessageStyles(intent: AlertProps['intent'] = 'info') {
-  return makeStyles((theme) => ({
+  const { user } = useAppContext()
+  const theme = user.theme[0]
+  return makeStyles(() => ({
     root: {
       background: theme.semanticColors[`${intent}Background`],
       color: theme.semanticColors[`${intent}Text`]

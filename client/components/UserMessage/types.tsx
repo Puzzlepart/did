@@ -33,19 +33,9 @@ export interface IUserMessageProps extends AlertProps {
   iconName?: string
 
   /**
-   * Container style
-   */
-  containerStyle?: React.CSSProperties
-
-  /**
    * To flex the message center with a fixed height
    */
   fixedHeight?: number
-
-  /**
-   * Styles for the inner part of the message
-   */
-  innerStyle?: React.CSSProperties
 
   /**
    * Actions to show in a menu
