@@ -41,7 +41,7 @@ export const ActionBar = () => {
           defaultCheckedValues={defaultCheckedValues}
           onCheckedValueChange={onCheckedValueChange}
         >
-          <ToolbarGroup style={{ flex: 1 }}>
+          <ToolbarGroup style={{ flex: 1, display: 'inline-flex' }}>
             <TodayButton />
             <ToolbarButton
               icon={icon('ArrowCircleLeft')}
