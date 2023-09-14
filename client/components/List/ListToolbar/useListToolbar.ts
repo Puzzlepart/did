@@ -53,8 +53,17 @@ export function useListToolbar(root: React.MutableRefObject<any>) {
           ].filter(Boolean),
     [context.props.menuItems]
   )
-  return {
-    commandBarProps,
-    menuItems
-  }
+
+  const menuItemGroups = useMemo<{ [key: string]: ListMenuItem[] }>(
+    () =>
+      _.uniq(menuItems.map((m) => m.group)).reduce(
+        (groups, name) => ({
+          ...groups,
+          [name ?? 'default']: menuItems.filter((m) => m.group === name)
+        }),
+        {}
+      ),
+    [menuItems]
+  )
+  return menuItemGroups
 }

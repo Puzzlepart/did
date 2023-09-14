@@ -1,22 +1,28 @@
-/* eslint-disable unicorn/no-array-callback-reference */
-import { Toolbar } from '@fluentui/react-components'
-import React, { FC, MutableRefObject } from 'react'
+import { Toolbar, ToolbarGroup } from '@fluentui/react-components'
+import React from 'react'
+import { StyledComponent } from 'types'
+import styles from './ListToolbar.module.scss'
 import { ListToolbarItem } from './ListToolbarItem'
+import { IListToolbarProps } from './types'
 import { useListToolbar } from './useListToolbar'
 
-export interface IListToolbarProps {
-  root: MutableRefObject<any>
-}
-
-export const ListToolbar: FC<IListToolbarProps> = (props) => {
-  const { menuItems } = useListToolbar(props.root)
+export const ListToolbar: StyledComponent<IListToolbarProps> = (props) => {
+  const menuItemGroups = useListToolbar(props.root)
   return (
-    <Toolbar>
-      {menuItems.map((item, index) => (
-        <ListToolbarItem key={index} item={item} />
+    <Toolbar className={ListToolbar.className}>
+      {Object.keys(menuItemGroups).map((key, index) => (
+        <ToolbarGroup key={index} role='presentation'>
+          {menuItemGroups[key].map((item, index) => (
+            <ListToolbarItem key={index} item={item} />
+          ))}
+        </ToolbarGroup>
       ))}
     </Toolbar>
   )
 }
 
+ListToolbar.displayName = 'ListToolbar'
+ListToolbar.className = styles.listToolbar
+
 export * from './ListMenuItem'
+export * from './types'

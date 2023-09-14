@@ -65,7 +65,15 @@ export class ListMenuItem {
    */
   items?: ListMenuItem[]
 
+  /**
+   * Custom render function for the command bar item associated with this list menu item.
+   */
   onRender?: ICommandBarItemProps['onRender']
+
+  /**
+   * The group name for the menu item.
+   */
+  group?: string
 
   /**
    * Creates a new instance of ListMenuItem.
@@ -114,6 +122,16 @@ export class ListMenuItem {
   public withDispatch(context: any, action: any, payload: any = null) {
     const dispatcher = context.dispatch as Dispatch<AnyAction>
     this.onClick = () => dispatcher(action(payload))
+    return this
+  }
+
+  /**
+   * Sets the group for the `ListMenuItem`.
+   *
+   * @param group Group name for the menu item
+   */
+  public setGroup(group: string) {
+    this.group = group
     return this
   }
 
