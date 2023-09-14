@@ -3,17 +3,14 @@ import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
-import { ListContext } from './context'
 import styles from './List.module.scss'
 import { ListFilterPanel } from './ListFilterPanel'
-import { PreviewList } from './PreviewList'
+import { ListContext } from './context'
 import { IListProps } from './types'
 import { useList } from './useList'
 
 /**
- * List component using `<DataGrid />` from `@fluentui/react-components`,
- * with fallback to `<ShimmeredDetailsList />` from `@fluentui/react` if
- * `disablePreview` is set to `true`.
+ * List component using  `<ShimmeredDetailsList />` from `@fluentui/react`.
  *
  * Supports list groups, filters, group by,
  * selection, search box and custom column headers.
@@ -26,11 +23,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
     <div className={styles.root} hidden={props.hidden}>
       <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          {props.disablePreview ? (
-            <ShimmeredDetailsList {...listProps} />
-          ) : (
-            <PreviewList {...listProps} />
-          )}
+          <ShimmeredDetailsList {...listProps} />
           <ColumnHeaderContextMenu />
           <ListFilterPanel />
         </ScrollablePaneWrapper>
@@ -56,3 +49,4 @@ export * from './types'
 export * from './useList'
 export * from './useListGroups'
 export * from './useListProps'
+

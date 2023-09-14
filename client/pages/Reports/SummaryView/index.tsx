@@ -23,7 +23,6 @@ export const SummaryView: TabComponent = () => {
           <Progress text={t('reports.generatingReportProgressText')} />
         )}
         <List
-          disablePreview
           hidden={!state.loading && _.isEmpty(rows)}
           enableShimmer={state.loading}
           columns={columns}

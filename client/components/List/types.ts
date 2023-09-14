@@ -80,7 +80,10 @@ export interface IListColumn extends IColumn {
   hidden?: boolean
 }
 
-export type ListFilterState = { filters: IFilter[]; isFiltered: boolean }
+export type ListFilterState = {
+  filters: IFilter[]
+  isFiltered: boolean
+}
 
 /**
  * @category List
@@ -171,12 +174,6 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Filter values
    */
   filterValues?: Record<string, any>
-
-  /**
-   * If `disablePreview` is set to `true`, `<ShimmeredDetailsList />` from `@fluentui/react` will
-   * be used instead of `<DataGrid />` from `@fluentui/react-components`.
-   */
-  disablePreview?: boolean
 
   /**
    * Menu items to show in `<Toolbar />` if using the preview mode.
