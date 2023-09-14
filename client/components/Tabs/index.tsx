@@ -2,6 +2,7 @@ import { Tab, TabList } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
+import styles from './Tabs.module.scss'
 
 export const Tabs: FC<ITabsProps> = (props) => {
   const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =
@@ -10,6 +11,7 @@ export const Tabs: FC<ITabsProps> = (props) => {
   return (
     <div>
       <TabList
+        className={styles.tabs}
         vertical={props.vertical}
         selectedValue={selectedValue}
         onTabSelect={onTabSelect}
