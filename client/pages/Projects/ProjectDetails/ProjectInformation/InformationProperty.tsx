@@ -13,12 +13,18 @@ export const InformationProperty: StyledComponent<IInformationPropertyProps> = (
   return (
     <Shimmer className={InformationProperty.className} isDataLoaded={!loading}>
       <div hidden={props.value === null || props.value === ''}>
-        <Label>{props.title}:</Label>
+        <div>
+          <Label weight={props.weight}>{props.title}:</Label>
+        </div>
         <span>{props.value}</span>
         {props.children}
       </div>
     </Shimmer>
   )
+}
+
+InformationProperty.defaultProps = {
+  weight: 'semibold'
 }
 
 InformationProperty.displayName = 'InformationProperty'

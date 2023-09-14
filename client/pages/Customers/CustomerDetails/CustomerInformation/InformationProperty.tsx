@@ -1,4 +1,5 @@
-import { Label as LabelElement, Shimmer } from '@fluentui/react'
+import { Shimmer } from '@fluentui/react'
+import { Label } from '@fluentui/react-components'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { useContext } from 'react'
 import { StyledComponent } from 'types'
@@ -12,12 +13,18 @@ export const InformationProperty: StyledComponent<IInformationPropertyProps> = (
   return (
     <Shimmer className={InformationProperty.className} isDataLoaded={!loading}>
       <div hidden={props.value === null || props.value === ''}>
-        <LabelElement>{props.title}:</LabelElement>
+        <div>
+          <Label weight={props.weight}>{props.title}:</Label>
+        </div>
         <span>{props.value}</span>
         {props.children}
       </div>
     </Shimmer>
   )
+}
+
+InformationProperty.defaultProps = {
+  weight: 'semibold'
 }
 
 InformationProperty.displayName = 'InformationProperty'

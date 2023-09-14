@@ -1,12 +1,10 @@
 import { Tabs } from 'components/Tabs'
 import { UserMessage } from 'components/UserMessage'
-import { ProjectList } from 'pages/Projects/ProjectsPage'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import styles from './CustomerDetails.module.scss'
 import { CustomerHeader } from './CustomerHeader'
-import { CustomerInformation } from './CustomerInformation'
 import { useCustomerDetails } from './useCustomerDetails'
 
 /**
@@ -16,7 +14,7 @@ import { useCustomerDetails } from './useCustomerDetails'
  */
 export const CustomerDetails: StyledComponent = () => {
   const { t } = useTranslation()
-  const { selected, error, projects, loading } = useCustomerDetails()
+  const { error, tabs } = useCustomerDetails()
 
   return (
     <div className={CustomerDetails.className}>
@@ -24,27 +22,7 @@ export const CustomerDetails: StyledComponent = () => {
       {error && (
         <UserMessage intent='error'>{t('common.genericErrorText')}</UserMessage>
       )}
-      <Tabs
-        items={{
-          information: [
-            CustomerInformation,
-            t('customers.informationHeaderText')
-          ],
-          projects: [
-            ProjectList,
-            t('customers.projectsHeaderText'),
-            {
-              items: projects,
-              hideColumns: ['customer'],
-              enableShimmer: loading,
-              searchBox: {
-                placeholder: t('customers.searchProjectsPlaceholder', selected),
-                disabled: loading
-              }
-            }
-          ]
-        }}
-      />
+      <Tabs items={tabs} />
     </div>
   )
 }

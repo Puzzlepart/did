@@ -1,8 +1,8 @@
 import { Dropdown } from '@fluentui/react'
-import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import _ from 'underscore'
+import { FormInputControlComponent } from '../types'
 import styles from './DropdownControl.module.scss'
 import { IDropdownControlProps } from './types'
 
@@ -11,24 +11,23 @@ import { IDropdownControlProps } from './types'
  *
  * @category Reusable Component
  */
-export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
-  props
-) => {
-  return (
-    <div className={DropdownControl.className} {..._.pick(props, 'hidden')}>
-      <Dropdown
-        {...props}
-        onChange={(_event, option) => {
-          props.model.set(props.name, option[props.setValue || 'key'])
-        }}
-        defaultSelectedKey={props.model.value(props.name) as string}
-      />
-      <div className={styles.description}>
-        <ReactMarkdown>{props.description}</ReactMarkdown>
+export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
+  (props) => {
+    return (
+      <div className={DropdownControl.className} {..._.pick(props, 'hidden')}>
+        <Dropdown
+          {...props}
+          onChange={(_event, option) => {
+            props.model.set(props.name, option[props.setValue || 'key'])
+          }}
+          defaultSelectedKey={props.model.value(props.name) as string}
+        />
+        <div className={styles.description}>
+          <ReactMarkdown>{props.description}</ReactMarkdown>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 
 DropdownControl.displayName = 'DropdownControl'
 DropdownControl.className = styles.dropdownControl

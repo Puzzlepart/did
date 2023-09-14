@@ -1,9 +1,11 @@
 import { Label } from '@fluentui/react'
 import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
-import { FormControl } from 'components/FormControl'
-import { TextControl } from 'components/FormControl/TextControl'
-import { TextControlOptions } from 'components/FormControl/TextControl/types'
+import {
+  FormControl,
+  TextControl,
+  TextControlOptions
+} from 'components/FormControl'
 import { IconPicker } from 'components/IconPicker'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'

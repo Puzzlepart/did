@@ -4,27 +4,27 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { StyledComponent } from 'types'
 import { useProjectsContext } from '../../context'
-import { Actions } from './Actions'
+import { ProjectActions } from './ProjectActions'
 import styles from './ProjectHeader.module.scss'
-import { useHeader } from './useHeader'
+import { useProjectHeader } from './useProjectHeader'
 
 /**
  * @category Projects
  */
 export const ProjectHeader: StyledComponent = () => {
   const { state, loading } = useProjectsContext()
-  const { breadcrumb } = useHeader()
+  const { breadcrumb } = useProjectHeader()
   return (
     <Shimmer
       className={ProjectHeader.className}
       isDataLoaded={!loading}
-      styles={{ dataWrapper: { width: '100%', display: 'flex' } }}
+      styles={{ dataWrapper: { width: '100%' } }}
     >
       <div className={styles.container}>
         <div className={styles.breadcrumb}>
           <Breadcrumb {...breadcrumb} />
         </div>
-        <Actions hidden={isMobile} />
+        <ProjectActions hidden={isMobile} />
       </div>
       <SubText
         className={styles.description}

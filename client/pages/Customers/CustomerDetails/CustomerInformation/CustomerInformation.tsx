@@ -18,6 +18,7 @@ export const CustomerInformation: StyledComponent = () => {
   return (
     <div className={CustomerInformation.className}>
       <UserMessage
+        className={styles.inactiveMessage}
         hidden={!state.selected?.inactive}
         text={t('customers.inactiveText')}
         intent='warning'

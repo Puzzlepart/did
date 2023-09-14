@@ -7,8 +7,7 @@ import styles from './UserMessage.module.scss'
 import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
- * A component that supports a `<MessageBar />` with
- * markdown using `react-markdown`.
+ * Component logic hook for the `UserMessage` component.
  *
  * @category Function Component
  */
@@ -19,7 +18,11 @@ export function useUserMessage(props: IUserMessageProps) {
     id: props.id,
     hidden: props.hidden,
     onClick: props.onClick,
-    className: [UserMessage.className, hasContextMenu && styles.hasContextMenu]
+    className: [
+      UserMessage.className,
+      props.className,
+      hasContextMenu && styles.hasContextMenu
+    ]
       .filter(Boolean)
       .join(' ')
   }

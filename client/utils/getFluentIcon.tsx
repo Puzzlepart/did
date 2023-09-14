@@ -41,6 +41,8 @@ import {
   CheckmarkCircle24Regular,
   CheckmarkFilled,
   CheckmarkRegular,
+  Collections24Filled,
+  Collections24Regular,
   Delete24Filled,
   Delete24Regular,
   DeleteDismiss24Filled,
@@ -55,6 +57,8 @@ import {
   Emoji24Regular,
   FastForward24Filled,
   FastForward24Regular,
+  Info24Filled,
+  Info24Regular,
   Key24Filled,
   Key24Regular,
   PeopleAdd24Filled,
@@ -73,6 +77,8 @@ import {
   System24Regular,
   TableEdit24Filled,
   TableEdit24Regular,
+  Timeline24Filled,
+  Timeline24Regular,
   Timer224Filled,
   Timer224Regular,
   Timer24Filled,
@@ -86,6 +92,18 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Timeline: {
+    regular: Timeline24Regular,
+    filled: Timeline24Filled
+  },
+  Collections: {
+    regular: Collections24Regular,
+    filled: Collections24Filled
+  },
+  Info: {
+    regular: Info24Regular,
+    filled: Info24Filled
+  },
   CalendarPlay: {
     regular: CalendarPlay24Regular,
     filled: CalendarPlay24Filled

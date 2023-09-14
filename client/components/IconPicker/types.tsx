@@ -1,5 +1,5 @@
 import { ISearchBoxProps, ITextFieldProps } from '@fluentui/react'
-import { FormInputControlBase } from 'components/FormControl/types'
+import { FormInputControlBase } from 'components/FormControl'
 
 export interface IIconPickerProps
   extends Pick<ITextFieldProps, 'label' | 'description'>,

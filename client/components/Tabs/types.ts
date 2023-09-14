@@ -1,8 +1,13 @@
-import { TabListProps } from '@fluentui/react-components'
+import { TabListProps, TabProps } from '@fluentui/react-components'
 import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
 import { FunctionComponent, HTMLProps } from 'react'
 import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
+import { FluentIconName } from 'utils'
+
+type TabHeader =
+  | string
+  | { text: string; iconName: FluentIconName; disabled?: TabProps['disabled'] }
 
 /**
  * A tuple representing a tab in the `Tabs` component.
@@ -13,7 +18,7 @@ import { StyledComponent } from 'types'
  *
  * @template T The type of the tab's additional props, if any.
  */
-type Tab<T extends ITabProps = any> = [FunctionComponent, string, T?]
+type Tab<T extends ITabProps = any> = [FunctionComponent, TabHeader, T?]
 
 /**
  * A record of `Tab` objects, keyed by a string identifier.

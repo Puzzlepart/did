@@ -102,7 +102,8 @@
     "applyLabelsHeaderText": "Legg til merkelappar på dette prosjektet",
     "tagLabel": "Nøkkel",
     "editButtonLabel": "Rediger prosjekt",
-    "toggleInactive": "Vis/skjul inaktive prosjekter"
+    "toggleInactive": "Vis/skjul inaktive prosjekter",
+    "searchTimeEntriesPlaceholder": "Søk i tidsoppføringar..."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -116,9 +117,12 @@
     "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} teikn",
     "descriptionFieldDescription": "Ei kort skildring av kunden. Det er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
-    "searchProjectsPlaceholder": "Søk i prosjekter...",
+    "searchProjectsPlaceholder": "Søk i prosjekter for {{name}}...",
     "editButtonLabel": "Rediger kunde",
-    "toggleInactive": "Vis/skjul inaktive kundar"
+    "toggleInactive": "Vis/skjul inaktive kundar",
+    "inactiveFieldDescription": "Merk kunden som inaktiv. Timer for kunden kan ikke lenger bekreftes.",
+    "projectsHeaderText": "Prosjekter",
+    "informationHeaderText": "Informasjon"
   },
   "admin": {
     "apiTokens": {

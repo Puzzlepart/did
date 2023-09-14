@@ -1,5 +1,5 @@
-import { ILabelProps } from '@fluentui/react'
+import { LabelProps } from '@fluentui/react-components'
 
-export interface IInformationPropertyProps extends ILabelProps {
+export interface IInformationPropertyProps extends LabelProps {
   value?: string
 }

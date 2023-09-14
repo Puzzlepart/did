@@ -102,7 +102,8 @@
     "applyLabelsHeaderText": "Apply labels to this project",
     "tagLabel": "Key",
     "editButtonLabel": "Edit project",
-    "toggleInactive": "Show/hide inactive projects"
+    "toggleInactive": "Show/hide inactive projects",
+    "searchTimeEntriesPlaceholder": "Search in time entries..."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -116,9 +117,12 @@
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
     "descriptionFieldDescription": "A short description for the customer. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported.",
     "createError": "We can't create the customer at the moment. Please try again later.",
-    "searchProjectsPlaceholder": "Search in projects...",
+    "searchProjectsPlaceholder": "Search in projects for {{name}}...",
     "editButtonLabel": "Edit customer",
-    "toggleInactive": "Show/hide inactive customers"
+    "toggleInactive": "Show/hide inactive customers",
+    "inactiveFieldDescription": "Mark the customer as inactive. Hours for the customer can no longer be confirmed.",
+    "projectsHeaderText": "Projects",
+    "informationHeaderText": "Information"
   },
   "admin": {
     "apiTokens": {

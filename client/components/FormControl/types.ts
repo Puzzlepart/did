@@ -4,6 +4,7 @@ import { IBasePanelProps } from 'components/BasePanel/types'
 import { IToastProps } from 'components/Toast'
 import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
+import { StyledComponent } from 'types'
 
 export type UseFormOptions = {
   /**
@@ -93,3 +94,5 @@ export type UseFormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
   model?: TModel,
   options?: TOptions
 ) => ISubmitProps
+
+export type FormInputControlComponent<T = any> = StyledComponent<T>

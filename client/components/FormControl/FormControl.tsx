@@ -54,10 +54,3 @@ FormControl.defaultProps = {
     text: undefined
   }
 }
-
-export * from './CheckboxControl'
-export * from './context'
-export * from './DropdownControl'
-export * from './TextControl'
-export * from './types'
-export * from './useFormControls'

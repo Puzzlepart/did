@@ -10,9 +10,9 @@ import timeentriesQuery from './timeentries.gql'
  *
  * @category Projects
  */
-export function useTimeEntriesQuery() {
+export function useProjectTimeEntriesQuery() {
   const { state } = useProjectsContext()
-  const { loading, error, data } = useQuery<{
+  const query = useQuery<{
     users: User[]
     timeEntries: TimeEntry[]
   }>(timeentriesQuery, {
@@ -21,10 +21,10 @@ export function useTimeEntriesQuery() {
     },
     skip: !state.selected
   })
-  const users: User[] = data?.users ?? []
-  const timeEntries = (data?.timeEntries ?? []).map((entry) => ({
+  const users: User[] = query?.data?.users ?? []
+  const timeEntries = (query?.data?.timeEntries ?? []).map((entry) => ({
     ...entry,
     resource: _.find(users, (user) => user.id === entry.resource?.id)
   }))
-  return { loading, error, timeEntries } as const
+  return { ...query, timeEntries }
 }

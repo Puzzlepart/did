@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { useProjectsContext } from '../../context'
 
-export function useHeader() {
+export function useProjectHeader() {
   const { t } = useTranslation()
   const { state, dispatch } = useProjectsContext()
   const history = useHistory()
