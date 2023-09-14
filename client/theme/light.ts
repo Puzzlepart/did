@@ -65,4 +65,7 @@ export const fluentLightTheme = webLightTheme
 /**
  * The Light theme is a combination of the legacy theme and the Fluent Light theme
  */
-export const lightTheme: [PartialTheme, Theme] = [legacyLightTheme, fluentLightTheme]
+export const lightTheme: [PartialTheme, Theme] = [
+  legacyLightTheme,
+  fluentLightTheme
+]

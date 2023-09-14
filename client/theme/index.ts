@@ -45,7 +45,6 @@ function getAutoColorScheme(): [PartialTheme, Theme] {
     : getTheme('light')
 }
 
-export * from './Themed'
 export * from './dark'
 export * from './light'
-
+export * from './Themed'

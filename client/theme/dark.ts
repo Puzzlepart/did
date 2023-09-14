@@ -99,4 +99,7 @@ const legacyDarkTheme: PartialTheme = {
 
 const fluentDarkTheme = webDarkTheme
 
-export const darkTheme: [PartialTheme, Theme] = [legacyDarkTheme, fluentDarkTheme]
+export const darkTheme: [PartialTheme, Theme] = [
+  legacyDarkTheme,
+  fluentDarkTheme
+]

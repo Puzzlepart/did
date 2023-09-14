@@ -12,17 +12,16 @@ import { IThemedProps } from './types'
  *
  * @returns - The themed component.
  */
-export const Themed: FC<IThemedProps> =
-  (props) => {
-    const [legacyTheme, fluentTheme] = props.theme
-    return (
-      <ThemeProvider applyTo={props.applyTo} theme={legacyTheme}>
-        <FluentProvider theme={fluentTheme} applyStylesToPortals={true}>
-          {props.children}
-        </FluentProvider>
-      </ThemeProvider>
-    )
-  }
+export const Themed: FC<IThemedProps> = (props) => {
+  const [legacyTheme, fluentTheme] = props.theme
+  return (
+    <ThemeProvider applyTo={props.applyTo} theme={legacyTheme}>
+      <FluentProvider theme={fluentTheme} applyStylesToPortals={true}>
+        {props.children}
+      </FluentProvider>
+    </ThemeProvider>
+  )
+}
 
 Themed.displayName = 'Themed'
 Themed.defaultProps = {
