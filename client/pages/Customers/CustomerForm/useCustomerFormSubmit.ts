@@ -16,10 +16,10 @@ import { useCustomerModel } from './useCustomerModel'
  *
  * @returns `toast`, `onClick` and `disabled`
  */
-export const useCustomerFormSubmit: UseFormSubmitHook<ICustomerFormProps, ReturnType<typeof useCustomerModel>> = (
-  props,
-  model
-) => {
+export const useCustomerFormSubmit: UseFormSubmitHook<
+  ICustomerFormProps,
+  ReturnType<typeof useCustomerModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
   const [toast, setToast] = useToast(8000)

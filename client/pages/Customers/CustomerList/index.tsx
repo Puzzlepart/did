@@ -1,5 +1,4 @@
-import { List } from 'components'
-import { ListMenuItem } from 'components/List/ListToolbar'
+import { InactiveCheckboxMenuItem, List } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +6,7 @@ import { useCustomerList } from './useCustomerList'
 
 export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
-  const { loading, items, columns } = useCustomerList()
+  const { loading, items, columns, toggleInactive } = useCustomerList()
 
   return (
     <>
@@ -16,7 +15,12 @@ export const CustomerList: TabComponent = (props) => {
         enableShimmer={loading}
         items={items}
         columns={columns}
-        menuItems={[new ListMenuItem().setDisabled(true)]}
+        menuItems={[
+          InactiveCheckboxMenuItem(
+            t('customers.toggleInactive'),
+            toggleInactive
+          )
+        ]}
       />
       {props.children}
     </>
