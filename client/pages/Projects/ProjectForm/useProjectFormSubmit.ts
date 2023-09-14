@@ -16,11 +16,11 @@ import { useProjectModel } from './useProjectModel'
  *
  * @returns `toast`, `onClick` and `disabled`
  */
-export const useProjectFormSubmit: UseFormSubmitHook<IProjectFormProps, ReturnType<typeof useProjectModel>, ReturnType<typeof useProjectFormOptions>> = (
-  props,
-  model,
-  options
-) => {
+export const useProjectFormSubmit: UseFormSubmitHook<
+  IProjectFormProps,
+  ReturnType<typeof useProjectModel>,
+  ReturnType<typeof useProjectFormOptions>
+> = (props, model, options) => {
   const { t } = useTranslation()
   const { refetch } = useProjectsContext()
   const [toast, setToast] = useToast(8000)

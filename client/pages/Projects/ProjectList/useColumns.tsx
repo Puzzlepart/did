@@ -6,9 +6,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
-import { IProjectListProps } from './types'
 import { useProjectsContext } from '../context'
 import { SET_SELECTED_PROJECT } from '../reducer/actions'
+import { IProjectListProps } from './types'
 
 /**
  * @ignore
@@ -19,7 +19,7 @@ const ColumnWrapper = ({ project, children }) => (
 
 /**
  * Returns column definitions for the project list.
- * 
+ *
  * @param props - The component props.
  */
 export function useColumns(props: IProjectListProps): IListColumn[] {
@@ -81,9 +81,11 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
     }),
     createColumnDef<Project>('labels', '', {}, (project) => (
       <ColumnWrapper project={project}>
-        {(project.labels as LabelObject[]).map((label: LabelObject, index: number) => (
-          <EntityLabel key={index} label={label} />
-        ))}
+        {(project.labels as LabelObject[]).map(
+          (label: LabelObject, index: number) => (
+            <EntityLabel key={index} label={label} />
+          )
+        )}
       </ColumnWrapper>
     ))
   ].filter((col) => !(props.hideColumns || []).includes(col.key))
