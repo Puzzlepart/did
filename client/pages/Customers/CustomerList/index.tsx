@@ -2,17 +2,19 @@ import { InactiveCheckboxMenuItem, List } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useCustomersContext } from '../context'
 import { useCustomerList } from './useCustomerList'
 
 export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
-  const { loading, items, columns, toggleInactive } = useCustomerList()
+  const context = useCustomersContext()
+  const { items, columns, toggleInactive } = useCustomerList()
 
   return (
     <>
       <List
         searchBox={{ placeholder: t('common.searchPlaceholder') }}
-        enableShimmer={loading}
+        enableShimmer={context.loading}
         items={items}
         columns={columns}
         menuItems={[

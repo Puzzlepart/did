@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { createContext, Dispatch } from 'react'
+import { createContext, Dispatch, useContext } from 'react'
 import { ICustomersState } from './types'
 
 /**
@@ -29,3 +29,5 @@ export interface ICustomersContext {
 }
 
 export const CustomersContext = createContext<ICustomersContext>(null)
+
+export const useCustomersContext = () => useContext(CustomersContext)

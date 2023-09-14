@@ -5,7 +5,7 @@ import { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 
-export function useHeader() {
+export function useCustomerHeader() {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(CustomersContext)
   const history = useHistory()

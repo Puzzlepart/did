@@ -2,7 +2,7 @@ import { Label as LabelElement, Shimmer } from '@fluentui/react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { useContext } from 'react'
 import { StyledComponent } from 'types'
-import styles from './Information.module.scss'
+import styles from './CustomerInformation.module.scss'
 import { IInformationPropertyProps } from './types'
 
 export const InformationProperty: StyledComponent<IInformationPropertyProps> = (

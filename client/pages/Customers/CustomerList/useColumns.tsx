@@ -5,15 +5,15 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
-import { useCustomerList } from './useCustomerList'
+import { useCustomersContext } from '../context'
+import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
 
 /**
  * Returns column definitions
  */
-export function useColumns({
-  setSelectedCustomer
-}: Partial<ReturnType<typeof useCustomerList>>): IListColumn[] {
+export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
+  const context = useCustomersContext()
   return [
     createColumnDef<Customer>(
       'key',
@@ -43,7 +43,7 @@ export function useColumns({
       (customer) => (
         <CustomerLink
           customer={customer}
-          onClick={() => setSelectedCustomer(customer)}
+          onClick={() => context.dispatch(SET_SELECTED_CUSTOMER({ customer }))}
         />
       )
     ),

@@ -6,6 +6,7 @@ export class CustomerModel {
     public key: string = '',
     public name: string = '',
     public description: string = '',
+    public inactive: boolean = false,
     public icon: string = ''
   ) {}
 

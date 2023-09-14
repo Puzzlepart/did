@@ -1,7 +1,11 @@
 import { IconPicker } from 'components'
-import { FormControl } from 'components/FormControl'
-import { TextControl } from 'components/FormControl/TextControl'
-import { TextControlOptions } from 'components/FormControl/TextControl/types'
+import {
+  FormControl,
+  SwitchControl,
+  SwitchControlOptions,
+  TextControl,
+  TextControlOptions
+} from 'components/FormControl'
 import packageFile from 'package'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -48,6 +52,13 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
         required={true}
+      />
+      <SwitchControl
+        {...register<SwitchControlOptions>('inactive')}
+        label={t('common.inactiveFieldLabel')}
+        labelPosition='above'
+        description={t('customers.inactiveFieldDescription')}
+        hidden={!props.edit}
       />
     </FormControl>
   )
