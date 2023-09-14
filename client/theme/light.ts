@@ -1,7 +1,8 @@
+import { Theme, webLightTheme } from '@fluentui/react-components'
 import { PartialTheme } from '@fluentui/react/lib/Theme'
 import fonts from './fonts'
 
-export default {
+const legacyLightTheme = {
   components: {
     logo: {
       styles: {
@@ -54,4 +55,14 @@ export default {
     whiteTranslucent40: '#ffffff88'
   },
   ...fonts
-} as PartialTheme
+}
+
+/**
+ * The Fluent Light theme uses `webLightTheme` from `@fluentui/react-components`
+ */
+export const fluentLightTheme = webLightTheme
+
+/**
+ * The Light theme is a combination of the legacy theme and the Fluent Light theme
+ */
+export const lightTheme: [PartialTheme, Theme] = [legacyLightTheme, fluentLightTheme]

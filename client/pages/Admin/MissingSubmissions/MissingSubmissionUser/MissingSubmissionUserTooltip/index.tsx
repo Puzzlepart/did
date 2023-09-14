@@ -1,15 +1,15 @@
 import { TooltipHost } from '@fluentui/react'
 import {
   FluentProvider,
-  Persona,
-  webLightTheme
+  Persona
 } from '@fluentui/react-components'
 import React from 'react'
+import { fluentLightTheme } from 'theme'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserTooltip.module.scss'
-import { IMissingSubmissionUserTooltipProps } from './types'
 import { UserMissingPeriods } from './UserMissingPeriods'
+import { IMissingSubmissionUserTooltipProps } from './types'
 
 export const MissingSubmissionUserTooltip: StyledComponent<IMissingSubmissionUserTooltipProps> =
   (props) => (
@@ -17,7 +17,7 @@ export const MissingSubmissionUserTooltip: StyledComponent<IMissingSubmissionUse
       tooltipProps={{
         onRenderContent: () => (
           <FluentProvider
-            theme={webLightTheme}
+            theme={fluentLightTheme}
             className={MissingSubmissionUserTooltip.className}
           >
             <Persona

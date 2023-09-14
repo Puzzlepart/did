@@ -30,6 +30,7 @@
       "pages": ["./pages"],
       "hooks": ["./hooks"],
       "utils": ["./utils"],
+      "theme": ["./theme"],
       "i18n": ["./i18n"]
     }
   }

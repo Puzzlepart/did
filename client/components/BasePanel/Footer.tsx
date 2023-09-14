@@ -1,6 +1,7 @@
-import { FluentProvider, webLightTheme } from '@fluentui/react-components'
+import { FluentProvider } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { fluentLightTheme } from 'theme'
 import styles from './BasePanel.module.scss'
 import { PanelAction } from './PanelAction'
 import { IBasePanelAction, IFooterProps } from './types'
@@ -18,7 +19,7 @@ export const Footer: FC<IFooterProps> = (props) => {
   ].filter(Boolean)
   return (
     <FluentProvider
-      theme={webLightTheme}
+      theme={fluentLightTheme}
       className={styles.footer}
       hidden={props.hidden}
     >

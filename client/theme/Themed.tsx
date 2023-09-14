@@ -1,6 +1,7 @@
-import { PartialTheme, ThemeProvider } from '@fluentui/react'
-import { FluentProvider, Theme } from '@fluentui/react-components'
-import React, { FC, ReactNode } from 'react'
+import { ThemeProvider } from '@fluentui/react'
+import { FluentProvider } from '@fluentui/react-components'
+import React, { FC } from 'react'
+import { IThemedProps } from './types'
 
 /**
  * A component that applies Fluent UI and custom theme to its children,
@@ -11,11 +12,19 @@ import React, { FC, ReactNode } from 'react'
  *
  * @returns - The themed component.
  */
-export const Themed: FC<{ theme: [PartialTheme, Theme]; children: ReactNode }> =
-  ({ theme, children }) => {
+export const Themed: FC<IThemedProps> =
+  (props) => {
+    const [legacyTheme, fluentTheme] = props.theme
     return (
-      <ThemeProvider applyTo='body' theme={theme[0]}>
-        <FluentProvider theme={theme[1]}>{children}</FluentProvider>
+      <ThemeProvider applyTo={props.applyTo} theme={legacyTheme}>
+        <FluentProvider theme={fluentTheme} applyStylesToPortals={true}>
+          {props.children}
+        </FluentProvider>
       </ThemeProvider>
     )
   }
+
+Themed.displayName = 'Themed'
+Themed.defaultProps = {
+  applyTo: 'body'
+}

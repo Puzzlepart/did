@@ -6,10 +6,10 @@ import {
   MenuItemCheckbox,
   MenuList,
   MenuPopover,
-  MenuTrigger,
-  webLightTheme
+  MenuTrigger
 } from '@fluentui/react-components'
 import React from 'react'
+import { fluentLightTheme } from 'theme'
 import { StyledComponent } from 'types'
 import styles from './EditPermissions.module.scss'
 import { IEditPermissionsProps } from './types'
@@ -21,7 +21,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
   const { permissions, checkedValues, onCheckedValueChange } =
     useEditPermissions(props)
   return (
-    <FluentProvider theme={webLightTheme} className={EditPermissions.className}>
+    <FluentProvider theme={fluentLightTheme} className={EditPermissions.className}>
       <div>
         <Menu
           checkedValues={checkedValues}
