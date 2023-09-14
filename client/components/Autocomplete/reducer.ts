@@ -1,5 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit'
-import { useMemo, useReducer } from 'react'
+import { useReducer } from 'hooks/useReducer'
 import _ from 'underscore'
 import {
   DISMISS_CALLOUT,
@@ -12,14 +11,14 @@ import {
 import { IAutocompleteState } from './types'
 
 /**
- * Creates reducer using `createReducer` from [\@reduxjs/toolkit](https://www.npmjs.com/package/\@reduxjs/toolkit)
+ * Auto complete reducer using `useReducer` hook.
  *
  * @param initialState - Initial state
  *
- * @returns `Reducer<IAutocompleteState<any>, AnyAction>`
+ * @returns [state, dispatch]
  */
-export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
-  createReducer<IAutocompleteState>(initialState, (builder) =>
+export function useAutocompleteReducer(initialState: IAutocompleteState) {
+  return useReducer<IAutocompleteState>(initialState, (builder) =>
     builder
       .addCase(INIT, (state, { payload }) => {
         state.items = payload.props.items
@@ -41,10 +40,10 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
         state.suggestions =
           state.value.length > 0
             ? state.items.filter((index) =>
-                index.searchValue
-                  .toLowerCase()
-                  .includes(payload.searchTerm.toLowerCase())
-              )
+              index.searchValue
+                .toLowerCase()
+                .includes(payload.searchTerm.toLowerCase())
+            )
             : []
       })
       .addCase(ON_KEY_DOWN, (state, { payload }) => {
@@ -77,15 +76,4 @@ export const createAutocompleteReducer = (initialState: IAutocompleteState) =>
         state.selectedItem = payload?.item
       })
   )
-
-/**
- * Auto complete reducer using `useReducer`
- *
- * @param initialState - Initial state
- *
- * @returns [state, dispatch]
- */
-export function useAutocompleteReducer(initialState: IAutocompleteState) {
-  const reducer = useMemo(() => createAutocompleteReducer(initialState), [])
-  return useReducer(reducer, initialState)
 }

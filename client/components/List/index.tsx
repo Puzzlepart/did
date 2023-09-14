@@ -20,7 +20,7 @@ import { useList } from './useList'
 export const List: ReusableComponent<IListProps> = (props) => {
   const { listProps, context } = useList(props)
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={List.className} hidden={props.hidden}>
       <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList {...listProps} />
@@ -32,6 +32,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
   )
 }
 
+List.className = styles.list
 List.defaultProps = {
   items: [],
   columns: [],

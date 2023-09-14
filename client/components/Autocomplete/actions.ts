@@ -5,7 +5,8 @@ import {
   ISuggestionItem
 } from './types'
 
-export const INIT = createAction<{ props: IAutocompleteProps }>('INIT')
+export type INIT_PAYLOAD = { props: IAutocompleteProps }
+export const INIT = createAction<INIT_PAYLOAD>('INIT')
 export const RESET = createAction('RESET')
 export const ON_SEARCH = createAction<{ searchTerm: string }>('ON_SEARCH')
 export const ON_KEY_DOWN = createAction<{

@@ -91,4 +91,6 @@ export const Autocomplete: ReusableComponent<IAutocompleteProps> = (props) => {
   )
 }
 
+Autocomplete.className = styles.autoComplete
+
 export * from './types'

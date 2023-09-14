@@ -42,7 +42,10 @@ export function useAutocomplete(props: IAutocompleteProps) {
     if (props.selectedKey === null) dispatch(RESET())
   }, [props.selectedKey])
 
-  const classNames = [styles.root, props.errorMessage && styles.hasError]
+  const classNames = [
+    styles.autoComplete, 
+    props.errorMessage && styles.hasError
+  ]
 
   const suggestions = useMemo(
     () =>
