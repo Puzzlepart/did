@@ -21,13 +21,8 @@ export function useLabelModel(props: ILabelFormProps) {
   }, [props.edit])
 
   useEffect(() => {
-    if (!props?.isOpen) {
-      map.$set(INITIAL_MODEL)
-    }
-  }, [props?.isOpen])
+    map.$set(INITIAL_MODEL)
+  }, [])
 
-  return {
-    ...map,
-    reset: () => map.$set(INITIAL_MODEL)
-  }
+  return map
 }

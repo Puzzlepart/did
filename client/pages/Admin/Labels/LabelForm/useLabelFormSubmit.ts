@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
 import { UseFormSubmitHook } from 'components/FormControl'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
@@ -8,10 +9,21 @@ import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import { ILabelFormProps } from './types'
 import { useLabelModel } from './useLabelModel'
 
-export const useLabelFormSubmit: UseFormSubmitHook<ILabelFormProps, ReturnType<typeof useLabelModel>> = (
-  props,
-  model
-) => {
+/**
+ * Hook that returns an object with properties needed for submitting a label form.
+ *
+ * @template ILabelFormProps - The type of the props passed to the label form.
+ * @template ReturnType<typeof useLabelModel> - The return type of the `useLabelModel` hook.
+ *
+ * @param props - The props passed to the label form.
+ * @param model - The model returned by the `useLabelModel` hook.
+ *
+ * @returns - An object with properties needed for submitting a label form.
+ */
+export const useLabelFormSubmit: UseFormSubmitHook<
+  ILabelFormProps,
+  ReturnType<typeof useLabelModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateLabel)
   const [toast, setToast] = useToast(8000)
@@ -19,7 +31,7 @@ export const useLabelFormSubmit: UseFormSubmitHook<ILabelFormProps, ReturnType<t
   /**
    * On save label
    */
-  const onSave = async () => {
+  const onSave = useCallback(async () => {
     try {
       await mutate({
         variables: {
@@ -43,7 +55,7 @@ export const useLabelFormSubmit: UseFormSubmitHook<ILabelFormProps, ReturnType<t
         intent: 'error'
       })
     }
-  }
+  }, [model, mutate, props])
 
   /**
    * Checks if form is valid
