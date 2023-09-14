@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
-import { ISubmitProps } from 'components/FormControl'
+import { UseFormSubmitHook } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
@@ -31,10 +31,10 @@ const isValidUrl = (urlString: string) => {
  * @param props Props from `<ReportLinksForm />`
  * @param model Model from `useReportLinksModel`
  */
-export function useReportsFormSubmit(
-  props: IReportLinksFormProps,
-  model: ReturnType<typeof useReportLinksModel>
-): ISubmitProps {
+export const useReportsFormSubmit: UseFormSubmitHook<IReportLinksFormProps, ReturnType<typeof useReportLinksModel>> = (
+  props,
+  model
+) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateReportLink)
   const [toast, setToast] = useToast(8000)

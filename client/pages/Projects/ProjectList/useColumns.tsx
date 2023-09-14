@@ -1,4 +1,4 @@
-import { IconText } from 'components'
+import { IconText, ProjectLink } from 'components'
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { IListColumn } from 'components/List/types'
@@ -6,8 +6,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
-import { NameLabel } from './NameLabel'
 import { IProjectListProps } from './types'
+import { useProjectsContext } from '../context'
+import { SET_SELECTED_PROJECT } from '../reducer/actions'
 
 /**
  * @ignore
@@ -17,16 +18,19 @@ const ColumnWrapper = ({ project, children }) => (
 )
 
 /**
- * Returns column definitions
+ * Returns column definitions for the project list.
+ * 
+ * @param props - The component props.
  */
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
+  const context = useProjectsContext()
   return [
-    createColumnDef(
+    createColumnDef<Project>(
       'customer',
       t('common.customer'),
       { minWidth: 340, maxWidth: 340 },
-      (project: Project) => {
+      (project) => {
         if (!project.customer) return null
         return (
           <ColumnWrapper project={project}>
@@ -35,14 +39,14 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         )
       }
     ),
-    createColumnDef(
+    createColumnDef<Project>(
       'key',
       t('common.keyFieldLabel'),
       {
         minWidth: 125,
         maxWidth: 125
       },
-      (project: Project) => {
+      (project) => {
         if (project.inactive) {
           return (
             <ColumnWrapper project={project}>
@@ -58,31 +62,26 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         return <IconText iconName={project.icon} text={project.key} />
       }
     ),
-    createColumnDef(
+    createColumnDef<Project>(
       'name',
       t('common.nameFieldLabel'),
       { maxWidth: 220 },
-      (project: Project) => (
+      (project) => (
         <ColumnWrapper project={project}>
-          <NameLabel
+          <ProjectLink
             project={project}
-            renderLink={props.renderLink}
-            onClick={() => {
-              if (props.linkOnClick) {
-                props.linkOnClick(project)
-              }
-            }}
+            onClick={() => context.dispatch(SET_SELECTED_PROJECT({ project }))}
           />
         </ColumnWrapper>
       )
     ),
-    createColumnDef('description', t('common.descriptionFieldLabel'), {
+    createColumnDef<Project>('description', t('common.descriptionFieldLabel'), {
       maxWidth: 220,
       isMultiline: true
     }),
-    createColumnDef('labels', '', {}, (project) => (
+    createColumnDef<Project>('labels', '', {}, (project) => (
       <ColumnWrapper project={project}>
-        {project.labels.map((label: LabelObject, index: number) => (
+        {(project.labels as LabelObject[]).map((label: LabelObject, index: number) => (
           <EntityLabel key={index} label={label} />
         ))}
       </ColumnWrapper>

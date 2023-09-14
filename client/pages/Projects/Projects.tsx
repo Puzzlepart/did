@@ -20,9 +20,6 @@ export const Projects: FC = () => {
         <ProjectDetails />
       ) : (
         <Tabs
-          // onTabChanged={(tab: ProjectsTab) =>
-          //   context.dispatch(CHANGE_TAB({ tab }))
-          // }
           items={{
             s: [ProjectList, t('common.search')],
             m: [ProjectList, t('projects.myProjectsText')],

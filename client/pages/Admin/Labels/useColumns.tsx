@@ -1,17 +1,25 @@
-import { DeleteLink, EditLink } from 'components'
+import { DeleteLink, EditLink, IListColumn } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
-import React from 'react'
+import { ComponentLogicHook } from 'hooks'
+import React, { useMemo } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 
+type UseColumnsHook = ComponentLogicHook<{
+  onEdit: (label: LabelObject) => void
+  onDelete: (label: LabelObject) => void
+},
+  IListColumn[]
+>
+
 /**
  * Columns hook for Labels
  */
-export function useColumns({ onEdit, onDelete }) {
+export const useColumns: UseColumnsHook = ({ onEdit, onDelete }) => {
   const { t } = useTranslation()
-  return [
+  return useMemo(() => ([
     createColumnDef('name', '', { maxWidth: 180 }, (label: LabelObject) => (
       <EntityLabel label={label} />
     )),
@@ -26,5 +34,5 @@ export function useColumns({ onEdit, onDelete }) {
         <DeleteLink onClick={() => onDelete(label)} />
       </div>
     ))
-  ]
+  ]), [])
 }

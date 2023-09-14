@@ -6,7 +6,7 @@ import { IProjectListProps } from './ProjectList/types'
 import { SET_SELECTED_PROJECT } from './reducer/actions'
 
 /**
- * Use Project list
+ * Component logic hook for the ProjectList component.
  *
  * @param context Context
  */

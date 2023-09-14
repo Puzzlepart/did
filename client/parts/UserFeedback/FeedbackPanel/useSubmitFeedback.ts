@@ -1,13 +1,12 @@
 import { useMutation } from '@apollo/client'
 import { IPanelProps } from '@fluentui/react'
-import { ISubmitProps } from 'components/FormControl'
+import { UseFormSubmitHook } from 'components/FormControl'
 import { useToast } from 'components/Toast'
-import { TypedMap } from 'hooks'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { UserFeedback } from '../../../../server/graphql'
 import $submit_feedback from './submit-feedback.gql'
+import { useFeedbackModel } from './useFeedbackModel'
 
 /**
  * Hook that returns props for submitting feedback.
@@ -16,10 +15,10 @@ import $submit_feedback from './submit-feedback.gql'
  * @param panel - The props for the feedback panel.
  * @returns An object containing the text for the submit button, a toast object, a click handler, and a disabled flag.
  */
-export const useSubmitFeedback = (
-  model: TypedMap<keyof UserFeedback, UserFeedback>,
-  panel: IPanelProps
-): ISubmitProps => {
+export const useSubmitFeedback: UseFormSubmitHook<IPanelProps,ReturnType<typeof useFeedbackModel>> = (
+  props,
+  model
+) => {
   const { t } = useTranslation()
   const [disabled, setDisabled] = useState(false)
   const [submitFeedback] = useMutation($submit_feedback)
@@ -55,7 +54,7 @@ export const useSubmitFeedback = (
           intent: 'warning'
         })
       }
-      panel.onDismiss()
+      props.onDismiss()
     },
     disabled:
       _.isEmpty(model.$.title) ||

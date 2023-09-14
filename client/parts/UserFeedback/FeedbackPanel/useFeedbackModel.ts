@@ -3,8 +3,6 @@ import { useMap } from 'hooks'
 import { UserFeedback } from 'types'
 import _ from 'underscore'
 import { convertToMap } from 'utils/convertToMap'
-import { useMoodOptions } from './useMoodOptions'
-import { useTypeOptions } from './useTypeOptions'
 
 const INITIAL_MODEL = {
   title: '',
@@ -26,13 +24,5 @@ export const useFeedbackModel = () => {
     reporter
   })
   const model = useMap<keyof UserFeedback, UserFeedback>(modelWithReporter)
-
-  const typeOptions = useTypeOptions()
-  const moodOptions = useMoodOptions()
-
-  return {
-    model,
-    typeOptions,
-    moodOptions
-  }
+  return model
 }

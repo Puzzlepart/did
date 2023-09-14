@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { ButtonProps } from '@fluentui/react-components'
 import { IBasePanelProps } from 'components/BasePanel/types'
 import { IToastProps } from 'components/Toast'
@@ -33,7 +34,7 @@ export type UseFormOptions = {
   errorMessage?: string
 }
 
-export interface ISubmitProps
+interface ISubmitProps
   extends Pick<ButtonProps, 'onClick' | 'disabled'> {
   text: string
   toast?: IToastProps
@@ -87,3 +88,9 @@ export type FormInputControlBase<O = any> = {
    */
   options?: O
 }
+
+export type UseFormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
+  props?: TProps,
+  model?: TModel,
+  options?: TOptions
+) => ISubmitProps

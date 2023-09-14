@@ -5,6 +5,8 @@ import { useColumns } from './useColumns'
 
 /**
  * Component logic hook for `<ProjecList />`
+ * 
+ * @param props Props for the component
  *
  * @category Projects
  */
