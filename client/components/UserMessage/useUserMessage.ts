@@ -2,8 +2,8 @@ import { MenuItemProps } from '@fluentui/react-components'
 import { HTMLAttributes, useMemo } from 'react'
 import { getFluentIcon } from 'utils'
 import { UserMessage } from '.'
-import styles from './UserMessage.module.scss'
 import { IUserMessageProps } from './types'
+import styles from './UserMessage.module.scss'
 import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**

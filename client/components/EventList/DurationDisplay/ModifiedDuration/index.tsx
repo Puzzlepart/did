@@ -7,7 +7,9 @@ import styles from './ModifiedDuration.module.scss'
 import { IModifiedDurationProps } from './types'
 import { useModifiedDuration } from './useModifiedDuration'
 
-export const ModifiedDuration: StyledComponent<IModifiedDurationProps> = (props) => {
+export const ModifiedDuration: StyledComponent<IModifiedDurationProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const { modifiedDuration, originalDuration, isAdjusted } =
     useModifiedDuration(props)

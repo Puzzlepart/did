@@ -20,6 +20,5 @@ export const NotificationIndicator: StyledComponent = (props) => {
   )
 }
 
-
 NotificationIndicator.displayName = 'NotificationIndicator'
 NotificationIndicator.className = styles.notificationIndicator

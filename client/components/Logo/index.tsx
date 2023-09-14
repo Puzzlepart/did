@@ -12,8 +12,9 @@ export const Logo: ReusableComponent<ILogoProps> = (props) => {
   return (
     <div className={Logo.className}>
       <div
-        className={`${styles.logo} ${props.dropShadow ? styles.dropShadow : ''
-          }`}
+        className={`${styles.logo} ${
+          props.dropShadow ? styles.dropShadow : ''
+        }`}
         style={{
           width: props.width,
           height: props.height

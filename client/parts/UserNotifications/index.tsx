@@ -7,8 +7,8 @@ import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
-import styles from './UserNotifications.module.scss'
 import { IUserNotificationsProps } from './types'
+import styles from './UserNotifications.module.scss'
 
 /**
  * User notifications
@@ -59,4 +59,3 @@ UserNotifications.className = styles.userNotifications
 
 export * from './NotificationsPanel'
 export * from './types'
-

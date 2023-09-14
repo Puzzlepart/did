@@ -9,7 +9,9 @@ import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
 import { IAddMultiplePanelProps } from './types'
 
-export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (props) => {
+export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
   const [selectedUsers, setSelectedUsers] = useState([])

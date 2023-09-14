@@ -12,7 +12,9 @@ import { IReportLinkTooltipProps } from './types'
  *
  * @category Reports
  */
-export const ReportLinkTooltip: StyledComponent<IReportLinkTooltipProps> = (props) => {
+export const ReportLinkTooltip: StyledComponent<IReportLinkTooltipProps> = (
+  props
+) => {
   const { t } = useTranslation()
   return (
     <Tooltip

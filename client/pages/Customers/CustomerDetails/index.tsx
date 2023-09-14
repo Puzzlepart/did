@@ -8,8 +8,6 @@ import { Header } from './Header'
 import { Information } from './Information'
 import { useCustomerList } from './useCustomerList'
 
-
-
 /**
  * @category Customers
  */

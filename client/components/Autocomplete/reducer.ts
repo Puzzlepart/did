@@ -40,10 +40,10 @@ export function useAutocompleteReducer(initialState: IAutocompleteState) {
         state.suggestions =
           state.value.length > 0
             ? state.items.filter((index) =>
-              index.searchValue
-                .toLowerCase()
-                .includes(payload.searchTerm.toLowerCase())
-            )
+                index.searchValue
+                  .toLowerCase()
+                  .includes(payload.searchTerm.toLowerCase())
+              )
             : []
       })
       .addCase(ON_KEY_DOWN, (state, { payload }) => {

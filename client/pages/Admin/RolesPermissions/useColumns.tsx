@@ -33,20 +33,25 @@ export function useColumns({ setPanel, onDelete }) {
       { minWidth: 400, maxWidth: 400, isMultiline: true },
       (role: Role) => <PermissionList permissionIds={role.permissions} />
     ),
-    createColumnDef(null, null, { minWidth: 100, maxWidth: 100 }, (role: Role) => (
-      <div style={{ display: 'flex' }}>
-        <EditLink
-          style={{ marginRight: 12 }}
-          hidden={role.readOnly}
-          onClick={() => {
-            setPanel({
-              headerText: t('admin.editRole'),
-              model: role
-            })
-          }}
-        />
-        <DeleteLink hidden={role.readOnly} onClick={() => onDelete(role)} />
-      </div>
-    ))
+    createColumnDef(
+      null,
+      null,
+      { minWidth: 100, maxWidth: 100 },
+      (role: Role) => (
+        <div style={{ display: 'flex' }}>
+          <EditLink
+            style={{ marginRight: 12 }}
+            hidden={role.readOnly}
+            onClick={() => {
+              setPanel({
+                headerText: t('admin.editRole'),
+                model: role
+              })
+            }}
+          />
+          <DeleteLink hidden={role.readOnly} onClick={() => onDelete(role)} />
+        </div>
+      )
+    )
   ]
 }

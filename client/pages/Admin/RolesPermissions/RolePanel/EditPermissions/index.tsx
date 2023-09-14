@@ -15,7 +15,9 @@ import styles from './EditPermissions.module.scss'
 import { IEditPermissionsProps } from './types'
 import { useEditPermissions } from './useEditPermissions'
 
-export const EditPermissions: StyledComponent<IEditPermissionsProps> = (props) => {
+export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
+  props
+) => {
   const { permissions, checkedValues, onCheckedValueChange } =
     useEditPermissions(props)
   return (

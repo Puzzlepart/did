@@ -12,7 +12,7 @@ export const WelcomeTab: TabComponent = () => {
   const buttons = useReportsQueryButtons()
   return (
     <div className={WelcomeTab.className}>
-      <UserMessage   text={t('reports.selectReportText')} />
+      <UserMessage text={t('reports.selectReportText')} />
       <div className={styles.reportButtons}>
         {buttons.map((button, index) => (
           <Button

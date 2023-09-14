@@ -8,9 +8,9 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { StyledComponent } from 'types'
 import { ErrorFallback, Navigation } from '../parts'
+import styles from './App.module.scss'
 import { AppSwitch } from './AppSwitch'
 import { useAppClassName } from './useAppClassName'
-import styles from './App.module.scss'
 
 /**
  * App router that uses `<Switch />` from

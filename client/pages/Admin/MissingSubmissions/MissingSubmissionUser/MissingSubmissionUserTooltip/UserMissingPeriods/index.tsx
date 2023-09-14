@@ -2,10 +2,12 @@ import { Label } from '@fluentui/react-components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import styles from './UserMissingPeriods.module.scss'
 import { IUserMissingPeriodsProps } from './types'
+import styles from './UserMissingPeriods.module.scss'
 
-export const UserMissingPeriods: StyledComponent<IUserMissingPeriodsProps> = (props) => {
+export const UserMissingPeriods: StyledComponent<IUserMissingPeriodsProps> = (
+  props
+) => {
   const { t } = useTranslation()
   if (!props.user.periods) return null
   return (

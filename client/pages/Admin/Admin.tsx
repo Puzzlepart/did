@@ -34,3 +34,5 @@ export const Admin: FC = () => {
     />
   )
 }
+
+Admin.displayName = 'Admin'

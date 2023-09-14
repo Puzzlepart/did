@@ -11,7 +11,9 @@ import { useSaveFilterForm } from './useSaveFilterForm'
 /**
  * @category Reports
  */
-export const SaveFilterForm: StyledComponent<ISaveFilterFormProps> = (props) => {
+export const SaveFilterForm: StyledComponent<ISaveFilterFormProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const { inputVisible, setInputVisible, value, set, onSave } =
     useSaveFilterForm()

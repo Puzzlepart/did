@@ -9,7 +9,9 @@ import { IProjectFormOptionsProps } from './types'
 /**
  * @category Projects
  */
-export const ProjectFormOptions: StyledComponent<IProjectFormOptionsProps> = (props) => {
+export const ProjectFormOptions: StyledComponent<IProjectFormOptionsProps> = (
+  props
+) => {
   const { t } = useTranslation()
   return (
     <div className={ProjectFormOptions.className} hidden={props.hidden}>

@@ -50,6 +50,7 @@ export const Timesheet: FC = () => {
   )
 }
 
+Timesheet.displayName = 'Timesheet'
 Timesheet.defaultProps = {
   dateRangeType: DateRangeType.Week
 }

@@ -12,8 +12,8 @@ import React, { useContext } from 'react'
 import { StyledComponent } from 'types'
 import { UserSettingsContext } from '../context'
 import { IUserSetting, UserSettingInputType } from '../types'
-import styles from './UserSettingInput.module.scss'
 import { onRenderOption } from './onRenderOption'
+import styles from './UserSettingInput.module.scss'
 
 /**
  * @category UserMenu

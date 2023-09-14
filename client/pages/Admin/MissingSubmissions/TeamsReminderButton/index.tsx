@@ -9,7 +9,9 @@ import styles from './TeamsReminderButton.module.scss'
 import { ITeamsReminderButtonProps } from './types'
 import { useStartTeamsConversation } from './useStartTeamsConversation'
 
-export const TeamsReminderButton: StyledComponent<ITeamsReminderButtonProps> = (props) => {
+export const TeamsReminderButton: StyledComponent<ITeamsReminderButtonProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const { startTeamsConversation } = useStartTeamsConversation(props)

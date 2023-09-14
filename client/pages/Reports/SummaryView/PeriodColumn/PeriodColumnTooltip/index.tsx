@@ -13,44 +13,43 @@ import { usePeriodColumnTooltip } from './usePeriodColumnTooltip'
 /**
  * @category SummaryView
  */
-export const PeriodColumnTooltip: StyledComponent<IPeriodColumnTooltipProps> = ({
-  periods,
-  hours,
-  user
-}) => {
-  const { t } = useTranslation()
-  const { week, month, monthName, year, customerTotals } =
-    usePeriodColumnTooltip({ periods, hours })
-  if (_.isEmpty(periods)) return null
-  return (
-    <div className={PeriodColumnTooltip.className}>
-      <div className={styles.header}>
-        <div className={styles.title}>
-          <div className={styles.text}>
-            {t('common.periodColumnTooltipTitle', { week, month })}
+export const PeriodColumnTooltip: StyledComponent<IPeriodColumnTooltipProps> =
+  ({ periods, hours, user }) => {
+    const { t } = useTranslation()
+    const { week, month, monthName, year, customerTotals } =
+      usePeriodColumnTooltip({ periods, hours })
+    if (_.isEmpty(periods)) return null
+    return (
+      <div className={PeriodColumnTooltip.className}>
+        <div className={styles.header}>
+          <div className={styles.title}>
+            <div className={styles.text}>
+              {t('common.periodColumnTooltipTitle', { week, month })}
+            </div>
+            <SubText text={`${monthName} ${year}`} />
           </div>
-          <SubText text={`${monthName} ${year}`} />
+          {user && (
+            <Persona
+              className={styles.userInfo}
+              text={user?.displayName}
+              secondaryText={user?.mail}
+              imageUrl={user?.photo?.base64}
+              size={PersonaSize.size40}
+            />
+          )}
         </div>
-        {user && (
-          <Persona
-            className={styles.userInfo}
-            text={user?.displayName}
-            secondaryText={user?.mail}
-            imageUrl={user?.photo?.base64}
-            size={PersonaSize.size40}
-          />
-        )}
+        <div className={styles.customerTotals}>
+          {customerTotals.map(({ customer, hours }, index) => {
+            if (!customer) return null
+            return (
+              <CustomerHours key={index} customer={customer} hours={hours} />
+            )
+          })}
+        </div>
+        <TotalHours hours={hours.total} />
       </div>
-      <div className={styles.customerTotals}>
-        {customerTotals.map(({ customer, hours }, index) => {
-          if (!customer) return null
-          return <CustomerHours key={index} customer={customer} hours={hours} />
-        })}
-      </div>
-      <TotalHours hours={hours.total} />
-    </div>
-  )
-}
+    )
+  }
 
 PeriodColumnTooltip.displayName = 'PeriodColumnTooltip'
 PeriodColumnTooltip.className = styles.periodColumnTooltip

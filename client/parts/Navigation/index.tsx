@@ -12,8 +12,8 @@ import { useAppClassName } from '../../app/useAppClassName'
 import { UserFeedback } from '../UserFeedback'
 import { UserMenu } from '../UserMenu'
 import { UserNotifications } from '../UserNotifications'
-import { NavItem } from './NavItem'
 import styles from './Navigation.module.scss'
+import { NavItem } from './NavItem'
 
 /**
  * @category Function Component

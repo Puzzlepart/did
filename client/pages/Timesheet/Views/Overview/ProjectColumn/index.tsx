@@ -45,7 +45,9 @@ function getErrorMessage(
 /**
  * Component that renders the project column for the event list.
  */
-export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({ event }) => {
+export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
+  event
+}) => {
   const { t } = useTranslation()
   const { state, dispatch, className } = useProjectColumn()
 

@@ -10,7 +10,7 @@ import { useAppContext } from 'AppContext'
 import { Toast, useToast } from 'components/Toast'
 import { useToggle } from 'hooks'
 import React, { useEffect, useRef } from 'react'
-import { MobileView, isMobile } from 'react-device-detect'
+import { isMobile, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
@@ -47,7 +47,11 @@ export const UserMenu: StyledComponent = () => {
   return (
     <Popover withArrow={true}>
       <PopoverTrigger>
-        <span ref={target} className={UserMenu.className} onClick={() => toggleMenu()}>
+        <span
+          ref={target}
+          className={UserMenu.className}
+          onClick={() => toggleMenu()}
+        >
           <Persona
             className={styles.user}
             name={user.displayName}

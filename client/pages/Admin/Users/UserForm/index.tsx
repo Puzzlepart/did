@@ -7,8 +7,8 @@ import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import { RolePicker } from './RolePicker'
-import styles from './UserForm.module.scss'
 import { IUserFormProps } from './types'
+import styles from './UserForm.module.scss'
 import { useUserForm } from './useUserForm'
 
 export const UserForm: StyledComponent<IUserFormProps> = (props) => {

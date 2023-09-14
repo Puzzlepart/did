@@ -1,8 +1,8 @@
 import { isMobile } from 'react-device-detect'
+import { Overview } from '.'
 import styles from './Overview.module.scss'
 import { useAdditionalColumns } from './useAdditionalColumns'
 import { useListGroupProps } from './useListGroupProps'
-import { Overview } from '.'
 
 /**
  * Custom hook that returns an object containing additionalColumns, listGroupProps, and className.

@@ -1,12 +1,12 @@
 import { BasePanel } from 'components'
 import React from 'react'
+import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../MenuItem'
 import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { useUserSettings } from './useUserSettings'
-import { StyledComponent } from 'types'
 
 /**
  * @category UserMenu

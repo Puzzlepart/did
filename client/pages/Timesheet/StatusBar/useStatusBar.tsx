@@ -4,12 +4,12 @@ import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
+import { StatusBar } from '.'
 import { useTimesheetContext } from '../context'
 import { Overview } from '../Views/Overview'
-import { StatusBar } from '.'
-import { isMobile } from 'react-device-detect'
 import styles from './StatusBar.module.scss'
 
 /**
@@ -190,10 +190,10 @@ export function useStatusBar() {
   return {
     className: classNames.filter(Boolean).join(' '),
     messages: messages
-    .filter((message) => !isDismissed(message.id))
-    .map((message) => ({
-      ...message,
-      onDismiss: () => dismiss(message.id)
-    }))
+      .filter((message) => !isDismissed(message.id))
+      .map((message) => ({
+        ...message,
+        onDismiss: () => dismiss(message.id)
+      }))
   }
 }

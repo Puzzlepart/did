@@ -43,7 +43,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
   }, [props.selectedKey])
 
   const classNames = [
-    styles.autoComplete, 
+    styles.autoComplete,
     props.errorMessage && styles.hasError
   ]
 

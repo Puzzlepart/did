@@ -43,6 +43,5 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
   )
 }
 
-
 RolesPermissions.displayName = 'RolesPermissions'
 RolesPermissions.className = styles.rolesPermissions

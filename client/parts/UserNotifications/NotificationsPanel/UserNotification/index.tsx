@@ -4,13 +4,15 @@ import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { UserNotificationsContext } from '../../context'
-import styles from './UserNotification.module.scss'
 import { IUserNotificationProps } from './types'
+import styles from './UserNotification.module.scss'
 
 /**
  * @category Function Component
  */
-export const UserNotification: StyledComponent<IUserNotificationProps> = ({ model }) => {
+export const UserNotification: StyledComponent<IUserNotificationProps> = ({
+  model
+}) => {
   const { t } = useTranslation()
   const { dismissNotification } = useContext(UserNotificationsContext)
   return (

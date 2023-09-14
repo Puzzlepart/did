@@ -1,13 +1,15 @@
 import { usePermissions } from 'hooks/user/usePermissions'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { PermissionCheckbox } from './PermissionCheckbox'
 import styles from './PermissionsControl.module.scss'
 import { IPermissionsControlProps } from './types'
-import { StyledComponent } from 'types'
 
-export const PermissionsControl: StyledComponent<IPermissionsControlProps> = (props) => {
+export const PermissionsControl: StyledComponent<IPermissionsControlProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const [permissions] = usePermissions(null, true)
   return (

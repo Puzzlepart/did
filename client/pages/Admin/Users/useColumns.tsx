@@ -58,15 +58,15 @@ export function useColumns(
         data: { hidden: isMobile }
       }),
       type === 'active' &&
-      createColumnDef(
-        'role.name',
-        t('common.roleLabel'),
-        {
-          maxWidth: 150,
-          data: { hidden: isMobile }
-        },
-        ({ role }) => <IconText iconName={role.icon} text={role.name} />
-      ),
+        createColumnDef(
+          'role.name',
+          t('common.roleLabel'),
+          {
+            maxWidth: 150,
+            data: { hidden: isMobile }
+          },
+          ({ role }) => <IconText iconName={role.icon} text={role.name} />
+        ),
       createColumnDef('lastActive', t('common.lastActiveLabel'), {
         maxWidth: 180,
         data: { hidden: isMobile },
@@ -74,27 +74,27 @@ export function useColumns(
           $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
       }),
       type === 'active' &&
-      createColumnDef(
-        'actions',
-        '',
-        { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
-        (user: User) => (
-          <div style={{ display: 'flex' }}>
-            <EditLink
-              style={{ marginRight: 12 }}
-              hidden={user.provider === 'google'}
-              onClick={() =>
-                context.dispatch(
-                  SET_USER_FORM({
-                    headerText: user.displayName,
-                    user
-                  })
-                )
-              }
-            />
-          </div>
+        createColumnDef(
+          'actions',
+          '',
+          { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
+          (user: User) => (
+            <div style={{ display: 'flex' }}>
+              <EditLink
+                style={{ marginRight: 12 }}
+                hidden={user.provider === 'google'}
+                onClick={() =>
+                  context.dispatch(
+                    SET_USER_FORM({
+                      headerText: user.displayName,
+                      user
+                    })
+                  )
+                }
+              />
+            </div>
+          )
         )
-      )
     ]
       .filter(Boolean)
       .filter((col) => !col.hidden)

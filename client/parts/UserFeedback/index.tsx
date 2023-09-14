@@ -6,8 +6,8 @@ import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
-import styles from './UserFeedback.module.scss'
 import { IUserFeedbackProps } from './types'
+import styles from './UserFeedback.module.scss'
 
 /**
  * User feedback
@@ -19,7 +19,9 @@ import { IUserFeedbackProps } from './types'
  *
  * @category Function Component
  */
-export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
+export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({
+  renderAsMenuItem
+}) => {
   const { t } = useTranslation()
   const [isOpen, togglePanel] = useToggle(false)
   return (

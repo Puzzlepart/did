@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { UserNotificationsContext } from '../context'
-import { UserNotification } from './UserNotification'
 import styles from './NotificationsPanel.module.scss'
+import { UserNotification } from './UserNotification'
 
 /**
  * @category Function Component
@@ -54,6 +54,5 @@ export const NotificationsPanel: StyledComponent<IPanelProps> = (props) => {
 NotificationsPanel.displayName = 'NotificationsPanel'
 NotificationsPanel.className = styles.notificationsPanel
 
-export * from './UserNotification'
 export * from './types'
-
+export * from './UserNotification'

@@ -33,6 +33,6 @@ export const useCustomerList = () => {
     columns,
     showInactive,
     setShowInactive,
-    setSelectedCustomer,
+    setSelectedCustomer
   }
 }

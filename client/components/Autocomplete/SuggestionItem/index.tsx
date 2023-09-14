@@ -9,12 +9,17 @@ import { ISuggestionItemProps } from './types'
 /**
  * @category Autocomplete
  */
-export const SuggestionItem: StyledComponent<ISuggestionItemProps> = (props) => {
+export const SuggestionItem: StyledComponent<ISuggestionItemProps> = (
+  props
+) => {
   if (props.item.key === -1) {
     return <div data-is-focusable={true}>{props.item.text}</div>
   }
 
-  const classNames = [SuggestionItem.className, props.item.isSelected && styles.isSelected]
+  const classNames = [
+    SuggestionItem.className,
+    props.item.isSelected && styles.isSelected
+  ]
   let iconStyles = {}
   if (typeof props.itemIcons !== 'boolean') {
     iconStyles = props.itemIcons?.style

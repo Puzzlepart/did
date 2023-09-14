@@ -100,7 +100,10 @@ const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
  * @param props - Props
  * @param name - Name
  */
-const createDurationColumnDefs = (props: IEventListProps, name: string): IColumn =>
+const createDurationColumnDefs = (
+  props: IEventListProps,
+  name: string
+): IColumn =>
   createColumnDef(
     'duration',
     name,

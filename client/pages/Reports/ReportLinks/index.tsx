@@ -5,8 +5,8 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { ReportsContext } from '../context'
-import { ReportLinkTooltip } from './ReportLinkTooltip'
 import styles from './ReportLinks.module.scss'
+import { ReportLinkTooltip } from './ReportLinkTooltip'
 
 /**
  * Report links. This component is used when the report links are available.

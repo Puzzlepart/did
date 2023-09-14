@@ -10,7 +10,9 @@ import { IMobileBreadcrumbProps } from './types'
 /**
  * @category Function Component
  */
-export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (props) => {
+export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
+  props
+) => {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
   const items: IBreadcrumbItem[] = [
@@ -39,4 +41,3 @@ MobileBreadcrumb.className = styles.mobileBreadcrumb
 
 export * from './types'
 export * from './useMobileBreadcrumb'
-

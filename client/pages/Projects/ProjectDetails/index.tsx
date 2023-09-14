@@ -52,4 +52,3 @@ ProjectDetails.className = styles.projectDetails
 export * from './Header'
 export * from './Information'
 export * from './TimeEntries'
-

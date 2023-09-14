@@ -10,7 +10,9 @@ import { useCustomerList } from './useCustomerList'
 /**
  * Returns column definitions
  */
-export function useColumns({ setSelectedCustomer }: Partial<ReturnType<typeof useCustomerList>>): IListColumn[] {
+export function useColumns({
+  setSelectedCustomer
+}: Partial<ReturnType<typeof useCustomerList>>): IListColumn[] {
   const { t } = useTranslation()
   return [
     createColumnDef<Customer>(
@@ -38,11 +40,20 @@ export function useColumns({ setSelectedCustomer }: Partial<ReturnType<typeof us
       'name',
       t('common.nameFieldLabel'),
       { maxWidth: 300 },
-      (customer) => <CustomerLink customer={customer} onClick={() => setSelectedCustomer(customer)} />
+      (customer) => (
+        <CustomerLink
+          customer={customer}
+          onClick={() => setSelectedCustomer(customer)}
+        />
+      )
     ),
-    createColumnDef<Customer>('description', t('common.descriptionFieldLabel'), {
-      maxWidth: 300,
-      isMultiline: true
-    })
+    createColumnDef<Customer>(
+      'description',
+      t('common.descriptionFieldLabel'),
+      {
+        maxWidth: 300,
+        isMultiline: true
+      }
+    )
   ]
 }

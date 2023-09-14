@@ -5,9 +5,14 @@ import { StyledComponent } from 'types'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'
 
-export const PermissionCheckbox: StyledComponent<IPermissionCheckboxProps> = (props) => {
+export const PermissionCheckbox: StyledComponent<IPermissionCheckboxProps> = (
+  props
+) => {
   return (
-    <div className={PermissionCheckbox.className} style={{ opacity: props.checked ? 1 : 0.6 }}>
+    <div
+      className={PermissionCheckbox.className}
+      style={{ opacity: props.checked ? 1 : 0.6 }}
+    >
       <Checkbox
         className={styles.checkBox}
         disabled={props.disabled}

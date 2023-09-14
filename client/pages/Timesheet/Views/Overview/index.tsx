@@ -7,8 +7,8 @@ import _ from 'underscore'
 import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD } from '../../reducer/actions'
 import { TimesheetViewComponent } from '../types'
-import { useOverview } from './useOverview'
 import styles from './Overview.module.scss'
+import { useOverview } from './useOverview'
 
 /**
  * @category Timesheet

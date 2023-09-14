@@ -1,7 +1,7 @@
 import { isMobile } from 'react-device-detect'
+import { ProjectColumn } from '.'
 import { useTimesheetContext } from '../../../context'
 import styles from './ProjectColumn.module.scss'
-import { ProjectColumn } from '.'
 
 /**
  * Custom hook that returns the state, dispatch and className for the project column component.

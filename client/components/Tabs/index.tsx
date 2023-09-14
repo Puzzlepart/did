@@ -1,8 +1,8 @@
 import { Tab, TabList } from '@fluentui/react-components'
 import React, { FC } from 'react'
+import styles from './Tabs.module.scss'
 import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
-import styles from './Tabs.module.scss'
 
 export const Tabs: FC<ITabsProps> = (props) => {
   const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =

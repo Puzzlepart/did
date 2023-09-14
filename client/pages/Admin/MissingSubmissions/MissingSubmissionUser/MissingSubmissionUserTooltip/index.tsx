@@ -8,15 +8,18 @@ import React from 'react'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserTooltip.module.scss'
-import { UserMissingPeriods } from './UserMissingPeriods'
 import { IMissingSubmissionUserTooltipProps } from './types'
+import { UserMissingPeriods } from './UserMissingPeriods'
 
 export const MissingSubmissionUserTooltip: StyledComponent<IMissingSubmissionUserTooltipProps> =
   (props) => (
     <TooltipHost
       tooltipProps={{
         onRenderContent: () => (
-          <FluentProvider theme={webLightTheme} className={MissingSubmissionUserTooltip.className}>
+          <FluentProvider
+            theme={webLightTheme}
+            className={MissingSubmissionUserTooltip.className}
+          >
             <Persona
               {...props.user}
               className={styles.persona}
