@@ -62,6 +62,7 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
   )
 }
 
+UserMessage.className = styles.userMessage
 UserMessage.defaultProps = {
   intent: 'info',
   actions: [],

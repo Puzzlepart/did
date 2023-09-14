@@ -8,7 +8,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import { PermissionScope } from '../../../../shared/config/security/permissions'
 import { IUsersContext } from './context'
 import { SET_USER_FORM } from './reducer/actions'
@@ -25,7 +25,7 @@ export function useColumns(
   const [, hasPermission] = usePermissions()
   return (type) => {
     return [
-      col(
+      createColumnDef(
         'avatar',
         '',
         {
@@ -45,56 +45,56 @@ export function useColumns(
           />
         )
       ),
-      col('surname', t('common.surnameLabel'), {
+      createColumnDef('surname', t('common.surnameLabel'), {
         maxWidth: 100,
         data: { hidden: isMobile }
       }),
-      col('givenName', t('common.givenNameLabel'), {
+      createColumnDef('givenName', t('common.givenNameLabel'), {
         maxWidth: 120,
         data: { hidden: isMobile }
       }),
-      col('jobTitle', t('common.jobTitleLabel'), {
+      createColumnDef('jobTitle', t('common.jobTitleLabel'), {
         maxWidth: 140,
         data: { hidden: isMobile }
       }),
       type === 'active' &&
-        col(
-          'role.name',
-          t('common.roleLabel'),
-          {
-            maxWidth: 150,
-            data: { hidden: isMobile }
-          },
-          ({ role }) => <IconText iconName={role.icon} text={role.name} />
-        ),
-      col('lastActive', t('common.lastActiveLabel'), {
+      createColumnDef(
+        'role.name',
+        t('common.roleLabel'),
+        {
+          maxWidth: 150,
+          data: { hidden: isMobile }
+        },
+        ({ role }) => <IconText iconName={role.icon} text={role.name} />
+      ),
+      createColumnDef('lastActive', t('common.lastActiveLabel'), {
         maxWidth: 180,
         data: { hidden: isMobile },
         onRender: (row) =>
           $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
       }),
       type === 'active' &&
-        col(
-          'actions',
-          '',
-          { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
-          (user: User) => (
-            <div style={{ display: 'flex' }}>
-              <EditLink
-                style={{ marginRight: 12 }}
-                hidden={user.provider === 'google'}
-                onClick={() =>
-                  context.dispatch(
-                    SET_USER_FORM({
-                      headerText: user.displayName,
-                      user
-                    })
-                  )
-                }
-              />
-            </div>
-          )
+      createColumnDef(
+        'actions',
+        '',
+        { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
+        (user: User) => (
+          <div style={{ display: 'flex' }}>
+            <EditLink
+              style={{ marginRight: 12 }}
+              hidden={user.provider === 'google'}
+              onClick={() =>
+                context.dispatch(
+                  SET_USER_FORM({
+                    headerText: user.displayName,
+                    user
+                  })
+                )
+              }
+            />
+          </div>
         )
+      )
     ]
       .filter(Boolean)
       .filter((col) => !col.hidden)

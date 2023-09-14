@@ -5,7 +5,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import styles from './Roles.module.scss'
 
 /**
@@ -14,7 +14,7 @@ import styles from './Roles.module.scss'
 export function useColumns({ setPanel, onDelete }) {
   const { t } = useTranslation()
   return [
-    col('name', '', { maxWidth: 150 }, (role: Role) => {
+    createColumnDef('name', '', { maxWidth: 150 }, (role: Role) => {
       return (
         <div className={styles.nameColumn}>
           <Icon className={styles.icon} iconName={role.icon} />
@@ -22,18 +22,18 @@ export function useColumns({ setPanel, onDelete }) {
         </div>
       )
     }),
-    col('description', t('common.descriptionFieldLabel'), {
+    createColumnDef('description', t('common.descriptionFieldLabel'), {
       maxWidth: 240,
       isMultiline: true,
       data: { hidden: isMobile }
     }),
-    col(
+    createColumnDef(
       'permissions',
       t('admin.permissonsLabel'),
       { minWidth: 400, maxWidth: 400, isMultiline: true },
       (role: Role) => <PermissionList permissionIds={role.permissions} />
     ),
-    col(null, null, { minWidth: 100, maxWidth: 100 }, (role: Role) => (
+    createColumnDef(null, null, { minWidth: 100, maxWidth: 100 }, (role: Role) => (
       <div style={{ display: 'flex' }}>
         <EditLink
           style={{ marginRight: 12 }}

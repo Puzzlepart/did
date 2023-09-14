@@ -2,7 +2,7 @@ import { CustomerLink } from 'components'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import { ProjectColumn } from './ProjectColumn'
 
 /**
@@ -12,13 +12,13 @@ export function useAdditionalColumns() {
   const { t } = useTranslation()
   return useMemo(
     () => [
-      col(
+      createColumnDef(
         'customer',
         t('common.customer'),
         { minWidth: 150, maxWidth: 200 },
         (event: EventObject) => <CustomerLink customer={event.customer} />
       ),
-      col(
+      createColumnDef(
         'project',
         t('common.project'),
         { minWidth: 150, maxWidth: 300 },

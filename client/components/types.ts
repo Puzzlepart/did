@@ -1,10 +1,11 @@
-import { FC, HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
+import { StyledComponent } from 'types'
 
 /**
  * Did reusable functional component
  *
- * @extends React.FunctionComponent
+ * @extends StyledComponent
  */
 export type ReusableComponent<
   T extends Omit<HTMLAttributes<any>, 'onChange' | 'defaultChecked'>
-> = FC<T>
+> = StyledComponent<T>

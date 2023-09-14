@@ -5,7 +5,7 @@ import { IListColumn } from 'components/List/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import { NameLabel } from './NameLabel'
 import { IProjectListProps } from './types'
 
@@ -22,7 +22,7 @@ const ColumnWrapper = ({ project, children }) => (
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
   return [
-    col(
+    createColumnDef(
       'customer',
       t('common.customer'),
       { minWidth: 340, maxWidth: 340 },
@@ -35,7 +35,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         )
       }
     ),
-    col(
+    createColumnDef(
       'key',
       t('common.keyFieldLabel'),
       {
@@ -58,7 +58,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         return <IconText iconName={project.icon} text={project.key} />
       }
     ),
-    col(
+    createColumnDef(
       'name',
       t('common.nameFieldLabel'),
       { maxWidth: 220 },
@@ -76,11 +76,11 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         </ColumnWrapper>
       )
     ),
-    col('description', t('common.descriptionFieldLabel'), {
+    createColumnDef('description', t('common.descriptionFieldLabel'), {
       maxWidth: 220,
       isMultiline: true
     }),
-    col('labels', '', {}, (project) => (
+    createColumnDef('labels', '', {}, (project) => (
       <ColumnWrapper project={project}>
         {project.labels.map((label: LabelObject, index: number) => (
           <EntityLabel key={index} label={label} />

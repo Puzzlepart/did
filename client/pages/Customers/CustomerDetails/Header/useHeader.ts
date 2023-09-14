@@ -15,7 +15,7 @@ export function useHeader() {
         root: { margin: 0 },
         itemLink: { fontSize: 14 },
         item: { fontSize: 14 },
-        chevron: { fontSize: 14 }
+        chevron: { fontSize: 8 }
        },
       items: [
         {

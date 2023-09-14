@@ -1,7 +1,10 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import { IListColumn } from 'components/List/types'
 
 /**
- * Generate a `IListColumn` defintion
+ * Creates a column definition for the `List` component.
+ * This is a helper function to make it easier to create
+ * column definitions.
  *
  * @param fieldName - Field name
  * @param name -Name
@@ -9,11 +12,11 @@ import { IListColumn } from 'components/List/types'
  * @param onRender - Render function
  * @param minWidth - Min width
  */
-export function generateColumn(
+export function createColumnDef<T = any>(
   fieldName: string,
   name = '',
   props: Partial<IListColumn> = {},
-  onRender?: (item?: any, index?: number, column?: IListColumn) => any,
+  onRender?: (item?: T, index?: number, column?: IListColumn) => any,
   minWidth = 100
 ): IListColumn {
   return {

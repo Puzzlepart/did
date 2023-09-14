@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { Customer } from 'types'
 import { CustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
@@ -11,7 +11,6 @@ export const useCustomerList = () => {
   const { dispatch, state, loading } = useContext(CustomersContext)
   const [items, setItems] = useState([...state.customers])
   const [showInactive, setShowInactive] = useState(false)
-  const columns = useColumns()
 
   useEffect(
     () =>
@@ -20,6 +19,13 @@ export const useCustomerList = () => {
       ),
     [state.customers, showInactive]
   )
+
+  const setSelectedCustomer = useCallback((customer: Customer) => {
+    if (customer) dispatch(SET_SELECTED_CUSTOMER({ customer }))
+  }, [])
+
+  const columns = useColumns({ setSelectedCustomer })
+
   return {
     state,
     loading,
@@ -27,8 +33,6 @@ export const useCustomerList = () => {
     columns,
     showInactive,
     setShowInactive,
-    setSelectedCustomer: (customer: Customer) => {
-      if (customer) dispatch(SET_SELECTED_CUSTOMER({ customer }))
-    }
+    setSelectedCustomer,
   }
 }

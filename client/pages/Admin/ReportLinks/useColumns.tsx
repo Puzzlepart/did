@@ -5,7 +5,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 
 type UseColumns = {
@@ -16,7 +16,7 @@ type UseColumns = {
 export function useColumns({ onEdit, onDelete }: UseColumns) {
   const { t } = useTranslation()
   return [
-    col(
+    createColumnDef(
       'published',
       t('admin.reportLinks.publishedLabel'),
 
@@ -31,7 +31,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
           </div>
         ) : null
     ),
-    col(
+    createColumnDef(
       'promoted',
       t('admin.reportLinks.promotedLabel'),
       {
@@ -45,7 +45,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
           </div>
         ) : null
     ),
-    col(
+    createColumnDef(
       'name',
       t('admin.reportLinks.nameLabel'),
       { maxWidth: 220 },
@@ -61,12 +61,12 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
         </div>
       )
     ),
-    col('description', t('admin.reportLinks.descriptionLabel'), {
+    createColumnDef('description', t('admin.reportLinks.descriptionLabel'), {
       isMultiline: true,
       maxWidth: 300,
       data: { hidden: isMobile }
     }),
-    col(
+    createColumnDef(
       'createdAt',
       t('common.createdLabel'),
       {
@@ -76,7 +76,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       (reportLink: ReportLink) =>
         new Date(reportLink.createdAt).toLocaleString()
     ),
-    col(
+    createColumnDef(
       'updatedAt',
       t('common.updatedLabel'),
       {
@@ -86,7 +86,7 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       (reportLink: ReportLink) =>
         new Date(reportLink.updatedAt).toLocaleString()
     ),
-    col(null, null, { minWidth: 180 }, (reportLink: ReportLink) => (
+    createColumnDef(null, null, { minWidth: 180 }, (reportLink: ReportLink) => (
       <div style={{ display: 'flex' }}>
         <EditLink
           style={{ marginRight: 12 }}

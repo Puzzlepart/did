@@ -1,8 +1,9 @@
 import { MenuItemProps } from '@fluentui/react-components'
 import { HTMLAttributes, useMemo } from 'react'
 import { getFluentIcon } from 'utils'
-import { IUserMessageProps } from './types'
+import { UserMessage } from '.'
 import styles from './UserMessage.module.scss'
+import { IUserMessageProps } from './types'
 import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
@@ -18,7 +19,7 @@ export function useUserMessage(props: IUserMessageProps) {
     id: props.id,
     hidden: props.hidden,
     onClick: props.onClick,
-    className: [styles.root, hasContextMenu && styles.hasContextMenu]
+    className: [UserMessage.className, hasContextMenu && styles.hasContextMenu]
       .filter(Boolean)
       .join(' ')
   }

@@ -4,15 +4,16 @@ import { IListColumn } from 'components/List/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
+import { useCustomerList } from './useCustomerList'
 
 /**
  * Returns column definitions
  */
-export function useColumns(): IListColumn[] {
+export function useColumns({ setSelectedCustomer }: Partial<ReturnType<typeof useCustomerList>>): IListColumn[] {
   const { t } = useTranslation()
   return [
-    col(
+    createColumnDef<Customer>(
       'key',
       t('common.keyFieldLabel'),
       {
@@ -33,13 +34,13 @@ export function useColumns(): IListColumn[] {
         return <IconText iconName={icon} text={key} />
       }
     ),
-    col(
+    createColumnDef<Customer>(
       'name',
       t('common.nameFieldLabel'),
       { maxWidth: 300 },
-      (customer: Customer) => <CustomerLink customer={customer} />
+      (customer) => <CustomerLink customer={customer} onClick={() => setSelectedCustomer(customer)} />
     ),
-    col('description', t('common.descriptionFieldLabel'), {
+    createColumnDef<Customer>('description', t('common.descriptionFieldLabel'), {
       maxWidth: 300,
       isMultiline: true
     })
