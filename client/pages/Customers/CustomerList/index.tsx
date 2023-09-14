@@ -1,4 +1,3 @@
-import { SelectionMode } from '@fluentui/react'
 import { List } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
@@ -8,16 +7,12 @@ import { useCustomerList } from './useCustomerList'
 
 export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
-  const { loading, items, columns, setSelectedCustomer } = useCustomerList()
+  const { loading, items, columns } = useCustomerList()
 
   return (
     <>
       <List
         searchBox={{ placeholder: t('common.searchPlaceholder') }}
-        selectionProps={{
-          mode: SelectionMode.single,
-          onChanged: setSelectedCustomer
-        }}
         enableShimmer={loading}
         items={items}
         columns={columns}

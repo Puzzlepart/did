@@ -1,6 +1,7 @@
 import {
   createTableColumn,
   TableCellLayout,
+  TableHeaderCell,
   Text,
   Tooltip
 } from '@fluentui/react-components'
@@ -20,7 +21,11 @@ import { IListColumn } from '../types'
 export function createPreviewListColumn(column: IListColumn, cellPadding = 6) {
   return createTableColumn<any>({
     columnId: column.fieldName,
-    renderHeaderCell: () => column.name,
+    renderHeaderCell: () => (
+      <TableHeaderCell>
+        {column.name}
+      </TableHeaderCell>
+    ),
     renderCell: (item) => {
       if (column.onRender) {
         return column.onRender(item)
