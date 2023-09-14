@@ -1,15 +1,12 @@
 import { TooltipHost } from '@fluentui/react'
-import {
-  FluentProvider,
-  Persona
-} from '@fluentui/react-components'
+import { FluentProvider, Persona } from '@fluentui/react-components'
 import React from 'react'
 import { fluentLightTheme } from 'theme'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserTooltip.module.scss'
-import { UserMissingPeriods } from './UserMissingPeriods'
 import { IMissingSubmissionUserTooltipProps } from './types'
+import { UserMissingPeriods } from './UserMissingPeriods'
 
 export const MissingSubmissionUserTooltip: StyledComponent<IMissingSubmissionUserTooltipProps> =
   (props) => (

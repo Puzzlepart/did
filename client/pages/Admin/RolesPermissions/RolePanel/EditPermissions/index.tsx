@@ -21,7 +21,10 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
   const { permissions, checkedValues, onCheckedValueChange } =
     useEditPermissions(props)
   return (
-    <FluentProvider theme={fluentLightTheme} className={EditPermissions.className}>
+    <FluentProvider
+      theme={fluentLightTheme}
+      className={EditPermissions.className}
+    >
       <div>
         <Menu
           checkedValues={checkedValues}

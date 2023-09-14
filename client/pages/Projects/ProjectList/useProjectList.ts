@@ -27,9 +27,7 @@ export function useProjectList(props: IProjectListProps) {
   useEffect(
     () =>
       setItems(
-        [...initialItems].filter(
-          ({ inactive }) => showInactive || !inactive
-        )
+        [...initialItems].filter(({ inactive }) => showInactive || !inactive)
       ),
     [initialItems, props.id, showInactive]
   )

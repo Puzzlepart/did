@@ -31,10 +31,10 @@ const isValidUrl = (urlString: string) => {
  * @param props Props from `<ReportLinksForm />`
  * @param model Model from `useReportLinksModel`
  */
-export const useReportsFormSubmit: UseFormSubmitHook<IReportLinksFormProps, ReturnType<typeof useReportLinksModel>> = (
-  props,
-  model
-) => {
+export const useReportsFormSubmit: UseFormSubmitHook<
+  IReportLinksFormProps,
+  ReturnType<typeof useReportLinksModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateReportLink)
   const [toast, setToast] = useToast(8000)

@@ -101,7 +101,8 @@
     "noLabelsSelectedText": "Legg til merkelapper på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
     "applyLabelsHeaderText": "Legg til merkelapper på dette prosjektet",
     "tagLabel": "Nøkkel",
-    "editButtonLabel": "Rediger prosjekt"
+    "editButtonLabel": "Rediger prosjekt",
+    "toggleInactive": "Vis/skjul inaktive prosjekter"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -116,7 +117,8 @@
     "descriptionFieldDescription": "Kort beskrivelse av kunden. \nDet er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
     "searchProjectsPlaceholder": "Søk i prosjekter...",
-    "editButtonLabel": "Rediger kunde"
+    "editButtonLabel": "Rediger kunde",
+    "toggleInactive": "Vis/skjul inaktive kunder"
   },
   "admin": {
     "apiTokens": {
@@ -289,7 +291,6 @@
     "searchPlaceholder": "Søk...",
     "genericErrorText": "En feil oppstod.",
     "createNewText": "Lag ny",
-    "toggleInactiveText": "Vis inaktive",
     "settings": "Innstillinger",
     "language": "Språk",
     "keyFieldLabel": "Nøkkel",

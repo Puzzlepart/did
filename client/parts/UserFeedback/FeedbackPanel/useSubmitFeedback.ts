@@ -15,10 +15,10 @@ import { useFeedbackModel } from './useFeedbackModel'
  * @param panel - The props for the feedback panel.
  * @returns An object containing the text for the submit button, a toast object, a click handler, and a disabled flag.
  */
-export const useSubmitFeedback: UseFormSubmitHook<IPanelProps,ReturnType<typeof useFeedbackModel>> = (
-  props,
-  model
-) => {
+export const useSubmitFeedback: UseFormSubmitHook<
+  IPanelProps,
+  ReturnType<typeof useFeedbackModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const [disabled, setDisabled] = useState(false)
   const [submitFeedback] = useMutation($submit_feedback)

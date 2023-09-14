@@ -101,7 +101,8 @@
     "noLabelsSelectedText": "Add labels to the projects for categorization. For example internal projects or projects that requires submitting hours in a separate system.",
     "applyLabelsHeaderText": "Apply labels to this project",
     "tagLabel": "Key",
-    "editButtonLabel": "Edit project"
+    "editButtonLabel": "Edit project",
+    "toggleInactive": "Show/hide inactive projects"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -116,7 +117,8 @@
     "descriptionFieldDescription": "A short description for the customer. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported.",
     "createError": "We can't create the customer at the moment. Please try again later.",
     "searchProjectsPlaceholder": "Search in projects...",
-    "editButtonLabel": "Edit customer"
+    "editButtonLabel": "Edit customer",
+    "toggleInactive": "Show/hide inactive customers"
   },
   "admin": {
     "apiTokens": {
@@ -289,7 +291,6 @@
     "searchPlaceholder": "Search...",
     "genericErrorText": "An error occured.",
     "createNewText": "Create new",
-    "toggleInactiveText": "Show inactive",
     "settings": "Settings",
     "language": "Language",
     "keyFieldLabel": "Key",
