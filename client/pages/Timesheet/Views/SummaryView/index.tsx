@@ -10,10 +10,12 @@ import { useSummaryView } from './useSummaryView'
 export const SummaryView: TimesheetViewComponent = () => {
   const props = useSummaryView()
   return (
-    <div className={styles.root}>
+    <div className={SummaryView.className}>
       <List {...props} />
     </div>
   )
 }
 
 SummaryView.id = 'summary'
+SummaryView.displayName = 'Timesheet.SummaryView'
+SummaryView.className = styles.summaryView

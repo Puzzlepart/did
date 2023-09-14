@@ -2,6 +2,7 @@ import { TabListProps } from '@fluentui/react-components'
 import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
 import { FunctionComponent, HTMLProps } from 'react'
 import { PermissionScope } from 'security'
+import { StyledComponent } from 'types'
 
 /**
  * A tuple representing a tab in the `Tabs` component.
@@ -73,4 +74,4 @@ export interface ITabProps extends HTMLProps<HTMLDivElement> {
  *
  * @template T The type of props that the component accepts.
  */
-export type TabComponent<T extends ITabProps = ITabProps> = FunctionComponent<T>
+export type TabComponent<T extends ITabProps = ITabProps> = StyledComponent<T>

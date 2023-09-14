@@ -1,7 +1,8 @@
 import { Persona, PersonaSize } from '@fluentui/react'
 import { SubText } from 'components'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { CustomerHours } from './CustomerHours'
 import styles from './PeriodColumnTooltip.module.scss'
@@ -12,7 +13,7 @@ import { usePeriodColumnTooltip } from './usePeriodColumnTooltip'
 /**
  * @category SummaryView
  */
-export const PeriodColumnTooltip: FC<IPeriodColumnTooltipProps> = ({
+export const PeriodColumnTooltip: StyledComponent<IPeriodColumnTooltipProps> = ({
   periods,
   hours,
   user
@@ -22,7 +23,7 @@ export const PeriodColumnTooltip: FC<IPeriodColumnTooltipProps> = ({
     usePeriodColumnTooltip({ periods, hours })
   if (_.isEmpty(periods)) return null
   return (
-    <div className={styles.root}>
+    <div className={PeriodColumnTooltip.className}>
       <div className={styles.header}>
         <div className={styles.title}>
           <div className={styles.text}>
@@ -50,3 +51,6 @@ export const PeriodColumnTooltip: FC<IPeriodColumnTooltipProps> = ({
     </div>
   )
 }
+
+PeriodColumnTooltip.displayName = 'PeriodColumnTooltip'
+PeriodColumnTooltip.className = styles.periodColumnTooltip

@@ -6,8 +6,11 @@ import { useMissingSubmissions } from './useMissingSubmissions'
 export const MissingSubmissions: TabComponent = () => {
   const { tabs } = useMissingSubmissions()
   return (
-    <div className={styles.root}>
+    <div className={MissingSubmissions.className}>
       <Tabs items={tabs} />
     </div>
   )
 }
+
+MissingSubmissions.displayName = 'MissingSubmissions'
+MissingSubmissions.className = styles.missingSubmissions

@@ -31,7 +31,7 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
     }
     default: {
       return (
-        <div className={styles.root}>
+        <div className={ProjectLink.className}>
           <Icon className={styles.icon} iconName={props.project?.icon} />
           <Link
             className={styles.link}
@@ -46,6 +46,8 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
   }
 }
 
+ProjectLink.displayName = 'ProjectLink'
+ProjectLink.className = styles.projectLink
 ProjectLink.defaultProps = {
   appearance: 'default',
   target: '_self'

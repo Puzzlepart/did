@@ -6,7 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
-import styles from './Roles.module.scss'
+import styles from './RolesPermissions.module.scss'
 
 /**
  * Columns hook for Roles

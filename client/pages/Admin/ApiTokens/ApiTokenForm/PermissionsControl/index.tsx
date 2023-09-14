@@ -5,12 +5,13 @@ import _ from 'underscore'
 import { PermissionCheckbox } from './PermissionCheckbox'
 import styles from './PermissionsControl.module.scss'
 import { IPermissionsControlProps } from './types'
+import { StyledComponent } from 'types'
 
-export const PermissionsControl: FC<IPermissionsControlProps> = (props) => {
+export const PermissionsControl: StyledComponent<IPermissionsControlProps> = (props) => {
   const { t } = useTranslation()
   const [permissions] = usePermissions(null, true)
   return (
-    <div className={styles.root}>
+    <div className={PermissionsControl.className}>
       <div className={styles.title}>
         {t('admin.apiTokens.permissionsTitle')}
       </div>
@@ -27,3 +28,6 @@ export const PermissionsControl: FC<IPermissionsControlProps> = (props) => {
     </div>
   )
 }
+
+PermissionsControl.displayName = 'PermissionsControl'
+PermissionsControl.className = styles.permissionsControl

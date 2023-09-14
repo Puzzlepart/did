@@ -1,14 +1,15 @@
 import { Label } from '@fluentui/react-components'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { IUserMissingPeriodsProps } from './types'
+import { StyledComponent } from 'types'
 import styles from './UserMissingPeriods.module.scss'
+import { IUserMissingPeriodsProps } from './types'
 
-export const UserMissingPeriods: FC<IUserMissingPeriodsProps> = (props) => {
+export const UserMissingPeriods: StyledComponent<IUserMissingPeriodsProps> = (props) => {
   const { t } = useTranslation()
   if (!props.user.periods) return null
   return (
-    <div className={styles.root}>
+    <div className={UserMissingPeriods.className}>
       <div>
         <Label weight='semibold'>{t('common.missingWeeksLabel')}</Label>
       </div>
@@ -16,3 +17,6 @@ export const UserMissingPeriods: FC<IUserMissingPeriodsProps> = (props) => {
     </div>
   )
 }
+
+UserMissingPeriods.displayName = 'UserMissingPeriods'
+UserMissingPeriods.className = styles.userMissingPeriods

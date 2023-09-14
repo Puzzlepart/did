@@ -18,7 +18,7 @@ export const DeleteLink: ReusableComponent<IDeleteLinkProps> = (props) => {
       style={{ ...props.style, opacity: props.disabled ? 0.2 : 1 }}
     >
       <Button
-        className={styles.root}
+        className={DeleteLink.className}
         onClick={props.onClick}
         disabled={props.disabled}
         appearance='subtle'
@@ -30,6 +30,7 @@ export const DeleteLink: ReusableComponent<IDeleteLinkProps> = (props) => {
   )
 }
 
+DeleteLink.className = styles.deleteLink
 DeleteLink.defaultProps = {
   style: {}
 }

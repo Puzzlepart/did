@@ -23,7 +23,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
   const { settings, onChange } = useContext(SubscriptionContext)
   const id = useId()
   return (
-    <div className={styles.root}>
+    <div className={SettingsSection.className}>
       {props.fields.map((field) => {
         const fieldProps = { ...field.props } as any
         fieldProps.disabled =
@@ -80,3 +80,6 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
     </div>
   )
 }
+
+SettingsSection.displayName = 'SettingsSection'
+SettingsSection.className = styles.settingsSection

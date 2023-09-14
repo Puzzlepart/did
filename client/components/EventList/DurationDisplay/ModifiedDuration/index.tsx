@@ -1,12 +1,13 @@
 import { Tooltip } from '@fluentui/react-components'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ModifiedDuration.module.scss'
 import { IModifiedDurationProps } from './types'
 import { useModifiedDuration } from './useModifiedDuration'
 
-export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
+export const ModifiedDuration: StyledComponent<IModifiedDurationProps> = (props) => {
   const { t } = useTranslation()
   const { modifiedDuration, originalDuration, isAdjusted } =
     useModifiedDuration(props)
@@ -32,7 +33,7 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
         </div>
       }
     >
-      <div className={styles.root}>
+      <div className={ModifiedDuration.className}>
         {props.children}
         <div className={styles.icon}>{icon('ArrowSortUp')}</div>
       </div>
@@ -40,6 +41,8 @@ export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
   )
 }
 
+ModifiedDuration.displayName = 'ModifiedDuration'
+ModifiedDuration.className = styles.modifiedDuration
 ModifiedDuration.defaultProps = {
   withArrow: true,
   relationship: 'description'

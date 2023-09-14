@@ -18,7 +18,7 @@ export const SubText: ReusableComponent<ISubTextProps> = (props) => {
   const { fonts, semanticColors } = useTheme()
   return (
     <div
-      className={`${styles.root} ${props.className}`}
+      className={`${SubText.className} ${props.className}`}
       style={{
         paddingTop: 4,
         fontSize: fonts[props.font].fontSize,
@@ -32,6 +32,7 @@ export const SubText: ReusableComponent<ISubTextProps> = (props) => {
   )
 }
 
+SubText.className = styles.subText
 SubText.defaultProps = {
   font: 'xSmall'
 }

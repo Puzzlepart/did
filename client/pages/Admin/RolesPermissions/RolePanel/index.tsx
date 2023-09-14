@@ -1,14 +1,15 @@
 import { Field, Input } from '@fluentui/react-components'
 import { BasePanel } from 'components'
 import { IconPicker } from 'components/IconPicker'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { EditPermissions } from './EditPermissions'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import { useRolePanel } from './useRolePanel'
 
-export const RolePanel: FC<IRolePanelProps> = (props) => {
+export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
   const { model, setModel, onSave, isSaveDisabled, isEdit } =
     useRolePanel(props)
@@ -27,7 +28,7 @@ export const RolePanel: FC<IRolePanelProps> = (props) => {
       ]}
       onDismiss={props.onDismiss}
     >
-      <div className={styles.root}>
+      <div className={RolePanel.className}>
         <Field label={t('admin.roleNameLabel')} required={true}>
           <Input
             defaultValue={props.model ? props.model.name : ''}
@@ -57,5 +58,8 @@ export const RolePanel: FC<IRolePanelProps> = (props) => {
     </BasePanel>
   )
 }
+
+RolePanel.displayName = 'RolePanel'
+RolePanel.className = styles.rolePanel
 
 export * from './types'

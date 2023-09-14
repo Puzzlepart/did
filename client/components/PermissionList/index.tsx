@@ -13,7 +13,7 @@ export const PermissionList: ReusableComponent<IPermissionListProps> = ({
 }) => {
   const [permissions] = usePermissions(permissionIds)
   return (
-    <div className={styles.root}>
+    <div className={PermissionList.className}>
       <div className={styles.container}>
         {permissions.map((perm) => (
           <div key={perm.id} className={styles.item} title={perm.description}>
@@ -25,5 +25,8 @@ export const PermissionList: ReusableComponent<IPermissionListProps> = ({
     </div>
   )
 }
+
+PermissionList.displayName = 'PermissionList'
+PermissionList.className = styles.permissionList
 
 export * from './types'

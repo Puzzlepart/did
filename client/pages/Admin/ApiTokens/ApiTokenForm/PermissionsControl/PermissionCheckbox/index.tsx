@@ -1,12 +1,13 @@
 import { Checkbox, Icon } from '@fluentui/react'
 import { SubText } from 'components'
-import React, { FC } from 'react'
+import React from 'react'
+import { StyledComponent } from 'types'
 import styles from './PermissionCheckbox.module.scss'
 import { IPermissionCheckboxProps } from './types'
 
-export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (props) => {
+export const PermissionCheckbox: StyledComponent<IPermissionCheckboxProps> = (props) => {
   return (
-    <div className={styles.root} style={{ opacity: props.checked ? 1 : 0.6 }}>
+    <div className={PermissionCheckbox.className} style={{ opacity: props.checked ? 1 : 0.6 }}>
       <Checkbox
         className={styles.checkBox}
         disabled={props.disabled}
@@ -25,3 +26,6 @@ export const PermissionCheckbox: FC<IPermissionCheckboxProps> = (props) => {
     </div>
   )
 }
+
+PermissionCheckbox.displayName = 'PermissionCheckbox'
+PermissionCheckbox.className = styles.permissionCheckbox

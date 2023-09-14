@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { Button } from '@fluentui/react-components'
-import React, { FC } from 'react'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './EditLink.module.scss'
@@ -11,12 +12,12 @@ import { IEditLinkProps } from './types'
  *
  * @category Reusable Component
  */
-export const EditLink: FC<IEditLinkProps> = (props) => {
+export const EditLink: ReusableComponent<IEditLinkProps> = (props) => {
   const { t } = useTranslation()
   return (
     <div {...props}>
       <Button
-        className={styles.root}
+        className={EditLink.className}
         onClick={props.onClick}
         appearance='subtle'
         icon={icon('PeopleEdit')}
@@ -26,3 +27,5 @@ export const EditLink: FC<IEditLinkProps> = (props) => {
     </div>
   )
 }
+
+EditLink.className = styles.editLink

@@ -1,21 +1,21 @@
 import { Icon } from '@fluentui/react'
 import { Caption2, Caption2Strong } from '@fluentui/react-components'
 import { EntityLabel, ProjectLink } from 'components'
-import React, { FC } from 'react'
+import React from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import { useTranslation } from 'react-i18next'
-import { LabelObject } from 'types'
+import { LabelObject, StyledComponent } from 'types'
 import _ from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectPopoverProps } from './types'
 
-export const ProjectPopoverContent: FC<IProjectPopoverProps> = ({
+export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
   project
 }) => {
   const { t } = useTranslation()
   return (
     <FadeIn>
-      <div className={styles.root}>
+      <div className={ProjectPopoverContent.className}>
         <div className={styles.container}>
           <div className={styles.header}>
             <div className={styles.iconContainer}>
@@ -57,3 +57,6 @@ export const ProjectPopoverContent: FC<IProjectPopoverProps> = ({
     </FadeIn>
   )
 }
+
+ProjectPopoverContent.displayName = 'ProjectPopoverContent'
+ProjectPopoverContent.className = styles.projectTooltip

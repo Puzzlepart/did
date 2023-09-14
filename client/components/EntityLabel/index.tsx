@@ -25,7 +25,7 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
 
   return (
     <div
-      className={styles.root}
+      className={EntityLabel.className}
       style={{ backgroundColor: label.color }}
       title={label.description}
     >
@@ -44,5 +44,7 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
     </div>
   )
 }
+
+EntityLabel.className = styles.entityLabel
 
 export * from './types'

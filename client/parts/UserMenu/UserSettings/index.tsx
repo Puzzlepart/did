@@ -6,17 +6,18 @@ import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { useUserSettings } from './useUserSettings'
+import { StyledComponent } from 'types'
 
 /**
  * @category UserMenu
  */
-export const UserSettings = () => {
+export const UserSettings: StyledComponent = () => {
   const { t, context, openPanel, dismissPanel, isOpen, settings } =
     useUserSettings()
 
   return (
     <UserSettingsContext.Provider value={context}>
-      <div className={styles.root}>
+      <div className={UserSettings.className}>
         <MenuItem
           text={t('common.settings')}
           icon={icon('EditSettings')}
@@ -43,3 +44,6 @@ export const UserSettings = () => {
     </UserSettingsContext.Provider>
   )
 }
+
+UserSettings.displayName = 'UserSettings'
+UserSettings.className = styles.userSettings

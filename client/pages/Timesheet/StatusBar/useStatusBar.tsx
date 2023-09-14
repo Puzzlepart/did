@@ -8,6 +8,9 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useTimesheetContext } from '../context'
 import { Overview } from '../Views/Overview'
+import { StatusBar } from '.'
+import { isMobile } from 'react-device-detect'
+import styles from './StatusBar.module.scss'
 
 /**
  * A custom hook that returns an array of user messages to be displayed in the status bar.
@@ -16,13 +19,17 @@ import { Overview } from '../Views/Overview'
  *
  * @returns An array of `IUserMessageProps` objects representing the user messages to be displayed in the status bar.
  */
-export function useStatusBar(): IUserMessageProps[] {
+export function useStatusBar() {
   const { t } = useTranslation()
   const [, dismiss, isDismissed] = useArray<string>([])
   const { state, dispatch } = useTimesheetContext()
 
-  if (!state.selectedPeriod) return []
-
+  if (!state.selectedPeriod) {
+    return {
+      className: StatusBar.className,
+      messages: []
+    }
+  }
   const messages: IUserMessageProps[] = []
 
   if (
@@ -176,10 +183,17 @@ export function useStatusBar(): IUserMessageProps[] {
       })
     }
   }
-  return messages
+
+  const classNames = [StatusBar.className]
+  if (isMobile) classNames.push(styles.mobile)
+
+  return {
+    className: classNames.filter(Boolean).join(' '),
+    messages: messages
     .filter((message) => !isDismissed(message.id))
     .map((message) => ({
       ...message,
       onDismiss: () => dismiss(message.id)
     }))
+  }
 }

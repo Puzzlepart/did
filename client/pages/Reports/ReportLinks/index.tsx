@@ -1,11 +1,12 @@
 import { Icon } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { UserMessage } from 'components'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { ReportsContext } from '../context'
-import styles from './ReportLinks.module.scss'
 import { ReportLinkTooltip } from './ReportLinkTooltip'
+import styles from './ReportLinks.module.scss'
 
 /**
  * Report links. This component is used when the report links are available.
@@ -14,11 +15,11 @@ import { ReportLinkTooltip } from './ReportLinkTooltip'
  *
  * @category Reports
  */
-export const ReportLinks: FC = () => {
+export const ReportLinks: StyledComponent = () => {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   return (
-    <div className={styles.root}>
+    <div className={ReportLinks.className}>
       <UserMessage text={t('reports.availableReportLinks')} />
       {context.state.queryPreset.reportLinks.map((link, index) => (
         <ReportLinkTooltip key={index} link={link}>
@@ -34,3 +35,6 @@ export const ReportLinks: FC = () => {
     </div>
   )
 }
+
+ReportLinks.displayName = 'ReportLinks'
+ReportLinks.className = styles.reportLinks

@@ -2,8 +2,8 @@
 // Please do not change this file!
 interface CssExports {
   'footer': string;
-  'root': string;
   'saveBtn': string;
+  'saveFilterForm': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

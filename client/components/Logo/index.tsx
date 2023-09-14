@@ -10,7 +10,7 @@ import { ILogoProps } from './types'
  */
 export const Logo: ReusableComponent<ILogoProps> = (props) => {
   return (
-    <div className={styles.root}>
+    <div className={Logo.className}>
       <div
         className={`${styles.logo} ${props.dropShadow ? styles.dropShadow : ''
           }`}
@@ -68,6 +68,8 @@ export const Logo: ReusableComponent<ILogoProps> = (props) => {
   )
 }
 
+Logo.displayName = 'Logo'
+Logo.className = styles.logo
 Logo.defaultProps = {
   showMotto: false,
   color: '#ffffff',

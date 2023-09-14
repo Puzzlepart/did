@@ -1,12 +1,13 @@
 /* eslint-disable tsdoc/syntax */
 import { useToggle } from 'hooks'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
-import { IUserFeedbackProps } from './types'
 import styles from './UserFeedback.module.scss'
+import { IUserFeedbackProps } from './types'
 
 /**
  * User feedback
@@ -18,7 +19,7 @@ import styles from './UserFeedback.module.scss'
  *
  * @category Function Component
  */
-export const UserFeedback: FC<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
+export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
   const { t } = useTranslation()
   const [isOpen, togglePanel] = useToggle(false)
   return (
@@ -30,7 +31,7 @@ export const UserFeedback: FC<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
           text={t('feedback.mobileFeedbackText')}
         />
       ) : (
-        <div className={styles.root} onClick={togglePanel}>
+        <div className={UserFeedback.className} onClick={togglePanel}>
           <div className={styles.icon}>{icon('Emoji')}</div>
         </div>
       )}
@@ -43,5 +44,8 @@ export const UserFeedback: FC<IUserFeedbackProps> = ({ renderAsMenuItem }) => {
     </>
   )
 }
+
+UserFeedback.displayName = 'UserFeedback'
+UserFeedback.className = styles.userFeedback
 
 export * from './FeedbackPanel'

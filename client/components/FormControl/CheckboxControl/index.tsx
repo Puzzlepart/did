@@ -17,7 +17,7 @@ export const CheckboxControl: ReusableComponent<ICheckboxControlProps> = (
 ) => {
   const onChange = useToggleControlChange(props)
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={CheckboxControl.className} hidden={props.hidden}>
       <Checkbox
         {...props}
         onChange={(event, data) => onChange(event, data.checked)}
@@ -29,5 +29,8 @@ export const CheckboxControl: ReusableComponent<ICheckboxControlProps> = (
     </div>
   )
 }
+
+CheckboxControl.displayName = 'CheckboxControl'
+CheckboxControl.className = styles.checkboxControl
 
 export * from './types'

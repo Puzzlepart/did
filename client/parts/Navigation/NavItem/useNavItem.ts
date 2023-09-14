@@ -1,6 +1,7 @@
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
 import { isMobile } from 'react-device-detect'
+import { NavItem } from '.'
 import { PAGE_NAVIGATE } from '../../../app/reducer'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
@@ -13,7 +14,7 @@ import { INavItemProps } from './types'
 export function useNavItem(props: INavItemProps) {
   const { dispatch } = useAppContext()
   const [, hasPermission] = usePermissions()
-  let className = styles.root
+  let className = NavItem.className
   if (isMobile) className += ` ${styles.mobile}`
   return {
     className,

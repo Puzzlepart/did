@@ -14,7 +14,7 @@ import { ICustomerLinkProps } from './types'
 export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
   const to = `/customers/search/${props.customer?.key}`.toLowerCase()
   return (
-    <div className={styles.root}>
+    <div className={CustomerLink.className}>
       <Icon className={styles.icon} iconName={props.customer?.icon} />
       <Link
         className={styles.link}
@@ -26,5 +26,7 @@ export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
     </div>
   )
 }
+
+CustomerLink.className = styles.customerLink
 
 export * from './types'

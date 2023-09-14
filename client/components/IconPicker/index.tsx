@@ -4,6 +4,7 @@ import React from 'react'
 import styles from './IconPicker.module.scss'
 import { IIconPickerProps } from './types'
 import { useIconPicker } from './useIconPicker'
+import { css } from '@fluentui/react'
 
 /**
  * Icon picker using `<Autocomplete />` to select
@@ -17,8 +18,11 @@ import { useIconPicker } from './useIconPicker'
 export const IconPicker: ReusableComponent<IIconPickerProps> = (props) => {
   const autoCompleteProps = useIconPicker(props)
   return (
-    <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
+    <div className={css(IconPicker.className, props.className)} hidden={props.hidden}>
       <Autocomplete {...autoCompleteProps} />
     </div>
   )
 }
+
+IconPicker.displayName = 'IconPicker'
+IconPicker.className = styles.iconPicker

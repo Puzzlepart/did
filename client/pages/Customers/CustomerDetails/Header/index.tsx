@@ -27,4 +27,5 @@ export const Header: StyledComponent = () => {
   )
 }
 
+Header.displayName = 'CustomerDetails.Header'
 Header.className = styles.header

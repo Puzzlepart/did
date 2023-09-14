@@ -1,17 +1,18 @@
 import { Checkbox } from '@fluentui/react-components'
 import { SubText } from 'components'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './ProjectFormOptions.module.scss'
 import { IProjectFormOptionsProps } from './types'
 
 /**
  * @category Projects
  */
-export const ProjectFormOptions: FC<IProjectFormOptionsProps> = (props) => {
+export const ProjectFormOptions: StyledComponent<IProjectFormOptionsProps> = (props) => {
   const { t } = useTranslation()
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={ProjectFormOptions.className} hidden={props.hidden}>
       <Checkbox
         label={t('projects.createOutlookCategoryFieldLabel')}
         checked={props.options.value('createOutlookCategory')}
@@ -27,3 +28,6 @@ export const ProjectFormOptions: FC<IProjectFormOptionsProps> = (props) => {
     </div>
   )
 }
+
+ProjectFormOptions.displayName = 'ProjectFormOptions'
+ProjectFormOptions.className = styles.projectFormOptions

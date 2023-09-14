@@ -43,4 +43,5 @@ export const CustomerDetails: StyledComponent = () => {
   )
 }
 
+CustomerDetails.displayName = 'CustomerDetails'
 CustomerDetails.className = styles.customerDetails

@@ -8,16 +8,17 @@ import {
   Toggle
 } from '@fluentui/react'
 import { SubText } from 'components'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
+import { StyledComponent } from 'types'
 import { UserSettingsContext } from '../context'
 import { IUserSetting, UserSettingInputType } from '../types'
-import { onRenderOption } from './onRenderOption'
 import styles from './UserSettingInput.module.scss'
+import { onRenderOption } from './onRenderOption'
 
 /**
  * @category UserMenu
  */
-export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
+export const UserSettingInput: StyledComponent<{ setting: IUserSetting }> = ({
   setting
 }) => {
   const { onUpdate } = useContext(UserSettingsContext)
@@ -68,9 +69,12 @@ export const UserSettingInput: FC<{ setting: IUserSetting }> = ({
   }
 
   return (
-    <div className={styles.root} hidden={setting.hidden}>
+    <div className={UserSettingInput.className} hidden={setting.hidden}>
       {element}
       <SubText text={setting.description} />
     </div>
   )
 }
+
+UserSettingInput.displayName = 'UserSettingInput'
+UserSettingInput.className = styles.userSettingInput

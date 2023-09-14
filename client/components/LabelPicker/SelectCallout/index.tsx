@@ -8,8 +8,8 @@ import {
   StickyPositionType
 } from '@fluentui/react'
 import { SubText } from 'components/SubText'
-import React, { FC, useEffect, useState } from 'react'
-import { LabelObject } from 'types'
+import React, { useEffect, useState } from 'react'
+import { LabelObject, StyledComponent } from 'types'
 import _ from 'underscore'
 import s from 'underscore.string'
 import styles from './SelectCallout.module.scss'
@@ -18,7 +18,7 @@ import { ISelectCalloutProps } from './types'
 /**
  * @category Function Component
  */
-export const SelectCallout: FC<ISelectCalloutProps> = (props) => {
+export const SelectCallout: StyledComponent<ISelectCalloutProps> = (props) => {
   const [labels, setLabels] = useState<LabelObject[]>(props.labels)
 
   useEffect(() => setLabels(props.labels), [props.labels])
@@ -41,7 +41,7 @@ export const SelectCallout: FC<ISelectCalloutProps> = (props) => {
       onDismiss={props.onDismiss}
       target={props.target}
     >
-      <div className={styles.root}>
+      <div className={SelectCallout.className}>
         <ScrollablePane>
           <Sticky stickyPosition={StickyPositionType.Header}>
             <div className={styles.header} hidden={!props.headerText}>
@@ -89,3 +89,6 @@ export const SelectCallout: FC<ISelectCalloutProps> = (props) => {
     </Callout>
   )
 }
+
+SelectCallout.displayName = 'SelectCallout'
+SelectCallout.className = styles.selectCallout

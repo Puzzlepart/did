@@ -25,7 +25,7 @@ export const Home: PageComponent = () => {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={Home.className}>
       <Logo showMotto={true} dropShadow={true} />
       {error && (
         <UserMessage
@@ -58,4 +58,6 @@ export const Home: PageComponent = () => {
   )
 }
 
+Home.displayName = 'Home'
+Home.className = styles.home
 Home.path = '/'

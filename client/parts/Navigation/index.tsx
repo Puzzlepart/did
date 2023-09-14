@@ -4,22 +4,23 @@ import { useAppContext } from 'AppContext'
 import packageFile from 'package'
 import { UserNotificationsContext } from 'parts/UserNotifications/context'
 import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
-import React, { FC } from 'react'
+import React from 'react'
 import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
+import { StyledComponent } from 'types'
 import { useAppClassName } from '../../app/useAppClassName'
 import { UserFeedback } from '../UserFeedback'
 import { UserMenu } from '../UserMenu'
 import { UserNotifications } from '../UserNotifications'
-import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
+import styles from './Navigation.module.scss'
 
 /**
  * @category Function Component
  */
-export const Navigation: FC = () => {
+export const Navigation: StyledComponent = () => {
   const { pages, isAuthenticated } = useAppContext()
-  const className = useAppClassName(styles)
+  const className = useAppClassName(Navigation, styles)
   const theme = useTheme()
   const userNotificationsContextValue = useUserNotifications()
   if (!isAuthenticated) return null
@@ -42,7 +43,7 @@ export const Navigation: FC = () => {
             {pages.map((page, index) => (
               <NavItem
                 key={index}
-                text={page.displayName}
+                text={page.text}
                 iconName={page.iconName}
                 to={{
                   pathname: page.path,
@@ -64,5 +65,7 @@ export const Navigation: FC = () => {
     </UserNotificationsContext.Provider>
   )
 }
+
+Navigation.className = styles.navigation
 
 export * from './NavItem'

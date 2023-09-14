@@ -1,7 +1,7 @@
 import { UserMessage, UserMessageContainer } from 'components/UserMessage'
-import React, { FC } from 'react'
-import { isMobile } from 'react-device-detect'
+import React from 'react'
 import FadeIn from 'react-fade-in'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import styles from './StatusBar.module.scss'
 import { useStatusBar } from './useStatusBar'
@@ -9,13 +9,12 @@ import { useStatusBar } from './useStatusBar'
 /**
  * @category Timesheet
  */
-export const StatusBar: FC = () => {
-  if (isMobile) styles.root += ` ${styles.mobile}`
-  const messages = useStatusBar()
+export const StatusBar: StyledComponent = () => {
+  const { className, messages } = useStatusBar()
 
   return (
     <FadeIn>
-      <div className={styles.root} hidden={_.isEmpty(messages)}>
+      <div className={className} hidden={_.isEmpty(messages)}>
         <div className={styles.container} hidden={_.isEmpty(messages)}>
           <UserMessageContainer height={65}>
             {messages.map((message, key) => (
@@ -27,3 +26,6 @@ export const StatusBar: FC = () => {
     </FadeIn>
   )
 }
+
+StatusBar.displayName = 'Timesheet.StatusBar'
+StatusBar.className = styles.statusBar

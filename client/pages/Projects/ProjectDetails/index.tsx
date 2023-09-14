@@ -1,6 +1,7 @@
 import { Pivot, PivotItem } from '@fluentui/react'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { useProjectsContext } from '../context'
 import { Header } from './Header'
 import { Information } from './Information'
@@ -10,12 +11,12 @@ import { TimeEntries } from './TimeEntries'
 /**
  * @category Projects
  */
-export const ProjectDetails: FC = () => {
+export const ProjectDetails: StyledComponent = () => {
   const { t } = useTranslation()
   const { loading } = useProjectsContext()
 
   return (
-    <div className={styles.root}>
+    <div className={ProjectDetails.className}>
       <Header />
       <Pivot>
         <PivotItem
@@ -45,6 +46,10 @@ export const ProjectDetails: FC = () => {
   )
 }
 
+ProjectDetails.displayName = 'ProjectDetails'
+ProjectDetails.className = styles.projectDetails
+
 export * from './Header'
 export * from './Information'
 export * from './TimeEntries'
+

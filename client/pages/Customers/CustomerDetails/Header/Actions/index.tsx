@@ -1,9 +1,10 @@
 import { Button } from '@fluentui/react-components'
 import { usePermissions } from 'hooks'
 import { CustomersContext } from 'pages/Customers/context'
-import React, { FC, HTMLAttributes, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { StyledComponent } from 'types'
 import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { CustomerForm } from '../../../CustomerForm'
@@ -11,13 +12,13 @@ import styles from './Actions.module.scss'
 /**
  * @category Customers
  */
-export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+export const Actions: StyledComponent = (props) => {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const { state, refetch } = useContext(CustomersContext)
   const { value: showEditPanel, toggle: toggleEditPanel } = useBoolean(false)
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={Actions.className} hidden={props.hidden}>
       <div className={styles.container}>
         {state.selected?.webLink && (
           <Button
@@ -67,3 +68,6 @@ export const Actions: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
     </div>
   )
 }
+
+Actions.displayName = 'CustomerDetails.Actions'
+Actions.className = styles.actions

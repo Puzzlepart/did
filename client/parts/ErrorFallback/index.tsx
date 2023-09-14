@@ -2,6 +2,7 @@ import { ActionButton } from '@fluentui/react'
 import $date from 'DateUtils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './ErrorFallback.module.scss'
 import { IErrorFallbackProps } from './types'
 
@@ -17,13 +18,13 @@ import { IErrorFallbackProps } from './types'
  *
  * @category Function Component
  */
-export const ErrorFallback = ({
+export const ErrorFallback: StyledComponent<IErrorFallbackProps> = ({
   error,
   resetErrorBoundary
-}: IErrorFallbackProps) => {
+}) => {
   const { t } = useTranslation()
   return (
-    <div role='alert' className={styles.root}>
+    <div role='alert' className={ErrorFallback.className}>
       <div className={styles.header}>{t('common.errorFallbackHeader')}</div>
       <pre>
         {t('common.timeLabel')}:{' '}
@@ -42,3 +43,6 @@ export const ErrorFallback = ({
     </div>
   )
 }
+
+ErrorFallback.displayName = 'ErrorFallback'
+ErrorFallback.className = styles.errorFallback

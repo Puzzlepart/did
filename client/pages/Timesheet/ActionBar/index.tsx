@@ -5,6 +5,7 @@ import {
 } from '@fluentui/react-components'
 import { Progress } from 'components/Progress'
 import React from 'react'
+import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { useTimesheetContext } from '../context'
 import { NEXT_PERIOD, PREVIOUS_PERIOD } from '../reducer/actions'
@@ -20,19 +21,19 @@ import { useActionBar } from './useActionBar'
 /**
  * @category Timesheet
  */
-export const ActionBar = () => {
+export const ActionBar: StyledComponent = () => {
   const { state, dispatch } = useTimesheetContext()
   const { defaultCheckedValues, onCheckedValueChange } = useActionBar()
 
   if (!!state.loading) {
     return (
-      <div className={styles.root}>
+      <div className={ActionBar.className}>
         <Progress {...state.loading} padding='15px' />
       </div>
     )
   }
   return (
-    <div className={styles.root}>
+    <div className={ActionBar.className}>
       {state.selectedPeriod ? (
         <Toolbar
           style={{
@@ -66,3 +67,6 @@ export const ActionBar = () => {
     </div>
   )
 }
+
+ActionBar.displayName = 'Timesheet.ActionBar'
+ActionBar.className = styles.actionBar

@@ -1,13 +1,14 @@
 /* eslint-disable tsdoc/syntax */
 import { useToggle } from 'hooks/common/useToggle'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
-import { IUserNotificationsProps } from './types'
 import styles from './UserNotifications.module.scss'
+import { IUserNotificationsProps } from './types'
 
 /**
  * User notifications
@@ -19,7 +20,7 @@ import styles from './UserNotifications.module.scss'
  *
  * @category Function Component
  */
-export const UserNotifications: FC<IUserNotificationsProps> = ({
+export const UserNotifications: StyledComponent<IUserNotificationsProps> = ({
   renderAsMenuItem
 }) => {
   const { t } = useTranslation()
@@ -43,7 +44,7 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
           />
         </MenuItem>
       ) : (
-        <div className={styles.root} onClick={togglePanel}>
+        <div className={UserNotifications.className} onClick={togglePanel}>
           <div className={styles.icon}>{icon('Alert')}</div>
           <NotificationIndicator />
         </div>
@@ -53,5 +54,9 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
   )
 }
 
+UserNotifications.displayName = 'UserNotifications'
+UserNotifications.className = styles.userNotifications
+
 export * from './NotificationsPanel'
 export * from './types'
+

@@ -24,7 +24,7 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   return (
     <BasePanel
       {...props}
-      className={styles.root}
+      className={FilterPanel.className}
       headerText={headerText}
       headerClassName={styles.header}
       onDismiss={props.onDismiss}
@@ -53,6 +53,7 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
   )
 }
 
+FilterPanel.className = styles.filterPanel
 FilterPanel.defaultProps = {
   shortListCount: 10
 }

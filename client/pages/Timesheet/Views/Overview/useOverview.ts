@@ -2,6 +2,7 @@ import { isMobile } from 'react-device-detect'
 import styles from './Overview.module.scss'
 import { useAdditionalColumns } from './useAdditionalColumns'
 import { useListGroupProps } from './useListGroupProps'
+import { Overview } from '.'
 
 /**
  * Custom hook that returns an object containing additionalColumns, listGroupProps, and className.
@@ -14,9 +15,8 @@ import { useListGroupProps } from './useListGroupProps'
 export function useOverview() {
   const additionalColumns = useAdditionalColumns()
   const listGroupProps = useListGroupProps()
-  const classNames = [styles.root]
+  const classNames = [Overview.className]
   if (isMobile) classNames.push(styles.mobile)
-
   return {
     additionalColumns,
     listGroupProps,

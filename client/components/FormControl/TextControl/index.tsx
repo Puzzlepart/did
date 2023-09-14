@@ -15,7 +15,7 @@ import { useTextControlChange } from './useTextControlChange'
  */
 export const TextField: ReusableComponent<ITextFieldProps> = (props) => {
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={TextField.className} hidden={props.hidden}>
       <Label weight='semibold'>{props.label}</Label>
       {props.rows > 1 ? (
         <Textarea {...props} className={styles.field} />
@@ -33,6 +33,7 @@ export const TextField: ReusableComponent<ITextFieldProps> = (props) => {
   )
 }
 
+TextField.className = styles.textControl
 TextField.defaultProps = {
   rows: 1
 }

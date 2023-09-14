@@ -18,7 +18,7 @@ export const HotkeyModal: ReusableComponent<IHotkeyModal> = (props) => {
     <Modal
       isOpen={props.isOpen}
       onDismiss={props.onDismiss}
-      containerClassName={styles.root}
+      containerClassName={HotkeyModal.className}
     >
       <div className={styles.container}>
         <div className={styles.title}>{t('common.shortcuts')}</div>
@@ -37,3 +37,6 @@ export const HotkeyModal: ReusableComponent<IHotkeyModal> = (props) => {
     </Modal>
   )
 }
+
+HotkeyModal.displayName = 'HotkeyModal'
+HotkeyModal.className = styles.hotkeyModal

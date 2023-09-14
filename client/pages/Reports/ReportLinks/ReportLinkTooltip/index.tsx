@@ -1,7 +1,8 @@
 import { Tooltip } from '@fluentui/react-components'
 import $date from 'DateUtils'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './ReportLinkTooltip.module.scss'
 import { IReportLinkTooltipProps } from './types'
 
@@ -11,13 +12,13 @@ import { IReportLinkTooltipProps } from './types'
  *
  * @category Reports
  */
-export const ReportLinkTooltip: FC<IReportLinkTooltipProps> = (props) => {
+export const ReportLinkTooltip: StyledComponent<IReportLinkTooltipProps> = (props) => {
   const { t } = useTranslation()
   return (
     <Tooltip
       relationship='description'
       content={
-        <div className={styles.root}>
+        <div className={ReportLinkTooltip.className}>
           <div className={styles.name}>{props.link.name}</div>
           <p className={styles.description}>{props.link.description}</p>
           <p className={styles.updated}>
@@ -36,3 +37,6 @@ export const ReportLinkTooltip: FC<IReportLinkTooltipProps> = (props) => {
     </Tooltip>
   )
 }
+
+ReportLinkTooltip.displayName = 'ReportLinkTooltip'
+ReportLinkTooltip.className = styles.reportLinkTooltip

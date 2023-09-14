@@ -10,7 +10,7 @@ export const List: TabComponent<IListProps> = ({ users, period }) => {
   const { t } = useTranslation()
   if (users) {
     return (
-      <div className={styles.root}>
+      <div className={List.className}>
         {users.map((user, index) => (
           <MissingSubmissionUser key={index} user={user} />
         ))}
@@ -18,7 +18,7 @@ export const List: TabComponent<IListProps> = ({ users, period }) => {
     )
   }
   return (
-    <div className={styles.root}>
+    <div className={List.className}>
       <TeamsReminderButton
         title={t(
           'admin.missingSubmissions.teamsReminderButtonTooltiop',
@@ -34,3 +34,6 @@ export const List: TabComponent<IListProps> = ({ users, period }) => {
     </div>
   )
 }
+
+List.displayName = 'MissingSubmissionsList'
+List.className = styles.list

@@ -23,7 +23,7 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
   } = useLabelPicker(props)
 
   return (
-    <div className={`${styles.root} ${props.className}`}>
+    <div className={`${LabelPicker.className} ${props.className}`}>
       <Label weight='semibold' className={styles.inputLabel}>
         <span>{props.label}</span>
         <span
@@ -57,6 +57,8 @@ export const LabelPicker: ReusableComponent<ILabelPickerProps> = (props) => {
   )
 }
 
+LabelPicker.displayName = 'LabelPicker'
+LabelPicker.className = styles.labelPicker
 LabelPicker.defaultProps = {
   defaultSelectedKeys: []
 }

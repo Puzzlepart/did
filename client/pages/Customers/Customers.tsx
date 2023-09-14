@@ -29,3 +29,5 @@ export const Customers: FC = () => {
     </CustomersContext.Provider>
   )
 }
+
+Customers.displayName = 'Customers'

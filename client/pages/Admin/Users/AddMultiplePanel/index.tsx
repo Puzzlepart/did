@@ -1,14 +1,15 @@
 import { CheckboxVisibility, PanelType, SelectionMode } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { BasePanel, List } from 'components'
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
 import { IAddMultiplePanelProps } from './types'
 
-export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
+export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (props) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
   const [selectedUsers, setSelectedUsers] = useState([])
@@ -19,7 +20,7 @@ export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
       headerText={t('admin.users.bulkImportUsersLabel')}
       type={PanelType.medium}
       isLightDismiss={true}
-      className={styles.root}
+      className={AddMultiplePanel.className}
     >
       <div className={styles.container}>
         <Button
@@ -49,5 +50,8 @@ export const AddMultiplePanel: FC<IAddMultiplePanelProps> = (props) => {
     </BasePanel>
   )
 }
+
+AddMultiplePanel.displayName = 'AddMultiplePanel'
+AddMultiplePanel.className = styles.addMultiplePanel
 
 export * from './types'

@@ -33,3 +33,5 @@ export const AppSwitch: FC = () => {
     </Switch>
   )
 }
+
+AppSwitch.displayName = 'AppSwitch'

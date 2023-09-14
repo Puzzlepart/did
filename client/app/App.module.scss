@@ -1,4 +1,4 @@
-.root {
+.app {
   width: 100%;
   -webkit-touch-callout: none;
 
@@ -44,7 +44,7 @@
   }
 }
 
-.root.mobile {
+.app.mobile {
   min-height: 100vh;
   min-height: -webkit-fill-available;
 
@@ -59,7 +59,7 @@
     }
 }
 
-.root.sticky {
+.app.sticky {
     .container {
         >div {
             margin-top: 65px;

@@ -1,19 +1,17 @@
 import { List, Toast } from 'components'
 import { ITabProps } from 'components/Tabs/types'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { RolePanel } from './RolePanel'
-import styles from './Roles.module.scss'
+import styles from './RolesPermissions.module.scss'
 import { useRoles } from './useRoles'
 
-/**
- * @ignore
- */
-export const RolesPermissions: FC<ITabProps> = () => {
+export const RolesPermissions: StyledComponent<ITabProps> = () => {
   const { t } = useTranslation()
   const { query, columns, panel, setPanel, toast } = useRoles()
   return (
-    <div className={styles.root}>
+    <div className={RolesPermissions.className}>
       <Toast {...toast} />
       <List
         enableShimmer={query.loading}
@@ -44,3 +42,7 @@ export const RolesPermissions: FC<ITabProps> = () => {
     </div>
   )
 }
+
+
+RolesPermissions.displayName = 'RolesPermissions'
+RolesPermissions.className = styles.rolesPermissions

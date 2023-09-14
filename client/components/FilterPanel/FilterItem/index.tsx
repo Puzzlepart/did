@@ -1,7 +1,8 @@
 import { Checkbox } from '@fluentui/react-components'
 import { SearchBox } from '@fluentui/react-search-preview'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
 import { useFilterItem } from './useFilterItem'
@@ -9,12 +10,12 @@ import { useFilterItem } from './useFilterItem'
 /**
  * @category Function Component
  */
-export const FilterItem: FC<IFilterItemProps> = (props) => {
+export const FilterItem: StyledComponent<IFilterItemProps> = (props) => {
   const { t } = useTranslation()
   const { onSearch, items, showCount, setShowCount, selectedKeys } =
     useFilterItem(props)
   return (
-    <div className={styles.root}>
+    <div className={FilterItem.className}>
       <div className={styles.header} hidden={props.hideHeader}>
         <span>{props.filter.name}</span>
       </div>
@@ -48,3 +49,5 @@ export const FilterItem: FC<IFilterItemProps> = (props) => {
     </div>
   )
 }
+
+FilterItem.className = styles.filterItem

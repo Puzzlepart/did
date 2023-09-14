@@ -1,6 +1,7 @@
 import { Shimmer } from '@fluentui/react'
-import React, { FC } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
+import { StyledComponent } from 'types'
 import styles from './Summary.module.scss'
 import { ISummaryProps } from './types'
 import { useSummary } from './useSummary'
@@ -8,10 +9,10 @@ import { useSummary } from './useSummary'
 /**
  * @category Projects
  */
-export const Summary: FC<ISummaryProps> = (props) => {
+export const Summary: StyledComponent<ISummaryProps> = (props) => {
   const items = useSummary(props)
   return (
-    <div className={styles.root} hidden={isMobile}>
+    <div className={Summary.className} hidden={isMobile}>
       {items.map(({ label, value }, index) => (
         <div key={index} className={styles.item}>
           <Shimmer isDataLoaded={!props.loading} className={styles.value}>
@@ -23,3 +24,6 @@ export const Summary: FC<ISummaryProps> = (props) => {
     </div>
   )
 }
+
+Summary.displayName = 'TimeEntries.Summary'
+Summary.className = styles.summary

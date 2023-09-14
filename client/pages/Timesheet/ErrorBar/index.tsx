@@ -1,14 +1,15 @@
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
 import get from 'get-value'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
 
 /**
  * @category Timesheet
  */
-export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
+export const ErrorBar: StyledComponent<IErrorBarProps> = ({ error }) => {
   const { t } = useTranslation()
   if (!error) return null
   let messageProps: IUserMessageProps
@@ -31,8 +32,11 @@ export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
     }
   }
   return (
-    <div className={styles.root}>
+    <div className={ErrorBar.className}>
       <UserMessage {...messageProps} />
     </div>
   )
 }
+
+ErrorBar.displayName = 'Timesheet.ErrorBar'
+ErrorBar.className = styles.errorBar

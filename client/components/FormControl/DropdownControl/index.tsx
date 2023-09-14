@@ -15,7 +15,7 @@ export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
   props
 ) => {
   return (
-    <div className={styles.root} {..._.pick(props, 'hidden')}>
+    <div className={DropdownControl.className} {..._.pick(props, 'hidden')}>
       <Dropdown
         {...props}
         onChange={(_event, option) => {
@@ -29,5 +29,8 @@ export const DropdownControl: ReusableComponent<IDropdownControlProps> = (
     </div>
   )
 }
+
+DropdownControl.displayName = 'DropdownControl'
+DropdownControl.className = styles.dropdownControl
 
 export * from './types'

@@ -2,17 +2,18 @@
 import { IPanelProps } from '@fluentui/react'
 import { BasePanel } from 'components'
 import { UserMessage, UserMessageContainer } from 'components/UserMessage'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { UserNotificationsContext } from '../context'
 import { UserNotification } from './UserNotification'
-import styles from './UserNotificationsPanel.module.scss'
+import styles from './NotificationsPanel.module.scss'
 
 /**
  * @category Function Component
  */
-export const NotificationsPanel: FC<IPanelProps> = (props) => {
+export const NotificationsPanel: StyledComponent<IPanelProps> = (props) => {
   const { t } = useTranslation()
   const { notifications, dismissedCount, clearDismissed } = useContext(
     UserNotificationsContext
@@ -20,7 +21,7 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
   return (
     <BasePanel
       {...props}
-      className={styles.root}
+      className={NotificationsPanel.className}
       headerText={t('notifications.headerText')}
       isLightDismiss={true}
     >
@@ -50,5 +51,9 @@ export const NotificationsPanel: FC<IPanelProps> = (props) => {
   )
 }
 
-export * from './types'
+NotificationsPanel.displayName = 'NotificationsPanel'
+NotificationsPanel.className = styles.notificationsPanel
+
 export * from './UserNotification'
+export * from './types'
+

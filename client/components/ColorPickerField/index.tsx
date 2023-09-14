@@ -23,7 +23,7 @@ export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
 ) => {
   const { ref, positioningRef } = useColorPickerField()
   return (
-    <div className={`${props.className} ${styles.root}`}>
+    <div className={`${props.className} ${ColorPickerField.className}`}>
       <Popover
         positioning={{ positioningRef }}
         trapFocus={true}
@@ -49,5 +49,7 @@ export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
     </div>
   )
 }
+
+ColorPickerField.className = styles.colorPickerField
 
 export * from './types'

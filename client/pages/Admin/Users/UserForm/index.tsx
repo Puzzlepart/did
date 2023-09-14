@@ -1,16 +1,17 @@
 import { Checkbox } from '@fluentui/react-components'
 import { Autocomplete, BasePanel } from 'components'
 import { TextField } from 'components/FormControl'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { UsersContext } from '../context'
 import { RolePicker } from './RolePicker'
+import styles from './UserForm.module.scss'
 import { IUserFormProps } from './types'
-import styles from './UserFormModal.module.scss'
 import { useUserForm } from './useUserForm'
 
-export const UserForm: FC<IUserFormProps> = (props) => {
+export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
   const { inputProps, model, setModel, isFormValid, onSave } =
@@ -19,7 +20,7 @@ export const UserForm: FC<IUserFormProps> = (props) => {
   return (
     <BasePanel
       {..._.omit(props, 'user')}
-      className={styles.root}
+      className={UserForm.className}
       isLightDismiss={true}
       footerActions={[
         {
@@ -89,5 +90,8 @@ export const UserForm: FC<IUserFormProps> = (props) => {
     </BasePanel>
   )
 }
+
+UserForm.displayName = 'UserForm'
+UserForm.className = styles.userForm
 
 export * from './types'

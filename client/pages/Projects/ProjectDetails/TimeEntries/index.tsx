@@ -1,8 +1,9 @@
 import { ActionButton } from '@fluentui/react'
 import { EventList, UserColumn, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { Summary } from './Summary'
 import styles from './TimeEntries.module.scss'
@@ -11,11 +12,11 @@ import { useTimeEntries } from './useTimeEntries'
 /**
  * @category Projects
  */
-export const TimeEntries: FC = () => {
+export const TimeEntries: StyledComponent = () => {
   const { t } = useTranslation()
   const { loading, timeEntries, onExport, error } = useTimeEntries()
   return (
-    <div className={styles.root}>
+    <div className={TimeEntries.className}>
       {error ? (
         <UserMessage intent='error' text={t('projects.timeEntriesErrorText')} />
       ) : (
@@ -56,3 +57,6 @@ export const TimeEntries: FC = () => {
     </div>
   )
 }
+
+TimeEntries.displayName = 'TimeEntries'
+TimeEntries.className = styles.timeEntries

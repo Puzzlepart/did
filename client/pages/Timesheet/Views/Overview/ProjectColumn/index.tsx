@@ -2,8 +2,9 @@ import { Icon } from '@fluentui/react'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
 import { ProjectLink, ProjectPopover, UserMessage } from 'components'
 import { TFunction } from 'i18next'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import _ from 'underscore'
 import {
   CLEAR_MANUAL_MATCH,
@@ -44,7 +45,7 @@ function getErrorMessage(
 /**
  * Component that renders the project column for the event list.
  */
-export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
+export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({ event }) => {
   const { t } = useTranslation()
   const { state, dispatch, className } = useProjectColumn()
 
@@ -109,3 +110,6 @@ export const ProjectColumn: FC<IProjectColumnProps> = ({ event }) => {
     </div>
   )
 }
+
+ProjectColumn.displayName = 'ProjectColumn'
+ProjectColumn.className = styles.projectColumn

@@ -30,7 +30,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
         </BasePanel>
       )}
     >
-      <div className={styles.root}>
+      <div className={FormControl.className}>
         <div className={styles.body}>{props.children}</div>
         <Footer
           hidden={!!props.panelProps}
@@ -48,6 +48,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
   </FormControlContext.Provider>
 )
 
+FormControl.className = styles.formControl
 FormControl.defaultProps = {
   submitProps: {
     text: undefined

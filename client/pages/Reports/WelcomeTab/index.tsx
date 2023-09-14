@@ -11,11 +11,8 @@ export const WelcomeTab: TabComponent = () => {
   const { t } = useTranslation()
   const buttons = useReportsQueryButtons()
   return (
-    <div className={styles.root}>
-      <UserMessage
-        // iconName='ReportDocument'
-        text={t('reports.selectReportText')}
-      />
+    <div className={WelcomeTab.className}>
+      <UserMessage   text={t('reports.selectReportText')} />
       <div className={styles.reportButtons}>
         {buttons.map((button, index) => (
           <Button
@@ -31,3 +28,6 @@ export const WelcomeTab: TabComponent = () => {
     </div>
   )
 }
+
+WelcomeTab.displayName = 'WelcomeTab'
+WelcomeTab.className = styles.welcomeTab

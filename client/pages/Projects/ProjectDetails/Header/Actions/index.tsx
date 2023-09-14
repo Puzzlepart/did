@@ -2,13 +2,14 @@ import { useMutation } from '@apollo/client'
 import { Button } from '@fluentui/react-components'
 import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { StyledComponent } from 'types'
 import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
-import { useProjectsContext } from '../../../context'
 import { ProjectForm } from '../../../ProjectForm'
+import { useProjectsContext } from '../../../context'
 import { SET_SELECTED_PROJECT } from '../../../reducer/actions'
 import styles from './Actions.module.scss'
 import $createOutlookCategory from './createOutlookCategory.gql'
@@ -17,7 +18,7 @@ import { IActionsProps } from './types'
 /**
  * @category Projects
  */
-export const Actions: FC<IActionsProps> = (props) => {
+export const Actions: StyledComponent<IActionsProps> = (props) => {
   const { refetch, state, dispatch } = useProjectsContext()
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
@@ -41,7 +42,7 @@ export const Actions: FC<IActionsProps> = (props) => {
   }
 
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={Actions.className} hidden={props.hidden}>
       <div className={styles.container}>
         {state.selected?.webLink && (
           <Button
@@ -92,3 +93,6 @@ export const Actions: FC<IActionsProps> = (props) => {
     </div>
   )
 }
+
+Actions.displayName = 'ProjectDetails.Actions'
+Actions.className = styles.actions

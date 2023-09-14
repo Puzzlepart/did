@@ -1,13 +1,14 @@
 import { Button } from '@fluentui/react-components'
-import React, { FC, MouseEventHandler } from 'react'
+import React, { MouseEventHandler } from 'react'
+import { StyledComponent } from 'types'
 import styles from './MenuItem.module.scss'
 import { IMenuItemProps } from './types'
 
 /**
  * @category UserMenu
  */
-export const MenuItem: FC<IMenuItemProps> = (props) => {
-  const className = [styles.root]
+export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
+  const className = [MenuItem.className]
   let onClick: MouseEventHandler<any> = props.onClick
   if (props.href) {
     onClick = () => {
@@ -48,3 +49,6 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
     </div>
   )
 }
+
+MenuItem.displayName = 'MenuItem'
+MenuItem.className = styles.menuItem

@@ -8,6 +8,7 @@ import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD } from '../../reducer/actions'
 import { TimesheetViewComponent } from '../types'
 import { useOverview } from './useOverview'
+import styles from './Overview.module.scss'
 
 /**
  * @category Timesheet
@@ -81,3 +82,5 @@ export const Overview: TimesheetViewComponent = () => {
 }
 
 Overview.id = 'overview'
+Overview.displayName = 'Overview'
+Overview.className = styles.overview

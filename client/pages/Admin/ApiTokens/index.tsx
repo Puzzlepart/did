@@ -33,14 +33,11 @@ export const ApiTokens: TabComponent = () => {
   } = useApiTokens()
 
   return (
-    <div className={styles.root}>
+    <div className={ApiTokens.className}>
       <Toast {...toast} />
       {!_.isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
-          <UserMessage
-            intent='success'
-            // iconName='Cloud'
-          >
+          <UserMessage intent='success'    >
             <span className={styles.text}>{apiKey}</span>
             <span className={styles.copy}>
               <CopyToClipboard text={apiKey}>
@@ -75,3 +72,6 @@ export const ApiTokens: TabComponent = () => {
     </div>
   )
 }
+
+ApiTokens.displayName = 'ApiTokens'
+ApiTokens.className = styles.apiTokens

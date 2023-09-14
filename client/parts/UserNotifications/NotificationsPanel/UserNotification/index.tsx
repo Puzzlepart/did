@@ -1,23 +1,23 @@
-/* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { UserNotificationsContext } from '../../context'
+import styles from './UserNotification.module.scss'
 import { IUserNotificationProps } from './types'
-import styles from './UserNotificationMessage.module.scss'
 
 /**
  * @category Function Component
  */
-export const UserNotification: FC<IUserNotificationProps> = ({ model }) => {
+export const UserNotification: StyledComponent<IUserNotificationProps> = ({ model }) => {
   const { t } = useTranslation()
   const { dismissNotification } = useContext(UserNotificationsContext)
   return (
     <FadeIn>
       <UserMessage
         {...model.alertProps}
-        className={styles.root}
+        className={UserNotification.className}
         actions={[
           {
             content: model.getMoreLinkText(t),
@@ -37,5 +37,8 @@ export const UserNotification: FC<IUserNotificationProps> = ({ model }) => {
     </FadeIn>
   )
 }
+
+UserNotification.displayName = 'UserNotification'
+UserNotification.className = styles.userNotification
 
 export * from './types'

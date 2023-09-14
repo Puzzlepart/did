@@ -1,14 +1,15 @@
 import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import { SubText } from 'components'
-import React, { FC } from 'react'
+import React from 'react'
+import { StyledComponent } from 'types'
 import styles from './ColumnHeader.module.scss'
 
 /**
  * @category List
  */
-export const ColumnHeader: FC<IDetailsColumnRenderTooltipProps> = (props) => {
+export const ColumnHeader: StyledComponent<IDetailsColumnRenderTooltipProps> = (props) => {
   return (
-    <div className={styles.root}>
+    <div className={ColumnHeader.className}>
       <div className={`${styles.container} ${props.hostClassName}`}>
         <h5 className={styles.name}>{props.column.name}</h5>
         <SubText style={{ marginTop: -24 }} text={props.column.data?.subText} />
@@ -16,3 +17,6 @@ export const ColumnHeader: FC<IDetailsColumnRenderTooltipProps> = (props) => {
     </div>
   )
 }
+
+ColumnHeader.displayName = 'ColumnHeader'
+ColumnHeader.className = styles.columnHeader

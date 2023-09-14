@@ -1,7 +1,7 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon } from '@fluentui/react'
-import React, { FC } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { StyledComponent } from 'types'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 import { useNavItem } from './useNavItem'
@@ -9,7 +9,7 @@ import { useNavItem } from './useNavItem'
 /**
  * @category Navigation
  */
-export const NavItem: FC<INavItemProps> = (props) => {
+export const NavItem: StyledComponent<INavItemProps> = (props) => {
   const { className, onClick, shouldRender } = useNavItem(props)
   return (
     shouldRender && (
@@ -27,5 +27,7 @@ export const NavItem: FC<INavItemProps> = (props) => {
     )
   )
 }
+
+NavItem.className = styles.navItem
 
 export * from './types'

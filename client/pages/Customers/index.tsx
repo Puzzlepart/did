@@ -19,9 +19,8 @@ export const CustomersPage: PageComponent = () => (
   </Switch>
 )
 
-Object.assign(CustomersPage, {
-  iconName: 'People',
-  permission: PermissionScope.ACCESS_CUSTOMERS
-} as Partial<PageComponent>)
+CustomersPage.displayName = 'CustomersPage'
+CustomersPage.iconName = 'People'
+CustomersPage.permission = PermissionScope.ACCESS_CUSTOMERS
 
 export * from './Customers'

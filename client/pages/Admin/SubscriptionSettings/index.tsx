@@ -7,9 +7,6 @@ import { SubscriptionContext } from './context'
 import styles from './SubscriptionSettings.module.scss'
 import { useSubscriptionSettings } from './useSubscriptionSettings'
 
-/**
- * @ignore
- */
 export const SubscriptionSettings: TabComponent = () => {
   const { t } = useTranslation()
   const { toast, context, onSaveSettings, hasChanges } =
@@ -17,7 +14,7 @@ export const SubscriptionSettings: TabComponent = () => {
 
   return (
     <SubscriptionContext.Provider value={context}>
-      <div className={styles.root}>
+      <div className={SubscriptionSettings.className}>
         <Toast {...toast} />
         {/* <TabContainer
           onTabChanged={(itemKey) => setSelectedKey(itemKey)}
@@ -40,3 +37,6 @@ export const SubscriptionSettings: TabComponent = () => {
     </SubscriptionContext.Provider>
   )
 }
+
+SubscriptionSettings.displayName = 'SubscriptionSettings'
+SubscriptionSettings.className = styles.subscriptionSettings

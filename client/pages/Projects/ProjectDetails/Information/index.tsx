@@ -1,8 +1,8 @@
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { LabelObject as Label } from 'types'
+import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import { useProjectsContext } from '../../context'
 import styles from './Information.module.scss'
@@ -11,12 +11,12 @@ import { InformationProperty } from './InformationProperty'
 /**
  * @category Projects
  */
-export const Information: FC = () => {
+export const Information: StyledComponent = () => {
   const { t } = useTranslation()
   const { state } = useProjectsContext()
 
   return (
-    <div className={styles.root}>
+    <div className={Information.className}>
       {state.selected?.inactive && (
         <UserMessage
           hidden={!state.selected?.inactive}
@@ -38,8 +38,10 @@ export const Information: FC = () => {
       <UserMessage
         hidden={!state.selected?.outlookCategory}
         text={t('projects.categoryOutlookText')}
-        // iconName='OutlookLogoInverse'
       />
     </div>
   )
 }
+
+Information.displayName = 'ProjectDetails.Information'
+Information.className = styles.information

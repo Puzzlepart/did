@@ -32,7 +32,7 @@ export const AllocationView: TimesheetViewComponent = () => {
 
   if (state.loading) {
     return (
-      <div className={styles.root} ref={container}>
+      <div className={AllocationView.className} ref={container}>
         <Spinner
           label={t('timesheet.allocation.loadingLabel')}
           size={SpinnerSize.large}
@@ -43,14 +43,14 @@ export const AllocationView: TimesheetViewComponent = () => {
 
   if (!state.loading && state.selectedPeriod?.totalDuration === 0) {
     return (
-      <div className={styles.root} ref={container}>
+      <div className={AllocationView.className} ref={container}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />
       </div>
     )
   }
 
   return (
-    <div className={styles.root} ref={container}>
+    <div className={AllocationView.className} ref={container}>
       {charts.map((c) => {
         const [k, d] = data[c.key]
         return (
@@ -99,3 +99,5 @@ export const AllocationView: TimesheetViewComponent = () => {
 }
 
 AllocationView.id = 'allocation'
+AllocationView.displayName = 'AllocationView'
+AllocationView.className = styles.allocationView

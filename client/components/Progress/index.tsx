@@ -10,7 +10,7 @@ import { IProgressProps } from './types'
 export const Progress: ReusableComponent<IProgressProps> = (props) => {
   return (
     <div
-      className={styles.root}
+      className={Progress.className}
       style={{ width: props.width, padding: props.padding }}
       hidden={props.hidden}
     >
@@ -21,6 +21,8 @@ export const Progress: ReusableComponent<IProgressProps> = (props) => {
   )
 }
 
+Progress.displayName = 'Progress'
+Progress.className = styles.progress
 Progress.defaultProps = {
   padding: '10px 0',
   width: '100%'

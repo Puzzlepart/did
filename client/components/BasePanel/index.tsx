@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import { Panel } from '@fluentui/react'
 import { FluentProvider, webLightTheme } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
@@ -17,13 +16,14 @@ export const BasePanel: ReusableComponent<IBasePanelProps> = (props) => {
   const panelProps = useBasePanel(props)
   return (
     <Panel {...panelProps}>
-      <FluentProvider theme={webLightTheme} className={styles.root}>
+      <FluentProvider theme={webLightTheme} className={BasePanel.className}>
         {props.children}
       </FluentProvider>
     </Panel>
   )
 }
 
+BasePanel.className = styles.basePanel
 BasePanel.defaultProps = {
   headerActions: [],
   footerActions: [],

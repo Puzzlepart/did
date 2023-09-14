@@ -17,7 +17,7 @@ export const SummaryView: TabComponent = () => {
   const context = useContext(ReportsContext)
   const { state, rows, columns } = useSummaryView()
   return (
-    <div className={styles.root}>
+    <div className={SummaryView.className}>
       <div className={styles.container}>
         {context.state.loading && (
           <Progress text={t('reports.generatingReportProgressText')} />
@@ -40,3 +40,6 @@ export const SummaryView: TabComponent = () => {
     </div>
   )
 }
+
+SummaryView.displayName = 'SummaryView'
+SummaryView.className = styles.summaryView

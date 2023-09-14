@@ -15,7 +15,7 @@ import { useColumns } from './useColumns'
 export const EventList: ReusableComponent<IEventListProps> = (props) => {
   const columns = useColumns(props)
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={EventList.className} hidden={props.hidden}>
       <List
         hideToolbar={props.hideToolbar}
         enableShimmer={props.enableShimmer}
@@ -27,5 +27,8 @@ export const EventList: ReusableComponent<IEventListProps> = (props) => {
     </div>
   )
 }
+
+EventList.displayName = 'EventList'
+EventList.className = styles.eventList
 
 export * from './types'
