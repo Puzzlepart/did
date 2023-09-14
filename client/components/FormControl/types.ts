@@ -34,8 +34,7 @@ export type UseFormOptions = {
   errorMessage?: string
 }
 
-interface ISubmitProps
-  extends Pick<ButtonProps, 'onClick' | 'disabled'> {
+interface ISubmitProps extends Pick<ButtonProps, 'onClick' | 'disabled'> {
   text: string
   toast?: IToastProps
 }
