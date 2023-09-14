@@ -29,7 +29,7 @@ Object.assign(ProjectsPage, {
 
 export * from './context'
 export * from './ProjectDetails'
-export * from './ProjectForm'
+export * from './ProjectForm/ProjectForm'
 export * from './ProjectList'
 export * from './Projects'
 export * from './types'

@@ -1,29 +1,28 @@
-import { EntityLabel } from 'components/EntityLabel'
-import { UserMessage } from 'components/UserMessage'
+import { EntityLabel, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import { useProjectsContext } from '../../context'
-import styles from './Information.module.scss'
 import { InformationProperty } from './InformationProperty'
+import styles from './ProjectInformation.module.scss'
 
 /**
+ * Shows details about the selected project.
+ *
  * @category Projects
  */
-export const Information: StyledComponent = () => {
+export const ProjectInformation: StyledComponent = () => {
   const { t } = useTranslation()
   const { state } = useProjectsContext()
 
   return (
-    <div className={Information.className}>
-      {state.selected?.inactive && (
-        <UserMessage
-          hidden={!state.selected?.inactive}
-          text={t('projects.inactiveText')}
-          intent='warning'
-        />
-      )}
+    <div className={ProjectInformation.className}>
+      <UserMessage
+        hidden={!state.selected?.inactive}
+        text={t('projects.inactiveText')}
+        intent='warning'
+      />
       <InformationProperty
         title={t('projects.tagLabel')}
         value={state.selected?.tag}
@@ -43,5 +42,5 @@ export const Information: StyledComponent = () => {
   )
 }
 
-Information.displayName = 'ProjectDetails.Information'
-Information.className = styles.information
+ProjectInformation.displayName = 'ProjectInformation'
+ProjectInformation.className = styles.projectInformation

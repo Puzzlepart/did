@@ -1,13 +1,11 @@
-/* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IconPicker, LabelPicker, SearchCustomer } from 'components'
 import {
   ChecboxControlOptions,
   CheckboxControl,
-  FormControl
+  FormControl,
+  TextControl,
+  TextControlOptions
 } from 'components/FormControl'
-import { TextControl } from 'components/FormControl/TextControl'
-import { TextControlOptions } from 'components/FormControl/TextControl/types'
 import { TabComponent } from 'components/Tabs'
 import packageFile from 'package'
 import React from 'react'
