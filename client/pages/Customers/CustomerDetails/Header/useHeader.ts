@@ -11,7 +11,12 @@ export function useHeader() {
   const history = useHistory()
   const breadcrumb = useMemo<IBreadcrumbProps>(
     () => ({
-      styles: { root: { margin: 0 } },
+      styles: { 
+        root: { margin: 0 },
+        itemLink: { fontSize: 14 },
+        item: { fontSize: 14 },
+        chevron: { fontSize: 14 }
+       },
       items: [
         {
           key: 'back',
