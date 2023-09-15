@@ -5,6 +5,7 @@ import { IToastProps } from 'components/Toast'
 import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
 import { StyledComponent } from 'types'
+import { IFieldProps } from './Field'
 
 export type UseFormOptions = {
   /**
@@ -68,7 +69,7 @@ export interface IFormControlProps
   edit?: any
 }
 
-export type FormInputControlBase<TOptions = any> = {
+export interface FormInputControlBase<TOptions = any> extends IFieldProps {
   /**
    * The `name` attribute is required
    */
@@ -95,4 +96,9 @@ export type FormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
   options?: TOptions
 ) => ISubmitProps
 
-export type FormInputControlComponent<T = any> = StyledComponent<T>
+/**
+ * A styled component that represents a form input control.
+ * 
+ * @template T - The type of props that this component accepts.
+ */
+export type FormInputControlComponent<T extends FormInputControlBase = FormInputControlBase> = StyledComponent<T>

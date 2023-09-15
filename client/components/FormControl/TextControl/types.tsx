@@ -1,6 +1,6 @@
 import { TextareaProps } from '@fluentui/react-components'
 import { ChangeEvent } from 'react'
-import { FormInputControlBase } from '../types'
+import { IFieldProps } from '../Field'
 
 export type TextControlOptions = {
   /**
@@ -14,23 +14,9 @@ export type TextControlOptions = {
   replace?: [RegExp, string]
 }
 
-export interface ITextFieldProps extends Omit<TextareaProps, 'onChange'> {
-  /**
-   * Label for the control
-   */
-  label?: string
-
-  /**
-   * Description for the control
-   */
-  description?: string
-
+export interface ITextFieldProps extends Pick<TextareaProps, 'rows' | 'value'>, IFieldProps {
   /**
    * On change event handler
    */
   onChange?: (event: ChangeEvent<any>, data: any) => void
 }
-
-export interface ITextControlProps
-  extends FormInputControlBase<TextControlOptions>,
-    Omit<ITextFieldProps, 'name' | 'value' | 'onChange'> {}

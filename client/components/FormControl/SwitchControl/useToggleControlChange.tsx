@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
-import { ISwitchControlProps, SwitchControlOptions } from './types'
+import { SwitchControlOptions } from './types'
+import { FormInputControlBase } from '../types'
 
 /**
  * Transform based on `ToggleControlOptions`
@@ -17,7 +18,7 @@ export function useToggleControlChange({
   model,
   name,
   options
-}: ISwitchControlProps) {
+}: FormInputControlBase) {
   return useCallback((_event, value) => {
     model.set(name, transformValue(value, options))
   }, [])

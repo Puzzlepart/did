@@ -1,10 +1,8 @@
-import { Label, Switch } from '@fluentui/react-components'
+import { Switch } from '@fluentui/react-components'
 import React from 'react'
-import _ from 'underscore'
-import { FieldDescription } from '../FieldDescription'
+import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './SwitchControl.module.scss'
-import { ISwitchControlProps } from './types'
 import { useToggleControlChange } from './useToggleControlChange'
 
 /**
@@ -13,25 +11,25 @@ import { useToggleControlChange } from './useToggleControlChange'
  *
  * @category Reusable Component
  */
-export const SwitchControl: FormInputControlComponent<ISwitchControlProps> = (
+export const SwitchControl: FormInputControlComponent = (
   props
 ) => {
   const onChange = useToggleControlChange(props)
   return (
-    <div className={SwitchControl.className} hidden={props.hidden}>
-      <Label weight={props.labelWeight}>{props.label}</Label>
+    <Field
+      className={SwitchControl.className}
+      label={props.label}
+      description={props.description}
+      required={props.required}
+      hidden={props.hidden}
+    >
       <Switch
-        {..._.omit(props, 'label', 'labelWeight')}
         onChange={(event, data) => onChange(event, data.checked)}
         checked={props.model.value<boolean>(props.name, false)}
       />
-      <FieldDescription text={props.description} />
-    </div>
+    </Field>
   )
 }
 
 SwitchControl.displayName = 'SwitchControl'
 SwitchControl.className = styles.switchControl
-SwitchControl.defaultProps = {
-  labelWeight: 'semibold'
-}

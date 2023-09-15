@@ -1,10 +1,10 @@
-import { Input, Label, Textarea } from '@fluentui/react-components'
+import { Input, Textarea } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
+import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './TextControl.module.scss'
-import { ITextControlProps, ITextFieldProps } from './types'
+import { ITextFieldProps } from './types'
 import { useTextControlChange } from './useTextControlChange'
 
 /**
@@ -16,8 +16,13 @@ import { useTextControlChange } from './useTextControlChange'
  */
 export const TextField: ReusableComponent<ITextFieldProps> = (props) => {
   return (
-    <div className={TextField.className} hidden={props.hidden}>
-      <Label weight='semibold'>{props.label}</Label>
+    <Field
+      className={TextField.className}
+      label={props.label}
+      description={props.description}
+      required={props.required}
+      hidden={props.hidden}
+    >
       {props.rows > 1 ? (
         <Textarea {...props} className={styles.field} />
       ) : (
@@ -28,10 +33,7 @@ export const TextField: ReusableComponent<ITextFieldProps> = (props) => {
           disabled={props.disabled}
         />
       )}
-      <div className={styles.description} hidden={props.disabled}>
-        <ReactMarkdown>{props.description}</ReactMarkdown>
-      </div>
-    </div>
+    </Field>
   )
 }
 
@@ -46,7 +48,7 @@ TextField.defaultProps = {
  *
  * @category Reusable Component
  */
-export const TextControl: FormInputControlComponent<ITextControlProps> = (
+export const TextControl: FormInputControlComponent = (
   props
 ) => {
   const onChange = useTextControlChange(props)

@@ -1,4 +1,4 @@
-import { PanelType } from '@fluentui/react'
+import { css, PanelType } from '@fluentui/react'
 import { BasePanel } from 'components/BasePanel'
 import { Footer } from 'components/BasePanel/Footer/Footer'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
@@ -8,6 +8,7 @@ import React from 'react'
 import { FormControlContext } from './context'
 import styles from './FormControl.module.scss'
 import { IFormControlProps } from './types'
+import { useFormControl } from './useFormControl'
 
 /**
  * FormControl component that handles form submission and validation.
@@ -20,43 +21,48 @@ import { IFormControlProps } from './types'
  *
  * @category Reusable Component
  */
-export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
-  <FormControlContext.Provider value={{ model: props.model }}>
-    <ConditionalWrapper
-      condition={!!props.panelProps}
-      wrapper={(children) => (
-        <BasePanel
-          type={PanelType.medium}
-          {...props.panelProps}
-          footerActions={[
-            {
-              ...props.submitProps,
-              hidden: !props.submitProps?.text,
-              appearance: 'primary'
-            }
-          ]}
-        >
-          {children}
-        </BasePanel>
-      )}
-    >
+export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
+  const { footerActions, contentId } = useFormControl(props)
+  return (
+    <FormControlContext.Provider value={{ model: props.model }}>
       <div className={FormControl.className}>
-        <div className={styles.body}>{props.children}</div>
-        <Footer
-          hidden={!!props.panelProps}
-          actions={[
-            {
-              ...props.submitProps,
-              hidden: !props.submitProps?.text,
-              appearance: 'primary'
-            }
-          ]}
-        />
+        <ConditionalWrapper
+          condition={!!props.panelProps}
+          wrapper={(children) => (
+            <BasePanel
+              type={PanelType.medium}
+              {...props.panelProps}
+              footerActions={footerActions}
+            >
+              {children}
+            </BasePanel>
+          )}
+        >
+          <div
+            className={css(
+              styles.content,
+              props.panelProps ? styles.panel : styles.standalone
+            )}
+            id={contentId}
+          >
+            {props.children}
+          </div>
+          <Footer
+            hidden={!!props.panelProps}
+            actions={[
+              {
+                ...props.submitProps,
+                hidden: !props.submitProps?.text,
+                appearance: 'primary'
+              }
+            ]}
+          />
+        </ConditionalWrapper>
+        <Toast {...props.submitProps?.toast} />
       </div>
-    </ConditionalWrapper>
-    <Toast {...props.submitProps?.toast} />
-  </FormControlContext.Provider>
-)
+    </FormControlContext.Provider>
+  )
+}
 
 FormControl.className = styles.formControl
 FormControl.defaultProps = {

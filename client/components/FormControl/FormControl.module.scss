@@ -2,16 +2,14 @@
   max-width: 550px;
   padding: 0 0 20px 0;
 
-  .body {
+  .content {
     margin: 0 0 20px 0;
 
-    > div {
-      margin: 0 0 20px 0;
-
-      label {
-        display: block;
-        margin: 0 0 5px 0;
-      }
+    &.standalone,
+    &.panel > div {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
   }
 }
