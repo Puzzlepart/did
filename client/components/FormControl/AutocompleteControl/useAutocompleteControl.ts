@@ -59,15 +59,9 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
   const { onDismissCallout, onSetSelected, onSearch, onKeyDown } =
     useAutocompleteControlEvents({ props, dispatch })
 
-  const searchBoxRef = useRef<any>()
-  useEffect(() => {
-    if (props.autoFocus) searchBoxRef?.current.focus()
-  }, [props])
-
   return {
     state,
     ref,
-    searchBoxRef,
     className: classNames.join(' '),
     suggestions,
     onDismissCallout,

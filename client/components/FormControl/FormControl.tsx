@@ -1,7 +1,8 @@
-import { css, PanelType } from '@fluentui/react'
+import { PanelType } from '@fluentui/react'
 import { BasePanel } from 'components/BasePanel'
 import { Footer } from 'components/BasePanel/Footer/Footer'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { JsonDebug } from 'components/JsonDebug'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
@@ -22,7 +23,7 @@ import { useFormControl } from './useFormControl'
  * @category Reusable Component
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
-  const { footerActions, contentId } = useFormControl(props)
+  const { footerActions } = useFormControl(props)
   return (
     <FormControlContext.Provider value={{ model: props.model }}>
       <div className={FormControl.className}>
@@ -38,15 +39,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
             </BasePanel>
           )}
         >
-          <div
-            className={css(
-              styles.content,
-              props.panelProps ? styles.panel : styles.standalone
-            )}
-            id={contentId}
-          >
-            {props.children}
-          </div>
+          <div className={styles.formControlContent}>{props.children}</div>
           <Footer
             hidden={!!props.panelProps}
             actions={[
@@ -57,6 +50,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
               }
             ]}
           />
+          {props.debug && <JsonDebug obj={props.model} />}
         </ConditionalWrapper>
         <Toast {...props.submitProps?.toast} />
       </div>

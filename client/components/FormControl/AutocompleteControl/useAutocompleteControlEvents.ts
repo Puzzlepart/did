@@ -1,5 +1,4 @@
-import { InputOnChangeData } from '@fluentui/react-components'
-import { ChangeEvent, KeyboardEvent } from 'react'
+import { KeyboardEvent } from 'react'
 import {
   DISMISS_CALLOUT,
   ON_KEY_DOWN,
@@ -20,8 +19,7 @@ export function useAutocompleteControlEvents({ dispatch, props }) {
       props.onSelected(item)
     },
     onSetSelected: (index: number) => dispatch(SET_SELECTED_INDEX({ index })),
-    onSearch: (_: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) =>
-      dispatch(ON_SEARCH({ searchTerm: data?.value })),
+    onSearch: (searchTerm: string) => dispatch(ON_SEARCH({ searchTerm })),
     onKeyDown: (event: KeyboardEvent<HTMLDivElement>) =>
       dispatch(
         ON_KEY_DOWN({

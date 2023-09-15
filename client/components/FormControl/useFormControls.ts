@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { useMap } from 'hooks/common/useMap'
 import { useCallback } from 'react'
+import { convertToMap } from 'utils'
 import { FormInputControlBase } from './types'
 
 /**
@@ -11,11 +13,11 @@ import { FormInputControlBase } from './types'
  *
  * @returns `FormInputControlBase`
  */
-function registerControl<O = any>(
-  name: string,
+function registerControl<TOptions = any, KeyType = string>(
+  name: KeyType,
   model: ReturnType<typeof useMap>,
-  options?: O
-): FormInputControlBase<O> {
+  options?: TOptions
+): FormInputControlBase<TOptions, KeyType> {
   return {
     name,
     model,
@@ -33,10 +35,10 @@ function registerControl<O = any>(
  *
  * @returns A `FormInputControlBase` instance with the given options.
  */
-export type RegisterControlCallback = <O>(
-  name: string,
-  options?: O
-) => FormInputControlBase<O>
+export type RegisterControlCallback<TOptions = {}, KeyType = string> = (
+  name: KeyType,
+  options?: TOptions
+) => FormInputControlBase<TOptions>
 
 /**
  * Use form controls
@@ -45,13 +47,23 @@ export type RegisterControlCallback = <O>(
  *
  * @returns a callback to register a new control
  */
-export function useFormControls(
+export function useFormControls<KeyType = any>(
   model: ReturnType<typeof useMap>
-): RegisterControlCallback {
+) {
   return useCallback(
-    (name: string, options?: any) => {
-      return registerControl(name, model, options)
-    },
+    <TOptions = {}>(name: KeyType, options?: TOptions) =>
+      registerControl<TOptions, KeyType>(name, model, options),
     [model]
   )
+}
+
+/**
+ * Returns a map of form control values and their corresponding update functions.
+ *
+ * @param initialModel An optional object containing initial form control values.
+ *
+ * @returns A map of form control values and their corresponding update functions.
+ */
+export function useFormControlModel<KeyType = any>(initialModel = {}) {
+  return useMap<KeyType>(convertToMap(initialModel))
 }

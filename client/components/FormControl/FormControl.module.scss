@@ -1,15 +1,12 @@
 .formControl {
   max-width: 550px;
   padding: 0 0 20px 0;
+}
 
-  .content {
-    margin: 0 0 20px 0;
 
-    &.standalone,
-    &.panel > div {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-  }
+.formControlContent {
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

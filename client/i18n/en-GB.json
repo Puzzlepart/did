@@ -139,7 +139,9 @@
       "neverExpiresText": "Never expires",
       "confirmDeleteTitle": "Delete API-key",
       "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?",
-      "editPermissionsDescription": "Click to manage or customize permissions for this API token. Please note that permissions cannot be updated after creation."
+      "editPermissionsDescription": "Click to manage or customize permissions for this API token. Please note that permissions cannot be updated after creation.",
+      "apiKeyGenerated": "Click the key to copy it to your clipboard.",
+      "apiKeyCopied": "API key successfully copied to clipboard."
     },
     "labels": {
       "headerText": "Labels",

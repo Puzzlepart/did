@@ -1,4 +1,3 @@
-import { useId } from '@fluentui/react-components'
 import { IBasePanelAction } from 'components'
 import { useMemo } from 'react'
 import { IFormControlProps } from './types'
@@ -12,10 +11,8 @@ export function useFormControl(props: IFormControlProps) {
         appearance: 'primary'
       }
     ],
-    []
+    [props.submitProps]
   )
 
-  const contentId = useId('form-control-content')
-
-  return { footerActions, contentId }
+  return { footerActions }
 }

@@ -67,13 +67,19 @@ export interface IFormControlProps
    * Model to be edited
    */
   edit?: any
+
+  /**
+   * Running in debug mode will show the model JSON in the bottom of the form.
+   */
+  debug?: boolean
 }
 
-export interface FormInputControlBase<TOptions = any> extends IFieldProps {
+export interface FormInputControlBase<TOptions = any, KeyType = string>
+  extends IFieldProps {
   /**
    * The `name` attribute is required
    */
-  name?: string
+  name?: KeyType
 
   /**
    * Automatically bind the text control to

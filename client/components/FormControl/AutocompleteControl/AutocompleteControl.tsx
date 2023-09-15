@@ -1,6 +1,5 @@
 import { Callout, FocusZone, FocusZoneDirection, List } from '@fluentui/react'
-import { SearchBox } from '@fluentui/react-search-preview'
-import { Field, FormInputControlComponent } from 'components'
+import { DynamicSearchBox, Field, FormInputControlComponent } from 'components'
 import React from 'react'
 import _ from 'underscore'
 import { IAutocompleteControlProps } from '.'
@@ -19,7 +18,6 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
     const {
       ref,
       state,
-      searchBoxRef,
       className,
       suggestions,
       onDismissCallout,
@@ -37,15 +35,12 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
           errorMessage={props.errorMessage}
         >
           <div ref={ref}>
-            <SearchBox
-              ref={searchBoxRef}
+            <DynamicSearchBox
               key={state.selectedItem?.key}
               className={styles.field}
               defaultValue={state.value}
               placeholder={props.placeholder}
               disabled={props.disabled}
-              autoComplete='off'
-              autoCorrect='off'
               onChange={onSearch}
             />
           </div>

@@ -139,7 +139,9 @@
       "neverExpiresText": "Utløper aldri",
       "confirmDeleteTitle": "Slett API-nøkkel",
       "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?",
-      "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse."
+      "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse.",
+      "apiKeyGenerated": "Klikk på nøkkelen for å kopiere den til utklippstavlen.",
+      "apiKeyCopied": "API-nøkkel ble kopiert til utklippstavlen."
     },
     "users": {
       "headerText": "Brukere",
