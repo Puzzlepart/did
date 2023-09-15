@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { OptionProps } from '@fluentui/react-components'
+import { DropdownProps, OptionProps } from '@fluentui/react-components'
 import { FormInputControlBase } from '../types'
 
 /**
@@ -21,7 +21,8 @@ export type DropdownControlOptions = {
  * Props for the DropdownControl component.
  */
 export interface IDropdownControlProps
-  extends FormInputControlBase<DropdownControlOptions> {
+  extends FormInputControlBase<DropdownControlOptions>,
+    Pick<DropdownProps, 'placeholder'> {
   /**
    * An array of options to display in the dropdown.
    */

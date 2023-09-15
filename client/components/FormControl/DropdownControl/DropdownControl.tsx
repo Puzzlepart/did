@@ -17,7 +17,7 @@ export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
     const onChange = useDropdownControlChange(props)
     return (
       <Field className={DropdownControl.className} {...props}>
-        <Dropdown onOptionSelect={onChange}>
+        <Dropdown placeholder={props.placeholder} onOptionSelect={onChange}>
           {_.map(props.values, (option, index) => (
             <Option key={index} value={option.value}>
               {option.text}
