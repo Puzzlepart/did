@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { SwitchControlOptions } from './types'
 import { FormInputControlBase } from '../types'
+import { SwitchControlOptions } from './types'
 
 /**
  * Transform based on `ToggleControlOptions`

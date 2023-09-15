@@ -1,10 +1,6 @@
 .labelPickerControl {
   position: inherit;
 
-  .inputLabel {
-    margin: 0 0 8px 0;
-  }
-
   .selectedLabels {
     display: flex;
     flex-direction: row;
@@ -15,9 +11,8 @@
     }
   }
 
-  .toggleIcon {
-    float: right;
-    cursor: pointer;
+  .openPickerButton {
+    margin: 12px 0;
   }
 
   .noneSelected {

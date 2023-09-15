@@ -1,17 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLabelsQuery } from 'graphql-queries/labels'
+import { useEffect, useState } from 'react'
 import { LabelObject } from 'types'
-import _ from 'underscore'
-import { useLabelsQuery } from '../../../graphql/useLabelsQuery'
+import { omitTypename } from 'utils'
 import { ILabelPickerControlProps } from './types'
 
 export function useLabelPicker({
   onChange,
   defaultSelectedKeys
 }: ILabelPickerControlProps) {
-  const { data } = useLabelsQuery()
-  const [labels, setLabels] = useState<LabelObject[]>([])
+  const [labels] = useLabelsQuery()
   const [selectedLabels, setSelectedLabels] = useState<LabelObject[]>([])
-  const [showCallout, setShowCallout] = useState<boolean>(false)
 
   function onToggleLabel(label: LabelObject) {
     const _selectedLabels = [...selectedLabels]
@@ -27,28 +25,18 @@ export function useLabelPicker({
   }
 
   useEffect(() => {
-    if (data?.labels) {
-      const _labels: LabelObject[] = data.labels.map((lbl: any) =>
-        _.omit(lbl, '__typename')
+    const _labels: LabelObject[] = labels.map((lbl) => omitTypename(lbl))
+    if (defaultSelectedKeys) {
+      const _selectedLabels = _labels.filter((lbl) =>
+        defaultSelectedKeys.includes(lbl.name)
       )
-      setLabels(_labels)
-      if (defaultSelectedKeys) {
-        const _selectedLabels = _labels.filter((lbl) =>
-          defaultSelectedKeys.includes(lbl.name)
-        )
-        setSelectedLabels(_selectedLabels)
-      }
+      setSelectedLabels(_selectedLabels)
     }
-  }, [data])
-
-  const ref = useRef(null)
+  }, [labels])
 
   return {
     onToggleLabel,
-    showCallout,
-    setShowCallout,
     labels,
-    selectedLabels,
-    ref
+    selectedLabels
   }
 }

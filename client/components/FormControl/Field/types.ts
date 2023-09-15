@@ -6,7 +6,7 @@ import { HTMLProps } from 'react'
  */
 export interface IFieldProps
   extends Pick<HTMLProps<HTMLDivElement>, 'className' | 'hidden'>,
-  Pick<LabelProps, 'weight' | 'disabled'> {
+    Pick<LabelProps, 'weight' | 'disabled'> {
   /**
    * The label for the field.
    */
@@ -16,7 +16,6 @@ export interface IFieldProps
    * The description for the field.
    */
   description?: string
-
 
   required?: boolean
 

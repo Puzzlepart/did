@@ -4,7 +4,7 @@ import React from 'react'
 import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './TextControl.module.scss'
-import { ITextFieldProps } from './types'
+import { ITextControlProps, ITextFieldProps } from './types'
 import { useTextControlChange } from './useTextControlChange'
 
 /**
@@ -48,7 +48,7 @@ TextField.defaultProps = {
  *
  * @category Reusable Component
  */
-export const TextControl: FormInputControlComponent = (
+export const TextControl: FormInputControlComponent<ITextControlProps> = (
   props
 ) => {
   const onChange = useTextControlChange(props)
@@ -60,5 +60,3 @@ export const TextControl: FormInputControlComponent = (
     />
   )
 }
-
-export * from './types'

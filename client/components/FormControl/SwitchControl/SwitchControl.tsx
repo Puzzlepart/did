@@ -11,9 +11,7 @@ import { useToggleControlChange } from './useToggleControlChange'
  *
  * @category Reusable Component
  */
-export const SwitchControl: FormInputControlComponent = (
-  props
-) => {
+export const SwitchControl: FormInputControlComponent = (props) => {
   const onChange = useToggleControlChange(props)
   return (
     <Field

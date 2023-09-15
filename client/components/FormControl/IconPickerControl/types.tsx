@@ -1,6 +1,7 @@
 import { IAutocompleteControlProps } from '../AutocompleteControl'
 
-export interface IIconPickerControlProps extends Omit<IAutocompleteControlProps<any>, 'onSelected'> {
+export interface IIconPickerControlProps
+  extends Omit<IAutocompleteControlProps<any>, 'onSelected'> {
   /**
    * Default selected icon
    */
