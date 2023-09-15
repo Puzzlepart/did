@@ -20,22 +20,12 @@ export function useApiTokenForm(props: IApiTokenFormProps) {
     const { data } = await addApiToken({ variables: { token } })
     props.onAdded(data.apiKey)
   }
-
-  function togglePermission(permissionId: string, checked: boolean) {
-    const permissions = [...(token.permissions || [])]
-    const index = permissions.indexOf(permissionId)
-    if (checked && index === -1) permissions.push(permissionId)
-    else permissions.splice(index, 1)
-    setToken({ ...token, permissions })
-  }
-
   const expiryOptions = useExpiryOptions()
 
   return {
     token,
     setToken,
     expiryOptions,
-    onAddApiToken,
-    togglePermission
+    onAddApiToken
   }
 }
