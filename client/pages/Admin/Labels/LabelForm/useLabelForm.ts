@@ -1,5 +1,4 @@
-import { IBasePanelProps } from 'components/BasePanel/types'
-import { useFormControls } from 'components/FormControl'
+import { IFormControlProps, useFormControls } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ILabelFormProps } from './types'
@@ -18,7 +17,7 @@ export function useLabelForm(props: ILabelFormProps) {
   const model = useLabelModel(props)
   const register = useFormControls(model)
   const submitProps = useLabelFormSubmit(props, model)
-  const panelProps: IBasePanelProps = {
+  const panelProps: IFormControlProps['panelProps'] = {
     ..._.omit(props, 'onSave'),
     headerText: props.edit
       ? t('admin.labels.editText')
