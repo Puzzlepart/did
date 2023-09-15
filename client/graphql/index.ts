@@ -49,4 +49,3 @@ export const client = new ApolloClient({
  * @ignore
  */
 export { FetchPolicy } from '@apollo/client'
-export { default as $usercontext } from './user-context.gql'
