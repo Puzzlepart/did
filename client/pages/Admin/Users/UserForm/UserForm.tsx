@@ -1,14 +1,14 @@
-import { Checkbox } from '@fluentui/react-components'
 import {
   AutocompleteControl,
+  CheckboxControl,
+  DropdownControl,
   FormControl,
-  InputField
+  InputControl
 } from 'components/FormControl'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { UsersContext } from '../context'
-import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserForm.module.scss'
 import { useUserForm } from './useUserForm'
@@ -16,11 +16,13 @@ import { useUserForm } from './useUserForm'
 export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
-  const { inputProps, model, setModel, submitProps } = useUserForm(props)
+  const { inputProps, model, register, submitProps } = useUserForm(props)
 
   return (
-    <FormControl panelProps={props} submitProps={submitProps}>
+    <FormControl model={model} panelProps={props} submitProps={submitProps}>
       <AutocompleteControl
+        required={true}
+        label={t('common.adUserLabel')}
         placeholder={t('common.searchPlaceholder')}
         items={context.state.availableAdUsers.map((u) => ({
           key: u.id,
@@ -28,45 +30,50 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           searchValue: u.displayName,
           data: u
         }))}
-        onSelected={(item) =>
-          setModel({
-            ...model,
-            ...item.data
-          })
-        }
+        onSelected={({ data }) => {
+          for (const key in data) {
+            model.set(key as any, data[key])
+          }
+        }}
       />
-      <InputField
+      <InputControl
+        {...register('surname')}
         {...inputProps({ key: 'surname', label: t('common.surnameLabel') })}
       />
-      <InputField
+      <InputControl
+        {...register('givenName')}
         {...inputProps({
           key: 'givenName',
           label: t('common.givenNameLabel')
         })}
       />
-      <InputField
+      <InputControl
+        {...register('displayName')}
         {...inputProps({
           key: 'displayName',
           label: t('common.displayNameLabel')
         })}
       />
-      <InputField
+      <InputControl
+        {...register('jobTitle')}
         {...inputProps({
           key: 'jobTitle',
           label: t('common.jobTitleLabel')
         })}
       />
-      <RolePicker
-        roles={context.state.roles}
-        model={model}
-        onChanged={(role) => setModel({ ...model, role })}
+      <DropdownControl
+        {...register('role')}
+        label={t('common.roleLabel')}
+        defaultValue='User'
+        values={context.state.roles.map((role) => ({
+          value: role.name,
+          text: role.name
+        }))}
       />
-      <Checkbox
+      <CheckboxControl
+        {...register('hiddenFromReports')}
         label={t('admin.userHiddenFromReportsLabel')}
-        defaultChecked={model.hiddenFromReports}
-        onChange={(_event, data) =>
-          setModel({ ...model, hiddenFromReports: data?.checked as boolean })
-        }
+        description={t('admin.userHiddenFromReportsDescription')}
       />
     </FormControl>
   )

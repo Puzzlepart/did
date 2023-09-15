@@ -258,7 +258,8 @@
     "vacation": "Ferie og fravær",
     "editPermissions": "Endre tilganger",
     "addPermissions": "Angi tillatelser",
-    "editPermissionsDescription": "Klikk for å legge til eller endre tillatelser for denne rollen."
+    "editPermissionsDescription": "Klikk for å legge til eller endre tillatelser for denne rollen.",
+    "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -479,7 +480,8 @@
     "updatedLabel": "Oppdatert",
     "cancelButtonLabel": "Avbryt",
     "toggleFilterPanel": "Filter",
-    "userSettingsPanelHeaderText": "Brukerinstillinger"
+    "userSettingsPanelHeaderText": "Brukerinstillinger",
+    "adUserLabel": "Bruker fra Active Directory"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

@@ -1,13 +1,16 @@
 import * as redux from '@reduxjs/toolkit'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
 type BuilderCallback<S> = (builder: redux.ActionReducerMapBuilder<S>) => void
 
-const createReducer = <S = any>(
+const useReducerCreator = <S = any>(
   initialState: S,
   builderCallback: BuilderCallback<S>
 ) => {
-  return redux.createReducer(initialState, builderCallback)
+  return useCallback(
+    () => redux.createReducer(initialState, builderCallback),
+    []
+  )
 }
 
 /**
@@ -23,9 +26,7 @@ export const useReducer = <S = any>(
   initialState: S,
   builderCallback: BuilderCallback<S>
 ) => {
-  const reducer = useMemo(
-    () => createReducer(initialState, builderCallback),
-    []
-  )
+  const createReducer = useReducerCreator(initialState, builderCallback)
+  const reducer = useMemo(() => createReducer(), [])
   return React.useReducer(reducer, initialState)
 }

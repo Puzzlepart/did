@@ -34,7 +34,7 @@ export const UserReports: FC = () => {
         footerActions={[
           {
             text: t('common.exportExcel'),
-            icon: icon('ArrowExportUp'),
+            iconName: 'ArrowExportUp',
             appearance: 'primary',
             onClick: () => {
               onExport()
