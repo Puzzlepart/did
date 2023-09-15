@@ -164,7 +164,8 @@
       "updateSuccess": "Merkelappen din **{{name}}** vart oppdatert",
       "defaultTitle": "ny merkelapp",
       "addNewText": "Opprett ny merkelapp",
-      "editText": "Rediger merkelapp"
+      "editText": "Rediger merkelapp",
+      "editLabels": "Klikk for å redigere merkelappar"
     },
     "subscriptionSettings": {
       "headerText": "Abonnement"
