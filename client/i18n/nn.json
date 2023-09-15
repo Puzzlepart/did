@@ -246,7 +246,7 @@
     "adUserSyncEnabledDescription": "Synkroniser automatisk brukareigenskapar frå Azure Active Directory når brukaren loggar på.",
     "adUserSyncPropertiesLabel": "Eigenskapar som skal synkroniserast",
     "adUserSyncPropertiesDescription": "Vel kva eigenskapar som skal synkroniserast automatisk frå Azure Active Directory.",
-    "roleInUseMessage": "Denne rolla er tildelt {{count}} brukarar og kan ikkje slettast.",
+    "roleInUseMessage": "Denne rolla er tildelt {{count}} brukar(ar) og kan ikkje slettast.",
     "userHiddenFromReportsLabel": "Skjult frå timeoversikt",
     "adUserSyncUserPhotoLabel": "Synkroniser profilbilete",
     "adUserSyncUserPhotoDescription": "Synkroniser profilbilete frå Azure Active Directory når brukarane loggar seg på.",
@@ -259,7 +259,11 @@
     "editPermissions": "Endre tilganger",
     "addPermissions": "Angi tilganger ",
     "editPermissionsDescription": "Klikk for å legge til eller endre tillatelser for denne rollen.",
-    "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine."
+    "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine.",
+    "roles": {
+      "confirmDeleteSubText": "Er du sikker på at du vil slette rollen {{name}}?",
+      "confirmDeleteTitle": "Slett rolle"
+    }
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
