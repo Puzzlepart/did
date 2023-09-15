@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { ITextFieldProps } from 'components/FormControl'
+import { IFormControlProps, ITextFieldProps } from 'components/FormControl'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
@@ -59,12 +59,11 @@ export function useUserForm(props: IUserFormProps) {
     onChange: (_event, value) => setModel({ ...model, [key]: value })
   })
 
-  return {
-    adSync,
-    model,
-    setModel,
-    onSave,
-    isFormValid,
-    inputProps
-  } as const
+  const submitProps: IFormControlProps['submitProps'] = {
+    text: t('common.save'),
+    onClick: onSave,
+    disabled: !isFormValid()
+  }
+
+  return { inputProps, model, setModel, submitProps }
 }
