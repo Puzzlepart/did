@@ -23,9 +23,10 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
       hidden={props.hidden}
     >
       {props.rows > 1 ? (
-        <Textarea {...props} className={styles.field} />
+        <Textarea {...props} className={styles.input} />
       ) : (
         <Input
+          className={styles.input}
           {..._.pick(
             props,
             'placeholder',
