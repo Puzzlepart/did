@@ -1,13 +1,15 @@
 import { FluentProvider } from '@fluentui/react-components'
-import React, { FC } from 'react'
+import { css } from '@fluentui/utilities'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { fluentLightTheme } from 'theme'
+import { StyledComponent } from 'types'
 import { PanelAction } from '../PanelAction'
 import { IBasePanelAction } from '../types'
 import styles from './Footer.module.scss'
 import { IFooterProps } from './types'
 
-export const Footer: FC<IFooterProps> = (props) => {
+export const Footer: StyledComponent<IFooterProps> = (props) => {
   const { t } = useTranslation()
   const actions = [
     ...props.actions,
@@ -21,10 +23,15 @@ export const Footer: FC<IFooterProps> = (props) => {
   return (
     <FluentProvider
       theme={fluentLightTheme}
-      className={styles.footer}
+      className={css(
+        Footer.className,
+        props.className,
+        props.sticky && styles.isSticky,
+        props.bordered && styles.hasBorder
+      )}
       hidden={props.hidden}
     >
-      <div className={styles.footerInner}>
+      <div className={css(styles.footerInner, props.padded && styles.padded)}>
         <div className={styles.actions}>
           {actions.map((action, index) => (
             <PanelAction key={index} {...action} />
@@ -35,6 +42,8 @@ export const Footer: FC<IFooterProps> = (props) => {
   )
 }
 
+Footer.displayName = 'Footer'
+Footer.className = styles.footer
 Footer.defaultProps = {
   actions: [],
   cancelAction: false

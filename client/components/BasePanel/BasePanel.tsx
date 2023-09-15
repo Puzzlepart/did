@@ -16,9 +16,7 @@ export const BasePanel: ReusableComponent<IBasePanelProps> = (props) => {
   const panelProps = useBasePanel(props)
   return (
     <Panel {...panelProps}>
-      <FluentProvider theme={webLightTheme} className={BasePanel.className}>
-        {props.children}
-      </FluentProvider>
+      <FluentProvider theme={webLightTheme}>{props.children}</FluentProvider>
     </Panel>
   )
 }

@@ -24,6 +24,9 @@ export function useBasePanel(props: IBasePanelProps) {
         actions={props.footerActions}
         onDismiss={props.onDismiss}
         cancelAction
+        sticky
+        padded
+        bordered
       />
     )
   }
