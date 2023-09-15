@@ -1,4 +1,9 @@
-import { Button, MenuTrigger } from '@fluentui/react-components'
+import {
+  Button,
+  MenuTrigger,
+  mergeClasses,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './DynamicButton.module.scss'
@@ -14,15 +19,32 @@ export const DynamicButton: ReusableComponent<IDynamicButtonProps> = (
   props
 ) => {
   const buttonProps = useDynamicButton(props)
-  if (props.menuTrigger) {
-    return (
-      <MenuTrigger disableButtonEnhancement>
-        <Button {...buttonProps}>{props.text}</Button>
-      </MenuTrigger>
-    )
+  switch (props.triggerFor) {
+    case 'Menu': {
+      return (
+        <MenuTrigger disableButtonEnhancement>
+          <Button {...buttonProps}>{props.text}</Button>
+        </MenuTrigger>
+      )
+    }
+    case 'Popover': {
+      return (
+        <PopoverTrigger disableButtonEnhancement>
+          <Button {...buttonProps}>{props.text}</Button>
+        </PopoverTrigger>
+      )
+    }
   }
   return (
-    <div className={DynamicButton.className} hidden={props.hidden}>
+    <div
+      className={mergeClasses(
+        DynamicButton.className,
+        props.className,
+        props.fadeIn === true && styles.fadeIn,
+        props.fadeIn === false && styles.fadeOut
+      )}
+      hidden={props.hidden}
+    >
       <Button {...buttonProps}>{props.text}</Button>
     </div>
   )

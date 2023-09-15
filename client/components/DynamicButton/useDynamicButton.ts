@@ -11,16 +11,22 @@ export function useDynamicButton(props: IDynamicButtonProps) {
       icon: getFluentIcon(props.iconName)
     }
   }
-  if (props.isPrimary) {
+  if (props.primary) {
     buttonProps = {
       ...buttonProps,
       appearance: 'primary'
     }
   }
-  if (props.isSecondary) {
+  if (props.secondary) {
     buttonProps = {
       ...buttonProps,
       appearance: 'secondary'
+    }
+  }
+  if (props.subtle) {
+    buttonProps = {
+      ...buttonProps,
+      appearance: 'subtle'
     }
   }
   return buttonProps

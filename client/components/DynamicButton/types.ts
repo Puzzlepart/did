@@ -9,7 +9,7 @@ type PartialButtonProps = Pick<
 
 export interface IDynamicButtonProps
   extends PartialButtonProps,
-    Pick<HTMLProps<HTMLDivElement>, 'hidden'> {
+    Pick<HTMLProps<HTMLDivElement>, 'hidden' | 'className'> {
   /**
    * Icon name to use for the button.
    */
@@ -24,15 +24,22 @@ export interface IDynamicButtonProps
   /**
    * Shortcut to set the button as primary.
    */
-  isPrimary?: boolean
+  primary?: boolean
 
   /**
    * Shortcut to set the button as secondary.
    */
-  isSecondary?: boolean
+  secondary?: boolean
 
   /**
-   * Renders the button as a menu trigger.
+   * Shortcut to set the button as subtle.
    */
-  menuTrigger?: boolean
+  subtle?: boolean
+
+  /**
+   * Renders the button as a trigge for `Menu` or `Popover`.
+   */
+  triggerFor?: 'Menu' | 'Popover'
+
+  fadeIn?: boolean
 }
