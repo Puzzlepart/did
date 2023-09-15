@@ -2,16 +2,20 @@ import { IDynamicButtonProps } from 'components'
 import { useMemo } from 'react'
 import { IFormControlProps } from './types'
 
-export function useFormControl(props: IFormControlProps) {
+export function useFormControl({ model, submitProps }: IFormControlProps) {
   const footerActions = useMemo<IDynamicButtonProps[]>(
     () => [
       {
-        ...props.submitProps,
-        hidden: !props.submitProps?.text,
+        ...submitProps,
+        onClick: (event) =>
+          submitProps?.onSave
+            ? submitProps?.onSave(model)
+            : submitProps.onClick(event),
+        hidden: !submitProps?.text,
         primary: true
       }
     ],
-    [props.submitProps?.disabled]
+    [submitProps?.disabled]
   )
 
   return { footerActions }

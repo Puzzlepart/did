@@ -4,9 +4,15 @@ import React from 'react'
 import _ from 'underscore'
 import { IAutocompleteControlProps } from '.'
 import styles from './AutocompleteControl.module.scss'
+import {
+  DISMISS_CALLOUT,
+  ON_KEY_DOWN,
+  ON_SEARCH,
+  RESET,
+  SET_SELECTED_INDEX
+} from './reducer/actions'
 import { SuggestionItem } from './SuggestionItem'
 import { useAutocompleteControl } from './useAutocompleteControl'
-import { DISMISS_CALLOUT, ON_KEY_DOWN, ON_SEARCH, SET_SELECTED_INDEX } from './reducer/actions'
 
 /**
  * Autocomplete component using `<SearchBox />`, `<Callout />`,
@@ -16,24 +22,25 @@ import { DISMISS_CALLOUT, ON_KEY_DOWN, ON_SEARCH, SET_SELECTED_INDEX } from './r
  */
 export const AutocompleteControl: FormInputControlComponent<IAutocompleteControlProps> =
   (props) => {
-    const {
-      ref,
-      state,
-      dispatch,
-      className,
-      suggestions
-    } = useAutocompleteControl(props)
+    const { ref, state, dispatch, suggestions } = useAutocompleteControl(props)
     return (
-      <div className={className} onKeyDown={event => dispatch(ON_KEY_DOWN({
-        key: event.key,
-        onEnter: (item) => props.onSelected(item)
-      }))}>
+      <>
         <Field
+          className={AutocompleteControl.className}
+          onKeyDown={(event) =>
+            dispatch(
+              ON_KEY_DOWN({
+                key: event.key,
+                onEnter: (item) => props.onSelected(item)
+              })
+            )
+          }
           label={props.label}
           description={props.description}
           required={props.required}
           disabled={props.disabled}
           errorMessage={props.errorMessage}
+          hidden={props.hidden}
         >
           <div ref={ref}>
             <DynamicSearchBox
@@ -44,6 +51,7 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
               placeholder={props.placeholder}
               disabled={props.disabled}
               onChange={(value) => dispatch(ON_SEARCH(value))}
+              onClear={() => dispatch(RESET())}
             />
           </div>
         </Field>
@@ -68,7 +76,7 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
                     key={item.key}
                     item={item}
                     itemIcons={props.itemIcons}
-                    onClick={() => dispatch(DISMISS_CALLOUT({ item, callback: props.onSelected }))}
+                    onClick={() => dispatch(DISMISS_CALLOUT({ item }))}
                     onMouseOver={() => dispatch(SET_SELECTED_INDEX(index))}
                   />
                 )}
@@ -76,7 +84,7 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
             </FocusZone>
           </div>
         </Callout>
-      </div>
+      </>
     )
   }
 

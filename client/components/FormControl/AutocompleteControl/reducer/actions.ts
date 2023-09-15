@@ -14,8 +14,6 @@ export const ON_KEY_DOWN = createAction<{
   onEnter: AutocompleteControlSelectCallback
 }>('ON_KEY_DOWN')
 export const SET_SELECTED_INDEX = createAction<number>('SET_SELECTED_INDEX')
-export const DISMISS_CALLOUT =
-  createAction<{
-    item: ISuggestionItem<any>
-    callback: (item: ISuggestionItem<any>) => void
-  }>('DISMISS_CALLOUT')
+export const DISMISS_CALLOUT = createAction<{
+  item: ISuggestionItem<any>
+}>('DISMISS_CALLOUT')

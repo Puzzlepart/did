@@ -23,8 +23,8 @@ export const Footer: StyledComponent<IFooterProps> = (props) => {
     >
       <div className={css(styles.footerInner, props.padded && styles.padded)}>
         <div className={styles.actions}>
-          {actions.map((action) => (
-            <DynamicButton key={action.text} {...action} />
+          {actions.map((action, index) => (
+            <DynamicButton key={index} {...action} />
           ))}
         </div>
       </div>

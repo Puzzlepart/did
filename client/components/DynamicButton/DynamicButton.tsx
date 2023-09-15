@@ -5,7 +5,7 @@ import {
   PopoverTrigger
 } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
-import React, { useMemo } from 'react'
+import React from 'react'
 import styles from './DynamicButton.module.scss'
 import { IDynamicButtonProps } from './types'
 import { useDynamicButton } from './useDynamicButton'
@@ -19,39 +19,37 @@ export const DynamicButton: ReusableComponent<IDynamicButtonProps> = (
   props
 ) => {
   const buttonProps = useDynamicButton(props)
-  return useMemo(() => {
-    switch (props.triggerFor) {
-      case 'Menu': {
-        return (
-          <MenuTrigger disableButtonEnhancement>
-            <Button {...buttonProps}>{props.text}</Button>
-          </MenuTrigger>
-        )
-      }
-      case 'Popover': {
-        return (
-          <PopoverTrigger disableButtonEnhancement>
-            <Button {...buttonProps}>{props.text}</Button>
-          </PopoverTrigger>
-        )
-      }
-      default: {
-        return (
-          <div
-            className={mergeClasses(
-              DynamicButton.className,
-              props.className,
-              props.fadeIn === true && styles.fadeIn,
-              props.fadeIn === false && styles.fadeOut
-            )}
-            hidden={props.hidden}
-          >
-            <Button {...buttonProps}>{props.text}</Button>
-          </div>
-        )
-      }
+  switch (props.triggerFor) {
+    case 'Menu': {
+      return (
+        <MenuTrigger disableButtonEnhancement>
+          <Button {...buttonProps}>{props.text}</Button>
+        </MenuTrigger>
+      )
     }
-  }, [props.disabled, props.hidden])
+    case 'Popover': {
+      return (
+        <PopoverTrigger disableButtonEnhancement>
+          <Button {...buttonProps}>{props.text}</Button>
+        </PopoverTrigger>
+      )
+    }
+    default: {
+      return (
+        <div
+          className={mergeClasses(
+            DynamicButton.className,
+            props.className,
+            props.fadeIn === true && styles.fadeIn,
+            props.fadeIn === false && styles.fadeOut
+          )}
+          hidden={props.hidden}
+        >
+          <Button {...buttonProps}>{props.text}</Button>
+        </div>
+      )
+    }
+  }
 }
 
 DynamicButton.displayName = 'DynamicButton'

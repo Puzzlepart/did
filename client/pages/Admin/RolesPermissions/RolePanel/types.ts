@@ -5,7 +5,7 @@ export interface IRolePanelProps extends IPanelProps {
   /**
    * Role to edit
    */
-  model?: Role
+  edit?: Role
 
   /**
    * On save callback

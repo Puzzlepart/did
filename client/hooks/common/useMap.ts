@@ -84,11 +84,54 @@ export function useMap<
   }
 }
 
+/**
+ * A typed map interface that provides type safety for keys and values.
+ * @template KeyType The type of the keys in the map.
+ * @template ObjectType The type of the object that contains the map.
+ * @template ValueType The type of the values in the map. Defaults to `any`.
+ */
 export interface TypedMap<KeyType, ObjectType, ValueType = any> {
+  /**
+   * Sets the entire map to the given `Map`.
+   *
+   * @param map The `Map` to set the typed map to.
+   */
   $set: (map: Map<KeyType, ValueType>) => void
+
+  /**
+   * The object representation of the map.
+   */
   $: ObjectType
+
+  /**
+   * Sets the value of the given key in the map.
+   *
+   * @param key The key to set the value for.
+   * @param value The value to set for the given key.
+   */
   set: (key: KeyType, value: ValueType) => void
+
+  /**
+   * Gets the value of the given key in the map.
+   *
+   * @param key The key to get the value for.
+   * @param defaultValue The default value to return if the key is not found in the map.
+   *
+   * @returns The value of the given key in the map, or the default value if the key is not found.
+   */
   value: <T = any>(key: KeyType, defaultValue?: T) => T
+
+  /**
+   * Resets the entire map to an empty `Map`.
+   */
   reset: () => void
+
+  /**
+   * Checks if all of the given keys are set in the map.
+   *
+   * @param keys The keys to check for in the map.
+   *
+   * @returns `true` if all of the given keys are set in the map, `false` otherwise.
+   */
   isSet: (...keys: KeyType[]) => boolean
 }

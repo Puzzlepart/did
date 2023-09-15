@@ -1,4 +1,5 @@
 import { List, Toast } from 'components'
+import { ListMenuItem } from 'components/List/ListToolbar'
 import { ITabProps } from 'components/Tabs/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +10,8 @@ import { useRoles } from './useRoles'
 
 export const RolesPermissions: StyledComponent<ITabProps> = () => {
   const { t } = useTranslation()
-  const { query, columns, panel, setPanel, toast } = useRoles()
+  const { query, columns, panel, setPanel, toast, confirmationDialog } =
+    useRoles()
   return (
     <div className={RolesPermissions.className}>
       <Toast {...toast} />
@@ -17,17 +19,11 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
         enableShimmer={query.loading}
         items={query?.data?.roles}
         columns={columns}
-        commandBar={{
-          items: [
-            {
-              key: 'ADD_NEW_ROLE',
-              text: t('admin.addNewRole'),
-              onClick: () => setPanel({ headerText: t('admin.addNewRole') }),
-              iconProps: { iconName: 'Permissions' }
-            }
-          ],
-          farItems: []
-        }}
+        menuItems={[
+          new ListMenuItem(t('admin.addNewRole'))
+            .setOnClick(() => setPanel({ headerText: t('admin.addNewRole') }))
+            .withIcon('Permissions')
+        ]}
       />
       {panel && (
         <RolePanel
@@ -39,6 +35,7 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
           onDismiss={() => setPanel(null)}
         />
       )}
+      {confirmationDialog}
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { Checkbox } from '@fluentui/react-components'
 import React from 'react'
-import _ from 'underscore'
 import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './CheckboxControl.module.scss'
@@ -19,7 +18,6 @@ export const CheckboxControl: FormInputControlComponent<ICheckboxControlProps> =
     return (
       <Field className={CheckboxControl.className} {...props}>
         <Checkbox
-          {..._.omit(props, 'label')}
           onChange={(event, data) => onChange(event, data.checked)}
           checked={props.model.value<boolean>(props.name, false)}
         />

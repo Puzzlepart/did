@@ -36,14 +36,13 @@ export function useApiTokens() {
       subText: t('admin.apiTokens.confirmDeleteSubText', token),
       responses: [[t('common.yes'), true, true], [t('common.no')]]
     })
-    if (response === true) {
-      await deleteApiToken({ variables: { name: token.name } })
-      setToast({
-        intent: 'success',
-        text: t('admin.tokenDeletedText', token)
-      })
-      refetch()
-    }
+    if (!response) return
+    await deleteApiToken({ variables: { name: token.name } })
+    setToast({
+      intent: 'success',
+      text: t('admin.tokenDeletedText', token)
+    })
+    refetch()
   }, [])
 
   const columns = useColumns({ onDelete })

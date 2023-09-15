@@ -16,10 +16,16 @@ import { useUserForm } from './useUserForm'
 export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   const { t } = useTranslation()
   const context = useContext(UsersContext)
-  const { inputProps, model, register, submitProps } = useUserForm(props)
+  const { isEditMode, inputProps, model, register, submitProps, onSelectUser } =
+    useUserForm(props)
 
   return (
-    <FormControl model={model} panelProps={props} submitProps={submitProps}>
+    <FormControl
+      model={model}
+      panelProps={{ ...props, scroll: true }}
+      submitProps={submitProps}
+      debug={true}
+    >
       <AutocompleteControl
         required={true}
         label={t('common.adUserLabel')}
@@ -30,11 +36,8 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           searchValue: u.displayName,
           data: u
         }))}
-        onSelected={({ data }) => {
-          for (const key in data) {
-            model.set(key as any, data[key])
-          }
-        }}
+        onSelected={onSelectUser}
+        hidden={isEditMode}
       />
       <InputControl
         {...register('surname')}

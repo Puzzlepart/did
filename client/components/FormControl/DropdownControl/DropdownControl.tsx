@@ -20,6 +20,7 @@ export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
         <Dropdown
           placeholder={props.placeholder}
           defaultValue={props.defaultValue}
+          value={props.model.value(props.name)?.name}
           onOptionSelect={onChange}
         >
           {_.map(props.values, (option, index) => (

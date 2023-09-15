@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useToast } from 'components/Toast'
-import { useState } from 'react'
+import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import $deleteRole from './deleteRole.gql'
@@ -18,14 +19,24 @@ export function useRoles() {
   const { t } = useTranslation()
   const [toast, setToast] = useToast(6000)
   const roleQuery = useQuery($roles)
-  const userRoleQuery = useQuery($users, { skip: true })
+  const userRoleQuery = useQuery($users, {
+    skip: true,
+    fetchPolicy: 'network-only'
+  })
   const [panel, setPanel] = useState<IRolePanelProps>(null)
   const [deleteRole] = useMutation($deleteRole)
+  const [confirmationDialog, getResponse] = useConfirmationDialog()
 
   /**
    * On delete role
    */
-  async function onDelete(role: Role) {
+  const onDelete = useCallback(async (role: Role) => {
+    const response = await getResponse({
+      title: t('admin.roles.confirmDeleteTitle'),
+      subText: t('admin.roles.confirmDeleteSubText', role),
+      responses: [[t('common.yes'), true, true], [t('common.no')]]
+    })
+    if (!response) return
     const { data } = await userRoleQuery.refetch({ query: { role: role.name } })
     if (data?.users?.length > 0) {
       setToast({
@@ -48,15 +59,16 @@ export function useRoles() {
         intent: 'success'
       })
     }
-  }
+  }, [])
 
-  const columns = useColumns({ setPanel, onDelete })
+  const columns = useColumns(setPanel, onDelete)
 
   return {
+    confirmationDialog,
     query: roleQuery,
     columns,
     panel,
     setPanel,
     toast
-  } as const
+  }
 }

@@ -1,7 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { useEffect, useMemo, useRef } from 'react'
-import { AutocompleteControl } from './AutocompleteControl'
-import styles from './AutocompleteControl.module.scss'
 import { useAutocompleteControlReducer } from './reducer'
 import { INIT, RESET } from './reducer/actions'
 import { IAutocompleteControlProps } from './types'
@@ -24,7 +22,7 @@ import { IAutocompleteControlProps } from './types'
  * @category AutocompleteControl
  */
 export function useAutocompleteControl(props: IAutocompleteControlProps) {
-  const [state, dispatch] = useAutocompleteControlReducer()
+  const [state, dispatch] = useAutocompleteControlReducer(props)
 
   useEffect(
     () => dispatch(INIT({ props })),
@@ -34,11 +32,6 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
   useEffect(() => {
     if (props.selectedKey === null) dispatch(RESET())
   }, [props.selectedKey])
-
-  const classNames = [
-    AutocompleteControl.className,
-    props.errorMessage && styles.hasError
-  ]
 
   const suggestions = useMemo(
     () =>
@@ -55,7 +48,6 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
     state,
     dispatch,
     ref,
-    className: classNames.join(' '),
     suggestions
   }
 }

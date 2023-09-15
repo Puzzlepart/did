@@ -1,11 +1,11 @@
-import { useMutation } from '@apollo/client'
-import { IFormControlProps } from 'components'
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import {
+  IFormControlProps,
+  useFormControlModel,
+  useFormControls
+} from 'components'
 import { RoleInput } from 'types'
-import _ from 'underscore'
-import $addOrUpdateRole from './addOrUpdateRole.gql'
 import { IRolePanelProps } from './types'
+import { useRolePanelSubmit } from './useRolePanelSubmit'
 
 /**
  * Component logic hook for `<RolePanel />`
@@ -13,38 +13,17 @@ import { IRolePanelProps } from './types'
  * @category Roles
  */
 export function useRolePanel(props: IRolePanelProps) {
-  const { t } = useTranslation()
-  const [addOrUpdateRole] = useMutation($addOrUpdateRole)
-  const [model, setModel] = useState<RoleInput>({})
-  const isSaveDisabled =
-    _.isEmpty(model.name) ||
-    _.isEmpty(model.icon) ||
-    _.isEqual(model.permissions, props.model?.permissions)
+  const model = useFormControlModel<keyof RoleInput, RoleInput>(props.edit)
+  const submitProps = useRolePanelSubmit(props, model)
+  const register = useFormControls<keyof RoleInput>(model)
 
-  useEffect(() => {
-    if (props.model) setModel(props.model)
-  }, [props.model])
-
-  /**
-   * On save role
-   */
-  async function onSave() {
-    await addOrUpdateRole({
-      variables: {
-        role: _.omit(model, '__typename'),
-        update: !!props.model
-      }
-    })
-    props.onSave()
+  const panelProps: IFormControlProps['panelProps'] = {
+    headerText: props.headerText,
+    isOpen: true,
+    onDismiss: props.onDismiss
   }
 
-  const submitProps: IFormControlProps['submitProps'] = {
-    text: t('common.save'),
-    onClick: onSave,
-    disabled: isSaveDisabled
-  }
+  const isEditMode = !!props.edit
 
-  const isEdit = !!props.model
-
-  return { model, setModel, submitProps, isEdit }
+  return { model, register, submitProps, panelProps, isEditMode }
 }

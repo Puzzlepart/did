@@ -1,20 +1,27 @@
 import { Icon } from '@fluentui/react'
 import { DeleteLink, EditLink } from 'components'
 import { PermissionList } from 'components/PermissionList'
-import React from 'react'
+import React, { Dispatch } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
+import { IRolePanelProps } from './RolePanel'
 import styles from './RolesPermissions.module.scss'
 
 /**
  * Columns hook for Roles
+ *
+ * @param setPanel - A callback function to set the panel state
+ * @param onDelete - A callback function to delete a role
  */
-export function useColumns({ setPanel, onDelete }) {
+export function useColumns(
+  setPanel: Dispatch<React.SetStateAction<IRolePanelProps>>,
+  onDelete: (role: Role) => void
+) {
   const { t } = useTranslation()
   return [
-    createColumnDef('name', '', { maxWidth: 150 }, (role: Role) => {
+    createColumnDef<Role>('name', '', { maxWidth: 150 }, (role) => {
       return (
         <div className={styles.nameColumn}>
           <Icon className={styles.icon} iconName={role.icon} />
@@ -27,17 +34,17 @@ export function useColumns({ setPanel, onDelete }) {
       isMultiline: true,
       data: { hidden: isMobile }
     }),
-    createColumnDef(
+    createColumnDef<Role>(
       'permissions',
       t('admin.permissonsLabel'),
       { minWidth: 400, maxWidth: 400, isMultiline: true },
-      (role: Role) => <PermissionList permissionIds={role.permissions} />
+      (role) => <PermissionList permissionIds={role.permissions} />
     ),
-    createColumnDef(
+    createColumnDef<Role>(
       null,
       null,
       { minWidth: 100, maxWidth: 100 },
-      (role: Role) => (
+      (role) => (
         <div style={{ display: 'flex' }}>
           <EditLink
             style={{ marginRight: 12 }}
@@ -45,7 +52,7 @@ export function useColumns({ setPanel, onDelete }) {
             onClick={() => {
               setPanel({
                 headerText: t('admin.editRole'),
-                model: role
+                edit: role
               })
             }}
           />

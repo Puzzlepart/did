@@ -3,6 +3,7 @@ import { css } from '@fluentui/react/lib/Utilities'
 import { UserMessage } from 'components/UserMessage'
 import React from 'react'
 import { StyledComponent } from 'types'
+import _ from 'underscore'
 import { FieldDescription } from '../FieldDescription'
 import styles from './Field.module.scss'
 import { IFieldProps } from './types'
@@ -14,7 +15,10 @@ import { IFieldProps } from './types'
  * @category Reusable Component
  */
 export const Field: StyledComponent<IFieldProps> = (props) => (
-  <div className={css(Field.className, props.className)} ref={props.ref}>
+  <div
+    className={css(Field.className, props.className)}
+    {..._.pick(props, 'hidden', 'onKeyDown')}
+  >
     <div className={styles.label}>
       <Label
         required={props.required}

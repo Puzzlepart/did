@@ -1,7 +1,6 @@
-import { current } from '@reduxjs/toolkit'
 import { useReducer } from 'hooks/useReducer'
 import _ from 'underscore'
-import { IAutocompleteControlState } from '../types'
+import { IAutocompleteControlProps, IAutocompleteControlState } from '../types'
 import {
   DISMISS_CALLOUT,
   INIT,
@@ -12,9 +11,15 @@ import {
 } from './actions'
 
 /**
- * Use AutocompleteControl reducer
+ * Hook that returns a reducer and its initial state for the AutocompleteControl component.
+ *
+ * @param props - Props for the AutocompleteControl component.
+ *
+ * @returns A tuple containing the state and dispatch function for the reducer.
  */
-export function useAutocompleteControlReducer() {
+export function useAutocompleteControlReducer({
+  onSelected
+}: IAutocompleteControlProps) {
   const initialState: IAutocompleteControlState = {
     value: '',
     selectedItem: null,
@@ -37,8 +42,7 @@ export function useAutocompleteControlReducer() {
         state.selectedItem = null
         state.value = ''
         state.suggestions = []
-        // eslint-disable-next-line no-console
-        console.log('RESET', current(state))
+        onSelected(state.selectedItem)
       })
       .addCase(ON_SEARCH, (state, { payload }) => {
         state.selectedIndex = -1
@@ -46,9 +50,16 @@ export function useAutocompleteControlReducer() {
         state.suggestions =
           state.value.length > 0
             ? state.items.filter((index) =>
-              index.searchValue.toLowerCase().includes(payload.toLowerCase())
-            )
+                index.searchValue.toLowerCase().includes(payload.toLowerCase())
+              )
             : []
+        if (state.suggestions.length === 1) {
+          state.selectedIndex = 0
+          state.selectedItem = state.suggestions[0]
+          state.value = state.selectedItem.text
+          state.suggestions = []
+          onSelected(state.selectedItem)
+        }
       })
       .addCase(ON_KEY_DOWN, (state, { payload }) => {
         switch (payload.key) {
@@ -62,10 +73,12 @@ export function useAutocompleteControlReducer() {
           }
           case 'Enter': {
             {
-              const item = state.suggestions[state.selectedIndex]
-              if (item) payload.onEnter(JSON.parse(JSON.stringify(item)))
               state.suggestions = []
-              state.value = item.text
+              const item = state.suggestions[state.selectedIndex]
+              if (item) {
+                payload.onEnter(JSON.parse(JSON.stringify(item)))
+                state.value = item.text
+              }
             }
             break
           }
@@ -79,7 +92,7 @@ export function useAutocompleteControlReducer() {
         if (payload?.item) {
           state.value = payload.item.text
           state.selectedItem = payload.item
-          payload.callback(payload.item)
+          onSelected(payload.item)
         }
       })
   )

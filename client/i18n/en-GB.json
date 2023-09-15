@@ -259,7 +259,11 @@
     "editPermissions": "Edit permissions",
     "addPermissions": "Set permissions",
     "editPermissionsDescription": "Click to add or modify permissions for this role.",
-    "userHiddenFromReportsDescription": "This setting allows you to designate the user as \"hidden\" from your reports. When a user is marked as hidden, their activity and data will not be included in any generated reports or analytics. This feature is particularly useful for scenarios where you have administrative users or special accounts that should not impact your reporting metrics."
+    "userHiddenFromReportsDescription": "This setting allows you to designate the user as \"hidden\" from your reports. When a user is marked as hidden, their activity and data will not be included in any generated reports or analytics. This feature is particularly useful for scenarios where you have administrative users or special accounts that should not impact your reporting metrics.",
+    "roles": {
+      "confirmDeleteSubText": "Are you sure you want to delete the role {{name}}?",
+      "confirmDeleteTitle": "Delete role"
+    }
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",

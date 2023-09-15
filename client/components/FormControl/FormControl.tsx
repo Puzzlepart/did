@@ -3,7 +3,7 @@ import { BasePanel } from 'components/BasePanel'
 import { JsonDebug } from 'components/JsonDebug'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { FormControlContext } from './context'
 import styles from './FormControl.module.scss'
 import { IFormControlProps } from './types'
@@ -22,6 +22,12 @@ import { useFormControl } from './useFormControl'
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   const { footerActions } = useFormControl(props)
+  const content: ReactElement = (
+    <>
+      <div className={FormControl.className}>{props.children}</div>
+      {props.debug && <JsonDebug obj={props.model} />}
+    </>
+  )
   return (
     <FormControlContext.Provider value={{ model: props.model }}>
       {props.panelProps ? (
@@ -30,12 +36,11 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
           {...props.panelProps}
           footerActions={footerActions}
         >
-          <div className={FormControl.className}>{props.children}</div>
+          {content}
         </BasePanel>
       ) : (
-        <div className={FormControl.className}>{props.children}</div>
+        content
       )}
-      {props.debug && <JsonDebug obj={props.model} />}
       <Toast {...props.submitProps?.toast} />
     </FormControlContext.Provider>
   )

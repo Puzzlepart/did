@@ -17,7 +17,6 @@ export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (
   return (
     <AutocompleteControl
       {...props}
-      key='SearchCustomer'
       disabled={disabled}
       items={items}
       itemIcons={{

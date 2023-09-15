@@ -5,6 +5,7 @@ import {
   useFormControls
 } from 'components/FormControl'
 import get from 'get-value'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import _ from 'underscore'
@@ -14,7 +15,7 @@ import { useUserFormSubmit } from './useUserFormSubmit'
 export function useUserForm(props: IUserFormProps) {
   const { t } = useTranslation()
   const appContext = useAppContext()
-  const model = useFormControlModel<keyof User>(props.user || {})
+  const model = useFormControlModel<keyof User, User>(props.user)
   const register = useFormControls<keyof User>(model)
   const submitProps = useUserFormSubmit(props, model)
 
@@ -31,5 +32,17 @@ export function useUserForm(props: IUserFormProps) {
     disabled: _.contains(adSyncProperties, key)
   })
 
-  return { inputProps, model, register, submitProps }
+  const onSelectUser = useCallback((item) => {
+    if (item?.data) {
+      for (const key in item.data) {
+        model.set(key as any, item.data[key])
+      }
+    } else {
+      model.reset()
+    }
+  }, [])
+
+  const isEditMode = !!props.user
+
+  return { isEditMode, inputProps, model, register, submitProps, onSelectUser }
 }

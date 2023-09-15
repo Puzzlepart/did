@@ -6,6 +6,7 @@ import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
 import { StyledComponent } from 'types'
 import { IFieldProps } from './Field'
+import { useFormControlModel } from './useFormControlModel'
 
 export type UseFormOptions = {
   /**
@@ -37,8 +38,22 @@ export type UseFormOptions = {
 }
 
 interface ISubmitProps extends Pick<ButtonProps, 'onClick' | 'disabled'> {
+  /**
+   * Text to show on the submit button.
+   */
   text: string
+
+  /**
+   * Toast props
+   */
   toast?: IToastProps
+
+  /**
+   * On save callback with the model passed as an argument.
+   *
+   * @param model The model used by the form control.
+   */
+  onSave?: (model: ReturnType<typeof useMap>) => void
 }
 
 export interface IFormControlPanelProps extends IBasePanelProps {
@@ -77,7 +92,8 @@ export interface IFormControlProps
 export interface FormInputControlBase<TOptions = any, KeyType = string>
   extends IFieldProps {
   /**
-   * The `name` attribute is required
+   * The `name` attribute is required for the Form Control
+   * to work properly.
    */
   name?: KeyType
 
@@ -96,11 +112,11 @@ export interface FormInputControlBase<TOptions = any, KeyType = string>
   options?: TOptions
 }
 
-export type FormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
-  props?: TProps,
-  model?: TModel,
-  options?: TOptions
-) => ISubmitProps
+export type FormSubmitHook<
+  TProps = {},
+  TModel = ReturnType<typeof useFormControlModel>,
+  TOptions = {}
+> = (props?: TProps, model?: TModel, options?: TOptions) => ISubmitProps
 
 /**
  * A styled component that represents a form input control.

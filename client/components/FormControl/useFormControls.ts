@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { useMap } from 'hooks/common/useMap'
 import { useCallback } from 'react'
-import { convertToMap } from 'utils'
 import { FormInputControlBase } from './types'
 
 /**
@@ -55,15 +54,4 @@ export function useFormControls<KeyType = any>(
       registerControl<TOptions, KeyType>(name, model, options),
     [model]
   )
-}
-
-/**
- * Returns a map of form control values and their corresponding update functions.
- *
- * @param initialModel An optional object containing initial form control values.
- *
- * @returns A map of form control values and their corresponding update functions.
- */
-export function useFormControlModel<KeyType = any>(initialModel = {}) {
-  return useMap<KeyType>(convertToMap(initialModel))
 }
