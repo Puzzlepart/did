@@ -1,5 +1,3 @@
 export * from './AutocompleteControl'
 export * from './SuggestionItem'
 export * from './types'
-export * from './useAutocompleteControl'
-export * from './useAutocompleteControlEvents'

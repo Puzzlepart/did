@@ -1,11 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
-import { INIT, RESET } from './actions'
+import { useEffect, useMemo, useRef } from 'react'
 import { AutocompleteControl } from './AutocompleteControl'
 import styles from './AutocompleteControl.module.scss'
-import { useAutocompleteReducer } from './reducer'
+import { useAutocompleteControlReducer } from './reducer'
+import { INIT, RESET } from './reducer/actions'
 import { IAutocompleteControlProps } from './types'
-import { useAutocompleteControlEvents } from './useAutocompleteControlEvents'
 
 /**
  * Component logic hook for AutocompleteControl component. This hook is responsible for
@@ -25,15 +24,9 @@ import { useAutocompleteControlEvents } from './useAutocompleteControlEvents'
  * @category AutocompleteControl
  */
 export function useAutocompleteControl(props: IAutocompleteControlProps) {
-  const [state, dispatch] = useAutocompleteReducer({
-    value: '',
-    selectedItem: null,
-    selectedIndex: -1,
-    suggestions: []
-  })
-  const ref = useRef<HTMLDivElement>()
+  const [state, dispatch] = useAutocompleteControlReducer()
 
-  useLayoutEffect(
+  useEffect(
     () => dispatch(INIT({ props })),
     [props.defaultSelectedKey, props.items]
   )
@@ -56,17 +49,13 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
     [state.suggestions, state.selectedIndex]
   )
 
-  const { onDismissCallout, onSetSelected, onSearch, onKeyDown } =
-    useAutocompleteControlEvents({ props, dispatch })
+  const ref = useRef<HTMLDivElement>(null)
 
   return {
     state,
+    dispatch,
     ref,
     className: classNames.join(' '),
-    suggestions,
-    onDismissCallout,
-    onSetSelected,
-    onSearch,
-    onKeyDown
+    suggestions
   }
 }

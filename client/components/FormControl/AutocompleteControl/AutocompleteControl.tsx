@@ -6,6 +6,7 @@ import { IAutocompleteControlProps } from '.'
 import styles from './AutocompleteControl.module.scss'
 import { SuggestionItem } from './SuggestionItem'
 import { useAutocompleteControl } from './useAutocompleteControl'
+import { DISMISS_CALLOUT, ON_KEY_DOWN, ON_SEARCH, SET_SELECTED_INDEX } from './reducer/actions'
 
 /**
  * Autocomplete component using `<SearchBox />`, `<Callout />`,
@@ -18,15 +19,15 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
     const {
       ref,
       state,
+      dispatch,
       className,
-      suggestions,
-      onDismissCallout,
-      onSetSelected,
-      onSearch,
-      onKeyDown
+      suggestions
     } = useAutocompleteControl(props)
     return (
-      <div className={className} onKeyDown={onKeyDown}>
+      <div className={className} onKeyDown={event => dispatch(ON_KEY_DOWN({
+        key: event.key,
+        onEnter: (item) => props.onSelected(item)
+      }))}>
         <Field
           label={props.label}
           description={props.description}
@@ -37,11 +38,12 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
           <div ref={ref}>
             <DynamicSearchBox
               key={state.selectedItem?.key}
+              value={state.selectedItem?.text}
               className={styles.field}
               defaultValue={state.value}
               placeholder={props.placeholder}
               disabled={props.disabled}
-              onChange={onSearch}
+              onChange={(value) => dispatch(ON_SEARCH(value))}
             />
           </div>
         </Field>
@@ -49,8 +51,8 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
           gapSpace={2}
           alignTargetEdge={true}
           hidden={_.isEmpty(state.suggestions)}
-          onDismiss={() => onDismissCallout(null)}
-          calloutMaxHeight={props.maxHeight || 450}
+          onDismiss={() => dispatch(DISMISS_CALLOUT(null))}
+          calloutMaxHeight={props.maxHeight ?? 450}
           style={{ width: ref.current?.clientWidth }}
           target={ref?.current}
           directionalHint={5}
@@ -66,8 +68,8 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
                     key={item.key}
                     item={item}
                     itemIcons={props.itemIcons}
-                    onClick={() => onDismissCallout(item)}
-                    onMouseOver={() => onSetSelected(index)}
+                    onClick={() => dispatch(DISMISS_CALLOUT({ item, callback: props.onSelected }))}
+                    onMouseOver={() => dispatch(SET_SELECTED_INDEX(index))}
                   />
                 )}
               />
