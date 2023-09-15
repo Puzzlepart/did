@@ -4,7 +4,6 @@ import { InputField } from './InputField'
 import { IInputControlProps } from './types'
 import { useInputControlChange } from './useInputControlChange'
 
-
 /**
  * Text field based on `<TextField />` from [@fluentui/react](@fluentui/react)
  * but also supports binding to a `model`

@@ -8,7 +8,10 @@ import { IInputControlProps } from './types'
  * @param value - Value
  * @param options - Options
  */
-function transformValue(value: any, { type, options }: IInputControlProps) {
+function transformValue(
+  value: any,
+  { type, options = {} }: IInputControlProps
+) {
   switch (type) {
     case 'number': {
       return Number.parseInt(value)

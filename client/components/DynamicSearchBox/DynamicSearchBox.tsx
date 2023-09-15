@@ -26,7 +26,7 @@ export const DynamicSearchBox: StyledComponent<IDynamicSearchBoxProps> = (
     <SearchBox
       className={mergeClasses(DynamicSearchBox.className, props.className)}
       placeholder={props.placeholder}
-      value={searchTerm}
+      value={props.value ?? searchTerm}
       onChange={(_event, data) => {
         setSearchTerm(data.value)
       }}

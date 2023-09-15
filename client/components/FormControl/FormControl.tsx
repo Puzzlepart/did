@@ -1,7 +1,5 @@
 import { PanelType } from '@fluentui/react'
 import { BasePanel } from 'components/BasePanel'
-import { Footer } from 'components/BasePanel/Footer/Footer'
-import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { JsonDebug } from 'components/JsonDebug'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
@@ -26,34 +24,19 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   const { footerActions } = useFormControl(props)
   return (
     <FormControlContext.Provider value={{ model: props.model }}>
-      <div className={FormControl.className}>
-        <ConditionalWrapper
-          condition={!!props.panelProps}
-          wrapper={(children) => (
-            <BasePanel
-              type={PanelType.medium}
-              {...props.panelProps}
-              footerActions={footerActions}
-            >
-              {children}
-            </BasePanel>
-          )}
+      {props.panelProps ? (
+        <BasePanel
+          type={PanelType.medium}
+          {...props.panelProps}
+          footerActions={footerActions}
         >
-          <div className={styles.formControlContent}>{props.children}</div>
-          <Footer
-            hidden={!!props.panelProps}
-            actions={[
-              {
-                ...props.submitProps,
-                hidden: !props.submitProps?.text,
-                appearance: 'primary'
-              }
-            ]}
-          />
-          {props.debug && <JsonDebug obj={props.model} />}
-        </ConditionalWrapper>
-        <Toast {...props.submitProps?.toast} />
-      </div>
+          <div className={FormControl.className}>{props.children}</div>
+        </BasePanel>
+      ) : (
+        <div className={FormControl.className}>{props.children}</div>
+      )}
+      {props.debug && <JsonDebug obj={props.model} />}
+      <Toast {...props.submitProps?.toast} />
     </FormControlContext.Provider>
   )
 }

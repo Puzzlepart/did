@@ -14,7 +14,7 @@ import { IFieldProps } from './types'
  * @category Reusable Component
  */
 export const Field: StyledComponent<IFieldProps> = (props) => (
-  <div className={css(Field.className, props.className)}>
+  <div className={css(Field.className, props.className)} ref={props.ref}>
     <div className={styles.label}>
       <Label
         required={props.required}

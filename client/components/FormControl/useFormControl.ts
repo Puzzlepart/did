@@ -1,17 +1,17 @@
-import { IBasePanelAction } from 'components'
+import { IDynamicButtonProps } from 'components'
 import { useMemo } from 'react'
 import { IFormControlProps } from './types'
 
 export function useFormControl(props: IFormControlProps) {
-  const footerActions = useMemo<IBasePanelAction[]>(
+  const footerActions = useMemo<IDynamicButtonProps[]>(
     () => [
       {
         ...props.submitProps,
         hidden: !props.submitProps?.text,
-        appearance: 'primary'
+        primary: true
       }
     ],
-    [props.submitProps]
+    [props.submitProps?.disabled]
   )
 
   return { footerActions }

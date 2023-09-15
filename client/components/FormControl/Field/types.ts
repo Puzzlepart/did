@@ -5,7 +5,7 @@ import { HTMLProps } from 'react'
  * Props for the Field component.
  */
 export interface IFieldProps
-  extends Pick<HTMLProps<HTMLDivElement>, 'className' | 'hidden'>,
+  extends Pick<HTMLProps<HTMLDivElement>, 'className' | 'hidden' | 'ref'>,
     Pick<LabelProps, 'weight' | 'disabled'> {
   /**
    * The label for the field.

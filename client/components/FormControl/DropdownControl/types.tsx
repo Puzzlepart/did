@@ -22,7 +22,7 @@ export type DropdownControlOptions = {
  */
 export interface IDropdownControlProps
   extends FormInputControlBase<DropdownControlOptions>,
-    Pick<DropdownProps, 'placeholder'> {
+    Pick<DropdownProps, 'defaultValue' | 'placeholder'> {
   /**
    * An array of options to display in the dropdown.
    */
