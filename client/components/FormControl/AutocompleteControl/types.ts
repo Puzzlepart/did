@@ -1,7 +1,7 @@
+import { SearchBoxProps } from '@fluentui/react-search-preview'
 import { CSSProperties } from 'react'
 import { FormInputControlBase } from '../types'
 import { ISuggestionItem } from './SuggestionItem/types'
-import { SearchBoxProps } from '@fluentui/react-search-preview'
 
 /**
  * @ignore
@@ -20,7 +20,9 @@ export type AutocompleteControlItemIcons = {
 /**
  * @category Autocomplete
  */
-export interface IAutocompleteControlProps<T = any> extends FormInputControlBase, Pick<SearchBoxProps, 'placeholder' |'autoFocus'> {
+export interface IAutocompleteControlProps<T = any>
+  extends FormInputControlBase,
+    Pick<SearchBoxProps, 'placeholder' | 'autoFocus'> {
   /**
    * Provide the key of the selected item. This will be used to clear
    * the selection when the provided key is `null`.
