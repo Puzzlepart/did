@@ -1,64 +1,57 @@
-import { Dropdown, TextField } from '@fluentui/react'
-import { FormControl } from 'components/FormControl'
+import { PanelType } from '@fluentui/react'
+import {
+  DropdownControl,
+  DropdownControlOptions,
+  FormControl,
+  TextControl
+} from 'components/FormControl'
 import { DateObject } from 'DateUtils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import _ from 'underscore'
-import s from 'underscore.string'
 import { EditPermissions } from '../../../Admin/RolesPermissions'
 import { IApiTokenFormProps } from './types'
 import { useApiTokenForm } from './useApiTokenForm'
 
 export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
   const { t } = useTranslation()
-  const { token, setToken, expiryOptions, onAddApiToken } =
-    useApiTokenForm(props)
+  const { expiryOptions, submitProps, model, register } = useApiTokenForm(props)
 
   return (
     <FormControl
-      submitProps={{
-        text: t('common.save'),
-        onClick: onAddApiToken,
-        disabled:
-          s.isBlank(token.name) ||
-          !token.expires ||
-          _.isEmpty(token.permissions)
-      }}
+      model={model}
+      submitProps={submitProps}
       panelProps={{
         headerText: t('admin.apiTokens.addNew'),
         isOpen: props.isOpen,
-        isLightDismiss: true,
+        type: PanelType.smallFixedFar,
         onDismiss: props.onDismiss
       }}
     >
-      <TextField
+      <TextControl
+        {...register('name')}
         label={t('admin.apiTokens.tokenNameLabel')}
         required={true}
-        onChange={(_event, value) => setToken({ ...token, name: value })}
       />
-      <Dropdown
+      <DropdownControl
+        {...register<DropdownControlOptions>('expires', {
+          preTransformValue: ({ optionValue }) =>
+            new DateObject().add(optionValue).jsDate
+        })}
         label={t('admin.apiTokens.tokenExpiryLabel')}
         required={true}
-        onChange={(_event, { data }) =>
-          setToken({
-            ...token,
-            expires: new DateObject().add(data).jsDate
-          })
-        }
-        options={Object.keys(expiryOptions).map((key) => ({
-          key,
-          data: key,
-          text: expiryOptions[key]
+        values={Object.keys(expiryOptions).map((value) => ({
+          value,
+          text: expiryOptions[value]
         }))}
       />
       <EditPermissions
         api={true}
         label={t('admin.apiTokens.permissionsTitle')}
         description={t('admin.apiTokens.editPermissionsDescription')}
-        selectedPermissions={token.permissions}
+        selectedPermissions={model.value('permissions')}
         onChange={(selectedPermissions) =>
-          setToken({ ...token, permissions: selectedPermissions })
+          model.set('permissions', selectedPermissions)
         }
       />
     </FormControl>

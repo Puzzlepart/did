@@ -1,11 +1,9 @@
-import { Icon } from '@fluentui/react'
-import { List, Toast, UserMessage } from 'components'
+import { List, Toast } from 'components'
+import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
+import { ApiKeyDisplay } from './ApiKeyDisplay'
 import { ApiTokenForm } from './ApiTokenForm'
 import styles from './ApiTokens.module.scss'
 import { useApiTokens } from './useApiTokens'
@@ -22,44 +20,29 @@ import { useApiTokens } from './useApiTokens'
 export const ApiTokens: TabComponent = () => {
   const { t } = useTranslation()
   const {
-    query,
+    items,
     form,
     setForm,
     apiKey,
     columns,
     onKeyAdded,
     confirmationDialog,
-    toast
+    toast,
+    onKeyCopied
   } = useApiTokens()
 
   return (
     <div className={ApiTokens.className}>
       <Toast {...toast} />
-      {!_.isNull(apiKey) && (
-        <FadeIn className={styles.apiKey}>
-          <UserMessage intent='success'>
-            <span className={styles.text}>{apiKey}</span>
-            <span className={styles.copy}>
-              <CopyToClipboard text={apiKey}>
-                <Icon iconName='Copy' />
-              </CopyToClipboard>
-            </span>
-          </UserMessage>
-        </FadeIn>
-      )}
+      <ApiKeyDisplay apiKey={apiKey} onKeyCopied={onKeyCopied} />
       <List
         columns={columns}
-        items={query?.data?.tokens}
-        commandBar={{
-          items: [
-            {
-              key: 'ADD_NEW_TOKEN',
-              text: t('admin.apiTokens.addNew'),
-              iconProps: { iconName: 'Add' },
-              onClick: () => setForm({ isOpen: true })
-            }
-          ]
-        }}
+        items={items}
+        menuItems={[
+          new ListMenuItem(t('admin.apiTokens.addNew'))
+            .withIcon('Add')
+            .setOnClick(() => setForm({ isOpen: true }))
+        ]}
       />
       {form.isOpen && (
         <ApiTokenForm

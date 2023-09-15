@@ -6,15 +6,15 @@
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
-import $date from 'DateUtils'
 import 'core-js/stable'
-import { fetchUserContext } from './graphql-queries/user'
+import $date from 'DateUtils'
 import i18next from 'i18next'
 import React from 'react'
 import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { App } from './app'
 import { client } from './graphql'
+import { fetchUserContext } from './graphql-queries/user'
 import './i18n'
 import { Themed } from './theme/Themed'
 
