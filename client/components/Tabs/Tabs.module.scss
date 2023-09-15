@@ -1,3 +1,21 @@
 .tabs {
   margin: 0 0 8px 0;
+
+  .list {
+    padding: 0 0 12px 0;
+  }
+
+  &.vertical {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+
+    .list {
+      margin: 0;
+    }
+
+    .container {
+      flex: 1;
+    }
+  }
 }

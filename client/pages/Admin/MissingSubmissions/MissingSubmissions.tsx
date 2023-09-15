@@ -7,7 +7,7 @@ export const MissingSubmissions: TabComponent = () => {
   const { tabs } = useMissingSubmissions()
   return (
     <div className={MissingSubmissions.className}>
-      <Tabs items={tabs} />
+      <Tabs items={tabs} vertical />
     </div>
   )
 }

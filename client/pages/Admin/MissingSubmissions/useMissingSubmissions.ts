@@ -8,10 +8,8 @@ import { any } from 'underscore'
 import { List } from './List'
 import { IMissingSubmissionUser } from './MissingSubmissionUser'
 import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
-
-export interface IMissingSubmissionPeriod extends IDatePeriod {
-  users?: IMissingSubmissionUser[]
-}
+import { IMissingSubmissionPeriod } from './types'
+import { arrayMap } from 'utils'
 
 /**
  * Maps `User` to `IMissingSubmissionUser`. We don't want to extend
@@ -21,15 +19,17 @@ export interface IMissingSubmissionPeriod extends IDatePeriod {
  * @param periods - Date periods
  * @returns
  */
-function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
-  return {
-    name: user.displayName,
-    secondaryText: user.mail,
-    imageUrl: user.photo?.base64,
-    email: user.mail,
-    periods
-  } as IMissingSubmissionUser
-}
+const mapUser = (user: User, periods?: IDatePeriod[]): IMissingSubmissionUser => ({
+  name: user.displayName,
+  secondaryText: user.mail,
+  avatar: {
+    image: {
+      src: user.photo?.base64
+    }
+  },
+  email: user.mail,
+  periods
+})
 
 /**
  * Get date periods with missing submissions.
@@ -37,25 +37,19 @@ function mapUser(user: User, periods?: IDatePeriod[]): IMissingSubmissionUser {
  * @param data - Data returned by `useMissingSubmissionsQuery`
  * @param datePeriods - Date periods
  */
-function getPeriodsWithMissingSubmissions(
-  data: ReturnType<typeof useMissingSubmissionsQuery>,
+const getPeriodsWithMissingSubmissions = (
+  [periods, users]: ReturnType<typeof useMissingSubmissionsQuery>,
   datePeriods: IDatePeriod[]
-): IMissingSubmissionPeriod[] {
-  return datePeriods.map((p) => {
-    return {
-      ...p,
-      users: data.users
-        .filter((user) => {
-          return !any(
-            data.periods,
-            ({ userId, week, month, year }) =>
-              userId === user.id && [week, month, year].join('_') === p.id
-          )
-        })
-        .map((user) => mapUser(user))
-    }
-  })
-}
+): IMissingSubmissionPeriod[] => datePeriods.map((p) => ({
+  ...p,
+  users: users
+    .filter((user) => !any(
+      periods,
+      ({ userId, week, month, year }) =>
+        userId === user.id && [week, month, year].join('_') === p.id
+    ))
+    .map((user) => mapUser(user))
+}))
 
 /**
  * Get users and their missing confirmed periods
@@ -63,24 +57,20 @@ function getPeriodsWithMissingSubmissions(
  * @param data - Data returned by `useMissingSubmissionsQuery`
  * @param datePeriods - Date periods
  */
-function getUsersWithMissingPeriods(
-  data: ReturnType<typeof useMissingSubmissionsQuery>,
+const getUsersWithMissingPeriods = (
+  [periods, users]: ReturnType<typeof useMissingSubmissionsQuery>,
   datePeriods: IDatePeriod[]
-): IMissingSubmissionUser[] {
-  return data.users
-    .map((user) => {
-      const missingPeriods = datePeriods.filter(
-        ({ id }) =>
-          !any(
-            data.periods,
-            ({ userId, week, month, year }) =>
-              userId === user.id && [week, month, year].join('_') === id
-          )
+) => arrayMap<User, IMissingSubmissionUser>(users, (user) => {
+  const missingPeriods = datePeriods.filter(
+    ({ id }) =>
+      !any(
+        periods,
+        ({ userId, week, month, year }) =>
+          userId === user.id && [week, month, year].join('_') === id
       )
-      return missingPeriods.length > 0 && mapUser(user, missingPeriods)
-    })
-    .filter(Boolean)
-}
+  )
+  return missingPeriods.length > 0 && mapUser(user, missingPeriods)
+})
 
 /**
  * Component logic hook for `<MissingSubmissions />`
@@ -98,13 +88,13 @@ export const useMissingSubmissions: ComponentLogicHook<
   const users = getUsersWithMissingPeriods(data, datePeriods)
   const tabs = useMemo<TabItems>(
     () => ({
-      all: [List, t('common.allWeeks'), { users }],
+      all: [List, { text: t('common.allWeeks'), iconName: 'SelectAllOff' }, { users }],
       ...periods.reduce<TabItems>((tabs, period) => {
-        tabs[period.id] = [List, period.name, { period }]
+        tabs[period.id] = [List, { text: t('common.periodName', period) , iconName: 'CalendarWorkWeek' }, { period }]
         return tabs
       }, {})
     }),
     [periods, users]
   )
-  return { tabs } as const
+  return { tabs }
 }

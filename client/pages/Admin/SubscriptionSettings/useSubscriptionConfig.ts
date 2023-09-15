@@ -17,7 +17,7 @@ export function useSubscriptionConfig() {
     {
       id: 'info',
       text: t('admin.subscriptionInfoHeader'),
-      icon: 'Info2',
+      icon: 'Info',
       fields: [
         {
           id: 'name',
@@ -41,7 +41,7 @@ export function useSubscriptionConfig() {
     },
     {
       id: 'adsync',
-      icon: 'UserSync',
+      icon: 'PersonSync',
       text: t('admin.adsync'),
       fields: [
         {
@@ -86,7 +86,7 @@ export function useSubscriptionConfig() {
     },
     {
       id: 'forecast',
-      icon: 'BufferTimeBefore',
+      icon: 'Timeline',
       text: t('admin.forecasting'),
       fields: [
         {
@@ -116,7 +116,7 @@ export function useSubscriptionConfig() {
     {
       id: 'vacation',
       text: t('admin.vacation'),
-      icon: 'Vacation',
+      icon: 'WeatherSunnyLow',
       fields: [
         {
           id: 'totalDays',
@@ -142,7 +142,7 @@ export function useSubscriptionConfig() {
     {
       id: 'teams',
       text: t('admin.teams'),
-      icon: 'TeamsLogo',
+      icon: 'PeopleTeam',
       fields: [
         {
           id: 'enabled',

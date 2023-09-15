@@ -71,6 +71,7 @@ export const Users: FC<ITabProps> = () => {
   )
 }
 
+Users.displayName = 'Users'
 Users.defaultProps = {
   permission: PermissionScope.LIST_USERS
 }

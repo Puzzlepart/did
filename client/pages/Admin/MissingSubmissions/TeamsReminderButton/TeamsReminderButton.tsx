@@ -19,7 +19,7 @@ export const TeamsReminderButton: StyledComponent<ITeamsReminderButtonProps> = (
   return (
     <div className={TeamsReminderButton.className}>
       <Button
-        appearance='primary'
+        appearance='subtle'
         icon={icon('PeopleTeam')}
         onClick={() => startTeamsConversation()}
         {...pick(props, 'title', 'text')}

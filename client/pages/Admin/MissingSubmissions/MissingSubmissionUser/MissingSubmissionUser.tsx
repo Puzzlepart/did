@@ -2,19 +2,17 @@ import { Persona } from '@fluentui/react-components'
 import React from 'react'
 import { StyledComponent } from 'types'
 import styles from './MissingSubmissionUser.module.scss'
-import { MissingSubmissionUserTooltip } from './MissingSubmissionUserTooltip'
+import { MissingSubmissionUserPopover } from './MissingSubmissionUserPopover'
 import { IMissingSubmissionUserProps } from './types'
 
 export const MissingSubmissionUser: StyledComponent<IMissingSubmissionUserProps> =
   (props) => (
     <div className={MissingSubmissionUser.className}>
-      <MissingSubmissionUserTooltip {...props}>
+      <MissingSubmissionUserPopover {...props}>
         <Persona {...props.user} className={styles.persona} size='medium' />
-      </MissingSubmissionUserTooltip>
+      </MissingSubmissionUserPopover>
     </div>
   )
 
 MissingSubmissionUser.displayName = 'MissingSubmissionUser'
 MissingSubmissionUser.className = styles.missingSubmissionUser
-
-export * from './types'

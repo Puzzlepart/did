@@ -1,11 +1,13 @@
+import { css } from '@fluentui/react'
 import { Tab, TabList, TabProps } from '@fluentui/react-components'
-import React, { FC, useMemo } from 'react'
+import { ReusableComponent } from 'components/types'
+import React, { useMemo } from 'react'
 import { getFluentIcon } from 'utils'
 import styles from './Tabs.module.scss'
 import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
 
-export const Tabs: FC<ITabsProps> = (props) => {
+export const Tabs: ReusableComponent<ITabsProps> = (props) => {
   const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =
     useTabs(props)
 
@@ -23,21 +25,25 @@ export const Tabs: FC<ITabsProps> = (props) => {
   }, [props.items])
 
   return (
-    <div>
+    <div className={css(Tabs.className, props.vertical && styles.vertical)}>
       <TabList
-        className={styles.tabs}
+        className={styles.list}
         vertical={props.vertical}
         selectedValue={selectedValue}
         onTabSelect={onTabSelect}
       >
         {tabItems}
       </TabList>
-      {Component && <Component {...componentProps} />}
-      {props.children}
+      <div className={styles.container}>
+        {Component && <Component {...componentProps} />}
+        {props.children}
+      </div>
     </div>
   )
 }
 
+Tabs.displayName = 'Tabs'
+Tabs.className = styles.tabs
 Tabs.defaultProps = {
   items: {},
   level: 2,

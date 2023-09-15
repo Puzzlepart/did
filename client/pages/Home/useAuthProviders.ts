@@ -3,7 +3,7 @@ import { ButtonProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
+import { getFluentIcon } from 'utils/getFluentIcon'
 
 interface IAuthProviderLoginButton
   extends Pick<ButtonProps, 'icon' | 'onClick' | 'appearance'> {
@@ -21,11 +21,11 @@ export function useAuthProviders(): Record<string, IAuthProviderLoginButton> {
   const authProviders: Record<string, IAuthProviderLoginButton> = {
     'azuread-openidconnect': {
       text: t('common.ms365signInText'),
-      icon: icon('StoreMicrosoft')
+      icon: getFluentIcon('Cloud')
     },
     google: {
       text: t('common.googleSignInText'),
-      icon: icon('Key')
+      icon: getFluentIcon('Key')
     }
   }
   return _.pick(authProviders, context.authProviders)

@@ -1,5 +1,7 @@
 import { Icon } from '@fluentui/react'
 import {
+  Cloud24Regular,
+  Cloud24Filled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -84,7 +86,11 @@ import {
   Timer24Filled,
   Timer24Regular,
   WebAsset24Filled,
-  WebAsset24Regular
+  WebAsset24Regular,
+  WeatherSunnyLow24Regular,
+  WeatherSunnyLow24Filled,
+  SelectAllOff24Regular,
+  SelectAllOff24Filled,
 } from '@fluentui/react-icons'
 import React from 'react'
 
@@ -92,6 +98,18 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  SelectAllOff: {
+    regular: SelectAllOff24Regular,
+    filled: SelectAllOff24Filled
+  },
+  WeatherSunnyLow: {
+    regular: WeatherSunnyLow24Regular,
+    filled: WeatherSunnyLow24Filled
+  },
+  Cloud: {
+    regular: Cloud24Regular,
+    filled: Cloud24Filled
+  },
   Timeline: {
     regular: Timeline24Regular,
     filled: Timeline24Filled

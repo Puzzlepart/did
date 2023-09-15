@@ -69,7 +69,7 @@ export interface IListColumnData {
 /**
  * @category List
  */
-export interface IListColumn<T = any> extends IColumn {
+export interface IListColumn extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */
@@ -98,7 +98,7 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Columns
    */
-  columns?: IListColumn<T>[]
+  columns?: IListColumn[]
 
   /**
    * Enable shimmer (normally while loading)

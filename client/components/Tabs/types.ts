@@ -1,5 +1,4 @@
 import { TabListProps, TabProps } from '@fluentui/react-components'
-import { FluentIcon } from '@fluentui/react-icons/lib/utils/createFluentIcon'
 import { FunctionComponent, HTMLProps } from 'react'
 import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
@@ -65,7 +64,7 @@ export interface ITabProps extends HTMLProps<HTMLDivElement> {
   /**
    * Icon to display for the tab in the tab list header.
    */
-  icon?: string | FluentIcon
+  icon?: FluentIconName
 
   /**
    * Permission scope required to view the tab.

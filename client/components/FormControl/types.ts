@@ -68,7 +68,7 @@ export interface IFormControlProps
   edit?: any
 }
 
-export type FormInputControlBase<O = any> = {
+export type FormInputControlBase<TOptions = any> = {
   /**
    * The `name` attribute is required
    */
@@ -86,7 +86,7 @@ export type FormInputControlBase<O = any> = {
    *
    * - `casing` - force value casing
    */
-  options?: O
+  options?: TOptions
 }
 
 export type FormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
