@@ -1,9 +1,15 @@
-import { IBasePanelProps, IHeaderProps } from '../types'
+import { HTMLAttributes } from 'react'
+import { IBasePanelProps } from '../types'
 
 /**
  * Props for the Footer component of the BasePanel.
  */
-export interface IFooterProps extends IHeaderProps {
+export interface IFooterProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Actions to display in the footer of the panel.
+   */
+  actions?: IBasePanelProps['footerActions']
+
   /**
    * Callback function to be called when the Footer is dismissed.
    */

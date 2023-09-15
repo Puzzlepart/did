@@ -1,25 +1,15 @@
 import { FluentProvider } from '@fluentui/react-components'
 import { css } from '@fluentui/utilities'
+import { DynamicButton } from 'components/DynamicButton'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { fluentLightTheme } from 'theme'
 import { StyledComponent } from 'types'
-import { PanelAction } from '../PanelAction'
-import { IBasePanelAction } from '../types'
 import styles from './Footer.module.scss'
 import { IFooterProps } from './types'
+import { useFooter } from './useFooter'
 
 export const Footer: StyledComponent<IFooterProps> = (props) => {
-  const { t } = useTranslation()
-  const actions = [
-    ...props.actions,
-    props.cancelAction &&
-      ({
-        text: t('common.cancelButtonLabel'),
-        appearance: 'subtle',
-        onClick: props.onDismiss
-      } as IBasePanelAction)
-  ].filter(Boolean)
+  const actions = useFooter(props)
   return (
     <FluentProvider
       theme={fluentLightTheme}
@@ -33,8 +23,8 @@ export const Footer: StyledComponent<IFooterProps> = (props) => {
     >
       <div className={css(styles.footerInner, props.padded && styles.padded)}>
         <div className={styles.actions}>
-          {actions.map((action, index) => (
-            <PanelAction key={index} {...action} />
+          {actions.map((action) => (
+            <DynamicButton key={action.text} {...action} />
           ))}
         </div>
       </div>

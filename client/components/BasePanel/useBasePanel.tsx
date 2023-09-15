@@ -1,8 +1,8 @@
 import { IPanelProps } from '@fluentui/react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import _ from 'underscore'
 import { Footer } from './Footer/Footer'
-import { Header } from './Header'
+import { Header } from './Header/Header'
 import { IBasePanelProps } from './types'
 
 /**
@@ -13,41 +13,45 @@ import { IBasePanelProps } from './types'
  * @returns An object containing the necessary props for rendering a BasePanel component.
  */
 export function useBasePanel(props: IBasePanelProps) {
-  let isFooterAtBottom = false
-  let onRenderFooter = null
-  let onRenderHeaderContent = null
+  const onRenderFooter = useMemo(() => {
+    return () =>
+      !_.isEmpty(props.footerActions) && (
+        <Footer
+          actions={props.footerActions}
+          onDismiss={props.onDismiss}
+          cancelAction
+          sticky
+          padded
+          bordered
+        />
+      )
+  }, [props.footerActions])
 
-  if (!_.isEmpty(props.footerActions)) {
-    isFooterAtBottom = true
-    onRenderFooter = () => (
-      <Footer
-        actions={props.footerActions}
-        onDismiss={props.onDismiss}
-        cancelAction
-        sticky
-        padded
-        bordered
-      />
-    )
-  }
-  if (!_.isEmpty(props.headerActions)) {
-    onRenderHeaderContent = () => <Header actions={props.headerActions} />
-  }
-  return {
-    ...props,
-    onRenderFooter,
-    onRenderHeaderContent,
-    isFooterAtBottom,
-    styles: {
-      footer: {
-        backgroundColor: 'var(--colorNeutralBackground1)'
-      },
-      footerInner: {
-        backgroundColor: 'var(--colorNeutralBackground1)'
-      },
-      scrollableContent: {
-        overflow: props.scroll ? 'auto' : 'visible'
+  const onRenderHeaderContent = useMemo(() => {
+    return () =>
+      !_.isEmpty(props.headerActions) && (
+        <Header actions={props.headerActions} />
+      )
+  }, [props.headerActions])
+
+  return useMemo<IPanelProps>(
+    () => ({
+      ...props,
+      onRenderFooter,
+      onRenderHeaderContent,
+      isFooterAtBottom: !_.isEmpty(props.footerActions),
+      styles: {
+        footer: {
+          backgroundColor: 'var(--colorNeutralBackground1)'
+        },
+        footerInner: {
+          backgroundColor: 'var(--colorNeutralBackground1)'
+        },
+        scrollableContent: {
+          overflow: props.scroll ? 'auto' : 'visible'
+        }
       }
-    }
-  } as IPanelProps
+    }),
+    [props, onRenderFooter, onRenderHeaderContent]
+  )
 }
