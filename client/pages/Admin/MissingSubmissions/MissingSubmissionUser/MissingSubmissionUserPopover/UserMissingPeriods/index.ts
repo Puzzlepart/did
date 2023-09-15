@@ -1,2 +1,2 @@
-export * from './UserMissingPeriods'
 export * from './types'
+export * from './UserMissingPeriods'

@@ -51,6 +51,7 @@ export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
           label={
             isEdit ? t('admin.editPermissions') : t('admin.addPermissions')
           }
+          description={t('admin.editPermissionsDescription')}
           onChange={(permissions) => setModel({ ...model, permissions })}
           selectedPermissions={model.permissions}
         />
@@ -61,5 +62,3 @@ export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
 
 RolePanel.displayName = 'RolePanel'
 RolePanel.className = styles.rolePanel
-
-export * from './types'

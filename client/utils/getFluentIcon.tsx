@@ -1,7 +1,7 @@
 import { Icon } from '@fluentui/react'
 import {
-  Cloud24Regular,
-  Cloud24Filled,
+  Accessibility24Filled,
+  Accessibility24Regular,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -43,6 +43,8 @@ import {
   CheckmarkCircle24Regular,
   CheckmarkFilled,
   CheckmarkRegular,
+  Cloud24Filled,
+  Cloud24Regular,
   Collections24Filled,
   Collections24Regular,
   Delete24Filled,
@@ -69,8 +71,14 @@ import {
   PeopleEdit24Regular,
   PeopleTeam24Filled,
   PeopleTeam24Regular,
+  Person24Filled,
+  Person24Regular,
+  PersonProhibited24Filled,
+  PersonProhibited24Regular,
   PersonSync24Filled,
   PersonSync24Regular,
+  SelectAllOff24Filled,
+  SelectAllOff24Regular,
   SignOut24Filled,
   SignOut24Regular,
   StoreMicrosoft24Filled,
@@ -85,12 +93,12 @@ import {
   Timer224Regular,
   Timer24Filled,
   Timer24Regular,
-  WebAsset24Filled,
-  WebAsset24Regular,
-  WeatherSunnyLow24Regular,
+  Umbrella24Filled,
+  Umbrella24Regular,
   WeatherSunnyLow24Filled,
-  SelectAllOff24Regular,
-  SelectAllOff24Filled,
+  WeatherSunnyLow24Regular,
+  WebAsset24Filled,
+  WebAsset24Regular
 } from '@fluentui/react-icons'
 import React from 'react'
 
@@ -98,6 +106,22 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Accessibility: {
+    regular: Accessibility24Regular,
+    filled: Accessibility24Filled
+  },
+  Umbrella: {
+    regular: Umbrella24Regular,
+    filled: Umbrella24Filled
+  },
+  Person: {
+    regular: Person24Regular,
+    filled: Person24Filled
+  },
+  PersonProhibited: {
+    regular: PersonProhibited24Regular,
+    filled: PersonProhibited24Filled
+  },
   SelectAllOff: {
     regular: SelectAllOff24Regular,
     filled: SelectAllOff24Filled

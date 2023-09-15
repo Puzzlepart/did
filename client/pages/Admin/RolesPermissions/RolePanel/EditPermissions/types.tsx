@@ -8,6 +8,11 @@ export interface IEditPermissionsProps {
   label: string
 
   /**
+   * The description for the component.
+   */
+  description: string
+
+  /**
    * An array of selected permissions.
    */
   selectedPermissions: string[]

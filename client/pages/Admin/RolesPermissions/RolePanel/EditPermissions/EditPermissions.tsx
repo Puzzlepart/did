@@ -1,13 +1,13 @@
 import { Icon } from '@fluentui/react'
 import {
-  Button,
   FluentProvider,
   Menu,
   MenuItemCheckbox,
   MenuList,
-  MenuPopover,
-  MenuTrigger
+  MenuPopover
 } from '@fluentui/react-components'
+import { DynamicButton } from 'components'
+import { FieldDescription } from 'components/FormControl'
 import React from 'react'
 import { fluentLightTheme } from 'theme'
 import { StyledComponent } from 'types'
@@ -30,9 +30,11 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
           checkedValues={checkedValues}
           onCheckedValueChange={onCheckedValueChange}
         >
-          <MenuTrigger disableButtonEnhancement>
-            <Button appearance='subtle'>{props.label}</Button>
-          </MenuTrigger>
+          <DynamicButton
+            text={props.label}
+            iconName='Accessibility'
+            menuTrigger
+          />
           <MenuPopover>
             <MenuList>
               {permissions.map((permission, index) => (
@@ -48,6 +50,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
             </MenuList>
           </MenuPopover>
         </Menu>
+        <FieldDescription text={props.description} />
       </div>
     </FluentProvider>
   )

@@ -14,7 +14,10 @@ type UseTabsReturnType = {
 }
 
 /**
- * A custom hook that manages the state of a tabbed interface.
+ * A custom hook for the `Tabs` component that manages the state of a tabbed interface.
+ * It returns the currently selected value, a function to handle tab selection, and the
+ * component to be rendered based on the selected tab. The default tab selected is either
+ * the first tab or the tab with the `key` specified in the `defaultSelectedValue` prop.
  *
  * @param props - The props object containing the items to be rendered as tabs.
  *
@@ -24,11 +27,14 @@ type UseTabsReturnType = {
  */
 export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = ({
   level,
-  items
+  items,
+  defaultSelectedValue
 }) => {
   const { dispatch } = useAppContext()
   const itemKeys = Object.keys(items)
-  const [selectedValue, setSelectedValue] = useState(itemKeys[0])
+  const [selectedValue, setSelectedValue] = useState<string>(
+    (defaultSelectedValue as string) ?? itemKeys[0]
+  )
   const [selectedComponent, selectedTab, selectedComponentProps] = useMemo(
     () => items[selectedValue] ?? [null, null, {}],
     [items, selectedValue]

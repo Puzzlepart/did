@@ -1,6 +1,7 @@
 export * from './CheckboxControl'
 export * from './context'
 export * from './DropdownControl'
+export * from './FieldDescription'
 export * from './FormControl'
 export * from './SwitchControl'
 export * from './TextControl'

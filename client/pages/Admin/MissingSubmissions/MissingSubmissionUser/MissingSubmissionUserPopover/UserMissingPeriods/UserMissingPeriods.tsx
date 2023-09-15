@@ -16,9 +16,11 @@ export const UserMissingPeriods: StyledComponent<IUserMissingPeriodsProps> = (
         <Label weight='semibold'>{t('common.missingWeeksLabel')}</Label>
       </div>
       <div className={styles.container}>
-      {props.user.periods.map((p, index) => (
-        <div key={index} className={styles.item}>{p.name}</div>
-      ))}
+        {props.user.periods.map((p, index) => (
+          <div key={index} className={styles.item}>
+            {p.name}
+          </div>
+        ))}
       </div>
     </div>
   )

@@ -128,7 +128,7 @@
   },
   "admin": {
     "apiTokens": {
-      "permissionsTitle": "Permissions",
+      "permissionsTitle": "Set permissions",
       "headerText": "API Tokens",
       "tokenNameLabel": "Name",
       "tokenExpiryLabel": "Token expiry",
@@ -138,7 +138,8 @@
       "oneYear": "1 year",
       "neverExpiresText": "Never expires",
       "confirmDeleteTitle": "Delete API-key",
-      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
+      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?",
+      "editPermissionsDescription": "Click to manage or customize permissions for this API token. Please note that permissions cannot be updated after creation."
     },
     "labels": {
       "headerText": "Labels",
@@ -253,7 +254,8 @@
       "iconColorDescription": "An icon color makes the report link stand out more from the preset queries if the link should be promoted."
     },
     "editPermissions": "Edit permissions",
-    "addPermissions": "Set permissions"
+    "addPermissions": "Set permissions",
+    "editPermissionsDescription": "Click to add or modify permissions for this role."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",

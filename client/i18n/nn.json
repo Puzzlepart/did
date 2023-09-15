@@ -128,7 +128,7 @@
   },
   "admin": {
     "apiTokens": {
-      "permissionsTitle": "Løyve",
+      "permissionsTitle": "Angi tillatelser",
       "headerText": "API-nøklar",
       "tokenExpiryLabel": "Varigheit for nøkkel",
       "addNew": "Lag API-nøkkel",
@@ -138,7 +138,8 @@
       "oneYear": "1 år",
       "neverExpiresText": "Går aldri ut på dato",
       "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?",
-      "confirmDeleteTitle": "Slett API-nøkkel"
+      "confirmDeleteTitle": "Slett API-nøkkel",
+      "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse."
     },
     "users": {
       "headerText": "Brukarar",
@@ -253,7 +254,8 @@
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacation": "Ferie og fravær",
     "editPermissions": "Endre tilganger",
-    "addPermissions": "Angi tilganger "
+    "addPermissions": "Angi tilganger ",
+    "editPermissionsDescription": "Klikk for å legge til eller endre tillatelser for denne rollen."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

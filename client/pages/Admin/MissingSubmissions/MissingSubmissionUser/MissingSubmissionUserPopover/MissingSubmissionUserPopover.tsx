@@ -1,21 +1,24 @@
-import { FluentProvider, Persona, Popover, PopoverSurface, PopoverTrigger } from '@fluentui/react-components'
+import {
+  FluentProvider,
+  Persona,
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import React from 'react'
 import { fluentLightTheme } from 'theme'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserPopover.module.scss'
-import { UserMissingPeriods } from './UserMissingPeriods'
 import { IMissingSubmissionUserPopoverProps } from './types'
+import { UserMissingPeriods } from './UserMissingPeriods'
 
 export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUserPopoverProps> =
   (props) => (
-    <Popover trapFocus openOnHover={true}>
+    <Popover trapFocus>
       <PopoverTrigger disableButtonEnhancement>
-        <div>
-          {props.children}
-        </div>
+        <div>{props.children}</div>
       </PopoverTrigger>
-
       <PopoverSurface>
         <FluentProvider
           theme={fluentLightTheme}

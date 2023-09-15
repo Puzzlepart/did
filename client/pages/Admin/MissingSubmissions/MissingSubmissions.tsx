@@ -4,10 +4,10 @@ import styles from './MissingSubmissions.module.scss'
 import { useMissingSubmissions } from './useMissingSubmissions'
 
 export const MissingSubmissions: TabComponent = () => {
-  const { tabs } = useMissingSubmissions()
+  const { tabs, defaultSelectedTab } = useMissingSubmissions()
   return (
     <div className={MissingSubmissions.className}>
-      <Tabs items={tabs} vertical />
+      <Tabs items={tabs} vertical defaultSelectedValue={defaultSelectedTab} />
     </div>
   )
 }

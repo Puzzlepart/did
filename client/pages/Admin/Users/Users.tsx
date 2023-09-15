@@ -32,7 +32,7 @@ export const Users: FC<ITabProps> = () => {
         items={{
           active: [
             List,
-            t('admin.users.activeHeaderText'),
+            { text: t('admin.users.activeHeaderText'), iconName: 'Person' },
             {
               items: context.state.activeUsers,
               columns: columns('active'),
@@ -42,12 +42,14 @@ export const Users: FC<ITabProps> = () => {
           ],
           disabled: [
             List,
-            t('admin.users.disabledHeaderText'),
+            {
+              text: t('admin.users.disabledHeaderText'),
+              iconName: 'PersonProhibited'
+            },
             {
               items: context.state.disabledUsers,
               columns: columns('disabled'),
-              menuItems,
-              selectionMode: SelectionMode.multiple
+              selectionMode: SelectionMode.none
             }
           ]
         }}
