@@ -1,0 +1,8 @@
+query Labels {
+  labels {
+    name
+    description
+    color
+    icon
+  }
+}
