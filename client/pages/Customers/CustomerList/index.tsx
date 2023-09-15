@@ -23,6 +23,9 @@ export const CustomerList: TabComponent = (props) => {
             toggleInactive
           )
         ]}
+        getColumnStyle={(customer) => ({
+          opacity: customer.inactive ? 0.4 : 1
+        })}
       />
       {props.children}
     </>

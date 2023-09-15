@@ -25,4 +25,15 @@ export const ProjectsContext = createContext<IProjectsContext>(null)
  *
  * @returns The current value of the ProjectsContext.
  */
-export const useProjectsContext = () => useContext(ProjectsContext)
+export const useProjectsContext = (): IProjectsContext => {
+  const context = useContext(ProjectsContext)
+  if (!context) {
+    return {
+      state: null,
+      dispatch: () => null,
+      refetch: () => null,
+      loading: false
+    }
+  }
+  return context
+}

@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { IPanelProps } from '@fluentui/react'
-import { UseFormSubmitHook } from 'components/FormControl'
+import { FormSubmitHook } from 'components/FormControl'
 import { useToast } from 'components/Toast'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,7 +15,7 @@ import { useFeedbackModel } from './useFeedbackModel'
  * @param panel - The props for the feedback panel.
  * @returns An object containing the text for the submit button, a toast object, a click handler, and a disabled flag.
  */
-export const useSubmitFeedback: UseFormSubmitHook<
+export const useSubmitFeedback: FormSubmitHook<
   IPanelProps,
   ReturnType<typeof useFeedbackModel>
 > = (props, model) => {

@@ -76,7 +76,7 @@ Logo.defaultProps = {
   color: '#ffffff',
   backgroundColor: '#252422',
   dropShadow: false,
-  width: 160,
+  width: 140,
   height: 80
 }
 

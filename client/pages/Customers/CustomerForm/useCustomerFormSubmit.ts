@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { UseFormSubmitHook } from 'components/FormControl'
+import { FormSubmitHook } from 'components/FormControl'
 import { useToast } from 'components/Toast'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ import { useCustomerModel } from './useCustomerModel'
  *
  * @returns `toast`, `onClick` and `disabled`
  */
-export const useCustomerFormSubmit: UseFormSubmitHook<
+export const useCustomerFormSubmit: FormSubmitHook<
   ICustomerFormProps,
   ReturnType<typeof useCustomerModel>
 > = (props, model) => {

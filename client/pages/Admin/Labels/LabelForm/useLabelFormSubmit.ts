@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
-import { UseFormSubmitHook } from 'components/FormControl'
+import { FormSubmitHook } from 'components/FormControl'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -20,7 +20,7 @@ import { useLabelModel } from './useLabelModel'
  *
  * @returns - An object with properties needed for submitting a label form.
  */
-export const useLabelFormSubmit: UseFormSubmitHook<
+export const useLabelFormSubmit: FormSubmitHook<
   ILabelFormProps,
   ReturnType<typeof useLabelModel>
 > = (props, model) => {

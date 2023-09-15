@@ -3,6 +3,8 @@ import { ICommandBarItemProps, Icon } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
 
+export type ListMenuItemGroup = 'default' | 'actions'
+
 /**
  * Represents a menu item in the `ListMenuItem` component. Supports
  * the Fluent API pattern using e.g. `new ListMenuItem().setIcon(...)`,
@@ -73,7 +75,7 @@ export class ListMenuItem {
   /**
    * The group name for the menu item.
    */
-  group?: string
+  group?: ListMenuItemGroup
 
   /**
    * Creates a new instance of ListMenuItem.
@@ -130,7 +132,7 @@ export class ListMenuItem {
    *
    * @param group Group name for the menu item
    */
-  public setGroup(group: string) {
+  public setGroup(group: ListMenuItemGroup) {
     this.group = group
     return this
   }
@@ -253,8 +255,6 @@ export class ListMenuItem {
       return <Icon iconName={item.icon} />
     }
     if (item.icon) IconElement = item.icon as any
-    // eslint-disable-next-line no-console
-    console.log(item.icon, IconElement)
     return <IconElement />
   }
 

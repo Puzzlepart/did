@@ -122,7 +122,9 @@
     "toggleInactive": "Show/hide inactive customers",
     "inactiveFieldDescription": "Mark the customer as inactive. Hours for the customer can no longer be confirmed.",
     "projectsHeaderText": "Projects",
-    "informationHeaderText": "Information"
+    "informationHeaderText": "Information",
+    "createProjectButtonLabel": "Create new project",
+    "projectFormHeaderText": "Create new project for {{name}}"
   },
   "admin": {
     "apiTokens": {

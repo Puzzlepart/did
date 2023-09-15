@@ -28,11 +28,6 @@ export interface IHeaderProps extends HTMLAttributes<HTMLDivElement> {
   actions?: IBasePanelAction[]
 }
 
-export interface IFooterProps extends IHeaderProps {
-  onDismiss?: IBasePanelProps['onDismiss']
-  cancelAction?: boolean
-}
-
 export interface IBasePanelAction {
   text: string
   title?: ButtonProps['title']

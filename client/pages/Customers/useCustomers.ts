@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import _ from 'underscore'
 import { ICustomersContext } from './context'
@@ -18,8 +19,9 @@ import { useCustomersHistory } from './useCustomersHistory'
  * * Building our `CustomersContext` object
  */
 export function useCustomers() {
+  const { t } = useTranslation()
   const urlParameters = useParams<ICustomersUrlParameters>()
-  const { state, dispatch } = useCustomersReducer(urlParameters)
+  const [state, dispatch] = useCustomersReducer(urlParameters, t)
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
   })

@@ -10,6 +10,7 @@ import {
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-search-preview'
 import { BaseFilter, IFilter } from 'components/FilterPanel'
+import { CSSProperties } from 'react'
 import { ExcelColumnType } from 'utils/exportExcel'
 import { ListMenuItem } from './ListToolbar'
 
@@ -68,7 +69,7 @@ export interface IListColumnData {
 /**
  * @category List
  */
-export interface IListColumn extends IColumn {
+export interface IListColumn<T = any> extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */
@@ -97,7 +98,7 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Columns
    */
-  columns?: IListColumn[]
+  columns?: IListColumn<T>[]
 
   /**
    * Enable shimmer (normally while loading)
@@ -184,6 +185,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Hide the toolbar
    */
   hideToolbar?: boolean
+
+  /**
+   * Get column style for the specified item
+   */
+  getColumnStyle?: (item: T) => CSSProperties
 }
 
 export type ColumnHeaderContextMenu = {

@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { UseFormSubmitHook } from 'components/FormControl'
+import { FormSubmitHook } from 'components/FormControl'
 import { useToast } from 'components/Toast'
 import { useTranslation } from 'react-i18next'
 import { useProjectsContext } from '../context'
@@ -16,13 +16,13 @@ import { useProjectModel } from './useProjectModel'
  *
  * @returns `toast`, `onClick` and `disabled`
  */
-export const useProjectFormSubmit: UseFormSubmitHook<
+export const useProjectFormSubmit: FormSubmitHook<
   IProjectFormProps,
   ReturnType<typeof useProjectModel>,
   ReturnType<typeof useProjectFormOptions>
 > = (props, model, options) => {
   const { t } = useTranslation()
-  const { refetch } = useProjectsContext()
+  const context = useProjectsContext()
   const [toast, setToast] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_project)
 
@@ -48,7 +48,7 @@ export const useProjectFormSubmit: UseFormSubmitHook<
           }),
           intent: 'success'
         })
-        refetch()
+        context.refetch()
         model.reset()
       }
     } catch {

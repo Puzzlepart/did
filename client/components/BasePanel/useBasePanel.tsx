@@ -1,7 +1,7 @@
 import { IPanelProps } from '@fluentui/react'
 import React from 'react'
 import _ from 'underscore'
-import { Footer } from './Footer'
+import { Footer } from './Footer/Footer'
 import { Header } from './Header'
 import { IBasePanelProps } from './types'
 
@@ -14,12 +14,12 @@ import { IBasePanelProps } from './types'
  */
 export function useBasePanel(props: IBasePanelProps) {
   let isFooterAtBottom = false
-  let onRenderFooterContent = null
+  let onRenderFooter = null
   let onRenderHeaderContent = null
 
   if (!_.isEmpty(props.footerActions)) {
     isFooterAtBottom = true
-    onRenderFooterContent = () => (
+    onRenderFooter = () => (
       <Footer
         actions={props.footerActions}
         onDismiss={props.onDismiss}
@@ -32,10 +32,16 @@ export function useBasePanel(props: IBasePanelProps) {
   }
   return {
     ...props,
-    onRenderFooterContent,
+    onRenderFooter,
     onRenderHeaderContent,
     isFooterAtBottom,
     styles: {
+      footer: {
+        backgroundColor: 'var(--colorNeutralBackground1)'
+      },
+      footerInner: {
+        backgroundColor: 'var(--colorNeutralBackground1)'
+      },
       scrollableContent: {
         overflow: props.scroll ? 'auto' : 'visible'
       }

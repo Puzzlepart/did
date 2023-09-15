@@ -1,5 +1,6 @@
+import { PanelType } from '@fluentui/react'
 import { BasePanel } from 'components/BasePanel'
-import { Footer } from 'components/BasePanel/Footer'
+import { Footer } from 'components/BasePanel/Footer/Footer'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
@@ -9,6 +10,14 @@ import styles from './FormControl.module.scss'
 import { IFormControlProps } from './types'
 
 /**
+ * FormControl component that handles form submission and validation.
+ *
+ * It can render in a `<BasePanel />` or as a standalone component. If
+ * providing `panelProps`, it will render in a panel. Otherwise, it will
+ * render as a standalone component. When rendering in a panel, the default
+ * type will be `PanelType.medium` - this can be overridden by providing
+ * `panelProps.type`.
+ *
  * @category Reusable Component
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
@@ -17,6 +26,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => (
       condition={!!props.panelProps}
       wrapper={(children) => (
         <BasePanel
+          type={PanelType.medium}
           {...props.panelProps}
           footerActions={[
             {

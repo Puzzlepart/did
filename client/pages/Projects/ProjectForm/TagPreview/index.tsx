@@ -10,15 +10,12 @@ import { useTranslation } from 'react-i18next'
 export const TagPreview: FC<HTMLProps<HTMLDivElement>> = (props) => {
   const { t } = useTranslation()
   const { model } = useFormControlContext()
-  const hasValidProjectId = model.value('key') && model.value('customerKey')
   return (
     <div hidden={props.hidden}>
       <UserMessage
-        // containerStyle={{ marginTop: 10 }}
-        // iconName='OutlookLogo'
         text={
-          hasValidProjectId
-            ? t('projects.idPreviewText', props)
+          model['projectId']
+            ? t('projects.idPreviewText', model)
             : t('projects.idPreviewBlankText')
         }
       />

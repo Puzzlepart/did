@@ -89,7 +89,7 @@ export type FormInputControlBase<O = any> = {
   options?: O
 }
 
-export type UseFormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
+export type FormSubmitHook<TProps = {}, TModel = {}, TOptions = {}> = (
   props?: TProps,
   model?: TModel,
   options?: TOptions

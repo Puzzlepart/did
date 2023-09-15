@@ -42,10 +42,10 @@ export const Home: PageComponent = () => {
       )}
       {!subscription && !error && (
         <div className={styles.signIn}>
-          {Object.keys(providers).map((key, index) => (
+          {Object.keys(providers).map((key) => (
             <Button
               key={key}
-              appearance={index === 0 ? 'primary' : 'secondary'}
+              appearance='subtle'
               icon={providers[key].icon}
               onClick={() => document.location.replace(`/auth/${key}/signin`)}
             >

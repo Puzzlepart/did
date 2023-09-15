@@ -17,15 +17,17 @@ import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
 
 /**
+ * ProjectForm component is used to create and edit projects.
+ *
  * @category Projects
  */
 export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, submit, register, options } = useProjectForm(props)
+  const { model, register, options, formControlProps } = useProjectForm(props)
   return (
-    <FormControl {...props} model={model} submitProps={submit}>
+    <FormControl {...formControlProps}>
       <SearchCustomer
-        hidden={!!props.edit}
+        hidden={!!props.edit || !!props.customerKey}
         label={t('common.customer')}
         required={true}
         placeholder={t('common.searchPlaceholder')}

@@ -23,7 +23,8 @@ export function useInitModel(
     const _map = convertToMap(model)
     map.$set(_map)
     if (!props.edit) map.set('icon', icon)
-  }, [props.edit])
+    if (props.customerKey) map.set('customerKey', props.customerKey)
+  }, [props.edit, props.customerKey])
 }
 
 /**
@@ -45,8 +46,9 @@ export function useProjectModel(props: IProjectFormProps) {
    * in the form.
    */
   const projectId =
-    map.value('key')?.length > 1 &&
-    [map.value('customerKey'), map.value('key')].join(' ')
+    map.value('key')?.length > 1
+      ? [map.value('customerKey'), map.value('key')].join(' ')
+      : null
 
   return {
     ...map,

@@ -122,7 +122,9 @@
     "toggleInactive": "Vis/skjul inaktive kunder",
     "inactiveFieldDescription": "Merk kunden som inaktiv. Timer for kunden kan ikke lenger bekreftes.",
     "projectsHeaderText": "Prosjekter",
-    "informationHeaderText": "Informasjon"
+    "informationHeaderText": "Informasjon",
+    "createProjectButtonLabel": "Opprett nytt prosjekt",
+    "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}"
   },
   "admin": {
     "apiTokens": {

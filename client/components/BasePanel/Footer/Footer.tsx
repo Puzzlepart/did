@@ -2,9 +2,10 @@ import { FluentProvider } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { fluentLightTheme } from 'theme'
-import styles from './BasePanel.module.scss'
-import { PanelAction } from './PanelAction'
-import { IBasePanelAction, IFooterProps } from './types'
+import { PanelAction } from '../PanelAction'
+import { IBasePanelAction } from '../types'
+import styles from './Footer.module.scss'
+import { IFooterProps } from './types'
 
 export const Footer: FC<IFooterProps> = (props) => {
   const { t } = useTranslation()
@@ -23,10 +24,12 @@ export const Footer: FC<IFooterProps> = (props) => {
       className={styles.footer}
       hidden={props.hidden}
     >
-      <div className={styles.actions}>
-        {actions.map((action, index) => (
-          <PanelAction key={index} {...action} />
-        ))}
+      <div className={styles.footerInner}>
+        <div className={styles.actions}>
+          {actions.map((action, index) => (
+            <PanelAction key={index} {...action} />
+          ))}
+        </div>
       </div>
     </FluentProvider>
   )

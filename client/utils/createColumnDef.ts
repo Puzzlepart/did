@@ -15,10 +15,10 @@ import { IListColumn } from 'components/List/types'
 export function createColumnDef<T = any>(
   fieldName: string,
   name = '',
-  props: Partial<IListColumn> = {},
-  onRender?: (item?: T, index?: number, column?: IListColumn) => any,
+  props: Partial<IListColumn<T>> = {},
+  onRender?: (item?: T, index?: number, column?: IListColumn<T>) => any,
   minWidth = 100
-): IListColumn {
+): IListColumn<T> {
   return {
     key: fieldName,
     fieldName,
@@ -28,5 +28,5 @@ export function createColumnDef<T = any>(
     isResizable: true,
     data: {},
     ...props
-  } as IListColumn
+  } as IListColumn<T>
 }

@@ -1,13 +1,19 @@
-import { Switch, SwitchProps } from '@fluentui/react-components'
-import { ListMenuItem } from 'components/List/ListToolbar'
+import {
+  Checkbox,
+  CheckboxProps,
+  SwitchProps
+} from '@fluentui/react-components'
+import { ListMenuItem, ListMenuItemGroup } from 'components/List/ListToolbar'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './InactiveCheckbox.module.scss'
 
-export const InactiveCheckbox: ReusableComponent<SwitchProps> = (props) => {
+export const InactiveCheckbox: ReusableComponent<CheckboxProps> = (props) => {
   return (
     <div className={InactiveCheckbox.className}>
-      <Switch {...props} onChange={props.onChange} />
+      <div className={styles.container}>
+        <Checkbox {...props} onChange={props.onChange} />
+      </div>
     </div>
   )
 }
@@ -17,16 +23,18 @@ export const InactiveCheckbox: ReusableComponent<SwitchProps> = (props) => {
  *
  * @param label Label for the checkbox
  * @param toggle Toggle state for the checkbox
+ * @param disabled Disabled state for the checkbox
  * @param group Group to add the menu item to (defaults to `actions`)
  */
 export const InactiveCheckboxMenuItem = (
   label: string,
   onChange: SwitchProps['onChange'],
-  group = 'actions'
+  disabled = false,
+  group: ListMenuItemGroup = 'actions'
 ) =>
   new ListMenuItem()
     .setCustomRender(() => (
-      <InactiveCheckbox label={label} onChange={onChange} />
+      <InactiveCheckbox label={label} onChange={onChange} disabled={disabled} />
     ))
     .setGroup(group)
 

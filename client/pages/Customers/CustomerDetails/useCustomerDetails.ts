@@ -1,23 +1,41 @@
-import { useQuery } from '@apollo/client'
+import { useQuery, WatchQueryFetchPolicy } from '@apollo/client'
+import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabItems } from 'components/Tabs'
 import { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Customer } from 'types'
 import { ProjectList } from '../../Projects'
 import { CustomersContext } from '../context'
+import { CLOSE_PROJECT_PANEL, OPEN_PROJECT_PANEL } from '../reducer/actions'
 import { CustomerInformation } from './CustomerInformation'
 import $projects from './projects.gql'
 
-export function useCustomerDetails() {
-  const { t } = useTranslation()
-  const { state, loading } = useContext(CustomersContext)
-  const selected = state.selected
+/**
+ * Handles fetching projects for the selected customer.
+ *
+ * @param customer - Selected customer
+ * @param fetchPolicy - Fetch policy (default: `cache-and-network`)
+ */
+function useProjectsQuery(
+  customer: Customer,
+  fetchPolicy: WatchQueryFetchPolicy = 'cache-and-network'
+) {
   const query = useQuery($projects, {
     variables: {
-      customerKey: selected?.key
+      customerKey: customer?.key
     },
-    skip: !selected
+    skip: !customer,
+    fetchPolicy
   })
-  const projects = query?.data?.projects ?? []
+  const projects = useMemo(() => query?.data?.projects ?? [], [query])
+  return [projects, query.loading, query.error, query.refetch] as const
+}
+
+export function useCustomerDetails() {
+  const { t } = useTranslation()
+  const context = useContext(CustomersContext)
+  const selected = context.state.selected
+  const [projects, loading, error, refetch] = useProjectsQuery(selected)
   const tabs: TabItems = useMemo(
     () => ({
       information: [
@@ -30,18 +48,37 @@ export function useCustomerDetails() {
         {
           items: projects,
           hideColumns: ['customer'],
-          enableShimmer: loading,
+          enableShimmer: context.loading,
           searchBox: {
             placeholder: t('customers.searchProjectsPlaceholder', selected),
-            disabled: loading
-          }
+            disabled: context.loading
+          },
+          menuItems: [
+            new ListMenuItem(t('customers.createProjectButtonLabel'))
+              .withIcon('AddCircle')
+              .setGroup('actions')
+              .setOnClick(() => {
+                context.dispatch(
+                  OPEN_PROJECT_PANEL({
+                    onSaveCallback: () => {
+                      refetch()
+                      context.dispatch(CLOSE_PROJECT_PANEL())
+                    },
+                    onDismissCallback: () =>
+                      context.dispatch(CLOSE_PROJECT_PANEL())
+                  })
+                )
+              })
+          ]
         }
       ]
     }),
-    [state, loading, selected]
+    [context.state, context.loading, selected, projects]
   )
   return {
-    ...query,
-    tabs
+    loading,
+    error,
+    tabs,
+    selected
   } as const
 }

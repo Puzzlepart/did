@@ -1,4 +1,4 @@
-import { useFormControls } from 'components/FormControl'
+import { IFormControlProps, useFormControls } from 'components/FormControl'
 import { IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'
 import { useProjectFormSubmit } from './useProjectFormSubmit'
@@ -11,11 +11,16 @@ export function useProjectForm(props: IProjectFormProps) {
   const model = useProjectModel(props)
   const options = useProjectFormOptions()
   const register = useFormControls(model)
-  const submit = useProjectFormSubmit(props, model, options)
+  const submitProps = useProjectFormSubmit(props, model, options)
+  const formControlProps: IFormControlProps = {
+    ...props,
+    model,
+    submitProps
+  }
   return {
     model,
-    submit,
     options,
-    register
+    register,
+    formControlProps
   }
 }
