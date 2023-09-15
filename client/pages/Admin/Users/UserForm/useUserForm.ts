@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { IFormControlProps, ITextFieldProps } from 'components/FormControl'
+import { IFormControlProps, IInputFieldProps } from 'components/FormControl'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
@@ -48,7 +48,7 @@ export function useUserForm(props: IUserFormProps) {
 
   const adSync = subscription?.settings?.adsync || { properties: [] }
 
-  const inputProps = ({ key, label }): ITextFieldProps => ({
+  const inputProps = ({ key, label }): IInputFieldProps => ({
     label,
     description: _.contains(adSync?.properties, key)
       ? t('admin.users.userFieldAdSync')

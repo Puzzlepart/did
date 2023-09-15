@@ -2,7 +2,7 @@ import { Checkbox } from '@fluentui/react-components'
 import {
   AutocompleteControl,
   FormControl,
-  TextField
+  InputField
 } from 'components/FormControl'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -35,22 +35,22 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           })
         }
       />
-      <TextField
+      <InputField
         {...inputProps({ key: 'surname', label: t('common.surnameLabel') })}
       />
-      <TextField
+      <InputField
         {...inputProps({
           key: 'givenName',
           label: t('common.givenNameLabel')
         })}
       />
-      <TextField
+      <InputField
         {...inputProps({
           key: 'displayName',
           label: t('common.displayNameLabel')
         })}
       />
-      <TextField
+      <InputField
         {...inputProps({
           key: 'jobTitle',
           label: t('common.jobTitleLabel')

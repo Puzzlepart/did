@@ -4,8 +4,8 @@ import { EntityLabel } from 'components/EntityLabel'
 import {
   FormControl,
   IconPickerControl,
-  TextControl,
-  TextControlOptions
+  InputControl,
+  InputControlOptions
 } from 'components/FormControl'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,8 +17,8 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
   const { model, register, submitProps, panelProps } = useLabelForm(props)
   return (
     <FormControl submitProps={submitProps} panelProps={panelProps}>
-      <TextControl
-        {...register<TextControlOptions>('name', {
+      <InputControl
+        {...register<InputControlOptions>('name', {
           casing: 'lower',
           replace: [/["#$%&'()*+,./:<>?\\{}~-]/g, ' ']
         })}
@@ -29,8 +29,8 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
         required={!props.edit}
         disabled={!!props.edit}
       />
-      <TextControl
-        {...register<TextControlOptions>('description', {
+      <InputControl
+        {...register<InputControlOptions>('description', {
           casing: 'capitalized'
         })}
         label={t('common.descriptionFieldLabel')}
@@ -40,7 +40,6 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
         {...register('icon')}
         label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
-        // width={300}
       />
       <ColorPickerField
         label={t('common.colorLabel')}

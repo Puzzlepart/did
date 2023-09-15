@@ -3,7 +3,7 @@ import {
   DropdownControl,
   DropdownControlOptions,
   FormControl,
-  TextControl
+  InputControl
 } from 'components/FormControl'
 import { DateObject } from 'DateUtils'
 import React from 'react'
@@ -28,7 +28,7 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
         onDismiss: props.onDismiss
       }}
     >
-      <TextControl
+      <InputControl
         {...register('name')}
         label={t('admin.apiTokens.tokenNameLabel')}
         required={true}

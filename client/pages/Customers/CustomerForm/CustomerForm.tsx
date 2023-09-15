@@ -1,10 +1,10 @@
 import {
   FormControl,
   IconPickerControl,
+  InputControl,
+  InputControlOptions,
   SwitchControl,
-  SwitchControlOptions,
-  TextControl,
-  TextControlOptions
+  SwitchControlOptions
 } from 'components/FormControl'
 import packageFile from 'package'
 import React, { FC } from 'react'
@@ -18,8 +18,8 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { submit, register } = useCustomerForm(props)
   return (
     <FormControl {...props} submitProps={submit}>
-      <TextControl
-        {...register<TextControlOptions>('key', {
+      <InputControl
+        {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), '']
         })}
@@ -28,8 +28,8 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         description={t('customers.keyFieldDescription', packageFile.config.app)}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('name', { casing: 'capitalized' })}
+      <InputControl
+        {...register<InputControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
         description={t(
           'customers.nameFieldDescription',
@@ -37,8 +37,8 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         )}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('description', {
+      <InputControl
+        {...register<InputControlOptions>('description', {
           casing: 'capitalized'
         })}
         label={t('common.descriptionFieldLabel')}

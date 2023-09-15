@@ -4,9 +4,9 @@ import {
   CheckboxControl,
   FormControl,
   IconPickerControl,
-  LabelPickerControl,
-  TextControl,
-  TextControlOptions
+  InputControl,
+  InputControlOptions,
+  LabelPickerControl
 } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
 import packageFile from 'package'
@@ -36,8 +36,8 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         selectedKey={model.value('customerKey')}
         onSelected={(customer) => model.set('customerKey', customer.key)}
       />
-      <TextControl
-        {...register<TextControlOptions>('key', {
+      <InputControl
+        {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), '']
         })}
@@ -47,14 +47,14 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         required={true}
       />
       <TagPreview hidden={!!props.edit} />
-      <TextControl
-        {...register<TextControlOptions>('name', { casing: 'capitalized' })}
+      <InputControl
+        {...register<InputControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
         description={t('projects.nameFieldDescription', packageFile.config.app)}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('description', {
+      <InputControl
+        {...register<InputControlOptions>('description', {
           casing: 'capitalized'
         })}
         label={t('common.descriptionFieldLabel')}
@@ -67,7 +67,6 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         label={t('common.iconFieldLabel')}
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        // width={300}
         required={true}
       />
       <CheckboxControl
