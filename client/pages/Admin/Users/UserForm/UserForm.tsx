@@ -24,7 +24,6 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
       model={model}
       panelProps={{ ...props, scroll: true }}
       submitProps={submitProps}
-      debug={true}
     >
       <AutocompleteControl
         required={true}

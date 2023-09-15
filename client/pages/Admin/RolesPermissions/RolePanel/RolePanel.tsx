@@ -16,7 +16,6 @@ export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
       model={model}
       submitProps={submitProps}
       panelProps={panelProps}
-      debug={true}
     >
       <InputControl
         {...register('name')}

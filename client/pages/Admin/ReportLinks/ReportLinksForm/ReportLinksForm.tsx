@@ -22,7 +22,6 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
       model={model}
       submitProps={submitProps}
       panelProps={panelProps}
-      debug={true}
     >
       <InputControl
         {...register<InputControlOptions>('name')}

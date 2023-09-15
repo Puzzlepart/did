@@ -59,7 +59,8 @@ export function useMap<
    *
    * @returns Model value from the converted object
    */
-  function value<T = any>(key: KeyType, _defaultValue: T = null): T {
+  function value<T = any>(key?: KeyType, _defaultValue: T = null): T {
+    if(!key) return $ as unknown as T
     return ($ as any)[key] ?? _defaultValue
   }
 
@@ -113,13 +114,14 @@ export interface TypedMap<KeyType, ObjectType, ValueType = any> {
 
   /**
    * Gets the value of the given key in the map.
+   * If no key is specified the entire object (`$`) is returned.
    *
    * @param key The key to get the value for.
    * @param defaultValue The default value to return if the key is not found in the map.
    *
    * @returns The value of the given key in the map, or the default value if the key is not found.
    */
-  value: <T = any>(key: KeyType, defaultValue?: T) => T
+  value: <T = any>(key?: KeyType, defaultValue?: T) => T
 
   /**
    * Resets the entire map to an empty `Map`.

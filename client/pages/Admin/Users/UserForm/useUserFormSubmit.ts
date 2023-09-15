@@ -3,9 +3,11 @@ import { FormSubmitHook, IFormControlProps } from 'components/FormControl'
 import { useMap } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { User } from 'types'
 import s from 'underscore.string'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
 import { IUserFormProps } from './types'
+import _ from 'underscore'
 
 /**
  * A custom hook that returns submit props needed for the `FormControls` component.
@@ -26,14 +28,9 @@ export const useUserFormSubmit: FormSubmitHook<
    * On save user
    */
   const onSave = async () => {
-    // eslint-disable-next-line no-console
-    console.log(model.$)
     await addOrUpdateUser({
       variables: {
-        user: {
-          displayName: 'Hello world',
-          role: model.value('role', 'User')
-        },
+        user: _.omit(model.value<User>(), '__typename', 'photo'),
         update: !!props.user
       }
     })
