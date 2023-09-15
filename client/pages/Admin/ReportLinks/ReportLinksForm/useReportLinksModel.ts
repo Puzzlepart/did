@@ -36,8 +36,5 @@ export function useReportLinksModel(props: IReportLinksFormProps) {
     }
   }, [props?.isOpen])
 
-  return {
-    ...map,
-    reset: () => map.$set(INITIAL_MODEL)
-  } as const
+  return map
 }

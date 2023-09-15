@@ -2,42 +2,38 @@ import {
   ChecboxControlOptions,
   CheckboxControl,
   DropdownControl,
+  DropdownControlOptions,
   FormControl,
   IconPickerControl,
-  TextControl,
-  TextControlOptions
+  InputControl,
+  InputControlOptions
 } from 'components/FormControl'
 import $date from 'DateUtils'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
 import { IReportLinksFormProps } from './types'
 import { useReportLinksForm } from './useReportLinksForm'
 
 export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, register, submit } = useReportLinksForm(props)
+  const { model, register, submitProps, panelProps } = useReportLinksForm(props)
   return (
     <FormControl
-      submitProps={submit}
-      panelProps={{
-        ..._.omit(props, 'onSave'),
-        headerText: props.edit
-          ? t('admin.reportLinks.editReportLinkText')
-          : t('admin.reportLinks.addNewReportText'),
-        scroll: true
-      }}
+      model={model}
+      submitProps={submitProps}
+      panelProps={panelProps}
+      debug={true}
     >
-      <TextControl
-        {...register<TextControlOptions>('name')}
+      <InputControl
+        {...register<InputControlOptions>('name')}
         label={t('admin.reportLinks.nameLabel')}
         placeholder={t('admin.reportLinks.namePlaceholder')}
         description={t('admin.reportLinks.nameDescription')}
         required={!props.edit}
         disabled={!!props.edit}
       />
-      <TextControl
-        {...register<TextControlOptions>('description')}
+      <InputControl
+        {...register<InputControlOptions>('description')}
         rows={10}
         label={t('admin.reportLinks.descriptionLabel')}
         placeholder={t('admin.reportLinks.descriptionPlaceholder')}
@@ -50,45 +46,45 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         label={t('common.iconFieldLabel')}
         description={t('admin.reportLinks.iconDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        // width={300}
         defaultSelected={model.$.icon}
-        // iconProps={{ styles: { root: { color: model.$.iconColor } } }}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('iconColor')}
+      <InputControl
+        {...register('iconColor')}
         label={t('admin.reportLinks.iconColorLabel')}
         placeholder={t('admin.reportLinks.iconColorPlaceholder')}
         description={t('admin.reportLinks.iconColorDescription')}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('externalUrl')}
+      <InputControl
+        {...register('externalUrl')}
         label={t('admin.reportLinks.externalUrlLabel')}
         placeholder={t('admin.reportLinks.externalUrlPlaceholder')}
         description={t('admin.reportLinks.externalUrlDescription')}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('year')}
-        // type='number'
+      <InputControl
+        {...register('year')}
+        type='number'
         maxLength={4}
         label={t('admin.reportLinks.yearLabel')}
         placeholder={t('admin.reportLinks.yearPlaceholder')}
         description={t('admin.reportLinks.yearDescription')}
       />
       <DropdownControl
-        {...register<TextControlOptions>('month')}
+        {...register<DropdownControlOptions>('month', {
+          preTransformValue: ({ optionValue }) => Number.parseInt(optionValue)
+        })}
         label={t('admin.reportLinks.monthLabel')}
         placeholder={t('admin.reportLinks.monthPlaceholder')}
         description={t('admin.reportLinks.monthDescription')}
-        options={[
+        values={[
           {
-            key: null,
+            value: null,
             text: ''
           },
           ...$date.getMonthNames().map((month, index) => ({
-            key: index,
+            value: index.toString(),
             text: month
           }))
         ]}
@@ -106,5 +102,3 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
     </FormControl>
   )
 }
-
-export * from './types'

@@ -71,7 +71,7 @@ export const useReportsFormSubmit: FormSubmitHook<
   /**
    * Checks if form is valid
    */
-  const isFormValid = (): boolean =>
+  const isFormValid =
     !s.isBlank(model.value('name', '')) &&
     isValidUrl(model.value('externalUrl', '')) &&
     !s.isBlank(model.value('icon', '')) &&
@@ -82,6 +82,6 @@ export const useReportsFormSubmit: FormSubmitHook<
     toast,
     text: t('common.save'),
     onClick: onSave,
-    disabled: !isFormValid() || loading
+    disabled: !isFormValid || loading
   } as const
 }
