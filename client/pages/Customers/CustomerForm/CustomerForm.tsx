@@ -1,6 +1,6 @@
-import { IconPicker } from 'components'
 import {
   FormControl,
+  IconPickerControl,
   SwitchControl,
   SwitchControlOptions,
   TextControl,
@@ -45,18 +45,16 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         description={t('customers.descriptionFieldDescription')}
         rows={14}
       />
-      <IconPicker
+      <IconPickerControl
         {...register('icon')}
         label={t('common.iconFieldLabel')}
         description={t('customers.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
         required={true}
       />
       <SwitchControl
         {...register<SwitchControlOptions>('inactive')}
         label={t('common.inactiveFieldLabel')}
-        labelPosition='above'
         description={t('customers.inactiveFieldDescription')}
         hidden={!props.edit}
       />

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
 import { Customer } from 'types'
 import $customers from '../../pages/Customers/customers.gql'
-import { ISuggestionItem } from '../Autocomplete'
+import { ISuggestionItem } from '../FormControl/AutocompleteControl'
 
 /**
  * Component logic hook for `<SearchCustomer />`

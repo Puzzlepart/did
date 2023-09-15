@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
-import { usePermissions } from 'hooks'
+import { IFormControlProps } from 'components'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
 import _ from 'underscore'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
@@ -12,9 +13,9 @@ import { IRolePanelProps } from './types'
  * @category Roles
  */
 export function useRolePanel(props: IRolePanelProps) {
+  const { t } = useTranslation()
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
   const [model, setModel] = useState<RoleInput>({})
-  const [permissions] = usePermissions()
   const isSaveDisabled =
     _.isEmpty(model.name) ||
     _.isEmpty(model.icon) ||
@@ -37,12 +38,13 @@ export function useRolePanel(props: IRolePanelProps) {
     props.onSave()
   }
 
-  return {
-    permissions,
-    model,
-    setModel,
-    onSave,
-    isSaveDisabled,
-    isEdit: !!props.model
+  const submitProps: IFormControlProps['submitProps'] = {
+    text: t('common.save'),
+    onClick: onSave,
+    disabled: isSaveDisabled
   }
+
+  const isEdit = !!props.model
+
+  return { model, setModel, submitProps, isEdit }
 }

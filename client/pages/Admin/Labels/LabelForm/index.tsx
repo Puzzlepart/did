@@ -3,10 +3,10 @@ import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import {
   FormControl,
+  IconPickerControl,
   TextControl,
   TextControlOptions
 } from 'components/FormControl'
-import { IconPicker } from 'components/IconPicker'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ILabelFormProps } from './types'
@@ -22,7 +22,6 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
           casing: 'lower',
           replace: [/["#$%&'()*+,./:<>?\\{}~-]/g, ' ']
         })}
-        spellCheck={false}
         maxLength={20}
         label={t('admin.labels.nameLabel')}
         placeholder={t('admin.labels.namePlaceholder')}
@@ -34,15 +33,14 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
         {...register<TextControlOptions>('description', {
           casing: 'capitalized'
         })}
-        spellCheck={false}
         label={t('common.descriptionFieldLabel')}
         placeholder={t('common.descriptionOptionalFieldLabel')}
       />
-      <IconPicker
+      <IconPickerControl
         {...register('icon')}
         label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
+        // width={300}
       />
       <ColorPickerField
         label={t('common.colorLabel')}

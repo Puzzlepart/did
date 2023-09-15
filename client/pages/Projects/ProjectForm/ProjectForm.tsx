@@ -1,8 +1,10 @@
-import { IconPicker, LabelPicker, SearchCustomer } from 'components'
+import { SearchCustomer } from 'components'
 import {
   ChecboxControlOptions,
   CheckboxControl,
   FormControl,
+  IconPickerControl,
+  LabelPickerControl,
   TextControl,
   TextControlOptions
 } from 'components/FormControl'
@@ -59,13 +61,13 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         description={t('projects.descriptionFieldDescription')}
         rows={8}
       />
-      <IconPicker
+      <IconPickerControl
         name='icon'
         model={model}
         label={t('common.iconFieldLabel')}
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
+        // width={300}
         required={true}
       />
       <CheckboxControl
@@ -74,10 +76,9 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         description={t('projects.inactiveFieldDescription')}
         hidden={!props.edit}
       />
-      <LabelPicker
+      <LabelPickerControl
         label={t('admin.labels.headerText')}
         placeholder={t('projects.filterLabels')}
-        headerText={t('projects.applyLabelsHeaderText')}
         noSelectionText={t('projects.noLabelsSelectedText')}
         defaultSelectedKeys={model.value('labels')}
         onChange={(labels) =>

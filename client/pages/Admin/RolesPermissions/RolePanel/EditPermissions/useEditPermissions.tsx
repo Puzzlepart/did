@@ -12,7 +12,7 @@ import { IEditPermissionsProps } from './types'
  * @returns An object containing permissions, onCheckedValueChange function, and checkedValues.
  */
 export function useEditPermissions(props: IEditPermissionsProps) {
-  const [permissions] = usePermissions()
+  const [permissions] = usePermissions(undefined, props.api)
 
   const onCheckedValueChange: MenuProps['onCheckedValueChange'] = (
     _,

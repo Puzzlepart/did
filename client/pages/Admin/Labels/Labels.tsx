@@ -10,13 +10,14 @@ import { useLabels } from './useLabels'
  */
 export const Labels: TabComponent = () => {
   const { t } = useTranslation()
-  const { columns, form, setForm, query, ConfirmationDialog } = useLabels()
+  const { items, columns, loading, form, setForm, ConfirmationDialog } =
+    useLabels()
 
   return (
     <>
       <List
-        enableShimmer={query.loading}
-        items={query.data?.labels}
+        enableShimmer={loading}
+        items={items}
         columns={columns}
         commandBar={{
           items: [

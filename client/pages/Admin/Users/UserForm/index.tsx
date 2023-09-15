@@ -1,6 +1,6 @@
 import { Checkbox } from '@fluentui/react-components'
-import { Autocomplete, BasePanel } from 'components'
-import { TextField } from 'components/FormControl'
+import { BasePanel } from 'components'
+import { AutocompleteControl, TextField } from 'components/FormControl'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -33,7 +33,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
     >
       {!props.user && (
         <div className={styles.inputContainer}>
-          <Autocomplete
+          <AutocompleteControl
             placeholder={t('common.searchPlaceholder')}
             items={context.state.availableAdUsers.map((u) => ({
               key: u.id,
@@ -47,7 +47,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
                 ...item.data
               })
             }
-            onClear={() => setModel({ ...model, id: '', displayName: '' })}
+            //onClear={() => setModel({ ...model, id: '', displayName: '' })}
           />
         </div>
       )}

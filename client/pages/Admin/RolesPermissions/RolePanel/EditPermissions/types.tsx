@@ -1,7 +1,10 @@
+import { HTMLAttributes } from 'react'
+
 /**
  * Props for the EditPermissions component.
  */
-export interface IEditPermissionsProps {
+export interface IEditPermissionsProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * The label for the component.
    */
@@ -23,4 +26,9 @@ export interface IEditPermissionsProps {
    * @param permissions - The updated array of selected permissions.
    */
   onChange: (permissions: string[]) => void
+
+  /**
+   * Whether or not to fetch API permissions.
+   */
+  api?: boolean
 }

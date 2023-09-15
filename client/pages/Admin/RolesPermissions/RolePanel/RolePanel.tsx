@@ -1,6 +1,5 @@
-import { Field, Input } from '@fluentui/react-components'
-import { BasePanel } from 'components'
-import { IconPicker } from 'components/IconPicker'
+import { Input } from '@fluentui/react-components'
+import { Field, FormControl, IconPickerControl } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -11,25 +10,19 @@ import { useRolePanel } from './useRolePanel'
 
 export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
-  const { model, setModel, onSave, isSaveDisabled, isEdit } =
-    useRolePanel(props)
+  const { model, setModel, submitProps, isEdit } = useRolePanel(props)
 
   return (
-    <BasePanel
-      headerText={props.headerText}
-      isOpen={true}
-      footerActions={[
-        {
-          text: t('common.save'),
-          onClick: onSave,
-          disabled: isSaveDisabled,
-          appearance: 'primary'
-        }
-      ]}
-      onDismiss={props.onDismiss}
+    <FormControl
+      submitProps={submitProps}
+      panelProps={{
+        headerText: props.headerText,
+        isOpen: true,
+        onDismiss: props.onDismiss
+      }}
     >
       <div className={RolePanel.className}>
-        <Field label={t('admin.roleNameLabel')} required={true}>
+        <Field required={true} label={t('admin.roleNameLabel')}>
           <Input
             defaultValue={props.model ? props.model.name : ''}
             disabled={!!props.model}
@@ -39,13 +32,12 @@ export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
             }
           />
         </Field>
-        <IconPicker
+        <IconPickerControl
           label={t('common.iconFieldLabel')}
           required={true}
           placeholder={t('common.iconSearchPlaceholder')}
           defaultSelected={model.icon}
           onSelected={(icon) => setModel({ ...model, icon })}
-          className={styles.inputField}
         />
         <EditPermissions
           label={
@@ -56,7 +48,7 @@ export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
           selectedPermissions={model.permissions}
         />
       </div>
-    </BasePanel>
+    </FormControl>
   )
 }
 

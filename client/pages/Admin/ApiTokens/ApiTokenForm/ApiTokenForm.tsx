@@ -1,6 +1,6 @@
 import { Dropdown, TextField } from '@fluentui/react'
-import { DateObject } from 'DateUtils'
 import { FormControl } from 'components/FormControl'
+import { DateObject } from 'DateUtils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -53,6 +53,7 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
         }))}
       />
       <EditPermissions
+        api={true}
         label={t('admin.apiTokens.permissionsTitle')}
         description={t('admin.apiTokens.editPermissionsDescription')}
         selectedPermissions={token.permissions}

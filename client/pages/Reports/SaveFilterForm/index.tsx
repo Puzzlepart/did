@@ -1,5 +1,5 @@
 import { ActionButton, TextField } from '@fluentui/react'
-import { IconPicker } from 'components'
+import { IconPickerControl } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -32,7 +32,7 @@ export const SaveFilterForm: StyledComponent<ISaveFilterFormProps> = (
         />
       </div>
       <div hidden={!inputVisible}>
-        <IconPicker
+        <IconPickerControl
           defaultSelected={value('iconProps').iconName}
           onSelected={(iconName) => set('iconProps', { iconName })}
         />

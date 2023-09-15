@@ -1,4 +1,4 @@
-import { Icon } from '@fluentui/react'
+import { css, Icon } from '@fluentui/react'
 import {
   FluentProvider,
   Menu,
@@ -21,40 +21,42 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
   const { permissions, checkedValues, onCheckedValueChange } =
     useEditPermissions(props)
   return (
-    <FluentProvider
-      theme={fluentLightTheme}
-      className={EditPermissions.className}
-    >
-      <div>
-        <Menu
-          checkedValues={checkedValues}
-          onCheckedValueChange={onCheckedValueChange}
-        >
-          <DynamicButton
-            text={props.label}
-            iconName='Accessibility'
-            menuTrigger
-          />
-          <MenuPopover>
-            <MenuList>
-              {permissions.map((permission, index) => (
-                <MenuItemCheckbox
-                  key={index}
-                  name='permissions'
-                  value={permission.id}
-                  icon={<Icon iconName={permission.iconName} />}
-                >
-                  {permission.name}
-                </MenuItemCheckbox>
-              ))}
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-        <FieldDescription text={props.description} />
-      </div>
-    </FluentProvider>
+    <div className={css(EditPermissions.className, props.className)}>
+      <FluentProvider theme={fluentLightTheme}>
+        <div>
+          <Menu
+            checkedValues={checkedValues}
+            onCheckedValueChange={onCheckedValueChange}
+          >
+            <DynamicButton
+              text={props.label}
+              iconName='Accessibility'
+              triggerFor='Menu'
+            />
+            <MenuPopover>
+              <MenuList>
+                {permissions.map((permission, index) => (
+                  <MenuItemCheckbox
+                    key={index}
+                    name='permissions'
+                    value={permission.id}
+                    icon={<Icon iconName={permission.iconName} />}
+                  >
+                    {permission.name}
+                  </MenuItemCheckbox>
+                ))}
+              </MenuList>
+            </MenuPopover>
+          </Menu>
+          <FieldDescription text={props.description} />
+        </div>
+      </FluentProvider>
+    </div>
   )
 }
 
 EditPermissions.displayName = 'EditPermissions'
 EditPermissions.className = styles.editPermissions
+EditPermissions.defaultProps = {
+  api: false
+}

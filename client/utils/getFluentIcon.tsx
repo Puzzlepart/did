@@ -51,6 +51,8 @@ import {
   Delete24Regular,
   DeleteDismiss24Filled,
   DeleteDismiss24Regular,
+  Dismiss24Filled,
+  Dismiss24Regular,
   DocumentDatabase24Filled,
   DocumentDatabase24Regular,
   DrinkMargarita24Filled,
@@ -87,6 +89,8 @@ import {
   System24Regular,
   TableEdit24Filled,
   TableEdit24Regular,
+  TagMultiple24Filled,
+  TagMultiple24Regular,
   Timeline24Filled,
   Timeline24Regular,
   Timer224Filled,
@@ -106,6 +110,14 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Dismiss: {
+    regular: Dismiss24Regular,
+    filled: Dismiss24Filled
+  },
+  TagMultiple: {
+    regular: TagMultiple24Regular,
+    filled: TagMultiple24Filled
+  },
   Accessibility: {
     regular: Accessibility24Regular,
     filled: Accessibility24Filled

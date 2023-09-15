@@ -64,7 +64,7 @@ export interface ITabProps extends HTMLProps<HTMLDivElement> {
   /**
    * Icon to display for the tab in the tab list header.
    */
-  icon?: FluentIconName
+  icon?: FluentIconName | string
 
   /**
    * Permission scope required to view the tab.

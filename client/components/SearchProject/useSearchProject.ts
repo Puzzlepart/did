@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
 import { Project } from 'types'
 import { arrayMap } from 'utils'
-import { ISuggestionItem } from '../Autocomplete'
+import { ISuggestionItem } from '../FormControl/AutocompleteControl'
 import $projects from './projects.gql'
 
 /**

@@ -1,9 +1,9 @@
-import { IconPicker } from 'components'
 import {
   ChecboxControlOptions,
   CheckboxControl,
   DropdownControl,
   FormControl,
+  IconPickerControl,
   TextControl,
   TextControlOptions
 } from 'components/FormControl'
@@ -44,15 +44,15 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         description={t('admin.reportLinks.descriptionDescription')}
         required={!props.edit}
       />
-      <IconPicker
+      <IconPickerControl
         name='icon'
         model={model}
         label={t('common.iconFieldLabel')}
         description={t('admin.reportLinks.iconDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
+        // width={300}
         defaultSelected={model.$.icon}
-        iconProps={{ styles: { root: { color: model.$.iconColor } } }}
+        // iconProps={{ styles: { root: { color: model.$.iconColor } } }}
         required={true}
       />
       <TextControl
