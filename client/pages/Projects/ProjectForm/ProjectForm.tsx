@@ -34,7 +34,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         required={true}
         placeholder={t('common.searchPlaceholder')}
         selectedKey={model.value('customerKey')}
-        onSelected={(customer) => model.set('customerKey', customer.key)}
+        onSelected={(customer) => model.set('customerKey', customer?.key)}
       />
       <InputControl
         {...register<InputControlOptions>('key', {

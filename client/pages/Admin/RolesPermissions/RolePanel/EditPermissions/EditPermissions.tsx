@@ -30,7 +30,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
           >
             <DynamicButton
               text={props.label}
-              iconName='Accessibility'
+              iconName='KeyMultiple'
               triggerFor='Menu'
             />
             <MenuPopover>

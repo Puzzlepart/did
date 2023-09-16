@@ -1,4 +1,5 @@
 import { List } from 'components'
+import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,17 +20,11 @@ export const Labels: TabComponent = () => {
         enableShimmer={loading}
         items={items}
         columns={columns}
-        commandBar={{
-          items: [
-            {
-              key: 'ADD_NEW_LABEL',
-              text: t('admin.labels.addNewText'),
-              iconProps: { iconName: 'Add' },
-              onClick: () => setForm({ isOpen: true })
-            }
-          ],
-          farItems: []
-        }}
+        menuItems={[
+          new ListMenuItem(t('admin.labels.addNewText'))
+            .setOnClick(() => setForm({ isOpen: true }))
+            .withIcon('Tag')
+        ]}
       />
       <LabelForm {...form} />
       {ConfirmationDialog}

@@ -1,5 +1,9 @@
 import { Panel } from '@fluentui/react'
-import { FluentProvider, webLightTheme } from '@fluentui/react-components'
+import {
+  Caption1,
+  FluentProvider,
+  webLightTheme
+} from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './BasePanel.module.scss'
@@ -16,7 +20,10 @@ export const BasePanel: ReusableComponent<IBasePanelProps> = (props) => {
   const panelProps = useBasePanel(props)
   return (
     <Panel {...panelProps}>
-      <FluentProvider theme={webLightTheme}>{props.children}</FluentProvider>
+      <FluentProvider theme={webLightTheme}>
+        {props.headerSubText && <Caption1>{props.headerSubText}</Caption1>}
+        {props.children}
+      </FluentProvider>
     </Panel>
   )
 }

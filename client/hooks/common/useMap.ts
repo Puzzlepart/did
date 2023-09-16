@@ -60,7 +60,7 @@ export function useMap<
    * @returns Model value from the converted object
    */
   function value<T = any>(key?: KeyType, _defaultValue: T = null): T {
-    if(!key) return $ as unknown as T
+    if (!key) return $ as unknown as T
     return ($ as any)[key] ?? _defaultValue
   }
 

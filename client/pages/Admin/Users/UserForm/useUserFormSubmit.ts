@@ -4,10 +4,10 @@ import { useMap } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
+import _ from 'underscore'
 import s from 'underscore.string'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
 import { IUserFormProps } from './types'
-import _ from 'underscore'
 
 /**
  * A custom hook that returns submit props needed for the `FormControls` component.

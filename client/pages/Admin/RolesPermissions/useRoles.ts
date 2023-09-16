@@ -36,7 +36,7 @@ export function useRoles() {
       subText: t('admin.roles.confirmDeleteSubText', role),
       responses: [[t('common.yes'), true, true], [t('common.no')]]
     })
-    if (!response) return
+    if (response !== true) return
     const { data } = await userRoleQuery.refetch({ query: { role: role.name } })
     if (data?.users?.length > 0) {
       setToast({

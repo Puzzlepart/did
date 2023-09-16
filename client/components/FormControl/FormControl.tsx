@@ -1,5 +1,6 @@
 import { PanelType } from '@fluentui/react'
 import { BasePanel } from 'components/BasePanel'
+import { Footer } from 'components/BasePanel/Footer'
 import { JsonDebug } from 'components/JsonDebug'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
@@ -39,7 +40,10 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
           {content}
         </BasePanel>
       ) : (
-        content
+        <>
+          {content}
+          <Footer actions={footerActions} />
+        </>
       )}
       <Toast {...props.submitProps?.toast} />
     </FormControlContext.Provider>

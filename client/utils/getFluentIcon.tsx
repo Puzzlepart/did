@@ -1,7 +1,5 @@
 import { Icon } from '@fluentui/react'
 import {
-  Accessibility24Filled,
-  Accessibility24Regular,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -67,6 +65,8 @@ import {
   Info24Regular,
   Key24Filled,
   Key24Regular,
+  KeyMultiple24Filled,
+  KeyMultiple24Regular,
   PeopleAdd24Filled,
   PeopleAdd24Regular,
   PeopleEdit24Filled,
@@ -118,9 +118,9 @@ const iconCatalog = {
     regular: TagMultiple24Regular,
     filled: TagMultiple24Filled
   },
-  Accessibility: {
-    regular: Accessibility24Regular,
-    filled: Accessibility24Filled
+  KeyMultiple: {
+    regular: KeyMultiple24Regular,
+    filled: KeyMultiple24Filled
   },
   Umbrella: {
     regular: Umbrella24Regular,
