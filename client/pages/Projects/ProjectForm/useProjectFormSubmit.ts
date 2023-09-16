@@ -62,6 +62,6 @@ export const useProjectFormSubmit: FormSubmitHook<
     toast,
     text: props.edit ? t('common.save') : t('common.add'),
     onClick,
-    disabled: loading || !model.valid || !!toast
+    disabled: loading || !!toast
   }
 }

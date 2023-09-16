@@ -105,7 +105,9 @@
     "toggleInactive": "Show/hide inactive projects",
     "searchTimeEntriesPlaceholder": "Search in time entries...",
     "keyInvalid": "The project key must be between {{min}} and {{max}} characters.",
-    "descriptionWarning": "We recommend adding a more detailed project description to provide a clearer understanding of your project's goals and requirements."
+    "descriptionWarning": "We recommend adding a more detailed project description to provide a clearer understanding of your project's goals and requirements.",
+    "customerFieldDescription": "Select the customer associated with this project from the dropdown list. If the customer is not in the list, you can create a new one - or maybe talk to an adult?",
+    "customerRequired": "Oops! Did you accidentally ghost a customer from the list? Time to pick a customer and make them feel appreciated in our project - they won't haunt you, we promise!"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

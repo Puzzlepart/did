@@ -343,6 +343,18 @@ export function getFluentIcon(
 }
 
 /**
+ * Returns an array of strings representing the names of all available Fluent icons.
+ *
+ * @returns An array of strings representing the names of all available Fluent icons.
+ */
+export function getFluentIcons() {
+  return Object.keys(iconCatalog).map((key) => ({
+    name: key,
+    hasFilledIcon: !!iconCatalog[key].filled
+  }))
+}
+
+/**
  * Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
  *
  * @param name - The name of the icon to retrieve.

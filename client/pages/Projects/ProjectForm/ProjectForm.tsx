@@ -1,6 +1,5 @@
 import { SearchCustomer } from 'components'
 import {
-  ChecboxControlOptions,
   CheckboxControl,
   FormControl,
   IconPickerControl,
@@ -17,6 +16,7 @@ import { ProjectFormOptions } from './ProjectFormOptions'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
+import { PROJECT_KEY_REGEX } from './validation'
 
 /**
  * ProjectForm component is used to create and edit projects.
@@ -29,8 +29,12 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   return (
     <FormControl {...formControlProps}>
       <SearchCustomer
+        {...register('customerKey', {
+          validator: t('projects.customerRequired')
+        })}
         hidden={!!props.edit || !!props.customerKey}
         label={t('common.customer')}
+        description={t('projects.customerFieldDescription')}
         required={true}
         placeholder={t('common.searchPlaceholder')}
         selectedKey={model.value('customerKey')}
@@ -39,7 +43,12 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       <InputControl
         {...register<InputControlOptions>('key', {
           casing: 'upper',
-          replace: [new RegExp('[^a-zA-Z0-9]'), '']
+          replace: [new RegExp('[^a-zA-Z0-9]'), ''],
+          validator: (value = '') =>
+            !PROJECT_KEY_REGEX.test(value) && [
+              t('projects.keyInvalid', { min: 2, max: 12 }),
+              'error'
+            ]
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
@@ -48,29 +57,36 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       />
       <TagPreview hidden={!!props.edit} />
       <InputControl
-        {...register<InputControlOptions>('name', { casing: 'capitalized' })}
+        {...register<InputControlOptions>('name', {
+          casing: 'capitalized',
+          validator: { minLength: 2 }
+        })}
         label={t('common.nameFieldLabel')}
-        description={t('projects.nameFieldDescription', packageFile.config.app)}
+        description={t('projects.nameFieldDescription')}
         required={true}
       />
       <InputControl
         {...register<InputControlOptions>('description', {
-          casing: 'capitalized'
+          casing: 'capitalized',
+          validator: {
+            minLength: 10,
+            state: 'warning',
+            messages: { minLength: t('projects.descriptionWarning') }
+          }
         })}
         label={t('common.descriptionFieldLabel')}
         description={t('projects.descriptionFieldDescription')}
         rows={8}
       />
       <IconPickerControl
-        name='icon'
-        model={model}
+        {...register('icon')}
         label={t('common.iconFieldLabel')}
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
         required={true}
       />
       <CheckboxControl
-        {...register<ChecboxControlOptions>('inactive')}
+        {...register('inactive')}
         label={t('common.inactiveFieldLabel')}
         description={t('projects.inactiveFieldDescription')}
         hidden={!props.edit}

@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { convertToMap } from 'utils/convertToMap'
 import { ProjectModel } from './ProjectModel'
 import { IProjectFormProps } from './types'
-import { useProjectFormValidation } from './useProjectFormValidation'
 
 /**
  * Initializes the model based on `props.edit`. Sets a random
@@ -37,7 +36,7 @@ export function useInitModel(
  */
 export function useProjectModel(props: IProjectFormProps) {
   const map = useMap<keyof ProjectModel, ProjectModel>()
-  const valid = useProjectFormValidation(map.$, !!props.edit)
+
   useInitModel(map, props)
 
   /**
@@ -52,7 +51,6 @@ export function useProjectModel(props: IProjectFormProps) {
 
   return {
     ...map,
-    valid,
     projectId
   }
 }

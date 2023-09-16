@@ -40,6 +40,8 @@ type ValidatorObject = {
   }
 }
 
+type ValidatorMessage = string
+
 /**
  * Represents the options that can be passed to a form control.
  */
@@ -51,5 +53,5 @@ export type BaseControlOptions = {
    *
    * @param value The value to validate.
    */
-  validator?: ValidatorFunction | ValidatorObject
+  validator?: ValidatorFunction | ValidatorObject | ValidatorMessage
 }

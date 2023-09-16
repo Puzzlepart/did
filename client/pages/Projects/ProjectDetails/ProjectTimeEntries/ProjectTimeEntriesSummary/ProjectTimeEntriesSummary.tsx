@@ -21,12 +21,18 @@ export const ProjectTimeEntriesSummary: StyledComponent<ISummaryProps> = (
           <div key={index} className={styles.item}>
             <Shimmer
               isDataLoaded={!props.loading}
-              className={mergeClasses(styles.value, props.loading && styles.shimmer)}
+              className={mergeClasses(
+                styles.value,
+                props.loading && styles.shimmer
+              )}
             >
               {value}
             </Shimmer>
             <Shimmer
-              className={mergeClasses(styles.label, props.loading && styles.shimmer)}
+              className={mergeClasses(
+                styles.label,
+                props.loading && styles.shimmer
+              )}
               isDataLoaded={!props.loading}
             >
               {label}

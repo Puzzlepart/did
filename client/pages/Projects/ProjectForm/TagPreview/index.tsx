@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { UserMessage } from 'components'
-import { useFormControlContext } from 'components/FormControl'
+import { useFormContext } from 'components/FormControl'
 import React, { FC, HTMLProps } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
  */
 export const TagPreview: FC<HTMLProps<HTMLDivElement>> = (props) => {
   const { t } = useTranslation()
-  const { model } = useFormControlContext()
+  const { model } = useFormContext()
   return (
     <div hidden={props.hidden}>
       <UserMessage

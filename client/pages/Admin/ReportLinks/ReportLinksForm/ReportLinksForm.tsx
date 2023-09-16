@@ -1,5 +1,4 @@
 import {
-  ChecboxControlOptions,
   CheckboxControl,
   DropdownControl,
   DropdownControlOptions,
@@ -89,12 +88,12 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         ]}
       />
       <CheckboxControl
-        {...register<ChecboxControlOptions>('published')}
+        {...register('published')}
         label={t('admin.reportLinks.publishedLabel')}
         description={t('admin.reportLinks.publishedDescription')}
       />
       <CheckboxControl
-        {...register<ChecboxControlOptions>('promoted')}
+        {...register('promoted')}
         label={t('admin.reportLinks.promotedLabel')}
         description={t('admin.reportLinks.promotedDescription')}
       />

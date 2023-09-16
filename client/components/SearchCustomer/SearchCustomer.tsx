@@ -13,7 +13,6 @@ export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (
   props
 ) => {
   const [items, disabled] = useSearchCustomer()
-
   return (
     <AutocompleteControl
       {...props}

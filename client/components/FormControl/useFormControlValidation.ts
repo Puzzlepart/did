@@ -6,6 +6,18 @@ import { ReactElement } from 'react-markdown/lib/react-markdown'
 import { FormInputControlBase, ValidationResult } from './types'
 
 /**
+ * Determines whether a given form input control should be validated.
+ * A control should be validated if it has a name and either a required flag or a validator function.
+ *
+ * @param field - The form input control to check.
+ *
+ * @returns True if the control should be validated, false otherwise.
+ */
+function shouldValidateField(field: FormInputControlBase) {
+  return !!field.name && (field.required || field.options?.validator)
+}
+
+/**
  * A hook that provides form control validation functionality. Checks all fields
  * for either a `required` attribute or a `validator` attribute. If a field has
  * a `required` attribute, it will be checked for a value. If a field has a
@@ -18,14 +30,10 @@ export function useFormControlValidation() {
   const { t } = useTranslation()
   const validationMessages = useMap<string, Record<string, ValidationResult>>()
   const validateForm = useCallback((fields: ReactElement[]) => {
-    const _validationMessages = new Map<string, ValidationResult>()
-    const requiredFormFields = fields
-      .filter(
-        ({ props }: any) =>
-          !!props['name'] && (props['required'] || props.options?.validator)
-      )
+    const formFieldsToValidate = fields
+      .filter((f) => shouldValidateField(f.props))
       .map<FormInputControlBase>((f) => f.props)
-    for (const field of requiredFormFields) {
+    const _validationMessages = formFieldsToValidate.reduce((map, field) => {
       const currentValue = field.model.value(field.name, null)
       if (
         field.required &&
@@ -33,15 +41,16 @@ export function useFormControlValidation() {
           currentValue === null ||
           currentValue === '')
       ) {
-        _validationMessages.set(field.name, [
-          t('formControl.requiredFieldMessage', field),
-          'error'
-        ])
+        let message = t('formControl.requiredFieldMessage', field)
+        if (typeof field.options?.validator === 'string') {
+          message = field.options.validator
+        }
+        map.set(field.name, [message, 'error'])
       } else if (field.options?.validator) {
         let customValidatorResult: ValidationResult
         if (typeof field.options.validator === 'function') {
           customValidatorResult = field.options.validator(currentValue)
-        } else {
+        } else if (typeof field.options.validator === 'object') {
           if (
             field.options.validator.minLength &&
             currentValue.length < field.options.validator.minLength
@@ -56,10 +65,11 @@ export function useFormControlValidation() {
           }
         }
         if (customValidatorResult) {
-          _validationMessages.set(field.name, customValidatorResult)
+          map.set(field.name, customValidatorResult)
         }
       }
-    }
+      return map
+    }, new Map<string, ValidationResult>())
     validationMessages.$set(_validationMessages)
     return !Array.from(_validationMessages.values()).some(
       ([, state]) => state === 'error'
