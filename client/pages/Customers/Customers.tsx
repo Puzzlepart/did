@@ -20,6 +20,7 @@ export const Customers: FC = () => {
         <CustomerDetails />
       ) : (
         <Tabs
+          selectedValue={context.urlParameters.currentTab}
           items={{
             s: [CustomerList, t('common.search')],
             new: [CustomerForm, t('customers.createNewText')]

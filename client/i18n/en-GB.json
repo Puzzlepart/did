@@ -105,7 +105,7 @@
     "toggleInactive": "Show/hide inactive projects",
     "searchTimeEntriesPlaceholder": "Search in time entries...",
     "keyInvalid": "The project key must be between {{min}} and {{max}} characters.",
-    "descriptionWarning": "We recommend adding a more detailed project description to provide a clearer understanding of your project's goals and requirements.",
+    "descriptionWarning": "We recommend including a quick summary of the project. This will provide a concise overview and help others quickly grasp the project's essence.",
     "customerFieldDescription": "Select the customer associated with this project from the dropdown list. If the customer is not in the list, you can create a new one - or maybe talk to an adult?",
     "customerRequired": "Oops! Did you accidentally ghost a customer from the list? Time to pick a customer and make them feel appreciated in our project - they won't haunt you, we promise!"
   },
@@ -114,7 +114,7 @@
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
     "keyFieldDescription": "A unique identifier for the customer. Keep it short, between {{CUSTOMER_KEY_MIN_LENGTH}} and {{CUSTOMER_KEY_MAX_LENGTH}} characters and only capital letters.",
-    "createSuccess": "The customer **{{name}}** was succesfully created.",
+    "createSuccess": "The customer **{{name}}** was succesfully created. Click to go directly to the newly created customer, or don't to stay here and create another one.",
     "createNewText": "Create new",
     "keyFieldLabel": "Customer key",
     "iconFieldDescription": "Use an icon to make the customer more recognizable in the Timesheet and Customer pages. A random icon will be selected if you dont' pick one yourself.",
@@ -128,7 +128,10 @@
     "projectsHeaderText": "Projects",
     "informationHeaderText": "Information",
     "createProjectButtonLabel": "Create new project",
-    "projectFormHeaderText": "Create new project for {{name}}"
+    "projectFormHeaderText": "Create new project for {{name}}",
+    "iconEasterEgg": "An Umbrella? Really? Right, you should be allowed since you are so good at doing your job.",
+    "keyInvalid": "The customer key must be between {{min}} and {{max}} characters.",
+    "descriptionWarning": "We recommend including a quick summary of the customer. This will provide a concise overview and help others quickly grasp the customer's essence."
   },
   "admin": {
     "apiTokens": {

@@ -26,7 +26,7 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   const content: ReactElement = (
     <>
       <div className={FormControl.className}>{props.children}</div>
-      {props.debug && <JsonDebug obj={props.model} />}
+      {props.debug && <JsonDebug obj={props.model.$} />}
     </>
   )
   return (

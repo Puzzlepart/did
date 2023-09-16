@@ -34,9 +34,10 @@ export function useCustomers() {
     () => ({
       ..._.pick(query, 'loading', 'refetch'),
       state,
-      dispatch
+      dispatch,
+      urlParameters
     }),
-    [state, dispatch]
+    [state, urlParameters]
   )
 
   const renderDetails = !!state.selected || !!urlParameters.customerKey
@@ -44,5 +45,5 @@ export function useCustomers() {
   return {
     context,
     renderDetails
-  } as const
+  }
 }

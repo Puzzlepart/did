@@ -2,6 +2,7 @@ import { SelectTabEventHandler } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { ComponentLogicHook } from 'hooks'
 import { FunctionComponent, useCallback, useMemo, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
 import { ITabProps, ITabsProps } from './types'
 
@@ -11,6 +12,25 @@ type UseTabsReturnType = {
   onTabSelect: SelectTabEventHandler
   Component: FunctionComponent<ITabProps>
   componentProps: any
+}
+
+/**
+ * Returns a callback function that updates the URL path at the specified level with the given key.
+ *
+ * @param level The level in the URL path to update.
+ *
+ * @returns A callback function that updates the URL path.
+ */
+function useTabsHistory(level: number) {
+  const history = useHistory()
+  return useCallback(
+    (key: string) => {
+      const paths = history.location.pathname.split('/')
+      paths[level] = key
+      history.replace(paths.join('/'))
+    },
+    [history]
+  )
 }
 
 /**
@@ -30,6 +50,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = ({
   items,
   defaultSelectedValue
 }) => {
+  const updateHistory = useTabsHistory(level)
   const { dispatch } = useAppContext()
   const itemKeys = Object.keys(items)
   const [selectedValue, setSelectedValue] = useState<string>(
@@ -44,6 +65,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = ({
     (_, data) => {
       const key = data?.value as string
       setSelectedValue(key)
+      updateHistory(key)
       dispatch(
         UPDATE_BREADCRUMB({
           key: key,

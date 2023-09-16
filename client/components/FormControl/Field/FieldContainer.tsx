@@ -17,7 +17,7 @@ import { IFieldProps } from './types'
  *
  * @returns An object with `validationMessage` and `validationState` properties.
  */
-function getValidatioProps(
+function getValidationProps(
   validationMessages: ReturnType<
     typeof useFormControlValidation
   >['validationMessages'],
@@ -36,27 +36,29 @@ function getValidatioProps(
  */
 export const FieldContainer: StyledComponent<IFieldProps> = (props) => {
   return (
-    <FormControlContext.Consumer>
-      {({ validationMessages }) => (
-        <Field
-          className={mergeClasses(FieldContainer.className, props.className)}
-          {..._.pick(props, 'hidden', 'onKeyDown')}
-          {...getValidatioProps(validationMessages, props.name)}
-        >
-          <div className={styles.label}>
-            <Label
-              required={props.required}
-              disabled={props.disabled}
-              weight='semibold'
-            >
-              {props.label}
-            </Label>
-          </div>
-          {props.children}
-          {props.description && <FieldDescription text={props.description} />}
-        </Field>
-      )}
-    </FormControlContext.Consumer>
+    !props.hidden && (
+      <FormControlContext.Consumer>
+        {({ validationMessages }) => (
+          <Field
+            className={mergeClasses(FieldContainer.className, props.className)}
+            {..._.pick(props, 'onKeyDown')}
+            {...getValidationProps(validationMessages, props.name)}
+          >
+            <div className={styles.label}>
+              <Label
+                required={props.required}
+                disabled={props.disabled}
+                weight='semibold'
+              >
+                {props.label}
+              </Label>
+            </div>
+            {props.children}
+            {props.description && <FieldDescription text={props.description} />}
+          </Field>
+        )}
+      </FormControlContext.Consumer>
+    )
   )
 }
 

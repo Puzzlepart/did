@@ -1,12 +1,12 @@
 import { useMutation } from '@apollo/client'
-import { FormSubmitHook } from 'components/FormControl'
+import { FormSubmitHook, useFormControlModel } from 'components/FormControl'
 import { useToast } from 'components/Toast'
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CustomersContext } from '../context'
+import { Customer } from 'types'
+import { omitTypename } from 'utils'
+import { useCustomersContext } from '../context'
 import $create_or_update_customer from './create-or-update-customer.gql'
 import { ICustomerFormProps } from './types'
-import { useCustomerModel } from './useCustomerModel'
 
 /**
  * Returns submit props used by `<FormControl />`
@@ -18,10 +18,10 @@ import { useCustomerModel } from './useCustomerModel'
  */
 export const useCustomerFormSubmit: FormSubmitHook<
   ICustomerFormProps,
-  ReturnType<typeof useCustomerModel>
+  ReturnType<typeof useFormControlModel>
 > = (props, model) => {
   const { t } = useTranslation()
-  const { refetch } = useContext(CustomersContext)
+  const { refetch } = useCustomersContext()
   const [toast, setToast, isToastShowing] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_customer)
 
@@ -32,20 +32,19 @@ export const useCustomerFormSubmit: FormSubmitHook<
     try {
       await mutate({
         variables: {
-          customer: model.$,
+          customer: omitTypename(model.$),
           update: !!props.edit
         }
       })
-      if (props.panelProps) {
-        setTimeout(props.panelProps.onSave, 1000)
-      } else {
-        setToast({
-          text: t('customers.createSuccess', model.$),
-          intent: 'success'
-        })
-        model.reset()
-        refetch()
-      }
+      setToast({
+        text: t('customers.createSuccess', model.$ as Customer)
+        // onClick: () => {
+        //   window.location.replace(`/customers/${model.value('key')}`)
+        // },
+        // intent: 'success'
+      })
+      model.reset()
+      // refetch()
     } catch {
       setToast({
         text: t('customers.createError'),

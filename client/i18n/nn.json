@@ -105,7 +105,7 @@
     "toggleInactive": "Vis/skjul inaktive prosjekter",
     "searchTimeEntriesPlaceholder": "Søk i tidsoppføringar...",
     "keyInvalid": "Prosjektnøkkelen må være mellom {{min}} og {{max}} tegn.",
-    "descriptionWarning": "Vi anbefaler å legge til en mer detaljert prosjektbeskrivelse for å gi en klarere forståelse av prosjektets mål og krav.",
+    "descriptionWarning": "Me tilrår å inkludera ei rask oppsummering av prosjektet. Dette vil gi ei kortfatta oversikt og hjelpa andre raskt å forstå essensen for prosjektet.",
     "customerFieldDescription": "Velg kunden knyttet til dette prosjektet fra rullegardinlisten. \nHvis kunden ikke står på listen, kan du opprette en ny – eller kanskje snakke med en voksen?",
     "customerRequired": "Oops! Droppet du ved et uhell å velge en kunde fra listen? På tide å velge en kunde og få dem til å føle seg verdsatt i prosjektet vårt - de vil ikke hjemsøke deg, det lover vi!"
   },
@@ -114,7 +114,7 @@
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
     "keyFieldDescription": "Ein unik identifikator for kunden. Haldt det kort, mellom {{min}} og {{max}} teikn. Bruk berre store bokstavar. Vel - faktisk har vi vært ganske irriterende - vi tillater ikke små bokstaver i feltet.",
-    "createSuccess": "Kunden **{{name}}** vart oppretta.",
+    "createSuccess": "Kunden **{{name}}** ble opprettet. \nKlikk for å gå direkte til den nyopprettede kunden, eller ikke bli her og opprette en ny.",
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk eit ikon for å gjere kunden meir synleg på timelista og kundesida. \nEit tilfeldig ikon blir valt for deg viss du ikkje vel eit sjølv.",
@@ -130,7 +130,8 @@
     "createProjectButtonLabel": "Opprett nytt prosjekt",
     "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
     "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{maks}} tegn.",
-    "iconEasterEgg": "Ein paraply? Verkeleg? Greitt, du burde få lov sidan du er så flink til å gjera jobben din."
+    "iconEasterEgg": "Ein paraply? Verkeleg? Greitt, du burde få lov sidan du er så flink til å gjera jobben din.",
+    "descriptionWarning": "Me tilrår å inkludera ei rask oppsummering av kunden. Dette vil gi ei kortfatta oversikt og hjelpa andre raskt å forstå essensen til kunden."
   },
   "admin": {
     "apiTokens": {

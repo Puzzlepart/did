@@ -4,7 +4,7 @@ import { Customer } from 'types'
 import { CustomersTab } from '../types'
 
 type OpenPanelPayload = {
-  onSaveCallback: () => void
+  onSaveCallback?: () => void
   onDismissCallback: () => void
 }
 

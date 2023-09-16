@@ -15,6 +15,13 @@ export const Tabs: ReusableComponent<ITabsProps> = (props) => {
   const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =
     useTabs(props)
 
+  /**
+   * An array of `Tab` components generated from the `items` prop.
+   * Each `Tab` component is created with a `value` prop set to the corresponding key in `items`,
+   * and a `children` prop set to the `text` property of the corresponding header object, or the header string if it is not an object.
+   * If the corresponding header object has an `iconName` property, the `Tab` component is created with an `icon` prop set to the corresponding Fluent icon.
+   * If the corresponding header object has a `disabled` property set to `true`, the `Tab` component is created with a `disabled` prop set to `true`.
+   */
   const tabItems = useMemo(() => {
     return itemKeys.map((key) => {
       const [, header] = props.items[key]

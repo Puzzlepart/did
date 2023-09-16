@@ -1,7 +1,7 @@
-import { useFormControls } from 'components/FormControl'
+import { useFormControlModel, useFormControls } from 'components/FormControl'
+import { Customer } from 'types'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormSubmit } from './useCustomerFormSubmit'
-import { useCustomerModel } from './useCustomerModel'
 
 /**
  * Component logic hook for `<CustomerForm />`
@@ -10,7 +10,7 @@ import { useCustomerModel } from './useCustomerModel'
  * @returns `model` and `submit`
  */
 export function useCustomerForm(props: ICustomerFormProps) {
-  const model = useCustomerModel(props)
+  const model = useFormControlModel<keyof Customer, Customer>(props.edit)
   const submit = useCustomerFormSubmit(props, model)
   const register = useFormControls(model)
   return {

@@ -1,5 +1,6 @@
 import { Switch } from '@fluentui/react-components'
 import React from 'react'
+import _ from 'underscore'
 import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './SwitchControl.module.scss'
@@ -16,10 +17,7 @@ export const SwitchControl: FormInputControlComponent = (props) => {
   return (
     <Field
       className={SwitchControl.className}
-      label={props.label}
-      description={props.description}
-      required={props.required}
-      hidden={props.hidden}
+      {..._.pick(props, 'name', 'label', 'description', 'required', 'hidden')}
     >
       <Switch
         onChange={(event, data) => onChange(event, data.checked)}

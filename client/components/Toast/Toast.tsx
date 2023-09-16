@@ -24,6 +24,3 @@ export const Toast: ReusableComponent<IToastProps> = (props) => {
 
 Toast.displayName = 'Toast'
 Toast.className = styles.toast
-
-export * from './types'
-export * from './useToast'

@@ -20,7 +20,7 @@ export const useFormControl: ComponentLogicHook<
       typeof useFormControlValidation
     >['validationMessages']
   }
-> = ({ children, submitProps }) => {
+> = ({ children, submitProps, panelProps }) => {
   const { validationMessages, validateForm } = useFormControlValidation()
   const footerActions = useMemo<IDynamicButtonProps[]>(
     () => [
@@ -28,6 +28,9 @@ export const useFormControl: ComponentLogicHook<
         ...submitProps,
         onClick: (event: any) => {
           if (validateForm(children as ReactElement[])) {
+            if (panelProps?.onDismiss) {
+              panelProps.onDismiss(event)
+            }
             return submitProps.onClick(event)
           }
         },

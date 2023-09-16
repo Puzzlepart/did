@@ -14,9 +14,9 @@ import { useCustomerForm } from './useCustomerForm'
 
 export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
-  const { submit, register } = useCustomerForm(props)
+  const { model, submit, register } = useCustomerForm(props)
   return (
-    <FormControl {...props} submitProps={submit}>
+    <FormControl {...props} model={model} submitProps={submit} debug={true}>
       <InputControl
         {...register<InputControlOptions>('key', {
           casing: 'upper',
@@ -36,18 +36,18 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
       <InputControl
         {...register<InputControlOptions>('name', { casing: 'capitalized' })}
         label={t('common.nameFieldLabel')}
-        description={t(
-          'customers.nameFieldDescription',
-          { min: 2 }
-        )}
+        description={t('customers.nameFieldDescription', { min: 2 })}
         required={true}
       />
       <InputControl
         {...register<InputControlOptions>('description', {
           casing: 'capitalized',
           validator: {
-            minLength: 2,
-            state: 'warning'
+            minLength: 10,
+            state: 'warning',
+            messages: {
+              minLength: t('customers.descriptionWarning')
+            }
           }
         })}
         label={t('common.descriptionFieldLabel')}

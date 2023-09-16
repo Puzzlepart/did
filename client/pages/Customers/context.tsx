@@ -1,7 +1,7 @@
 import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, Dispatch, useContext } from 'react'
-import { ICustomersState } from './types'
+import { ICustomersState, ICustomersUrlParameters } from './types'
 
 /**
  * Interface for the Customers context object.
@@ -26,6 +26,11 @@ export interface ICustomersContext {
    * Whether the component is loading.
    */
   loading?: boolean
+
+  /**
+   * The URL parameters for the component.
+   */
+  urlParameters: ICustomersUrlParameters
 }
 
 export const CustomersContext = createContext<ICustomersContext>(null)

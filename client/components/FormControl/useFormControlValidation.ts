@@ -53,7 +53,7 @@ export function useFormControlValidation() {
         } else if (typeof field.options.validator === 'object') {
           if (
             field.options.validator.minLength &&
-            currentValue.length < field.options.validator.minLength
+            currentValue?.length < field.options.validator.minLength
           ) {
             const message =
               field.options?.validator?.messages?.minLength ??

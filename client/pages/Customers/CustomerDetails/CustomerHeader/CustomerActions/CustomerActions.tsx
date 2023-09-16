@@ -47,10 +47,6 @@ export const CustomerActions: StyledComponent = (props) => {
           onClick={() =>
             context.dispatch(
               OPEN_CUSTOMER_PANEL({
-                onSaveCallback: () => {
-                  context.refetch()
-                  context.dispatch(CLOSE_CUSTOMER_PANEL())
-                },
                 onDismissCallback: () =>
                   context.dispatch(CLOSE_CUSTOMER_PANEL())
               })

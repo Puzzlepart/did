@@ -68,12 +68,14 @@ export function useCustomersReducer(
             isOpen: true,
             headerText: state.selected.name,
             onDismiss: payload.onDismissCallback,
-            onSave: payload.onSaveCallback
+            scroll: true
           }
         }
       })
       .addCase(CLOSE_CUSTOMER_PANEL, (state) => {
-        state.customerForm = null
+        if (state.customerForm?.panelProps) {
+          state.customerForm = null
+        }
       })
   )
 }

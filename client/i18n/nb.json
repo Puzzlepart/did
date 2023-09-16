@@ -114,7 +114,7 @@
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
     "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, mellom {{min}} og {{max}} tegn og kun store bokstaver. Vel - faktisk har vi vært ganske irriterende - vi tillater ikke små bokstaver i feltet.",
-    "createSuccess": "Kunden **{{name}}** ble opprettet.",
+    "createSuccess": "Kunden **{{name}}** ble opprettet. \nKlikk for å gå direkte til den nyopprettede kunden, eller ikke bli her og opprette en ny.",
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk et ikon for å gjøre kunden mer gjenkjennelig på timelisten og kundesiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv.",
@@ -130,7 +130,8 @@
     "createProjectButtonLabel": "Opprett nytt prosjekt",
     "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
     "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{maks}} tegn.",
-    "iconEasterEgg": "En paraply? Virkelig? Greit, du burde få lov siden du er så flink til å gjøre jobben din."
+    "iconEasterEgg": "En paraply? Virkelig? Greit, du burde få lov siden du er så flink til å gjøre jobben din.",
+    "descriptionWarning": "Vi anbefaler å inkludere en rask oppsummering av kunden. \nDette vil gi en kortfattet oversikt og hjelpe andre raskt å forstå kundens essens."
   },
   "admin": {
     "apiTokens": {
