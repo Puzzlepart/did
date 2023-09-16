@@ -1,4 +1,9 @@
-import { Tab, TabList, TabProps, mergeClasses } from '@fluentui/react-components'
+import {
+  mergeClasses,
+  Tab,
+  TabList,
+  TabProps
+} from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React, { useMemo } from 'react'
 import { getFluentIcon } from 'utils'
@@ -24,7 +29,12 @@ export const Tabs: ReusableComponent<ITabsProps> = (props) => {
   }, [props.items])
 
   return (
-    <div className={mergeClasses(Tabs.className, props.vertical && styles.vertical)}>
+    <div
+      className={mergeClasses(
+        Tabs.className,
+        props.vertical && styles.vertical
+      )}
+    >
       <TabList
         className={styles.list}
         vertical={props.vertical}
