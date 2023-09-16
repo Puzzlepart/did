@@ -26,6 +26,11 @@ type ValidatorObject = {
   minLength?: number
 
   /**
+   * The regular expression to use to validate the value.
+   */
+  regex?: RegExp
+
+  /**
    * The validation state to use for the control.
    */
   state?: ValidationState

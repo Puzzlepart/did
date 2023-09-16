@@ -22,7 +22,7 @@ export const useCustomerFormSubmit: FormSubmitHook<
 > = (props, model) => {
   const { t } = useTranslation()
   const { refetch } = useContext(CustomersContext)
-  const [toast, setToast] = useToast(8000)
+  const [toast, setToast, isToastShowing] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_customer)
 
   /**
@@ -57,6 +57,6 @@ export const useCustomerFormSubmit: FormSubmitHook<
     toast,
     text: props.edit ? t('common.save') : t('common.add'),
     onClick,
-    disabled: loading || !model.valid || !!toast
+    disabled: loading || isToastShowing
   }
 }

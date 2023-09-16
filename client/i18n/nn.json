@@ -113,12 +113,12 @@
     "inactiveText": "Denne kunden er markert som inaktiv.",
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
-    "keyFieldDescription": "Ein unik identifikator for kunden. Haldt det kort, mellom {{CUSTOMER_KEY_MIN_LENGTH}} og {{CUSTOMER_KEY_MAX_LENGTH}} teikn. Bruk berre store bokstavar.",
+    "keyFieldDescription": "Ein unik identifikator for kunden. Haldt det kort, mellom {{min}} og {{max}} teikn. Bruk berre store bokstavar. Vel - faktisk har vi vært ganske irriterende - vi tillater ikke små bokstaver i feltet.",
     "createSuccess": "Kunden **{{name}}** vart oppretta.",
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk eit ikon for å gjere kunden meir synleg på timelista og kundesida. \nEit tilfeldig ikon blir valt for deg viss du ikkje vel eit sjølv.",
-    "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} teikn",
+    "nameFieldDescription": "Namnet på kunden. Dette vil vera synleg i timelista di og i prosjektoversikta. Minimum {{min}} teikn. Vi har ingen satt makslengde, men bruk sunn fornuft.",
     "descriptionFieldDescription": "Ei kort skildring av kunden. Det er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi får dessverre ikkje oppretta kunden akkurat no. Prøv igjen seinare, eller spør ein av dei vaksne.",
     "searchProjectsPlaceholder": "Søk i prosjekter for {{name}}...",
@@ -128,7 +128,9 @@
     "projectsHeaderText": "Prosjekter",
     "informationHeaderText": "Informasjon",
     "createProjectButtonLabel": "Opprett nytt prosjekt",
-    "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}"
+    "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
+    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{maks}} tegn.",
+    "iconEasterEgg": "Ein paraply? Verkeleg? Greitt, du burde få lov sidan du er så flink til å gjera jobben din."
   },
   "admin": {
     "apiTokens": {

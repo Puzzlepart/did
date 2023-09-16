@@ -1,7 +1,6 @@
 import { useMap } from 'hooks/common/useMap'
 import { CustomerModel } from './CustomerModel'
 import { ICustomerFormProps } from './types'
-import { useCustomerFormValidation } from './useCustomerFormValidation'
 import { useInitModel } from './useInitModel'
 
 /**
@@ -14,12 +13,8 @@ import { useInitModel } from './useInitModel'
  */
 export function useCustomerModel(props: ICustomerFormProps) {
   const map = useMap<keyof CustomerModel, CustomerModel>()
-  const valid = useCustomerFormValidation(map.$)
 
   useInitModel(map, props)
 
-  return {
-    ...map,
-    valid
-  }
+  return map
 }

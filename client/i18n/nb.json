@@ -113,12 +113,12 @@
     "inactiveText": "Denne kunden er markert som inaktiv.",
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
-    "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, mellom {{CUSTOMER_KEY_MIN_LENGTH}} og {{CUSTOMER_KEY_MAX_LENGTH}} tegn og kun store bokstaver.",
+    "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, mellom {{min}} og {{max}} tegn og kun store bokstaver. Vel - faktisk har vi vært ganske irriterende - vi tillater ikke små bokstaver i feltet.",
     "createSuccess": "Kunden **{{name}}** ble opprettet.",
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk et ikon for å gjøre kunden mer gjenkjennelig på timelisten og kundesiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv.",
-    "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer.",
+    "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{min}} karakterer. Vi har ingen satt makslengde, men bruk sunn fornuft.",
     "descriptionFieldDescription": "Kort beskrivelse av kunden. \nDet er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
     "searchProjectsPlaceholder": "Søk i prosjekter for {{name}}...",
@@ -128,7 +128,9 @@
     "projectsHeaderText": "Prosjekter",
     "informationHeaderText": "Informasjon",
     "createProjectButtonLabel": "Opprett nytt prosjekt",
-    "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}"
+    "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
+    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{maks}} tegn.",
+    "iconEasterEgg": "En paraply? Virkelig? Greit, du burde få lov siden du er så flink til å gjøre jobben din."
   },
   "admin": {
     "apiTokens": {

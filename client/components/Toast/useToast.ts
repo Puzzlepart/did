@@ -29,5 +29,5 @@ export function useToast(
     }, duration)
   }
 
-  return [state, set] as const
+  return [state, set, !!state] as const
 }
