@@ -72,7 +72,9 @@ export function useMap<
    * @returns True if all the keys have a non-blank value, false otherwise.
    */
   function isSet(...keys: KeyType[]): boolean {
-    return keys.every((key) => !s.isBlank(value(key)))
+    const _keys = keys.filter(Boolean)
+    if (_keys.length === 0) return false
+    return keys.filter(Boolean).every((key) => !s.isBlank(value(key)))
   }
 
   return {
