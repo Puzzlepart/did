@@ -103,7 +103,8 @@
     "tagLabel": "Key",
     "editButtonLabel": "Edit project",
     "toggleInactive": "Show/hide inactive projects",
-    "searchTimeEntriesPlaceholder": "Search in time entries..."
+    "searchTimeEntriesPlaceholder": "Search in time entries...",
+    "keyInvalid": "The project key must be between {{min}} and {{max}} characters."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -561,5 +562,9 @@
     "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend.",
     "mobileFeedbackText": "Give feedback",
     "reportAnonymouslyFieldLabel": "Report anonymously"
+  },
+  "formControl": {
+    "minLengthMessage": "The {{label}} field must contain at least {{options.validator.minLength}} characters.",
+    "requiredFieldMessage": "The {{label}} field is mandatory."
   }
 }
