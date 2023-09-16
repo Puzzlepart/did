@@ -21,4 +21,9 @@ export interface IDynamicSearchBoxProps
    * Callback function that is called when the clear search button is clicked (optional).
    */
   onClear?: () => void
+
+  /**
+   * Fluent icon name to render in `contentBefore` (optional).
+   */
+  iconName?: FluentIconName | string
 }

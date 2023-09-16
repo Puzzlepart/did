@@ -1,10 +1,11 @@
 import { mergeClasses } from '@fluentui/react-components'
 import { SearchBox } from '@fluentui/react-search-preview'
 import { DynamicButton } from 'components/DynamicButton'
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import { StyledComponent } from 'types'
 import styles from './DynamicSearchBox.module.scss'
 import { IDynamicSearchBoxProps } from './types'
+import { useDynamicSearchBox } from './useDynamicSearchBox'
 
 /**
  * DynamicSearchBox is a wrapper around the `SearchBox` component from `@fluentui/react-search-preview`
@@ -16,16 +17,7 @@ import { IDynamicSearchBoxProps } from './types'
 export const DynamicSearchBox: StyledComponent<IDynamicSearchBoxProps> = (
   props
 ) => {
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  const value = useMemo(
-    () => props.value ?? searchTerm,
-    [props.value, searchTerm]
-  )
-
-  useEffect(() => {
-    props.onChange(searchTerm.toLowerCase())
-  }, [searchTerm])
-
+  const { setSearchTerm, value, contentBefore } = useDynamicSearchBox(props)
   return (
     <SearchBox
       className={mergeClasses(DynamicSearchBox.className, props.className)}
@@ -35,6 +27,7 @@ export const DynamicSearchBox: StyledComponent<IDynamicSearchBoxProps> = (
         setSearchTerm(data.value)
       }}
       appearance={props.appearance}
+      contentBefore={contentBefore}
       contentAfter={
         <DynamicButton
           className={styles.clearSearch}
