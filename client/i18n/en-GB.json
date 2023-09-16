@@ -104,7 +104,8 @@
     "editButtonLabel": "Edit project",
     "toggleInactive": "Show/hide inactive projects",
     "searchTimeEntriesPlaceholder": "Search in time entries...",
-    "keyInvalid": "The project key must be between {{min}} and {{max}} characters."
+    "keyInvalid": "The project key must be between {{min}} and {{max}} characters.",
+    "descriptionWarning": "We recommend adding a more detailed project description to provide a clearer understanding of your project's goals and requirements."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

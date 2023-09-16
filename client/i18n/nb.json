@@ -104,7 +104,8 @@
     "editButtonLabel": "Rediger prosjekt",
     "toggleInactive": "Vis/skjul inaktive prosjekter",
     "searchTimeEntriesPlaceholder": "Søk i tidsoppføringer...",
-    "keyInvalid": "Prosjektnøkkelen må være mellom {{min}} og {{max}} tegn."
+    "keyInvalid": "Prosjektnøkkelen må være mellom {{min}} og {{max}} tegn.",
+    "descriptionWarning": "Vi anbefaler å legge til en mer detaljert prosjektbeskrivelse for å gi en klarere forståelse av prosjektets mål og krav."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
