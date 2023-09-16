@@ -1,5 +1,4 @@
-import { Label } from '@fluentui/react-components'
-import { css } from '@fluentui/react/lib/Utilities'
+import { Label, mergeClasses } from '@fluentui/react-components'
 import { UserMessage } from 'components/UserMessage'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -16,7 +15,7 @@ import { IFieldProps } from './types'
  */
 export const Field: StyledComponent<IFieldProps> = (props) => (
   <div
-    className={css(Field.className, props.className)}
+    className={mergeClasses(Field.className, props.className)}
     {..._.pick(props, 'hidden', 'onKeyDown')}
   >
     <div className={styles.label}>

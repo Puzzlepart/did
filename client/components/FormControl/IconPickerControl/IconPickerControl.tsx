@@ -1,4 +1,4 @@
-import { css } from '@fluentui/react'
+import { mergeClasses } from '@fluentui/react-components'
 import React from 'react'
 import { AutocompleteControl } from '../AutocompleteControl'
 import { FormInputControlComponent } from '../types'
@@ -20,7 +20,7 @@ export const IconPickerControl: FormInputControlComponent<IIconPickerControlProp
     const autoCompleteProps = useIconPickerControl(props)
     return (
       <div
-        className={css(IconPickerControl.className, props.className)}
+        className={mergeClasses(IconPickerControl.className, props.className)}
         hidden={props.hidden}
       >
         <AutocompleteControl {...autoCompleteProps} />

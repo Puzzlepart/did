@@ -507,7 +507,7 @@
     "manageUsers": "Administrere brukere",
     "manageRolesPermissions": "Administere roller og tilganger",
     "deleteProjectsDescription": "Sletting av prosjekter støttes foreløpig ikke.",
-    "accessTimesheetDescription": "Tilgang til timelisten",
+    "accessTimesheetDescription": "Tilgang til timelisten for å registrere og bekrefte timer.",
     "accessCustomersDescription": "Tilgang til siden kunder der du kan søke i aktive og inaktive kunder.",
     "accessProjectsDescription": "Tilgang til prosjekter-siden der du kan søke i aktive og inaktive prosjekter.",
     "accessAdminDescription": "Tilgang til prosjekt-siden der du kan søke i aktive og inaktive prosjekter.",

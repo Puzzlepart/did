@@ -4,14 +4,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin: -2px -4px;
-    padding: 6px;
+    gap: 15px;
 
     .item {
-      width: auto;
-      height: 30px;
-      margin: 2px 4px;
-
       .icon {
         margin: 0 4px 0 0;
       }

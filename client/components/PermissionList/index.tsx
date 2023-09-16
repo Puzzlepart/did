@@ -4,6 +4,7 @@ import { usePermissions } from 'hooks'
 import React from 'react'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
+import { Caption1, Tooltip, Text } from '@fluentui/react-components'
 
 /**
  * @category Reusable Component
@@ -16,13 +17,21 @@ export const PermissionList: ReusableComponent<IPermissionListProps> = ({
     <div className={PermissionList.className}>
       <div className={styles.container}>
         {permissions.map((perm) => (
-          <div key={perm.id} className={styles.item} title={perm.description}>
-            <Icon className={styles.icon} iconName={perm.iconName} />
-            <span>{perm.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+          <Tooltip key={perm.id} content={(
+            <div style={{ padding: 15 }}>
+              <Text block weight='semibold' style={{ margin: '8px 0' }}>{perm.name}</Text>
+              <Caption1>{perm.description}</Caption1>
+            </div>
+          )} relationship='description'>
+            <div className={styles.item} title={perm.description}>
+              <Icon className={styles.icon} iconName={perm.iconName} />
+              <span>{perm.name}</span>
+            </div>
+          </Tooltip>
+        ))
+        }
+      </div >
+    </div >
   )
 }
 

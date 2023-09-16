@@ -1,10 +1,10 @@
-import { css, Icon } from '@fluentui/react'
 import {
   FluentProvider,
   Menu,
   MenuItemCheckbox,
   MenuList,
-  MenuPopover
+  MenuPopover,
+  mergeClasses
 } from '@fluentui/react-components'
 import { DynamicButton } from 'components'
 import { FieldDescription } from 'components/FormControl'
@@ -21,7 +21,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
   const { permissions, checkedValues, onCheckedValueChange } =
     useEditPermissions(props)
   return (
-    <div className={css(EditPermissions.className, props.className)}>
+    <div className={mergeClasses(EditPermissions.className, props.className)}>
       <FluentProvider theme={fluentLightTheme}>
         <div>
           <Menu
@@ -40,7 +40,6 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
                     key={index}
                     name='permissions'
                     value={permission.id}
-                    icon={<Icon iconName={permission.iconName} />}
                   >
                     {permission.name}
                   </MenuItemCheckbox>

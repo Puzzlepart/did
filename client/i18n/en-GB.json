@@ -507,7 +507,7 @@
     "manageUsers": "Manage users",
     "manageRolesPermissions": "Manage roles and permissions",
     "deleteProjectsDescription": "Deletion of projects is currently not supported.",
-    "accessTimesheetDescription": "Access to Timesheet page",
+    "accessTimesheetDescription": "Access to Timesheet page for registering hours.",
     "accessCustomersDescription": "Acces to Customers page where you can search in active and inactive customers.",
     "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
     "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",

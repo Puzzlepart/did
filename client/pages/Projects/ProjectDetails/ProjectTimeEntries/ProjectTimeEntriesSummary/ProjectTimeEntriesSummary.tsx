@@ -1,4 +1,5 @@
-import { css, Shimmer } from '@fluentui/react'
+import { Shimmer } from '@fluentui/react'
+import { mergeClasses } from '@fluentui/react-components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { StyledComponent } from 'types'
@@ -20,12 +21,12 @@ export const ProjectTimeEntriesSummary: StyledComponent<ISummaryProps> = (
           <div key={index} className={styles.item}>
             <Shimmer
               isDataLoaded={!props.loading}
-              className={css(styles.value, props.loading && styles.shimmer)}
+              className={mergeClasses(styles.value, props.loading && styles.shimmer)}
             >
               {value}
             </Shimmer>
             <Shimmer
-              className={css(styles.label, props.loading && styles.shimmer)}
+              className={mergeClasses(styles.label, props.loading && styles.shimmer)}
               isDataLoaded={!props.loading}
             >
               {label}
