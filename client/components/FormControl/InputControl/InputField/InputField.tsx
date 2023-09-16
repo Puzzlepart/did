@@ -17,10 +17,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
   return (
     <Field
       className={InputField.className}
-      label={props.label}
-      description={props.description}
-      required={props.required}
-      hidden={props.hidden}
+      {..._.pick(props, 'name', 'label', 'description', 'required', 'hidden')}
     >
       {props.rows > 1 ? (
         <Textarea

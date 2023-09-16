@@ -1,20 +1,31 @@
-import { ISuggestionItem } from 'components/FormControl/AutocompleteControl'
+import { IIconProps } from '@fluentui/react'
+import {
+  IAutocompleteControlProps,
+  ISuggestionItem
+} from 'components/FormControl/AutocompleteControl'
 import { useFabricIcons } from 'hooks'
-import _ from 'underscore'
 import { IIconPickerControlProps } from './types'
 
 /**
  * @category Reusable Component
  */
 export function useIconPickerControl(props: IIconPickerControlProps) {
-  const items = useFabricIcons()
+  const items = useFabricIcons(props.includeFluentIcons)
 
+  /**
+   * Returns the default selected key for the `IconPickerControl`.
+   *
+   * @returns The default selected key as a string.
+   */
   const getDefaultSelectedKey = () => {
     const { defaultSelected, model, name } = props
     if (defaultSelected) return defaultSelected
     if (model && name) return model.value(name) as string
   }
 
+  /**
+   * Clears the selected icon and updates the model.
+   */
   const onClear = () => {
     const { onSelected, model, name } = props
     if (onSelected) {
@@ -25,21 +36,26 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
     }
   }
 
+  /**
+   * Callback function that is called when an item is selected from the suggestion list.
+   *
+   * @param item - The selected suggestion item.
+   */
   const onSelected = (item: ISuggestionItem) => {
     const { onSelected, model, name } = props
-    if (onSelected) onSelected(item.data)
-    if (model && name) model.set(name, item.data)
+    if (onSelected) onSelected(item?.data)
+    if (model && name) model.set(name, item?.data)
   }
 
-  return _.omit(
-    {
-      ...props,
-      items,
-      defaultSelectedKey: getDefaultSelectedKey(),
-      onSelected,
-      onClear,
-      itemIcons: true
-    },
-    'className'
-  )
+  return {
+    ...props,
+    items,
+    defaultSelectedKey: getDefaultSelectedKey(),
+    onSelected,
+    onClear,
+    itemIcons: true,
+    getIcon: (item: ISuggestionItem<IIconProps>) => {
+      return item.iconName
+    }
+  } as IAutocompleteControlProps
 }

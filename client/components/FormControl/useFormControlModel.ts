@@ -17,7 +17,6 @@ export function useFormControlModel<KeyType, ObjectType = Record<string, any>>(
   const map = useMap<KeyType, ObjectType>()
   useEffect(() => {
     if (!initialModel) return
-    console.log('initialModel', initialModel)
     map.$set(convertToMap(initialModel))
   }, [initialModel])
   return map

@@ -20,7 +20,12 @@ export const Footer: StyledComponent<IFooterProps> = (props) => {
       )}
       hidden={props.hidden}
     >
-      <div className={mergeClasses(styles.footerInner, props.padded && styles.padded)}>
+      <div
+        className={mergeClasses(
+          styles.footerInner,
+          props.padded && styles.padded
+        )}
+      >
         <div className={styles.actions}>
           {actions.map((action, index) => (
             <DynamicButton key={index} {...action} />

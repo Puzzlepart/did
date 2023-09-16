@@ -1,5 +1,6 @@
 import { IDynamicSearchBoxProps } from 'components/DynamicSearchBox'
 import { CSSProperties } from 'react'
+import { FluentIconName } from 'utils/getFluentIcon'
 import { FormInputControlBase } from '../types'
 import { ISuggestionItem } from './SuggestionItem/types'
 
@@ -58,6 +59,11 @@ export interface IAutocompleteControlProps<T = any>
    * Max height of the autocomplete component.
    */
   maxHeight?: number
+
+  /**
+   * Function to get an icon based on the selected item.
+   */
+  getIcon?: (item: ISuggestionItem<T>) => FluentIconName
 }
 
 /**

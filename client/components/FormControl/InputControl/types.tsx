@@ -1,7 +1,7 @@
-import { FormInputControlBase } from '../types'
+import { BaseControlOptions, FormInputControlBase } from '../types'
 import { IInputFieldProps } from './InputField'
 
-export type InputControlOptions = {
+export interface InputControlOptions extends BaseControlOptions {
   /**
    * Force value casing
    */
@@ -14,5 +14,5 @@ export type InputControlOptions = {
 }
 
 export interface IInputControlProps
-  extends FormInputControlBase,
+  extends FormInputControlBase<InputControlOptions>,
     Pick<IInputFieldProps, 'rows' | 'placeholder' | 'maxLength' | 'type'> {}

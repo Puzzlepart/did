@@ -1,9 +1,6 @@
 import { IFieldProps } from '../Field'
-import { FormInputControlBase } from '../types'
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type ChecboxControlOptions = {}
+import { BaseControlOptions, FormInputControlBase } from '../types'
 
 export interface ICheckboxControlProps
-  extends FormInputControlBase<ChecboxControlOptions>,
+  extends FormInputControlBase<BaseControlOptions>,
     IFieldProps {}

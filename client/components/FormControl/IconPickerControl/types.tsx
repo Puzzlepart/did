@@ -13,4 +13,9 @@ export interface IIconPickerControlProps
    * be specified instead.
    */
   onSelected?: (icon: string) => void
+
+  /**
+   * Include icons from Fluent UI 2 in the suggestions.
+   */
+  includeFluentIcons?: boolean
 }

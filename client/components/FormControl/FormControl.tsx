@@ -22,7 +22,7 @@ import { useFormControl } from './useFormControl'
  * @category Reusable Component
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
-  const { footerActions } = useFormControl(props)
+  const { validationMessages, footerActions } = useFormControl(props)
   const content: ReactElement = (
     <>
       <div className={FormControl.className}>{props.children}</div>
@@ -30,7 +30,9 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
     </>
   )
   return (
-    <FormControlContext.Provider value={{ model: props.model }}>
+    <FormControlContext.Provider
+      value={{ model: props.model, validationMessages }}
+    >
       {props.panelProps ? (
         <BasePanel
           type={PanelType.medium}

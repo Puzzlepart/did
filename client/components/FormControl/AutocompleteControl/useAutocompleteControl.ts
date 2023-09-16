@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { useEffect, useMemo, useRef } from 'react'
+import { FluentIconName } from 'utils'
 import { useAutocompleteControlReducer } from './reducer'
 import { INIT, RESET } from './reducer/actions'
 import { IAutocompleteControlProps } from './types'
@@ -44,10 +45,18 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
 
   const ref = useRef<HTMLDivElement>(null)
 
+  const iconName = useMemo<FluentIconName>(() => {
+    if (props.getIcon && state.selectedItem) {
+      return props.getIcon(state.selectedItem)
+    }
+    return null
+  }, [props.getIcon])
+
   return {
     state,
     dispatch,
     ref,
-    suggestions
+    suggestions,
+    iconName
   }
 }

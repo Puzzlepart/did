@@ -1,26 +1,41 @@
-import { IDynamicButtonProps } from 'components'
+import { IBasePanelProps, IDynamicButtonProps } from 'components'
+import { ComponentLogicHook } from 'hooks'
 import { useMemo } from 'react'
+import { ReactElement } from 'react-markdown/lib/react-markdown'
 import { IFormControlProps } from './types'
+import { useFormControlValidation } from './useFormControlValidation'
 
 /**
  * Hook that returns an object with `footerActions` to be used in a form control.
  *
- * @param model - The form model.
  * @param submitProps - The submit button props.
  *
- * @returns An object with footerActions.
+ * @returns An object with `footerActions`.
  */
-export function useFormControl({ submitProps }: IFormControlProps) {
+export const useFormControl: ComponentLogicHook<
+  IFormControlProps,
+  {
+    footerActions: IBasePanelProps['footerActions']
+    validationMessages: ReturnType<
+      typeof useFormControlValidation
+    >['validationMessages']
+  }
+> = ({ children, submitProps }) => {
+  const { validationMessages, validateForm } = useFormControlValidation()
   const footerActions = useMemo<IDynamicButtonProps[]>(
     () => [
       {
         ...submitProps,
-        hidden: !submitProps?.text,
+        onClick: (event: any) => {
+          if (validateForm(children as ReactElement[])) {
+            return submitProps.onClick(event)
+          }
+        },
         primary: true
       }
     ],
     [submitProps]
   )
 
-  return { footerActions }
+  return { validationMessages, footerActions }
 }

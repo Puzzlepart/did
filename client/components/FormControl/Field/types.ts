@@ -4,9 +4,15 @@ import { HTMLProps } from 'react'
 /**
  * Props for the Field component.
  */
-export interface IFieldProps
+export interface IFieldProps<KeyType = string>
   extends Pick<HTMLProps<HTMLDivElement>, 'className' | 'hidden' | 'onKeyDown'>,
     Pick<LabelProps, 'weight' | 'disabled'> {
+  /**
+   * The `name` attribute is required for the Form Control
+   * to work properly.
+   */
+  name?: KeyType
+
   /**
    * The label for the field.
    */
@@ -17,6 +23,9 @@ export interface IFieldProps
    */
   description?: string
 
+  /**
+   * Whether the field is required or not.
+   */
   required?: boolean
 
   /**

@@ -22,39 +22,34 @@ import { useAutocompleteControl } from './useAutocompleteControl'
  */
 export const AutocompleteControl: FormInputControlComponent<IAutocompleteControlProps> =
   (props) => {
-    const { ref, state, dispatch, suggestions } = useAutocompleteControl(props)
+    const { ref, state, dispatch, suggestions, iconName } =
+      useAutocompleteControl(props)
     return (
-      <>
-        <Field
-          className={AutocompleteControl.className}
-          onKeyDown={(event) =>
-            dispatch(
-              ON_KEY_DOWN({
-                key: event.key,
-                onEnter: (item) => props.onSelected(item)
-              })
-            )
-          }
-          label={props.label}
-          description={props.description}
-          required={props.required}
-          disabled={props.disabled}
-          errorMessage={props.errorMessage}
-          hidden={props.hidden}
-        >
-          <div ref={ref}>
-            <DynamicSearchBox
-              key={state.selectedItem?.key}
-              value={state.selectedItem?.text}
-              className={styles.field}
-              defaultValue={state.value}
-              placeholder={props.placeholder}
-              disabled={props.disabled}
-              onChange={(value) => dispatch(ON_SEARCH(value))}
-              onClear={() => dispatch(RESET())}
-            />
-          </div>
-        </Field>
+      <Field
+        className={AutocompleteControl.className}
+        onKeyDown={(event) =>
+          dispatch(
+            ON_KEY_DOWN({
+              key: event.key,
+              onEnter: (item) => props.onSelected(item)
+            })
+          )
+        }
+        {..._.pick(props, 'name', 'label', 'description', 'required', 'hidden')}
+      >
+        <div ref={ref}>
+          <DynamicSearchBox
+            key={state.selectedItem?.key}
+            value={state.selectedItem?.text}
+            className={styles.field}
+            defaultValue={state.value}
+            placeholder={props.placeholder}
+            disabled={props.disabled}
+            onChange={(value) => dispatch(ON_SEARCH(value))}
+            onClear={() => dispatch(RESET())}
+            iconName={iconName}
+          />
+        </div>
         <Callout
           gapSpace={2}
           alignTargetEdge={true}
@@ -84,7 +79,7 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
             </FocusZone>
           </div>
         </Callout>
-      </>
+      </Field>
     )
   }
 
