@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
+import { DateObject } from 'DateUtils'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,69 +20,77 @@ export function useApiTokens() {
   const [items, { refetch }] = useApiTokensQuery()
   const [toast, setToast] = useToast(8000)
   const [deleteApiToken] = useMutation($deleteApiToken)
-  const [apiKey, setApiKey] = useState(null)
   const [form, setForm] = useState<IApiTokenFormProps>({})
+  const [selectedToken, onSelectionChanged] = useState<ApiToken>(null)
+  const [newToken, setNewToken] = useState<ApiToken>(null)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
 
   /**
-   * Deletes an API token.
-   *
-   * @param token - The API token to be deleted.
+   * Deletes the `selectedToken` and shows a success toast message.
    *
    * @returns - A Promise that resolves when the API token is deleted.
    */
-  const onDelete = useCallback(async (token: ApiToken) => {
+  const onDelete = useCallback(async () => {
     const response = await getResponse({
       title: t('admin.apiTokens.confirmDeleteTitle'),
-      subText: t('admin.apiTokens.confirmDeleteSubText', token),
-      responses: [[t('common.yes'), true, true], [t('common.no')]]
+      subText: t('admin.apiTokens.confirmDeleteSubText', {
+        ...selectedToken,
+        expires: new DateObject(selectedToken.expires).$.fromNow()
+      }),
+      responses: [
+        [t('common.yes'), true, true],
+        [t('common.no'), false, false]
+      ]
     })
     if (!response) return
-    await deleteApiToken({ variables: { name: token.name } })
+    await deleteApiToken({ variables: { name: selectedToken.name } })
     setToast({
       intent: 'success',
-      text: t('admin.tokenDeletedText', token)
+      text: t('admin.tokenDeletedText', selectedToken)
     })
     refetch()
-  }, [])
-
-  const columns = useColumns({ onDelete })
+  }, [selectedToken])
 
   /**
    * Callback function that is called when a new API key is generated and added.
-   * Sets the API key in state and refetches the API tokens. Hides the API key
+   * Sets the API token in state and refetches the API tokens. Hides the API key
    * after 10 seconds.
    *
-   * @param generatedKey - The newly generated API key.
+   * @param token - The newly created API token.
    */
-  const onKeyAdded = useCallback((generatedKey: string) => {
+  const onTokenAdded = useCallback((token: ApiToken) => {
     setForm({})
-    setApiKey(generatedKey)
+    setNewToken(token)
     refetch()
-    setTimeout(() => setApiKey(null), 10_000)
+    setTimeout(() => setNewToken(null), 10_000)
   }, [])
 
   /**
    * Callback function that is called when the API key is copied to the clipboard.
    * Sets a success toast message and clears the API key from state.
    */
-  const onKeyCopied = useCallback(() => {
+  const onKeyCopied = useCallback((token: ApiToken) => {
     setToast({
-      text: t('admin.apiTokens.apiKeyCopied'),
+      text: t('admin.apiTokens.apiKeyCopied', token),
       intent: 'success'
     })
-    setApiKey(null)
+    setNewToken(null)
   }, [])
+
+  const columns = useColumns(onKeyCopied)
 
   return {
     items,
     form,
     setForm,
-    apiKey,
     columns,
-    onKeyAdded,
+    onTokenAdded,
     confirmationDialog,
     toast,
-    onKeyCopied
+    onKeyCopied,
+    onDelete,
+    selectedToken,
+    newToken,
+    onSelectionChanged
   }
 }

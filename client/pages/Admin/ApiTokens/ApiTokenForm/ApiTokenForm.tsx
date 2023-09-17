@@ -1,5 +1,6 @@
 import { PanelType } from '@fluentui/react'
 import {
+  BaseControlOptions,
   DropdownControl,
   DropdownControlOptions,
   FormControl,
@@ -9,14 +10,17 @@ import { DateObject } from 'DateUtils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
+import { fuzzyMap } from 'utils'
 import { EditPermissions } from '../../../Admin/RolesPermissions'
 import { IApiTokenFormProps } from './types'
 import { useApiTokenForm } from './useApiTokenForm'
+import useFieldValidators from './validation'
 
 export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
   const { t } = useTranslation()
   const { expiryOptions, submitProps, model, register } = useApiTokenForm(props)
-
+  const { ValidateUniqueNameFunction, ValidatePermissionsFunction } =
+    useFieldValidators(props)
   return (
     <FormControl
       model={model}
@@ -29,8 +33,23 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
       }}
     >
       <InputControl
-        {...register('name')}
+        {...register('name', {
+          validators: [ValidateUniqueNameFunction]
+        })}
         label={t('admin.apiTokens.tokenNameLabel')}
+        required={true}
+      />
+      <InputControl
+        {...register('description', {
+          validators: [
+            {
+              minLength: 20
+            }
+          ]
+        })}
+        rows={8}
+        label={t('common.descriptionFieldLabel')}
+        description={t('admin.apiTokens.tokenDescriptionDescription')}
         required={true}
       />
       <DropdownControl
@@ -40,15 +59,22 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
         })}
         label={t('admin.apiTokens.tokenExpiryLabel')}
         required={true}
-        values={Object.keys(expiryOptions).map((value) => ({
-          value,
-          text: expiryOptions[value]
+        values={fuzzyMap<any>(expiryOptions, (value, key) => ({
+          value: key,
+          text: value
         }))}
       />
       <EditPermissions
+        {...register<BaseControlOptions>('permissions', {
+          validators: [ValidatePermissionsFunction]
+        })}
         api={true}
-        label={t('admin.apiTokens.permissionsTitle')}
+        label={t('admin.permissonsLabel')}
+        buttonLabel={t('admin.apiTokens.permissionsTitle')}
         description={t('admin.apiTokens.editPermissionsDescription')}
+        emptyMessage={t('admin.apiTokens.noPermissionsSelected', {
+          buttonLabel: t('admin.apiTokens.permissionsTitle')
+        })}
         selectedPermissions={model.value('permissions')}
         onChange={(selectedPermissions) =>
           model.set('permissions', selectedPermissions)

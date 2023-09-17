@@ -10,4 +10,9 @@ export interface IInputFieldProps
    * On change event handler
    */
   onChange?: (event: ChangeEvent<any>, data: any) => void
+
+  /**
+   * On blur event handler.
+   */
+  onBlur?: (event: any) => void
 }

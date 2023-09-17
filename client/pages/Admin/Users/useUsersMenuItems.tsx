@@ -32,7 +32,8 @@ export function useUsersMenuItems(context: IUsersContext) {
         .setDisabled(
           context.state.loading ||
             _.isEmpty(context.state.availableAdUsers) ||
-            !hasPermission(PermissionScope.LIST_USERS)
+            !hasPermission(PermissionScope.IMPORT_USERS),
+          'Du har ikke tilstrekkelige rettigheter til å legge til nye brukere.'
         )
         .withDispatch(context, SET_USER_FORM, {
           headerText: t('admin.users.addNewUser')
@@ -40,13 +41,15 @@ export function useUsersMenuItems(context: IUsersContext) {
       new ListMenuItem(t('admin.users.bulkImportUsersLabel'))
         .withIcon('ArrowImport')
         .setDisabled(
-          context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS)
+          context.state.loading || !hasPermission(PermissionScope.IMPORT_USERS),
+          'Du har ikke tilstrekkelige rettigheter til å importere brukere.'
         )
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
         .withIcon('PersonSync')
         .setDisabled(
-          context.state.loading || !hasPermission(PermissionScope.MANAGE_USERS)
+          context.state.loading || !hasPermission(PermissionScope.IMPORT_USERS),
+          'Du har ikke tilstrekkelige rettigheter til å synkronisere brukere.'
         )
         .setOnClick(async () => {
           context.dispatch(

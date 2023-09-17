@@ -18,14 +18,13 @@ export function useProjectList(context: IProjectsContext): IProjectListProps {
       enableShimmer: context.loading,
       renderLink: true,
       linkOnClick: (project: Project) =>
-        context.dispatch(SET_SELECTED_PROJECT({ project })),
+        context.dispatch(SET_SELECTED_PROJECT(project)),
       searchBox: {
         placeholder:
           context.state.currentTab === 'm'
             ? t('projects.myProjectsSearchPlaceholder')
             : t('common.searchPlaceholder'),
-        onChange: () =>
-          context.dispatch(SET_SELECTED_PROJECT({ project: null }))
+        onChange: () => context.dispatch(SET_SELECTED_PROJECT(null))
       }
     }),
     [context, t]

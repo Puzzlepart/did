@@ -129,9 +129,11 @@
     "informationHeaderText": "Informasjon",
     "createProjectButtonLabel": "Opprett nytt prosjekt",
     "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
-    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{maks}} tegn.",
+    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{max}} tegn.",
     "iconEasterEgg": "Ein paraply? Verkeleg? Greitt, du burde få lov sidan du er så flink til å gjera jobben din.",
-    "descriptionWarning": "Me tilrår å inkludera ei rask oppsummering av kunden. Dette vil gi ei kortfatta oversikt og hjelpa andre raskt å forstå essensen til kunden."
+    "descriptionWarning": "Me tilrår å inkludera ei rask oppsummering av kunden. Dette vil gi ei kortfatta oversikt og hjelpa andre raskt å forstå essensen til kunden.",
+    "keyNotUniqueError": "Kundenøkkelen {{key}} er allerede i bruk av kunden {{name}}.",
+    "nameNotUniqueError": "Det ser ut til at det allerede er en kunde med samme navn."
   },
   "admin": {
     "apiTokens": {
@@ -148,7 +150,16 @@
       "confirmDeleteTitle": "Slett API-nøkkel",
       "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse.",
       "apiKeyGenerated": "Klikk på nøkkelen for å kopiere den til utklippstavlen.",
-      "apiKeyCopied": "API-nøkkel ble kopiert til utklippstavlen."
+      "apiKeyCopied": "API-nøkkel ble kopiert til utklippstavlen.",
+      "noPermissionsSelected": "Velg ønskede tillatelser for API-nøkkelen. Klikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
+      "permissionsRequired": "Du må velge minst én tillatelse for API-nøkkelen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er som å ha en jobb uten oppgaver.",
+      "tokenDescriptionDescription": "Beskriv litt om hvordan du har tenkt å bruke API-token, og forklar kort hvorfor du trenger de valgte tillatelsene.",
+      "warningTooManyPermissions": "Du har valgt {{count}} tillatelser. \nVi anbefaler ikke å være for grådig med tillatelser, men hvis du vet hva du gjør - kjør på. ",
+      "delete": "Slett",
+      "displaySecretKeyButtonLabel": "Vis meg nøkkelen",
+      "displaySecretKeyButtonTooltip": "Klikk for å avsløre den hemmelig nøkkelen i {{displayDuration}} sekunder, og klikk deretter på feltene for å kopiere den.",
+      "keyLabel": "Hemmelig nøkkel",
+      "yearPlural": "{{years}} år"
     },
     "users": {
       "headerText": "Brukarar",
@@ -264,13 +275,16 @@
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke hendelser i Outlook som ferie.",
     "vacation": "Ferie og fravær",
     "editPermissions": "Endre tilganger",
-    "addPermissions": "Angi tilganger ",
+    "addPermissions": "Angi tillatelser",
     "editPermissionsDescription": "Klikk for å legge til eller endre tillatelser for denne rollen.",
     "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine.",
     "roles": {
       "confirmDeleteSubText": "Er du sikker på at du vil slette rollen {{name}}?",
       "confirmDeleteTitle": "Slett rolle"
-    }
+    },
+    "deleteRole": "Slett rolle",
+    "permissionsRequired": "Du må gi minst eitt løyve for rolla. Ingen vits i å ha ei rolle viss du ikkje kan gjera noko med ho? Det er liksom litt som å ha ein jobb utan oppgåver.",
+    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -492,7 +506,8 @@
     "cancelButtonLabel": "Avbryt",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "Brukerinstillingar",
-    "adUserLabel": "Brukar frå Active Directory"
+    "adUserLabel": "Brukar frå Active Directory",
+    "adUserRequired": "Du må velge en Active Directory-bruker å legge til."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -529,7 +544,20 @@
     "listUsers": "Hente brukere",
     "listUsersDescription": "Hente ut alle brukere for abonnementet.",
     "manageReportLinks": "Administrer rapportkoblinger",
-    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger."
+    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger.",
+    "category_customers": "Kunder",
+    "category_timesheet": "Timeliste",
+    "category_reports": "Rapporter",
+    "category_projects": "Prosjekter",
+    "category_admin": "Admin",
+    "category_api": "API",
+    "selectAll": "Velg/fjern alle",
+    "importUsers": "Hent brukere fra AD",
+    "importUsersDescription": "Hente ut brukere fra Azure Active Directory og registere de i systemet. Dette er ikke noe alle burde ha tilgang til.",
+    "manageApiTokens": "Administrere API-nøkler",
+    "manageApiTokensDescription": "Administere (opprette nye, slette eksisterende, og se eksisterende nøkler) API-nøkler. Det er greit å være forsiktig med hvem som får denne tilgangen, da det er ganske mye som kan gjøres med så mye krefter.",
+    "listApiTokens": "Liste ut API-nøkler",
+    "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer."
   },
   "notifications": {
     "moreLinkText": "Les meir her",
@@ -571,6 +599,7 @@
   },
   "formControl": {
     "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",
-    "minLengthMessage": "Feltet {{label}} må inneholde minst {{options.validator.minLength}} tegn."
+    "minLengthMessage": "Feltet {{label}} må inneholde minst {{validator.minLength}} tegn.",
+    "regexMessage": "Feltet {{label}} samsvarer ikke med det nødvendige mønsteret."
   }
 }

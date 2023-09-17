@@ -10,8 +10,11 @@ export function useExpiryOptions() {
     () => ({
       '1month': t('admin.apiTokens.oneMonth'),
       '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
+      '6month': t('admin.apiTokens.monthPlural', { months: 6 }),
       '1year': t('admin.apiTokens.oneYear'),
-      '10year': t('admin.apiTokens.neverExpiresText')
+      '3year': t('admin.apiTokens.yearPlural', { years: 3 }),
+      '5year': t('admin.apiTokens.yearPlural', { years: 5 }),
+      '15year': t('admin.apiTokens.neverExpiresText')
     }),
     []
   )

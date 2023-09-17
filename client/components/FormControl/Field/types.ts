@@ -14,6 +14,11 @@ export interface IFieldProps<KeyType = string>
   name?: KeyType
 
   /**
+   * Control ID for the field to store on the HTML element.
+   */
+  id?: string
+
+  /**
    * The label for the field.
    */
   label?: string

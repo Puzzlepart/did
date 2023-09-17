@@ -12,7 +12,7 @@ import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
 
 export const Tabs: ReusableComponent<ITabsProps> = (props) => {
-  const { itemKeys, selectedValue, onTabSelect, Component, componentProps } =
+  const { selectedValue, onTabSelect, Component, componentProps } =
     useTabs(props)
 
   /**
@@ -23,7 +23,7 @@ export const Tabs: ReusableComponent<ITabsProps> = (props) => {
    * If the corresponding header object has a `disabled` property set to `true`, the `Tab` component is created with a `disabled` prop set to `true`.
    */
   const tabItems = useMemo(() => {
-    return itemKeys.map((key) => {
+    return Object.keys(props.items).map((key) => {
       const [, header] = props.items[key]
       const title = typeof header === 'string' ? header : header.text
       const tabProps: TabProps = { value: key, children: title }

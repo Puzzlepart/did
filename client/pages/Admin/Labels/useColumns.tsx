@@ -1,4 +1,4 @@
-import { DeleteLink, EditLink, IListColumn } from 'components'
+import { DynamicButton, IListColumn } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { ComponentLogicHook } from 'hooks'
 import React, { useMemo } from 'react'
@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
+import styles from './Labels.module.scss'
 
 type UseColumnsHook = ComponentLogicHook<
   {
@@ -30,10 +31,20 @@ export const useColumns: UseColumnsHook = ({ onEdit, onDelete }) => {
         minWidth: 180,
         data: { hidden: isMobile }
       }),
-      createColumnDef(null, null, { minWidth: 180 }, (label: LabelObject) => (
-        <div style={{ display: 'flex' }}>
-          <EditLink style={{ marginRight: 6 }} onClick={() => onEdit(label)} />
-          <DeleteLink onClick={() => onDelete(label)} />
+      createColumnDef<LabelObject>(null, null, { minWidth: 180 }, (label) => (
+        <div className={styles.actionsColumn}>
+          <DynamicButton
+            text={t('common.editLabel')}
+            onClick={() => onEdit(label)}
+            iconName='NoteEdit'
+            size='small'
+          />
+          <DynamicButton
+            text={t('common.delete')}
+            onClick={() => onDelete(label)}
+            iconName='Delete'
+            size='small'
+          />
         </div>
       ))
     ],

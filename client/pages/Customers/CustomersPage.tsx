@@ -15,12 +15,10 @@ import { Customers } from './Customers'
  */
 export const CustomersPage: PageComponent = () => (
   <Switch>
-    <Route path='/customers/:currentTab?/:customerKey?' component={Customers} />
+    <Route path='/customers/:currentTab?/:detailsTab?' component={Customers} />
   </Switch>
 )
 
 CustomersPage.displayName = 'CustomersPage'
 CustomersPage.iconName = 'People'
 CustomersPage.permission = PermissionScope.ACCESS_CUSTOMERS
-
-export * from './Customers'

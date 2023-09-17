@@ -1,11 +1,9 @@
 import { useMutation } from '@apollo/client'
 import { FormSubmitHook, IFormControlProps } from 'components/FormControl'
 import { useMap } from 'hooks'
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import _ from 'underscore'
-import s from 'underscore.string'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
 import { IUserFormProps } from './types'
 
@@ -28,6 +26,7 @@ export const useUserFormSubmit: FormSubmitHook<
    * On save user
    */
   const onSave = async () => {
+    alert('Saving')
     await addOrUpdateUser({
       variables: {
         user: _.omit(model.value<User>(), '__typename', 'photo'),
@@ -38,14 +37,8 @@ export const useUserFormSubmit: FormSubmitHook<
     props.onDismiss()
   }
 
-  const disabled = useMemo(
-    () => s.isBlank(model.value('id')) || s.isBlank(model.value('displayName')),
-    [model.isSet('id', 'displayName')]
-  )
-
   return {
     text: t('common.save'),
-    onClick: onSave,
-    disabled
+    onClick: onSave
   } as IFormControlProps['submitProps']
 }

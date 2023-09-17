@@ -1,5 +1,10 @@
 import { Callout, FocusZone, FocusZoneDirection, List } from '@fluentui/react'
-import { DynamicSearchBox, Field, FormInputControlComponent } from 'components'
+import {
+  DynamicSearchBox,
+  Field,
+  FormControlContext,
+  FormInputControlComponent
+} from 'components'
 import React from 'react'
 import _ from 'underscore'
 import { IAutocompleteControlProps } from '.'
@@ -25,61 +30,74 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
     const { ref, state, dispatch, suggestions, iconName } =
       useAutocompleteControl(props)
     return (
-      <Field
-        className={AutocompleteControl.className}
-        onKeyDown={(event) =>
-          dispatch(
-            ON_KEY_DOWN({
-              key: event.key,
-              onEnter: (item) => props.onSelected(item)
-            })
-          )
-        }
-        {..._.pick(props, 'name', 'label', 'description', 'required', 'hidden')}
-      >
-        <div ref={ref}>
-          <DynamicSearchBox
-            key={state.selectedItem?.key}
-            value={state.selectedItem?.text}
-            className={styles.field}
-            defaultValue={state.value}
-            placeholder={props.placeholder}
-            disabled={props.disabled}
-            onChange={(value) => dispatch(ON_SEARCH(value))}
-            onClear={() => dispatch(RESET())}
-            iconName={iconName}
-          />
-        </div>
-        <Callout
-          gapSpace={2}
-          alignTargetEdge={true}
-          hidden={_.isEmpty(state.suggestions)}
-          onDismiss={() => dispatch(DISMISS_CALLOUT(null))}
-          calloutMaxHeight={props.maxHeight ?? 450}
-          style={{ width: ref.current?.clientWidth }}
-          target={ref?.current}
-          directionalHint={5}
-          isBeakVisible={false}
-        >
-          <div>
-            <FocusZone direction={FocusZoneDirection.vertical}>
-              <List
-                tabIndex={0}
-                items={suggestions}
-                onRenderCell={(item, index) => (
-                  <SuggestionItem
-                    key={item.key}
-                    item={item}
-                    itemIcons={props.itemIcons}
-                    onClick={() => dispatch(DISMISS_CALLOUT({ item }))}
-                    onMouseOver={() => dispatch(SET_SELECTED_INDEX(index))}
-                  />
-                )}
+      <FormControlContext.Consumer>
+        {(context) => (
+          <Field
+            className={AutocompleteControl.className}
+            onKeyDown={(event) =>
+              dispatch(
+                ON_KEY_DOWN({
+                  key: event.key,
+                  onEnter: (item) => props.onSelected(item)
+                })
+              )
+            }
+            {..._.pick(
+              props,
+              'name',
+              'label',
+              'description',
+              'required',
+              'hidden'
+            )}
+          >
+            <div ref={ref}>
+              <DynamicSearchBox
+                id={props.id}
+                key={state.selectedItem?.key}
+                value={state.selectedItem?.text}
+                className={styles.field}
+                defaultValue={state.value}
+                placeholder={props.placeholder}
+                disabled={props.disabled}
+                onChange={(value) => dispatch(ON_SEARCH(value))}
+                onClear={() => dispatch(RESET())}
+                iconName={iconName}
+                onBlur={context.onBlurCallback}
               />
-            </FocusZone>
-          </div>
-        </Callout>
-      </Field>
+            </div>
+            <Callout
+              gapSpace={2}
+              alignTargetEdge={true}
+              hidden={_.isEmpty(state.suggestions)}
+              onDismiss={() => dispatch(DISMISS_CALLOUT(null))}
+              calloutMaxHeight={props.maxHeight ?? 450}
+              style={{ width: ref.current?.clientWidth }}
+              target={ref?.current}
+              directionalHint={5}
+              isBeakVisible={false}
+            >
+              <div>
+                <FocusZone direction={FocusZoneDirection.vertical}>
+                  <List
+                    tabIndex={0}
+                    items={suggestions}
+                    onRenderCell={(item, index) => (
+                      <SuggestionItem
+                        key={item.key}
+                        item={item}
+                        itemIcons={props.itemIcons}
+                        onClick={() => dispatch(DISMISS_CALLOUT({ item }))}
+                        onMouseOver={() => dispatch(SET_SELECTED_INDEX(index))}
+                      />
+                    )}
+                  />
+                </FocusZone>
+              </div>
+            </Callout>
+          </Field>
+        )}
+      </FormControlContext.Consumer>
     )
   }
 

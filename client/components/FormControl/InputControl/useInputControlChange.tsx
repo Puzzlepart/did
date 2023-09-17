@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
 import s from 'underscore.string'
+import { useFormContext } from '../context'
+import { CLEAR_VALIDATION_MESSAGE } from '../reducer'
 import { IInputControlProps } from './types'
 
 /**
@@ -50,7 +52,9 @@ function transformValue(
  * @param props - Props
  */
 export function useInputControlChange(props: IInputControlProps) {
+  const context = useFormContext()
   return useCallback((_event, value) => {
+    context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
     props.model.set(props.name, transformValue(value, props))
   }, [])
 }

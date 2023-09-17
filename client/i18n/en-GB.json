@@ -131,7 +131,9 @@
     "projectFormHeaderText": "Create new project for {{name}}",
     "iconEasterEgg": "An Umbrella? Really? Right, you should be allowed since you are so good at doing your job.",
     "keyInvalid": "The customer key must be between {{min}} and {{max}} characters.",
-    "descriptionWarning": "We recommend including a quick summary of the customer. This will provide a concise overview and help others quickly grasp the customer's essence."
+    "descriptionWarning": "We recommend including a quick summary of the customer. This will provide a concise overview and help others quickly grasp the customer's essence.",
+    "keyNotUniqueError": "The customer key {{key}} is already in use by the customer {{name}}.",
+    "nameNotUniqueError": "It appears that there is already a API-key with that name. Please come up with something else."
   },
   "admin": {
     "apiTokens": {
@@ -145,10 +147,19 @@
       "oneYear": "1 year",
       "neverExpiresText": "Never expires",
       "confirmDeleteTitle": "Delete API-key",
-      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?",
+      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"? It expires (or expired} {{expires}}.",
       "editPermissionsDescription": "Click to manage or customize permissions for this API token. Please note that permissions cannot be updated after creation.",
       "apiKeyGenerated": "Click the key to copy it to your clipboard.",
-      "apiKeyCopied": "API key successfully copied to clipboard."
+      "apiKeyCopied": "API key for **{{name}}** successfully copied to clipboard.",
+      "noPermissionsSelected": "Select desired permissions for the API key. Click **{{buttonLabel}}** and select permissions by category.",
+      "delete": "Delete",
+      "yearPlural": "{{years}} years",
+      "keyLabel": "Secret key",
+      "displaySecretKeyButtonTooltip": "Click to reveal the secret for {{displayDuration}} seconds, then click the fields to copy it.",
+      "displaySecretKeyButtonLabel": "Show me the secret",
+      "permissionsRequired": "You need to provide at least one permission for the API-key. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
+      "tokenDescriptionDescription": "Describe a bit about how you intend to use the API-token, and explain briefly why you need the selected permissions.",
+      "warningTooManyPermissions": "You've selected {{count}} permissions. We recommend not too be too greedy with permissions, but if you know what you're doing - sure."
     },
     "labels": {
       "headerText": "Labels",
@@ -170,7 +181,7 @@
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
-      "deleteSuccess": "Role {{name}} was successfully deleted."
+      "deleteSuccess": "Role {{name}} was successfully deleted. It hasn't been assigned to anyone yet, so it's going just fine!"
     },
     "users": {
       "headerText": "Users",
@@ -270,7 +281,10 @@
     "roles": {
       "confirmDeleteSubText": "Are you sure you want to delete the role {{name}}?",
       "confirmDeleteTitle": "Delete role"
-    }
+    },
+    "deleteRole": "Delete role",
+    "permissionsRequired": "You need to provide at least one permission for the role. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
+    "noPermissionsSelected": "Select desired permissions for the user. Click **{{buttonLabel}}** and select permissions by category."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
@@ -492,7 +506,8 @@
     "cancelButtonLabel": "Cancel",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "User settings",
-    "adUserLabel": "User from Active Directory"
+    "adUserLabel": "User from Active Directory",
+    "adUserRequired": "You must select an Active Directory user to add."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -502,6 +517,12 @@
     "AdminPage": "Admin"
   },
   "permissions": {
+    "category_admin": "Admin",
+    "category_timesheet": "Timesheet",
+    "category_reports": "Reports",
+    "category_projects": "Projects",
+    "category_customers": "Customers",
+    "category_api": "API",
     "accessTimesheet": "Access to Timesheet",
     "accessCustomers": "Access to Customers",
     "accessProjects": "Access to Projects",
@@ -529,7 +550,14 @@
     "listUsers": "List users",
     "listUsersDescription": "Retrieve the list of all users in the subscription.",
     "manageReportLinks": "Manage report links",
-    "manageReportLinksDescription": "Manage report links. Add, edit and delete report links."
+    "manageReportLinksDescription": "Manage report links. Add, edit and delete report links.",
+    "selectAll": "Select/deselect all",
+    "importUsers": "Retrieve users from AD",
+    "importUsersDescription": "Retrieve users from Azure Active Directory and register them in the system. This is not something that everyone should have access to.",
+    "manageApiTokensDescription": "Manage (create new, delete existing, and view existing keys) API keys. It is good to be careful about who gets this access, as there is quite a lot that can be done with this much power.",
+    "manageApiTokens": "Manage API-tokens",
+    "listApiTokens": "List API-tokens",
+    "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems."
   },
   "notifications": {
     "moreLinkText": "Read more here",
@@ -571,6 +599,7 @@
   },
   "formControl": {
     "minLengthMessage": "The {{label}} field must contain at least {{options.validator.minLength}} characters.",
-    "requiredFieldMessage": "The {{label}} field is mandatory."
+    "requiredFieldMessage": "The {{label}} field is mandatory.",
+    "regexMessage": "The field {{label}} does not match the required pattern."
   }
 }

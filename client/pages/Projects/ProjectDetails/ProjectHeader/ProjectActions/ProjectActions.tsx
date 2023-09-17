@@ -18,7 +18,7 @@ import styles from './ProjectActions.module.scss'
  * @category Projects
  */
 export const ProjectActions: StyledComponent = (props) => {
-  const { refetch, state, dispatch } = useProjectsContext()
+  const { state, dispatch } = useProjectsContext()
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
   const [createOutlookCategory] = useMutation($createOutlookCategory)
@@ -36,7 +36,7 @@ export const ProjectActions: StyledComponent = (props) => {
     if (result.success) {
       const project = copy(state.selected)
       project.outlookCategory = result.data
-      dispatch(SET_SELECTED_PROJECT({ project }))
+      dispatch(SET_SELECTED_PROJECT(project))
     }
   }
 
@@ -79,11 +79,7 @@ export const ProjectActions: StyledComponent = (props) => {
                 scroll: true,
                 isOpen: showEditPanel,
                 headerText: state.selected?.name,
-                onDismiss: toggleEditPanel,
-                onSave: () => {
-                  toggleEditPanel()
-                  refetch()
-                }
+                onDismiss: toggleEditPanel
               }}
             />
           </>

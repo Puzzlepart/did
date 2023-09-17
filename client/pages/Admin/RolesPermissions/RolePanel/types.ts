@@ -1,14 +1,10 @@
-import { IPanelProps } from '@fluentui/react'
+import { IFormControlProps } from 'components'
 import { Role } from 'types'
+import { useRoles } from '../useRoles'
 
-export interface IRolePanelProps extends IPanelProps {
+export interface IRolePanelProps extends IFormControlProps<Role> {
   /**
-   * Role to edit
+   * Refetch callback is needed to update the list of roles after a role is added or updated.
    */
-  edit?: Role
-
-  /**
-   * On save callback
-   */
-  onSave?: () => void
+  refetch?: ReturnType<typeof useRoles>['query']['refetch']
 }

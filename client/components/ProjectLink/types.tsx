@@ -25,4 +25,9 @@ export interface IProjectLinkProps extends HTMLProps<HTMLDivElement> {
    * The appearance of the link.
    */
   appearance?: 'default' | 'button'
+
+  /**
+   * Link template to use when generating the link.
+   */
+  linkTemplate?: string
 }

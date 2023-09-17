@@ -1,10 +1,8 @@
 import { useMutation } from '@apollo/client'
 import { FormSubmitHook, useFormControlModel, useToast } from 'components'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
-import _ from 'underscore'
-import s from 'underscore.string'
 import $addApiToken from './addApiToken.gql'
 import { IApiTokenFormProps } from './types'
 /**
@@ -15,7 +13,7 @@ export const useApiTokenFormSubmit: FormSubmitHook<
   ReturnType<typeof useFormControlModel>
 > = (props, model) => {
   const { t } = useTranslation()
-  const [addApiToken, { loading }] = useMutation<ApiToken>($addApiToken)
+  const [addApiToken] = useMutation<ApiToken>($addApiToken)
   const [toast, setToast] = useToast(8000)
 
   /**
@@ -30,7 +28,10 @@ export const useApiTokenFormSubmit: FormSubmitHook<
       })
       setToast({ text: t('admin.tokenGeneratedText') }, 20_000)
       model.reset()
-      props.onAdded(data.apiKey)
+      props.onTokenAdded({
+        ...(model.$ as ApiToken),
+        ...data
+      })
     } catch {
       setToast({
         intent: 'error',
@@ -40,18 +41,9 @@ export const useApiTokenFormSubmit: FormSubmitHook<
     }
   }, [model, props])
 
-  const disabled = useMemo(
-    () =>
-      s.isBlank(model.value('name')) ||
-      !model.isSet('expires') ||
-      _.isEmpty(model.value('permissions')),
-    [model]
-  )
-
   return {
     toast,
     text: t('common.save'),
-    onClick: onSave,
-    disabled: disabled || loading
+    onClick: onSave
   }
 }

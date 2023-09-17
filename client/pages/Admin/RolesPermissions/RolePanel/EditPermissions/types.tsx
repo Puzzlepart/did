@@ -1,19 +1,32 @@
+import { IFieldProps } from 'components'
 import { HTMLAttributes } from 'react'
+import { FluentIconName } from 'utils'
 
 /**
  * Props for the EditPermissions component.
  */
 export interface IEditPermissionsProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
+    Pick<IFieldProps, 'name' | 'label' | 'description'> {
   /**
-   * The label for the component.
+   * Label format for the permissions list. For instance
+   * `{{count}} {{label}} selected`.
    */
-  label: string
+  labelFormat?: string
+  /**
+   * Label for the button that opens the permissions menu.
+   */
+  buttonLabel?: string
 
   /**
-   * The description for the component.
+   * Icon for the button that opens the permissions menu.
    */
-  description: string
+  buttonIcon?: FluentIconName
+
+  /**
+   * Empty message to display when there are no permissions selected.
+   */
+  emptyMessage?: string
 
   /**
    * An array of selected permissions.

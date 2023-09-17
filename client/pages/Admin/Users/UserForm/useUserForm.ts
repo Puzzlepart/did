@@ -15,7 +15,14 @@ import { useUserFormSubmit } from './useUserFormSubmit'
 export function useUserForm(props: IUserFormProps) {
   const { t } = useTranslation()
   const appContext = useAppContext()
-  const model = useFormControlModel<keyof User, User>(props.user)
+  const model = useFormControlModel<keyof User, User>(props.user, (user) => {
+    // A bit nasty temp-hack to fix the role type
+    return {
+      ...user,
+      photo: null,
+      role: user.role['name']
+    }
+  })
   const register = useFormControls<keyof User>(model)
   const submitProps = useUserFormSubmit(props, model)
 

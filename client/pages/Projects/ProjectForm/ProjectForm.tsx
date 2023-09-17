@@ -30,7 +30,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
     <FormControl {...formControlProps}>
       <SearchCustomer
         {...register('customerKey', {
-          validator: t('projects.customerRequired')
+          validators: t('projects.customerRequired')
         })}
         hidden={!!props.edit || !!props.customerKey}
         label={t('common.customer')}
@@ -44,11 +44,13 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-          validator: (value = '') =>
-            !PROJECT_KEY_REGEX.test(value) && [
-              t('projects.keyInvalid', { min: 2, max: 12 }),
-              'error'
-            ]
+          validators: [
+            (value = '') =>
+              !PROJECT_KEY_REGEX.test(value) && [
+                t('projects.keyInvalid', { min: 2, max: 12 }),
+                'error'
+              ]
+          ]
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
@@ -59,7 +61,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       <InputControl
         {...register<InputControlOptions>('name', {
           casing: 'capitalized',
-          validator: { minLength: 2 }
+          validators: [{ minLength: 2 }]
         })}
         label={t('common.nameFieldLabel')}
         description={t('projects.nameFieldDescription')}
@@ -68,11 +70,13 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       <InputControl
         {...register<InputControlOptions>('description', {
           casing: 'capitalized',
-          validator: {
-            minLength: 10,
-            state: 'warning',
-            messages: { minLength: t('projects.descriptionWarning') }
-          }
+          validators: [
+            {
+              minLength: 10,
+              state: 'warning',
+              messages: { minLength: t('projects.descriptionWarning') }
+            }
+          ]
         })}
         label={t('common.descriptionFieldLabel')}
         description={t('projects.descriptionFieldDescription')}

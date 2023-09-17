@@ -1,22 +1,28 @@
-import { createContext, useContext } from 'react'
-import { IFormControlProps } from './types'
-import { useFormControlValidation } from './useFormControlValidation'
+import { AnyAction } from '@reduxjs/toolkit'
+import { createContext, Dispatch, useContext } from 'react'
+import { IFormControlProps, IFormControlState } from './types'
 
 /**
  * Interface for the form control context.
  */
-export interface IFormControlContext {
+export interface IFormControlContext extends IFormControlState {
   /**
    * The model object for the form control.
    */
   model: IFormControlProps['model']
 
   /**
-   * The validation messages for the form control.
+   * The Redux dispatch function.
    */
-  validationMessages: ReturnType<
-    typeof useFormControlValidation
-  >['validationMessages']
+  dispatch: Dispatch<AnyAction>
+
+  /**
+   * On blur callback that is called when a form control loses focus.
+   * If enabled the field will be validated on blur.
+   *
+   * @param event - The blur event.
+   */
+  onBlurCallback: (event: any) => void
 }
 
 /**

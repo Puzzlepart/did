@@ -2,18 +2,16 @@ import { List } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import styles from './ReportLinks.module.scss'
 import { ReportLinksForm } from './ReportLinksForm'
 import { useReportLinks } from './useReportLinks'
 
-/**
- * @ignore
- */
 export const ReportLinks: TabComponent = () => {
   const { t } = useTranslation()
   const { columns, form, setForm, query, ConfirmationDialog } = useReportLinks()
 
   return (
-    <>
+    <div className={ReportLinks.className}>
       <List
         enableShimmer={query.loading}
         items={query.data?.reportLinks}
@@ -34,6 +32,9 @@ export const ReportLinks: TabComponent = () => {
       />
       <ReportLinksForm {...form} />
       {ConfirmationDialog}
-    </>
+    </div>
   )
 }
+
+ReportLinks.displayName = 'ReportLinks'
+ReportLinks.className = styles.reportLinks

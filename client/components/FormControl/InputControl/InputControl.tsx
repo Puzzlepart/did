@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormControlContext } from '../context'
 import { FormInputControlComponent } from '../types'
 import { InputField } from './InputField'
 import { IInputControlProps } from './types'
@@ -15,11 +16,16 @@ export const InputControl: FormInputControlComponent<IInputControlProps> = (
 ) => {
   const onChange = useInputControlChange(props)
   return (
-    <InputField
-      {...props}
-      onChange={(event, data) => onChange(event, data.value)}
-      value={props.model.value<string>(props.name, '')}
-    />
+    <FormControlContext.Consumer>
+      {(context) => (
+        <InputField
+          {...props}
+          onBlur={context.onBlurCallback}
+          onChange={(event, data) => onChange(event, data.value)}
+          value={props.model.value<string>(props.name, '')}
+        />
+      )}
+    </FormControlContext.Consumer>
   )
 }
 

@@ -20,6 +20,7 @@ export const DynamicSearchBox: StyledComponent<IDynamicSearchBoxProps> = (
   const { setSearchTerm, value, contentBefore } = useDynamicSearchBox(props)
   return (
     <SearchBox
+      id={props.id}
       className={mergeClasses(DynamicSearchBox.className, props.className)}
       placeholder={props.placeholder}
       value={value}
@@ -28,6 +29,7 @@ export const DynamicSearchBox: StyledComponent<IDynamicSearchBoxProps> = (
       }}
       appearance={props.appearance}
       contentBefore={contentBefore}
+      onBlur={props.onBlur}
       contentAfter={
         <DynamicButton
           className={styles.clearSearch}

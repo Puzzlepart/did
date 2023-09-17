@@ -66,6 +66,5 @@ export const Navigation: StyledComponent = () => {
   )
 }
 
+Navigation.displayName = 'Navigation'
 Navigation.className = styles.navigation
-
-export * from './NavItem'

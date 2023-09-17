@@ -1,0 +1,23 @@
+.listHeader {
+    margin: 0;
+
+    &.minimalHeaderColumns {
+        span[class*="ms-DetailsHeader-cellName"] {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--shadow8);
+
+            i[class*='ms-Icon'] {
+                margin-right: 4px;
+                vertical-align: top;
+            }
+        }
+    }
+
+    div[class*='ms-DetailsHeader '] {
+        padding-top: 0;
+        margin-top: 16px;
+        border-top: 1px solid rgb(234, 234, 234);
+    }
+}

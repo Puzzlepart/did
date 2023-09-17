@@ -18,7 +18,9 @@ export const CheckboxControl: FormInputControlComponent<ICheckboxControlProps> =
     return (
       <Field className={CheckboxControl.className} {...props}>
         <Checkbox
-          onChange={(event, data) => onChange(event, data.checked)}
+          onChange={(event, data) => {
+            onChange(event, data?.checked)
+          }}
           checked={props.model.value<boolean>(props.name, false)}
         />
       </Field>

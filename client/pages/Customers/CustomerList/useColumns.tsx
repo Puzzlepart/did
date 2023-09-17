@@ -55,9 +55,7 @@ export function useColumns(): IListColumn[] {
         (customer) => (
           <CustomerLink
             customer={customer}
-            onClick={() =>
-              context.dispatch(SET_SELECTED_CUSTOMER({ customer }))
-            }
+            onClick={() => context.dispatch(SET_SELECTED_CUSTOMER(customer))}
           />
         )
       ),

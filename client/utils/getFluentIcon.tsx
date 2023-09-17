@@ -55,10 +55,14 @@ import {
   DocumentDatabase24Regular,
   DrinkMargarita24Filled,
   DrinkMargarita24Regular,
+  Edit24Filled,
+  Edit24Regular,
   EditSettings24Filled,
   EditSettings24Regular,
   Emoji24Filled,
   Emoji24Regular,
+  Eye24Filled,
+  Eye24Regular,
   FastForward24Filled,
   FastForward24Regular,
   Info24Filled,
@@ -67,6 +71,10 @@ import {
   Key24Regular,
   KeyMultiple24Filled,
   KeyMultiple24Regular,
+  LinkEdit24Filled,
+  LinkEdit24Regular,
+  NoteEdit24Filled,
+  NoteEdit24Regular,
   PeopleAdd24Filled,
   PeopleAdd24Regular,
   PeopleEdit24Filled,
@@ -75,6 +83,8 @@ import {
   PeopleTeam24Regular,
   Person24Filled,
   Person24Regular,
+  PersonEdit24Filled,
+  PersonEdit24Regular,
   PersonProhibited24Filled,
   PersonProhibited24Regular,
   PersonSync24Filled,
@@ -87,10 +97,14 @@ import {
   StoreMicrosoft24Regular,
   System24Filled,
   System24Regular,
+  TableCellEdit24Filled,
+  TableCellEdit24Regular,
   TableEdit24Filled,
   TableEdit24Regular,
   TagMultiple24Filled,
   TagMultiple24Regular,
+  TextBulletListSquareEdit24Filled,
+  TextBulletListSquareEdit24Regular,
   Timeline24Filled,
   Timeline24Regular,
   Timer224Filled,
@@ -110,6 +124,34 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Eye: {
+    regular: Eye24Regular,
+    filled: Eye24Filled
+  },
+  NoteEdit: {
+    regular: NoteEdit24Regular,
+    filled: NoteEdit24Filled
+  },
+  LinkEdit: {
+    regular: LinkEdit24Regular,
+    filled: LinkEdit24Filled
+  },
+  Edit: {
+    regular: Edit24Regular,
+    filled: Edit24Filled
+  },
+  TableCellEdit: {
+    regular: TableCellEdit24Regular,
+    filled: TableCellEdit24Filled
+  },
+  PersonEdit: {
+    regular: PersonEdit24Regular,
+    filled: PersonEdit24Filled
+  },
+  TextBulletListSquareEdit: {
+    regular: TextBulletListSquareEdit24Regular,
+    filled: TextBulletListSquareEdit24Filled
+  },
   Dismiss: {
     regular: Dismiss24Regular,
     filled: Dismiss24Filled

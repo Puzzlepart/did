@@ -1,7 +1,8 @@
-import { IBasePanelProps, IDynamicButtonProps } from 'components'
+import { IDynamicButtonProps, IFormControlContext } from 'components'
 import { ComponentLogicHook } from 'hooks'
 import { useMemo } from 'react'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
+import { CLEAR_VALIDATION_MESSAGES, useFormControlReducer } from './reducer'
 import { IFormControlProps } from './types'
 import { useFormControlValidation } from './useFormControlValidation'
 
@@ -15,30 +16,47 @@ import { useFormControlValidation } from './useFormControlValidation'
 export const useFormControl: ComponentLogicHook<
   IFormControlProps,
   {
-    footerActions: IBasePanelProps['footerActions']
-    validationMessages: ReturnType<
-      typeof useFormControlValidation
-    >['validationMessages']
+    context: IFormControlContext
+    submitAction: IDynamicButtonProps
   }
-> = ({ children, submitProps, panelProps }) => {
-  const { validationMessages, validateForm } = useFormControlValidation()
-  const footerActions = useMemo<IDynamicButtonProps[]>(
-    () => [
-      {
-        ...submitProps,
-        onClick: (event: any) => {
-          if (validateForm(children as ReactElement[])) {
-            if (panelProps?.onDismiss) {
-              panelProps.onDismiss(event)
-            }
-            return submitProps.onClick(event)
+> = (props) => {
+  const [state, dispatch] = useFormControlReducer()
+  const validateForm = useFormControlValidation(dispatch)
+
+  const submitAction = useMemo<IDynamicButtonProps>(
+    () => ({
+      ...props.submitProps,
+      onClick: async (event: any) => {
+        dispatch(CLEAR_VALIDATION_MESSAGES())
+        if (await validateForm(props.children as ReactElement[])) {
+          if (props.panelProps?.onDismiss) {
+            props.panelProps.onDismiss(event)
           }
-        },
-        primary: true
-      }
-    ],
-    [submitProps]
+          return props.submitProps.onClick(event)
+        }
+      },
+      primary: true
+    }),
+    [props.submitProps]
   )
 
-  return { validationMessages, footerActions }
+  const context = useMemo<IFormControlContext>(
+    () => ({
+      ...state,
+      model: props.model,
+      dispatch,
+      onBlurCallback: (event) => {
+        if (props.validateOnBlur) {
+          const [, name] = event.target.id.split('_')
+          const field = (props.children as ReactElement[]).find(
+            ({ props }) => props['name'] === name
+          )
+          validateForm([field])
+        }
+      }
+    }),
+    [state, props.model]
+  )
+
+  return { context, submitAction }
 }

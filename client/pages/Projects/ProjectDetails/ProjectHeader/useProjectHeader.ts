@@ -17,14 +17,14 @@ export function useProjectHeader() {
           : t('projects.myProjectsText'),
       onClick: () => {
         history.replace(`/projects/${state.currentTab}`)
-        dispatch(SET_SELECTED_PROJECT({ project: null }))
+        dispatch(SET_SELECTED_PROJECT(null))
       }
     },
     {
       key: 'customer',
       text: state.selected?.customer.name,
       onClick: () =>
-        history.replace(`/customers/search/${state.selected?.customer.key}`)
+        history.replace(`/customers/s/${state.selected?.customer.key}`)
     },
     {
       key: 'selected',

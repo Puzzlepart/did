@@ -9,24 +9,39 @@ import {
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { CUSTOMER_KEY_REGEX, ICustomerFormProps } from './types'
+import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
+import {
+  CUSTOMER_KEY_REGEX,
+  useValidateUniqueKeyFunction,
+  useValidateUniqueNameFunction
+} from './validation'
 
 export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, submit, register } = useCustomerForm(props)
+  const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction()
+  const ValidateUniqueNameFunction = useValidateUniqueNameFunction()
   return (
-    <FormControl {...props} model={model} submitProps={submit} debug={true}>
+    <FormControl
+      {...props}
+      model={model}
+      submitProps={submit}
+      validateOnBlur={true}
+    >
       <InputControl
         {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-          validator: {
-            regex: CUSTOMER_KEY_REGEX,
-            messages: {
-              regex: t('customers.keyInvalid', { min: 2, max: 12 })
-            }
-          }
+          validators: [
+            {
+              regex: CUSTOMER_KEY_REGEX,
+              messages: {
+                regex: t('customers.keyInvalid', { min: 2, max: 12 })
+              }
+            },
+            ValidateUniqueKeyFunction
+          ]
         })}
         disabled={!!props.edit}
         label={t('customers.keyFieldLabel')}
@@ -34,7 +49,15 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         required={true}
       />
       <InputControl
-        {...register<InputControlOptions>('name', { casing: 'capitalized' })}
+        {...register<InputControlOptions>('name', {
+          casing: 'capitalized',
+          validators: [
+            {
+              minLength: 2
+            },
+            ValidateUniqueNameFunction
+          ]
+        })}
         label={t('common.nameFieldLabel')}
         description={t('customers.nameFieldDescription', { min: 2 })}
         required={true}
@@ -42,13 +65,15 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
       <InputControl
         {...register<InputControlOptions>('description', {
           casing: 'capitalized',
-          validator: {
-            minLength: 10,
-            state: 'warning',
-            messages: {
-              minLength: t('customers.descriptionWarning')
+          validators: [
+            {
+              minLength: 10,
+              state: 'warning',
+              messages: {
+                minLength: t('customers.descriptionWarning')
+              }
             }
-          }
+          ]
         })}
         label={t('common.descriptionFieldLabel')}
         description={t('customers.descriptionFieldDescription')}
@@ -56,12 +81,14 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
       />
       <IconPickerControl
         {...register('icon', {
-          validator: (value) => {
-            if (value === 'Umbrella') {
-              return [t('customers.iconEasterEgg'), 'warning']
+          validators: [
+            (value) => {
+              if (value === 'Umbrella') {
+                return [t('customers.iconEasterEgg'), 'warning']
+              }
+              return null
             }
-            return null
-          }
+          ]
         })}
         label={t('common.iconFieldLabel')}
         description={t('customers.iconFieldDescription')}

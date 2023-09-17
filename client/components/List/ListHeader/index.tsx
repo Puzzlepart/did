@@ -1,10 +1,13 @@
 import { merge } from '@fluentui/react'
-import React, { FC, useRef } from 'react'
+import { mergeClasses } from '@fluentui/react-components'
+import React, { useRef } from 'react'
+import { StyledComponent } from 'types'
 import { useListContext } from '../context'
 import { ListToolbar } from '../ListToolbar'
+import styles from './ListHeader.module.scss'
 import { IListHeaderProps } from './types'
 
-export const ListHeader: FC<IListHeaderProps> = ({
+export const ListHeader: StyledComponent<IListHeaderProps> = ({
   headerProps,
   defaultRender
 }) => {
@@ -33,9 +36,18 @@ export const ListHeader: FC<IListHeaderProps> = ({
   return hideToolbar ? (
     defaultRender(mergedHeaderProps)
   ) : (
-    <div ref={root}>
+    <div
+      ref={root}
+      className={mergeClasses(
+        ListHeader.className,
+        context.props.minmalHeaderColumns && styles.minimalHeaderColumns
+      )}
+    >
       <ListToolbar root={root} />
       {defaultRender(mergedHeaderProps)}
     </div>
   )
 }
+
+ListHeader.displayName = 'ListHeader'
+ListHeader.className = styles.listHeader

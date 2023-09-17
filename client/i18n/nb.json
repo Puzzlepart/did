@@ -129,9 +129,11 @@
     "informationHeaderText": "Informasjon",
     "createProjectButtonLabel": "Opprett nytt prosjekt",
     "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
-    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{maks}} tegn.",
+    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{max}} tegn.",
     "iconEasterEgg": "En paraply? Virkelig? Greit, du burde få lov siden du er så flink til å gjøre jobben din.",
-    "descriptionWarning": "Vi anbefaler å inkludere en rask oppsummering av kunden. \nDette vil gi en kortfattet oversikt og hjelpe andre raskt å forstå kundens essens."
+    "descriptionWarning": "Vi anbefaler å inkludere en rask oppsummering av kunden. \nDette vil gi en kortfattet oversikt og hjelpe andre raskt å forstå kundens essens.",
+    "keyNotUniqueError": "Kundenøkkelen {{key}} er allerede i bruk av kunden {{name}}.",
+    "nameNotUniqueError": "Det ser ut til at det allerede finnes en API-nøkkel med det navnet. \nKom gjerne opp med noe annet."
   },
   "admin": {
     "apiTokens": {
@@ -145,10 +147,19 @@
       "oneYear": "1 år",
       "neverExpiresText": "Utløper aldri",
       "confirmDeleteTitle": "Slett API-nøkkel",
-      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?",
+      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"? \nDen utløper (eller utløpte} {{expires}}.",
       "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse.",
       "apiKeyGenerated": "Klikk på nøkkelen for å kopiere den til utklippstavlen.",
-      "apiKeyCopied": "API-nøkkel ble kopiert til utklippstavlen."
+      "apiKeyCopied": "API-nøkkelen for **{{name}}** ble kopiert til utklippstavlen.",
+      "noPermissionsSelected": "Velg ønskede tillatelser for API-nøkkelen. Klikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
+      "delete": "Slett",
+      "yearPlural": "{{years}} år",
+      "keyLabel": "Hemmelig nøkkel",
+      "displaySecretKeyButtonTooltip": "Klikk for å avsløre den hemmelig nøkkelen i {{displayDuration}} sekunder, og klikk deretter på feltene for å kopiere den.",
+      "displaySecretKeyButtonLabel": "Vis meg nøkkelen",
+      "permissionsRequired": "Du må velge minst én tillatelse for API-nøkkelen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er som å ha en jobb uten oppgaver.",
+      "tokenDescriptionDescription": "Beskriv litt om hvordan du har tenkt å bruke API-token, og forklar kort hvorfor du trenger de valgte tillatelsene.",
+      "warningTooManyPermissions": "Du har valgt {{count}} tillatelser. \nVi anbefaler ikke å være for grådig med tillatelser, men hvis du vet hva du gjør - kjør på."
     },
     "users": {
       "headerText": "Brukere",
@@ -270,7 +281,10 @@
       "confirmDeleteSubText": "Er du sikker på at du vil slette rollen {{name}}?",
       "confirmDeleteTitle": "Slett rolle"
     },
-    "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine."
+    "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine.",
+    "deleteRole": "Slett rolle",
+    "permissionsRequired": "Du må gi minst én tillatelse for rollen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er liksom litt som å ha en jobb uten oppgaver.",
+    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -492,7 +506,8 @@
     "cancelButtonLabel": "Avbryt",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "Brukerinstillinger",
-    "adUserLabel": "Bruker fra Active Directory"
+    "adUserLabel": "Bruker fra Active Directory",
+    "adUserRequired": "Du må velge en Active Directory-bruker å legge til."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -529,7 +544,20 @@
     "listUsers": "Hente brukere",
     "listUsersDescription": "Hent listen over alle brukere for abonnementet.",
     "manageReportLinks": "Administrer rapportkoblinger",
-    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger."
+    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger.",
+    "category_admin": "Admin",
+    "category_customers": "Kunder",
+    "category_timesheet": "Timeliste",
+    "category_reports": "Rapporter",
+    "category_projects": "Prosjekter",
+    "category_api": "API",
+    "selectAll": "Velg/fjern alle",
+    "importUsers": "Hent brukere fra AD",
+    "importUsersDescription": "Hente ut brukere fra Azure Active Directory og registere de i systemet. Dette er ikke noe alle burde ha tilgang til.",
+    "manageApiTokensDescription": "Administere (opprette nye, slette eksisterende, og se eksisterende nøkler) API-nøkler. Det er greit å være forsiktig med hvem som får denne tilgangen, da det er ganske mye som kan gjøres med så mye krefter.",
+    "manageApiTokens": "Administrere API-nøkler",
+    "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer.",
+    "listApiTokens": "Liste ut API-nøkler"
   },
   "notifications": {
     "moreLinkText": "Les mer her",
@@ -571,6 +599,7 @@
   },
   "formControl": {
     "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",
-    "minLengthMessage": "Feltet {{label}} må inneholde minst {{options.validator.minLength}} tegn."
+    "minLengthMessage": "Feltet {{label}} må inneholde minst {{validator.minLength}} tegn.",
+    "regexMessage": "Feltet {{label}} samsvarer ikke med det nødvendige mønsteret."
   }
 }

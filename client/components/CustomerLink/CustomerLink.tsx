@@ -2,6 +2,7 @@ import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { createRouterLink } from 'utils'
 import styles from './CustomerLink.module.scss'
 import { ICustomerLinkProps } from './types'
 
@@ -12,13 +13,12 @@ import { ICustomerLinkProps } from './types'
  * @category Reusable Component
  */
 export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
-  const to = `/customers/search/${props.customer?.key}`.toLowerCase()
   return (
     <div className={CustomerLink.className}>
       <Icon className={styles.icon} iconName={props.customer?.icon} />
       <Link
         className={styles.link}
-        to={to}
+        to={createRouterLink(props.linkTemplate, props.customer)}
         onClick={() => props.onClick && props.onClick(null)}
       >
         <span>{props.text ?? props.customer?.name}</span>
@@ -27,6 +27,8 @@ export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
   )
 }
 
+CustomerLink.displayName = 'CustomerLink'
 CustomerLink.className = styles.customerLink
-
-export * from './types'
+CustomerLink.defaultProps = {
+  linkTemplate: '/customers/{{key}}'
+}

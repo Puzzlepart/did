@@ -49,6 +49,7 @@ export const ListToolbarMenuItem: FC<{
   return (
     <MenuItem
       content={item.text}
+      title={item.title}
       icon={ListMenuItem.createIcon(item)}
       style={createStyle(item)}
       disabled={item.disabled}

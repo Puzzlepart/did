@@ -9,7 +9,8 @@ import $create_or_update_customer from './create-or-update-customer.gql'
 import { ICustomerFormProps } from './types'
 
 /**
- * Returns submit props used by `<FormControl />`
+ * Returns submit props used by `<FormControl />
+`
  *
  * @param props - Props
  * @param model - Model
@@ -37,14 +38,18 @@ export const useCustomerFormSubmit: FormSubmitHook<
         }
       })
       setToast({
-        text: t('customers.createSuccess', model.$ as Customer)
-        // onClick: () => {
-        //   window.location.replace(`/customers/${model.value('key')}`)
-        // },
-        // intent: 'success'
+        text: t('customers.createSuccess', model.$ as Customer),
+        onClick: () => {
+          window.location.replace(
+            `/customers/information/${model.value('key')}`
+          )
+        },
+        intent: 'success'
       })
-      model.reset()
-      // refetch()
+      window.setTimeout(() => {
+        model.reset()
+        refetch()
+      }, 1000)
     } catch {
       setToast({
         text: t('customers.createError'),

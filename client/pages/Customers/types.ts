@@ -12,9 +12,9 @@ export interface ICustomersUrlParameters {
   currentTab: string
 
   /**
-   * The key of the customer being viewed.
+   * The details tab selected by the user.
    */
-  customerKey: string
+  detailsTab: string
 }
 
 /**
@@ -29,11 +29,6 @@ export type CustomersTab = 's' | 'new'
  * The state of the Customers page.
  */
 export interface ICustomersState {
-  /**
-   * The currently selected tab.
-   */
-  currentTab?: CustomersTab
-
   /**
    * The currently selected customer.
    */

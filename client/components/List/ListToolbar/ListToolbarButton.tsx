@@ -21,7 +21,7 @@ export const ListToolbarButton: FC<{
   return (
     <ToolbarButton
       icon={getFluentIconWithFallback(props.item.icon)}
-      title={props.item.text}
+      title={props.item.title}
       style={createStyle(props.item, props.buttonStyle)}
       onClick={props.item.onClick}
       disabled={props.item.disabled}

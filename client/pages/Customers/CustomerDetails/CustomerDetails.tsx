@@ -26,7 +26,7 @@ export const CustomerDetails: StyledComponent = () => {
       {error && (
         <UserMessage intent='error'>{t('common.genericErrorText')}</UserMessage>
       )}
-      <Tabs items={tabs} />
+      <Tabs items={tabs} level={3} />
       {context.state.projectForm && (
         <ProjectForm {...context.state.projectForm} />
       )}

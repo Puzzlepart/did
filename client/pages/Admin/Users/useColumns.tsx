@@ -1,17 +1,19 @@
-import { Persona } from '@fluentui/react-components'
-import { IconText } from 'components'
-import { EditLink } from 'components/EditLink'
+import { Icon } from '@fluentui/react'
+import { Caption1, Persona } from '@fluentui/react-components'
+import { DynamicButton } from 'components'
 import { IListColumn } from 'components/List/types'
-import $date from 'DateUtils'
+import { DateObject } from 'DateUtils'
 import { usePermissions } from 'hooks/user/usePermissions'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { User } from 'types'
+import { getFluentIcon } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
-import { PermissionScope } from '../../../../shared/config/security/permissions'
 import { IUsersContext } from './context'
 import { SET_USER_FORM } from './reducer/actions'
+import styles from './Users.module.scss'
 
 /**
  * Returns columns for the `Users` component
@@ -25,14 +27,14 @@ export function useColumns(
   const [, hasPermission] = usePermissions()
   return (type) => {
     return [
-      createColumnDef(
+      createColumnDef<User>(
         'avatar',
         '',
         {
           minWidth: 240,
           maxWidth: 240
         },
-        (user: User) => (
+        (user) => (
           <Persona
             name={user.displayName}
             secondaryText={user.mail}
@@ -45,15 +47,15 @@ export function useColumns(
           />
         )
       ),
-      createColumnDef('surname', t('common.surnameLabel'), {
+      createColumnDef<User>('surname', t('common.surnameLabel'), {
         maxWidth: 100,
         data: { hidden: isMobile }
       }),
-      createColumnDef('givenName', t('common.givenNameLabel'), {
+      createColumnDef<User>('givenName', t('common.givenNameLabel'), {
         maxWidth: 120,
         data: { hidden: isMobile }
       }),
-      createColumnDef('jobTitle', t('common.jobTitleLabel'), {
+      createColumnDef<User>('jobTitle', t('common.jobTitleLabel'), {
         maxWidth: 140,
         data: { hidden: isMobile }
       }),
@@ -65,24 +67,40 @@ export function useColumns(
             maxWidth: 150,
             data: { hidden: isMobile }
           },
-          ({ role }) => <IconText iconName={role.icon} text={role.name} />
+          ({ role }) => (
+            <div className={styles.roleColumn}>
+              <Icon iconName={role.icon} />
+              <Caption1>{role.name}</Caption1>
+            </div>
+          )
         ),
-      createColumnDef('lastActive', t('common.lastActiveLabel'), {
-        maxWidth: 180,
-        data: { hidden: isMobile },
-        onRender: (row) =>
-          $date.formatDate(row.lastActive, 'MMM DD, YYYY HH:mm')
-      }),
+      createColumnDef<User>(
+        'lastActive',
+        t('common.lastActiveLabel'),
+        {
+          maxWidth: 180,
+          data: { hidden: isMobile },
+          renderAs: 'timeFromNow'
+        },
+        (user) => (
+          <div
+            className={styles.lastActiveColumn}
+            style={{ visibility: user.lastActive ? 'visible' : 'hidden' }}
+          >
+            {getFluentIcon('Timer')}
+            <Caption1>{new DateObject(user.lastActive).$.fromNow()}</Caption1>
+          </div>
+        )
+      ),
       type === 'active' &&
-        createColumnDef(
+        createColumnDef<User>(
           'actions',
           '',
           { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
-          (user: User) => (
-            <div style={{ display: 'flex' }}>
-              <EditLink
-                style={{ marginRight: 12 }}
-                hidden={user.provider === 'google'}
+          (user) => (
+            <div className={styles.actionsColumn}>
+              <DynamicButton
+                text={t('common.editLabel')}
                 onClick={() =>
                   context.dispatch(
                     SET_USER_FORM({
@@ -91,6 +109,8 @@ export function useColumns(
                     })
                   )
                 }
+                iconName='PersonEdit'
+                size='small'
               />
             </div>
           )

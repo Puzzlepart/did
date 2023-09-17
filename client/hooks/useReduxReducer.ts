@@ -14,7 +14,7 @@ const useReducerCreator = <S = any>(
 }
 
 /**
- * A custom hook that uses React's useReducer hook with a builder function to create a reducer.
+ * A custom hook that uses React's useReducer hook with `@reduxjs/toolkit`'s createReducer function.
  *
  * @template S The type of the state object.
  * @param initialState The initial state of the reducer.
@@ -22,7 +22,7 @@ const useReducerCreator = <S = any>(
  *
  * @returns A tuple containing the current state and a dispatch function to update the state.
  */
-export const useReducer = <S = any>(
+export const useReduxReducer = <S = any>(
   initialState: S,
   builderCallback: BuilderCallback<S>
 ) => {

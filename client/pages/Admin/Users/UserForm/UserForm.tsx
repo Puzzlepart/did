@@ -25,19 +25,23 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
       panelProps={{ ...props, scroll: true }}
       submitProps={submitProps}
     >
-      <AutocompleteControl
-        required={true}
-        label={t('common.adUserLabel')}
-        placeholder={t('common.searchPlaceholder')}
-        items={context.state.availableAdUsers.map((u) => ({
-          key: u.id,
-          text: u.displayName,
-          searchValue: u.displayName,
-          data: u
-        }))}
-        onSelected={onSelectUser}
-        hidden={isEditMode}
-      />
+      {!isEditMode && (
+        <AutocompleteControl
+          {...register('_' as any, {
+            validators: t('common.adUserRequired')
+          })}
+          required={true}
+          label={t('common.adUserLabel')}
+          placeholder={t('common.searchPlaceholder')}
+          items={context.state.availableAdUsers.map((u) => ({
+            key: u.id,
+            text: u.displayName,
+            searchValue: u.displayName,
+            data: u
+          }))}
+          onSelected={onSelectUser}
+        />
+      )}
       <InputControl
         {...register('surname')}
         {...inputProps({ key: 'surname', label: t('common.surnameLabel') })}

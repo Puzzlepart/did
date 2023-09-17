@@ -1,4 +1,9 @@
 .list {
   margin: 0 0 25px 0;
   position: relative;
+
+  [class*='ms-DetailsRow-cellCheck'] {
+    display: flex;
+    align-items: center;
+  }
 }

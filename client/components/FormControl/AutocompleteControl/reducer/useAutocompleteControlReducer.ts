@@ -1,4 +1,4 @@
-import { useReducer } from 'hooks/useReducer'
+import { useReduxReducer } from 'hooks/useReduxReducer'
 import _ from 'underscore'
 import { IAutocompleteControlProps, IAutocompleteControlState } from '../types'
 import {
@@ -26,7 +26,7 @@ export function useAutocompleteControlReducer({
     selectedIndex: -1,
     suggestions: []
   }
-  return useReducer(initialState, (builder) =>
+  return useReduxReducer(initialState, (builder) =>
     builder
       .addCase(INIT, (state, { payload }) => {
         state.items = payload.props.items

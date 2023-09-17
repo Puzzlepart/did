@@ -1,45 +1,58 @@
-import { DeleteLink } from 'components'
 import { IListColumn } from 'components/List/types'
-import { DateObject } from 'DateUtils'
+import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ApiToken } from 'types'
+import { PermissionScope as $ } from 'security'
+import { createColumnDef } from 'utils'
+import { ApiToken } from '../../../../server/graphql'
+import { ApiKeyDisplay } from './ApiKeyDisplay'
 
 /**
  * Returns the columns for the ApiTokens list
+ *
+ * @param onKeyCopied Callback for when the key is copied
  */
-export function useColumns({ onDelete }): IListColumn[] {
+export function useColumns(
+  onKeyCopied: (token: ApiToken) => void
+): IListColumn[] {
   const { t } = useTranslation()
+  const [, hasPermission] = usePermissions()
   return [
-    {
-      key: 'name',
-      fieldName: 'name',
-      name: t('common.nameFieldLabel'),
+    createColumnDef('name', t('common.nameFieldLabel'), {
       minWidth: 100,
       maxWidth: 100
-    },
-    {
-      key: 'created',
-      name: t('common.createdLabel'),
+    }),
+    createColumnDef('description', t('common.descriptionFieldLabel'), {
+      minWidth: 180,
+      maxWidth: 220,
+      isMultiline: true
+    }),
+    createColumnDef('created', t('common.createdLabel'), {
       minWidth: 100,
       maxWidth: 180,
-      onRender: (token: ApiToken) =>
-        new DateObject(token.created).format('MMMM D, YYYY')
-    },
-    {
-      key: 'expires',
-      name: t('common.expiresLabel'),
+      renderAs: 'timeFromNow'
+    }),
+    createColumnDef('expires', t('common.expiresLabel'), {
       minWidth: 100,
-      onRender: (token: ApiToken) =>
-        new DateObject(token.expires).format('MMMM D, YYYY')
-    },
-    {
-      key: 'actions',
-      name: '',
-      minWidth: 150,
-      onRender: (token: ApiToken) => (
-        <DeleteLink onClick={() => onDelete(token)} />
+      maxWidth: 180,
+      renderAs: 'timeFromNow'
+    }),
+
+    hasPermission($.MANAGE_API_TOKENS) &&
+      createColumnDef<ApiToken>(
+        'secret',
+        t('admin.apiTokens.keyLabel'),
+        {
+          minWidth: 100,
+          maxWidth: 180
+        },
+        (token) => (
+          <ApiKeyDisplay
+            toggleDisplay
+            apiKey={token['secret']}
+            onKeyCopied={() => onKeyCopied(token)}
+          />
+        )
       )
-    }
-  ]
+  ].filter(Boolean)
 }

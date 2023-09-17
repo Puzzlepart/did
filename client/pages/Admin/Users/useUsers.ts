@@ -74,5 +74,5 @@ export function useUsers() {
     columns,
     menuItems,
     onAddUsers
-  } as const
+  }
 }

@@ -18,6 +18,7 @@ function registerControl<TOptions = any, KeyType = string>(
   options?: TOptions
 ): FormInputControlBase<TOptions, KeyType> {
   return {
+    id: `form_control_${name}`,
     name,
     model,
     options

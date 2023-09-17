@@ -1,8 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { FormSubmitHook, IFormControlProps } from 'components'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
-import s from 'underscore.string'
 import { omitTypename } from 'utils'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
 import { IRolePanelProps } from './types'
@@ -23,11 +21,6 @@ export const useRolePanelSubmit: FormSubmitHook<IRolePanelProps> = (
 ) => {
   const { t } = useTranslation()
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
-  const disabled =
-    s.isBlank(model.value('name')) ||
-    s.isBlank(model.value('icon')) ||
-    _.isEqual(model.value('permissions'), props.edit?.permissions) ||
-    _.isEmpty(model.value('permissions'))
 
   /**
    * On save role
@@ -39,13 +32,13 @@ export const useRolePanelSubmit: FormSubmitHook<IRolePanelProps> = (
         update: !!props.edit
       }
     })
-    props.onSave()
+    props.panelProps.onDismiss()
+    props.refetch()
   }
 
   const submitProps: IFormControlProps['submitProps'] = {
     text: t('common.save'),
-    onClick: onSave,
-    disabled
+    onClick: onSave
   }
 
   return submitProps

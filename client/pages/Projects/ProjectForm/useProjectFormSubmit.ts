@@ -38,19 +38,15 @@ export const useProjectFormSubmit: FormSubmitHook<
           update: !!props.edit
         }
       })
-      if (props.panelProps) {
-        setTimeout(() => props.panelProps.onSave(), 1000)
-      } else {
-        setToast({
-          text: t('projects.createSuccess', {
-            projectId: model.projectId,
-            name: model.$.name
-          }),
-          intent: 'success'
-        })
-        context.refetch()
-        model.reset()
-      }
+      setToast({
+        text: t('projects.createSuccess', {
+          projectId: model.projectId,
+          name: model.$.name
+        }),
+        intent: 'success'
+      })
+      context.refetch()
+      model.reset()
     } catch {
       setToast({
         text: t('projects.createError'),

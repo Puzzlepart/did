@@ -7,7 +7,12 @@ export const MissingSubmissions: TabComponent = () => {
   const { tabs, defaultSelectedTab } = useMissingSubmissions()
   return (
     <div className={MissingSubmissions.className}>
-      <Tabs items={tabs} vertical defaultSelectedValue={defaultSelectedTab} />
+      <Tabs
+        items={tabs}
+        vertical
+        defaultSelectedValue={defaultSelectedTab}
+        level={3}
+      />
     </div>
   )
 }

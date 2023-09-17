@@ -13,7 +13,17 @@ export type ValidationResult = [string?, ValidationState?]
  * Represents a function that can be used to validate a form control's value.
  * It takes the value as an argument and returns a CustomValidatorResult.
  */
-type ValidatorFunction = (value: any) => ValidationResult
+type BaseValidatorFunction<T, V = any> = (value: V) => T
+
+export interface ValidatorFunction<V = any>
+  extends BaseValidatorFunction<ValidationResult, V> {
+  isAsync?: false
+}
+
+export interface AsyncValidatorFunction<V = any>
+  extends BaseValidatorFunction<Promise<ValidationResult>, V> {
+  isAsync: true
+}
 
 /**
  * Represents an object that can be used to configure a form control's validation.
@@ -52,11 +62,13 @@ type ValidatorMessage = string
  */
 export type BaseControlOptions = {
   /**
-   * A validator function or object that can be used to validate the control's value.
-   * If a function is provided, it should return a CustomValidatorResult.
+   * A collection of validator functions and/or objects that can be used to validate the control's value.
+   * If a function is provided, it should return a `CustomValidatorResult`.
    * If an object is provided, it can specify a minimum length, a regular expression, and a validation state.
    *
    * @param value The value to validate.
    */
-  validator?: ValidatorFunction | ValidatorObject | ValidatorMessage
+  validators?:
+    | (ValidatorFunction | AsyncValidatorFunction | ValidatorObject)[]
+    | ValidatorMessage
 }

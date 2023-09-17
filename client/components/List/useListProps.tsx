@@ -61,7 +61,7 @@ export function useListProps({
       }
     },
     checkboxVisibility:
-      context.props.checkboxVisibility || CheckboxVisibility.hidden,
+      context.props.checkboxVisibility ?? CheckboxVisibility.hidden,
     onRenderDetailsHeader: (headerProps, defaultRender) => (
       <ListHeader headerProps={headerProps} defaultRender={defaultRender} />
     ),

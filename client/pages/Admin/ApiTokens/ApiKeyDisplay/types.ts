@@ -1,4 +1,7 @@
 export interface IApiKeyDisplayProps {
+  label?: string
   apiKey: string
-  onKeyCopied: () => void
+  onKeyCopied?: () => void
+  toggleDisplay?: boolean
+  displayDuration?: number
 }

@@ -1,12 +1,12 @@
 import { Icon } from '@fluentui/react'
-import { Link } from '@fluentui/react-components'
-import { DeleteLink, EditLink } from 'components'
+import { Caption1, Link } from '@fluentui/react-components'
+import { DynamicButton } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
-import { createColumnDef } from 'utils/createColumnDef'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
+import { createColumnDef, getFluentIcon } from 'utils'
+import styles from './ReportLinks.module.scss'
 
 type UseColumns = {
   onEdit: (reportLink: ReportLink) => void
@@ -16,83 +16,91 @@ type UseColumns = {
 export function useColumns({ onEdit, onDelete }: UseColumns) {
   const { t } = useTranslation()
   return [
-    createColumnDef(
+    createColumnDef<ReportLink>(
       'published',
       t('admin.reportLinks.publishedLabel'),
 
       {
-        minWidth: 75,
-        maxWidth: 75
+        minWidth: 100,
+        maxWidth: 100,
+        iconName: 'PromotedDatabase'
       },
-      (reportLink: ReportLink) =>
+      (reportLink) =>
         reportLink.published ? (
           <div style={{ textAlign: 'center' }}>
-            {icon('Checkmark', true, '#107c10')}
+            {getFluentIcon('Checkmark')}
           </div>
         ) : null
     ),
-    createColumnDef(
+    createColumnDef<ReportLink>(
       'promoted',
       t('admin.reportLinks.promotedLabel'),
       {
-        minWidth: 75,
-        maxWidth: 75
+        minWidth: 100,
+        maxWidth: 100,
+        iconName: 'PromotedDatabase'
       },
-      (reportLink: ReportLink) =>
+      (reportLink) =>
         reportLink.promoted ? (
           <div style={{ textAlign: 'center' }}>
-            {icon('Checkmark', true, '#107c10')}
+            {getFluentIcon('Checkmark')}
           </div>
         ) : null
     ),
-    createColumnDef(
+    createColumnDef<ReportLink>(
       'name',
       t('admin.reportLinks.nameLabel'),
       { maxWidth: 220 },
-      (reportLink: ReportLink) => (
-        <div>
+      (reportLink) => (
+        <div className={styles.nameColumn}>
           <Icon
+            className={styles.icon}
             iconName={reportLink.icon}
-            styles={{ root: { marginRight: 8, color: reportLink.iconColor } }}
+            styles={{ root: { color: reportLink.iconColor } }}
           />
-          <Link href={reportLink.externalUrl} target='_blank'>
-            {reportLink.name}
+          <Link
+            className={styles.link}
+            href={reportLink.externalUrl}
+            target='_blank'
+          >
+            <Caption1>{reportLink.name}</Caption1>
           </Link>
         </div>
       )
     ),
-    createColumnDef('description', t('admin.reportLinks.descriptionLabel'), {
-      isMultiline: true,
-      maxWidth: 300,
-      data: { hidden: isMobile }
+    createColumnDef<ReportLink>(
+      'description',
+      t('admin.reportLinks.descriptionLabel'),
+      {
+        isMultiline: true,
+        maxWidth: 300,
+        data: { hidden: isMobile }
+      }
+    ),
+    createColumnDef<ReportLink>('createdAt', t('common.createdLabel'), {
+      minWidth: 130,
+      maxWidth: 130,
+      renderAs: 'timeFromNow'
     }),
-    createColumnDef(
-      'createdAt',
-      t('common.createdLabel'),
-      {
-        minWidth: 150,
-        maxWidth: 150
-      },
-      (reportLink: ReportLink) =>
-        new Date(reportLink.createdAt).toLocaleString()
-    ),
-    createColumnDef(
-      'updatedAt',
-      t('common.updatedLabel'),
-      {
-        minWidth: 150,
-        maxWidth: 150
-      },
-      (reportLink: ReportLink) =>
-        new Date(reportLink.updatedAt).toLocaleString()
-    ),
-    createColumnDef(null, null, { minWidth: 180 }, (reportLink: ReportLink) => (
-      <div style={{ display: 'flex' }}>
-        <EditLink
-          style={{ marginRight: 12 }}
+    createColumnDef<ReportLink>('updatedAt', t('common.updatedLabel'), {
+      minWidth: 130,
+      maxWidth: 130,
+      renderAs: 'timeFromNow'
+    }),
+    createColumnDef<ReportLink>(null, null, { minWidth: 180 }, (reportLink) => (
+      <div className={styles.actionsColumn}>
+        <DynamicButton
+          text={t('common.editLabel')}
           onClick={() => onEdit(reportLink)}
+          iconName='LinkEdit'
+          size='small'
         />
-        <DeleteLink onClick={() => onDelete(reportLink)} />
+        <DynamicButton
+          text={t('common.delete')}
+          onClick={() => onDelete(reportLink)}
+          iconName='Delete'
+          size='small'
+        />
       </div>
     ))
   ]

@@ -1,8 +1,11 @@
+import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
 import { List, Toast } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
+import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope as $ } from '../../../../shared/config/security/types'
 import { ApiKeyDisplay } from './ApiKeyDisplay'
 import { ApiTokenForm } from './ApiTokenForm'
 import styles from './ApiTokens.module.scss'
@@ -23,31 +26,50 @@ export const ApiTokens: TabComponent = () => {
     items,
     form,
     setForm,
-    apiKey,
     columns,
-    onKeyAdded,
+    onTokenAdded,
     confirmationDialog,
     toast,
-    onKeyCopied
+    onKeyCopied,
+    onDelete,
+    onSelectionChanged,
+    selectedToken,
+    newToken
   } = useApiTokens()
-
+  const [, hasPermission] = usePermissions()
   return (
     <div className={ApiTokens.className}>
       <Toast {...toast} />
-      <ApiKeyDisplay apiKey={apiKey} onKeyCopied={onKeyCopied} />
+      <ApiKeyDisplay
+        label={t('admin.apiTokens.apiKeyGenerated')}
+        apiKey={newToken?.apiKey}
+        onKeyCopied={() => onKeyCopied(newToken)}
+      />
       <List
         columns={columns}
         items={items}
+        checkboxVisibility={CheckboxVisibility.onHover}
+        selectionProps={{
+          mode: SelectionMode.single,
+          onChanged: onSelectionChanged
+        }}
         menuItems={[
           new ListMenuItem(t('admin.apiTokens.addNew'))
             .withIcon('Add')
-            .setOnClick(() => setForm({ isOpen: true }))
+            .setDisabled(!hasPermission($.MANAGE_API_TOKENS))
+            .setOnClick(() => setForm({ isOpen: true })),
+          new ListMenuItem(t('admin.apiTokens.delete'))
+            .setOnClick(onDelete)
+            .withIcon('Delete')
+            .setGroup('actions')
+            .setDisabled(!selectedToken || !hasPermission($.MANAGE_API_TOKENS))
         ]}
       />
       {form.isOpen && (
         <ApiTokenForm
           {...form}
-          onAdded={onKeyAdded}
+          tokens={items}
+          onTokenAdded={onTokenAdded}
           onDismiss={() => setForm({ isOpen: false })}
         />
       )}

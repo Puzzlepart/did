@@ -22,6 +22,11 @@ export class ListMenuItem {
   name?: string
 
   /**
+   * The title (tooltip) of the menu item.
+   */
+  title?: string
+
+  /**
    * The value of the menu item if it is a MenuItemCheckbox
    */
   value?: string
@@ -141,11 +146,18 @@ export class ListMenuItem {
    * Sets the disabled state for the `ListMenuItem`.
    *
    * @param disabled The disabled state to set.
+   * @param disabledTooltip The tooltip to display when the menu item is disabled.
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setDisabled(disabled: ListMenuItem['disabled']) {
+  public setDisabled(
+    disabled: ListMenuItem['disabled'],
+    disabledTooltip?: string
+  ) {
     this.disabled = disabled
+    if (this.disabled && disabledTooltip) {
+      this.title = disabledTooltip
+    }
     return this
   }
 

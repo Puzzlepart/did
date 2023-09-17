@@ -2,29 +2,24 @@ import { Field, Label, mergeClasses } from '@fluentui/react-components'
 import React from 'react'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
-import { FormControlContext } from '../context'
+import { FormControlContext, IFormControlContext } from '../context'
 import { FieldDescription } from '../FieldDescription'
-import { ValidationResult } from '../types'
-import { useFormControlValidation } from '../useFormControlValidation'
 import styles from './FieldContainer.module.scss'
 import { IFieldProps } from './types'
 
 /**
  * Returns an object with validation message and state for a given field name.
  *
- * @param validationMessages - The validation messages object returned from the `useFormControlValidation` hook.
+ * @param context - The form control context.
  * @param name - The name of the field to get validation props for.
  *
  * @returns An object with `validationMessage` and `validationState` properties.
  */
-function getValidationProps(
-  validationMessages: ReturnType<
-    typeof useFormControlValidation
-  >['validationMessages'],
-  name: string
-) {
+function getValidationProps(context: IFormControlContext, name: string) {
+  if (!context) return [null, 'none']
+  const { validationMessages } = context
   const [validationMessage = null, validationState = 'none'] =
-    validationMessages.value<ValidationResult>(name, [])
+    validationMessages.get(name) ?? []
   return {
     validationMessage,
     validationState
@@ -38,11 +33,11 @@ export const FieldContainer: StyledComponent<IFieldProps> = (props) => {
   return (
     !props.hidden && (
       <FormControlContext.Consumer>
-        {({ validationMessages }) => (
+        {(context) => (
           <Field
             className={mergeClasses(FieldContainer.className, props.className)}
             {..._.pick(props, 'onKeyDown')}
-            {...getValidationProps(validationMessages, props.name)}
+            {...getValidationProps(context, props.name)}
           >
             <div className={styles.label}>
               <Label

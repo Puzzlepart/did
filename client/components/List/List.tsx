@@ -44,5 +44,6 @@ List.defaultProps = {
   defaultSearchBoxWidth: 500,
   filterValues: {},
   menuItems: [],
-  getColumnStyle: () => ({})
+  getColumnStyle: () => ({}),
+  minmalHeaderColumns: true
 }

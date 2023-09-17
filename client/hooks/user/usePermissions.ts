@@ -1,11 +1,11 @@
 import { useAppContext } from 'AppContext'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getPermissions, IPermission, PermissionScope } from 'security'
+import { getPermissions, IPermissionInfo, PermissionScope } from 'security'
 import _ from 'underscore'
 
 type UsePermissionsReturnType = [
-  IPermission[],
+  IPermissionInfo[],
   (scope: PermissionScope) => boolean
 ]
 
@@ -29,25 +29,29 @@ export function usePermissions(
 ): UsePermissionsReturnType {
   const { t } = useTranslation()
   const context = useAppContext()
+  const permissions = getPermissions(t)
+  const permissionIds = Object.keys(permissions) as PermissionScope[]
 
-  let permissions = getPermissions(t)
+  return useMemo(() => {
+    let _permissions = { ...permissions }
+    if (scopeIds) {
+      _permissions = _.pick(_permissions, scopeIds)
+    }
 
-  if (scopeIds) {
-    permissions = permissions.filter((perm) => _.contains(scopeIds, perm.id))
-  }
+    const permissionInfo: IPermissionInfo[] = Object.values(_permissions).map(
+      (perm, index) => ({
+        ...perm,
+        id: permissionIds[index],
+        disabled: perm.disabled || (!perm.api && api)
+      })
+    )
 
-  if (api) {
-    permissions = permissions.filter((perm) => perm.api)
-  }
-
-  return useMemo(
-    () => [
-      permissions,
+    return [
+      permissionInfo,
       (scope: PermissionScope) => {
         if (!scope) return true
         return context?.user ? context.user.hasPermission(scope) : false
       }
-    ],
-    [context?.user]
-  )
+    ]
+  }, [context?.user, scopeIds, api])
 }

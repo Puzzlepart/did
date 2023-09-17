@@ -18,9 +18,8 @@ export function useRolePanel(props: IRolePanelProps) {
   const register = useFormControls<keyof RoleInput>(model)
 
   const panelProps: IFormControlProps['panelProps'] = {
-    headerText: props.headerText,
-    isOpen: true,
-    onDismiss: props.onDismiss
+    ...props.panelProps,
+    isOpen: true
   }
 
   const isEditMode = !!props.edit

@@ -4,7 +4,7 @@ import { FluentIconName } from 'utils'
 
 type PartialButtonProps = Pick<
   ButtonProps,
-  'onClick' | 'title' | 'appearance' | 'shape' | 'disabled'
+  'onClick' | 'title' | 'appearance' | 'shape' | 'disabled' | 'size' | 'shape'
 >
 
 export interface IDynamicButtonProps

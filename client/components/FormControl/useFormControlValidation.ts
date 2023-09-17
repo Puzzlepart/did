@@ -1,9 +1,13 @@
+/* eslint-disable unicorn/no-for-loop */
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable unicorn/prefer-ternary */
 /* eslint-disable unicorn/no-lonely-if */
-import { useMap } from 'hooks'
-import { useCallback } from 'react'
+import { AnyAction } from '@reduxjs/toolkit'
 import { useTranslation } from 'react-i18next'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
+import { SET_VALIDATION_MESSAGES } from './reducer'
 import { FormInputControlBase, ValidationResult } from './types'
+import { validateField } from './validateField'
 
 /**
  * Determines whether a given form input control should be validated.
@@ -14,7 +18,7 @@ import { FormInputControlBase, ValidationResult } from './types'
  * @returns True if the control should be validated, false otherwise.
  */
 function shouldValidateField(field: FormInputControlBase) {
-  return !!field.name && (field.required || field.options?.validator)
+  return !!field.name && (field.required || !!field.options?.validators)
 }
 
 /**
@@ -24,56 +28,28 @@ function shouldValidateField(field: FormInputControlBase) {
  * `validator` attribute, it will be checked using the provided validator
  * function or object.
  *
- * @returns An object containing the `validateForm` function and an `validationMessages` map.
+ * @param dispatch - The Redux dispatch function to dispatch actions to the form control reducer.
  */
-export function useFormControlValidation() {
+export function useFormControlValidation(dispatch: React.Dispatch<AnyAction>) {
   const { t } = useTranslation()
-  const validationMessages = useMap<string, Record<string, ValidationResult>>()
-  const validateForm = useCallback((fields: ReactElement[]) => {
+  const validateForm = async (fields: ReactElement[]) => {
     const formFieldsToValidate = fields
-      .filter((f) => shouldValidateField(f.props))
+      .filter((f) => f && shouldValidateField(f.props))
       .map<FormInputControlBase>((f) => f.props)
-    const _validationMessages = formFieldsToValidate.reduce((map, field) => {
-      const currentValue = field.model.value(field.name, null)
-      if (
-        field.required &&
-        (currentValue === undefined ||
-          currentValue === null ||
-          currentValue === '')
-      ) {
-        let message = t('formControl.requiredFieldMessage', field)
-        if (typeof field.options?.validator === 'string') {
-          message = field.options.validator
-        }
-        map.set(field.name, [message, 'error'])
-      } else if (field.options?.validator) {
-        let customValidatorResult: ValidationResult
-        if (typeof field.options.validator === 'function') {
-          customValidatorResult = field.options.validator(currentValue)
-        } else if (typeof field.options.validator === 'object') {
-          if (
-            field.options.validator.minLength &&
-            currentValue?.length < field.options.validator.minLength
-          ) {
-            const message =
-              field.options?.validator?.messages?.minLength ??
-              t('formControl.minLengthMessage', field)
-            customValidatorResult = [
-              message,
-              field.options.validator.state ?? 'error'
-            ]
-          }
-        }
-        if (customValidatorResult) {
-          map.set(field.name, customValidatorResult)
-        }
+    const _validationMessages = new Map<string, ValidationResult>()
+    for (const field of formFieldsToValidate) {
+      if (_validationMessages.has(field.name)) {
+        continue
       }
-      return map
-    }, new Map<string, ValidationResult>())
-    validationMessages.$set(_validationMessages)
+      const validationResult = await validateField(field, t)
+      if (validationResult) {
+        _validationMessages.set(field.name, validationResult)
+      }
+    }
+    dispatch(SET_VALIDATION_MESSAGES(_validationMessages))
     return !Array.from(_validationMessages.values()).some(
       ([, state]) => state === 'error'
     )
-  }, [])
-  return { validateForm, validationMessages }
+  }
+  return validateForm
 }

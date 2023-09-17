@@ -1,29 +1,44 @@
-import { Textarea } from '@fluentui/react-components'
-import { Field } from 'components'
+import { Input, Label } from '@fluentui/react-components'
+import { ConditionalWrapper } from 'components'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import FadeIn from 'react-fade-in/lib/FadeIn'
-import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { IApiKeyDisplayProps } from './types'
+import { useApiKeyDisplay } from './useApiKeyDisplay'
 
 export const ApiKeyDisplay: StyledComponent<IApiKeyDisplayProps> = (props) => {
-  const { t } = useTranslation()
-  if (!props.apiKey) return null
+  const { isDisplaying, contentAfter } = useApiKeyDisplay(props)
+
+  if (!props.toggleDisplay && !props.apiKey) return null
+
   return (
-    <FadeIn delay={500} transitionDuration={800}>
-      <CopyToClipboard text={props.apiKey} onCopy={props.onKeyCopied}>
-        <span>
-          <Field label={t('admin.apiTokens.apiKeyGenerated')}>
-            <Textarea
-              value={props.apiKey}
-              style={{ width: '100%', cursor: 'copy' }}
-            />
-          </Field>
-        </span>
-      </CopyToClipboard>
-    </FadeIn>
+    <ConditionalWrapper
+      condition={isDisplaying}
+      wrapper={(children) => (
+        <CopyToClipboard text={props.apiKey} onCopy={props.onKeyCopied}>
+          {children}
+        </CopyToClipboard>
+      )}
+    >
+      <span>
+        {props.label && <Label weight='semibold'>{props.label}</Label>}
+        <Input
+          type={isDisplaying ? 'text' : 'password'}
+          disabled={!isDisplaying}
+          readOnly={isDisplaying}
+          value={props.apiKey}
+          style={{ width: '100%', cursor: 'pointer' }}
+          contentAfter={contentAfter}
+        />
+      </span>
+    </ConditionalWrapper>
   )
 }
 
 ApiKeyDisplay.displayName = 'ApiKeyDisplay'
+ApiKeyDisplay.defaultProps = {
+  onKeyCopied: () => {
+    // Do nothing by default
+  },
+  displayDuration: 5
+}

@@ -26,18 +26,21 @@ export function useRoles() {
   const [panel, setPanel] = useState<IRolePanelProps>(null)
   const [deleteRole] = useMutation($deleteRole)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
+  const [selectedRole, onSelectionChanged] = useState<Role>(null)
 
   /**
    * On delete role
    */
-  const onDelete = useCallback(async (role: Role) => {
+  const onDelete = useCallback(async () => {
     const response = await getResponse({
       title: t('admin.roles.confirmDeleteTitle'),
-      subText: t('admin.roles.confirmDeleteSubText', role),
+      subText: t('admin.roles.confirmDeleteSubText', selectedRole),
       responses: [[t('common.yes'), true, true], [t('common.no')]]
     })
     if (response !== true) return
-    const { data } = await userRoleQuery.refetch({ query: { role: role.name } })
+    const { data } = await userRoleQuery.refetch({
+      query: { role: selectedRole.name }
+    })
     if (data?.users?.length > 0) {
       setToast({
         text: t('admin.roleInUseMessage', {
@@ -48,20 +51,20 @@ export function useRoles() {
     } else {
       await deleteRole({
         variables: {
-          name: role.name
+          name: selectedRole.name
         }
       })
       await roleQuery.refetch()
       setToast({
         text: t('admin.rolesPermissions.deleteSuccess', {
-          name: role.name
+          name: selectedRole.name
         }),
         intent: 'success'
       })
     }
-  }, [])
+  }, [selectedRole])
 
-  const columns = useColumns(setPanel, onDelete)
+  const columns = useColumns()
 
   return {
     confirmationDialog,
@@ -69,6 +72,9 @@ export function useRoles() {
     columns,
     panel,
     setPanel,
-    toast
+    toast,
+    onSelectionChanged,
+    selectedRole,
+    onDelete
   }
 }

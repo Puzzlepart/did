@@ -9,6 +9,7 @@ import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
 import $date from 'DateUtils'
 import i18next from 'i18next'
+import { enableMapSet } from 'immer'
 import React from 'react'
 import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
@@ -17,6 +18,9 @@ import { client } from './graphql'
 import { fetchUserContext } from './graphql-queries/user'
 import './i18n'
 import { Themed } from './theme/Themed'
+
+// Enable the MapSet plugin
+enableMapSet()
 
 /**
  * Bootstrapping the App

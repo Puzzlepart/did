@@ -1,162 +1,133 @@
 import { TFunction } from 'i18next'
-
-export enum PermissionScope {
-  ACCESS_TIMESHEET = 'f5a82c37',
-  ACCESS_CUSTOMERS = 'e18a7c45',
-  ACCESS_PROJECTS = '289a64ab',
-  ACCESS_ADMIN = '2653c3aa',
-  ACCESS_REPORTS = 'a031c42f',
-  MANAGE_PROJECTS = 'ef4032fb',
-  DELETE_PROJECTS = 'c5439319',
-  MANAGE_CUSTOMERS = '09909241',
-  DELETE_CUSTOMER = '8b39db3d',
-  MANAGE_USERS = '15e40e99',
-  LIST_USERS = '1a1db774',
-  MANAGE_ROLESPERMISSIONS = 'cd52a735',
-  MANAGE_SUBSCRIPTION = '67ba6efc',
-  MANAGE_REPORT_LINKS = '8de5215e'
-}
-
-export interface IPermission {
-  /**
-   * Permission ID
-   */
-  id: PermissionScope
-
-  /**
-   * Name of the permission
-   */
-  name: string
-
-  /**
-   * Description of the permission
-   */
-  description?: string
-
-  /**
-   * Icon that describe the permission
-   *
-   * @see https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
-   */
-  iconName?: string
-
-  /**
-   * Callable from external API
-   */
-  api?: boolean
-
-  /**
-   * Disabled (not available)
-   */
-  disabled?: boolean
-}
+import { IPermissionInfo, PermissionScope } from './types'
 
 /**
- * Get permissions
+ * Get all permissions available in the system.
  *
- * Specifiy translate function for i18n
+ * Need to provide `t`(translate function) since this is not
+ * a React hook or component.
  *
  * @param t - Translate funcion
  */
-export function getPermissions(t: TFunction): IPermission[] {
-  return [
-    {
-      id: PermissionScope.ACCESS_TIMESHEET,
-      name: t('permissions.accessTimesheet'),
-      description: t('permissions.accessTimesheetDescription'),
-      iconName: 'TimeSheet'
-    },
-    {
-      id: PermissionScope.ACCESS_CUSTOMERS,
-      name: t('permissions.accessCustomers'),
-      description: t('permissions.accessCustomersDescription'),
-      iconName: 'People'
-    },
-    {
-      id: PermissionScope.ACCESS_PROJECTS,
-      name: t('permissions.accessProjects'),
-      description: t('permissions.accessProjectsDescription'),
-      iconName: 'ProjectCollection'
-    },
-    {
-      id: PermissionScope.ACCESS_ADMIN,
-      name: t('permissions.accessAdmin'),
-      description: t('permissions.accessAdminDescription'),
-      iconName: 'Settings'
-    },
-    {
-      id: PermissionScope.ACCESS_REPORTS,
-      name: t('permissions.accessReports'),
-      description: t('permissions.accessReportsDescription'),
-      iconName: 'ReportDocument',
-      api: true
-    },
-    {
-      id: PermissionScope.MANAGE_PROJECTS,
-      name: t('permissions.manageProjects'),
-      description: t('permissions.manageProjectsDescription'),
-      iconName: 'TaskManager',
-      api: true
-    },
-    {
-      id: PermissionScope.DELETE_PROJECTS,
-      name: t('permissions.deleteProjects'),
-      description: t('permissions.deleteProjectsDescription'),
-      iconName: 'DeleteTable',
-      disabled: true,
-      api: true
-    },
-    {
-      id: PermissionScope.MANAGE_CUSTOMERS,
-      name: t('permissions.manageCustomers'),
-      description: t('permissions.manageCustomersDescription'),
-      iconName: 'PageData',
-      api: true
-    },
+export const getPermissions = (
+  t: TFunction
+): Record<string, IPermissionInfo> => ({
+  [PermissionScope.ACCESS_TIMESHEET]: {
+    name: t('permissions.accessTimesheet'),
+    description: t('permissions.accessTimesheetDescription'),
+    iconName: 'TimeSheet',
+    category: 'timesheet'
+  },
+  [PermissionScope.ACCESS_CUSTOMERS]: {
+    name: t('permissions.accessCustomers'),
+    description: t('permissions.accessCustomersDescription'),
+    iconName: 'People',
+    category: 'customers'
+  },
+  [PermissionScope.ACCESS_PROJECTS]: {
+    name: t('permissions.accessProjects'),
+    description: t('permissions.accessProjectsDescription'),
+    iconName: 'ProjectCollection',
+    category: 'projects'
+  },
+  [PermissionScope.ACCESS_ADMIN]: {
+    name: t('permissions.accessAdmin'),
+    description: t('permissions.accessAdminDescription'),
+    iconName: 'Settings',
+    category: 'admin'
+  },
+  [PermissionScope.ACCESS_REPORTS]: {
+    id: PermissionScope.ACCESS_REPORTS,
+    name: t('permissions.accessReports'),
+    description: t('permissions.accessReportsDescription'),
+    iconName: 'ReportDocument',
+    api: true,
+    category: 'reports'
+  },
+  [PermissionScope.MANAGE_PROJECTS]: {
+    name: t('permissions.manageProjects'),
+    description: t('permissions.manageProjectsDescription'),
+    iconName: 'TaskManager',
+    api: true,
+    category: 'projects'
+  },
+  [PermissionScope.DELETE_PROJECTS]: {
+    name: t('permissions.deleteProjects'),
+    description: t('permissions.deleteProjectsDescription'),
+    iconName: 'DeleteTable',
+    disabled: true,
+    api: true,
+    category: 'projects'
+  },
+  [PermissionScope.MANAGE_CUSTOMERS]: {
+    name: t('permissions.manageCustomers'),
+    description: t('permissions.manageCustomersDescription'),
+    iconName: 'PageData',
+    api: true,
+    category: 'customers'
+  },
 
-    {
-      id: PermissionScope.DELETE_CUSTOMER,
-      name: t('permissions.deleteCustomers'),
-      description: t('permissions.deleteCustomersDescription'),
-      iconName: 'PageData',
-      disabled: true,
-      api: true
-    },
-    {
-      id: PermissionScope.MANAGE_USERS,
-      name: t('permissions.manageUsers'),
-      description: t('permissions.manageUsersDescription'),
-      iconName: 'ManagerSelfService',
-      api: true
-    },
-    {
-      id: PermissionScope.LIST_USERS,
-      name: t('permissions.listUsers'),
-      description: t('permissions.listUsersDescription'),
-      iconName: 'ContactList',
-      api: true
-    },
-    {
-      id: PermissionScope.MANAGE_ROLESPERMISSIONS,
-      name: t('permissions.manageRolesPermissions'),
-      description: t('permissions.manageRolesPermissionsDescription'),
-      iconName: 'Permissions',
-      api: true
-    },
-    {
-      id: PermissionScope.MANAGE_SUBSCRIPTION,
-      name: t('permissions.manageSubscription'),
-      description: t('permissions.manageSubscriptionDescription'),
-      iconName: 'SubstitutionsIn',
-      api: false,
-      disabled: true
-    },
-    {
-      id: PermissionScope.MANAGE_REPORT_LINKS,
-      name: t('permissions.manageReportLinks'),
-      description: t('permissions.manageReportLinksDescription'),
-      iconName: 'AnalyticsReport',
-      api: false
-    }
-  ]
-}
+  [PermissionScope.DELETE_CUSTOMER]: {
+    name: t('permissions.deleteCustomers'),
+    description: t('permissions.deleteCustomersDescription'),
+    iconName: 'PageData',
+    disabled: true,
+    api: true,
+    category: 'customers'
+  },
+  [PermissionScope.MANAGE_USERS]: {
+    name: t('permissions.manageUsers'),
+    description: t('permissions.manageUsersDescription'),
+    iconName: 'ManagerSelfService',
+    api: true,
+    category: 'admin'
+  },
+  [PermissionScope.LIST_USERS]: {
+    name: t('permissions.listUsers'),
+    description: t('permissions.listUsersDescription'),
+    iconName: 'ContactList',
+    api: true,
+    category: 'admin'
+  },
+  [PermissionScope.IMPORT_USERS]: {
+    name: t('permissions.importUsers'),
+    description: t('permissions.importUsersDescription'),
+    iconName: 'AzureLogo',
+    category: 'admin'
+  },
+  [PermissionScope.MANAGE_ROLESPERMISSIONS]: {
+    name: t('permissions.manageRolesPermissions'),
+    description: t('permissions.manageRolesPermissionsDescription'),
+    iconName: 'Permissions',
+    api: true,
+    category: 'admin'
+  },
+  [PermissionScope.MANAGE_SUBSCRIPTION]: {
+    name: t('permissions.manageSubscription'),
+    description: t('permissions.manageSubscriptionDescription'),
+    iconName: 'SubstitutionsIn',
+    api: false,
+    disabled: true,
+    category: 'admin'
+  },
+  [PermissionScope.MANAGE_REPORT_LINKS]: {
+    name: t('permissions.manageReportLinks'),
+    description: t('permissions.manageReportLinksDescription'),
+    iconName: 'AnalyticsReport',
+    api: false,
+    disabled: true,
+    category: 'reports'
+  },
+  [PermissionScope.LIST_API_TOKENS]: {
+    name: t('permissions.listApiTokens'),
+    description: t('permissions.listApiTokensDescription'),
+    iconName: 'GroupList',
+    category: 'api'
+  },
+  [PermissionScope.MANAGE_API_TOKENS]: {
+    name: t('permissions.manageApiTokens'),
+    description: t('permissions.manageApiTokensDescription'),
+    iconName: 'AzureAPIManagement',
+    category: 'api'
+  }
+})

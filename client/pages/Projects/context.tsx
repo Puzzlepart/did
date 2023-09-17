@@ -1,17 +1,22 @@
-import { ApolloQueryResult } from '@apollo/client'
+import { QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, useContext } from 'react'
+import { OutlookCategory, Project } from 'types'
 import { IProjectListProps } from './ProjectList'
 import { IProjectsState } from './types'
 
 /**
  * @category Projects
  */
-export interface IProjectsContext {
+export interface IProjectsContext
+  extends Partial<
+    QueryResult<{
+      projects: Project[]
+      outlookCategories: OutlookCategory[]
+    }>
+  > {
   state: IProjectsState
   dispatch: React.Dispatch<AnyAction>
-  refetch(variables?: any): Promise<ApolloQueryResult<any>>
-  loading: boolean
   listProps?: IProjectListProps
 }
 

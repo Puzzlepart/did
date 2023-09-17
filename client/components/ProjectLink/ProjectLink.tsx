@@ -3,6 +3,7 @@ import { Button } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { createRouterLink } from 'utils'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
@@ -14,7 +15,9 @@ import { IProjectLinkProps } from './types'
  * @category Reusable Component
  */
 export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
-  const to = `/projects/search/${props.project?.tag}`.toLowerCase()
+  const to = createRouterLink(props.linkTemplate, {
+    tag: props.project.tag.split(' ').join('_')
+  })
   switch (props.appearance) {
     case 'button': {
       return (
@@ -50,5 +53,6 @@ ProjectLink.displayName = 'ProjectLink'
 ProjectLink.className = styles.projectLink
 ProjectLink.defaultProps = {
   appearance: 'default',
-  target: '_self'
+  target: '_self',
+  linkTemplate: '/projects/{{tag}}'
 }

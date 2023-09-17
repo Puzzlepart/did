@@ -24,12 +24,14 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
           className={styles.input}
           {..._.pick(
             props,
+            'id',
             'placeholder',
             'value',
             'onChange',
             'disabled',
             'maxLength',
-            'rows'
+            'rows',
+            'onBlur'
           )}
         />
       ) : (
@@ -37,12 +39,14 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
           className={styles.input}
           {..._.pick(
             props,
+            'id',
             'placeholder',
             'type',
             'value',
             'onChange',
             'disabled',
-            'maxLength'
+            'maxLength',
+            'onBlur'
           )}
         />
       )}

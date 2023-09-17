@@ -1,0 +1,24 @@
+.users {
+  .roleColumn{
+    display: flex;
+    gap: 5px;
+  }
+
+  .lastActiveColumn {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-start;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  
+
+  .actionsColumn {
+    display: flex;
+    gap: 5px;
+  }
+}

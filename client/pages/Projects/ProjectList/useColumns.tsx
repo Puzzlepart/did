@@ -1,13 +1,17 @@
-import { IconText, ItemColumn, ProjectLink } from 'components'
-import { CustomerLink } from 'components/CustomerLink'
-import { EntityLabel } from 'components/EntityLabel'
-import { IListColumn } from 'components/List/types'
+import {
+  CustomerLink,
+  EntityLabel,
+  IconText,
+  IListColumn,
+  ItemColumn,
+  ProjectLink
+} from 'components'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useProjectsContext } from '../context'
-import { SET_SELECTED_PROJECT } from '../reducer/actions'
+import { SET_SELECTED_PROJECT } from '../reducer'
 import { IProjectListProps } from './types'
 
 /**
@@ -69,9 +73,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           (project) => (
             <ProjectLink
               project={project}
-              onClick={() =>
-                context.dispatch(SET_SELECTED_PROJECT({ project }))
-              }
+              onClick={() => context.dispatch(SET_SELECTED_PROJECT(project))}
             />
           )
         ),

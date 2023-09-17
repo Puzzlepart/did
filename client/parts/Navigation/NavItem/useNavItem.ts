@@ -1,9 +1,6 @@
 import { useAppContext } from 'AppContext'
 import { usePermissions } from 'hooks'
-import { isMobile } from 'react-device-detect'
-import { NavItem } from '.'
 import { PAGE_NAVIGATE } from '../../../app/reducer'
-import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 
 /**
@@ -14,11 +11,10 @@ import { INavItemProps } from './types'
 export function useNavItem(props: INavItemProps) {
   const { dispatch } = useAppContext()
   const [, hasPermission] = usePermissions()
-  let className = NavItem.className
-  if (isMobile) className += ` ${styles.mobile}`
+  const isActive = location.pathname.startsWith(props.to.pathname)
   return {
-    className,
     onClick: () => dispatch(PAGE_NAVIGATE()),
+    isActive,
     shouldRender: !!props.permission && hasPermission(props.permission)
   }
 }
