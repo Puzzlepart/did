@@ -1,30 +1,23 @@
 import { Icon } from '@fluentui/react'
 import { Caption1, Persona } from '@fluentui/react-components'
-import { DynamicButton } from 'components'
-import { IListColumn } from 'components/List/types'
 import { DateObject } from 'DateUtils'
-import { usePermissions } from 'hooks/user/usePermissions'
+import { IListColumn } from 'components/List/types'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope } from 'security'
 import { User } from 'types'
 import { getFluentIcon } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
-import { IUsersContext } from './context'
-import { SET_USER_FORM } from './reducer/actions'
 import styles from './Users.module.scss'
 
 /**
- * Returns columns for the `Users` component
+ * Returns columns for the `Users` list. The returned function accepts a `type` parameter, 
+ * which can be either `'active'` or `'disabled'`.
  *
  * @category Users
  */
-export function useColumns(
-  context: IUsersContext
-): (type: 'active' | 'disabled') => IListColumn[] {
+export function useColumns(): (type: 'active' | 'disabled') => IListColumn[] {
   const { t } = useTranslation()
-  const [, hasPermission] = usePermissions()
   return (type) => {
     return [
       createColumnDef<User>(
@@ -91,30 +84,7 @@ export function useColumns(
             <Caption1>{new DateObject(user.lastActive).$.fromNow()}</Caption1>
           </div>
         )
-      ),
-      type === 'active' &&
-        createColumnDef<User>(
-          'actions',
-          '',
-          { maxWidth: 100, hidden: !hasPermission(PermissionScope.LIST_USERS) },
-          (user) => (
-            <div className={styles.actionsColumn}>
-              <DynamicButton
-                text={t('common.editLabel')}
-                onClick={() =>
-                  context.dispatch(
-                    SET_USER_FORM({
-                      headerText: user.displayName,
-                      user
-                    })
-                  )
-                }
-                iconName='PersonEdit'
-                size='small'
-              />
-            </div>
-          )
-        )
+      )
     ]
       .filter(Boolean)
       .filter((col) => !col.hidden)

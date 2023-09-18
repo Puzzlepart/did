@@ -6,5 +6,5 @@ import { SelectionMode } from '@fluentui/react'
 
 export interface IListSelectionProps<T = any> {
   mode: SelectionMode
-  onChanged: (selected: T) => void
+  onChanged: (selected: T | T[]) => void
 }

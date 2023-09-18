@@ -1,7 +1,10 @@
+/* eslint-disable unicorn/switch-case-braces */
 /* eslint-disable unicorn/consistent-function-scoping */
 import { ICommandBarItemProps, Icon } from '@fluentui/react'
+import { MenuItemCheckboxProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
+import { FluentIconName, getFluentIconWithFallback } from 'utils'
 
 export type ListMenuItemGroup = 'default' | 'actions'
 
@@ -14,73 +17,78 @@ export class ListMenuItem {
   /**
    * The text to display in the menu item.
    */
-  text?: string
+  private _text?: string
 
   /**
    * The name of the menu item.
    */
-  name?: string
+  private _name?: string
 
   /**
    * The title (tooltip) of the menu item.
    */
-  title?: string
+  private _title?: string
 
   /**
    * The value of the menu item if it is a MenuItemCheckbox
    */
-  value?: string
+  private _value?: string
 
   /**
    * The icon to display in the menu item. A string representing a FluentIcon
    * or an Icon from `@fluentui/react` can be provided.
    */
-  icon?: string
+  private _iconName?: string | FluentIconName
 
   /**
    * On click event handler.
    */
-  onClick?: MouseEventHandler<any>
+  private _onClick?: MouseEventHandler<any>
 
   /**
    * Disabled state.
    */
-  disabled?: boolean
+  private _disabled?: boolean
+
+  /**
+   * Hidden state.
+   */
+  public hidden?: boolean
 
   /**
    * Checked state.
    */
-  checkedValues?: Record<string, string[]>
+  private _checkedValues?: Record<string, string[]>
 
   /**
    * The type of the menu item.
    */
-  type?: 'divider' | 'header' | 'default'
+  private _type?: 'divider' | 'header' | 'default'
 
   /**
    * Custom width of the menu item.
    */
-  width?: string | number
+  private _width?: string | number
 
   /**
    * Custom style of the menu item.
    */
-  style?: CSSProperties
+  private _style?: CSSProperties
 
   /**
    * Items to render in a sub menu.
    */
-  items?: ListMenuItem[]
+  public items?: ListMenuItem[]
 
   /**
    * Custom render function for the command bar item associated with this list menu item.
    */
-  onRender?: ICommandBarItemProps['onRender']
+  public onRender?: ICommandBarItemProps['onRender']
 
   /**
    * The group name for the menu item.
    */
-  group?: ListMenuItemGroup
+  public group?: ListMenuItemGroup
 
   /**
    * Creates a new instance of ListMenuItem.
@@ -88,7 +96,7 @@ export class ListMenuItem {
    * @param text The text to display in the menu item (optional).
    */
   constructor(text?: string) {
-    this.text = text
+    this._text = text
   }
 
   /**
@@ -100,8 +108,8 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public withIcon(iconName: string) {
-    this.icon = iconName
+  public withIcon(iconName: string | FluentIconName) {
+    this._iconName = iconName
     return this
   }
 
@@ -112,8 +120,8 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setOnClick(onClick: ListMenuItem['onClick']) {
-    this.onClick = onClick
+  public setOnClick(onClick: ListMenuItem['_onClick']) {
+    this._onClick = onClick
     return this
   }
 
@@ -128,7 +136,7 @@ export class ListMenuItem {
    */
   public withDispatch(context: any, action: any, payload: any = null) {
     const dispatcher = context.dispatch as Dispatch<AnyAction>
-    this.onClick = () => dispatcher(action(payload))
+    this._onClick = () => dispatcher(action(payload))
     return this
   }
 
@@ -150,14 +158,20 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setDisabled(
-    disabled: ListMenuItem['disabled'],
-    disabledTooltip?: string
-  ) {
-    this.disabled = disabled
-    if (this.disabled && disabledTooltip) {
-      this.title = disabledTooltip
-    }
+  public setDisabled(disabled: ListMenuItem['_disabled']) {
+    this._disabled = disabled
+    return this
+  }
+
+  /**
+ * Sets the hidden state for the `ListMenuItem`.
+ *
+ * @param hidden The hidden state to set.
+ *
+ * @returns The updated `ListMenuItem` instance.
+ */
+  public setHidden(hidden: ListMenuItem['hidden']) {
+    this.hidden = hidden
     return this
   }
 
@@ -168,8 +182,8 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setType(type: ListMenuItem['type']) {
-    this.type = type
+  public setType(type: ListMenuItem['_type']) {
+    this._type = type
     return this
   }
 
@@ -181,9 +195,9 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public makeCheckable({ name, value }: Pick<ListMenuItem, 'name' | 'value'>) {
-    this.name = name
-    this.value = value
+  public makeCheckable({ name, value }: Pick<MenuItemCheckboxProps, 'name' | 'value'>) {
+    this._name = name
+    this._value = value
     return this
   }
 
@@ -194,8 +208,8 @@ export class ListMenuItem {
    *
    * @returns The updated ListMenuItem instance.
    */
-  public setStyle(style: ListMenuItem['style']) {
-    this.style = style
+  public setStyle(style: ListMenuItem['_style']) {
+    this._style = style
     return this
   }
 
@@ -206,8 +220,8 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public setWidth(width: ListMenuItem['width']) {
-    this.width = width
+  public setWidth(width: ListMenuItem['_width']) {
+    this._width = width
     return this
   }
 
@@ -221,10 +235,10 @@ export class ListMenuItem {
    */
   public setItems(
     items: ListMenuItem['items'],
-    checkedValues?: ListMenuItem['checkedValues']
+    checkedValues?: ListMenuItem['_checkedValues']
   ) {
     this.items = items
-    if (checkedValues) this.checkedValues = checkedValues
+    if (checkedValues) this._checkedValues = checkedValues
     return this
   }
 
@@ -263,11 +277,15 @@ export class ListMenuItem {
    */
   public static createIcon(item: ListMenuItem) {
     let IconElement = () => null
-    if (typeof item.icon === 'string') {
-      return <Icon iconName={item.icon} />
+    if (typeof item._iconName === 'string') {
+      return <Icon iconName={item._iconName} />
     }
-    if (item.icon) IconElement = item.icon as any
+    if (item._iconName) IconElement = item._iconName as any
     return <IconElement />
+  }
+
+  public get text() {
+    return this._text
   }
 
   /**
@@ -284,6 +302,112 @@ export class ListMenuItem {
         .setOnClick(item.onClick)
         .setDisabled(item.disabled)
     )
+  }
+
+  /**
+   * Get the type of the component to render.
+   * 
+   * - `custom` if the `onRender` prop is set.
+   * - `menu` (Menu + MenuList) if the `items` prop is set.
+   * - `button` (ToolbarButton) otherwise.
+   */
+  public get componentType(): 'custom' | 'menu' | 'menu_item_checkbox' | 'button' {
+    if (this.onRender) return 'custom'
+    else if (this.items) return 'menu'
+    else if (this._value) return 'menu_item_checkbox'
+    return 'button'
+  }
+
+  /**
+   * Creates a CSS style object for the ListMenuItem component.
+   * @param additionalStyle - An optional object containing additional CSS properties to be merged with the default style.
+   * @returns A CSSProperties object representing the style of the ListMenuItem component.
+   */
+  private _createStyle(
+    additionalStyle?: CSSProperties
+  ): CSSProperties {
+    const style: CSSProperties = {
+      ...this._style,
+      ...additionalStyle
+    }
+    if (this._width) {
+      style.width = this._width
+      style.minWidth = this._width
+    }
+    switch (this._type) {
+      /**
+       * The `ListMenuItem` is a header and should be bold and 12px.
+       */
+      case 'header': {
+        {
+          style.fontWeight = 'bold'
+          style.fontSize = 12
+        }
+        break
+      }
+      /**
+       * The `ListMenuItem` is a divider and should have a border top and a height of 1px.
+       */
+      case 'divider': {
+        {
+          style.borderTop = '1px solid #eaeaea'
+          style.height = '1px'
+          style.minHeight = '1px'
+        }
+        break
+      }
+    }
+    return style
+  }
+
+  /**
+   * Creates props for the component based on its type.
+   * 
+   * @template T - The type of the props object to be returned.
+   * 
+   * @param options - An object containing additional options.
+   * @param options.additionalStyles={} - Additional styles to be applied to the component.
+   * 
+   * @returns - The props object for the component.
+   */
+  public createProps<T>({ additionalStyles = {} }: { additionalStyles?: CSSProperties } = {}) {
+    let props = {}
+    switch (this.componentType) {
+      case 'button': {
+        props = {
+          title: this._title,
+          disabled: this._disabled,
+          onClick: this._onClick,
+          style: this._createStyle(additionalStyles)
+        }
+        if (this._iconName) props['icon'] = getFluentIconWithFallback(this._iconName)
+      }
+    break
+      case 'menu_item_checkbox': {
+        props = {
+          name: this._name,
+          value: this._value,
+          disabled: this._disabled,
+          onClick: this._onClick,
+          content: this._text,
+          style: this._createStyle(additionalStyles)
+        }
+        if (this._iconName) props['icon'] = getFluentIconWithFallback(this._iconName)
+      }
+      break
+      case 'menu': {
+        const hasCheckmarks = this.items.some(({ _value: value }) => !!value)
+        const hasIcons = this.items.some(({ _iconName: icon }) => !!icon)
+        props = {
+          hasCheckmarks,
+          hasIcons,
+          checkedValues: this._checkedValues
+        }
+      }
+      break
+    }
+
+    return props as T
   }
 }
 

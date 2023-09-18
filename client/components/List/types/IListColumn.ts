@@ -5,7 +5,7 @@ import { IListColumnData } from './IListColumnData'
  * @category List
  */
 
-export interface IListColumn extends IColumn {
+export interface IListColumn<T extends object = any> extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */
@@ -20,6 +20,13 @@ export interface IListColumn extends IColumn {
    * How to render the column
    *
    * - `timeFromNow` - render the column as a time from now
+   * - `customerLink` - render the column as a customer link
    */
-  renderAs?: 'timeFromNow'
+  renderAs?: 'timeFromNow' | 'customerLink' | 'projectLink'
+
+  /**
+   * Create render props to send to the component rendering the column.
+   * E.g. `ProjectLink` or `CustomerLink`.
+   */
+  createRenderProps?: (item: T) => any
 }

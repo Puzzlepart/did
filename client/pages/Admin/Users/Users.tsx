@@ -1,5 +1,5 @@
-import { SelectionMode } from '@fluentui/react'
-import { List } from 'components/List'
+import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { IListProps, List } from 'components/List'
 import { Tabs } from 'components/Tabs'
 import { ITabProps, TabComponent } from 'components/Tabs/types'
 import React from 'react'
@@ -7,10 +7,11 @@ import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
-import { HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM } from './reducer/actions'
+import { HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM, SET_SELECTED_USERS } from './reducer/actions'
 import { UserForm } from './UserForm'
 import styles from './Users.module.scss'
 import { useUsers } from './useUsers'
+import { User } from 'types'
 
 /**
  * Manage users
@@ -34,20 +35,23 @@ export const Users: TabComponent<ITabProps> = () => {
           items={{
             active: [
               List,
-              { text: t('admin.users.activeHeaderText'), iconName: 'Person' },
+              t('admin.users.activeHeaderText'),
               {
                 items: context.state.activeUsers,
                 columns: columns('active'),
                 menuItems,
-                selectionMode: SelectionMode.multiple
-              }
+                checkboxVisibility: CheckboxVisibility.onHover,
+                selectionProps:{
+                  mode: SelectionMode.multiple,
+                  onChanged(selected) {
+                   context.dispatch(SET_SELECTED_USERS(selected as User[]))
+                  },
+                }
+              } as IListProps<User>
             ],
             disabled: [
               List,
-              {
-                text: t('admin.users.disabledHeaderText'),
-                iconName: 'PersonProhibited'
-              },
+               t('admin.users.disabledHeaderText'),
               {
                 items: context.state.disabledUsers,
                 columns: columns('disabled'),

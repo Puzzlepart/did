@@ -22,7 +22,7 @@ import { useUsersMenuItems } from './useUsersMenuItems'
  */
 export function useUsers() {
   const { t } = useTranslation()
-  const { state, dispatch } = useUsersReducer()
+  const [state,dispatch] = useUsersReducer()
   const query = useQuery($users, {
     fetchPolicy: 'cache-and-network'
   })
@@ -30,11 +30,11 @@ export function useUsers() {
   const context = useMemo(
     () =>
       ({
+        ...query,
         state,
         dispatch,
-        refetch: query.refetch
       } as IUsersContext),
-    [state, query.refetch]
+    [state, query.loading]
   )
 
   useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
@@ -65,7 +65,7 @@ export function useUsers() {
     query.refetch()
   }
 
-  const columns = useColumns(context)
+  const columns = useColumns()
   const menuItems = useUsersMenuItems(context)
 
   return {

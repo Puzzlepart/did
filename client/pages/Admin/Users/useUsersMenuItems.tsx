@@ -4,7 +4,6 @@ import { usePermissions } from 'hooks/user/usePermissions'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import _ from 'underscore'
 import { IUsersContext } from './context'
 import {
   CLEAR_PROGRESS,
@@ -29,28 +28,20 @@ export function useUsersMenuItems(context: IUsersContext) {
     return [
       new ListMenuItem(t('admin.users.addNewUser'))
         .withIcon('PeopleAdd')
-        .setDisabled(
-          context.state.loading ||
-            _.isEmpty(context.state.availableAdUsers) ||
-            !hasPermission(PermissionScope.IMPORT_USERS),
-          'Du har ikke tilstrekkelige rettigheter til å legge til nye brukere.'
-        )
+        .setDisabled(context.state.loading)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
         .withDispatch(context, SET_USER_FORM, {
           headerText: t('admin.users.addNewUser')
         }),
       new ListMenuItem(t('admin.users.bulkImportUsersLabel'))
         .withIcon('ArrowImport')
-        .setDisabled(
-          context.state.loading || !hasPermission(PermissionScope.IMPORT_USERS),
-          'Du har ikke tilstrekkelige rettigheter til å importere brukere.'
-        )
+        .setDisabled(context.state.loading)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
-        .withIcon('PersonSync')
-        .setDisabled(
-          context.state.loading || !hasPermission(PermissionScope.IMPORT_USERS),
-          'Du har ikke tilstrekkelige rettigheter til å synkronisere brukere.'
-        )
+        .withIcon('ArrowSync')
+        .setDisabled(context.state.loading)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
         .setOnClick(async () => {
           context.dispatch(
             SET_PROGRESS(t('admin.users.synchronizingUserProperties'))
@@ -62,15 +53,28 @@ export function useUsersMenuItems(context: IUsersContext) {
         <Progress
           text={context.state.progress}
           width={400}
-          padding='10px 10px'
+          padding={10}
           hidden={!context.state.progress}
         />
-      ))
+      )),
+      new ListMenuItem(t('common.editLabel'))
+        .setDisabled(context.state.loading || context.state.selectedUsers.length !== 1)
+        .withIcon('PersonEdit')
+        .setOnClick(() => {
+          const [user] = context.state.selectedUsers
+          context.dispatch(
+            SET_USER_FORM({
+              headerText: user.displayName,
+              user
+            })
+          )
+        })
+        .setGroup('actions')
     ]
   }, [
     context.state.loading,
     context.state.availableAdUsers,
-    hasPermission,
-    context.state.progress
+    context.state.progress,
+    context.state.selectedUsers
   ])
 }

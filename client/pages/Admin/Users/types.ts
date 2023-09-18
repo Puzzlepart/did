@@ -31,6 +31,11 @@ export interface IUsersState {
   availableAdUsers: ActiveDirectoryUser[]
 
   /**
+   * Users selected in the list
+   */
+  selectedUsers: User[]
+
+  /**
    * All roles
    */
   roles: Role[]

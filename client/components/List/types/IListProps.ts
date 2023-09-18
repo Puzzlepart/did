@@ -47,7 +47,7 @@ export interface IListProps<T = any>
   /**
    * Selection
    */
-  selectionProps?: IListSelectionProps
+  selectionProps?: IListSelectionProps<T>
 
   /**
    * Group props

@@ -3,13 +3,14 @@ import {
   Menu,
   MenuItem,
   MenuItemCheckbox,
+  MenuItemCheckboxProps,
+  MenuItemProps,
   MenuList,
   MenuPopover,
   MenuProps,
   MenuTrigger
 } from '@fluentui/react-components'
 import React, { FC, useState } from 'react'
-import { createStyle } from './createStyle'
 import { ListMenuItem } from './ListMenuItem'
 import { ListToolbarButton } from './ListToolbarButton'
 
@@ -29,36 +30,36 @@ export const ListToolbarMenuItem: FC<{
   closeMenu?: () => void
 }> = (props) => {
   const { item, closeMenu } = props
-  if (item.value) {
-    return (
-      <MenuItemCheckbox
-        name={item.name}
-        value={item.value}
-        content={item.text}
-        icon={ListMenuItem.createIcon(item)}
-        style={createStyle(item)}
-        disabled={item.disabled}
-        onClick={() => {
-          item.onClick(null)
-          closeMenu && closeMenu()
-        }}
-      />
-    )
+  switch (item.componentType) {
+    case 'menu_item_checkbox': {
+      const props = item.createProps<MenuItemCheckboxProps>()
+      return (
+        <MenuItemCheckbox
+          {...props}
+          onClick={() => {
+            props.onClick(null)
+            closeMenu && closeMenu()
+          }}
+        />
+      )
+    }
+    case 'menu': {
+      return <ListToolbarMenu {...props} />
+    }
+    default: {
+      const props = item.createProps<MenuItemProps>()
+      return (
+        <MenuItem
+          {...props}
+          content={item.text}
+          onClick={() => {
+            props.onClick(null)
+            closeMenu && closeMenu()
+          }}
+        />
+      )
+    }
   }
-  if (item.items) return <ListToolbarMenu {...props} />
-  return (
-    <MenuItem
-      content={item.text}
-      title={item.title}
-      icon={ListMenuItem.createIcon(item)}
-      style={createStyle(item)}
-      disabled={item.disabled}
-      onClick={() => {
-        item.onClick(null)
-        closeMenu && closeMenu()
-      }}
-    />
-  )
 }
 
 /**
@@ -69,9 +70,7 @@ export const ListToolbarMenuItem: FC<{
  * @returns The rendered menu.
  */
 export const ListToolbarMenu: FC<{ item: ListMenuItem }> = ({ item }) => {
-  const { items, checkedValues } = item
-  const hasCheckmarks = items.some(({ value }) => !!value)
-  const hasIcons = items.some(({ icon }) => !!icon)
+  const props = item.createProps<MenuProps>()
   const [open, setOpen] = useState(false)
   const onOpenChange: MenuProps['onOpenChange'] = (_, data) => {
     setOpen(data.open)
@@ -80,16 +79,14 @@ export const ListToolbarMenu: FC<{ item: ListMenuItem }> = ({ item }) => {
     <Menu
       open={open}
       onOpenChange={onOpenChange}
-      hasCheckmarks={hasCheckmarks}
-      hasIcons={hasIcons}
-      checkedValues={checkedValues}
+      {...props}
     >
       <MenuTrigger disableButtonEnhancement>
         <ListToolbarButton item={item} />
       </MenuTrigger>
       <MenuPopover>
         <MenuList>
-          {items.map((menuItem, index) => (
+          {item.items.map((menuItem, index) => (
             <ListToolbarMenuItem
               key={index}
               item={menuItem}

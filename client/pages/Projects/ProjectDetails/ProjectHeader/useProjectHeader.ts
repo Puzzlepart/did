@@ -2,6 +2,7 @@ import { useBreadcrumb } from 'hooks/useBreadcrumb'
 import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer/actions'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
+import { createRouterLink } from 'utils'
 import { useProjectsContext } from '../../context'
 
 export function useProjectHeader() {
@@ -16,7 +17,7 @@ export function useProjectHeader() {
           ? t('navigation.ProjectsPage')
           : t('projects.myProjectsText'),
       onClick: () => {
-        history.replace(`/projects/${state.currentTab}`)
+        history.replace('/projects/s')
         dispatch(SET_SELECTED_PROJECT(null))
       }
     },
@@ -24,7 +25,7 @@ export function useProjectHeader() {
       key: 'customer',
       text: state.selected?.customer.name,
       onClick: () =>
-        history.replace(`/customers/s/${state.selected?.customer.key}`)
+        history.replace(createRouterLink('/customers/{{key}}', state.selected?.customer))
     },
     {
       key: 'selected',

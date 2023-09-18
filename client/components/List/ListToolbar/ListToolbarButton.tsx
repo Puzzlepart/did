@@ -1,7 +1,5 @@
-import { ToolbarButton } from '@fluentui/react-components'
+import { ToolbarButton, ToolbarButtonProps } from '@fluentui/react-components'
 import React, { CSSProperties, FC } from 'react'
-import { getFluentIconWithFallback } from 'utils'
-import { createStyle } from './createStyle'
 import { ListMenuItem } from './ListMenuItem'
 
 /**
@@ -17,16 +15,14 @@ export const ListToolbarButton: FC<{
   item: ListMenuItem
   buttonStyle?: CSSProperties
   labelStyle?: CSSProperties
-}> = (props) => {
+}> = ({ item, buttonStyle, labelStyle }) => {
+  if (item.hidden) return null
+  const props = item.createProps<ToolbarButtonProps>({
+    additionalStyles: buttonStyle
+  })
   return (
-    <ToolbarButton
-      icon={getFluentIconWithFallback(props.item.icon)}
-      title={props.item.title}
-      style={createStyle(props.item, props.buttonStyle)}
-      onClick={props.item.onClick}
-      disabled={props.item.disabled}
-    >
-      <span style={props.labelStyle}>{props.item.text}</span>
+    <ToolbarButton {...props}  >
+      <span style={labelStyle}>{item.text}</span>
     </ToolbarButton>
   )
 }

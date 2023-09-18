@@ -1,5 +1,7 @@
 import { Icon } from '@fluentui/react'
 import {
+  ArrowSync24Regular,
+  ArrowSync24Filled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -355,6 +357,10 @@ const iconCatalog = {
   DeleteDismiss: {
     regular: DeleteDismiss24Regular,
     filled: DeleteDismiss24Filled
+  },
+  ArrowSync: {
+    regular: ArrowSync24Regular,
+    filled: ArrowSync24Filled
   }
 }
 

@@ -1,10 +1,8 @@
 import {
-  CustomerLink,
   EntityLabel,
   IconText,
   IListColumn,
-  ItemColumn,
-  ProjectLink
+  ItemColumn
 } from 'components'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -39,11 +37,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         createColumnDef<Project>(
           'customer',
           t('common.customer'),
-          { minWidth: 340, maxWidth: 340 },
-          (project) => {
-            if (!project.customer) return null
-            return <CustomerLink customer={project.customer} />
-          }
+          { minWidth: 340, maxWidth: 340, renderAs: 'customerLink' }
         ),
         createColumnDef<Project>(
           'key',
@@ -67,15 +61,15 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           }
         ),
         createColumnDef<Project>(
-          'name',
+          undefined,
           t('common.nameFieldLabel'),
-          { maxWidth: 220 },
-          (project) => (
-            <ProjectLink
-              project={project}
-              onClick={() => context.dispatch(SET_SELECTED_PROJECT(project))}
-            />
-          )
+          {
+            maxWidth: 220,
+            renderAs: 'projectLink',
+            createRenderProps: (project) => ({
+              onClick: () => context.dispatch(SET_SELECTED_PROJECT(project))
+            })
+          }
         ),
         createColumnDef<Project>(
           'description',
