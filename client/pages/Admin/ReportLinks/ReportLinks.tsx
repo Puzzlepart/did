@@ -1,4 +1,4 @@
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { SelectionMode } from '@fluentui/react'
 import { List } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
@@ -28,11 +28,7 @@ export const ReportLinks: TabComponent = () => {
         enableShimmer={query.loading}
         items={query.data?.reportLinks}
         columns={columns}
-        checkboxVisibility={CheckboxVisibility.onHover}
-        selectionProps={{
-          mode: SelectionMode.single,
-          onChanged: onSelectionChanged
-        }}
+        selectionProps={[SelectionMode.single, onSelectionChanged]}
         menuItems={[
           new ListMenuItem(t('admin.reportLinks.addNewReportsLink'))
             .withIcon('Add')

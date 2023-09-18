@@ -27,14 +27,15 @@ export function useList(props: IListProps) {
   )
 
   const selection = useMemo(() => {
-    if (!props.selectionProps) return null
+    const [selectionMode = SelectionMode.none, onChanged] = props.selectionProps 
+    if (!onChanged) return null
     return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
-        if (props.selectionProps?.mode === SelectionMode.single) {
-          props.selectionProps.onChanged(_.first(_selection))
+        if (selectionMode === SelectionMode.single) {
+          onChanged(_.first(_selection))
         } else {
-          props.selectionProps.onChanged(_selection)
+          onChanged(_selection)
         }
       }
     })

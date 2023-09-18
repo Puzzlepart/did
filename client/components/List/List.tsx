@@ -1,4 +1,4 @@
-import { ShimmeredDetailsList } from '@fluentui/react'
+import { SelectionMode, ShimmeredDetailsList } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
@@ -45,5 +45,6 @@ List.defaultProps = {
   filterValues: {},
   menuItems: [],
   getColumnStyle: () => ({}),
-  minmalHeaderColumns: true
+  minmalHeaderColumns: true,
+  selectionProps: [SelectionMode.none]
 }

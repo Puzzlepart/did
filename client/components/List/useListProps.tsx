@@ -9,10 +9,10 @@ import {
 } from '@fluentui/react'
 import React from 'react'
 import _ from 'underscore'
-import { IListContext } from './context'
 import { ItemColumn } from './ItemColumn'
 import { ListGroupHeader } from './ListGroupHeader'
 import { ListHeader } from './ListHeader'
+import { IListContext } from './context'
 import { INIT_COLUMN_HEADER_CONTEXT_MENU } from './reducer'
 import { IListColumn, IListProps } from './types'
 
@@ -32,7 +32,7 @@ export function useListProps({
   context,
   selection,
   groups,
-  items
+  items,
 }: UseListProps): IListProps {
   const columns = _.filter(context.props.columns, (col) => {
     const groupBy = context.props.listGroupProps?.fieldName
@@ -40,6 +40,11 @@ export function useListProps({
     if (groupBy && col.fieldName === groupBy) return false
     return true
   })
+  const [selectionMode = SelectionMode.none] = context.props.selectionProps
+  let checkboxVisibility = selectionMode === SelectionMode.none ? CheckboxVisibility.hidden : CheckboxVisibility.onHover
+  if (context.props.checkboxVisibility) {
+    checkboxVisibility = context.props.checkboxVisibility
+  }
   return {
     getKey: (_item, index) => `list_item_${index}`,
     setKey: 'list',
@@ -49,9 +54,8 @@ export function useListProps({
     columns,
     items,
     groups,
-    selectionMode: context.props.selectionProps
-      ? context.props.selectionProps.mode
-      : SelectionMode.none,
+    selectionMode: selectionMode,
+    checkboxVisibility,
     constrainMode: ConstrainMode.horizontalConstrained,
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
@@ -60,8 +64,6 @@ export function useListProps({
         return <ListGroupHeader {...props} />
       }
     },
-    checkboxVisibility:
-      context.props.checkboxVisibility ?? CheckboxVisibility.hidden,
     onRenderDetailsHeader: (headerProps, defaultRender) => (
       <ListHeader headerProps={headerProps} defaultRender={defaultRender} />
     ),

@@ -2,7 +2,7 @@ import { Text, Tooltip } from '@fluentui/react-components'
 import { DynamicButton } from 'components'
 import React, { ReactElement, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
+import { useTimeout, useBoolean } from 'usehooks-ts'
 import { getFluentIcon } from 'utils'
 import { IApiKeyDisplayProps } from './types'
 
@@ -15,16 +15,11 @@ export function useApiKeyDisplay(props: IApiKeyDisplayProps) {
     display.setValue(!props.toggleDisplay)
   }, [props.toggleDisplay])
 
-  let timeout: NodeJS.Timeout
-
-  useEffect(() => {
-    timeout && clearTimeout(timeout)
+  useTimeout(() => {
     if (display.value && props.toggleDisplay) {
-      timeout = setTimeout(() => {
-        display.toggle()
-      }, props.displayDuration * 1000)
+      display.toggle()
     }
-  }, [display.value])
+  }, props.displayDuration * 1000)
 
   let contentAfter: ReactElement
   if (props.toggleDisplay) {

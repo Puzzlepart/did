@@ -3,14 +3,14 @@ import {
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
   IRenderFunction,
-  IShimmeredDetailsListProps
+  IShimmeredDetailsListProps,
+  SelectionMode
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-search-preview'
 import { CSSProperties } from 'react'
 import { ListMenuItem } from '../ListToolbar'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
-import { IListSelectionProps } from './IListSelectionProps'
 import { ListFilterState } from './ListFilterState'
 
 /**
@@ -45,9 +45,9 @@ export interface IListProps<T = any>
   searchBox?: SearchBoxProps
 
   /**
-   * Selection
+   * Selection props
    */
-  selectionProps?: IListSelectionProps<T>
+  selectionProps?: [SelectionMode, ((selected: T | T[]) => void)?]
 
   /**
    * Group props
