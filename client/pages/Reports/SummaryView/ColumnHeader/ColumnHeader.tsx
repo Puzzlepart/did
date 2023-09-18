@@ -7,9 +7,7 @@ import { IColumnHeaderProps } from './types'
 /**
  * @category List
  */
-export const ColumnHeader: StyledComponent<IColumnHeaderProps> = (
-  props
-) => {
+export const ColumnHeader: StyledComponent<IColumnHeaderProps> = (props) => {
   return (
     <div className={ColumnHeader.className}>
       <div className={`${styles.container} ${props.hostClassName}`}>
@@ -25,6 +23,6 @@ export const ColumnHeader: StyledComponent<IColumnHeaderProps> = (
 ColumnHeader.displayName = 'ColumnHeader'
 ColumnHeader.className = styles.columnHeader
 ColumnHeader.defaultProps = {
-    subText: '',
-    textSize: 400
+  subText: '',
+  textSize: 400
 }

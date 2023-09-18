@@ -4,12 +4,14 @@ import { ComponentLogicHook, useTimesheetPeriods } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
-import { any } from 'underscore'
+import _ from 'underscore'
+import * as s from 'underscore.string'
 import { arrayMap } from 'utils'
 import { List } from './List'
 import { IMissingSubmissionUser } from './MissingSubmissionUser'
 import { IMissingSubmissionPeriod } from './types'
 import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
+
 
 /**
  * Maps `User` to `IMissingSubmissionUser`. We don't want to extend
@@ -17,7 +19,6 @@ import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
  *
  * @param user - User
  * @param periods - Date periods
- * @returns
  */
 const mapUser = (
   user: User,
@@ -49,7 +50,7 @@ const getPeriodsWithMissingSubmissions = (
     users: users
       .filter(
         (user) =>
-          !any(
+          !_.any(
             periods,
             ({ userId, week, month, year }) =>
               userId === user.id && [week, month, year].join('_') === p.id
@@ -71,7 +72,7 @@ const getUsersWithMissingPeriods = (
   arrayMap<User, IMissingSubmissionUser>(users, (user) => {
     const missingPeriods = datePeriods.filter(
       ({ id }) =>
-        !any(
+        !_.any(
           periods,
           ({ userId, week, month, year }) =>
             userId === user.id && [week, month, year].join('_') === id
@@ -107,6 +108,7 @@ export const useMissingSubmissions: ComponentLogicHook<
           List,
           {
             text: t('common.periodName', period),
+            description: s.capitalize(period.monthName),
             iconName: 'CalendarWorkWeek'
           },
           { period }

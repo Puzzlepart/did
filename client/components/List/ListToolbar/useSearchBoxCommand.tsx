@@ -12,6 +12,9 @@ export function useSearchBoxCommand() {
     onRender: () => (
       <SearchBox
         {...context.props.searchBox}
+        style={{
+          width: '100%'
+        }}
         defaultValue={context.state.searchTerm}
         onChange={(_event, data) => {
           if (context.props.searchBox.onChange)

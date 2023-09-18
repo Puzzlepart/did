@@ -36,5 +36,5 @@ export function useProjectList(props: IProjectListProps) {
     items,
     columns,
     toggleInactive
-  } as const
+  }
 }

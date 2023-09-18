@@ -487,7 +487,7 @@
     "homePage": "Home",
     "missingWeeksLabel": "Missing weeks",
     "allWeeks": "All weeks",
-    "periodName": "Week {{name}}",
+    "periodName": "Week {{weekNumber}}",
     "userLastActiveText": "The user was last active {{lastActive}}.",
     "roundUpEventsLabel": "Round events to nearest 30 minutes",
     "roundUpEventsDescription": "Microsoft supports the ability to end meetings early or start late, typically by 5 or 10 minutes. This function allows us to round the duration of events to the nearest half hour. The setting won't take effect before next login.",
