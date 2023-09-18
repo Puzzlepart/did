@@ -40,11 +40,13 @@ export const ReportLinks: TabComponent = () => {
           new ListMenuItem(t('common.editLabel'))
             .withIcon('LinkEdit')
             .setOnClick(onEdit)
-            .setDisabled(!selectedLink),
+            .setDisabled(!selectedLink)
+            .setGroup('actions'),
           new ListMenuItem(t('common.delete'))
             .withIcon('Delete')
             .setOnClick(onDelete)
             .setDisabled(!selectedLink)
+            .setGroup('actions')
         ]}
         commandBar={{
           items: [
