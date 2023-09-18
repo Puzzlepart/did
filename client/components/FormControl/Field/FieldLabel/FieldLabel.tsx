@@ -16,7 +16,7 @@ export const FieldLabel: StyledComponent<IFieldLabelProps> = (props) => {
         disabled={props.disabled}
         weight={props.weight}
         style={{
-          fontSize: props.fontSize,
+          fontSize: props.fontSize
         }}
       >
         {props.text}

@@ -9,8 +9,8 @@ import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { useProjectsContext } from '../../../context'
 import { OPEN_EDIT_PANEL, SET_SELECTED_PROJECT } from '../../../reducer/actions'
-import styles from './ProjectActions.module.scss'
 import $createOutlookCategory from './createOutlookCategory.gql'
+import styles from './ProjectActions.module.scss'
 
 /**
  * @category Projects

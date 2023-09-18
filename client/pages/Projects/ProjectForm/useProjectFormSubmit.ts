@@ -33,7 +33,7 @@ export const useProjectFormSubmit: FormSubmitHook<
     try {
       await mutate({
         variables: {
-          project: model.$,
+          project: 'hello',
           options: options.$,
           update: !!props.edit
         }
@@ -51,7 +51,7 @@ export const useProjectFormSubmit: FormSubmitHook<
     } catch {
       const messageKey = props.edit ? 'updateError' : 'createError'
       setToast({
-        text: t(`projects.updateError`),
+        text: t(`projects.${messageKey}`, model),
         intent: 'error'
       })
     }

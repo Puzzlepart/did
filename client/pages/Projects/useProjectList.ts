@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IProjectListProps } from './ProjectList/types'
 import { IProjectsContext } from './context'
+import { IProjectListProps } from './ProjectList/types'
 import { SET_SELECTED_PROJECT } from './reducer/actions'
 
 /**

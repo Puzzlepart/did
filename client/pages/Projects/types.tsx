@@ -25,7 +25,7 @@ export interface IProjectsState {
    * The currently selected tab.
    */
   currentTab?: ProjectsTab
-  
+
   /**
    * The currently selected project.
    */

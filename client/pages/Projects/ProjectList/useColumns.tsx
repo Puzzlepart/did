@@ -70,15 +70,20 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             isMultiline: true
           }
         ),
-        createColumnDef<Project>('labels', '', {}, (project) => (
-          <>
-            {(project.labels as LabelObject[]).map(
-              (label: LabelObject, index: number) => (
-                <EntityLabel key={index} label={label} />
-              )
-            )}
-          </>
-        ))
+        createColumnDef<Project>(
+          'labels',
+          t('projects.labelFieldLabel'),
+          {},
+          (project) => (
+            <>
+              {(project.labels as LabelObject[]).map(
+                (label: LabelObject, index: number) => (
+                  <EntityLabel key={index} label={label} />
+                )
+              )}
+            </>
+          )
+        )
       ].filter((col) => !(props.hideColumns || []).includes(col.key)),
     [props.hideColumns]
   )

@@ -1,7 +1,7 @@
 import { useFormControlModel } from 'components'
 import { Project } from 'types'
-import { IProjectFormProps } from './types'
 import _ from 'underscore'
+import { IProjectFormProps } from './types'
 
 /**
  * Returns the model and functions to update
@@ -12,10 +12,15 @@ import _ from 'underscore'
  * @returns the initial model
  */
 export function useProjectModel(props: IProjectFormProps) {
-  const map = useFormControlModel<keyof Project, Project>(props.edit, (p) => _.omit({
-    ...p,
-    labels: p.labels ? p.labels.map((label) => label.name) : []
-  }, ['customer', 'tag']))
+  const map = useFormControlModel<keyof Project, Project>(props.edit, (p) =>
+    _.omit(
+      {
+        ...p,
+        labels: p.labels ? p.labels.map((label) => label.name) : []
+      },
+      ['customer', 'tag']
+    )
+  )
 
   /**
    * Project ID is not included the mutation

@@ -5,8 +5,8 @@ import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
-import { useProjects } from './useProjects'
 import { CLOSE_EDIT_PANEL } from './reducer'
+import { useProjects } from './useProjects'
 
 /**
  * @category Function Component
