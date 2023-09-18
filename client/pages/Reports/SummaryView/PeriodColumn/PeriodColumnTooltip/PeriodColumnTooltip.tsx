@@ -46,9 +46,16 @@ export const PeriodColumnTooltip: StyledComponent<IPeriodColumnTooltipProps> = (
             )}
           </div>
           <div className={styles.customerTotals}>
-            {customerTotals.map(({ customer, hours }, index) => customer && (
-              <CustomerHours key={index} customer={customer} hours={hours} />
-            ))}
+            {customerTotals.map(
+              ({ customer, hours }, index) =>
+                customer && (
+                  <CustomerHours
+                    key={index}
+                    customer={customer}
+                    hours={hours}
+                  />
+                )
+            )}
           </div>
           <TotalHours hours={props.hours.total} />
         </div>

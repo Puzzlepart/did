@@ -1,5 +1,6 @@
 import { LabelProps } from '@fluentui/react-components'
 import { HTMLProps } from 'react'
+import { IFieldLabelProps } from './FieldLabel/types'
 
 /**
  * Props for the Field component.
@@ -38,4 +39,9 @@ export interface IFieldProps<KeyType = string>
    * the `UserMessage` component with `intent` set to `error`.
    */
   errorMessage?: string
+
+  /**
+   * Label properties
+   */
+  labelProps?: IFieldLabelProps
 }

@@ -6,6 +6,7 @@ import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
 import { useProjects } from './useProjects'
+import { CLOSE_EDIT_PANEL } from './reducer'
 
 /**
  * @category Function Component
@@ -27,6 +28,15 @@ export const Projects: FC = () => {
           }}
         ></Tabs>
       )}
+      <ProjectForm
+        edit={{ ...context.state.editProject }}
+        panelProps={{
+          scroll: true,
+          isOpen: !!context.state.editProject,
+          headerText: context.state.editProject?.name,
+          onDismiss: () => context.dispatch(CLOSE_EDIT_PANEL())
+        }}
+      />
     </ProjectsContext.Provider>
   )
 }

@@ -1,30 +1,7 @@
-import { useMap } from 'hooks/common/useMap'
-import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
-import { useEffect } from 'react'
-import { convertToMap } from 'utils/convertToMap'
-import { ProjectModel } from './ProjectModel'
+import { useFormControlModel } from 'components'
+import { Project } from 'types'
 import { IProjectFormProps } from './types'
-
-/**
- * Initializes the model based on `props.edit`. Sets a random
- * fabric icon using hook `useRandomFabricIcon`.
- *
- * @param map - Map
- * @param props - Props
- */
-export function useInitModel(
-  map: ReturnType<typeof useMap>,
-  props: IProjectFormProps
-): void {
-  const icon = useRandomFabricIcon()
-  useEffect(() => {
-    const model = new ProjectModel().init(props.edit)
-    const _map = convertToMap(model)
-    map.$set(_map)
-    if (!props.edit) map.set('icon', icon)
-    if (props.customerKey) map.set('customerKey', props.customerKey)
-  }, [props.edit, props.customerKey])
-}
+import _ from 'underscore'
 
 /**
  * Returns the model and functions to update
@@ -35,9 +12,10 @@ export function useInitModel(
  * @returns the initial model
  */
 export function useProjectModel(props: IProjectFormProps) {
-  const map = useMap<keyof ProjectModel, ProjectModel>()
-
-  useInitModel(map, props)
+  const map = useFormControlModel<keyof Project, Project>(props.edit, (p) => _.omit({
+    ...p,
+    labels: p.labels ? p.labels.map((label) => label.name) : []
+  }, ['customer', 'tag']))
 
   /**
    * Project ID is not included the mutation

@@ -11,10 +11,9 @@ export const ListToolbar: StyledComponent<IListToolbarProps> = (props) => {
   return (
     <Toolbar className={ListToolbar.className} size={props.size}>
       {Object.keys(menuItemGroups).map((key, index) => (
-        <ToolbarGroup key={index} role='presentation' style={{
-          flex: index === 0 ? 1 : 0,
-          flexShrink: 0
-        }}>
+        <ToolbarGroup
+          key={index}
+          role='presentation'>
           {menuItemGroups[key].map((item, index) => (
             <ListToolbarItem key={index} item={item} />
           ))}

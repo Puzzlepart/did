@@ -4,15 +4,13 @@ import copy from 'fast-copy'
 import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope } from 'security'
+import { PermissionScope as $ } from 'security'
 import { StyledComponent } from 'types'
-import useBoolean from 'usehooks-ts/dist/esm/useBoolean/useBoolean'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { useProjectsContext } from '../../../context'
-import { ProjectForm } from '../../../ProjectForm'
-import { SET_SELECTED_PROJECT } from '../../../reducer/actions'
-import $createOutlookCategory from './createOutlookCategory.gql'
+import { OPEN_EDIT_PANEL, SET_SELECTED_PROJECT } from '../../../reducer/actions'
 import styles from './ProjectActions.module.scss'
+import $createOutlookCategory from './createOutlookCategory.gql'
 
 /**
  * @category Projects
@@ -22,7 +20,6 @@ export const ProjectActions: StyledComponent = (props) => {
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
   const [createOutlookCategory] = useMutation($createOutlookCategory)
-  const { value: showEditPanel, toggle: toggleEditPanel } = useBoolean(false)
 
   /**
    * On create category in Outlook
@@ -63,26 +60,14 @@ export const ProjectActions: StyledComponent = (props) => {
             {t('projects.createOutlookCategoryLabel')}
           </Button>
         )}
-        {hasPermission(PermissionScope.MANAGE_PROJECTS) && (
-          <>
-            <Button
-              appearance='transparent'
-              icon={icon('TableEdit')}
-              onClick={toggleEditPanel}
-            >
-              {t('projects.editButtonLabel')}
-            </Button>
-            <ProjectForm
-              key={state.selected?.tag}
-              edit={state.selected}
-              panelProps={{
-                scroll: true,
-                isOpen: showEditPanel,
-                headerText: state.selected?.name,
-                onDismiss: toggleEditPanel
-              }}
-            />
-          </>
+        {hasPermission($.MANAGE_PROJECTS) && (
+          <Button
+            appearance='transparent'
+            icon={icon('TableEdit')}
+            onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))}
+          >
+            {t('projects.editButtonLabel')}
+          </Button>
         )}
       </div>
     </div>

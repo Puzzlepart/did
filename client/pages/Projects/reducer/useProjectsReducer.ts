@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import _ from 'underscore'
 import { fuzzyStringEqual } from 'utils'
 import { IProjectsState, IProjectsUrlParameters } from '../types'
-import { DATA_UPDATED, SET_SELECTED_PROJECT } from './actions'
+import { CLOSE_EDIT_PANEL, DATA_UPDATED, OPEN_EDIT_PANEL, SET_SELECTED_PROJECT } from './actions'
 
 /**
  * Use Projects reducer.
@@ -38,6 +38,12 @@ export function useProjectsReducer() {
         })
         .addCase(SET_SELECTED_PROJECT, (state, { payload }) => {
           state.selected = payload
+        })
+        .addCase(OPEN_EDIT_PANEL, (state, { payload }) => {
+          state.editProject = payload
+        })
+        .addCase(CLOSE_EDIT_PANEL, (state) => {
+          state.editProject = null
         })
   )
 }

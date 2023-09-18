@@ -12,7 +12,6 @@ import { IMissingSubmissionUser } from './MissingSubmissionUser'
 import { IMissingSubmissionPeriod } from './types'
 import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
 
-
 /**
  * Maps `User` to `IMissingSubmissionUser`. We don't want to extend
  * classes that have the `ObjectType` decorator.

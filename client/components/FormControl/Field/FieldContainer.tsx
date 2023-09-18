@@ -1,10 +1,11 @@
-import { Field, Label, mergeClasses } from '@fluentui/react-components'
+import { Field, mergeClasses } from '@fluentui/react-components'
 import React from 'react'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
-import { FormControlContext, IFormControlContext } from '../context'
 import { FieldDescription } from '../FieldDescription'
+import { FormControlContext, IFormControlContext } from '../context'
 import styles from './FieldContainer.module.scss'
+import { FieldLabel } from './FieldLabel'
 import { IFieldProps } from './types'
 
 /**
@@ -39,15 +40,12 @@ export const FieldContainer: StyledComponent<IFieldProps> = (props) => {
             {..._.pick(props, 'onKeyDown')}
             {...getValidationProps(context, props.name)}
           >
-            <div className={styles.label}>
-              <Label
-                required={props.required}
-                disabled={props.disabled}
-                weight='semibold'
-              >
-                {props.label}
-              </Label>
-            </div>
+            <FieldLabel
+              {...props.labelProps}
+              required={props.required}
+              disabled={props.disabled}
+              text={props.label}
+            />
             {props.children}
             {props.description && <FieldDescription text={props.description} />}
           </Field>
@@ -60,5 +58,8 @@ export const FieldContainer: StyledComponent<IFieldProps> = (props) => {
 FieldContainer.displayName = 'FieldContainer'
 FieldContainer.className = styles.fieldContainer
 FieldContainer.defaultProps = {
-  name: 'unregistered_field'
+  name: 'unregistered_field',
+  labelProps: {
+    weight: 'semibold'
+  }
 }

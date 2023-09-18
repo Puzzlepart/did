@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Project } from 'types'
-import { IProjectsContext } from './context'
 import { IProjectListProps } from './ProjectList/types'
+import { IProjectsContext } from './context'
 import { SET_SELECTED_PROJECT } from './reducer/actions'
 
 /**
@@ -15,10 +14,8 @@ export function useProjectList(context: IProjectsContext): IProjectListProps {
   const listProps = useMemo<IProjectListProps>(
     () => ({
       items: null,
-      enableShimmer: context.loading,
+      enableShimmer: context.loading && !context.previousData,
       renderLink: true,
-      linkOnClick: (project: Project) =>
-        context.dispatch(SET_SELECTED_PROJECT(project)),
       searchBox: {
         placeholder:
           context.state.currentTab === 'm'

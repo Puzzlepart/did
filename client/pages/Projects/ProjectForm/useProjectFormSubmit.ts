@@ -38,8 +38,9 @@ export const useProjectFormSubmit: FormSubmitHook<
           update: !!props.edit
         }
       })
+      const messageKey = props.edit ? 'updateSuccess' : 'createSuccess'
       setToast({
-        text: t('projects.createSuccess', {
+        text: t(`projects.${messageKey}`, {
           projectId: model.projectId,
           name: model.$.name
         }),
@@ -48,8 +49,9 @@ export const useProjectFormSubmit: FormSubmitHook<
       context.refetch()
       model.reset()
     } catch {
+      const messageKey = props.edit ? 'updateError' : 'createError'
       setToast({
-        text: t('projects.createError'),
+        text: t(`projects.updateError`),
         intent: 'error'
       })
     }
