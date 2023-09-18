@@ -12,15 +12,15 @@ import { ListToolbarMenu } from './ListToolbarMenu'
  * @returns The rendered toolbar item.
  */
 export const ListToolbarItem: FC<{ item: ListMenuItem }> = (props) => {
-  switch(props.item.componentType) {
+  switch (props.item.componentType) {
     case 'custom': {
-       return props.item.onRender(null, null) as JSX.Element
+      return props.item.onRender(null, null) as JSX.Element
     }
-    case 'menu': { 
+    case 'menu': {
       return <ListToolbarMenu {...props} />
     }
     default: {
-       return <ListToolbarButton {...props} />
+      return <ListToolbarButton {...props} />
     }
   }
 }

@@ -1,2 +1,2 @@
-export * from './useUsersReducer'
 export * from './actions'
+export * from './useUsersReducer'

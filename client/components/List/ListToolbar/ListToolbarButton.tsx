@@ -21,7 +21,7 @@ export const ListToolbarButton: FC<{
     additionalStyles: buttonStyle
   })
   return (
-    <ToolbarButton {...props}  >
+    <ToolbarButton {...props}>
       <span style={labelStyle}>{item.text}</span>
     </ToolbarButton>
   )

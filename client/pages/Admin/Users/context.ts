@@ -1,6 +1,6 @@
 import { OperationVariables, QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { Dispatch, createContext } from 'react'
+import { createContext, Dispatch } from 'react'
 import { IUsersState } from './types'
 
 /**

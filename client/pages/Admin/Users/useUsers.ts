@@ -22,7 +22,7 @@ import { useUsersMenuItems } from './useUsersMenuItems'
  */
 export function useUsers() {
   const { t } = useTranslation()
-  const [state,dispatch] = useUsersReducer()
+  const [state, dispatch] = useUsersReducer()
   const query = useQuery($users, {
     fetchPolicy: 'cache-and-network'
   })
@@ -32,7 +32,7 @@ export function useUsers() {
       ({
         ...query,
         state,
-        dispatch,
+        dispatch
       } as IUsersContext),
     [state, query.loading]
   )

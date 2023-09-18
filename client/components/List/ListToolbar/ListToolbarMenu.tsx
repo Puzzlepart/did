@@ -76,11 +76,7 @@ export const ListToolbarMenu: FC<{ item: ListMenuItem }> = ({ item }) => {
     setOpen(data.open)
   }
   return (
-    <Menu
-      open={open}
-      onOpenChange={onOpenChange}
-      {...props}
-    >
+    <Menu open={open} onOpenChange={onOpenChange} {...props}>
       <MenuTrigger disableButtonEnhancement>
         <ListToolbarButton item={item} />
       </MenuTrigger>

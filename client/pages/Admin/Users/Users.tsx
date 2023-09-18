@@ -5,13 +5,17 @@ import { ITabProps, TabComponent } from 'components/Tabs/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { User } from 'types'
 import { AddMultiplePanel } from './AddMultiplePanel'
 import { UsersContext } from './context'
-import { HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM, SET_SELECTED_USERS } from './reducer/actions'
+import {
+  HIDE_ADD_MULTIPLE_PANEL,
+  HIDE_USER_FORM,
+  SET_SELECTED_USERS
+} from './reducer/actions'
 import { UserForm } from './UserForm'
 import styles from './Users.module.scss'
 import { useUsers } from './useUsers'
-import { User } from 'types'
 
 /**
  * Manage users
@@ -41,17 +45,17 @@ export const Users: TabComponent<ITabProps> = () => {
                 columns: columns('active'),
                 menuItems,
                 checkboxVisibility: CheckboxVisibility.onHover,
-                selectionProps:{
+                selectionProps: {
                   mode: SelectionMode.multiple,
                   onChanged(selected) {
-                   context.dispatch(SET_SELECTED_USERS(selected as User[]))
-                  },
+                    context.dispatch(SET_SELECTED_USERS(selected as User[]))
+                  }
                 }
               } as IListProps<User>
             ],
             disabled: [
               List,
-               t('admin.users.disabledHeaderText'),
+              t('admin.users.disabledHeaderText'),
               {
                 items: context.state.disabledUsers,
                 columns: columns('disabled'),

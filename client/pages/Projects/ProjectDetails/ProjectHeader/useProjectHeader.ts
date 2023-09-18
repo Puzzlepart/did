@@ -25,7 +25,9 @@ export function useProjectHeader() {
       key: 'customer',
       text: state.selected?.customer.name,
       onClick: () =>
-        history.replace(createRouterLink('/customers/{{key}}', state.selected?.customer))
+        history.replace(
+          createRouterLink('/customers/{{key}}', state.selected?.customer)
+        )
     },
     {
       key: 'selected',

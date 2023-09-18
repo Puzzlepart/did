@@ -20,6 +20,7 @@ export function useLabels() {
   const [form, setForm] = useState<ILabelFormProps>({
     isOpen: false
   })
+  const [selectedLabel, onSelectionChanged] = useState<LabelObject>(null)
   const [ConfirmationDialog, getResponse] = useConfirmationDialog()
 
   const onDismiss = useCallback(() => {
@@ -30,29 +31,26 @@ export function useLabels() {
     refetch().then(() => setForm({ isOpen: false }))
   }, [])
 
-  const onEdit = useCallback((label: LabelObject) => {
-    setForm({ isOpen: true, edit: label })
-  }, [])
+  const onEdit = useCallback(() => {
+    setForm({ isOpen: true, edit: selectedLabel })
+  }, [selectedLabel])
 
-  const onDelete = useCallback(
-    async (label: LabelObject) => {
-      const response = await getResponse({
-        title: t('admin.labels.confirmDeleteTitle'),
-        subText: t('admin.labels.confirmDeleteSubText', label),
-        responses: [[t('common.yes'), true, true], [t('common.no')]]
-      })
-      if (response === true) {
-        deleteLabel({ variables: { name: label.name } }).then(refetch)
-      }
-    },
-    [deleteLabel]
-  )
+  const onDelete = useCallback(async () => {
+    const response = await getResponse({
+      title: t('admin.labels.confirmDeleteTitle'),
+      subText: t('admin.labels.confirmDeleteSubText', selectedLabel),
+      responses: [[t('common.yes'), true, true], [t('common.no')]]
+    })
+    if (response === true) {
+      deleteLabel({ variables: { name: selectedLabel.name } }).then(refetch)
+    }
+  }, [deleteLabel, selectedLabel])
 
   useEffect(() => {
     refetch()
   }, [form])
 
-  const columns = useColumns({ onEdit, onDelete })
+  const columns = useColumns()
   return {
     items,
     columns,
@@ -63,6 +61,10 @@ export function useLabels() {
       onDismiss
     },
     setForm,
-    ConfirmationDialog
+    ConfirmationDialog,
+    onEdit,
+    onDelete,
+    onSelectionChanged,
+    selectedLabel
   }
 }

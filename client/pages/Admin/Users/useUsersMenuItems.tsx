@@ -40,7 +40,9 @@ export function useUsersMenuItems(context: IUsersContext) {
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
         .withIcon('ArrowSync')
-        .setDisabled(context.state.loading || context.state.selectedUsers.length === 0)
+        .setDisabled(
+          context.state.loading || context.state.selectedUsers.length === 0
+        )
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
         .setOnClick(async () => {
           context.dispatch(
@@ -58,7 +60,9 @@ export function useUsersMenuItems(context: IUsersContext) {
         />
       )),
       new ListMenuItem(t('common.editLabel'))
-        .setDisabled(context.state.loading || context.state.selectedUsers.length !== 1)
+        .setDisabled(
+          context.state.loading || context.state.selectedUsers.length !== 1
+        )
         .withIcon('PersonEdit')
         .setOnClick(() => {
           const [user] = context.state.selectedUsers

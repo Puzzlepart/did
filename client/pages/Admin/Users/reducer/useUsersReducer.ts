@@ -1,7 +1,16 @@
 import get from 'get-value'
 import { useReduxReducer as useReducer } from 'hooks'
 import _ from 'underscore'
-import { CLEAR_PROGRESS, DATA_UPDATED, HIDE_ADD_MULTIPLE_PANEL, HIDE_USER_FORM, SET_ADD_MULTIPLE_PANEL, SET_PROGRESS, SET_SELECTED_USERS, SET_USER_FORM } from './actions'
+import {
+  CLEAR_PROGRESS,
+  DATA_UPDATED,
+  HIDE_ADD_MULTIPLE_PANEL,
+  HIDE_USER_FORM,
+  SET_ADD_MULTIPLE_PANEL,
+  SET_PROGRESS,
+  SET_SELECTED_USERS,
+  SET_USER_FORM
+} from './actions'
 import { initialState } from './initialState'
 
 /**
@@ -35,7 +44,7 @@ export function useUsersReducer() {
       .addCase(SET_ADD_MULTIPLE_PANEL, (state, { payload }) => {
         state.addMultiplePanel = payload
       })
-      .addCase(SET_SELECTED_USERS,  (state, { payload }) => {
+      .addCase(SET_SELECTED_USERS, (state, { payload }) => {
         state.selectedUsers = payload
       })
       .addCase(SET_PROGRESS, (state, { payload }) => {

@@ -1,7 +1,7 @@
 import { Icon } from '@fluentui/react'
 import { Caption1, Persona } from '@fluentui/react-components'
-import { DateObject } from 'DateUtils'
 import { IListColumn } from 'components/List/types'
+import { DateObject } from 'DateUtils'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import { createColumnDef } from 'utils/createColumnDef'
 import styles from './Users.module.scss'
 
 /**
- * Returns columns for the `Users` list. The returned function accepts a `type` parameter, 
+ * Returns columns for the `Users` list. The returned function accepts a `type` parameter,
  * which can be either `'active'` or `'disabled'`.
  *
  * @category Users

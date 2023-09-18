@@ -1,7 +1,5 @@
 import { Icon } from '@fluentui/react'
 import {
-  ArrowSync24Regular,
-  ArrowSync24Filled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -16,6 +14,8 @@ import {
   ArrowImport24Regular,
   ArrowSortUpFilled,
   ArrowSortUpRegular,
+  ArrowSync24Filled,
+  ArrowSync24Regular,
   ArrowUndo24Filled,
   ArrowUndo24Regular,
   BinRecycle24Filled,

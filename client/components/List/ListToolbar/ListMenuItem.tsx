@@ -164,12 +164,12 @@ export class ListMenuItem {
   }
 
   /**
- * Sets the hidden state for the `ListMenuItem`.
- *
- * @param hidden The hidden state to set.
- *
- * @returns The updated `ListMenuItem` instance.
- */
+   * Sets the hidden state for the `ListMenuItem`.
+   *
+   * @param hidden The hidden state to set.
+   *
+   * @returns The updated `ListMenuItem` instance.
+   */
   public setHidden(hidden: ListMenuItem['hidden']) {
     this.hidden = hidden
     return this
@@ -195,7 +195,10 @@ export class ListMenuItem {
    *
    * @returns The updated `ListMenuItem` instance.
    */
-  public makeCheckable({ name, value }: Pick<MenuItemCheckboxProps, 'name' | 'value'>) {
+  public makeCheckable({
+    name,
+    value
+  }: Pick<MenuItemCheckboxProps, 'name' | 'value'>) {
     this._name = name
     this._value = value
     return this
@@ -306,12 +309,16 @@ export class ListMenuItem {
 
   /**
    * Get the type of the component to render.
-   * 
+   *
    * - `custom` if the `onRender` prop is set.
    * - `menu` (Menu + MenuList) if the `items` prop is set.
    * - `button` (ToolbarButton) otherwise.
    */
-  public get componentType(): 'custom' | 'menu' | 'menu_item_checkbox' | 'button' {
+  public get componentType():
+    | 'custom'
+    | 'menu'
+    | 'menu_item_checkbox'
+    | 'button' {
     if (this.onRender) return 'custom'
     else if (this.items) return 'menu'
     else if (this._value) return 'menu_item_checkbox'
@@ -323,9 +330,7 @@ export class ListMenuItem {
    * @param additionalStyle - An optional object containing additional CSS properties to be merged with the default style.
    * @returns A CSSProperties object representing the style of the ListMenuItem component.
    */
-  private _createStyle(
-    additionalStyle?: CSSProperties
-  ): CSSProperties {
+  private _createStyle(additionalStyle?: CSSProperties): CSSProperties {
     const style: CSSProperties = {
       ...this._style,
       ...additionalStyle
@@ -362,49 +367,56 @@ export class ListMenuItem {
 
   /**
    * Creates props for the component based on its type.
-   * 
+   *
    * @template T - The type of the props object to be returned.
-   * 
+   *
    * @param options - An object containing additional options.
    * @param options.additionalStyles={} - Additional styles to be applied to the component.
-   * 
+   *
    * @returns - The props object for the component.
    */
-  public createProps<T>({ additionalStyles = {} }: { additionalStyles?: CSSProperties } = {}) {
+  public createProps<T>({
+    additionalStyles = {}
+  }: { additionalStyles?: CSSProperties } = {}) {
     let props = {}
     switch (this.componentType) {
-      case 'button': {
-        props = {
-          title: this._title,
-          disabled: this._disabled,
-          onClick: this._onClick,
-          style: this._createStyle(additionalStyles)
+      case 'button':
+        {
+          props = {
+            title: this._title,
+            disabled: this._disabled,
+            onClick: this._onClick,
+            style: this._createStyle(additionalStyles)
+          }
+          if (this._iconName)
+            props['icon'] = getFluentIconWithFallback(this._iconName)
         }
-        if (this._iconName) props['icon'] = getFluentIconWithFallback(this._iconName)
-      }
-    break
-      case 'menu_item_checkbox': {
-        props = {
-          name: this._name,
-          value: this._value,
-          disabled: this._disabled,
-          onClick: this._onClick,
-          content: this._text,
-          style: this._createStyle(additionalStyles)
+        break
+      case 'menu_item_checkbox':
+        {
+          props = {
+            name: this._name,
+            value: this._value,
+            disabled: this._disabled,
+            onClick: this._onClick,
+            content: this._text,
+            style: this._createStyle(additionalStyles)
+          }
+          if (this._iconName)
+            props['icon'] = getFluentIconWithFallback(this._iconName)
         }
-        if (this._iconName) props['icon'] = getFluentIconWithFallback(this._iconName)
-      }
-      break
-      case 'menu': {
-        const hasCheckmarks = this.items.some(({ _value: value }) => !!value)
-        const hasIcons = this.items.some(({ _iconName: icon }) => !!icon)
-        props = {
-          hasCheckmarks,
-          hasIcons,
-          checkedValues: this._checkedValues
+        break
+      case 'menu':
+        {
+          const hasCheckmarks = this.items.some(({ _value: value }) => !!value)
+          const hasIcons = this.items.some(({ _iconName: icon }) => !!icon)
+          props = {
+            hasCheckmarks,
+            hasIcons,
+            checkedValues: this._checkedValues
+          }
         }
-      }
-      break
+        break
     }
 
     return props as T

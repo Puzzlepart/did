@@ -1,9 +1,4 @@
-import {
-  EntityLabel,
-  IconText,
-  IListColumn,
-  ItemColumn
-} from 'components'
+import { EntityLabel, IconText, IListColumn, ItemColumn } from 'components'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
@@ -34,11 +29,11 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
   const columns = useMemo(
     () =>
       [
-        createColumnDef<Project>(
-          'customer',
-          t('common.customer'),
-          { minWidth: 340, maxWidth: 340, renderAs: 'customerLink' }
-        ),
+        createColumnDef<Project>('customer', t('common.customer'), {
+          minWidth: 340,
+          maxWidth: 340,
+          renderAs: 'customerLink'
+        }),
         createColumnDef<Project>(
           'key',
           t('common.keyFieldLabel'),
@@ -60,17 +55,13 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             return <IconText iconName={project.icon} text={project.key} />
           }
         ),
-        createColumnDef<Project>(
-          undefined,
-          t('common.nameFieldLabel'),
-          {
-            maxWidth: 220,
-            renderAs: 'projectLink',
-            createRenderProps: (project) => ({
-              onClick: () => context.dispatch(SET_SELECTED_PROJECT(project))
-            })
-          }
-        ),
+        createColumnDef<Project>(undefined, t('common.nameFieldLabel'), {
+          maxWidth: 220,
+          renderAs: 'projectLink',
+          createRenderProps: (project) => ({
+            onClick: () => context.dispatch(SET_SELECTED_PROJECT(project))
+          })
+        }),
         createColumnDef<Project>(
           'description',
           t('common.descriptionFieldLabel'),

@@ -22,10 +22,11 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
 
   if (!!context.props.columnHeaderProps?.onRender) {
     return (
-      <div className={mergeClasses(
-        ListHeader.className,
-        context.props.minmalHeaderColumns && styles.minimalHeaderColumns
-      )}
+      <div
+        className={mergeClasses(
+          ListHeader.className,
+          context.props.minmalHeaderColumns && styles.minimalHeaderColumns
+        )}
       >
         {context.props.columnHeaderProps.onRender(
           mergedHeaderProps,
@@ -42,10 +43,12 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
   }
 
   return hideToolbar ? (
-    <div className={mergeClasses(
-      ListHeader.className,
-      context.props.minmalHeaderColumns && styles.minimalHeaderColumns
-    )}>
+    <div
+      className={mergeClasses(
+        ListHeader.className,
+        context.props.minmalHeaderColumns && styles.minimalHeaderColumns
+      )}
+    >
       {defaultRender(mergedHeaderProps)}
     </div>
   ) : (
