@@ -1,6 +1,5 @@
 import { Icon } from '@fluentui/react'
 import { Caption1, Link } from '@fluentui/react-components'
-import { DynamicButton } from 'components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -8,12 +7,7 @@ import { ReportLink } from 'types'
 import { createColumnDef, getFluentIcon } from 'utils'
 import styles from './ReportLinks.module.scss'
 
-type UseColumns = {
-  onEdit: (reportLink: ReportLink) => void
-  onDelete: (reportLink: ReportLink) => void
-}
-
-export function useColumns({ onEdit, onDelete }: UseColumns) {
+export function useColumns() {
   const { t } = useTranslation()
   return [
     createColumnDef<ReportLink>(
@@ -86,22 +80,6 @@ export function useColumns({ onEdit, onDelete }: UseColumns) {
       minWidth: 130,
       maxWidth: 130,
       renderAs: 'timeFromNow'
-    }),
-    createColumnDef<ReportLink>(null, null, { minWidth: 180 }, (reportLink) => (
-      <div className={styles.actionsColumn}>
-        <DynamicButton
-          text={t('common.editLabel')}
-          onClick={() => onEdit(reportLink)}
-          iconName='LinkEdit'
-          size='small'
-        />
-        <DynamicButton
-          text={t('common.delete')}
-          onClick={() => onDelete(reportLink)}
-          iconName='Delete'
-          size='small'
-        />
-      </div>
-    ))
+    })
   ]
 }

@@ -1,4 +1,6 @@
+import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
 import { List } from 'components'
+import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +10,17 @@ import { useReportLinks } from './useReportLinks'
 
 export const ReportLinks: TabComponent = () => {
   const { t } = useTranslation()
-  const { columns, form, setForm, query, ConfirmationDialog } = useReportLinks()
+  const {
+    columns,
+    form,
+    setForm,
+    query,
+    ConfirmationDialog,
+    onEdit,
+    onDelete,
+    onSelectionChanged,
+    selectedLink
+  } = useReportLinks()
 
   return (
     <div className={ReportLinks.className}>
@@ -16,6 +28,24 @@ export const ReportLinks: TabComponent = () => {
         enableShimmer={query.loading}
         items={query.data?.reportLinks}
         columns={columns}
+        checkboxVisibility={CheckboxVisibility.onHover}
+        selectionProps={{
+          mode: SelectionMode.single,
+          onChanged: onSelectionChanged
+        }}
+        menuItems={[
+          new ListMenuItem(t('admin.reportLinks.addNewReportsLink'))
+            .withIcon('Add')
+            .setOnClick(() => setForm({ isOpen: true })),
+          new ListMenuItem(t('common.editLabel'))
+            .withIcon('LinkEdit')
+            .setOnClick(onEdit)
+            .setDisabled(!selectedLink),
+          new ListMenuItem(t('common.delete'))
+            .withIcon('Delete')
+            .setOnClick(onDelete)
+            .setDisabled(!selectedLink)
+        ]}
         commandBar={{
           items: [
             {
