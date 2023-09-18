@@ -72,15 +72,13 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
         ),
         createColumnDef<Project>(
           'labels',
-          t('projects.labelFieldLabel'),
+          t('common.labelFieldLabel'),
           {},
           (project) => (
             <>
-              {(project.labels as LabelObject[]).map(
-                (label: LabelObject, index: number) => (
-                  <EntityLabel key={index} label={label} />
-                )
-              )}
+              {(project.labels as LabelObject[]).map((label, index: number) => (
+                <EntityLabel key={index} label={label} />
+              ))}
             </>
           )
         )

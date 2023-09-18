@@ -12,10 +12,7 @@ export function useProjectHeader() {
   const breadcrumb = useBreadcrumb([
     {
       key: 'back',
-      text:
-        state.currentTab === 's'
-          ? t('navigation.ProjectsPage')
-          : t('projects.myProjectsText'),
+      text: t('navigation.ProjectsPage'),
       onClick: () => {
         history.replace('/projects/s')
         dispatch(SET_SELECTED_PROJECT(null))

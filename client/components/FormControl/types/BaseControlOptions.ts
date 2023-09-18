@@ -1,3 +1,5 @@
+import { FormInputControlBase } from './FormInputControlBase'
+
 /**
  * Represents the possible validation states for a form control.
  */
@@ -12,8 +14,14 @@ export type ValidationResult = [string?, ValidationState?]
 /**
  * Represents a function that can be used to validate a form control's value.
  * It takes the value as an argument and returns a CustomValidatorResult.
+ *
+ * @param value The value to validate.
+ * @param field The form input control field to validate.
  */
-type BaseValidatorFunction<T, V = any> = (value: V) => T
+type BaseValidatorFunction<T, V = any> = (
+  value: V,
+  field?: FormInputControlBase
+) => T
 
 export interface ValidatorFunction<V = any>
   extends BaseValidatorFunction<ValidationResult, V> {

@@ -65,7 +65,7 @@ export class MongoDocumentService<T> {
    * @param query - Filter query
    * @param sort - Sort options
    */
-  public find<S = any>(query: FilterQuery<T>, sort?: S) {
+  public find<S = any>(query: FilterQuery<T>, sort?: S): Promise<T[]> {
     return this.collection.find(this._extendQuery(query), { sort }).toArray()
   }
 

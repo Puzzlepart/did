@@ -13,17 +13,34 @@ import { useProjects } from './useProjects'
  */
 export const Projects: FC = () => {
   const { t } = useTranslation()
-  const { listProps, context, renderDetails } = useProjects()
+  const { context, renderDetails } = useProjects()
 
   return (
-    <ProjectsContext.Provider value={{ ...context, listProps }}>
+    <ProjectsContext.Provider value={{ ...context }}>
       {renderDetails ? (
         <ProjectDetails />
       ) : (
         <Tabs
           items={{
-            s: [ProjectList, t('common.search')],
-            m: [ProjectList, t('projects.myProjectsText')],
+            s: [
+              ProjectList,
+              t('common.search'),
+              {
+                enableShimmer: context.loading,
+                searchBox: {
+                  placeholder: t('common.searchPlaceholder')
+                }
+              }
+            ],
+            m: [
+              ProjectList,
+              t('projects.myProjectsText'),
+              {
+                searchBox: {
+                  placeholder: t('projects.myProjectsSearchPlaceholder')
+                }
+              }
+            ],
             new: [ProjectForm, t('projects.createNewText')]
           }}
         ></Tabs>

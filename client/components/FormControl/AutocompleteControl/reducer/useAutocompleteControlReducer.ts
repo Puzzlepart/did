@@ -53,13 +53,6 @@ export function useAutocompleteControlReducer({
                 index.searchValue.toLowerCase().includes(payload.toLowerCase())
               )
             : []
-        if (state.suggestions.length === 1) {
-          state.selectedIndex = 0
-          state.selectedItem = state.suggestions[0]
-          state.value = state.selectedItem.text
-          state.suggestions = []
-          onSelected(state.selectedItem)
-        }
       })
       .addCase(ON_KEY_DOWN, (state, { payload }) => {
         switch (payload.key) {

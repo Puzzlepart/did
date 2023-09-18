@@ -16,7 +16,7 @@ import { ProjectFormOptions } from './ProjectFormOptions'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
-import { PROJECT_KEY_REGEX } from './validation'
+import { useValidateKeyFunction } from './validation'
 
 /**
  * ProjectForm component is used to create and edit projects.
@@ -26,8 +26,9 @@ import { PROJECT_KEY_REGEX } from './validation'
 export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, register, options, formControlProps } = useProjectForm(props)
+  const ValidateKeyFunction = useValidateKeyFunction()
   return (
-    <FormControl {...formControlProps}>
+    <FormControl {...formControlProps} debug={true}>
       <SearchCustomer
         {...register('customerKey', {
           validators: t('projects.customerRequired')
@@ -44,18 +45,12 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-          validators: [
-            (value = '') =>
-              !PROJECT_KEY_REGEX.test(value) && [
-                t('projects.keyInvalid', { min: 2, max: 12 }),
-                'error'
-              ]
-          ]
+          validators: [ValidateKeyFunction]
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
         description={t('projects.keyFieldDescription', packageFile.config.app)}
-        required={true}
+        required={!props.edit}
       />
       <TagPreview hidden={!!props.edit} />
       <InputControl
@@ -97,7 +92,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
       />
       <LabelPickerControl
         label={t('admin.labels.headerText')}
-        placeholder={t('projects.filterLabels')}
+        placeholder={t('common.filterLabels')}
         noSelectionText={t('projects.noLabelsSelectedText')}
         defaultSelectedKeys={model.value('labels')}
         onChange={(labels) =>

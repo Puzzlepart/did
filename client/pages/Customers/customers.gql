@@ -6,6 +6,12 @@ query Customers {
     icon
     webLink
     externalSystemURL
+    labels {
+      name
+      description
+      color
+      icon
+    }
     inactive
   }
 }

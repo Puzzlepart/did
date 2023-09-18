@@ -67,7 +67,6 @@
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet"
   },
   "projects": {
-    "filterLabels": "Filtrer merkelapper...",
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
     "searchPlaceholder": "Søk i prosjekter...",
     "categoryOutlookText": "Dette prosjektet har en Outlook-kategori.",
@@ -109,8 +108,7 @@
     "customerFieldDescription": "Velg kunden knyttet til dette prosjektet fra rullegardinlisten. \nHvis kunden ikke står på listen, kan du opprette en ny – eller kanskje snakke med en voksen?",
     "customerRequired": "Oops! Droppet du ved et uhell å velge en kunde fra listen? På tide å velge en kunde og få dem til å føle seg verdsatt i prosjektet vårt - de vil ikke hjemsøke deg, det lover vi!",
     "updateSuccess": "Prosjektet **{{name}}** ble oppdatert helt uten problemer.",
-    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket. \nVennligst prøv igjen senere, eller spør en voksen om råd.\"",
-    "labelFieldLabel": "Merkelapper"
+    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket. \nVennligst prøv igjen senere, eller spør en voksen om råd.\""
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -511,7 +509,9 @@
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "Brukerinstillinger",
     "adUserLabel": "Bruker fra Active Directory",
-    "adUserRequired": "Du må velge en Active Directory-bruker å legge til."
+    "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
+    "labelFieldLabel": "Merkelapper",
+    "filterLabels": "Filtrer merkelapper..."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

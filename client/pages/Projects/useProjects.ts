@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { IProjectsContext } from './context'
 import { useProjectsReducer } from './reducer'
-import { useProjectList } from './useProjectList'
 import { useProjectsQuery } from './useProjectsQuery'
 
 /**
@@ -21,8 +20,7 @@ export function useProjects() {
     }),
     [state, query.loading]
   )
-  const listProps = useProjectList(context)
   const renderDetails = !!state.selected
 
-  return { listProps, context, renderDetails }
+  return { context, renderDetails }
 }

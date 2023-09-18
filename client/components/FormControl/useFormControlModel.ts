@@ -24,7 +24,6 @@ export function useFormControlModel<KeyType, ObjectType = Record<string, any>>(
   const map = useMap<KeyType, ObjectType>()
   useEffect(() => {
     if (!initialModel || Object.keys(initialModel).length === 0) return
-    console.log('Initial model changed...')
     const typeNameOmmited = omitTypename(initialModel)
     const _map = convertToMap<KeyType>(
       postUpdate ? postUpdate(typeNameOmmited) : typeNameOmmited

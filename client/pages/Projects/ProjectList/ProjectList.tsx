@@ -32,8 +32,8 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   return (
     <>
       <List
-        {...(context?.listProps ?? {})}
         {...props}
+        enableShimmer={context.loading}
         items={items}
         columns={columns}
         groups={props.groups}

@@ -15,17 +15,11 @@ export interface IProjectsUrlParameters {
 export type ProjectsTab = 's' | 'm' | 'new'
 
 /**
+ * Represents the state of the Projects component.
+ *
  * @category Projects
  */
-/**
- * Represents the state of the Projects component.
- */
 export interface IProjectsState {
-  /**
-   * The currently selected tab.
-   */
-  currentTab?: ProjectsTab
-
   /**
    * The currently selected project.
    */

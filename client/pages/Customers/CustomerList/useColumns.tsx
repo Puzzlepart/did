@@ -1,9 +1,9 @@
-import { IconText, ItemColumn } from 'components'
+import { EntityLabel, IconText, ItemColumn } from 'components'
 import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Customer } from 'types'
+import { Customer, LabelObject } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useCustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
@@ -63,9 +63,21 @@ export function useColumns(): IListColumn[] {
         'description',
         t('common.descriptionFieldLabel'),
         {
-          maxWidth: 300,
+          maxWidth: 350,
           isMultiline: true
         }
+      ),
+      createColumnDef<Customer>(
+        'labels',
+        t('common.labelFieldLabel'),
+        {},
+        (customer) => (
+          <>
+            {(customer.labels as LabelObject[]).map((label, index: number) => (
+              <EntityLabel key={index} label={label} />
+            ))}
+          </>
+        )
       )
     ],
     []

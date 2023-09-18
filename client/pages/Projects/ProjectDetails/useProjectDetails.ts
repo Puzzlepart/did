@@ -19,16 +19,14 @@ export function useProjectDetails() {
         ProjectInformation,
         {
           text: t('projects.informationHeaderText'),
-          iconName: 'Info',
-          disabled: context.loading
+          iconName: 'Info'
         }
       ],
       timeEntries: [
         ProjectTimeEntries,
         {
           text: t('projects.timeEntriesHeaderText'),
-          iconName: 'Timeline',
-          disabled: context.loading
+          iconName: 'Timeline'
         }
       ]
     }),

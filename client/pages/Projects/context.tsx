@@ -2,7 +2,6 @@ import { QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, useContext } from 'react'
 import { OutlookCategory, Project } from 'types'
-import { IProjectListProps } from './ProjectList'
 import { IProjectsState } from './types'
 
 /**
@@ -17,7 +16,6 @@ export interface IProjectsContext
   > {
   state: IProjectsState
   dispatch: React.Dispatch<AnyAction>
-  listProps?: IProjectListProps
 }
 
 /**

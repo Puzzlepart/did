@@ -17,5 +17,8 @@ export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
     fetchPolicy: 'cache-and-network'
   })
   useEffect(() => dispatch(DATA_UPDATED(query)), [query])
-  return query
+  return {
+    ...query,
+    loading: query.loading && !query.previousData
+  }
 }

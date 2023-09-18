@@ -4,6 +4,7 @@ import _ from 'underscore'
 import { Context } from '../../graphql/context'
 import { Customer } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
+import { LabelService } from './label'
 
 /**
  * Customer service
@@ -17,8 +18,12 @@ export class CustomerService extends MongoDocumentService<Customer> {
    * Constructor for `CustomerService`
    *
    * @param context - Injected context through `typedi`
+   * @param _labelSvc - Injected `LabelService` through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(
+    @Inject('CONTEXT') readonly context: Context,
+    private readonly _labelSvc: LabelService
+  ) {
     super(context, 'customers', CustomerService.name)
   }
 
@@ -68,7 +73,9 @@ export class CustomerService extends MongoDocumentService<Customer> {
   }
 
   /**
-   * Get customers
+   * Get customers from cache or database using the provided `query`.
+   * The result is sorted by the `name` property, then labels are
+   * added to each customer based on the `labels` property.
    *
    * @param query - Query
    */
@@ -76,8 +83,15 @@ export class CustomerService extends MongoDocumentService<Customer> {
     try {
       return this.cache.usingCache<Customer[]>(
         async () => {
-          const customers = await this.find(query, { name: 1 })
-          return customers
+          const [customers, labels] = await Promise.all([
+            this.find(query, { name: 1 }) as Promise<Customer[]>,
+            this._labelSvc.getLabels()
+          ])
+          const _customers = customers.map((c) => {
+            c.labels = _.filter(labels, (l) => _.contains(c.labels, l.name))
+            return c
+          })
+          return _customers
         },
         { key: 'getcustomers' }
       )

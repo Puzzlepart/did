@@ -33,7 +33,7 @@ export const useProjectFormSubmit: FormSubmitHook<
     try {
       await mutate({
         variables: {
-          project: 'hello',
+          project: model.$,
           options: options.$,
           update: !!props.edit
         }

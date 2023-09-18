@@ -71,11 +71,8 @@ export const ListToolbarMenuItem: FC<{
 export const ListToolbarMenu: FC<{ item: ListMenuItem }> = ({ item }) => {
   const props = item.createProps<MenuProps>()
   const [open, setOpen] = useState(false)
-  const onOpenChange: MenuProps['onOpenChange'] = (_, data) => {
-    // eslint-disable-next-line no-console
-    console.log(data)
+  const onOpenChange: MenuProps['onOpenChange'] = (_, data) =>
     setOpen(data.open)
-  }
   return (
     <Menu open={open} onOpenChange={onOpenChange} {...props}>
       <ListToolbarButton item={item} menuTrigger />

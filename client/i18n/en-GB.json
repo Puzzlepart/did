@@ -67,7 +67,6 @@
     "eventDurationModifiedTitle": "Automatically modified event duration"
   },
   "projects": {
-    "filterLabels": "Filter labels...",
     "inactiveText": "This project has been marked as inactive.",
     "searchPlaceholder": "Search in projects...",
     "categoryOutlookText": "This project has a category in your Outlook.",
@@ -109,8 +108,7 @@
     "descriptionWarning": "We recommend including a quick summary of the project. This will provide a concise overview and help others quickly grasp the project's essence.",
     "customerFieldDescription": "Select the customer associated with this project from the dropdown list. If the customer is not in the list, you can create a new one - or maybe talk to an adult?",
     "customerRequired": "Oops! Did you accidentally ghost a customer from the list? Time to pick a customer and make them feel appreciated in our project - they won't haunt you, we promise!",
-    "updateError": "We can't update the project **{{projectId}}** at the moment. Please try again later, or ask an adult for advice.\"",
-    "labelFieldLabel": "Labels"
+    "updateError": "We can't update the project **{{projectId}}** at the moment. Please try again later, or ask an adult for advice.\""
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -136,7 +134,8 @@
     "keyInvalid": "The customer key must be between {{min}} and {{max}} characters.",
     "descriptionWarning": "We recommend including a quick summary of the customer. This will provide a concise overview and help others quickly grasp the customer's essence.",
     "keyNotUniqueError": "The customer key {{key}} is already in use by the customer {{name}}.",
-    "nameNotUniqueError": "It appears that there is already a API-key with that name. Please come up with something else."
+    "nameNotUniqueError": "It appears that there is already a API-key with that name. Please come up with something else.",
+    "noLabelsSelectedText": "Add labels to the customer for categorization. "
   },
   "admin": {
     "apiTokens": {
@@ -511,7 +510,9 @@
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "User settings",
     "adUserLabel": "User from Active Directory",
-    "adUserRequired": "You must select an Active Directory user to add."
+    "adUserRequired": "You must select an Active Directory user to add.",
+    "labelFieldLabel": "Labels",
+    "filterLabels": "Filter labels..."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

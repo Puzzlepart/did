@@ -37,9 +37,12 @@ export async function validateField(
       let customValidatorResult: ValidationResult
       if (typeof validator === 'function') {
         if (validator.isAsync) {
-          customValidatorResult = await validator(currentValue)
+          customValidatorResult = await validator(currentValue, field)
         } else {
-          customValidatorResult = (validator as ValidatorFunction)(currentValue)
+          customValidatorResult = (validator as ValidatorFunction)(
+            currentValue,
+            field
+          )
         }
       } else if (typeof validator === 'object') {
         if (validator.minLength && currentValue?.length < validator.minLength) {

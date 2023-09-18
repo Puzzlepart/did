@@ -3,6 +3,7 @@ import {
   IconPickerControl,
   InputControl,
   InputControlOptions,
+  LabelPickerControl,
   SwitchControl,
   SwitchControlOptions
 } from 'components/FormControl'
@@ -21,7 +22,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, submit, register } = useCustomerForm(props)
   const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction()
-  const ValidateUniqueNameFunction = useValidateUniqueNameFunction()
+  const ValidateUniqueNameFunction = useValidateUniqueNameFunction(props)
   return (
     <FormControl
       {...props}
@@ -33,7 +34,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-          validators: [
+          validators: !props.edit && [
             {
               regex: CUSTOMER_KEY_REGEX,
               messages: {
@@ -46,7 +47,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         disabled={!!props.edit}
         label={t('customers.keyFieldLabel')}
         description={t('customers.keyFieldDescription', { min: 2, max: 12 })}
-        required={true}
+        required={!props.edit}
       />
       <InputControl
         {...register<InputControlOptions>('name', {
@@ -94,6 +95,18 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         description={t('customers.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
         required={true}
+      />
+      <LabelPickerControl
+        label={t('admin.labels.headerText')}
+        placeholder={t('projects.filterLabels')}
+        noSelectionText={t('customers.noLabelsSelectedText')}
+        defaultSelectedKeys={model.value('labels')}
+        onChange={(labels) =>
+          model.set(
+            'labels',
+            labels.map((lbl) => lbl.name)
+          )
+        }
       />
       <SwitchControl
         {...register<SwitchControlOptions>('inactive')}
