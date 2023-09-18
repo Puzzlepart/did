@@ -34,10 +34,7 @@ export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (
         </Button>
         <List
           items={context.state.availableAdUsers}
-          selectionProps={{
-            mode: SelectionMode.multiple,
-            onChanged: (selected) => setSelectedUsers(selected)
-          }}
+          selectionProps={[SelectionMode.multiple, setSelectedUsers]}
           checkboxVisibility={CheckboxVisibility.always}
           columns={[
             {

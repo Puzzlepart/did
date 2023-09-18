@@ -45,12 +45,7 @@ export const Users: TabComponent<ITabProps> = () => {
                 columns: columns('active'),
                 menuItems,
                 checkboxVisibility: CheckboxVisibility.onHover,
-                selectionProps: {
-                  mode: SelectionMode.multiple,
-                  onChanged(selected) {
-                    context.dispatch(SET_SELECTED_USERS(selected as User[]))
-                  }
-                }
+                selectionProps: [SelectionMode.multiple, (selected) => context.dispatch(SET_SELECTED_USERS(selected as User[]))]
               } as IListProps<User>
             ],
             disabled: [

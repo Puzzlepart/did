@@ -1,4 +1,4 @@
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { SelectionMode } from '@fluentui/react'
 import { List, Toast } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
@@ -48,11 +48,7 @@ export const ApiTokens: TabComponent = () => {
       <List
         columns={columns}
         items={items}
-        checkboxVisibility={CheckboxVisibility.onHover}
-        selectionProps={{
-          mode: SelectionMode.single,
-          onChanged: onSelectionChanged
-        }}
+        selectionProps={[SelectionMode.single, onSelectionChanged]}
         menuItems={[
           new ListMenuItem(t('admin.apiTokens.addNew'))
             .withIcon('Add')

@@ -1,4 +1,4 @@
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { SelectionMode } from '@fluentui/react'
 import { List, Toast } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { ITabProps } from 'components/Tabs/types'
@@ -29,11 +29,7 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
         enableShimmer={query.loading && !query.previousData}
         items={query?.data?.roles}
         columns={columns}
-        checkboxVisibility={CheckboxVisibility.onHover}
-        selectionProps={{
-          mode: SelectionMode.single,
-          onChanged: onSelectionChanged
-        }}
+        selectionProps={[SelectionMode.single, onSelectionChanged]}
         menuItems={[
           new ListMenuItem(t('admin.addNewRole'))
             .setOnClick(() =>
