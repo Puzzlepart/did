@@ -40,7 +40,7 @@ export function useUsersMenuItems(context: IUsersContext) {
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
         .withIcon('ArrowSync')
-        .setDisabled(context.state.loading)
+        .setDisabled(context.state.loading || context.state.selectedUsers.length === 0)
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
         .setOnClick(async () => {
           context.dispatch(
