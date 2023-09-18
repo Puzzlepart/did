@@ -305,7 +305,8 @@
     "applyFilterText": "Bruk filter",
     "availableReportLinks": "Det er rapporter tilgjengelig for denne spørringen. Bruk knappene nedenfor for å laste ned rapportene, eller klikk nedenfor for å hente ferske data fra serveren.",
     "fetchDataButton": "Hent ferske data fra serveren",
-    "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}."
+    "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}.",
+    "welcomeHeaderText": "Heim"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

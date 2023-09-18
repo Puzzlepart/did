@@ -27,7 +27,7 @@ export function useList(props: IListProps) {
   )
 
   const selection = useMemo(() => {
-    const [selectionMode = SelectionMode.none, onChanged] = props.selectionProps 
+    const [selectionMode = SelectionMode.none, onChanged] = props.selectionProps
     if (!onChanged) return null
     return new Selection({
       onSelectionChanged: () => {

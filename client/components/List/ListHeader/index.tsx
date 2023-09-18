@@ -59,7 +59,7 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
         context.props.minmalHeaderColumns && styles.minimalHeaderColumns
       )}
     >
-      {!hideToolbar && <ListToolbar root={root} />}
+      {!hideToolbar && <ListToolbar />}
       {defaultRender(mergedHeaderProps)}
     </div>
   )

@@ -378,32 +378,15 @@ export class ListMenuItem {
   public createProps<T>({
     additionalStyles = {}
   }: { additionalStyles?: CSSProperties } = {}) {
-    let props = {}
+    let props: Record<string, any> = {}
     switch (this.componentType) {
-      case 'button':
-        {
-          props = {
-            title: this._title,
-            disabled: this._disabled,
-            onClick: this._onClick,
-            style: this._createStyle(additionalStyles)
-          }
-          if (this._iconName)
-            props['icon'] = getFluentIconWithFallback(this._iconName)
-        }
-        break
       case 'menu_item_checkbox':
         {
           props = {
             name: this._name,
             value: this._value,
-            disabled: this._disabled,
-            onClick: this._onClick,
-            content: this._text,
-            style: this._createStyle(additionalStyles)
+            content: this._text
           }
-          if (this._iconName)
-            props['icon'] = getFluentIconWithFallback(this._iconName)
         }
         break
       case 'menu':
@@ -418,7 +401,11 @@ export class ListMenuItem {
         }
         break
     }
-
+    if (this._iconName) props.icon = getFluentIconWithFallback(this._iconName)
+    if (this._onClick) props.onClick = this._onClick
+    props.disabled = this._disabled
+    props.title = this._title
+    props.style = this._createStyle(additionalStyles)
     return props as T
   }
 }

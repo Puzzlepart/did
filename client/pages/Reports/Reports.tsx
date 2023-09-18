@@ -7,10 +7,10 @@ import { useReports } from './useReports'
  * @category Function Component
  */
 export const Reports: FC = () => {
-  const { context, tabs } = useReports()
+  const { context, tabs, onTabSelect } = useReports()
   return (
     <ReportsContext.Provider value={context}>
-      <Tabs items={tabs} />
+      <Tabs vertical items={tabs} onTabSelect={onTabSelect} />
     </ReportsContext.Provider>
   )
 }

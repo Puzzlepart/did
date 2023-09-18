@@ -63,6 +63,9 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
           level: props.level
         })
       )
+      if (props.onTabSelect) {
+        props.onTabSelect(key)
+      }
     },
     [setSelectedValue]
   )

@@ -1,12 +1,11 @@
-import { TabListProps, TabProps } from '@fluentui/react-components'
+import { TabListProps } from '@fluentui/react-components'
 import { FunctionComponent, HTMLProps } from 'react'
 import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
 import { FluentIconName } from 'utils'
+import { ITabHeaderProps } from './TabHeader'
 
-type TabHeader =
-  | string
-  | { text: string; iconName: FluentIconName; disabled?: TabProps['disabled'] }
+export type TabHeader = string | ITabHeaderProps
 
 /**
  * A tuple representing a tab in the `Tabs` component.
@@ -66,6 +65,11 @@ export interface ITabProps extends HTMLProps<HTMLDivElement> {
    * An optional text for the tab to display in the tab list header.
    */
   text?: string
+
+  /**
+   * An optional description for the tab to display in the tab list header.
+   */
+  description?: string
 
   /**
    * Icon to display for the tab in the tab list header.

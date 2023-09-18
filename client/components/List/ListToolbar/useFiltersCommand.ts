@@ -40,7 +40,8 @@ export function useFiltersCommand() {
     key: 'TOGGLE_FILTER_PANEL',
     iconProps: { iconName: 'Filter' },
     iconOnly: true,
-    disabled: context.props.enableShimmer,
+    disabled:
+      context.props.enableShimmer || context.state.origItems.length === 0,
     onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
   }
 
@@ -51,12 +52,14 @@ export function useFiltersCommand() {
         .withIcon('Filter')
         .setOnClick(toggleCommandBarItem.onClick)
         .setDisabled(toggleCommandBarItem.disabled)
+        .setGroup('actions')
     },
     clear: {
       commandBarItem: clearCommandBarItem,
       menuItem: new ListMenuItem(t('common.clearFilters'))
         .withIcon('ClearFilter')
         .setDisabled(clearCommandBarItem.disabled)
+        .setGroup('actions')
     }
   }
 }

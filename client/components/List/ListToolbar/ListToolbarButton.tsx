@@ -1,5 +1,10 @@
-import { ToolbarButton, ToolbarButtonProps } from '@fluentui/react-components'
+import {
+  MenuTrigger,
+  ToolbarButton,
+  ToolbarButtonProps
+} from '@fluentui/react-components'
 import React, { CSSProperties, FC } from 'react'
+import _ from 'underscore'
 import { ListMenuItem } from './ListMenuItem'
 
 /**
@@ -15,14 +20,24 @@ export const ListToolbarButton: FC<{
   item: ListMenuItem
   buttonStyle?: CSSProperties
   labelStyle?: CSSProperties
-}> = ({ item, buttonStyle, labelStyle }) => {
-  if (item.hidden) return null
-  const props = item.createProps<ToolbarButtonProps>({
-    additionalStyles: buttonStyle
+  menuTrigger?: boolean
+}> = (props) => {
+  if (props.item.hidden) return null
+  const toolbarButtonProps = props.item.createProps<ToolbarButtonProps>({
+    additionalStyles: props.buttonStyle
   })
+  if (props.menuTrigger) {
+    return (
+      <MenuTrigger disableButtonEnhancement>
+        <ToolbarButton {..._.pick(toolbarButtonProps, 'icon', 'disabled')}>
+          <span style={props.labelStyle}>{props.item.text}</span>
+        </ToolbarButton>
+      </MenuTrigger>
+    )
+  }
   return (
-    <ToolbarButton {...props}>
-      <span style={labelStyle}>{item.text}</span>
+    <ToolbarButton {...toolbarButtonProps}>
+      <span style={props.labelStyle}>{props.item.text}</span>
     </ToolbarButton>
   )
 }

@@ -21,17 +21,19 @@ export const ReportLinks: StyledComponent = () => {
   return (
     <div className={ReportLinks.className}>
       <UserMessage text={t('reports.availableReportLinks')} />
-      {context.state.queryPreset.reportLinks.map((link, index) => (
-        <ReportLinkTooltip key={index} link={link}>
-          <Button
-            className={styles.link}
-            onClick={() => window.open(link.externalUrl, '_blank')}
-            icon={<Icon iconName='ExcelDocument' />}
-          >
-            {link.name}
-          </Button>
-        </ReportLinkTooltip>
-      ))}
+      <div className={styles.linksList}>
+        {context.state.queryPreset.reportLinks.map((link, index) => (
+          <ReportLinkTooltip key={index} link={link}>
+            <Button
+              className={styles.link}
+              onClick={() => window.open(link.externalUrl, '_blank')}
+              icon={<Icon iconName='ExcelDocument' />}
+            >
+              {link.name}
+            </Button>
+          </ReportLinkTooltip>
+        ))}
+      </div>
     </div>
   )
 }

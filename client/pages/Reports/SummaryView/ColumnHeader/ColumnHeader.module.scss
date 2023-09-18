@@ -1,19 +1,12 @@
 .columnHeader {
-  height: 65px;
-  min-height: 65px;
+  height: 40px;
+  min-height: 40px;
 
   .container {
     display: flex;
     flex-direction: column;
-    height: 65px;
-    min-height: 65px;
+    justify-content: center;
     padding: 0 4px 0 8px;
     box-sizing: border-box;
-
-    .name {
-      font-weight: bold;
-      margin: 0;
-      padding: 0;
-    }
   }
 }

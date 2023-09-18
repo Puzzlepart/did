@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prefer-ternary */
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { ListMenuItem } from './ListMenuItem'
 import { ListToolbarButton } from './ListToolbarButton'
 import { ListToolbarMenu } from './ListToolbarMenu'
@@ -14,7 +14,7 @@ import { ListToolbarMenu } from './ListToolbarMenu'
 export const ListToolbarItem: FC<{ item: ListMenuItem }> = (props) => {
   switch (props.item.componentType) {
     case 'custom': {
-      return props.item.onRender(null, null) as JSX.Element
+      return props.item.onRender(null, null) as ReactElement
     }
     case 'menu': {
       return <ListToolbarMenu {...props} />

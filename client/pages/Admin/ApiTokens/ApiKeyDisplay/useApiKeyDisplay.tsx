@@ -2,7 +2,7 @@ import { Text, Tooltip } from '@fluentui/react-components'
 import { DynamicButton } from 'components'
 import React, { ReactElement, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useTimeout, useBoolean } from 'usehooks-ts'
+import { useBoolean, useTimeout } from 'usehooks-ts'
 import { getFluentIcon } from 'utils'
 import { IApiKeyDisplayProps } from './types'
 

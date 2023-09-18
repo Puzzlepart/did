@@ -6,6 +6,7 @@ import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfig
 import { IReportsContext } from './context'
 import { useReportsQueries, useReportsQuery } from './hooks'
 import { useReportsReducer } from './reducer'
+import { CHANGE_QUERY } from './reducer/actions'
 import { ReportTab } from './ReportTab'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
@@ -54,8 +55,14 @@ export function useReports() {
       _.reduce(
         _.filter(queries, (q) => !q.hidden),
         (tabs, query) => {
-          const { id, text: title } = query
-          tabs[id] = [ReportTab, title]
+          const { id, text, description } = query
+          tabs[id] = [
+            ReportTab,
+            {
+              text,
+              description
+            }
+          ]
           return tabs
         },
         {} as TabItems
@@ -65,16 +72,21 @@ export function useReports() {
 
   const tabs: TabItems = useMemo(
     () => ({
-      default: [WelcomeTab, ''],
+      home: [WelcomeTab, t('reports.welcomeHeaderText')],
       ...queryTabs,
       summary: [SummaryView, t('reports.summaryHeaderText')]
     }),
     [queryTabs]
   )
 
+  const onTabSelect = (key: string) => {
+    if (key === 'home') return
+    dispatch(CHANGE_QUERY({ id: key }))
+  }
+
   return {
     tabs,
     context,
-    reportLinks: state.reportLinks
-  } as const
+    onTabSelect
+  }
 }

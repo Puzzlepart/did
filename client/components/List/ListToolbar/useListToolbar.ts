@@ -1,5 +1,5 @@
 import { ICommandBarProps } from '@fluentui/react'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import _ from 'underscore'
 import { useListContext } from '../context'
 import { ListMenuItem } from './ListMenuItem'
@@ -10,15 +10,13 @@ import { useSearchBoxCommand } from './useSearchBoxCommand'
 /**
  * Custom hook that returns the necessary props for a list toolbar, including search box, filter commands, and export options.
  *
- * @param root A mutable ref object that represents the root element of the component.
- *
  * @returns An object containing the necessary props for a list toolbar.
  */
-export function useListToolbar(root: React.MutableRefObject<any>) {
+export function useListToolbar() {
   const context = useListContext()
   const excelExportCommands = useExcelExportCommand()
   const { commandBarItem: searchBoxItem, menuItem: searchBoxMenuItem } =
-    useSearchBoxCommand(root)
+    useSearchBoxCommand()
   const filterCommands = useFiltersCommand()
 
   const commandBarProps = useMemo<ICommandBarProps>(

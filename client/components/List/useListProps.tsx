@@ -9,10 +9,10 @@ import {
 } from '@fluentui/react'
 import React from 'react'
 import _ from 'underscore'
+import { IListContext } from './context'
 import { ItemColumn } from './ItemColumn'
 import { ListGroupHeader } from './ListGroupHeader'
 import { ListHeader } from './ListHeader'
-import { IListContext } from './context'
 import { INIT_COLUMN_HEADER_CONTEXT_MENU } from './reducer'
 import { IListColumn, IListProps } from './types'
 
@@ -32,7 +32,7 @@ export function useListProps({
   context,
   selection,
   groups,
-  items,
+  items
 }: UseListProps): IListProps {
   const columns = _.filter(context.props.columns, (col) => {
     const groupBy = context.props.listGroupProps?.fieldName
@@ -41,7 +41,10 @@ export function useListProps({
     return true
   })
   const [selectionMode = SelectionMode.none] = context.props.selectionProps
-  let checkboxVisibility = selectionMode === SelectionMode.none ? CheckboxVisibility.hidden : CheckboxVisibility.onHover
+  let checkboxVisibility =
+    selectionMode === SelectionMode.none
+      ? CheckboxVisibility.hidden
+      : CheckboxVisibility.onHover
   if (context.props.checkboxVisibility) {
     checkboxVisibility = context.props.checkboxVisibility
   }

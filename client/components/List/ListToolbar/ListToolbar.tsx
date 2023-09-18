@@ -7,7 +7,7 @@ import { IListToolbarProps } from './types'
 import { useListToolbar } from './useListToolbar'
 
 export const ListToolbar: StyledComponent<IListToolbarProps> = (props) => {
-  const menuItemGroups = useListToolbar(props.root)
+  const menuItemGroups = useListToolbar()
   return (
     <Toolbar className={ListToolbar.className} size={props.size}>
       {Object.keys(menuItemGroups).map((key, index) => (

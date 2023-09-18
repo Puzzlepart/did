@@ -47,6 +47,8 @@ import {
   Cloud24Regular,
   Collections24Filled,
   Collections24Regular,
+  ContentView24Filled,
+  ContentView24Regular,
   Delete24Filled,
   Delete24Regular,
   DeleteDismiss24Filled,
@@ -126,6 +128,10 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  ContentView: {
+    regular: ContentView24Regular,
+    filled: ContentView24Filled
+  },
   Eye: {
     regular: Eye24Regular,
     filled: Eye24Filled

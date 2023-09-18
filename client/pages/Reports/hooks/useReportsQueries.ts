@@ -27,16 +27,14 @@ import { IReportsQuery } from '../types'
 export function useLastMonthQuery(query = report_last_month): IReportsQuery {
   const { t } = useTranslation()
   const dateObject = new DateObject().add('-1month').toObject()
+  const monthName = s.capitalize(dateObject.monthName)
   return {
     id: 'last_month',
-    text: t('common.exportTypeLastMonth', {
-      monthName: isBrowser ? `(${dateObject.monthName})` : ''
-    }),
+    text: t('common.exportTypeLastMonth'),
+    description: isBrowser && monthName,
     icon: 'CalendarDay',
     query,
-    exportFileName: `TimeEntries-${s.capitalize(
-      dateObject.monthName
-    )}-{0}.xlsx`,
+    exportFileName: `TimeEntries-${monthName}-{0}.xlsx`,
     variables: {
       userQuery: { hiddenFromReports: false }
     },
@@ -62,16 +60,14 @@ export function useCurrentMonthQuery(
 ): IReportsQuery {
   const { t } = useTranslation()
   const dateObject = new DateObject().toObject()
+  const monthName = s.capitalize(dateObject.monthName)
   return {
     id: 'current_month',
-    text: t('common.exportTypeCurrentMonth', {
-      monthName: isBrowser ? `(${dateObject.monthName})` : ''
-    }),
+    text: t('common.exportTypeCurrentMonth'),
+    description: isBrowser && monthName,
     icon: 'Calendar',
     query,
-    exportFileName: `TimeEntries-${s.capitalize(
-      dateObject.monthName
-    )}-{0}.xlsx`,
+    exportFileName: `TimeEntries-${monthName}-{0}.xlsx`,
     variables: {
       userQuery: { hiddenFromReports: false }
     },
@@ -98,9 +94,8 @@ export function useLastYearQuery(query = report_last_year): IReportsQuery {
   const year = dateObject.year - 1
   return {
     id: 'last_year',
-    text: t('common.exportTypeLastYear', {
-      year: isBrowser ? `(${year})` : ''
-    }),
+    text: t('common.exportTypeLastYear'),
+    description: isBrowser && `${year}`,
     icon: 'Previous',
     query,
     exportFileName: `TimeEntries-${year}-{0}.xlsx`,
@@ -128,9 +123,8 @@ export function useCurrentYearQuery(
   const { year } = new DateObject().toObject('year')
   return {
     id: 'current_year',
-    text: t('common.exportTypeCurrentYear', {
-      year: isBrowser ? `(${year})` : ''
-    }),
+    text: t('common.exportTypeCurrentYear'),
+    description: isBrowser && `${year}`,
     icon: 'CalendarReply',
     query,
     exportFileName: `TimeEntries-${year}-{0}.xlsx`,

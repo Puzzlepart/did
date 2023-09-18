@@ -7,6 +7,7 @@ import {
 import { ReusableComponent } from 'components/types'
 import React, { useMemo } from 'react'
 import { getFluentIcon } from 'utils'
+import { TabHeader } from './TabHeader'
 import styles from './Tabs.module.scss'
 import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
@@ -25,8 +26,15 @@ export const Tabs: ReusableComponent<ITabsProps> = (props) => {
   const tabItems = useMemo(() => {
     return Object.keys(props.items).map((key) => {
       const [, header] = props.items[key]
-      const title = typeof header === 'string' ? header : header.text
-      const tabProps: TabProps = { value: key, children: title }
+      const tabProps: TabProps = {
+        value: key,
+        children:
+          typeof header === 'string' ? (
+            <span>{header}</span>
+          ) : (
+            <TabHeader {...header} />
+          )
+      }
       if (typeof header === 'object') {
         tabProps.icon = getFluentIcon(header?.iconName)
         tabProps.disabled = header?.disabled

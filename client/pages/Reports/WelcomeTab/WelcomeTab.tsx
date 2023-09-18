@@ -4,24 +4,30 @@ import { UserMessage } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useReportsQueryButtons } from '../hooks'
+import { useReportsContext } from '../context'
 import styles from './WelcomeTab.module.scss'
 
 export const WelcomeTab: TabComponent = () => {
   const { t } = useTranslation()
-  const buttons = useReportsQueryButtons()
+  const { state } = useReportsContext()
+  const promotedReportLinks = state.reportLinks?.filter((l) => l.promoted) ?? []
   return (
     <div className={WelcomeTab.className}>
       <UserMessage text={t('reports.selectReportText')} />
       <div className={styles.reportButtons}>
-        {buttons.map((button, index) => (
+        {promotedReportLinks.map((link, index) => (
           <Button
             key={index}
-            title={button.title}
-            icon={<Icon {...button.iconProps} />}
-            onClick={button.onClick as any}
+            title={link.name}
+            icon={
+              <Icon iconName={link.icon} style={{ color: link.iconColor }} />
+            }
+            onClick={() => {
+              window.open(link.externalUrl, '_blank')
+            }}
+            appearance='transparent'
           >
-            {button.text}
+            {link.name}
           </Button>
         ))}
       </div>

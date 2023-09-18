@@ -7,8 +7,7 @@ import {
   MenuItemProps,
   MenuList,
   MenuPopover,
-  MenuProps,
-  MenuTrigger
+  MenuProps
 } from '@fluentui/react-components'
 import React, { FC, useState } from 'react'
 import { ListMenuItem } from './ListMenuItem'
@@ -73,13 +72,13 @@ export const ListToolbarMenu: FC<{ item: ListMenuItem }> = ({ item }) => {
   const props = item.createProps<MenuProps>()
   const [open, setOpen] = useState(false)
   const onOpenChange: MenuProps['onOpenChange'] = (_, data) => {
+    // eslint-disable-next-line no-console
+    console.log(data)
     setOpen(data.open)
   }
   return (
     <Menu open={open} onOpenChange={onOpenChange} {...props}>
-      <MenuTrigger disableButtonEnhancement>
-        <ListToolbarButton item={item} />
-      </MenuTrigger>
+      <ListToolbarButton item={item} menuTrigger />
       <MenuPopover>
         <MenuList>
           {item.items.map((menuItem, index) => (

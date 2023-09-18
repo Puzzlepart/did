@@ -1,6 +1,7 @@
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import _ from 'underscore'
 import { ReportsContext } from '../context'
 import { REMOVE_SAVED_FILTER, SET_FILTER } from '../reducer/actions'
 
@@ -13,10 +14,12 @@ import { REMOVE_SAVED_FILTER, SET_FILTER } from '../reducer/actions'
 export function useMenuItems(): ListMenuItem[] {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
-  const { savedFilters, activeFilter } = context.state
+  const { savedFilters, activeFilter, data } = context.state
   return [
     new ListMenuItem(activeFilter?.text ?? t('reports.savedFilters'))
       .withIcon('ContentView')
+      .setDisabled(_.isEmpty(data?.timeEntries))
+      .setHidden(Object.keys(savedFilters).length === 0)
       .setItems(
         Object.keys(savedFilters).map((key) => {
           const filter = savedFilters[key]
