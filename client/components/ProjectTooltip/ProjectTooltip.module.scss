@@ -1,10 +1,10 @@
 .projectTooltip {
   margin: 0;
-  padding: 10px;
+  padding: 15px;
   width: 300px;
-  .container {
-    position: relative;
+  position: relative;
 
+  .container {
     .header {
       padding: 0 0 0 8px;
       display: flex;
@@ -27,21 +27,21 @@
     }
 
     .labels {
-      margin: 4px 0 10px 0;
+      margin: 10px 0;
     }
 
     .footer {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin: 8px 0 0 0;
+      margin: 25px 0 0 0;
       box-sizing: border-box;
       width: 100%;
     }
 
     .tag {
       position: absolute;
-      top: 0;
+      top: -5px;
       right: 0;
     }
   }

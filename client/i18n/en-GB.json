@@ -94,7 +94,7 @@
     "informationHeaderText": "Information",
     "timeEntriesHeaderText": "Time entries",
     "noInformationAvailable": "No information available about this project.",
-    "navigateText": "Show details",
+    "navigateText": "Go to the project",
     "iconFieldDescription": "Use an icon to make the project more recognizable in the Timesheet and Project pages. A random icon will be selected if you dont' pick one yourself.",
     "createError": "We can't create the project at the moment. Please try again later.",
     "timeEntriesLoadingDescription": "Take a sip of coffee if you've been busy lately...",

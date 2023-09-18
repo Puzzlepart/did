@@ -44,10 +44,10 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
           {project.tag && (
             <div className={styles.footer}>
               <ProjectLink
-                appearance='button'
+                appearance='secondary'
                 project={project}
+                icon='Home'
                 text={t('projects.navigateText')}
-                icon='FastForward'
               />
             </div>
           )}

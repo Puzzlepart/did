@@ -2,6 +2,7 @@ query Projects {
   projects {
     tag
     name
+    description
     icon
     customer {
       key

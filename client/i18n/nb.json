@@ -93,7 +93,7 @@
     "informationHeaderText": "Informasjon",
     "timeEntriesHeaderText": "Tidsoppføringer",
     "noInformationAvailable": "Det er ingen informasjon tilgjengelig om dette prosjektet.",
-    "navigateText": "Vis detaljer",
+    "navigateText": "Gå til prosjektet",
     "iconFieldDescription": "Bruk et ikon for å gjøre prosjektet mer gjenkjennelig i timelisten og på prosjektsiden. \nEt tilfeldig ikon blir valgt hvis du ikke velger et selv.",
     "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
     "timeEntriesLoadingDescription": "Ta deg en slurk kaffe hvis det har vært travelt i det siste ...",

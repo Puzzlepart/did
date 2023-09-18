@@ -25,7 +25,6 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
           fontSize: 16
         }
       }}
-      //width={props.width}
       placeholder={props.placeholder}
       onSelected={(item) => props.onSelected(item.data)}
       autoFocus={props.autoFocus}

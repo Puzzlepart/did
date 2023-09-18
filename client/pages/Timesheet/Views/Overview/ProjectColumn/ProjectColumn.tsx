@@ -11,8 +11,7 @@ import {
   IGNORE_EVENT,
   TOGGLE_MANUAL_MATCH_PANEL
 } from '../../../reducer/actions'
-import { ClearManualMatchButton } from './ClearManualMatchButton'
-import { MatchEventPanel } from './MatchEventPanel'
+import { ClearManualMatchButton } from './ClearManualMatchButton/ClearManualMatchButton'
 import styles from './ProjectColumn.module.scss'
 import { IProjectColumnProps } from './types'
 import { useProjectColumn } from './useProjectColumn'
@@ -51,9 +50,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
   const { t } = useTranslation()
   const { state, dispatch, className } = useProjectColumn()
 
-  if (event.isSystemIgnored) {
-    return null
-  }
+  if (event.isSystemIgnored) return null
   if (!event.project) {
     if (event.error) {
       const [text, intent] = getErrorMessage(event.error.code, t)
@@ -67,7 +64,6 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
       <div className={className}>
         <UserMessage
           intent='warning'
-          // iconName='TagUnknown'
           text={t('timesheet.noProjectMatchFoundText')}
           actions={[
             {
@@ -86,7 +82,6 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
             }
           ]}
         />
-        <MatchEventPanel />
       </div>
     )
   }

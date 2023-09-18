@@ -1,3 +1,4 @@
+import { ButtonProps } from '@fluentui/react-components'
 import { HTMLProps } from 'react'
 import { Project } from 'types'
 import { FluentIconName } from 'utils/getFluentIcon'
@@ -24,7 +25,7 @@ export interface IProjectLinkProps extends HTMLProps<HTMLDivElement> {
   /**
    * The appearance of the link.
    */
-  appearance?: 'default' | 'button'
+  appearance?: ButtonProps['appearance'] | 'link'
 
   /**
    * Link template to use when generating the link.

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Callout, FocusZone, FocusZoneDirection, List } from '@fluentui/react'
+import { mergeClasses } from '@fluentui/react-components'
 import {
   DynamicSearchBox,
   Field,
@@ -33,7 +35,10 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
       <FormControlContext.Consumer>
         {(context) => (
           <Field
-            className={AutocompleteControl.className}
+            className={mergeClasses(
+              AutocompleteControl.className,
+              props.className
+            )}
             onKeyDown={(event) =>
               dispatch(
                 ON_KEY_DOWN({
@@ -63,7 +68,7 @@ export const AutocompleteControl: FormInputControlComponent<IAutocompleteControl
                 onChange={(value) => dispatch(ON_SEARCH(value))}
                 onClear={() => dispatch(RESET())}
                 iconName={iconName}
-                onBlur={context.onBlurCallback}
+                onBlur={context?.onBlurCallback}
               />
             </div>
             <Callout

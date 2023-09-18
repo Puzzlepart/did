@@ -19,20 +19,7 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
     tag: props.project.tag.split(' ').join('_')
   })
   switch (props.appearance) {
-    case 'button': {
-      return (
-        <Button
-          appearance='transparent'
-          icon={icon(props.icon)}
-          onClick={() => {
-            window.open(to, props.target)
-          }}
-        >
-          <span>{props.text}</span>
-        </Button>
-      )
-    }
-    default: {
+    case 'link': {
       return (
         <div className={ProjectLink.className}>
           <Icon className={styles.icon} iconName={props.project?.icon} />
@@ -46,13 +33,26 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
         </div>
       )
     }
+    default: {
+      return (
+        <Button
+          appearance={props.appearance}
+          icon={icon(props.icon)}
+          onClick={() => {
+            window.open(to, props.target)
+          }}
+        >
+          <span>{props.text}</span>
+        </Button>
+      )
+    }
   }
 }
 
 ProjectLink.displayName = 'ProjectLink'
 ProjectLink.className = styles.projectLink
 ProjectLink.defaultProps = {
-  appearance: 'default',
+  appearance: 'link',
   target: '_self',
   linkTemplate: '/projects/{{tag}}'
 }

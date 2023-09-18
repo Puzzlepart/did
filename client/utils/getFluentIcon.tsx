@@ -69,6 +69,8 @@ import {
   Eye24Regular,
   FastForward24Filled,
   FastForward24Regular,
+  Home24Filled,
+  Home24Regular,
   Info24Filled,
   Info24Regular,
   Key24Filled,
@@ -128,6 +130,10 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Home: {
+    regular: Home24Regular,
+    filled: Home24Filled
+  },
   ContentView: {
     regular: ContentView24Regular,
     filled: ContentView24Filled
