@@ -9,5 +9,5 @@ import { t9r } from './t9r'
  * @returns The router link with variables replaced and converted to lowercase.
  */
 export function createRouterLink(linkTemplate: string, variables: object) {
-  return t9r(linkTemplate, variables).toLowerCase()
+  return t9r(linkTemplate, variables ?? {}).toLowerCase()
 }
