@@ -39,7 +39,9 @@ export const Tabs: ReusableComponent<ITabsProps> = (props) => {
     <div
       className={mergeClasses(
         Tabs.className,
-        props.vertical && styles.vertical
+        props.vertical && styles.vertical,
+        props.level === 3 && styles.compactHeaders,
+        props.experimental && styles.experimental
       )}
     >
       <TabList

@@ -45,6 +45,12 @@ export interface ITabsProps extends Omit<TabListProps, 'onTabSelect'> {
    * An optional callback function to be called when a tab is selected.
    */
   onTabSelect?: (key: string) => void
+
+  /**
+   * An optional flag indicating whether or not to render the tabs with
+   * experimental features and styles enabled.
+   */
+  experimental?: boolean
 }
 
 /**
