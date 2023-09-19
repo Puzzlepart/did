@@ -7,7 +7,7 @@ import { EventObject, Project } from 'types'
 import { useTimesheetContext } from '../../../context'
 
 /**
- * Hook that returns the necessary props and functions for the manual match panel.
+ * Component logic hook for `MatchEventPanel`.
  *
  * @returns An object containing the following properties:
  * - isOpen: A boolean indicating whether the manual match panel is open.
