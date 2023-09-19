@@ -40,9 +40,11 @@
       .icon {
         display: flex;
         color: #f1f1f1;
-        font-size: 1.4rem;
-        height: 1.4rem;
         -webkit-font-smoothing: subpixel-antialiased;
+        svg {
+          width: 36px;
+          height: 36px;
+        }
       }
 
       .text {

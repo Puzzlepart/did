@@ -20,6 +20,8 @@ import {
   ArrowUndo24Regular,
   BinRecycle24Filled,
   BinRecycle24Regular,
+  BuildingSkyscraperFilled,
+  BuildingSkyscraperRegular,
   bundleIcon,
   CalendarAdd24Filled,
   CalendarAdd24Regular,
@@ -45,8 +47,10 @@ import {
   CheckmarkRegular,
   Cloud24Filled,
   Cloud24Regular,
-  Collections24Filled,
-  Collections24Regular,
+  CollectionsFilled,
+  CollectionsRegular,
+  ContentSettings24Filled,
+  ContentSettings24Regular,
   ContentView24Filled,
   ContentView24Regular,
   Delete24Filled,
@@ -79,6 +83,8 @@ import {
   KeyMultiple24Regular,
   LinkEdit24Filled,
   LinkEdit24Regular,
+  ListBarFilled,
+  ListBarRegular,
   NoteEdit24Filled,
   NoteEdit24Regular,
   PeopleAdd24Filled,
@@ -115,8 +121,8 @@ import {
   Timeline24Regular,
   Timer224Filled,
   Timer224Regular,
-  Timer24Filled,
-  Timer24Regular,
+  TimerFilled,
+  TimerRegular,
   Umbrella24Filled,
   Umbrella24Regular,
   WeatherSunnyLow24Filled,
@@ -130,6 +136,18 @@ import React from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  ListBar: {
+    regular: ListBarRegular,
+    filled: ListBarFilled
+  },
+  ContentSettings: {
+    regular: ContentSettings24Regular,
+    filled: ContentSettings24Filled
+  },
+  BuildingSkyscraper: {
+    regular: BuildingSkyscraperRegular,
+    filled: BuildingSkyscraperFilled
+  },
   Home: {
     regular: Home24Regular,
     filled: Home24Filled
@@ -207,8 +225,8 @@ const iconCatalog = {
     filled: Timeline24Filled
   },
   Collections: {
-    regular: Collections24Regular,
-    filled: Collections24Filled
+    regular: CollectionsRegular,
+    filled: CollectionsFilled
   },
   Info: {
     regular: Info24Regular,
@@ -315,8 +333,8 @@ const iconCatalog = {
     filled: CheckmarkCircle24Filled
   },
   Timer: {
-    regular: Timer24Regular,
-    filled: Timer24Filled
+    regular: TimerRegular,
+    filled: TimerFilled
   },
   PeopleTeam: {
     regular: PeopleTeam24Regular,

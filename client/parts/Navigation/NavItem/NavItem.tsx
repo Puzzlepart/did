@@ -1,9 +1,9 @@
-import { Icon } from '@fluentui/react'
 import { mergeClasses } from '@fluentui/react-components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { NavLink } from 'react-router-dom'
 import { StyledComponent } from 'types'
+import { getFluentIcon } from 'utils'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 import { useNavItem } from './useNavItem'
@@ -20,11 +20,12 @@ export const NavItem: StyledComponent<INavItemProps> = (props) => {
       >
         {isActive ? (
           <span className={mergeClasses(styles.link, styles.active)}>
+            <span className={styles.icon}>{getFluentIcon(props.iconName)}</span>
             <span className={styles.text}>{props.text}</span>
           </span>
         ) : (
           <NavLink to={props.to} className={styles.link} onClick={onClick}>
-            <Icon iconName={props.iconName} className={styles.icon} />
+            <span className={styles.icon}>{getFluentIcon(props.iconName)}</span>
             <span className={styles.text}>{props.text}</span>
           </NavLink>
         )}

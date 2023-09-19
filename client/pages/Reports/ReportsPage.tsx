@@ -16,14 +16,6 @@ export const ReportsPage: PageComponent = () => {
   return <Reports />
 }
 
-Object.assign(ReportsPage, {
-  iconName: 'ReportDocument',
-  permission: PermissionScope.ACCESS_REPORTS
-} as Partial<PageComponent>)
-
-export * from './context'
-export * from './hooks'
-export * from './reducer'
-export * from './ReportsList/useMenuItems'
-export * from './SaveFilterForm'
-export * from './types'
+ReportsPage.displayName = 'ReportsPage'
+ReportsPage.iconName = 'ListBar'
+ReportsPage.permission = PermissionScope.ACCESS_REPORTS

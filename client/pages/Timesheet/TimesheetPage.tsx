@@ -28,11 +28,5 @@ export const TimesheetPage: PageComponent = () => {
 }
 
 TimesheetPage.displayName = 'TimesheetPage'
-TimesheetPage.iconName = 'TimeSheet'
+TimesheetPage.iconName = 'Timer'
 TimesheetPage.permission = PermissionScope.ACCESS_TIMESHEET
-
-export * from './hooks'
-export * from './Timesheet'
-export * from './TimesheetDateRange'
-export * from './TimesheetPeriod'
-export * from './types'

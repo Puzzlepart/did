@@ -22,10 +22,9 @@ export const ProjectsPage: PageComponent = () => {
   )
 }
 
-Object.assign(ProjectsPage, {
-  iconName: 'ProjectCollection',
-  permission: PermissionScope.ACCESS_PROJECTS
-} as Partial<PageComponent>)
+ProjectsPage.displayName = 'ProjectsPage'
+ProjectsPage.iconName = 'Collections'
+ProjectsPage.permission = PermissionScope.ACCESS_PROJECTS
 
 export * from './context'
 export * from './ProjectDetails'

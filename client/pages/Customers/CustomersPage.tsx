@@ -20,5 +20,5 @@ export const CustomersPage: PageComponent = () => (
 )
 
 CustomersPage.displayName = 'CustomersPage'
-CustomersPage.iconName = 'People'
+CustomersPage.iconName = 'BuildingSkyscraper'
 CustomersPage.permission = PermissionScope.ACCESS_CUSTOMERS
