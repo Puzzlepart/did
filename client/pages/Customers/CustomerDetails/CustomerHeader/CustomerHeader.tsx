@@ -20,11 +20,14 @@ export const CustomerHeader: StyledComponent = () => {
       isDataLoaded={!loading}
       styles={{ dataWrapper: { width: '100%' } }}
     >
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        style={{ display: isMobile ? 'none' : 'flex' }}
+      >
         <div className={styles.breadcrumb}>
           <Breadcrumb {...breadcrumb} />
         </div>
-        <CustomerActions hidden={isMobile} />
+        <CustomerActions />
       </div>
       <SubText
         className={styles.description}

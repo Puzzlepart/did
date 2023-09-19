@@ -1,7 +1,7 @@
 import { SelectTabEventHandler } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { ComponentLogicHook } from 'hooks'
-import { FunctionComponent, useCallback, useMemo } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo } from 'react'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
 import { ITabProps, ITabsProps } from './types'
 import { useTabsSelection } from './useTabsSelection'
@@ -50,19 +50,26 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
     [props.items, selectedValue]
   )
 
+  useEffect(() => {
+    if (selectedValue) {
+      dispatch(
+        UPDATE_BREADCRUMB({
+          item: {
+            key: selectedValue,
+            text:
+              typeof selectedTab === 'string' ? selectedTab : selectedTab.text,
+            level: props.level
+          }
+        })
+      )
+    }
+  }, [selectedValue])
+
   const onTabSelect = useCallback<SelectTabEventHandler>(
     (_, data) => {
       const key = data?.value as string
       setSelectedValue(key)
       updateHistory(key)
-      dispatch(
-        UPDATE_BREADCRUMB({
-          key: key,
-          text:
-            typeof selectedTab === 'string' ? selectedTab : selectedTab.text,
-          level: props.level
-        })
-      )
       if (props.onTabSelect) {
         props.onTabSelect(key)
       }

@@ -1,7 +1,7 @@
 import { Breadcrumb, IBreadcrumbItem } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import React from 'react'
-import { isBrowser } from 'react-device-detect'
+import { MobileView } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { StyledComponent } from 'types'
 import styles from './MobileBreadcrumb.module.scss'
@@ -13,8 +13,8 @@ import { IMobileBreadcrumbProps } from './types'
 export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
   props
 ) => {
-  const { state } = useAppContext()
-  const nav = Object.keys(state.nav || {})
+  const appContext = useAppContext()
+  const nav = Object.keys(appContext.state.nav || {})
   const items: IBreadcrumbItem[] = [
     {
       key: 'current',
@@ -23,18 +23,18 @@ export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
     },
     ...nav.map((key, index) => ({
       key,
-      text: state.nav[key].text,
+      text: appContext.state.nav[key].text,
       isCurrentItem: index === nav.length - 1
     }))
   ]
-  if (isBrowser) return null
   return (
-    <div hidden={props.hidden}>
-      <FadeIn delay={250}>
+    <MobileView>
+      <FadeIn>
         <Breadcrumb className={MobileBreadcrumb.className} items={items} />
       </FadeIn>
-    </div>
+    </MobileView>
   )
 }
 
+MobileBreadcrumb.displayName = 'MobileBreadcrumb'
 MobileBreadcrumb.className = styles.mobileBreadcrumb

@@ -39,7 +39,6 @@ export interface ITabsProps extends Omit<TabListProps, 'onTabSelect'> {
    * @default 2
    */
   level?: number
-
   /**
    * An optional callback function to be called when a tab is selected.
    */
