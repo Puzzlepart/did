@@ -1,6 +1,7 @@
 import { DateRangeType } from '@fluentui/react'
 import { PopoverProps } from '@fluentui/react-components'
 import { useState } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../../types'
 
@@ -16,14 +17,17 @@ export function useDateRangePicker() {
   const [open, setOpen] = useState(false)
   const handleOpenChange: PopoverProps['onOpenChange'] = (_, data) =>
     setOpen(data.open || false)
-  let triggerText = state.dateRange.timespan
-  if (
-    state.dateRangeType === DateRangeType.Week &&
-    state.periods.length === 1
-  ) {
-    triggerText = `${state.selectedPeriod.getName(t)} (${
-      state.dateRange.timespan
-    })`
+  let triggerText: string
+  if (isBrowser) {
+    triggerText = state.dateRange.timespan
+    if (
+      state.dateRangeType === DateRangeType.Week &&
+      state.periods.length === 1
+    ) {
+      triggerText = `${state.selectedPeriod.getName(t)} (${
+        state.dateRange.timespan
+      })`
+    }
   }
   return { triggerText, open, handleOpenChange }
 }

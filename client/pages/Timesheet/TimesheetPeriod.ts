@@ -345,7 +345,8 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Period is complete meaning all events are matched
+   * Period is complete meaning all events are matched to a project, but there
+   * might be ignored events.
    *
    * @returns `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
    *

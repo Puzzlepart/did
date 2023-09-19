@@ -1,0 +1,12 @@
+.navigatePeriodsButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin: 0 0 0 8px;
+
+    .navigatePeriodsButton {
+        &.mobile {
+            margin-top: 2px;
+        }
+    }
+}

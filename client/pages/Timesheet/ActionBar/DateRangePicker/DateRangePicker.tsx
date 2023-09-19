@@ -28,9 +28,11 @@ export const DateRangePicker: FC = () => {
   const { triggerText, open, handleOpenChange } = useDateRangePicker()
   return (
     <Popover trapFocus={true} open={open} onOpenChange={handleOpenChange}>
-      <PopoverTrigger disableButtonEnhancement>
-        <Button appearance='subtle'>{triggerText}</Button>
-      </PopoverTrigger>
+      {triggerText && (
+        <PopoverTrigger disableButtonEnhancement>
+          <Button appearance='subtle'>{triggerText}</Button>
+        </PopoverTrigger>
+      )}
       <PopoverSurface>
         <Calendar
           onSelectDate={(date) => {
