@@ -22,4 +22,4 @@
 
 • **page**: *PageComponent*
 
-Defined in: [parts/MobileBreadcrumb/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/types.tsx#L10)
+Defined in: [client/parts/MobileBreadcrumb/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/types.tsx#L10)

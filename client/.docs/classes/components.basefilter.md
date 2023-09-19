@@ -57,7 +57,7 @@ Name | Type | Description |
 
 **Returns:** [*BaseFilter*](components.basefilter.md)
 
-Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
 
 ## Properties
 
@@ -77,7 +77,7 @@ ___
 
 • **selectedKeys**: *string*[]
 
-Defined in: [components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L11)
 
 ___
 
@@ -99,7 +99,7 @@ Name | Type |
 
 **Returns:** [*BaseFilter*](components.basefilter.md)
 
-Defined in: [components/FilterPanel/Filters/BaseFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L28)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L28)
 
 ___
 
@@ -119,7 +119,7 @@ Name | Type | Description |
 
 `IFilter`
 
-Defined in: [components/FilterPanel/Filters/BaseFilter.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L41)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L41)
 
 ___
 
@@ -139,4 +139,4 @@ Name | Type | Description |
 
 this
 
-Defined in: [components/FilterPanel/Filters/BaseFilter.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L58)
+Defined in: [client/components/FilterPanel/Filters/BaseFilter.ts:58](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/BaseFilter.ts#L58)

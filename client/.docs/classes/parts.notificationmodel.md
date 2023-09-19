@@ -12,6 +12,7 @@
 
 ### Properties
 
+- [iconName](parts.notificationmodel.md#iconname)
 - [id](parts.notificationmodel.md#id)
 - [moreLink](parts.notificationmodel.md#morelink)
 - [severity](parts.notificationmodel.md#severity)
@@ -20,9 +21,9 @@
 
 ### Accessors
 
-- [\_iconProps](parts.notificationmodel.md#_iconprops)
-- [\_messageType](parts.notificationmodel.md#_messagetype)
-- [messageProps](parts.notificationmodel.md#messageprops)
+- [\_icon](parts.notificationmodel.md#_icon)
+- [\_notificationIntent](parts.notificationmodel.md#_notificationintent)
+- [alertProps](parts.notificationmodel.md#alertprops)
 
 ### Methods
 
@@ -44,15 +45,23 @@ Name | Type | Description |
 
 **Returns:** [*NotificationModel*](parts.notificationmodel.md)
 
-Defined in: [parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
+Defined in: [client/parts/UserNotifications/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L12)
 
 ## Properties
+
+### iconName
+
+• `Optional` **iconName**: *string*
+
+Defined in: [client/parts/UserNotifications/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L12)
+
+___
 
 ### id
 
 • **id**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L7)
+Defined in: [client/parts/UserNotifications/types.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L7)
 
 ___
 
@@ -60,7 +69,7 @@ ___
 
 • **moreLink**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
+Defined in: [client/parts/UserNotifications/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L11)
 
 ___
 
@@ -68,7 +77,7 @@ ___
 
 • **severity**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L9)
+Defined in: [client/parts/UserNotifications/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L9)
 
 ___
 
@@ -76,7 +85,7 @@ ___
 
 • **text**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L10)
+Defined in: [client/parts/UserNotifications/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L10)
 
 ___
 
@@ -84,37 +93,41 @@ ___
 
 • **type**: *string*
 
-Defined in: [parts/UserNotifications/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L8)
+Defined in: [client/parts/UserNotifications/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L8)
 
 ## Accessors
 
-### \_iconProps
+### \_icon
 
-• `Private`get **_iconProps**(): *IIconProps*
+• `Private`get **_icon**(): *Element*
 
-**Returns:** *IIconProps*
+**Returns:** *Element*
 
-Defined in: [parts/UserNotifications/types.tsx:37](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L37)
-
-___
-
-### \_messageType
-
-• `Private`get **_messageType**(): [*UserMessageType*](../modules/components.md#usermessagetype)
-
-**Returns:** [*UserMessageType*](../modules/components.md#usermessagetype)
-
-Defined in: [parts/UserNotifications/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L26)
+Defined in: [client/parts/UserNotifications/types.tsx:44](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L44)
 
 ___
 
-### messageProps
+### \_notificationIntent
 
-• get **messageProps**(): [*IUserMessageProps*](../interfaces/components.iusermessageprops.md)
+• `Private`get **_notificationIntent**(): *error* \| *warning* \| *success* \| *info*
 
-**Returns:** [*IUserMessageProps*](../interfaces/components.iusermessageprops.md)
+Returns the intent of the notification based on its type.
 
-Defined in: [parts/UserNotifications/types.tsx:51](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L51)
+**Returns:** *error* \| *warning* \| *success* \| *info*
+
+The intent of the notification.
+
+Defined in: [client/parts/UserNotifications/types.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L33)
+
+___
+
+### alertProps
+
+• get **alertProps**(): AlertProps
+
+**Returns:** AlertProps
+
+Defined in: [client/parts/UserNotifications/types.tsx:58](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L58)
 
 ## Methods
 
@@ -132,4 +145,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [parts/UserNotifications/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L65)
+Defined in: [client/parts/UserNotifications/types.tsx:71](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L71)

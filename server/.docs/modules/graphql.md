@@ -37,7 +37,6 @@
 ### GraphQL ObjectType Classes
 
 - [ActiveDirectoryUser](../classes/graphql.activedirectoryuser.md)
-- [ApiToken](../classes/graphql.apitoken.md)
 - [CreateOrUpdateProjectResult](../classes/graphql.createorupdateprojectresult.md)
 - [CreateOutlookCategoryResult](../classes/graphql.createoutlookcategoryresult.md)
 - [Customer](../classes/graphql.customer.md)
@@ -76,6 +75,10 @@
 - [SubscriptionResolver](../classes/graphql.subscriptionresolver.md)
 - [TimesheetResolver](../classes/graphql.timesheetresolver.md)
 - [UserResolver](../classes/graphql.userresolver.md)
+
+### Other Classes
+
+- [ApiToken](../classes/graphql.apitoken.md)
 
 ### GraphQL Type Type aliases
 
@@ -158,7 +161,7 @@ ___
 
 ### setupGraphQL
 
-▸ `Const`**setupGraphQL**(`app`: *Application*, `mcl`: *MongoClient*): *Promise*<void\>
+▸ `Const`**setupGraphQL**(`app`: *Application*, `mcl`: *any*): *Promise*<void\>
 
 Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
 application
@@ -177,7 +180,7 @@ application
 Name | Type | Description |
 :------ | :------ | :------ |
 `app` | *Application* | Express application   |
-`mcl` | *MongoClient* | Mongo client    |
+`mcl` | *any* | Mongo client    |
 
 **Returns:** *Promise*<void\>
 

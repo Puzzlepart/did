@@ -6,6 +6,18 @@ App components
 
 ## Table of contents
 
+### Namespaces
+
+- [ErrorFallback](parts.errorfallback.md)
+- [MobileBreadcrumb](parts.mobilebreadcrumb.md)
+- [NavItem](parts.navitem.md)
+- [Navigation](parts.navigation.md)
+- [NotificationsPanel](parts.notificationspanel.md)
+- [UserFeedback](parts.userfeedback.md)
+- [UserMenu](parts.usermenu.md)
+- [UserNotification](parts.usernotification.md)
+- [UserNotifications](parts.usernotifications.md)
+
 ### Classes
 
 - [NotificationModel](../classes/parts.notificationmodel.md)
@@ -16,6 +28,7 @@ App components
 
 ### Other Interfaces
 
+- [IErrorFallbackProps](../interfaces/parts.ierrorfallbackprops.md)
 - [IMobileBreadcrumbItem](../interfaces/parts.imobilebreadcrumbitem.md)
 - [IMobileBreadcrumbProps](../interfaces/parts.imobilebreadcrumbprops.md)
 - [INotificationsPanelProps](../interfaces/parts.inotificationspanelprops.md)
@@ -24,6 +37,7 @@ App components
 
 ### Function Component Variables
 
+- [ErrorFallback](parts.md#errorfallback)
 - [FeedbackPanel](parts.md#feedbackpanel)
 - [MobileBreadcrumb](parts.md#mobilebreadcrumb)
 - [Navigation](parts.md#navigation)
@@ -37,51 +51,62 @@ App components
 
 - [NavItem](parts.md#navitem)
 
-### Function Component Functions
-
-- [ErrorFallback](parts.md#errorfallback)
-
-### Other Functions
+### Functions
 
 - [useMobileBreadcrumb](parts.md#usemobilebreadcrumb)
 
 ## Function Component Variables
 
+### ErrorFallback
+
+• `Const` **ErrorFallback**: *StyledComponent*<[*IErrorFallbackProps*](../interfaces/parts.ierrorfallbackprops.md)\>
+
+Error fallback for `<ErrorBoundary />`  from
+`react-error-boundary`
+
+Shows the `error` message and provides a
+button that  executes `resetErrorBoundary` that might
+temporarily solve the issue (in some cases).
+
+Defined in: [client/parts/ErrorFallback/ErrorFallback.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/ErrorFallback.tsx#L20)
+
+___
+
 ### FeedbackPanel
 
 • `Const` **FeedbackPanel**: *FC*<IPanelProps\>
 
-Defined in: [parts/UserFeedback/FeedbackPanel/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L18)
+Defined in: [client/parts/UserFeedback/FeedbackPanel/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L17)
 
 ___
 
 ### MobileBreadcrumb
 
-• `Const` **MobileBreadcrumb**: *FC*<[*IMobileBreadcrumbProps*](../interfaces/parts.imobilebreadcrumbprops.md)\>
+• `Const` **MobileBreadcrumb**: *StyledComponent*<[*IMobileBreadcrumbProps*](../interfaces/parts.imobilebreadcrumbprops.md)\>
 
-Defined in: [parts/MobileBreadcrumb/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/index.tsx#L14)
+Defined in: [client/parts/MobileBreadcrumb/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/index.tsx#L13)
 
 ___
 
 ### Navigation
 
-• `Const` **Navigation**: FC
+• `Const` **Navigation**: StyledComponent
 
-Defined in: [parts/Navigation/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/index.tsx#L20)
+Defined in: [client/parts/Navigation/Navigation.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/Navigation.tsx#L21)
 
 ___
 
 ### NotificationsPanel
 
-• `Const` **NotificationsPanel**: *FC*<IPanelProps\>
+• `Const` **NotificationsPanel**: *StyledComponent*<IPanelProps\>
 
-Defined in: [parts/UserNotifications/NotificationsPanel/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/index.tsx#L14)
+Defined in: [client/parts/UserNotifications/NotificationsPanel/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/index.tsx#L16)
 
 ___
 
 ### UserFeedback
 
-• `Const` **UserFeedback**: *FC*<IUserFeedbackProps\>
+• `Const` **UserFeedback**: *StyledComponent*<IUserFeedbackProps\>
 
 User feedback
 
@@ -90,29 +115,29 @@ is set to `true`.
 
 An icon name is optional and defaults to **Emoji2**
 
-Defined in: [parts/UserFeedback/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/index.tsx#L21)
+Defined in: [client/parts/UserFeedback/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/index.tsx#L22)
 
 ___
 
 ### UserMenu
 
-• `Const` **UserMenu**: FC
+• `Const` **UserMenu**: StyledComponent
 
-Defined in: [parts/UserMenu/index.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L24)
+Defined in: [client/parts/UserMenu/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L31)
 
 ___
 
 ### UserNotification
 
-• `Const` **UserNotification**: *FC*<[*IUserNotificationProps*](../interfaces/parts.iusernotificationprops.md)\>
+• `Const` **UserNotification**: *StyledComponent*<[*IUserNotificationProps*](../interfaces/parts.iusernotificationprops.md)\>
 
-Defined in: [parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx#L14)
+Defined in: [client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/index.tsx#L13)
 
 ___
 
 ### UserNotifications
 
-• `Const` **UserNotifications**: *FC*<[*IUserNotificationsProps*](../interfaces/parts.iusernotificationsprops.md)\>
+• `Const` **UserNotifications**: *StyledComponent*<[*IUserNotificationsProps*](../interfaces/parts.iusernotificationsprops.md)\>
 
 User notifications
 
@@ -121,7 +146,7 @@ is set to `true`.
 
 An icon name is optional and defaults to **Ringer**
 
-Defined in: [parts/UserNotifications/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L22)
+Defined in: [client/parts/UserNotifications/index.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/index.tsx#L23)
 
 ___
 
@@ -129,38 +154,11 @@ ___
 
 ### NavItem
 
-• `Const` **NavItem**: *FC*<[*INavItemProps*](../interfaces/parts.inavitemprops.md)\>
+• `Const` **NavItem**: *StyledComponent*<[*INavItemProps*](../interfaces/parts.inavitemprops.md)\>
 
-Defined in: [parts/Navigation/NavItem/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/index.tsx#L12)
+Defined in: [client/parts/Navigation/NavItem/NavItem.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/NavItem.tsx#L14)
 
-## Function Component Functions
-
-### ErrorFallback
-
-▸ `Const`**ErrorFallback**(`__namedParameters`: IErrorFallbackProps): *Element*
-
-Error fallback for `<ErrorBoundary />`  from
-`react-error-boundary`
-
-Shows the `error` message and provides two
-buttons. One that redirects the user to
-GitHub to create a new **bug** and one that
-executes `resetErrorBoundary` that might
-temporarily solve the issue.
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | IErrorFallbackProps |
-
-**Returns:** *Element*
-
-Defined in: [parts/ErrorFallback/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/ErrorFallback/index.tsx#L20)
-
-___
-
-## Other Functions
+## Functions
 
 ### useMobileBreadcrumb
 
@@ -177,4 +175,4 @@ Name | Type |
 
 **Returns:** IBreadcrumbItem[]
 
-Defined in: [parts/MobileBreadcrumb/useMobileBreadcrumb.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/useMobileBreadcrumb.ts#L11)
+Defined in: [client/parts/MobileBreadcrumb/useMobileBreadcrumb.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/useMobileBreadcrumb.ts#L10)

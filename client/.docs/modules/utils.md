@@ -10,24 +10,47 @@ Reusable utility functions
 
 - [BrowserStorage](../classes/utils.browserstorage.md)
 
+### Type aliases
+
+- [FluentIconName](utils.md#fluenticonname)
+
 ### Functions
 
 - [arrayExtend](utils.md#arrayextend)
 - [arrayMap](utils.md#arraymap)
 - [cleanArray](utils.md#cleanarray)
 - [convertToMap](utils.md#converttomap)
+- [createColumnDef](utils.md#createcolumndef)
 - [createPath](utils.md#createpath)
+- [createRouterLink](utils.md#createrouterlink)
 - [deepCopy](utils.md#deepcopy)
-- [generateColumn](utils.md#generatecolumn)
+- [fuzzyMap](utils.md#fuzzymap)
+- [fuzzyStringEqual](utils.md#fuzzystringequal)
 - [getContrastColor](utils.md#getcontrastcolor)
+- [getFluentIcon](utils.md#getfluenticon)
+- [getFluentIconWithFallback](utils.md#getfluenticonwithfallback)
+- [getFluentIcons](utils.md#getfluenticons)
 - [getSum](utils.md#getsum)
 - [loadScripts](utils.md#loadscripts)
+- [mapProperty](utils.md#mapproperty)
+- [mergeMaps](utils.md#mergemaps)
 - [omitDeep](utils.md#omitdeep)
 - [omitTypename](utils.md#omittypename)
 - [searchObject](utils.md#searchobject)
 - [sleep](utils.md#sleep)
 - [sortAlphabetically](utils.md#sortalphabetically)
+- [t9r](utils.md#t9r)
 - [tryParseJson](utils.md#tryparsejson)
+
+## Type aliases
+
+### FluentIconName
+
+Ƭ **FluentIconName**: keyof *typeof* iconCatalog
+
+Represents the name of a Fluent UI icon.
+
+Defined in: [client/utils/getFluentIcon.tsx:382](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L382)
 
 ## Functions
 
@@ -54,32 +77,33 @@ Name | Type | Default value | Description |
 
 **Returns:** T[]
 
-Defined in: [utils/arrayExtend.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L15)
+Defined in: [client/utils/arrayExtend.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayExtend.ts#L15)
 
 ___
 
 ### arrayMap
 
-▸ **arrayMap**<T\>(`arr`: T[], `callbackfn`: (`value`: T, `index`: *number*) => T): T[]
+▸ **arrayMap**<T, R\>(`arr`: T[], `callbackfn`: (`value`: T, `index`: *number*) => R): R[]
 
-Array map with `null` / `undefined` check
+Array map that removes falsy values.
 
 #### Type parameters:
 
 Name | Default |
 :------ | :------ |
 `T` | *any* |
+`R` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `arr` | T[] | Array   |
-`callbackfn` | (`value`: T, `index`: *number*) => T | Map callback function    |
+`callbackfn` | (`value`: T, `index`: *number*) => R | Map callback function    |
 
-**Returns:** T[]
+**Returns:** R[]
 
-Defined in: [utils/arrayMap.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayMap.ts#L8)
+Defined in: [client/utils/arrayMap.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/arrayMap.ts#L8)
 
 ___
 
@@ -103,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** T[]
 
-Defined in: [utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
+Defined in: [client/utils/cleanArray.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/cleanArray.ts#L8)
 
 ___
 
@@ -127,7 +151,37 @@ Name | Type | Description |
 
 **Returns:** *Map*<KeyType, any\>
 
-Defined in: [utils/convertToMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/convertToMap.ts#L6)
+Defined in: [client/utils/convertToMap.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/convertToMap.ts#L6)
+
+___
+
+### createColumnDef
+
+▸ **createColumnDef**<T\>(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T\>\>, `onRender?`: (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
+
+Creates a column definition for the `List` component.
+This is a helper function to make it easier to create
+column definitions.
+
+#### Type parameters:
+
+Name | Type | Default |
+:------ | :------ | :------ |
+`T` | *object* | *any* |
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`fieldName` | *string* | - | Field name for the column   |
+`name` | *string* | '' | -Name for the column   |
+`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T\>\> | - | Additional props   |
+`onRender?` | (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any* | - | Render function   |
+`minWidth` | *number* | 100 | Min width    |
+
+**Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
+
+Defined in: [client/utils/createColumnDef.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/createColumnDef.ts#L15)
 
 ___
 
@@ -145,7 +199,28 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [utils/createPath.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/createPath.ts#L6)
+Defined in: [client/utils/createPath.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/createPath.ts#L6)
+
+___
+
+### createRouterLink
+
+▸ **createRouterLink**(`linkTemplate`: *string*, `variables`: *object*): *string*
+
+Creates a router link by replacing variables in a link template with their corresponding values.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`linkTemplate` | *string* | The link template with variables to replace.   |
+`variables` | *object* | An object containing key-value pairs of variable names and their corresponding values.    |
+
+**Returns:** *string*
+
+The router link with variables replaced and converted to lowercase.
+
+Defined in: [client/utils/createRouterLink.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/createRouterLink.ts#L11)
 
 ___
 
@@ -163,29 +238,55 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
+Defined in: [client/utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
 
 ___
 
-### generateColumn
+### fuzzyMap
 
-▸ **generateColumn**(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\>, `onRender?`: (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
+▸ **fuzzyMap**<T, R\>(`obj`: *FuzzyMapObjectType*<T\>, `callbackFunction`: *FuzzyMapCallbackFunction*<T, R\>): R[]
 
-Generate a `IListColumn` defintion
+Maps over an array or object and returns a new array with the results of calling a provided function on every element.
+The provided function can be used to filter out unwanted elements by returning a falsy value.
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | - |
+`R` | T |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`obj` | *FuzzyMapObjectType*<T\> | The array or object to map over.    |
+`callbackFunction` | *FuzzyMapCallbackFunction*<T, R\> | The function to call on each element.    |
+
+**Returns:** R[]
+
+Defined in: [client/utils/fuzzyMap.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/fuzzyMap.ts#L19)
+
+___
+
+### fuzzyStringEqual
+
+▸ **fuzzyStringEqual**(`a?`: *string*, `b?`: *string*): *boolean*
+
+Compares two strings for equality, ignoring non-alphanumeric characters and case.
 
 #### Parameters:
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`fieldName` | *string* | - | Field name   |
-`name` | *string* | '' | -Name   |
-`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)\> | - | Additional props   |
-`onRender?` | (`item?`: *any*, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any* | - | Render function   |
-`minWidth` | *number* | 100 | Min width    |
+`a` | *string* | '' | The first string to compare.   |
+`b` | *string* | '' | The second string to compare.    |
 
-**Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
+**Returns:** *boolean*
 
-Defined in: [utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
+True if the strings are equal, false otherwise.
+
+Defined in: [client/utils/fuzzyStringEqual.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/fuzzyStringEqual.ts#L9)
 
 ___
 
@@ -207,7 +308,65 @@ Name | Type | Description |
 
 The contrasting color (black or white)
 
-Defined in: [utils/getContrastColor.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L11)
+Defined in: [client/utils/getContrastColor.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/getContrastColor.ts#L11)
+
+___
+
+### getFluentIcon
+
+▸ **getFluentIcon**(`name`: [*FluentIconName*](utils.md#fluenticonname), `bundle?`: *boolean*, `color?`: *string*): *Element*
+
+Returns the Fluent icon with the specified name.
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`name` | [*FluentIconName*](utils.md#fluenticonname) | - | The name of the icon to retrieve.   |
+`bundle` | *boolean* | true | Whether to bundle the filled and regular versions of the icon. Defaults to true.   |
+`color?` | *string* | - | The color to apply to the icon.    |
+
+**Returns:** *Element*
+
+The specified Fluent icon.
+
+Defined in: [client/utils/getFluentIcon.tsx:393](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L393)
+
+___
+
+### getFluentIconWithFallback
+
+▸ **getFluentIconWithFallback**(`name`: *string*, `bundleWithFilled?`: *boolean*, `color?`: *string*): *Element*
+
+Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`name` | *string* | - | The name of the icon to retrieve.   |
+`bundleWithFilled` | *boolean* | true | Whether to bundle the icon with the filled version. Defaults to true.   |
+`color?` | *string* | - | The color of the icon.    |
+
+**Returns:** *Element*
+
+A Fluent UI icon component or a default icon component if the requested icon is not found.
+
+Defined in: [client/utils/getFluentIcon.tsx:426](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L426)
+
+___
+
+### getFluentIcons
+
+▸ **getFluentIcons**(): { `hasFilledIcon`: *boolean* = !!iconCatalog[key].filled; `name`: *string*  }[]
+
+Returns an array of strings representing the names of all available Fluent icons.
+
+**Returns:** { `hasFilledIcon`: *boolean* = !!iconCatalog[key].filled; `name`: *string*  }[]
+
+An array of strings representing the names of all available Fluent icons.
+
+Defined in: [client/utils/getFluentIcon.tsx:410](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L410)
 
 ___
 
@@ -226,7 +385,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: [utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
+Defined in: [client/utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
 
 ___
 
@@ -252,7 +411,61 @@ Name | Type | Default value | Description |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
+Defined in: [client/utils/loadScripts.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/loadScripts.ts#L11)
+
+___
+
+### mapProperty
+
+▸ **mapProperty**<T, R\>(`array`: T[], `property`: keyof T): R[]
+
+Returns an array of values for a given property of an array of objects.
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | - |
+`R` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`array` | T[] | The array of objects to map.   |
+`property` | keyof T | The property to map from each object in the array.    |
+
+**Returns:** R[]
+
+An array of values for the given property.
+
+Defined in: [client/utils/mapProperty.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/mapProperty.ts#L9)
+
+___
+
+### mergeMaps
+
+▸ **mergeMaps**<T\>(...`maps`: *Map*<string, T\>[]): *Map*<string, T\>
+
+Merges multiple maps into a single map.
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`...maps` | *Map*<string, T\>[] | The maps to merge.    |
+
+**Returns:** *Map*<string, T\>
+
+A new map containing all the entries from the input maps.
+
+Defined in: [client/utils/mergeMaps.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/mergeMaps.ts#L8)
 
 ___
 
@@ -273,7 +486,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [utils/omitDeep.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitDeep.ts#L9)
+Defined in: [client/utils/omitDeep.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitDeep.ts#L9)
 
 ___
 
@@ -291,7 +504,7 @@ Name | Type |
 
 **Returns:** *any*
 
-Defined in: [utils/omitTypename.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitTypename.ts#L9)
+Defined in: [client/utils/omitTypename.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/omitTypename.ts#L9)
 
 ___
 
@@ -321,7 +534,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [utils/searchObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L19)
+Defined in: [client/utils/searchObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L19)
 
 ___
 
@@ -339,7 +552,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
+Defined in: [client/utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
 
 ___
 
@@ -357,7 +570,27 @@ Name | Type |
 
 **Returns:** *string*[]
 
-Defined in: [utils/sortAlphabetically.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sortAlphabetically.ts#L6)
+Defined in: [client/utils/sortAlphabetically.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sortAlphabetically.ts#L6)
+
+___
+
+### t9r
+
+▸ **t9r**(`template`: *string*, `interpolations`: *Record*<string, any\>): *string*
+
+Replace tokens in a template string with values from an object. Tokens are
+in the form of {{ token }}.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`template` | *string* | Template string with tokens in the form of {{ token }}   |
+`interpolations` | *Record*<string, any\> | Object with keys matching the tokens in the template    |
+
+**Returns:** *string*
+
+Defined in: [client/utils/t9r.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/t9r.ts#L9)
 
 ___
 
@@ -383,4 +616,4 @@ Name | Type | Default value | Description |
 
 **Returns:** T
 
-Defined in: [utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)
+Defined in: [client/utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)

@@ -16,4 +16,4 @@
 
 • **query**: *string*
 
-Defined in: [pages/Reports/types.tsx:187](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L187)
+Defined in: [client/pages/Reports/types.tsx:196](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L196)

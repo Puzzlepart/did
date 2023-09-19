@@ -80,7 +80,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*Project*](graphql.project.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -126,7 +126,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*Project*](graphql.project.md)\>, `sort?`: S): *Promise*<[*Project*](graphql.project.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*Project*](graphql.project.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -142,7 +142,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Project*](graphql.project.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*Project*](graphql.project.md)[]\>
@@ -155,19 +155,19 @@ ___
 
 ### getProjectsData
 
-▸ **getProjectsData**(`query?`: *FilterQuery*<[*Project*](graphql.project.md)\>): *Promise*<ProjectsData\>
+▸ **getProjectsData**(`query?`: *any*): *Promise*<ProjectsData\>
 
 Get projects, customers and labels.
 
-Projects are sorted by the name property
-
-Connects labels and customer to projects
+Projects are sorted by the name property, then connects
+customers and labels to projects using the `customerKey` and
+`labels` properties.
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*Project*](graphql.project.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<ProjectsData\>
 
@@ -177,7 +177,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -189,7 +189,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -199,7 +199,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -213,7 +213,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -223,7 +223,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*Project*](graphql.project.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -233,10 +233,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Project*](graphql.project.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 

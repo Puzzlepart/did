@@ -4,11 +4,13 @@
 
 [Pages](../modules/pages.md).IProjectsState
 
+Represents the state of the Projects component.
+
 ## Table of contents
 
 ### Properties
 
-- [currentTab](pages.iprojectsstate.md#currenttab)
+- [editProject](pages.iprojectsstate.md#editproject)
 - [error](pages.iprojectsstate.md#error)
 - [outlookCategories](pages.iprojectsstate.md#outlookcategories)
 - [projects](pages.iprojectsstate.md#projects)
@@ -16,11 +18,13 @@
 
 ## Properties
 
-### currentTab
+### editProject
 
-• `Optional` **currentTab**: ProjectsTab
+• `Optional` **editProject**: *Project*
 
-Defined in: [pages/Projects/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L21)
+The project being edited.
+
+Defined in: [client/pages/Projects/types.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L36)
 
 ___
 
@@ -28,7 +32,9 @@ ___
 
 • `Optional` **error**: *ApolloError*
 
-Defined in: [pages/Projects/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L25)
+The error that occurred while fetching or updating data.
+
+Defined in: [client/pages/Projects/types.tsx:46](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L46)
 
 ___
 
@@ -36,7 +42,9 @@ ___
 
 • `Optional` **outlookCategories**: *OutlookCategory*[]
 
-Defined in: [pages/Projects/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L24)
+The list of Outlook categories for the current user.
+
+Defined in: [client/pages/Projects/types.tsx:41](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L41)
 
 ___
 
@@ -44,7 +52,9 @@ ___
 
 • `Optional` **projects**: *Project*[]
 
-Defined in: [pages/Projects/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L23)
+The list of projects.
+
+Defined in: [client/pages/Projects/types.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L31)
 
 ___
 
@@ -52,4 +62,6 @@ ___
 
 • `Optional` **selected**: *Project*
 
-Defined in: [pages/Projects/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L22)
+The currently selected project.
+
+Defined in: [client/pages/Projects/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L26)

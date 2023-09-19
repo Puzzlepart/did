@@ -26,7 +26,7 @@
 
 Excel column format
 
-Defined in: [components/List/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L32)
+Defined in: [client/components/List/types/IListColumnData.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L23)
 
 ___
 
@@ -42,9 +42,9 @@ Filter type. Should be a class that extends `BaseFilter`
 
 **Returns:** [*BaseFilter*](../classes/components.basefilter.md)
 
-Defined in: [components/List/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L57)
+Defined in: [client/components/List/types/IListColumnData.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L48)
 
-Defined in: [components/List/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L57)
+Defined in: [client/components/List/types/IListColumnData.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L48)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 Hidden column
 
-Defined in: [components/List/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L22)
+Defined in: [client/components/List/types/IListColumnData.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L13)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 Hidden from Excel exports
 
-Defined in: [components/List/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L37)
+Defined in: [client/components/List/types/IListColumnData.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L28)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 Is the column filterable?
 
-Defined in: [components/List/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L47)
+Defined in: [client/components/List/types/IListColumnData.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L38)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 Is the column groupable?
 
-Defined in: [components/List/types.ts:52](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L52)
+Defined in: [client/components/List/types/IListColumnData.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L43)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 Is the column sortable?
 
-Defined in: [components/List/types.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L42)
+Defined in: [client/components/List/types/IListColumnData.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L33)
 
 ___
 
@@ -116,9 +116,9 @@ Name | Type |
 
 **Returns:** *Element*
 
-Defined in: [components/List/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L62)
+Defined in: [client/components/List/types/IListColumnData.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L53)
 
-Defined in: [components/List/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L62)
+Defined in: [client/components/List/types/IListColumnData.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L53)
 
 ___
 
@@ -128,4 +128,4 @@ ___
 
 Optional sub text
 
-Defined in: [components/List/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L27)
+Defined in: [client/components/List/types/IListColumnData.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumnData.ts#L18)

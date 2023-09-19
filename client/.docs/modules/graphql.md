@@ -8,10 +8,6 @@ GraphQL
 
 ## Table of contents
 
-### References
-
-- [$usercontext](graphql.md#$usercontext)
-
 ### GraphQL Interfaces
 
 - [IBaseResult](../interfaces/graphql.ibaseresult.md)
@@ -20,12 +16,6 @@ GraphQL
 ### Variables
 
 - [client](graphql.md#client)
-
-## References
-
-### $usercontext
-
-Renames and exports: [default\_query](pages.md#default_query)
 
 ## Variables
 
@@ -39,4 +29,4 @@ Defines our [Apollo Client](https://www.apollographql.com/docs/react/)
 * Using url `/graphql`
 * Using `cache-and-network` as default `fetchPolicy`
 
-Defined in: [graphql/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L41)
+Defined in: [client/graphql/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L41)

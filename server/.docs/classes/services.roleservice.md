@@ -80,7 +80,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*Role*](graphql.role.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -106,7 +106,7 @@ Inherited from: void
 
 ### addRole
 
-▸ **addRole**(`role`: [*Role*](graphql.role.md)): *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+▸ **addRole**(`role`: [*Role*](graphql.role.md)): *Promise*<any\>
 
 Add role
 
@@ -116,7 +116,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `role` | [*Role*](graphql.role.md) | Role    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/role.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L58)
 
@@ -142,7 +142,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*Role*](graphql.role.md)\>, `sort?`: S): *Promise*<[*Role*](graphql.role.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*Role*](graphql.role.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -158,7 +158,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Role*](graphql.role.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
@@ -189,7 +189,7 @@ ___
 
 ### getRoles
 
-▸ **getRoles**(`query?`: *FilterQuery*<[*Role*](graphql.role.md)\>): *Promise*<[*Role*](graphql.role.md)[]\>
+▸ **getRoles**(`query?`: *any*): *Promise*<[*Role*](graphql.role.md)[]\>
 
 Get roles
 
@@ -197,7 +197,7 @@ Get roles
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*Role*](graphql.role.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
@@ -207,7 +207,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -219,7 +219,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -229,7 +229,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -243,7 +243,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -253,7 +253,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*Role*](graphql.role.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -263,10 +263,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Role*](graphql.role.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 

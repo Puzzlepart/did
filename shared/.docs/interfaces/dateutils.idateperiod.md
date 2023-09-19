@@ -4,14 +4,18 @@
 
 [DateUtils](../modules/dateutils.md).IDatePeriod
 
+Represents a period of time with a start and end date.
+
 ## Table of contents
 
 ### Properties
 
 - [endDate](dateutils.idateperiod.md#enddate)
 - [id](dateutils.idateperiod.md#id)
+- [monthName](dateutils.idateperiod.md#monthname)
 - [name](dateutils.idateperiod.md#name)
 - [startDate](dateutils.idateperiod.md#startdate)
+- [weekNumber](dateutils.idateperiod.md#weeknumber)
 
 ## Properties
 
@@ -19,7 +23,9 @@
 
 • **endDate**: [*DateObject*](../classes/dateutils.dateobject.md)
 
-Defined in: [shared/utils/DateObject.ts:16](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L16)
+The end date of the period.
+
+Defined in: [shared/utils/DateObject.ts:34](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L34)
 
 ___
 
@@ -27,7 +33,19 @@ ___
 
 • **id**: *string*
 
-Defined in: [shared/utils/DateObject.ts:13](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L13)
+The unique identifier for the period.
+
+Defined in: [shared/utils/DateObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L19)
+
+___
+
+### monthName
+
+• `Optional` **monthName**: *string*
+
+The name of the month for the start date of the period.
+
+Defined in: [shared/utils/DateObject.ts:39](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L39)
 
 ___
 
@@ -35,7 +53,9 @@ ___
 
 • **name**: *string*
 
-Defined in: [shared/utils/DateObject.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L14)
+The name of the period.
+
+Defined in: [shared/utils/DateObject.ts:24](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L24)
 
 ___
 
@@ -43,4 +63,16 @@ ___
 
 • **startDate**: [*DateObject*](../classes/dateutils.dateobject.md)
 
-Defined in: [shared/utils/DateObject.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L15)
+The start date of the period.
+
+Defined in: [shared/utils/DateObject.ts:29](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L29)
+
+___
+
+### weekNumber
+
+• `Optional` **weekNumber**: *number*
+
+The week number for the start date of the period.
+
+Defined in: [shared/utils/DateObject.ts:44](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L44)

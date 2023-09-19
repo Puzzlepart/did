@@ -19,7 +19,7 @@
 
 • **items**: [*IFilterItem*](components.ifilteritem.md)[]
 
-Defined in: [components/FilterPanel/Filters/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L15)
+Defined in: [client/components/FilterPanel/Filters/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L15)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **key**: *string*
 
-Defined in: [components/FilterPanel/Filters/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L13)
+Defined in: [client/components/FilterPanel/Filters/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L13)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [components/FilterPanel/Filters/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L14)
+Defined in: [client/components/FilterPanel/Filters/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L14)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **selected**: [*IFilterItem*](components.ifilteritem.md)[]
 
-Defined in: [components/FilterPanel/Filters/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L16)
+Defined in: [client/components/FilterPanel/Filters/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/types.ts#L16)

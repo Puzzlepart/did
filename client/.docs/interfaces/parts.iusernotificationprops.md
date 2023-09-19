@@ -16,4 +16,4 @@
 
 • **model**: [*NotificationModel*](../classes/parts.notificationmodel.md)
 
-Defined in: [parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx#L4)
+Defined in: [client/parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/NotificationsPanel/UserNotification/types.tsx#L4)

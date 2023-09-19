@@ -9,9 +9,16 @@
 ### Variables
 
 - [defaultProps](pages.timesheet.md#defaultprops)
+- [displayName](pages.timesheet.md#displayname)
 
 ## Variables
 
 ### defaultProps
 
 • **defaultProps**: *Partial*<{}\>
+
+___
+
+### displayName
+
+• **displayName**: *string*

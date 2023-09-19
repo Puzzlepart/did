@@ -4,6 +4,8 @@
 
 [GraphQL](../modules/graphql.md).ApiToken
 
+A type that describes an API token.
+
 ## Table of contents
 
 ### Constructors
@@ -14,6 +16,7 @@
 
 - [apiKey](graphql.apitoken.md#apikey)
 - [created](graphql.apitoken.md#created)
+- [description](graphql.apitoken.md#description)
 - [expires](graphql.apitoken.md#expires)
 - [name](graphql.apitoken.md#name)
 - [permissions](graphql.apitoken.md#permissions)
@@ -33,7 +36,9 @@
 
 • `Optional` **apiKey**: *string*
 
-Defined in: [graphql/resolvers/apiToken/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L25)
+The secret API key associated with the API token.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L50)
 
 ___
 
@@ -41,7 +46,19 @@ ___
 
 • `Optional` **created**: Date
 
-Defined in: [graphql/resolvers/apiToken/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L17)
+The date when the API token was created.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L32)
+
+___
+
+### description
+
+• **description**: *string*
+
+The description of the API token.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L26)
 
 ___
 
@@ -49,7 +66,9 @@ ___
 
 • **expires**: Date
 
-Defined in: [graphql/resolvers/apiToken/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L20)
+The date when the API token expires.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L38)
 
 ___
 
@@ -57,7 +76,9 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/apiToken/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L14)
+The name of the API token.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L20)
 
 ___
 
@@ -65,7 +86,9 @@ ___
 
 • **permissions**: *string*[]
 
-Defined in: [graphql/resolvers/apiToken/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L23)
+An array of permissions associated with the API token.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L44)
 
 ___
 
@@ -73,4 +96,6 @@ ___
 
 • `Optional` **subscriptionId**: *string*
 
-Defined in: [graphql/resolvers/apiToken/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L26)
+The subscription ID associated with the API token.
+
+Defined in: [graphql/resolvers/apiToken/types.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L55)

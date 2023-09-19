@@ -80,7 +80,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*ReportLink*](graphql.reportlink.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -124,7 +124,7 @@ ___
 
 ### addReportLink
 
-▸ **addReportLink**(`reportLink`: [*ReportLink*](graphql.reportlink.md)): *Promise*<InsertOneWriteOpResult<WithId<[*ReportLink*](graphql.reportlink.md)\>\>\>
+▸ **addReportLink**(`reportLink`: [*ReportLink*](graphql.reportlink.md)): *Promise*<any\>
 
 Add report link
 
@@ -134,7 +134,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `reportLink` | [*ReportLink*](graphql.reportlink.md) | Report link    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*ReportLink*](graphql.reportlink.md)\>\>\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/reportLink.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reportLink.ts#L60)
 
@@ -142,7 +142,7 @@ ___
 
 ### deleteReportLink
 
-▸ **deleteReportLink**(`name`: *string*): *Promise*<DeleteWriteOpResultObject\>
+▸ **deleteReportLink**(`name`: *string*): *Promise*<any\>
 
 Delete report link by name
 
@@ -152,7 +152,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `name` | *string* | Name    |
 
-**Returns:** *Promise*<DeleteWriteOpResultObject\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/reportLink.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reportLink.ts#L96)
 
@@ -160,7 +160,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*ReportLink*](graphql.reportlink.md)\>, `sort?`: S): *Promise*<[*ReportLink*](graphql.reportlink.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*ReportLink*](graphql.reportlink.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -176,7 +176,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*ReportLink*](graphql.reportlink.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*ReportLink*](graphql.reportlink.md)[]\>
@@ -189,7 +189,7 @@ ___
 
 ### getReportLinks
 
-▸ **getReportLinks**(`query?`: *FilterQuery*<[*ReportLink*](graphql.reportlink.md)\>): *Promise*<[*ReportLink*](graphql.reportlink.md)[]\>
+▸ **getReportLinks**(`query?`: *any*): *Promise*<[*ReportLink*](graphql.reportlink.md)[]\>
 
 Get report links using the specified query.
 
@@ -197,7 +197,7 @@ Get report links using the specified query.
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*ReportLink*](graphql.reportlink.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<[*ReportLink*](graphql.reportlink.md)[]\>
 
@@ -207,7 +207,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*ReportLink*](graphql.reportlink.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -219,7 +219,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*ReportLink*](graphql.reportlink.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -229,7 +229,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*ReportLink*](graphql.reportlink.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -243,7 +243,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*ReportLink*](graphql.reportlink.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -253,7 +253,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*ReportLink*](graphql.reportlink.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -263,10 +263,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*ReportLink*](graphql.reportlink.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 

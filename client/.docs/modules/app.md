@@ -34,7 +34,7 @@ The App component
 
 App
 
-Defined in: [app/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L18)
+Defined in: [client/app/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L17)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Const` **AppContext**: *Context*<[*IAppContext*](../interfaces/app.iappcontext.md)\>
 
-Defined in: [app/context.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L41)
+Defined in: [client/app/context.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L41)
 
 ## Functions
 
@@ -60,4 +60,4 @@ Uses `useContext` with `AppContext`
 
 `IAppContext`
 
-Defined in: [app/context.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L50)
+Defined in: [client/app/context.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/app/context.ts#L50)

@@ -6,13 +6,20 @@ Reusable React Hooks
 
 ## Table of contents
 
+### Interfaces
+
+- [TypedMap](../interfaces/hooks.typedmap.md)
+
 ### Type aliases
 
+- [ComponentLogicHook](hooks.md#componentlogichook)
 - [UseUpdateUserConfigurationParamType](hooks.md#useupdateuserconfigurationparamtype)
 - [UseUpdateUserConfigurationReturnType](hooks.md#useupdateuserconfigurationreturntype)
 
 ### Other Functions
 
+- [useBreadcrumb](hooks.md#usebreadcrumb)
+- [useReduxReducer](hooks.md#usereduxreducer)
 - [useTimesheetPeriods](hooks.md#usetimesheetperiods)
 
 ### React Hook Functions
@@ -28,6 +35,37 @@ Reusable React Hooks
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
 
 ## Type aliases
+
+### ComponentLogicHook
+
+Ƭ **ComponentLogicHook**<TProps, TReturnType\>: (`props?`: TProps) => TReturnType
+
+A function that takes in props of type `TProps` and returns a value of type `TReturnType`.
+This function is typically used to encapsulate logic for a component to separate it from the
+rendering logic.
+
+#### Type parameters:
+
+Name | Default | Description |
+:------ | :------ | :------ |
+`TProps` | {} | The type of the props object passed to the hook.   |
+`TReturnType` | *any* | The type of the value returned by the hook.    |
+
+#### Type declaration:
+
+▸ (`props?`: TProps): TReturnType
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`props?` | TProps |
+
+**Returns:** TReturnType
+
+Defined in: [client/hooks/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/hooks/types.ts#L10)
+
+___
 
 ### UseUpdateUserConfigurationParamType
 
@@ -46,7 +84,7 @@ Name | Type |
 `autoUpdate`? | *boolean* |
 `config`? | T |
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L7)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L7)
 
 ___
 
@@ -63,9 +101,56 @@ Name | Type |
 `updatePreferredLanguage`? | (`preferredLanguage`: *string*) => *Promise*<void\> |
 `updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L12)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L12)
 
 ## Other Functions
+
+### useBreadcrumb
+
+▸ **useBreadcrumb**(`items`: IBreadcrumbProps[*items*]): *IBreadcrumbProps*
+
+Returns a memoized `IBreadcrumbProps` object with the provided `items` array.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`items` | IBreadcrumbProps[*items*] | An array of `IBreadcrumbItem` objects to display in the breadcrumb.    |
+
+**Returns:** *IBreadcrumbProps*
+
+A memoized `IBreadcrumbProps` object with the provided `items` array.
+
+Defined in: [client/hooks/useBreadcrumb.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/useBreadcrumb.ts#L11)
+
+___
+
+### useReduxReducer
+
+▸ `Const`**useReduxReducer**<S\>(`initialState`: S, `builderCallback`: *BuilderCallback*<S\>): [S, *Dispatch*<AnyAction\>]
+
+A custom hook that uses React's useReducer hook with `@reduxjs/toolkit`'s createReducer function.
+
+#### Type parameters:
+
+Name | Default | Description |
+:------ | :------ | :------ |
+`S` | *any* | The type of the state object.   |
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`initialState` | S | The initial state of the reducer.   |
+`builderCallback` | *BuilderCallback*<S\> | A function that takes a reducer and returns a new reducer with additional functionality.    |
+
+**Returns:** [S, *Dispatch*<AnyAction\>]
+
+A tuple containing the current state and a dispatch function to update the state.
+
+Defined in: [client/hooks/useReduxReducer.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/hooks/useReduxReducer.ts#L25)
+
+___
 
 ### useTimesheetPeriods
 
@@ -90,7 +175,7 @@ Name | Type |
 
 Timesheet periods for a number of weeks in the past
 
-Defined in: [hooks/common/useTimesheetPeriods.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useTimesheetPeriods.ts#L12)
+Defined in: [client/hooks/common/useTimesheetPeriods.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useTimesheetPeriods.ts#L12)
 
 ___
 
@@ -118,7 +203,7 @@ Name | Type |
 
 **Returns:** readonly [T[], (`item`: T) => *void*, (`item`: T) => *boolean*]
 
-Defined in: [hooks/common/useArray.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L11)
+Defined in: [client/hooks/common/useArray.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useArray.ts#L11)
 
 ___
 
@@ -146,7 +231,7 @@ Name | Type |
 
 **Returns:** readonly [T, (`value`: *any*) => *void*, () => *void*]
 
-Defined in: [hooks/browserStorage/useBrowserStorage.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L13)
+Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L13)
 
 ___
 
@@ -168,26 +253,32 @@ Name | Type |
 :------ | :------ |
 `onExport` | () => *Promise*<void\> |
 
-Defined in: [hooks/excel/useExcelExport.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L19)
+Defined in: [client/hooks/excel/useExcelExport.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L19)
 
 ___
 
 ### useFabricIcons
 
-▸ **useFabricIcons**(): [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
+▸ **useFabricIcons**(`includeFluentIcons?`: *boolean*): [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
 
 Returns all icons from [@uifabric/icons](https://www.npmjs.com/package/@uifabric/icons)
 as an array of `ISuggestionItem`
 
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`includeFluentIcons` | *boolean* | false | Whether to include Fluent UI 2 icons.    |
+
 **Returns:** [*ISuggestionItem*](../interfaces/components.isuggestionitem.md)[]
 
-Defined in: [hooks/common/useFabricIcons.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L12)
+Defined in: [client/hooks/common/useFabricIcons.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useFabricIcons.ts#L15)
 
 ___
 
 ### useMap
 
-▸ **useMap**<KeyType, ObjectType, ValueType\>(`map?`: *Map*<any, any\>): *object*
+▸ **useMap**<KeyType, ObjectType, ValueType\>(`initialMap?`: *Map*<any, any\>): [*TypedMap*](../interfaces/hooks.typedmap.md)<KeyType, ObjectType, ValueType\>
 
 Hook for using a `Map` as a state object. A set of
 functions are returned for setting the map, setting
@@ -207,25 +298,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`map` | *Map*<any, any\> | Intitial map    |
+`initialMap` | *Map*<any, any\> | Intitial map    |
 
-**Returns:** *object*
+**Returns:** [*TypedMap*](../interfaces/hooks.typedmap.md)<KeyType, ObjectType, ValueType\>
 
-Name | Type |
-:------ | :------ |
-`$` | ObjectType |
-`$set` | *Dispatch*<SetStateAction<Map<KeyType, ValueType\>\>\> |
-`reset` | () => *void* |
-`set` | (`key`: KeyType, `value`: ValueType) => *void* |
-`value` | <T\>(`key`: KeyType, `\_defaultValue`: T) => T |
-
-a `$set` function to set the map, a `set´
+A `TypedMap` with a `$set` function to set the map, a `set´
 function to set a key on the map, a `value`function
 to return the value of the specified key, a `$` object
 that is a object representation of the map and a `reset`
-function for clearing the map.
+function for clearing the map. Also a `isSet` function
+to check if all the specified keys have a non-blank value.
 
-Defined in: [hooks/common/useMap.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L20)
+Defined in: [client/hooks/common/useMap.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L22)
 
 ___
 
@@ -244,7 +328,7 @@ Name | Type |
 
 **Returns:** NotificationsQuery
 
-Defined in: [hooks/notifications/useNotificationsQuery.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L27)
+Defined in: [client/hooks/notifications/useNotificationsQuery.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L27)
 
 ___
 
@@ -260,7 +344,7 @@ has the specified permission.
 
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
-`scopeIds?` | *string*[] | - | Limit the returns permissions to the specified ids   |
+`scopeIds?` | *string*[] | - | Limit the returns permissions to the specified Ids   |
 `api` | *boolean* | false | Only return permissions available to be called externally    |
 
 **Returns:** UsePermissionsReturnType
@@ -269,7 +353,7 @@ Permissions available based on specified `permissionIds`
 and a function `hasPermission` that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [hooks/user/usePermissions.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L27)
+Defined in: [client/hooks/user/usePermissions.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L26)
 
 ___
 
@@ -290,7 +374,7 @@ Name | Type | Default value |
 
 **Returns:** [*boolean*, DispatchWithoutAction]
 
-Defined in: [hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
+Defined in: [client/hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
 
 ___
 
@@ -318,4 +402,4 @@ Name | Type | Description |
 
 **Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [hooks/user/useUpdateUserConfiguration.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L36)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L36)

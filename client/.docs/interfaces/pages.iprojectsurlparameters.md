@@ -9,7 +9,7 @@
 ### Properties
 
 - [currentTab](pages.iprojectsurlparameters.md#currenttab)
-- [projectKey](pages.iprojectsurlparameters.md#projectkey)
+- [detailsTab](pages.iprojectsurlparameters.md#detailstab)
 
 ## Properties
 
@@ -17,12 +17,12 @@
 
 • **currentTab**: ProjectsTab
 
-Defined in: [pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)
+Defined in: [client/pages/Projects/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L8)
 
 ___
 
-### projectKey
+### detailsTab
 
-• **projectKey**: *string*
+• **detailsTab**: *string*
 
-Defined in: [pages/Projects/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L8)
+Defined in: [client/pages/Projects/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/types.tsx#L9)

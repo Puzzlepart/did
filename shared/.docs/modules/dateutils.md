@@ -45,7 +45,7 @@ the client and the server.
 
 Ƭ **DateInput**: [*ConfigType*](dateutils._dayjs.md#configtype)
 
-Defined in: [shared/utils/date.ts:27](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L27)
+Defined in: [shared/utils/date.ts:28](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L28)
 
 ___
 

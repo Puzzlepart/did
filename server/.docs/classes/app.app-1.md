@@ -67,7 +67,7 @@ Defined in: [app.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/app.ts
 
 ### \_mcl
 
-• `Private` **\_mcl**: *MongoClient*
+• `Private` **\_mcl**: *any*
 
 Mongo client
 

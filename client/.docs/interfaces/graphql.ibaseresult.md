@@ -18,7 +18,7 @@
 
 • **data**: *string*
 
-Defined in: [graphql/index.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L31)
+Defined in: [client/graphql/index.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L31)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **error**: [*IError*](graphql.ierror.md)
 
-Defined in: [graphql/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L30)
+Defined in: [client/graphql/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L30)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 • **success**: *boolean*
 
-Defined in: [graphql/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L29)
+Defined in: [client/graphql/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/graphql/index.ts#L29)

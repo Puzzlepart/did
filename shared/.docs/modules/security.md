@@ -13,7 +13,7 @@ both the client and the server.
 
 ### Interfaces
 
-- [IPermission](../interfaces/security.ipermission.md)
+- [IPermissionInfo](../interfaces/security.ipermissioninfo.md)
 
 ### Functions
 
@@ -23,11 +23,12 @@ both the client and the server.
 
 ### getPermissions
 
-▸ **getPermissions**(`t`: TFunction): [*IPermission*](../interfaces/security.ipermission.md)[]
+▸ `Const`**getPermissions**(`t`: TFunction): *Record*<string, [*IPermissionInfo*](../interfaces/security.ipermissioninfo.md)\>
 
-Get permissions
+Get all permissions available in the system.
 
-Specifiy translate function for i18n
+Need to provide `t`(translate function) since this is not
+a React hook or component.
 
 #### Parameters:
 
@@ -35,6 +36,6 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `t` | TFunction | Translate funcion    |
 
-**Returns:** [*IPermission*](../interfaces/security.ipermission.md)[]
+**Returns:** *Record*<string, [*IPermissionInfo*](../interfaces/security.ipermissioninfo.md)\>
 
-Defined in: [shared/config/security/permissions.ts:61](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L61)
+Defined in: [shared/config/security/permissions.ts:12](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L12)

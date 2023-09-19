@@ -12,6 +12,7 @@
 
 ### Properties
 
+- [iconName](graphql.notification.md#iconname)
 - [id](graphql.notification.md#id)
 - [moreLink](graphql.notification.md#morelink)
 - [severity](graphql.notification.md#severity)
@@ -27,6 +28,14 @@
 **Returns:** [*Notification*](graphql.notification.md)
 
 ## Properties
+
+### iconName
+
+• `Optional` **iconName**: *string*
+
+Defined in: [graphql/resolvers/notification/types.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L75)
+
+___
 
 ### id
 

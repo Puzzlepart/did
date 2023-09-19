@@ -4,17 +4,18 @@
 
 [Pages](../modules/pages.md).IProjectsContext
 
+## Hierarchy
+
+* *Partial*<QueryResult<{ `outlookCategories`: OutlookCategory[] ; `projects`: Project[]  }\>\>
+
+  ↳ **IProjectsContext**
+
 ## Table of contents
 
 ### Properties
 
 - [dispatch](pages.iprojectscontext.md#dispatch)
-- [loading](pages.iprojectscontext.md#loading)
 - [state](pages.iprojectscontext.md#state)
-
-### Methods
-
-- [refetch](pages.iprojectscontext.md#refetch)
 
 ## Properties
 
@@ -22,15 +23,7 @@
 
 • **dispatch**: *Dispatch*<AnyAction\>
 
-Defined in: [pages/Projects/context.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L11)
-
-___
-
-### loading
-
-• **loading**: *boolean*
-
-Defined in: [pages/Projects/context.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L13)
+Defined in: [client/pages/Projects/context.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L18)
 
 ___
 
@@ -38,20 +31,4 @@ ___
 
 • **state**: [*IProjectsState*](pages.iprojectsstate.md)
 
-Defined in: [pages/Projects/context.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L10)
-
-## Methods
-
-### refetch
-
-▸ **refetch**(`variables?`: *any*): *Promise*<ApolloQueryResult<any\>\>
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`variables?` | *any* |
-
-**Returns:** *Promise*<ApolloQueryResult<any\>\>
-
-Defined in: [pages/Projects/context.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L12)
+Defined in: [client/pages/Projects/context.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/context.tsx#L17)

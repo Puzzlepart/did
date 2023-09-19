@@ -10,18 +10,18 @@
 
 - [columns](pages.ireportscontext.md#columns)
 - [dispatch](pages.ireportscontext.md#dispatch)
+- [queries](pages.ireportscontext.md#queries)
 - [state](pages.ireportscontext.md#state)
-- [t](pages.ireportscontext.md#t)
 
 ## Properties
 
 ### columns
 
-• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<any\>[]
 
 Columns
 
-Defined in: [pages/Reports/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L24)
+Defined in: [client/pages/Reports/context.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L23)
 
 ___
 
@@ -31,7 +31,17 @@ ___
 
 Dispatch an action
 
-Defined in: [pages/Reports/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L19)
+Defined in: [client/pages/Reports/context.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L18)
+
+___
+
+### queries
+
+• **queries**: [*IReportsQuery*](pages.ireportsquery.md)[]
+
+Queries for the reports
+
+Defined in: [client/pages/Reports/context.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L28)
 
 ___
 
@@ -41,14 +51,4 @@ ___
 
 State
 
-Defined in: [pages/Reports/context.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L14)
-
-___
-
-### t
-
-• **t**: TFunction
-
-Translate function
-
-Defined in: [pages/Reports/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L29)
+Defined in: [client/pages/Reports/context.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L13)

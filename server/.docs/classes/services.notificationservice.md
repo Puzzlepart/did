@@ -38,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationService*](services.notificationservice.md)
 
-Defined in: [services/notification/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L20)
+Defined in: [services/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L21)
 
 ## Methods
 
@@ -57,7 +57,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ForecastNotification[]\>
 
-Defined in: [services/notification/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L95)
+Defined in: [services/notification/index.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L102)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 ▸ `Private`**_getPeriods**(`add`: *string*, `count`: *number*, `locale`: *string*): *any*[]
 
-Get Timesheet periods for the next {count} weeks with the given {add} value.
+Get Timesheet periods for the next/previous {count} weeks/months with the given {add} value.
 
 #### Parameters:
 
@@ -77,26 +77,28 @@ Name | Type | Description |
 
 **Returns:** *any*[]
 
-Defined in: [services/notification/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L43)
+Defined in: [services/notification/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L44)
 
 ___
 
 ### \_unconfirmedPeriods
 
-▸ `Private`**_unconfirmedPeriods**(`template`: *string*, `locale`: *string*): *Promise*<UnconfirmedPeriodNotification[]\>
+▸ `Private`**_unconfirmedPeriods**(`template`: *string*, `locale`: *string*, `weeks?`: *number*): *Promise*<UnconfirmedPeriodNotification[]\>
 
-Get unconfirmed periods notifications
+Get unconfirmed periods notifications for the previous {count} weeks. Passing
+-1w as {add} to `_getPeriods` will return the previous weeks.
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`template` | *string* | Notification template   |
-`locale` | *string* | Locale    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`template` | *string* | - | Notification template   |
+`locale` | *string* | - | Locale of the user   |
+`weeks` | *number* | 5 | Number of weeks (default: 5)    |
 
 **Returns:** *Promise*<UnconfirmedPeriodNotification[]\>
 
-Defined in: [services/notification/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L68)
+Defined in: [services/notification/index.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L71)
 
 ___
 
@@ -115,4 +117,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<(UnconfirmedPeriodNotification \| ForecastNotification)[]\>
 
-Defined in: [services/notification/index.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L132)
+Defined in: [services/notification/index.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L139)

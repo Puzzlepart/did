@@ -22,4 +22,4 @@
 
 • **label**: *LabelObject* \| *LabelInput*
 
-Defined in: [components/EntityLabel/types.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.ts#L8)
+Defined in: [client/components/EntityLabel/types.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/types.ts#L8)

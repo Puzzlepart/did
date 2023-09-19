@@ -20,7 +20,7 @@
 
 • `Optional` **emptyGroupName**: *string*
 
-Defined in: [components/List/types.ts:240](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L240)
+Defined in: [client/components/List/types/IListGroupProps.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L9)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **fieldName**: *string*
 
-Defined in: [components/List/types.ts:237](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L237)
+Defined in: [client/components/List/types/IListGroupProps.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L6)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 • `Optional` **groupData**: *any*[]
 
-Defined in: [components/List/types.ts:239](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L239)
+Defined in: [client/components/List/types/IListGroupProps.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L8)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Optional` **groupNames**: *string*[]
 
-Defined in: [components/List/types.ts:238](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L238)
+Defined in: [client/components/List/types/IListGroupProps.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L7)
 
 ___
 
@@ -64,6 +64,6 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [components/List/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L241)
+Defined in: [client/components/List/types/IListGroupProps.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L10)
 
-Defined in: [components/List/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L241)
+Defined in: [client/components/List/types/IListGroupProps.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L10)
