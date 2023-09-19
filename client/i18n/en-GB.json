@@ -29,7 +29,7 @@
     "ignoreEventButtonLabel": "Ignore",
     "clearProjectMatchTooltipText": "Clear match",
     "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
-    "didYouMeanText": "Did you mean",
+    "didYouMeanText": "Did you mean <Link>{{tag}}</Link>?",
     "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key.",
     "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",

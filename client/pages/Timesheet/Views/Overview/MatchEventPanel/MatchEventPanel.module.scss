@@ -1,7 +1,6 @@
 .matchEventPanel {
   padding: 15px 0 0 0;
-
-  .searchProject {
-    margin: 14px 0 0 0;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

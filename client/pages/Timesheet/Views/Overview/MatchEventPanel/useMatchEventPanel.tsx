@@ -1,4 +1,4 @@
-import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
+import { ITimesheetContext, TimesheetContext } from '../../../context'
 import {
   MANUAL_MATCH,
   TOGGLE_MANUAL_MATCH_PANEL
@@ -17,7 +17,8 @@ import { EventObject, Project } from 'types'
  */
 export function useMatchEventPanel() {
   const { state, dispatch } = useContext<ITimesheetContext>(TimesheetContext)
-
+  const event = state.eventToMatch ?? ({} as EventObject)
+  
   /**
    * On manual match. Dispatches action type MANUAL_MATCH
    *
@@ -40,7 +41,7 @@ export function useMatchEventPanel() {
   return {
     isOpen: !!state.eventToMatch,
     onDismiss,
-    event: state.eventToMatch ?? ({} as EventObject),
+    event,
     onMatch
   }
 }

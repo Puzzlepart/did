@@ -1,9 +1,9 @@
-import { Link } from '@fluentui/react-components'
 import { BasePanel, SearchProject, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import styles from './MatchEventPanel.module.scss'
+import { SuggestedProjectMessage } from './SuggestedProjectMessage/SuggestedProjectMessage'
 import { useMatchEventPanel } from './useMatchEventPanel'
 
 /**
@@ -22,14 +22,7 @@ export const MatchEventPanel: StyledComponent = () => {
     >
       <div className={styles.matchEventPanel}>
         <UserMessage text={t('timesheet.matchOutlookInfoText', event)} />
-        <UserMessage hidden={!event.suggestedProject}>
-          <p>
-            <span>{t('timesheet.didYouMeanText')}</span>
-            <Link onClick={() => onMatch(event.suggestedProject)}>
-              {event.suggestedProject?.tag}
-            </Link>
-          </p>
-        </UserMessage>
+        <SuggestedProjectMessage eventId={event.id} project={event.suggestedProject} />
         <UserMessage
           hidden={!event.customer || !!event.suggestedProject}
           text={t('timesheet.eventNotFullyMatchedText', {
@@ -37,7 +30,6 @@ export const MatchEventPanel: StyledComponent = () => {
           })}
         />
         <SearchProject
-          className={styles.searchProject}
           width='100%'
           onSelected={(project) => onMatch(project)}
           placeholder={t('timesheet.matchEventPanelSearchPlaceholder')}

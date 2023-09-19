@@ -29,7 +29,7 @@
     "ignoreEventButtonLabel": "Ignorer",
     "clearProjectMatchTooltipText": "Fjern match",
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>kalenderoppføringa i Outlook</a> blir tilkobla et prosjekt automatisk. I nokre tilfelle kan det likevel vere nødvendig å løyse kalenderoppføringa manuelt.",
-    "didYouMeanText": "Meinte du",
+    "didYouMeanText": "Meinte du <Link>{{tag}}</Link>?",
     "eventNotFullyMatchedText": "Kalenderoppføringa kunne ikkje matchast. Vi fann matchande kunde **{{name}}**, men ikkje noko prosjekt med den spesifiserte nøkkelen.",
     "unforecastHoursText": "Fjern prognose",
     "forecastHoursText": "Lagre prognose",

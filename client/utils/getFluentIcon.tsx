@@ -81,6 +81,8 @@ import {
   Key24Regular,
   KeyMultiple24Filled,
   KeyMultiple24Regular,
+  Lightbulb24Filled,
+  Lightbulb24Regular,
   LinkEdit24Filled,
   LinkEdit24Regular,
   ListBarFilled,
@@ -130,12 +132,16 @@ import {
   WebAsset24Filled,
   WebAsset24Regular
 } from '@fluentui/react-icons'
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Lightbulb: {
+    regular: Lightbulb24Regular,
+    filled: Lightbulb24Filled
+  },
   ListBar: {
     regular: ListBarRegular,
     filled: ListBarFilled
@@ -405,19 +411,29 @@ export type FluentIconName = keyof typeof iconCatalog
  * @param name - The name of the icon to retrieve.
  * @param bundle - Whether to bundle the filled and regular versions of the icon. Defaults to true.
  * @param color - The color to apply to the icon.
+ * @param size - The size of the icon.
  *
  * @returns The specified Fluent icon.
  */
 export function getFluentIcon(
   name: FluentIconName,
   bundle = true,
-  color?: string
+  color?: string,
+  size?: number
 ) {
   if (!iconCatalog[name]) return null
   const icon = iconCatalog[name]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
-  if (!color) return <Icon />
-  return <Icon style={{ color }} />
+  const props: { style?: CSSProperties } = {}
+  if (color) props.style = { color }
+  if (size) {
+    props.style = {
+      ...props.style,
+      width: size,
+      height: size
+    }
+  }
+  return <Icon {...props} />
 }
 
 /**
