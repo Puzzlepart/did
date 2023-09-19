@@ -84,7 +84,7 @@ ___
 
 • `Const` **MobileBreadcrumb**: *StyledComponent*<[*IMobileBreadcrumbProps*](../interfaces/parts.imobilebreadcrumbprops.md)\>
 
-Defined in: [client/parts/MobileBreadcrumb/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/index.tsx#L13)
+Defined in: [client/parts/MobileBreadcrumb/MobileBreadcrumb.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/parts/MobileBreadcrumb/MobileBreadcrumb.tsx#L13)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 • `Const` **UserMenu**: StyledComponent
 
-Defined in: [client/parts/UserMenu/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/index.tsx#L31)
+Defined in: [client/parts/UserMenu/UserMenu.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/UserMenu.tsx#L32)
 
 ___
 
