@@ -2,7 +2,7 @@ import { ApolloQueryResult, useQuery } from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'
-import { Dispatch, useLayoutEffect } from 'react'
+import { Dispatch, useEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'
 import { ITimesheetState } from '../types'
 import $timesheet from './timesheet.gql'
@@ -36,7 +36,7 @@ export function useTimesheetQuery(
   })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
   return query.refetch
 }
