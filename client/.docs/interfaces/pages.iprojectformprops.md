@@ -63,7 +63,7 @@ An optional description for the tab to display in the tab list header.
 
 Inherited from: void
 
-Defined in: [client/components/Tabs/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L72)
+Defined in: [client/components/Tabs/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L71)
 
 ___
 
@@ -87,7 +87,7 @@ Icon to display for the tab in the tab list header.
 
 Inherited from: void
 
-Defined in: [client/components/Tabs/types.ts:77](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L77)
+Defined in: [client/components/Tabs/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L76)
 
 ___
 
@@ -99,7 +99,7 @@ An optional ID for the tab.
 
 Inherited from: void
 
-Defined in: [client/components/Tabs/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L62)
+Defined in: [client/components/Tabs/types.ts:61](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L61)
 
 ___
 
@@ -136,7 +136,7 @@ Permission scope required to view the tab.
 
 Inherited from: void
 
-Defined in: [client/components/Tabs/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L82)
+Defined in: [client/components/Tabs/types.ts:81](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L81)
 
 ___
 
@@ -160,7 +160,7 @@ An optional text for the tab to display in the tab list header.
 
 Inherited from: void
 
-Defined in: [client/components/Tabs/types.ts:67](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L67)
+Defined in: [client/components/Tabs/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/client/components/Tabs/types.ts#L66)
 
 ___
 

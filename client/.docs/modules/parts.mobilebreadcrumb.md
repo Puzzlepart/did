@@ -9,9 +9,16 @@
 ### Variables
 
 - [className](parts.mobilebreadcrumb.md#classname)
+- [displayName](parts.mobilebreadcrumb.md#displayname)
 
 ## Variables
 
 ### className
 
 • **className**: *string*
+
+___
+
+### displayName
+
+• **displayName**: *string*
