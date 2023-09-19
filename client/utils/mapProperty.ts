@@ -8,5 +8,5 @@
  */
 export function mapProperty<T, R = any>(array: T[], property: keyof T): R[] {
   if (!array) return []
-  return array.map((item) => item[property]).filter(Boolean) as R[]
+  return array.map((item) => item[property]).filter(Boolean) as unknown as R[]
 }
