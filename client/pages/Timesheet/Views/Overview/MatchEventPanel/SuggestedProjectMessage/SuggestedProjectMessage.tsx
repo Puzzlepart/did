@@ -9,7 +9,7 @@ import { ISuggestedProjectMessageProps } from './types'
 
 /**
  * Component for displaying a message to the user when a suggested project is available.
- * 
+ *
  * @category Timesheet
  */
 export const SuggestedProjectMessage: StyledComponent<ISuggestedProjectMessageProps> =
