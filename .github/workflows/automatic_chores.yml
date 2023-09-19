@@ -20,9 +20,6 @@ jobs:
     name: Automatic chores
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[no ci]')"
-    concurrency: 
-      group: ${{ github.ref }}_automatic_chores
-      cancel-in-progress: true
     strategy:
       matrix:
         node-version: [18.12.0]

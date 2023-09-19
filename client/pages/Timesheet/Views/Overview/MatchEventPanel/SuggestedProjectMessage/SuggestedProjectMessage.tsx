@@ -7,6 +7,11 @@ import { MANUAL_MATCH } from '../../../..//reducer/actions'
 import { useTimesheetContext } from '../../../../context'
 import { ISuggestedProjectMessageProps } from './types'
 
+/**
+ * Component for displaying a message to the user when a suggested project is available.
+ * 
+ * @category Timesheet
+ */
 export const SuggestedProjectMessage: StyledComponent<ISuggestedProjectMessageProps> =
   ({ eventId, project: suggestedProject }) => {
     const context = useTimesheetContext()
