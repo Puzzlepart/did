@@ -1,15 +1,15 @@
 import { UserMessage } from 'components'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Trans } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { getFluentIcon } from 'utils'
 import { MANUAL_MATCH } from '../../../..//reducer/actions'
-import { TimesheetContext } from '../../../../context'
+import { useTimesheetContext } from '../../../../context'
 import { ISuggestedProjectMessageProps } from './types'
 
 export const SuggestedProjectMessage: StyledComponent<ISuggestedProjectMessageProps> =
   ({ eventId, project: suggestedProject }) => {
-    const context = useContext(TimesheetContext)
+    const context = useTimesheetContext()
     return (
       <UserMessage
         hidden={!suggestedProject}
