@@ -1,10 +1,10 @@
-import { ITimesheetContext, TimesheetContext } from '../../../context'
 import {
   MANUAL_MATCH,
   TOGGLE_MANUAL_MATCH_PANEL
 } from 'pages/Timesheet/reducer/actions'
 import { useCallback, useContext } from 'react'
 import { EventObject, Project } from 'types'
+import { ITimesheetContext, TimesheetContext } from '../../../context'
 
 /**
  * Hook that returns the necessary props and functions for the manual match panel.
@@ -18,7 +18,7 @@ import { EventObject, Project } from 'types'
 export function useMatchEventPanel() {
   const { state, dispatch } = useContext<ITimesheetContext>(TimesheetContext)
   const event = state.eventToMatch ?? ({} as EventObject)
-  
+
   /**
    * On manual match. Dispatches action type MANUAL_MATCH
    *

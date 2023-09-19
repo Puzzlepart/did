@@ -1,4 +1,5 @@
 import { IPanelProps } from '@fluentui/react'
+import { TextProps } from '@fluentui/react-components'
 import { IDynamicButtonProps } from 'components/DynamicButton'
 
 /**
@@ -6,11 +7,18 @@ import { IDynamicButtonProps } from 'components/DynamicButton'
  */
 export interface IBasePanelProps extends IPanelProps {
   /**
-   * Header sub text to display in the panel. This text will be
-   * displayed in a `<Caption1 />` component from `@fluentui/react-components`.
-   * Use this if you want to show more information about the panel.
+   * Header sub text to display in the panel. Use this
+   * if you want to show more information about the panel.
+   * Use `headerSubTextProps` to style the header sub text.
    */
   headerSubText?: string
+
+  /**
+   * Props for the header sub text.
+   *
+   * @default ```{ size: 400 }```
+   */
+  headerSubTextProps?: TextProps
 
   /**
    * Actions to display in the header of the panel.

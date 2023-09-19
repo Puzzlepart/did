@@ -1,9 +1,5 @@
 import { Panel } from '@fluentui/react'
-import {
-  Caption1,
-  FluentProvider,
-  webLightTheme
-} from '@fluentui/react-components'
+import { FluentProvider, Text, webLightTheme } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './BasePanel.module.scss'
@@ -21,17 +17,26 @@ export const BasePanel: ReusableComponent<IBasePanelProps> = (props) => {
   return (
     <Panel {...panelProps}>
       <FluentProvider theme={webLightTheme}>
-        {props.headerSubText && <Caption1>{props.headerSubText}</Caption1>}
+        {props.headerSubText && (
+          <Text {...props.headerSubTextProps} className={styles.headerSubText}>
+            {props.headerSubText}
+          </Text>
+        )}
         {props.children}
       </FluentProvider>
     </Panel>
   )
 }
 
+BasePanel.displayName = 'BasePanel'
 BasePanel.className = styles.basePanel
 BasePanel.defaultProps = {
   headerActions: [],
   footerActions: [],
   isLightDismiss: true,
-  scroll: false
+  scroll: false,
+  headerSubTextProps: {
+    size: 400,
+    block: true
+  }
 }

@@ -15,14 +15,16 @@ export const MatchEventPanel: StyledComponent = () => {
   return (
     <BasePanel
       isOpen={isOpen}
-      isLightDismiss={true}
       headerText={t('timesheet.matchEventPanelHeaderText')}
       headerSubText={event.title}
       onDismiss={onDismiss}
     >
       <div className={styles.matchEventPanel}>
         <UserMessage text={t('timesheet.matchOutlookInfoText', event)} />
-        <SuggestedProjectMessage eventId={event.id} project={event.suggestedProject} />
+        <SuggestedProjectMessage
+          eventId={event.id}
+          project={event.suggestedProject}
+        />
         <UserMessage
           hidden={!event.customer || !!event.suggestedProject}
           text={t('timesheet.eventNotFullyMatchedText', {
@@ -31,7 +33,7 @@ export const MatchEventPanel: StyledComponent = () => {
         />
         <SearchProject
           width='100%'
-          onSelected={(project) => onMatch(project)}
+          onSelected={onMatch}
           placeholder={t('timesheet.matchEventPanelSearchPlaceholder')}
           autoFocus
         />
