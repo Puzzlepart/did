@@ -32,17 +32,19 @@ function convertDateRangeTypeToString(dateRangeType: DateRangeType) {
 export function useTimesheetHistory(state: ITimesheetState) {
   const { t } = useTranslation()
   const history = useHistory()
-  const { dispatch } = useAppContext()
+  const appContext = useAppContext()
 
   /**
-   * Dispatches action `UPDATE_BREADCRUMB`
+   * Dispatches action `UPDATE_BREADCRUMB` to App reducer.
    */
   const onUpdateBreadcrumb = (text: string, level: number) =>
-    dispatch(
+    appContext.dispatch(
       UPDATE_BREADCRUMB({
-        key: text,
-        text,
-        level
+        item: {
+          key: text,
+          text,
+          level
+        }
       })
     )
 
