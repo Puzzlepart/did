@@ -9,7 +9,7 @@ import { IFieldLabelProps } from './types'
  */
 export const FieldLabel: StyledComponent<IFieldLabelProps> = (props) => {
   return (
-    <div className={FieldLabel.className}>
+    <div className={FieldLabel.className} hidden={props.hidden}>
       <Label
         className={styles.label}
         required={props.required}

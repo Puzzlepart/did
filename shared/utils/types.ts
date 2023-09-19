@@ -44,4 +44,4 @@ export type TimeSpanStringOptions = {
   includeTime?: string
 }
 
-export { DateObject }
+export { DateObject } from './DateObject'

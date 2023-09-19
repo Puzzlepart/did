@@ -1,10 +1,10 @@
-import { UserMessage } from 'components/UserMessage'
+import { EntityLabel, InformationProperty, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyledComponent } from 'types'
+import { LabelObject as Label, StyledComponent } from 'types'
+import _ from 'underscore'
 import { useCustomersContext } from '../../context'
 import styles from './CustomerInformation.module.scss'
-import { InformationProperty } from './InformationProperty'
 
 /**
  * Shows details about the selected customer.
@@ -13,20 +13,30 @@ import { InformationProperty } from './InformationProperty'
  */
 export const CustomerInformation: StyledComponent = () => {
   const { t } = useTranslation()
-  const { state } = useCustomersContext()
+  const context = useCustomersContext()
 
   return (
     <div className={CustomerInformation.className}>
       <UserMessage
-        className={styles.inactiveMessage}
-        hidden={!state.selected?.inactive}
+        hidden={!context.state.selected?.inactive}
         text={t('customers.inactiveText')}
         intent='warning'
       />
       <InformationProperty
         title={t('projects.tagLabel')}
-        value={state.selected?.key}
+        value={context.state.selected?.key}
+        isDataLoaded={!context.loading}
       />
+      {!_.isEmpty(context.state.selected?.labels) && (
+        <InformationProperty
+          title={t('common.labelsText')}
+          isDataLoaded={!context.loading}
+        >
+          {(context.state.selected?.labels as Label[]).map((label, index) => (
+            <EntityLabel key={index} label={label} />
+          ))}
+        </InformationProperty>
+      )}
     </div>
   )
 }

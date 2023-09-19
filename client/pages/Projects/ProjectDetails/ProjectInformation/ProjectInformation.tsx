@@ -1,10 +1,9 @@
-import { EntityLabel, UserMessage } from 'components'
+import { EntityLabel, InformationProperty, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import { useProjectsContext } from '../../context'
-import { InformationProperty } from './InformationProperty'
 import styles from './ProjectInformation.module.scss'
 
 /**
@@ -14,28 +13,32 @@ import styles from './ProjectInformation.module.scss'
  */
 export const ProjectInformation: StyledComponent = () => {
   const { t } = useTranslation()
-  const { state } = useProjectsContext()
+  const context = useProjectsContext()
 
   return (
     <div className={ProjectInformation.className}>
       <UserMessage
-        hidden={!state.selected?.inactive}
+        hidden={!context.state.selected?.inactive}
         text={t('projects.inactiveText')}
         intent='warning'
       />
       <InformationProperty
         title={t('projects.tagLabel')}
-        value={state.selected?.tag}
+        value={context.state.selected?.tag}
+        isDataLoaded={!context.loading}
       />
-      {!_.isEmpty(state.selected?.labels) && (
-        <InformationProperty title={t('admin.labels.headerText')}>
-          {(state.selected?.labels as Label[]).map((label, index) => (
+      {!_.isEmpty(context.state.selected?.labels) && (
+        <InformationProperty
+          title={t('common.labelsText')}
+          isDataLoaded={!context.loading}
+        >
+          {(context.state.selected?.labels as Label[]).map((label, index) => (
             <EntityLabel key={index} label={label} />
           ))}
         </InformationProperty>
       )}
       <UserMessage
-        hidden={!state.selected?.outlookCategory}
+        hidden={!context.state.selected?.outlookCategory}
         text={t('projects.categoryOutlookText')}
       />
     </div>

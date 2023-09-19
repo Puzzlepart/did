@@ -22,7 +22,7 @@ export const Admin: FC = () => {
           MissingSubmissions,
           t('admin.missingSubmissions.headerText')
         ],
-        labels: [Labels, t('admin.labels.headerText')],
+        labels: [Labels, t('common.labelsText')],
         rolespermissions: [
           RolesPermissions,
           t('admin.rolesPermissions.headerText')

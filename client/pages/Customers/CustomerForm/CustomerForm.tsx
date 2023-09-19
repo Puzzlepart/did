@@ -97,7 +97,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         required={true}
       />
       <LabelPickerControl
-        label={t('admin.labels.headerText')}
+        label={t('common.labelsText')}
         placeholder={t('projects.filterLabels')}
         noSelectionText={t('customers.noLabelsSelectedText')}
         defaultSelectedKeys={model.value('labels')}

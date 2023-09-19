@@ -125,16 +125,6 @@ export class Customer {
    */
   @Field(() => [Label])
   public labels?: Label[] | string[]
-
-  /**
-   * Creates a Customer object from a CustomerInput object
-   *
-   * @param input - Input object
-   */
-  public fromInput(input: CustomerInput): Customer {
-    Object.assign(this, input)
-    return this
-  }
 }
 
 /**

@@ -91,7 +91,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         hidden={!props.edit}
       />
       <LabelPickerControl
-        label={t('admin.labels.headerText')}
+        label={t('common.labelsText')}
         placeholder={t('common.filterLabels')}
         noSelectionText={t('projects.noLabelsSelectedText')}
         defaultSelectedKeys={model.value('labels')}

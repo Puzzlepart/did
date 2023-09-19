@@ -1,6 +1,7 @@
 import { useFormControlModel } from 'components'
 import { Project } from 'types'
 import _ from 'underscore'
+import { mapProperty } from 'utils'
 import { IProjectFormProps } from './types'
 
 /**
@@ -16,7 +17,7 @@ export function useProjectModel(props: IProjectFormProps) {
     _.omit(
       {
         ...p,
-        labels: p.labels ? p.labels.map((label) => label.name) : []
+        labels: mapProperty<any, string>(p.labels, 'name')
       },
       ['customer', 'tag']
     )

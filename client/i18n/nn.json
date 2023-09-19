@@ -176,7 +176,6 @@
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
       "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
-      "headerText": "Merkelappar",
       "nameLabel": "Namn på merkelapp",
       "namePlaceholder": "Namn på merkelapp",
       "nameDescription": "Namn på merkelapp. \nIngen spesialtegn. \nKun bokstavar og mellomrom.",
@@ -511,7 +510,8 @@
     "adUserLabel": "Brukar frå Active Directory",
     "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
     "labelFieldLabel": "Merkelappar",
-    "filterLabels": "Filtrer merkelappar..."
+    "filterLabels": "Filtrer merkelappar...",
+    "labelsText": "Merkelappar"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

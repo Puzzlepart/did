@@ -174,7 +174,6 @@
       "synchronizingUserProperties": "Synkroniserer brukeregenskaper..."
     },
     "labels": {
-      "headerText": "Merkelapper",
       "confirmDeleteTitle": "Slett merkelapp",
       "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
       "nameLabel": "Navn på merkelapp",
@@ -511,7 +510,8 @@
     "adUserLabel": "Bruker fra Active Directory",
     "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
     "labelFieldLabel": "Merkelapper",
-    "filterLabels": "Filtrer merkelapper..."
+    "filterLabels": "Filtrer merkelapper...",
+    "labelsText": "Merkelapper"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

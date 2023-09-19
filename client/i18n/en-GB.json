@@ -164,7 +164,6 @@
       "warningTooManyPermissions": "You've selected {{count}} permissions. We recommend not too be too greedy with permissions, but if you know what you're doing - sure."
     },
     "labels": {
-      "headerText": "Labels",
       "confirmDeleteTitle": "Delete label",
       "confirmDeleteSubText": "Are you sure you want to delete the label \"{{name}}\"?",
       "nameLabel": "Label name",
@@ -512,7 +511,8 @@
     "adUserLabel": "User from Active Directory",
     "adUserRequired": "You must select an Active Directory user to add.",
     "labelFieldLabel": "Labels",
-    "filterLabels": "Filter labels..."
+    "filterLabels": "Filter labels...",
+    "labelsText": "Labels"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
