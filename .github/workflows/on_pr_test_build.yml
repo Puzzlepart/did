@@ -14,6 +14,9 @@ jobs:
     name: Test build
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[no ci]')"
+    concurrency: 
+      group: ${{ github.ref }}_test_build
+      cancel-in-progress: true
     strategy:
       matrix:
         node-version: [18.12.0]
