@@ -27,9 +27,8 @@ export const AdminPage: PageComponent = () => {
   )
 }
 
-Object.assign(AdminPage, {
-  iconName: 'Settings',
-  permission: PermissionScope.ACCESS_ADMIN
-} as Partial<PageComponent>)
+AdminPage.displayName = 'AdminPage'
+AdminPage.iconName = 'Settings'
+AdminPage.permission = PermissionScope.ACCESS_ADMIN
 
 export * from './Admin'

@@ -1,24 +1,28 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { IPanelProps } from '@fluentui/react'
-import { ISubmitProps } from 'components/FormControl'
+import { FormSubmitHook } from 'components/FormControl'
 import { useToast } from 'components/Toast'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import $submit_feedback from './submit-feedback.gql'
-import { IFeedbackModel } from './useFeedbackModel'
+import { useFeedbackModel } from './useFeedbackModel'
 
-export const useSubmitFeedback = (
-  model: IFeedbackModel,
-  panel: IPanelProps
-): ISubmitProps => {
+/**
+ * Hook that returns props for submitting feedback.
+ *
+ * @param model - The map of feedback data.
+ * @param panel - The props for the feedback panel.
+ * @returns An object containing the text for the submit button, a toast object, a click handler, and a disabled flag.
+ */
+export const useSubmitFeedback: FormSubmitHook<
+  IPanelProps,
+  ReturnType<typeof useFeedbackModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const [disabled, setDisabled] = useState(false)
   const [submitFeedback] = useMutation($submit_feedback)
-  const [toast, setToast] = useToast(8000, {
-    innerStyle: { paddingLeft: 15 }
-  })
+  const [toast, setToast] = useToast(8000)
 
   /**
    * On submit feedback
@@ -41,16 +45,16 @@ export const useSubmitFeedback = (
         setToast({
           headerText: t('feedback.submitSuccessMessagHeader'),
           text: t('feedback.submitSuccessMessageText', result),
-          type: 'success'
+          intent: 'success'
         })
       } else {
         setToast({
           headerText: t('feedback.submitErrorMessageHeader'),
           text: t('feedback.submitErrorMessageText'),
-          type: 'severeWarning'
+          intent: 'warning'
         })
       }
-      panel.onDismiss()
+      props.onDismiss()
     },
     disabled:
       _.isEmpty(model.$.title) ||

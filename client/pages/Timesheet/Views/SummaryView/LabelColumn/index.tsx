@@ -1,20 +1,20 @@
 import { Icon } from '@fluentui/react'
 import { EntityLabel } from 'components/EntityLabel'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { LabelObject as Label } from 'types'
+import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { ILabelColumnProps } from './types'
 
-export const LabelColumn: FC<ILabelColumnProps> = (props) => {
+export const LabelColumn: StyledComponent<ILabelColumnProps> = (props) => {
   const { t } = useTranslation()
   if (props.project) {
     if (!props.project.tag) {
       return <div>{t('common.unconfirmedHours')}</div>
     }
     return (
-      <div className={styles.root}>
+      <div className={LabelColumn.className}>
         <div className={styles.iconContainer}>
           <Icon
             iconName={props.project.icon}
@@ -39,5 +39,8 @@ export const LabelColumn: FC<ILabelColumnProps> = (props) => {
   }
   return null
 }
+
+LabelColumn.displayName = 'LabelColumn'
+LabelColumn.className = styles.labelColumn
 
 export * from './types'

@@ -1,24 +1,25 @@
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
-import React, { FC } from 'react'
+import get from 'get-value'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
 
 /**
  * @category Timesheet
  */
-export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
+export const ErrorBar: StyledComponent<IErrorBarProps> = ({ error }) => {
   const { t } = useTranslation()
   if (!error) return null
   let messageProps: IUserMessageProps
-  const code = error.graphQLErrors[0]?.extensions?.code
+  const code = get(error, 'graphQLErrors.0.extensions.code', { default: '' })
   switch (code) {
     case 'ResourceNotFound': {
       {
         messageProps = {
           text: t('timesheet.exchangeLicenseErrorMessageText'),
-          type: 'error',
-          iconName: 'SearchCalendar'
+          intent: 'error'
         }
       }
       break
@@ -26,13 +27,16 @@ export const ErrorBar: FC<IErrorBarProps> = ({ error }) => {
     default: {
       messageProps = {
         text: t('timesheet.errorMessageText'),
-        type: 'error'
+        intent: 'error'
       }
     }
   }
   return (
-    <div className={styles.root}>
+    <div className={ErrorBar.className}>
       <UserMessage {...messageProps} />
     </div>
   )
 }
+
+ErrorBar.displayName = 'Timesheet.ErrorBar'
+ErrorBar.className = styles.errorBar

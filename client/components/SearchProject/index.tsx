@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { Autocomplete } from '../Autocomplete'
+import { AutocompleteControl } from '../FormControl/AutocompleteControl'
 import { ISearchProjectProps } from './types'
 import { useSearchProject } from './useSearchProject'
 
@@ -16,7 +15,7 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
   const [items, disabled] = useSearchProject()
 
   return (
-    <Autocomplete
+    <AutocompleteControl
       {...props}
       disabled={disabled}
       items={items}
@@ -26,9 +25,7 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
           fontSize: 16
         }
       }}
-      width={props.width}
       placeholder={props.placeholder}
-      onClear={() => props.onSelected(null)}
       onSelected={(item) => props.onSelected(item.data)}
       autoFocus={props.autoFocus}
     />

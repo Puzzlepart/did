@@ -1,4 +1,4 @@
-.root {
+.userMenu {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -12,13 +12,8 @@
   }
 
   .user {
-    div[class*='-primaryText'] {
+    span[class*='primaryText'], span[class*='secondaryText'] {
       color: #fff !important;
-    }
-    div[class*='-secondaryText'] {
-      color: #fff !important;
-      display: block;
-      font-size: 10px !important;
     }
   }
 }

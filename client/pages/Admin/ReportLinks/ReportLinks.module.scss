@@ -1,0 +1,16 @@
+.reportLinks {
+    margin: 0;
+
+    .nameColumn {
+        display: flex;
+        gap: 5px;
+
+        .icon {
+            flex-shrink: 1;
+        }
+
+        .link {
+            flex: 1
+        }
+    }
+}

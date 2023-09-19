@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks'
 import { useEffect } from 'react'
 import { convertToMap } from 'utils/convertToMap'
@@ -37,8 +36,5 @@ export function useReportLinksModel(props: IReportLinksFormProps) {
     }
   }, [props?.isOpen])
 
-  return {
-    ...map,
-    reset: () => map.$set(INITIAL_MODEL)
-  } as const
+  return map
 }

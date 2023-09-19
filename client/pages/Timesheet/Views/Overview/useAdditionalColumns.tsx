@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { CustomerLink } from 'components'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
-import { CustomerColumn } from './CustomerColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import { ProjectColumn } from './ProjectColumn'
 
 /**
@@ -13,16 +12,16 @@ export function useAdditionalColumns() {
   const { t } = useTranslation()
   return useMemo(
     () => [
-      col(
+      createColumnDef(
         'customer',
         t('common.customer'),
-        { minWidth: 150, maxWidth: 200, isMultiline: true },
-        (event: EventObject) => <CustomerColumn event={event} />
+        { minWidth: 150, maxWidth: 200 },
+        (event: EventObject) => <CustomerLink customer={event.customer} />
       ),
-      col(
+      createColumnDef(
         'project',
         t('common.project'),
-        { minWidth: 150, maxWidth: 300, isMultiline: true },
+        { minWidth: 150, maxWidth: 300 },
         (event: EventObject) => <ProjectColumn event={event} />
       )
     ],

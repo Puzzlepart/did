@@ -1,9 +1,9 @@
 import { QueryResult } from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
-import { Project } from 'types'
+import { EventObject, Project } from 'types'
 import { TimesheetDateRange } from '../TimesheetDateRange'
-import { TimesheetView } from '../types'
+import { TimesheetViewComponent } from '../Views/types'
 
 /**
  * Data updated action
@@ -64,16 +64,17 @@ export const NEXT_PERIOD = createAction('NEXT_PERIOD')
  *
  * @category Timesheet Actions
  */
-export const CHANGE_VIEW = createAction<{ view: TimesheetView }>('CHANGE_VIEW')
+export const CHANGE_VIEW =
+  createAction<{ view: TimesheetViewComponent }>('CHANGE_VIEW')
 
 /**
  * Change date range type action
  *
  * @category Timesheet Actions
  */
-export const CHANGE_DATE_RANGE_TYPE = createAction<{
-  dateRangeType: DateRangeType
-}>('CHANGE_DATE_RANGE_TYPE')
+export const CHANGE_DATE_RANGE_TYPE = createAction<DateRangeType>(
+  'CHANGE_DATE_RANGE_TYPE'
+)
 
 /**
  * Manual match action
@@ -90,6 +91,15 @@ export const MANUAL_MATCH =
  */
 export const CLEAR_MANUAL_MATCH =
   createAction<{ id: string }>('CLEAR_MANUAL_MATCH')
+
+/**
+ * Open manual match panel action
+ *
+ * @category Timesheet Actions
+ */
+export const TOGGLE_MANUAL_MATCH_PANEL = createAction<{ event: EventObject }>(
+  'TOGGLE_MANUAL_MATCH_PANEL'
+)
 
 /**
  * Ignore event action

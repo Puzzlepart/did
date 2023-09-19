@@ -49,10 +49,9 @@ export class CustomerResolver {
     @Arg('customer', () => CustomerInput) customer: CustomerInput,
     @Arg('update', { nullable: true }) update: boolean
   ) {
-    const c = new Customer().fromInput(customer)
     await (update
-      ? this._customer.updateCustomer(c)
-      : this._customer.addCustomer(c))
+      ? this._customer.updateCustomer(customer as Customer)
+      : this._customer.addCustomer(customer as Customer))
     return { success: true }
   }
 

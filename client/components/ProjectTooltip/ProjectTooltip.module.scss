@@ -1,46 +1,48 @@
-.root {
+.projectTooltip {
   margin: 0;
-  padding: 10px;
-  min-width: 250px;
+  padding: 15px;
+  width: 300px;
+  position: relative;
 
-  .header {
-    padding: 0 0 0 8px;
-    display: flex;
-    flex-direction: row;
+  .container {
+    .header {
+      padding: 0 0 0 8px;
+      display: flex;
+      flex-direction: row;
 
-    .iconContainer {
-      padding: 6px 12px 0 0;
-      align-self: flex-start;
+      .iconContainer {
+        padding: 6px 12px 0 0;
+        align-self: flex-start;
+      }
+
+      .title {
+        font-size: 13pt;
+        margin: 0;
+      }
+
+      .subTitle {
+        font-size: 8pt;
+        margin: 0 0 10px 0;
+      }
     }
 
-    .title {
-      font-size: 13pt;
-      margin: 0;
+    .labels {
+      margin: 10px 0;
     }
 
-    .subTitle {
-      font-size: 8pt;
-      margin: 0 0 10px 0;
-    }
-  }
-
-  .labels {
-    margin: 4px 0 10px 0;
-  }
-
-  .footer {
-    display: flex;
-    flex-direction: row;
-    margin: 8px 0 0 0;
-    font-size: 12px;
-
-    .link {
-      flex-grow: 1;
+    .footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 25px 0 0 0;
+      box-sizing: border-box;
+      width: 100%;
     }
 
     .tag {
-      font-weight: 500;
-      text-align: right;
+      position: absolute;
+      top: -5px;
+      right: 0;
     }
   }
 }

@@ -1,8 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { TooltipHost } from '@fluentui/react'
+import { Tooltip } from '@fluentui/react-components'
 import $date from 'DateUtils'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './ReportLinkTooltip.module.scss'
 import { IReportLinkTooltipProps } from './types'
 
@@ -12,27 +12,33 @@ import { IReportLinkTooltipProps } from './types'
  *
  * @category Reports
  */
-export const ReportLinkTooltip: FC<IReportLinkTooltipProps> = ({
-  link,
-  children
-}) => {
+export const ReportLinkTooltip: StyledComponent<IReportLinkTooltipProps> = (
+  props
+) => {
   const { t } = useTranslation()
   return (
-    <TooltipHost
+    <Tooltip
+      relationship='description'
       content={
-        <div className={styles.root}>
-          <div className={styles.name}>{link.name}</div>
-          <p className={styles.description}>{link.description}</p>
+        <div className={ReportLinkTooltip.className}>
+          <div className={styles.name}>{props.link.name}</div>
+          <p className={styles.description}>{props.link.description}</p>
           <p className={styles.updated}>
             {t('reports.reportLinkUpdatedText', {
-              ...link,
-              updatedAt: $date.formatDate(link.updatedAt, 'MMM DD, YYYY HH:mm')
+              ...props.link,
+              updatedAt: $date.formatDate(
+                props.link.updatedAt,
+                'MMM DD, YYYY HH:mm'
+              )
             })}
           </p>
         </div>
       }
     >
-      {children}
-    </TooltipHost>
+      <div>{props.children}</div>
+    </Tooltip>
   )
 }
+
+ReportLinkTooltip.displayName = 'ReportLinkTooltip'
+ReportLinkTooltip.className = styles.reportLinkTooltip

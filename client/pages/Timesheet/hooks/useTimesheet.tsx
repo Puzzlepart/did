@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
 import { useTimesheetReducer } from '../reducer'
 import { ITimesheetContext } from '../types'
@@ -42,18 +41,11 @@ export function useTimesheet() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [state]
   )
-
-  const headerButtonProps = {
-    disabled: !!state.error || !!state.loading,
-    style: state.loading ? { opacity: 0.4 } : {}
-  }
-
   return {
     state,
     dispatch,
     context,
     onSubmitPeriod,
-    onUnsubmitPeriod,
-    headerButtonProps
+    onUnsubmitPeriod
   }
 }

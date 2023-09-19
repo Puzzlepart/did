@@ -1,6 +1,6 @@
 @import '@primer/css/labels/index.scss';
 
-.root {
+.entityLabel {
   @include labels-base;
   @include labels-large;
   margin: 4px 4px 4px 0px;

@@ -17,6 +17,7 @@ import {
   PREVIOUS_PERIOD,
   SET_DATE_RANGE,
   SUBMITTING_PERIOD,
+  TOGGLE_MANUAL_MATCH_PANEL,
   TOGGLE_SHORTCUTS,
   UNSUBMITTING_PERIOD
 } from './actions'
@@ -36,11 +37,7 @@ export function createTimesheetReducer(
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.query.loading
           ? {
-              label: parameters.t('timesheet.loadingTimesheetLabel'),
-              description: parameters.t(
-                'timesheet.loadingTimesheetDescription'
-              ),
-              iconProps: { iconName: 'RecurringEvent' }
+              text: parameters.t('timesheet.loadingTimesheetLabel')
             }
           : null
         if (payload.query.data) {
@@ -68,35 +65,19 @@ export function createTimesheetReducer(
       .addCase(SUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-              label: parameters.t('timesheet.forecastingPeriodLabel'),
-              description: parameters.t(
-                'timesheet.forecastingPeriodDescription'
-              ),
-              iconProps: { iconName: 'PlanView' }
+              text: parameters.t('timesheet.forecastingPeriodLabel')
             }
           : {
-              label: parameters.t('timesheet.confirmingPeriodLabel'),
-              description: parameters.t(
-                'timesheet.confirmingPeriodDescription'
-              ),
-              iconProps: { iconName: 'CheckMark' }
+              text: parameters.t('timesheet.confirmingPeriodLabel')
             }
       })
       .addCase(UNSUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-              label: parameters.t('timesheet.unforecastingPeriodLabel'),
-              description: parameters.t(
-                'timesheet.unforecastingPeriodDescription'
-              ),
-              iconProps: { iconName: 'ClearFormattingEraser' }
+              text: parameters.t('timesheet.unforecastingPeriodLabel')
             }
           : {
-              label: parameters.t('timesheet.unconfirmingPeriodLabel'),
-              description: parameters.t(
-                'timesheet.unconfirmingPeriodDescription'
-              ),
-              iconProps: { iconName: 'SkypeCircleArrow' }
+              text: parameters.t('timesheet.unconfirmingPeriodLabel')
             }
       })
       .addCase(CHANGE_PERIOD, (state, { payload }) => {
@@ -161,10 +142,10 @@ export function createTimesheetReducer(
         state.selectedView = payload.view
       })
       .addCase(CHANGE_DATE_RANGE_TYPE, (state, { payload }) => {
-        state.dateRangeType = payload.dateRangeType
+        state.dateRangeType = payload
         state.dateRange = new TimesheetDateRange(
           state.selectedPeriod.endDate,
-          payload.dateRangeType
+          payload
         )
         state.periods = []
       })
@@ -174,6 +155,10 @@ export function createTimesheetReducer(
         state.periods = state.periods.map((p) =>
           p.id === state.selectedPeriod.id ? state.selectedPeriod : p
         )
+        state.eventToMatch = null
+      })
+      .addCase(TOGGLE_MANUAL_MATCH_PANEL, (state, { payload }) => {
+        state.eventToMatch = payload?.event ?? null
       })
       .addCase(CLEAR_MANUAL_MATCH, (state, { payload }) => {
         state.selectedPeriod.clearManualMatch(payload.id)

@@ -1,17 +1,18 @@
-/* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable tsdoc/syntax */
 import { Breadcrumb, IBreadcrumbItem } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import React, { FC } from 'react'
+import React from 'react'
 import { isBrowser } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
+import { StyledComponent } from 'types'
 import styles from './MobileBreadcrumb.module.scss'
 import { IMobileBreadcrumbProps } from './types'
 
 /**
  * @category Function Component
  */
-export const MobileBreadcrumb: FC<IMobileBreadcrumbProps> = (props) => {
+export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
+  props
+) => {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
   const items: IBreadcrumbItem[] = [
@@ -30,11 +31,13 @@ export const MobileBreadcrumb: FC<IMobileBreadcrumbProps> = (props) => {
   return (
     <div hidden={props.hidden}>
       <FadeIn delay={250}>
-        <Breadcrumb className={styles.root} items={items} />
+        <Breadcrumb className={MobileBreadcrumb.className} items={items} />
       </FadeIn>
     </div>
   )
 }
+
+MobileBreadcrumb.className = styles.mobileBreadcrumb
 
 export * from './types'
 export * from './useMobileBreadcrumb'

@@ -19,7 +19,7 @@
     "allHoursMatchedText": "**All hours matched!** Are you ready to confirm the period?",
     "periodConfirmedText": "**{{hours}}** confirmed this period. Click **Unconfirm hours** if you want to do some adjustments.",
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
-    "undoIgnoreText": "Click to undo",
+    "undoIgnoreText": "Undo ignored events",
     "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
     "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above. ",
     "projectInactiveError": "Project is no longer active. Please resolve the event in Outlook.",
@@ -63,10 +63,10 @@
     "monthForecastedText": "The month is forecasted with {{hours}}.",
     "monthConfirmedText": "A total of **{{hours}}** confirmed this month. You have confirmed {{confirmedPeriodsCount}} out of {{periodsCount}} periods. You need to be in the **Overview** view to do adjustments.",
     "ignoreAllText": "Ignore all",
-    "eventNoTitleErrorText": "Please enter a subject for this event. Events without a subject will not be included in the timesheet."
+    "eventNoTitleErrorText": "Please enter a subject for this event. Events without a subject will not be included in the timesheet.",
+    "eventDurationModifiedTitle": "Automatically modified event duration"
   },
   "projects": {
-    "filterLabels": "Filter labels...",
     "inactiveText": "This project has been marked as inactive.",
     "searchPlaceholder": "Search in projects...",
     "categoryOutlookText": "This project has a category in your Outlook.",
@@ -80,6 +80,7 @@
     "exportTimeEntriesLabel": "Export to Excel",
     "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, between {{PROJECT_KEY_MIN_LENGTH}} and {{PROJECT_KEY_MAX_LENGTH}} characters.",
     "createSuccess": "The project **{{name}}** was succesfully created. Use **{{projectId}}** to tag your events in Outlook.",
+    "updateSuccess": "The project **{{name}}** was succesfully updated.",
     "editLabel": "Edit project",
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed.",
     "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{projectId}}**. You can automatically create a category in Outlook by checking **Automatically create category in Outlook**.",
@@ -93,31 +94,52 @@
     "informationHeaderText": "Information",
     "timeEntriesHeaderText": "Time entries",
     "noInformationAvailable": "No information available about this project.",
-    "navigateText": "Details",
+    "navigateText": "Go to the project",
     "iconFieldDescription": "Use an icon to make the project more recognizable in the Timesheet and Project pages. A random icon will be selected if you dont' pick one yourself.",
     "createError": "We can't create the project at the moment. Please try again later.",
     "timeEntriesLoadingDescription": "Take a sip of coffee if you've been busy lately...",
     "noLabelsSelectedText": "Add labels to the projects for categorization. For example internal projects or projects that requires submitting hours in a separate system.",
     "applyLabelsHeaderText": "Apply labels to this project",
-    "tagLabel": "Key"
+    "tagLabel": "Key",
+    "editButtonLabel": "Edit project",
+    "toggleInactive": "Show/hide inactive projects",
+    "searchTimeEntriesPlaceholder": "Search in time entries...",
+    "keyInvalid": "The project key must be between {{min}} and {{max}} characters.",
+    "descriptionWarning": "We recommend including a quick summary of the project. This will provide a concise overview and help others quickly grasp the project's essence.",
+    "customerFieldDescription": "Select the customer associated with this project from the dropdown list. If the customer is not in the list, you can create a new one - or maybe talk to an adult?",
+    "customerRequired": "Oops! Did you accidentally ghost a customer from the list? Time to pick a customer and make them feel appreciated in our project - they won't haunt you, we promise!",
+    "updateError": "We can't update the project **{{projectId}}** at the moment. Please try again later, or ask an adult for advice.\""
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
     "keyFieldDescription": "A unique identifier for the customer. Keep it short, between {{CUSTOMER_KEY_MIN_LENGTH}} and {{CUSTOMER_KEY_MAX_LENGTH}} characters and only capital letters.",
-    "createSuccess": "The customer **{{name}}** was succesfully created.",
+    "createSuccess": "The customer **{{name}}** was succesfully created. Click to go directly to the newly created customer, or don't to stay here and create another one.",
     "createNewText": "Create new",
     "keyFieldLabel": "Customer key",
     "iconFieldDescription": "Use an icon to make the customer more recognizable in the Timesheet and Customer pages. A random icon will be selected if you dont' pick one yourself.",
     "nameFieldDescription": "The name of the customer. This will be visible in your timesheet and in the project overview. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} characters.",
     "descriptionFieldDescription": "A short description for the customer. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported.",
     "createError": "We can't create the customer at the moment. Please try again later.",
-    "searchProjectsPlaceholder": "Search in projects..."
+    "searchProjectsPlaceholder": "Search in projects for {{name}}...",
+    "editButtonLabel": "Edit customer",
+    "toggleInactive": "Show/hide inactive customers",
+    "inactiveFieldDescription": "Mark the customer as inactive. Hours for the customer can no longer be confirmed.",
+    "projectsHeaderText": "Projects",
+    "informationHeaderText": "Information",
+    "createProjectButtonLabel": "Create new project",
+    "projectFormHeaderText": "Create new project for {{name}}",
+    "iconEasterEgg": "An Umbrella? Really? Right, you should be allowed since you are so good at doing your job.",
+    "keyInvalid": "The customer key must be between {{min}} and {{max}} characters.",
+    "descriptionWarning": "We recommend including a quick summary of the customer. This will provide a concise overview and help others quickly grasp the customer's essence.",
+    "keyNotUniqueError": "The customer key {{key}} is already in use by the customer {{name}}.",
+    "nameNotUniqueError": "It appears that there is already a API-key with that name. Please come up with something else.",
+    "noLabelsSelectedText": "Add labels to the customer for categorization. "
   },
   "admin": {
     "apiTokens": {
-      "permissionsTitle": "Permissions",
+      "permissionsTitle": "Set permissions",
       "headerText": "API Tokens",
       "tokenNameLabel": "Name",
       "tokenExpiryLabel": "Token expiry",
@@ -127,10 +149,21 @@
       "oneYear": "1 year",
       "neverExpiresText": "Never expires",
       "confirmDeleteTitle": "Delete API-key",
-      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"?"
+      "confirmDeleteSubText": "Are you sure you want to delete the API-key \"{{name}}\"? It expires (or expired} {{expires}}.",
+      "editPermissionsDescription": "Click to manage or customize permissions for this API token. Please note that permissions cannot be updated after creation.",
+      "apiKeyGenerated": "Click the key to copy it to your clipboard.",
+      "apiKeyCopied": "API key for **{{name}}** successfully copied to clipboard.",
+      "noPermissionsSelected": "Select desired permissions for the API key. Click **{{buttonLabel}}** and select permissions by category.",
+      "delete": "Delete",
+      "yearPlural": "{{years}} years",
+      "keyLabel": "Secret key",
+      "displaySecretKeyButtonTooltip": "Click to reveal the secret for {{displayDuration}} seconds, then click the fields to copy it.",
+      "displaySecretKeyButtonLabel": "Show me the secret",
+      "permissionsRequired": "You need to provide at least one permission for the API-key. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
+      "tokenDescriptionDescription": "Describe a bit about how you intend to use the API-token, and explain briefly why you need the selected permissions.",
+      "warningTooManyPermissions": "You've selected {{count}} permissions. We recommend not too be too greedy with permissions, but if you know what you're doing - sure."
     },
     "labels": {
-      "headerText": "Labels",
       "confirmDeleteTitle": "Delete label",
       "confirmDeleteSubText": "Are you sure you want to delete the label \"{{name}}\"?",
       "nameLabel": "Label name",
@@ -141,14 +174,15 @@
       "updateSuccess": "Your label **{{name}}** was succesfully updated.",
       "defaultTitle": "my new label",
       "addNewText": "Add new label",
-      "editText": "Edit label"
+      "editText": "Edit label",
+      "editLabels": "Click to edit labels"
     },
     "subscriptionSettings": {
       "headerText": "Subscription"
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
-      "deleteSuccess": "Role {{name}} was successfully deleted."
+      "deleteSuccess": "Role {{name}} was successfully deleted. It hasn't been assigned to anyone yet, so it's going just fine!"
     },
     "users": {
       "headerText": "Users",
@@ -192,7 +226,7 @@
     "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
     "adUserSyncPropertiesLabel": "Properties to synchronize",
     "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
-    "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
+    "roleInUseMessage": "This role is assigned to {{count}} user(s) and cannot be deleted. ",
     "userHiddenFromReportsLabel": "Hidden from reports",
     "adUserSyncUserPhotoLabel": "Synchronize user photo",
     "adUserSyncUserPhotoDescription": "Synchronize user photo from Azure Active Directory when the users logs in.",
@@ -240,10 +274,21 @@
       "iconColorLabel": "Icon color",
       "iconColorPlaceholder": "Enter an icon color",
       "iconColorDescription": "An icon color makes the report link stand out more from the preset queries if the link should be promoted."
-    }
+    },
+    "editPermissions": "Edit permissions",
+    "addPermissions": "Set permissions",
+    "editPermissionsDescription": "Click to add or modify permissions for this role.",
+    "userHiddenFromReportsDescription": "This setting allows you to designate the user as \"hidden\" from your reports. When a user is marked as hidden, their activity and data will not be included in any generated reports or analytics. This feature is particularly useful for scenarios where you have administrative users or special accounts that should not impact your reporting metrics.",
+    "roles": {
+      "confirmDeleteSubText": "Are you sure you want to delete the role {{name}}?",
+      "confirmDeleteTitle": "Delete role"
+    },
+    "deleteRole": "Delete role",
+    "permissionsRequired": "You need to provide at least one permission for the role. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
+    "noPermissionsSelected": "Select desired permissions for the user. Click **{{buttonLabel}}** and select permissions by category."
   },
   "reports": {
-    "generatingReportLabel": "Generating report",
+    "generatingReportProgressText": "Please wait while we generate the report for you...",
     "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no time entries at this time.",
     "selectReportText": "Select a report below. Be aware that some reports can take several minutes to load. For some reports, there might be a pre-generated version available with formatting and layout already applied.",
@@ -261,7 +306,8 @@
     "applyFilterText": "Apply filter",
     "availableReportLinks": "There is reports available for this query. Use the buttons below to download the reports, and hover over the buttons to see more information about the report.",
     "fetchDataButton": "Fetch fresh data from the server",
-    "reportLinkUpdatedText": "Updated by {{updatedBy}} on {{updatedAt}}."
+    "reportLinkUpdatedText": "Updated by {{updatedBy}} on {{updatedAt}}.",
+    "welcomeHeaderText": "Home"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -284,7 +330,6 @@
     "searchPlaceholder": "Search...",
     "genericErrorText": "An error occured.",
     "createNewText": "Create new",
-    "toggleInactiveText": "Show inactive",
     "settings": "Settings",
     "language": "Language",
     "keyFieldLabel": "Key",
@@ -443,7 +488,7 @@
     "homePage": "Home",
     "missingWeeksLabel": "Missing weeks",
     "allWeeks": "All weeks",
-    "periodName": "Week {{name}}",
+    "periodName": "Week {{weekNumber}}",
     "userLastActiveText": "The user was last active {{lastActive}}.",
     "roundUpEventsLabel": "Round events to nearest 30 minutes",
     "roundUpEventsDescription": "Microsoft supports the ability to end meetings early or start late, typically by 5 or 10 minutes. This function allows us to round the duration of events to the nearest half hour. The setting won't take effect before next login.",
@@ -459,7 +504,15 @@
     "vacationCalculationTypePlannedDescription": "Everything in your calendar categorized with IAM VAC.",
     "vacationCalculationTypeConfirmedDescription": "Vacation confirmed as part of your timesheet.",
     "vacationSummaryTooltipConfirmed": "The vacation calculation is for the whole year, and is based on {{usedHours}} hours of vacation confirmed as part of your timesheet (each vacation day is 8 hours).",
-    "updatedLabel": "Updated"
+    "updatedLabel": "Updated",
+    "cancelButtonLabel": "Cancel",
+    "toggleFilterPanel": "Filter",
+    "userSettingsPanelHeaderText": "User settings",
+    "adUserLabel": "User from Active Directory",
+    "adUserRequired": "You must select an Active Directory user to add.",
+    "labelFieldLabel": "Labels",
+    "filterLabels": "Filter labels...",
+    "labelsText": "Labels"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -469,6 +522,12 @@
     "AdminPage": "Admin"
   },
   "permissions": {
+    "category_admin": "Admin",
+    "category_timesheet": "Timesheet",
+    "category_reports": "Reports",
+    "category_projects": "Projects",
+    "category_customers": "Customers",
+    "category_api": "API",
     "accessTimesheet": "Access to Timesheet",
     "accessCustomers": "Access to Customers",
     "accessProjects": "Access to Projects",
@@ -481,7 +540,7 @@
     "manageUsers": "Manage users",
     "manageRolesPermissions": "Manage roles and permissions",
     "deleteProjectsDescription": "Deletion of projects is currently not supported.",
-    "accessTimesheetDescription": "Access to Timesheet page",
+    "accessTimesheetDescription": "Access to Timesheet page for registering hours.",
     "accessCustomersDescription": "Acces to Customers page where you can search in active and inactive customers.",
     "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
     "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",
@@ -496,7 +555,14 @@
     "listUsers": "List users",
     "listUsersDescription": "Retrieve the list of all users in the subscription.",
     "manageReportLinks": "Manage report links",
-    "manageReportLinksDescription": "Manage report links. Add, edit and delete report links."
+    "manageReportLinksDescription": "Manage report links. Add, edit and delete report links.",
+    "selectAll": "Select/deselect all",
+    "importUsers": "Retrieve users from AD",
+    "importUsersDescription": "Retrieve users from Azure Active Directory and register them in the system. This is not something that everyone should have access to.",
+    "manageApiTokensDescription": "Manage (create new, delete existing, and view existing keys) API keys. It is good to be careful about who gets this access, as there is quite a lot that can be done with this much power.",
+    "manageApiTokens": "Manage API-tokens",
+    "listApiTokens": "List API-tokens",
+    "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems."
   },
   "notifications": {
     "moreLinkText": "Read more here",
@@ -507,7 +573,8 @@
       "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
       "forecast": "Missing forecast for week {0} ({1})."
     },
-    "clearDismissedText": "Click to show dismissed notifications."
+    "clearDismissedText": "Click to show dismissed notifications.",
+    "dismissText": "Dismiss notification"
   },
   "feedback": {
     "headerText": "Feedback",
@@ -534,5 +601,10 @@
     "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend.",
     "mobileFeedbackText": "Give feedback",
     "reportAnonymouslyFieldLabel": "Report anonymously"
+  },
+  "formControl": {
+    "minLengthMessage": "The {{label}} field must contain at least {{options.validator.minLength}} characters.",
+    "requiredFieldMessage": "The {{label}} field is mandatory.",
+    "regexMessage": "The field {{label}} does not match the required pattern."
   }
 }

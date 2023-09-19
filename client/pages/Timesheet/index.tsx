@@ -27,10 +27,9 @@ export const TimesheetPage: PageComponent = () => {
   )
 }
 
-Object.assign(TimesheetPage, {
-  iconName: 'TimeSheet',
-  permission: PermissionScope.ACCESS_TIMESHEET
-} as Partial<PageComponent>)
+TimesheetPage.displayName = 'TimesheetPage'
+TimesheetPage.iconName = 'TimeSheet'
+TimesheetPage.permission = PermissionScope.ACCESS_TIMESHEET
 
 export * from './hooks'
 export * from './Timesheet'

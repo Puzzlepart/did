@@ -1,7 +1,8 @@
 import { ActionButton, TextField } from '@fluentui/react'
-import { IconPicker } from 'components'
-import React, { FC } from 'react'
+import { IconPickerControl } from 'components'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import s from 'underscore.string'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
@@ -10,13 +11,15 @@ import { useSaveFilterForm } from './useSaveFilterForm'
 /**
  * @category Reports
  */
-export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
+export const SaveFilterForm: StyledComponent<ISaveFilterFormProps> = (
+  props
+) => {
   const { t } = useTranslation()
   const { inputVisible, setInputVisible, value, set, onSave } =
     useSaveFilterForm()
 
   return (
-    <div className={styles.root} style={props?.style}>
+    <div className={SaveFilterForm.className} style={props?.style}>
       <div hidden={!inputVisible}>
         <TextField
           value={value('text')}
@@ -29,7 +32,7 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
         />
       </div>
       <div hidden={!inputVisible}>
-        <IconPicker
+        <IconPickerControl
           defaultSelected={value('iconProps').iconName}
           onSelected={(iconName) => set('iconProps', { iconName })}
         />
@@ -58,3 +61,6 @@ export const SaveFilterForm: FC<ISaveFilterFormProps> = (props) => {
     </div>
   )
 }
+
+SaveFilterForm.displayName = 'SaveFilterForm'
+SaveFilterForm.className = styles.saveFilterForm

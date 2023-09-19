@@ -1,26 +1,31 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon, Link } from '@fluentui/react'
-import React, { FC } from 'react'
+import { Button } from '@fluentui/react-components'
+import { ReusableComponent } from 'components/types'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './EditLink.module.scss'
 import { IEditLinkProps } from './types'
 
 /**
- * Renders a edit link using `<Icon />` and `<Link />`
- * from `@fluentui/react`
+ * Renders a edit link using `<Button />` component from `@fluentui/react-components`
  *
  * @category Reusable Component
  */
-export const EditLink: FC<IEditLinkProps> = (props) => {
+export const EditLink: ReusableComponent<IEditLinkProps> = (props) => {
   const { t } = useTranslation()
   return (
     <div {...props}>
-      <Link className={styles.root} onClick={props.onClick}>
-        {props.iconName && (
-          <Icon className={styles.icon} iconName={props.iconName} />
-        )}
+      <Button
+        className={EditLink.className}
+        onClick={props.onClick}
+        appearance='subtle'
+        icon={icon('PeopleEdit')}
+      >
         <span className={styles.text}>{t('common.editLabel')}</span>
-      </Link>
+      </Button>
     </div>
   )
 }
+
+EditLink.className = styles.editLink

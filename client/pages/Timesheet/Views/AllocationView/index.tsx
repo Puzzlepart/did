@@ -1,7 +1,6 @@
 import { Spinner, SpinnerSize } from '@fluentui/react'
 import { UserMessage } from 'components'
 import { SubText } from 'components/SubText'
-import { TabComponent } from 'components/TabContainer/types'
 import get from 'get-value'
 import color from 'randomcolor'
 import React, { useRef } from 'react'
@@ -15,6 +14,7 @@ import {
   YAxis
 } from 'recharts'
 import { useTimesheetContext } from '../../context'
+import { TimesheetViewComponent } from '../types'
 import styles from './AllocationView.module.scss'
 import { useChartConfig } from './useChartConfig'
 import { useChartData } from './useChartData'
@@ -22,7 +22,7 @@ import { useChartData } from './useChartData'
 /**
  * @category Timesheet
  */
-export const AllocationView: TabComponent = () => {
+export const AllocationView: TimesheetViewComponent = () => {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   const container = useRef<HTMLDivElement>(null)
@@ -32,7 +32,7 @@ export const AllocationView: TabComponent = () => {
 
   if (state.loading) {
     return (
-      <div className={styles.root} ref={container}>
+      <div className={AllocationView.className} ref={container}>
         <Spinner
           label={t('timesheet.allocation.loadingLabel')}
           size={SpinnerSize.large}
@@ -43,14 +43,14 @@ export const AllocationView: TabComponent = () => {
 
   if (!state.loading && state.selectedPeriod?.totalDuration === 0) {
     return (
-      <div className={styles.root} ref={container}>
+      <div className={AllocationView.className} ref={container}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />
       </div>
     )
   }
 
   return (
-    <div className={styles.root} ref={container}>
+    <div className={AllocationView.className} ref={container}>
       {charts.map((c) => {
         const [k, d] = data[c.key]
         return (
@@ -97,3 +97,7 @@ export const AllocationView: TabComponent = () => {
     </div>
   )
 }
+
+AllocationView.id = 'allocation'
+AllocationView.displayName = 'AllocationView'
+AllocationView.className = styles.allocationView

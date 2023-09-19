@@ -19,7 +19,7 @@
     "allHoursMatchedText": "Alle timene dine er matchet! Er du klar til å bekrefte perioden din?",
     "periodConfirmedText": "Perioden er bekreftet med {{hours}}. Klikk **Angre bekreft timer** dersom du vil gjøre noen justeringer.",
     "ignoredEventsText": "Du har {{ignored_count}} manuelt ignorert(e) kalenderoppføringe(r).",
-    "undoIgnoreText": "Trykk for å angre",
+    "undoIgnoreText": "Angre ignorerte hendelser",
     "unresolvedErrorText": "Du har {{count}} uløste feil. Du må løse disse før du kan bekrefte timene dine.",
     "splitWeekInfoText": "Den valgte uken strekker seg over to måneder. \nNaviger mellom første og andre periode med knappene over",
     "projectInactiveErrorText": "Prosjektet er ikke lenger aktivt. Rediger kalenderoppføringen i Outlook.",
@@ -28,7 +28,7 @@
     "resolveProjectButtonLabel": "Løs manuelt",
     "ignoreEventButtonLabel": "Ignorer",
     "clearProjectMatchTooltipText": "Fjern match",
-    "matchOutlookInfoText": "**Tips:** Prøv å sørge for at<a href='{{webLink}}' target='_blank'>kalenderoppføringen i Outlook</a> blir tilkoblet et prosjekt automatisk. I noen tilfeller kan det dog være nødvendig å løse kalenderoppføringen manuelt.",
+    "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>kalenderoppføringen i Outlook</a> blir tilkoblet et prosjekt automatisk. I noen tilfeller kan det dog være nødvendig å løse kalenderoppføringen manuelt.",
     "didYouMeanText": "Mente du",
     "eventNotFullyMatchedText": "Kalenderoppføringen kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",
     "unforecastHoursText": "Fjern prognose",
@@ -63,10 +63,10 @@
     "monthForecastedText": "Måneden er prognosert med {{hours}}.",
     "monthConfirmedText": "Totalt **{{hours}}** bekreftet denne måneden. Du har bekreftet {{confirmedPeriodsCount}} av {{periodsCount}} perioder. Du må være i **Oversikt**-visningen for å gjøre justeringer.",
     "ignoreAllText": "Ignorer alle",
-    "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten."
+    "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten.",
+    "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet"
   },
   "projects": {
-    "filterLabels": "Filtrer merkelapper...",
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
     "searchPlaceholder": "Søk i prosjekter...",
     "categoryOutlookText": "Dette prosjektet har en Outlook-kategori.",
@@ -87,37 +87,58 @@
     "createOutlookCategoryFieldDescription": "Opprett kategori {{id}} i Outlook. Dette gjør det lettere å assosiere dine kalenderoppføringer i Outlook med riktig prosjekt og kunde.",
     "keyFieldLabel": "Prosjektnøkkel",
     "createNewText": "Opprett nytt",
-    "nameFieldDescription": "Navnet på prosjektet. \nDette vil være synlig i timelisten og i prosjektoversikten. \nMinimum {{PROJECT_NAME_MIN_LENGTH}} tegn.",
+    "nameFieldDescription": "Navnet på prosjektet. \nDette vil være synlig i timelisten og i prosjektoversikten. \nMinimum 2 tegn.",
     "descriptionFieldDescription": "Beskriv prosjektet mer detaljert. Det er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "idPreviewBlankText": "Bruk en kombinasjon av kundenøkkel og prosjektnøkkel for å tagge kalenderoppføringene dine i Outlook. \nDu kan automatisk opprette en kategori i Outlook ved å huke av for **Opprett automatisk kategori i Outlook**.",
     "informationHeaderText": "Informasjon",
     "timeEntriesHeaderText": "Tidsoppføringer",
     "noInformationAvailable": "Det er ingen informasjon tilgjengelig om dette prosjektet.",
-    "navigateText": "Detaljer",
+    "navigateText": "Gå til prosjektet",
     "iconFieldDescription": "Bruk et ikon for å gjøre prosjektet mer gjenkjennelig i timelisten og på prosjektsiden. \nEt tilfeldig ikon blir valgt hvis du ikke velger et selv.",
     "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
     "timeEntriesLoadingDescription": "Ta deg en slurk kaffe hvis det har vært travelt i det siste ...",
     "noLabelsSelectedText": "Legg til merkelapper på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
     "applyLabelsHeaderText": "Legg til merkelapper på dette prosjektet",
-    "tagLabel": "Nøkkel"
+    "tagLabel": "Nøkkel",
+    "editButtonLabel": "Rediger prosjekt",
+    "toggleInactive": "Vis/skjul inaktive prosjekter",
+    "searchTimeEntriesPlaceholder": "Søk i tidsoppføringer...",
+    "keyInvalid": "Prosjektnøkkelen må være mellom {{min}} og {{max}} tegn.",
+    "descriptionWarning": "Vi anbefaler å legge til en mer detaljert prosjektbeskrivelse for å gi en klarere forståelse av prosjektets mål og krav.",
+    "customerFieldDescription": "Velg kunden knyttet til dette prosjektet fra rullegardinlisten. \nHvis kunden ikke står på listen, kan du opprette en ny – eller kanskje snakke med en voksen?",
+    "customerRequired": "Oops! Droppet du ved et uhell å velge en kunde fra listen? På tide å velge en kunde og få dem til å føle seg verdsatt i prosjektet vårt - de vil ikke hjemsøke deg, det lover vi!",
+    "updateSuccess": "Prosjektet **{{name}}** ble oppdatert helt uten problemer.",
+    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket. \nVennligst prøv igjen senere, eller spør en voksen om råd.\""
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
-    "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, mellom {{CUSTOMER_KEY_MIN_LENGTH}} og {{CUSTOMER_KEY_MAX_LENGTH}} tegn og kun store bokstaver.",
-    "createSuccess": "Kunden **{{name}}** ble opprettet.",
+    "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, mellom {{min}} og {{max}} tegn og kun store bokstaver. Vel - faktisk har vi vært ganske irriterende - vi tillater ikke små bokstaver i feltet.",
+    "createSuccess": "Kunden **{{name}}** ble opprettet. \nKlikk for å gå direkte til den nyopprettede kunden, eller ikke bli her og opprette en ny.",
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk et ikon for å gjøre kunden mer gjenkjennelig på timelisten og kundesiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv.",
-    "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer.",
+    "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{min}} karakterer. Vi har ingen satt makslengde, men bruk sunn fornuft.",
     "descriptionFieldDescription": "Kort beskrivelse av kunden. \nDet er støtte for [markdown](https://www.markdownguide.org/basic-syntax/).",
     "createError": "Vi kan ikke opprette kunden for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
-    "searchProjectsPlaceholder": "Søk i prosjekter..."
+    "searchProjectsPlaceholder": "Søk i prosjekter for {{name}}...",
+    "editButtonLabel": "Rediger kunde",
+    "toggleInactive": "Vis/skjul inaktive kunder",
+    "inactiveFieldDescription": "Merk kunden som inaktiv. Timer for kunden kan ikke lenger bekreftes.",
+    "projectsHeaderText": "Prosjekter",
+    "informationHeaderText": "Informasjon",
+    "createProjectButtonLabel": "Opprett nytt prosjekt",
+    "projectFormHeaderText": "Opprett nytt prosjekt for {{name}}",
+    "keyInvalid": "Kundenøkkelen må være mellom {{min}} og {{max}} tegn.",
+    "iconEasterEgg": "En paraply? Virkelig? Greit, du burde få lov siden du er så flink til å gjøre jobben din.",
+    "descriptionWarning": "Vi anbefaler å inkludere en rask oppsummering av kunden. \nDette vil gi en kortfattet oversikt og hjelpe andre raskt å forstå kundens essens.",
+    "keyNotUniqueError": "Kundenøkkelen {{key}} er allerede i bruk av kunden {{name}}.",
+    "nameNotUniqueError": "Det ser ut til at det allerede finnes en API-nøkkel med det navnet. \nKom gjerne opp med noe annet."
   },
   "admin": {
     "apiTokens": {
-      "permissionsTitle": "Tillatelser",
+      "permissionsTitle": "Angi tillatelser",
       "headerText": "API-nøkler",
       "tokenExpiryLabel": "Varighet for nøkkel",
       "addNew": "Lag API-nøkkel",
@@ -127,7 +148,19 @@
       "oneYear": "1 år",
       "neverExpiresText": "Utløper aldri",
       "confirmDeleteTitle": "Slett API-nøkkel",
-      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"?"
+      "confirmDeleteSubText": "Er du sikker på at du vil slette API-nøkkelen \"{{name}}\"? \nDen utløper (eller utløpte} {{expires}}.",
+      "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse.",
+      "apiKeyGenerated": "Klikk på nøkkelen for å kopiere den til utklippstavlen.",
+      "apiKeyCopied": "API-nøkkelen for **{{name}}** ble kopiert til utklippstavlen.",
+      "noPermissionsSelected": "Velg ønskede tillatelser for API-nøkkelen. Klikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
+      "delete": "Slett",
+      "yearPlural": "{{years}} år",
+      "keyLabel": "Hemmelig nøkkel",
+      "displaySecretKeyButtonTooltip": "Klikk for å avsløre den hemmelig nøkkelen i {{displayDuration}} sekunder, og klikk deretter på feltene for å kopiere den.",
+      "displaySecretKeyButtonLabel": "Vis meg nøkkelen",
+      "permissionsRequired": "Du må velge minst én tillatelse for API-nøkkelen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er som å ha en jobb uten oppgaver.",
+      "tokenDescriptionDescription": "Beskriv litt om hvordan du har tenkt å bruke API-token, og forklar kort hvorfor du trenger de valgte tillatelsene.",
+      "warningTooManyPermissions": "Du har valgt {{count}} tillatelser. \nVi anbefaler ikke å være for grådig med tillatelser, men hvis du vet hva du gjør - kjør på."
     },
     "users": {
       "headerText": "Brukere",
@@ -141,7 +174,6 @@
       "synchronizingUserProperties": "Synkroniserer brukeregenskaper..."
     },
     "labels": {
-      "headerText": "Merkelapper",
       "confirmDeleteTitle": "Slett merkelapp",
       "confirmDeleteSubText": "Er du sikker på at du vil slette merkelappen \"{{name}}\"?",
       "nameLabel": "Navn på merkelapp",
@@ -152,7 +184,8 @@
       "updateSuccess": "Merkelappen din **{{name}}** ble oppdatert",
       "defaultTitle": "ny merkelapp",
       "addNewText": "Opprett ny merkelapp",
-      "editText": "Rediger merkelapp"
+      "editText": "Rediger merkelapp",
+      "editLabels": "Klikk for å redigere merkelapper"
     },
     "subscriptionSettings": {
       "headerText": "Abonnement"
@@ -240,10 +273,21 @@
     "vacationEventCategoryDescription": "Kategori som skal brukes til å merke kalenderoppføringer i Outlook som ferie.",
     "vacationTotalDaysDescription": "Totalt antall feriedager for hver ansatt i selskapet.",
     "vacationTotalDaysLabel": "Feriedager",
-    "vacation": "Ferie og fravær"
+    "vacation": "Ferie og fravær",
+    "editPermissions": "Endre tilganger",
+    "addPermissions": "Angi tillatelser",
+    "editPermissionsDescription": "Klikk for å legge til eller endre tillatelser for denne rollen.",
+    "roles": {
+      "confirmDeleteSubText": "Er du sikker på at du vil slette rollen {{name}}?",
+      "confirmDeleteTitle": "Slett rolle"
+    },
+    "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine.",
+    "deleteRole": "Slett rolle",
+    "permissionsRequired": "Du må gi minst én tillatelse for rollen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er liksom litt som å ha en jobb uten oppgaver.",
+    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori."
   },
   "reports": {
-    "generatingReportLabel": "Genererer rapport",
+    "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
     "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene ...",
     "noEntriesText": "Det er ingen tidsoppføringer for denne perioden.",
     "selectReportText": "Velg en rapport nedenfor. Vær oppmerksom på at enkelte rapporter kan ta flere minutter å laste. For noen rapporter kan det kan være en forhåndsgenerert versjon tilgjengelig med formatering og layout.",
@@ -261,7 +305,8 @@
     "applyFilterText": "Bruk filter",
     "availableReportLinks": "Det er rapporter tilgjengelig for denne spørringen. Bruk knappene nedenfor for å laste ned rapportene, og hold musepekeren over knappene for å se mer informasjon om rapporten.",
     "fetchDataButton": "Hent ferske data fra serveren",
-    "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}."
+    "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}.",
+    "welcomeHeaderText": "Hjem"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -284,7 +329,6 @@
     "searchPlaceholder": "Søk...",
     "genericErrorText": "En feil oppstod.",
     "createNewText": "Lag ny",
-    "toggleInactiveText": "Vis inaktive",
     "settings": "Innstillinger",
     "language": "Språk",
     "keyFieldLabel": "Nøkkel",
@@ -431,7 +475,7 @@
     "light-theme": "Lyst tema",
     "auto-theme": "System-tema",
     "descriptionOptionalFieldLabel": "Beskrivelse (valgfritt)",
-    "clearFilters": "Fjern alle filtre",
+    "clearFilters": "Nullstill alle filtre",
     "lastActiveLabel": "Sist aktiv",
     "vacationSummaryText": "{{remaining}} av {{total}} feriedager gjenstående",
     "vacationTotalDaysLabel": "Antal feriedager",
@@ -443,7 +487,7 @@
     "homePage": "Hjem",
     "missingWeeksLabel": "Mangler uker",
     "allWeeks": "Alle uker",
-    "periodName": "Uke {{name}}",
+    "periodName": "Uke {{weekNumber}}",
     "userLastActiveText": "Brukeren var sist aktiv {{lastActive}}.",
     "roundUpEventsLabel": "Avrund hendelser til nærmeste 30 minutter",
     "roundUpEventsDescription": "Microsoft støtter muligheten for å avslutte møter tidlig eller starte sent, typisk med 5 eller 10 minutter. Denne funksjonen lar oss runde av varigheten på hendelser til nærmeste halvtime. Innstillingen trer ikke i kraft før neste pålogging.",
@@ -459,7 +503,15 @@
     "vacationCalculationTypePlannedDescription": "Alt i kalenderen din er kategorisert med IAM VAC.",
     "vacationCalculationTypeConfirmedDescription": "Ferie bekreftet som en del av timelisten din.",
     "vacationSummaryTooltipConfirmed": "Ferieberegningen er for hele året, og er basert på {{usedHours}} timer ferie bekreftet som en del av timelisten din (hver feriedag er 8 timer).",
-    "updatedLabel": "Oppdatert"
+    "updatedLabel": "Oppdatert",
+    "cancelButtonLabel": "Avbryt",
+    "toggleFilterPanel": "Filter",
+    "userSettingsPanelHeaderText": "Brukerinstillinger",
+    "adUserLabel": "Bruker fra Active Directory",
+    "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
+    "labelFieldLabel": "Merkelapper",
+    "filterLabels": "Filtrer merkelapper...",
+    "labelsText": "Merkelapper"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -481,7 +533,7 @@
     "manageUsers": "Administrere brukere",
     "manageRolesPermissions": "Administere roller og tilganger",
     "deleteProjectsDescription": "Sletting av prosjekter støttes foreløpig ikke.",
-    "accessTimesheetDescription": "Tilgang til timelisten",
+    "accessTimesheetDescription": "Tilgang til timelisten for å registrere og bekrefte timer.",
     "accessCustomersDescription": "Tilgang til siden kunder der du kan søke i aktive og inaktive kunder.",
     "accessProjectsDescription": "Tilgang til prosjekter-siden der du kan søke i aktive og inaktive prosjekter.",
     "accessAdminDescription": "Tilgang til prosjekt-siden der du kan søke i aktive og inaktive prosjekter.",
@@ -496,7 +548,20 @@
     "listUsers": "Hente brukere",
     "listUsersDescription": "Hent listen over alle brukere for abonnementet.",
     "manageReportLinks": "Administrer rapportkoblinger",
-    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger."
+    "manageReportLinksDescription": "Administrer rapportkoblinger. Legg til, rediger og slett rapportkoblinger.",
+    "category_admin": "Admin",
+    "category_customers": "Kunder",
+    "category_timesheet": "Timeliste",
+    "category_reports": "Rapporter",
+    "category_projects": "Prosjekter",
+    "category_api": "API",
+    "selectAll": "Velg/fjern alle",
+    "importUsers": "Hent brukere fra AD",
+    "importUsersDescription": "Hente ut brukere fra Azure Active Directory og registere de i systemet. Dette er ikke noe alle burde ha tilgang til.",
+    "manageApiTokensDescription": "Administere (opprette nye, slette eksisterende, og se eksisterende nøkler) API-nøkler. Det er greit å være forsiktig med hvem som får denne tilgangen, da det er ganske mye som kan gjøres med så mye krefter.",
+    "manageApiTokens": "Administrere API-nøkler",
+    "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer.",
+    "listApiTokens": "Liste ut API-nøkler"
   },
   "notifications": {
     "moreLinkText": "Les mer her",
@@ -507,7 +572,8 @@
       "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse.",
       "forecast": "Uke {0} ({1}) mangler prognose."
     },
-    "clearDismissedText": "Klikk for å vise gjemte varsler."
+    "clearDismissedText": "Klikk for å vise gjemte varsler.",
+    "dismissText": "Avvis varsel"
   },
   "feedback": {
     "headerText": "Tilbakemelding",
@@ -534,5 +600,10 @@
     "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
     "mobileFeedbackText": "Gi tilbakemelding",
     "reportAnonymouslyFieldLabel": "Rapporter anonymt"
+  },
+  "formControl": {
+    "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",
+    "minLengthMessage": "Feltet {{label}} må inneholde minst {{validator.minLength}} tegn.",
+    "regexMessage": "Feltet {{label}} samsvarer ikke med det nødvendige mønsteret."
   }
 }

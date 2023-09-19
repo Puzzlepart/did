@@ -1,7 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
-import { ISubmitProps } from 'components/FormControl'
+import { FormSubmitHook } from 'components/FormControl'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
@@ -9,18 +9,29 @@ import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import { ILabelFormProps } from './types'
 import { useLabelModel } from './useLabelModel'
 
-export function useLabelFormSubmit(
-  props: ILabelFormProps,
-  model: ReturnType<typeof useLabelModel>
-): ISubmitProps {
+/**
+ * Hook that returns an object with properties needed for submitting a label form.
+ *
+ * @template ILabelFormProps - The type of the props passed to the label form.
+ * @template ReturnType<typeof useLabelModel> - The return type of the `useLabelModel` hook.
+ *
+ * @param props - The props passed to the label form.
+ * @param model - The model returned by the `useLabelModel` hook.
+ *
+ * @returns - An object with properties needed for submitting a label form.
+ */
+export const useLabelFormSubmit: FormSubmitHook<
+  ILabelFormProps,
+  ReturnType<typeof useLabelModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateLabel)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [toast, setToast] = useToast(8000)
 
   /**
    * On save label
    */
-  const onSave = async () => {
+  const onSave = useCallback(async () => {
     try {
       await mutate({
         variables: {
@@ -32,7 +43,7 @@ export function useLabelFormSubmit(
         text: props.edit
           ? t('admin.labels.updateSuccess', model.$)
           : t('admin.labels.createSuccess', model.$),
-        type: 'success'
+        intent: 'success'
       })
       model.reset()
       props.onSave(model.$)
@@ -41,10 +52,10 @@ export function useLabelFormSubmit(
         text: props.edit
           ? t('admin.labels.createError')
           : t('admin.labels.createError'),
-        type: 'error'
+        intent: 'error'
       })
     }
-  }
+  }, [model, mutate, props])
 
   /**
    * Checks if form is valid

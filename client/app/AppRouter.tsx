@@ -3,9 +3,10 @@
  *
  * @module App
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { StyledComponent } from 'types'
 import { ErrorFallback, Navigation } from '../parts'
 import styles from './App.module.scss'
 import { AppSwitch } from './AppSwitch'
@@ -22,8 +23,8 @@ import { useAppClassName } from './useAppClassName'
  *
  * @category App
  */
-export const AppRouter: FC = () => {
-  const className = useAppClassName(styles)
+export const AppRouter: StyledComponent = () => {
+  const className = useAppClassName(AppRouter, styles)
   return (
     <Router>
       <div className={className}>
@@ -35,3 +36,5 @@ export const AppRouter: FC = () => {
     </Router>
   )
 }
+
+AppRouter.className = styles.app

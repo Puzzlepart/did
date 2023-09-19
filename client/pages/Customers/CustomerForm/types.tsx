@@ -1,4 +1,7 @@
 import { IFormControlProps } from 'components/FormControl'
-import { ITabItemProps } from 'components/TabContainer'
+import { ITabProps } from 'components/Tabs/types'
+import { Customer } from 'types'
 
-export interface ICustomerFormProps extends ITabItemProps, IFormControlProps {}
+export interface ICustomerFormProps
+  extends ITabProps,
+    IFormControlProps<Customer> {}

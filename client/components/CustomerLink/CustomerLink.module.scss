@@ -1,0 +1,12 @@
+.customerLink {
+  display: flex;
+  align-items: center;
+  
+  .icon {
+    align-self: flex-start;
+  }
+
+  .link {
+    margin-left: 6px;
+  }
+}

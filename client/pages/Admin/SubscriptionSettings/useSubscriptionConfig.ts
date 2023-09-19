@@ -1,3 +1,4 @@
+import { CheckboxProps, SliderProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
@@ -14,9 +15,9 @@ export function useSubscriptionConfig() {
   const { t } = useTranslation()
   return [
     {
-      itemKey: 'info',
-      headerText: t('admin.subscriptionInfoHeader'),
-      itemIcon: 'Info2',
+      id: 'info',
+      text: t('admin.subscriptionInfoHeader'),
+      icon: 'Info',
       fields: [
         {
           id: 'name',
@@ -39,9 +40,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'adsync',
-      itemIcon: 'UserSync',
-      headerText: t('admin.adsync'),
+      id: 'adsync',
+      icon: 'PersonSync',
+      text: t('admin.adsync'),
       fields: [
         {
           id: 'enabled',
@@ -50,7 +51,7 @@ export function useSubscriptionConfig() {
             label: t('admin.adUserSyncEnabledLabel'),
             description: t('admin.adUserSyncEnabledDescription')
           }
-        } as SubscriptionSettingField,
+        } as SubscriptionSettingField<CheckboxProps>,
         {
           id: 'properties',
           type: 'checkbox',
@@ -80,13 +81,13 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.adsync?.enabled
-        } as SubscriptionSettingField
+        } as SubscriptionSettingField<CheckboxProps>
       ]
     },
     {
-      itemKey: 'forecast',
-      itemIcon: 'BufferTimeBefore',
-      headerText: t('admin.forecasting'),
+      id: 'forecast',
+      icon: 'Timeline',
+      text: t('admin.forecasting'),
       fields: [
         {
           id: 'enabled',
@@ -109,13 +110,13 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.forecast?.enabled
-        } as SubscriptionSettingField
+        } as SubscriptionSettingField<SliderProps>
       ]
     },
     {
-      itemKey: 'vacation',
-      headerText: t('admin.vacation'),
-      itemIcon: 'Vacation',
+      id: 'vacation',
+      text: t('admin.vacation'),
+      icon: 'WeatherSunnyLow',
       fields: [
         {
           id: 'totalDays',
@@ -139,9 +140,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'teams',
-      headerText: t('admin.teams'),
-      itemIcon: 'TeamsLogo',
+      id: 'teams',
+      text: t('admin.teams'),
+      icon: 'PeopleTeam',
       fields: [
         {
           id: 'enabled',

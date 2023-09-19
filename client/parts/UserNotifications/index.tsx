@@ -1,8 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react'
 import { useToggle } from 'hooks/common/useToggle'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
@@ -19,9 +20,8 @@ import styles from './UserNotifications.module.scss'
  *
  * @category Function Component
  */
-export const UserNotifications: FC<IUserNotificationsProps> = ({
-  renderAsMenuItem,
-  iconName = 'Ringer'
+export const UserNotifications: StyledComponent<IUserNotificationsProps> = ({
+  renderAsMenuItem
 }) => {
   const { t } = useTranslation()
   const [isOpen, togglePanel] = useToggle(false)
@@ -30,7 +30,7 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
       {renderAsMenuItem ? (
         <MenuItem
           onClick={togglePanel}
-          iconProps={{ iconName }}
+          icon={icon('Alert')}
           text={t('notifications.headerText')}
         >
           <NotificationIndicator
@@ -44,10 +44,8 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
           />
         </MenuItem>
       ) : (
-        <div className={styles.root} onClick={togglePanel}>
-          <div className={styles.icon}>
-            <Icon iconName={iconName} />
-          </div>
+        <div className={UserNotifications.className} onClick={togglePanel}>
+          <div className={styles.icon}>{icon('Alert')}</div>
           <NotificationIndicator />
         </div>
       )}
@@ -55,6 +53,9 @@ export const UserNotifications: FC<IUserNotificationsProps> = ({
     </>
   )
 }
+
+UserNotifications.displayName = 'UserNotifications'
+UserNotifications.className = styles.userNotifications
 
 export * from './NotificationsPanel'
 export * from './types'

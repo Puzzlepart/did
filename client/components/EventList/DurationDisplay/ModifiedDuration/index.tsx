@@ -1,48 +1,51 @@
-import { Icon, TooltipHost } from '@fluentui/react'
-import $date, { DurationStringFormat } from 'DateUtils'
-import React, { FC } from 'react'
+import { Tooltip } from '@fluentui/react-components'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ModifiedDuration.module.scss'
 import { IModifiedDurationProps } from './types'
+import { useModifiedDuration } from './useModifiedDuration'
 
-export const ModifiedDuration: FC<IModifiedDurationProps> = (props) => {
+export const ModifiedDuration: StyledComponent<IModifiedDurationProps> = (
+  props
+) => {
   const { t } = useTranslation()
-  if (!props.event['adjustedMinutes']) return <>{props.children}</>
-  const originalDuration = $date.getDurationString(
-    props.event['originalDuration'],
-    t,
-    DurationStringFormat.Long
-  )
-  const modifiedDuration = $date.getDurationString(
-    props.event.duration,
-    t,
-    DurationStringFormat.Long
-  )
+  const { modifiedDuration, originalDuration, isAdjusted } =
+    useModifiedDuration(props)
+  if (!isAdjusted) return <>{props.children}</>
   return (
-    <TooltipHost
-      hostClassName={styles.host}
-      className={styles.root}
+    <Tooltip
+      relationship={props.relationship}
+      withArrow={props.withArrow}
       content={
         <div className={styles.content}>
-          <Icon {...props.iconProps} />
-          <span>
+          <div className={styles.header}>
+            <div className={styles.icon}>{icon('ArrowSortUp')}</div>
+            <div className={styles.title}>
+              {t('timesheet.eventDurationModifiedTitle')}
+            </div>
+          </div>
+          <div className={styles.body}>
             {t('timesheet.eventDurationModifiedMessage', {
               modifiedDuration,
               originalDuration
             })}
-          </span>
+          </div>
         </div>
       }
     >
-      {props.children}
-      <Icon {...props.iconProps} />
-    </TooltipHost>
+      <div className={ModifiedDuration.className}>
+        {props.children}
+        <div className={styles.icon}>{icon('ArrowSortUp')}</div>
+      </div>
+    </Tooltip>
   )
 }
 
+ModifiedDuration.displayName = 'ModifiedDuration'
+ModifiedDuration.className = styles.modifiedDuration
 ModifiedDuration.defaultProps = {
-  iconProps: {
-    className: styles.icon,
-    iconName: 'SortUp'
-  }
+  withArrow: true,
+  relationship: 'description'
 }

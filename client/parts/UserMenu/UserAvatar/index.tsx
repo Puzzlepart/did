@@ -1,5 +1,4 @@
-/* eslint-disable tsdoc/syntax */
-import { Icon, Persona, PersonaSize } from '@fluentui/react'
+import { Persona } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import React, { FC } from 'react'
 import { MenuItem } from '../MenuItem'
@@ -12,24 +11,14 @@ export const UserAvatar: FC = () => {
   return (
     <MenuItem>
       <Persona
-        text={user.displayName}
-        secondaryText={user.mail}
-        tertiaryText={user.role.name}
-        imageUrl={user.photo?.base64}
-        size={PersonaSize.size40}
-        onRenderTertiaryText={() => (
-          <div>
-            <Icon
-              iconName='Permissions'
-              styles={{ root: { color: '#444', margin: '2px 4px 0 0' } }}
-            />
-            <span>{user.role.name}</span>
-          </div>
-        )}
-        styles={{
-          secondaryText: { fontSize: 10 },
-          tertiaryText: { display: 'block', fontSize: 10 }
+        name={user.displayName}
+        secondaryText={user.role.name}
+        avatar={{
+          image: {
+            src: user.photo?.base64
+          }
         }}
+        size='large'
       />
     </MenuItem>
   )

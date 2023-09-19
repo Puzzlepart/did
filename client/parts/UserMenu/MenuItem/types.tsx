@@ -1,11 +1,11 @@
-import { IIconProps } from '@fluentui/react'
-import { HTMLAttributes } from 'react'
+import { ButtonProps } from '@fluentui/react-components'
+import { CSSProperties } from 'react'
 
-export interface IMenuItemProps extends HTMLAttributes<HTMLDivElement> {
-  iconProps?: IIconProps
+export interface IMenuItemProps
+  extends Pick<ButtonProps, 'onClick' | 'icon' | 'title'> {
   text?: string
   hideText?: boolean
   href?: string
-  iconClassName?: string
-  textStyle?: React.CSSProperties
+  textStyle?: CSSProperties
+  style?: CSSProperties
 }

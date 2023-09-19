@@ -1,12 +1,19 @@
-import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
+import { IContextualMenuItem } from '@fluentui/react'
 import { IListGroupProps, ListFilterState } from 'components/List/types'
+import { ITabProps } from 'components/Tabs'
+import { IDatePeriod } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { Project, ReportLink, TimesheetPeriodObject, User } from 'types'
 
 /**
  * @category Reports
  */
-export interface IReportsQuery extends IPivotItemProps {
+export interface IReportsQuery extends ITabProps {
+  /**
+   * Unique query identifier
+   */
+  id: string
+
   /**
    * GraphQL query
    */
@@ -26,7 +33,9 @@ export interface IReportsQuery extends IPivotItemProps {
   exportFileName?: string
 
   /**
-   * Report link reference
+   * Report link reference. String in the format
+   * `{year}_{month}`. This is used to match
+   * report links to queries.
    */
   reportLinkRef?: string
 
@@ -38,7 +47,7 @@ export interface IReportsQuery extends IPivotItemProps {
    */
   reportLinks?: ReportLink[]
 
-  [key: string]: any
+  periods?: IDatePeriod[]
 }
 
 /**

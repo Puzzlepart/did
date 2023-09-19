@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { useMap } from 'hooks/common/useMap'
 import { useCallback } from 'react'
 import { FormInputControlBase } from './types'
@@ -11,37 +12,47 @@ import { FormInputControlBase } from './types'
  *
  * @returns `FormInputControlBase`
  */
-function registerControl<O = any>(
-  name: string,
+function registerControl<TOptions = any, KeyType = string>(
+  name: KeyType,
   model: ReturnType<typeof useMap>,
-  options?: O
-): FormInputControlBase<O> {
+  options?: TOptions
+): FormInputControlBase<TOptions, KeyType> {
   return {
+    id: `form_control_${name}`,
     name,
     model,
     options
   }
 }
 
-export type RegisterControlCallback = <O>(
-  name: string,
-  options?: O
-) => FormInputControlBase<O>
+/**
+ * A callback function that registers a form input control with the given name and options.
+ *
+ * @template O The type of options for the form input control.
+ *
+ * @param name The name of the form input control.
+ * @param options The options for the form input control.
+ *
+ * @returns A `FormInputControlBase` instance with the given options.
+ */
+export type RegisterControlCallback<TOptions = {}, KeyType = string> = (
+  name: KeyType,
+  options?: TOptions
+) => FormInputControlBase<TOptions>
 
 /**
  * Use form controls
  *
  * @param model - Model
  *
- * @returns a callback to register a new control
+ * @returns A callback to register a new control
  */
-export function useFormControls(
+export function useFormControls<KeyType = any>(
   model: ReturnType<typeof useMap>
-): RegisterControlCallback {
+) {
   return useCallback(
-    (name: string, options?: any) => {
-      return registerControl(name, model, options)
-    },
+    <TOptions = {}>(name: KeyType, options?: TOptions) =>
+      registerControl<TOptions, KeyType>(name, model, options),
     [model]
   )
 }

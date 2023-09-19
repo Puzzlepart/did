@@ -1,29 +1,31 @@
-import { DeleteLink, EditLink } from 'components'
+/* eslint-disable @typescript-eslint/ban-types */
+import { IListColumn } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
-import React from 'react'
+import { ComponentLogicHook } from 'hooks'
+import React, { useMemo } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
+
+type UseColumnsHook = ComponentLogicHook<{}, IListColumn[]>
 
 /**
  * Columns hook for Labels
  */
-export function useColumns({ onEdit, onDelete }) {
+export const useColumns: UseColumnsHook = () => {
   const { t } = useTranslation()
-  return [
-    col('name', '', { maxWidth: 180 }, (label: LabelObject) => (
-      <EntityLabel label={label} />
-    )),
-    col('description', t('common.descriptionFieldLabel'), {
-      isMultiline: true,
-      data: { hidden: isMobile }
-    }),
-    col(null, null, { minWidth: 180 }, (label: LabelObject) => (
-      <div style={{ display: 'flex' }}>
-        <EditLink style={{ marginRight: 12 }} onClick={() => onEdit(label)} />
-        <DeleteLink onClick={() => onDelete(label)} />
-      </div>
-    ))
-  ]
+  return useMemo(
+    () => [
+      createColumnDef('name', '', { maxWidth: 180 }, (label: LabelObject) => (
+        <EntityLabel label={label} />
+      )),
+      createColumnDef('description', t('common.descriptionFieldLabel'), {
+        isMultiline: true,
+        minWidth: 180,
+        data: { hidden: isMobile }
+      })
+    ],
+    []
+  )
 }

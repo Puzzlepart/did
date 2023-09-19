@@ -1,13 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useToast } from 'components'
+import { DateObject } from 'DateUtils'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import $deleteApiToken from './deleteApiToken.gql'
-import $tokens from './tokens.gql'
+import { useApiTokensQuery } from './useApiTokensQuery'
 import { useColumns } from './useColumns'
 
 /**
@@ -17,53 +17,80 @@ import { useColumns } from './useColumns'
  */
 export function useApiTokens() {
   const { t } = useTranslation()
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const [items, { refetch }] = useApiTokensQuery()
+  const [toast, setToast] = useToast(8000)
   const [deleteApiToken] = useMutation($deleteApiToken)
-  const query = useQuery($tokens)
-  const [apiKey, setApiKey] = useState(null)
   const [form, setForm] = useState<IApiTokenFormProps>({})
+  const [selectedToken, onSelectionChanged] = useState<ApiToken>(null)
+  const [newToken, setNewToken] = useState<ApiToken>(null)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
 
-  const onDelete = useCallback(async (token: ApiToken) => {
+  /**
+   * Deletes the `selectedToken` and shows a success toast message.
+   *
+   * @returns - A Promise that resolves when the API token is deleted.
+   */
+  const onDelete = useCallback(async () => {
     const response = await getResponse({
       title: t('admin.apiTokens.confirmDeleteTitle'),
-      subText: t('admin.apiTokens.confirmDeleteSubText', token),
-      responses: [[t('common.yes'), true, true], [t('common.no')]]
+      subText: t('admin.apiTokens.confirmDeleteSubText', {
+        ...selectedToken,
+        expires: new DateObject(selectedToken.expires).$.fromNow()
+      }),
+      responses: [
+        [t('common.yes'), true, true],
+        [t('common.no'), false, false]
+      ]
     })
-    if (response === true) {
-      await deleteApiToken({ variables: { name: token.name } })
-      setToast({
-        type: 'info',
-        text: t('admin.tokenDeletedText', token)
-      })
-      query.refetch()
-    }
-  }, [])
+    if (!response) return
+    await deleteApiToken({ variables: { name: selectedToken.name } })
+    setToast({
+      intent: 'success',
+      text: t('admin.tokenDeletedText', selectedToken)
+    })
+    refetch()
+  }, [selectedToken])
 
-  const onKeyAdded = useCallback((generatedKey: string) => {
+  /**
+   * Callback function that is called when a new API key is generated and added.
+   * Sets the API token in state and refetches the API tokens. Hides the API key
+   * after 10 seconds.
+   *
+   * @param token - The newly created API token.
+   */
+  const onTokenAdded = useCallback((token: ApiToken) => {
     setForm({})
-    if (generatedKey) {
-      setToast({ text: t('admin.tokenGeneratedText') }, 20_000)
-      setApiKey(generatedKey)
-    } else {
-      setToast({
-        type: 'error',
-        text: t('admin.tokenErrorText')
-      })
-    }
-    query.refetch()
+    setNewToken(token)
+    refetch()
+    setTimeout(() => setNewToken(null), 10_000)
   }, [])
 
-  const columns = useColumns({ onDelete })
+  /**
+   * Callback function that is called when the API key is copied to the clipboard.
+   * Sets a success toast message and clears the API key from state.
+   */
+  const onKeyCopied = useCallback((token: ApiToken) => {
+    setToast({
+      text: t('admin.apiTokens.apiKeyCopied', token),
+      intent: 'success'
+    })
+    setNewToken(null)
+  }, [])
+
+  const columns = useColumns(onKeyCopied)
 
   return {
-    query,
+    items,
     form,
     setForm,
-    apiKey,
-    toast,
     columns,
-    onKeyAdded,
-    confirmationDialog
+    onTokenAdded,
+    confirmationDialog,
+    toast,
+    onKeyCopied,
+    onDelete,
+    selectedToken,
+    newToken,
+    onSelectionChanged
   }
 }

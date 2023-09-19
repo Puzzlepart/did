@@ -11,5 +11,8 @@ export const UserVacationTooltipContent: FC<any> = (props) => {
     case 'confirmed': {
       return <span>{t('common.vacationSummaryTooltipConfirmed', props)}</span>
     }
+    default: {
+      return null
+    }
   }
 }

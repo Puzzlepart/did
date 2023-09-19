@@ -1,16 +1,27 @@
-import { IMessageBarProps } from '@fluentui/react'
+import { MenuItemProps } from '@fluentui/react-components'
+import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
+import { FluentIconName } from 'utils'
 
-export type UserMessageType =
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'severeWarning'
+/**
+ * Represents an action that can be performed on a user message.
+ */
+export interface IUserMessageAction extends Omit<MenuItemProps, 'icon'> {
+  /**
+   * The name of the Fluent UI icon to display for the action (optional).
+   */
+  iconName?: FluentIconName
+
+  /**
+   * The color of the icon to display for the action (optional).
+   */
+  iconColor?: string
+}
 
 /**
  * @category UserMessage
  */
-export interface IUserMessageProps extends IMessageBarProps {
+export interface IUserMessageProps extends AlertProps {
   /**
    * Header text to show in **bold** _slightly larger_ font
    */
@@ -26,27 +37,7 @@ export interface IUserMessageProps extends IMessageBarProps {
   /**
    * On click handler for the message
    */
-  onClick?: (event: React.MouseEvent<any>) => void
-
-  /**
-   * On dismiss handler for the message
-   */
-  onDismiss?: () => void
-
-  /**
-   * Type info, warning, error etc
-   */
-  type?: UserMessageType
-
-  /**
-   * Icon to use if not default for the type
-   */
-  iconName?: string
-
-  /**
-   * Container style
-   */
-  containerStyle?: React.CSSProperties
+  onClick?: (event: MouseEvent<any>) => void
 
   /**
    * To flex the message center with a fixed height
@@ -54,7 +45,29 @@ export interface IUserMessageProps extends IMessageBarProps {
   fixedHeight?: number
 
   /**
-   * Styles for the inner part of the message
+   * Actions to show in a menu
    */
-  innerStyle?: React.CSSProperties
+  actions?: IUserMessageAction[]
+
+  /**
+   * Whether to open the actions menu on hover
+   */
+  openActionsOnHover?: boolean
+}
+
+/**
+ * Props for the UserMessageContainer component.
+ */
+export interface IUserMessageContainerProps
+  extends HTMLAttributes<HTMLDivElement>,
+    Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
+  /**
+   * Vertical direction for the items in the container.
+   */
+  vertical?: boolean
+
+  /**
+   * How to spread the items in the container.
+   */
+  spread?: 'evenly' | 'around' | 'between'
 }

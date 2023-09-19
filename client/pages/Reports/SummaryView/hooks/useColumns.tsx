@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   IColumn,
   IDetailsColumnRenderTooltipProps,
@@ -36,7 +35,11 @@ export function useColumns(): IListColumn[] {
       }
     })
     data.onRenderColumnHeader = (props: IDetailsColumnRenderTooltipProps) => (
-      <ColumnHeader {...props} />
+      <ColumnHeader
+        hostClassName={props.hostClassName}
+        text={props.column.name}
+        subText={props.column.data?.subText}
+      />
     )
     columns.push({
       key: p.id,

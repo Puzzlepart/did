@@ -1,26 +1,18 @@
-.root {
+.periodColumnTooltip {
   padding: 20px;
-  min-width: 420px;
-  width: 420px;
+  min-width: 240px;
+  width: 240px;
   box-sizing: border-box;
-  max-width: none;
 
   .header {
-    margin: 0 0 25px 0;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin: 0 0 25px 0;
+    padding: 0 10px 0 0;
 
-    .title {
-      flex-grow: 1;
-      
-      .text {
-        font-size: 18px;
-      }
-    }
-
-    .userInfo {
-      margin-left: auto;
-      order: 2;
+    .userAvatar {
+      justify-content: flex-end;
     }
   }
 

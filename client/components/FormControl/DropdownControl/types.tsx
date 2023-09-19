@@ -1,14 +1,30 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { IDropdownProps, ITextFieldProps } from '@fluentui/react'
-import { FormInputControlBase } from '../types'
+import { DropdownProps, OptionProps } from '@fluentui/react-components'
+import { BaseControlOptions, FormInputControlBase } from '../types'
 
-export interface IDropdownControlProps
-  extends Omit<FormInputControlBase<{}>, 'options'>,
-    Omit<IDropdownProps, 'name' | 'value' | 'onChange'> {
-  setValue?: 'data' | 'key'
+/**
+ * Options for the DropdownControl component.
+ */
+export interface DropdownControlOptions extends BaseControlOptions {
   /**
-   * Description of the control as `IDropdownProps` from [@fluentui/react](@fluentui/react)
-   * does not have the `description` property.
+   * A function to transform the selected value before it is submitted.
+   *
+   * @param data - The data to transform.
    */
-  description?: ITextFieldProps['description']
+  preTransformValue?: (data: {
+    optionValue: string
+    optionText: string
+  }) => void
+}
+
+/**
+ * Props for the DropdownControl component.
+ */
+export interface IDropdownControlProps
+  extends FormInputControlBase<DropdownControlOptions>,
+    Pick<DropdownProps, 'defaultValue' | 'placeholder'> {
+  /**
+   * An array of options to display in the dropdown.
+   */
+  values: OptionProps[]
 }

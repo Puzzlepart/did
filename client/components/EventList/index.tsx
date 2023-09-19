@@ -1,6 +1,7 @@
 import { List } from 'components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
+import _ from 'underscore'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 import { useColumns } from './useColumns'
@@ -15,16 +16,24 @@ import { useColumns } from './useColumns'
 export const EventList: ReusableComponent<IEventListProps> = (props) => {
   const columns = useColumns(props)
   return (
-    <div className={styles.root} hidden={props.hidden}>
+    <div className={EventList.className} hidden={props.hidden}>
       <List
-        enableShimmer={props.enableShimmer}
+        {..._.pick(
+          props,
+          'items',
+          'hideToolbar',
+          'enableShimmer',
+          'listGroupProps',
+          'menuItems',
+          'searchBox'
+        )}
         columns={columns}
-        items={props.items}
-        listGroupProps={props.listGroupProps}
-        listGroupRenderProps={{ showEmptyGroups: true }}
       />
     </div>
   )
 }
+
+EventList.displayName = 'EventList'
+EventList.className = styles.eventList
 
 export * from './types'

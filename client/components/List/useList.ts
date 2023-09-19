@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'
@@ -9,12 +8,11 @@ import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 
 /**
- * Component logic hook for `<List />
-`
+ * Hook that returns a list of items and selection state for a given set of props.
  *
- * @param props - Props
+ * @param props The props for the list.
  *
- * @category List
+ * @returns An object containing the list props and context.
  */
 export function useList(props: IListProps) {
   const [state, dispatch] = useListReducer({
@@ -29,20 +27,21 @@ export function useList(props: IListProps) {
   )
 
   const selection = useMemo(() => {
-    if (!props.selectionProps) return null
+    const [selectionMode = SelectionMode.none, onChanged] = props.selectionProps
+    if (!onChanged) return null
     return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
-        if (props.selectionProps?.mode === SelectionMode.single) {
-          props.selectionProps.onChanged(_.first(_selection))
+        if (selectionMode === SelectionMode.single) {
+          onChanged(_.first(_selection))
         } else {
-          props.selectionProps.onChanged(_selection)
+          onChanged(_selection)
         }
       }
     })
   }, [props.selectionProps])
 
-  const context: IListContext = { props, state, dispatch }
+  const context = { props, state, dispatch } as IListContext
 
   const [groups, items] = useListGroups(context)
 

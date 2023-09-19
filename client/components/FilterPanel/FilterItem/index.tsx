@@ -1,7 +1,8 @@
-/* eslint-disable tsdoc/syntax */
-import { Checkbox, SearchBox } from '@fluentui/react'
-import React, { FC } from 'react'
+import { Checkbox } from '@fluentui/react-components'
+import { SearchBox } from '@fluentui/react-search-preview'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
 import { useFilterItem } from './useFilterItem'
@@ -9,28 +10,31 @@ import { useFilterItem } from './useFilterItem'
 /**
  * @category Function Component
  */
-export const FilterItem: FC<IFilterItemProps> = (props) => {
+export const FilterItem: StyledComponent<IFilterItemProps> = (props) => {
   const { t } = useTranslation()
   const { onSearch, items, showCount, setShowCount, selectedKeys } =
     useFilterItem(props)
   return (
-    <div className={styles.root}>
+    <div className={FilterItem.className}>
       <div className={styles.header} hidden={props.hideHeader}>
         <span>{props.filter.name}</span>
       </div>
-      <div className={styles.searchBox} hidden={props.filter.items.length < 10}>
+      <div
+        className={styles.searchBox}
+        hidden={props.filter.items.length < props.shortListCount}
+      >
         <SearchBox
           placeholder={t('common.searchPlaceholder')}
-          onChange={(_event, value) => onSearch(value)}
+          onChange={(_event, { value }) => onSearch(value)}
         />
       </div>
       {[...items].slice(0, showCount).map((item) => (
         <div key={item.key} className={styles.item}>
           <Checkbox
             label={item.value}
-            checked={selectedKeys.has(item.key)}
-            onChange={(_, checked) =>
-              props.onFilterUpdated(props.filter, item, checked)
+            checked={selectedKeys.has(item.key as string)}
+            onChange={(_, { checked }) =>
+              props.onFilterUpdated(props.filter, item, checked as boolean)
             }
           />
         </div>
@@ -45,3 +49,5 @@ export const FilterItem: FC<IFilterItemProps> = (props) => {
     </div>
   )
 }
+
+FilterItem.className = styles.filterItem

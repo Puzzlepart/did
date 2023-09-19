@@ -1,8 +1,7 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { IListColumn } from 'components/List/types'
-import { TFunction } from 'i18next'
-import { createContext } from 'react'
-import { IReportsState } from './types'
+import { createContext, Dispatch, useContext } from 'react'
+import { IReportsQuery, IReportsState } from './types'
 
 /**
  * @category Reports
@@ -16,7 +15,7 @@ export interface IReportsContext {
   /**
    * Dispatch an action
    */
-  dispatch?: React.Dispatch<AnyAction>
+  dispatch?: Dispatch<AnyAction>
 
   /**
    * Columns
@@ -24,12 +23,19 @@ export interface IReportsContext {
   columns?: IListColumn[]
 
   /**
-   * Translate function
+   * Queries for the reports
    */
-  t: TFunction
+  queries: IReportsQuery[]
 }
 
 /**
  * @category Reports
  */
 export const ReportsContext = createContext<IReportsContext>(null)
+
+/**
+ * Returns the current value of the ReportsContext.
+ *
+ * @returns The current value of the ReportsContext.
+ */
+export const useReportsContext = () => useContext(ReportsContext)

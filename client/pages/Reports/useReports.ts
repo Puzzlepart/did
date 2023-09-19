@@ -1,14 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { TabItems } from 'components/Tabs'
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
-import {
-  useReportsQueries,
-  useReportsQuery,
-  useReportsQueryOptions
-} from './hooks'
+import { IReportsContext } from './context'
+import { useReportsQueries, useReportsQuery } from './hooks'
 import { useReportsReducer } from './reducer'
+import { CHANGE_QUERY } from './reducer/actions'
+import { ReportTab } from './ReportTab'
+import { SummaryView } from './SummaryView'
+import { WelcomeTab } from './WelcomeTab'
 
 /**
  * Component logic for `<Reports />`
@@ -29,7 +30,6 @@ export function useReports() {
   const { t } = useTranslation()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer(queries)
-  const options = useReportsQueryOptions({ queries, state, dispatch })
   const query = useReportsQuery({ state, dispatch })
 
   useLayoutEffect(() => {
@@ -45,13 +45,48 @@ export function useReports() {
     autoUpdate: !state.loading && !!state.activeFilter?.text
   })
 
-  const context = useMemo(() => ({ state, dispatch, t }), [state])
+  const context = useMemo<IReportsContext>(
+    () => ({ state, dispatch, queries }),
+    [state]
+  )
+
+  const queryTabs = useMemo(
+    () =>
+      _.reduce(
+        _.filter(queries, (q) => !q.hidden),
+        (tabs, query) => {
+          const { id, text, description } = query
+          tabs[id] = [
+            ReportTab,
+            {
+              text,
+              description
+            }
+          ]
+          return tabs
+        },
+        {} as TabItems
+      ),
+    [queries]
+  )
+
+  const tabs: TabItems = useMemo(
+    () => ({
+      home: [WelcomeTab, t('reports.welcomeHeaderText')],
+      ...queryTabs,
+      summary: [SummaryView, t('reports.summaryHeaderText')]
+    }),
+    [queryTabs]
+  )
+
+  const onTabSelect = (key: string) => {
+    if (key === 'home') return
+    dispatch(CHANGE_QUERY({ id: key }))
+  }
 
   return {
-    defaultSelectedKey: state.queryPreset?.itemKey || 'default',
-    queries: queries.filter((q) => !q.hidden),
-    options,
+    tabs,
     context,
-    reportLinks: state.reportLinks
-  } as const
+    onTabSelect
+  }
 }

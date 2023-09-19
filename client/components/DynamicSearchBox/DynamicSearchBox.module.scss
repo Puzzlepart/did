@@ -1,0 +1,15 @@
+.dynamicSearchBox {
+    width: 100%;
+    box-sizing: border-box;
+
+    .clearSearch {
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    span[class*="fui-SearchBox__dismiss"] {
+        display: none;
+    }
+}

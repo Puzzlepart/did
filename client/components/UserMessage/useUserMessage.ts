@@ -1,57 +1,39 @@
-import {
-  IMessageBarProps,
-  IMessageBarStyleProps,
-  IMessageBarStyles,
-  IStyleFunctionOrObject,
-  MessageBarType
-} from '@fluentui/react'
-import { HTMLAttributes } from 'react'
+import { MenuItemProps } from '@fluentui/react-components'
+import { HTMLAttributes, useMemo } from 'react'
+import { getFluentIcon } from 'utils'
+import { UserMessage } from '.'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
+import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
- * A component that supports a `<MessageBar />` with
- * markdown using `react-markdown`.
+ * Component logic hook for the `UserMessage` component.
  *
  * @category Function Component
  */
 export function useUserMessage(props: IUserMessageProps) {
-  const messageBarStyles: IStyleFunctionOrObject<
-    IMessageBarStyleProps,
-    IMessageBarStyles
-  > = props.styles || {}
-
-  const messageBarType = MessageBarType[props.type] || MessageBarType.info
-
-  if (props.fixedHeight) {
-    messageBarStyles['root'] = {
-      ...messageBarStyles['root'],
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: props.fixedHeight
-    }
-  }
-
-  const container: HTMLAttributes<HTMLDivElement> = {
+  const alertStyle = useUserMessageStyles(props.intent)
+  const hasContextMenu = props.actions?.length > 0
+  const containerProps: HTMLAttributes<HTMLDivElement> = {
     id: props.id,
-    className: [styles.root, props.className].join(' '),
-    style: props.containerStyle,
     hidden: props.hidden,
-    onClick: props.onClick
+    onClick: props.onClick,
+    className: [
+      UserMessage.className,
+      props.className,
+      hasContextMenu && styles.hasContextMenu
+    ]
+      .filter(Boolean)
+      .join(' ')
   }
+  const actions = useMemo<MenuItemProps[]>(
+    () =>
+      props.actions.map((action) => ({
+        ...action,
+        icon: getFluentIcon(action.iconName, true, action.iconColor)
+      })),
+    [props.actions]
+  )
 
-  const message: IMessageBarProps = {
-    styles: messageBarStyles,
-    isMultiline: props.isMultiline,
-    messageBarType,
-    messageBarIconProps: props.iconName && { iconName: props.iconName },
-    onDismiss: props.onDismiss,
-    actions: props.actions
-  }
-
-  return {
-    container,
-    message
-  }
+  return { containerProps, alertStyle, actions }
 }

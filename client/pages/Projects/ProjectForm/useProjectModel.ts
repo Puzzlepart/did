@@ -1,33 +1,8 @@
-/* eslint-disable unicorn/consistent-function-scoping */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useMap } from 'hooks/common/useMap'
-import { useRandomFabricIcon } from 'hooks/common/useRandomFabricIcon'
-import { useEffect } from 'react'
-import { convertToMap } from 'utils/convertToMap'
-import { ProjectModel } from './ProjectModel'
+import { useFormControlModel } from 'components'
+import { Project } from 'types'
+import _ from 'underscore'
+import { mapProperty } from 'utils'
 import { IProjectFormProps } from './types'
-import { useProjectFormValidation } from './useProjectFormValidation'
-
-/**
- * Initializes the model based on `props.edit`. Sets a random
- * fabric icon using hook `useRandomFabricIcon`.
- *
- * @param map - Map
- * @param props - Props
- */
-export function useInitModel(
-  map: ReturnType<typeof useMap>,
-  props: IProjectFormProps
-): void {
-  const icon = useRandomFabricIcon()
-  useEffect(() => {
-    const model = new ProjectModel().init(props.edit)
-    const _map = convertToMap(model)
-    map.$set(_map)
-    if (!props.edit) map.set('icon', icon)
-  }, [props.edit])
-}
 
 /**
  * Returns the model and functions to update
@@ -38,9 +13,15 @@ export function useInitModel(
  * @returns the initial model
  */
 export function useProjectModel(props: IProjectFormProps) {
-  const map = useMap<keyof ProjectModel, ProjectModel>()
-  const valid = useProjectFormValidation(map.$, !!props.edit)
-  useInitModel(map, props)
+  const map = useFormControlModel<keyof Project, Project>(props.edit, (p) =>
+    _.omit(
+      {
+        ...p,
+        labels: mapProperty<any, string>(p.labels, 'name')
+      },
+      ['customer', 'tag']
+    )
+  )
 
   /**
    * Project ID is not included the mutation
@@ -48,12 +29,12 @@ export function useProjectModel(props: IProjectFormProps) {
    * in the form.
    */
   const projectId =
-    map.value('key')?.length > 1 &&
-    [map.value('customerKey'), map.value('key')].join(' ')
+    map.value('key')?.length > 1
+      ? [map.value('customerKey'), map.value('key')].join(' ')
+      : null
 
   return {
     ...map,
-    valid,
     projectId
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { CustomerLink } from 'components/CustomerLink'
 import {
   CustomerFilter,

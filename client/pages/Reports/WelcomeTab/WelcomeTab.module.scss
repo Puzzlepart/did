@@ -1,0 +1,15 @@
+.welcomeTab {
+  margin: 0 0 0 10px;
+
+  .reportButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: -8px;
+    padding: 20px 0 0 0;
+
+    > button {
+      margin: 8px;
+    }
+  }
+}

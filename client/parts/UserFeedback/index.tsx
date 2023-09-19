@@ -1,8 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from '@fluentui/react'
 import { useToggle } from 'hooks'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
 import { IUserFeedbackProps } from './types'
@@ -18,9 +19,8 @@ import styles from './UserFeedback.module.scss'
  *
  * @category Function Component
  */
-export const UserFeedback: FC<IUserFeedbackProps> = ({
-  renderAsMenuItem,
-  iconName = 'Emoji2'
+export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({
+  renderAsMenuItem
 }) => {
   const { t } = useTranslation()
   const [isOpen, togglePanel] = useToggle(false)
@@ -29,14 +29,12 @@ export const UserFeedback: FC<IUserFeedbackProps> = ({
       {renderAsMenuItem ? (
         <MenuItem
           onClick={togglePanel}
-          iconProps={{ iconName: 'Emoji2' }}
+          icon={icon('Emoji')}
           text={t('feedback.mobileFeedbackText')}
         />
       ) : (
-        <div className={styles.root} onClick={togglePanel}>
-          <div className={styles.icon}>
-            <Icon iconName={iconName} />
-          </div>
+        <div className={UserFeedback.className} onClick={togglePanel}>
+          <div className={styles.icon}>{icon('Emoji')}</div>
         </div>
       )}
       <FeedbackPanel
@@ -48,5 +46,8 @@ export const UserFeedback: FC<IUserFeedbackProps> = ({
     </>
   )
 }
+
+UserFeedback.displayName = 'UserFeedback'
+UserFeedback.className = styles.userFeedback
 
 export * from './FeedbackPanel'

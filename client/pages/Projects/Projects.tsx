@@ -1,13 +1,11 @@
-import { TabContainer } from 'components/TabContainer'
+import { Tabs } from 'components/Tabs'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
-import { CHANGE_TAB } from './reducer/actions'
-import { ProjectsTab } from './types'
+import { CLOSE_EDIT_PANEL } from './reducer'
 import { useProjects } from './useProjects'
 
 /**
@@ -15,39 +13,47 @@ import { useProjects } from './useProjects'
  */
 export const Projects: FC = () => {
   const { t } = useTranslation()
-  const { listProps, context, renderDetails } = useProjects()
+  const { context, renderDetails } = useProjects()
 
   return (
-    <ProjectsContext.Provider value={context}>
+    <ProjectsContext.Provider value={{ ...context }}>
       {renderDetails ? (
         <ProjectDetails />
       ) : (
-        <TabContainer
-          hidden={!!context.state.selected}
-          defaultSelectedKey={context.state.currentTab}
-          onTabChanged={(tab: ProjectsTab) =>
-            context.dispatch(CHANGE_TAB({ tab }))
-          }
-        >
-          <ProjectList
-            {...listProps}
-            itemKey='s'
-            headerText={t('common.search')}
-            items={context.state.projects}
-          />
-          <ProjectList
-            {...listProps}
-            itemKey='m'
-            headerText={t('projects.myProjectsText')}
-            items={context.state.projects.filter((p) => !!p.outlookCategory)}
-          />
-          <ProjectForm
-            itemKey='new'
-            headerText={t('projects.createNewText')}
-            permission={PermissionScope.MANAGE_PROJECTS}
-          />
-        </TabContainer>
+        <Tabs
+          items={{
+            s: [
+              ProjectList,
+              t('common.search'),
+              {
+                enableShimmer: context.loading,
+                searchBox: {
+                  placeholder: t('common.searchPlaceholder')
+                }
+              }
+            ],
+            m: [
+              ProjectList,
+              t('projects.myProjectsText'),
+              {
+                searchBox: {
+                  placeholder: t('projects.myProjectsSearchPlaceholder')
+                }
+              }
+            ],
+            new: [ProjectForm, t('projects.createNewText')]
+          }}
+        ></Tabs>
       )}
+      <ProjectForm
+        edit={{ ...context.state.editProject }}
+        panelProps={{
+          scroll: true,
+          isOpen: !!context.state.editProject,
+          headerText: context.state.editProject?.name,
+          onDismiss: () => context.dispatch(CLOSE_EDIT_PANEL())
+        }}
+      />
     </ProjectsContext.Provider>
   )
 }

@@ -83,9 +83,9 @@ export class ProjectService extends MongoDocumentService<Project> {
   /**
    * Get projects, customers and labels.
    *
-   * Projects are sorted by the name property
-   *
-   * Connects labels and customer to projects
+   * Projects are sorted by the name property, then connects
+   * customers and labels to projects using the `customerKey` and
+   * `labels` properties.
    *
    * @param query - Query
    */
@@ -97,24 +97,25 @@ export class ProjectService extends MongoDocumentService<Project> {
             this.find(query, { name: 1 }),
             this._customerSvc.getCustomers(
               query?.customerKey && { key: query.customerKey }
-            ),
+            ) as Promise<Customer[]>,
             this._labelSvc.getLabels()
           ])
           const _projects = projects
             .map((p) => {
               p.customer =
                 _.find(customers, (c) => c.key === p.customerKey) || null
-              p.labels = _.filter(labels, ({ name }) => {
-                // eslint-disable-next-line unicorn/prefer-array-some
-                return !!_.find(p.labels, (l) => name === l)
-              })
+              p.labels = _.filter(labels, (l) => _.contains(p.labels, l.name))
               return p
             })
             .filter((p) => p.customer !== null)
           const data = { projects: _projects, customers, labels }
           return data
         },
-        { key: ['getprojectsdata', query?.customerKey.toString()] }
+        {
+          key: ['getprojectsdata', query?.customerKey.toString()]
+            .filter(Boolean)
+            .join(':')
+        }
       )
     } catch (error) {
       throw error

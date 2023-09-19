@@ -2,18 +2,27 @@ import { useMemo, useState } from 'react'
 import s from 'underscore.string'
 import { IFilterItemProps } from './types'
 
-export function useFilterItem(props: IFilterItemProps) {
-  const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
+/**
+ * Hook that provides functionality for a filter item.
+ *
+ * @param props - The props for the filter item.
+ */
+export function useFilterItem({ filter, shortListCount }: IFilterItemProps) {
+  const selectedKeys = useMemo(
+    () => new Set(filter.selected.map((f) => f.key)),
+    [filter.selected]
+  ) as Set<string>
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const [showCount, setShowCount] = useState(props.shortListCount)
+  const [showCount, setShowCount] = useState(shortListCount)
 
   const items = useMemo(() => {
-    return props.filter.items.filter((item) =>
+    return filter.items.filter((item) =>
       s.isBlank(searchTerm)
         ? true
         : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
     )
-  }, [searchTerm, props.filter.items])
+  }, [searchTerm, filter.items])
+
   return {
     onSearch: setSearchTerm,
     items,

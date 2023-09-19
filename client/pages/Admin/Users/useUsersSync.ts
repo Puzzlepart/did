@@ -15,7 +15,7 @@ import $updateUsers from './updateUsers.gql'
 export function useUsersSync(context: IUsersContext) {
   const [updateUsers] = useMutation($updateUsers)
   return async (properties = ['accountEnabled']) => {
-    const users = context.state.users
+    const users = context.state.selectedUsers
       .map((user) => {
         const adUser = _.find(context.state.adUsers, (a) => a.id === user.id)
         if (!adUser) return null

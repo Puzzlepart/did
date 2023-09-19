@@ -23,7 +23,13 @@ import {
  * - `CHANGE_QUERY` - Change query preset and update report links based on the new preset.
  * - `SET_FILTER_STATE` - Set filter state and update active filter if filter is not active.
  */
-export default ({ initialState, queries }) =>
+export default ({
+  initialState,
+  queries
+}: {
+  initialState: IReportsState
+  queries: IReportsQuery[]
+}) =>
   createReducer<IReportsState>(initialState, (builder) =>
     builder
       /**
@@ -83,19 +89,16 @@ export default ({ initialState, queries }) =>
        * `CHANGE_QUERY`: Change query preset and update report links based on the new preset.
        */
       .addCase(CHANGE_QUERY, (state, { payload }) => {
-        const queryPreset = _.find<IReportsQuery>(
-          queries,
-          (q) => q.itemKey === payload?.itemKey
-        )
+        const queryPreset = _.find(queries, (q) => q.id === payload?.id)
         if (payload.force) {
-          state.queryPreset = queryPreset
+          state.queryPreset = queryPreset as any
           return
         }
         const reportLinks = _.filter(
           current(state).reportLinks,
           ({ linkRef }) => linkRef === queryPreset.reportLinkRef
         )
-        state.queryPreset = { ...queryPreset, reportLinks }
+        state.queryPreset = { ...queryPreset, reportLinks } as any
       })
 
       /**

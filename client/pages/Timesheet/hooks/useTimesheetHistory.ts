@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DateRangeType } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useLayoutEffect } from 'react'
@@ -52,7 +51,7 @@ export function useTimesheetHistory(state: ITimesheetState) {
     const location = [
       '/timesheet',
       convertDateRangeTypeToString(state.dateRangeType),
-      state.selectedView,
+      state.selectedView.id,
       state.selectedPeriod.startDate
     ].join('/')
     history.push(location)

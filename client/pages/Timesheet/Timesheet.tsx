@@ -1,25 +1,24 @@
 /* eslint-disable tsdoc/syntax */
 import { DateRangeType } from '@fluentui/react'
-import { TabContainer } from 'components'
+import { Tab, TabList } from '@fluentui/react-components'
 import { HotkeyModal } from 'components/HotkeyModal'
 import React, { FC } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
-import { useTranslation } from 'react-i18next'
 import { ActionBar } from './ActionBar'
 import { ErrorBar } from './ErrorBar'
 import { useTimesheet } from './hooks'
 import { useHotkeys } from './hotkeys/useHotkeys'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { StatusBar } from './StatusBar'
-import { TimesheetContext, TimesheetView } from './types'
-import { AllocationView, Overview, SummaryView } from './Views'
+import { TimesheetContext } from './types'
+import { useViews, View } from './Views'
 
 /**
  * @category Function Component
  */
 export const Timesheet: FC = () => {
-  const { t } = useTranslation()
-  const { state, dispatch, context, headerButtonProps } = useTimesheet()
+  const { state, dispatch, context } = useTimesheet()
+  const { views, getViewById } = useViews()
   const { hotkeysProps } = useHotkeys(context)
 
   return (
@@ -29,30 +28,17 @@ export const Timesheet: FC = () => {
           <ActionBar />
           <ErrorBar error={state.error} />
           <StatusBar />
-          <TabContainer
-            hidden={!!state.error}
-            selectedKey={state.selectedView ?? TimesheetView.Overview}
-            onTabChanged={(itemKey) => {
-              dispatch(CHANGE_VIEW({ view: itemKey as TimesheetView }))
+          <TabList
+            selectedValue={state.selectedView.id}
+            onTabSelect={(_, data) => {
+              dispatch(CHANGE_VIEW({ view: getViewById(data.value as string) }))
             }}
-            level={3}
           >
-            <Overview
-              headerButtonProps={headerButtonProps}
-              itemKey={TimesheetView.Overview}
-              headerText={t('timesheet.overviewHeaderText')}
-            />
-            <SummaryView
-              headerButtonProps={headerButtonProps}
-              itemKey={TimesheetView.Summary}
-              headerText={t('timesheet.summaryHeaderText')}
-            />
-            <AllocationView
-              headerButtonProps={headerButtonProps}
-              itemKey={TimesheetView.Allocation}
-              headerText={t('timesheet.allocationHeaderText')}
-            />
-          </TabContainer>
+            {views.map(({ id, displayName }, index) => (
+              <Tab key={index} value={id} content={displayName} />
+            ))}
+          </TabList>
+          <View component={state.selectedView} />
         </div>
         <HotkeyModal
           {...hotkeysProps}
@@ -64,6 +50,7 @@ export const Timesheet: FC = () => {
   )
 }
 
+Timesheet.displayName = 'Timesheet'
 Timesheet.defaultProps = {
   dateRangeType: DateRangeType.Week
 }

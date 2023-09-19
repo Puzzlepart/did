@@ -1,9 +1,11 @@
-import { ChoiceGroup, DefaultButton, Panel } from '@fluentui/react'
+import { ChoiceGroup } from '@fluentui/react'
+import { BasePanel } from 'components'
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
 import React, { FC } from 'react'
 import { BrowserView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../MenuItem'
 import { useUserReports } from './useUserReports'
 
@@ -21,15 +23,25 @@ export const UserReports: FC = () => {
   return (
     <BrowserView renderWithFragment={true}>
       <MenuItem
-        iconProps={{ iconName: 'ReportDocument' }}
+        icon={icon('DocumentDatabase')}
         text={t('common.userReports')}
         onClick={togglePanel}
       />
-      <Panel
+      <BasePanel
         headerText={t('common.userReports')}
         isOpen={showPanel}
         onDismiss={togglePanel}
-        isLightDismiss={true}
+        footerActions={[
+          {
+            text: t('common.exportExcel'),
+            iconName: 'ArrowExportUp',
+            appearance: 'primary',
+            onClick: () => {
+              onExport()
+            },
+            disabled: !preset || query.loading
+          }
+        ]}
       >
         <ChoiceGroup
           defaultSelectedKey={preset?.key}
@@ -40,21 +52,9 @@ export const UserReports: FC = () => {
         />
         <UserMessage
           hidden={!preset || query.loading}
-          containerStyle={{ marginTop: 15 }}
-          iconName='ReminderTime'
           text={t('common.userReportSummary', query)}
         />
-        <DefaultButton
-          text={t('common.exportExcel')}
-          styles={{ root: { marginTop: 20, width: '100%' } }}
-          iconProps={{
-            iconName: 'ExcelDocument',
-            styles: { root: { color: 'green' } }
-          }}
-          onClick={onExport}
-          disabled={!preset || query.loading}
-        />
-      </Panel>
+      </BasePanel>
     </BrowserView>
   )
 }

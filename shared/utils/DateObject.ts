@@ -9,11 +9,39 @@ export type ObjectInput = {
   year: number | string
 }
 
+/**
+ * Represents a period of time with a start and end date.
+ */
 export interface IDatePeriod {
+  /**
+   * The unique identifier for the period.
+   */
   id: string
+
+  /**
+   * The name of the period.
+   */
   name: string
+
+  /**
+   * The start date of the period.
+   */
   startDate: DateObject
+
+  /**
+   * The end date of the period.
+   */
   endDate: DateObject
+
+  /**
+   * The name of the month for the start date of the period.
+   */
+  monthName?: string
+
+  /**
+   * The week number for the start date of the period.
+   */
+  weekNumber?: number
 }
 
 export class DateObject {
@@ -224,7 +252,8 @@ export class DateObject {
             id: DateUtils.getPeriod(startOfWeek.$),
             name: startOfWeek.$.isoWeek().toString(),
             startDate: startOfWeek,
-            endDate: endOfWeek
+            endDate: endOfWeek,
+            weekNumber: startOfWeek.$.isoWeek()
           }
         ]
       : [
@@ -236,7 +265,9 @@ export class DateObject {
               '0'
             )}`,
             startDate: startOfWeek,
-            endDate: startOfWeek.endOfMonth
+            endDate: startOfWeek.endOfMonth,
+            monthName: startOfWeek.format('MMMM'),
+            weekNumber: startOfWeek.$.isoWeek()
           },
           {
             id: DateUtils.getPeriod(endOfWeek.$),
@@ -246,7 +277,9 @@ export class DateObject {
               '0'
             )}`,
             startDate: endOfWeek.startOfMonth,
-            endDate: endOfWeek
+            endDate: endOfWeek,
+            monthName: endOfWeek.format('MMMM'),
+            weekNumber: startOfWeek.$.isoWeek()
           }
         ]
   }

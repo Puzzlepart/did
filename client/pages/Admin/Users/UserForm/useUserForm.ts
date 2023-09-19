@@ -1,68 +1,55 @@
-import { useMutation } from '@apollo/client'
-import { ITextFieldProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import { useEffect, useState } from 'react'
+import {
+  IInputFieldProps,
+  useFormControlModel,
+  useFormControls
+} from 'components/FormControl'
+import get from 'get-value'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Role, User } from 'types'
+import { User } from 'types'
 import _ from 'underscore'
-import s from 'underscore.string'
-import $addOrUpdateUser from './addOrUpdateUser.gql'
 import { IUserFormProps } from './types'
+import { useUserFormSubmit } from './useUserFormSubmit'
 
 export function useUserForm(props: IUserFormProps) {
   const { t } = useTranslation()
-  const { subscription } = useAppContext()
-  const [model, setModel] = useState<User>({})
-  const [addOrUpdateUser] = useMutation($addOrUpdateUser)
+  const appContext = useAppContext()
+  const model = useFormControlModel<keyof User, User>(props.user, (user) => {
+    // A bit nasty temp-hack to fix the role type
+    return {
+      ...user,
+      photo: null,
+      role: user.role['name']
+    }
+  })
+  const register = useFormControls<keyof User>(model)
+  const submitProps = useUserFormSubmit(props, model)
 
-  useEffect(() => {
-    setModel(props.user || {})
-  }, [props.user])
+  const adSyncProperties = get(
+    appContext,
+    'subscription.settings.adsync.properties',
+    { default: [] }
+  )
 
-  /**
-   * On save user
-   */
-  const onSave = async () => {
-    await addOrUpdateUser({
-      variables: {
-        user: _.omit(
-          {
-            ...model,
-            role: (model?.role as Role)?.name || 'User'
-          },
-          '__typename',
-          'photo'
-        ),
-        update: !!props.user
-      }
-    })
-    setModel({})
-    props.onDismiss()
-  }
-
-  /**
-   * Checks if form is valid
-   */
-  const isFormValid = () =>
-    !s.isBlank(model?.id || '') && !s.isBlank(model?.displayName || '')
-
-  const adSync = subscription?.settings?.adsync || { properties: [] }
-
-  const inputProps = ({ key, label }): ITextFieldProps => ({
+  const inputProps = ({ key, label }): IInputFieldProps => ({
     label,
-    disabled: _.contains(adSync?.properties, key),
     description:
-      _.contains(adSync?.properties, key) && t('admin.users.userFieldAdSync'),
-    value: model[key],
-    onChange: (_event, value) => setModel({ ...model, [key]: value })
+      _.contains(adSyncProperties, key) && t('admin.users.userFieldAdSync'),
+    disabled: _.contains(adSyncProperties, key)
   })
 
-  return {
-    adSync,
-    model,
-    setModel,
-    onSave,
-    isFormValid,
-    inputProps
-  } as const
+  const onSelectUser = useCallback((item) => {
+    if (item?.data) {
+      for (const key in item.data) {
+        model.set(key as any, item.data[key])
+      }
+    } else {
+      model.reset()
+    }
+  }, [])
+
+  const isEditMode = !!props.user
+
+  return { isEditMode, inputProps, model, register, submitProps, onSelectUser }
 }

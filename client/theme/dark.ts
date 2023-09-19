@@ -1,11 +1,11 @@
+import { Theme, webDarkTheme } from '@fluentui/react-components'
 import { PartialTheme } from '@fluentui/react/lib/Theme'
 import fonts from './fonts'
 
-export default {
+const legacyDarkTheme: PartialTheme = {
   components: {
     logo: {
       styles: {
-        background: '#fff',
         color: '#252422'
       }
     },
@@ -19,14 +19,15 @@ export default {
     menuBackground: '#161b22',
     menuHeader: '#161b22',
     bodyBackground: '#0d1117',
+    bodySubtext: '#c9d1d9',
     successBackground: '#C9F7E8',
     successText: '#444',
-    successIcon: '#444',
     infoBackground: '#323130',
     infoText: '#fff',
     errorBackground: '#442726',
     errorText: '#fff',
-    bodySubtext: '#c9d1d9'
+    warningBackground: '#fff4ce',
+    warningText: '#444'
   },
   palette: {
     themeDarker: '#0d1117',
@@ -95,3 +96,10 @@ export default {
   },
   ...fonts
 } as PartialTheme
+
+const fluentDarkTheme = webDarkTheme
+
+export const darkTheme: [PartialTheme, Theme] = [
+  legacyDarkTheme,
+  fluentDarkTheme
+]

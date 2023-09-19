@@ -1,13 +1,17 @@
 /* eslint-disable tsdoc/syntax */
-import { FC } from 'react'
 import { PermissionScope } from 'security'
+import { StyledComponent } from 'types'
 
 /**
  * Page component
  *
  * @category Pages
  */
-export interface PageComponent extends FC {
+export interface PageComponent extends StyledComponent {
+  /**
+   * Text that describe the page in the navigation
+   */
+  text?: string
   /**
    * Icon that describe the page in the navigation
    *

@@ -16,6 +16,7 @@ import isoWeekPlugin from 'dayjs/plugin/isoWeek'
 import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear'
 import localeDataPlugin from 'dayjs/plugin/localeData'
 import objectSupportPlugin from 'dayjs/plugin/objectSupport'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import timezonePlugin from 'dayjs/plugin/timezone'
 import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
@@ -42,6 +43,7 @@ export class DateUtils {
     $dayjs.extend<PluginFunc>(isoWeekPlugin)
     $dayjs.extend<PluginFunc>(isoWeeksInYear)
     $dayjs.extend<PluginFunc>(isLeapYear)
+    $dayjs.extend(relativeTime)
   }
 
   /**
@@ -97,10 +99,16 @@ export class DateUtils {
    *
    * @param dateTime - Date
    * @param template - Date format
-   * @param locale - Locale
+   * @param locale - Locale to use for formatting
+   * @param fallback - Fallback value if date is ´null` or `undefined`
    */
-  formatDate(dateTime: ConfigType, template: string, locale?: string): string {
-    if (!dateTime) return null
+  formatDate(
+    dateTime: ConfigType,
+    template: string,
+    locale?: string,
+    fallback = null
+  ): string {
+    if (!dateTime) return fallback
     if (locale) return $dayjs(dateTime).locale(locale).format(template)
     return $dayjs(dateTime).format(template)
   }
@@ -148,16 +156,18 @@ export class DateUtils {
     const endDateObject = new DateObject(end)
     while (startDateObject.isBeforeOrSame(endDateObject)) {
       switch (template) {
-        case 'jsDate':
+        case 'jsDate': {
           {
             days.push(startDateObject.jsDate)
           }
           break
-        case 'DateObject':
+        }
+        case 'DateObject': {
           {
             days.push(startDateObject)
           }
           break
+        }
         default: {
           days.push(s.capitalize(startDateObject.format(template)))
         }
@@ -431,6 +441,6 @@ export default new DateUtils({
   isoWeek: true
 })
 
+export { default as $dayjs } from 'dayjs'
 export { IDatePeriod } from './DateObject'
 export * from './types'
-export { $dayjs }

@@ -1,36 +1,27 @@
 import { Label } from '@fluentui/react'
 import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
-import { FormControl } from 'components/FormControl'
-import { TextControl } from 'components/FormControl/TextControl'
-import { TextControlOptions } from 'components/FormControl/TextControl/types'
-import { IconPicker } from 'components/IconPicker'
+import {
+  FormControl,
+  IconPickerControl,
+  InputControl,
+  InputControlOptions
+} from 'components/FormControl'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
 import { ILabelFormProps } from './types'
 import { useLabelForm } from './useLabelForm'
 
 export const LabelForm: FC<ILabelFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, register, submit } = useLabelForm(props)
+  const { model, register, submitProps, panelProps } = useLabelForm(props)
   return (
-    <FormControl
-      submitProps={submit}
-      panelProps={{
-        ..._.omit(props, 'onSave'),
-        headerText: props.edit
-          ? t('admin.labels.editText')
-          : t('admin.labels.addNewText'),
-        isLightDismiss: true
-      }}
-    >
-      <TextControl
-        {...register<TextControlOptions>('name', {
+    <FormControl submitProps={submitProps} panelProps={panelProps}>
+      <InputControl
+        {...register<InputControlOptions>('name', {
           casing: 'lower',
           replace: [/["#$%&'()*+,./:<>?\\{}~-]/g, ' ']
         })}
-        spellCheck={false}
         maxLength={20}
         label={t('admin.labels.nameLabel')}
         placeholder={t('admin.labels.namePlaceholder')}
@@ -38,20 +29,17 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
         required={!props.edit}
         disabled={!!props.edit}
       />
-      <TextControl
-        {...register<TextControlOptions>('description', {
+      <InputControl
+        {...register<InputControlOptions>('description', {
           casing: 'capitalized'
         })}
-        spellCheck={false}
         label={t('common.descriptionFieldLabel')}
         placeholder={t('common.descriptionOptionalFieldLabel')}
-        multiline={true}
       />
-      <IconPicker
+      <IconPickerControl
         {...register('icon')}
         label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
       />
       <ColorPickerField
         label={t('common.colorLabel')}

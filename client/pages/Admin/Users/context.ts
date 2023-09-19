@@ -1,14 +1,21 @@
-import { ApolloQueryResult, OperationVariables } from '@apollo/client'
+import { OperationVariables, QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { createContext } from 'react'
+import { createContext, Dispatch } from 'react'
 import { IUsersState } from './types'
 
-export interface IUsersContext {
+/**
+ * Represents the context object for the Users page.
+ */
+export interface IUsersContext extends QueryResult<any, OperationVariables> {
+  /**
+   * The current state of the Users component.
+   */
   state: IUsersState
-  dispatch: React.Dispatch<AnyAction>
-  refetch: (
-    variables?: Partial<OperationVariables>
-  ) => Promise<ApolloQueryResult<any>>
+
+  /**
+   * A function to dispatch actions to the Users reducer.
+   */
+  dispatch: Dispatch<AnyAction>
 }
 
 export const UsersContext = createContext<IUsersContext>(null)

@@ -1,28 +1,29 @@
 import { useMutation } from '@apollo/client'
-import { ISubmitProps } from 'components/FormControl'
+import { FormSubmitHook, useFormControlModel } from 'components/FormControl'
 import { useToast } from 'components/Toast'
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CustomersContext } from '../context'
+import { Customer } from 'types'
+import { omitTypename } from 'utils'
+import { useCustomersContext } from '../context'
 import $create_or_update_customer from './create-or-update-customer.gql'
 import { ICustomerFormProps } from './types'
-import { useCustomerModel } from './useCustomerModel'
 
 /**
- * Returns submit props used by `<FormControl />`
+ * Returns submit props used by `<FormControl />
+`
  *
  * @param props - Props
  * @param model - Model
  *
  * @returns `toast`, `onClick` and `disabled`
  */
-export function useCustomerFormSubmit(
-  props: ICustomerFormProps,
-  model: ReturnType<typeof useCustomerModel>
-): ISubmitProps {
+export const useCustomerFormSubmit: FormSubmitHook<
+  ICustomerFormProps,
+  ReturnType<typeof useFormControlModel>
+> = (props, model) => {
   const { t } = useTranslation()
-  const { refetch } = useContext(CustomersContext)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const { refetch } = useCustomersContext()
+  const [toast, setToast, isToastShowing] = useToast(8000)
   const [mutate, { loading }] = useMutation($create_or_update_customer)
 
   /**
@@ -32,24 +33,27 @@ export function useCustomerFormSubmit(
     try {
       await mutate({
         variables: {
-          customer: model.$,
+          customer: omitTypename(model.$),
           update: !!props.edit
         }
       })
-      if (props.panelProps) {
-        setTimeout(props.panelProps.onSave, 1000)
-      } else {
-        setToast({
-          text: t('customers.createSuccess', model.$),
-          type: 'success'
-        })
+      setToast({
+        text: t('customers.createSuccess', model.$ as Customer),
+        onClick: () => {
+          window.location.replace(
+            `/customers/information/${model.value('key')}`
+          )
+        },
+        intent: 'success'
+      })
+      window.setTimeout(() => {
         model.reset()
         refetch()
-      }
+      }, 1000)
     } catch {
       setToast({
         text: t('customers.createError'),
-        type: 'error'
+        intent: 'error'
       })
     }
   }
@@ -57,6 +61,6 @@ export function useCustomerFormSubmit(
     toast,
     text: props.edit ? t('common.save') : t('common.add'),
     onClick,
-    disabled: loading || !model.valid || !!toast
+    disabled: loading || isToastShowing
   }
 }

@@ -1,34 +1,46 @@
-/* eslint-disable tsdoc/syntax */
-import { Link } from '@fluentui/react'
 import { UserMessage } from 'components'
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { UserNotificationsContext } from '../../context'
 import { IUserNotificationProps } from './types'
-import styles from './UserNotificationMessage.module.scss'
+import styles from './UserNotification.module.scss'
 
 /**
  * @category Function Component
  */
-export const UserNotification: FC<IUserNotificationProps> = ({
+export const UserNotification: StyledComponent<IUserNotificationProps> = ({
   model
-}: IUserNotificationProps) => {
+}) => {
   const { t } = useTranslation()
   const { dismissNotification } = useContext(UserNotificationsContext)
   return (
     <FadeIn>
       <UserMessage
-        {...model.messageProps}
-        className={styles.root}
-        onDismiss={() => dismissNotification(model.id)}
-        styles={{ actions: { flexDirection: 'row', paddingLeft: 28 } }}
-        actions={<Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>}
+        {...model.alertProps}
+        className={UserNotification.className}
+        actions={[
+          {
+            content: model.getMoreLinkText(t),
+            onClick: () => window.open(model.moreLink, '_self'),
+            iconName: 'CalendarPlay'
+          },
+          {
+            content: t('notifications.dismissText'),
+            onClick: () => dismissNotification(model.id),
+            iconName: 'DeleteDismiss',
+            iconColor: 'var(--colorPaletteRedForeground1)'
+          }
+        ]}
       >
         <span className={styles.text}>{model.text}</span>
       </UserMessage>
     </FadeIn>
   )
 }
+
+UserNotification.displayName = 'UserNotification'
+UserNotification.className = styles.userNotification
 
 export * from './types'

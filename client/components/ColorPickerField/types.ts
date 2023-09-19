@@ -1,7 +1,6 @@
-import React from 'react'
+import { HTMLAttributes } from 'react'
 
-export interface IColorPickerFieldProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface IColorPickerFieldProps extends HTMLAttributes<HTMLDivElement> {
   label: string
   color: string
   onChanged: (color: string) => void

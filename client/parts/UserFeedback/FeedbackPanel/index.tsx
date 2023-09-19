@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { ChoiceGroup, Dropdown, IPanelProps, Toggle } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import {
   FormControl,
-  TextControl,
-  TextControlOptions
+  InputControl,
+  InputControlOptions
 } from 'components/FormControl'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -37,19 +36,16 @@ export const FeedbackPanel: FC<IPanelProps> = (props) => {
         options={typeOptions}
         onChange={(_event, option) => model.set('labels', [option.key])}
       />
-      <TextControl
-        {...register<TextControlOptions>('title', { casing: 'capitalized' })}
+      <InputControl
+        {...register<InputControlOptions>('title', { casing: 'capitalized' })}
         label={t('feedback.summaryFieldLabel')}
         required={true}
       />
-      <TextControl
-        {...register<TextControlOptions>('body', { casing: 'capitalized' })}
+      <InputControl
+        {...register<InputControlOptions>('body', { casing: 'capitalized' })}
         label={t('feedback.descriptionFieldLabel')}
         description={t('feedback.descriptionFieldDesc')}
-        multiline={true}
         required={true}
-        autoAdjustHeight={true}
-        styles={{ field: { height: 200 } }}
       />
       <ChoiceGroup
         label={t('feedback.ratingFieldLabel')}

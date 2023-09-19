@@ -1,24 +1,24 @@
 import { useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { Dispatch, useLayoutEffect } from 'react'
+import { Dispatch, useEffect } from 'react'
 import $projects_outlook from './projects-outlook.gql'
 import { DATA_UPDATED } from './reducer/actions'
 
 /**
- * Use Projects query
- *
- * Uses useQuery from apollo/client
+ * Hook tha uses `useQuery` from `@apollo/client` to fetch data
+ * from the GraphQL server, then dispatches the data to the
+ * reducer using `DATA_UPDATED` action.
  *
  * @param dispatch - Dispatch
  */
 export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
-  const { refetch, data, error, loading } = useQuery($projects_outlook, {
+  const query = useQuery($projects_outlook, {
     variables: { sortBy: 'name' },
     fetchPolicy: 'cache-and-network'
   })
-  useLayoutEffect(
-    () => dispatch(DATA_UPDATED({ data, error, loading })),
-    [data, error, loading, dispatch]
-  )
-  return { refetch, loading } as const
+  useEffect(() => dispatch(DATA_UPDATED(query)), [query])
+  return {
+    ...query,
+    loading: query.loading && !query.previousData
+  }
 }

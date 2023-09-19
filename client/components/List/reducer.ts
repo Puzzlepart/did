@@ -98,9 +98,9 @@ export default (initialState: IListState) => {
         })
         .addCase(CLEAR_FILTERS, (state) => {
           state.items = state.origItems
+          state.filters = []
         })
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return useReducer(reducer, initialState)
 }

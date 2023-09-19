@@ -17,5 +17,5 @@ export function useSummaryView() {
     state,
     rows,
     columns
-  } as const
+  }
 }

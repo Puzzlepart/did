@@ -1,43 +1,43 @@
 import {
   Calendar,
-  Callout,
   DayOfWeek,
-  DirectionalHint,
   FirstWeekOfYear,
-  FocusTrapZone,
   ICalendarStrings,
-  ICalloutProps,
   useTheme
 } from '@fluentui/react'
+import {
+  Button,
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { SET_DATE_RANGE } from '../../reducer/actions'
 import { TimesheetDateRange, useTimesheetContext } from '../../types'
+import { useDateRangePicker } from './useDateRangePicker'
 
 /**
  * @category Timesheet
  */
-export const DateRangePicker: FC<ICalloutProps> = (props) => {
+export const DateRangePicker: FC = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const { palette } = useTheme()
+  const { triggerText, open, handleOpenChange } = useDateRangePicker()
   return (
-    <Callout
-      {...props}
-      isBeakVisible={false}
-      doNotLayer={false}
-      gapSpace={5}
-      directionalHint={DirectionalHint.bottomAutoEdge}
-      setInitialFocus={true}
-    >
-      <FocusTrapZone isClickableOutsideFocusTrap={true}>
+    <Popover trapFocus={true} open={open} onOpenChange={handleOpenChange}>
+      <PopoverTrigger disableButtonEnhancement>
+        <Button appearance='subtle'>{triggerText}</Button>
+      </PopoverTrigger>
+      <PopoverSurface>
         <Calendar
           onSelectDate={(date) => {
             dispatch(
               SET_DATE_RANGE(new TimesheetDateRange(date, state.dateRangeType))
             )
-            props.onDismiss()
+            handleOpenChange(undefined, { open: false })
           }}
           firstDayOfWeek={DayOfWeek.Monday}
           strings={
@@ -59,7 +59,7 @@ export const DateRangePicker: FC<ICalloutProps> = (props) => {
             }
           }}
         />
-      </FocusTrapZone>
-    </Callout>
+      </PopoverSurface>
+    </Popover>
   )
 }

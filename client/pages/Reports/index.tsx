@@ -24,6 +24,6 @@ Object.assign(ReportsPage, {
 export * from './context'
 export * from './hooks'
 export * from './reducer'
-export * from './ReportsList/useCommands'
+export * from './ReportsList/useMenuItems'
 export * from './SaveFilterForm'
 export * from './types'

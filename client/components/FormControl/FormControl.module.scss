@@ -1,7 +1,6 @@
-.root {
-  max-width: 550px;
-
-  > div {
-    margin: 12px 0 0 0;
-  }
+.formControl{
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

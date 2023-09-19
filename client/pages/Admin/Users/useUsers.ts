@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation, useQuery } from '@apollo/client'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +13,7 @@ import {
 } from './reducer/actions'
 import { useColumns } from './useColumns'
 import $users from './users.gql'
-import { useUsersCommands } from './useUsersCommands'
+import { useUsersMenuItems } from './useUsersMenuItems'
 
 /**
  * Component logic for `Users`
@@ -23,7 +22,7 @@ import { useUsersCommands } from './useUsersCommands'
  */
 export function useUsers() {
   const { t } = useTranslation()
-  const { state, dispatch } = useUsersReducer()
+  const [state, dispatch] = useUsersReducer()
   const query = useQuery($users, {
     fetchPolicy: 'cache-and-network'
   })
@@ -31,11 +30,11 @@ export function useUsers() {
   const context = useMemo(
     () =>
       ({
+        ...query,
         state,
-        dispatch,
-        refetch: query.refetch
+        dispatch
       } as IUsersContext),
-    [state, query.refetch]
+    [state, query.loading]
   )
 
   useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
@@ -48,12 +47,11 @@ export function useUsers() {
   const onAddUsers = async (users: any[]) => {
     dispatch(HIDE_ADD_MULTIPLE_PANEL())
     dispatch(
-      SET_PROGRESS({
-        label: t('admin.users.bulkImportingUsersLabel', {
+      SET_PROGRESS(
+        t('admin.users.bulkImportingUsersLabel', {
           count: users.length
-        }),
-        labelPosition: 'right'
-      })
+        })
+      )
     )
     await addUsers({
       variables: {
@@ -67,14 +65,14 @@ export function useUsers() {
     query.refetch()
   }
 
-  const columns = useColumns(context)
-  const commandBar = useUsersCommands(context)
+  const columns = useColumns()
+  const menuItems = useUsersMenuItems(context)
 
   return {
     context,
     refetch: query.refetch,
     columns,
-    onAddUsers,
-    commandBar
-  } as const
+    menuItems,
+    onAddUsers
+  }
 }

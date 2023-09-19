@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppContext } from 'AppContext'
 import { useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +19,7 @@ export function useReportsReducer(queries: IReportsQuery[]) {
   const { getUserConfiguration } = useAppContext()
   const url = useParams<IReportsParameters>()
   const initialState: IReportsState = {
-    loading: true,
+    loading: false,
     data: {
       timeEntries: [],
       users: [],
@@ -34,7 +33,7 @@ export function useReportsReducer(queries: IReportsQuery[]) {
     }
   }
   if (url.query) {
-    initialState.queryPreset = _.find(queries, (q) => q.itemKey === url.query)
+    initialState.queryPreset = _.find(queries, (q) => q.id === url.query)
   }
   initialState.savedFilters = getUserConfiguration('reports.filters') || {}
   const reducer = useMemo(() => createReducer({ initialState, queries }), [])

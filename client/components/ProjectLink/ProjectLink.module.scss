@@ -1,6 +1,12 @@
-.root {
+.projectLink {
+  display: flex;
+  align-items: center;
+  
   .icon {
-    margin: 0 4px 0 0;
-    vertical-align: middle;
+    align-self: flex-start;
+  }
+
+  .link {
+    margin-left: 6px;
   }
 }

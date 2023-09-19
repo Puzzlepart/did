@@ -19,3 +19,5 @@ export const DurationDisplay: FC<IDurationDisplayProps> = (props) => {
     </ModifiedDuration>
   )
 }
+
+DurationDisplay.displayName = 'DurationDisplay'

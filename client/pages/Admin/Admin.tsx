@@ -1,67 +1,41 @@
-/* eslint-disable unicorn/prevent-abbreviations */
-import { TabContainer } from 'components/TabContainer'
-import React, { useState } from 'react'
+import { Tabs } from 'components/Tabs'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
-import { PermissionScope } from 'security'
-import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { MissingSubmissions } from './MissingSubmissions'
 import { ReportLinks } from './ReportLinks'
-import { Roles } from './Roles'
+import { RolesPermissions } from './RolesPermissions'
 import { SubscriptionSettings } from './SubscriptionSettings'
 import { Users } from './Users'
 
 /**
  * @category Function Component
  */
-export const Admin = () => {
+export const Admin: FC = () => {
   const { t } = useTranslation()
-  const params = useParams<{ view: string }>()
-  const [view, setView] = useState(params.view || 'users')
-  const history = useHistory()
-
   return (
-    <TabContainer
-      className={styles.root}
-      fixedLinkWidth={true}
-      onTabChanged={(itemKey) => {
-        setView(itemKey)
-        history.push(`/admin/${itemKey}`)
+    <Tabs
+      items={{
+        users: [Users, t('admin.users.headerText')],
+        missingsubmissions: [
+          MissingSubmissions,
+          t('admin.missingSubmissions.headerText')
+        ],
+        labels: [Labels, t('common.labelsText')],
+        rolespermissions: [
+          RolesPermissions,
+          t('admin.rolesPermissions.headerText')
+        ],
+        subscription: [
+          SubscriptionSettings,
+          t('admin.subscriptionSettings.headerText')
+        ],
+        reportlinks: [ReportLinks, t('admin.reportLinks.headerText')],
+        apitokens: [ApiTokens, t('admin.apiTokens.headerText')]
       }}
-      defaultSelectedKey={view}
-    >
-      <Users
-        headerText={t('admin.users.headerText')}
-        permission={PermissionScope.LIST_USERS}
-      />
-      <MissingSubmissions
-        headerText={t('admin.missingSubmissions.headerText')}
-      />
-      <Labels headerText={t('admin.labels.headerText')} />
-      <Roles
-        headerText={t('admin.rolesPermissions.headerText')}
-        permission={PermissionScope.MANAGE_ROLESPERMISSIONS}
-      />
-      <SubscriptionSettings
-        headerText={t('admin.subscriptionSettings.headerText')}
-        permission={PermissionScope.MANAGE_SUBSCRIPTION}
-      />
-      <ReportLinks
-        headerText={t('admin.reportLinks.headerText')}
-        permission={PermissionScope.MANAGE_REPORT_LINKS}
-      />
-      <ApiTokens
-        headerText={t('admin.apiTokens.headerText')}
-        permission={PermissionScope.MANAGE_SUBSCRIPTION}
-      />
-    </TabContainer>
+    />
   )
 }
 
-export * from './ApiTokens'
-export * from './Labels'
-export * from './Roles'
-export * from './SubscriptionSettings'
-export * from './Users'
+Admin.displayName = 'Admin'
