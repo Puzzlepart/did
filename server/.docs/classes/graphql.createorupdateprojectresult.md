@@ -29,7 +29,7 @@
 
 • `Optional` **id**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L121)
+Defined in: [graphql/resolvers/project/types.ts:193](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L193)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • **success**: *boolean*
 
-Defined in: [graphql/resolvers/project/types.ts:118](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L118)
+Defined in: [graphql/resolvers/project/types.ts:190](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L190)

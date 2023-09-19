@@ -31,17 +31,17 @@ Name | Default |
 
 Column header context menu `column` and `targetElement`
 
-Defined in: [components/List/types.ts:207](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L207)
+Defined in: [client/components/List/types/IListState.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L33)
 
 ___
 
 ### filterBy
 
-• `Optional` **filterBy**: [*IListColumn*](components.ilistcolumn.md)
+• `Optional` **filterBy**: [*IListColumn*](components.ilistcolumn.md)<any\>
 
 Filter by column
 
-Defined in: [components/List/types.ts:217](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L217)
+Defined in: [client/components/List/types/IListState.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L43)
 
 ___
 
@@ -51,17 +51,17 @@ ___
 
 Current filters
 
-Defined in: [components/List/types.ts:202](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L202)
+Defined in: [client/components/List/types/IListState.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L28)
 
 ___
 
 ### groupBy
 
-• `Optional` **groupBy**: [*IListColumn*](components.ilistcolumn.md)
+• `Optional` **groupBy**: [*IListColumn*](components.ilistcolumn.md)<any\>
 
 Group by column
 
-Defined in: [components/List/types.ts:212](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L212)
+Defined in: [client/components/List/types/IListState.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L38)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 Is filter panel open
 
-Defined in: [components/List/types.ts:222](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L222)
+Defined in: [client/components/List/types/IListState.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L48)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 Current items
 
-Defined in: [components/List/types.ts:197](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L197)
+Defined in: [client/components/List/types/IListState.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L23)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 Original items
 
-Defined in: [components/List/types.ts:192](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L192)
+Defined in: [client/components/List/types/IListState.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L18)
 
 ___
 
@@ -101,4 +101,4 @@ ___
 
 Search term
 
-Defined in: [components/List/types.ts:187](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L187)
+Defined in: [client/components/List/types/IListState.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListState.ts#L13)

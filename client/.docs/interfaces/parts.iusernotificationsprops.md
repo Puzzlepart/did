@@ -8,21 +8,12 @@
 
 ### Properties
 
-- [iconName](parts.iusernotificationsprops.md#iconname)
 - [renderAsMenuItem](parts.iusernotificationsprops.md#renderasmenuitem)
 
 ## Properties
-
-### iconName
-
-• `Optional` **iconName**: *string*
-
-Defined in: [parts/UserNotifications/types.tsx:83](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L83)
-
-___
 
 ### renderAsMenuItem
 
 • `Optional` **renderAsMenuItem**: *boolean*
 
-Defined in: [parts/UserNotifications/types.tsx:82](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L82)
+Defined in: [client/parts/UserNotifications/types.tsx:88](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserNotifications/types.tsx#L88)

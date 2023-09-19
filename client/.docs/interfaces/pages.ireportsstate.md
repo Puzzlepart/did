@@ -26,7 +26,7 @@
 
 Active filter
 
-Defined in: [pages/Reports/types.tsx:125](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L125)
+Defined in: [client/pages/Reports/types.tsx:134](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L134)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 Data
 
-Defined in: [pages/Reports/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L90)
+Defined in: [client/pages/Reports/types.tsx:99](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L99)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 Current filter state
 
-Defined in: [pages/Reports/types.tsx:130](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L130)
+Defined in: [client/pages/Reports/types.tsx:139](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L139)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 Group by properties
 
-Defined in: [pages/Reports/types.tsx:110](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L110)
+Defined in: [client/pages/Reports/types.tsx:119](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L119)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 Whether the filter panel is open
 
-Defined in: [pages/Reports/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L100)
+Defined in: [client/pages/Reports/types.tsx:109](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L109)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 Loading
 
-Defined in: [pages/Reports/types.tsx:115](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L115)
+Defined in: [client/pages/Reports/types.tsx:124](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L124)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 Selected query preset
 
-Defined in: [pages/Reports/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L105)
+Defined in: [client/pages/Reports/types.tsx:114](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L114)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 Report links
 
-Defined in: [pages/Reports/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L95)
+Defined in: [client/pages/Reports/types.tsx:104](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L104)
 
 ___
 
@@ -108,4 +108,4 @@ Saved filters
 
 #### Type declaration:
 
-Defined in: [pages/Reports/types.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L120)
+Defined in: [client/pages/Reports/types.tsx:129](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L129)

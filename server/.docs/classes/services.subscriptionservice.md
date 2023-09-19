@@ -81,7 +81,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*Subscription*](graphql.subscription.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -131,7 +131,7 @@ ___
 
 ### addSubscription
 
-▸ **addSubscription**(`subscription`: [*Subscription*](graphql.subscription.md)): *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+▸ **addSubscription**(`subscription`: [*Subscription*](graphql.subscription.md)): *Promise*<any\>
 
 Add subscription
 
@@ -141,7 +141,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `subscription` | [*Subscription*](graphql.subscription.md) | Subscription    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/subscription.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L93)
 
@@ -149,7 +149,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*Subscription*](graphql.subscription.md)\>, `sort?`: S): *Promise*<[*Subscription*](graphql.subscription.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*Subscription*](graphql.subscription.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -165,7 +165,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Subscription*](graphql.subscription.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)[]\>
@@ -178,7 +178,7 @@ ___
 
 ### getByExternalId
 
-▸ **getByExternalId**(`idOrMail`: *string*, `provider`: *string*): *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
+▸ **getByExternalId**(`idOrMail`: *string*, `provider`: *string*): *Promise*<any\>
 
 Get subscription by external id or email
 
@@ -191,7 +191,7 @@ Name | Type | Description |
 `idOrMail` | *string* | User ID or mail   |
 `provider` | *string* | Provider    |
 
-**Returns:** *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/subscription.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L73)
 
@@ -219,7 +219,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -231,7 +231,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -241,7 +241,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -255,7 +255,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -265,7 +265,7 @@ ___
 
 ### registerExternalUser
 
-▸ **registerExternalUser**(`provider`: *string*, `mail`: *string*): *Promise*<UpdateWriteOpResult\>
+▸ **registerExternalUser**(`provider`: *string*, `mail`: *string*): *Promise*<any\>
 
 Register external user
 
@@ -276,7 +276,7 @@ Name | Type | Description |
 `provider` | *string* | Provider   |
 `mail` | *string* | Email address    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/subscription.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L127)
 
@@ -284,7 +284,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*Subscription*](graphql.subscription.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -294,10 +294,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Subscription*](graphql.subscription.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -307,7 +307,7 @@ ___
 
 ### updateSubscription
 
-▸ **updateSubscription**(`settings`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)): *Promise*<UpdateWriteOpResult\>
+▸ **updateSubscription**(`settings`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)): *Promise*<any\>
 
 Update subscription
 
@@ -317,6 +317,6 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `settings` | [*SubscriptionSettings*](graphql.subscriptionsettings.md) | Subscription settings    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/subscription.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L109)

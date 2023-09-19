@@ -68,7 +68,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [services/timesheet/index.ts:357](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L357)
+Defined in: [services/timesheet/index.ts:358](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L358)
 
 ___
 
@@ -91,7 +91,7 @@ Name | Type |
 
 Events
 
-Defined in: [services/timesheet/index.ts:232](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L232)
+Defined in: [services/timesheet/index.ts:234](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L234)
 
 ___
 
@@ -113,7 +113,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [services/timesheet/index.ts:286](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L286)
+Defined in: [services/timesheet/index.ts:288](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L288)
 
 ___
 
@@ -137,7 +137,7 @@ Name | Type | Default value | Description |
 
 An array of `TimesheetPeriodObject` instances representing the timesheet periods between the given start and end dates.
 
-Defined in: [services/timesheet/index.ts:309](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L309)
+Defined in: [services/timesheet/index.ts:310](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L310)
 
 ___
 
@@ -192,7 +192,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [services/timesheet/index.ts:387](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L387)
+Defined in: [services/timesheet/index.ts:388](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L388)
 
 ___
 
@@ -221,7 +221,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:158](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L158)
+Defined in: [services/timesheet/index.ts:160](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L160)
 
 ___
 
@@ -239,4 +239,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/timesheet/index.ts:199](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L199)
+Defined in: [services/timesheet/index.ts:201](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L201)

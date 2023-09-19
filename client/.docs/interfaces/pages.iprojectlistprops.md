@@ -4,6 +4,8 @@
 
 [Pages](../modules/pages.md).IProjectListProps
 
+Props for the ProjectList component.
+
 ## Hierarchy
 
 * *Omit*<[*IListProps*](components.ilistprops.md)<Project\>, *role*\>
@@ -22,13 +24,18 @@
 - [exportFileName](pages.iprojectlistprops.md#exportfilename)
 - [filterPanelActions](pages.iprojectlistprops.md#filterpanelactions)
 - [filterValues](pages.iprojectlistprops.md#filtervalues)
+- [getColumnStyle](pages.iprojectlistprops.md#getcolumnstyle)
 - [height](pages.iprojectlistprops.md#height)
 - [hidden](pages.iprojectlistprops.md#hidden)
 - [hideColumns](pages.iprojectlistprops.md#hidecolumns)
+- [hideToolbar](pages.iprojectlistprops.md#hidetoolbar)
+- [id](pages.iprojectlistprops.md#id)
 - [items](pages.iprojectlistprops.md#items)
 - [linkOnClick](pages.iprojectlistprops.md#linkonclick)
 - [listGroupProps](pages.iprojectlistprops.md#listgroupprops)
 - [listGroupRenderProps](pages.iprojectlistprops.md#listgrouprenderprops)
+- [menuItems](pages.iprojectlistprops.md#menuitems)
+- [minmalHeaderColumns](pages.iprojectlistprops.md#minmalheadercolumns)
 - [onFilter](pages.iprojectlistprops.md#onfilter)
 - [renderLink](pages.iprojectlistprops.md#renderlink)
 - [searchBox](pages.iprojectlistprops.md#searchbox)
@@ -40,7 +47,7 @@
 
 • `Optional` **columnHeaderProps**: *object*
 
-Column header
+Column header props
 
 #### Type declaration:
 
@@ -51,19 +58,19 @@ Name | Type |
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L141)
+Defined in: [client/components/List/types/IListProps.ts:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L75)
 
 ___
 
 ### columns
 
-• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<any\>[]
 
 Columns
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L96)
+Defined in: [client/components/List/types/IListProps.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L30)
 
 ___
 
@@ -75,7 +82,7 @@ Command bar props
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L131)
+Defined in: [client/components/List/types/IListProps.ts:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L65)
 
 ___
 
@@ -89,7 +96,7 @@ Default search box width
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:157](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L157)
+Defined in: [client/components/List/types/IListProps.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L91)
 
 ___
 
@@ -101,7 +108,7 @@ Enable shimmer (normally while loading)
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L101)
+Defined in: [client/components/List/types/IListProps.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L35)
 
 ___
 
@@ -114,7 +121,7 @@ list data.
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:150](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L150)
+Defined in: [client/components/List/types/IListProps.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L84)
 
 ___
 
@@ -126,7 +133,7 @@ Filter panel actions
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:162](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L162)
+Defined in: [client/components/List/types/IListProps.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L96)
 
 ___
 
@@ -138,7 +145,33 @@ Filter values
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:172](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L172)
+Defined in: [client/components/List/types/IListProps.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L106)
+
+___
+
+### getColumnStyle
+
+• `Optional` **getColumnStyle**: (`item`: *Project*) => *CSSProperties*
+
+Get column style for the specified item
+
+#### Type declaration:
+
+▸ (`item`: *Project*): *CSSProperties*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`item` | *Project* |
+
+**Returns:** *CSSProperties*
+
+Defined in: [client/components/List/types/IListProps.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L121)
+
+Inherited from: void
+
+Defined in: [client/components/List/types/IListProps.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L121)
 
 ___
 
@@ -150,7 +183,7 @@ Fixed height
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L106)
+Defined in: [client/components/List/types/IListProps.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L40)
 
 ___
 
@@ -158,11 +191,11 @@ ___
 
 • `Optional` **hidden**: *boolean*
 
-Hidden
+Hidden state of the list
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:136](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L136)
+Defined in: [client/components/List/types/IListProps.ts:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L70)
 
 ___
 
@@ -170,7 +203,33 @@ ___
 
 • `Optional` **hideColumns**: *string*[]
 
-Defined in: [pages/Projects/ProjectList/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L13)
+An array of column names to hide.
+
+Defined in: [client/pages/Projects/ProjectList/types.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L27)
+
+___
+
+### hideToolbar
+
+• `Optional` **hideToolbar**: *boolean*
+
+Hide the toolbar
+
+Inherited from: void
+
+Defined in: [client/components/List/types/IListProps.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L116)
+
+___
+
+### id
+
+• `Optional` **id**: *s* \| *m*
+
+Id of the tab.
+
+Overrides: void
+
+Defined in: [client/pages/Projects/ProjectList/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L32)
 
 ___
 
@@ -182,13 +241,17 @@ Items
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L91)
+Defined in: [client/components/List/types/IListProps.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L25)
 
 ___
 
 ### linkOnClick
 
 • `Optional` **linkOnClick**: (`project`: *Project*) => *void*
+
+Function to be called when a project link is clicked.
+
+**`param`** The project that was clicked.
 
 #### Type declaration:
 
@@ -202,9 +265,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
+Defined in: [client/pages/Projects/ProjectList/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L22)
 
-Defined in: [pages/Projects/ProjectList/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L12)
+Defined in: [client/pages/Projects/ProjectList/types.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L22)
 
 ___
 
@@ -216,7 +279,7 @@ Group props
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L121)
+Defined in: [client/components/List/types/IListProps.ts:55](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L55)
 
 ___
 
@@ -228,7 +291,32 @@ Group render props
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L126)
+Defined in: [client/components/List/types/IListProps.ts:60](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L60)
+
+___
+
+### menuItems
+
+• `Optional` **menuItems**: *ListMenuItem*[]
+
+Menu items to show in `<Toolbar />` if using the preview mode.
+
+Inherited from: void
+
+Defined in: [client/components/List/types/IListProps.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L111)
+
+___
+
+### minmalHeaderColumns
+
+• `Optional` **minmalHeaderColumns**: *boolean*
+
+Use minimal header columns. Styled with small font size,
+uppercase letters, some letter spacing and text shadows.
+
+Inherited from: void
+
+Defined in: [client/components/List/types/IListProps.ts:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L127)
 
 ___
 
@@ -250,11 +338,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [client/components/List/types/IListProps.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L101)
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:167](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L167)
+Defined in: [client/components/List/types/IListProps.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L101)
 
 ___
 
@@ -262,28 +350,30 @@ ___
 
 • `Optional` **renderLink**: *boolean*
 
-Defined in: [pages/Projects/ProjectList/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L11)
+Determines whether to render a link for each project.
+
+Defined in: [client/pages/Projects/ProjectList/types.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/types.tsx#L16)
 
 ___
 
 ### searchBox
 
-• `Optional` **searchBox**: *ISearchBoxProps*
+• `Optional` **searchBox**: SearchBoxProps
 
 Search box props
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L111)
+Defined in: [client/components/List/types/IListProps.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L45)
 
 ___
 
 ### selectionProps
 
-• `Optional` **selectionProps**: [*IListSelectionProps*](components.ilistselectionprops.md)<any\>
+• `Optional` **selectionProps**: [SelectionMode, function?]
 
-Selection
+Selection props
 
 Inherited from: void
 
-Defined in: [components/List/types.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.ts#L116)
+Defined in: [client/components/List/types/IListProps.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L50)

@@ -4,6 +4,8 @@
 
 [GraphQL](../modules/graphql.md).CustomerInput
 
+Represents the input object for creating or updating a customer.
+
 ## Table of contents
 
 ### Constructors
@@ -17,6 +19,7 @@
 - [icon](graphql.customerinput.md#icon)
 - [inactive](graphql.customerinput.md#inactive)
 - [key](graphql.customerinput.md#key)
+- [labels](graphql.customerinput.md#labels)
 - [name](graphql.customerinput.md#name)
 - [webLink](graphql.customerinput.md#weblink)
 
@@ -34,7 +37,9 @@
 
 • **description**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L60)
+The description of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L32)
 
 ___
 
@@ -42,7 +47,9 @@ ___
 
 • `Optional` **externalSystemURL**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L66)
+The external system URL of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L44)
 
 ___
 
@@ -50,7 +57,9 @@ ___
 
 • **icon**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L69)
+The icon of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L50)
 
 ___
 
@@ -58,7 +67,9 @@ ___
 
 • `Optional` **inactive**: *boolean*
 
-Defined in: [graphql/resolvers/customer/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L72)
+Whether the customer is inactive or not.
+
+Defined in: [graphql/resolvers/customer/types.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L56)
 
 ___
 
@@ -66,7 +77,19 @@ ___
 
 • **key**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L54)
+The unique key of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L20)
+
+___
+
+### labels
+
+• `Optional` **labels**: *string*[]
+
+The labels associated with the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L62)
 
 ___
 
@@ -74,7 +97,9 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L57)
+The name of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L26)
 
 ___
 
@@ -82,4 +107,6 @@ ___
 
 • `Optional` **webLink**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L63)
+The web link of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L38)

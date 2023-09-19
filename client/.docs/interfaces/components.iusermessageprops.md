@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *IMessageBarProps*
+* *AlertProps*
 
   ↳ **IUserMessageProps**
 
@@ -14,25 +14,22 @@
 
 ### Properties
 
-- [containerStyle](components.iusermessageprops.md#containerstyle)
+- [actions](components.iusermessageprops.md#actions)
 - [fixedHeight](components.iusermessageprops.md#fixedheight)
 - [headerText](components.iusermessageprops.md#headertext)
-- [iconName](components.iusermessageprops.md#iconname)
-- [innerStyle](components.iusermessageprops.md#innerstyle)
 - [onClick](components.iusermessageprops.md#onclick)
-- [onDismiss](components.iusermessageprops.md#ondismiss)
+- [openActionsOnHover](components.iusermessageprops.md#openactionsonhover)
 - [text](components.iusermessageprops.md#text)
-- [type](components.iusermessageprops.md#type)
 
 ## Properties
 
-### containerStyle
+### actions
 
-• `Optional` **containerStyle**: *CSSProperties*
+• `Optional` **actions**: [*IUserMessageAction*](components.iusermessageaction.md)[]
 
-Container style
+Actions to show in a menu
 
-Defined in: [components/UserMessage/types.tsx:49](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L49)
+Defined in: [client/components/UserMessage/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L50)
 
 ___
 
@@ -42,7 +39,7 @@ ___
 
 To flex the message center with a fixed height
 
-Defined in: [components/UserMessage/types.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L54)
+Defined in: [client/components/UserMessage/types.tsx:45](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L45)
 
 ___
 
@@ -52,27 +49,7 @@ ___
 
 Header text to show in **bold** _slightly larger_ font
 
-Defined in: [components/UserMessage/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L17)
-
-___
-
-### iconName
-
-• `Optional` **iconName**: *string*
-
-Icon to use if not default for the type
-
-Defined in: [components/UserMessage/types.tsx:44](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L44)
-
-___
-
-### innerStyle
-
-• `Optional` **innerStyle**: *CSSProperties*
-
-Styles for the inner part of the message
-
-Defined in: [components/UserMessage/types.tsx:59](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L59)
+Defined in: [client/components/UserMessage/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L28)
 
 ___
 
@@ -94,31 +71,21 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [components/UserMessage/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L29)
+Defined in: [client/components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
 
 Overrides: void
 
-Defined in: [components/UserMessage/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L29)
+Defined in: [client/components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
 
 ___
 
-### onDismiss
+### openActionsOnHover
 
-• `Optional` **onDismiss**: () => *void*
+• `Optional` **openActionsOnHover**: *boolean*
 
-On dismiss handler for the message
+Whether to open the actions menu on hover
 
-#### Type declaration:
-
-▸ (): *void*
-
-**Returns:** *void*
-
-Defined in: [components/UserMessage/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L34)
-
-Overrides: void
-
-Defined in: [components/UserMessage/types.tsx:34](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L34)
+Defined in: [client/components/UserMessage/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L55)
 
 ___
 
@@ -130,14 +97,4 @@ Text to show in the message
 
 **`remarks`** Supports markdown
 
-Defined in: [components/UserMessage/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L24)
-
-___
-
-### type
-
-• `Optional` **type**: [*UserMessageType*](../modules/components.md#usermessagetype)
-
-Type info, warning, error etc
-
-Defined in: [components/UserMessage/types.tsx:39](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L39)
+Defined in: [client/components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)

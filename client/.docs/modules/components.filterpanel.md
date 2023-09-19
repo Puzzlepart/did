@@ -8,9 +8,16 @@
 
 ### Variables
 
+- [className](components.filterpanel.md#classname)
 - [defaultProps](components.filterpanel.md#defaultprops)
 
 ## Variables
+
+### className
+
+• **className**: *string*
+
+___
 
 ### defaultProps
 

@@ -93,7 +93,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*User*](graphql.user.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -146,7 +146,7 @@ ___
 
 ### addUser
 
-▸ **addUser**(`user`: [*User*](graphql.user.md)): *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+▸ **addUser**(`user`: [*User*](graphql.user.md)): *Promise*<any\>
 
 Add the specified user object
 
@@ -156,7 +156,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `user` | [*User*](graphql.user.md) | User    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/user.ts:112](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L112)
 
@@ -164,7 +164,7 @@ ___
 
 ### addUsers
 
-▸ **addUsers**(`users_`: [*User*](graphql.user.md)[]): *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+▸ **addUsers**(`users_`: [*User*](graphql.user.md)[]): *Promise*<any\>
 
 Add multiple users in bulk
 
@@ -174,7 +174,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `users_` | [*User*](graphql.user.md)[] | Users    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+**Returns:** *Promise*<any\>
 
 Defined in: [services/mongo/user.ts:126](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L126)
 
@@ -182,7 +182,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*User*](graphql.user.md)\>, `sort?`: S): *Promise*<[*User*](graphql.user.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*User*](graphql.user.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -198,7 +198,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*User*](graphql.user.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
@@ -251,7 +251,7 @@ ___
 
 ### getUsers
 
-▸ **getUsers**(`query?`: *FilterQuery*<[*User*](graphql.user.md)\>): *Promise*<[*User*](graphql.user.md)[]\>
+▸ **getUsers**(`query?`: *any*): *Promise*<[*User*](graphql.user.md)[]\>
 
 Get users by the specified query
 
@@ -259,7 +259,7 @@ Get users by the specified query
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*User*](graphql.user.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
@@ -269,7 +269,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -281,7 +281,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -291,7 +291,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -305,7 +305,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -315,7 +315,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*User*](graphql.user.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -325,10 +325,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*User*](graphql.user.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 

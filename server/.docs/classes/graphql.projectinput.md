@@ -36,7 +36,9 @@
 
 • **customerKey**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L17)
+The unique key of the customer associated with the project.
+
+Defined in: [graphql/resolvers/project/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L26)
 
 ___
 
@@ -44,7 +46,9 @@ ___
 
 • **description**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L23)
+The description of the project.
+
+Defined in: [graphql/resolvers/project/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L38)
 
 ___
 
@@ -52,7 +56,9 @@ ___
 
 • `Optional` **externalSystemURL**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L32)
+The external system URL of the project.
+
+Defined in: [graphql/resolvers/project/types.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L56)
 
 ___
 
@@ -60,7 +66,9 @@ ___
 
 • **icon**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L26)
+The icon of the project.
+
+Defined in: [graphql/resolvers/project/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L44)
 
 ___
 
@@ -68,7 +76,9 @@ ___
 
 • `Optional` **inactive**: *boolean*
 
-Defined in: [graphql/resolvers/project/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L35)
+Whether the project is inactive or not.
+
+Defined in: [graphql/resolvers/project/types.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L62)
 
 ___
 
@@ -76,7 +86,9 @@ ___
 
 • **key**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L14)
+The unique key of the project.
+
+Defined in: [graphql/resolvers/project/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L20)
 
 ___
 
@@ -84,7 +96,9 @@ ___
 
 • `Optional` **labels**: *string*[]
 
-Defined in: [graphql/resolvers/project/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L38)
+The labels associated with the project.
+
+Defined in: [graphql/resolvers/project/types.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L68)
 
 ___
 
@@ -92,7 +106,9 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L20)
+The name of the project.
+
+Defined in: [graphql/resolvers/project/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L32)
 
 ___
 
@@ -100,4 +116,6 @@ ___
 
 • `Optional` **webLink**: *string*
 
-Defined in: [graphql/resolvers/project/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L29)
+The web link of the project.
+
+Defined in: [graphql/resolvers/project/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L50)

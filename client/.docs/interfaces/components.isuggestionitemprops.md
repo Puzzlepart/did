@@ -8,7 +8,7 @@
 
 * *HTMLProps*<HTMLDivElement\>
 
-* *Pick*<[*IAutocompleteProps*](components.iautocompleteprops.md), *itemIcons*\>
+* *Pick*<[*IAutocompleteControlProps*](components.iautocompletecontrolprops.md), *itemIcons*\>
 
   ↳ **ISuggestionItemProps**
 
@@ -25,16 +25,16 @@
 
 • **item**: [*ISuggestionItem*](components.isuggestionitem.md)<any\>
 
-Defined in: [components/Autocomplete/SuggestionItem/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/SuggestionItem/types.ts#L23)
+Defined in: [client/components/FormControl/AutocompleteControl/SuggestionItem/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/SuggestionItem/types.ts#L23)
 
 ___
 
 ### itemIcons
 
-• `Optional` **itemIcons**: *boolean* \| AutocompleteItemIcons
+• `Optional` **itemIcons**: *boolean* \| AutocompleteControlItemIcons
 
 Icons to be displayed next to each item.
 
 Inherited from: void
 
-Defined in: [components/Autocomplete/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/types.ts#L41)
+Defined in: [client/components/FormControl/AutocompleteControl/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L36)

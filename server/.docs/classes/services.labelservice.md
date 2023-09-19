@@ -56,7 +56,7 @@ Name | Type | Description |
 
 Overrides: void
 
-Defined in: [services/mongo/label.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L20)
+Defined in: [services/mongo/label.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L21)
 
 ## Properties
 
@@ -80,7 +80,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*LabelObject*](graphql.labelobject.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -108,7 +108,7 @@ Inherited from: void
 
 ▸ `Private`**_generateId**(`label`: [*LabelObject*](graphql.labelobject.md)): *string*
 
-Generate id for a label
+Generate an ID for a label
 
 #### Parameters:
 
@@ -118,15 +118,15 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [services/mongo/label.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L35)
+Defined in: [services/mongo/label.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L36)
 
 ___
 
 ### addLabel
 
-▸ **addLabel**(`label`: [*LabelObject*](graphql.labelobject.md)): *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
+▸ **addLabel**(`label`: [*LabelObject*](graphql.labelobject.md)): *Promise*<any\>
 
-Add label
+Add label, then clear the cache key `labels`.
 
 #### Parameters:
 
@@ -134,17 +134,17 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `label` | [*LabelObject*](graphql.labelobject.md) | Label    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
+**Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/label.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L58)
+Defined in: [services/mongo/label.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L64)
 
 ___
 
 ### deleteLabel
 
-▸ **deleteLabel**(`name`: *string*): *Promise*<DeleteWriteOpResultObject\>
+▸ **deleteLabel**(`name`: *string*): *Promise*<any\>
 
-Delete label by name
+Delete label by name, then clear the cache key `labels`.
 
 #### Parameters:
 
@@ -152,15 +152,15 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `name` | *string* | Name    |
 
-**Returns:** *Promise*<DeleteWriteOpResultObject\>
+**Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/label.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L90)
+Defined in: [services/mongo/label.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L98)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\>, `sort?`: S): *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -176,7 +176,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
@@ -189,25 +189,25 @@ ___
 
 ### getLabels
 
-▸ **getLabels**(`query?`: *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\>): *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
+▸ **getLabels**(`query?`: *any*): *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Get labels
+Get labels from cache or database.
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [services/mongo/label.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L44)
+Defined in: [services/mongo/label.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L45)
 
 ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -219,7 +219,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -229,7 +229,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -243,7 +243,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -253,7 +253,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -263,10 +263,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*LabelObject*](graphql.labelobject.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -278,7 +278,7 @@ ___
 
 ▸ **updateLabel**(`label`: [*LabelObject*](graphql.labelobject.md)): *Promise*<void\>
 
-Update label
+Update label, then clear the cache key `labels`.
 
 #### Parameters:
 
@@ -288,4 +288,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/label.ts:77](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L77)
+Defined in: [services/mongo/label.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L84)

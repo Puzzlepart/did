@@ -15,7 +15,10 @@
 - [ACCESS\_TIMESHEET](security.permissionscope.md#access_timesheet)
 - [DELETE\_CUSTOMER](security.permissionscope.md#delete_customer)
 - [DELETE\_PROJECTS](security.permissionscope.md#delete_projects)
+- [IMPORT\_USERS](security.permissionscope.md#import_users)
+- [LIST\_API\_TOKENS](security.permissionscope.md#list_api_tokens)
 - [LIST\_USERS](security.permissionscope.md#list_users)
+- [MANAGE\_API\_TOKENS](security.permissionscope.md#manage_api_tokens)
 - [MANAGE\_CUSTOMERS](security.permissionscope.md#manage_customers)
 - [MANAGE\_PROJECTS](security.permissionscope.md#manage_projects)
 - [MANAGE\_REPORT\_LINKS](security.permissionscope.md#manage_report_links)
@@ -29,7 +32,7 @@
 
 • **ACCESS\_ADMIN**: = "2653c3aa"
 
-Defined in: [shared/config/security/permissions.ts:7](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L7)
+Defined in: [shared/config/security/types.ts:5](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L5)
 
 ___
 
@@ -37,7 +40,7 @@ ___
 
 • **ACCESS\_CUSTOMERS**: = "e18a7c45"
 
-Defined in: [shared/config/security/permissions.ts:5](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L5)
+Defined in: [shared/config/security/types.ts:3](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L3)
 
 ___
 
@@ -45,7 +48,7 @@ ___
 
 • **ACCESS\_PROJECTS**: = "289a64ab"
 
-Defined in: [shared/config/security/permissions.ts:6](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L6)
+Defined in: [shared/config/security/types.ts:4](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L4)
 
 ___
 
@@ -53,7 +56,7 @@ ___
 
 • **ACCESS\_REPORTS**: = "a031c42f"
 
-Defined in: [shared/config/security/permissions.ts:8](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L8)
+Defined in: [shared/config/security/types.ts:6](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L6)
 
 ___
 
@@ -61,7 +64,7 @@ ___
 
 • **ACCESS\_TIMESHEET**: = "f5a82c37"
 
-Defined in: [shared/config/security/permissions.ts:4](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L4)
+Defined in: [shared/config/security/types.ts:2](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L2)
 
 ___
 
@@ -69,7 +72,7 @@ ___
 
 • **DELETE\_CUSTOMER**: = "8b39db3d"
 
-Defined in: [shared/config/security/permissions.ts:12](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L12)
+Defined in: [shared/config/security/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L10)
 
 ___
 
@@ -77,7 +80,23 @@ ___
 
 • **DELETE\_PROJECTS**: = "c5439319"
 
-Defined in: [shared/config/security/permissions.ts:10](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L10)
+Defined in: [shared/config/security/types.ts:8](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L8)
+
+___
+
+### IMPORT\_USERS
+
+• **IMPORT\_USERS**: = "b2b0f2a0"
+
+Defined in: [shared/config/security/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L13)
+
+___
+
+### LIST\_API\_TOKENS
+
+• **LIST\_API\_TOKENS**: = "cc77404a"
+
+Defined in: [shared/config/security/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L17)
 
 ___
 
@@ -85,7 +104,15 @@ ___
 
 • **LIST\_USERS**: = "1a1db774"
 
-Defined in: [shared/config/security/permissions.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L14)
+Defined in: [shared/config/security/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L12)
+
+___
+
+### MANAGE\_API\_TOKENS
+
+• **MANAGE\_API\_TOKENS**: = "5f1a2b0e"
+
+Defined in: [shared/config/security/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L18)
 
 ___
 
@@ -93,7 +120,7 @@ ___
 
 • **MANAGE\_CUSTOMERS**: = "09909241"
 
-Defined in: [shared/config/security/permissions.ts:11](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L11)
+Defined in: [shared/config/security/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L9)
 
 ___
 
@@ -101,7 +128,7 @@ ___
 
 • **MANAGE\_PROJECTS**: = "ef4032fb"
 
-Defined in: [shared/config/security/permissions.ts:9](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L9)
+Defined in: [shared/config/security/types.ts:7](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L7)
 
 ___
 
@@ -109,7 +136,7 @@ ___
 
 • **MANAGE\_REPORT\_LINKS**: = "8de5215e"
 
-Defined in: [shared/config/security/permissions.ts:17](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L17)
+Defined in: [shared/config/security/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L16)
 
 ___
 
@@ -117,7 +144,7 @@ ___
 
 • **MANAGE\_ROLESPERMISSIONS**: = "cd52a735"
 
-Defined in: [shared/config/security/permissions.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L15)
+Defined in: [shared/config/security/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L14)
 
 ___
 
@@ -125,7 +152,7 @@ ___
 
 • **MANAGE\_SUBSCRIPTION**: = "67ba6efc"
 
-Defined in: [shared/config/security/permissions.ts:16](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L16)
+Defined in: [shared/config/security/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L15)
 
 ___
 
@@ -133,4 +160,4 @@ ___
 
 • **MANAGE\_USERS**: = "15e40e99"
 
-Defined in: [shared/config/security/permissions.ts:13](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/permissions.ts#L13)
+Defined in: [shared/config/security/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/shared/config/security/types.ts#L11)

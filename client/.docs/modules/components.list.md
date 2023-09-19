@@ -8,9 +8,16 @@
 
 ### Variables
 
+- [className](components.list.md#classname)
 - [defaultProps](components.list.md#defaultprops)
 
 ## Variables
+
+### className
+
+• **className**: *string*
+
+___
 
 ### defaultProps
 

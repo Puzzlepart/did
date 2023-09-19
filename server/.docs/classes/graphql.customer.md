@@ -4,6 +4,8 @@
 
 [GraphQL](../modules/graphql.md).Customer
 
+Represents a customer.
+
 ## Table of contents
 
 ### Constructors
@@ -15,14 +17,12 @@
 - [description](graphql.customer.md#description)
 - [externalSystemURL](graphql.customer.md#externalsystemurl)
 - [icon](graphql.customer.md#icon)
+- [id](graphql.customer.md#id)
 - [inactive](graphql.customer.md#inactive)
 - [key](graphql.customer.md#key)
+- [labels](graphql.customer.md#labels)
 - [name](graphql.customer.md#name)
 - [webLink](graphql.customer.md#weblink)
-
-### Methods
-
-- [fromInput](graphql.customer.md#frominput)
 
 ## Constructors
 
@@ -38,15 +38,19 @@
 
 • **description**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L20)
+The description of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L97)
 
 ___
 
 ### externalSystemURL
 
-• **externalSystemURL**: *string*
+• `Optional` **externalSystemURL**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L26)
+The external system URL of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L109)
 
 ___
 
@@ -54,7 +58,19 @@ ___
 
 • **icon**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L29)
+The icon of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L115)
+
+___
+
+### id
+
+• **id**: *string*
+
+The unique ID of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L79)
 
 ___
 
@@ -62,7 +78,9 @@ ___
 
 • `Optional` **inactive**: *boolean*
 
-Defined in: [graphql/resolvers/customer/types.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L32)
+Whether the customer is inactive or not.
+
+Defined in: [graphql/resolvers/customer/types.ts:121](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L121)
 
 ___
 
@@ -70,7 +88,19 @@ ___
 
 • **key**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L14)
+The unique key of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L85)
+
+___
+
+### labels
+
+• `Optional` **labels**: *string*[] \| [*LabelObject*](graphql.labelobject.md)[]
+
+The labels associated with the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L127)
 
 ___
 
@@ -78,30 +108,16 @@ ___
 
 • **name**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L17)
+The name of the customer.
+
+Defined in: [graphql/resolvers/customer/types.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L91)
 
 ___
 
 ### webLink
 
-• **webLink**: *string*
+• `Optional` **webLink**: *string*
 
-Defined in: [graphql/resolvers/customer/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L23)
+The web link of the customer.
 
-## Methods
-
-### fromInput
-
-▸ **fromInput**(`input`: [*CustomerInput*](graphql.customerinput.md)): [*Customer*](graphql.customer.md)
-
-Creates a Customer object from a CustomerInput object
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`input` | [*CustomerInput*](graphql.customerinput.md) | Input object    |
-
-**Returns:** [*Customer*](graphql.customer.md)
-
-Defined in: [graphql/resolvers/customer/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L39)
+Defined in: [graphql/resolvers/customer/types.ts:103](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L103)

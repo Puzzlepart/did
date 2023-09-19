@@ -20,6 +20,8 @@
 - [diff](dateutils._dayjs.dayjs.md#diff)
 - [endOf](dateutils._dayjs.dayjs.md#endof)
 - [format](dateutils._dayjs.dayjs.md#format)
+- [from](dateutils._dayjs.dayjs.md#from)
+- [fromNow](dateutils._dayjs.dayjs.md#fromnow)
 - [get](dateutils._dayjs.dayjs.md#get)
 - [hour](dateutils._dayjs.dayjs.md#hour)
 - [isAfter](dateutils._dayjs.dayjs.md#isafter)
@@ -43,9 +45,11 @@
 - [set](dateutils._dayjs.dayjs.md#set)
 - [startOf](dateutils._dayjs.dayjs.md#startof)
 - [subtract](dateutils._dayjs.dayjs.md#subtract)
+- [to](dateutils._dayjs.dayjs.md#to)
 - [toDate](dateutils._dayjs.dayjs.md#todate)
 - [toISOString](dateutils._dayjs.dayjs.md#toisostring)
 - [toJSON](dateutils._dayjs.dayjs.md#tojson)
+- [toNow](dateutils._dayjs.dayjs.md#tonow)
 - [toString](dateutils._dayjs.dayjs.md#tostring)
 - [tz](dateutils._dayjs.dayjs.md#tz)
 - [unix](dateutils._dayjs.dayjs.md#unix)
@@ -323,6 +327,39 @@ Name | Type |
 **Returns:** *string*
 
 Defined in: node_modules/dayjs/index.d.ts:276
+
+___
+
+### from
+
+▸ **from**(`compared`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `withoutSuffix?`: *boolean*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`compared` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
+`withoutSuffix?` | *boolean* |
+
+**Returns:** *string*
+
+Defined in: node_modules/dayjs/plugin/relativeTime.d.ts:20
+
+___
+
+### fromNow
+
+▸ **fromNow**(`withoutSuffix?`: *boolean*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`withoutSuffix?` | *boolean* |
+
+**Returns:** *string*
+
+Defined in: node_modules/dayjs/plugin/relativeTime.d.ts:19
 
 ___
 
@@ -950,6 +987,23 @@ Defined in: node_modules/dayjs/plugin/objectSupport.d.ts:10
 
 ___
 
+### to
+
+▸ **to**(`compared`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `withoutSuffix?`: *boolean*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`compared` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
+`withoutSuffix?` | *boolean* |
+
+**Returns:** *string*
+
+Defined in: node_modules/dayjs/plugin/relativeTime.d.ts:22
+
+___
+
 ### toDate
 
 ▸ **toDate**(): Date
@@ -994,6 +1048,22 @@ Docs: https://day.js.org/docs/en/display/as-json
 **Returns:** *string*
 
 Defined in: node_modules/dayjs/index.d.ts:339
+
+___
+
+### toNow
+
+▸ **toNow**(`withoutSuffix?`: *boolean*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`withoutSuffix?` | *boolean* |
+
+**Returns:** *string*
+
+Defined in: node_modules/dayjs/plugin/relativeTime.d.ts:21
 
 ___
 

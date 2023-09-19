@@ -78,7 +78,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*ApiToken*](graphql.apitoken.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -142,7 +142,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\>, `sort?`: S): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -158,7 +158,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
@@ -171,7 +171,7 @@ ___
 
 ### getTokens
 
-▸ **getTokens**(`query?`: *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\>): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
+▸ **getTokens**(`query?`: *any*): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Get tokens
 
@@ -179,7 +179,7 @@ Get tokens
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
@@ -189,7 +189,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -201,7 +201,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -211,7 +211,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -225,7 +225,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -235,7 +235,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -245,10 +245,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 

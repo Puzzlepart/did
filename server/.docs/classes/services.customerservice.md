@@ -41,7 +41,7 @@ Customer service
 
 ### constructor
 
-\+ **new CustomerService**(`context`: *Context*): [*CustomerService*](services.customerservice.md)
+\+ **new CustomerService**(`context`: *Context*, `_labelSvc`: [*LabelService*](services.labelservice.md)): [*CustomerService*](services.customerservice.md)
 
 Constructor for `CustomerService`
 
@@ -49,13 +49,14 @@ Constructor for `CustomerService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | *Context* | Injected context through `typedi`   |
+`_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through `typedi`    |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
 Overrides: void
 
-Defined in: [services/mongo/customer.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L15)
+Defined in: [services/mongo/customer.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L16)
 
 ## Properties
 
@@ -79,7 +80,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*Customer*](graphql.customer.md)\>
+• **collection**: *any*
 
 Inherited from: void
 
@@ -117,7 +118,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L30)
+Defined in: [services/mongo/customer.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L35)
 
 ___
 
@@ -135,13 +136,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L61)
+Defined in: [services/mongo/customer.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L66)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*Customer*](graphql.customer.md)\>, `sort?`: S): *Promise*<[*Customer*](graphql.customer.md)[]\>
+▸ **find**<S\>(`query`: *any*, `sort?`: S): *Promise*<[*Customer*](graphql.customer.md)[]\>
 
 Wrapper on _.find().toArray()
 
@@ -157,7 +158,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Customer*](graphql.customer.md)\> | Filter query   |
+`query` | *any* | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
@@ -170,25 +171,27 @@ ___
 
 ### getCustomers
 
-▸ **getCustomers**(`query?`: *FilterQuery*<[*Customer*](graphql.customer.md)\>): *Promise*<[*Customer*](graphql.customer.md)[]\>
+▸ **getCustomers**(`query?`: *any*): *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Get customers
+Get customers from cache or database using the provided `query`.
+The result is sorted by the `name` property, then labels are
+added to each customer based on the `labels` property.
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<[*Customer*](graphql.customer.md)\> | Query    |
+`query?` | *any* | Query    |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [services/mongo/customer.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L75)
+Defined in: [services/mongo/customer.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L82)
 
 ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
+▸ **insert**(`document_`: *any*): *any*
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -200,7 +203,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -210,7 +213,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *any*
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -224,7 +227,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -234,7 +237,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*Customer*](graphql.customer.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *any*, `document_`: *any*): *any*
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -244,10 +247,10 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*Customer*](graphql.customer.md)\> | Query   |
+`query` | *any* | Query   |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<UpdateWriteOpResult\>
+**Returns:** *any*
 
 Inherited from: void
 
@@ -269,4 +272,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L47)
+Defined in: [services/mongo/customer.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L52)

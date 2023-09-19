@@ -54,7 +54,7 @@ ___
 
 ### passportMiddleware
 
-▸ `Const`**passportMiddleware**(`mcl`: *MongoClient*): *PassportStatic*
+▸ `Const`**passportMiddleware**(`mcl`: *any*): *PassportStatic*
 
 Setup passport to be used for authentication
 
@@ -62,7 +62,7 @@ Setup passport to be used for authentication
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`mcl` | *MongoClient* | Mongo client    |
+`mcl` | *any* | Mongo client    |
 
 **Returns:** *PassportStatic*
 

@@ -17,7 +17,7 @@
 
 • **Long**: = "LongFormat"
 
-Defined in: [shared/utils/date.ts:31](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L31)
+Defined in: [shared/utils/date.ts:32](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L32)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **Short**: = "ShortFormat"
 
-Defined in: [shared/utils/date.ts:30](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L30)
+Defined in: [shared/utils/date.ts:31](https://github.com/Puzzlepart/did/blob/dev/shared/utils/date.ts#L31)
