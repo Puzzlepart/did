@@ -18,7 +18,7 @@ export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
   const items: IBreadcrumbItem[] = [
     {
       key: 'current',
-      text: props.page.displayName,
+      text: props.page.text,
       isCurrentItem: nav.length === 0
     },
     ...nav.map((key, index) => ({
@@ -38,6 +38,3 @@ export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
 }
 
 MobileBreadcrumb.className = styles.mobileBreadcrumb
-
-export * from './types'
-export * from './useMobileBreadcrumb'
