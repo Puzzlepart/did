@@ -228,7 +228,7 @@ Get end date index with Monday = 0
 
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:380](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L380)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:381](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L381)
 
 ___
 
@@ -264,7 +264,8 @@ ___
 
 • get **isComplete**(): *boolean*
 
-Period is complete meaning all events are matched
+Period is complete meaning all events are matched to a project, but there
+might be ignored events.
 
 **`memberof`** TimesheetPeriod
 
@@ -272,7 +273,7 @@ Period is complete meaning all events are matched
 
 `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:354](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L354)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:355](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L355)
 
 ___
 
@@ -288,7 +289,7 @@ Period is in the past
 
 `true` if the `endDate` is before today
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:365](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L365)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:366](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L366)
 
 ___
 
@@ -328,7 +329,7 @@ Get start date index with Monday = 0
 
 **Returns:** *number*
 
-Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:372](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L372)
+Defined in: [client/pages/Timesheet/TimesheetPeriod.ts:373](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPeriod.ts#L373)
 
 ___
 
