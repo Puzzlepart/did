@@ -21,6 +21,8 @@ All are built using React Function components and Hooks.
 - [ProjectInformation](pages.projectinformation.md)
 - [ProjectList](pages.projectlist.md)
 - [ProjectTimeEntries](pages.projecttimeentries.md)
+- [ProjectsPage](pages.projectspage.md)
+- [ReportsPage](pages.reportspage.md)
 - [SaveFilterForm](pages.savefilterform.md)
 - [Timesheet](pages.timesheet.md)
 - [TimesheetPage](pages.timesheetpage.md)
@@ -243,7 +245,7 @@ Using `Switch`, `Route` and `useRouteMatch` from
 `react-router-dom` to support navigating between
 sub components
 
-Defined in: [client/pages/Admin/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/index.tsx#L17)
+Defined in: [client/pages/Admin/AdminPage.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/AdminPage.tsx#L17)
 
 ___
 
@@ -296,7 +298,7 @@ Using `Switch`, `Route` and `useRouteMatch` from
 `react-router-dom` to support navigating between
 sub components
 
-Defined in: [client/pages/Reports/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/index.tsx#L15)
+Defined in: [client/pages/Reports/ReportsPage.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/ReportsPage.tsx#L15)
 
 ___
 
@@ -310,7 +312,7 @@ Using `Switch`, `Route` and `useRouteMatch` from
 `react-router-dom` to support navigating between
 sub components
 
-Defined in: [client/pages/Timesheet/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/index.tsx#L16)
+Defined in: [client/pages/Timesheet/TimesheetPage.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetPage.tsx#L16)
 
 ___
 

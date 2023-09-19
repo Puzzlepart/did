@@ -22,9 +22,9 @@
 
 ### iconName
 
-• `Optional` **iconName**: *string*
+• `Optional` **iconName**: *ListBar* \| *ContentSettings* \| *BuildingSkyscraper* \| *Home* \| *ContentView* \| *Eye* \| *NoteEdit* \| *LinkEdit* \| *Edit* \| *TableCellEdit* \| *PersonEdit* \| *TextBulletListSquareEdit* \| *Dismiss* \| *TagMultiple* \| *KeyMultiple* \| *Umbrella* \| *Person* \| *PersonProhibited* \| *SelectAllOff* \| *WeatherSunnyLow* \| *Cloud* \| *Timeline* \| *Collections* \| *Info* \| *CalendarPlay* \| *CalendarClock* \| *Emoji* \| *Alert* \| *ArrowExportUp* \| *DrinkMargarita* \| *EditSettings* \| *DocumentDatabase* \| *Key* \| *StoreMicrosoft* \| *ArrowSortUp* \| *Checkmark* \| *ArrowImport* \| *PeopleAdd* \| *PersonSync* \| *AddCircle* \| *CalendarWeekNumbers* \| *ArrowCircleLeft* \| *ArrowCircleRight* \| *CalendarCancel* \| *CalendarMonth* \| *CalendarSync* \| *CalendarToday* \| *CalendarWorkWeek* \| *CheckmarkCircle* \| *Timer* \| *PeopleTeam* \| *Timer2* \| *PeopleEdit* \| *Delete* \| *ArrowUndo* \| *FastForward* \| *TableEdit* \| *WebAsset* \| *System* \| *SignOut* \| *CalendarAdd* \| *BinRecycle* \| *DeleteDismiss* \| *ArrowSync*
 
-Defined in: [client/parts/Navigation/NavItem/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L9)
+Defined in: [client/parts/Navigation/NavItem/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L10)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • `Optional` **permission**: PermissionScope
 
-Defined in: [client/parts/Navigation/NavItem/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L10)
+Defined in: [client/parts/Navigation/NavItem/types.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L11)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 • **text**: *string*
 
-Defined in: [client/parts/Navigation/NavItem/types.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L8)
+Defined in: [client/parts/Navigation/NavItem/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/NavItem/types.tsx#L9)
