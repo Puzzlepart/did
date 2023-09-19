@@ -10,6 +10,7 @@
 
 - [className](components.basepanel.md#classname)
 - [defaultProps](components.basepanel.md#defaultprops)
+- [displayName](components.basepanel.md#displayname)
 
 ## Variables
 
@@ -22,3 +23,9 @@ ___
 ### defaultProps
 
 • **defaultProps**: *Partial*<[*IBasePanelProps*](../interfaces/components.ibasepanelprops.md)\>
+
+___
+
+### displayName
+
+• **displayName**: *string*

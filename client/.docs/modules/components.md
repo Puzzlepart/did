@@ -534,7 +534,7 @@ ___
 Renders a Panel with the content wrapped in `<FluentProvider />` from
 [@fluentui/react-components](@fluentui/react-components)
 
-Defined in: [client/components/BasePanel/BasePanel.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/BasePanel.tsx#L19)
+Defined in: [client/components/BasePanel/BasePanel.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/BasePanel.tsx#L15)
 
 ___
 

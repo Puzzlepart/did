@@ -19,6 +19,7 @@ Props for the `BasePanel` component.
 - [footerActions](components.ibasepanelprops.md#footeractions)
 - [headerActions](components.ibasepanelprops.md#headeractions)
 - [headerSubText](components.ibasepanelprops.md#headersubtext)
+- [headerSubTextProps](components.ibasepanelprops.md#headersubtextprops)
 - [scroll](components.ibasepanelprops.md#scroll)
 
 ## Properties
@@ -29,7 +30,7 @@ Props for the `BasePanel` component.
 
 Actions to display in the footer of the panel.
 
-Defined in: [client/components/BasePanel/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L23)
+Defined in: [client/components/BasePanel/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L31)
 
 ___
 
@@ -39,7 +40,7 @@ ___
 
 Actions to display in the header of the panel.
 
-Defined in: [client/components/BasePanel/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L18)
+Defined in: [client/components/BasePanel/types.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L26)
 
 ___
 
@@ -47,11 +48,23 @@ ___
 
 • `Optional` **headerSubText**: *string*
 
-Header sub text to display in the panel. This text will be
-displayed in a `<Caption1 />` component from `@fluentui/react-components`.
-Use this if you want to show more information about the panel.
+Header sub text to display in the panel. Use this
+if you want to show more information about the panel.
+Use `headerSubTextProps` to style the header sub text.
 
-Defined in: [client/components/BasePanel/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L13)
+Defined in: [client/components/BasePanel/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L14)
+
+___
+
+### headerSubTextProps
+
+• `Optional` **headerSubTextProps**: TextProps
+
+Props for the header sub text.
+
+**`default`** ```{ size: 400 }```
+
+Defined in: [client/components/BasePanel/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L21)
 
 ___
 
@@ -63,4 +76,4 @@ Whether or not the panel should have a scroll bar. If set to
 `true`, the scrollable content container will have `overflow`
 set to `auto`, otherwise it will be set to `visible`.
 
-Defined in: [client/components/BasePanel/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L30)
+Defined in: [client/components/BasePanel/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/types.ts#L38)
