@@ -50,7 +50,7 @@ Reusable utility functions
 
 Represents the name of a Fluent UI icon.
 
-Defined in: [client/utils/getFluentIcon.tsx:382](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L382)
+Defined in: [client/utils/getFluentIcon.tsx:400](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L400)
 
 ## Functions
 
@@ -330,7 +330,7 @@ Name | Type | Default value | Description |
 
 The specified Fluent icon.
 
-Defined in: [client/utils/getFluentIcon.tsx:393](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L393)
+Defined in: [client/utils/getFluentIcon.tsx:411](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L411)
 
 ___
 
@@ -352,7 +352,7 @@ Name | Type | Default value | Description |
 
 A Fluent UI icon component or a default icon component if the requested icon is not found.
 
-Defined in: [client/utils/getFluentIcon.tsx:426](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L426)
+Defined in: [client/utils/getFluentIcon.tsx:444](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L444)
 
 ___
 
@@ -366,7 +366,7 @@ Returns an array of strings representing the names of all available Fluent icons
 
 An array of strings representing the names of all available Fluent icons.
 
-Defined in: [client/utils/getFluentIcon.tsx:410](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L410)
+Defined in: [client/utils/getFluentIcon.tsx:428](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L428)
 
 ___
 

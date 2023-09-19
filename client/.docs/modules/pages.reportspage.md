@@ -1,16 +1,16 @@
-[did-client - v0.12.0](../README.md) / [Pages](pages.md) / TimesheetPage
+[did-client - v0.12.0](../README.md) / [Pages](pages.md) / ReportsPage
 
-# Namespace: TimesheetPage
+# Namespace: ReportsPage
 
-[Pages](pages.md).TimesheetPage
+[Pages](pages.md).ReportsPage
 
 ## Table of contents
 
 ### Variables
 
-- [displayName](pages.timesheetpage.md#displayname)
-- [iconName](pages.timesheetpage.md#iconname)
-- [permission](pages.timesheetpage.md#permission)
+- [displayName](pages.reportspage.md#displayname)
+- [iconName](pages.reportspage.md#iconname)
+- [permission](pages.reportspage.md#permission)
 
 ## Variables
 
