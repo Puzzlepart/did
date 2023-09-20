@@ -24,13 +24,13 @@ export const NavigatePeriodsButtons: StyledComponent<
 > = ({ name }) => {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
-  const isHidden =
-    state.dateRangeType !== DateRangeType.Week || state.periods.length === 1
+  const shouldRender =
+    state.dateRangeType === DateRangeType.Week && state.periods.length > 1
   return (
     <ToolbarRadioGroup
       className={NavigatePeriodsButtons.className}
       style={{
-        display: isHidden ? 'none' : 'flex'
+        display: shouldRender ? 'flex' : 'none'
       }}
     >
       {state.periods.map((period, index) => {
