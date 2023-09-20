@@ -13,13 +13,19 @@ import s from 'underscore.string'
 import { useTimesheetContext } from '../../context'
 import styles from './NavigatePeriodsButtons.module.scss'
 
+/**
+ * Renders a group of radio buttons for navigating between periods. This is 
+ * only visible when the date range type is set to `DateRangeType.Week`, as
+ * we have tabs for navigating between the periods when the date range type
+ * is set to `DateRangeType.Month`.
+ */
 export const NavigatePeriodsButtons: StyledComponent<
   Pick<ToolbarRadioButtonProps, 'name'>
 > = ({ name }) => {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   const isHidden =
-    state.dateRangeType === DateRangeType.Week || state.periods.length === 1
+    state.dateRangeType !== DateRangeType.Week || state.periods.length === 1
   return (
     <ToolbarRadioGroup
       className={NavigatePeriodsButtons.className}
