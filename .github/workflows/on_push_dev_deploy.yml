@@ -13,9 +13,12 @@ on:
       - 'package.json'
 
 jobs:
-  build-and-deploy:
-    name: Build and deploy
+  build:
+    name: Build client and server
     runs-on: ubuntu-latest
+    concurrency: 
+      group: ${{ github.ref }}_push_dev
+      cancel-in-progress: true
     if: "!contains(github.event.head_commit.message, '[no ci]')"
     strategy:
       matrix:
@@ -33,14 +36,30 @@ jobs:
 
     - name: Create package
       run: |
-        npm run package
+        npm run package:client
+        npm run build:server
       env:
         NODE_ENV: production
 
-    - uses: actions/upload-artifact@v3
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
       with:
         name: did-package
-        path: ./did-package.zip
+        path: .
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'dev'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: did-package
 
     - name: 'Deploy package to didapp/dev'
       uses: azure/webapps-deploy@v2
@@ -48,4 +67,4 @@ jobs:
         app-name: 'didapp'
         slot-name: 'dev'
         publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
-        package: ./did-package.zip
+        package: ./
