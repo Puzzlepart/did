@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { AnyAction } from '@reduxjs/toolkit'
+import { IToastProps } from 'components'
 import get from 'get-value'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
@@ -36,6 +37,14 @@ export interface IAppContext extends IAppProps {
    * Get user configuration
    */
   getUserConfiguration: <T = any>(path: string) => T
+
+  /**
+   * Sets a toast message with the given properties and duration.
+   *
+   * @param props - The properties of the toast message.
+   * @param duration - The duration in milliseconds to display the toast message.
+   */
+  setToast: (props: IToastProps, duration: number) => void
 }
 
 export const AppContext = createContext<IAppContext>(null)
@@ -51,11 +60,12 @@ export function useAppContext(): IAppContext {
   const context = useContext(AppContext)
   const getUserConfiguration = (path: string) =>
     get(context.user.configuration, path)
+
   return {
     ...context,
     isAuthenticated: !!context.user?.id,
     getUserConfiguration
-  } as const
+  }
 }
 
 export { ContextUser } from './ContextUser'

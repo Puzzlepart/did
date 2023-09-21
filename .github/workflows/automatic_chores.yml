@@ -19,10 +19,7 @@ jobs:
   automatic_chores:
     name: Automatic chores
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[no ci]')"
-    strategy:
-      matrix:
-        node-version: [18.12.0]
+    if: "!contains(github.event.head_commit.message, '[no-ci]')"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,7 +28,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ vars.NODE_VERSION }}
  
       - run: |
           npm ci --no-audit --no-fund --loglevel=error
@@ -71,7 +68,7 @@ jobs:
           git config --local user.email "github-automatic-chores@users.noreply.github.com"
           git config --local user.name "github-automatic-chores"
           git commit --no-verify -m "docs: updated generated docs, \
-          readme and changelog (${{ steps.git_context.outputs.sha_short }}) 📝 [no ci]" \
+          readme and changelog (${{ steps.git_context.outputs.sha_short }}) 📝 [no-ci]" \
           -m "This is a commit done by the GitHub action \
           https://github.com/Puzzlepart/did/blob/dev/.github/workflows/automatic_chores.yml. \
           This way we avoid having to generate documentation, run eslint etc. locally before \

@@ -14,7 +14,7 @@ import { useTimesheetContext } from '../../context'
 import styles from './NavigatePeriodsButtons.module.scss'
 
 /**
- * Renders a group of radio buttons for navigating between periods. This is 
+ * Renders a group of radio buttons for navigating between periods. This is
  * only visible when the date range type is set to `DateRangeType.Week`, as
  * we have tabs for navigating between the periods when the date range type
  * is set to `DateRangeType.Month`.

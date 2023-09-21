@@ -4,7 +4,7 @@ import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './CheckboxControl.module.scss'
 import { ICheckboxControlProps } from './types'
-import { useToggleControlChange } from './useToggleControlChange'
+import { useCheckboxControlChange } from './useCheckboxControlChange'
 
 /**
  * Text field based on `<Checkbox />` from `@fluentui/react-components`
@@ -14,13 +14,11 @@ import { useToggleControlChange } from './useToggleControlChange'
  */
 export const CheckboxControl: FormInputControlComponent<ICheckboxControlProps> =
   (props) => {
-    const onChange = useToggleControlChange(props)
+    const onChange = useCheckboxControlChange(props)
     return (
       <Field className={CheckboxControl.className} {...props}>
         <Checkbox
-          onChange={(event, data) => {
-            onChange(event, data?.checked)
-          }}
+          onChange={(event, data) => onChange(event, data?.checked)}
           checked={props.model.value<boolean>(props.name, false)}
         />
       </Field>

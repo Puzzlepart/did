@@ -1,5 +1,5 @@
 import { Dropdown, Option } from '@fluentui/react-components'
-import React from 'react'
+import React, { useMemo } from 'react'
 import _ from 'underscore'
 import { FormControlContext } from '../context'
 import { Field } from '../Field'
@@ -16,6 +16,16 @@ import { useDropdownControlChange } from './useDropdownControlChange'
 export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
   (props) => {
     const onChange = useDropdownControlChange(props)
+    const value = useMemo(() => {
+      if (props.model) {
+        const modelValue = props.model.value(props.name)
+        const option = _.findWhere(props.values, { value: modelValue })
+        if (modelValue) {
+          return option.text
+        }
+      }
+      return props.defaultValue
+    }, [props.defaultValue, props.model, props.name])
     return (
       <FormControlContext.Consumer>
         {(context) => (
@@ -23,7 +33,7 @@ export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
             <Dropdown
               placeholder={props.placeholder}
               defaultValue={props.defaultValue}
-              value={props.model.value(props.name)?.name}
+              value={value}
               onOptionSelect={onChange}
               onBlur={context.onBlurCallback}
             >

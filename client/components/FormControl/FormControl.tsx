@@ -4,7 +4,7 @@ import { Footer } from 'components/BasePanel/Footer'
 import { JsonDebug } from 'components/JsonDebug'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { FormControlContext } from './context'
 import styles from './FormControl.module.scss'
 import { IFormControlProps } from './types'
@@ -23,7 +23,7 @@ import { useFormControl } from './useFormControl'
  */
 export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   const { context, submitAction } = useFormControl(props)
-  const content: ReactElement = (
+  const content = (
     <>
       <div className={FormControl.className}>{props.children}</div>
       {props.debug && <JsonDebug obj={props.model.$} />}

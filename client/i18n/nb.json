@@ -511,7 +511,8 @@
     "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
     "labelFieldLabel": "Merkelapper",
     "filterLabels": "Filtrer merkelapper...",
-    "labelsText": "Merkelapper"
+    "labelsText": "Merkelapper",
+    "userSettingsSaved": "Innstillingene dine er lagret. Har du endret språk, må du laste siden på nytt for at det skal tre i kraft."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

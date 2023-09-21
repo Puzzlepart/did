@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-
 import { useMutation } from '@apollo/client'
+import { TypedMap } from 'hooks'
 import { useCallback, useEffect } from 'react'
 import $updateUserConfiguration from './update-user-configuration.gql'
 
@@ -10,10 +10,8 @@ export type UseUpdateUserConfigurationParamType<T = any> = {
 }
 
 export type UseUpdateUserConfigurationReturnType = {
-  updateConfiguration?: (config: any) => Promise<void>
-  updateStartPage?: (startPage: string) => Promise<void>
-  updatePreferredLanguage?: (preferredLanguage: string) => Promise<void>
   updateLastActive?: () => Promise<void>
+  updateUserSettings?: (user: TypedMap<any, any, any>) => Promise<boolean>
 }
 
 /**
@@ -39,20 +37,6 @@ export function useUpdateUserConfiguration(
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const stringValue = JSON.stringify(params?.config || {})
 
-  const updateConfiguration = useCallback(async (config_: any) => {
-    await updateUserConfiguration({
-      variables: { configuration: JSON.stringify(config_) }
-    })
-  }, [])
-
-  const updateStartPage = useCallback(async (startPage: string) => {
-    await updateUserConfiguration({
-      variables: {
-        startPage
-      }
-    })
-  }, [])
-
   const updateLastActive = useCallback(async () => {
     await updateUserConfiguration({
       variables: {
@@ -61,13 +45,14 @@ export function useUpdateUserConfiguration(
     })
   }, [])
 
-  const updatePreferredLanguage = useCallback(
-    async (preferredLanguage: string) => {
+  const updateUserSettings = useCallback(
+    async (user: TypedMap<any, any, any>) => {
       await updateUserConfiguration({
         variables: {
-          preferredLanguage
+          user: JSON.stringify(user.$)
         }
       })
+      return true
     },
     []
   )
@@ -81,9 +66,7 @@ export function useUpdateUserConfiguration(
   }, [stringValue])
 
   return {
-    updateConfiguration,
-    updateStartPage,
-    updateLastActive,
-    updatePreferredLanguage
-  } as const
+    updateUserSettings,
+    updateLastActive
+  }
 }

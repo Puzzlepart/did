@@ -3,6 +3,7 @@
  *
  * @module App
  */
+import { Toast } from 'components'
 import React, { FC } from 'react'
 import { AppRouter } from './AppRouter'
 import { AppContext } from './context'
@@ -19,8 +20,7 @@ export const App: FC<IAppProps> = (props) => {
   return (
     <AppContext.Provider value={context}>
       <AppRouter />
+      <Toast {...context.state.toast} />
     </AppContext.Provider>
   )
 }
-
-export * from './context'

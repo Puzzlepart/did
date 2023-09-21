@@ -22,7 +22,7 @@ export const InputControl: FormInputControlComponent<IInputControlProps> = (
           {...props}
           onBlur={context.onBlurCallback}
           onChange={(event, data) => onChange(event, data.value)}
-          value={props.model.value<string>(props.name, '')}
+          value={props.model?.value<string>(props.name, '')}
         />
       )}
     </FormControlContext.Consumer>

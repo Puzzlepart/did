@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-console */
 import { useMap } from 'hooks/common/useMap'
 import { useEffect } from 'react'
@@ -24,10 +25,9 @@ export function useFormControlModel<KeyType, ObjectType = Record<string, any>>(
   const map = useMap<KeyType, ObjectType>()
   useEffect(() => {
     if (!initialModel || Object.keys(initialModel).length === 0) return
-    const typeNameOmmited = omitTypename(initialModel)
-    const _map = convertToMap<KeyType>(
-      postUpdate ? postUpdate(typeNameOmmited) : typeNameOmmited
-    )
+    const obj = postUpdate ? postUpdate(initialModel) : initialModel
+    const typeNameOmmited = omitTypename(obj)
+    const _map = convertToMap<KeyType>(typeNameOmmited)
     map.$set(_map)
   }, [initialModel])
   return map

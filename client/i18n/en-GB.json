@@ -512,7 +512,8 @@
     "adUserRequired": "You must select an Active Directory user to add.",
     "labelFieldLabel": "Labels",
     "filterLabels": "Filter labels...",
-    "labelsText": "Labels"
+    "labelsText": "Labels",
+    "userSettingsSaved": "Your settings have been saved successfully. If you have changed the language, you must reload the page for it to take effect."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

@@ -24,7 +24,8 @@ export interface IDropdownControlProps
   extends FormInputControlBase<DropdownControlOptions>,
     Pick<DropdownProps, 'defaultValue' | 'placeholder'> {
   /**
-   * An array of options to display in the dropdown.
+   * An array of options to display in the dropdown. Specify an array
+   * of objects with `value` and `text` properties.
    */
   values: OptionProps[]
 }

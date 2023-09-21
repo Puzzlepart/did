@@ -13,18 +13,19 @@ on:
       - 'package.json'
 
 jobs:
-  build-and-deploy:
+  package:
+    name: Package did
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.12.0]
+    concurrency: 
+      group: ${{ github.ref }}_on_push_main_deploy
+      cancel-in-progress: true
 
     steps:
     - uses: actions/checkout@master
-    
+
     - uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{ vars.NODE_VERSION }}
 
     - run: |
         npm ci --no-audit --no-fund --loglevel=error
@@ -40,9 +41,24 @@ jobs:
         name: did-release-package
         path: ./did-release-package.zip
 
-    - name: 'Deploy to Azure Web App'
+  deploy_azure:
+    name: Deploying to Azure
+    runs-on: ubuntu-latest
+    needs: package
+    environment:
+      name: 'prod'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: did-package
+
+    - name: 'Deploy package to didapp'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
         publish-profile: ${{ secrets.DIDAPP_PUBLISH_PROFILE }}
-        package: ./did-release-package.zip
+        package: ./did-package.zip
+

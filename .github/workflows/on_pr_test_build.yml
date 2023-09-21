@@ -13,19 +13,16 @@ jobs:
   test_build:
     name: Test build
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[no ci]')"
-    strategy:
-      matrix:
-        node-version: [18.12.0]
+    if: "!contains(github.event.head_commit.message, '[no-ci]')"
     steps:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ vars.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ vars.NODE_VERSION }}
 
       - run: |
          npm ci --no-audit --no-fund --loglevel=error

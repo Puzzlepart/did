@@ -511,7 +511,8 @@
     "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
     "labelFieldLabel": "Merkelappar",
     "filterLabels": "Filtrer merkelappar...",
-    "labelsText": "Merkelappar"
+    "labelsText": "Merkelappar",
+    "userSettingsSaved": "Innstillingane dine er lagra. Har du endra språk, må du lasta sidan på nytt for at det skal tre i kraft."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

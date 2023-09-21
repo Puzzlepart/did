@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable unicorn/no-array-for-each */
 const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')

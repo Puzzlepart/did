@@ -1,65 +1,46 @@
-import { useSetTimeout } from '@fluentui/react-hooks'
+import { useAppContext } from 'AppContext'
+import { IFormControlProps } from 'components'
 import { useUpdateUserConfiguration } from 'hooks/user/useUpdateUserConfiguration'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { sleep } from 'utils'
-import { IUserSetting } from './types'
-import { useSettingsConfiguration } from './useSettingsConfiguration'
+import { useBoolean } from 'usehooks-ts'
+import { useUserSettingsModel } from './useUserSettingsModel'
 
 export function useUserSettings() {
   const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const { updateConfiguration, updatePreferredLanguage, updateStartPage } =
-    useUpdateUserConfiguration()
-  const { setTimeout, clearTimeout } = useSetTimeout()
-  const timeout: Record<string, number> = {}
+  const { updateUserSettings } = useUpdateUserConfiguration()
+  const appContext = useAppContext()
+  const panel = useBoolean(false)
+  const { model, register } = useUserSettingsModel()
 
-  /**
-   * On update
-   *
-   * @param setting - Setting
-   * @param value - Value
-   */
-  const onUpdate = (
-    setting: IUserSetting,
-    value: string | number | boolean
-  ) => {
-    clearTimeout(timeout[setting.fieldName])
-    timeout[setting.fieldName] = setTimeout(async () => {
-      switch (setting.fieldName) {
-        case 'preferredLanguage': {
-          await updatePreferredLanguage(value as string)
-          break
-        }
-        case 'startPage': {
-          await updateStartPage(value as string)
-          break
-        }
-        default: {
-          await updateConfiguration({ [setting.fieldName]: value })
-        }
-      }
-      if (setting.postSaveMessage) {
-        sessionStorage.setItem(
-          'did_on_load_user_menu_mesage',
-          setting.postSaveMessage
-        )
-      }
-    }, 1500)
+  const onSaveUserSettings = async () => {
+    await updateUserSettings(model)
+    panel.setFalse()
+    appContext.setToast(
+      {
+        text: t('common.userSettingsSaved'),
+        intent: 'success'
+      },
+      5
+    )
   }
 
-  const settings = useSettingsConfiguration()
+  const formControlProps: IFormControlProps = {
+    model,
+    panelProps: {
+      headerText: t('common.userSettingsPanelHeaderText'),
+      isOpen: panel.value,
+      onDismiss: () => panel.setFalse()
+    },
+    submitProps: {
+      text: t('common.save'),
+      onClick: onSaveUserSettings
+    }
+  }
 
   return {
-    t,
-    context: { onUpdate },
-    openPanel: () => setIsOpen(true),
-    dismissPanel: async () => {
-      setIsOpen(false)
-      await sleep(1)
-      location.reload()
-    },
-    isOpen,
-    settings
-  } as const
+    model,
+    register,
+    openPanel: () => panel.setTrue(),
+    formControlProps
+  }
 }

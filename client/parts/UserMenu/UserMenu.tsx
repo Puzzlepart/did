@@ -1,4 +1,3 @@
-/* eslint-disable tsdoc/syntax */
 import { Icon, useTheme } from '@fluentui/react'
 import {
   Avatar,
@@ -10,7 +9,7 @@ import {
 import { useAppContext } from 'AppContext'
 import { Toast, useToast } from 'components/Toast'
 import { useToggle } from 'hooks'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { isBrowser, isMobile, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -34,7 +33,6 @@ export const UserMenu: StyledComponent = () => {
   const { user, subscription } = useAppContext()
   const { palette } = useTheme()
   const [menuHidden, toggleMenu] = useToggle(true)
-  const target = useRef(null)
   const [toast, setToast] = useToast(8000)
 
   useEffect(() => {
@@ -48,11 +46,7 @@ export const UserMenu: StyledComponent = () => {
   return (
     <Popover withArrow={true}>
       <PopoverTrigger>
-        <span
-          ref={target}
-          className={UserMenu.className}
-          onClick={() => toggleMenu()}
-        >
+        <span className={UserMenu.className} onClick={() => toggleMenu()}>
           {isBrowser ? (
             <Persona
               className={styles.user}

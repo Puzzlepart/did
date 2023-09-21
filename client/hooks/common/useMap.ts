@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import setValue from 'set-value'
 import s from 'underscore.string'
 
 /**
@@ -34,10 +35,10 @@ export function useMap<
    * The `Map` is converted to an object using
    * `[...$map].reduce`
    */
-  const $: ObjectType = [...$map].reduce((object, [key, value]) => {
-    object[key] = value
-    return object
-  }, {} as any)
+  const $: ObjectType = [...$map].reduce(
+    (object, [key, value]) => setValue(object, key as any, value),
+    {} as any
+  )
 
   /**
    * Set `key` of `model`
@@ -59,9 +60,9 @@ export function useMap<
    *
    * @returns Model value from the converted object
    */
-  function value<T = any>(key?: KeyType, _defaultValue: T = null): T {
+  function value<T = ValueType>(key?: KeyType, _defaultValue: T = null): T {
     if (!key) return $ as unknown as T
-    return ($ as any)[key] ?? _defaultValue
+    return ($map.get(key) ?? _defaultValue) as T
   }
 
   /**
