@@ -25,6 +25,6 @@ async function run() {
   ], {
     prefix: 'none'
   })
-  await archivePackage()
+  await archivePackage(false)
 }
 run()
