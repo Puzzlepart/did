@@ -53,7 +53,7 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
 
     log('Archiving deployment files...')
     archive.file('.deployment')
-    archive.file('.deploy/deploy.s
+    archive.file('.deploy/deploy.sh')
 
     if (includeNodeModules) {
         log('Archiving node_modules...')
