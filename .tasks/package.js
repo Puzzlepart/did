@@ -5,7 +5,7 @@ const { promisify } = require('util')
 const rimraf = require('rimraf')
 const rmdir = promisify(rimraf)
 const path = require('path')
-const package_archive = require('./package.archive')
+const archivePackage = require('./archivePackage')
 const log = console.log
 
 async function run() {
@@ -25,6 +25,6 @@ async function run() {
   ], {
     prefix: 'none'
   })
-  await package_archive()
+  await archivePackage()
 }
 run()

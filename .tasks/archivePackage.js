@@ -14,7 +14,8 @@ async function run() {
     })
 
     output.on('close', () => {
-        log(`Archive ${filename} has been finalized and the output file is ready with ${archive.pointer()} total bytes.`)
+        const mb = archive.pointer() / 1024 / 1024
+        log(`Archive ${filename} has been finalized and the output file is ready with ${mb.toFixed(2)} MB`)
     })
 
     output.on('end', () => {

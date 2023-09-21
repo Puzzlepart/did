@@ -26,7 +26,7 @@
     "package:client": "webpack --config webpack/config.js",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
     "debug:server": "npm run build:server; ts-node ./server/index.ts -T --inspect --wait",
-    "create-env": "node .tasks/create-dot-env.js"
+    "create-env": "node .tasks/createDotEnv.js"
   },
   "dependencies": {
     "@apollo/client": "3.3.13",
