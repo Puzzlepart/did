@@ -43,8 +43,9 @@ async function run(includeNodeModules = true) {
         throw error
     })
 
-    log('Archiving package.json...')
+    log('Archiving package.json and package-lock.json...')
     archive.file('package.json')
+    archive.file('package-lock.json')
 
     if (includeNodeModules) {
         log('Archiving node_modules...')

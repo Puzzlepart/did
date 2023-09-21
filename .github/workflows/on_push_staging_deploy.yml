@@ -10,6 +10,8 @@ on:
       - 'shared/**'
       - 'webpack/**'
       - 'package.json'
+      - '.deployment'
+      - '.deploy.sh'
 
 jobs:
   package:
