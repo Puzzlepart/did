@@ -24,6 +24,8 @@ hash node 2>/dev/null
 exitWithMessageOnError "Missing node.js executable, please install node.js, if already installed make sure it can be reached from the current environment."
 
 # Setup
+# - Installing kudusync
+# - Installing npm v8.19.2
 # -----
 
 SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
@@ -62,6 +64,10 @@ if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
     # In case we are running on kudu service, this is the correct location of kuduSync
     KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
   fi
+
+  echo "Installing npm v8.19.2"
+  npm install -g npm@8.19.2
+  exitWithMessageOnError "Failed to install npm v8.19.2"
 fi
 
 ##################################################################################################################################
