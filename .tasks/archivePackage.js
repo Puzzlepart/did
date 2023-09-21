@@ -47,7 +47,9 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
     log('Archiving package.json and package-lock.json...')
     archive.file('package.json')
     if (includePackageLockFile) {
-    archive.file('package-lock.json')
+        archive.file('package-lock.json')
+    } else {
+        log('Skipping package-lock.json...')
     }
 
 
