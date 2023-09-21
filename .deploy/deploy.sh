@@ -16,6 +16,33 @@ exitWithMessageOnError () {
   fi
 }
 
+selectNodeVersion () {
+  if [[ -n "$KUDU_SELECT_NODE_VERSION_CMD" ]]; then
+    SELECT_NODE_VERSION="$KUDU_SELECT_NODE_VERSION_CMD \"$DEPLOYMENT_SOURCE\" \"$DEPLOYMENT_TARGET\" \"$DEPLOYMENT_TEMP\""
+    eval $SELECT_NODE_VERSION
+    exitWithMessageOnError "Selecting node version failed."
+
+    if [[ -e "$DEPLOYMENT_TEMP/__nodeVersion.tmp" ]]; then
+      NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
+      exitWithMessageOnError "Getting node version failed."
+    fi
+    
+    if [[ -e "$DEPLOYMENT_TEMP/__npmVersion.tmp" ]]; then
+      NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
+      exitWithMessageOnError "Getting npm version failed."
+    fi
+
+    if [[ ! -n "$NODE_EXE" ]]; then
+      NODE_EXE=node
+    fi
+
+    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
+  else
+    NPM_CMD=npm
+    NODE_EXE=node
+  fi
+}
+
 # Prerequisites
 # -------------
 
@@ -72,9 +99,12 @@ fi
 
 ##################################################################################################################################
 # Deployment
+#
+# 1. KuduSync
+# 2. Select node version
+# 3. Installing node_modules with --production flag
+#
 # ----------
-
-echo Syncing Files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET
 
 # 1. KuduSync
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
@@ -82,13 +112,15 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
-  
-  echo "Syncing files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
+
   "$KUDU_SYNC_CMD" -v 50 $IGNORE_MANIFEST_PARAM -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
-# 2. Installing node_modules with --production flag
+# 2. Select node version
+selectNodeVersion
+
+# 3. Installing node_modules with --production flag
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "Running npm install --production"

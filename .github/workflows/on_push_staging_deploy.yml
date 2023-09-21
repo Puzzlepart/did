@@ -11,7 +11,7 @@ on:
       - 'webpack/**'
       - 'package.json'
       - '.deployment'
-      - '.deploy.sh'
+      - '.deploy/**'
 
 jobs:
   package:

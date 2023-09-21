@@ -25,6 +25,9 @@ async function run() {
   ], {
     prefix: 'none'
   })
-  await archivePackage(false)
+  await archivePackage({
+    includeNodeModules: false,
+    includePackageLockFile: true
+  })
 }
 run()
