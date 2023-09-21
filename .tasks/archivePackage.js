@@ -5,7 +5,14 @@ const archiver = require('archiver')
 const package = require('../package.json')
 const log = console.log
 
-async function run() {
+/**
+ * Archives the package by creating a zip file containing package.json, node_modules, server and shared directories.
+ * 
+ * @param includeNodeModules - Whether or not to include node_modules directory in the archive (default: true).
+ * 
+ * @returns - A Promise that resolves when the archive has been created.
+ */
+async function run(includeNodeModules = true) {
     const filename = `./${package.name}-package.zip`
     log(chalk.cyan(`Creating archive ${filename}`))
     const output = fs.createWriteStream(filename)
@@ -39,12 +46,16 @@ async function run() {
     log('Archiving package.json...')
     archive.file('package.json')
 
-    log('Archiving node_modules...')
-    archive.directory(path.resolve(__dirname, '../node_modules'), 'node_modules')
+    if (includeNodeModules) {
+        log('Archiving node_modules...')
+        archive.directory(path.resolve(__dirname, '../node_modules'), 'node_modules')
+    } else {
+        log('Skipping node_modules...')
+    }
 
     log('Archiving dist/server...')
     archive.directory(path.resolve(__dirname, '../dist/server'), 'server')
-    
+
     log('Archiving dist/shared...')
     archive.directory(path.resolve(__dirname, '../dist/shared'), 'shared')
 
