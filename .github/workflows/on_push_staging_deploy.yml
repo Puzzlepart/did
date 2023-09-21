@@ -1,0 +1,63 @@
+name: Build and deploy to didapp/staging
+
+on:
+  push:
+    branches:
+      - issues/1119
+    paths:
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+      - 'webpack/**'
+      - 'package.json'
+
+jobs:
+  package:
+    name: Package did
+    runs-on: ubuntu-latest
+    concurrency: 
+      group: ${{ github.ref }}_on_push_staging_deploy
+      cancel-in-progress: true
+    if: "!contains(github.event.head_commit.message, '[no-ci]')"
+
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ vars.NODE_VERSION }}
+
+    - run: |
+        npm ci --no-audit --no-fund --loglevel=error
+
+    - name: Create package
+      run: |
+        npm run package
+      env:
+        NODE_ENV: production
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: did-package
+        path: ./did-package.zip
+
+  deploy_azure:
+    name: Deploying to Azure
+    runs-on: ubuntu-latest
+    needs: package
+    # environment:
+    #   name: 'dev'
+    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: did-package
+
+    - name: 'Deploy package to didapp/staging'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'didapp'
+        slot-name: 'staging'
+        publish-profile: ${{ secrets.DIDAPP_STAGING_PUBLISH_PROFILE }}
+        package: ./did-package.zip
