@@ -149,6 +149,7 @@ ___
 
 • **values**: OptionProps[]
 
-An array of options to display in the dropdown.
+An array of options to display in the dropdown. Specify an array
+of objects with `value` and `text` properties.
 
-Defined in: [client/components/FormControl/DropdownControl/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/DropdownControl/types.tsx#L29)
+Defined in: [client/components/FormControl/DropdownControl/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/DropdownControl/types.tsx#L30)

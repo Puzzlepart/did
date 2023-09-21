@@ -61,7 +61,7 @@ Name | Type | Description |
 
 Overrides: void
 
-Defined in: [services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L19)
+Defined in: [services/mongo/user.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L18)
 
 ## Properties
 
@@ -69,7 +69,7 @@ Defined in: [services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/d
 
 • `Private` **\_role**: [*RoleService*](services.roleservice.md)
 
-Defined in: [services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L19)
+Defined in: [services/mongo/user.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L18)
 
 ___
 
@@ -140,7 +140,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [services/mongo/user.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L39)
+Defined in: [services/mongo/user.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L38)
 
 ___
 
@@ -158,7 +158,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/user.ts:112](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L112)
+Defined in: [services/mongo/user.ts:111](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L111)
 
 ___
 
@@ -176,7 +176,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/user.ts:126](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L126)
+Defined in: [services/mongo/user.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L125)
 
 ___
 
@@ -225,7 +225,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
-Defined in: [services/mongo/user.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L72)
+Defined in: [services/mongo/user.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L71)
 
 ___
 
@@ -245,7 +245,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/user.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L95)
+Defined in: [services/mongo/user.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L94)
 
 ___
 
@@ -263,7 +263,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [services/mongo/user.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L48)
+Defined in: [services/mongo/user.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L47)
 
 ___
 
@@ -338,9 +338,10 @@ ___
 
 ### updateCurrentUserConfiguration
 
-▸ **updateCurrentUserConfiguration**(`configuration?`: *string*, `startPage?`: *string*, `lastActive?`: *string*, `preferredLanguage?`: *string*): *Promise*<void\>
+▸ **updateCurrentUserConfiguration**(`userObjectString?`: *string*, `lastActive?`: *string*): *Promise*<void\>
 
-Update configuration for the current user
+Update configuration for the current user. Either a whole `User` object
+or `lastActive` is provided.
 
 **`remarks`** For now we we're working with the configuration as a string,
 to avoid typing the whole configuration object.
@@ -349,14 +350,12 @@ to avoid typing the whole configuration object.
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`configuration?` | *string* | Configuration   |
-`startPage?` | *string* | Start page   |
-`lastActive?` | *string* | - |
-`preferredLanguage?` | *string* | Preferred language    |
+`userObjectString?` | *string* | A JSON stringified User object with potentially updated configuration   |
+`lastActive?` | *string* | Preferred language    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L173)
+Defined in: [services/mongo/user.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L172)
 
 ___
 
@@ -374,7 +373,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L155)
+Defined in: [services/mongo/user.ts:154](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L154)
 
 ___
 
@@ -392,4 +391,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/user.ts:140](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L140)
+Defined in: [services/mongo/user.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L139)
