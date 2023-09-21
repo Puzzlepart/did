@@ -78,6 +78,11 @@ else
   KUDU_SERVICE=true
 fi
 
+
+echo "Installing npm v8.19.2"
+npm install -g npm@8.19.2
+exitWithMessageOnError "Failed to install npm v8.19.2"
+
 if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
   # Install kudu sync
   echo Installing Kudu Sync
@@ -91,10 +96,6 @@ if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
     # In case we are running on kudu service, this is the correct location of kuduSync
     KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
   fi
-
-  echo "Installing npm v8.19.2"
-  npm install -g npm@8.19.2
-  exitWithMessageOnError "Failed to install npm v8.19.2"
 fi
 
 ##################################################################################################################################
