@@ -46,19 +46,19 @@ selectNodeVersion () {
 # Prerequisites
 # -------------
 
-# Verify node.js installed
+# Verify Node.js installed
 hash node 2>/dev/null
 exitWithMessageOnError "Missing node.js executable, please install node.js, if already installed make sure it can be reached from the current environment."
 
 # Setup
 # - Installing kudusync
-# - Installing npm v8.19.2
 # -----
 
 SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
 KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
+KUDU_SYNC_IGNORE_FILES=".git;.hg;.deployment;deploy.sh"
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -77,11 +77,6 @@ if [[ ! -n "$DEPLOYMENT_TARGET" ]]; then
 else
   KUDU_SERVICE=true
 fi
-
-
-echo "Installing npm v8.19.2"
-npm install -g npm@8.19.2
-exitWithMessageOnError "Failed to install npm v8.19.2"
 
 if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
   # Install kudu sync
@@ -102,9 +97,8 @@ fi
 # Deployment
 #
 # 1. KuduSync
-# 2. Select node version
+# 2. Select Node version
 # 3. Installing node_modules with --production flag
-#
 # ----------
 
 # 1. KuduSync
@@ -114,11 +108,11 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
 
-  "$KUDU_SYNC_CMD" -v 50 $IGNORE_MANIFEST_PARAM -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
+  "$KUDU_SYNC_CMD" -v 50 $IGNORE_MANIFEST_PARAM -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i "$KUDU_SYNC_IGNORE_FILES"
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
-# 2. Select node version
+# 2. Select Node version
 selectNodeVersion
 
 # 3. Installing node_modules with --production flag

@@ -37,7 +37,7 @@ jobs:
       env:
         NODE_ENV: production
         INCLUDE_NODE_MODULES: '0'
-        INCLUDE_PACKAGE_LOCK_FILE: '1'
+        INCLUDE_PACKAGE_LOCK_FILE: '0'
 
     - uses: actions/upload-artifact@v3
       with:
