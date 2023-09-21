@@ -7,7 +7,6 @@ did-client - v0.12.0
 ### Modules
 
 - [/](modules/_.md)
-- [App](modules/app.md)
 - [Components](modules/components.md)
 - [GraphQL](modules/graphql.md)
 - [Hooks](modules/hooks.md)

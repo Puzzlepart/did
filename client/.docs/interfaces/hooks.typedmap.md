@@ -33,7 +33,7 @@ Name | Default | Description |
 
 The object representation of the map.
 
-Defined in: [client/hooks/common/useMap.ts:107](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L107)
+Defined in: [client/hooks/common/useMap.ts:108](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L108)
 
 ___
 
@@ -57,9 +57,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/hooks/common/useMap.ts:102](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L102)
+Defined in: [client/hooks/common/useMap.ts:103](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L103)
 
-Defined in: [client/hooks/common/useMap.ts:102](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L102)
+Defined in: [client/hooks/common/useMap.ts:103](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L103)
 
 ___
 
@@ -85,9 +85,9 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [client/hooks/common/useMap.ts:140](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L140)
+Defined in: [client/hooks/common/useMap.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L141)
 
-Defined in: [client/hooks/common/useMap.ts:140](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L140)
+Defined in: [client/hooks/common/useMap.ts:141](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L141)
 
 ___
 
@@ -103,9 +103,9 @@ Resets the entire map to an empty `Map`.
 
 **Returns:** *void*
 
-Defined in: [client/hooks/common/useMap.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L131)
+Defined in: [client/hooks/common/useMap.ts:132](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L132)
 
-Defined in: [client/hooks/common/useMap.ts:131](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L131)
+Defined in: [client/hooks/common/useMap.ts:132](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L132)
 
 ___
 
@@ -132,9 +132,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/hooks/common/useMap.ts:115](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L115)
+Defined in: [client/hooks/common/useMap.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L116)
 
-Defined in: [client/hooks/common/useMap.ts:115](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L115)
+Defined in: [client/hooks/common/useMap.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L116)
 
 ___
 
@@ -170,6 +170,6 @@ Name | Type |
 
 **Returns:** T
 
-Defined in: [client/hooks/common/useMap.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L126)
+Defined in: [client/hooks/common/useMap.ts:127](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L127)
 
-Defined in: [client/hooks/common/useMap.ts:126](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L126)
+Defined in: [client/hooks/common/useMap.ts:127](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L127)

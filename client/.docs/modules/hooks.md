@@ -96,10 +96,8 @@ ___
 
 Name | Type |
 :------ | :------ |
-`updateConfiguration`? | (`config`: *any*) => *Promise*<void\> |
 `updateLastActive`? | () => *Promise*<void\> |
-`updatePreferredLanguage`? | (`preferredLanguage`: *string*) => *Promise*<void\> |
-`updateStartPage`? | (`startPage`: *string*) => *Promise*<void\> |
+`updateUserSettings`? | (`user`: [*TypedMap*](../interfaces/hooks.typedmap.md)<any, any, any\>) => *Promise*<boolean\> |
 
 Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L12)
 
@@ -309,7 +307,7 @@ that is a object representation of the map and a `reset`
 function for clearing the map. Also a `isSet` function
 to check if all the specified keys have a non-blank value.
 
-Defined in: [client/hooks/common/useMap.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L22)
+Defined in: [client/hooks/common/useMap.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useMap.ts#L23)
 
 ___
 
@@ -402,4 +400,4 @@ Name | Type | Description |
 
 **Returns:** [*UseUpdateUserConfigurationReturnType*](hooks.md#useupdateuserconfigurationreturntype)
 
-Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L36)
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L34)
