@@ -77,6 +77,7 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
   
+  echo "Syncing files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
   "$KUDU_SYNC_CMD" -v 50 $IGNORE_MANIFEST_PARAM -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
   exitWithMessageOnError "Kudu Sync failed"
 fi

@@ -47,6 +47,11 @@ async function run(includeNodeModules = true) {
     archive.file('package.json')
     archive.file('package-lock.json')
 
+
+    log('Archiving deployment files...')
+    archive.file('.deployment')
+    archive.file('.deploy.sh')
+
     if (includeNodeModules) {
         log('Archiving node_modules...')
         archive.directory(path.resolve(__dirname, '../node_modules'), 'node_modules')
