@@ -10,6 +10,8 @@ on:
       - 'shared/**'
       - 'webpack/**'
       - 'package.json'
+      - '.deployment'
+      - '.deploy/**'
 
 jobs:
   package:
@@ -34,6 +36,8 @@ jobs:
         npm run package
       env:
         NODE_ENV: production
+        INCLUDE_NODE_MODULES: '0'
+        INCLUDE_PACKAGE_LOCK_FILE: '0'
 
     - uses: actions/upload-artifact@v3
       with:

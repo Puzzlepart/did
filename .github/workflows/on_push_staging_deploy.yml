@@ -3,7 +3,7 @@ name: Build and deploy to didapp/staging
 on:
   push:
     branches:
-      - issues/1119
+      - feat/*
     paths:
       - 'server/**'
       - 'client/**'
@@ -48,9 +48,9 @@ jobs:
     name: Deploying to Azure
     runs-on: ubuntu-latest
     needs: package
-    # environment:
-    #   name: 'dev'
-    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    environment:
+      name: 'staging'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
     - name: Download artifact from build job
