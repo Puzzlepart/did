@@ -36,7 +36,7 @@ SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
 KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
-KUDU_SYNC_IGNORE_FILES=".git;.hg;.deployment;deploy.sh"
+KUDU_SYNC_IGNORE_FILES=".git;.hg;.deployment;deploy.sh;node_modules"
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
