@@ -8,11 +8,12 @@ const log = console.log
 /**
  * Archives the package by creating a zip file containing package.json, node_modules, server and shared directories.
  * 
- * @param includeNodeModules - Whether or not to include node_modules directory in the archive (default: true).
+ * @param includeNodeModules - Whether to include node_modules in the archive. Defaults to true.
+ * @param includePackageLockFile - Whether to include package-lock.json in the archive. Defaults to true.
  * 
  * @returns - A Promise that resolves when the archive has been created.
  */
-async function run(includeNodeModules = true) {
+async function run({ includeNodeModules = true, includePackageLockFile = true }) {
     const filename = `./${package.name}-package.zip`
     log(chalk.cyan(`Creating archive ${filename}`))
     const output = fs.createWriteStream(filename)
@@ -43,8 +44,18 @@ async function run(includeNodeModules = true) {
         throw error
     })
 
-    log('Archiving package.json...')
+    log('Archiving package.json and package-lock.json...')
     archive.file('package.json')
+    if (includePackageLockFile) {
+        archive.file('package-lock.json')
+    } else {
+        log('Skipping package-lock.json...')
+    }
+
+
+    log('Archiving deployment files...')
+    archive.file('.deployment')
+    archive.file('.deploy/deploy.sh')
 
     if (includeNodeModules) {
         log('Archiving node_modules...')

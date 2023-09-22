@@ -1,4 +1,4 @@
-name: Build and deploy to didapp/feat
+name: Build and deploy to didapp/staging
 
 on:
   push:
@@ -10,19 +10,20 @@ on:
       - 'shared/**'
       - 'webpack/**'
       - 'package.json'
+      - '.deployment'
+      - '.deploy/**'
 
 jobs:
   package:
     name: Package did
     runs-on: ubuntu-latest
     concurrency: 
-      group: ${{ github.ref }}_on_push_feat_deploy
+      group: ${{ github.ref }}_on_push_staging_deploy
       cancel-in-progress: true
     if: "!contains(github.event.head_commit.message, '[no-ci]')"
 
     steps:
     - uses: actions/checkout@master
-
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ vars.NODE_VERSION }}
@@ -35,6 +36,8 @@ jobs:
         npm run package
       env:
         NODE_ENV: production
+        INCLUDE_NODE_MODULES: '0'
+        INCLUDE_PACKAGE_LOCK_FILE: '0'
 
     - uses: actions/upload-artifact@v3
       with:
@@ -55,10 +58,10 @@ jobs:
       with:
         name: did-package
 
-    - name: 'Deploy package to didapp/feat'
+    - name: 'Deploy package to didapp/staging'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
-        slot-name: 'feat'
-        publish-profile: ${{ secrets.DIDAPP_FEAT_PUBLISH_PROFILE }}
+        slot-name: 'staging'
+        publish-profile: ${{ secrets.DIDAPP_STAGING_PUBLISH_PROFILE }}
         package: ./did-package.zip

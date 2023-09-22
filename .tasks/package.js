@@ -25,6 +25,9 @@ async function run() {
   ], {
     prefix: 'none'
   })
-  await archivePackage()
+  await archivePackage({
+    includeNodeModules: process.env.INCLUDE_NODE_MODULES === '1',
+    includePackageLockFile: process.env.INCLUDE_PACKAGE_LOCK_FILE !== '0'
+  })
 }
 run()
