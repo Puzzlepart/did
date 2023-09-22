@@ -9,7 +9,6 @@ import { usePermissions } from 'hooks'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../MenuItem'
 import { CONFIG_KEYS } from './types'
 import { useUserSettings } from './useUserSettings'
@@ -28,10 +27,9 @@ export const UserSettings: StyledComponent = () => {
       <div className={UserSettings.className}>
         <MenuItem
           text={t('common.settings')}
-          icon={icon('EditSettings')}
           onClick={openPanel}
         />
-        <FormControl {...formControlProps} debug={true}>
+        <FormControl {...formControlProps}>
           <DropdownControl
             {...register(CONFIG_KEYS.startPage)}
             label={t('common.startPageLabel')}

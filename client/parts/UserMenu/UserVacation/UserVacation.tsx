@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { TooltipHost, useTheme } from '@fluentui/react'
+import { useTheme } from '@fluentui/react'
+import { Tooltip } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
@@ -16,7 +17,8 @@ export const UserVacation: FC = () => {
   const { data } = useQuery($vacation, { fetchPolicy: 'cache-first' })
   const { palette } = useTheme()
   return (
-    <TooltipHost
+    <Tooltip
+      relationship='description'
       content={<UserVacationTooltipContent {...(data?.vacation ?? {})} />}
     >
       <MenuItem
@@ -24,9 +26,10 @@ export const UserVacation: FC = () => {
         text={t('common.vacationSummaryText', data?.vacation)}
         icon={icon('DrinkMargarita')}
         textStyle={{
-          color: palette.neutralPrimary
+          color: palette.neutralPrimary,
+          padding: '0 0 0 10px'
         }}
       />
-    </TooltipHost>
+    </Tooltip>
   )
 }

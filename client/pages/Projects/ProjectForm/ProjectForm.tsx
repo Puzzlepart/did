@@ -28,7 +28,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { model, register, options, formControlProps } = useProjectForm(props)
   const ValidateKeyFunction = useValidateKeyFunction()
   return (
-    <FormControl {...formControlProps} debug={true}>
+    <FormControl {...formControlProps}>
       <SearchCustomer
         {...register('customerKey', {
           validators: t('projects.customerRequired')

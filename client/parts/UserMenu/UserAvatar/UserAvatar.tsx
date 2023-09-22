@@ -19,6 +19,9 @@ export const UserAvatar: FC = () => {
           }
         }}
         size='large'
+        style={{
+          padding: '0 0 0 10px'
+        }}
       />
     </MenuItem>
   )

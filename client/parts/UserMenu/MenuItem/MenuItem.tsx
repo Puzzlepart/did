@@ -1,4 +1,4 @@
-import { Button } from '@fluentui/react-components'
+import { Button, mergeClasses } from '@fluentui/react-components'
 import React, { MouseEventHandler } from 'react'
 import { StyledComponent } from 'types'
 import styles from './MenuItem.module.scss'
@@ -8,7 +8,6 @@ import { IMenuItemProps } from './types'
  * @category UserMenu
  */
 export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
-  const className = [MenuItem.className]
   let onClick: MouseEventHandler<any> = props.onClick
   if (props.href) {
     onClick = () => {
@@ -18,7 +17,7 @@ export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
 
   return (
     <div
-      className={className.join(' ')}
+      className={mergeClasses(MenuItem.className, props.className)}
       title={props.title}
       style={{
         ...props.style,
