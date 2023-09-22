@@ -11,20 +11,21 @@ import { ProjectColumn } from './ProjectColumn'
 export function useAdditionalColumns() {
   const { t } = useTranslation()
   return useMemo(
-    () => [
-      createColumnDef<EventObject>(
-        'customer',
-        t('common.customer'),
-        { minWidth: 150, maxWidth: 200 },
-        (event) => <CustomerLink customer={event.customer} />
-      ),
-      createColumnDef<EventObject>(
-        'project',
-        t('common.project'),
-        { minWidth: 150, maxWidth: 300 },
-        (event) => <ProjectColumn event={event} />
-      )
-    ].filter(Boolean),
+    () =>
+      [
+        createColumnDef<EventObject>(
+          'customer',
+          t('common.customer'),
+          { minWidth: 150, maxWidth: 200 },
+          (event) => <CustomerLink customer={event.customer} />
+        ),
+        createColumnDef<EventObject>(
+          'project',
+          t('common.project'),
+          { minWidth: 150, maxWidth: 300 },
+          (event) => <ProjectColumn event={event} />
+        )
+      ].filter(Boolean),
     []
   )
 }
