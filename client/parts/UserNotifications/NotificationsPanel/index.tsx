@@ -33,7 +33,7 @@ export const NotificationsPanel: StyledComponent<IPanelProps> = (props) => {
               dismissedCount > 0
                 ? [
                     {
-                      content: t('notifications.clearDismissedText'),
+                      text: t('notifications.clearDismissedText'),
                       onClick: clearDismissed
                     }
                   ]

@@ -1,23 +1,17 @@
 import {
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuPopover,
-  MenuTrigger,
   Title3
 } from '@fluentui/react-components'
 import { Alert } from '@fluentui/react-components/unstable'
-import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { Progress } from 'components/Progress'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
-import _ from 'underscore'
 import { getFluentIcon } from 'utils'
-import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
+import { UserMessageActions } from './UserMessageActions/UserMessage'
+import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
 
 /**
@@ -27,45 +21,31 @@ import { useUserMessage } from './useUserMessage'
  * @category Reusable Component
  */
 export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
-  const { containerProps, alertStyle, actions } = useUserMessage(props)
+  const { containerProps, alertStyle } = useUserMessage(props)
   return (
     <div {...containerProps}>
-      <ConditionalWrapper
-        condition={!_.isEmpty(actions)}
-        wrapper={(children) => (
-          <Menu openOnHover={props.openActionsOnHover}>
-            <MenuTrigger disableButtonEnhancement>{children}</MenuTrigger>
-            <MenuPopover>
-              <MenuList>
-                {actions.map((action, index) => (
-                  <MenuItem {...action} key={index} />
-                ))}
-              </MenuList>
-            </MenuPopover>
-          </Menu>
+      <Alert
+        {...props}
+        icon={props.iconName && getFluentIcon(props.iconName)}
+        style={alertStyle}
+        className={styles.alert}>
+        {props.headerText && (
+          <Title3 className={styles.header}>{props.headerText}</Title3>
         )}
-      >
-        <Alert
-          {...props}
-          icon={props.iconName && getFluentIcon(props.iconName)}
-          style={alertStyle}
-          className={styles.alert}
-        >
-          {props.headerText && (
-            <Title3 className={styles.header}>{props.headerText}</Title3>
-          )}
-          {props.renderProgress && <Progress text={props.text} />}
-          {props.text && !props.renderProgress && (
+        {props.renderProgress && <Progress text={props.text} />}
+        {props.text && !props.renderProgress && (
+          <div className={styles.flex}>
             <ReactMarkdown
               className={styles.text}
               rehypePlugins={[rehypeRaw, rehypeSanitize]}
             >
               {props.text}
             </ReactMarkdown>
-          )}
-          {props.children}
-        </Alert>
-      </ConditionalWrapper>
+            <UserMessageActions actions={props.actions} />
+          </div>
+        )}
+        {props.children}
+      </Alert>
     </div>
   )
 }
@@ -73,6 +53,5 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
 UserMessage.className = styles.userMessage
 UserMessage.defaultProps = {
   intent: 'info',
-  actions: [],
-  openActionsOnHover: false
+  actions: []
 }

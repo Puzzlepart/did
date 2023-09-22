@@ -1,9 +1,7 @@
-import { MenuItemProps } from '@fluentui/react-components'
-import { HTMLAttributes, useMemo } from 'react'
-import { getFluentIcon } from 'utils'
+import { HTMLAttributes } from 'react'
 import { UserMessage } from '.'
-import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
+import { IUserMessageProps } from './types'
 import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
@@ -26,14 +24,5 @@ export function useUserMessage(props: IUserMessageProps) {
       .filter(Boolean)
       .join(' ')
   }
-  const actions = useMemo<MenuItemProps[]>(
-    () =>
-      props.actions.map((action) => ({
-        ...action,
-        icon: getFluentIcon(action.iconName, true, action.iconColor)
-      })),
-    [props.actions]
-  )
-
-  return { containerProps, alertStyle, actions }
+  return { containerProps, alertStyle }
 }

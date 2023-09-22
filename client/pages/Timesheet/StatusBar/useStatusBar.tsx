@@ -1,14 +1,14 @@
 import { DateRangeType } from '@fluentui/react'
-import { IUserMessageProps } from 'components/UserMessage/types'
 import $date from 'DateUtils'
+import { IUserMessageProps } from 'components/UserMessage/types'
 import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { StatusBar } from '.'
-import { useTimesheetContext } from '../context'
 import { Overview } from '../Views/Overview'
+import { useTimesheetContext } from '../context'
 import styles from './StatusBar.module.scss'
 
 /**
@@ -91,8 +91,7 @@ export function useStatusBar() {
         }),
         actions: [
           {
-            key: 'ignore',
-            content: t('timesheet.ignoreAllText'),
+            text: t('timesheet.ignoreAllText'),
             onClick: () => dispatch(IGNORE_ALL()),
             iconName: 'CalendarCancel'
           }
@@ -144,8 +143,7 @@ export function useStatusBar() {
         }),
         actions: [
           {
-            key: 'undo-ignore',
-            content: t('timesheet.undoIgnoreText'),
+            text: t('timesheet.undoIgnoreText'),
             onClick: () => dispatch(CLEAR_IGNORES()),
             iconName: 'ArrowUndo'
           }

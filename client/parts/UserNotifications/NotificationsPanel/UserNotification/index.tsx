@@ -22,15 +22,14 @@ export const UserNotification: StyledComponent<IUserNotificationProps> = ({
         className={UserNotification.className}
         actions={[
           {
-            content: model.getMoreLinkText(t),
+            text: model.getMoreLinkText(t),
             onClick: () => window.open(model.moreLink, '_self'),
             iconName: 'CalendarPlay'
           },
           {
-            content: t('notifications.dismissText'),
+            text: t('notifications.dismissText'),
             onClick: () => dismissNotification(model.id),
-            iconName: 'DeleteDismiss',
-            iconColor: 'var(--colorPaletteRedForeground1)'
+            iconName: 'DeleteDismiss'
           }
         ]}
       >
