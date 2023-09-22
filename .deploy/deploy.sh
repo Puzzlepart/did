@@ -8,6 +8,7 @@
 # Helpers
 # -------
 
+# Function to exit the script with an error message
 exitWithMessageOnError () {
   if [ ! $? -eq 0 ]; then
     echo "An error has occurred during web site deployment."
@@ -16,9 +17,32 @@ exitWithMessageOnError () {
   fi
 }
 
+# Function to select node version to use
 selectNodeVersion () {
   NODE_EXE=node
   NPM_CMD=npm
+}
+
+# Function to compare two version numbers
+compare_versions() {
+    local version1="$1"
+    local version2="$2"
+
+    IFS='.' read -ra ver1 <<< "$version1"
+    IFS='.' read -ra ver2 <<< "$version2"
+
+    for i in "${!ver1[@]}"; do
+        if [[ ${ver1[i]} -lt ${ver2[i]} ]]; then
+            echo "IS_OLDER"
+            return
+        elif [[ ${ver1[i]} -gt ${ver2[i]} ]]; then
+            echo "IS_NEWER"
+            return
+        fi
+    done
+
+    echo "IS_SAME"
+    return
 }
 
 # Prerequisites
@@ -64,6 +88,13 @@ fi
 # 3. Installing node_modules with --production flag
 # ----------
 CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
+NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
+COMPARE_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
+
+if [[ "$COMPARE_RESULT" == "IS_NEWER" ]]; then
+  echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
+  rm -rf "$DEPLOYMENT_TARGET/node_modules"
+fi
 
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
 
