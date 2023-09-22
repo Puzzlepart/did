@@ -9,8 +9,12 @@
     display: flex;
     color: #fff;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 11px;
     text-decoration: none;
+    text-transform: capitalize;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: var(--shadow8);
 
     .icon {
       display: none;
@@ -21,8 +25,9 @@
     }
 
     &.active {
-      color: #cf5f00;
+      color: #f6f586;
       cursor: default;
+      font-weight: bold;
     }
   }
 
