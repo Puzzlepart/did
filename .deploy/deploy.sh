@@ -63,6 +63,7 @@ fi
 # 2. Select Node version
 # 3. Installing node_modules with --production flag
 # ----------
+CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
 NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
 
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then

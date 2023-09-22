@@ -50,7 +50,7 @@ jobs:
     needs: package
     environment:
       name: 'staging'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-app-slot.webapp-url }}
 
     steps:
     - name: Download artifact from build job
@@ -59,6 +59,7 @@ jobs:
         name: did-package
 
     - name: 'Deploy package to didapp/staging'
+      id: deploy-to-app-slot
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'

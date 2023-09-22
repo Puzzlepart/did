@@ -50,7 +50,7 @@ jobs:
     needs: package
     environment:
       name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-app.outputs.webapp-url }}
 
     steps:
     - name: Download artifact from build job
@@ -59,6 +59,7 @@ jobs:
         name: did-package
 
     - name: 'Deploy package to didapp'
+      id: deploy-to-app
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
