@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ----------------------
-# Did KUDU Deployment Script
+# Did Deployment Script
 # Version: 0.0.1
 # ----------------------
 
@@ -35,8 +35,6 @@ exitWithMessageOnError "Missing node.js executable, please install node.js, if a
 SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
-KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
-KUDU_SYNC_IGNORE_FILES=".git;.hg;.deployment;deploy.sh;node_modules"
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -56,37 +54,21 @@ else
   KUDU_SERVICE=true
 fi
 
-if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
-  # Install kudu sync
-  echo Installing Kudu Sync
-  npm install kudusync -g --production --silent
-  exitWithMessageOnError "Failed to install kudusync"
 
-  if [[ ! -n "$KUDU_SERVICE" ]]; then
-    # In case we are running locally, this is the correct location of kuduSync
-    KUDU_SYNC_CMD=kuduSync
-  else
-    # In case we are running on kudu service, this is the correct location of kuduSync
-    KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
-  fi
-fi
 
 ##################################################################################################################################
 # Deployment
 #
-# 1. KuduSync
+# 1. rsync to copy files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET
 # 2. Select Node version
 # 3. Installing node_modules with --production flag
 # ----------
-
-# 1. KuduSync
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
 
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
-
-  "$KUDU_SYNC_CMD" -v 50 $IGNORE_MANIFEST_PARAM -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i "$KUDU_SYNC_IGNORE_FILES"
+  rsync -av "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
