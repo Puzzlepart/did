@@ -45,7 +45,7 @@ jobs:
         path: ./did-package.zip
 
   deploy_azure:
-    name: Deploying to Azure
+    name: Deploying to didapp
     runs-on: ubuntu-latest
     needs: package
     environment:
