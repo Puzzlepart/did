@@ -93,7 +93,8 @@ export function useStatusBar() {
           {
             text: t('timesheet.ignoreAllText'),
             onClick: () => dispatch(IGNORE_ALL()),
-            iconName: 'CalendarCancel'
+            iconName: 'CalendarCancel',
+            iconColor: 'var(--colorPaletteRedForeground1)'
           }
         ],
         intent: 'warning'
@@ -145,7 +146,7 @@ export function useStatusBar() {
           {
             text: t('timesheet.undoIgnoreText'),
             onClick: () => dispatch(CLEAR_IGNORES()),
-            iconName: 'ArrowUndo'
+            iconName: 'ArrowUndo',
           }
         ],
         intent: 'warning'

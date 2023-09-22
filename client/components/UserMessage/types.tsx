@@ -6,10 +6,12 @@ import { FluentIconName } from 'utils'
 /**
  * Represents an action that can be performed on a user message.
  */
-export type UserMessageAction = Pick<
+export interface IUserMessageAction extends Pick<
   IDynamicButtonProps,
   'text' | 'iconName' | 'disabled' | 'onClick'
->
+> {
+  iconColor?: string
+}
 
 /**
  * @category UserMessage
@@ -40,7 +42,7 @@ export interface IUserMessageProps extends AlertProps {
   /**
    * Actions to show in a menu
    */
-  actions?: UserMessageAction[]
+  actions?: IUserMessageAction[]
 
   /**
    * Whether to render a progress bar in the message

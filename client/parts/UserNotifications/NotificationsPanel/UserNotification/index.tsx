@@ -29,7 +29,8 @@ export const UserNotification: StyledComponent<IUserNotificationProps> = ({
           {
             text: t('notifications.dismissText'),
             onClick: () => dismissNotification(model.id),
-            iconName: 'DeleteDismiss'
+            iconName: 'DeleteDismiss',
+            iconColor: 'var(--colorPaletteRedForeground1)'
           }
         ]}
       >

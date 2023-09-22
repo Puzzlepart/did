@@ -76,6 +76,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
             {
               text: t('timesheet.ignoreEventButtonLabel'),
               iconName: 'CalendarCancel',
+              iconColor: 'var(--colorPaletteRedForeground1)',
               onClick: () => {
                 dispatch(IGNORE_EVENT({ id: event.id }))
               }

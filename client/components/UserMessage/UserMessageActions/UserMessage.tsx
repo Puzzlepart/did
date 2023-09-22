@@ -1,6 +1,8 @@
-import { Link } from '@fluentui/react-components'
+import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui/react-components'
+import { ConditionalWrapper } from 'components'
 import React from 'react'
 import { StyledComponent } from 'types'
+import _ from 'underscore'
 import { getFluentIcon } from 'utils'
 import { IUserMessageProps } from '../types'
 import styles from './UserMessageActions.module.scss'
@@ -9,18 +11,27 @@ export const UserMessageActions: StyledComponent<
   Pick<IUserMessageProps, 'actions'>
 > = (props) => {
   return (
-    <div className={UserMessageActions.className}>
-      {props.actions.map((action, index) => (
-        <Link
-          key={index}
-          className={styles.actionLink}
-          onClick={() => action.onClick(null)}
-        >
-          {getFluentIcon(action.iconName, true, null, 16)}
-          <span>{action.text}</span>
-        </Link>
-      ))}
-    </div>
+    <ConditionalWrapper
+      condition={!_.isEmpty(props.actions)}
+      wrapper={(children) => (
+        <Menu openOnHover={true}>
+          <MenuTrigger disableButtonEnhancement>{children}</MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              {props.actions.map((action, index) => (
+                <MenuItem
+                  key={index}
+                  content={action.text}
+                  onClick={() => action.onClick(null)}
+                  icon={getFluentIcon(action.iconName, true, action.iconColor)}
+                />
+              ))}
+            </MenuList>
+          </MenuPopover>
+        </Menu>
+      )}>
+      {props.children}
+    </ConditionalWrapper>
   )
 }
 UserMessageActions.displayName = 'UserMessageActions'

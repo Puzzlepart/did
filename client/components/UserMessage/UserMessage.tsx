@@ -7,9 +7,9 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import { getFluentIcon } from 'utils'
-import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { UserMessageActions } from './UserMessageActions/UserMessage'
+import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
 
 /**
@@ -22,29 +22,30 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
   const { containerProps, alertStyle } = useUserMessage(props)
   return (
     <div {...containerProps}>
-      <Alert
-        {...props}
-        icon={props.iconName && getFluentIcon(props.iconName)}
-        style={alertStyle}
-        className={styles.alert}
-      >
-        {props.headerText && (
-          <Title3 className={styles.header}>{props.headerText}</Title3>
-        )}
-        {props.renderProgress && <Progress text={props.text} />}
-        {props.text && !props.renderProgress && (
-          <div className={styles.flex}>
-            <ReactMarkdown
-              className={styles.text}
-              rehypePlugins={[rehypeRaw, rehypeSanitize]}
-            >
-              {props.text}
-            </ReactMarkdown>
-            <UserMessageActions actions={props.actions} />
-          </div>
-        )}
-        {props.children}
-      </Alert>
+      <UserMessageActions actions={props.actions}>
+        <Alert
+          {...props}
+          icon={props.iconName && getFluentIcon(props.iconName)}
+          style={alertStyle}
+          className={styles.alert}
+        >
+          {props.headerText && (
+            <Title3 className={styles.header}>{props.headerText}</Title3>
+          )}
+          {props.renderProgress && <Progress text={props.text} />}
+          {props.text && !props.renderProgress && (
+            <div className={styles.flex}>
+              <ReactMarkdown
+                className={styles.text}
+                rehypePlugins={[rehypeRaw, rehypeSanitize]}
+              >
+                {props.text}
+              </ReactMarkdown>
+            </div>
+          )}
+          {props.children}
+        </Alert>
+      </UserMessageActions>
     </div>
   )
 }
