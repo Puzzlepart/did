@@ -21,10 +21,7 @@ export const UserReports: FC = () => {
 
   return (
     <BrowserView renderWithFragment={true}>
-      <MenuItem
-        text={t('common.userReports')}
-        onClick={togglePanel}
-      />
+      <MenuItem text={t('common.userReports')} onClick={togglePanel} />
       <BasePanel
         headerText={t('common.userReports')}
         isOpen={showPanel}

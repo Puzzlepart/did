@@ -25,10 +25,7 @@ export const UserSettings: StyledComponent = () => {
   return useMemo(
     () => (
       <div className={UserSettings.className}>
-        <MenuItem
-          text={t('common.settings')}
-          onClick={openPanel}
-        />
+        <MenuItem text={t('common.settings')} onClick={openPanel} />
         <FormControl {...formControlProps}>
           <DropdownControl
             {...register(CONFIG_KEYS.startPage)}

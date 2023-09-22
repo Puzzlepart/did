@@ -1,8 +1,5 @@
 import { useTheme } from '@fluentui/react'
-import {
-  Popover,
-  PopoverSurface
-} from '@fluentui/react-components'
+import { Popover, PopoverSurface } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import React from 'react'
 import { MobileView } from 'react-device-detect'
@@ -42,13 +39,8 @@ export const UserMenu: StyledComponent = () => {
           <UserNotifications renderAsMenuItem={true} />
           <UserFeedback renderAsMenuItem={true} />
         </MobileView>
-        <MenuItem
-          href='/auth/signout'
-          text={t('common.signOutText')}
-        />
-        <span className={styles.version}>
-          {`v${process.env.VERSION}`}
-        </span>
+        <MenuItem href='/auth/signout' text={t('common.signOutText')} />
+        <span className={styles.version}>{`v${process.env.VERSION}`}</span>
       </PopoverSurface>
     </Popover>
   )
