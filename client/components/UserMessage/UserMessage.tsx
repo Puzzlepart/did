@@ -8,9 +8,9 @@ import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import { getFluentIcon } from 'utils'
 import styles from './UserMessage.module.scss'
+import { UserMessageAction } from './UserMessageAction'
 import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
-import { UserMessageAction } from './UserMessageAction'
 
 /**
  * A component that uses `Alert` from [@fluentui/react-components](@fluentui/react-components),
