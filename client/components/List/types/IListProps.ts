@@ -7,7 +7,7 @@ import {
   SelectionMode
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-search-preview'
-import { CSSProperties } from 'react'
+import { CSSProperties, HTMLProps } from 'react'
 import { ListMenuItem } from '../ListToolbar'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
@@ -18,7 +18,8 @@ import { ListFilterState } from './ListFilterState'
  */
 
 export interface IListProps<T = any>
-  extends Omit<IShimmeredDetailsListProps, 'selectionMode'> {
+  extends Pick<HTMLProps<HTMLDivElement>, 'className'>,
+  Omit<IShimmeredDetailsListProps, 'selectionMode'> {
   /**
    * Items
    */

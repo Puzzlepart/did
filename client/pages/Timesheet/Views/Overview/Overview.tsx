@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/prefer-ternary */
-import { DateRangeType, Pivot, PivotItem } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react'
 import { mergeClasses } from '@fluentui/react-components'
 import { EventList } from 'components'
-import packageFile from 'package'
+import { Tabs } from 'components/Tabs'
 import React, { ReactElement } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -20,20 +20,15 @@ import { useOverview } from './useOverview'
 export const Overview: TimesheetViewComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const { additionalColumns, listGroupProps } = useOverview()
+  const { eventListProps } = useOverview()
   let element: ReactElement = null
   switch (state.dateRangeType) {
     case DateRangeType.Week: {
       {
         element = (
           <EventList
-            hideToolbar={true}
-            hidden={!!state.error}
-            enableShimmer={!!state.loading}
+            {...eventListProps}
             items={state.selectedPeriod?.getEvents()}
-            dateFormat={packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
-            listGroupProps={listGroupProps}
-            additionalColumns={additionalColumns}
           />
         )
       }
@@ -43,42 +38,22 @@ export const Overview: TimesheetViewComponent = () => {
       {
         if (state.loading && _.isEmpty(state.periods)) {
           element = (
-            <EventList
-              hideToolbar={true}
-              enableShimmer={true}
-              items={[]}
-              listGroupProps={listGroupProps}
-              additionalColumns={additionalColumns}
-            />
+            <EventList {...eventListProps} />
           )
         } else {
           element = (
-            <Pivot
-              selectedKey={state.selectedPeriod?.id}
-              onLinkClick={(item) => {
-                dispatch(CHANGE_PERIOD({ id: item.props.itemKey }))
-              }}
-            >
-              {state.periods.map((period) => (
-                <PivotItem
-                  key={period.id}
-                  itemKey={period.id}
-                  headerText={period.getName(t)}
-                >
-                  <EventList
-                    hideToolbar={true}
-                    hidden={!!state.error}
-                    enableShimmer={!!state.loading}
-                    items={period.getEvents()}
-                    dateFormat={
-                      packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT
-                    }
-                    listGroupProps={listGroupProps}
-                    additionalColumns={additionalColumns}
-                  />
-                </PivotItem>
-              ))}
-            </Pivot>
+            <Tabs
+              defaultSelectedValue={state.selectedPeriod?.id}
+              items={[...state.periods].reduce((_items, period) => ({
+                ..._items,
+                [period.id]: [EventList, period.getName(t), {
+                  ...eventListProps,
+                  items: period.getEvents()
+                }]
+              }), {})}
+              onTabSelect={(id) => {
+                dispatch(CHANGE_PERIOD({ id }))
+              }} />
           )
         }
       }

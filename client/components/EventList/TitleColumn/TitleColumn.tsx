@@ -4,6 +4,7 @@ import React from 'react'
 import { StyledComponent } from 'types'
 import styles from './TitleColumn.module.scss'
 import { ITitleColumnProps } from './types'
+import { TimeColumn } from '../TimeColumn'
 
 export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
     return (
@@ -17,6 +18,9 @@ export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
                         <EntityLabel key={index} label={label} />
                     ))}
                 </div>
+            )}
+            {props.displayTime && (
+                <TimeColumn {...props} className={styles.time} />
             )}
         </div>
     )

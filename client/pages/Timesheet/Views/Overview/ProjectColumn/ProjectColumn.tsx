@@ -1,11 +1,13 @@
+/* eslint-disable unicorn/no-negated-condition */
 import { Icon } from '@fluentui/react'
-import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { mergeClasses } from '@fluentui/react-components'
 import { ProjectLink, ProjectPopover, UserMessage } from 'components'
-import { TFunction } from 'i18next'
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
+import { useTimesheetContext } from '../../../context'
 import {
   CLEAR_MANUAL_MATCH,
   IGNORE_EVENT,
@@ -14,32 +16,7 @@ import {
 import { ClearManualMatchButton } from './ClearManualMatchButton/ClearManualMatchButton'
 import styles from './ProjectColumn.module.scss'
 import { IProjectColumnProps } from './types'
-import { useProjectColumn } from './useProjectColumn'
-
-/**
- * Get error message for the event by error code. Translate function
- * from i18next is passed as a parameter due to the fact that this function
- * is called from the component and the hook can't be called inside the loop.
- *
- * @param code - Error code
- * @param t - Translate function
- */
-function getErrorMessage(
-  code: string,
-  t: TFunction
-): [string, AlertProps['intent']] {
-  switch (code) {
-    case 'PROJECT_INACTIVE': {
-      return [t('timesheet.projectInactiveErrorText'), 'error']
-    }
-    case 'CUSTOMER_INACTIVE': {
-      return [t('timesheet.customerInactiveErrorText'), 'error']
-    }
-    case 'EVENT_NO_TITLE': {
-      return [t('timesheet.eventNoTitleErrorText'), 'error']
-    }
-  }
-}
+import { getErrorMessage } from './getErrorMessage'
 
 /**
  * Component that renders the project column for the event list.
@@ -48,20 +25,22 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
   event
 }) => {
   const { t } = useTranslation()
-  const { state, dispatch, className } = useProjectColumn()
+  const { state, dispatch } = useTimesheetContext()
 
-  if (event.isSystemIgnored) return null
-  if (!event.project) {
+  let element: ReactElement = null
+
+  if (event.isSystemIgnored) {
+    element = null
+  }
+  else if (!event.project) {
     if (event.error) {
       const [text, intent] = getErrorMessage(event.error.code, t)
-      return (
-        <div className={className}>
-          <UserMessage intent={intent} text={text} />
-        </div>
+      element = (
+        <UserMessage intent={intent} text={text} />
       )
     }
-    return (
-      <div className={className}>
+    else {
+      element = (
         <UserMessage
           intent='warning'
           text={t('timesheet.noProjectMatchFoundText')}
@@ -82,12 +61,10 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
             }
           ]}
         />
-      </div>
-    )
-  }
-
-  return (
-    <div className={className}>
+      )
+    }
+  } else {
+    return (
       <div className={styles.content}>
         <ProjectPopover project={event.project}>
           <div className={styles.link}>
@@ -104,6 +81,11 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
           />
         )}
       </div>
+    )
+  }
+  return (
+    <div className={mergeClasses(ProjectColumn.className, isMobile && styles.mobile)}>
+      {element}
     </div>
   )
 }
