@@ -1,5 +1,5 @@
 import { DateRangeType } from '@fluentui/react'
-import { IProgressProps } from 'components/Progress/types'
+import { IUserMessageProps } from 'components'
 import { EventObject } from '../../../server/graphql'
 import { TimesheetDateRange } from './TimesheetDateRange'
 import { TimesheetPeriod } from './TimesheetPeriod'
@@ -35,9 +35,9 @@ export interface ITimesheetState {
   dateRangeType: DateRangeType
 
   /**
-   * Loading props
+   * Loading props for the `<UserMessage />` component
    */
-  loading?: IProgressProps
+  loading?: IUserMessageProps
 
   /**
    * Error object

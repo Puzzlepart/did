@@ -53,6 +53,16 @@ export interface IUserMessageProps extends AlertProps {
    * Whether to open the actions menu on hover
    */
   openActionsOnHover?: boolean
+
+  /**
+   * Whether to render a progress bar in the message
+   */
+  renderProgress?: boolean
+
+  /**
+   * The name of the Fluent UI icon to display for the message (optional).
+   */
+  iconName?: FluentIconName
 }
 
 /**

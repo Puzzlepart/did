@@ -44,6 +44,7 @@ export const NavigatePeriodsButtons: StyledComponent<
             name={name}
             value={period.id}
             size={isMobile ? 'small' : 'medium'}
+            disabled={!!state.loading}
           >
             {isMobile
               ? s.capitalize(period.month.slice(0, 3))

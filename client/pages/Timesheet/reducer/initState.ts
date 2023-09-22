@@ -1,7 +1,10 @@
 import { DateRangeType } from '@fluentui/react'
-import { ITimesheetState, TimesheetDateRange } from '../types'
+import {
+  ITimesheetParameters,
+  ITimesheetState,
+  TimesheetDateRange
+} from '../types'
 import { Overview } from '../Views/Overview'
-import { ITimesheetReducerParameters } from './types'
 
 /**
  * Convert string value to `DateRangeType`
@@ -29,14 +32,10 @@ function convertStringToDateRangeType(dateRangeTypeString: string) {
  *
  * @returns Initial state
  */
-export function initState(
-  parameters: ITimesheetReducerParameters
-): ITimesheetState {
+export function initState(url: ITimesheetParameters): ITimesheetState {
   const periods = []
-  const dateRangeType = convertStringToDateRangeType(parameters.url.dateRange)
-  const scope = new TimesheetDateRange(parameters.url.startDate, dateRangeType)
-  // const selectedView =
-  //   (parameters.url.view as TimesheetView) ?? TimesheetView.Overview
+  const dateRangeType = convertStringToDateRangeType(url.dateRange)
+  const scope = new TimesheetDateRange(url.startDate, dateRangeType)
   return {
     periods,
     dateRange: scope,

@@ -3,7 +3,6 @@ import {
   ToolbarButton,
   ToolbarGroup
 } from '@fluentui/react-components'
-import { Progress } from 'components/Progress'
 import React from 'react'
 import { StyledComponent } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
@@ -24,46 +23,36 @@ import { useActionBar } from './useActionBar'
 export const ActionBar: StyledComponent = () => {
   const { state, dispatch } = useTimesheetContext()
   const { defaultCheckedValues, onCheckedValueChange } = useActionBar()
-
-  if (!!state.loading) {
-    return (
-      <div className={ActionBar.className}>
-        <Progress {...state.loading} padding='15px' />
-      </div>
-    )
-  }
   return (
     <div className={ActionBar.className}>
-      {state.selectedPeriod ? (
-        <Toolbar
-          style={{
-            justifyContent: 'space-between'
-          }}
-          defaultCheckedValues={defaultCheckedValues}
-          onCheckedValueChange={onCheckedValueChange}
-        >
-          <ToolbarGroup style={{ flex: 1, display: 'inline-flex' }}>
-            <TodayButton />
-            <ToolbarButton
-              icon={icon('ArrowCircleLeft')}
-              onClick={() => dispatch(PREVIOUS_PERIOD())}
-              disabled={!!state.loading}
-            />
-            <ToolbarButton
-              icon={icon('ArrowCircleRight')}
-              onClick={() => dispatch(NEXT_PERIOD())}
-              disabled={!!state.loading}
-            />
-            <DateRangePicker />
-            <DateRangeButtons name='dateRange' />
-            <NavigatePeriodsButtons name='period' />
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <ForecastButtons />
-            <ConfirmButtons />
-          </ToolbarGroup>
-        </Toolbar>
-      ) : null}
+      <Toolbar
+        style={{
+          justifyContent: 'space-between'
+        }}
+        defaultCheckedValues={defaultCheckedValues}
+        onCheckedValueChange={onCheckedValueChange}
+      >
+        <ToolbarGroup style={{ flex: 1, display: 'inline-flex' }}>
+          <TodayButton />
+          <ToolbarButton
+            icon={icon('ArrowCircleLeft')}
+            onClick={() => dispatch(PREVIOUS_PERIOD())}
+            disabled={!!state.loading}
+          />
+          <ToolbarButton
+            icon={icon('ArrowCircleRight')}
+            onClick={() => dispatch(NEXT_PERIOD())}
+            disabled={!!state.loading}
+          />
+          <DateRangePicker />
+          <DateRangeButtons name='dateRange' />
+          <NavigatePeriodsButtons name='period' />
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ForecastButtons />
+          <ConfirmButtons />
+        </ToolbarGroup>
+      </Toolbar>
     </div>
   )
 }

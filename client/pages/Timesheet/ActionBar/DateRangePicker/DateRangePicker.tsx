@@ -30,7 +30,9 @@ export const DateRangePicker: FC = () => {
     <Popover trapFocus={true} open={open} onOpenChange={handleOpenChange}>
       {triggerText && (
         <PopoverTrigger disableButtonEnhancement>
-          <Button appearance='subtle'>{triggerText}</Button>
+          <Button disabled={!!state.loading} appearance='subtle'>
+            {triggerText}
+          </Button>
         </PopoverTrigger>
       )}
       <PopoverSurface>

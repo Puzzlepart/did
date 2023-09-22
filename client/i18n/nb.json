@@ -1,7 +1,6 @@
 {
   "timesheet": {
-    "loadingTimesheetLabel": "Laster kalenderoppføringer",
-    "loadingTimesheetDescription": "Vent et lite øyeblikk...",
+    "loadingTimesheetText": "Vi laster timelisten din. Vennligst hold ut ett øyeblikk...",
     "confirmingPeriodLabel": "Bekrefter timene dine",
     "confirmingPeriodDescription": "Vent et lite øyeblikk...",
     "unconfirmingPeriodLabel": "Vi nullstiller timene dine for perioden",

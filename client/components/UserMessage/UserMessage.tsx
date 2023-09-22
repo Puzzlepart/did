@@ -8,12 +8,14 @@ import {
 } from '@fluentui/react-components'
 import { Alert } from '@fluentui/react-components/unstable'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { Progress } from 'components/Progress'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import _ from 'underscore'
+import { getFluentIcon } from 'utils'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { useUserMessage } from './useUserMessage'
@@ -43,11 +45,17 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
           </Menu>
         )}
       >
-        <Alert {...props} style={alertStyle} className={styles.alert}>
+        <Alert
+          {...props}
+          icon={props.iconName && getFluentIcon(props.iconName)}
+          style={alertStyle}
+          className={styles.alert}
+        >
           {props.headerText && (
             <Title3 className={styles.header}>{props.headerText}</Title3>
           )}
-          {props.text && (
+          {props.renderProgress && <Progress text={props.text} />}
+          {props.text && !props.renderProgress && (
             <ReactMarkdown
               className={styles.text}
               rehypePlugins={[rehypeRaw, rehypeSanitize]}

@@ -35,5 +35,3 @@ export const EventList: ReusableComponent<IEventListProps> = (props) => {
 
 EventList.displayName = 'EventList'
 EventList.className = styles.eventList
-
-export * from './types'

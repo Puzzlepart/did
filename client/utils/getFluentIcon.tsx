@@ -39,8 +39,8 @@ import {
   CalendarToday24Regular,
   CalendarWeekNumbers24Filled,
   CalendarWeekNumbers24Regular,
-  CalendarWorkWeek24Filled,
-  CalendarWorkWeek24Regular,
+  CalendarWorkWeekFilled,
+  CalendarWorkWeekRegular,
   CheckmarkCircle24Filled,
   CheckmarkCircle24Regular,
   CheckmarkFilled,
@@ -75,6 +75,8 @@ import {
   FastForward24Regular,
   Home24Filled,
   Home24Regular,
+  HourglassHalfFilled,
+  HourglassHalfRegular,
   Info24Filled,
   Info24Regular,
   Key24Filled,
@@ -331,8 +333,8 @@ const iconCatalog = {
     filled: CalendarToday24Filled
   },
   CalendarWorkWeek: {
-    regular: CalendarWorkWeek24Regular,
-    filled: CalendarWorkWeek24Filled
+    regular: CalendarWorkWeekRegular,
+    filled: CalendarWorkWeekFilled
   },
   CheckmarkCircle: {
     regular: CheckmarkCircle24Regular,
@@ -397,6 +399,10 @@ const iconCatalog = {
   ArrowSync: {
     regular: ArrowSync24Regular,
     filled: ArrowSync24Filled
+  },
+  HourGlassHalf: {
+    regular: HourglassHalfRegular,
+    filled: HourglassHalfFilled
   }
 }
 

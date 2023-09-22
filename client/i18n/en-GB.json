@@ -1,7 +1,6 @@
 {
   "timesheet": {
-    "loadingTimesheetLabel": "Loading your timesheet",
-    "loadingTimesheetDescription": "Please wait while we fetch your latest data...",
+    "loadingTimesheetText": "We are loading your timesheet. Please hold on for a few moments...",
     "confirmingPeriodLabel": "Confirming period",
     "confirmingPeriodDescription": "Hang on a minute...",
     "unconfirmingPeriodLabel": "Unconfirming the period",
