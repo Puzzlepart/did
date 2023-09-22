@@ -1,10 +1,7 @@
-import {
-  Avatar,
-  Persona, PopoverTrigger
-} from '@fluentui/react-components'
+import { Avatar, Persona, PopoverTrigger } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import React from 'react'
-import { MobileView, isBrowser } from 'react-device-detect'
+import { isBrowser, MobileView } from 'react-device-detect'
 import { StyledComponent } from 'types'
 import { NotificationIndicator } from '../../UserNotifications/NotificationIndicator'
 import styles from './UserMenuTrigger.module.scss'
@@ -24,7 +21,8 @@ export const UserMenuTrigger: StyledComponent = () => {
                 src: user.photo?.base64
               }
             }}
-            size='small' />
+            size='small'
+          />
         ) : (
           <Avatar
             className={styles.user}
@@ -32,7 +30,8 @@ export const UserMenuTrigger: StyledComponent = () => {
             image={{
               src: user.photo?.base64
             }}
-            size={40} />
+            size={40}
+          />
         )}
         <MobileView renderWithFragment={true}>
           <NotificationIndicator />
