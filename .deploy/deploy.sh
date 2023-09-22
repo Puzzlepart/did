@@ -58,8 +58,6 @@ exitWithMessageOnError "Missing node.js executable, please install node.js, if a
 SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
-CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
-NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -88,17 +86,19 @@ fi
 # 2. Select Node version
 # 3. Installing node_modules with --production flag
 # ----------
-COMPARE_VERSION_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
-
-if [[ "$COMPARE_VERSION_RESULT" == "IS_NEWER" ]]; then
-  echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
-  rm -rf "$DEPLOYMENT_TARGET/node_modules"
-fi
 
 # Checks if package.json doesn't exist
 if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo "package.json file doesn't exist in the $DEPLOYMENT_TARGET folder - cleaning node_modules folder"
   rm -rf "$DEPLOYMENT_TARGET/node_modules"
+  else
+  CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
+  NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
+  COMPARE_VERSION_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
+  if [[ "$COMPARE_VERSION_RESULT" == "IS_NEWER" ]]; then
+    echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
+    rm -rf "$DEPLOYMENT_TARGET/node_modules"
+  fi
 fi
 
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
