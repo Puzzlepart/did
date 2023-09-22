@@ -14,6 +14,7 @@ export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
   props
 ) => {
   const appContext = useAppContext()
+  if(!appContext.isAuthenticated) return null
   const nav = Object.keys(appContext.state.nav || {})
   const items: IBreadcrumbItem[] = [
     {

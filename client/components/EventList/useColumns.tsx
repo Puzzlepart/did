@@ -1,16 +1,14 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { IColumn } from '@fluentui/react'
-import { Link } from '@fluentui/react-components'
-import { EntityLabel } from 'components/EntityLabel'
-import $date from 'DateUtils'
 import get from 'get-value'
 import React, { useMemo } from 'react'
-import { isBrowser, MobileView } from 'react-device-detect'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, TimeEntry } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 import { DurationDisplay } from './DurationDisplay'
-import styles from './EventList.module.scss'
+import { TimeColumn } from './TimeColumn'
+import { TitleColumn } from './TitleColumn'
 import { IEventListProps } from './types'
 
 /**
@@ -43,24 +41,11 @@ function getSizing(
  * @param name - Name
  */
 const createTitleColumnDef = (props: IEventListProps, name: string): IColumn =>
-  createColumnDef(
+  createColumnDef<EventObject>(
     'title',
     name,
     { ...getSizing(props, 'title', 320, 400), isMultiline: true },
-    (event: EventObject) => (
-      <div className={styles.titleColumn}>
-        <Link href={event.webLink} target='_blank' title={event.title}>
-          <span>{event.title}</span>
-        </Link>
-        {event.labels && (
-          <div className={styles.labels}>
-            {event.labels.map((label, index) => (
-              <EntityLabel key={index} label={label} />
-            ))}
-          </div>
-        )}
-      </div>
-    )
+    (event) => <TitleColumn event={event} />
   )
 
 /**
@@ -70,28 +55,11 @@ const createTitleColumnDef = (props: IEventListProps, name: string): IColumn =>
  * @param name - Name
  */
 const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
-  createColumnDef(
+  createColumnDef<TimeEntry>(
     'time',
     name,
     { ...getSizing(props, 'time', 90, 90) },
-    (event: TimeEntry) => {
-      const startTime = $date.formatDate(event.startDateTime, props.dateFormat)
-      const endTime = $date.formatDate(event.endDateTime, props.dateFormat)
-      return (
-        <>
-          <span>
-            {startTime} - {endTime}
-          </span>
-          <MobileView renderWithFragment={true}>
-            <DurationDisplay
-              displayFormat='({0})'
-              event={event}
-              style={{ marginLeft: 4 }}
-            />
-          </MobileView>
-        </>
-      )
-    }
+    (event) => <TimeColumn event={event} dateFormat={props.dateFormat} />
   )
 
 /**
@@ -104,13 +72,20 @@ const createDurationColumnDefs = (
   props: IEventListProps,
   name: string
 ): IColumn =>
-  createColumnDef(
+  createColumnDef<TimeEntry>(
     'duration',
     name,
     { ...getSizing(props, 'duration', 75, 75) },
-    (event: TimeEntry) => <DurationDisplay event={event} />
+    (event) => <DurationDisplay event={event} />
   )
 
+/**
+ * Hook that returns the columns for the `EventList` component.
+ * 
+ * @param props Props for the `EventList` component
+ * 
+ * @category EventList
+ */
 export function useColumns(props: IEventListProps) {
   const { t } = useTranslation()
   return useMemo(

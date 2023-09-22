@@ -1,7 +1,8 @@
+/* eslint-disable unicorn/prefer-ternary */
 import { DateRangeType, Pivot, PivotItem } from '@fluentui/react'
 import { EventList } from 'components'
 import packageFile from 'package'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useTimesheetContext } from '../../context'
@@ -10,6 +11,8 @@ import { TimesheetViewComponent } from '../types'
 import { MatchEventPanel } from './MatchEventPanel'
 import styles from './Overview.module.scss'
 import { useOverview } from './useOverview'
+import { mergeClasses } from '@fluentui/react-components'
+import { isMobile } from 'react-device-detect'
 
 /**
  * @category Timesheet
@@ -17,41 +20,35 @@ import { useOverview } from './useOverview'
 export const Overview: TimesheetViewComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const { additionalColumns, listGroupProps, className } = useOverview()
+  const { additionalColumns, listGroupProps } = useOverview()
+  let element: ReactElement = null
   switch (state.dateRangeType) {
     case DateRangeType.Week: {
-      return (
-        <div className={className}>
-          <EventList
-            hideToolbar={true}
-            hidden={!!state.error}
-            enableShimmer={!!state.loading}
-            items={state.selectedPeriod?.getEvents()}
-            dateFormat={packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
-            listGroupProps={listGroupProps}
-            additionalColumns={additionalColumns}
-          />
-          <MatchEventPanel />
-        </div>
+      element = (
+        <EventList
+          hideToolbar={true}
+          hidden={!!state.error}
+          enableShimmer={!!state.loading}
+          items={state.selectedPeriod?.getEvents()}
+          dateFormat={packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
+          listGroupProps={listGroupProps}
+          additionalColumns={additionalColumns}
+        />
       )
     }
     case DateRangeType.Month: {
       if (state.loading && _.isEmpty(state.periods)) {
-        return (
-          <div className={className}>
-            <EventList
-              hideToolbar={true}
-              enableShimmer={true}
-              items={[]}
-              listGroupProps={listGroupProps}
-              additionalColumns={additionalColumns}
-            />
-            <MatchEventPanel />
-          </div>
+        element = (
+          <EventList
+            hideToolbar={true}
+            enableShimmer={true}
+            items={[]}
+            listGroupProps={listGroupProps}
+            additionalColumns={additionalColumns}
+          />
         )
-      }
-      return (
-        <div className={className}>
+      } else {
+        element = (
           <Pivot
             selectedKey={state.selectedPeriod?.id}
             onLinkClick={(item) => {
@@ -78,11 +75,17 @@ export const Overview: TimesheetViewComponent = () => {
               </PivotItem>
             ))}
           </Pivot>
-          <MatchEventPanel />
-        </div>
-      )
+        )
+      }
     }
   }
+  return (
+
+    <div className={mergeClasses(Overview.className, isMobile && styles.mobile)}>
+      {element}
+      <MatchEventPanel />
+    </div>
+  )
 }
 
 Overview.id = 'overview'

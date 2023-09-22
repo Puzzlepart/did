@@ -6,25 +6,25 @@ import { createColumnDef } from 'utils/createColumnDef'
 import { ProjectColumn } from './ProjectColumn'
 
 /**
- * Use additonal columns
+ * Hook that returns additonal columns for the event list.
  */
 export function useAdditionalColumns() {
   const { t } = useTranslation()
   return useMemo(
     () => [
-      createColumnDef(
+      createColumnDef<EventObject>(
         'customer',
         t('common.customer'),
         { minWidth: 150, maxWidth: 200 },
-        (event: EventObject) => <CustomerLink customer={event.customer} />
+        (event) => <CustomerLink customer={event.customer} />
       ),
-      createColumnDef(
+      createColumnDef<EventObject>(
         'project',
         t('common.project'),
         { minWidth: 150, maxWidth: 300 },
-        (event: EventObject) => <ProjectColumn event={event} />
+        (event) => <ProjectColumn event={event} />
       )
-    ],
+    ].filter(Boolean),
     []
   )
 }

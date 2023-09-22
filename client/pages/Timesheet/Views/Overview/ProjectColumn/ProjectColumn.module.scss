@@ -5,6 +5,7 @@
   padding: 4px 0 4px 0;
 
   &.mobile {
+    padding: 0px;
     .content {
       .link {
         font-size: 10pt;
@@ -16,7 +17,7 @@
   .content {
     display: flex;
     flex-direction: row;
-    padding: 0 0 0 8px;
+    padding: 0 0 0 0;
     flex-grow: 1 1 1 1;
 
     .labelIcon {
