@@ -58,9 +58,9 @@ export class ContextUser {
         )
       )
       this.configuration = tryParseJson(_user.configuration, {})
-      this.theme = getTheme(this.configuration?.ui?.theme)
+      this.theme = getTheme()
     } else {
-      this.theme = getTheme('light')
+      this.theme = getTheme()
     }
   }
 

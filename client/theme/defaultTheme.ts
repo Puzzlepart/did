@@ -1,8 +1,16 @@
 import { Theme, webLightTheme } from '@fluentui/react-components'
-import { PartialTheme } from '@fluentui/react/lib/Theme'
+import { ISemanticColors, PartialTheme } from '@fluentui/react/lib/Theme'
 import fonts from './fonts'
 
-const legacyLightTheme = {
+interface ExtendedThemeSemanticColors extends Partial<ISemanticColors> {
+  infoText?: string
+}
+
+interface ExtendedTheme extends PartialTheme {
+  semanticColors: ExtendedThemeSemanticColors
+}
+
+const legacyDefaultTheme: ExtendedTheme = {
   components: {
     logo: {
       styles: {
@@ -16,8 +24,9 @@ const legacyLightTheme = {
     }
   },
   semanticColors: {
+    link: '#133748',
     menuBackground: '#fff',
-    menuHeader: '#161b22',
+    menuHeader: '#3a0960',
     bodyBackground: '#ffffff',
     bodySubtext: '#605e5c',
     successBackground: '#C9F7E8',
@@ -60,12 +69,12 @@ const legacyLightTheme = {
 /**
  * The Fluent Light theme uses `webLightTheme` from `@fluentui/react-components`
  */
-export const fluentLightTheme = webLightTheme
+export const fluentDefaultTheme = webLightTheme
 
 /**
  * The Light theme is a combination of the legacy theme and the Fluent Light theme
  */
-export const lightTheme: [PartialTheme, Theme] = [
-  legacyLightTheme,
-  fluentLightTheme
+export const defaultTheme: [PartialTheme, Theme] = [
+  legacyDefaultTheme,
+  fluentDefaultTheme
 ]

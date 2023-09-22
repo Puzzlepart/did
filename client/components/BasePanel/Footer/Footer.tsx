@@ -1,7 +1,7 @@
 import { FluentProvider, mergeClasses } from '@fluentui/react-components'
 import { DynamicButton } from 'components/DynamicButton'
 import React from 'react'
-import { fluentLightTheme } from 'theme'
+import { fluentDefaultTheme } from 'theme'
 import { StyledComponent } from 'types'
 import styles from './Footer.module.scss'
 import { IFooterProps } from './types'
@@ -11,7 +11,7 @@ export const Footer: StyledComponent<IFooterProps> = (props) => {
   const actions = useFooter(props)
   return (
     <FluentProvider
-      theme={fluentLightTheme}
+      theme={fluentDefaultTheme}
       className={mergeClasses(
         Footer.className,
         props.className,

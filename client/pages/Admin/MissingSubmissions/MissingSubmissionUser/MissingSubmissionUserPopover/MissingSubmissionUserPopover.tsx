@@ -6,7 +6,7 @@ import {
   PopoverTrigger
 } from '@fluentui/react-components'
 import React from 'react'
-import { fluentLightTheme } from 'theme'
+import { fluentDefaultTheme } from 'theme'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserPopover.module.scss'
@@ -21,7 +21,7 @@ export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUse
       </PopoverTrigger>
       <PopoverSurface>
         <FluentProvider
-          theme={fluentLightTheme}
+          theme={fluentDefaultTheme}
           className={MissingSubmissionUserPopover.className}
         >
           <Persona

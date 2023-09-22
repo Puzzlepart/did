@@ -12,7 +12,7 @@ import { DynamicButton, PermissionList, UserMessage } from 'components'
 import { Field, FieldDescription } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { fluentLightTheme } from 'theme'
+import { fluentDefaultTheme } from 'theme'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { t9r } from 'utils'
@@ -47,7 +47,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
           permissionIds={checkedValues.permissions ?? []}
         />
       )}
-      <FluentProvider theme={fluentLightTheme}>
+      <FluentProvider theme={fluentDefaultTheme}>
         <Menu>
           <DynamicButton
             text={props.buttonLabel ?? props.label}

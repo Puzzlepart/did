@@ -9,17 +9,9 @@ body {
     padding: 0;
 }
 
-a {
+a, a:hover, a:visited, a:active {
+    color: #133748;
     text-decoration: none;
-    color: #007bff;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:visited {
-    color: #007bff;
 }
 
 h1 {
