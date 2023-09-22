@@ -90,14 +90,16 @@ fi
 # Checks if package.json doesn't exist
 if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo "package.json file doesn't exist in the $DEPLOYMENT_TARGET folder - cleaning node_modules folder"
-  rm -rf "$DEPLOYMENT_TARGET/node_modules"
+  #rm -rf "$DEPLOYMENT_TARGET/node_modules"
+  echo "Cleaning of node_modules folder in $DEPLOYMENT_TARGET is temporarily disabled due to issues with deploy timeouts"
   else
   CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
   NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
   COMPARE_VERSION_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
   if [[ "$COMPARE_VERSION_RESULT" == "IS_NEWER" ]]; then
     echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
-    rm -rf "$DEPLOYMENT_TARGET/node_modules"
+    #rm -rf "$DEPLOYMENT_TARGET/node_modules"
+    echo "Cleaning of node_modules folder in $DEPLOYMENT_TARGET is temporarily disabled due to issues with deploy timeouts"
   fi
 fi
 
