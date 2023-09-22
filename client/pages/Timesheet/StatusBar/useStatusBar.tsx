@@ -146,7 +146,7 @@ export function useStatusBar() {
           {
             text: t('timesheet.undoIgnoreText'),
             onClick: () => dispatch(CLEAR_IGNORES()),
-            iconName: 'ArrowUndo',
+            iconName: 'ArrowUndo'
           }
         ],
         intent: 'warning'

@@ -1,4 +1,10 @@
-import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui/react-components'
+import {
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuPopover,
+  MenuTrigger
+} from '@fluentui/react-components'
 import { ConditionalWrapper } from 'components'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -29,7 +35,8 @@ export const UserMessageActions: StyledComponent<
             </MenuList>
           </MenuPopover>
         </Menu>
-      )}>
+      )}
+    >
       {props.children}
     </ConditionalWrapper>
   )

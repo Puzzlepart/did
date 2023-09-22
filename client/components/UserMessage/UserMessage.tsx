@@ -7,9 +7,9 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import { getFluentIcon } from 'utils'
+import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { UserMessageActions } from './UserMessageActions/UserMessage'
-import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
 
 /**
