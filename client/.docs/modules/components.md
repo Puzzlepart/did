@@ -634,7 +634,7 @@ Renders events in a list using `<List />` component
 
 Supports property `additionalColumns`
 
-Defined in: [client/components/EventList/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L16)
+Defined in: [client/components/EventList/EventList.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/EventList.tsx#L16)
 
 ___
 
@@ -863,7 +863,7 @@ ___
 A component that uses `Alert` from [@fluentui/react-components](@fluentui/react-components),
 conditionally renders a `Menu` from [@fluentui/react-components](@fluentui/react-components).
 
-Defined in: [client/components/UserMessage/UserMessage.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/UserMessage.tsx#L27)
+Defined in: [client/components/UserMessage/UserMessage.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/UserMessage.tsx#L29)
 
 ___
 
