@@ -1,14 +1,14 @@
 import { DateRangeType } from '@fluentui/react'
-import $date from 'DateUtils'
 import { IUserMessageProps } from 'components/UserMessage/types'
+import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { StatusBar } from '.'
-import { Overview } from '../Views/Overview'
 import { useTimesheetContext } from '../context'
+import { Overview } from '../Views/Overview'
 import styles from './StatusBar.module.scss'
 
 /**

@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 import { UserMessage } from '.'
-import styles from './UserMessage.module.scss'
 import { IUserMessageProps } from './types'
+import styles from './UserMessage.module.scss'
 import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**

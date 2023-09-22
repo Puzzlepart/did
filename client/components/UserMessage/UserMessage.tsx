@@ -1,6 +1,4 @@
-import {
-  Title3
-} from '@fluentui/react-components'
+import { Title3 } from '@fluentui/react-components'
 import { Alert } from '@fluentui/react-components/unstable'
 import { Progress } from 'components/Progress'
 import { ReusableComponent } from 'components/types'
@@ -9,9 +7,9 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import { getFluentIcon } from 'utils'
+import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 import { UserMessageActions } from './UserMessageActions/UserMessage'
-import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
 
 /**
@@ -28,7 +26,8 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
         {...props}
         icon={props.iconName && getFluentIcon(props.iconName)}
         style={alertStyle}
-        className={styles.alert}>
+        className={styles.alert}
+      >
         {props.headerText && (
           <Title3 className={styles.header}>{props.headerText}</Title3>
         )}

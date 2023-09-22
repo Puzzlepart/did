@@ -105,7 +105,6 @@ Reusable React Function components.
 - [ILabelPickerControlProps](../interfaces/components.ilabelpickercontrolprops.md)
 - [ISubmitProps](../interfaces/components.isubmitprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
-- [IUserMessageAction](../interfaces/components.iusermessageaction.md)
 - [IUserMessageContainerProps](../interfaces/components.iusermessagecontainerprops.md)
 - [InputControlOptions](../interfaces/components.inputcontroloptions.md)
 - [ValidatorFunction](../interfaces/components.validatorfunction.md)
@@ -129,6 +128,7 @@ Reusable React Function components.
 - [RegisterControlCallback](components.md#registercontrolcallback)
 - [SwitchControlOptions](components.md#switchcontroloptions)
 - [UseFormOptions](components.md#useformoptions)
+- [UserMessageAction](components.md#usermessageaction)
 - [ValidationResult](components.md#validationresult)
 - [ValidationState](components.md#validationstate)
 
@@ -380,6 +380,16 @@ Name | Type | Description |
 `variables` | (`$`: *Record*<string, any\>) => *Record*<string, any\> | Function to generate the variables based on the model.   |
 
 Defined in: [client/components/FormControl/types/UseFormOptions.ts:1](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/types/UseFormOptions.ts#L1)
+
+___
+
+### UserMessageAction
+
+Ƭ **UserMessageAction**: *Pick*<[*IDynamicButtonProps*](../interfaces/components.idynamicbuttonprops.md), *text* \| *iconName* \| *disabled* \| *onClick*\>
+
+Represents an action that can be performed on a user message.
+
+Defined in: [client/components/UserMessage/types.tsx:9](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L9)
 
 ___
 
@@ -863,7 +873,7 @@ ___
 A component that uses `Alert` from [@fluentui/react-components](@fluentui/react-components),
 conditionally renders a `Menu` from [@fluentui/react-components](@fluentui/react-components).
 
-Defined in: [client/components/UserMessage/UserMessage.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/UserMessage.tsx#L29)
+Defined in: [client/components/UserMessage/UserMessage.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/UserMessage.tsx#L23)
 
 ___
 

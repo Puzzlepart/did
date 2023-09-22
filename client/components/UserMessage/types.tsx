@@ -6,7 +6,10 @@ import { FluentIconName } from 'utils'
 /**
  * Represents an action that can be performed on a user message.
  */
-export type UserMessageAction = Pick<IDynamicButtonProps, 'text' | 'iconName' | 'disabled' | 'onClick'> 
+export type UserMessageAction = Pick<
+  IDynamicButtonProps,
+  'text' | 'iconName' | 'disabled' | 'onClick'
+>
 
 /**
  * @category UserMessage
@@ -55,7 +58,7 @@ export interface IUserMessageProps extends AlertProps {
  */
 export interface IUserMessageContainerProps
   extends HTMLAttributes<HTMLDivElement>,
-  Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
+    Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
   /**
    * Vertical direction for the items in the container.
    */

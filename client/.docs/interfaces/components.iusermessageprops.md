@@ -19,7 +19,6 @@
 - [headerText](components.iusermessageprops.md#headertext)
 - [iconName](components.iusermessageprops.md#iconname)
 - [onClick](components.iusermessageprops.md#onclick)
-- [openActionsOnHover](components.iusermessageprops.md#openactionsonhover)
 - [renderProgress](components.iusermessageprops.md#renderprogress)
 - [text](components.iusermessageprops.md#text)
 
@@ -27,11 +26,11 @@
 
 ### actions
 
-• `Optional` **actions**: [*IUserMessageAction*](components.iusermessageaction.md)[]
+• `Optional` **actions**: [*UserMessageAction*](../modules/components.md#usermessageaction)[]
 
 Actions to show in a menu
 
-Defined in: [client/components/UserMessage/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L50)
+Defined in: [client/components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
 
 ___
 
@@ -41,7 +40,7 @@ ___
 
 To flex the message center with a fixed height
 
-Defined in: [client/components/UserMessage/types.tsx:45](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L45)
+Defined in: [client/components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)
 
 ___
 
@@ -51,7 +50,7 @@ ___
 
 Header text to show in **bold** _slightly larger_ font
 
-Defined in: [client/components/UserMessage/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L28)
+Defined in: [client/components/UserMessage/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L18)
 
 ___
 
@@ -61,7 +60,7 @@ ___
 
 The name of the Fluent UI icon to display for the message (optional).
 
-Defined in: [client/components/UserMessage/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L65)
+Defined in: [client/components/UserMessage/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L50)
 
 ___
 
@@ -83,21 +82,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
+Defined in: [client/components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
 
 Overrides: void
 
-Defined in: [client/components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
-
-___
-
-### openActionsOnHover
-
-• `Optional` **openActionsOnHover**: *boolean*
-
-Whether to open the actions menu on hover
-
-Defined in: [client/components/UserMessage/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L55)
+Defined in: [client/components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
 
 ___
 
@@ -107,7 +96,7 @@ ___
 
 Whether to render a progress bar in the message
 
-Defined in: [client/components/UserMessage/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L60)
+Defined in: [client/components/UserMessage/types.tsx:45](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L45)
 
 ___
 
@@ -119,4 +108,4 @@ Text to show in the message
 
 **`remarks`** Supports markdown
 
-Defined in: [client/components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)
+Defined in: [client/components/UserMessage/types.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L25)
