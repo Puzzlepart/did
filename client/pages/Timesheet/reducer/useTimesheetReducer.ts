@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import _ from 'underscore'
-import { TimesheetPeriodObject } from '../../../../server/graphql'
+import { TimesheetPeriodObject } from 'types'
 import {
   TimesheetDateRange,
   TimesheetPeriod
