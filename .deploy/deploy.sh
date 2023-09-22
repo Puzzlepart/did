@@ -96,6 +96,12 @@ if [[ "$COMPARE_RESULT" == "IS_NEWER" ]]; then
   rm -rf "$DEPLOYMENT_TARGET/node_modules"
 fi
 
+# Checks if package.json doesn't exist
+if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  echo "package.json file doesn't exist in the $DEPLOYMENT_TARGET folder - cleaning node_modules folder"
+  rm -rf "$DEPLOYMENT_TARGET/node_modules"
+fi
+
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
 
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
