@@ -5,11 +5,7 @@
  *
  * @module GraphQL
  */
-import {
-  ApolloServerPluginSchemaReporting,
-  ApolloServerPluginUsageReporting
-} from 'apollo-server-core'
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer } from '@apollo/server'
 import {
   ApolloServerPlugin,
   GraphQLRequestContext
@@ -48,7 +44,6 @@ export const generateGraphQLSchema = async () => {
     validate: false,
     authChecker,
     authMode: 'error',
-    dateScalarMode: 'isoDate',
     scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
   })
   return schema
