@@ -1,6 +1,6 @@
 import { DateRangeType } from '@fluentui/react'
 import { current } from '@reduxjs/toolkit'
-import { useReduxReducer } from 'hooks'
+import { useReduxReducer as useReducer } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -38,7 +38,7 @@ export function useTimesheetReducer() {
   const { t } = useTranslation()
   const url = useParams<ITimesheetParameters>()
   const initialState = useMemo(() => initState(url), [])
-  return useReduxReducer(initialState, (builder) =>
+  return useReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload: query }) => {
         state.loading = query.loading && {
