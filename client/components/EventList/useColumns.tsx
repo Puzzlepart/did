@@ -45,7 +45,7 @@ const createTitleColumnDef = (props: IEventListProps, name: string): IColumn =>
     'title',
     name,
     { ...getSizing(props, 'title', 320, 400), isMultiline: true },
-    (event) => <TitleColumn event={event} />
+    (event) => <TitleColumn {...props} event={event} />
   )
 
 /**
@@ -59,7 +59,7 @@ const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
     'time',
     name,
     { ...getSizing(props, 'time', 90, 90) },
-    (event) => <TimeColumn event={event} dateFormat={props.dateFormat} />
+    (event) => <TimeColumn {...props} event={event} />
   )
 
 /**
@@ -68,7 +68,7 @@ const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
  * @param props - Props
  * @param name - Name
  */
-const createDurationColumnDefs = (
+const createDurationColumnDef = (
   props: IEventListProps,
   name: string
 ): IColumn =>
@@ -93,7 +93,7 @@ export function useColumns(props: IEventListProps) {
       [
         createTitleColumnDef(props, t('common.titleLabel')),
         createTimeColumnDef(props, t('common.timeLabel')),
-        isBrowser && createDurationColumnDefs(props, t('common.durationLabel')),
+        isBrowser && createDurationColumnDef(props, t('common.durationLabel')),
         ...props.additionalColumns
       ]
         .filter((col) => !!col)
