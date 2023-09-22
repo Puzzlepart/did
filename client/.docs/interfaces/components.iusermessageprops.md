@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *AlertProps*
+* *Omit*<AlertProps, *action*\>
 
   ↳ **IUserMessageProps**
 
@@ -14,7 +14,7 @@
 
 ### Properties
 
-- [actions](components.iusermessageprops.md#actions)
+- [action](components.iusermessageprops.md#action)
 - [fixedHeight](components.iusermessageprops.md#fixedheight)
 - [headerText](components.iusermessageprops.md#headertext)
 - [iconName](components.iusermessageprops.md#iconname)
@@ -24,13 +24,13 @@
 
 ## Properties
 
-### actions
+### action
 
-• `Optional` **actions**: [*IUserMessageAction*](components.iusermessageaction.md)[]
+• `Optional` **action**: [*IUserMessageAction*](components.iusermessageaction.md)
 
-Actions to show in a menu
+Action to show in a menu
 
-Defined in: [client/components/UserMessage/types.tsx:45](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L45)
+Defined in: [client/components/UserMessage/types.tsx:46](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L46)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 To flex the message center with a fixed height
 
-Defined in: [client/components/UserMessage/types.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L40)
+Defined in: [client/components/UserMessage/types.tsx:41](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L41)
 
 ___
 
@@ -50,17 +50,17 @@ ___
 
 Header text to show in **bold** _slightly larger_ font
 
-Defined in: [client/components/UserMessage/types.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L23)
+Defined in: [client/components/UserMessage/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L24)
 
 ___
 
 ### iconName
 
-• `Optional` **iconName**: *Lightbulb* \| *ListBar* \| *ContentSettings* \| *BuildingSkyscraper* \| *Home* \| *ContentView* \| *Eye* \| *NoteEdit* \| *LinkEdit* \| *Edit* \| *TableCellEdit* \| *PersonEdit* \| *TextBulletListSquareEdit* \| *Dismiss* \| *TagMultiple* \| *KeyMultiple* \| *Umbrella* \| *Person* \| *PersonProhibited* \| *SelectAllOff* \| *WeatherSunnyLow* \| *Cloud* \| *Timeline* \| *Collections* \| *Info* \| *CalendarPlay* \| *CalendarClock* \| *Emoji* \| *Alert* \| *ArrowExportUp* \| *DrinkMargarita* \| *EditSettings* \| *DocumentDatabase* \| *Key* \| *StoreMicrosoft* \| *ArrowSortUp* \| *Checkmark* \| *ArrowImport* \| *PeopleAdd* \| *PersonSync* \| *AddCircle* \| *CalendarWeekNumbers* \| *ArrowCircleLeft* \| *ArrowCircleRight* \| *CalendarCancel* \| *CalendarMonth* \| *CalendarSync* \| *CalendarToday* \| *CalendarWorkWeek* \| *CheckmarkCircle* \| *Timer* \| *PeopleTeam* \| *Timer2* \| *PeopleEdit* \| *Delete* \| *ArrowUndo* \| *FastForward* \| *TableEdit* \| *WebAsset* \| *System* \| *SignOut* \| *CalendarAdd* \| *BinRecycle* \| *DeleteDismiss* \| *ArrowSync* \| *HourGlassHalf*
+• `Optional` **iconName**: *TagQuestionMark* \| *Lightbulb* \| *ListBar* \| *ContentSettings* \| *BuildingSkyscraper* \| *Home* \| *ContentView* \| *Eye* \| *NoteEdit* \| *LinkEdit* \| *Edit* \| *TableCellEdit* \| *PersonEdit* \| *TextBulletListSquareEdit* \| *Dismiss* \| *TagMultiple* \| *KeyMultiple* \| *Umbrella* \| *Person* \| *PersonProhibited* \| *SelectAllOff* \| *WeatherSunnyLow* \| *Cloud* \| *Timeline* \| *Collections* \| *Info* \| *CalendarPlay* \| *CalendarClock* \| *Emoji* \| *Alert* \| *ArrowExportUp* \| *DrinkMargarita* \| *EditSettings* \| *DocumentDatabase* \| *Key* \| *StoreMicrosoft* \| *ArrowSortUp* \| *Checkmark* \| *ArrowImport* \| *PeopleAdd* \| *PersonSync* \| *AddCircle* \| *CalendarWeekNumbers* \| *ArrowCircleLeft* \| *ArrowCircleRight* \| *CalendarCancel* \| *CalendarMonth* \| *CalendarSync* \| *CalendarToday* \| *CalendarWorkWeek* \| *CheckmarkCircle* \| *Timer* \| *PeopleTeam* \| *Timer2* \| *PeopleEdit* \| *Delete* \| *ArrowUndo* \| *FastForward* \| *TableEdit* \| *WebAsset* \| *System* \| *SignOut* \| *CalendarAdd* \| *BinRecycle* \| *DeleteDismiss* \| *ArrowSync* \| *HourGlassHalf*
 
 The name of the Fluent UI icon to display for the message (optional).
 
-Defined in: [client/components/UserMessage/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L55)
+Defined in: [client/components/UserMessage/types.tsx:56](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L56)
 
 ___
 
@@ -82,11 +82,11 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)
+Defined in: [client/components/UserMessage/types.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L36)
 
 Overrides: void
 
-Defined in: [client/components/UserMessage/types.tsx:35](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L35)
+Defined in: [client/components/UserMessage/types.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L36)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 Whether to render a progress bar in the message
 
-Defined in: [client/components/UserMessage/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L50)
+Defined in: [client/components/UserMessage/types.tsx:51](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L51)
 
 ___
 
@@ -108,4 +108,4 @@ Text to show in the message
 
 **`remarks`** Supports markdown
 
-Defined in: [client/components/UserMessage/types.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L30)
+Defined in: [client/components/UserMessage/types.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L31)

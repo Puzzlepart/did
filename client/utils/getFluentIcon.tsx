@@ -1,7 +1,5 @@
 import { Icon } from '@fluentui/react'
 import {
-  TagQuestionMarkRegular,
-  TagQuestionMarkFilled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -121,6 +119,8 @@ import {
   TableEdit24Regular,
   TagMultiple24Filled,
   TagMultiple24Regular,
+  TagQuestionMarkFilled,
+  TagQuestionMarkRegular,
   TextBulletListSquareEdit24Filled,
   TextBulletListSquareEdit24Regular,
   Timeline24Filled,
@@ -144,7 +144,7 @@ import React, { CSSProperties } from 'react'
 const iconCatalog = {
   TagQuestionMark: {
     regular: TagQuestionMarkRegular,
-    filled: TagQuestionMarkFilled 
+    filled: TagQuestionMarkFilled
   },
   Lightbulb: {
     regular: Lightbulb24Regular,

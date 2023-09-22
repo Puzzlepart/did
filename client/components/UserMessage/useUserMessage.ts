@@ -15,12 +15,9 @@ export function useUserMessage(props: IUserMessageProps) {
     hidden: props.hidden,
     onClick: props.onClick,
     style: {
-      cursor: props.onClick ? 'pointer' : 'default',
+      cursor: props.onClick ? 'pointer' : 'default'
     },
-    className: [
-      UserMessage.className,
-      props.className
-    ]
+    className: [UserMessage.className, props.className]
       .filter(Boolean)
       .join(' ')
   }

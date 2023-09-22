@@ -33,7 +33,8 @@ export const NotificationsPanel: StyledComponent<IPanelProps> = (props) => {
               dismissedCount > 0 && {
                 text: t('notifications.clearDismissedText'),
                 onClick: clearDismissed
-              }}
+              }
+            }
           />
         </div>
         <UserMessageContainer vertical gap={12}>

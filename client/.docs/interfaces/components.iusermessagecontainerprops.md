@@ -29,7 +29,7 @@ Props for the UserMessageContainer component.
 
 How to spread the items in the container.
 
-Defined in: [client/components/UserMessage/types.tsx:72](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L72)
+Defined in: [client/components/UserMessage/types.tsx:73](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L73)
 
 ___
 
@@ -39,4 +39,4 @@ ___
 
 Vertical direction for the items in the container.
 
-Defined in: [client/components/UserMessage/types.tsx:67](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L67)
+Defined in: [client/components/UserMessage/types.tsx:68](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L68)

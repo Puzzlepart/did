@@ -74,7 +74,7 @@ export function useStatusBar() {
           hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
           splitWeekInfoText:
             state.periods.length > 1 &&
-              state.dateRangeType === DateRangeType.Week
+            state.dateRangeType === DateRangeType.Week
               ? t('timesheet.splitWeekInfoText')
               : ''
         })
@@ -143,7 +143,7 @@ export function useStatusBar() {
         action: {
           text: t('timesheet.undoIgnoreTooltip'),
           onClick: () => dispatch(CLEAR_IGNORES()),
-          iconName: 'ArrowUndo',
+          iconName: 'ArrowUndo'
         },
         intent: 'warning'
       })
