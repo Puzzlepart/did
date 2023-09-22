@@ -45,20 +45,21 @@ jobs:
         path: ./did-package.zip
 
   deploy_azure:
-    name: Deploying to Azure
+    name: Deploying to didapp/dev
     runs-on: ubuntu-latest
     needs: package
     environment:
       name: 'dev'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-app-slot.webapp-url }}
 
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: did-package
 
     - name: 'Deploy package to didapp/dev'
+      id: deploy-to-app-slot
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'

@@ -8,26 +8,35 @@ const path = require('path')
 const archivePackage = require('./archivePackage')
 const log = console.log
 
-async function run() {
+const DIST_PATH = path.resolve(__dirname, '../', 'dist')
+const INCLUDE_NODE_MODULES = process.env.INCLUDE_NODE_MODULES === '1'
+const INCLUDE_PACKAGE_LOCK_FILE = process.env.INCLUDE_PACKAGE_LOCK_FILE !== '0'
+
+/**
+ * Runs the package script, which cleans the `DIST_PATH` directory and then concurrently 
+ * runs the `package:client` and `build:server` scripts. Finally, it archives the package.
+ */
+async function package() {
   if (process.env.CI !== 'true') {
-    const dir = path.resolve(__dirname, '../', 'dist')
     log()
     log()
-    log(`Cleaning directory ${chalk.cyan(dir)} 🗑️`)
+    log(`Cleaning directory ${chalk.cyan(DIST_PATH)} 🗑️`)
     log()
     log()
-    await rmdir(dir)
+    await rmdir(DIST_PATH)
   }
 
   await concurrently([
     { command: 'npm run package:client', name: 'package:client' },
     { command: "npm run build:server", name: 'build:server' }
   ], {
-    prefix: 'none'
+    prefix: 'none',
   })
   await archivePackage({
-    includeNodeModules: process.env.INCLUDE_NODE_MODULES === '1',
-    includePackageLockFile: process.env.INCLUDE_PACKAGE_LOCK_FILE !== '0'
+    includeNodeModules: INCLUDE_NODE_MODULES,
+    includePackageLockFile: INCLUDE_PACKAGE_LOCK_FILE
   })
 }
-run()
+
+// Run the script
+package()

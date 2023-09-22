@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # ----------------------
-# Did KUDU Deployment Script
+# Did Deployment Script
 # Version: 0.0.1
 # ----------------------
 
 # Helpers
 # -------
 
+# Function to exit the script with an error message
 exitWithMessageOnError () {
   if [ ! $? -eq 0 ]; then
     echo "An error has occurred during web site deployment."
@@ -16,9 +17,32 @@ exitWithMessageOnError () {
   fi
 }
 
+# Function to select node version to use
 selectNodeVersion () {
   NODE_EXE=node
   NPM_CMD=npm
+}
+
+# Function to compare two version numbers
+compare_versions() {
+    local version1="$1"
+    local version2="$2"
+
+    IFS='.' read -ra ver1 <<< "$version1"
+    IFS='.' read -ra ver2 <<< "$version2"
+
+    for i in "${!ver1[@]}"; do
+        if [[ ${ver1[i]} -lt ${ver2[i]} ]]; then
+            echo "IS_OLDER"
+            return
+        elif [[ ${ver1[i]} -gt ${ver2[i]} ]]; then
+            echo "IS_NEWER"
+            return
+        fi
+    done
+
+    echo "IS_SAME"
+    return
 }
 
 # Prerequisites
@@ -29,14 +53,13 @@ hash node 2>/dev/null
 exitWithMessageOnError "Missing node.js executable, please install node.js, if already installed make sure it can be reached from the current environment."
 
 # Setup
-# - Installing kudusync
-# -----
+# -------------
 
 SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
-KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
-KUDU_SYNC_IGNORE_FILES=".git;.hg;.deployment;deploy.sh;node_modules"
+CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
+NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -56,38 +79,35 @@ else
   KUDU_SERVICE=true
 fi
 
-if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
-  # Install kudu sync
-  echo Installing Kudu Sync
-  npm install kudusync -g --production --silent
-  exitWithMessageOnError "Failed to install kudusync"
 
-  if [[ ! -n "$KUDU_SERVICE" ]]; then
-    # In case we are running locally, this is the correct location of kuduSync
-    KUDU_SYNC_CMD=kuduSync
-  else
-    # In case we are running on kudu service, this is the correct location of kuduSync
-    KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
-  fi
-fi
 
 ##################################################################################################################################
 # Deployment
 #
-# 1. KuduSync
+# 1. rsync to copy files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET
 # 2. Select Node version
 # 3. Installing node_modules with --production flag
 # ----------
+COMPARE_VERSION_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
 
-# 1. KuduSync
+if [[ "$COMPARE_VERSION_RESULT" == "IS_NEWER" ]]; then
+  echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
+  rm -rf "$DEPLOYMENT_TARGET/node_modules"
+fi
+
+# Checks if package.json doesn't exist
+if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  echo "package.json file doesn't exist in the $DEPLOYMENT_TARGET folder - cleaning node_modules folder"
+  rm -rf "$DEPLOYMENT_TARGET/node_modules"
+fi
+
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
 
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
-
-  "$KUDU_SYNC_CMD" -v 50 $IGNORE_MANIFEST_PARAM -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i "$KUDU_SYNC_IGNORE_FILES"
-  exitWithMessageOnError "Kudu Sync failed"
+  rsync -a "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
+  exitWithMessageOnError "Rsync failed to sync files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
 fi
 
 # 2. Select Node version
@@ -97,9 +117,9 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "Running $NPM_CMD install --production --silent"
-  eval $NPM_CMD install --production --silent
+  eval $NPM_CMD install --production --silent --no-fund --no-audit
   exitWithMessageOnError "Failed to install production npm dependencies"
 fi
 
 ##################################################################################################################################
-echo "Deployment finished successfully."
+echo "Deployment of v$NEW_PACKAGE_VERSION was successful"
