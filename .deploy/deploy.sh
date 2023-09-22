@@ -64,14 +64,13 @@ fi
 # 3. Installing node_modules with --production flag
 # ----------
 CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
-NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
 
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
 
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
-  rsync -av "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
+  rsync -a "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
   exitWithMessageOnError "Rsync failed to sync files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
 fi
 
@@ -82,7 +81,7 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "Running $NPM_CMD install --production --silent"
-  eval $NPM_CMD install --production --silent
+  eval $NPM_CMD install --production --silent --no-fund
   exitWithMessageOnError "Failed to install production npm dependencies"
 fi
 
