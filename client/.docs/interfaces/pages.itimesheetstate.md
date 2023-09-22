@@ -27,7 +27,7 @@
 
 The current date range
 
-Defined in: [client/pages/Timesheet/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L30)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L31)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 The current date range type
 
-Defined in: [client/pages/Timesheet/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L35)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L36)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 Error object
 
-Defined in: [client/pages/Timesheet/types.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L45)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L46)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 Event to match in the `<MatchEventPanel />`
 
-Defined in: [client/pages/Timesheet/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L60)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:61](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L61)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 Loading props for the `<UserMessage />` component
 
-Defined in: [client/pages/Timesheet/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L40)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L41)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 Navigation history
 
-Defined in: [client/pages/Timesheet/types.ts:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L55)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:56](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L56)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 Periods for the seleted scope
 
-Defined in: [client/pages/Timesheet/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L15)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L16)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 The currently selected period
 
-Defined in: [client/pages/Timesheet/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L20)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L21)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 The currently selected view
 
-Defined in: [client/pages/Timesheet/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L25)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L26)
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 Show hotkeys modal
 
-Defined in: [client/pages/Timesheet/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L50)
+Defined in: [client/pages/Timesheet/types/ITimesheetState.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetState.ts#L51)

@@ -18,7 +18,7 @@
 
 • **dateRange**: *string*
 
-Defined in: [client/pages/Timesheet/types.ts:67](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L67)
+Defined in: [client/pages/Timesheet/types/ITimesheetParameters.ts:5](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetParameters.ts#L5)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **startDate**: *string*
 
-Defined in: [client/pages/Timesheet/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L69)
+Defined in: [client/pages/Timesheet/types/ITimesheetParameters.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetParameters.ts#L7)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 • **view**: *string*
 
-Defined in: [client/pages/Timesheet/types.ts:68](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L68)
+Defined in: [client/pages/Timesheet/types/ITimesheetParameters.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types/ITimesheetParameters.ts#L6)

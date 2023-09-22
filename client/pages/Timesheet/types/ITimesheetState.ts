@@ -1,9 +1,9 @@
 import { DateRangeType } from '@fluentui/react'
 import { IUserMessageProps } from 'components'
 import { EventObject } from 'types'
+import { TimesheetViewComponent } from '../Views'
 import { TimesheetDateRange } from './TimesheetDateRange'
 import { TimesheetPeriod } from './TimesheetPeriod'
-import { TimesheetViewComponent } from '../Views'
 
 /**
  * @category Timesheet

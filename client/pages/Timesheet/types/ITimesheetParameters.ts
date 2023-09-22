@@ -2,7 +2,7 @@
  * @category Timesheet
  */
 export interface ITimesheetParameters {
-  dateRange: string;
-  view: string;
-  startDate: string;
+  dateRange: string
+  view: string
+  startDate: string
 }
