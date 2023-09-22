@@ -1,13 +1,14 @@
 import { DateRangeType } from '@fluentui/react'
 import { IUserMessageProps } from 'components'
-import { EventObject } from '../../../server/graphql'
+import { EventObject } from 'types'
 import { TimesheetDateRange } from './TimesheetDateRange'
 import { TimesheetPeriod } from './TimesheetPeriod'
-import { TimesheetViewComponent } from './Views/types'
+import { TimesheetViewComponent } from '../Views'
 
 /**
  * @category Timesheet
  */
+
 export interface ITimesheetState {
   /**
    * Periods for the seleted scope
@@ -59,16 +60,3 @@ export interface ITimesheetState {
    */
   eventToMatch?: EventObject
 }
-
-/**
- * @category Timesheet
- */
-export interface ITimesheetParameters {
-  dateRange: string
-  view: string
-  startDate: string
-}
-
-export * from './context'
-export * from './TimesheetDateRange'
-export * from './TimesheetPeriod'

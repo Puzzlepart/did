@@ -3,7 +3,7 @@ import { PopoverProps } from '@fluentui/react-components'
 import { useState } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { useTimesheetContext } from '../../types'
+import { useTimesheetContext } from '../../context'
 
 /**
  * Custom hook that returns the trigger text for the date range picker component,

@@ -38,3 +38,5 @@ export const useViews = () => {
 
   return { views, getViewById }
 }
+
+export * from './types'

@@ -4,7 +4,7 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'
 import { Dispatch, useEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'
-import { ITimesheetState } from '../types'
+import { ITimesheetState } from '../types/ITimesheetState'
 import $timesheet from './timesheet.gql'
 
 /**
@@ -34,9 +34,8 @@ export function useTimesheetQuery(
     fetchPolicy: 'cache-and-network',
     errorPolicy: 'all'
   })
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  
+  useEffect(() => dispatch(DATA_UPDATED(query)), [query])
 
   return query.refetch
 }

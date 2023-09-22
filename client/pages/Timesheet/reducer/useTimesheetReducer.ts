@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom'
 import _ from 'underscore'
 import { TimesheetPeriodObject } from '../../../../server/graphql'
 import {
-  ITimesheetParameters,
   TimesheetDateRange,
   TimesheetPeriod
 } from '../types'
+import { ITimesheetParameters } from '../types/ITimesheetParameters'
 import {
   CHANGE_DATE_RANGE_TYPE,
   CHANGE_PERIOD,
@@ -32,7 +32,7 @@ import {
 import { initState } from './initState'
 
 /**
- * Use Timesheet reducer
+ * Use Timesheet reducer.
  */
 export function useTimesheetReducer() {
   const { t } = useTranslation()
@@ -40,25 +40,25 @@ export function useTimesheetReducer() {
   const initialState = useMemo(() => initState(url), [])
   return useReduxReducer(initialState, (builder) =>
     builder
-      .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.loading = payload.query.loading && {
+      .addCase(DATA_UPDATED, (state, { payload: query }) => {
+        state.loading = query.loading && {
           text: t('timesheet.loadingTimesheetText'),
           iconName: 'HourGlassHalf'
         }
-        if (payload.query.data) {
-          state.periods = payload.query.data.periods.map(
+        if (query.data) {
+          state.periods = query.data.periods.map(
             (period: TimesheetPeriodObject) =>
               new TimesheetPeriod().initialize(period)
           )
           const lastNav = _.last(state.navHistory)
           state.selectedPeriod =
-            _.find(state.periods, (p) => p.id === state.selectedPeriod?.id) ??
-            _.find(state.periods, (p) => p.startDate === url.startDate) ??
+            _.find(state.periods, ({ id }) => id === state.selectedPeriod?.id) ??
+            _.find(state.periods, ({ startDate }) => startDate === url.startDate) ??
             (lastNav === 'PREVIOUS_PERIOD'
               ? _.last(state.periods)
               : _.first(state.periods))
         }
-        state.error = payload.query.error
+        state.error = query.error
       })
       .addCase(SET_DATE_RANGE, (state, { payload }) => {
         state.dateRange =
@@ -67,20 +67,20 @@ export function useTimesheetReducer() {
       .addCase(SUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-              text: t('timesheet.forecastingPeriodLabel')
-            }
+            text: t('timesheet.forecastingPeriodLabel')
+          }
           : {
-              text: t('timesheet.confirmingPeriodLabel')
-            }
+            text: t('timesheet.confirmingPeriodLabel')
+          }
       })
       .addCase(UNSUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-              text: t('timesheet.unforecastingPeriodLabel')
-            }
+            text: t('timesheet.unforecastingPeriodLabel')
+          }
           : {
-              text: t('timesheet.unconfirmingPeriodLabel')
-            }
+            text: t('timesheet.unconfirmingPeriodLabel')
+          }
       })
       .addCase(CHANGE_PERIOD, (state, { payload }) => {
         state.selectedPeriod = _.find(

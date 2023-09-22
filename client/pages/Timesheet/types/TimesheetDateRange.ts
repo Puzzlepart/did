@@ -1,7 +1,7 @@
 import { DateRangeType } from '@fluentui/react'
 import DateUtils, { DateInput, DateObject } from 'DateUtils'
 import { TimesheetQuery } from 'types'
-import { capitalize } from 'underscore.string'
+import s from 'underscore.string'
 
 /**
  * Handles a date range, the period of time between
@@ -117,7 +117,7 @@ export class TimesheetDateRange {
         })
       }
       case DateRangeType.Month: {
-        return capitalize(this.startDate.format('MMMM'))
+        return s.capitalize(this.startDate.format('MMMM'))
       }
     }
   }

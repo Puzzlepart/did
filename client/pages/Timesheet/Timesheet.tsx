@@ -10,7 +10,7 @@ import { useTimesheet } from './hooks'
 import { useHotkeys } from './hotkeys/useHotkeys'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { StatusBar } from './StatusBar'
-import { TimesheetContext } from './types'
+import { TimesheetContext } from './context'
 import { useViews, View } from './Views'
 
 /**

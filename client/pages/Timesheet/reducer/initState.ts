@@ -1,9 +1,9 @@
 import { DateRangeType } from '@fluentui/react'
 import {
-  ITimesheetParameters,
-  ITimesheetState,
   TimesheetDateRange
 } from '../types'
+import { ITimesheetParameters } from '../types/ITimesheetParameters'
+import { ITimesheetState } from '../types/ITimesheetState'
 import { Overview } from '../Views/Overview'
 
 /**

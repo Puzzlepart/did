@@ -14,8 +14,9 @@ import {
 import React, { FC } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { useTimesheetContext } from '../../context'
 import { SET_DATE_RANGE } from '../../reducer/actions'
-import { TimesheetDateRange, useTimesheetContext } from '../../types'
+import { TimesheetDateRange } from '../../types'
 import { useDateRangePicker } from './useDateRangePicker'
 
 /**
