@@ -60,7 +60,6 @@ All are built using React Function components and Hooks.
 
 ### Timesheet Interfaces
 
-- [ITimesheetContext](../interfaces/pages.itimesheetcontext.md)
 - [ITimesheetParameters](../interfaces/pages.itimesheetparameters.md)
 - [ITimesheetState](../interfaces/pages.itimesheetstate.md)
 
@@ -107,10 +106,6 @@ All are built using React Function components and Hooks.
 - [ReportsContext](pages.md#reportscontext)
 - [SaveFilterForm](pages.md#savefilterform)
 
-### Timesheet Variables
-
-- [TimesheetContext](pages.md#timesheetcontext)
-
 ### Other Functions
 
 - [useMenuItems](pages.md#usemenuitems)
@@ -131,10 +126,6 @@ All are built using React Function components and Hooks.
 
 - [useReportsQuery](pages.md#usereportsquery)
 - [useReportsReducer](pages.md#usereportsreducer)
-
-### Timesheet Functions
-
-- [useTimesheetContext](pages.md#usetimesheetcontext)
 
 ### Timesheet Hooks Functions
 
@@ -391,16 +382,6 @@ ___
 
 Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L14)
 
-___
-
-## Timesheet Variables
-
-### TimesheetContext
-
-• `Const` **TimesheetContext**: *Context*<[*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)\>
-
-Defined in: [client/pages/Timesheet/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L30)
-
 ## Other Functions
 
 ### useMenuItems
@@ -636,23 +617,6 @@ Defined in: [client/pages/Reports/reducer/useReportsReducer.ts:17](https://githu
 
 ___
 
-## Timesheet Functions
-
-### useTimesheetContext
-
-▸ `Const`**useTimesheetContext**(): [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)
-
-Returns the current context value for Timesheet using
-`useContext` from `react`
-
-**Returns:** [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)
-
-`TimesheetContext`
-
-Defined in: [client/pages/Timesheet/context.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L40)
-
-___
-
 ## Timesheet Hooks Functions
 
 ### useSubmitActions
@@ -694,7 +658,7 @@ and dispatching actions
 
 Name | Type |
 :------ | :------ |
-`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) |
+`context` | *ITimesheetContext* |
 `dispatch` | *Dispatch*<AnyAction\> |
 `onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
 `onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |

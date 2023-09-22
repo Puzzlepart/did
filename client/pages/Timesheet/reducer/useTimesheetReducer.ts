@@ -4,12 +4,9 @@ import { useReduxReducer as useReducer } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import _ from 'underscore'
 import { TimesheetPeriodObject } from 'types'
-import {
-  TimesheetDateRange,
-  TimesheetPeriod
-} from '../types'
+import _ from 'underscore'
+import { TimesheetDateRange, TimesheetPeriod } from '../types'
 import { ITimesheetParameters } from '../types/ITimesheetParameters'
 import {
   CHANGE_DATE_RANGE_TYPE,
@@ -52,8 +49,14 @@ export function useTimesheetReducer() {
           )
           const lastNav = _.last(state.navHistory)
           state.selectedPeriod =
-            _.find(state.periods, ({ id }) => id === state.selectedPeriod?.id) ??
-            _.find(state.periods, ({ startDate }) => startDate === url.startDate) ??
+            _.find(
+              state.periods,
+              ({ id }) => id === state.selectedPeriod?.id
+            ) ??
+            _.find(
+              state.periods,
+              ({ startDate }) => startDate === url.startDate
+            ) ??
             (lastNav === 'PREVIOUS_PERIOD'
               ? _.last(state.periods)
               : _.first(state.periods))
@@ -67,20 +70,20 @@ export function useTimesheetReducer() {
       .addCase(SUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-            text: t('timesheet.forecastingPeriodLabel')
-          }
+              text: t('timesheet.forecastingPeriodLabel')
+            }
           : {
-            text: t('timesheet.confirmingPeriodLabel')
-          }
+              text: t('timesheet.confirmingPeriodLabel')
+            }
       })
       .addCase(UNSUBMITTING_PERIOD, (state, { payload }) => {
         state.loading = payload.forecast
           ? {
-            text: t('timesheet.unforecastingPeriodLabel')
-          }
+              text: t('timesheet.unforecastingPeriodLabel')
+            }
           : {
-            text: t('timesheet.unconfirmingPeriodLabel')
-          }
+              text: t('timesheet.unconfirmingPeriodLabel')
+            }
       })
       .addCase(CHANGE_PERIOD, (state, { payload }) => {
         state.selectedPeriod = _.find(

@@ -1,7 +1,5 @@
 import { DateRangeType } from '@fluentui/react'
-import {
-  TimesheetDateRange
-} from '../types'
+import { TimesheetDateRange } from '../types'
 import { ITimesheetParameters } from '../types/ITimesheetParameters'
 import { ITimesheetState } from '../types/ITimesheetState'
 import { Overview } from '../Views/Overview'

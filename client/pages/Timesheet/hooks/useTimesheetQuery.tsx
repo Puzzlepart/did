@@ -34,7 +34,7 @@ export function useTimesheetQuery(
     fetchPolicy: 'cache-and-network',
     errorPolicy: 'all'
   })
-  
+
   useEffect(() => dispatch(DATA_UPDATED(query)), [query])
 
   return query.refetch

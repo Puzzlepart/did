@@ -5,12 +5,12 @@ import { HotkeyModal } from 'components/HotkeyModal'
 import React, { FC } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { ActionBar } from './ActionBar'
+import { TimesheetContext } from './context'
 import { ErrorBar } from './ErrorBar'
 import { useTimesheet } from './hooks'
 import { useHotkeys } from './hotkeys/useHotkeys'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { StatusBar } from './StatusBar'
-import { TimesheetContext } from './context'
 import { useViews, View } from './Views'
 
 /**
