@@ -17,8 +17,10 @@
 - [actions](components.iusermessageprops.md#actions)
 - [fixedHeight](components.iusermessageprops.md#fixedheight)
 - [headerText](components.iusermessageprops.md#headertext)
+- [iconName](components.iusermessageprops.md#iconname)
 - [onClick](components.iusermessageprops.md#onclick)
 - [openActionsOnHover](components.iusermessageprops.md#openactionsonhover)
+- [renderProgress](components.iusermessageprops.md#renderprogress)
 - [text](components.iusermessageprops.md#text)
 
 ## Properties
@@ -50,6 +52,16 @@ ___
 Header text to show in **bold** _slightly larger_ font
 
 Defined in: [client/components/UserMessage/types.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L28)
+
+___
+
+### iconName
+
+• `Optional` **iconName**: *Lightbulb* \| *ListBar* \| *ContentSettings* \| *BuildingSkyscraper* \| *Home* \| *ContentView* \| *Eye* \| *NoteEdit* \| *LinkEdit* \| *Edit* \| *TableCellEdit* \| *PersonEdit* \| *TextBulletListSquareEdit* \| *Dismiss* \| *TagMultiple* \| *KeyMultiple* \| *Umbrella* \| *Person* \| *PersonProhibited* \| *SelectAllOff* \| *WeatherSunnyLow* \| *Cloud* \| *Timeline* \| *Collections* \| *Info* \| *CalendarPlay* \| *CalendarClock* \| *Emoji* \| *Alert* \| *ArrowExportUp* \| *DrinkMargarita* \| *EditSettings* \| *DocumentDatabase* \| *Key* \| *StoreMicrosoft* \| *ArrowSortUp* \| *Checkmark* \| *ArrowImport* \| *PeopleAdd* \| *PersonSync* \| *AddCircle* \| *CalendarWeekNumbers* \| *ArrowCircleLeft* \| *ArrowCircleRight* \| *CalendarCancel* \| *CalendarMonth* \| *CalendarSync* \| *CalendarToday* \| *CalendarWorkWeek* \| *CheckmarkCircle* \| *Timer* \| *PeopleTeam* \| *Timer2* \| *PeopleEdit* \| *Delete* \| *ArrowUndo* \| *FastForward* \| *TableEdit* \| *WebAsset* \| *System* \| *SignOut* \| *CalendarAdd* \| *BinRecycle* \| *DeleteDismiss* \| *ArrowSync* \| *HourGlassHalf*
+
+The name of the Fluent UI icon to display for the message (optional).
+
+Defined in: [client/components/UserMessage/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L65)
 
 ___
 
@@ -86,6 +98,16 @@ ___
 Whether to open the actions menu on hover
 
 Defined in: [client/components/UserMessage/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L55)
+
+___
+
+### renderProgress
+
+• `Optional` **renderProgress**: *boolean*
+
+Whether to render a progress bar in the message
+
+Defined in: [client/components/UserMessage/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L60)
 
 ___
 

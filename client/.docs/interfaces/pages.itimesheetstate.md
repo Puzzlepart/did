@@ -63,9 +63,9 @@ ___
 
 ### loading
 
-• `Optional` **loading**: *IProgressProps*
+• `Optional` **loading**: [*IUserMessageProps*](components.iusermessageprops.md)
 
-Loading props
+Loading props for the `<UserMessage />` component
 
 Defined in: [client/pages/Timesheet/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L40)
 
