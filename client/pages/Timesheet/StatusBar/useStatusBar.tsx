@@ -74,7 +74,7 @@ export function useStatusBar() {
           hours: $date.getDurationString(state.selectedPeriod.totalDuration, t),
           splitWeekInfoText:
             state.periods.length > 1 &&
-            state.dateRangeType === DateRangeType.Week
+              state.dateRangeType === DateRangeType.Week
               ? t('timesheet.splitWeekInfoText')
               : ''
         })
@@ -89,14 +89,12 @@ export function useStatusBar() {
             t
           )
         }),
-        actions: [
-          {
-            text: t('timesheet.ignoreAllText'),
-            onClick: () => dispatch(IGNORE_ALL()),
-            iconName: 'CalendarCancel',
-            iconColor: 'var(--colorPaletteRedForeground1)'
-          }
-        ],
+        action: {
+          text: t('timesheet.ignoreAllTooltip'),
+          onClick: () => dispatch(IGNORE_ALL()),
+          iconName: 'CalendarCancel',
+          iconColor: 'var(--colorPaletteRedForeground1)'
+        },
         intent: 'warning'
       })
     }
@@ -142,13 +140,11 @@ export function useStatusBar() {
         text: t('timesheet.ignoredEventsText', {
           ignored_count: state.selectedPeriod.ignoredEvents.length
         }),
-        actions: [
-          {
-            text: t('timesheet.undoIgnoreText'),
-            onClick: () => dispatch(CLEAR_IGNORES()),
-            iconName: 'ArrowUndo',
-          }
-        ],
+        action: {
+          text: t('timesheet.undoIgnoreTooltip'),
+          onClick: () => dispatch(CLEAR_IGNORES()),
+          iconName: 'ArrowUndo',
+        },
         intent: 'warning'
       })
     }

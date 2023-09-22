@@ -16,7 +16,7 @@ export interface IUserMessageAction extends Pick<
 /**
  * @category UserMessage
  */
-export interface IUserMessageProps extends AlertProps {
+export interface IUserMessageProps extends Omit<AlertProps, 'action'> {
   /**
    * Header text to show in **bold** _slightly larger_ font
    */
@@ -40,9 +40,9 @@ export interface IUserMessageProps extends AlertProps {
   fixedHeight?: number
 
   /**
-   * Actions to show in a menu
+   * Action to show in a menu
    */
-  actions?: IUserMessageAction[]
+  action?: IUserMessageAction
 
   /**
    * Whether to render a progress bar in the message

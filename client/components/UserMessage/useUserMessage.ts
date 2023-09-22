@@ -1,7 +1,6 @@
 import { HTMLAttributes } from 'react'
 import { UserMessage } from '.'
 import { IUserMessageProps } from './types'
-import styles from './UserMessage.module.scss'
 import { useUserMessageStyles } from './useUserMessageStyles'
 
 /**
@@ -11,18 +10,20 @@ import { useUserMessageStyles } from './useUserMessageStyles'
  */
 export function useUserMessage(props: IUserMessageProps) {
   const alertStyle = useUserMessageStyles(props.intent)
-  const hasContextMenu = props.actions?.length > 0
   const containerProps: HTMLAttributes<HTMLDivElement> = {
     id: props.id,
     hidden: props.hidden,
     onClick: props.onClick,
+    style: {
+      cursor: props.onClick ? 'pointer' : 'default',
+    },
     className: [
       UserMessage.className,
-      props.className,
-      hasContextMenu && styles.hasContextMenu
+      props.className
     ]
       .filter(Boolean)
       .join(' ')
   }
+
   return { containerProps, alertStyle }
 }

@@ -65,23 +65,15 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
         <UserMessage
           intent='warning'
           text={t('timesheet.noProjectMatchFoundText')}
-          actions={[
-            {
-              text: t('timesheet.resolveProjectButtonLabel'),
-              iconName: 'AddCircle',
-              onClick: () => {
-                dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))
-              }
-            },
-            {
-              text: t('timesheet.ignoreEventButtonLabel'),
-              iconName: 'CalendarCancel',
-              iconColor: 'var(--colorPaletteRedForeground1)',
-              onClick: () => {
-                dispatch(IGNORE_EVENT({ id: event.id }))
-              }
+          onClick={() => dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))}
+          action={{
+            text: t('timesheet.ignoreEventActionTooltip', event),
+            iconName: 'CalendarCancel',
+            iconColor: 'var(--colorPaletteRedForeground1)',
+            onClick: () => {
+              dispatch(IGNORE_EVENT({ id: event.id }))
             }
-          ]}
+          }}
         />
       </div>
     )
