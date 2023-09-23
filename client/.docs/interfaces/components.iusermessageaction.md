@@ -8,7 +8,7 @@ Represents an action that can be performed on a user message.
 
 ## Hierarchy
 
-* *Omit*<MenuItemProps, *icon*\>
+* *Pick*<[*IDynamicButtonProps*](components.idynamicbuttonprops.md), *text* \| *iconName* \| *disabled* \| *onClick*\>
 
   ↳ **IUserMessageAction**
 
@@ -18,6 +18,7 @@ Represents an action that can be performed on a user message.
 
 - [iconColor](components.iusermessageaction.md#iconcolor)
 - [iconName](components.iusermessageaction.md#iconname)
+- [text](components.iusermessageaction.md#text)
 
 ## Properties
 
@@ -25,16 +26,29 @@ Represents an action that can be performed on a user message.
 
 • `Optional` **iconColor**: *string*
 
-The color of the icon to display for the action (optional).
-
-Defined in: [client/components/UserMessage/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L18)
+Defined in: [client/components/UserMessage/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L14)
 
 ___
 
 ### iconName
 
-• `Optional` **iconName**: *Lightbulb* \| *ListBar* \| *ContentSettings* \| *BuildingSkyscraper* \| *Home* \| *ContentView* \| *Eye* \| *NoteEdit* \| *LinkEdit* \| *Edit* \| *TableCellEdit* \| *PersonEdit* \| *TextBulletListSquareEdit* \| *Dismiss* \| *TagMultiple* \| *KeyMultiple* \| *Umbrella* \| *Person* \| *PersonProhibited* \| *SelectAllOff* \| *WeatherSunnyLow* \| *Cloud* \| *Timeline* \| *Collections* \| *Info* \| *CalendarPlay* \| *CalendarClock* \| *Emoji* \| *Alert* \| *ArrowExportUp* \| *DrinkMargarita* \| *EditSettings* \| *DocumentDatabase* \| *Key* \| *StoreMicrosoft* \| *ArrowSortUp* \| *Checkmark* \| *ArrowImport* \| *PeopleAdd* \| *PersonSync* \| *AddCircle* \| *CalendarWeekNumbers* \| *ArrowCircleLeft* \| *ArrowCircleRight* \| *CalendarCancel* \| *CalendarMonth* \| *CalendarSync* \| *CalendarToday* \| *CalendarWorkWeek* \| *CheckmarkCircle* \| *Timer* \| *PeopleTeam* \| *Timer2* \| *PeopleEdit* \| *Delete* \| *ArrowUndo* \| *FastForward* \| *TableEdit* \| *WebAsset* \| *System* \| *SignOut* \| *CalendarAdd* \| *BinRecycle* \| *DeleteDismiss* \| *ArrowSync* \| *HourGlassHalf*
+• `Optional` **iconName**: *TagQuestionMark* \| *Lightbulb* \| *ListBar* \| *ContentSettings* \| *BuildingSkyscraper* \| *Home* \| *ContentView* \| *Eye* \| *NoteEdit* \| *LinkEdit* \| *Edit* \| *TableCellEdit* \| *PersonEdit* \| *TextBulletListSquareEdit* \| *Dismiss* \| *TagMultiple* \| *KeyMultiple* \| *Umbrella* \| *Person* \| *PersonProhibited* \| *SelectAllOff* \| *WeatherSunnyLow* \| *Cloud* \| *Timeline* \| *Collections* \| *Info* \| *CalendarPlay* \| *CalendarClock* \| *Emoji* \| *Alert* \| *ArrowExportUp* \| *DrinkMargarita* \| *EditSettings* \| *DocumentDatabase* \| *Key* \| *StoreMicrosoft* \| *ArrowSortUp* \| *Checkmark* \| *ArrowImport* \| *PeopleAdd* \| *PersonSync* \| *AddCircle* \| *CalendarWeekNumbers* \| *ArrowCircleLeft* \| *ArrowCircleRight* \| *CalendarCancel* \| *CalendarMonth* \| *CalendarSync* \| *CalendarToday* \| *CalendarWorkWeek* \| *CheckmarkCircle* \| *Timer* \| *PeopleTeam* \| *Timer2* \| *PeopleEdit* \| *Delete* \| *ArrowUndo* \| *FastForward* \| *TableEdit* \| *WebAsset* \| *System* \| *SignOut* \| *CalendarAdd* \| *BinRecycle* \| *DeleteDismiss* \| *ArrowSync* \| *HourGlassHalf*
 
-The name of the Fluent UI icon to display for the action (optional).
+Icon name to use for the button.
 
-Defined in: [client/components/UserMessage/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/types.tsx#L13)
+Inherited from: void
+
+Defined in: [client/components/DynamicButton/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/DynamicButton/types.ts#L16)
+
+___
+
+### text
+
+• `Optional` **text**: *string*
+
+Text to display on the button. This is not natively supported as a prop on
+the `Button` component from `@fluentui/react-components`.
+
+Inherited from: void
+
+Defined in: [client/components/DynamicButton/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/components/DynamicButton/types.ts#L22)

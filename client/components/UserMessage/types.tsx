@@ -1,27 +1,23 @@
-import { MenuItemProps } from '@fluentui/react-components'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { IDynamicButtonProps } from 'components/DynamicButton'
 import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
 import { FluentIconName } from 'utils'
 
 /**
  * Represents an action that can be performed on a user message.
  */
-export interface IUserMessageAction extends Omit<MenuItemProps, 'icon'> {
-  /**
-   * The name of the Fluent UI icon to display for the action (optional).
-   */
-  iconName?: FluentIconName
-
-  /**
-   * The color of the icon to display for the action (optional).
-   */
+export interface IUserMessageAction
+  extends Pick<
+    IDynamicButtonProps,
+    'text' | 'iconName' | 'disabled' | 'onClick'
+  > {
   iconColor?: string
 }
 
 /**
  * @category UserMessage
  */
-export interface IUserMessageProps extends AlertProps {
+export interface IUserMessageProps extends Omit<AlertProps, 'action'> {
   /**
    * Header text to show in **bold** _slightly larger_ font
    */
@@ -45,14 +41,9 @@ export interface IUserMessageProps extends AlertProps {
   fixedHeight?: number
 
   /**
-   * Actions to show in a menu
+   * Action to show in a menu
    */
-  actions?: IUserMessageAction[]
-
-  /**
-   * Whether to open the actions menu on hover
-   */
-  openActionsOnHover?: boolean
+  action?: IUserMessageAction
 
   /**
    * Whether to render a progress bar in the message

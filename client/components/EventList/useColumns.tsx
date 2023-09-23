@@ -88,9 +88,9 @@ const createDurationColumnDef = (
 
 /**
  * Hook that returns the columns for the `EventList` component.
- * 
+ *
  * @param props Props for the `EventList` component
- * 
+ *
  * @category EventList
  */
 export function useColumns(props: IEventListProps) {

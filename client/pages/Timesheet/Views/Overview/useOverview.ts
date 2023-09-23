@@ -7,7 +7,7 @@ import { isBrowser } from 'react-device-detect'
 
 /**
  * Custom hook that returns an object containing additionalColumns andlistGroupProps, and className.
- * `listGroupProps` is an object containing props for the list group component. `additionalColumns` is 
+ * `listGroupProps` is an object containing props for the list group component. `additionalColumns` is
  * an array of objects containing props for the additional columns.
  *
  * @returns An object containing additionalColumns, listGroupProps, and className.

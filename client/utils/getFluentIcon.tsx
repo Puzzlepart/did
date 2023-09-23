@@ -119,6 +119,8 @@ import {
   TableEdit24Regular,
   TagMultiple24Filled,
   TagMultiple24Regular,
+  TagQuestionMarkFilled,
+  TagQuestionMarkRegular,
   TextBulletListSquareEdit24Filled,
   TextBulletListSquareEdit24Regular,
   Timeline24Filled,
@@ -140,6 +142,10 @@ import React, { CSSProperties } from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  TagQuestionMark: {
+    regular: TagQuestionMarkRegular,
+    filled: TagQuestionMarkFilled
+  },
   Lightbulb: {
     regular: Lightbulb24Regular,
     filled: Lightbulb24Filled

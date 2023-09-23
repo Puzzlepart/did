@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prefer-ternary */
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType, Pivot, PivotItem } from '@fluentui/react'
 import { mergeClasses } from '@fluentui/react-components'
 import { EventList } from 'components'
 import { Tabs } from 'components/Tabs'
@@ -61,7 +61,9 @@ export const Overview: TimesheetViewComponent = () => {
     }
   }
   return (
-    <div className={mergeClasses(Overview.className, isMobile && styles.mobile)}>
+    <div
+      className={mergeClasses(Overview.className, isMobile && styles.mobile)}
+    >
       {element}
       <MatchEventPanel />
     </div>

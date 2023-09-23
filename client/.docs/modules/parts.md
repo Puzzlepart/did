@@ -123,7 +123,7 @@ ___
 
 • `Const` **UserMenu**: StyledComponent
 
-Defined in: [client/parts/UserMenu/UserMenu.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/UserMenu.tsx#L24)
+Defined in: [client/parts/UserMenu/UserMenu.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserMenu/UserMenu.tsx#L21)
 
 ___
 
