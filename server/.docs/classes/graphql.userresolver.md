@@ -48,7 +48,7 @@ Name | Type | Description |
 
 **Returns:** [*UserResolver*](graphql.userresolver.md)
 
-Defined in: [graphql/resolvers/user/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L42)
+Defined in: [graphql/resolvers/user/UserResolver.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L42)
 
 ## Methods
 
@@ -60,7 +60,7 @@ Get Active Directory users
 
 **Returns:** *Promise*<[*ActiveDirectoryUser*](graphql.activedirectoryuser.md)[]\>
 
-Defined in: [graphql/resolvers/user/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L89)
+Defined in: [graphql/resolvers/user/UserResolver.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L91)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 ▸ **addOrUpdateUser**(`user`: [*UserInput*](graphql.userinput.md), `update`: *boolean*): *Promise*<BaseResult\>
 
-Add or update user
+Add or update user in the system.
 
 #### Parameters:
 
@@ -79,7 +79,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L114)
+Defined in: [graphql/resolvers/user/UserResolver.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L116)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 ▸ **addUsers**(`users`: [*UserInput*](graphql.userinput.md)[]): *Promise*<BaseResult\>
 
-Add users
+Add users to the system.
 
 #### Parameters:
 
@@ -97,7 +97,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L136)
+Defined in: [graphql/resolvers/user/UserResolver.ts:138](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L138)
 
 ___
 
@@ -105,11 +105,11 @@ ___
 
 ▸ **authProviders**(): *string*[]
 
-Get auth providers
+Get auth providers available in the environment.
 
 **Returns:** *string*[]
 
-Defined in: [graphql/resolvers/user/index.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L60)
+Defined in: [graphql/resolvers/user/UserResolver.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L60)
 
 ___
 
@@ -117,7 +117,9 @@ ___
 
 ▸ **currentUser**(`context`: *Context*): *Promise*<[*User*](graphql.user.md)\>
 
-Get current user
+Get current user, aswell as `id`, `name` and `owner` of
+the current subscription. If the user is not logged in,
+`null` is returned.
 
 #### Parameters:
 
@@ -127,7 +129,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
-Defined in: [graphql/resolvers/user/index.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L73)
+Defined in: [graphql/resolvers/user/UserResolver.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L75)
 
 ___
 
@@ -145,7 +147,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*UserFeedbackResult*](graphql.userfeedbackresult.md)\>
 
-Defined in: [graphql/resolvers/user/index.ts:184](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L184)
+Defined in: [graphql/resolvers/user/UserResolver.ts:186](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L186)
 
 ___
 
@@ -153,7 +155,7 @@ ___
 
 ▸ **updateUserConfiguration**(`user`: *string*, `lastActive?`: *string*): *Promise*<BaseResult\>
 
-Update user configuration
+Update user configuration for the current user.
 
 #### Parameters:
 
@@ -164,7 +166,7 @@ Name | Type |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:170](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L170)
+Defined in: [graphql/resolvers/user/UserResolver.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L172)
 
 ___
 
@@ -172,7 +174,7 @@ ___
 
 ▸ **updateUsers**(`users`: [*UserInput*](graphql.userinput.md)[]): *Promise*<BaseResult\>
 
-Update users
+Update users in the system.
 
 #### Parameters:
 
@@ -182,7 +184,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/user/index.ts:154](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L154)
+Defined in: [graphql/resolvers/user/UserResolver.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L156)
 
 ___
 
@@ -190,7 +192,7 @@ ___
 
 ▸ **users**(`query`: [*UserQuery*](graphql.userquery.md)): *Promise*<[*User*](graphql.user.md)[]\>
 
-Get users
+Get users in the system.
 
 #### Parameters:
 
@@ -200,4 +202,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [graphql/resolvers/user/index.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L100)
+Defined in: [graphql/resolvers/user/UserResolver.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/UserResolver.ts#L102)
