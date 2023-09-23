@@ -27,6 +27,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'id',
             'placeholder',
             'value',
+            'defaultValue',
             'onChange',
             'disabled',
             'maxLength',
@@ -43,10 +44,12 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'placeholder',
             'type',
             'value',
+            'defaultValue',
             'onChange',
             'disabled',
             'maxLength',
-            'onBlur'
+            'onBlur',
+            'contentAfter'
           )}
         />
       )}

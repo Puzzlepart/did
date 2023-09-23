@@ -183,17 +183,6 @@
   "resolutions": {
     "@babel/preset-env": "7.13.12"
   },
-  "config": {
-    "app": {
-      "CUSTOMER_KEY_MIN_LENGTH": 3,
-      "CUSTOMER_KEY_MAX_LENGTH": 12,
-      "CUSTOMER_NAME_MIN_LENGTH": 2,
-      "BROWSER_STORAGE_KEY_PREFIX": "did",
-      "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month",
-      "TIMESHEET_OVERVIEW_DAY_FORMAT": "dddd DD",
-      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm"
-    }
-  },
   "contributors": [
     {
       "name": "Carl Joakim Damsleth",

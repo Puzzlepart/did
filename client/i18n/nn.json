@@ -133,7 +133,8 @@
     "iconEasterEgg": "Ein paraply? Verkeleg? Greitt, du burde få lov sidan du er så flink til å gjera jobben din.",
     "descriptionWarning": "Me tilrår å inkludera ei rask oppsummering av kunden. Dette vil gi ei kortfatta oversikt og hjelpa andre raskt å forstå essensen til kunden.",
     "keyNotUniqueError": "Kundenøkkelen {{key}} er allerede i bruk av kunden {{name}}.",
-    "nameNotUniqueError": "Det ser ut til at det allerede er en kunde med samme navn."
+    "nameNotUniqueError": "Det ser ut til at det allerede er en kunde med samme navn.",
+    "noLabelsSelectedText": "Legg til merkelapper på kunden for kategorisering."
   },
   "admin": {
     "apiTokens": {
@@ -283,7 +284,12 @@
     },
     "deleteRole": "Slett rolle",
     "permissionsRequired": "Du må gi minst eitt løyve for rolla. Ingen vits i å ha ei rolle viss du ikkje kan gjera noko med ho? Det er liksom litt som å ha ein jobb utan oppgåver.",
-    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori."
+    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
+    "timesheet": "Timeliste",
+    "timesheetDayFormatLabel": "Datoformat for dager i timelisten",
+    "timesheetDayFormatDescription": "Velg datoformat for dagene i timelisten. Dette er formatet som brukes i grupperingen av timer i timelisten. Eksempel: dddd DD. Se forhåndsvisning til høyre.",
+    "timesheetTimeFormatLabel": "Format for tid",
+    "timesheetTimeFormatDescription": "Velg format for tid. Brukes i timelisten. Eksempel: HH:mm. Se forhåndsvisning til høyre."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

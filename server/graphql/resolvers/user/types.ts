@@ -2,7 +2,7 @@
 import { GraphQLDateTime } from 'graphql-scalars'
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { Subscription } from '../subscription/types'
+import { Subscription } from '../subscription/types/Subscription'
 import { BaseResult, Role } from '../types'
 
 /**

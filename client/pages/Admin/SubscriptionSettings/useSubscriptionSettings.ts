@@ -14,7 +14,9 @@ import $updateSubscription from './updateSubscription.gql'
 import { useSubscriptionConfig } from './useSubscriptionConfig'
 
 /**
- * @ignore
+ * Component logic hook for the subscription settings component.
+ * 
+ * @category SubscriptionSettings
  */
 export function useSubscriptionSettings() {
   const { t } = useTranslation()

@@ -1,5 +1,6 @@
 import { CheckboxProps, SliderProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
+import { DateObject } from 'DateUtils'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'
@@ -8,7 +9,7 @@ import { SubscriptionSettingField } from './types'
 /**
  * Subscription config hook
  *
- * @ignore
+ * @category SubscriptionSettings
  */
 export function useSubscriptionConfig() {
   const { subscription } = useAppContext()
@@ -40,6 +41,33 @@ export function useSubscriptionConfig() {
       ]
     },
     {
+      id: 'timesheet',
+      icon: 'Timeline',
+      text: t('admin.timesheet'),
+      fields: [
+        {
+          id: 'dayFormat',
+          type: 'text',
+          props: {
+            label: t('admin.timesheetDayFormatLabel'),
+            description: t('admin.timesheetDayFormatDescription'),
+            defaultValue: 'dddd DD',
+            getContentAfter: (value: string) => new DateObject().format(value)
+          }
+        },
+        {
+          id: 'timeFormat',
+          type: 'text',
+          props: {
+            label: t('admin.timesheetTimeFormatLabel'),
+            description: t('admin.timesheetTimeFormatDescription'),
+            defaultValue: 'HH:mm',
+            getContentAfter: (value: string) => new DateObject().format(value)
+          }
+        }
+      ]
+    },
+    {
       id: 'adsync',
       icon: 'PersonSync',
       text: t('admin.adsync'),
@@ -54,7 +82,7 @@ export function useSubscriptionConfig() {
         } as SubscriptionSettingField<CheckboxProps>,
         {
           id: 'properties',
-          type: 'checkbox',
+          type: 'checkboxmulti',
           options: {
             givenName: t('common.givenNameLabel'),
             surname: t('common.surnameLabel'),

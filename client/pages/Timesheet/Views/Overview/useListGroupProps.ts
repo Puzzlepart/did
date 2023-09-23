@@ -1,5 +1,5 @@
+import { useAppContext } from 'AppContext'
 import $date, { DateObject } from 'DateUtils'
-import packageFile from 'package'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
@@ -12,12 +12,13 @@ import { useTimesheetContext } from '../../context'
  */
 export function useListGroupProps() {
   const { t } = useTranslation()
+  const {subscription} = useAppContext()
   const { state } = useTimesheetContext()
   return useMemo<IListGroupProps<EventObject>>(
     () => ({
       fieldName: 'date',
       groupNames: state.selectedPeriod?.weekdays<string>(
-        packageFile.config.app.TIMESHEET_OVERVIEW_DAY_FORMAT
+       subscription?.settings?.timesheet?.dayFormat
       ),
       groupData: state.selectedPeriod
         ?.weekdays<DateObject>('DateObject')

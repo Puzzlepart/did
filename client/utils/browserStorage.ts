@@ -1,4 +1,3 @@
-import packageFile from 'package'
 import { tryParseJson } from './tryParseJson'
 
 /**
@@ -11,7 +10,7 @@ export class BrowserStorage<T = unknown> {
   private _key: string
 
   constructor(key: string, private _store = localStorage) {
-    this._key = `${packageFile.config.app.BROWSER_STORAGE_KEY_PREFIX}_${key}`
+    this._key = `did_${key}`
   }
 
   /**

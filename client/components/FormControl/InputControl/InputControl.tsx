@@ -3,7 +3,7 @@ import { FormControlContext } from '../context'
 import { FormInputControlComponent } from '../types'
 import { InputField } from './InputField'
 import { IInputControlProps } from './types'
-import { useInputControlChange } from './useInputControlChange'
+import { useInputControl } from './useInputControl'
 
 /**
  * Text field based on `<TextField />` from [@fluentui/react](@fluentui/react)
@@ -14,7 +14,7 @@ import { useInputControlChange } from './useInputControlChange'
 export const InputControl: FormInputControlComponent<IInputControlProps> = (
   props
 ) => {
-  const onChange = useInputControlChange(props)
+  const { onChange, value } = useInputControl(props)
   return (
     <FormControlContext.Consumer>
       {(context) => (
@@ -22,7 +22,7 @@ export const InputControl: FormInputControlComponent<IInputControlProps> = (
           {...props}
           onBlur={context.onBlurCallback}
           onChange={(event, data) => onChange(event, data.value)}
-          value={props.model?.value<string>(props.name, '')}
+          value={value}
         />
       )}
     </FormControlContext.Consumer>

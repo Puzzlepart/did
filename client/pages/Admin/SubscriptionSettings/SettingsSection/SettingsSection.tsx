@@ -1,87 +1,64 @@
-import { omit } from '@fluentui/react'
-import {
-  Checkbox,
-  Field,
-  Input,
-  Label,
-  useId
-} from '@fluentui/react-components'
-import { SubText } from 'components'
+import { CheckboxField, InputField } from 'components'
 import { TabComponent } from 'components/Tabs'
-import get from 'get-value'
-import React, { useContext } from 'react'
-import { SubscriptionContext } from '../context'
-import { CheckboxField } from './CheckboxField'
+import React from 'react'
+import { MultiCheckboxField } from './MultiCheckboxField'
 import styles from './SettingsSection.module.scss'
-import { SliderField } from './SliderField'
 import { ISettingsSectionProps } from './types'
+import { useSettingsSection } from './useSettingsSection'
 
 /**
  * @category SubscriptionSettings
  */
 export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
-  const { settings, onChange } = useContext(SubscriptionContext)
-  const id = useId()
+  const { fields } = useSettingsSection(props)
   return (
     <div className={SettingsSection.className}>
-      {props.fields.map((field) => {
-        const fieldProps = { ...field.props } as any
-        fieldProps.disabled =
-          field.disabledIf && field.disabledIf(settings || {})
-        fieldProps.hidden = field.hiddenIf && field.hiddenIf(settings || {})
-        const key = `${props.id}.${field.id}`
-        let fieldElement: JSX.Element
+      {fields.map(({ field, fieldProps, settingsKey, onChange, getValueWithDefault }) => {
         switch (field.type) {
           case 'text': {
-            fieldElement = (
-              <Field>
-                <Label htmlFor={id} weight='semibold'>
-                  {fieldProps.label}
-                </Label>
-                <Input {...omit(fieldProps, ['description'])} />
-              </Field>
+            fieldProps.contentAfter = fieldProps.getContentAfter
+              ? fieldProps.getContentAfter(getValueWithDefault(fieldProps.defaultValue ?? null))
+              : fieldProps.contentAfter
+            return (
+              <InputField
+                {...fieldProps}
+                key={settingsKey}
+                value={getValueWithDefault(fieldProps.defaultValue ?? null)}
+                onChange={(_event, data) => onChange(data.value)}
+              />
             )
-            break
           }
           case 'bool': {
-            fieldElement = (
-              <Checkbox
+            return (
+              <CheckboxField
                 {...fieldProps}
-                defaultChecked={get(settings, key, { default: false })}
-                inlineLabel={true}
-                onChange={(_event, data) => onChange(key, data.checked)}
+                key={settingsKey}
+                checked={getValueWithDefault(false)}
+                onChange={(_event, data) => onChange(data.checked)}
               />
             )
-            break
           }
           case 'number': {
-            fieldElement = (
-              <SliderField
+            return (
+              <InputField
                 {...fieldProps}
-                onChange={(_event, data) => onChange(key, data.value)}
-                settingsKey={key}
+                key={settingsKey}
+                type='number'
+                value={getValueWithDefault(fieldProps.defaultValue ?? 0)}
+                onChange={(_event, data) => onChange(data.value)}
               />
             )
-            break
           }
-          case 'checkbox': {
-            fieldElement = (
-              <CheckboxField {...field} settingsKey={key} settings={settings} />
+          case 'checkboxmulti': {
+            return (
+              <MultiCheckboxField
+                {...field}
+                key={settingsKey}
+                settingsKey={settingsKey}
+              />
             )
-            break
           }
         }
-        return (
-          <div
-            key={field.id}
-            style={{ width: '100%' }}
-            className={styles.inputField}
-            hidden={fieldProps.hidden}
-          >
-            {fieldElement}
-            <SubText text={fieldProps.description} />
-          </div>
-        )
       })}
     </div>
   )
@@ -89,3 +66,6 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
 
 SettingsSection.displayName = 'SettingsSection'
 SettingsSection.className = styles.settingsSection
+SettingsSection.defaultProps = {
+  fields: []
+}

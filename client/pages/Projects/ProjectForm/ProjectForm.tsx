@@ -8,7 +8,6 @@ import {
   LabelPickerControl
 } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
-import packageFile from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
@@ -49,7 +48,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
-        description={t('projects.keyFieldDescription', packageFile.config.app)}
+        description={t('projects.keyFieldDescription', { min: 2, max: 12 })}
         required={!props.edit}
       />
       <TagPreview hidden={!!props.edit} />

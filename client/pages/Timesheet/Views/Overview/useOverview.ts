@@ -1,5 +1,5 @@
+import { useAppContext } from 'AppContext'
 import { IEventListProps } from 'components'
-import packageFile from 'package'
 import { isBrowser } from 'react-device-detect'
 import { useTimesheetContext } from '../../context'
 import { useAdditionalColumns } from './useAdditionalColumns'
@@ -13,6 +13,7 @@ import { useListGroupProps } from './useListGroupProps'
  * @returns An object containing additionalColumns, listGroupProps, and className.
  */
 export function useOverview() {
+  const { subscription } = useAppContext()
   const { state } = useTimesheetContext()
   const additionalColumns = useAdditionalColumns()
   const listGroupProps = useListGroupProps()
@@ -21,7 +22,7 @@ export function useOverview() {
     enableShimmer: !!state.loading,
     hidden: !!state.error,
     items: [],
-    dateFormat: packageFile.config.app.TIMESHEET_OVERVIEW_TIME_FORMAT,
+    dateFormat: subscription?.settings?.timesheet?.timeFormat,
     listGroupProps,
     additionalColumns,
     useTimeColumn: isBrowser,
