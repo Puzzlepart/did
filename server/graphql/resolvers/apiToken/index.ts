@@ -34,7 +34,7 @@ export class ApiTokenResolver {
    *
    * @param ctx - GraphQL context
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   apiTokens(@Ctx() context: Context): Promise<ApiToken[]> {
     return this._apiToken.getTokens({
@@ -48,7 +48,7 @@ export class ApiTokenResolver {
    * @param token - Token
    * @param ctx - GraphQL context
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => String, { description: 'Add API token' })
   addApiToken(
     @Arg('token') token: ApiTokenInput,
@@ -63,7 +63,7 @@ export class ApiTokenResolver {
    * @param name - Name
    * @param ctx - GraphQL context
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(
     @Arg('name') name: string,

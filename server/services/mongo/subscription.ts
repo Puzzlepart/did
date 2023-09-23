@@ -12,6 +12,7 @@ import { MongoDocumentService } from './@document'
  * Subscription service
  *
  * @extends MongoDocumentService
+ * 
  * @category Injectable Container Service
  */
 @Service({ global: false })
@@ -68,7 +69,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @remarks Returns null if no subscription is found.
    *
    * @param idOrMail - User ID or mail
-   * @param provider - Provider
+   * @param provider - Provider name
    */
   public async getByExternalId(idOrMail: string, provider: string) {
     try {

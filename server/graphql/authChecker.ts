@@ -14,7 +14,7 @@ export interface IAuthOptions {
   /**
    * Requires user context and can cannot be called with an API token
    */
-  userContext?: boolean
+  requiresUserContext?: boolean
 
   /**
    * Permission scope required for the resolver
@@ -35,7 +35,7 @@ export const authChecker: AuthChecker<Context, IAuthOptions> = (
   if (!authOptions) {
     return !!context.permissions
   }
-  if (authOptions.userContext) {
+  if (authOptions.requiresUserContext) {
     return !!context.userId
   }
   if (authOptions.scope) {

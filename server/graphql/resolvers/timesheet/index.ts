@@ -40,7 +40,7 @@ export class TimesheetResolver {
    * @param query - Query
    * @param options - Options
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [TimesheetPeriodObject], {
     description: 'Get timesheet for startDate - endDate'
   })
@@ -65,7 +65,7 @@ export class TimesheetResolver {
    *
    * Total vacation days, used and remaining.
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => VacationSummary, {
     description:
       'Get vacation summary. Total vacation days, used and remaining.'
@@ -86,7 +86,7 @@ export class TimesheetResolver {
    * @param period - Period
    * @param options - Timesheet options (forecast, tzoffset etc)
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, {
     description:
       'Adds matched time entries for the specified period and an entry for the confirmed period'
@@ -115,7 +115,7 @@ export class TimesheetResolver {
    * @param period - Period
    * @param forecast - Forecast
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, {
     description:
       'Deletes time entries for the specified period and the entry for the confirmed period'

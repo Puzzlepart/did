@@ -28,7 +28,7 @@ export class OutlookCategoryResolver {
   /**
    * Get Outlook categories
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
   async outlookCategories() {
     const categories = await this._msgraph.getOutlookCategories()
@@ -40,7 +40,7 @@ export class OutlookCategoryResolver {
    *
    * @param category - Category
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => CreateOutlookCategoryResult, {
     description: 'Create Outlook category'
   })
