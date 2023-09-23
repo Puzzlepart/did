@@ -103,10 +103,9 @@ if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
   fi
 fi
 
-# Checks if revision.txt exists
-if [ -e "$DEPLOYMENT_TARGET/revision.txt" ]; then
-  CURRENT_REVISION=$(cat "$DEPLOYMENT_TARGET/revision.txt")
-  NEW_REVISION=$(cat "$DEPLOYMENT_SOURCE/revision.txt")
+# Checks if revision.txt exists in the $DEPLOYMENT_SOURCE folder
+if [ -e "$DEPLOYMENT_SOURCE/revision.txt" ]; then
+  CURRENT_REVISION=$(cat "$DEPLOYMENT_SOURCE/revision.txt")
 fi
 
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
@@ -124,6 +123,11 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   echo "Syncing files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
   rsync -a "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
   exitWithMessageOnError "Rsync failed to sync files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
+fi
+
+# Checks if revision.txt exists in the $DEPLOYMENT_TARGET folder
+if [ -e "$DEPLOYMENT_TARGET/revision.txt" ]; then
+  NEW_REVISION=$(cat "$DEPLOYMENT_TARGET/revision.txt")
 fi
 
 # 2. Select Node version
