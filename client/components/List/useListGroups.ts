@@ -13,14 +13,18 @@ import { IListContext } from './context'
  *
  * @category List
  */
-export function useListGroups(context: IListContext) {
+export function useListGroups(context: IListContext): [IGroup[], any[]] {
   let items = [...context.state.items]
   const groupByFieldName =
     context.state.groupBy?.fieldName ?? context.props.listGroupProps?.fieldName
-  if (!groupByFieldName) return [null, items]
+  if (!groupByFieldName) {
+    return [null, items]
+  }
   const { emptyGroupName, totalFunc, groupNames, groupData } =
     context.props.listGroupProps
-  if (_.isEmpty(context.state.items) && !groupNames) return [null, []]
+  if (_.isEmpty(context.state.items) && !groupNames) {
+    return [null, []]
+  }
   const itemsSort = { props: [groupByFieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames_ = items.map((g) =>
@@ -50,5 +54,5 @@ export function useListGroups(context: IListContext) {
     }
     return group
   })
-  return [groups, items] as const
+  return [groups, items]
 }

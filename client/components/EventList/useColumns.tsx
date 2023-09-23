@@ -2,7 +2,7 @@
 import { IColumn } from '@fluentui/react'
 import get from 'get-value'
 import React, { useMemo } from 'react'
-import { isBrowser } from 'react-device-detect'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, TimeEntry } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
@@ -10,6 +10,7 @@ import { DurationDisplay } from './DurationDisplay'
 import { TimeColumn } from './TimeColumn'
 import { TitleColumn } from './TitleColumn'
 import { IEventListProps } from './types'
+import { ITitleColumnProps } from './TitleColumn/types'
 
 /**
  * Get sizing for column
@@ -40,13 +41,19 @@ function getSizing(
  * @param props - Props
  * @param name - Name
  */
-const createTitleColumnDef = (props: IEventListProps, name: string): IColumn =>
-  createColumnDef<EventObject>(
+const createTitleColumnDef = (props: IEventListProps, name: string): IColumn => {
+  const titleColumnProps: Partial<ITitleColumnProps> = {
+    ...(isBrowser && props.titleColumn?.browser),
+    ...(isMobile && props.titleColumn?.mobile),
+    ...props,
+  }
+  return  createColumnDef<EventObject>(
     'title',
     name,
     { ...getSizing(props, 'title', 320, 400), isMultiline: true },
-    (event) => <TitleColumn event={event} />
+    (event) => <TitleColumn {...titleColumnProps} event={event} />
   )
+}
 
 /**
  * Time column
@@ -59,7 +66,7 @@ const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
     'time',
     name,
     { ...getSizing(props, 'time', 90, 90) },
-    (event) => <TimeColumn event={event} dateFormat={props.dateFormat} />
+    (event) => <TimeColumn {...props} event={event} />
   )
 
 /**
@@ -68,7 +75,7 @@ const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
  * @param props - Props
  * @param name - Name
  */
-const createDurationColumnDefs = (
+const createDurationColumnDef = (
   props: IEventListProps,
   name: string
 ): IColumn =>
@@ -92,8 +99,8 @@ export function useColumns(props: IEventListProps) {
     () =>
       [
         createTitleColumnDef(props, t('common.titleLabel')),
-        createTimeColumnDef(props, t('common.timeLabel')),
-        isBrowser && createDurationColumnDefs(props, t('common.durationLabel')),
+        props.useTimeColumn && createTimeColumnDef(props, t('common.timeLabel')),
+        isBrowser && createDurationColumnDef(props, t('common.durationLabel')),
         ...props.additionalColumns
       ]
         .filter((col) => !!col)

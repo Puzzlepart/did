@@ -1,4 +1,4 @@
-import { ApolloQueryResult, useQuery } from '@apollo/client'
+import { ApolloQueryResult, WatchQueryFetchPolicy, useQuery } from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'
@@ -12,12 +12,14 @@ import $timesheet from './timesheet.gql'
  *
  * @param state - State
  * @param dispatch - Dispatch
+ * @param fetchPolicy - Fetch policy (default: 'cache-and-network')
  *
  * @category Timesheet Hooks
  */
 export function useTimesheetQuery(
   state: ITimesheetState,
-  dispatch: Dispatch<AnyAction>
+  dispatch: Dispatch<AnyAction>,
+  fetchPolicy: WatchQueryFetchPolicy = 'cache-and-network'
 ): () => Promise<ApolloQueryResult<any>> {
   const { user } = useAppContext()
   const query = useQuery($timesheet, {
@@ -31,7 +33,7 @@ export function useTimesheetQuery(
         includeSplitWeeks: state.dateRangeType === DateRangeType.Week
       }
     },
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy,
     errorPolicy: 'all'
   })
 

@@ -12,12 +12,7 @@ import { IModifiedDurationProps } from './types'
 export function useModifiedDuration(props: IModifiedDurationProps) {
   const { t } = useTranslation()
   const isAdjusted = !!props.event['adjustedMinutes']
-  if (!isAdjusted)
-    return {
-      isAdjusted: false,
-      modifiedDuration: undefined,
-      originalDuration: undefined
-    }
+  if (!isAdjusted) return {}
   const originalDuration = $date.getDurationString(
     props.event['originalDuration'],
     t,

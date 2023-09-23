@@ -1,102 +1,83 @@
+/* eslint-disable unicorn/no-negated-condition */
 import { Icon } from '@fluentui/react'
-import { AlertProps } from '@fluentui/react-components/dist/unstable'
-import { ProjectLink, ProjectPopover, UserMessage } from 'components'
-import { TFunction } from 'i18next'
-import React from 'react'
+import { mergeClasses } from '@fluentui/react-components'
+import { CustomerLink, ProjectLink, ProjectPopover, UserMessage } from 'components'
+import React, { ReactElement } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
+import { useTimesheetContext } from '../../../context'
 import {
   CLEAR_MANUAL_MATCH,
   IGNORE_EVENT,
   TOGGLE_MANUAL_MATCH_PANEL
 } from '../../../reducer/actions'
-import { ClearManualMatchButton } from './ClearManualMatchButton/ClearManualMatchButton'
+import { ClearManualMatchButton } from './ClearManualMatchButton'
 import styles from './ProjectColumn.module.scss'
 import { IProjectColumnProps } from './types'
 import { useProjectColumn } from './useProjectColumn'
 
 /**
- * Get error message for the event by error code. Translate function
- * from i18next is passed as a parameter due to the fact that this function
- * is called from the component and the hook can't be called inside the loop.
- *
- * @param code - Error code
- * @param t - Translate function
- */
-function getErrorMessage(
-  code: string,
-  t: TFunction
-): [string, AlertProps['intent']] {
-  switch (code) {
-    case 'PROJECT_INACTIVE': {
-      return [t('timesheet.projectInactiveErrorText'), 'error']
-    }
-    case 'CUSTOMER_INACTIVE': {
-      return [t('timesheet.customerInactiveErrorText'), 'error']
-    }
-    case 'EVENT_NO_TITLE': {
-      return [t('timesheet.eventNoTitleErrorText'), 'error']
-    }
-  }
-}
-
-/**
  * Component that renders the project column for the event list.
  */
 export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
-  event
+  event,
+  includeCustomerLink
 }) => {
-  const { t } = useTranslation()
-  const { state, dispatch, className } = useProjectColumn()
+  const { t } = useTranslation('timesheet')
+  const { state, dispatch } = useTimesheetContext()
+  const { errorMessage } = useProjectColumn(event)
+  let element: ReactElement = null
 
-  if (event.isSystemIgnored) return null
-  if (!event.project) {
-    if (event.error) {
-      const [text, intent] = getErrorMessage(event.error.code, t)
-      return (
-        <div className={className}>
-          <UserMessage intent={intent} text={text} />
+  if (event.isSystemIgnored) {
+    element = null
+  }
+  else if (event.project) {
+    element = (
+      <>
+        {includeCustomerLink && <CustomerLink customer={event.customer} />}
+        <div className={styles.content}>
+          <ProjectPopover project={event.project}>
+            <div className={styles.link}>
+              <ProjectLink project={event.project} />
+            </div>
+          </ProjectPopover>
+          {!_.isEmpty(event.project.labels) && (
+            <Icon iconName='Tag' className={styles.labelIcon} />
+          )}
+          {event.manualMatch && !state.selectedPeriod.isConfirmed && (
+            <ClearManualMatchButton
+              onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
+              className={styles.clearButton}
+            />
+          )}
         </div>
-      )
-    }
-    return (
-      <div className={className}>
-        <UserMessage
-          intent='warning'
-          text={t('timesheet.noProjectMatchFoundText')}
-          onClick={() => dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))}
-          action={{
-            text: t('timesheet.ignoreEventActionTooltip', event),
-            iconName: 'CalendarCancel',
-            iconColor: 'var(--colorPaletteRedForeground1)',
-            onClick: () => {
-              dispatch(IGNORE_EVENT({ id: event.id }))
-            }
-          }}
-        />
-      </div>
+      </>
+    )
+  } else if (event.error) {
+    element = <UserMessage {...errorMessage} />
+  }
+  else {
+    element = (
+      <UserMessage
+        intent='warning'
+        text={t('noProjectMatchFoundText')}
+        onClick={() => dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))}
+        action={{
+          text: t('ignoreEventActionTooltip', event),
+          iconName: 'CalendarCancel',
+          iconColor: 'var(--colorPaletteRedForeground1)',
+          onClick: () => {
+            dispatch(IGNORE_EVENT({ id: event.id }))
+          }
+        }}
+      />
     )
   }
-
   return (
-    <div className={className}>
-      <div className={styles.content}>
-        <ProjectPopover project={event.project}>
-          <div className={styles.link}>
-            <ProjectLink project={event.project} />
-          </div>
-        </ProjectPopover>
-        {!_.isEmpty(event.project.labels) && (
-          <Icon iconName='Tag' className={styles.labelIcon} />
-        )}
-        {event.manualMatch && !state.selectedPeriod.isConfirmed && (
-          <ClearManualMatchButton
-            onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
-            className={styles.clearButton}
-          />
-        )}
-      </div>
+    <div className={mergeClasses(ProjectColumn.className, isMobile && styles.mobile)}>
+      {element}
     </div>
   )
 }

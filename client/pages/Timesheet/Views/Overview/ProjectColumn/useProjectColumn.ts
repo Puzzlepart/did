@@ -1,17 +1,31 @@
-import { isMobile } from 'react-device-detect'
-import { ProjectColumn } from '.'
-import { useTimesheetContext } from '../../../context'
-import styles from './ProjectColumn.module.scss'
+import { IUserMessageProps } from 'components'
+import { useTranslation } from 'react-i18next'
+import { EventObject } from 'types'
 
 /**
- * Custom hook that returns the state, dispatch and className for the project column component.
- *
- * @returns An object containing the state, dispatch and className.
+ * Hook for the project column.
+ * 
+ * @param event The event object.
  */
-export function useProjectColumn() {
-  const { state, dispatch } = useTimesheetContext()
-  let className = ProjectColumn.className
-  if (isMobile) className += ` ${styles.mobile}`
+export function useProjectColumn(event: EventObject) {
+  const { t } = useTranslation('timesheet')
+  let errorText = null
+  switch (event.error?.code) {
+    case 'PROJECT_INACTIVE': {
+      errorText = t('projectInactiveErrorText')
+    }
+    case 'CUSTOMER_INACTIVE': {
+      errorText = t('customerInactiveErrorText')
+    }
+    case 'EVENT_NO_TITLE': {
+      errorText = t('eventNoTitleErrorText')
+    }
+  }
 
-  return { state, dispatch, className }
+  const errorMessage: IUserMessageProps = errorText && {
+    text: errorText,
+    intent: 'error'
+  }
+
+  return { errorMessage }
 }
