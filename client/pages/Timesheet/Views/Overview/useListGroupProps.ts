@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-array-reduce */
-
 import $date, { DateObject } from 'DateUtils'
 import packageFile from 'package'
 import { useMemo } from 'react'
@@ -7,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
 import { IListGroupProps } from '../../../../components/List'
 import { useTimesheetContext } from '../../context'
+import { getSum } from 'utils'
 
 /**
  * Use list group props
@@ -14,7 +13,7 @@ import { useTimesheetContext } from '../../context'
 export function useListGroupProps() {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
-  return useMemo<IListGroupProps>(
+  return useMemo<IListGroupProps<EventObject>>(
     () => ({
       fieldName: 'date',
       groupNames: state.selectedPeriod?.weekdays<string>(
@@ -25,8 +24,8 @@ export function useListGroupProps() {
         .map((date) => ({
           holiday: date.isNationalHoliday(state.selectedPeriod?.holidays)
         })),
-      totalFunc: (events: EventObject[]) => {
-        const duration = events.reduce((sum, index) => sum + index.duration, 0)
+      totalFunc: (events) => {
+        const duration = getSum(events, 'duration')
         return ` (${$date.getDurationString(duration, t)})`
       }
     }),

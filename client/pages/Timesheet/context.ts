@@ -9,7 +9,7 @@ import { ITimesheetState } from './types/ITimesheetState'
  */
 export interface ITimesheetContext extends ReturnType<typeof useSubmitActions> {
   /**
-   * State
+   * State of the timesheet component
    */
   state: ITimesheetState
 
