@@ -103,6 +103,12 @@ if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
   fi
 fi
 
+# Checks if revision.txt exists
+if [ -e "$DEPLOYMENT_TARGET/revision.txt" ]; then
+  CURRENT_REVISION=$(cat "$DEPLOYMENT_TARGET/revision.txt")
+  NEW_REVISION=$(cat "$DEPLOYMENT_SOURCE/revision.txt")
+fi
+
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
 
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
@@ -132,4 +138,4 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 fi
 
 ##################################################################################################################################
-echo "Deployment of v$NEW_PACKAGE_VERSION was successful"
+echo "Deployment of v$NEW_PACKAGE_VERSION#$NEW_REVISION was successful"

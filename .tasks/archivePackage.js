@@ -31,7 +31,7 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
     })
 
     archive.on('warning', (error) => {
-        if (err.code === 'ENOENT') {
+        if (error.code === 'ENOENT') {
             log(error)
         } else {
             log(error)
@@ -56,6 +56,9 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
     log('Archiving deployment files...')
     archive.file('.deployment')
     archive.file('.deploy/deploy.sh')
+
+    log('Archiving revision file...')
+    archive.file('revision.txt')
 
     if (includeNodeModules) {
         log('Archiving node_modules...')
