@@ -109,11 +109,11 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
   echo "Cleaning $DEPLOYMENT_TARGET folder"
-  echo "\tDeleting existing package-lock.json"
+  echo "- Deleting existing package-lock.json"
   rm -rf "$DEPLOYMENT_TARGET/package-lock.json"
-  echo "\tDeleting existing shared/ folder"
+  echo "- Deleting existing shared/ folder"
   rm -rf "$DEPLOYMENT_TARGET/shared"
-  echo "\tDeleting existing server/ folder"
+  echo "- Deleting existing server/ folder"
   rm -rf "$DEPLOYMENT_TARGET/server"
   echo "Syncing files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
   rsync -a "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
