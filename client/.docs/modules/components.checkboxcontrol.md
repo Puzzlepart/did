@@ -8,16 +8,9 @@
 
 ### Variables
 
-- [className](components.checkboxcontrol.md#classname)
 - [displayName](components.checkboxcontrol.md#displayname)
 
 ## Variables
-
-### className
-
-• **className**: *string*
-
-___
 
 ### displayName
 

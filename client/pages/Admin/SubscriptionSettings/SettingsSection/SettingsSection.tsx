@@ -13,53 +13,57 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
   const { fields } = useSettingsSection(props)
   return (
     <div className={SettingsSection.className}>
-      {fields.map(({ field, fieldProps, settingsKey, onChange, getValueWithDefault }) => {
-        switch (field.type) {
-          case 'text': {
-            fieldProps.contentAfter = fieldProps.getContentAfter
-              ? fieldProps.getContentAfter(getValueWithDefault(fieldProps.defaultValue ?? null))
-              : fieldProps.contentAfter
-            return (
-              <InputField
-                {...fieldProps}
-                key={settingsKey}
-                value={getValueWithDefault(fieldProps.defaultValue ?? null)}
-                onChange={(_event, data) => onChange(data.value)}
-              />
-            )
-          }
-          case 'bool': {
-            return (
-              <CheckboxField
-                {...fieldProps}
-                key={settingsKey}
-                checked={getValueWithDefault(false)}
-                onChange={(_event, data) => onChange(data.checked)}
-              />
-            )
-          }
-          case 'number': {
-            return (
-              <InputField
-                {...fieldProps}
-                key={settingsKey}
-                type='number'
-                value={getValueWithDefault(fieldProps.defaultValue ?? 0)}
-                onChange={(_event, data) => onChange(data.value)}
-              />
-            )
-          }
-          case 'checkboxmulti': {
-            return (
-              <MultiCheckboxField
-                {...field}
-                key={settingsKey}
-                settingsKey={settingsKey}
-              />
-            )
+      {fields.map(
+        ({ field, fieldProps, settingsKey, onChange, getValueWithDefault }) => {
+          switch (field.type) {
+            case 'text': {
+              fieldProps.contentAfter = fieldProps.getContentAfter
+                ? fieldProps.getContentAfter(
+                    getValueWithDefault(fieldProps.defaultValue ?? null)
+                  )
+                : fieldProps.contentAfter
+              return (
+                <InputField
+                  {...fieldProps}
+                  key={settingsKey}
+                  value={getValueWithDefault(fieldProps.defaultValue ?? null)}
+                  onChange={(_event, data) => onChange(data.value)}
+                />
+              )
+            }
+            case 'bool': {
+              return (
+                <CheckboxField
+                  {...fieldProps}
+                  key={settingsKey}
+                  checked={getValueWithDefault(false)}
+                  onChange={(_event, data) => onChange(data.checked)}
+                />
+              )
+            }
+            case 'number': {
+              return (
+                <InputField
+                  {...fieldProps}
+                  key={settingsKey}
+                  type='number'
+                  value={getValueWithDefault(fieldProps.defaultValue ?? 0)}
+                  onChange={(_event, data) => onChange(data.value)}
+                />
+              )
+            }
+            case 'checkboxmulti': {
+              return (
+                <MultiCheckboxField
+                  {...field}
+                  key={settingsKey}
+                  settingsKey={settingsKey}
+                />
+              )
+            }
           }
         }
-      })}
+      )}
     </div>
   )
 }

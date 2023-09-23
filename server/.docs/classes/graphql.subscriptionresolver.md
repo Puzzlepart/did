@@ -38,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
-Defined in: [graphql/resolvers/subscription/index.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L25)
+Defined in: [graphql/resolvers/subscription/SubscriptionResolver.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/SubscriptionResolver.ts#L25)
 
 ## Methods
 
@@ -56,7 +56,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [graphql/resolvers/subscription/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L40)
+Defined in: [graphql/resolvers/subscription/SubscriptionResolver.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/SubscriptionResolver.ts#L40)
 
 ___
 
@@ -74,4 +74,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/subscription/index.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L51)
+Defined in: [graphql/resolvers/subscription/SubscriptionResolver.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/SubscriptionResolver.ts#L51)

@@ -52,7 +52,7 @@ Name | Type |
 
 **Returns:** [*BrowserStorage*](utils.browserstorage.md)<T\>
 
-Defined in: [client/utils/browserStorage.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L11)
+Defined in: [client/utils/browserStorage.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L10)
 
 ## Properties
 
@@ -60,7 +60,7 @@ Defined in: [client/utils/browserStorage.ts:11](https://github.com/Puzzlepart/di
 
 • `Private` **\_key**: *string*
 
-Defined in: [client/utils/browserStorage.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L11)
+Defined in: [client/utils/browserStorage.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L10)
 
 ## Methods
 
@@ -78,7 +78,7 @@ Name | Type | Default value | Description |
 
 **Returns:** T
 
-Defined in: [client/utils/browserStorage.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L22)
+Defined in: [client/utils/browserStorage.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L21)
 
 ___
 
@@ -96,7 +96,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [client/utils/browserStorage.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L40)
+Defined in: [client/utils/browserStorage.ts:39](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L39)
 
 ___
 
@@ -114,4 +114,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [client/utils/browserStorage.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L31)
+Defined in: [client/utils/browserStorage.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/utils/browserStorage.ts#L30)

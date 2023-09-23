@@ -12,13 +12,13 @@ import { useTimesheetContext } from '../../context'
  */
 export function useListGroupProps() {
   const { t } = useTranslation()
-  const {subscription} = useAppContext()
+  const { subscription } = useAppContext()
   const { state } = useTimesheetContext()
   return useMemo<IListGroupProps<EventObject>>(
     () => ({
       fieldName: 'date',
       groupNames: state.selectedPeriod?.weekdays<string>(
-       subscription?.settings?.timesheet?.dayFormat
+        subscription?.settings?.timesheet?.dayFormat
       ),
       groupData: state.selectedPeriod
         ?.weekdays<DateObject>('DateObject')

@@ -325,7 +325,7 @@ ___
 
 ProjectForm component is used to create and edit projects.
 
-Defined in: [client/pages/Projects/ProjectForm/ProjectForm.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/ProjectForm.tsx#L26)
+Defined in: [client/pages/Projects/ProjectForm/ProjectForm.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/ProjectForm.tsx#L25)
 
 ___
 
@@ -686,4 +686,4 @@ Name | Type | Default value | Description |
 
 **Returns:** () => *Promise*<ApolloQueryResult<any\>\>
 
-Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L19)
+Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L23)

@@ -30,7 +30,7 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [graphql/resolvers/subscription/types.ts:141](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L141)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionADSyncSettings.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionADSyncSettings.ts#L32)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • `Optional` **properties**: *string*[]
 
-Defined in: [graphql/resolvers/subscription/types.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L144)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionADSyncSettings.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionADSyncSettings.ts#L35)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • `Optional` **syncUserPhoto**: *boolean*
 
-Defined in: [graphql/resolvers/subscription/types.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L147)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionADSyncSettings.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionADSyncSettings.ts#L38)

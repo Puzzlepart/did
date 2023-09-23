@@ -22,7 +22,6 @@
 - [ReportsQuery](../classes/graphql.reportsquery.md)
 - [RoleInput](../classes/graphql.roleinput.md)
 - [SubscriptionADSyncSettingsInput](../classes/graphql.subscriptionadsyncsettingsinput.md)
-- [SubscriptionForecastSettingsInput](../classes/graphql.subscriptionforecastsettingsinput.md)
 - [SubscriptionSettingsInput](../classes/graphql.subscriptionsettingsinput.md)
 - [SubscriptionTeamsSettingsInput](../classes/graphql.subscriptionteamssettingsinput.md)
 - [SubscriptionVacationSettingsInput](../classes/graphql.subscriptionvacationsettingsinput.md)
@@ -79,6 +78,7 @@
 ### Other Classes
 
 - [ApiToken](../classes/graphql.apitoken.md)
+- [SubscriptionForecastSettingsInput](../classes/graphql.subscriptionforecastsettingsinput.md)
 
 ### GraphQL Type Type aliases
 

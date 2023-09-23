@@ -28,4 +28,4 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [graphql/resolvers/subscription/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L175)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionTeamsSettings.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionTeamsSettings.ts#L24)

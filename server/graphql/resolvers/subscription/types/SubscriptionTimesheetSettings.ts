@@ -29,4 +29,3 @@ export class SubscriptionTimesheetSettingsInput {
   @Field({ nullable: true, defaultValue: 'HH:mm' })
   timeFormat?: string
 }
-

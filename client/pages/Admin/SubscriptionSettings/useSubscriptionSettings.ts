@@ -15,7 +15,7 @@ import { useSubscriptionConfig } from './useSubscriptionConfig'
 
 /**
  * Component logic hook for the subscription settings component.
- * 
+ *
  * @category SubscriptionSettings
  */
 export function useSubscriptionSettings() {

@@ -11,6 +11,7 @@ Reusable React Function components.
 - [AutocompleteControl](components.autocompletecontrol.md)
 - [BasePanel](components.basepanel.md)
 - [CheckboxControl](components.checkboxcontrol.md)
+- [CheckboxField](components.checkboxfield.md)
 - [ColorPickerField](components.colorpickerfield.md)
 - [CustomerLink](components.customerlink.md)
 - [DeleteLink](components.deletelink.md)
@@ -160,6 +161,7 @@ Reusable React Function components.
 - [AutocompleteControl](components.md#autocompletecontrol)
 - [BasePanel](components.md#basepanel)
 - [CheckboxControl](components.md#checkboxcontrol)
+- [CheckboxField](components.md#checkboxfield)
 - [ColorPickerField](components.md#colorpickerfield)
 - [ConditionalWrapper](components.md#conditionalwrapper)
 - [CustomerLink](components.md#customerlink)
@@ -545,7 +547,17 @@ ___
 Text field based on `<Checkbox />` from `@fluentui/react-components`
 but also supports binding to a `model`
 
-Defined in: [client/components/FormControl/CheckboxControl/CheckboxControl.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/CheckboxControl/CheckboxControl.tsx#L15)
+Defined in: [client/components/FormControl/CheckboxControl/CheckboxControl.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/CheckboxControl/CheckboxControl.tsx#L13)
+
+___
+
+### CheckboxField
+
+• `Const` **CheckboxField**: *ReusableComponent*<ICheckboxFieldProps\>
+
+Field based on `<Checkbox />` from `@fluentui/react-components`.
+
+Defined in: [client/components/FormControl/CheckboxControl/CheckboxField/CheckboxField.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/CheckboxControl/CheckboxField/CheckboxField.tsx#L13)
 
 ___
 

@@ -4,7 +4,7 @@ import { IFieldProps } from '../../Field'
 
 export interface IInputFieldProps
   extends Pick<TextareaProps, 'rows' | 'value' | 'placeholder' | 'maxLength'>,
-    Pick<InputProps, 'type' |'defaultValue'>,
+    Pick<InputProps, 'type' | 'defaultValue'>,
     IFieldProps {
   /**
    * On change event handler

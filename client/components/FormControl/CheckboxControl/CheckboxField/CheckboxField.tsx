@@ -10,13 +10,14 @@ import { ICheckboxFieldProps } from './types'
  *
  * @category Reusable Component
  */
-export const CheckboxField: ReusableComponent<ICheckboxFieldProps> =
-  (props) => {
-    return (
-      <Field {...props}>
-        <Checkbox {..._.pick(props, 'checked', 'onChange')} />
-      </Field>
-    )
-  }
+export const CheckboxField: ReusableComponent<ICheckboxFieldProps> = (
+  props
+) => {
+  return (
+    <Field {...props}>
+      <Checkbox {..._.pick(props, 'checked', 'onChange')} />
+    </Field>
+  )
+}
 
 CheckboxField.displayName = 'CheckBoxField'

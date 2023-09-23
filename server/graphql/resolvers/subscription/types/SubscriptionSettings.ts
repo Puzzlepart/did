@@ -1,11 +1,26 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, InputType, ObjectType } from 'type-graphql'
-import { SubscriptionADSyncSettings, SubscriptionADSyncSettingsInput } from './SubscriptionADSyncSettings'
-import { SubscriptionForecastSettings, SubscriptionForecastSettingsInput } from './SubscriptionForecastSettings'
-import { SubscriptionTeamsSettings, SubscriptionTeamsSettingsInput } from './SubscriptionTeamsSettings'
-import { SubscriptionVacationSettings, SubscriptionVacationSettingsInput } from './SubscriptionVacationSettings'
-import { SubscriptionTimesheetSettings, SubscriptionTimesheetSettingsInput } from './SubscriptionTimesheetSettings'
+import {
+  SubscriptionADSyncSettings,
+  SubscriptionADSyncSettingsInput
+} from './SubscriptionADSyncSettings'
+import {
+  SubscriptionForecastSettings,
+  SubscriptionForecastSettingsInput
+} from './SubscriptionForecastSettings'
+import {
+  SubscriptionTeamsSettings,
+  SubscriptionTeamsSettingsInput
+} from './SubscriptionTeamsSettings'
+import {
+  SubscriptionTimesheetSettings,
+  SubscriptionTimesheetSettingsInput
+} from './SubscriptionTimesheetSettings'
+import {
+  SubscriptionVacationSettings,
+  SubscriptionVacationSettingsInput
+} from './SubscriptionVacationSettings'
 
 /**
  * @category GraphQL ObjectType

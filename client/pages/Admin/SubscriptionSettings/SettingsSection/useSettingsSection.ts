@@ -6,7 +6,7 @@ import { ISettingsSectionProps } from './types'
 /**
  * Custom hook that returns an object containing fields and their corresponding properties
  * for a settings section.
- * 
+ *
  * @param props - The props for the settings section.
  */
 export function useSettingsSection(props: ISettingsSectionProps) {
@@ -16,7 +16,7 @@ export function useSettingsSection(props: ISettingsSectionProps) {
       const fieldProps = {
         ...field.props,
         disabled: field.disabledIf && field.disabledIf(context.settings || {}),
-        hidden: field.hiddenIf && field.hiddenIf(context.settings || {}),
+        hidden: field.hiddenIf && field.hiddenIf(context.settings || {})
       } as Record<string, any>
 
       const settingsKey = `${props.id}.${field.id}`
@@ -33,7 +33,7 @@ export function useSettingsSection(props: ISettingsSectionProps) {
         fieldProps,
         settingsKey,
         onChange,
-        getValueWithDefault,
+        getValueWithDefault
       }
     })
   }, [props.fields])

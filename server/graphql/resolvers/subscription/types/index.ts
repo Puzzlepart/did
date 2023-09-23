@@ -1,6 +1,6 @@
 export * from './Subscription'
-export * from './SubscriptionSettings'
 export * from './SubscriptionADSyncSettings'
 export * from './SubscriptionForecastSettings'
+export * from './SubscriptionSettings'
 export * from './SubscriptionTeamsSettings'
 export * from './SubscriptionVacationSettings'
