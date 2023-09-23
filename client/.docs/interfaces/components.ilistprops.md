@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IListProps
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IListProps
 
 # Interface: IListProps<T\>
 
@@ -11,6 +11,8 @@ Name | Default |
 `T` | *any* |
 
 ## Hierarchy
+
+* *Pick*<HTMLProps<HTMLDivElement\>, *className*\>
 
 * *Omit*<IShimmeredDetailsListProps, *selectionMode*\>
 
@@ -58,7 +60,7 @@ Name | Type |
 `className`? | *string* |
 `onRender`? | *IRenderFunction*<IDetailsHeaderProps\> |
 
-Defined in: [client/components/List/types/IListProps.ts:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L75)
+Defined in: [client/components/List/types/IListProps.ts:76](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L76)
 
 ___
 
@@ -70,7 +72,7 @@ Columns
 
 Overrides: void
 
-Defined in: [client/components/List/types/IListProps.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L30)
+Defined in: [client/components/List/types/IListProps.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L31)
 
 ___
 
@@ -80,7 +82,7 @@ ___
 
 Command bar props
 
-Defined in: [client/components/List/types/IListProps.ts:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L65)
+Defined in: [client/components/List/types/IListProps.ts:66](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L66)
 
 ___
 
@@ -92,7 +94,7 @@ Default search box width
 
 **`default`** 500
 
-Defined in: [client/components/List/types/IListProps.ts:91](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L91)
+Defined in: [client/components/List/types/IListProps.ts:92](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L92)
 
 ___
 
@@ -104,7 +106,7 @@ Enable shimmer (normally while loading)
 
 Overrides: void
 
-Defined in: [client/components/List/types/IListProps.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L35)
+Defined in: [client/components/List/types/IListProps.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L36)
 
 ___
 
@@ -115,7 +117,7 @@ ___
 Export file name. Set this property to enable Excel export of the
 list data.
 
-Defined in: [client/components/List/types/IListProps.ts:84](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L84)
+Defined in: [client/components/List/types/IListProps.ts:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L85)
 
 ___
 
@@ -125,7 +127,7 @@ ___
 
 Filter panel actions
 
-Defined in: [client/components/List/types/IListProps.ts:96](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L96)
+Defined in: [client/components/List/types/IListProps.ts:97](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L97)
 
 ___
 
@@ -135,7 +137,7 @@ ___
 
 Filter values
 
-Defined in: [client/components/List/types/IListProps.ts:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L106)
+Defined in: [client/components/List/types/IListProps.ts:107](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L107)
 
 ___
 
@@ -157,9 +159,9 @@ Name | Type |
 
 **Returns:** *CSSProperties*
 
-Defined in: [client/components/List/types/IListProps.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L121)
+Defined in: [client/components/List/types/IListProps.ts:122](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L122)
 
-Defined in: [client/components/List/types/IListProps.ts:121](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L121)
+Defined in: [client/components/List/types/IListProps.ts:122](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L122)
 
 ___
 
@@ -169,7 +171,7 @@ ___
 
 Fixed height
 
-Defined in: [client/components/List/types/IListProps.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L40)
+Defined in: [client/components/List/types/IListProps.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L41)
 
 ___
 
@@ -179,7 +181,7 @@ ___
 
 Hidden state of the list
 
-Defined in: [client/components/List/types/IListProps.ts:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L70)
+Defined in: [client/components/List/types/IListProps.ts:71](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L71)
 
 ___
 
@@ -189,7 +191,7 @@ ___
 
 Hide the toolbar
 
-Defined in: [client/components/List/types/IListProps.ts:116](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L116)
+Defined in: [client/components/List/types/IListProps.ts:117](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L117)
 
 ___
 
@@ -201,17 +203,17 @@ Items
 
 Overrides: void
 
-Defined in: [client/components/List/types/IListProps.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L25)
+Defined in: [client/components/List/types/IListProps.ts:26](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L26)
 
 ___
 
 ### listGroupProps
 
-• `Optional` **listGroupProps**: [*IListGroupProps*](components.ilistgroupprops.md)
+• `Optional` **listGroupProps**: [*IListGroupProps*](components.ilistgroupprops.md)<any\>
 
 Group props
 
-Defined in: [client/components/List/types/IListProps.ts:55](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L55)
+Defined in: [client/components/List/types/IListProps.ts:56](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L56)
 
 ___
 
@@ -221,7 +223,7 @@ ___
 
 Group render props
 
-Defined in: [client/components/List/types/IListProps.ts:60](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L60)
+Defined in: [client/components/List/types/IListProps.ts:61](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L61)
 
 ___
 
@@ -231,7 +233,7 @@ ___
 
 Menu items to show in `<Toolbar />` if using the preview mode.
 
-Defined in: [client/components/List/types/IListProps.ts:111](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L111)
+Defined in: [client/components/List/types/IListProps.ts:112](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L112)
 
 ___
 
@@ -242,7 +244,7 @@ ___
 Use minimal header columns. Styled with small font size,
 uppercase letters, some letter spacing and text shadows.
 
-Defined in: [client/components/List/types/IListProps.ts:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L127)
+Defined in: [client/components/List/types/IListProps.ts:128](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L128)
 
 ___
 
@@ -264,9 +266,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/List/types/IListProps.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L101)
+Defined in: [client/components/List/types/IListProps.ts:102](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L102)
 
-Defined in: [client/components/List/types/IListProps.ts:101](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L101)
+Defined in: [client/components/List/types/IListProps.ts:102](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L102)
 
 ___
 
@@ -276,7 +278,7 @@ ___
 
 Search box props
 
-Defined in: [client/components/List/types/IListProps.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L45)
+Defined in: [client/components/List/types/IListProps.ts:46](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L46)
 
 ___
 
@@ -286,4 +288,4 @@ ___
 
 Selection props
 
-Defined in: [client/components/List/types/IListProps.ts:50](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L50)
+Defined in: [client/components/List/types/IListProps.ts:51](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListProps.ts#L51)

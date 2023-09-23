@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / Utils
+[did-client - v0.13.0](../README.md) / Utils
 
 # Module: Utils
 
@@ -373,20 +373,26 @@ ___
 
 ### getSum
 
-▸ **getSum**(`items`: Item[], `property`: *string*): *number*
+▸ **getSum**<T\>(`items`: T[], `property`: keyof T): *number*
 
 Get sum for a property in the array using `_.reduce`.
+
+#### Type parameters:
+
+Name | Type | Default |
+:------ | :------ | :------ |
+`T` | *object* | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | Item[] | Items   |
-`property` | *string* | Property key    |
+`items` | T[] | Items   |
+`property` | keyof T | Property key    |
 
 **Returns:** *number*
 
-Defined in: [client/utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
+Defined in: [client/utils/getSum.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L10)
 
 ___
 

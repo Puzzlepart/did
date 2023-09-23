@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / MSOAuthService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / MSOAuthService
 
 # Class: MSOAuthService
 

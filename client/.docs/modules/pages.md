@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / Pages
+[did-client - v0.13.0](../README.md) / Pages
 
 # Module: Pages
 
@@ -672,17 +672,18 @@ ___
 
 ### useTimesheetQuery
 
-▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>): *function*
+▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>, `fetchPolicy?`: WatchQueryFetchPolicy): *function*
 
 Use Timesheet query
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | State   |
-`dispatch` | *Dispatch*<AnyAction\> | Dispatch    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | - | State   |
+`dispatch` | *Dispatch*<AnyAction\> | - | Dispatch   |
+`fetchPolicy` | WatchQueryFetchPolicy | 'cache-and-network' | Fetch policy (default: 'cache-and-network')    |
 
 **Returns:** () => *Promise*<ApolloQueryResult<any\>\>
 
-Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L18)
+Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L19)

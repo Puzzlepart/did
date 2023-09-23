@@ -1,4 +1,8 @@
-import { ApolloQueryResult, WatchQueryFetchPolicy, useQuery } from '@apollo/client'
+import {
+  ApolloQueryResult,
+  useQuery,
+  WatchQueryFetchPolicy
+} from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'

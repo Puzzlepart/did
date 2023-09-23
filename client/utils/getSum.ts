@@ -7,7 +7,10 @@ import _ from 'underscore'
  * @param items - Items
  * @param property - Property key
  */
-export function getSum<T extends object = any>(items: T[], property: keyof T): number {
+export function getSum<T extends object = any>(
+  items: T[],
+  property: keyof T
+): number {
   return _.reduce(
     items,
     (sum, item) => (sum += get(item, property as string, { default: 0 })),

@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / CustomerService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / CustomerService
 
 # Class: CustomerService
 

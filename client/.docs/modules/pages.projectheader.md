@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Pages](pages.md) / ProjectHeader
+[did-client - v0.13.0](../README.md) / [Pages](pages.md) / ProjectHeader
 
 # Namespace: ProjectHeader
 

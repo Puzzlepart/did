@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / ICustomersUrlParameters
+[did-client - v0.13.0](../README.md) / [Pages](../modules/pages.md) / ICustomersUrlParameters
 
 # Interface: ICustomersUrlParameters
 

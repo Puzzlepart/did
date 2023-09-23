@@ -9,8 +9,8 @@ import { createColumnDef } from 'utils/createColumnDef'
 import { DurationDisplay } from './DurationDisplay'
 import { TimeColumn } from './TimeColumn'
 import { TitleColumn } from './TitleColumn'
-import { IEventListProps } from './types'
 import { ITitleColumnProps } from './TitleColumn/types'
+import { IEventListProps } from './types'
 
 /**
  * Get sizing for column
@@ -41,13 +41,16 @@ function getSizing(
  * @param props - Props
  * @param name - Name
  */
-const createTitleColumnDef = (props: IEventListProps, name: string): IColumn => {
+const createTitleColumnDef = (
+  props: IEventListProps,
+  name: string
+): IColumn => {
   const titleColumnProps: Partial<ITitleColumnProps> = {
     ...(isBrowser && props.titleColumn?.browser),
     ...(isMobile && props.titleColumn?.mobile),
-    ...props,
+    ...props
   }
-  return  createColumnDef<EventObject>(
+  return createColumnDef<EventObject>(
     'title',
     name,
     { ...getSizing(props, 'title', 320, 400), isMultiline: true },
@@ -99,7 +102,8 @@ export function useColumns(props: IEventListProps) {
     () =>
       [
         createTitleColumnDef(props, t('common.titleLabel')),
-        props.useTimeColumn && createTimeColumnDef(props, t('common.timeLabel')),
+        props.useTimeColumn &&
+          createTimeColumnDef(props, t('common.timeLabel')),
         isBrowser && createDurationColumnDef(props, t('common.durationLabel')),
         ...props.additionalColumns
       ]

@@ -36,7 +36,7 @@ export interface IEventListProps extends IListProps {
 
   /**
    * Whether to use the time column
-   * 
+   *
    * @default true
    */
   useTimeColumn?: boolean

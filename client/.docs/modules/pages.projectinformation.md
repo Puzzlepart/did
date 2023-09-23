@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Pages](pages.md) / ProjectInformation
+[did-client - v0.13.0](../README.md) / [Pages](pages.md) / ProjectInformation
 
 # Namespace: ProjectInformation
 

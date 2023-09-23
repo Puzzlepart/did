@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](components.md) / IconPickerControl
+[did-client - v0.13.0](../README.md) / [Components](components.md) / IconPickerControl
 
 # Namespace: IconPickerControl
 

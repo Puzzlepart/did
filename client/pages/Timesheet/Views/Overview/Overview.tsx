@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prefer-ternary */
-import { DateRangeType, Pivot, PivotItem } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react'
 import { mergeClasses } from '@fluentui/react-components'
 import { EventList } from 'components'
 import { Tabs } from 'components/Tabs'
@@ -37,23 +37,29 @@ export const Overview: TimesheetViewComponent = () => {
     case DateRangeType.Month: {
       {
         if (state.loading && _.isEmpty(state.periods)) {
-          element = (
-            <EventList {...eventListProps} />
-          )
+          element = <EventList {...eventListProps} />
         } else {
           element = (
             <Tabs
               defaultSelectedValue={state.selectedPeriod?.id}
-              items={[...state.periods].reduce((_items, period) => ({
-                ..._items,
-                [period.id]: [EventList, period.getName(t), {
-                  ...eventListProps,
-                  items: period.getEvents()
-                }]
-              }), {})}
+              items={[...state.periods].reduce(
+                (_items, period) => ({
+                  ..._items,
+                  [period.id]: [
+                    EventList,
+                    period.getName(t),
+                    {
+                      ...eventListProps,
+                      items: period.getEvents()
+                    }
+                  ]
+                }),
+                {}
+              )}
               onTabSelect={(id) => {
                 dispatch(CHANGE_PERIOD({ id }))
-              }} />
+              }}
+            />
           )
         }
       }

@@ -25,7 +25,7 @@ export interface IListGroupProps<T = any> {
 
   /**
    * Function to get the total for the group.
-   * 
+   *
    * @param items The items of the group.
    */
   totalFunc?: (items: T[]) => string

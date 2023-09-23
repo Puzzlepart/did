@@ -1,7 +1,12 @@
 /* eslint-disable unicorn/no-negated-condition */
 import { Icon } from '@fluentui/react'
 import { mergeClasses } from '@fluentui/react-components'
-import { CustomerLink, ProjectLink, ProjectPopover, UserMessage } from 'components'
+import {
+  CustomerLink,
+  ProjectLink,
+  ProjectPopover,
+  UserMessage
+} from 'components'
 import React, { ReactElement } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -32,8 +37,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
 
   if (event.isSystemIgnored) {
     element = null
-  }
-  else if (event.project) {
+  } else if (event.project) {
     element = (
       <>
         {includeCustomerLink && <CustomerLink customer={event.customer} />}
@@ -57,8 +61,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
     )
   } else if (event.error) {
     element = <UserMessage {...errorMessage} />
-  }
-  else {
+  } else {
     element = (
       <UserMessage
         intent='warning'
@@ -76,7 +79,12 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
     )
   }
   return (
-    <div className={mergeClasses(ProjectColumn.className, isMobile && styles.mobile)}>
+    <div
+      className={mergeClasses(
+        ProjectColumn.className,
+        isMobile && styles.mobile
+      )}
+    >
       {element}
     </div>
   )

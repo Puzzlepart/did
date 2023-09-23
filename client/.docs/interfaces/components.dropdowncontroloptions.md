@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / DropdownControlOptions
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / DropdownControlOptions
 
 # Interface: DropdownControlOptions
 

@@ -1,10 +1,10 @@
 import { CustomerLink } from 'components'
 import React, { useMemo } from 'react'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 import { ProjectColumn } from './ProjectColumn'
-import { isBrowser, isMobile } from 'react-device-detect'
 
 /**
  * Hook that returns additonal columns for the event list.
@@ -17,17 +17,20 @@ export function useAdditionalColumns() {
   return useMemo(
     () =>
       [
-        isBrowser && createColumnDef<EventObject>(
-          'customer',
-          t('common.customer'),
-          { minWidth: 150, maxWidth: 200 },
-          (event) => <CustomerLink customer={event.customer} />
-        ),
+        isBrowser &&
+          createColumnDef<EventObject>(
+            'customer',
+            t('common.customer'),
+            { minWidth: 150, maxWidth: 200 },
+            (event) => <CustomerLink customer={event.customer} />
+          ),
         createColumnDef<EventObject>(
           'project',
           t('common.project'),
           { minWidth: 150, maxWidth: 300 },
-          (event) => <ProjectColumn event={event} includeCustomerLink={isMobile} />
+          (event) => (
+            <ProjectColumn event={event} includeCustomerLink={isMobile} />
+          )
         )
       ].filter(Boolean),
     []

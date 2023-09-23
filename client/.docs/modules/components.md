@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / Components
+[did-client - v0.13.0](../README.md) / Components
 
 # Module: Components
 
@@ -883,7 +883,7 @@ Defined in: [client/components/UserColumn/index.tsx:15](https://github.com/Puzzl
 
 ### useListGroups
 
-▸ **useListGroups**(`context`: IListContext): *any*[][] \| readonly [IGroup[], *any*[]]
+▸ **useListGroups**(`context`: IListContext): [IGroup[], *any*[]]
 
 Returns list groups based on property `listGroupProps` on
 the `<List />` component
@@ -894,7 +894,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `context` | IListContext | Context    |
 
-**Returns:** *any*[][] \| readonly [IGroup[], *any*[]]
+**Returns:** [IGroup[], *any*[]]
 
 Defined in: [client/components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
 

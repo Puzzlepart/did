@@ -3,9 +3,9 @@ import packageFile from 'package'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
+import { getSum } from 'utils'
 import { IListGroupProps } from '../../../../components/List'
 import { useTimesheetContext } from '../../context'
-import { getSum } from 'utils'
 
 /**
  * Use list group props

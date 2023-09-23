@@ -1,8 +1,14 @@
-[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IListGroupProps
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IListGroupProps
 
-# Interface: IListGroupProps
+# Interface: IListGroupProps<T\>
 
 [Components](../modules/components.md).IListGroupProps
+
+## Type parameters
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
 
 ## Table of contents
 
@@ -20,7 +26,9 @@
 
 • `Optional` **emptyGroupName**: *string*
 
-Defined in: [client/components/List/types/IListGroupProps.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L9)
+The name of the empty group.
+
+Defined in: [client/components/List/types/IListGroupProps.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L24)
 
 ___
 
@@ -28,7 +36,9 @@ ___
 
 • **fieldName**: *string*
 
-Defined in: [client/components/List/types/IListGroupProps.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L6)
+The name of the field to group by.
+
+Defined in: [client/components/List/types/IListGroupProps.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L9)
 
 ___
 
@@ -36,7 +46,9 @@ ___
 
 • `Optional` **groupData**: *any*[]
 
-Defined in: [client/components/List/types/IListGroupProps.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L8)
+The data of the groups.
+
+Defined in: [client/components/List/types/IListGroupProps.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L19)
 
 ___
 
@@ -44,26 +56,32 @@ ___
 
 • `Optional` **groupNames**: *string*[]
 
-Defined in: [client/components/List/types/IListGroupProps.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L7)
+The names of the groups.
+
+Defined in: [client/components/List/types/IListGroupProps.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L14)
 
 ___
 
 ### totalFunc
 
-• `Optional` **totalFunc**: (`items`: *any*[]) => *string*
+• `Optional` **totalFunc**: (`items`: T[]) => *string*
+
+Function to get the total for the group.
+
+**`param`** The items of the group.
 
 #### Type declaration:
 
-▸ (`items`: *any*[]): *string*
+▸ (`items`: T[]): *string*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`items` | *any*[] |
+`items` | T[] |
 
 **Returns:** *string*
 
-Defined in: [client/components/List/types/IListGroupProps.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L10)
+Defined in: [client/components/List/types/IListGroupProps.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L31)
 
-Defined in: [client/components/List/types/IListGroupProps.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L10)
+Defined in: [client/components/List/types/IListGroupProps.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListGroupProps.ts#L31)

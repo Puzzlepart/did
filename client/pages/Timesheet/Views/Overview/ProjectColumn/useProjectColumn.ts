@@ -4,7 +4,7 @@ import { EventObject } from 'types'
 
 /**
  * Hook for the project column.
- * 
+ *
  * @param event The event object.
  */
 export function useProjectColumn(event: EventObject) {
