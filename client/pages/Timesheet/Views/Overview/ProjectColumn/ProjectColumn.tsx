@@ -15,8 +15,8 @@ import {
 } from '../../../reducer/actions'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import styles from './ProjectColumn.module.scss'
-import { getErrorMessage } from './getErrorMessage'
 import { IProjectColumnProps } from './types'
+import { useProjectColumn } from './useProjectColumn'
 
 /**
  * Component that renders the project column for the event list.
@@ -25,8 +25,9 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
   event,
   includeCustomerLink
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('timesheet')
   const { state, dispatch } = useTimesheetContext()
+  const { errorMessage } = useProjectColumn(event)
   let element: ReactElement = null
 
   if (event.isSystemIgnored) {
@@ -35,7 +36,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
   else if (event.project) {
     element = (
       <>
-      {includeCustomerLink && <CustomerLink customer={event.customer} />}
+        {includeCustomerLink && <CustomerLink customer={event.customer} />}
         <div className={styles.content}>
           <ProjectPopover project={event.project}>
             <div className={styles.link}>
@@ -55,17 +56,16 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
       </>
     )
   } else if (event.error) {
-    const [text, intent] = getErrorMessage(event.error.code, t)
-    element = <UserMessage intent={intent} text={text} />
+    element = <UserMessage {...errorMessage} />
   }
   else {
     element = (
       <UserMessage
         intent='warning'
-        text={t('timesheet.noProjectMatchFoundText')}
+        text={t('noProjectMatchFoundText')}
         onClick={() => dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))}
         action={{
-          text: t('timesheet.ignoreEventActionTooltip', event),
+          text: t('ignoreEventActionTooltip', event),
           iconName: 'CalendarCancel',
           iconColor: 'var(--colorPaletteRedForeground1)',
           onClick: () => {
