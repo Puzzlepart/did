@@ -12,7 +12,7 @@ import { MongoDocumentService } from './@document'
  * Subscription service
  *
  * @extends MongoDocumentService
- * 
+ *
  * @category Injectable Container Service
  */
 @Service({ global: false })

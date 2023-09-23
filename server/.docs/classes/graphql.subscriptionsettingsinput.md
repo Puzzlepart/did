@@ -32,7 +32,7 @@
 
 • `Optional` **adsync**: [*SubscriptionADSyncSettingsInput*](graphql.subscriptionadsyncsettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L40)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L55)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • `Optional` **forecast**: [*SubscriptionForecastSettingsInput*](graphql.subscriptionforecastsettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L37)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L52)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • `Optional` **teams**: [*SubscriptionTeamsSettingsInput*](graphql.subscriptionteamssettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L46)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L61)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • `Optional` **timesheet**: *SubscriptionTimesheetSettingsInput*
 
-Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L49)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L64)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 • `Optional` **vacation**: [*SubscriptionVacationSettingsInput*](graphql.subscriptionvacationsettingsinput.md)
 
-Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L43)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionSettings.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionSettings.ts#L58)

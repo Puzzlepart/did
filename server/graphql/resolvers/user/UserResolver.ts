@@ -62,7 +62,7 @@ export class UserResolver {
   }
 
   /**
-   * Get current user, aswell as `id`, `name` and `owner` of 
+   * Get current user, aswell as `id`, `name` and `owner` of
    * the current subscription. If the user is not logged in,
    * `null` is returned.
    *

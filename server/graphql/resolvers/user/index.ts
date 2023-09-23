@@ -1,2 +1,2 @@
-export * from './UserResolver'
 export * from './types'
+export * from './UserResolver'
