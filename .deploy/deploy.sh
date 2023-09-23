@@ -113,15 +113,8 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
-  echo "Cleaning $DEPLOYMENT_TARGET folder"
-  echo "- Deleting existing package-lock.json"
-  rm -rf "$DEPLOYMENT_TARGET/package-lock.json"
-  echo "- Deleting existing shared/ folder"
-  rm -rf "$DEPLOYMENT_TARGET/shared"
-  echo "- Deleting existing server/ folder"
-  rm -rf "$DEPLOYMENT_TARGET/server"
   echo "Syncing files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
-  rsync -a "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
+  rsync -a --delete --force --exclude=node_modules/ "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
   exitWithMessageOnError "Rsync failed to sync files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
 fi
 
@@ -142,4 +135,4 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 fi
 
 ##################################################################################################################################
-echo "Deployment of v$NEW_PACKAGE_VERSION#$NEW_REVISION was successful"
+echo "Deployment of v$NEW_PACKAGE_VERSION.$NEW_REVISION was successful"
