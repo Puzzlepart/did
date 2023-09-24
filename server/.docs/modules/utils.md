@@ -44,7 +44,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [utils/environment.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L62)
+Defined in: [utils/environment.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L63)
 
 ___
 

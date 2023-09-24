@@ -76,7 +76,7 @@ ___
 
 • `Const` **FeedbackPanel**: *FC*<IPanelProps\>
 
-Defined in: [client/parts/UserFeedback/FeedbackPanel/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/index.tsx#L17)
+Defined in: [client/parts/UserFeedback/FeedbackPanel/FeedbackPanel.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/FeedbackPanel/FeedbackPanel.tsx#L17)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 • `Const` **Navigation**: StyledComponent
 
-Defined in: [client/parts/Navigation/Navigation.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/Navigation.tsx#L21)
+Defined in: [client/parts/Navigation/Navigation.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/parts/Navigation/Navigation.tsx#L20)
 
 ___
 
@@ -115,7 +115,7 @@ is set to `true`.
 
 An icon name is optional and defaults to **Emoji2**
 
-Defined in: [client/parts/UserFeedback/index.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/index.tsx#L22)
+Defined in: [client/parts/UserFeedback/UserFeedback.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/parts/UserFeedback/UserFeedback.tsx#L22)
 
 ___
 

@@ -189,19 +189,14 @@ export class UserResolver {
     @Arg('feedback') feedback: UserFeedback
   ): Promise<UserFeedbackResult> {
     try {
-
       const title = `${feedback.title} ${feedback.mood}`
       const labels = [feedback.label].filter(Boolean)
       let reporter = null
-      const reporterTemplate = environment(
-        'GITHUB_FEEDBACK_REPORTER_INFO'
-      )
+      const reporterTemplate = environment('GITHUB_FEEDBACK_REPORTER_INFO')
       if (reporterTemplate) {
         if (feedback.hasGitHubUser) {
           reporter = Format(reporterTemplate, `@${feedback.gitHubUsername}`)
-        } else if (
-          feedback.reporter
-        ) {
+        } else if (feedback.reporter) {
           reporter = Format(
             reporterTemplate,
             `[${feedback.reporter.displayName}](mailto:${feedback.reporter.mail})`

@@ -27,6 +27,7 @@ Reusable React Function components.
 - [FilterItem](components.filteritem.md)
 - [FilterPanel](components.filterpanel.md)
 - [FormControl](components.formcontrol.md)
+- [HorizontalSection](components.horizontalsection.md)
 - [HotkeyModal](components.hotkeymodal.md)
 - [IconPickerControl](components.iconpickercontrol.md)
 - [IconText](components.icontext.md)
@@ -39,6 +40,7 @@ Reusable React Function components.
 - [List](components.list.md)
 - [PermissionList](components.permissionlist.md)
 - [ProjectLink](components.projectlink.md)
+- [RadioGroupControl](components.radiogroupcontrol.md)
 - [SubText](components.subtext.md)
 - [SuggestionItem](components.suggestionitem.md)
 - [SwitchControl](components.switchcontrol.md)
@@ -104,6 +106,7 @@ Reusable React Function components.
 - [IInputControlProps](../interfaces/components.iinputcontrolprops.md)
 - [IInputFieldProps](../interfaces/components.iinputfieldprops.md)
 - [ILabelPickerControlProps](../interfaces/components.ilabelpickercontrolprops.md)
+- [IRadioGroupControlProps](../interfaces/components.iradiogroupcontrolprops.md)
 - [ISubmitProps](../interfaces/components.isubmitprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
 - [IUserMessageAction](../interfaces/components.iusermessageaction.md)
@@ -150,6 +153,7 @@ Reusable React Function components.
 
 - [DynamicButton](components.md#dynamicbutton)
 - [FormControlContext](components.md#formcontrolcontext)
+- [HorizontalSection](components.md#horizontalsection)
 - [InactiveCheckbox](components.md#inactivecheckbox)
 - [InformationProperty](components.md#informationproperty)
 - [InputField](components.md#inputfield)
@@ -184,6 +188,7 @@ Reusable React Function components.
 - [PermissionList](components.md#permissionlist)
 - [ProjectLink](components.md#projectlink)
 - [ProjectPopover](components.md#projectpopover)
+- [RadioGroupControl](components.md#radiogroupcontrol)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
 - [SearchCustomer](components.md#searchcustomer)
 - [SearchProject](components.md#searchproject)
@@ -467,6 +472,14 @@ ___
 The form control context.
 
 Defined in: [client/components/FormControl/context.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/context.ts#L31)
+
+___
+
+### HorizontalSection
+
+• `Const` **HorizontalSection**: StyledComponent
+
+Defined in: [client/components/FormControl/HorizontalSection/HorizontalSection.tsx:5](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/HorizontalSection/HorizontalSection.tsx#L5)
 
 ___
 
@@ -797,6 +810,16 @@ Shows more details about the project in a
 `<TooltipHost />` from `@fluentui/react`
 
 Defined in: [client/components/ProjectTooltip/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTooltip/index.tsx#L17)
+
+___
+
+### RadioGroupControl
+
+• `Const` **RadioGroupControl**: [*FormInputControlComponent*](components.md#forminputcontrolcomponent)<[*IRadioGroupControlProps*](../interfaces/components.iradiogroupcontrolprops.md)\>
+
+Field based on `<RadioGroup />` from [@fluentui/react-components](@fluentui/react-components)
+
+Defined in: [client/components/FormControl/RadioGroupControl/RadioGroupControl.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/RadioGroupControl/RadioGroupControl.tsx#L15)
 
 ___
 

@@ -4,9 +4,9 @@ import { useAppContext } from 'AppContext'
 import { FormSubmitHook, useFormControlModel } from 'components/FormControl'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { BaseResult } from 'types'
 import _ from 'underscore'
 import $submit_feedback from './submit-feedback.gql'
-import { BaseResult } from 'types'
 
 /**
  * Hook that returns props for submitting feedback.
@@ -21,7 +21,7 @@ export const useSubmitFeedback: FormSubmitHook<
 > = (props, model) => {
   const { t } = useTranslation()
   const appContext = useAppContext()
-  const [submitFeedback] = useMutation<{result: BaseResult}>($submit_feedback)
+  const [submitFeedback] = useMutation<{ result: BaseResult }>($submit_feedback)
 
   /**
    * On submit feedback
