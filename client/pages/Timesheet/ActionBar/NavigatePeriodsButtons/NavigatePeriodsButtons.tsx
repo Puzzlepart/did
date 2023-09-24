@@ -33,25 +33,24 @@ export const NavigatePeriodsButtons: StyledComponent<
         display: shouldRender ? 'flex' : 'none'
       }}
     >
-      {state.periods.map((period, index) => {
-        return (
-          <ToolbarRadioButton
-            className={mergeClasses(
-              styles.navigatePeriodsButton,
-              isMobile && styles.mobile
-            )}
-            key={index}
-            name={name}
-            value={period.id}
-            size={isMobile ? 'small' : 'medium'}
-            disabled={!!state.loading}
-          >
-            {isMobile
-              ? s.capitalize(period.month.slice(0, 3))
-              : period.getName(t, true)}
-          </ToolbarRadioButton>
-        )
-      })}
+      {state.periods.map((period, index) => (
+        <ToolbarRadioButton
+          className={mergeClasses(
+            styles.navigatePeriodsButton,
+            isMobile && styles.mobile
+          )}
+          key={index}
+          name={name}
+          defaultChecked={period.id === state.selectedPeriod?.id}
+          value={period.id}
+          size={isMobile ? 'small' : 'medium'}
+          disabled={!!state.loading}
+        >
+          {isMobile
+            ? s.capitalize(period.month.slice(0, 3))
+            : period.getName(t, true)}
+        </ToolbarRadioButton>
+      ))}
     </ToolbarRadioGroup>
   )
 }

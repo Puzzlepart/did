@@ -38,7 +38,7 @@ export function useApp(props: IAppProps) {
    * Sets a toast message with the given properties and duration (in seconds).
    *
    * @param props - The properties of the toast message.
-   * @param duration - The duration in seconds to display the toast message (default: 6).
+   * @param duration - The duration in seconds to display the toast message (default: **6**).
    */
   const setToast = (props: IToastProps, duration: number = 6) => {
     context.dispatch(SET_TOAST(props))

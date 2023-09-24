@@ -601,11 +601,12 @@
     "typeFieldLabel": "What feedback would you like to give?",
     "summaryFieldLabel": "Short summary",
     "submitSuccessMessageText": "Your feedback was registered with reference **#{{ref}}**. Thank you for taking your time!",
-    "submitSuccessMessagHeader": "Thank you!",
-    "submitErrorMessageHeader": "Very sorry!",
-    "submitErrorMessageText": "We couldn't register your feedback. Something weird happend in our backend.",
+    "submitErrorMessageText": "Sorry! We couldn't register your feedback. Something weird happend in our backend.",
     "mobileFeedbackText": "Give feedback",
-    "reportAnonymouslyFieldLabel": "Report anonymously"
+    "reportAnonymouslyFieldLabel": "Report anonymously",
+    "hasGitHubUserFieldLabel": "I have a GitHub user",
+    "gitHubUsernameFieldLabel": "Username on GitHub",
+    "hasGitHubUserFieldDescription": "If you have a GitHub user we can keep ypu posted about the progress on your feedback - if it involves any work for us."
   },
   "formControl": {
     "minLengthMessage": "The {{label}} field must contain at least {{options.validator.minLength}} characters.",

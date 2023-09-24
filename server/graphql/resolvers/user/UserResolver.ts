@@ -1,5 +1,3 @@
-import { createAppAuth } from '@octokit/auth-app'
-import { request } from '@octokit/request'
 import createDebug from 'debug'
 import 'reflect-metadata'
 import Format from 'string-format'
@@ -8,6 +6,7 @@ import { Service } from 'typedi'
 import _ from 'underscore'
 import { PermissionScope } from '../../../../shared/config/security'
 import {
+  GitHubService,
   MSGraphService,
   SubscriptionService,
   UserService
@@ -46,11 +45,13 @@ export class UserResolver {
    * @param _msgraph - MS Graph service
    * @param _userSvc - User service
    * @param _subSvc - Subscription service
+   * @param _githubSvc - GitHub service
    */
   constructor(
     private readonly _msgraph: MSGraphService,
     private readonly _userSvc: UserService,
-    private readonly _subSvc: SubscriptionService
+    private readonly _subSvc: SubscriptionService,
+    private readonly _githubSvc: GitHubService
   ) {}
 
   /**
@@ -178,7 +179,8 @@ export class UserResolver {
   }
 
   /**
-   * Submit feedback
+   * Submit feedback to GitHub repository configured in the
+   * environment.
    *
    * @param feedback - Feedback model
    */
@@ -187,38 +189,31 @@ export class UserResolver {
     @Arg('feedback') feedback: UserFeedback
   ): Promise<UserFeedbackResult> {
     try {
-      const auth = createAppAuth({
-        appId: environment('GITHUB_APPID'),
-        installationId: environment('GITHUB_INSTALLATION_ID'),
-        privateKey: environment('GITHUB_PRIVATE_KEY'),
-        clientId: environment('GITHUB_CLIENT_ID'),
-        clientSecret: environment('GITHUB_CLIENT_SECRET')
-      })
-      const { token } = (await auth({ type: 'installation' })) as any
 
-      const issue = {
-        ..._.omit(feedback, 'reporter'),
-        title: `${feedback.title} ${feedback.mood}`,
-        body: feedback.body,
-        labels: feedback.labels || []
-      }
-      if (feedback.reporter && environment('GITHUB_FEEDBACK_REPORTER_INFO')) {
-        const template = environment('GITHUB_FEEDBACK_REPORTER_INFO')
-        issue.body += `\n\n${Format(
-          template,
-          feedback.reporter.displayName,
-          feedback.reporter.mail
-        )}`
-      }
-      const result = await request('POST /repos/{owner}/{repo}/issues', {
-        owner: environment<string>('GITHUB_FEEDBACK_OWNER'),
-        repo: environment<string>('GITHUB_FEEDBACK_REPO'),
-        ...issue,
-        headers: {
-          authorization: `token ${token}`
+      const title = `${feedback.title} ${feedback.mood}`
+      const labels = [feedback.label].filter(Boolean)
+      let reporter = null
+      const reporterTemplate = environment(
+        'GITHUB_FEEDBACK_REPORTER_INFO'
+      )
+      if (reporterTemplate) {
+        if (feedback.hasGitHubUser) {
+          reporter = Format(reporterTemplate, `@${feedback.gitHubUsername}`)
+        } else if (
+          feedback.reporter
+        ) {
+          reporter = Format(
+            reporterTemplate,
+            `[${feedback.reporter.displayName}](mailto:${feedback.reporter.mail})`
+          )
         }
-      })
-      return { success: true, ref: result.data.number }
+      }
+      const ref = await this._githubSvc.createIssue(
+        title,
+        [feedback.body, reporter].filter(Boolean).join('\n\n'),
+        labels
+      )
+      return { success: true, ref }
     } catch (error) {
       debug('There was an issue submitting feedback to GitHub: ', error.message)
       return { success: false }

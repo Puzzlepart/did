@@ -15,4 +15,4 @@ export interface InputControlOptions extends BaseControlOptions {
 
 export interface IInputControlProps
   extends FormInputControlBase<InputControlOptions>,
-    Pick<IInputFieldProps, 'rows' | 'placeholder' | 'maxLength' | 'type'> {}
+  Pick<IInputFieldProps, 'rows' | 'placeholder' | 'maxLength' | 'type' | 'contentBefore' | 'contentAfter'> { }

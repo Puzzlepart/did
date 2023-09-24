@@ -23,7 +23,7 @@ export const UserMenu: StyledComponent = () => {
   const { subscription } = useAppContext()
   const { palette } = useTheme()
   return (
-    <Popover withArrow={true}>
+    <Popover withArrow={true} closeOnScroll={true}>
       <UserMenuTrigger />
       <PopoverSurface className={UserMenu.className}>
         <MenuItem

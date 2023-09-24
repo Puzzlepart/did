@@ -74,10 +74,10 @@ Logo.className = styles.logo
 Logo.defaultProps = {
   showMotto: false,
   color: '#ffffff',
-  backgroundColor: '#252422',
+  backgroundColor: '#3a0960',
   dropShadow: false,
-  width: 140,
-  height: 80
+  width: 165,
+  height: 94
 }
 
 export * from './types'

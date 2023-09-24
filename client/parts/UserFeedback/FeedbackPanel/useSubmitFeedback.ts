@@ -1,12 +1,12 @@
 import { useMutation } from '@apollo/client'
 import { IPanelProps } from '@fluentui/react'
-import { FormSubmitHook } from 'components/FormControl'
-import { useToast } from 'components/Toast'
-import { useCallback, useState } from 'react'
+import { useAppContext } from 'AppContext'
+import { FormSubmitHook, useFormControlModel } from 'components/FormControl'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import $submit_feedback from './submit-feedback.gql'
-import { useFeedbackModel } from './useFeedbackModel'
+import { BaseResult } from 'types'
 
 /**
  * Hook that returns props for submitting feedback.
@@ -17,49 +17,45 @@ import { useFeedbackModel } from './useFeedbackModel'
  */
 export const useSubmitFeedback: FormSubmitHook<
   IPanelProps,
-  ReturnType<typeof useFeedbackModel>
+  ReturnType<typeof useFormControlModel>
 > = (props, model) => {
   const { t } = useTranslation()
-  const [disabled, setDisabled] = useState(false)
-  const [submitFeedback] = useMutation($submit_feedback)
-  const [toast, setToast] = useToast(8000)
+  const appContext = useAppContext()
+  const [submitFeedback] = useMutation<{result: BaseResult}>($submit_feedback)
 
   /**
    * On submit feedback
    */
   const onSubmitFeedback = useCallback(async () => {
-    setDisabled(true)
+    const feedback = {
+      ...(model.$ as any),
+      reporter:
+        !model.value('anonymous') &&
+        _.pick(appContext.user, 'displayName', 'mail')
+    }
     const { data } = await submitFeedback({
-      variables: { feedback: model.$ }
+      variables: { feedback }
     })
-    setDisabled(false)
     return data.result
   }, [model.$])
 
   return {
     text: t('feedback.submitButtonText'),
-    toast,
     onClick: async () => {
       const result = await onSubmitFeedback()
       if (result.success) {
-        setToast({
-          headerText: t('feedback.submitSuccessMessagHeader'),
+        appContext.setToast({
           text: t('feedback.submitSuccessMessageText', result),
           intent: 'success'
         })
       } else {
-        setToast({
-          headerText: t('feedback.submitErrorMessageHeader'),
+        appContext.setToast({
           text: t('feedback.submitErrorMessageText'),
           intent: 'warning'
         })
       }
+      model.reset()
       props.onDismiss()
-    },
-    disabled:
-      _.isEmpty(model.$.title) ||
-      _.isEmpty(model.$.body) ||
-      !model.$.mood ||
-      disabled
+    }
   }
 }

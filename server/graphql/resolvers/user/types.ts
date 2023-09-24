@@ -216,11 +216,20 @@ export class UserFeedback {
   @Field({ nullable: true })
   mood?: string
 
-  @Field(() => [String], { nullable: true })
-  labels?: string[]
+  @Field({ nullable: true })
+  label?: string
 
   @Field(() => UserFeedbackReporter, { nullable: true })
   reporter?: UserFeedbackReporter
+
+  @Field({ nullable: true })
+  anonymous?: boolean
+
+  @Field({ nullable: true })
+  hasGitHubUser?: boolean
+
+  @Field({ nullable: true })
+  gitHubUsername?: string
 }
 
 /**

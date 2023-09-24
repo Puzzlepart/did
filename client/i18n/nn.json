@@ -585,9 +585,9 @@
     "headerText": "Tilbakemelding",
     "report_a_problem": "Rapporter eit problem",
     "have-a-suggestion": "Forslag",
-    "give-a-compliment": "Gi ein kompliment",
+    "give-a-compliment": "Gi eit kompliment",
     "something-else": "Noko anna",
-    "descriptionFieldLabel": "Beskriv tilbakemeldingen din",
+    "descriptionFieldLabel": "Beskriv tilbakemeldinga di",
     "ratingFieldLabel": "Korleis vil du rangere opplevinga di med did?",
     "very-satisfied": "Svært nøgd",
     "satisfied": "Nøgd",
@@ -601,11 +601,12 @@
     "typeFieldLabel": "Kva tilbakemelding vil du gi?",
     "summaryFieldLabel": "Kort samandrag",
     "submitSuccessMessageText": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse **#{{ref}}**.",
-    "submitSuccessMessagHeader": "Takk skal du ha!",
-    "submitErrorMessageHeader": "Beklagar!",
-    "submitErrorMessageText": "Vi kunne ikkje registrere tilbakemeldinga di. \nNoko rart har skjedd på serveren som vi ikkje heilt forstår.",
+    "submitErrorMessageText": "Beklagar! Vi kunne ikkje registrere tilbakemeldinga di. \nNoko rart har skjedd på serveren som vi ikkje heilt forstår.",
     "mobileFeedbackText": "Gi ei tilbakemelding",
-    "reportAnonymouslyFieldLabel": "Rapporter anonymt"
+    "reportAnonymouslyFieldLabel": "Rapporter anonymt",
+    "hasGitHubUserFieldLabel": "Jeg har en GitHub-bruker",
+    "gitHubUsernameFieldLabel": "Brukernavn på GitHub",
+    "hasGitHubUserFieldDescription": "Hvis du har en GitHub-bruker kan vi holde ypu oppdatert om fremdriften på tilbakemeldingen din - hvis det innebærer noe arbeid for oss."
   },
   "formControl": {
     "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",

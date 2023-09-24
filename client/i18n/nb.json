@@ -601,11 +601,12 @@
     "typeFieldLabel": "Hvilken tilbakemelding vil du gi?",
     "summaryFieldLabel": "Kort sammendrag",
     "submitSuccessMessageText": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse **#{{ref}}**.",
-    "submitSuccessMessagHeader": "Takk skal du ha!",
-    "submitErrorMessageHeader": "Beklager!",
-    "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
+    "submitErrorMessageText": "Beklager! Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
     "mobileFeedbackText": "Gi tilbakemelding",
-    "reportAnonymouslyFieldLabel": "Rapporter anonymt"
+    "reportAnonymouslyFieldLabel": "Rapporter anonymt",
+    "hasGitHubUserFieldLabel": "Jeg har en GitHub-bruker",
+    "gitHubUsernameFieldLabel": "Brukernavn på GitHub",
+    "hasGitHubUserFieldDescription": "Hvis du har en GitHub-bruker kan vi holde ypu oppdatert om fremdriften på tilbakemeldingen din - hvis det innebærer noe arbeid for oss."
   },
   "formControl": {
     "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",

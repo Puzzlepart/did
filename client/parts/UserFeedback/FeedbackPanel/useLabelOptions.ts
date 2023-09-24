@@ -1,23 +1,23 @@
-import { IDropdownOption } from '@fluentui/react'
+import { OptionProps } from '@fluentui/react-components'
 import { useTranslation } from 'react-i18next'
 
-export const useTypeOptions = (): IDropdownOption[] => {
+export const useLabelOptions = (): OptionProps[] => {
   const { t } = useTranslation()
   return [
     {
-      key: 'feedback:problem',
+      value: 'feedback:problem',
       text: t('feedback.report_a_problem')
     },
     {
-      key: 'feedback:suggestion',
+      value: 'feedback:suggestion',
       text: t('feedback.have-a-suggestion')
     },
     {
-      key: 'feedback:compliment',
+      value: 'feedback:compliment',
       text: t('feedback.give-a-compliment')
     },
     {
-      key: 'feedback:something-else',
+      value: 'feedback:something-else',
       text: t('feedback.something-else')
     }
   ]

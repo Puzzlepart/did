@@ -49,6 +49,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'disabled',
             'maxLength',
             'onBlur',
+            'contentBefore',
             'contentAfter'
           )}
         />
