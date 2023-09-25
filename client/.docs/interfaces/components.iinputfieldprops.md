@@ -120,9 +120,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L17)
+Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L20)
 
-Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L17)
+Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L20)
 
 ___
 
@@ -145,9 +145,9 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L12)
+Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L15)
 
-Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L12)
+Defined in: [client/components/FormControl/InputControl/InputField/types.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/InputControl/InputField/types.tsx#L15)
 
 ___
 
