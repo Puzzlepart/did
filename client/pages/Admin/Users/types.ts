@@ -1,5 +1,5 @@
 import { ActiveDirectoryUser, Role, User } from 'types'
-import { IAddMultiplePanelProps } from './BulkImportPanel/types'
+import { IBulkImportPanelProps } from './BulkImportPanel/types'
 import { IUserFormProps } from './UserForm/types'
 
 export interface IUsersState {
@@ -48,7 +48,7 @@ export interface IUsersState {
   /**
    * Properties for `BulkImportPanel`
    */
-  bulkImportPanel?: IAddMultiplePanelProps
+  bulkImportPanel?: IBulkImportPanelProps
 
   /**
    * Text for the Progress bar
