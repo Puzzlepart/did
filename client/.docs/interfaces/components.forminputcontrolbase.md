@@ -25,6 +25,8 @@ Name | Type | Default |
 
   ↳↳ [*IInputControlProps*](components.iinputcontrolprops.md)
 
+  ↳↳ [*IRadioGroupControlProps*](components.iradiogroupcontrolprops.md)
+
 ## Table of contents
 
 ### Properties

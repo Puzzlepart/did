@@ -1,30 +1,33 @@
-[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IInputControlProps
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IRadioGroupControlProps
 
-# Interface: IInputControlProps
+# Interface: IRadioGroupControlProps
 
-[Components](../modules/components.md).IInputControlProps
+[Components](../modules/components.md).IRadioGroupControlProps
+
+Props for the RadioGroupControl component.
 
 ## Hierarchy
 
-* [*FormInputControlBase*](components.forminputcontrolbase.md)<[*InputControlOptions*](components.inputcontroloptions.md)\>
+* [*FormInputControlBase*](components.forminputcontrolbase.md)<{}\>
 
-* *Pick*<[*IInputFieldProps*](components.iinputfieldprops.md), *rows* \| *placeholder* \| *maxLength* \| *type* \| *contentBefore* \| *contentAfter*\>
+* *Pick*<RadioGroupProps, *name*\>
 
-  ↳ **IInputControlProps**
+  ↳ **IRadioGroupControlProps**
 
 ## Table of contents
 
 ### Properties
 
-- [description](components.iinputcontrolprops.md#description)
-- [errorMessage](components.iinputcontrolprops.md#errormessage)
-- [id](components.iinputcontrolprops.md#id)
-- [label](components.iinputcontrolprops.md#label)
-- [labelProps](components.iinputcontrolprops.md#labelprops)
-- [model](components.iinputcontrolprops.md#model)
-- [name](components.iinputcontrolprops.md#name)
-- [options](components.iinputcontrolprops.md#options)
-- [required](components.iinputcontrolprops.md#required)
+- [description](components.iradiogroupcontrolprops.md#description)
+- [errorMessage](components.iradiogroupcontrolprops.md#errormessage)
+- [id](components.iradiogroupcontrolprops.md#id)
+- [label](components.iradiogroupcontrolprops.md#label)
+- [labelProps](components.iradiogroupcontrolprops.md#labelprops)
+- [model](components.iradiogroupcontrolprops.md#model)
+- [name](components.iradiogroupcontrolprops.md#name)
+- [options](components.iradiogroupcontrolprops.md#options)
+- [required](components.iradiogroupcontrolprops.md#required)
+- [values](components.iradiogroupcontrolprops.md#values)
 
 ## Properties
 
@@ -118,11 +121,13 @@ ___
 
 ### options
 
-• `Optional` **options**: [*InputControlOptions*](components.inputcontroloptions.md)
+• `Optional` **options**: *object*
 
 Control options
 
 - `casing` - force value casing
+
+#### Type declaration:
 
 Inherited from: [FormInputControlBase](components.forminputcontrolbase.md).[options](components.forminputcontrolbase.md#options)
 
@@ -139,3 +144,14 @@ Whether the field is required or not.
 Inherited from: [FormInputControlBase](components.forminputcontrolbase.md).[required](components.forminputcontrolbase.md#required)
 
 Defined in: [client/components/FormControl/Field/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/Field/types.ts#L35)
+
+___
+
+### values
+
+• **values**: RadioProps[]
+
+An array of options to display in the dropdown. Specify an array
+of objects with `value` and `text` properties.
+
+Defined in: [client/components/FormControl/RadioGroupControl/types.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/RadioGroupControl/types.tsx#L15)

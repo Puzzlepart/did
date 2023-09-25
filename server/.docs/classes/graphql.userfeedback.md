@@ -12,8 +12,11 @@
 
 ### Properties
 
+- [anonymous](graphql.userfeedback.md#anonymous)
 - [body](graphql.userfeedback.md#body)
-- [labels](graphql.userfeedback.md#labels)
+- [gitHubUsername](graphql.userfeedback.md#githubusername)
+- [hasGitHubUser](graphql.userfeedback.md#hasgithubuser)
+- [label](graphql.userfeedback.md#label)
 - [mood](graphql.userfeedback.md#mood)
 - [reporter](graphql.userfeedback.md#reporter)
 - [title](graphql.userfeedback.md#title)
@@ -28,6 +31,14 @@
 
 ## Properties
 
+### anonymous
+
+• `Optional` **anonymous**: *boolean*
+
+Defined in: [graphql/resolvers/user/types.ts:226](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L226)
+
+___
+
 ### body
 
 • **body**: *string*
@@ -36,9 +47,25 @@ Defined in: [graphql/resolvers/user/types.ts:214](https://github.com/Puzzlepart/
 
 ___
 
-### labels
+### gitHubUsername
 
-• `Optional` **labels**: *string*[]
+• `Optional` **gitHubUsername**: *string*
+
+Defined in: [graphql/resolvers/user/types.ts:232](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L232)
+
+___
+
+### hasGitHubUser
+
+• `Optional` **hasGitHubUser**: *boolean*
+
+Defined in: [graphql/resolvers/user/types.ts:229](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L229)
+
+___
+
+### label
+
+• `Optional` **label**: *string*
 
 Defined in: [graphql/resolvers/user/types.ts:220](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L220)
 

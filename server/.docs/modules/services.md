@@ -18,6 +18,7 @@ Services used by `GraphQL`
 - [CustomerService](../classes/services.customerservice.md)
 - [ForecastedPeriodsService](../classes/services.forecastedperiodsservice.md)
 - [ForecastedTimeEntryService](../classes/services.forecastedtimeentryservice.md)
+- [GitHubService](../classes/services.githubservice.md)
 - [GoogleCalendarService](../classes/services.googlecalendarservice.md)
 - [HolidaysService](../classes/services.holidaysservice.md)
 - [LabelService](../classes/services.labelservice.md)

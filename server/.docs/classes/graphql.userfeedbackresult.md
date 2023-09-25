@@ -48,7 +48,7 @@ ___
 
 • `Optional` **ref**: *number*
 
-Defined in: [graphql/resolvers/user/types.ts:232](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L232)
+Defined in: [graphql/resolvers/user/types.ts:241](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L241)
 
 ___
 
