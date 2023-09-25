@@ -6,7 +6,7 @@ import { CHANGE_DATE_RANGE_TYPE, CHANGE_PERIOD } from '../reducer/actions'
 /**
  * Custom hook that returns default checked values and a callback function for the ActionBar component.
  *
- * @returns An object containing the defaultCheckedValues and onCheckedValueChange function.
+ * @returns An object containing the checkedValues and onCheckedValueChange function.
  */
 export function useActionBar() {
   const { state, dispatch } = useTimesheetContext()
@@ -14,7 +14,7 @@ export function useActionBar() {
    * An object containing default checked values for the toolbar.
    * Memoized to prevent unnecessary re-renders.
    */
-  const defaultCheckedValues: ToolbarProps['defaultCheckedValues'] = useMemo(
+  const checkedValues: ToolbarProps['checkedValues'] = useMemo(
     () => ({
       dateRange: state.dateRangeType && [state.dateRangeType.toString()],
       period: state.selectedPeriod && [state.selectedPeriod?.id]
@@ -40,5 +40,5 @@ export function useActionBar() {
         }
       }
     }, [])
-  return { defaultCheckedValues, onCheckedValueChange }
+  return { checkedValues, onCheckedValueChange }
 }

@@ -22,14 +22,14 @@ import { useActionBar } from './useActionBar'
  */
 export const ActionBar: StyledComponent = () => {
   const { state, dispatch } = useTimesheetContext()
-  const { defaultCheckedValues, onCheckedValueChange } = useActionBar()
+  const { checkedValues, onCheckedValueChange } = useActionBar()
   return (
     <div className={ActionBar.className}>
       <Toolbar
         style={{
           justifyContent: 'space-between'
         }}
-        defaultCheckedValues={defaultCheckedValues}
+        checkedValues={checkedValues}
         onCheckedValueChange={onCheckedValueChange}
       >
         <ToolbarGroup style={{ flex: 1, display: 'inline-flex' }}>
