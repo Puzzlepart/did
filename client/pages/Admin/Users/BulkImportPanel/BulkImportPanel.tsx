@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { UsersContext } from '../context'
-import styles from './AddMultiplePanel.module.scss'
-import { IAddMultiplePanelProps } from './types'
+import styles from './BulkImportPanel.module.scss'
+import { IBulkImportPanelProps } from './types'
 
-export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (
+export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
   props
 ) => {
   const { t } = useTranslation()
@@ -22,7 +22,8 @@ export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (
       headerText={t('admin.users.bulkImportUsersLabel')}
       type={PanelType.medium}
       isLightDismiss={true}
-      className={AddMultiplePanel.className}
+      scroll={true}
+      className={BulkImportPanel.className}
     >
       <div className={styles.container}>
         <Button
@@ -50,7 +51,5 @@ export const AddMultiplePanel: StyledComponent<IAddMultiplePanelProps> = (
   )
 }
 
-AddMultiplePanel.displayName = 'AddMultiplePanel'
-AddMultiplePanel.className = styles.addMultiplePanel
-
-export * from './types'
+BulkImportPanel.displayName = 'BulkImportPanel'
+BulkImportPanel.className = styles.bulkImportPanel

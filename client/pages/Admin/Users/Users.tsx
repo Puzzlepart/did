@@ -6,7 +6,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { User } from 'types'
-import { AddMultiplePanel } from './AddMultiplePanel'
+import { BulkImportPanel } from './BulkImportPanel'
 import { UsersContext } from './context'
 import {
   HIDE_ADD_MULTIPLE_PANEL,
@@ -71,9 +71,9 @@ export const Users: TabComponent<ITabProps> = () => {
               !event && context.refetch()
             }}
           />
-          <AddMultiplePanel
-            {...context.state.addMultiplePanel}
-            isOpen={!!context.state.addMultiplePanel}
+          <BulkImportPanel
+            {...context.state.bulkImportPanel}
+            isOpen={!!context.state.bulkImportPanel}
             onAdd={onAddUsers}
             onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
           />

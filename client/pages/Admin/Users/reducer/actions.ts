@@ -1,7 +1,7 @@
 import { QueryResult } from '@apollo/client'
 import { createAction } from '@reduxjs/toolkit'
 import { User } from 'types'
-import { IAddMultiplePanelProps } from '../AddMultiplePanel'
+import { IAddMultiplePanelProps } from '../BulkImportPanel'
 import { IUserFormProps } from '../UserForm'
 
 export const DATA_UPDATED =

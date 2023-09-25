@@ -1,6 +1,6 @@
 import { IPanelProps } from '@fluentui/react'
 
-export interface IAddMultiplePanelProps extends IPanelProps {
+export interface IBulkImportPanelProps extends IPanelProps {
   /**
    * On add
    */
