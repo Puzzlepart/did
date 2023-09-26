@@ -8,7 +8,9 @@ import { defaultTheme } from './defaultTheme'
  *
  * @returns the theme with palette
  */
-export function getTheme(name: 'auto' | 'dark' | 'default' = 'auto'): [PartialTheme, Theme] {
+export function getTheme(
+  name: 'auto' | 'dark' | 'default' = 'auto'
+): [PartialTheme, Theme] {
   switch (name) {
     case 'dark': {
       return darkTheme
@@ -36,7 +38,6 @@ function getAutoColorScheme(): [PartialTheme, Theme] {
     : getTheme('default')
 }
 
-export * from './Themed'
 export * from './darkTheme'
 export * from './defaultTheme'
-
+export * from './Themed'

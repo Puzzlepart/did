@@ -13,12 +13,12 @@ export const BasePanel: ReusableComponent<IBasePanelProps> = (props) => {
   const panelProps = useBasePanel(props)
   return (
     <Panel {...panelProps}>
-        {props.headerSubText && (
-          <Text {...props.headerSubTextProps} className={styles.headerSubText}>
-            {props.headerSubText}
-          </Text>
-        )}
-        {props.children}
+      {props.headerSubText && (
+        <Text {...props.headerSubTextProps} className={styles.headerSubText}>
+          {props.headerSubText}
+        </Text>
+      )}
+      {props.children}
     </Panel>
   )
 }

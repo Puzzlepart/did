@@ -6,8 +6,8 @@
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
-import $date from 'DateUtils'
 import 'core-js/stable'
+import $date from 'DateUtils'
 import i18next from 'i18next'
 import { enableMapSet } from 'immer'
 import React from 'react'

@@ -45,57 +45,57 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
           permissionIds={checkedValues.permissions ?? []}
         />
       )}
-        <Menu>
-          <DynamicButton
-            text={props.buttonLabel ?? props.label}
-            iconName={props.buttonIcon}
-            triggerFor='Menu'
-          />
-          <MenuPopover>
-            <MenuList>
-              {Object.keys(permissions).map((key) => (
-                <Menu
-                  key={key}
-                  checkedValues={checkedValues}
-                  onCheckedValueChange={onCheckedValueChange}
-                >
-                  <MenuTrigger disableButtonEnhancement>
-                    <MenuItem>{t(`permissions.category_${key}`)}</MenuItem>
-                  </MenuTrigger>
-                  <MenuPopover>
-                    <MenuList>
-                      {permissions[key].length > 1 && (
-                        <>
-                          <MenuItemCheckbox name={key} value='allSelected'>
-                            {t('permissions.selectAll')}
-                          </MenuItemCheckbox>
-
-                          <div
-                            style={{
-                              borderBottom: '1px solid #eaeaea',
-                              margin: '0 0 8px 0'
-                            }}
-                          />
-                        </>
-                      )}
-                      {permissions[key].map((permission, index) => (
-                        <MenuItemCheckbox
-                          key={index}
-                          name={props.name}
-                          value={permission.id}
-                          disabled={permission.disabled}
-                        >
-                          {permission.name}
+      <Menu>
+        <DynamicButton
+          text={props.buttonLabel ?? props.label}
+          iconName={props.buttonIcon}
+          triggerFor='Menu'
+        />
+        <MenuPopover>
+          <MenuList>
+            {Object.keys(permissions).map((key) => (
+              <Menu
+                key={key}
+                checkedValues={checkedValues}
+                onCheckedValueChange={onCheckedValueChange}
+              >
+                <MenuTrigger disableButtonEnhancement>
+                  <MenuItem>{t(`permissions.category_${key}`)}</MenuItem>
+                </MenuTrigger>
+                <MenuPopover>
+                  <MenuList>
+                    {permissions[key].length > 1 && (
+                      <>
+                        <MenuItemCheckbox name={key} value='allSelected'>
+                          {t('permissions.selectAll')}
                         </MenuItemCheckbox>
-                      ))}
-                    </MenuList>
-                  </MenuPopover>
-                </Menu>
-              ))}
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-        <FieldDescription text={props.description} />
+
+                        <div
+                          style={{
+                            borderBottom: '1px solid #eaeaea',
+                            margin: '0 0 8px 0'
+                          }}
+                        />
+                      </>
+                    )}
+                    {permissions[key].map((permission, index) => (
+                      <MenuItemCheckbox
+                        key={index}
+                        name={props.name}
+                        value={permission.id}
+                        disabled={permission.disabled}
+                      >
+                        {permission.name}
+                      </MenuItemCheckbox>
+                    ))}
+                  </MenuList>
+                </MenuPopover>
+              </Menu>
+            ))}
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <FieldDescription text={props.description} />
     </Field>
   )
 }

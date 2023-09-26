@@ -546,10 +546,7 @@ ___
 
 • `Const` **BasePanel**: *ReusableComponent*<[*IBasePanelProps*](../interfaces/components.ibasepanelprops.md)\>
 
-Renders a Panel with the content wrapped in `<FluentProvider />` from
-[@fluentui/react-components](@fluentui/react-components)
-
-Defined in: [client/components/BasePanel/BasePanel.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/BasePanel.tsx#L15)
+Defined in: [client/components/BasePanel/BasePanel.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/BasePanel.tsx#L12)
 
 ___
 

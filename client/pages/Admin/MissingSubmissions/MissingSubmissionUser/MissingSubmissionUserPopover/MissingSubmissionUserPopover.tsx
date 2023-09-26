@@ -8,8 +8,8 @@ import React from 'react'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserPopover.module.scss'
-import { UserMissingPeriods } from './UserMissingPeriods'
 import { IMissingSubmissionUserPopoverProps } from './types'
+import { UserMissingPeriods } from './UserMissingPeriods'
 
 export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUserPopoverProps> =
   (props) => (

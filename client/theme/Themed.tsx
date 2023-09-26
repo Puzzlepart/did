@@ -15,11 +15,17 @@ export const Themed: FC<HTMLProps<HTMLDivElement>> = (props) => {
   return (
     <AppContext.Consumer>
       {(context) => (
-        <ThemeProvider applyTo='body' theme={context.user.theme[0]} className={props.className} hidden={props.hidden}>
-          <FluentProvider theme={context.user.theme[1]} applyStylesToPortals={true}>
-            <PortalCompatProvider>
-            {props.children}
-            </PortalCompatProvider>
+        <ThemeProvider
+          applyTo='body'
+          theme={context.user.theme[0]}
+          className={props.className}
+          hidden={props.hidden}
+        >
+          <FluentProvider
+            theme={context.user.theme[1]}
+            applyStylesToPortals={true}
+          >
+            <PortalCompatProvider>{props.children}</PortalCompatProvider>
           </FluentProvider>
         </ThemeProvider>
       )}
