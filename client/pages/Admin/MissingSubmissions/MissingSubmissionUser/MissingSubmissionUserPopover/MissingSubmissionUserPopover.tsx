@@ -1,17 +1,16 @@
 import {
-  FluentProvider,
   Persona,
   Popover,
   PopoverSurface,
   PopoverTrigger
 } from '@fluentui/react-components'
 import React from 'react'
-import { fluentDefaultTheme } from 'theme'
+import { Themed } from 'theme'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserPopover.module.scss'
-import { IMissingSubmissionUserPopoverProps } from './types'
 import { UserMissingPeriods } from './UserMissingPeriods'
+import { IMissingSubmissionUserPopoverProps } from './types'
 
 export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUserPopoverProps> =
   (props) => (
@@ -20,10 +19,7 @@ export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUse
         <div>{props.children}</div>
       </PopoverTrigger>
       <PopoverSurface>
-        <FluentProvider
-          theme={fluentDefaultTheme}
-          className={MissingSubmissionUserPopover.className}
-        >
+        <Themed className={MissingSubmissionUserPopover.className}>
           <Persona
             {...props.user}
             className={styles.persona}
@@ -31,7 +27,7 @@ export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUse
           />
           <UserMissingPeriods {...props} />
           <TeamsReminderButton period={props.period} users={[props.user]} />
-        </FluentProvider>
+        </Themed>
       </PopoverSurface>
     </Popover>
   )

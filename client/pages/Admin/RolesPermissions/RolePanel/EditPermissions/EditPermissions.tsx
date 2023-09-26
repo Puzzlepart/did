@@ -1,5 +1,4 @@
 import {
-  FluentProvider,
   Menu,
   MenuItem,
   MenuItemCheckbox,
@@ -12,7 +11,7 @@ import { DynamicButton, PermissionList, UserMessage } from 'components'
 import { Field, FieldDescription } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { fluentDefaultTheme } from 'theme'
+import { Themed } from 'theme'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
 import { t9r } from 'utils'
@@ -47,7 +46,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
           permissionIds={checkedValues.permissions ?? []}
         />
       )}
-      <FluentProvider theme={fluentDefaultTheme}>
+      <Themed>
         <Menu>
           <DynamicButton
             text={props.buttonLabel ?? props.label}
@@ -99,7 +98,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
           </MenuPopover>
         </Menu>
         <FieldDescription text={props.description} />
-      </FluentProvider>
+      </Themed>
     </Field>
   )
 }
