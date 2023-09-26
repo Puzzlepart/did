@@ -6,8 +6,8 @@
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
-import 'core-js/stable'
 import $date from 'DateUtils'
+import 'core-js/stable'
 import i18next from 'i18next'
 import { enableMapSet } from 'immer'
 import React from 'react'
@@ -17,7 +17,6 @@ import { App } from './app'
 import { client } from './graphql'
 import { fetchUserContext } from './graphql-queries/user'
 import './i18n'
-import { Themed } from './theme/Themed'
 
 // Enable the MapSet plugin
 enableMapSet()
@@ -36,11 +35,9 @@ export const bootstrap = async () => {
   i18next.changeLanguage(context.user.preferredLanguage)
 
   render(
-    <Themed theme={context.user.theme}>
-      <ApolloProvider client={client}>
-        <App {...context} />
-      </ApolloProvider>
-    </Themed>,
+    <ApolloProvider client={client}>
+      <App {...context} />
+    </ApolloProvider>,
     document.querySelector('#app')
   )
 }

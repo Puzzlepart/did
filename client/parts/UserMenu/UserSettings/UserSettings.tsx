@@ -63,6 +63,24 @@ export const UserSettings: StyledComponent = () => {
               }
             ]}
           />
+          <DropdownControl
+            {...register(CONFIG_KEYS.theme)}
+            label={t('common.uiThemeLabel')}
+            values={[
+              {
+                value: 'default',
+                text: t('common.light-theme')
+              },
+              {
+                value: 'dark',
+                text: t('common.dark-theme')
+              },
+              {
+                value: 'auto',
+                text: t('common.auto-theme')
+              }
+            ]}
+          />
           <InputControl
             {...register(CONFIG_KEYS.vacationTotalDays)}
             label={t('common.vacationTotalDaysLabel')}
