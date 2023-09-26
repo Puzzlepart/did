@@ -1,7 +1,6 @@
 import { mergeClasses } from '@fluentui/react-components'
 import { DynamicButton } from 'components/DynamicButton'
 import React from 'react'
-import { Themed } from 'theme'
 import { StyledComponent } from 'types'
 import styles from './Footer.module.scss'
 import { IFooterProps } from './types'
@@ -10,7 +9,7 @@ import { useFooter } from './useFooter'
 export const Footer: StyledComponent<IFooterProps> = (props) => {
   const actions = useFooter(props)
   return (
-    <Themed
+    <div
       className={mergeClasses(
         Footer.className,
         props.className,
@@ -31,7 +30,7 @@ export const Footer: StyledComponent<IFooterProps> = (props) => {
           ))}
         </div>
       </div>
-    </Themed>
+    </div>
   )
 }
 

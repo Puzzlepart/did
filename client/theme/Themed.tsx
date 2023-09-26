@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@fluentui/react'
 import { FluentProvider } from '@fluentui/react-components'
+import { PortalCompatProvider } from '@fluentui/react-portal-compat'
 import { AppContext } from 'AppContext'
 import React, { FC, HTMLProps } from 'react'
 
@@ -16,7 +17,9 @@ export const Themed: FC<HTMLProps<HTMLDivElement>> = (props) => {
       {(context) => (
         <ThemeProvider applyTo='body' theme={context.user.theme[0]} className={props.className} hidden={props.hidden}>
           <FluentProvider theme={context.user.theme[1]} applyStylesToPortals={true}>
+            <PortalCompatProvider>
             {props.children}
+            </PortalCompatProvider>
           </FluentProvider>
         </ThemeProvider>
       )}

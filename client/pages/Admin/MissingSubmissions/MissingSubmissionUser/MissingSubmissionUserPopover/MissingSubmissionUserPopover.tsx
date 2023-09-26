@@ -5,7 +5,6 @@ import {
   PopoverTrigger
 } from '@fluentui/react-components'
 import React from 'react'
-import { Themed } from 'theme'
 import { StyledComponent } from 'types'
 import { TeamsReminderButton } from '../../TeamsReminderButton'
 import styles from './MissingSubmissionUserPopover.module.scss'
@@ -19,7 +18,7 @@ export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUse
         <div>{props.children}</div>
       </PopoverTrigger>
       <PopoverSurface>
-        <Themed className={MissingSubmissionUserPopover.className}>
+        <div className={MissingSubmissionUserPopover.className}>
           <Persona
             {...props.user}
             className={styles.persona}
@@ -27,7 +26,7 @@ export const MissingSubmissionUserPopover: StyledComponent<IMissingSubmissionUse
           />
           <UserMissingPeriods {...props} />
           <TeamsReminderButton period={props.period} users={[props.user]} />
-        </Themed>
+        </div>
       </PopoverSurface>
     </Popover>
   )
