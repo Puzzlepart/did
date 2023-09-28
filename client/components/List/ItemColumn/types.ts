@@ -13,4 +13,4 @@ export type ItemColumnRenderType =
   | 'projectLink'
   | 'projectTag'
   | 'tag'
-  | 'persona'  
+  | 'persona'

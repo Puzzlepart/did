@@ -317,7 +317,7 @@ ___
 
 ### ItemColumnRenderType
 
-Ƭ **ItemColumnRenderType**: *timeFromNow* \| *customerLink* \| *projectLink* \| *projectTag* \| *tag*
+Ƭ **ItemColumnRenderType**: *timeFromNow* \| *customerLink* \| *projectLink* \| *projectTag* \| *tag* \| *persona*
 
 Defined in: [client/components/List/ItemColumn/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/types.ts#L10)
 

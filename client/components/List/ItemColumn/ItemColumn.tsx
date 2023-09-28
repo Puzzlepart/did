@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/prefer-ternary */
 import { Caption1, Persona, Text, Tooltip } from '@fluentui/react-components'
 import { Tag } from '@fluentui/react-tags-preview'
-import { DateObject } from 'DateUtils'
 import { CustomerLink, ProjectLink, ProjectTag } from 'components'
+import { DateObject } from 'DateUtils'
 import get from 'get-value'
 import React, { ReactElement } from 'react'
 import ReactMarkdown from 'react-markdown'
