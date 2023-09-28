@@ -6,3 +6,5 @@ export interface IItemColumnProps extends HTMLAttributes<HTMLDivElement> {
   index?: number
   column: Partial<IListColumn>
 }
+
+export type ItemColumnRenderType = 'timeFromNow' | 'customerLink' | 'projectLink' | 'projectTag' | 'tag'

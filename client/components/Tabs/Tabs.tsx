@@ -1,47 +1,16 @@
 import {
   mergeClasses,
-  Tab,
-  TabList,
-  TabProps
+  TabList
 } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
-import React, { useMemo } from 'react'
-import { getFluentIcon } from 'utils'
-import { TabHeader } from './TabHeader'
+import React from 'react'
 import styles from './Tabs.module.scss'
 import { ITabsProps } from './types'
 import { useTabs } from './useTabs'
 
 export const Tabs: ReusableComponent<ITabsProps> = (props) => {
-  const { selectedValue, onTabSelect, Component, componentProps } =
+  const { selectedValue, onTabSelect, Component, componentProps, tabItems } =
     useTabs(props)
-
-  /**
-   * An array of `Tab` components generated from the `items` prop.
-   * Each `Tab` component is created with a `value` prop set to the corresponding key in `items`,
-   * and a `children` prop set to the `text` property of the corresponding header object, or the header string if it is not an object.
-   * If the corresponding header object has an `iconName` property, the `Tab` component is created with an `icon` prop set to the corresponding Fluent icon.
-   * If the corresponding header object has a `disabled` property set to `true`, the `Tab` component is created with a `disabled` prop set to `true`.
-   */
-  const tabItems = useMemo(() => {
-    return Object.keys(props.items).map((key) => {
-      const [, header] = props.items[key]
-      const tabProps: TabProps = {
-        value: key,
-        children:
-          typeof header === 'string' ? (
-            <span>{header}</span>
-          ) : (
-            <TabHeader {...header} />
-          )
-      }
-      if (typeof header === 'object') {
-        tabProps.icon = getFluentIcon(header?.iconName)
-        tabProps.disabled = header?.disabled
-      }
-      return <Tab key={key} {...tabProps} />
-    })
-  }, [props.items])
 
   return (
     <div
@@ -57,6 +26,7 @@ export const Tabs: ReusableComponent<ITabsProps> = (props) => {
         vertical={props.vertical}
         selectedValue={selectedValue}
         onTabSelect={onTabSelect}
+        size={props.level === 3 ? 'medium' : 'large'}
       >
         {tabItems}
       </TabList>

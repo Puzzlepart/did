@@ -9,6 +9,7 @@ import { StyledComponent } from 'types'
 import { useListContext } from '../context'
 import styles from './ItemColumn.module.scss'
 import { IItemColumnProps } from './types'
+import { Tag } from '@fluentui/react-tags-preview'
 
 export const ItemColumn: StyledComponent<IItemColumnProps> = ({
   column,
@@ -49,13 +50,16 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
         return <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
       }
       case 'customerLink': {
-        return <CustomerLink customer={fieldValue} />
+        return <CustomerLink customer={fieldValue} {...renderProps} />
       }
       case 'projectLink': {
         return <ProjectLink project={fieldValue} {...renderProps} />
       }
       case 'projectTag': {
         return <ProjectTag project={fieldValue} {...renderProps} />
+      }
+      case 'tag': {
+        return <Tag {...renderProps}>{fieldValue}</Tag>
       }
       default: {
         if (column.onRender) {
