@@ -32,7 +32,8 @@
       "utils": ["./utils"],
       "theme": ["./theme"],
       "i18n": ["./i18n"],
-      "graphql-queries": ["./graphql-queries"]
+      "graphql-queries": ["./graphql-queries"],
+      "graphql-mutations": ["./graphql-mutations"]
     }
   }
 }
