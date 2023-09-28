@@ -49,7 +49,8 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             renderAs: 'projectTag',
             createRenderProps: (project) => ({
               icon: getFluentIconWithFallback(project.icon),
-              hasOutlookCategory: _.contains(outlookCategories, project.tag)
+              hasOutlookCategory: _.contains(outlookCategories, project.tag),
+              hasSecondaryAction: !_.isEmpty(outlookCategories)
             })
           }
         ),

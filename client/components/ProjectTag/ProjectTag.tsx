@@ -24,18 +24,20 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
   return (
     <InteractionTag>
       <CopyToClipboard text={props.project?.tag} onCopy={onTagCopied}>
-        <InteractionTagPrimary hasSecondaryAction icon={props.icon}>
+        <InteractionTagPrimary hasSecondaryAction={props.hasSecondaryAction} icon={props.icon}>
           <span>{props.project?.tag}</span>
         </InteractionTagPrimary>
       </CopyToClipboard>
-      <Tooltip content={addOutlookCategoryTooltip} relationship='label'>
-        <InteractionTagSecondary
-          onClick={addOutlookCategory}
-          style={{ cursor: hasOutlookCategory ? 'auto' : 'pointer' }}
-        >
-          {getFluentIcon('Heart', { bundle: true, filled: hasOutlookCategory })}
-        </InteractionTagSecondary>
-      </Tooltip>
+      {props.hasSecondaryAction && (
+        <Tooltip content={addOutlookCategoryTooltip} relationship='label'>
+          <InteractionTagSecondary
+            onClick={addOutlookCategory}
+            style={{ cursor: hasOutlookCategory ? 'auto' : 'pointer' }}
+          >
+            {getFluentIcon('Heart', { bundle: true, filled: hasOutlookCategory })}
+          </InteractionTagSecondary>
+        </Tooltip>
+      )}
     </InteractionTag>
   )
 }

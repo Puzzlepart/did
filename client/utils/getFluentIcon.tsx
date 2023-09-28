@@ -435,7 +435,8 @@ type GetFluentIconOptions = {
  * @param name - The name of the icon to retrieve.
  * @param options - The options to use when retrieving the icon.
  *
- * @returns The specified Fluent icon.
+ * @returns The specified Fluent icon with the specified options, or null if the icon is not found
+ * in the catalog.
  */
 export function getFluentIcon(
   name: FluentIconName,
