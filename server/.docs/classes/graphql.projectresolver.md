@@ -39,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectResolver*](graphql.projectresolver.md)
 
-Defined in: [graphql/resolvers/project/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L27)
+Defined in: [graphql/resolvers/project/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L26)
 
 ## Methods
 
@@ -59,7 +59,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*CreateOrUpdateProjectResult*](graphql.createorupdateprojectresult.md)\>
 
-Defined in: [graphql/resolvers/project/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L66)
+Defined in: [graphql/resolvers/project/index.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L65)
 
 ___
 
@@ -77,4 +77,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Project*](graphql.project.md)[]\>
 
-Defined in: [graphql/resolvers/project/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L46)
+Defined in: [graphql/resolvers/project/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L45)

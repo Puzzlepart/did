@@ -206,11 +206,11 @@ export class MSGraphService {
 
   /**
    * Get Outlook categories. This method uses the Microsoft Graph endpoint
-   * `/me/outlook/masterCategories`. The response is default cached for 
+   * `/me/outlook/masterCategories`. The response is default cached for
    * 60 seconds.
    *
    * @public
-   * 
+   *
    * @param cacheExpiry - Cache expiry in seconds
    *
    * @memberof MSGraphService
@@ -225,7 +225,11 @@ export class MSGraphService {
             .get()
           return value
         },
-        { key: 'getoutlookcategories', expiry: cacheExpiry, scope: CacheScope.USER }
+        {
+          key: 'getoutlookcategories',
+          expiry: cacheExpiry,
+          scope: CacheScope.USER
+        }
       )
     } catch (error) {
       throw new MSGraphError('getOutlookCategories', error.message)

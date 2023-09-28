@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [services/msgraph/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L29)
+Defined in: [services/msgraph/MSGraphService.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L29)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [services/msgraph/index.ts:29](https://github.com/Puzzlepart/did/blo
 
 • `Private` **\_accessTokenOptions**: MSAccessTokenOptions
 
-Defined in: [services/msgraph/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L23)
+Defined in: [services/msgraph/MSGraphService.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L23)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **\_cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [services/msgraph/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L22)
+Defined in: [services/msgraph/MSGraphService.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L22)
 
 ___
 
@@ -81,15 +81,15 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [services/msgraph/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L44)
+Defined in: [services/msgraph/MSGraphService.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L44)
 
 ___
 
 ### createOutlookCategory
 
-▸ **createOutlookCategory**(`category`: *string*): *Promise*<MSGraphOutlookCategory\>
+▸ **createOutlookCategory**(`category`: *string*): *Promise*<[*MSGraphOutlookCategory*](../interfaces/services.msgraphoutlookcategory.md)\>
 
-Create Outlook category
+Create Outlook category.
 
 **`memberof`** MSGraphService
 
@@ -99,9 +99,9 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `category` | *string* | Category    |
 
-**Returns:** *Promise*<MSGraphOutlookCategory\>
+**Returns:** *Promise*<[*MSGraphOutlookCategory*](../interfaces/services.msgraphoutlookcategory.md)\>
 
-Defined in: [services/msgraph/index.ts:184](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L184)
+Defined in: [services/msgraph/MSGraphService.ts:184](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L184)
 
 ___
 
@@ -121,7 +121,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L127)
+Defined in: [services/msgraph/MSGraphService.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L127)
 
 ___
 
@@ -142,21 +142,29 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:242](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L242)
+Defined in: [services/msgraph/MSGraphService.ts:245](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L245)
 
 ___
 
 ### getOutlookCategories
 
-▸ **getOutlookCategories**(): *Promise*<any[]\>
+▸ **getOutlookCategories**(`cacheExpiry?`: *number*): *Promise*<any[]\>
 
-Get Outlook categories
+Get Outlook categories. This method uses the Microsoft Graph endpoint
+`/me/outlook/masterCategories`. The response is default cached for
+60 seconds.
 
 **`memberof`** MSGraphService
 
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`cacheExpiry` | *number* | 60 | Cache expiry in seconds    |
+
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/msgraph/index.ts:215](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L215)
+Defined in: [services/msgraph/MSGraphService.ts:218](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L218)
 
 ___
 
@@ -179,7 +187,7 @@ Name | Type | Description |
 A base64 representation of the user photo, or null if
 the user photo is not found.
 
-Defined in: [services/msgraph/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L69)
+Defined in: [services/msgraph/MSGraphService.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L69)
 
 ___
 
@@ -193,7 +201,7 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L144)
+Defined in: [services/msgraph/MSGraphService.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L144)
 
 ___
 
@@ -211,4 +219,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L87)
+Defined in: [services/msgraph/MSGraphService.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L87)

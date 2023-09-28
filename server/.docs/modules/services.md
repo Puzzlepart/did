@@ -36,7 +36,12 @@ Services used by `GraphQL`
 
 ### Other Classes
 
+- [MSGraphError](../classes/services.msgrapherror.md)
 - [UserNotification](../classes/services.usernotification.md)
+
+### Interfaces
+
+- [MSGraphOutlookCategory](../interfaces/services.msgraphoutlookcategory.md)
 
 ### Type aliases
 
