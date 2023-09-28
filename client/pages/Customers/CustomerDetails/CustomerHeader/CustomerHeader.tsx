@@ -1,19 +1,19 @@
-import { Breadcrumb, Shimmer } from '@fluentui/react'
-import { SubText } from 'components'
+import { Shimmer } from '@fluentui/react'
+import { Breadcrumb, SubText } from 'components'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { StyledComponent } from 'types'
 import { CustomersContext } from '../../context'
 import { CustomerActions } from './CustomerActions'
 import styles from './CustomerHeader.module.scss'
-import { useCustomerHeader } from './useCustomerHeader'
+import { useCustomerHeaderBreadcrumb } from './useCustomerHeaderBreadcrumb'
 
 /**
  * @category Customers
  */
 export const CustomerHeader: StyledComponent = () => {
   const { state, loading } = useContext(CustomersContext)
-  const { breadcrumb } = useCustomerHeader()
+  const breadcrumbItems = useCustomerHeaderBreadcrumb()
   return (
     <Shimmer
       className={CustomerHeader.className}
@@ -24,9 +24,7 @@ export const CustomerHeader: StyledComponent = () => {
         className={styles.container}
         style={{ display: isMobile ? 'none' : 'flex' }}
       >
-        <div className={styles.breadcrumb}>
-          <Breadcrumb {...breadcrumb} />
-        </div>
+        <Breadcrumb className={styles.breadcrumb} items={breadcrumbItems} />
         <CustomerActions />
       </div>
       <SubText

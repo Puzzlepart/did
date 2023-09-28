@@ -1,23 +1,28 @@
-import { IBreadcrumbItem } from 'components'
-import { useMemo } from 'react'
+import { useBreadcrumb, useSwitchCase } from 'hooks'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { createRouterLink } from 'utils'
 import { useProjectsContext } from '../../context'
 import { SET_SELECTED_PROJECT } from '../../reducer/actions'
+import { IProjectsUrlParameters } from '../../types'
 
 /**
  * A hook that returns the breadcrumb items for the project header.
  * 
  * @returns An object containing the breadcrumb items.
  */
-export function useProjectHeader() {
+export function useProjectHeaderBreadcrumb() {
   const { t } = useTranslation()
   const { state, dispatch } = useProjectsContext()
+  const urlParameters = useParams<IProjectsUrlParameters>()
   const history = useHistory()
-  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => ([
+  const detailsTab = useSwitchCase(urlParameters.detailsTab, {
+    projects:  t('customers.projectsHeaderText'),
+    default: t('customers.informationHeaderText')
+  })
+
+  const breadcrumbItems = useBreadcrumb([
     {
-      key: 0,
       value: t('navigation.ProjectsPage'),
       onClick: () => {
         history.replace('/projects/s')
@@ -25,7 +30,6 @@ export function useProjectHeader() {
       }
     },
     {
-      key: 1,
       value: state.selected?.customer.name,
       onClick: () =>
         history.replace(
@@ -33,9 +37,11 @@ export function useProjectHeader() {
         )
     },
     {
-      key: 2,
       value: state.selected?.name
+    },
+    {
+      value: detailsTab
     }
-  ]), [state.selected])
-  return { breadcrumbItems }
+  ], [state.selected, detailsTab])
+  return breadcrumbItems
 }

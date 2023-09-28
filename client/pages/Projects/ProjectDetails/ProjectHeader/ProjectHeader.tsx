@@ -5,7 +5,7 @@ import { StyledComponent } from 'types'
 import { useProjectsContext } from '../../context'
 import { ProjectActions } from './ProjectActions'
 import styles from './ProjectHeader.module.scss'
-import { useProjectHeader } from './useProjectHeader'
+import { useProjectHeaderBreadcrumb } from './useProjectHeaderBreadcrumb'
 import { Breadcrumb, SubText} from 'components'
 
 /**
@@ -13,7 +13,7 @@ import { Breadcrumb, SubText} from 'components'
  */
 export const ProjectHeader: StyledComponent = () => {
   const { state, loading } = useProjectsContext()
-  const { breadcrumbItems } = useProjectHeader()
+  const  breadcrumbItems  = useProjectHeaderBreadcrumb()
   return (
     <Shimmer
       className={ProjectHeader.className}

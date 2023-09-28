@@ -16,7 +16,7 @@ export const ProjectDetails: StyledComponent = () => {
   return (
     <div className={ProjectDetails.className}>
       <ProjectHeader />
-      <Tabs items={tabs} />
+      <Tabs items={tabs} level={3} />
     </div>
   )
 }
