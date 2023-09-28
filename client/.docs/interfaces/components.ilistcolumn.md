@@ -1,6 +1,6 @@
 [did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IListColumn
 
-# Interface: IListColumn<T\>
+# Interface: IListColumn<T, P\>
 
 [Components](../modules/components.md).IListColumn
 
@@ -9,6 +9,7 @@
 Name | Type | Default |
 :------ | :------ | :------ |
 `T` | *object* | *any* |
+`P` | *object* | *any* |
 
 ## Hierarchy
 
@@ -29,14 +30,14 @@ Name | Type | Default |
 
 ### createRenderProps
 
-• `Optional` **createRenderProps**: (`item`: T) => *any*
+• `Optional` **createRenderProps**: (`item`: T) => *Partial*<P\>
 
 Create render props to send to the component rendering the column.
 E.g. `ProjectLink` or `CustomerLink`.
 
 #### Type declaration:
 
-▸ (`item`: T): *any*
+▸ (`item`: T): *Partial*<P\>
 
 #### Parameters:
 
@@ -44,11 +45,11 @@ Name | Type |
 :------ | :------ |
 `item` | T |
 
-**Returns:** *any*
+**Returns:** *Partial*<P\>
 
-Defined in: [client/components/List/types/IListColumn.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L31)
+Defined in: [client/components/List/types/IListColumn.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L34)
 
-Defined in: [client/components/List/types/IListColumn.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L31)
+Defined in: [client/components/List/types/IListColumn.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L34)
 
 ___
 
@@ -60,7 +61,7 @@ Data for the column - `IListColumnData`
 
 Overrides: void
 
-Defined in: [client/components/List/types/IListColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L12)
+Defined in: [client/components/List/types/IListColumn.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L13)
 
 ___
 
@@ -70,17 +71,19 @@ ___
 
 The column should be hidden
 
-Defined in: [client/components/List/types/IListColumn.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L17)
+Defined in: [client/components/List/types/IListColumn.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L18)
 
 ___
 
 ### renderAs
 
-• `Optional` **renderAs**: *timeFromNow* \| *customerLink* \| *projectLink*
+• `Optional` **renderAs**: *timeFromNow* \| *customerLink* \| *projectLink* \| *projectTag*
 
 How to render the column
 
 - `timeFromNow` - render the column as a time from now
 - `customerLink` - render the column as a customer link
+- `projectLink` - render the column as a project link
+- `projectTag` - render the column as a project tag
 
-Defined in: [client/components/List/types/IListColumn.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L25)
+Defined in: [client/components/List/types/IListColumn.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L28)

@@ -84,6 +84,10 @@
 
 - [ReportsQueryPreset](graphql.md#reportsquerypreset)
 
+### Variables
+
+- [debug](graphql.md#debug)
+
 ### Functions
 
 - [generateClientInfo](graphql.md#generateclientinfo)
@@ -99,6 +103,14 @@
 Reports query preset
 
 Defined in: [graphql/resolvers/reports/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L71)
+
+## Variables
+
+### debug
+
+• `Const` **debug**: Debugger
+
+Defined in: [graphql/setupGraphQL.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/setupGraphQL.ts#L18)
 
 ## Functions
 
@@ -134,7 +146,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [graphql/index.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L75)
+Defined in: [graphql/generateClientInfo.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/generateClientInfo.ts#L25)
 
 ___
 
@@ -155,7 +167,7 @@ Generate [GraphQL](https://graphql.org/) schema using
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [graphql/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L43)
+Defined in: [graphql/generateGraphQLSchema.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/generateGraphQLSchema.ts#L20)
 
 ___
 
@@ -184,4 +196,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [graphql/index.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L115)
+Defined in: [graphql/setupGraphQL.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/setupGraphQL.ts#L37)

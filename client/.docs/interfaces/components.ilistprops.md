@@ -66,7 +66,7 @@ ___
 
 ### columns
 
-• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<any\>[]
+• `Optional` **columns**: [*IListColumn*](components.ilistcolumn.md)<any, any\>[]
 
 Columns
 

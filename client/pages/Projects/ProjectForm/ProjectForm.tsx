@@ -24,7 +24,8 @@ import { useValidateKeyFunction } from './validation'
  */
 export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, register, options, formControlProps, isCustomerContext } = useProjectForm(props)
+  const { model, register, options, formControlProps, isCustomerContext } =
+    useProjectForm(props)
   const ValidateKeyFunction = useValidateKeyFunction()
   return (
     <FormControl {...formControlProps}>

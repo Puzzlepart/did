@@ -50,7 +50,7 @@ Reusable utility functions
 
 Represents the name of a Fluent UI icon.
 
-Defined in: [client/utils/getFluentIcon.tsx:418](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L418)
+Defined in: [client/utils/getFluentIcon.tsx:424](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L424)
 
 ## Functions
 
@@ -157,7 +157,7 @@ ___
 
 ### createColumnDef
 
-▸ **createColumnDef**<T\>(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T\>\>, `onRender?`: (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
+▸ **createColumnDef**<T, P\>(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T, P\>\>, `onRender?`: (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Creates a column definition for the `List` component.
 This is a helper function to make it easier to create
@@ -168,6 +168,7 @@ column definitions.
 Name | Type | Default |
 :------ | :------ | :------ |
 `T` | *object* | *any* |
+`P` | *object* | *any* |
 
 #### Parameters:
 
@@ -175,7 +176,7 @@ Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `fieldName` | *string* | - | Field name for the column   |
 `name` | *string* | '' | -Name for the column   |
-`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T\>\> | - | Additional props   |
+`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T, P\>\> | - | Additional props   |
 `onRender?` | (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any* | - | Render function   |
 `minWidth` | *number* | 100 | Min width    |
 
@@ -314,30 +315,29 @@ ___
 
 ### getFluentIcon
 
-▸ **getFluentIcon**(`name`: [*FluentIconName*](utils.md#fluenticonname), `bundle?`: *boolean*, `color?`: *string*, `size?`: *number*): *Element*
+▸ **getFluentIcon**(`name`: [*FluentIconName*](utils.md#fluenticonname), `options?`: GetFluentIconOptions): *Element*
 
 Returns the Fluent icon with the specified name.
 
 #### Parameters:
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`name` | [*FluentIconName*](utils.md#fluenticonname) | - | The name of the icon to retrieve.   |
-`bundle` | *boolean* | true | Whether to bundle the filled and regular versions of the icon. Defaults to true.   |
-`color?` | *string* | - | The color to apply to the icon.   |
-`size?` | *number* | - | The size of the icon.    |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | [*FluentIconName*](utils.md#fluenticonname) | The name of the icon to retrieve.   |
+`options?` | GetFluentIconOptions | The options to use when retrieving the icon.    |
 
 **Returns:** *Element*
 
-The specified Fluent icon.
+The specified Fluent icon with the specified options, or null if the icon is not found
+in the catalog.
 
-Defined in: [client/utils/getFluentIcon.tsx:430](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L430)
+Defined in: [client/utils/getFluentIcon.tsx:441](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L441)
 
 ___
 
 ### getFluentIconWithFallback
 
-▸ **getFluentIconWithFallback**(`name`: *string*, `bundleWithFilled?`: *boolean*, `color?`: *string*): *Element*
+▸ **getFluentIconWithFallback**(`name`: *string*, `bundle?`: *boolean*, `color?`: *string*): *Element*
 
 Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
 
@@ -346,14 +346,14 @@ Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/re
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `name` | *string* | - | The name of the icon to retrieve.   |
-`bundleWithFilled` | *boolean* | true | Whether to bundle the icon with the filled version. Defaults to true.   |
+`bundle` | *boolean* | true | Whether to bundle the icon with the filled version. Defaults to true.   |
 `color?` | *string* | - | The color of the icon.    |
 
 **Returns:** *Element*
 
 A Fluent UI icon component or a default icon component if the requested icon is not found.
 
-Defined in: [client/utils/getFluentIcon.tsx:472](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L472)
+Defined in: [client/utils/getFluentIcon.tsx:485](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L485)
 
 ___
 
@@ -367,7 +367,7 @@ Returns an array of strings representing the names of all available Fluent icons
 
 An array of strings representing the names of all available Fluent icons.
 
-Defined in: [client/utils/getFluentIcon.tsx:456](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L456)
+Defined in: [client/utils/getFluentIcon.tsx:469](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L469)
 
 ___
 

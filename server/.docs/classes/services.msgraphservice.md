@@ -142,7 +142,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:241](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L241)
+Defined in: [services/msgraph/index.ts:242](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L242)
 
 ___
 
@@ -156,7 +156,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/msgraph/index.ts:214](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L214)
+Defined in: [services/msgraph/index.ts:215](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L215)
 
 ___
 
