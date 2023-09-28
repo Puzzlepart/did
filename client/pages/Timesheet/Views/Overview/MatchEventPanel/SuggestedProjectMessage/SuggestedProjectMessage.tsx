@@ -18,7 +18,7 @@ export const SuggestedProjectMessage: StyledComponent<ISuggestedProjectMessagePr
     return (
       <UserMessage
         hidden={!suggestedProject}
-        icon={getFluentIcon('Lightbulb', true, null, 16)}
+        icon={getFluentIcon('Lightbulb', { bundle: true, size: 16 })}
       >
         <p>
           <Trans

@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prefer-ternary */
 import { Caption1, Text, Tooltip } from '@fluentui/react-components'
-import { CustomerLink, ProjectLink } from 'components'
 import { DateObject } from 'DateUtils'
+import { CustomerLink, ProjectLink, ProjectTag } from 'components'
 import get from 'get-value'
 import React, { ReactElement } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -43,21 +43,25 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
         <Caption1>{fieldValue.slice(0, 80) + '...'}</Caption1>
       </Tooltip>
     )
-  }
-  switch (column.renderAs) {
-    case 'timeFromNow': {
-      return <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
-    }
-    case 'customerLink': {
-      return <CustomerLink customer={fieldValue} />
-    }
-    case 'projectLink': {
-      return <ProjectLink project={fieldValue} {...renderProps} />
-    }
-    default: {
-      if (column.onRender) {
-        element = column.onRender(item)
-      } else element = <Text size={200}>{fieldValue}</Text>
+  } else {
+    switch (column.renderAs) {
+      case 'timeFromNow': {
+        return <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
+      }
+      case 'customerLink': {
+        return <CustomerLink customer={fieldValue} />
+      }
+      case 'projectLink': {
+        return <ProjectLink project={fieldValue} {...renderProps} />
+      }
+      case 'projectTag': {
+        return <ProjectTag project={fieldValue}  {...renderProps} />
+      }
+      default: {
+        if (column.onRender) {
+          element = column.onRender(item)
+        } else element = <Text size={200}>{fieldValue}</Text>
+      }
     }
   }
 

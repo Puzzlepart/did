@@ -1,4 +1,4 @@
-import { EntityLabel, IconText, ItemColumn } from 'components'
+import { EntityLabel, ItemColumn } from 'components'
 import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
 import React, { useMemo } from 'react'
@@ -7,6 +7,7 @@ import { Customer, LabelObject } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useCustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
+import { Icon } from '@fluentui/react'
 
 /**
  * Column wrapper component that sets opacity to 0.4 if customer is inactive.
@@ -29,23 +30,20 @@ export function useColumns(): IListColumn[] {
   const columns = useMemo(
     () => [
       createColumnDef<Customer>(
+        'icon',
+      null,
+        {
+          minWidth: 30,
+          maxWidth: 30
+        },
+        (customer) => <Icon iconName={customer.icon} />
+      ),
+      createColumnDef<Customer>(
         'key',
         t('common.keyFieldLabel'),
         {
           minWidth: 125,
           maxWidth: 125
-        },
-        (customer) => {
-          return customer.inactive ? (
-            <IconText
-              title={t('customers.inactiveText')}
-              iconName='Warning'
-              styles={{ root: { color: '#ffbf00' } }}
-              text={customer.key}
-            />
-          ) : (
-            <IconText iconName={customer.icon} text={customer.key} />
-          )
         }
       ),
       createColumnDef<Customer>(
@@ -56,6 +54,7 @@ export function useColumns(): IListColumn[] {
           <CustomerLink
             customer={customer}
             onClick={() => context.dispatch(SET_SELECTED_CUSTOMER(customer))}
+            showIcon={false}
           />
         )
       ),

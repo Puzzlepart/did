@@ -12,14 +12,14 @@ import { IListColumn } from 'components/List'
  * @param onRender - Render function
  * @param minWidth - Min width
  */
-export function createColumnDef<T extends object = any>(
+export function createColumnDef<T extends object = any, P extends object = any>(
   fieldName: string,
   name = '',
-  props: Partial<IListColumn<T>> = {},
+  props: Partial<IListColumn<T, P>> = {},
   onRender?: (item?: T, index?: number, column?: IListColumn) => any,
   minWidth = 100
 ): IListColumn {
-  const columnDef: IListColumn = {
+  const columnDef: IListColumn<T, P> = {
     key: fieldName,
     fieldName,
     name,

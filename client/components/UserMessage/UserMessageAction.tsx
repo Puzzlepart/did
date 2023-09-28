@@ -11,7 +11,7 @@ export const UserMessageAction = (props: IUserMessageProps) => {
       event.preventDefault()
       props.action.onClick(null)
     },
-    icon: getFluentIcon(props.action.iconName, true, props.action.iconColor),
+    icon: getFluentIcon(props.action.iconName, { bundle: true, color: props.action.iconColor }),
     appearance: 'transparent'
   }
 

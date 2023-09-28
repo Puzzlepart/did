@@ -517,7 +517,13 @@
     "labelFieldLabel": "Merkelappar",
     "filterLabels": "Filtrer merkelappar...",
     "labelsText": "Merkelappar",
-    "userSettingsSaved": "Innstillingane dine er lagra. Har du endra språk, må du lasta sidan på nytt for at det skal tre i kraft."
+    "userSettingsSaved": "Innstillingane dine er lagra. Har du endra språk, må du lasta sidan på nytt for at det skal tre i kraft.",
+    "outlookCategoryAdd": "Klikk for å legge til prosjektnøkkelen som en kategori i Outlook.",
+    "outlookCategoryError": "Det oppsto en feil ved opprettelse av kategorien i Outlook. Hvis du nettopp opprettet den, kan det ta noen øyeblikk før det vises her.",
+    "outlookCategoryRemove": "Gå til Outlook for å fjerne kategorien om du ikke trenger den lenger.",
+    "tagFieldLabel": "Prosjektnøkkel",
+    "outlookCategoryAdded": "Prosjektnøkkelen **{{tag}}** ble lagt til i Outlook som en kategori.",
+    "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

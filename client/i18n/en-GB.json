@@ -517,7 +517,13 @@
     "labelFieldLabel": "Labels",
     "filterLabels": "Filter labels...",
     "labelsText": "Labels",
-    "userSettingsSaved": "Your settings have been saved successfully. If you have changed the language, you must reload the page for it to take effect."
+    "userSettingsSaved": "Your settings have been saved successfully. If you have changed the language, you must reload the page for it to take effect.",
+    "outlookCategoryAdded": "The project tag **{{tag}}** was added to Outlook as a category.",
+    "outlookCategoryRemove": "Go to Outlook to remove the category if you no longer need it.",
+    "outlookCategoryAdd": "Click to add the project tag as a category in Outlook.",
+    "projectTagCopiedToClipboard": "The project tag **{{tag}}** was copied to the clipboard.",
+    "outlookCategoryError": "There was an error creating the category in Outlook. If you just created it, it might take some moments before it shows up here.",
+    "tagFieldLabel": "Tag"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

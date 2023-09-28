@@ -69,12 +69,15 @@ const legacyDefaultTheme: ExtendedTheme = {
 /**
  * The Fluent Light theme uses `webLightTheme` from `@fluentui/react-components`
  */
-export const fluentDefaultTheme = webLightTheme
+export const fluentDefaultTheme: Partial<Theme> = {
+  ...webLightTheme,
+  colorBrandForegroundLink: '#133748'
+}
 
 /**
  * The Light theme is a combination of the legacy theme and the Fluent Light theme
  */
-export const defaultTheme: [PartialTheme, Theme] = [
+export const defaultTheme: [PartialTheme, Partial<Theme>] = [
   legacyDefaultTheme,
   fluentDefaultTheme
 ]

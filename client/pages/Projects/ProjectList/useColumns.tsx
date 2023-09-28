@@ -1,7 +1,10 @@
-import { EntityLabel, IconText, IListColumn, ItemColumn } from 'components'
+import { EntityLabel, IListColumn, IProjectTagProps, ItemColumn } from 'components'
+import { IProjectLinkProps } from 'components/ProjectLink/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
+import _ from 'underscore'
+import { getFluentIconWithFallback } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useProjectsContext } from '../context'
 import { SET_SELECTED_PROJECT } from '../reducer'
@@ -26,40 +29,35 @@ const ColumnWrapper = ({ project, children }) => (
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
   const context = useProjectsContext()
+  const outlookCategories = (context.data?.outlookCategories ?? []).map((category) => category.displayName)
   const columns = useMemo(
     () =>
       [
-        createColumnDef<Project>('customer', t('common.customer'), {
-          minWidth: 340,
-          maxWidth: 340,
-          renderAs: 'customerLink'
-        }),
-        createColumnDef<Project>(
-          'key',
-          t('common.keyFieldLabel'),
+        createColumnDef<Project, IProjectTagProps>(
+          null,
+          t('common.tagFieldLabel'),
           {
-            minWidth: 125,
-            maxWidth: 125
-          },
-          (project) => {
-            if (project.inactive) {
-              return (
-                <IconText
-                  title={t('projects.inactiveText')}
-                  iconName='Warning'
-                  styles={{ root: { color: '#ffbf00' } }}
-                  text={project.key}
-                />
-              )
-            }
-            return <IconText iconName={project.icon} text={project.key} />
+            minWidth: 160,
+            maxWidth: 180,
+            renderAs: 'projectTag',
+            createRenderProps: (project) => ({
+              icon: getFluentIconWithFallback(project.icon),
+              hasOutlookCategory: _.contains(outlookCategories, project.tag)
+            })
           }
         ),
-        createColumnDef<Project>(undefined, t('common.nameFieldLabel'), {
-          maxWidth: 220,
+        createColumnDef<Project>('customer', t('common.customer'), {
+          minWidth: 180,
+          maxWidth: 200,
+          renderAs: 'customerLink'
+        }),
+        createColumnDef<Project, IProjectLinkProps>(null, t('common.nameFieldLabel'), {
+          minWidth: 220,
+          maxWidth: 260,
           renderAs: 'projectLink',
           createRenderProps: (project) => ({
-            onClick: () => context.dispatch(SET_SELECTED_PROJECT(project))
+            onClick: () => context.dispatch(SET_SELECTED_PROJECT(project)),
+            showIcon: false
           })
         }),
         createColumnDef<Project>(
@@ -83,7 +81,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           )
         )
       ].filter((col) => !(props.hideColumns || []).includes(col.key)),
-    [props.hideColumns]
+    [props.hideColumns, outlookCategories]
   )
 
   const columnsWithWrapper = useMemo(

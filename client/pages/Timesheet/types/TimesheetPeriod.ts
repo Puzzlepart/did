@@ -137,7 +137,8 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Get events
+   * Get events for the period. Optionally filter
+   * by matched or unmatched events.
    *
    * @param option - Get events option
    *

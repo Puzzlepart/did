@@ -43,9 +43,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
         {includeCustomerLink && <CustomerLink customer={event.customer} />}
         <div className={styles.content}>
           <ProjectPopover project={event.project}>
-            <div className={styles.link}>
-              <ProjectLink project={event.project} />
-            </div>
+            <ProjectLink project={event.project} />
           </ProjectPopover>
           {!_.isEmpty(event.project.labels) && (
             <Icon iconName='Tag' className={styles.labelIcon} />

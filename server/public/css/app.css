@@ -9,16 +9,12 @@ body {
     padding: 0;
 }
 
-a {
+a, a:visited {
     color: var(--colorBrandForegroundLink);
 }
 
 a, a:hover, a:visited, a:active {
     text-decoration: none !important;
-}
-
-a:visited {
-    color: initial;
 }
 
 h1 {

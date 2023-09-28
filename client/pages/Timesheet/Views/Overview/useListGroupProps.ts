@@ -8,7 +8,7 @@ import { IListGroupProps } from '../../../../components/List'
 import { useTimesheetContext } from '../../context'
 
 /**
- * Use list group props
+ * Hook that returns the list group props for the timesheet overview.
  */
 export function useListGroupProps() {
   const { t } = useTranslation()
