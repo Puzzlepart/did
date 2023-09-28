@@ -39,7 +39,8 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
           >
             {getFluentIcon('Heart', {
               bundle: true,
-              filled: hasOutlookCategory
+              filled: hasOutlookCategory,
+              color: '#FF4033'
             })}
           </InteractionTagSecondary>
         </Tooltip>

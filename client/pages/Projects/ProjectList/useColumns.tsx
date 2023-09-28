@@ -9,7 +9,7 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
 import _ from 'underscore'
-import { getFluentIconWithFallback } from 'utils'
+import { fuzzyContains, getFluentIconWithFallback, mapProperty } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useProjectsContext } from '../context'
 import { SET_SELECTED_PROJECT } from '../reducer'
@@ -34,9 +34,7 @@ const ColumnWrapper = ({ project, children }) => (
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
   const context = useProjectsContext()
-  const outlookCategories = (context.data?.outlookCategories ?? []).map(
-    (category) => category.displayName
-  )
+  const outlookCategories = mapProperty(context?.state?.outlookCategories, 'displayName')
   const columns = useMemo(
     () =>
       [
@@ -49,7 +47,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             renderAs: 'projectTag',
             createRenderProps: (project) => ({
               icon: getFluentIconWithFallback(project.icon),
-              hasOutlookCategory: _.contains(outlookCategories, project.tag),
+              hasOutlookCategory: fuzzyContains(outlookCategories, project.tag),
               hasSecondaryAction: !_.isEmpty(outlookCategories)
             })
           }

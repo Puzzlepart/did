@@ -2,8 +2,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { PermissionScope } from '../../../../shared/config/security'
-import { ProjectService } from '../../../services/mongo'
-import MSGraphService from '../../../services/msgraph'
+import { MSGraphService, ProjectService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import {
   CreateOrUpdateProjectResult,

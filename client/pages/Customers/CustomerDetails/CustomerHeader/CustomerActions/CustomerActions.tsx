@@ -1,4 +1,4 @@
-import { Button } from '@fluentui/react-components'
+import { DynamicButton } from 'components'
 import { usePermissions } from 'hooks'
 import {
   CLOSE_CUSTOMER_PANEL,
@@ -8,7 +8,6 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { CustomersContext } from '../../../context'
 import styles from './CustomerActions.module.scss'
 
@@ -22,28 +21,25 @@ export const CustomerActions: StyledComponent = (props) => {
   return (
     <div className={CustomerActions.className} hidden={props.hidden}>
       <div className={styles.container}>
-        <Button
-          disabled={!context.state.selected?.webLink}
+        <DynamicButton
+          hidden={!context.state.selected?.webLink}
+          text={t('customers.webLinkText')}
           appearance='transparent'
-          icon={icon('WebAsset')}
-          onClick={() => window.open(context.state.selected?.webLink, '_blank')}
-        >
-          {t('customers.webLinkText')}
-        </Button>
-        <Button
-          disabled={!context.state.selected?.externalSystemURL}
+          iconName='WebAsset'
+          onClick={() => window.open(context.state.selected?.webLink, '_blank')} />
+        <DynamicButton
+          hidden={!context.state.selected?.externalSystemURL}
+          text={t('customers.externalSystemUrlText')}
           appearance='transparent'
-          icon={icon('System')}
+          iconName='System'
           onClick={() =>
             window.open(context.state.selected?.externalSystemURL, '_blank')
-          }
-        >
-          {t('customers.externalSystemUrlText')}
-        </Button>
-        <Button
-          disabled={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
+          } />
+        <DynamicButton
+          hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
+          text={t('customers.editButtonLabel')}
           appearance='transparent'
-          icon={icon('AddCircle')}
+          iconName='AddCircle'
           onClick={() =>
             context.dispatch(
               OPEN_CUSTOMER_PANEL({
@@ -51,10 +47,7 @@ export const CustomerActions: StyledComponent = (props) => {
                   context.dispatch(CLOSE_CUSTOMER_PANEL())
               })
             )
-          }
-        >
-          {t('customers.editButtonLabel')}
-        </Button>
+          } />
       </div>
     </div>
   )
