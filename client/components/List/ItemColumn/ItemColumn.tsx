@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prefer-ternary */
-import { Caption1, Text, Tooltip } from '@fluentui/react-components'
+import { Caption1, Persona, Text, Tooltip } from '@fluentui/react-components'
 import { CustomerLink, ProjectLink, ProjectTag } from 'components'
 import { DateObject } from 'DateUtils'
 import get from 'get-value'
@@ -60,6 +60,9 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
       }
       case 'tag': {
         return <Tag {...renderProps}>{fieldValue}</Tag>
+      }
+      case 'persona': {
+        return <Persona {...renderProps} />
       }
       default: {
         if (column.onRender) {
