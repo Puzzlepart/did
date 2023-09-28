@@ -1,5 +1,4 @@
-import { Breadcrumb, Shimmer } from '@fluentui/react'
-import { SubText } from 'components/SubText'
+import { Shimmer } from '@fluentui/react'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { StyledComponent } from 'types'
@@ -7,13 +6,14 @@ import { useProjectsContext } from '../../context'
 import { ProjectActions } from './ProjectActions'
 import styles from './ProjectHeader.module.scss'
 import { useProjectHeader } from './useProjectHeader'
+import { Breadcrumb, SubText} from 'components'
 
 /**
  * @category Projects
  */
 export const ProjectHeader: StyledComponent = () => {
   const { state, loading } = useProjectsContext()
-  const { breadcrumb } = useProjectHeader()
+  const { breadcrumbItems } = useProjectHeader()
   return (
     <Shimmer
       className={ProjectHeader.className}
@@ -21,9 +21,7 @@ export const ProjectHeader: StyledComponent = () => {
       styles={{ dataWrapper: { width: '100%' } }}
     >
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Breadcrumb {...breadcrumb} />
-        </div>
+        <Breadcrumb className={styles.breadcrumb} items={breadcrumbItems} />
         <ProjectActions hidden={isMobile} />
       </div>
       <SubText

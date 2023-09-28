@@ -1,36 +1,41 @@
-import { useBreadcrumb } from 'hooks/useBreadcrumb'
-import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer/actions'
+import { IBreadcrumbItem } from 'components'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { createRouterLink } from 'utils'
 import { useProjectsContext } from '../../context'
+import { SET_SELECTED_PROJECT } from '../../reducer/actions'
 
+/**
+ * A hook that returns the breadcrumb items for the project header.
+ * 
+ * @returns An object containing the breadcrumb items.
+ */
 export function useProjectHeader() {
   const { t } = useTranslation()
   const { state, dispatch } = useProjectsContext()
   const history = useHistory()
-  const breadcrumb = useBreadcrumb([
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => ([
     {
-      key: 'back',
-      text: t('navigation.ProjectsPage'),
+      key: 0,
+      value: t('navigation.ProjectsPage'),
       onClick: () => {
         history.replace('/projects/s')
         dispatch(SET_SELECTED_PROJECT(null))
       }
     },
     {
-      key: 'customer',
-      text: state.selected?.customer.name,
+      key: 1,
+      value: state.selected?.customer.name,
       onClick: () =>
         history.replace(
           createRouterLink('/customers/{{key}}', state.selected?.customer)
         )
     },
     {
-      key: 'selected',
-      text: state.selected?.name,
-      isCurrentItem: true
+      key: 2,
+      value: state.selected?.name
     }
-  ])
-  return { breadcrumb }
+  ]), [state.selected])
+  return { breadcrumbItems }
 }
