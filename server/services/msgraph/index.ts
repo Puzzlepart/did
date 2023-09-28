@@ -10,7 +10,7 @@ import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
 import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
-import { MSGraphOutlookCategory } from './types'
+import { MSGraphError, MSGraphOutlookCategory } from './types'
 
 /**
  * Microsoft Graph service
@@ -111,7 +111,7 @@ class MSGraphService {
           )
       )
     } catch (error) {
-      throw new Error(`MSGraphService.getVacation: ${error.message}`)
+      throw new MSGraphError('getVacation', error.message)
     }
   }
 
@@ -130,7 +130,7 @@ class MSGraphService {
       const value = await client.api('/me').select(properties).get()
       return value
     } catch (error) {
-      throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
+      throw new MSGraphError('getCurrentUser', error.message)
     }
   }
 
@@ -168,7 +168,7 @@ class MSGraphService {
         { key: 'getusers' }
       )
     } catch (error) {
-      throw new Error(`MSGraphService.getUsers: ${error.message}`)
+      throw new MSGraphError('getUsers', error.message)
     }
   }
 
@@ -198,9 +198,10 @@ class MSGraphService {
       const result = await client
         .api('/me/outlook/masterCategories')
         .post(content)
+      await this._cache.clear({ key: 'getoutlookcategories' })
       return result
     } catch (error) {
-      throw new Error(`MSGraphService.createOutlookCategory: ${error.message}`)
+      throw new MSGraphError('createOutlookCategory', error.message)
     }
   }
 
@@ -221,10 +222,10 @@ class MSGraphService {
             .get()
           return value
         },
-        { key: 'getoutlookcategories', expiry: 1800, scope: CacheScope.USER }
+        { key: 'getoutlookcategories', expiry: 60, scope: CacheScope.USER }
       )
     } catch (error) {
-      throw new Error(`MSGraphService.getOutlookCategories: ${error.message}`)
+      throw new MSGraphError('getOutlookCategories', error.message)
     }
   }
 
@@ -300,7 +301,7 @@ class MSGraphService {
           )
       )
     } catch (error) {
-      throw new Error(`MSGraphService.getEvents: ${error.message}`)
+      throw new MSGraphError('getEvents', error.message)
     }
   }
 }
