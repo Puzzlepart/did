@@ -39,7 +39,6 @@ export function useCustomersReducer() {
       })
       .addCase(OPEN_PROJECT_PANEL, (state, { payload }) => {
         state.projectForm = {
-          customerKey: state.selected.key,
           panelProps: {
             isOpen: true,
             headerText: t('customers.projectFormHeaderText', state.selected),
