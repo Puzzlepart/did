@@ -5,7 +5,7 @@ import { IListColumn } from 'components/List'
  * Creates a column definition for the `List` component.
  * This is a helper function to make it easier to create
  * column definitions.
- * 
+ *
  * First template parameter (`T`) is the type of the item in the list,
  * and the second template parameter (`P`) is the type of the props
  * passed to the component rendering the column if a custom

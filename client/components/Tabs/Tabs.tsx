@@ -1,7 +1,4 @@
-import {
-  mergeClasses,
-  TabList
-} from '@fluentui/react-components'
+import { mergeClasses, TabList } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './Tabs.module.scss'
