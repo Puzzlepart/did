@@ -1,5 +1,4 @@
-/* eslint-disable unicorn/prevent-abbreviations */
-import { useReduxReducer } from 'hooks/useReduxReducer'
+import { useReduxReducer as useReducer } from 'hooks/useReduxReducer'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import _ from 'underscore'
@@ -25,13 +24,13 @@ export function useCustomersReducer() {
   const initialState: ICustomersState = {
     customers: []
   }
-  const urlParams = useParams<ICustomersUrlParameters>()
-  return useReduxReducer(initialState, (builder) =>
+  const urlParameters = useParams<ICustomersUrlParameters>()
+  return useReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.customers = payload.data?.customers || []
         state.selected = _.find(state.customers, ({ key }) =>
-          fuzzyStringEqual(key, urlParams.currentTab)
+          fuzzyStringEqual(key, urlParameters.currentTab)
         )
       })
       .addCase(SET_SELECTED_CUSTOMER, (state, { payload }) => {
