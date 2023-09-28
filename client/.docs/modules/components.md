@@ -106,6 +106,7 @@ Reusable React Function components.
 - [IIconPickerControlProps](../interfaces/components.iiconpickercontrolprops.md)
 - [IInputControlProps](../interfaces/components.iinputcontrolprops.md)
 - [IInputFieldProps](../interfaces/components.iinputfieldprops.md)
+- [IItemColumnProps](../interfaces/components.iitemcolumnprops.md)
 - [ILabelPickerControlProps](../interfaces/components.ilabelpickercontrolprops.md)
 - [IProjectTagProps](../interfaces/components.iprojecttagprops.md)
 - [IRadioGroupControlProps](../interfaces/components.iradiogroupcontrolprops.md)
@@ -131,6 +132,7 @@ Reusable React Function components.
 - [FormInputControlComponent](components.md#forminputcontrolcomponent)
 - [FormSubmitHook](components.md#formsubmithook)
 - [IHotkeyModal](components.md#ihotkeymodal)
+- [ItemColumnRenderType](components.md#itemcolumnrendertype)
 - [ListFilterState](components.md#listfilterstate)
 - [RegisterControlCallback](components.md#registercontrolcallback)
 - [SwitchControlOptions](components.md#switchcontroloptions)
@@ -310,6 +312,14 @@ ___
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
 Defined in: [client/components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+
+___
+
+### ItemColumnRenderType
+
+Ƭ **ItemColumnRenderType**: *timeFromNow* \| *customerLink* \| *projectLink* \| *projectTag* \| *tag*
+
+Defined in: [client/components/List/ItemColumn/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/types.ts#L10)
 
 ___
 
@@ -518,9 +528,9 @@ ___
 
 ### ItemColumn
 
-• `Const` **ItemColumn**: *StyledComponent*<IItemColumnProps\>
+• `Const` **ItemColumn**: *StyledComponent*<[*IItemColumnProps*](../interfaces/components.iitemcolumnprops.md)\>
 
-Defined in: [client/components/List/ItemColumn/ItemColumn.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/ItemColumn.tsx#L13)
+Defined in: [client/components/List/ItemColumn/ItemColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/ItemColumn.tsx#L14)
 
 ___
 

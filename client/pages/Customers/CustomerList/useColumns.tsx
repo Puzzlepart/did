@@ -41,7 +41,7 @@ export function useColumns(): IListColumn[] {
       createColumnDef<Customer, ICustomerLinkProps>(
         'name',
         t('common.nameFieldLabel'),
-        { 
+        {
           maxWidth: 300,
           renderAs: 'customerLink',
           createRenderProps: (customer) => ({

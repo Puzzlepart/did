@@ -47,9 +47,9 @@ Name | Type |
 
 **Returns:** *Partial*<P\>
 
-Defined in: [client/components/List/types/IListColumn.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L34)
+Defined in: [client/components/List/types/IListColumn.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L30)
 
-Defined in: [client/components/List/types/IListColumn.ts:34](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L34)
+Defined in: [client/components/List/types/IListColumn.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L30)
 
 ___
 
@@ -61,7 +61,7 @@ Data for the column - `IListColumnData`
 
 Overrides: void
 
-Defined in: [client/components/List/types/IListColumn.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L13)
+Defined in: [client/components/List/types/IListColumn.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L14)
 
 ___
 
@@ -71,19 +71,14 @@ ___
 
 The column should be hidden
 
-Defined in: [client/components/List/types/IListColumn.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L18)
+Defined in: [client/components/List/types/IListColumn.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L19)
 
 ___
 
 ### renderAs
 
-• `Optional` **renderAs**: *timeFromNow* \| *customerLink* \| *projectLink* \| *projectTag*
+• `Optional` **renderAs**: [*ItemColumnRenderType*](../modules/components.md#itemcolumnrendertype)
 
-How to render the column
+How to render the column.
 
-- `timeFromNow` - render the column as a time from now
-- `customerLink` - render the column as a customer link
-- `projectLink` - render the column as a project link
-- `projectTag` - render the column as a project tag
-
-Defined in: [client/components/List/types/IListColumn.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L28)
+Defined in: [client/components/List/types/IListColumn.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types/IListColumn.ts#L24)

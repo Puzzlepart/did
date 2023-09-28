@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/prefer-ternary */
 import { Caption1, Text, Tooltip } from '@fluentui/react-components'
+import { Tag } from '@fluentui/react-tags-preview'
 import { CustomerLink, ProjectLink, ProjectTag } from 'components'
 import { DateObject } from 'DateUtils'
 import get from 'get-value'
@@ -9,7 +10,6 @@ import { StyledComponent } from 'types'
 import { useListContext } from '../context'
 import styles from './ItemColumn.module.scss'
 import { IItemColumnProps } from './types'
-import { Tag } from '@fluentui/react-tags-preview'
 
 export const ItemColumn: StyledComponent<IItemColumnProps> = ({
   column,

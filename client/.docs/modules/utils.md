@@ -163,6 +163,11 @@ Creates a column definition for the `List` component.
 This is a helper function to make it easier to create
 column definitions.
 
+First template parameter (`T`) is the type of the item in the list,
+and the second template parameter (`P`) is the type of the props
+passed to the component rendering the column if a custom
+render type is used.
+
 #### Type parameters:
 
 Name | Type | Default |
@@ -182,7 +187,7 @@ Name | Type | Default value | Description |
 
 **Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Defined in: [client/utils/createColumnDef.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/createColumnDef.ts#L15)
+Defined in: [client/utils/createColumnDef.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/utils/createColumnDef.ts#L20)
 
 ___
 

@@ -1,7 +1,17 @@
-import { SelectTabEventHandler, Tab, TabProps } from '@fluentui/react-components'
+import {
+  SelectTabEventHandler,
+  Tab,
+  TabProps
+} from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { ComponentLogicHook } from 'hooks'
-import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo } from 'react'
+import React, {
+  FunctionComponent,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useMemo
+} from 'react'
 import { getFluentIcon } from 'utils'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
 import { TabHeader } from './TabHeader'
@@ -79,7 +89,6 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
     },
     [setSelectedValue]
   )
-
 
   /**
    * An array of `Tab` components generated from the `items` prop.
