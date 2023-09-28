@@ -40,6 +40,7 @@ Reusable React Function components.
 - [List](components.list.md)
 - [PermissionList](components.permissionlist.md)
 - [ProjectLink](components.projectlink.md)
+- [ProjectTag](components.projecttag.md)
 - [RadioGroupControl](components.radiogroupcontrol.md)
 - [SubText](components.subtext.md)
 - [SuggestionItem](components.suggestionitem.md)
@@ -106,6 +107,7 @@ Reusable React Function components.
 - [IInputControlProps](../interfaces/components.iinputcontrolprops.md)
 - [IInputFieldProps](../interfaces/components.iinputfieldprops.md)
 - [ILabelPickerControlProps](../interfaces/components.ilabelpickercontrolprops.md)
+- [IProjectTagProps](../interfaces/components.iprojecttagprops.md)
 - [IRadioGroupControlProps](../interfaces/components.iradiogroupcontrolprops.md)
 - [ISubmitProps](../interfaces/components.isubmitprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
@@ -188,6 +190,7 @@ Reusable React Function components.
 - [PermissionList](components.md#permissionlist)
 - [ProjectLink](components.md#projectlink)
 - [ProjectPopover](components.md#projectpopover)
+- [ProjectTag](components.md#projecttag)
 - [RadioGroupControl](components.md#radiogroupcontrol)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
 - [SearchCustomer](components.md#searchcustomer)
@@ -810,6 +813,14 @@ Defined in: [client/components/ProjectTooltip/index.tsx:17](https://github.com/P
 
 ___
 
+### ProjectTag
+
+• `Const` **ProjectTag**: *ReusableComponent*<[*IProjectTagProps*](../interfaces/components.iprojecttagprops.md)\>
+
+Defined in: [client/components/ProjectTag/ProjectTag.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTag/ProjectTag.tsx#L17)
+
+___
+
 ### RadioGroupControl
 
 • `Const` **RadioGroupControl**: [*FormInputControlComponent*](components.md#forminputcontrolcomponent)<[*IRadioGroupControlProps*](../interfaces/components.iradiogroupcontrolprops.md)\>
@@ -1026,9 +1037,9 @@ Use form controls
 
 #### Type parameters:
 
-Name | Default |
-:------ | :------ |
-`KeyType` | *any* |
+Name | Type | Default |
+:------ | :------ | :------ |
+`KeyType` | *string* | *any* |
 
 #### Parameters:
 

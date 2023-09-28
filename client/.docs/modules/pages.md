@@ -354,7 +354,7 @@ ___
 Project list component used by `<Projects />`. Renders
 projects in a list using our `<List />` component.
 
-Defined in: [client/pages/Projects/ProjectList/ProjectList.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/ProjectList.tsx#L21)
+Defined in: [client/pages/Projects/ProjectList/ProjectList.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/ProjectList.tsx#L16)
 
 ___
 
