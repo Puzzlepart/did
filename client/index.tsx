@@ -45,4 +45,3 @@ export const bootstrap = async () => {
 bootstrap()
 
 export { App } from './app'
-

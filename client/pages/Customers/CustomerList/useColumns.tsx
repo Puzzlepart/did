@@ -1,3 +1,4 @@
+import { Icon } from '@fluentui/react'
 import { EntityLabel, ItemColumn } from 'components'
 import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
@@ -7,7 +8,6 @@ import { Customer, LabelObject } from 'types'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useCustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
-import { Icon } from '@fluentui/react'
 
 /**
  * Column wrapper component that sets opacity to 0.4 if customer is inactive.
@@ -31,21 +31,17 @@ export function useColumns(): IListColumn[] {
     () => [
       createColumnDef<Customer>(
         'icon',
-      null,
+        null,
         {
           minWidth: 30,
           maxWidth: 30
         },
         (customer) => <Icon iconName={customer.icon} />
       ),
-      createColumnDef<Customer>(
-        'key',
-        t('common.keyFieldLabel'),
-        {
-          minWidth: 125,
-          maxWidth: 125
-        }
-      ),
+      createColumnDef<Customer>('key', t('common.keyFieldLabel'), {
+        minWidth: 125,
+        maxWidth: 125
+      }),
       createColumnDef<Customer>(
         'name',
         t('common.nameFieldLabel'),

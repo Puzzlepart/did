@@ -7,5 +7,5 @@
  */
 export * from './generateClientInfo'
 export * from './generateGraphQLSchema'
-export * from './setupGraphQL'
 export * from './resolvers'
+export * from './setupGraphQL'

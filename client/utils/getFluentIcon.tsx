@@ -1,7 +1,5 @@
 import { Icon } from '@fluentui/react'
 import {
-  HeartRegular,
-  HeartFilled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -75,6 +73,8 @@ import {
   Eye24Regular,
   FastForward24Filled,
   FastForward24Regular,
+  HeartFilled,
+  HeartRegular,
   Home24Filled,
   Home24Regular,
   HourglassHalfFilled,

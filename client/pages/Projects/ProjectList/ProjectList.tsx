@@ -16,11 +16,7 @@ import { useProjectList } from './useProjectList'
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const { t } = useTranslation()
   const context = useProjectsContext()
-  const {
-    items,
-    columns,
-    toggleInactive
-  } = useProjectList(props)
+  const { items, columns, toggleInactive } = useProjectList(props)
   return (
     <>
       <List

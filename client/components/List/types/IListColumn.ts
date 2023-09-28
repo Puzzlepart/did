@@ -5,7 +5,8 @@ import { IListColumnData } from './IListColumnData'
  * @category List
  */
 
-export interface IListColumn<T extends object = any, P extends object = any> extends IColumn {
+export interface IListColumn<T extends object = any, P extends object = any>
+  extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */

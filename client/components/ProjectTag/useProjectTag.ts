@@ -6,13 +6,15 @@ import { IProjectTagProps } from './types'
 
 /**
  * Hook that returns an object with properties and functions related to the project tag.
- * 
+ *
  * @param props - The props object containing the project and whether it has an Outlook category.
  */
 export function useProjectTag(props: IProjectTagProps) {
   const { t } = useTranslation()
   const appContext = useAppContext()
-  const [hasOutlookCategory, setHasOutlookCategory] = useState(props.hasOutlookCategory)
+  const [hasOutlookCategory, setHasOutlookCategory] = useState(
+    props.hasOutlookCategory
+  )
   const createOutlookCategory = useCreateOutlookCategory()
 
   /**
@@ -45,6 +47,13 @@ export function useProjectTag(props: IProjectTagProps) {
     })
   }
 
-  const addOutlookCategoryTooltip = hasOutlookCategory ? t('common.outlookCategoryRemove') : t('common.outlookCategoryAdd')
-  return { hasOutlookCategory, addOutlookCategory, addOutlookCategoryTooltip, onTagCopied }
+  const addOutlookCategoryTooltip = hasOutlookCategory
+    ? t('common.outlookCategoryRemove')
+    : t('common.outlookCategoryAdd')
+  return {
+    hasOutlookCategory,
+    addOutlookCategory,
+    addOutlookCategoryTooltip,
+    onTagCopied
+  }
 }

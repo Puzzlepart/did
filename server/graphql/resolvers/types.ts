@@ -15,10 +15,10 @@ export class Error {
   @Field()
   message: string
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   code?: string
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   statusCode?: string
 }
 

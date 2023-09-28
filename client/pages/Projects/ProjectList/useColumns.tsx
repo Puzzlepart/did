@@ -1,4 +1,9 @@
-import { EntityLabel, IListColumn, IProjectTagProps, ItemColumn } from 'components'
+import {
+  EntityLabel,
+  IListColumn,
+  IProjectTagProps,
+  ItemColumn
+} from 'components'
 import { IProjectLinkProps } from 'components/ProjectLink/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -29,7 +34,9 @@ const ColumnWrapper = ({ project, children }) => (
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
   const context = useProjectsContext()
-  const outlookCategories = (context.data?.outlookCategories ?? []).map((category) => category.displayName)
+  const outlookCategories = (context.data?.outlookCategories ?? []).map(
+    (category) => category.displayName
+  )
   const columns = useMemo(
     () =>
       [
@@ -51,15 +58,19 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           maxWidth: 200,
           renderAs: 'customerLink'
         }),
-        createColumnDef<Project, IProjectLinkProps>(null, t('common.nameFieldLabel'), {
-          minWidth: 220,
-          maxWidth: 260,
-          renderAs: 'projectLink',
-          createRenderProps: (project) => ({
-            onClick: () => context.dispatch(SET_SELECTED_PROJECT(project)),
-            showIcon: false
-          })
-        }),
+        createColumnDef<Project, IProjectLinkProps>(
+          null,
+          t('common.nameFieldLabel'),
+          {
+            minWidth: 220,
+            maxWidth: 260,
+            renderAs: 'projectLink',
+            createRenderProps: (project) => ({
+              onClick: () => context.dispatch(SET_SELECTED_PROJECT(project)),
+              showIcon: false
+            })
+          }
+        ),
         createColumnDef<Project>(
           'description',
           t('common.descriptionFieldLabel'),

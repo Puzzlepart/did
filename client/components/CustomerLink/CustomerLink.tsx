@@ -15,7 +15,9 @@ import { ICustomerLinkProps } from './types'
 export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
   return (
     <div className={CustomerLink.className}>
-      {props.showIcon && <Icon className={styles.icon} iconName={props.customer?.icon} />}
+      {props.showIcon && (
+        <Icon className={styles.icon} iconName={props.customer?.icon} />
+      )}
       <Link
         className={styles.link}
         to={createRouterLink(props.linkTemplate, props.customer)}

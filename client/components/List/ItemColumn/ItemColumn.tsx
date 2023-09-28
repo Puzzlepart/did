@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prefer-ternary */
 import { Caption1, Text, Tooltip } from '@fluentui/react-components'
-import { DateObject } from 'DateUtils'
 import { CustomerLink, ProjectLink, ProjectTag } from 'components'
+import { DateObject } from 'DateUtils'
 import get from 'get-value'
 import React, { ReactElement } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -55,7 +55,7 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
         return <ProjectLink project={fieldValue} {...renderProps} />
       }
       case 'projectTag': {
-        return <ProjectTag project={fieldValue}  {...renderProps} />
+        return <ProjectTag project={fieldValue} {...renderProps} />
       }
       default: {
         if (column.onRender) {

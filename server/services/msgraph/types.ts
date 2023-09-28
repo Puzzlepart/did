@@ -5,7 +5,12 @@ export interface MSGraphOutlookCategory {
 }
 
 export class MSGraphError extends Error {
-  constructor(name: string, message: string, public code?: string, public statusCode?: string) {
+  constructor(
+    name: string,
+    message: string,
+    public code?: string,
+    public statusCode?: string
+  ) {
     super(message)
     this.name = name
   }

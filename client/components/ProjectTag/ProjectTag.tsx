@@ -2,7 +2,7 @@ import { Tooltip } from '@fluentui/react-components'
 import {
   InteractionTag,
   InteractionTagPrimary,
-  InteractionTagSecondary,
+  InteractionTagSecondary
 } from '@fluentui/react-tags-preview'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
@@ -15,7 +15,12 @@ import { useProjectTag } from './useProjectTag'
  * @category Reusable Component
  */
 export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
-  const { hasOutlookCategory, addOutlookCategory, addOutlookCategoryTooltip, onTagCopied } = useProjectTag(props)
+  const {
+    hasOutlookCategory,
+    addOutlookCategory,
+    addOutlookCategoryTooltip,
+    onTagCopied
+  } = useProjectTag(props)
   return (
     <InteractionTag>
       <CopyToClipboard text={props.project?.tag} onCopy={onTagCopied}>
@@ -24,7 +29,10 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
         </InteractionTagPrimary>
       </CopyToClipboard>
       <Tooltip content={addOutlookCategoryTooltip} relationship='label'>
-        <InteractionTagSecondary onClick={addOutlookCategory} style={{ cursor: hasOutlookCategory ? 'auto' : 'pointer' }}>
+        <InteractionTagSecondary
+          onClick={addOutlookCategory}
+          style={{ cursor: hasOutlookCategory ? 'auto' : 'pointer' }}
+        >
           {getFluentIcon('Heart', { bundle: true, filled: hasOutlookCategory })}
         </InteractionTagSecondary>
       </Tooltip>

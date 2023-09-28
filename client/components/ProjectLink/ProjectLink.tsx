@@ -22,7 +22,9 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
     case 'link': {
       return (
         <div className={ProjectLink.className}>
-         {props.showIcon && <Icon className={styles.icon} iconName={props.project?.icon} />}
+          {props.showIcon && (
+            <Icon className={styles.icon} iconName={props.project?.icon} />
+          )}
           <Link
             className={styles.link}
             to={to}

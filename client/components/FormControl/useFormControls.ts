@@ -47,7 +47,7 @@ export type RegisterControlCallback<TOptions = {}, KeyType = string> = (
  *
  * @returns A callback to register a new control
  */
-export function useFormControls<KeyType = any>(
+export function useFormControls<KeyType extends string = any>(
   model: ReturnType<typeof useMap>
 ) {
   return useCallback(

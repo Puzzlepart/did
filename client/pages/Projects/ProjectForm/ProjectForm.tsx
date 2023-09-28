@@ -24,7 +24,7 @@ import { useValidateKeyFunction } from './validation'
  */
 export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, register, options, formControlProps } = useProjectForm(props)
+  const { model, register, options, formControlProps, isCustomerContext } = useProjectForm(props)
   const ValidateKeyFunction = useValidateKeyFunction()
   return (
     <FormControl {...formControlProps}>
@@ -32,7 +32,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         {...register('customerKey', {
           validators: t('projects.customerRequired')
         })}
-        hidden={!!props.edit || !!props.customerKey}
+        hidden={!!props.edit || isCustomerContext}
         label={t('common.customer')}
         description={t('projects.customerFieldDescription')}
         required={true}
