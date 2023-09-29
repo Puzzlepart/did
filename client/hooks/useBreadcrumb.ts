@@ -1,24 +1,27 @@
-import { IBreadcrumbProps } from '@fluentui/react'
-import { useMemo } from 'react'
+import { IBreadcrumbItem } from 'components'
+import { DependencyList, useMemo } from 'react'
 
 /**
- * Returns a memoized `IBreadcrumbProps` object with the provided `items` array.
+ * Returns a memoized array of breadcrumb items with keys added to each item.
  *
- * @param items An array of `IBreadcrumbItem` objects to display in the breadcrumb.
+ * @param items An array of partial breadcrumb items.
+ * @param deps An optional array of dependencies.
  *
- * @returns A memoized `IBreadcrumbProps` object with the provided `items` array.
+ * @returns A memoized array of partial breadcrumb items with keys added to each item.
  */
-export function useBreadcrumb(items: IBreadcrumbProps['items']) {
-  return useMemo<IBreadcrumbProps>(
-    () => ({
-      styles: {
-        root: { margin: 0 },
-        itemLink: { fontSize: 14 },
-        item: { fontSize: 14 },
-        chevron: { fontSize: 8 }
-      },
-      items
-    }),
-    [items]
+export function useBreadcrumb(
+  items: Partial<IBreadcrumbItem>[],
+  deps: DependencyList = []
+) {
+  return useMemo<IBreadcrumbItem[]>(
+    () =>
+      items.map(
+        (item, index) =>
+          ({
+            key: index,
+            ...item
+          } as IBreadcrumbItem)
+      ),
+    deps
   )
 }

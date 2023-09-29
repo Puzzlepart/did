@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { AuthChecker, ResolverData } from 'type-graphql'
 import _ from 'underscore'
 import { PermissionScope } from '../../shared/config/security'
