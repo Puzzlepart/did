@@ -1,3 +1,6 @@
+/* eslint-disable unicorn/no-array-callback-reference */
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable quotes */
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
@@ -5,8 +8,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { DateObject } from '../../../shared/utils/DateObject'
-import { EventObject } from '../../graphql'
-import { Context } from '../../graphql/context'
+import { Context,EventObject } from '../../graphql'
 import { environment } from '../../utils'
 import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
@@ -237,6 +239,8 @@ export class MSGraphService {
    *
    * @param startDateTimeIso - Start date time in `ISO format`
    * @param endDateTimeIso - End date time in `ISO format`
+   * @param filterStr - Filter string for the query (default: `sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
+   * @param orderBy - Order by string for the query (default: `start/dateTime asc`)
    *
    * @public
    *
@@ -244,7 +248,9 @@ export class MSGraphService {
    */
   public async getEvents(
     startDateTimeIso: string,
-    endDateTimeIso: string
+    endDateTimeIso: string,
+    filterStr = "sensitivity ne 'private' and isallday eq false and iscancelled eq false",
+    orderBy = 'start/dateTime asc'
   ): Promise<EventObject[]> {
     try {
       const cacheOptions: CacheOptions = {
@@ -272,11 +278,8 @@ export class MSGraphService {
               'webLink',
               'isOrganizer'
             ])
-            .filter(
-              // eslint-disable-next-line quotes
-              "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
-            )
-            .orderby('start/dateTime asc')
+            .filter(filterStr)
+            .orderby(orderBy)
             .top(500)
             .get()
         ).value
@@ -297,7 +300,6 @@ export class MSGraphService {
               )
           )
           .filter((event: EventObject) => event.duration <= 24)
-          // Removing events that start before the start of the timesheet period, since they've been picked up by the previous period. See #1009 for details
           .filter(
             (event: EventObject) =>
               event.startDateTime >= new Date(startDateTimeIso)

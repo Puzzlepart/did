@@ -1,5 +1,5 @@
-import { GraphQLDateTime } from 'graphql-scalars'
 import 'reflect-metadata'
+import { GraphQLDateTime } from 'graphql-scalars'
 import { buildSchema, ResolverData } from 'type-graphql'
 import { authChecker } from './authChecker'
 import { Context } from './context'
