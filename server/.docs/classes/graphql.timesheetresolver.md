@@ -40,7 +40,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetResolver*](graphql.timesheetresolver.md)
 
-Defined in: [graphql/resolvers/timesheet/index.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L28)
+Defined in: [graphql/resolvers/timesheet/TimesheetResolver.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/TimesheetResolver.ts#L28)
 
 ## Methods
 
@@ -59,13 +59,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L94)
+Defined in: [graphql/resolvers/timesheet/TimesheetResolver.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/TimesheetResolver.ts#L94)
 
 ___
 
 ### timesheet
 
-▸ **timesheet**(`context`: *Context*, `query`: [*TimesheetQuery*](graphql.timesheetquery.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<any[]\>
+▸ **timesheet**(`context`: [*Context*](graphql.context.md), `query`: [*TimesheetQuery*](graphql.timesheetquery.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<any[]\>
 
 Get timesheet
 
@@ -73,13 +73,13 @@ Get timesheet
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | - |
+`context` | [*Context*](graphql.context.md) | - |
 `query` | [*TimesheetQuery*](graphql.timesheetquery.md) | Query   |
 `options` | [*TimesheetOptions*](graphql.timesheetoptions.md) | Options    |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L47)
+Defined in: [graphql/resolvers/timesheet/TimesheetResolver.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/TimesheetResolver.ts#L47)
 
 ___
 
@@ -98,13 +98,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:123](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L123)
+Defined in: [graphql/resolvers/timesheet/TimesheetResolver.ts:123](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/TimesheetResolver.ts#L123)
 
 ___
 
 ### vacation
 
-▸ **vacation**(`context`: *Context*): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
+▸ **vacation**(`context`: [*Context*](graphql.context.md)): *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
 Get vacation summary
 
@@ -114,8 +114,8 @@ Total vacation days, used and remaining.
 
 Name | Type |
 :------ | :------ |
-`context` | *Context* |
+`context` | [*Context*](graphql.context.md) |
 
 **Returns:** *Promise*<[*VacationSummary*](graphql.vacationsummary.md)\>
 
-Defined in: [graphql/resolvers/timesheet/index.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L73)
+Defined in: [graphql/resolvers/timesheet/TimesheetResolver.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/TimesheetResolver.ts#L73)

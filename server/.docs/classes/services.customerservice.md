@@ -41,7 +41,7 @@ Customer service
 
 ### constructor
 
-\+ **new CustomerService**(`context`: *Context*, `_labelSvc`: [*LabelService*](services.labelservice.md)): [*CustomerService*](services.customerservice.md)
+\+ **new CustomerService**(`context`: [*Context*](graphql.context.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*CustomerService*](services.customerservice.md)
 
 Constructor for `CustomerService`
 
@@ -49,7 +49,7 @@ Constructor for `CustomerService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`   |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`   |
 `_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through `typedi`    |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
@@ -98,7 +98,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

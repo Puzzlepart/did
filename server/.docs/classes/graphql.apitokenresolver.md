@@ -45,7 +45,7 @@ Defined in: [graphql/resolvers/apiToken/index.ts:24](https://github.com/Puzzlepa
 
 ### addApiToken
 
-▸ **addApiToken**(`token`: [*ApiTokenInput*](graphql.apitokeninput.md), `context`: *Context*): *Promise*<string\>
+▸ **addApiToken**(`token`: [*ApiTokenInput*](graphql.apitokeninput.md), `context`: [*Context*](graphql.context.md)): *Promise*<string\>
 
 Add API token
 
@@ -54,7 +54,7 @@ Add API token
 Name | Type | Description |
 :------ | :------ | :------ |
 `token` | [*ApiTokenInput*](graphql.apitokeninput.md) | Token   |
-`context` | *Context* | - |
+`context` | [*Context*](graphql.context.md) | - |
 
 **Returns:** *Promise*<string\>
 
@@ -64,7 +64,7 @@ ___
 
 ### apiTokens
 
-▸ **apiTokens**(`context`: *Context*): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
+▸ **apiTokens**(`context`: [*Context*](graphql.context.md)): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Get API tokens
 
@@ -72,7 +72,7 @@ Get API tokens
 
 Name | Type |
 :------ | :------ |
-`context` | *Context* |
+`context` | [*Context*](graphql.context.md) |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
@@ -82,7 +82,7 @@ ___
 
 ### deleteApiToken
 
-▸ **deleteApiToken**(`name`: *string*, `context`: *Context*): *Promise*<BaseResult\>
+▸ **deleteApiToken**(`name`: *string*, `context`: [*Context*](graphql.context.md)): *Promise*<BaseResult\>
 
 Delete API token
 
@@ -91,7 +91,7 @@ Delete API token
 Name | Type | Description |
 :------ | :------ | :------ |
 `name` | *string* | Name   |
-`context` | *Context* | - |
+`context` | [*Context*](graphql.context.md) | - |
 
 **Returns:** *Promise*<BaseResult\>
 

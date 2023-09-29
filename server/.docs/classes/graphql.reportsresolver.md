@@ -99,7 +99,7 @@ ___
 
 ### userReport
 
-▸ **userReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `context?`: *Context*): *Promise*<Report\>
+▸ **userReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `context?`: [*Context*](graphql.context.md)): *Promise*<Report\>
 
 Get report
 
@@ -108,7 +108,7 @@ Get report
 Name | Type | Description |
 :------ | :------ | :------ |
 `preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Report preset   |
-`context?` | *Context* | GraphQL context    |
+`context?` | [*Context*](graphql.context.md) | GraphQL context    |
 
 **Returns:** *Promise*<Report\>
 

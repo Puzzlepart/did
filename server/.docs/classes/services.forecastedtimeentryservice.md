@@ -37,7 +37,7 @@ Forecasted time entries service
 
 ### constructor
 
-\+ **new ForecastedTimeEntryService**(`context`: *Context*): [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
+\+ **new ForecastedTimeEntryService**(`context`: [*Context*](graphql.context.md)): [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
 
 Constructor for `ForecastedTimeEntryService`
 
@@ -45,7 +45,7 @@ Constructor for `ForecastedTimeEntryService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
 
@@ -93,7 +93,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

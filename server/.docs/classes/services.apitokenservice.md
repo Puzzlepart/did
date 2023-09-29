@@ -40,7 +40,7 @@ API token service
 
 ### constructor
 
-\+ **new ApiTokenService**(`context`: *Context*): [*ApiTokenService*](services.apitokenservice.md)
+\+ **new ApiTokenService**(`context`: [*Context*](graphql.context.md)): [*ApiTokenService*](services.apitokenservice.md)
 
 Constructor for `ApiTokenService`
 
@@ -48,7 +48,7 @@ Constructor for `ApiTokenService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
@@ -96,7 +96,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

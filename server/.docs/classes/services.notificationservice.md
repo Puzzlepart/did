@@ -23,7 +23,7 @@ Notification service
 
 ### constructor
 
-\+ **new NotificationService**(`context`: *Context*, `_timesheetSvc`: [*TimesheetService*](services.timesheetservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*NotificationService*](services.notificationservice.md)
+\+ **new NotificationService**(`context`: [*Context*](graphql.context.md), `_timesheetSvc`: [*TimesheetService*](services.timesheetservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*NotificationService*](services.notificationservice.md)
 
 Constructor for `NotificationService`
 
@@ -31,7 +31,7 @@ Constructor for `NotificationService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`   |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`   |
 `_timesheetSvc` | [*TimesheetService*](services.timesheetservice.md) | Injected `TimesheetService` through `typedi`   |
 `_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through `typedi`   |
 `_fperiodSvc` | [*ForecastedPeriodsService*](services.forecastedperiodsservice.md) | Injected `ForecastedPeriodsService` through `typedi`    |

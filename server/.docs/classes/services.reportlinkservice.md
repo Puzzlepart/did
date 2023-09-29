@@ -42,7 +42,7 @@ Report links service
 
 ### constructor
 
-\+ **new ReportLinkService**(`context`: *Context*): [*ReportLinkService*](services.reportlinkservice.md)
+\+ **new ReportLinkService**(`context`: [*Context*](graphql.context.md)): [*ReportLinkService*](services.reportlinkservice.md)
 
 Constructor for `ReportLinkService`
 
@@ -50,7 +50,7 @@ Constructor for `ReportLinkService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*ReportLinkService*](services.reportlinkservice.md)
 
@@ -98,7 +98,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

@@ -44,7 +44,7 @@ Defined in: [graphql/resolvers/subscription/SubscriptionResolver.ts:25](https://
 
 ### subscription
 
-▸ **subscription**(`context`: *Context*): *Promise*<[*Subscription*](graphql.subscription.md)\>
+▸ **subscription**(`context`: [*Context*](graphql.context.md)): *Promise*<[*Subscription*](graphql.subscription.md)\>
 
 Get current subscription
 
@@ -52,7 +52,7 @@ Get current subscription
 
 Name | Type |
 :------ | :------ |
-`context` | *Context* |
+`context` | [*Context*](graphql.context.md) |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 

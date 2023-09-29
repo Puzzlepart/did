@@ -42,7 +42,7 @@ Role service
 
 ### constructor
 
-\+ **new RoleService**(`context`: *Context*): [*RoleService*](services.roleservice.md)
+\+ **new RoleService**(`context`: [*Context*](graphql.context.md)): [*RoleService*](services.roleservice.md)
 
 Constructor for `RoleService`
 
@@ -50,7 +50,7 @@ Constructor for `RoleService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
@@ -98,7 +98,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

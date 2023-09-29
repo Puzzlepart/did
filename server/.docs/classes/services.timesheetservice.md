@@ -27,7 +27,7 @@ Timesheet service
 
 ### constructor
 
-\+ **new TimesheetService**(`context`: *Context*, `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_googleCalSvc`: [*GoogleCalendarService*](services.googlecalendarservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_timeEntrySvc`: [*TimeEntryService*](services.timeentryservice.md), `_forecastTimeEntrySvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_confirmedPeriodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_forecastPeriodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_holidaysService`: [*HolidaysService*](services.holidaysservice.md)): [*TimesheetService*](services.timesheetservice.md)
+\+ **new TimesheetService**(`context`: [*Context*](graphql.context.md), `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_googleCalSvc`: [*GoogleCalendarService*](services.googlecalendarservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_timeEntrySvc`: [*TimeEntryService*](services.timeentryservice.md), `_forecastTimeEntrySvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_confirmedPeriodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_forecastPeriodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_holidaysService`: [*HolidaysService*](services.holidaysservice.md)): [*TimesheetService*](services.timesheetservice.md)
 
 Constructor
 
@@ -35,7 +35,7 @@ Constructor
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`   |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`   |
 `_msgraphSvc` | [*MSGraphService*](services.msgraphservice.md) | Injected `MSGraphService` through `typedi`   |
 `_googleCalSvc` | [*GoogleCalendarService*](services.googlecalendarservice.md) | Injected `GoogleCalendarService` through `typedi`   |
 `_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through `typedi`   |

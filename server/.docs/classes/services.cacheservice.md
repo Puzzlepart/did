@@ -29,7 +29,7 @@ Cache service
 
 ### constructor
 
-\+ **new CacheService**(`context`: *Context*, `prefix?`: *string*, `scope?`: [*CacheScope*](../enums/services.cachescope.md)): [*CacheService*](services.cacheservice.md)
+\+ **new CacheService**(`context`: [*Context*](graphql.context.md), `prefix?`: *string*, `scope?`: [*CacheScope*](../enums/services.cachescope.md)): [*CacheService*](services.cacheservice.md)
 
 Constructor
 
@@ -37,7 +37,7 @@ Constructor
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Scope (defaults to CacheScope.SUBSCRIPTION)    |
+`context` | [*Context*](graphql.context.md) | Scope (defaults to CacheScope.SUBSCRIPTION)    |
 `prefix?` | *string* | Prefix   |
 `scope` | [*CacheScope*](../enums/services.cachescope.md) | - |
 

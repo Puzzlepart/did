@@ -40,7 +40,7 @@ Project service
 
 ### constructor
 
-\+ **new ProjectService**(`context`: *Context*, `_customerSvc`: [*CustomerService*](services.customerservice.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
+\+ **new ProjectService**(`context`: [*Context*](graphql.context.md), `_customerSvc`: [*CustomerService*](services.customerservice.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
 
 Constructor for `ProjectService`
 
@@ -48,7 +48,7 @@ Constructor for `ProjectService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`   |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`   |
 `_customerSvc` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through `typedi`   |
 `_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through `typedi`    |
 
@@ -98,7 +98,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

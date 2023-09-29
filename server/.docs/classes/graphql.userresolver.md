@@ -116,7 +116,7 @@ ___
 
 ### currentUser
 
-▸ **currentUser**(`context`: *Context*): *Promise*<[*User*](graphql.user.md)\>
+▸ **currentUser**(`context`: [*Context*](graphql.context.md)): *Promise*<[*User*](graphql.user.md)\>
 
 Get current user, aswell as `id`, `name` and `owner` of
 the current subscription. If the user is not logged in,
@@ -126,7 +126,7 @@ the current subscription. If the user is not logged in,
 
 Name | Type |
 :------ | :------ |
-`context` | *Context* |
+`context` | [*Context*](graphql.context.md) |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 

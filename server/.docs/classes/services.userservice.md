@@ -47,7 +47,7 @@ User service
 
 ### constructor
 
-\+ **new UserService**(`context`: *Context*): [*UserService*](services.userservice.md)
+\+ **new UserService**(`context`: [*Context*](graphql.context.md)): [*UserService*](services.userservice.md)
 
 Constructor for `UserService`
 
@@ -55,7 +55,7 @@ Constructor for `UserService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*UserService*](services.userservice.md)
 
@@ -111,7 +111,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

@@ -43,7 +43,7 @@ Subscription service
 
 ### constructor
 
-\+ **new SubscriptionService**(`context`: *Context*): [*SubscriptionService*](services.subscriptionservice.md)
+\+ **new SubscriptionService**(`context`: [*Context*](graphql.context.md)): [*SubscriptionService*](services.subscriptionservice.md)
 
 Constructor for `SubscriptionService`
 
@@ -51,7 +51,7 @@ Constructor for `SubscriptionService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
@@ -99,7 +99,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

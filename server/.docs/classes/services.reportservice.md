@@ -29,7 +29,7 @@ Report service
 
 ### constructor
 
-\+ **new ReportService**(`context`: *Context*, `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_timeEntrySvc`: [*TimeEntryService*](services.timeentryservice.md), `_forecastTimeEntrySvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_confirmedPeriodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services.reportservice.md)
+\+ **new ReportService**(`context`: [*Context*](graphql.context.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_timeEntrySvc`: [*TimeEntryService*](services.timeentryservice.md), `_forecastTimeEntrySvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_confirmedPeriodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services.reportservice.md)
 
 Constructor for ReportsService
 
@@ -37,7 +37,7 @@ Constructor for ReportsService
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`   |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`   |
 `_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through `typedi`   |
 `_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through `typedi`   |
 `_timeEntrySvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through `typedi`   |
@@ -52,7 +52,7 @@ Defined in: [services/report.ts:39](https://github.com/Puzzlepart/did/blob/dev/s
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 ## Methods
 

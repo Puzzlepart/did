@@ -37,7 +37,7 @@ Forecasted periods service
 
 ### constructor
 
-\+ **new ForecastedPeriodsService**(`context`: *Context*): [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
+\+ **new ForecastedPeriodsService**(`context`: [*Context*](graphql.context.md)): [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
 Constructor for `ForecastedPeriodsService`
 
@@ -45,7 +45,7 @@ Constructor for `ForecastedPeriodsService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
@@ -93,7 +93,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

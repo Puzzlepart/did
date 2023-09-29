@@ -20,6 +20,7 @@ Reusable React Hooks
 
 - [useBreadcrumb](hooks.md#usebreadcrumb)
 - [useReduxReducer](hooks.md#usereduxreducer)
+- [useSwitchCase](hooks.md#useswitchcase)
 - [useTimesheetPeriods](hooks.md#usetimesheetperiods)
 
 ### React Hook Functions
@@ -105,21 +106,22 @@ Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:12](https://github.
 
 ### useBreadcrumb
 
-▸ **useBreadcrumb**(`items`: IBreadcrumbProps[*items*]): *IBreadcrumbProps*
+▸ **useBreadcrumb**(`items`: *Partial*<[*IBreadcrumbItem*](../interfaces/components.ibreadcrumbitem.md)\>[], `deps?`: DependencyList): [*IBreadcrumbItem*](../interfaces/components.ibreadcrumbitem.md)[]
 
-Returns a memoized `IBreadcrumbProps` object with the provided `items` array.
+Returns a memoized array of breadcrumb items with keys added to each item.
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | IBreadcrumbProps[*items*] | An array of `IBreadcrumbItem` objects to display in the breadcrumb.    |
+`items` | *Partial*<[*IBreadcrumbItem*](../interfaces/components.ibreadcrumbitem.md)\>[] | An array of partial breadcrumb items.   |
+`deps` | DependencyList | An optional array of dependencies.    |
 
-**Returns:** *IBreadcrumbProps*
+**Returns:** [*IBreadcrumbItem*](../interfaces/components.ibreadcrumbitem.md)[]
 
-A memoized `IBreadcrumbProps` object with the provided `items` array.
+A memoized array of partial breadcrumb items with keys added to each item.
 
-Defined in: [client/hooks/useBreadcrumb.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/useBreadcrumb.ts#L11)
+Defined in: [client/hooks/useBreadcrumb.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/hooks/useBreadcrumb.ts#L12)
 
 ___
 
@@ -147,6 +149,23 @@ Name | Type | Description |
 A tuple containing the current state and a dispatch function to update the state.
 
 Defined in: [client/hooks/useReduxReducer.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/hooks/useReduxReducer.ts#L25)
+
+___
+
+### useSwitchCase
+
+▸ **useSwitchCase**(`value`: *string*, `cases`: *Record*<string, string\>): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`value` | *string* |
+`cases` | *Record*<string, string\> |
+
+**Returns:** *string*
+
+Defined in: [client/hooks/common/useSwitchCase.ts:1](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useSwitchCase.ts#L1)
 
 ___
 
