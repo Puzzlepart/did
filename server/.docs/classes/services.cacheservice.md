@@ -79,7 +79,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L89)
+Defined in: [services/cache.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L90)
 
 ___
 
@@ -127,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:111](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L111)
+Defined in: [services/cache.ts:112](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L112)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:141](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L141)
+Defined in: [services/cache.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L142)
 
 ___
 
@@ -170,4 +170,4 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:158](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L158)
+Defined in: [services/cache.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L159)

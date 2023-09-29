@@ -24,6 +24,7 @@ Reusable utility functions
 - [createPath](utils.md#createpath)
 - [createRouterLink](utils.md#createrouterlink)
 - [deepCopy](utils.md#deepcopy)
+- [fuzzyContains](utils.md#fuzzycontains)
 - [fuzzyMap](utils.md#fuzzymap)
 - [fuzzyStringEqual](utils.md#fuzzystringequal)
 - [getContrastColor](utils.md#getcontrastcolor)
@@ -245,6 +246,25 @@ Name | Type | Description |
 **Returns:** *any*
 
 Defined in: [client/utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
+
+___
+
+### fuzzyContains
+
+▸ **fuzzyContains**(`array`: *string*[], `value`: *string*): *boolean*
+
+Checks if an array contains a value, ignoring case.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`array` | *string*[] | The array to check.   |
+`value` | *string* | The value to check for.    |
+
+**Returns:** *boolean*
+
+Defined in: [client/utils/fuzzyContains.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/utils/fuzzyContains.ts#L7)
 
 ___
 
