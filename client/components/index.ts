@@ -5,6 +5,7 @@
  * @module Components
  */
 export * from './BasePanel'
+export * from './Breadcrumb'
 export * from './ColorPickerField'
 export * from './ConditionalWrapper'
 export * from './CustomerLink'
@@ -33,4 +34,3 @@ export * from './SubText'
 export * from './Toast'
 export * from './UserColumn'
 export * from './UserMessage'
-export * from './Breadcrumb'

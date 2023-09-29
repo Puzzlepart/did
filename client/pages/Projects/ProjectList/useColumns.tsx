@@ -34,7 +34,10 @@ const ColumnWrapper = ({ project, children }) => (
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
   const context = useProjectsContext()
-  const outlookCategories = mapProperty(context?.state?.outlookCategories, 'displayName')
+  const outlookCategories = mapProperty(
+    context?.state?.outlookCategories,
+    'displayName'
+  )
   const columns = useMemo(
     () =>
       [

@@ -5,8 +5,8 @@
  *
  * @module GraphQL
  */
+export * from './context'
 export * from './generateClientInfo'
 export * from './generateGraphQLSchema'
 export * from './resolvers'
 export * from './setupGraphQL'
-export * from './context'

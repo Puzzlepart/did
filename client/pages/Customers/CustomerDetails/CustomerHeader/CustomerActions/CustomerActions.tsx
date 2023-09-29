@@ -26,7 +26,8 @@ export const CustomerActions: StyledComponent = (props) => {
           text={t('customers.webLinkText')}
           appearance='transparent'
           iconName='WebAsset'
-          onClick={() => window.open(context.state.selected?.webLink, '_blank')} />
+          onClick={() => window.open(context.state.selected?.webLink, '_blank')}
+        />
         <DynamicButton
           hidden={!context.state.selected?.externalSystemURL}
           text={t('customers.externalSystemUrlText')}
@@ -34,7 +35,8 @@ export const CustomerActions: StyledComponent = (props) => {
           iconName='System'
           onClick={() =>
             window.open(context.state.selected?.externalSystemURL, '_blank')
-          } />
+          }
+        />
         <DynamicButton
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
           text={t('customers.editButtonLabel')}
@@ -47,7 +49,8 @@ export const CustomerActions: StyledComponent = (props) => {
                   context.dispatch(CLOSE_CUSTOMER_PANEL())
               })
             )
-          } />
+          }
+        />
       </div>
     </div>
   )

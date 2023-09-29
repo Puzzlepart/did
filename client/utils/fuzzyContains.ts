@@ -1,6 +1,6 @@
 /**
  * Checks if an array contains a value, ignoring case.
- * 
+ *
  * @param array - The array to check.
  * @param value - The value to check for.
  */

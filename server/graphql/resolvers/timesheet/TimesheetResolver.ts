@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { Context } from '../../context'
 import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
 import { BaseResult } from '../types'
 import {
   TimesheetOptions,

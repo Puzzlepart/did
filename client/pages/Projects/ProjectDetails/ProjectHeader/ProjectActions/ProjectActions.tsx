@@ -8,8 +8,8 @@ import { PermissionScope as $ } from 'security'
 import { StyledComponent } from 'types'
 import { useProjectsContext } from '../../../context'
 import { OPEN_EDIT_PANEL, SET_SELECTED_PROJECT } from '../../../reducer/actions'
-import styles from './ProjectActions.module.scss'
 import $createOutlookCategory from './createOutlookCategory.gql'
+import styles from './ProjectActions.module.scss'
 
 /**
  * @category Projects
@@ -46,19 +46,22 @@ export const ProjectActions: StyledComponent = (props) => {
           iconName='WebAsset'
           onClick={() =>
             window.open(state.selected?.externalSystemURL, '_blank')
-          } />
+          }
+        />
         <DynamicButton
           hidden={!!state.selected?.outlookCategory}
           text={t('projects.createOutlookCategoryLabel')}
           appearance='transparent'
           iconName='CalendarAdd'
-          onClick={() => onCreateCategory()} />
+          onClick={() => onCreateCategory()}
+        />
         <DynamicButton
           hidden={!hasPermission($.MANAGE_PROJECTS)}
           text={t('projects.editButtonLabel')}
           appearance='transparent'
           iconName='TableEdit'
-          onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))} />
+          onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))}
+        />
       </div>
     </div>
   )

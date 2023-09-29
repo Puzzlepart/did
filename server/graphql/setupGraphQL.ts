@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting
@@ -11,6 +10,7 @@ import {
 import createDebug from 'debug'
 import express from 'express'
 import { MongoClient } from 'mongodb'
+import 'reflect-metadata'
 import Container, { ContainerInstance } from 'typedi'
 import _ from 'underscore'
 import { Context, createContext } from './context'

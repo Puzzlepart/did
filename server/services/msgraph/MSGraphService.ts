@@ -8,7 +8,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { DateObject } from '../../../shared/utils/DateObject'
-import { Context,EventObject } from '../../graphql'
+import { Context, EventObject } from '../../graphql'
 import { environment } from '../../utils'
 import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
@@ -208,11 +208,11 @@ export class MSGraphService {
 
   /**
    * Get Outlook categories. This method uses the Microsoft Graph endpoint
-   * `/me/outlook/masterCategories`. The response is default cached for 
+   * `/me/outlook/masterCategories`. The response is default cached for
    * 60 seconds.
    *
    * @public
-   * 
+   *
    * @param cacheExpiry - Cache expiry in seconds
    *
    * @memberof MSGraphService
@@ -227,7 +227,11 @@ export class MSGraphService {
             .get()
           return value
         },
-        { key: 'getoutlookcategories', expiry: cacheExpiry, scope: CacheScope.USER }
+        {
+          key: 'getoutlookcategories',
+          expiry: cacheExpiry,
+          scope: CacheScope.USER
+        }
       )
     } catch (error) {
       throw new MSGraphError('getOutlookCategories', error.message)
@@ -284,27 +288,25 @@ export class MSGraphService {
             .get()
         ).value
       }, cacheOptions)
-      return (
-        events
-          .map(
-            (event) =>
-              new EventObject(
-                event.id,
-                event.subject,
-                event.body.content,
-                event.isOrganizer,
-                event.start,
-                event.end,
-                event.webLink,
-                event.categories
-              )
-          )
-          .filter((event: EventObject) => event.duration <= 24)
-          .filter(
-            (event: EventObject) =>
-              event.startDateTime >= new Date(startDateTimeIso)
-          )
-      )
+      return events
+        .map(
+          (event) =>
+            new EventObject(
+              event.id,
+              event.subject,
+              event.body.content,
+              event.isOrganizer,
+              event.start,
+              event.end,
+              event.webLink,
+              event.categories
+            )
+        )
+        .filter((event: EventObject) => event.duration <= 24)
+        .filter(
+          (event: EventObject) =>
+            event.startDateTime >= new Date(startDateTimeIso)
+        )
     } catch (error) {
       throw new MSGraphError('getEvents', error.message)
     }
