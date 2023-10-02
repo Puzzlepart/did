@@ -1,14 +1,13 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable quotes */
-/* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { DateObject } from '../../../shared/utils/DateObject'
-import { Context, EventObject } from '../../graphql'
+import { Context } from '../../graphql/context'
+import { EventObject } from '../../graphql/resolvers/timesheet/types'
 import { environment } from '../../utils'
 import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
@@ -243,7 +242,7 @@ export class MSGraphService {
    *
    * @param startDateTimeIso - Start date time in `ISO format`
    * @param endDateTimeIso - End date time in `ISO format`
-   * @param filterStr - Filter string for the query (default: `sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
+   * @param filterString - Filter string for the query (default: `sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
    * @param orderBy - Order by string for the query (default: `start/dateTime asc`)
    *
    * @public
@@ -253,7 +252,7 @@ export class MSGraphService {
   public async getEvents(
     startDateTimeIso: string,
     endDateTimeIso: string,
-    filterStr = "sensitivity ne 'private' and isallday eq false and iscancelled eq false",
+    filterString = "sensitivity ne 'private' and isallday eq false and iscancelled eq false",
     orderBy = 'start/dateTime asc'
   ): Promise<EventObject[]> {
     try {
@@ -282,7 +281,7 @@ export class MSGraphService {
               'webLink',
               'isOrganizer'
             ])
-            .filter(filterStr)
+            .filter(filterString)
             .orderby(orderBy)
             .top(500)
             .get()
@@ -290,7 +289,7 @@ export class MSGraphService {
       }, cacheOptions)
       return events
         .map(
-          (event) =>
+          (event: any) =>
             new EventObject(
               event.id,
               event.subject,

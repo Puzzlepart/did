@@ -17,7 +17,7 @@ export function useCustomerHeaderBreadcrumb() {
   const history = useHistory()
   const urlParameters = useParams<ICustomersUrlParameters>()
   const detailsTab = useSwitchCase(urlParameters.detailsTab, {
-    projects: t('projects.timeEntriesHeaderText'),
+    projects: t('customers.projectsHeaderText'),
     default: t('projects.informationHeaderText')
   })
 
