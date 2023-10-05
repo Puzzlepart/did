@@ -14,7 +14,7 @@ import { useUserFormSubmit } from './useUserFormSubmit'
 
 /**
  * A custom hook that returns the necessary props and functions for the user form.
- * 
+ *
  * @param props - The props for the user form.
  */
 export function useUserForm(props: IUserFormProps) {

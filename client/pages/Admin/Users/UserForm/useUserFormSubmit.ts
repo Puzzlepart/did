@@ -27,7 +27,7 @@ export const useUserFormSubmit: FormSubmitHook<
    * save button on the user form. This function will call the `addOrUpdateUser`
    * mutation and then reset the user form model. Finally, the `onDismiss` prop
    * is called to close the user form.
-   * 
+   *
    * If no role is selected, the role will default to `User` to avoid users
    * being created without a role.
    */
