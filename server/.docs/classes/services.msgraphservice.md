@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [services/msgraph/MSGraphService.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L31)
+Defined in: [services/msgraph/MSGraphService.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L30)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [services/msgraph/MSGraphService.ts:31](https://github.com/Puzzlepar
 
 • `Private` **\_accessTokenOptions**: MSAccessTokenOptions
 
-Defined in: [services/msgraph/MSGraphService.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L25)
+Defined in: [services/msgraph/MSGraphService.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L24)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **\_cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [services/msgraph/MSGraphService.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L24)
+Defined in: [services/msgraph/MSGraphService.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L23)
 
 ___
 
@@ -81,7 +81,7 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [services/msgraph/MSGraphService.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L46)
+Defined in: [services/msgraph/MSGraphService.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L45)
 
 ___
 
@@ -101,7 +101,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*MSGraphOutlookCategory*](../interfaces/services.msgraphoutlookcategory.md)\>
 
-Defined in: [services/msgraph/MSGraphService.ts:186](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L186)
+Defined in: [services/msgraph/MSGraphService.ts:185](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L185)
 
 ___
 
@@ -121,13 +121,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/MSGraphService.ts:129](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L129)
+Defined in: [services/msgraph/MSGraphService.ts:128](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L128)
 
 ___
 
 ### getEvents
 
-▸ **getEvents**(`startDateTimeIso`: *string*, `endDateTimeIso`: *string*, `filterStr?`: *string*, `orderBy?`: *string*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
+▸ **getEvents**(`startDateTimeIso`: *string*, `endDateTimeIso`: *string*, `filterString?`: *string*, `orderBy?`: *string*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
 Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
 
@@ -139,12 +139,12 @@ Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `startDateTimeIso` | *string* | - | Start date time in `ISO format`   |
 `endDateTimeIso` | *string* | - | End date time in `ISO format`   |
-`filterStr` | *string* | "sensitivity ne 'private' and isallday eq false and iscancelled eq false" | Filter string for the query (default: `sensitivity ne 'private' and isallday eq false and iscancelled eq false`)   |
+`filterString` | *string* | "sensitivity ne 'private' and isallday eq false and iscancelled eq false" | Filter string for the query (default: `sensitivity ne 'private' and isallday eq false and iscancelled eq false`)   |
 `orderBy` | *string* | 'start/dateTime asc' | Order by string for the query (default: `start/dateTime asc`)    |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/MSGraphService.ts:253](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L253)
+Defined in: [services/msgraph/MSGraphService.ts:252](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L252)
 
 ___
 
@@ -166,7 +166,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/msgraph/MSGraphService.ts:220](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L220)
+Defined in: [services/msgraph/MSGraphService.ts:219](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L219)
 
 ___
 
@@ -189,7 +189,7 @@ Name | Type | Description |
 A base64 representation of the user photo, or null if
 the user photo is not found.
 
-Defined in: [services/msgraph/MSGraphService.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L71)
+Defined in: [services/msgraph/MSGraphService.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L70)
 
 ___
 
@@ -203,7 +203,7 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/MSGraphService.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L146)
+Defined in: [services/msgraph/MSGraphService.ts:145](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L145)
 
 ___
 
@@ -221,4 +221,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/MSGraphService.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L89)
+Defined in: [services/msgraph/MSGraphService.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/MSGraphService.ts#L88)
