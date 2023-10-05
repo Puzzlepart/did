@@ -23,13 +23,22 @@ export const useUserFormSubmit: FormSubmitHook<
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
   /**
-   * On save user
+   * On save user form data. This function is called when the user clicks the
+   * save button on the user form. This function will call the `addOrUpdateUser`
+   * mutation and then reset the user form model. Finally, the `onDismiss` prop
+   * is called to close the user form.
+   * 
+   * If no role is selected, the role will default to `User` to avoid users
+   * being created without a role.
    */
   const onSave = async () => {
-    alert('Saving')
+    const user = {
+      ..._.omit(model.value<User>(), '__typename', 'photo'),
+      role: model.value<User>('role') ?? 'User'
+    }
     await addOrUpdateUser({
       variables: {
-        user: _.omit(model.value<User>(), '__typename', 'photo'),
+        user,
         update: !!props.user
       }
     })

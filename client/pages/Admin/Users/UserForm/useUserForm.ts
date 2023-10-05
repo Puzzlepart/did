@@ -12,17 +12,19 @@ import _ from 'underscore'
 import { IUserFormProps } from './types'
 import { useUserFormSubmit } from './useUserFormSubmit'
 
+/**
+ * A custom hook that returns the necessary props and functions for the user form.
+ * 
+ * @param props - The props for the user form.
+ */
 export function useUserForm(props: IUserFormProps) {
   const { t } = useTranslation()
   const appContext = useAppContext()
-  const model = useFormControlModel<keyof User, User>(props.user, (user) => {
-    // A bit nasty temp-hack to fix the role type
-    return {
-      ...user,
-      photo: null,
-      role: user.role['name']
-    }
-  })
+  const model = useFormControlModel<keyof User, User>(props.user, (user) => ({
+    ...user,
+    photo: null,
+    role: user.role && user.role['name']
+  }))
   const register = useFormControls<keyof User>(model)
   const submitProps = useUserFormSubmit(props, model)
 
