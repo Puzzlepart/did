@@ -42,8 +42,8 @@ jobs:
 
       - name: ESLint and prettier
         run: |
-          npm run lint
-          npm run prettier
+          npm run lint:fix
+          npm run prettier:write
 
       - name: Generating README and CHANGELOG using @appnest/readme
         run: |
