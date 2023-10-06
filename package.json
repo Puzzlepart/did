@@ -179,7 +179,7 @@
     "terser-webpack-plugin": "^5.3.6",
     "typedoc": "0.25.1",
     "typedoc-plugin-markdown": "3.6.0",
-    "typescript": "4.9.x",
+    "typescript": "4.8.x",
     "webpack-build-notifier": "2.3.0",
     "webpack-bundle-analyzer": "4.8.0",
     "webpack-livereload-plugin": "3.0.2"
