@@ -118,7 +118,6 @@
     "ts-node": "10.9.1",
     "type-graphql": "1.1.1",
     "typedi": "0.10.0",
-    "typescript": "4.2.3",
     "ua-parser-js": "0.7.26",
     "underscore": "1.12.1",
     "underscore.string": "3.3.5",
@@ -178,11 +177,12 @@
     "prettier-plugin-organize-imports": "3.2.3",
     "rimraf": "3.0.2",
     "terser-webpack-plugin": "^5.3.6",
-    "typedoc": "0.20.34",
+    "typedoc": "0.25.1",
     "typedoc-plugin-markdown": "3.6.0",
     "webpack-build-notifier": "2.3.0",
     "webpack-bundle-analyzer": "4.8.0",
-    "webpack-livereload-plugin": "3.0.2"
+    "webpack-livereload-plugin": "3.0.2",
+    "typescript": "4.9.x"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.12"
