@@ -10,18 +10,18 @@
   ],
   "hideGenerator": true,
   "gitRevision": "dev",
-  "tsconfig": "../tsconfig.json",
+  "tsconfig": "./tsconfig.json",
   "categorizeByGroup": true,
   "categoryOrder": ["Function Component", "*"],
   "entryPoints": [
-    "client/components/index.ts",
-    "client/parts/index.ts",
-    "client/pages/index.ts",
-    "client/hooks/index.ts",
-    "client/graphql/index.ts",
-    "client/helpers/index.ts",
-    "client/utils/index.ts",
-    "client/app/index.tsx",
-    "client/index.tsx"
+    "./components/index.ts",
+    "./parts/index.ts",
+    "./pages/index.ts",
+    "./hooks/index.ts",
+    "./graphql/index.ts",
+    "./helpers/index.ts",
+    "./utils/index.ts",
+    "./app/index.tsx",
+    "./index.tsx"
   ]
 }

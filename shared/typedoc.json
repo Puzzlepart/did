@@ -9,7 +9,7 @@
   "tsconfig": "../client/tsconfig.json",
   "categorizeByGroup": true,
   "entryPoints": [
-    "shared/config/security/index.ts",
-    "shared/utils/date.ts"
+    "./config/security/index.ts",
+    "./utils/date.ts"
   ]
 }
