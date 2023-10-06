@@ -37,7 +37,7 @@ jobs:
 
       - name: ESLint
         run: |
-          npx eslint --ext .ts,.tsx ./client ./server --color --quiet
+          eslint --ext .ts,.tsx ./client ./server --color --quiet
 
       - name: Package client
         run: |
