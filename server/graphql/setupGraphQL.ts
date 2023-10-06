@@ -16,7 +16,8 @@ import _ from 'underscore'
 import { Context, createContext } from './context'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
-export const debug = createDebug('graphql')
+import colors from 'colors/safe'
+export const debug = createDebug('graphql/setupGraphQL')
 
 /**
  * Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
@@ -66,7 +67,7 @@ export const setupGraphQL = async (
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
               debug(
-                `Resetting container for request ${requestContext.context.requestId}`
+                `Resetting container for request ${colors.magenta(requestContext.context.requestId)}`
               )
               // Remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)

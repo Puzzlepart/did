@@ -31,7 +31,6 @@ function getPluginsForEnvironment() {
   const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
   const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
   const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
-  const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
   const { CustomCompileHooks } = require('./compileHooks')
   plugins.push(
     new ForkTsCheckerWebpackPlugin({
@@ -46,7 +45,6 @@ function getPluginsForEnvironment() {
         error: () => {}
       }
     }),
-    new ForkTsCheckerNotifierWebpackPlugin({ skipSuccessful: true }),
     new CustomCompileHooks({
       url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
       localtunnel: {
