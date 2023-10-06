@@ -21,6 +21,8 @@
   "scripts": {
     "watch": "node .tasks/watch.js",
     "package": "node .tasks/package.js",
+    "lint": "eslint --ext .ts,.tsx ./client ./server --color --quiet",
+    "prettier": " prettier '**/*.ts*' --write --log-level silent",
     "test": "ava --verbose",
     "start": "node ./server/index.js",
     "package:client": "webpack --config webpack/config.js",

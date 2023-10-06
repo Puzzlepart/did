@@ -22,7 +22,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Use Node.js ${{ vars.NODE_VERSION }}
+      - name: Use Node.js (${{ vars.NODE_VERSION }})
         uses: actions/setup-node@v3
         with:
           node-version: ${{ vars.NODE_VERSION }}
@@ -37,7 +37,7 @@ jobs:
 
       - name: ESLint
         run: |
-          eslint --ext .ts,.tsx ./client ./server --color --quiet
+          npm run lint
 
       - name: Package client
         run: |
