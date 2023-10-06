@@ -19,7 +19,10 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
-  public theme: [PartialTheme, Theme]
+  public theme: {
+    legacyTheme: PartialTheme
+    fluentTheme: Theme
+  }
   public lastActive: Date
 
   /**

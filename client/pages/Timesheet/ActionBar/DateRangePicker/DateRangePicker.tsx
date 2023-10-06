@@ -6,14 +6,15 @@ import {
   useTheme
 } from '@fluentui/react'
 import {
-  Button,
   Popover,
   PopoverSurface,
-  PopoverTrigger
+  PopoverTrigger,
+  ToolbarButton
 } from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../../context'
 import { SET_DATE_RANGE } from '../../reducer/actions'
 import { TimesheetDateRange } from '../../types'
@@ -26,14 +27,19 @@ export const DateRangePicker: FC = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const { palette } = useTheme()
-  const { triggerText, open, handleOpenChange } = useDateRangePicker()
+  const { triggerText, triggerIcon, open, handleOpenChange } =
+    useDateRangePicker()
   return (
     <Popover trapFocus={true} open={open} onOpenChange={handleOpenChange}>
       {triggerText && (
         <PopoverTrigger disableButtonEnhancement>
-          <Button disabled={!!state.loading} appearance='subtle'>
+          <ToolbarButton
+            disabled={!!state.loading}
+            appearance='subtle'
+            icon={getFluentIcon(triggerIcon)}
+          >
             {triggerText}
-          </Button>
+          </ToolbarButton>
         </PopoverTrigger>
       )}
       <PopoverSurface>

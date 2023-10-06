@@ -3,6 +3,7 @@ import { PopoverProps } from '@fluentui/react-components'
 import { useState } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { FluentIconName } from 'utils'
 import { useTimesheetContext } from '../../context'
 
 /**
@@ -18,16 +19,19 @@ export function useDateRangePicker() {
   const handleOpenChange: PopoverProps['onOpenChange'] = (_, data) =>
     setOpen(data.open || false)
   let triggerText: string
+  let triggerIcon: FluentIconName
   if (isBrowser) {
     triggerText = state.dateRange.timespan
-    if (
-      state.dateRangeType === DateRangeType.Week &&
-      state.periods.length === 1
-    ) {
-      triggerText = `${state.selectedPeriod.getName(t)} (${
-        state.dateRange.timespan
-      })`
+    triggerIcon = 'CalendarDate'
+    if (state.dateRangeType === DateRangeType.Week) {
+      if (state.periods.length === 1) {
+        triggerText = `${state.selectedPeriod.getName(t)} (${
+          state.dateRange.timespan
+        })`
+      }
+    } else {
+      triggerIcon = 'ClipboardMonth'
     }
   }
-  return { triggerText, open, handleOpenChange }
+  return { triggerText, triggerIcon, open, handleOpenChange }
 }

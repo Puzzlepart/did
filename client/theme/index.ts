@@ -1,5 +1,4 @@
-import { Theme } from '@fluentui/react-components'
-import { PartialTheme } from '@fluentui/react/lib/Theme'
+import { ContextUser } from 'AppContext'
 import { darkTheme } from './darkTheme'
 import { defaultTheme } from './defaultTheme'
 
@@ -10,7 +9,7 @@ import { defaultTheme } from './defaultTheme'
  */
 export function getTheme(
   name: 'auto' | 'dark' | 'default' = 'auto'
-): [PartialTheme, Theme] {
+): ContextUser['theme'] {
   switch (name) {
     case 'dark': {
       return darkTheme
@@ -31,13 +30,13 @@ export function getTheme(
  *
  * @returns the system preferred color scheme, either darkTheme or lightTheme
  */
-function getAutoColorScheme(): [PartialTheme, Theme] {
+function getAutoColorScheme(): ContextUser['theme'] {
   return window.matchMedia &&
     window.matchMedia('(prefers-color-scheme: dark)').matches
     ? getTheme('dark')
     : getTheme('default')
 }
 
+export * from './Themed'
 export * from './darkTheme'
 export * from './defaultTheme'
-export * from './Themed'

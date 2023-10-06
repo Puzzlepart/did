@@ -1,6 +1,7 @@
 import { Theme, webLightTheme } from '@fluentui/react-components'
 import { ISemanticColors, PartialTheme } from '@fluentui/react/lib/Theme'
 import fonts from './fonts'
+import { ContextUser } from 'AppContext'
 
 interface ExtendedThemeSemanticColors extends Partial<ISemanticColors> {
   infoText?: string
@@ -77,7 +78,7 @@ export const fluentDefaultTheme: Theme = {
 /**
  * The Light theme is a combination of the legacy theme and the Fluent Light theme
  */
-export const defaultTheme: [PartialTheme, Theme] = [
-  legacyDefaultTheme,
-  fluentDefaultTheme
-]
+export const defaultTheme: ContextUser['theme'] = {
+  legacyTheme: legacyDefaultTheme,
+  fluentTheme: fluentDefaultTheme
+}
