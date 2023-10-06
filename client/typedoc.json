@@ -10,7 +10,7 @@
   ],
   "hideGenerator": true,
   "gitRevision": "dev",
-  "tsconfig": "./client/tsconfig.json",
+  "tsconfig": "../tsconfig.json",
   "categorizeByGroup": true,
   "categoryOrder": ["Function Component", "*"],
   "entryPoints": [

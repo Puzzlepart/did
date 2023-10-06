@@ -36,9 +36,9 @@ jobs:
       - name: Generating documentation using typedoc
         run: |
           npx concurrently \
-          "node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logger none" \
-          "node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logger none" \
-          "node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logger none"
+          "node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logLevel None" \
+          "node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logLevel None" \
+          "node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logLevel None"
 
       - name: ESLint and prettier
         run: |
