@@ -236,7 +236,7 @@
       }
     },
     "rules": {
-      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": 2,
       "@typescript-eslint/no-explicit-any": 0,
       "@typescript-eslint/member-delimiter-style": 0,
       "@typescript-eslint/explicit-function-return-type": 0,
@@ -244,11 +244,11 @@
       "@typescript-eslint/no-inferrable-types": 0,
       "react/prop-types": 0,
       "no-inferrable-types": 0,
-      "react/display-name": 0,
+      "react/display-name": 1,
       "no-compare-neg-zero": 1,
       "no-console": 2,
       "eqeqeq": 1,
-      "max-classes-per-file": 1,
+      "max-classes-per-file": 0,
       "jsx-quotes": [
         "error",
         "prefer-single"

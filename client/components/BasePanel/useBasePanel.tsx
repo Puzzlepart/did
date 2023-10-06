@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { IPanelProps } from '@fluentui/react'
 import React, { useMemo } from 'react'
 import _ from 'underscore'
