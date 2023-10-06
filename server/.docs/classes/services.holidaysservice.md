@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / HolidaysService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / HolidaysService
 
 # Class: HolidaysService
 
@@ -37,7 +37,7 @@ Holidays service
 
 ### constructor
 
-\+ **new HolidaysService**(`context`: *Context*): [*HolidaysService*](services.holidaysservice.md)
+\+ **new HolidaysService**(`context`: [*Context*](graphql.context.md)): [*HolidaysService*](services.holidaysservice.md)
 
 Constructor for `HolidaysService`
 
@@ -45,7 +45,7 @@ Constructor for `HolidaysService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*HolidaysService*](services.holidaysservice.md)
 
@@ -93,7 +93,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

@@ -1,6 +1,5 @@
 import { useToggle } from 'hooks'
 import { useEffect, useMemo, useState } from 'react'
-import { Project } from 'types'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'
@@ -23,7 +22,6 @@ export function useProjectList(props: IProjectListProps) {
   }, [context?.state?.projects, props.items, props.id])
   const [items, setItems] = useState(initialItems)
   const [showInactive, toggleInactive] = useToggle(false)
-  const [selectedProject, onSelectionChanged] = useState<Project>(null)
   const columns = useColumns(props)
 
   useEffect(
@@ -37,8 +35,6 @@ export function useProjectList(props: IProjectListProps) {
   return {
     items,
     columns,
-    toggleInactive,
-    selectedProject,
-    onSelectionChanged
+    toggleInactive
   }
 }

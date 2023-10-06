@@ -30,7 +30,7 @@ export class RoleResolver {
   /**
    * Get roles
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [Role], { description: 'Get roles' })
   roles() {
     return this._role.getRoles()

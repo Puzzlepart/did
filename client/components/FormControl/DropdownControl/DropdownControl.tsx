@@ -20,7 +20,7 @@ export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
       if (props.model) {
         const modelValue = props.model.value(props.name)
         const option = _.findWhere(props.values, { value: modelValue })
-        if (modelValue) {
+        if (option && modelValue) {
           return option.text
         }
       }

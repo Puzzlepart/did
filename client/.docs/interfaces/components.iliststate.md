@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IListState
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IListState
 
 # Interface: IListState<T\>
 
@@ -37,7 +37,7 @@ ___
 
 ### filterBy
 
-• `Optional` **filterBy**: [*IListColumn*](components.ilistcolumn.md)<any\>
+• `Optional` **filterBy**: [*IListColumn*](components.ilistcolumn.md)<any, any\>
 
 Filter by column
 
@@ -57,7 +57,7 @@ ___
 
 ### groupBy
 
-• `Optional` **groupBy**: [*IListColumn*](components.ilistcolumn.md)<any\>
+• `Optional` **groupBy**: [*IListColumn*](components.ilistcolumn.md)<any, any\>
 
 Group by column
 

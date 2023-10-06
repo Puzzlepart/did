@@ -69,7 +69,7 @@ export class CacheService {
    */
   private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope) {
     key = _.isArray(key) ? _.filter(key, (k) => !!k) : [key]
-    return [
+    const scopedCacheKey = [
       this.prefix,
       ...key,
       scope === CacheScope.SUBSCRIPTION
@@ -79,6 +79,7 @@ export class CacheService {
       .join(':')
       .replace(/-/g, '')
       .toLowerCase()
+    return scopedCacheKey
   }
 
   /**

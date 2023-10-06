@@ -58,8 +58,6 @@ exitWithMessageOnError "Missing node.js executable, please install node.js, if a
 SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
-CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
-NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -88,17 +86,26 @@ fi
 # 2. Select Node version
 # 3. Installing node_modules with --production flag
 # ----------
-COMPARE_VERSION_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
-
-if [[ "$COMPARE_VERSION_RESULT" == "IS_NEWER" ]]; then
-  echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
-  rm -rf "$DEPLOYMENT_TARGET/node_modules"
-fi
 
 # Checks if package.json doesn't exist
 if [ ! -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo "package.json file doesn't exist in the $DEPLOYMENT_TARGET folder - cleaning node_modules folder"
-  rm -rf "$DEPLOYMENT_TARGET/node_modules"
+  #rm -rf "$DEPLOYMENT_TARGET/node_modules"
+  echo "Cleaning of node_modules folder in $DEPLOYMENT_TARGET is temporarily disabled due to issues with deploy timeouts"
+  else
+  CURRENT_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_TARGET/package.json').version")
+  NEW_PACKAGE_VERSION=$(node -p -e "require('$DEPLOYMENT_SOURCE/package.json').version")
+  COMPARE_VERSION_RESULT=$(compare_versions "$NEW_PACKAGE_VERSION" "$CURRENT_PACKAGE_VERSION")
+  if [[ "$COMPARE_VERSION_RESULT" == "IS_NEWER" ]]; then
+    echo "Cleaning node_modules folder in $DEPLOYMENT_TARGET"
+    #rm -rf "$DEPLOYMENT_TARGET/node_modules"
+    echo "Cleaning of node_modules folder in $DEPLOYMENT_TARGET is temporarily disabled due to issues with deploy timeouts"
+  fi
+fi
+
+# Checks if revision.txt exists in the $DEPLOYMENT_SOURCE folder
+if [ -e "$DEPLOYMENT_SOURCE/revision.txt" ]; then
+  CURRENT_REVISION=$(cat "$DEPLOYMENT_SOURCE/revision.txt")
 fi
 
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
@@ -106,8 +113,14 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   if [[ "$IGNORE_MANIFEST" -eq "1" ]]; then
     IGNORE_MANIFEST_PARAM=-x
   fi
-  rsync -a "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
+  echo "Syncing files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
+  rsync -a --delete --force --exclude=node_modules/ "$DEPLOYMENT_SOURCE/" "$DEPLOYMENT_TARGET/"
   exitWithMessageOnError "Rsync failed to sync files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
+fi
+
+# Checks if revision.txt exists in the $DEPLOYMENT_TARGET folder
+if [ -e "$DEPLOYMENT_TARGET/revision.txt" ]; then
+  NEW_REVISION=$(cat "$DEPLOYMENT_TARGET/revision.txt")
 fi
 
 # 2. Select Node version
@@ -122,4 +135,4 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 fi
 
 ##################################################################################################################################
-echo "Deployment of v$NEW_PACKAGE_VERSION was successful"
+echo "Deployment of v$NEW_PACKAGE_VERSION.$NEW_REVISION was successful"

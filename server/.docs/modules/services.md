@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / Services
+[did-server - v0.13.0](../README.md) / Services
 
 # Module: Services
 
@@ -18,6 +18,7 @@ Services used by `GraphQL`
 - [CustomerService](../classes/services.customerservice.md)
 - [ForecastedPeriodsService](../classes/services.forecastedperiodsservice.md)
 - [ForecastedTimeEntryService](../classes/services.forecastedtimeentryservice.md)
+- [GitHubService](../classes/services.githubservice.md)
 - [GoogleCalendarService](../classes/services.googlecalendarservice.md)
 - [HolidaysService](../classes/services.holidaysservice.md)
 - [LabelService](../classes/services.labelservice.md)
@@ -35,7 +36,12 @@ Services used by `GraphQL`
 
 ### Other Classes
 
+- [MSGraphError](../classes/services.msgrapherror.md)
 - [UserNotification](../classes/services.usernotification.md)
+
+### Interfaces
+
+- [MSGraphOutlookCategory](../interfaces/services.msgraphoutlookcategory.md)
 
 ### Type aliases
 

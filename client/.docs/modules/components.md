@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / Components
+[did-client - v0.13.0](../README.md) / Components
 
 # Module: Components
 
@@ -10,7 +10,9 @@ Reusable React Function components.
 
 - [AutocompleteControl](components.autocompletecontrol.md)
 - [BasePanel](components.basepanel.md)
+- [Breadcrumb](components.breadcrumb.md)
 - [CheckboxControl](components.checkboxcontrol.md)
+- [CheckboxField](components.checkboxfield.md)
 - [ColorPickerField](components.colorpickerfield.md)
 - [CustomerLink](components.customerlink.md)
 - [DeleteLink](components.deletelink.md)
@@ -26,6 +28,7 @@ Reusable React Function components.
 - [FilterItem](components.filteritem.md)
 - [FilterPanel](components.filterpanel.md)
 - [FormControl](components.formcontrol.md)
+- [HorizontalSection](components.horizontalsection.md)
 - [HotkeyModal](components.hotkeymodal.md)
 - [IconPickerControl](components.iconpickercontrol.md)
 - [IconText](components.icontext.md)
@@ -38,6 +41,8 @@ Reusable React Function components.
 - [List](components.list.md)
 - [PermissionList](components.permissionlist.md)
 - [ProjectLink](components.projectlink.md)
+- [ProjectTag](components.projecttag.md)
+- [RadioGroupControl](components.radiogroupcontrol.md)
 - [SubText](components.subtext.md)
 - [SuggestionItem](components.suggestionitem.md)
 - [SwitchControl](components.switchcontrol.md)
@@ -90,6 +95,8 @@ Reusable React Function components.
 - [DropdownControlOptions](../interfaces/components.dropdowncontroloptions.md)
 - [FormInputControlBase](../interfaces/components.forminputcontrolbase.md)
 - [IBasePanelProps](../interfaces/components.ibasepanelprops.md)
+- [IBreadcrumbComponentProps](../interfaces/components.ibreadcrumbcomponentprops.md)
+- [IBreadcrumbItem](../interfaces/components.ibreadcrumbitem.md)
 - [ICheckboxControlProps](../interfaces/components.icheckboxcontrolprops.md)
 - [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
 - [IDropdownControlProps](../interfaces/components.idropdowncontrolprops.md)
@@ -102,7 +109,10 @@ Reusable React Function components.
 - [IIconPickerControlProps](../interfaces/components.iiconpickercontrolprops.md)
 - [IInputControlProps](../interfaces/components.iinputcontrolprops.md)
 - [IInputFieldProps](../interfaces/components.iinputfieldprops.md)
+- [IItemColumnProps](../interfaces/components.iitemcolumnprops.md)
 - [ILabelPickerControlProps](../interfaces/components.ilabelpickercontrolprops.md)
+- [IProjectTagProps](../interfaces/components.iprojecttagprops.md)
+- [IRadioGroupControlProps](../interfaces/components.iradiogroupcontrolprops.md)
 - [ISubmitProps](../interfaces/components.isubmitprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
 - [IUserMessageAction](../interfaces/components.iusermessageaction.md)
@@ -125,6 +135,7 @@ Reusable React Function components.
 - [FormInputControlComponent](components.md#forminputcontrolcomponent)
 - [FormSubmitHook](components.md#formsubmithook)
 - [IHotkeyModal](components.md#ihotkeymodal)
+- [ItemColumnRenderType](components.md#itemcolumnrendertype)
 - [ListFilterState](components.md#listfilterstate)
 - [RegisterControlCallback](components.md#registercontrolcallback)
 - [SwitchControlOptions](components.md#switchcontroloptions)
@@ -147,8 +158,10 @@ Reusable React Function components.
 
 ### Other Variables
 
+- [Breadcrumb](components.md#breadcrumb)
 - [DynamicButton](components.md#dynamicbutton)
 - [FormControlContext](components.md#formcontrolcontext)
+- [HorizontalSection](components.md#horizontalsection)
 - [InactiveCheckbox](components.md#inactivecheckbox)
 - [InformationProperty](components.md#informationproperty)
 - [InputField](components.md#inputfield)
@@ -160,6 +173,7 @@ Reusable React Function components.
 - [AutocompleteControl](components.md#autocompletecontrol)
 - [BasePanel](components.md#basepanel)
 - [CheckboxControl](components.md#checkboxcontrol)
+- [CheckboxField](components.md#checkboxfield)
 - [ColorPickerField](components.md#colorpickerfield)
 - [ConditionalWrapper](components.md#conditionalwrapper)
 - [CustomerLink](components.md#customerlink)
@@ -182,6 +196,8 @@ Reusable React Function components.
 - [PermissionList](components.md#permissionlist)
 - [ProjectLink](components.md#projectlink)
 - [ProjectPopover](components.md#projectpopover)
+- [ProjectTag](components.md#projecttag)
+- [RadioGroupControl](components.md#radiogroupcontrol)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
 - [SearchCustomer](components.md#searchcustomer)
 - [SearchProject](components.md#searchproject)
@@ -300,6 +316,14 @@ ___
 Ƭ **IHotkeyModal**: GlobalHotKeysProps & IModalProps
 
 Defined in: [client/components/HotkeyModal/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/HotkeyModal/index.tsx#L8)
+
+___
+
+### ItemColumnRenderType
+
+Ƭ **ItemColumnRenderType**: *timeFromNow* \| *customerLink* \| *projectLink* \| *projectTag* \| *tag* \| *persona*
+
+Defined in: [client/components/List/ItemColumn/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/types.ts#L10)
 
 ___
 
@@ -446,6 +470,14 @@ ___
 
 ## Other Variables
 
+### Breadcrumb
+
+• `Const` **Breadcrumb**: *ReusableComponent*<[*IBreadcrumbComponentProps*](../interfaces/components.ibreadcrumbcomponentprops.md)\>
+
+Defined in: [client/components/Breadcrumb/Breadcrumb.tsx:7](https://github.com/Puzzlepart/did/blob/dev/client/components/Breadcrumb/Breadcrumb.tsx#L7)
+
+___
+
 ### DynamicButton
 
 • `Const` **DynamicButton**: *ReusableComponent*<[*IDynamicButtonProps*](../interfaces/components.idynamicbuttonprops.md)\>
@@ -465,6 +497,14 @@ ___
 The form control context.
 
 Defined in: [client/components/FormControl/context.ts:31](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/context.ts#L31)
+
+___
+
+### HorizontalSection
+
+• `Const` **HorizontalSection**: StyledComponent
+
+Defined in: [client/components/FormControl/HorizontalSection/HorizontalSection.tsx:5](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/HorizontalSection/HorizontalSection.tsx#L5)
 
 ___
 
@@ -500,9 +540,9 @@ ___
 
 ### ItemColumn
 
-• `Const` **ItemColumn**: *StyledComponent*<IItemColumnProps\>
+• `Const` **ItemColumn**: *StyledComponent*<[*IItemColumnProps*](../interfaces/components.iitemcolumnprops.md)\>
 
-Defined in: [client/components/List/ItemColumn/ItemColumn.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/ItemColumn.tsx#L13)
+Defined in: [client/components/List/ItemColumn/ItemColumn.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/List/ItemColumn/ItemColumn.tsx#L14)
 
 ___
 
@@ -531,10 +571,7 @@ ___
 
 • `Const` **BasePanel**: *ReusableComponent*<[*IBasePanelProps*](../interfaces/components.ibasepanelprops.md)\>
 
-Renders a Panel with the content wrapped in `<FluentProvider />` from
-[@fluentui/react-components](@fluentui/react-components)
-
-Defined in: [client/components/BasePanel/BasePanel.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/BasePanel.tsx#L15)
+Defined in: [client/components/BasePanel/BasePanel.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/BasePanel/BasePanel.tsx#L12)
 
 ___
 
@@ -545,7 +582,17 @@ ___
 Text field based on `<Checkbox />` from `@fluentui/react-components`
 but also supports binding to a `model`
 
-Defined in: [client/components/FormControl/CheckboxControl/CheckboxControl.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/CheckboxControl/CheckboxControl.tsx#L15)
+Defined in: [client/components/FormControl/CheckboxControl/CheckboxControl.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/CheckboxControl/CheckboxControl.tsx#L13)
+
+___
+
+### CheckboxField
+
+• `Const` **CheckboxField**: *ReusableComponent*<ICheckboxFieldProps\>
+
+Field based on `<Checkbox />` from `@fluentui/react-components`.
+
+Defined in: [client/components/FormControl/CheckboxControl/CheckboxField/CheckboxField.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/CheckboxControl/CheckboxField/CheckboxField.tsx#L13)
 
 ___
 
@@ -634,7 +681,7 @@ Renders events in a list using `<List />` component
 
 Supports property `additionalColumns`
 
-Defined in: [client/components/EventList/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/index.tsx#L16)
+Defined in: [client/components/EventList/EventList.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/EventList/EventList.tsx#L16)
 
 ___
 
@@ -788,6 +835,24 @@ Defined in: [client/components/ProjectTooltip/index.tsx:17](https://github.com/P
 
 ___
 
+### ProjectTag
+
+• `Const` **ProjectTag**: *ReusableComponent*<[*IProjectTagProps*](../interfaces/components.iprojecttagprops.md)\>
+
+Defined in: [client/components/ProjectTag/ProjectTag.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/components/ProjectTag/ProjectTag.tsx#L17)
+
+___
+
+### RadioGroupControl
+
+• `Const` **RadioGroupControl**: [*FormInputControlComponent*](components.md#forminputcontrolcomponent)<[*IRadioGroupControlProps*](../interfaces/components.iradiogroupcontrolprops.md)\>
+
+Field based on `<RadioGroup />` from [@fluentui/react-components](@fluentui/react-components)
+
+Defined in: [client/components/FormControl/RadioGroupControl/RadioGroupControl.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/RadioGroupControl/RadioGroupControl.tsx#L15)
+
+___
+
 ### ScrollablePaneWrapper
 
 • `Const` **ScrollablePaneWrapper**: *ReusableComponent*<any\>
@@ -863,7 +928,7 @@ ___
 A component that uses `Alert` from [@fluentui/react-components](@fluentui/react-components),
 conditionally renders a `Menu` from [@fluentui/react-components](@fluentui/react-components).
 
-Defined in: [client/components/UserMessage/UserMessage.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/UserMessage.tsx#L27)
+Defined in: [client/components/UserMessage/UserMessage.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/UserMessage.tsx#L21)
 
 ___
 
@@ -883,7 +948,7 @@ Defined in: [client/components/UserColumn/index.tsx:15](https://github.com/Puzzl
 
 ### useListGroups
 
-▸ **useListGroups**(`context`: IListContext): *any*[][] \| readonly [IGroup[], *any*[]]
+▸ **useListGroups**(`context`: IListContext): [IGroup[], *any*[]]
 
 Returns list groups based on property `listGroupProps` on
 the `<List />` component
@@ -894,7 +959,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `context` | IListContext | Context    |
 
-**Returns:** *any*[][] \| readonly [IGroup[], *any*[]]
+**Returns:** [IGroup[], *any*[]]
 
 Defined in: [client/components/List/useListGroups.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/useListGroups.ts#L16)
 
@@ -994,9 +1059,9 @@ Use form controls
 
 #### Type parameters:
 
-Name | Default |
-:------ | :------ |
-`KeyType` | *any* |
+Name | Type | Default |
+:------ | :------ | :------ |
+`KeyType` | *string* | *any* |
 
 #### Parameters:
 

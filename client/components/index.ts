@@ -5,6 +5,7 @@
  * @module Components
  */
 export * from './BasePanel'
+export * from './Breadcrumb'
 export * from './ColorPickerField'
 export * from './ConditionalWrapper'
 export * from './CustomerLink'
@@ -24,6 +25,7 @@ export * from './InformationProperty'
 export * from './List'
 export * from './PermissionList'
 export * from './ProjectLink'
+export * from './ProjectTag'
 export * from './ProjectTooltip'
 export * from './ScrollablePaneWrapper'
 export * from './SearchCustomer'

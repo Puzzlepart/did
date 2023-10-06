@@ -1,0 +1,13 @@
+mutation CreateOutlookCategory ($category: String!) {
+  result: createOutlookCategory(category: $category) {
+    data {
+      id
+      displayName
+      color
+    }
+    success
+    error {
+      message
+    }
+  }
+}

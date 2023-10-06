@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / CacheService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / CacheService
 
 # Class: CacheService
 
@@ -29,7 +29,7 @@ Cache service
 
 ### constructor
 
-\+ **new CacheService**(`context`: *Context*, `prefix?`: *string*, `scope?`: [*CacheScope*](../enums/services.cachescope.md)): [*CacheService*](services.cacheservice.md)
+\+ **new CacheService**(`context`: [*Context*](graphql.context.md), `prefix?`: *string*, `scope?`: [*CacheScope*](../enums/services.cachescope.md)): [*CacheService*](services.cacheservice.md)
 
 Constructor
 
@@ -37,7 +37,7 @@ Constructor
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Scope (defaults to CacheScope.SUBSCRIPTION)    |
+`context` | [*Context*](graphql.context.md) | Scope (defaults to CacheScope.SUBSCRIPTION)    |
 `prefix?` | *string* | Prefix   |
 `scope` | [*CacheScope*](../enums/services.cachescope.md) | - |
 
@@ -79,7 +79,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L89)
+Defined in: [services/cache.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L90)
 
 ___
 
@@ -127,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:111](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L111)
+Defined in: [services/cache.ts:112](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L112)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [services/cache.ts:141](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L141)
+Defined in: [services/cache.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L142)
 
 ___
 
@@ -170,4 +170,4 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [services/cache.ts:158](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L158)
+Defined in: [services/cache.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L159)

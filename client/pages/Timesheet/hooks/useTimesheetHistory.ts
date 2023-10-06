@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import s from 'underscore.string'
 import { UPDATE_BREADCRUMB } from '../../../app/reducer'
-import { ITimesheetState } from '../types'
+import { ITimesheetState } from '../types/ITimesheetState'
 
 /**
  * Convert enum value for `DateRangeType` to string

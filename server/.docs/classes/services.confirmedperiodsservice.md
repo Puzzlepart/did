@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / ConfirmedPeriodsService
 
 # Class: ConfirmedPeriodsService
 
@@ -37,7 +37,7 @@ Confirmed periods service
 
 ### constructor
 
-\+ **new ConfirmedPeriodsService**(`context`: *Context*): [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
+\+ **new ConfirmedPeriodsService**(`context`: [*Context*](graphql.context.md)): [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
 
 Constructor for `ConfirmedPeriodsService`
 
@@ -45,7 +45,7 @@ Constructor for `ConfirmedPeriodsService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
 
@@ -93,7 +93,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

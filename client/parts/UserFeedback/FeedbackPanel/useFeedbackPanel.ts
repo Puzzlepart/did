@@ -1,10 +1,14 @@
 import { IPanelProps } from '@fluentui/react'
-import { useFormControls } from 'components/FormControl'
-import { useEffect } from 'react'
-import { useFeedbackModel } from './useFeedbackModel'
+import {
+  IFormControlProps,
+  useFormControlModel,
+  useFormControls
+} from 'components/FormControl'
+import { useTranslation } from 'react-i18next'
+import { UserFeedback } from 'types'
+import { useLabelOptions } from './useLabelOptions'
 import { useMoodOptions } from './useMoodOptions'
 import { useSubmitFeedback } from './useSubmitFeedback'
-import { useTypeOptions } from './useTypeOptions'
 
 /**
  * Hook that returns the necessary props for the FeedbackPanel component.
@@ -14,19 +18,28 @@ import { useTypeOptions } from './useTypeOptions'
  * @returns An object containing the necessary props for the FeedbackPanel component.
  */
 export function useFeedbackPanel(props: IPanelProps) {
-  const typeOptions = useTypeOptions()
+  const { t } = useTranslation()
+  const labelOptions = useLabelOptions()
   const moodOptions = useMoodOptions()
-  const model = useFeedbackModel()
-  const register = useFormControls(model)
-  const submit = useSubmitFeedback(props, model)
+  const model = useFormControlModel<keyof UserFeedback, UserFeedback>()
+  const register = useFormControls<keyof UserFeedback>(model)
+  const submitProps = useSubmitFeedback(props, model)
 
-  useEffect(model.reset, [props.isOpen])
+  const formControlProps: IFormControlProps = {
+    model,
+    submitProps,
+    panelProps: {
+      ...props,
+      headerText: t('feedback.headerText'),
+      scroll: true
+    }
+  }
 
   return {
-    model,
-    typeOptions,
+    labelOptions,
     moodOptions,
+    model,
     register,
-    submit
+    formControlProps
   }
 }

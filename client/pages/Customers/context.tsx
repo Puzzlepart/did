@@ -1,5 +1,6 @@
 import { QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
+import get from 'get-value'
 import { createContext, Dispatch, useContext } from 'react'
 import { Customer } from 'types'
 import { ICustomersState } from './types'
@@ -22,4 +23,14 @@ export interface ICustomersContext
 
 export const CustomersContext = createContext<ICustomersContext>(null)
 
-export const useCustomersContext = () => useContext(CustomersContext)
+/**
+ * Use this hook to access the Customers context. Optionally, you can pass a path
+ * to a specific property in the context. E.g. `useCustomersContext('state.loading')`.
+ *
+ * @param path Optional path to a specific property in the context.
+ */
+export const useCustomersContext = (path?: string) => {
+  const context = useContext(CustomersContext)
+  if (path) return get(context, path, { default: null })
+  return context
+}

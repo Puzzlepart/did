@@ -1,25 +1,38 @@
-import { isMobile } from 'react-device-detect'
-import { Overview } from '.'
-import styles from './Overview.module.scss'
+import { useAppContext } from 'AppContext'
+import { IEventListProps } from 'components'
+import { isBrowser } from 'react-device-detect'
+import { useTimesheetContext } from '../../context'
 import { useAdditionalColumns } from './useAdditionalColumns'
 import { useListGroupProps } from './useListGroupProps'
 
 /**
- * Custom hook that returns an object containing additionalColumns, listGroupProps, and className.
- * additionalColumns is an array of additional columns to be displayed in the overview.
- * listGroupProps is an object containing props for the list group component.
- * className is a string containing the class names for the root element.
+ * Custom hook that returns an object containing additionalColumns andlistGroupProps, and className.
+ * `listGroupProps` is an object containing props for the list group component. `additionalColumns` is
+ * an array of objects containing props for the additional columns.
  *
  * @returns An object containing additionalColumns, listGroupProps, and className.
  */
 export function useOverview() {
+  const { subscription } = useAppContext()
+  const { state } = useTimesheetContext()
   const additionalColumns = useAdditionalColumns()
   const listGroupProps = useListGroupProps()
-  const classNames = [Overview.className]
-  if (isMobile) classNames.push(styles.mobile)
-  return {
-    additionalColumns,
+  const eventListProps: IEventListProps = {
+    hideToolbar: true,
+    enableShimmer: !!state.loading,
+    hidden: !!state.error,
+    items: [],
+    dateFormat: subscription?.settings?.timesheet?.timeFormat,
     listGroupProps,
-    className: classNames.join(' ')
+    additionalColumns,
+    useTimeColumn: isBrowser,
+    titleColumn: {
+      mobile: {
+        displayTime: true
+      }
+    }
+  }
+  return {
+    eventListProps
   }
 }

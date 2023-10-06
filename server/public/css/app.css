@@ -9,17 +9,12 @@ body {
     padding: 0;
 }
 
-a {
-    text-decoration: none;
-    color: #007bff;
+a, a:visited {
+    color: var(--colorBrandForegroundLink);
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-a:visited {
-    color: #007bff;
+a, a:hover, a:visited, a:active {
+    text-decoration: none !important;
 }
 
 h1 {

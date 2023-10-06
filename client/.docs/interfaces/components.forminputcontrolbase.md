@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / FormInputControlBase
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / FormInputControlBase
 
 # Interface: FormInputControlBase<TOptions, KeyType\>
 
@@ -24,6 +24,8 @@ Name | Type | Default |
   ↳↳ [*IDropdownControlProps*](components.idropdowncontrolprops.md)
 
   ↳↳ [*IInputControlProps*](components.iinputcontrolprops.md)
+
+  ↳↳ [*IRadioGroupControlProps*](components.iradiogroupcontrolprops.md)
 
 ## Table of contents
 

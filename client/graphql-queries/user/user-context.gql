@@ -20,6 +20,10 @@ query UserContext {
       teams {
         enabled
       }
+      timesheet {
+        dayFormat
+        timeFormat
+      }
     }
   }
   user: currentUser {

@@ -20,19 +20,13 @@ export const UserNotification: StyledComponent<IUserNotificationProps> = ({
       <UserMessage
         {...model.alertProps}
         className={UserNotification.className}
-        actions={[
-          {
-            content: model.getMoreLinkText(t),
-            onClick: () => window.open(model.moreLink, '_self'),
-            iconName: 'CalendarPlay'
-          },
-          {
-            content: t('notifications.dismissText'),
-            onClick: () => dismissNotification(model.id),
-            iconName: 'DeleteDismiss',
-            iconColor: 'var(--colorPaletteRedForeground1)'
-          }
-        ]}
+        onClick={() => window.open(model.moreLink, '_self')}
+        action={{
+          text: t('notifications.dismissText'),
+          onClick: () => dismissNotification(model.id),
+          iconName: 'DeleteDismiss',
+          iconColor: 'var(--colorPaletteRedForeground1)'
+        }}
       >
         <span className={styles.text}>{model.text}</span>
       </UserMessage>

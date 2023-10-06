@@ -5,7 +5,6 @@ import { useExcelExport } from 'hooks'
 import React, { FC } from 'react'
 import { BrowserView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../MenuItem'
 import { useUserReports } from './useUserReports'
 
@@ -22,11 +21,7 @@ export const UserReports: FC = () => {
 
   return (
     <BrowserView renderWithFragment={true}>
-      <MenuItem
-        icon={icon('DocumentDatabase')}
-        text={t('common.userReports')}
-        onClick={togglePanel}
-      />
+      <MenuItem text={t('common.userReports')} onClick={togglePanel} />
       <BasePanel
         headerText={t('common.userReports')}
         isOpen={showPanel}

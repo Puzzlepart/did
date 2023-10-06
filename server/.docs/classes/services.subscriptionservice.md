@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / SubscriptionService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / SubscriptionService
 
 # Class: SubscriptionService
 
@@ -43,7 +43,7 @@ Subscription service
 
 ### constructor
 
-\+ **new SubscriptionService**(`context`: *Context*): [*SubscriptionService*](services.subscriptionservice.md)
+\+ **new SubscriptionService**(`context`: [*Context*](graphql.context.md)): [*SubscriptionService*](services.subscriptionservice.md)
 
 Constructor for `SubscriptionService`
 
@@ -51,13 +51,13 @@ Constructor for `SubscriptionService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
 Overrides: void
 
-Defined in: [services/mongo/subscription.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L18)
+Defined in: [services/mongo/subscription.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L19)
 
 ## Properties
 
@@ -99,7 +99,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 
@@ -125,7 +125,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [services/mongo/subscription.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L38)
+Defined in: [services/mongo/subscription.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L39)
 
 ___
 
@@ -143,7 +143,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/subscription.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L93)
+Defined in: [services/mongo/subscription.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L94)
 
 ___
 
@@ -189,11 +189,11 @@ Get subscription by external id or email
 Name | Type | Description |
 :------ | :------ | :------ |
 `idOrMail` | *string* | User ID or mail   |
-`provider` | *string* | Provider    |
+`provider` | *string* | Provider name    |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/subscription.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L73)
+Defined in: [services/mongo/subscription.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L74)
 
 ___
 
@@ -213,7 +213,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [services/mongo/subscription.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L52)
+Defined in: [services/mongo/subscription.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L53)
 
 ___
 
@@ -278,7 +278,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/subscription.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L127)
+Defined in: [services/mongo/subscription.ts:128](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L128)
 
 ___
 
@@ -319,4 +319,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/mongo/subscription.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L109)
+Defined in: [services/mongo/subscription.ts:110](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L110)

@@ -42,7 +42,7 @@ export function useUsersReducer() {
         state.userForm = payload
       })
       .addCase(SET_ADD_MULTIPLE_PANEL, (state, { payload }) => {
-        state.addMultiplePanel = payload
+        state.bulkImportPanel = payload
       })
       .addCase(SET_SELECTED_USERS, (state, { payload }) => {
         state.selectedUsers = payload
@@ -54,7 +54,7 @@ export function useUsersReducer() {
         state.progress = null
       })
       .addCase(HIDE_ADD_MULTIPLE_PANEL, (state) => {
-        state.addMultiplePanel = null
+        state.bulkImportPanel = null
       })
       .addCase(HIDE_USER_FORM, (state) => {
         state.userForm = null

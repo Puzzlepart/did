@@ -86,7 +86,7 @@ export class ReportsResolver {
    * @param preset - Report preset
    * @param context - GraphQL context
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [TimeEntry], {
     description: 'Get a user preset report.'
   })

@@ -39,8 +39,8 @@ import {
   CalendarToday24Regular,
   CalendarWeekNumbers24Filled,
   CalendarWeekNumbers24Regular,
-  CalendarWorkWeek24Filled,
-  CalendarWorkWeek24Regular,
+  CalendarWorkWeekFilled,
+  CalendarWorkWeekRegular,
   CheckmarkCircle24Filled,
   CheckmarkCircle24Regular,
   CheckmarkFilled,
@@ -73,8 +73,12 @@ import {
   Eye24Regular,
   FastForward24Filled,
   FastForward24Regular,
+  HeartFilled,
+  HeartRegular,
   Home24Filled,
   Home24Regular,
+  HourglassHalfFilled,
+  HourglassHalfRegular,
   Info24Filled,
   Info24Regular,
   Key24Filled,
@@ -117,6 +121,8 @@ import {
   TableEdit24Regular,
   TagMultiple24Filled,
   TagMultiple24Regular,
+  TagQuestionMarkFilled,
+  TagQuestionMarkRegular,
   TextBulletListSquareEdit24Filled,
   TextBulletListSquareEdit24Regular,
   Timeline24Filled,
@@ -138,6 +144,14 @@ import React, { CSSProperties } from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  Heart: {
+    regular: HeartRegular,
+    filled: HeartFilled
+  },
+  TagQuestionMark: {
+    regular: TagQuestionMarkRegular,
+    filled: TagQuestionMarkFilled
+  },
   Lightbulb: {
     regular: Lightbulb24Regular,
     filled: Lightbulb24Filled
@@ -331,8 +345,8 @@ const iconCatalog = {
     filled: CalendarToday24Filled
   },
   CalendarWorkWeek: {
-    regular: CalendarWorkWeek24Regular,
-    filled: CalendarWorkWeek24Filled
+    regular: CalendarWorkWeekRegular,
+    filled: CalendarWorkWeekFilled
   },
   CheckmarkCircle: {
     regular: CheckmarkCircle24Regular,
@@ -397,6 +411,10 @@ const iconCatalog = {
   ArrowSync: {
     regular: ArrowSync24Regular,
     filled: ArrowSync24Filled
+  },
+  HourGlassHalf: {
+    regular: HourglassHalfRegular,
+    filled: HourglassHalfFilled
   }
 }
 
@@ -404,24 +422,31 @@ const iconCatalog = {
  * Represents the name of a Fluent UI icon.
  */
 export type FluentIconName = keyof typeof iconCatalog
+type GetFluentIconOptions = {
+  bundle?: boolean
+  color?: string
+  size?: string | number
+  filled?: boolean
+}
 
 /**
  * Returns the Fluent icon with the specified name.
  *
  * @param name - The name of the icon to retrieve.
- * @param bundle - Whether to bundle the filled and regular versions of the icon. Defaults to true.
- * @param color - The color to apply to the icon.
- * @param size - The size of the icon.
+ * @param options - The options to use when retrieving the icon.
  *
- * @returns The specified Fluent icon.
+ * @returns The specified Fluent icon with the specified options, or null if the icon is not found
+ * in the catalog.
  */
 export function getFluentIcon(
   name: FluentIconName,
-  bundle = true,
-  color?: string,
-  size?: number
+  options?: GetFluentIconOptions
 ) {
   if (!iconCatalog[name]) return null
+  const bundle = options?.bundle ?? true
+  const color = options?.color
+  const size = options?.size
+  const filled = options?.filled ?? false
   const icon = iconCatalog[name]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
   const props: { style?: CSSProperties } = {}
@@ -433,7 +458,7 @@ export function getFluentIcon(
       height: size
     }
   }
-  return <Icon {...props} />
+  return <Icon {...props} filled={filled} />
 }
 
 /**
@@ -452,18 +477,18 @@ export function getFluentIcons() {
  * Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
  *
  * @param name - The name of the icon to retrieve.
- * @param bundleWithFilled - Whether to bundle the icon with the filled version. Defaults to true.
+ * @param bundle - Whether to bundle the icon with the filled version. Defaults to true.
  * @param color - The color of the icon.
  *
  * @returns A Fluent UI icon component or a default icon component if the requested icon is not found.
  */
 export function getFluentIconWithFallback(
   name: string,
-  bundleWithFilled = true,
+  bundle = true,
   color?: string
 ) {
   if (iconCatalog[name]) {
-    return getFluentIcon(name as FluentIconName, bundleWithFilled, color)
+    return getFluentIcon(name as FluentIconName, { bundle, color })
   }
   return <Icon iconName={name} style={{ color }} />
 }

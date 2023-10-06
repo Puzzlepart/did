@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / IProjectsContext
+[did-client - v0.13.0](../README.md) / [Pages](../modules/pages.md) / IProjectsContext
 
 # Interface: IProjectsContext
 

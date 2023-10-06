@@ -41,5 +41,8 @@ export interface IDynamicButtonProps
    */
   triggerFor?: 'Menu' | 'Popover'
 
+  /**
+   * Fade in the button.
+   */
   fadeIn?: boolean
 }

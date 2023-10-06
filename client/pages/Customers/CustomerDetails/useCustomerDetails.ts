@@ -53,5 +53,5 @@ export function useCustomerDetails() {
     error,
     tabs,
     selected
-  } as const
+  }
 }

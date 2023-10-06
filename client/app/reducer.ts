@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit'
 import { IToastProps } from 'components'
-import { useReduxReducer } from 'hooks/useReduxReducer'
+import { useReduxReducer as useReducer } from 'hooks/useReduxReducer'
 import _ from 'underscore'
 import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 import { IAppState } from './types'
@@ -16,15 +16,12 @@ export const SET_TOAST = createAction<IToastProps>('SET_TOAST')
 /**
  * Use app reducer
  *
- * @remarks Using `createReducer` from `@reduxjs/toolkit` and
- * `useReducer` from `react`
- *
  * @param initialState - Initial state
  *
  * @category App
  */
 export default function useAppReducer(initialState: IAppState) {
-  return useReduxReducer(initialState, (builder) =>
+  return useReducer(initialState, (builder) =>
     builder
       .addCase(
         UPDATE_BREADCRUMB,

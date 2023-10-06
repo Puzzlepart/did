@@ -1,9 +1,11 @@
-import { EntityLabel, IconText, ItemColumn } from 'components'
-import { CustomerLink } from 'components/CustomerLink'
+import { TagProps } from '@fluentui/react-tags-preview'
+import { EntityLabel, ItemColumn } from 'components'
+import { ICustomerLinkProps } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer, LabelObject } from 'types'
+import { getFluentIconWithFallback } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useCustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
@@ -28,36 +30,26 @@ export function useColumns(): IListColumn[] {
 
   const columns = useMemo(
     () => [
-      createColumnDef<Customer>(
-        'key',
-        t('common.keyFieldLabel'),
-        {
-          minWidth: 125,
-          maxWidth: 125
-        },
-        (customer) => {
-          return customer.inactive ? (
-            <IconText
-              title={t('customers.inactiveText')}
-              iconName='Warning'
-              styles={{ root: { color: '#ffbf00' } }}
-              text={customer.key}
-            />
-          ) : (
-            <IconText iconName={customer.icon} text={customer.key} />
-          )
-        }
-      ),
-      createColumnDef<Customer>(
+      createColumnDef<Customer, TagProps>('key', t('customers.keyFieldLabel'), {
+        minWidth: 125,
+        maxWidth: 125,
+        renderAs: 'tag',
+        createRenderProps: (customer) => ({
+          icon: getFluentIconWithFallback(customer.icon)
+        })
+      }),
+      createColumnDef<Customer, ICustomerLinkProps>(
         'name',
         t('common.nameFieldLabel'),
-        { maxWidth: 300 },
-        (customer) => (
-          <CustomerLink
-            customer={customer}
-            onClick={() => context.dispatch(SET_SELECTED_CUSTOMER(customer))}
-          />
-        )
+        {
+          maxWidth: 300,
+          renderAs: 'customerLink',
+          createRenderProps: (customer) => ({
+            onClick: () => context.dispatch(SET_SELECTED_CUSTOMER(customer)),
+            showIcon: false,
+            customer
+          })
+        }
       ),
       createColumnDef<Customer>(
         'description',

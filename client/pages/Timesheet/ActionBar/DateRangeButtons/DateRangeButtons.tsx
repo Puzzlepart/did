@@ -3,6 +3,7 @@ import {
   ToolbarRadioButton,
   ToolbarRadioButtonProps
 } from '@fluentui/react-components'
+import { TimesheetContext } from 'pages/Timesheet/context'
 import React, { FC } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
@@ -14,22 +15,25 @@ import { getFluentIcon as icon } from 'utils/getFluentIcon'
  */
 export const DateRangeButtons: FC<Pick<ToolbarRadioButtonProps, 'name'>> = ({
   name
-}) => {
-  return (
-    isBrowser && (
-      <>
-        <ToolbarRadioButton
-          name={name}
-          value={DateRangeType.Week.toString()}
-          icon={icon('CalendarMonth')}
-        />
-        <ToolbarRadioButton
-          name={name}
-          value={DateRangeType.Month.toString()}
-          icon={icon('CalendarWorkWeek')}
-          style={{ margin: '0 0 0 6px' }}
-        />
-      </>
-    )
+}) =>
+  isBrowser && (
+    <TimesheetContext.Consumer>
+      {({ state }) => (
+        <>
+          <ToolbarRadioButton
+            name={name}
+            value={DateRangeType.Week.toString()}
+            icon={icon('CalendarMonth')}
+            disabled={!!state.loading}
+          />
+          <ToolbarRadioButton
+            name={name}
+            value={DateRangeType.Month.toString()}
+            icon={icon('CalendarWorkWeek')}
+            style={{ margin: '0 0 0 6px' }}
+            disabled={!!state.loading}
+          />
+        </>
+      )}
+    </TimesheetContext.Consumer>
   )
-}

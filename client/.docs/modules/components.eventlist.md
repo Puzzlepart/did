@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](components.md) / EventList
+[did-client - v0.13.0](../README.md) / [Components](components.md) / EventList
 
 # Namespace: EventList
 
@@ -9,6 +9,7 @@
 ### Variables
 
 - [className](components.eventlist.md#classname)
+- [defaultProps](components.eventlist.md#defaultprops)
 - [displayName](components.eventlist.md#displayname)
 
 ## Variables
@@ -16,6 +17,12 @@
 ### className
 
 • **className**: *string*
+
+___
+
+### defaultProps
+
+• **defaultProps**: *Partial*<[*IEventListProps*](../interfaces/components.ieventlistprops.md)\>
 
 ___
 

@@ -1,4 +1,4 @@
-/* eslint-disable tsdoc/syntax */
+import { mergeClasses } from '@fluentui/react-components'
 import { useTheme } from '@fluentui/react/lib/Theme'
 import { useAppContext } from 'AppContext'
 import packageFile from 'package'
@@ -8,7 +8,6 @@ import React from 'react'
 import { BrowserView, isMobile } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { StyledComponent } from 'types'
-import { useAppClassName } from '../../app/useAppClassName'
 import { UserFeedback } from '../UserFeedback'
 import { UserMenu } from '../UserMenu'
 import { UserNotifications } from '../UserNotifications'
@@ -20,14 +19,16 @@ import { NavItem } from './NavItem'
  */
 export const Navigation: StyledComponent = () => {
   const { pages, isAuthenticated } = useAppContext()
-  const className = useAppClassName(Navigation, styles)
   const theme = useTheme()
   const userNotificationsContextValue = useUserNotifications()
   if (!isAuthenticated) return null
   return (
     <UserNotificationsContext.Provider value={userNotificationsContextValue}>
       <nav
-        className={className}
+        className={mergeClasses(
+          Navigation.className,
+          isMobile && styles.mobile
+        )}
         style={{ background: theme.semanticColors.menuHeader }}
         hidden={isMobile && !isAuthenticated}
       >

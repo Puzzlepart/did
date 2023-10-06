@@ -23,10 +23,10 @@ export interface ISubscriptionSettingNumber<T = SliderProps>
   type: 'number'
 }
 
-export interface ISubscriptionSettingCheckbox<T = any>
+export interface ISubscriptionSettingCheckboxMulti<T = any>
   extends ISubscriptionSettingBase<T> {
   id: string
-  type: 'checkbox'
+  type: 'checkboxmulti'
   options: Record<string, string>
 }
 
@@ -34,4 +34,4 @@ export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingText<T>
   | ISubscriptionSettingBool<T>
   | ISubscriptionSettingNumber<T>
-  | ISubscriptionSettingCheckbox<T>
+  | ISubscriptionSettingCheckboxMulti<T>

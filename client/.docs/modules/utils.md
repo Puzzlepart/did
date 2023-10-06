@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / Utils
+[did-client - v0.13.0](../README.md) / Utils
 
 # Module: Utils
 
@@ -24,6 +24,7 @@ Reusable utility functions
 - [createPath](utils.md#createpath)
 - [createRouterLink](utils.md#createrouterlink)
 - [deepCopy](utils.md#deepcopy)
+- [fuzzyContains](utils.md#fuzzycontains)
 - [fuzzyMap](utils.md#fuzzymap)
 - [fuzzyStringEqual](utils.md#fuzzystringequal)
 - [getContrastColor](utils.md#getcontrastcolor)
@@ -50,7 +51,7 @@ Reusable utility functions
 
 Represents the name of a Fluent UI icon.
 
-Defined in: [client/utils/getFluentIcon.tsx:406](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L406)
+Defined in: [client/utils/getFluentIcon.tsx:424](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L424)
 
 ## Functions
 
@@ -157,17 +158,23 @@ ___
 
 ### createColumnDef
 
-▸ **createColumnDef**<T\>(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T\>\>, `onRender?`: (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
+▸ **createColumnDef**<T, P\>(`fieldName`: *string*, `name?`: *string*, `props?`: *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T, P\>\>, `onRender?`: (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any*, `minWidth?`: *number*): [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
 Creates a column definition for the `List` component.
 This is a helper function to make it easier to create
 column definitions.
+
+First template parameter (`T`) is the type of the item in the list,
+and the second template parameter (`P`) is the type of the props
+passed to the component rendering the column if a custom
+render type is used.
 
 #### Type parameters:
 
 Name | Type | Default |
 :------ | :------ | :------ |
 `T` | *object* | *any* |
+`P` | *object* | *any* |
 
 #### Parameters:
 
@@ -175,13 +182,13 @@ Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `fieldName` | *string* | - | Field name for the column   |
 `name` | *string* | '' | -Name for the column   |
-`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T\>\> | - | Additional props   |
+`props` | *Partial*<[*IListColumn*](../interfaces/components.ilistcolumn.md)<T, P\>\> | - | Additional props   |
 `onRender?` | (`item?`: T, `index?`: *number*, `column?`: [*IListColumn*](../interfaces/components.ilistcolumn.md)) => *any* | - | Render function   |
 `minWidth` | *number* | 100 | Min width    |
 
 **Returns:** [*IListColumn*](../interfaces/components.ilistcolumn.md)
 
-Defined in: [client/utils/createColumnDef.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/utils/createColumnDef.ts#L15)
+Defined in: [client/utils/createColumnDef.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/utils/createColumnDef.ts#L20)
 
 ___
 
@@ -239,6 +246,25 @@ Name | Type | Description |
 **Returns:** *any*
 
 Defined in: [client/utils/deepCopy.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/deepCopy.ts#L6)
+
+___
+
+### fuzzyContains
+
+▸ **fuzzyContains**(`array`: *string*[], `value`: *string*): *boolean*
+
+Checks if an array contains a value, ignoring case.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`array` | *string*[] | The array to check.   |
+`value` | *string* | The value to check for.    |
+
+**Returns:** *boolean*
+
+Defined in: [client/utils/fuzzyContains.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/utils/fuzzyContains.ts#L7)
 
 ___
 
@@ -314,30 +340,29 @@ ___
 
 ### getFluentIcon
 
-▸ **getFluentIcon**(`name`: [*FluentIconName*](utils.md#fluenticonname), `bundle?`: *boolean*, `color?`: *string*, `size?`: *number*): *Element*
+▸ **getFluentIcon**(`name`: [*FluentIconName*](utils.md#fluenticonname), `options?`: GetFluentIconOptions): *Element*
 
 Returns the Fluent icon with the specified name.
 
 #### Parameters:
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`name` | [*FluentIconName*](utils.md#fluenticonname) | - | The name of the icon to retrieve.   |
-`bundle` | *boolean* | true | Whether to bundle the filled and regular versions of the icon. Defaults to true.   |
-`color?` | *string* | - | The color to apply to the icon.   |
-`size?` | *number* | - | The size of the icon.    |
+Name | Type | Description |
+:------ | :------ | :------ |
+`name` | [*FluentIconName*](utils.md#fluenticonname) | The name of the icon to retrieve.   |
+`options?` | GetFluentIconOptions | The options to use when retrieving the icon.    |
 
 **Returns:** *Element*
 
-The specified Fluent icon.
+The specified Fluent icon with the specified options, or null if the icon is not found
+in the catalog.
 
-Defined in: [client/utils/getFluentIcon.tsx:418](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L418)
+Defined in: [client/utils/getFluentIcon.tsx:441](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L441)
 
 ___
 
 ### getFluentIconWithFallback
 
-▸ **getFluentIconWithFallback**(`name`: *string*, `bundleWithFilled?`: *boolean*, `color?`: *string*): *Element*
+▸ **getFluentIconWithFallback**(`name`: *string*, `bundle?`: *boolean*, `color?`: *string*): *Element*
 
 Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
 
@@ -346,14 +371,14 @@ Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/re
 Name | Type | Default value | Description |
 :------ | :------ | :------ | :------ |
 `name` | *string* | - | The name of the icon to retrieve.   |
-`bundleWithFilled` | *boolean* | true | Whether to bundle the icon with the filled version. Defaults to true.   |
+`bundle` | *boolean* | true | Whether to bundle the icon with the filled version. Defaults to true.   |
 `color?` | *string* | - | The color of the icon.    |
 
 **Returns:** *Element*
 
 A Fluent UI icon component or a default icon component if the requested icon is not found.
 
-Defined in: [client/utils/getFluentIcon.tsx:460](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L460)
+Defined in: [client/utils/getFluentIcon.tsx:485](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L485)
 
 ___
 
@@ -367,26 +392,32 @@ Returns an array of strings representing the names of all available Fluent icons
 
 An array of strings representing the names of all available Fluent icons.
 
-Defined in: [client/utils/getFluentIcon.tsx:444](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L444)
+Defined in: [client/utils/getFluentIcon.tsx:469](https://github.com/Puzzlepart/did/blob/dev/client/utils/getFluentIcon.tsx#L469)
 
 ___
 
 ### getSum
 
-▸ **getSum**(`items`: Item[], `property`: *string*): *number*
+▸ **getSum**<T\>(`items`: T[], `property`: keyof T): *number*
 
 Get sum for a property in the array using `_.reduce`.
+
+#### Type parameters:
+
+Name | Type | Default |
+:------ | :------ | :------ |
+`T` | *object* | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | Item[] | Items   |
-`property` | *string* | Property key    |
+`items` | T[] | Items   |
+`property` | keyof T | Property key    |
 
 **Returns:** *number*
 
-Defined in: [client/utils/getSum.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L12)
+Defined in: [client/utils/getSum.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/utils/getSum.ts#L10)
 
 ___
 

@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Hooks](../modules/hooks.md) / TypedMap
+[did-client - v0.13.0](../README.md) / [Hooks](../modules/hooks.md) / TypedMap
 
 # Interface: TypedMap<KeyType, ObjectType, ValueType\>
 

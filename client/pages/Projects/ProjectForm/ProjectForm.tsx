@@ -8,7 +8,6 @@ import {
   LabelPickerControl
 } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
-import packageFile from 'package'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
@@ -25,15 +24,16 @@ import { useValidateKeyFunction } from './validation'
  */
 export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, register, options, formControlProps } = useProjectForm(props)
+  const { model, register, options, formControlProps, isCustomerContext } =
+    useProjectForm(props)
   const ValidateKeyFunction = useValidateKeyFunction()
   return (
-    <FormControl {...formControlProps} debug={true}>
+    <FormControl {...formControlProps}>
       <SearchCustomer
         {...register('customerKey', {
           validators: t('projects.customerRequired')
         })}
-        hidden={!!props.edit || !!props.customerKey}
+        hidden={!!props.edit || isCustomerContext}
         label={t('common.customer')}
         description={t('projects.customerFieldDescription')}
         required={true}
@@ -49,7 +49,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         })}
         disabled={!!props.edit}
         label={t('projects.keyFieldLabel')}
-        description={t('projects.keyFieldDescription', packageFile.config.app)}
+        description={t('projects.keyFieldDescription', { min: 2, max: 12 })}
         required={!props.edit}
       />
       <TagPreview hidden={!!props.edit} />

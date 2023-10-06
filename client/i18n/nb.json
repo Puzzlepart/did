@@ -1,7 +1,6 @@
 {
   "timesheet": {
-    "loadingTimesheetLabel": "Laster kalenderoppføringer",
-    "loadingTimesheetDescription": "Vent et lite øyeblikk...",
+    "loadingTimesheetText": "Vi laster timelisten din. Vennligst hold ut ett øyeblikk...",
     "confirmingPeriodLabel": "Bekrefter timene dine",
     "confirmingPeriodDescription": "Vent et lite øyeblikk...",
     "unconfirmingPeriodLabel": "Vi nullstiller timene dine for perioden",
@@ -19,14 +18,14 @@
     "allHoursMatchedText": "Alle timene dine er matchet! Er du klar til å bekrefte perioden din?",
     "periodConfirmedText": "Perioden er bekreftet med {{hours}}. Klikk **Angre bekreft timer** dersom du vil gjøre noen justeringer.",
     "ignoredEventsText": "Du har {{ignored_count}} manuelt ignorert(e) kalenderoppføringe(r).",
-    "undoIgnoreText": "Angre ignorerte hendelser",
+    "undoIgnoreTooltip": "Angre alle ignorerte hendelser.",
     "unresolvedErrorText": "Du har {{count}} uløste feil. Du må løse disse før du kan bekrefte timene dine.",
     "splitWeekInfoText": "Den valgte uken strekker seg over to måneder. \nNaviger mellom første og andre periode med knappene over",
     "projectInactiveErrorText": "Prosjektet er ikke lenger aktivt. Rediger kalenderoppføringen i Outlook.",
     "customerInactiveErrorText": "Kunden er ikke lenger aktiv. Rediger kalenderoppføringen i Outlook.",
-    "noProjectMatchFoundText": "Ingen treff funnet for noe prosjekt. Har du satt en kategori på kalenderoppføringen i Outlook?",
+    "noProjectMatchFoundText": "Ingen treff funnet for noe prosjekt. Har du satt en kategori på kalenderoppføringen i Outlook? Klikk for å løse kalenderoppføringen manuelt.",
     "resolveProjectButtonLabel": "Løs manuelt",
-    "ignoreEventButtonLabel": "Ignorer",
+    "ignoreEventActionTooltip": "Klikk for å ignorere hendelsen {{title}}.",
     "clearProjectMatchTooltipText": "Fjern match",
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>kalenderoppføringen i Outlook</a> blir tilkoblet et prosjekt automatisk. I noen tilfeller kan det dog være nødvendig å løse kalenderoppføringen manuelt.",
     "didYouMeanText": "Mente du <Link>{{tag}}</Link>?",
@@ -62,7 +61,7 @@
     "dateRangeMonth": "Måned",
     "monthForecastedText": "Måneden er prognosert med {{hours}}.",
     "monthConfirmedText": "Totalt **{{hours}}** bekreftet denne måneden. Du har bekreftet {{confirmedPeriodsCount}} av {{periodsCount}} perioder. Du må være i **Oversikt**-visningen for å gjøre justeringer.",
-    "ignoreAllText": "Ignorer alle",
+    "ignoreAllTooltip": "Ignorer alle hendelser som ikke er tilkoblet ett prosjekt.",
     "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten.",
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet"
   },
@@ -78,7 +77,7 @@
     "myProjectsText": "Mine prosjekter",
     "myProjectsSearchPlaceholder": "Søk i mine prosjekter...",
     "exportTimeEntriesLabel": "Eksporter til Excel",
-    "keyFieldDescription": "En unik identifikator for prosjektet. \nBrukes sammen med kundenøkkelen for å danne nøkkelen som brukes til å tagge kalenderoppføringer i Outlook. \nHold det kort, mellom {{PROJECT_KEY_MIN_LENGTH}} og {{PROJECT_KEY_MAX_LENGTH}} tegn.",
+    "keyFieldDescription": "En unik identifikator for prosjektet. \nBrukes sammen med kundenøkkelen for å danne nøkkelen som brukes til å tagge kalenderoppføringer i Outlook. \nHold det kort, mellom {{min}} og {{max}} tegn.",
     "createSuccess": "Prosjektet **{{name}}** ble opprettet. Bruk **{{projectId}}** til å tagge dine kalenderoppføringer i Outlook.",
     "editLabel": "Rediger prosjekt",
     "inactiveFieldDescription": "Marker prosjektet som inaktivt. Det kan ikke lenger bekreftes timer for prosjektet.",
@@ -134,7 +133,8 @@
     "iconEasterEgg": "En paraply? Virkelig? Greit, du burde få lov siden du er så flink til å gjøre jobben din.",
     "descriptionWarning": "Vi anbefaler å inkludere en rask oppsummering av kunden. \nDette vil gi en kortfattet oversikt og hjelpe andre raskt å forstå kundens essens.",
     "keyNotUniqueError": "Kundenøkkelen {{key}} er allerede i bruk av kunden {{name}}.",
-    "nameNotUniqueError": "Det ser ut til at det allerede finnes en API-nøkkel med det navnet. \nKom gjerne opp med noe annet."
+    "nameNotUniqueError": "Det ser ut til at det allerede finnes en API-nøkkel med det navnet. \nKom gjerne opp med noe annet.",
+    "noLabelsSelectedText": "Legg til merkelapper på kunden for kategorisering."
   },
   "admin": {
     "apiTokens": {
@@ -284,7 +284,12 @@
     "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine.",
     "deleteRole": "Slett rolle",
     "permissionsRequired": "Du må gi minst én tillatelse for rollen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er liksom litt som å ha en jobb uten oppgaver.",
-    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori."
+    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
+    "timesheet": "Timeliste",
+    "timesheetDayFormatDescription": "Velg datoformat for dagene i timelisten. Dette er formatet som brukes i grupperingen av timer i timelisten. Eksempel: dddd DD. Se forhåndsvisning til høyre.",
+    "timesheetDayFormatLabel": "Datoformat for dager i timelisten",
+    "timesheetTimeFormatDescription": "Velg format for tid. Brukes i timelisten. Eksempel: HH:mm. Se forhåndsvisning til høyre.",
+    "timesheetTimeFormatLabel": "Format for tid"
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -512,7 +517,13 @@
     "labelFieldLabel": "Merkelapper",
     "filterLabels": "Filtrer merkelapper...",
     "labelsText": "Merkelapper",
-    "userSettingsSaved": "Innstillingene dine er lagret. Har du endret språk, må du laste siden på nytt for at det skal tre i kraft."
+    "userSettingsSaved": "Innstillingene dine er lagret. Har du endret språk, må du laste siden på nytt for at det skal tre i kraft.",
+    "outlookCategoryAdded": "Prosjektnøkkelen **{{tag}}** ble lagt til i Outlook som en kategori.",
+    "outlookCategoryRemove": "Gå til Outlook for å fjerne kategorien om du ikke trenger den lenger.",
+    "outlookCategoryAdd": "Klikk for å legge til prosjektnøkkelen som en kategori i Outlook.",
+    "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen.",
+    "outlookCategoryError": "Det oppsto en feil ved opprettelse av kategorien i Outlook. Hvis du nettopp opprettet den, kan det ta noen øyeblikk før det vises her.",
+    "tagFieldLabel": "Prosjektnøkkel"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -596,11 +607,12 @@
     "typeFieldLabel": "Hvilken tilbakemelding vil du gi?",
     "summaryFieldLabel": "Kort sammendrag",
     "submitSuccessMessageText": "Takk for at du tok deg god tid! Tilbakemeldingen din ble registrert med referanse **#{{ref}}**.",
-    "submitSuccessMessagHeader": "Takk skal du ha!",
-    "submitErrorMessageHeader": "Beklager!",
-    "submitErrorMessageText": "Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
+    "submitErrorMessageText": "Beklager! Vi kunne ikke registrere tilbakemeldingen din. \nNoe rart skjedde på serveren som vi ikke helt forstår.",
     "mobileFeedbackText": "Gi tilbakemelding",
-    "reportAnonymouslyFieldLabel": "Rapporter anonymt"
+    "reportAnonymouslyFieldLabel": "Rapporter anonymt",
+    "hasGitHubUserFieldLabel": "Jeg har en GitHub-bruker",
+    "gitHubUsernameFieldLabel": "Brukernavn på GitHub",
+    "hasGitHubUserFieldDescription": "Hvis du har en GitHub-bruker kan vi holde ypu oppdatert om fremdriften på tilbakemeldingen din - hvis det innebærer noe arbeid for oss."
   },
   "formControl": {
     "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",

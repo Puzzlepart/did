@@ -1,26 +1,16 @@
-import { Icon, useTheme } from '@fluentui/react'
-import {
-  Avatar,
-  Persona,
-  Popover,
-  PopoverSurface,
-  PopoverTrigger
-} from '@fluentui/react-components'
+import { useTheme } from '@fluentui/react'
+import { Popover, PopoverSurface } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
-import { Toast, useToast } from 'components/Toast'
-import { useToggle } from 'hooks'
-import React, { useEffect } from 'react'
-import { isBrowser, isMobile, MobileView } from 'react-device-detect'
+import React from 'react'
+import { MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { UserFeedback } from '../UserFeedback'
 import { UserNotifications } from '../UserNotifications'
-import { NotificationIndicator } from '../UserNotifications/NotificationIndicator'
-import { Divider } from './Divider'
 import { MenuItem } from './MenuItem'
 import { UserAvatar } from './UserAvatar'
 import styles from './UserMenu.module.scss'
+import { UserMenuTrigger } from './UserMenuTrigger'
 import { UserReports } from './UserReports'
 import { UserSettings } from './UserSettings'
 import { UserVacation } from './UserVacation'
@@ -30,93 +20,27 @@ import { UserVacation } from './UserVacation'
  */
 export const UserMenu: StyledComponent = () => {
   const { t } = useTranslation()
-  const { user, subscription } = useAppContext()
+  const { subscription } = useAppContext()
   const { palette } = useTheme()
-  const [menuHidden, toggleMenu] = useToggle(true)
-  const [toast, setToast] = useToast(8000)
-
-  useEffect(() => {
-    setToast({
-      text: sessionStorage.did_on_load_user_menu_mesage,
-      intent: 'success'
-    })
-    sessionStorage.removeItem('did_on_load_user_menu_mesage')
-  }, [])
-
   return (
-    <Popover withArrow={true}>
-      <PopoverTrigger>
-        <span className={UserMenu.className} onClick={() => toggleMenu()}>
-          {isBrowser ? (
-            <Persona
-              className={styles.user}
-              name={user.displayName}
-              secondaryText={user.mail}
-              avatar={{
-                image: {
-                  src: user.photo?.base64
-                }
-              }}
-              size='small'
-            />
-          ) : (
-            <Avatar
-              className={styles.user}
-              name={user.displayName}
-              image={{
-                src: user.photo?.base64
-              }}
-              size={40}
-            />
-          )}
-          <span hidden={isMobile}>
-            <Icon
-              iconName={menuHidden ? 'ChevronDown' : 'ChevronUp'}
-              styles={{ root: { color: 'white', marginLeft: 6 } }}
-            />
-          </span>
-          <MobileView renderWithFragment={true}>
-            <NotificationIndicator />
-          </MobileView>
-          <Toast {...toast} />
-        </span>
-      </PopoverTrigger>
-      <PopoverSurface className={styles.menu}>
+    <Popover withArrow={true} closeOnScroll={true}>
+      <UserMenuTrigger />
+      <PopoverSurface className={UserMenu.className}>
         <MenuItem
           text={subscription.name}
-          style={{
-            padding: '0 2px 2px 12px',
-            color: palette.neutralSecondary,
-            fontSize: 8,
-            fontWeight: 600
-          }}
+          className={styles.subscription}
+          style={{ color: palette.neutralSecondary }}
         />
         <UserAvatar />
         <UserVacation />
         <UserReports />
-        <Divider />
         <UserSettings />
         <MobileView renderWithFragment={true}>
-          <Divider />
           <UserNotifications renderAsMenuItem={true} />
-          <Divider />
           <UserFeedback renderAsMenuItem={true} />
         </MobileView>
-        <Divider />
-        <MenuItem
-          href='/auth/signout'
-          icon={icon('SignOut')}
-          text={t('common.signOutText')}
-        />
-        <MenuItem
-          style={{
-            textAlign: 'right',
-            fontSize: 10,
-            padding: 8,
-            color: 'rgb(96, 94, 92)'
-          }}
-          text={`v${process.env.VERSION}`}
-        />
+        <MenuItem href='/auth/signout' text={t('common.signOutText')} />
+        <span className={styles.version}>{`v${process.env.VERSION}`}</span>
       </PopoverSurface>
     </Popover>
   )

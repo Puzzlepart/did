@@ -15,11 +15,11 @@ export class Error {
   @Field()
   message: string
 
-  @Field()
-  code: string
+  @Field({ nullable: true })
+  code?: string
 
-  @Field()
-  statusCode: string
+  @Field({ nullable: true })
+  statusCode?: string
 }
 
 /**
@@ -47,15 +47,15 @@ export class EventError {
   code: string
 }
 
-export * from './apiToken'
-export * from './customer'
-export * from './label'
-export * from './notification'
-export * from './outlookCategory'
-export * from './project'
-export * from './reportLink'
-export * from './reports'
-export * from './role'
-export * from './subscription'
-export * from './timesheet'
-export * from './user'
+export * from './apiToken/types'
+export * from './customer/types'
+export * from './label/types'
+export * from './notification/types'
+export * from './outlookCategory/types'
+export * from './project/types'
+export * from './reportLink/types'
+export * from './reports/types'
+export * from './role/types'
+export * from './subscription/types'
+export * from './timesheet/types'
+export * from './user/types'

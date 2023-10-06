@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / Pages
+[did-client - v0.13.0](../README.md) / Pages
 
 # Module: Pages
 
@@ -60,7 +60,6 @@ All are built using React Function components and Hooks.
 
 ### Timesheet Interfaces
 
-- [ITimesheetContext](../interfaces/pages.itimesheetcontext.md)
 - [ITimesheetParameters](../interfaces/pages.itimesheetparameters.md)
 - [ITimesheetState](../interfaces/pages.itimesheetstate.md)
 
@@ -107,10 +106,6 @@ All are built using React Function components and Hooks.
 - [ReportsContext](pages.md#reportscontext)
 - [SaveFilterForm](pages.md#savefilterform)
 
-### Timesheet Variables
-
-- [TimesheetContext](pages.md#timesheetcontext)
-
 ### Other Functions
 
 - [useMenuItems](pages.md#usemenuitems)
@@ -131,10 +126,6 @@ All are built using React Function components and Hooks.
 
 - [useReportsQuery](pages.md#usereportsquery)
 - [useReportsReducer](pages.md#usereportsreducer)
-
-### Timesheet Functions
-
-- [useTimesheetContext](pages.md#usetimesheetcontext)
 
 ### Timesheet Hooks Functions
 
@@ -334,7 +325,7 @@ ___
 
 ProjectForm component is used to create and edit projects.
 
-Defined in: [client/pages/Projects/ProjectForm/ProjectForm.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/ProjectForm.tsx#L26)
+Defined in: [client/pages/Projects/ProjectForm/ProjectForm.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/ProjectForm.tsx#L25)
 
 ___
 
@@ -363,7 +354,7 @@ ___
 Project list component used by `<Projects />`. Renders
 projects in a list using our `<List />` component.
 
-Defined in: [client/pages/Projects/ProjectList/ProjectList.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/ProjectList.tsx#L21)
+Defined in: [client/pages/Projects/ProjectList/ProjectList.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/ProjectList.tsx#L16)
 
 ___
 
@@ -390,16 +381,6 @@ ___
 • `Const` **SaveFilterForm**: *StyledComponent*<ISaveFilterFormProps\>
 
 Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SaveFilterForm/index.tsx#L14)
-
-___
-
-## Timesheet Variables
-
-### TimesheetContext
-
-• `Const` **TimesheetContext**: *Context*<[*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)\>
-
-Defined in: [client/pages/Timesheet/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L30)
 
 ## Other Functions
 
@@ -636,23 +617,6 @@ Defined in: [client/pages/Reports/reducer/useReportsReducer.ts:17](https://githu
 
 ___
 
-## Timesheet Functions
-
-### useTimesheetContext
-
-▸ `Const`**useTimesheetContext**(): [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)
-
-Returns the current context value for Timesheet using
-`useContext` from `react`
-
-**Returns:** [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)
-
-`TimesheetContext`
-
-Defined in: [client/pages/Timesheet/context.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/context.ts#L40)
-
-___
-
 ## Timesheet Hooks Functions
 
 ### useSubmitActions
@@ -694,7 +658,7 @@ and dispatching actions
 
 Name | Type |
 :------ | :------ |
-`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) |
+`context` | *ITimesheetContext* |
 `dispatch` | *Dispatch*<AnyAction\> |
 `onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
 `onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
@@ -708,17 +672,18 @@ ___
 
 ### useTimesheetQuery
 
-▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>): *function*
+▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>, `fetchPolicy?`: WatchQueryFetchPolicy): *function*
 
 Use Timesheet query
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | State   |
-`dispatch` | *Dispatch*<AnyAction\> | Dispatch    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | - | State   |
+`dispatch` | *Dispatch*<AnyAction\> | - | Dispatch   |
+`fetchPolicy` | WatchQueryFetchPolicy | 'cache-and-network' | Fetch policy (default: 'cache-and-network')    |
 
 **Returns:** () => *Promise*<ApolloQueryResult<any\>\>
 
-Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L18)
+Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L23)

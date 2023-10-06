@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / GraphQL
+[did-server - v0.13.0](../README.md) / GraphQL
 
 # Module: GraphQL
 
@@ -22,7 +22,6 @@
 - [ReportsQuery](../classes/graphql.reportsquery.md)
 - [RoleInput](../classes/graphql.roleinput.md)
 - [SubscriptionADSyncSettingsInput](../classes/graphql.subscriptionadsyncsettingsinput.md)
-- [SubscriptionForecastSettingsInput](../classes/graphql.subscriptionforecastsettingsinput.md)
 - [SubscriptionSettingsInput](../classes/graphql.subscriptionsettingsinput.md)
 - [SubscriptionTeamsSettingsInput](../classes/graphql.subscriptionteamssettingsinput.md)
 - [SubscriptionVacationSettingsInput](../classes/graphql.subscriptionvacationsettingsinput.md)
@@ -79,13 +78,20 @@
 ### Other Classes
 
 - [ApiToken](../classes/graphql.apitoken.md)
+- [Context](../classes/graphql.context.md)
+- [SubscriptionForecastSettingsInput](../classes/graphql.subscriptionforecastsettingsinput.md)
 
 ### GraphQL Type Type aliases
 
 - [ReportsQueryPreset](graphql.md#reportsquerypreset)
 
+### Variables
+
+- [debug](graphql.md#debug)
+
 ### Functions
 
+- [createContext](graphql.md#createcontext)
 - [generateClientInfo](graphql.md#generateclientinfo)
 - [generateGraphQLSchema](graphql.md#generategraphqlschema)
 - [setupGraphQL](graphql.md#setupgraphql)
@@ -100,11 +106,47 @@ Reports query preset
 
 Defined in: [graphql/resolvers/reports/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L71)
 
+## Variables
+
+### debug
+
+• `Const` **debug**: Debugger
+
+Defined in: [graphql/setupGraphQL.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/setupGraphQL.ts#L19)
+
 ## Functions
+
+### createContext
+
+▸ `Const`**createContext**(`request`: *Request*, `mcl`: *any*): *Promise*<[*Context*](../classes/graphql.context.md)\>
+
+Create GraphQL context
+
+* Sets the default `mongodb` instance on the context
+* Sets the user subscription on the context
+* Checks token auth using `handleTokenAuthentication`
+* Generates a random request ID using `Math random`
+* Sets `CONTEXT` and `REQUEST` on the container to enable
+  dependency injection in the resolvers.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`request` | *Request* | Express request   |
+`mcl` | *any* | Mongo client    |
+
+**Returns:** *Promise*<[*Context*](../classes/graphql.context.md)\>
+
+GraphQL context object
+
+Defined in: [graphql/context.ts:100](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L100)
+
+___
 
 ### generateClientInfo
 
-▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<Context\>): *object*
+▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<[*Context*](../classes/graphql.context.md)\>): *object*
 
 Specify this function to provide Apollo Studio with client details
 for each processed request. Apollo Studio uses this information to
@@ -125,7 +167,7 @@ for Postman, Azure Logic Apps and Microsoft Flow.
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | *GraphQLRequestContext*<Context\> |
+`__namedParameters` | *GraphQLRequestContext*<[*Context*](../classes/graphql.context.md)\> |
 
 **Returns:** *object*
 
@@ -134,7 +176,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [graphql/index.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L75)
+Defined in: [graphql/generateClientInfo.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/generateClientInfo.ts#L26)
 
 ___
 
@@ -155,7 +197,7 @@ Generate [GraphQL](https://graphql.org/) schema using
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [graphql/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L43)
+Defined in: [graphql/generateGraphQLSchema.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/generateGraphQLSchema.ts#L20)
 
 ___
 
@@ -184,4 +226,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [graphql/index.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L115)
+Defined in: [graphql/setupGraphQL.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/setupGraphQL.ts#L38)

@@ -30,7 +30,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           {...register('_' as any, {
             validators: t('common.adUserRequired')
           })}
-          required={true}
+          required={!model.value('id')}
           label={t('common.adUserLabel')}
           placeholder={t('common.searchPlaceholder')}
           items={context.state.availableAdUsers.map((u) => ({

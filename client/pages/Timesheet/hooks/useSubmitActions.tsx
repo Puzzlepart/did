@@ -5,7 +5,7 @@ import { useAppContext } from 'AppContext'
 import { Dispatch, useCallback } from 'react'
 import { AnyAction } from 'redux'
 import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
-import { ITimesheetState } from '../types'
+import { ITimesheetState } from '../types/ITimesheetState'
 import $submitPeriod from './submitPeriod.gql'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 

@@ -2,11 +2,28 @@
   width: 100%;
   -webkit-touch-callout: none;
 
+  &.mobile {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  
+    .container {
+      padding: 0 15px;
+      margin-top: 0;
+  
+      > div {
+        margin-top: 0;
+      }
+    }
+  }
+
   .container {
     max-width: 1440px;
     box-sizing: border-box;
     margin: auto;
     margin-top: 20px;
+    > div {
+      margin-top: 65px;
+    }
   }
 
   @media (max-width: 600px) {
@@ -42,27 +59,4 @@
       max-width: 1330px;
     }
   }
-}
-
-.app.mobile {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-
-    .container {
-        padding: 0 15px;
-        margin-top: 0;
-
-        >div {
-            margin-top: 0;
-        }
-
-    }
-}
-
-.app.sticky {
-    .container {
-        >div {
-            margin-top: 65px;
-        }
-    }
 }

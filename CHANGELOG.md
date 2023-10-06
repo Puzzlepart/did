@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.12.1 - N/A](#-0121---na)
+	* [➤ 0.13.0 - N/A](#-0130---na)
 		* [Fixed](#fixed)
 	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
 		* [Added](#added)
@@ -70,9 +70,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0121---na)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0130---na)
 
-## ➤ 0.12.1 - N/A
+## ➤ 0.13.0 - N/A
 
 ### Fixed
 - Fix for [#1112](https://github.com/Puzzlepart/did/issues/1112)

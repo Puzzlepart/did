@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionTeamsSettingsInput
+[did-server - v0.13.0](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionTeamsSettingsInput
 
 # Class: SubscriptionTeamsSettingsInput
 
@@ -28,4 +28,4 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [graphql/resolvers/subscription/types.ts:175](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L175)
+Defined in: [graphql/resolvers/subscription/types/SubscriptionTeamsSettings.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types/SubscriptionTeamsSettings.ts#L24)

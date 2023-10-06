@@ -42,8 +42,10 @@ export const NavigatePeriodsButtons: StyledComponent<
             )}
             key={index}
             name={name}
+            defaultChecked={period.id === state.selectedPeriod?.id}
             value={period.id}
             size={isMobile ? 'small' : 'medium'}
+            disabled={!!state.loading}
           >
             {isMobile
               ? s.capitalize(period.month.slice(0, 3))

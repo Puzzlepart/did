@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / LabelService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / LabelService
 
 # Class: LabelService
 
@@ -42,7 +42,7 @@ Label service
 
 ### constructor
 
-\+ **new LabelService**(`context`: *Context*): [*LabelService*](services.labelservice.md)
+\+ **new LabelService**(`context`: [*Context*](graphql.context.md)): [*LabelService*](services.labelservice.md)
 
 Constructor for `LabelService`
 
@@ -50,7 +50,7 @@ Constructor for `LabelService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*LabelService*](services.labelservice.md)
 
@@ -98,7 +98,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

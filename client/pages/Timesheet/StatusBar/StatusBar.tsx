@@ -12,10 +12,9 @@ import { useStatusBar } from './useStatusBar'
  */
 export const StatusBar: StyledComponent = () => {
   const { className, messages } = useStatusBar()
-
   return (
     <FadeIn>
-      <div className={className} hidden={_.isEmpty(messages)}>
+      <div className={className}>
         <div className={styles.container} hidden={_.isEmpty(messages)}>
           <UserMessageContainer height='auto' vertical={isMobile}>
             {messages.map((message, key) => (

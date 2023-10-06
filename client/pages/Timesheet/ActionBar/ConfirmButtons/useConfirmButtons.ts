@@ -25,7 +25,7 @@ export function useConfirmButtons(props: IConfirmButtonsProps) {
     : confirmIcons
   const buttonProps: ToolbarButtonProps = useMemo(
     () => ({
-      icon: icon(iconName, true, iconColor),
+      icon: icon(iconName, { bundle: true, color: iconColor }),
       disabled: !!loading,
       onClick: () => {
         if (selectedPeriod?.isConfirmed) {

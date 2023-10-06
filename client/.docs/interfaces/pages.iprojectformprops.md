@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / IProjectFormProps
+[did-client - v0.13.0](../README.md) / [Pages](../modules/pages.md) / IProjectFormProps
 
 # Interface: IProjectFormProps
 
@@ -16,7 +16,6 @@
 
 ### Properties
 
-- [customerKey](pages.iprojectformprops.md#customerkey)
 - [debug](pages.iprojectformprops.md#debug)
 - [description](pages.iprojectformprops.md#description)
 - [edit](pages.iprojectformprops.md#edit)
@@ -30,18 +29,6 @@
 - [validateOnBlur](pages.iprojectformprops.md#validateonblur)
 
 ## Properties
-
-### customerKey
-
-• `Optional` **customerKey**: *string*
-
-Specify the customer key to use for the project creation. The
-customer field will be disabled and the customer key will be
-used to create the project.
-
-Defined in: [client/pages/Projects/ProjectForm/types.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectForm/types.tsx#L16)
-
-___
 
 ### debug
 

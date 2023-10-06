@@ -3,6 +3,10 @@
   height: 100%;
   box-sizing: border-box;
 
+  .flex {
+    flex: 1;
+  }
+
   .alert {
     padding: 10px;
     max-width: 100%;

@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Components](../modules/components.md) / IInputControlProps
+[did-client - v0.13.0](../README.md) / [Components](../modules/components.md) / IInputControlProps
 
 # Interface: IInputControlProps
 
@@ -8,7 +8,7 @@
 
 * [*FormInputControlBase*](components.forminputcontrolbase.md)<[*InputControlOptions*](components.inputcontroloptions.md)\>
 
-* *Pick*<[*IInputFieldProps*](components.iinputfieldprops.md), *rows* \| *placeholder* \| *maxLength* \| *type*\>
+* *Pick*<[*IInputFieldProps*](components.iinputfieldprops.md), *rows* \| *placeholder* \| *maxLength* \| *type* \| *contentBefore* \| *contentAfter*\>
 
   ↳ **IInputControlProps**
 

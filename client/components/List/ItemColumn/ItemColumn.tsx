@@ -1,6 +1,7 @@
 /* eslint-disable unicorn/prefer-ternary */
-import { Caption1, Text, Tooltip } from '@fluentui/react-components'
-import { CustomerLink, ProjectLink } from 'components'
+import { Caption1, Persona, Text, Tooltip } from '@fluentui/react-components'
+import { Tag } from '@fluentui/react-tags-preview'
+import { CustomerLink, ProjectLink, ProjectTag } from 'components'
 import { DateObject } from 'DateUtils'
 import get from 'get-value'
 import React, { ReactElement } from 'react'
@@ -43,21 +44,31 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
         <Caption1>{fieldValue.slice(0, 80) + '...'}</Caption1>
       </Tooltip>
     )
-  }
-  switch (column.renderAs) {
-    case 'timeFromNow': {
-      return <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
-    }
-    case 'customerLink': {
-      return <CustomerLink customer={fieldValue} />
-    }
-    case 'projectLink': {
-      return <ProjectLink project={fieldValue} {...renderProps} />
-    }
-    default: {
-      if (column.onRender) {
-        element = column.onRender(item)
-      } else element = <Text size={200}>{fieldValue}</Text>
+  } else {
+    switch (column.renderAs) {
+      case 'timeFromNow': {
+        return <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
+      }
+      case 'customerLink': {
+        return <CustomerLink customer={fieldValue} {...renderProps} />
+      }
+      case 'projectLink': {
+        return <ProjectLink project={fieldValue} {...renderProps} />
+      }
+      case 'projectTag': {
+        return <ProjectTag project={fieldValue} {...renderProps} />
+      }
+      case 'tag': {
+        return <Tag {...renderProps}>{fieldValue}</Tag>
+      }
+      case 'persona': {
+        return <Persona {...renderProps} />
+      }
+      default: {
+        if (column.onRender) {
+          element = column.onRender(item)
+        } else element = <Text size={200}>{fieldValue}</Text>
+      }
     }
   }
 

@@ -158,3 +158,4 @@ export const setupGraphQL = async (
 }
 
 export * from './resolvers'
+export * from './setupGraphQL'

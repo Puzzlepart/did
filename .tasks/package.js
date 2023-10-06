@@ -27,8 +27,9 @@ async function package() {
   }
 
   await concurrently([
-    { command: 'npm run package:client', name: 'package:client' },
-    { command: "npm run build:server", name: 'build:server' }
+    { command: 'npm run package:client', name: 'Packaging client' },
+    { command: "npm run build:server", name: 'Building server' },
+    { command: "git rev-parse --short HEAD > revision.txt", name: 'Writing revision to file' }
   ], {
     prefix: 'none',
   })

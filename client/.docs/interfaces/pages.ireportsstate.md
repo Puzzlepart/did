@@ -1,4 +1,4 @@
-[did-client - v0.12.0](../README.md) / [Pages](../modules/pages.md) / IReportsState
+[did-client - v0.13.0](../README.md) / [Pages](../modules/pages.md) / IReportsState
 
 # Interface: IReportsState
 
@@ -52,7 +52,7 @@ ___
 
 ### groupBy
 
-• `Optional` **groupBy**: [*IListGroupProps*](components.ilistgroupprops.md)
+• `Optional` **groupBy**: [*IListGroupProps*](components.ilistgroupprops.md)<any\>
 
 Group by properties
 

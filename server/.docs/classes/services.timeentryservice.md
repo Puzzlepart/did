@@ -1,4 +1,4 @@
-[did-server - v0.12.0](../README.md) / [Services](../modules/services.md) / TimeEntryService
+[did-server - v0.13.0](../README.md) / [Services](../modules/services.md) / TimeEntryService
 
 # Class: TimeEntryService
 
@@ -37,7 +37,7 @@ Time entry service
 
 ### constructor
 
-\+ **new TimeEntryService**(`context`: *Context*): [*TimeEntryService*](services.timeentryservice.md)
+\+ **new TimeEntryService**(`context`: [*Context*](graphql.context.md)): [*TimeEntryService*](services.timeentryservice.md)
 
 Constructor for `TimeEntryService`
 
@@ -45,7 +45,7 @@ Constructor for `TimeEntryService`
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | *Context* | Injected context through `typedi`    |
+`context` | [*Context*](graphql.context.md) | Injected context through `typedi`    |
 
 **Returns:** [*TimeEntryService*](services.timeentryservice.md)
 
@@ -93,7 +93,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: *Context*
+• `Readonly` **context**: [*Context*](graphql.context.md)
 
 Inherited from: void
 

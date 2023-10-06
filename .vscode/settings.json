@@ -25,6 +25,8 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB",
+  "i18n-ally.translate.openai.apiKey": "OPENAI_API_KEY",
+  "i18n-ally.extract.autoDetect": false,
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
   "editor.folding": true,
   "editor.foldingImportsByDefault": true

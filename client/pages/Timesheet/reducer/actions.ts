@@ -2,7 +2,7 @@ import { QueryResult } from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
 import { EventObject, Project } from 'types'
-import { TimesheetDateRange } from '../TimesheetDateRange'
+import { TimesheetDateRange } from '../types'
 import { TimesheetViewComponent } from '../Views/types'
 
 /**
@@ -10,7 +10,7 @@ import { TimesheetViewComponent } from '../Views/types'
  *
  * @category Timesheet Actions
  */
-export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<QueryResult>('DATA_UPDATED')
 
 /**
  * Set date range action

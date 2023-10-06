@@ -3,7 +3,6 @@ import { IUserMessageProps } from 'components/UserMessage/types'
 import $date from 'DateUtils'
 import { useArray } from 'hooks/common/useArray'
 import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
-import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -27,7 +26,13 @@ export function useStatusBar() {
   if (!state.selectedPeriod) {
     return {
       className: StatusBar.className,
-      messages: []
+      messages: [
+        {
+          id: 'loading',
+          ...state.loading,
+          renderProgress: true
+        }
+      ] as IUserMessageProps[]
     }
   }
   const messages: IUserMessageProps[] = []
@@ -84,14 +89,12 @@ export function useStatusBar() {
             t
           )
         }),
-        actions: [
-          {
-            key: 'ignore',
-            content: t('timesheet.ignoreAllText'),
-            onClick: () => dispatch(IGNORE_ALL()),
-            iconName: 'CalendarCancel'
-          }
-        ],
+        action: {
+          text: t('timesheet.ignoreAllTooltip'),
+          onClick: () => dispatch(IGNORE_ALL()),
+          iconName: 'CalendarCancel',
+          iconColor: 'var(--colorPaletteRedForeground1)'
+        },
         intent: 'warning'
       })
     }
@@ -137,14 +140,11 @@ export function useStatusBar() {
         text: t('timesheet.ignoredEventsText', {
           ignored_count: state.selectedPeriod.ignoredEvents.length
         }),
-        actions: [
-          {
-            key: 'undo-ignore',
-            content: t('timesheet.undoIgnoreText'),
-            onClick: () => dispatch(CLEAR_IGNORES()),
-            iconName: 'ArrowUndo'
-          }
-        ],
+        action: {
+          text: t('timesheet.undoIgnoreTooltip'),
+          onClick: () => dispatch(CLEAR_IGNORES()),
+          iconName: 'ArrowUndo'
+        },
         intent: 'warning'
       })
     }
@@ -170,16 +170,9 @@ export function useStatusBar() {
       )
       messages.push({
         id: 'adjustedevents',
-        children: (
-          <p>
-            <span>
-              {t('timesheet.adjustedEventDurationsInfoText', {
-                adjustedMinutes
-              })}
-            </span>
-          </p>
-        )
-        // iconName: 'SortUp'
+        text: t('timesheet.adjustedEventDurationsInfoText', {
+          adjustedMinutes
+        })
       })
     }
   }

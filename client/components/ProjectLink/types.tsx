@@ -31,4 +31,9 @@ export interface IProjectLinkProps extends HTMLProps<HTMLDivElement> {
    * Link template to use when generating the link.
    */
   linkTemplate?: string
+
+  /**
+   * Whether to show the customer icon.
+   */
+  showIcon?: boolean
 }

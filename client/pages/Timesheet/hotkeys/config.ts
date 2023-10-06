@@ -7,7 +7,7 @@ import {
   SET_DATE_RANGE,
   TOGGLE_SHORTCUTS
 } from '../reducer/actions'
-import { TimesheetDateRange } from '../TimesheetDateRange'
+import { TimesheetDateRange } from '../types'
 
 export const getHotkeys = (
   context: ITimesheetContext,

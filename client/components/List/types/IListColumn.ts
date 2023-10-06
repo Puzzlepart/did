@@ -1,11 +1,13 @@
 import { IColumn } from '@fluentui/react'
+import { ItemColumnRenderType } from '../ItemColumn'
 import { IListColumnData } from './IListColumnData'
 
 /**
  * @category List
  */
 
-export interface IListColumn<T extends object = any> extends IColumn {
+export interface IListColumn<T extends object = any, P extends object = any>
+  extends IColumn {
   /**
    * Data for the column - `IListColumnData`
    */
@@ -17,16 +19,13 @@ export interface IListColumn<T extends object = any> extends IColumn {
   hidden?: boolean
 
   /**
-   * How to render the column
-   *
-   * - `timeFromNow` - render the column as a time from now
-   * - `customerLink` - render the column as a customer link
+   * How to render the column.
    */
-  renderAs?: 'timeFromNow' | 'customerLink' | 'projectLink'
+  renderAs?: ItemColumnRenderType
 
   /**
    * Create render props to send to the component rendering the column.
    * E.g. `ProjectLink` or `CustomerLink`.
    */
-  createRenderProps?: (item: T) => any
+  createRenderProps?: (item: T) => Partial<P>
 }
