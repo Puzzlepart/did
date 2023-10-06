@@ -17,6 +17,8 @@ jobs:
       group: ${{ github.ref }}_on_pr_test_build
       cancel-in-progress: true
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    env:
+      NODE_ENV: production
     steps:
       - uses: actions/checkout@v3
         with:
@@ -34,15 +36,16 @@ jobs:
         run: |
           npm test
 
+      - name: ESLint
+        run: |
+          npx eslint --ext .ts,.tsx ./client ./server --color --quiet
+
       - name: Package client
         run: |
           npm run package:client
         env:
           DEBUG: webpack*
-          NODE_ENV: production
 
       - name: Build server
         run: |
           npm run build:server
-        env:
-          NODE_ENV: production
