@@ -323,7 +323,6 @@
     "printWidth": 80,
     "trailingComma": "none",
     "bracketSpacing": true,
-    "jsxBracketSameLine": true,
     "jsxSingleQuote": true
   },
   "commitlint": {
