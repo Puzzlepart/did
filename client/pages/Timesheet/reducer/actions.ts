@@ -26,8 +26,9 @@ export const SET_DATE_RANGE = createAction<TimesheetDateRange | string>(
  *
  * @category Timesheet Actions
  */
-export const SUBMITTING_PERIOD =
-  createAction<{ forecast: boolean }>('SUBMITTING_PERIOD')
+export const SUBMITTING_PERIOD = createAction<{ forecast: boolean }>(
+  'SUBMITTING_PERIOD'
+)
 
 /**
  * Submittng period action
@@ -64,8 +65,9 @@ export const NEXT_PERIOD = createAction('NEXT_PERIOD')
  *
  * @category Timesheet Actions
  */
-export const CHANGE_VIEW =
-  createAction<{ view: TimesheetViewComponent }>('CHANGE_VIEW')
+export const CHANGE_VIEW = createAction<{ view: TimesheetViewComponent }>(
+  'CHANGE_VIEW'
+)
 
 /**
  * Change date range type action
@@ -81,16 +83,18 @@ export const CHANGE_DATE_RANGE_TYPE = createAction<DateRangeType>(
  *
  * @category Timesheet Actions
  */
-export const MANUAL_MATCH =
-  createAction<{ eventId: string; project: Project }>('MANUAL_MATCH')
+export const MANUAL_MATCH = createAction<{ eventId: string; project: Project }>(
+  'MANUAL_MATCH'
+)
 
 /**
  * Clear manual match action
  *
  * @category Timesheet Actions
  */
-export const CLEAR_MANUAL_MATCH =
-  createAction<{ id: string }>('CLEAR_MANUAL_MATCH')
+export const CLEAR_MANUAL_MATCH = createAction<{ id: string }>(
+  'CLEAR_MANUAL_MATCH'
+)
 
 /**
  * Open manual match panel action

@@ -12,32 +12,33 @@ import { ISuggestedProjectMessageProps } from './types'
  *
  * @category Timesheet
  */
-export const SuggestedProjectMessage: StyledComponent<ISuggestedProjectMessageProps> =
-  ({ eventId, project: suggestedProject }) => {
-    const context = useTimesheetContext()
-    return (
-      <UserMessage
-        hidden={!suggestedProject}
-        icon={getFluentIcon('Lightbulb', { bundle: true, size: 16 })}
-      >
-        <p>
-          <Trans
-            i18nKey='timesheet.didYouMeanText'
-            tOptions={suggestedProject ?? {}}
-            components={{
-              Link: (
-                <a
-                  style={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    context.dispatch(
-                      MANUAL_MATCH({ eventId, project: suggestedProject })
-                    )
-                  }
-                ></a>
-              )
-            }}
-          />
-        </p>
-      </UserMessage>
-    )
-  }
+export const SuggestedProjectMessage: StyledComponent<
+  ISuggestedProjectMessageProps
+> = ({ eventId, project: suggestedProject }) => {
+  const context = useTimesheetContext()
+  return (
+    <UserMessage
+      hidden={!suggestedProject}
+      icon={getFluentIcon('Lightbulb', { bundle: true, size: 16 })}
+    >
+      <p>
+        <Trans
+          i18nKey='timesheet.didYouMeanText'
+          tOptions={suggestedProject ?? {}}
+          components={{
+            Link: (
+              <a
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  context.dispatch(
+                    MANUAL_MATCH({ eventId, project: suggestedProject })
+                  )
+                }
+              ></a>
+            )
+          }}
+        />
+      </p>
+    </UserMessage>
+  )
+}

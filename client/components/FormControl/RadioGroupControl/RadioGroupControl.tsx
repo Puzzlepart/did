@@ -12,22 +12,23 @@ import { useRadioGroupControl } from './useRadioGroupControl'
  *
  * @category Reusable Component
  */
-export const RadioGroupControl: FormInputControlComponent<IRadioGroupControlProps> =
-  (props) => {
-    const { value, onChange } = useRadioGroupControl(props)
-    return (
-      <FormControlContext.Consumer>
-        {() => (
-          <Field {...props}>
-            <RadioGroup name={props.name} value={value} onChange={onChange}>
-              {_.map(props.values, (v, index) => (
-                <Radio {...v} key={index} />
-              ))}
-            </RadioGroup>
-          </Field>
-        )}
-      </FormControlContext.Consumer>
-    )
-  }
+export const RadioGroupControl: FormInputControlComponent<
+  IRadioGroupControlProps
+> = (props) => {
+  const { value, onChange } = useRadioGroupControl(props)
+  return (
+    <FormControlContext.Consumer>
+      {() => (
+        <Field {...props}>
+          <RadioGroup name={props.name} value={value} onChange={onChange}>
+            {_.map(props.values, (v, index) => (
+              <Radio {...v} key={index} />
+            ))}
+          </RadioGroup>
+        </Field>
+      )}
+    </FormControlContext.Consumer>
+  )
+}
 
 RadioGroupControl.displayName = 'RadioGroupControl'

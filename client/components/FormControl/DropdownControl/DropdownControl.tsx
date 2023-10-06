@@ -13,41 +13,42 @@ import { useDropdownControlChange } from './useDropdownControlChange'
  *
  * @category Reusable Component
  */
-export const DropdownControl: FormInputControlComponent<IDropdownControlProps> =
-  (props) => {
-    const onChange = useDropdownControlChange(props)
-    const value = useMemo(() => {
-      if (props.model) {
-        const modelValue = props.model.value(props.name)
-        const option = _.findWhere(props.values, { value: modelValue })
-        if (option && modelValue) {
-          return option.text
-        }
+export const DropdownControl: FormInputControlComponent<
+  IDropdownControlProps
+> = (props) => {
+  const onChange = useDropdownControlChange(props)
+  const value = useMemo(() => {
+    if (props.model) {
+      const modelValue = props.model.value(props.name)
+      const option = _.findWhere(props.values, { value: modelValue })
+      if (option && modelValue) {
+        return option.text
       }
-      return props.defaultValue
-    }, [props.defaultValue, props.model, props.name])
-    return (
-      <FormControlContext.Consumer>
-        {(context) => (
-          <Field className={DropdownControl.className} {...props}>
-            <Dropdown
-              placeholder={props.placeholder}
-              defaultValue={props.defaultValue}
-              value={value}
-              onOptionSelect={onChange}
-              onBlur={context.onBlurCallback}
-            >
-              {_.map(props.values, (option, index) => (
-                <Option key={index} value={option.value}>
-                  {option.text}
-                </Option>
-              ))}
-            </Dropdown>
-          </Field>
-        )}
-      </FormControlContext.Consumer>
-    )
-  }
+    }
+    return props.defaultValue
+  }, [props.defaultValue, props.model, props.name])
+  return (
+    <FormControlContext.Consumer>
+      {(context) => (
+        <Field className={DropdownControl.className} {...props}>
+          <Dropdown
+            placeholder={props.placeholder}
+            defaultValue={props.defaultValue}
+            value={value}
+            onOptionSelect={onChange}
+            onBlur={context.onBlurCallback}
+          >
+            {_.map(props.values, (option, index) => (
+              <Option key={index} value={option.value}>
+                {option.text}
+              </Option>
+            ))}
+          </Dropdown>
+        </Field>
+      )}
+    </FormControlContext.Consumer>
+  )
+}
 
 DropdownControl.displayName = 'DropdownControl'
 DropdownControl.className = styles.dropdownControl

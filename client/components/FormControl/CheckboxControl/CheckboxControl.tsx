@@ -10,16 +10,17 @@ import { useCheckboxControlChange } from './useCheckboxControlChange'
  *
  * @category Reusable Component
  */
-export const CheckboxControl: FormInputControlComponent<ICheckboxControlProps> =
-  (props) => {
-    const onChange = useCheckboxControlChange(props)
-    return (
-      <CheckboxField
-        {...props}
-        onChange={(event, data) => onChange(event, data?.checked)}
-        checked={props.model.value<boolean>(props.name, false)}
-      />
-    )
-  }
+export const CheckboxControl: FormInputControlComponent<
+  ICheckboxControlProps
+> = (props) => {
+  const onChange = useCheckboxControlChange(props)
+  return (
+    <CheckboxField
+      {...props}
+      onChange={(event, data) => onChange(event, data?.checked)}
+      checked={props.model.value<boolean>(props.name, false)}
+    />
+  )
+}
 
 CheckboxControl.displayName = 'CheckboxControl'

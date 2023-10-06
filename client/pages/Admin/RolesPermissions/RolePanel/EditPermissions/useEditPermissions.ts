@@ -60,16 +60,19 @@ export function useEditPermissions(props: IEditPermissionsProps) {
   const checkedValues = useMemo(
     () => ({
       permissions: props.selectedPermissions,
-      ...Object.keys(permissionsGrouped).reduce((acc, key) => {
-        const isCategorySelected = _.every(
-          removeDisabled(permissionsGrouped[key]),
-          ({ id }) => props.selectedPermissions?.includes(id)
-        )
-        return {
-          ...acc,
-          [key]: isCategorySelected ? ['allSelected'] : []
-        }
-      }, {} as Record<string, string[]>)
+      ...Object.keys(permissionsGrouped).reduce(
+        (acc, key) => {
+          const isCategorySelected = _.every(
+            removeDisabled(permissionsGrouped[key]),
+            ({ id }) => props.selectedPermissions?.includes(id)
+          )
+          return {
+            ...acc,
+            [key]: isCategorySelected ? ['allSelected'] : []
+          }
+        },
+        {} as Record<string, string[]>
+      )
     }),
     [props.selectedPermissions]
   )

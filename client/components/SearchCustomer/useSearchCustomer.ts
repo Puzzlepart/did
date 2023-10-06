@@ -19,7 +19,7 @@ export function useSearchCustomer() {
             searchValue: [customer.key, customer.name].join(' '),
             data: customer,
             iconName: customer.icon || 'Page'
-          } as ISuggestionItem<Customer>)
+          }) as ISuggestionItem<Customer>
       ),
     [data]
   )

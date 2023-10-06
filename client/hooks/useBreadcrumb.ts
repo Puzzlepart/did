@@ -20,7 +20,7 @@ export function useBreadcrumb(
           ({
             key: index,
             ...item
-          } as IBreadcrumbItem)
+          }) as IBreadcrumbItem
       ),
     deps
   )

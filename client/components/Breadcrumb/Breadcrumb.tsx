@@ -4,16 +4,17 @@ import React from 'react'
 import { renderBreadcrumbItem } from './renderBreadcrumbItem'
 import { IBreadcrumbComponentProps } from './types'
 
-export const BreadcrumbComponent: ReusableComponent<IBreadcrumbComponentProps> =
-  (props) => {
-    return (
-      <div className={props.className}>
-        <Breadcrumb size='large'>
-          {props.items.map((item) => renderBreadcrumbItem(item, props.items))}
-        </Breadcrumb>
-      </div>
-    )
-  }
+export const BreadcrumbComponent: ReusableComponent<
+  IBreadcrumbComponentProps
+> = (props) => {
+  return (
+    <div className={props.className}>
+      <Breadcrumb size='large'>
+        {props.items.map((item) => renderBreadcrumbItem(item, props.items))}
+      </Breadcrumb>
+    </div>
+  )
+}
 
 BreadcrumbComponent.displayName = 'Breadcrumb'
 BreadcrumbComponent.defaultProps = {

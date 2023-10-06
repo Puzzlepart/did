@@ -5,14 +5,15 @@ import styles from './MissingSubmissionUser.module.scss'
 import { MissingSubmissionUserPopover } from './MissingSubmissionUserPopover'
 import { IMissingSubmissionUserProps } from './types'
 
-export const MissingSubmissionUser: StyledComponent<IMissingSubmissionUserProps> =
-  (props) => (
-    <div className={MissingSubmissionUser.className}>
-      <MissingSubmissionUserPopover {...props}>
-        <Persona {...props.user} className={styles.persona} size='medium' />
-      </MissingSubmissionUserPopover>
-    </div>
-  )
+export const MissingSubmissionUser: StyledComponent<
+  IMissingSubmissionUserProps
+> = (props) => (
+  <div className={MissingSubmissionUser.className}>
+    <MissingSubmissionUserPopover {...props}>
+      <Persona {...props.user} className={styles.persona} size='medium' />
+    </MissingSubmissionUserPopover>
+  </div>
+)
 
 MissingSubmissionUser.displayName = 'MissingSubmissionUser'
 MissingSubmissionUser.className = styles.missingSubmissionUser

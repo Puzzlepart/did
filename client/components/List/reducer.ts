@@ -12,20 +12,24 @@ import {
 } from './types'
 
 export const PROPS_UPDATED = createAction<IListProps>('PROPS_UPDATED')
-export const EXECUTE_SEARCH =
-  createAction<{ searchTerm: string }>('EXECUTE_SEARCH')
+export const EXECUTE_SEARCH = createAction<{ searchTerm: string }>(
+  'EXECUTE_SEARCH'
+)
 export const INIT_COLUMN_HEADER_CONTEXT_MENU =
   createAction<ColumnHeaderContextMenu>('INIT_COLUMN_HEADER_CONTEXT_MENU')
 export const DISMISS_COLUMN_HEADER_CONTEXT_MENU = createAction(
   'DISMISS_COLUMN_HEADER_CONTEXT_MENU'
 )
-export const SET_GROUP_BY =
-  createAction<{ column: IListColumn }>('SET_GROUP_BY')
-export const SET_FILTER_BY =
-  createAction<{ column: IListColumn }>('SET_FILTER_BY')
+export const SET_GROUP_BY = createAction<{ column: IListColumn }>(
+  'SET_GROUP_BY'
+)
+export const SET_FILTER_BY = createAction<{ column: IListColumn }>(
+  'SET_FILTER_BY'
+)
 export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
-export const FILTERS_UPDATED =
-  createAction<{ filters: IFilter[] }>('FILTERS_UPDATED')
+export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
+  'FILTERS_UPDATED'
+)
 export const CLEAR_FILTERS = createAction('CLEAR_FILTERS')
 
 /**

@@ -4,8 +4,9 @@ import { User } from 'types'
 import { IBulkImportPanelProps } from '../BulkImportPanel'
 import { IUserFormProps } from '../UserForm'
 
-export const DATA_UPDATED =
-  createAction<{ query: QueryResult<any> }>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<{ query: QueryResult<any> }>(
+  'DATA_UPDATED'
+)
 export const SET_PROGRESS = createAction<string>('SET_PROGRESS')
 export const SET_USER_FORM = createAction<IUserFormProps>('SET_USER_FORM')
 export const SET_ADD_MULTIPLE_PANEL = createAction<IBulkImportPanelProps>(

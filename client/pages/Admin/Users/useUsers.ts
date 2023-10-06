@@ -33,7 +33,7 @@ export function useUsers() {
         ...query,
         state,
         dispatch
-      } as IUsersContext),
+      }) as IUsersContext,
     [state, query.loading]
   )
 

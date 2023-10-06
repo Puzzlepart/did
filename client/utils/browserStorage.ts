@@ -9,7 +9,10 @@ import { tryParseJson } from './tryParseJson'
 export class BrowserStorage<T = unknown> {
   private _key: string
 
-  constructor(key: string, private _store = localStorage) {
+  constructor(
+    key: string,
+    private _store = localStorage
+  ) {
     this._key = `did_${key}`
   }
 

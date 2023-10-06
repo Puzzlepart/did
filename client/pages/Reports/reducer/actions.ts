@@ -19,8 +19,9 @@ export const DATA_UPDATED = createAction<{
 /**
  * @category Reports Actions
  */
-export const CHANGE_QUERY =
-  createAction<{ id: string; force?: boolean }>('FILTER_UPDATED')
+export const CHANGE_QUERY = createAction<{ id: string; force?: boolean }>(
+  'FILTER_UPDATED'
+)
 
 /**
  * @category Reports Actions
@@ -30,8 +31,9 @@ export const SET_FILTER = createAction<IReportsSavedFilter>('SET_FILTER')
 /**
  * @category Reports Actions
  */
-export const ADD_SAVED_FILTER =
-  createAction<{ model: IContextualMenuItem }>('ADD_SAVED_FILTER')
+export const ADD_SAVED_FILTER = createAction<{ model: IContextualMenuItem }>(
+  'ADD_SAVED_FILTER'
+)
 
 /**
  * @category Reports Actions

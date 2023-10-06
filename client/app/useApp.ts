@@ -56,7 +56,7 @@ export function useApp(props: IAppProps) {
         state,
         dispatch,
         setToast
-      } as IAppContext),
+      }) as IAppContext,
     [state, notifications]
   )
 

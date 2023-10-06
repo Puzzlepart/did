@@ -14,6 +14,7 @@ export interface IConditionalWrapperProps extends HTMLProps<HTMLDivElement> {
  *
  * @category Reusable Component
  */
-export const ConditionalWrapper: ReusableComponent<IConditionalWrapperProps> =
-  ({ condition, wrapper, children }) =>
-    condition ? wrapper(children) : children
+export const ConditionalWrapper: ReusableComponent<
+  IConditionalWrapperProps
+> = ({ condition, wrapper, children }) =>
+  condition ? wrapper(children) : children

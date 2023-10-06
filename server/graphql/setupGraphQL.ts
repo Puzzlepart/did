@@ -67,7 +67,9 @@ export const setupGraphQL = async (
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
               debug(
-                `Resetting container for request ${colors.magenta(requestContext.context.requestId)}`
+                `Resetting container for request ${colors.magenta(
+                  requestContext.context.requestId
+                )}`
               )
               // Remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)

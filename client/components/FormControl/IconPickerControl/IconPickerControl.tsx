@@ -11,11 +11,12 @@ import { useIconPickerControl } from './useIconPickerControl'
  *
  * @category Reusable Component
  */
-export const IconPickerControl: FormInputControlComponent<IIconPickerControlProps> =
-  (props) => {
-    const autoCompleteProps = useIconPickerControl(props)
-    return <AutocompleteControl {...autoCompleteProps} />
-  }
+export const IconPickerControl: FormInputControlComponent<
+  IIconPickerControlProps
+> = (props) => {
+  const autoCompleteProps = useIconPickerControl(props)
+  return <AutocompleteControl {...autoCompleteProps} />
+}
 
 IconPickerControl.displayName = 'IconPickerControl'
 IconPickerControl.className = styles.iconPickerControl
