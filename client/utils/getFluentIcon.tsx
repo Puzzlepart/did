@@ -1,5 +1,9 @@
 import { Icon } from '@fluentui/react'
 import {
+  CalendarDateRegular,
+  CalendarDateFilled,
+  ClipboardMonthRegular,
+  ClipboardMonthFilled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -144,6 +148,14 @@ import React, { CSSProperties } from 'react'
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 const iconCatalog = {
+  ClipboardMonth: {
+    regular: ClipboardMonthRegular,
+    filled: ClipboardMonthFilled
+  },
+  CalendarDate: {
+    regular: CalendarDateRegular,
+    filled: CalendarDateFilled
+  },
   Heart: {
     regular: HeartRegular,
     filled: HeartFilled
