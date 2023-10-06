@@ -5,6 +5,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { Context } from '../graphql/context'
 import { redisMiddlware } from '../middleware/redis'
+const colors = require('colors/safe')
 const log = require('debug')('server/services/cache')
 
 /**
@@ -90,13 +91,13 @@ export class CacheService {
   private _get<T = any>({ key, scope }: CacheOptions): Promise<T> {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
-      log(`Retrieving cached value for key ${scopedCacheKey}...`)
+      log(`Retrieving cached value for key ${colors.magenta(scopedCacheKey)}...`)
       redisMiddlware.get(scopedCacheKey, (error, reply) => {
         if (error) {
-          log(`Failed to retrieve cachedd value for key ${scopedCacheKey}.`)
+          log(`Failed to retrieve cachedd value for key ${colors.magenta(scopedCacheKey)}.`)
           resolve(null)
         } else {
-          log(`Retrieved cached value for key ${scopedCacheKey}.`)
+          log(`Retrieved cached value for key ${colors.magenta(scopedCacheKey)}.`)
           resolve(JSON.parse(reply) as T)
         }
       })
@@ -113,7 +114,7 @@ export class CacheService {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(
-        `Setting value for key ${scopedCacheKey} with a expiration of ${expiry} seconds...`
+        `Setting value for key ${colors.magenta(scopedCacheKey)} with a expiration of ${colors.magenta(expiry)} seconds.`
       )
       redisMiddlware.setex(
         scopedCacheKey,
@@ -121,11 +122,11 @@ export class CacheService {
         JSON.stringify(value),
         (error, reply) => {
           if (error) {
-            log(`Failed to set value for key ${scopedCacheKey}.`)
+            log(`Failed to set value for key ${colors.magenta(scopedCacheKey)}.`)
             resolve(error)
           } else {
             log(
-              `Value for key ${scopedCacheKey} set with a expiration of ${expiry} seconds.`
+              `Value for key ${colors.magenta(scopedCacheKey)} set with a expiration of ${colors.magenta(expiry)} seconds.`
             )
             resolve(reply)
           }
