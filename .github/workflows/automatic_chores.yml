@@ -43,7 +43,7 @@ jobs:
       - name: ESLint and prettier
         run: |
           npx eslint --ext .ts,.tsx ./client ./server --color --fix --quiet
-          npx prettier '**/*.ts*' --write --loglevel silent
+          npx prettier '**/*.ts*' --write --log-level silent
 
       - name: Generating README and CHANGELOG using @appnest/readme
         run: |
