@@ -1,9 +1,5 @@
 import { Icon } from '@fluentui/react'
 import {
-  CalendarDateRegular,
-  CalendarDateFilled,
-  ClipboardMonthRegular,
-  ClipboardMonthFilled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -33,6 +29,8 @@ import {
   CalendarCancel24Regular,
   CalendarClock24Filled,
   CalendarClock24Regular,
+  CalendarDateFilled,
+  CalendarDateRegular,
   CalendarMonth24Filled,
   CalendarMonth24Regular,
   CalendarPlay24Filled,
@@ -49,6 +47,8 @@ import {
   CheckmarkCircle24Regular,
   CheckmarkFilled,
   CheckmarkRegular,
+  ClipboardMonthFilled,
+  ClipboardMonthRegular,
   Cloud24Filled,
   Cloud24Regular,
   CollectionsFilled,

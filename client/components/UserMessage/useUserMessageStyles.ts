@@ -3,7 +3,7 @@ import { useAppContext } from 'AppContext'
 
 /**
  * Get `background` and `color` styles for `UserMessage` based on
- * the provided `intent`. We use colors from `semanticColors` in 
+ * the provided `intent`. We use colors from `semanticColors` in
  * the legacy theme.
  *
  * @category UserMessage

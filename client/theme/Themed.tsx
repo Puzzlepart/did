@@ -10,10 +10,10 @@ import React, { FC, HTMLProps, useMemo } from 'react'
  * `@fluentui/react` and `@fluentui/react-components` components. Also
  * uses `<PortalCompatProvider>` to support e.g. `Panel` and `Dialog`
  * components from `@fluentui/react`.
- * 
+ *
  * We want to use `useMemo` to avoid re-rendering the entire app when
- * the context changes. 
- * 
+ * the context changes.
+ *
  * @see https://github.com/Puzzlepart/did/pull/1132
  *
  * @returns - The themed component tree.

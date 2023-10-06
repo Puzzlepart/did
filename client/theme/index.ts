@@ -37,6 +37,6 @@ function getAutoColorScheme(): ContextUser['theme'] {
     : getTheme('default')
 }
 
-export * from './Themed'
 export * from './darkTheme'
 export * from './defaultTheme'
+export * from './Themed'
