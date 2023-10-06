@@ -301,7 +301,9 @@
         }
       ],
       "unicorn/prefer-code-point": 0,
-      "unicorn/no-await-expression-member": 0
+      "unicorn/no-await-expression-member": 0,
+      "unicorn/prefer-string-replace-all": 0,
+      "unicorn/prefer-at": 0
     },
     "settings": {
       "react": {
