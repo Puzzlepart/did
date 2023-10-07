@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.13.0-alpha.1-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.13.0-alpha.2-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -27,9 +27,6 @@
 	* [Node version](#node-version)
 	* [Authentication](#authentication)
 		* [Google](#google)
-	* [Commiting to the repository](#commiting-to-the-repository)
-		* [Commitlint](#commitlint)
-		* [commit-changes.js](#commit-changesjs)
 	* [Branching / Deploying](#branching--deploying)
 		* [Main branch](#main-branch)
 		* [Dev branch](#dev-branch)
@@ -177,27 +174,6 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 #### Google
 See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) for more details on using Did with Google.
 
-### Commiting to the repository
-#### Commitlint
-We are using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
-
-You _can_ (but shouldn't) bypass the `commit-msg` hooks using the git `--no-verify` option:
-
-```shell
-git commit -m "yolo!" --no-verify
-```
-
-For Git commands that don't have a `--no-verify` option, you can use `HUSKY` environment variable:
-
-```shell
-HUSKY=0 git push # yolo!
-```
-
-See `commitlint` in [package.json](./package.json). The commit message needs to be lowercase and have a prefix.
-
-#### commit-changes.js
-We also have the node script `.tasks/commit-changes.js` that can be used. This script/task prompts you for the prefix and commit message, then commits your changes. It can also push the changes right away.
-
 ### Branching / Deploying
 
 #### Main branch
@@ -205,8 +181,9 @@ We also have the node script `.tasks/commit-changes.js` that can be used. This s
 The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did.puzzlepart.com](https://did.puzzlepart.com)  
 
 #### Dev branch
-The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net)  
-`/feature/*`-prefixed branches may or may not be included in future releases.
+The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
+
+The deploy CI is executing when new tags matching the pattern `v*` is pushed to `dev`.
 
 ### Feature branches
 For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-staging.azurewebsites.net](https://didapp-staging.azurewebsites.net) is set up for branches matching the pattern `feat/*`.
