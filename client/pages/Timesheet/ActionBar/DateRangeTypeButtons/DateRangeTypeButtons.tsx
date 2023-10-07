@@ -17,9 +17,9 @@ import styles from './DateRangeTypeButtons.module.scss'
  *
  * @category Timesheet
  */
-export const DateRangeTypeButtons: StyledComponent<Pick<ToolbarRadioButtonProps, 'name'>> = ({
-  name
-}) =>
+export const DateRangeTypeButtons: StyledComponent<
+  Pick<ToolbarRadioButtonProps, 'name'>
+> = ({ name }) =>
   isBrowser && (
     <TimesheetContext.Consumer>
       {({ state }) => (
@@ -28,18 +28,22 @@ export const DateRangeTypeButtons: StyledComponent<Pick<ToolbarRadioButtonProps,
             name={name}
             value={DateRangeType.Week.toString()}
             icon={icon('CalendarMonth')}
-            disabled={!!state.loading || state.dateRangeType === DateRangeType.Week}
+            disabled={
+              !!state.loading || state.dateRangeType === DateRangeType.Week
+            }
           />
           <ToolbarRadioButton
             name={name}
             value={DateRangeType.Month.toString()}
             icon={icon('CalendarWorkWeek')}
-            disabled={!!state.loading || state.dateRangeType === DateRangeType.Month}
+            disabled={
+              !!state.loading || state.dateRangeType === DateRangeType.Month
+            }
           />
         </div>
       )}
     </TimesheetContext.Consumer>
   )
 
-  DateRangeTypeButtons.displayName = 'DateRangeTypeButtons'
-  DateRangeTypeButtons.className = styles.dateRangeTypeButtons
+DateRangeTypeButtons.displayName = 'DateRangeTypeButtons'
+DateRangeTypeButtons.className = styles.dateRangeTypeButtons

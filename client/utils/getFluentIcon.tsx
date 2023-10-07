@@ -462,7 +462,7 @@ export function getFluentIcon(
   const filled = options?.filled ?? false
   const icon = iconCatalog[name]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
-  const props: { style?: CSSProperties, title?: string } = {
+  const props: { style?: CSSProperties; title?: string } = {
     title: options?.title
   }
   if (color) props.style = { color }
