@@ -29,11 +29,12 @@ export function getTheme(name: UserTheme['name'] = 'auto'): UserTheme {
  * @returns the system preferred color scheme, either darkTheme or lightTheme
  */
 function getAutoColorScheme(): UserTheme {
-  return window.matchMedia
-    ? window.matchMedia('(prefers-color-scheme: dark)').matches
+  if(window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
       ? getTheme('dark')
       : getTheme('default')
-    : getTheme('default')
+  }
+  return getTheme('default')
 }
 
 export * from './Themed'
