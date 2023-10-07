@@ -8,6 +8,11 @@ import React from 'react'
 import { StyledComponent } from 'types'
 import styles from './VersionInfo.module.scss'
 
+/**
+ * Renders the version information of the application.
+ * If DISPLAY_VERSION_DETAILS is set to '1', it displays a tooltip with commit, branch, and last commit details.
+ * Otherwise, it displays only the version number.
+ */
 export const VersionInfo: StyledComponent = () => {
   const displayVersionDetailsToooltip = DISPLAY_VERSION_DETAILS === '1'
   return displayVersionDetailsToooltip ? (
