@@ -1,4 +1,4 @@
-import { GraphQLRequestContext } from 'apollo-server-plugin-base'
+import { GraphQLRequestContext } from '@apollo/server'
 import 'reflect-metadata'
 import UAParser from 'ua-parser-js'
 import _ from 'underscore'

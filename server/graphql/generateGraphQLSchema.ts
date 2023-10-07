@@ -25,7 +25,6 @@ export const generateGraphQLSchema = async () => {
     validate: false,
     authChecker,
     authMode: 'error',
-    dateScalarMode: 'isoDate',
     scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
   })
   return schema

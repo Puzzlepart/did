@@ -26,5 +26,5 @@
   "i18n-ally.extract.autoDetect": false,
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
   "editor.folding": true,
-  "editor.foldingImportsByDefault": true
+  "editor.foldingImportsByDefault": false
 }

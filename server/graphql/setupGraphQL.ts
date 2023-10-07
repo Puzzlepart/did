@@ -1,4 +1,10 @@
 import { ApolloServer, ApolloServerPlugin, GraphQLRequestContext } from '@apollo/server'
+import { expressMiddleware } from '@apollo/server/express4'
+import { ApolloServerPluginUsageReporting } from '@apollo/server/plugin/usageReporting'
+import { ApolloServerPluginSchemaReporting } from '@apollo/server/plugin/schemaReporting'
+import { json } from 'body-parser'
+import colors from 'colors/safe'
+import cors from 'cors'
 import createDebug from 'debug'
 import express from 'express'
 import { MongoClient } from 'mongodb'
@@ -8,7 +14,6 @@ import _ from 'underscore'
 import { Context, createContext } from './context'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
-import colors from 'colors/safe'
 export const debug = createDebug('graphql/setupGraphQL')
 
 /**
@@ -34,7 +39,7 @@ export const setupGraphQL = async (
 ): Promise<void> => {
   try {
     const schema = await generateGraphQLSchema()
-    const server = new ApolloServer({
+    const server = new ApolloServer<Context>({
       logger: {
         debug: () => null,
         info: () => null,
@@ -46,7 +51,6 @@ export const setupGraphQL = async (
       formatError: (error) => _.pick(error, 'message'),
       plugins: [
         ApolloServerPluginUsageReporting({
-          rewriteError: (error) => error,
           sendVariableValues: { all: true },
           generateClientInfo
         }),
@@ -62,7 +66,7 @@ export const setupGraphQL = async (
                 )}`
               )
               // Remember to dispose the scoped container to prevent memory leaks
-              Container.reset(requestContext.context.requestId)
+              Container.reset(requestContext.contextValue.requestId)
               const instancesIds = (
                 (Container as any).instances as ContainerInstance[]
               ).map((instance) => instance.id)
@@ -72,8 +76,18 @@ export const setupGraphQL = async (
         }
       ] as ApolloServerPlugin[]
     })
-    server
+    await server.start()
+    app.use(
+      '/graphql',
+      cors<cors.CorsRequest>(),
+      json(),
+      expressMiddleware(server, {
+        context: ({ req }) => createContext(req, mcl)
+      })
+    )
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error)
     debug(error)
   }
 }
