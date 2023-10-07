@@ -1,4 +1,4 @@
-#import "../../../graphql/fragments/timeentry-fragment.gql"
+#import "../../../graphql-client/fragments/timeentry-fragment.gql"
 
 query ForecastReport {
   timeEntries: forecastedReport {

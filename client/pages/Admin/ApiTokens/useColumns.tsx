@@ -3,8 +3,8 @@ import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope as $ } from 'security'
+import { ApiToken } from 'types'
 import { createColumnDef } from 'utils'
-import { ApiToken } from '../../../../server/graphql'
 import { ApiKeyDisplay } from './ApiKeyDisplay'
 
 /**

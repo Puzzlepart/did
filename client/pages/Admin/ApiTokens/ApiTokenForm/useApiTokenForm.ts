@@ -1,5 +1,5 @@
 import { useFormControlModel, useFormControls } from 'components'
-import { ApiTokenInput } from '../../../../../server/graphql'
+import { ApiTokenInput } from 'types'
 import { IApiTokenFormProps } from './types'
 import { useApiTokenFormSubmit } from './useApiTokenFormSubmit'
 import { useExpiryOptions } from './useExpiryOptions'
