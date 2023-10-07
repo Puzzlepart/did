@@ -73,6 +73,60 @@ export class Context {
    * Mongo database
    */
   public db?: MongoDatabase
+
+  /**
+   * Create GraphQL context
+   *
+   * * Sets the default `mongodb` instance on the context
+   * * Sets the user subscription on the context
+   * * Checks token auth using `handleTokenAuthentication`
+   * * Generates a random request ID using `Math random`
+   * * Sets `CONTEXT` and `REQUEST` on the container to enable
+   *   dependency injection in the resolvers.
+   *
+   * @param request - Express request
+   * @param mcl - Mongo client
+   *
+   * @returns GraphQL context object
+   */
+  public static create = async (
+    request: Express.Request,
+    mcl: MongoClient
+  ): Promise<Context> => {
+    try {
+      const database = mcl.db(environment('MONGO_DB_DB_NAME'))
+      const context: Context = {}
+      context.requestId = generateUniqueRequestId()
+      context.container = Container.of(context.requestId)
+      context.mcl = mcl
+      context.subscription = get(request, 'user.subscription', { default: {} })
+      const apiKey = get(request, 'api_key')
+      if (apiKey) {
+        const { permissions, subscription } = await handleTokenAuthentication(
+          apiKey,
+          database
+        )
+        context.permissions = permissions
+        context.subscription = subscription
+      } else {
+        context.user = get(request, 'user')
+        context.userId = get(request, 'user.id')
+        context.userConfiguration = tryParseJson<Record<string, any>>(
+          get(request, 'user.configuration'),
+          {}
+        )
+        context.provider = get(request, 'user.provider')
+        context.permissions = get(request, 'user.role.permissions')
+      }
+      context.db = context.mcl.db(context.subscription.db)
+      context.container.set({ id: 'CONTEXT', transient: true, value: context })
+      context.container.set({ id: 'REQUEST', transient: true, value: request })
+      debug(`Creating context for request ${context.requestId}`)
+      return context
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 /**
@@ -83,64 +137,10 @@ function generateUniqueRequestId() {
 }
 
 /**
- * Create GraphQL context
- *
- * * Sets the default `mongodb` instance on the context
- * * Sets the user subscription on the context
- * * Checks token auth using `handleTokenAuthentication`
- * * Generates a random request ID using `Math random`
- * * Sets `CONTEXT` and `REQUEST` on the container to enable
- *   dependency injection in the resolvers.
- *
- * @param request - Express request
- * @param mcl - Mongo client
- *
- * @returns GraphQL context object
- */
-export const createContext = async (
-  request: Express.Request,
-  mcl: MongoClient
-): Promise<Context> => {
-  try {
-    const database = mcl.db(environment('MONGO_DB_DB_NAME'))
-    const context: Context = {}
-    context.requestId = generateUniqueRequestId()
-    context.container = Container.of(context.requestId)
-    context.mcl = mcl
-    context.subscription = get(request, 'user.subscription', { default: {} })
-    const apiKey = get(request, 'api_key')
-    if (apiKey) {
-      const { permissions, subscription } = await handleTokenAuthentication(
-        apiKey,
-        database
-      )
-      context.permissions = permissions
-      context.subscription = subscription
-    } else {
-      context.user = get(request, 'user')
-      context.userId = get(request, 'user.id')
-      context.userConfiguration = tryParseJson<Record<string, any>>(
-        get(request, 'user.configuration'),
-        {}
-      )
-      context.provider = get(request, 'user.provider')
-      context.permissions = get(request, 'user.role.permissions')
-    }
-    context.db = context.mcl.db(context.subscription.db)
-    context.container.set({ id: 'CONTEXT', transient: true, value: context })
-    context.container.set({ id: 'REQUEST', transient: true, value: request })
-    debug(`Creating context for request ${context.requestId}`)
-    return context
-  } catch (error) {
-    throw error
-  }
-}
-
-/**
  * Authenticates a user based on an API key and retrieves their subscription and permissions.
  *
  * @param apiKey - The API key to authenticate the user with.
- * @param database - The MongoDatabase instance to use for database operations.
+ * @param database - The `MongoDatabase` instance to use for database operations.
  *
  * @returns An object containing the user's subscription and permissions.
  *
@@ -171,5 +171,5 @@ const handleTokenAuthentication = async (
     throw new GraphQLError(
       'Failed to authenticate with the specified token.'
     )
-  return { subscription, permissions: token.permissions }
+  return { subscription: subscription as unknown as Subscription, permissions: token.permissions }
 }
