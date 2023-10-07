@@ -3,7 +3,7 @@ name: Build and deploy to didapp/dev
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   package:
