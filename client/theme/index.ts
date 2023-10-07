@@ -40,3 +40,4 @@ function getAutoColorScheme(): UserTheme {
 export * from './Themed'
 export * from './darkTheme'
 export * from './defaultTheme'
+export * from './iconCatalog'
