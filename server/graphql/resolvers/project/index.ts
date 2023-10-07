@@ -33,7 +33,9 @@ export class ProjectResolver {
   constructor(
     private readonly _project: ProjectService,
     private readonly _msgraph: MSGraphService
-  ) {}
+  ) {
+    // Empty constructor
+  }
 
   /**
    * Get projects
@@ -45,7 +47,6 @@ export class ProjectResolver {
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string
   ): Promise<Project[]> {
-    throw new Error('Not implemented')
     const { projects } = await this._project.getProjectsData(
       customerKey && { customerKey }
     )
