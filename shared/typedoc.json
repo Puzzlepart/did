@@ -1,7 +1,7 @@
 {
   "name": "did-shared",
   "includeVersion": true,
-  "out": "shared/.docs",
+  "out": "./.docs",
   "readme": "none",
   "excludeInternal": true,
   "hideGenerator": true,
