@@ -12,6 +12,7 @@ import { StyledComponent } from 'types'
 import s from 'underscore.string'
 import { useTimesheetContext } from '../../context'
 import styles from './NavigatePeriodsButtons.module.scss'
+import { getFluentIcon } from 'utils'
 
 /**
  * Renders a group of radio buttons for navigating between periods. This is
@@ -44,8 +45,8 @@ export const NavigatePeriodsButtons: StyledComponent<
             name={name}
             defaultChecked={period.id === state.selectedPeriod?.id}
             value={period.id}
-            size={isMobile ? 'small' : 'medium'}
-            disabled={!!state.loading}
+            icon={getFluentIcon('CalendarWeekNumbers')}
+            disabled={!!state.loading || state.selectedPeriod?.id === period.id}
           >
             {isMobile
               ? s.capitalize(period.month.slice(0, 3))

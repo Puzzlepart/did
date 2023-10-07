@@ -11,19 +11,21 @@ import {
   PopoverTrigger,
   ToolbarButton
 } from '@fluentui/react-components'
-import React, { FC } from 'react'
+import React from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../../context'
 import { SET_DATE_RANGE } from '../../reducer/actions'
 import { TimesheetDateRange } from '../../types'
+import styles from './DateRangePicker.module.scss'
 import { useDateRangePicker } from './useDateRangePicker'
 
 /**
  * @category Timesheet
  */
-export const DateRangePicker: FC = () => {
+export const DateRangePicker: StyledComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
   const { palette } = useTheme()
@@ -34,6 +36,7 @@ export const DateRangePicker: FC = () => {
       {triggerText && (
         <PopoverTrigger disableButtonEnhancement>
           <ToolbarButton
+          className={DateRangePicker.className}
             disabled={!!state.loading}
             appearance='subtle'
             icon={getFluentIcon(triggerIcon)}
@@ -74,3 +77,6 @@ export const DateRangePicker: FC = () => {
     </Popover>
   )
 }
+
+DateRangePicker.displayName = 'DateRangePicker'
+DateRangePicker.className = styles.dateRangePicker

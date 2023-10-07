@@ -10,7 +10,7 @@ import { useTimesheetContext } from '../context'
 import { NEXT_PERIOD, PREVIOUS_PERIOD } from '../reducer/actions'
 import styles from './ActionBar.module.scss'
 import { ConfirmButtons } from './ConfirmButtons'
-import { DateRangeButtons } from './DateRangeButtons'
+import { DateRangeTypeButtons } from './DateRangeTypeButtons'
 import { DateRangePicker } from './DateRangePicker'
 import { ForecastButtons } from './ForecastButtons'
 import { NavigatePeriodsButtons } from './NavigatePeriodsButtons'
@@ -45,7 +45,7 @@ export const ActionBar: StyledComponent = () => {
             disabled={!!state.loading}
           />
           <DateRangePicker />
-          <DateRangeButtons name='dateRange' />
+          <DateRangeTypeButtons name='dateRangeType' />
           <NavigatePeriodsButtons name='period' />
         </ToolbarGroup>
         <ToolbarGroup>
