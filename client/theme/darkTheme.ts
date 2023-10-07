@@ -1,7 +1,7 @@
 import { webDarkTheme } from '@fluentui/react-components'
 import { PartialTheme } from '@fluentui/react/lib/Theme'
-import { ContextUser } from 'AppContext'
 import fonts from './fonts'
+import { UserTheme } from './types'
 
 const legacyDarkTheme: PartialTheme = {
   components: {
@@ -100,7 +100,8 @@ const legacyDarkTheme: PartialTheme = {
 
 const fluentDarkTheme = webDarkTheme
 
-export const darkTheme: ContextUser['theme'] = {
+export const darkTheme: UserTheme = {
+  name: 'dark',
   legacyTheme: legacyDarkTheme,
   fluentTheme: fluentDarkTheme
 }
