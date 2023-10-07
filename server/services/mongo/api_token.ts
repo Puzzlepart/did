@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken'
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
@@ -20,7 +20,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(
       context,
       'api_tokens',

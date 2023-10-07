@@ -6,7 +6,7 @@ import { Service } from 'typedi'
 import { PermissionScope } from '../../../../shared/config/security'
 import { SubscriptionService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
+import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import { Subscription, SubscriptionSettingsInput } from './types'
 
@@ -37,7 +37,7 @@ export class SubscriptionResolver {
     description: 'Get current subscription',
     nullable: true
   })
-  subscription(@Ctx() context: Context): Promise<Subscription> {
+  subscription(@Ctx() context: RequestContext): Promise<Subscription> {
     return this._subscription.getById(context.subscription.id)
   }
 

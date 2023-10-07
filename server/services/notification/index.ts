@@ -7,7 +7,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ConfirmedPeriodsService, ForecastedPeriodsService } from '..'
 import { DateObject } from '../../../shared/utils/date'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
@@ -28,7 +28,7 @@ export class NotificationService {
    * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') private readonly context: Context,
+    @Inject('CONTEXT') private readonly context: RequestContext,
     private readonly _timesheetSvc: TimesheetService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces

@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import { RoleService } from '.'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
@@ -22,7 +22,7 @@ export class UserService extends MongoDocumentService<User> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(context, 'users')
     this._role = new RoleService(context)
   }

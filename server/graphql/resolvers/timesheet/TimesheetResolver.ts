@@ -3,7 +3,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
+import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import {
   TimesheetOptions,
@@ -45,7 +45,7 @@ export class TimesheetResolver {
     description: 'Get timesheet for startDate - endDate'
   })
   async timesheet(
-    @Ctx() context: Context,
+    @Ctx() context: RequestContext,
     @Arg('query') query: TimesheetQuery,
     @Arg('options') options: TimesheetOptions
   ) {
@@ -70,7 +70,7 @@ export class TimesheetResolver {
     description:
       'Get vacation summary. Total vacation days, used and remaining.'
   })
-  async vacation(@Ctx() context: Context) {
+  async vacation(@Ctx() context: RequestContext) {
     try {
       return await this._timesheet.getVacation(
         context.subscription.settings.vacation

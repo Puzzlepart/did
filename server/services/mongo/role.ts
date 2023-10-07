@@ -1,7 +1,7 @@
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
@@ -18,7 +18,7 @@ export class RoleService extends MongoDocumentService<Role> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(context, 'roles')
   }
 

@@ -6,7 +6,7 @@ import {
 } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { ReportLink } from '../../graphql/resolvers/reportLink'
 import { MongoDocumentService } from './@document'
 
@@ -23,7 +23,7 @@ export class ReportLinkService extends MongoDocumentService<ReportLink> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') public readonly context: Context) {
+  constructor(@Inject('CONTEXT') public readonly context: RequestContext) {
     super(context, 'report_links')
   }
 

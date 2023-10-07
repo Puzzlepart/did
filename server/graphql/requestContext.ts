@@ -1,3 +1,6 @@
+/**
+ * [GraphQL](https://graphql.org/) context
+ */
 import createDebug from 'debug'
 import get from 'get-value'
 import { verify } from 'jsonwebtoken'
@@ -8,17 +11,15 @@ import { DateObject } from '../../shared/utils/date'
 import { environment, tryParseJson } from '../utils'
 import { Subscription } from './resolvers/types'
 import { GraphQLError } from 'graphql'
-const debug = createDebug('graphql/context')
+import colors from 'colors/safe'
+const debug = createDebug('graphql/requestContext')
 
-/**
- * [GraphQL](https://graphql.org/) context
- */
 /**
  * The context object provides access to various resources and information
  * for the current request, such as the user ID, user object, user configuration,
  * provider, subscription, container instance, permissions, and MongoDB client and database.
  */
-export class Context {
+export class RequestContext {
   /**
    * Request ID
    *
@@ -74,6 +75,12 @@ export class Context {
    */
   public db?: MongoDatabase
 
+
+  private constructor() {
+    this.requestId = RequestContext.generateUniqueRequestId()
+    this.container = Container.of(this.requestId)
+  }
+
   /**
    * Create GraphQL context
    *
@@ -92,12 +99,11 @@ export class Context {
   public static create = async (
     request: Express.Request,
     mcl: MongoClient
-  ): Promise<Context> => {
+  ): Promise<RequestContext> => {
     try {
       const database = mcl.db(environment('MONGO_DB_DB_NAME'))
-      const context: Context = {}
-      context.requestId = generateUniqueRequestId()
-      context.container = Container.of(context.requestId)
+      const context = new RequestContext()
+      debug(`Creating context for request ${colors.magenta(context.requestId)}`)
       context.mcl = mcl
       context.subscription = get(request, 'user.subscription', { default: {} })
       const apiKey = get(request, 'api_key')
@@ -121,19 +127,19 @@ export class Context {
       context.db = context.mcl.db(context.subscription.db)
       context.container.set({ id: 'CONTEXT', transient: true, value: context })
       context.container.set({ id: 'REQUEST', transient: true, value: request })
-      debug(`Creating context for request ${context.requestId}`)
+      debug(`Context created for request ${colors.magenta(context.requestId)}`)
       return context
     } catch (error) {
       throw error
     }
   }
-}
 
-/**
- * Generate unique ID for the request
- */
-function generateUniqueRequestId() {
-  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+  /**
+   * Generate unique ID for the request
+   */
+  private static generateUniqueRequestId() {
+    return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+  }
 }
 
 /**

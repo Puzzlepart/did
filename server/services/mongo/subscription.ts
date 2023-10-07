@@ -1,6 +1,6 @@
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import {
   Subscription,
   SubscriptionSettings
@@ -22,7 +22,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(
       context,
       'subscriptions',

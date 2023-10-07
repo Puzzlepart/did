@@ -11,7 +11,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import Container, { ContainerInstance } from 'typedi'
 import _ from 'underscore'
-import { Context } from './context'
+import { RequestContext } from './requestContext'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
 import { environment } from '../utils'
@@ -39,7 +39,7 @@ export const setupGraphQL = async (
 ): Promise<void> => {
   try {
     const schema = await generateGraphQLSchema()
-    const server = new ApolloServer<Context>({
+    const server = new ApolloServer<RequestContext>({
       logger: {
         debug: () => null,
         info: () => null,
@@ -62,7 +62,7 @@ export const setupGraphQL = async (
         }),
         {
           requestDidStart: () => ({
-            willSendResponse(requestContext: GraphQLRequestContext<Context>) {
+            willSendResponse(requestContext: GraphQLRequestContext<RequestContext>) {
               debug(
                 `Resetting container for request ${colors.magenta(
                   requestContext.contextValue.requestId
@@ -85,7 +85,7 @@ export const setupGraphQL = async (
       cors<cors.CorsRequest>(),
       json(),
       expressMiddleware(server, {
-        context: ({ req }) => Context.create(req, mcl)
+        context: ({ req }) => RequestContext.create(req, mcl)
       })
     )
   } catch (error) {

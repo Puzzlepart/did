@@ -13,7 +13,7 @@ import {
 } from '../../../services'
 import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
+import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import {
   ActiveDirectoryUser,
@@ -73,7 +73,7 @@ export class UserResolver {
     nullable: true,
     description: 'Get the currently logged in user'
   })
-  async currentUser(@Ctx() context: Context): Promise<User> {
+  async currentUser(@Ctx() context: RequestContext): Promise<User> {
     const user = await this._userSvc.getById(context.userId)
     if (!user) return null
     return {
