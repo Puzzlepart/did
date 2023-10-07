@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Context | did-server - v0.13.0</title><meta name="description" content="Documentation for did-server"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>RequestContext | did-server - v0.13.0</title><meta name="description" content="Documentation for did-server"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -14,8 +14,8 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">did-server</a></li>
 <li><a href="../modules/GraphQL.html">GraphQL</a></li>
-<li><a href="GraphQL.Context.html">Context</a></li></ul>
-<h1>Class Context</h1></div>
+<li><a href="GraphQL.RequestContext.html">RequestContext</a></li></ul>
+<h1>Class RequestContext</h1></div>
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>The context object provides access to various resources and information
 for the current request, such as the user ID, user object, user configuration,
@@ -25,9 +25,9 @@ provider, subscription, container instance, permissions, and MongoDB client and 
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><span class="target">Context</span></li></ul></section><aside class="tsd-sources">
+<li><span class="target">RequestContext</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L21">server/graphql/context.ts:21</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L22">server/graphql/requestContext.ts:22</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -35,29 +35,36 @@ provider, subscription, container instance, permissions, and MongoDB client and 
 <div class="tsd-accordion-details">
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Constructors</h3>
-<div class="tsd-index-list"><a href="GraphQL.Context.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a>
+<div class="tsd-index-list"><a href="GraphQL.RequestContext.html#constructor" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="GraphQL.Context.html#container" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>container?</span></a>
-<a href="GraphQL.Context.html#db" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>db?</span></a>
-<a href="GraphQL.Context.html#mcl" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>mcl?</span></a>
-<a href="GraphQL.Context.html#permissions" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>permissions?</span></a>
-<a href="GraphQL.Context.html#provider" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>provider?</span></a>
-<a href="GraphQL.Context.html#requestId" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>request<wbr/>Id?</span></a>
-<a href="GraphQL.Context.html#subscription" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>subscription?</span></a>
-<a href="GraphQL.Context.html#user" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user?</span></a>
-<a href="GraphQL.Context.html#userConfiguration" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Configuration?</span></a>
-<a href="GraphQL.Context.html#userId" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Id?</span></a>
+<div class="tsd-index-list"><a href="GraphQL.RequestContext.html#container" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>container?</span></a>
+<a href="GraphQL.RequestContext.html#db" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>db?</span></a>
+<a href="GraphQL.RequestContext.html#mcl" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>mcl?</span></a>
+<a href="GraphQL.RequestContext.html#permissions" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>permissions?</span></a>
+<a href="GraphQL.RequestContext.html#provider" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>provider?</span></a>
+<a href="GraphQL.RequestContext.html#requestId" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>request<wbr/>Id?</span></a>
+<a href="GraphQL.RequestContext.html#subscription" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>subscription?</span></a>
+<a href="GraphQL.RequestContext.html#user" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user?</span></a>
+<a href="GraphQL.RequestContext.html#userConfiguration" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Configuration?</span></a>
+<a href="GraphQL.RequestContext.html#userId" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Id?</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Methods</h3>
+<div class="tsd-index-list"><a href="GraphQL.RequestContext.html#create" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>create</span></a>
+<a href="GraphQL.RequestContext.html#generateUniqueRequestId" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>generate<wbr/>Unique<wbr/>Request<wbr/>Id</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Constructors</h2>
-<section class="tsd-panel tsd-member"><a id="constructor" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_Context"><span class="tsd-kind-constructor-signature">new <wbr/>Context</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="GraphQL.Context.html" class="tsd-signature-type tsd-kind-class">Context</a><a href="#constructor.new_Context" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<section class="tsd-panel tsd-member tsd-is-private"><a id="constructor" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_RequestContext"><span class="tsd-kind-constructor-signature">new <wbr/>Request<wbr/>Context</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="GraphQL.RequestContext.html" class="tsd-signature-type tsd-kind-class">RequestContext</a><a href="#constructor.new_RequestContext" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <a href="GraphQL.Context.html" class="tsd-signature-type tsd-kind-class">Context</a></h4></li></ul></section></section>
+<h4 class="tsd-returns-title">Returns <a href="GraphQL.RequestContext.html" class="tsd-signature-type tsd-kind-class">RequestContext</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L78">server/graphql/requestContext.ts:78</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="container" class="tsd-anchor"></a>
@@ -67,7 +74,7 @@ provider, subscription, container instance, permissions, and MongoDB client and 
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L59">server/graphql/context.ts:59</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L60">server/graphql/requestContext.ts:60</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="db" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>db</span><a href="#db" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">db</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">MongoDatabase</span></div>
@@ -75,7 +82,7 @@ provider, subscription, container instance, permissions, and MongoDB client and 
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L75">server/graphql/context.ts:75</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L76">server/graphql/requestContext.ts:76</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="mcl" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>mcl</span><a href="#mcl" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">mcl</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">MongoClient</span></div>
@@ -83,7 +90,7 @@ provider, subscription, container instance, permissions, and MongoDB client and 
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L70">server/graphql/context.ts:70</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L71">server/graphql/requestContext.ts:71</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="permissions" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>permissions</span><a href="#permissions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">permissions</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
@@ -92,7 +99,7 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L65">server/graphql/context.ts:65</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L66">server/graphql/requestContext.ts:66</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="provider" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>provider</span><a href="#provider" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">provider</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;google&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;azuread-openidconnect&quot;</span></div>
@@ -101,7 +108,7 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L49">server/graphql/context.ts:49</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L50">server/graphql/requestContext.ts:50</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="requestId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>request<wbr/>Id</span><a href="#requestId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">request<wbr/>Id</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -110,7 +117,7 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L27">server/graphql/context.ts:27</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L28">server/graphql/requestContext.ts:28</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="subscription" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>subscription</span><a href="#subscription" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">subscription</span><span class="tsd-signature-symbol">?:</span> <a href="GraphQL.Subscription.html" class="tsd-signature-type tsd-kind-class">Subscription</a></div>
@@ -118,7 +125,7 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L54">server/graphql/context.ts:54</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L55">server/graphql/requestContext.ts:55</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="user" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>user</span><a href="#user" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">user</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
@@ -126,7 +133,7 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L37">server/graphql/context.ts:37</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L38">server/graphql/requestContext.ts:38</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="userConfiguration" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>user<wbr/>Configuration</span><a href="#userConfiguration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">user<wbr/>Configuration</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
@@ -134,7 +141,7 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L42">server/graphql/context.ts:42</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L43">server/graphql/requestContext.ts:43</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="userId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>user<wbr/>Id</span><a href="#userId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">user<wbr/>Id</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -142,7 +149,53 @@ the API key used by external calls</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L32">server/graphql/context.ts:32</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L33">server/graphql/requestContext.ts:33</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member"><a id="create" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>create</span><a href="#create" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="create.create-1"><span class="tsd-kind-call-signature">create</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">request</span>, <span class="tsd-kind-parameter">mcl</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="GraphQL.RequestContext.html" class="tsd-signature-type tsd-kind-class">RequestContext</a><span class="tsd-signature-symbol">&gt;</span><a href="#create.create-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Create GraphQL context</p>
+<ul>
+<li>Sets the default <code>mongodb</code> instance on the context</li>
+<li>Sets the user subscription on the context</li>
+<li>Checks token auth using <code>handleTokenAuthentication</code></li>
+<li>Generates a random request ID using <code>Math random</code></li>
+<li>Sets <code>CONTEXT</code> and <code>REQUEST</code> on the container to enable
+dependency injection in the resolvers.</li>
+</ul>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">request</span>: <span class="tsd-signature-type ">Request</span></h5>
+<div class="tsd-comment tsd-typography"><p>Express request</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">mcl</span>: <span class="tsd-signature-type ">MongoClient</span></h5>
+<div class="tsd-comment tsd-typography"><p>Mongo client</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="GraphQL.RequestContext.html" class="tsd-signature-type tsd-kind-class">RequestContext</a><span class="tsd-signature-symbol">&gt;</span></h4><p>GraphQL context object</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L98">server/graphql/requestContext.ts:98</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-private"><a id="generateUniqueRequestId" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>generate<wbr/>Unique<wbr/>Request<wbr/>Id</span><a href="#generateUniqueRequestId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="generateUniqueRequestId.generateUniqueRequestId-1"><span class="tsd-kind-call-signature">generate<wbr/>Unique<wbr/>Request<wbr/>Id</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#generateUniqueRequestId.generateUniqueRequestId-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Generate unique ID for the request</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/requestContext.ts#L139">server/graphql/requestContext.ts:139</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -161,7 +214,7 @@ the API key used by external calls</p>
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
-<li><a href="#constructor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
+<li><a href="#constructor" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
 <li><a href="#container" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>container</span></a></li>
 <li><a href="#db" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>db</span></a></li>
 <li><a href="#mcl" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>mcl</span></a></li>
@@ -171,7 +224,9 @@ the API key used by external calls</p>
 <li><a href="#subscription" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>subscription</span></a></li>
 <li><a href="#user" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user</span></a></li>
 <li><a href="#userConfiguration" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Configuration</span></a></li>
-<li><a href="#userId" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Id</span></a></li></ul></div></details></div>
+<li><a href="#userId" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>user<wbr/>Id</span></a></li>
+<li><a href="#create" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>create</span></a></li>
+<li><a href="#generateUniqueRequestId" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>generate<wbr/>Unique<wbr/>Request<wbr/>Id</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>did-server - v0.13.0</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">

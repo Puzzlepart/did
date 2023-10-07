@@ -18,10 +18,10 @@
 <h1>Function setupGraphQL</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="setupGraphQL"><span class="tsd-kind-call-signature">setup<wbr/>GraphQL</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">app</span>, <span class="tsd-kind-parameter">mcl</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#setupGraphQL" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="setupGraphQL"><span class="tsd-kind-call-signature">setup<wbr/>GraphQL</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">app</span>, <span class="tsd-kind-parameter">mcl</span>, <span class="tsd-kind-parameter">path</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#setupGraphQL" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set up <a href="https://graphql.org/">GraphQL</a> for the <a href="https://www.npmjs.com/package/express">express</a>
-application</p>
+application.</p>
 <ul>
 <li>Sets up reporting to <a href="https://studio.apollographql.com/org/puzzlepart/graphs">Apollo Studio</a></li>
 <li>Sets up plugin to reset the container for each request</li>
@@ -29,7 +29,6 @@ application</p>
 <a id="md:reporting-needs-the-following-environment-keys" class="tsd-anchor"></a><h4><a href="#md:reporting-needs-the-following-environment-keys">Reporting needs the following environment keys:</a></h4><ul>
 <li><code>APOLLO_KEY</code></li>
 <li><code>APOLLO_GRAPH_VARIANT</code></li>
-<li><code>APOLLO_SCHEMA_REPORTING</code></li>
 </ul>
 </div>
 <div class="tsd-parameters">
@@ -44,11 +43,16 @@ application</p>
 <h5><span class="tsd-kind-parameter">mcl</span>: <span class="tsd-signature-type ">MongoClient</span></h5>
 <div class="tsd-comment tsd-typography"><p>Mongo client</p>
 </div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;/graphql&#39;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Path to GraphQL endpoint, defaults to <code>/graphql</code></p>
+</div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/setupGraphQL.ts#L39">server/graphql/setupGraphQL.ts:39</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/server/graphql/setupGraphQL.ts#L41">server/graphql/setupGraphQL.ts:41</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
