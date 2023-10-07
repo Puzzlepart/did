@@ -1,12 +1,4 @@
-import {
-  ApolloServerPluginSchemaReporting,
-  ApolloServerPluginUsageReporting
-} from 'apollo-server-core'
-import { ApolloServer } from 'apollo-server-express'
-import {
-  ApolloServerPlugin,
-  GraphQLRequestContext
-} from 'apollo-server-plugin-base'
+import { ApolloServer, ApolloServerPlugin, GraphQLRequestContext } from '@apollo/server'
 import createDebug from 'debug'
 import express from 'express'
 import { MongoClient } from 'mongodb'
@@ -51,9 +43,7 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
-      playground: false,
       formatError: (error) => _.pick(error, 'message'),
-      context: ({ req }) => createContext(req, mcl),
       plugins: [
         ApolloServerPluginUsageReporting({
           rewriteError: (error) => error,
@@ -68,7 +58,7 @@ export const setupGraphQL = async (
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
               debug(
                 `Resetting container for request ${colors.magenta(
-                  requestContext.context.requestId
+                  requestContext.contextValue.requestId
                 )}`
               )
               // Remember to dispose the scoped container to prevent memory leaks
@@ -82,7 +72,7 @@ export const setupGraphQL = async (
         }
       ] as ApolloServerPlugin[]
     })
-    server.applyMiddleware({ app, path: '/graphql' })
+    server
   } catch (error) {
     debug(error)
   }
