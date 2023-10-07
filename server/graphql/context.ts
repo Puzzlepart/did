@@ -1,13 +1,13 @@
-import { AuthenticationError } from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
 import { verify } from 'jsonwebtoken'
-import { Db as MongoDatabase, MongoClient } from 'mongodb'
+import { MongoClient, Db as MongoDatabase } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
 import { environment, tryParseJson } from '../utils'
 import { Subscription } from './resolvers/types'
+import { GraphQLError } from 'graphql'
 const debug = createDebug('graphql/context')
 
 /**
@@ -155,7 +155,7 @@ const handleTokenAuthentication = async (
     environment('API_TOKEN_SECRET')
   ) as any
   const expired = new DateObject(expires).jsDate < new Date()
-  if (expired) throw new AuthenticationError('The specified token is expired.')
+  if (expired) throw new GraphQLError('The specified token is expired.')
   const [token, subscription] = await Promise.all([
     database.collection('api_tokens').findOne({
       apiKey,
@@ -168,7 +168,7 @@ const handleTokenAuthentication = async (
     })
   ])
   if (!token || !subscription)
-    throw new AuthenticationError(
+    throw new GraphQLError(
       'Failed to authenticate with the specified token.'
     )
   return { subscription, permissions: token.permissions }
