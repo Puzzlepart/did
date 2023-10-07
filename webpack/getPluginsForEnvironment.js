@@ -1,15 +1,13 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const tryRequire = require('try-require')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
-const {
-  HTML_PLUGIN_TEMPLATE,
-  HTML_PLUGIN_FILE_NAME,
-  DEFINITIONS,
-  IS_DEVELOPMENT,
-  TSCONFIG_PATH
-} = require('./constants')
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
+const constants = require('./constants')
+const gitRevisionPlugin = new GitRevisionPlugin()
+const createExportedVarsPlugin = require('./exportedVarsPlugin')
 
 /**
  * Get plugins config for webpack based on
@@ -19,30 +17,30 @@ const {
  * @returns plugins config for webpack
  */
 function getPluginsForEnvironment() {
+  const exportedVarsPlugin = createExportedVarsPlugin(gitRevisionPlugin)
   let plugins = [
+    gitRevisionPlugin,
     new HtmlWebpackPlugin({
-      template: HTML_PLUGIN_TEMPLATE,
-      filename: HTML_PLUGIN_FILE_NAME,
+      template: constants.get('HTML_PLUGIN_TEMPLATE'),
+      filename: constants.get('HTML_PLUGIN_FILE_NAME'),
       inject: true,
     }),
-    new webpack.DefinePlugin(DEFINITIONS)
+    exportedVarsPlugin
   ]
-  if (!IS_DEVELOPMENT) return plugins
+  if (!constants.get('IS_DEVELOPMENT')) return plugins
   const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
   const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
   const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
-  const { CustomCompileHooks } = require('./compileHooks')
+  const CustomCompileHooks = require('./compileHooks')
   plugins.push(
     new ForkTsCheckerWebpackPlugin({
       typescript: {
-        configFile: TSCONFIG_PATH,
+        configFile: constants.get('TSCONFIG_PATH'),
         profile: process.env.FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE === '1'
       },
       logger: {
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        log: () => {},
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        error: () => {}
+        log: () => { },
+        error: () => { }
       }
     }),
     new CustomCompileHooks({

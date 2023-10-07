@@ -31,11 +31,13 @@ export const debug = createDebug('graphql/setupGraphQL')
  *
  * @param app - Express application
  * @param mcl - Mongo client
+ * @param path - Path to GraphQL endpoint, defaults to `/graphql`
  */
 
 export const setupGraphQL = async (
   app: express.Application,
-  mcl: MongoClient
+  mcl: MongoClient,
+  path ='/graphql'
 ): Promise<void> => {
   try {
     const schema = await generateGraphQLSchema()
@@ -81,13 +83,14 @@ export const setupGraphQL = async (
     })
     await server.start()
     app.use(
-      '/graphql',
+      path,
       cors<cors.CorsRequest>(),
       json(),
       expressMiddleware(server, {
-        context: ({ req }) => RequestContext.create(req, mcl)
+        context: ({ req }) => RequestContext.create(req, mcl),
       })
     )
+    debug(`ApolloServer server started and available at ${colors.magenta(path)}`)
   } catch (error) {
     debug(error)
   }

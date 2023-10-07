@@ -18,6 +18,9 @@
       "--no-warnings"
     ]
   },
+  "config": {
+    "BUNDLE_FILE_NAME": "'did.[name].[fullhash].js"
+  },
   "scripts": {
     "watch": "node .tasks/watch.js",
     "package": "node .tasks/package.js",
@@ -57,6 +60,7 @@
     "body-parser": "1.19.0",
     "chalk": "4.1.0",
     "class-validator": "0.14.0",
+    "colors": "1.4.0",
     "concurrently": "6.0.0",
     "connect-redis": "5.1.0",
     "copyfiles": "2.4.1",
@@ -66,7 +70,6 @@
     "css-modules-typescript-loader": "4.0.1",
     "dayjs": "1.10.4",
     "debug": "4.3.1",
-    "colors": "1.4.0",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-bearer-token": "2.4.0",
@@ -123,8 +126,8 @@
     "ts-loader": "9.4.4",
     "ts-node": "10.9.1",
     "type-graphql": "2.0.0-beta.3",
-    "typescript": "4.8.x",
     "typedi": "0.10.0",
+    "typescript": "4.8.x",
     "ua-parser-js": "0.7.26",
     "underscore": "1.12.1",
     "underscore.string": "3.3.5",
@@ -176,6 +179,7 @@
     "eslint-plugin-unicorn": "48.0.1",
     "eslint-plugin-unused-imports": "^3.0.0",
     "fork-ts-checker-webpack-plugin": "9.0.0",
+    "git-revision-webpack-plugin": "^5.0.0",
     "localtunnel": "2.0.1",
     "open": "8.0.4",
     "play-sound": "1.1.3",

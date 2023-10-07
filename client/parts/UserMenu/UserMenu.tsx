@@ -14,6 +14,7 @@ import { UserMenuTrigger } from './UserMenuTrigger'
 import { UserReports } from './UserReports'
 import { UserSettings } from './UserSettings'
 import { UserVacation } from './UserVacation'
+import { VersionInfo } from './VersionInfo'
 
 /**
  * @category Function Component
@@ -22,6 +23,13 @@ export const UserMenu: StyledComponent = () => {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const { palette } = useTheme()
+  // eslint-disable-next-line no-console
+  console.log({
+    VERSION,
+    COMMIT_HASH,
+    LAST_COMMIT_DATETIME,
+    BRANCH
+  })
   return (
     <Popover withArrow={true} closeOnScroll={true}>
       <UserMenuTrigger />
@@ -40,7 +48,7 @@ export const UserMenu: StyledComponent = () => {
           <UserFeedback renderAsMenuItem={true} />
         </MobileView>
         <MenuItem href='/auth/signout' text={t('common.signOutText')} />
-        <span className={styles.version}>{`v${process.env.VERSION}`}</span>
+        <VersionInfo />
       </PopoverSurface>
     </Popover>
   )
