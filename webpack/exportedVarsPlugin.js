@@ -3,7 +3,15 @@
 const webpack = require('webpack')
 const constants = require('./constants')
 
-module.exports = (gitRevisionPlugin) => {
+/**
+ * Makes environment variables available to the client side
+ * using the `DefinePlugin` from `webpack`.
+ * 
+ * @param {*} gitRevisionPlugin Git revision plugin
+ * 
+ * @returns {webpack.DefinePlugin} Webpack plugin
+ */
+function createExportedVarsPlugin(gitRevisionPlugin) {
     const repositoryUrl = constants.get('REPOSITORY_URL')
     const commithash = gitRevisionPlugin.commithash()
     const branch = gitRevisionPlugin.branch()
@@ -19,3 +27,5 @@ module.exports = (gitRevisionPlugin) => {
         BRANCH_URL: JSON.stringify(branchurl),
     })
 }
+
+module.exports = createExportedVarsPlugin
