@@ -2,7 +2,7 @@ import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { CustomerService } from '.'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import {
   Customer,
   LabelObject as Label,
@@ -33,7 +33,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    * @param _labelSvc - Injected `LabelService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') readonly context: Context,
+    @Inject('CONTEXT') readonly context: RequestContext,
     private readonly _customerSvc: CustomerService,
     private readonly _labelSvc: LabelService
   ) {

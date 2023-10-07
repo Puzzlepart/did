@@ -1,0 +1,27 @@
+.versionInfo {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    font-size: 10px;
+    padding: 8px;
+    cursor: default;
+
+    &.detailsAvailable {
+        cursor: help;
+    }
+}
+
+.versionInfoTooltip {
+    font-size: 10px;
+    padding: 8px;
+    color: rgb(96, 94, 92);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-sizing: border-box;
+
+    .infoLabel {
+        margin-right: 4px;
+    }
+}

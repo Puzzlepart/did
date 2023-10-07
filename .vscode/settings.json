@@ -4,7 +4,6 @@
     "client/**/*.js": true,
     "client/**/*.js.map": true,
     "client/**/*.d.ts": true,
-    "client/**/global.d.ts": false,
     "server/**/*.js": true,
     "server/**/*.js.map": true,
     "server/views/index.hbs": true,
@@ -26,5 +25,5 @@
   "i18n-ally.extract.autoDetect": false,
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
   "editor.folding": true,
-  "editor.foldingImportsByDefault": true
+  "editor.foldingImportsByDefault": false
 }

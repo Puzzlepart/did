@@ -33,7 +33,9 @@ export class ProjectResolver {
   constructor(
     private readonly _project: ProjectService,
     private readonly _msgraph: MSGraphService
-  ) {}
+  ) {
+    // Empty constructor
+  }
 
   /**
    * Get projects

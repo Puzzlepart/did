@@ -1,7 +1,7 @@
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { Customer } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 import { LabelService } from './label'
@@ -21,7 +21,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
    * @param _labelSvc - Injected `LabelService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') readonly context: Context,
+    @Inject('CONTEXT') readonly context: RequestContext,
     private readonly _labelSvc: LabelService
   ) {
     super(context, 'customers', CustomerService.name)

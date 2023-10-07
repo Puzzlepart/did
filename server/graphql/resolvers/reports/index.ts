@@ -4,7 +4,7 @@ import { Service } from 'typedi'
 import { PermissionScope } from '../../../../shared/config/security'
 import { ReportService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
+import { RequestContext } from '../../requestContext'
 import { TimesheetPeriodObject } from '../timesheet'
 import {
   ConfirmedPeriodsQuery,
@@ -92,7 +92,7 @@ export class ReportsResolver {
   })
   async userReport(
     @Arg('preset') preset?: ReportsQueryPreset,
-    @Ctx() context?: Context
+    @Ctx() context?: RequestContext
   ) {
     return await this._report.getUserReport(preset, context.userId)
   }

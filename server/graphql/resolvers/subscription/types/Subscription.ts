@@ -13,20 +13,32 @@ import { SubscriptionSettings } from './SubscriptionSettings'
 export class Subscription {
   _id?: string
 
+  /**
+   * Unique ID of the subscription.
+   */
   @Field(() => ID)
   id: string
 
+  /**
+   * Unique name of the subscription.
+   */
   @Field()
   name: string
 
+  /**
+   * The owner of the subscription, to enable login for the first time.
+   */
   @Field({ nullable: true })
   owner: string
 
+  /*
+   * The settings for the subscription.
+   */
   @Field(() => SubscriptionSettings, { nullable: true })
   settings?: SubscriptionSettings
 
   /**
-   * Database name
+   * Database name for the subscription.
    */
   db?: string
 }

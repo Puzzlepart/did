@@ -1,8 +1,8 @@
-import { GraphQLRequestContext } from 'apollo-server-plugin-base'
+import { GraphQLRequestContext } from '@apollo/server'
 import 'reflect-metadata'
 import UAParser from 'ua-parser-js'
 import _ from 'underscore'
-import { Context } from './context'
+import { RequestContext } from './requestContext'
 
 /**
  * Specify this function to provide Apollo Studio with client details
@@ -25,7 +25,7 @@ import { Context } from './context'
 
 export function generateClientInfo({
   request
-}: GraphQLRequestContext<Context>) {
+}: GraphQLRequestContext<RequestContext>) {
   const userAgent = request.http.headers.get('user-agent') || ''
   if (_.isEmpty(userAgent)) return null
   if (userAgent.indexOf('PostmanRuntime') === 0) {

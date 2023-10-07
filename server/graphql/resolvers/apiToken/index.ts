@@ -5,7 +5,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { ApiTokenService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
+import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import { ApiToken, ApiTokenInput } from './types'
 
@@ -36,7 +36,7 @@ export class ApiTokenResolver {
    */
   @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
-  apiTokens(@Ctx() context: Context): Promise<ApiToken[]> {
+  apiTokens(@Ctx() context: RequestContext): Promise<ApiToken[]> {
     return this._apiToken.getTokens({
       subscriptionId: context.subscription.id
     })
@@ -52,7 +52,7 @@ export class ApiTokenResolver {
   @Mutation(() => String, { description: 'Add API token' })
   addApiToken(
     @Arg('token') token: ApiTokenInput,
-    @Ctx() context: Context
+    @Ctx() context: RequestContext
   ): Promise<string> {
     return this._apiToken.addToken(token, context.subscription.id)
   }
@@ -67,7 +67,7 @@ export class ApiTokenResolver {
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(
     @Arg('name') name: string,
-    @Ctx() context: Context
+    @Ctx() context: RequestContext
   ): Promise<BaseResult> {
     await this._apiToken.deleteToken(name, context.subscription.id)
     return { success: true, error: null }

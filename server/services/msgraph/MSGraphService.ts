@@ -6,7 +6,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { DateObject } from '../../../shared/utils/DateObject'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { EventObject } from '../../graphql/resolvers/timesheet/types'
 import { environment } from '../../utils'
 import { CacheOptions, CacheScope, CacheService } from '../cache'
@@ -32,7 +32,7 @@ export class MSGraphService {
   constructor(
     private _msOAuthSvc: MSOAuthService,
     private _accessToken?: string,
-    @Inject('CONTEXT') readonly context?: Context
+    @Inject('CONTEXT') readonly context?: RequestContext
   ) {
     this._cache = new CacheService(context, MSGraphService.name)
   }

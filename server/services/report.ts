@@ -4,7 +4,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/DateObject'
-import { Context } from '../graphql/context'
+import { RequestContext } from '../graphql/requestContext'
 import {
   ConfirmedPeriodsQuery,
   Customer,
@@ -48,7 +48,7 @@ export class ReportService {
    * @param _confirmedPeriodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') readonly context: Context,
+    @Inject('CONTEXT') readonly context: RequestContext,
     private readonly _projectSvc: ProjectService,
     private readonly _userSvc: UserService,
     private readonly _timeEntrySvc: TimeEntryService,

@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../graphql/context'
+import { RequestContext } from '../graphql/requestContext'
 import { redisMiddlware } from '../middleware/redis'
 const colors = require('colors/safe')
 const log = require('debug')('server/services/cache')
@@ -53,7 +53,7 @@ export class CacheService {
    * @param context - Scope (defaults to CacheScope.SUBSCRIPTION)
    */
   constructor(
-    @Inject('CONTEXT') private readonly context: Context,
+    @Inject('CONTEXT') private readonly context: RequestContext,
     public prefix?: string,
     public scope: CacheScope = CacheScope.SUBSCRIPTION
   ) {}

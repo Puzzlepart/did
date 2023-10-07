@@ -2,7 +2,7 @@ import { GraphQLDateTime } from 'graphql-scalars'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import { authChecker } from './authChecker'
-import { Context } from './context'
+import { RequestContext } from './requestContext'
 import resolvers from './resolvers'
 
 /**
@@ -20,12 +20,11 @@ import resolvers from './resolvers'
 export const generateGraphQLSchema = async () => {
   const schema = await buildSchema({
     resolvers,
-    container: ({ context }: ResolverData<Context>) => context.container,
+    container: ({ context }: ResolverData<RequestContext>) => context.container,
     emitSchemaFile: false,
     validate: false,
     authChecker,
     authMode: 'error',
-    dateScalarMode: 'isoDate',
     scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
   })
   return schema

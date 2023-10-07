@@ -5,7 +5,7 @@ import _ from 'underscore'
 import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import {
   SubscriptionVacationSettings,
   TimesheetPeriodObject,
@@ -54,7 +54,7 @@ export class TimesheetService {
    * @param _holidaysService - Injected `HolidaysService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') private readonly context: Context,
+    @Inject('CONTEXT') private readonly context: RequestContext,
     private readonly _msgraphSvc: MSGraphService,
     private readonly _googleCalSvc: GoogleCalendarService,
     private readonly _projectSvc: ProjectService,

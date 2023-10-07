@@ -14,7 +14,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { App } from './app'
-import { client } from './graphql'
+import { client } from './graphql-client'
 import { fetchUserContext } from './graphql-queries/user'
 import './i18n'
 

@@ -1,3 +1,4 @@
+import colors from 'colors/safe'
 import createDebug from 'debug'
 import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
@@ -17,13 +18,15 @@ export interface MSAccessTokenOptions {
 /**
  * Microsoft OAuth service
  *
- * Used for renewing access token using `simple-oauth2`
+ * Used for renewing access token using `simple-oauth2`.
  *
  * @category Injectable Container Service
  */
 @Service({ global: false })
-class MSOAuthService {
-  constructor(@Inject('REQUEST') private readonly _request: any) {}
+export default class MSOAuthService {
+  constructor(@Inject('REQUEST') private readonly _request: any) {
+    // Empty constructor
+  }
 
   /**
    * Get client
@@ -36,7 +39,11 @@ class MSOAuthService {
       authorizePath: options.authorizePath || 'oauth2/v2.0/authorize',
       tokenPath: options.tokenPath || 'oauth2/v2.0/token'
     }
-    debug(`Creating AuthorizationCode client: ${JSON.stringify(auth)}`)
+    debug(
+      `Creating AuthorizationCode client with options: ${colors.magenta(
+        JSON.stringify(auth)
+      )}`
+    )
     return new AuthorizationCode({
       client: {
         id: options.clientId,
@@ -61,34 +68,26 @@ class MSOAuthService {
     try {
       if (accessToken.expired() || options.force) {
         debug(
-          `Token expired. Attempting to refresh... Options: ${JSON.stringify(
-            options
-          )}`
+          `Token expired at ${colors.magenta(
+            accessToken.token.expires_at
+          )}. Attempting to refresh.`
         )
         accessToken = await accessToken.refresh(
           _.pick(accessToken.token, 'scope')
         )
         debug(
-          `Successfully refreshed token expiring ${accessToken.token.expires_at}.`
+          `Successfully refreshed token expiring ${colors.magenta(
+            accessToken.token.expires_at
+          )}.`
         )
       } else {
-        debug(`Token expiring ${accessToken.token.expires_at}.`)
+        debug(`Token expiring ${colors.magenta(accessToken.token.expires_at)}.`)
       }
     } catch (error) {
-      debug(
-        `Failed to refresh token using options ${JSON.stringify(options)}: ${
-          error.message
-        }`
-      )
-      throw new Error(
-        `Failed to refresh token using options ${JSON.stringify(options)}: ${
-          error.message
-        }`
-      )
+      debug(`Failed to refresh token: ${colors.red(error.message)}`)
+      throw new Error(`Failed to refresh token: ${error.message}`)
     }
     this._request.user['tokenParams'] = accessToken.token
     return accessToken.token
   }
 }
-
-export default MSOAuthService

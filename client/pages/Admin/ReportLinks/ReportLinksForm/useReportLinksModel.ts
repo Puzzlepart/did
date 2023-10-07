@@ -1,7 +1,7 @@
 import { useMap } from 'hooks'
 import { useEffect } from 'react'
 import { convertToMap } from 'utils/convertToMap'
-import { ReportLink } from '../../../../../server/graphql'
+import { ReportLink } from 'types'
 import { IReportLinksFormProps } from './types'
 
 /**

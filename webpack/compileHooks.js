@@ -41,7 +41,7 @@ class CustomCompileHooks {
        * backend is persisted to a file on 
        * the root of the project **.localtunnel**
        */
-      async ({ compilation }, callback) => {
+      async ({ }, callback) => {
         if (!this.isFirstRun) {
           return callback()
         }
@@ -70,7 +70,7 @@ class CustomCompileHooks {
        * the `url` in the browser using `open`
        * if `options.open` is specified.
        */
-      ({ compilation }, callback) => {
+      ({ }, callback) => {
         if (!this.isFirstRun) {
           return callback()
         }
@@ -85,7 +85,7 @@ class CustomCompileHooks {
         log()
         log(
           'To create a production build, use ' +
-          `${chalk.cyan('npm run package:client')}`
+          `${chalk.cyan('NODE_ENV=prouction npm run package:client')}`
         )
         log()
         log()
@@ -103,6 +103,4 @@ class CustomCompileHooks {
   }
 }
 
-module.exports = {
-  CustomCompileHooks
-}
+module.exports = CustomCompileHooks

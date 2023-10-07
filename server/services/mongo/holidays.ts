@@ -1,5 +1,5 @@
 import { Inject, Service } from 'typedi'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
 
@@ -16,7 +16,7 @@ export class HolidaysService extends MongoDocumentService<any> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(
       context,
       'holidays',

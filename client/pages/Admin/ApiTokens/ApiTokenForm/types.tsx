@@ -1,5 +1,5 @@
 import { IPanelProps } from '@fluentui/react'
-import { ApiToken } from '../../../../../server/graphql'
+import { ApiToken } from 'types'
 
 export interface IApiTokenFormProps extends IPanelProps {
   /**
