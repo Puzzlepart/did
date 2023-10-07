@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.8.5",
+    "@apollo/server": "4.9.4",
     "@babel/compat-data": "7.13.12",
     "@babel/core": "7.13.13",
     "@babel/preset-env": "7.13.12",
@@ -60,6 +61,7 @@
     "connect-redis": "5.1.0",
     "copyfiles": "2.4.1",
     "core-js": "3.32.1",
+    "cors": "2.8.5",
     "css-loader": "5.2.0",
     "css-modules-typescript-loader": "4.0.1",
     "dayjs": "1.10.4",
