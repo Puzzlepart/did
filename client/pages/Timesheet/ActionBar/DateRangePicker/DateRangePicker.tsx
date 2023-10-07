@@ -36,7 +36,7 @@ export const DateRangePicker: StyledComponent = () => {
       {triggerText && (
         <PopoverTrigger disableButtonEnhancement>
           <ToolbarButton
-          className={DateRangePicker.className}
+            className={DateRangePicker.className}
             disabled={!!state.loading}
             appearance='subtle'
             icon={getFluentIcon(triggerIcon)}
