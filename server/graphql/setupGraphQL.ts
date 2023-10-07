@@ -14,11 +14,12 @@ import _ from 'underscore'
 import { Context, createContext } from './context'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
+import { environment } from '../utils'
 export const debug = createDebug('graphql/setupGraphQL')
 
 /**
  * Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
- * application
+ * application.
  *
  * * Sets up reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs)
  * * Sets up plugin to reset the container for each request
@@ -27,7 +28,6 @@ export const debug = createDebug('graphql/setupGraphQL')
  *
  * * `APOLLO_KEY`
  * * `APOLLO_GRAPH_VARIANT`
- * * `APOLLO_SCHEMA_REPORTING`
  *
  * @param app - Express application
  * @param mcl - Mongo client
@@ -52,7 +52,10 @@ export const setupGraphQL = async (
       plugins: [
         ApolloServerPluginUsageReporting({
           sendVariableValues: { all: true },
-          generateClientInfo
+          generateClientInfo,
+          sendReportsImmediately: environment<boolean>('APOLLO_SCHEMA_REPORTING_SEND_REPORTS_IMMEDIATELY', false, {
+            isSwitch: true
+          })
         }),
         ApolloServerPluginSchemaReporting({
           initialDelayMaxMs: 30 * 1000
@@ -70,7 +73,7 @@ export const setupGraphQL = async (
               const instancesIds = (
                 (Container as any).instances as ContainerInstance[]
               ).map((instance) => instance.id)
-              debug('Container instances left in memory: ', instancesIds)
+              debug(`${instancesIds.length} container instance(s) left in memory.`)
             }
           })
         }
@@ -86,8 +89,6 @@ export const setupGraphQL = async (
       })
     )
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
     debug(error)
   }
 }

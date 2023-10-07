@@ -45,6 +45,7 @@ export class ProjectResolver {
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string
   ): Promise<Project[]> {
+    throw new Error('Not implemented')
     const { projects } = await this._project.getProjectsData(
       customerKey && { customerKey }
     )

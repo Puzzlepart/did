@@ -44,7 +44,6 @@ Now you need to set the required environment variables from this table:
 | `REDIS_CACHE_KEY` | Secret key for the [Redis cache]([Redis](https://redis.io/)) | **Yes** |
 | `APOLLO_KEY` | Key for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | **Yes**  |
 | `APOLLO_GRAPH_VARIANT` | Graph variant for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | **Yes**  |
-| `APOLLO_SCHEMA_REPORTING` | Report schema to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | No       |
 | `MONGO_DB_CONNECTION_STRING` | Connection string for MongoDB                                | **Yes**  |
 | `MONGO_DB_DB_NAME` | Database name for MongoDB                                    | **Yes**  |
 | `API_TOKEN_SECRET` | Secret to generate API tokens                                | **Yes**  |
