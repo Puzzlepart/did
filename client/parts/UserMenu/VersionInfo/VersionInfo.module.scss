@@ -4,7 +4,11 @@
     right: 10px;
     font-size: 10px;
     padding: 8px;
-    color: rgb(96, 94, 92);
+    cursor: default;
+
+    &.detailsAvailable {
+        cursor: help;
+    }
 }
 
 .versionInfoTooltip {
