@@ -1,4 +1,8 @@
-import { ApolloServer, ApolloServerPlugin, GraphQLRequestContext } from '@apollo/server'
+import {
+  ApolloServer,
+  ApolloServerPlugin,
+  GraphQLRequestContext
+} from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginUsageReporting } from '@apollo/server/plugin/usageReporting'
 import { ApolloServerPluginSchemaReporting } from '@apollo/server/plugin/schemaReporting'
@@ -37,7 +41,7 @@ export const debug = createDebug('graphql/setupGraphQL')
 export const setupGraphQL = async (
   app: express.Application,
   mcl: MongoClient,
-  path ='/graphql'
+  path = '/graphql'
 ): Promise<void> => {
   try {
     const schema = await generateGraphQLSchema()
@@ -55,16 +59,22 @@ export const setupGraphQL = async (
         ApolloServerPluginUsageReporting({
           sendVariableValues: { all: true },
           generateClientInfo,
-          sendReportsImmediately: environment<boolean>('APOLLO_SCHEMA_REPORTING_SEND_REPORTS_IMMEDIATELY', false, {
-            isSwitch: true
-          })
+          sendReportsImmediately: environment<boolean>(
+            'APOLLO_SCHEMA_REPORTING_SEND_REPORTS_IMMEDIATELY',
+            false,
+            {
+              isSwitch: true
+            }
+          )
         }),
         ApolloServerPluginSchemaReporting({
           initialDelayMaxMs: 30 * 1000
         }),
         {
           requestDidStart: () => ({
-            willSendResponse(requestContext: GraphQLRequestContext<RequestContext>) {
+            willSendResponse(
+              requestContext: GraphQLRequestContext<RequestContext>
+            ) {
               debug(
                 `Resetting container for request ${colors.magenta(
                   requestContext.contextValue.requestId
@@ -75,7 +85,9 @@ export const setupGraphQL = async (
               const instancesIds = (
                 (Container as any).instances as ContainerInstance[]
               ).map((instance) => instance.id)
-              debug(`${instancesIds.length} container instance(s) left in memory.`)
+              debug(
+                `${instancesIds.length} container instance(s) left in memory.`
+              )
             }
           })
         }
@@ -87,10 +99,12 @@ export const setupGraphQL = async (
       cors<cors.CorsRequest>(),
       json(),
       expressMiddleware(server, {
-        context: ({ req }) => RequestContext.create(req, mcl),
+        context: ({ req }) => RequestContext.create(req, mcl)
       })
     )
-    debug(`ApolloServer server started and available at ${colors.magenta(path)}`)
+    debug(
+      `ApolloServer server started and available at ${colors.magenta(path)}`
+    )
   } catch (error) {
     debug(error)
   }

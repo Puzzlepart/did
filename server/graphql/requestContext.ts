@@ -75,7 +75,6 @@ export class RequestContext {
    */
   public db?: MongoDatabase
 
-
   private constructor() {
     this.requestId = RequestContext.generateUniqueRequestId()
     this.container = Container.of(this.requestId)
@@ -174,8 +173,6 @@ const handleTokenAuthentication = async (
     })
   ])
   if (!token || !subscription)
-    throw new GraphQLError(
-      'Failed to authenticate with the specified token.',
-    )
+    throw new GraphQLError('Failed to authenticate with the specified token.')
   return { subscription, permissions: token.permissions }
 }

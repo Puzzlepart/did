@@ -39,7 +39,11 @@ export default class MSOAuthService {
       authorizePath: options.authorizePath || 'oauth2/v2.0/authorize',
       tokenPath: options.tokenPath || 'oauth2/v2.0/token'
     }
-    debug(`Creating AuthorizationCode client with options: ${colors.magenta(JSON.stringify(auth))}`)
+    debug(
+      `Creating AuthorizationCode client with options: ${colors.magenta(
+        JSON.stringify(auth)
+      )}`
+    )
     return new AuthorizationCode({
       client: {
         id: options.clientId,
@@ -63,22 +67,25 @@ export default class MSOAuthService {
     )
     try {
       if (accessToken.expired() || options.force) {
-        debug(`Token expired at ${colors.magenta(accessToken.token.expires_at)}. Attempting to refresh.`)
+        debug(
+          `Token expired at ${colors.magenta(
+            accessToken.token.expires_at
+          )}. Attempting to refresh.`
+        )
         accessToken = await accessToken.refresh(
           _.pick(accessToken.token, 'scope')
         )
         debug(
-          `Successfully refreshed token expiring ${colors.magenta(accessToken.token.expires_at)}.`
+          `Successfully refreshed token expiring ${colors.magenta(
+            accessToken.token.expires_at
+          )}.`
         )
       } else {
         debug(`Token expiring ${colors.magenta(accessToken.token.expires_at)}.`)
       }
     } catch (error) {
-      debug(
-        `Failed to refresh token: ${colors.red(error.message)}`
-      )
-      throw new Error(`Failed to refresh token: ${error.message}`
-      )
+      debug(`Failed to refresh token: ${colors.red(error.message)}`)
+      throw new Error(`Failed to refresh token: ${error.message}`)
     }
     this._request.user['tokenParams'] = accessToken.token
     return accessToken.token
