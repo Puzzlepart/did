@@ -120,6 +120,7 @@
     "try-require": "1.2.1",
     "ts-loader": "9.4.4",
     "ts-node": "10.9.1",
+    "typescript": "4.8.x",
     "type-graphql": "1.1.1",
     "typedi": "0.10.0",
     "ua-parser-js": "0.7.26",
@@ -183,7 +184,6 @@
     "terser-webpack-plugin": "^5.3.6",
     "typedoc": "0.25.1",
     "typedoc-plugin-markdown": "3.6.0",
-    "typescript": "4.8.x",
     "webpack-build-notifier": "2.3.0",
     "webpack-bundle-analyzer": "4.8.0",
     "webpack-livereload-plugin": "3.0.2"
