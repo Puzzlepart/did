@@ -11,7 +11,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import Container, { ContainerInstance } from 'typedi'
 import _ from 'underscore'
-import { Context, createContext } from './context'
+import { Context } from './context'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
 import { environment } from '../utils'
@@ -85,7 +85,7 @@ export const setupGraphQL = async (
       cors<cors.CorsRequest>(),
       json(),
       expressMiddleware(server, {
-        context: ({ req }) => createContext(req, mcl)
+        context: ({ req }) => Context.create(req, mcl)
       })
     )
   } catch (error) {

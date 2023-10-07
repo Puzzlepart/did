@@ -171,5 +171,5 @@ const handleTokenAuthentication = async (
     throw new GraphQLError(
       'Failed to authenticate with the specified token.'
     )
-  return { subscription: subscription as unknown as Subscription, permissions: token.permissions }
+  return { subscription, permissions: token.permissions }
 }
