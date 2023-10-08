@@ -46,9 +46,11 @@ export interface IUserMessageProps extends Omit<AlertProps, 'action'> {
   action?: IUserMessageAction
 
   /**
-   * Whether to render a progress bar in the message
+   * Whether to render a progress bar in the message. The first element of the array
+   * is a boolean that indicates whether to render the progress bar. The second element
+   * is the text to show in the progress bar - defaults to the `text` prop.
    */
-  renderProgress?: boolean
+  renderProgress?: [boolean, string?]
 
   /**
    * The name of the Fluent UI icon to display for the message (optional).

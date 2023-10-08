@@ -50,9 +50,15 @@
       "customerChartTitle": "Kundar",
       "projectChartTitle": "Prosjekt",
       "noDataText": "Ingen data å visa for den valde perioden.",
-      "customerChartDescription": "Viser allokering per kunde for perioden",
-      "projectChartDescription": "Viser allokering per prosjekt for perioden",
-      "loadingLabel": "Laster data og genererer diagrammer..."
+      "customerChartDescription": "Viser allokering per kunde for perioden. Se hvordan dine **{0}** timer er fordelt på **{1}** kunder.",
+      "projectChartDescription": "Viser allokering per prosjekt for perioden. Se hvordan dine **{0}** timer er fordelt på **{1}** prosjekter.",
+      "loadingLabel": "Laster data og genererer diagrammer...",
+      "unconfirmedHoursDescription": "Timer som ikke er avsatt til et prosjekt.  Pass på at du merker hendelsene dine i Outlook for å spare deg for det manuelle arbeidet med å løse disse manuelt.",
+      "ignoredHoursDescription": "Ignorerte timer (enten manuelt eller av systemet).  Gjør det enklere for deg selv og bruk en **IGNORE** Outlook-kategori, eller bruk `[IGNORE]` i emnet eller brødteksten til hendelsen.",
+      "tooltipDetailsInfoText": "Det kan være mer informasjon tilgjengelig. Klikk for å vise alle detaljer.",
+      "customerChartLoadingText": "Laster inn kunderallokeringen din for perioden ...",
+      "projectChartLoadingText": "Laster inn prosjektallokering din for perioden ...",
+      "navigateToEntityInfoText": "Klikk igjen for å navigere til entiteten."
     },
     "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
     "eventDurationModifiedMessage": "Varigheita til hendinga har automatisk vorte endra frå {{originalDuration}} til {{modifiedDuration}}. Om du ikkje vil at dette skal skje i framtida, kan funksjonen skruast av i brukarinnstillingar.",
@@ -523,7 +529,8 @@
     "outlookCategoryRemove": "Gå til Outlook for å fjerne kategorien om du ikke trenger den lenger.",
     "tagFieldLabel": "Prosjektnøkkel",
     "outlookCategoryAdded": "Prosjektnøkkelen **{{tag}}** ble lagt til i Outlook som en kategori.",
-    "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen."
+    "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen.",
+    "ignoredHours": "Ignorerte timer"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

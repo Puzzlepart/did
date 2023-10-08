@@ -8,6 +8,7 @@ import { LabelObject, StyledComponent } from 'types'
 import _ from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectPopoverProps } from './types'
+import { Tag } from '@fluentui/react-tags-preview'
 
 export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
   project
@@ -21,14 +22,14 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
             <div className={styles.iconContainer}>
               <Icon
                 iconName={project.icon}
-                styles={{ root: { fontSize: 24 } }}
+                styles={{ root: { fontSize: 28 } }}
               />
             </div>
             <div className={styles.title}>
               <span>{project.name}</span>
               {project.customer && (
                 <div className={styles.subTitle}>
-                  <span>for {project.customer.name}</span>
+                  <Caption2Strong>for {project.customer.name}</Caption2Strong>
                 </div>
               )}
             </div>
@@ -44,14 +45,17 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
           {project.tag && (
             <div className={styles.footer}>
               <ProjectLink
-                appearance='secondary'
+                appearance='transparent'
+                size='small'
                 project={project}
                 icon='Home'
                 text={t('projects.navigateText')}
               />
             </div>
           )}
-          <Caption2Strong className={styles.tag}>{project.tag}</Caption2Strong>
+          <Tag className={styles.tag} size='extra-small'>
+            {project.tag}
+          </Tag>
         </div>
       </div>
     </FadeIn>

@@ -1,8 +1,9 @@
 import { DateRangeType } from '@fluentui/react'
+import { useParams } from 'react-router-dom'
+import { useViews } from '../Views'
 import { TimesheetDateRange } from '../types'
 import { ITimesheetParameters } from '../types/ITimesheetParameters'
 import { ITimesheetState } from '../types/ITimesheetState'
-import { Overview } from '../Views/Overview'
 
 /**
  * Convert string value to `DateRangeType`
@@ -24,21 +25,22 @@ function convertStringToDateRangeType(dateRangeTypeString: string) {
 }
 
 /**
- * Initializes state based on url parameters
- *
- * @param parameters - Timesheet reducer parameters
+ * Initializes state based on URL parameters
  *
  * @returns Initial state
  */
-export function initState(url: ITimesheetParameters): ITimesheetState {
+export function useInitialState(): ITimesheetState {
+  const { getViewById } = useViews()
+  const url = useParams<ITimesheetParameters>()
   const periods = []
   const dateRangeType = convertStringToDateRangeType(url.dateRange)
   const scope = new TimesheetDateRange(url.startDate, dateRangeType)
+  const selectedView = getViewById(url.view)
   return {
     periods,
     dateRange: scope,
     dateRangeType,
-    selectedView: Overview,
+    selectedView,
     navHistory: []
   }
 }

@@ -30,7 +30,7 @@ export function useStatusBar() {
         {
           id: 'loading',
           ...state.loading,
-          renderProgress: true
+          renderProgress: [true]
         }
       ] as IUserMessageProps[]
     }

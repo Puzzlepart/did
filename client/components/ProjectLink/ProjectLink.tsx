@@ -43,6 +43,7 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
           onClick={() => {
             window.open(to, props.target)
           }}
+          size={props.size}
         >
           <span>{props.text}</span>
         </Button>
@@ -57,5 +58,6 @@ ProjectLink.defaultProps = {
   appearance: 'link',
   target: '_self',
   linkTemplate: '/projects/{{tag}}',
-  showIcon: true
+  showIcon: true,
+  size: 'medium'
 }

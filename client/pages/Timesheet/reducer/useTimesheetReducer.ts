@@ -1,7 +1,6 @@
 import { DateRangeType } from '@fluentui/react'
 import { current } from '@reduxjs/toolkit'
 import { useReduxReducer as useReducer } from 'hooks'
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { TimesheetPeriodObject } from 'types'
@@ -26,7 +25,7 @@ import {
   TOGGLE_SHORTCUTS,
   UNSUBMITTING_PERIOD
 } from './actions'
-import { initState } from './initState'
+import { useInitialState } from './useInitialState'
 
 /**
  * Use Timesheet reducer.
@@ -34,7 +33,7 @@ import { initState } from './initState'
 export function useTimesheetReducer() {
   const { t } = useTranslation()
   const url = useParams<ITimesheetParameters>()
-  const initialState = useMemo(() => initState(url), [])
+  const initialState = useInitialState()
   return useReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload: query }) => {

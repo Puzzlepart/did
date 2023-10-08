@@ -85,10 +85,12 @@ export function useColumns(): IColumn[] {
       isResizable: true,
       onRender: (row: ILabelColumnProps) => {
         if (row.project) {
-          return (
+          return row.project.tag ? (
             <ProjectPopover project={row.project}>
               <LabelColumn {...row} />
             </ProjectPopover>
+          ) : (
+            <LabelColumn {...row} />
           )
         }
         return <LabelColumn {...row} />

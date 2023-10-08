@@ -12,9 +12,30 @@ import _ from 'underscore'
 import { BrowserStorage } from 'utils'
 
 export enum GetEventsOption {
+  /**
+   * Get all events, excluding manually and system ignored events.
+   */
   AllEvents,
+
+  /**
+   * Get matched events.
+   */
   MatchedEvents,
-  UnmatchedEvents
+
+  /**
+   * Get unmatched events, excluding manually and system ignored events.
+   */
+  UnmatchedEvents,
+
+  /**
+   * Get all events, including manually and system ignored events.
+   */
+  AllEventsIncludingIgnored,
+
+  /**
+   * Get only manually and system ignored events.
+   */
+  IgnoredEvents
 }
 
 /**
@@ -149,17 +170,23 @@ export class TimesheetPeriod {
   ): EventObject[] {
     return [...(this.events || [])]
       .filter((event) => {
-        if (this._uiIgnoredEvents.includes(event.id) || event.isSystemIgnored)
-          return false
+        const isIgnored =
+          this._uiIgnoredEvents.includes(event.id) || !!event.isSystemIgnored
         switch (option) {
-          case GetEventsOption.AllEvents: {
+          case GetEventsOption.AllEventsIncludingIgnored: {
             return true
           }
+          case GetEventsOption.IgnoredEvents: {
+            return isIgnored
+          }
+          case GetEventsOption.AllEvents: {
+            return !isIgnored
+          }
           case GetEventsOption.MatchedEvents: {
-            return !!event.project
+            return !!event.project && !isIgnored
           }
           case GetEventsOption.UnmatchedEvents: {
-            return !event.project
+            return !event.project && !isIgnored
           }
         }
       })

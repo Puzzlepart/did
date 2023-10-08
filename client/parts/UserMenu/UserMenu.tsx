@@ -23,13 +23,6 @@ export const UserMenu: StyledComponent = () => {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const { palette } = useTheme()
-  // eslint-disable-next-line no-console
-  console.log({
-    VERSION,
-    COMMIT_HASH,
-    LAST_COMMIT_DATETIME,
-    BRANCH
-  })
   return (
     <Popover withArrow={true} closeOnScroll={true}>
       <UserMenuTrigger />

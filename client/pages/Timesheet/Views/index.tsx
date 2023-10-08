@@ -34,7 +34,8 @@ export const useViews = () => {
    *
    * @returns The view object with the specified ID, or undefined if no such view exists.
    */
-  const getViewById = (id: string) => views.find((view) => view.id === id)
+  const getViewById = (id: string) =>
+    views.find((view) => view.id === id) ?? Overview
 
   return { views, getViewById }
 }

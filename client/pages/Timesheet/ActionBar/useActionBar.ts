@@ -29,8 +29,6 @@ export function useActionBar() {
    */
   const onCheckedValueChange: ToolbarProps['onCheckedValueChange'] =
     useCallback((_, data) => {
-      // eslint-disable-next-line no-console
-      console.log(data)
       switch (data?.name) {
         case 'dateRangeType': {
           const dateRangeType = Number.parseInt(data?.checkedItems[0], 10)
@@ -42,5 +40,6 @@ export function useActionBar() {
         }
       }
     }, [])
+
   return { checkedValues, onCheckedValueChange }
 }

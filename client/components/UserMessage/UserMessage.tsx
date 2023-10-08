@@ -32,8 +32,10 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
         {props.headerText && (
           <Title3 className={styles.header}>{props.headerText}</Title3>
         )}
-        {props.renderProgress && <Progress text={props.text} />}
-        {props.text && !props.renderProgress && (
+        {props.renderProgress[0] && (
+          <Progress text={props.renderProgress[1] ?? props.text} />
+        )}
+        {props.text && !props.renderProgress[0] && (
           <div className={styles.flex}>
             <ReactMarkdown
               className={styles.text}
@@ -51,5 +53,6 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
 
 UserMessage.className = styles.userMessage
 UserMessage.defaultProps = {
-  intent: 'info'
+  intent: 'info',
+  renderProgress: [false, null]
 }

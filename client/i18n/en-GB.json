@@ -50,9 +50,15 @@
       "customerChartTitle": "Customers",
       "projectChartTitle": "Projects",
       "noDataText": "No data to show for the selected period.",
-      "customerChartDescription": "Shows allocation per customer for the period",
-      "projectChartDescription": "Shows allocation per project for the period",
-      "loadingLabel": "Loading data and generating charts..."
+      "customerChartDescription": "Shows allocation per customer for the period. See how your **{0}** hours are distributed among **{1}** customers.",
+      "projectChartDescription": "Shows allocation per project for the period. See how your **{0}** hours are distributed across **{1}** projects",
+      "loadingLabel": "Loading data and generating charts...",
+      "ignoredHoursDescription": "Ignored hours (either manually or by the system). Make it easier for yoursel and use a **IGNORE** Outlook category, or put `[IGNORED]` in the subject or body of the event.",
+      "unconfirmedHoursDescription": "Hours not allocated to a project. Make sure you tag your events in Outlook to save you the manual work of resolving these manually.",
+      "tooltipDetailsInfoText": "There might be more information availale. Click to show full details.",
+      "projectChartLoadingText": "Loading your project allocation for the period...",
+      "customerChartLoadingText": "Loading your customer allocation for the period...",
+      "navigateToEntityInfoText": "Click again to navigate to the entity."
     },
     "matchEventPanelSearchPlaceholder": "Search projects...",
     "eventDurationModifiedMessage": "The event's duration has been automatically changed from {{originalDuration}} to {{modifiedDuration}}. If you do not want this to happen in the future, the function can be turned off in the user settings.",
@@ -523,7 +529,8 @@
     "outlookCategoryAdd": "Click to add the project tag as a category in Outlook.",
     "projectTagCopiedToClipboard": "The project tag **{{tag}}** was copied to the clipboard.",
     "outlookCategoryError": "There was an error creating the category in Outlook. If you just created it, it might take some moments before it shows up here.",
-    "tagFieldLabel": "Tag"
+    "tagFieldLabel": "Tag",
+    "ignoredHours": "Ignored hours"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

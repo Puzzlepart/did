@@ -15,6 +15,7 @@ export function useUserMessage(props: IUserMessageProps) {
     hidden: props.hidden,
     onClick: props.onClick,
     style: {
+      ...props.style,
       cursor: props.onClick ? 'pointer' : 'default'
     },
     className: [UserMessage.className, props.className]

@@ -1,6 +1,6 @@
 .projectTooltip {
   margin: 0;
-  padding: 15px;
+  padding: 8px 10px;
   width: 300px;
   position: relative;
 
@@ -9,10 +9,10 @@
       padding: 0 0 0 8px;
       display: flex;
       flex-direction: row;
+      gap: 10px;
 
       .iconContainer {
-        padding: 6px 12px 0 0;
-        align-self: flex-start;
+        align-self:  center;
       }
 
       .title {

@@ -50,9 +50,15 @@
       "customerChartTitle": "Kunder",
       "projectChartTitle": "Prosjekter",
       "noDataText": "Ingen data å vise for den valgte perioden.",
-      "customerChartDescription": "Viser allokering per kunde for perioden",
-      "projectChartDescription": "Viser allokering per prosjekt for perioden",
-      "loadingLabel": "Laster data og genererer diagrammer..."
+      "customerChartDescription": "Viser allokering per kunde for perioden. Se hvordan dine **{0}** timer er fordelt på **{1}** kunder.",
+      "projectChartDescription": "Viser allokering per prosjekt for perioden. Se hvordan dine **{0}** timer er fordelt på **{1}** prosjekter.",
+      "loadingLabel": "Laster data og genererer diagrammer...",
+      "unconfirmedHoursDescription": "Timer som ikke er avsatt til et prosjekt. \nPass på at du merker hendelsene dine i Outlook for å spare deg for det manuelle arbeidet med å løse disse manuelt.",
+      "ignoredHoursDescription": "Ignorerte timer (enten manuelt eller av systemet).  Gjør det enklere for deg selv og bruk en **IGNORE** Outlook-kategori, eller bruk `[IGNORE]` i emnet eller brødteksten til hendelsen.",
+      "tooltipDetailsInfoText": "Det kan være mer informasjon tilgjengelig. Klikk for å vise alle detaljer.",
+      "customerChartLoadingText": "Laster inn kundetildelingen for perioden ...",
+      "projectChartLoadingText": "Laster inn prosjektallokering din for perioden ...",
+      "navigateToEntityInfoText": "Klikk igjen for å navigere til entiteten."
     },
     "matchEventPanelSearchPlaceholder": "Søk i prosjekter...",
     "eventDurationModifiedMessage": "Hendelsens varighet har automatisk blitt endret fra {{originalDuration}} til {{modifiedDuration}}. Om du ikke vil at dette skal skje i fremtiden, kan funksjonen skrus av i brukerinnstillinger.",
@@ -523,7 +529,8 @@
     "outlookCategoryAdd": "Klikk for å legge til prosjektnøkkelen som en kategori i Outlook.",
     "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen.",
     "outlookCategoryError": "Det oppsto en feil ved opprettelse av kategorien i Outlook. Hvis du nettopp opprettet den, kan det ta noen øyeblikk før det vises her.",
-    "tagFieldLabel": "Prosjektnøkkel"
+    "tagFieldLabel": "Prosjektnøkkel",
+    "ignoredHours": "Ignorerte timer"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

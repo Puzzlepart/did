@@ -35,6 +35,7 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
       customer {
         key
         name
+        description
         icon
         inactive
       }
