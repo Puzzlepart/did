@@ -28,17 +28,14 @@ export const AllocationView: TimesheetViewComponent = () => {
 
   return (
     <div className={AllocationView.className} ref={container}>
-      {charts.map((c) => {
-        const entries = data[c.key]
-        return (
-          <PieChartContainer
-            key={c.key}
-            chart={c}
-            entries={entries}
-            container={container.current}
-          />
-        )
-      })}
+      {charts.map((c) => (
+        <PieChartContainer
+          key={c.key}
+          chart={c}
+          entries={data[c.key]}
+          container={container.current}
+        />
+      ))}
     </div>
   )
 }

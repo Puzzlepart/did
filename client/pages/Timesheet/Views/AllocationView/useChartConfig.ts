@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IChartConfig } from './types'
-import { Customer, Project } from 'types'
 
 /**
  * Hook for chart configuration
@@ -21,11 +20,8 @@ export function useChartConfig() {
         textKey: 'name',
         secondaryTextKey: 'customer.name',
         teritaryTextKey: 'description',
-        loadingText: t('timesheet.allocation.projectChartLoadingText'),
-        getUrl: (project) => {
-          return `/projects/${project.tag.split(' ').join('_')}`
-        }
-      } as IChartConfig<Project>,
+        loadingText: t('timesheet.allocation.projectChartLoadingText')
+      } as IChartConfig,
       {
         key: 'customer',
         title: t('timesheet.allocation.customerChartTitle'),
@@ -36,9 +32,8 @@ export function useChartConfig() {
         valuePostfix: t('common.hours'),
         textKey: 'name',
         teritaryTextKey: 'description',
-        loadingText: t('timesheet.allocation.customerChartLoadingText'),
-        getUrl: (item) => `/customers/${item.key}`
-      } as IChartConfig<Customer>
+        loadingText: t('timesheet.allocation.customerChartLoadingText')
+      } as IChartConfig
     ],
     []
   )

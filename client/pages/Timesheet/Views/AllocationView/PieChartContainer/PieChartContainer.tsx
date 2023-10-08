@@ -14,7 +14,7 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
   props
 ) => {
   const { state } = useTimesheetContext()
-  const { showFullTooltip, cells, navigationAvailable, onPieClick } =
+  const { showFullTooltip, cells } =
     usePieChartContainer(props)
 
   return (
@@ -40,7 +40,6 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
             <Tooltip
               content={
                 <ChartTooltip
-                  navigationAvailable={navigationAvailable}
                   showFullTooltip={showFullTooltip.value}
                 />
               }
@@ -54,7 +53,7 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
               outerRadius={150}
               fill='#8884d8'
               label
-              onClick={onPieClick}
+              onClick={showFullTooltip.toggle}
               onMouseMove={showFullTooltip.setFalse}
             >
               {cells}
@@ -68,18 +67,3 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
 
 PieChartContainer.displayName = 'PieChartContainer'
 PieChartContainer.className = styles.pieChartContainer
-PieChartContainer.defaultProps = {
-  pie: {
-    dataKey: 'value',
-    startAngle: 0,
-    endAngle: 360,
-    label: true,
-    outerRadius: 150,
-    fill: '#8884d8'
-  },
-  legend: {
-    layout: 'horizontal',
-    verticalAlign: 'top',
-    align: 'center'
-  }
-}

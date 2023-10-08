@@ -1,11 +1,9 @@
 import { Caption2Strong, mergeClasses } from '@fluentui/react-components'
-import { Alert } from '@fluentui/react-components/unstable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import { StyledComponent } from 'types'
 import s from 'underscore.string'
-import { getFluentIcon } from 'utils'
 import styles from './ChartTooltip.module.scss'
 import { IChartTooltipProps } from './types'
 import { useChartTooltip } from './useChartTooltip'
@@ -26,8 +24,7 @@ export const ChartTooltip: StyledComponent<IChartTooltipProps> = (props) => {
     secondaryText,
     teritaryText,
     value,
-    lineClamp,
-    url
+    lineClamp
   } = useChartTooltip(props)
   if (shouldRender) {
     return (
@@ -50,7 +47,7 @@ export const ChartTooltip: StyledComponent<IChartTooltipProps> = (props) => {
             <ReactMarkdown>{teritaryText}</ReactMarkdown>
           </div>
         )}
-        {lineClamp ? (
+        {lineClamp && (
           <div
             className={styles.footer}
             hidden={s.isBlank(secondaryText) && s.isBlank(teritaryText)}
@@ -58,17 +55,6 @@ export const ChartTooltip: StyledComponent<IChartTooltipProps> = (props) => {
             <Caption2Strong>
               {t('timesheet.allocation.tooltipDetailsInfoText')}
             </Caption2Strong>
-          </div>
-        ) : (
-          <div
-            className={styles.footer}
-            hidden={!props.navigationAvailable || s.isBlank(url)}
-          >
-            <Alert icon={getFluentIcon('WebAsset', { size: 16 })}>
-              <Caption2Strong>
-                {t('timesheet.allocation.navigateToEntityInfoText')}
-              </Caption2Strong>
-            </Alert>
           </div>
         )}
       </div>

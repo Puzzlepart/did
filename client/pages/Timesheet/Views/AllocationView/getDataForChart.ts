@@ -32,8 +32,7 @@ export function getDataForChart(
         id: data[chart.idKey],
         chart,
         data,
-        value,
-        url: chart.getUrl(data)
+        value
       })
     return _items
   }, [])

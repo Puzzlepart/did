@@ -1,4 +1,4 @@
-export interface IChartConfig<T = any> {
+export interface IChartConfig {
   /**
    * Unique key for the chart
    */
@@ -53,11 +53,6 @@ export interface IChartConfig<T = any> {
    * Text to display while loading
    */
   loadingText?: string
-
-  /**
-   * Get the navigation url for the item
-   */
-  getUrl(item: T): string
 }
 
 export type ChartDataItem = {
@@ -100,11 +95,6 @@ export type ChartDataItem = {
    * Fill color for the cell if it's shouldn't be random
    */
   fill?: string
-
-  /**
-   * Navigation url for the item
-   */
-  url?: string
 }
 
 export type ChartData<T = ChartDataItem> = { [key: string]: T[] }
