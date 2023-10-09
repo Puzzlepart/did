@@ -1,4 +1,3 @@
-
 import { PersonaProps } from '@fluentui/react-components'
 import { IListColumn } from 'components/List/types'
 import React from 'react'

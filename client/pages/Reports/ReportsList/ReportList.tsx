@@ -42,10 +42,13 @@ export const ReportsList: TabComponent = () => {
           headerElements: <SaveFilterForm />
         }}
       />
-      {(_.isEmpty(context.state.data.timeEntries) &&
+      {_.isEmpty(context.state.data.timeEntries) &&
         !context.state.loading &&
-        context.queryPreset) && (
-          <UserMessage text={t('reports.noEntriesText', context.queryPreset)} style={{ marginTop: -15 }} />
+        context.queryPreset && (
+          <UserMessage
+            text={t('reports.noEntriesText', context.queryPreset)}
+            style={{ marginTop: -15 }}
+          />
         )}
     </div>
   )

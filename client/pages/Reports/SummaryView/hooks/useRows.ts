@@ -23,7 +23,9 @@ export function useRows() {
   const context = useReportsContext()
   return [
     ...context.state.data.users.map((user) => {
-      const periods = context.state.data.periods.filter((period) => period.userId === user.id)
+      const periods = context.state.data.periods.filter(
+        (period) => period.userId === user.id
+      )
       return {
         user,
         ...generateColumnData(periods)
