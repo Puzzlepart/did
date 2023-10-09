@@ -1,6 +1,7 @@
-import { Drawer, DrawerBody } from '@fluentui/react-components/unstable'
-import { Footer } from 'components/BasePanel/Footer'
+
+import { DynamicButton } from 'components/DynamicButton'
 import { JsonDebug } from 'components/JsonDebug'
+import { Panel } from 'components/Panel'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
@@ -12,8 +13,8 @@ import { useFormControl } from './useFormControl'
 /**
  * FormControl component that handles form submission and validation.
  *
- * It can render in a `<BasePanel />` or as a standalone component. If
- * providing `panelProps`, it will render in a panel. Otherwise, it will
+ * It can render in a `<Panel />` or as a standalone component. If
+ * providing prop `panel`, it will render in a panel. Otherwise, it will
  * render as a standalone component. When rendering in a panel, the default
  * type will be `PanelType.medium` - this can be overridden by providing
  * `panelProps.type`.
@@ -30,20 +31,16 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   )
   return (
     <FormControlContext.Provider value={context}>
-      {props.panelProps ? (
-        <Drawer
-          open={props.panelProps.isOpen}
-          type='overlay'
-          position='end'
-        >
-          <DrawerBody>
-            {content}
-          </DrawerBody>
-        </Drawer>
+      {props.panel ? (
+        <Panel {...props.panel} actions={[submitAction]}>
+          {content}
+        </Panel>
       ) : (
         <>
           {content}
-          <Footer actions={[submitAction]} />
+          <div className={styles.formControlFooter}>
+            <DynamicButton {...submitAction} />
+          </div>
         </>
       )}
       <Toast {...props.submitProps?.toast} />

@@ -1,6 +1,10 @@
-.formControl{
+.formControl {
   margin: 10px 0;
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.formControlFooter {
+  margin: 25px 0 0 0;
 }
