@@ -4,7 +4,7 @@
  *
  * @module Components
  */
-export * from './BasePanel'
+export * from './Panel'
 export * from './Breadcrumb'
 export * from './ColorPickerField'
 export * from './ConditionalWrapper'

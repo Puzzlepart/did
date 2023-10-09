@@ -1,12 +1,12 @@
 import { IContextualMenuItem } from '@fluentui/react'
 import { useMap } from 'hooks'
 import { useContext, useState } from 'react'
-import { ReportsContext } from '../context'
-import { ADD_SAVED_FILTER } from '../reducer/actions'
+import { ReportsContext } from '../../context'
+import { ADD_SAVED_FILTER } from '../../reducer/actions'
 import { INITIAL_MODEL } from './types'
 
 export function useSaveFilterForm() {
-  const { dispatch } = useContext(ReportsContext)
+  const context = useContext(ReportsContext)
   const { $, set, $set, value } = useMap<
     keyof IContextualMenuItem,
     IContextualMenuItem
@@ -24,10 +24,15 @@ export function useSaveFilterForm() {
       setInputVisible(true)
       return
     }
-    dispatch(ADD_SAVED_FILTER({ model: $ }))
+    context.dispatch(ADD_SAVED_FILTER({ model: $ }))
     $set(INITIAL_MODEL)
     setInputVisible(false)
   }
 
-  return { inputVisible, setInputVisible, value, set, onSave } as const
+  const disabled =
+    ((value('text')?.length < 2 || !value('iconProps')?.iconName) &&
+      inputVisible) ||
+    !context.state.filterState?.isFiltered
+
+  return { inputVisible, setInputVisible, value, set, onSave, disabled }
 }

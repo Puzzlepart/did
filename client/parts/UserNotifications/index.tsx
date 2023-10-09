@@ -49,7 +49,7 @@ export const UserNotifications: StyledComponent<IUserNotificationsProps> = ({
           <NotificationIndicator />
         </div>
       )}
-      <NotificationsPanel isOpen={isOpen} onDismiss={togglePanel} />
+      <NotificationsPanel open={isOpen} onDismiss={togglePanel} />
     </>
   )
 }

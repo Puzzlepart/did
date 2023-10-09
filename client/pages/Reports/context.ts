@@ -23,9 +23,9 @@ export interface IReportsContext {
   columns?: IListColumn[]
 
   /**
-   * Queries for the reports
+   * The currently selected query preset
    */
-  queries: IReportsQuery[]
+  queryPreset: IReportsQuery
 }
 
 /**
@@ -34,8 +34,16 @@ export interface IReportsContext {
 export const ReportsContext = createContext<IReportsContext>(null)
 
 /**
- * Returns the current value of the ReportsContext.
+ * Returns the current value of the `ReportsContext` or the `fallbackValue`
+ * if the context is not available.
  *
- * @returns The current value of the ReportsContext.
+ * @returns The current value of the `ReportsContext`, or the `fallbackValue`
+ * if the context is not available.
  */
-export const useReportsContext = () => useContext(ReportsContext)
+export const useReportsContext = (fallbackValue: IReportsContext = null) => {
+  const context = useContext(ReportsContext)
+  if (!context) {
+    return fallbackValue
+  }
+  return context
+}

@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import _ from 'underscore'
-import { useReportsContext } from '../context'
 import { ReportLinks } from '../ReportLinks'
 import { ReportsList } from '../ReportsList'
+import { useReportsContext } from '../context'
 
 /**
  * Report tab
@@ -11,9 +11,12 @@ import { ReportsList } from '../ReportsList'
  */
 export const ReportTab: FC = () => {
   const context = useReportsContext()
+  if (!context.queryPreset) {
+    return null
+  }
   return (
     <div>
-      {_.isEmpty(context.state.queryPreset?.reportLinks) ? (
+      {_.isEmpty(context.queryPreset.reportLinks) ? (
         <ReportsList />
       ) : (
         <ReportLinks />

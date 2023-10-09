@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { DateRangeType, IColumn, useTheme } from '@fluentui/react'
-import { ProjectPopover } from 'components'
+import { DateRangeType, useTheme } from '@fluentui/react'
+import { IListColumn, ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
@@ -13,14 +13,14 @@ import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 /**
  * Columns hook for `<SummaryView />`
  */
-export function useColumns(): IColumn[] {
+export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
   const theme = useTheme()
   const { state, dispatch } = useTimesheetContext()
-  const onRender = (row: any, _index: number, col: IColumn) => (
+  const onRender = (row: any, _index: number, col: IListColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  let columns: IColumn[] = []
+  let columns: IListColumn[] = []
   switch (state.dateRangeType) {
     case DateRangeType.Week: {
       {
@@ -57,7 +57,7 @@ export function useColumns(): IColumn[] {
     }
     case DateRangeType.Month: {
       {
-        columns = state.periods.map<IColumn>((period) => ({
+        columns = state.periods.map<IListColumn>((period) => ({
           key: period.id,
           fieldName: period.id,
           name: period.getName(t),
@@ -106,6 +106,6 @@ export function useColumns(): IColumn[] {
       isResizable: false,
       data: { style: { fontWeight: 500 } },
       onRender
-    }
+    } as IListColumn
   ]
 }

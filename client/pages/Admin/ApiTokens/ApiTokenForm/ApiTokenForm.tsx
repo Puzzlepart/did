@@ -1,4 +1,4 @@
-import { PanelType } from '@fluentui/react'
+import { DateObject } from 'DateUtils'
 import {
   BaseControlOptions,
   DropdownControl,
@@ -6,7 +6,6 @@ import {
   FormControl,
   InputControl
 } from 'components/FormControl'
-import { DateObject } from 'DateUtils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -25,10 +24,9 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
     <FormControl
       model={model}
       submitProps={submitProps}
-      panelProps={{
-        headerText: t('admin.apiTokens.addNew'),
-        isOpen: props.isOpen,
-        type: PanelType.smallFixedFar,
+      panel={{
+        title: t('admin.apiTokens.addNew'),
+        open: props.open,
         onDismiss: props.onDismiss
       }}
     >

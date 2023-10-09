@@ -81,11 +81,15 @@ export default (initialState: IListState) => {
         })
         .addCase(SET_FILTER_BY, (state, { payload }) => {
           state.filterBy = payload.column
-          state.isFilterPanelOpen = true
+          state.filterPanel = {
+            open: true
+          }
         })
         .addCase(TOGGLE_FILTER_PANEL, (state) => {
-          state.isFilterPanelOpen = !state.isFilterPanelOpen
-          if (!state.isFilterPanelOpen) {
+          state.filterPanel = {
+            open: !state.filterPanel?.open
+          }
+          if (!state.filterPanel?.open) {
             state.filterBy = null
           }
         })

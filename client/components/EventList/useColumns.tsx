@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { IColumn } from '@fluentui/react'
+import { IListColumn } from 'components/List/types'
 import get from 'get-value'
 import React, { useMemo } from 'react'
 import { isBrowser, isMobile } from 'react-device-detect'
@@ -44,7 +44,7 @@ function getSizing(
 const createTitleColumnDef = (
   props: IEventListProps,
   name: string
-): IColumn => {
+): IListColumn => {
   const titleColumnProps: Partial<ITitleColumnProps> = {
     ...(isBrowser && props.titleColumn?.browser),
     ...(isMobile && props.titleColumn?.mobile),
@@ -64,7 +64,10 @@ const createTitleColumnDef = (
  * @param props - Props
  * @param name - Name
  */
-const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
+const createTimeColumnDef = (
+  props: IEventListProps,
+  name: string
+): IListColumn =>
   createColumnDef<TimeEntry>(
     'time',
     name,
@@ -81,7 +84,7 @@ const createTimeColumnDef = (props: IEventListProps, name: string): IColumn =>
 const createDurationColumnDef = (
   props: IEventListProps,
   name: string
-): IColumn =>
+): IListColumn =>
   createColumnDef<TimeEntry>(
     'duration',
     name,

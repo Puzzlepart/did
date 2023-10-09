@@ -20,7 +20,7 @@ export function useReportLinks() {
   const query = useQuery($reportLinks, { fetchPolicy: 'cache-first' })
   const [deleteReportLink] = useMutation($deleteReportLink)
   const [form, setForm] = useState<IReportLinksFormProps>({
-    isOpen: false
+    open: false
   })
   const [selectedLink, onSelectionChanged] = useState<ReportLink>(null)
   const [ConfirmationDialog, getResponse] = useConfirmationDialog()
@@ -29,21 +29,21 @@ export function useReportLinks() {
    * Callback function for after a report link is saved.
    */
   const onSave = useCallback(() => {
-    query.refetch().then(() => setForm({ isOpen: false }))
+    query.refetch().then(() => setForm({ open: false }))
   }, [query])
 
   /**
    * Callback function for when a report link is edited.
    */
   const onEdit = useCallback(() => {
-    setForm({ isOpen: true, edit: selectedLink })
+    setForm({ open: true, edit: selectedLink })
   }, [selectedLink])
 
   /**
    * Callback function for when the form is dismissed.
    */
   const onDismiss = useCallback(() => {
-    setForm({ isOpen: false })
+    setForm({ open: false })
   }, [])
 
   /**

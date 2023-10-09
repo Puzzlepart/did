@@ -26,9 +26,9 @@ export function useUserSettings() {
 
   const formControlProps: IFormControlProps = {
     model,
-    panelProps: {
-      headerText: t('common.userSettingsPanelHeaderText'),
-      isOpen: panel.value,
+    panel: {
+      title: t('common.userSettingsPanelHeaderText'),
+      open: panel.value,
       onDismiss: () => panel.setFalse()
     },
     submitProps: {

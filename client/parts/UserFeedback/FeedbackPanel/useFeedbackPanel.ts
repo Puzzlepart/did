@@ -1,4 +1,3 @@
-import { IPanelProps } from '@fluentui/react'
 import {
   IFormControlProps,
   useFormControlModel,
@@ -9,6 +8,7 @@ import { UserFeedback } from 'types'
 import { useLabelOptions } from './useLabelOptions'
 import { useMoodOptions } from './useMoodOptions'
 import { useSubmitFeedback } from './useSubmitFeedback'
+import { IPanelProps } from 'components/Panel'
 
 /**
  * Hook that returns the necessary props for the FeedbackPanel component.
@@ -28,10 +28,9 @@ export function useFeedbackPanel(props: IPanelProps) {
   const formControlProps: IFormControlProps = {
     model,
     submitProps,
-    panelProps: {
+    panel: {
       ...props,
-      headerText: t('feedback.headerText'),
-      scroll: true
+      title: t('feedback.headerText')
     }
   }
 

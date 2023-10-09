@@ -16,12 +16,11 @@ export function useReportLinksForm(props: IReportLinksFormProps) {
   const model = useReportLinksModel(props)
   const register = useFormControls<keyof ReportLink>(model)
   const submitProps = useReportsFormSubmit(props, model)
-  const panelProps: IFormControlProps['panelProps'] = {
+  const panelProps: IFormControlProps['panel'] = {
     ..._.omit(props, 'onSave'),
-    headerText: props.edit
+    title: props.edit
       ? t('admin.reportLinks.editReportLinkText')
-      : t('admin.reportLinks.addNewReportText'),
-    scroll: true
+      : t('admin.reportLinks.addNewReportText')
   }
   return {
     model,

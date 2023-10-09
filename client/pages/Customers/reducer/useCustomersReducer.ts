@@ -38,10 +38,9 @@ export function useCustomersReducer() {
       })
       .addCase(OPEN_PROJECT_PANEL, (state, { payload }) => {
         state.projectForm = {
-          panelProps: {
-            isOpen: true,
-            headerText: t('customers.projectFormHeaderText', state.selected),
-            scroll: true,
+          panel: {
+            open: true,
+            title: t('customers.projectFormHeaderText', state.selected),
             onDismiss: payload.onDismissCallback
           }
         }
@@ -52,16 +51,15 @@ export function useCustomersReducer() {
       .addCase(OPEN_CUSTOMER_PANEL, (state, { payload }) => {
         state.customerForm = {
           edit: state.selected,
-          panelProps: {
-            isOpen: true,
-            headerText: state.selected.name,
-            onDismiss: payload.onDismissCallback,
-            scroll: true
+          panel: {
+            open: true,
+            title: state.selected.name,
+            onDismiss: payload.onDismissCallback
           }
         }
       })
       .addCase(CLOSE_CUSTOMER_PANEL, (state) => {
-        if (state.customerForm?.panelProps) {
+        if (state.customerForm?.panel) {
           state.customerForm = null
         }
       })

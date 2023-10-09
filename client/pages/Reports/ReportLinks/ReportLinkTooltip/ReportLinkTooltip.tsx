@@ -18,6 +18,7 @@ export const ReportLinkTooltip: StyledComponent<IReportLinkTooltipProps> = (
   const { t } = useTranslation()
   return (
     <Tooltip
+      withArrow
       relationship='description'
       content={
         <div className={ReportLinkTooltip.className}>

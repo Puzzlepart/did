@@ -1,5 +1,4 @@
-import { IColumn } from '@fluentui/react'
-import { IListProps } from 'components/List/types'
+import { IListProps, IListColumn } from 'components/List/types'
 import { ITitleColumnProps } from './TitleColumn/types'
 
 /**
@@ -9,7 +8,7 @@ export interface IEventListProps extends IListProps {
   /**
    * An array of additional columns to add
    */
-  additionalColumns?: IColumn[]
+  additionalColumns?: IListColumn[]
 
   /**
    * Date format

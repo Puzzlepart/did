@@ -1,15 +1,16 @@
 import { TabItems } from 'components/Tabs'
-import { useLayoutEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
-import { IReportsContext } from './context'
-import { useReportsQueries, useReportsQuery } from './hooks'
-import { useReportsReducer } from './reducer'
-import { CHANGE_QUERY } from './reducer/actions'
-import { ReportTab } from './ReportTab'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
+import { IReportsContext } from './context'
+import {
+  useReportsQueries,
+  useReportsQuery,
+  useReportsQueryPreset
+} from './hooks'
+import { useReportsReducer } from './reducer'
 
 /**
  * Component logic for `<Reports />`
@@ -28,15 +29,15 @@ import { WelcomeTab } from './WelcomeTab'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const queries = useReportsQueries()
-  const [state, dispatch] = useReportsReducer(queries)
-  const query = useReportsQuery({ state, dispatch })
+  const { queries, queryTabs } = useReportsQueries()
+  const [state, dispatch] = useReportsReducer()
+  const queryPreset = useReportsQueryPreset(queries, state)
+  const context = useMemo<IReportsContext>(
+    () => ({ state, dispatch, queryPreset }),
+    [state, queryPreset]
+  )
 
-  useLayoutEffect(() => {
-    if (state.queryPreset && _.isEmpty(state.queryPreset?.reportLinks)) {
-      query({ variables: state.queryPreset?.variables })
-    }
-  }, [state.queryPreset?.reportLinks])
+  useReportsQuery(context)
 
   useUpdateUserConfiguration({
     config: {
@@ -45,31 +46,11 @@ export function useReports() {
     autoUpdate: !state.loading && !!state.activeFilter?.text
   })
 
-  const context = useMemo<IReportsContext>(
-    () => ({ state, dispatch, queries }),
-    [state]
-  )
-
-  const queryTabs = useMemo(
-    () =>
-      _.reduce(
-        _.filter(queries, (q) => !q.hidden),
-        (tabs, query) => {
-          const { id, text, description } = query
-          tabs[id] = [
-            ReportTab,
-            {
-              text,
-              description
-            }
-          ]
-          return tabs
-        },
-        {} as TabItems
-      ),
-    [queries]
-  )
-
+  /**
+   * Tabs for `<Reports />`. The `home` tab is always present,
+   * aswell as the `summary` tab. `queryTabs` are the tabs
+   * for the queries.
+   */
   const tabs: TabItems = useMemo(
     () => ({
       home: [WelcomeTab, t('reports.welcomeHeaderText')],
@@ -79,14 +60,8 @@ export function useReports() {
     [queryTabs]
   )
 
-  const onTabSelect = (key: string) => {
-    if (key === 'home') return
-    dispatch(CHANGE_QUERY({ id: key }))
-  }
-
   return {
     tabs,
-    context,
-    onTabSelect
+    context
   }
 }

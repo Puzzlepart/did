@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
-import { SaveFilterForm } from '../SaveFilterForm'
 import { useColumns } from './useColumns'
 import { useMenuItems } from './useMenuItems'
+import { SaveFilterForm } from './SaveFilterForm'
 
 /**
  * Reports list
@@ -31,7 +31,7 @@ export const ReportsList: TabComponent = () => {
       )}
       {_.isEmpty(context.state.data.timeEntries) &&
       !context.state.loading &&
-      context.state.queryPreset ? (
+      context.queryPreset ? (
         <UserMessage text={t('reports.noEntriesText')} />
       ) : (
         <List
@@ -40,12 +40,12 @@ export const ReportsList: TabComponent = () => {
           items={context.state.data.timeEntries}
           columns={columns}
           menuItems={menuItems}
-          exportFileName={context.state.queryPreset?.exportFileName}
+          exportFileName={context.queryPreset?.exportFileName}
           filterValues={context.state?.activeFilter?.values}
           onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
-          filterPanelActions={
-            <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
-          }
+          filterPanel={{
+            headerElements: <SaveFilterForm />
+          }}
         />
       )}
     </div>

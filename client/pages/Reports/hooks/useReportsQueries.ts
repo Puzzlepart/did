@@ -1,8 +1,12 @@
 import { DateObject } from 'DateUtils'
+import { TabItems } from 'components/Tabs'
 import { useTimesheetPeriods } from 'hooks'
+import { useMemo } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import _ from 'underscore'
 import s from 'underscore.string'
+import { ReportTab } from '../ReportTab'
 import {
   report_current_month,
   report_current_year,
@@ -183,20 +187,19 @@ export function useSummaryQuery(): IReportsQuery {
 }
 
 /**
- * Use Reports Queries. Returns all queries
- * used in reports. Each query is generated
- * by a separate hook.
+ * Returns all queries and query tabs available
+ * for `<Reports />`.
  *
  * @category Reports
  */
-export function useReportsQueries(): IReportsQuery[] {
+export function useReportsQueries() {
   const lastMonthQuery = useLastMonthQuery()
   const currentMonthQuery = useCurrentMonthQuery()
   const currentYearQuery = useCurrentYearQuery()
   const lastYearQuery = useLastYearQuery()
   const forecastQuery = useForecastQuery()
   const summaryQuery = useSummaryQuery()
-  return [
+  const queries = [
     lastMonthQuery,
     currentMonthQuery,
     currentYearQuery,
@@ -204,6 +207,28 @@ export function useReportsQueries(): IReportsQuery[] {
     forecastQuery,
     summaryQuery
   ]
+
+  const queryTabs = useMemo(
+    () =>
+      _.reduce(
+        _.filter(queries, (q) => !q.hidden),
+        (tabs, query) => {
+          const { id, text, description } = query
+          tabs[id] = [
+            ReportTab,
+            {
+              text,
+              description
+            }
+          ]
+          return tabs
+        },
+        {} as TabItems
+      ),
+    [queries]
+  )
+
+  return { queries, queryTabs }
 }
 
 export { default as default_query } from '../queries/report-current-month.gql'

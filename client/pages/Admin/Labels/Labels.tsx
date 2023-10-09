@@ -32,7 +32,7 @@ export const Labels: TabComponent = () => {
         selectionProps={[SelectionMode.single, onSelectionChanged]}
         menuItems={[
           new ListMenuItem(t('admin.labels.addNewText'))
-            .setOnClick(() => setForm({ isOpen: true }))
+            .setOnClick(() => setForm({ open: true }))
             .withIcon('Tag'),
           new ListMenuItem(t('common.editLabel'))
             .withIcon('NoteEdit')

@@ -1,14 +1,10 @@
-import {
-  IColumn,
-  IDetailsColumnRenderTooltipProps,
-  PersonaSize
-} from '@fluentui/react'
+import { IDetailsColumnRenderTooltipProps, PersonaSize } from '@fluentui/react'
+import $date from 'DateUtils'
 import { IListColumn, IListColumnData } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
-import $date from 'DateUtils'
-import React, { useContext } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
-import { ReportsContext } from '../../context'
+import { useReportsContext } from '../../context'
 import { ColumnHeader } from '../ColumnHeader'
 import { PeriodColumn } from '../PeriodColumn'
 
@@ -16,8 +12,8 @@ import { PeriodColumn } from '../PeriodColumn'
  * Columns hook for SummaryView
  */
 export function useColumns(): IListColumn[] {
-  const { state } = useContext(ReportsContext)
-  const periods = (state.queryPreset?.periods || []) as any[]
+  const { queryPreset } = useReportsContext()
+  const periods = (queryPreset?.periods ?? []) as any[]
   const userColumn = useUserListColumn({
     size: PersonaSize.size24,
     hidePersonaDetails: isMobile
@@ -48,7 +44,7 @@ export function useColumns(): IListColumn[] {
       minWidth: 60,
       maxWidth: 100,
       data,
-      onRender: (item: any, _index: number, column: IColumn) => (
+      onRender: (item: any, _index: number, column: IListColumn) => (
         <PeriodColumn user={item.user} periods={item[column.fieldName]} />
       )
     } as IListColumn)

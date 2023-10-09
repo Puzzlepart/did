@@ -1,4 +1,4 @@
-import { BasePanel, SearchProject, UserMessage } from 'components'
+import { Panel, SearchProject, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -13,10 +13,10 @@ export const MatchEventPanel: StyledComponent = () => {
   const { t } = useTranslation()
   const { event, isOpen, onDismiss, onMatch } = useMatchEventPanel()
   return (
-    <BasePanel
-      isOpen={isOpen}
-      headerText={t('timesheet.matchEventPanelHeaderText')}
-      headerSubText={event.title}
+    <Panel
+      open={isOpen}
+      title={t('timesheet.matchEventPanelHeaderText')}
+      description={event.title}
       onDismiss={onDismiss}
     >
       <div className={styles.matchEventPanel}>
@@ -38,7 +38,7 @@ export const MatchEventPanel: StyledComponent = () => {
           autoFocus
         />
       </div>
-    </BasePanel>
+    </Panel>
   )
 }
 

@@ -47,6 +47,9 @@ export interface IReportsQuery extends ITabProps {
    */
   reportLinks?: ReportLink[]
 
+  /**
+   * Date periods
+   */
   periods?: IDatePeriod[]
 }
 
@@ -87,6 +90,16 @@ export interface IReportsData {
    * Projects
    */
   projects: Project[]
+
+  /**
+   * Report links
+   */
+  reportLinks?: ReportLink[]
+
+  /**
+   * Loading state
+   */
+  loading?: boolean
 }
 
 /**
@@ -96,22 +109,12 @@ export interface IReportsState {
   /**
    * Data
    */
-  data?: IReportsData
-
-  /**
-   * Report links
-   */
-  reportLinks?: ReportLink[]
+  data?: Partial<IReportsData>
 
   /**
    * Whether the filter panel is open
    */
   isFiltersOpen?: boolean
-
-  /**
-   * Selected query preset
-   */
-  queryPreset?: IReportsQuery
 
   /**
    * Group by properties
@@ -193,5 +196,5 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
  * @category Reports
  */
 export interface IReportsParameters {
-  query: string
+  queryPreset: string
 }

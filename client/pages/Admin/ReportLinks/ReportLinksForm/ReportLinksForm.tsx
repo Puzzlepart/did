@@ -17,11 +17,7 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, register, submitProps, panelProps } = useReportLinksForm(props)
   return (
-    <FormControl
-      model={model}
-      submitProps={submitProps}
-      panelProps={panelProps}
-    >
+    <FormControl model={model} submitProps={submitProps} panel={panelProps}>
       <InputControl
         {...register<InputControlOptions>('name')}
         label={t('admin.reportLinks.nameLabel')}

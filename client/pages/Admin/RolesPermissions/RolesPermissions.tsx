@@ -34,8 +34,8 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
           new ListMenuItem(t('admin.addNewRole'))
             .setOnClick(() =>
               setPanel({
-                panelProps: {
-                  headerText: t('admin.addNewRole'),
+                panel: {
+                  title: t('admin.addNewRole'),
                   onDismiss: () => setPanel(null)
                 }
               })
@@ -44,8 +44,8 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
           new ListMenuItem(t('admin.editRole'))
             .setOnClick(() =>
               setPanel({
-                panelProps: {
-                  headerText: t('admin.editRole'),
+                panel: {
+                  title: t('admin.editRole'),
                   onDismiss: () => setPanel(null)
                 },
                 edit: selectedRole

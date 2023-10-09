@@ -12,6 +12,7 @@ import { ListMenuItem } from '../ListToolbar'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
 import { ListFilterState } from './ListFilterState'
+import { IFilterPanelProps } from 'components/FilterPanel'
 
 /**
  * @category List
@@ -92,9 +93,9 @@ export interface IListProps<T = any>
   defaultSearchBoxWidth?: number
 
   /**
-   * Filter panel actions
+   * Filter panel props
    */
-  filterPanelActions?: JSX.Element | JSX.Element[]
+  filterPanel?: Pick<IFilterPanelProps, 'headerActions' | 'headerElements'>
 
   /**
    * On filter callback returning `filters` and `isFiltered`.

@@ -6,8 +6,8 @@ import { useBoolean } from 'usehooks-ts'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
-import { IUserFeedbackProps } from './types'
 import styles from './UserFeedback.module.scss'
+import { IUserFeedbackProps } from './types'
 
 /**
  * User feedback
@@ -37,10 +37,7 @@ export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({
           <div className={styles.icon}>{icon('Emoji')}</div>
         </div>
       )}
-      <FeedbackPanel
-        isOpen={panelState.value}
-        onDismiss={panelState.setFalse}
-      />
+      <FeedbackPanel open={panelState.value} onDismiss={panelState.setFalse} />
     </>
   )
 }

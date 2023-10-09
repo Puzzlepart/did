@@ -1,4 +1,4 @@
-import { IFilter } from 'components/FilterPanel'
+import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { IListColumn } from './IListColumn'
 
@@ -45,5 +45,5 @@ export interface IListState<T = any> {
   /**
    * Is filter panel open
    */
-  isFilterPanelOpen?: boolean
+  filterPanel?: Pick<IFilterPanelProps, 'open'>
 }

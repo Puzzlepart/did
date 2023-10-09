@@ -1,4 +1,4 @@
-import { IPanelProps } from '@fluentui/react'
+import { IPanelProps } from 'components/Panel'
 
 export interface IBulkImportPanelProps extends IPanelProps {
   /**

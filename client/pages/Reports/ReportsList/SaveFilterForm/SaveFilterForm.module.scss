@@ -1,0 +1,29 @@
+.saveFilterForm {
+  margin: 10px 0 0 0;
+
+  .body {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    padding-right: 8px;
+    box-sizing: border-box;
+
+    .nameInput {
+      flex: 1;
+    }
+
+    .iconPicker {
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 200px;
+      max-width: 200px;
+    }
+  }
+
+  .footer {
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
+}

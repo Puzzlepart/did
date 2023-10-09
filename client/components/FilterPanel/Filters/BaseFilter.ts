@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { IColumn } from '@fluentui/react'
+import { IListColumn } from 'components/List/types'
 import get from 'get-value'
 import _ from 'underscore'
 import { IFilter, IFilterItem } from './types'
@@ -25,7 +25,7 @@ export class BaseFilter {
     this.valueFieldName = valueFieldName ?? keyFieldName
   }
 
-  public fromColumn(column: IColumn) {
+  public fromColumn(column: IListColumn) {
     this.name = column.name
     this.keyFieldName = column.fieldName
     this.valueFieldName = column.fieldName
