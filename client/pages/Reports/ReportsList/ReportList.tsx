@@ -9,6 +9,7 @@ import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
 import { useColumns } from './useColumns'
 import { useMenuItems } from './useMenuItems'
+import { SaveFilterForm } from './SaveFilterForm'
 
 /**
  * Reports list
@@ -42,6 +43,9 @@ export const ReportsList: TabComponent = () => {
           exportFileName={context.queryPreset?.exportFileName}
           filterValues={context.state?.activeFilter?.values}
           onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))} 
+          filterPanel={{
+            headerElements: <SaveFilterForm />
+          }}
         />
       )}
     </div>

@@ -34,7 +34,7 @@ export function useReports() {
   const queryPreset = useReportsQueryPreset(queries, state)
   const context = useMemo<IReportsContext>(
     () => ({ state, dispatch, queryPreset }),
-    [state]
+    [state, queryPreset]
   )
 
   useReportsQuery(context)

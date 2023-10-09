@@ -8,10 +8,13 @@
     }
 
     .footer {
-        .actions {
-            display: flex;
-            flex-direction: row;
-            gap: 6px;
-        }
+        display: initial;
+    }
+
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
     }
 }

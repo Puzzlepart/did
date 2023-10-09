@@ -45,6 +45,12 @@ export const Panel: PanelComponent = (props) => {
           <span>{props.title}</span>
           {props.description && <Caption2 block>{props.description}</Caption2>}
         </DrawerHeaderTitle>
+        <div className={styles.actions}>
+          {props.headerActions.map((action, index) => (
+            <DynamicButton key={index} {...action} />
+          ))}
+        </div>
+        {props.headerElements}
       </DrawerHeader>
       <DrawerBody className={styles.body}>{props.children}</DrawerBody>
       <DrawerFooter className={styles.footer}>
@@ -71,5 +77,6 @@ Panel.defaultProps = {
   size: 'medium',
   position: 'end',
   lightDismiss: true,
+  headerActions: [],
   actions: []
 }

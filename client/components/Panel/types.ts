@@ -1,7 +1,7 @@
 import { DrawerProps } from '@fluentui/react-components/unstable'
 import { IDynamicButtonProps } from 'components/DynamicButton'
 import { ReusableComponent } from 'components/types'
-import { HTMLProps } from 'react'
+import { HTMLProps, ReactElement } from 'react'
 
 type IPanelDismissEvent = any
 
@@ -22,6 +22,11 @@ export interface IPanelProps
    * Actions to display in the header of the panel.
    */
   headerActions?: IDynamicButtonProps[]
+
+  /**
+   * Additional elements to display in the header of the panel.
+   */
+  headerElements?: ReactElement
 
   /**
    * Actions to display in the footer of the panel.

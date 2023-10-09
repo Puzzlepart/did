@@ -29,7 +29,7 @@ export function useReportsQuery({
   dispatch,
   queryPreset
 }: IReportsContext) {
-  const [query, queryResult] = useLazyQuery(
+  const [query, { data, loading }] = useLazyQuery(
     queryPreset?.query || default_query,
     {
       fetchPolicy: 'no-cache'
@@ -47,12 +47,12 @@ export function useReportsQuery({
     () =>
       dispatch(
         DATA_UPDATED({
-          ...queryResult.data,
+          ...data,
           ...reportLinksQuery.data,
-          loading: queryResult.loading || reportLinksQuery.loading
+          loading
         })
       ),
-    [queryResult.loading, reportLinksQuery.loading]
+    [loading, reportLinksQuery.loading]
   )
 
   useEffect(() => {
