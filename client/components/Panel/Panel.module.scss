@@ -1,0 +1,17 @@
+.panel {
+    .header {
+        display: initial;
+    }
+    
+    .body {
+        display: initial;
+    }
+
+    .footer {
+        .actions {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+        }
+    }
+}
