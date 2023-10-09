@@ -11,6 +11,8 @@ import { ErrorFallback, Navigation } from '../parts'
 import styles from './App.module.scss'
 import { AppSwitch } from './AppSwitch'
 import { useAppClassName } from './useAppClassName'
+import { Toast } from 'components/Toast'
+import { useAppContext } from 'AppContext'
 
 /**
  * App router that uses `<Switch />` from
@@ -25,6 +27,7 @@ import { useAppClassName } from './useAppClassName'
  */
 export const AppRouter: StyledComponent = () => {
   const className = useAppClassName(AppRouter, styles)
+  const context = useAppContext()
   return (
     <Router>
       <div className={className}>
@@ -32,6 +35,7 @@ export const AppRouter: StyledComponent = () => {
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <AppSwitch />
         </ErrorBoundary>
+      <Toast {...context.state.toast} />
       </div>
     </Router>
   )

@@ -29,6 +29,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const ValidateKeyFunction = useValidateKeyFunction()
   return (
     <FormControl {...formControlProps}>
+      {(!isCustomerContext || !!props.edit) && (
       <SearchCustomer
         {...register('customerKey', {
           validators: t('projects.customerRequired')
@@ -41,6 +42,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         selectedKey={model.value('customerKey')}
         onSelected={(customer) => model.set('customerKey', customer?.key)}
       />
+      )}
       <InputControl
         {...register<InputControlOptions>('key', {
           casing: 'upper',
@@ -111,6 +113,10 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   )
 }
 
+ProjectForm.displayName = 'ProjectForm'
 ProjectForm.defaultProps = {
+  refetch: () => {
+    // Do nothing if not provided.
+  },
   permission: PermissionScope.MANAGE_PROJECTS
 }

@@ -29,8 +29,8 @@ export const CustomersContext = createContext<ICustomersContext>(null)
  *
  * @param path Optional path to a specific property in the context.
  */
-export const useCustomersContext = (path?: string) => {
+export function useCustomersContext<T = ICustomersContext>(path?: string): T {
   const context = useContext(CustomersContext)
-  if (path) return get(context, path, { default: null })
-  return context
+  if (path) return get(context, path, { default: null }) as T
+  return context as T
 }

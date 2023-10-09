@@ -41,7 +41,9 @@ export const Projects: FC = () => {
                 }
               }
             ],
-            new: [ProjectForm, t('projects.createNewText')]
+            new: [ProjectForm, t('projects.createNewText'), {
+              refetch: context.refetch
+            }]
           }}
         ></Tabs>
       )}

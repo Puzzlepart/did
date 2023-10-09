@@ -18,7 +18,7 @@ import { useCustomerDetails } from './useCustomerDetails'
 export const CustomerDetails: StyledComponent = () => {
   const { t } = useTranslation()
   const context = useCustomersContext()
-  const { error, tabs } = useCustomerDetails()
+  const { error, tabs,refetch } = useCustomerDetails()
 
   return (
     <div className={CustomerDetails.className}>
@@ -28,7 +28,7 @@ export const CustomerDetails: StyledComponent = () => {
       )}
       <Tabs items={tabs} level={3} />
       {context.state.projectForm && (
-        <ProjectForm {...context.state.projectForm} />
+        <ProjectForm {...context.state.projectForm} refetch={refetch} />
       )}
       {context.state.customerForm && (
         <CustomerForm {...context.state.customerForm} />

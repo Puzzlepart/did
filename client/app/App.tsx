@@ -3,7 +3,6 @@
  *
  * @module App
  */
-import { Toast } from 'components'
 import React, { FC } from 'react'
 import { Themed } from 'theme'
 import { AppRouter } from './AppRouter'
@@ -22,7 +21,6 @@ export const App: FC<IAppProps> = (props) => {
     <AppContext.Provider value={context}>
       <Themed>
         <AppRouter />
-        <Toast {...context.state.toast} />
       </Themed>
     </AppContext.Provider>
   )
