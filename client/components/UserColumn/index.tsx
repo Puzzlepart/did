@@ -36,4 +36,3 @@ UserColumn.defaultProps = {
 
 export * from './types'
 export * from './useUserListColumn'
-
