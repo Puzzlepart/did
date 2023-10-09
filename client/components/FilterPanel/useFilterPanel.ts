@@ -38,9 +38,9 @@ export function useFilterPanel(props: IFilterPanelProps) {
     )
   }
 
-  const headerText = props.selectedFilter
+  const title = props.selectedFilter
     ? t('common.filterByColumn', props.selectedFilter)
-    : props.headerText
+    : props.title
 
   const filtersToRender = filters
     .filter((filter) =>
@@ -60,7 +60,7 @@ export function useFilterPanel(props: IFilterPanelProps) {
   return {
     filtersToRender,
     onFilterUpdated,
-    headerText,
+    title,
     onClearFilters
   }
 }

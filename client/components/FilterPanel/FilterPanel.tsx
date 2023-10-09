@@ -1,5 +1,4 @@
-import { BasePanel } from 'components/BasePanel'
-import { ReusableComponent } from 'components/types'
+import { Panel, PanelComponent } from 'components/Panel'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { FilterItem } from './FilterItem'
@@ -16,19 +15,17 @@ import { useFilterPanel } from './useFilterPanel'
  *
  * @category Reusable Component
  */
-export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
+export const FilterPanel: PanelComponent<IFilterPanelProps> = (props) => {
   const { t } = useTranslation()
-  const { filtersToRender, onFilterUpdated, headerText, onClearFilters } =
+  const { filtersToRender, onFilterUpdated, title, onClearFilters } =
     useFilterPanel(props)
 
   return (
-    <BasePanel
+    <Panel
       {...props}
-      className={FilterPanel.className}
-      headerText={headerText}
-      headerClassName={styles.header}
+      title={title}
       onDismiss={props.onDismiss}
-      footerActions={[
+      actions={[
         {
           text: t('common.clearFilters'),
           onClick: onClearFilters,
@@ -49,7 +46,7 @@ export const FilterPanel: ReusableComponent<IFilterPanelProps> = (props) => {
           hideHeader={!!props.selectedFilter}
         />
       ))}
-    </BasePanel>
+    </Panel>
   )
 }
 
@@ -57,7 +54,3 @@ FilterPanel.className = styles.filterPanel
 FilterPanel.defaultProps = {
   shortListCount: 10
 }
-
-export * from './FilterItem'
-export * from './Filters'
-export * from './types'

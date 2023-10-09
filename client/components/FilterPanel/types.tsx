@@ -1,4 +1,5 @@
-import { IColumn, IPanelProps } from '@fluentui/react'
+import { IColumn } from '@fluentui/react'
+import { IPanelProps } from 'components/Panel'
 import { BaseFilter, IFilter } from './Filters'
 
 /**
@@ -36,9 +37,4 @@ export interface IFilterPanelProps extends IPanelProps {
    * Selected filter
    */
   selectedFilter?: IColumn
-
-  /**
-   * Actions
-   */
-  actions?: JSX.Element | JSX.Element[]
 }
