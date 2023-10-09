@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils'
 import styles from './Panel.module.scss'
 import { PanelComponent } from './types'
+import { usePanel } from './usePanel'
 
 /**
  * Wrapper over `<Drawer />` from `@fluentui/react-components/unstable` that provides 
@@ -13,12 +14,14 @@ import { PanelComponent } from './types'
  */
 export const Panel: PanelComponent = (props) => {
     const { t } = useTranslation()
+    const { onOpenChange } = usePanel(props)
     return (
         <Drawer
             className={Panel.className}
             type={props.type}
             separator={true}
             open={props.open}
+            onOpenChange={onOpenChange}
             position={props.position}
             size={props.size}
         >
@@ -29,7 +32,7 @@ export const Panel: PanelComponent = (props) => {
                             appearance='subtle'
                             aria-label='Close'
                             icon={getFluentIcon('Dismiss')}
-                            onClick={props.onDismiss}   
+                            onClick={props.onDismiss}
                         />
                     }
                 >
@@ -66,5 +69,6 @@ Panel.defaultProps = {
     type: 'overlay',
     size: 'medium',
     position: 'end',
+    lightDismiss: true,
     actions: []
 }

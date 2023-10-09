@@ -27,6 +27,11 @@ export interface IPanelProps extends Pick<DrawerProps, 'open' | 'type' | 'positi
      * @param event - The event that triggered the dismissal (optional).
      */
     onDismiss?: (event?: IPanelDismissEvent) => void
+
+    /**
+     * Close the panel when clicking outside of it (default: `true`).
+     */
+    lightDismiss?: boolean
 }
 
 /**
