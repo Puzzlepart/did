@@ -196,5 +196,5 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
  * @category Reports
  */
 export interface IReportsParameters {
-  query: string
+  queryPreset: string
 }

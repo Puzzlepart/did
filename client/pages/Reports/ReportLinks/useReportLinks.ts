@@ -1,8 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { useContext, useMemo } from 'react'
+import { useContext } from 'react'
 import { ReportsContext } from '../context'
-import _ from 'underscore'
-import { useParams } from 'react-router-dom'
+import { useReportsQueryPreset } from '../hooks'
 import { IReportLinksProps } from './types'
 
 /**
@@ -11,9 +10,8 @@ import { IReportLinksProps } from './types'
  * @param props - The props for the `ReportLinks` component.
  */
 export function useReportLinks(props:IReportLinksProps) {
-  const params = useParams<{ queryPreset?: string; }>()
   const context = useContext(ReportsContext)
-  const queryPreset = useMemo(() => _.find(context.queries, (q) => q.id === params.queryPreset), [params.queryPreset])
+  const queryPreset = useReportsQueryPreset()
   if(props.promoted) {
     return { reportLinks: context.state.data.reportLinks.filter(({ promoted }) => promoted) }
   }

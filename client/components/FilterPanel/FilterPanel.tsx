@@ -2,7 +2,6 @@ import { Panel, PanelComponent } from 'components/Panel'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { FilterItem } from './FilterItem'
-import styles from './FilterPanel.module.scss'
 import { IFilterPanelProps } from './types'
 import { useFilterPanel } from './useFilterPanel'
 
@@ -29,12 +28,13 @@ export const FilterPanel: PanelComponent<IFilterPanelProps> = (props) => {
         {
           text: t('common.clearFilters'),
           onClick: onClearFilters,
-          disabled: !onClearFilters
+          disabled: !onClearFilters,
+          appearance: 'secondary'
         }
       ]}
     >
       {props.children}
-      <div className={styles.actions} hidden={!!props.selectedFilter}>
+      <div hidden={!!props.selectedFilter}>
         {props.actions}
       </div>
       {filtersToRender.map((filter) => (
@@ -50,7 +50,7 @@ export const FilterPanel: PanelComponent<IFilterPanelProps> = (props) => {
   )
 }
 
-FilterPanel.className = styles.filterPanel
+FilterPanel.displayName = 'FilterPanel'
 FilterPanel.defaultProps = {
   shortListCount: 10
 }

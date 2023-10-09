@@ -9,7 +9,7 @@ import { CLEAR_FILTERS, FILTERS_UPDATED, TOGGLE_FILTER_PANEL } from '../reducer'
  *
  * @returns The props for the filter panel.
  */
-export function useListFilterPanel() {
+export function useListFilterPanel(): IFilterPanelProps {
   const { t } = useTranslation()
   const context = useListContext()
   const filters = useMemo<BaseFilter[]>(
@@ -21,8 +21,8 @@ export function useListFilterPanel() {
   )
   return useMemo<IFilterPanelProps>(
     () => ({
-      isOpen: context.state.isFilterPanelOpen,
-      headerText: t('reports.filterPanelHeaderText'),
+      ...context.state.filterPanel,
+      title: t('reports.filterPanelHeaderText'),
       filters,
       items: context.state.origItems,
       onFiltersUpdated: (filters) =>
@@ -31,7 +31,6 @@ export function useListFilterPanel() {
       onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
       selectedFilter: context.state.filterBy,
       actions: context.props.filterPanelActions
-    }),
-    [context]
+    } as IFilterPanelProps), [context]
   )
 }

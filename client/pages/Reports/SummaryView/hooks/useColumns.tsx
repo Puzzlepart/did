@@ -5,9 +5,9 @@ import {
 import $date from 'DateUtils'
 import { IListColumn, IListColumnData } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
-import React, { useContext } from 'react'
+import { useReportsQueryPreset } from 'pages/Reports/hooks'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
-import { ReportsContext } from '../../context'
 import { ColumnHeader } from '../ColumnHeader'
 import { PeriodColumn } from '../PeriodColumn'
 
@@ -15,8 +15,8 @@ import { PeriodColumn } from '../PeriodColumn'
  * Columns hook for SummaryView
  */
 export function useColumns(): IListColumn[] {
-  const { state } = useContext(ReportsContext)
-  const periods = (state.queryPreset?.periods || []) as any[]
+  const queryPreset = useReportsQueryPreset()
+  const periods = (queryPreset?.periods ?? []) as any[]
   const userColumn = useUserListColumn({
     size: PersonaSize.size24,
     hidePersonaDetails: isMobile

@@ -3,14 +3,14 @@ import {
   useLazyQuery,
   useQuery
 } from '@apollo/client'
-import { useEffect, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import { ReportLink } from 'types'
 import _ from 'underscore'
 import { IReportsContext } from '../context'
 import { report_links } from '../queries'
 import { DATA_UPDATED } from '../reducer/actions'
 import { default_query } from './useReportsQueries'
+import { useReportsQueryPreset } from './useReportsQueryPreset'
 
 /**
  * Hook for Reports Query.
@@ -29,17 +29,13 @@ import { default_query } from './useReportsQueries'
  * @category Reports Hooks
  */
 export function useReportsQuery(context: IReportsContext) {
-  const params = useParams<{ queryPreset?: string }>()
-  const queryPreset = useMemo(() => _.find(context.queries, (q) => q.id === params.queryPreset), [params.queryPreset])
+  const queryPreset = useReportsQueryPreset(context)
   const [query, queryResult] = useLazyQuery(
     queryPreset?.query || default_query,
     {
       fetchPolicy: 'no-cache'
     }
   )
-
-  // eslint-disable-next-line no-console
-  console.log(queryResult)
 
   const reportLinksQuery = useQuery<{ reportLinks: ReportLink[] }>(report_links, {
     fetchPolicy: 'cache-and-network'
@@ -54,18 +50,10 @@ export function useReportsQuery(context: IReportsContext) {
     [queryResult.loading, reportLinksQuery.loading]
   )
 
-  // eslint-disable-next-line no-console
-  console.log({
-    ...queryResult.data,
-    ...reportLinksQuery.data,
-    loading: queryResult.loading || reportLinksQuery.loading
-  })
-
   useEffect(() => {
     const reportLinks = (queryPreset && context.state.data.reportLinks.filter(({ linkRef }) => linkRef === queryPreset.reportLinkRef)) ?? []
     if (_.isEmpty(reportLinks)) {
       query({ variables: queryPreset?.variables })
     }
-  }, [params.queryPreset])
-
+  }, [queryPreset])
 }

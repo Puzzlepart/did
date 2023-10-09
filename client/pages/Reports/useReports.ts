@@ -36,7 +36,6 @@ export function useReports() {
 
   useReportsQuery(context)
 
-
   useUpdateUserConfiguration({
     config: {
       'reports.filters': state.savedFilters

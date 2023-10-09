@@ -41,6 +41,7 @@ export function useReportsReducer() {
         }
       }
     })
+    
     .addCase(SET_FILTER, (state, { payload }) => {
       state.activeFilter =
         state.activeFilter?.key === payload.key ? null : (payload as any)
