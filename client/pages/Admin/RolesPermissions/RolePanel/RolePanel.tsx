@@ -17,11 +17,7 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
     useRolePanel(props)
 
   return (
-    <FormControl
-      model={model}
-      submitProps={submitProps}
-      panel={panelProps}
-    >
+    <FormControl model={model} submitProps={submitProps} panel={panelProps}>
       <InputControl
         {...register('name')}
         required={true}

@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import _ from 'underscore'
 import { ReportLinks } from '../ReportLinks'
 import { ReportsList } from '../ReportsList'
-import { useReportsQueryPreset } from '../hooks'
+import { useReportsContext } from '../context'
 
 /**
  * Report tab
@@ -10,17 +10,13 @@ import { useReportsQueryPreset } from '../hooks'
  * @category Reports
  */
 export const ReportTab: FC = () => {
-    const queryPreset = useReportsQueryPreset()
-    if (!queryPreset) {
-        return null
-    }
-    return (
-        <div>
-            {_.isEmpty(queryPreset.reportLinks) ? (
-                <ReportsList />
-            ) : (
-                <ReportLinks />
-            )}
-        </div>
-    )
+  const context = useReportsContext()
+  if (!context.queryPreset) {
+    return null
+  }
+  return (
+    <div>
+      {_.isEmpty(context.queryPreset.reportLinks) ? <ReportsList /> : <ReportLinks />}
+    </div>
+  )
 }

@@ -64,7 +64,10 @@ const createTitleColumnDef = (
  * @param props - Props
  * @param name - Name
  */
-const createTimeColumnDef = (props: IEventListProps, name: string): IListColumn =>
+const createTimeColumnDef = (
+  props: IEventListProps,
+  name: string
+): IListColumn =>
   createColumnDef<TimeEntry>(
     'time',
     name,

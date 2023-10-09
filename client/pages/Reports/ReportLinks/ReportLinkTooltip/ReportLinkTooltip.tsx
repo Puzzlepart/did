@@ -13,32 +13,32 @@ import { IReportLinkTooltipProps } from './types'
  * @category Reports
  */
 export const ReportLinkTooltip: StyledComponent<IReportLinkTooltipProps> = (
-    props
+  props
 ) => {
-    const { t } = useTranslation()
-    return (
-        <Tooltip
-            withArrow
-            relationship='description'
-            content={
-                <div className={ReportLinkTooltip.className}>
-                    <div className={styles.name}>{props.link.name}</div>
-                    <p className={styles.description}>{props.link.description}</p>
-                    <p className={styles.updated}>
-                        {t('reports.reportLinkUpdatedText', {
-                            ...props.link,
-                            updatedAt: $date.formatDate(
-                                props.link.updatedAt,
-                                'MMM DD, YYYY HH:mm'
-                            )
-                        })}
-                    </p>
-                </div>
-            }
-        >
-            <div>{props.children}</div>
-        </Tooltip>
-    )
+  const { t } = useTranslation()
+  return (
+    <Tooltip
+      withArrow
+      relationship='description'
+      content={
+        <div className={ReportLinkTooltip.className}>
+          <div className={styles.name}>{props.link.name}</div>
+          <p className={styles.description}>{props.link.description}</p>
+          <p className={styles.updated}>
+            {t('reports.reportLinkUpdatedText', {
+              ...props.link,
+              updatedAt: $date.formatDate(
+                props.link.updatedAt,
+                'MMM DD, YYYY HH:mm'
+              )
+            })}
+          </p>
+        </div>
+      }
+    >
+      <div>{props.children}</div>
+    </Tooltip>
+  )
 }
 
 ReportLinkTooltip.displayName = 'ReportLinkTooltip'

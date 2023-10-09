@@ -8,7 +8,6 @@ import { IReportsData, IReportsSavedFilter } from '../types'
  */
 export const DATA_UPDATED = createAction<IReportsData>('DATA_UPDATED')
 
-
 /**
  * @category Reports Actions
  */

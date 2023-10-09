@@ -20,11 +20,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
     useUserForm(props)
 
   return (
-    <FormControl
-      model={model}
-      panel={{ ...props }}
-      submitProps={submitProps}
-    >
+    <FormControl model={model} panel={{ ...props }} submitProps={submitProps}>
       {!isEditMode && (
         <AutocompleteControl
           {...register('_' as any, {

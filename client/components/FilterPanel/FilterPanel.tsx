@@ -34,9 +34,7 @@ export const FilterPanel: PanelComponent<IFilterPanelProps> = (props) => {
       ]}
     >
       {props.children}
-      <div hidden={!!props.selectedFilter}>
-        {props.actions}
-      </div>
+      <div hidden={!!props.selectedFilter}>{props.actions}</div>
       {filtersToRender.map((filter) => (
         <FilterItem
           key={filter.key}

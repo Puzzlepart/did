@@ -1,8 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import {
-  useLazyQuery,
-  useQuery
-} from '@apollo/client'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import { useEffect } from 'react'
 import { ReportLink } from 'types'
 import _ from 'underscore'
@@ -10,7 +7,6 @@ import { IReportsContext } from '../context'
 import { report_links } from '../queries'
 import { DATA_UPDATED } from '../reducer/actions'
 import { default_query } from './useReportsQueries'
-import { useReportsQueryPreset } from './useReportsQueryPreset'
 
 /**
  * Hook for Reports Query.
@@ -28,8 +24,7 @@ import { useReportsQueryPreset } from './useReportsQueryPreset'
  *
  * @category Reports Hooks
  */
-export function useReportsQuery(context: IReportsContext) {
-  const queryPreset = useReportsQueryPreset(context)
+export function useReportsQuery({ state, dispatch, queryPreset }: IReportsContext) {
   const [query, queryResult] = useLazyQuery(
     queryPreset?.query || default_query,
     {
@@ -37,21 +32,32 @@ export function useReportsQuery(context: IReportsContext) {
     }
   )
 
-  const reportLinksQuery = useQuery<{ reportLinks: ReportLink[] }>(report_links, {
-    fetchPolicy: 'cache-and-network'
-  })
+  const reportLinksQuery = useQuery<{ reportLinks: ReportLink[] }>(
+    report_links,
+    {
+      fetchPolicy: 'cache-and-network'
+    }
+  )
 
   useEffect(
-    () => context.dispatch(DATA_UPDATED({
-      ...queryResult.data,
-      ...reportLinksQuery.data,
-      loading: queryResult.loading || reportLinksQuery.loading
-    })),
+    () =>
+      dispatch(
+        DATA_UPDATED({
+          ...queryResult.data,
+          ...reportLinksQuery.data,
+          loading: queryResult.loading || reportLinksQuery.loading
+        })
+      ),
     [queryResult.loading, reportLinksQuery.loading]
   )
 
   useEffect(() => {
-    const reportLinks = (queryPreset && context.state.data.reportLinks.filter(({ linkRef }) => linkRef === queryPreset.reportLinkRef)) ?? []
+    const reportLinks =
+      (queryPreset &&
+        state.data.reportLinks.filter(
+          ({ linkRef }) => linkRef === queryPreset.reportLinkRef
+        )) ??
+      []
     if (_.isEmpty(reportLinks)) {
       query({ variables: queryPreset?.variables })
     }

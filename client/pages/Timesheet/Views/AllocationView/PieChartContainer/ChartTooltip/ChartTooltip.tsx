@@ -18,14 +18,8 @@ import { useChartTooltip } from './useChartTooltip'
  */
 export const ChartTooltip: StyledComponent<IChartTooltipProps> = (props) => {
   const { t } = useTranslation()
-  const {
-    shouldRender,
-    name,
-    secondaryText,
-    teritaryText,
-    value,
-    lineClamp
-  } = useChartTooltip(props)
+  const { shouldRender, name, secondaryText, teritaryText, value, lineClamp } =
+    useChartTooltip(props)
   if (shouldRender) {
     return (
       <div

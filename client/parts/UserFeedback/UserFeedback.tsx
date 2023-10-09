@@ -37,10 +37,7 @@ export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({
           <div className={styles.icon}>{icon('Emoji')}</div>
         </div>
       )}
-      <FeedbackPanel
-        open={panelState.value}
-        onDismiss={panelState.setFalse}
-      />
+      <FeedbackPanel open={panelState.value} onDismiss={panelState.setFalse} />
     </>
   )
 }

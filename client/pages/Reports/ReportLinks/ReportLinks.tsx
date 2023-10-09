@@ -22,7 +22,10 @@ export const ReportLinks: StyledComponent<IReportLinksProps> = (props) => {
   const { reportLinks } = useReportLinks(props)
   return (
     <div>
-      <UserMessage hidden={props.promoted} text={t('reports.availableReportLinks')} />
+      <UserMessage
+        hidden={props.promoted}
+        text={t('reports.availableReportLinks')}
+      />
       <div className={props.className}>
         {reportLinks.map((link, index) => (
           <ReportLinkTooltip key={index} link={link}>

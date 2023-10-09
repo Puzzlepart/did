@@ -7,7 +7,7 @@ import { ReportTab } from './ReportTab'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
 import { IReportsContext } from './context'
-import { useReportsQueries, useReportsQuery } from './hooks'
+import { useReportsQueries, useReportsQuery, useReportsQueryPreset } from './hooks'
 import { useReportsReducer } from './reducer'
 
 /**
@@ -29,8 +29,9 @@ export function useReports() {
   const { t } = useTranslation()
   const queries = useReportsQueries()
   const [state, dispatch] = useReportsReducer()
+  const queryPreset = useReportsQueryPreset(queries, state)
   const context = useMemo<IReportsContext>(
-    () => ({ state, dispatch, queries }),
+    () => ({ state, dispatch, queryPreset, queries }),
     [state]
   )
 

@@ -14,8 +14,7 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
   props
 ) => {
   const { state } = useTimesheetContext()
-  const { showFullTooltip, cells } =
-    usePieChartContainer(props)
+  const { showFullTooltip, cells } = usePieChartContainer(props)
 
   return (
     <div className={PieChartContainer.className}>
@@ -38,11 +37,7 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
         >
           <PieChart>
             <Tooltip
-              content={
-                <ChartTooltip
-                  showFullTooltip={showFullTooltip.value}
-                />
-              }
+              content={<ChartTooltip showFullTooltip={showFullTooltip.value} />}
             />
             <Legend layout='horizontal' verticalAlign='top' align='center' />
             <Pie

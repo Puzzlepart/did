@@ -9,7 +9,6 @@ import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
 import { useColumns } from './useColumns'
 import { useMenuItems } from './useMenuItems'
-import { useReportsQueryPreset } from '../hooks'
 
 /**
  * Reports list
@@ -21,7 +20,6 @@ export const ReportsList: TabComponent = () => {
   const context = useContext(ReportsContext)
   const columns = useColumns()
   const menuItems = useMenuItems()
-  const queryPreset = useReportsQueryPreset()
   return (
     <div>
       {context.state.loading && (
@@ -31,7 +29,8 @@ export const ReportsList: TabComponent = () => {
         />
       )}
       {_.isEmpty(context.state.data.timeEntries) &&
-        !context.state.loading && queryPreset ? (
+      !context.state.loading &&
+      context.queryPreset ? (
         <UserMessage text={t('reports.noEntriesText')} />
       ) : (
         <List
@@ -40,13 +39,13 @@ export const ReportsList: TabComponent = () => {
           items={context.state.data.timeEntries}
           columns={columns}
           menuItems={menuItems}
-          exportFileName={queryPreset?.exportFileName}
+          exportFileName={context.queryPreset?.exportFileName}
           filterValues={context.state?.activeFilter?.values}
           onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
           // TODO: Implement save filter form
-        // filterPanelActions={
-        //   <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
-        // }
+          // filterPanelActions={
+          //   <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
+          // }
         />
       )}
     </div>

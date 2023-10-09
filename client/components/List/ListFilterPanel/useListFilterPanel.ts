@@ -20,17 +20,19 @@ export function useListFilterPanel(): IFilterPanelProps {
     [context.props.columns]
   )
   return useMemo<IFilterPanelProps>(
-    () => ({
-      ...context.state.filterPanel,
-      title: t('reports.filterPanelHeaderText'),
-      filters,
-      items: context.state.origItems,
-      onFiltersUpdated: (filters) =>
-        context.dispatch(FILTERS_UPDATED({ filters })),
-      onClearFilters: () => context.dispatch(CLEAR_FILTERS()),
-      onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
-      selectedFilter: context.state.filterBy,
-      actions: context.props.filterPanelActions
-    } as IFilterPanelProps), [context]
+    () =>
+      ({
+        ...context.state.filterPanel,
+        title: t('reports.filterPanelHeaderText'),
+        filters,
+        items: context.state.origItems,
+        onFiltersUpdated: (filters) =>
+          context.dispatch(FILTERS_UPDATED({ filters })),
+        onClearFilters: () => context.dispatch(CLEAR_FILTERS()),
+        onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
+        selectedFilter: context.state.filterBy,
+        actions: context.props.filterPanelActions
+      }) as IFilterPanelProps,
+    [context]
   )
 }
