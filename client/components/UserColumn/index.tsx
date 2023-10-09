@@ -1,8 +1,7 @@
-import { Persona, PersonaSize } from '@fluentui/react'
+import { Persona } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import get from 'get-value'
 import React from 'react'
-import { isBrowser, isMobile } from 'react-device-detect'
 import { IUserColumnProps } from './types'
 
 /**
@@ -12,23 +11,17 @@ import { IUserColumnProps } from './types'
  *
  * @category SummaryView
  */
-export const UserColumn: ReusableComponent<IUserColumnProps> = ({
-  user,
-  persona = { size: PersonaSize.size24 }
-}) => {
+export const UserColumn: ReusableComponent<IUserColumnProps> = (props) => {
   return (
     <div>
       <Persona
-        {...persona}
-        text={user.displayName}
-        secondaryText={user.mail}
-        tertiaryText={get(user, 'role.name')}
-        imageUrl={user.photo?.base64}
-        styles={{
-          tertiaryText: {
-            fontSize: 10,
-            visibility: isBrowser && 'hidden',
-            display: isMobile ? 'block' : 'hidden'
+        size={props.size}
+        name={props.user.displayName}
+        secondaryText={props.displayMail && props.user.mail}
+        tertiaryText={get(props.user, 'role.name')}
+        avatar={{
+          image: {
+            src: props.user.photo?.base64
           }
         }}
       />
@@ -36,5 +29,11 @@ export const UserColumn: ReusableComponent<IUserColumnProps> = ({
   )
 }
 
+UserColumn.displayName = 'UserColumn'
+UserColumn.defaultProps = {
+  size: 'small'
+}
+
 export * from './types'
 export * from './useUserListColumn'
+

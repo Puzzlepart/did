@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
+import { SaveFilterForm } from './SaveFilterForm'
 import { useColumns } from './useColumns'
 import { useMenuItems } from './useMenuItems'
-import { SaveFilterForm } from './SaveFilterForm'
 
 /**
  * Reports list
@@ -29,25 +29,24 @@ export const ReportsList: TabComponent = () => {
           padding='10px 0 20px 18px'
         />
       )}
-      {_.isEmpty(context.state.data.timeEntries) &&
-      !context.state.loading &&
-      context.queryPreset ? (
-        <UserMessage text={t('reports.noEntriesText')} />
-      ) : (
-        <List
-          enableShimmer={context.state.loading}
-          checkboxVisibility={CheckboxVisibility.always}
-          items={context.state.data.timeEntries}
-          columns={columns}
-          menuItems={menuItems}
-          exportFileName={context.queryPreset?.exportFileName}
-          filterValues={context.state?.activeFilter?.values}
-          onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
-          filterPanel={{
-            headerElements: <SaveFilterForm />
-          }}
-        />
-      )}
+      <List
+        enableShimmer={context.state.loading}
+        checkboxVisibility={CheckboxVisibility.always}
+        items={context.state.data.timeEntries}
+        columns={columns}
+        menuItems={menuItems}
+        exportFileName={context.queryPreset?.exportFileName}
+        filterValues={context.state?.activeFilter?.values}
+        onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
+        filterPanel={{
+          headerElements: <SaveFilterForm />
+        }}
+      />
+      {(_.isEmpty(context.state.data.timeEntries) &&
+        !context.state.loading &&
+        context.queryPreset) && (
+          <UserMessage text={t('reports.noEntriesText', context.queryPreset)} style={{ marginTop: -15 }} />
+        )}
     </div>
   )
 }

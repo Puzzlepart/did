@@ -1,8 +1,10 @@
 .columnHeader {
   height: 40px;
   min-height: 40px;
+  box-sizing: border-box;
 
   .container {
+    padding: 0 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;

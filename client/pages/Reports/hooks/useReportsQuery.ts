@@ -25,7 +25,6 @@ import { default_query } from './useReportsQueries'
  * @category Reports Hooks
  */
 export function useReportsQuery({
-  state,
   dispatch,
   queryPreset
 }: IReportsContext) {
@@ -56,13 +55,7 @@ export function useReportsQuery({
   )
 
   useEffect(() => {
-    const reportLinks =
-      (queryPreset &&
-        state.data.reportLinks.filter(
-          ({ linkRef }) => linkRef === queryPreset.reportLinkRef
-        )) ??
-      []
-    if (_.isEmpty(reportLinks)) {
+    if (_.isEmpty(queryPreset.reportLinks)) {
       query({ variables: queryPreset?.variables })
     }
   }, [queryPreset])

@@ -10,11 +10,11 @@ import { useRows } from './useRows'
  * @category SummaryView
  */
 export function useSummaryView() {
-  const { state } = useContext(ReportsContext)
+  const context = useContext(ReportsContext)
   const columns = useColumns()
-  const rows = useRows(state)
+  const rows = useRows()
   return {
-    state,
+    ...context,
     rows,
     columns
   }

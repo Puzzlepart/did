@@ -24,7 +24,9 @@ export function useReportsReducer() {
       ({
         loading: false,
         data: {
-          reportLinks: []
+          reportLinks: [],
+          users: [],
+          periods: []
         },
         activeFilter: null,
         filterState: {

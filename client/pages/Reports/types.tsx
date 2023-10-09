@@ -8,7 +8,7 @@ import { Project, ReportLink, TimesheetPeriodObject, User } from 'types'
 /**
  * @category Reports
  */
-export interface IReportsQuery extends ITabProps {
+export interface IReportsQuery<QueryType = any> extends ITabProps {
   /**
    * Unique query identifier
    */
@@ -17,12 +17,12 @@ export interface IReportsQuery extends ITabProps {
   /**
    * GraphQL query
    */
-  query: any
+  query: QueryType
 
   /**
    * GraphQL query variables
    */
-  variables?: any
+  variables?: Record<string, any>
 
   /**
    * Export file name template. {0} will be replaced
@@ -48,7 +48,7 @@ export interface IReportsQuery extends ITabProps {
   reportLinks?: ReportLink[]
 
   /**
-   * Date periods
+   * Date periods for the summary report.
    */
   periods?: IDatePeriod[]
 }
@@ -107,7 +107,7 @@ export interface IReportsData {
  */
 export interface IReportsState {
   /**
-   * Data
+   * Data for the current query
    */
   data?: Partial<IReportsData>
 

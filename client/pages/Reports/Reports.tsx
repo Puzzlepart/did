@@ -10,7 +10,7 @@ export const Reports: FC = () => {
   const { context, tabs } = useReports()
   return (
     <ReportsContext.Provider value={context}>
-      <Tabs vertical items={tabs} selectedValue={context.queryPreset?.id} />
+      <Tabs vertical items={tabs} defaultSelectedValue={context.queryPreset?.id} />
     </ReportsContext.Provider>
   )
 }

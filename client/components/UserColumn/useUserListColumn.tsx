@@ -1,4 +1,5 @@
-import { IPersonaProps } from '@fluentui/react'
+
+import { PersonaProps } from '@fluentui/react-components'
 import { IListColumn } from 'components/List/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +13,7 @@ import { UserColumn } from '.'
  * set to `true` to render a total column.
  */
 export function useUserListColumn(
-  persona: IPersonaProps = {},
+  size?: PersonaProps['size'],
   props?: Partial<IListColumn>
 ): IListColumn {
   const { t } = useTranslation()
@@ -31,7 +32,7 @@ export function useUserListColumn(
           </span>
         )
       }
-      return <UserColumn user={item?.user || item} persona={persona} />
+      return <UserColumn user={item?.user || item} size={size} />
     }
   }
 }

@@ -1,9 +1,8 @@
-import { IDetailsColumnRenderTooltipProps, PersonaSize } from '@fluentui/react'
+import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import $date from 'DateUtils'
 import { IListColumn, IListColumnData } from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import { useReportsContext } from '../../context'
 import { ColumnHeader } from '../ColumnHeader'
 import { PeriodColumn } from '../PeriodColumn'
@@ -14,10 +13,7 @@ import { PeriodColumn } from '../PeriodColumn'
 export function useColumns(): IListColumn[] {
   const { queryPreset } = useReportsContext()
   const periods = (queryPreset?.periods ?? []) as any[]
-  const userColumn = useUserListColumn({
-    size: PersonaSize.size24,
-    hidePersonaDetails: isMobile
-  })
+  const userColumn = useUserListColumn()
   const columns: IListColumn[] = [userColumn]
   for (const p of periods) {
     const data: IListColumnData = {}
