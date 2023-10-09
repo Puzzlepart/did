@@ -1,19 +1,31 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-classes-per-file */
+import colors from 'colors/safe'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../graphql/requestContext'
 import { redisMiddlware } from '../middleware/redis'
-const colors = require('colors/safe')
 const log = require('debug')('server/services/cache')
 
 /**
  * Cache scope - `USER` or `SUBSCRIPTION`
  */
 export enum CacheScope {
+  /**
+   * User scope
+   */
   USER,
-  SUBSCRIPTION
+
+  /**
+   * Subscription scope
+   */
+  SUBSCRIPTION,
+
+  /**
+   * Global scope
+   */
+  GLOBAL
 }
 
 /**
@@ -86,10 +98,11 @@ export class CacheService {
     const scopedCacheKey = [
       this.prefix,
       ...key,
-      scope === CacheScope.SUBSCRIPTION
+      scope !== CacheScope.GLOBAL && (scope === CacheScope.SUBSCRIPTION
         ? this.context.subscription.id
-        : this.context.userId
+        : this.context.userId)
     ]
+      .filter(Boolean)
       .join(':')
       .replace(/-/g, '')
       .toLowerCase()
@@ -137,7 +150,7 @@ export class CacheService {
       log(
         `Setting value for key ${colors.magenta(
           scopedCacheKey
-        )} with a expiration of ${colors.magenta(expiry)} seconds.`
+        )} with a expiration of ${colors.magenta(expiry.toString())} seconds.`
       )
       redisMiddlware.setex(
         scopedCacheKey,
@@ -153,7 +166,7 @@ export class CacheService {
             log(
               `Value for key ${colors.magenta(
                 scopedCacheKey
-              )} set with a expiration of ${colors.magenta(expiry)} seconds.`
+              )} set with a expiration of ${colors.magenta(expiry.toString())} seconds.`
             )
             resolve(reply)
           }
@@ -165,10 +178,10 @@ export class CacheService {
   /**
    * Clear cache for the specified key and scope
    *
-   * @param options - Cache options
+   * @param key - Cache key
    */
-  public clear({ key, scope }: CacheOptions) {
-    const pattern = `${this._getScopedCacheKey(key, scope)}*`
+  public clear(key: CacheKey) {
+    const pattern = `${this._getScopedCacheKey(key, CacheScope.GLOBAL)}*`
     return new Promise((resolve) => {
       redisMiddlware.keys(pattern, (_error, keys) => {
         redisMiddlware.del(keys, () => {

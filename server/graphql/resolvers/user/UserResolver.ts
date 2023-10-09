@@ -42,13 +42,13 @@ export class UserResolver {
   /**
    * Constructor for UserResolver
    *
-   * @param _msgraph - MS Graph service
+   * @param _msgraphSvc - MS Graph service
    * @param _userSvc - User service
    * @param _subSvc - Subscription service
    * @param _githubSvc - GitHub service
    */
   constructor(
-    private readonly _msgraph: MSGraphService,
+    private readonly _msgraphSvc: MSGraphService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService,
     private readonly _githubSvc: GitHubService
@@ -90,7 +90,7 @@ export class UserResolver {
     description: 'Get all users from Active Directory'
   })
   activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
-    return this._msgraph.getUsers()
+    return this._msgraphSvc.getUsers()
   }
 
   /**
