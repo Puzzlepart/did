@@ -32,7 +32,7 @@ export const ReportLinks: TabComponent = () => {
         menuItems={[
           new ListMenuItem(t('admin.reportLinks.addNewReportsLink'))
             .withIcon('Add')
-            .setOnClick(() => setForm({ isOpen: true })),
+            .setOnClick(() => setForm({ open: true })),
           new ListMenuItem(t('common.editLabel'))
             .withIcon('LinkEdit')
             .setOnClick(onEdit)
@@ -51,7 +51,7 @@ export const ReportLinks: TabComponent = () => {
               text: t('admin.reportLinks.addNewReportsLink'),
               iconProps: { iconName: 'Add' },
               onClick: () => {
-                setForm({ isOpen: true })
+                setForm({ open: true })
               }
             }
           ],

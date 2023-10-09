@@ -1,7 +1,6 @@
-import { IPanelProps } from '@fluentui/react'
+import { IPanelProps } from 'components/Panel'
 
 export interface IReportLinksFormProps extends IPanelProps {
-  title?: string
   edit?: any
   onSave?: (report: any) => void
 }

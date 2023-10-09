@@ -1,5 +1,5 @@
 import { ChoiceGroup } from '@fluentui/react'
-import { BasePanel } from 'components'
+import { Panel } from 'components'
 import { UserMessage } from 'components/UserMessage'
 import { useExcelExport } from 'hooks'
 import React, { FC } from 'react'
@@ -22,11 +22,11 @@ export const UserReports: FC = () => {
   return (
     <BrowserView renderWithFragment={true}>
       <MenuItem text={t('common.userReports')} onClick={togglePanel} />
-      <BasePanel
-        headerText={t('common.userReports')}
-        isOpen={showPanel}
+      <Panel
+        title={t('common.userReports')}
+        open={showPanel}
         onDismiss={togglePanel}
-        footerActions={[
+        actions={[
           {
             text: t('common.exportExcel'),
             iconName: 'ArrowExportUp',
@@ -49,7 +49,7 @@ export const UserReports: FC = () => {
           hidden={!preset || query.loading}
           text={t('common.userReportSummary', query)}
         />
-      </BasePanel>
+      </Panel>
     </BrowserView>
   )
 }

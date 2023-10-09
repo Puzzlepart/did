@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
-import { IPanelProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { FormSubmitHook, useFormControlModel } from 'components/FormControl'
+import { IPanelProps } from 'components/Panel'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BaseResult } from 'types'

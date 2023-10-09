@@ -1,4 +1,3 @@
-import { IPanelProps } from '@fluentui/react'
 import {
   DropdownControl,
   FormControl,
@@ -7,14 +6,15 @@ import {
   RadioGroupControl,
   SwitchControl
 } from 'components/FormControl'
-import React, { FC } from 'react'
+import { PanelComponent } from 'components/Panel'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useFeedbackPanel } from './useFeedbackPanel'
 
 /**
  * @category Function Component
  */
-export const FeedbackPanel: FC<IPanelProps> = (props) => {
+export const FeedbackPanel: PanelComponent = (props) => {
   const { t } = useTranslation()
   const { labelOptions, moodOptions, model, register, formControlProps } =
     useFeedbackPanel(props)

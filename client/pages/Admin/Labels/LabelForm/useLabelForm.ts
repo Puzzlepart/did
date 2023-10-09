@@ -17,9 +17,9 @@ export function useLabelForm(props: ILabelFormProps) {
   const model = useLabelModel(props)
   const register = useFormControls(model)
   const submitProps = useLabelFormSubmit(props, model)
-  const panelProps: IFormControlProps['panelProps'] = {
+  const panelProps: IFormControlProps['panel'] = {
     ..._.omit(props, 'onSave'),
-    headerText: props.edit
+    title: props.edit
       ? t('admin.labels.editText')
       : t('admin.labels.addNewText')
   }

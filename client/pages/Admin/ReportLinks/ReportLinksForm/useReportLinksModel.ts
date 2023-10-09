@@ -31,10 +31,10 @@ export function useReportLinksModel(props: IReportLinksFormProps) {
   }, [props.edit])
 
   useEffect(() => {
-    if (!props?.isOpen) {
+    if (!props?.open) {
       map.$set(INITIAL_MODEL)
     }
-  }, [props?.isOpen])
+  }, [props?.open])
 
   return map
 }

@@ -7,14 +7,14 @@ import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { User } from 'types'
 import { BulkImportPanel } from './BulkImportPanel'
+import { UserForm } from './UserForm'
+import styles from './Users.module.scss'
 import { UsersContext } from './context'
 import {
   HIDE_ADD_MULTIPLE_PANEL,
   HIDE_USER_FORM,
   SET_SELECTED_USERS
 } from './reducer/actions'
-import { UserForm } from './UserForm'
-import styles from './Users.module.scss'
 import { useUsers } from './useUsers'
 
 /**
@@ -65,7 +65,7 @@ export const Users: TabComponent<ITabProps> = () => {
         >
           <UserForm
             {...context.state.userForm}
-            isOpen={!!context.state.userForm}
+            open={!!context.state.userForm}
             onDismiss={(event) => {
               context.dispatch(HIDE_USER_FORM())
               !event && context.refetch()
@@ -73,7 +73,7 @@ export const Users: TabComponent<ITabProps> = () => {
           />
           <BulkImportPanel
             {...context.state.bulkImportPanel}
-            isOpen={!!context.state.bulkImportPanel}
+            open={!!context.state.bulkImportPanel}
             onAdd={onAddUsers}
             onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
           />

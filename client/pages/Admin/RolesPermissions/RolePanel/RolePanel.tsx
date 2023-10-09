@@ -4,14 +4,14 @@ import {
   IconPickerControl,
   InputControl
 } from 'components'
+import { PanelComponent } from 'components/Panel'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyledComponent } from 'types'
 import { EditPermissions } from './EditPermissions'
 import { IRolePanelProps } from './types'
 import { useRolePanel } from './useRolePanel'
 
-export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
+export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
   const { model, register, submitProps, panelProps, isEditMode } =
     useRolePanel(props)
@@ -20,7 +20,7 @@ export const RolePanel: StyledComponent<IRolePanelProps> = (props) => {
     <FormControl
       model={model}
       submitProps={submitProps}
-      panelProps={panelProps}
+      panel={panelProps}
     >
       <InputControl
         {...register('name')}

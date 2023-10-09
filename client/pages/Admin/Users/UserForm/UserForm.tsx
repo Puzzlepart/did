@@ -22,7 +22,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   return (
     <FormControl
       model={model}
-      panelProps={{ ...props, scroll: true }}
+      panel={{ ...props }}
       submitProps={submitProps}
     >
       {!isEditMode && (

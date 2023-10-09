@@ -53,7 +53,7 @@ export const ApiTokens: TabComponent = () => {
           new ListMenuItem(t('admin.apiTokens.addNew'))
             .withIcon('Add')
             .setDisabled(!hasPermission($.MANAGE_API_TOKENS))
-            .setOnClick(() => setForm({ isOpen: true })),
+            .setOnClick(() => setForm({ open: true })),
           new ListMenuItem(t('admin.apiTokens.delete'))
             .setOnClick(onDelete)
             .withIcon('Delete')
@@ -61,12 +61,12 @@ export const ApiTokens: TabComponent = () => {
             .setDisabled(!selectedToken || !hasPermission($.MANAGE_API_TOKENS))
         ]}
       />
-      {form.isOpen && (
+      {form.open && (
         <ApiTokenForm
           {...form}
           tokens={items}
           onTokenAdded={onTokenAdded}
-          onDismiss={() => setForm({ isOpen: false })}
+          onDismiss={() => setForm({ open: false })}
         />
       )}
       {confirmationDialog}

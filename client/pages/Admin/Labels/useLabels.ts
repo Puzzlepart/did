@@ -4,8 +4,8 @@ import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/Confirm
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
-import $deleteLabel from './deleteLabel.gql'
 import { ILabelFormProps } from './LabelForm'
+import $deleteLabel from './deleteLabel.gql'
 import { useColumns } from './useColumns'
 
 /**
@@ -18,21 +18,21 @@ export function useLabels() {
   const [items, { loading, refetch }] = useLabelsQuery()
   const [deleteLabel] = useMutation($deleteLabel)
   const [form, setForm] = useState<ILabelFormProps>({
-    isOpen: false
+    open: false
   })
   const [selectedLabel, onSelectionChanged] = useState<LabelObject>(null)
   const [ConfirmationDialog, getResponse] = useConfirmationDialog()
 
   const onDismiss = useCallback(() => {
-    setForm({ isOpen: false })
+    setForm({ open: false })
   }, [])
 
   const onSave = useCallback(() => {
-    refetch().then(() => setForm({ isOpen: false }))
+    refetch().then(() => setForm({ open: false }))
   }, [])
 
   const onEdit = useCallback(() => {
-    setForm({ isOpen: true, edit: selectedLabel })
+    setForm({ open: true, edit: selectedLabel })
   }, [selectedLabel])
 
   const onDelete = useCallback(async () => {

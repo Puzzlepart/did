@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
-import { SaveFilterForm } from '../SaveFilterForm'
 import { useColumns } from './useColumns'
 import { useMenuItems } from './useMenuItems'
 
@@ -43,9 +42,9 @@ export const ReportsList: TabComponent = () => {
           exportFileName={context.state.queryPreset?.exportFileName}
           filterValues={context.state?.activeFilter?.values}
           onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
-          filterPanelActions={
-            <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
-          }
+          // filterPanelActions={
+          //   <SaveFilterForm disabled={!context.state.filterState?.isFiltered} />
+          // }
         />
       )}
     </div>

@@ -47,10 +47,9 @@ export const Projects: FC = () => {
       )}
       <ProjectForm
         edit={{ ...context.state.editProject }}
-        panelProps={{
-          scroll: true,
-          isOpen: !!context.state.editProject,
-          headerText: context.state.editProject?.name,
+        panel={{
+          open: !!context.state.editProject,
+          title: context.state.editProject?.name,
           onDismiss: () => context.dispatch(CLOSE_EDIT_PANEL())
         }}
       />
