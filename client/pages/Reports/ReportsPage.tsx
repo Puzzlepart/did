@@ -2,6 +2,7 @@ import { PageComponent } from 'pages/types'
 import * as React from 'react'
 import { PermissionScope } from 'security'
 import { Reports } from './Reports'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 /**
  * Reports page
@@ -13,7 +14,14 @@ import { Reports } from './Reports'
  * @category Page Component
  */
 export const ReportsPage: PageComponent = () => {
-  return <Reports />
+  const match = useRouteMatch()
+  return (
+    <Switch>
+      <Route path={`${match.path}/:queryPreset?`}>
+        <Reports />
+      </Route>
+    </Switch>
+  )
 }
 
 ReportsPage.displayName = 'ReportsPage'

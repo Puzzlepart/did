@@ -1,15 +1,14 @@
 import { TabItems } from 'components/Tabs'
-import { useLayoutEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
-import { IReportsContext } from './context'
-import { useReportsQueries, useReportsQuery } from './hooks'
-import { useReportsReducer } from './reducer'
-import { CHANGE_QUERY } from './reducer/actions'
 import { ReportTab } from './ReportTab'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
+import { IReportsContext } from './context'
+import { useReportsQueries, useReportsQuery } from './hooks'
+import { useReportsReducer } from './reducer'
 
 /**
  * Component logic for `<Reports />`
@@ -29,14 +28,14 @@ import { WelcomeTab } from './WelcomeTab'
 export function useReports() {
   const { t } = useTranslation()
   const queries = useReportsQueries()
-  const [state, dispatch] = useReportsReducer(queries)
-  const query = useReportsQuery({ state, dispatch })
+  const [state, dispatch] = useReportsReducer()
+  const context = useMemo<IReportsContext>(
+    () => ({ state, dispatch, queries }),
+    [state]
+  )
 
-  useLayoutEffect(() => {
-    if (state.queryPreset && _.isEmpty(state.queryPreset?.reportLinks)) {
-      query({ variables: state.queryPreset?.variables })
-    }
-  }, [state.queryPreset?.reportLinks])
+  useReportsQuery(context)
+
 
   useUpdateUserConfiguration({
     config: {
@@ -44,11 +43,6 @@ export function useReports() {
     },
     autoUpdate: !state.loading && !!state.activeFilter?.text
   })
-
-  const context = useMemo<IReportsContext>(
-    () => ({ state, dispatch, queries }),
-    [state]
-  )
 
   const queryTabs = useMemo(
     () =>
@@ -79,14 +73,8 @@ export function useReports() {
     [queryTabs]
   )
 
-  const onTabSelect = (key: string) => {
-    if (key === 'home') return
-    dispatch(CHANGE_QUERY({ id: key }))
-  }
-
   return {
     tabs,
-    context,
-    onTabSelect
+    context
   }
 }

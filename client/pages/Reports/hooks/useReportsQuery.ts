@@ -1,21 +1,16 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import {
-  FetchPolicy,
-  QueryLazyOptions,
   useLazyQuery,
   useQuery
 } from '@apollo/client'
-import { AnyAction } from '@reduxjs/toolkit'
-import { useLayoutEffect } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
+import { ReportLink } from 'types'
+import _ from 'underscore'
+import { IReportsContext } from '../context'
 import { report_links } from '../queries'
 import { DATA_UPDATED } from '../reducer/actions'
-import { IReportsState } from '../types'
 import { default_query } from './useReportsQueries'
-
-type useReportsQuery = {
-  state: IReportsState
-  dispatch: React.Dispatch<AnyAction>
-  fetchPolicy?: FetchPolicy
-}
 
 /**
  * Hook for Reports Query.
@@ -33,24 +28,44 @@ type useReportsQuery = {
  *
  * @category Reports Hooks
  */
-export function useReportsQuery({
-  state,
-  dispatch,
-  fetchPolicy = 'no-cache'
-}: useReportsQuery): (options?: QueryLazyOptions<any>) => void {
+export function useReportsQuery(context: IReportsContext) {
+  const params = useParams<{ queryPreset?: string }>()
+  const queryPreset = useMemo(() => _.find(context.queries, (q) => q.id === params.queryPreset), [params.queryPreset])
   const [query, queryResult] = useLazyQuery(
-    state.queryPreset?.query || default_query,
+    queryPreset?.query || default_query,
     {
-      fetchPolicy,
-      variables: state.queryPreset?.variables || {}
+      fetchPolicy: 'no-cache'
     }
   )
-  const reportLinksQuery = useQuery(report_links, {
+
+  // eslint-disable-next-line no-console
+  console.log(queryResult)
+
+  const reportLinksQuery = useQuery<{ reportLinks: ReportLink[] }>(report_links, {
     fetchPolicy: 'cache-and-network'
   })
-  useLayoutEffect(
-    () => dispatch(DATA_UPDATED({ queryResult, reportLinksQuery })),
+
+  useEffect(
+    () => context.dispatch(DATA_UPDATED({
+      ...queryResult.data,
+      ...reportLinksQuery.data,
+      loading: queryResult.loading || reportLinksQuery.loading
+    })),
     [queryResult.loading, reportLinksQuery.loading]
   )
-  return query
+
+  // eslint-disable-next-line no-console
+  console.log({
+    ...queryResult.data,
+    ...reportLinksQuery.data,
+    loading: queryResult.loading || reportLinksQuery.loading
+  })
+
+  useEffect(() => {
+    const reportLinks = (queryPreset && context.state.data.reportLinks.filter(({ linkRef }) => linkRef === queryPreset.reportLinkRef)) ?? []
+    if (_.isEmpty(reportLinks)) {
+      query({ variables: queryPreset?.variables })
+    }
+  }, [params.queryPreset])
+
 }
