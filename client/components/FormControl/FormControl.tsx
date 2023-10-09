@@ -1,12 +1,11 @@
-import { PanelType } from '@fluentui/react'
-import { BasePanel } from 'components/BasePanel'
+import { Drawer, DrawerBody } from '@fluentui/react-components/unstable'
 import { Footer } from 'components/BasePanel/Footer'
 import { JsonDebug } from 'components/JsonDebug'
 import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { FormControlContext } from './context'
 import styles from './FormControl.module.scss'
+import { FormControlContext } from './context'
 import { IFormControlProps } from './types'
 import { useFormControl } from './useFormControl'
 
@@ -32,13 +31,15 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   return (
     <FormControlContext.Provider value={context}>
       {props.panelProps ? (
-        <BasePanel
-          type={PanelType.medium}
-          {...props.panelProps}
-          footerActions={[submitAction]}
+        <Drawer
+          open={props.panelProps.isOpen}
+          type='overlay'
+          position='end'
         >
-          {content}
-        </BasePanel>
+          <DrawerBody>
+            {content}
+          </DrawerBody>
+        </Drawer>
       ) : (
         <>
           {content}
