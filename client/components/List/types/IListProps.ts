@@ -7,6 +7,7 @@ import {
   SelectionMode
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-search-preview'
+import { IPanelProps } from 'components/Panel/types'
 import { CSSProperties, HTMLProps } from 'react'
 import { ListMenuItem } from '../ListToolbar'
 import { IListColumn } from './IListColumn'
@@ -94,7 +95,7 @@ export interface IListProps<T = any>
   /**
    * Filter panel actions
    */
-  filterPanelActions?: JSX.Element | JSX.Element[]
+  filterPanelActions?: IPanelProps['actions']
 
   /**
    * On filter callback returning `filters` and `isFiltered`.
