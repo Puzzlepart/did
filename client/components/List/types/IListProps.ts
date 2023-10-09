@@ -20,7 +20,7 @@ import { IFilterPanelProps } from 'components/FilterPanel'
 
 export interface IListProps<T = any>
   extends Pick<HTMLProps<HTMLDivElement>, 'className'>,
-  Omit<IShimmeredDetailsListProps, 'selectionMode'> {
+    Omit<IShimmeredDetailsListProps, 'selectionMode'> {
   /**
    * Items
    */

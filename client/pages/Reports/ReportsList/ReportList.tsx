@@ -42,7 +42,7 @@ export const ReportsList: TabComponent = () => {
           menuItems={menuItems}
           exportFileName={context.queryPreset?.exportFileName}
           filterValues={context.state?.activeFilter?.values}
-          onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))} 
+          onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
           filterPanel={{
             headerElements: <SaveFilterForm />
           }}

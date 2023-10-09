@@ -29,7 +29,11 @@ export function useSaveFilterForm() {
     setInputVisible(false)
   }
 
-  const disabled = (value('text')?.length < 2 && !!value('iconProps')?.iconName && inputVisible) || !context.state.filterState?.isFiltered
+  const disabled =
+    (value('text')?.length < 2 &&
+      !value('iconProps')?.iconName &&
+      inputVisible) ||
+    !context.state.filterState?.isFiltered
 
   return { inputVisible, setInputVisible, value, set, onSave, disabled }
 }
