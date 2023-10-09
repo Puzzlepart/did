@@ -1,13 +1,15 @@
 import { TabItems } from 'components/Tabs'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
 import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
-import { ReportTab } from './ReportTab'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
 import { IReportsContext } from './context'
-import { useReportsQueries, useReportsQuery, useReportsQueryPreset } from './hooks'
+import {
+  useReportsQueries,
+  useReportsQuery,
+  useReportsQueryPreset
+} from './hooks'
 import { useReportsReducer } from './reducer'
 
 /**
@@ -27,11 +29,11 @@ import { useReportsReducer } from './reducer'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const queries = useReportsQueries()
+  const { queries, queryTabs } = useReportsQueries()
   const [state, dispatch] = useReportsReducer()
   const queryPreset = useReportsQueryPreset(queries, state)
   const context = useMemo<IReportsContext>(
-    () => ({ state, dispatch, queryPreset, queries }),
+    () => ({ state, dispatch, queryPreset }),
     [state]
   )
 
@@ -44,26 +46,11 @@ export function useReports() {
     autoUpdate: !state.loading && !!state.activeFilter?.text
   })
 
-  const queryTabs = useMemo(
-    () =>
-      _.reduce(
-        _.filter(queries, (q) => !q.hidden),
-        (tabs, query) => {
-          const { id, text, description } = query
-          tabs[id] = [
-            ReportTab,
-            {
-              text,
-              description
-            }
-          ]
-          return tabs
-        },
-        {} as TabItems
-      ),
-    [queries]
-  )
-
+  /**
+   * Tabs for `<Reports />`. The `home` tab is always present,
+   * aswell as the `summary` tab. `queryTabs` are the tabs
+   * for the queries.
+   */
   const tabs: TabItems = useMemo(
     () => ({
       home: [WelcomeTab, t('reports.welcomeHeaderText')],

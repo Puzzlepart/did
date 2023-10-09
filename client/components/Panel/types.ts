@@ -19,6 +19,11 @@ export interface IPanelProps
   description?: string
 
   /**
+   * Actions to display in the header of the panel.
+   */
+  headerActions?: IDynamicButtonProps[]
+
+  /**
    * Actions to display in the footer of the panel.
    */
   actions?: IDynamicButtonProps[]

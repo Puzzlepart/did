@@ -23,11 +23,6 @@ export interface IReportsContext {
   columns?: IListColumn[]
 
   /**
-   * Queries for the reports
-   */
-  queries: IReportsQuery[]
-
-  /**
    * The currently selected query preset
    */
   queryPreset: IReportsQuery

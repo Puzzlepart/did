@@ -16,7 +16,11 @@ export const ReportTab: FC = () => {
   }
   return (
     <div>
-      {_.isEmpty(context.queryPreset.reportLinks) ? <ReportsList /> : <ReportLinks />}
+      {_.isEmpty(context.queryPreset.reportLinks) ? (
+        <ReportsList />
+      ) : (
+        <ReportLinks />
+      )}
     </div>
   )
 }

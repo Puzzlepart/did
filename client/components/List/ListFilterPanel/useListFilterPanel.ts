@@ -23,6 +23,7 @@ export function useListFilterPanel(): IFilterPanelProps {
     () =>
       ({
         ...context.state.filterPanel,
+        ...context.props.filterPanel,
         title: t('reports.filterPanelHeaderText'),
         filters,
         items: context.state.origItems,
@@ -30,8 +31,7 @@ export function useListFilterPanel(): IFilterPanelProps {
           context.dispatch(FILTERS_UPDATED({ filters })),
         onClearFilters: () => context.dispatch(CLEAR_FILTERS()),
         onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
-        selectedFilter: context.state.filterBy,
-        actions: context.props.filterPanelActions
+        selectedFilter: context.state.filterBy
       }) as IFilterPanelProps,
     [context]
   )

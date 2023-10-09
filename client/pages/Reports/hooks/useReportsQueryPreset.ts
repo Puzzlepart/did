@@ -11,7 +11,10 @@ import { IReportsParameters, IReportsQuery, IReportsState } from '../types'
  *
  * @param context - The reports context containing the queries to search through.
  */
-export function useReportsQueryPreset(queries: IReportsQuery[], state: IReportsState) {
+export function useReportsQueryPreset(
+  queries: IReportsQuery[],
+  state: IReportsState
+) {
   const params = useParams<IReportsParameters>()
   const queryPreset = useMemo(() => {
     const _queryPreset = _.find(queries, ({ id }) => id === params.queryPreset)

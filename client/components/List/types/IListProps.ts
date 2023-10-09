@@ -7,12 +7,12 @@ import {
   SelectionMode
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-search-preview'
-import { IPanelProps } from 'components/Panel/types'
 import { CSSProperties, HTMLProps } from 'react'
 import { ListMenuItem } from '../ListToolbar'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
 import { ListFilterState } from './ListFilterState'
+import { IFilterPanelProps } from 'components/FilterPanel'
 
 /**
  * @category List
@@ -93,9 +93,9 @@ export interface IListProps<T = any>
   defaultSearchBoxWidth?: number
 
   /**
-   * Filter panel actions
+   * Filter panel props
    */
-  filterPanelActions?: IPanelProps['actions']
+  filterPanel?: Pick<IFilterPanelProps, 'headerActions'>
 
   /**
    * On filter callback returning `filters` and `isFiltered`.

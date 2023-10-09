@@ -24,7 +24,11 @@ import { default_query } from './useReportsQueries'
  *
  * @category Reports Hooks
  */
-export function useReportsQuery({ state, dispatch, queryPreset }: IReportsContext) {
+export function useReportsQuery({
+  state,
+  dispatch,
+  queryPreset
+}: IReportsContext) {
   const [query, queryResult] = useLazyQuery(
     queryPreset?.query || default_query,
     {
