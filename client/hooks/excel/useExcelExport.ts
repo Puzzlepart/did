@@ -1,4 +1,5 @@
-import { format, IColumn } from '@fluentui/react'
+import { format } from '@fluentui/react'
+import { IListColumn } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -7,7 +8,7 @@ import { exportExcel } from 'utils/exportExcel'
 interface IUseExcelExportOptions {
   items: any[]
   fileName: string
-  columns: IColumn[] | ((t: TFunction) => IColumn[])
+  columns: IListColumn[] | ((t: TFunction) => IListColumn[])
   callback?: (blob: Blob) => void
 }
 

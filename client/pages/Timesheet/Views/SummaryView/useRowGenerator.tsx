@@ -1,5 +1,6 @@
-import { DateRangeType, IColumn } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react'
 import $date from 'DateUtils'
+import { IListColumn } from 'components/List/types'
 import { TFunction, useTranslation } from 'react-i18next'
 import { EventObject, Project } from 'types'
 import _ from 'underscore'
@@ -25,7 +26,7 @@ function getUniqueProjectRows(events: EventObject[], t: TFunction): any[] {
   ]
 }
 
-export function useRowGenerator(columns: IColumn[]) {
+export function useRowGenerator(columns: IListColumn[]) {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
 

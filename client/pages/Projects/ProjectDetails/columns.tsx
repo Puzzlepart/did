@@ -1,8 +1,8 @@
-import { IColumn } from '@fluentui/react'
+import { IListColumn } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { ExcelColumnType } from 'utils/exportExcel'
 
-const columns = (t: TFunction): IColumn[] => [
+const columns = (t: TFunction): IListColumn[] => [
   {
     key: 'title',
     fieldName: 'title',
