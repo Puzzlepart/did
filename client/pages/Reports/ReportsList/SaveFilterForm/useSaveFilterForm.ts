@@ -30,8 +30,7 @@ export function useSaveFilterForm() {
   }
 
   const disabled =
-    (value('text')?.length < 2 &&
-      !value('iconProps')?.iconName &&
+    ((value('text')?.length < 2 || !value('iconProps')?.iconName) &&
       inputVisible) ||
     !context.state.filterState?.isFiltered
 
