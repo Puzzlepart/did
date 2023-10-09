@@ -16,10 +16,18 @@ export enum CacheScope {
   SUBSCRIPTION
 }
 
+/**
+ * Cache key can either be an string or an array of string.
+ */
 export type CacheKey = string | string[]
 
 /**
- * Cache options
+ * Cache options for `CacheService`.
+ * 
+ * - `key` - Cache key
+ * - `expiry` - Cache expiry in seconds
+ * - `scope` - Cache scope
+ * - `disabled` - Cache disabled (defaults to `false`)
  */
 export type CacheOptions = {
   /**
@@ -36,6 +44,11 @@ export type CacheOptions = {
    * Cache scope
    */
   scope?: CacheScope
+
+  /**
+   * Cache disabled (defaults to `false`)
+   */
+  disabled?: boolean
 }
 
 /**
@@ -166,18 +179,21 @@ export class CacheService {
   }
 
   /**
-   * Using cache
+   * Using cache for the provided `asyncFunction` using the specified `options`.
+   * If the value is not cached, the `asyncFunction` is executed and the value
+   * is cached with redis.
    *
-   * @param func - Promise function
+   * @param asyncFunction - Async function to execute if the value is not cached
    * @param options - Cache options
    */
   public async usingCache<T = any>(
-    function_: () => Promise<T>,
-    { key, expiry = 60, scope }: CacheOptions
+    asyncFunction: () => Promise<T>,
+    { key, expiry = 60, scope, disabled = false }: CacheOptions
   ) {
+    if(disabled) return await asyncFunction()
     const cachedValue: T = await this._get<T>({ key, scope })
     if (cachedValue) return cachedValue
-    const value: T = await function_()
+    const value: T = await asyncFunction()
     await this._set({ key, scope, expiry }, value)
     return value
   }
