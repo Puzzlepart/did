@@ -69,7 +69,7 @@ export class LabelService extends MongoDocumentService<Label> {
         _id: this._generateId(label),
         ...label
       })
-      await this.cache.clear({ key: 'labels' })
+      await this.cache.clear('labels')
       return result
     } catch (error) {
       throw error
@@ -83,8 +83,8 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
+      await this.cache.clear('labels')
       await this.update(_.pick(label, 'name'), label)
-      await this.cache.clear({ key: 'labels' })
     } catch (error) {
       throw error
     }
@@ -97,8 +97,8 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async deleteLabel(name: string): Promise<DeleteWriteOpResultObject> {
     try {
+      await this.cache.clear('labels')
       const result = await this.collection.deleteOne({ name })
-      await this.cache.clear({ key: 'labels' })
       return result
     } catch (error) {
       throw error

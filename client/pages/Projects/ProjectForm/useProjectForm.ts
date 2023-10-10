@@ -1,6 +1,6 @@
 import { IFormControlProps, useFormControls } from 'components/FormControl'
 import { ComponentLogicHook } from 'hooks'
-import { useCustomersContext } from 'pages/Customers/context'
+import { useCustomersContext } from '../../Customers/context'
 import { IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'
 import { useProjectFormSubmit } from './useProjectFormSubmit'

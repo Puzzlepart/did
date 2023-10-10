@@ -52,6 +52,7 @@ export const Projects: FC = () => {
           title: context.state.editProject?.name,
           onDismiss: () => context.dispatch(CLOSE_EDIT_PANEL())
         }}
+        refetch={context.refetch}
       />
     </ProjectsContext.Provider>
   )
