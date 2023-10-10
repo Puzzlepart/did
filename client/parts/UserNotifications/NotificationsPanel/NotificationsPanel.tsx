@@ -18,7 +18,6 @@ export const NotificationsPanel: PanelComponent = (props) => {
   return (
     <Panel
       {...props}
-      className={NotificationsPanel.className}
       title={t('notifications.headerText')}
     >
       <div hidden={!_.isEmpty(notifications)}>
@@ -32,7 +31,7 @@ export const NotificationsPanel: PanelComponent = (props) => {
           }
         />
       </div>
-      <UserMessageContainer vertical gap={12}>
+      <UserMessageContainer vertical gap={20} margin='20px 0 0 0'>
         {...notifications.map((n, index) => (
           <UserNotification key={index} model={n} />
         ))}
@@ -42,6 +41,3 @@ export const NotificationsPanel: PanelComponent = (props) => {
 }
 
 NotificationsPanel.displayName = 'NotificationsPanel'
-
-export * from './UserNotification'
-export * from './types'

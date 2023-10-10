@@ -16,7 +16,7 @@ export const StatusBar: StyledComponent = () => {
     <FadeIn>
       <div className={className}>
         <div className={styles.container} hidden={_.isEmpty(messages)}>
-          <UserMessageContainer height='auto' vertical={isMobile}>
+          <UserMessageContainer vertical={isMobile}>
             {messages.map((message, key) => (
               <UserMessage key={key} {...message} />
             ))}

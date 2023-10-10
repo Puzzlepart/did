@@ -56,6 +56,3 @@ export const UserNotifications: StyledComponent<IUserNotificationsProps> = ({
 
 UserNotifications.displayName = 'UserNotifications'
 UserNotifications.className = styles.userNotifications
-
-export * from './NotificationsPanel'
-export * from './types'

@@ -25,7 +25,7 @@ export const UserMessageContainer: ReusableComponent<
 UserMessageContainer.defaultProps = {
   vertical: false,
   spread: 'evenly',
-  height: '100%',
+  height: 'auto',
   gap: 10,
   margin: 0
 }
