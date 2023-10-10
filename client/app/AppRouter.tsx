@@ -35,7 +35,7 @@ export const AppRouter: StyledComponent = () => {
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <AppSwitch />
         </ErrorBoundary>
-      <Toast {...context.state.toast} />
+        <Toast {...context.state.toast} />
       </div>
     </Router>
   )

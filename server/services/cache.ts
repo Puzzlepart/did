@@ -35,7 +35,7 @@ export type CacheKey = string | string[]
 
 /**
  * Cache options for `CacheService`.
- * 
+ *
  * - `key` - Cache key
  * - `expiry` - Cache expiry in seconds
  * - `scope` - Cache scope
@@ -98,9 +98,10 @@ export class CacheService {
     const scopedCacheKey = [
       this.prefix,
       ...key,
-      scope !== CacheScope.GLOBAL && (scope === CacheScope.SUBSCRIPTION
-        ? this.context.subscription.id
-        : this.context.userId)
+      scope !== CacheScope.GLOBAL &&
+        (scope === CacheScope.SUBSCRIPTION
+          ? this.context.subscription.id
+          : this.context.userId)
     ]
       .filter(Boolean)
       .join(':')
@@ -166,7 +167,9 @@ export class CacheService {
             log(
               `Value for key ${colors.magenta(
                 scopedCacheKey
-              )} set with a expiration of ${colors.magenta(expiry.toString())} seconds.`
+              )} set with a expiration of ${colors.magenta(
+                expiry.toString()
+              )} seconds.`
             )
             resolve(reply)
           }
@@ -203,7 +206,7 @@ export class CacheService {
     asyncFunction: () => Promise<T>,
     { key, expiry = 60, scope, disabled = false }: CacheOptions
   ) {
-    if(disabled) return await asyncFunction()
+    if (disabled) return await asyncFunction()
     const cachedValue: T = await this._get<T>({ key, scope })
     if (cachedValue) return cachedValue
     const value: T = await asyncFunction()
