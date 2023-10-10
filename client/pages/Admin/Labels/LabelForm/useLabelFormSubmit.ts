@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useToast } from 'components'
+import { useAppContext } from 'AppContext'
 import { FormSubmitHook } from 'components/FormControl'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -26,7 +26,7 @@ export const useLabelFormSubmit: FormSubmitHook<
 > = (props, model) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateLabel)
-  const [toast, setToast] = useToast(8000)
+  const { setToast } = useAppContext()
 
   /**
    * On save label
@@ -64,7 +64,6 @@ export const useLabelFormSubmit: FormSubmitHook<
     !s.isBlank(model.value('name', '')) && !s.isBlank(model.value('color', ''))
 
   return {
-    toast,
     text: t('common.save'),
     onClick: onSave,
     disabled: !isFormValid() || loading

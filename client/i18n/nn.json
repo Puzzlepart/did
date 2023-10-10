@@ -191,7 +191,9 @@
       "defaultTitle": "ny merkelapp",
       "addNewText": "Opprett ny merkelapp",
       "editText": "Rediger merkelapp",
-      "editLabels": "Klikk for å redigere merkelappar"
+      "editLabels": "Klikk for å redigere merkelappar",
+      "deleteSuccess": "Merkelappen **{{name}}** vart sletta utan problem.",
+      "deleteError": "Det oppstod eit problem med å sletta etiketten **{{name}}* . Ver vennleg og prøv igjen, eller spør ein voksen."
     },
     "subscriptionSettings": {
       "headerText": "Abonnement"

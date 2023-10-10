@@ -180,7 +180,9 @@
       "defaultTitle": "my new label",
       "addNewText": "Add new label",
       "editText": "Edit label",
-      "editLabels": "Click to edit labels"
+      "editLabels": "Click to edit labels",
+      "deleteSuccess": "The label **{{name}}** was successfully deleted.",
+      "deleteError": "There was an issue deleting label **{{name}}**. Please try again, or ask an adult."
     },
     "subscriptionSettings": {
       "headerText": "Subscription"
