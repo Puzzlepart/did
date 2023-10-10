@@ -467,7 +467,7 @@
     "userReportSummary": "Du har jobbet **{{hours}}** timer for {{projects}} prosjekter {{preset}}. \nKlikk _Eksporter til Excel_ for å eksportere timene dine til Excel.",
     "exportExcel": "Eksporter til Excel",
     "errorFallbackHeader": "Det ser ut som noe gikk galt",
-    "tryAgainText": "Prøv igjen, det kan fungere ...",
+    "tryAgainText": "Prøv igjen, det kan fungere.",
     "githubIssueReportLinkText": "Rapporter problem på GitHub",
     "ownerLabel": "Eier",
     "periodColumnTooltipTitle": "{{week}}/{{month}}",

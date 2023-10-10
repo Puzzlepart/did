@@ -9,18 +9,11 @@ import { DATA_UPDATED } from '../reducer/actions'
 import { default_query } from './useReportsQueries'
 
 /**
- * Hook for Reports Query.
+ * Responsible for fetching data for `Reports` component.
  *
- * Using `useLazyQuery` and `useLayoutEffect` and dispatches
+ * Using `useLazyQuery` and `useEffect` and dispatches
  * `DATA_UPDATED` action on query changes. Also fetches report links
  * using `useQuery`.
- *
- * @param param0 - `state` and `dispatch` from `useReportsReducer`, aswell
- * as `fetchPolicy` for `useLazyQuery` with default value `'no-cache'`
- *
- * @returns `query` from `useLazyQuery`. A callback function that
- * executes the query. It takes an optional `QueryLazyOptions` object
- * as an argument.
  *
  * @category Reports Hooks
  */
@@ -52,7 +45,7 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
   )
 
   useEffect(() => {
-    if (_.isEmpty(queryPreset.reportLinks)) {
+    if (_.isEmpty(queryPreset?.reportLinks)) {
       query({ variables: queryPreset?.variables })
     }
   }, [queryPreset])
