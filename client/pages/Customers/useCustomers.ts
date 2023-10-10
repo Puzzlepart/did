@@ -48,7 +48,6 @@ export function useCustomers() {
 
   const renderDetails = !!state.selected
 
-
   const urlParams = useParams<ICustomersUrlParameters>()
 
   return {
