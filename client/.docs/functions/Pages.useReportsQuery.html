@@ -18,10 +18,10 @@
 <h1>Function useReportsQuery</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="useReportsQuery"><span class="tsd-kind-call-signature">use<wbr/>Reports<wbr/>Query</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">param0</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#useReportsQuery" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="useReportsQuery"><span class="tsd-kind-call-signature">use<wbr/>Reports<wbr/>Query</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#useReportsQuery" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Hook for Reports Query.</p>
-<p>Using <code>useLazyQuery</code> and <code>useLayoutEffect</code> and dispatches
+<div class="tsd-comment tsd-typography"><p>Responsible for fetching data for <code>Reports</code> component.</p>
+<p>Using <code>useLazyQuery</code> and <code>useEffect</code> and dispatches
 <code>DATA_UPDATED</code> action on query changes. Also fetches report links
 using <code>useQuery</code>.</p>
 </div>
@@ -29,18 +29,11 @@ using <code>useQuery</code>.</p>
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">param0</span>: <a href="../interfaces/Pages.IReportsContext.html" class="tsd-signature-type tsd-kind-interface">IReportsContext</a></h5>
-<div class="tsd-comment tsd-typography"><p><code>state</code> and <code>dispatch</code> from <code>useReportsReducer</code>, aswell
-as <code>fetchPolicy</code> for <code>useLazyQuery</code> with default value <code>&#39;no-cache&#39;</code></p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><p><code>query</code> from <code>useLazyQuery</code>. A callback function that
-executes the query. It takes an optional <code>QueryLazyOptions</code> object
-as an argument.</p>
-
+<h5><span class="tsd-kind-parameter">__namedParameters</span>: <a href="../interfaces/Pages.IReportsContext.html" class="tsd-signature-type tsd-kind-interface">IReportsContext</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L27">client/pages/Reports/hooks/useReportsQuery.ts:27</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L20">client/pages/Reports/hooks/useReportsQuery.ts:20</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
