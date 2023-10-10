@@ -26,7 +26,7 @@ export interface ICustomersUrlParameters {
 export type CustomersTab = 's' | 'new'
 
 /**
- * The state of the Customers page.
+ * The state of the Customers component.
  */
 export interface ICustomersState {
   /**

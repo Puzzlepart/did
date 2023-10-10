@@ -1,9 +1,12 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import { useAppContext } from 'AppContext'
 import { useEffect, useMemo } from 'react'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
 import { ICustomersContext } from './context'
 import { useCustomersReducer } from './reducer'
 import { useCustomersQuery } from './useCustomersQuery'
+import { useParams } from 'react-router-dom'
+import { ICustomersUrlParameters } from './types'
 
 /**
  * Component logic hook for `<Customers />`
@@ -17,7 +20,6 @@ export function useCustomers() {
   const appContext = useAppContext()
   const [state, dispatch] = useCustomersReducer()
   const query = useCustomersQuery(dispatch)
-
   const context = useMemo<ICustomersContext>(
     () => ({
       ...query,
@@ -46,7 +48,11 @@ export function useCustomers() {
 
   const renderDetails = !!state.selected
 
+
+  const urlParams = useParams<ICustomersUrlParameters>()
+
   return {
+    ...urlParams,
     context,
     renderDetails
   }

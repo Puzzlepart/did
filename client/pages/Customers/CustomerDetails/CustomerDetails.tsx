@@ -5,7 +5,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../context'
-import { CustomerForm } from '../CustomerForm'
 import styles from './CustomerDetails.module.scss'
 import { CustomerHeader } from './CustomerHeader'
 import { useCustomerDetails } from './useCustomerDetails'
@@ -27,12 +26,7 @@ export const CustomerDetails: StyledComponent = () => {
         <UserMessage intent='error'>{t('common.genericErrorText')}</UserMessage>
       )}
       <Tabs items={tabs} level={3} />
-      {context.state.projectForm && (
-        <ProjectForm {...context.state.projectForm} refetch={refetch} />
-      )}
-      {context.state.customerForm && (
-        <CustomerForm {...context.state.customerForm} />
-      )}
+      <ProjectForm {...context.state.projectForm} refetch={refetch} />
     </div>
   )
 }

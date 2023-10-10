@@ -16,13 +16,16 @@ import {
 /**
  * Use Customers reducer. It will create the initial state
  * and return a reducer and its state.
- *
- * @param urlParameters - URL parameters
  */
 export function useCustomersReducer() {
   const { t } = useTranslation()
   const initialState: ICustomersState = {
-    customers: []
+    customers: [],
+    projectForm: {
+      panel: {
+        open: false
+      }
+    }
   }
   const urlParameters = useParams<ICustomersUrlParameters>()
   return useReducer(initialState, (builder) =>
@@ -46,7 +49,11 @@ export function useCustomersReducer() {
         }
       })
       .addCase(CLOSE_PROJECT_PANEL, (state) => {
-        state.projectForm = null
+        state.projectForm = {
+          panel: {
+            open: false
+          }
+        }
       })
       .addCase(OPEN_CUSTOMER_PANEL, (state, { payload }) => {
         state.customerForm = {
