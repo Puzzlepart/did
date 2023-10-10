@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
-import { FormSubmitHook, useFormControlModel, useToast } from 'components'
+import { useAppContext } from 'AppContext'
+import { FormSubmitHook, useFormControlModel } from 'components'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
@@ -14,7 +15,7 @@ export const useApiTokenFormSubmit: FormSubmitHook<
 > = (props, model) => {
   const { t } = useTranslation()
   const [addApiToken] = useMutation<ApiToken>($addApiToken)
-  const [toast, setToast] = useToast(8000)
+  const { displayToast } = useAppContext()
 
   /**
    * On save API token
@@ -26,23 +27,19 @@ export const useApiTokenFormSubmit: FormSubmitHook<
           token: model.$
         }
       })
-      setToast({ text: t('admin.tokenGeneratedText') }, 20_000)
+      displayToast(t('admin.tokenGeneratedText'), 'success', 20)
       model.reset()
       props.onTokenAdded({
         ...(model.$ as ApiToken),
         ...data
       })
     } catch {
-      setToast({
-        intent: 'error',
-        text: t('admin.tokenErrorText')
-      })
+      displayToast(t('admin.tokenErrorText'), 'error')
       props.onDismiss()
     }
   }, [model, props])
 
   return {
-    toast,
     text: t('common.save'),
     onClick: onSave
   }

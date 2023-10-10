@@ -1,16 +1,14 @@
 import { useMutation } from '@apollo/client'
+import { useAppContext } from 'AppContext'
 import { FormSubmitHook, useFormControlModel } from 'components/FormControl'
-import { useToast } from 'components/Toast'
 import { useTranslation } from 'react-i18next'
-import { Customer } from 'types'
 import { omitTypename } from 'utils'
 import { useCustomersContext } from '../context'
 import $create_or_update_customer from './create-or-update-customer.gql'
-import { ICustomerFormProps } from './types'
+import { CreateOrUpdateCustomerVariables, ICustomerFormProps } from './types'
 
 /**
- * Returns submit props used by `<FormControl />
-`
+ * Returns submit props used by `<FormControl />.
  *
  * @param props - Props
  * @param model - Model
@@ -22,45 +20,51 @@ export const useCustomerFormSubmit: FormSubmitHook<
   ReturnType<typeof useFormControlModel>
 > = (props, model) => {
   const { t } = useTranslation()
-  const { refetch } = useCustomersContext()
-  const [toast, setToast, isToastShowing] = useToast(8000)
-  const [mutate, { loading }] = useMutation($create_or_update_customer)
+  const context = useCustomersContext()
+  const { displayToast } = useAppContext()
+  const [createOrUpdateCustomer, { loading }] = useMutation<
+    any,
+    CreateOrUpdateCustomerVariables
+  >($create_or_update_customer)
 
   /**
    * On form submit
    */
   async function onClick() {
+    const variables: CreateOrUpdateCustomerVariables = {
+      customer: omitTypename(model.$),
+      update: !!props.edit
+    }
     try {
-      await mutate({
-        variables: {
-          customer: omitTypename(model.$),
-          update: !!props.edit
+      await createOrUpdateCustomer({ variables })
+      displayToast(
+        variables.update
+          ? t('customers.updateSuccess', variables.customer)
+          : t('customers.createSuccess', variables.customer),
+        'success',
+        6,
+        {
+          onClick: () => {
+            if (variables.update) return
+            window.location.replace(
+              `/customers/information/${variables.customer.key}`
+            )
+          }
         }
-      })
-      setToast({
-        text: t('customers.createSuccess', model.$ as Customer),
-        onClick: () => {
-          window.location.replace(
-            `/customers/information/${model.value('key')}`
-          )
-        },
-        intent: 'success'
-      })
-      window.setTimeout(() => {
-        model.reset()
-        refetch()
-      }, 1000)
+      )
+      model.reset()
+      context.refetch()
     } catch {
-      setToast({
-        text: t('customers.createError'),
-        intent: 'error'
-      })
+      if (variables.update) {
+        displayToast(t('customers.updateError', variables.customer), 'error')
+        return
+      }
+      displayToast(t('customers.createError'), 'error')
     }
   }
   return {
-    toast,
     text: props.edit ? t('common.save') : t('common.add'),
     onClick,
-    disabled: loading || isToastShowing
+    disabled: loading
   }
 }

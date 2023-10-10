@@ -4,7 +4,7 @@ about: Use this issue type when performing a smoke test
 labels: smoke tests
 ---
 
-The following suite of tests should be performed before each release in dev https://didapp-dev.azurewebsites.net/ and after deploy to production
+The following suite of tests should be performed before each release in dev https://didapp-dev.azurewebsites.net/ and after deploy to production.
 
 You can see active smoke test issues [here](https://github.com/Puzzlepart/did/issues?q=is%3Aopen+is%3Aissue+label%3A%22smoke+tests%22).
 

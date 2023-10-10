@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
-import { ILabelFormProps } from './types'
+import { CreateOrUpdateLabelVariables, ILabelFormProps } from './types'
 import { useLabelModel } from './useLabelModel'
 
 /**
@@ -25,37 +25,39 @@ export const useLabelFormSubmit: FormSubmitHook<
   ReturnType<typeof useLabelModel>
 > = (props, model) => {
   const { t } = useTranslation()
-  const [mutate, { loading }] = useMutation($addOrUpdateLabel)
-  const { setToast } = useAppContext()
+  const [createOrUpdateLabel, { loading }] = useMutation<
+    any,
+    CreateOrUpdateLabelVariables
+  >($addOrUpdateLabel)
+  const { displayToast } = useAppContext()
 
   /**
    * On save label
    */
   const onSave = useCallback(async () => {
+    const variables: CreateOrUpdateLabelVariables = {
+      label: _.omit(model.$, '__typename'),
+      update: !!props.edit
+    }
     try {
-      await mutate({
-        variables: {
-          label: _.omit(model.$, '__typename'),
-          update: !!props.edit
-        }
-      })
-      setToast({
-        text: props.edit
+      await createOrUpdateLabel({ variables })
+      displayToast(
+        variables.update
           ? t('admin.labels.updateSuccess', model.$)
           : t('admin.labels.createSuccess', model.$),
-        intent: 'success'
-      })
+        'success'
+      )
       model.reset()
       props.onSave(model.$)
     } catch {
-      setToast({
-        text: props.edit
-          ? t('admin.labels.createError')
+      displayToast(
+        variables.update
+          ? t('admin.labels.updateError')
           : t('admin.labels.createError'),
-        intent: 'error'
-      })
+        'error'
+      )
     }
-  }, [model, mutate, props])
+  }, [model, createOrUpdateLabel, props])
 
   /**
    * Checks if form is valid

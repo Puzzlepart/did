@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { Shimmer } from '@fluentui/react'
 import { FieldLabel } from 'components'
 import React from 'react'
@@ -18,7 +19,7 @@ export const InformationProperty: StyledComponent<IInformationPropertyProps> = (
           text={props.title}
           hidden={props.value === null || props.value === ''}
         />
-        <span>{props.value}</span>
+        {props.onRenderValue(props.value)}
         {props.children}
       </div>
     </Shimmer>
@@ -27,3 +28,6 @@ export const InformationProperty: StyledComponent<IInformationPropertyProps> = (
 
 InformationProperty.displayName = 'InformationProperty'
 InformationProperty.className = styles.informationProperty
+InformationProperty.defaultProps = {
+  onRenderValue: (value) => <span>{value}</span>
+}

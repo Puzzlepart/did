@@ -25,6 +25,11 @@ export function useCustomersReducer() {
       panel: {
         open: false
       }
+    },
+    customerForm: {
+      panel: {
+        open: false
+      }
     }
   }
   const urlParameters = useParams<ICustomersUrlParameters>()
@@ -67,7 +72,11 @@ export function useCustomersReducer() {
       })
       .addCase(CLOSE_CUSTOMER_PANEL, (state) => {
         if (state.customerForm?.panel) {
-          state.customerForm = null
+          state.customerForm = {
+            panel: {
+              open: false
+            }
+          }
         }
       })
   )

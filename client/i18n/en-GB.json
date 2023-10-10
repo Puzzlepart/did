@@ -140,7 +140,9 @@
     "descriptionWarning": "We recommend including a quick summary of the customer. This will provide a concise overview and help others quickly grasp the customer's essence.",
     "keyNotUniqueError": "The customer key {{key}} is already in use by the customer {{name}}.",
     "nameNotUniqueError": "It appears that there is already a API-key with that name. Please come up with something else.",
-    "noLabelsSelectedText": "Add labels to the customer for categorization. "
+    "noLabelsSelectedText": "Add labels to the customer for categorization. ",
+    "updateSuccess": "The customer **{{name}}** was succesfully updated.",
+    "updateError": "We can't update the customer **{{name}}** at the moment. Please try again later, or ask an adult for advice."
   },
   "admin": {
     "apiTokens": {
@@ -175,14 +177,15 @@
       "namePlaceholder": "Label name",
       "nameDescription": "Label name. No special characters. Just your everyday letters and spaces.",
       "createSuccess": "Your new label **{{name}}** was succesfully created.",
-      "createError": "We can't update the label at the moment. Please try again later.",
+      "createError": "We can't create the label at the moment. Please try again later.",
       "updateSuccess": "Your label **{{name}}** was succesfully updated.",
       "defaultTitle": "my new label",
       "addNewText": "Add new label",
       "editText": "Edit label",
       "editLabels": "Click to edit labels",
       "deleteSuccess": "The label **{{name}}** was successfully deleted.",
-      "deleteError": "There was an issue deleting label **{{name}}**. Please try again, or ask an adult."
+      "deleteError": "There was an issue deleting label **{{name}}**. Please try again, or ask an adult.",
+      "updateError": "We can't update the label at the moment. Please try again later."
     },
     "subscriptionSettings": {
       "headerText": "Subscription"
@@ -218,7 +221,7 @@
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months/weeks in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
-    "tokenGeneratedText": "Make sure to copy your new personal access token now. You won’t be able to see it again!",
+    "tokenGeneratedText": "The token was successfully generated. Make sure to copy your new personal access token.",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
     "subscriptionSettingsUpdateSuccess": "Subscription settings successfully updated.",

@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client'
-import { useToast } from 'components/Toast'
+import { useAppContext } from 'AppContext'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
-import $deleteRole from './deleteRole.gql'
 import { IRolePanelProps } from './RolePanel/types'
+import $deleteRole from './deleteRole.gql'
 import $roles from './roles.gql'
 import { useColumns } from './useColumns'
 import $users from './users.gql'
@@ -17,7 +17,6 @@ import $users from './users.gql'
  */
 export function useRoles() {
   const { t } = useTranslation()
-  const [toast, setToast] = useToast(6000)
   const roleQuery = useQuery($roles)
   const userRoleQuery = useQuery($users, {
     skip: true,
@@ -27,6 +26,7 @@ export function useRoles() {
   const [deleteRole] = useMutation($deleteRole)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
   const [selectedRole, onSelectionChanged] = useState<Role>(null)
+  const { displayToast } = useAppContext()
 
   /**
    * On delete role
@@ -42,12 +42,12 @@ export function useRoles() {
       query: { role: selectedRole.name }
     })
     if (data?.users?.length > 0) {
-      setToast({
-        text: t('admin.roleInUseMessage', {
+      displayToast(
+        t('admin.roleInUseMessage', {
           count: data?.users?.length
         }),
-        intent: 'error'
-      })
+        'error'
+      )
     } else {
       await deleteRole({
         variables: {
@@ -55,12 +55,12 @@ export function useRoles() {
         }
       })
       await roleQuery.refetch()
-      setToast({
-        text: t('admin.rolesPermissions.deleteSuccess', {
+      displayToast(
+        t('admin.rolesPermissions.deleteSuccess', {
           name: selectedRole.name
         }),
-        intent: 'success'
-      })
+        'success'
+      )
     }
   }, [selectedRole])
 
@@ -72,7 +72,6 @@ export function useRoles() {
     columns,
     panel,
     setPanel,
-    toast,
     onSelectionChanged,
     selectedRole,
     onDelete

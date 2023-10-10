@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { useToast } from 'components/Toast'
 import get from 'get-value'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +24,6 @@ export function useSubscriptionSettings() {
     omitTypename(context.subscription)
   )
   const [updateSubscription] = useMutation($updateSubscription)
-  const [toast, setToast] = useToast(6000)
   const sections = useSubscriptionConfig()
 
   /**
@@ -54,10 +52,10 @@ export function useSubscriptionSettings() {
   const onSaveSettings = async () => {
     const variables = _.pick(subscription, 'settings')
     await updateSubscription({ variables })
-    setToast({
-      text: t('admin.subscriptionSettingsUpdateSuccess'),
-      intent: 'success'
-    })
+    context.displayToast(
+      t('admin.subscriptionSettingsUpdateSuccess'),
+      'success'
+    )
   }
 
   /**
@@ -95,7 +93,6 @@ export function useSubscriptionSettings() {
       onChange
     },
     subscription,
-    toast,
     onSaveSettings,
     tabs,
     hasChanges

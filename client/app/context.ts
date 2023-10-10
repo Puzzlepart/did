@@ -39,12 +39,19 @@ export interface IAppContext extends IAppProps {
   getUserConfiguration: <T = any>(path: string) => T
 
   /**
-   * Sets a toast message with the given properties and duration.
+   * Displays a toast message with the given properties and duration (which defaults to 6 seconds).
    *
-   * @param props - The properties of the toast message.
+   * @param text - The text of the toast message.
+   * @param intent - The intent of the toast message (default: **info**).
    * @param duration - The duration in seconds to display the toast message (default: **6**).
+   * @param additionalProps - Additional properties to pass to the toast message.
    */
-  setToast: (props: IToastProps, duration?: number) => void
+  displayToast: (
+    text: IToastProps['text'],
+    intent?: IToastProps['intent'],
+    duration?: number,
+    additionalProps?: Partial<IToastProps>
+  ) => void
 }
 
 export const AppContext = createContext<IAppContext>(null)
@@ -60,7 +67,6 @@ export function useAppContext(): IAppContext {
   const context = useContext(AppContext)
   const getUserConfiguration = (path: string) =>
     get(context.user.configuration, path)
-
   return {
     ...context,
     isAuthenticated: !!context.user?.id,

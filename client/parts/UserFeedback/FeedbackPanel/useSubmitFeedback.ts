@@ -44,15 +44,12 @@ export const useSubmitFeedback: FormSubmitHook<
     onClick: async () => {
       const result = await onSubmitFeedback()
       if (result.success) {
-        appContext.setToast({
-          text: t('feedback.submitSuccessMessageText', result),
-          intent: 'success'
-        })
+        appContext.displayToast(
+          t('feedback.submitSuccessMessageText', result),
+          'success'
+        )
       } else {
-        appContext.setToast({
-          text: t('feedback.submitErrorMessageText'),
-          intent: 'warning'
-        })
+        appContext.displayToast(t('feedback.submitErrorMessageText'), 'warning')
       }
       model.reset()
       props.onDismiss()

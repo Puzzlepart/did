@@ -41,7 +41,7 @@ export const CustomerActions: StyledComponent = (props) => {
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
           text={t('customers.editButtonLabel')}
           appearance='transparent'
-          iconName='AddCircle'
+          iconName='Edit'
           onClick={() =>
             context.dispatch(
               OPEN_CUSTOMER_PANEL({

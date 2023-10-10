@@ -23,7 +23,7 @@ export function useLabels() {
   })
   const [selectedLabel, onSelectionChanged] = useState<LabelObject>(null)
   const [ConfirmationDialog, getResponse] = useConfirmationDialog()
-  const { setToast } = useAppContext()
+  const { displayToast } = useAppContext()
 
   const onDismiss = useCallback(() => {
     setForm({ open: false })
@@ -52,15 +52,9 @@ export function useLabels() {
         await deleteLabel({ variables: { name: selectedLabel.name } }).then(
           refetch
         )
-        setToast({
-          text: t('admin.labels.deleteSuccess', selectedLabel),
-          intent: 'success'
-        })
+        displayToast(t('admin.labels.deleteSuccess', selectedLabel), 'success')
       } catch {
-        setToast({
-          text: t('admin.labels.deleteError', selectedLabel),
-          intent: 'error'
-        })
+        displayToast(t('admin.labels.deleteError', selectedLabel), 'error')
       }
     }
   }, [deleteLabel, selectedLabel])

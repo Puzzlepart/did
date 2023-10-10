@@ -64,7 +64,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
   )
 
   useEffect(() => {
-    if (selectedValue) {
+    if (selectedValue && selectedTab) {
       dispatch(
         UPDATE_BREADCRUMB({
           item: {

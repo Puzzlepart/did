@@ -100,7 +100,7 @@
     "noInformationAvailable": "Det er ingen informasjon tilgjengelig om dette prosjektet.",
     "navigateText": "Gå til prosjektet",
     "iconFieldDescription": "Bruk et ikon for å gjøre prosjektet mer gjenkjennelig i timelisten og på prosjektsiden. \nEt tilfeldig ikon blir valgt hvis du ikke velger et selv.",
-    "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen.",
+    "createError": "Vi kan ikke opprette prosjektet for øyeblikket. Prøv igjen senere, eller spør en voksen.",
     "timeEntriesLoadingDescription": "Ta deg en slurk kaffe hvis det har vært travelt i det siste ...",
     "noLabelsSelectedText": "Legg til merkelapper på prosjektene for kategorisering. \nFor eksempel interne prosjekter eller prosjekter som krever innsending av timer i et eget system.",
     "applyLabelsHeaderText": "Legg til merkelapper på dette prosjektet",
@@ -140,7 +140,9 @@
     "descriptionWarning": "Vi anbefaler å inkludere en rask oppsummering av kunden. \nDette vil gi en kortfattet oversikt og hjelpe andre raskt å forstå kundens essens.",
     "keyNotUniqueError": "Kundenøkkelen {{key}} er allerede i bruk av kunden {{name}}.",
     "nameNotUniqueError": "Det ser ut til at det allerede finnes en API-nøkkel med det navnet. \nKom gjerne opp med noe annet.",
-    "noLabelsSelectedText": "Legg til merkelapper på kunden for kategorisering."
+    "noLabelsSelectedText": "Legg til merkelapper på kunden for kategorisering.",
+    "updateSuccess": "Kunden **{{name}}** ble oppdatert helt uten problemer.",
+    "updateError": "Vi kan ikke oppdatere kunden **{{name}}** for øyeblikket. Vennligst prøv igjen senere, eller spør en voksen om råd."
   },
   "admin": {
     "apiTokens": {
@@ -185,7 +187,7 @@
       "nameLabel": "Navn på merkelapp",
       "namePlaceholder": "Navn på merkelapp",
       "nameDescription": "Navn på merkelapp. \nIngen spesialtegn. \nBare bokstaver og mellomrom.",
-      "createError": "Vi kan ikke oppdatere merkelappen for øyeblikket. \nPrøv igjen senere.",
+      "createError": "Vi kan ikke opprette merkelappen for øyeblikket. Prøv igjen senere.",
       "createSuccess": "Den nye merkelappen din **{{name}}** ble opprettet",
       "updateSuccess": "Merkelappen din **{{name}}** ble oppdatert",
       "defaultTitle": "ny merkelapp",
@@ -193,7 +195,8 @@
       "editText": "Rediger merkelapp",
       "editLabels": "Klikk for å redigere merkelapper",
       "deleteSuccess": "Merkelappen **{{name}}** ble slettet uten problemer.",
-      "deleteError": "Det oppsto et problem med å slette etiketten **{{name}}**. Vennligst prøv igjen, eller spør en voksen."
+      "deleteError": "Det oppsto et problem med å slette etiketten **{{name}}**. Vennligst prøv igjen, eller spør en voksen.",
+      "updateError": "Vi kan ikke oppdatere merkelappen for øyeblikket. Prøv igjen senere."
     },
     "subscriptionSettings": {
       "headerText": "Abonnement"
@@ -257,7 +260,7 @@
     "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene/ukene i det valgte året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilganger",
-    "tokenGeneratedText": "Sørg for å kopiere den nye API-nøkkelen din nå. \nDen forsvinner når du navigerer bort!",
+    "tokenGeneratedText": "API-nøkkelen ble generert uten problemer. Sørg for å kopiere nøkkelen.",
     "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
     "tokenDeletedText": "Nøkkelen **{{name}}** ble slettet.",
     "subscriptionSettingsUpdateSuccess": "Abonnementsinnstillingene er oppdatert.",

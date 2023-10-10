@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useToast } from 'components'
+import { useAppContext } from 'AppContext'
 import { FormSubmitHook } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -37,7 +37,7 @@ export const useReportsFormSubmit: FormSubmitHook<
 > = (props, model) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateReportLink)
-  const [toast, setToast] = useToast(8000)
+  const { displayToast } = useAppContext()
 
   /**
    * On save report link function callback.
@@ -50,21 +50,21 @@ export const useReportsFormSubmit: FormSubmitHook<
           update: !!props.edit
         }
       })
-      setToast({
-        text: props.edit
+      displayToast(
+        props.edit
           ? t('admin.reportLinks.updateSuccess', model.$)
           : t('admin.reportLinks.createSuccess', model.$),
-        intent: 'success'
-      })
+        'success'
+      )
       model.reset()
       props.onSave(model.$)
     } catch {
-      setToast({
-        text: props.edit
+      displayToast(
+        props.edit
           ? t('admin.reportLinks.updateError')
           : t('admin.reportLinks.createError'),
-        intent: 'error'
-      })
+        'error'
+      )
     }
   }
 
@@ -79,9 +79,8 @@ export const useReportsFormSubmit: FormSubmitHook<
     !s.isBlank(model.value('description', ''))
 
   return {
-    toast,
     text: t('common.save'),
     onClick: onSave,
     disabled: !isFormValid || loading
-  } as const
+  }
 }

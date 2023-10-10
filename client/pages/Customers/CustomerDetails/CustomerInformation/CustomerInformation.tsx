@@ -1,3 +1,4 @@
+import { Tag } from '@fluentui/react-tags-preview'
 import { EntityLabel, InformationProperty, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -25,6 +26,7 @@ export const CustomerInformation: StyledComponent = () => {
       <InformationProperty
         title={t('projects.tagLabel')}
         value={context.state.selected?.key}
+        onRenderValue={(value) => <Tag size='medium'>{value}</Tag>}
         isDataLoaded={!context.loading}
       />
       {!_.isEmpty(context.state.selected?.labels) && (

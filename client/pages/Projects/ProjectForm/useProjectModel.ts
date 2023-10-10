@@ -1,7 +1,7 @@
 import { useFormControlModel } from 'components'
 import { useCustomersContext } from 'pages/Customers/context'
 import { useEffect } from 'react'
-import { Project } from 'types'
+import { ProjectInput } from 'types'
 import _ from 'underscore'
 import { mapProperty } from 'utils'
 import { IProjectFormProps } from './types'
@@ -15,15 +15,15 @@ import { IProjectFormProps } from './types'
  * @returns the initial model
  */
 export function useProjectModel(props: IProjectFormProps) {
-  const map = useFormControlModel<keyof Project, Partial<Project>>(
-    props.edit,
+  const map = useFormControlModel<keyof ProjectInput, Partial<ProjectInput>>(
+    props.edit as ProjectInput,
     (p) =>
       _.omit(
         {
           ...p,
           labels: mapProperty<any, string>(p.labels, 'name')
         },
-        ['customer', 'tag']
+        ['customer', 'tag', 'outlookCategory']
       )
   )
   const customerKey = useCustomersContext<string>('state.selected.key')

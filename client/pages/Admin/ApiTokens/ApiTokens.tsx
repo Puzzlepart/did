@@ -1,5 +1,5 @@
 import { SelectionMode } from '@fluentui/react'
-import { List, Toast } from 'components'
+import { List } from 'components'
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { TabComponent } from 'components/Tabs'
 import { usePermissions } from 'hooks'
@@ -29,7 +29,6 @@ export const ApiTokens: TabComponent = () => {
     columns,
     onTokenAdded,
     confirmationDialog,
-    toast,
     onKeyCopied,
     onDelete,
     onSelectionChanged,
@@ -39,7 +38,6 @@ export const ApiTokens: TabComponent = () => {
   const [, hasPermission] = usePermissions()
   return (
     <div className={ApiTokens.className}>
-      <Toast {...toast} />
       <ApiKeyDisplay
         label={t('admin.apiTokens.apiKeyGenerated')}
         apiKey={newToken?.apiKey}

@@ -26,25 +26,22 @@ export function useProjectTag(props: IProjectTagProps) {
     if (!hasOutlookCategory) {
       const { success } = await createOutlookCategory(props.project?.tag)
       if (success) {
-        appContext.setToast({
-          text: t('common.outlookCategoryAdded', props.project),
-          intent: 'success'
-        })
+        appContext.displayToast(
+          t('common.outlookCategoryAdded', props.project),
+          'success'
+        )
         setHasOutlookCategory(true)
       } else {
-        appContext.setToast({
-          text: t('common.outlookCategoryError'),
-          intent: 'error'
-        })
+        appContext.displayToast(t('common.outlookCategoryError'), 'error')
       }
     }
   }
 
   const onTagCopied = () => {
-    appContext.setToast({
-      text: t('common.projectTagCopiedToClipboard', props.project),
-      intent: 'success'
-    })
+    appContext.displayToast(
+      t('common.projectTagCopiedToClipboard', props.project),
+      'success'
+    )
   }
 
   const addOutlookCategoryTooltip = hasOutlookCategory

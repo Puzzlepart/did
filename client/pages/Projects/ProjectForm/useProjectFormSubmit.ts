@@ -3,7 +3,7 @@ import { useAppContext } from 'AppContext'
 import { FormSubmitHook } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
 import $create_or_update_project from './create-or-update-project.gql'
-import { IProjectFormProps } from './types'
+import { CreateOrUpdateProjectVariables, IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'
 import { useProjectModel } from './useProjectModel'
 
@@ -21,37 +21,47 @@ export const useProjectFormSubmit: FormSubmitHook<
   ReturnType<typeof useProjectFormOptions>
 > = (props, model, options) => {
   const { t } = useTranslation()
-  const { setToast } = useAppContext()
-  const [mutate, { loading }] = useMutation($create_or_update_project)
+  const { displayToast } = useAppContext()
+  const [createOrUpdateProjct, { loading }] = useMutation<
+    any,
+    CreateOrUpdateProjectVariables
+  >($create_or_update_project)
 
   /**
    * On form submit
    */
   async function onClick() {
+    const variables: CreateOrUpdateProjectVariables = {
+      project: model.$,
+      options: options.$,
+      update: !!props.edit
+    }
     try {
-      await mutate({
-        variables: {
-          project: model.$,
-          options: options.$,
-          update: !!props.edit
-        }
-      })
-      const messageKey = props.edit ? 'updateSuccess' : 'createSuccess'
-      setToast({
-        text: t(`projects.${messageKey}`, {
-          projectId: model.projectId,
-          name: model.$.name
-        }),
-        intent: 'success'
-      })
+      await createOrUpdateProjct({ variables })
+      displayToast(
+        variables.update
+          ? t('projects.updateSuccess', {
+              ...variables.project,
+              projectId: model.projectId
+            })
+          : t('projects.createError', {
+              ...variables.project,
+              projectId: model.projectId
+            }),
+        'success'
+      )
       model.reset()
       props.refetch()
     } catch {
-      const messageKey = props.edit ? 'updateError' : 'createError'
-      setToast({
-        text: t(`projects.${messageKey}`, model),
-        intent: 'error'
-      })
+      displayToast(
+        variables.update
+          ? t('projects.updateError', {
+              ...variables.project,
+              projectId: model.projectId
+            })
+          : t('projects.createError'),
+        'error'
+      )
     }
   }
   return {

@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useToast } from 'components'
+import { useAppContext } from 'AppContext'
 import { DateObject } from 'DateUtils'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { useCallback, useState } from 'react'
@@ -18,12 +18,12 @@ import { useColumns } from './useColumns'
 export function useApiTokens() {
   const { t } = useTranslation()
   const [items, { refetch }] = useApiTokensQuery()
-  const [toast, setToast] = useToast(8000)
   const [deleteApiToken] = useMutation($deleteApiToken)
   const [form, setForm] = useState<IApiTokenFormProps>({})
   const [selectedToken, onSelectionChanged] = useState<ApiToken>(null)
   const [newToken, setNewToken] = useState<ApiToken>(null)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
+  const { displayToast } = useAppContext()
 
   /**
    * Deletes the `selectedToken` and shows a success toast message.
@@ -44,10 +44,7 @@ export function useApiTokens() {
     })
     if (!response) return
     await deleteApiToken({ variables: { name: selectedToken.name } })
-    setToast({
-      intent: 'success',
-      text: t('admin.tokenDeletedText', selectedToken)
-    })
+    displayToast(t('admin.tokenDeletedText', selectedToken), 'success')
     refetch()
   }, [selectedToken])
 
@@ -70,10 +67,7 @@ export function useApiTokens() {
    * Sets a success toast message and clears the API key from state.
    */
   const onKeyCopied = useCallback((token: ApiToken) => {
-    setToast({
-      text: t('admin.apiTokens.apiKeyCopied', token),
-      intent: 'success'
-    })
+    displayToast(t('admin.apiTokens.apiKeyCopied', token), 'success')
     setNewToken(null)
   }, [])
 
@@ -86,7 +80,6 @@ export function useApiTokens() {
     columns,
     onTokenAdded,
     confirmationDialog,
-    toast,
     onKeyCopied,
     onDelete,
     selectedToken,

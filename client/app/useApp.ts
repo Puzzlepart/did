@@ -35,13 +35,26 @@ export function useApp(props: IAppProps) {
   const pages = usePages()
 
   /**
-   * Sets a toast message with the given properties and duration (in seconds).
+   * Displays a toast message with the given properties and duration (which defaults to 6 seconds).
    *
-   * @param props - The properties of the toast message.
+   * @param text - The text of the toast message.
+   * @param intent - The intent of the toast message (default: **info**).
    * @param duration - The duration in seconds to display the toast message (default: **6**).
+   * @param additionalProps - Additional properties to pass to the toast message.
    */
-  const setToast = (props: IToastProps, duration: number = 6) => {
-    context.dispatch(SET_TOAST(props))
+  const displayToast = (
+    text: IToastProps['text'],
+    intent: IToastProps['intent'] = 'info',
+    duration: number = 6,
+    additionalProps: Partial<IToastProps> = {}
+  ) => {
+    context.dispatch(
+      SET_TOAST({
+        text,
+        intent,
+        ...additionalProps
+      })
+    )
     setTimeout(() => {
       context.dispatch(SET_TOAST(null))
     }, duration * 1000)
@@ -55,7 +68,7 @@ export function useApp(props: IAppProps) {
         notifications,
         state,
         dispatch,
-        setToast
+        displayToast
       }) as IAppContext,
     [state, notifications]
   )

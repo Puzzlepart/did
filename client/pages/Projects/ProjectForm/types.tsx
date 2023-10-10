@@ -1,6 +1,7 @@
+import { OperationVariables } from '@apollo/client'
 import { IFormControlProps } from 'components/FormControl'
 import { ITabProps } from 'components/Tabs'
-import { Project } from 'types'
+import { Project, ProjectInput, ProjectOptions } from 'types'
 
 /**
  * @category Projects
@@ -10,8 +11,27 @@ export interface IProjectFormProps
     IFormControlProps<Project> {
   /**
    * Refetch callback to execute when the form has been submitted
-   * successfully. The function is called with no arguments 1000
-   * milliseconds after the project has been created or updated.
+   * successfully.
    */
   refetch?: () => void
+}
+
+/**
+ * Variables for creating or updating a customer.
+ */
+export interface CreateOrUpdateProjectVariables extends OperationVariables {
+  /**
+   * The project input object.
+   */
+  project: Partial<ProjectInput>
+
+  /*
+   * Flag that decides whether to update or create a project.
+   */
+  update?: boolean
+
+  /**
+   * Options for the project creation.
+   */
+  options?: ProjectOptions
 }
