@@ -49,7 +49,9 @@ export function useLabels() {
     })
     if (response === true) {
       try {
-        await deleteLabel({ variables: { name: selectedLabel.name } }).then(refetch)
+        await deleteLabel({ variables: { name: selectedLabel.name } }).then(
+          refetch
+        )
         setToast({
           text: t('admin.labels.deleteSuccess', selectedLabel),
           intent: 'success'
