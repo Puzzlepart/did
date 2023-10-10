@@ -16,10 +16,7 @@ export const NotificationsPanel: PanelComponent = (props) => {
     UserNotificationsContext
   )
   return (
-    <Panel
-      {...props}
-      title={t('notifications.headerText')}
-    >
+    <Panel {...props} title={t('notifications.headerText')}>
       <div hidden={!_.isEmpty(notifications)}>
         <UserMessage
           text={t('notifications.emptyText', { dismissedCount })}
