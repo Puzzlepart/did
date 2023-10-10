@@ -17,7 +17,10 @@ import { convertToMap, omitTypename } from 'utils'
  *
  * @returns A map of form control values and their corresponding update functions.
  */
-export function useFormControlModel<KeyType, ObjectType extends Record<string, any> = Record<string, any>>(
+export function useFormControlModel<
+  KeyType,
+  ObjectType extends Record<string, any> = Record<string, any>
+>(
   initialModel: ObjectType = null,
   postUpdate?: (initialModel: ObjectType) => ObjectType
 ) {

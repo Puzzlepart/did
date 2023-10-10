@@ -30,18 +30,18 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   return (
     <FormControl {...formControlProps}>
       {(!isCustomerContext || !!props.edit) && (
-      <SearchCustomer
-        {...register('customerKey', {
-          validators: t('projects.customerRequired')
-        })}
-        hidden={!!props.edit || isCustomerContext}
-        label={t('common.customer')}
-        description={t('projects.customerFieldDescription')}
-        required={true}
-        placeholder={t('common.searchPlaceholder')}
-        selectedKey={model.value('customerKey')}
-        onSelected={(customer) => model.set('customerKey', customer?.key)}
-      />
+        <SearchCustomer
+          {...register('customerKey', {
+            validators: t('projects.customerRequired')
+          })}
+          hidden={!!props.edit || isCustomerContext}
+          label={t('common.customer')}
+          description={t('projects.customerFieldDescription')}
+          required={true}
+          placeholder={t('common.searchPlaceholder')}
+          selectedKey={model.value('customerKey')}
+          onSelected={(customer) => model.set('customerKey', customer?.key)}
+        />
       )}
       <InputControl
         {...register<InputControlOptions>('key', {

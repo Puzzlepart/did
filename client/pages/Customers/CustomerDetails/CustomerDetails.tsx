@@ -18,7 +18,7 @@ import { useCustomerDetails } from './useCustomerDetails'
 export const CustomerDetails: StyledComponent = () => {
   const { t } = useTranslation()
   const context = useCustomersContext()
-  const { error, tabs,refetch } = useCustomerDetails()
+  const { error, tabs, refetch } = useCustomerDetails()
 
   return (
     <div className={CustomerDetails.className}>
