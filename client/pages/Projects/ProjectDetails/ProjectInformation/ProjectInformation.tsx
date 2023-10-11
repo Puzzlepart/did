@@ -1,4 +1,9 @@
-import { EntityLabel, InformationProperty, UserMessage } from 'components'
+import {
+  EntityLabel,
+  InformationProperty,
+  ProjectTag,
+  UserMessage
+} from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label, StyledComponent } from 'types'
@@ -24,7 +29,13 @@ export const ProjectInformation: StyledComponent = () => {
       />
       <InformationProperty
         title={t('projects.tagLabel')}
-        value={context.state.selected?.tag}
+        onRenderValue={() => (
+          <ProjectTag
+            project={context.state.selected}
+            enableFavoriting
+            hasOutlookCategory={!!context.state.selected?.outlookCategory}
+          />
+        )}
         isDataLoaded={!context.loading}
       />
       {!_.isEmpty(context.state.selected?.labels) && (
@@ -37,10 +48,6 @@ export const ProjectInformation: StyledComponent = () => {
           ))}
         </InformationProperty>
       )}
-      <UserMessage
-        hidden={!context.state.selected?.outlookCategory}
-        text={t('projects.categoryOutlookText')}
-      />
     </div>
   )
 }
