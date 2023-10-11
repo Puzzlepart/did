@@ -11,7 +11,7 @@ import { IConfirmButtonsProps } from './types'
 /**
  * Custom hook that returns button properties and text for confirming or unconfirming timesheet hours.
  *
- * @param props - The props to pass to the hook.
+ * @param props - The properties for `ConfirmButtons`.
  *
  * @returns An object containing button properties and text.
  */
@@ -29,9 +29,9 @@ export function useConfirmButtons(props: IConfirmButtonsProps) {
       disabled: !!loading,
       onClick: () => {
         if (selectedPeriod?.isConfirmed) {
-          context.onUnsubmitPeriod(false)
+          context.onUnsubmitPeriod({ forecast: false })
         } else {
-          context.onSubmitPeriod(false)
+          context.onSubmitPeriod({ forecast: false })
         }
       }
     }),

@@ -36,7 +36,9 @@ export interface ITimesheetState {
   dateRangeType: DateRangeType
 
   /**
-   * Loading props for the `<UserMessage />` component
+   * Loading props for the `<UserMessage />` component.
+   * This is the props for a `<UserMessage />` component
+   * that is displayed when the timesheet is loading.
    */
   loading?: IUserMessageProps
 

@@ -17,33 +17,34 @@ import { useViews, View } from './Views'
  * @category Function Component
  */
 export const Timesheet: FC = () => {
-  const { state, dispatch, context } = useTimesheet()
+  const context = useTimesheet()
   const { views, getViewById } = useViews()
   const { hotkeysProps } = useHotkeys(context)
-
   return (
     <TimesheetContext.Provider value={context}>
       <GlobalHotKeys {...hotkeysProps}>
         <div>
           <ActionBar />
-          <ErrorBar error={state.error} />
+          <ErrorBar error={context.state.error} />
           <StatusBar />
           <TabList
-            selectedValue={state.selectedView.id}
+            selectedValue={context.state.selectedView.id}
             onTabSelect={(_, data) => {
-              dispatch(CHANGE_VIEW({ view: getViewById(data.value as string) }))
+              context.dispatch(
+                CHANGE_VIEW({ view: getViewById(data.value as string) })
+              )
             }}
           >
             {views.map(({ id, displayName }, index) => (
               <Tab key={index} value={id} content={displayName} />
             ))}
           </TabList>
-          <View component={state.selectedView} />
+          <View component={context.state.selectedView} />
         </div>
         <HotkeyModal
           {...hotkeysProps}
-          isOpen={state.showHotkeysModal}
-          onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
+          isOpen={context.state.showHotkeysModal}
+          onDismiss={() => context.dispatch(TOGGLE_SHORTCUTS())}
         />
       </GlobalHotKeys>
     </TimesheetContext.Provider>

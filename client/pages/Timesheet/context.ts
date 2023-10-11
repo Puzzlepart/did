@@ -7,7 +7,7 @@ import { ITimesheetState } from './types/ITimesheetState'
 /**
  * @category Timesheet
  */
-export interface ITimesheetContext extends ReturnType<typeof useSubmitActions> {
+export interface ITimesheetContext {
   /**
    * State of the timesheet component
    */
@@ -22,6 +22,20 @@ export interface ITimesheetContext extends ReturnType<typeof useSubmitActions> {
    * Refetch data
    */
   refetch?: () => Promise<ApolloQueryResult<any>>
+
+  /**
+   * Submit the current period.
+   *
+   * @param options - The options for submitting the period.
+   */
+  onSubmitPeriod: ReturnType<typeof useSubmitActions>['onSubmitPeriod']
+
+  /**
+   * Unsubmit the current period.
+   *
+   * @param options - The options for unsubmitting the period.
+   */
+  onUnsubmitPeriod: ReturnType<typeof useSubmitActions>['onUnsubmitPeriod']
 }
 
 /**

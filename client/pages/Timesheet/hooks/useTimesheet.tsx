@@ -6,7 +6,9 @@ import { useTimesheetHistory } from './useTimesheetHistory'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
 /**
- * Hook for Timesheet
+ * Component logic for Timesheet. Returns a context object
+ * that can be passed down to child components from
+ * `Timesheet` component.
  *
  * * Reacts to state changes and updates history
  * using `useTimesheetHistory`
@@ -24,28 +26,19 @@ export function useTimesheet() {
 
   useTimesheetHistory(state)
 
-  const { onSubmitPeriod, onUnsubmitPeriod } = useSubmitActions({
+  const submitActions = useSubmitActions({
     state,
     dispatch,
     refetch
   })
 
-  const context = useMemo<ITimesheetContext>(
+  return useMemo<ITimesheetContext>(
     () => ({
+      ...submitActions,
       state,
       refetch,
-      onSubmitPeriod,
-      onUnsubmitPeriod,
       dispatch
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state]
   )
-  return {
-    state,
-    dispatch,
-    context,
-    onSubmitPeriod,
-    onUnsubmitPeriod
-  }
 }

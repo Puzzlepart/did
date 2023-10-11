@@ -6,7 +6,7 @@ import { useConfirmButtons } from './useConfirmButtons'
 /**
  * Renders the confirm and unconfirm buttons for a timesheet period.
  *
- * @returns A ToolbarButton with the appropriate icon and text, and
+ * @returns A `ToolbarButton` with the appropriate icon and text, and
  * a click handler that calls the appropriate action.
  *
  * @category Timesheet
@@ -22,6 +22,6 @@ ConfirmButtons.displayName = 'ConfirmButtons'
 ConfirmButtons.defaultProps = {
   icons: [
     ['CheckmarkCircle', 'green'],
-    ['ArrowUndo', 'red']
+    ['CalendarCancel', 'red']
   ]
 }
