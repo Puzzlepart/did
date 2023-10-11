@@ -15,7 +15,7 @@ let newVersion = currentVersion
  * 
  * @returns {Promise<void>}
  */
-async function updateVersion({ major, minor, patch, alpha, beta}) {
+async function updateVersion({ major, minor, patch, alpha, beta }) {
     if (argv.major) {
         newVersion = currentVersion.split('.').map((v, i) => i === 0 ? parseInt(v) + 1 : 0).splice(0, 3).join('.')
     } else if (argv.minor) {
@@ -42,7 +42,13 @@ async function updateVersion({ major, minor, patch, alpha, beta}) {
     package.version = newVersion
     await writeFileAsync('./package.json', JSON.stringify(package, null, 2))
     await execAsync('npm install')
-    console.log(`Updated version from ${colors.cyan(currentVersion)} to ${colors.magenta(newVersion)}. Remember to ${colors.magenta('commit')} and ${colors.magenta('push')} the changes.`)
+    if (argv.push) {
+        await execAsync(`git tag -a v${tag} -m "${tag}"`)
+        await execAsync('git push --tags');
+        console.log(`Updated version from ${colors.cyan(currentVersion)} to ${colors.magenta(newVersion)}. New tag have been created and pushed to the repository.`)
+    } else {
+        console.log(`Updated version from ${colors.cyan(currentVersion)} to ${colors.magenta(newVersion)}. Remember to ${colors.magenta('commit')} and ${colors.magenta('push')} the changes.`)
+    }
 }
 
 updateVersion(argv)
