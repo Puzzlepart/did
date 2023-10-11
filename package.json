@@ -440,6 +440,10 @@
     "deps": [
       "⬆️",
       "Upgrade dependencies"
+    ],
+    "templates": [
+      "📃",
+      "Added or updated issue or PR templates"
     ]
   },
   "terser": {
