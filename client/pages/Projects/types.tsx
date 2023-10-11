@@ -5,7 +5,14 @@ import { OutlookCategory, Project } from 'types'
  * @category Projects
  */
 export interface IProjectsUrlParameters {
+  /**
+   * The currently selected tab or project tag.
+   */
   currentTab: ProjectsTab
+
+  /**
+   * The currently selected details tab.
+   */
   detailsTab: string
 }
 

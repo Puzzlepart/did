@@ -74,7 +74,6 @@
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
     "searchPlaceholder": "Søk i prosjekt",
-    "categoryOutlookText": "Dette prosjektet har ein Outlook-kategori.",
     "workspaceLabel": "Prosjektområde",
     "createOutlookCategoryLabel": "Lag ein Outlook-kategori",
     "noTimeEntriesText": "Ingen timar registrerte på dette prosjektet.",

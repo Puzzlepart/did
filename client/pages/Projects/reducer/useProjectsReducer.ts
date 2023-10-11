@@ -33,9 +33,12 @@ export function useProjectsReducer() {
               fuzzyStringEqual(c.displayName, p.tag)
             )
           }))
-          state.selected = _.find(state.projects, ({ tag }) =>
-            fuzzyStringEqual(tag, urlParams.currentTab)
-          )
+          const selectedTag = state.selected?.tag ?? urlParams.currentTab
+          if (selectedTag) {
+            state.selected = _.find(state.projects, ({ tag }) =>
+              fuzzyStringEqual(tag, selectedTag)
+            )
+          }
         }
         state.error = payload.error as any
       })

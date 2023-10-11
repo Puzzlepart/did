@@ -1,11 +1,11 @@
 import { QueryResult } from '@apollo/client'
 import { createAction } from '@reduxjs/toolkit'
-import { OutlookCategory, Project } from 'types'
+import { Project } from 'types'
+import { IProjectsState } from '../types'
 
-type DATA_UPDTED_PAYLOAD = QueryResult<{
-  projects: Project[]
-  outlookCategories: OutlookCategory[]
-}>
+type DATA_UPDTED_PAYLOAD = QueryResult<
+  Pick<IProjectsState, 'projects' | 'outlookCategories'>
+>
 
 export const DATA_UPDATED = createAction<DATA_UPDTED_PAYLOAD>('DATA_UPDATED')
 export const SET_SELECTED_PROJECT = createAction<Project>(

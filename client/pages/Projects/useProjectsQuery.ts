@@ -3,6 +3,7 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { Dispatch, useEffect } from 'react'
 import $projects_outlook from './projects-outlook.gql'
 import { DATA_UPDATED } from './reducer/actions'
+import { IProjectsState } from './types'
 
 /**
  * Hook tha uses `useQuery` from `@apollo/client` to fetch data
@@ -12,7 +13,9 @@ import { DATA_UPDATED } from './reducer/actions'
  * @param dispatch - Dispatch
  */
 export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
-  const query = useQuery($projects_outlook, {
+  const query = useQuery<
+    Pick<IProjectsState, 'projects' | 'outlookCategories'>
+  >($projects_outlook, {
     variables: { sortBy: 'name' },
     fetchPolicy: 'cache-and-network'
   })

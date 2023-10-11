@@ -1,7 +1,6 @@
 import { QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, useContext } from 'react'
-import { OutlookCategory, Project } from 'types'
 import { IProjectsState } from './types'
 
 /**
@@ -9,10 +8,7 @@ import { IProjectsState } from './types'
  */
 export interface IProjectsContext
   extends Partial<
-    QueryResult<{
-      projects: Project[]
-      outlookCategories: OutlookCategory[]
-    }>
+    QueryResult<Pick<IProjectsState, 'projects' | 'outlookCategories'>>
   > {
   state: IProjectsState
   dispatch: React.Dispatch<AnyAction>
