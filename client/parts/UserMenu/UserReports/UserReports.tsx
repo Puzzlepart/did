@@ -1,7 +1,7 @@
 import { ChoiceGroup } from '@fluentui/react'
+import { Skeleton, SkeletonItem } from '@fluentui/react-components'
 import { Panel } from 'components'
 import { UserMessage } from 'components/UserMessage'
-import { useExcelExport } from 'hooks'
 import React, { FC } from 'react'
 import { BrowserView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -10,33 +10,17 @@ import { useUserReports } from './useUserReports'
 
 export const UserReports: FC = () => {
   const { t } = useTranslation()
-  const { preset, setPreset, queries, showPanel, togglePanel, query, columns } =
+  const { preset, setPreset, queries, panelState, query, onExport } =
     useUserReports()
-
-  const { onExport } = useExcelExport({
-    items: query?.data,
-    fileName: preset?.exportFileName,
-    columns
-  })
 
   return (
     <BrowserView renderWithFragment={true}>
-      <MenuItem text={t('common.userReports')} onClick={togglePanel} />
+      <MenuItem text={t('common.userReports')} onClick={panelState.toggle} />
       <Panel
         title={t('common.userReports')}
-        open={showPanel}
-        onDismiss={togglePanel}
-        actions={[
-          {
-            text: t('common.exportExcel'),
-            iconName: 'ArrowExportUp',
-            appearance: 'primary',
-            onClick: () => {
-              onExport()
-            },
-            disabled: !preset || query.loading
-          }
-        ]}
+        open={panelState.value}
+        onDismiss={panelState.setFalse}
+        contentGap={25}
       >
         <ChoiceGroup
           defaultSelectedKey={preset?.key}
@@ -45,10 +29,21 @@ export const UserReports: FC = () => {
           }}
           options={queries}
         />
-        <UserMessage
-          hidden={!preset || query.loading}
-          text={t('common.userReportSummary', query)}
-        />
+        {query.loading ? (
+          <Skeleton>
+            <SkeletonItem style={{ height: 66 }} />
+          </Skeleton>
+        ) : (
+          <UserMessage
+            hidden={!preset}
+            text={t('common.userReportSummary', query)}
+            action={{
+              iconName: 'ArrowExportUp',
+              text: t('common.exportExcel'),
+              onClick: onExport
+            }}
+          />
+        )}
       </Panel>
     </BrowserView>
   )

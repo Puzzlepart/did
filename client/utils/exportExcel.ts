@@ -3,6 +3,7 @@ import { DateObject } from 'DateUtils'
 import get from 'get-value'
 import s from 'underscore.string'
 import { loadScripts } from './loadScripts'
+import $date from 'DateUtils'
 
 export interface IExcelExportOptions {
   fileName: string
@@ -10,7 +11,7 @@ export interface IExcelExportOptions {
   skip?: string[]
 }
 
-export type ExcelColumnType = 'date' | null
+export type ExcelColumnType = 'date' | 'monthName' | null
 
 /**
  * Coverts a Javascript string to a
@@ -77,6 +78,11 @@ export async function exportExcel(
                 return {
                   v: new DateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
                   t: 'd'
+                }
+              }
+              case 'monthName': {
+                return {
+                  v: $date.getMonthNames()[fieldValue - 1]
                 }
               }
               default: {

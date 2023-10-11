@@ -35,7 +35,8 @@
     "debug:server": "npm run build:server; ts-node ./server/index.ts -T --inspect --wait",
     "create-env": "node .tasks/createDotEnv.js",
     "tag": "node .tasks/git-tag.js",
-    "update:version": "node .tasks/updateVersion.js"
+    "update:version": "node .tasks/updateVersion.js",
+    "commit": "sexy-commits"
   },
   "dependencies": {
     "@apollo/client": "3.8.5",

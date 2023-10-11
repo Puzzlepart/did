@@ -95,6 +95,8 @@ export function getFluentIconWithFallback(
   bundle = true,
   color?: string
 ) {
+  // eslint-disable-next-line no-console
+  console.log('getFluentIconWithFallback', iconCatalog[name], name)
   if (iconCatalog[name]) {
     return getFluentIcon(name as FluentIconName, { bundle, color })
   }

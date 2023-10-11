@@ -1,13 +1,11 @@
-import { CustomerLink } from 'components/CustomerLink'
-import { ProjectLink } from 'components/ProjectLink'
-import $date from 'DateUtils'
-import React, { useMemo } from 'react'
+import { IListColumn } from 'components'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 export function useColumns() {
   const { t } = useTranslation()
-  return useMemo(
+  return useMemo<IListColumn[]>(
     () => [
       {
         key: 'title',
@@ -19,15 +17,13 @@ export function useColumns() {
         key: 'project',
         fieldName: 'project.name',
         name: t('common.project'),
-        minWidth: 100,
-        onRender: ({ project }) => <ProjectLink project={project} />
+        minWidth: 100
       },
       {
         key: 'customer',
         fieldName: 'customer.name',
         name: t('common.customer'),
-        minWidth: 100,
-        onRender: ({ customer }) => <CustomerLink customer={customer} />
+        minWidth: 100
       },
       {
         key: 'duration',
@@ -40,18 +36,14 @@ export function useColumns() {
         fieldName: 'startDateTime',
         name: t('common.startTimeLabel'),
         minWidth: 100,
-        data: { excelColFormat: 'date' as ExcelColumnType },
-        onRender: ({ startDateTime }) =>
-          $date.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
+        data: { excelColFormat: 'date' as ExcelColumnType }
       },
       {
         key: 'endDateTime',
         fieldName: 'endDateTime',
         name: t('common.endTimeLabel'),
         minWidth: 100,
-        data: { excelColFormat: 'date' as ExcelColumnType },
-        onRender: ({ endDateTime }) =>
-          $date.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
+        data: { excelColFormat: 'date' as ExcelColumnType }
       },
       {
         key: 'week',
@@ -64,7 +56,7 @@ export function useColumns() {
         fieldName: 'month',
         name: t('common.monthLabel'),
         minWidth: 100,
-        onRender: ({ month }) => $date.getMonthNames()[month - 1]
+        data: { excelColFormat: 'monthName' as ExcelColumnType }
       },
       {
         key: 'year',

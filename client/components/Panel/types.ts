@@ -44,6 +44,13 @@ export interface IPanelProps
    * Close the panel when clicking outside of it (default: `true`).
    */
   lightDismiss?: boolean
+
+  /**
+   * The gap between the panel content elements. The body of the panel
+   * will have a flexbox layout with `flexDirection: 'column'` and
+   * `gap: contentGap` (default: `undefined`).
+   */
+  contentGap?: number
 }
 
 /**

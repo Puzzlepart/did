@@ -20,7 +20,7 @@ import { usePanel } from './usePanel'
  */
 export const Panel: PanelComponent = (props) => {
   const { t } = useTranslation()
-  const { onOpenChange } = usePanel(props)
+  const { onOpenChange, bodyStyle } = usePanel(props)
   return (
     <Drawer
       className={Panel.className}
@@ -52,7 +52,9 @@ export const Panel: PanelComponent = (props) => {
         </div>
         {props.headerElements}
       </DrawerHeader>
-      <DrawerBody className={styles.body}>{props.children}</DrawerBody>
+      <DrawerBody className={styles.body} style={bodyStyle}>
+        {props.children}
+      </DrawerBody>
       <DrawerFooter className={styles.footer}>
         <div className={styles.actions}>
           {props.actions.map((action, index) => (

@@ -11,7 +11,7 @@ import { IAppProps } from './types'
 import { useApp } from './useApp'
 
 /**
- * App
+ * App entry point component.
  *
  * @category App
  */

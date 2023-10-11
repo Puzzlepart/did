@@ -1,10 +1,13 @@
 import { DialogOpenChangeData } from '@fluentui/react-components'
 import { IPanelProps } from './types'
+import { CSSProperties } from 'react'
 
 /**
  * Component logic hook for `<Panel />`. For now it only handles
  * the `onOpenChange` event (which is using `DialogOpenChangeData`
  * for data for some reason).
+ *
+ * @param props - The props passed to the `Panel` component.
  */
 export function usePanel(props: IPanelProps) {
   /**
@@ -18,5 +21,13 @@ export function usePanel(props: IPanelProps) {
     }
   }
 
-  return { onOpenChange }
+  const bodyStyle: CSSProperties = {}
+
+  if (props.contentGap) {
+    bodyStyle.display = 'flex'
+    bodyStyle.flexDirection = 'column'
+    bodyStyle.gap = `${props.contentGap}px`
+  }
+
+  return { onOpenChange, bodyStyle }
 }
