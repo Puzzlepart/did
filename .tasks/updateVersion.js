@@ -43,7 +43,7 @@ async function updateVersion({ major, minor, patch, alpha, beta }) {
     await writeFileAsync('./package.json', JSON.stringify(package, null, 2))
     await execAsync('npm install')
     if (argv.push) {
-        await execAsync(`git tag -a v${tag} -m "${tag}"`)
+        await execAsync(`git tag -a v${newVersion} -m "${newVersion}"`)
         await execAsync('git push --tags');
         console.log(`Updated version from ${colors.cyan(currentVersion)} to ${colors.magenta(newVersion)}. New tag have been created and pushed to the repository.`)
     } else {
