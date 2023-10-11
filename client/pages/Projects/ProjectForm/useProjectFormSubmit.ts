@@ -8,7 +8,7 @@ import { useProjectFormOptions } from './useProjectFormOptions'
 import { useProjectModel } from './useProjectModel'
 
 /**
- * Returns submit props used by `<FormControl />`
+ * Creates submit props used by `<FormControl />`.
  *
  * @param props - Props
  * @param model - Model
@@ -44,11 +44,20 @@ export const useProjectFormSubmit: FormSubmitHook<
               ...variables.project,
               projectId: model.projectId
             })
-          : t('projects.createError', {
+          : t('projects.createSuccess', {
               ...variables.project,
               projectId: model.projectId
             }),
-        'success'
+        'success',
+        6,
+        {
+          onClick: () => {
+            if (variables.update) return
+            window.location.replace(
+              `/projects/${model.projectId.split(' ').join('_')}`
+            )
+          }
+        }
       )
       model.reset()
       props.refetch()
