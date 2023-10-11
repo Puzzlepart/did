@@ -20,7 +20,7 @@ export interface IProjectsContext
 export const ProjectsContext = createContext<IProjectsContext>(null)
 
 /**
- * Returns the current value of the `ProjectsContext` or 
+ * Returns the current value of the `ProjectsContext` or
  * a default value if the context is not set or available.
  *
  * @returns The current value of the `ProjectsContext`.
