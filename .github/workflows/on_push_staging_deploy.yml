@@ -2,18 +2,8 @@ name: Build and deploy to didapp/staging
 
 on:
   push:
-    branches:
-      - dev
-      - feat/*
-    paths:
-      - 'server/**'
-      - 'client/**'
-      - 'shared/**'
-      - 'webpack/**'
-      - 'package.json'
-      - '.deployment'
-      - '.deploy/**'
-      - '.github/workflows/on_push_staging_deploy.yml'
+    tags:
+      - 'v*'
 
 jobs:
   package:

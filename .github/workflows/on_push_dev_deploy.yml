@@ -2,8 +2,17 @@ name: Build and deploy to didapp/dev
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - dev
+      - feat/*
+    paths:
+      - 'server/**'
+      - 'client/**'
+      - 'shared/**'
+      - 'webpack/**'
+      - 'package.json'
+      - '.deployment'
+      - '.deploy/**'
 
 jobs:
   package:
