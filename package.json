@@ -370,6 +370,10 @@
       "✨",
       "Introduced new features"
     ],
+    "improvement": [
+      "🌱",
+      "Improved an existing feature"
+    ],
     "fix": [
       "🐛",
       "Fixed a bug"
