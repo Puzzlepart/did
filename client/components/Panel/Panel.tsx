@@ -1,4 +1,4 @@
-import { Button, Caption2 } from '@fluentui/react-components'
+import { Button, Caption1 } from '@fluentui/react-components'
 import {
   Drawer,
   DrawerBody,
@@ -42,8 +42,12 @@ export const Panel: PanelComponent = (props) => {
             />
           }
         >
-          <span>{props.title}</span>
-          {props.description && <Caption2 block>{props.description}</Caption2>}
+          <div className={styles.title}>{props.title}</div>
+          {props.description && (
+            <div className={styles.description}>
+              <Caption1 block>{props.description}</Caption1>
+            </div>
+          )}
         </DrawerHeaderTitle>
         <div className={styles.actions}>
           {props.headerActions.map((action, index) => (

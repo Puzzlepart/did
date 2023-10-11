@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@apollo/client'
-import { useEffect, useMemo } from 'react'
+import { useMutation } from '@apollo/client'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import $addUsers from './addUsers.gql'
@@ -7,13 +7,12 @@ import { IUsersContext } from './context'
 import { useUsersReducer } from './reducer'
 import {
   CLEAR_PROGRESS,
-  DATA_UPDATED,
   HIDE_ADD_MULTIPLE_PANEL,
   SET_PROGRESS
 } from './reducer/actions'
 import { useColumns } from './useColumns'
-import $users from './users.gql'
 import { useUsersMenuItems } from './useUsersMenuItems'
+import { useUsersQuery } from './useUsersQuery'
 
 /**
  * Component logic for `Users`
@@ -23,10 +22,8 @@ import { useUsersMenuItems } from './useUsersMenuItems'
 export function useUsers() {
   const { t } = useTranslation()
   const [state, dispatch] = useUsersReducer()
-  const query = useQuery($users, {
-    fetchPolicy: 'cache-and-network'
-  })
   const [addUsers] = useMutation($addUsers)
+  const query = useUsersQuery(dispatch)
   const context = useMemo(
     () =>
       ({
@@ -37,10 +34,8 @@ export function useUsers() {
     [state, query.loading]
   )
 
-  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
-
   /**
-   * On add users
+   * On add users to the current subscription.
    *
    * @param users - Users to add
    */
@@ -70,7 +65,6 @@ export function useUsers() {
 
   return {
     context,
-    refetch: query.refetch,
     columns,
     menuItems,
     onAddUsers

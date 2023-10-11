@@ -1,6 +1,6 @@
 import { OperationVariables, QueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
-import { createContext, Dispatch } from 'react'
+import { createContext, Dispatch, useContext } from 'react'
 import { IUsersState } from './types'
 
 /**
@@ -19,3 +19,8 @@ export interface IUsersContext extends QueryResult<any, OperationVariables> {
 }
 
 export const UsersContext = createContext<IUsersContext>(null)
+
+/**
+ * Returns the current value of the `UsersContext`.
+ */
+export const useUsersContext = () => useContext(UsersContext)

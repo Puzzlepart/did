@@ -178,7 +178,15 @@
       "addNewUser": "Legg til ny",
       "userFieldAdSync": "Feltet synkroniseres automatisk fra Azure AD når brukeren logger på, og kan ikke endres i Did.",
       "syncUsersLabel": "Synkroniser brukeregenskaper",
-      "synchronizingUserProperties": "Synkroniserer brukeregenskaper..."
+      "synchronizingUserProperties": "Synkroniserer brukeregenskaper...",
+      "updateSuccess": "Brukeren **{{displayName}}** ble oppdatert uten problem.",
+      "createSuccess": "Brukeren **{{displayName}}** er opprettet og er nå klar til å begynne å registrere timer.",
+      "updateError": "Det oppstod en feil under oppdatering av bruker **{{displayName}}**.",
+      "createError": "Det oppstod en feil under opprettelse av bruker **{{displayName}}**.",
+      "editUserPanelDescription": "Endre rolle eller rediger egenskaper som ikke automatisk blir synkronisert fra Azure Active Directory. Du kan også skjule brukeren fra timeoversikter.",
+      "addNewUserPanelDescription": "Velg en bruker fra Azure Active Directory, sett en rolle, og eventuelt endre på egenskaper som ikke sykroniseres automatisk.",
+      "addNewUserPanelTitle": "Legg til ny bruker",
+      "editUserPanelTitle": "Rediger bruker"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

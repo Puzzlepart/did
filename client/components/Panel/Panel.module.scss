@@ -1,6 +1,14 @@
 .panel {
     .header {
         display: initial;
+
+        .title {
+            display: initial;
+        }
+
+        .description {
+            margin: 8px 0 0 0;
+        }
     }
     
     .body {

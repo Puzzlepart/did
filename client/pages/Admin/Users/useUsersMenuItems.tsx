@@ -63,7 +63,7 @@ export function useUsersMenuItems(context: IUsersContext) {
         .setDisabled(
           context.state.loading || context.state.selectedUsers.length !== 1
         )
-        .withIcon('PersonEdit')
+        .withIcon('Edit')
         .setOnClick(() => {
           const [user] = context.state.selectedUsers
           context.dispatch(

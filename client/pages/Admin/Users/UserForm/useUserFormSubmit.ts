@@ -1,11 +1,16 @@
 import { useMutation } from '@apollo/client'
+import { useAppContext } from 'AppContext'
 import { FormSubmitHook, IFormControlProps } from 'components/FormControl'
 import { useMap } from 'hooks'
 import { useTranslation } from 'react-i18next'
-import { User } from 'types'
-import _ from 'underscore'
+import { UserInput } from 'types'
+import { useUsersContext } from '../context'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
-import { IUserFormProps } from './types'
+import {
+  CreateOrUpdateUserVariables,
+  IUserFormProps,
+  createUserInput
+} from './types'
 
 /**
  * A custom hook that returns submit props needed for the `FormControls` component.
@@ -20,7 +25,11 @@ export const useUserFormSubmit: FormSubmitHook<
   ReturnType<typeof useMap>
 > = (props, model) => {
   const { t } = useTranslation()
-  const [addOrUpdateUser] = useMutation($addOrUpdateUser)
+  const { displayToast } = useAppContext()
+  const context = useUsersContext()
+  const [addOrUpdateUser] = useMutation<any, CreateOrUpdateUserVariables>(
+    $addOrUpdateUser
+  )
 
   /**
    * On save user form data. This function is called when the user clicks the
@@ -32,18 +41,30 @@ export const useUserFormSubmit: FormSubmitHook<
    * being created without a role.
    */
   const onSave = async () => {
-    const user = {
-      ..._.omit(model.value<User>(), '__typename', 'photo'),
-      role: model.value<User>('role') ?? 'User'
+    const variables: CreateOrUpdateUserVariables = {
+      user: createUserInput(model.value<UserInput>()),
+      update: !!props.user
     }
-    await addOrUpdateUser({
-      variables: {
-        user,
-        update: !!props.user
-      }
-    })
-    model.reset()
-    props.onDismiss()
+    try {
+      await addOrUpdateUser({ variables })
+      displayToast(
+        variables.update
+          ? t('admin.users.updateSuccess', variables.user)
+          : t('admin.users.createSuccess', variables.user),
+        'success'
+      )
+      context.refetch()
+    } catch {
+      displayToast(
+        variables.update
+          ? t('admin.users.updateError', variables.user)
+          : t('admin.users.createError', variables.user),
+        'error'
+      )
+    } finally {
+      model.reset()
+      props.onDismiss()
+    }
   }
 
   return {

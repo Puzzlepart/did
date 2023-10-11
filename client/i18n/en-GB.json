@@ -202,7 +202,15 @@
       "addNewUser": "Add new",
       "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did.",
       "syncUsersLabel": "Synchronize user properties",
-      "synchronizingUserProperties": "Synchronizing user properties..."
+      "synchronizingUserProperties": "Synchronizing user properties...",
+      "updateSuccess": "Successfully updated user **{{displayName}}**.",
+      "createSuccess": "The user **{{displayName}}** has been successfully created and is now ready to begin submitting their timesheets. Feel free to get started right away!",
+      "updateError": "An error occured when updating user **{{displayName}}*.",
+      "createError": "An error occured when attempting to create user **{{displayName}}**.",
+      "addNewUserPanelTitle": "Add new user",
+      "editUserPanelTitle": "Edit user",
+      "addNewUserPanelDescription": "Select a user from Azure Active Directory, set a role, and any changed properties that are not automatically synchronized.",
+      "editUserPanelDescription": "Change role or edit properties that are not automatically synced from Azure Active Directory. You can also hide the user from overviews."
     },
     "missingSubmissions": {
       "headerText": "Missing submissions",

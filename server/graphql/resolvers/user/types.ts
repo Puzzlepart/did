@@ -122,11 +122,6 @@ export class User {
 
   @Field({ nullable: true })
   accountEnabled?: boolean
-
-  public create?(user: User): User {
-    Object.assign(this, user)
-    return this
-  }
 }
 
 /**
@@ -178,6 +173,7 @@ export class UserInput {
   @Field({ nullable: true })
   accountEnabled?: boolean
 }
+
 /**
  * @category GraphQL InputType
  */
