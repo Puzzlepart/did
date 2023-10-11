@@ -26,7 +26,7 @@
     "noProjectMatchFoundText": "Ingen treff funnet for noe prosjekt. Har du satt en kategori på kalenderoppføringen i Outlook? Klikk for å løse kalenderoppføringen manuelt.",
     "resolveProjectButtonLabel": "Løs manuelt",
     "ignoreEventActionTooltip": "Klikk for å ignorere hendelsen {{title}}.",
-    "clearProjectMatchTooltipText": "Fjern match",
+    "clearProjectMatchTooltipText": "Fjern manuell prosjekttilkobling. Husk: Det er alltid bedre å automatisk tagge hendelsene dine i Outlook. Du vet hvordan!",
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>kalenderoppføringen i Outlook</a> blir tilkoblet et prosjekt automatisk. I noen tilfeller kan det dog være nødvendig å løse kalenderoppføringen manuelt.",
     "didYouMeanText": "Mente du <Link>{{tag}}</Link>?",
     "eventNotFullyMatchedText": "Kalenderoppføringen kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",

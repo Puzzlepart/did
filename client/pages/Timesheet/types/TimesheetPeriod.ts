@@ -86,7 +86,10 @@ export class TimesheetPeriod {
   private _uiIgnoredEventsStorage: BrowserStorage<string[]>
 
   /**
-   * Constructor for `TimesheetPeriod`
+   * Initialize the `TimesheetPeriod` object from a `TimesheetPeriodObject`.
+   * All the properties from the `TimesheetPeriodObject` are copied to the
+   * `TimesheetPeriod` object and objects for storing matched and ignored
+   * events are created.
    *
    * @param period - Period
    */
@@ -108,7 +111,6 @@ export class TimesheetPeriod {
    *
    * @param t - Translate function
    * @param includeMonth - Include month
-   * @memberof TimesheetPeriod
    */
   public getName(t: TFunction, includeMonth?: boolean) {
     let name = `${t('common.weekLabel')} ${this.week}`
@@ -132,8 +134,6 @@ export class TimesheetPeriod {
    * using hooks or something similiar.
    *
    * @returns an extended event object
-   *
-   * @memberof TimesheetPeriod
    */
   private _checkUiManualMatch(event: EventObject) {
     const manualMatch = this._uiMatchedEvents[event.id]
@@ -162,8 +162,6 @@ export class TimesheetPeriod {
    * by matched or unmatched events.
    *
    * @param option - Get events option
-   *
-   * @memberof TimesheetPeriod
    */
   public getEvents(
     option: GetEventsOption = GetEventsOption.AllEvents
@@ -186,7 +184,9 @@ export class TimesheetPeriod {
             return !!event.project && !isIgnored
           }
           case GetEventsOption.UnmatchedEvents: {
-            return !event.project && !isIgnored
+            return (
+              !event.project && !isIgnored && !this._uiMatchedEvents[event.id]
+            )
           }
         }
       })
@@ -195,8 +195,6 @@ export class TimesheetPeriod {
 
   /**
    * Get ignored events for the period
-   *
-   * @memberof TimesheetPeriod
    */
   public get ignoredEvents(): string[] {
     return this._uiIgnoredEvents
@@ -204,8 +202,6 @@ export class TimesheetPeriod {
 
   /**
    * Get aggregated errors from the events in the period
-   *
-   * @memberof TimesheetPeriod
    */
   public get errors(): any[] {
     if (!this.getEvents) return []
@@ -216,8 +212,6 @@ export class TimesheetPeriod {
 
   /**
    * Get total duration of events in the period
-   *
-   * @memberof TimesheetPeriod
    */
   public get totalDuration(): number {
     return this.getEvents().reduce((sum, event) => (sum += event.duration), 0)
@@ -225,8 +219,6 @@ export class TimesheetPeriod {
 
   /**
    * Get matched duration for the events in the period
-   *
-   * @memberof TimesheetPeriod
    */
   public get matchedDuration(): number {
     return _.filter(this.getEvents(), (event) => !!event.project).reduce(
@@ -237,8 +229,6 @@ export class TimesheetPeriod {
 
   /**
    * Get unmatched duration for the events in the period
-   *
-   * @memberof TimesheetPeriod
    */
   public get unmatchedDuration(): number {
     return this.totalDuration - this.matchedDuration
@@ -249,8 +239,6 @@ export class TimesheetPeriod {
    *
    * @param eventId - Event id
    * @param project - Project
-   *
-   * @memberof TimesheetPeriod
    */
   public setManualMatch(eventId: string, project: Project) {
     const matches = this._uiMatchedEvents
@@ -262,8 +250,6 @@ export class TimesheetPeriod {
    * Clear manual match from local storage
    *
    * @param eventId - Event id
-   *
-   * @memberof TimesheetPeriod
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = _.omit(this._uiMatchedEvents, eventId)
@@ -274,8 +260,6 @@ export class TimesheetPeriod {
    * Store ignored event in browser storage
    *
    * @param eventId - Event id
-   *
-   * @memberof TimesheetPeriod
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
@@ -284,8 +268,6 @@ export class TimesheetPeriod {
 
   /**
    * Clear ignored events from browser storage
-   *
-   * @memberof TimesheetPeriod
    */
   public clearIgnoredEvents() {
     this._uiIgnoredEvents = []
@@ -294,8 +276,6 @@ export class TimesheetPeriod {
 
   /**
    * Ignore all unmatched events
-   *
-   * @memberof TimesheetPeriod
    */
   public ignoreAllEvents() {
     this._uiIgnoredEvents = _.uniq([
@@ -309,8 +289,6 @@ export class TimesheetPeriod {
 
   /**
    * Get matched events with properties
-   *
-   * @memberof TimesheetPeriod
    */
   public get matchedEvents(): ClientEventInput[] {
     const events = _.filter(
@@ -346,8 +324,6 @@ export class TimesheetPeriod {
    * and `matchedEvents`
    *
    * @returns Data for the period
-   *
-   * @memberof TimesheetPeriod
    */
   public get data(): TimesheetPeriodInput {
     return _.pick(
@@ -364,8 +340,6 @@ export class TimesheetPeriod {
    * Get weekdays in the specified format
    *
    * @param template - Template
-   *
-   * @memberof TimesheetPeriod
    */
   public weekdays<T = string>(template: string = 'dddd DD'): T[] {
     if (!this.startDate) return []
@@ -377,8 +351,6 @@ export class TimesheetPeriod {
    * might be ignored events.
    *
    * @returns `true` if the unmatched duration (`unmatchedDuration`) is equal to zero (0)
-   *
-   * @memberof TimesheetPeriod
    */
   public get isComplete(): boolean {
     return this.unmatchedDuration === 0
@@ -388,8 +360,6 @@ export class TimesheetPeriod {
    * Period is in the past
    *
    * @returns `true` if the `endDate` is before today
-   *
-   * @memberof TimesheetPeriod
    */
   public get isPast(): boolean {
     return $date.isBefore(this.endDate)

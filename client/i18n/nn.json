@@ -26,7 +26,7 @@
     "noProjectMatchFoundText": "Fann ikkje noko treff på prosjekt. Har du satt en kategori på kalenderoppføringa i Outlook? Klikk for å løyse kalenderoppføringa manuelt.",
     "resolveProjectButtonLabel": "Løys manuelt",
     "ignoreEventActionTooltip": "Klikk for å ignorere hendelsen {{title}}.",
-    "clearProjectMatchTooltipText": "Fjern match",
+    "clearProjectMatchTooltipText": "Fjern manuell prosjekttilkopling. Hugs: Det er alltid betre å automatisk tagga hendingane dine i Outlook. Du veit korleis!",
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>kalenderoppføringa i Outlook</a> blir tilkobla et prosjekt automatisk. I nokre tilfelle kan det likevel vere nødvendig å løyse kalenderoppføringa manuelt.",
     "didYouMeanText": "Meinte du <Link>{{tag}}</Link>?",
     "eventNotFullyMatchedText": "Kalenderoppføringa kunne ikkje matchast. Vi fann matchande kunde **{{name}}**, men ikkje noko prosjekt med den spesifiserte nøkkelen.",
@@ -69,7 +69,10 @@
     "monthConfirmedText": "Totalt **{{hours}}** stadfesta denne månaden. Du har stadfesta {{confirmedPeriodsCount}} av {{periodsCount}} periodar. Du må vere i *Oversikt*-visninga for å gjere justeringar.",
     "ignoreAllTooltip": "Ignorer alle hendingar som ikkje er tilkopla eitt prosjekt.",
     "eventNoTitleErrorText": "Legg inn eit emne for denne hendinga. Arrangement utan emne vil ikkje bli inkludert i timelista.",
-    "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet"
+    "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
+    "timesheet": {
+      "projectLabelsTooltipText": "hei"
+    }
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",

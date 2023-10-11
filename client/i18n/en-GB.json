@@ -26,7 +26,7 @@
     "noProjectMatchFoundText": "No match found for any project. Click to resolve manually.",
     "resolveProjectButtonLabel": "Resolve",
     "ignoreEventActionTooltip": "Click to ignore the event {{title}}.",
-    "clearProjectMatchTooltipText": "Clear match",
+    "clearProjectMatchTooltipText": "Clear manual match. Remember: It's always better to automatically tag your events in Outlook. You know how!",
     "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "didYouMeanText": "Did you mean <Link>{{tag}}</Link>?",
     "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key.",
