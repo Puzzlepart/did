@@ -36,10 +36,13 @@ export function useCustomersReducer() {
   return useReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.customers = payload.data?.customers || []
-        state.selected = _.find(state.customers, ({ key }) =>
-          fuzzyStringEqual(key, urlParameters.currentTab)
-        )
+        state.customers = payload.data?.customers ?? []
+        const selectedKey = state.selected?.key ?? urlParameters.currentTab
+        if (selectedKey) {
+          state.selected = _.find(state.customers, ({ key }) =>
+            fuzzyStringEqual(key, selectedKey)
+          )
+        }
       })
       .addCase(SET_SELECTED_CUSTOMER, (state, { payload }) => {
         state.selected = payload

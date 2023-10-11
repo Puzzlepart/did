@@ -119,7 +119,7 @@
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt forretningssystem",
     "keyFieldDescription": "Ein unik identifikator for kunden. Haldt det kort, mellom {{min}} og {{max}} teikn. Bruk berre store bokstavar. Vel - faktisk har vi vært ganske irriterende - vi tillater ikke små bokstaver i feltet.",
-    "createSuccess": "Kunden **{{name}}** ble opprettet. \nKlikk for å gå direkte til den nyopprettede kunden, eller ikke bli her og opprette en ny.",
+    "createSuccess": "Kunden **{{name}}** ble opprettet. Klikk for å gå direkte til den nyopprettede kunden, eller ikke bli her og opprette en ny.",
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk eit ikon for å gjere kunden meir synleg på timelista og kundesida. \nEit tilfeldig ikon blir valt for deg viss du ikkje vel eit sjølv.",

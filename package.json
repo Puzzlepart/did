@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.13.0-alpha.8",
+  "version": "0.13.0-alpha.9",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
@@ -34,7 +34,8 @@
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
     "debug:server": "npm run build:server; ts-node ./server/index.ts -T --inspect --wait",
     "create-env": "node .tasks/createDotEnv.js",
-    "tag": "node .tasks/git-tag.js"
+    "tag": "node .tasks/git-tag.js",
+    "update:version": "node .tasks/updateVersion.js"
   },
   "dependencies": {
     "@apollo/client": "3.8.5",

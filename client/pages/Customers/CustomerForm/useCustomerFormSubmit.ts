@@ -47,7 +47,7 @@ export const useCustomerFormSubmit: FormSubmitHook<
           onClick: () => {
             if (variables.update) return
             window.location.replace(
-              `/customers/information/${variables.customer.key}`
+              `/customers/${variables.customer.key}/projects`
             )
           }
         }
