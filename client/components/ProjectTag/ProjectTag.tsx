@@ -7,7 +7,7 @@ import {
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { getFluentIcon } from 'utils'
+import { getFluentIcon, getFluentIconWithFallback } from 'utils'
 import { IProjectTagProps } from './types'
 import { useProjectTag } from './useProjectTag'
 
@@ -25,13 +25,15 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
     <InteractionTag>
       <CopyToClipboard text={props.project?.tag} onCopy={onTagCopied}>
         <InteractionTagPrimary
-          hasSecondaryAction={props.hasSecondaryAction}
-          icon={props.icon}
+          hasSecondaryAction={props.enableFavoriting}
+          icon={
+            props.displayIcon && getFluentIconWithFallback(props.project.icon)
+          }
         >
           <span>{props.project?.tag}</span>
         </InteractionTagPrimary>
       </CopyToClipboard>
-      {props.hasSecondaryAction && (
+      {props.enableFavoriting && (
         <Tooltip content={addOutlookCategoryTooltip} relationship='label'>
           <InteractionTagSecondary
             onClick={addOutlookCategory}

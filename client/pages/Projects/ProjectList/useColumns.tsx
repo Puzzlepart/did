@@ -9,7 +9,7 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject, Project } from 'types'
 import _ from 'underscore'
-import { fuzzyContains, getFluentIconWithFallback, mapProperty } from 'utils'
+import { fuzzyContains, mapProperty } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useProjectsContext } from '../context'
 import { SET_SELECTED_PROJECT } from '../reducer'
@@ -49,9 +49,9 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             maxWidth: 180,
             renderAs: 'projectTag',
             createRenderProps: (project) => ({
-              icon: getFluentIconWithFallback(project.icon),
+              displayIcon: true,
               hasOutlookCategory: fuzzyContains(outlookCategories, project.tag),
-              hasSecondaryAction: !_.isEmpty(outlookCategories)
+              enableFavoriting: !_.isEmpty(outlookCategories)
             })
           }
         ),

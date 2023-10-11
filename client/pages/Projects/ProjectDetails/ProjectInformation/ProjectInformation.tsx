@@ -32,7 +32,7 @@ export const ProjectInformation: StyledComponent = () => {
         onRenderValue={() => (
           <ProjectTag
             project={context.state.selected}
-            hasSecondaryAction
+            enableFavoriting
             hasOutlookCategory={!!context.state.selected?.outlookCategory}
           />
         )}
