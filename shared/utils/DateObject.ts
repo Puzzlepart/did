@@ -130,6 +130,13 @@ export class DateObject {
   }
 
   /**
+   * Is week day (Monday to Friday)
+   */
+  public get isWeekday() {
+    return DateUtils.isWeekday(this)
+  }
+
+  /**
    * Get the formatted date according to the string of tokens passed in.
    *
    * To escape characters, wrap them in square brackets (e.g. [MM]).

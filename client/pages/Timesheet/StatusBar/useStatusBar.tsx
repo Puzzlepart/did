@@ -10,6 +10,7 @@ import { StatusBar } from '.'
 import { Overview } from '../Views/Overview'
 import { useTimesheetContext } from '../context'
 import styles from './StatusBar.module.scss'
+import {weekHoursSummaryMessage} from './weekHoursSummaryMessage'
 
 /**
  * A custom hook that returns an array of user messages to be displayed in the status bar.
@@ -73,20 +74,32 @@ export function useStatusBar() {
     })
   }
 
-  /**
-   * Displays a week hours summary message.
-   */
-  const weekHoursSummaryMessage: IUserMessageProps =
-    !selectedPeriod.isConfirmed && {
-      id: 'weekhourssummarymessage',
-      text: t('timesheet.weekHoursSummaryText', {
-        hours: $date.getDurationString(selectedPeriod.totalDuration, t),
-        splitWeekInfoText:
-          periods.length > 1 && dateRangeType === DateRangeType.Week
-            ? t('timesheet.splitWeekInfoText')
-            : ''
-      })
-    }
+  // const workHours = 8
+  // console.log(workHours)
+  // // try {
+  // // const missingHours =selectedPeriod ? ((workHours * selectedPeriod.workDaysCount) - selectedPeriod.totalDuration + 1) : 0
+  // // console.log(missingHours)
+  // // } catch (error) {
+  // //   console.log(error)
+  // // }
+  // const missingHours = 3
+  // console.log(missingHours)
+
+  // /**
+  //  * Displays a week hours summary message.
+  //  */
+  // const weekHoursSummaryMessage: IUserMessageProps =
+  //   !selectedPeriod.isConfirmed && {
+  //     id: 'weekhourssummarymessage',
+  //     text: t('timesheet.weekHoursSummaryText', {
+  //       hours: $date.getDurationString(selectedPeriod.totalDuration, t),
+  //       splitWeekInfoText:
+  //         periods.length > 1 && dateRangeType === DateRangeType.Week
+  //           ? t('timesheet.splitWeekInfoText')
+  //           : '',
+  //       workHoursInfoText: missingHours > 0 ? `Med ${workHours} timers arbeidsdag mangler du ${missingHours} timer denne perioden.` : 0
+  //     })
+  //   }
 
   /**
    * Displays a hours not matched message.
@@ -189,7 +202,7 @@ export function useStatusBar() {
   }
 
   if (!selectedPeriod.isConfirmed) {
-    messages.push(weekHoursSummaryMessage)
+    messages.push(weekHoursSummaryMessage(state, t))
   }
 
   if (!selectedPeriod.isComplete && !selectedPeriod.isForecast) {

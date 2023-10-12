@@ -9,7 +9,7 @@ import {
   TimesheetPeriodObject
 } from 'types'
 import _ from 'underscore'
-import { BrowserStorage } from 'utils'
+import { BrowserStorage, mapProperty } from 'utils'
 
 export enum GetEventsOption {
   /**
@@ -344,6 +344,17 @@ export class TimesheetPeriod {
   public weekdays<T = string>(template: string = 'dddd DD'): T[] {
     if (!this.startDate) return []
     return $date.getDays(this.startDate, this.endDate, template) as T[]
+  }
+
+  /**
+   * Get number of work days in the period. It excludes weekends and holidays.
+   */
+  public get workDaysCount(): number {
+    return $date.getWorkingDays(
+      this.startDate,
+      this.endDate,
+      mapProperty(this.holidays, 'date')
+    )
   }
 
   /**

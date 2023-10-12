@@ -178,6 +178,28 @@ export class DateUtils {
   }
 
   /**
+   * Get working days between a start and end time, excluding holidays.
+   *
+   * @param start - Start date
+   * @param end - End date
+   * @param holidays - Holidays (ISO date strings)
+   */
+  public getWorkingDays(start: DateInput, end: DateInput, holidays: string[]) {
+    const startDateObject = new DateObject(start)
+    const endDateObject = new DateObject(end)
+    let workingDays = 0
+    while (startDateObject.isBeforeOrSame(endDateObject)) {
+      if (
+        startDateObject.isWeekday &&
+        !holidays.some((h) => startDateObject.isSameDay(new DateObject(h)))
+      )
+        workingDays++
+      startDateObject.add('1d')
+    }
+    return workingDays
+  }
+
+  /**
    * Get month name for the speicifed month index
    *
    * @param monthIndex - Month index
@@ -330,6 +352,15 @@ export class DateUtils {
    */
   public isBefore(a: DateInput, b?: DateInput) {
     return $dayjs(a).isBefore(b)
+  }
+
+  /**
+   * Is weekday
+   *
+   * @param date - Date
+   */
+  public isWeekday(date: DateObject) {
+    return date.$.isoWeekday() >= 1 && date.$.isoWeekday() <= 5
   }
 
   /**

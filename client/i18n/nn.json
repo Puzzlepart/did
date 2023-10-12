@@ -13,7 +13,7 @@
     "goToCurrentWeek": "Gå til inneverande veke eller månad",
     "goToPrevWeek": "Gå til førre periode",
     "goToNextWeek": "Gå til neste periode",
-    "weekHoursSummaryText": "Du har totalt **{{hours}}** denne perioda. {{splitWeekInfoText}}",
+    "weekHoursSummaryText": "Du har totalt **{{hours}}** denne perioda. {{workHoursInfoText}} {{splitWeekInfoText}}",
     "hoursNotMatchedText": "Du har **{{hours}}** som ikkje er kopla mot eit prosjekt. Alle avtalar må stemme overeins før du kan stadfeste timane dine.",
     "allHoursMatchedText": "Alle timane dine er matcha. Er du klar til å stadfeste perioda di?",
     "periodConfirmedText": "Perioda er stadfesta med {{hours}}. Klikk **Angre stadfesting** dersom du treng å justere timeføringa.",
