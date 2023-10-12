@@ -42,4 +42,9 @@ export interface IProjectLinkProps
    * Whether to show the customer icon.
    */
   showIcon?: boolean
+
+  /**
+   * Renders the link with a popover (`ProjectPopover`).
+   */
+  withPopover?: boolean
 }

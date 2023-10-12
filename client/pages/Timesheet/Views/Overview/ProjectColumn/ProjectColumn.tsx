@@ -1,11 +1,6 @@
 /* eslint-disable unicorn/no-negated-condition */
 import { mergeClasses } from '@fluentui/react-components'
-import {
-  CustomerLink,
-  ProjectLink,
-  ProjectPopover,
-  UserMessage
-} from 'components'
+import { CustomerLink, ProjectLink, UserMessage } from 'components'
 import React, { ReactElement } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -42,9 +37,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
       <>
         {includeCustomerLink && <CustomerLink customer={event.customer} />}
         <div className={styles.content}>
-          <ProjectPopover project={event.project}>
-            <ProjectLink project={event.project} />
-          </ProjectPopover>
+          <ProjectLink project={event.project} withPopover />
           {!_.isEmpty(event.project.labels) &&
             getFluentIcon('TagMultiple', { size: 16 })}
           <ClearManualMatchButton

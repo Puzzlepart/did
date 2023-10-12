@@ -1,26 +1,29 @@
 import { Icon } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { createRouterLink } from 'utils'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
+import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { ProjectPopover } from 'components/ProjectTooltip'
 
 /**
- * Renders a `<Link />` from `react-router-dom` that
- * navigates to the specified project
+ * Renders a `<Link />` or `<Button />` that navigates to the specified project.
+ * Optionally, renders the link/button with a popover (`ProjectPopover`).
  *
  * @category Reusable Component
  */
 export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
+  let element: ReactElement = null
   const to = createRouterLink(props.linkTemplate, {
     tag: props.project.tag.split(' ').join('_')
   })
   switch (props.appearance) {
     case 'link': {
-      return (
+      element = (
         <div className={ProjectLink.className}>
           {props.showIcon && (
             <Icon className={styles.icon} iconName={props.project?.icon} />
@@ -34,9 +37,10 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
           </Link>
         </div>
       )
+      break
     }
     default: {
-      return (
+      element = (
         <Button
           appearance={props.appearance}
           icon={icon(props.icon)}
@@ -48,8 +52,20 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
           <span>{props.text}</span>
         </Button>
       )
+      break
     }
   }
+
+  return (
+    <ConditionalWrapper
+      condition={props.withPopover}
+      wrapper={(children) => (
+        <ProjectPopover project={props.project}>{children}</ProjectPopover>
+      )}
+    >
+      {element}
+    </ConditionalWrapper>
+  )
 }
 
 ProjectLink.displayName = 'ProjectLink'
@@ -59,5 +75,6 @@ ProjectLink.defaultProps = {
   target: '_self',
   linkTemplate: '/projects/{{tag}}',
   showIcon: true,
-  size: 'medium'
+  size: 'medium',
+  withPopover: false
 }
