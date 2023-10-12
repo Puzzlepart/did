@@ -21,7 +21,7 @@ export const useFormControl: ComponentLogicHook<
   }
 > = (props) => {
   const [state, dispatch] = useFormControlReducer()
-  const validateForm = useFormControlValidation(dispatch)
+  const validateForm = useFormControlValidation(props, dispatch)
 
   const submitAction = useMemo<IDynamicButtonProps>(
     () => ({

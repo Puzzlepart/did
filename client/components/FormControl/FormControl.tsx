@@ -1,7 +1,6 @@
 import { DynamicButton } from 'components/DynamicButton'
 import { JsonDebug } from 'components/JsonDebug'
 import { Panel } from 'components/Panel'
-import { Toast } from 'components/Toast'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './FormControl.module.scss'
@@ -42,7 +41,6 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
           </div>
         </>
       )}
-      <Toast {...props.submitProps?.toast} />
     </FormControlContext.Provider>
   )
 }

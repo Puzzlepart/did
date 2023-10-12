@@ -32,6 +32,11 @@ export interface IFormControlProps<T = any>
   edit?: T
 
   /**
+   * Skip validation for the form control.
+   */
+  skipValidation?: boolean
+
+  /**
    * Running in debug mode will show the model JSON in the bottom of the form.
    */
   debug?: boolean

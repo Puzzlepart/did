@@ -6,7 +6,11 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { useTranslation } from 'react-i18next'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import { SET_VALIDATION_MESSAGES } from './reducer'
-import { FormInputControlBase, ValidationResult } from './types'
+import {
+  FormInputControlBase,
+  IFormControlProps,
+  ValidationResult
+} from './types'
 import { validateField } from './validateField'
 
 /**
@@ -28,11 +32,16 @@ function shouldValidateField(field: FormInputControlBase) {
  * `validator` attribute, it will be checked using the provided validator
  * function or object.
  *
+ * @param props - The props from the `FormControl` component.
  * @param dispatch - The Redux dispatch function to dispatch actions to the form control reducer.
  */
-export function useFormControlValidation(dispatch: React.Dispatch<AnyAction>) {
+export function useFormControlValidation(
+  props: IFormControlProps,
+  dispatch: React.Dispatch<AnyAction>
+) {
   const { t } = useTranslation()
   const validateForm = async (fields: ReactElement[]) => {
+    if (props.skipValidation) return true
     const formFieldsToValidate = fields
       .filter((f) => f && shouldValidateField(f.props))
       .map<FormInputControlBase>((f) => f.props)

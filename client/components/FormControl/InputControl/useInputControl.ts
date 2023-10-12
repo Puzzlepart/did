@@ -49,7 +49,7 @@ function transformValue(
  * will be returned as is. Otherwise, the value will be transformed based on
  * the `InputControlOptions`.
  *
- * @param props - Props
+ * @param props - Props for the `InputControl` component.
  */
 export function useInputControl(props: IInputControlProps) {
   const context = useFormContext()
@@ -58,7 +58,7 @@ export function useInputControl(props: IInputControlProps) {
     props.model.set(props.name, transformValue(value, props))
   }, [])
 
-  const value = props.model.value(props.name)
+  const value = props.model.value<string>(props.name, '')
 
   return { onChange, value }
 }
