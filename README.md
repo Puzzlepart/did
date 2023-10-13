@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.13.0-alpha.10-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.13.0-alpha.11-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -58,17 +58,18 @@
 | [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-red.svg)](https://semver.org) |
 | [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
 | [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | Q4 2023      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
+| [🧲 &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | Q1 2024      | [![version](https://img.shields.io/badge/version-0.14.0-red.svg)](https://semver.org) |
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#environments)
 
 ## ➤ Environments
 
-| Environment | Branch   | CI | Status |
+| Environment | Branch/Tag   | CI | Status |
 | ----------- | ------------------------------------------------------------  | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [Production](https://did.puzzlepart.com)     | **main** | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | ![Build and deploy to didapp](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/badge.svg?branch=main) |
-| [Development](https://didapp-dev.azurewebsites.net) | **dev**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | [![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml/badge.svg?branch=dev)](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml) |
-| [Staging (new features)](https://didapp-staging.azurewebsites.net) | **feat/***  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/staging/vstscd) | [![Build and deploy to didapp/staging](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml) |
+| [Development (new features)](https://didapp-dev.azurewebsites.net) | **dev** and  **feat/**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | [![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml/badge.svg?branch=dev)](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml) |
+| [Staging (pre-prod)](https://didapp-staging.azurewebsites.net) | Release tags | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/staging/vstscd) | [![Build and deploy to didapp/staging](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml) |
 
 
 
@@ -159,7 +160,9 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: Did should be developed with node >=14.18.1**
+**NB: Did should be developed with node 18.12.0**
+
+_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.12.0._
 
 ### Authentication
 
@@ -183,10 +186,8 @@ The `/main` branch requires pull requests, and is set up with a CI/CD pipeline w
 #### Dev branch
 The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
 
-The deploy CI is executing when new tags matching the pattern `v*` is pushed to `dev`.
-
 ### Feature branches
-For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-staging.azurewebsites.net](https://didapp-staging.azurewebsites.net) is set up for branches matching the pattern `feat/*`.
+For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) is set up for branches matching the pattern `feat/*` and `dev`.
 
 #### Naming conventions
 You are encouraged to branch with either of the following prefixes  
