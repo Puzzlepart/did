@@ -13,5 +13,5 @@ export interface IFilter {
   key: string
   name: string
   items: IFilterItem[]
-  selected: IFilterItem[]
+  selected: Set<string>
 }

@@ -5,6 +5,7 @@ import { IFilter } from './types'
 
 /**
  * @extends BaseFilter
+ *
  * @category FilterPanel
  */
 export class CustomerFilter extends BaseFilter {
@@ -23,6 +24,7 @@ export class CustomerFilter extends BaseFilter {
    * Intialize the `CustomerFilter`
    *
    * @param items - Items
+   * @param refresh - Refresh the items, keeping the selected keys
    */
   public initialize(items: any[]): IFilter {
     const filterItems = _.unique(

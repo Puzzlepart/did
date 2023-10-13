@@ -22,11 +22,6 @@ export interface IFilterPanelProps extends IPanelProps {
   onFiltersUpdated: (filters: IFilter[]) => void
 
   /**
-   * On reset filters
-   */
-  onClearFilters?: () => void
-
-  /**
    * Number of items to show by default (can show all with Show all link)
    *
    * @default 10

@@ -1,8 +1,7 @@
 import { ICommandBarItemProps } from '@fluentui/react'
-import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { useListContext } from '../context'
-import { CLEAR_FILTERS, TOGGLE_FILTER_PANEL } from '../reducer'
+import { TOGGLE_FILTER_PANEL } from '../reducer'
 import { ListMenuItem } from './ListMenuItem'
 
 /**
@@ -13,7 +12,6 @@ import { ListMenuItem } from './ListMenuItem'
  * @returns An object containing two properties: `toggle` and `clear`, each with a `commandBarItem` property.
  */
 export function useFiltersCommand() {
-  const { t } = useTranslation()
   const context = useListContext()
 
   const hasFilterableColumns = _.any(
@@ -23,17 +21,8 @@ export function useFiltersCommand() {
 
   if (!hasFilterableColumns) {
     return {
-      toggle: undefined,
-      clear: undefined
+      toggle: undefined
     }
-  }
-
-  const clearCommandBarItem: ICommandBarItemProps = {
-    key: 'CLEAR_FILTERS',
-    iconProps: { iconName: 'ClearFilter' },
-    iconOnly: true,
-    disabled: context.state.origItems.length === context.state.items.length,
-    onClick: () => context.dispatch(CLEAR_FILTERS())
   }
 
   const toggleCommandBarItem: ICommandBarItemProps = {
@@ -48,17 +37,10 @@ export function useFiltersCommand() {
   return {
     toggle: {
       commandBarItem: toggleCommandBarItem,
-      menuItem: new ListMenuItem(t('common.toggleFilterPanel'))
+      menuItem: new ListMenuItem()
         .withIcon('Filter')
         .setOnClick(toggleCommandBarItem.onClick)
         .setDisabled(toggleCommandBarItem.disabled)
-        .setGroup('actions')
-    },
-    clear: {
-      commandBarItem: clearCommandBarItem,
-      menuItem: new ListMenuItem(t('common.clearFilters'))
-        .withIcon('ClearFilter')
-        .setDisabled(clearCommandBarItem.disabled)
         .setGroup('actions')
     }
   }

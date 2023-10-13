@@ -28,7 +28,6 @@ export function useListToolbar() {
       farItems: [
         ...(context.props.commandBar?.farItems ?? []),
         filterCommands.toggle?.commandBarItem,
-        filterCommands.clear?.commandBarItem,
         excelExportCommands?.commandBarItem
       ].filter(Boolean)
     }),
@@ -46,7 +45,6 @@ export function useListToolbar() {
             searchBoxMenuItem,
             ...context.props.menuItems,
             filterCommands.toggle?.menuItem,
-            filterCommands.clear?.menuItem,
             excelExportCommands?.menuItem
           ].filter(Boolean),
     [context.props.menuItems]

@@ -1,5 +1,8 @@
+/* eslint-disable unicorn/consistent-function-scoping */
+import { CheckboxProps } from '@fluentui/react-components'
 import { useMemo, useState } from 'react'
 import s from 'underscore.string'
+import { useFilterPanelContext } from '../context'
 import { IFilterItemProps } from './types'
 
 /**
@@ -7,13 +10,10 @@ import { IFilterItemProps } from './types'
  *
  * @param props - The props for the filter item.
  */
-export function useFilterItem({ filter, shortListCount }: IFilterItemProps) {
-  const selectedKeys = useMemo(
-    () => new Set(filter.selected.map((f) => f.key)),
-    [filter.selected]
-  ) as Set<string>
+export function useFilterItem({ filter }: IFilterItemProps) {
+  const context = useFilterPanelContext()
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const [showCount, setShowCount] = useState(shortListCount)
+  const [showCount, setShowCount] = useState(context.props.shortListCount)
 
   const items = useMemo(() => {
     return filter.items.filter((item) =>
@@ -23,11 +23,23 @@ export function useFilterItem({ filter, shortListCount }: IFilterItemProps) {
     )
   }, [searchTerm, filter.items])
 
+  /**
+   * Handles the change event of the checkbox input element.
+   * @param event - The change event object.
+   */
+  const onChange: CheckboxProps['onChange'] = ({ target }) => {
+    const newSelected = new Set(context.selected.get(filter.key) ?? [])
+    if (newSelected.has(target.name)) newSelected.delete(target.name)
+    else newSelected.add(target.name)
+    context.onFilterUpdated(filter, newSelected)
+  }
+
   return {
     onSearch: setSearchTerm,
     items,
     showCount,
     setShowCount,
-    selectedKeys
-  } as const
+    onChange,
+    selected: context.selected.get(filter.key) ?? new Set()
+  }
 }

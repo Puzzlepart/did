@@ -55,6 +55,9 @@ export function useReportsReducer() {
         }
       })
 
+      /**
+       * `SET_FILTER`: Set active filter.
+       */
       .addCase(SET_FILTER, (state, { payload }) => {
         state.activeFilter =
           state.activeFilter?.key === payload.key ? null : (payload as any)
@@ -68,7 +71,7 @@ export function useReportsReducer() {
           values: current(state).filterState?.filters?.reduce(
             (object, f) => ({
               ...object,
-              [f.key]: f.selected.map((index) => index.key)
+              [f.key]: Array.from(f.selected.values())
             }),
             {}
           ),

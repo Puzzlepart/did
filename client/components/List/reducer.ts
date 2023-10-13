@@ -30,7 +30,6 @@ export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
 )
-export const CLEAR_FILTERS = createAction('CLEAR_FILTERS')
 
 /**
  * Reducer for Timesheet
@@ -95,18 +94,13 @@ export default (initialState: IListState) => {
         })
         .addCase(FILTERS_UPDATED, (state, { payload }) => {
           state.filters = payload.filters
-          state.items = _.filter(state.origItems, (entry) => {
-            return (
-              _.filter(payload.filters, (f) => {
-                const selectedKeys = f.selected.map((s) => s.key)
-                return selectedKeys.includes(get(entry, f.key, { default: '' }))
-              }).length === payload.filters.length
-            )
-          })
-        })
-        .addCase(CLEAR_FILTERS, (state) => {
-          state.items = state.origItems
-          state.filters = []
+          state.items = _.filter(
+            state.origItems,
+            (entry) =>
+              _.filter(payload.filters, (f) =>
+                f.selected.has(get(entry, f.key, { default: '' }))
+              ).length === payload.filters.length
+          )
         })
     )
   }, [])

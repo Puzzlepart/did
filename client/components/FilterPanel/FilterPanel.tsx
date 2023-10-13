@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { FilterItem } from './FilterItem'
 import { IFilterPanelProps } from './types'
 import { useFilterPanel } from './useFilterPanel'
+import { FilterPanelContext } from './context'
 
 /**
  * Filter panel that renders filter items with more than
@@ -16,34 +17,29 @@ import { useFilterPanel } from './useFilterPanel'
  */
 export const FilterPanel: PanelComponent<IFilterPanelProps> = (props) => {
   const { t } = useTranslation()
-  const { filtersToRender, onFilterUpdated, title, onClearFilters } =
-    useFilterPanel(props)
+  const { filtersToRender, contextValue, title } = useFilterPanel(props)
 
   return (
-    <Panel
-      {...props}
-      title={title}
-      onDismiss={props.onDismiss}
-      actions={[
-        {
-          text: t('common.clearFilters'),
-          onClick: onClearFilters,
-          disabled: !onClearFilters,
-          appearance: 'secondary'
-        }
-      ]}
-    >
-      {props.children}
-      {filtersToRender.map((filter) => (
-        <FilterItem
-          key={filter.key}
-          filter={filter}
-          onFilterUpdated={onFilterUpdated}
-          shortListCount={props.shortListCount}
-          hideHeader={!!props.selectedFilter}
-        />
-      ))}
-    </Panel>
+    <FilterPanelContext.Provider value={contextValue}>
+      <Panel
+        {...props}
+        title={title}
+        onDismiss={props.onDismiss}
+        actions={[
+          {
+            text: t('common.clearFilters'),
+            onClick: () => contextValue.setSelected(new Map()),
+            disabled: contextValue.selected.size === 0,
+            appearance: 'secondary'
+          }
+        ]}
+      >
+        {props.children}
+        {filtersToRender.map((filter) => (
+          <FilterItem key={filter.key} filter={filter} />
+        ))}
+      </Panel>
+    </FilterPanelContext.Provider>
   )
 }
 

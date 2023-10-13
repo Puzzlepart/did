@@ -319,7 +319,7 @@
     "exportToExcel": "Export to Excel",
     "savedFilters": "Saved filters",
     "saveFilterText": "Save filter",
-    "filterNamePlaceholder": "Enter filter name...",
+    "filterNamePlaceholder": "Enter filter name (minimum 2 characters)...",
     "cancelSaveFilterText": "Cancel",
     "deleteFilterText": "Delete",
     "filterPanelHeaderText": "Filters",

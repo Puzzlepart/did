@@ -12,18 +12,16 @@ import { useSaveFilterForm } from './useSaveFilterForm'
  */
 export const SaveFilterForm: StyledComponent = () => {
   const { t } = useTranslation()
-  const { inputVisible, setInputVisible, value, set, onSave, disabled } =
-    useSaveFilterForm()
+  const { inputVisible, value, set, onSave, disabled } = useSaveFilterForm()
 
   return (
     <div className={SaveFilterForm.className}>
-      {inputVisible && (
+      {inputVisible.value && (
         <div className={styles.body}>
-          <Field className={styles.nameInput} required={true}>
+          <Field className={styles.nameInput}>
             <Input
               value={value('text')}
               placeholder={t('reports.filterNamePlaceholder')}
-              required={true}
               onChange={(_event, { value }) => {
                 set('text', s.capitalize(value))
                 set('key', s.underscored(value))
@@ -32,7 +30,6 @@ export const SaveFilterForm: StyledComponent = () => {
           </Field>
           <IconPickerControl
             className={styles.iconPicker}
-            required={true}
             defaultSelected={value('iconProps').iconName}
             onSelected={(iconName) => set('iconProps', { iconName })}
           />
@@ -40,15 +37,15 @@ export const SaveFilterForm: StyledComponent = () => {
       )}
       <div className={styles.footer}>
         <DynamicButton
-          primary={inputVisible}
+          primary={inputVisible.value}
           text={t('reports.saveFilterText')}
           disabled={disabled}
           onClick={onSave}
         />
         <DynamicButton
-          hidden={!inputVisible}
+          hidden={!inputVisible.value}
           text={t('reports.cancelSaveFilterText')}
-          onClick={() => setInputVisible(false)}
+          onClick={inputVisible.setFalse}
           subtle
         />
       </div>
