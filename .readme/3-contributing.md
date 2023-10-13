@@ -83,7 +83,9 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: Did should be developed with node >=14.18.1**
+**NB: Did should be developed with node 18.12.0**
+
+_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.12.0._
 
 ### Authentication
 
@@ -107,10 +109,8 @@ The `/main` branch requires pull requests, and is set up with a CI/CD pipeline w
 #### Dev branch
 The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
 
-The deploy CI is executing when new tags matching the pattern `v*` is pushed to `dev`.
-
 ### Feature branches
-For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-staging.azurewebsites.net](https://didapp-staging.azurewebsites.net) is set up for branches matching the pattern `feat/*`.
+For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) is set up for branches matching the pattern `feat/*` and `dev`.
 
 #### Naming conventions
 You are encouraged to branch with either of the following prefixes  
