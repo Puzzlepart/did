@@ -19,6 +19,7 @@
 ## ➤ Table of Contents
 
 * [➤ Roadmap](#-roadmap)
+* [➤ Backlog](#-backlog)
 * [➤ Environments](#-environments)
 * [➤ Contributing](#-contributing)
 	* [Getting started](#getting-started)
@@ -59,6 +60,13 @@
 | [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
 | [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | Q4 2023      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
 | [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | Q1/Q2 2024      | [![version](https://img.shields.io/badge/version-0.14.0-red.svg)](https://semver.org) |
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#backlog)
+
+## ➤ Backlog
+
+Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#environments)
