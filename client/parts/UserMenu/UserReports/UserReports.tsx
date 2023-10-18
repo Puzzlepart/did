@@ -20,6 +20,7 @@ export const UserReports: FC = () => {
         title={t('common.userReports')}
         open={panelState.value}
         onDismiss={panelState.setFalse}
+        size='small'
         contentGap={25}
       >
         <ChoiceGroup

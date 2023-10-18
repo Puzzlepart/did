@@ -30,7 +30,13 @@ export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
           appearance='subtle'
           onClick={onClick}
           icon={props.icon}
-          style={{ width: '100%' }}
+          style={{
+            width: '100%',
+            textTransform: 'uppercase',
+            fontSize: 10,
+            letterSpacing: 2,
+            textShadow: 'var(--shadow8)'
+          }}
         >
           {props.text}
         </Button>
