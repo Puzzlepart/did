@@ -10,8 +10,10 @@
 
 [[load:.readme/1-roadmap.md]]
 
-[[load:.readme/2-environments.md]]
+[[load:.readme/2-backlog.md]]
 
-[[load:.readme/3-contributing.md]]
+[[load:.readme/3-environments.md]]
+
+[[load:.readme/4-contributing.md]]
 
 [[ template:contributors ]]
