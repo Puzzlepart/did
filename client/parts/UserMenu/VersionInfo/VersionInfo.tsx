@@ -29,19 +29,19 @@ export const VersionInfo: StyledComponent = () => {
       relationship='description'
       content={
         <div className={styles.versionInfoTooltip}>
-          <div>
+          <div hidden={!hashShort}>
             <b className={styles.infoLabel}>Commit:</b>
             <Link href={commitUrl} target='_blank'>
               <span>{hashShort}</span>
             </Link>
           </div>
-          <div>
+          <div hidden={!branch}>
             <b className={styles.infoLabel}>Branch:</b>
             <Link href={branchUrl} target='_blank'>
               <span>{branch}</span>
             </Link>
           </div>
-          <div>
+          <div hidden={!lastCommitDatetime}>
             <b className={styles.infoLabel}>Last commit:</b>
             <span>{lastCommitDatetime}</span>
           </div>
