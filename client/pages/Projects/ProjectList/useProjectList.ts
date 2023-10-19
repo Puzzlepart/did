@@ -1,11 +1,15 @@
-import { useToggle } from 'hooks'
 import { useEffect, useMemo, useState } from 'react'
+import { useBoolean } from 'usehooks-ts'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'
 
 /**
- * Component logic hook for `<ProjecList />`
+ * Component logic hook for `<ProjecList />`. This hook is used to
+ * manage the state and actions of the `<ProjectList />` component.
+ * It handles the filtering of projects based on the `showInactive`
+ * and tab `id` props. It also handles the columns for the table,
+ * using the `useColumns` hook.
  *
  * @param props Props for the component
  *
@@ -13,28 +17,33 @@ import { useColumns } from './useColumns'
  */
 export function useProjectList(props: IProjectListProps) {
   const context = useProjectsContext()
-  const initialItems = useMemo(() => {
-    let items = context?.state?.projects ?? props.items
+  const initialProjects = useMemo(() => {
+    let projects = context?.state?.projects ?? props.items
     if (props.id === 'm') {
-      items = items.filter(({ outlookCategory }) => !!outlookCategory)
+      projects = projects.filter(({ outlookCategory }) => !!outlookCategory)
     }
-    return items
+    return projects
   }, [context?.state?.projects, props.items, props.id])
-  const [items, setItems] = useState(initialItems)
-  const [showInactive, toggleInactive] = useToggle(false)
+  const [projects, setProjects] = useState(initialProjects)
+  const showInactive = useBoolean(false)
   const columns = useColumns(props)
 
   useEffect(
     () =>
-      setItems(
-        [...initialItems].filter(({ inactive }) => showInactive || !inactive)
+      setProjects(
+        [...initialProjects].filter(
+          ({ inactive }) => showInactive.value || !inactive
+        )
       ),
-    [initialItems, props.id, showInactive]
+    [initialProjects, props.id, showInactive.value]
   )
 
+  const inactiveProjects = initialProjects.filter(({ inactive }) => inactive)
+
   return {
-    items,
+    projects,
+    inactiveProjects,
     columns,
-    toggleInactive
+    showInactive
   }
 }

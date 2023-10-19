@@ -37,9 +37,6 @@ export function useUpdateUserConfiguration(
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const stringValue = JSON.stringify(params?.config ?? {})
 
-  // eslint-disable-next-line no-console
-  console.log(params)
-
   const updateLastActive = useCallback(async () => {
     await updateUserConfiguration({
       variables: {
@@ -62,8 +59,6 @@ export function useUpdateUserConfiguration(
 
   useEffect(() => {
     if (params?.autoUpdate) {
-      // eslint-disable-next-line no-console
-      console.log(`Auto updating user configuration: ${stringValue}`)
       updateUserConfiguration({
         variables: { configuration: stringValue }
       })
