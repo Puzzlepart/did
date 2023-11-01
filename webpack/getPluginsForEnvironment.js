@@ -29,7 +29,6 @@ function getPluginsForEnvironment() {
   ]
   if (!constants.get('IS_DEVELOPMENT')) return plugins
   const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
-  const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
   const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
   const CustomCompileHooks = require('./compileHooks')
   plugins.push(
@@ -52,13 +51,7 @@ function getPluginsForEnvironment() {
       },
       launchBrowser: process.env.LAUNCH_BROWSER === '1'
     }),
-    new LiveReloadPlugin(),
-    new WebpackBuildNotifierPlugin({
-      logo: path.resolve('./server/public/images/favicon/apple-touch-icon.png'),
-      sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
-      suppressWarning: true,
-      showDuration: true
-    })
+    new LiveReloadPlugin()
   )
   return plugins
 }
