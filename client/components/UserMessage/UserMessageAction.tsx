@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Tooltip } from '@fluentui/react-components'
 import React from 'react'
-import { getFluentIcon } from 'utils'
+import { getFluentIconWithFallback } from 'utils'
 import { IUserMessageProps } from './types'
 
 export const UserMessageAction = (props: IUserMessageProps) => {
@@ -11,7 +11,7 @@ export const UserMessageAction = (props: IUserMessageProps) => {
       event.preventDefault()
       props.action.onClick(null)
     },
-    icon: getFluentIcon(props.action.iconName, {
+    icon: getFluentIconWithFallback(props.action.iconName, {
       bundle: true,
       color: props.action.iconColor
     }),

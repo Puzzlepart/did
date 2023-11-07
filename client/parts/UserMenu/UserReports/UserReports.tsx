@@ -39,7 +39,8 @@ export const UserReports: FC = () => {
             hidden={!preset}
             text={t('common.userReportSummary', query)}
             action={{
-              iconName: 'ArrowExportUp',
+              iconName: 'ExcelDocument',
+              iconColor: '#217346',
               text: t('common.exportExcel'),
               onClick: onExport
             }}

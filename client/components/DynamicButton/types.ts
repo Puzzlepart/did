@@ -13,7 +13,7 @@ export interface IDynamicButtonProps
   /**
    * Icon name to use for the button.
    */
-  iconName?: FluentIconName
+  iconName?: FluentIconName | string
 
   /**
    * Text to display on the button. This is not natively supported as a prop on

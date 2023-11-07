@@ -85,18 +85,16 @@ export function getFluentIcons() {
  * Returns a Fluent UI icon component with fallback to a an icon from `@fluentui/react`.
  *
  * @param name - The name of the icon to retrieve.
- * @param bundle - Whether to bundle the icon with the filled version. Defaults to true.
- * @param color - The color of the icon.
+ * @param options . The options to use when retrieving the icon.
  *
  * @returns A Fluent UI icon component or a default icon component if the requested icon is not found.
  */
 export function getFluentIconWithFallback(
   name: string,
-  bundle = true,
-  color?: string
+  options?: GetFluentIconOptions
 ) {
   if (iconCatalog[name]) {
-    return getFluentIcon(name as FluentIconName, { bundle, color })
+    return getFluentIcon(name as FluentIconName, options)
   }
-  return <Icon iconName={name} style={{ color }} />
+  return <Icon iconName={name} style={{ color: options?.color }} />
 }
