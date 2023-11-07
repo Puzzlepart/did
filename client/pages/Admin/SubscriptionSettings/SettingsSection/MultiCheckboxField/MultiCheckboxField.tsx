@@ -15,12 +15,12 @@ export const MultiCheckboxField: StyledComponent<ICheckboxFieldProps> = ({
   props,
   options
 }) => {
-  const { onChange, settings } = useContext(SubscriptionContext)
+  const context = useContext(SubscriptionContext)
   return (
     <Field label={props.label} description={props.description}>
       {Object.keys(options).map((key) => {
         const defaultChecked = _.contains(
-          get(settings, settingsKey, { default: [] }),
+          get(context.settings, settingsKey, { default: [] }),
           key
         )
         return (
@@ -28,11 +28,9 @@ export const MultiCheckboxField: StyledComponent<ICheckboxFieldProps> = ({
             <Checkbox
               defaultChecked={defaultChecked}
               label={options[key]}
-              onChange={(_event, checked) => {
-                onChange(settingsKey, (value: string[] = []) => {
-                  if (checked) value.push(key)
-                  else value.splice(value.indexOf(key), 1)
-                  return value
+              onChange={(_event, { checked }) => {
+                context.onChange(settingsKey, (value: string[] = []) => {
+                  return checked ? [...value, key] : _.without(value, key)
                 })
               }}
             />
