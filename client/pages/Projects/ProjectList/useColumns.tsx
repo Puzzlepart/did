@@ -42,13 +42,14 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
     () =>
       [
         createColumnDef<Project, IProjectTagProps>(
-          null,
+          'tag',
           t('common.tagFieldLabel'),
           {
             minWidth: 160,
             maxWidth: 180,
             renderAs: 'projectTag',
             createRenderProps: (project) => ({
+              project,
               displayIcon: true,
               hasOutlookCategory: fuzzyContains(outlookCategories, project.tag),
               enableFavoriting: !_.isEmpty(outlookCategories)
@@ -61,13 +62,14 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           renderAs: 'customerLink'
         }),
         createColumnDef<Project, IProjectLinkProps>(
-          null,
+          'name',
           t('common.nameFieldLabel'),
           {
             minWidth: 220,
             maxWidth: 260,
             renderAs: 'projectLink',
             createRenderProps: (project) => ({
+              project,
               onClick: () => context.dispatch(SET_SELECTED_PROJECT(project)),
               showIcon: false
             })
