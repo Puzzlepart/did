@@ -1,7 +1,6 @@
 import { TabItems } from 'components/Tabs'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
 import { SummaryView } from './SummaryView'
 import { WelcomeTab } from './WelcomeTab'
 import { IReportsContext } from './context'
@@ -38,13 +37,6 @@ export function useReports() {
   )
 
   useReportsQuery(context)
-
-  useUpdateUserConfiguration({
-    config: {
-      'reports.filters': state.savedFilters
-    },
-    autoUpdate: !state.loading && !!state.activeFilter?.text
-  })
 
   /**
    * Tabs for `<Reports />`. The `home` tab is always present,
