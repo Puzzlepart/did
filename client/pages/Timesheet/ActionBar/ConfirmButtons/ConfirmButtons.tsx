@@ -1,7 +1,9 @@
-import { ToolbarButton } from '@fluentui/react-components'
+import { ToolbarButton, Tooltip } from '@fluentui/react-components'
+import { ConditionalWrapper } from 'components'
 import React, { FC } from 'react'
 import { IConfirmButtonsProps } from './types'
 import { useConfirmButtons } from './useConfirmButtons'
+import ReactMarkdown from 'react-markdown'
 
 /**
  * Renders the confirm and unconfirm buttons for a timesheet period.
@@ -12,10 +14,22 @@ import { useConfirmButtons } from './useConfirmButtons'
  * @category Timesheet
  */
 export const ConfirmButtons: FC<IConfirmButtonsProps> = (props) => {
-  const { buttonProps, buttonText, isConfirmDisabled } =
-    useConfirmButtons(props)
-  if (isConfirmDisabled) return null
-  return <ToolbarButton {...buttonProps}>{buttonText}</ToolbarButton>
+  const { buttonProps, buttonText, tooltipText } = useConfirmButtons(props)
+  return (
+    <ConditionalWrapper
+      condition={!!tooltipText}
+      wrapper={(children) => (
+        <Tooltip
+          content={<ReactMarkdown>{tooltipText}</ReactMarkdown>}
+          relationship='description'
+        >
+          {children}
+        </Tooltip>
+      )}
+    >
+      <ToolbarButton {...buttonProps}>{buttonText}</ToolbarButton>
+    </ConditionalWrapper>
+  )
 }
 
 ConfirmButtons.displayName = 'ConfirmButtons'
