@@ -1,12 +1,10 @@
 mutation UpdateUserConfiguration(
   $user: String
   $lastActive: String
-  $configuration: String
 ) {
   result: updateUserConfiguration(
     user: $user
     lastActive: $lastActive
-    configuration: $configuration
   ) {
     success
   }
