@@ -18,15 +18,15 @@ export const Admin: FC = () => {
     <Tabs
       items={{
         users: [Users, t('admin.users.headerText')],
+        rolespermissions: [
+          RolesPermissions,
+          t('admin.rolesPermissions.headerText')
+        ],
         missingsubmissions: [
           MissingSubmissions,
           t('admin.missingSubmissions.headerText')
         ],
         labels: [Labels, t('common.labelsText')],
-        rolespermissions: [
-          RolesPermissions,
-          t('admin.rolesPermissions.headerText')
-        ],
         subscription: [
           SubscriptionSettings,
           t('admin.subscriptionSettings.headerText')

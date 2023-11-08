@@ -159,14 +159,13 @@
       "editPermissionsDescription": "Click to manage or customize permissions for this API token. Please note that permissions cannot be updated after creation.",
       "apiKeyGenerated": "Click the key to copy it to your clipboard.",
       "apiKeyCopied": "API key for **{{name}}** successfully copied to clipboard.",
-      "noPermissionsSelected": "Select desired permissions for the API key. Click **{{buttonLabel}}** and select permissions by category.",
       "delete": "Delete",
       "yearPlural": "{{years}} years",
       "keyLabel": "Secret key",
       "displaySecretKeyButtonTooltip": "Click to reveal the secret for {{displayDuration}} seconds, then click the fields to copy it.",
       "displaySecretKeyButtonLabel": "Show me the secret",
       "permissionsRequired": "You need to provide at least one permission for the API-key. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
-      "tokenDescriptionDescription": "Describe a bit about how you intend to use the API-token, and explain briefly why you need the selected permissions.",
+      "tokenDescriptionDescription": "Describe briefly (minimum {{minLength}} characters) how you intend to use the API-token, and explain briefly why you need the selected permissions.",
       "warningTooManyPermissions": "You've selected {{count}} permissions. We recommend not too be too greedy with permissions, but if you know what you're doing - sure."
     },
     "labels": {
@@ -302,7 +301,6 @@
     },
     "deleteRole": "Delete role",
     "permissionsRequired": "You need to provide at least one permission for the role. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
-    "noPermissionsSelected": "Select desired permissions for the user. Click **{{buttonLabel}}** and select permissions by category.",
     "timesheet": "Timesheet",
     "timesheetDayFormatDescription": "Select the date format for the days in the timesheet. This is the format used in the grouping of hours in the timesheet. Example: dddd DD. See preview on the right.",
     "timesheetDayFormatLabel": "Date format for days in the Timesheet",

@@ -13,20 +13,11 @@ export interface IEditPermissionsProps
    * `{{count}} {{label}} selected`.
    */
   labelFormat?: string
-  /**
-   * Label for the button that opens the permissions menu.
-   */
-  buttonLabel?: string
 
   /**
    * Icon for the button that opens the permissions menu.
    */
   buttonIcon?: FluentIconName
-
-  /**
-   * Empty message to display when there are no permissions selected.
-   */
-  emptyMessage?: string
 
   /**
    * An array of selected permissions.

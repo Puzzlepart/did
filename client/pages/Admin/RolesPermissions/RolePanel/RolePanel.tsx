@@ -22,7 +22,7 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
         {...register('name')}
         required={true}
         label={t('admin.roleNameLabel')}
-        disabled={!!props.edit}
+        disabled={isEditMode}
       />
       <IconPickerControl
         {...register('icon')}
@@ -40,15 +40,7 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
           ]
         })}
         label={t('admin.permissonsLabel')}
-        buttonLabel={
-          isEditMode ? t('admin.editPermissions') : t('admin.addPermissions')
-        }
         description={t('admin.editPermissionsDescription')}
-        emptyMessage={t('admin.noPermissionsSelected', {
-          buttonLabel: isEditMode
-            ? t('admin.editPermissions')
-            : t('admin.addPermissions')
-        })}
         onChange={(permissions) => model.set('permissions', permissions)}
         selectedPermissions={model.value('permissions')}
       />

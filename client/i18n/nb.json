@@ -159,14 +159,13 @@
       "editPermissionsDescription": "Klikk for å administrere eller tilpasse tillatelser for denne API-nøkkelen. \nVær oppmerksom på at tillatelser ikke kan oppdateres etter opprettelse.",
       "apiKeyGenerated": "Klikk på nøkkelen for å kopiere den til utklippstavlen.",
       "apiKeyCopied": "API-nøkkelen for **{{name}}** ble kopiert til utklippstavlen.",
-      "noPermissionsSelected": "Velg ønskede tillatelser for API-nøkkelen. Klikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
       "delete": "Slett",
       "yearPlural": "{{years}} år",
       "keyLabel": "Hemmelig nøkkel",
       "displaySecretKeyButtonTooltip": "Klikk for å avsløre den hemmelig nøkkelen i {{displayDuration}} sekunder, og klikk deretter på feltene for å kopiere den.",
       "displaySecretKeyButtonLabel": "Vis meg nøkkelen",
       "permissionsRequired": "Du må velge minst én tillatelse for API-nøkkelen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er som å ha en jobb uten oppgaver.",
-      "tokenDescriptionDescription": "Beskriv litt om hvordan du har tenkt å bruke API-token, og forklar kort hvorfor du trenger de valgte tillatelsene.",
+      "tokenDescriptionDescription": "Beskriv (minst {{minLength}} tegn) hvordan du har tenkt å bruke API-token, og forklar kort hvorfor du trenger de valgte tillatelsene.",
       "warningTooManyPermissions": "Du har valgt {{count}} tillatelser. \nVi anbefaler ikke å være for grådig med tillatelser, men hvis du vet hva du gjør - kjør på."
     },
     "users": {
@@ -302,7 +301,6 @@
     "userHiddenFromReportsDescription": "Denne innstillingen lar deg angi brukeren som \"skjult\" fra rapportene dine. Når en bruker er merket som skjult, blir ikke aktiviteten og dataene inkludert i genererte rapporter eller analyser. \nDenne funksjonen er spesielt nyttig for scenarier der du har administrative brukere eller spesielle kontoer som ikke bør påvirke rapporteringsberegningene dine.",
     "deleteRole": "Slett rolle",
     "permissionsRequired": "Du må gi minst én tillatelse for rollen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er liksom litt som å ha en jobb uten oppgaver.",
-    "noPermissionsSelected": "Velg ønskede tillatelser for brukeren. \nKlikk **{{buttonLabel}}** og velg tillatelser etter kategori.",
     "timesheet": "Timeliste",
     "timesheetDayFormatDescription": "Velg datoformat for dagene i timelisten. Dette er formatet som brukes i grupperingen av timer i timelisten. Eksempel: dddd DD. Se forhåndsvisning til høyre.",
     "timesheetDayFormatLabel": "Datoformat for dager i timelisten",

@@ -47,7 +47,9 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
         })}
         rows={8}
         label={t('common.descriptionFieldLabel')}
-        description={t('admin.apiTokens.tokenDescriptionDescription')}
+        description={t('admin.apiTokens.tokenDescriptionDescription', {
+          minLength: 20
+        })}
         required={true}
       />
       <DropdownControl
@@ -68,11 +70,7 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
         })}
         api={true}
         label={t('admin.permissonsLabel')}
-        buttonLabel={t('admin.apiTokens.permissionsTitle')}
         description={t('admin.apiTokens.editPermissionsDescription')}
-        emptyMessage={t('admin.apiTokens.noPermissionsSelected', {
-          buttonLabel: t('admin.apiTokens.permissionsTitle')
-        })}
         selectedPermissions={model.value('permissions')}
         onChange={(selectedPermissions) =>
           model.set('permissions', selectedPermissions)
