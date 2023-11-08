@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable unicorn/prefer-ternary */
 import { Caption1, Persona, Text, Tooltip } from '@fluentui/react-components'
 import { Tag } from '@fluentui/react-tags-preview'
@@ -10,6 +11,21 @@ import { StyledComponent } from 'types'
 import { useListContext } from '../context'
 import styles from './ItemColumn.module.scss'
 import { IItemColumnProps } from './types'
+
+function createRenderMap(fieldValue: any, renderProps: any) {
+  const map = new Map<string, ReactElement>([
+    [
+      'timeFromNow',
+      <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
+    ],
+    ['customerLink', <CustomerLink customer={fieldValue} {...renderProps} />],
+    ['projectLink', <ProjectLink project={fieldValue} {...renderProps} />],
+    ['projectTag', <ProjectTag project={fieldValue} {...renderProps} />],
+    ['tag', <Tag {...renderProps}>{fieldValue}</Tag>],
+    ['persona', <Persona {...renderProps} />]
+  ])
+  return map
+}
 
 export const ItemColumn: StyledComponent<IItemColumnProps> = ({
   column,
@@ -45,30 +61,13 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
       </Tooltip>
     )
   } else {
-    switch (column.renderAs) {
-      case 'timeFromNow': {
-        return <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
-      }
-      case 'customerLink': {
-        return <CustomerLink customer={fieldValue} {...renderProps} />
-      }
-      case 'projectLink': {
-        return <ProjectLink project={fieldValue} {...renderProps} />
-      }
-      case 'projectTag': {
-        return <ProjectTag project={fieldValue} {...renderProps} />
-      }
-      case 'tag': {
-        return <Tag {...renderProps}>{fieldValue}</Tag>
-      }
-      case 'persona': {
-        return <Persona {...renderProps} />
-      }
-      default: {
-        if (column.onRender) {
-          element = column.onRender(item)
-        } else element = <Text size={200}>{fieldValue}</Text>
-      }
+    const renderMap = createRenderMap(fieldValue, renderProps)
+    if (renderMap.has(column.renderAs)) {
+      return renderMap.get(column.renderAs)
+    } else {
+      if (column.onRender) {
+        element = column.onRender(item)
+      } else element = <Text size={200}>{fieldValue}</Text>
     }
   }
 

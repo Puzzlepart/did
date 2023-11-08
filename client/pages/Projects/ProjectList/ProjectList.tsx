@@ -15,7 +15,7 @@ import { useProjectList } from './useProjectList'
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const { t } = useTranslation()
   const context = useProjectsContext()
-  const { projects, inactiveProjects, columns, showInactive } =
+  const { projects, inactiveProjects, columns, showInactive, getKey } =
     useProjectList(props)
   return (
     <>
@@ -25,6 +25,7 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
         items={projects}
         columns={columns}
         groups={props.groups}
+        getKey={getKey}
         menuItems={[
           inactiveProjects.length > 0 &&
             InactiveCheckboxMenuItem(

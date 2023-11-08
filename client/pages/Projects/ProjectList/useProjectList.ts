@@ -1,4 +1,6 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 import { useEffect, useMemo, useState } from 'react'
+import { Project } from 'types'
 import { useBoolean } from 'usehooks-ts'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
@@ -40,10 +42,15 @@ export function useProjectList(props: IProjectListProps) {
 
   const inactiveProjects = initialProjects.filter(({ inactive }) => inactive)
 
+  function getKey(project: Project, index: number) {
+    return `project_list_item_${project?.tag ?? index}`
+  }
+
   return {
     projects,
     inactiveProjects,
     columns,
-    showInactive
+    showInactive,
+    getKey
   }
 }

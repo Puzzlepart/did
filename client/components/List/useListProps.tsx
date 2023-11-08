@@ -49,7 +49,7 @@ export function useListProps({
     checkboxVisibility = context.props.checkboxVisibility
   }
   return {
-    getKey: (_item, index) => `list_item_${index}`,
+    getKey: context.props.getKey,
     setKey: 'list',
     enableShimmer: context.props.enableShimmer,
     isPlaceholderData: context.props.enableShimmer,
