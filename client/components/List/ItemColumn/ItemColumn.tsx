@@ -1,9 +1,5 @@
-/* eslint-disable react/jsx-key */
 /* eslint-disable unicorn/prefer-ternary */
-import { Caption1, Persona, Text, Tooltip } from '@fluentui/react-components'
-import { Tag } from '@fluentui/react-tags-preview'
-import { CustomerLink, ProjectLink, ProjectTag } from 'components'
-import { DateObject } from 'DateUtils'
+import { Caption1, Text, Tooltip } from '@fluentui/react-components'
 import get from 'get-value'
 import React, { ReactElement } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -11,21 +7,7 @@ import { StyledComponent } from 'types'
 import { useListContext } from '../context'
 import styles from './ItemColumn.module.scss'
 import { IItemColumnProps } from './types'
-
-function createRenderMap(fieldValue: any, renderProps: any) {
-  const map = new Map<string, ReactElement>([
-    [
-      'timeFromNow',
-      <Caption1>{new DateObject(fieldValue).$.fromNow()}</Caption1>
-    ],
-    ['customerLink', <CustomerLink customer={fieldValue} {...renderProps} />],
-    ['projectLink', <ProjectLink project={fieldValue} {...renderProps} />],
-    ['projectTag', <ProjectTag project={fieldValue} {...renderProps} />],
-    ['tag', <Tag {...renderProps}>{fieldValue}</Tag>],
-    ['persona', <Persona {...renderProps} />]
-  ])
-  return map
-}
+import { createRenderMap } from './createRenderMap'
 
 export const ItemColumn: StyledComponent<IItemColumnProps> = ({
   column,
