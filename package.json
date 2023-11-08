@@ -46,7 +46,7 @@
     "@babel/preset-env": "7.13.12",
     "@fluentui/react": "8.111.2",
     "@fluentui/react-breadcrumb-preview": "1.0.5",
-    "@fluentui/react-components": "9.32.1",
+    "@fluentui/react-components": "9.37.4",
     "@fluentui/react-portal-compat": "9.0.92",
     "@fluentui/react-search-preview": "0.1.12",
     "@fluentui/react-tags-preview": "0.3.1",

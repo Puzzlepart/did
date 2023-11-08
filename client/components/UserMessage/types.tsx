@@ -1,4 +1,4 @@
-import { AlertProps } from '@fluentui/react-components/dist/unstable'
+import { MessageBarProps } from '@fluentui/react-components'
 import { IDynamicButtonProps } from 'components/DynamicButton'
 import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
 import { FluentIconName } from 'utils'
@@ -17,7 +17,7 @@ export interface IUserMessageAction
 /**
  * @category UserMessage
  */
-export interface IUserMessageProps extends Omit<AlertProps, 'action'> {
+export interface IUserMessageProps extends Omit<MessageBarProps, 'action'> {
   /**
    * Header text to show in **bold** _slightly larger_ font
    */
