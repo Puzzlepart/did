@@ -13,7 +13,7 @@ export function useUserSettings() {
   const { model, register } = useUserSettingsModel()
 
   const onSaveUserSettings = async () => {
-    await updateUserSettings(model)
+    await updateUserSettings(model.$)
     panel.setFalse()
     appContext.displayToast(t('common.userSettingsSaved'), 'success')
   }

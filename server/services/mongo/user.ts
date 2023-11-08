@@ -174,20 +174,21 @@ export class UserService extends MongoDocumentService<User> {
     lastActive?: string
   ) {
     try {
-      const filter = { _id: this.context.userId }
-      const $set: User = {}
+      const currentUserFilter = { _id: this.context.userId }
+      const updatedUser: User = {}
       if (userObjectString) {
-        const user = await this.collection.findOne(filter)
+        const user = await this.collection.findOne(currentUserFilter)
         const userObject = JSON.parse(userObjectString) as User
-        $set.configuration = _.merge(
+        updatedUser.configuration = _.merge(
           user.configuration,
           userObject.configuration
         )
-        $set.startPage = userObject.startPage
-        $set.preferredLanguage = userObject.preferredLanguage
+        updatedUser.startPage = userObject.startPage ?? user.startPage
+        updatedUser.preferredLanguage =
+          userObject.preferredLanguage ?? user.preferredLanguage
       }
-      if (lastActive) $set.lastActive = new Date(lastActive)
-      await this.update(filter, $set)
+      if (lastActive) updatedUser.lastActive = new Date(lastActive)
+      await this.update(currentUserFilter, updatedUser)
     } catch (error) {
       throw error
     }

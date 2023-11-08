@@ -129,7 +129,7 @@ export interface IReportsState {
   /**
    * Saved filters
    */
-  savedFilters?: { [key: string]: IReportsSavedFilter }
+  savedFilters?: Record<string, IReportsSavedFilter>
 
   /**
    * Active filter

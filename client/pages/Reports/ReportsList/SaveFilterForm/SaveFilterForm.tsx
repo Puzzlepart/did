@@ -1,5 +1,5 @@
 import { Input } from '@fluentui/react-components'
-import { DynamicButton, Field, IconPickerControl } from 'components'
+import { DynamicButton, Field } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -28,11 +28,6 @@ export const SaveFilterForm: StyledComponent = () => {
               }}
             />
           </Field>
-          <IconPickerControl
-            className={styles.iconPicker}
-            defaultSelected={value('iconProps').iconName}
-            onSelected={(iconName) => set('iconProps', { iconName })}
-          />
         </div>
       )}
       <div className={styles.footer}>

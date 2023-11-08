@@ -1,5 +1,5 @@
 import { Icon } from '@fluentui/react'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import styles from './AutocompleteControl.module.scss'
 import { ISuggestionItem } from './types'
 
@@ -7,14 +7,12 @@ import { ISuggestionItem } from './types'
  * Renders an option for the `AutocompleteControl` component.
  *
  * @param s The suggestion item to render.
- *
- * @returns The rendered option as any to be able to use it within the `<Option />` component.
  */
 export const renderOption = ({
   iconName,
   text,
   secondaryText
-}: ISuggestionItem<any>): any => {
+}: ISuggestionItem<any>): ReactElement => {
   return (
     <div className={styles.option}>
       <div className={styles.container}>

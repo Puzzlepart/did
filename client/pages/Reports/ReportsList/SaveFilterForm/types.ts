@@ -7,6 +7,5 @@ import { convertToMap } from 'utils/convertToMap'
  */
 export const INITIAL_MODEL = convertToMap({
   key: '',
-  text: '',
-  iconProps: {}
+  text: ''
 })

@@ -17,21 +17,18 @@ export function useMenuItems(): ListMenuItem[] {
   return [
     new ListMenuItem(activeFilter?.text ?? t('reports.savedFilters'))
       .withIcon('ContentView')
-      .setDisabled(true)
       .setHidden(Object.keys(savedFilters).length === 0)
       .setItems(
         Object.keys(savedFilters).map((key) => {
           const filter = savedFilters[key]
-          return new ListMenuItem(filter.text)
-            .withIcon(filter.iconProps?.iconName)
-            .setItems([
-              new ListMenuItem(t('reports.applyFilterText'))
-                .withIcon('Play')
-                .setOnClick(() => context.dispatch(SET_FILTER(filter))),
-              new ListMenuItem(t('reports.deleteFilterText'))
-                .withIcon('Delete')
-                .setOnClick(() => context.dispatch(REMOVE_SAVED_FILTER(key)))
-            ])
+          return new ListMenuItem(filter.text).setItems([
+            new ListMenuItem(t('reports.applyFilterText'))
+              .withIcon('Play')
+              .setOnClick(() => context.dispatch(SET_FILTER(filter))),
+            new ListMenuItem(t('reports.deleteFilterText'))
+              .withIcon('Delete')
+              .setOnClick(() => context.dispatch(REMOVE_SAVED_FILTER(key)))
+          ])
         }),
         {}
       )

@@ -329,7 +329,8 @@
     "availableReportLinks": "Det er rapporter tilgjengelig for denne spørringen. Bruk knappene nedenfor for å laste ned rapportene, og hold musepekeren over knappene for å se mer informasjon om rapporten.",
     "fetchDataButton": "Hent ferske data fra serveren",
     "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}.",
-    "welcomeHeaderText": "Hjem"
+    "welcomeHeaderText": "Hjem",
+    "filterIconPlaceholder": "Søk etter et ikon for filteret..."
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

@@ -329,7 +329,8 @@
     "availableReportLinks": "There is reports available for this query. Use the buttons below to download the reports, and hover over the buttons to see more information about the report.",
     "fetchDataButton": "Fetch fresh data from the server",
     "reportLinkUpdatedText": "Updated by {{updatedBy}} on {{updatedAt}}.",
-    "welcomeHeaderText": "Home"
+    "welcomeHeaderText": "Home",
+    "filterIconPlaceholder": "Search for a filter icon..."
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
