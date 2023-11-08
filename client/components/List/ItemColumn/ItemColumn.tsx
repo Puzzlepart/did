@@ -9,29 +9,21 @@ import styles from './ItemColumn.module.scss'
 import { IItemColumnProps } from './types'
 import { createRenderMap } from './createRenderMap'
 
-export const ItemColumn: StyledComponent<IItemColumnProps> = ({
-  column,
-  item
-}) => {
+export const ItemColumn: StyledComponent<IItemColumnProps> = (props) => {
   const context = useListContext()
-  const fieldValue = get(item, column.fieldName)
-  const style = context.props.getColumnStyle(item)
-
+  const fieldValue = get(props.item, props.column.fieldName)
+  const style = context.props.getColumnStyle(props.item)
   if (!fieldValue) return null
-  let renderProps = {}
-  if (column.createRenderProps) {
-    renderProps = column.createRenderProps(item)
-  }
-
+  const renderMap = createRenderMap(fieldValue, props)
   let element: ReactElement = null
-  if (column.isMultiline && fieldValue?.length > 80) {
+  if (props.column.isMultiline && fieldValue?.length > 80) {
     element = (
       <Tooltip
         relationship='description'
         content={
           <div style={{ padding: '8px 20px' }}>
             <Text block weight='semibold' size={300}>
-              {column.name}
+              {props.column.name}
             </Text>
             <Caption1>
               <ReactMarkdown>{fieldValue}</ReactMarkdown>
@@ -43,12 +35,11 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = ({
       </Tooltip>
     )
   } else {
-    const renderMap = createRenderMap(fieldValue, renderProps)
-    if (renderMap.has(column.renderAs)) {
-      return renderMap.get(column.renderAs)
+    if (renderMap.has(props.column.renderAs)) {
+      return renderMap.get(props.column.renderAs)
     } else {
-      if (column.onRender) {
-        element = column.onRender(item)
+      if (props.column.onRender) {
+        element = props.column.onRender(props.item)
       } else element = <Text size={200}>{fieldValue}</Text>
     }
   }
