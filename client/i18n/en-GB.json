@@ -312,7 +312,7 @@
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
     "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
-    "noEntriesText": "There's no time entries available for {{query}}.",
+    "noEntriesText": "There's no time entries available for ``{{text}}``.",
     "selectReportText": "Select a report below. Be aware that some reports can take several minutes to load. For some reports, there might be a pre-generated version available with formatting and layout already applied.",
     "selectReportLabel": "Select report",
     "forecast": "Forecast",
@@ -461,7 +461,7 @@
     "showAllFiltersText": "Show all ({{count}})",
     "userReports": "My reports",
     "export": "Export",
-    "exportTypeLastMonth": "Last month {{monthName}}",
+    "exportTypeLastMonth": "Last month",
     "exportTypeCurrentMonth": "Current month",
     "exportTypeCurrentYear": "This year",
     "subscription": "Subscription",

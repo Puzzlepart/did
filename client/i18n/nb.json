@@ -461,7 +461,7 @@
     "showAllFiltersText": "Vis alle ({{count}})",
     "userReports": "Mine rapporter",
     "export": "Eksporter",
-    "exportTypeLastMonth": "Forrige måned {{monthName}}",
+    "exportTypeLastMonth": "Forrige måned",
     "exportTypeCurrentMonth": "Inneværende måned",
     "exportTypeCurrentYear": "Inneværende år",
     "subscription": "Abonnement",

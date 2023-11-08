@@ -463,7 +463,7 @@
     "showAllFiltersText": "Vis alle ({{count}})",
     "userReports": "Rapportane mine",
     "export": "Eksporter",
-    "exportTypeLastMonth": "Førre månad {{monthName}}",
+    "exportTypeLastMonth": "Førre månad",
     "exportTypeCurrentMonth": "Inneverande månad",
     "exportTypeCurrentYear": "Inneverande år",
     "subscription": "Abonnement",
