@@ -1,8 +1,20 @@
+import { OptionProps } from '@fluentui/react-components'
 import { IDynamicSearchBoxProps } from 'components/DynamicSearchBox'
-import { CSSProperties } from 'react'
 import { FluentIconName } from 'utils/getFluentIcon'
 import { FormInputControlBase } from '../types'
-import { ISuggestionItem } from './SuggestionItem/types'
+
+/**
+ * @category Autocomplete
+ */
+export interface ISuggestionItem<T = any>
+  extends Pick<OptionProps, 'value' | 'key' | 'text'> {
+  secondaryText?: string
+  searchValue: string
+  iconName?: string
+  type?: string
+  tag?: any
+  data?: T
+}
 
 /**
  * @ignore
@@ -10,13 +22,6 @@ import { ISuggestionItem } from './SuggestionItem/types'
 export type AutocompleteControlSelectCallback<T = any> = (
   item: ISuggestionItem<T>
 ) => void
-
-/**
- * @ignore
- */
-export type AutocompleteControlItemIcons = {
-  style: CSSProperties
-}
 
 /**
  * @category Autocomplete
@@ -29,11 +34,6 @@ export interface IAutocompleteControlProps<T = any>
    * the selection when the provided key is `null`.
    */
   selectedKey?: string
-
-  /**
-   * Icons to be displayed next to each item.
-   */
-  itemIcons?: AutocompleteControlItemIcons | boolean
 
   /**
    * Callback to be called when an item is selected.
@@ -64,18 +64,49 @@ export interface IAutocompleteControlProps<T = any>
    * Function to get an icon based on the selected item.
    */
   getIcon?: (item: ISuggestionItem<T>) => FluentIconName
+
+  /**
+   * Optional np results message.
+   */
+  noResultsMessage?: string
+
+  /**
+   * Optional min characters to trigger search.
+   */
+  minCharacters?: number
 }
 
 /**
  * @category Autocomplete
  */
+/**
+ * Represents the state of an `AutocompleteControl` component.
+ *
+ * @template T The type of the suggestion items.
+ */
 export interface IAutocompleteControlState<T = any> {
+  /**
+   * An array of suggestion items to be displayed in the dropdown.
+   */
   items?: ISuggestionItem<T>[]
-  suggestions?: ISuggestionItem<T>[]
-  isSuggestionDisabled?: boolean
-  value?: string
-  selectedItem?: ISuggestionItem
-  selectedIndex?: number
-}
 
-export * from './SuggestionItem/types'
+  /**
+   * An array of suggestion items filtered based on the user's input.
+   */
+  suggestions?: ISuggestionItem<T>[]
+
+  /**
+   * A boolean indicating whether the suggestion dropdown is disabled.
+   */
+  isSuggestionDisabled?: boolean
+
+  /**
+   * The current value of the input field.
+   */
+  value?: string
+
+  /**
+   * The currently selected suggestion item.
+   */
+  selectedItem?: ISuggestionItem
+}

@@ -637,5 +637,8 @@
     "minLengthMessage": "The {{label}} field must contain at least {{options.validator.minLength}} characters.",
     "requiredFieldMessage": "The {{label}} field is mandatory.",
     "regexMessage": "The field {{label}} does not match the required pattern."
+  },
+  "autocomplete": {
+    "noResultsMessage": "No results found. Enter at least {{minCharacters}} characters to search."
   }
 }

@@ -18,12 +18,6 @@ export const SearchCustomer: ReusableComponent<ISearchCustomerProps> = (
       {...props}
       disabled={disabled}
       items={items}
-      itemIcons={{
-        style: {
-          marginTop: 8,
-          fontSize: 14
-        }
-      }}
       placeholder={props.placeholder}
     />
   )

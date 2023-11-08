@@ -34,15 +34,6 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
     if (props.selectedKey === null) dispatch(RESET())
   }, [props.selectedKey])
 
-  const suggestions = useMemo(
-    () =>
-      state.suggestions.map((suggestion_, index) => ({
-        ...suggestion_,
-        isSelected: index === state.selectedIndex
-      })),
-    [state.suggestions, state.selectedIndex]
-  )
-
   const ref = useRef<HTMLDivElement>(null)
 
   const iconName = useMemo<FluentIconName>(() => {
@@ -56,7 +47,6 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
     state,
     dispatch,
     ref,
-    suggestions,
     iconName
   }
 }

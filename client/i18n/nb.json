@@ -637,5 +637,8 @@
     "requiredFieldMessage": "Feltet {{label}} er obligatorisk.",
     "minLengthMessage": "Feltet {{label}} må inneholde minst {{validator.minLength}} tegn.",
     "regexMessage": "Feltet {{label}} samsvarer ikke med det nødvendige mønsteret."
+  },
+  "autocomplete": {
+    "noResultsMessage": "Ingen resultater. Skriv inn minst {{minCharacters}} tegn for å søke."
   }
 }

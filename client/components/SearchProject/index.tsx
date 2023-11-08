@@ -19,12 +19,6 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
       {...props}
       disabled={disabled}
       items={items}
-      itemIcons={{
-        style: {
-          marginTop: 8,
-          fontSize: 16
-        }
-      }}
       placeholder={props.placeholder}
       onSelected={(item) => props.onSelected(item.data)}
       autoFocus={props.autoFocus}

@@ -5,5 +5,29 @@
 
   .field {
     max-width: none;
+    width: 100%;
+  }
+}
+
+.option {
+  .container {
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+      padding: 0 8px 0 0;
+      width: 30px;
+      box-sizing: border-box;
+    }
+
+    .content {
+      .text {
+        font-size: initial;
+      }
+
+      .secondaryText {
+        font-size: 11px;
+      }
+    }
   }
 }
