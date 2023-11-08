@@ -7,28 +7,19 @@ import {
 } from '@fluentui/react'
 import { DynamicSearchBox } from 'components'
 import { SubText } from 'components/SubText'
-import React, { useMemo, useState } from 'react'
+import React from 'react'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
 import s from 'underscore.string'
 import styles from './LabelPicker.module.scss'
 import { ILabelPickerProps } from './types'
+import { useLabelPicker } from './useLabelPicker'
 
 /**
  * @category Function Component
  */
 export const LabelPicker: StyledComponent<ILabelPickerProps> = (props) => {
-  const [searchTerm, onSearch] = useState<string>('')
-
-  const labels = useMemo(() => {
-    let _labels = [...props.labels]
-    if (searchTerm.length > 0) {
-      _labels = _labels.filter((lbl) =>
-        lbl.name.toLowerCase().includes(searchTerm)
-      )
-    }
-    return _labels
-  }, [props.labels, searchTerm])
+  const { labels, onSearch } = useLabelPicker(props)
 
   return (
     <div className={LabelPicker.className}>

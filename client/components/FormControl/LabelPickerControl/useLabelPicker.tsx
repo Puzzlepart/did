@@ -13,14 +13,13 @@ export function useLabelPicker({
 
   function onToggleLabel(label: LabelObject) {
     const _selectedLabels = [...selectedLabels]
-    const index = _selectedLabels.indexOf(label)
-    if (index === -1) {
-      _selectedLabels.push(label)
-      setSelectedLabels(_selectedLabels)
-    } else {
+    const index = _selectedLabels.findIndex((lbl) => lbl.name === label.name)
+    if (index > -1) {
       _selectedLabels.splice(index, 1)
-      setSelectedLabels(_selectedLabels)
+    } else {
+      _selectedLabels.push(label)
     }
+    setSelectedLabels(_selectedLabels)
     onChange(_selectedLabels)
   }
 

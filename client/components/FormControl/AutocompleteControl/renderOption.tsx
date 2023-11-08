@@ -10,16 +10,22 @@ import { ISuggestionItem } from './types'
  *
  * @returns The rendered option as any to be able to use it within the `<Option />` component.
  */
-export const renderOption = (s: ISuggestionItem<any>): any => {
+export const renderOption = ({
+  iconName,
+  text,
+  secondaryText
+}: ISuggestionItem<any>): any => {
   return (
     <div className={styles.option}>
       <div className={styles.container}>
-        <div className={styles.icon} hidden={!s.iconName}>
-          <Icon iconName={s.iconName} />
+        <div className={styles.icon} hidden={!iconName}>
+          <Icon iconName={iconName} />
         </div>
         <div className={styles.content}>
-          <div className={styles.text}>{s.text}</div>
-          <div className={styles.secondaryText}>{s.secondaryText}</div>
+          <div className={styles.text}>{text}</div>
+          <div className={styles.secondaryText} hidden={!secondaryText}>
+            {secondaryText}
+          </div>
         </div>
       </div>
     </div>
