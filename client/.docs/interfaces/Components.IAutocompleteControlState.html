@@ -15,18 +15,25 @@
 <li><a href="../index.html">did-client</a></li>
 <li><a href="../modules/Components.html">Components</a></li>
 <li><a href="Components.IAutocompleteControlState.html">IAutocompleteControlState</a></li></ul>
-<h1>Interface IAutocompleteControlState&lt;T&gt;</h1></div> 
+<h1>Interface IAutocompleteControlState&lt;T&gt;</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>Represents the state of an <code>AutocompleteControl</code> component.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></section> 
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section> 
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the suggestion items.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li><span class="target">IAutocompleteControlState</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L72">client/components/FormControl/AutocompleteControl/types.ts:72</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L87">client/components/FormControl/AutocompleteControl/types.ts:87</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -36,7 +43,6 @@
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="Components.IAutocompleteControlState.html#isSuggestionDisabled" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>is<wbr/>Suggestion<wbr/>Disabled?</span></a>
 <a href="Components.IAutocompleteControlState.html#items" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>items?</span></a>
-<a href="Components.IAutocompleteControlState.html#selectedIndex" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>selected<wbr/>Index?</span></a>
 <a href="Components.IAutocompleteControlState.html#selectedItem" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>selected<wbr/>Item?</span></a>
 <a href="Components.IAutocompleteControlState.html#suggestions" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>suggestions?</span></a>
 <a href="Components.IAutocompleteControlState.html#value" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>value?</span></a>
@@ -45,34 +51,44 @@
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="isSuggestionDisabled" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>is<wbr/>Suggestion<wbr/>Disabled</span><a href="#isSuggestionDisabled" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">is<wbr/>Suggestion<wbr/>Disabled</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">is<wbr/>Suggestion<wbr/>Disabled</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>A boolean indicating whether the suggestion dropdown is disabled.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L75">client/components/FormControl/AutocompleteControl/types.ts:75</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L101">client/components/FormControl/AutocompleteControl/types.ts:101</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="items" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>items</span><a href="#items" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">items</span><span class="tsd-signature-symbol">?:</span> <a href="Components.ISuggestionItem.html" class="tsd-signature-type tsd-kind-interface">ISuggestionItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">items</span><span class="tsd-signature-symbol">?:</span> <a href="Components.ISuggestionItem.html" class="tsd-signature-type tsd-kind-interface">ISuggestionItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>An array of suggestion items to be displayed in the dropdown.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L73">client/components/FormControl/AutocompleteControl/types.ts:73</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member"><a id="selectedIndex" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>selected<wbr/>Index</span><a href="#selectedIndex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">selected<wbr/>Index</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L78">client/components/FormControl/AutocompleteControl/types.ts:78</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L91">client/components/FormControl/AutocompleteControl/types.ts:91</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="selectedItem" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>selected<wbr/>Item</span><a href="#selectedItem" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">selected<wbr/>Item</span><span class="tsd-signature-symbol">?:</span> <a href="Components.ISuggestionItem.html" class="tsd-signature-type tsd-kind-interface">ISuggestionItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">selected<wbr/>Item</span><span class="tsd-signature-symbol">?:</span> <a href="Components.ISuggestionItem.html" class="tsd-signature-type tsd-kind-interface">ISuggestionItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><p>The currently selected suggestion item.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L77">client/components/FormControl/AutocompleteControl/types.ts:77</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L111">client/components/FormControl/AutocompleteControl/types.ts:111</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="suggestions" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>suggestions</span><a href="#suggestions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">suggestions</span><span class="tsd-signature-symbol">?:</span> <a href="Components.ISuggestionItem.html" class="tsd-signature-type tsd-kind-interface">ISuggestionItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">suggestions</span><span class="tsd-signature-symbol">?:</span> <a href="Components.ISuggestionItem.html" class="tsd-signature-type tsd-kind-interface">ISuggestionItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>An array of suggestion items filtered based on the user&#39;s input.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L74">client/components/FormControl/AutocompleteControl/types.ts:74</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L96">client/components/FormControl/AutocompleteControl/types.ts:96</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="value" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>value</span><a href="#value" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">value</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">value</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The current value of the input field.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L76">client/components/FormControl/AutocompleteControl/types.ts:76</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/Puzzlepart/did/blob/dev/client/components/FormControl/AutocompleteControl/types.ts#L106">client/components/FormControl/AutocompleteControl/types.ts:106</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -93,7 +109,6 @@
 <ul>
 <li><a href="#isSuggestionDisabled" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>is<wbr/>Suggestion<wbr/>Disabled</span></a></li>
 <li><a href="#items" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>items</span></a></li>
-<li><a href="#selectedIndex" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>selected<wbr/>Index</span></a></li>
 <li><a href="#selectedItem" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>selected<wbr/>Item</span></a></li>
 <li><a href="#suggestions" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>suggestions</span></a></li>
 <li><a href="#value" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>value</span></a></li></ul></div></details></div>
