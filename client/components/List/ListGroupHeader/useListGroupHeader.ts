@@ -1,31 +1,55 @@
 import {
   IDetailsGroupDividerProps,
+  IGroupHeaderProps,
   IGroupHeaderStyles,
   useTheme
 } from '@fluentui/react'
+import _ from 'lodash'
+import { HTMLProps } from 'react'
 
 /**
  * Hook that returns styles and event handlers for a list group header.
  *
  * @param props - The props object containing the group and onToggleCollapse function.
  */
-export function useListGroupHeader({
-  group,
-  onToggleCollapse
-}: IDetailsGroupDividerProps) {
+export function useListGroupHeader(props: IDetailsGroupDividerProps) {
   const theme = useTheme()
-  const { holiday } = group?.data ?? {}
-  const styles: Partial<IGroupHeaderStyles> = {
-    title: {
-      fontWeight: 'normal',
-      color: holiday && theme.palette.red
+  const { holiday = null, total = null, styles = {} } = { ...props.group?.data }
+
+  const mergedStyles = _.merge(
+    {
+      title: {
+        fontWeight: 'normal',
+        color: holiday && theme.palette.red
+      },
+      expand: { cursor: 'pointer' }
     },
-    expand: { cursor: 'pointer' },
-    headerCount: { display: 'none' }
+    styles
+  ) as Partial<IGroupHeaderStyles>
+
+  /**
+   * Partial props for the `ListGroupHeader` component.
+   */
+  const groupHeaderProps: Partial<IGroupHeaderProps> = {
+    ...props,
+    group: {
+      ...props.group,
+      count: total ?? props.group?.count
+    },
+    styles: mergedStyles,
+    onToggleCollapse: () => props.onToggleCollapse(props.group)
   }
-  return {
-    styles,
+
+  /**
+   * Props for the container element of the `ListGroupHeader` component.
+   */
+  const containerProps: HTMLProps<HTMLDivElement> = {
     title: holiday?.name,
-    onClick: () => onToggleCollapse(group)
+    onClick: () => props.onToggleCollapse(props.group)
+  }
+
+  return {
+    groupHeaderProps,
+    containerProps
   }
 }

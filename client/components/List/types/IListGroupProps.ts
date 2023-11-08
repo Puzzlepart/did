@@ -1,6 +1,7 @@
 /**
  * @category List
  */
+import { IGroupHeaderStyles } from '@fluentui/react'
 
 export interface IListGroupProps<T = any> {
   /**
@@ -16,7 +17,7 @@ export interface IListGroupProps<T = any> {
   /**
    * The data of the groups.
    */
-  groupData?: any[]
+  groupData?: any
 
   /**
    * The name of the empty group.
@@ -29,4 +30,9 @@ export interface IListGroupProps<T = any> {
    * @param items The items of the group.
    */
   totalFunc?: (items: T[]) => string
+
+  /**
+   * Styles for the group header.
+   */
+  styles?: Partial<IGroupHeaderStyles>
 }

@@ -39,10 +39,10 @@ export function useListGroups(context: IListContext): [IGroup[], any[]] {
       })}`
       return `${itemValue}`.toLowerCase() === name.toLowerCase()
     })
-    const total = totalFunc ? totalFunc(items_) : ''
+    const total = totalFunc ? totalFunc(items_) : null
     const group: IGroup = {
       key: name,
-      name: `${name} ${total}`,
+      name,
       startIndex: groupNames_
         .map((g) => g.toLowerCase())
         .indexOf(name.toLowerCase(), 0),
@@ -50,7 +50,11 @@ export function useListGroups(context: IListContext): [IGroup[], any[]] {
       isShowingAll: items_.length === items.length,
       isDropEnabled: false,
       isCollapsed: false,
-      data: groupData && groupData[index]
+      data: {
+        ...groupData[index],
+        total,
+        styles: context.props.listGroupProps.styles
+      }
     }
     return group
   })

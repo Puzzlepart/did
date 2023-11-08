@@ -27,7 +27,7 @@ export function useListGroupProps() {
         })),
       totalFunc: (events) => {
         const duration = getSum(events, 'duration')
-        return ` (${$date.getDurationString(duration, t)})`
+        return $date.getDurationString(duration, t)
       }
     }),
     [state.selectedPeriod]
