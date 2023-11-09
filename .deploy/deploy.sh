@@ -129,8 +129,8 @@ selectNodeVersion
 # 3. Installing node_modules with --production flag
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD install --production --silent"
-  eval $NPM_CMD install --production --silent --no-fund --no-audit
+  echo "Running $NPM_CMD install --production --no-fund --no-audit"
+  eval $NPM_CMD install --production --no-fund --no-audit
   exitWithMessageOnError "Failed to install production npm dependencies"
 fi
 
