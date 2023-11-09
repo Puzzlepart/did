@@ -18,6 +18,7 @@ export const UserNotification: StyledComponent<IUserNotificationProps> = ({
     <UserMessage
       {...model.alertProps}
       className={UserNotification.className}
+      text={model.text}
       onClick={() => window.open(model.moreLink, '_self')}
       action={{
         text: t('notifications.dismissText'),
@@ -25,9 +26,7 @@ export const UserNotification: StyledComponent<IUserNotificationProps> = ({
         iconName: 'DeleteDismiss',
         iconColor: 'var(--colorPaletteRedForeground1)'
       }}
-    >
-      <span className={styles.text}>{model.text}</span>
-    </UserMessage>
+    />
   )
 }
 

@@ -1,3 +1,4 @@
+import { MessageBarProps } from '@fluentui/react-components'
 import { AlertProps } from '@fluentui/react-components/dist/unstable'
 import { TFunction } from 'i18next'
 import { Notification } from 'types'
@@ -55,7 +56,7 @@ export class NotificationModel {
     }
   }
 
-  public get alertProps(): AlertProps {
+  public get alertProps(): MessageBarProps {
     return {
       itemID: this.id,
       intent: this._notificationIntent,
