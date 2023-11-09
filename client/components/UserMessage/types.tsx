@@ -1,19 +1,7 @@
 import { MessageBarProps } from '@fluentui/react-components'
-import { IDynamicButtonProps } from 'components/DynamicButton'
 import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
 import { FluentIconName } from 'utils'
-
-/**
- * Represents an action that can be performed on a user message.
- */
-export interface IUserMessageAction
-  extends Pick<
-    IDynamicButtonProps,
-    'text' | 'iconName' | 'disabled' | 'onClick'
-  > {
-  iconColor?: string
-}
-
+import { IUserMessageAction } from './UserMessageAction'
 /**
  * @category UserMessage
  */

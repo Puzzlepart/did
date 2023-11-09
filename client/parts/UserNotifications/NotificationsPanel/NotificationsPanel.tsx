@@ -12,24 +12,23 @@ import { UserNotification } from './UserNotification'
  */
 export const NotificationsPanel: PanelComponent = (props) => {
   const { t } = useTranslation()
-  const { notifications, dismissedCount, clearDismissed } = useContext(
-    UserNotificationsContext
-  )
+  const context = useContext(UserNotificationsContext)
   return (
     <Panel {...props} title={t('notifications.headerText')}>
-      <div hidden={!_.isEmpty(notifications)}>
+      <div hidden={!_.isEmpty(context.notifications)}>
         <UserMessage
-          text={t('notifications.emptyText', { dismissedCount })}
+          text={t('notifications.emptyText', context)}
           action={
-            dismissedCount > 0 && {
+            context.dismissedCount > 0 && {
               text: t('notifications.clearDismissedText'),
-              onClick: clearDismissed
+              iconName: 'ArrowUndo',
+              onClick: context.clearDismissed
             }
           }
         />
       </div>
       <UserMessageContainer vertical gap={20} margin='20px 0 0 0'>
-        {...notifications.map((n, index) => (
+        {...context.notifications.map((n, index) => (
           <UserNotification key={index} model={n} />
         ))}
       </UserMessageContainer>

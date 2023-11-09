@@ -1,25 +1,24 @@
 import { Button, ButtonProps, Tooltip } from '@fluentui/react-components'
-import React from 'react'
+import React, { FC } from 'react'
 import { getFluentIconWithFallback } from 'utils'
-import { IUserMessageProps } from './types'
+import { IUserMessageAction } from './types'
 
-export const UserMessageAction = (props: IUserMessageProps) => {
-  if (!props.action) return null
+export const UserMessageAction: FC<IUserMessageAction> = (props) => {
   const buttonProps: ButtonProps = {
     onClick: (event: React.MouseEvent<any>) => {
       event.stopPropagation()
       event.preventDefault()
-      props.action.onClick(null)
+      props.onClick(null)
     },
-    icon: getFluentIconWithFallback(props.action.iconName, {
+    icon: getFluentIconWithFallback(props.iconName, {
       bundle: true,
-      color: props.action.iconColor
+      color: props.iconColor
     }),
     appearance: 'transparent'
   }
 
   return (
-    <Tooltip relationship='description' content={props.action.text}>
+    <Tooltip relationship='description' content={props.text}>
       <Button {...buttonProps} />
     </Tooltip>
   )

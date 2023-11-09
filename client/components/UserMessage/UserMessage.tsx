@@ -12,9 +12,9 @@ import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import { getFluentIcon } from 'utils'
 import styles from './UserMessage.module.scss'
+import { UserMessageAction } from './UserMessageAction/UserMessageAction'
 import { IUserMessageProps } from './types'
 import { useUserMessage } from './useUserMessage'
-import { UserMessageAction } from './UserMessageAction'
 
 /**
  * A component that uses `MessageBar` from [@fluentui/react-components](@fluentui/react-components),
@@ -53,7 +53,11 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
           )}
           {props.children}
         </MessageBarBody>
-        <MessageBarActions containerAction={<UserMessageAction {...props} />} />
+        {props.action && (
+          <MessageBarActions
+            containerAction={<UserMessageAction {...props.action} />}
+          />
+        )}
       </MessageBar>
     </div>
   )

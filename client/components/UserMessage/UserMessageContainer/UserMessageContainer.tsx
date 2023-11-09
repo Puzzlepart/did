@@ -1,6 +1,6 @@
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { IUserMessageContainerProps } from './types'
+import { IUserMessageContainerProps } from '../types'
 
 export const UserMessageContainer: ReusableComponent<
   IUserMessageContainerProps
