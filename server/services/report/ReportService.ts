@@ -2,33 +2,21 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { ProjectService, UserService } from '.'
-import { DateObject } from '../../shared/utils/DateObject'
-import { RequestContext } from '../graphql/requestContext'
+import { ProjectService, UserService } from '..'
+import { DateObject } from '../../../shared/utils/DateObject'
+import { RequestContext } from '../../graphql/requestContext'
 import {
   ConfirmedPeriodsQuery,
-  Customer,
-  Project,
   ReportsQuery,
   ReportsQueryPreset,
-  TimeEntry,
-  User
-} from '../graphql/resolvers/types'
+  TimeEntry
+} from '../../graphql/resolvers/types'
 import {
   ConfirmedPeriodsService,
   ForecastedTimeEntryService,
   TimeEntryService
-} from './mongo'
-
-type Report = TimeEntry[]
-
-interface IGenerateReportParameters {
-  timeEntries: TimeEntry[]
-  sortAsc: boolean
-  users?: User[]
-  projects: Project[]
-  customers: Customer[]
-}
+} from '../mongo'
+import { Report, IGenerateReportParameters } from './types'
 
 /**
  * Report service
@@ -57,7 +45,13 @@ export class ReportService {
   ) {}
 
   /**
-   * Generate preset query.
+   * Generate preset query from the provided preset.
+   *
+   * Supported presets are:
+   * * LAST_MONTH
+   * * CURRENT_MONTH
+   * * LAST_YEAR
+   * * CURRENT_YEAR
    *
    * @param preset - Query preset
    */
@@ -87,7 +81,10 @@ export class ReportService {
   }
 
   /**
-   * Generate report
+   * Generates report by sorting time entries by date, and then
+   * mapping each time entry to a report entry, which is an object
+   * containing the time entry, the project, the customer, and the
+   * resource.
    *
    * @param param0 - Parameters
    */
@@ -97,15 +94,17 @@ export class ReportService {
     users,
     projects,
     customers
-  }: IGenerateReportParameters) {
+  }: IGenerateReportParameters): TimeEntry[] {
     return timeEntries
       .sort(({ startDateTime: a }, { startDateTime: b }) => {
         return sortAsc
           ? new Date(a).getTime() - new Date(b).getTime()
           : new Date(b).getTime() - new Date(a).getTime()
       })
-      .reduce((timeEntries_, entry) => {
-        if (!entry.projectId) return timeEntries_
+      .reduce((entries, entry) => {
+        if (!entry.projectId) {
+          return entries
+        }
         const resource = users
           ? _.find(users, (user) => user.id === entry.userId)
           : {}
@@ -114,25 +113,16 @@ export class ReportService {
           customers,
           (c) => c.key === _.first(entry.projectId.split(' '))
         )
-        if (project && customer && resource) {
-          return [
-            ...timeEntries_,
-            {
-              ..._.omit(
-                entry,
-                '_id',
-                'userId',
-                'periodId',
-                'projectId',
-                'body'
-              ),
-              project: _.pick(project, 'tag', 'name', 'description', 'icon'),
-              customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
-              resource
-            }
-          ]
+        if (!project || !customer || !resource) {
+          return entries
         }
-        return timeEntries_
+        const mergedEntry = {
+          ..._.omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
+          project: _.pick(project, 'tag', 'name', 'description', 'icon'),
+          customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
+          resource
+        }
+        return [...entries, mergedEntry]
       }, [])
   }
 
@@ -183,7 +173,10 @@ export class ReportService {
   }
 
   /**
-   * Get forecast report
+   * Get forecast report. Get all time entries that start after the current date
+   * using the `ForecastedTimeEntryService`, fetching projects data using the
+   * `ProjectService`, and fetching users using the `UserService`. Then generates
+   * the report using `_generateReport`.
    */
   public async getForecastReport(): Promise<Report> {
     try {

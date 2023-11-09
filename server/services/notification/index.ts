@@ -9,7 +9,7 @@ import { ConfirmedPeriodsService, ForecastedPeriodsService } from '..'
 import { DateObject } from '../../../shared/utils/date'
 import { RequestContext } from '../../graphql/requestContext'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
-import { TimesheetService } from '../timesheet'
+import { TimesheetService } from '../timesheet/TimesheetService'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 
 /**
