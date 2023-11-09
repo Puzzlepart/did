@@ -41,6 +41,10 @@ List.defaultProps = {
     items: [],
     farItems: []
   },
+  listGroupProps: {
+    fieldName: null,
+    emptyGroupName: ''
+  },
   defaultSearchBoxWidth: 500,
   filterValues: {},
   menuItems: [],

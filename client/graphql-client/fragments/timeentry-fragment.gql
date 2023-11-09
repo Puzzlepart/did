@@ -13,6 +13,7 @@ fragment TimeEntryFragment on TimeEntry {
   project {
     tag
     name
+    icon
   }
   resource {
     id

@@ -45,7 +45,11 @@ export interface IListColumnData {
   /**
    * Filter type. Should be a class that extends `BaseFilter`
    */
-  filterType?: new () => BaseFilter
+  filterType?: new (
+    name?: string,
+    keyFieldName?: string,
+    valueFieldName?: string
+  ) => BaseFilter
 
   /**
    * Callback to render a tooltip for the column header

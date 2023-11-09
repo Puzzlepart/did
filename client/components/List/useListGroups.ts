@@ -21,7 +21,7 @@ export function useListGroups(context: IListContext): [IGroup[], any[]] {
     return [null, items]
   }
   const { emptyGroupName, totalFunc, groupNames, groupData } =
-    context.props.listGroupProps
+    context.props.listGroupProps ?? {}
   if (_.isEmpty(context.state.items) && !groupNames) {
     return [null, []]
   }
@@ -51,7 +51,7 @@ export function useListGroups(context: IListContext): [IGroup[], any[]] {
       isDropEnabled: false,
       isCollapsed: false,
       data: {
-        ...groupData[index],
+        ...(groupData && groupData[index]),
         total,
         styles: context.props.listGroupProps.styles
       }
