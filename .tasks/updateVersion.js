@@ -24,18 +24,18 @@ async function updateVersion({ major, minor, patch, alpha, beta }) {
         newVersion = currentVersion.split('.').map((v, i) => i === 2 ? parseInt(v) + 1 : 0).splice(0, 3).join('.')
     }
     else if (argv.alpha) {
-        if (currentVersion.includes('.alpha')) {
-            const alphaVersion = parseInt(currentVersion.split('.alpha.')[1])
-            newVersion = currentVersion.split('.alpha.')[0] + '.alpha.' + (alphaVersion + 1)
+        if (currentVersion.includes('-alpha')) {
+            const alphaVersion = parseInt(currentVersion.split('-alpha.')[1])
+            newVersion = currentVersion.split('-alpha.')[0] + '-alpha.' + (alphaVersion + 1)
         } else {
-            newVersion = currentVersion + '.alpha.0'
+            newVersion = currentVersion + '-alpha.0'
         }
     } else if (argv.beta) {
-        if (currentVersion.includes('.beta')) {
-            const alphaVersion = parseInt(currentVersion.split('.beta.')[1])
-            newVersion = currentVersion.split('.beta.')[0] + '.beta.' + (alphaVersion + 1)
+        if (currentVersion.includes('-beta')) {
+            const alphaVersion = parseInt(currentVersion.split('-beta.')[1])
+            newVersion = currentVersion.split('-beta.')[0] + '-beta.' + (alphaVersion + 1)
         } else {
-            newVersion = currentVersion + '.beta.0'
+            newVersion = currentVersion + '-beta.0'
         }
     }
 
