@@ -37,7 +37,7 @@ const legacyDefaultTheme: ExtendedTheme = {
     errorBackground: 'var(--colorPaletteRedForeground1)',
     errorText: '#fff',
     warningBackground: '#fff4ce',
-    warningText: '#444'
+    warningText: '#242424'
   },
   palette: {
     themePrimary: '#0078d4',
