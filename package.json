@@ -188,8 +188,6 @@
     "prettier-plugin-organize-imports": "3.2.3",
     "rimraf": "3.0.2",
     "terser-webpack-plugin": "^5.3.6",
-    "typedoc": "0.25.1",
-    "typedoc-plugin-markdown": "3.6.0",
     "webpack-bundle-analyzer": "4.8.0",
     "webpack-livereload-plugin": "3.0.2"
   },

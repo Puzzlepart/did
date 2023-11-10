@@ -2,11 +2,6 @@
 import 'reflect-metadata'
 import { Field, ObjectType } from 'type-graphql'
 
-/**
- * Ignore from typedoc documentation
- *
- * @ignore
- */
 @ObjectType({ description: 'A type that describes a Error' })
 export class Error {
   @Field()
@@ -22,11 +17,6 @@ export class Error {
   statusCode?: string
 }
 
-/**
- * Ignore from typedoc documentation
- *
- * @ignore
- */
 @ObjectType({ description: 'A type that describes a BaseResult' })
 export class BaseResult {
   @Field({ nullable: true, defaultValue: false })
@@ -36,11 +26,6 @@ export class BaseResult {
   error?: Error
 }
 
-/**
- * Ignore from typedoc documentation
- *
- * @ignore
- */
 @ObjectType({ description: 'A type that describes a EventError' })
 export class EventError {
   @Field()

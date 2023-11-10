@@ -32,14 +32,6 @@ jobs:
  
       - run: |
           npm ci --no-audit --no-fund --loglevel=error --include=dev
-
-      - name: Generating documentation using typedoc
-        run: |
-          npx concurrently \
-          "node_modules/typedoc/bin/typedoc -options ./client/typedoc.json --logLevel None" \
-          "node_modules/typedoc/bin/typedoc -options ./server/typedoc.json --logLevel None" \
-          "node_modules/typedoc/bin/typedoc -options ./shared/typedoc.json --logLevel None"
-
       - name: ESLint and prettier
         run: |
           npm run lint:fix
