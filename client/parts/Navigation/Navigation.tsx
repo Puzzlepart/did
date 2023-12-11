@@ -1,18 +1,18 @@
 import { mergeClasses } from '@fluentui/react-components'
 import { useTheme } from '@fluentui/react/lib/Theme'
 import { useAppContext } from 'AppContext'
-import packageFile from 'package'
 import { UserNotificationsContext } from 'parts/UserNotifications/context'
 import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
 import React from 'react'
 import { BrowserView, isMobile } from 'react-device-detect'
-import { Link } from 'react-router-dom'
 import { StyledComponent } from 'types'
 import { UserFeedback } from '../UserFeedback'
 import { UserMenu } from '../UserMenu'
 import { UserNotifications } from '../UserNotifications'
-import styles from './Navigation.module.scss'
+import { Logo } from './Logo'
 import { NavItem } from './NavItem'
+import styles from './Navigation.module.scss'
+import { CompanyBrand } from './CompanyBrand'
 
 /**
  * @category Function Component
@@ -33,13 +33,8 @@ export const Navigation: StyledComponent = () => {
         hidden={isMobile && !isAuthenticated}
       >
         <div className={styles.container}>
-          <Link
-            to={{ pathname: '/', state: { prevPath: location.pathname } }}
-            className={styles.logo}
-            title={`${packageFile.name} - ${packageFile.description}`}
-          >
-            {packageFile.name}
-          </Link>
+          <CompanyBrand />
+          <Logo />
           <ul className={styles.nav}>
             {pages.map((page, index) => (
               <NavItem
