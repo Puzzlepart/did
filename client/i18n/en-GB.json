@@ -188,7 +188,7 @@
     "subscriptionSettings": {
       "headerText": "Subscription",
       "companyLogoLabel": "Logo",
-      "companyLogoDescription": "Add the URL to your company logo. Recommended height is 50 pixels."
+      "companyLogoDescription": "Add the URL to your company logo. Recommended height is 40 pixels."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",

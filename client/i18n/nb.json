@@ -207,7 +207,7 @@
     "subscriptionSettings": {
       "headerText": "Abonnement",
       "companyLogoLabel": "Logo",
-      "companyLogoDescription": "Legg til URL-en til firmalogoen din. Anbefalt høyde er 50 piksler."
+      "companyLogoDescription": "Legg til nettstedsadressen til firmalogoen din. Anbefalt høyde er 40 piksler."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
