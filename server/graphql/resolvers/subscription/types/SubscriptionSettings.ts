@@ -21,12 +21,19 @@ import {
   SubscriptionVacationSettings,
   SubscriptionVacationSettingsInput
 } from './SubscriptionVacationSettings'
+import {
+  SubscriptionBrandSetting,
+  SubscriptionBrandSettingInput
+} from './SubscriptionBrandSetting'
 
 /**
  * @category GraphQL ObjectType
  */
 @ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
+  @Field(() => SubscriptionBrandSetting, { nullable: true })
+  brand?: SubscriptionBrandSetting
+
   @Field(() => SubscriptionForecastSettings, { nullable: true })
   forecast?: SubscriptionForecastSettings
 
@@ -48,6 +55,9 @@ export class SubscriptionSettings {
  */
 @InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
+  @Field(() => SubscriptionBrandSettingInput, { nullable: true })
+  brand?: SubscriptionBrandSettingInput
+
   @Field(() => SubscriptionForecastSettingsInput, { nullable: true })
   forecast?: SubscriptionForecastSettingsInput
 
