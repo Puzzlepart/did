@@ -41,6 +41,22 @@ export function useSubscriptionConfig() {
       ]
     },
     {
+      id: 'brand',
+      text: t('admin.subscriptionBrandHeader'),
+      icon: 'Color',
+      fields: [
+        {
+          id: 'logoSrc',
+          type: 'text',
+          props: {
+            label: t('admin.subscriptionSettings.companyLogoLabel'),
+            description: t('admin.subscriptionSettings.companyLogoDescription'),
+            defaultValue: ''
+          }
+        } as SubscriptionSettingField
+      ]
+    },
+    {
       id: 'timesheet',
       icon: 'Timeline',
       text: t('admin.timesheet'),

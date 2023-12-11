@@ -4,6 +4,9 @@ query UserContext {
     name
     owner
     settings {
+      brand {
+        logoSrc
+      }
       forecast {
         enabled
         notifications

@@ -7,18 +7,15 @@ import { isMobile } from 'react-device-detect'
 import { mergeClasses } from '@fluentui/react-components'
 
 export const Logo: StyledComponent = () => {
-    return (
-        <Link
-        to={{ pathname: '/', state: { prevPath: location.pathname } }}
-        className={mergeClasses(
-            Logo.className,
-            isMobile && styles.mobile
-          )}
-        title={`${packageFile.name} - ${packageFile.description}`}
-      >
-        {packageFile.name}
-      </Link>
-    )
+  return (
+    <Link
+      to={{ pathname: '/', state: { prevPath: location.pathname } }}
+      className={mergeClasses(Logo.className, isMobile && styles.mobile)}
+      title={`${packageFile.name} - ${packageFile.description}`}
+    >
+      {packageFile.name}
+    </Link>
+  )
 }
 
 Logo.displayName = 'Logo'
