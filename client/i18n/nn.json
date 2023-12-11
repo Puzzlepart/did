@@ -207,7 +207,9 @@
       "deleteError": "Det oppstod eit problem med å sletta etiketten **{{name}}* . Ver vennleg og prøv igjen, eller spør ein voksen."
     },
     "subscriptionSettings": {
-      "headerText": "Abonnement"
+      "headerText": "Abonnement",
+      "companyLogoLabel": "Logo",
+      "companyLogoDescription": "Legg til URL-en til firmalogoen din. Anbefalt høyde er 50 piksler."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -307,7 +309,8 @@
     "timesheetDayFormatLabel": "Datoformat for dager i timelisten",
     "timesheetDayFormatDescription": "Velg datoformat for dagene i timelisten. Dette er formatet som brukes i grupperingen av timer i timelisten. Eksempel: dddd DD. Se forhåndsvisning til høyre.",
     "timesheetTimeFormatLabel": "Format for tid",
-    "timesheetTimeFormatDescription": "Velg format for tid. Brukes i timelisten. Eksempel: HH:mm. Se forhåndsvisning til høyre."
+    "timesheetTimeFormatDescription": "Velg format for tid. Brukes i timelisten. Eksempel: HH:mm. Se forhåndsvisning til høyre.",
+    "subscriptionBrandHeader": "Tema"
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
