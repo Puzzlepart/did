@@ -21,7 +21,11 @@ export const ImageField: StyledComponent<IImageFieldProps> = (props) => {
         <div className={ImageField.className}>
             <Field label={props.label}>
                 <div className={styles.inputContainer}>
-                    <Input className={styles.inputField} value={props.value} disabled={isInputDisabled} />
+                    <Input 
+                    className={styles.inputField} 
+                    value={props.value} 
+                    onChange={(_event, data) => props.onChange(data.value)}
+                    disabled={isInputDisabled} />
                     <div className={styles.imagePicker}>
                         <label htmlFor={imagePickerId} className={styles.imagePickerLabel}>
                             {t('admin.subscriptionSettings.imageFieldUploadLabel')}
