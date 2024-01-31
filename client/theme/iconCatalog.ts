@@ -138,13 +138,25 @@ import {
   WeatherSunnyLow24Filled,
   WeatherSunnyLow24Regular,
   WebAsset24Filled,
-  WebAsset24Regular
+  WebAsset24Regular,
+  ColorRegular,
+  ColorFilled,
+  DesignIdeasRegular,
+  DesignIdeasFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  Color: {
+    regular: ColorRegular,
+    filled: ColorFilled
+  },
+  DesignIdeas: {
+    regular: DesignIdeasRegular,
+    filled: DesignIdeasFilled
+  },
   ClipboardMonth: {
     regular: ClipboardMonthRegular,
     filled: ClipboardMonthFilled

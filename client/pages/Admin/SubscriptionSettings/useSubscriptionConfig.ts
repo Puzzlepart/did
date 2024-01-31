@@ -5,14 +5,17 @@ import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'
 import { SubscriptionSettingField } from './types'
+import { useTheme } from '@fluentui/react'
 
 /**
- * Subscription config hook
+ * Component logic for `SubscriptionSettings` component. Handles the
+ * configuration of the subscription settings sections and input fields.
  *
  * @category SubscriptionSettings
  */
 export function useSubscriptionConfig() {
   const { subscription } = useAppContext()
+  const theme = useTheme()
   const { t } = useTranslation()
   return [
     {
@@ -37,6 +40,31 @@ export function useSubscriptionConfig() {
             defaultValue: subscription.owner
           },
           disabledIf: () => true
+        } as SubscriptionSettingField
+      ]
+    },
+    {
+      id: 'brand',
+      text: t('admin.subscriptionBrandHeader'),
+      icon: 'Color',
+      fields: [
+        {
+          id: 'navBackground',
+          type: 'text',
+          props: {
+            label: t('admin.subscriptionSettings.navBackgroundLabel'),
+            description: t('admin.subscriptionSettings.navBackgroundDescription'),
+            defaultValue: theme?.semanticColors?.menuHeader
+          }
+        },
+        {
+          id: 'logoSrc',
+          type: 'text',
+          props: {
+            label: t('admin.subscriptionSettings.companyLogoLabel'),
+            description: t('admin.subscriptionSettings.companyLogoDescription'),
+            defaultValue: ''
+          }
         } as SubscriptionSettingField
       ]
     },

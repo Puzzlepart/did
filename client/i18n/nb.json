@@ -205,7 +205,11 @@
       "updateError": "Vi kan ikke oppdatere merkelappen for øyeblikket. Prøv igjen senere."
     },
     "subscriptionSettings": {
-      "headerText": "Abonnement"
+      "headerText": "Abonnement",
+      "companyLogoLabel": "Logo",
+      "companyLogoDescription": "Legg til nettstedsadressen til firmalogoen din. Anbefalt høyde er 40 piksler.",
+      "navBackgroundDescription": "Egendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
+      "navBackgroundLabel": "Bakgrunnsfarge for navigasjonslinjen"
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -305,7 +309,8 @@
     "timesheetDayFormatDescription": "Velg datoformat for dagene i timelisten. Dette er formatet som brukes i grupperingen av timer i timelisten. Eksempel: dddd DD. Se forhåndsvisning til høyre.",
     "timesheetDayFormatLabel": "Datoformat for dager i timelisten",
     "timesheetTimeFormatDescription": "Velg format for tid. Brukes i timelisten. Eksempel: HH:mm. Se forhåndsvisning til høyre.",
-    "timesheetTimeFormatLabel": "Format for tid"
+    "timesheetTimeFormatLabel": "Format for tid",
+    "subscriptionBrandHeader": "Tema"
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

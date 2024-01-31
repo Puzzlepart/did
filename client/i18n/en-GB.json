@@ -186,7 +186,11 @@
       "updateError": "We can't update the label at the moment. Please try again later."
     },
     "subscriptionSettings": {
-      "headerText": "Subscription"
+      "headerText": "Subscription",
+      "companyLogoLabel": "Logo",
+      "companyLogoDescription": "Add the URL to your company logo. Recommended height is 40 pixels.",
+      "navBackgroundLabel": "Navigation background color",
+      "navBackgroundDescription": "Custom background color for the navigation bar. If not specified, the default brand color will be used."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
@@ -305,7 +309,8 @@
     "timesheetDayFormatDescription": "Select the date format for the days in the timesheet. This is the format used in the grouping of hours in the timesheet. Example: dddd DD. See preview on the right.",
     "timesheetDayFormatLabel": "Date format for days in the Timesheet",
     "timesheetTimeFormatDescription": "Select format for time. Used in the Timesheet. Example: HH:mm. See preview on the right.",
-    "timesheetTimeFormatLabel": "Format for time"
+    "timesheetTimeFormatLabel": "Format for time",
+    "subscriptionBrandHeader": "Branding"
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
