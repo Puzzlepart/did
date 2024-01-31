@@ -27,6 +27,9 @@ export class SigninError extends Error {
   }
 }
 
+/**
+ * No OID found error
+ */
 export const NO_OID_FOUND = new SigninError(
   '0f8fc199',
   'Sorry to break it to you..',
@@ -34,13 +37,19 @@ export const NO_OID_FOUND = new SigninError(
   'BlockedSite'
 )
 
+/**
+ * Tenant not enrolled error
+ */
 export const TENANT_NOT_ENROLLED = new SigninError(
   'de72e4da',
   'Your company is not enrolled in did',
-  'Please contact<a href="mailto:did@puzzlepart.com">did@puzzlepart.com</a> for more information.',
+  'We\'re currently accepting new pilot customers. Please contact <a href="mailto:did@puzzlepart.com">did@puzzlepart.com</a> for more information.',
   'Phone'
 )
 
+/**
+ * User not enrolled error
+ */
 export const USER_NOT_ENROLLED = new SigninError(
   'cee991f0',
   'I promised to keep it a secret...',
@@ -49,13 +58,19 @@ export const USER_NOT_ENROLLED = new SigninError(
   'Sad'
 )
 
-export const SIGNIN_FAILED = new SigninError(
+/**
+ * Generic sign in failed error
+ */
+export const GENERIC_SIGNIN_FAILED = new SigninError(
   'e0666582',
   'An error occured signing you in',
   'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> It can help to clear your browser cache.',
   'Dislike'
 )
 
+/**
+ * User account disabled error
+ */
 export const USER_ACCOUNT_DISABLED = new SigninError(
   'e0666582',
   'An error occured signing you in',
