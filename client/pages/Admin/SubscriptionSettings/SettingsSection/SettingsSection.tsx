@@ -1,6 +1,7 @@
 import { CheckboxField, InputField } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
+import { ImageField } from './ImageField'
 import { MultiCheckboxField } from './MultiCheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
@@ -58,6 +59,16 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
                   {...field}
                   key={settingsKey}
                   settingsKey={settingsKey}
+                />
+              )
+            }
+            case 'image': {
+              return (
+                <ImageField
+                  {...fieldProps}
+                  key={settingsKey}
+                  value={getValueWithDefault(null)}
+                  onChange={onChange}
                 />
               )
             }

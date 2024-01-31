@@ -61,11 +61,10 @@ export function useSubscriptionConfig() {
         },
         {
           id: 'logoSrc',
-          type: 'text',
+          type: 'image',
           props: {
             label: t('admin.subscriptionSettings.companyLogoLabel'),
-            description: t('admin.subscriptionSettings.companyLogoDescription'),
-            defaultValue: ''
+            description: t('admin.subscriptionSettings.companyLogoDescription')
           }
         } as SubscriptionSettingField
       ]
