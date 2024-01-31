@@ -1,0 +1,35 @@
+.imageField {
+    .inputContainer {
+        display: flex;
+
+        .inputField {
+            flex: 1;
+            margin: 0 10px 0 0;
+        }
+
+        .imagePicker {
+            margin: 5px 0 0 0;
+            .imagePickerLabel {
+                background-color: var(--colorNeutralBackground1);
+                color: var(--colorNeutralForeground1);
+                border: var(--strokeWidthThin) solid var(--colorNeutralStroke1);
+                font-family: var(--fontFamilyBase);
+                outline-style: none;
+                padding: 5px var(--spacingHorizontalM);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .imagePreview {
+        width: 200px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 120px;
+            height: 40px;
+        }
+    }
+}

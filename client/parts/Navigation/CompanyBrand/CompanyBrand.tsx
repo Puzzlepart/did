@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { StyledComponent } from 'types'
 import React from 'react'
 import styles from './CompanyBrand.module.scss'

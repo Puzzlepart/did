@@ -1,4 +1,6 @@
 import {
+  ArrowUploadRegular,
+  ArrowUploadFilled,
   AddCircle24Filled,
   AddCircle24Regular,
   Alert24Filled,
@@ -149,6 +151,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  ArrowUpload: {
+    regular: ArrowUploadRegular,
+    filled: ArrowUploadFilled
+  },
   Color: {
     regular: ColorRegular,
     filled: ColorFilled

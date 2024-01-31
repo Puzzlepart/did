@@ -1,10 +1,30 @@
 import { ITextFieldProps } from '@fluentui/react'
 import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import { IImageFieldProps } from './SettingsSection/ImageField'
 
 interface ISubscriptionSettingBase<T = any> {
+  /**
+   * The ID of the setting
+   */
   id: string
+
+  /**
+   * Conditionally disable the setting based on the current settings
+   * 
+   * @param settings The current settings
+   */
   disabledIf?: (settings: any) => boolean
+
+  /**
+   * Conditionally hide the setting based on the current settings
+   * 
+   * @param settings The current settings
+   */
   hiddenIf?: (settings: any) => boolean
+
+  /**
+   * The props to pass to the field component
+   */
   props: T
 }
 
@@ -30,8 +50,14 @@ export interface ISubscriptionSettingCheckboxMulti<T = any>
   options: Record<string, string>
 }
 
+export interface ISubscriptionSettingImage<T = IImageFieldProps>
+  extends ISubscriptionSettingBase<T> {
+  type: 'image'
+}
+
 export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingText<T>
   | ISubscriptionSettingBool<T>
   | ISubscriptionSettingNumber<T>
   | ISubscriptionSettingCheckboxMulti<T>
+  | ISubscriptionSettingImage
