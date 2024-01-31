@@ -5,6 +5,7 @@ query UserContext {
     owner
     settings {
       brand {
+        navBackground
         logoSrc
       }
       forecast {

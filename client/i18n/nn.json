@@ -209,7 +209,9 @@
     "subscriptionSettings": {
       "headerText": "Abonnement",
       "companyLogoLabel": "Logo",
-      "companyLogoDescription": "Legg til nettstedsadressa til firmalogoen din. Anbefalt høgde er 40 pikslar."
+      "companyLogoDescription": "Legg til nettstedsadressa til firmalogoen din. Anbefalt høgde er 40 pikslar.",
+      "navBackgroundDescription": "Egendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
+      "navBackgroundLabel": "Bakgrunnsfarge for navigasjonslinjen"
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
