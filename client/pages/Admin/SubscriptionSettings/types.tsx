@@ -10,14 +10,14 @@ interface ISubscriptionSettingBase<T = any> {
 
   /**
    * Conditionally disable the setting based on the current settings
-   * 
+   *
    * @param settings The current settings
    */
   disabledIf?: (settings: any) => boolean
 
   /**
    * Conditionally hide the setting based on the current settings
-   * 
+   *
    * @param settings The current settings
    */
   hiddenIf?: (settings: any) => boolean
