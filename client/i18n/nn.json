@@ -498,7 +498,7 @@
     "googleSignInText": "Logg på med Google",
     "activeDirectory": "Azure AD",
     "google": "Google",
-    "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent.",
+    "signInDisabledText": "Pålogging er for øyeblikket deaktivert. \nVennligst vent.",
     "error": "Feilmelding",
     "uiThemeLabel": "Fargetema",
     "dark-theme": "Mørkt tema",

@@ -496,7 +496,7 @@
     "googleSignInText": "Sign in with Google",
     "activeDirectory": "Azure AD",
     "google": "Google",
-    "signInDisabledMessage": "Sign in is currently disabled. Please hold on.",
+    "signInDisabledText": "Sign in is currently disabled. Please hold on.",
     "error": "Error",
     "uiThemeLabel": "Theme",
     "light-theme": "Light theme",
@@ -547,7 +547,8 @@
     "projectTagCopiedToClipboard": "The project tag **{{tag}}** was copied to the clipboard.",
     "outlookCategoryError": "There was an error creating the category in Outlook. If you just created it, it might take some moments before it shows up here.",
     "tagFieldLabel": "Tag",
-    "ignoredHours": "Ignored hours"
+    "ignoredHours": "Ignored hours",
+    "signInDisabledMessage": "We'"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
