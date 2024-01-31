@@ -7,9 +7,15 @@ import styles from './ImageField.module.scss'
 import { IImageFieldProps } from './types'
 import { useImageField } from './useImageField'
 
+/**
+ * Renders an image field component with an image/file picker
+ * and a preview of the image.
+ *
+ * @component ImageField
+ */
 export const ImageField: StyledComponent<IImageFieldProps> = (props) => {
     const { t } = useTranslation()
-    const { imagePickerId, onChange, isInputDisabled } = useImageField(props)
+    const { imagePickerId, onChange, isInputDisabled, navBackground } = useImageField(props)
 
     return (
         <div className={ImageField.className}>
@@ -30,7 +36,7 @@ export const ImageField: StyledComponent<IImageFieldProps> = (props) => {
                 </div>
                 <FieldDescription text={props.description} />
             </Field>
-            <div className={styles.imagePreview} hidden={!props.value}>
+            <div className={styles.imagePreview} hidden={!props.value} style={{ background: navBackground}}>
                 <img src={props.value} />
             </div>
         </div>
