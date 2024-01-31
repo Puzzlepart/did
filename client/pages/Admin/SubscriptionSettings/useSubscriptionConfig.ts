@@ -53,7 +53,9 @@ export function useSubscriptionConfig() {
           type: 'text',
           props: {
             label: t('admin.subscriptionSettings.navBackgroundLabel'),
-            description: t('admin.subscriptionSettings.navBackgroundDescription'),
+            description: t(
+              'admin.subscriptionSettings.navBackgroundDescription'
+            ),
             defaultValue: theme?.semanticColors?.menuHeader
           }
         },

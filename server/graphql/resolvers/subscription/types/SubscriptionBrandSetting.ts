@@ -12,7 +12,7 @@ import { Field, InputType, ObjectType } from 'type-graphql'
 export class SubscriptionBrandSetting {
   @Field({ nullable: true })
   navBackground?: string
-  
+
   @Field({ nullable: true })
   logoSrc?: string
 }
