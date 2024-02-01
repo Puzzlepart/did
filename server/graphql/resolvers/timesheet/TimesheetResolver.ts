@@ -1,7 +1,10 @@
+/* eslint-disable unicorn/empty-brace-spaces */
+/* eslint-disable unicorn/prevent-abbreviations */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { TimesheetService } from '../../../services'
+import { DateObject } from '../../../../shared/utils/date'
+import { ConfirmedPeriodsService, TimesheetService, UserService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
@@ -10,8 +13,10 @@ import {
   TimesheetPeriodInput,
   TimesheetPeriodObject,
   TimesheetQuery,
-  VacationSummary
+  VacationSummary,
+  WeekStatusObject
 } from './types'
+import { PermissionScope } from '../../../../shared/config/security'
 
 /**
  * Resolver for `TimesheetPeriodObject`.
@@ -29,10 +34,14 @@ export class TimesheetResolver {
   /**
    * Constructor for TimesheetResolver
    *
-   * @param _timesheet - Timesheet service
+   * @param _timesheetSvc - Timesheet service
+   * @param _userSvc - User service
    */
-  // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private readonly _timesheet: TimesheetService) {}
+  constructor(
+    private readonly _timesheetSvc: TimesheetService,
+    private readonly _userSvc: UserService,
+    private readonly _cpSvc: ConfirmedPeriodsService
+  ) { }
 
   /**
    * Get timesheet
@@ -50,7 +59,7 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ) {
     try {
-      return await this._timesheet.getTimesheet({
+      return await this._timesheetSvc.getTimesheet({
         ...query,
         ...options,
         configuration: context.userConfiguration?.timesheet || {}
@@ -72,7 +81,7 @@ export class TimesheetResolver {
   })
   async vacation(@Ctx() context: RequestContext) {
     try {
-      return await this._timesheet.getVacation(
+      return await this._timesheetSvc.getVacation(
         context.subscription.settings.vacation
       )
     } catch (error) {
@@ -96,7 +105,7 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      await this._timesheet.submitPeriod({ ...options, period })
+      await this._timesheetSvc.submitPeriod({ ...options, period })
       return {
         success: false,
         error: null
@@ -125,7 +134,7 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      await this._timesheet.unsubmitPeriod({ ...options, period })
+      await this._timesheetSvc.unsubmitPeriod({ ...options, period })
       return {
         success: true,
         error: null
@@ -135,6 +144,49 @@ export class TimesheetResolver {
         success: false,
         error
       }
+    }
+  }
+
+  /**
+   * Get status for the provided week and user (and year if provided). 
+   * 
+   * @remarks For now, this is using the `ACCESS_REPORTS` scope, but this 
+   * could be changed in the future.
+   * 
+   * @param email - User email
+   * @param week - Week number
+   * @param year - Year (optional, defaults to current year)
+   * 
+   * @returns An object containing the user's ID, submit status and total hours for the week
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
+  @Query(() => WeekStatusObject, {
+    description: 'Get status of the current week'
+  })
+  public async weekStatus(
+    @Arg('email') email: string,
+    @Arg('week') week: number,
+    @Arg('year', { nullable: true }) year?: number
+  ): Promise<WeekStatusObject> {
+    const user = await this._userSvc.getById(email)
+    if (!user) throw new Error(`No user found with email ${email}`)
+    const confirmedPeriods = await this._cpSvc.find({
+      userId: user._id,
+      week,
+      year: year ?? new Date().getFullYear()
+    })
+    const {isWeekSplit} = new DateObject().fromObject({
+      week,
+      year: year ?? new Date().getFullYear()
+    })
+    const submitStatus = isWeekSplit && confirmedPeriods.length === 2 ? 2 : (confirmedPeriods.length === 1 && !isWeekSplit ? 1 : 0)
+    const hours = confirmedPeriods.reduce((sum, { hours }) => sum + hours, 0)
+
+    return {
+      userId: user._id,
+      submitStatus,
+      hours,
+      isWeekSplit
     }
   }
 }
