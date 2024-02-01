@@ -175,11 +175,22 @@ export class TimesheetResolver {
       week,
       year: year ?? new Date().getFullYear()
     })
-    const {isWeekSplit} = new DateObject().fromObject({
+    const { isWeekSplit } = new DateObject().fromObject({
       week,
       year: year ?? new Date().getFullYear()
     })
-    const submitStatus = isWeekSplit && confirmedPeriods.length === 2 ? 2 : (confirmedPeriods.length === 1 && !isWeekSplit ? 1 : 0)
+    let submitStatus = 0
+    if (isWeekSplit) {
+      if (confirmedPeriods.length === 2) {
+        submitStatus = 2
+      } else if (confirmedPeriods.length === 1) {
+        submitStatus = 1
+      }
+    } else {
+      if (confirmedPeriods.length === 1) {
+        submitStatus = 2
+      }
+    }
     const hours = confirmedPeriods.reduce((sum, { hours }) => sum + hours, 0)
 
     return {
