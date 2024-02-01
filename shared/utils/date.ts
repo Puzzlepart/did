@@ -323,6 +323,15 @@ export class DateUtils {
   }
 
   /**
+   * Is the week split between two months
+   * 
+   * @param date - Date
+   */
+  public isWeekSplit(date: DateObject): boolean {
+    return date.startOfWeek.isSameMonth(date.endOfWeek) === false
+  }
+
+  /**
    * Is current year
    *
    * @param a - Date a
