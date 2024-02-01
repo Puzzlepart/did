@@ -37,4 +37,10 @@ export class WeekStatusQueryResult {
      */
     @Field()
     isWeekSplit: boolean
+
+    /**
+     * URL to the timesheet for the provided week
+     */
+    @Field(() => String)
+    url: string
 }

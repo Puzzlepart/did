@@ -175,12 +175,12 @@ export class TimesheetResolver {
       week,
       year: year ?? new Date().getFullYear()
     })
-    const { isWeekSplit } = new DateObject().fromObject({
+    const date = new DateObject().fromObject({
       week,
       year: year ?? new Date().getFullYear()
     })
     let submitStatus = 0
-    if (isWeekSplit) {
+    if (date.isWeekSplit) {
       if (confirmedPeriods.length === 2) {
         submitStatus = 2
       } else if (confirmedPeriods.length === 1) {
@@ -197,7 +197,8 @@ export class TimesheetResolver {
       userId: user._id,
       submitStatus,
       hours,
-      isWeekSplit
+      isWeekSplit: date.isWeekSplit,
+      url: `/timesheet/week/overview/${date.startOfWeek.format('YYYY-MM-DD')}`
     }
   }
 }
