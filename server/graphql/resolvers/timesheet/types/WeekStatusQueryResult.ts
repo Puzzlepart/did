@@ -2,14 +2,14 @@ import 'reflect-metadata'
 import { Field, Float, Int, ObjectType } from 'type-graphql'
 
 /**
- * Return object for the `weekStatus` query
+ * Query result object for the `weekStatus` query
  * 
  * @category GraphQL ObjectType
  */
 @ObjectType({
-    description: 'Return object for the weekStatus query'
+    description: 'Query result object for the `weekStatus` query'
 })
-export class WeekStatusObject {
+export class WeekStatusQueryResult {
     /**
      * User ID
      */

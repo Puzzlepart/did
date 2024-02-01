@@ -14,7 +14,7 @@ import {
   TimesheetPeriodObject,
   TimesheetQuery,
   VacationSummary,
-  WeekStatusObject
+  WeekStatusQueryResult
 } from './types'
 import { PermissionScope } from '../../../../shared/config/security'
 
@@ -160,14 +160,14 @@ export class TimesheetResolver {
    * @returns An object containing the user's ID, submit status and total hours for the week
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
-  @Query(() => WeekStatusObject, {
+  @Query(() => WeekStatusQueryResult, {
     description: 'Get status of the current week'
   })
   public async weekStatus(
     @Arg('email') email: string,
     @Arg('week') week: number,
     @Arg('year', { nullable: true }) year?: number
-  ): Promise<WeekStatusObject> {
+  ): Promise<WeekStatusQueryResult> {
     const user = await this._userSvc.getById(email)
     if (!user) throw new Error(`No user found with email ${email}`)
     const confirmedPeriods = await this._cpSvc.find({
