@@ -4,7 +4,11 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { DateObject } from '../../../../shared/utils/date'
-import { ConfirmedPeriodsService, TimesheetService, UserService } from '../../../services'
+import {
+  ConfirmedPeriodsService,
+  TimesheetService,
+  UserService
+} from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
@@ -41,7 +45,7 @@ export class TimesheetResolver {
     private readonly _timesheetSvc: TimesheetService,
     private readonly _userSvc: UserService,
     private readonly _cpSvc: ConfirmedPeriodsService
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -148,15 +152,15 @@ export class TimesheetResolver {
   }
 
   /**
-   * Get status for the provided week and user (and year if provided). 
-   * 
-   * @remarks For now, this is using the `ACCESS_REPORTS` scope, but this 
+   * Get status for the provided week and user (and year if provided).
+   *
+   * @remarks For now, this is using the `ACCESS_REPORTS` scope, but this
    * could be changed in the future.
-   * 
+   *
    * @param email - User email
    * @param week - Week number
    * @param year - Year (optional, defaults to current year)
-   * 
+   *
    * @returns An object containing the user's ID, submit status and total hours for the week
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
