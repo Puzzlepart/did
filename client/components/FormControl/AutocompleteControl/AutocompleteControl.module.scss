@@ -15,12 +15,16 @@
     flex-direction: row;
 
     .icon {
-      padding: 0 8px 0 0;
-      width: 30px;
+      width: 40px;
       box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .content {
+      flex: 1;
+
       .text {
         font-size: initial;
       }

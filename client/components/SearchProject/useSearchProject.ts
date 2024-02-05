@@ -6,16 +6,21 @@ import { ISuggestionItem } from '../FormControl/AutocompleteControl'
 import $projects from './projects.gql'
 
 /**
- * Component logic hook for `<SearchProject />`
+ * Component logic hook for `<SearchProject />`. Handles
+ * fetching of projects using the query in `projects.gql`,
+ * removes inactive projects and maps the result to an
+ * array of `ISuggestionItem<Project>`.
  */
 export function useSearchProject() {
-  const { data, loading } = useQuery($projects, {
+  const { data, loading } = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-and-network'
   })
 
+  const projects = data?.projects.filter((project) => !project.inactive)
+
   const items: ISuggestionItem<Project>[] = useMemo(
     () =>
-      arrayMap<any>(data?.projects, (project) => ({
+      arrayMap<any>(projects, (project) => ({
         key: project.tag,
         text: project.name,
         secondaryText: project.tag,
