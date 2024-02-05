@@ -4,6 +4,7 @@ query Projects {
     name
     description
     icon
+    inactive
     customer {
       key
       name

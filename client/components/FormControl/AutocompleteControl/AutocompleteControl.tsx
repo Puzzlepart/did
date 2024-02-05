@@ -54,9 +54,9 @@ export const AutocompleteControl: FormInputControlComponent<
               onBlur={context?.onBlurCallback}
               freeform
             >
-              {state.suggestions.map((s) => (
-                <Option key={s.key} value={s.key as string} text={s.text}>
-                  {renderOption(s)}
+              {state.suggestions.map((option) => (
+                <Option key={option.key} value={option.key as string} text={option.text} checkIcon={null}>
+                  {renderOption(option)}
                 </Option>
               ))}
               {_.isEmpty(state.suggestions) && !state.selectedItem && (
