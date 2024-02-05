@@ -55,7 +55,7 @@ export const AutocompleteControl: FormInputControlComponent<
               freeform
             >
               {state.suggestions.map((s) => (
-                <Option key={s.key} value={s.key as string} text={s.text}>
+                <Option key={s.key} value={s.key as string} text={s.text} checkIcon={null}>
                   {renderOption(s)}
                 </Option>
               ))}

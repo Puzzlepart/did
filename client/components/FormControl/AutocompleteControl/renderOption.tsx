@@ -12,20 +12,18 @@ export const renderOption = ({
   iconName,
   text,
   secondaryText
-}: ISuggestionItem<any>): ReactElement => {
-  return (
-    <div className={styles.option}>
-      <div className={styles.container}>
-        <div className={styles.icon} hidden={!iconName}>
-          <Icon iconName={iconName} />
-        </div>
-        <div className={styles.content}>
-          <div className={styles.text}>{text}</div>
-          <div className={styles.secondaryText} hidden={!secondaryText}>
-            {secondaryText}
-          </div>
+}: ISuggestionItem<any>): ReactElement => (
+  <div className={styles.option}>
+    <div className={styles.container}>
+      <div className={styles.icon} hidden={!iconName}>
+        <Icon iconName={iconName} styles={{ root: { fontSize: 22 } }} />
+      </div>
+      <div className={styles.content}>
+        <div className={styles.text}>{text}</div>
+        <div className={styles.secondaryText} hidden={!secondaryText}>
+          {secondaryText}
         </div>
       </div>
     </div>
-  )
-}
+  </div>
+)
