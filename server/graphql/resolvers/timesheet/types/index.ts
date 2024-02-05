@@ -6,3 +6,5 @@ export * from './TimesheetPeriodInput'
 export * from './TimesheetPeriodObject'
 export * from './TimesheetQuery'
 export * from './VacationSummaryObject'
+export * from './WeekStatusQueryResult'
+

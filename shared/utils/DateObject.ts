@@ -130,6 +130,13 @@ export class DateObject {
   }
 
   /**
+   * Is week split between two months
+   */
+  public get isWeekSplit() {
+    return DateUtils.isWeekSplit(this)
+  }
+
+  /**
    * Get the formatted date according to the string of tokens passed in.
    *
    * To escape characters, wrap them in square brackets (e.g. [MM]).
