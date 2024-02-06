@@ -311,7 +311,13 @@
     "timesheetDayFormatLabel": "Datoformat for dager i timelisten",
     "timesheetTimeFormatDescription": "Velg format for tid. Brukes i timelisten. Eksempel: HH:mm. Se forhåndsvisning til høyre.",
     "timesheetTimeFormatLabel": "Format for tid",
-    "subscriptionBrandHeader": "Tema"
+    "subscriptionBrandHeader": "Tema",
+    "teamsMissingSubmissionsEnabledDescription": "Aktiver påminnelser om manglende bekreftelser i Teams.",
+    "teamsMissingSubmissionsEnabledLabel": "Aktiver påminnelser for manglende bekreftelser i Teams.",
+    "teamsMissingSubmissionsSinglePeriodText": "Meldingsmal for påminnelse for enkeltperioder",
+    "teamsMissingSubmissionsMultiplePeriodsText": "Meldingsmal for påminnelse om flere perioder",
+    "teamsMissingSubmissionsMultiplePeriodsTextDescription": "Angi meldingsmalen for en påminnelse for flere perioder. Tokenet `{0}` vil bli erstattet med de faktiske periodene.",
+    "teamsMissingSubmissionsSinglePeriodTextDescription": "Angi meldingsmalen for en påminnelse for flere perioder. Tokenet `{0}` vil bli erstattet med den faktiske perioden."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

@@ -311,7 +311,13 @@
     "timesheetDayFormatLabel": "Date format for days in the Timesheet",
     "timesheetTimeFormatDescription": "Select format for time. Used in the Timesheet. Example: HH:mm. See preview on the right.",
     "timesheetTimeFormatLabel": "Format for time",
-    "subscriptionBrandHeader": "Branding"
+    "subscriptionBrandHeader": "Branding",
+    "teamsMissingSubmissionsEnabledLabel": "Enable reminders for missing submissions in Teams",
+    "teamsMissingSubmissionsEnabledDescription": "Enable reminders about missing submissions in Teams.",
+    "teamsMissingSubmissionsSinglePeriodText": "Message template for single period reminder",
+    "teamsMissingSubmissionsMultiplePeriodsText": "Message template for multiple periods reminder",
+    "teamsMissingSubmissionsMultiplePeriodsTextDescription": "Set the mesage template for a reminder for multiple periods. The token `{0}` will be replaces with the actual periods.",
+    "teamsMissingSubmissionsSinglePeriodTextDescription": "Set the mesage template for a reminder for a single period. The token `{0}` will be replaces with the actual period."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
