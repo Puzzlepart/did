@@ -79,14 +79,16 @@ export function useAppContext(): IAppContext {
  * Retrieves the subscription settings from the app context.
  * If a specific path is provided, returns the value at that path in the settings object.
  * If no path is provided, returns the entire settings object.
- * 
+ *
  * @param path - Optional path to a specific setting value.
- * 
+ *
  * @returns The subscription settings or a specific setting value.
  */
-export function useSubscriptionSettings<T = SubscriptionSettings>(path?: string) {
+export function useSubscriptionSettings<T = SubscriptionSettings>(
+  path?: string
+) {
   const { subscription } = useAppContext()
-  if(path) return get(subscription.settings, path) as T
+  if (path) return get(subscription.settings, path) as T
   return subscription.settings as T
 }
 

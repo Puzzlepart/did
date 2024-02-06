@@ -212,29 +212,38 @@ export function useSubscriptionConfig() {
         {
           id: 'missingSubmissionsEnabled',
           type: 'bool',
-          hiddenIf: (settings: SubscriptionSettings) => !settings?.teams?.enabled,
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.teams?.enabled,
           props: {
             label: t('admin.teamsMissingSubmissionsEnabledLabel'),
             description: t('admin.teamsMissingSubmissionsEnabledDescription')
-          },
+          }
         },
         {
           id: 'missingSubmissionsSinglePeriodText',
           type: 'text',
-          hiddenIf: (settings: SubscriptionSettings) => !settings?.teams?.missingSubmissionsEnabled || !settings?.teams?.enabled,
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.teams?.missingSubmissionsEnabled ||
+            !settings?.teams?.enabled,
           props: {
             label: t('admin.teamsMissingSubmissionsSinglePeriodText'),
-            description: t('admin.teamsMissingSubmissionsSinglePeriodTextDescription'),
+            description: t(
+              'admin.teamsMissingSubmissionsSinglePeriodTextDescription'
+            ),
             rows: 2
           }
         },
         {
           id: 'missingSubmissionsMultiplePeriodsText',
           type: 'text',
-          hiddenIf: (settings: SubscriptionSettings) => !settings?.teams?.missingSubmissionsEnabled || !settings?.teams?.enabled,
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.teams?.missingSubmissionsEnabled ||
+            !settings?.teams?.enabled,
           props: {
             label: t('admin.teamsMissingSubmissionsMultiplePeriodsText'),
-            description: t('admin.teamsMissingSubmissionsMultiplePeriodsTextDescription'),
+            description: t(
+              'admin.teamsMissingSubmissionsMultiplePeriodsTextDescription'
+            ),
             rows: 2
           }
         }
