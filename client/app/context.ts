@@ -4,6 +4,7 @@ import { IToastProps } from 'components'
 import get from 'get-value'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
+import { SubscriptionSettings } from 'types'
 import { useNotificationsQuery } from '../hooks'
 import { IAppProps, IAppState } from './types'
 
@@ -72,6 +73,21 @@ export function useAppContext(): IAppContext {
     isAuthenticated: !!context.user?.id,
     getUserConfiguration
   }
+}
+
+/**
+ * Retrieves the subscription settings from the app context.
+ * If a specific path is provided, returns the value at that path in the settings object.
+ * If no path is provided, returns the entire settings object.
+ * 
+ * @param path - Optional path to a specific setting value.
+ * 
+ * @returns The subscription settings or a specific setting value.
+ */
+export function useSubscriptionSettings<T = SubscriptionSettings>(path?: string) {
+  const { subscription } = useAppContext()
+  if(path) return get(subscription.settings, path) as T
+  return subscription.settings as T
 }
 
 export { ContextUser } from './ContextUser'

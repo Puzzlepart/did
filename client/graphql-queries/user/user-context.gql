@@ -23,6 +23,9 @@ query UserContext {
       }
       teams {
         enabled
+        missingSubmissionsEnabled
+        missingSubmissionsSinglePeriodText
+        missingSubmissionsMultiplePeriodsText
       }
       timesheet {
         dayFormat

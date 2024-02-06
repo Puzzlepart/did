@@ -11,6 +11,15 @@ import { Field, InputType, ObjectType } from 'type-graphql'
 export class SubscriptionTeamsSettings {
   @Field({ nullable: true })
   enabled?: boolean
+
+  @Field({ nullable: true })
+  missingSubmissionsEnabled?: boolean
+
+  @Field({ nullable: true })
+  missingSubmissionsSinglePeriodText?: string
+
+  @Field({ nullable: true })
+  missingSubmissionsMultiplePeriodsText?: string
 }
 
 /**
@@ -22,4 +31,13 @@ export class SubscriptionTeamsSettings {
 export class SubscriptionTeamsSettingsInput {
   @Field({ nullable: true })
   enabled?: boolean
+
+  @Field({ nullable: true })
+  missingSubmissionsEnabled?: boolean
+
+  @Field({ nullable: true })
+  missingSubmissionsSinglePeriodText?: string
+
+  @Field({ nullable: true })
+  missingSubmissionsMultiplePeriodsText?: string
 }

@@ -1,6 +1,7 @@
 import { ITextFieldProps } from '@fluentui/react'
 import { CheckboxProps, SliderProps } from '@fluentui/react-components'
 import { IImageFieldProps } from './SettingsSection/ImageField'
+import { SubscriptionSettings } from 'types'
 
 interface ISubscriptionSettingBase<T = any> {
   /**
@@ -13,14 +14,14 @@ interface ISubscriptionSettingBase<T = any> {
    *
    * @param settings The current settings
    */
-  disabledIf?: (settings: any) => boolean
+  disabledIf?: (settings: SubscriptionSettings) => boolean
 
   /**
    * Conditionally hide the setting based on the current settings
    *
    * @param settings The current settings
    */
-  hiddenIf?: (settings: any) => boolean
+  hiddenIf?: (settings: SubscriptionSettings) => boolean
 
   /**
    * The props to pass to the field component

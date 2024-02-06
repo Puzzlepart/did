@@ -15,7 +15,7 @@ export const TeamsReminderButton: StyledComponent<ITeamsReminderButtonProps> = (
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const { startTeamsConversation } = useStartTeamsConversation(props)
-  if (!subscription.settings?.teams?.enabled) return null
+  if (!subscription.settings?.teams?.missingSubmissionsEnabled) return null
   return (
     <div className={TeamsReminderButton.className}>
       <Button
