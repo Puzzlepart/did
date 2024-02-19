@@ -51,11 +51,6 @@ export interface IAutocompleteControlProps<T = any>
   noSuggestionsText?: string
 
   /**
-   * Default selected key.
-   */
-  defaultSelectedKey?: string
-
-  /**
    * Max height of the autocomplete component.
    */
   maxHeight?: number
@@ -94,11 +89,6 @@ export interface IAutocompleteControlState<T = any> {
    * An array of suggestion items filtered based on the user's input.
    */
   suggestions?: ISuggestionItem<T>[]
-
-  /**
-   * A boolean indicating whether the suggestion dropdown is disabled.
-   */
-  isSuggestionDisabled?: boolean
 
   /**
    * The current value of the input field.
