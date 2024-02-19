@@ -1,7 +1,6 @@
 import React from 'react'
 import { AutocompleteControl } from '../AutocompleteControl'
 import { FormInputControlComponent } from '../types'
-import styles from './IconPickerControl.module.scss'
 import { IIconPickerControlProps } from './types'
 import { useIconPickerControl } from './useIconPickerControl'
 
@@ -19,4 +18,3 @@ export const IconPickerControl: FormInputControlComponent<
 }
 
 IconPickerControl.displayName = 'IconPickerControl'
-IconPickerControl.className = styles.iconPickerControl

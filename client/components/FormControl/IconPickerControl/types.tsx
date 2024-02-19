@@ -18,4 +18,9 @@ export interface IIconPickerControlProps
    * Include icons from Fluent UI 2 in the suggestions.
    */
   includeFluentIcons?: boolean
+
+  /**
+   * Picks a random icon from the list of icons.
+   */
+  random?: boolean
 }
