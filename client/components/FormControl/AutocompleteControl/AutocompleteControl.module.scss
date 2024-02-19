@@ -3,6 +3,13 @@
   box-sizing: border-box;
   padding: 8px 0 0 0;
 
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+
   .field {
     max-width: none;
     width: 100%;
