@@ -31,7 +31,8 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
     useProjectForm(props)
   const ValidateKeyFunction = useValidateKeyFunction()
   const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction(
-    model.value('customerKey')
+    model.value('customerKey'),
+    !props.edit
   )
   return (
     <FormControl {...formControlProps}>
