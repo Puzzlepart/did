@@ -9,9 +9,9 @@ import { useMemo } from 'react'
 
 /**
  * Handles the logic for the `IconPickerControl`.
- * 
+ *
  * @param props Props for the `IconPickerControl`.
- * 
+ *
  * @returns Props for the `AutocompleteControl`.
  */
 export function useIconPickerControl(props: IIconPickerControlProps) {
