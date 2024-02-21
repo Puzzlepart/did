@@ -44,13 +44,13 @@ export const AutocompleteControl: FormInputControlComponent<
           )}
         >
           <div ref={ref} className={styles.container}>
-            {state.value &&
+            {(state.value && props.iconPreview) &&
               getFluentIconWithFallback(state.value, {
                 size: 18
               })}
             <Combobox
               className={styles.field}
-              placeholder={props.placeholder}
+              placeholder={state.placeholder}
               disabled={props.disabled}
               value={state.selectedItem?.text ?? state.value ?? ''}
               defaultValue={state.value}
@@ -61,7 +61,7 @@ export const AutocompleteControl: FormInputControlComponent<
               onDoubleClick={() => dispatch(ON_SEARCH(''))}
               freeform
             >
-              {state.suggestions.map((option) => (
+              {_.take(state.suggestions, props.maxSuggestions).map((option) => (
                 <Option
                   key={option.key}
                   value={option.key as string}
@@ -88,7 +88,8 @@ export const AutocompleteControl: FormInputControlComponent<
 AutocompleteControl.displayName = 'AutocompleteControl'
 AutocompleteControl.className = styles.autocompleteControl
 AutocompleteControl.defaultProps = {
-  minCharacters: 1
+  minCharacters: 1,
+  maxSuggestions: 15
 }
 
 export * from './types'

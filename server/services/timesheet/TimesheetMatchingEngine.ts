@@ -229,7 +229,6 @@ export default class TimesheetMatchingEngine {
       if (inactiveProject) event.error = { code: 'PROJECT_INACTIVE' }
       if (inactiveCustomer) event.error = { code: 'CUSTOMER_INACTIVE' }
       event.project = null
-      event.customer = null
     }
     return event
   }

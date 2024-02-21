@@ -29,7 +29,7 @@
     "clearProjectMatchTooltipText": "Fjern manuell prosjekttilkopling. Hugs: Det er alltid betre å automatisk tagga hendingane dine i Outlook. Du veit korleis!",
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>kalenderoppføringa i Outlook</a> blir tilkobla et prosjekt automatisk. I nokre tilfelle kan det likevel vere nødvendig å løyse kalenderoppføringa manuelt.",
     "didYouMeanText": "Meinte du <Link>{{tag}}</Link>?",
-    "eventNotFullyMatchedText": "Kalenderoppføringa kunne ikkje matchast. Vi fann matchande kunde **{{name}}**, men ikkje noko prosjekt med den spesifiserte nøkkelen.",
+    "eventNotFullyMatchedText": "Kalenderoppføringa kunne ikkje matchast. Vi fann matchande kunde **{{name}}**, men ikkje noko prosjekt med den spesifiserte nøkkelen. Prosjektet kan være inaktivt.",
     "unforecastHoursText": "Fjern prognose",
     "forecastHoursText": "Lagre prognose",
     "periodForecastedText": "Perioda er prognosert med {{hours}}.",
@@ -115,7 +115,8 @@
     "customerFieldDescription": "Velg kunden knyttet til dette prosjektet fra rullegardinlisten. \nHvis kunden ikke står på listen, kan du opprette en ny – eller kanskje snakke med en voksen?",
     "customerRequired": "Oops! Droppet du ved et uhell å velge en kunde fra listen? På tide å velge en kunde og få dem til å føle seg verdsatt i prosjektet vårt - de vil ikke hjemsøke deg, det lover vi!",
     "updateSuccess": "Prosjektet **{{name}}** blei oppdatert heilt utan problemer.",
-    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket.  Vennligst prøv igjen senere, eller spør en voksen om råd."
+    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket.  Vennligst prøv igjen senere, eller spør en voksen om råd.",
+    "keyNotUniqueError": "Kunden {{name}} har allerede et prosjekt med nøkkelen {{key}}."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

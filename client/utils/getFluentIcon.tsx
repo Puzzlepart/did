@@ -99,7 +99,7 @@ export function getFluentIconWithFallback(
   return (
     <Icon
       iconName={name}
-      style={{ color: options?.color, fontSize: options.size }}
+      style={{ color: options?.color, fontSize: options?.size }}
     />
   )
 }

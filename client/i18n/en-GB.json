@@ -27,9 +27,9 @@
     "resolveProjectButtonLabel": "Resolve",
     "ignoreEventActionTooltip": "Click to ignore the event {{title}}.",
     "clearProjectMatchTooltipText": "Clear manual match. Remember: It's always better to automatically tag your events in Outlook. You know how!",
-    "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
+    "matchOutlookInfoText": "**Please note:** You should try your best to match <a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "didYouMeanText": "Did you mean <Link>{{tag}}</Link>?",
-    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key.",
+    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key. The project might be inactive.",
     "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
     "forecastHoursText": "Forecast hours",
@@ -69,7 +69,8 @@
     "monthConfirmedText": "A total of **{{hours}}** confirmed this month. You have confirmed {{confirmedPeriodsCount}} out of {{periodsCount}} periods. You need to be in the **Overview** view to do adjustments.",
     "ignoreAllTooltip": "Ignore all unmatched events.",
     "eventNoTitleErrorText": "Please enter a subject for this event. Events without a subject will not be included in the timesheet.",
-    "eventDurationModifiedTitle": "Automatically modified event duration"
+    "eventDurationModifiedTitle": "Automatically modified event duration",
+    "manuallyResolveEventActionTooltip": "Click to manually resolve the event {{title}}. Remember it's always best to keep your Outlook calendar up to date."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -112,7 +113,8 @@
     "descriptionWarning": "We recommend including a quick summary of the project. This will provide a concise overview and help others quickly grasp the project's essence.",
     "customerFieldDescription": "Select the customer associated with this project from the dropdown list. If the customer is not in the list, you can create a new one - or maybe talk to an adult?",
     "customerRequired": "Oops! Did you accidentally ghost a customer from the list? Time to pick a customer and make them feel appreciated in our project - they won't haunt you, we promise!",
-    "updateError": "We can't update the project **{{projectId}}** at the moment. Please try again later, or ask an adult for advice.\""
+    "updateError": "We can't update the project **{{projectId}}** at the moment. Please try again later, or ask an adult for advice.\"",
+    "keyNotUniqueError": "The customer {{name}} already has a project with key {{key}}."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
