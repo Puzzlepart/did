@@ -1,7 +1,8 @@
 import { ISearchBoxProps } from '@fluentui/react'
+import { IAutocompleteControlProps } from 'components/FormControl'
 import { Project } from 'types'
 
-export interface ISearchProjectProps extends ISearchBoxProps {
+export interface ISearchProjectProps extends ISearchBoxProps, Pick<IAutocompleteControlProps, 'initialFilter' | 'intialFilterPlaceholder'> {
   /**
    * Callback when a project is selected.
    *

@@ -13,7 +13,6 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
   props
 ) => {
   const [items, disabled] = useSearchProject()
-
   return (
     <AutocompleteControl
       {...props}
