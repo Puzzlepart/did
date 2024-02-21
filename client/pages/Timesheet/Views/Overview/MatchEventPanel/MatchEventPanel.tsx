@@ -21,16 +21,18 @@ export const MatchEventPanel: StyledComponent = () => {
     >
       <div className={styles.matchEventPanel}>
         <UserMessage text={t('timesheet.matchOutlookInfoText', event)} />
-        <SuggestedProjectMessage
-          eventId={event.id}
-          project={event.suggestedProject}
-        />
-        <UserMessage
-          hidden={!event.customer || !!event.suggestedProject}
-          text={t('timesheet.eventNotFullyMatchedText', {
-            name: event.customer?.name
-          })}
-        />
+        <div>
+          <SuggestedProjectMessage
+            eventId={event.id}
+            project={event.suggestedProject}
+          />
+          <UserMessage
+            hidden={!event.customer || !!event.suggestedProject}
+            text={t('timesheet.eventNotFullyMatchedText', {
+              name: event.customer?.name
+            })}
+          />
+        </div>
         <SearchProject
           width='100%'
           onSelected={onMatch}
