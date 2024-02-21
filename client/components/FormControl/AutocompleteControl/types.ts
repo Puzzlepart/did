@@ -74,6 +74,21 @@ export interface IAutocompleteControlProps<T = any>
    * Enable icon preview.
    */
   iconPreview?: boolean
+
+  /**
+   * Initial filter to apply to the search.
+   */
+  initialFilter?: Record<string, any>
+
+  /**
+   * Placeholder to display when the initial filter is applied.
+   */
+  intialFilterPlaceholder?: string
+
+  /**
+   * The maximum number of suggestions to display.
+   */
+  maxSuggestions?: number
 }
 
 /**
@@ -104,4 +119,9 @@ export interface IAutocompleteControlState<T = any> {
    * The currently selected suggestion item.
    */
   selectedItem?: ISuggestionItem
+
+  /**
+   * The placeholder to display.
+   */
+  placeholder?: string
 }
