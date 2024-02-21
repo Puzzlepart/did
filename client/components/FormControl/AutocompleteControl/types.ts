@@ -69,6 +69,11 @@ export interface IAutocompleteControlProps<T = any>
    * Optional min characters to trigger search.
    */
   minCharacters?: number
+
+  /**
+   * Enable icon preview.
+   */
+  iconPreview?: boolean
 }
 
 /**
