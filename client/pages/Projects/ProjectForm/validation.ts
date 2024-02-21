@@ -28,14 +28,16 @@ export function useValidateKeyFunction() {
  * unique among the customers.
  *
  * @param customerKey  The key of the selected customer.
+ * @param enabled  Whether the validation is enabled (default: `false`).
  *
  * @returns An validator function that resolves with an error message
  * if the key is not unique, or null if it is unique.
  */
-export function useValidateUniqueKeyFunction(customerKey: string) {
+export function useValidateUniqueKeyFunction(customerKey: string, enabled = false) {
   const context = useProjectsContext()
   const { t } = useTranslation()
   const ValidateUniqueKeyFunction: ValidatorFunction<string> = (value) => {
+    if (!enabled) return null
     const projects = context.state.projects.filter(
       (p) => p.customerKey === customerKey
     )
