@@ -112,7 +112,8 @@
     "customerFieldDescription": "Velg kunden knyttet til dette prosjektet fra rullegardinlisten. \nHvis kunden ikke står på listen, kan du opprette en ny – eller kanskje snakke med en voksen?",
     "customerRequired": "Oops! Droppet du ved et uhell å velge en kunde fra listen? På tide å velge en kunde og få dem til å føle seg verdsatt i prosjektet vårt - de vil ikke hjemsøke deg, det lover vi!",
     "updateSuccess": "Prosjektet **{{name}}** ble oppdatert helt uten problemer.",
-    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket. \nVennligst prøv igjen senere, eller spør en voksen om råd.\""
+    "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket. \nVennligst prøv igjen senere, eller spør en voksen om råd.\"",
+    "keyNotUniqueError": "Kunden {{name}} har allerede et prosjekt med nøkkelen {{key}}."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
