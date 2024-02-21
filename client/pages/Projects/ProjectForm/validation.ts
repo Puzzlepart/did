@@ -33,7 +33,10 @@ export function useValidateKeyFunction() {
  * @returns An validator function that resolves with an error message
  * if the key is not unique, or null if it is unique.
  */
-export function useValidateUniqueKeyFunction(customerKey: string, enabled = false) {
+export function useValidateUniqueKeyFunction(
+  customerKey: string,
+  enabled = false
+) {
   const context = useProjectsContext()
   const { t } = useTranslation()
   const ValidateUniqueKeyFunction: ValidatorFunction<string> = (value) => {

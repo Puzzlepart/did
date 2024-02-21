@@ -8,8 +8,8 @@ import { useProjectModel } from './useProjectModel'
 
 type UseProjectFormReturnType = {
   /**
-  * The model for the form.
-  */
+   * The model for the form.
+   */
   model: ReturnType<typeof useProjectModel>
 
   /**
