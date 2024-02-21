@@ -44,9 +44,10 @@ export const AutocompleteControl: FormInputControlComponent<
           )}
         >
           <div ref={ref} className={styles.container}>
-            {state.value && getFluentIconWithFallback(state.value, {
-              size: 18
-            })}
+            {state.value &&
+              getFluentIconWithFallback(state.value, {
+                size: 18
+              })}
             <Combobox
               className={styles.field}
               placeholder={props.placeholder}

@@ -96,5 +96,10 @@ export function getFluentIconWithFallback(
   if (iconCatalog[name]) {
     return getFluentIcon(name as FluentIconName, options)
   }
-  return <Icon iconName={name} style={{ color: options?.color, fontSize: options.size }} />
+  return (
+    <Icon
+      iconName={name}
+      style={{ color: options?.color, fontSize: options.size }}
+    />
+  )
 }

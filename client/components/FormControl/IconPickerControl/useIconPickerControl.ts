@@ -18,13 +18,8 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
    *
    * @returns The default selected key as a string.
    */
-  const selectedKey =  useMemo(() => {
-    const {
-      defaultSelected,
-      model,
-      name,
-      random
-    } = props
+  const selectedKey = useMemo(() => {
+    const { defaultSelected, model, name, random } = props
     if (random) {
       const randomIndex = Math.floor(Math.random() * items.length)
       return items[randomIndex].key
@@ -64,6 +59,6 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
     onSelected,
     onClear,
     itemIcons: true,
-    getIcon: (item: ISuggestionItem<IIconProps>) => item.iconName,
+    getIcon: (item: ISuggestionItem<IIconProps>) => item.iconName
   } as IAutocompleteControlProps
 }

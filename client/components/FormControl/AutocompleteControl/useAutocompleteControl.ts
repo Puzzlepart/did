@@ -19,12 +19,9 @@ import { IAutocompleteControlProps } from './types'
 export function useAutocompleteControl(props: IAutocompleteControlProps) {
   const [state, dispatch] = useAutocompleteControlReducer(props)
 
-  useEffect(
-    () => {
-      dispatch(INIT({ props }))
-    },
-    [props.items, props.selectedKey]
-  )
+  useEffect(() => {
+    dispatch(INIT({ props }))
+  }, [props.items, props.selectedKey])
 
   useEffect(() => {
     if (props.selectedKey === null && state.selectedItem) {
