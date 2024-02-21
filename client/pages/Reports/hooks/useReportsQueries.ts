@@ -1,9 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DateObject } from 'DateUtils'
+import { TabItems } from 'components/Tabs'
 import { useTimesheetPeriods } from 'hooks'
+import { useMemo } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import _ from 'underscore'
 import s from 'underscore.string'
+import { ReportTab } from '../ReportTab'
 import {
   report_current_month,
   report_current_year,
@@ -28,16 +31,14 @@ import { IReportsQuery } from '../types'
 export function useLastMonthQuery(query = report_last_month): IReportsQuery {
   const { t } = useTranslation()
   const dateObject = new DateObject().add('-1month').toObject()
+  const monthName = s.capitalize(dateObject.monthName)
   return {
-    itemKey: 'last_month',
-    headerText: t('common.exportTypeLastMonth', {
-      monthName: isBrowser ? `(${dateObject.monthName})` : ''
-    }),
-    itemIcon: 'CalendarDay',
+    id: 'last_month',
+    text: t('common.exportTypeLastMonth'),
+    description: isBrowser && monthName,
+    icon: 'CalendarDay',
     query,
-    exportFileName: `TimeEntries-${s.capitalize(
-      dateObject.monthName
-    )}-{0}.xlsx`,
+    exportFileName: `TimeEntries-${monthName}-{0}.xlsx`,
     variables: {
       userQuery: { hiddenFromReports: false }
     },
@@ -63,16 +64,14 @@ export function useCurrentMonthQuery(
 ): IReportsQuery {
   const { t } = useTranslation()
   const dateObject = new DateObject().toObject()
+  const monthName = s.capitalize(dateObject.monthName)
   return {
-    itemKey: 'current_month',
-    headerText: t('common.exportTypeCurrentMonth', {
-      monthName: isBrowser ? `(${dateObject.monthName})` : ''
-    }),
-    itemIcon: 'Calendar',
+    id: 'current_month',
+    text: t('common.exportTypeCurrentMonth'),
+    description: isBrowser && monthName,
+    icon: 'Calendar',
     query,
-    exportFileName: `TimeEntries-${s.capitalize(
-      dateObject.monthName
-    )}-{0}.xlsx`,
+    exportFileName: `TimeEntries-${monthName}-{0}.xlsx`,
     variables: {
       userQuery: { hiddenFromReports: false }
     },
@@ -98,11 +97,10 @@ export function useLastYearQuery(query = report_last_year): IReportsQuery {
   const dateObject = new DateObject().toObject('year')
   const year = dateObject.year - 1
   return {
-    itemKey: 'last_year',
-    headerText: t('common.exportTypeLastYear', {
-      year: isBrowser ? `(${year})` : ''
-    }),
-    itemIcon: 'Previous',
+    id: 'last_year',
+    text: t('common.exportTypeLastYear'),
+    description: isBrowser && `${year}`,
+    icon: 'Previous',
     query,
     exportFileName: `TimeEntries-${year}-{0}.xlsx`,
     reportLinkRef: year.toString()
@@ -128,11 +126,10 @@ export function useCurrentYearQuery(
   const { t } = useTranslation()
   const { year } = new DateObject().toObject('year')
   return {
-    itemKey: 'current_year',
-    headerText: t('common.exportTypeCurrentYear', {
-      year: isBrowser ? `(${year})` : ''
-    }),
-    itemIcon: 'CalendarReply',
+    id: 'current_year',
+    text: t('common.exportTypeCurrentYear'),
+    description: isBrowser && `${year}`,
+    icon: 'CalendarReply',
     query,
     exportFileName: `TimeEntries-${year}-{0}.xlsx`,
     variables: {
@@ -156,9 +153,9 @@ export function useCurrentYearQuery(
 export function useForecastQuery(query = report_forecast): IReportsQuery {
   const { t } = useTranslation()
   return {
-    itemKey: 'forecast',
-    headerText: t('reports.forecast'),
-    itemIcon: 'TimeSheet',
+    id: 'forecast',
+    text: t('reports.forecast'),
+    icon: 'TimeSheet',
     query,
     exportFileName: 'Forecast-{0}.xlsx',
     variables: {
@@ -176,9 +173,9 @@ export function useSummaryQuery(): IReportsQuery {
   const { t } = useTranslation()
   const { periods, queries } = useTimesheetPeriods(8, true)
   return {
-    itemKey: 'summary',
-    headerText: t('reports.summaryHeaderText'),
-    itemIcon: 'CalendarWeek',
+    id: 'summary',
+    text: t('reports.summaryHeaderText'),
+    icon: 'CalendarWeek',
     hidden: true,
     periods,
     query: report_summary,
@@ -190,20 +187,19 @@ export function useSummaryQuery(): IReportsQuery {
 }
 
 /**
- * Use Reports Queries. Returns all queries
- * used in reports. Each query is generated
- * by a separate hook.
+ * Returns all queries and query tabs available
+ * for `<Reports />`.
  *
  * @category Reports
  */
-export function useReportsQueries(): IReportsQuery[] {
+export function useReportsQueries() {
   const lastMonthQuery = useLastMonthQuery()
   const currentMonthQuery = useCurrentMonthQuery()
   const currentYearQuery = useCurrentYearQuery()
   const lastYearQuery = useLastYearQuery()
   const forecastQuery = useForecastQuery()
   const summaryQuery = useSummaryQuery()
-  return [
+  const queries = [
     lastMonthQuery,
     currentMonthQuery,
     currentYearQuery,
@@ -211,6 +207,28 @@ export function useReportsQueries(): IReportsQuery[] {
     forecastQuery,
     summaryQuery
   ]
+
+  const queryTabs = useMemo(
+    () =>
+      _.reduce(
+        _.filter(queries, (q) => !q.hidden),
+        (tabs, query) => {
+          const { id, text, description } = query
+          tabs[id] = [
+            ReportTab,
+            {
+              text,
+              description
+            }
+          ]
+          return tabs
+        },
+        {} as TabItems
+      ),
+    [queries]
+  )
+
+  return { queries, queryTabs }
 }
 
 export { default as default_query } from '../queries/report-current-month.gql'

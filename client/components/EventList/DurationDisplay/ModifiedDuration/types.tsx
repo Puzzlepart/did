@@ -1,7 +1,6 @@
-import { IIconProps } from '@fluentui/react'
+import type { TooltipProps } from '@fluentui/react-components'
 import { EventObject, TimeEntry } from 'types'
 
-export interface IModifiedDurationProps {
+export interface IModifiedDurationProps extends Partial<TooltipProps> {
   event: TimeEntry | EventObject
-  iconProps?: IIconProps
 }

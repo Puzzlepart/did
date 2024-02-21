@@ -1,21 +1,28 @@
-import { IContextualMenuItem, IPivotItemProps } from '@fluentui/react'
+import { IContextualMenuItem } from '@fluentui/react'
 import { IListGroupProps, ListFilterState } from 'components/List/types'
+import { ITabProps } from 'components/Tabs'
+import { IDatePeriod } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { Project, ReportLink, TimesheetPeriodObject, User } from 'types'
 
 /**
  * @category Reports
  */
-export interface IReportsQuery extends IPivotItemProps {
+export interface IReportsQuery<QueryType = any> extends ITabProps {
+  /**
+   * Unique query identifier
+   */
+  id: string
+
   /**
    * GraphQL query
    */
-  query: any
+  query: QueryType
 
   /**
    * GraphQL query variables
    */
-  variables?: any
+  variables?: Record<string, any>
 
   /**
    * Export file name template. {0} will be replaced
@@ -26,7 +33,9 @@ export interface IReportsQuery extends IPivotItemProps {
   exportFileName?: string
 
   /**
-   * Report link reference
+   * Report link reference. String in the format
+   * `{year}_{month}`. This is used to match
+   * report links to queries.
    */
   reportLinkRef?: string
 
@@ -38,7 +47,10 @@ export interface IReportsQuery extends IPivotItemProps {
    */
   reportLinks?: ReportLink[]
 
-  [key: string]: any
+  /**
+   * Date periods for the summary report.
+   */
+  periods?: IDatePeriod[]
 }
 
 /**
@@ -78,16 +90,6 @@ export interface IReportsData {
    * Projects
    */
   projects: Project[]
-}
-
-/**
- * @category Reports
- */
-export interface IReportsState {
-  /**
-   * Data
-   */
-  data?: IReportsData
 
   /**
    * Report links
@@ -95,14 +97,24 @@ export interface IReportsState {
   reportLinks?: ReportLink[]
 
   /**
+   * Loading state
+   */
+  loading?: boolean
+}
+
+/**
+ * @category Reports
+ */
+export interface IReportsState {
+  /**
+   * Data for the current query
+   */
+  data?: Partial<IReportsData>
+
+  /**
    * Whether the filter panel is open
    */
   isFiltersOpen?: boolean
-
-  /**
-   * Selected query preset
-   */
-  queryPreset?: IReportsQuery
 
   /**
    * Group by properties
@@ -117,7 +129,7 @@ export interface IReportsState {
   /**
    * Saved filters
    */
-  savedFilters?: { [key: string]: IReportsSavedFilter }
+  savedFilters?: Record<string, IReportsSavedFilter>
 
   /**
    * Active filter
@@ -184,5 +196,5 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
  * @category Reports
  */
 export interface IReportsParameters {
-  query: string
+  queryPreset: string
 }

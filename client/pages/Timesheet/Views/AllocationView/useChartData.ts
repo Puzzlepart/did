@@ -1,56 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DateRangeType } from '@fluentui/react'
-import get from 'get-value'
+import { GetEventsOption } from 'pages/Timesheet/types'
 import { useMemo } from 'react'
-import { TFunction, useTranslation } from 'react-i18next'
-import _ from 'underscore'
-import s from 'underscore.string'
-import { EventObject } from '../../../../../server/graphql/resolvers/types'
+import { useTranslation } from 'react-i18next'
 import { useTimesheetContext } from '../../context'
-import { IChartConfig } from './types'
-
-/**
- * Get data for chart
- *
- * @param events - Events
- * @param chart - Chart
- * @param width - Client width
- * @param t - Translate function
- */
-function getDataForChart(
-  events: EventObject[] = [],
-  chart: IChartConfig,
-  width: number,
-  t: TFunction
-) {
-  if (!width) return []
-  const items = events.reduce((_items, entry) => {
-    const data = get(entry, chart.key)
-    if (!data) return _items
-    const item = _.find(_items, ({ id }) => id === data[chart.idKey])
-    const value = get(entry, chart.valueKey)
-    if (item) item.value += value
-    else _items.push({ id: data[chart.idKey], chart, data, value })
-    return _items
-  }, [])
-  const unconfirmedHours: number = events
-    .filter((entry) => !get(entry, chart.key))
-    .reduce((sum, entry) => sum + get(entry, chart.valueKey), 0)
-  items.push({
-    id: t('common.unconfirmedHours'),
-    data: { name: t('common.unconfirmedHours') },
-    value: unconfirmedHours,
-    chart
-  })
-  const truncateLength = width / (items.length ?? 1) / 6
-  return items.map((index) => ({
-    ...index,
-    label: s.prune(index.data[chart.textKey], truncateLength),
-    value: Number.parseFloat(index.value.toFixed(1))
-  }))
-}
-
-type ChartData<T> = { [key: string]: [string, T[]] }
+import { getDataForChart } from './getDataForChart'
+import { ChartData, ChartDataItem, IChartConfig } from './types'
 
 /**
  * Hook for chart data
@@ -58,23 +12,35 @@ type ChartData<T> = { [key: string]: [string, T[]] }
  * @param charts - Charts
  * @param container - HTML container
  */
-export function useChartData<T = any>(
+export function useChartData(
   charts: IChartConfig[],
   container: HTMLDivElement
-): ChartData<T> {
+): ChartData<ChartDataItem> {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
   let events = state.selectedPeriod?.getEvents()
+  let ignoredEvents = state.selectedPeriod?.getEvents(
+    GetEventsOption.IgnoredEvents
+  )
   if (state.dateRangeType === DateRangeType.Month) {
     events = state.periods.flatMap((period) => period.getEvents())
+    ignoredEvents = state.periods.flatMap((period) =>
+      period.getEvents(GetEventsOption.IgnoredEvents)
+    )
   }
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {
-        const d = getDataForChart(events, chart, container?.clientWidth, t)
+        const entries = getDataForChart(
+          events,
+          ignoredEvents,
+          chart,
+          container?.clientWidth,
+          t
+        )
         return {
           ..._data,
-          [chart.key]: [`${chart.key}_${d.length}`, d]
+          [chart.key]: entries
         }
       }, {}),
     [charts, container?.clientWidth, state.selectedPeriod, events]

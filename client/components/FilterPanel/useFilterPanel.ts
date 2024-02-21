@@ -1,7 +1,8 @@
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IFilter, IFilterItem } from './Filters'
+import { IFilter } from './Filters'
 import { IFilterPanelProps } from './types'
-import { useFilterPanelFilters } from './useFilterPanelFilters'
+import { IFilterPanelContext } from './context'
 
 /**
  * Component logic hook for `<FilterPanel />`
@@ -12,39 +13,60 @@ import { useFilterPanelFilters } from './useFilterPanelFilters'
  */
 export function useFilterPanel(props: IFilterPanelProps) {
   const { t } = useTranslation()
-  const { filters, setFilters } = useFilterPanelFilters(props)
+  const [selected, setSelected] = useState<Map<string, Set<string>>>(new Map())
+  const [filters, setFilters] = useState<IFilter[]>(
+    props.filters.map((f) => f.initialize(props.items))
+  )
+
+  useEffect(() => {
+    setFilters(props.filters.map((f) => f.initialize(props.items)))
+  }, [props.items, props.filters])
 
   /**
    * On filter updated
    *
-   * @param filter - Filter
-   * @param item - Item
-   * @param checked - Checked
+   * @param filter - Filter to update
+   * @param selected - Selected keys
    */
-  const onFilterUpdated = (
-    filter: IFilter,
-    item: IFilterItem,
-    checked: boolean
-  ) => {
-    let selected = [...filter.selected]
-    if (checked) selected.push(item)
-    else selected = selected.filter((f) => f.key !== item.key)
-    const updatedFilters = filters.map((f) => {
-      return f.key === filter.key ? { ...filter, selected } : f
+  const onFilterUpdated = (filter: IFilter, selected: Set<string>) => {
+    setSelected((previousSelected) => {
+      const newSelected = new Map(previousSelected)
+      newSelected.set(filter.key, selected)
+      return newSelected
     })
-    setFilters(updatedFilters)
-    props.onFiltersUpdated(
-      updatedFilters.filter((filter) => filter.selected.length > 0)
-    )
   }
 
-  const headerText = props.selectedFilter
+  useEffect(() => {
+    const updatedFilters = filters
+      .map((f) => ({
+        ...f,
+        selected: selected.get(f.key) ?? new Set<string>()
+      }))
+      .filter(({ selected }) => selected.size > 0)
+    props.onFiltersUpdated(updatedFilters)
+  }, [selected])
+
+  const title = props.selectedFilter
     ? t('common.filterByColumn', props.selectedFilter)
-    : props.headerText
+    : props.title
+
+  const filtersToRender = filters.filter((filter) =>
+    props.selectedFilter ? props.selectedFilter?.key === filter.key : true
+  )
+
+  const contextValue = useMemo<IFilterPanelContext>(
+    () => ({
+      props,
+      onFilterUpdated,
+      selected,
+      setSelected
+    }),
+    [selected]
+  )
 
   return {
-    filters,
-    onFilterUpdated,
-    headerText
-  } as const
+    filtersToRender,
+    title,
+    contextValue
+  }
 }

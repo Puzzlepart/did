@@ -1,15 +1,13 @@
-import { PartialTheme } from '@fluentui/react/lib/Theme'
-import { default as darkTheme } from './dark'
-import { default as lightTheme } from './light'
+import { darkTheme } from './darkTheme'
+import { defaultTheme } from './defaultTheme'
+import { UserTheme } from './types'
 
 /**
  * Get theme by name
  *
- * @param name - Theme name
- *
  * @returns the theme with palette
  */
-export function getTheme(name: string): PartialTheme {
+export function getTheme(name: UserTheme['name'] = 'auto'): UserTheme {
   switch (name) {
     case 'dark': {
       return darkTheme
@@ -18,7 +16,7 @@ export function getTheme(name: string): PartialTheme {
       return getAutoColorScheme()
     }
     default: {
-      return lightTheme
+      return defaultTheme
     }
   }
 }
@@ -30,12 +28,16 @@ export function getTheme(name: string): PartialTheme {
  *
  * @returns the system preferred color scheme, either darkTheme or lightTheme
  */
-function getAutoColorScheme(): PartialTheme {
-  return window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? darkTheme
-    : lightTheme
+function getAutoColorScheme(): UserTheme {
+  if (window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? getTheme('dark')
+      : getTheme('default')
+  }
+  return getTheme('default')
 }
 
-export { default as darkTheme } from './dark'
-export { default as lightTheme } from './light'
+export * from './Themed'
+export * from './darkTheme'
+export * from './defaultTheme'
+export * from './iconCatalog'

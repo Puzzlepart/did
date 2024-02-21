@@ -1,5 +1,5 @@
-.root {
-  min-height: 65px;
+.statusBar {
+  min-height: 70px;
   box-sizing: border-box;
   margin: 10px 0 10px 0;
 
@@ -49,7 +49,7 @@
   }
 }
 
-.root.mobile {
+.statusBar.mobile {
   .container {
     flex-direction: column;
 

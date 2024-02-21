@@ -13,7 +13,7 @@ export function useRouteMatches(...paths: string[]) {
   const match = useRouteMatch()
   const _paths = [...paths, ''].map((path) => `:${path}`)
   return [
-    ...paths.reverse().map((_path) => {
+    ...paths.reverse().map(() => {
       _paths.pop()
       return [match.path, ..._paths].join('/')
     }),

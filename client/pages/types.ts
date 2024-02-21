@@ -1,19 +1,25 @@
 /* eslint-disable tsdoc/syntax */
-import { FC } from 'react'
 import { PermissionScope } from 'security'
+import { StyledComponent } from 'types'
+import { FluentIconName } from 'utils'
 
 /**
  * Page component
  *
  * @category Pages
  */
-export interface PageComponent extends FC {
+export interface PageComponent extends StyledComponent {
+  /**
+   * Text that describe the page in the navigation
+   */
+  text?: string
+
   /**
    * Icon that describe the page in the navigation
    *
-   * @see https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
+   * @see https://react.fluentui.dev/?path=/docs/concepts-developer-icons-icons-catalog--page
    */
-  iconName?: string
+  iconName?: FluentIconName
 
   /**
    * Path for routing

@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
-import { useToast } from 'components'
-import { ISubmitProps } from 'components/FormControl'
+import { useAppContext } from 'AppContext'
+import { FormSubmitHook } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import s from 'underscore.string'
@@ -32,13 +31,13 @@ const isValidUrl = (urlString: string) => {
  * @param props Props from `<ReportLinksForm />`
  * @param model Model from `useReportLinksModel`
  */
-export function useReportsFormSubmit(
-  props: IReportLinksFormProps,
-  model: ReturnType<typeof useReportLinksModel>
-): ISubmitProps {
+export const useReportsFormSubmit: FormSubmitHook<
+  IReportLinksFormProps,
+  ReturnType<typeof useReportLinksModel>
+> = (props, model) => {
   const { t } = useTranslation()
   const [mutate, { loading }] = useMutation($addOrUpdateReportLink)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
+  const { displayToast } = useAppContext()
 
   /**
    * On save report link function callback.
@@ -51,28 +50,28 @@ export function useReportsFormSubmit(
           update: !!props.edit
         }
       })
-      setToast({
-        text: props.edit
+      displayToast(
+        props.edit
           ? t('admin.reportLinks.updateSuccess', model.$)
           : t('admin.reportLinks.createSuccess', model.$),
-        type: 'success'
-      })
+        'success'
+      )
       model.reset()
       props.onSave(model.$)
     } catch {
-      setToast({
-        text: props.edit
+      displayToast(
+        props.edit
           ? t('admin.reportLinks.updateError')
           : t('admin.reportLinks.createError'),
-        type: 'error'
-      })
+        'error'
+      )
     }
   }
 
   /**
    * Checks if form is valid
    */
-  const isFormValid = (): boolean =>
+  const isFormValid =
     !s.isBlank(model.value('name', '')) &&
     isValidUrl(model.value('externalUrl', '')) &&
     !s.isBlank(model.value('icon', '')) &&
@@ -80,9 +79,8 @@ export function useReportsFormSubmit(
     !s.isBlank(model.value('description', ''))
 
   return {
-    toast,
     text: t('common.save'),
     onClick: onSave,
-    disabled: !isFormValid() || loading
-  } as const
+    disabled: !isFormValid || loading
+  }
 }

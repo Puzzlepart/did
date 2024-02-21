@@ -1,12 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useLayoutEffect, useMemo } from 'react'
+import { TabItems } from 'components/Tabs'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
-import { useUpdateUserConfiguration } from '../../hooks/user/useUpdateUserConfiguration'
+import { SummaryView } from './SummaryView'
+import { WelcomeTab } from './WelcomeTab'
+import { IReportsContext } from './context'
 import {
   useReportsQueries,
   useReportsQuery,
-  useReportsQueryOptions
+  useReportsQueryPreset
 } from './hooks'
 import { useReportsReducer } from './reducer'
 
@@ -27,31 +28,32 @@ import { useReportsReducer } from './reducer'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const queries = useReportsQueries()
-  const [state, dispatch] = useReportsReducer(queries)
-  const options = useReportsQueryOptions({ queries, state, dispatch })
-  const query = useReportsQuery({ state, dispatch })
+  const { queries, queryTabs } = useReportsQueries()
+  const [state, dispatch] = useReportsReducer()
+  const queryPreset = useReportsQueryPreset(queries, state)
+  const context = useMemo<IReportsContext>(
+    () => ({ state, dispatch, queryPreset }),
+    [state, queryPreset]
+  )
 
-  useLayoutEffect(() => {
-    if (state.queryPreset && _.isEmpty(state.queryPreset?.reportLinks)) {
-      query({ variables: state.queryPreset?.variables })
-    }
-  }, [state.queryPreset?.reportLinks])
+  useReportsQuery(context)
 
-  useUpdateUserConfiguration({
-    config: {
-      'reports.filters': state.savedFilters
-    },
-    autoUpdate: !state.loading && !!state.activeFilter?.text
-  })
-
-  const context = useMemo(() => ({ state, dispatch, t }), [state])
+  /**
+   * Tabs for `<Reports />`. The `home` tab is always present,
+   * aswell as the `summary` tab. `queryTabs` are the tabs
+   * for the queries.
+   */
+  const tabs: TabItems = useMemo(
+    () => ({
+      home: [WelcomeTab, t('reports.welcomeHeaderText')],
+      ...queryTabs,
+      summary: [SummaryView, t('reports.summaryHeaderText')]
+    }),
+    [queryTabs]
+  )
 
   return {
-    defaultSelectedKey: state.queryPreset?.itemKey || 'default',
-    queries: queries.filter((q) => !q.hidden),
-    options,
-    context,
-    reportLinks: state.reportLinks
-  } as const
+    tabs,
+    context
+  }
 }

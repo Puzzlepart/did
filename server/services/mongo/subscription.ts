@@ -1,6 +1,6 @@
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import {
   Subscription,
   SubscriptionSettings
@@ -12,6 +12,7 @@ import { MongoDocumentService } from './@document'
  * Subscription service
  *
  * @extends MongoDocumentService
+ *
  * @category Injectable Container Service
  */
 @Service({ global: false })
@@ -21,7 +22,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(
       context,
       'subscriptions',
@@ -68,7 +69,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @remarks Returns null if no subscription is found.
    *
    * @param idOrMail - User ID or mail
-   * @param provider - Provider
+   * @param provider - Provider name
    */
   public async getByExternalId(idOrMail: string, provider: string) {
     try {

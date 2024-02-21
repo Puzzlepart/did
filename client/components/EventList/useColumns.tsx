@@ -1,14 +1,15 @@
-import { IColumn, Link } from '@fluentui/react'
-import { EntityLabel } from 'components/EntityLabel'
-import $date from 'DateUtils'
+/* eslint-disable unicorn/prevent-abbreviations */
+import { IListColumn } from 'components/List/types'
 import get from 'get-value'
 import React, { useMemo } from 'react'
-import { isBrowser, MobileView } from 'react-device-detect'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, TimeEntry } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import { createColumnDef } from 'utils/createColumnDef'
 import { DurationDisplay } from './DurationDisplay'
-import styles from './EventList.module.scss'
+import { TimeColumn } from './TimeColumn'
+import { TitleColumn } from './TitleColumn'
+import { ITitleColumnProps } from './TitleColumn/types'
 import { IEventListProps } from './types'
 
 /**
@@ -40,26 +41,22 @@ function getSizing(
  * @param props - Props
  * @param name - Name
  */
-const titleColumn = (props: IEventListProps, name: string): IColumn =>
-  col(
+const createTitleColumnDef = (
+  props: IEventListProps,
+  name: string
+): IListColumn => {
+  const titleColumnProps: Partial<ITitleColumnProps> = {
+    ...(isBrowser && props.titleColumn?.browser),
+    ...(isMobile && props.titleColumn?.mobile),
+    ...props
+  }
+  return createColumnDef<EventObject>(
     'title',
     name,
     { ...getSizing(props, 'title', 320, 400), isMultiline: true },
-    (event: EventObject) => (
-      <div className={styles.titleColumn}>
-        <Link href={event.webLink} target='_blank' title={event.title}>
-          <span>{event.title}</span>
-        </Link>
-        {event.labels && (
-          <div className={styles.labels}>
-            {event.labels.map((label, index) => (
-              <EntityLabel key={index} label={label} />
-            ))}
-          </div>
-        )}
-      </div>
-    )
+    (event) => <TitleColumn {...titleColumnProps} event={event} />
   )
+}
 
 /**
  * Time column
@@ -67,29 +64,15 @@ const titleColumn = (props: IEventListProps, name: string): IColumn =>
  * @param props - Props
  * @param name - Name
  */
-const timeColumn = (props: IEventListProps, name: string): IColumn =>
-  col(
+const createTimeColumnDef = (
+  props: IEventListProps,
+  name: string
+): IListColumn =>
+  createColumnDef<TimeEntry>(
     'time',
     name,
     { ...getSizing(props, 'time', 90, 90) },
-    (event: TimeEntry) => {
-      const startTime = $date.formatDate(event.startDateTime, props.dateFormat)
-      const endTime = $date.formatDate(event.endDateTime, props.dateFormat)
-      return (
-        <>
-          <span>
-            {startTime} - {endTime}
-          </span>
-          <MobileView renderWithFragment={true}>
-            <DurationDisplay
-              displayFormat='({0})'
-              event={event}
-              style={{ marginLeft: 4 }}
-            />
-          </MobileView>
-        </>
-      )
-    }
+    (event) => <TimeColumn {...props} event={event} />
   )
 
 /**
@@ -98,22 +81,33 @@ const timeColumn = (props: IEventListProps, name: string): IColumn =>
  * @param props - Props
  * @param name - Name
  */
-const durationColumn = (props: IEventListProps, name: string): IColumn =>
-  col(
+const createDurationColumnDef = (
+  props: IEventListProps,
+  name: string
+): IListColumn =>
+  createColumnDef<TimeEntry>(
     'duration',
     name,
     { ...getSizing(props, 'duration', 75, 75) },
-    (event: TimeEntry) => <DurationDisplay event={event} />
+    (event) => <DurationDisplay event={event} />
   )
 
+/**
+ * Hook that returns the columns for the `EventList` component.
+ *
+ * @param props Props for the `EventList` component
+ *
+ * @category EventList
+ */
 export function useColumns(props: IEventListProps) {
   const { t } = useTranslation()
   return useMemo(
     () =>
       [
-        titleColumn(props, t('common.titleLabel')),
-        timeColumn(props, t('common.timeLabel')),
-        isBrowser && durationColumn(props, t('common.durationLabel')),
+        createTitleColumnDef(props, t('common.titleLabel')),
+        props.useTimeColumn &&
+          createTimeColumnDef(props, t('common.timeLabel')),
+        isBrowser && createDurationColumnDef(props, t('common.durationLabel')),
         ...props.additionalColumns
       ]
         .filter((col) => !!col)
@@ -121,7 +115,6 @@ export function useColumns(props: IEventListProps) {
           ...col,
           isResizable: props.resizableColumns
         })),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [props.additionalColumns]
   )
 }

@@ -4,7 +4,7 @@ about: Use this issue type when performing a smoke test
 labels: smoke tests
 ---
 
-The following suite of tests should be performed before each release in dev https://didapp-dev.azurewebsites.net/ and after deploy to production
+The following suite of tests should be performed before each release in dev https://didapp-dev.azurewebsites.net/ and after deploy to production.
 
 You can see active smoke test issues [here](https://github.com/Puzzlepart/did/issues?q=is%3Aopen+is%3Aissue+label%3A%22smoke+tests%22).
 
@@ -111,12 +111,7 @@ You can see active smoke test issues [here](https://github.com/Puzzlepart/did/is
 - [ ] I have openend the `Bulk import` UI. Add users if possible **$4.2.1.2**
 - [ ] I have openend the `Add user` UI. Add a user if possible **$4.2.1.3**
 
-### Summary $4.2.2
-
-- [ ] I can navigate to the `Summary` section **$4.2.2.1**
-- [ ] I can see all users under the `Week` and `Month` tabs **$4.2.2.2**
-- [ ] I can see if users have confirmed their weeks and the number of hours they have confirmed **$4.2.2.3**
-- [ ] I have tried exporting the current view as excel and the content appears valid **$4.2.2.4**
+_Summary $4.2.2 removed as it's not relevant anymore._
 
 ### Labels $4.2.3
 

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/no-array-reduce */
 
 import get from 'get-value'
@@ -6,9 +7,9 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ConfirmedPeriodsService, ForecastedPeriodsService } from '..'
 import { DateObject } from '../../../shared/utils/date'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
-import { TimesheetService } from '../timesheet'
+import { TimesheetService } from '../timesheet/TimesheetService'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 
 /**
@@ -27,20 +28,20 @@ export class NotificationService {
    * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') private readonly context: Context,
+    @Inject('CONTEXT') private readonly context: RequestContext,
     private readonly _timesheetSvc: TimesheetService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
   ) {}
 
   /**
-   * Get Timesheet periods for the next {count} weeks with the given {add} value.
+   * Get Timesheet periods for the next/previous {count} weeks/months with the given {add} value.
    *
    * @param add - Add
    * @param count - Count
    * @param locale - User locale
    */
-  private _getPeriods(add: string, count: number, locale: string) {
+  private _getPeriods(add: string, count: number, locale: string): any[] {
     const periods = []
     let d = new DateObject().add(add)
     for (let index = 0; index <= count; index++) {
@@ -60,25 +61,31 @@ export class NotificationService {
   }
 
   /**
-   * Get unconfirmed periods notifications
+   * Get unconfirmed periods notifications for the previous {count} weeks. Passing
+   * -1w as {add} to `_getPeriods` will return the previous weeks.
    *
    * @param template - Notification template
-   * @param locale - Locale
+   * @param locale - Locale of the user
+   * @param weeks - Number of weeks (default: 5)
    */
-  private async _unconfirmedPeriods(template: string, locale: string) {
-    const periods = this._getPeriods('-1w', 5, locale)
+  private async _unconfirmedPeriods(
+    template: string,
+    locale: string,
+    weeks = 5
+  ) {
+    const periods = this._getPeriods('-1w', weeks, locale)
 
     const confirmedPeriods = await this._cperiodSvc.find({
       userId: this.context.userId
     })
 
-    const nperiods: any[] = periods.reduce(($, period) => {
+    const nperiods: any[] = periods.reduce((arr, period) => {
       const isConfirmed = _.any(
         confirmedPeriods,
         ({ _id }) => _id === period._id
       )
-      if (!isConfirmed) $.push(period)
-      return $
+      if (!isConfirmed) arr.push(period)
+      return arr
     }, [])
 
     return nperiods.map(
@@ -111,13 +118,13 @@ export class NotificationService {
       userId: this.context.userId
     })
 
-    const nperiods: any[] = periods.reduce(($, period) => {
+    const nperiods: any[] = periods.reduce((arr, period) => {
       const isForecasted = _.any(
         forecastedPeriods,
         ({ _id }) => _id === period._id
       )
-      if (!isForecasted) $.push(period)
-      return $
+      if (!isForecasted) arr.push(period)
+      return arr
     }, [])
 
     return nperiods.map((period) => new ForecastNotification(period, template))

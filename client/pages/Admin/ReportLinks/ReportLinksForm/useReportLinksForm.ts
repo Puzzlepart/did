@@ -1,4 +1,7 @@
-import { useFormControls } from 'components/FormControl'
+import { IFormControlProps, useFormControls } from 'components/FormControl'
+import { useTranslation } from 'react-i18next'
+import { ReportLink } from 'types'
+import _ from 'underscore'
 import { IReportLinksFormProps } from './types'
 import { useReportLinksModel } from './useReportLinksModel'
 import { useReportsFormSubmit } from './useReportsFormSubmit'
@@ -7,15 +10,22 @@ import { useReportsFormSubmit } from './useReportsFormSubmit'
  * Component logic hook for `<ReportLinksForm />`.
  *
  * @param props Props from `<ReportLinksForm />`
- * @returns
  */
 export function useReportLinksForm(props: IReportLinksFormProps) {
+  const { t } = useTranslation()
   const model = useReportLinksModel(props)
-  const register = useFormControls(model)
-  const submit = useReportsFormSubmit(props, model)
+  const register = useFormControls<keyof ReportLink>(model)
+  const submitProps = useReportsFormSubmit(props, model)
+  const panelProps: IFormControlProps['panel'] = {
+    ..._.omit(props, 'onSave'),
+    title: props.edit
+      ? t('admin.reportLinks.editReportLinkText')
+      : t('admin.reportLinks.addNewReportText')
+  }
   return {
     model,
     register,
-    submit
-  } as const
+    submitProps,
+    panelProps
+  }
 }

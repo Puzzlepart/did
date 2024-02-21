@@ -1,0 +1,52 @@
+.chartTooltip {
+    padding: 10px;
+    background-color: var(--colorNeutralBackground2);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 240px;
+    box-sizing: border-box;
+
+    &.lineClamp {
+        .secondaryText, .teritaryText {
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+        }
+        .secondaryText {
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+        }
+        .teritaryText {
+            -webkit-line-clamp: 4; 
+            line-clamp: 4;
+        }
+    }
+
+    .name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--colorNeutralForeground2);
+    }
+
+    .secondaryText >p, .teritaryText >p {
+        margin: 0;
+    }
+
+    .secondaryText {
+        padding: 0;
+        color: var(--colorSecondaryForeground1);
+        font-size: 11px;
+    }
+
+    .teritaryText {
+        padding: 0;
+        color: var(--colorNeutralForeground3);
+        font-size: 12px;
+    }
+
+    .footer {
+        margin-top: 10px;
+    }
+}

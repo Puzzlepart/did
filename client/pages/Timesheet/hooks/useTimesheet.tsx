@@ -1,13 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
+import { ITimesheetContext } from '../context'
 import { useTimesheetReducer } from '../reducer'
-import { ITimesheetContext } from '../types'
 import { useSubmitActions } from './useSubmitActions'
 import { useTimesheetHistory } from './useTimesheetHistory'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
 /**
- * Hook for Timesheet
+ * Component logic for Timesheet. Returns a context object
+ * that can be passed down to child components from
+ * `Timesheet` component.
  *
  * * Reacts to state changes and updates history
  * using `useTimesheetHistory`
@@ -25,35 +26,19 @@ export function useTimesheet() {
 
   useTimesheetHistory(state)
 
-  const { onSubmitPeriod, onUnsubmitPeriod } = useSubmitActions({
+  const submitActions = useSubmitActions({
     state,
     dispatch,
     refetch
   })
 
-  const context = useMemo<ITimesheetContext>(
+  return useMemo<ITimesheetContext>(
     () => ({
+      ...submitActions,
       state,
       refetch,
-      onSubmitPeriod,
-      onUnsubmitPeriod,
       dispatch
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state]
   )
-
-  const headerButtonProps = {
-    disabled: !!state.error || !!state.loading,
-    style: state.loading ? { opacity: 0.4 } : {}
-  }
-
-  return {
-    state,
-    dispatch,
-    context,
-    onSubmitPeriod,
-    onUnsubmitPeriod,
-    headerButtonProps
-  }
 }

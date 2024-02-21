@@ -1,7 +1,9 @@
 query ApiTokens {
     tokens: apiTokens {
       name
+      description
       created
       expires
+      secret: apiKey
     }
   }

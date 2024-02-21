@@ -2,37 +2,29 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
-const {
-  MODE,
-  IS_DEVELOPMENT,
-  PUBLIC_JS_PATH,
-  BUNDLE_FILE_NAME,
-  SRC_PATH,
-  TSCONFIG_COMPILER_OPTIONS,
-  TSCONFIG_PATH,
-} = require('./constants')
+const constants = require('./constants')
 const { getResolves } = require('./getResolves')
 const { getPluginsForEnvironment } = require('./getPluginsForEnvironment')
 const { getOptimizationForEnvironment } = require('./getOptimizationForEnvironment')
 const { getRules } = require('./getRules')
 
 const config = {
-  mode: MODE,
-  entry: SRC_PATH,
+  mode: constants.get('MODE'),
+  entry: constants.get('SRC_PATH'),
   output: {
-    path: PUBLIC_JS_PATH,
-    filename: BUNDLE_FILE_NAME,
+    path: constants.get('PUBLIC_JS_PATH'),
+    filename: constants.get('BUNDLE_FILE_NAME'),
     publicPath: '/js',
     hashFunction: 'xxhash64'
   },
-  optimization: getOptimizationForEnvironment(IS_DEVELOPMENT),
+  optimization: getOptimizationForEnvironment(constants.get('IS_DEVELOPMENT')),
   module: {
     rules: getRules(
-      TSCONFIG_PATH,
-      IS_DEVELOPMENT
+      constants.get('TSCONFIG_PATH'), 
+      constants.get('IS_DEVELOPMENT')
     )
   },
-  resolve: getResolves(TSCONFIG_COMPILER_OPTIONS),
+  resolve: getResolves(constants.get('TSCONFIG_COMPILER_OPTIONS')),
   plugins: getPluginsForEnvironment(),
   stats: {
     warnings: false,

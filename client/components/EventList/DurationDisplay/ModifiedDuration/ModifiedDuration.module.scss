@@ -1,25 +1,39 @@
-.root {
-  padding: 20px;
+.modifiedDuration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
 
-  .content {
+  .icon {
     font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .icon {
-      margin: 0 14px 0 0;
-      font-size: 22px;
-      color: rgb(16, 124, 16);
-    }
   }
 }
 
-.host {
-  cursor: help;
-  .icon {
-    margin: 0 0 0 6px;
-    font-size: 10px;
-    color: rgb(16, 124, 16);
+.content {
+  padding: 12px;
+  box-sizing: border-box;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 10px 0;
+
+    .icon {
+      padding: 0 6px 0 0;
+      font-size: 28px;
+    }
+
+    .title {
+      font-size: 18px;
+      line-height: 1.2em;
+    }
   }
+  .body {
+    display: inherit;
+  }
+}
+
+.icon {
+  color: #107c10;
 }

@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.12.0-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.13.0-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -19,6 +19,7 @@
 ## ➤ Table of Contents
 
 * [➤ Roadmap](#-roadmap)
+* [➤ Backlog](#-backlog)
 * [➤ Environments](#-environments)
 * [➤ Contributing](#-contributing)
 	* [Getting started](#getting-started)
@@ -27,12 +28,10 @@
 	* [Node version](#node-version)
 	* [Authentication](#authentication)
 		* [Google](#google)
-	* [Commiting to the repository](#commiting-to-the-repository)
-		* [Commitlint](#commitlint)
-		* [commit-changes.js](#commit-changesjs)
 	* [Branching / Deploying](#branching--deploying)
 		* [Main branch](#main-branch)
 		* [Dev branch](#dev-branch)
+	* [Feature branches](#feature-branches)
 		* [Naming conventions](#naming-conventions)
 		* [See also](#see-also)
 	* [GraphQL](#graphql)
@@ -60,16 +59,25 @@
 | [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-red.svg)](https://semver.org) |
 | [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
 | [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | Q4 2023      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
+| [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | Q1/Q2 2024      | [![version](https://img.shields.io/badge/version-0.14.0-red.svg)](https://semver.org) |
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#backlog)
+
+## ➤ Backlog
+
+Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#environments)
 
 ## ➤ Environments
 
-| Environment | URL                                                          | Branch   | CI                                                           | Status                                                       |
-| ----------- | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Production  | [https://did.puzzlepart.com/](https://did.puzzlepart.com)    | **main** | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | ![Build and deploy to didapp](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/badge.svg?branch=main) |
-| Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | **dev**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | ![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/dev/badge.svg?branch=dev) |
+| Environment | Branch/Tag   | CI | Status |
+| ----------- | ------------------------------------------------------------  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Production](https://did.puzzlepart.com)     | **main** | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | ![Build and deploy to didapp](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/badge.svg?branch=main) |
+| [Development (new features)](https://didapp-dev.azurewebsites.net) | **dev** and  **feat/**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | [![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml/badge.svg?branch=dev)](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml) |
+| [Staging (pre-prod)](https://didapp-staging.azurewebsites.net) | Release tags | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/staging/vstscd) | [![Build and deploy to didapp/staging](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml) |
 
 
 
@@ -120,8 +128,7 @@ Now you need to set the required environment variables from this table:
 | `REDIS_CACHE_HOSTNAME` | Hostname for the [Redis cache]([Redis](https://redis.io/)) | **Yes** |
 | `REDIS_CACHE_KEY` | Secret key for the [Redis cache]([Redis](https://redis.io/)) | **Yes** |
 | `APOLLO_KEY` | Key for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | **Yes**  |
-| `APOLLO_GRAPH_VARIANT` | Graph variant for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | **Yes**  |
-| `APOLLO_SCHEMA_REPORTING` | Report schema to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | No       |
+| `APOLLO_GRAPH_VARIANT` | Graph variant for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs). See [this article](https://www.apollographql.com/docs/apollo-server/monitoring/metrics/) | **Yes**  |
 | `MONGO_DB_CONNECTION_STRING` | Connection string for MongoDB                                | **Yes**  |
 | `MONGO_DB_DB_NAME` | Database name for MongoDB                                    | **Yes**  |
 | `API_TOKEN_SECRET` | Secret to generate API tokens                                | **Yes**  |
@@ -161,7 +168,9 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: Did should be developed with node >=14.18.1**
+**NB: Did should be developed with node 18.12.0**
+
+_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.12.0._
 
 ### Authentication
 
@@ -176,27 +185,6 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 #### Google
 See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) for more details on using Did with Google.
 
-### Commiting to the repository
-#### Commitlint
-We are using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
-
-You _can_ (but shouldn't) bypass the `commit-msg` hooks using the git `--no-verify` option:
-
-```shell
-git commit -m "yolo!" --no-verify
-```
-
-For Git commands that don't have a `--no-verify` option, you can use `HUSKY` environment variable:
-
-```shell
-HUSKY=0 git push # yolo!
-```
-
-See `commitlint` in [package.json](./package.json). The commit message needs to be lowercase and have a prefix.
-
-#### commit-changes.js
-We also have the node script `.tasks/commit-changes.js` that can be used. This script/task prompts you for the prefix and commit message, then commits your changes. It can also push the changes right away.
-
 ### Branching / Deploying
 
 #### Main branch
@@ -204,14 +192,16 @@ We also have the node script `.tasks/commit-changes.js` that can be used. This s
 The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did.puzzlepart.com](https://did.puzzlepart.com)  
 
 #### Dev branch
-The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net)  
-`/feature/*`-prefixed branches may or may not be included in future releases.
+The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
+
+### Feature branches
+For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) is set up for branches matching the pattern `feat/*` and `dev`.
 
 #### Naming conventions
 You are encouraged to branch with either of the following prefixes  
 *  **hotfix/**
 *  **bugfix/**
-*  **feature/** or **feat/**
+*  **feat/**
 
 #### See also
 See also [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)

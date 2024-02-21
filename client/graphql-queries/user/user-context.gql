@@ -1,0 +1,54 @@
+query UserContext {
+  subscription {
+    id
+    name
+    owner
+    settings {
+      brand {
+        navBackground
+        logoSrc
+      }
+      forecast {
+        enabled
+        notifications
+      }
+      adsync {
+        enabled
+        properties
+        syncUserPhoto
+      }
+      vacation {
+        totalDays
+        eventCategory
+      }
+      teams {
+        enabled
+        missingSubmissionsEnabled
+        missingSubmissionsSinglePeriodText
+        missingSubmissionsMultiplePeriodsText
+      }
+      timesheet {
+        dayFormat
+        timeFormat
+      }
+    }
+  }
+  user: currentUser {
+    id
+    mail
+    displayName
+    role {
+      name
+      icon
+      permissions
+    }
+    startPage
+    lastActive
+    preferredLanguage
+    configuration
+    photo {
+      base64
+    }
+  }
+  authProviders
+}

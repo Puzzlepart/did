@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useQuery } from '@apollo/client'
 import { useMemo } from 'react'
 import { Customer } from 'types'
 import $customers from '../../pages/Customers/customers.gql'
-import { ISuggestionItem } from '../Autocomplete'
+import { ISuggestionItem } from '../FormControl/AutocompleteControl'
 
 /**
  * Component logic hook for `<SearchCustomer />`
@@ -20,7 +19,7 @@ export function useSearchCustomer() {
             searchValue: [customer.key, customer.name].join(' '),
             data: customer,
             iconName: customer.icon || 'Page'
-          } as ISuggestionItem<Customer>)
+          }) as ISuggestionItem<Customer>
       ),
     [data]
   )

@@ -1,6 +1,5 @@
-import { ISpinnerProps } from '@fluentui/react'
 import { ActiveDirectoryUser, Role, User } from 'types'
-import { IAddMultiplePanelProps } from './AddMultiplePanel/types'
+import { IBulkImportPanelProps } from './BulkImportPanel/types'
 import { IUserFormProps } from './UserForm/types'
 
 export interface IUsersState {
@@ -32,6 +31,11 @@ export interface IUsersState {
   availableAdUsers: ActiveDirectoryUser[]
 
   /**
+   * Users selected in the list
+   */
+  selectedUsers: User[]
+
+  /**
    * All roles
    */
   roles: Role[]
@@ -42,12 +46,12 @@ export interface IUsersState {
   userForm?: IUserFormProps
 
   /**
-   * Properties for `AddMultiplePanel`
+   * Properties for `BulkImportPanel`
    */
-  addMultiplePanel?: IAddMultiplePanelProps
+  bulkImportPanel?: IBulkImportPanelProps
 
   /**
-   * Properties for `Spinner`
+   * Text for the Progress bar
    */
-  progress?: ISpinnerProps
+  progress?: string
 }

@@ -1,29 +1,8 @@
-import { IFilter, IFilterItem } from '../Filters'
+import { IFilter } from '../Filters'
 
 export interface IFilterItemProps {
   /**
-   * Filter
+   * Filter to render items for
    */
   filter: IFilter
-
-  /**
-   * On filter updated
-   */
-  onFilterUpdated: (
-    filter: IFilter,
-    item: IFilterItem,
-    checked: boolean
-  ) => void
-
-  /**
-   * Number of items to show by default (can show all with Show all link)
-   *
-   * @default 10
-   */
-  shortListCount: number
-
-  /**
-   * Hide the filter item header
-   */
-  hideHeader?: boolean
 }

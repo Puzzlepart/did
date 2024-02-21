@@ -1,26 +1,26 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { DateRangeType, IColumn, useTheme } from '@fluentui/react'
-import { ProjectTooltip } from 'components'
+import { DateRangeType, useTheme } from '@fluentui/react'
+import { IListColumn, ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
 import { useTimesheetContext } from '../../context'
 import { CHANGE_PERIOD, CHANGE_VIEW } from '../../reducer/actions'
-import { TimesheetView } from '../../types'
+import { Overview } from '../Overview'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 
 /**
  * Columns hook for `<SummaryView />`
  */
-export function useColumns(): IColumn[] {
+export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
   const theme = useTheme()
   const { state, dispatch } = useTimesheetContext()
-  const onRender = (row: any, _index: number, col: IColumn) => (
+  const onRender = (row: any, _index: number, col: IListColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  let columns: IColumn[] = []
+  let columns: IListColumn[] = []
   switch (state.dateRangeType) {
     case DateRangeType.Week: {
       {
@@ -57,7 +57,7 @@ export function useColumns(): IColumn[] {
     }
     case DateRangeType.Month: {
       {
-        columns = state.periods.map<IColumn>((period) => ({
+        columns = state.periods.map<IListColumn>((period) => ({
           key: period.id,
           fieldName: period.id,
           name: period.getName(t),
@@ -66,7 +66,7 @@ export function useColumns(): IColumn[] {
           onRender,
           styles: { root: { cursor: 'pointer' } },
           onColumnClick: () => {
-            dispatch(CHANGE_VIEW({ view: TimesheetView.Overview }))
+            dispatch(CHANGE_VIEW({ view: Overview }))
             dispatch(CHANGE_PERIOD({ id: period.id }))
           }
         }))
@@ -85,10 +85,12 @@ export function useColumns(): IColumn[] {
       isResizable: true,
       onRender: (row: ILabelColumnProps) => {
         if (row.project) {
-          return (
-            <ProjectTooltip project={row.project}>
+          return row.project.tag ? (
+            <ProjectPopover project={row.project}>
               <LabelColumn {...row} />
-            </ProjectTooltip>
+            </ProjectPopover>
+          ) : (
+            <LabelColumn {...row} />
           )
         }
         return <LabelColumn {...row} />
@@ -104,6 +106,6 @@ export function useColumns(): IColumn[] {
       isResizable: false,
       data: { style: { fontWeight: 500 } },
       onRender
-    }
+    } as IListColumn
   ]
 }

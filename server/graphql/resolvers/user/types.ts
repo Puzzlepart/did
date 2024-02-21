@@ -2,7 +2,7 @@
 import { GraphQLDateTime } from 'graphql-scalars'
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { Subscription } from '../subscription/types'
+import { Subscription } from '../subscription/types/Subscription'
 import { BaseResult, Role } from '../types'
 
 /**
@@ -122,11 +122,6 @@ export class User {
 
   @Field({ nullable: true })
   accountEnabled?: boolean
-
-  public create?(user: User): User {
-    Object.assign(this, user)
-    return this
-  }
 }
 
 /**
@@ -178,6 +173,7 @@ export class UserInput {
   @Field({ nullable: true })
   accountEnabled?: boolean
 }
+
 /**
  * @category GraphQL InputType
  */
@@ -216,11 +212,20 @@ export class UserFeedback {
   @Field({ nullable: true })
   mood?: string
 
-  @Field(() => [String], { nullable: true })
-  labels?: string[]
+  @Field({ nullable: true })
+  label?: string
 
   @Field(() => UserFeedbackReporter, { nullable: true })
   reporter?: UserFeedbackReporter
+
+  @Field({ nullable: true })
+  anonymous?: boolean
+
+  @Field({ nullable: true })
+  hasGitHubUser?: boolean
+
+  @Field({ nullable: true })
+  gitHubUsername?: string
 }
 
 /**

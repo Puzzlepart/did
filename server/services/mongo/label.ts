@@ -6,7 +6,7 @@ import {
 } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
@@ -14,6 +14,7 @@ import { MongoDocumentService } from './@document'
  * Label service
  *
  * @extends MongoDocumentService
+ *
  * @category Injectable Container Service
  */
 @Service({ global: false })
@@ -23,12 +24,12 @@ export class LabelService extends MongoDocumentService<Label> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
-    super(context, 'labels')
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
+    super(context, 'labels', LabelService.name)
   }
 
   /**
-   * Generate id for a label
+   * Generate an ID for a label
    *
    * @param label - Label
    */
@@ -37,21 +38,26 @@ export class LabelService extends MongoDocumentService<Label> {
   }
 
   /**
-   * Get labels
+   * Get labels from cache or database.
    *
    * @param query - Query
    */
-  public async getLabels(query?: FilterQuery<Label>): Promise<Label[]> {
+  public getLabels(query?: FilterQuery<Label>): Promise<Label[]> {
     try {
-      const labels = await this.find(query)
-      return labels
+      return this.cache.usingCache<Label[]>(
+        async () => {
+          const labels = await this.find(query)
+          return labels
+        },
+        { key: 'labels' }
+      )
     } catch (error) {
       throw error
     }
   }
 
   /**
-   * Add label
+   * Add label, then clear the cache key `labels`.
    *
    * @param label - Label
    */
@@ -63,6 +69,7 @@ export class LabelService extends MongoDocumentService<Label> {
         _id: this._generateId(label),
         ...label
       })
+      await this.cache.clear('labels')
       return result
     } catch (error) {
       throw error
@@ -70,12 +77,13 @@ export class LabelService extends MongoDocumentService<Label> {
   }
 
   /**
-   * Update label
+   * Update label, then clear the cache key `labels`.
    *
    * @param label - Label
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
+      await this.cache.clear('labels')
       await this.update(_.pick(label, 'name'), label)
     } catch (error) {
       throw error
@@ -83,12 +91,13 @@ export class LabelService extends MongoDocumentService<Label> {
   }
 
   /**
-   * Delete label by name
+   * Delete label by name, then clear the cache key `labels`.
    *
    * @param name - Name
    */
   public async deleteLabel(name: string): Promise<DeleteWriteOpResultObject> {
     try {
+      await this.cache.clear('labels')
       const result = await this.collection.deleteOne({ name })
       return result
     } catch (error) {

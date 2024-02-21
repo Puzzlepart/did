@@ -1,4 +1,4 @@
-.root {
+.overview {
     .container {
         width: auto;
     }
@@ -22,7 +22,7 @@
             align-items: unset !important;
             align-self: unset !important;
             min-height: auto !important;
-            width: auto !important;
+            width: 100% !important;
         }
 
         [class*="ms-FocusZone"],

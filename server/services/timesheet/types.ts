@@ -3,7 +3,7 @@ import {
   Project,
   TimesheetPeriodInput
 } from '../../graphql/resolvers/types'
-import MatchingEngine from './matchingEngine'
+import MatchingEngine from './TimesheetMatchingEngine'
 
 export type ProjectMatch = { id: string; key: string; customerKey: string }
 

@@ -17,7 +17,6 @@
     "types": [
       "express",
       "node",
-      "express-bearer-token",
       "express-session",
       "passport-azure-ad",
       "debug",

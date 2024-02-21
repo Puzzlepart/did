@@ -2,7 +2,7 @@
 
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
 import _ from 'underscore'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { CacheService } from '../cache'
 
 export class MongoDocumentService<T> {
@@ -20,7 +20,7 @@ export class MongoDocumentService<T> {
    * @param database - Database
    */
   constructor(
-    public readonly context: Context,
+    public readonly context: RequestContext,
     public collectionName: string,
     public cachePrefix?: string,
     database?: Db
@@ -65,7 +65,7 @@ export class MongoDocumentService<T> {
    * @param query - Filter query
    * @param sort - Sort options
    */
-  public find<S = any>(query: FilterQuery<T>, sort?: S) {
+  public find<S = any>(query: FilterQuery<T>, sort?: S): Promise<T[]> {
     return this.collection.find(this._extendQuery(query), { sort }).toArray()
   }
 

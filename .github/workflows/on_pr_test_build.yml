@@ -13,25 +13,31 @@ jobs:
   test_build:
     name: Test build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.12.0]
+    concurrency: 
+      group: ${{ github.ref }}_on_pr_test_build
+      cancel-in-progress: true
+    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     steps:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js (${{ vars.NODE_VERSION }})
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ vars.NODE_VERSION }}
 
-      - run: |
-         npm ci --no-audit --no-fund --loglevel=error
+      - name: Install dependencies
+        run: |
+         npm ci --no-audit --no-fund --loglevel=error --include=dev
 
       - name: Ava tests
         run: |
           npm test
+
+      - name: ESLint
+        run: |
+          npm run lint
 
       - name: Package client
         run: |

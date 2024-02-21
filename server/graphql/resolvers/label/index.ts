@@ -42,7 +42,7 @@ export class LabelResolver {
    * @param label - Label
    * @param update - Update
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, { description: 'Add or update label' })
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,
@@ -58,7 +58,7 @@ export class LabelResolver {
    *
    * @param name - Name
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string): Promise<BaseResult> {
     await this._label.deleteLabel(name)

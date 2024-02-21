@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DateRangeType } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
 import { useLayoutEffect } from 'react'
@@ -6,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import s from 'underscore.string'
 import { UPDATE_BREADCRUMB } from '../../../app/reducer'
-import { ITimesheetState } from '../types'
+import { ITimesheetState } from '../types/ITimesheetState'
 
 /**
  * Convert enum value for `DateRangeType` to string
@@ -33,17 +32,19 @@ function convertDateRangeTypeToString(dateRangeType: DateRangeType) {
 export function useTimesheetHistory(state: ITimesheetState) {
   const { t } = useTranslation()
   const history = useHistory()
-  const { dispatch } = useAppContext()
+  const appContext = useAppContext()
 
   /**
-   * Dispatches action `UPDATE_BREADCRUMB`
+   * Dispatches action `UPDATE_BREADCRUMB` to App reducer.
    */
   const onUpdateBreadcrumb = (text: string, level: number) =>
-    dispatch(
+    appContext.dispatch(
       UPDATE_BREADCRUMB({
-        key: text,
-        text,
-        level
+        item: {
+          key: text,
+          text,
+          level
+        }
       })
     )
 
@@ -52,7 +53,7 @@ export function useTimesheetHistory(state: ITimesheetState) {
     const location = [
       '/timesheet',
       convertDateRangeTypeToString(state.dateRangeType),
-      state.selectedView,
+      state.selectedView.id,
       state.selectedPeriod.startDate
     ].join('/')
     history.push(location)

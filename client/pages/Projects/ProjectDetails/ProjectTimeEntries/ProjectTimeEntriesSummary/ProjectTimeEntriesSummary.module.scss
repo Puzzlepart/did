@@ -1,0 +1,45 @@
+.projectTimeEntriesSummary {
+  margin: 15px 10px;
+  padding: 0 0 0 0;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .item {
+      width: 240px;
+      height: 100px;
+      padding: 15px 0 15px 15px;
+      box-sizing: border-box;
+      box-shadow: var(--shadow8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      .value {
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: 2px;
+
+        &.shimmer {
+          width: 120px;
+          height: 25px;
+        }
+      }
+
+      .label {
+        text-align: center;
+        color: #8b949e;
+        font-size: 13px;
+        letter-spacing: 2px;
+        &.shimmer {
+          width: 120px;
+          height: 25px;
+        }
+      }
+    }
+  }
+}

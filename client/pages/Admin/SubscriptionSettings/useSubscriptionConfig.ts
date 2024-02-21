@@ -1,22 +1,27 @@
+import { CheckboxProps, SliderProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
+import { DateObject } from 'DateUtils'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'
 import { SubscriptionSettingField } from './types'
+import { useTheme } from '@fluentui/react'
 
 /**
- * Subscription config hook
+ * Component logic for `SubscriptionSettings` component. Handles the
+ * configuration of the subscription settings sections and input fields.
  *
- * @ignore
+ * @category SubscriptionSettings
  */
 export function useSubscriptionConfig() {
   const { subscription } = useAppContext()
+  const theme = useTheme()
   const { t } = useTranslation()
   return [
     {
-      itemKey: 'info',
-      headerText: t('admin.subscriptionInfoHeader'),
-      itemIcon: 'Info2',
+      id: 'info',
+      text: t('admin.subscriptionInfoHeader'),
+      icon: 'Info',
       fields: [
         {
           id: 'name',
@@ -39,9 +44,62 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'adsync',
-      itemIcon: 'UserSync',
-      headerText: t('admin.adsync'),
+      id: 'brand',
+      text: t('admin.subscriptionBrandHeader'),
+      icon: 'Color',
+      fields: [
+        {
+          id: 'navBackground',
+          type: 'text',
+          props: {
+            label: t('admin.subscriptionSettings.navBackgroundLabel'),
+            description: t(
+              'admin.subscriptionSettings.navBackgroundDescription'
+            ),
+            defaultValue: theme?.semanticColors?.menuHeader
+          }
+        },
+        {
+          id: 'logoSrc',
+          type: 'image',
+          props: {
+            label: t('admin.subscriptionSettings.companyLogoLabel'),
+            description: t('admin.subscriptionSettings.companyLogoDescription')
+          }
+        } as SubscriptionSettingField
+      ]
+    },
+    {
+      id: 'timesheet',
+      icon: 'Timeline',
+      text: t('admin.timesheet'),
+      fields: [
+        {
+          id: 'dayFormat',
+          type: 'text',
+          props: {
+            label: t('admin.timesheetDayFormatLabel'),
+            description: t('admin.timesheetDayFormatDescription'),
+            defaultValue: 'dddd DD',
+            getContentAfter: (value: string) => new DateObject().format(value)
+          }
+        },
+        {
+          id: 'timeFormat',
+          type: 'text',
+          props: {
+            label: t('admin.timesheetTimeFormatLabel'),
+            description: t('admin.timesheetTimeFormatDescription'),
+            defaultValue: 'HH:mm',
+            getContentAfter: (value: string) => new DateObject().format(value)
+          }
+        }
+      ]
+    },
+    {
+      id: 'adsync',
+      icon: 'PersonSync',
+      text: t('admin.adsync'),
       fields: [
         {
           id: 'enabled',
@@ -50,10 +108,10 @@ export function useSubscriptionConfig() {
             label: t('admin.adUserSyncEnabledLabel'),
             description: t('admin.adUserSyncEnabledDescription')
           }
-        } as SubscriptionSettingField,
+        } as SubscriptionSettingField<CheckboxProps>,
         {
           id: 'properties',
-          type: 'checkbox',
+          type: 'checkboxmulti',
           options: {
             givenName: t('common.givenNameLabel'),
             surname: t('common.surnameLabel'),
@@ -80,13 +138,13 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.adsync?.enabled
-        } as SubscriptionSettingField
+        } as SubscriptionSettingField<CheckboxProps>
       ]
     },
     {
-      itemKey: 'forecast',
-      itemIcon: 'BufferTimeBefore',
-      headerText: t('admin.forecasting'),
+      id: 'forecast',
+      icon: 'Timeline',
+      text: t('admin.forecasting'),
       fields: [
         {
           id: 'enabled',
@@ -109,13 +167,13 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.forecast?.enabled
-        } as SubscriptionSettingField
+        } as SubscriptionSettingField<SliderProps>
       ]
     },
     {
-      itemKey: 'vacation',
-      headerText: t('admin.vacation'),
-      itemIcon: 'Vacation',
+      id: 'vacation',
+      text: t('admin.vacation'),
+      icon: 'WeatherSunnyLow',
       fields: [
         {
           id: 'totalDays',
@@ -139,9 +197,9 @@ export function useSubscriptionConfig() {
       ]
     },
     {
-      itemKey: 'teams',
-      headerText: t('admin.teams'),
-      itemIcon: 'TeamsLogo',
+      id: 'teams',
+      text: t('admin.teams'),
+      icon: 'PeopleTeam',
       fields: [
         {
           id: 'enabled',
@@ -149,6 +207,44 @@ export function useSubscriptionConfig() {
           props: {
             label: t('admin.teamsEnabledLabel'),
             description: t('admin.teamsEnabledDescription')
+          }
+        },
+        {
+          id: 'missingSubmissionsEnabled',
+          type: 'bool',
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.teams?.enabled,
+          props: {
+            label: t('admin.teamsMissingSubmissionsEnabledLabel'),
+            description: t('admin.teamsMissingSubmissionsEnabledDescription')
+          }
+        },
+        {
+          id: 'missingSubmissionsSinglePeriodText',
+          type: 'text',
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.teams?.missingSubmissionsEnabled ||
+            !settings?.teams?.enabled,
+          props: {
+            label: t('admin.teamsMissingSubmissionsSinglePeriodText'),
+            description: t(
+              'admin.teamsMissingSubmissionsSinglePeriodTextDescription'
+            ),
+            rows: 2
+          }
+        },
+        {
+          id: 'missingSubmissionsMultiplePeriodsText',
+          type: 'text',
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.teams?.missingSubmissionsEnabled ||
+            !settings?.teams?.enabled,
+          props: {
+            label: t('admin.teamsMissingSubmissionsMultiplePeriodsText'),
+            description: t(
+              'admin.teamsMissingSubmissionsMultiplePeriodsTextDescription'
+            ),
+            rows: 2
           }
         }
       ]

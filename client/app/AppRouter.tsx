@@ -3,13 +3,16 @@
  *
  * @module App
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { StyledComponent } from 'types'
 import { ErrorFallback, Navigation } from '../parts'
 import styles from './App.module.scss'
 import { AppSwitch } from './AppSwitch'
 import { useAppClassName } from './useAppClassName'
+import { Toast } from 'components/Toast'
+import { useAppContext } from 'AppContext'
 
 /**
  * App router that uses `<Switch />` from
@@ -22,8 +25,9 @@ import { useAppClassName } from './useAppClassName'
  *
  * @category App
  */
-export const AppRouter: FC = () => {
-  const className = useAppClassName(styles)
+export const AppRouter: StyledComponent = () => {
+  const className = useAppClassName(AppRouter, styles)
+  const context = useAppContext()
   return (
     <Router>
       <div className={className}>
@@ -31,7 +35,10 @@ export const AppRouter: FC = () => {
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <AppSwitch />
         </ErrorBoundary>
+        <Toast {...context.state.toast} />
       </div>
     </Router>
   )
 }
+
+AppRouter.className = styles.app

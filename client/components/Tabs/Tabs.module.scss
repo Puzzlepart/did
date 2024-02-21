@@ -1,0 +1,52 @@
+.tabs {
+  margin: 0 0 8px 0;
+
+  .list {
+    padding: 0 0 12px 0;
+  }
+
+  &.vertical {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+
+    .list {
+      margin: 0;
+    }
+
+    .container {
+      flex: 1;
+    }
+  }
+
+  &.experimental {
+    [class*="fui-Tab"] {
+      &:not(:first-of-type) {
+        border-left: 1px solid rgb(234, 234, 234);
+      }
+      [class*="fui-Tab__content"] {
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: 2px;
+        text-shadow: var(--shadow8);
+        text-transform: uppercase;
+      }
+    }
+
+    &.compactHeaders {
+      margin-top: -10px;
+
+      [class*="fui-Tab"] {
+        [class*="fui-Tab__content"] {
+          font-size: 8px;
+        }
+
+        svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}

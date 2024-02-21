@@ -1,11 +1,35 @@
-import { IIconProps } from '@fluentui/react'
-import { HTMLAttributes } from 'react'
+import { ButtonProps } from '@fluentui/react-components'
+import { CSSProperties } from 'react'
 
-export interface IMenuItemProps extends HTMLAttributes<HTMLDivElement> {
-  iconProps?: IIconProps
+export interface IMenuItemProps
+  extends Pick<ButtonProps, 'onClick' | 'icon' | 'title'> {
+  /**
+   * Menu item text
+   */
   text?: string
+
+  /**
+   * Hide the text
+   */
   hideText?: boolean
+
+  /**
+   * Menu item link href
+   */
   href?: string
-  iconClassName?: string
-  textStyle?: React.CSSProperties
+
+  /**
+   * Menu item text style
+   */
+  textStyle?: CSSProperties
+
+  /**
+   * Menu item style
+   */
+  style?: CSSProperties
+
+  /**
+   * Additional class name
+   */
+  className?: string
 }

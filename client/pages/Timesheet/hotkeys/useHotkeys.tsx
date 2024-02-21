@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ITimesheetContext } from '../types'
+import { ITimesheetContext } from '../context'
 import { getHotkeys } from './config'
 
 /**

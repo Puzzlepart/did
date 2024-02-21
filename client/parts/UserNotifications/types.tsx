@@ -1,7 +1,8 @@
-import { IIconProps } from '@fluentui/react'
-import { IUserMessageProps, UserMessageType } from 'components/UserMessage'
+import { MessageBarProps } from '@fluentui/react-components'
+import { AlertProps } from '@fluentui/react-components/dist/unstable'
 import { TFunction } from 'i18next'
 import { Notification } from 'types'
+import { getFluentIcon as icon } from 'utils/getFluentIcon'
 
 export class NotificationModel {
   public id: string
@@ -9,6 +10,7 @@ export class NotificationModel {
   public severity: string
   public text: string
   public moreLink: string
+  public iconName?: string
 
   /**
    * Constructs a new instance of UserNotificationMessageModel
@@ -21,9 +23,15 @@ export class NotificationModel {
     this.severity = notification.severity
     this.text = notification.text
     this.moreLink = notification.moreLink
+    this.iconName = notification.iconName
   }
 
-  private get _messageType(): UserMessageType {
+  /**
+   * Returns the intent of the notification based on its type.
+   *
+   * @returns The intent of the notification.
+   */
+  private get _notificationIntent(): AlertProps['intent'] {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
         return 'warning'
@@ -34,27 +42,26 @@ export class NotificationModel {
     }
   }
 
-  private get _iconProps(): IIconProps {
+  private get _icon() {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
-        return { iconName: 'CalendarWorkWeek' }
+        return icon('CalendarWeekNumbers')
       }
       case 'MISSING_FORECAST': {
-        return { iconName: 'BufferTimeBefore' }
+        return icon('Timer2')
       }
       default: {
-        return
+        return null
       }
     }
   }
 
-  public get messageProps(): IUserMessageProps {
-    const userMessageProps: IUserMessageProps = {
+  public get alertProps(): MessageBarProps {
+    return {
       itemID: this.id,
-      type: this._messageType,
-      messageBarIconProps: this._iconProps
+      intent: this._notificationIntent,
+      icon: this._icon
     }
-    return userMessageProps
   }
 
   /**
@@ -80,5 +87,4 @@ export class NotificationModel {
 
 export interface IUserNotificationsProps {
   renderAsMenuItem?: boolean
-  iconName?: string
 }

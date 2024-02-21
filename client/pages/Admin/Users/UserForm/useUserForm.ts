@@ -1,68 +1,69 @@
-import { useMutation } from '@apollo/client'
-import { ITextFieldProps } from '@fluentui/react'
 import { useAppContext } from 'AppContext'
-import { useEffect, useState } from 'react'
+import {
+  IInputFieldProps,
+  useFormControlModel,
+  useFormControls
+} from 'components/FormControl'
+import get from 'get-value'
+import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Role, User } from 'types'
+import { User, UserInput } from 'types'
 import _ from 'underscore'
-import s from 'underscore.string'
-import $addOrUpdateUser from './addOrUpdateUser.gql'
-import { IUserFormProps } from './types'
+import { useUsersContext } from '../context'
+import { IUserFormProps, createUserInput } from './types'
+import { useUserFormSubmit } from './useUserFormSubmit'
 
+/**
+ * A custom hook that returns the necessary props and functions for the user form.
+ *
+ * @param props - The props for the user form.
+ */
 export function useUserForm(props: IUserFormProps) {
   const { t } = useTranslation()
-  const { subscription } = useAppContext()
-  const [model, setModel] = useState<User>({})
-  const [addOrUpdateUser] = useMutation($addOrUpdateUser)
+  const appContext = useAppContext()
+  const context = useUsersContext()
+  const initialModel = useMemo(() => createUserInput(props.user), [props.user])
+  const model = useFormControlModel<keyof UserInput, UserInput>(initialModel)
+  const register = useFormControls<keyof User>(model)
+  const submitProps = useUserFormSubmit(props, model)
 
-  useEffect(() => {
-    setModel(props.user || {})
-  }, [props.user])
+  const adSyncProperties = get(
+    appContext,
+    'subscription.settings.adsync.properties',
+    { default: [] }
+  )
 
-  /**
-   * On save user
-   */
-  const onSave = async () => {
-    await addOrUpdateUser({
-      variables: {
-        user: _.omit(
-          {
-            ...model,
-            role: (model?.role as Role)?.name || 'User'
-          },
-          '__typename',
-          'photo'
-        ),
-        update: !!props.user
-      }
-    })
-    setModel({})
-    props.onDismiss()
-  }
-
-  /**
-   * Checks if form is valid
-   */
-  const isFormValid = () =>
-    !s.isBlank(model?.id || '') && !s.isBlank(model?.displayName || '')
-
-  const adSync = subscription?.settings?.adsync || { properties: [] }
-
-  const inputProps = ({ key, label }): ITextFieldProps => ({
+  const inputProps = ({ key, label }): IInputFieldProps => ({
     label,
-    disabled: _.contains(adSync?.properties, key),
     description:
-      _.contains(adSync?.properties, key) && t('admin.users.userFieldAdSync'),
-    value: model[key],
-    onChange: (_event, value) => setModel({ ...model, [key]: value })
+      _.contains(adSyncProperties, key) && t('admin.users.userFieldAdSync'),
+    disabled: _.contains(adSyncProperties, key)
   })
 
+  /**
+   * Callback function that sets the form model with the data of the selected user, or resets the model if no user is selected.
+   *
+   * @param item The selected user item.
+   */
+  const onSelectUser = useCallback((item) => {
+    if (item?.data) {
+      for (const key in item.data) {
+        model.set(key as any, item.data[key])
+      }
+    } else {
+      model.reset()
+    }
+  }, [])
+
+  const isEditMode = !!props.user
+
   return {
-    adSync,
+    isEditMode,
+    inputProps,
     model,
-    setModel,
-    onSave,
-    isFormValid,
-    inputProps
-  } as const
+    register,
+    submitProps,
+    onSelectUser,
+    ...context.state
+  }
 }

@@ -1,10 +1,12 @@
-.root {
+.projectColumn {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 6px;
   padding: 4px 0 4px 0;
 
   &.mobile {
+    padding: 0px;
     .content {
       .link {
         font-size: 10pt;
@@ -13,25 +15,12 @@
     }
   }
 
-  .iconContainer {
-    padding: 4px 0 0 0;
-    align-self: flex-start;
-  }
-
   .content {
     display: flex;
     flex-direction: row;
-    padding: 0 0 0 8px;
-    flex-grow: 1 1 1 1;
-
-    .labelIcon {
-      margin: 0 0 0 6px;
-      align-self: center;
-    }
-
-    .clearButton {
-      margin: 0 0 0 4px;
-    }
+    padding: 0;
+    align-items: center;
+    gap: 6px;
   }
 
   .eventActions {

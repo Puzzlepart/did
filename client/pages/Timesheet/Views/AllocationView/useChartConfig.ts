@@ -5,33 +5,36 @@ import { IChartConfig } from './types'
 /**
  * Hook for chart configuration
  */
-export function useChartConfig(): IChartConfig[] {
+export function useChartConfig() {
   const { t } = useTranslation()
-  return useMemo(
+  return useMemo<IChartConfig[]>(
     () => [
       {
         key: 'project',
         title: t('timesheet.allocation.projectChartTitle'),
         subTitle: t('timesheet.allocation.projectChartDescription'),
-        colors: 'light',
+        luminosity: 'light',
         idKey: 'name',
         valueKey: 'duration',
         valuePostfix: t('common.hours'),
         textKey: 'name',
-        subTextKey: 'customer.name'
-      },
+        secondaryTextKey: 'customer.name',
+        teritaryTextKey: 'description',
+        loadingText: t('timesheet.allocation.projectChartLoadingText')
+      } as IChartConfig,
       {
-        key: 'project.customer',
+        key: 'customer',
         title: t('timesheet.allocation.customerChartTitle'),
         subTitle: t('timesheet.allocation.customerChartDescription'),
-        colors: 'light',
+        luminosity: 'light',
         idKey: 'name',
         valueKey: 'duration',
         valuePostfix: t('common.hours'),
-        textKey: 'name'
-      }
+        textKey: 'name',
+        teritaryTextKey: 'description',
+        loadingText: t('timesheet.allocation.customerChartLoadingText')
+      } as IChartConfig
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 }

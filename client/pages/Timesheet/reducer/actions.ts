@@ -1,16 +1,16 @@
 import { QueryResult } from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
-import { Project } from 'types'
-import { TimesheetDateRange } from '../TimesheetDateRange'
-import { TimesheetView } from '../types'
+import { EventObject, Project } from 'types'
+import { TimesheetDateRange } from '../types'
+import { TimesheetViewComponent } from '../Views/types'
 
 /**
  * Data updated action
  *
  * @category Timesheet Actions
  */
-export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<QueryResult>('DATA_UPDATED')
 
 /**
  * Set date range action
@@ -26,8 +26,9 @@ export const SET_DATE_RANGE = createAction<TimesheetDateRange | string>(
  *
  * @category Timesheet Actions
  */
-export const SUBMITTING_PERIOD =
-  createAction<{ forecast: boolean }>('SUBMITTING_PERIOD')
+export const SUBMITTING_PERIOD = createAction<{ forecast: boolean }>(
+  'SUBMITTING_PERIOD'
+)
 
 /**
  * Submittng period action
@@ -64,32 +65,45 @@ export const NEXT_PERIOD = createAction('NEXT_PERIOD')
  *
  * @category Timesheet Actions
  */
-export const CHANGE_VIEW = createAction<{ view: TimesheetView }>('CHANGE_VIEW')
+export const CHANGE_VIEW = createAction<{ view: TimesheetViewComponent }>(
+  'CHANGE_VIEW'
+)
 
 /**
  * Change date range type action
  *
  * @category Timesheet Actions
  */
-export const CHANGE_DATE_RANGE_TYPE = createAction<{
-  dateRangeType: DateRangeType
-}>('CHANGE_DATE_RANGE_TYPE')
+export const CHANGE_DATE_RANGE_TYPE = createAction<DateRangeType>(
+  'CHANGE_DATE_RANGE_TYPE'
+)
 
 /**
  * Manual match action
  *
  * @category Timesheet Actions
  */
-export const MANUAL_MATCH =
-  createAction<{ eventId: string; project: Project }>('MANUAL_MATCH')
+export const MANUAL_MATCH = createAction<{ eventId: string; project: Project }>(
+  'MANUAL_MATCH'
+)
 
 /**
  * Clear manual match action
  *
  * @category Timesheet Actions
  */
-export const CLEAR_MANUAL_MATCH =
-  createAction<{ id: string }>('CLEAR_MANUAL_MATCH')
+export const CLEAR_MANUAL_MATCH = createAction<{ id: string }>(
+  'CLEAR_MANUAL_MATCH'
+)
+
+/**
+ * Open manual match panel action
+ *
+ * @category Timesheet Actions
+ */
+export const TOGGLE_MANUAL_MATCH_PANEL = createAction<{ event: EventObject }>(
+  'TOGGLE_MANUAL_MATCH_PANEL'
+)
 
 /**
  * Ignore event action

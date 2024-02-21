@@ -2,14 +2,14 @@ import { ApolloQueryResult } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, Dispatch, useContext } from 'react'
 import { useSubmitActions } from './hooks/useSubmitActions'
-import { ITimesheetState } from './types'
+import { ITimesheetState } from './types/ITimesheetState'
 
 /**
  * @category Timesheet
  */
-export interface ITimesheetContext extends ReturnType<typeof useSubmitActions> {
+export interface ITimesheetContext {
   /**
-   * State
+   * State of the timesheet component
    */
   state: ITimesheetState
 
@@ -22,6 +22,20 @@ export interface ITimesheetContext extends ReturnType<typeof useSubmitActions> {
    * Refetch data
    */
   refetch?: () => Promise<ApolloQueryResult<any>>
+
+  /**
+   * Submit the current period.
+   *
+   * @param options - The options for submitting the period.
+   */
+  onSubmitPeriod: ReturnType<typeof useSubmitActions>['onSubmitPeriod']
+
+  /**
+   * Unsubmit the current period.
+   *
+   * @param options - The options for unsubmitting the period.
+   */
+  onUnsubmitPeriod: ReturnType<typeof useSubmitActions>['onUnsubmitPeriod']
 }
 
 /**

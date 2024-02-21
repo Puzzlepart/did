@@ -1,0 +1,12 @@
+.welcomeTab {
+  margin: 0 0 0 10px;
+
+  .promotedReportLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: -8px;
+    padding: 20px 0 0 0;
+    gap: 8px;
+  }
+}

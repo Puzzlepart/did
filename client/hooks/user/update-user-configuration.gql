@@ -1,13 +1,9 @@
 mutation UpdateUserConfiguration(
-  $configuration: String
-  $preferredLanguage: String
-  $startPage: String
+  $user: String
   $lastActive: String
 ) {
   result: updateUserConfiguration(
-    configuration: $configuration
-    preferredLanguage: $preferredLanguage
-    startPage: $startPage
+    user: $user
     lastActive: $lastActive
   ) {
     success

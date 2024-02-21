@@ -1,4 +1,4 @@
-.root {
+.reports {
   [class*='ms-Pivot-link']:disabled {
     opacity: 0.5;
     -webkit-transition: opacity 1s ease-in-out;
@@ -15,5 +15,20 @@
     -ms-transition: opacity 1s ease-in-out;
     -o-transition: opacity 1s ease-in-out;
     transition: opacity 1s ease-in-out;
+  }
+
+  .defaultTab {
+    margin: 0 0 0 10px;
+
+    .reportButtons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin: -8px;
+
+      >button {
+        margin: 8px;
+      }
+    }
   }
 }

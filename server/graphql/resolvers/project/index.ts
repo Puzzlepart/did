@@ -2,8 +2,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { PermissionScope } from '../../../../shared/config/security'
-import { ProjectService } from '../../../services/mongo'
-import MSGraphService from '../../../services/msgraph'
+import { MSGraphService, ProjectService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import {
   CreateOrUpdateProjectResult,
@@ -28,13 +27,15 @@ export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
    *
-   * @param _project - Project service
-   * @param _msgraph - Microsoft Graph service
+   * @param _projectSvc - Project service
+   * @param _msgraphSvc - Microsoft Graph service
    */
   constructor(
-    private readonly _project: ProjectService,
-    private readonly _msgraph: MSGraphService
-  ) {}
+    private readonly _projectSvc: ProjectService,
+    private readonly _msgraphSvc: MSGraphService
+  ) {
+    // Empty constructor
+  }
 
   /**
    * Get projects
@@ -46,7 +47,7 @@ export class ProjectResolver {
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string
   ): Promise<Project[]> {
-    const { projects } = await this._project.getProjectsData(
+    const { projects } = await this._projectSvc.getProjectsData(
       customerKey && { customerKey }
     )
     return projects
@@ -70,12 +71,12 @@ export class ProjectResolver {
   ): Promise<CreateOrUpdateProjectResult> {
     const p = new Project(project)
     if (update) {
-      const success = await this._project.updateProject(p)
+      const success = await this._projectSvc.updateProject(p)
       return { success }
     } else {
-      const id = await this._project.addProject(p)
+      const id = await this._projectSvc.addProject(p)
       if (options.createOutlookCategory) {
-        await this._msgraph.createOutlookCategory(id)
+        await this._msgraphSvc.createOutlookCategory(id)
       }
       return { success: true, id }
     }

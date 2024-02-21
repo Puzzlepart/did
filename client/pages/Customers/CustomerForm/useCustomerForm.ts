@@ -1,7 +1,8 @@
-import { useFormControls } from 'components/FormControl'
+import { useFormControlModel, useFormControls } from 'components/FormControl'
+import { Customer } from 'types'
+import { mapProperty } from 'utils'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormSubmit } from './useCustomerFormSubmit'
-import { useCustomerModel } from './useCustomerModel'
 
 /**
  * Component logic hook for `<CustomerForm />`
@@ -10,7 +11,13 @@ import { useCustomerModel } from './useCustomerModel'
  * @returns `model` and `submit`
  */
 export function useCustomerForm(props: ICustomerFormProps) {
-  const model = useCustomerModel(props)
+  const model = useFormControlModel<keyof Customer, Customer>(
+    props.edit,
+    (p) => ({
+      ...p,
+      labels: mapProperty<any, string>(p.labels, 'name')
+    })
+  )
   const submit = useCustomerFormSubmit(props, model)
   const register = useFormControls(model)
   return {

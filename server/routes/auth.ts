@@ -10,7 +10,10 @@ import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import _ from 'underscore'
 import url from 'url'
-import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
+import {
+  SigninError,
+  GENERIC_SIGNIN_FAILED
+} from '../middleware/passport/errors'
 import { environment } from '../utils'
 const auth = Router()
 
@@ -40,7 +43,8 @@ export const authCallbackHandler =
   (request: Request, response: Response, next: NextFunction) => {
     passport.authenticate(strategy, (error: Error, user: Express.User) => {
       if (error || !user) {
-        const _error = error instanceof SigninError ? error : SIGNIN_FAILED
+        const _error =
+          error instanceof SigninError ? error : GENERIC_SIGNIN_FAILED
         return response.redirect(
           url.format({
             pathname: '/',

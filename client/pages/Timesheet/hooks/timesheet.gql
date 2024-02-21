@@ -1,4 +1,4 @@
-#import "../../../graphql/fragments/project-fragment.gql"
+#import "../../../graphql-client/fragments/project-fragment.gql"
 
 query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
   periods: timesheet(query: $query, options: $options) {
@@ -35,6 +35,7 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
       customer {
         key
         name
+        description
         icon
         inactive
       }

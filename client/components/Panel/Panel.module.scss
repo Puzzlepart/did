@@ -1,0 +1,28 @@
+.panel {
+    .header {
+        display: initial;
+
+        .title {
+            display: initial;
+        }
+
+        .description {
+            margin: 8px 0 0 0;
+        }
+    }
+    
+    .body {
+        display: initial;
+    }
+
+    .footer {
+        display: initial;
+    }
+
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
+}

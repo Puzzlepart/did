@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMap } from 'hooks'
 import { useEffect } from 'react'
 import { convertToMap } from 'utils/convertToMap'
-import { ReportLink } from '../../../../../server/graphql'
+import { ReportLink } from 'types'
 import { IReportLinksFormProps } from './types'
 
 /**
@@ -32,13 +31,10 @@ export function useReportLinksModel(props: IReportLinksFormProps) {
   }, [props.edit])
 
   useEffect(() => {
-    if (!props?.isOpen) {
+    if (!props?.open) {
       map.$set(INITIAL_MODEL)
     }
-  }, [props?.isOpen])
+  }, [props?.open])
 
-  return {
-    ...map,
-    reset: () => map.$set(INITIAL_MODEL)
-  } as const
+  return map
 }

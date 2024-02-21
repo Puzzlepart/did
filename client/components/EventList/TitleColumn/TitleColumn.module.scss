@@ -1,0 +1,15 @@
+.titleColumn {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .labels {
+    margin: 0 0 0 10px;
+  }
+
+  .time {
+    align-items: flex-end;
+    min-width: 150px;
+  }
+}

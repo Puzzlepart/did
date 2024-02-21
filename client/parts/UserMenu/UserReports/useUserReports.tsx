@@ -1,5 +1,6 @@
-import { useToggle } from 'hooks'
+import { useExcelExport } from 'hooks'
 import { useState } from 'react'
+import { useBoolean } from 'usehooks-ts'
 import { useQueries } from './queries'
 import { useColumns } from './useColumns'
 import { useUserReportQuery } from './useUserReportQuery'
@@ -11,18 +12,23 @@ import { useUserReportQuery } from './useUserReportQuery'
  */
 export function useUserReports() {
   const [preset, setPreset] = useState<any>(null)
-  const [showPanel, togglePanel] = useToggle()
+  const panelState = useBoolean(false)
   const queries = useQueries()
   const query = useUserReportQuery(preset)
   const columns = useColumns()
+
+  const { onExport } = useExcelExport({
+    items: query?.data,
+    fileName: preset?.exportFileName,
+    columns
+  })
 
   return {
     preset,
     setPreset,
     queries,
-    showPanel,
-    togglePanel,
+    panelState,
     query,
-    columns
+    onExport
   }
 }

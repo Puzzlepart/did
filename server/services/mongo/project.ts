@@ -2,7 +2,7 @@ import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { CustomerService } from '.'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import {
   Customer,
   LabelObject as Label,
@@ -33,7 +33,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    * @param _labelSvc - Injected `LabelService` through `typedi`
    */
   constructor(
-    @Inject('CONTEXT') readonly context: Context,
+    @Inject('CONTEXT') readonly context: RequestContext,
     private readonly _customerSvc: CustomerService,
     private readonly _labelSvc: LabelService
   ) {
@@ -49,7 +49,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<string> {
     try {
-      await this.cache.clear({ key: 'getprojectsdata' })
+      await this.cache.clear('getprojectsdata')
       const tag = [project.customerKey, project.key].join(' ')
       const { insertedId } = await this.insert({
         _id: tag,
@@ -71,7 +71,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
-      await this.cache.clear({ key: 'getprojectsdata' })
+      await this.cache.clear('getprojectsdata')
       const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
       const { result } = await this.update(filter, project)
       return result.ok === 1
@@ -83,9 +83,9 @@ export class ProjectService extends MongoDocumentService<Project> {
   /**
    * Get projects, customers and labels.
    *
-   * Projects are sorted by the name property
-   *
-   * Connects labels and customer to projects
+   * Projects are sorted by the name property, then connects
+   * customers and labels to projects using the `customerKey` and
+   * `labels` properties.
    *
    * @param query - Query
    */
@@ -97,24 +97,25 @@ export class ProjectService extends MongoDocumentService<Project> {
             this.find(query, { name: 1 }),
             this._customerSvc.getCustomers(
               query?.customerKey && { key: query.customerKey }
-            ),
+            ) as Promise<Customer[]>,
             this._labelSvc.getLabels()
           ])
           const _projects = projects
             .map((p) => {
               p.customer =
                 _.find(customers, (c) => c.key === p.customerKey) || null
-              p.labels = _.filter(labels, ({ name }) => {
-                // eslint-disable-next-line unicorn/prefer-array-some
-                return !!_.find(p.labels, (l) => name === l)
-              })
+              p.labels = _.filter(labels, (l) => _.contains(p.labels, l.name))
               return p
             })
             .filter((p) => p.customer !== null)
           const data = { projects: _projects, customers, labels }
           return data
         },
-        { key: ['getprojectsdata', query?.customerKey.toString()] }
+        {
+          key: ['getprojectsdata', query?.customerKey.toString()]
+            .filter(Boolean)
+            .join(':')
+        }
       )
     } catch (error) {
       throw error

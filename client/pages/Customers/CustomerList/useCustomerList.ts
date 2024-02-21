@@ -1,34 +1,41 @@
 import { useContext, useEffect, useState } from 'react'
-import { Customer } from 'types'
+import { useBoolean } from 'usehooks-ts'
 import { CustomersContext } from '../context'
-import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
 import { useColumns } from './useColumns'
 
 /**
- * Component logic for `<CustomerList />`
+ * Component logic for `<CustomerList />`. This hook is used to
+ * manage the state and actions of the `<CustomerList />` component.
+ * It handles the filtering of customers based on the `showInactive`
+ * prop. It also handles the columns for the table, using the
+ * `useColumns` hook.
+ *
+ * @category Customers
  */
 export const useCustomerList = () => {
-  const { dispatch, state, loading } = useContext(CustomersContext)
-  const [items, setItems] = useState([...state.customers])
-  const [showInactive, setShowInactive] = useState(false)
+  const context = useContext(CustomersContext)
+  const [customers, setCustomers] = useState([...context.state.customers])
+  const showInactive = useBoolean(false)
   const columns = useColumns()
 
   useEffect(
     () =>
-      setItems(
-        [...state.customers].filter((p) => (showInactive ? true : !p.inactive))
+      setCustomers(
+        [...context.state.customers].filter(
+          (p) => showInactive.value || !p.inactive
+        )
       ),
-    [state.customers, showInactive]
+    [context.state.customers, showInactive.value]
   )
+
+  const inactiveCustomers = context.state.customers.filter(
+    ({ inactive }) => inactive
+  )
+
   return {
-    state,
-    loading,
-    items,
+    customers,
+    inactiveCustomers,
     columns,
-    showInactive,
-    setShowInactive,
-    setSelectedCustomer: (customer: Customer) => {
-      if (customer) dispatch(SET_SELECTED_CUSTOMER({ customer }))
-    }
+    showInactive
   }
 }

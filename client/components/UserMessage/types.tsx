@@ -1,16 +1,11 @@
-import { IMessageBarProps } from '@fluentui/react'
-
-export type UserMessageType =
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'severeWarning'
-
+import { MessageBarProps } from '@fluentui/react-components'
+import { CSSProperties, HTMLAttributes, MouseEvent } from 'react'
+import { FluentIconName } from 'utils'
+import { IUserMessageAction } from './UserMessageAction'
 /**
  * @category UserMessage
  */
-export interface IUserMessageProps extends IMessageBarProps {
+export interface IUserMessageProps extends Omit<MessageBarProps, 'action'> {
   /**
    * Header text to show in **bold** _slightly larger_ font
    */
@@ -26,27 +21,7 @@ export interface IUserMessageProps extends IMessageBarProps {
   /**
    * On click handler for the message
    */
-  onClick?: (event: React.MouseEvent<any>) => void
-
-  /**
-   * On dismiss handler for the message
-   */
-  onDismiss?: () => void
-
-  /**
-   * Type info, warning, error etc
-   */
-  type?: UserMessageType
-
-  /**
-   * Icon to use if not default for the type
-   */
-  iconName?: string
-
-  /**
-   * Container style
-   */
-  containerStyle?: React.CSSProperties
+  onClick?: (event: MouseEvent<any>) => void
 
   /**
    * To flex the message center with a fixed height
@@ -54,7 +29,36 @@ export interface IUserMessageProps extends IMessageBarProps {
   fixedHeight?: number
 
   /**
-   * Styles for the inner part of the message
+   * Action to show in a menu
    */
-  innerStyle?: React.CSSProperties
+  action?: IUserMessageAction
+
+  /**
+   * Whether to render a progress bar in the message. The first element of the array
+   * is a boolean that indicates whether to render the progress bar. The second element
+   * is the text to show in the progress bar - defaults to the `text` prop.
+   */
+  renderProgress?: [boolean, string?]
+
+  /**
+   * The name of the Fluent UI icon to display for the message (optional).
+   */
+  iconName?: FluentIconName
+}
+
+/**
+ * Props for the UserMessageContainer component.
+ */
+export interface IUserMessageContainerProps
+  extends HTMLAttributes<HTMLDivElement>,
+    Pick<CSSProperties, 'height' | 'gap' | 'margin'> {
+  /**
+   * Vertical direction for the items in the container.
+   */
+  vertical?: boolean
+
+  /**
+   * How to spread the items in the container.
+   */
+  spread?: 'evenly' | 'around' | 'between'
 }

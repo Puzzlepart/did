@@ -1,30 +1,64 @@
-interface ISubscriptionSettingBase {
+import { ITextFieldProps } from '@fluentui/react'
+import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import { IImageFieldProps } from './SettingsSection/ImageField'
+import { SubscriptionSettings } from 'types'
+
+interface ISubscriptionSettingBase<T = any> {
+  /**
+   * The ID of the setting
+   */
   id: string
-  disabledIf?: (settings: any) => boolean
-  hiddenIf?: (settings: any) => boolean
-  props: { [key: string]: any }
+
+  /**
+   * Conditionally disable the setting based on the current settings
+   *
+   * @param settings The current settings
+   */
+  disabledIf?: (settings: SubscriptionSettings) => boolean
+
+  /**
+   * Conditionally hide the setting based on the current settings
+   *
+   * @param settings The current settings
+   */
+  hiddenIf?: (settings: SubscriptionSettings) => boolean
+
+  /**
+   * The props to pass to the field component
+   */
+  props: T
 }
 
-export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingText<T = ITextFieldProps>
+  extends ISubscriptionSettingBase<T> {
   type: 'text'
 }
 
-export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingBool<T = CheckboxProps>
+  extends ISubscriptionSettingBase<T> {
   type: 'bool'
 }
 
-export interface ISubscriptionSettingNumber extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingNumber<T = SliderProps>
+  extends ISubscriptionSettingBase<T> {
   type: 'number'
 }
 
-export interface ISubscriptionSettingCheckbox extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingCheckboxMulti<T = any>
+  extends ISubscriptionSettingBase<T> {
   id: string
-  type: 'checkbox'
+  type: 'checkboxmulti'
   options: Record<string, string>
 }
 
-export type SubscriptionSettingField =
-  | ISubscriptionSettingText
-  | ISubscriptionSettingBool
-  | ISubscriptionSettingNumber
-  | ISubscriptionSettingCheckbox
+export interface ISubscriptionSettingImage<T = IImageFieldProps>
+  extends ISubscriptionSettingBase<T> {
+  type: 'image'
+}
+
+export type SubscriptionSettingField<T = any> =
+  | ISubscriptionSettingText<T>
+  | ISubscriptionSettingBool<T>
+  | ISubscriptionSettingNumber<T>
+  | ISubscriptionSettingCheckboxMulti<T>
+  | ISubscriptionSettingImage

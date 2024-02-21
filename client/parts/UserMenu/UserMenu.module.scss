@@ -1,34 +1,21 @@
-.root {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  margin: 0 8px;
-  padding: 0 10px 0 12px;
-  position: relative;
-
-  &:hover {
-    color: #fff;
-  }
-
-  .user {
-    div[class*='-primaryText'] {
-      color: #fff !important;
-    }
-    div[class*='-secondaryText'] {
-      color: #fff !important;
-      display: block;
-      font-size: 10px !important;
-    }
-  }
-}
-
-.menu {
+.userMenu {
   border-radius: 3px;
-  padding-top: 15px;
-  height: auto;
-  width: auto;
+  padding: 15px 0 0 0;
   z-index: 100;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 260px;
+  min-height: 320px;
+  box-sizing: border-box;
+
+  .subscription {
+    padding: 0 2px 2px 12px;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 }

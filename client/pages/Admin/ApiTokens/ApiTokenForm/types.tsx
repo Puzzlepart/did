@@ -1,5 +1,16 @@
-import { IPanelProps } from '@fluentui/react'
+import { IPanelProps } from 'components/Panel'
+import { ApiToken } from 'types'
 
 export interface IApiTokenFormProps extends IPanelProps {
-  onAdded?: (apiKey: string) => void
+  /**
+   * `onTokenAdded` needs to be passed in `props` until this
+   * component is refactored to use `React.Context`.
+   */
+  onTokenAdded?: (token: ApiToken) => void
+
+  /**
+   * `tokens` needs to be passed in `props` until this
+   * component is refactored to use `React.Context`.
+   */
+  tokens?: ApiToken[]
 }

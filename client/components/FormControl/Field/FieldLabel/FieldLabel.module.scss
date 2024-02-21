@@ -1,0 +1,12 @@
+.fieldLabel {
+  margin-bottom: 4px;
+
+  .label {
+    color: var(--colorNeutralForeground1);
+    text-transform: capitalize;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: var(--shadow8);
+  }
+}

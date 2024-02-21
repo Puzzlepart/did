@@ -8,7 +8,7 @@ export function useHome() {
   const { user, subscription } = useAppContext()
   const location = useLocation<{ prevPath: string }>()
   const urlSearchParameters = new URLSearchParams(document.location.search)
-  const error =
+  const loginError: Error =
     urlSearchParameters.get('error') &&
     JSON.parse(atob(urlSearchParameters.get('error')))
   const redirectPage =
@@ -17,9 +17,10 @@ export function useHome() {
     location.state?.prevPath === undefined
       ? user.startPage
       : null
+
   return {
-    error,
+    loginError,
     subscription,
     redirectPage
-  } as const
+  }
 }

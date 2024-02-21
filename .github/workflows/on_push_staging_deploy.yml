@@ -1,0 +1,60 @@
+name: Build and deploy to didapp/staging
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  package:
+    name: Package did
+    runs-on: ubuntu-latest
+    concurrency: 
+      group: ${{ github.ref }}_on_push_staging_deploy
+      cancel-in-progress: true
+
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ vars.NODE_VERSION }}
+
+    - run: |
+        npm ci --no-audit --no-fund --loglevel=error
+
+    - name: Create package
+      run: |
+        npm run package
+      env:
+        NODE_ENV: production
+        INCLUDE_NODE_MODULES: '0'
+        INCLUDE_PACKAGE_LOCK_FILE: '0'
+        DISPLAY_VERSION_DETAILS: '1'
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: did-package
+        path: ./did-package.zip
+
+  deploy_azure:
+    name: Deploying to didapp/staging
+    runs-on: ubuntu-latest
+    needs: package
+    environment:
+      name: 'staging'
+      url: ${{ steps.deploy-to-app-slot.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: did-package
+
+    - name: 'Deploy package to didapp/staging'
+      id: deploy-to-app-slot
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'didapp'
+        slot-name: 'staging'
+        publish-profile: ${{ secrets.DIDAPP_STAGING_PUBLISH_PROFILE }}
+        package: ./did-package.zip

@@ -1,14 +1,13 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { IColumn } from '@fluentui/react'
+import { IListColumn } from 'components/List/types'
 import get from 'get-value'
-import _ from 'underscore'
 import { IFilter, IFilterItem } from './types'
 
 /**
  * @category FilterPanel
  */
 export class BaseFilter {
-  public selectedKeys: string[]
+  private _selectedKeys: Set<string> = new Set()
 
   /**
    * Constructor for `BaseFilter`
@@ -25,7 +24,7 @@ export class BaseFilter {
     this.valueFieldName = valueFieldName ?? keyFieldName
   }
 
-  public fromColumn(column: IColumn) {
+  public fromColumn(column: IListColumn) {
     this.name = column.name
     this.keyFieldName = column.fieldName
     this.valueFieldName = column.fieldName
@@ -35,28 +34,24 @@ export class BaseFilter {
   /**
    * Initializes the filter returning `IFilter`
    *
-   * @param filterItems - Filter items
-   * @returns `IFilter`
+   * @param filterItems - Filter items to initialize with
    */
   public initialize(filterItems: IFilterItem[]): IFilter {
     return {
       key: this.keyFieldName,
       name: this.name,
       items: filterItems,
-      selected: filterItems.filter((item) =>
-        _.contains(this.selectedKeys, item.key)
-      )
+      selected: this._selectedKeys
     }
   }
 
   /**
-   * Set defaults (`selectedKeys`) for the filter
+   * Set defaults selected keys for the filter.
    *
    * @param values - Values
-   * @returns this
    */
   public setDefaults(values: any) {
-    this.selectedKeys = get(values, this.keyFieldName) ?? []
+    this._selectedKeys = new Set(get(values, this.keyFieldName) ?? [])
     return this
   }
 }

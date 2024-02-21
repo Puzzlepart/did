@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "no-inline-styles": "off",
+    "typescript-config/strict": "off",
+    "css-prefix-order": "off",
+    "compat-api/css": "off"
+  }
+}

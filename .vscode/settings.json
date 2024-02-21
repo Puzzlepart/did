@@ -4,20 +4,16 @@
     "client/**/*.js": true,
     "client/**/*.js.map": true,
     "client/**/*.d.ts": true,
-    "client/**/global.d.ts": false,
     "server/**/*.js": true,
     "server/**/*.js.map": true,
     "server/views/index.hbs": true,
     "server/public/js": true,
     "dist": true,
-    "server/.docs": true,
-    "client/.docs": true,
-    "shared/.docs": true,
+    "**/.docs": true,
     "README.md": true,
     "CHANGELOG.md": true,
     "schema.gql": true,
-    "*.dmm": true,
-    ".husky": true,
+    "*.dmm": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
@@ -25,7 +21,9 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB",
+  "i18n-ally.translate.openai.apiKey": "OPENAI_API_KEY",
+  "i18n-ally.extract.autoDetect": false,
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
   "editor.folding": true,
-  "editor.foldingImportsByDefault": true
+  "editor.foldingImportsByDefault": false
 }

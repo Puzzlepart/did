@@ -1,0 +1,20 @@
+.userMenuTrigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 8px;
+  padding: 0 10px;
+  position: relative;
+
+  &:hover {
+    color: #fff;
+  }
+
+  .user {
+    span[class*="primaryText"],
+    span[class*="secondaryText"] {
+      color: #fff !important;
+    }
+  }
+}

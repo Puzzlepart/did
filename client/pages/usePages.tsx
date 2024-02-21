@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   AdminPage,
   CustomersPage,
@@ -12,7 +11,9 @@ import { useTranslation } from 'react-i18next'
 import { PageComponent } from './types'
 
 /**
- * Get all available pages in the app
+ * Get all available pages in the app, including the home page. Appends
+ * the `path` and `text` properties to each page component so that it can
+ * be used in the navigation menu.
  *
  * @returns The available page components
  *
@@ -30,7 +31,7 @@ export function usePages(): PageComponent[] {
       Home
     ].map((page) =>
       Object.assign(page, {
-        displayName: t(`navigation.${page.name}`),
+        text: t(`navigation.${page.name}`),
         path: `/${page.name.replace(/Home|Page/gm, '')}`.toLowerCase()
       })
     )

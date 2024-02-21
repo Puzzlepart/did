@@ -1,8 +1,12 @@
-import { TooltipDelay, TooltipHost } from '@fluentui/react'
+import {
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { ProjectTooltipContent } from './ProjectTooltipContent'
-import { IProjectTooltipProps } from './types'
+import { ProjectPopoverContent } from './ProjectPopoverContent'
+import { IProjectPopoverProps } from './types'
 
 /**
  * Shows more details about the project in a
@@ -10,19 +14,17 @@ import { IProjectTooltipProps } from './types'
  *
  * @category Reusable Component
  */
-export const ProjectTooltip: ReusableComponent<IProjectTooltipProps> = (
+export const ProjectPopover: ReusableComponent<IProjectPopoverProps> = (
   props
 ) => {
   return (
-    <TooltipHost
-      tooltipProps={{
-        onRenderContent: () => <ProjectTooltipContent {...props} />
-      }}
-      delay={TooltipDelay.long}
-      closeDelay={TooltipDelay.long}
-      calloutProps={{ gapSpace: 0 }}
-    >
-      {props.children}
-    </TooltipHost>
+    <Popover openOnHover={true} mouseLeaveDelay={250} openOnContext={true}>
+      <PopoverTrigger>
+        <div>{props.children}</div>
+      </PopoverTrigger>
+      <PopoverSurface>
+        <ProjectPopoverContent {...props} />
+      </PopoverSurface>
+    </Popover>
   )
 }

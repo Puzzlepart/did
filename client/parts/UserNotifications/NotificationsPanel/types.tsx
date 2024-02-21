@@ -1,4 +1,4 @@
-import { IPanelProps } from '@fluentui/react'
+import { IPanelProps } from 'components/Panel/types'
 import { NotificationModel } from '../types'
 
 export interface INotificationsPanelProps extends IPanelProps {

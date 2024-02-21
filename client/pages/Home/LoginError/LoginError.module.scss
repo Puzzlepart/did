@@ -1,0 +1,10 @@
+.loginError {
+    margin: 15px 0 0 0;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+
+    .text {
+        margin-bottom: 5px;
+    }
+}

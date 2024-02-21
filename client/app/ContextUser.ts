@@ -1,6 +1,6 @@
-import { PartialTheme } from '@fluentui/react/lib/Theme'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'
+import { UserTheme } from 'theme/types'
 import { Role, User, UserPhoto } from 'types'
 import _ from 'underscore'
 import { tryParseJson } from 'utils'
@@ -18,7 +18,7 @@ export class ContextUser {
   public startPage: string
   public configuration: Record<string, any>
   public photo: UserPhoto
-  public theme: PartialTheme
+  public theme: UserTheme
   public lastActive: Date
 
   /**
@@ -59,7 +59,7 @@ export class ContextUser {
       this.configuration = tryParseJson(_user.configuration, {})
       this.theme = getTheme(this.configuration?.ui?.theme)
     } else {
-      this.theme = getTheme('light')
+      this.theme = getTheme('default')
     }
   }
 

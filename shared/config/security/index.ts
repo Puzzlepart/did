@@ -5,4 +5,5 @@
  *
  * @module Security
  */
-export { getPermissions, IPermission, PermissionScope } from './permissions'
+export * from './permissions'
+export * from './types'

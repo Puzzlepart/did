@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import _ from 'lodash'
 import { FilterQuery } from 'mongodb'
-import set from 'set-value'
 import { Inject, Service } from 'typedi'
-import _ from 'underscore'
 import { RoleService } from '.'
-import { Context } from '../../graphql/context'
+import { RequestContext } from '../../graphql/requestContext'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
@@ -23,7 +22,7 @@ export class UserService extends MongoDocumentService<User> {
    *
    * @param context - Injected context through `typedi`
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(context, 'users')
     this._role = new RoleService(context)
   }
@@ -161,40 +160,35 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Update configuration for the current user
+   * Update configuration for the current user. Either a whole `User` object
+   * or `lastActive` is provided.
    *
    * @remarks For now we we're working with the configuration as a string,
    * to avoid typing the whole configuration object.
    *
-   * @param configuration - Configuration
-   * @param startPage - Start page
-   * @param preferredLanguage - Preferred language
+   * @param userObjectString - A JSON stringified User object with potentially updated configuration
+   * @param lastActive - Preferred language
    */
   public async updateCurrentUserConfiguration(
-    configuration?: string,
-    startPage?: string,
-    lastActive?: string,
-    preferredLanguage?: string
+    userObjectString?: string,
+    lastActive?: string
   ) {
     try {
-      const filter = { _id: this.context.userId }
-      const $set: User = {}
-      if (configuration) {
-        const user = await this.collection.findOne(filter)
-        const _configuration = JSON.parse(configuration)
-        // eslint-disable-next-line unicorn/no-array-reduce
-        $set.configuration = Object.keys(_configuration).reduce(
-          (object, key) => {
-            set(object, key, _configuration[key])
-            return object
-          },
-          user.configuration || {}
+      const currentUserFilter = { _id: this.context.userId }
+      const updatedUser: User = {}
+      if (userObjectString) {
+        const user = await this.collection.findOne(currentUserFilter)
+        const userObject = JSON.parse(userObjectString) as User
+        updatedUser.configuration = _.merge(
+          user.configuration,
+          userObject.configuration
         )
+        updatedUser.startPage = userObject.startPage ?? user.startPage
+        updatedUser.preferredLanguage =
+          userObject.preferredLanguage ?? user.preferredLanguage
       }
-      if (startPage) $set.startPage = startPage
-      if (preferredLanguage) $set.preferredLanguage = preferredLanguage
-      if (lastActive) $set.lastActive = new Date(lastActive)
-      await this.update(filter, $set)
+      if (lastActive) updatedUser.lastActive = new Date(lastActive)
+      await this.update(currentUserFilter, updatedUser)
     } catch (error) {
       throw error
     }

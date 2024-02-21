@@ -1,16 +1,20 @@
-import { useQuery } from '@apollo/client'
+import { useQuery, WatchQueryFetchPolicy } from '@apollo/client'
 import { useTimesheetPeriods } from 'hooks'
 import { TimesheetPeriodObject, User } from 'types'
 import $missingSubmissions from './missing-submissions.gql'
 
-export function useMissingSubmissionsQuery() {
+export function useMissingSubmissionsQuery(
+  fetchPolicy: WatchQueryFetchPolicy = 'cache-first'
+) {
   const { queries } = useTimesheetPeriods()
-  const query = useQuery($missingSubmissions, {
-    fetchPolicy: 'cache-and-network',
+  const { data } = useQuery<{
+    periods: TimesheetPeriodObject[]
+    users: User[]
+  }>($missingSubmissions, {
+    fetchPolicy,
     variables: { queries }
   })
-  return {
-    periods: (query.data?.periods ?? []) as TimesheetPeriodObject[],
-    users: (query.data?.users ?? []) as User[]
-  } as const
+  const periods = data?.periods ?? []
+  const users = data?.users ?? []
+  return [periods, users] as const
 }

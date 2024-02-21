@@ -40,18 +40,25 @@ export function useListProps({
     if (groupBy && col.fieldName === groupBy) return false
     return true
   })
+  const [selectionMode = SelectionMode.none] = context.props.selectionProps
+  let checkboxVisibility =
+    selectionMode === SelectionMode.none
+      ? CheckboxVisibility.hidden
+      : CheckboxVisibility.onHover
+  if (context.props.checkboxVisibility) {
+    checkboxVisibility = context.props.checkboxVisibility
+  }
   return {
-    getKey: (_item, index) => `list_item_${index}`,
+    getKey: context.props.getKey,
     setKey: 'list',
     enableShimmer: context.props.enableShimmer,
     isPlaceholderData: context.props.enableShimmer,
-    selection,
+    selection: selectionMode === SelectionMode.none ? undefined : selection,
     columns,
     items,
     groups,
-    selectionMode: context.props.selectionProps
-      ? context.props.selectionProps.mode
-      : SelectionMode.none,
+    selectionMode: selectionMode,
+    checkboxVisibility,
     constrainMode: ConstrainMode.horizontalConstrained,
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
@@ -60,8 +67,6 @@ export function useListProps({
         return <ListGroupHeader {...props} />
       }
     },
-    checkboxVisibility:
-      context.props.checkboxVisibility || CheckboxVisibility.hidden,
     onRenderDetailsHeader: (headerProps, defaultRender) => (
       <ListHeader headerProps={headerProps} defaultRender={defaultRender} />
     ),

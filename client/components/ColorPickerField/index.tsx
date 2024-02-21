@@ -1,10 +1,16 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Label, TooltipHost } from '@fluentui/react'
+import {
+  Label,
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
-import React, { useRef } from 'react'
+import React from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import styles from './ColorPickerField.module.scss'
 import { IColorPickerFieldProps } from './types'
+import { useColorPickerField } from './useColorPickerField'
 
 /**
  * Field to pick an color using `<SketchPicker />` from
@@ -15,29 +21,35 @@ import { IColorPickerFieldProps } from './types'
 export const ColorPickerField: ReusableComponent<IColorPickerFieldProps> = (
   props
 ) => {
-  const target = useRef<any>(null)
+  const { ref, positioningRef } = useColorPickerField()
   return (
-    <div className={`${props.className} ${styles.root}`}>
-      <Label>{props.label}</Label>
-      <TooltipHost
-        tooltipProps={{
-          targetElement: target as any,
-          onRenderContent: () => (
-            <SketchPicker
-              color={props.color}
-              onChange={({ hex }) => props.onChanged(hex)}
-            />
-          )
-        }}
+    <div className={`${props.className} ${ColorPickerField.className}`}>
+      <Popover
+        positioning={{ positioningRef }}
+        trapFocus={true}
+        withArrow={true}
       >
-        <span
-          ref={target}
-          className={styles.colorPreview}
-          style={{ backgroundColor: props.color }}
-        ></span>
-      </TooltipHost>
+        <PopoverTrigger disableButtonEnhancement>
+          <div>
+            <Label weight='semibold'>{props.label}</Label>
+            <div
+              ref={ref}
+              className={styles.colorPreview}
+              style={{ backgroundColor: props.color }}
+            ></div>
+          </div>
+        </PopoverTrigger>
+        <PopoverSurface>
+          <SketchPicker
+            color={props.color}
+            onChange={({ hex }) => props.onChanged(hex)}
+          />
+        </PopoverSurface>
+      </Popover>
     </div>
   )
 }
+
+ColorPickerField.className = styles.colorPickerField
 
 export * from './types'

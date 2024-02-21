@@ -1,7 +1,8 @@
+import 'reflect-metadata'
 import { AuthChecker, ResolverData } from 'type-graphql'
 import _ from 'underscore'
 import { PermissionScope } from '../../shared/config/security'
-import { Context } from './context'
+import { RequestContext } from './requestContext'
 
 /**
  * GraphQL API authentication options.
@@ -14,7 +15,7 @@ export interface IAuthOptions {
   /**
    * Requires user context and can cannot be called with an API token
    */
-  userContext?: boolean
+  requiresUserContext?: boolean
 
   /**
    * Permission scope required for the resolver
@@ -28,14 +29,14 @@ export interface IAuthOptions {
  * @param param0 - Resolver data
  * @param param1 - Authentication options
  */
-export const authChecker: AuthChecker<Context, IAuthOptions> = (
-  { context }: ResolverData<Context>,
+export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
+  { context }: ResolverData<RequestContext>,
   [authOptions]
 ) => {
   if (!authOptions) {
     return !!context.permissions
   }
-  if (authOptions.userContext) {
+  if (authOptions.requiresUserContext) {
     return !!context.userId
   }
   if (authOptions.scope) {

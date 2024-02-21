@@ -1,10 +1,14 @@
-import { ApolloQueryResult, useQuery } from '@apollo/client'
+import {
+  ApolloQueryResult,
+  useQuery,
+  WatchQueryFetchPolicy
+} from '@apollo/client'
 import { DateRangeType } from '@fluentui/react'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'
-import { Dispatch, useLayoutEffect } from 'react'
+import { Dispatch, useEffect } from 'react'
 import { DATA_UPDATED } from '../reducer/actions'
-import { ITimesheetState } from '../types'
+import { ITimesheetState } from '../types/ITimesheetState'
 import $timesheet from './timesheet.gql'
 
 /**
@@ -12,12 +16,14 @@ import $timesheet from './timesheet.gql'
  *
  * @param state - State
  * @param dispatch - Dispatch
+ * @param fetchPolicy - Fetch policy (default: 'cache-and-network')
  *
  * @category Timesheet Hooks
  */
 export function useTimesheetQuery(
   state: ITimesheetState,
-  dispatch: Dispatch<AnyAction>
+  dispatch: Dispatch<AnyAction>,
+  fetchPolicy: WatchQueryFetchPolicy = 'cache-and-network'
 ): () => Promise<ApolloQueryResult<any>> {
   const { user } = useAppContext()
   const query = useQuery($timesheet, {
@@ -31,12 +37,11 @@ export function useTimesheetQuery(
         includeSplitWeeks: state.dateRangeType === DateRangeType.Week
       }
     },
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy,
     errorPolicy: 'all'
   })
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  useEffect(() => dispatch(DATA_UPDATED(query)), [query])
 
   return query.refetch
 }

@@ -1,11 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import createActivityDetector from 'activity-detector'
 import { IAppContext } from 'AppContext'
+import { IToastProps } from 'components'
 import { usePages } from 'pages/usePages'
 import { useEffect, useMemo } from 'react'
 import { useNotificationsQuery } from '../hooks'
 import { useUpdateUserConfiguration } from '../hooks/user/useUpdateUserConfiguration'
-import useAppReducer from './reducer'
+import useAppReducer, { SET_TOAST } from './reducer'
 import { IAppProps } from './types'
 
 /**
@@ -33,6 +33,33 @@ export function useApp(props: IAppProps) {
   const [state, dispatch] = useAppReducer({})
   const notifications = useNotificationsQuery({ user: props.user })
   const pages = usePages()
+
+  /**
+   * Displays a toast message with the given properties and duration (which defaults to 6 seconds).
+   *
+   * @param text - The text of the toast message.
+   * @param intent - The intent of the toast message (default: **info**).
+   * @param duration - The duration in seconds to display the toast message (default: **6**).
+   * @param additionalProps - Additional properties to pass to the toast message.
+   */
+  const displayToast = (
+    text: IToastProps['text'],
+    intent: IToastProps['intent'] = 'info',
+    duration: number = 6,
+    additionalProps: Partial<IToastProps> = {}
+  ) => {
+    context.dispatch(
+      SET_TOAST({
+        text,
+        intent,
+        ...additionalProps
+      })
+    )
+    setTimeout(() => {
+      context.dispatch(SET_TOAST(null))
+    }, duration * 1000)
+  }
+
   const context = useMemo<IAppContext>(
     () =>
       ({
@@ -40,8 +67,9 @@ export function useApp(props: IAppProps) {
         pages,
         notifications,
         state,
-        dispatch
-      } as IAppContext),
+        dispatch,
+        displayToast
+      }) as IAppContext,
     [state, notifications]
   )
 

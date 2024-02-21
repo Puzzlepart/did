@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation, useQuery } from '@apollo/client'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ReportLink } from '../../../../server/graphql'
+import { ReportLink } from 'types'
 import $deleteReportLink from './deleteReportLink.gql'
 import $reportLinks from './reportLinks.gql'
 import { IReportLinksFormProps } from './ReportLinksForm'
@@ -21,55 +20,55 @@ export function useReportLinks() {
   const query = useQuery($reportLinks, { fetchPolicy: 'cache-first' })
   const [deleteReportLink] = useMutation($deleteReportLink)
   const [form, setForm] = useState<IReportLinksFormProps>({
-    isOpen: false
+    open: false
   })
+  const [selectedLink, onSelectionChanged] = useState<ReportLink>(null)
   const [ConfirmationDialog, getResponse] = useConfirmationDialog()
 
   /**
    * Callback function for after a report link is saved.
    */
   const onSave = useCallback(() => {
-    query.refetch().then(() => setForm({ isOpen: false }))
+    query.refetch().then(() => setForm({ open: false }))
   }, [query])
 
   /**
    * Callback function for when a report link is edited.
    */
-  const onEdit = useCallback((reportLink: ReportLink) => {
-    setForm({ isOpen: true, edit: reportLink })
-  }, [])
+  const onEdit = useCallback(() => {
+    setForm({ open: true, edit: selectedLink })
+  }, [selectedLink])
 
   /**
    * Callback function for when the form is dismissed.
    */
   const onDismiss = useCallback(() => {
-    setForm({ isOpen: false })
+    setForm({ open: false })
   }, [])
 
   /**
    * Callback function for deleting a report link.
    */
-  const onDelete = useCallback(
-    async (reportLink: ReportLink) => {
-      const response = await getResponse({
-        title: t('admin.reportLinks.confirmDeleteTitle'),
-        subText: t('admin.reportLinks.confirmDeleteSubText', reportLink),
-        responses: [[t('common.yes'), true, true], [t('common.no')]]
-      })
-      if (response === true) {
-        deleteReportLink({ variables: { name: reportLink.name } }).then(
-          query.refetch
-        )
-      }
-    },
-    [deleteReportLink]
-  )
+  const onDelete = useCallback(async () => {
+    const response = await getResponse({
+      title: t('admin.reportLinks.confirmDeleteTitle'),
+      subText: t('admin.reportLinks.confirmDeleteSubText', selectedLink),
+      responses: [
+        [t('common.yes'), true, true],
+        [t('common.no'), false, false]
+      ]
+    })
+    if (!response) return
+    deleteReportLink({ variables: { name: selectedLink.name } }).then(
+      query.refetch
+    )
+  }, [selectedLink, deleteReportLink])
 
   useEffect(() => {
     query.refetch()
   }, [form])
 
-  const columns = useColumns({ onEdit, onDelete })
+  const columns = useColumns()
 
   return {
     columns,
@@ -80,6 +79,10 @@ export function useReportLinks() {
     },
     setForm,
     query,
-    ConfirmationDialog
-  } as const
+    ConfirmationDialog,
+    onEdit,
+    onDelete,
+    selectedLink,
+    onSelectionChanged
+  }
 }

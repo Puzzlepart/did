@@ -1,68 +1,81 @@
 import { useMutation } from '@apollo/client'
-import { ISubmitProps } from 'components/FormControl'
-import { useToast } from 'components/Toast'
-import { useContext } from 'react'
+import { useAppContext } from 'AppContext'
+import { FormSubmitHook } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
-import { ProjectsContext } from '../context'
 import $create_or_update_project from './create-or-update-project.gql'
-import { IProjectFormProps } from './types'
+import { CreateOrUpdateProjectVariables, IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'
 import { useProjectModel } from './useProjectModel'
 
 /**
- * Returns submit props used by `<FormControl />`
+ * Creates submit props used by `<FormControl />`.
  *
  * @param props - Props
  * @param model - Model
  *
  * @returns `toast`, `onClick` and `disabled`
  */
-export function useProjectFormSubmit(
-  props: IProjectFormProps,
-  model: ReturnType<typeof useProjectModel>,
-  options: ReturnType<typeof useProjectFormOptions>
-): ISubmitProps {
+export const useProjectFormSubmit: FormSubmitHook<
+  IProjectFormProps,
+  ReturnType<typeof useProjectModel>,
+  ReturnType<typeof useProjectFormOptions>
+> = (props, model, options) => {
   const { t } = useTranslation()
-  const { refetch } = useContext(ProjectsContext)
-  const [toast, setToast] = useToast(8000, { isMultiline: true })
-  const [mutate, { loading }] = useMutation($create_or_update_project)
+  const { displayToast } = useAppContext()
+  const [createOrUpdateProjct, { loading }] = useMutation<
+    any,
+    CreateOrUpdateProjectVariables
+  >($create_or_update_project)
 
   /**
    * On form submit
    */
   async function onClick() {
+    const variables: CreateOrUpdateProjectVariables = {
+      project: model.$,
+      options: options.$,
+      update: !!props.edit
+    }
     try {
-      await mutate({
-        variables: {
-          project: model.$,
-          options: options.$,
-          update: !!props.edit
+      await createOrUpdateProjct({ variables })
+      displayToast(
+        variables.update
+          ? t('projects.updateSuccess', {
+              ...variables.project,
+              projectId: model.projectId
+            })
+          : t('projects.createSuccess', {
+              ...variables.project,
+              projectId: model.projectId
+            }),
+        'success',
+        6,
+        {
+          onClick: () => {
+            if (variables.update) return
+            window.location.replace(
+              `/projects/${model.projectId.split(' ').join('_')}`
+            )
+          }
         }
-      })
-      if (props.panelProps) {
-        setTimeout(() => props.panelProps.onSave(), 1000)
-      } else {
-        setToast({
-          text: t('projects.createSuccess', {
-            projectId: model.projectId,
-            name: model.$.name
-          }),
-          type: 'success'
-        })
-        refetch()
-        model.reset()
-      }
+      )
+      model.reset()
+      props.refetch()
     } catch {
-      setToast({
-        text: t('projects.createError'),
-        type: 'error'
-      })
+      displayToast(
+        variables.update
+          ? t('projects.updateError', {
+              ...variables.project,
+              projectId: model.projectId
+            })
+          : t('projects.createError'),
+        'error'
+      )
     }
   }
   return {
-    toast,
     text: props.edit ? t('common.save') : t('common.add'),
     onClick,
-    disabled: loading || !model.valid || !!toast
+    disabled: loading
   }
 }
