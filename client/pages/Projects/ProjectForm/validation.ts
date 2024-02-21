@@ -28,7 +28,7 @@ export function useValidateKeyFunction() {
  * unique among the customers.
  *
  * @param customerKey  The key of the selected customer.
- * @param enabled  Whether the validation is enabled.
+ * @param enabled  Whether the validation is enabled (default: `false`).
  *
  * @returns An validator function that resolves with an error message
  * if the key is not unique, or null if it is unique.
