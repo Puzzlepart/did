@@ -5,6 +5,7 @@ import {
 } from 'components/FormControl/AutocompleteControl'
 import { useFabricIcons } from 'hooks'
 import { IIconPickerControlProps } from './types'
+import { useMemo } from 'react'
 
 /**
  * @category Reusable Component
@@ -17,11 +18,20 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
    *
    * @returns The default selected key as a string.
    */
-  const getDefaultSelectedKey = () => {
-    const { defaultSelected, model, name } = props
+  const selectedKey =  useMemo(() => {
+    const {
+      defaultSelected,
+      model,
+      name,
+      random
+    } = props
+    if (random) {
+      const randomIndex = Math.floor(Math.random() * items.length)
+      return items[randomIndex].key
+    }
     if (defaultSelected) return defaultSelected
     if (model && name) return model.value(name) as string
-  }
+  }, [props.defaultSelected])
 
   /**
    * Clears the selected icon and updates the model.
@@ -50,12 +60,10 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
   return {
     ...props,
     items,
-    defaultSelectedKey: getDefaultSelectedKey(),
+    selectedKey,
     onSelected,
     onClear,
     itemIcons: true,
-    getIcon: (item: ISuggestionItem<IIconProps>) => {
-      return item.iconName
-    }
+    getIcon: (item: ISuggestionItem<IIconProps>) => item.iconName,
   } as IAutocompleteControlProps
 }

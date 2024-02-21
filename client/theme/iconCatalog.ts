@@ -1,4 +1,6 @@
 import {
+  ChevronDownRegular,
+  ChevronDownFilled,
   ArrowUploadRegular,
   ArrowUploadFilled,
   AddCircle24Filled,
@@ -151,6 +153,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  ChevronDown: {
+    regular: ChevronDownRegular,
+    filled: ChevronDownFilled
+  },
   ArrowUpload: {
     regular: ArrowUploadRegular,
     filled: ArrowUploadFilled
