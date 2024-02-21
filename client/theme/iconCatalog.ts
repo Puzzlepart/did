@@ -146,13 +146,19 @@ import {
   ColorRegular,
   ColorFilled,
   DesignIdeasRegular,
-  DesignIdeasFilled
-} from '@fluentui/react-icons'
+  DesignIdeasFilled,
+  BoxSearchRegular,
+  BoxSearchFilled,
+} from '@fluentui/react-icons'  
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  BoxSearch: {
+    regular: BoxSearchRegular,
+    filled: BoxSearchFilled
+  },
   ChevronDown: {
     regular: ChevronDownRegular,
     filled: ChevronDownFilled
