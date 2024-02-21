@@ -15,7 +15,10 @@ import { ProjectFormOptions } from './ProjectFormOptions'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
-import { useValidateKeyFunction, useValidateUniqueKeyFunction } from './validation'
+import {
+  useValidateKeyFunction,
+  useValidateUniqueKeyFunction
+} from './validation'
 
 /**
  * ProjectForm component is used to create and edit projects.
@@ -27,7 +30,9 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { model, register, options, formControlProps, isCustomerContext } =
     useProjectForm(props)
   const ValidateKeyFunction = useValidateKeyFunction()
-  const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction(model.value('customerKey'))
+  const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction(
+    model.value('customerKey')
+  )
   return (
     <FormControl {...formControlProps}>
       {(!isCustomerContext || !!props.edit) && (

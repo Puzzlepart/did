@@ -148,8 +148,8 @@ import {
   DesignIdeasRegular,
   DesignIdeasFilled,
   BoxSearchRegular,
-  BoxSearchFilled,
-} from '@fluentui/react-icons'  
+  BoxSearchFilled
+} from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.

@@ -44,7 +44,8 @@ export const AutocompleteControl: FormInputControlComponent<
           )}
         >
           <div ref={ref} className={styles.container}>
-            {(state.value && props.iconPreview) &&
+            {state.value &&
+              props.iconPreview &&
               getFluentIconWithFallback(state.value, {
                 size: 18
               })}

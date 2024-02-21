@@ -23,11 +23,10 @@ export function useValidateKeyFunction() {
   return ValidateKeyFunction
 }
 
-
 /**
  * Returns an validator function that checks if the provided `key` is
  * unique among the customers.
- * 
+ *
  * @param customerKey  The key of the selected customer.
  *
  * @returns An validator function that resolves with an error message
@@ -36,16 +35,20 @@ export function useValidateKeyFunction() {
 export function useValidateUniqueKeyFunction(customerKey: string) {
   const context = useProjectsContext()
   const { t } = useTranslation()
-  const ValidateUniqueKeyFunction: ValidatorFunction<string> = (
-    value
-  ) => {
+  const ValidateUniqueKeyFunction: ValidatorFunction<string> = (value) => {
     const projects = context.state.projects.filter(
       (p) => p.customerKey === customerKey
     )
     if (_.isEmpty(projects)) return null
     const existingProject = projects.find((p) => p.key === value)
     if (!existingProject) return null
-    return [t('projects.keyNotUniqueError', { ...existingProject.customer, key: value }), 'error']
+    return [
+      t('projects.keyNotUniqueError', {
+        ...existingProject.customer,
+        key: value
+      }),
+      'error'
+    ]
   }
   return ValidateUniqueKeyFunction
 }

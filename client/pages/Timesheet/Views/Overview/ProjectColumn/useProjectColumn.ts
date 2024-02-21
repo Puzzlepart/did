@@ -20,22 +20,25 @@ export function useProjectColumn(event: EventObject) {
     iconName: 'BoxSearch',
     iconColor: '#fff',
     onClick: () => {
-      context.dispatch(TOGGLE_MANUAL_MATCH_PANEL({event}))
+      context.dispatch(TOGGLE_MANUAL_MATCH_PANEL({ event }))
     }
   }
   switch (event.error?.code) {
-    case 'PROJECT_INACTIVE': {
-      errorText = t('projectInactiveErrorText')
-    }
+    case 'PROJECT_INACTIVE':
+      {
+        errorText = t('projectInactiveErrorText')
+      }
       break
-    case 'CUSTOMER_INACTIVE': {
-      errorText = t('customerInactiveErrorText')
-    }
+    case 'CUSTOMER_INACTIVE':
+      {
+        errorText = t('customerInactiveErrorText')
+      }
       break
-    case 'EVENT_NO_TITLE': {
-      errorText = t('eventNoTitleErrorText')
-      manualResolveAction = null
-    }
+    case 'EVENT_NO_TITLE':
+      {
+        errorText = t('eventNoTitleErrorText')
+        manualResolveAction = null
+      }
       break
   }
 

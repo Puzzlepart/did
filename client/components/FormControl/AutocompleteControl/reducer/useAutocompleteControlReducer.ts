@@ -38,8 +38,10 @@ export function useAutocompleteControlReducer({
           if (payload.props.initialFilter) {
             state.suggestions = payload.props.items.filter(({ data }) =>
               Object.keys(payload.props.initialFilter).every(
-                (key) => _.get(data, key) === _.get(payload.props.initialFilter, key)
-              ))
+                (key) =>
+                  _.get(data, key) === _.get(payload.props.initialFilter, key)
+              )
+            )
             if (state.suggestions.length === 0) {
               state.placeholder = intialFilterPlaceholder ?? placeholder
             }
@@ -61,10 +63,10 @@ export function useAutocompleteControlReducer({
           state.suggestions =
             state.value.length >= minCharacters
               ? state.items.filter((index) =>
-                index.searchValue
-                  .toLowerCase()
-                  .includes(payload.toLowerCase())
-              )
+                  index.searchValue
+                    .toLowerCase()
+                    .includes(payload.toLowerCase())
+                )
               : []
           state.placeholder = placeholder
         })
