@@ -30,7 +30,6 @@ jobs:
 
     - run: |
         npm ci --no-audit --no-fund --loglevel=error
-
     - name: Create package
       run: |
         npm run package
@@ -66,4 +65,3 @@ jobs:
         app-name: 'didapp'
         publish-profile: ${{ secrets.DIDAPP_PUBLISH_PROFILE }}
         package: ./did-package.zip
-
