@@ -14,7 +14,7 @@ import { useProjects } from './useProjects'
 export const Projects: FC = () => {
   const { t } = useTranslation()
   const { context, renderDetails } = useProjects()
-  
+
   return (
     <ProjectsContext.Provider value={{ ...context }}>
       {renderDetails ? (

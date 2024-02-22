@@ -42,7 +42,7 @@ export function useValidateUniqueKeyFunction(
   const ValidateUniqueKeyFunction: ValidatorFunction<string> = (value) => {
     if (!enabled) return null
 
-    if(_.isEmpty(context.state?.projects)) return null
+    if (_.isEmpty(context.state?.projects)) return null
 
     const projects = context.state.projects.filter(
       (p) => p.customer?.key === customerKey
