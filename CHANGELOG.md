@@ -17,65 +17,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.13.0 - N/A](#-0130---na)
+	* [➤ 0.13.2 - TBA](#-0132---tba)
 		* [Fixed](#fixed)
-	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
-		* [Added](#added)
+	* [➤ 0.13.1 - 21.02.2024](#-0131---21022024)
 		* [Fixed](#fixed-1)
-		* [Changed](#changed)
-	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
-		* [Added](#added-1)
+	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
 		* [Fixed](#fixed-2)
-		* [Changed](#changed-1)
-	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
+		* [Added](#added)
+		* [Changed](#changed)
+	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
+		* [Added](#added-1)
 		* [Fixed](#fixed-3)
-	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
-		* [Fixed](#fixed-4)
-	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
-		* [Fixed](#fixed-5)
-	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
+		* [Changed](#changed-1)
+	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added-2)
-		* [Fixed](#fixed-6)
+		* [Fixed](#fixed-4)
 		* [Changed](#changed-2)
-	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
-		* [Added](#added-3)
+	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
+		* [Fixed](#fixed-5)
+	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
+		* [Fixed](#fixed-6)
+	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
 		* [Fixed](#fixed-7)
-		* [Changed](#changed-3)
-	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
-		* [Added](#added-4)
+	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
+		* [Added](#added-3)
 		* [Fixed](#fixed-8)
+		* [Changed](#changed-3)
+	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
+		* [Added](#added-4)
+		* [Fixed](#fixed-9)
 		* [Changed](#changed-4)
+	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
+		* [Added](#added-5)
+		* [Fixed](#fixed-10)
+		* [Changed](#changed-5)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
-		* [Added](#added-5)
-		* [Fixed](#fixed-9)
-	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
 		* [Added](#added-6)
-		* [Fixed](#fixed-10)
+		* [Fixed](#fixed-11)
+	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
+		* [Added](#added-7)
+		* [Fixed](#fixed-12)
 	* [➤ 0.6.0 - N/A](#-060---na)
 	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
-		* [Added](#added-7)
-		* [Fixed](#fixed-11)
-	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
 		* [Added](#added-8)
-		* [Fixed](#fixed-12)
 		* [Fixed](#fixed-13)
-	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
+	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
 		* [Added](#added-9)
 		* [Fixed](#fixed-14)
-	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
 		* [Fixed](#fixed-15)
-	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
 		* [Added](#added-10)
+		* [Fixed](#fixed-16)
+	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+		* [Fixed](#fixed-17)
+	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+		* [Added](#added-11)
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0130---na)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0132---tba)
 
-## ➤ 0.13.0 - N/A
+## ➤ 0.13.2 - TBA
+
+### Fixed
+- Fix for [#1204](https://github.com/Puzzlepart/did/issues/1204)
+- Fix for [#1207](https://github.com/Puzzlepart/did/issues/1207)
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0131---21022024)
+
+## ➤ 0.13.1 - 21.02.2024
+
+### Fixed
+- Fix for [#1197](https://github.com/Puzzlepart/did/issues/1197)
+- Fix for [#1200](https://github.com/Puzzlepart/did/issues/1200)
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0130---21022024)
+
+## ➤ 0.13.0 - 21.02.2024
 
 ### Fixed
 - Fix for [#1112](https://github.com/Puzzlepart/did/issues/1112)
+- Deactivated projects can no longer be selectable when resolving manually [#1171](https://github.com/Puzzlepart/did/issues/1171)
+- Fixed Icon field will now be cleared when a new project has been created [#1188](https://github.com/Puzzlepart/did/issues/1188)
+- Fixed Missing key prop on DetailsRowFields component [#1147](https://github.com/Puzzlepart/did/issues/1147)
+- Fix for action bar glitching in Timesheet [#1132](https://github.com/Puzzlepart/did/issues/1132)
+
+### Added
+- Improved general look and feel - now using the new [Fluent UI 9](https://react.fluentui.dev/?path=/docs/concepts-developer-quick-start--page)
+- Company brand support [#1170](https://github.com/Puzzlepart/did/issues/1170)
+- Enriched Subscription Teams settings with fields for Teams reminder messages [#1185](https://github.com/Puzzlepart/did/issues/1185)
+- Added WeekStatus GraphQL API Endpoint for User Week Confirmation Status [#1181](https://github.com/Puzzlepart/did/issues/1181)
+
+### Changed
+- Better handling of signin errors [#1176](https://github.com/Puzzlepart/did/issues/1176)
+- Migrating to `@apollo/server@v4` [#1116](https://github.com/Puzzlepart/did/issues/1116)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0120---17042023)
