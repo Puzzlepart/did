@@ -11,7 +11,7 @@ export interface IProjectsContext
     QueryResult<Pick<IProjectsState, 'projects' | 'outlookCategories'>>
   > {
   state: IProjectsState
-  dispatch: React.Dispatch<AnyAction>
+  dispatch?: React.Dispatch<AnyAction>
 }
 
 /**

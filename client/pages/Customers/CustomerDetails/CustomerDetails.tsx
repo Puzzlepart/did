@@ -1,6 +1,6 @@
 import { Tabs } from 'components/Tabs'
 import { UserMessage } from 'components/UserMessage'
-import { ProjectForm } from 'pages/Projects'
+import { ProjectForm, ProjectsContext } from 'pages/Projects'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -18,7 +18,7 @@ import { CustomerForm } from '../CustomerForm'
 export const CustomerDetails: StyledComponent = () => {
   const { t } = useTranslation()
   const context = useCustomersContext()
-  const { error, tabs, refetch } = useCustomerDetails()
+  const { projects, error, tabs, refetch } = useCustomerDetails()
 
   return (
     <div className={CustomerDetails.className}>
@@ -28,7 +28,9 @@ export const CustomerDetails: StyledComponent = () => {
       )}
       <Tabs items={tabs} level={3} />
       <CustomerForm {...context.state.customerForm} />
-      <ProjectForm {...context.state.projectForm} refetch={refetch} />
+      <ProjectsContext.Provider value={{ state: { projects } }}>
+        <ProjectForm {...context.state.projectForm} refetch={refetch} />
+      </ProjectsContext.Provider>
     </div>
   )
 }

@@ -46,7 +46,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           t('common.tagFieldLabel'),
           {
             minWidth: 160,
-            maxWidth: 180,
+            maxWidth: 240,
             renderAs: 'projectTag',
             createRenderProps: (project) => ({
               project,
