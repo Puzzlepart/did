@@ -45,7 +45,7 @@ export function useValidateUniqueKeyFunction(
     if(_.isEmpty(context.state?.projects)) return null
 
     const projects = context.state.projects.filter(
-      (p) => p.customerKey === customerKey
+      (p) => p.customer?.key === customerKey
     )
     if (_.isEmpty(projects)) return null
     const existingProject = projects.find((p) => p.key === value)
