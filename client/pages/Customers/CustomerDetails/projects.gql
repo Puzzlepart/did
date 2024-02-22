@@ -12,5 +12,9 @@ query CustomerProjects ($customerKey: String) {
       color
       icon
     }
+    customer {
+      key
+      name
+    }
   }
 }

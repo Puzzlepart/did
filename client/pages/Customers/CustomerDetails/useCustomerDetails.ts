@@ -12,7 +12,7 @@ export function useCustomerDetails() {
   const { t } = useTranslation()
   const context = useContext(CustomersContext)
   const selected = context.state.selected
-  const [projects, { loading, error, refetch }] = useProjectsQuery(selected)
+  const [projects, { error, refetch }] = useProjectsQuery(selected)
   const tabs: TabItems = useMemo(
     () => ({
       information: [
@@ -48,11 +48,5 @@ export function useCustomerDetails() {
     }),
     [context.state, context.loading, selected, projects]
   )
-  return {
-    loading,
-    error,
-    tabs,
-    selected,
-    refetch
-  }
+  return { projects, error, tabs, refetch }
 }

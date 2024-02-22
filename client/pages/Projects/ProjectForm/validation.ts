@@ -1,7 +1,7 @@
 import { ValidatorFunction } from 'components'
+import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { useProjectsContext } from '../context'
-import _ from 'lodash'
 
 /**
  * Returns a validator function that checks if the given value is a valid project key.
@@ -41,8 +41,11 @@ export function useValidateUniqueKeyFunction(
   const { t } = useTranslation()
   const ValidateUniqueKeyFunction: ValidatorFunction<string> = (value) => {
     if (!enabled) return null
+
+    if(_.isEmpty(context.state?.projects)) return null
+
     const projects = context.state.projects.filter(
-      (p) => p.customerKey === customerKey
+      (p) => p.customer?.key === customerKey
     )
     if (_.isEmpty(projects)) return null
     const existingProject = projects.find((p) => p.key === value)
