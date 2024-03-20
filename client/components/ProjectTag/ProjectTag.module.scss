@@ -1,0 +1,22 @@
+.projectTag {
+    margin: 0;
+}
+
+.colorPresets {
+    width: 200px;
+    padding: 5px 15px;
+    box-sizing: border-box;
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        .preset {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+}
