@@ -2,6 +2,7 @@ import { Tag } from '@fluentui/react-tags-preview'
 import { EntityLabel, InformationProperty, UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
 import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import { useCustomersContext } from '../../context'
@@ -23,6 +24,14 @@ export const CustomerInformation: StyledComponent = () => {
         text={t('customers.inactiveText')}
         intent='warning'
       />
+      {context.state.selected?.description && (
+        <InformationProperty
+          title={t('common.descriptionFieldLabel')}
+          value={context.state.selected?.description}
+          onRenderValue={(value) =>   <ReactMarkdown>{value}</ReactMarkdown>}
+          isDataLoaded={!context.loading}
+        />
+      )}
       <InformationProperty
         title={t('projects.tagLabel')}
         value={context.state.selected?.key}
