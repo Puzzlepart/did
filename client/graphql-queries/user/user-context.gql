@@ -21,6 +21,9 @@ query UserContext {
         totalDays
         eventCategory
       }
+      budgetTracking {
+        enabled
+      }
       teams {
         enabled
         missingSubmissionsEnabled

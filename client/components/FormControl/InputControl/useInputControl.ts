@@ -53,10 +53,14 @@ function transformValue(
  */
 export function useInputControl(props: IInputControlProps) {
   const context = useFormContext()
-  const onChange = useCallback((_event, value) => {
-    context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
-    props.model.set(props.name, transformValue(value, props))
-  }, [])
+
+  const onChange = useCallback(
+    (_event, value) => {
+      context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
+      props.model.set(props.name, transformValue(value, props))
+    },
+    [props.model]
+  )
 
   const value = props.model.value<string>(props.name, '')
 

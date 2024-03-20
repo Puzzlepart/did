@@ -148,13 +148,19 @@ import {
   DesignIdeasRegular,
   DesignIdeasFilled,
   BoxSearchRegular,
-  BoxSearchFilled
+  BoxSearchFilled,
+  ChartMultipleRegular,
+  ChartMultipleFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  ChartMultiple: {
+    regular: ChartMultipleRegular,
+    filled: ChartMultipleFilled
+  },
   BoxSearch: {
     regular: BoxSearchRegular,
     filled: BoxSearchFilled

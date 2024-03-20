@@ -18,6 +18,12 @@ query ProjectsOutlook {
       icon
     }
     inactive
+    budgetTracking {
+      trackingEnabled
+      hours
+      warningThreshold
+      criticalThreshold
+    }
   }
   outlookCategories {
     id

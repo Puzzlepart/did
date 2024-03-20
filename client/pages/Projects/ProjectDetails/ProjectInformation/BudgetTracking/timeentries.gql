@@ -1,0 +1,6 @@
+
+  query ProjectReport ($query: ReportsQuery!) {
+    timeEntries: report(query: $query) {
+      duration
+    }
+  }

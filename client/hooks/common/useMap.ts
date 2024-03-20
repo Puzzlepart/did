@@ -1,6 +1,20 @@
+import _ from 'lodash'
 import { useState } from 'react'
 import setValue from 'set-value'
 import s from 'underscore.string'
+
+/**
+ * Options for the `useMap` hook.
+ */
+export type UseMapOptions = {
+  /**
+   * If `true`, the keys of the map are treated as nested property paths.
+   * For instance `set('a.b', 1)` will set the value of `b` on the object
+   * at the key `a`. If `false`, the key is treated as a single key even
+   * if it contains one or serveral dots.
+   */
+  useNestedKeys?: boolean
+}
 
 /**
  * Hook for using a `Map` as a state object. A set of
@@ -24,7 +38,10 @@ export function useMap<
   KeyType = string,
   ObjectType = Record<any, any>,
   ValueType = any
->(initialMap = new Map()): TypedMap<KeyType, ObjectType, ValueType> {
+>(
+  initialMap = new Map(),
+  options: UseMapOptions = {}
+): TypedMap<KeyType, ObjectType, ValueType> {
   const [$map, $set] = useState<Map<KeyType, ValueType>>(initialMap)
 
   const reset = () => $set(initialMap)
@@ -41,28 +58,50 @@ export function useMap<
   )
 
   /**
-   * Set `key` of `model`
+   * Set `key` of `model`. If the key is a nested
+   * property path, the value is set using `_.set`.
    *
    * @param key - Key
    * @param value - Value
    */
   const set = (key: KeyType, value: ValueType) => {
-    $set((_state) => new Map(_state).set(key, value))
+    if (!key) return
+    const [property, ...nestedKeys] = key.toString().split('.') as [
+      KeyType,
+      ...string[]
+    ]
+    if (_.isEmpty(nestedKeys) || !options.useNestedKeys)
+      return $set(new Map($map).set(key, value))
+    else {
+      let newValue = $map.get(property) ?? ({} as any)
+      newValue = _.set(newValue, nestedKeys.join('.'), value)
+      return $set(new Map($map).set(property, newValue))
+    }
   }
 
   /**
    * Get model value. The value is retrived
    * from the converted object. If the value
    * is `undefined` the default value is returned.
+   * If the key is a nested property path, the value
+   * is retrieved using `_.get`.
    *
-   * @param key - Key of the value to retrieve
-   * @param _defaultValue - Default value (default: `null`)
+   * @param key Key of the value to retrieve
+   * @param _defaultValue Default value (default: `null`)
    *
    * @returns Model value from the converted object
    */
   function value<T = ValueType>(key?: KeyType, _defaultValue: T = null): T {
     if (!key) return $ as unknown as T
-    return ($map.get(key) ?? _defaultValue) as T
+    const [property, ...nestedKeys] = key.toString().split('.') as [
+      KeyType,
+      ...string[]
+    ]
+    let value = $map.get(key) as unknown as T
+    if (_.isEmpty(nestedKeys) || !options.useNestedKeys)
+      return value ?? _defaultValue
+    value = $map.get(property) as unknown as T
+    return _.get(value, nestedKeys.join('.'), _defaultValue) as T
   }
 
   /**

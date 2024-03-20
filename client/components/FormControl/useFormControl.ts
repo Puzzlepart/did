@@ -5,6 +5,28 @@ import { ReactElement } from 'react-markdown/lib/react-markdown'
 import { CLEAR_VALIDATION_MESSAGES, useFormControlReducer } from './reducer'
 import { IFormControlProps } from './types'
 import { useFormControlValidation } from './useFormControlValidation'
+import React from 'react'
+
+/**
+ * Get the children of the form control. If children
+ * is a `Pivot` component, it will return the children of all
+ * the `PivotItem` components.
+ *
+ * @param children The children of the form control.
+ *
+ * @returns The children of the form control.
+ */
+function getChildControls(children: any) {
+  const controls = React.Children.toArray(children).flatMap((child: any) => {
+    if (child.props?.children) {
+      return getChildControls(child.props.children)
+    }
+    return child
+  })
+  // eslint-disable-next-line no-console
+  console.log(controls)
+  return controls
+}
 
 /**
  * Hook that returns an object with `footerActions` to be used in a form control.
@@ -28,7 +50,7 @@ export const useFormControl: ComponentLogicHook<
       ...props.submitProps,
       onClick: async (event: any) => {
         dispatch(CLEAR_VALIDATION_MESSAGES())
-        if (await validateForm(props.children as ReactElement[])) {
+        if (await validateForm(getChildControls(props.children))) {
           if (props.panel?.onDismiss) {
             props.panel.onDismiss()
           }

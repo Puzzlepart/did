@@ -2,7 +2,7 @@ import React from 'react'
 import { FormInputControlComponent } from '../types'
 import { CheckboxField } from './CheckboxField'
 import { ICheckboxControlProps } from './types'
-import { useCheckboxControlChange } from './useCheckboxControlChange'
+import { useCheckboxControl } from './useCheckboxControl'
 
 /**
  * Text field based on `<Checkbox />` from `@fluentui/react-components`
@@ -13,12 +13,12 @@ import { useCheckboxControlChange } from './useCheckboxControlChange'
 export const CheckboxControl: FormInputControlComponent<
   ICheckboxControlProps
 > = (props) => {
-  const onChange = useCheckboxControlChange(props)
+  const { onChange, checked } = useCheckboxControl(props)
   return (
     <CheckboxField
       {...props}
       onChange={(event, data) => onChange(event, data?.checked)}
-      checked={props.model.value<boolean>(props.name, false)}
+      checked={checked}
     />
   )
 }

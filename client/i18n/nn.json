@@ -116,7 +116,17 @@
     "customerRequired": "Oops! Droppet du ved et uhell å velge en kunde fra listen? På tide å velge en kunde og få dem til å føle seg verdsatt i prosjektet vårt - de vil ikke hjemsøke deg, det lover vi!",
     "updateSuccess": "Prosjektet **{{name}}** blei oppdatert heilt utan problemer.",
     "updateError": "Vi kan ikke oppdatere prosjektet **{{projectId}}** for øyeblikket.  Vennligst prøv igjen senere, eller spør en voksen om råd.",
-    "keyNotUniqueError": "Kunden {{name}} har allerede et prosjekt med nøkkelen {{key}}."
+    "keyNotUniqueError": "Kunden {{name}} har allerede et prosjekt med nøkkelen {{key}}.",
+    "budgetTracking": "Budsjett",
+    "budgetHoursUsed": "{{hours}} av {{budget}} timar brukt.",
+    "budget": "Budsjettoppfølging",
+    "budgetTrackingEnabled": "Skru på budsjettoppfølging",
+    "budgetTrackingEnabledDescription": "Skru på budsjettoppfølging for dette prosjektet.",
+    "budgetHours": "Budsjett i timar",
+    "budgetHoursDescription": "Budsjettet for dette prosjektet i antall timer. Vi tar ikke hensyn til ulike timepriser på dette tidspunktet.",
+    "budgetWarningThreshold": "Advarsel terskel for budsjett",
+    "budgetCriticalThreshold": "Kritisk terskel for budsjett",
+    "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -320,7 +330,9 @@
     "teamsMissingSubmissionsSinglePeriodText": "Meldingsmal for påminnelse for enkeltperioder",
     "teamsMissingSubmissionsMultiplePeriodsText": "Meldingsmal for påminnelse om flere perioder",
     "teamsMissingSubmissionsMultiplePeriodsTextDescription": "Angi meldingsmalen for en påminnelse for flere perioder. Tokenet `{0}` vil bli erstattet med de faktiske periodene.",
-    "teamsMissingSubmissionsSinglePeriodTextDescription": "Angi meldingsmalen for en påminnelse for flere perioder. Tokenet `{0}` vil bli erstattet med den faktiske perioden."
+    "teamsMissingSubmissionsSinglePeriodTextDescription": "Angi meldingsmalen for en påminnelse for flere perioder. Tokenet `{0}` vil bli erstattet med den faktiske perioden.",
+    "budgetTracking": "Budsjettoppfølging",
+    "budgetTrackingEnabledLabel": "Aktiver budsjettoppfølging"
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -556,7 +568,8 @@
     "tagFieldLabel": "Prosjektnøkkel",
     "outlookCategoryAdded": "Prosjektnøkkelen **{{tag}}** ble lagt til i Outlook som en kategori.",
     "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen.",
-    "ignoredHours": "Ignorerte timer"
+    "ignoredHours": "Ignorerte timer",
+    "general": "Generelt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

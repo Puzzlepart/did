@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.13.3-0",
+  "version": "0.13.3-2",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
@@ -343,6 +343,10 @@
     "colours": true
   },
   "gitmoji": {
+    "component": [
+      "🚀",
+      "Added a new React component"
+    ],
     "build": [
       "🏗️",
       "Make architectural changes"
@@ -445,6 +449,10 @@
     "templates": [
       "📃",
       "Added or updated issue or PR templates"
+    ],
+    "other": [
+      "🔧",
+      "Other changes that don't fit into any of the other categories"
     ]
   },
   "terser": {
