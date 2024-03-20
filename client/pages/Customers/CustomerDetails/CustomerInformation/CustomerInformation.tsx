@@ -28,7 +28,7 @@ export const CustomerInformation: StyledComponent = () => {
         <InformationProperty
           title={t('common.descriptionFieldLabel')}
           value={context.state.selected?.description}
-          onRenderValue={(value) =>   <ReactMarkdown>{value}</ReactMarkdown>}
+          onRenderValue={(value) => <ReactMarkdown>{value}</ReactMarkdown>}
           isDataLoaded={!context.loading}
         />
       )}
