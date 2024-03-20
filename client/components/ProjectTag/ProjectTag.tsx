@@ -52,8 +52,10 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
           </PopoverTrigger>
           {hasOutlookCategory ? (
             <PopoverSurface>
-            <ReactMarkdown linkTarget='_blank'>
-              {t('common.outlookCategoryRemove', {href:'https://outlook.office.com/mail/options/general/categories'})}
+              <ReactMarkdown linkTarget='_blank'>
+                {t('common.outlookCategoryRemove', {
+                  href: 'https://outlook.office.com/mail/options/general/categories'
+                })}
               </ReactMarkdown>
             </PopoverSurface>
           ) : (
