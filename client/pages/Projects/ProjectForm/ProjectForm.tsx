@@ -38,6 +38,8 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
     model.value('customerKey'),
     !props.edit
   )
+  // eslint-disable-next-line no-console
+  console.log(formControlProps.model.value())
   return (
     <FormControl {...formControlProps}>
       <Pivot
@@ -107,10 +109,10 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
           />
           <IconPickerControl
             {...register('icon')}
+            required
             label={t('common.iconFieldLabel')}
             description={t('projects.iconFieldDescription')}
             placeholder={t('common.iconSearchPlaceholder')}
-            required={true}
           />
           <CheckboxControl
             {...register('inactive')}

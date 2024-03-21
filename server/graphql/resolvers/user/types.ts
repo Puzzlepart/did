@@ -122,6 +122,12 @@ export class User {
 
   @Field({ nullable: true })
   accountEnabled?: boolean
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  employmentStartDate?: Date
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  employmentEndDate?: Date
 }
 
 /**
@@ -172,6 +178,12 @@ export class UserInput {
 
   @Field({ nullable: true })
   accountEnabled?: boolean
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  employmentStartDate?: Date
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  employmentEndDate?: Date
 }
 
 /**

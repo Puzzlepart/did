@@ -91,13 +91,6 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           text: role.name
         }))}
       />
-      {isEditMode && (
-        <CheckboxControl
-          {...register('hiddenFromReports')}
-          label={t('admin.userHiddenFromReportsLabel')}
-          description={t('admin.userHiddenFromReportsDescription')}
-        />
-      )}
       <DateControl
         {...register('employmentStartDate')}
         label={t('admin.users.employmentStartDateLabel')}
@@ -108,6 +101,13 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         label={t('admin.users.employmentEndDateLabel')}
         description={t('admin.users.employmentEndDateDescription')}
       />
+      {isEditMode && (
+        <CheckboxControl
+          {...register('hiddenFromReports')}
+          label={t('admin.userHiddenFromReportsLabel')}
+          description={t('admin.userHiddenFromReportsDescription')}
+        />
+      )}
     </FormControl>
   )
 }
