@@ -36,12 +36,11 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
    * Clears the selected icon and updates the model.
    */
   const onClear = () => {
-    const { onSelected, model, name } = props
-    if (onSelected) {
-      onSelected(null)
+    if (props.onSelected) {
+      props.onSelected(null)
     }
-    if (model && name) {
-      model.set(name, null)
+    if (props.model && props.name) {
+      props.model.set(name, null)
     }
   }
 
@@ -51,9 +50,8 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
    * @param item - The selected suggestion item.
    */
   const onSelected = (item: ISuggestionItem) => {
-    const { onSelected, model, name } = props
-    if (onSelected) onSelected(item?.data)
-    if (model && name) model.set(name, item?.data)
+    if (props.onSelected) props.onSelected(item?.data)
+    if (props.model && props.name) props.model.set(props.name, item?.data)
   }
 
   return {
@@ -63,6 +61,7 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
     onSelected,
     onClear,
     itemIcons: true,
+    iconPreview: true,
     getIcon: (item: ISuggestionItem<IIconProps>) => item.iconName
   } as IAutocompleteControlProps
 }

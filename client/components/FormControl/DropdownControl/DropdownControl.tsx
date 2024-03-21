@@ -27,6 +27,7 @@ export const DropdownControl: FormInputControlComponent<
     }
     return props.defaultValue
   }, [props.defaultValue, props.model, props.name])
+
   return (
     <FormControlContext.Consumer>
       {(context) => (

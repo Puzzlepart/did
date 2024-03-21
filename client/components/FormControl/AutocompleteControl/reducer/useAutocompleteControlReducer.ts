@@ -15,8 +15,7 @@ import { INIT, ON_SEARCH, RESET_SELECTION, SET_SELECTED } from './actions'
 export function useAutocompleteControlReducer({
   placeholder,
   intialFilterPlaceholder,
-  minCharacters,
-  onSelected
+  minCharacters
 }: IAutocompleteControlProps) {
   return useReducer(
     {
@@ -55,7 +54,6 @@ export function useAutocompleteControlReducer({
           state.value = ''
           state.suggestions = []
           state.placeholder = placeholder
-          onSelected(null)
         })
         .addCase(ON_SEARCH, (state, { payload }) => {
           state.selectedItem = null
@@ -79,7 +77,6 @@ export function useAutocompleteControlReducer({
           if (selectedItem) {
             state.value = selectedItem.text
             state.selectedItem = selectedItem
-            onSelected(selectedItem)
           }
         })
   )

@@ -14,7 +14,7 @@ export const IconPickerControl: FormInputControlComponent<
   IIconPickerControlProps
 > = (props) => {
   const autoCompleteProps = useIconPickerControl(props)
-  return <AutocompleteControl {...autoCompleteProps} iconPreview />
+  return <AutocompleteControl {...autoCompleteProps} />
 }
 
 IconPickerControl.displayName = 'IconPickerControl'
