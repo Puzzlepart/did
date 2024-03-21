@@ -9,6 +9,7 @@ import styles from './CustomerDetails.module.scss'
 import { CustomerHeader } from './CustomerHeader'
 import { useCustomerDetails } from './useCustomerDetails'
 import { CustomerForm } from '../CustomerForm'
+import { CustomerInformation } from './CustomerInformation'
 
 /**
  * Displays the details of a customer, including a list of projects.
@@ -26,6 +27,7 @@ export const CustomerDetails: StyledComponent = () => {
       {error && (
         <UserMessage intent='error'>{t('common.genericErrorText')}</UserMessage>
       )}
+      <CustomerInformation />
       <Tabs items={tabs} level={3} />
       <CustomerForm {...context.state.customerForm} />
       <ProjectsContext.Provider value={{ state: { projects } }}>
