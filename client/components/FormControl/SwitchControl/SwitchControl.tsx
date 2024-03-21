@@ -4,7 +4,7 @@ import _ from 'underscore'
 import { Field } from '../Field'
 import { FormInputControlComponent } from '../types'
 import styles from './SwitchControl.module.scss'
-import { useSwitchControlChange } from './useSwitchControlChange'
+import { useSwitchControl } from './useSwitchControl'
 
 /**
  * Text field based on `<Switch />` from `@fluentui/react-components`
@@ -13,13 +13,14 @@ import { useSwitchControlChange } from './useSwitchControlChange'
  * @category Reusable Component
  */
 export const SwitchControl: FormInputControlComponent = (props) => {
-  const onChange = useSwitchControlChange(props)
+  const { value, onChange } = useSwitchControl(props)
   return (
     <Field
       className={SwitchControl.className}
       {..._.pick(props, 'name', 'label', 'description', 'required', 'hidden')}
     >
       <Switch
+        checked={value}
         onChange={(event, data) => onChange(event, data.checked)}
         defaultChecked={props.model?.value<boolean>(props.name)}
       />
