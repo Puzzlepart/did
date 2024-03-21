@@ -8,7 +8,7 @@ import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
-import { ProjectPopover } from 'components/ProjectTooltip'
+import { ProjectPopover } from 'components/ProjectPopover/ProjectPopover'
 
 /**
  * Renders a `<Link />` or `<Button />` that navigates to the specified project.

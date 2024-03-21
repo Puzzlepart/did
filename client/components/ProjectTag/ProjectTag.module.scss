@@ -1,5 +1,11 @@
 .projectTag {
     margin: 0;
+    border: none !important;
+    outline: none !important;
+    [class*='fui-InteractionTagPrimary'] {
+        border: none;
+        outline: none;
+    }
 }
 
 .colorPresets {

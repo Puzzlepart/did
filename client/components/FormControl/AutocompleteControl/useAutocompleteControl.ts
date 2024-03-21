@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useAutocompleteControlReducer } from './reducer'
 import { INIT, RESET_SELECTION } from './reducer/actions'
 import { IAutocompleteControlProps } from './types'
+import _ from 'lodash'
 
 /**
  * Component logic hook for AutocompleteControl component. This hook is responsible for
@@ -30,6 +31,7 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
   }, [props.selectedKey])
 
   useEffect(() => {
+    if (_.isEmpty(state.items)) return
     props.onSelected(state.selectedItem ?? null)
   }, [state.selectedItem])
 
