@@ -29,7 +29,10 @@ import {
   SubscriptionBudgetTrackingSettings,
   SubscriptionBudgetTrackingSettingsInput
 } from './SubscriptionBudgetTrackingSettings'
-import { SubscriptionSecuritySettings, SubscriptionSecuritySettingsInput } from './SubscriptionSecuritySettings'
+import {
+  SubscriptionSecuritySettings,
+  SubscriptionSecuritySettingsInput
+} from './SubscriptionSecuritySettings'
 
 /**
  * @category GraphQL ObjectType

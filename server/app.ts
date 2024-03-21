@@ -180,10 +180,11 @@ export class App {
    * Setup error handling using `http-errors`
    */
   setupErrorHandling() {
-    this.instance.use((_request, _response, next) => next(createError(401)))
+    this.instance.use((_request, response, next) =>
+      next(createError(response.statusCode))
+    )
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
-        console.error('Error', error, JSON.stringify(error))
         response.render('index', {
           error: JSON.stringify(_.pick(error, 'name', 'message', 'status'))
         })

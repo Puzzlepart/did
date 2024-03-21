@@ -70,21 +70,16 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async getById(idOrMail: string): Promise<User> {
     try {
-      console.log('UserService.getById')
       const user = await this.collection.findOne({
         $or: [{ _id: idOrMail }, { mail: idOrMail }]
       })
       if (!user) return null
       if (!user.role) throw new Error(`The user ${idOrMail} has no role set.`)
-      // eslint-disable-next-line no-console
-      console.log('UserService.getById', JSON.stringify(user))
       user.id = user._id
       user.role = await this._role.getByName(user.role as string)
       user.configuration = JSON.stringify(user.configuration)
       return user
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log('UserService.getById', error)
       throw error
     }
   }
