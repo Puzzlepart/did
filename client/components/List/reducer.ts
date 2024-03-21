@@ -31,6 +31,12 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
 )
 
+/**
+ * Applies filters to an array of items based on the provided filter values.
+ *
+ * @param items The array of items to filter.
+ * @param filterValues The filter values to apply.
+ */
 function applyFilters<T = any>(
   items: T[],
   filterValues: IListState['filterValues'] = {}
