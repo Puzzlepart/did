@@ -31,7 +31,7 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
   }, [props.selectedKey])
 
   useEffect(() => {
-    if(_.isEmpty(state.items)) return
+    if (_.isEmpty(state.items)) return
     props.onSelected(state.selectedItem ?? null)
   }, [state.selectedItem])
 

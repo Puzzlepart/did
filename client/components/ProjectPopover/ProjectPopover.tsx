@@ -14,11 +14,12 @@ import { IProjectPopoverProps } from './types'
  *
  * @category Reusable Component
  */
+
 export const ProjectPopover: ReusableComponent<IProjectPopoverProps> = (
   props
 ) => {
   return (
-    <Popover openOnHover={true} mouseLeaveDelay={250} openOnContext={true}>
+    <Popover openOnHover={true} mouseLeaveDelay={250} openOnContext>
       <PopoverTrigger>
         <div>{props.children}</div>
       </PopoverTrigger>
