@@ -25,4 +25,9 @@ export interface IProjectTagProps extends HTMLProps<HTMLDivElement> {
    * Display the project icon.
    */
   displayIcon?: boolean
+
+  /**
+   * The href for the Outlook categories page.
+   */
+  outlookCategoriesHref?: string
 }

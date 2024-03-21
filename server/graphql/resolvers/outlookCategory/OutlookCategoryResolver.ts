@@ -47,10 +47,14 @@ export class OutlookCategoryResolver {
     description: 'Create Outlook category'
   })
   async createOutlookCategory(
-    @Arg('category') category: string
+    @Arg('category') category: string,
+    @Arg('colorPresetIndex', { nullable: true }) colorPresetIndex?: number
   ): Promise<CreateOutlookCategoryResult> {
     try {
-      const data = await this._msgraph.createOutlookCategory(category)
+      const data = await this._msgraph.createOutlookCategory(
+        category,
+        colorPresetIndex
+      )
       return { success: true, data }
     } catch (error) {
       return {
