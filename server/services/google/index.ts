@@ -5,6 +5,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { EventObject } from '../../graphql'
 import { environment } from '../../utils/environment'
+import { Request } from '../../graphql/requestContext'
 
 /**
  * Google calendar service
@@ -15,7 +16,7 @@ import { environment } from '../../utils/environment'
 class GoogleCalendarService {
   private _cal: calendar_v3.Calendar
 
-  constructor(@Inject('REQUEST') private readonly _request: any) {
+  constructor(@Inject('REQUEST') private readonly _request: Request) {
     if (this._request.user) {
       const client = new google.auth.OAuth2({
         clientId: environment('GOOGLE_CLIENT_ID'),

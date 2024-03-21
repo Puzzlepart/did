@@ -4,6 +4,7 @@ import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
+import { Request } from '../graphql/requestContext'
 const debug = createDebug('services/msoauth')
 
 export interface MSAccessTokenOptions {
@@ -24,7 +25,7 @@ export interface MSAccessTokenOptions {
  */
 @Service({ global: false })
 export default class MSOAuthService {
-  constructor(@Inject('REQUEST') private readonly _request: any) {
+  constructor(@Inject('REQUEST') private readonly _request: Request) {
     // Empty constructor
   }
 
@@ -39,11 +40,6 @@ export default class MSOAuthService {
       authorizePath: options.authorizePath || 'oauth2/v2.0/authorize',
       tokenPath: options.tokenPath || 'oauth2/v2.0/token'
     }
-    debug(
-      `Creating AuthorizationCode client with options: ${colors.magenta(
-        JSON.stringify(auth)
-      )}`
-    )
     return new AuthorizationCode({
       client: {
         id: options.clientId,
@@ -63,7 +59,7 @@ export default class MSOAuthService {
    */
   public async getAccessToken(options: MSAccessTokenOptions): Promise<Token> {
     let accessToken = this._getClient(options).createToken(
-      this._request.user['tokenParams']
+      this._request.user.tokenParams
     )
     try {
       if (accessToken.expired() || options.force) {
@@ -87,7 +83,7 @@ export default class MSOAuthService {
       debug(`Failed to refresh token: ${colors.red(error.message)}`)
       throw new Error(`Failed to refresh token: ${error.message}`)
     }
-    this._request.user['tokenParams'] = accessToken.token
+    this._request.user.tokenParams = accessToken.token
     return accessToken.token
   }
 }
