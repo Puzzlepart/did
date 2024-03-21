@@ -8,28 +8,38 @@ import { useCustomerList } from './useCustomerList'
 export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
   const context = useCustomersContext()
-  const { customers, inactiveCustomers, columns, showInactive } =
-    useCustomerList()
-
+  const { columns, showInactive } = useCustomerList()
   return (
     <>
       <List
         searchBox={{ placeholder: t('common.searchPlaceholder') }}
         enableShimmer={context.loading}
-        items={customers}
+        items={context.state.customers}
         columns={columns}
-        menuItems={[
-          inactiveCustomers.length > 0 &&
-            InactiveCheckboxMenuItem(
-              t('customers.toggleInactive', {
-                count: inactiveCustomers.length
-              }),
-              showInactive.toggle
-            )
-        ]}
+        menuItems={(_context) => {
+          return context.state.customers.some((c) => c.inactive)
+            ? [
+                InactiveCheckboxMenuItem(
+                  t('customers.toggleInactive', {
+                    count: _context.state.itemsPreFilter.filter(
+                      (c) => c.inactive
+                    ).length
+                  }),
+                  showInactive.toggle
+                )
+              ]
+            : []
+        }}
         getColumnStyle={(customer) => ({
           opacity: customer.inactive ? 0.4 : 1
         })}
+        filterValues={
+          showInactive.value
+            ? {}
+            : {
+                inactive: false
+              }
+        }
       />
       {props.children}
     </>

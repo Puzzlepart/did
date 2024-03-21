@@ -12,7 +12,7 @@ import _ from 'underscore'
 import { IListContext } from './context'
 import { ItemColumn } from './ItemColumn'
 import { ListGroupHeader } from './ListGroupHeader'
-import { ListHeader } from './ListHeader'
+import { ListHeader } from './ListHeader/ListHeader'
 import { INIT_COLUMN_HEADER_CONTEXT_MENU } from './reducer'
 import { IListColumn, IListProps } from './types'
 

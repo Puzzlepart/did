@@ -13,6 +13,11 @@ export interface IListState<T = any> {
   searchTerm?: string
 
   /**
+   * Filter values
+   */
+  filterValues?: Record<string, any>
+
+  /**
    * Original items
    */
   origItems?: T[]
@@ -21,6 +26,12 @@ export interface IListState<T = any> {
    * Current items
    */
   items?: T[]
+
+  /**
+   * Items before filters are applied,
+   * but after search term is applied.
+   */
+  itemsPreFilter?: T[]
 
   /**
    * Current filters

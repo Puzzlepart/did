@@ -1,6 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
 import { useBoolean } from 'usehooks-ts'
-import { CustomersContext } from '../context'
 import { useColumns } from './useColumns'
 
 /**
@@ -13,28 +11,10 @@ import { useColumns } from './useColumns'
  * @category Customers
  */
 export const useCustomerList = () => {
-  const context = useContext(CustomersContext)
-  const [customers, setCustomers] = useState([...context.state.customers])
   const showInactive = useBoolean(false)
   const columns = useColumns()
 
-  useEffect(
-    () =>
-      setCustomers(
-        [...context.state.customers].filter(
-          (p) => showInactive.value || !p.inactive
-        )
-      ),
-    [context.state.customers, showInactive.value]
-  )
-
-  const inactiveCustomers = context.state.customers.filter(
-    ({ inactive }) => inactive
-  )
-
   return {
-    customers,
-    inactiveCustomers,
     columns,
     showInactive
   }

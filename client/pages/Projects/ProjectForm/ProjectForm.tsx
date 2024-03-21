@@ -38,8 +38,6 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
     model.value('customerKey'),
     !props.edit
   )
-  // eslint-disable-next-line no-console
-  console.log(formControlProps.model.value())
   return (
     <FormControl {...formControlProps}>
       <Pivot
