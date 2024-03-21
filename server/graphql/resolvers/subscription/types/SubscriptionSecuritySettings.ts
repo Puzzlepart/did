@@ -10,7 +10,13 @@ import { Field, InputType, ObjectType } from 'type-graphql'
 })
 export class SubscriptionSecuritySettings {
   /**
-   * Total number of vacation days per year
+   * Enable security group membership check
+   */
+  @Field({ nullable: true })
+  securityGroupEnabled?: boolean
+
+  /**
+   * Security group ID (Microsoft Entra ID)
    */
   @Field({
     nullable: true,
@@ -27,7 +33,12 @@ export class SubscriptionSecuritySettings {
 })
 export class SubscriptionSecuritySettingsInput {
   /**
-   * Total number of vacation days per year
+   * Enable security group membership check
+   */
+  @Field({ nullable: true })
+  securityGroupEnabled?: boolean
+  /**
+   * Security group ID (Microsoft Entra ID)
    */
   @Field({
     nullable: true,
