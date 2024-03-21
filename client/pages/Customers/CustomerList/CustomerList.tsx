@@ -33,9 +33,13 @@ export const CustomerList: TabComponent = (props) => {
         getColumnStyle={(customer) => ({
           opacity: customer.inactive ? 0.4 : 1
         })}
-        filterValues={{
-          inactive: false
-        }}
+        filterValues={
+          showInactive.value
+            ? {}
+            : {
+                inactive: false
+              }
+        }
       />
       {props.children}
     </>

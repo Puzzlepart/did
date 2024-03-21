@@ -19,11 +19,6 @@ export const CustomerInformation: StyledComponent = () => {
 
   return (
     <div className={CustomerInformation.className}>
-      <UserMessage
-        hidden={!context.state.selected?.inactive}
-        text={t('customers.inactiveText')}
-        intent='warning'
-      />
       <InformationProperty
         hidden={!context.state.selected?.description}
         title={t('common.descriptionFieldLabel')}
@@ -47,6 +42,11 @@ export const CustomerInformation: StyledComponent = () => {
           ))}
         </InformationProperty>
       )}
+      <UserMessage
+        hidden={!context.state.selected?.inactive}
+        text={t('customers.inactiveText')}
+        intent='warning'
+      />
     </div>
   )
 }

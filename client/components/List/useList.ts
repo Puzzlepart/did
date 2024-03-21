@@ -18,6 +18,7 @@ export function useList(props: IListProps) {
   const [state, dispatch] = useListReducer({
     origItems: props.items,
     items: props.items,
+    itemsPreFilter: props.items,
     searchTerm: ''
   })
 
