@@ -152,7 +152,7 @@ import {
   ChartMultipleRegular,
   ChartMultipleFilled,
   LockOpenRegular,
-  LockOpenFilled,
+  LockOpenFilled
 } from '@fluentui/react-icons'
 
 /**

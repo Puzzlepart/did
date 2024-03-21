@@ -35,6 +35,7 @@ query UserContext {
         timeFormat
       }
       security {
+        securityGroupEnabled
         securityGroupId
       }
     }
