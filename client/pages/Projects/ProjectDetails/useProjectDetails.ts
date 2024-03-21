@@ -2,7 +2,6 @@ import { TabItems } from 'components/Tabs'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useProjectsContext } from '../context'
-import { ProjectInformation } from './ProjectInformation'
 import { ProjectTimeEntries } from './ProjectTimeEntries'
 
 /**
@@ -15,13 +14,6 @@ export function useProjectDetails() {
   const context = useProjectsContext()
   const tabs: TabItems = useMemo(
     () => ({
-      information: [
-        ProjectInformation,
-        {
-          text: t('projects.informationHeaderText'),
-          iconName: 'Info'
-        }
-      ],
       timeEntries: [
         ProjectTimeEntries,
         {
