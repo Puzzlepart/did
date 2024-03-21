@@ -86,7 +86,8 @@ export function useSubscriptionConfig() {
         {
           id: 'securityGroupId',
           type: 'text',
-          hiddenIf: (settings: SubscriptionSettings) => ! _.get(settings, 'security.securityGroupEnabled'),
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.securityGroupEnabled'),
           props: {
             label: t('admin.securityGroupIdLabel'),
             description: t('admin.securityGroupIdDescription')

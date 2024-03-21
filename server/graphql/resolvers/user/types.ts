@@ -128,6 +128,13 @@ export class User {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   employmentEndDate?: Date
+
+  /**
+   * If the user is enrolled in did through a security group,
+   * this will be the security group id.
+   */
+  @Field({ nullable: true })
+  securityGroupId?: string
 }
 
 /**
@@ -184,6 +191,13 @@ export class UserInput {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   employmentEndDate?: Date
+
+  /**
+   * If the user is enrolled in did through a security group,
+   * this will be the security group id.
+   */
+  @Field({ nullable: true })
+  securityGroupId?: string
 }
 
 /**
