@@ -1,6 +1,7 @@
 import {
   AutocompleteControl,
   CheckboxControl,
+  DateControl,
   DropdownControl,
   FormControl,
   InputControl
@@ -89,6 +90,16 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           value: role.name,
           text: role.name
         }))}
+      />
+      <DateControl
+        {...register('employmentStartDate')}
+        label={t('admin.users.employmentStartDateLabel')}
+        description={t('admin.users.employmentStartDateDescription')}
+      />
+      <DateControl
+        {...register('employmentEndDate')}
+        label={t('admin.users.employmentEndDateLabel')}
+        description={t('admin.users.employmentEndDateDescription')}
       />
       {isEditMode && (
         <CheckboxControl

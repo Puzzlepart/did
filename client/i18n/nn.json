@@ -199,7 +199,11 @@
       "editUserPanelTitle": "Rediger brukar",
       "addNewUserPanelTitle": "Legg til ny brukar",
       "editUserPanelDescription": "Endre rolle eller rediger eigenskapar som ikkje automatisk blir synkronisert frå Azure Active Directory. Du kan også skjula brukaren frå timeoversikter.",
-      "addNewUserPanelDescription": "Velg en bruker fra Azure Active Directory, sett en rolle, og eventuelt endre på egenskaper som ikke sykroniseres automatisk."
+      "addNewUserPanelDescription": "Velg en bruker fra Azure Active Directory, sett en rolle, og eventuelt endre på egenskaper som ikke sykroniseres automatisk.",
+      "employmentEndDateDescription": "Datoen brukerens arbeidsforhold avsluttes. \nDersom brukeren ikke lenger er ansatt, sett denne datoen til siste arbeidsdag.",
+      "employmentStartDateDescription": "Datoen brukerens ansettelse starter. \nHvis brukeren allerede er ansatt, sett denne datoen til første arbeidsdag.",
+      "employmentEndDateLabel": "Sluttdato for ansettelse",
+      "employmentStartDateLabel": "Startdato for ansettelse"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -358,6 +362,68 @@
     "filterIconPlaceholder": "Søk etter et ikon for filteret..."
   },
   "common": {
+    "datePicker": {
+      "goToToday": "Gå til i dag",
+      "prevMonthAriaLabel": "Gå til forrige måned",
+      "nextMonthAriaLabel": "Gå til neste måned",
+      "prevYearAriaLabel": "Gå til forrige år",
+      "nextYearAriaLabel": "Gå til neste år",
+      "prevYearRangeAriaLabel": "Gå til forrige årrekke",
+      "nextYearRangeAriaLabel": "Gå til neste årrekke",
+      "monthPickerHeaderAriaLabel": "{0}, velg for å endre året",
+      "yearPickerHeaderAriaLabel": "{0}, velg for å endre måneden",
+      "closeButtonAriaLabel": "Lukk",
+      "weekNumberFormatString": "Ukenummer {0}",
+      "selectedDateFormatString": "Valgt dato {0}",
+      "todayDateFormatString": "Dagens dato {0}",
+      "dayMarkedAriaLabel": "Merket dag",
+      "months": [
+        "Januar",
+        "Februar",
+        "Mars",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+      ],
+      "shortMonths": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Des"
+      ],
+      "days": [
+        "Søndag",
+        "Mandag",
+        "Tirsdag",
+        "Onsdag",
+        "Torsdag",
+        "Fredag",
+        "Lørdag"
+      ],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "O",
+        "T",
+        "F",
+        "L"
+      ]
+    },
     "colorPresets": {
       "red": "rød",
       "orange": "oransje",

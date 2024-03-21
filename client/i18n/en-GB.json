@@ -227,7 +227,11 @@
       "addNewUserPanelTitle": "Add new user",
       "editUserPanelTitle": "Edit user",
       "addNewUserPanelDescription": "Select a user from Azure Active Directory, set a role, and any changed properties that are not automatically synchronized.",
-      "editUserPanelDescription": "Change role or edit properties that are not automatically synced from Azure Active Directory. You can also hide the user from overviews."
+      "editUserPanelDescription": "Change role or edit properties that are not automatically synced from Azure Active Directory. You can also hide the user from overviews.",
+      "employmentStartDateLabel": "Employment Start Date",
+      "employmentEndDateLabel": "Employment End Date",
+      "employmentEndDateDescription": "The date the user's employment ends. If the user is no longer employed, set this date to the last day of employment.",
+      "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment."
     },
     "missingSubmissions": {
       "headerText": "Missing submissions",
@@ -359,6 +363,68 @@
     "filterIconPlaceholder": "Search for a filter icon..."
   },
   "common": {
+    "datePicker": {
+      "goToToday": "Go to today",
+      "prevMonthAriaLabel": "Go to previous month",
+      "nextMonthAriaLabel": "Go to next month",
+      "prevYearAriaLabel": "Go to previous year",
+      "nextYearAriaLabel": "Go to next year",
+      "prevYearRangeAriaLabel": "Go to previous year range",
+      "nextYearRangeAriaLabel": "Go to next year range",
+      "monthPickerHeaderAriaLabel": "{0}, select to change the year",
+      "yearPickerHeaderAriaLabel": "{0}, select to change the month",
+      "closeButtonAriaLabel": "Close",
+      "weekNumberFormatString": "Week number {0}",
+      "selectedDateFormatString": "Selected date {0}",
+      "todayDateFormatString": "Today's date {0}",
+      "dayMarkedAriaLabel": "Day marked",
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "shortMonths": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ],
+      "days": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+      ]
+    },
     "colorPresets": {
       "red": "red",
       "orange": "orange",

@@ -29,6 +29,10 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
     }
   }, [props.selectedKey])
 
+  useEffect(() => {
+    props.onSelected(state.selectedItem ?? null)
+  }, [state.selectedItem])
+
   const ref = useRef<HTMLDivElement>(null)
 
   return { ref, state, dispatch }

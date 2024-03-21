@@ -23,8 +23,6 @@ function getChildControls(children: any) {
     }
     return child
   })
-  // eslint-disable-next-line no-console
-  console.log(controls)
   return controls
 }
 
