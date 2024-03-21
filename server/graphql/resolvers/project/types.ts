@@ -7,6 +7,42 @@ import { Customer, LabelObject as Label, OutlookCategory } from '../types'
  * @category GraphQL InputType
  */
 @InputType({
+  description:
+    'Input object for ProjectBudget used in Mutation createOrUpdateProject'
+})
+/**
+ * Represents the input object for creating or updating a project.
+ */
+export class ProjectBudgetInput {
+  /**
+   * Enable budget tracking for the project.
+   */
+  @Field({ nullable: true })
+  trackingEnabled?: boolean
+
+  /**
+   * The budget for the project in amount of hours.
+   */
+  @Field({ nullable: true })
+  hours?: number
+
+  /**
+   * The percentage of the budget at which a warning will be shown.
+   */
+  @Field({ nullable: true })
+  warningThreshold?: number
+
+  /**
+   * The percentage of the budget at which an error will be shown.
+   */
+  @Field({ nullable: true })
+  criticalThreshold?: number
+}
+
+/**
+ * @category GraphQL InputType
+ */
+@InputType({
   description: 'Input object for Project used in Mutation createOrUpdateProject'
 })
 /**
@@ -66,6 +102,45 @@ export class ProjectInput {
    */
   @Field(() => [String], { nullable: true })
   labels?: string[]
+
+  /**
+   * The budget tracking for the project.
+   */
+  @Field(() => ProjectBudgetInput, { nullable: true })
+  budgetTracking?: ProjectBudgetInput
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a ProjectBudget',
+  simpleResolvers: true
+})
+export class ProjectBudget {
+  /**
+   * Enable budget tracking for the project.
+   */
+  @Field({ nullable: true })
+  trackingEnabled?: boolean
+
+  /**
+   * The budget for the project in amount of hours.
+   */
+  @Field({ nullable: true })
+  hours?: number
+
+  /**
+   * The percentage of the budget at which a warning will be shown.
+   */
+  @Field({ nullable: true })
+  warningThreshold?: number
+
+  /**
+   * The percentage of the budget at which an error will be shown.
+   */
+  @Field({ nullable: true })
+  criticalThreshold?: number
 }
 
 /**
@@ -156,6 +231,12 @@ export class Project {
    */
   @Field(() => [Label])
   public labels?: Label[] | string[]
+
+  /**
+   * The budget tracking for the project.
+   */
+  @Field(() => ProjectBudget, { nullable: true })
+  public budgetTracking?: ProjectBudget
 
   /**
    * Constructs a new Project.

@@ -24,7 +24,8 @@ export function useProjectModel(props: IProjectFormProps) {
           labels: mapProperty<any, string>(p.labels, 'name')
         },
         ['customer', 'tag', 'outlookCategory']
-      )
+      ),
+    { useNestedKeys: true }
   )
   const customerKey = useCustomersContext<string>('state.selected.key')
 

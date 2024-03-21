@@ -10,6 +10,8 @@ import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import { useProjectsContext } from '../../context'
 import styles from './ProjectInformation.module.scss'
+import { BudgetTracking } from './BudgetTracking'
+import ReactMarkdown from 'react-markdown'
 
 /**
  * Shows details about the selected project.
@@ -38,16 +40,23 @@ export const ProjectInformation: StyledComponent = () => {
         )}
         isDataLoaded={!context.loading}
       />
-      {!_.isEmpty(context.state.selected?.labels) && (
-        <InformationProperty
-          title={t('common.labelsText')}
-          isDataLoaded={!context.loading}
-        >
-          {(context.state.selected?.labels as Label[]).map((label, index) => (
-            <EntityLabel key={index} label={label} />
-          ))}
-        </InformationProperty>
-      )}
+      <InformationProperty
+        hidden={!context.state.selected?.description}
+        title={t('common.descriptionFieldLabel')}
+        value={context.state.selected?.description}
+        onRenderValue={(value) => <ReactMarkdown>{value}</ReactMarkdown>}
+        isDataLoaded={!context.loading}
+      />
+      <BudgetTracking />
+      <InformationProperty
+        hidden={_.isEmpty(context.state.selected?.labels)}
+        title={t('common.labelsText')}
+        isDataLoaded={!context.loading}
+      >
+        {(context.state.selected?.labels as Label[]).map((label, index) => (
+          <EntityLabel key={index} label={label} />
+        ))}
+      </InformationProperty>
     </div>
   )
 }

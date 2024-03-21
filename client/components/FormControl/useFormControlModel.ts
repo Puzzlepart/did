@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-console */
-import { useMap } from 'hooks/common/useMap'
+import { UseMapOptions, useMap } from 'hooks/common/useMap'
 import { useEffect } from 'react'
 import { convertToMap, omitTypename } from 'utils'
 
@@ -22,9 +22,10 @@ export function useFormControlModel<
   ObjectType extends Record<string, any> = Record<string, any>
 >(
   initialModel: ObjectType = null,
-  postUpdate?: (initialModel: ObjectType) => ObjectType
+  postUpdate?: (initialModel: ObjectType) => ObjectType,
+  options?: UseMapOptions
 ) {
-  const map = useMap<KeyType, ObjectType>()
+  const map = useMap<KeyType, ObjectType>(undefined, options)
   useEffect(() => {
     if (!initialModel || Object.keys(initialModel).length === 0) return
     const obj = postUpdate ? postUpdate(initialModel) : initialModel

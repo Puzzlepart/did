@@ -6,5 +6,11 @@ export interface IInformationPropertyProps
   extends LabelProps,
     Pick<IShimmerProps, 'isDataLoaded'> {
   value?: string
+
+  /**
+   * Custom render function for the value.
+   *
+   * @param value Value passed to the component
+   */
   onRenderValue?: (value: string) => ReactElement
 }

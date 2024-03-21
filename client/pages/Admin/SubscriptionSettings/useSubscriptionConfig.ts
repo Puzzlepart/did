@@ -197,6 +197,21 @@ export function useSubscriptionConfig() {
       ]
     },
     {
+      id: 'budgetTracking',
+      text: t('admin.budgetTracking'),
+      icon: 'ChartMultiple',
+      fields: [
+        {
+          id: 'enabled',
+          type: 'bool',
+          props: {
+            label: t('admin.budgetTrackingEnabledLabel'),
+            description: t('admin.budgetTrackingEnabledDescription')
+          }
+        }
+      ]
+    },
+    {
       id: 'teams',
       text: t('admin.teams'),
       icon: 'PeopleTeam',

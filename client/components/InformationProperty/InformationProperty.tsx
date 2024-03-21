@@ -1,17 +1,18 @@
-/* eslint-disable react/no-children-prop */
 import { Shimmer } from '@fluentui/react'
 import { FieldLabel } from 'components'
 import React from 'react'
 import { StyledComponent } from 'types'
 import styles from './InformationProperty.module.scss'
 import { IInformationPropertyProps } from './types'
+import { mergeClasses } from '@fluentui/react-components'
 
 export const InformationProperty: StyledComponent<IInformationPropertyProps> = (
   props
 ) => {
+  if (props.hidden) return null
   return (
     <Shimmer
-      className={InformationProperty.className}
+      className={mergeClasses(InformationProperty.className, props.className)}
       isDataLoaded={props.isDataLoaded}
     >
       <div hidden={props.value === null || props.value === ''}>

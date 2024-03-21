@@ -24,14 +24,13 @@ export const CustomerInformation: StyledComponent = () => {
         text={t('customers.inactiveText')}
         intent='warning'
       />
-      {context.state.selected?.description && (
-        <InformationProperty
-          title={t('common.descriptionFieldLabel')}
-          value={context.state.selected?.description}
-          onRenderValue={(value) => <ReactMarkdown>{value}</ReactMarkdown>}
-          isDataLoaded={!context.loading}
-        />
-      )}
+      <InformationProperty
+        hidden={!context.state.selected?.description}
+        title={t('common.descriptionFieldLabel')}
+        value={context.state.selected?.description}
+        onRenderValue={(value) => <ReactMarkdown>{value}</ReactMarkdown>}
+        isDataLoaded={!context.loading}
+      />
       <InformationProperty
         title={t('projects.tagLabel')}
         value={context.state.selected?.key}
