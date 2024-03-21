@@ -15,3 +15,4 @@
 | [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
 | [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | 21.02 2024      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
 | [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | Q1/Q2 2024      | [![version](https://img.shields.io/badge/version-0.14.0-red.svg)](https://semver.org) |
+| [🛎️ &nbsp;14 -  &nbsp;Silisium](https://github.com/Puzzlepart/did365/milestone/13) | Q1/Q2 2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
