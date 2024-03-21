@@ -176,24 +176,28 @@ export class MSGraphService {
   /**
    * Create Outlook category.
    *
-   * @param category - Category
+   * @param category The category to create
+   * @param colorPresetIndex The color preset index (optional, default: `-1`)
    *
    * @public
    *
    * @memberof MSGraphService
    */
   public async createOutlookCategory(
-    category: string
+    category: string,
+    colorPresetIndex = -1
   ): Promise<MSGraphOutlookCategory> {
     try {
-      const colorIndex =
-        category
-          .split('')
-          .map((c) => c.charCodeAt(0))
-          .reduce((a, b) => a + b) % 24
+      if (colorPresetIndex === -1) {
+        colorPresetIndex =
+          category
+            .split('')
+            .map((c) => c.charCodeAt(0))
+            .reduce((a, b) => a + b) % 24
+      }
       const content = JSON.stringify({
         displayName: category,
-        color: `preset${colorIndex}`
+        color: `preset${colorPresetIndex}`
       })
       const client = await this._getClient()
       const result = await client

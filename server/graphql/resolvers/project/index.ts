@@ -74,11 +74,11 @@ export class ProjectResolver {
       const success = await this._projectSvc.updateProject(p)
       return { success }
     } else {
-      const id = await this._projectSvc.addProject(p)
+      const projectId = await this._projectSvc.addProject(p)
       if (options.createOutlookCategory) {
-        await this._msgraphSvc.createOutlookCategory(id)
+        await this._msgraphSvc.createOutlookCategory(projectId)
       }
-      return { success: true, id }
+      return { success: true, id: projectId }
     }
   }
 }

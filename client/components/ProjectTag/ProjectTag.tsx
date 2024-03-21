@@ -1,4 +1,8 @@
-import { Tooltip } from '@fluentui/react-components'
+import {
+  Popover,
+  PopoverSurface,
+  PopoverTrigger
+} from '@fluentui/react-components'
 import {
   InteractionTag,
   InteractionTagPrimary,
@@ -7,22 +11,22 @@ import {
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { useTranslation } from 'react-i18next'
 import { getFluentIcon, getFluentIconWithFallback } from 'utils'
+import styles from './ProjectTag.module.scss'
 import { IProjectTagProps } from './types'
 import { useProjectTag } from './useProjectTag'
+import ReactMarkdown from 'react-markdown'
 
 /**
  * @category Reusable Component
  */
 export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
-  const {
-    hasOutlookCategory,
-    addOutlookCategory,
-    addOutlookCategoryTooltip,
-    onTagCopied
-  } = useProjectTag(props)
+  const { t } = useTranslation()
+  const { hasOutlookCategory, addOutlookCategory, onTagCopied, colorPresets } =
+    useProjectTag(props)
   return (
-    <InteractionTag>
+    <InteractionTag className={ProjectTag.className}>
       <CopyToClipboard text={props.project?.tag} onCopy={onTagCopied}>
         <InteractionTagPrimary
           hasSecondaryAction={props.enableFavoriting}
@@ -34,21 +38,49 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
         </InteractionTagPrimary>
       </CopyToClipboard>
       {props.enableFavoriting && (
-        <Tooltip content={addOutlookCategoryTooltip} relationship='label'>
-          <InteractionTagSecondary
-            onClick={addOutlookCategory}
-            style={{ cursor: hasOutlookCategory ? 'auto' : 'pointer' }}
-          >
-            {getFluentIcon('Heart', {
-              bundle: true,
-              filled: hasOutlookCategory,
-              color: '#FF4033'
-            })}
-          </InteractionTagSecondary>
-        </Tooltip>
+        <Popover>
+          <PopoverTrigger>
+            <InteractionTagSecondary
+              style={{ cursor: hasOutlookCategory ? 'auto' : 'pointer' }}
+            >
+              {getFluentIcon('Heart', {
+                bundle: true,
+                filled: hasOutlookCategory,
+                color: '#FF4033'
+              })}
+            </InteractionTagSecondary>
+          </PopoverTrigger>
+          {hasOutlookCategory ? (
+            <PopoverSurface>
+              <ReactMarkdown linkTarget='_blank'>
+                {t('common.outlookCategoryRemove', props)}
+              </ReactMarkdown>
+            </PopoverSurface>
+          ) : (
+            <PopoverSurface>
+              <div className={styles.colorPresets}>
+                <div className={styles.container}>
+                  {colorPresets.map(([colorHex, colorName], index) => (
+                    <div
+                      key={index}
+                      title={t('common.outlookCategoryAdd', { colorName })}
+                      className={styles.preset}
+                      style={{ backgroundColor: colorHex }}
+                      onClick={() => addOutlookCategory(index + 1)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </PopoverSurface>
+          )}
+        </Popover>
       )}
     </InteractionTag>
   )
 }
 
 ProjectTag.displayName = 'ProjectLink'
+ProjectTag.className = styles.projectTag
+ProjectTag.defaultProps = {
+  outlookCategoriesHref: 'https://outlook.office.com/mail/options/general/categories'
+}

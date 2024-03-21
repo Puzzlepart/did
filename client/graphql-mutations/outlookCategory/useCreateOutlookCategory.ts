@@ -17,11 +17,11 @@ export function useCreateOutlookCategory() {
   }>($createOutlookCategory)
 
   return useCallback(
-    async (category: string) => {
+    async (category: string, colorPresetIndex = -1) => {
       const {
         data: { result }
       } = await createOutlookCategory({
-        variables: { category }
+        variables: { category, colorPresetIndex }
       })
       return result
     },

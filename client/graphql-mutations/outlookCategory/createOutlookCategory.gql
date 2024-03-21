@@ -1,5 +1,5 @@
-mutation CreateOutlookCategory ($category: String!) {
-  result: createOutlookCategory(category: $category) {
+mutation CreateOutlookCategory ($category: String!, $colorPresetIndex: Float) {
+  result: createOutlookCategory(category: $category, colorPresetIndex: $colorPresetIndex) {
     data {
       id
       displayName
