@@ -34,21 +34,23 @@ export function useListToolbar() {
     [context.props.commandBar]
   )
 
-  const menuItems = useMemo(
-    () =>
-      _.isEmpty(context.props.menuItems)
-        ? ListMenuItem.convert([
-            ...commandBarProps.items,
-            ...commandBarProps.farItems
-          ])
-        : [
-            searchBoxMenuItem,
-            ...context.props.menuItems,
-            filterCommands.toggle?.menuItem,
-            excelExportCommands?.menuItem
-          ].filter(Boolean),
-    [context.props.menuItems]
-  )
+  const menuItemsFromProps = _.isFunction(context.props.menuItems)
+    ? context.props.menuItems(context)
+    : context.props.menuItems
+
+  const menuItems = useMemo(() => {
+    return _.isEmpty(menuItemsFromProps)
+      ? ListMenuItem.convert([
+          ...commandBarProps.items,
+          ...commandBarProps.farItems
+        ])
+      : [
+          searchBoxMenuItem,
+          ...menuItemsFromProps,
+          filterCommands.toggle?.menuItem,
+          excelExportCommands?.menuItem
+        ].filter(Boolean)
+  }, [menuItemsFromProps])
 
   const menuItemGroups = useMemo<{ [key: string]: ListMenuItem[] }>(
     () =>

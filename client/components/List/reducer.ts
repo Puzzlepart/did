@@ -31,6 +31,26 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
 )
 
+function applyFilters<T = any>(
+  items: T[],
+  filterValues: IListState['filterValues'] = {}
+) {
+  return items.filter(
+    (item) =>
+      _.filter(Object.keys(filterValues), (key) => {
+        const value = get(item as any, key, '')
+        switch (typeof value) {
+          case 'boolean': {
+            return filterValues[key] === value
+          }
+          default: {
+            return filterValues[key].includes(value)
+          }
+        }
+      }).length === Object.keys(filterValues).length
+  )
+}
+
 /**
  * Reducer for Timesheet
  *
@@ -42,28 +62,18 @@ export default (initialState: IListState) => {
       builder
         .addCase(PROPS_UPDATED, (state, { payload }) => {
           state.origItems = payload.items ?? []
-          state.items = state.origItems
-            .filter((item) =>
-              searchObject({
-                item,
-                searchTerm: state.searchTerm
-              })
-            )
-            .filter((item) => {
-              return (
-                _.filter(Object.keys(payload.filterValues), (key) => {
-                  return payload.filterValues[key].includes(get(item, key, ''))
-                }).length === Object.keys(payload.filterValues).length
-              )
-            })
+          state.itemsPreFilter = state.origItems
+          state.filterValues = payload.filterValues ?? {}
+          state.items = applyFilters(state.itemsPreFilter, state.filterValues)
         })
         .addCase(EXECUTE_SEARCH, (state, { payload }) => {
-          state.items = current(state).origItems.filter((item) =>
+          state.itemsPreFilter = current(state).origItems.filter((item) =>
             searchObject({
               item,
               searchTerm: payload.searchTerm
             })
           )
+          state.items = applyFilters(state.itemsPreFilter, state.filterValues)
           state.searchTerm = payload.searchTerm
         })
         .addCase(INIT_COLUMN_HEADER_CONTEXT_MENU, (state, { payload }) => {
