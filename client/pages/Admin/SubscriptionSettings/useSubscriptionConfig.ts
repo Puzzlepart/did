@@ -70,6 +70,22 @@ export function useSubscriptionConfig() {
       ]
     },
     {
+      id: 'security',
+      text: t('admin.security'),
+      icon: 'LockOpen',
+      fields: [
+        {
+          id:'securityGroupId',
+          type: 'text',
+          props: {
+            label: t('admin.securityGroupIdLabel'),
+            description: t('admin.securityGroupIdDescription')
+          
+          }
+        }
+      ]
+    },
+    {
       id: 'timesheet',
       icon: 'Timeline',
       text: t('admin.timesheet'),

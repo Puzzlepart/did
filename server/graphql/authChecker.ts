@@ -33,6 +33,7 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
   { context }: ResolverData<RequestContext>,
   [authOptions]
 ) => {
+  console.log('authChecker', context, authOptions)
   if (!authOptions) {
     return !!context.permissions
   }
