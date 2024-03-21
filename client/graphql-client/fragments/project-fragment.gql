@@ -3,6 +3,9 @@ fragment ProjectFragment on Project {
   name
   description
   icon
+  outlookCategory {
+    key
+  }
   customer {
     key
     name

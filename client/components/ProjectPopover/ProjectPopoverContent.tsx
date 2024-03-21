@@ -1,19 +1,17 @@
 import { Icon } from '@fluentui/react'
 import { Caption2, Caption2Strong } from '@fluentui/react-components'
-import { EntityLabel, ProjectLink } from 'components'
+import { EntityLabel, ProjectTag } from 'components'
 import React from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'
-import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
 import { LabelObject, StyledComponent } from 'types'
 import _ from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectPopoverProps } from './types'
-import { Tag } from '@fluentui/react-tags-preview'
 
 export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
   project
 }) => {
-  const { t } = useTranslation()
   return (
     <FadeIn>
       <div className={ProjectPopoverContent.className}>
@@ -33,8 +31,15 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
                 </div>
               )}
             </div>
+            <ProjectTag project={project} />
           </div>
-          <Caption2>{project.description}</Caption2>
+          <div className={styles.description}>
+          <Caption2>
+            <ReactMarkdown>
+            {project.description}
+          </ReactMarkdown>
+            </Caption2>
+          </div>
           {!_.isEmpty(project.labels) && (
             <div className={styles.labels}>
               {(project.labels as LabelObject[]).map((label, index) => (
@@ -42,20 +47,6 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
               ))}
             </div>
           )}
-          {project.tag && (
-            <div className={styles.footer}>
-              <ProjectLink
-                appearance='transparent'
-                size='small'
-                project={project}
-                icon='Home'
-                text={t('projects.navigateText')}
-              />
-            </div>
-          )}
-          <Tag className={styles.tag} size='extra-small'>
-            {project.tag}
-          </Tag>
         </div>
       </div>
     </FadeIn>
