@@ -82,5 +82,6 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
 ProjectTag.displayName = 'ProjectLink'
 ProjectTag.className = styles.projectTag
 ProjectTag.defaultProps = {
-  outlookCategoriesHref: 'https://outlook.office.com/mail/options/general/categories'
+  outlookCategoriesHref:
+    'https://outlook.office.com/mail/options/general/categories'
 }
