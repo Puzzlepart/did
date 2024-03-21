@@ -74,6 +74,9 @@ export const onVerifySignin = async (
         role: isOwner ? 'Owner' : 'User',
         preferredLanguage: 'en-GB'
       }
+      if (isUserInSecurityGroup) {
+        dbUser.securityGroupId = subscription.settings.security.securityGroupId
+      }
       await userSrv.addUser(dbUser)
     }
 

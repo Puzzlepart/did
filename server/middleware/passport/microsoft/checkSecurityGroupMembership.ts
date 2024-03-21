@@ -16,7 +16,11 @@ export const checkSecurityGroupMembership = async (
   tokenParameters: any,
   mail: string
 ) => {
-  if (!subscription.settings?.security?.securityGroupId) return false
+  if (
+    !subscription.settings?.security?.securityGroupEnabled ||
+    !subscription.settings?.security?.securityGroupId
+  )
+    return false
   const msAuthSvc = new MSOAuthService({
     user: {
       subscription,
