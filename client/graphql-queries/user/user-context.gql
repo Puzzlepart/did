@@ -34,6 +34,10 @@ query UserContext {
         dayFormat
         timeFormat
       }
+      security {
+        securityGroupEnabled
+        securityGroupId
+      }
     }
   }
   user: currentUser {

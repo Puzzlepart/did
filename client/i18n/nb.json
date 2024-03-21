@@ -335,7 +335,12 @@
     "teamsMissingSubmissionsSinglePeriodTextDescription": "Angi meldingsmalen for en påminnelse for flere perioder. Tokenet `{0}` vil bli erstattet med den faktiske perioden.",
     "budgetTrackingEnabledDescription": "Aktivering av denne innstillingen vil aktivere ytterligere egenskaper på prosjektene som gjør det mulig å visualisere hvor mange timer som er registrert for prosjektet og hvordan det går. \nDenne funksjonen vil gi brukerne en enkel oversikt over prosjektets fremdrift",
     "budgetTracking": "Budsjettoppfølging",
-    "budgetTrackingEnabledLabel": "Aktiver budsjettoppfølging"
+    "budgetTrackingEnabledLabel": "Aktiver budsjettoppfølging",
+    "security": "Sikkerhet",
+    "securityGroupIdLabel": "Azure Entra ID Sikkerhetsgruppe ID",
+    "securityGroupIdDescription": "ID-en til Azure AD-sikkerhetsgruppen som skal ha tilgang til applikasjonen. Hvis feltet er tomt, må brukere med tilgang legges til manuelt i applikasjonen.",
+    "securityGroupEnabledLabel": "Aktiver tilgang gjennom en sikkerhetsgruppe i Azure Entra ID.",
+    "securityGroupEnabledDescription": "Aktiver tilgang til applikasjonen for brukere i den angitte Azure AD-sikkerhetsgruppen."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

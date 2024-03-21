@@ -6,6 +6,7 @@ import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'
 import { SubscriptionSettingField } from './types'
 import { useTheme } from '@fluentui/react'
+import _ from 'lodash'
 
 /**
  * Component logic for `SubscriptionSettings` component. Handles the
@@ -67,6 +68,31 @@ export function useSubscriptionConfig() {
             description: t('admin.subscriptionSettings.companyLogoDescription')
           }
         } as SubscriptionSettingField
+      ]
+    },
+    {
+      id: 'security',
+      text: t('admin.security'),
+      icon: 'LockOpen',
+      fields: [
+        {
+          id: 'securityGroupEnabled',
+          type: 'bool',
+          props: {
+            label: t('admin.securityGroupEnabledLabel'),
+            description: t('admin.securityGroupEnabledDescription')
+          }
+        },
+        {
+          id: 'securityGroupId',
+          type: 'text',
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.securityGroupEnabled'),
+          props: {
+            label: t('admin.securityGroupIdLabel'),
+            description: t('admin.securityGroupIdDescription')
+          }
+        }
       ]
     },
     {

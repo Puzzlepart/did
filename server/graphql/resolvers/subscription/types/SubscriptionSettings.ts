@@ -29,6 +29,10 @@ import {
   SubscriptionBudgetTrackingSettings,
   SubscriptionBudgetTrackingSettingsInput
 } from './SubscriptionBudgetTrackingSettings'
+import {
+  SubscriptionSecuritySettings,
+  SubscriptionSecuritySettingsInput
+} from './SubscriptionSecuritySettings'
 
 /**
  * @category GraphQL ObjectType
@@ -55,6 +59,9 @@ export class SubscriptionSettings {
 
   @Field(() => SubscriptionBudgetTrackingSettings, { nullable: true })
   budgetTracking?: SubscriptionBudgetTrackingSettings
+
+  @Field(() => SubscriptionSecuritySettings, { nullable: true })
+  security?: SubscriptionSecuritySettings
 }
 
 /**
@@ -82,4 +89,7 @@ export class SubscriptionSettingsInput {
 
   @Field(() => SubscriptionBudgetTrackingSettingsInput, { nullable: true })
   budgetTracking?: SubscriptionBudgetTrackingSettingsInput
+
+  @Field(() => SubscriptionSecuritySettingsInput, { nullable: true })
+  security?: SubscriptionSecuritySettingsInput
 }

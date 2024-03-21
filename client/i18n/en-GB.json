@@ -337,7 +337,12 @@
     "teamsMissingSubmissionsSinglePeriodTextDescription": "Set the mesage template for a reminder for a single period. The token `{0}` will be replaces with the actual period.",
     "budgetTracking": "Budget Tracking",
     "budgetTrackingEnabledLabel": "Enable Budget Tracking",
-    "budgetTrackingEnabledDescription": "Enabling this setting will enable additional properties on the projects making it possible to visualize how many hours are registered for the project and how it's going. This feature will provide users with a simple overview of project progress"
+    "budgetTrackingEnabledDescription": "Enabling this setting will enable additional properties on the projects making it possible to visualize how many hours are registered for the project and how it's going. This feature will provide users with a simple overview of project progress",
+    "security": "Security",
+    "securityGroupIdLabel": "Azure Entra ID Security Group ID",
+    "securityGroupIdDescription": "The ID of the Azure AD security group that should have access to the application. If the field is empty, users with access needs to be manually added to the application.",
+    "securityGroupEnabledLabel": "Enable Azure Entra ID Security Group Access",
+    "securityGroupEnabledDescription": "Enable access to the application for users in the specified Azure AD security group."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",

@@ -14,6 +14,15 @@ import { GraphQLError } from 'graphql'
 import colors from 'colors/safe'
 const debug = createDebug('graphql/requestContext')
 
+interface User extends Partial<Omit<Express.User, 'subscription'>> {
+  subscription?: Subscription
+  tokenParams?: Record<string, any>
+}
+
+export interface Request extends Partial<Omit<Express.Request, 'user'>> {
+  user: User
+}
+
 /**
  * The context object provides access to various resources and information
  * for the current request, such as the user ID, user object, user configuration,
@@ -90,8 +99,8 @@ export class RequestContext {
    * * Sets `CONTEXT` and `REQUEST` on the container to enable
    *   dependency injection in the resolvers.
    *
-   * @param request - Express request
-   * @param mcl - Mongo client
+   * @param request Express request
+   * @param mcl Mongo client
    *
    * @returns GraphQL context object
    */

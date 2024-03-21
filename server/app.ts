@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /**
  * NodeJS Express App
@@ -180,7 +181,7 @@ export class App {
    * Setup error handling using `http-errors`
    */
   setupErrorHandling() {
-    this.instance.use((_request, _response, next) => next(createError(401)))
+    this.instance.use((_req, _res, next) => next(createError(401)))
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
         response.render('index', {

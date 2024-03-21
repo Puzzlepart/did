@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
-import { SubscriptionService, UserService } from '../../../services/mongo'
+import { SubscriptionService, UserService } from '../../../services'
 import { environment } from '../../../utils'
 import {
   NO_OID_FOUND,
@@ -11,6 +11,7 @@ import {
   USER_NOT_ENROLLED
 } from '../errors'
 import { synchronizeUserProfile } from './synchronizeUserProfile'
+import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
 
 /**
  * On verify sign in Microsoft
@@ -28,10 +29,10 @@ import { synchronizeUserProfile } from './synchronizeUserProfile'
 export const onVerifySignin = async (
   mcl: MongoClient,
   profile: IProfile,
-  tokenParameters: unknown,
+  tokenParameters: any,
   done: VerifyCallback
 ) => {
-  const subSrv = new SubscriptionService({
+  const subSvc = new SubscriptionService({
     db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
@@ -39,7 +40,7 @@ export const onVerifySignin = async (
 
     if (!userId) throw NO_OID_FOUND
 
-    const subscription = await subSrv.getById(subId)
+    const subscription = await subSvc.getById(subId)
     if (!subscription) {
       throw TENANT_NOT_ENROLLED
     }
@@ -49,27 +50,40 @@ export const onVerifySignin = async (
       db: mcl.db(subscription.db)
     })
 
-    let user_ = await userSrv.getById(userId)
+    let dbUser = await userSrv.getById(userId)
 
-    if (!user_ && !isOwner) throw USER_NOT_ENROLLED
+    let isUserInSecurityGroup = false
 
-    const shouldAddUser = !user_ && isOwner
+    if (!dbUser && !isOwner) {
+      isUserInSecurityGroup = await checkSecurityGroupMembership(
+        subscription,
+        tokenParameters,
+        mail
+      )
+    }
 
-    if (shouldAddUser) {
-      user_ = {
+    const isUserEnrolled = isOwner || isUserInSecurityGroup || !!dbUser
+
+    if (!isUserEnrolled) throw USER_NOT_ENROLLED
+
+    if (isUserEnrolled && !dbUser) {
+      dbUser = {
         id: userId,
         mail,
         displayName: profile.displayName,
-        role: 'Owner',
+        role: isOwner ? 'Owner' : 'User',
         preferredLanguage: 'en-GB'
       }
-      await userSrv.addUser(user_)
+      if (isUserInSecurityGroup) {
+        dbUser.securityGroupId = subscription.settings.security.securityGroupId
+      }
+      await userSrv.addUser(dbUser)
     }
 
-    if (user_?.accountEnabled === false) throw USER_ACCOUNT_DISABLED
+    if (dbUser?.accountEnabled === false) throw USER_ACCOUNT_DISABLED
 
-    const user: any = {
-      ...user_,
+    const user = {
+      ...dbUser,
       subscription,
       tokenParams: tokenParameters
     }
