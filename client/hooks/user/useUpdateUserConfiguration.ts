@@ -15,11 +15,11 @@ export function useUpdateUserConfiguration() {
    * Updates the user's last active timestamp in the user configuration.
    */
   const updateLastActive = useCallback(async () => {
-    // await updateUserConfiguration({
-    //   variables: {
-    //     lastActive: new Date()
-    //   }
-    // })
+    await updateUserConfiguration({
+      variables: {
+        lastActive: new Date()
+      }
+    })
   }, [])
 
   /**
@@ -27,12 +27,12 @@ export function useUpdateUserConfiguration() {
    *
    * @param user The user object to update the configuration with.
    */
-  const updateUserSettings = useCallback(async () => {
-    // await updateUserConfiguration({
-    //   variables: {
-    //     user: JSON.stringify(user)
-    //   }
-    // })
+  const updateUserSettings = useCallback(async (user: Record<string, any>) => {
+    await updateUserConfiguration({
+      variables: {
+        user: JSON.stringify(user)
+      }
+    })
     return true
   }, [])
 
