@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
+import { ListMenuItem } from 'components/List/ListToolbar'
 
 /**
  * Project list component used by `<Projects />`. Renders
@@ -32,7 +33,7 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
               t('projects.toggleInactive', { count: inactiveProjects.length }),
               showInactive.toggle
             ),
-          ...props.menuItems
+          ...(props.menuItems as ListMenuItem[])
         ]}
       />
       {props.children}

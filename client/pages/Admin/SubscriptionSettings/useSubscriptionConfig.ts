@@ -96,7 +96,8 @@ export function useSubscriptionConfig() {
         {
           id: 'domainRestrictionEnabled',
           type: 'bool',
-          disabledIf: (settings: SubscriptionSettings) => !_.get(settings, 'security.securityGroupEnabled'),
+          disabledIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.securityGroupEnabled'),
           props: {
             label: t('admin.domainRestrictionEnabledLabel'),
             description: t('admin.domainRestrictionEnabledDescription')
@@ -105,8 +106,10 @@ export function useSubscriptionConfig() {
         {
           id: 'domainRestriction',
           type: 'text',
-          disabledIf: (settings: SubscriptionSettings) => !_.get(settings, 'security.securityGroupEnabled'),
-          hiddenIf: (settings: SubscriptionSettings) => !_.get(settings, 'security.domainRestrictionEnabled'),
+          disabledIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.securityGroupEnabled'),
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.domainRestrictionEnabled'),
           props: {
             label: t('admin.domainRestrictionLabel'),
             description: t('admin.domainRestrictionDescription'),
