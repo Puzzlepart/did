@@ -45,12 +45,12 @@ function applyFilters<T = any>(
     (item) =>
       _.filter(Object.keys(filterValues), (key) => {
         const value = get(item as any, key, '')
-        switch (typeof value) {
+        switch (typeof filterValues[key]) {
           case 'boolean': {
             return filterValues[key] === value
           }
           default: {
-            return filterValues[key].includes(value)
+            return filterValues[key]?.includes(value)
           }
         }
       }).length === Object.keys(filterValues).length
