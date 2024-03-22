@@ -23,6 +23,12 @@ export class SubscriptionSecuritySettings {
     defaultValue: '00000000-0000-0000-0000-000000000000'
   })
   securityGroupId?: string
+
+  @Field({ nullable: true })
+  domainRestrictionEnabled?: boolean
+
+  @Field({ nullable: true })
+  domainRestriction?: string
 }
 
 /**
@@ -45,4 +51,10 @@ export class SubscriptionSecuritySettingsInput {
     defaultValue: '00000000-0000-0000-0000-000000000000'
   })
   securityGroupId?: string
+
+  @Field({ nullable: true })
+  domainRestrictionEnabled?: boolean
+
+  @Field({ nullable: true })
+  domainRestriction?: string
 }

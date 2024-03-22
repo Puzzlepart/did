@@ -1,8 +1,6 @@
 /* eslint-disable unicorn/consistent-function-scoping */
-import { useEffect, useMemo, useState } from 'react'
 import { Project } from 'types'
 import { useBoolean } from 'usehooks-ts'
-import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'
 
@@ -18,37 +16,14 @@ import { useColumns } from './useColumns'
  * @category Projects
  */
 export function useProjectList(props: IProjectListProps) {
-  const context = useProjectsContext()
-  const initialProjects = useMemo(() => {
-    let projects = context?.state?.projects ?? props.items
-    if (props.id === 'm') {
-      projects = projects.filter(({ outlookCategory }) => !!outlookCategory)
-    }
-    return projects
-  }, [context?.state?.projects, props.items, props.id])
-  const [projects, setProjects] = useState(initialProjects)
   const showInactive = useBoolean(false)
   const columns = useColumns(props)
-
-  useEffect(
-    () =>
-      setProjects(
-        [...initialProjects].filter(
-          ({ inactive }) => showInactive.value || !inactive
-        )
-      ),
-    [initialProjects, props.id, showInactive.value]
-  )
-
-  const inactiveProjects = initialProjects.filter(({ inactive }) => inactive)
 
   function getKey(project: Project, index: number) {
     return `project_list_item_${project?.tag ?? index}`
   }
 
   return {
-    projects,
-    inactiveProjects,
     columns,
     showInactive,
     getKey

@@ -56,7 +56,7 @@ export const onVerifySignin = async (
 
     if (!dbUser && !isOwner) {
       isUserInSecurityGroup = await checkSecurityGroupMembership(
-        subscription,
+        subscription?.settings?.security ?? {},
         tokenParameters,
         mail
       )
