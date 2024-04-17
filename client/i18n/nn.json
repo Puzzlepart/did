@@ -85,7 +85,7 @@
     "myProjectsText": "Prosjekta mine",
     "myProjectsSearchPlaceholder": "Søk i prosjekta mine...",
     "exportTimeEntriesLabel": "Eksporter til Excel",
-    "keyFieldDescription": "Ein unik identifikator for prosjektet. \nBlir brukt saman med kundenøkkelen for å lage nøkkelen som blir brukt til å merke kalenderoppføringer i Outlook. \nHold det kort, mellom {{PROJECT_KEY_MIN_LENGTH}} og {{PROJECT_KEY_MAX_LENGTH}} teikn.",
+    "keyFieldDescription": "Ein unik identifikator for prosjektet. Blir brukt saman med kundenøkkelen for å lage nøkkelen som blir brukt til å merke kalenderoppføringer i Outlook. Hold det kort, mellom {{min}} og {{max}} teikn.",
     "createSuccess": "Prosjektet **{{name}}** vart oppretta. Bruk **{{projectId}}** til å merke kalenderoppføringane dine i Outlook. Klikk for å gå direkte til det nyoppretta prosjektet, eller bli her for å oppretta eit nytt.",
     "editLabel": "Rediger prosjekt",
     "inactiveFieldDescription": "Marker prosjektet som inaktivt. Det kan ikkje lenger stadfestast timar for prosjektet.",
@@ -227,7 +227,11 @@
       "companyLogoDescription": "Legg til nettstedsaddressen til firmalogoen din. Bruk enten en Base 64-bildestreng, eller last opp et bilde fra datamaskinen din. Anbefalte dimensjoner er 120 x 40 piksler. Du kan se en forhåndsvisning nedenfor.",
       "navBackgroundDescription": "Egendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
       "navBackgroundLabel": "Bakgrunnsfarge for navigasjonslinjen",
-      "imageFieldUploadLabel": "Last opp bilde"
+      "imageFieldUploadLabel": "Last opp bilde",
+      "projectKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for prosjektnøkkel.",
+      "projectKeyMaxLengthLabel": "Maksimum lengde for prosjektnøkkel",
+      "customerKeyMaxLengthLabel": "Maksimum lengde for kundenøkkel",
+      "customerKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for kundenøkkel."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -345,7 +349,9 @@
     "domainRestrictionLabel": "Begrens tilgang til brukere i følgende domene",
     "domainRestrictionDescription": "I tillegg til Entra ID-sikkerhetsgruppen kan du begrense tilgangen til applikasjonen til brukere i det angitte domenet. Hvis feltet er tomt, vil alle brukere i Entra ID-sikkerhetsgruppen ha tilgang til applikasjonen.",
     "domainRestrictionEnabledLabel": "Aktiver domenebegrensning",
-    "domainRestrictionEnabledDescription": "I tillegg til Entra ID-sikkerhetsgruppen kan du begrense tilgangen til applikasjonen til brukere i det angitte domenet."
+    "domainRestrictionEnabledDescription": "I tillegg til Entra ID-sikkerhetsgruppen kan du begrense tilgangen til applikasjonen til brukere i det angitte domenet.",
+    "customersHeader": "Kunder",
+    "projectsHeader": "Prosjekter"
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
