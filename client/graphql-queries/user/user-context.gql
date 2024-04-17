@@ -40,6 +40,12 @@ query UserContext {
         domainRestrictionEnabled
         domainRestriction
       }
+      customers {
+        keyMaxLength
+      }
+      projects {
+        keyMaxLength
+      }
     }
   }
   user: currentUser {

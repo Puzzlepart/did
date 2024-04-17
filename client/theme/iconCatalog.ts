@@ -152,13 +152,25 @@ import {
   ChartMultipleRegular,
   ChartMultipleFilled,
   LockOpenRegular,
-  LockOpenFilled
+  LockOpenFilled,
+  AppsRegular,
+  AppsFilled,
+  BriefcaseRegular,
+  BriefcaseFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  Apps: {
+    regular: AppsRegular,
+    filled: AppsFilled
+  },
+  Briefcase: {
+    regular: BriefcaseRegular,
+    filled: BriefcaseFilled
+  },
   LockOpen: {
     regular: LockOpenRegular,
     filled: LockOpenFilled

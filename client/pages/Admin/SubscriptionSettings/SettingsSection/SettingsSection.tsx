@@ -1,6 +1,7 @@
 import { CheckboxField, InputField } from 'components'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
+import { parseInt } from 'utils'
 import { ImageField } from './ImageField'
 import { MultiCheckboxField } from './MultiCheckboxField'
 import styles from './SettingsSection.module.scss'
@@ -49,7 +50,7 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
                   key={settingsKey}
                   type='number'
                   value={getValueWithDefault(fieldProps.defaultValue ?? 0)}
-                  onChange={(_event, data) => onChange(data.value)}
+                  onChange={(_event, data) => onChange(parseInt(data.value))}
                 />
               )
             }
