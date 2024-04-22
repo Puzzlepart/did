@@ -22,6 +22,7 @@ import { validateField } from './validateField'
  * @returns True if the control should be validated, false otherwise.
  */
 function shouldValidateField(field: FormInputControlBase) {
+  if(!field) return false
   return !!field.name && (field.required || !!field.options?.validators)
 }
 
