@@ -18,7 +18,6 @@ export function useCustomerDetails() {
         ProjectList,
         { text: t('customers.projectsHeaderText'), iconName: 'Collections' },
         {
-          items: projects,
           hideColumns: ['customer'],
           enableShimmer: context.loading,
           searchBox: {
