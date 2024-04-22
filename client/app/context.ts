@@ -85,10 +85,11 @@ export function useAppContext(): IAppContext {
  * @returns The subscription settings or a specific setting value.
  */
 export function useSubscriptionSettings<T = SubscriptionSettings>(
-  path?: string
+  path?: string,
+  defaultValue?: T
 ) {
   const { subscription } = useAppContext()
-  if (path) return get(subscription.settings, path) as T
+  if (path) return get(subscription.settings, path, defaultValue) as T
   return subscription.settings as T
 }
 

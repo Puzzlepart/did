@@ -33,6 +33,14 @@ import {
   SubscriptionSecuritySettings,
   SubscriptionSecuritySettingsInput
 } from './SubscriptionSecuritySettings'
+import {
+  SubscriptionProjectsSettings,
+  SubscriptionProjectsSettingsInput
+} from './SubscriptionProjectsSettings'
+import {
+  SubscriptionCustomersSettings,
+  SubscriptionCustomersSettingsInput
+} from './SubscriptionCustomersSettings'
 
 /**
  * @category GraphQL ObjectType
@@ -62,6 +70,12 @@ export class SubscriptionSettings {
 
   @Field(() => SubscriptionSecuritySettings, { nullable: true })
   security?: SubscriptionSecuritySettings
+
+  @Field(() => SubscriptionCustomersSettings, { nullable: true })
+  customers?: SubscriptionCustomersSettings
+
+  @Field(() => SubscriptionProjectsSettings, { nullable: true })
+  projects?: SubscriptionProjectsSettings
 }
 
 /**
@@ -92,4 +106,10 @@ export class SubscriptionSettingsInput {
 
   @Field(() => SubscriptionSecuritySettingsInput, { nullable: true })
   security?: SubscriptionSecuritySettingsInput
+
+  @Field(() => SubscriptionCustomersSettingsInput, { nullable: true })
+  customers?: SubscriptionCustomersSettingsInput
+
+  @Field(() => SubscriptionProjectsSettingsInput, { nullable: true })
+  projects?: SubscriptionProjectsSettingsInput
 }

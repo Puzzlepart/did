@@ -71,6 +71,42 @@ export function useSubscriptionConfig() {
       ]
     },
     {
+      id: 'customers',
+      text: t('admin.customersHeader'),
+      icon: 'Apps',
+      fields: [
+        {
+          id: 'keyMaxLength',
+          type: 'number',
+          props: {
+            label: t('admin.subscriptionSettings.customerKeyMaxLengthLabel'),
+            description: t(
+              'admin.subscriptionSettings.customerKeyMaxLengthDescription'
+            ),
+            defaultValue: 12
+          }
+        }
+      ]
+    },
+    {
+      id: 'projects',
+      text: t('admin.projectsHeader'),
+      icon: 'Briefcase',
+      fields: [
+        {
+          id: 'keyMaxLength',
+          type: 'number',
+          props: {
+            label: t('admin.subscriptionSettings.projectKeyMaxLengthLabel'),
+            description: t(
+              'admin.subscriptionSettings.projectKeyMaxLengthDescription'
+            ),
+            defaultValue: 12
+          }
+        }
+      ]
+    },
+    {
       id: 'security',
       text: t('admin.security'),
       icon: 'LockOpen',

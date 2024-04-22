@@ -204,7 +204,11 @@
       "companyLogoDescription": "Add the URL to your company logo. Either use a Base 64 image string, or upload an image from your computer. Recommended dimensions are 120 x 40 pixels. You can see the preview below.",
       "navBackgroundLabel": "Navigation background color",
       "navBackgroundDescription": "Custom background color for the navigation bar. If not specified, the default brand color will be used.",
-      "imageFieldUploadLabel": "Upload image"
+      "imageFieldUploadLabel": "Upload image",
+      "projectKeyMaxLengthLabel": "Max length for key",
+      "customerKeyMaxLengthLabel": "Max length for key",
+      "projectKeyMaxLengthDescription": "Maximum allowed characters for the project key.",
+      "customerKeyMaxLengthDescription": "Maximum allowed characters for the customer key."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
@@ -346,7 +350,9 @@
     "domainRestrictionEnabledLabel": "Enable domain restriction",
     "domainRestrictionEnabledDescription": "In addition to the Entra ID security group, you can restrict access to the application to users in the specified domain.",
     "domainRestrictionLabel": "Restrict access to users in the following domain",
-    "domainRestrictionDescription": "In addition to the Entra ID security group, you can restrict access to the application to users in the specified domain. If the field is empty, all users in the Entra ID security group will have access to the application."
+    "domainRestrictionDescription": "In addition to the Entra ID security group, you can restrict access to the application to users in the specified domain. If the field is empty, all users in the Entra ID security group will have access to the application.",
+    "customersHeader": "Customers",
+    "projectsHeader": "Projects"
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
