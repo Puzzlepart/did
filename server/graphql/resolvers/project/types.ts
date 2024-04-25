@@ -229,7 +229,7 @@ export class Project {
   /**
    * The labels of the project.
    */
-  @Field(() => [Label])
+  @Field(() => [Label], { nullable: true })
   public labels?: Label[] | string[]
 
   /**
