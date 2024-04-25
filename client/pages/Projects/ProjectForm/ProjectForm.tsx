@@ -9,7 +9,8 @@ import {
   InputControl,
   InputControlOptions,
   LabelPickerControl,
-  SliderControl
+  SliderControl,
+  UserPickerControl
 } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
@@ -167,6 +168,16 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
             </FormGroup>
           </PivotItem>
         )}
+         <PivotItem
+          headerText='Ressurser'
+          itemIcon='Group'
+          itemKey='resources'
+        >
+          <FormGroup gap={15}>
+            <UserPickerControl label='Prosjektleder' placeholder='Søk etter brukere...' />
+            <UserPickerControl label='Prosjektmedlemmer' placeholder='Søk etter brukere...'  multiple />
+          </FormGroup>
+        </PivotItem>
       </Pivot>
     </FormControl>
   )
