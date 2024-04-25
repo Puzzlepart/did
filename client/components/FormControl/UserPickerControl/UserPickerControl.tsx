@@ -12,20 +12,18 @@ import { UserPicker } from './UserPicker'
 export const UserPickerControl: FormInputControlComponent<
   IUserPickerControlProps
 > = (props) => {
-  const { } = useUserPickerControl()
+  const { value, onChange } = useUserPickerControl(props)
 
   return (
     <Field
       className={`${UserPickerControl.className} ${props.className}`}
       {...props}
     >
-      <UserPicker {...props} />
+      <UserPicker {...props} onChange={onChange} value={value} />
     </Field>
   )
 }
 
 UserPickerControl.displayName = 'LabelPickerControl'
 UserPickerControl.className = styles.userPickerControl
-UserPickerControl.defaultProps = {
-  defaultSelectedKeys: []
-}
+UserPickerControl.defaultProps = {}

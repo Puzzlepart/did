@@ -1,0 +1,18 @@
+query UsersAdmin {
+  users {
+    id
+    displayName
+    givenName
+    surname
+    jobTitle
+    mail
+    lastActive
+    accountEnabled
+    role {
+      name
+    }
+    photo {
+      base64
+    }
+  }
+}

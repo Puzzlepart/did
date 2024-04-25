@@ -1,5 +1,6 @@
-import { HTMLAttributes } from 'react'
+import { FormInputControlBase } from '../types'
 import { IUserPickerProps } from './UserPicker'
 
 export interface IUserPickerControlProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, IUserPickerProps { }
+  extends FormInputControlBase,
+    IUserPickerProps {}
