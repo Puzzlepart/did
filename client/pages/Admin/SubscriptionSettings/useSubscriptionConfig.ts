@@ -103,6 +103,36 @@ export function useSubscriptionConfig() {
             ),
             defaultValue: 12
           }
+        },
+        {
+          id: 'enableResourceManagement',
+          type: 'bool',
+          props: {
+            label: t(
+              'admin.subscriptionSettings.enableResourceManagementLabel'
+            ),
+            description: t(
+              'admin.subscriptionSettings.enableResourceManagementDescription'
+            )
+          }
+        },
+        {
+          id: 'resourceMetadata',
+          type: 'checkboxmulti',
+          options: {
+            projectRole: t('common.projectRole'),
+            hourlyRate: t('common.hourlyRate'),
+            startDate: t('common.startDate'),
+            endDate: t('common.endDate')
+          },
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'projects.enableResourceManagement'),
+          props: {
+            label: t('admin.subscriptionSettings.resourceMetadataLabel'),
+            description: t(
+              'admin.subscriptionSettings.resourceMetadataDescription'
+            )
+          }
         }
       ]
     },
