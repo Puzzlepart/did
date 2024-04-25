@@ -104,10 +104,18 @@ export class ProjectInput {
   labels?: string[]
 
   /**
-   * The budget tracking for the project.
+   * The budget tracking for the project. Might be merged into
+   * the `properties` field in the future.
    */
   @Field(() => ProjectBudgetInput, { nullable: true })
   budgetTracking?: ProjectBudgetInput
+
+  /**
+   * The properties of the project. This is a JSON string instead
+   * of being strongly typed to allow for flexibility in the future.
+   */
+  @Field(() => String, { nullable: true, defaultValue: '{}' })
+  properties: string
 }
 
 /**
@@ -233,10 +241,18 @@ export class Project {
   public labels?: Label[] | string[]
 
   /**
-   * The budget tracking for the project.
+   * The budget tracking for the project. Might be merged into
+   * the `properties` field in the future.
    */
   @Field(() => ProjectBudget, { nullable: true })
   public budgetTracking?: ProjectBudget
+
+  /**
+   * The properties of the project. This is a JSON string instead
+   * of being strongly typed to allow for flexibility in the future.
+   */
+  @Field(() => String, { nullable: true, defaultValue: '{}' })
+  public properties: string
 
   /**
    * Constructs a new Project.

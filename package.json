@@ -344,6 +344,10 @@
     "colours": true
   },
   "gitmoji": {
+    "graphql": [
+      "🚀",
+      "Updated GraphQL schema"
+    ],
     "component": [
       "🚀",
       "Added a new React component"
