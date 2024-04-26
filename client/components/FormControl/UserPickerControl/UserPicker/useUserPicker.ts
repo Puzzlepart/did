@@ -94,7 +94,9 @@ export function useUserPicker(props: IUserPickerProps) {
   )
 
   return {
+    props,
     state,
+    setState,
     selectableUsers,
     onUserSelected,
     onAddUser,

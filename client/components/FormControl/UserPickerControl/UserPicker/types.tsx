@@ -1,3 +1,4 @@
+import { IInputFieldProps } from 'components/FormControl/InputControl'
 import { User } from 'types'
 
 export type SingleUserPickerValue = string
@@ -10,6 +11,12 @@ export type UserPickerValue = SingleUserPickerValue | MultiUserPickerValue
 
 type UserWithMetadata = User & {
   additionalMetadata?: Record<string, string>
+}
+
+export type AdditionalMetadataField = {
+  type: IInputFieldProps['type']
+  label: string
+  renderAs?: 'currency'
 }
 
 export interface IUserPickerProps {
@@ -33,7 +40,7 @@ export interface IUserPickerProps {
    * Additional metadata to be stored with the users.
    * Only used when `multiple` is true.
    */
-  additionalMetadata?: Record<string, string>
+  additionalMetadata?: Record<string, AdditionalMetadataField>
 }
 
 export interface IUserPickerState {
