@@ -70,7 +70,9 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             renderAs: 'projectLink',
             createRenderProps: (project) => ({
               project,
-              onClick: () => context.dispatch && context.dispatch(SET_SELECTED_PROJECT(project)),
+              onClick: () =>
+                context.dispatch &&
+                context.dispatch(SET_SELECTED_PROJECT(project)),
               showIcon: false
             })
           }

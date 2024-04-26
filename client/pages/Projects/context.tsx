@@ -5,7 +5,7 @@ import { IProjectsState } from './types'
 
 /**
  * The context object for the `Projects` component.
- * 
+ *
  * @category Projects
  */
 export interface IProjectsContext
