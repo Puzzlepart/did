@@ -121,9 +121,7 @@ export function useSubscriptionConfig() {
           type: 'checkboxmulti',
           options: {
             projectRole: t('common.projectRole'),
-            hourlyRate: t('common.hourlyRate'),
-            startDate: t('common.startDate'),
-            endDate: t('common.endDate')
+            hourlyRate: t('common.hourlyRate')
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !_.get(settings, 'projects.enableResourceManagement'),

@@ -158,7 +158,7 @@ import {
   BriefcaseRegular,
   BriefcaseFilled,
   GroupRegular,
-  GroupFilled,
+  GroupFilled
 } from '@fluentui/react-icons'
 
 /**

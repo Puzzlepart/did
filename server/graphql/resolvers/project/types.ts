@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-type-error */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
@@ -38,6 +39,8 @@ export class ProjectBudgetInput {
   @Field({ nullable: true })
   criticalThreshold?: number
 }
+
+type ProjectProperties = string | Record<string, any>
 
 /**
  * @category GraphQL InputType
@@ -115,7 +118,7 @@ export class ProjectInput {
    * of being strongly typed to allow for flexibility in the future.
    */
   @Field(() => String, { nullable: true, defaultValue: '{}' })
-  properties: string
+  properties: ProjectProperties
 }
 
 /**
@@ -252,7 +255,7 @@ export class Project {
    * of being strongly typed to allow for flexibility in the future.
    */
   @Field(() => String, { nullable: true, defaultValue: '{}' })
-  public properties: string
+  public properties: ProjectProperties
 
   /**
    * Constructs a new Project.
@@ -260,7 +263,7 @@ export class Project {
    * @param input - The input to construct the project from.
    */
   constructor(input?: ProjectInput) {
-    Object.assign(this, input || {})
+    Object.assign(this, input ?? {})
   }
 }
 

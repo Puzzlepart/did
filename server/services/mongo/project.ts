@@ -8,6 +8,7 @@ import {
   LabelObject as Label,
   Project
 } from '../../graphql/resolvers/types'
+import { tryParseJson } from '../../utils'
 import { MongoDocumentService } from './@document'
 import { LabelService } from './label'
 
@@ -51,15 +52,54 @@ export class ProjectService extends MongoDocumentService<Project> {
     try {
       await this.cache.clear('getprojectsdata')
       const tag = [project.customerKey, project.key].join(' ')
-      const { insertedId } = await this.insert({
-        _id: tag,
-        tag,
-        ...project
-      })
+      const { insertedId } = await this.insert(
+        this._handleProjectProperties(
+          {
+            _id: tag,
+            tag,
+            ...project,
+            properties: project.properties
+              ? JSON.parse(project.properties as string)
+              : {}
+          },
+          'set'
+        )
+      )
       return insertedId
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * Handles the project properties based on the specified action. This is used
+   * to avoid typing the properties field in the GraphQL schema. We want to store
+   * the data as JSON in `mongodb`, but we want to return it as a string in the
+   * GraphQL schema.
+   *
+   * - If the action is `get`, it converts the project properties to a JSON string
+   * and returns the result.
+   * - If the action is `set`, it converts the project properties to an JSON object,
+   * and returns the updated project object.
+   *
+   * @param project - The project object.
+   * @param action - The action to perform on the project properties ('get' or 'set').
+   *
+   * @returns The updated project object.
+   */
+  protected _handleProjectProperties(
+    project: Project,
+    action: 'get' | 'set'
+  ): Project {
+    if (!project.properties) return project
+    if (action === 'get') {
+      project.properties = project.properties
+        ? JSON.stringify(project.properties)
+        : '{}'
+    } else {
+      project.properties = tryParseJson(project.properties as string, {})
+    }
+    return project
   }
 
   /**
@@ -73,7 +113,10 @@ export class ProjectService extends MongoDocumentService<Project> {
     try {
       await this.cache.clear('getprojectsdata')
       const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
-      const { result } = await this.update(filter, project)
+      const { result } = await this.update(
+        filter,
+        this._handleProjectProperties(project, 'set')
+      )
       return result.ok === 1
     } catch (error) {
       throw error
@@ -101,12 +144,17 @@ export class ProjectService extends MongoDocumentService<Project> {
             this._labelSvc.getLabels()
           ])
           const _projects = projects
-            .map((p) => {
-              p.customer =
-                _.find(customers, (c) => c.key === p.customerKey) || null
-              p.labels = _.filter(labels, (l) => _.contains(p.labels, l.name))
-              return p
-            })
+            .map((p) =>
+              this._handleProjectProperties(
+                {
+                  ...p,
+                  customer:
+                    _.find(customers, (c) => c.key === p.customerKey) || null,
+                  labels: _.filter(labels, (l) => _.contains(p.labels, l.name))
+                },
+                'get'
+              )
+            )
             .filter((p) => p.customer !== null)
           const data = { projects: _projects, customers, labels }
           return data

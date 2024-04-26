@@ -45,6 +45,8 @@ query UserContext {
       }
       projects {
         keyMaxLength
+        enableResourceManagement
+        resourceMetadata
       }
     }
   }

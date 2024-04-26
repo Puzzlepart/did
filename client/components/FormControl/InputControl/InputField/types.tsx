@@ -18,4 +18,9 @@ export interface IInputFieldProps
    * On blur event handler.
    */
   onBlur?: (event: any) => void
+
+  /**
+   * On enter event handler.
+   */
+  onEnter?: (value: any) => void
 }
