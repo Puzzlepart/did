@@ -139,19 +139,20 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public getProjectsData(
     query?: FilterQuery<Project>,
-    options: GetProjectsDataOptions = DefaultGetProjectsDataOptions
+    options: GetProjectsDataOptions = {}
   ): Promise<ProjectsData> {
     try {
+      const mergedOptions = { ...DefaultGetProjectsDataOptions, ...options }
       return this.cache.usingCache<ProjectsData>(
         async () => {
           const [projects, customers, labels] = await Promise.all([
             this.find(query, { name: 1 }),
-            options.includeCustomers
+            mergedOptions.includeCustomers
               ? (this._customerSvc.getCustomers(
                   query?.customerKey && { key: query.customerKey }
                 ) as Promise<Customer[]>)
               : Promise.resolve([]),
-            options.includeLabels
+            mergedOptions.includeLabels
               ? this._labelSvc.getLabels()
               : Promise.resolve([])
           ])
@@ -167,13 +168,15 @@ export class ProjectService extends MongoDocumentService<Project> {
                 'get'
               )
             )
-            .filter((p) => p.customer !== null || !options.includeCustomers)
+            .filter(
+              (p) => p.customer !== null || !mergedOptions.includeCustomers
+            )
           const data = { projects: _projects, customers, labels }
           return data
         },
         {
-          key: { ...query, collection: 'projects' },
-          disabled: !options.cache
+          key: query,
+          disabled: !mergedOptions.cache
         }
       )
     } catch (error) {

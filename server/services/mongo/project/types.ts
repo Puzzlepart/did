@@ -11,8 +11,19 @@ export type ProjectsData = {
 }
 
 export type GetProjectsDataOptions = {
+  /**
+   * Include labels in the response.
+   */
   includeLabels?: boolean
+
+  /**
+   * Include customers in the response.
+   */
   includeCustomers?: boolean
+
+  /**
+   * Use cache for the response.
+   */
   cache?: boolean
 }
 
