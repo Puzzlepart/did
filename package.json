@@ -344,6 +344,10 @@
     "colours": true
   },
   "gitmoji": {
+    "adjust": [
+      "🔧",
+     "Just a small adjustment"
+    ],
     "graphql": [
       "🚀",
       "Updated GraphQL schema"
