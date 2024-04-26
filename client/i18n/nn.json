@@ -687,7 +687,8 @@
     "hourlyRate": "Timelønn",
     "projectRole": "Prosjektrolle",
     "startDate": "Startdato",
-    "endDate": "Sluttdato"
+    "endDate": "Sluttdato",
+    "notSet": "Ikke satt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -785,5 +786,12 @@
   },
   "autocomplete": {
     "noResultsMessage": "Ingen resultater. Skriv inn minst {{minCharacters}} tegn for å søke."
+  },
+  "components": {
+    "userPicker": {
+      "additionalMetadata": "Ekstra informasjon",
+      "addUser": "Legg til",
+      "displayName": "Namn"
+    }
   }
 }

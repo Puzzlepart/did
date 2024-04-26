@@ -690,7 +690,8 @@
     "hourlyRate": "Hourly Rate",
     "projectRole": "Project Role",
     "startDate": "Start Date",
-    "endDate": "End Date"
+    "endDate": "End Date",
+    "notSet": "Not set"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -788,5 +789,12 @@
   },
   "autocomplete": {
     "noResultsMessage": "No results found. Enter at least {{minCharacters}} characters to search."
+  },
+  "components": {
+    "userPicker": {
+      "additionalMetadata": "Additional metadata",
+      "addUser": "Add",
+      "displayName": "Name"
+    }
   }
 }
