@@ -32,7 +32,9 @@ export const MultiCheckboxField: StyledComponent<ICheckboxFieldProps> = ({
             label={options[key]}
             onChange={(_event, { checked }) => {
               context.onChange(settingsKey, (value: string[] = []) => {
-                return checked ? [...value, key] : _.without(value, key)
+                return checked
+                  ? [...(value ?? []), key]
+                  : _.without(value ?? [], key)
               })
             }}
           />
