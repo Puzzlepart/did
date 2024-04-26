@@ -1,4 +1,19 @@
 {
   "version": "0.2.0",
-  "configurations": []
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:9001",
+      "webRoot": "${workspaceFolder}",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/client/*"
+      },
+      "runtimeArgs": [
+          "--ignore-certificate-errors",
+          "--user-data-dir=${workspaceFolder}/.vscode/chrome-debug-user-data"
+      ]
+    }
+  ]
 }
