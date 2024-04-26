@@ -3,6 +3,7 @@ import { useFormContext } from '../context'
 import { IUserPickerControlProps } from './types'
 import { CLEAR_VALIDATION_MESSAGE } from '../reducer/actions'
 import { User } from '../../../../server/graphql'
+import _ from 'underscore'
 
 /**
  * Transform the value for the `UserPickerControl`.
@@ -11,18 +12,23 @@ import { User } from '../../../../server/graphql'
  * @param props The props of the user picker control.
  */
 function transformValue(value: User[], props: IUserPickerControlProps) {
-  // eslint-disable-next-line no-console
-  console.log('transformValue called', value, props.name)
   if (props.multiple) {
-    return []
+    return value.map((user) =>
+      _.pick(user, ['id', ...Object.keys(props.additionalMetadata)])
+    )
   }
-  return null
+  return _.first(value)?.id ?? null
 }
 
+/**
+ * Custom hook for managing the `UserPickerControl` com
+ *
+ * @param props - The props for the user picker control.
+ *
+ * @returns An object containing the `onChange` function and the current `value` of the control.
+ */
 export function useUserPickerControl(props: IUserPickerControlProps) {
   const context = useFormContext()
-  // eslint-disable-next-line no-console
-  console.log('useUserPickerControl called', props.model)
 
   const onChange = useCallback(
     (value: User[]) => {
@@ -32,6 +38,9 @@ export function useUserPickerControl(props: IUserPickerControlProps) {
     [props.model]
   )
 
-  const value = props.model.value<any>(props.name, '')
+  const value = props.model.value<IUserPickerControlProps['value']>(
+    props.name,
+    ''
+  )
   return { onChange, value }
 }

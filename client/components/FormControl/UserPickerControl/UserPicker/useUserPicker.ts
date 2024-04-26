@@ -1,11 +1,10 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/consistent-function-scoping */
-/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState } from 'hooks'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
+import { useUserPickerValueParser } from './useUserPickerValueParser'
 
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useMergedState<IUserPickerState>({
@@ -15,6 +14,7 @@ export function useUserPicker(props: IUserPickerProps) {
   })
 
   useUserPickerQuery(setState)
+  useUserPickerValueParser(props, state, setState)
 
   /**
    * Handler for when a user is selected in the `Combobox`. Gets the
@@ -36,15 +36,68 @@ export function useUserPicker(props: IUserPickerProps) {
   }
 
   const onAddUser = () => {
-    setState((prevState) => ({
-      selectedUser: null,
-      selectedUsers: [...prevState.selectedUsers, prevState.selectedUser]
-    }))
+    const selectedUsers = [
+      ...state.selectedUsers,
+      {
+        ...state.selectedUser,
+        ...state.selectedUser.additionalMetadata
+      }
+    ]
+    props.onChange(selectedUsers)
+    setState({ selectedUsers, selectedUser: null })
   }
+
+  /**
+   * On set additional metadata for the selected user. If a `userId` is provided,
+   * it will set the additional metadata for the user with the provided ID.
+   * Otherwise, it will set the additional metadata for the selected user.
+   *
+   * @param key Key of the additional metadata
+   * @param value Value of the additional metadata
+   * @param userId User ID of the user to set the additional metadata for,
+   * if not provided, it will set the additional metadata for the selected user.
+   */
+  const onSetAdditionalMetadata = (
+    key: string,
+    value: string,
+    userId?: string
+  ) => {
+    if (userId) {
+      const selectedUsers = state.selectedUsers.map((user) => {
+        if (user.id === userId) {
+          return {
+            ...user,
+            [key]: value
+          }
+        }
+        return user
+      })
+      props.onChange(selectedUsers)
+      setState({ selectedUsers })
+      return
+    }
+    setState({
+      selectedUser: {
+        ...state.selectedUser,
+        additionalMetadata: {
+          ...state.selectedUser.additionalMetadata,
+          [key]: value
+        }
+      }
+    })
+  }
+
+  const selectableUsers = state.users.filter(
+    (user) =>
+      !state.selectedUsers.some((u) => u.id === user.id) &&
+      user.accountEnabled !== false
+  )
 
   return {
     state,
+    selectableUsers,
     onUserSelected,
-    onAddUser
+    onAddUser,
+    onSetAdditionalMetadata
   }
 }
