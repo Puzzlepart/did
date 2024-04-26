@@ -6,7 +6,8 @@ import { Project } from 'types'
  *
  * @category Projects
  */
-export interface IProjectListProps extends Omit<IListProps<Project>, 'role'> {
+export interface IProjectListProps
+  extends Omit<IListProps<Project>, 'role' | 'items'> {
   /**
    * Determines whether to render a link for each project.
    */
