@@ -123,7 +123,8 @@
     "budgetHoursDescription": "Budsjettet for dette prosjektet i antall timer. \nVi tar ikke hensyn til ulike timepriser på dette tidspunktet.",
     "budgetWarningThreshold": "Advarsel terskel for budsjett",
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
-    "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises."
+    "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
+    "resources": "Ressurser"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

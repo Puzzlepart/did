@@ -125,7 +125,8 @@
     "budgetWarningThreshold": "Budget Warning Threshold",
     "budgetCriticalThreshold": "Budget Critical Threshold",
     "budgetCriticalThresholdDescription": "The percentage of the budget at which an error will be shown.",
-    "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown."
+    "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown.",
+    "resources": "Resources"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
