@@ -10,8 +10,15 @@ export function useResources() {
   )
   const additionalMetadata = _.pick(
     {
-      hourlyRate: t('common.hourlyRate'),
-      projectRole: t('common.projectRole')
+      hourlyRate: {
+        label: t('common.hourlyRate'),
+        type: 'number',
+        renderAs: 'currency'
+      },
+      projectRole: {
+        label: t('common.projectRole'),
+        type: 'text'
+      }
     },
     resourceMetadata
   )

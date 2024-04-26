@@ -1,4 +1,4 @@
-query ProjectsOutlook {
+query ProjectsQuery {
   projects {
     tag
     key
