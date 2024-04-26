@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
-import _ from 'underscore'
+import _ from 'lodash'
 import { RequestContext } from '../../../graphql/requestContext'
 import { CacheService } from '../../cache'
+import { FieldType } from './types'
+import { tryParseJson } from '../../../utils'
+const log = require('debug')('server/services/cache')
 
 export class MongoDocumentService<T> {
   public cache: CacheService = null
   public collection: Collection<T>
+  private _fieldTypes: Record<keyof T, any> = null
 
   /**
    * Constructer for `MongoDocumentService`
@@ -55,8 +60,23 @@ export class MongoDocumentService<T> {
     }, {})
   }
 
+  private _handleFieldTypes(documents: T[], action: 'get' | 'set') {
+    return documents.map((document) => {
+      for (const key of Object.keys(document)) {
+        if (this._fieldTypes[key] && Boolean(document[key])) {
+          switch (this._fieldTypes[key]) {
+            case 'JSON': {
+              document[key] = action === 'get' ? JSON.stringify(document[key]) : tryParseJson(document[key])
+            }
+          }
+        }
+      }
+      return document
+    })
+  }
+
   /**
-   * Wrapper on _.find().toArray()
+   * Wrapper on `_.find().toArray()` that also handles field types like `JSON`.
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
@@ -116,5 +136,15 @@ export class MongoDocumentService<T> {
         updatedAt: new Date()
       }
     })
+  }
+
+  /**
+   * Register field type for special handling.
+   * 
+   * @param fieldName Field name to register
+   * @param type The field type
+   */
+  public registerType(fieldName: keyof T, type: FieldType) {
+    this._fieldTypes[fieldName] = type
   }
 }
