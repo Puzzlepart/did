@@ -18,6 +18,7 @@ export function useProjectsReducer() {
   const urlParams = useParams<IProjectsUrlParameters>()
   const initialState: IProjectsState = {
     projects: [],
+    myProjects: [],
     outlookCategories: [],
     selected: null,
     editProject: null
@@ -34,6 +35,7 @@ export function useProjectsReducer() {
               fuzzyStringEqual(c.displayName, p.tag)
             )
           }))
+          state.myProjects = payload.data.myProjects.map((p) => p.tag)
           const selectedTag = state.selected?.tag ?? urlParams.currentTab
           if (selectedTag) {
             state.selected = _.find(state.projects, ({ tag }) =>

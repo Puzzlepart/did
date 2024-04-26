@@ -33,7 +33,10 @@ export function useProjectList(props: IProjectListProps) {
   const items = useMemo(() => {
     let projects = context?.state?.projects ?? []
     if (props.id === 'm') {
-      projects = projects.filter(({ outlookCategory }) => !!outlookCategory)
+      projects = projects.filter(
+        ({ outlookCategory, tag }) =>
+          Boolean(outlookCategory) || context?.state?.myProjects?.includes(tag)
+      )
     }
     return projects
   }, [context?.state?.projects, props.id])

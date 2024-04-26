@@ -26,6 +26,9 @@ query ProjectsQuery {
     }
     properties
   }
+  myProjects {
+    tag
+  }
   outlookCategories {
     id
     key

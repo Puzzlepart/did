@@ -4,7 +4,11 @@ import { Project } from 'types'
 import { IProjectsState } from '../types'
 
 type DATA_UPDTED_PAYLOAD = QueryResult<
-  Pick<IProjectsState, 'projects' | 'outlookCategories'>
+  Pick<IProjectsState, 'projects' | 'outlookCategories'> & {
+    myProjects: {
+      tag: string
+    }[]
+  }
 >
 
 export const DATA_UPDATED = createAction<DATA_UPDTED_PAYLOAD>('DATA_UPDATED')

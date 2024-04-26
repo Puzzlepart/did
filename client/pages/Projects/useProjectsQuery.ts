@@ -14,7 +14,11 @@ import { IProjectsState } from './types'
  */
 export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
   const query = useQuery<
-    Pick<IProjectsState, 'projects' | 'outlookCategories'>
+    Pick<IProjectsState, 'projects' | 'myProjects' | 'outlookCategories'> & {
+      myProjects: {
+        tag: string
+      }[]
+    }
   >($projects_outlook, {
     variables: { sortBy: 'name' },
     fetchPolicy: 'cache-and-network'

@@ -38,6 +38,12 @@ export interface IProjectsState {
   projects?: Project[]
 
   /**
+   * The list of projects that the current user is a member of.
+   * Just an array of the tags for now.
+   */
+  myProjects?: string[]
+
+  /**
    * The project being edited.
    */
   editProject?: Project
