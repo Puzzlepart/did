@@ -208,7 +208,9 @@
       "projectKeyMaxLengthLabel": "Max length for key",
       "customerKeyMaxLengthLabel": "Max length for key",
       "projectKeyMaxLengthDescription": "Maximum allowed characters for the project key.",
-      "customerKeyMaxLengthDescription": "Maximum allowed characters for the customer key."
+      "customerKeyMaxLengthDescription": "Maximum allowed characters for the customer key.",
+      "showMyProjectsByDefaultLabel": "Show My Projects By Default",
+      "showMyProjectsByDefaultDescription": "Show \"My Projects\" as default on the Project page."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",

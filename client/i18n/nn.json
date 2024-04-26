@@ -231,7 +231,9 @@
       "projectKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for prosjektnøkkel.",
       "projectKeyMaxLengthLabel": "Maksimum lengde for prosjektnøkkel",
       "customerKeyMaxLengthLabel": "Maksimum lengde for kundenøkkel",
-      "customerKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for kundenøkkel."
+      "customerKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for kundenøkkel.",
+      "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
+      "showMyProjectsByDefaultDescription": "Vis \"Prosjekta mine\" som standard på prosjektsida."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",

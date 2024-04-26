@@ -10,6 +10,12 @@ import { Field, InputType, ObjectType } from 'type-graphql'
   description: 'A type that describes Subscription projects settings'
 })
 export class SubscriptionProjectsSettings {
+  /**
+   * Show my projects by default for all users
+   */
+  @Field({ nullable: true, defaultValue: false })
+  showMyProjectsByDefault?: boolean
+
   @Field({ nullable: true, defaultValue: 1 })
   keyMaxLength?: number
 }
@@ -22,6 +28,12 @@ export class SubscriptionProjectsSettings {
   description: 'A input that describes Subscription projects settings'
 })
 export class SubscriptionProjectsSettingsInput {
+  /**
+   * Show my projects by default for all users
+   */
+  @Field({ nullable: true, defaultValue: false })
+  showMyProjectsByDefault?: boolean
+
   @Field({ nullable: true, defaultValue: 1 })
   keyMaxLength?: number
 }
