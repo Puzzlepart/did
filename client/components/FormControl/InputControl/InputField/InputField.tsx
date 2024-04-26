@@ -41,6 +41,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
           {..._.pick(
             props,
             'id',
+            'className',
             'placeholder',
             'type',
             'value',

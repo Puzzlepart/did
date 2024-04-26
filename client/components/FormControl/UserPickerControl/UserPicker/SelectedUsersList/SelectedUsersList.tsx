@@ -28,7 +28,7 @@ export const SelectedUsersList: FC = () => {
               fieldName: key,
               name: field.label,
               minWidth: 100,
-              maxWidth: 120,
+              maxWidth: 140,
               onRender: (user: User) => (
                 <UserMetadataCell
                   id={key}

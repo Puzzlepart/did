@@ -31,9 +31,12 @@ export const AdditionalMetadata: FC = () => {
             `additionalMetadata.${key}`,
             ''
           )}
-          onChange={(_, { value }) =>
+          onChange={(_, { value }) => {
+            if (field.type === 'number') {
+              value = Number(value)
+            }
             context.onSetAdditionalMetadata(key, value)
-          }
+          }}
         />
       ))}
     </FormGroup>
