@@ -12,12 +12,14 @@ export const AdditionalMetadata: FC = () => {
   const additionalMetadata = Object.entries(context.props.additionalMetadata)
   return (
     <FormGroup
-      hidden={!Boolean(context.state.selectedUser) || _.isEmpty(additionalMetadata)}
+      hidden={
+        !Boolean(context.state.selectedUser) || _.isEmpty(additionalMetadata)
+      }
       title={t('components.userPicker.additionalMetadata')}
       bordered
       className={styles.additionalMetadata}
     >
-      {additionalMetadata.map(([key,field]) => (
+      {additionalMetadata.map(([key, field]) => (
         <InputField
           hidden={!Boolean(context.state.selectedUser)}
           type={field.type}

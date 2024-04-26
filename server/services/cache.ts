@@ -86,15 +86,15 @@ export class CacheService {
 
   /**
    * Parses the cache key and returns an array of strings.
-   * 
+   *
    * @param key - The cache key to be parsed.
-   * 
+   *
    * @returns An array of strings representing the parsed cache key.
    */
   private _parseCacheKey(key: CacheKey): string[] {
-    if(!key) return []
+    if (!key) return []
     if (_.isArray(key)) {
-      key = _.filter(key, Boolean) 
+      key = _.filter(key, Boolean)
     }
     if (_.isObject(key)) {
       key = [JSON.stringify(key).replace(/[^\dA-Za-z]/g, '')]
@@ -215,9 +215,11 @@ export class CacheService {
           return resolve(null)
         } else {
           log(
-            `Clearing ${colors.magenta(keys.length.toString())} keys for pattern ${colors.magenta(
-              pattern
-            )}: ${colors.cyan(keys.join(', '))}.`
+            `Clearing ${colors.magenta(
+              keys.length.toString()
+            )} keys for pattern ${colors.magenta(pattern)}: ${colors.cyan(
+              keys.join(', ')
+            )}.`
           )
         }
         redisMiddlware.del(keys, () => {

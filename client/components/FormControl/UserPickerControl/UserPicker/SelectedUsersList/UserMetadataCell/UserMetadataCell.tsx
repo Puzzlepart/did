@@ -7,7 +7,12 @@ import styles from './UserMetadataCell.module.scss'
 import { IUserMetadataCellProps } from './types'
 import { formatCurrency } from 'utils'
 
-function renderValue(value: string | number, renderAs: 'currency') {
+function renderValue(
+  value: string | number,
+  renderAs: 'currency',
+  defaultValue: string
+) {
+  if (!value) return defaultValue
   switch (renderAs) {
     case 'currency': {
       return formatCurrency(value as number)
@@ -20,7 +25,7 @@ function renderValue(value: string | number, renderAs: 'currency') {
 
 export const UserMetadataCell: FC<IUserMetadataCellProps> = (props) => {
   const { t } = useTranslation()
-  const [value, setValue] = useState(props.user[props.id] ?? t('common.notSet'))
+  const [value, setValue] = useState(props.user[props.id])
   const editing = useBoolean(false)
   return (
     <div className={styles.userMeadataCell}>
@@ -35,7 +40,7 @@ export const UserMetadataCell: FC<IUserMetadataCellProps> = (props) => {
         />
       ) : (
         <span className={styles.value} onClick={editing.toggle}>
-          {renderValue(value, props.field.renderAs)}
+          {renderValue(value, props.field.renderAs, t('common.notSet'))}
         </span>
       )}
     </div>

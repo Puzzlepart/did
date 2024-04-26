@@ -20,7 +20,14 @@ export type AdditionalMetadataField = {
 }
 
 export interface IUserPickerProps {
+  /**
+   * The placeholder text for the user picker.
+   */
   placeholder?: string
+
+  /**
+   * The value of the user picker.
+   */
   value?: UserPickerValue
 
   /**
@@ -45,10 +52,9 @@ export interface IUserPickerProps {
 
 export interface IUserPickerState {
   /**
-   * Whether the query is still loading.
-   * This is handled by the `useUserPickerQuery` hook.
+   * Whether the data for the user picker has been loaded.
    */
-  loading: boolean
+  isDataLoaded: boolean
 
   /**
    * All the available users in the picker.

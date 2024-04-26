@@ -4,17 +4,15 @@ import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState } from 'hooks'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
-import { useUserPickerValueParser } from './useUserPickerValueParser'
 
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useMergedState<IUserPickerState>({
-    loading: false,
+    isDataLoaded: false,
     users: [],
     selectedUsers: []
   })
 
-  useUserPickerQuery(setState)
-  useUserPickerValueParser(props, state, setState)
+  useUserPickerQuery({ props, setState })
 
   /**
    * Handler for when a user is selected in the `Combobox`. Gets the

@@ -21,7 +21,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { budgetTracking, projects } = useSubscriptionSettings()
   const { formControlProps } = useProjectForm(props)
   return (
-    <FormControl debug={true} {...formControlProps}>
+    <FormControl {...formControlProps}>
       <Pivot
         styles={{
           link: {
