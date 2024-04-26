@@ -5,12 +5,12 @@ import { IFormControlProps, IFormControlState } from './types'
 /**
  * Interface for the form control context.
  */
-export interface IFormControlContext extends IFormControlState {
-  /**
-   * The model object for the form control.
-   */
-  model: IFormControlProps['model']
-
+export interface IFormControlContext
+  extends IFormControlState,
+    Pick<
+      IFormControlProps,
+      'model' | 'register' | 'additionalContext' | 'isEditMode'
+    > {
   /**
    * The Redux dispatch function.
    */

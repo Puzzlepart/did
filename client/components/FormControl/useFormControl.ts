@@ -6,6 +6,7 @@ import { CLEAR_VALIDATION_MESSAGES, useFormControlReducer } from './reducer'
 import { IFormControlProps } from './types'
 import { useFormControlValidation } from './useFormControlValidation'
 import React from 'react'
+import _ from 'lodash'
 
 /**
  * Get the children of the form control. If children
@@ -63,7 +64,12 @@ export const useFormControl: ComponentLogicHook<
   const context = useMemo<IFormControlContext>(
     () => ({
       ...state,
-      model: props.model,
+      ..._.pick(props, [
+        'model',
+        'register',
+        'additionalContext',
+        'isEditMode'
+      ]),
       dispatch,
       onBlurCallback: (event) => {
         if (props.validateOnBlur) {

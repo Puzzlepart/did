@@ -2,13 +2,18 @@ import { IPanelProps } from 'components/Panel'
 import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
 import { ISubmitProps } from './ISubmitProps'
-
+import { useFormControls } from '../useFormControls'
 export interface IFormControlProps<T = any>
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
   /**
    * Specify the model used for the form control.
    */
   model?: ReturnType<typeof useMap>
+
+  /**
+   * Callback for registering form controls.
+   */
+  register?: ReturnType<typeof useFormControls>
 
   /**
    * Submit  props
@@ -37,7 +42,17 @@ export interface IFormControlProps<T = any>
   skipValidation?: boolean
 
   /**
+   * If the form control is in edit mode.
+   */
+  isEditMode?: boolean
+
+  /**
    * Running in debug mode will show the model JSON in the bottom of the form.
    */
   debug?: boolean
+
+  /**
+   * Additional context to be passed to the form controls.
+   */
+  additionalContext?: Map<string, any>
 }
