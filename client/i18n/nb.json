@@ -230,7 +230,11 @@
       "projectKeyMaxLengthLabel": "Maksimum lengde for prosjektnøkkel",
       "projectKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for prosjektnøkkel.",
       "customerKeyMaxLengthLabel": "Maksimum lengde for kundenøkkel",
-      "customerKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for kundenøkkel."
+      "customerKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for kundenøkkel.",
+      "enableResourceManagementDescription": "Aktivering av denne innstillingen gir forbedret administrasjon av prosjektressurser. \nNår den er aktivert, kan administratorer få tilgang til detaljerte metadata relatert til hvert prosjekt, for eksempel \"Prosjektleder\" og \"Prosjektmedlemmer\". \nDenne funksjonen letter bedre overvåking og koordinering mellom teammedlemmer, og sikrer at roller og ansvar er klart definert og synlig på plattformen.",
+      "enableResourceManagementLabel": "Aktiver ressurshåndtering",
+      "resourceMetadataLabel": "Ressursmetadata",
+      "resourceMetadataDescription": "Velg metadata for prosjektressurser."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -677,7 +681,11 @@
     "outlookCategoryError": "Det oppsto en feil ved opprettelse av kategorien i Outlook. Hvis du nettopp opprettet den, kan det ta noen øyeblikk før det vises her.",
     "tagFieldLabel": "Prosjektnøkkel",
     "ignoredHours": "Ignorerte timer",
-    "general": "Generelt"
+    "general": "Generelt",
+    "hourlyRate": "Timelønn",
+    "projectRole": "Prosjektrolle",
+    "endDate": "Sluttdato",
+    "startDate": "Startdato"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

@@ -208,7 +208,11 @@
       "projectKeyMaxLengthLabel": "Max length for key",
       "customerKeyMaxLengthLabel": "Max length for key",
       "projectKeyMaxLengthDescription": "Maximum allowed characters for the project key.",
-      "customerKeyMaxLengthDescription": "Maximum allowed characters for the customer key."
+      "customerKeyMaxLengthDescription": "Maximum allowed characters for the customer key.",
+      "enableResourceManagementLabel": "Enable Resource Management",
+      "enableResourceManagementDescription": "Enabling this setting allows for enhanced management of project resources. Once activated, administrators can access detailed metadata related to each project, such as \"Project Leader\" and \"Project Members.\" This feature facilitates better oversight and coordination among team members, ensuring that roles and responsibilities are clearly defined and visible within the platform.",
+      "resourceMetadataLabel": "Resource metadata",
+      "resourceMetadataDescription": "Select metadata for project resources."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
@@ -679,7 +683,12 @@
     "tagFieldLabel": "Tag",
     "ignoredHours": "Ignored hours",
     "signInDisabledMessage": "We'",
-    "general": "General"
+    "general": "General",
+    "projectRoleLabel": "Project Role",
+    "hourlyRate": "Hourly Rate",
+    "projectRole": "Project Role",
+    "startDate": "Start Date",
+    "endDate": "End Date"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
