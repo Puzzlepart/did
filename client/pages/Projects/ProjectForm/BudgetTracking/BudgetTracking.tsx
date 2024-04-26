@@ -3,33 +3,37 @@ import {
   FormGroup,
   InputControl,
   InputControlOptions,
-  SliderControl
+  SliderControl,
+  useFormContext
 } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectFormTabComponent } from '../types'
 
-export const BudgetTracking: ProjectFormTabComponent = ({
-  register,
-  model
-}) => {
+export const BudgetTracking: ProjectFormTabComponent = () => {
   const { t } = useTranslation()
+  const { model, register } = useFormContext()
   return (
     <FormGroup gap={15}>
       <CheckboxControl
-        {...register('budgetTracking.trackingEnabled')}
+        {...register('properties.budgetTracking.trackingEnabled')}
         label={t('projects.budgetTrackingEnabled')}
         description={t('projects.budgetTrackingEnabledDescription')}
       />
       <InputControl
-        {...register<InputControlOptions>('budgetTracking.hours', {})}
+        {...register<InputControlOptions>(
+          'properties.budgetTracking.hours',
+          {}
+        )}
         label={t('projects.budgetHours')}
         description={t('projects.budgetHoursDescription')}
         type='number'
-        hidden={!model.value('budgetTracking.trackingEnabled' as any)}
+        hidden={
+          !model.value('properties.budgetTracking.trackingEnabled' as any)
+        }
       />
       <SliderControl
-        {...register('budgetTracking.warningThreshold')}
+        {...register('properties.budgetTracking.warningThreshold')}
         label={t('projects.budgetWarningThreshold')}
         description={t('projects.budgetWarningThresholdDescription')}
         formatValue={(value) => `${value * 100}%`}
@@ -37,10 +41,12 @@ export const BudgetTracking: ProjectFormTabComponent = ({
         max={1}
         step={0.01}
         defaultValue={0.8}
-        hidden={!model.value('budgetTracking.trackingEnabled' as any)}
+        hidden={
+          !model.value('properties.budgetTracking.trackingEnabled' as any)
+        }
       />
       <SliderControl
-        {...register('budgetTracking.criticalThreshold')}
+        {...register('properties.budgetTracking.criticalThreshold')}
         label={t('projects.budgetCriticalThreshold')}
         description={t('projects.budgetCriticalThresholdDescription')}
         formatValue={(value) => `${value * 100}%`}
@@ -48,7 +54,9 @@ export const BudgetTracking: ProjectFormTabComponent = ({
         max={1}
         step={0.01}
         defaultValue={0.9}
-        hidden={!model.value('budgetTracking.trackingEnabled' as any)}
+        hidden={
+          !model.value('properties.budgetTracking.trackingEnabled' as any)
+        }
       />
     </FormGroup>
   )

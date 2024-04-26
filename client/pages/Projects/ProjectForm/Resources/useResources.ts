@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useSubscriptionSettings } from 'AppContext'
 import _ from 'lodash'
+import { AdditionalMetadataField } from 'components/FormControl/UserPickerControl/UserPicker'
 
 export function useResources() {
   const { t } = useTranslation()
@@ -14,11 +15,11 @@ export function useResources() {
         label: t('common.hourlyRate'),
         type: 'number',
         renderAs: 'currency'
-      },
+      } as AdditionalMetadataField,
       projectRole: {
         label: t('common.projectRole'),
         type: 'text'
-      }
+      } as AdditionalMetadataField
     },
     resourceMetadata
   )

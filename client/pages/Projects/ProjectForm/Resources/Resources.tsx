@@ -1,9 +1,14 @@
-import { FormGroup, UserPickerControl } from 'components/FormControl'
+import {
+  FormGroup,
+  UserPickerControl,
+  useFormContext
+} from 'components/FormControl'
 import React from 'react'
 import { ProjectFormTabComponent } from '../types'
 import { useResources } from './useResources'
 
-export const Resources: ProjectFormTabComponent = ({ register }) => {
+export const Resources: ProjectFormTabComponent = () => {
+  const { register } = useFormContext()
   const { additionalMetadata } = useResources()
   return (
     <FormGroup gap={15}>
