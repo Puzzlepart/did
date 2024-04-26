@@ -85,6 +85,26 @@ export class CacheService {
   ) {}
 
   /**
+   * Parses the cache key and returns an array of strings.
+   * 
+   * @param key - The cache key to be parsed.
+   * 
+   * @returns An array of strings representing the parsed cache key.
+   */
+  private _parseCacheKey(key: CacheKey): string[] {
+    if(!key) return []
+    if (_.isArray(key)) {
+      key = _.filter(key, Boolean) 
+    }
+    if (_.isObject(key)) {
+      key = [JSON.stringify(key).replace(/[^\dA-Za-z]/g, '')]
+    } else {
+      key = [key]
+    }
+    return key as string[]
+  }
+
+  /**
    * Get scoped cache key
    *
    * Key can either be an string or  an array of string.
@@ -95,17 +115,10 @@ export class CacheService {
    * @param scope - Cache scope
    */
   private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope) {
-    if (_.isArray(key)) {
-      key = _.filter(key, Boolean)
-    }
-    if (_.isObject(key)) {
-      key = [JSON.stringify(key).replace(/[^\dA-Za-z]/g, '')]
-    } else {
-      key = [key]
-    }
+    const keyParts = this._parseCacheKey(key)
     const scopedCacheKey = [
       this.prefix,
-      ...(key as string[]),
+      ...keyParts,
       scope !== CacheScope.GLOBAL &&
         (scope === CacheScope.SUBSCRIPTION
           ? this.context.subscription.id
@@ -187,14 +200,26 @@ export class CacheService {
   }
 
   /**
-   * Clear cache for the specified key and scope
+   * Clear cache for the specified key and scope. If no key is provided,
+   * it will clear all cache for the current prefix.
    *
    * @param key - Cache key
    */
-  public clear(key: CacheKey) {
+  public clear(key: CacheKey = null) {
     const pattern = `${this._getScopedCacheKey(key, CacheScope.GLOBAL)}*`
+    log(`Clearing cache for key ${colors.magenta(pattern)}...`)
     return new Promise((resolve) => {
       redisMiddlware.keys(pattern, (_error, keys) => {
+        if (keys.length === 0) {
+          log(`No keys found for pattern ${colors.magenta(pattern)}.`)
+          return resolve(null)
+        } else {
+          log(
+            `Clearing ${colors.magenta(keys.length.toString())} keys for pattern ${colors.magenta(
+              pattern
+            )}: ${colors.cyan(keys.join(', '))}.`
+          )
+        }
         redisMiddlware.del(keys, () => {
           resolve(null)
         })
