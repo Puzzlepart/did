@@ -11,7 +11,7 @@ export const SelectedUsersList: FC = () => {
   const context = useUserPickerContext()
   return (
     <List
-      enableShimmer={context.state.loading}
+      enableShimmer={!context.state.isDataLoaded}
       items={context.state.selectedUsers}
       columns={[
         {

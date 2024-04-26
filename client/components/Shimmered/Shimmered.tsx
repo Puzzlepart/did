@@ -6,7 +6,7 @@ import { IShimmeredProps } from './types'
 
 export const Shimmered: ReusableComponent<IShimmeredProps> = (props) => {
   return (
-    <div>
+    <div className={props.className}>
       {props.isDataLoaded ? (
         props.children
       ) : (
