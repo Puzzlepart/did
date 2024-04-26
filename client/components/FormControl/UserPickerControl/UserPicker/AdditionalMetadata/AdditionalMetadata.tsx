@@ -9,20 +9,21 @@ import { useUserPickerContext } from '../context'
 export const AdditionalMetadata: FC = () => {
   const { t } = useTranslation()
   const context = useUserPickerContext()
+  const additionalMetadata = Object.entries(context.props.additionalMetadata)
   return (
     <FormGroup
-      hidden={!Boolean(context.state.selectedUser)}
+      hidden={!Boolean(context.state.selectedUser) || _.isEmpty(additionalMetadata)}
       title={t('components.userPicker.additionalMetadata')}
       bordered
       className={styles.additionalMetadata}
     >
-      {Object.keys(context.props.additionalMetadata).map((key) => (
+      {additionalMetadata.map(([key,field]) => (
         <InputField
           hidden={!Boolean(context.state.selectedUser)}
-          type={context.props.additionalMetadata[key].type}
+          type={field.type}
           key={key}
           name={key}
-          label={context.props.additionalMetadata[key].label}
+          label={field.label}
           value={_.get(
             context.state.selectedUser,
             `additionalMetadata.${key}`,
