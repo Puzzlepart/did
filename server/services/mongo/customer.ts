@@ -3,7 +3,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'
 import { Customer } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 import { LabelService } from './label'
 
 /**

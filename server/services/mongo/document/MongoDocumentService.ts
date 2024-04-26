@@ -1,9 +1,7 @@
-/* eslint-disable unicorn/no-array-callback-reference */
-
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
 import _ from 'underscore'
-import { RequestContext } from '../../graphql/requestContext'
-import { CacheService } from '../cache'
+import { RequestContext } from '../../../graphql/requestContext'
+import { CacheService } from '../../cache'
 
 export class MongoDocumentService<T> {
   public cache: CacheService = null

@@ -5,7 +5,7 @@ import { Inject, Service } from 'typedi'
 import { RoleService } from '.'
 import { RequestContext } from '../../graphql/requestContext'
 import { User } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * User service

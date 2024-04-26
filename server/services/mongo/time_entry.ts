@@ -1,7 +1,7 @@
 import { Inject, Service } from 'typedi'
 import { RequestContext } from '../../graphql/requestContext'
 import { TimeEntry } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * Time entry service

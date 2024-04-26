@@ -1,29 +1,26 @@
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { CustomerService } from '.'
-import { RequestContext } from '../../graphql/requestContext'
+import { CustomerService } from '..'
+import { RequestContext } from '../../../graphql/requestContext'
+import { Customer, Project } from '../../../graphql/resolvers/types'
+import { tryParseJson } from '../../../utils'
+import { MongoDocumentService } from '../document'
+import { LabelService } from '../label'
 import {
-  Customer,
-  LabelObject as Label,
-  Project
-} from '../../graphql/resolvers/types'
-import { tryParseJson } from '../../utils'
-import { MongoDocumentService } from './@document'
-import { LabelService } from './label'
-
-export type ProjectsData = {
-  projects: Project[]
-  customers: Customer[]
-  labels: Label[]
-}
+  GetProjectsDataOptions,
+  DefaultGetProjectsDataOptions,
+  ProjectsData
+} from './types'
 
 /**
  * Project service
  *
  * @extends MongoDocumentService
+ *
  * @category Injectable Container Service
  */
+
 @Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
   /**
@@ -82,6 +79,9 @@ export class ProjectService extends MongoDocumentService<Project> {
    * - If the action is `set`, it converts the project properties to an JSON object,
    * and returns the updated project object.
    *
+   * @note This might be a good candidate for a decorator, or some sort of dynamic
+   * field transformation.
+   *
    * @param project - The project object.
    * @param action - The action to perform on the project properties ('get' or 'set').
    *
@@ -130,18 +130,30 @@ export class ProjectService extends MongoDocumentService<Project> {
    * customers and labels to projects using the `customerKey` and
    * `labels` properties.
    *
-   * @param query - Query
+   * The `options` parameter can be used to exclude customers and
+   * labels in the result. By default, customers and labels are
+   * included.
+   *
+   * @param query - Query for the projects
+   * @param options - Options for the query
    */
-  public getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
+  public getProjectsData(
+    query?: FilterQuery<Project>,
+    options: GetProjectsDataOptions = DefaultGetProjectsDataOptions
+  ): Promise<ProjectsData> {
     try {
       return this.cache.usingCache<ProjectsData>(
         async () => {
           const [projects, customers, labels] = await Promise.all([
             this.find(query, { name: 1 }),
-            this._customerSvc.getCustomers(
-              query?.customerKey && { key: query.customerKey }
-            ) as Promise<Customer[]>,
-            this._labelSvc.getLabels()
+            options.includeCustomers
+              ? (this._customerSvc.getCustomers(
+                  query?.customerKey && { key: query.customerKey }
+                ) as Promise<Customer[]>)
+              : Promise.resolve([]),
+            options.includeLabels
+              ? this._labelSvc.getLabels()
+              : Promise.resolve([])
           ])
           const _projects = projects
             .map((p) =>
@@ -155,14 +167,13 @@ export class ProjectService extends MongoDocumentService<Project> {
                 'get'
               )
             )
-            .filter((p) => p.customer !== null)
+            .filter((p) => p.customer !== null || !options.includeCustomers)
           const data = { projects: _projects, customers, labels }
           return data
         },
         {
-          key: ['getprojectsdata', query?.customerKey.toString()]
-            .filter(Boolean)
-            .join(':')
+          key: { ...query, collection: 'projects' },
+          disabled: !options.cache
         }
       )
     } catch (error) {
