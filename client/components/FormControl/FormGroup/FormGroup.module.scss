@@ -1,6 +1,25 @@
 .formGroup {
   margin: 10px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: -20px 0 0 0;
+      background-color: #fff;
+      padding: 0 12px;
+      flex: 0;
+    }
+
+    .bordered {
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      padding: 10px;
+    }
+  }
 }
