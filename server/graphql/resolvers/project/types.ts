@@ -4,42 +4,6 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
-/**
- * @category GraphQL InputType
- */
-@InputType({
-  description:
-    'Input object for ProjectBudget used in Mutation createOrUpdateProject'
-})
-/**
- * Represents the input object for creating or updating a project.
- */
-export class ProjectBudgetInput {
-  /**
-   * Enable budget tracking for the project.
-   */
-  @Field({ nullable: true })
-  trackingEnabled?: boolean
-
-  /**
-   * The budget for the project in amount of hours.
-   */
-  @Field({ nullable: true })
-  hours?: number
-
-  /**
-   * The percentage of the budget at which a warning will be shown.
-   */
-  @Field({ nullable: true })
-  warningThreshold?: number
-
-  /**
-   * The percentage of the budget at which an error will be shown.
-   */
-  @Field({ nullable: true })
-  criticalThreshold?: number
-}
-
 type ProjectProperties = string | Record<string, any>
 
 /**
@@ -107,51 +71,11 @@ export class ProjectInput {
   labels?: string[]
 
   /**
-   * The budget tracking for the project. Might be merged into
-   * the `properties` field in the future.
-   */
-  @Field(() => ProjectBudgetInput, { nullable: true })
-  budgetTracking?: ProjectBudgetInput
-
-  /**
    * The properties of the project. This is a JSON string instead
    * of being strongly typed to allow for flexibility in the future.
    */
   @Field(() => String, { nullable: true, defaultValue: '{}' })
   properties: ProjectProperties
-}
-
-/**
- * @category GraphQL ObjectType
- */
-@ObjectType({
-  description: 'A type that describes a ProjectBudget',
-  simpleResolvers: true
-})
-export class ProjectBudget {
-  /**
-   * Enable budget tracking for the project.
-   */
-  @Field({ nullable: true })
-  trackingEnabled?: boolean
-
-  /**
-   * The budget for the project in amount of hours.
-   */
-  @Field({ nullable: true })
-  hours?: number
-
-  /**
-   * The percentage of the budget at which a warning will be shown.
-   */
-  @Field({ nullable: true })
-  warningThreshold?: number
-
-  /**
-   * The percentage of the budget at which an error will be shown.
-   */
-  @Field({ nullable: true })
-  criticalThreshold?: number
 }
 
 /**
@@ -242,13 +166,6 @@ export class Project {
    */
   @Field(() => [Label], { nullable: true })
   public labels?: Label[] | string[]
-
-  /**
-   * The budget tracking for the project. Might be merged into
-   * the `properties` field in the future.
-   */
-  @Field(() => ProjectBudget, { nullable: true })
-  public budgetTracking?: ProjectBudget
 
   /**
    * The properties of the project. This is a JSON string instead

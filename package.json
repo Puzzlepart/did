@@ -345,6 +345,10 @@
     "colours": true
   },
   "gitmoji": {
+    "services": [
+      "🚀",
+      "Updated or added new services"
+    ],
     "adjust": [
       "🔧",
       "Just a small adjustment"
