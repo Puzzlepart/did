@@ -8,19 +8,19 @@ import {
   IconPickerControl,
   InputControl,
   InputControlOptions,
-  LabelPickerControl,
-  SliderControl,
-  UserPickerControl
+  LabelPickerControl
 } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { BudgetTracking } from './BudgetTracking'
 import { ProjectFormOptions } from './ProjectFormOptions'
+import { ProjectKey } from './ProjectKey'
+import { Resources } from './Resources'
 import { TagPreview } from './TagPreview'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
-import { ProjectKey } from './ProjectKey'
 
 /**
  * ProjectForm component is used to create and edit projects.
@@ -124,60 +124,18 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
             />
           </FormGroup>
         </PivotItem>
+        <PivotItem headerText='Ressurser' itemIcon='Group' itemKey='resources'>
+          <Resources register={register} />
+        </PivotItem>
         {budgetTracking?.enabled && !!props.edit && (
           <PivotItem
             headerText={t('projects.budget')}
             itemIcon='LineChart'
             itemKey='budget'
           >
-            <FormGroup gap={15}>
-              <CheckboxControl
-                {...register('budgetTracking.trackingEnabled')}
-                label={t('projects.budgetTrackingEnabled')}
-                description={t('projects.budgetTrackingEnabledDescription')}
-              />
-              <InputControl
-                {...register<InputControlOptions>('budgetTracking.hours', {})}
-                label={t('projects.budgetHours')}
-                description={t('projects.budgetHoursDescription')}
-                type='number'
-                hidden={!model.value('budgetTracking.trackingEnabled' as any)}
-              />
-              <SliderControl
-                {...register('budgetTracking.warningThreshold')}
-                label={t('projects.budgetWarningThreshold')}
-                description={t('projects.budgetWarningThresholdDescription')}
-                formatValue={(value) => `${value * 100}%`}
-                min={0}
-                max={1}
-                step={0.01}
-                defaultValue={0.8}
-                hidden={!model.value('budgetTracking.trackingEnabled' as any)}
-              />
-              <SliderControl
-                {...register('budgetTracking.criticalThreshold')}
-                label={t('projects.budgetCriticalThreshold')}
-                description={t('projects.budgetCriticalThresholdDescription')}
-                formatValue={(value) => `${value * 100}%`}
-                min={0}
-                max={1}
-                step={0.01}
-                defaultValue={0.9}
-                hidden={!model.value('budgetTracking.trackingEnabled' as any)}
-              />
-            </FormGroup>
+            <BudgetTracking register={register} model={model} />
           </PivotItem>
         )}
-         <PivotItem
-          headerText='Ressurser'
-          itemIcon='Group'
-          itemKey='resources'
-        >
-          <FormGroup gap={15}>
-            <UserPickerControl label='Prosjektleder' placeholder='Søk etter brukere...' />
-            <UserPickerControl label='Prosjektmedlemmer' placeholder='Søk etter brukere...'  multiple />
-          </FormGroup>
-        </PivotItem>
       </Pivot>
     </FormControl>
   )

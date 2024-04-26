@@ -2,7 +2,7 @@
 import { useReduxReducer as useReducer } from 'hooks'
 import { useParams } from 'react-router-dom'
 import _ from 'underscore'
-import { fuzzyStringEqual } from 'utils'
+import { fuzzyStringEqual, tryParseJson } from 'utils'
 import { IProjectsState, IProjectsUrlParameters } from '../types'
 import {
   CLOSE_EDIT_PANEL,
@@ -29,6 +29,7 @@ export function useProjectsReducer() {
           state.outlookCategories = payload.data.outlookCategories
           state.projects = payload.data.projects.map((p) => ({
             ...p,
+            properties: tryParseJson(p.properties as string, {}),
             outlookCategory: _.find(state.outlookCategories, (c) =>
               fuzzyStringEqual(c.displayName, p.tag)
             )

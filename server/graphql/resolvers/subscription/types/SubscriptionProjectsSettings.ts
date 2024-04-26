@@ -12,6 +12,12 @@ import { Field, InputType, ObjectType } from 'type-graphql'
 export class SubscriptionProjectsSettings {
   @Field({ nullable: true, defaultValue: 1 })
   keyMaxLength?: number
+
+  @Field({ nullable: true, defaultValue: false })
+  enableResourceManagement?: boolean
+
+  @Field(() => [String], { nullable: true })
+  resourceMetadata?: string[]
 }
 
 /**
@@ -24,4 +30,10 @@ export class SubscriptionProjectsSettings {
 export class SubscriptionProjectsSettingsInput {
   @Field({ nullable: true, defaultValue: 1 })
   keyMaxLength?: number
+
+  @Field({ nullable: true, defaultValue: false })
+  enableResourceManagement?: boolean
+
+  @Field(() => [String], { nullable: true })
+  resourceMetadata?: string[]
 }

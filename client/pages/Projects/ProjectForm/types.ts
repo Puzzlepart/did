@@ -1,7 +1,9 @@
 import { OperationVariables } from '@apollo/client'
 import { IFormControlProps, useFormControls } from 'components/FormControl'
 import { ITabProps } from 'components/Tabs'
+import { FC } from 'react'
 import { Project, ProjectInput, ProjectOptions } from 'types'
+import { useProjectModel } from './useProjectModel'
 
 export interface IProjectFormInputProps {
   register: ReturnType<typeof useFormControls>
@@ -20,6 +22,13 @@ export interface IProjectFormProps
    */
   refetch?: () => void
 }
+
+interface IProjectFormTabProps {
+  register: ReturnType<typeof useFormControls>
+  model?: ReturnType<typeof useProjectModel>
+}
+
+export type ProjectFormTabComponent = FC<IProjectFormTabProps>
 
 /**
  * Variables for creating or updating a customer.
