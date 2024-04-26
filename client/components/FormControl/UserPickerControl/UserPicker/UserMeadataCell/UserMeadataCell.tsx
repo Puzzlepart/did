@@ -15,6 +15,8 @@ export const UserMeadataCell: FC<IUserMeadataCellProps> = (props) => {
           value={value}
           onChange={(_, { value }) => setValue(value)}
           onEnter={() => {
+            // eslint-disable-next-line no-console
+            console.log('onEnter')
             props.onChange(value)
             editing.toggle()
           }}

@@ -52,6 +52,11 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'contentBefore',
             'contentAfter'
           )}
+          onKeyDown={({ key, currentTarget }) => {
+            if (key === 'Enter' && props.onEnter) {
+              props.onEnter(currentTarget.value)
+            }
+          }}
         />
       )}
     </Field>
