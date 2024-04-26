@@ -5,23 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useBoolean } from 'usehooks-ts'
 import styles from './UserMetadataCell.module.scss'
 import { IUserMetadataCellProps } from './types'
-import { formatCurrency } from 'utils'
-
-function renderValue(
-  value: string | number,
-  renderAs: 'currency',
-  defaultValue: string
-) {
-  if (!value) return defaultValue
-  switch (renderAs) {
-    case 'currency': {
-      return formatCurrency(value as number)
-    }
-    default: {
-      return value
-    }
-  }
-}
+import { renderValue } from './renderValue'
 
 export const UserMetadataCell: FC<IUserMetadataCellProps> = (props) => {
   const { t } = useTranslation()
