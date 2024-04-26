@@ -124,7 +124,7 @@ export class CacheService {
       redisMiddlware.get(scopedCacheKey, (error, reply) => {
         if (error) {
           log(
-            `Failed to retrieve cachedd value for key ${colors.magenta(
+            `Failed to retrieve cached value for key ${colors.magenta(
               scopedCacheKey
             )}.`
           )
