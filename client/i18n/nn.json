@@ -685,7 +685,7 @@
     "projectTagCopiedToClipboard": "Prosjektnøkkelen **{{tag}}** ble kopiert til utklippstavlen.",
     "ignoredHours": "Ignorerte timer",
     "general": "Generelt",
-    "hourlyRate": "Timelønn",
+    "hourlyRate": "Timepris",
     "projectRole": "Prosjektrolle",
     "startDate": "Startdato",
     "endDate": "Sluttdato",

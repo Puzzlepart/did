@@ -4,6 +4,7 @@ import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState } from 'hooks'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
+import _ from 'lodash'
 
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useMergedState<IUserPickerState>({
@@ -12,7 +13,24 @@ export function useUserPicker(props: IUserPickerProps) {
     selectedUsers: []
   })
 
-  useUserPickerQuery({ props, setState })
+  useUserPickerQuery((users) => {
+    const selectedUsers =
+      _.isArray(props.value) && props.multiple
+        ? props.value.map((value) => ({
+            ...value,
+            ...users.find((user) => user.id === value.id)
+          }))
+        : []
+    setState({
+      users,
+      isDataLoaded: true,
+      selectedUsers,
+      selectedUser:
+        typeof props.value === 'string' && !props.multiple
+          ? users.find((user) => user.id === props.value)
+          : null
+    })
+  })
 
   /**
    * Handler for when a user is selected in the `Combobox`. Gets the
