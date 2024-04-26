@@ -104,7 +104,7 @@ export interface IListProps<T = any>
   onFilter?: (filterState: ListFilterState) => void
 
   /**
-   * Filter values
+   * Filter values to apply to the list.
    */
   filterValues?: Record<string, any>
 
