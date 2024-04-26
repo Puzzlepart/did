@@ -94,6 +94,16 @@ export function useSubscriptionConfig() {
       icon: 'Briefcase',
       fields: [
         {
+          id: 'showMyProjectsByDefault',
+          type: 'bool',
+          props: {
+            label: t('admin.subscriptionSettings.showMyProjectsByDefaultLabel'),
+            description: t(
+              'admin.subscriptionSettings.showMyProjectsByDefaultDescription'
+            )
+          }
+        },
+        {
           id: 'keyMaxLength',
           type: 'number',
           props: {

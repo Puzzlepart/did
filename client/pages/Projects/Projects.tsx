@@ -13,7 +13,7 @@ import { useProjects } from './useProjects'
  */
 export const Projects: FC = () => {
   const { t } = useTranslation()
-  const { context, renderDetails } = useProjects()
+  const { context, renderDetails, defaultTab } = useProjects()
 
   return (
     <ProjectsContext.Provider value={{ ...context }}>
@@ -21,6 +21,7 @@ export const Projects: FC = () => {
         <ProjectDetails />
       ) : (
         <Tabs
+          defaultSelectedValue={defaultTab}
           items={{
             s: [
               ProjectList,
@@ -43,7 +44,7 @@ export const Projects: FC = () => {
             ],
             new: [ProjectForm, t('projects.createNewText')]
           }}
-        ></Tabs>
+        />
       )}
       <ProjectForm
         edit={{ ...context.state.editProject }}

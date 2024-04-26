@@ -10,11 +10,13 @@ import { useTabsHistory } from './useTabsHistory'
 export function useTabsSelection(props: ITabsProps) {
   const [updateHistory, tab] = useTabsHistory(props.level)
   const itemKeys = Object.keys(props.items)
-  const [selectedValue, setSelectedValue] = useState<string>(
-    (props.defaultSelectedValue as string) ?? itemKeys[0]
-  )
+  const [selectedValue, setSelectedValue] = useState<string>(null)
   useEffect(() => {
-    setSelectedValue(props.items[tab] ? tab : itemKeys[0])
+    setSelectedValue(
+      props.items[tab]
+        ? tab
+        : (props.defaultSelectedValue as string) ?? itemKeys[0]
+    )
   }, [])
 
   return { selectedValue, setSelectedValue, updateHistory }

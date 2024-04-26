@@ -235,7 +235,9 @@
       "enableResourceManagementDescription": "Aktivering av denne innstillingen gir forbedret administrasjon av prosjektressurser. \nNår den er aktivert, kan administratorer få tilgang til detaljerte metadata relatert til hvert prosjekt, for eksempel \"Prosjektleder\" og \"Prosjektmedlemmer\". \nDenne funksjonen letter bedre overvåking og koordinering mellom teammedlemmer, og sikrer at roller og ansvar er klart definert og synlig på plattformen.",
       "enableResourceManagementLabel": "Aktiver ressurshåndtering",
       "resourceMetadataLabel": "Ressursmetadata",
-      "resourceMetadataDescription": "Velg metadata for prosjektressurser."
+      "resourceMetadataDescription": "Velg metadata for prosjektressurser.",
+      "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
+      "showMyProjectsByDefaultDescription": "Vis \"Prosjekta mine\" som standard på prosjektsida."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
