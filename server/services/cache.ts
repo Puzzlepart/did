@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-ternary */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-classes-per-file */
 import colors from 'colors/safe'
@@ -31,7 +32,7 @@ export enum CacheScope {
 /**
  * Cache key can either be an string or an array of string.
  */
-export type CacheKey = string | string[]
+export type CacheKey = string | string[] | Record<string, any>
 
 /**
  * Cache options for `CacheService`.
@@ -94,10 +95,17 @@ export class CacheService {
    * @param scope - Cache scope
    */
   private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope) {
-    key = _.isArray(key) ? _.filter(key, (k) => !!k) : [key]
+    if (_.isArray(key)) {
+      key = _.filter(key, Boolean)
+    }
+    if (_.isObject(key)) {
+      key = [JSON.stringify(key).replace(/[^\dA-Za-z]/g, '')]
+    } else {
+      key = [key]
+    }
     const scopedCacheKey = [
       this.prefix,
-      ...key,
+      ...(key as string[]),
       scope !== CacheScope.GLOBAL &&
         (scope === CacheScope.SUBSCRIPTION
           ? this.context.subscription.id
