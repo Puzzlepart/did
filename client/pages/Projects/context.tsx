@@ -4,13 +4,24 @@ import { createContext, useContext } from 'react'
 import { IProjectsState } from './types'
 
 /**
+ * The context object for the `Projects` component.
+ * 
  * @category Projects
  */
 export interface IProjectsContext
   extends Partial<
     QueryResult<Pick<IProjectsState, 'projects' | 'outlookCategories'>>
   > {
+  /**
+   * The current state of the `Projects` component.
+   */
   state: IProjectsState
+
+  /**
+   * A dispatch function to update the state of the `Projects` component.
+   * This might not be available in the context when used outside of the
+   * `Projects` component.
+   */
   dispatch?: React.Dispatch<AnyAction>
 }
 
