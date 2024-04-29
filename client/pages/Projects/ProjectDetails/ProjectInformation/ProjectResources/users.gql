@@ -1,0 +1,13 @@
+query Users {
+  users {
+    id
+    displayName
+    givenName
+    surname
+    jobTitle
+    mail
+    photo {
+      base64
+    }
+  }
+}

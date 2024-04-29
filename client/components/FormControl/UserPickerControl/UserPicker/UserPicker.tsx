@@ -61,5 +61,8 @@ UserPicker.displayName = 'LabelPicker'
 UserPicker.className = styles.userPicker
 UserPicker.defaultProps = {
   onChange: emptyFunction,
-  additionalMetadata: {}
+  additionalMetadata: {},
+  list: {
+    allowEdit: true
+  }
 }

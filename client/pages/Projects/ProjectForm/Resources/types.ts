@@ -1,3 +1,4 @@
+import { IInputFieldProps } from 'components'
 import { AdditionalMetadataField } from 'components/FormControl/UserPickerControl/UserPicker'
 import { TFunction } from 'i18next'
 
@@ -9,18 +10,38 @@ import { TFunction } from 'i18next'
  *
  * @returns The additional metadata field.
  */
-export type GetFieldFunction = (
+export type GetFieldFunction<P> = (
   t: TFunction,
   ...args: any[]
-) => AdditionalMetadataField
+) => AdditionalMetadataField<P>
 
-export const ProjectRoleField: GetFieldFunction = (t) => ({
+export const ProjectRoleField: GetFieldFunction<Partial<IInputFieldProps>> = (
+  t
+) => ({
   label: t('common.projectRole'),
   type: 'text'
 })
 
-export const HourlyRateField: GetFieldFunction = (t) => ({
+export const HourlyRateField: GetFieldFunction<Partial<IInputFieldProps>> = (
+  t
+) => ({
   label: t('common.hourlyRate'),
   type: 'number',
   renderAs: 'currency'
 })
+
+export type ResourcesExtension = {
+  /**
+   * The project owner. The ID of the user who owns the project.
+   */
+  projectOwner: string
+
+  /**
+   * The resources for the project. Contains an array of objects with an `id`
+   * property and additional properties.
+   */
+  resources: Array<{
+    id: string
+    [key: string]: any
+  }>
+}

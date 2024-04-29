@@ -37,6 +37,7 @@ export function usePredefinedRoles() {
     )
   }
   return {
+    hourlyRate: null,
     projectRole: {
       label: t('common.projectRole'),
       type: 'choice',

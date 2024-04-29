@@ -1,4 +1,5 @@
 import { User } from 'types'
+import { IUserMetadataCellProps } from './SelectedUsersList'
 
 export type SingleUserPickerValue = string
 export type UserInfo = {
@@ -49,6 +50,27 @@ export interface IUserPickerProps {
    * Only used when `multiple` is true.
    */
   additionalMetadata?: Record<string, AdditionalMetadataField>
+
+  /**
+   * Configuration for the list of selected users. Only applicable when `multiple` is true.
+   */
+  list?: {
+    /**
+     * Allow to edit users in the list. Only applicable when `multiple` is true.
+     */
+    allowEdit?: boolean
+
+    /**
+     * Custom renderer for the additional metadata cell.
+     *
+     * @param value Value of the cell.
+     * @param props Props for the cell.
+     */
+    onRenderValue?: (
+      value: string | number,
+      props: IUserMetadataCellProps
+    ) => any
+  }
 }
 
 export interface IUserPickerState {

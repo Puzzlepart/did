@@ -135,8 +135,12 @@
     },
     "roleDefinitions": {
       "infoMessage": "Establish role definitions for the project, including positions such as Project Manager, Developer, and Designer. Additionally, specify the hourly rates for each role.",
-      "headerText": "Roles"
-    }
+      "headerText": "Roles",
+      "rolePlaceholder": "Enter the name of the role.",
+      "hourlyRatePlaceholder": "Enter the hourly rate for the role."
+    },
+    "resourcesLabel": "Project Resources",
+    "hourlyRate": "kr {{rate}} / hour"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

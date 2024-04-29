@@ -11,7 +11,7 @@ export const AddUserButton: FC = () => {
   const { t } = useTranslation()
   const context = useUserPickerContext()
   const requiredFields = Object.keys(context.props.additionalMetadata).filter(
-    (key) => context.props.additionalMetadata[key].required
+    (key) => context.props.additionalMetadata[key]?.required
   )
   return (
     <Shimmered

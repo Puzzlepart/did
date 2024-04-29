@@ -3,6 +3,7 @@ import { useSubscriptionSettings } from 'AppContext'
 import _ from 'lodash'
 import { ProjectRoleField, HourlyRateField } from './types'
 import { usePredefinedRoles } from './usePredefinedRoles'
+import { IUserPickerProps } from 'components/FormControl/UserPickerControl/UserPicker'
 
 export function useResources() {
   const { t } = useTranslation()
@@ -11,17 +12,21 @@ export function useResources() {
     []
   )
   const predefinedRoleField = usePredefinedRoles()
-  if (predefinedRoleField) {
-    return {
-      additionalMetadata: predefinedRoleField
-    }
-  }
-  const additionalMetadata = _.pick(
+  let additionalMetadata = _.pick(
     {
       hourlyRate: HourlyRateField(t),
       projectRole: ProjectRoleField(t)
     },
     resourceMetadata
   )
-  return { additionalMetadata }
+  let allowEdit = true
+  let onRenderValue: IUserPickerProps['list']['onRenderValue'] = null
+  if (predefinedRoleField) {
+    additionalMetadata = predefinedRoleField
+    allowEdit = false
+    onRenderValue = (value, { user }) =>
+      Boolean(user['hourlyRate']) ? `${value} (${user['hourlyRate']})` : value
+  }
+
+  return { additionalMetadata, allowEdit, onRenderValue }
 }

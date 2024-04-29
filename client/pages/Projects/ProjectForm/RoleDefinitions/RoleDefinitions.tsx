@@ -3,10 +3,12 @@ import { FormGroup, ListControl, useFormContext } from 'components/FormControl'
 import React from 'react'
 import { ProjectFormTabComponent } from '../types'
 import { useTranslation } from 'react-i18next'
+import { useRoleDefinitions } from './useRoleDefinitions'
 
 export const RoleDefinitions: ProjectFormTabComponent = () => {
   const { register } = useFormContext()
   const { t } = useTranslation()
+  const { fields } = useRoleDefinitions()
   return (
     <FormGroup gap={15}>
       <UserMessage
@@ -15,21 +17,7 @@ export const RoleDefinitions: ProjectFormTabComponent = () => {
       />
       <ListControl
         {...register('roleDefinitions', {}, RoleDefinitions.extensionId)}
-        fields={[
-          {
-            key: 'name',
-            type: 'text',
-            label: t('common.projectRole'),
-            required: true
-          },
-          {
-            key: 'hourlyRate',
-            type: 'number',
-            label: t('common.hourlyRate'),
-            renderAs: 'currency',
-            required: true
-          }
-        ]}
+        fields={fields}
       />
     </FormGroup>
   )

@@ -21,6 +21,7 @@ export const ItemForm: FC = () => {
               field.type === 'number' ? Number(value) : value
             )
           }}
+          {...field.props}
         />
       ))}
     </div>

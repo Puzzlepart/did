@@ -133,8 +133,12 @@
     },
     "roleDefinitions": {
       "infoMessage": "Opprett rolledefinisjoner for prosjektet, inkludert roller som prosjektleder, utvikler og designer. Du kan også spesifisere timeprisen for hver rolle for å gi en bedre oversikt over inntjening per prosjekt.",
-      "headerText": "Roller"
-    }
+      "headerText": "Roller",
+      "hourlyRatePlaceholder": "Angi timepris for rollen.",
+      "rolePlaceholder": "Skriv inn navnet på rollen."
+    },
+    "resourcesLabel": "Prosjektressurser",
+    "hourlyRate": "kr {{rate}} / time"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

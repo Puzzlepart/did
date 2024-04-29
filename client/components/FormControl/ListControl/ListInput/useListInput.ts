@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 export function useListInput(props: IListInputProps) {
   const { state, setState } = useMergedState<IListInputState>({
-    items: props.value ?? [],
+    items: _.isArray(props.value) ? props.value : [],
     currentItem: null
   })
 

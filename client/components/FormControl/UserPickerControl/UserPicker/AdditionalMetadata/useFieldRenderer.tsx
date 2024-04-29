@@ -9,6 +9,7 @@ import { AdditionalMetadataField } from '../types'
 export function useFieldRenderer() {
   const context = useUserPickerContext()
   return (field: AdditionalMetadataField, key: string) => {
+    if (!field) return null
     switch (field.type) {
       case 'choice': {
         return (

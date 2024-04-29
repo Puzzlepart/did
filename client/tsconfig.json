@@ -30,6 +30,7 @@
       "pages": ["./pages"],
       "hooks": ["./hooks"],
       "utils": ["./utils"],
+      "logging": ["./logging"],
       "theme": ["./theme"],
       "i18n": ["./i18n"],
       "graphql-queries": ["./graphql-queries"],

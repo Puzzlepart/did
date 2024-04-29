@@ -1,12 +1,13 @@
 import { IInputFieldProps } from 'components/FormControl/InputControl'
 import { User } from 'types'
 
-export type ListField = {
+export type ListField<P = Record<string, any>> = {
   key: string
   type: IInputFieldProps['type']
   label: string
   renderAs?: 'currency'
   required?: boolean
+  props?: P
 }
 
 export interface IListInputProps {

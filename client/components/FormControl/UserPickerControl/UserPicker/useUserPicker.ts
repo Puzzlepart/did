@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState } from 'hooks'
+import _ from 'lodash'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
-import _ from 'lodash'
 
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useMergedState<IUserPickerState>({
@@ -52,13 +52,11 @@ export function useUserPicker(props: IUserPickerProps) {
   }
 
   const onAddUser = () => {
-    const selectedUsers = [
-      ...state.selectedUsers,
-      {
-        ...state.selectedUser,
-        ...state.selectedUser.additionalMetadata
-      }
-    ]
+    const newUser = {
+      ...state.selectedUser,
+      ...state.selectedUser.additionalMetadata
+    }
+    const selectedUsers = [...state.selectedUsers, newUser]
     props.onChange(selectedUsers)
     setState({ selectedUsers, selectedUser: null })
   }

@@ -23,26 +23,29 @@ export const SelectedUsersList: FC = () => {
           minWidth: 100,
           maxWidth: 180
         },
-        ...Object.entries(context.props.additionalMetadata).map(
-          ([key, field]) =>
-            ({
-              key,
-              fieldName: key,
-              name: field.label,
-              minWidth: 100,
-              maxWidth: 140,
-              onRender: (user: User) => (
-                <UserMetadataCell
-                  id={key}
-                  field={field}
-                  user={user}
-                  onChange={(value) =>
-                    context.onSetAdditionalMetadata({ [key]: value }, user.id)
-                  }
-                />
-              )
-            }) as IListColumn
-        ),
+        ...Object.entries(context.props.additionalMetadata)
+          .map(
+            ([key, field]) =>
+              field &&
+              ({
+                key,
+                fieldName: key,
+                name: field.label,
+                minWidth: 100,
+                maxWidth: 140,
+                onRender: (user: User) => (
+                  <UserMetadataCell
+                    id={key}
+                    field={field}
+                    user={user}
+                    onChange={(value) =>
+                      context.onSetAdditionalMetadata({ [key]: value }, user.id)
+                    }
+                  />
+                )
+              } as IListColumn)
+          )
+          .filter(Boolean),
         {
           key: 'actions',
           fieldName: 'actions',

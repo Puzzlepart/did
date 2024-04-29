@@ -7,6 +7,7 @@ import { useNotificationsQuery } from '../hooks'
 import { useUpdateUserConfiguration } from '../hooks/user/useUpdateUserConfiguration'
 import useAppReducer, { SET_TOAST } from './reducer'
 import { IAppProps } from './types'
+import { logging } from 'logging'
 
 /**
  * Update `last_active` property for the user.
@@ -33,6 +34,15 @@ export function useApp(props: IAppProps) {
   const [state, dispatch] = useAppReducer({})
   const notifications = useNotificationsQuery({ user: props.user })
   const pages = usePages()
+
+  logging
+    .configure({
+      minLevels: {
+        '': 'info',
+        core: 'warn'
+      }
+    })
+    .registerConsoleLogger()
 
   /**
    * Displays a toast message with the given properties and duration (which defaults to 6 seconds).
