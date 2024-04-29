@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/client'
-import _ from 'lodash'
+import { useExtension } from 'hooks'
+import { Project } from 'types'
+import { BudgetTracking } from '../../../ProjectForm'
 import { useProjectsContext } from '../../../context'
 import timeentriesQuery from './timeentries.gql'
-import { BudgetTracking } from './types'
+import { BudgetTrackingExtension } from './types'
 
 /**
  * Custom hook for budget tracking. Queries GraphQL API with the
@@ -13,11 +15,12 @@ import { BudgetTracking } from './types'
  */
 export const useBudgetTracking = () => {
   const context = useProjectsContext()
-  const tracking = _.get(
-    context.state,
-    'selected.properties.budgetTracking',
+  const tracking = useExtension<Project, BudgetTrackingExtension>(
+    context.state.selected,
+    BudgetTracking.extensionId,
+    null,
     {}
-  ) as BudgetTracking
+  )
   const { loading, data } = useQuery(timeentriesQuery, {
     variables: {
       query: { projectId: context.state.selected?.tag }

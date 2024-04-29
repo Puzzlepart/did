@@ -1,4 +1,4 @@
-export type BudgetTracking = {
+export type BudgetTrackingExtension = {
   trackingEnabled: boolean
   hours: number
   warningThreshold: number
