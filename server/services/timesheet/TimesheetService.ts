@@ -278,10 +278,10 @@ export class TimesheetService {
   }
 
   /**
-   * Get period data from id
+   * Get period data from `id` and `userId`
    *
-   * * Generates an _id for Mongo DB
-   * * Returns week, month, year and userId
+   * * Generates an `_id` for Mongo DB
+   * * Returns `week`, `month`, year and `userId`
    *
    * @param id - Id
    * @param userId - User ID
