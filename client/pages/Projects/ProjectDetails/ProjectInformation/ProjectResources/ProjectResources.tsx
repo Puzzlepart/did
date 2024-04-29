@@ -15,7 +15,7 @@ import _ from 'lodash'
 export const ProjectResources: StyledComponent = () => {
   const { projectOwner, resources, isDataLoaded } = useProjectResources()
   const { t } = useTranslation()
-  if(!projectOwner && _.isEmpty(resources)) {
+  if (!projectOwner && _.isEmpty(resources)) {
     return null
   }
   return (

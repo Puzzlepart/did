@@ -54,8 +54,8 @@ export class MongoDocumentService<T> {
       const isFalse = query[key] === false
       q[key] = isFalse
         ? {
-          $in: [false, null]
-        }
+            $in: [false, null]
+          }
         : query[key]
       return q
     }, {})
@@ -64,7 +64,7 @@ export class MongoDocumentService<T> {
   /**
    * Parses JSON string to object before inserting into the mongo collection.
    * Also merges the extensions metadata with the extensions object.
-   * 
+   *
    * @param document Document to parse
    * @param key Key of the field
    */
@@ -74,15 +74,18 @@ export class MongoDocumentService<T> {
       if (!json) return null
       switch (key) {
         case 'extensions': {
-          return [...this._extensions.entries()].reduce((extensions, [key, metadata]) => {
-            return {
-              ...extensions,
-              [key]: {
-                ...metadata,
-                ...extensions[key],
+          return [...this._extensions.entries()].reduce(
+            (extensions, [key, metadata]) => {
+              return {
+                ...extensions,
+                [key]: {
+                  ...metadata,
+                  ...extensions[key]
+                }
               }
-            }
-          }, json)
+            },
+            json
+          )
         }
         default: {
           return json
@@ -113,7 +116,7 @@ export class MongoDocumentService<T> {
               document[key as string] =
                 action === 'get'
                   ? JSON.stringify(document[key])
-                : this._parseJson(document, key)
+                  : this._parseJson(document, key)
             }
           }
         }
@@ -214,11 +217,14 @@ export class MongoDocumentService<T> {
    * If the extension ID is an instance of `Extension`, the metadata parameter is ignored.
    * If the extension ID is a string or a number, the metadata parameter is used.
    * If the `extensions` field type is not registered, it will be registered as `JSON`.
-   * 
+   *
    * @param extensionId - The ID of the extension to register, either a string, number, or an instance of `Extension`.
    * @param metadata - Optional metadata for the extension.
    */
-  public registerExtension(extensionId: string | Extension, metadata?: ExtensionMetadata) {
+  public registerExtension(
+    extensionId: string | Extension,
+    metadata?: ExtensionMetadata
+  ) {
     if (extensionId instanceof Extension) {
       this._extensions.set(extensionId.id, extensionId.metadata)
     } else {
