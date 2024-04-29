@@ -1,0 +1,40 @@
+import { IInputFieldProps } from 'components/FormControl/InputControl'
+import { User } from 'types'
+
+export type ListField = {
+  key: string
+  type: IInputFieldProps['type']
+  label: string
+  renderAs?: 'currency'
+  required?: boolean
+}
+
+export interface IListInputProps {
+  /**
+   * The value of the user picker.
+   */
+  value?: any
+
+  /**
+   * Change handler for the user picker.
+   *
+   * @param selectedUsers The selected users.
+   */
+  onChange?: (selectedUsers: User[]) => void
+
+  /**
+   * Fields to store in the list.
+   */
+  fields?: ListField[]
+}
+
+export interface IListInputState {
+  /**
+   * Whether the data for the user picker has been loaded.
+   */
+  isDataLoaded: boolean
+
+  items: any[]
+
+  currentItem?: any
+}
