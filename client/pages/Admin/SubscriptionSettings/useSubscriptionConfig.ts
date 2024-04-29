@@ -141,6 +141,16 @@ export function useSubscriptionConfig() {
               'admin.subscriptionSettings.resourceMetadataDescription'
             )
           }
+        },
+        {
+          id: 'enableProjectRoles',
+          type: 'bool',
+          props: {
+            label: t('admin.subscriptionSettings.enableProjectRolesLabel'),
+            description: t(
+              'admin.subscriptionSettings.enableProjectRolesDescription'
+            )
+          }
         }
       ]
     },

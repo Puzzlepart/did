@@ -9,7 +9,7 @@ import { TFunction } from 'i18next'
  *
  * @returns The additional metadata field.
  */
-type GetFieldFunction = (
+export type GetFieldFunction = (
   t: TFunction,
   ...args: any[]
 ) => AdditionalMetadataField
@@ -23,15 +23,4 @@ export const HourlyRateField: GetFieldFunction = (t) => ({
   label: t('common.hourlyRate'),
   type: 'number',
   renderAs: 'currency'
-})
-
-// eslint-disable-next-line unicorn/prevent-abbreviations
-export const PredefinedRoleField: GetFieldFunction = (
-  t,
-  options: any[],
-  transformFunction: any
-) => ({
-  label: t('common.projectRole'),
-  type: 'choice',
-  props: { values: options, transformFunc: transformFunction }
 })

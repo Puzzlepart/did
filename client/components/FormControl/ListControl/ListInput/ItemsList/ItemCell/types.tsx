@@ -4,5 +4,5 @@ export interface IItemCellProps {
   index: number
   field: ListField
   value?: any
-  onChange: (value: any) => void
+  onChange?: (value: any) => void
 }

@@ -15,6 +15,7 @@ type UserWithMetadata = User & {
 export type AdditionalMetadataField = {
   type: 'text' | 'number' | 'choice'
   label: string
+  required?: boolean
   renderAs?: 'currency'
   props?: Record<string, any>
 }

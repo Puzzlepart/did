@@ -2,9 +2,10 @@
 import { InputField } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { emptyFunction } from 'utils/emptyFunction'
 import styles from './ItemCell.module.scss'
-import { IItemCellProps } from './types'
 import { renderValue } from './renderValue'
+import { IItemCellProps } from './types'
 import { useItemCell } from './useItemCell'
 
 export const ItemCell: FC<IItemCellProps> = (props) => {
@@ -23,7 +24,10 @@ export const ItemCell: FC<IItemCellProps> = (props) => {
           }}
         />
       ) : (
-        <span className={styles.value} onClick={editing.toggle}>
+        <span
+          className={styles.value}
+          onClick={Boolean(props.onChange) ? editing.toggle : emptyFunction}
+        >
           {renderValue(value, props.field.renderAs, t('common.notSet'))}
         </span>
       )}

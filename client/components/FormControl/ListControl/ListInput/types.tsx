@@ -30,11 +30,12 @@ export interface IListInputProps {
 
 export interface IListInputState {
   /**
-   * Whether the data for the user picker has been loaded.
+   * The items selected in the input.
    */
-  isDataLoaded: boolean
-
   items: any[]
 
+  /**
+   * The current item being edited.
+   */
   currentItem?: any
 }

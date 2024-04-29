@@ -48,7 +48,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         </PivotItem>
         {projects?.enableProjectRoles && (
           <PivotItem
-            headerText='Roller'
+            headerText={t('projects.roleDefinitions.headerText')}
             itemIcon='FabricUserFolder'
             itemKey='roleDefinitions'
           >

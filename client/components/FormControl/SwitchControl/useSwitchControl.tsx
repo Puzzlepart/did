@@ -12,8 +12,6 @@ export function useSwitchControl(props: FormInputControlBase) {
 
   const onChange = useCallback(
     (_event, value: boolean) => {
-      // eslint-disable-next-line no-console
-      console.log('onChange', props.name, value)
       props.model.set(props.name, value)
     },
     [props.model]
