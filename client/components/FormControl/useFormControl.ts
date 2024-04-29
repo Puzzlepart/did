@@ -61,6 +61,21 @@ export const useFormControl: ComponentLogicHook<
     [props.submitProps]
   )
 
+  /**
+   * Retrieves the value of a specific extension property for a given key and extension ID.
+   *
+   * @param key - The key of the extension property.
+   * @param extensionId - The ID of the extension.
+   *
+   * @returns The value of the extension property, or undefined if not found.
+   */
+  const getExtensionValue = <T = any>(key: string, extensionId: string) => {
+    return _.get(
+      props.model.$,
+      `extensions.${extensionId}.properties.${key}`
+    ) as T
+  }
+
   const context = useMemo<IFormControlContext>(
     () => ({
       ...state,
@@ -70,6 +85,7 @@ export const useFormControl: ComponentLogicHook<
         'additionalContext',
         'isEditMode'
       ]),
+      getExtensionValue,
       dispatch,
       onBlurCallback: (event) => {
         if (props.validateOnBlur) {

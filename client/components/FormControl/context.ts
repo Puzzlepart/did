@@ -23,6 +23,14 @@ export interface IFormControlContext
    * @param event - The blur event.
    */
   onBlurCallback: (event: any) => void
+
+  /**
+   * Retrieves the value of a specific extension property for a given key and extension ID.
+   *
+   * @param key - The key of the extension property.
+   * @param extensionId - The ID of the extension.
+   */
+  getExtensionValue: <T = any>(key: string, extensionId: string) => T
 }
 
 /**
