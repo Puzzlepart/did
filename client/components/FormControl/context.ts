@@ -5,12 +5,12 @@ import { IFormControlProps, IFormControlState } from './types'
 /**
  * Interface for the form control context.
  */
-export interface IFormControlContext extends IFormControlState {
-  /**
-   * The model object for the form control.
-   */
-  model: IFormControlProps['model']
-
+export interface IFormControlContext
+  extends IFormControlState,
+    Pick<
+      IFormControlProps,
+      'model' | 'register' | 'additionalContext' | 'isEditMode'
+    > {
   /**
    * The Redux dispatch function.
    */
@@ -23,6 +23,14 @@ export interface IFormControlContext extends IFormControlState {
    * @param event - The blur event.
    */
   onBlurCallback: (event: any) => void
+
+  /**
+   * Retrieves the value of a specific extension property for a given key and extension ID.
+   *
+   * @param key - The key of the extension property.
+   * @param extensionId - The ID of the extension.
+   */
+  getExtensionValue: <T = any>(key: string, extensionId: string) => T
 }
 
 /**

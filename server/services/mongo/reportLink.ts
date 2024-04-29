@@ -8,7 +8,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'
 import { ReportLink } from '../../graphql/resolvers/reportLink'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * Report links service

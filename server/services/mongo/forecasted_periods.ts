@@ -1,6 +1,6 @@
 import { Inject, Service } from 'typedi'
 import { RequestContext } from '../../graphql/requestContext'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * Forecasted periods service

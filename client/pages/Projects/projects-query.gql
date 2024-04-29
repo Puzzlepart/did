@@ -1,4 +1,4 @@
-query ProjectsOutlook {
+query ProjectsQuery {
   projects {
     tag
     key
@@ -18,12 +18,10 @@ query ProjectsOutlook {
       icon
     }
     inactive
-    budgetTracking {
-      trackingEnabled
-      hours
-      warningThreshold
-      criticalThreshold
-    }
+    extensions
+  }
+  myProjects {
+    tag
   }
   outlookCategories {
     id

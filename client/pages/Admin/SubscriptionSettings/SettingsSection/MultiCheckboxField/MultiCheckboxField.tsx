@@ -16,27 +16,30 @@ export const MultiCheckboxField: StyledComponent<ICheckboxFieldProps> = ({
   options
 }) => {
   const context = useContext(SubscriptionContext)
+  const items = Object.keys(options)
+  const isDefaultChecked = (key: string) =>
+    _.contains(get(context.settings, settingsKey, { default: [] }), key)
   return (
-    <Field label={props.label} description={props.description}>
-      {Object.keys(options).map((key) => {
-        const defaultChecked = _.contains(
-          get(context.settings, settingsKey, { default: [] }),
-          key
-        )
-        return (
-          <div key={key}>
-            <Checkbox
-              defaultChecked={defaultChecked}
-              label={options[key]}
-              onChange={(_event, { checked }) => {
-                context.onChange(settingsKey, (value: string[] = []) => {
-                  return checked ? [...value, key] : _.without(value, key)
-                })
-              }}
-            />
-          </div>
-        )
-      })}
+    <Field
+      label={props.label}
+      description={props.description}
+      hidden={props.hidden}
+    >
+      {items.map((key) => (
+        <Field key={key}>
+          <Checkbox
+            defaultChecked={isDefaultChecked(key)}
+            label={options[key]}
+            onChange={(_event, { checked }) => {
+              context.onChange(settingsKey, (value: string[] = []) => {
+                return checked
+                  ? [...(value ?? []), key]
+                  : _.without(value ?? [], key)
+              })
+            }}
+          />
+        </Field>
+      ))}
     </Field>
   )
 }

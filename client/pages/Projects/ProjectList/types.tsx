@@ -25,7 +25,10 @@ export interface IProjectListProps
   hideColumns?: string[]
 
   /**
-   * Id of the tab.
+   * ID of the tab.
+   *
+   * - `'s'` - Show all projects tab.
+   * - `'m'` - Show My projects (projects with category in the user's outlook) tab.
    */
   id?: 's' | 'm'
 }

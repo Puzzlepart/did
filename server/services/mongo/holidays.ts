@@ -1,7 +1,7 @@
 import { Inject, Service } from 'typedi'
 import { RequestContext } from '../../graphql/requestContext'
 import { environment } from '../../utils'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * Holidays service

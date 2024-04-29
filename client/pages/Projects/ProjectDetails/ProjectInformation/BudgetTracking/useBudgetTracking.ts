@@ -1,6 +1,10 @@
 import { useQuery } from '@apollo/client'
+import { useExtension } from 'hooks'
+import { Project } from 'types'
+import { BudgetTracking } from '../../../ProjectForm'
 import { useProjectsContext } from '../../../context'
 import timeentriesQuery from './timeentries.gql'
+import { BudgetTrackingExtension } from './types'
 
 /**
  * Custom hook for budget tracking. Queries GraphQL API with the
@@ -11,6 +15,12 @@ import timeentriesQuery from './timeentries.gql'
  */
 export const useBudgetTracking = () => {
   const context = useProjectsContext()
+  const tracking = useExtension<Project, BudgetTrackingExtension>(
+    context.state.selected,
+    BudgetTracking.extensionId,
+    null,
+    {}
+  )
   const { loading, data } = useQuery(timeentriesQuery, {
     variables: {
       query: { projectId: context.state.selected?.tag }
@@ -24,7 +34,6 @@ export const useBudgetTracking = () => {
     0
   )
 
-  const tracking = context.state.selected?.budgetTracking ?? {}
   let used = Number.parseFloat((hours / tracking.hours).toFixed(2))
   used = used > 1 ? 1 : used
   const getValidationStateFromThreshold = () => {

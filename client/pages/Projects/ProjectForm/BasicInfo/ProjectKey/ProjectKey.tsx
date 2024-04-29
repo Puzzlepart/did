@@ -5,24 +5,20 @@ import {
 } from 'components/FormControl'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IProjectFormInputProps } from '../types'
 import {
   useValidateKeyFunction,
   useValidateUniqueKeyFunction
 } from './validation'
 import { useSubscriptionSettings } from 'AppContext'
 
-export const ProjectKey: FC<IProjectFormInputProps> = ({
-  register,
-  isEdit
-}) => {
+export const ProjectKey: FC = () => {
   const { t } = useTranslation()
-  const { model } = useFormContext()
+  const { model, register, isEditMode } = useFormContext()
   const keyMaxLength = useSubscriptionSettings('projects.keyMaxLength', 12)
   const validateKeyFunction = useValidateKeyFunction(keyMaxLength)
   const validateUniqueKeyFunction = useValidateUniqueKeyFunction(
     model.value('customerKey'),
-    !isEdit
+    !isEditMode
   )
   return (
     <InputControl
@@ -31,13 +27,13 @@ export const ProjectKey: FC<IProjectFormInputProps> = ({
         replace: [new RegExp('[^a-zA-Z0-9]'), ''],
         validators: [validateKeyFunction, validateUniqueKeyFunction]
       })}
-      disabled={isEdit}
+      disabled={isEditMode}
       label={t('projects.keyFieldLabel')}
       description={t('projects.keyFieldDescription', {
         min: 2,
         max: keyMaxLength
       })}
-      required={!isEdit}
+      required={!isEditMode}
     />
   )
 }

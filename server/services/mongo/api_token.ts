@@ -5,7 +5,7 @@ import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * API token service

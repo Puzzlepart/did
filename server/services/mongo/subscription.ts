@@ -6,7 +6,7 @@ import {
   SubscriptionSettings
 } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * Subscription service

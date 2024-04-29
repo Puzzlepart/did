@@ -123,7 +123,14 @@
     "budgetHoursDescription": "Budsjettet for dette prosjektet i antall timer. \nVi tar ikke hensyn til ulike timepriser på dette tidspunktet.",
     "budgetWarningThreshold": "Advarsel terskel for budsjett",
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
-    "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises."
+    "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
+    "resources": {
+      "headerText": "Ressurser",
+      "resourcesPlaceholder": "Søk etter brukere...",
+      "projectOwnerPlaceholder": "Søk etter brukere...",
+      "resourcesLabel": "Prosjektressurser",
+      "projectOwnerLabel": "Prosjekteier"
+    }
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -231,6 +238,10 @@
       "projectKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for prosjektnøkkel.",
       "customerKeyMaxLengthLabel": "Maksimum lengde for kundenøkkel",
       "customerKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for kundenøkkel.",
+      "enableResourceManagementDescription": "Aktivering av denne innstillingen gir forbedret administrasjon av prosjektressurser. \nNår den er aktivert, kan administratorer få tilgang til detaljerte metadata relatert til hvert prosjekt, for eksempel \"Prosjektleder\" og \"Prosjektmedlemmer\". \nDenne funksjonen letter bedre overvåking og koordinering mellom teammedlemmer, og sikrer at roller og ansvar er klart definert og synlig på plattformen.",
+      "enableResourceManagementLabel": "Aktiver ressurshåndtering",
+      "resourceMetadataLabel": "Ressursmetadata",
+      "resourceMetadataDescription": "Velg metadata for prosjektressurser.",
       "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
       "showMyProjectsByDefaultDescription": "Vis \"Mine prosjekter\" som standard på prosjektsiden."
     },
@@ -679,7 +690,12 @@
     "outlookCategoryError": "Det oppsto en feil ved opprettelse av kategorien i Outlook. Hvis du nettopp opprettet den, kan det ta noen øyeblikk før det vises her.",
     "tagFieldLabel": "Prosjektnøkkel",
     "ignoredHours": "Ignorerte timer",
-    "general": "Generelt"
+    "general": "Generelt",
+    "hourlyRate": "Timepris",
+    "projectRole": "Prosjektrolle",
+    "endDate": "Sluttdato",
+    "startDate": "Startdato",
+    "notSet": "Ikke satt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -777,5 +793,12 @@
   },
   "autocomplete": {
     "noResultsMessage": "Ingen resultater. Skriv inn minst {{minCharacters}} tegn for å søke."
+  },
+  "components": {
+    "userPicker": {
+      "additionalMetadata": "Ekstra informasjon",
+      "addUser": "Legg til",
+      "displayName": "Navn"
+    }
   }
 }

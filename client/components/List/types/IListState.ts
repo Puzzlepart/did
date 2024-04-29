@@ -1,21 +1,17 @@
 import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { IListColumn } from './IListColumn'
+import { IListProps } from './IListProps'
 
 /**
  * @category List
  */
 
-export interface IListState<T = any> {
+export interface IListState<T = any> extends Pick<IListProps, 'filterValues'> {
   /**
    * Search term
    */
   searchTerm?: string
-
-  /**
-   * Filter values
-   */
-  filterValues?: Record<string, any>
 
   /**
    * Original items

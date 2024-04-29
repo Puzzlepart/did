@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.13.3-10",
+  "version": "0.13.3-11",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
@@ -188,6 +188,7 @@
     "prettier": "3.0.3",
     "prettier-plugin-organize-imports": "3.2.3",
     "rimraf": "3.0.2",
+    "sexy-commits": "^0.3.17-6",
     "terser-webpack-plugin": "^5.3.6",
     "webpack-bundle-analyzer": "4.8.0",
     "webpack-livereload-plugin": "3.0.2"
@@ -344,6 +345,14 @@
     "colours": true
   },
   "gitmoji": {
+    "services": [
+      "🚀",
+      "Updated or added new services"
+    ],
+    "adjust": [
+      "🔧",
+      "Just a small adjustment"
+    ],
     "graphql": [
       "🚀",
       "Updated GraphQL schema"

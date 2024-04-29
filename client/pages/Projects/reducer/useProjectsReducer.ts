@@ -2,7 +2,7 @@
 import { useReduxReducer as useReducer } from 'hooks'
 import { useParams } from 'react-router-dom'
 import _ from 'underscore'
-import { fuzzyStringEqual } from 'utils'
+import { fuzzyStringEqual, tryParseJson } from 'utils'
 import { IProjectsState, IProjectsUrlParameters } from '../types'
 import {
   CLOSE_EDIT_PANEL,
@@ -18,6 +18,7 @@ export function useProjectsReducer() {
   const urlParams = useParams<IProjectsUrlParameters>()
   const initialState: IProjectsState = {
     projects: [],
+    myProjects: [],
     outlookCategories: [],
     selected: null,
     editProject: null
@@ -31,8 +32,10 @@ export function useProjectsReducer() {
             ...p,
             outlookCategory: _.find(state.outlookCategories, (c) =>
               fuzzyStringEqual(c.displayName, p.tag)
-            )
+            ),
+            extensions: tryParseJson(p.extensions as string, {})
           }))
+          state.myProjects = payload.data.myProjects.map((p) => p.tag)
           const selectedTag = state.selected?.tag ?? urlParams.currentTab
           if (selectedTag) {
             state.selected = _.find(state.projects, ({ tag }) =>

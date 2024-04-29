@@ -1,12 +1,8 @@
 import { OperationVariables } from '@apollo/client'
-import { IFormControlProps, useFormControls } from 'components/FormControl'
+import { IFormControlProps } from 'components/FormControl'
 import { ITabProps } from 'components/Tabs'
+import { FC } from 'react'
 import { Project, ProjectInput, ProjectOptions } from 'types'
-
-export interface IProjectFormInputProps {
-  register: ReturnType<typeof useFormControls>
-  isEdit: boolean
-}
 
 /**
  * @category Projects
@@ -19,6 +15,12 @@ export interface IProjectFormProps
    * successfully.
    */
   refetch?: () => void
+}
+
+interface IProjectFormTabProps {}
+
+export interface ProjectFormTabComponent extends FC<IProjectFormTabProps> {
+  extensionId?: string
 }
 
 /**

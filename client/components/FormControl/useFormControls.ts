@@ -41,6 +41,21 @@ export type RegisterControlCallback<TOptions = {}, KeyType = string> = (
 ) => FormInputControlBase<TOptions>
 
 /**
+ * Returns the extended property name for a given name and extension ID.
+ *
+ * @param name - The name of the property.
+ * @param extensionId - The ID of the extension.
+ *
+ * @returns The extended property name.
+ */
+function getExtendedPropertyName<KeyType extends string>(
+  name: KeyType,
+  extensionId: string
+): KeyType {
+  return `extensions.${extensionId}.properties.${name}` as KeyType
+}
+
+/**
  * Use form controls
  *
  * @param model - Model
@@ -51,8 +66,16 @@ export function useFormControls<KeyType extends string = any>(
   model: ReturnType<typeof useMap>
 ) {
   return useCallback(
-    <TOptions = {}>(name: KeyType, options?: TOptions) =>
-      registerControl<TOptions, KeyType>(name, model, options),
+    <TOptions = {}>(
+      name: KeyType,
+      options?: TOptions,
+      extensionId?: string
+    ) => {
+      if (extensionId) {
+        name = getExtendedPropertyName(name, extensionId)
+      }
+      return registerControl<TOptions, KeyType>(name, model, options)
+    },
     [model]
   )
 }

@@ -1,13 +1,15 @@
-/* eslint-disable unicorn/no-array-callback-reference */
-
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
-import _ from 'underscore'
-import { RequestContext } from '../../graphql/requestContext'
-import { CacheService } from '../cache'
+import _ from 'lodash'
+import { RequestContext } from '../../../graphql/requestContext'
+import { CacheService } from '../../cache'
+import { FieldType } from './types'
+import { tryParseJson } from '../../../utils'
 
 export class MongoDocumentService<T> {
   public cache: CacheService = null
   public collection: Collection<T>
+  private _fieldTypes: Map<keyof T, any> = new Map()
 
   /**
    * Constructer for `MongoDocumentService`
@@ -37,11 +39,11 @@ export class MongoDocumentService<T> {
    *
    * @example Query
    *
-   * { hiddenFromReports: false }
+   * ```{ hiddenFromReports: false }```
    *
    * will be converted to
    *
-   * { hiddenFromReports: { $in: [false, null] } }
+   * ```{ hiddenFromReports: { $in: [false, null] } }```
    *
    * @param query - Filter query
    */
@@ -58,15 +60,48 @@ export class MongoDocumentService<T> {
   }
 
   /**
-   * Wrapper on _.find().toArray()
+   * Handles field types for the given action on the provided documents.
+   *
+   * @param action - The action to perform ('get' or 'set').
+   * @param documents_ - The documents to handle field types for.
+   *
+   * @returns The transformed documents with field types handled.
+   */
+  private _handleFieldTypes(action: 'get' | 'set', ...documents_: T[]): T[] {
+    if (this._fieldTypes.size === 0) {
+      return documents_
+    }
+    const transformed = documents_.map((document) => {
+      for (const key of this._fieldTypes.keys()) {
+        if (document[key] !== undefined) {
+          switch (this._fieldTypes.get(key)) {
+            case 'JSON': {
+              document[key as string] =
+                action === 'get'
+                  ? JSON.stringify(document[key])
+                  : tryParseJson(document[key] as string)
+            }
+          }
+        }
+      }
+      return document
+    })
+    return transformed
+  }
+
+  /**
+   * Wrapper on `_.find().toArray()` that also handles field types like `JSON`.
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
    * @param query - Filter query
    * @param sort - Sort options
    */
-  public find<S = any>(query: FilterQuery<T>, sort?: S): Promise<T[]> {
-    return this.collection.find(this._extendQuery(query), { sort }).toArray()
+  public async find<S = any>(query: FilterQuery<T>, sort?: S): Promise<T[]> {
+    const array = await this.collection
+      .find(this._extendQuery(query), { sort })
+      .toArray()
+    return this._handleFieldTypes('get', ...array)
   }
 
   /**
@@ -89,22 +124,24 @@ export class MongoDocumentService<T> {
   }
 
   /**
-   * Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
+   * Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties,
+   * and handles field types like `JSON`.
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
    *
    * @param document_ - Document
    */
   public insert(document_: OptionalId<any>) {
+    const [document] = this._handleFieldTypes('set', document_)
     return this.collection.insertOne({
-      ...document_,
+      ...document,
       createdAt: new Date(),
       updatedAt: new Date()
     })
   }
 
   /**
-   * Wrapper on updateOne() that also updates `updatedAt` property
+   * Wrapper on updateOne() that also updates `updatedAt` property and handles field types like `JSON`.
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#updateOne
    *
@@ -112,11 +149,29 @@ export class MongoDocumentService<T> {
    * @param document_ - Document
    */
   public update(query: FilterQuery<T>, document_: OptionalId<any>) {
+    const [document] = this._handleFieldTypes('set', document_)
     return this.collection.updateOne(query, {
       $set: {
-        ...document_,
+        ...document,
         updatedAt: new Date()
       }
     })
+  }
+
+  /**
+   * Register field type for special handling.
+   *
+   * @param fieldName Field name to register
+   * @param type The field type
+   */
+  protected _registerType(fieldName: keyof T, type: FieldType) {
+    this._fieldTypes.set(fieldName, type)
+  }
+
+  /**
+   * Register JSON field type for special handling.
+   */
+  public registerJsonType(fieldName: keyof T) {
+    this._registerType(fieldName, 'JSON')
   }
 }

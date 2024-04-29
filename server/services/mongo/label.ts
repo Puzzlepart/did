@@ -8,7 +8,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
+import { MongoDocumentService } from './document'
 
 /**
  * Label service

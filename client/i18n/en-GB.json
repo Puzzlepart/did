@@ -125,7 +125,14 @@
     "budgetWarningThreshold": "Budget Warning Threshold",
     "budgetCriticalThreshold": "Budget Critical Threshold",
     "budgetCriticalThresholdDescription": "The percentage of the budget at which an error will be shown.",
-    "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown."
+    "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown.",
+    "resources": {
+      "headerText": "Resources",
+      "projectOwnerLabel": "Project Owner",
+      "projectOwnerPlaceholder": "Search users...",
+      "resourcesLabel": "Project Resources",
+      "resourcesPlaceholder": "Search users..."
+    }
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -209,6 +216,10 @@
       "customerKeyMaxLengthLabel": "Max length for key",
       "projectKeyMaxLengthDescription": "Maximum allowed characters for the project key.",
       "customerKeyMaxLengthDescription": "Maximum allowed characters for the customer key.",
+      "enableResourceManagementLabel": "Enable Resource Management",
+      "enableResourceManagementDescription": "Enabling this setting allows for enhanced management of project resources. Once activated, administrators can access detailed metadata related to each project, such as \"Project Leader\" and \"Project Members.\" This feature facilitates better oversight and coordination among team members, ensuring that roles and responsibilities are clearly defined and visible within the platform.",
+      "resourceMetadataLabel": "Resource metadata",
+      "resourceMetadataDescription": "Select metadata for project resources.",
       "showMyProjectsByDefaultLabel": "Show My Projects By Default",
       "showMyProjectsByDefaultDescription": "Show \"My Projects\" as default on the Project page."
     },
@@ -681,7 +692,13 @@
     "tagFieldLabel": "Tag",
     "ignoredHours": "Ignored hours",
     "signInDisabledMessage": "We'",
-    "general": "General"
+    "general": "General",
+    "projectRoleLabel": "Project Role",
+    "hourlyRate": "Hourly Rate",
+    "projectRole": "Project Role",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "notSet": "Not set"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -779,5 +796,12 @@
   },
   "autocomplete": {
     "noResultsMessage": "No results found. Enter at least {{minCharacters}} characters to search."
+  },
+  "components": {
+    "userPicker": {
+      "additionalMetadata": "Additional metadata",
+      "addUser": "Add",
+      "displayName": "Name"
+    }
   }
 }

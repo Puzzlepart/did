@@ -1,7 +1,7 @@
 import { ValidatorFunction } from 'components'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
-import { useProjectsContext } from '../../../context'
+import { useProjectsContext } from '../../../../context'
 
 /**
  * Returns an validator function that checks if the provided `key` is

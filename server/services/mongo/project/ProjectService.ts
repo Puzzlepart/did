@@ -1,28 +1,25 @@
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { CustomerService } from '.'
-import { RequestContext } from '../../graphql/requestContext'
+import { CustomerService } from '..'
+import { RequestContext } from '../../../graphql/requestContext'
+import { Customer, Project } from '../../../graphql/resolvers/types'
+import { MongoDocumentService } from '../document'
+import { LabelService } from '../label'
 import {
-  Customer,
-  LabelObject as Label,
-  Project
-} from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
-import { LabelService } from './label'
-
-export type ProjectsData = {
-  projects: Project[]
-  customers: Customer[]
-  labels: Label[]
-}
+  DefaultGetProjectsDataOptions,
+  GetProjectsDataOptions,
+  ProjectsData
+} from './types'
 
 /**
  * Project service
  *
  * @extends MongoDocumentService
+ *
  * @category Injectable Container Service
  */
+
 @Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
   /**
@@ -38,6 +35,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     private readonly _labelSvc: LabelService
   ) {
     super(context, 'projects', ProjectService.name)
+    this.registerJsonType('extensions')
   }
 
   /**
@@ -49,7 +47,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<string> {
     try {
-      await this.cache.clear('getprojectsdata')
+      await this.cache.clear()
       const tag = [project.customerKey, project.key].join(' ')
       const { insertedId } = await this.insert({
         _id: tag,
@@ -71,7 +69,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
-      await this.cache.clear('getprojectsdata')
+      await this.cache.clear()
       const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
       const { result } = await this.update(filter, project)
       return result.ok === 1
@@ -87,34 +85,48 @@ export class ProjectService extends MongoDocumentService<Project> {
    * customers and labels to projects using the `customerKey` and
    * `labels` properties.
    *
-   * @param query - Query
+   * The `options` parameter can be used to exclude customers and
+   * labels in the result. By default, customers and labels are
+   * included.
+   *
+   * @param query - Query for the projects
+   * @param options - Options for the query
    */
-  public getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
+  public getProjectsData(
+    query?: FilterQuery<Project>,
+    options: GetProjectsDataOptions = {}
+  ): Promise<ProjectsData> {
     try {
+      const mergedOptions = { ...DefaultGetProjectsDataOptions, ...options }
       return this.cache.usingCache<ProjectsData>(
         async () => {
           const [projects, customers, labels] = await Promise.all([
             this.find(query, { name: 1 }),
-            this._customerSvc.getCustomers(
-              query?.customerKey && { key: query.customerKey }
-            ) as Promise<Customer[]>,
-            this._labelSvc.getLabels()
+            mergedOptions.includeCustomers
+              ? (this._customerSvc.getCustomers(
+                  query?.customerKey && { key: query.customerKey }
+                ) as Promise<Customer[]>)
+              : Promise.resolve([]),
+            mergedOptions.includeLabels
+              ? this._labelSvc.getLabels()
+              : Promise.resolve([])
           ])
           const _projects = projects
-            .map((p) => {
-              p.customer =
-                _.find(customers, (c) => c.key === p.customerKey) || null
-              p.labels = _.filter(labels, (l) => _.contains(p.labels, l.name))
-              return p
-            })
-            .filter((p) => p.customer !== null)
+            .map((p) => ({
+              ...p,
+              customer:
+                _.find(customers, (c) => c.key === p.customerKey) || null,
+              labels: _.filter(labels, (l) => _.contains(p.labels, l.name))
+            }))
+            .filter(
+              (p) => p.customer !== null || !mergedOptions.includeCustomers
+            )
           const data = { projects: _projects, customers, labels }
           return data
         },
         {
-          key: ['getprojectsdata', query?.customerKey.toString()]
-            .filter(Boolean)
-            .join(':')
+          key: query,
+          disabled: !mergedOptions.cache
         }
       )
     } catch (error) {

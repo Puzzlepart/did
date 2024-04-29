@@ -32,7 +32,10 @@ export const useProjectFormSubmit: FormSubmitHook<
    */
   async function onClick() {
     const variables: CreateOrUpdateProjectVariables = {
-      project: model.$,
+      project: {
+        ...model.$,
+        extensions: JSON.stringify(model.$.extensions)
+      },
       options: options.$,
       update: !!props.edit
     }

@@ -156,13 +156,19 @@ import {
   AppsRegular,
   AppsFilled,
   BriefcaseRegular,
-  BriefcaseFilled
+  BriefcaseFilled,
+  GroupRegular,
+  GroupFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  Group: {
+    regular: GroupRegular,
+    filled: GroupFilled
+  },
   Apps: {
     regular: AppsRegular,
     filled: AppsFilled
