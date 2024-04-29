@@ -15,6 +15,7 @@ export function useFieldRenderer() {
           <DropdownField
             key={key}
             label={field.label}
+            required={field.required}
             onChange={(_event, { selectedOptions }) => {
               const transformFunction = _.get(
                 field,
@@ -43,6 +44,7 @@ export function useFieldRenderer() {
             key={key}
             name={key}
             label={field.label}
+            required={field.required}
             value={_.get(
               context.state.selectedUser,
               `additionalMetadata.${key}`,
@@ -54,6 +56,7 @@ export function useFieldRenderer() {
               }
               context.onSetAdditionalMetadata({ [key]: value })
             }}
+            {...field.props}
           />
         )
       }

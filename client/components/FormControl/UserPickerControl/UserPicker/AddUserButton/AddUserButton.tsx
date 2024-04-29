@@ -13,8 +13,6 @@ export const AddUserButton: FC = () => {
   const requiredFields = Object.keys(context.props.additionalMetadata).filter(
     (key) => context.props.additionalMetadata[key].required
   )
-  // eslint-disable-next-line no-console
-  console.log('requiredFields', requiredFields, context.state.selectedUser)
   return (
     <Shimmered
       className={styles.addUserButton}

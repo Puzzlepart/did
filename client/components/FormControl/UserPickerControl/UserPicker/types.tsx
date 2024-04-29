@@ -12,12 +12,12 @@ type UserWithMetadata = User & {
   additionalMetadata?: Record<string, string>
 }
 
-export type AdditionalMetadataField = {
+export type AdditionalMetadataField<P = Record<string, any>> = {
   type: 'text' | 'number' | 'choice'
   label: string
   required?: boolean
   renderAs?: 'currency'
-  props?: Record<string, any>
+  props?: P
 }
 
 export interface IUserPickerProps {
