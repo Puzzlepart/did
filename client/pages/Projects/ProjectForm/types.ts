@@ -19,7 +19,9 @@ export interface IProjectFormProps
 
 interface IProjectFormTabProps {}
 
-export type ProjectFormTabComponent = FC<IProjectFormTabProps>
+export interface ProjectFormTabComponent extends FC<IProjectFormTabProps> {
+  extensionId?: string
+}
 
 /**
  * Variables for creating or updating a customer.

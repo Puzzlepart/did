@@ -34,7 +34,7 @@ export const useProjectFormSubmit: FormSubmitHook<
     const variables: CreateOrUpdateProjectVariables = {
       project: {
         ...model.$,
-        properties: JSON.stringify(model.$.properties)
+        extensions: JSON.stringify(model.$.extensions)
       },
       options: options.$,
       update: !!props.edit

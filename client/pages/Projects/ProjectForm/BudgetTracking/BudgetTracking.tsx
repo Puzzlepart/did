@@ -12,28 +12,29 @@ import { ProjectFormTabComponent } from '../types'
 
 export const BudgetTracking: ProjectFormTabComponent = () => {
   const { t } = useTranslation()
-  const { model, register } = useFormContext()
+  const { register, getExtensionValue } = useFormContext()
   return (
     <FormGroup gap={15}>
       <CheckboxControl
-        {...register('properties.budgetTracking.trackingEnabled')}
+        {...register('trackingEnabled', {}, BudgetTracking.extensionId)}
         label={t('projects.budgetTrackingEnabled')}
         description={t('projects.budgetTrackingEnabledDescription')}
       />
       <InputControl
         {...register<InputControlOptions>(
-          'properties.budgetTracking.hours',
-          {}
+          'hours',
+          {},
+          BudgetTracking.extensionId
         )}
         label={t('projects.budgetHours')}
         description={t('projects.budgetHoursDescription')}
         type='number'
         hidden={
-          !model.value('properties.budgetTracking.trackingEnabled' as any)
+          !getExtensionValue('trackingEnabled', BudgetTracking.extensionId)
         }
       />
       <SliderControl
-        {...register('properties.budgetTracking.warningThreshold')}
+        {...register('warningThreshold', {}, BudgetTracking.extensionId)}
         label={t('projects.budgetWarningThreshold')}
         description={t('projects.budgetWarningThresholdDescription')}
         formatValue={(value) => `${value * 100}%`}
@@ -42,11 +43,11 @@ export const BudgetTracking: ProjectFormTabComponent = () => {
         step={0.01}
         defaultValue={0.8}
         hidden={
-          !model.value('properties.budgetTracking.trackingEnabled' as any)
+          !getExtensionValue('trackingEnabled', BudgetTracking.extensionId)
         }
       />
       <SliderControl
-        {...register('properties.budgetTracking.criticalThreshold')}
+        {...register('criticalThreshold', {}, BudgetTracking.extensionId)}
         label={t('projects.budgetCriticalThreshold')}
         description={t('projects.budgetCriticalThresholdDescription')}
         formatValue={(value) => `${value * 100}%`}
@@ -55,9 +56,11 @@ export const BudgetTracking: ProjectFormTabComponent = () => {
         step={0.01}
         defaultValue={0.9}
         hidden={
-          !model.value('properties.budgetTracking.trackingEnabled' as any)
+          !getExtensionValue('trackingEnabled', BudgetTracking.extensionId)
         }
       />
     </FormGroup>
   )
 }
+
+BudgetTracking.extensionId = '4bb5dfa9-a742-4692-8aa9-86de79961a70'

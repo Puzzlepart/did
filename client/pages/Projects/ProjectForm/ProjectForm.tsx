@@ -47,7 +47,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         </PivotItem>
         {projects?.enableResourceManagement && (
           <PivotItem
-            headerText={t('projects.resources')}
+            headerText={t('projects.resources.headerText')}
             itemIcon='Group'
             itemKey='resources'
           >
