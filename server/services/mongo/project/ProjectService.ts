@@ -35,7 +35,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     private readonly _labelSvc: LabelService
   ) {
     super(context, 'projects', ProjectService.name)
-    this.registerJsonType('extensions') 
+    this.registerJsonType('extensions')
   }
 
   /**

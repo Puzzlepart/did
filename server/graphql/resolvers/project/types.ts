@@ -4,7 +4,12 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
-type ProjectExtensions = string | Record<string, any>
+type ProjectExtensionObject = {
+  description: string
+  properties: Record<string, any>
+}
+
+type ProjectExtensions = string | Record<string, ProjectExtensionObject>
 
 /**
  * @category GraphQL InputType
