@@ -12,11 +12,8 @@ export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
   props
 ) => {
   const { t } = useTranslation()
-  const {
-    selectedUsers,
-    setSelectedUsers,
-    availableUsers
-  } = useBulkImportPanel()
+  const { selectedUsers, setSelectedUsers, availableUsers } =
+    useBulkImportPanel()
   return (
     <Panel
       className={styles.bulkImportPanel}

@@ -139,7 +139,7 @@ export class MSGraphService {
    * Get Azure Active Directory users. Using paging to get all users (more than 999).
    *
    * @public
-   * 
+   *
    * @param pageLimit - Page limit (default: 999)
    *
    * @memberof MSGraphService
