@@ -21,6 +21,7 @@ interface IProjectFormTabProps {}
 
 export interface ProjectFormTabComponent extends FC<IProjectFormTabProps> {
   extensionId?: string
+  extensionDescription?: string
 }
 
 /**
