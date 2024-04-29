@@ -1,4 +1,8 @@
 import {
+  AccessibilityRegular,
+  AccessibilityFilled,
+  AccessibilityQuestionMarkRegular,
+  AccessibilityQuestionMarkFilled,
   ChevronDownRegular,
   ChevronDownFilled,
   ArrowUploadRegular,
@@ -165,6 +169,14 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  Accessibility: {
+    regular: AccessibilityRegular,
+    filled: AccessibilityFilled
+  },
+  AccessibilityQuestionMark: {
+    regular: AccessibilityQuestionMarkRegular,
+    filled: AccessibilityQuestionMarkFilled
+  },
   Group: {
     regular: GroupRegular,
     filled: GroupFilled

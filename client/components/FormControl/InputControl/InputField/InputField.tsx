@@ -64,6 +64,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
   )
 }
 
+InputField.displayName = 'InputField'
 InputField.className = styles.inputField
 InputField.defaultProps = {
   rows: 1

@@ -5,6 +5,8 @@ import { useUserPickerContext } from '../context'
 import { IListColumn, List } from 'components'
 import { UserMetadataCell } from './UserMetadataCell'
 import { User } from 'types'
+import { Button } from '@fluentui/react-components'
+import { getFluentIcon } from 'utils'
 
 export const SelectedUsersList: FC = () => {
   const { t } = useTranslation()
@@ -21,26 +23,46 @@ export const SelectedUsersList: FC = () => {
           minWidth: 100,
           maxWidth: 180
         },
-        ...Object.entries(context.props.additionalMetadata).map(
-          ([key, field]) =>
-            ({
-              key,
-              fieldName: key,
-              name: field.label,
-              minWidth: 100,
-              maxWidth: 140,
-              onRender: (user: User) => (
-                <UserMetadataCell
-                  id={key}
-                  field={field}
-                  user={user}
-                  onChange={(value) =>
-                    context.onSetAdditionalMetadata(key, value, user.id)
-                  }
-                />
-              )
-            }) as IListColumn
-        )
+        ...Object.entries(context.props.additionalMetadata)
+          .map(
+            ([key, field]) =>
+              field &&
+              ({
+                key,
+                fieldName: key,
+                name: field.label,
+                minWidth: 100,
+                maxWidth: 140,
+                onRender: (user: User) => (
+                  <UserMetadataCell
+                    id={key}
+                    field={field}
+                    user={user}
+                    onChange={(value) =>
+                      context.onSetAdditionalMetadata({ [key]: value }, user.id)
+                    }
+                  />
+                )
+              } as IListColumn)
+          )
+          .filter(Boolean),
+        {
+          key: 'actions',
+          fieldName: 'actions',
+          name: '',
+          minWidth: 60,
+          maxWidth: 60,
+          onRender: (user: User) => (
+            <Button
+              size='small'
+              icon={getFluentIcon('Delete')}
+              appearance='subtle'
+              onClick={() => context.onRemoveUser(user.id)}
+            >
+              {t('components.userPicker.removeUser')}
+            </Button>
+          )
+        }
       ]}
     />
   )

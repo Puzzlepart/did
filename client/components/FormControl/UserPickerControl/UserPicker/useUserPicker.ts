@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState } from 'hooks'
+import _ from 'lodash'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
-import _ from 'lodash'
 
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useMergedState<IUserPickerState>({
@@ -52,13 +52,11 @@ export function useUserPicker(props: IUserPickerProps) {
   }
 
   const onAddUser = () => {
-    const selectedUsers = [
-      ...state.selectedUsers,
-      {
-        ...state.selectedUser,
-        ...state.selectedUser.additionalMetadata
-      }
-    ]
+    const newUser = {
+      ...state.selectedUser,
+      ...state.selectedUser.additionalMetadata
+    }
+    const selectedUsers = [...state.selectedUsers, newUser]
     props.onChange(selectedUsers)
     setState({ selectedUsers, selectedUser: null })
   }
@@ -68,14 +66,12 @@ export function useUserPicker(props: IUserPickerProps) {
    * it will set the additional metadata for the user with the provided ID.
    * Otherwise, it will set the additional metadata for the selected user.
    *
-   * @param key Key of the additional metadata
-   * @param value Value of the additional metadata
+   * @param keyValuePairs Key-value pairs of the additional metadata to set.
    * @param userId User ID of the user to set the additional metadata for,
    * if not provided, it will set the additional metadata for the selected user.
    */
   const onSetAdditionalMetadata = (
-    key: string,
-    value: string,
+    keyValuePairs: Record<string, any>,
     userId?: string
   ) => {
     if (userId) {
@@ -83,7 +79,7 @@ export function useUserPicker(props: IUserPickerProps) {
         if (user.id === userId) {
           return {
             ...user,
-            [key]: value
+            ...keyValuePairs
           }
         }
         return user
@@ -97,10 +93,23 @@ export function useUserPicker(props: IUserPickerProps) {
         ...state.selectedUser,
         additionalMetadata: {
           ...state.selectedUser.additionalMetadata,
-          [key]: value
+          ...keyValuePairs
         }
       }
     })
+  }
+
+  /**
+   * Removes a user from the selected users list and triggers the `onChange` event.
+   *
+   * @param userId - The ID of the user to be removed.
+   */
+  const onRemoveUser = (userId: string) => {
+    const selectedUsers = state.selectedUsers.filter(
+      (user) => user.id !== userId
+    )
+    props.onChange(selectedUsers)
+    setState({ selectedUsers })
   }
 
   const selectableUsers = state.users.filter(
@@ -116,6 +125,7 @@ export function useUserPicker(props: IUserPickerProps) {
     selectableUsers,
     onUserSelected,
     onAddUser,
+    onRemoveUser,
     onSetAdditionalMetadata
   }
 }

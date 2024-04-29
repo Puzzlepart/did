@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useSubscriptionSettings } from 'AppContext'
 import _ from 'lodash'
-import { AdditionalMetadataField } from 'components/FormControl/UserPickerControl/UserPicker'
+import { ProjectRoleField, HourlyRateField } from './types'
+import { usePredefinedRoles } from './usePredefinedRoles'
+import { IUserPickerProps } from 'components/FormControl/UserPickerControl/UserPicker'
 
 export function useResources() {
   const { t } = useTranslation()
@@ -9,19 +11,22 @@ export function useResources() {
     'projects.resourceMetadata',
     []
   )
-  const additionalMetadata = _.pick(
+  const predefinedRoleField = usePredefinedRoles()
+  let additionalMetadata = _.pick(
     {
-      hourlyRate: {
-        label: t('common.hourlyRate'),
-        type: 'number',
-        renderAs: 'currency'
-      } as AdditionalMetadataField,
-      projectRole: {
-        label: t('common.projectRole'),
-        type: 'text'
-      } as AdditionalMetadataField
+      hourlyRate: HourlyRateField(t),
+      projectRole: ProjectRoleField(t)
     },
     resourceMetadata
   )
-  return { additionalMetadata }
+  let allowEdit = true
+  let onRenderValue: IUserPickerProps['list']['onRenderValue'] = null
+  if (predefinedRoleField) {
+    additionalMetadata = predefinedRoleField
+    allowEdit = false
+    onRenderValue = (value, { user }) =>
+      Boolean(user['hourlyRate']) ? `${value} (${user['hourlyRate']})` : value
+  }
+
+  return { additionalMetadata, allowEdit, onRenderValue }
 }

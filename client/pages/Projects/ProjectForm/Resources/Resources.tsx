@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 export const Resources: ProjectFormTabComponent = () => {
   const { t } = useTranslation()
   const { register } = useFormContext()
-  const { additionalMetadata } = useResources()
+  const { additionalMetadata, allowEdit, onRenderValue } = useResources()
   return (
     <FormGroup gap={15}>
       <UserPickerControl
@@ -25,6 +25,10 @@ export const Resources: ProjectFormTabComponent = () => {
         placeholder={t('projects.resources.resourcesPlaceholder')}
         multiple
         additionalMetadata={additionalMetadata}
+        list={{
+          allowEdit,
+          onRenderValue
+        }}
       />
     </FormGroup>
   )

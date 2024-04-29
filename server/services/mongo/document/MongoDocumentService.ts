@@ -1,15 +1,17 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
 import _ from 'lodash'
 import { RequestContext } from '../../../graphql/requestContext'
 import { CacheService } from '../../cache'
-import { FieldType } from './types'
+import { Extension, ExtensionMetadata, Extensions, FieldType } from './types'
 import { tryParseJson } from '../../../utils'
 
 export class MongoDocumentService<T> {
   public cache: CacheService = null
   public collection: Collection<T>
   private _fieldTypes: Map<keyof T, any> = new Map()
+  private _extensions: Extensions = new Map()
 
   /**
    * Constructer for `MongoDocumentService`
@@ -52,11 +54,43 @@ export class MongoDocumentService<T> {
       const isFalse = query[key] === false
       q[key] = isFalse
         ? {
-            $in: [false, null]
-          }
+          $in: [false, null]
+        }
         : query[key]
       return q
     }, {})
+  }
+
+  /**
+   * Parses JSON string to object before inserting into the mongo collection.
+   * Also merges the extensions metadata with the extensions object.
+   * 
+   * @param document Document to parse
+   * @param key Key of the field
+   */
+  private _parseJson(document: T, key: keyof T) {
+    try {
+      const json = tryParseJson(document[key] as string, null)
+      if (!json) return null
+      switch (key) {
+        case 'extensions': {
+          return [...this._extensions.entries()].reduce((extensions, [key, metadata]) => {
+            return {
+              ...extensions,
+              [key]: {
+                ...metadata,
+                ...extensions[key],
+              }
+            }
+          }, json)
+        }
+        default: {
+          return json
+        }
+      }
+    } catch {
+      return null
+    }
   }
 
   /**
@@ -79,7 +113,7 @@ export class MongoDocumentService<T> {
               document[key as string] =
                 action === 'get'
                   ? JSON.stringify(document[key])
-                  : tryParseJson(document[key] as string)
+                : this._parseJson(document, key)
             }
           }
         }
@@ -173,5 +207,25 @@ export class MongoDocumentService<T> {
    */
   public registerJsonType(fieldName: keyof T) {
     this._registerType(fieldName, 'JSON')
+  }
+
+  /**
+   * Registers an extension with the given extension ID and optional metadata.
+   * If the extension ID is an instance of `Extension`, the metadata parameter is ignored.
+   * If the extension ID is a string or a number, the metadata parameter is used.
+   * If the `extensions` field type is not registered, it will be registered as `JSON`.
+   * 
+   * @param extensionId - The ID of the extension to register, either a string, number, or an instance of `Extension`.
+   * @param metadata - Optional metadata for the extension.
+   */
+  public registerExtension(extensionId: string | Extension, metadata?: ExtensionMetadata) {
+    if (extensionId instanceof Extension) {
+      this._extensions.set(extensionId.id, extensionId.metadata)
+    } else {
+      this._extensions.set(extensionId, metadata)
+    }
+    if (!this._fieldTypes.has('extensions' as any)) {
+      this._registerType('extensions' as any, 'JSON')
+    }
   }
 }

@@ -12,6 +12,7 @@ import { useProjectsContext } from '../../context'
 import styles from './ProjectInformation.module.scss'
 import { BudgetTracking } from './BudgetTracking'
 import ReactMarkdown from 'react-markdown'
+import { ProjectResources } from './ProjectResources'
 
 /**
  * Shows details about the selected project.
@@ -47,6 +48,7 @@ export const ProjectInformation: StyledComponent = () => {
         onRenderValue={(value) => <ReactMarkdown>{value}</ReactMarkdown>}
         isDataLoaded={!context.loading}
       />
+      <ProjectResources />
       <BudgetTracking />
       <InformationProperty
         hidden={_.isEmpty(context.state.selected?.labels)}

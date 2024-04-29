@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { useFormContext } from '../context'
-import { IUserPickerControlProps } from './types'
-import { CLEAR_VALIDATION_MESSAGE } from '../reducer/actions'
-import { User } from '../../../../server/graphql'
 import _ from 'underscore'
+import { User } from '../../../../server/graphql'
+import { useFormContext } from '../context'
+import { CLEAR_VALIDATION_MESSAGE } from '../reducer/actions'
+import { IUserPickerControlProps } from './types'
 
 /**
  * Transform the value for the `UserPickerControl`.

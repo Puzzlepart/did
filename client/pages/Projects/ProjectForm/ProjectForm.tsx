@@ -10,6 +10,7 @@ import { BudgetTracking } from './BudgetTracking'
 import { Resources } from './Resources'
 import { IProjectFormProps } from './types'
 import { useProjectForm } from './useProjectForm'
+import { RoleDefinitions } from './RoleDefinitions'
 
 /**
  * ProjectForm component is used to create and edit projects.
@@ -45,6 +46,15 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         >
           <BasicInfo />
         </PivotItem>
+        {projects?.enableProjectRoles && (
+          <PivotItem
+            headerText={t('projects.roleDefinitions.headerText')}
+            itemIcon='FabricUserFolder'
+            itemKey='roleDefinitions'
+          >
+            <RoleDefinitions />
+          </PivotItem>
+        )}
         {projects?.enableResourceManagement && (
           <PivotItem
             headerText={t('projects.resources.headerText')}

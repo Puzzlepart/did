@@ -9,6 +9,7 @@ import styles from './UserPicker.module.scss'
 import { UserPickerContext } from './context'
 import { IUserPickerProps } from './types'
 import { useUserPicker } from './useUserPicker'
+import { emptyFunction } from 'utils/emptyFunction'
 
 /**
  * @category Function Component
@@ -59,8 +60,9 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
 UserPicker.displayName = 'LabelPicker'
 UserPicker.className = styles.userPicker
 UserPicker.defaultProps = {
-  onChange: () => {
-    // Nothing happens on change if not provided.
-  },
-  additionalMetadata: {}
+  onChange: emptyFunction,
+  additionalMetadata: {},
+  list: {
+    allowEdit: true
+  }
 }

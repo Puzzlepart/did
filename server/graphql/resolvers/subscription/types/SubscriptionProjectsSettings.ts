@@ -24,6 +24,9 @@ export class SubscriptionProjectsSettings {
 
   @Field(() => [String], { nullable: true })
   resourceMetadata?: string[]
+
+  @Field({ nullable: true, defaultValue: false })
+  enableProjectRoles?: boolean
 }
 
 /**
@@ -48,4 +51,7 @@ export class SubscriptionProjectsSettingsInput {
 
   @Field(() => [String], { nullable: true })
   resourceMetadata?: string[]
+
+  @Field({ nullable: true, defaultValue: false })
+  enableProjectRoles?: boolean
 }

@@ -132,7 +132,15 @@
       "projectOwnerPlaceholder": "Search users...",
       "resourcesLabel": "Project Resources",
       "resourcesPlaceholder": "Search users..."
-    }
+    },
+    "roleDefinitions": {
+      "infoMessage": "Establish role definitions for the project, including positions such as Project Manager, Developer, and Designer. Additionally, specify the hourly rates for each role.",
+      "headerText": "Roles",
+      "rolePlaceholder": "Enter the name of the role.",
+      "hourlyRatePlaceholder": "Enter the hourly rate for the role."
+    },
+    "resourcesLabel": "Project Resources",
+    "hourlyRate": "kr {{rate}} / hour"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -221,7 +229,9 @@
       "resourceMetadataLabel": "Resource metadata",
       "resourceMetadataDescription": "Select metadata for project resources.",
       "showMyProjectsByDefaultLabel": "Show My Projects By Default",
-      "showMyProjectsByDefaultDescription": "Show \"My Projects\" as default on the Project page."
+      "showMyProjectsByDefaultDescription": "Show \"My Projects\" as default on the Project page.",
+      "enableProjectRolesLabel": "Enable Project Roles",
+      "enableProjectRolesDescription": "Enable roles for projects. Set up a set of roles with time rates, and select one of the predefined roles when adding a new resource."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
@@ -802,7 +812,8 @@
     "userPicker": {
       "additionalMetadata": "Additional metadata",
       "addUser": "Add",
-      "displayName": "Name"
+      "displayName": "Name",
+      "removeUser": "Remove"
     }
   }
 }

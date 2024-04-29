@@ -130,7 +130,15 @@
       "projectOwnerPlaceholder": "Søk etter brukere...",
       "resourcesLabel": "Prosjektressurser",
       "projectOwnerLabel": "Prosjekteier"
-    }
+    },
+    "roleDefinitions": {
+      "infoMessage": "Opprett rolledefinisjoner for prosjektet, inkludert roller som prosjektleder, utvikler og designer. Du kan også spesifisere timeprisen for hver rolle for å gi en bedre oversikt over inntjening per prosjekt.",
+      "headerText": "Roller",
+      "hourlyRatePlaceholder": "Angi timepris for rollen.",
+      "rolePlaceholder": "Skriv inn navnet på rollen."
+    },
+    "resourcesLabel": "Prosjektressurser",
+    "hourlyRate": "kr {{rate}} / time"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -244,7 +252,9 @@
       "resourceMetadataLabel": "Ressursmetadata",
       "resourceMetadataDescription": "Velg metadata for prosjektressurser.",
       "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
-      "showMyProjectsByDefaultDescription": "Vis \"Mine prosjekter\" som standard på prosjektsiden."
+      "showMyProjectsByDefaultDescription": "Vis \"Mine prosjekter\" som standard på prosjektsiden.",
+      "enableProjectRolesLabel": "Aktiver prosjektroller",
+      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -799,7 +809,8 @@
     "userPicker": {
       "additionalMetadata": "Ekstra informasjon",
       "addUser": "Legg til",
-      "displayName": "Navn"
+      "displayName": "Navn",
+      "removeUser": "Fjern"
     }
   }
 }
