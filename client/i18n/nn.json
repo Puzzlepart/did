@@ -127,7 +127,13 @@
     "budgetWarningThreshold": "Advarsel terskel for budsjett",
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
     "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
-    "resources": "Ressurser"
+    "resources": {
+      "headerText": "Ressurser",
+      "resourcesPlaceholder": "Søk etter brukarar...",
+      "projectOwnerPlaceholder": "Søk etter brukarar...",
+      "resourcesLabel": "Prosjektressursar",
+      "projectOwnerLabel": "Prosjekteier"
+    }
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
