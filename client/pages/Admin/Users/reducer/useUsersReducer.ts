@@ -34,7 +34,7 @@ export function useUsersReducer() {
         state.adUsers = activeDirectoryUsers
         state.availableAdUsers = _.filter(
           activeDirectoryUsers,
-          (x) => !_.any(users, (y) => y.id === x.id)
+          (x) => !_.any(users, (y) => y.id === x.id) && Boolean(x.mail)
         )
         state.loading = payload.query.loading
       })

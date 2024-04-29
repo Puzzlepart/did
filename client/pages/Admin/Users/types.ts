@@ -26,7 +26,8 @@ export interface IUsersState {
   adUsers: ActiveDirectoryUser[]
 
   /**
-   * Users registered in Azure Active Directory, but not in did
+   * Users registered in Azure Active Directory with a valid email address, 
+   * that are not already registered in the system.
    */
   availableAdUsers: ActiveDirectoryUser[]
 

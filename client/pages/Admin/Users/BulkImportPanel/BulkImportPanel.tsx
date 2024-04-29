@@ -1,21 +1,25 @@
 import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { List, Panel } from 'components'
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import { UsersContext } from '../context'
+import styles from './BulkImportPanel.module.scss'
 import { IBulkImportPanelProps } from './types'
+import { useBulkImportPanel } from './useBulkImportPanel'
 
 export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
   props
 ) => {
   const { t } = useTranslation()
-  const context = useContext(UsersContext)
-  const [selectedUsers, setSelectedUsers] = useState([])
-
+  const {
+    selectedUsers,
+    setSelectedUsers,
+    availableUsers
+  } = useBulkImportPanel()
   return (
     <Panel
+      className={styles.bulkImportPanel}
       open={props.open}
       onDismiss={props.onDismiss}
       title={t('admin.users.bulkImportUsersLabel')}
@@ -28,7 +32,7 @@ export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
         {t('admin.users.bulkImportUsersLabel')}
       </Button>
       <List
-        items={context.state.availableAdUsers}
+        items={availableUsers}
         selectionProps={[SelectionMode.multiple, setSelectedUsers]}
         checkboxVisibility={CheckboxVisibility.always}
         columns={[
@@ -36,6 +40,14 @@ export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
             key: 'displayName',
             fieldName: 'displayName',
             name: t('common.displayNameLabel'),
+            minWidth: 100,
+            maxWidth: 150,
+            isMultiline: true
+          },
+          {
+            key: 'mail',
+            fieldName: 'mail',
+            name: t('common.mailLabel'),
             minWidth: 100
           }
         ]}

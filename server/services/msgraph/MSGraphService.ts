@@ -136,18 +136,20 @@ export class MSGraphService {
   }
 
   /**
-   * Get Azure Active Directory users
+   * Get Azure Active Directory users. Using paging to get all users (more than 999).
    *
    * @public
+   * 
+   * @param pageLimit - Page limit (default: 999)
    *
    * @memberof MSGraphService
    */
-  public getUsers(): Promise<any> {
+  public getUsers(pageLimit = 999): Promise<any> {
     try {
       return this._cache.usingCache(
         async () => {
           const client = await this._getClient()
-          const response = await client
+          let response = await client
             .api('/users')
             // eslint-disable-next-line quotes
             .filter("userType eq 'Member'")
@@ -162,11 +164,16 @@ export class MSGraphService {
               'preferredLanguage',
               'accountEnabled'
             ])
-            .top(999)
+            .top(pageLimit)
             .get()
-          return _.sortBy(response.value, 'displayName')
+          let users = [...response.value]
+          while (response['@odata.nextLink']) {
+            response = await client.api(response['@odata.nextLink']).get()
+            users = users.concat(response.value)
+          }
+          return _.sortBy(users, 'displayName')
         },
-        { key: 'getusers' }
+        { key: 'getusers_' }
       )
     } catch (error) {
       throw new MSGraphError('getUsers', error.message)

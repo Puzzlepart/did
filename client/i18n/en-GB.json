@@ -248,7 +248,8 @@
       "employmentStartDateLabel": "Employment Start Date",
       "employmentEndDateLabel": "Employment End Date",
       "employmentEndDateDescription": "The date the user's employment ends. If the user is no longer employed, set this date to the last day of employment.",
-      "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment."
+      "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
+      "searchUsersLabel": "Search users..."
     },
     "missingSubmissions": {
       "headerText": "Missing submissions",

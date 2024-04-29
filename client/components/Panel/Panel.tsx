@@ -1,4 +1,4 @@
-import { Button, Caption1 } from '@fluentui/react-components'
+import { Button, Caption1, mergeClasses } from '@fluentui/react-components'
 import {
   Drawer,
   DrawerBody,
@@ -23,7 +23,7 @@ export const Panel: PanelComponent = (props) => {
   const { onOpenChange, bodyStyle } = usePanel(props)
   return (
     <Drawer
-      className={Panel.className}
+      className={mergeClasses(Panel.className, props.className)}
       type={props.type}
       separator={true}
       open={props.open}

@@ -207,7 +207,8 @@
       "employmentEndDateDescription": "Datoen brukerens arbeidsforhold avsluttes. Dersom brukeren ikke lenger er ansatt, sett denne datoen til siste arbeidsdag.",
       "employmentStartDateDescription": "Datoen brukerens ansettelse starter. Hvis brukeren allerede er ansatt, sett denne datoen til første arbeidsdag.",
       "employmentEndDateLabel": "Sluttdato for ansettelse",
-      "employmentStartDateLabel": "Startdato for ansettelse"
+      "employmentStartDateLabel": "Startdato for ansettelse",
+      "searchUsersLabel": "Søk i brukere..."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
