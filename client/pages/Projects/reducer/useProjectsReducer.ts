@@ -30,10 +30,10 @@ export function useProjectsReducer() {
           state.outlookCategories = payload.data.outlookCategories
           state.projects = payload.data.projects.map((p) => ({
             ...p,
-            properties: tryParseJson(p.properties as string, {}),
             outlookCategory: _.find(state.outlookCategories, (c) =>
               fuzzyStringEqual(c.displayName, p.tag)
-            )
+            ),
+            extensions: tryParseJson(p.extensions as string, {})
           }))
           state.myProjects = payload.data.myProjects.map((p) => p.tag)
           const selectedTag = state.selected?.tag ?? urlParams.currentTab
