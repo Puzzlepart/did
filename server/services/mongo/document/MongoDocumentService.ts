@@ -88,8 +88,7 @@ export class MongoDocumentService<T> {
           return json
         }
       }
-    } catch (error) {
-      console.log(error)
+    } catch {
       return null
     }
   }
