@@ -45,3 +45,11 @@ export type ResourcesExtension = {
     [key: string]: any
   }>
 }
+
+/**
+ * The default values for the resources extension if no values are provided.
+ */
+export const ResourcesExtensionDefault: ResourcesExtension = {
+  projectOwner: null,
+  resources: []
+}

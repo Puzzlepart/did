@@ -1,7 +1,7 @@
 import { useExtension } from 'hooks'
 import { Project } from 'types'
 import { Resources } from '../../../ProjectForm'
-import { ResourcesExtension } from '../../../ProjectForm/Resources/types'
+import { ResourcesExtension, ResourcesExtensionDefault } from '../../../ProjectForm/Resources/types'
 import { useProjectsContext } from '../../../context'
 import { useUsersQuery } from './useUsersQuery'
 
@@ -15,7 +15,9 @@ export const useProjectResources = () => {
 
   const resourcesExtension = useExtension<Project, ResourcesExtension>(
     context.state.selected,
-    Resources.extensionId
+    Resources.extensionId,
+    null,
+    ResourcesExtensionDefault
   )
 
   const projectOwner = users.find(

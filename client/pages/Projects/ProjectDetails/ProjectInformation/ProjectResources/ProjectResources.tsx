@@ -5,6 +5,7 @@ import { StyledComponent } from 'types'
 import styles from './ProjectResources.module.scss'
 import { useProjectResources } from './useProjectResources'
 import { useTranslation } from 'react-i18next'
+import _ from 'lodash'
 
 /**
  * Shows details about the selected project.
@@ -14,6 +15,9 @@ import { useTranslation } from 'react-i18next'
 export const ProjectResources: StyledComponent = () => {
   const { projectOwner, resources, isDataLoaded } = useProjectResources()
   const { t } = useTranslation()
+  if(!projectOwner && _.isEmpty(resources)) {
+    return null
+  }
   return (
     <InformationProperty
       title={t('projects.resourcesLabel')}

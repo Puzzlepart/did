@@ -9,6 +9,8 @@ import { LabelService } from '../label'
 import {
   DefaultGetProjectsDataOptions,
   GetProjectsDataOptions,
+  ProjectResourcesExtension,
+  ProjectRoleDefinitionsExtension,
   ProjectsData
 } from './types'
 
@@ -35,7 +37,9 @@ export class ProjectService extends MongoDocumentService<Project> {
     private readonly _labelSvc: LabelService
   ) {
     super(context, 'projects', ProjectService.name)
-    this.registerJsonType('extensions')
+    this.registerExtension(new ProjectResourcesExtension())
+    this.registerExtension(new ProjectRoleDefinitionsExtension())
+    this.registerExtension(new ProjectRoleDefinitionsExtension())
   }
 
   /**
