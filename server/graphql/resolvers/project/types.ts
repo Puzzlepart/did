@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
-type ProjectProperties = string | Record<string, any>
+type ProjectExtensions = string | Record<string, any>
 
 /**
  * @category GraphQL InputType
@@ -71,11 +71,11 @@ export class ProjectInput {
   labels?: string[]
 
   /**
-   * The properties of the project. This is a JSON string instead
+   * The extensions of the project. This is a JSON string instead
    * of being strongly typed to allow for flexibility in the future.
    */
   @Field(() => String, { nullable: true, defaultValue: '{}' })
-  properties: ProjectProperties
+  extensions: ProjectExtensions
 }
 
 /**
@@ -168,11 +168,11 @@ export class Project {
   public labels?: Label[] | string[]
 
   /**
-   * The properties of the project. This is a JSON string instead
+   * The extensions of the project. This is a JSON string instead
    * of being strongly typed to allow for flexibility in the future.
    */
   @Field(() => String, { nullable: true, defaultValue: '{}' })
-  public properties: ProjectProperties
+  extensions: ProjectExtensions
 
   /**
    * Constructs a new Project.
