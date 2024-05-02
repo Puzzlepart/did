@@ -68,8 +68,14 @@ export class ProjectResolver {
     const { projects } = await this._projectSvc.getProjectsData(
       {
         $or: [
-          { [`extensions.${extensionId}.properties.resources.id`]: context.userId },
-          { [`extensions.${extensionId}.properties.projectOwner`]: context.userId }
+          {
+            [`extensions.${extensionId}.properties.resources.id`]:
+              context.userId
+          },
+          {
+            [`extensions.${extensionId}.properties.projectOwner`]:
+              context.userId
+          }
         ]
       },
       {
