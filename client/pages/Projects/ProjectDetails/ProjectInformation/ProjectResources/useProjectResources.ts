@@ -20,7 +20,8 @@ export const useProjectResources = () => {
     context.state.selected,
     Resources.extensionId,
     null,
-    ResourcesExtensionDefault
+    ResourcesExtensionDefault,
+    true
   )
 
   const projectOwner = users.find(

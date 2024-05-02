@@ -56,20 +56,21 @@ export class ProjectResolver {
   }
 
   /**
-   * Get projects where the current user is a member.
+   * Get projects where the current user is a member. It needs to check
+   * the extension with the ID `2dfbce96-947f-4c26-95b4-5eda10616074`.
    *
    * @param context - GraphQL request context
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_PROJECTS })
   @Query(() => [Project], { description: 'Get projects' })
   async myProjects(@Ctx() context: RequestContext): Promise<Project[]> {
+    const extensionId = '2dfbce96-947f-4c26-95b4-5eda10616074'
     const { projects } = await this._projectSvc.getProjectsData(
       {
-        'properties.resources': {
-          $elemMatch: {
-            id: context.user.id
-          }
-        }
+        $or: [
+          { [`extensions.${extensionId}.properties.resources.id`]: context.userId },
+          { [`extensions.${extensionId}.properties.projectOwner`]: context.userId }
+        ]
       },
       {
         includeLabels: false,

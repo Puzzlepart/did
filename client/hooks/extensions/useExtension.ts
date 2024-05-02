@@ -17,18 +17,21 @@ export function useExtension<T = any, R = any>(
   entity: T,
   extensionId: string,
   key?: string,
-  defaultValue = null
+  defaultValue = null,
+  mergeWithDefault = false
 ) {
   if (!key) {
-    return _.get(
+    const value = _.get(
       entity,
       `extensions.${extensionId}.properties`,
       defaultValue
     ) as R
+    return mergeWithDefault ? _.merge(defaultValue, value) : value
   }
-  return _.get(
+  const value = _.get(
     entity,
     `extensions.${extensionId}.properties.${key}`,
     defaultValue
   ) as R
+  return mergeWithDefault ? _.merge(defaultValue, value) : value
 }
