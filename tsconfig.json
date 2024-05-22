@@ -23,7 +23,7 @@
       "get-value",
       "passport"
     ],
-    "outDir": "dist"
+    "outDir": "app"
   },
   "include": ["./server/**/*.ts"],
   "exclude": ["./node_modules", "**/*.test.ts"],

@@ -3,8 +3,7 @@ name: Build and deploy to didapp/dev
 on:
   push:
     branches:
-      - dev
-      - feat/*
+      - ci/on_push_dev_docker_deploy
     paths:
       - 'server/**'
       - 'client/**'
@@ -13,6 +12,7 @@ on:
       - 'package.json'
       - '.deployment'
       - '.deploy/**'
+      - '.github/workflows/**'
 
 jobs:
   package:
@@ -36,8 +36,8 @@ jobs:
     #     npm run package
     #   env:
     #     NODE_ENV: production
-    #     INCLUDE_NODE_MODULES: '0'
-    #     INCLUDE_PACKAGE_LOCK_FILE: '0'
+    #     INCLUDE_NODE_MODULES: '1'
+    #     INCLUDE_PACKAGE_LOCK_FILE: '1'
     #     DISPLAY_VERSION_DETAILS: '1'
 
     - uses: actions/upload-artifact@v3
@@ -45,25 +45,34 @@ jobs:
         name: did-package
         path: ./did-package.zip
 
-  deploy_azure:
-    name: Deploying to didapp/dev
+  build_and_push_docker:
+    name: Build and push Docker image
     runs-on: ubuntu-latest
     needs: package
-    environment:
-      name: 'dev'
-      url: ${{ steps.deploy-to-app-slot.webapp-url }}
-
+    env:
+      ACR_LOGIN_SERVER: didappcr.azurecr.io
+      ACR_USERNAME: didappcr
+      ACR_PASSWORD: 8fu6JxW8GzIp70KYNTuyvp8VLwr/mCsYOuYErEry8t+ACRDCwPul  
+      ACR_IMAGE_ID: didapp
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
         name: did-package
 
-    - name: 'Deploy package to didapp/dev'
-      id: deploy-to-app-slot
-      uses: azure/webapps-deploy@v2
+    - name: Login to Azure Container Registry
+      uses: azure/docker-login@v1
       with:
-        app-name: 'didapp'
-        slot-name: 'dev'
-        publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
-        package: ./did-package.zip
+        login-server: ${{ env.ACR_LOGIN_SERVER }}
+        username: ${{ env.ACR_USERNAME }}
+        password: ${{ env.ACR_PASSWORD }}
+
+    - name: Load Docker image
+      run: |
+        docker load -i did-package.zip
+
+    - name: Tag Docker image
+      run: docker tag ${{ env.ACR_IMAGE_ID }} ${{ env.ACR_LOGIN_SERVER }}/didapp:latest
+
+    - name: Push Docker image to Azure Container Registry
+      run: docker push ${{ env.ACR_LOGIN_SERVER }}/didapp:latest

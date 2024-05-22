@@ -39,12 +39,12 @@ jobs:
         run: |
           npm run lint
 
-      - name: Package client
-        run: |
-          npm run package:client
-        env:
-          DEBUG: webpack*
-          NODE_ENV: production
+      # - name: Package client
+      #   run: |
+      #     npm run package:client
+      #   env:
+      #     DEBUG: webpack*
+      #     NODE_ENV: production
 
       - name: Build server
         run: |

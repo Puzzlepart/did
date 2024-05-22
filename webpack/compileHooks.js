@@ -85,7 +85,7 @@ class CustomCompileHooks {
         log()
         log(
           'To create a production build, use ' +
-          `${chalk.cyan('NODE_ENV=prouction npm run package:client')}`
+          `${chalk.cyan('NODE_ENV=prouction npm run build:client')}`
         )
         log()
         log()
