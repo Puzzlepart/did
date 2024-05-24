@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
         node-version: ${{ vars.NODE_VERSION }}
 
@@ -31,7 +31,7 @@ jobs:
         INCLUDE_PACKAGE_LOCK_FILE: '0'
         DISPLAY_VERSION_DETAILS: '1'
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: did-package
         path: ./did-package.zip
@@ -46,13 +46,13 @@ jobs:
 
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: did-package
 
     - name: 'Deploy package to didapp/staging'
       id: deploy-to-app-slot
-      uses: azure/webapps-deploy@v2
+      uses: azure/webapps-deploy@v3
       with:
         app-name: 'didapp'
         slot-name: 'staging'
