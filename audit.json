@@ -1,0 +1,762 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "axios": {
+      "name": "axios",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1096525,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios Cross-Site Request Forgery Vulnerability",
+          "url": "https://github.com/advisories/GHSA-wf5p-g6vw-rhxx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-352"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=0.8.1 <0.28.0"
+        }
+      ],
+      "effects": [
+        "localtunnel"
+      ],
+      "range": "0.8.1 - 0.27.2",
+      "nodes": [
+        "node_modules/axios"
+      ],
+      "fixAvailable": {
+        "name": "localtunnel",
+        "version": "1.8.3",
+        "isSemVerMajor": true
+      }
+    },
+    "body-parser": {
+      "name": "body-parser",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "qs"
+      ],
+      "effects": [],
+      "range": "1.19.0",
+      "nodes": [
+        "node_modules/body-parser"
+      ],
+      "fixAvailable": {
+        "name": "body-parser",
+        "version": "1.20.2",
+        "isSemVerMajor": false
+      }
+    },
+    "gcp-metadata": {
+      "name": "gcp-metadata",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "json-bigint"
+      ],
+      "effects": [
+        "google-auth-library"
+      ],
+      "range": "0.8.0 - 4.1.0",
+      "nodes": [
+        "node_modules/gcp-metadata"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "google-auth-library": {
+      "name": "google-auth-library",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "gcp-metadata",
+        "gtoken"
+      ],
+      "effects": [
+        "googleapis",
+        "googleapis-common"
+      ],
+      "range": "0.9.4 - 5.10.1",
+      "nodes": [
+        "node_modules/google-auth-library"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "google-p12-pem": {
+      "name": "google-p12-pem",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "node-forge"
+      ],
+      "effects": [
+        "gtoken"
+      ],
+      "range": "<=3.1.2",
+      "nodes": [
+        "node_modules/google-p12-pem"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "googleapis": {
+      "name": "googleapis",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "google-auth-library",
+        "googleapis-common"
+      ],
+      "effects": [],
+      "range": "37.0.0-webpack - 48.0.0",
+      "nodes": [
+        "node_modules/googleapis"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "googleapis-common": {
+      "name": "googleapis-common",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "google-auth-library"
+      ],
+      "effects": [],
+      "range": "0.5.0-webpack - 0.5.0-webpack3 || 0.6.0-webpack - 3.2.2",
+      "nodes": [
+        "node_modules/googleapis-common"
+      ],
+      "fixAvailable": true
+    },
+    "got": {
+      "name": "got",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1088948,
+          "name": "got",
+          "dependency": "got",
+          "title": "Got allows a redirect to a UNIX socket",
+          "url": "https://github.com/advisories/GHSA-pfrx-2q88-qq97",
+          "severity": "moderate",
+          "cwe": [],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<11.8.5"
+        }
+      ],
+      "effects": [
+        "package-json"
+      ],
+      "range": "<11.8.5",
+      "nodes": [
+        "node_modules/got"
+      ],
+      "fixAvailable": {
+        "name": "nodemon",
+        "version": "2.0.22",
+        "isSemVerMajor": false
+      }
+    },
+    "gtoken": {
+      "name": "gtoken",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "google-p12-pem"
+      ],
+      "effects": [
+        "google-auth-library"
+      ],
+      "range": "<=5.0.0",
+      "nodes": [
+        "node_modules/gtoken"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "json-bigint": {
+      "name": "json-bigint",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1089848,
+          "name": "json-bigint",
+          "dependency": "json-bigint",
+          "title": "Uncontrolled Resource Consumption in json-bigint",
+          "url": "https://github.com/advisories/GHSA-wgfq-7857-4jcc",
+          "severity": "high",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<1.0.0"
+        }
+      ],
+      "effects": [
+        "gcp-metadata"
+      ],
+      "range": "<1.0.0",
+      "nodes": [
+        "node_modules/json-bigint"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "jsonwebtoken": {
+      "name": "jsonwebtoken",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1089434,
+          "name": "jsonwebtoken",
+          "dependency": "jsonwebtoken",
+          "title": "jsonwebtoken unrestricted key type could lead to legacy keys usage ",
+          "url": "https://github.com/advisories/GHSA-8cf7-32gw-wr33",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-327"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=8.5.1"
+        },
+        {
+          "source": 1091087,
+          "name": "jsonwebtoken",
+          "dependency": "jsonwebtoken",
+          "title": "jsonwebtoken's insecure implementation of key retrieval function could lead to Forgeable Public/Private Tokens from RSA to HMAC",
+          "url": "https://github.com/advisories/GHSA-hjrf-2m68-5959",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-287"
+          ],
+          "cvss": {
+            "score": 5,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<=8.5.1"
+        },
+        {
+          "source": 1092549,
+          "name": "jsonwebtoken",
+          "dependency": "jsonwebtoken",
+          "title": "jsonwebtoken vulnerable to signature validation bypass due to insecure default algorithm in jwt.verify()",
+          "url": "https://github.com/advisories/GHSA-qwph-4952-7xr6",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-287",
+            "CWE-327",
+            "CWE-347"
+          ],
+          "cvss": {
+            "score": 6.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:H/A:L"
+          },
+          "range": "<9.0.0"
+        }
+      ],
+      "effects": [],
+      "range": "<=8.5.1",
+      "nodes": [
+        "node_modules/jsonwebtoken"
+      ],
+      "fixAvailable": {
+        "name": "jsonwebtoken",
+        "version": "9.0.2",
+        "isSemVerMajor": true
+      }
+    },
+    "latest-version": {
+      "name": "latest-version",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "package-json"
+      ],
+      "effects": [
+        "update-notifier"
+      ],
+      "range": "0.2.0 - 5.1.0",
+      "nodes": [
+        "node_modules/latest-version"
+      ],
+      "fixAvailable": {
+        "name": "nodemon",
+        "version": "2.0.22",
+        "isSemVerMajor": false
+      }
+    },
+    "localtunnel": {
+      "name": "localtunnel",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "axios"
+      ],
+      "effects": [],
+      "range": ">=1.9.0",
+      "nodes": [
+        "node_modules/localtunnel"
+      ],
+      "fixAvailable": {
+        "name": "localtunnel",
+        "version": "1.8.3",
+        "isSemVerMajor": true
+      }
+    },
+    "lodash.trim": {
+      "name": "lodash.trim",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1094494,
+          "name": "lodash.trim",
+          "dependency": "lodash.trim",
+          "title": "Regular Expression Denial of Service (ReDoS) in lodash",
+          "url": "https://github.com/advisories/GHSA-29mw-wpgm-hmr9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=4.5.1"
+        }
+      ],
+      "effects": [
+        "string-strip-html"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/lodash.trim"
+      ],
+      "fixAvailable": {
+        "name": "string-strip-html",
+        "version": "13.4.8",
+        "isSemVerMajor": true
+      }
+    },
+    "mongodb": {
+      "name": "mongodb",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1096430,
+          "name": "mongodb",
+          "dependency": "mongodb",
+          "title": "MongoDB Driver may publish events containing authentication-related data",
+          "url": "https://github.com/advisories/GHSA-vxvm-qww3-2fh7",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-200",
+            "CWE-532"
+          ],
+          "cvss": {
+            "score": 4.2,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=3.6.0 <3.6.10"
+        }
+      ],
+      "effects": [],
+      "range": "3.6.0 - 3.6.9",
+      "nodes": [
+        "node_modules/mongodb"
+      ],
+      "fixAvailable": {
+        "name": "mongodb",
+        "version": "3.7.4",
+        "isSemVerMajor": false
+      }
+    },
+    "node-fetch": {
+      "name": "node-fetch",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1095073,
+          "name": "node-fetch",
+          "dependency": "node-fetch",
+          "title": "node-fetch forwards secure headers to untrusted sites",
+          "url": "https://github.com/advisories/GHSA-r683-j2x4-v87g",
+          "severity": "high",
+          "cwe": [
+            "CWE-173",
+            "CWE-200",
+            "CWE-601"
+          ],
+          "cvss": {
+            "score": 8.8,
+            "vectorString": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<2.6.7"
+        }
+      ],
+      "effects": [],
+      "range": "<2.6.7",
+      "nodes": [
+        "node_modules/node-fetch"
+      ],
+      "fixAvailable": {
+        "name": "node-fetch",
+        "version": "2.7.0",
+        "isSemVerMajor": false
+      }
+    },
+    "node-forge": {
+      "name": "node-forge",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1088227,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "Prototype Pollution in node-forge debug API.",
+          "url": "https://github.com/advisories/GHSA-5rrq-pxf6-6jx5",
+          "severity": "low",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<1.0.0"
+        },
+        {
+          "source": 1088229,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "URL parsing in node-forge could lead to undesired behavior.",
+          "url": "https://github.com/advisories/GHSA-gf8q-jrpm-jvxq",
+          "severity": "low",
+          "cwe": [
+            "CWE-601"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<1.0.0"
+        },
+        {
+          "source": 1088746,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "Improper Verification of Cryptographic Signature in `node-forge`",
+          "url": "https://github.com/advisories/GHSA-2r2c-g63r-vccr",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-347"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<1.3.0"
+        },
+        {
+          "source": 1093719,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "Open Redirect in node-forge",
+          "url": "https://github.com/advisories/GHSA-8fr3-hfg3-gpgp",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-601"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<1.0.0"
+        },
+        {
+          "source": 1095012,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "Improper Verification of Cryptographic Signature in node-forge",
+          "url": "https://github.com/advisories/GHSA-cfm4-qjh2-4765",
+          "severity": "high",
+          "cwe": [
+            "CWE-347"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<1.3.0"
+        },
+        {
+          "source": 1095013,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "Improper Verification of Cryptographic Signature in node-forge",
+          "url": "https://github.com/advisories/GHSA-x4jg-mjrx-434g",
+          "severity": "high",
+          "cwe": [
+            "CWE-347"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<1.3.0"
+        }
+      ],
+      "effects": [
+        "google-p12-pem"
+      ],
+      "range": "<=1.2.1",
+      "nodes": [
+        "node_modules/node-forge"
+      ],
+      "fixAvailable": {
+        "name": "googleapis",
+        "version": "137.1.0",
+        "isSemVerMajor": true
+      }
+    },
+    "nodemon": {
+      "name": "nodemon",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "update-notifier"
+      ],
+      "effects": [],
+      "range": "1.3.5 - 2.0.16 || 2.0.18",
+      "nodes": [
+        "node_modules/nodemon"
+      ],
+      "fixAvailable": {
+        "name": "nodemon",
+        "version": "2.0.22",
+        "isSemVerMajor": false
+      }
+    },
+    "package-json": {
+      "name": "package-json",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "got"
+      ],
+      "effects": [
+        "latest-version"
+      ],
+      "range": "<=6.5.0",
+      "nodes": [
+        "node_modules/package-json"
+      ],
+      "fixAvailable": {
+        "name": "nodemon",
+        "version": "2.0.22",
+        "isSemVerMajor": false
+      }
+    },
+    "qs": {
+      "name": "qs",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1096472,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs vulnerable to Prototype Pollution",
+          "url": "https://github.com/advisories/GHSA-hrpp-h998-j3pp",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=6.7.0 <6.7.3"
+        }
+      ],
+      "effects": [
+        "body-parser"
+      ],
+      "range": "6.7.0 - 6.7.2",
+      "nodes": [
+        "node_modules/qs"
+      ],
+      "fixAvailable": {
+        "name": "body-parser",
+        "version": "1.20.2",
+        "isSemVerMajor": false
+      }
+    },
+    "redis": {
+      "name": "redis",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1089196,
+          "name": "redis",
+          "dependency": "redis",
+          "title": "Node-Redis potential exponential regex in monitor mode",
+          "url": "https://github.com/advisories/GHSA-35q2-47q7-3pc3",
+          "severity": "high",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=2.6.0 <3.1.1"
+        }
+      ],
+      "effects": [],
+      "range": "2.6.0 - 3.1.0",
+      "nodes": [
+        "node_modules/redis"
+      ],
+      "fixAvailable": {
+        "name": "redis",
+        "version": "3.1.2",
+        "isSemVerMajor": false
+      }
+    },
+    "set-value": {
+      "name": "set-value",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1094509,
+          "name": "set-value",
+          "dependency": "set-value",
+          "title": "Prototype Pollution in set-value",
+          "url": "https://github.com/advisories/GHSA-4jqc-8m5r-9rpr",
+          "severity": "high",
+          "cwe": [
+            "CWE-843",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": ">=3.0.0 <3.0.3"
+        }
+      ],
+      "effects": [],
+      "range": "3.0.0 - 3.0.2",
+      "nodes": [
+        "node_modules/set-value"
+      ],
+      "fixAvailable": {
+        "name": "set-value",
+        "version": "3.0.3",
+        "isSemVerMajor": false
+      }
+    },
+    "string-strip-html": {
+      "name": "string-strip-html",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "lodash.trim"
+      ],
+      "effects": [],
+      "range": "<=8.3.0 || 9.0.0 - 13.2.3",
+      "nodes": [
+        "node_modules/string-strip-html"
+      ],
+      "fixAvailable": {
+        "name": "string-strip-html",
+        "version": "13.4.8",
+        "isSemVerMajor": true
+      }
+    },
+    "update-notifier": {
+      "name": "update-notifier",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "latest-version"
+      ],
+      "effects": [
+        "nodemon"
+      ],
+      "range": "0.2.0 - 5.1.0",
+      "nodes": [
+        "node_modules/update-notifier"
+      ],
+      "fixAvailable": {
+        "name": "nodemon",
+        "version": "2.0.22",
+        "isSemVerMajor": false
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 11,
+      "high": 11,
+      "critical": 0,
+      "total": 24
+    },
+    "dependencies": {
+      "prod": 1466,
+      "dev": 434,
+      "optional": 20,
+      "peer": 5,
+      "peerOptional": 0,
+      "total": 1919
+    }
+  }
+}
