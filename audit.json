@@ -1,0 +1,130 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "axios": {
+      "name": "axios",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1096525,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios Cross-Site Request Forgery Vulnerability",
+          "url": "https://github.com/advisories/GHSA-wf5p-g6vw-rhxx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-352"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=0.8.1 <0.28.0"
+        }
+      ],
+      "effects": [
+        "localtunnel"
+      ],
+      "range": "0.8.1 - 0.27.2",
+      "nodes": [
+        "node_modules/axios"
+      ],
+      "fixAvailable": {
+        "name": "localtunnel",
+        "version": "1.8.3",
+        "isSemVerMajor": true
+      }
+    },
+    "localtunnel": {
+      "name": "localtunnel",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "axios"
+      ],
+      "effects": [],
+      "range": ">=1.9.0",
+      "nodes": [
+        "node_modules/localtunnel"
+      ],
+      "fixAvailable": {
+        "name": "localtunnel",
+        "version": "1.8.3",
+        "isSemVerMajor": true
+      }
+    },
+    "lodash.trim": {
+      "name": "lodash.trim",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1094494,
+          "name": "lodash.trim",
+          "dependency": "lodash.trim",
+          "title": "Regular Expression Denial of Service (ReDoS) in lodash",
+          "url": "https://github.com/advisories/GHSA-29mw-wpgm-hmr9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=4.5.1"
+        }
+      ],
+      "effects": [
+        "string-strip-html"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/lodash.trim"
+      ],
+      "fixAvailable": {
+        "name": "string-strip-html",
+        "version": "13.4.8",
+        "isSemVerMajor": true
+      }
+    },
+    "string-strip-html": {
+      "name": "string-strip-html",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "lodash.trim"
+      ],
+      "effects": [],
+      "range": "<=8.3.0 || 9.0.0 - 13.2.3",
+      "nodes": [
+        "node_modules/string-strip-html"
+      ],
+      "fixAvailable": {
+        "name": "string-strip-html",
+        "version": "13.4.8",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 4,
+      "high": 0,
+      "critical": 0,
+      "total": 4
+    },
+    "dependencies": {
+      "prod": 1282,
+      "dev": 432,
+      "optional": 20,
+      "peer": 5,
+      "peerOptional": 0,
+      "total": 1733
+    }
+  }
+}
