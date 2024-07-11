@@ -60,6 +60,19 @@ export class ActiveDirectoryUser {
   accountEnabled?: boolean
 }
 
+
+@ObjectType({
+  description: 'A type that describes a User timebank entry',
+  simpleResolvers: true
+})
+export class UserTimebankEntry {
+  @Field({ nullable: false })
+  balanceAdjustment?: number
+
+  @Field({ nullable: false })
+  id?: string
+}
+
 @ObjectType({
   description: 'A type that describes a User timebank',
   simpleResolvers: true
@@ -70,6 +83,23 @@ export class UserTimebank {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   lastUpdated?: Date
+
+  @Field(() => [UserTimebankEntry], { nullable: true })
+  entries?: UserTimebankEntry[]
+}
+
+@InputType({
+  description: 'A type that describes a User timebank entry input'
+})
+export class UserTimebankEntryInput {
+  @Field({ nullable: false })
+  balanceAdjustment?: number
+
+  @Field({ nullable: false })
+  id?: string
+
+  @Field(() => [UserTimebankEntryInput], { nullable: false })
+  entries?: UserTimebankEntryInput[]
 }
 
 @InputType({
@@ -81,6 +111,13 @@ export class UserTimebankInput {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   lastUpdated?: Date
+
+}
+
+@ObjectType({ description: 'A type that describes a User timebank result' })
+export class UpdateUserTimebankResult extends BaseResult {
+  @Field({ nullable: true })
+  balance?: number
 }
 
 /**

@@ -226,6 +226,14 @@ export function useSubscriptionConfig() {
             defaultValue: 'HH:mm',
             getContentAfter: (value: string) => new DateObject().format(value)
           }
+        },
+        {
+          id:'timebankEnabled',
+          type: 'bool',
+          props: {
+            label: t('admin.timesheetTimebankEnabledLabel'),
+            description: t('admin.timesheetTimebankEnabledDescription')
+          }
         }
       ]
     },

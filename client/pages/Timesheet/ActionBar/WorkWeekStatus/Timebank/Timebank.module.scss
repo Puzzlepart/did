@@ -1,0 +1,20 @@
+.timebank {
+
+    .container {
+        padding: 10px;
+        width: 400px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        .header {
+            margin: 0 0 10px 0;
+        }
+
+        .actions {
+            margin: 10px 0 0 0;
+            display: flex;
+            gap: 10px;
+        }
+    }
+}

@@ -1,7 +1,10 @@
-mutation UpdateUserTimebank($hours: Float!) {
+mutation UpdateUserTimebank($balanceAdjustment: Float!, $entryId: String!, $reset: Boolean!) {
   result: updateUserTimebank(
-    hours: $hours
+    balanceAdjustment: $balanceAdjustment
+    entryId: $entryId
+    reset: $reset
   ) {
     success
+    balance
   }
 }

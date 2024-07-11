@@ -1,48 +1,72 @@
 import { Button, Field, MessageBar, Popover, PopoverSurface, PopoverTrigger, Slider } from '@fluentui/react-components'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { ITimebankProps } from './types'
-import $updateUserTimebank from './update-user-timebank.gql'
-import { useMutation } from '@apollo/client'
+import { useTimebank } from './useTimebank'
+import { getFluentIcon } from 'utils'
+import styles from './Timebank.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export const Timebank: FC<ITimebankProps> = (props) => {
-    const [hours, setHours] = useState(props.hours)
-    const [updateUserTimebank] = useMutation($updateUserTimebank)
+    const { t } = useTranslation()
+    const {
+        state,
+        setState,
+        onUpdateUserTimebank,
+    } = useTimebank(props)
     return (
         <Popover>
             <PopoverTrigger>
                 {props.children as any}
             </PopoverTrigger>
-            <PopoverSurface>
-                <div style={{
-                    padding: 10,
-                    width: 350,
-                    display: 'flex',
-                    gap: 10,
-                    flexDirection: 'column'
-                }}>
-                    <MessageBar>
-                        Du har lagt 13 timer i tidsbanken din. Hvis du har lagt til timer som ikke er godkjent, vil de ikke bli lagt til i tidsbanken din.
+            <PopoverSurface className={styles.timebank}>
+                <div className={styles.container}>
+                    <h4 className={styles.header}>{t('timesheet.timebank.header')}</h4>
+                    <MessageBar
+                        icon={getFluentIcon('Timer')}
+                        intent={state.currentBalance > 0 ? 'success' : 'warning'}>
+                        {t('timesheet.timebank.balance', { balance: state.currentBalance })}
                     </MessageBar>
-                    <Field
-                        label={`${hours} timer`}
-                        hint='Velg antall timer du vil legge til i tidsbanken din'>
-                        <Slider
-                            min={1}
-                            max={props.hours}
-                            step={0.5}
-                            value={hours}
-                            // onChange={(_, { value }) => setHours(value)} 
-                            />
-                    </Field>
-                    <Button
-                        appearance='primary'
-                        onClick={() => {
-                            // updateUserTimebank({
-                            //     variables: { hours }
-                            // })
-                        }}
-                    >Lagre {hours} timer i tidsbanken din</Button>
-                </div >
+                    {!state.isTimebankAdjusted && (
+                        <>
+                            {props.hours > 0 && (
+                                <Field
+                                    label={t('timesheet.timebank.balanceAdjustmentLabel', state)}
+                                    hint={t('timesheet.timebank.balanceAdjustmentHint')}>
+                                    <Slider
+                                        min={1}
+                                        max={props.hours}
+                                        step={0.5}
+                                        value={state.balanceAdjustment}
+                                        onChange={(_, { value }) => setState(previousState => ({
+                                            ...previousState,
+                                            balanceAdjustment: value as number
+                                        }))}
+                                    />
+                                </Field>
+                            )}
+                            <div className={styles.actions}>
+                                {props.hours > 0 ? (
+                                    <Button
+                                        appearance='primary'
+                                        onClick={() => onUpdateUserTimebank()}
+                                    >{t('timesheet.timebank.incrementTimebankText', state)}</Button>
+                                )
+                                    : (
+                                        <Button
+                                            appearance='primary'
+                                            onClick={() => onUpdateUserTimebank()}
+                                        >{t('timesheet.timebank.decrementTimebankText', { balanceAdjustment: state.balanceAdjustment * -1 })}</Button>
+                                    )}
+                                <Button
+                                    disabled
+                                    appearance='secondary'
+                                    onClick={() => onUpdateUserTimebank(true)}>
+                                    {t('timesheet.timebank.resetTimebankText')}
+                                </Button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </PopoverSurface>
         </Popover>
     )

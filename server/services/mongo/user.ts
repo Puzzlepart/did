@@ -147,13 +147,15 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Update the specified user
+   * Update the specified user with the provided properties. If no properties
+   * are provided, the whole user object is updated.
    *
    * @param user - User to update
+   * @param properties - Properties to update
    */
-  public async updateUser(user: User): Promise<void> {
+  public async updateUser(user: User, properties = []): Promise<void> {
     try {
-      await this.update({ _id: user.id }, user)
+      await this.update({ _id: user.id }, _.isEmpty(properties) ? user : _.pick(user, properties))
     } catch (error) {
       throw error
     }
