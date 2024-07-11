@@ -1,5 +1,4 @@
 import { MessageBarProps } from '@fluentui/react-components'
-import { AlertProps } from '@fluentui/react-components/dist/unstable'
 import { TFunction } from 'i18next'
 import { Notification } from 'types'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
@@ -31,7 +30,7 @@ export class NotificationModel {
    *
    * @returns The intent of the notification.
    */
-  private get _notificationIntent(): AlertProps['intent'] {
+  private get _notificationIntent(): MessageBarProps['intent'] {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED': {
         return 'warning'
