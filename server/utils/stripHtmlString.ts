@@ -12,3 +12,4 @@ export function stripHtmlString(string = ''): string {
   if(!string) return string
   return stripHtml(string).result
 }
+
