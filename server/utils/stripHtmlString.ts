@@ -10,7 +10,7 @@ import stripHtml from 'string-strip-html'
  */
 export function stripHtmlString(string: string): string {
   try {
-  return stripHtml(string).result
+    return stripHtml(string).result
   } catch {
     return null
   }
