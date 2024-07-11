@@ -16,6 +16,7 @@ import { ForecastButtons } from './ForecastButtons/ForecastButtons'
 import { NavigatePeriodsButtons } from './NavigatePeriodsButtons'
 import { TodayButton } from './TodayButton'
 import { useActionBar } from './useActionBar'
+import { WorkWeekStatus } from './WorkWeekStatus'
 
 /**
  * @category Timesheet
@@ -46,6 +47,7 @@ export const ActionBar: StyledComponent = () => {
           />
           <DateRangePicker />
           <DateRangeTypeButtons name='dateRangeType' />
+          <WorkWeekStatus />
           <NavigatePeriodsButtons name='period' />
         </ToolbarGroup>
         <ToolbarGroup>

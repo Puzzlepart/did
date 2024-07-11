@@ -1,4 +1,8 @@
 import {
+  ThumbLikeRegular,
+  ThumbLikeFilled,
+  ThumbDislikeRegular,
+  ThumbDislikeFilled,
   AccessibilityRegular,
   AccessibilityFilled,
   AccessibilityQuestionMarkRegular,
@@ -21,6 +25,8 @@ import {
   ArrowImport24Regular,
   ArrowSortUpFilled,
   ArrowSortUpRegular,
+  ArrowSortDownFilled,
+  ArrowSortDownRegular,
   ArrowSync24Filled,
   ArrowSync24Regular,
   ArrowUndo24Filled,
@@ -373,9 +379,21 @@ export const iconCatalog = {
     regular: StoreMicrosoft24Regular,
     filled: StoreMicrosoft24Filled
   },
+  ThumbLike: {
+    regular: ThumbLikeRegular,
+    filled: ThumbLikeFilled
+  },
+  ThumbDislike: {
+    regular: ThumbDislikeRegular,
+    filled: ThumbDislikeFilled
+  },
   ArrowSortUp: {
     regular: ArrowSortUpRegular,
     filled: ArrowSortUpFilled
+  },
+  ArrowSortDown: {
+    regular: ArrowSortDownRegular,
+    filled: ArrowSortDownFilled
   },
   Checkmark: {
     regular: CheckmarkRegular,
