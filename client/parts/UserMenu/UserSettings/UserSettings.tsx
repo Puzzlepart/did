@@ -29,7 +29,7 @@ export const UserSettings: StyledComponent = () => {
                   text: t('common.general'),
                   iconName: 'ContentSettings'
                 },
-                { register }
+                { register, model }
               ],
               timesheet: [
                 Timesheet,
@@ -37,7 +37,7 @@ export const UserSettings: StyledComponent = () => {
                   text: t('common.timesheet'),
                   iconName: 'Timeline'
                 },
-                { register }
+                { register, model }
               ],
               vacation: [
                 Vacation,
@@ -45,7 +45,7 @@ export const UserSettings: StyledComponent = () => {
                   text: t('common.vacation'),
                   iconName: 'WeatherSunnyLow'
                 },
-                { register }
+                { register, model }
               ]
             }}
           />
