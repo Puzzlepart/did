@@ -13,6 +13,7 @@ on:
       - 'package.json'
       - '.deployment'
       - '.deploy/**'
+      - '.github/workflows/on_push_dev_deploy.yml' # This file
 
 jobs:
   package:
