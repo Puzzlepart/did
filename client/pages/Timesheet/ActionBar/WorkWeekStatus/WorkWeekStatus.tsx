@@ -18,17 +18,15 @@ import { useWorkWeekStatus } from './useWorkWeekStatus'
 export const WorkWeekStatus: FC = () => {
   const { timebankEnabled } = useSubscriptionSettings<SubscriptionTimesheetSettings>('timesheet')
   const {
-    allPeriodsConfirmed,
     workWeekHoursDiff,
     text,
     background,
     iconName
   } = useWorkWeekStatus()
   if (!text) return null
-  const condition = allPeriodsConfirmed && timebankEnabled
   return (
     <ConditionalWrapper
-      condition={allPeriodsConfirmed && timebankEnabled}
+      condition={timebankEnabled}
       wrapper={(children) => (
         <Timebank hours={workWeekHoursDiff}>{children}</Timebank>
       )}
@@ -38,7 +36,7 @@ export const WorkWeekStatus: FC = () => {
           marginLeft: 15,
           background,
           color: 'white',
-          cursor: condition ? 'pointer' : 'default'
+          cursor: timebankEnabled ? 'pointer' : 'default'
         }}
         icon={icon(iconName, { bundle: false })}
       >

@@ -18,6 +18,7 @@ export function useTimebank(props: ITimebankProps) {
     const [updateUserTimebank] = useMutation($updateUserTimebank)
     const { periods } = useTimesheetState()
     const entryId = periods.map(({ id }) => id).join('_')
+    const workWeekConfirmed = periods.every(({ isConfirmed }) => isConfirmed)
 
     const [state, setState] = useState<ITimebankState>({
         currentBalance: user.timebank?.balance ?? 0,
@@ -43,6 +44,7 @@ export function useTimebank(props: ITimebankProps) {
     }
 
     return {
+        timebankAdjustmentAvailable: workWeekConfirmed && !state.isTimebankAdjusted,
         state,
         setState,
         onUpdateUserTimebank

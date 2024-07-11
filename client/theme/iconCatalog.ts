@@ -1,4 +1,6 @@
 import {
+  TimeAndWeatherRegular,
+  TimeAndWeatherFilled,
   ThumbLikeRegular,
   ThumbLikeFilled,
   ThumbDislikeRegular,
@@ -175,6 +177,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  TimeAndWeather: {
+    regular: TimeAndWeatherRegular,
+    filled: TimeAndWeatherFilled
+  },
   Accessibility: {
     regular: AccessibilityRegular,
     filled: AccessibilityFilled

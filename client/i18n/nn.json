@@ -81,7 +81,8 @@
       "decrementTimebankText": "Trekk {{balanceAdjustment}} timer fra tidsbanken din",
       "header": "Tidsbank",
       "balanceAdjustedMessage": "Tidsbanken din er oppdatert. Du har nå {{balance}} timer gjenværende i tidsbanken.",
-      "resetTimebankText": "Nullstill tidsbank"
+      "resetTimebankText": "Nullstill tidsbank",
+      "balanceAdjustmentNotAvailable": "Du må bekrefte timene dine for uken før du justerer timebanksaldoen. Hvis uken er delt, må begge periodene bekreftes."
     }
   },
   "projects": {

@@ -79,7 +79,8 @@
       "decrementTimebankText": "Subtract {{balanceAdjustment}} hours from your time bank",
       "header": "Timebank",
       "balanceAdjustedMessage": "Your time bank has been updated. You now have {{balance}} hours remaining in the time bank.",
-      "resetTimebankText": "Reset timebank"
+      "resetTimebankText": "Reset timebank",
+      "balanceAdjustmentNotAvailable": "You need to confirm your hours for the week before adjusting timebank balance. If the week is split, both periods needs to be confirmed."
     }
   },
   "projects": {

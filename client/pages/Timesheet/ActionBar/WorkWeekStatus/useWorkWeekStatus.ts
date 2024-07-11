@@ -1,5 +1,5 @@
 import { useAppContext } from 'AppContext'
-import { useTimesheetState } from 'pages/Timesheet/context'
+import { useTimesheetState } from '../../context'
 
 /**
  * Component logic hook for the `WorkWeekStatus` component.
@@ -19,7 +19,6 @@ export function useWorkWeekStatus() {
     (sum, { totalDuration }) => (sum += totalDuration),
     0
   )
-  const allPeriodsConfirmed = periods.every(({ isConfirmed }) => isConfirmed)
   const workWeekHoursDiff = totalHours - workWeekHours
   if (workWeekHoursDiff === 0 || totalHours === 0) {
     return { text, background, iconName }
@@ -33,7 +32,6 @@ export function useWorkWeekStatus() {
     background = '#c50f1f'
   }
   return {
-    allPeriodsConfirmed,
     workWeekHoursDiff,
     text,
     background,
