@@ -9,6 +9,9 @@ import stripHtml from 'string-strip-html'
  * @param str - String
  */
 export function stripHtmlString(string: string): string {
-  if (!string) return null
+  try {
   return stripHtml(string).result
+  } catch {
+    return null
+  }
 }
