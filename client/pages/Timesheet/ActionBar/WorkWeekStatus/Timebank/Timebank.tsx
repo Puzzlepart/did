@@ -37,7 +37,7 @@ export const Timebank: FC<ITimebankProps> = (props) => {
                                         <Slider
                                             min={1}
                                             max={props.hours}
-                                            step={0.5}
+                                            step={0.25}
                                             value={state.balanceAdjustment}
                                             onChange={(_, { value }) => setState(previousState => ({
                                                 ...previousState,
