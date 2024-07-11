@@ -24,6 +24,7 @@ jobs:
 
     - name: Create package
       run: |
+        export NODE_OPTIONS="--max-old-space-size=8192"
         npm run package
       env:
         NODE_ENV: production
