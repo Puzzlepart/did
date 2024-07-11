@@ -8,10 +8,7 @@ import stripHtml from 'string-strip-html'
  *
  * @param str - String
  */
-export function stripHtmlString(string: string): string {
-  try {
-    return stripHtml(string).result
-  } catch {
-    return null
-  }
+export function stripHtmlString(string = ''): string {
+  if(!string) return string
+  return stripHtml(string).result
 }
