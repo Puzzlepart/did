@@ -21,7 +21,8 @@ export const WorkWeekStatus: FC = () => {
         background,
         color: 'white'
       }}
-      icon={icon(iconName, {bundle:false})}>
+      icon={icon(iconName, { bundle: false })}
+    >
       {text}
     </ToolbarButton>
   )

@@ -1,6 +1,4 @@
-import {
-  FormControl
-} from 'components'
+import { FormControl } from 'components'
 import { Tabs } from 'components/Tabs'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,12 +12,7 @@ import { useUserSettings } from './useUserSettings'
  */
 export const UserSettings: StyledComponent = () => {
   const { t } = useTranslation()
-  const {
-    register,
-    model,
-    openPanel,
-    formControlProps
-  } = useUserSettings()
+  const { register, model, openPanel, formControlProps } = useUserSettings()
 
   return useMemo(
     () => (
@@ -30,7 +23,7 @@ export const UserSettings: StyledComponent = () => {
             level={3}
             vertical
             items={{
-              'general': [
+              general: [
                 General,
                 {
                   text: t('common.general'),
@@ -38,23 +31,24 @@ export const UserSettings: StyledComponent = () => {
                 },
                 { register }
               ],
-              'timesheet': [
+              timesheet: [
                 Timesheet,
                 {
-                  text:t('common.timesheet'),
+                  text: t('common.timesheet'),
                   iconName: 'Timeline'
                 },
                 { register }
               ],
-              'vacation': [
+              vacation: [
                 Vacation,
                 {
-                  text:t('common.vacation'),
+                  text: t('common.vacation'),
                   iconName: 'WeatherSunnyLow'
                 },
                 { register }
-              ],
-            }} />
+              ]
+            }}
+          />
         </FormControl>
       </div>
     ),

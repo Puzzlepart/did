@@ -15,8 +15,11 @@ export function useWorkWeekStatus() {
   if (!workWeekHours || loading) {
     return { text, background, iconName }
   }
-  const totalHours = periods.reduce((sum, { totalDuration }) => sum += totalDuration, 0)
-  const workWeekHoursDiff = (totalHours - workWeekHours)
+  const totalHours = periods.reduce(
+    (sum, { totalDuration }) => (sum += totalDuration),
+    0
+  )
+  const workWeekHoursDiff = totalHours - workWeekHours
   if (workWeekHoursDiff === 0 || totalHours === 0) {
     return { text, background, iconName }
   }

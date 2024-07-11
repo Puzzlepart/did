@@ -1,7 +1,4 @@
-import {
-  DropdownControl,
-  InputControl
-} from 'components'
+import { DropdownControl, InputControl } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { CONFIG_KEYS } from '../types'
