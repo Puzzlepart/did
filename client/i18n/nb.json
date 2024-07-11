@@ -706,7 +706,11 @@
     "projectRole": "Prosjektrolle",
     "endDate": "Sluttdato",
     "startDate": "Startdato",
-    "notSet": "Ikke satt"
+    "notSet": "Ikke satt",
+    "workWeekHoursLabel": "Ukentlige arbeidstimer",
+    "workWeekHoursDescription": "Antall timer i en arbeidsuke. Typisk 40 timer med 5 dagers arbeidsuke og 100% ansettelse.",
+    "vacation": "Ferie",
+    "timesheet": "Timeliste"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

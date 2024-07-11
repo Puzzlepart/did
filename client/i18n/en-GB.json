@@ -709,7 +709,11 @@
     "projectRole": "Project Role",
     "startDate": "Start Date",
     "endDate": "End Date",
-    "notSet": "Not set"
+    "notSet": "Not set",
+    "workWeekHoursDescription": "The number of hours in a work week. Typically 40 hours with a 5 day work week and 100% employment.",
+    "workWeekHoursLabel": "Work week hours",
+    "timesheet": "Timesheet",
+    "vacation": "Vacation"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
