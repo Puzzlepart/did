@@ -69,9 +69,11 @@ export const Timebank: FC<ITimebankProps> = (props) => {
                             </>
                         )
                         : (
-                            <MessageBar intent='warning'>
-                                {t('timesheet.timebank.balanceAdjustmentNotAvailable')}
-                            </MessageBar>
+                            <div hidden={state.isTimebankAdjusted}>
+                                <MessageBar intent='warning'>
+                                    {t('timesheet.timebank.balanceAdjustmentNotAvailable')}
+                                </MessageBar>
+                            </div>
                         )}
                 </div>
             </PopoverSurface>
