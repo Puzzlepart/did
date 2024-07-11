@@ -1,7 +1,11 @@
 import { ToolbarButton } from '@fluentui/react-components'
+import { useSubscriptionSettings } from 'AppContext'
+import { ConditionalWrapper } from 'components'
 import React, { FC } from 'react'
-import { useWorkWeekStatus } from './useWorkWeekStatus'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
+import { SubscriptionTimesheetSettings } from 'types'
+import { Timebank } from './Timebank'
+import { useWorkWeekStatus } from './useWorkWeekStatus'
 
 /**
  * Renders a `ToolbarButton` that displays the plus or minus hours for
@@ -12,19 +16,33 @@ import { getFluentIcon as icon } from 'utils/getFluentIcon'
  * @category Timesheet
  */
 export const WorkWeekStatus: FC = () => {
-  const { text, background, iconName } = useWorkWeekStatus()
+  const { timebankEnabled } = useSubscriptionSettings<SubscriptionTimesheetSettings>('timesheet')
+  const {
+    workWeekHoursDiff,
+    text,
+    background,
+    iconName
+  } = useWorkWeekStatus()
   if (!text) return null
   return (
-    <ToolbarButton
-      style={{
-        marginLeft: 15,
-        background,
-        color: 'white'
-      }}
-      icon={icon(iconName, { bundle: false })}
+    <ConditionalWrapper
+      condition={timebankEnabled}
+      wrapper={(children) => (
+        <Timebank hours={workWeekHoursDiff}>{children}</Timebank>
+      )}
     >
-      {text}
-    </ToolbarButton>
+      <ToolbarButton
+        style={{
+          marginLeft: 15,
+          background,
+          color: 'white',
+          cursor: timebankEnabled ? 'pointer' : 'default'
+        }}
+        icon={icon(iconName, { bundle: false })}
+      >
+        {text}
+      </ToolbarButton>
+    </ConditionalWrapper >
   )
 }
 

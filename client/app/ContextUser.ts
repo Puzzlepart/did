@@ -1,7 +1,7 @@
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { PermissionScope } from 'security'
 import { UserTheme } from 'theme/types'
-import { Role, User, UserPhoto } from 'types'
+import { Role, User, UserPhoto, UserTimebank } from 'types'
 import _ from 'underscore'
 import { tryParseJson } from 'utils'
 import { getTheme } from '../theme'
@@ -20,6 +20,7 @@ export class ContextUser {
   public photo: UserPhoto
   public theme: UserTheme
   public lastActive: Date
+  public timebank: UserTimebank
 
   /**
    * Constructor for `ContextUser`
@@ -53,7 +54,8 @@ export class ContextUser {
           'role',
           'startPage',
           'photo',
-          'lastActive'
+          'lastActive',
+          'timebank'
         )
       )
       this.configuration = tryParseJson(_user.configuration, {})

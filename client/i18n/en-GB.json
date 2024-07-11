@@ -70,7 +70,18 @@
     "ignoreAllTooltip": "Ignore all unmatched events.",
     "eventNoTitleErrorText": "Please enter a subject for this event. Events without a subject will not be included in the timesheet.",
     "eventDurationModifiedTitle": "Automatically modified event duration",
-    "manuallyResolveEventActionTooltip": "Click to manually resolve the event {{title}}. Remember it's always best to keep your Outlook calendar up to date."
+    "manuallyResolveEventActionTooltip": "Click to manually resolve the event {{title}}. Remember it's always best to keep your Outlook calendar up to date.",
+    "timebank": {
+      "balance": "You have {{balance}} hours in your time bank.",
+      "balanceAdjustmentLabel": "{{balanceAdjustment}} hours",
+      "balanceAdjustmentHint": "Select the number of hours you want to add to your time bank. It is not necessarily all the extra hours you have worked this week, as you may be taking some hours as overtime.",
+      "incrementTimebankText": "Store {{balanceAdjustment}} hours in your time bank",
+      "decrementTimebankText": "Subtract {{balanceAdjustment}} hours from your time bank",
+      "header": "Timebank",
+      "balanceAdjustedMessage": "Your time bank has been updated. You now have {{balance}} hours remaining in the time bank.",
+      "resetTimebankText": "Reset timebank",
+      "balanceAdjustmentNotAvailable": "You need to confirm your hours for the week before adjusting timebank balance. If the week is split, both periods needs to be confirmed."
+    }
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -376,7 +387,9 @@
     "domainRestrictionLabel": "Restrict access to users in the following domain",
     "domainRestrictionDescription": "In addition to the Entra ID security group, you can restrict access to the application to users in the specified domain. If the field is empty, all users in the Entra ID security group will have access to the application.",
     "customersHeader": "Customers",
-    "projectsHeader": "Projects"
+    "projectsHeader": "Projects",
+    "timesheetTimebankEnabledLabel": "Enable Timebank",
+    "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",

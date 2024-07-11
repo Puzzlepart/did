@@ -1,5 +1,5 @@
 import { useAppContext } from 'AppContext'
-import { useTimesheetState } from 'pages/Timesheet/context'
+import { useTimesheetState } from '../../context'
 
 /**
  * Component logic hook for the `WorkWeekStatus` component.
@@ -25,11 +25,16 @@ export function useWorkWeekStatus() {
   }
 
   if (workWeekHoursDiff > 0) {
-    text = `${workWeekHoursDiff} timer`
+    text = `${workWeekHoursDiff.toFixed(2)} timer`
     background = '#0e700e'
   } else {
-    text = `${workWeekHoursDiff * -1} timer`
+    text = `${(workWeekHoursDiff * -1).toFixed(2)} timer`
     background = '#c50f1f'
   }
-  return { text, background, iconName }
+  return {
+    workWeekHoursDiff,
+    text,
+    background,
+    iconName
+  }
 }

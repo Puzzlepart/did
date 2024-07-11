@@ -17,6 +17,7 @@ import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import {
   ActiveDirectoryUser,
+  UpdateUserTimebankResult,
   User,
   UserFeedback,
   UserFeedbackResult,
@@ -176,6 +177,40 @@ export class UserResolver {
   ): Promise<BaseResult> {
     await this._userSvc.updateCurrentUserConfiguration(user, lastActive)
     return { success: true }
+  }
+
+  /**
+   * Update user timebank for the current user.
+   */
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
+  @Mutation(() => UpdateUserTimebankResult, { description: 'Updates the balance of the user timebank' })
+  async updateUserTimebank(
+    @Ctx() context: RequestContext,
+    @Arg('balanceAdjustment', { nullable: false }) balanceAdjustment: number,
+    @Arg('entryId', { nullable: false }) entryId: string,
+    @Arg('reset', { nullable: true }) reset: boolean,
+  ): Promise<UpdateUserTimebankResult> {
+    try {
+      const user = await this._userSvc.getById(context.userId)
+      user.timebank = {
+        balance: reset ? 0 : (user.timebank?.balance ?? 0) + balanceAdjustment,
+        lastUpdated: new Date(),
+        entries: reset
+          ? []
+          : [
+            ...(user.timebank?.entries ?? []),
+            {
+              id: entryId,
+              balanceAdjustment
+            }
+          ]
+      }
+      await this._userSvc.updateUser(user, ['timebank'])
+      return { success: true, balance: user.timebank.balance }
+    } catch (error) {
+      debug('There was an issue updating the user timebank: ', error.message)
+      return { success: false }
+    }
   }
 
   /**

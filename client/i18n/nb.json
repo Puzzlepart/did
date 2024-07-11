@@ -69,7 +69,18 @@
     "monthConfirmedText": "Totalt **{{hours}}** bekreftet denne måneden. Du har bekreftet {{confirmedPeriodsCount}} av {{periodsCount}} perioder. Du må være i **Oversikt**-visningen for å gjøre justeringer.",
     "ignoreAllTooltip": "Ignorer alle hendelser som ikke er tilkoblet ett prosjekt.",
     "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten.",
-    "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet"
+    "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
+    "timebank": {
+      "balance": " Du har {{balance}} timer i tidsbanken din.",
+      "balanceAdjustmentLabel": "{{balanceAdjustment}} timer",
+      "balanceAdjustmentHint": "Velg antall timer du vil legge til i tidsbanken din. Det er ikke nødvendigvis alle de ekstra timene du har jobbet denne uken, da du muligens tar ut noen timer som overtid.",
+      "incrementTimebankText": "Lagre {{balanceAdjustment}} timer i tidsbanken din",
+      "decrementTimebankText": "Trekk {{balanceAdjustment}} timer fra tidsbanken din",
+      "header": "Tidsbank",
+      "balanceAdjustedMessage": "Tidsbanken din er oppdatert. Du har nå {{balance}} timer gjenværende i tidsbanken.",
+      "resetTimebankText": "Nullstill tidsbank",
+      "balanceAdjustmentNotAvailable": "Du må bekrefte timene dine for uken før du justerer timebanksaldoen. Hvis uken er delt, må begge periodene bekreftes."
+    }
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
@@ -375,7 +386,9 @@
     "domainRestrictionEnabledLabel": "Aktiver domenebegrensning",
     "domainRestrictionEnabledDescription": "I tillegg til Entra ID-sikkerhetsgruppen kan du begrense tilgangen til applikasjonen til brukere i det angitte domenet.",
     "projectsHeader": "Prosjekter",
-    "customersHeader": "Kunder"
+    "customersHeader": "Kunder",
+    "timesheetTimebankEnabledLabel": "Aktiver Tidsbank",
+    "timesheetTimebankEnabledDescription": "Når tidbank er aktivert, kan ansatte akkumulere overtidstimer som kan brukes til fritid på et senere tidspunkt. Dette gir fleksibilitet og mulighet for bedre balanse mellom arbeid og fritid."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

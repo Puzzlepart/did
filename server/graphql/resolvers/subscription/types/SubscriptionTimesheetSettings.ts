@@ -14,6 +14,9 @@ export class SubscriptionTimesheetSettings {
 
   @Field({ nullable: true, defaultValue: 'HH:mm' })
   timeFormat?: string
+
+  @Field({ nullable: true })
+  timebankEnabled?: boolean
 }
 
 /**
@@ -28,4 +31,7 @@ export class SubscriptionTimesheetSettingsInput {
 
   @Field({ nullable: true, defaultValue: 'HH:mm' })
   timeFormat?: string
+
+  @Field({ nullable: true })
+  timebankEnabled?: boolean
 }
