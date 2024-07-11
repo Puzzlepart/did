@@ -10,9 +10,9 @@ export const AppSwitch: FC = () => {
   const location = useLocation()
   const { pages, dispatch } = useAppContext()
   const [, hasPermission] = usePermissions()
-  const page = location?.pathname.split('/')[1]
+  // const page = location?.pathname.split('/')[1]
 
-  useEffect(() => dispatch(RESET_BREADCRUMB()), [page])
+  // useEffect(() => dispatch(RESET_BREADCRUMB()), [page])
 
   return (
     <Switch>
@@ -20,7 +20,7 @@ export const AppSwitch: FC = () => {
         <Route key={index} path={Page.path}>
           {hasPermission(Page.permission) ? (
             <>
-              <MobileBreadcrumb page={Page} hidden={Page.path === '/'} />
+              {/* <MobileBreadcrumb page={Page} hidden={Page.path === '/'} /> */}
               <div className={styles.container}>
                 <Page />
               </div>

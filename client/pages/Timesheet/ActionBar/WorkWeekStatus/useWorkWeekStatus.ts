@@ -19,6 +19,7 @@ export function useWorkWeekStatus() {
     (sum, { totalDuration }) => (sum += totalDuration),
     0
   )
+  const allPeriodsConfirmed = periods.every(({ isConfirmed }) => isConfirmed)
   const workWeekHoursDiff = totalHours - workWeekHours
   if (workWeekHoursDiff === 0 || totalHours === 0) {
     return { text, background, iconName }
@@ -31,5 +32,11 @@ export function useWorkWeekStatus() {
     text = `${workWeekHoursDiff * -1} timer`
     background = '#c50f1f'
   }
-  return { text, background, iconName }
+  return {
+    allPeriodsConfirmed,
+    workWeekHoursDiff,
+    text,
+    background,
+    iconName
+  }
 }

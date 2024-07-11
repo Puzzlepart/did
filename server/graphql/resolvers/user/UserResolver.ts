@@ -179,6 +179,29 @@ export class UserResolver {
   }
 
   /**
+   * Update user timebank for the current user.
+   */
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
+  @Mutation(() => BaseResult, { description: 'Updates the balance of the user timebank' })
+  async updateUserTimebank(
+    @Ctx() context: RequestContext,
+    @Arg('hours', { nullable: false }) hours: number,
+  ): Promise<BaseResult> {
+    try {
+      const user = await this._userSvc.getById(context.userId)
+      // user.timebank = {
+      //   balance: hours,
+      //   lastUpdated: new Date(),
+      // }
+      // await this._userSvc.updateUser(user)
+      return { success: true }
+    } catch (error) {
+      debug('There was an issue updating the user timebank: ', error.message)
+      return { success: false }
+    }
+  }
+
+  /**
    * Submit feedback to GitHub repository configured in the
    * environment.
    *

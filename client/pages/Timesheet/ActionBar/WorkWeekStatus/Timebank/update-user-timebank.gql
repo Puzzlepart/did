@@ -1,0 +1,7 @@
+mutation UpdateUserTimebank($hours: Float!) {
+  result: updateUserTimebank(
+    hours: $hours
+  ) {
+    success
+  }
+}
