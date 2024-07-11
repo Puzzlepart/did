@@ -60,7 +60,6 @@ export class ActiveDirectoryUser {
   accountEnabled?: boolean
 }
 
-
 @ObjectType({
   description: 'A type that describes a User timebank entry',
   simpleResolvers: true
@@ -111,7 +110,6 @@ export class UserTimebankInput {
 
   @Field(() => GraphQLDateTime, { nullable: true })
   lastUpdated?: Date
-
 }
 
 @ObjectType({ description: 'A type that describes a User timebank result' })
@@ -196,7 +194,7 @@ export class User {
   @Field({ nullable: true })
   securityGroupId?: string
 
-  @Field(() => UserTimebank,{ nullable: true })
+  @Field(() => UserTimebank, { nullable: true })
   timebank?: UserTimebank
 }
 
@@ -262,7 +260,7 @@ export class UserInput {
   @Field({ nullable: true })
   securityGroupId?: string
 
-  @Field(() => UserTimebankInput,{ nullable: true })
+  @Field(() => UserTimebankInput, { nullable: true })
   timebank?: UserTimebankInput
 }
 

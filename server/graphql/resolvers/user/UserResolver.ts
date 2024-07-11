@@ -183,12 +183,14 @@ export class UserResolver {
    * Update user timebank for the current user.
    */
   @Authorized<IAuthOptions>({ requiresUserContext: true })
-  @Mutation(() => UpdateUserTimebankResult, { description: 'Updates the balance of the user timebank' })
+  @Mutation(() => UpdateUserTimebankResult, {
+    description: 'Updates the balance of the user timebank'
+  })
   async updateUserTimebank(
     @Ctx() context: RequestContext,
     @Arg('balanceAdjustment', { nullable: false }) balanceAdjustment: number,
     @Arg('entryId', { nullable: false }) entryId: string,
-    @Arg('reset', { nullable: true }) reset: boolean,
+    @Arg('reset', { nullable: true }) reset: boolean
   ): Promise<UpdateUserTimebankResult> {
     try {
       const user = await this._userSvc.getById(context.userId)
@@ -198,12 +200,12 @@ export class UserResolver {
         entries: reset
           ? []
           : [
-            ...(user.timebank?.entries ?? []),
-            {
-              id: entryId,
-              balanceAdjustment
-            }
-          ]
+              ...(user.timebank?.entries ?? []),
+              {
+                id: entryId,
+                balanceAdjustment
+              }
+            ]
       }
       await this._userSvc.updateUser(user, ['timebank'])
       return { success: true, balance: user.timebank.balance }

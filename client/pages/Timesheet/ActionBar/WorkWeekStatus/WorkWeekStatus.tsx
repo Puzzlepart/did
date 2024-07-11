@@ -16,13 +16,9 @@ import { useWorkWeekStatus } from './useWorkWeekStatus'
  * @category Timesheet
  */
 export const WorkWeekStatus: FC = () => {
-  const { timebankEnabled } = useSubscriptionSettings<SubscriptionTimesheetSettings>('timesheet')
-  const {
-    workWeekHoursDiff,
-    text,
-    background,
-    iconName
-  } = useWorkWeekStatus()
+  const { timebankEnabled } =
+    useSubscriptionSettings<SubscriptionTimesheetSettings>('timesheet')
+  const { workWeekHoursDiff, text, background, iconName } = useWorkWeekStatus()
   if (!text) return null
   return (
     <ConditionalWrapper
@@ -42,7 +38,7 @@ export const WorkWeekStatus: FC = () => {
       >
         {text}
       </ToolbarButton>
-    </ConditionalWrapper >
+    </ConditionalWrapper>
   )
 }
 
