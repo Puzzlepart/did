@@ -228,7 +228,7 @@ export function useSubscriptionConfig() {
           }
         },
         {
-          id:'timebankEnabled',
+          id: 'timebankEnabled',
           type: 'bool',
           props: {
             label: t('admin.timesheetTimebankEnabledLabel'),
