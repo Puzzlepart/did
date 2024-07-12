@@ -23,7 +23,7 @@ export function useTimebank(props: ITimebankProps) {
     const [state, setState] = useState<ITimebankState>({
         currentBalance: user.timebank?.balance ?? 0,
         balanceAdjustment: props.hours,
-        isTimebankAdjusted: user.timebank.entries?.some(entry => entry.id === entryId)
+        isTimebankAdjusted: (user.timebank?.entries ?? []).some(entry => entry.id === entryId)
     })
 
     /**
