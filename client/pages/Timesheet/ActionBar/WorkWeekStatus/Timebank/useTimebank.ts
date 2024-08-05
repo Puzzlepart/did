@@ -3,6 +3,7 @@ import { useAppContext } from 'AppContext'
 import { useTimesheetState } from 'pages/Timesheet/context'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { toFixed } from '../../../../../../shared/utils/toFixed'
 import { ITimebankProps, ITimebankState } from './types'
 import $updateUserTimebank from './update-user-timebank.gql'
 
@@ -21,8 +22,8 @@ export function useTimebank(props: ITimebankProps) {
   const workWeekConfirmed = periods.every(({ isConfirmed }) => isConfirmed)
 
   const [state, setState] = useState<ITimebankState>({
-    currentBalance: user.timebank?.balance ?? 0,
-    balanceAdjustment: props.hours,
+    currentBalance: toFixed(user.timebank?.balance ?? 0),
+    balanceAdjustment: toFixed(props.hours),
     isTimebankAdjusted: user.timebank?.entries?.some(
       (entry) => entry.id === entryId
     )
@@ -37,13 +38,14 @@ export function useTimebank(props: ITimebankProps) {
     const { data } = await updateUserTimebank({
       variables: { entryId, balanceAdjustment: state.balanceAdjustment, reset }
     })
+    const newBalance = toFixed(data.result.balance)
     setState({
       ...state,
-      currentBalance: data.result.balance,
+      currentBalance: newBalance,
       isTimebankAdjusted: !reset
     })
     displayToast(
-      t('timesheet.timebank.balanceAdjustedMessage', data.result),
+      t('timesheet.timebank.balanceAdjustedMessage', { balance: newBalance }),
       'success'
     )
   }
