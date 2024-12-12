@@ -21,7 +21,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -224,10 +224,19 @@ export default class TimesheetMatchingEngine {
   }
 
   private _findProjectRole(project: Project) {
-    const extensions = tryParseJson(get(project, 'extensions', { default: 'null' }))
+    const extensions = tryParseJson(
+      get(project, 'extensions', { default: 'null' })
+    )
     if (!extensions) return null
-    const resources = get(extensions, `${ProjectResourcesExtensionId}.properties.resources`, { default: [] })
-    const resource = _.find(resources, ({ id }) => id === this._configuration.userId)
+    const resources = get(
+      extensions,
+      `${ProjectResourcesExtensionId}.properties.resources`,
+      { default: [] }
+    )
+    const resource = _.find(
+      resources,
+      ({ id }) => id === this._configuration.userId
+    )
     if (!resource) return null
     return {
       name: resource.projectRole,

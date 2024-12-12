@@ -221,7 +221,7 @@ export class CreateOrUpdateProjectResult {
 @ObjectType({
   description: 'A type that describes a Project Role'
 })
-export class ProjectRole  {
+export class ProjectRole {
   @Field({ nullable: true })
   name: string
 
@@ -237,7 +237,7 @@ export class ProjectRole  {
 export class ProjectRoleInput {
   @Field({ nullable: true })
   name: string
-  
+
   @Field({ nullable: true })
   hourlyRate: number
 }

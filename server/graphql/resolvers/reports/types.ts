@@ -6,7 +6,7 @@ import { Customer, Project, ProjectRole, User } from '../types'
 /**
  * Represents a TimeEntry object with all its properties and relationships.
  * All fields are required except for the role field.
- * 
+ *
  * @category GraphQL ObjectType
  */
 @ObjectType({

@@ -2,7 +2,13 @@ import 'reflect-metadata'
 import { Field, Float, ID, Int, ObjectType } from 'type-graphql'
 import DateUtils, { DateWithTimezone } from '../../../../../shared/utils/date'
 import { stripHtmlString } from '../../../../utils/stripHtmlString'
-import { Customer, EventError, LabelObject, Project, ProjectRole } from '../../types'
+import {
+  Customer,
+  EventError,
+  LabelObject,
+  Project,
+  ProjectRole
+} from '../../types'
 
 /**
  * An Object type that describes a Event

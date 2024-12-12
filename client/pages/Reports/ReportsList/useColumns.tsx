@@ -78,24 +78,22 @@ export function useColumns() {
               displayIcon: true
             }),
             data: {
-              isSortable: true,
+              isSortable: true
             }
           }
         ),
-        createColumnDef<TimeEntry>(
-          'role.name',
-          t('projects.roleFieldLabel'),
-          {
-            minWidth: 100,
-            data: { hidden: true }
-          }),
+        createColumnDef<TimeEntry>('role.name', t('projects.roleFieldLabel'), {
+          minWidth: 100,
+          data: { hidden: true }
+        }),
         createColumnDef<TimeEntry>(
           'role.hourlyRate',
           t('common.hourlyRateLabel'),
           {
             minWidth: 100,
             data: { hidden: true }
-          }),
+          }
+        ),
         createColumnDef<TimeEntry>(
           'startEndDateTime',
           t('common.timeLabel'),

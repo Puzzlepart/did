@@ -34,8 +34,10 @@ export const DefaultGetProjectsDataOptions: GetProjectsDataOptions = {
   cache: true
 }
 
-export const ProjectResourcesExtensionId = '2dfbce96-947f-4c26-95b4-5eda10616074'
-export const ProjectRoleDefinitionsExtensionId = '3f04bf7b-2a80-4e28-843d-64d1bd622ea7'
+export const ProjectResourcesExtensionId =
+  '2dfbce96-947f-4c26-95b4-5eda10616074'
+export const ProjectRoleDefinitionsExtensionId =
+  '3f04bf7b-2a80-4e28-843d-64d1bd622ea7'
 export const BudgetTrackingExtensionId = '4bb5dfa9-a742-4692-8aa9-86de79961a70'
 
 export class ProjectResourcesExtension extends Extension {

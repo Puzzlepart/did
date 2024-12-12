@@ -5,7 +5,9 @@ import { Project } from 'types'
 /**
  * Props for the ProjectLink component.
  */
-export interface IProjectTagProps extends Omit<HTMLProps<HTMLDivElement>, 'size'>, Pick<InteractionTagProps, 'size'> {
+export interface IProjectTagProps
+  extends Omit<HTMLProps<HTMLDivElement>, 'size'>,
+    Pick<InteractionTagProps, 'size'> {
   /**
    * The project to link to.
    */

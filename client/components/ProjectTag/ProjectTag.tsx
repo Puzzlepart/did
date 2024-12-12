@@ -20,7 +20,7 @@ import ReactMarkdown from 'react-markdown'
 
 /**
  * A tag for a project. The tag can be copied to the clipboard and favorited.
- * 
+ *
  * @category Reusable Component
  */
 export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
