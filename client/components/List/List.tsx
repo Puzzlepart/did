@@ -43,7 +43,7 @@ List.defaultProps = {
   },
   listGroupProps: {
     fieldName: null,
-    emptyGroupName: ''
+    emptyGroupName: null
   },
   defaultSearchBoxWidth: 500,
   filterValues: {},

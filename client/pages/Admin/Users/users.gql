@@ -9,6 +9,11 @@ query UsersAdmin {
     mail
     preferredLanguage
     accountEnabled
+    manager {
+      id
+      mail
+      displayName
+    }
   }
   users {
     id

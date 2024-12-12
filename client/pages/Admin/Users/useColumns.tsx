@@ -83,7 +83,12 @@ export function useColumns(
               }
             }
           },
-          data: { hidden: isMobile, isSortable: true, isGroupable: true }
+          data: {
+            hidden: isMobile,
+            isSortable: true,
+            isGroupable: true,
+            groupOptions: { emptyGroupName: t('common.noManagerLabel') }
+          }
         }
       ),
       createColumnDef<User>(

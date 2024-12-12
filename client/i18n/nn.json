@@ -727,7 +727,8 @@
     "vacation": "Ferie",
     "timesheet": "Timeliste",
     "managerLabel": "Leder",
-    "hourlyRateLabel": "Timepris"
+    "hourlyRateLabel": "Timepris",
+    "noManagerLabel": "Ingen leder tildelt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

@@ -144,11 +144,11 @@ export class MSGraphService {
    *
    * @public
    *
-   * @param pageLimit - Page limit (default: 999)
+   * @param pageLimit - Page limit (default: 100)
    *
    * @memberof MSGraphService
    */
-  public getUsers(pageLimit = 999): Promise<any> {
+  public getUsers(pageLimit = 100): Promise<any> {
     try {
       return this._cache.usingCache(
         async () => {
@@ -166,8 +166,10 @@ export class MSGraphService {
               'mobilePhone',
               'mail',
               'preferredLanguage',
-              'accountEnabled'
+              'accountEnabled',
+              'manager'
             ])
+            .expand('manager')
             .top(pageLimit)
             .get()
           let users = [...response.value]

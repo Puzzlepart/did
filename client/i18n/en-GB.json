@@ -729,7 +729,8 @@
     "timesheet": "Timesheet",
     "vacation": "Vacation",
     "managerLabel": "Manager",
-    "hourlyRateLabel": "Hourly Rate"
+    "hourlyRateLabel": "Hourly Rate",
+    "noManagerLabel": "No Manager Assigned"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

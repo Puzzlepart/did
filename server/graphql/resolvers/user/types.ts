@@ -22,44 +22,6 @@ export class UserPhoto {
   base64?: string
 }
 
-/**
- * A type that describes a ActiveDirectoryUser
- *
- * @category GraphQL ObjectType
- */
-@ObjectType({
-  description: 'A type that describes a ActiveDirectoryUser',
-  simpleResolvers: true
-})
-export class ActiveDirectoryUser {
-  @Field(() => ID)
-  id?: string
-
-  @Field({ nullable: true })
-  displayName?: string
-
-  @Field({ nullable: true })
-  givenName?: string
-
-  @Field({ nullable: true })
-  surname?: string
-
-  @Field({ nullable: true })
-  jobTitle?: string
-
-  @Field({ nullable: true })
-  mobilePhone?: string
-
-  @Field({ nullable: true })
-  mail?: string
-
-  @Field({ nullable: true })
-  preferredLanguage?: string
-
-  @Field({ nullable: true })
-  accountEnabled?: boolean
-}
-
 @ObjectType({
   description: 'A type that describes a User timebank entry',
   simpleResolvers: true
@@ -258,13 +220,16 @@ export class UserInput {
 
   /**
    * If the user is enrolled in did through a security group,
-   * this will be the security group id.
+   * this will be the security group ID.
    */
   @Field({ nullable: true })
   securityGroupId?: string
 
   @Field(() => UserTimebankInput, { nullable: true })
   timebank?: UserTimebankInput
+
+  @Field(() => UserInput, { nullable: true })
+  manager?: UserInput
 }
 
 /**
@@ -328,4 +293,45 @@ export class UserFeedback {
 export class UserFeedbackResult extends BaseResult {
   @Field({ nullable: true })
   ref?: number
+}
+
+/**
+ * A type that describes a ActiveDirectoryUser
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a ActiveDirectoryUser',
+  simpleResolvers: true
+})
+export class ActiveDirectoryUser {
+  @Field(() => ID)
+  id?: string
+
+  @Field({ nullable: true })
+  displayName?: string
+
+  @Field({ nullable: true })
+  givenName?: string
+
+  @Field({ nullable: true })
+  surname?: string
+
+  @Field({ nullable: true })
+  jobTitle?: string
+
+  @Field({ nullable: true })
+  mobilePhone?: string
+
+  @Field({ nullable: true })
+  mail?: string
+
+  @Field({ nullable: true })
+  preferredLanguage?: string
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
+
+  @Field(() => User, { nullable: true })
+  manager?: User
 }
