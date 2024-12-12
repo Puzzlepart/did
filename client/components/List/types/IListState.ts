@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { IListColumn } from './IListColumn'
@@ -40,17 +41,24 @@ export interface IListState<T = any> extends Pick<IListProps, 'filterValues'> {
   columnHeaderContextMenu?: ColumnHeaderContextMenu
 
   /**
-   * Group by column
+   * Group by options - column
    */
   groupBy?: IListColumn
 
   /**
-   * Filter by column
+   * Filter by options - column 
    */
   filterBy?: IListColumn
+
+  /**
+   * Sort by options - column and direction
+   */
+  sortOpts?: SortOptions
 
   /**
    * Is filter panel open
    */
   filterPanel?: Pick<IFilterPanelProps, 'open'>
 }
+
+export type SortOptions = [string, 'asc' | 'desc']

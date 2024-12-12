@@ -49,7 +49,7 @@ export const Users: TabComponent<ITabProps> = () => {
                   SelectionMode.multiple,
                   (selected) =>
                     context.dispatch(SET_SELECTED_USERS(selected as User[]))
-                ]
+                ],
               } as IListProps<User>
             ],
             disabled: [

@@ -28,6 +28,10 @@ query UsersAdmin {
       permissions
       readOnly
     }
+    manager {
+      id
+      displayName
+    }
     photo {
       base64
     }

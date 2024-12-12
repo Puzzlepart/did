@@ -50,6 +50,5 @@ List.defaultProps = {
   menuItems: [],
   getColumnStyle: () => ({}),
   minmalHeaderColumns: true,
-  selectionProps: [SelectionMode.none],
-  getKey: (_item, index) => `list_item_${index}`
+  selectionProps: [SelectionMode.none]
 }

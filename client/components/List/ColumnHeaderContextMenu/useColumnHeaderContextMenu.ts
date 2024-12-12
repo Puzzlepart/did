@@ -8,9 +8,11 @@ import { useListContext } from '../context'
 import {
   DISMISS_COLUMN_HEADER_CONTEXT_MENU,
   SET_FILTER_BY,
-  SET_GROUP_BY
+  SET_GROUP_BY,
+  SET_SORT
 } from '../reducer'
 import { IListColumnData } from '../types'
+import _ from 'underscore'
 
 export function useColumnHeaderContextMenu(): IContextualMenuProps {
   const { t } = useTranslation()
@@ -21,12 +23,22 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
   const items: IContextualMenuItem[] = [
     columnData.isSortable && {
       key: 'SORT_DESC',
-      text: t('common.sortDesc')
+      text: t('common.sortDesc'),
+      onClick: () => {
+        context.dispatch(SET_SORT({ column, direction: 'desc' }))
+      },
+      checked: _.isEqual(context.state.sortOpts, [column.fieldName, 'desc'])
     },
-    columnData.isSortable && {
-      key: 'SORT_ASC',
-      text: t('common.sortAsc')
-    },
+    columnData.isSortable &&
+      ({
+        key: 'SORT_ASC',
+        text: t('common.sortAsc'),
+        onClick: () => {
+          context.dispatch(SET_SORT({ column, direction: 'asc' }))
+        },
+        canCheck: true,
+        checked: _.isEqual(context.state.sortOpts, [column.fieldName, 'asc'])
+      } as IContextualMenuItem),
     columnData.isFilterable && {
       key: 'DIVIDER_0',
       itemType: ContextualMenuItemType.Divider

@@ -724,7 +724,8 @@
     "workWeekHoursLabel": "Ukentlige arbeidstimer",
     "workWeekHoursDescription": "Talet på timar i ei arbeidsveke. Typisk 40 timar med 5 dagars arbeidsveke og 100% tilsetjing.",
     "vacation": "Ferie",
-    "timesheet": "Timeliste"
+    "timesheet": "Timeliste",
+    "managerLabel": "Leder"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

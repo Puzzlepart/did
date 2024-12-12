@@ -128,7 +128,11 @@ export class MSGraphService {
   public async getCurrentUser(properties: string[]): Promise<any> {
     try {
       const client = await this._getClient()
-      const value = await client.api('/me').select(properties).get()
+      const value = await client
+        .api('/me')
+        .expand('manager')
+        .select([...properties, 'manager'])
+        .get()
       return value
     } catch (error) {
       throw new MSGraphError('getCurrentUser', error.message)

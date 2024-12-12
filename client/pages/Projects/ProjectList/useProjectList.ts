@@ -1,13 +1,12 @@
 /* eslint-disable unicorn/consistent-function-scoping */
-import { Project } from 'types'
+import { InactiveCheckboxMenuItem } from 'components'
+import { IListProps, ListMenuItem } from 'components/List'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useBoolean } from 'usehooks-ts'
+import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'
-import { useMemo } from 'react'
-import { useProjectsContext } from '../context'
-import { IListProps, ListMenuItem } from 'components/List'
-import { useTranslation } from 'react-i18next'
-import { InactiveCheckboxMenuItem } from 'components'
 
 /**
  * Component logic hook for `<ProjecList />`. This hook is used to
@@ -25,10 +24,6 @@ export function useProjectList(props: IProjectListProps) {
   const context = useProjectsContext()
   const showInactive = useBoolean(false)
   const columns = useColumns(props)
-
-  function getKey(project: Project, index: number) {
-    return `project_list_item_${project?.tag ?? index}`
-  }
 
   const items = useMemo(() => {
     let projects = context?.state?.projects ?? []
@@ -56,7 +51,6 @@ export function useProjectList(props: IProjectListProps) {
     items,
     columns,
     menuItems,
-    showInactive,
-    getKey
+    showInactive
   }
 }

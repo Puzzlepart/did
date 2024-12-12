@@ -9,6 +9,7 @@ import { IMenuItemProps } from './types'
  */
 export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
   let onClick: MouseEventHandler<any> = props.onClick
+
   if (props.href) {
     onClick = () => {
       window.location.replace(props.href)

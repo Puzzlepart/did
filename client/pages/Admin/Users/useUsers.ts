@@ -60,7 +60,7 @@ export function useUsers() {
     query.refetch()
   }
 
-  const columns = useColumns()
+  const columns = useColumns(context)
   const menuItems = useUsersMenuItems(context)
 
   return {

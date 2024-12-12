@@ -196,6 +196,9 @@ export class User {
 
   @Field(() => UserTimebank, { nullable: true })
   timebank?: UserTimebank
+
+  @Field(() => User, { nullable: true })
+  manager?: User
 }
 
 /**

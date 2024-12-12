@@ -7,6 +7,7 @@ import {
   Selection,
   SelectionMode
 } from '@fluentui/react'
+import * as arraySort from 'array-sort'
 import React from 'react'
 import _ from 'underscore'
 import { IListContext } from './context'
@@ -48,14 +49,18 @@ export function useListProps({
   if (context.props.checkboxVisibility) {
     checkboxVisibility = context.props.checkboxVisibility
   }
+  const sortedItems = context.state.sortOpts
+    ? arraySort([...items], context.state.sortOpts[0], {
+        reverse: context.state.sortOpts[1] === 'asc'
+      })
+    : items
   return {
-    getKey: context.props.getKey,
     setKey: 'list',
     enableShimmer: context.props.enableShimmer,
     isPlaceholderData: context.props.enableShimmer,
     selection: selectionMode === SelectionMode.none ? undefined : selection,
     columns,
-    items,
+    items: sortedItems,
     groups,
     selectionMode: selectionMode,
     checkboxVisibility,
