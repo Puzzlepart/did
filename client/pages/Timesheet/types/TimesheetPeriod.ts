@@ -5,12 +5,11 @@ import {
   ClientEventInput,
   EventObject,
   Project,
-  ProjectRole,
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
 import _ from 'underscore'
-import { BrowserStorage } from 'utils'
+import { BrowserStorage, omitTypename } from 'utils'
 
 export enum GetEventsOption {
   /**
@@ -300,7 +299,7 @@ export class TimesheetPeriod {
         id: event.id,
         projectId: event.project.tag,
         manualMatch: event.manualMatch,
-        role: _.omit(event.role, '__typename') as ProjectRole
+        role: omitTypename(event.role)
       }
       if (event.adjustedMinutes) {
         eventInput = {
