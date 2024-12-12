@@ -214,3 +214,30 @@ export class CreateOrUpdateProjectResult {
   @Field({ nullable: true })
   id?: string
 }
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a Project Role'
+})
+export class ProjectRole  {
+  @Field({ nullable: true })
+  name: string
+
+  @Field({ nullable: true })
+  hourlyRate: number
+}
+/**
+ * @category GraphQL InputType
+ */
+@InputType({
+  description: 'A input type that describes a Project Role'
+})
+export class ProjectRoleInput {
+  @Field({ nullable: true })
+  name: string
+  
+  @Field({ nullable: true })
+  hourlyRate: number
+}

@@ -34,8 +34,12 @@ export const DefaultGetProjectsDataOptions: GetProjectsDataOptions = {
   cache: true
 }
 
+export const ProjectResourcesExtensionId = '2dfbce96-947f-4c26-95b4-5eda10616074'
+export const ProjectRoleDefinitionsExtensionId = '3f04bf7b-2a80-4e28-843d-64d1bd622ea7'
+export const BudgetTrackingExtensionId = '4bb5dfa9-a742-4692-8aa9-86de79961a70'
+
 export class ProjectResourcesExtension extends Extension {
-  public id = '2dfbce96-947f-4c26-95b4-5eda10616074'
+  public id = ProjectResourcesExtensionId
   public metadata: ExtensionMetadata = {
     status: 'Available',
     description: 'Project resources'
@@ -43,7 +47,7 @@ export class ProjectResourcesExtension extends Extension {
 }
 
 export class ProjectRoleDefinitionsExtension extends Extension {
-  public id = '3f04bf7b-2a80-4e28-843d-64d1bd622ea7'
+  public id = ProjectRoleDefinitionsExtensionId
   public metadata: ExtensionMetadata = {
     status: 'Available',
     description: 'Project role definitions'
@@ -51,7 +55,7 @@ export class ProjectRoleDefinitionsExtension extends Extension {
 }
 
 export class BudgetTrackingExtension extends Extension {
-  public id = '4bb5dfa9-a742-4692-8aa9-86de79961a70'
+  public id = BudgetTrackingExtensionId
   public metadata: ExtensionMetadata = {
     status: 'Available',
     description: 'Budget tracking'

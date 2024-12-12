@@ -5,6 +5,7 @@ import {
   ClientEventInput,
   EventObject,
   Project,
+  ProjectRole,
   TimesheetPeriodInput,
   TimesheetPeriodObject
 } from 'types'
@@ -298,7 +299,8 @@ export class TimesheetPeriod {
       let eventInput: ClientEventInput = {
         id: event.id,
         projectId: event.project.tag,
-        manualMatch: event.manualMatch
+        manualMatch: event.manualMatch,
+        role: _.omit(event.role, '__typename') as ProjectRole
       }
       if (event.adjustedMinutes) {
         eventInput = {
