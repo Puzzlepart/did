@@ -40,6 +40,7 @@ export function useColumns() {
               showIcon: false
             }),
             data: {
+              isSortable: true,
               isGroupable: true,
               isFilterable: true,
               filterType: ProjectFilter
@@ -57,6 +58,7 @@ export function useColumns() {
               customer
             }),
             data: {
+              isSortable: true,
               isGroupable: true,
               isFilterable: true,
               filterType: CustomerFilter
@@ -67,15 +69,33 @@ export function useColumns() {
           'project.tag',
           t('projects.keyFieldLabel'),
           {
-            minWidth: 160,
-            maxWidth: 180,
+            minWidth: 180,
+            maxWidth: 200,
             renderAs: 'projectTag',
             createRenderProps: ({ project }) => ({
               project,
+              size: 'small',
               displayIcon: true
-            })
+            }),
+            data: {
+              isSortable: true,
+            }
           }
         ),
+        createColumnDef<TimeEntry>(
+          'role.name',
+          t('projects.roleFieldLabel'),
+          {
+            minWidth: 100,
+            data: { hidden: true }
+          }),
+        createColumnDef<TimeEntry>(
+          'role.hourlyRate',
+          t('common.hourlyRateLabel'),
+          {
+            minWidth: 100,
+            data: { hidden: true }
+          }),
         createColumnDef<TimeEntry>(
           'startEndDateTime',
           t('common.timeLabel'),
