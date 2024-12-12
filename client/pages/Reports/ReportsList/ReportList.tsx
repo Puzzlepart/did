@@ -2,14 +2,11 @@ import { CheckboxVisibility } from '@fluentui/react'
 import { List, UserMessage } from 'components'
 import { Progress } from 'components/Progress'
 import { TabComponent } from 'components/Tabs'
-import React, { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
+import React from 'react'
 import _ from 'underscore'
-import { ReportsContext } from '../context'
 import { SET_FILTER_STATE } from '../reducer/actions'
 import { SaveFilterForm } from './SaveFilterForm'
-import { useColumns } from './useColumns'
-import { useMenuItems } from './useMenuItems'
+import { useReportsList } from './useReportsList'
 
 /**
  * Reports list
@@ -17,10 +14,7 @@ import { useMenuItems } from './useMenuItems'
  * @category Reports
  */
 export const ReportsList: TabComponent = () => {
-  const { t } = useTranslation()
-  const context = useContext(ReportsContext)
-  const columns = useColumns()
-  const menuItems = useMenuItems()
+  const { t, context, columns, menuItems } = useReportsList()
   return (
     <div>
       {context.state.loading && (

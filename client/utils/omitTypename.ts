@@ -6,6 +6,6 @@ import { omitDeep } from './omitDeep'
  *
  * @param obj - Object
  */
-export function omitTypename(object: any): any {
+export function omitTypename<T = any, R = T>(object: T): R {
   return omitDeep(deepCopy(object), '__typename')
 }

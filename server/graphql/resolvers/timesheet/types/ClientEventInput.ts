@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { Field, Float, InputType, Int } from 'type-graphql'
+import { ProjectRoleInput } from '../../types'
 
 /**
  * @category GraphQL InputType
@@ -31,4 +32,7 @@ export class ClientEventInput {
 
   @Field(() => Int, { nullable: true })
   adjustedMinutes?: number
+
+  @Field(() => ProjectRoleInput, { nullable: true })
+  role?: ProjectRoleInput
 }

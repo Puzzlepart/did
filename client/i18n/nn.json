@@ -152,7 +152,8 @@
       "rolePlaceholder": "Skriv inn navnet på rollen."
     },
     "resourcesLabel": "Prosjektressurser",
-    "hourlyRate": "kr {{rate}} / time"
+    "hourlyRate": "kr {{rate}} / time",
+    "roleFieldLabel": "Prosjektrolle"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -725,7 +726,8 @@
     "workWeekHoursDescription": "Talet på timar i ei arbeidsveke. Typisk 40 timar med 5 dagars arbeidsveke og 100% tilsetjing.",
     "vacation": "Ferie",
     "timesheet": "Timeliste",
-    "managerLabel": "Leder"
+    "managerLabel": "Leder",
+    "hourlyRateLabel": "Timepris"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

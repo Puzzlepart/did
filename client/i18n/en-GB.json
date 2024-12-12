@@ -151,7 +151,8 @@
       "hourlyRatePlaceholder": "Enter the hourly rate for the role."
     },
     "resourcesLabel": "Project Resources",
-    "hourlyRate": "kr {{rate}} / hour"
+    "hourlyRate": "kr {{rate}} / hour",
+    "roleFieldLabel": "Project Role"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -727,7 +728,8 @@
     "workWeekHoursLabel": "Work week hours",
     "timesheet": "Timesheet",
     "vacation": "Vacation",
-    "managerLabel": "Manager"
+    "managerLabel": "Manager",
+    "hourlyRateLabel": "Hourly Rate"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

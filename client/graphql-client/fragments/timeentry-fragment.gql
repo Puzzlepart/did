@@ -18,4 +18,8 @@ fragment TimeEntryFragment on TimeEntry {
   resource {
     id
   }
+  role {
+    name
+    hourlyRate
+  }
 }

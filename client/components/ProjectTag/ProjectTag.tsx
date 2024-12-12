@@ -19,6 +19,8 @@ import { useProjectTag } from './useProjectTag'
 import ReactMarkdown from 'react-markdown'
 
 /**
+ * A tag for a project. The tag can be copied to the clipboard and favorited.
+ * 
  * @category Reusable Component
  */
 export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
@@ -26,7 +28,7 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
   const { hasOutlookCategory, addOutlookCategory, onTagCopied, colorPresets } =
     useProjectTag(props)
   return (
-    <InteractionTag className={ProjectTag.className}>
+    <InteractionTag className={ProjectTag.className} size={props.size}>
       <CopyToClipboard text={props.project?.tag} onCopy={onTagCopied}>
         <InteractionTagPrimary
           hasSecondaryAction={props.enableFavoriting}
@@ -82,6 +84,7 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
 ProjectTag.displayName = 'ProjectLink'
 ProjectTag.className = styles.projectTag
 ProjectTag.defaultProps = {
+  size: 'medium',
   outlookCategoriesHref:
     'https://outlook.office.com/mail/options/general/categories'
 }

@@ -16,6 +16,9 @@ export function useSaveFilterForm() {
   >(INITIAL_MODEL)
   const inputVisible = useBoolean(false)
 
+  // eslint-disable-next-line no-console
+  console.log('value', value('text'), $)
+
   /**
    * On save filter handler.
    *
