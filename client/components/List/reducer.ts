@@ -106,8 +106,13 @@ export default (initialState: IListState) => {
           }
         })
         .addCase(SET_SORT, (state, { payload }) => {
-          const newSortBy = [payload.column.fieldName, payload.direction] as SortOptions
-          state.sortOpts = _.isEqual(state.sortOpts, newSortBy) ? null : newSortBy
+          const newSortBy = [
+            payload.column.fieldName,
+            payload.direction
+          ] as SortOptions
+          state.sortOpts = _.isEqual(state.sortOpts, newSortBy)
+            ? null
+            : newSortBy
         })
         .addCase(TOGGLE_FILTER_PANEL, (state) => {
           state.filterPanel = {

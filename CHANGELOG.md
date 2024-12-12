@@ -100,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Customer and Project key max length is now configurable in subscription settings [#1231](https://github.com/Puzzlepart/did/issues/1231)
 - Initial support for enhancing the resource management capabilities within the Projects module of our time entry system. [#1237](https://github.com/Puzzlepart/did/issues/1237)
 - Showing week hours summary based on user work week [#1138](https://github.com/Puzzlepart/did/issues/1138)
+- Manager included in user sync [#1244](https://github.com/Puzzlepart/did/issues/1244)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0132---22022024)

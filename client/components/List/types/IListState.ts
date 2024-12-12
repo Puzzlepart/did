@@ -46,7 +46,7 @@ export interface IListState<T = any> extends Pick<IListProps, 'filterValues'> {
   groupBy?: IListColumn
 
   /**
-   * Filter by options - column 
+   * Filter by options - column
    */
   filterBy?: IListColumn
 
