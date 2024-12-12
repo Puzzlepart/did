@@ -1,10 +1,11 @@
+import { InteractionTagProps } from '@fluentui/react-tags-preview'
 import { HTMLProps } from 'react'
 import { Project } from 'types'
 
 /**
  * Props for the ProjectLink component.
  */
-export interface IProjectTagProps extends HTMLProps<HTMLDivElement> {
+export interface IProjectTagProps extends Omit<HTMLProps<HTMLDivElement>, 'size'>, Pick<InteractionTagProps, 'size'> {
   /**
    * The project to link to.
    */

@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
-import { Customer, Project, User } from '../types'
+import { Customer, Project, ProjectRole, User } from '../types'
 
 /**
  * @category GraphQL ObjectType
@@ -61,6 +61,9 @@ export class TimeEntry {
 
   @Field(() => User)
   resource: User
+
+  @Field(() => ProjectRole)
+  role: ProjectRole
 }
 
 /**
