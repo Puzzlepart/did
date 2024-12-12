@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import _ from 'lodash'
 import { useState } from 'react'
 import setValue from 'set-value'
@@ -71,11 +72,11 @@ export function useMap<
       ...string[]
     ]
     if (_.isEmpty(nestedKeys) || !options.useNestedKeys)
-      return $set(new Map($map).set(key, value))
+      return $set((prev) => new Map(prev).set(key, value))
     else {
       let newValue = $map.get(property) ?? ({} as any)
       newValue = _.set(newValue, nestedKeys.join('.'), value)
-      return $set(new Map($map).set(property, newValue))
+      return $set((prev) => new Map(prev).set(property, newValue))
     }
   }
 
