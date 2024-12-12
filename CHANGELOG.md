@@ -316,7 +316,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## ➤ 0.8.0 - 15.10.2020
 ### Added
-- Did now supports forecasting [#355](https://github.com/Puzzlepart/did/issues/355)
+- did now supports forecasting [#355](https://github.com/Puzzlepart/did/issues/355)
 - Better mobile navigation with descriptive labels [#539](https://github.com/Puzzlepart/did/issues/539), [#588](https://github.com/Puzzlepart/did/issues/588)
 - We now have custom error pages [#502](https://github.com/Puzzlepart/did/issues/502)
 - Better error messages [#579](https://github.com/Puzzlepart/did/issues/579)
@@ -328,7 +328,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue with split weeks where the returned events and total hours were wrong [#578](https://github.com/Puzzlepart/did/issues/578)
 - Missing week summary on Admin page [#569](https://github.com/Puzzlepart/did/issues/569) 
 - Could not open week picker in Timesheet under certain conditions [#558](https://github.com/Puzzlepart/did/issues/558)
-- Did now properly matches ÆØÅ in customer and project keys [#550](https://github.com/Puzzlepart/did/issues/550)
+- did now properly matches ÆØÅ in customer and project keys [#550](https://github.com/Puzzlepart/did/issues/550)
 
 
 
@@ -336,7 +336,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## ➤ 0.7.0 - 09.09.2020
 ### Added
-- Rebrand to just "Did" [#412](https://github.com/Puzzlepart/did/issues/412)
+- Rebrand to just "did" [#412](https://github.com/Puzzlepart/did/issues/412)
 - Improved reports landing page [#505](https://github.com/Puzzlepart/did/issues/505)
 - Added customers as a separate column in the Timesheet overview [#496](https://github.com/Puzzlepart/did/issues/496)
 - Show project ID (full key) in ProjectColumnTooltip [#495](https://github.com/Puzzlepart/did/issues/495)
@@ -404,7 +404,7 @@ Need details.
 ### Added
 - Support for adding a project as a category in the users mailbox [#202](https://github.com/Puzzlepart/did/issues/202)
 - Icon picker in project and customer forms [#213](https://github.com/Puzzlepart/did/issues/213)
-- Support for using Did in Teams tabs. No SSO support for now [#170](https://github.com/Puzzlepart/did/issues/170)
+- Support for using did in Teams tabs. No SSO support for now [#170](https://github.com/Puzzlepart/did/issues/170)
 
 ### Fixed
 - Using `get-value` module to get `project.inactive` and `customer.inactive` from event [#212](https://github.com/Puzzlepart/did/issues/212)

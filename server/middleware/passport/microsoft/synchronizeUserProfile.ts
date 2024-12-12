@@ -18,10 +18,13 @@ function evaluateUserSync(
   properties: string[],
   data: Record<string, any>
 ) {
-  const mergedData: Record<string, any> = _.pick({
-    ...data,
-    manager: _.pick(data.manager, 'id', 'mail', 'displayName')
-  }, properties)
+  const mergedData: Record<string, any> = _.pick(
+    {
+      ...data,
+      manager: _.pick(data.manager, 'id', 'mail', 'displayName')
+    },
+    properties
+  )
 
   const needSync = !_.isEqual(
     _.pick(user, [...properties, 'photo']),
