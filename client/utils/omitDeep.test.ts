@@ -9,7 +9,7 @@ test('omitDeep removes __typename deep', (t) => {
       projects: [
         {
           __typename: 'Project',
-          name: 'Did'
+          name: 'did'
         },
         {
           __typename: 'Project',
@@ -20,7 +20,7 @@ test('omitDeep removes __typename deep', (t) => {
     '__typename'
   )
   t.deepEqual(result, {
-    projects: [{ name: 'Did' }, { name: 'Prosjektportalen' }],
+    projects: [{ name: 'did' }, { name: 'Prosjektportalen' }],
     name: 'Puzzlepart'
   })
 })

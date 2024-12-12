@@ -26,7 +26,7 @@ import authRoute from './routes/auth'
 import { environment } from './utils'
 
 /**
- * Did `express` App
+ * did `express` App
  *
  * Defines our `express` app with our middleware
  * for helmet, passport and redis.

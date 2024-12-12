@@ -33,7 +33,8 @@ export function useUsersSync(context: IUsersContext) {
           },
           null as Record<string, any>
         )
-        return userUpdate ? omitTypename({ id: user.id, ...userUpdate }) : null
+        if (!userUpdate) return null
+        return omitTypename({ id: user.id, ...userUpdate })
       })
       .filter(Boolean)
     if (!_.isEmpty(users)) {

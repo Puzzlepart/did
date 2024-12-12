@@ -18,19 +18,13 @@ function evaluateUserSync(
   properties: string[],
   data: Record<string, any>
 ) {
-  const mergedData: Record<string, any> = {
-    ..._.pick(data, properties),
-    photo: {
-      base64: data.photo
-    },
+  const mergedData: Record<string, any> = _.pick({
+    ...data,
     manager: _.pick(data.manager, 'id', 'mail', 'displayName')
-  }
+  }, properties)
 
   const needSync = !_.isEqual(
-    {
-      ..._.pick(user, [...properties, 'manager', 'photo']),
-      manager: _.pick(user.manager, 'id', 'mail', 'displayName')
-    },
+    _.pick(user, [...properties, 'photo']),
     mergedData
   )
 
@@ -56,12 +50,11 @@ export async function synchronizeUserProfile(
     return
   }
   try {
-    const msgraphSrv = new MSGraphService(new MSOAuthService({ user }))
+    const msGraphSvc = new MSGraphService(new MSOAuthService({ user }))
     const [data, userPhoto] = await Promise.all([
-      msgraphSrv.getCurrentUser(properties),
-      msgraphSrv.getUserPhoto('48x48')
+      msGraphSvc.getCurrentUser(properties),
+      msGraphSvc.getUserPhoto('48x48')
     ])
-
     const [needSync, mergedData] = evaluateUserSync(user, properties, {
       ...data,
       photo: userPhoto

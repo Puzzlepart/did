@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ----------------------
-# Did Deployment Script
+# did Deployment Script
 # Version: 0.0.1
 # ----------------------
 
