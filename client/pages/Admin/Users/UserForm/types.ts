@@ -61,6 +61,6 @@ export function createUserInput(user: User, defaultRole = 'User'): UserInput {
     },
     '__typename',
     'photo'
-  )
+  ) as UserInput
   return userInput
 }
