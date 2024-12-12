@@ -13,8 +13,7 @@ import { useProjectList } from './useProjectList'
  */
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const context = useProjectsContext()
-  const { items, columns, menuItems, showInactive, getKey } =
-    useProjectList(props)
+  const { items, columns, menuItems, showInactive } = useProjectList(props)
   return (
     <>
       <List
@@ -23,7 +22,6 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
         items={items}
         columns={columns}
         groups={props.groups}
-        getKey={getKey}
         menuItems={menuItems}
         filterValues={
           showInactive.value

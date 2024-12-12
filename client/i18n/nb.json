@@ -723,7 +723,8 @@
     "workWeekHoursLabel": "Ukentlige arbeidstimer",
     "workWeekHoursDescription": "Antall timer i en arbeidsuke. Typisk 40 timer med 5 dagers arbeidsuke og 100% ansettelse.",
     "vacation": "Ferie",
-    "timesheet": "Timeliste"
+    "timesheet": "Timeliste",
+    "managerLabel": "Leder"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

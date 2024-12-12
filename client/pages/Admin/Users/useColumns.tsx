@@ -9,14 +9,17 @@ import { Role, User } from 'types'
 import { getFluentIcon, getFluentIconWithFallback } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import styles from './Users.module.scss'
+import { IUsersContext } from './context'
 
 /**
  * Returns columns for the `Users` list. The returned function accepts a `type` parameter,
  * which can be either `'active'` or `'disabled'`.
+ * 
+ * @param context - The `Users` context.
  *
  * @category Users
  */
-export function useColumns(): (type: 'active' | 'disabled') => IListColumn[] {
+export function useColumns(context: IUsersContext): (type: 'active' | 'disabled') => IListColumn[] {
   const { t } = useTranslation()
   return (type) => {
     return [
@@ -36,26 +39,45 @@ export function useColumns(): (type: 'active' | 'disabled') => IListColumn[] {
       }),
       createColumnDef<User>('surname', t('common.surnameLabel'), {
         maxWidth: 100,
-        data: { hidden: isMobile }
+        data: { hidden: isMobile, isSortable: true }
       }),
       createColumnDef<User>('givenName', t('common.givenNameLabel'), {
         maxWidth: 120,
-        data: { hidden: isMobile }
+        data: { hidden: isMobile, isSortable: true }
       }),
       createColumnDef<User>('jobTitle', t('common.jobTitleLabel'), {
         maxWidth: 140,
-        data: { hidden: isMobile }
+        data: { hidden: isMobile, isSortable: true }
       }),
       type === 'active' &&
-        createColumnDef<User, TagProps>('role.name', t('common.roleLabel'), {
-          maxWidth: 150,
-          data: { hidden: isMobile },
-          renderAs: 'tag',
-          createRenderProps: (user) => ({
-            icon: getFluentIconWithFallback((user.role as Role)?.icon),
-            size: 'small'
-          })
-        }),
+      createColumnDef<User, TagProps>('role.name', t('common.roleLabel'), {
+        maxWidth: 150,
+        data: { hidden: isMobile, isSortable: true, isGroupable: true },
+        renderAs: 'tag',
+        createRenderProps: (user) => ({
+          icon: getFluentIconWithFallback((user.role as Role)?.icon),
+          size: 'small'
+        })
+      }),
+      createColumnDef<User, PersonaProps>('manager.displayName', t('common.managerLabel'), {
+        minWidth: 240,
+        maxWidth: 240,
+        renderAs: 'persona',
+        createRenderProps: ({ manager }) => {
+          const user = context.state.activeUsers.find((u) => u.id === manager.id)
+          if (!user) return null
+          return {
+            name: user.displayName,
+            secondaryText: user.mail,
+            avatar: {
+              image: {
+                src: user.photo?.base64
+              }
+            }
+          }
+        },
+        data: { hidden: isMobile, isSortable: true, isGroupable: true }
+      }),
       createColumnDef<User>(
         'lastActive',
         t('common.lastActiveLabel'),

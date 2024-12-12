@@ -8,12 +8,16 @@ const debug = createDebug('middleware/passport/synchronizeUserProfile')
 /**
  * Check if user profile synchronization is needed. If needed, return
  * the merged data to update the user.
- * 
+ *
  * @param user - User object
  * @param properties - Properties to check
  * @param data - Data to compare
  */
-function evaluateUserSync(user: User, properties: string[], data: Record<string, any>) {
+function evaluateUserSync(
+  user: User,
+  properties: string[],
+  data: Record<string, any>
+) {
   const mergedData: Record<string, any> = {
     ..._.pick(data, properties),
     photo: {
@@ -22,10 +26,13 @@ function evaluateUserSync(user: User, properties: string[], data: Record<string,
     manager: _.pick(data.manager, 'id', 'mail', 'displayName')
   }
 
-  const needSync = !_.isEqual({
-    ..._.pick(user, [...properties, 'manager', 'photo']),
-    manager: _.pick(user.manager, 'id', 'mail', 'displayName')
-  }, mergedData)
+  const needSync = !_.isEqual(
+    {
+      ..._.pick(user, [...properties, 'manager', 'photo']),
+      manager: _.pick(user.manager, 'id', 'mail', 'displayName')
+    },
+    mergedData
+  )
 
   return [needSync, mergedData] as const
 }
@@ -55,7 +62,10 @@ export async function synchronizeUserProfile(
       msgraphSrv.getUserPhoto('48x48')
     ])
 
-    const [needSync, mergedData] = evaluateUserSync(user, properties, { ...data, photo: userPhoto })
+    const [needSync, mergedData] = evaluateUserSync(user, properties, {
+      ...data,
+      photo: userPhoto
+    })
     if (syncUserPhoto && userPhoto) {
       user.photo = {
         base64: userPhoto
