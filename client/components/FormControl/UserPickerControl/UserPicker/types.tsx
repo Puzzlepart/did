@@ -1,5 +1,6 @@
 import { User } from 'types'
 import { IUserMetadataCellProps } from './SelectedUsersList'
+import { FieldProps } from '@fluentui/react-components'
 
 export type SingleUserPickerValue = string
 export type UserInfo = {
@@ -21,7 +22,7 @@ export type AdditionalMetadataField<P = Record<string, any>> = {
   props?: P
 }
 
-export interface IUserPickerProps {
+export interface IUserPickerProps extends Pick<FieldProps, 'label' | 'hint'> {
   /**
    * The placeholder text for the user picker.
    */
