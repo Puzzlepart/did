@@ -16,6 +16,7 @@ import {
   report_summary
 } from '../queries'
 import { IReportsQuery } from '../types'
+import { useCustomQuery } from '../CustomQueryTab'
 
 /**
  * Returns query properties for preset
@@ -199,13 +200,15 @@ export function useReportsQueries() {
   const lastYearQuery = useLastYearQuery()
   const forecastQuery = useForecastQuery()
   const summaryQuery = useSummaryQuery()
+  const customQuery = useCustomQuery()
   const queries = [
     lastMonthQuery,
     currentMonthQuery,
     currentYearQuery,
     lastYearQuery,
     forecastQuery,
-    summaryQuery
+    summaryQuery,
+    customQuery.query
   ]
 
   const queryTabs = useMemo(

@@ -1,0 +1,15 @@
+#import "../../../graphql-client/fragments/timeentry-fragment.gql"
+
+query CustomQueryReport {
+  timeEntries: report(preset: "CUSTOM_QUERY") {
+    ...TimeEntryFragment
+  }
+  users: users {
+    id
+    displayName
+    mail
+    photo {
+      base64
+    }
+  }
+}

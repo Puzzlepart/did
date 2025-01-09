@@ -416,7 +416,8 @@
     "customQueryHeaderText": "Egendefinert spørring",
     "customQueryEndDate": "Sluttdato",
     "customQueryStartDate": "Startdato",
-    "customQueryUser": "Ansatt"
+    "customQueryUser": "Ansatt",
+    "customQuerySubmit": "Send inn"
   },
   "common": {
     "datePicker": {

@@ -417,7 +417,8 @@
     "customQueryHeaderText": "Custom query",
     "customQueryStartDate": "Start Date",
     "customQueryEndDate": "End Date",
-    "customQueryUser": "Employee"
+    "customQueryUser": "Employee",
+    "customQuerySubmit": "Submit"
   },
   "common": {
     "datePicker": {

@@ -2,6 +2,7 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { IListColumn } from 'components/List/types'
 import { createContext, Dispatch, useContext } from 'react'
 import { IReportsQuery, IReportsState } from './types'
+import { LazyQueryExecFunction } from '@apollo/client'
 
 /**
  * @category Reports
@@ -26,6 +27,8 @@ export interface IReportsContext {
    * The currently selected query preset
    */
   queryPreset: IReportsQuery
+
+  query?: LazyQueryExecFunction<any, any>
 }
 
 /**

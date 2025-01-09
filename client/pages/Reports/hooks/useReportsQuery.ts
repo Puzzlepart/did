@@ -18,12 +18,16 @@ import { default_query } from './useReportsQueries'
  * @category Reports Hooks
  */
 export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
+  // eslint-disable-next-line no-console
+  console.log('useReportsQuery', queryPreset.variables, queryPreset.query)
   const [query, { data, loading }] = useLazyQuery(
-    queryPreset?.query || default_query,
+    queryPreset?.query ?? default_query,
     {
       fetchPolicy: 'no-cache'
     }
   )
+  // eslint-disable-next-line no-console
+  console.log('useReportsQuery', { data, loading })
 
   const reportLinksQuery = useQuery<{ reportLinks: ReportLink[] }>(
     report_links,
@@ -45,7 +49,7 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
   )
 
   useEffect(() => {
-    if (_.isEmpty(queryPreset?.reportLinks)) {
+    if (queryPreset && _.isEmpty(queryPreset?.reportLinks)) {
       query({ variables: queryPreset?.variables })
     }
   }, [queryPreset])

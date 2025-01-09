@@ -1,6 +1,5 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ReportsContext } from '../context'
+import { useReportsContext } from '../context'
 import { useColumns } from './useColumns'
 import { useMenuItems } from './useMenuItems'
 
@@ -9,7 +8,7 @@ import { useMenuItems } from './useMenuItems'
  */
 export function useReportsList() {
   const { t } = useTranslation()
-  const context = useContext(ReportsContext)
+  const context = useReportsContext()
   const columns = useColumns()
   const menuItems = useMenuItems()
   return { t, context, columns, menuItems }
