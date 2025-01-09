@@ -413,7 +413,11 @@
     "fetchDataButton": "Fetch fresh data from the server",
     "reportLinkUpdatedText": "Updated by {{updatedBy}} on {{updatedAt}}.",
     "welcomeHeaderText": "Home",
-    "filterIconPlaceholder": "Search for a filter icon..."
+    "filterIconPlaceholder": "Search for a filter icon...",
+    "customQueryHeaderText": "Custom query",
+    "customQueryStartDate": "Start Date",
+    "customQueryEndDate": "End Date",
+    "customQueryUser": "Employee"
   },
   "common": {
     "datePicker": {

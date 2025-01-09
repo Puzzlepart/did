@@ -1,4 +1,4 @@
-import { Combobox, Option, Persona } from '@fluentui/react-components'
+import { Combobox, Field, Option, Persona } from '@fluentui/react-components'
 import { Shimmered } from 'components/Shimmered'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -18,7 +18,10 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
   const context = useUserPicker(props)
   return (
     <UserPickerContext.Provider value={context}>
-      <div className={UserPicker.className}>
+      <Field
+        className={UserPicker.className}
+        label={props.label}
+        hint={props.hint}>
         <Shimmered
           isDataLoaded={context.state.isDataLoaded}
           width={250}
@@ -52,7 +55,7 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
             <SelectedUsersList />
           </div>
         )}
-      </div>
+      </Field>
     </UserPickerContext.Provider>
   )
 }

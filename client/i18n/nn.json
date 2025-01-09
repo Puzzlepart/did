@@ -413,7 +413,11 @@
     "fetchDataButton": "Hent ferske data fra serveren",
     "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}.",
     "welcomeHeaderText": "Heim",
-    "filterIconPlaceholder": "Søk etter et ikon for filteret..."
+    "filterIconPlaceholder": "Søk etter et ikon for filteret...",
+    "customQueryHeaderText": "Egendefinert spørring",
+    "customQueryStartDate": "Startdato",
+    "customQueryEndDate": "Sluttdato",
+    "customQueryUser": "Ansatt"
   },
   "common": {
     "datePicker": {
