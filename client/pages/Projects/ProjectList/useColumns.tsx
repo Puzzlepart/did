@@ -86,6 +86,19 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
           }
         ),
         createColumnDef<Project>(
+          'parent',
+          t('projects.parentLabel'),
+          {
+            renderAs: 'projectLink',
+            createRenderProps: (project) => ({
+              project: project.parent,
+              onClick: () =>
+                context.dispatch &&
+                context.dispatch(SET_SELECTED_PROJECT(project.parent?.tag))
+            })
+          }
+        ),
+        createColumnDef<Project>(
           'labels',
           t('common.labelFieldLabel'),
           {},

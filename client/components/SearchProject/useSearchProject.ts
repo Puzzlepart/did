@@ -4,19 +4,24 @@ import { Project } from 'types'
 import { arrayMap } from 'utils'
 import { ISuggestionItem } from '../FormControl/AutocompleteControl'
 import $projects from './projects.gql'
+import { ISearchProjectProps } from './types'
 
 /**
  * Component logic hook for `<SearchProject />`. Handles
  * fetching of projects using the query in `projects.gql`,
  * removes inactive projects and maps the result to an
  * array of `ISuggestionItem<Project>`.
+ *
+ * @param props The props for the `<SearchProject />` component
  */
-export function useSearchProject() {
+export function useSearchProject(props: ISearchProjectProps) {
   const { data, loading } = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-and-network'
   })
 
-  const projects = data?.projects.filter((project) => !project.inactive)
+  const projects = data?.projects.filter(
+    (project) => !project.inactive && props.filterFunc(project)
+  )
 
   const items: ISuggestionItem<Project>[] = useMemo(
     () =>

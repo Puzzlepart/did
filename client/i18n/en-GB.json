@@ -152,7 +152,11 @@
     },
     "resourcesLabel": "Project Resources",
     "hourlyRate": "kr {{rate}} / hour",
-    "roleFieldLabel": "Project Role"
+    "roleFieldLabel": "Project Role",
+    "parentProject": "Parent Project",
+    "parentProjectDescription": "Select a parent project to which this project belongs. This is particularly useful for organizing projects hierarchically and maintaining connections between related projects.",
+    "parentLabel": "Parent Project",
+    "childrenLabel": "Child Projects"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

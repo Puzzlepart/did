@@ -10,6 +10,8 @@ import {
   OPEN_EDIT_PANEL,
   SET_SELECTED_PROJECT
 } from './actions'
+import { Project } from 'types'
+import { current } from '@reduxjs/toolkit'
 
 /**
  * Use Projects reducer.
@@ -46,7 +48,12 @@ export function useProjectsReducer() {
         state.error = payload.error as any
       })
       .addCase(SET_SELECTED_PROJECT, (state, { payload }) => {
-        state.selected = payload
+        state.selected =
+          typeof payload === 'string'
+            ? _.find(current(state).projects, ({ tag }) =>
+                fuzzyStringEqual(tag, payload)
+              )
+            : (payload as Project)
       })
       .addCase(OPEN_EDIT_PANEL, (state, { payload }) => {
         state.editProject = payload

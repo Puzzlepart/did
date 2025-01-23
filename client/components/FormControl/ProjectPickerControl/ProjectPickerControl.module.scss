@@ -1,0 +1,22 @@
+.projectPickerControl {
+  position: inherit;
+
+  .selectedLabels {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    >div {
+      margin-bottom: 5px;
+    }
+  }
+
+  .openPickerButton {
+    margin: 12px 0;
+  }
+
+  .noneSelected {
+    font-size: 12px;
+    color: #586069;
+  }
+}

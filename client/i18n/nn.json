@@ -153,7 +153,11 @@
     },
     "resourcesLabel": "Prosjektressurser",
     "hourlyRate": "kr {{rate}} / time",
-    "roleFieldLabel": "Prosjektrolle"
+    "roleFieldLabel": "Prosjektrolle",
+    "parentProject": "Overordna prosjekt",
+    "parentProjectDescription": "Vel eit overordna prosjekt som dette prosjektet høyrer til. Dette er særleg nyttig for å organisere prosjekt hierarkisk og oppretthalde samanhengar mellom relaterte prosjekt.",
+    "parentLabel": "Overordna prosjekt",
+    "childrenLabel": "Underordna prosjekter"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

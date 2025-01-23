@@ -6,6 +6,7 @@ import {
   InputControl,
   InputControlOptions,
   LabelPickerControl,
+  ProjectPickerControl,
   useFormContext
 } from 'components/FormControl'
 import React from 'react'
@@ -87,6 +88,11 @@ export const BasicInfo: ProjectFormTabComponent = () => {
             labels.map((lbl) => lbl.name)
           )
         }
+      />
+      <ProjectPickerControl
+        {...register('parentKey')}
+        label={t('projects.parentProject')}
+        description={t('projects.parentProjectDescription')}
       />
       <CreateOutlookCategory />
     </FormGroup>

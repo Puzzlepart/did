@@ -116,11 +116,17 @@ export class ProjectService extends MongoDocumentService<Project> {
               : Promise.resolve([])
           ])
           const _projects = projects
-            .map((p) => ({
-              ...p,
+            .map<Project>((project) => ({
+              ...project,
               customer:
-                _.find(customers, (c) => c.key === p.customerKey) || null,
-              labels: _.filter(labels, (l) => _.contains(p.labels, l.name))
+                _.find(customers, (c) => c.key === project.customerKey) || null,
+              labels: _.filter(labels, (l) =>
+                _.contains(project.labels, l.name)
+              ),
+              parent: projects.find(({ tag }) => tag === project.parentKey),
+              children: projects.filter(
+                ({ parentKey }) => parentKey === project.tag
+              )
             }))
             .filter(
               (p) => p.customer !== null || !mergedOptions.includeCustomers

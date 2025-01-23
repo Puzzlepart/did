@@ -12,15 +12,19 @@ import { useSearchProject } from './useSearchProject'
 export const SearchProject: ReusableComponent<ISearchProjectProps> = (
   props
 ) => {
-  const [items, disabled] = useSearchProject()
+  const [items, disabled] = useSearchProject(props)
   return (
     <AutocompleteControl
       {...props}
       disabled={disabled}
       items={items}
-      placeholder={props.placeholder}
       onSelected={(item) => props.onSelected(item?.data)}
       autoFocus={props.autoFocus}
     />
   )
+}
+
+SearchProject.displayName = 'SearchProject'
+SearchProject.defaultProps = {
+  filterFunc: () => true
 }
