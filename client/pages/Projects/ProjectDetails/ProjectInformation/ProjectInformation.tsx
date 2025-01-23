@@ -7,7 +7,7 @@ import {
 } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { LabelObject as Label, StyledComponent } from 'types'
+import { LabelObject as Label, StyledComponent, SubscriptionProjectsSettings } from 'types'
 import _ from 'underscore'
 import { useProjectsContext } from '../../context'
 import styles from './ProjectInformation.module.scss'
@@ -15,6 +15,7 @@ import { BudgetTracking } from './BudgetTracking'
 import ReactMarkdown from 'react-markdown'
 import { ProjectResources } from './ProjectResources'
 import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer'
+import { useSubscriptionSettings } from 'AppContext'
 
 /**
  * Shows details about the selected project.
@@ -24,6 +25,7 @@ import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer'
 export const ProjectInformation: StyledComponent = () => {
   const { t } = useTranslation()
   const context = useProjectsContext()
+    const settings = useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
 
   return (
     <div className={ProjectInformation.className}>
@@ -62,7 +64,7 @@ export const ProjectInformation: StyledComponent = () => {
         ))}
       </InformationProperty>
       <InformationProperty
-        hidden={!context.state.selected?.parent}
+        hidden={!context.state.selected?.parent || !settings?.enableSimpleHierachy}
         title={t('projects.parentLabel')}
         onRenderValue={() => (
           <ProjectLink
@@ -77,7 +79,7 @@ export const ProjectInformation: StyledComponent = () => {
         isDataLoaded={!context.loading}
       />
       <InformationProperty
-        hidden={_.isEmpty(context.state.selected?.children)}
+        hidden={_.isEmpty(context.state.selected?.children) || !settings?.enableSimpleHierachy}
         title={t('projects.childrenLabel')}
         onRenderValue={() => (
           <div style={{ display: 'flex', flexDirection: 'row', gap: 20 }}>

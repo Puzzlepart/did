@@ -50,6 +50,7 @@ query UserContext {
         enableResourceManagement
         resourceMetadata
         enableProjectRoles
+        enableSimpleHierachy
       }
     }
   }

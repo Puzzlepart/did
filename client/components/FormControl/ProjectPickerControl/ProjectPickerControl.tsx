@@ -14,6 +14,7 @@ export const ProjectPickerControl: FormInputControlComponent<
   const { onSelected } = useProjectPickerControl(props)
   return (
     <SearchProject
+      hidden={props.hidden}
       label={props.label}
       description={props.description}
       placeholder={props.placeholder}

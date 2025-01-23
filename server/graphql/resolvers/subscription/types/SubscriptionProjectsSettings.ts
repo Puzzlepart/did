@@ -27,6 +27,9 @@ export class SubscriptionProjectsSettings {
 
   @Field({ nullable: true, defaultValue: false })
   enableProjectRoles?: boolean
+
+  @Field({ nullable: true, defaultValue: false })
+  enableSimpleHierachy?: boolean
 }
 
 /**
@@ -54,4 +57,7 @@ export class SubscriptionProjectsSettingsInput {
 
   @Field({ nullable: true, defaultValue: false })
   enableProjectRoles?: boolean
+
+  @Field({ nullable: true, defaultValue: false })
+  enableSimpleHierachy?: boolean
 }

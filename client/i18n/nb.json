@@ -270,7 +270,9 @@
       "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
       "showMyProjectsByDefaultDescription": "Vis \"Mine prosjekter\" som standard på prosjektsiden.",
       "enableProjectRolesLabel": "Aktiver prosjektroller",
-      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs."
+      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs.",
+      "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter.",
+      "enableSimpleHierachyLabel": "Aktiver hierarki"
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
