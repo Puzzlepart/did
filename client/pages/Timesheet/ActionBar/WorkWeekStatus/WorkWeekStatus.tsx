@@ -28,11 +28,12 @@ export const WorkWeekStatus: FC = () => {
       )}
     >
       <ToolbarButton
+        hidden={!timebankEnabled}
         style={{
           marginLeft: 15,
           background,
           color: 'white',
-          cursor: timebankEnabled ? 'pointer' : 'default'
+          display: timebankEnabled ? 'flex' : 'none'
         }}
         icon={icon(iconName, { bundle: false })}
       >
