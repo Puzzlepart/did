@@ -157,7 +157,8 @@
     "parentProject": "Overordna prosjekt",
     "parentProjectDescription": "Vel eit overordna prosjekt som dette prosjektet høyrer til. Dette er særleg nyttig for å organisere prosjekt hierarkisk og oppretthalde samanhengar mellom relaterte prosjekt.",
     "parentLabel": "Overordna prosjekt",
-    "childrenLabel": "Underordna prosjekter"
+    "childrenLabel": "Underordna prosjekter",
+    "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

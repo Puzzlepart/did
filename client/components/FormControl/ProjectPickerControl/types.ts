@@ -4,5 +4,8 @@ import { FormInputControlBase } from '../types'
 
 export interface IProjectPickerControlProps
   extends FormInputControlBase,
-    Pick<ISearchProjectProps, 'label' | 'placeholder' | 'description'>,
+    Pick<
+      ISearchProjectProps,
+      'label' | 'placeholder' | 'description' | 'disabledText'
+    >,
     Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {}

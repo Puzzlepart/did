@@ -40,7 +40,8 @@ export const AutocompleteControl: FormInputControlComponent<
             'label',
             'description',
             'required',
-            'hidden'
+            'hidden',
+            'title'
           )}
         >
           <div ref={ref} className={styles.container}>

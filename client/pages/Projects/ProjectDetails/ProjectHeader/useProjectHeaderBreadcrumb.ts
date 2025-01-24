@@ -18,10 +18,11 @@ export function useProjectHeaderBreadcrumb() {
   const history = useHistory()
   const detailsTab = useSwitchCase(urlParameters.detailsTab, {
     projects: t('customers.projectsHeaderText'),
+    timeEntries: t('projects.timeEntriesHeaderText'),
     default: t('customers.informationHeaderText')
   })
 
-  const breadcrumbItems = useBreadcrumb(
+  return useBreadcrumb(
     [
       {
         value: t('navigation.ProjectsPage'),
@@ -46,5 +47,4 @@ export function useProjectHeaderBreadcrumb() {
     ],
     [state.selected, detailsTab]
   )
-  return breadcrumbItems
 }

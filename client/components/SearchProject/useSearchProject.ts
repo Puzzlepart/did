@@ -5,6 +5,7 @@ import { arrayMap } from 'utils'
 import { ISuggestionItem } from '../FormControl/AutocompleteControl'
 import $projects from './projects.gql'
 import { ISearchProjectProps } from './types'
+import _ from 'lodash'
 
 /**
  * Component logic hook for `<SearchProject />`. Handles
@@ -35,8 +36,8 @@ export function useSearchProject(props: ISearchProjectProps) {
         data: project,
         iconName: project.icon
       })),
-    [data]
+    [projects]
   )
 
-  return [items, loading] as const
+  return [items, loading || _.isEmpty(items)] as const
 }

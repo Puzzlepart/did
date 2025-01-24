@@ -4,6 +4,7 @@ import { FormInputControlComponent } from '../types'
 import styles from './ProjectPickerControl.module.scss'
 import { IProjectPickerControlProps } from './types'
 import { useProjectPickerControl } from './useProjectPickerControl'
+import _ from 'lodash'
 
 /**
  * @category Reusable Component
@@ -11,16 +12,18 @@ import { useProjectPickerControl } from './useProjectPickerControl'
 export const ProjectPickerControl: FormInputControlComponent<
   IProjectPickerControlProps
 > = (props) => {
-  const { onSelected } = useProjectPickerControl(props)
+  const { onSelected, filterFunc } = useProjectPickerControl(props)
   return (
     <SearchProject
-      hidden={props.hidden}
-      label={props.label}
-      description={props.description}
-      placeholder={props.placeholder}
-      filterFunc={(project) =>
-        project?.customer?.key === props.model.value('customerKey')
-      }
+      {..._.pick(
+        props,
+        'hidden',
+        'label',
+        'description',
+        'placeholder',
+        'disabledText'
+      )}
+      filterFunc={filterFunc}
       onSelected={onSelected}
       selectedKey={props.model.value(props.name)}
     />

@@ -27,4 +27,9 @@ export interface ISearchProjectProps
    * @param project Project to filter
    */
   filterFunc?: (project?: Project) => boolean
+
+  /**
+   * Tooltip to display when the component is disabled.
+   */
+  disabledText?: string
 }

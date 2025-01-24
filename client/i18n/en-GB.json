@@ -156,7 +156,8 @@
     "parentProject": "Parent Project",
     "parentProjectDescription": "Select a parent project to which this project belongs. This is particularly useful for organizing projects hierarchically and maintaining connections between related projects.",
     "parentLabel": "Parent Project",
-    "childrenLabel": "Child Projects"
+    "childrenLabel": "Child Projects",
+    "parentProjectDisabledText": "You can only select a parent project under the same customer, and there's no customer selected, or no projects under the selected customer."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

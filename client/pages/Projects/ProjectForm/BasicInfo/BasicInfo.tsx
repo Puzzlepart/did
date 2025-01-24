@@ -22,7 +22,8 @@ import { SubscriptionProjectsSettings } from 'types'
 export const BasicInfo: ProjectFormTabComponent = () => {
   const { t } = useTranslation()
   const { model, register, isEditMode } = useFormContext()
-  const settings = useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
+  const settings =
+    useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
   const customerContext = useCustomersContext()
   const isCustomerContext = !!customerContext
   return (
@@ -97,6 +98,7 @@ export const BasicInfo: ProjectFormTabComponent = () => {
         hidden={!settings?.enableSimpleHierachy}
         label={t('projects.parentProject')}
         description={t('projects.parentProjectDescription')}
+        disabledText={t('projects.parentProjectDisabledText')}
       />
       <CreateOutlookCategory />
     </FormGroup>

@@ -34,7 +34,8 @@ const ColumnWrapper = ({ project, children }) => (
  */
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
-  const settings = useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
+  const settings =
+    useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
   const context = useProjectsContext()
   const outlookCategories = mapProperty(
     context?.state?.outlookCategories,
@@ -87,20 +88,16 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             isMultiline: true
           }
         ),
-       createColumnDef<Project>(
-          'parent',
-          t('projects.parentLabel'),
-          {
-            hidden: !settings?.enableSimpleHierachy,
-            renderAs: 'projectLink',
-            createRenderProps: (project) => ({
-              project: project.parent,
-              onClick: () =>
-                context.dispatch &&
-                context.dispatch(SET_SELECTED_PROJECT(project.parent?.tag))
-            })
-          }
-        ),
+        createColumnDef<Project>('parent', t('projects.parentLabel'), {
+          hidden: !settings?.enableSimpleHierachy,
+          renderAs: 'projectLink',
+          createRenderProps: (project) => ({
+            project: project.parent,
+            onClick: () =>
+              context.dispatch &&
+              context.dispatch(SET_SELECTED_PROJECT(project.parent?.tag))
+          })
+        }),
         createColumnDef<Project>(
           'labels',
           t('common.labelFieldLabel'),
@@ -113,7 +110,10 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             </>
           )
         )
-      ].filter((col) => col.hidden !== true && !(props.hideColumns || []).includes(col.key)),
+      ].filter(
+        (col) =>
+          col.hidden !== true && !(props.hideColumns || []).includes(col.key)
+      ),
     [props.hideColumns, outlookCategories]
   )
 

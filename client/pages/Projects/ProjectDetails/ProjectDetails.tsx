@@ -4,7 +4,6 @@ import { StyledComponent } from 'types'
 import styles from './ProjectDetails.module.scss'
 import { ProjectHeader } from './ProjectHeader'
 import { useProjectDetails } from './useProjectDetails'
-import { ProjectInformation } from './ProjectInformation'
 
 /**
  * Displays the details of a project, including a list of time entries.
@@ -17,7 +16,6 @@ export const ProjectDetails: StyledComponent = () => {
   return (
     <div className={ProjectDetails.className}>
       <ProjectHeader />
-      <ProjectInformation />
       <Tabs items={tabs} level={3} />
     </div>
   )
@@ -25,7 +23,3 @@ export const ProjectDetails: StyledComponent = () => {
 
 ProjectDetails.displayName = 'ProjectDetails'
 ProjectDetails.className = styles.projectDetails
-
-export * from './ProjectHeader'
-export * from './ProjectInformation'
-export * from './ProjectTimeEntries'
