@@ -1,13 +1,9 @@
-import { useMutation } from '@apollo/client'
-import { useAppContext } from 'AppContext'
 import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/ConfirmDialog'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useBoolean } from 'usehooks-ts'
 import { getFluentIcon } from 'utils/getFluentIcon'
-import lockPeriodMutation from './lock-period.gql'
+import { useWeekStatusContext } from '../context'
 import { ILockWeekButtonProps } from './types'
-import { useLockedPeriodsQuery } from './useLockedPeriodsQuery'
 
 /**
  * Component logic hook for the `LockWeekButton` component. Handles
@@ -18,30 +14,33 @@ import { useLockedPeriodsQuery } from './useLockedPeriodsQuery'
  */
 export function useLockWeekButton(props: ILockWeekButtonProps) {
   const { t } = useTranslation()
-  const { displayToast } = useAppContext()
-  const [lockedPeriods] = useLockedPeriodsQuery()
-  const [lockPeriod] = useMutation(lockPeriodMutation)
-  const isLocked = useBoolean(false)
+  const context = useWeekStatusContext()
+  const [lockedPeriod, setLockedPeriod] = useState(null)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
 
   useEffect(() => {
-    isLocked.setValue(
-      lockedPeriods?.some(({ periodId }) => periodId === props.period?.id)
+    setLockedPeriod(
+      context.lockedPeriods?.find(({ periodId }) => periodId === props.period?.id)
     )
-  }, [lockedPeriods, props.period?.id])
+  }, [context.lockedPeriods, props.period?.id])
 
-  const text = isLocked.value
+  const text = Boolean(lockedPeriod)
     ? t('admin.weekStatus.unlockWeekButtonText')
     : t('admin.weekStatus.lockWeekButtonText')
 
-  const icon = getFluentIcon(isLocked.value ? 'LockClosed' : 'LockOpen')
+  const icon = getFluentIcon(Boolean(lockedPeriod) ? 'LockClosed' : 'LockOpen')
 
   /**
    * Handles the click event for the button.
+   * * If the period is not locked, a confirmation dialog is shown.
+   * * If the user confirms, the period is locked/unlocked.
+   * * If the period is locked, it is unlocked.
+   * * If the period is unlocked, it is locked.
+   * * If the period is unlocked, the user can provide a reason for locking.
    */
   const onClick = async () => {
     let reason = null
-    if (!isLocked.value) {
+    if (!Boolean(lockedPeriod)) {
       const { response, comment } = await getResponse({
         title: t('admin.weekStatus.confirmLockTitle'),
         subText: t('admin.weekStatus.confirmLockSubText', {
@@ -59,23 +58,7 @@ export function useLockWeekButton(props: ILockWeekButtonProps) {
       if (!response) return
       reason = comment
     }
-    const { data } = await lockPeriod({
-      variables: {
-        periodId: props.period?.id,
-        unlock: isLocked.value,
-        reason
-      }
-    })
-    if (!data.result?.success) return
-    const period =
-      props.period?.weekNumber +
-      (props.period.monthName ? ` (${props.period.monthName})` : '')
-    if (isLocked.value) {
-      displayToast(t('admin.weekStatus.weekUnlocked', { period }), 'success')
-    } else {
-      displayToast(t('admin.weekStatus.weekLocked', { period }), 'success')
-    }
-    isLocked.toggle()
+    context.onLockPeriod(props.period?.id, reason)
   }
-  return { text, icon, onClick, confirmationDialog }
+  return { text, icon, onClick, lockedPeriod, confirmationDialog }
 }

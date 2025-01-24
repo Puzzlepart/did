@@ -110,7 +110,9 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
           )
       }
       if (typeof header === 'object') {
-        tabProps.icon = getFluentIcon(header?.iconName)
+        tabProps.icon = getFluentIcon(header?.iconName, {
+          color: header.iconColor
+        })
         tabProps.disabled = header?.disabled
       }
       return <Tab key={key} {...tabProps} />
