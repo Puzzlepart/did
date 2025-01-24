@@ -1,4 +1,5 @@
 import { useExcelExport } from 'hooks'
+import { useBoolean } from 'usehooks-ts'
 import { useProjectsContext } from '../../context'
 import columns from '../columns'
 import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
@@ -8,7 +9,8 @@ import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
  */
 export function useProjectTimeEntries() {
   const { state } = useProjectsContext()
-  const { loading, error, timeEntries } = useProjectTimeEntriesQuery()
+  const skip = useBoolean(true)
+  const { loading, error, timeEntries } = useProjectTimeEntriesQuery(skip.value)
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
     '-'
@@ -24,6 +26,7 @@ export function useProjectTimeEntries() {
     loading,
     error,
     onExport,
-    timeEntries
+    timeEntries,
+    skip
   }
 }

@@ -56,6 +56,7 @@ export function useListProps({
     : items
   return {
     setKey: 'list',
+    styles: context.props.styles,
     enableShimmer: context.props.enableShimmer,
     isPlaceholderData: context.props.enableShimmer,
     selection: selectionMode === SelectionMode.none ? undefined : selection,

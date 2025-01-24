@@ -7,10 +7,12 @@ import timeentriesQuery from './timeentries.gql'
 /**
  * Hook for time entries query. Queries GraphQL API with the
  * query specified in `timeentries.gql` and joins the data.
+ * 
+ * @param skip Whether to skip the query
  *
  * @category Projects
  */
-export function useProjectTimeEntriesQuery() {
+export function useProjectTimeEntriesQuery(skip: boolean) {
   const { state } = useProjectsContext()
   const query = useQuery<{
     users: User[]
@@ -19,7 +21,7 @@ export function useProjectTimeEntriesQuery() {
     variables: {
       query: { projectId: state.selected?.tag }
     },
-    skip: !state.selected
+    skip: !state.selected || skip
   })
   const users: User[] = query?.data?.users ?? []
   const timeEntries = (query?.data?.timeEntries ?? []).map((entry) => ({

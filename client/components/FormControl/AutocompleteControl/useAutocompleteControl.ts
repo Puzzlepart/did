@@ -33,7 +33,7 @@ export function useAutocompleteControl(props: IAutocompleteControlProps) {
   useEffect(() => {
     if (_.isEmpty(state.items)) return
     props.onSelected(state.selectedItem ?? null)
-  }, [state.selectedItem])
+  }, [state.selectedItem?.key])
 
   const ref = useRef<HTMLDivElement>(null)
 

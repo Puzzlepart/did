@@ -18,7 +18,6 @@ export function useProjectHeaderBreadcrumb() {
   const history = useHistory()
   const detailsTab = useSwitchCase(urlParameters.detailsTab, {
     projects: t('customers.projectsHeaderText'),
-    timeEntries: t('projects.timeEntriesHeaderText'),
     default: t('customers.informationHeaderText')
   })
 

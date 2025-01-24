@@ -155,7 +155,8 @@
     "parentProjectDescription": "Velg et overordnet prosjekt som dette prosjektet skal tilhøre. Dette er spesielt nyttig for å organisere prosjekter hierarkisk og opprettholde sammenhenger mellom relaterte prosjekter.",
     "parentLabel": "Overordnet prosjekt",
     "childrenLabel": "Underordnede prosjekter",
-    "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden."
+    "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
+    "loadTimeEntriesLabel": "Last inn tidsoppføringer"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
