@@ -70,14 +70,14 @@ export function useConfirmButtons(props: IConfirmButtonsProps) {
       tooltipText =
         selectedPeriod?.errors?.length > 0
           ? t('timesheet.unresolvedErrorText', {
-            count: selectedPeriod.errors.length
-          })
+              count: selectedPeriod.errors.length
+            })
           : t('timesheet.hoursNotMatchedText', {
-            hours: $date.getDurationString(
-              selectedPeriod?.unmatchedDuration ?? 0,
-              t
-            )
-          })
+              hours: $date.getDurationString(
+                selectedPeriod?.unmatchedDuration ?? 0,
+                t
+              )
+            })
     }
   }
 

@@ -23,19 +23,17 @@ export function useLockWeekButton(props: ILockWeekButtonProps) {
   const [lockPeriod] = useMutation(lockPeriodMutation)
   const isLocked = useBoolean(false)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
-  
+
   useEffect(() => {
     isLocked.setValue(
-      lockedPeriods?.some(
-        ({ periodId }) => periodId === props.period?.id
-      )
+      lockedPeriods?.some(({ periodId }) => periodId === props.period?.id)
     )
   }, [lockedPeriods, props.period?.id])
 
   const text = isLocked.value
     ? t('admin.weekStatus.unlockWeekButtonText')
     : t('admin.weekStatus.lockWeekButtonText')
-    
+
   const icon = getFluentIcon(isLocked.value ? 'LockClosed' : 'LockOpen')
 
   /**
@@ -44,10 +42,12 @@ export function useLockWeekButton(props: ILockWeekButtonProps) {
   const onClick = async () => {
     let reason = null
     if (!isLocked.value) {
-      const {response,comment} = await getResponse({
+      const { response, comment } = await getResponse({
         title: t('admin.weekStatus.confirmLockTitle'),
         subText: t('admin.weekStatus.confirmLockSubText', {
-          period: props.period?.weekNumber + (props.period.monthName ? ` (${props.period.monthName})` : '')
+          period:
+            props.period?.weekNumber +
+            (props.period.monthName ? ` (${props.period.monthName})` : '')
         }),
         responses: [
           [t('common.yes'), true, true],
@@ -67,7 +67,9 @@ export function useLockWeekButton(props: ILockWeekButtonProps) {
       }
     })
     if (!data.result?.success) return
-    const period = props.period?.weekNumber + (props.period.monthName ? ` (${props.period.monthName})` : '')
+    const period =
+      props.period?.weekNumber +
+      (props.period.monthName ? ` (${props.period.monthName})` : '')
     if (isLocked.value) {
       displayToast(t('admin.weekStatus.weekUnlocked', { period }), 'success')
     } else {
