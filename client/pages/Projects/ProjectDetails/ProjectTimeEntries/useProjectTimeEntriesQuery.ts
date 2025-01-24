@@ -7,7 +7,7 @@ import timeentriesQuery from './timeentries.gql'
 /**
  * Hook for time entries query. Queries GraphQL API with the
  * query specified in `timeentries.gql` and joins the data.
- * 
+ *
  * @param skip Whether to skip the query
  *
  * @category Projects
