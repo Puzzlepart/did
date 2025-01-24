@@ -9,7 +9,7 @@ export interface IWeekStatusContext {
 
   /**
    * On lock period handler.
-   * 
+   *
    * @param periodId Period ID
    * @param reason The reason for locking the period
    */

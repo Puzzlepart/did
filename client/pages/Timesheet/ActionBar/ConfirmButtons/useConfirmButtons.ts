@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon as icon } from 'utils'
-import { useLockedPeriodsQuery } from '../../../Admin/WeekStatus'
+import { useLockedPeriods } from '../../../Admin/WeekStatus'
 import { useTimesheetContext } from '../../context'
 import { IConfirmButtonsProps } from './types'
 
@@ -21,11 +21,9 @@ import { IConfirmButtonsProps } from './types'
 export function useConfirmButtons(props: IConfirmButtonsProps) {
   const { t } = useTranslation()
   const context = useTimesheetContext()
-  const [lockedPeriods] = useLockedPeriodsQuery()
+  const lockedPeriods = useLockedPeriods()
   const { selectedPeriod, loading, dateRangeType, selectedView } = context.state
-  const isPeriodLocked = lockedPeriods?.some(
-    ({ periodId }) => periodId === selectedPeriod?.id
-  )
+  const isPeriodLocked = lockedPeriods.isLocked(selectedPeriod?.id)
   const isRangeWeek = dateRangeType === DateRangeType.Week
   const isOverview = selectedView?.id === Overview.id
   const isDisabled =

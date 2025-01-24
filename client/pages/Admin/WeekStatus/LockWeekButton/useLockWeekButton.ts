@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils/getFluentIcon'
 import { useWeekStatusContext } from '../context'
 import { ILockWeekButtonProps } from './types'
+import { LockedPeriod } from 'types'
 
 /**
  * Component logic hook for the `LockWeekButton` component. Handles
@@ -15,12 +16,14 @@ import { ILockWeekButtonProps } from './types'
 export function useLockWeekButton(props: ILockWeekButtonProps) {
   const { t } = useTranslation()
   const context = useWeekStatusContext()
-  const [lockedPeriod, setLockedPeriod] = useState(null)
+  const [lockedPeriod, setLockedPeriod] = useState<LockedPeriod>(null)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
 
   useEffect(() => {
     setLockedPeriod(
-      context.lockedPeriods?.find(({ periodId }) => periodId === props.period?.id)
+      context.lockedPeriods?.find(
+        ({ periodId }) => periodId === props.period?.id
+      )
     )
   }, [context.lockedPeriods, props.period?.id])
 
