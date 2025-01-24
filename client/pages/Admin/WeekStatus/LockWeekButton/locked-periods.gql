@@ -1,0 +1,5 @@
+query LockedPeriods {
+  subscription {
+    lockedPeriods
+  }
+}

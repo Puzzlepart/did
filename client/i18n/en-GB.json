@@ -281,13 +281,15 @@
       "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
       "searchUsersLabel": "Search users..."
     },
-    "missingSubmissions": {
-      "headerText": "Missing submissions",
+    "weekStatus": {
+      "headerText": "Week status",
       "teamsReminderMessageTemplate": "You must confirm the following weeks in did: {{periods}}",
       "teamsReminderButtonText": "Send reminder in Teams",
       "teamsReminderMessageSinglePeriodTemplate": "You must confirm week {{period}} in did.",
       "teamsReminderTopicTemplate": "Week {{name}} in did",
-      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}"
+      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}",
+      "unlockWeekButtonText": "Unlock week",
+      "lockWeekButtonText": "Lock week"
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",

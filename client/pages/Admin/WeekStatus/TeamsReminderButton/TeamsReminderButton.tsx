@@ -24,7 +24,7 @@ export const TeamsReminderButton: StyledComponent<ITeamsReminderButtonProps> = (
         onClick={() => startTeamsConversation()}
         {...pick(props, 'title', 'text')}
       >
-        {t('admin.missingSubmissions.teamsReminderButtonText')}
+        {t('admin.weekStatus.teamsReminderButtonText')}
       </Button>
     </div>
   )

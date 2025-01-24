@@ -280,13 +280,15 @@
       "headerText": "Roller og tillatelser",
       "deleteSuccess": "Rollen {{name}} ble slettet."
     },
-    "missingSubmissions": {
-      "headerText": "Manglende bekreftelser",
+    "weekStatus": {
+      "headerText": "Ukestatus",
       "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
       "teamsReminderButtonText": "Send påminnelse i Teams",
       "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did.",
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
-      "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som ikke har bekreftet uke {{name}}"
+      "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som ikke har bekreftet uke {{name}}",
+      "unlockWeekButtonText": "Lås opp uke",
+      "lockWeekButtonText": "Lås uke"
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",

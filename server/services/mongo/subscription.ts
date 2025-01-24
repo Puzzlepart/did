@@ -137,4 +137,33 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
       throw error
     }
   }
+
+  /**
+   * Lock or unlock a period for the subscription.
+   *
+   * @param periodId Period ID
+   * @param unlock If true, unlock the period
+   */
+  public async lockPeriod(periodId: string, unlock: boolean) {
+    try {
+      const current = await this.collection.findOne({
+        _id: this.context.subscription.id
+      })
+      const lockedPeriods = current.lockedPeriods ?? []
+      const index = lockedPeriods.indexOf(periodId)
+
+      if (unlock) {
+        if (index > -1) lockedPeriods.splice(index, 1)
+      } else {
+        if (index === -1) lockedPeriods.push(periodId)
+      }
+
+      return await this.update(
+        { _id: this.context.subscription.id },
+        { lockedPeriods }
+      )
+    } catch (error) {
+      throw error
+    }
+  }
 }

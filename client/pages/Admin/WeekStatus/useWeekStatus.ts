@@ -7,10 +7,10 @@ import { User } from 'types'
 import _ from 'underscore'
 import * as s from 'underscore.string'
 import { arrayMap } from 'utils'
-import { List } from './List'
+import { List } from './List/List'
 import { IMissingSubmissionUser } from './MissingSubmissionUser'
 import { IMissingSubmissionPeriod } from './types'
-import { useMissingSubmissionsQuery } from './useMissingSubmissionsQuery'
+import { useWeekStatusQuery } from './useWeekStatusQuery'
 
 /**
  * Maps `User` to `IMissingSubmissionUser`. We don't want to extend
@@ -37,11 +37,11 @@ const mapUser = (
 /**
  * Get date periods with missing submissions.
  *
- * @param data - Data returned by `useMissingSubmissionsQuery`
+ * @param data - Data returned by `useWeekStatusQuery`
  * @param datePeriods - Date periods
  */
 const getPeriodsWithMissingSubmissions = (
-  [periods, users]: ReturnType<typeof useMissingSubmissionsQuery>,
+  [periods, users]: ReturnType<typeof useWeekStatusQuery>,
   datePeriods: IDatePeriod[]
 ): IMissingSubmissionPeriod[] =>
   datePeriods.map((p) => ({
@@ -65,7 +65,7 @@ const getPeriodsWithMissingSubmissions = (
  * @param datePeriods - Date periods
  */
 const getUsersWithMissingPeriods = (
-  [periods, users]: ReturnType<typeof useMissingSubmissionsQuery>,
+  [periods, users]: ReturnType<typeof useWeekStatusQuery>,
   datePeriods: IDatePeriod[]
 ) =>
   arrayMap<User, IMissingSubmissionUser>(users, (user) => {
@@ -81,9 +81,9 @@ const getUsersWithMissingPeriods = (
   })
 
 /**
- * Component logic hook for `<MissingSubmissions />`
+ * Component logic hook for `<WeekStatus />`
  */
-export const useMissingSubmissions: ComponentLogicHook<
+export const useWeekStatus: ComponentLogicHook<
   null,
   {
     tabs: TabItems
@@ -92,7 +92,7 @@ export const useMissingSubmissions: ComponentLogicHook<
 > = () => {
   const { t } = useTranslation()
   const { periods: datePeriods } = useTimesheetPeriods()
-  const data = useMissingSubmissionsQuery()
+  const data = useWeekStatusQuery()
   const periods = getPeriodsWithMissingSubmissions(data, datePeriods)
   const users = getUsersWithMissingPeriods(data, datePeriods)
   const tabs = useMemo<TabItems>(

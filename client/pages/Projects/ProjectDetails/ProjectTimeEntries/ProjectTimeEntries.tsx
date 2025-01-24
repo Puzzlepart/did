@@ -13,12 +13,16 @@ import { useProjectTimeEntries } from './useProjectTimeEntries'
  */
 export const ProjectTimeEntries: StyledComponent = () => {
   const { t } = useTranslation()
-  const { loading, timeEntries, onExport, error, skip } = useProjectTimeEntries()
+  const { loading, timeEntries, onExport, error, skip } =
+    useProjectTimeEntries()
   return (
     <div className={ProjectTimeEntries.className}>
       <div hidden={skip.value}>
         {error && (
-          <UserMessage intent='error' text={t('projects.timeEntriesErrorText')} />
+          <UserMessage
+            intent='error'
+            text={t('projects.timeEntriesErrorText')}
+          />
         )}
         {_.isEmpty(timeEntries) ? (
           <UserMessage
@@ -59,7 +63,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
             .setOnClick(() => {
               skip.setValue(!skip.value)
             })
-            .setHidden(!skip.value) 
+            .setHidden(!skip.value)
             .setGroup('actions'),
           new ListMenuItem(t('projects.exportTimeEntriesLabel'))
             .withIcon('ExcelDocument')

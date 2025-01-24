@@ -41,4 +41,10 @@ export class Subscription {
    * Database name for the subscription.
    */
   db?: string
+
+  /**
+   * The locked periods for the subscription.
+   */
+  @Field(() => [String], { nullable: true })
+  lockedPeriods?: string[]
 }

@@ -170,13 +170,19 @@ import {
   BriefcaseRegular,
   BriefcaseFilled,
   GroupRegular,
-  GroupFilled
+  GroupFilled,
+  LockClosedRegular,
+  LockClosedFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  LockClosed: {
+    regular: LockClosedRegular,
+    filled: LockClosedFilled
+  },
   TimeAndWeather: {
     regular: TimeAndWeatherRegular,
     filled: TimeAndWeatherFilled
