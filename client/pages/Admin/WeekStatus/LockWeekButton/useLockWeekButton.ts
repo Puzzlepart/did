@@ -1,12 +1,12 @@
+import { useMutation } from '@apollo/client'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useBoolean } from 'usehooks-ts'
 import { getFluentIcon } from 'utils/getFluentIcon'
+import lockPeriodMutation from './lock-period.gql'
 import { ILockWeekButtonProps } from './types'
-import $lockedPeriods from './locked-periods.gql'
-import $lockPeriod from './lock-period.gql'
-import { useMutation, useQuery } from '@apollo/client'
-import { Subscription } from 'types'
-import { useEffect } from 'react'
+import { useLockedPeriodsQuery } from './useLockedPeriodsQuery'
+import { useAppContext } from 'AppContext'
 
 /**
  * Component logic hook for the `LockWeekButton` component. Handles
@@ -17,19 +17,18 @@ import { useEffect } from 'react'
  */
 export function useLockWeekButton(props: ILockWeekButtonProps) {
   const { t } = useTranslation()
-  const { data } = useQuery<{ subscription: Subscription }>($lockedPeriods, {
-    fetchPolicy: 'network-only'
-  })
-  const [lockPeriod] = useMutation($lockPeriod)
+  const { displayToast } = useAppContext()
+  const [lockedPeriods] = useLockedPeriodsQuery()
+  const [lockPeriod] = useMutation(lockPeriodMutation)
   const isLocked = useBoolean(false)
 
   useEffect(() => {
     isLocked.setValue(
-      data?.subscription?.lockedPeriods?.some(
+      lockedPeriods?.some(
         (periodId) => periodId === props.period?.id
       )
     )
-  }, [data?.subscription?.lockedPeriods, props.period?.id])
+  }, [lockedPeriods, props.period?.id])
 
   const text = isLocked.value
     ? t('admin.weekStatus.unlockWeekButtonText')
@@ -39,13 +38,20 @@ export function useLockWeekButton(props: ILockWeekButtonProps) {
   /**
    * Handles the click event for the button.
    */
-  const onClick = () => {
-    lockPeriod({
+  const onClick = async () => {
+    const { data } = await lockPeriod({
       variables: {
         periodId: props.period?.id,
         unlock: isLocked.value
+
       }
     })
+    if (!data.result?.success) return
+    if (isLocked.value) {
+      displayToast(t('admin.weekStatus.weekUnlocked', props.period), 'success')
+    } else {
+      displayToast(t('admin.weekStatus.weekLocked', props.period), 'success')
+    }
     isLocked.toggle()
   }
   return { text, icon, onClick }
