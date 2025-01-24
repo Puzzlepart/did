@@ -153,7 +153,13 @@
     },
     "resourcesLabel": "Prosjektressurser",
     "hourlyRate": "kr {{rate}} / time",
-    "roleFieldLabel": "Prosjektrolle"
+    "roleFieldLabel": "Prosjektrolle",
+    "parentProject": "Overordna prosjekt",
+    "parentProjectDescription": "Vel eit overordna prosjekt som dette prosjektet høyrer til. Dette er særleg nyttig for å organisere prosjekt hierarkisk og oppretthalde samanhengar mellom relaterte prosjekt.",
+    "parentLabel": "Overordna prosjekt",
+    "childrenLabel": "Underordna prosjekter",
+    "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
+    "loadTimeEntriesLabel": "Last inn tidsoppføringer"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -267,7 +273,9 @@
       "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
       "showMyProjectsByDefaultDescription": "Vis \"Prosjekta mine\" som standard på prosjektsida.",
       "enableProjectRolesLabel": "Aktiver prosjektroller",
-      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs."
+      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs.",
+      "enableSimpleHierachyLabel": "Aktiver hierarki",
+      "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",

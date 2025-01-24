@@ -2,6 +2,7 @@ import { OptionProps } from '@fluentui/react-components'
 import { IDynamicSearchBoxProps } from 'components/DynamicSearchBox'
 import { FluentIconName } from 'utils/getFluentIcon'
 import { FormInputControlBase } from '../types'
+import { HTMLAttributes } from 'react'
 
 /**
  * @category Autocomplete
@@ -28,6 +29,7 @@ export type AutocompleteControlSelectCallback<T = any> = (
  */
 export interface IAutocompleteControlProps<T = any>
   extends FormInputControlBase,
+    Pick<HTMLAttributes<HTMLDivElement>, 'title'>,
     Pick<IDynamicSearchBoxProps, 'placeholder' | 'autoFocus'> {
   /**
    * Provide the key of the selected item. This will be used to clear

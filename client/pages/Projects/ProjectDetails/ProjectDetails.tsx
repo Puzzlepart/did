@@ -25,7 +25,3 @@ export const ProjectDetails: StyledComponent = () => {
 
 ProjectDetails.displayName = 'ProjectDetails'
 ProjectDetails.className = styles.projectDetails
-
-export * from './ProjectHeader'
-export * from './ProjectInformation'
-export * from './ProjectTimeEntries'

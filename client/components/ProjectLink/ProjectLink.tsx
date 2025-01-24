@@ -31,7 +31,11 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
           <Link
             className={styles.link}
             to={to}
-            onClick={() => props.onClick && props.onClick(null)}
+            onClick={() => {
+              if (props.onClick) {
+                props.onClick(null)
+              }
+            }}
           >
             <span>{props.text ?? props.project?.name}</span>
           </Link>

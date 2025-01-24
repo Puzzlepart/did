@@ -152,7 +152,13 @@
     },
     "resourcesLabel": "Project Resources",
     "hourlyRate": "kr {{rate}} / hour",
-    "roleFieldLabel": "Project Role"
+    "roleFieldLabel": "Project Role",
+    "parentProject": "Parent Project",
+    "parentProjectDescription": "Select a parent project to which this project belongs. This is particularly useful for organizing projects hierarchically and maintaining connections between related projects.",
+    "parentLabel": "Parent Project",
+    "childrenLabel": "Child Projects",
+    "parentProjectDisabledText": "You can only select a parent project under the same customer, and there's no customer selected, or no projects under the selected customer.",
+    "loadTimeEntriesLabel": "Load time entries"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -243,7 +249,9 @@
       "showMyProjectsByDefaultLabel": "Show My Projects By Default",
       "showMyProjectsByDefaultDescription": "Show \"My Projects\" as default on the Project page.",
       "enableProjectRolesLabel": "Enable Project Roles",
-      "enableProjectRolesDescription": "Enable roles for projects. Set up a set of roles with time rates, and select one of the predefined roles when adding a new resource."
+      "enableProjectRolesDescription": "Enable roles for projects. Set up a set of roles with time rates, and select one of the predefined roles when adding a new resource.",
+      "enableSimpleHierachyLabel": "Enable Hierarchy",
+      "enableSimpleHierachyDescription": "Enable project hierarchy supporting setting parent project, displaying parent and child projects."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",

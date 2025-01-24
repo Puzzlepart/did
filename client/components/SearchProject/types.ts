@@ -6,7 +6,12 @@ export interface ISearchProjectProps
   extends ISearchBoxProps,
     Pick<
       IAutocompleteControlProps,
-      'initialFilter' | 'intialFilterPlaceholder'
+      | 'initialFilter'
+      | 'intialFilterPlaceholder'
+      | 'label'
+      | 'placeholder'
+      | 'description'
+      | 'selectedKey'
     > {
   /**
    * Callback when a project is selected.
@@ -14,4 +19,17 @@ export interface ISearchProjectProps
    * @param project The selected project
    */
   onSelected: (project: Project) => void
+
+  /**
+   * Optional filter function to apply to limit
+   * the projects that are displayed.
+   *
+   * @param project Project to filter
+   */
+  filterFunc?: (project?: Project) => boolean
+
+  /**
+   * Tooltip to display when the component is disabled.
+   */
+  disabledText?: string
 }

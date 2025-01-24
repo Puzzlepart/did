@@ -19,6 +19,21 @@ query ProjectsQuery {
     }
     inactive
     extensions
+    parentKey
+    parent {
+      tag
+      key
+      name
+      description
+      icon
+    }
+    children {
+      tag
+      key
+      name
+      description
+      icon
+    }
   }
   myProjects {
     tag

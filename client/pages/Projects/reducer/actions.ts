@@ -12,7 +12,7 @@ type DATA_UPDTED_PAYLOAD = QueryResult<
 >
 
 export const DATA_UPDATED = createAction<DATA_UPDTED_PAYLOAD>('DATA_UPDATED')
-export const SET_SELECTED_PROJECT = createAction<Project>(
+export const SET_SELECTED_PROJECT = createAction<Project | string>(
   'SET_SELECTED_PROJECT'
 )
 export const OPEN_EDIT_PANEL = createAction<Project>('OPEN_EDIT_PANEL')

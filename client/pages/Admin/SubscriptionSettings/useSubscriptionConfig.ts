@@ -151,6 +151,16 @@ export function useSubscriptionConfig() {
               'admin.subscriptionSettings.enableProjectRolesDescription'
             )
           }
+        },
+        {
+          id: 'enableSimpleHierachy',
+          type: 'bool',
+          props: {
+            label: t('admin.subscriptionSettings.enableSimpleHierachyLabel'),
+            description: t(
+              'admin.subscriptionSettings.enableSimpleHierachyDescription'
+            )
+          }
         }
       ]
     },

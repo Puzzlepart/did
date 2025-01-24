@@ -6,6 +6,7 @@ import $create_or_update_project from './create-or-update-project.gql'
 import { CreateOrUpdateProjectVariables, IProjectFormProps } from './types'
 import { useProjectFormOptions } from './useProjectFormOptions'
 import { useProjectModel } from './useProjectModel'
+import _ from 'lodash'
 
 /**
  * Creates submit props used by `<FormControl />`.
@@ -32,10 +33,13 @@ export const useProjectFormSubmit: FormSubmitHook<
    */
   async function onClick() {
     const variables: CreateOrUpdateProjectVariables = {
-      project: {
-        ...model.$,
-        extensions: JSON.stringify(model.$.extensions)
-      },
+      project: _.omit(
+        {
+          ...model.$,
+          extensions: JSON.stringify(model.$.extensions)
+        },
+        ['parent', 'children']
+      ),
       options: options.$,
       update: !!props.edit
     }

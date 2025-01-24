@@ -14,7 +14,8 @@ import { createColumnDef } from 'utils/createColumnDef'
 import { useProjectsContext } from '../context'
 import { SET_SELECTED_PROJECT } from '../reducer'
 import { IProjectListProps } from './types'
-
+import { useSubscriptionSettings } from 'AppContext'
+import { SubscriptionProjectsSettings } from 'types'
 /**
  * Column wrapper component that sets opacity to 0.4 if project is inactive.
  *
@@ -33,6 +34,8 @@ const ColumnWrapper = ({ project, children }) => (
  */
 export function useColumns(props: IProjectListProps): IListColumn[] {
   const { t } = useTranslation()
+  const settings =
+    useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
   const context = useProjectsContext()
   const outlookCategories = mapProperty(
     context?.state?.outlookCategories,
@@ -85,6 +88,16 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             isMultiline: true
           }
         ),
+        createColumnDef<Project>('parent', t('projects.parentLabel'), {
+          hidden: !settings?.enableSimpleHierachy,
+          renderAs: 'projectLink',
+          createRenderProps: (project) => ({
+            project: project.parent,
+            onClick: () =>
+              context.dispatch &&
+              context.dispatch(SET_SELECTED_PROJECT(project.parent?.tag))
+          })
+        }),
         createColumnDef<Project>(
           'labels',
           t('common.labelFieldLabel'),
@@ -97,7 +110,10 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             </>
           )
         )
-      ].filter((col) => !(props.hideColumns || []).includes(col.key)),
+      ].filter(
+        (col) =>
+          col.hidden !== true && !(props.hideColumns || []).includes(col.key)
+      ),
     [props.hideColumns, outlookCategories]
   )
 

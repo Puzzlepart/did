@@ -21,7 +21,7 @@ export function useProjectHeaderBreadcrumb() {
     default: t('customers.informationHeaderText')
   })
 
-  const breadcrumbItems = useBreadcrumb(
+  return useBreadcrumb(
     [
       {
         value: t('navigation.ProjectsPage'),
@@ -46,5 +46,4 @@ export function useProjectHeaderBreadcrumb() {
     ],
     [state.selected, detailsTab]
   )
-  return breadcrumbItems
 }

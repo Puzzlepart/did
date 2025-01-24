@@ -6,6 +6,7 @@ import {
   InputControl,
   InputControlOptions,
   LabelPickerControl,
+  ProjectPickerControl,
   useFormContext
 } from 'components/FormControl'
 import React from 'react'
@@ -15,10 +16,14 @@ import { ProjectKey } from './ProjectKey'
 import { TagPreview } from './TagPreview'
 import { ProjectFormTabComponent } from '../types'
 import { CreateOutlookCategory } from './CreateOutlookCategory'
+import { useSubscriptionSettings } from 'AppContext'
+import { SubscriptionProjectsSettings } from 'types'
 
 export const BasicInfo: ProjectFormTabComponent = () => {
   const { t } = useTranslation()
   const { model, register, isEditMode } = useFormContext()
+  const settings =
+    useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
   const customerContext = useCustomersContext()
   const isCustomerContext = !!customerContext
   return (
@@ -87,6 +92,13 @@ export const BasicInfo: ProjectFormTabComponent = () => {
             labels.map((lbl) => lbl.name)
           )
         }
+      />
+      <ProjectPickerControl
+        {...register('parentKey')}
+        hidden={!settings?.enableSimpleHierachy}
+        label={t('projects.parentProject')}
+        description={t('projects.parentProjectDescription')}
+        disabledText={t('projects.parentProjectDisabledText')}
       />
       <CreateOutlookCategory />
     </FormGroup>
