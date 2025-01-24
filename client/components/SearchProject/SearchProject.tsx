@@ -17,7 +17,7 @@ export const SearchProject: ReusableComponent<ISearchProjectProps> = (
     <AutocompleteControl
       {...props}
       disabled={disabled}
-      title={disabled && props.disabledText}
+      title={disabled ? props.disabledText : undefined}
       items={items}
       onSelected={(item) => props.onSelected(item?.data)}
       autoFocus={props.autoFocus}
