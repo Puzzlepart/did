@@ -2,10 +2,39 @@ import 'reflect-metadata'
 import { Field, ID, ObjectType } from 'type-graphql'
 import { SubscriptionSettings } from './SubscriptionSettings'
 
+@ObjectType({
+  description: 'A type that describes a locked period',
+  simpleResolvers: true
+})
+export class LockedPeriod {
+  /**
+   * Unique ID of the locked period.
+   */
+  @Field({ nullable: false })
+  periodId: string
+
+  /**
+   * The reason for locking the period.
+   */
+  @Field({ nullable: true })
+  reason?: string
+
+  /**
+   * The user who locked the period.
+   */
+  @Field({ nullable: true })
+  lockedBy?: string
+
+  /**
+   * The date the period was locked.
+   */
+  @Field({ nullable: true })
+  lockedAt?: Date
+}
+
 /**
  * @category GraphQL ObjectType
  */
-
 @ObjectType({
   description: 'A type that describes a Subscription',
   simpleResolvers: true
@@ -45,6 +74,6 @@ export class Subscription {
   /**
    * The locked periods for the subscription.
    */
-  @Field(() => [String], { nullable: true })
-  lockedPeriods?: string[]
+  @Field(() => [LockedPeriod], { nullable: true })
+  lockedPeriods?: LockedPeriod[]
 }

@@ -80,7 +80,8 @@
       "balanceAdjustedMessage": "Tidsbanken din er oppdatert. Du har nå {{balance}} timer gjenværende i tidsbanken.",
       "resetTimebankText": "Nullstill tidsbank",
       "balanceAdjustmentNotAvailable": "Du må bekrefte timene dine for uken før du justerer timebanksaldoen. Hvis uken er delt, må begge periodene bekreftes."
-    }
+    },
+    "periodLockedText": "Perioden er låst av en administrator, og det er ikke mulig å gjøre endringer før den låses opp."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
@@ -288,7 +289,12 @@
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
       "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som ikke har bekreftet uke {{name}}",
       "unlockWeekButtonText": "Lås opp uke",
-      "lockWeekButtonText": "Lås uke"
+      "lockWeekButtonText": "Lås uke",
+      "weekLocked": "Uke {{period}} ble låst, og timer kan ikke lenger føres for denne uken.",
+      "weekUnlocked": "Uke {{period}} ble låst opp.",
+      "confirmLockSubText": "Er du sikker på at du vil låse uke {{period}}?",
+      "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse uken...",
+      "confirmLockTitle": "Lås uke"
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",

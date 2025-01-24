@@ -102,7 +102,7 @@
     "passport": "0.6.0",
     "passport-azure-ad": "4.3.4",
     "passport-google-oauth20": "2.0.0",
-    "pzl-react-reusable-components": "0.3.1",
+    "pzl-react-reusable-components": "0.3.5-2",
     "randomcolor": "0.6.2",
     "react": "17.0.2",
     "react-color": "2.19.3",

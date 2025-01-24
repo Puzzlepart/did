@@ -289,7 +289,12 @@
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
       "teamsReminderButtonTooltiop": "Send påminning i Teams til alle brukarar som ikkje har bekreftet veke {{name}}",
       "unlockWeekButtonText": "Lås opp uke",
-      "lockWeekButtonText": "Lås uke"
+      "lockWeekButtonText": "Lås veke",
+      "weekLocked": "Veke {{period}} blei låst, og timar kan ikkje lenger førast for denne veka.",
+      "weekUnlocked": "Veke {{period}} ble låst opp.",
+      "confirmLockSubText": "Er du sikker på at du vil låse veke {{period}}?",
+      "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse veka...",
+      "confirmLockTitle": "Lås veke"
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",

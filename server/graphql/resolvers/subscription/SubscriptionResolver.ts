@@ -66,9 +66,14 @@ export class SubscriptionResolver {
   @Mutation(() => BaseResult, { description: 'Lock or unlock a period' })
   async lockPeriod(
     @Arg('periodId') periodId: string,
-    @Arg('unlock', { nullable: true }) unlock: boolean
+    @Arg('unlock', { nullable: false }) unlock: boolean,
+    @Arg('reason', { nullable: true }) reason: string
   ): Promise<BaseResult> {
-    await this._subscription.lockPeriod(periodId, unlock)
-    return { success: true }
+    try {
+      await this._subscription.lockPeriod(periodId, unlock, reason)
+      return { success: true } as BaseResult
+    } catch (error) {
+      return { success: false, error } as BaseResult
+    }
   }
 }
