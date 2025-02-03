@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import {
   CheckboxVisibility,
   ConstrainMode,
@@ -56,6 +57,7 @@ export function useListProps({
     : items
   return {
     setKey: 'list',
+    getKey: (_, idx) =>  `item_${idx}`,
     styles: context.props.styles,
     enableShimmer: context.props.enableShimmer,
     isPlaceholderData: context.props.enableShimmer,
