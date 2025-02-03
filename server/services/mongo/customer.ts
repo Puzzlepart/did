@@ -93,7 +93,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
           })
           return _customers
         },
-        { key: 'getcustomers' }
+        { key: ['getcustomers', query]}
       )
     } catch (error) {
       throw error

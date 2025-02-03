@@ -108,8 +108,8 @@ export class ProjectService extends MongoDocumentService<Project> {
             this.find(query, { name: 1 }),
             mergedOptions.includeCustomers
               ? (this._customerSvc.getCustomers(
-                  query?.customerKey && { key: query.customerKey }
-                ) as Promise<Customer[]>)
+                query?.customerKey && { key: query.customerKey }
+              ) as Promise<Customer[]>)
               : Promise.resolve([]),
             mergedOptions.includeLabels
               ? this._labelSvc.getLabels()
@@ -135,7 +135,8 @@ export class ProjectService extends MongoDocumentService<Project> {
           return data
         },
         {
-          key: query,
+          key: ['getprojectsdata', query],
+          hash: 'sha256',
           disabled: !mergedOptions.cache
         }
       )

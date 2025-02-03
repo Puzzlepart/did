@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/prefer-ternary */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-classes-per-file */
@@ -8,6 +9,7 @@ import _ from 'underscore'
 import { RequestContext } from '../graphql/requestContext'
 import { redisMiddlware } from '../middleware/redis'
 const log = require('debug')('server/services/cache')
+import crypto from 'crypto'
 
 /**
  * Cache scope - `USER` or `SUBSCRIPTION`
@@ -62,6 +64,12 @@ export type CacheOptions = {
    * Cache disabled (defaults to `false`)
    */
   disabled?: boolean
+
+  /**
+   * If enabled, objects part of the key will be hashed
+   * using the specified algorithm.
+   */
+  hash?: string
 }
 
 /**
@@ -85,19 +93,45 @@ export class CacheService {
   ) {}
 
   /**
+   * Hash object using `crypto.createHash('sha256')`.
+   * 
+   * @param obj Object to be hashed
+   * @param algorithm Hash algorithm
+   */
+  private _hashObject(obj: object, algorithm: string): string {
+    return crypto.createHash(algorithm).update(JSON.stringify(obj)).digest('hex')
+  }
+
+  /**
    * Parses the cache key and returns an array of strings.
    *
    * @param key - The cache key to be parsed.
+   * @param hash - If enabled, objects part of the key will be hashed.
    *
    * @returns An array of strings representing the parsed cache key.
    */
-  private _parseCacheKey(key: CacheKey): string[] {
+  private _parseCacheKey(key: CacheKey, hash: string): string[] {
     if (!key) return []
     if (_.isArray(key)) {
       key = _.filter(key, Boolean)
+        .map((k) => {
+          if (_.isObject(k)) {
+            if (hash) {
+              return this._hashObject(k, hash)
+            } else {
+              return JSON.stringify(k).replace(/[^\dA-Za-z]/g, '')
+            }
+          } else {
+            return k
+          }
+        })
     }
     if (_.isObject(key)) {
-      key = [JSON.stringify(key).replace(/[^\dA-Za-z]/g, '')]
+      if (hash) {
+        key = [this._hashObject(key, hash)]
+      } else {
+        key = [JSON.stringify(key).replace(/[^\dA-Za-z]/g, '')]
+      }
     } else {
       key = [key]
     }
@@ -109,20 +143,21 @@ export class CacheService {
    *
    * Key can either be an string or  an array of string.
    * If it's an array it will be filtered to remove empty/null
-   * values and joined by :.
+   * values and joined by :. 
    *
    * @param key - Cache key
    * @param scope - Cache scope
+   * @param hash - Hash the key
    */
-  private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope) {
-    const keyParts = this._parseCacheKey(key)
+  private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope, hash: string = null): string {
+    const keyParts = this._parseCacheKey(key, hash)
     const scopedCacheKey = [
       this.prefix,
       ...keyParts,
       scope !== CacheScope.GLOBAL &&
-        (scope === CacheScope.SUBSCRIPTION
-          ? this.context.subscription.id
-          : this.context.userId)
+      (scope === CacheScope.SUBSCRIPTION
+        ? this.context.subscription.id
+        : this.context.userId)
     ]
       .filter(Boolean)
       .join(':')
@@ -136,9 +171,9 @@ export class CacheService {
    *
    * @param options - Cache options
    */
-  private _get<T = any>({ key, scope }: CacheOptions): Promise<T> {
+  private _get<T = any>(options: CacheOptions): Promise<T> {
     return new Promise((resolve) => {
-      const scopedCacheKey = this._getScopedCacheKey(key, scope)
+      const scopedCacheKey = this._getScopedCacheKey(options.key, options.scope, options.hash)
       log(
         `Retrieving cached value for key ${colors.magenta(scopedCacheKey)}...`
       )
@@ -166,17 +201,17 @@ export class CacheService {
    * @param options - Cache options
    * @param value - Cache value
    */
-  private _set<T = any>({ key, scope, expiry }: CacheOptions, value: T) {
+  private _set<T = any>(options: CacheOptions, value: T) {
     return new Promise((resolve) => {
-      const scopedCacheKey = this._getScopedCacheKey(key, scope)
+      const scopedCacheKey = this._getScopedCacheKey(options.key, options.scope, options.hash)
       log(
         `Setting value for key ${colors.magenta(
           scopedCacheKey
-        )} with a expiration of ${colors.magenta(expiry.toString())} seconds.`
+        )} with a expiration of ${colors.magenta(options.expiry.toString())} seconds.`
       )
       redisMiddlware.setex(
         scopedCacheKey,
-        expiry,
+        options.expiry,
         JSON.stringify(value),
         (error, reply) => {
           if (error) {
@@ -189,7 +224,7 @@ export class CacheService {
               `Value for key ${colors.magenta(
                 scopedCacheKey
               )} set with a expiration of ${colors.magenta(
-                expiry.toString()
+                options.expiry.toString()
               )} seconds.`
             )
             resolve(reply)
@@ -239,13 +274,13 @@ export class CacheService {
    */
   public async usingCache<T = any>(
     asyncFunction: () => Promise<T>,
-    { key, expiry = 60, scope, disabled = false }: CacheOptions
+    { key, expiry = 60, scope, disabled = false, hash }: CacheOptions
   ) {
     if (disabled) return await asyncFunction()
-    const cachedValue: T = await this._get<T>({ key, scope })
+    const cachedValue: T = await this._get<T>({ key, scope, hash })
     if (cachedValue) return cachedValue
     const value: T = await asyncFunction()
-    await this._set({ key, scope, expiry }, value)
+    await this._set({ key, scope, expiry, hash }, value)
     return value
   }
 }
