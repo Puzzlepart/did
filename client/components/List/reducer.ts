@@ -38,6 +38,7 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
 
 /**
  * Applies filters to an array of items based on the provided filter values.
+ * Also supports negation by prefixing the key with '!'.
  *
  * @param items The array of items to filter.
  * @param filterValues The filter values to apply.
@@ -49,13 +50,16 @@ function applyFilters<T = any>(
   return items.filter(
     (item) =>
       _.filter(Object.keys(filterValues), (key) => {
+        const filterValue = filterValues[key]
+        const isNeg = key.startsWith('!')
+        key = isNeg ? key.slice(1) : key
         const value = get(item as any, key, '')
-        switch (typeof filterValues[key]) {
+        switch (typeof filterValue) {
           case 'boolean': {
-            return filterValues[key] === value
+            return isNeg ? value !== filterValue : value === filterValue
           }
           default: {
-            return filterValues[key]?.includes(value)
+            return filterValue?.includes(value)
           }
         }
       }).length === Object.keys(filterValues).length

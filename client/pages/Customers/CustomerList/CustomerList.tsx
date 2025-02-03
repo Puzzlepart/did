@@ -37,7 +37,7 @@ export const CustomerList: TabComponent = (props) => {
           showInactive.value
             ? {}
             : {
-                inactive: false
+              '!inactive': true
               }
         }
       />
