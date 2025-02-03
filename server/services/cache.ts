@@ -94,12 +94,15 @@ export class CacheService {
 
   /**
    * Hash object using `crypto.createHash('sha256')`.
-   * 
+   *
    * @param obj Object to be hashed
    * @param algorithm Hash algorithm
    */
   private _hashObject(obj: object, algorithm: string): string {
-    return crypto.createHash(algorithm).update(JSON.stringify(obj)).digest('hex')
+    return crypto
+      .createHash(algorithm)
+      .update(JSON.stringify(obj))
+      .digest('hex')
   }
 
   /**
@@ -113,18 +116,17 @@ export class CacheService {
   private _parseCacheKey(key: CacheKey, hash: string): string[] {
     if (!key) return []
     if (_.isArray(key)) {
-      key = _.filter(key, Boolean)
-        .map((k) => {
-          if (_.isObject(k)) {
-            if (hash) {
-              return this._hashObject(k, hash)
-            } else {
-              return JSON.stringify(k).replace(/[^\dA-Za-z]/g, '')
-            }
+      key = _.filter(key, Boolean).map((k) => {
+        if (_.isObject(k)) {
+          if (hash) {
+            return this._hashObject(k, hash)
           } else {
-            return k
+            return JSON.stringify(k).replace(/[^\dA-Za-z]/g, '')
           }
-        })
+        } else {
+          return k
+        }
+      })
     }
     if (_.isObject(key)) {
       if (hash) {
@@ -143,21 +145,25 @@ export class CacheService {
    *
    * Key can either be an string or  an array of string.
    * If it's an array it will be filtered to remove empty/null
-   * values and joined by :. 
+   * values and joined by :.
    *
    * @param key - Cache key
    * @param scope - Cache scope
    * @param hash - Hash the key
    */
-  private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope, hash: string = null): string {
+  private _getScopedCacheKey(
+    key: CacheKey,
+    scope: CacheScope = this.scope,
+    hash: string = null
+  ): string {
     const keyParts = this._parseCacheKey(key, hash)
     const scopedCacheKey = [
       this.prefix,
       ...keyParts,
       scope !== CacheScope.GLOBAL &&
-      (scope === CacheScope.SUBSCRIPTION
-        ? this.context.subscription.id
-        : this.context.userId)
+        (scope === CacheScope.SUBSCRIPTION
+          ? this.context.subscription.id
+          : this.context.userId)
     ]
       .filter(Boolean)
       .join(':')
@@ -173,7 +179,11 @@ export class CacheService {
    */
   private _get<T = any>(options: CacheOptions): Promise<T> {
     return new Promise((resolve) => {
-      const scopedCacheKey = this._getScopedCacheKey(options.key, options.scope, options.hash)
+      const scopedCacheKey = this._getScopedCacheKey(
+        options.key,
+        options.scope,
+        options.hash
+      )
       log(
         `Retrieving cached value for key ${colors.magenta(scopedCacheKey)}...`
       )
@@ -203,11 +213,17 @@ export class CacheService {
    */
   private _set<T = any>(options: CacheOptions, value: T) {
     return new Promise((resolve) => {
-      const scopedCacheKey = this._getScopedCacheKey(options.key, options.scope, options.hash)
+      const scopedCacheKey = this._getScopedCacheKey(
+        options.key,
+        options.scope,
+        options.hash
+      )
       log(
         `Setting value for key ${colors.magenta(
           scopedCacheKey
-        )} with a expiration of ${colors.magenta(options.expiry.toString())} seconds.`
+        )} with a expiration of ${colors.magenta(
+          options.expiry.toString()
+        )} seconds.`
       )
       redisMiddlware.setex(
         scopedCacheKey,
