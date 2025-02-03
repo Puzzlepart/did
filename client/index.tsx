@@ -29,7 +29,7 @@ enableMapSet()
  * * Sets up `DateUtils` with the user language
  */
 export const bootstrap = async () => {
-  initializeIcons()
+  initializeIcons(ICONS_BASE_URL)
   const context = await fetchUserContext(client)
   $date.setup(context.user.preferredLanguage)
   i18next.changeLanguage(context.user.preferredLanguage)

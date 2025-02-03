@@ -13,6 +13,11 @@ declare module '*.gql' {
 }
 
 /**
+ * The base URL for the icons. Made available by the webpack `DefinePlugin`.
+ */
+declare const ICONS_BASE_URL: string
+
+/**
  * The current version of the application. Made available by 
  * the webpack `DefinePlugin`.
  */
