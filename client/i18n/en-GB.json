@@ -750,6 +750,7 @@
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
     "reason": "Reason"
+    "parentProject": "Parent Project"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

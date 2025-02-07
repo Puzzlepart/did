@@ -102,6 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Showing week hours summary based on user work week [#1138](https://github.com/Puzzlepart/did/issues/1138)
 - Manager included in user sync [#1244](https://github.com/Puzzlepart/did/issues/1244)
 - Enhancements to the Project Role Management [#1245](https://github.com/Puzzlepart/did/issues/1245)
+- Add Parent Project to reports and Excel export [#1253](https://github.com/Puzzlepart/did/issues/1253)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0132---22022024)

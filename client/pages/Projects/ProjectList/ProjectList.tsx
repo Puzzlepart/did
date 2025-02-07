@@ -27,7 +27,7 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
           showInactive.value
             ? {}
             : {
-                inactive: false
+                '!inactive': true
               }
         }
       />
