@@ -16,6 +16,7 @@
     "weekHoursSummaryText": "Du har totalt **{{hours}}** denne perioda. {{splitWeekInfoText}}",
     "hoursNotMatchedText": "Du har **{{hours}}** som ikkje er kopla mot eit prosjekt. Alle avtalar må stemme overeins før du kan stadfeste timane dine.",
     "allHoursMatchedText": "Alle timane dine er matcha. Er du klar til å stadfeste perioda di?",
+    "allHoursMatchedPeriodLockedText": "Alle timane dine er matcha, men perioda er låst og endringer kan ikkje gjerast for øyeblikket.",
     "periodConfirmedText": "Perioda er stadfesta med {{hours}}. Klikk **Angre stadfesting** dersom du treng å justere timeføringa.",
     "ignoredEventsText": "Du har {{ignored_count}} manuelt ignorert(e) kalenderoppføring(er).",
     "undoIgnoreTooltip": "Angre alle ignorerte hendelser.",
@@ -83,7 +84,8 @@
       "balanceAdjustedMessage": "Tidsbanken din er oppdatert. Du har nå {{balance}} timer gjenværende i tidsbanken.",
       "resetTimebankText": "Nullstill tidsbank",
       "balanceAdjustmentNotAvailable": "Du må bekrefte timene dine for uken før du justerer timebanksaldoen. Hvis uken er delt, må begge periodene bekreftes."
-    }
+    },
+    "periodLockedConfirmedText": "**{{hours}}** bekreftet denne perioden. Perioden er låst og det kan ikke gjøres endringer for den."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",

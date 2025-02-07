@@ -21,7 +21,7 @@ export function useForecastButtons(props: IForecastButtonsProps) {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const context = useTimesheetContext()
-    const lockedPeriods = useLockedPeriods()
+  const lockedPeriods = useLockedPeriods()
   const { selectedPeriod, loading, dateRangeType, selectedView } = context.state
   const isPeriodLocked = lockedPeriods.isLocked(selectedPeriod?.id)
   const isForecasted = selectedPeriod?.isForecasted
