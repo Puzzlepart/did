@@ -29,6 +29,25 @@ export function useColumns() {
           maxWidth: 150
         }),
         createColumnDef<TimeEntry, IProjectLinkProps>(
+          'project.parent.name',
+          t('common.parentProject'),
+          {
+            minWidth: 100,
+            maxWidth: 140,
+            renderAs: 'projectLink',
+            createRenderProps: ({ project }) => ({
+              project: project.parent,
+              showIcon: false
+            }),
+            data: {
+              isSortable: true,
+              isGroupable: true,
+              isFilterable: true,
+              filterType: ProjectFilter
+            }
+          }
+        ),
+        createColumnDef<TimeEntry, IProjectLinkProps>(
           'project.name',
           t('common.project'),
           {

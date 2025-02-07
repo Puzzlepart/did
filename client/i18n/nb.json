@@ -735,7 +735,8 @@
     "timesheet": "Timeliste",
     "managerLabel": "Leder",
     "hourlyRateLabel": "Timepris",
-    "noManagerLabel": "Ingen leder tildelt"
+    "noManagerLabel": "Ingen leder tildelt",
+    "parentProject": "Overordnet prosjekt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
