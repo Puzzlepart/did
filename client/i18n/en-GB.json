@@ -749,7 +749,7 @@
     "managerLabel": "Manager",
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
-    "reason": "Reason"
+    "reason": "Reason",
     "parentProject": "Parent Project"
   },
   "navigation": {
