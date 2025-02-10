@@ -56,7 +56,9 @@ export function useForecastButtons(props: IForecastButtonsProps) {
    * if the current view is not **Overview** or the current date range is not **Week**.
    */
   const isForecastDisabled =
-    !subscription.settings?.forecast?.enabled || (!isRangeWeek && !isOverview) || isPeriodLocked
+    !subscription.settings?.forecast?.enabled ||
+    (!isRangeWeek && !isOverview) ||
+    isPeriodLocked
 
   return { buttonProps, buttonText, isForecastDisabled }
 }

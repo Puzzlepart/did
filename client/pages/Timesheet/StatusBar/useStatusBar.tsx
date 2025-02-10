@@ -23,8 +23,9 @@ export function useStatusBar() {
   const { t } = useTranslation()
   const [, dismiss, isDismissed] = useArray<string>([])
   const context = useTimesheetContext()
-    const lockedPeriods = useLockedPeriods()
-  const { dateRangeType, selectedView, periods, selectedPeriod, loading } = context.state
+  const lockedPeriods = useLockedPeriods()
+  const { dateRangeType, selectedView, periods, selectedPeriod, loading } =
+    context.state
   const isPeriodLocked = lockedPeriods.isLocked(selectedPeriod?.id)
 
   if (!selectedPeriod) {
@@ -116,10 +117,13 @@ export function useStatusBar() {
     intent: 'success'
   }
 
-  if(isPeriodLocked) {
-    allHoursMatchedMessage.text = t('timesheet.allHoursMatchedPeriodLockedText', {
-      hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
-    })
+  if (isPeriodLocked) {
+    allHoursMatchedMessage.text = t(
+      'timesheet.allHoursMatchedPeriodLockedText',
+      {
+        hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
+      }
+    )
     allHoursMatchedMessage.iconName = 'LockClosed'
   }
 
@@ -134,7 +138,7 @@ export function useStatusBar() {
     intent: 'success'
   }
 
-  if(isPeriodLocked) {
+  if (isPeriodLocked) {
     periodConfirmedMessage.text = t('timesheet.periodLockedConfirmedText', {
       hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
     })
