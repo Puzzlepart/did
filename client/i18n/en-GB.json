@@ -15,8 +15,10 @@
     "goToNextWeek": "Go to next period",
     "weekHoursSummaryText": "**{{hours}}** this week. {{splitWeekInfoText}}",
     "hoursNotMatchedText": "**{{hours}}** unmatched this period. All events must be matched before you can confirm your timesheet.",
-    "allHoursMatchedText": "**All hours matched!** Are you ready to confirm the period?",
+    "allHoursMatchedText": "All hours matched! Are you ready to confirm the period?",
+    "allHoursMatchedPeriodLockedText": "All hours matched, but the period is locked and no changes can be made to it at this time.",
     "periodConfirmedText": "**{{hours}}** confirmed this period. Click **Unconfirm hours** if you want to do some adjustments.",
+    "periodLockedConfirmedText": "**{{hours}}** confirmed this period. The period is locked and no changes can be made to it.",
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
     "undoIgnoreTooltip": "Undo all ignored events.",
     "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
@@ -81,7 +83,8 @@
       "balanceAdjustedMessage": "Your time bank has been updated. You now have {{balance}} hours remaining in the time bank.",
       "resetTimebankText": "Reset timebank",
       "balanceAdjustmentNotAvailable": "You need to confirm your hours for the week before adjusting timebank balance. If the week is split, both periods needs to be confirmed."
-    }
+    },
+    "periodLockedText": "The period is locked by an administrator, and no changes can be made to it until it is unlocked."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -281,13 +284,22 @@
       "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
       "searchUsersLabel": "Search users..."
     },
-    "missingSubmissions": {
-      "headerText": "Missing submissions",
+    "weekStatus": {
+      "headerText": "Week status",
       "teamsReminderMessageTemplate": "You must confirm the following weeks in did: {{periods}}",
       "teamsReminderButtonText": "Send reminder in Teams",
       "teamsReminderMessageSinglePeriodTemplate": "You must confirm week {{period}} in did.",
       "teamsReminderTopicTemplate": "Week {{name}} in did",
-      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}"
+      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}",
+      "unlockWeekButtonText": "Unlock week",
+      "lockWeekButtonText": "Lock week",
+      "weekUnlocked": "Week {{period}} was successfully unlocked.",
+      "weekLocked": "Week {{period}} was successfully locked, and time entries can no longer be logged for this week.",
+      "confirmLockTitle": "Lock week",
+      "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
+      "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
+      "weekOpenTooltip": "Week {{weekNumber}} is open. Tap to lock, and optionally add a reason.",
+      "weekLockedTooltip": "Week {{weekNumber}} was locked {{lockedAt}}."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",
@@ -739,6 +751,7 @@
     "managerLabel": "Manager",
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
+    "reason": "Reason",
     "parentProject": "Parent Project"
   },
   "navigation": {

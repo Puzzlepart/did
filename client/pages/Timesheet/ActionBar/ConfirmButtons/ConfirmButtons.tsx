@@ -1,9 +1,9 @@
 import { ToolbarButton, Tooltip } from '@fluentui/react-components'
 import { ConditionalWrapper } from 'components'
 import React, { FC } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { IConfirmButtonsProps } from './types'
 import { useConfirmButtons } from './useConfirmButtons'
-import ReactMarkdown from 'react-markdown'
 
 /**
  * Renders the confirm and unconfirm buttons for a timesheet period.

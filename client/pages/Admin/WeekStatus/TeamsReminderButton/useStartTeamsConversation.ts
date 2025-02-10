@@ -26,7 +26,7 @@ export function useStartTeamsConversation({
     useSubscriptionSettings<SubscriptionTeamsSettings>('teams')
   const startTeamsConversation = () => {
     let message = t(
-      'admin.missingSubmissions.teamsReminderMessageSinglePeriodTemplate',
+      'admin.weekStatus.teamsReminderMessageSinglePeriodTemplate',
       { period: period?.name }
     )
     if (teamsSettings?.missingSubmissionsSinglePeriodText) {
@@ -39,7 +39,7 @@ export function useStartTeamsConversation({
       const periods = first(users)
         .periods.map((p) => p.name)
         .join(', ')
-      message = t('admin.missingSubmissions.teamsReminderMessageTemplate', {
+      message = t('admin.weekStatus.teamsReminderMessageTemplate', {
         periods
       })
       if (teamsSettings?.missingSubmissionsMultiplePeriodsText) {

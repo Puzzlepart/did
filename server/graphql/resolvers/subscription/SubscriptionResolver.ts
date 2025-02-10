@@ -55,4 +55,25 @@ export class SubscriptionResolver {
     await this._subscription.updateSubscription(settings)
     return { success: true }
   }
+
+  /**
+   * Lock or unlock a period for the subscription.
+   *
+   * @param periodId Period ID
+   * @param unlock If true, unlock the period
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_SUBSCRIPTION })
+  @Mutation(() => BaseResult, { description: 'Lock or unlock a period' })
+  async lockPeriod(
+    @Arg('periodId') periodId: string,
+    @Arg('unlock', { nullable: false }) unlock: boolean,
+    @Arg('reason', { nullable: true }) reason: string
+  ): Promise<BaseResult> {
+    try {
+      await this._subscription.lockPeriod(periodId, unlock, reason)
+      return { success: true } as BaseResult
+    } catch (error) {
+      return { success: false, error } as BaseResult
+    }
+  }
 }

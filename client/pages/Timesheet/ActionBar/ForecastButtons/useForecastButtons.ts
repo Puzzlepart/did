@@ -3,11 +3,12 @@ import { ToolbarButtonProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { Overview } from 'pages/Timesheet/Views/Overview'
 import { useMemo } from 'react'
+import { isBrowser } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
+import { useLockedPeriods } from '../../../Admin/WeekStatus'
 import { useTimesheetContext } from '../../context'
 import { IForecastButtonsProps } from './types'
-import { isBrowser } from 'react-device-detect'
 
 /**
  * Custom hook that returns button properties and text for forecasting or unforecasting timesheet hours.
@@ -20,7 +21,9 @@ export function useForecastButtons(props: IForecastButtonsProps) {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
   const context = useTimesheetContext()
+  const lockedPeriods = useLockedPeriods()
   const { selectedPeriod, loading, dateRangeType, selectedView } = context.state
+  const isPeriodLocked = lockedPeriods.isLocked(selectedPeriod?.id)
   const isForecasted = selectedPeriod?.isForecasted
   const [forecastIcons, undoIcons] = props.icons
   const [iconName, iconColor] = isForecasted ? undoIcons : forecastIcons
@@ -53,7 +56,7 @@ export function useForecastButtons(props: IForecastButtonsProps) {
    * if the current view is not **Overview** or the current date range is not **Week**.
    */
   const isForecastDisabled =
-    !subscription.settings?.forecast?.enabled || (!isRangeWeek && !isOverview)
+    !subscription.settings?.forecast?.enabled || (!isRangeWeek && !isOverview) || isPeriodLocked
 
   return { buttonProps, buttonText, isForecastDisabled }
 }

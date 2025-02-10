@@ -50,7 +50,7 @@ export function useReportLinks() {
    * Callback function for deleting a report link.
    */
   const onDelete = useCallback(async () => {
-    const response = await getResponse({
+    const { response } = await getResponse({
       title: t('admin.reportLinks.confirmDeleteTitle'),
       subText: t('admin.reportLinks.confirmDeleteSubText', selectedLink),
       responses: [

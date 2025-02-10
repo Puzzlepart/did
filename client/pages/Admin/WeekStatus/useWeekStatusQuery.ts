@@ -1,16 +1,16 @@
 import { useQuery, WatchQueryFetchPolicy } from '@apollo/client'
 import { useTimesheetPeriods } from 'hooks'
 import { TimesheetPeriodObject, User } from 'types'
-import $missingSubmissions from './missing-submissions.gql'
+import $weekStatus from './week-status.gql'
 
-export function useMissingSubmissionsQuery(
+export function useWeekStatusQuery(
   fetchPolicy: WatchQueryFetchPolicy = 'cache-first'
 ) {
   const { queries } = useTimesheetPeriods()
   const { data } = useQuery<{
     periods: TimesheetPeriodObject[]
     users: User[]
-  }>($missingSubmissions, {
+  }>($weekStatus, {
     fetchPolicy,
     variables: { queries }
   })

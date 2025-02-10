@@ -31,7 +31,7 @@ export function useApiTokens() {
    * @returns - A Promise that resolves when the API token is deleted.
    */
   const onDelete = useCallback(async () => {
-    const response = await getResponse({
+    const { response } = await getResponse({
       title: t('admin.apiTokens.confirmDeleteTitle'),
       subText: t('admin.apiTokens.confirmDeleteSubText', {
         ...selectedToken,

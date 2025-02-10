@@ -16,6 +16,7 @@
     "weekHoursSummaryText": "Du har totalt **{{hours}}** denne perioden. {{splitWeekInfoText}}",
     "hoursNotMatchedText": "Du har **{{hours}}** som ikke er koblet mot et prosjekt. Alle avtaler må stemme overens før du kan bekrefte timene dine.",
     "allHoursMatchedText": "Alle timene dine er matchet! Er du klar til å bekrefte perioden din?",
+    "allHoursMatchedPeriodLockedText": "Alle timene dine er matchet, men perioden er låst og endringer kan ikke gjøres for øyeblikket.",
     "periodConfirmedText": "Perioden er bekreftet med {{hours}}. Klikk **Angre bekreft timer** dersom du vil gjøre noen justeringer.",
     "ignoredEventsText": "Du har {{ignored_count}} manuelt ignorert(e) kalenderoppføringe(r).",
     "undoIgnoreTooltip": "Angre alle ignorerte hendelser.",
@@ -80,7 +81,9 @@
       "balanceAdjustedMessage": "Tidsbanken din er oppdatert. Du har nå {{balance}} timer gjenværende i tidsbanken.",
       "resetTimebankText": "Nullstill tidsbank",
       "balanceAdjustmentNotAvailable": "Du må bekrefte timene dine for uken før du justerer timebanksaldoen. Hvis uken er delt, må begge periodene bekreftes."
-    }
+    },
+    "periodLockedText": "Perioden er låst av en administrator, og det er ikke mulig å gjøre endringer før den låses opp.",
+    "periodLockedConfirmedText": "**{{hours}}** bekreftet denne perioden. Perioden er låst og det kan ikke gjøres endringer for den."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
@@ -280,13 +283,22 @@
       "headerText": "Roller og tillatelser",
       "deleteSuccess": "Rollen {{name}} ble slettet."
     },
-    "missingSubmissions": {
-      "headerText": "Manglende bekreftelser",
+    "weekStatus": {
+      "headerText": "Ukestatus",
       "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
       "teamsReminderButtonText": "Send påminnelse i Teams",
       "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did.",
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
-      "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som ikke har bekreftet uke {{name}}"
+      "teamsReminderButtonTooltiop": "Send påminnelse i Teams til alle brukere som ikke har bekreftet uke {{name}}",
+      "unlockWeekButtonText": "Lås opp uke",
+      "lockWeekButtonText": "Lås uke",
+      "weekLocked": "Uke {{period}} ble låst, og timer kan ikke lenger føres for denne uken.",
+      "weekUnlocked": "Uke {{period}} ble låst opp.",
+      "confirmLockSubText": "Er du sikker på at du vil låse uke {{period}}?",
+      "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse uken...",
+      "confirmLockTitle": "Lås uke",
+      "weekOpenTooltip": "Uke {{weekNumber}} er åpen. Trykk for å låse, og legg eventuelt til en årsak.",
+      "weekLockedTooltip": "Uke {{weekNumber}} ble låst {{lockedAt}}."
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",
@@ -736,6 +748,7 @@
     "managerLabel": "Leder",
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
+    "reason": "Årsak",
     "parentProject": "Overordnet prosjekt"
   },
   "navigation": {

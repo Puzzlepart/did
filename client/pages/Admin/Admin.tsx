@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
-import { MissingSubmissions } from './MissingSubmissions'
+import { WeekStatus } from './WeekStatus'
 import { ReportLinks } from './ReportLinks'
 import { RolesPermissions } from './RolesPermissions'
 import { SubscriptionSettings } from './SubscriptionSettings'
@@ -22,10 +22,7 @@ export const Admin: FC = () => {
           RolesPermissions,
           t('admin.rolesPermissions.headerText')
         ],
-        missingsubmissions: [
-          MissingSubmissions,
-          t('admin.missingSubmissions.headerText')
-        ],
+        weekStatus: [WeekStatus, t('admin.weekStatus.headerText')],
         labels: [Labels, t('common.labelsText')],
         subscription: [
           SubscriptionSettings,

@@ -3,8 +3,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { MissingSubmissionUser } from '../MissingSubmissionUser'
 import { TeamsReminderButton } from '../TeamsReminderButton'
-import styles from './List.module.scss'
 import { IListProps } from './types'
+import styles from './List.module.scss'
+import { LockWeekButton } from '../LockWeekButton'
 
 export const List: TabComponent<IListProps> = ({ users, period }) => {
   const { t } = useTranslation()
@@ -19,15 +20,15 @@ export const List: TabComponent<IListProps> = ({ users, period }) => {
   }
   return (
     <div className={List.className}>
-      <TeamsReminderButton
-        title={t(
-          'admin.missingSubmissions.teamsReminderButtonTooltiop',
-          period
-        )}
-        period={period}
-        users={period.users}
-        topic={t('admin.missingSubmissions.teamsReminderTopicTemplate', period)}
-      />
+      <div className={styles.actions}>
+        <TeamsReminderButton
+          title={t('admin.weekStatus.teamsReminderButtonTooltiop', period)}
+          period={period}
+          users={period.users}
+          topic={t('admin.weekStatus.teamsReminderTopicTemplate', period)}
+        />
+        <LockWeekButton period={period} />
+      </div>
       {period.users.map((user, index) => (
         <MissingSubmissionUser key={index} user={user} period={period} />
       ))}

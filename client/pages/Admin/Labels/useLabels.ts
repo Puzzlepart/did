@@ -42,7 +42,7 @@ export function useLabels() {
    * or an error toast if not.
    */
   const onDelete = useCallback(async () => {
-    const response = await getResponse({
+    const { response } = await getResponse({
       title: t('admin.labels.confirmDeleteTitle'),
       subText: t('admin.labels.confirmDeleteSubText', selectedLabel),
       responses: [[t('common.yes'), true, true], [t('common.no')]]
