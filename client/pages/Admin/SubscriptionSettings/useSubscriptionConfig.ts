@@ -161,6 +161,16 @@ export function useSubscriptionConfig() {
               'admin.subscriptionSettings.enableSimpleHierachyDescription'
             )
           }
+        },
+        {
+          id:'autoLoadTimeEntries',
+          type: 'bool',
+          props: {
+            label: t('admin.subscriptionSettings.autoLoadTimeEntriesLabel'),
+            description: t(
+              'admin.subscriptionSettings.autoLoadTimeEntriesDescription'
+            )
+          }
         }
       ]
     },

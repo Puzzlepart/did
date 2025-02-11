@@ -277,7 +277,9 @@
       "enableProjectRolesLabel": "Aktiver prosjektroller",
       "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs.",
       "enableSimpleHierachyLabel": "Aktiver hierarki",
-      "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter."
+      "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter.",
+      "autoLoadTimeEntriesLabel": "Last inn tidsoppføringer automatisk",
+      "autoLoadTimeEntriesDescription": "Når aktivert, lastes tidsoppføringer automatisk uten at du trenger å gjøre noe."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",

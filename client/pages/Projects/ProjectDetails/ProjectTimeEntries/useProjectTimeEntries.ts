@@ -1,16 +1,17 @@
 import { useExcelExport } from 'hooks'
-import { useBoolean } from 'usehooks-ts'
 import { useProjectsContext } from '../../context'
 import columns from '../columns'
 import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
 
 /**
+ * Custom logic hook for project time entries. Uses the
+ * `useProjectTimeEntriesQuery` hook to fetch time entries.
+ * 
  * @category Projects
  */
 export function useProjectTimeEntries() {
   const { state } = useProjectsContext()
-  const skip = useBoolean(true)
-  const { loading, error, timeEntries } = useProjectTimeEntriesQuery(skip.value)
+  const { loading, error, timeEntries, skip } = useProjectTimeEntriesQuery()
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
     '-'

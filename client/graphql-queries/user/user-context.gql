@@ -51,6 +51,7 @@ query UserContext {
         resourceMetadata
         enableProjectRoles
         enableSimpleHierachy
+        autoLoadTimeEntries
       }
     }
   }

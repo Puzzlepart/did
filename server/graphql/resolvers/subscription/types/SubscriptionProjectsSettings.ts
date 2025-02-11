@@ -37,6 +37,12 @@ export class SubscriptionProjectsSettings {
    */
   @Field({ nullable: true, defaultValue: false })
   enableSimpleHierachy?: boolean
+
+  /**
+   * Enable automatic loading of time entries for projects.
+   */
+  @Field({ nullable: true, defaultValue: false })
+  autoLoadTimeEntries?: boolean
 }
 
 /**
@@ -71,4 +77,10 @@ export class SubscriptionProjectsSettingsInput {
    */
   @Field({ nullable: true, defaultValue: false })
   enableSimpleHierachy?: boolean
+
+  /**
+   * Enable automatic loading of time entries for projects.
+   */
+  @Field({ nullable: true, defaultValue: false })
+  autoLoadTimeEntries?: boolean
 }

@@ -254,7 +254,9 @@
       "enableProjectRolesLabel": "Enable Project Roles",
       "enableProjectRolesDescription": "Enable roles for projects. Set up a set of roles with time rates, and select one of the predefined roles when adding a new resource.",
       "enableSimpleHierachyLabel": "Enable Hierarchy",
-      "enableSimpleHierachyDescription": "Enable project hierarchy supporting setting parent project, displaying parent and child projects."
+      "enableSimpleHierachyDescription": "Enable project hierarchy supporting setting parent project, displaying parent and child projects.",
+      "autoLoadTimeEntriesLabel": "Automatically Load Time Entries",
+      "autoLoadTimeEntriesDescription": "When enabled, time entries will be loaded automatically without requiring manual action."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
