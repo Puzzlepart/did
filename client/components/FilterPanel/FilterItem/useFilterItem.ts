@@ -17,12 +17,12 @@ export function useFilterItem({ filter }: IFilterItemProps) {
 
   const items = useMemo(() => {
     return filter.items
-    .filter((item) => Boolean(item.key))
-    .filter((item) =>
-      s.isBlank(searchTerm)
-        ? true
-        : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
-    )
+      .filter((item) => Boolean(item.key))
+      .filter((item) =>
+        s.isBlank(searchTerm)
+          ? true
+          : s.contains(item.value.toLowerCase(), searchTerm.toLowerCase())
+      )
   }, [searchTerm, filter.items])
 
   /**
