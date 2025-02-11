@@ -6,7 +6,7 @@ import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
 /**
  * Custom logic hook for project time entries. Uses the
  * `useProjectTimeEntriesQuery` hook to fetch time entries.
- * 
+ *
  * @category Projects
  */
 export function useProjectTimeEntries() {

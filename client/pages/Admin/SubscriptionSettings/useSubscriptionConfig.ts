@@ -163,7 +163,7 @@ export function useSubscriptionConfig() {
           }
         },
         {
-          id:'autoLoadTimeEntries',
+          id: 'autoLoadTimeEntries',
           type: 'bool',
           props: {
             label: t('admin.subscriptionSettings.autoLoadTimeEntriesLabel'),

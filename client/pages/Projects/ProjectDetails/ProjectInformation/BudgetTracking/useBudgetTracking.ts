@@ -29,11 +29,13 @@ export const useBudgetTracking = () => {
     skip: !context.state.selected
   })
 
-  const hours = (data?.timeEntries ?? []).reduce(
-    (duration: number, entry: { duration: number }) =>
-      duration + entry.duration,
-    0
-  ).toFixed(0)
+  const hours = (data?.timeEntries ?? [])
+    .reduce(
+      (duration: number, entry: { duration: number }) =>
+        duration + entry.duration,
+      0
+    )
+    .toFixed(0)
 
   let used = Number.parseFloat((hours / tracking.hours).toFixed(2))
   used = used > 1 ? 1 : used

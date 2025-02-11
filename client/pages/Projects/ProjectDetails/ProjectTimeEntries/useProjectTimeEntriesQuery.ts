@@ -16,7 +16,8 @@ import { useSubscriptionSettings } from 'AppContext'
 export function useProjectTimeEntriesQuery() {
   const { state } = useProjectsContext()
   const skip = useBoolean(true)
-  const { autoLoadTimeEntries } = useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
+  const { autoLoadTimeEntries } =
+    useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
   useEffect(() => {
     if (autoLoadTimeEntries) {
       skip.setFalse()
@@ -29,7 +30,7 @@ export function useProjectTimeEntriesQuery() {
     variables: {
       query: { projectId: state.selected?.tag }
     },
-    skip: (!state.selected || skip.value)
+    skip: !state.selected || skip.value
   })
   const users: User[] = query?.data?.users ?? []
   const timeEntries = (query?.data?.timeEntries ?? []).map((entry) => ({
