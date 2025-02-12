@@ -3,6 +3,7 @@ import { Customer } from 'types'
 import { mapProperty } from 'utils'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormSubmit } from './useCustomerFormSubmit'
+import { CustomerForm } from './CustomerForm'
 
 /**
  * Component logic hook for `<CustomerForm />`
@@ -19,9 +20,10 @@ export function useCustomerForm(props: ICustomerFormProps) {
     })
   )
   const submit = useCustomerFormSubmit(props, model)
-  const register = useFormControls(model)
+  const register = useFormControls(model, CustomerForm.displayName)
   const formControl: IFormControlProps = {
     ...props,
+    id: CustomerForm.displayName,
     model,
     register,
     submitProps: submit,

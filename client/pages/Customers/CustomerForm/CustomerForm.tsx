@@ -91,6 +91,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   )
 }
 
+CustomerForm.displayName = 'CustomerForm'
 CustomerForm.defaultProps = {
   permission: PermissionScope.MANAGE_CUSTOMERS
 }
