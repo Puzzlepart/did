@@ -4,15 +4,20 @@ import { useCallback } from 'react'
 import { FormInputControlBase } from './types'
 import _ from 'lodash'
 
+/**
+ * Registry of controls. The key is the ID of the form control, and the value is an array of form controls.
+ * This is used to keep track of all form controls that are registered with a specific form control ID.
+ */
 export const CONTROL_REGISTRY: Record<string, any[]> = {}
 
 /**
- * Register control with a `model`
+ * Register control for a form control with the given name and options.
+ * If an ID is provided, the control will be registered with the given ID.
  *
  * @param name - Name
  * @param model - Model
  * @param options - Control options
- * @param id - ID
+ * @param id - Form control ID
  *
  * @returns `FormInputControlBase`
  */
@@ -67,10 +72,11 @@ function getExtendedPropertyName<KeyType extends string>(
 }
 
 /**
- * Use form controls
+ * Hook that returns a callback to register a new control with the given name and options.
+ * If an ID is provided, the control will be registered with the given ID.
  *
  * @param model - Model
- * @param id - ID
+ * @param id - Form control ID
  *
  * @returns A callback to register a new control
  */
