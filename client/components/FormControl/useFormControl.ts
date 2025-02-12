@@ -1,4 +1,4 @@
-import { IDynamicButtonProps, IFormControlContext } from 'components'
+import { CONTROL_REGISTRY, IDynamicButtonProps, IFormControlContext } from 'components'
 import { ComponentLogicHook } from 'hooks'
 import _ from 'lodash'
 import { useMemo } from 'react'
@@ -28,7 +28,9 @@ export const useFormControl: ComponentLogicHook<
       ...props.submitProps,
       onClick: async (event: any) => {
         dispatch(CLEAR_VALIDATION_MESSAGES())
-        if (await validateForm()) {
+        // transform object to array
+        const fields = Object.values(CONTROL_REGISTRY[props.id])
+        if (await validateForm(fields)) {
           if (props.panel?.onDismiss) {
             props.panel.onDismiss()
           }
@@ -66,13 +68,11 @@ export const useFormControl: ComponentLogicHook<
       ]),
       getExtensionValue,
       dispatch,
-      onBlurCallback: () => {
+      onBlurCallback: ({ target }) => {
         if (props.validateOnBlur) {
-          // const [, name] = event.target.id.split('_')
-          // const field = (props.children as ReactElement[]).find(
-          //   ({ props }) => props['name'] === name
-          // )
-          // validateForm([field])
+          const [, name] = target.id.split('_')
+          const fields = Object.values(CONTROL_REGISTRY[props.id])
+          validateForm(fields.filter(f => f.name === name))
         }
       }
     }),

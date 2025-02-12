@@ -20,6 +20,7 @@ export const CustomerKey: FC = () => {
   return (
     <InputControl
       {...register<InputControlOptions>('key', {
+        required: !isEditMode,
         casing: 'upper',
         replace: [new RegExp('[^a-zA-Z0-9]'), ''],
         validators: [validateKeyFunction, validateUniqueKeyFunction]
@@ -30,7 +31,6 @@ export const CustomerKey: FC = () => {
         min: 2,
         max: keyMaxLength
       })}
-      required={!isEditMode}
     />
   )
 }

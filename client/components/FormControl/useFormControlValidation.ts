@@ -10,7 +10,6 @@ import {
   IFormControlProps,
   ValidationResult
 } from './types'
-import { CONTROL_REGISTRY } from './useFormControls'
 import { validateField } from './validateField'
 
 /**
@@ -41,9 +40,9 @@ export function useFormControlValidation(
   dispatch: React.Dispatch<AnyAction>
 ) {
   const { t } = useTranslation()
-  const validateForm = async () => {
+  const validateForm = async (fields: FormInputControlBase[]) => {
     if (props.skipValidation) return true
-    const formFieldsToValidate = CONTROL_REGISTRY[props.id]
+    const formFieldsToValidate = fields
       .filter(Boolean)
       .filter((f) => shouldValidateField(f))
     const _validationMessages = new Map<string, ValidationResult>()

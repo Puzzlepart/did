@@ -12,10 +12,10 @@ import { useTranslation } from 'react-i18next'
 
 export function useValidateKeyFunction(keyMaxLength: number) {
   const { t } = useTranslation()
-  const PROJECT_KEY_REGEX = new RegExp('(^[A-ZÆØÅ0-9-]{2,12}$)', 'gm')
+  const regex = new RegExp(`(^[A-ZÆØÅ0-9-]{2,${keyMaxLength}}$)`)
   const ValidateKeyFunction: ValidatorFunction<string> = (value) => {
     return (
-      !PROJECT_KEY_REGEX.test(value) && [
+      !regex.test(value) && [
         t('projects.keyInvalid', { min: 2, max: keyMaxLength }),
         'error'
       ]
