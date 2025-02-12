@@ -28,6 +28,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
 
   return (
     <FormControl
+      id={UserForm.displayName}
       model={model}
       panel={{
         ...props,
@@ -43,9 +44,9 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
       {!isEditMode && (
         <AutocompleteControl
           {...register('_' as any, {
+            required: !model.value('id'),
             validators: t('common.adUserRequired')
           })}
-          required={!model.value('id')}
           label={t('common.adUserLabel')}
           placeholder={t('common.searchPlaceholder')}
           items={availableAdUsers.map((u) => ({

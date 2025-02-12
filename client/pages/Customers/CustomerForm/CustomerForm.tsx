@@ -10,61 +10,34 @@ import {
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { CustomerKey } from './CustomerKey'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
-import {
-  CUSTOMER_KEY_REGEX,
-  useValidateUniqueKeyFunction,
-  useValidateUniqueNameFunction
-} from './validation'
+import { useValidateUniqueNameFunction } from './validation'
 
 export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, submit, register } = useCustomerForm(props)
-  const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction()
-  const ValidateUniqueNameFunction = useValidateUniqueNameFunction(props)
+  const { formControlProps } = useCustomerForm(props)
+  const validateUniqueNameFunction = useValidateUniqueNameFunction(props)
   return (
-    <FormControl
-      {...props}
-      model={model}
-      submitProps={submit}
-      validateOnBlur={true}
-    >
+    <FormControl {...formControlProps}>
+      <CustomerKey />
       <InputControl
-        {...register<InputControlOptions>('key', {
-          casing: 'upper',
-          replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-          validators: !props.edit && [
-            {
-              regex: CUSTOMER_KEY_REGEX,
-              messages: {
-                regex: t('customers.keyInvalid', { min: 2, max: 12 })
-              }
-            },
-            ValidateUniqueKeyFunction
-          ]
-        })}
-        disabled={!!props.edit}
-        label={t('customers.keyFieldLabel')}
-        description={t('customers.keyFieldDescription', { min: 2, max: 12 })}
-        required={!props.edit}
-      />
-      <InputControl
-        {...register<InputControlOptions>('name', {
+        {...formControlProps.register<InputControlOptions>('name', {
+          required: true,
           casing: 'capitalized',
           validators: [
             {
               minLength: 2
             },
-            ValidateUniqueNameFunction
+            validateUniqueNameFunction
           ]
         })}
         label={t('common.nameFieldLabel')}
         description={t('customers.nameFieldDescription', { min: 2 })}
-        required={true}
       />
       <InputControl
-        {...register<InputControlOptions>('description', {
+        {...formControlProps.register<InputControlOptions>('description', {
           casing: 'capitalized',
           validators: [
             {
@@ -81,7 +54,8 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         rows={14}
       />
       <IconPickerControl
-        {...register('icon', {
+        {...formControlProps.register('icon', {
+          required: true,
           validators: [
             (value) => {
               if (value === 'Umbrella') {
@@ -94,22 +68,21 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         label={t('common.iconFieldLabel')}
         description={t('customers.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        required={true}
       />
       <LabelPickerControl
         label={t('common.labelsText')}
-        placeholder={t('projects.filterLabels')}
+        placeholder={t('common.filterLabels')}
         noSelectionText={t('customers.noLabelsSelectedText')}
-        defaultSelectedKeys={model.value('labels')}
+        defaultSelectedKeys={formControlProps.model.value('labels')}
         onChange={(labels) =>
-          model.set(
+          formControlProps.model.set(
             'labels',
             labels.map((lbl) => lbl.name)
           )
         }
       />
       <SwitchControl
-        {...register<SwitchControlOptions>('inactive')}
+        {...formControlProps.register<SwitchControlOptions>('inactive')}
         label={t('common.inactiveFieldLabel')}
         description={t('customers.inactiveFieldDescription')}
         hidden={!props.edit}
@@ -118,6 +91,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   )
 }
 
+CustomerForm.displayName = 'CustomerForm'
 CustomerForm.defaultProps = {
   permission: PermissionScope.MANAGE_CUSTOMERS
 }

@@ -17,22 +17,27 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, register, submitProps, panelProps } = useReportLinksForm(props)
   return (
-    <FormControl model={model} submitProps={submitProps} panel={panelProps}>
+    <FormControl
+      id={ReportLinksForm.displayName}
+      model={model}
+      submitProps={submitProps}
+      panel={panelProps}
+    >
       <InputControl
-        {...register<InputControlOptions>('name')}
+        {...register<InputControlOptions>('name', { required: !props.edit })}
         label={t('admin.reportLinks.nameLabel')}
         placeholder={t('admin.reportLinks.namePlaceholder')}
         description={t('admin.reportLinks.nameDescription')}
-        required={!props.edit}
         disabled={!!props.edit}
       />
       <InputControl
-        {...register<InputControlOptions>('description')}
+        {...register<InputControlOptions>('description', {
+          required: !props.edit
+        })}
         rows={10}
         label={t('admin.reportLinks.descriptionLabel')}
         placeholder={t('admin.reportLinks.descriptionPlaceholder')}
         description={t('admin.reportLinks.descriptionDescription')}
-        required={!props.edit}
       />
       <IconPickerControl
         name='icon'
@@ -44,18 +49,16 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         required={true}
       />
       <InputControl
-        {...register('iconColor')}
+        {...register('iconColor', { required: true })}
         label={t('admin.reportLinks.iconColorLabel')}
         placeholder={t('admin.reportLinks.iconColorPlaceholder')}
         description={t('admin.reportLinks.iconColorDescription')}
-        required={true}
       />
       <InputControl
-        {...register('externalUrl')}
+        {...register('externalUrl', { required: true })}
         label={t('admin.reportLinks.externalUrlLabel')}
         placeholder={t('admin.reportLinks.externalUrlPlaceholder')}
         description={t('admin.reportLinks.externalUrlDescription')}
-        required={true}
       />
       <InputControl
         {...register('year')}
@@ -96,3 +99,5 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
     </FormControl>
   )
 }
+
+ReportLinksForm.displayName = 'ReportLinksForm'

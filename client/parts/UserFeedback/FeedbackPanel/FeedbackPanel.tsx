@@ -21,27 +21,29 @@ export const FeedbackPanel: PanelComponent = (props) => {
   return (
     <FormControl {...formControlProps}>
       <DropdownControl
-        {...register('label')}
+        {...register('label', { required: true })}
         label={t('feedback.typeFieldLabel')}
-        required={true}
         values={labelOptions}
       />
       <InputControl
-        {...register<InputControlOptions>('title', { casing: 'capitalized' })}
+        {...register<InputControlOptions>('title', {
+          required: true,
+          casing: 'capitalized'
+        })}
         label={t('feedback.summaryFieldLabel')}
-        required={true}
       />
       <InputControl
-        {...register<InputControlOptions>('body', { casing: 'capitalized' })}
+        {...register<InputControlOptions>('body', {
+          required: true,
+          casing: 'capitalized'
+        })}
         label={t('feedback.descriptionFieldLabel')}
         description={t('feedback.descriptionFieldDesc')}
-        required={true}
         rows={6}
       />
       <RadioGroupControl
-        {...register('mood')}
+        {...register('mood', { required: true })}
         label={t('feedback.ratingFieldLabel')}
-        required={true}
         values={moodOptions}
       />
       <SwitchControl
@@ -64,3 +66,5 @@ export const FeedbackPanel: PanelComponent = (props) => {
     </FormControl>
   )
 }
+
+FeedbackPanel.displayName = 'FeedbackPanel'

@@ -70,6 +70,11 @@ type ValidatorMessage = string
  */
 export type BaseControlOptions = {
   /**
+   * Whether the field is required or not.
+   */
+  required?: boolean
+
+  /**
    * A collection of validator functions and/or objects that can be used to validate the control's value.
    * If a function is provided, it should return a `CustomValidatorResult`.
    * If an object is provided, it can specify a minimum length, a regular expression, and a validation state.

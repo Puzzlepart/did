@@ -2,6 +2,7 @@ import { useAppContext } from 'AppContext'
 import { useFormControlModel, useFormControls } from 'components'
 import get from 'get-value'
 import { CONFIG_KEYS } from './types'
+import { UserSettings } from './UserSettings'
 
 /**
  * Returns a model and register object for user settings form control.
@@ -16,6 +17,6 @@ export function useUserSettingsModel() {
       return $
     }, {})
   )
-  const register = useFormControls(model)
+  const register = useFormControls(model, UserSettings)
   return { model, register }
 }

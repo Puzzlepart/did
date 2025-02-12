@@ -1,28 +1,44 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { useMap } from 'hooks/common/useMap'
-import { useCallback } from 'react'
+import { FC, useCallback } from 'react'
 import { FormInputControlBase } from './types'
+import _ from 'lodash'
 
 /**
- * Register control with a `model`
+ * Registry of controls. The key is the ID of the form control, and the value is an array of form controls.
+ * This is used to keep track of all form controls that are registered with a specific form control ID.
+ */
+export const CONTROL_REGISTRY: Record<string, Record<string, any>> = {}
+
+/**
+ * Register control for a form control with the given name and options.
+ * If an ID is provided, the control will be registered with the given ID.
  *
  * @param name - Name
  * @param model - Model
  * @param options - Control options
+ * @param id - Form control ID
  *
  * @returns `FormInputControlBase`
  */
 function registerControl<TOptions = any, KeyType = string>(
   name: KeyType,
   model: ReturnType<typeof useMap>,
-  options?: TOptions
+  options?: TOptions,
+  id?: string
 ): FormInputControlBase<TOptions, KeyType> {
-  return {
-    id: `form_control_${name}`,
+  const control = {
+    id: `formcontrol_${name}`,
     name,
     model,
-    options
+    options,
+    required: (options as any)?.required
   }
+  if (id) {
+    _.set(CONTROL_REGISTRY, `${id}.${name}`, control)
+    return control
+  }
+  return control
 }
 
 /**
@@ -56,14 +72,17 @@ function getExtendedPropertyName<KeyType extends string>(
 }
 
 /**
- * Use form controls
+ * Hook that returns a callback to register a new control with the given name and options.
+ * If an component is provided, the control will be registered with the component's display name.
  *
- * @param model - Model
+ * @param model - Model instance
+ * @param component - Component instance
  *
  * @returns A callback to register a new control
  */
 export function useFormControls<KeyType extends string = any>(
-  model: ReturnType<typeof useMap>
+  model: ReturnType<typeof useMap>,
+  component?: FC
 ) {
   return useCallback(
     <TOptions = {}>(
@@ -74,7 +93,12 @@ export function useFormControls<KeyType extends string = any>(
       if (extensionId) {
         name = getExtendedPropertyName(name, extensionId)
       }
-      return registerControl<TOptions, KeyType>(name, model, options)
+      return registerControl<TOptions, KeyType>(
+        name,
+        model,
+        options,
+        component.displayName
+      )
     },
     [model]
   )

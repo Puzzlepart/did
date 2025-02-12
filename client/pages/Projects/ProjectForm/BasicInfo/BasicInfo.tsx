@@ -12,7 +12,7 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCustomersContext } from '../../../Customers/context'
-import { ProjectKey } from './ProjectKey'
+import { ProjectKeyInput } from './ProjectKeyInput'
 import { TagPreview } from './TagPreview'
 import { ProjectFormTabComponent } from '../types'
 import { CreateOutlookCategory } from './CreateOutlookCategory'
@@ -31,27 +31,27 @@ export const BasicInfo: ProjectFormTabComponent = () => {
       {(!isCustomerContext || isEditMode) && (
         <SearchCustomer
           {...register('customerKey', {
+            required: true,
             validators: t('projects.customerRequired')
           })}
           hidden={isEditMode || isCustomerContext}
           label={t('common.customer')}
           description={t('projects.customerFieldDescription')}
-          required={true}
           placeholder={t('common.searchPlaceholder')}
           selectedKey={model.value('customerKey')}
           onSelected={(customer) => model.set('customerKey', customer?.key)}
         />
       )}
-      <ProjectKey />
-      <TagPreview hidden={isEditMode} />
+      <ProjectKeyInput />
+      <TagPreview />
       <InputControl
         {...register<InputControlOptions>('name', {
+          required: true,
           casing: 'capitalized',
           validators: [{ minLength: 2 }]
         })}
         label={t('common.nameFieldLabel')}
         description={t('projects.nameFieldDescription')}
-        required={true}
       />
       <InputControl
         {...register<InputControlOptions>('description', {
@@ -69,8 +69,7 @@ export const BasicInfo: ProjectFormTabComponent = () => {
         rows={8}
       />
       <IconPickerControl
-        {...register('icon')}
-        required
+        {...register('icon', { required: true })}
         label={t('common.iconFieldLabel')}
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}

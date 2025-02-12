@@ -12,7 +12,7 @@ import { useUserSettings } from './useUserSettings'
  */
 export const UserSettings: StyledComponent = () => {
   const { t } = useTranslation()
-  const { register, model, openPanel, formControlProps } = useUserSettings()
+  const { openPanel, formControlProps } = useUserSettings()
 
   return useMemo(
     () => (
@@ -29,7 +29,7 @@ export const UserSettings: StyledComponent = () => {
                   text: t('common.general'),
                   iconName: 'ContentSettings'
                 },
-                { register, model }
+                formControlProps
               ],
               timesheet: [
                 Timesheet,
@@ -37,7 +37,7 @@ export const UserSettings: StyledComponent = () => {
                   text: t('common.timesheet'),
                   iconName: 'Timeline'
                 },
-                { register, model }
+                formControlProps
               ],
               vacation: [
                 Vacation,
@@ -45,14 +45,14 @@ export const UserSettings: StyledComponent = () => {
                   text: t('common.vacation'),
                   iconName: 'WeatherSunnyLow'
                 },
-                { register, model }
+                formControlProps
               ]
             }}
           />
         </FormControl>
       </div>
     ),
-    [model]
+    [formControlProps.model]
   )
 }
 

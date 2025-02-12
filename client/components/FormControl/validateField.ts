@@ -4,6 +4,7 @@ import { TFunction } from 'react-i18next'
 import _ from 'underscore'
 import {
   FormInputControlBase,
+  IFormControlProps,
   ValidationResult,
   ValidatorFunction
 } from './types'
@@ -12,15 +13,17 @@ import {
  * Validates a form input control field using the provided validators.
  *
  * @param field - The form input control field to validate.
+ * @param props - The props from the `FormControl` component.
  * @param t - The translation function to use for error messages.
  *
  * @returns A promise that resolves to a ValidationResult array, or null if the field is valid.
  */
 export async function validateField(
   field: FormInputControlBase,
+  props: IFormControlProps,
   t: TFunction
 ): Promise<ValidationResult> {
-  const currentValue = field.model.value(field.name, null)
+  const currentValue = props.model.value(field.name, null)
   const validators = field.options?.validators
   if (
     field.required &&

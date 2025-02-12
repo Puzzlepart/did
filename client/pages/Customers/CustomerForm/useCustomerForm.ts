@@ -1,8 +1,14 @@
-import { useFormControlModel, useFormControls } from 'components/FormControl'
+import {
+  IFormControlProps,
+  useFormControlModel,
+  useFormControls
+} from 'components/FormControl'
 import { Customer } from 'types'
 import { mapProperty } from 'utils'
 import { ICustomerFormProps } from './types'
 import { useCustomerFormSubmit } from './useCustomerFormSubmit'
+import { CustomerForm } from './CustomerForm'
+import { ComponentLogicHook } from 'hooks'
 
 /**
  * Component logic hook for `<CustomerForm />`
@@ -10,7 +16,10 @@ import { useCustomerFormSubmit } from './useCustomerFormSubmit'
  * @param props - Props
  * @returns `model` and `submit`
  */
-export function useCustomerForm(props: ICustomerFormProps) {
+export const useCustomerForm: ComponentLogicHook<
+  ICustomerFormProps,
+  { formControlProps: IFormControlProps }
+> = (props) => {
   const model = useFormControlModel<keyof Customer, Customer>(
     props.edit,
     (p) => ({
@@ -19,10 +28,14 @@ export function useCustomerForm(props: ICustomerFormProps) {
     })
   )
   const submit = useCustomerFormSubmit(props, model)
-  const register = useFormControls(model)
-  return {
+  const register = useFormControls(model, CustomerForm)
+  const formControlProps: IFormControlProps = {
+    ...props,
+    id: CustomerForm.displayName,
     model,
-    submit,
-    register
+    register,
+    submitProps: submit,
+    validateOnBlur: true
   }
+  return { formControlProps }
 }

@@ -12,6 +12,7 @@ import _ from 'underscore'
 import { useUsersContext } from '../context'
 import { IUserFormProps, createUserInput } from './types'
 import { useUserFormSubmit } from './useUserFormSubmit'
+import { UserForm } from './UserForm'
 
 /**
  * A custom hook that returns the necessary props and functions for the user form.
@@ -24,7 +25,7 @@ export function useUserForm(props: IUserFormProps) {
   const context = useUsersContext()
   const initialModel = useMemo(() => createUserInput(props.user), [props.user])
   const model = useFormControlModel<keyof UserInput, UserInput>(initialModel)
-  const register = useFormControls<keyof User>(model)
+  const register = useFormControls<keyof User>(model, UserForm)
   const submitProps = useUserFormSubmit(props, model)
 
   const adSyncProperties = get(
