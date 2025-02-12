@@ -57,11 +57,8 @@ export function useSubscriptionSettings() {
         t('admin.subscriptionSettingsUpdateSuccess'),
         'success'
       )
-    } catch  {
-      context.displayToast(
-        t('admin.subscriptionSettingsUpdateError'),
-        'error'
-      )
+    } catch {
+      context.displayToast(t('admin.subscriptionSettingsUpdateError'), 'error')
     }
   }
 
