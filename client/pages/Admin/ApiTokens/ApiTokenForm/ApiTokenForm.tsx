@@ -22,6 +22,7 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
     useFieldValidators(props)
   return (
     <FormControl
+      id={ApiTokenForm.displayName}
       model={model}
       submitProps={submitProps}
       panel={{
@@ -79,3 +80,5 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
     </FormControl>
   )
 }
+
+ApiTokenForm.displayName = 'ApiTokenForm'
