@@ -66,3 +66,5 @@ export const FeedbackPanel: PanelComponent = (props) => {
     </FormControl>
   )
 }
+
+FeedbackPanel.displayName = 'FeedbackPanel'
