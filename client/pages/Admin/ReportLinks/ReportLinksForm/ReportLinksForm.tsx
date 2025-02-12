@@ -24,14 +24,16 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
       panel={panelProps}
     >
       <InputControl
-        {...register<InputControlOptions>('name', {required: !props.edit})}
+        {...register<InputControlOptions>('name', { required: !props.edit })}
         label={t('admin.reportLinks.nameLabel')}
         placeholder={t('admin.reportLinks.namePlaceholder')}
         description={t('admin.reportLinks.nameDescription')}
         disabled={!!props.edit}
       />
       <InputControl
-        {...register<InputControlOptions>('description', {required: !props.edit})}
+        {...register<InputControlOptions>('description', {
+          required: !props.edit
+        })}
         rows={10}
         label={t('admin.reportLinks.descriptionLabel')}
         placeholder={t('admin.reportLinks.descriptionPlaceholder')}
@@ -47,13 +49,13 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         required={true}
       />
       <InputControl
-        {...register('iconColor', {required: true})}
+        {...register('iconColor', { required: true })}
         label={t('admin.reportLinks.iconColorLabel')}
         placeholder={t('admin.reportLinks.iconColorPlaceholder')}
         description={t('admin.reportLinks.iconColorDescription')}
       />
       <InputControl
-        {...register('externalUrl', {required: true})}
+        {...register('externalUrl', { required: true })}
         label={t('admin.reportLinks.externalUrlLabel')}
         placeholder={t('admin.reportLinks.externalUrlPlaceholder')}
         description={t('admin.reportLinks.externalUrlDescription')}

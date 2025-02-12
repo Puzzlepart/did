@@ -10,7 +10,10 @@ import { ApiTokenForm } from './ApiTokenForm'
  */
 export function useApiTokenForm(props: IApiTokenFormProps) {
   const model = useFormControlModel<keyof ApiTokenInput>()
-  const register = useFormControls<keyof ApiTokenInput>(model, ApiTokenForm.displayName)
+  const register = useFormControls<keyof ApiTokenInput>(
+    model,
+    ApiTokenForm.displayName
+  )
   const submitProps = useApiTokenFormSubmit(props, model)
   const expiryOptions = useExpiryOptions()
   return {
