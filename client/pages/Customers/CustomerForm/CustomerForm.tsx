@@ -10,49 +10,22 @@ import {
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { CustomerKey } from './CustomerKey'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
-import {
-  CUSTOMER_KEY_REGEX,
-  useValidateUniqueKeyFunction,
-  useValidateUniqueNameFunction
-} from './validation'
+import { useValidateUniqueNameFunction } from './validation'
 
 export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
-  const { model, submit, register } = useCustomerForm(props)
-  const ValidateUniqueKeyFunction = useValidateUniqueKeyFunction()
+  const { formControl } = useCustomerForm(props)
   const ValidateUniqueNameFunction = useValidateUniqueNameFunction(props)
   return (
-    <FormControl
-      {...props}
-      model={model}
-      submitProps={submit}
-      validateOnBlur={true}
-    >
+    <FormControl {...formControl}>
+      <CustomerKey />
       <InputControl
-        {...register<InputControlOptions>('key', {
-          casing: 'upper',
-          replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-          required: !props.edit,
-          validators: !props.edit && [
-            {
-              regex: CUSTOMER_KEY_REGEX,
-              messages: {
-                regex: t('customers.keyInvalid', { min: 2, max: 12 })
-              }
-            },
-            ValidateUniqueKeyFunction
-          ]
-        })}
-        disabled={!!props.edit}
-        label={t('customers.keyFieldLabel')}
-        description={t('customers.keyFieldDescription', { min: 2, max: 12 })}
-      />
-      <InputControl
-        {...register<InputControlOptions>('name', {
-          casing: 'capitalized',
+        {...formControl.register<InputControlOptions>('name', {
           required: true,
+          casing: 'capitalized',
           validators: [
             {
               minLength: 2
@@ -64,7 +37,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         description={t('customers.nameFieldDescription', { min: 2 })}
       />
       <InputControl
-        {...register<InputControlOptions>('description', {
+        {...formControl.register<InputControlOptions>('description', {
           casing: 'capitalized',
           validators: [
             {
@@ -81,7 +54,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         rows={14}
       />
       <IconPickerControl
-        {...register('icon', {
+        {...formControl.register('icon', {
           required: true,
           validators: [
             (value) => {
@@ -100,16 +73,16 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         label={t('common.labelsText')}
         placeholder={t('common.filterLabels')}
         noSelectionText={t('customers.noLabelsSelectedText')}
-        defaultSelectedKeys={model.value('labels')}
+        defaultSelectedKeys={formControl.model.value('labels')}
         onChange={(labels) =>
-          model.set(
+          formControl.model.set(
             'labels',
             labels.map((lbl) => lbl.name)
           )
         }
       />
       <SwitchControl
-        {...register<SwitchControlOptions>('inactive')}
+        {...formControl.register<SwitchControlOptions>('inactive')}
         label={t('common.inactiveFieldLabel')}
         description={t('customers.inactiveFieldDescription')}
         hidden={!props.edit}

@@ -1,4 +1,4 @@
-import { useFormControlModel, useFormControls } from 'components/FormControl'
+import { IFormControlProps, useFormControlModel, useFormControls } from 'components/FormControl'
 import { Customer } from 'types'
 import { mapProperty } from 'utils'
 import { ICustomerFormProps } from './types'
@@ -20,9 +20,12 @@ export function useCustomerForm(props: ICustomerFormProps) {
   )
   const submit = useCustomerFormSubmit(props, model)
   const register = useFormControls(model)
-  return {
+  const formControl: IFormControlProps = {
+    ...props,
     model,
-    submit,
-    register
+    register,
+    submitProps: submit,
+    validateOnBlur: true
   }
+  return { formControl }
 }
