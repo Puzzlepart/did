@@ -30,7 +30,7 @@ function registerControl<TOptions = any, KeyType = string>(
     required: (options as any)?.required
   }
   if (id && !CONTROL_REGISTRY[id]?.some((c) => c.name === name)) {
-    _.set(CONTROL_REGISTRY, id, [...CONTROL_REGISTRY[id] ?? [], control])
+    _.set(CONTROL_REGISTRY, id, [...(CONTROL_REGISTRY[id] ?? []), control])
     return control
   }
   return control

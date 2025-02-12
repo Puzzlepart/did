@@ -26,11 +26,17 @@ export const FeedbackPanel: PanelComponent = (props) => {
         values={labelOptions}
       />
       <InputControl
-        {...register<InputControlOptions>('title', { required: true, casing: 'capitalized' })}
+        {...register<InputControlOptions>('title', {
+          required: true,
+          casing: 'capitalized'
+        })}
         label={t('feedback.summaryFieldLabel')}
       />
       <InputControl
-        {...register<InputControlOptions>('body', { required: true, casing: 'capitalized' })}
+        {...register<InputControlOptions>('body', {
+          required: true,
+          casing: 'capitalized'
+        })}
         label={t('feedback.descriptionFieldLabel')}
         description={t('feedback.descriptionFieldDesc')}
         rows={6}

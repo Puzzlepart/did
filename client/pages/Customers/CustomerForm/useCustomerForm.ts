@@ -1,4 +1,8 @@
-import { IFormControlProps, useFormControlModel, useFormControls } from 'components/FormControl'
+import {
+  IFormControlProps,
+  useFormControlModel,
+  useFormControls
+} from 'components/FormControl'
 import { Customer } from 'types'
 import { mapProperty } from 'utils'
 import { ICustomerFormProps } from './types'

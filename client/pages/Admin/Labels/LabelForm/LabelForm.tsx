@@ -16,7 +16,11 @@ export const LabelForm: FC<ILabelFormProps> = (props) => {
   const { t } = useTranslation()
   const { model, register, submitProps, panelProps } = useLabelForm(props)
   return (
-    <FormControl id={LabelForm.displayName} submitProps={submitProps} panel={panelProps}>
+    <FormControl
+      id={LabelForm.displayName}
+      submitProps={submitProps}
+      panel={panelProps}
+    >
       <InputControl
         {...register<InputControlOptions>('name', {
           casing: 'lower',

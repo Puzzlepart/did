@@ -1,33 +1,36 @@
 import { useSubscriptionSettings } from 'AppContext'
 import {
-    InputControl,
-    InputControlOptions,
-    useFormContext
+  InputControl,
+  InputControlOptions,
+  useFormContext
 } from 'components/FormControl'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useValidateUniqueKeyFunction, useValidateKeyFunction } from './validation'
+import {
+  useValidateUniqueKeyFunction,
+  useValidateKeyFunction
+} from './validation'
 
 export const CustomerKey: FC = () => {
-    const { t } = useTranslation()
-    const { register, isEditMode } = useFormContext()
-    const keyMaxLength = useSubscriptionSettings('customers.keyMaxLength', 12)
-    const validateKeyFunction = useValidateKeyFunction(keyMaxLength)
-    const validateUniqueKeyFunction = useValidateUniqueKeyFunction()
-    return (
-        <InputControl
-            {...register<InputControlOptions>('key', {
-                casing: 'upper',
-                replace: [new RegExp('[^a-zA-Z0-9]'), ''],
-                validators: [
-                    validateKeyFunction,
-                    validateUniqueKeyFunction
-                ]
-            })}
-            disabled={isEditMode}
-            label={t('customers.keyFieldLabel')}
-            description={t('customers.keyFieldDescription', { min: 2, max: keyMaxLength })}
-            required={!isEditMode}
-        />
-    )
+  const { t } = useTranslation()
+  const { register, isEditMode } = useFormContext()
+  const keyMaxLength = useSubscriptionSettings('customers.keyMaxLength', 12)
+  const validateKeyFunction = useValidateKeyFunction(keyMaxLength)
+  const validateUniqueKeyFunction = useValidateUniqueKeyFunction()
+  return (
+    <InputControl
+      {...register<InputControlOptions>('key', {
+        casing: 'upper',
+        replace: [new RegExp('[^a-zA-Z0-9]'), ''],
+        validators: [validateKeyFunction, validateUniqueKeyFunction]
+      })}
+      disabled={isEditMode}
+      label={t('customers.keyFieldLabel')}
+      description={t('customers.keyFieldDescription', {
+        min: 2,
+        max: keyMaxLength
+      })}
+      required={!isEditMode}
+    />
+  )
 }
