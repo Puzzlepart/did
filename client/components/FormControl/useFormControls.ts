@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { useMap } from 'hooks/common/useMap'
-import { useCallback } from 'react'
+import { FC, useCallback } from 'react'
 import { FormInputControlBase } from './types'
 import _ from 'lodash'
 
@@ -73,16 +73,16 @@ function getExtendedPropertyName<KeyType extends string>(
 
 /**
  * Hook that returns a callback to register a new control with the given name and options.
- * If an ID is provided, the control will be registered with the given ID.
+ * If an component is provided, the control will be registered with the component's display name.
  *
- * @param model - Model
- * @param id - Form control ID
+ * @param model - Model instance
+ * @param component - Component instance
  *
  * @returns A callback to register a new control
  */
 export function useFormControls<KeyType extends string = any>(
   model: ReturnType<typeof useMap>,
-  id?: string
+  component?: FC
 ) {
   return useCallback(
     <TOptions = {}>(
@@ -93,7 +93,12 @@ export function useFormControls<KeyType extends string = any>(
       if (extensionId) {
         name = getExtendedPropertyName(name, extensionId)
       }
-      return registerControl<TOptions, KeyType>(name, model, options, id)
+      return registerControl<TOptions, KeyType>(
+        name,
+        model,
+        options,
+        component.displayName
+      )
     },
     [model]
   )

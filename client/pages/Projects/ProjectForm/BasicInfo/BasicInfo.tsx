@@ -12,7 +12,7 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCustomersContext } from '../../../Customers/context'
-import { ProjectKey } from './ProjectKey'
+import { ProjectKeyInput } from './ProjectKeyInput'
 import { TagPreview } from './TagPreview'
 import { ProjectFormTabComponent } from '../types'
 import { CreateOutlookCategory } from './CreateOutlookCategory'
@@ -42,8 +42,8 @@ export const BasicInfo: ProjectFormTabComponent = () => {
           onSelected={(customer) => model.set('customerKey', customer?.key)}
         />
       )}
-      <ProjectKey />
-      <TagPreview hidden={isEditMode} />
+      <ProjectKeyInput />
+      <TagPreview />
       <InputControl
         {...register<InputControlOptions>('name', {
           required: true,

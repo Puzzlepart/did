@@ -22,7 +22,10 @@ import { validateField } from './validateField'
  */
 function shouldValidateField(field: FormInputControlBase) {
   if (!field) return false
-  return !!field.name && (field.required || !!field.options?.validators)
+  return (
+    Boolean(field.name) &&
+    (field.required || Boolean(field.options?.validators))
+  )
 }
 
 /**

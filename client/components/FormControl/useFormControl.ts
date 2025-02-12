@@ -1,10 +1,19 @@
-import { CONTROL_REGISTRY, IDynamicButtonProps, IFormControlContext } from 'components'
+import {
+  CONTROL_REGISTRY,
+  IDynamicButtonProps,
+  IFormControlContext
+} from 'components'
 import { ComponentLogicHook } from 'hooks'
 import _ from 'lodash'
 import { useMemo } from 'react'
 import { CLEAR_VALIDATION_MESSAGES, useFormControlReducer } from './reducer'
 import { IFormControlProps } from './types'
 import { useFormControlValidation } from './useFormControlValidation'
+
+type UseFormControlReturnType = {
+  context: IFormControlContext
+  submitAction: IDynamicButtonProps
+}
 
 /**
  * Hook that returns an object with `footerActions` to be used in a form control.
@@ -15,10 +24,7 @@ import { useFormControlValidation } from './useFormControlValidation'
  */
 export const useFormControl: ComponentLogicHook<
   IFormControlProps,
-  {
-    context: IFormControlContext
-    submitAction: IDynamicButtonProps
-  }
+  UseFormControlReturnType
 > = (props) => {
   const [state, dispatch] = useFormControlReducer()
   const validateForm = useFormControlValidation(props, dispatch)
@@ -28,7 +34,6 @@ export const useFormControl: ComponentLogicHook<
       ...props.submitProps,
       onClick: async (event: any) => {
         dispatch(CLEAR_VALIDATION_MESSAGES())
-        // transform object to array
         const fields = Object.values(CONTROL_REGISTRY[props.id])
         if (await validateForm(fields)) {
           if (props.panel?.onDismiss) {
@@ -72,7 +77,7 @@ export const useFormControl: ComponentLogicHook<
         if (props.validateOnBlur) {
           const [, name] = target.id.split('_')
           const fields = Object.values(CONTROL_REGISTRY[props.id])
-          validateForm(fields.filter(f => f.name === name))
+          validateForm(fields.filter((f) => f.name === name))
         }
       }
     }),

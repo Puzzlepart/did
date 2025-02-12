@@ -17,27 +17,27 @@ import { useValidateUniqueNameFunction } from './validation'
 
 export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const { t } = useTranslation()
-  const { formControl } = useCustomerForm(props)
-  const ValidateUniqueNameFunction = useValidateUniqueNameFunction(props)
+  const { formControlProps } = useCustomerForm(props)
+  const validateUniqueNameFunction = useValidateUniqueNameFunction(props)
   return (
-    <FormControl {...formControl}>
+    <FormControl {...formControlProps}>
       <CustomerKey />
       <InputControl
-        {...formControl.register<InputControlOptions>('name', {
+        {...formControlProps.register<InputControlOptions>('name', {
           required: true,
           casing: 'capitalized',
           validators: [
             {
               minLength: 2
             },
-            ValidateUniqueNameFunction
+            validateUniqueNameFunction
           ]
         })}
         label={t('common.nameFieldLabel')}
         description={t('customers.nameFieldDescription', { min: 2 })}
       />
       <InputControl
-        {...formControl.register<InputControlOptions>('description', {
+        {...formControlProps.register<InputControlOptions>('description', {
           casing: 'capitalized',
           validators: [
             {
@@ -54,7 +54,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         rows={14}
       />
       <IconPickerControl
-        {...formControl.register('icon', {
+        {...formControlProps.register('icon', {
           required: true,
           validators: [
             (value) => {
@@ -73,16 +73,16 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         label={t('common.labelsText')}
         placeholder={t('common.filterLabels')}
         noSelectionText={t('customers.noLabelsSelectedText')}
-        defaultSelectedKeys={formControl.model.value('labels')}
+        defaultSelectedKeys={formControlProps.model.value('labels')}
         onChange={(labels) =>
-          formControl.model.set(
+          formControlProps.model.set(
             'labels',
             labels.map((lbl) => lbl.name)
           )
         }
       />
       <SwitchControl
-        {...formControl.register<SwitchControlOptions>('inactive')}
+        {...formControlProps.register<SwitchControlOptions>('inactive')}
         label={t('common.inactiveFieldLabel')}
         description={t('customers.inactiveFieldDescription')}
         hidden={!props.edit}

@@ -15,10 +15,7 @@ import { ReportLinksForm } from './ReportLinksForm'
 export function useReportLinksForm(props: IReportLinksFormProps) {
   const { t } = useTranslation()
   const model = useReportLinksModel(props)
-  const register = useFormControls<keyof ReportLink>(
-    model,
-    ReportLinksForm.displayName
-  )
+  const register = useFormControls<keyof ReportLink>(model, ReportLinksForm)
   const submitProps = useReportsFormSubmit(props, model)
   const panelProps: IFormControlProps['panel'] = {
     ..._.omit(props, 'onSave'),

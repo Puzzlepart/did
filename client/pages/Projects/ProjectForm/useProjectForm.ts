@@ -8,16 +8,6 @@ import { ProjectForm } from './ProjectForm'
 
 type UseProjectFormReturnType = {
   /**
-   * The model for the form.
-   */
-  model: ReturnType<typeof useProjectModel>
-
-  /**
-   * Callback for registering form controls.
-   */
-  register: ReturnType<typeof useFormControls>
-
-  /**
    * Props to pass to the `FormControl` component.
    */
   formControlProps: IFormControlProps
@@ -32,7 +22,7 @@ export const useProjectForm: ComponentLogicHook<
 > = (props) => {
   const model = useProjectModel(props)
   const options = useProjectFormOptions()
-  const register = useFormControls(model, ProjectForm.displayName)
+  const register = useFormControls(model, ProjectForm)
   const submitProps = useProjectFormSubmit(props, model, options)
   const formControlProps: IFormControlProps = {
     ...props,
@@ -41,6 +31,7 @@ export const useProjectForm: ComponentLogicHook<
     register,
     isEditMode: Boolean(props.edit),
     submitProps,
+    validateOnBlur: true,
     additionalContext: new Map<string, any>([
       ['options', options],
       ['setOptions', (key: any, value: any) => options.set(key, value)]
@@ -48,8 +39,6 @@ export const useProjectForm: ComponentLogicHook<
   }
 
   return {
-    model,
-    register,
     formControlProps
   }
 }

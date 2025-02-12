@@ -23,7 +23,7 @@ export function useFeedbackPanel(props: IPanelProps) {
   const labelOptions = useLabelOptions()
   const moodOptions = useMoodOptions()
   const model = useFormControlModel<keyof UserFeedback, UserFeedback>()
-  const register = useFormControls<keyof UserFeedback>(model, FeedbackPanel.displayName)
+  const register = useFormControls<keyof UserFeedback>(model, FeedbackPanel)
   const submitProps = useSubmitFeedback(props, model)
 
   const formControlProps: IFormControlProps = {

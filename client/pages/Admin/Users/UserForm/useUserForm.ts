@@ -25,7 +25,7 @@ export function useUserForm(props: IUserFormProps) {
   const context = useUsersContext()
   const initialModel = useMemo(() => createUserInput(props.user), [props.user])
   const model = useFormControlModel<keyof UserInput, UserInput>(initialModel)
-  const register = useFormControls<keyof User>(model, UserForm.displayName)
+  const register = useFormControls<keyof User>(model, UserForm)
   const submitProps = useUserFormSubmit(props, model)
 
   const adSyncProperties = get(

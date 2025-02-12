@@ -15,14 +15,17 @@ import { useCallback } from 'react'
 export function useValidateUniqueKeyFunction() {
   const context = useCustomersContext()
   const { t } = useTranslation()
-  const ValidateUniqueKeyFunction: ValidatorFunction<string> = useCallback((
-    value,
-    field
-  ) => {
-    if (!field.required) return null
-    const customer = _.find(context.state.customers, ({ key }) => key === value)
-    if (!customer) return null
-    return [t('customers.keyNotUniqueError', customer), 'error']
-  }, [context, t])
+  const ValidateUniqueKeyFunction: ValidatorFunction<string> = useCallback(
+    (value, field) => {
+      if (!field.required) return null
+      const customer = _.find(
+        context.state.customers,
+        ({ key }) => key === value
+      )
+      if (!customer) return null
+      return [t('customers.keyNotUniqueError', customer), 'error']
+    },
+    [context, t]
+  )
   return ValidateUniqueKeyFunction
 }

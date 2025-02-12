@@ -16,7 +16,7 @@ import { LabelForm } from '.'
 export function useLabelForm(props: ILabelFormProps) {
   const { t } = useTranslation()
   const model = useLabelModel(props)
-  const register = useFormControls(model, LabelForm.displayName)
+  const register = useFormControls(model, LabelForm)
   const submitProps = useLabelFormSubmit(props, model)
   const panelProps: IFormControlProps['panel'] = {
     ..._.omit(props, 'onSave'),

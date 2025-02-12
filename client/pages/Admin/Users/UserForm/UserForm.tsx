@@ -44,7 +44,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
       {!isEditMode && (
         <AutocompleteControl
           {...register('_' as any, {
-            required:!model.value('id'),
+            required: !model.value('id'),
             validators: t('common.adUserRequired')
           })}
           label={t('common.adUserLabel')}

@@ -16,7 +16,7 @@ import { RolePanel } from './RolePanel'
 export function useRolePanel(props: IRolePanelProps) {
   const model = useFormControlModel<keyof RoleInput, RoleInput>(props.edit)
   const submitProps = useRolePanelSubmit(props, model)
-  const register = useFormControls<keyof RoleInput>(model, RolePanel.displayName)
+  const register = useFormControls<keyof RoleInput>(model, RolePanel)
 
   const panelProps: IFormControlProps['panel'] = {
     ...props.panel,
