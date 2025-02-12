@@ -32,13 +32,14 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
     >
       <InputControl
         {...register('name', {
+          required: true,
           validators: [ValidateUniqueNameFunction]
         })}
         label={t('admin.apiTokens.tokenNameLabel')}
-        required={true}
       />
       <InputControl
         {...register('description', {
+          required: true,
           validators: [
             {
               minLength: 20
@@ -50,15 +51,14 @@ export const ApiTokenForm: StyledComponent<IApiTokenFormProps> = (props) => {
         description={t('admin.apiTokens.tokenDescriptionDescription', {
           minLength: 20
         })}
-        required={true}
       />
       <DropdownControl
         {...register<DropdownControlOptions>('expires', {
+          required: true,
           preTransformValue: ({ optionValue }) =>
             new DateObject().add(optionValue).jsDate
         })}
         label={t('admin.apiTokens.tokenExpiryLabel')}
-        required={true}
         values={fuzzyMap<any>(expiryOptions, (value, key) => ({
           value: key,
           text: value

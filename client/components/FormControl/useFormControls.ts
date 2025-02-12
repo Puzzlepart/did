@@ -2,6 +2,9 @@
 import { useMap } from 'hooks/common/useMap'
 import { useCallback } from 'react'
 import { FormInputControlBase } from './types'
+import _ from 'lodash'
+
+export const CONTROL_REGISTRY: Record<string, any[]> = {}
 
 /**
  * Register control with a `model`
@@ -9,20 +12,28 @@ import { FormInputControlBase } from './types'
  * @param name - Name
  * @param model - Model
  * @param options - Control options
+ * @param id - ID
  *
  * @returns `FormInputControlBase`
  */
 function registerControl<TOptions = any, KeyType = string>(
   name: KeyType,
   model: ReturnType<typeof useMap>,
-  options?: TOptions
+  options?: TOptions,
+  id?: string
 ): FormInputControlBase<TOptions, KeyType> {
-  return {
+  const control = {
     id: `form_control_${name}`,
     name,
     model,
-    options
+    options,
+    required: (options as any)?.required
   }
+  if (id && !CONTROL_REGISTRY[id]?.some((c) => c.name === name)) {
+    _.set(CONTROL_REGISTRY, id, [...CONTROL_REGISTRY[id] ?? [], control])
+    return control
+  }
+  return control
 }
 
 /**
@@ -59,11 +70,13 @@ function getExtendedPropertyName<KeyType extends string>(
  * Use form controls
  *
  * @param model - Model
+ * @param id - ID
  *
  * @returns A callback to register a new control
  */
 export function useFormControls<KeyType extends string = any>(
-  model: ReturnType<typeof useMap>
+  model: ReturnType<typeof useMap>,
+  id?: string
 ) {
   return useCallback(
     <TOptions = {}>(
@@ -74,7 +87,7 @@ export function useFormControls<KeyType extends string = any>(
       if (extensionId) {
         name = getExtendedPropertyName(name, extensionId)
       }
-      return registerControl<TOptions, KeyType>(name, model, options)
+      return registerControl<TOptions, KeyType>(name, model, options, id)
     },
     [model]
   )

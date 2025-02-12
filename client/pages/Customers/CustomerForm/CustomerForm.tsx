@@ -34,6 +34,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         {...register<InputControlOptions>('key', {
           casing: 'upper',
           replace: [new RegExp('[^a-zA-Z0-9]'), ''],
+          required: !props.edit,
           validators: !props.edit && [
             {
               regex: CUSTOMER_KEY_REGEX,
@@ -47,11 +48,11 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         disabled={!!props.edit}
         label={t('customers.keyFieldLabel')}
         description={t('customers.keyFieldDescription', { min: 2, max: 12 })}
-        required={!props.edit}
       />
       <InputControl
         {...register<InputControlOptions>('name', {
           casing: 'capitalized',
+          required: true,
           validators: [
             {
               minLength: 2
@@ -61,7 +62,6 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         })}
         label={t('common.nameFieldLabel')}
         description={t('customers.nameFieldDescription', { min: 2 })}
-        required={true}
       />
       <InputControl
         {...register<InputControlOptions>('description', {
@@ -82,6 +82,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
       />
       <IconPickerControl
         {...register('icon', {
+          required: true,
           validators: [
             (value) => {
               if (value === 'Umbrella') {
@@ -94,11 +95,10 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
         label={t('common.iconFieldLabel')}
         description={t('customers.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        required={true}
       />
       <LabelPickerControl
         label={t('common.labelsText')}
-        placeholder={t('projects.filterLabels')}
+        placeholder={t('common.filterLabels')}
         noSelectionText={t('customers.noLabelsSelectedText')}
         defaultSelectedKeys={model.value('labels')}
         onChange={(labels) =>

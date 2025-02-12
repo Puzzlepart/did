@@ -4,13 +4,13 @@
 /* eslint-disable unicorn/no-lonely-if */
 import { AnyAction } from '@reduxjs/toolkit'
 import { useTranslation } from 'react-i18next'
-import { ReactElement } from 'react-markdown/lib/react-markdown'
 import { SET_VALIDATION_MESSAGES } from './reducer'
 import {
   FormInputControlBase,
   IFormControlProps,
   ValidationResult
 } from './types'
+import { CONTROL_REGISTRY } from './useFormControls'
 import { validateField } from './validateField'
 
 /**
@@ -41,17 +41,17 @@ export function useFormControlValidation(
   dispatch: React.Dispatch<AnyAction>
 ) {
   const { t } = useTranslation()
-  const validateForm = async (fields: ReactElement[]) => {
+  const validateForm = async () => {
     if (props.skipValidation) return true
-    const formFieldsToValidate = fields
-      .filter((f) => f && shouldValidateField(f.props))
-      .map<FormInputControlBase>((f) => f.props)
+    const formFieldsToValidate = CONTROL_REGISTRY[props.id]
+      .filter(Boolean)
+      .filter((f) => shouldValidateField(f))
     const _validationMessages = new Map<string, ValidationResult>()
     for (const field of formFieldsToValidate) {
       if (_validationMessages.has(field.name)) {
         continue
       }
-      const validationResult = await validateField(field, t)
+      const validationResult = await validateField(field, props, t)
       if (validationResult) {
         _validationMessages.set(field.name, validationResult)
       }
