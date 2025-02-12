@@ -412,7 +412,8 @@
     "customersHeader": "Customers",
     "projectsHeader": "Projects",
     "timesheetTimebankEnabledLabel": "Enable Timebank",
-    "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance."
+    "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance.",
+    "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",

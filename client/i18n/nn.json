@@ -411,7 +411,8 @@
     "customersHeader": "Kunder",
     "projectsHeader": "Prosjekter",
     "timesheetTimebankEnabledLabel": "Aktiver Tidsbank",
-    "timesheetTimebankEnabledDescription": "Når tidbank er aktivert, kan ansatte akkumulere overtidstimer som kan brukes til fritid på et senere tidspunkt. Dette gir fleksibilitet og mulighet for bedre balanse mellom arbeid og fritid."
+    "timesheetTimebankEnabledDescription": "Når tidbank er aktivert, kan ansatte akkumulere overtidstimer som kan brukes til fritid på et senere tidspunkt. Dette gir fleksibilitet og mulighet for bedre balanse mellom arbeid og fritid.",
+    "subscriptionSettingsUpdateError": "En feil oppstod under oppdatering av abonnementsinnstillinger."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
