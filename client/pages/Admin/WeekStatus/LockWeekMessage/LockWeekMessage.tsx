@@ -17,10 +17,7 @@ export const LockWeekMessage: StyledComponent<ILockWeekMessageProps> = (
 
   if (!Boolean(lockedPeriod)) return null
 
-  const lockedAt = $date.formatDate(
-    lockedPeriod.lockedAt,
-    props.dateFormat
-  )
+  const lockedAt = $date.formatDate(lockedPeriod.lockedAt, props.dateFormat)
 
   return (
     <UserMessage
@@ -29,9 +26,12 @@ export const LockWeekMessage: StyledComponent<ILockWeekMessageProps> = (
       text={t('admin.weekStatus.weekLockedMessage', {
         ...props.period,
         lockedAt,
-        reason: lockedPeriod?.reason && `\n\n **${t('common.reason')}:** _${lockedPeriod.reason}_`
+        reason:
+          lockedPeriod?.reason &&
+          `\n\n **${t('common.reason')}:** _${lockedPeriod.reason}_`
       })}
-      style={{ marginBottom: 25 }} />
+      style={{ marginBottom: 25 }}
+    />
   )
 }
 

@@ -23,7 +23,10 @@ export const List: TabComponent<IListProps> = (props) => {
     <div className={List.className}>
       <div className={styles.actions}>
         <TeamsReminderButton
-          title={t('admin.weekStatus.teamsReminderButtonTooltiop', props.period)}
+          title={t(
+            'admin.weekStatus.teamsReminderButtonTooltiop',
+            props.period
+          )}
           period={props.period}
           users={props.period.users}
           topic={t('admin.weekStatus.teamsReminderTopicTemplate', props.period)}

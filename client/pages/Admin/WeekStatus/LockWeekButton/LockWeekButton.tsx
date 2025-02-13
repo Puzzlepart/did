@@ -8,8 +8,7 @@ import { useLockWeekButton } from './useLockWeekButton'
 export const LockWeekButton: StyledComponent<ILockWeekButtonProps> = (
   props
 ) => {
-  const { text, icon, onClick, confirmationDialog } =
-    useLockWeekButton(props)
+  const { text, icon, onClick, confirmationDialog } = useLockWeekButton(props)
   return (
     <div className={LockWeekButton.className}>
       <Button appearance='subtle' icon={icon} onClick={onClick}>

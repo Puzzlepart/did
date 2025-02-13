@@ -1,6 +1,6 @@
 import { IMissingSubmissionPeriod } from '../types'
 
-export interface ILockWeekMessageProps  {
+export interface ILockWeekMessageProps {
   period: IMissingSubmissionPeriod
   dateFormat?: string
 }
