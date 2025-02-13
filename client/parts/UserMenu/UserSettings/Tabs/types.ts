@@ -5,4 +5,4 @@ export interface UserSettingsTabComponent
   extends React.FC<{
     register: ReturnType<typeof useUserSettings>['formControlProps']['register']
     model: ReturnType<typeof useUserSettings>['formControlProps']['model']
-  }> { }
+  }> {}
