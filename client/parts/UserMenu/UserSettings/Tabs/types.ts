@@ -1,8 +1,7 @@
 import React from 'react'
 import { useUserSettings } from '../useUserSettings'
 
+type IUserSettingsTabComponentProps = Pick<ReturnType<typeof useUserSettings>['formControlProps'], 'register' | 'model'>
+
 export interface UserSettingsTabComponent
-  extends React.FC<{
-    register: ReturnType<typeof useUserSettings>['formControlProps']['register']
-    model: ReturnType<typeof useUserSettings>['formControlProps']['model']
-  }> {}
+  extends React.FC<IUserSettingsTabComponentProps> { }
