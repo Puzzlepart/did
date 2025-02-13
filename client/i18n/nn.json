@@ -299,8 +299,7 @@
       "confirmLockSubText": "Er du sikker på at du vil låse veke {{period}}?",
       "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse veka...",
       "confirmLockTitle": "Lås veke",
-      "weekOpenTooltip": "Veke {{weekNumber}} er åpen. Trykk for å låse, og legg eventuelt til en årsak.",
-      "weekLockedTooltip": "Veke {{weekNumber}} ble låst {{lockedAt}}."
+      "weekLockedMessage": "Veke {{weekNumber}} ble låst {{lockedAt}}.{{reason}}"
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",
@@ -751,7 +750,7 @@
     "managerLabel": "Leder",
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
-    "reason": "Årsak",
+    "reason": "Begrunning",
     "parentProject": "Overordna prosjekt"
   },
   "navigation": {

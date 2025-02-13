@@ -1,18 +1,19 @@
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import { LockWeekButton } from '../LockWeekButton'
+import { LockWeekMessage } from '../LockWeekMessage'
 import { MissingSubmissionUser } from '../MissingSubmissionUser'
 import { TeamsReminderButton } from '../TeamsReminderButton'
-import { IListProps } from './types'
 import styles from './List.module.scss'
-import { LockWeekButton } from '../LockWeekButton'
+import { IListProps } from './types'
+import { useTranslation } from 'react-i18next'
 
-export const List: TabComponent<IListProps> = ({ users, period }) => {
+export const List: TabComponent<IListProps> = (props) => {
   const { t } = useTranslation()
-  if (users) {
+  if (props.users) {
     return (
       <div className={List.className}>
-        {users.map((user, index) => (
+        {props.users.map((user, index) => (
           <MissingSubmissionUser key={index} user={user} />
         ))}
       </div>
@@ -22,15 +23,16 @@ export const List: TabComponent<IListProps> = ({ users, period }) => {
     <div className={List.className}>
       <div className={styles.actions}>
         <TeamsReminderButton
-          title={t('admin.weekStatus.teamsReminderButtonTooltiop', period)}
-          period={period}
-          users={period.users}
-          topic={t('admin.weekStatus.teamsReminderTopicTemplate', period)}
+          title={t('admin.weekStatus.teamsReminderButtonTooltiop', props.period)}
+          period={props.period}
+          users={props.period.users}
+          topic={t('admin.weekStatus.teamsReminderTopicTemplate', props.period)}
         />
-        <LockWeekButton period={period} />
+        <LockWeekButton period={props.period} />
       </div>
-      {period.users.map((user, index) => (
-        <MissingSubmissionUser key={index} user={user} period={period} />
+      <LockWeekMessage period={props.period} />
+      {props.period.users.map((user, index) => (
+        <MissingSubmissionUser key={index} user={user} period={props.period} />
       ))}
     </div>
   )

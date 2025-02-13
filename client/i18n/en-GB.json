@@ -300,8 +300,7 @@
       "confirmLockTitle": "Lock week",
       "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
       "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
-      "weekOpenTooltip": "Week {{weekNumber}} is open. Tap to lock, and optionally add a reason.",
-      "weekLockedTooltip": "Week {{weekNumber}} was locked {{lockedAt}}."
+      "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",
