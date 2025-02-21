@@ -30,6 +30,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'defaultValue',
             'onChange',
             'disabled',
+            'minLength',
             'maxLength',
             'rows',
             'onBlur'
@@ -48,6 +49,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'defaultValue',
             'onChange',
             'disabled',
+            'minLength',
             'maxLength',
             'onBlur',
             'contentBefore',

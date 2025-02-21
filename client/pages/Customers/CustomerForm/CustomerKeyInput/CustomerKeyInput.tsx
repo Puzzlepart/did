@@ -11,7 +11,7 @@ import {
   useValidateKeyFunction
 } from './validation'
 
-export const CustomerKey: FC = () => {
+export const CustomerKeyInput: FC = () => {
   const { t } = useTranslation()
   const { register, isEditMode } = useFormContext()
   const keyMaxLength = useSubscriptionSettings('customers.keyMaxLength', 12)
@@ -25,12 +25,13 @@ export const CustomerKey: FC = () => {
         replace: [new RegExp('[^a-zA-Z0-9]'), ''],
         validators: [validateKeyFunction, validateUniqueKeyFunction]
       })}
-      disabled={isEditMode}
       label={t('customers.keyFieldLabel')}
       description={t('customers.keyFieldDescription', {
         min: 2,
         max: keyMaxLength
       })}
+      disabled={isEditMode}
+      maxLength={keyMaxLength}
     />
   )
 }

@@ -6,7 +6,7 @@ export interface IInputFieldProps
   extends Pick<TextareaProps, 'rows' | 'value' | 'placeholder' | 'maxLength'>,
     Pick<
       InputProps,
-      'type' | 'defaultValue' | 'contentBefore' | 'contentAfter'
+      'type' | 'defaultValue' | 'contentBefore' | 'contentAfter' |'minLength' |'maxLength'
     >,
     IFieldProps {
   /**

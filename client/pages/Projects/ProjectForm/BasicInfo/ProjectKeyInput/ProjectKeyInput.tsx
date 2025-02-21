@@ -1,3 +1,4 @@
+import { useSubscriptionSettings } from 'AppContext'
 import {
   InputControl,
   InputControlOptions,
@@ -9,7 +10,6 @@ import {
   useValidateKeyFunction,
   useValidateUniqueKeyFunction
 } from './validation'
-import { useSubscriptionSettings } from 'AppContext'
 
 export const ProjectKeyInput: FC = () => {
   const { t } = useTranslation()
@@ -25,12 +25,13 @@ export const ProjectKeyInput: FC = () => {
         replace: [new RegExp('[^a-zA-Z0-9]'), ''],
         validators: [validateKeyFunction, validateUniqueKeyFunction]
       })}
-      disabled={isEditMode || !Boolean(model.value('customerKey'))}
       label={t('projects.keyFieldLabel')}
       description={t('projects.keyFieldDescription', {
         min: 2,
         max: keyMaxLength
       })}
+      disabled={isEditMode || !Boolean(model.value('customerKey'))}
+      maxLength={keyMaxLength}
     />
   )
 }

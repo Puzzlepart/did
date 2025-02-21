@@ -10,7 +10,7 @@ import {
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { CustomerKey } from './CustomerKey'
+import { CustomerKeyInput } from './CustomerKeyInput'
 import { ICustomerFormProps } from './types'
 import { useCustomerForm } from './useCustomerForm'
 import { useValidateUniqueNameFunction } from './validation'
@@ -21,7 +21,7 @@ export const CustomerForm: FC<ICustomerFormProps> = (props) => {
   const validateUniqueNameFunction = useValidateUniqueNameFunction(props)
   return (
     <FormControl {...formControlProps}>
-      <CustomerKey />
+      <CustomerKeyInput />
       <InputControl
         {...formControlProps.register<InputControlOptions>('name', {
           required: true,
