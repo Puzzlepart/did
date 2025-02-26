@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.13.3 - TBA](#-0133---tba)
+	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
 		* [Fixed](#fixed)
 		* [Changed](#changed)
 		* [Added](#added)
@@ -80,9 +80,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0133---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0133---25022025)
 
-## ➤ 0.13.3 - TBA
+## ➤ 0.13.3 - 25.02.2025
 
 ### Fixed
 - Fixed layout issue in Project Popover in Timesheet [#1196](https://github.com/Puzzlepart/did/issues/1196)
