@@ -27,13 +27,13 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         styles={{
           link: {
             display:
-              budgetTracking?.enabled || projects.enableResourceManagement
+              budgetTracking?.enabled || projects?.enableResourceManagement
                 ? 'initial'
                 : 'none'
           },
           itemContainer: {
             paddingTop:
-              budgetTracking?.enabled || projects.enableResourceManagement
+              budgetTracking?.enabled || projects?.enableResourceManagement
                 ? 15
                 : 0
           }
