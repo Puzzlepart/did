@@ -7,8 +7,8 @@ import {
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  useValidateUniqueKeyFunction,
-  useValidateKeyFunction
+  useValidateKeyFunction,
+  useValidateUniqueKeyFunction
 } from './validation'
 
 export const CustomerKeyInput: FC = () => {

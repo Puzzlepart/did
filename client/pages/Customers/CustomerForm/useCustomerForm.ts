@@ -35,6 +35,7 @@ export const useCustomerForm: ComponentLogicHook<
     model,
     register,
     submitProps: submit,
+    isEditMode: Boolean(props.edit),
     validateOnBlur: true
   }
   return { formControlProps }
