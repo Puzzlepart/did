@@ -149,7 +149,10 @@
       "infoMessage": "Opprett rolledefinisjoner for prosjektet, inkludert roller som prosjektleder, utvikler og designer. Du kan også spesifisere timeprisen for hver rolle for å gi en bedre oversikt over inntjening per prosjekt.",
       "headerText": "Roller",
       "hourlyRatePlaceholder": "Angi timepris for rollen.",
-      "rolePlaceholder": "Skriv inn navnet på rollen."
+      "rolePlaceholder": "Skriv inn navnet på rollen.",
+      "defaultRoleLabel": "Standardrolle",
+      "defaultRoleDescription": "Denne rollen vil bli tildelt alle nye prosjektmedlemmer som standard hvis ingen annen rolle er spesifisert for dem.",
+      "defaultRoleError": "En standardrolle eksisterer allerede. Fjern standardrollen {{role}} før du legger til en annen."
     },
     "resourcesLabel": "Prosjektressurser",
     "hourlyRate": "kr {{rate}} / time",

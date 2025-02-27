@@ -17,3 +17,11 @@ test('deepCopy returns a deep copy of an object', (t) => {
   t.not(result.b, obj.b)
   t.not(result.b.d, obj.b.d)
 })
+
+test('deepCopy handles arrays correctly', (t) => {
+  const arr = [1, { nested: 'value' }]
+  const result = deepCopy(arr)
+  t.deepEqual(result, arr)
+  t.not(result, arr)
+  t.not(result[1], arr[1])
+})

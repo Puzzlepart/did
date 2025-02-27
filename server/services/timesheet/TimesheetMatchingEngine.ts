@@ -4,7 +4,11 @@ import _ from 'underscore'
 import s from 'underscore.string'
 import { Customer, EventObject, Project } from '../../graphql/resolvers/types'
 import { tryParseJson } from '../../utils'
-import { ProjectResourcesExtensionId, ProjectsData } from '../mongo/project'
+import {
+  ProjectResourcesExtensionId,
+  ProjectRoleDefinitionsExtensionId,
+  ProjectsData
+} from '../mongo/project'
 import { ProjectMatch } from './types'
 
 /**
@@ -223,6 +227,13 @@ export default class TimesheetMatchingEngine {
     return event
   }
 
+  /**
+   * Finds the project role for a given project based on the user ID in the configuration.
+   *
+   * @param project - The project object to search for the role.
+   *
+   * @returns An object containing the project role name and hourly rate if found, otherwise null.
+   */
   private _findProjectRole(project: Project) {
     const extensions = tryParseJson(
       get(project, 'extensions', { default: 'null' })
@@ -233,11 +244,23 @@ export default class TimesheetMatchingEngine {
       `${ProjectResourcesExtensionId}.properties.resources`,
       { default: [] }
     )
+    const roleDefinitions = get(
+      extensions,
+      `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
+      { default: [] }
+    )
+    const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
     const resource = _.find(
       resources,
       ({ id }) => id === this._configuration.userId
     )
-    if (!resource) return null
+    if (!resource) {
+      if (!defaultRole) return null
+      return {
+        name: defaultRole.name,
+        hourlyRate: defaultRole.hourlyRate
+      }
+    }
     return {
       name: resource.projectRole,
       hourlyRate: resource.hourlyRate

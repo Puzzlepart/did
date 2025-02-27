@@ -151,7 +151,10 @@
       "infoMessage": "Establish role definitions for the project, including positions such as Project Manager, Developer, and Designer. Additionally, specify the hourly rates for each role.",
       "headerText": "Roles",
       "rolePlaceholder": "Enter the name of the role.",
-      "hourlyRatePlaceholder": "Enter the hourly rate for the role."
+      "hourlyRatePlaceholder": "Enter the hourly rate for the role.",
+      "defaultRoleLabel": "Default",
+      "defaultRoleDescription": "This role will be assigned to all new project members by default if no other role is specified for them.",
+      "defaultRoleError": "A default role already exists. Please remove the default role {{role}} before adding another."
     },
     "resourcesLabel": "Project Resources",
     "hourlyRate": "kr {{rate}} / hour",

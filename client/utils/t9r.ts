@@ -1,4 +1,6 @@
+import { get } from 'lodash'
 /* eslint-disable unicorn/better-regex */
+
 /**
  * Replace tokens in a template string with values from an object. Tokens are
  * in the form of {{ token }}.
@@ -12,6 +14,6 @@ export function t9r(
 ): string {
   return template.replace(
     /\{\{\s*([^}\s]+)\s*\}\}/g,
-    (_, token) => interpolations[token]
+    (_, token) => get(interpolations, token, '')
   )
 }

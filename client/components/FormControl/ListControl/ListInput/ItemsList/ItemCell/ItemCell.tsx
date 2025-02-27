@@ -28,7 +28,12 @@ export const ItemCell: FC<IItemCellProps> = (props) => {
           className={styles.value}
           onClick={Boolean(props.onChange) ? editing.toggle : emptyFunction}
         >
-          {renderValue(value, props.field.renderAs, t('common.notSet'))}
+          {renderValue(
+            value,
+            props.field.renderAs,
+            props.field.defaultValue ?? t('common.notSet'),
+            t
+          )}
         </span>
       )}
     </div>
