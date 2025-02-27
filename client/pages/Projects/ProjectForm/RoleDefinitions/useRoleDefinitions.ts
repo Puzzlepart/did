@@ -40,6 +40,7 @@ export function useRoleDefinitions() {
       label: t('projects.roleDefinitions.defaultRoleLabel'),
       renderAs: 'boolean',
       defaultValue: '',
+      required: false,
       props: {
         hint: t('projects.roleDefinitions.defaultRoleDescription'),
         disabled: Boolean(defaultRole),
