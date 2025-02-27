@@ -9,19 +9,31 @@ import { ListField } from '../types'
 export const ItemForm: FC = () => {
   const context = useListInputContext()
 
-  const renderField = (field: ListField<Record<string, any>>, index: number) => {
+  const renderField = (
+    field: ListField<Record<string, any>>,
+    index: number
+  ) => {
     switch (field.type) {
       case 'boolean': {
         return (
           <Field
             key={index}
             label={field.label}
-            {..._.pick(field.props, 'label', 'hint', 'required')}>
+            {..._.pick(
+              field.props,
+              'label',
+              'hint',
+              'required',
+              'validationMessage',
+              'validationState'
+            )}
+          >
             <Switch
               checked={_.get(context, `state.currentItem.${field.key}`, false)}
               onChange={(_, { checked }) => {
                 context.onFieldChange(field, checked)
               }}
+              {..._.pick(field.props, 'disabled')}
             />
           </Field>
         )

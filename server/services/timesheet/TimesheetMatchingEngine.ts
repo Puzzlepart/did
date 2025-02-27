@@ -4,7 +4,11 @@ import _ from 'underscore'
 import s from 'underscore.string'
 import { Customer, EventObject, Project } from '../../graphql/resolvers/types'
 import { tryParseJson } from '../../utils'
-import { ProjectResourcesExtensionId, ProjectRoleDefinitionsExtensionId, ProjectsData } from '../mongo/project'
+import {
+  ProjectResourcesExtensionId,
+  ProjectRoleDefinitionsExtensionId,
+  ProjectsData
+} from '../mongo/project'
 import { ProjectMatch } from './types'
 
 /**
@@ -21,7 +25,7 @@ export default class TimesheetMatchingEngine {
    * @param _data - Projects data
    */
   // eslint-disable-next-line unicorn/empty-brace-spaces
-  constructor(private _data: ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -227,7 +231,7 @@ export default class TimesheetMatchingEngine {
    * Finds the project role for a given project based on the user ID in the configuration.
    *
    * @param project - The project object to search for the role.
-   * 
+   *
    * @returns An object containing the project role name and hourly rate if found, otherwise null.
    */
   private _findProjectRole(project: Project) {
@@ -245,13 +249,18 @@ export default class TimesheetMatchingEngine {
       `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
       { default: [] }
     )
-    // eslint-disable-next-line no-console
-    console.log({ roleDefinitions, project: project.name })
+    const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
     const resource = _.find(
       resources,
       ({ id }) => id === this._configuration.userId
     )
-    if (!resource) return null
+    if (!resource) {
+      if (!defaultRole) return null
+      return {
+        name: defaultRole.name,
+        hourlyRate: defaultRole.hourlyRate
+      }
+    }
     return {
       name: resource.projectRole,
       hourlyRate: resource.hourlyRate
