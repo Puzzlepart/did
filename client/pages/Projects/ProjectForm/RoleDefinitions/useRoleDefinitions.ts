@@ -28,6 +28,8 @@ export function useRoleDefinitions() {
       key: 'isDefault',
       type: 'boolean',
       label: t('projects.roleDefinitions.defaultRoleLabel'),
+      renderAs: 'boolean',
+      defaultValue: '',
       props: {
         hint: t('projects.roleDefinitions.defaultRoleDescription')
       }
