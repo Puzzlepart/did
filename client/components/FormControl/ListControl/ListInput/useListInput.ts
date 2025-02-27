@@ -38,7 +38,7 @@ export function useListInput(props: IListInputProps) {
 
   const onFieldChange = (
     field: ListField,
-    value: string | number,
+    value: string | number | boolean,
     index = -1
   ) => {
     if (index !== -1) {
