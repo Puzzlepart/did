@@ -23,7 +23,15 @@ export function useRoleDefinitions() {
       props: {
         placeholder: t('projects.roleDefinitions.hourlyRatePlaceholder')
       }
-    } as ListField<Partial<IInputFieldProps>>
+    } as ListField<Partial<IInputFieldProps>>,
+    {
+      key: 'isDefault',
+      type: 'boolean',
+      label: t('projects.roleDefinitions.defaultRoleLabel'),
+      props: {
+        hint: t('projects.roleDefinitions.defaultRoleDescription')
+      }
+    } 
   ]
   return { fields }
 }
