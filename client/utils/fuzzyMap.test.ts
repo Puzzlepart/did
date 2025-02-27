@@ -31,3 +31,15 @@ test('fuzzyMap maps an more advanced object', (t) => {
   const result = fuzzyMap(object, (item, key) => `${key}: ${item.join(', ')}`)
   t.deepEqual(result, ['five: 5, 6, 7', 'six: 7, 8, 9', 'seven: 8, 9, 10'])
 })
+
+test('fuzzyMap returns empty array for empty array input', (t) => {
+  const result = fuzzyMap([], (item) => item + 1)
+  t.deepEqual(result, [])
+})
+
+test('fuzzyMap handles null or undefined input', (t) => {
+  const resultNull = fuzzyMap(null, (item) => item)
+  const resultUndefined = fuzzyMap(undefined, (item) => item)
+  t.deepEqual(resultNull, [])
+  t.deepEqual(resultUndefined, [])
+})

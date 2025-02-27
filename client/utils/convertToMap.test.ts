@@ -10,3 +10,15 @@ test('toMap converts an object to a Map', (t) => {
   t.is(result.get('name'), 'Ole')
   t.is(result.get('age'), 38)
 })
+
+test('convertToMap handles empty object', (t) => {
+  const result = convertToMap({})
+  t.is(result.size, 0)
+})
+
+test('convertToMap handles null or undefined gracefully', (t) => {
+  const resultNull = convertToMap(null)
+  const resultUndefined = convertToMap(undefined)
+  t.is(resultNull.size, 0)
+  t.is(resultUndefined.size, 0)
+})
