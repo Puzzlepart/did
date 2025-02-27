@@ -45,10 +45,11 @@ export function useRoleDefinitions() {
         hint: t('projects.roleDefinitions.defaultRoleDescription'),
         disabled: Boolean(defaultRole),
         validationState: Boolean(defaultRole) && 'error',
-        validationMessage: Boolean(defaultRole)
-          && t('projects.roleDefinitions.defaultRoleError', {
-              role: defaultRole.name
-            })
+        validationMessage:
+          Boolean(defaultRole) &&
+          t('projects.roleDefinitions.defaultRoleError', {
+            role: defaultRole.name
+          })
       }
     } as ListField<any>
   ]

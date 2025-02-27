@@ -64,7 +64,9 @@ export function useListInput(props: IListInputProps) {
   }
 
   const isItemValid = () =>
-    props.fields.every((field) => !field.required || Boolean(_.get(state.currentItem, field.key)))
+    props.fields.every(
+      (field) => !field.required || Boolean(_.get(state.currentItem, field.key))
+    )
 
   return {
     props,

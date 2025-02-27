@@ -12,8 +12,7 @@ export function t9r(
   template: string,
   interpolations: Record<string, any>
 ): string {
-  return template.replace(
-    /\{\{\s*([^}\s]+)\s*\}\}/g,
-    (_, token) => get(interpolations, token, '')
+  return template.replace(/\{\{\s*([^}\s]+)\s*\}\}/g, (_, token) =>
+    get(interpolations, token, '')
   )
 }

@@ -15,7 +15,10 @@ export function parseInt(value: string): number {
  *
  * @param value The string value to parse.
  */
-export function parseFloat(value: string | number, fractionDigits?: number): number {
+export function parseFloat(
+  value: string | number,
+  fractionDigits?: number
+): number {
   if (Number.isNaN(`${value}`)) return null
   if (fractionDigits) {
     return Number.parseFloat(parseFloat(`${value}`).toFixed(fractionDigits))

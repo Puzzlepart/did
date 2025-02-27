@@ -6,6 +6,6 @@
 export function convertToMap<KeyType = string>(
   object: Record<string, any>
 ): Map<KeyType, any> {
-  if(!object) return new Map<KeyType, any>()
+  if (!object) return new Map<KeyType, any>()
   return new Map<KeyType, any>(Object.entries(object) as any)
 }
