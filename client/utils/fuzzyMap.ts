@@ -22,7 +22,7 @@ export function fuzzyMap<T, R = T>(
 ) {
   if (!obj) return []
   if (_.isArray(obj))
-    return obj
+    return (obj as T[])
       .map((item, index) => callbackFunction(item, index))
       .filter(Boolean)
   return Object.entries(obj).map(([key, value], index) =>
