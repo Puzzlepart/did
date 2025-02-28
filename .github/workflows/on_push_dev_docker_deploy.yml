@@ -3,7 +3,7 @@ name: Build and deploy to didapp/dev
 on:
   push:
     branches:
-      - ci/on_push_dev_docker_deploy
+      - deploy/docker-image
     paths:
       - 'server/**'
       - 'client/**'
