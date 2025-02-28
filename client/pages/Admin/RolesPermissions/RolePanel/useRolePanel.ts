@@ -6,6 +6,7 @@ import {
 import { RoleInput } from 'types'
 import { IRolePanelProps } from './types'
 import { useRolePanelSubmit } from './useRolePanelSubmit'
+import { RolePanel } from './RolePanel'
 
 /**
  * Component logic hook for `<RolePanel />`
@@ -15,7 +16,7 @@ import { useRolePanelSubmit } from './useRolePanelSubmit'
 export function useRolePanel(props: IRolePanelProps) {
   const model = useFormControlModel<keyof RoleInput, RoleInput>(props.edit)
   const submitProps = useRolePanelSubmit(props, model)
-  const register = useFormControls<keyof RoleInput>(model)
+  const register = useFormControls<keyof RoleInput>(model, RolePanel)
 
   const panelProps: IFormControlProps['panel'] = {
     ...props.panel,

@@ -20,6 +20,7 @@ export function fuzzyMap<T, R = T>(
   obj: FuzzyMapObjectType<T>,
   callbackFunction: FuzzyMapCallbackFunction<T, R>
 ) {
+  if (!obj) return []
   if (_.isArray(obj))
     return obj
       .map((item, index) => callbackFunction(item, index))

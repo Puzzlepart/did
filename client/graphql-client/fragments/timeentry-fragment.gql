@@ -14,8 +14,16 @@ fragment TimeEntryFragment on TimeEntry {
     tag
     name
     icon
+    parent {
+      tag
+      name
+    }
   }
   resource {
     id
+  }
+  role {
+    name
+    hourlyRate
   }
 }

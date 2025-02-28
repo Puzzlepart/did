@@ -37,7 +37,7 @@ export const FieldContainer: StyledComponent<IFieldProps> = (props) => {
         {(context) => (
           <Field
             className={mergeClasses(FieldContainer.className, props.className)}
-            {..._.pick(props, 'onKeyDown')}
+            {..._.pick(props, 'onKeyDown', 'title')}
             {...getValidationProps(context, props.name)}
           >
             <FieldLabel

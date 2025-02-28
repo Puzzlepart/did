@@ -52,3 +52,13 @@ export const TimesheetContext = createContext<ITimesheetContext>(null)
  * @returns `TimesheetContext`
  */
 export const useTimesheetContext = () => useContext(TimesheetContext)
+
+/**
+ * Returns the current state value for Timesheet using
+ * `useContext` from `react`
+ *
+ * @category Timesheet
+ *
+ * @returns `ITimesheetState`
+ */
+export const useTimesheetState = () => useContext(TimesheetContext).state

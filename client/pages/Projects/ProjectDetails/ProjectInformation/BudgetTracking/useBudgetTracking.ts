@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { FieldProps } from '@fluentui/react-components'
 import { useExtension } from 'hooks'
 import { Project } from 'types'
 import { BudgetTracking } from '../../../ProjectForm'
@@ -28,25 +29,29 @@ export const useBudgetTracking = () => {
     skip: !context.state.selected
   })
 
-  const hours = (data?.timeEntries ?? []).reduce(
-    (duration: number, entry: { duration: number }) =>
-      duration + entry.duration,
-    0
-  )
+  const hours = (data?.timeEntries ?? [])
+    .reduce(
+      (duration: number, entry: { duration: number }) =>
+        duration + entry.duration,
+      0
+    )
+    .toFixed(0)
 
   let used = Number.parseFloat((hours / tracking.hours).toFixed(2))
   used = used > 1 ? 1 : used
-  const getValidationStateFromThreshold = () => {
+
+  const getValidationStateFromThreshold = (): FieldProps['validationState'] => {
     if (used > tracking.criticalThreshold) return 'error'
     if (used > tracking.warningThreshold) return 'warning'
     return 'none'
   }
+
   return {
     loading,
     budgetTrackingEnabled: tracking.trackingEnabled,
     hours,
     budget: tracking.hours,
     used,
-    getValidationStateFromThreshold
+    validationState: getValidationStateFromThreshold()
   }
 }

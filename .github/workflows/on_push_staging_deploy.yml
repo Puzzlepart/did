@@ -22,16 +22,17 @@ jobs:
     - run: |
         npm ci --no-audit --no-fund --loglevel=error
 
-    # - name: Create package
-    #   run: |
-    #     npm run package
-    #   env:
-    #     NODE_ENV: production
-    #     INCLUDE_NODE_MODULES: '0'
-    #     INCLUDE_PACKAGE_LOCK_FILE: '0'
-    #     DISPLAY_VERSION_DETAILS: '1'
+    - name: Create package
+      run: |
+        export NODE_OPTIONS="--max-old-space-size=8192"
+        npm run package
+      env:
+        NODE_ENV: production
+        INCLUDE_NODE_MODULES: '0'
+        INCLUDE_PACKAGE_LOCK_FILE: '0'
+        DISPLAY_VERSION_DETAILS: '1'
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: did-package
         path: ./did-package.zip
@@ -46,7 +47,7 @@ jobs:
 
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: did-package
 

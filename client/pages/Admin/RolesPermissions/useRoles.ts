@@ -32,7 +32,7 @@ export function useRoles() {
    * On delete role
    */
   const onDelete = useCallback(async () => {
-    const response = await getResponse({
+    const { response } = await getResponse({
       title: t('admin.roles.confirmDeleteTitle'),
       subText: t('admin.roles.confirmDeleteSubText', selectedRole),
       responses: [[t('common.yes'), true, true], [t('common.no')]]

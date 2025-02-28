@@ -1,0 +1,10 @@
+query LockedPeriods {
+  subscription {
+    lockedPeriods {
+      periodId
+      reason
+      lockedBy
+      lockedAt
+    }
+  }
+}

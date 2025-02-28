@@ -3,9 +3,10 @@ import { User } from 'types'
 
 export type ListField<P = Record<string, any>> = {
   key: string
-  type: IInputFieldProps['type']
+  type: IInputFieldProps['type'] | 'boolean'
   label: string
-  renderAs?: 'currency'
+  renderAs?: 'currency' | 'boolean'
+  defaultValue?: string
   required?: boolean
   props?: P
 }

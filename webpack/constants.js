@@ -10,7 +10,9 @@ const PUBLIC_JS_PATH = path.resolve(SERVER_DIST, 'public/js')
 const HTML_PLUGIN_TEMPLATE = path.resolve('./server/views/_template.hbs')
 const HTML_PLUGIN_FILE_NAME = path.resolve(SERVER_DIST, 'views/index.hbs')
 const TSCONFIG_PATH = path.resolve(SRC_PATH, 'tsconfig.json')
+const ICONS_BASE_URL = 'https://spoprod-a.akamaihd.net/files/fabric/assets/icons/'
 const EXPORTED_ENV_VARS = {
+    'ICONS_BASE_URL': JSON.stringify(ICONS_BASE_URL),
     'VERSION': JSON.stringify(package.version),
     'DISPLAY_VERSION_DETAILS': JSON.stringify(process.env.DISPLAY_VERSION_DETAILS ?? '0'),
     'process.env.LOG_LEVEL': JSON.stringify(process.env.CLIENT_LOG_LEVEL ?? 'SILENT'),

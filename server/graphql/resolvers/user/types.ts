@@ -22,42 +22,62 @@ export class UserPhoto {
   base64?: string
 }
 
-/**
- * A type that describes a ActiveDirectoryUser
- *
- * @category GraphQL ObjectType
- */
 @ObjectType({
-  description: 'A type that describes a ActiveDirectoryUser',
+  description: 'A type that describes a User timebank entry',
   simpleResolvers: true
 })
-export class ActiveDirectoryUser {
-  @Field(() => ID)
+export class UserTimebankEntry {
+  @Field({ nullable: false })
+  balanceAdjustment?: number
+
+  @Field({ nullable: false })
+  id?: string
+}
+
+@ObjectType({
+  description: 'A type that describes a User timebank',
+  simpleResolvers: true
+})
+export class UserTimebank {
+  @Field({ nullable: true })
+  balance?: number
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  lastUpdated?: Date
+
+  @Field(() => [UserTimebankEntry], { nullable: true })
+  entries?: UserTimebankEntry[]
+}
+
+@InputType({
+  description: 'A type that describes a User timebank entry input'
+})
+export class UserTimebankEntryInput {
+  @Field({ nullable: false })
+  balanceAdjustment?: number
+
+  @Field({ nullable: false })
   id?: string
 
-  @Field({ nullable: true })
-  displayName?: string
+  @Field(() => [UserTimebankEntryInput], { nullable: false })
+  entries?: UserTimebankEntryInput[]
+}
 
+@InputType({
+  description: 'A input type that describes a User timebank'
+})
+export class UserTimebankInput {
   @Field({ nullable: true })
-  givenName?: string
+  balance?: number
 
-  @Field({ nullable: true })
-  surname?: string
+  @Field(() => GraphQLDateTime, { nullable: true })
+  lastUpdated?: Date
+}
 
+@ObjectType({ description: 'A type that describes a User timebank result' })
+export class UpdateUserTimebankResult extends BaseResult {
   @Field({ nullable: true })
-  jobTitle?: string
-
-  @Field({ nullable: true })
-  mobilePhone?: string
-
-  @Field({ nullable: true })
-  mail?: string
-
-  @Field({ nullable: true })
-  preferredLanguage?: string
-
-  @Field({ nullable: true })
-  accountEnabled?: boolean
+  balance?: number
 }
 
 /**
@@ -135,6 +155,12 @@ export class User {
    */
   @Field({ nullable: true })
   securityGroupId?: string
+
+  @Field(() => UserTimebank, { nullable: true })
+  timebank?: UserTimebank
+
+  @Field(() => User, { nullable: true })
+  manager?: User
 }
 
 /**
@@ -194,10 +220,16 @@ export class UserInput {
 
   /**
    * If the user is enrolled in did through a security group,
-   * this will be the security group id.
+   * this will be the security group ID.
    */
   @Field({ nullable: true })
   securityGroupId?: string
+
+  @Field(() => UserTimebankInput, { nullable: true })
+  timebank?: UserTimebankInput
+
+  @Field(() => UserInput, { nullable: true })
+  manager?: UserInput
 }
 
 /**
@@ -261,4 +293,45 @@ export class UserFeedback {
 export class UserFeedbackResult extends BaseResult {
   @Field({ nullable: true })
   ref?: number
+}
+
+/**
+ * A type that describes a ActiveDirectoryUser
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a ActiveDirectoryUser',
+  simpleResolvers: true
+})
+export class ActiveDirectoryUser {
+  @Field(() => ID)
+  id?: string
+
+  @Field({ nullable: true })
+  displayName?: string
+
+  @Field({ nullable: true })
+  givenName?: string
+
+  @Field({ nullable: true })
+  surname?: string
+
+  @Field({ nullable: true })
+  jobTitle?: string
+
+  @Field({ nullable: true })
+  mobilePhone?: string
+
+  @Field({ nullable: true })
+  mail?: string
+
+  @Field({ nullable: true })
+  preferredLanguage?: string
+
+  @Field({ nullable: true })
+  accountEnabled?: boolean
+
+  @Field(() => User, { nullable: true })
+  manager?: User
 }

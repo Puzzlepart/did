@@ -118,7 +118,14 @@ export class ReportService {
         }
         const mergedEntry = {
           ..._.omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
-          project: _.pick(project, 'tag', 'name', 'description', 'icon'),
+          project: _.pick(
+            project,
+            'tag',
+            'name',
+            'description',
+            'icon',
+            'parent'
+          ),
           customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
           resource
         }

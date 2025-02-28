@@ -4,9 +4,9 @@ import {
   useFormContext
 } from 'components/FormControl'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { ProjectFormTabComponent } from '../types'
 import { useResources } from './useResources'
-import { useTranslation } from 'react-i18next'
 
 export const Resources: ProjectFormTabComponent = () => {
   const { t } = useTranslation()

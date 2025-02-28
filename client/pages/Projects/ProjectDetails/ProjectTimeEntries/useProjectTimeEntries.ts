@@ -4,11 +4,14 @@ import columns from '../columns'
 import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
 
 /**
+ * Custom logic hook for project time entries. Uses the
+ * `useProjectTimeEntriesQuery` hook to fetch time entries.
+ *
  * @category Projects
  */
 export function useProjectTimeEntries() {
   const { state } = useProjectsContext()
-  const { loading, error, timeEntries } = useProjectTimeEntriesQuery()
+  const { loading, error, timeEntries, skip } = useProjectTimeEntriesQuery()
   const fileName = `TimeEntries-${state.selected?.tag.replace(
     /\s+/g,
     '-'
@@ -24,6 +27,7 @@ export function useProjectTimeEntries() {
     loading,
     error,
     onExport,
-    timeEntries
+    timeEntries,
+    skip
   }
 }

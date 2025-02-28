@@ -8,7 +8,7 @@ import { FormInputControlBase } from '../types'
  * @returns An object containing the `onChange` function.
  */
 export function useSwitchControl(props: FormInputControlBase) {
-  const value = props.model?.value<boolean>(props.name)
+  const value = props.model?.value<boolean>(props.name) ?? false
 
   const onChange = useCallback(
     (_event, value: boolean) => {

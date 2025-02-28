@@ -3,6 +3,7 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
+import _ from 'underscore'
 
 type ProjectExtensionObject = {
   description: string
@@ -81,6 +82,12 @@ export class ProjectInput {
    */
   @Field(() => String, { nullable: true, defaultValue: '{}' })
   extensions: ProjectExtensions
+
+  /**
+   * The key/tag of the parent project.
+   */
+  @Field({ nullable: true })
+  parentKey?: string
 }
 
 /**
@@ -180,12 +187,30 @@ export class Project {
   extensions: ProjectExtensions
 
   /**
-   * Constructs a new Project.
+   * The full `tag` of the parent project.
+   */
+  @Field({ nullable: true })
+  parentKey?: string
+
+  /**
+   * The parent project.
+   */
+  @Field(() => Project, { nullable: true })
+  parent?: Project
+
+  /**
+   * The children projects.
+   */
+  @Field(() => [Project], { nullable: true })
+  children?: Project[]
+
+  /**
+   * Constructs a new `Project` object from the given `ProjectInput`.
    *
    * @param input - The input to construct the project from.
    */
   constructor(input?: ProjectInput) {
-    Object.assign(this, input ?? {})
+    Object.assign(this, _.omit(input ?? {}, ['children', 'parent']))
   }
 }
 
@@ -213,4 +238,31 @@ export class CreateOrUpdateProjectResult {
 
   @Field({ nullable: true })
   id?: string
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a Project Role'
+})
+export class ProjectRole {
+  @Field({ nullable: true })
+  name: string
+
+  @Field({ nullable: true })
+  hourlyRate: number
+}
+/**
+ * @category GraphQL InputType
+ */
+@InputType({
+  description: 'A input type that describes a Project Role'
+})
+export class ProjectRoleInput {
+  @Field({ nullable: true })
+  name: string
+
+  @Field({ nullable: true })
+  hourlyRate: number
 }

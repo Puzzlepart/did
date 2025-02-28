@@ -21,7 +21,7 @@ export const BudgetTracking: StyledComponent = () => {
     hours,
     budget,
     used,
-    getValidationStateFromThreshold
+    validationState
   } = useBudgetTracking()
 
   if (!budgetTrackingEnabled || !budgetTracking.enabled) {
@@ -33,7 +33,7 @@ export const BudgetTracking: StyledComponent = () => {
       onRenderValue={() => (
         <div className={styles.budgetTracking}>
           <Field
-            validationState={getValidationStateFromThreshold()}
+            validationState={validationState}
             validationMessage={t('projects.budgetHoursUsed', {
               hours,
               budget
@@ -43,7 +43,8 @@ export const BudgetTracking: StyledComponent = () => {
           </Field>
         </div>
       )}
-      isDataLoaded={!loading}
+      isDataLoaded
+      hidden={loading}
     />
   )
 }

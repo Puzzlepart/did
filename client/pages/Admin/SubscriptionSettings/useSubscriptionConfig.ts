@@ -151,6 +151,26 @@ export function useSubscriptionConfig() {
               'admin.subscriptionSettings.enableProjectRolesDescription'
             )
           }
+        },
+        {
+          id: 'enableSimpleHierachy',
+          type: 'bool',
+          props: {
+            label: t('admin.subscriptionSettings.enableSimpleHierachyLabel'),
+            description: t(
+              'admin.subscriptionSettings.enableSimpleHierachyDescription'
+            )
+          }
+        },
+        {
+          id: 'autoLoadTimeEntries',
+          type: 'bool',
+          props: {
+            label: t('admin.subscriptionSettings.autoLoadTimeEntriesLabel'),
+            description: t(
+              'admin.subscriptionSettings.autoLoadTimeEntriesDescription'
+            )
+          }
         }
       ]
     },
@@ -226,6 +246,14 @@ export function useSubscriptionConfig() {
             defaultValue: 'HH:mm',
             getContentAfter: (value: string) => new DateObject().format(value)
           }
+        },
+        {
+          id: 'timebankEnabled',
+          type: 'bool',
+          props: {
+            label: t('admin.timesheetTimebankEnabledLabel'),
+            description: t('admin.timesheetTimebankEnabledDescription')
+          }
         }
       ]
     },
@@ -253,7 +281,8 @@ export function useSubscriptionConfig() {
             mobilePhone: t('common.mobilePhoneLabel'),
             preferredLanguage: t('common.preferredLanguageLabel'),
             department: t('common.departmentLabel'),
-            officeLocation: t('common.officeLocationLabel')
+            officeLocation: t('common.officeLocationLabel'),
+            manager: t('common.managerLabel')
           },
           props: {
             label: t('admin.adUserSyncPropertiesLabel'),

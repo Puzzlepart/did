@@ -51,11 +51,15 @@ export function useSubscriptionSettings() {
    */
   const onSaveSettings = async () => {
     const variables = _.pick(subscription, 'settings')
-    await updateSubscription({ variables })
-    context.displayToast(
-      t('admin.subscriptionSettingsUpdateSuccess'),
-      'success'
-    )
+    try {
+      await updateSubscription({ variables })
+      context.displayToast(
+        t('admin.subscriptionSettingsUpdateSuccess'),
+        'success'
+      )
+    } catch {
+      context.displayToast(t('admin.subscriptionSettingsUpdateError'), 'error')
+    }
   }
 
   /**

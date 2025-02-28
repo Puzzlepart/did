@@ -1,9 +1,12 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
-import { Customer, Project, User } from '../types'
+import { Customer, Project, ProjectRole, User } from '../types'
 
 /**
+ * Represents a TimeEntry object with all its properties and relationships.
+ * All fields are required except for the role field.
+ *
  * @category GraphQL ObjectType
  */
 @ObjectType({
@@ -61,6 +64,9 @@ export class TimeEntry {
 
   @Field(() => User)
   resource: User
+
+  @Field(() => ProjectRole, { nullable: true })
+  role: ProjectRole
 }
 
 /**

@@ -23,7 +23,7 @@ export const CreateOutlookCategory: StyledComponent = () => {
       />
       <SubText
         text={t('projects.createOutlookCategoryFieldDescription', {
-          id: model['projectId']
+          id: model['projectId'] ? `**${model['projectId']}**` : ''
         })}
       />
     </div>

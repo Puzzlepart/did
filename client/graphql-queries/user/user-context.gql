@@ -33,6 +33,7 @@ query UserContext {
       timesheet {
         dayFormat
         timeFormat
+        timebankEnabled
       }
       security {
         securityGroupEnabled
@@ -49,6 +50,8 @@ query UserContext {
         enableResourceManagement
         resourceMetadata
         enableProjectRoles
+        enableSimpleHierachy
+        autoLoadTimeEntries
       }
     }
   }
@@ -67,6 +70,14 @@ query UserContext {
     configuration
     photo {
       base64
+    }
+    timebank {
+      balance
+      lastUpdated
+      entries {
+        id
+        balanceAdjustment
+      }
     }
   }
   authProviders

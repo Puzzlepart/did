@@ -5,6 +5,7 @@ import _ from 'underscore'
 import { IReportLinksFormProps } from './types'
 import { useReportLinksModel } from './useReportLinksModel'
 import { useReportsFormSubmit } from './useReportsFormSubmit'
+import { ReportLinksForm } from './ReportLinksForm'
 
 /**
  * Component logic hook for `<ReportLinksForm />`.
@@ -14,7 +15,7 @@ import { useReportsFormSubmit } from './useReportsFormSubmit'
 export function useReportLinksForm(props: IReportLinksFormProps) {
   const { t } = useTranslation()
   const model = useReportLinksModel(props)
-  const register = useFormControls<keyof ReportLink>(model)
+  const register = useFormControls<keyof ReportLink>(model, ReportLinksForm)
   const submitProps = useReportsFormSubmit(props, model)
   const panelProps: IFormControlProps['panel'] = {
     ..._.omit(props, 'onSave'),

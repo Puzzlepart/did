@@ -22,7 +22,6 @@ export const SwitchControl: FormInputControlComponent = (props) => {
       <Switch
         checked={value}
         onChange={(event, data) => onChange(event, data.checked)}
-        defaultChecked={props.model?.value<boolean>(props.name)}
       />
     </Field>
   )

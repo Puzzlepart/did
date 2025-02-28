@@ -9,7 +9,7 @@ import {
   TimesheetPeriodObject
 } from 'types'
 import _ from 'underscore'
-import { BrowserStorage } from 'utils'
+import { BrowserStorage, omitTypename } from 'utils'
 
 export enum GetEventsOption {
   /**
@@ -298,7 +298,8 @@ export class TimesheetPeriod {
       let eventInput: ClientEventInput = {
         id: event.id,
         projectId: event.project.tag,
-        manualMatch: event.manualMatch
+        manualMatch: event.manualMatch,
+        role: omitTypename(event.role)
       }
       if (event.adjustedMinutes) {
         eventInput = {

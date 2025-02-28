@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import { StatusBar } from '.'
+import { useLockedPeriods } from '../../Admin/WeekStatus'
 import { Overview } from '../Views/Overview'
 import { useTimesheetContext } from '../context'
 import styles from './StatusBar.module.scss'
@@ -21,9 +22,11 @@ import styles from './StatusBar.module.scss'
 export function useStatusBar() {
   const { t } = useTranslation()
   const [, dismiss, isDismissed] = useArray<string>([])
-  const { state, dispatch } = useTimesheetContext()
+  const context = useTimesheetContext()
+  const lockedPeriods = useLockedPeriods()
   const { dateRangeType, selectedView, periods, selectedPeriod, loading } =
-    state
+    context.state
+  const isPeriodLocked = lockedPeriods.isLocked(selectedPeriod?.id)
 
   if (!selectedPeriod) {
     return {
@@ -98,7 +101,7 @@ export function useStatusBar() {
     }),
     action: {
       text: t('timesheet.ignoreAllTooltip'),
-      onClick: () => dispatch(IGNORE_ALL()),
+      onClick: () => context.dispatch(IGNORE_ALL()),
       iconName: 'CalendarCancel',
       iconColor: 'var(--colorPaletteRedForeground1)'
     },
@@ -114,6 +117,16 @@ export function useStatusBar() {
     intent: 'success'
   }
 
+  if (isPeriodLocked) {
+    allHoursMatchedMessage.text = t(
+      'timesheet.allHoursMatchedPeriodLockedText',
+      {
+        hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
+      }
+    )
+    allHoursMatchedMessage.iconName = 'LockClosed'
+  }
+
   /**
    * Displays a period confirmed message.
    */
@@ -123,6 +136,13 @@ export function useStatusBar() {
       hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
     }),
     intent: 'success'
+  }
+
+  if (isPeriodLocked) {
+    periodConfirmedMessage.text = t('timesheet.periodLockedConfirmedText', {
+      hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
+    })
+    periodConfirmedMessage.iconName = 'LockClosed'
   }
 
   /**
@@ -145,7 +165,7 @@ export function useStatusBar() {
     }),
     action: {
       text: t('timesheet.undoIgnoreTooltip'),
-      onClick: () => dispatch(CLEAR_IGNORES()),
+      onClick: () => context.dispatch(CLEAR_IGNORES()),
       iconName: 'ArrowUndo'
     },
     intent: 'warning'

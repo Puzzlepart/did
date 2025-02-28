@@ -8,7 +8,8 @@ import {
   ColumnHeaderContextMenu,
   IListColumn,
   IListProps,
-  IListState
+  IListState,
+  SortOptions
 } from './types'
 
 export const PROPS_UPDATED = createAction<IListProps>('PROPS_UPDATED')
@@ -26,6 +27,10 @@ export const SET_GROUP_BY = createAction<{ column: IListColumn }>(
 export const SET_FILTER_BY = createAction<{ column: IListColumn }>(
   'SET_FILTER_BY'
 )
+export const SET_SORT = createAction<{
+  column: IListColumn
+  direction: 'asc' | 'desc'
+}>('SET_SORT')
 export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
@@ -33,6 +38,7 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
 
 /**
  * Applies filters to an array of items based on the provided filter values.
+ * Also supports negation by prefixing the key with '!'.
  *
  * @param items The array of items to filter.
  * @param filterValues The filter values to apply.
@@ -44,13 +50,16 @@ function applyFilters<T = any>(
   return items.filter(
     (item) =>
       _.filter(Object.keys(filterValues), (key) => {
+        const filterValue = filterValues[key]
+        const isNeg = key.startsWith('!')
+        key = isNeg ? key.slice(1) : key
         const value = get(item as any, key, '')
-        switch (typeof filterValues[key]) {
+        switch (typeof filterValue) {
           case 'boolean': {
-            return filterValues[key] === value
+            return isNeg ? value !== filterValue : value === filterValue
           }
           default: {
-            return filterValues[key]?.includes(value)
+            return filterValue?.includes(value)
           }
         }
       }).length === Object.keys(filterValues).length
@@ -99,6 +108,15 @@ export default (initialState: IListState) => {
           state.filterPanel = {
             open: true
           }
+        })
+        .addCase(SET_SORT, (state, { payload }) => {
+          const newSortBy = [
+            payload.column.fieldName,
+            payload.direction
+          ] as SortOptions
+          state.sortOpts = _.isEqual(state.sortOpts, newSortBy)
+            ? null
+            : newSortBy
         })
         .addCase(TOGGLE_FILTER_PANEL, (state) => {
           state.filterPanel = {

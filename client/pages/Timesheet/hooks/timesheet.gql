@@ -45,6 +45,10 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
         color
         icon
       }
+      role {
+        name
+        hourlyRate
+      }
     }
     isConfirmed
     isForecasted

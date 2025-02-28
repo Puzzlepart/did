@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react'
 import { StyledComponent } from 'types'
 
 /**
- * Did reusable functional component
+ * did reusable functional component
  *
  * @extends StyledComponent
  */

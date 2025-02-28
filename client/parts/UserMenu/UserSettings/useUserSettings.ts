@@ -20,6 +20,7 @@ export function useUserSettings() {
 
   const formControlProps: IFormControlProps = {
     model,
+    register,
     panel: {
       title: t('common.userSettingsPanelHeaderText'),
       open: panel.value,
@@ -32,8 +33,6 @@ export function useUserSettings() {
   }
 
   return {
-    model,
-    register,
     openPanel: () => panel.setTrue(),
     formControlProps
   }

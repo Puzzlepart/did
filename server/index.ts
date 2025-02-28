@@ -40,7 +40,7 @@ export async function startServer(port: string) {
         log()
         log(
           chalk.red(
-            `😭 Did server error: ${bind} requires elevated privileges 😭`
+            `😭 did server error: ${bind} requires elevated privileges 😭`
           )
         )
         log()
@@ -48,7 +48,7 @@ export async function startServer(port: string) {
       }
       case 'EADDRINUSE': {
         log()
-        log(chalk.red(`😭 Did server error: ${bind} is already in use 😭`))
+        log(chalk.red(`😭 did server error: ${bind} is already in use 😭`))
         log()
         process.exit(1)
       }
@@ -64,7 +64,7 @@ export async function startServer(port: string) {
    */
   function onListening() {
     log()
-    log(chalk.cyan(`Did server listening on port [${port}] 🚀`))
+    log(chalk.cyan(`did server listening on port [${port}] 🚀`))
     log()
   }
 

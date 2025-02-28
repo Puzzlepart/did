@@ -4,6 +4,7 @@ import _ from 'underscore'
 import { ILabelFormProps } from './types'
 import { useLabelFormSubmit } from './useLabelFormSubmit'
 import { useLabelModel } from './useLabelModel'
+import { LabelForm } from '.'
 
 /**
  * Custom hook that returns an object with the label form model, form control registration function, and form submission function.
@@ -15,7 +16,7 @@ import { useLabelModel } from './useLabelModel'
 export function useLabelForm(props: ILabelFormProps) {
   const { t } = useTranslation()
   const model = useLabelModel(props)
-  const register = useFormControls(model)
+  const register = useFormControls(model, LabelForm)
   const submitProps = useLabelFormSubmit(props, model)
   const panelProps: IFormControlProps['panel'] = {
     ..._.omit(props, 'onSave'),

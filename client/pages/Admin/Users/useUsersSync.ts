@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client'
 import _ from 'underscore'
 import { IUsersContext } from './context'
 import $updateUsers from './updateUsers.gql'
+import { omitTypename } from 'utils'
 
 /**
  * Sync users hook for `Users`. Returns a function that can be used to
@@ -14,10 +15,10 @@ import $updateUsers from './updateUsers.gql'
  */
 export function useUsersSync(context: IUsersContext) {
   const [updateUsers] = useMutation($updateUsers)
-  return async (properties = ['accountEnabled']) => {
+  return async (properties = ['accountEnabled', 'manager']) => {
     const users = context.state.selectedUsers
       .map((user) => {
-        const adUser = _.find(context.state.adUsers, (a) => a.id === user.id)
+        const adUser = _.find(context.state.adUsers, ({ id }) => id === user.id)
         if (!adUser) return null
         const userUpdate = properties.reduce(
           (object, property) => {
@@ -32,7 +33,8 @@ export function useUsersSync(context: IUsersContext) {
           },
           null as Record<string, any>
         )
-        return userUpdate ? { id: user.id, ...userUpdate } : null
+        if (!userUpdate) return null
+        return omitTypename({ id: user.id, ...userUpdate })
       })
       .filter(Boolean)
     if (!_.isEmpty(users)) {

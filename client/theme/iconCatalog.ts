@@ -1,4 +1,10 @@
 import {
+  TimeAndWeatherRegular,
+  TimeAndWeatherFilled,
+  ThumbLikeRegular,
+  ThumbLikeFilled,
+  ThumbDislikeRegular,
+  ThumbDislikeFilled,
   AccessibilityRegular,
   AccessibilityFilled,
   AccessibilityQuestionMarkRegular,
@@ -21,6 +27,8 @@ import {
   ArrowImport24Regular,
   ArrowSortUpFilled,
   ArrowSortUpRegular,
+  ArrowSortDownFilled,
+  ArrowSortDownRegular,
   ArrowSync24Filled,
   ArrowSync24Regular,
   ArrowUndo24Filled,
@@ -162,13 +170,23 @@ import {
   BriefcaseRegular,
   BriefcaseFilled,
   GroupRegular,
-  GroupFilled
+  GroupFilled,
+  LockClosedRegular,
+  LockClosedFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  LockClosed: {
+    regular: LockClosedRegular,
+    filled: LockClosedFilled
+  },
+  TimeAndWeather: {
+    regular: TimeAndWeatherRegular,
+    filled: TimeAndWeatherFilled
+  },
   Accessibility: {
     regular: AccessibilityRegular,
     filled: AccessibilityFilled
@@ -373,9 +391,21 @@ export const iconCatalog = {
     regular: StoreMicrosoft24Regular,
     filled: StoreMicrosoft24Filled
   },
+  ThumbLike: {
+    regular: ThumbLikeRegular,
+    filled: ThumbLikeFilled
+  },
+  ThumbDislike: {
+    regular: ThumbDislikeRegular,
+    filled: ThumbDislikeFilled
+  },
   ArrowSortUp: {
     regular: ArrowSortUpRegular,
     filled: ArrowSortUpFilled
+  },
+  ArrowSortDown: {
+    regular: ArrowSortDownRegular,
+    filled: ArrowSortDownFilled
   },
   Checkmark: {
     regular: CheckmarkRegular,

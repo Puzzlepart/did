@@ -1,0 +1,9 @@
+mutation LockPeriod ($periodId: String!, $unlock: Boolean!, $reason: String) {
+  result: lockPeriod(
+    periodId: $periodId, 
+    unlock: $unlock,
+    reason: $reason
+    ) {
+    success
+  }
+}

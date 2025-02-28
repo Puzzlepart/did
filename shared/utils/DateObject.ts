@@ -1,4 +1,4 @@
-import { Dayjs, OpUnitType } from 'dayjs'
+import { Dayjs, ManipulateType, OpUnitType } from 'dayjs'
 import _ from 'underscore'
 import s from 'underscore.string'
 import { HolidayObject } from '../../server/graphql'
@@ -204,8 +204,8 @@ export class DateObject {
    */
   public add(add: string) {
     const value = Number.parseInt(add)
-    const [, unit] = add.split(value.toString())
-    return new DateObject(this.$.add(value, unit as OpUnitType))
+    const [, unit] = add.split(value.toString()) as [string, ManipulateType]
+    return new DateObject(this.$.add(value, unit))
   }
 
   /**

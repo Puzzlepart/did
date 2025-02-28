@@ -22,20 +22,25 @@ export function useListGroups(context: IListContext): [IGroup[], any[]] {
   }
   const { emptyGroupName, totalFunc, groupNames, groupData } =
     context.props.listGroupProps ?? {}
+  const defaultGroupName =
+    emptyGroupName ??
+    get(context.state, 'groupBy.data.groupOptions?.emptyGroupName', {
+      default: ''
+    })
   if (_.isEmpty(context.state.items) && !groupNames) {
     return [null, []]
   }
   const itemsSort = { props: [groupByFieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames_ = items.map((g) =>
-    get(g, groupByFieldName, { default: emptyGroupName }).toString()
+    get(g, groupByFieldName, { default: defaultGroupName }).toString()
   )
   const uniqueGroupNames =
     groupNames || _.unique(groupNames_).sort((a, b) => (a > b ? 1 : -1))
   const groups = uniqueGroupNames.map((name, index) => {
     const items_ = items.filter((item) => {
       const itemValue = `${get(item, groupByFieldName, {
-        default: emptyGroupName
+        default: defaultGroupName
       })}`
       return `${itemValue}`.toLowerCase() === name.toLowerCase()
     })

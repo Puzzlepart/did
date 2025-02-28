@@ -15,8 +15,10 @@
     "goToNextWeek": "Go to next period",
     "weekHoursSummaryText": "**{{hours}}** this week. {{splitWeekInfoText}}",
     "hoursNotMatchedText": "**{{hours}}** unmatched this period. All events must be matched before you can confirm your timesheet.",
-    "allHoursMatchedText": "**All hours matched!** Are you ready to confirm the period?",
+    "allHoursMatchedText": "All hours matched! Are you ready to confirm the period?",
+    "allHoursMatchedPeriodLockedText": "All hours matched, but the period is locked and no changes can be made to it at this time.",
     "periodConfirmedText": "**{{hours}}** confirmed this period. Click **Unconfirm hours** if you want to do some adjustments.",
+    "periodLockedConfirmedText": "**{{hours}}** confirmed this period. The period is locked and no changes can be made to it.",
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
     "undoIgnoreTooltip": "Undo all ignored events.",
     "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
@@ -70,7 +72,19 @@
     "ignoreAllTooltip": "Ignore all unmatched events.",
     "eventNoTitleErrorText": "Please enter a subject for this event. Events without a subject will not be included in the timesheet.",
     "eventDurationModifiedTitle": "Automatically modified event duration",
-    "manuallyResolveEventActionTooltip": "Click to manually resolve the event {{title}}. Remember it's always best to keep your Outlook calendar up to date."
+    "manuallyResolveEventActionTooltip": "Click to manually resolve the event {{title}}. Remember it's always best to keep your Outlook calendar up to date.",
+    "timebank": {
+      "balance": "You have {{balance}} hours in your time bank.",
+      "balanceAdjustmentLabel": "{{balanceAdjustment}} hours",
+      "balanceAdjustmentHint": "Select the number of hours you want to add to your time bank. It is not necessarily all the extra hours you have worked this week, as you may be taking some hours as overtime.",
+      "incrementTimebankText": "Store {{balanceAdjustment}} hours in your time bank",
+      "decrementTimebankText": "Subtract {{balanceAdjustment}} hours from your time bank",
+      "header": "Timebank",
+      "balanceAdjustedMessage": "Your time bank has been updated. You now have {{balance}} hours remaining in the time bank.",
+      "resetTimebankText": "Reset timebank",
+      "balanceAdjustmentNotAvailable": "You need to confirm your hours for the week before adjusting timebank balance. If the week is split, both periods needs to be confirmed."
+    },
+    "periodLockedText": "The period is locked by an administrator, and no changes can be made to it until it is unlocked."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -137,10 +151,20 @@
       "infoMessage": "Establish role definitions for the project, including positions such as Project Manager, Developer, and Designer. Additionally, specify the hourly rates for each role.",
       "headerText": "Roles",
       "rolePlaceholder": "Enter the name of the role.",
-      "hourlyRatePlaceholder": "Enter the hourly rate for the role."
+      "hourlyRatePlaceholder": "Enter the hourly rate for the role.",
+      "defaultRoleLabel": "Default",
+      "defaultRoleDescription": "This role will be assigned to all new project members by default if no other role is specified for them.",
+      "defaultRoleError": "A default role already exists. Please remove the default role {{role}} before adding another."
     },
     "resourcesLabel": "Project Resources",
-    "hourlyRate": "kr {{rate}} / hour"
+    "hourlyRate": "kr {{rate}} / hour",
+    "roleFieldLabel": "Project Role",
+    "parentProject": "Parent Project",
+    "parentProjectDescription": "Select a parent project to which this project belongs. This is particularly useful for organizing projects hierarchically and maintaining connections between related projects.",
+    "parentLabel": "Parent Project",
+    "childrenLabel": "Child Projects",
+    "parentProjectDisabledText": "You can only select a parent project under the same customer, and there's no customer selected, or no projects under the selected customer.",
+    "loadTimeEntriesLabel": "Load time entries"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -231,7 +255,11 @@
       "showMyProjectsByDefaultLabel": "Show My Projects By Default",
       "showMyProjectsByDefaultDescription": "Show \"My Projects\" as default on the Project page.",
       "enableProjectRolesLabel": "Enable Project Roles",
-      "enableProjectRolesDescription": "Enable roles for projects. Set up a set of roles with time rates, and select one of the predefined roles when adding a new resource."
+      "enableProjectRolesDescription": "Enable roles for projects. Set up a set of roles with time rates, and select one of the predefined roles when adding a new resource.",
+      "enableSimpleHierachyLabel": "Enable Hierarchy",
+      "enableSimpleHierachyDescription": "Enable project hierarchy supporting setting parent project, displaying parent and child projects.",
+      "autoLoadTimeEntriesLabel": "Automatically Load Time Entries",
+      "autoLoadTimeEntriesDescription": "When enabled, time entries will be loaded automatically without requiring manual action."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
@@ -244,7 +272,7 @@
       "bulkImportUsersLabel": "Bulk import",
       "bulkImportingUsersLabel": "Importing {{count}} users. Please wait..",
       "addNewUser": "Add new",
-      "userFieldAdSync": "The field is automatically synchronized from Entra ID when the user logs in, and can not be modified in Did.",
+      "userFieldAdSync": "The field is automatically synchronized from Entra ID when the user logs in, and can not be modified in did.",
       "syncUsersLabel": "Synchronize user properties",
       "synchronizingUserProperties": "Synchronizing user properties...",
       "updateSuccess": "Successfully updated user **{{displayName}}**.",
@@ -261,13 +289,21 @@
       "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
       "searchUsersLabel": "Search users..."
     },
-    "missingSubmissions": {
-      "headerText": "Missing submissions",
+    "weekStatus": {
+      "headerText": "Week status",
       "teamsReminderMessageTemplate": "You must confirm the following weeks in did: {{periods}}",
       "teamsReminderButtonText": "Send reminder in Teams",
       "teamsReminderMessageSinglePeriodTemplate": "You must confirm week {{period}} in did.",
       "teamsReminderTopicTemplate": "Week {{name}} in did",
-      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}"
+      "teamsReminderButtonTooltiop": "Send reminder in Teams to all users missing week {{name}}",
+      "unlockWeekButtonText": "Unlock week",
+      "lockWeekButtonText": "Lock week",
+      "weekUnlocked": "Week {{period}} was successfully unlocked.",
+      "weekLocked": "Week {{period}} was successfully locked, and time entries can no longer be logged for this week.",
+      "confirmLockTitle": "Lock week",
+      "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
+      "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
+      "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",
@@ -376,7 +412,10 @@
     "domainRestrictionLabel": "Restrict access to users in the following domain",
     "domainRestrictionDescription": "In addition to the Entra ID security group, you can restrict access to the application to users in the specified domain. If the field is empty, all users in the Entra ID security group will have access to the application.",
     "customersHeader": "Customers",
-    "projectsHeader": "Projects"
+    "projectsHeader": "Projects",
+    "timesheetTimebankEnabledLabel": "Enable Timebank",
+    "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance.",
+    "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
@@ -646,7 +685,7 @@
     "periodColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}",
     "disable": "Disable",
     "startPageLabel": "Start page",
-    "preferredLanguageDescription": "Did will display menus and buttons in this language.",
+    "preferredLanguageDescription": "did will display menus and buttons in this language.",
     "googleSignInText": "Sign in with Google",
     "activeDirectory": "Entra ID",
     "google": "Google",
@@ -709,7 +748,16 @@
     "projectRole": "Project Role",
     "startDate": "Start Date",
     "endDate": "End Date",
-    "notSet": "Not set"
+    "notSet": "Not set",
+    "workWeekHoursDescription": "The number of hours in a work week. Typically 40 hours with a 5 day work week and 100% employment.",
+    "workWeekHoursLabel": "Work week hours",
+    "timesheet": "Timesheet",
+    "vacation": "Vacation",
+    "managerLabel": "Manager",
+    "hourlyRateLabel": "Hourly Rate",
+    "noManagerLabel": "No Manager Assigned",
+    "reason": "Reason",
+    "parentProject": "Parent Project"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

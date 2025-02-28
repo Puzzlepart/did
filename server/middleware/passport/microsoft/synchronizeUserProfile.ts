@@ -6,6 +6,35 @@ import MSOAuthService from '../../../services/msoauth'
 const debug = createDebug('middleware/passport/synchronizeUserProfile')
 
 /**
+ * Check if user profile synchronization is needed. If needed, return
+ * the merged data to update the user.
+ *
+ * @param user - User object
+ * @param properties - Properties to check
+ * @param data - Data to compare
+ */
+function evaluateUserSync(
+  user: User,
+  properties: string[],
+  data: Record<string, any>
+) {
+  const mergedData: Record<string, any> = _.pick(
+    {
+      ...data,
+      manager: _.pick(data.manager, 'id', 'mail', 'displayName')
+    },
+    properties
+  )
+
+  const needSync = !_.isEqual(
+    _.pick(user, [...properties, 'photo']),
+    mergedData
+  )
+
+  return [needSync, mergedData] as const
+}
+
+/**
  * Synchronize user profile properties and user photo based
  * on subscription settings.
  *
@@ -24,16 +53,14 @@ export async function synchronizeUserProfile(
     return
   }
   try {
-    const msgraphSrv = new MSGraphService(new MSOAuthService({ user }))
+    const msGraphSvc = new MSGraphService(new MSOAuthService({ user }))
     const [data, userPhoto] = await Promise.all([
-      msgraphSrv.getCurrentUser(properties),
-      msgraphSrv.getUserPhoto('48x48')
+      msGraphSvc.getCurrentUser(properties),
+      msGraphSvc.getUserPhoto('48x48')
     ])
-    const needSync = !_.isEqual(_.pick(user, [...properties, 'photo']), {
-      photo: {
-        base64: userPhoto
-      },
-      ..._.pick(data, [...properties, 'photo'])
+    const [needSync, mergedData] = evaluateUserSync(user, properties, {
+      ...data,
+      photo: userPhoto
     })
     if (syncUserPhoto && userPhoto) {
       user.photo = {
@@ -41,7 +68,7 @@ export async function synchronizeUserProfile(
       }
     }
     if (!needSync) {
-      debug('User profile properties for %s are up to date!', user.id)
+      debug('User profile properties for %s are up to date.', user.id)
       return
     }
     debug(
@@ -51,7 +78,7 @@ export async function synchronizeUserProfile(
     )
     await userSvc.updateUser({
       ..._.pick(user, 'id', 'photo'),
-      ..._.pick(data, [...properties, 'photo'])
+      ...mergedData
     })
     debug('User profile properties synchronized from Azure AD for %s.', user.id)
   } catch (error) {

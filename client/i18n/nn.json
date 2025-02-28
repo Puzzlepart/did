@@ -16,6 +16,7 @@
     "weekHoursSummaryText": "Du har totalt **{{hours}}** denne perioda. {{splitWeekInfoText}}",
     "hoursNotMatchedText": "Du har **{{hours}}** som ikkje er kopla mot eit prosjekt. Alle avtalar må stemme overeins før du kan stadfeste timane dine.",
     "allHoursMatchedText": "Alle timane dine er matcha. Er du klar til å stadfeste perioda di?",
+    "allHoursMatchedPeriodLockedText": "Alle timane dine er matcha, men perioda er låst og endringer kan ikkje gjerast for øyeblikket.",
     "periodConfirmedText": "Perioda er stadfesta med {{hours}}. Klikk **Angre stadfesting** dersom du treng å justere timeføringa.",
     "ignoredEventsText": "Du har {{ignored_count}} manuelt ignorert(e) kalenderoppføring(er).",
     "undoIgnoreTooltip": "Angre alle ignorerte hendelser.",
@@ -72,7 +73,19 @@
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
     "timesheet": {
       "projectLabelsTooltipText": "hei"
-    }
+    },
+    "timebank": {
+      "balance": " Du har {{balance}} timer i tidsbanken din.",
+      "balanceAdjustmentLabel": "{{balanceAdjustment}} timer",
+      "balanceAdjustmentHint": "Velg antall timer du vil legge til i tidsbanken din. Det er ikke nødvendigvis alle de ekstra timene du har jobbet denne uken, da du muligens tar ut noen timer som overtid.",
+      "incrementTimebankText": "Lagre {{balanceAdjustment}} timer i tidsbanken din",
+      "decrementTimebankText": "Trekk {{balanceAdjustment}} timer fra tidsbanken din",
+      "header": "Tidsbank",
+      "balanceAdjustedMessage": "Tidsbanken din er oppdatert. Du har nå {{balance}} timer gjenværende i tidsbanken.",
+      "resetTimebankText": "Nullstill tidsbank",
+      "balanceAdjustmentNotAvailable": "Du må bekrefte timene dine for uken før du justerer timebanksaldoen. Hvis uken er delt, må begge periodene bekreftes."
+    },
+    "periodLockedConfirmedText": "**{{hours}}** bekreftet denne perioden. Perioden er låst og det kan ikke gjøres endringer for den."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
@@ -138,10 +151,20 @@
       "infoMessage": "Opprett rolledefinisjoner for prosjektet, inkludert roller som prosjektleder, utvikler og designer. Du kan også spesifisere timeprisen for hver rolle for å gi en bedre oversikt over inntjening per prosjekt.",
       "headerText": "Roller",
       "hourlyRatePlaceholder": "Angi timepris for rollen.",
-      "rolePlaceholder": "Skriv inn navnet på rollen."
+      "rolePlaceholder": "Skriv inn navnet på rollen.",
+      "defaultRoleLabel": "Standardrolle",
+      "defaultRoleDescription": "Denne rollen vil bli tildelt alle nye prosjektmedlemmer som standard hvis ingen annen rolle er spesifisert for dem.",
+      "defaultRoleError": "Ei standardrolle eksisterer allereie. Fjern standardrolla {{role}} før du legg til ein annan."
     },
     "resourcesLabel": "Prosjektressurser",
-    "hourlyRate": "kr {{rate}} / time"
+    "hourlyRate": "kr {{rate}} / time",
+    "roleFieldLabel": "Prosjektrolle",
+    "parentProject": "Overordna prosjekt",
+    "parentProjectDescription": "Vel eit overordna prosjekt som dette prosjektet høyrer til. Dette er særleg nyttig for å organisere prosjekt hierarkisk og oppretthalde samanhengar mellom relaterte prosjekt.",
+    "parentLabel": "Overordna prosjekt",
+    "childrenLabel": "Underordna prosjekter",
+    "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
+    "loadTimeEntriesLabel": "Last inn tidsoppføringer"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -204,7 +227,7 @@
       "bulkImportUsersLabel": "Importer i bulk",
       "bulkImportingUsersLabel": "Importerer {{count}} brukarar. Ver vennleg å vent...",
       "addNewUser": "Legg til ny",
-      "userFieldAdSync": "Feltet blir synkronisert automatisk frå Entra ID når brukaren loggar seg på, og kan ikkje endrast i Did.",
+      "userFieldAdSync": "Feltet blir synkronisert automatisk frå Entra ID når brukaren loggar seg på, og kan ikkje endrast i did.",
       "syncUsersLabel": "Synkroniser brukeregenskaper",
       "synchronizingUserProperties": "Synkroniserer brukaregenskaper...",
       "updateSuccess": "Brukaren **{{displayName}}** vart oppdatert utan problem.",
@@ -255,19 +278,31 @@
       "showMyProjectsByDefaultLabel": "Vis mine prosjekter som standard",
       "showMyProjectsByDefaultDescription": "Vis \"Prosjekta mine\" som standard på prosjektsida.",
       "enableProjectRolesLabel": "Aktiver prosjektroller",
-      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs."
+      "enableProjectRolesDescription": "Aktiver roller for prosjekter. Sett opp et sett med roller med timepris, og velg blandt de forhåndsdefinerte rollene når du legger til en ny ressurs.",
+      "enableSimpleHierachyLabel": "Aktiver hierarki",
+      "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter.",
+      "autoLoadTimeEntriesLabel": "Last inn tidsoppføringer automatisk",
+      "autoLoadTimeEntriesDescription": "Når aktivert, lastes tidsoppføringer automatisk uten at du trenger å gjøre noe."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
       "deleteSuccess": "Rollen {{name}} vart sletta."
     },
-    "missingSubmissions": {
-      "headerText": "Manglende bekreftelser",
+    "weekStatus": {
+      "headerText": "Ukestatus",
       "teamsReminderMessageTemplate": "Du må bekrefte følgende uker i did: {{periods}}",
       "teamsReminderButtonText": "Send påminnelse i Teams",
       "teamsReminderMessageSinglePeriodTemplate": "Du må bekreft uke {{period}} i did.",
       "teamsReminderTopicTemplate": "Uke {{name}} i did",
-      "teamsReminderButtonTooltiop": "Send påminning i Teams til alle brukarar som ikkje har bekreftet veke {{name}}"
+      "teamsReminderButtonTooltiop": "Send påminning i Teams til alle brukarar som ikkje har bekreftet veke {{name}}",
+      "unlockWeekButtonText": "Lås opp uke",
+      "lockWeekButtonText": "Lås veke",
+      "weekLocked": "Veke {{period}} blei låst, og timar kan ikkje lenger førast for denne veka.",
+      "weekUnlocked": "Veke {{period}} ble låst opp.",
+      "confirmLockSubText": "Er du sikker på at du vil låse veke {{period}}?",
+      "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse veka...",
+      "confirmLockTitle": "Lås veke",
+      "weekLockedMessage": "Veke {{weekNumber}} ble låst {{lockedAt}}.{{reason}}"
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",
@@ -376,7 +411,10 @@
     "domainRestrictionEnabledLabel": "Aktiver domenebegrensning",
     "domainRestrictionEnabledDescription": "I tillegg til Entra ID-sikkerhetsgruppen kan du begrense tilgangen til applikasjonen til brukere i det angitte domenet.",
     "customersHeader": "Kunder",
-    "projectsHeader": "Prosjekter"
+    "projectsHeader": "Prosjekter",
+    "timesheetTimebankEnabledLabel": "Aktiver Tidsbank",
+    "timesheetTimebankEnabledDescription": "Når tidbank er aktivert, kan ansatte akkumulere overtidstimer som kan brukes til fritid på et senere tidspunkt. Dette gir fleksibilitet og mulighet for bedre balanse mellom arbeid og fritid.",
+    "subscriptionSettingsUpdateError": "En feil oppstod under oppdatering av abonnementsinnstillinger."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -646,7 +684,7 @@
     "periodColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}",
     "disable": "Deaktiver",
     "startPageLabel": "Startside",
-    "preferredLanguageDescription": "Did viser menyar og knappar på dette språket.",
+    "preferredLanguageDescription": "did viser menyar og knappar på dette språket.",
     "googleSignInText": "Logg på med Google",
     "activeDirectory": "Entra ID",
     "google": "Google",
@@ -707,7 +745,16 @@
     "projectRole": "Prosjektrolle",
     "startDate": "Startdato",
     "endDate": "Sluttdato",
-    "notSet": "Ikke satt"
+    "notSet": "Ikke satt",
+    "workWeekHoursLabel": "Ukentlige arbeidstimer",
+    "workWeekHoursDescription": "Talet på timar i ei arbeidsveke. Typisk 40 timar med 5 dagars arbeidsveke og 100% tilsetjing.",
+    "vacation": "Ferie",
+    "timesheet": "Timeliste",
+    "managerLabel": "Leder",
+    "hourlyRateLabel": "Timepris",
+    "noManagerLabel": "Ingen leder tildelt",
+    "reason": "Begrunning",
+    "parentProject": "Overordna prosjekt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

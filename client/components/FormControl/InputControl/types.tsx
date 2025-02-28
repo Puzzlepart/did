@@ -23,4 +23,6 @@ export interface IInputControlProps
       | 'type'
       | 'contentBefore'
       | 'contentAfter'
+      | 'minLength'
+      | 'maxLength'
     > {}
