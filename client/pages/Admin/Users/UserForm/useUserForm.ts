@@ -56,7 +56,7 @@ export function useUserForm(props: IUserFormProps) {
     }
   }, [])
 
-  const isEditMode = !!props.user
+  const isEditMode = Boolean(props.user)
 
   return {
     isEditMode,
