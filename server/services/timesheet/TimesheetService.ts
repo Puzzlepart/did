@@ -132,7 +132,10 @@ export class TimesheetService {
             ...periods[index],
             provider: this.context.provider,
             engine,
-            configuration: { userId: this.context.userId }
+            configuration: {
+              ...parameters.configuration,
+              userId: this.context.userId
+            }
           })
         }
         periods[index] = period
