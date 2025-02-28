@@ -1,7 +1,3 @@
-/* eslint-disable unicorn/no-for-loop */
-/* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable unicorn/prefer-ternary */
-/* eslint-disable unicorn/no-lonely-if */
 import { AnyAction } from '@reduxjs/toolkit'
 import { useTranslation } from 'react-i18next'
 import { SET_VALIDATION_MESSAGES } from './reducer'

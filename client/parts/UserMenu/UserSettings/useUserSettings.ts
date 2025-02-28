@@ -4,6 +4,7 @@ import { useUpdateUserConfiguration } from 'hooks/user/useUpdateUserConfiguratio
 import { useTranslation } from 'react-i18next'
 import { useBoolean } from 'usehooks-ts'
 import { useUserSettingsModel } from './useUserSettingsModel'
+import { UserSettings } from './UserSettings'
 
 export function useUserSettings() {
   const { t } = useTranslation()
@@ -19,6 +20,7 @@ export function useUserSettings() {
   }
 
   const formControlProps: IFormControlProps = {
+    id: UserSettings.displayName,
     model,
     register,
     panel: {
