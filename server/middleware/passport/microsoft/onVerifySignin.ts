@@ -36,13 +36,19 @@ export const onVerifySignin = async (
     db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
+    let isExternal = false
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
 
     if (!userId) throw NO_OID_FOUND
 
-    const subscription = await subSvc.getById(subId)
+    let subscription = await subSvc.getById(subId)
+
     if (!subscription) {
-      throw TENANT_NOT_ENROLLED
+      subscription = await subSvc.getByExternalId(mail, 'microsoft|ext')
+      isExternal = true
+      if (!subscription) {
+        throw TENANT_NOT_ENROLLED
+      }
     }
     const isOwner = subscription.owner === mail
 
@@ -51,6 +57,25 @@ export const onVerifySignin = async (
     })
 
     let dbUser = await userSrv.getById(userId)
+
+    if (!Boolean(dbUser) && isExternal) {
+      dbUser = {
+        id: userId,
+        mail,
+        displayName: profile.displayName,
+        role: 'External User',
+        preferredLanguage: 'en-GB',
+        tenantId: subId,
+        isExternal: true,
+        configuration: {
+          ui: {
+            theme: 'auto',
+            stickyNavigation: true
+          }
+        }
+      }
+      await userSrv.addUser(dbUser)
+    }
 
     let isUserInSecurityGroup = false
 
@@ -62,7 +87,7 @@ export const onVerifySignin = async (
       )
     }
 
-    const isUserEnrolled = isOwner || isUserInSecurityGroup || !!dbUser
+    const isUserEnrolled = isOwner || isUserInSecurityGroup || Boolean(dbUser)
 
     if (!isUserEnrolled) throw USER_NOT_ENROLLED
 

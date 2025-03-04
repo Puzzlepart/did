@@ -161,6 +161,12 @@ export class User {
 
   @Field(() => User, { nullable: true })
   manager?: User
+
+  @Field({ nullable: true })
+  tenantId?: string
+
+  @Field({ nullable: true })
+  isExternal?: boolean
 }
 
 /**

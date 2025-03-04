@@ -24,6 +24,9 @@ export class Role {
 
   @Field({ nullable: true })
   readOnly?: boolean
+
+  @Field({ nullable: true })
+  enabledForExternalUsers?: boolean
 }
 
 /**
@@ -47,4 +50,7 @@ export class RoleInput {
 
   @Field({ nullable: true })
   readOnly?: boolean
+
+  @Field({ nullable: true })
+  enabledForExternalUsers?: boolean
 }
