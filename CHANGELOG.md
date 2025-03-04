@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.13.4 - TBA](#-0134---tba)
+	* [➤ 0.14.0 - TBA](#-0140---tba)
 		* [Fixed](#fixed)
 		* [Added](#added)
 	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
@@ -83,9 +83,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0134---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0140---tba)
 
-## ➤ 0.13.4 - TBA
+## ➤ 0.14.0 - TBA
 
 ### Fixed
 - Fixed an issue with ProjectForm breaking if no project settings was set on the subscription [#1257](https://github.com/Puzzlepart/did/issues/1257)
