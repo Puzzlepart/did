@@ -12,10 +12,12 @@ import styles from './Users.module.scss'
 import { UsersContext } from './context'
 import {
   HIDE_ADD_MULTIPLE_PANEL,
+  HIDE_INVITE_EXTERNAL_USER_FORM,
   HIDE_USER_FORM,
   SET_SELECTED_USERS
 } from './reducer/actions'
 import { useUsers } from './useUsers'
+import { InviteExternalUserForm } from './InviteExternalUserForm'
 
 /**
  * Manage users
@@ -77,6 +79,9 @@ export const Users: TabComponent<ITabProps> = () => {
             onAdd={onAddUsers}
             onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
           />
+          <InviteExternalUserForm 
+          {...context.state.inviteExternaluserForm} 
+          onDismiss={() => context.dispatch(HIDE_INVITE_EXTERNAL_USER_FORM())} />
         </Tabs>
       </div>
     </UsersContext.Provider>

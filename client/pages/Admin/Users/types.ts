@@ -1,6 +1,7 @@
 import { ActiveDirectoryUser, Role, User } from 'types'
 import { IBulkImportPanelProps } from './BulkImportPanel/types'
 import { IUserFormProps } from './UserForm/types'
+import { IInviteExternalUserFormProps } from './InviteExternalUserForm'
 
 export interface IUsersState {
   loading: boolean
@@ -45,6 +46,11 @@ export interface IUsersState {
    * Properties for `UserForm`
    */
   userForm?: IUserFormProps
+
+  /**
+   * Properties for `InviteExternalUserForm`
+   */
+  inviteExternaluserForm?: IInviteExternalUserFormProps
 
   /**
    * Properties for `BulkImportPanel`
