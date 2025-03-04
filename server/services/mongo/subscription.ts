@@ -224,10 +224,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     if (!subscription) return null
 
     const invitation = (
-      _.get(
-        subscription,
-        invitationsPath
-      ) as ExternalUserInvitation[]
+      _.get(subscription, invitationsPath) as ExternalUserInvitation[]
     ).find((inv) => inv.mail === mail)
 
     return {

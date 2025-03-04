@@ -16,7 +16,8 @@ export const InviteExternalUserForm: StyledComponent<
   IInviteExternalUserFormProps
 > = (props) => {
   const { t } = useTranslation()
-  const { formControlProps, register, availableRoles } = useInviteExternalUserForm(props)
+  const { formControlProps, register, availableRoles } =
+    useInviteExternalUserForm(props)
   const EmailDomainValidator = useEmailDomainValidator()
   return (
     <FormControl {...formControlProps}>

@@ -92,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for setting a role as default [#1259](https://github.com/Puzzlepart/did/issues/1259)
+- Support for allowing guest users from external tenants to log in [#1264](https://github.com/Puzzlepart/did/issues/1264)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0133---25022025)

@@ -92,6 +92,6 @@ export function useListProps({
         })
       )
     },
-    onItemInvoked: context.props.onItemInvoked,
+    onItemInvoked: context.props.onItemInvoked
   } as IListProps
 }

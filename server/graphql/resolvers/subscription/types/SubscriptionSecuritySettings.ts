@@ -49,7 +49,7 @@ export class SubscriptionSecuritySettingsInput {
    */
   @Field({ nullable: true })
   securityGroupEnabled?: boolean
-  
+
   /**
    * Security group ID (Microsoft Entra ID)
    */
