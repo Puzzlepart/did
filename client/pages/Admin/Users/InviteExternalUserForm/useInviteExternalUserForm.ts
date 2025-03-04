@@ -45,6 +45,6 @@ export function useInviteExternalUserForm(props: IInviteExternalUserFormProps) {
     model,
     register,
     submitProps,
-    ...context.state
+    availableRoles: context.state.roles.filter((role) => role.enabledForExternalUsers)
   }
 }

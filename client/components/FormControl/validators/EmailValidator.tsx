@@ -11,11 +11,14 @@ import { TFunction } from 'react-i18next'
  * @returns A function that takes a string value and returns null if the value is a valid email,
  * or an array containing the error message and 'error' if the value is invalid.
  */
-export const EmailValidator = (t: TFunction, emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/) => {
+export const EmailValidator = (
+  t: TFunction,
+  emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+) => {
   return ((value: string) => {
     if (!value) return null
     return emailRegex.test(value)
       ? null
-      : [t('common.invalidEmailValidation'),   'error']
+      : [t('common.invalidEmailValidation'), 'error']
   }) as ValidatorFunction
 }

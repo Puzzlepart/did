@@ -10,12 +10,13 @@ import { IInviteExternalUserFormProps } from './types'
 import { useInviteExternalUserForm } from './useInviteExternalUserForm'
 import { useTranslation } from 'react-i18next'
 import { useEmailDomainValidator } from './useEmailDomainValidator'
+import _ from 'lodash'
 
 export const InviteExternalUserForm: StyledComponent<
   IInviteExternalUserFormProps
 > = (props) => {
   const { t } = useTranslation()
-  const { formControlProps, register, roles } = useInviteExternalUserForm(props)
+  const { formControlProps, register, availableRoles } = useInviteExternalUserForm(props)
   const EmailDomainValidator = useEmailDomainValidator()
   return (
     <FormControl {...formControlProps}>
@@ -29,7 +30,9 @@ export const InviteExternalUserForm: StyledComponent<
       <DropdownControl
         {...register('role', { required: true })}
         label={t('common.roleLabel')}
-        values={roles
+        defaultValue={_.first(availableRoles)?.name}
+        disabled={availableRoles.length === 1}
+        values={availableRoles
           .filter((role) => role.enabledForExternalUsers)
           .map((role) => ({
             value: role.name,

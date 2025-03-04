@@ -14,10 +14,10 @@ export function useListField(props: Partial<IListFieldProps>) {
 
   /**
    * Handles the change event for an input field.
-   * 
+   *
    * @param _event - The event object (not used).
    * @param data - The data object containing the input value.
-   * 
+   *
    * If the input value contains an '@' character, the value is split and only the part after the '@' is kept.
    * The resulting value is then set as the input value.
    */
@@ -31,11 +31,11 @@ export function useListField(props: Partial<IListFieldProps>) {
 
   /**
    * Handles the key down event for the input field.
-   * 
+   *
    * @param event - The keyboard event object.
    * @param event.key - The key that was pressed.
    * @param event.currentTarget - The current target of the event.
-   * 
+   *
    * If the 'Enter' key is pressed, the function will:
    * - Ignore if the input value is empty or already exists in the items array.
    * - Add the input value to the list of items and update the context.

@@ -38,6 +38,7 @@ export const DropdownControl: FormInputControlComponent<
             value={value}
             onOptionSelect={onChange}
             onBlur={context.onBlurCallback}
+            disabled={props.disabled}
           >
             {_.map(props.values, (option, index) => (
               <Option key={index} value={option.value}>

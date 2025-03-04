@@ -18,8 +18,11 @@ export const ListField: StyledComponent<IListFieldProps> = ({
   props
 }) => {
   const { t } = useTranslation()
-  const { items, inputValue, onChange, onKeyDown, onRemove } =
-    useListField({ settingsKey, onAddMessage, onRemoveMessage })
+  const { items, inputValue, onChange, onKeyDown, onRemove } = useListField({
+    settingsKey,
+    onAddMessage,
+    onRemoveMessage
+  })
   return (
     <Field
       className={ListField.className}

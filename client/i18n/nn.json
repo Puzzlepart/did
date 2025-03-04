@@ -770,7 +770,7 @@
     "parentProject": "Overordna prosjekt",
     "invalidEmailValidation": "Du har skrevet inn en ugyldig e-post.",
     "emailLabel": "E-postadresse",
-    "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene."
+    "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene for eksterne brukere."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
