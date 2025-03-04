@@ -1,16 +1,15 @@
 import {
   DropdownControl,
+  EmailValidator,
   FormControl,
-  InputControl,
-  EmailValidator
+  InputControl
 } from 'components/FormControl'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { IInviteExternalUserFormProps } from './types'
-import { useInviteExternalUserForm } from './useInviteExternalUserForm'
-import { useTranslation } from 'react-i18next'
 import { useEmailDomainValidator } from './useEmailDomainValidator'
-import _ from 'lodash'
+import { useInviteExternalUserForm } from './useInviteExternalUserForm'
 
 export const InviteExternalUserForm: StyledComponent<
   IInviteExternalUserFormProps
@@ -31,8 +30,6 @@ export const InviteExternalUserForm: StyledComponent<
       <DropdownControl
         {...register('role', { required: true })}
         label={t('common.roleLabel')}
-        defaultValue={_.first(availableRoles)?.name}
-        disabled={availableRoles.length === 1}
         values={availableRoles
           .filter((role) => role.enabledForExternalUsers)
           .map((role) => ({
