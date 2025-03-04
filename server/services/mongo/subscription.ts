@@ -213,8 +213,10 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     mail: string,
     provider: string
   ): Promise<ExternalUserInvitation> {
+    const invitationsPath = `invitations.${provider}|external`
+
     const subscription = await this.collection.findOne({
-      [`invitations.${provider}|external`]: {
+      [invitationsPath]: {
         $elemMatch: { mail }
       }
     })
@@ -224,7 +226,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     const invitation = (
       _.get(
         subscription,
-        `invitations.${provider}|external`
+        invitationsPath
       ) as ExternalUserInvitation[]
     ).find((inv) => inv.mail === mail)
 
