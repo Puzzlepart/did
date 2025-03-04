@@ -49,5 +49,6 @@ query UsersAdmin {
     icon
     permissions
     readOnly
+    enabledForExternalUsers
   }
 }

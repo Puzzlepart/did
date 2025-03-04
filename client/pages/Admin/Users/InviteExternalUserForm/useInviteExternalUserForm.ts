@@ -1,8 +1,10 @@
 import {
+  IFormControlProps,
   useFormControlModel,
   useFormControls
 } from 'components/FormControl'
-import { User, UserInput } from 'types'
+import { useTranslation } from 'react-i18next'
+import { ExternalUserInput } from 'types'
 import { useUsersContext } from '../context'
 import { InviteExternalUserForm } from './InviteExternalUserForm'
 import { IInviteExternalUserFormProps } from './types'
@@ -14,12 +16,26 @@ import { useInviteExternalUserFormSubmit } from './useInviteExternalUserFormSubm
  * @param props - The props for the invite external user form.
  */
 export function useInviteExternalUserForm(props: IInviteExternalUserFormProps) {
+  const { t } = useTranslation()
   const context = useUsersContext()
-  const model = useFormControlModel<keyof UserInput, UserInput>({})
-  const register = useFormControls<keyof User>(model, InviteExternalUserForm)
+  const model = useFormControlModel<keyof ExternalUserInput, ExternalUserInput>()
+  const register = useFormControls<keyof ExternalUserInput>(model, InviteExternalUserForm)
   const submitProps = useInviteExternalUserFormSubmit(props, model)
 
+  const formControlProps: IFormControlProps = {
+    id: InviteExternalUserForm.displayName,
+    model,
+    register,
+    submitProps,
+    panel: {
+      ...props,
+      title: t('admin.inviteExternalUser')
+    },
+    validateOnBlur: true
+  }
+
   return {
+    formControlProps,
     model,
     register,
     submitProps,

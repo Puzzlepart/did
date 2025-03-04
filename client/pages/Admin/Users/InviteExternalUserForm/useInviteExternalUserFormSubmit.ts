@@ -3,17 +3,24 @@ import { FormSubmitHook, IFormControlProps } from 'components/FormControl'
 import { useMap } from 'hooks'
 import { useTranslation } from 'react-i18next'
 import { IInviteExternalUserFormProps } from './types'
+import $inviteExternalUser from './inviteExternalUser.gql'
+import { useMutation } from '@apollo/client'
 
 export const useInviteExternalUserFormSubmit: FormSubmitHook<
   IInviteExternalUserFormProps,
   ReturnType<typeof useMap>
-> = () => {
+> = (_, model) => {
   const { t } = useTranslation()
+  const [inviteExternalUser] = useMutation(
+    $inviteExternalUser
+  )
 
   const onSave = async () => {
-    // eslint-disable-next-line no-console
-    console.log('Saving...')
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await inviteExternalUser({
+      variables: {
+        user: model.value()
+      }
+    })
   }
 
   return {

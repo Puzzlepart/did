@@ -79,9 +79,10 @@ export const Users: TabComponent<ITabProps> = () => {
             onAdd={onAddUsers}
             onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
           />
-          <InviteExternalUserForm 
-          {...context.state.inviteExternaluserForm} 
-          onDismiss={() => context.dispatch(HIDE_INVITE_EXTERNAL_USER_FORM())} />
+          <InviteExternalUserForm
+            {...context.state.inviteExternaluserForm}
+            onDismiss={() => context.dispatch(HIDE_INVITE_EXTERNAL_USER_FORM())}
+          />
         </Tabs>
       </div>
     </UsersContext.Provider>
