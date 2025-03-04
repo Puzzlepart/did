@@ -425,7 +425,10 @@
     "domainRestrictionExternalEnabledLabel": "Enable domain restriction for external users",
     "domainRestrictionExternalEnabledDescription": "External sharing is limited to the following approved domains to ensure secure communication with trusted partners.",
     "domainRestrictionExternalLabel": "Restrict access to external users in the following domains",
-    "domainRestrictionExternalDescription": "Specify which external domains your users are allowed to share with."
+    "domainRestrictionExternalDescription": "Specify which external domains your users are allowed to share with.",
+    "domainRestrictionExternalPlaceholder": "Enter a domain and press enter to add it...",
+    "domainRestrictionAddMessage": "Domain **{0}** successfully added to the allowlist.",
+    "domainRestrictionRemoveMessage": "Domain **{0}** successfully removed from the allowlist. Existing users will still have access and be able to log in."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
@@ -769,7 +772,8 @@
     "reason": "Reason",
     "parentProject": "Parent Project",
     "invalidEmailValidation": "You've entered an invalid email.",
-    "emailLabel": "Mail"
+    "emailLabel": "Mail",
+    "invalidEmailDomainValidation": "{{domain}} is not a supported domain."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

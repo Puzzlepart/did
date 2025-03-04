@@ -235,9 +235,12 @@ export function useSubscriptionConfig() {
           type: 'list',
           hiddenIf: (settings: SubscriptionSettings) =>
             !_.get(settings, 'security.domainRestrictionExternalEnabled'),
+          onAddMessage: t('admin.domainRestrictionAddMessage'),
+          onRemoveMessage: t('admin.domainRestrictionRemoveMessage'),
           props: {
             label: t('admin.domainRestrictionExternalLabel'),
             description: t('admin.domainRestrictionExternalDescription'),
+            placeholder: t('admin.domainRestrictionExternalPlaceholder'),
             contentBefore: '@'
           }
         }

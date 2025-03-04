@@ -59,6 +59,8 @@ export interface ISubscriptionSettingImage<T = IImageFieldProps>
 export interface ISubscriptionSettingList<T = any>
   extends ISubscriptionSettingBase<T> {
   type: 'list'
+  onAddMessage?: string
+  onRemoveMessage?: string
 }
 
 export type SubscriptionSettingField<T = any> =

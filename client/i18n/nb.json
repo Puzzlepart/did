@@ -424,7 +424,10 @@
     "domainRestrictionExternalEnabledLabel": "Aktiver domenebegrensning for eksterne brukere",
     "domainRestrictionExternalEnabledDescription": "Ekstern deling er begrenset til følgende godkjente domener for å sikre sikker kommunikasjon med pålitelige partnere.",
     "domainRestrictionExternalLabel": "Begrens tilgangen til eksterne brukere i følgende domener",
-    "domainRestrictionExternalDescription": "Spesifiser hvilke eksterne domener brukerne dine har lov til å dele med."
+    "domainRestrictionExternalDescription": "Spesifiser hvilke eksterne domener brukerne dine har lov til å dele med.",
+    "domainRestrictionExternalPlaceholder": "Skriv inn et domene og trykk Enter for å legge det til...",
+    "domainRestrictionAddMessage": "Domenet **{0}** er lagt til og kan nå brukes for ekstern deling.",
+    "domainRestrictionRemoveMessage": "Domene **{0}** er fjernet og kan ikke lenger brukes for ekstern deling. Eksisterende brukere vil fortsatt ha tilgang og kunne logge inn."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -765,8 +768,9 @@
     "noManagerLabel": "Ingen leder tildelt",
     "reason": "Begrunnelse",
     "parentProject": "Overordnet prosjekt",
-    "invalidEmailValidation": "Du har skrevet inn en ugyldig e -post.",
-    "emailLabel": "E-postadresse"
+    "invalidEmailValidation": "Du har skrevet inn en ugyldig e-post.",
+    "emailLabel": "E-postadresse",
+    "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

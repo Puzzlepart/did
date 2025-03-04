@@ -22,7 +22,10 @@ export const useInviteExternalUserFormSubmit: FormSubmitHook<
           invitation: model.value()
         }
       })
-      displayToast(t('admin.users.inviteExternalUserSuccess', model.value()), 'success')
+      displayToast(
+        t('admin.users.inviteExternalUserSuccess', model.value()),
+        'success'
+      )
     } catch {
       displayToast(t('admin.users.inviteExternalUserError'), 'error')
     } finally {

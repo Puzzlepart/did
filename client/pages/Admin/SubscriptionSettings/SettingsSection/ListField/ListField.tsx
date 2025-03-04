@@ -1,25 +1,25 @@
-/* eslint-disable no-console */
+/* eslint-disable unicorn/prevent-abbreviations */
 import { Button, Input } from '@fluentui/react-components'
 import { Field } from 'components'
-import _ from 'lodash'
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import { SubscriptionContext } from '../../context'
 import styles from './ListField.module.scss'
 import { IListFieldProps } from './types'
+import { useListField } from './useListField'
 
 /**
  * @category SubscriptionSettings
  */
 export const ListField: StyledComponent<IListFieldProps> = ({
   settingsKey,
+  onAddMessage,
+  onRemoveMessage,
   props
 }) => {
   const { t } = useTranslation()
-  const context = useContext(SubscriptionContext)
-  const items = _.get(context.settings, settingsKey, [])
-  const [inputValue, setInputValue] = useState('')
+  const { items, inputValue, onChange, onKeyDown, onRemove } =
+    useListField({ settingsKey, onAddMessage, onRemoveMessage })
   return (
     <Field
       className={ListField.className}
@@ -30,21 +30,18 @@ export const ListField: StyledComponent<IListFieldProps> = ({
       <Input
         {...props}
         value={inputValue}
-        onChange={(_event, data) => setInputValue(data.value)}
-        onKeyDown={({ key, currentTarget }) => {
-          if (key === 'Enter') {
-            context.onChange(settingsKey, (value: string[] = []) => {
-              return [...value, currentTarget.value].filter(Boolean)
-            })
-            setInputValue('')
-          }
-        }
-        } />
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
       <ul className={styles.list}>
         {items.map((item, index) => (
           <li key={index}>
             <div>{item}</div>
-            <div><Button size='small'>{t('common.delete')}</Button></div>
+            <div>
+              <Button onClick={() => onRemove(index)} size='small'>
+                {t('common.delete')}
+              </Button>
+            </div>
           </li>
         ))}
       </ul>
@@ -54,3 +51,4 @@ export const ListField: StyledComponent<IListFieldProps> = ({
 
 ListField.displayName = 'ListField'
 ListField.className = styles.listField
+ListField.defaultProps = {}
