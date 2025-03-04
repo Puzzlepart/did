@@ -129,5 +129,11 @@ export const getPermissions = (
     description: t('permissions.manageApiTokensDescription'),
     iconName: 'AzureAPIManagement',
     category: 'api'
+  },
+  [PermissionScope.INVITE_EXTERNAL_USERS]: {
+    name: t('permissions.inviteExternalUsers'),
+    description: t('permissions.inviteExternalUsersDescription'),
+    iconName: 'Globe',
+    category: 'admin'
   }
 })

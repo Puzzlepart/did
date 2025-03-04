@@ -15,7 +15,8 @@ export enum PermissionScope {
   MANAGE_SUBSCRIPTION = '67ba6efc',
   MANAGE_REPORT_LINKS = '8de5215e',
   LIST_API_TOKENS = 'cc77404a',
-  MANAGE_API_TOKENS = '5f1a2b0e'
+  MANAGE_API_TOKENS = '5f1a2b0e',
+  INVITE_EXTERNAL_USERS = '785e1c6e'
 }
 
 export interface IPermissionInfo {
