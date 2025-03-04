@@ -43,25 +43,31 @@ export class ProjectService extends MongoDocumentService<Project> {
   }
 
   /**
-   * Add project
+   * Adds a new project to the database.
    *
-   * Returns the ID of the added project
+   * @param project - The project object to be added.
+   * @returns A promise that resolves to the ID of the inserted project.
    *
-   * @param project - Project to add
+   * @remarks
+   * This method clears the cache for 'getprojectsdata' before adding the new project.
+   * The project's key and customer key are converted to uppercase and used as the `_id` in the database.
    */
   public async addProject(project: Project): Promise<string> {
-    try {
-      await this.cache.clear()
-      const tag = [project.customerKey, project.key].join(' ')
-      const { insertedId } = await this.insert({
-        _id: tag,
-        tag,
-        ...project
-      })
-      return insertedId
-    } catch (error) {
-      throw error
-    }
+    const customerKey = project.customerKey.toUpperCase()
+    const key = project.key.toUpperCase()
+    const tag = `${customerKey} ${key}`
+
+    await this.cache.clear('getprojectsdata')
+
+    const { insertedId } = await this.insert({
+      _id: tag,
+      ...project,
+      customerKey,
+      key,
+      tag
+    })
+
+    return insertedId
   }
 
   /**

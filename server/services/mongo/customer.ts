@@ -28,20 +28,23 @@ export class CustomerService extends MongoDocumentService<Customer> {
   }
 
   /**
-   * Add customer
+   * Adds a new customer to the database.
    *
-   * @param customer - Customer to add
+   * @param customer - The customer object to be added.
+   * @returns A promise that resolves when the customer has been added.
+   *
+   * @remarks
+   * This method clears the cache for 'getcustomers' before adding the new customer.
+   * The customer's key is converted to uppercase and used as the `_id` in the database.
    */
   public async addCustomer(customer: Customer): Promise<void> {
-    try {
-      await this.cache.clear('getcustomers')
-      await this.insert({
-        _id: customer.key,
-        ...customer
-      })
-    } catch (error) {
-      throw error
-    }
+    await this.cache.clear('getcustomers')
+    const key = customer.key.toUpperCase()
+    await this.insert({
+      _id: key,
+      ...customer,
+      key
+    })
   }
 
   /**
