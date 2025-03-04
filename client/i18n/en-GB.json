@@ -287,7 +287,10 @@
       "employmentEndDateLabel": "Employment End Date",
       "employmentEndDateDescription": "The date the user's employment ends. If the user is no longer employed, set this date to the last day of employment.",
       "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
-      "searchUsersLabel": "Search users..."
+      "searchUsersLabel": "Search users...",
+      "invitationsHeaderText": "External invitations",
+      "inviteExternalUserError": "An error occurred while inviting the external user.",
+      "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration."
     },
     "weekStatus": {
       "headerText": "Week status",
@@ -415,7 +418,17 @@
     "projectsHeader": "Projects",
     "timesheetTimebankEnabledLabel": "Enable Timebank",
     "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance.",
-    "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings."
+    "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings.",
+    "enabledForExternalUsers": "Enabled for external users",
+    "enabledForExternalUsersDescription": "The role will be available for external users.",
+    "inviteExternalUser": "Invite External User",
+    "domainRestrictionExternalEnabledLabel": "Enable domain restriction for external users",
+    "domainRestrictionExternalEnabledDescription": "External sharing is limited to the following approved domains to ensure secure communication with trusted partners.",
+    "domainRestrictionExternalLabel": "Restrict access to external users in the following domains",
+    "domainRestrictionExternalDescription": "Specify which external domains your users are allowed to share with.",
+    "domainRestrictionExternalPlaceholder": "Enter a domain and press enter to add it...",
+    "domainRestrictionAddMessage": "Domain **{0}** successfully added to the allowlist.",
+    "domainRestrictionRemoveMessage": "Domain **{0}** successfully removed from the allowlist. Existing users will still have access and be able to log in."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
@@ -757,7 +770,10 @@
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
     "reason": "Reason",
-    "parentProject": "Parent Project"
+    "parentProject": "Parent Project",
+    "invalidEmailValidation": "You've entered an invalid email.",
+    "emailLabel": "Mail",
+    "invalidEmailDomainValidation": "{{domain}} is not a supported domain."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -807,7 +823,9 @@
     "manageApiTokensDescription": "Manage (create new, delete existing, and view existing keys) API keys. It is good to be careful about who gets this access, as there is quite a lot that can be done with this much power.",
     "manageApiTokens": "Manage API-tokens",
     "listApiTokens": "List API-tokens",
-    "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems."
+    "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems.",
+    "inviteExternalUsers": "Invite External Users",
+    "inviteExternalUsersDescription": "Allows inviting users outside of the organization to collaborate and access resources."
   },
   "notifications": {
     "moreLinkText": "Read more here",

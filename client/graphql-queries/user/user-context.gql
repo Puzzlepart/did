@@ -40,6 +40,8 @@ query UserContext {
         securityGroupId
         domainRestrictionEnabled
         domainRestriction
+        domainRestrictionExternalEnabled
+        domainRestrictionExternal
       }
       customers {
         keyMaxLength

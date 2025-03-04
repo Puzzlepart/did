@@ -48,6 +48,10 @@ export interface ISubscriptionSettingCheckboxMulti<T = any>
   extends ISubscriptionSettingBase<T> {
   id: string
   type: 'checkboxmulti'
+
+  /**
+   * The options to display
+   */
   options: Record<string, string>
 }
 
@@ -56,9 +60,25 @@ export interface ISubscriptionSettingImage<T = IImageFieldProps>
   type: 'image'
 }
 
+export interface ISubscriptionSettingList<T = any>
+  extends ISubscriptionSettingBase<T> {
+  type: 'list'
+
+  /**
+   * The message to display when an item is added
+   */
+  onAddMessage?: string
+
+  /**
+   * The message to display when an item is removed
+   */
+  onRemoveMessage?: string
+}
+
 export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingText<T>
   | ISubscriptionSettingBool<T>
   | ISubscriptionSettingNumber<T>
   | ISubscriptionSettingCheckboxMulti<T>
   | ISubscriptionSettingImage
+  | ISubscriptionSettingList

@@ -1,0 +1,8 @@
+mutation InviteExternalUser ($invitation: ExternalUserInvitation!) {
+  inviteExternalUser(invitation: $invitation) {
+    success
+    error {
+      message
+    }
+  }
+}

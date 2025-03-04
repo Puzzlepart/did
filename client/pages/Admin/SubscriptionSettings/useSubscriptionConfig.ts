@@ -219,6 +219,30 @@ export function useSubscriptionConfig() {
             description: t('admin.domainRestrictionDescription'),
             contentBefore: '@'
           }
+        },
+        {
+          id: 'domainRestrictionExternalEnabled',
+          type: 'bool',
+          disabledIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.securityGroupEnabled'),
+          props: {
+            label: t('admin.domainRestrictionExternalEnabledLabel'),
+            description: t('admin.domainRestrictionExternalEnabledDescription')
+          }
+        },
+        {
+          id: 'domainRestrictionExternal',
+          type: 'list',
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !_.get(settings, 'security.domainRestrictionExternalEnabled'),
+          onAddMessage: t('admin.domainRestrictionAddMessage'),
+          onRemoveMessage: t('admin.domainRestrictionRemoveMessage'),
+          props: {
+            label: t('admin.domainRestrictionExternalLabel'),
+            description: t('admin.domainRestrictionExternalDescription'),
+            placeholder: t('admin.domainRestrictionExternalPlaceholder'),
+            contentBefore: '@'
+          }
         }
       ]
     },

@@ -8,6 +8,7 @@ import { IUsersContext } from './context'
 import {
   CLEAR_PROGRESS,
   SET_ADD_MULTIPLE_PANEL,
+  SET_INVITE_EXTERNAL_USER_FORM,
   SET_PROGRESS,
   SET_USER_FORM
 } from './reducer/actions'
@@ -29,21 +30,26 @@ export function useUsersMenuItems(context: IUsersContext) {
       new ListMenuItem(t('admin.users.addNewUser'))
         .withIcon('PeopleAdd')
         .setDisabled(context.state.loading)
-        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .withDispatch(context, SET_USER_FORM, {
           headerText: t('admin.users.addNewUser')
         }),
+      new ListMenuItem('Inviter ekstern bruker')
+        .withIcon('GlobePerson')
+        .setDisabled(context.state.loading)
+        .setHidden(!hasPermission(PermissionScope.INVITE_EXTERNAL_USERS))
+        .withDispatch(context, SET_INVITE_EXTERNAL_USER_FORM, { open: true }),
       new ListMenuItem(t('admin.users.bulkImportUsersLabel'))
         .withIcon('ArrowImport')
         .setDisabled(context.state.loading)
-        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(t('admin.users.syncUsersLabel'))
         .withIcon('ArrowSync')
         .setDisabled(
           context.state.loading || context.state.selectedUsers.length === 0
         )
-        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS) && !true)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .setOnClick(async () => {
           context.dispatch(
             SET_PROGRESS(t('admin.users.synchronizingUserProperties'))

@@ -242,7 +242,10 @@
       "employmentStartDateDescription": "Datoen brukerens ansettelse starter. \nHvis brukeren allerede er ansatt, sett denne datoen til første arbeidsdag.",
       "employmentEndDateLabel": "Sluttdato for ansettelse",
       "employmentStartDateLabel": "Startdato for ansettelse",
-      "searchUsersLabel": "Søk i brukarar..."
+      "searchUsersLabel": "Søk i brukarar...",
+      "invitationsHeaderText": "Eksterne invitasjoner",
+      "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
+      "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -414,7 +417,17 @@
     "projectsHeader": "Prosjekter",
     "timesheetTimebankEnabledLabel": "Aktiver Tidsbank",
     "timesheetTimebankEnabledDescription": "Når tidbank er aktivert, kan ansatte akkumulere overtidstimer som kan brukes til fritid på et senere tidspunkt. Dette gir fleksibilitet og mulighet for bedre balanse mellom arbeid og fritid.",
-    "subscriptionSettingsUpdateError": "En feil oppstod under oppdatering av abonnementsinnstillinger."
+    "subscriptionSettingsUpdateError": "En feil oppstod under oppdatering av abonnementsinnstillinger.",
+    "enabledForExternalUsers": "Tilgjengelig for eksterne brukere",
+    "enabledForExternalUsersDescription": "Rollen vil være tilgjengelig for eksterne brukere.",
+    "inviteExternalUser": "Inviter ekstern bruker",
+    "domainRestrictionExternalEnabledLabel": "Aktiver domenebegrensning for eksterne brukere",
+    "domainRestrictionExternalEnabledDescription": "Ekstern deling er begrenset til følgende godkjente domener for å sikre sikker kommunikasjon med pålitelige partnere.",
+    "domainRestrictionExternalLabel": "Begrens tilgangen til eksterne brukere i følgende domener",
+    "domainRestrictionExternalDescription": "Spesifiser hvilke eksterne domener brukerne dine har lov til å dele med.",
+    "domainRestrictionExternalPlaceholder": "Skriv inn et domene og trykk Enter for å legge det til...",
+    "domainRestrictionAddMessage": "Domenet **{0}** er lagt til og kan nå brukes for ekstern deling.",
+    "domainRestrictionRemoveMessage": "Domene **{0}** er fjernet og kan ikke lenger brukes for ekstern deling. Eksisterende brukere vil fortsatt ha tilgang og kunne logge inn."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -754,7 +767,10 @@
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
     "reason": "Begrunning",
-    "parentProject": "Overordna prosjekt"
+    "parentProject": "Overordna prosjekt",
+    "invalidEmailValidation": "Du har skrevet inn en ugyldig e-post.",
+    "emailLabel": "E-postadresse",
+    "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene for eksterne brukere."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -804,7 +820,9 @@
     "manageApiTokens": "Administrere API-nøkler",
     "manageApiTokensDescription": "Administere (opprette nye, slette eksisterende, og se eksisterende nøkler) API-nøkler. Det er greit å være forsiktig med hvem som får denne tilgangen, da det er ganske mye som kan gjøres med så mye krefter.",
     "listApiTokens": "Liste ut API-nøkler",
-    "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer."
+    "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer.",
+    "inviteExternalUsers": "Invitere eksterne brukere",
+    "inviteExternalUsersDescription": "Gir rettighet til å invitere brukere utenfor organisasjonen for samarbeid og tilgang til ressurser."
   },
   "notifications": {
     "moreLinkText": "Les meir her",

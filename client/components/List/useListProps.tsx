@@ -91,6 +91,7 @@ export function useListProps({
           target: event.currentTarget
         })
       )
-    }
+    },
+    onItemInvoked: context.props.onItemInvoked,
   } as IListProps
 }

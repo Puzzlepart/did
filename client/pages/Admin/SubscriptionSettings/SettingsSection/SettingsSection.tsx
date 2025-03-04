@@ -7,6 +7,7 @@ import { MultiCheckboxField } from './MultiCheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 import { useSettingsSection } from './useSettingsSection'
+import { ListField } from './ListField'
 
 /**
  * @category SubscriptionSettings
@@ -65,6 +66,15 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
               case 'checkboxmulti': {
                 return (
                   <MultiCheckboxField
+                    {...field}
+                    key={settingsKey}
+                    settingsKey={settingsKey}
+                  />
+                )
+              }
+              case 'list': {
+                return (
+                  <ListField
                     {...field}
                     key={settingsKey}
                     settingsKey={settingsKey}

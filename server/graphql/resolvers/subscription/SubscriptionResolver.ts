@@ -8,7 +8,12 @@ import { SubscriptionService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
-import { Subscription, SubscriptionSettingsInput } from './types'
+import {
+  ExternalUserInvitation,
+  Subscription,
+  SubscriptionSettingsInput
+} from './types'
+import { generateId } from '../../../utils'
 
 /**
  * Resolver for `Subscription`.
@@ -72,6 +77,27 @@ export class SubscriptionResolver {
     try {
       await this._subscription.lockPeriod(periodId, unlock, reason)
       return { success: true } as BaseResult
+    } catch (error) {
+      return { success: false, error } as BaseResult
+    }
+  }
+
+  @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
+  @Mutation(() => BaseResult, { description: 'Invite external user' })
+  async inviteExternalUser(
+    @Ctx() context: RequestContext,
+    @Arg('invitation', () => ExternalUserInvitation)
+    invitation: ExternalUserInvitation
+  ): Promise<BaseResult> {
+    try {
+      await this._subscription.inviteExternalUser({
+        ...invitation,
+        id: generateId(),
+        invitedAt: new Date(),
+        invitedBy: context.user.id,
+        provider: 'microsoft'
+      })
+      return { success: true, error: null }
     } catch (error) {
       return { success: false, error } as BaseResult
     }

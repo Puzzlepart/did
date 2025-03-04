@@ -7,13 +7,16 @@ import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { User } from 'types'
 import { BulkImportPanel } from './BulkImportPanel'
+import { InviteExternalUserForm } from './InviteExternalUserForm'
 import { UserForm } from './UserForm'
 import styles from './Users.module.scss'
 import { UsersContext } from './context'
 import {
   HIDE_ADD_MULTIPLE_PANEL,
+  HIDE_INVITE_EXTERNAL_USER_FORM,
   HIDE_USER_FORM,
-  SET_SELECTED_USERS
+  SET_SELECTED_USERS,
+  SET_USER_FORM
 } from './reducer/actions'
 import { useUsers } from './useUsers'
 
@@ -43,6 +46,14 @@ export const Users: TabComponent<ITabProps> = () => {
               {
                 items: context.state.activeUsers,
                 columns: columns('active'),
+                onItemInvoked: (user) => {
+                  context.dispatch(
+                    SET_USER_FORM({
+                      headerText: user.displayName,
+                      user
+                    })
+                  )
+                },
                 menuItems,
                 checkboxVisibility: CheckboxVisibility.onHover,
                 selectionProps: [
@@ -76,6 +87,10 @@ export const Users: TabComponent<ITabProps> = () => {
             open={!!context.state.bulkImportPanel}
             onAdd={onAddUsers}
             onDismiss={() => context.dispatch(HIDE_ADD_MULTIPLE_PANEL())}
+          />
+          <InviteExternalUserForm
+            {...context.state.inviteExternaluserForm}
+            onDismiss={() => context.dispatch(HIDE_INVITE_EXTERNAL_USER_FORM())}
           />
         </Tabs>
       </div>

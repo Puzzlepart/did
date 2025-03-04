@@ -1,7 +1,8 @@
 import { Inject, Service } from 'typedi'
-import _ from 'underscore'
+import _ from 'lodash'
 import { RequestContext } from '../../graphql/requestContext'
 import {
+  ExternalUserInvitation,
   Subscription,
   SubscriptionSettings
 } from '../../graphql/resolvers/types'
@@ -125,11 +126,16 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    *
    * @param provider - Provider
    * @param mail - Email address
+   * @param subscriptionId - Subscription ID
    */
-  public async registerExternalUser(provider: string, mail: string) {
+  public async registerExternalUser(
+    provider: string,
+    mail: string,
+    subscriptionId = this.context.subscription.id
+  ) {
     try {
       const result = await this.collection.updateOne(
-        { _id: this.context.subscription.id },
+        { _id: subscriptionId },
         { $push: { [`externals.${provider}`]: mail } }
       )
       return result
@@ -170,6 +176,89 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
         { _id: this.context.subscription.id },
         { lockedPeriods }
       )
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
+   * Invites an external user by adding their invitation to the subscription's invitations list.
+   *
+   * @param invitation - The invitation details for the external user.
+   * @returns The result of the update operation.
+   */
+  public async inviteExternalUser(invitation: ExternalUserInvitation) {
+    try {
+      const result = await this.collection.updateOne(
+        { _id: this.context.subscription.id },
+        {
+          $push: { [`invitations.${invitation.provider}|external`]: invitation }
+        }
+      )
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
+   * Retrieves an external user invitation from the database based on the provided email.
+   *
+   * @param mail - The email address of the external user invitation to retrieve.
+   * @param provider - The provider of the external user invitation to retrieve.
+   *
+   * @returns A promise that resolves to the external user invitation if found, otherwise null.
+   */
+  public async getExternalInvitation(
+    mail: string,
+    provider: string
+  ): Promise<ExternalUserInvitation> {
+    const invitationsPath = `invitations.${provider}|external`
+
+    const subscription = await this.collection.findOne({
+      [invitationsPath]: {
+        $elemMatch: { mail }
+      }
+    })
+
+    if (!subscription) return null
+
+    const invitation = (
+      _.get(
+        subscription,
+        invitationsPath
+      ) as ExternalUserInvitation[]
+    ).find((inv) => inv.mail === mail)
+
+    return {
+      ...invitation,
+      subscription: {
+        ...subscription,
+        id: subscription._id
+      }
+    }
+  }
+
+  /**
+   * Removes an external user invitation from the subscription's invitations list.
+   *
+   * @param invitation - The external user invitation to be removed.
+   *
+   * @returns - The result of the update operation.
+   */
+  public async removeExternalInvitation(invitation: ExternalUserInvitation) {
+    try {
+      const result = await this.collection.updateOne(
+        { _id: invitation.subscription.id },
+        {
+          $pull: {
+            [`invitations.${invitation.provider}|external`]: {
+              id: invitation.id
+            }
+          }
+        }
+      )
+      return result
     } catch (error) {
       throw error
     }

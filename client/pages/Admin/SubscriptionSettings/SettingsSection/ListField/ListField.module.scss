@@ -1,0 +1,19 @@
+.listField {
+  margin: 0;
+
+  ul.list {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+
+    li {
+      padding: 4px 0 0 0;
+      display: flex;
+      flex-direction: row;
+
+      div:first-child {
+        width: 220px;
+      }
+    }
+  }
+}
