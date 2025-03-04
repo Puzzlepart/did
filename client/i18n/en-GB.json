@@ -415,7 +415,9 @@
     "projectsHeader": "Projects",
     "timesheetTimebankEnabledLabel": "Enable Timebank",
     "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance.",
-    "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings."
+    "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings.",
+    "enabledForExternalUsers": "Enabled for external users",
+    "enabledForExternalUsersDescription": "The role will be available for external users."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
@@ -807,7 +809,9 @@
     "manageApiTokensDescription": "Manage (create new, delete existing, and view existing keys) API keys. It is good to be careful about who gets this access, as there is quite a lot that can be done with this much power.",
     "manageApiTokens": "Manage API-tokens",
     "listApiTokens": "List API-tokens",
-    "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems."
+    "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems.",
+    "inviteExternalUsers": "Invite External Users",
+    "inviteExternalUsersDescription": "Allows inviting users outside of the organization to collaborate and access resources."
   },
   "notifications": {
     "moreLinkText": "Read more here",
