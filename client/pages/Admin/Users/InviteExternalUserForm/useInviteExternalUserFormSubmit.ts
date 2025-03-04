@@ -11,14 +11,12 @@ export const useInviteExternalUserFormSubmit: FormSubmitHook<
   ReturnType<typeof useMap>
 > = (_, model) => {
   const { t } = useTranslation()
-  const [inviteExternalUser] = useMutation(
-    $inviteExternalUser
-  )
+  const [inviteExternalUser] = useMutation($inviteExternalUser)
 
   const onSave = async () => {
     await inviteExternalUser({
       variables: {
-        user: model.value()
+        invitation: model.value()
       }
     })
   }

@@ -3,7 +3,9 @@ import _ from 'underscore'
 import { User } from '../../../graphql'
 import { MSGraphService, UserService } from '../../../services'
 import MSOAuthService from '../../../services/msoauth'
-const debug = createDebug('middleware/passport/synchronizeUserProfile')
+const debug = createDebug(
+  'middleware/passport/microsoft/synchronizeUserProfile'
+)
 
 /**
  * Check if user profile synchronization is needed. If needed, return

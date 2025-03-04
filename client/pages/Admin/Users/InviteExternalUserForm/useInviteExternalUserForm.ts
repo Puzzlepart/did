@@ -18,8 +18,14 @@ import { useInviteExternalUserFormSubmit } from './useInviteExternalUserFormSubm
 export function useInviteExternalUserForm(props: IInviteExternalUserFormProps) {
   const { t } = useTranslation()
   const context = useUsersContext()
-  const model = useFormControlModel<keyof ExternalUserInput, ExternalUserInput>()
-  const register = useFormControls<keyof ExternalUserInput>(model, InviteExternalUserForm)
+  const model = useFormControlModel<
+    keyof ExternalUserInput,
+    ExternalUserInput
+  >()
+  const register = useFormControls<keyof ExternalUserInput>(
+    model,
+    InviteExternalUserForm
+  )
   const submitProps = useInviteExternalUserFormSubmit(props, model)
 
   const formControlProps: IFormControlProps = {

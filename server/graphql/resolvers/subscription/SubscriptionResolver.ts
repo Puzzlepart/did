@@ -8,8 +8,12 @@ import { SubscriptionService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
-import { ExternalUserInput, Subscription, SubscriptionSettingsInput } from './types'
-import _ from 'lodash'
+import {
+  ExternalUserInvitation,
+  Subscription,
+  SubscriptionSettingsInput
+} from './types'
+import { generateId } from '../../../utils'
 
 /**
  * Resolver for `Subscription`.
@@ -82,14 +86,15 @@ export class SubscriptionResolver {
   @Mutation(() => BaseResult, { description: 'Invite external user' })
   async inviteExternalUser(
     @Ctx() context: RequestContext,
-    @Arg('user', () => ExternalUserInput) user: ExternalUserInput,
+    @Arg('invitation', () => ExternalUserInvitation)
+    invitation: ExternalUserInvitation
   ): Promise<BaseResult> {
     try {
-      // eslint-disable-next-line no-console
-      console.log('inviteExternalUser', context.user)
       await this._subscription.inviteExternalUser({
-        ...user,
-        manager: _.pick(context.user, ['id', 'mail', 'displayName']),
+        ...invitation,
+        id: generateId(),
+        invitedAt: new Date(),
+        invitedBy: context.user.id,
         provider: 'microsoft'
       })
       return { success: true, error: null }

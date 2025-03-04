@@ -1,5 +1,5 @@
-mutation InviteExternalUser ($user: ExternalUserInput!) {
-  inviteExternalUser(user: $user) {
+mutation InviteExternalUser ($invitation: ExternalUserInvitation!) {
+  inviteExternalUser(invitation: $invitation) {
     success
     error {
       message
