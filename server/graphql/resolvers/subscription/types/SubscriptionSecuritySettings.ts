@@ -49,6 +49,7 @@ export class SubscriptionSecuritySettingsInput {
    */
   @Field({ nullable: true })
   securityGroupEnabled?: boolean
+  
   /**
    * Security group ID (Microsoft Entra ID)
    */
@@ -58,15 +59,28 @@ export class SubscriptionSecuritySettingsInput {
   })
   securityGroupId?: string
 
+  /**
+   * Enable domain restriction for internal users
+   */
   @Field({ nullable: true })
   domainRestrictionEnabled?: boolean
 
+  /**
+   * Domain restriction for internal users
+   */
   @Field({ nullable: true })
   domainRestriction?: string
 
+  /**
+   * Enable external domain restriction
+   */
   @Field({ nullable: true })
   domainRestrictionExternalEnabled?: boolean
 
+  /**
+   * External domains that are allowed to be invited
+   * as external users to the subscription.
+   */
   @Field(() => [String], { nullable: true })
   domainRestrictionExternal?: string[]
 }
