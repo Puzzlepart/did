@@ -131,11 +131,11 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   public async registerExternalUser(
     provider: string,
     mail: string,
-    subscriptionId?: string
+    subscriptionId = this.context.subscription.id
   ) {
     try {
       const result = await this.collection.updateOne(
-        { _id: subscriptionId ?? this.context.subscription?.id },
+        { _id: subscriptionId },
         { $push: { [`externals.${provider}`]: mail } }
       )
       return result
