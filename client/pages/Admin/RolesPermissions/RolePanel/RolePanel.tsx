@@ -53,7 +53,8 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
       <SwitchControl
         {...register('enabledForExternalUsers')}
         label={t('admin.enabledForExternalUsers')}
-        description={t('admin.enabledForExternalUsersDescription' )}  />
+        description={t('admin.enabledForExternalUsersDescription')}
+      />
     </FormControl>
   )
 }

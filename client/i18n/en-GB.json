@@ -417,7 +417,8 @@
     "timesheetTimebankEnabledDescription": "When the time bank is enabled, employees can accumulate overtime hours that can be used for time off at a later date. This provides flexibility and the opportunity for a better work-life balance.",
     "subscriptionSettingsUpdateError": "An error occurred while updating the subscription settings.",
     "enabledForExternalUsers": "Enabled for external users",
-    "enabledForExternalUsersDescription": "The role will be available for external users."
+    "enabledForExternalUsersDescription": "The role will be available for external users.",
+    "inviteExternalUser": "Invite External User"
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",
@@ -759,7 +760,8 @@
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
     "reason": "Reason",
-    "parentProject": "Parent Project"
+    "parentProject": "Parent Project",
+    "invalidEmailValidation": "You've entered an invalid email."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

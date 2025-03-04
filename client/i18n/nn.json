@@ -416,7 +416,8 @@
     "timesheetTimebankEnabledDescription": "Når tidbank er aktivert, kan ansatte akkumulere overtidstimer som kan brukes til fritid på et senere tidspunkt. Dette gir fleksibilitet og mulighet for bedre balanse mellom arbeid og fritid.",
     "subscriptionSettingsUpdateError": "En feil oppstod under oppdatering av abonnementsinnstillinger.",
     "enabledForExternalUsers": "Tilgjengelig for eksterne brukere",
-    "enabledForExternalUsersDescription": "Rollen vil være tilgjengelig for eksterne brukere."
+    "enabledForExternalUsersDescription": "Rollen vil være tilgjengelig for eksterne brukere.",
+    "inviteExternalUser": "Inviter ekstern bruker"
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
@@ -756,7 +757,8 @@
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
     "reason": "Begrunning",
-    "parentProject": "Overordna prosjekt"
+    "parentProject": "Overordna prosjekt",
+    "invalidEmailValidation": "Du har skrevet inn en ugyldig e -post."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

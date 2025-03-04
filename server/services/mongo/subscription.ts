@@ -2,6 +2,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'
 import {
+  ExternalUserInput,
   Subscription,
   SubscriptionSettings
 } from '../../graphql/resolvers/types'
@@ -170,6 +171,18 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
         { _id: this.context.subscription.id },
         { lockedPeriods }
       )
+    } catch (error) {
+      throw error
+    }
+  }
+
+  public async inviteExternalUser(user: ExternalUserInput) {
+    try {
+      const result = await this.collection.updateOne(
+        { _id: this.context.subscription.id },
+        { $push: { [`invitations.${user.provider}|external`]: user } }
+      )
+      return result
     } catch (error) {
       throw error
     }
