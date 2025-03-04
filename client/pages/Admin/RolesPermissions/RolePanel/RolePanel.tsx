@@ -2,7 +2,8 @@ import {
   BaseControlOptions,
   FormControl,
   IconPickerControl,
-  InputControl
+  InputControl,
+  SwitchControl
 } from 'components'
 import { PanelComponent } from 'components/Panel'
 import React from 'react'
@@ -49,6 +50,10 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
         onChange={(permissions) => model.set('permissions', permissions)}
         selectedPermissions={model.value('permissions')}
       />
+      <SwitchControl
+        {...register('enabledForExternalUsers')}
+        label={t('admin.enabledForExternalUsers')}
+        description={t('admin.enabledForExternalUsersDescription' )}  />
     </FormControl>
   )
 }
