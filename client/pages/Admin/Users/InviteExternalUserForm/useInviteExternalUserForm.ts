@@ -4,7 +4,7 @@ import {
   useFormControls
 } from 'components/FormControl'
 import { useTranslation } from 'react-i18next'
-import { ExternalUserInput } from 'types'
+import { ExternalUserInvitation } from 'types'
 import { useUsersContext } from '../context'
 import { InviteExternalUserForm } from './InviteExternalUserForm'
 import { IInviteExternalUserFormProps } from './types'
@@ -19,10 +19,10 @@ export function useInviteExternalUserForm(props: IInviteExternalUserFormProps) {
   const { t } = useTranslation()
   const context = useUsersContext()
   const model = useFormControlModel<
-    keyof ExternalUserInput,
-    ExternalUserInput
+    keyof ExternalUserInvitation,
+    ExternalUserInvitation
   >()
-  const register = useFormControls<keyof ExternalUserInput>(
+  const register = useFormControls<keyof ExternalUserInvitation>(
     model,
     InviteExternalUserForm
   )

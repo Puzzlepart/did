@@ -56,9 +56,15 @@ export interface ISubscriptionSettingImage<T = IImageFieldProps>
   type: 'image'
 }
 
+export interface ISubscriptionSettingList<T = any>
+  extends ISubscriptionSettingBase<T> {
+  type: 'list'
+}
+
 export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingText<T>
   | ISubscriptionSettingBool<T>
   | ISubscriptionSettingNumber<T>
   | ISubscriptionSettingCheckboxMulti<T>
   | ISubscriptionSettingImage
+  | ISubscriptionSettingList

@@ -29,6 +29,12 @@ export class SubscriptionSecuritySettings {
 
   @Field({ nullable: true })
   domainRestriction?: string
+
+  @Field({ nullable: true })
+  domainRestrictionExternalEnabled?: boolean
+
+  @Field(() => [String], { nullable: true })
+  domainRestrictionExternal?: string[]
 }
 
 /**
@@ -57,4 +63,10 @@ export class SubscriptionSecuritySettingsInput {
 
   @Field({ nullable: true })
   domainRestriction?: string
+
+  @Field({ nullable: true })
+  domainRestrictionExternalEnabled?: boolean
+
+  @Field(() => [String], { nullable: true })
+  domainRestrictionExternal?: string[]
 }

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { User } from 'types'
 import { BulkImportPanel } from './BulkImportPanel'
+import { InviteExternalUserForm } from './InviteExternalUserForm'
 import { UserForm } from './UserForm'
 import styles from './Users.module.scss'
 import { UsersContext } from './context'
@@ -17,7 +18,6 @@ import {
   SET_SELECTED_USERS
 } from './reducer/actions'
 import { useUsers } from './useUsers'
-import { InviteExternalUserForm } from './InviteExternalUserForm'
 
 /**
  * Manage users

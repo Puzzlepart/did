@@ -9,7 +9,7 @@ import { IDropdownControlProps } from './types'
 import { useDropdownControlChange } from './useDropdownControlChange'
 
 /**
- * Text field based on `<Dropdown />` from [@fluentui/react](@fluentui/react)
+ * Dropdown field based on `<Dropdown />` from [@fluentui/react](@fluentui/react)
  *
  * @category Reusable Component
  */

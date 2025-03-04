@@ -1,14 +1,14 @@
 import {
   DropdownControl,
   FormControl,
-  InputControl
+  InputControl,
+  EmailValidator
 } from 'components/FormControl'
 import React from 'react'
 import { StyledComponent } from 'types'
 import { IInviteExternalUserFormProps } from './types'
 import { useInviteExternalUserForm } from './useInviteExternalUserForm'
 import { useTranslation } from 'react-i18next'
-import { EmailValidator } from '../../../../components/FormControl/validators/EmailValidator'
 
 export const InviteExternalUserForm: StyledComponent<
   IInviteExternalUserFormProps
@@ -23,8 +23,7 @@ export const InviteExternalUserForm: StyledComponent<
           required: true,
           validators: [EmailValidator(t)]
         })}
-        label='Email'
-        description='The email address of the external user.'
+        label={t('common.emailLabel')}
       />
       <DropdownControl
         {...register('role', { required: true })}
