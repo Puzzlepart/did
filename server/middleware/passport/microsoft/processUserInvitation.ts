@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { IProfile } from 'passport-azure-ad'
-import { ExternalUserInvitation, User } from 'server/graphql'
+import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { UserService, SubscriptionService } from 'server/services'
 import { debug, PROVIDER } from './onVerifySignin'
 
@@ -14,7 +14,7 @@ export async function processUserInvitation(
   mail: string,
   subId: string,
   profile: IProfile,
-  userInvitation: ExternalUserInvitation,
+  userInvitation: ExternalUserInvitationInput,
   subscription: any
 ): Promise<User> {
   debug(
@@ -29,6 +29,7 @@ export async function processUserInvitation(
     preferredLanguage: 'en-GB',
     tenantId: subId,
     isExternal: true,
+    startPage: '/reports',
     configuration: {
       ui: {
         theme: 'auto',

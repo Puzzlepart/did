@@ -2,7 +2,7 @@ import { Inject, Service } from 'typedi'
 import _ from 'lodash'
 import { RequestContext } from '../../graphql/requestContext'
 import {
-  ExternalUserInvitation,
+  ExternalUserInvitationInput,
   Subscription,
   SubscriptionSettings
 } from '../../graphql/resolvers/types'
@@ -187,7 +187,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @param invitation - The invitation details for the external user.
    * @returns The result of the update operation.
    */
-  public async inviteExternalUser(invitation: ExternalUserInvitation) {
+  public async inviteExternalUser(invitation: ExternalUserInvitationInput) {
     try {
       const result = await this.collection.updateOne(
         { _id: this.context.subscription.id },
@@ -201,6 +201,15 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     }
   }
 
+  public async getExternalInvitations(
+    provider = 'microsoft'
+  ): Promise<ExternalUserInvitationInput[]> {
+    const current = await this.collection.findOne({
+      _id: this.context.subscription.id
+    })
+    return _.get(current, `invitations.${provider}|external`, [])
+  }
+
   /**
    * Retrieves an external user invitation from the database based on the provided email.
    *
@@ -212,7 +221,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   public async getExternalInvitation(
     mail: string,
     provider: string
-  ): Promise<ExternalUserInvitation> {
+  ): Promise<ExternalUserInvitationInput> {
     const invitationsPath = `invitations.${provider}|external`
 
     const subscription = await this.collection.findOne({
@@ -224,7 +233,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     if (!subscription) return null
 
     const invitation = (
-      _.get(subscription, invitationsPath) as ExternalUserInvitation[]
+      _.get(subscription, invitationsPath) as ExternalUserInvitationInput[]
     ).find((inv) => inv.mail === mail)
 
     return {
@@ -243,7 +252,9 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    *
    * @returns - The result of the update operation.
    */
-  public async removeExternalInvitation(invitation: ExternalUserInvitation) {
+  public async removeExternalInvitation(
+    invitation: ExternalUserInvitationInput
+  ) {
     try {
       const result = await this.collection.updateOne(
         { _id: invitation.subscription.id },

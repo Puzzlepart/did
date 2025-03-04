@@ -10,6 +10,7 @@ import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import {
   ExternalUserInvitation,
+  ExternalUserInvitationInput,
   Subscription,
   SubscriptionSettingsInput
 } from './types'
@@ -86,8 +87,8 @@ export class SubscriptionResolver {
   @Mutation(() => BaseResult, { description: 'Invite external user' })
   async inviteExternalUser(
     @Ctx() context: RequestContext,
-    @Arg('invitation', () => ExternalUserInvitation)
-    invitation: ExternalUserInvitation
+    @Arg('invitation', () => ExternalUserInvitationInput)
+    invitation: ExternalUserInvitationInput
   ): Promise<BaseResult> {
     try {
       await this._subscription.inviteExternalUser({
@@ -101,5 +102,13 @@ export class SubscriptionResolver {
     } catch (error) {
       return { success: false, error } as BaseResult
     }
+  }
+
+  @Query(() => [ExternalUserInvitation], {
+    description: 'Get external invitations',
+    nullable: true
+  })
+  async externalInvitations() {
+    return await this._subscription.getExternalInvitations()
   }
 }

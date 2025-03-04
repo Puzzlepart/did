@@ -288,7 +288,7 @@
       "employmentEndDateDescription": "The date the user's employment ends. If the user is no longer employed, set this date to the last day of employment.",
       "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
       "searchUsersLabel": "Search users...",
-      "invitationsHeaderText": "External invitations",
+      "invitationsHeaderText": "Pending invitations",
       "inviteExternalUserError": "An error occurred while inviting the external user.",
       "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration."
     },
@@ -773,7 +773,11 @@
     "parentProject": "Parent Project",
     "invalidEmailValidation": "You've entered an invalid email.",
     "emailLabel": "Mail",
-    "invalidEmailDomainValidation": "{{domain}} is not a supported domain."
+    "invalidEmailDomainValidation": "{{domain}} is not a supported domain.",
+    "idLabel": "ID",
+    "invitedAtLabel": "Invited at",
+    "invitedByLabel": "Invited by",
+    "cancelButtonDisabledTooltip": "Cancelling invitations is currently not supported."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

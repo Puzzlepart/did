@@ -20,6 +20,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import timezonePlugin from 'dayjs/plugin/timezone'
 import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { TFunction } from 'i18next'
 import s from 'underscore.string'
 import { DateObject } from './DateObject'
@@ -43,6 +44,7 @@ export class DateUtils {
     $dayjs.extend<PluginFunc>(isoWeekPlugin)
     $dayjs.extend<PluginFunc>(isoWeeksInYear)
     $dayjs.extend<PluginFunc>(isLeapYear)
+    $dayjs.extend<PluginFunc>(localizedFormat)
     $dayjs.extend(relativeTime)
   }
 
