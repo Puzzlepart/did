@@ -15,7 +15,8 @@ import {
   HIDE_ADD_MULTIPLE_PANEL,
   HIDE_INVITE_EXTERNAL_USER_FORM,
   HIDE_USER_FORM,
-  SET_SELECTED_USERS
+  SET_SELECTED_USERS,
+  SET_USER_FORM
 } from './reducer/actions'
 import { useUsers } from './useUsers'
 
@@ -45,6 +46,14 @@ export const Users: TabComponent<ITabProps> = () => {
               {
                 items: context.state.activeUsers,
                 columns: columns('active'),
+                onItemInvoked: (user) => {
+                  context.dispatch(
+                    SET_USER_FORM({
+                      headerText: user.displayName,
+                      user
+                    })
+                  )
+                },
                 menuItems,
                 checkboxVisibility: CheckboxVisibility.onHover,
                 selectionProps: [
