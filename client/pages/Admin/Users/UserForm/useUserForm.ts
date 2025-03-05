@@ -30,13 +30,10 @@ export function useUserForm(props: IUserFormProps) {
   const model = useFormControlModel<keyof UserInput, UserInput>(initialModel)
   const register = useFormControls<keyof User>(model, UserForm)
   const submitProps = useUserFormSubmit(props, model)
-  const revokeExternalAccess = useRevokeExternalAccess(
-    model.value(),
-    () => {
-      props.onDismiss()
-      context.dispatch(RESET_SELECTION())
-    }
-  )
+  const revokeExternalAccess = useRevokeExternalAccess(model.value(), () => {
+    props.onDismiss()
+    context.dispatch(RESET_SELECTION())
+  })
 
   const adSyncProperties = get(
     appContext,

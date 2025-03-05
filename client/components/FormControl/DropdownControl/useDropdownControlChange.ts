@@ -27,12 +27,15 @@ import _ from 'lodash'
  * @param props.values - The available values for the dropdown control.
  */
 export function useDropdownControlChange(props: IDropdownControlProps) {
-  const onChange = useCallback<DropdownProps['onOptionSelect']>((_event, data) => {
-    const value = props.options?.preTransformValue
-      ? props.options.preTransformValue(data)
-      : data.optionValue
-    props.model.set(props.name, value)
-  }, [])
+  const onChange = useCallback<DropdownProps['onOptionSelect']>(
+    (_event, data) => {
+      const value = props.options?.preTransformValue
+        ? props.options.preTransformValue(data)
+        : data.optionValue
+      props.model.set(props.name, value)
+    },
+    []
+  )
 
   useEffect(() => {
     if (!props.selectFirstOption) return
@@ -43,7 +46,6 @@ export function useDropdownControlChange(props: IDropdownControlProps) {
       optionText: props.values[0].text
     })
   }, [props.selectFirstOption])
-
 
   return onChange
 }

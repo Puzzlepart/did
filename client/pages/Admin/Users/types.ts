@@ -71,7 +71,7 @@ export interface IUsersState {
   progress?: string
 
   /**
-   * A key that uniquely identifies the given items. 
+   * A key that uniquely identifies the given items.
    * If provided, the selection will be reset when the key changes.
    */
   setKey?: string

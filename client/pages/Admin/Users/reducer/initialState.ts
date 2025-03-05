@@ -12,5 +12,5 @@ export const initialState: IUsersState = {
   availableAdUsers: [],
   selectedUsers: [],
   roles: [],
-  setKey: Date.now().toString(),
+  setKey: Date.now().toString()
 }
