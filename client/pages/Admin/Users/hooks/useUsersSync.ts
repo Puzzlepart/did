@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import _ from 'underscore'
-import { IUsersContext } from './context'
+import { IUsersContext } from '../context'
 import $updateUsers from './updateUsers.gql'
 import { omitTypename } from 'utils'
 

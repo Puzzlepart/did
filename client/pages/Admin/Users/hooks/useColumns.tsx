@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
 import { getFluentIcon, getFluentIconWithFallback } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
-import styles from './Users.module.scss'
-import { IUsersContext } from './context'
+import styles from '../Users.module.scss'
+import { IUsersContext } from '../context'
 
 /**
  * Returns columns for the `Users` list. The returned function accepts a `type` parameter,

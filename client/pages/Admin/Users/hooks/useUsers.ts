@@ -3,13 +3,13 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import $addUsers from './addUsers.gql'
-import { IUsersContext } from './context'
-import { useUsersReducer } from './reducer'
+import { IUsersContext } from '../context'
+import { useUsersReducer } from '../reducer'
 import {
   CLEAR_PROGRESS,
   HIDE_ADD_MULTIPLE_PANEL,
   SET_PROGRESS
-} from './reducer/actions'
+} from '../reducer/actions'
 import { useColumns } from './useColumns'
 import { useUsersMenuItems } from './useUsersMenuItems'
 import { useUsersQuery } from './useUsersQuery'

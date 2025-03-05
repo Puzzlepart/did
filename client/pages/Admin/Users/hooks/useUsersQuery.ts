@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Dispatch, useEffect } from 'react'
-import { DATA_UPDATED } from './reducer/actions'
+import { DATA_UPDATED } from '../reducer/actions'
 import $users from './users.gql'
 import { AnyAction } from '@reduxjs/toolkit'
 

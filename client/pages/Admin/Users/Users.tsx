@@ -18,7 +18,7 @@ import {
   SET_SELECTED_USERS,
   SET_USER_FORM
 } from './reducer/actions'
-import { useUsers } from './useUsers'
+import { useUsers } from './hooks'
 
 /**
  * Manage users

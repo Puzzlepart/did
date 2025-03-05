@@ -4,14 +4,14 @@ import { usePermissions } from 'hooks/user/usePermissions'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { IUsersContext } from './context'
+import { IUsersContext } from '../context'
 import {
   CLEAR_PROGRESS,
   SET_ADD_MULTIPLE_PANEL,
   SET_INVITE_EXTERNAL_USER_FORM,
   SET_PROGRESS,
   SET_USER_FORM
-} from './reducer/actions'
+} from '../reducer/actions'
 import { useUsersSync } from './useUsersSync'
 
 /**
