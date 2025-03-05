@@ -50,6 +50,7 @@ export const InviteExternalUserForm: StyledComponent<
             value: role.name,
             text: role.name
           }))}
+        selectFirstOption
       />
     </FormControl>
   )
