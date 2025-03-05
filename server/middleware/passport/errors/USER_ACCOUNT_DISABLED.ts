@@ -5,7 +5,7 @@ import { SigninError } from './SigninError'
  */
 export const USER_ACCOUNT_DISABLED = new SigninError(
   'e0666582',
-  'An error occured signing you in',
+  'An error occured signing you in to did',
   'Your account is disabled.',
   'Cancel'
 )
