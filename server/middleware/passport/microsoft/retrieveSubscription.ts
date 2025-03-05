@@ -9,9 +9,9 @@ import { IProfileJson } from './types'
  * @param subSvc - Subscription service
  * @param subId - Subscription ID
  * @param profile - User profile object
- * 
+ *
  * @returns The subscription object
- * 
+ *
  * @throws TENANT_NOT_ENROLLED if no subscription is found
  */
 export async function retrieveSubscription(
@@ -34,7 +34,10 @@ export async function retrieveSubscription(
   }
 
   // Check if there's an invitation
-  const userInvitation = await subSvc.getExternalInvitation(profile.preferred_username, PROVIDER)
+  const userInvitation = await subSvc.getExternalInvitation(
+    profile.preferred_username,
+    PROVIDER
+  )
   subscription = userInvitation?.subscription
 
   if (!subscription) {

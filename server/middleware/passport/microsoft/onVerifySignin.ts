@@ -6,17 +6,17 @@ import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from '../../../services'
 import { environment } from '../../../utils'
+import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
+import { processUserInvitation } from './processUserInvitation'
+import { retrieveSubscription } from './retrieveSubscription'
+import { synchronizeUserProfile } from './synchronizeUserProfile'
+import { IProfileJson } from './types'
 import {
   NO_OID_FOUND,
   USER_ACCOUNT_DISABLED,
   USER_INVITATION_ACCEPTED,
   USER_NOT_ENROLLED
 } from '../errors'
-import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
-import { processUserInvitation } from './processUserInvitation'
-import { retrieveSubscription } from './retrieveSubscription'
-import { synchronizeUserProfile } from './synchronizeUserProfile'
-import { IProfileJson } from './types'
 
 export const debug = createDebug('middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
@@ -124,7 +124,7 @@ export const onVerifySignin = async (
     }
 
     if (subscription?.settings?.adsync?.enabled) {
-      await synchronizeUserProfile(user, userSrv)
+      await synchronizeUserProfile(user, userSrv, !Boolean(userInvitation))
     }
 
     // Check if user invitation was accepted, if so, return
