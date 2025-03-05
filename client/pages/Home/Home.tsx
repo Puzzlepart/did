@@ -26,9 +26,12 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={Home.className}>
-      <Logo showMotto={true} dropShadow={true} />
+      <Logo showMotto dropShadow />
       {loginError && (
-        <LoginError text={loginError.name} message={loginError.message} />
+        <LoginError
+          text={loginError.name}
+          message={loginError.message} 
+          intent={loginError.intent} />
       )}
       {_.isEmpty(Object.keys(providers)) && (
         <LoginError text={t('common.signInDisabledText')} />
