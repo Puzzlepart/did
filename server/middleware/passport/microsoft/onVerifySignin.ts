@@ -1,8 +1,9 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import createDebug from 'debug'
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
-import { ExternalUserInvitation, ExternalUserInvitationInput, User } from 'server/graphql'
+import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from '../../../services'
 import { environment } from '../../../utils'
 import {
@@ -12,10 +13,9 @@ import {
   USER_NOT_ENROLLED
 } from '../errors'
 import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
-import { synchronizeUserProfile } from './synchronizeUserProfile'
-import createDebug from 'debug'
 import { processUserInvitation } from './processUserInvitation'
 import { retrieveSubscription } from './retrieveSubscription'
+import { synchronizeUserProfile } from './synchronizeUserProfile'
 
 export const debug = createDebug('middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
