@@ -34,7 +34,7 @@ export function useUsersMenuItems(context: IUsersContext) {
         .withDispatch(context, SET_USER_FORM, {
           headerText: t('admin.users.addNewUser')
         }),
-      new ListMenuItem('Inviter ekstern bruker')
+      new ListMenuItem(t('admin.users.inviteExternalUser'))
         .withIcon('GlobePerson')
         .setDisabled(context.state.loading)
         .setHidden(!hasPermission(PermissionScope.INVITE_EXTERNAL_USERS))

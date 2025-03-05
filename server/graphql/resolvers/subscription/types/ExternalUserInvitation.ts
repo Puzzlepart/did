@@ -27,6 +27,28 @@ export class ExternalUserInvitationInput {
   @Field({ nullable: true })
   provider?: string
 
+  /**
+   * Language to be used by the user.
+   * This is hardcoded to 'en-GB' for now.
+   */
+  preferredLanguage?: string
+
+  /**
+   * Start page for the user.
+   * This is hardcoded to '/reports' for now.
+   */
+  startPage?: string
+
+  /**
+   * Theme to be used by the user.
+   * This is harcoded to 'auto' for now.
+   */
+  theme?: string
+
+  /**
+   * Subscription to be associated with the 
+   * user invitation.
+   */
   subscription?: Subscription
 }
 

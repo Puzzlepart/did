@@ -96,7 +96,10 @@ export class SubscriptionResolver {
         id: generateId(),
         invitedAt: new Date(),
         invitedBy: context.user.id,
-        provider: 'microsoft'
+        provider: 'microsoft',
+        startPage: '/reports',
+        theme: 'auto',
+        preferredLanguage: 'en-GB'
       })
       return { success: true, error: null }
     } catch (error) {

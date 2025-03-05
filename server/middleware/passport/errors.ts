@@ -9,7 +9,8 @@ export class SigninError extends Error {
     public name: string,
     message: string,
     public icon?: string,
-    public intent = 'error'
+    public redirectDelayMs?: number,
+    public authProvider?: string
   ) {
     super(message)
   }
@@ -23,7 +24,8 @@ export class SigninError extends Error {
         name: this.name,
         message: this.message,
         icon: this.icon,
-        intent: this.intent,
+        redirectDelayMs: this.redirectDelayMs,
+        authProvider: this.authProvider
       })
     ).toString('base64')
   }
@@ -83,7 +85,8 @@ export const USER_ACCOUNT_DISABLED = new SigninError(
 export const USER_INVITATION_ACCEPTED = new SigninError(
   '37ef71e8',
   'Invitation accepted',
-  'You have accepted the invitation to join did. Please log in with your Microsoft account to continue.',
+  'You have accepted the invitation to join did. You will be redirected to the login page in a few seconds.',
   'Checkmark',
-  'info'
+  5000,
+  'azuread-openidconnect'
 )

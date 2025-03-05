@@ -150,6 +150,8 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @param periodId Period ID
    * @param unlock If true, unlock the period
    * @param reason Reason for locking the period (optional)
+   * 
+   * @returns The result of the update operation.
    */
   public async lockPeriod(periodId: string, unlock: boolean, reason?: string) {
     try {
@@ -185,6 +187,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * Invites an external user by adding their invitation to the subscription's invitations list.
    *
    * @param invitation - The invitation details for the external user.
+   * 
    * @returns The result of the update operation.
    */
   public async inviteExternalUser(invitation: ExternalUserInvitationInput) {

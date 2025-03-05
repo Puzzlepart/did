@@ -16,6 +16,7 @@ import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
 import { processUserInvitation } from './processUserInvitation'
 import { retrieveSubscription } from './retrieveSubscription'
 import { synchronizeUserProfile } from './synchronizeUserProfile'
+import { IProfileJson } from './types'
 
 export const debug = createDebug('middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
@@ -43,18 +44,21 @@ export const onVerifySignin = async (
     db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
+    // Extract profile JSON
+    const _profile = profile._json as IProfileJson
+
     // User invitation
     let userInvitation: ExternalUserInvitationInput
 
     // Extract user identity information
-    const { tid: subId, oid: userId, preferred_username: mail } = profile._json
+    const { tid: subId, oid: userId, preferred_username: mail } = _profile
 
     if (!userId) {
       throw NO_OID_FOUND
     }
 
     // Find applicable subscription
-    const subscription = await retrieveSubscription(subSvc, subId, mail)
+    const subscription = await retrieveSubscription(subSvc, subId, _profile)
 
     // Check if user is owner
     const isOwner = subscription.owner === mail
@@ -74,9 +78,8 @@ export const onVerifySignin = async (
         dbUser = await processUserInvitation(
           userSrv,
           subSvc,
-          profile._json,
-          userInvitation,
-          subscription
+          _profile,
+          userInvitation
         )
       }
     }
