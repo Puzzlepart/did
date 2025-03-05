@@ -2,6 +2,7 @@
 import { useAppContext } from 'AppContext'
 import { useLocation } from 'react-router-dom'
 import { ISigninError } from './types'
+import { useEffect } from 'react'
 
 /**
  * Component logic for `Home`
@@ -17,6 +18,15 @@ export function useHome(paramName = 'error') {
   const loginError: ISigninError =
     urlSearchParameters.get(paramName) &&
     JSON.parse(atob(urlSearchParameters.get(paramName) as string))
+
+  useEffect(() => {
+    if (loginError?.redirectDelayMs) {
+      setTimeout(() => {
+        window.location.replace(`/auth/${loginError.authProvider}/signin`)
+      }, loginError.redirectDelayMs)
+    }
+  }, [loginError])
+
   const redirectPage =
     user.startPage &&
       user.startPage !== '/' &&

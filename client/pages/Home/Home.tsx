@@ -30,8 +30,8 @@ export const Home: PageComponent = () => {
       {loginError && (
         <LoginError
           text={loginError.name}
-          message={loginError.message} 
-          intent={loginError.intent} />
+          message={loginError.message}
+          enableDismiss={!loginError.redirectDelayMs} />
       )}
       {_.isEmpty(Object.keys(providers)) && (
         <LoginError text={t('common.signInDisabledText')} />
