@@ -774,7 +774,9 @@
     "idLabel": "Id",
     "invitedAtLabel": "Invitert",
     "invitedByLabel": "Invitert av",
-    "cancelButtonDisabledTooltip": "Å avbryte invitasjoner støttes foreløpig ikke."
+    "cancelButtonDisabledTooltip": "Å avbryte invitasjoner støttes foreløpig ikke.",
+    "ok": "OK",
+    "dismiss": "Avvis"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

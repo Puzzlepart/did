@@ -777,7 +777,9 @@
     "idLabel": "ID",
     "invitedAtLabel": "Invited at",
     "invitedByLabel": "Invited by",
-    "cancelButtonDisabledTooltip": "Cancelling invitations is currently not supported."
+    "cancelButtonDisabledTooltip": "Cancelling invitations is currently not supported.",
+    "ok": "OK",
+    "dismiss": "Dismiss"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
