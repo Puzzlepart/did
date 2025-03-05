@@ -130,11 +130,13 @@ export class SubscriptionResolver {
    * Cancel an external user invitation.
    *
    * @param invitationId - The ID of the invitation to cancel.
-   * 
+   *
    * @returns A promise that resolves when the invitation is cancelled.
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
-  @Mutation(() => BaseResult, { description: 'Cancel external user invitation' })
+  @Mutation(() => BaseResult, {
+    description: 'Cancel external user invitation'
+  })
   async cancelExternalInvitation(
     @Arg('invitationId') invitationId: string
   ): Promise<BaseResult> {
@@ -142,7 +144,10 @@ export class SubscriptionResolver {
       await this._subscription.cancelExternalInvitation(invitationId)
       return { success: true, error: null }
     } catch (error) {
-      return { success: false, error: _.pick(error, ['name', 'message', 'code', 'statusCode']) }
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
     }
   }
 }

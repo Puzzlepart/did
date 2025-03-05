@@ -1,11 +1,11 @@
 /* eslint-disable unicorn/consistent-function-scoping */
+import { useMutation } from '@apollo/client'
+import { useAppContext } from 'AppContext'
 import { FormSubmitHook, IFormControlProps } from 'components/FormControl'
 import { useMap } from 'hooks'
 import { useTranslation } from 'react-i18next'
-import { IInviteExternalUserFormProps } from './types'
 import $inviteExternalUser from './inviteExternalUser.gql'
-import { useMutation } from '@apollo/client'
-import { useAppContext } from 'AppContext'
+import { IInviteExternalUserFormProps } from './types'
 
 export const useInviteExternalUserFormSubmit: FormSubmitHook<
   IInviteExternalUserFormProps,
@@ -34,7 +34,7 @@ export const useInviteExternalUserFormSubmit: FormSubmitHook<
   }
 
   return {
-    text: t('common.save'),
+    text: t('admin.users.inviteExternalUserSubmit'),
     onClick: onSave
   } as IFormControlProps['submitProps']
 }

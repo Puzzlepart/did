@@ -73,7 +73,10 @@ export const Users: TabComponent<ITabProps> = () => {
                 selectionMode: SelectionMode.none
               }
             ],
-            pendingInvitations: [PendingInvitations, t('admin.users.pendingInvitations')]
+            pendingInvitations: [
+              PendingInvitations,
+              t('admin.users.pendingInvitations')
+            ]
           }}
         >
           <UserForm

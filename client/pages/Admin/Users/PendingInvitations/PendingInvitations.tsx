@@ -12,6 +12,7 @@ import {
 import {
   CalendarRegular,
   MailRegular,
+  PersonRegular,
   ShieldLockRegular
 } from '@fluentui/react-icons'
 import date from 'DateUtils'
@@ -25,7 +26,7 @@ import { usePendingInvitations } from './usePendingInvitations'
 
 export const PendingInvitations: StyledComponent = () => {
   const { t } = useTranslation()
-  const { invitations, loading, cancelInvitation } =
+  const { invitations, getUserById, loading, cancelInvitation } =
     usePendingInvitations()
 
   if (loading) {
@@ -59,7 +60,9 @@ export const PendingInvitations: StyledComponent = () => {
                   appearance='filled'
                   color={invitation.status === 'pending' ? 'warning' : 'danger'}
                 >
-                  {invitation.status === 'pending' ? t('common.pending') : t('common.expired')}
+                  {invitation.status === 'pending'
+                    ? t('common.pending')
+                    : t('common.expired')}
                 </Badge>
               }
             />
@@ -77,7 +80,19 @@ export const PendingInvitations: StyledComponent = () => {
               <div className={styles.infoRow}>
                 <CalendarRegular />
                 <Caption1>
-                  {t('admin.users.invitedString', { invitedAt: date.formatDate(invitation.invitedAt, 'LLL') })}
+                  {t('admin.users.invitedString', {
+                    invitedAt: date.formatDate(invitation.invitedAt, 'LLL')
+                  })}
+                </Caption1>
+              </div>
+
+              <div className={styles.infoRow}>
+                <PersonRegular />
+                <Caption1>
+                  {t(
+                    'admin.users.invitedByString',
+                    getUserById(invitation.invitedBy)
+                  )}
                 </Caption1>
               </div>
             </div>

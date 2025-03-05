@@ -53,6 +53,7 @@ query UsersAdmin {
   }
   invitations: externalInvitations {
     id
+    name  
     mail
     role
     invitedAt

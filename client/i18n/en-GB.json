@@ -297,7 +297,14 @@
       "cancelInvitation": "Cancel invitation",
       "pendingInvitations": "Pending Invitations",
       "cancelInvitationError": "There was an error cancelling the invitation: {{error}}",
-      "cancelInvitationSuccess": "Successfully cancelled invitation."
+      "cancelInvitationSuccess": "Successfully cancelled invitation.",
+      "invitationNamePlaceholder": "Enter the name of the user you want to invite...",
+      "invitationNameDescription": "The name of the user you want to invite — it's recommended to fill this out, but not required.",
+      "invitationEmailDescription": "The e-mail of the user you want to invite. There might be limitations on supported domains.",
+      "invitationNameRecommended": "It is recommended to provide a name for the individual you want to invite.",
+      "invitationRoleDescription": "description={t('Please select a role for the invited user. Only roles that have been explicitly enabled for external users are available for selection in this list. If no roles are visible, it means no roles are currently enabled for external invitations.",
+      "invitedByString": "Invited by {{displayName}}",
+      "inviteExternalUserSubmit": "Send invitation"
     },
     "weekStatus": {
       "headerText": "Week status",

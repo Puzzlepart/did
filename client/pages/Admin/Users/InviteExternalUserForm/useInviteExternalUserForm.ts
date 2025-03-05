@@ -9,6 +9,8 @@ import { useUsersContext } from '../context'
 import { InviteExternalUserForm } from './InviteExternalUserForm'
 import { IInviteExternalUserFormProps } from './types'
 import { useInviteExternalUserFormSubmit } from './useInviteExternalUserFormSubmit'
+import { useEmailDomainValidator } from './useEmailDomainValidator'
+import { useInvitationNameValidator } from './useInvitationNameValidator'
 
 /**
  * A custom hook that returns the necessary props and functions for the invite external user form.
@@ -40,6 +42,9 @@ export function useInviteExternalUserForm(props: IInviteExternalUserFormProps) {
     validateOnBlur: true
   }
 
+  const emailDomainValidator = useEmailDomainValidator()
+  const invitationNameValidator = useInvitationNameValidator()
+
   return {
     formControlProps,
     model,
@@ -47,6 +52,8 @@ export function useInviteExternalUserForm(props: IInviteExternalUserFormProps) {
     submitProps,
     availableRoles: context.state.roles.filter(
       (role) => role.enabledForExternalUsers
-    )
+    ),
+    emailDomainValidator,
+    invitationNameValidator
   }
 }
