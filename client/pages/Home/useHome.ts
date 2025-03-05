@@ -23,8 +23,8 @@ export function useHome(paramName = 'response') {
 
   const redirectPage =
     user.startPage &&
-      user.startPage !== '/' &&
-      location.state?.prevPath === undefined
+    user.startPage !== '/' &&
+    location.state?.prevPath === undefined
       ? user.startPage
       : null
 

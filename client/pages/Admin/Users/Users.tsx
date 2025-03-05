@@ -11,6 +11,7 @@ import { InviteExternalUserForm } from './InviteExternalUserForm'
 import { UserForm } from './UserForm'
 import styles from './Users.module.scss'
 import { UsersContext } from './context'
+import { useUsers } from './hooks'
 import {
   HIDE_ADD_MULTIPLE_PANEL,
   HIDE_INVITE_EXTERNAL_USER_FORM,
@@ -18,7 +19,7 @@ import {
   SET_SELECTED_USERS,
   SET_USER_FORM
 } from './reducer/actions'
-import { useUsers } from './hooks'
+import { PendingInvitations } from './PendingInvitations'
 
 /**
  * Manage users
@@ -71,7 +72,8 @@ export const Users: TabComponent<ITabProps> = () => {
                 columns: columns('disabled'),
                 selectionMode: SelectionMode.none
               }
-            ]
+            ],
+            pendingInvitations: [PendingInvitations, t('admin.users.pendingInvitations')]
           }}
         >
           <UserForm

@@ -291,7 +291,11 @@
       "invitationsHeaderText": "Pending invitations",
       "inviteExternalUserError": "An error occurred while inviting the external user.",
       "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration.",
-      "inviteExternalUser": "Invite External User"
+      "inviteExternalUser": "Invite External User",
+      "noPendingInvitations": "No pending invitations at the moment.",
+      "invitedString": "Invited {{invitedAt}}",
+      "cancelInvitation": "Cancel invitation",
+      "pendingInvitations": "Pending Invitations"
     },
     "weekStatus": {
       "headerText": "Week status",
@@ -780,7 +784,9 @@
     "invitedByLabel": "Invited by",
     "cancelButtonDisabledTooltip": "Cancelling invitations is currently not supported.",
     "ok": "OK",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "pending": "Pending",
+    "expired": "Expired"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

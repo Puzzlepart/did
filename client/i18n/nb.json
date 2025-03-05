@@ -244,7 +244,11 @@
       "invitationsHeaderText": "Aktive invitasjoner",
       "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
       "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn.",
-      "inviteExternalUser": "Inviter ekstern bruker"
+      "inviteExternalUser": "Inviter ekstern bruker",
+      "noPendingInvitations": "Ingen ventende invitasjoner for øyeblikket.",
+      "invitedString": "Invitert {{invitedAt}}",
+      "cancelInvitation": "Kanseller invitasjon",
+      "pendingInvitations": "Eksterne invitasjoner"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -778,7 +782,9 @@
     "cancelButtonDisabledTooltip": "Å avbryte invitasjoner støttes foreløpig ikke.",
     "ok": "OK",
     "dismiss": "Avvis",
-    "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!"
+    "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!",
+    "pending": "Venter",
+    "expired": "Utløpt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

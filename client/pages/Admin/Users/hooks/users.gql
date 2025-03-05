@@ -51,4 +51,12 @@ query UsersAdmin {
     readOnly
     enabledForExternalUsers
   }
+  invitations: externalInvitations {
+    id
+    mail
+    role
+    invitedAt
+    invitedBy
+    status
+  }
 }

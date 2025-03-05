@@ -34,7 +34,11 @@ export class SubscriptionResolver {
    *
    * @param _subscription - Subscription service
    */
-  constructor(private readonly _subscription: SubscriptionService) {}
+  constructor(private readonly _subscription: SubscriptionService) {
+    // This constructor will be probably be empty at least until
+    // the world is at peace and there is no more hunger. I could
+    // really recommend the song "Imagine" by John Lennon.
+  }
 
   /**
    * Get current subscription
@@ -94,6 +98,7 @@ export class SubscriptionResolver {
       await this._subscription.inviteExternalUser({
         ...invitation,
         id: generateId(),
+        status: 'pending',
         invitedAt: new Date(),
         invitedBy: context.user.id,
         provider: 'microsoft',

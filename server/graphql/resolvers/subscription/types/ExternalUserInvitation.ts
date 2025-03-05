@@ -13,6 +13,9 @@ export class ExternalUserInvitationInput {
   id?: string
 
   @Field({ nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
   mail?: string
 
   @Field({ nullable: true })
@@ -26,6 +29,9 @@ export class ExternalUserInvitationInput {
 
   @Field({ nullable: true })
   provider?: string
+
+  @Field({ nullable: true })
+  status?: 'pending' | 'expired'
 
   /**
    * Language to be used by the user.
@@ -63,6 +69,9 @@ export class ExternalUserInvitation {
   id?: string
 
   @Field({ nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
   mail?: string
 
   @Field({ nullable: true })
@@ -76,4 +85,7 @@ export class ExternalUserInvitation {
 
   @Field({ nullable: true })
   provider?: string
+
+  @Field({ nullable: true })
+  status?: 'pending' | 'expired'
 }

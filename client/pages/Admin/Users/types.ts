@@ -1,4 +1,4 @@
-import { ActiveDirectoryUser, Role, User } from 'types'
+import { ActiveDirectoryUser, ExternalUserInvitation, Role, User } from 'types'
 import { IBulkImportPanelProps } from './BulkImportPanel/types'
 import { IUserFormProps } from './UserForm/types'
 import { IInviteExternalUserFormProps } from './InviteExternalUserForm'
@@ -41,6 +41,11 @@ export interface IUsersState {
    * All roles
    */
   roles: Role[]
+
+  /**
+   * External invitations
+   */
+  invitations?: ExternalUserInvitation[]
 
   /**
    * Properties for `UserForm`

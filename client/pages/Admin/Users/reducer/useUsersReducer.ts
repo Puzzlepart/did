@@ -38,6 +38,7 @@ export function useUsersReducer() {
           activeDirectoryUsers,
           (x) => !_.any(users, (y) => y.id === x.id) && Boolean(x.mail)
         )
+        state.invitations = get(payload, 'query.data.invitations', {default: []})
         state.loading = payload.query.loading
       })
       .addCase(SET_USER_FORM, (state, { payload }) => {
