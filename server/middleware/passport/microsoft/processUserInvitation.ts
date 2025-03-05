@@ -1,7 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { IProfile } from 'passport-azure-ad'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
-import { UserService, SubscriptionService } from 'server/services'
+import { SubscriptionService, UserService } from 'server/services'
 import { debug, PROVIDER } from './onVerifySignin'
 
 /**
@@ -10,10 +9,7 @@ import { debug, PROVIDER } from './onVerifySignin'
 export async function processUserInvitation(
   userSrv: UserService,
   subSvc: SubscriptionService,
-  userId: string,
-  mail: string,
-  subId: string,
-  profile: IProfile,
+  profile: Record<string, any>,
   userInvitation: ExternalUserInvitationInput,
   subscription: any
 ): Promise<User> {
@@ -22,12 +18,12 @@ export async function processUserInvitation(
   )
 
   const dbUser: Partial<User> = {
-    id: userId,
-    mail,
+    id: profile.oid,
+    mail: profile.preferred_username,
     displayName: profile.displayName,
     role: userInvitation.role,
     preferredLanguage: 'en-GB',
-    tenantId: subId,
+    tenantId: profile.tid,
     isExternal: true,
     startPage: '/reports',
     configuration: {
@@ -39,8 +35,8 @@ export async function processUserInvitation(
   }
 
   await userSrv.addUser(dbUser)
-  debug(`Registering user ${mail} with subscription ${subscription.id}`)
-  await subSvc.registerExternalUser(PROVIDER, mail, subscription.id)
+  debug(`Registering user ${profile.preferred_username} (${profile.oid}) with subscription ${subscription.id}`)
+  await subSvc.registerExternalUser(PROVIDER, profile.oid, subscription.id)
   debug(`Removing external invitation with ID ${userInvitation.id}`)
   await subSvc.removeExternalInvitation(userInvitation)
   debug(

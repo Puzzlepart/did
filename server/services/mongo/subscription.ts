@@ -125,18 +125,18 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * Register external user
    *
    * @param provider - Provider
-   * @param mail - Email address
+   * @param mailOrId - Mail or ID (preferably ID)
    * @param subscriptionId - Subscription ID
    */
   public async registerExternalUser(
     provider: string,
-    mail: string,
+    mailOrId: string,
     subscriptionId = this.context.subscription.id
   ) {
     try {
       const result = await this.collection.updateOne(
         { _id: subscriptionId },
-        { $push: { [`externals.${provider}`]: mail } }
+        { $push: { [`externals.${provider}`]: mailOrId } }
       )
       return result
     } catch (error) {

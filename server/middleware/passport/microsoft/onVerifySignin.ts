@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
-import { User } from 'server/graphql'
+import { ExternalUserInvitation, ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from '../../../services'
 import { environment } from '../../../utils'
 import {
@@ -44,7 +44,7 @@ export const onVerifySignin = async (
   })
   try {
     // User invitation
-    let userInvitation
+    let userInvitation: ExternalUserInvitationInput
 
     // Extract user identity information
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
@@ -74,10 +74,7 @@ export const onVerifySignin = async (
         dbUser = await processUserInvitation(
           userSrv,
           subSvc,
-          userId,
-          mail,
-          subId,
-          profile,
+          profile._json,
           userInvitation,
           subscription
         )
