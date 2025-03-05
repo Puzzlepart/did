@@ -1,17 +1,20 @@
 import { ListMenuItem } from 'components/List/ListToolbar'
 import { Progress } from 'components/Progress'
 import { usePermissions } from 'hooks/user/usePermissions'
+import _ from 'lodash'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { IUsersContext } from '../context'
 import {
   CLEAR_PROGRESS,
+  RESET_SELECTION,
   SET_ADD_MULTIPLE_PANEL,
   SET_INVITE_EXTERNAL_USER_FORM,
   SET_PROGRESS,
   SET_USER_FORM
 } from '../reducer/actions'
+import { useRevokeExternalAccess } from '../UserForm'
 import { useUsersSync } from './useUsersSync'
 
 /**
@@ -25,6 +28,14 @@ export function useUsersMenuItems(context: IUsersContext) {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const syncUsers = useUsersSync(context)
+  const revokeExternalAccess = useRevokeExternalAccess<ListMenuItem>(
+    _.first(context.state.selectedUsers),
+    () => {
+      context.refetch()
+      context.dispatch(RESET_SELECTION())
+    },
+    true
+  )
   return useMemo(() => {
     return [
       new ListMenuItem(t('admin.users.addNewUser'))
@@ -47,7 +58,9 @@ export function useUsersMenuItems(context: IUsersContext) {
       new ListMenuItem(t('admin.users.syncUsersLabel'))
         .withIcon('ArrowSync')
         .setDisabled(
-          context.state.loading || context.state.selectedUsers.length === 0
+          context.state.loading ||
+            context.state.selectedUsers.filter(({ isExternal }) => !isExternal)
+              .length === 0
         )
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .setOnClick(async () => {
@@ -65,6 +78,7 @@ export function useUsersMenuItems(context: IUsersContext) {
           hidden={!context.state.progress}
         />
       )),
+      revokeExternalAccess,
       new ListMenuItem(t('common.editLabel'))
         .setDisabled(
           context.state.loading || context.state.selectedUsers.length !== 1

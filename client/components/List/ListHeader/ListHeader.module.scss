@@ -20,4 +20,10 @@
         margin-top: 16px;
         border-top: 1px solid rgb(234, 234, 234);
     }
+
+    .searchBox {
+        min-width: calc(100% - 16px);
+        box-sizing: border-box;
+        margin: 12px 0 12px 12px;
+    }
 }

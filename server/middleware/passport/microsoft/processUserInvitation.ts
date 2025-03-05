@@ -1,9 +1,13 @@
 /* eslint-disable unicorn/prevent-abbreviations */
+import createDebug from 'debug'
 import _ from 'lodash'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from 'server/services'
-import { debug, PROVIDER } from './onVerifySignin'
+import { PROVIDER } from './onVerifySignin'
 import { IProfileJson } from './types'
+const debug = createDebug(
+  'server/middleware/passport/microsoft/processUserInvitation'
+)
 
 /**
  * Process a user invitation and create a user account
@@ -30,21 +34,19 @@ export async function processUserInvitation(
     mail: profile.preferred_username,
     displayName: profile.displayName,
     role: userInvitation.role,
+    manager: invitedBy && _.pick(invitedBy, ['id', 'mail', 'displayName']),
     preferredLanguage: userInvitation.preferredLanguage,
     tenantId: profile.tid,
     isExternal: true,
     invitationId: userInvitation.id,
     invitedAt: userInvitation.invitedAt,
     startPage: userInvitation.startPage,
+    provider: PROVIDER,
     configuration: {
       ui: {
         theme: userInvitation.theme
       }
     }
-  }
-
-  if (Boolean(invitedBy)) {
-    dbUser.manager = _.pick(invitedBy, ['id', 'mail', 'displayName'])
   }
 
   await userSrv.addUser(dbUser)

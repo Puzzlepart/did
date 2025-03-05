@@ -32,6 +32,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
   )
 }
 
+List.displayName = 'List'
 List.className = styles.list
 List.defaultProps = {
   items: [],
@@ -50,5 +51,6 @@ List.defaultProps = {
   menuItems: [],
   getColumnStyle: () => ({}),
   minmalHeaderColumns: true,
-  selectionProps: [SelectionMode.none]
+  selectionProps: [SelectionMode.none],
+  setKey: List.displayName
 }

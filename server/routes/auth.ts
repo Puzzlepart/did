@@ -28,12 +28,12 @@ type AuthProvider = 'azuread-openidconnect' | 'google'
  */
 export const signInHandler =
   (strategy: AuthProvider, options: passport.AuthenticateOptions) =>
-  (request: Request, response: Response, next: NextFunction) => {
-    request.session.regenerate(() => {
-      request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
-      passport.authenticate(strategy, options)(request, response, next)
-    })
-  }
+    (request: Request, response: Response, next: NextFunction) => {
+      request.session.regenerate(() => {
+        request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
+        passport.authenticate(strategy, options)(request, response, next)
+      })
+    }
 
 /**
  * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`.
@@ -46,32 +46,33 @@ export const signInHandler =
  */
 export const authCallbackHandler =
   (strategy: AuthProvider) =>
-  (request: Request, response: Response, next: NextFunction) => {
-    passport.authenticate(strategy, (error: Error, user: Express.User) => {
-      if (error || !user) {
-        const _error =
-          error instanceof SigninError ? error : GENERIC_SIGNIN_FAILED
-        return response.redirect(
-          url.format({
-            pathname: '/',
-            query: {
-              response: _error?.toString()
-            }
-          })
-        )
-      }
-      request.logIn(user, (error_) => {
-        if (error_) {
-          return response.render('index', { error: JSON.stringify(error_) })
+    (request: Request, response: Response, next: NextFunction) => {
+      passport.authenticate(strategy, (error: Error, user: Express.User) => {
+        if (error || !user) {
+          const _error =
+            error instanceof SigninError ? error : GENERIC_SIGNIN_FAILED
+          return response.redirect(
+            url.format({
+              pathname: '/',
+              query: {
+                client_code: _error.code,
+                client_response: _error?.toString()
+              }
+            })
+          )
         }
-        const redirectUrl =
-          request.session[REDIRECT_URL_PROPERTY] ||
-          user['startPage'] ||
-          '/timesheet'
-        return response.redirect(redirectUrl)
-      })
-    })(request, response, next)
-  }
+        request.logIn(user, (error_) => {
+          if (error_) {
+            return response.render('index', { error: JSON.stringify(error_) })
+          }
+          const redirectUrl =
+            request.session[REDIRECT_URL_PROPERTY] ||
+            user['startPage'] ||
+            '/timesheet'
+          return response.redirect(redirectUrl)
+        })
+      })(request, response, next)
+    }
 
 /**
  * Handler for `/auth/signout`. Destroys the session using

@@ -28,4 +28,9 @@ export interface IDropdownControlProps
    * of objects with `value` and `text` properties.
    */
   values: OptionProps[]
+
+  /**
+   * Flag to indicate if the first option should be selected by default.
+   */
+  selectFirstOption?: boolean
 }

@@ -1,7 +1,11 @@
+import createDebug from 'debug'
 import { SubscriptionService } from 'server/services'
 import { TENANT_NOT_ENROLLED } from '../errors'
-import { PROVIDER, debug } from './onVerifySignin'
+import { PROVIDER } from './onVerifySignin'
 import { IProfileJson } from './types'
+const debug = createDebug(
+  'server/middleware/passport/microsoft/retrieveSubscription'
+)
 
 /**
  * Retrieve the subscription for the given user.

@@ -7,6 +7,7 @@ import {
   HIDE_ADD_MULTIPLE_PANEL,
   HIDE_INVITE_EXTERNAL_USER_FORM,
   HIDE_USER_FORM,
+  RESET_SELECTION,
   SET_ADD_MULTIPLE_PANEL,
   SET_INVITE_EXTERNAL_USER_FORM,
   SET_PROGRESS,
@@ -69,6 +70,10 @@ export function useUsersReducer() {
       })
       .addCase(HIDE_INVITE_EXTERNAL_USER_FORM, (state) => {
         state.inviteExternaluserForm = null
+      })
+      .addCase(RESET_SELECTION, (state) => {
+        state.selectedUsers = []
+        state.setKey = Date.now().toString()
       })
   )
 }

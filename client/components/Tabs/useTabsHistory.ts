@@ -15,7 +15,12 @@ export function useTabsHistory(level: number) {
     (key: string) => {
       const paths = history.location.pathname.split('/')
       paths[level] = key
-      history.replace(paths.splice(0, level + 1).join('/'))
+      history.replace(
+        `/${paths
+          .filter(Boolean)
+          .splice(0, level + 1)
+          .join('/')}`
+      )
     },
     [history]
   )

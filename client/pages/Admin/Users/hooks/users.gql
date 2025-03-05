@@ -42,6 +42,8 @@ query UsersAdmin {
     }
     employmentStartDate
     employmentEndDate
+    isExternal
+    invitedAt
   }
   roles {
     name

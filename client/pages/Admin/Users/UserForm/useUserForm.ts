@@ -1,5 +1,6 @@
 import { useAppContext } from 'AppContext'
 import {
+  IFormControlProps,
   IInputFieldProps,
   useFormControlModel,
   useFormControls
@@ -10,9 +11,11 @@ import { useTranslation } from 'react-i18next'
 import { User, UserInput } from 'types'
 import _ from 'underscore'
 import { useUsersContext } from '../context'
-import { IUserFormProps, createUserInput } from './types'
-import { useUserFormSubmit } from './useUserFormSubmit'
+import { RESET_SELECTION } from '../reducer/actions'
 import { UserForm } from './UserForm'
+import { IUserFormProps, createUserInput } from './types'
+import { useRevokeExternalAccess } from './useRevokeExternalAccess'
+import { useUserFormSubmit } from './useUserFormSubmit'
 
 /**
  * A custom hook that returns the necessary props and functions for the user form.
@@ -27,6 +30,13 @@ export function useUserForm(props: IUserFormProps) {
   const model = useFormControlModel<keyof UserInput, UserInput>(initialModel)
   const register = useFormControls<keyof User>(model, UserForm)
   const submitProps = useUserFormSubmit(props, model)
+  const revokeExternalAccess = useRevokeExternalAccess(
+    model.value(),
+    () => {
+      props.onDismiss()
+      context.dispatch(RESET_SELECTION())
+    }
+  )
 
   const adSyncProperties = get(
     appContext,
@@ -58,12 +68,30 @@ export function useUserForm(props: IUserFormProps) {
 
   const isEditMode = Boolean(props.user)
 
-  return {
-    isEditMode,
-    inputProps,
+  const formControlProps: IFormControlProps = {
+    id: UserForm.displayName,
     model,
     register,
     submitProps,
+    isEditMode,
+    panel: {
+      ...props,
+      title: isEditMode
+        ? t('admin.users.editUserPanelTitle')
+        : t('admin.users.addNewUserPanelTitle'),
+      description: isEditMode
+        ? t('admin.users.editUserPanelDescription')
+        : t('admin.users.addNewUserPanelDescription')
+    },
+    additonalActions: [revokeExternalAccess]
+  }
+
+  return {
+    isEditMode,
+    formControlProps,
+    inputProps,
+    model,
+    register,
     onSelectUser,
     ...context.state
   }

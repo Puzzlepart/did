@@ -85,6 +85,18 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
+   * Deletes a user document from the collection by its ID.
+   * The deletion is successful if the document is found and deleted.
+   *
+   * @param id - The ID of the user document to delete.
+   *
+   * @returns A promise that resolves to a boolean indicating whether the deletion was successful.
+   */
+  public async deleteById(id: string): Promise<boolean> {
+    const { result } = await this.collection.deleteOne({ _id: id })
+    return result.ok === 1 && result.n === 1
+  }
+  /**
    * Get configuration by user ID or mail.
    *
    * @remarks Returns `null` if no user is found.

@@ -287,7 +287,7 @@
       "employmentEndDateLabel": "Employment End Date",
       "employmentEndDateDescription": "The date the user's employment ends. If the user is no longer employed, set this date to the last day of employment.",
       "employmentStartDateDescription": "The date the user's employment starts. If the user is already employed, set this date to the first day of employment.",
-      "searchUsersLabel": "Search users...",
+      "searchUsersLabel": "Search {{usersCount}} active users...",
       "invitationsHeaderText": "Pending invitations",
       "inviteExternalUserError": "An error occurred while inviting the external user.",
       "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration.",
@@ -304,7 +304,12 @@
       "invitationNameRecommended": "It is recommended to provide a name for the individual you want to invite.",
       "invitationRoleDescription": "description={t('Please select a role for the invited user. Only roles that have been explicitly enabled for external users are available for selection in this list. If no roles are visible, it means no roles are currently enabled for external invitations.",
       "invitedByString": "Invited by {{displayName}}",
-      "inviteExternalUserSubmit": "Send invitation"
+      "inviteExternalUserSubmit": "Send invitation",
+      "removeExternalUser": "Revoke access",
+      "removeExternalUserError": "Please try again. If the problem continues, contact an administrator.",
+      "removeExternalUserSuccess": "Their access to the system has been removed. If you ever need to invite them again, you can do it easily from the user management page.",
+      "removeExternalUserErrorTitle": "Something went wrong while removing external user {{displayName}}.",
+      "removeExternalUserSuccessTitle": "Success! External user {{displayName}} no longer has access."
     },
     "weekStatus": {
       "headerText": "Week status",

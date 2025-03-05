@@ -240,7 +240,7 @@
       "employmentStartDateDescription": "Datoen brukerens ansettelse starter. Hvis brukeren allerede er ansatt, sett denne datoen til første arbeidsdag.",
       "employmentEndDateLabel": "Sluttdato for ansettelse",
       "employmentStartDateLabel": "Startdato for ansettelse",
-      "searchUsersLabel": "Søk i brukere...",
+      "searchUsersLabel": "Søk i {{usersCount}} aktive brukere...",
       "invitationsHeaderText": "Aktive invitasjoner",
       "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
       "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn.",
@@ -257,7 +257,12 @@
       "invitationNameRecommended": "Det anbefales å oppgi et navn på personen du vil invitere.",
       "invitationRoleDescription": "Vennligst velg en rolle for den inviterte brukeren. Kun roller som eksplisitt er aktivert for eksterne brukere er tilgjengelige i denne listen. Hvis ingen roller vises, betyr det at ingen roller for øyeblikket er aktivert for eksterne invitasjoner.",
       "invitedByString": "Invitert av {{displayName}}",
-      "inviteExternalUserSubmit": "Send invitasjon"
+      "inviteExternalUserSubmit": "Send invitasjon",
+      "removeExternalUser": "Fjern tilgang",
+      "removeExternalUserError": "Prøv igjen. Hvis problemet vedvarer, kontakt en administrator.",
+      "removeExternalUserSuccess": "Vi har fjernet tilgangen deres til systemet. Hvis du ønsker å invitere dem igjen senere, kan du enkelt gjøre det fra brukerstyringssiden.",
+      "removeExternalUserErrorTitle": "Noe gikk galt ved fjerning av ekstern bruker {{displayName}}.",
+      "removeExternalUserSuccessTitle": "Ekstern bruker {{displayName}} er nå fjernet fra systemet."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

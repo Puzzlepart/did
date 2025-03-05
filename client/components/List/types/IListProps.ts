@@ -15,6 +15,14 @@ import { ListFilterState } from './ListFilterState'
 import { IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 
+interface SearchBox extends SearchBoxProps {
+  /**
+   * Enable full width for the `SearchBox`. It will be standalone
+   * and full width, not inside the `ToolBar`.
+   */
+  fullWidth?: boolean
+}
+
 /**
  * @category List
  */
@@ -45,7 +53,7 @@ export interface IListProps<T = any>
   /**
    * Search box props
    */
-  searchBox?: SearchBoxProps
+  searchBox?: SearchBox
 
   /**
    * Selection props

@@ -17,8 +17,7 @@ import {
   USER_INVITATION_ACCEPTED,
   USER_NOT_ENROLLED
 } from '../errors'
-
-export const debug = createDebug('middleware/passport/microsoft/onVerifySignin')
+const debug = createDebug('server/middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
 
 /**
@@ -124,13 +123,14 @@ export const onVerifySignin = async (
     }
 
     if (subscription?.settings?.adsync?.enabled) {
-      await synchronizeUserProfile(user, userSrv, !Boolean(userInvitation))
+      const syncManager = !Boolean(userInvitation) && !dbUser.isExternal
+      await synchronizeUserProfile(user, userSrv, syncManager)
     }
 
     // Check if user invitation was accepted, if so, return
     // a special error message to the client
     if (Boolean(userInvitation)) {
-      return done(USER_INVITATION_ACCEPTED, null)
+      return done(USER_INVITATION_ACCEPTED(dbUser.manager), null)
     }
 
     done(null, user)

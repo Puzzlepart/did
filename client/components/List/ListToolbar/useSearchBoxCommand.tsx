@@ -24,7 +24,7 @@ export function useSearchBoxCommand() {
       />
     )
   }
-  if (context.props.searchBox) {
+  if (context.props.searchBox && !context.props.searchBox.fullWidth) {
     return {
       commandBarItem,
       menuItem: new ListMenuItem().setCustomRender(commandBarItem.onRender)
