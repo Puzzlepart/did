@@ -245,7 +245,8 @@
       "searchUsersLabel": "Søk i brukarar...",
       "invitationsHeaderText": "Aktive invitasjoner",
       "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
-      "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn."
+      "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn.",
+      "inviteExternalUser": "Inviter ekstern bruker"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

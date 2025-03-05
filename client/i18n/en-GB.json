@@ -290,7 +290,8 @@
       "searchUsersLabel": "Search users...",
       "invitationsHeaderText": "Pending invitations",
       "inviteExternalUserError": "An error occurred while inviting the external user.",
-      "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration."
+      "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration.",
+      "inviteExternalUser": "Invite External User"
     },
     "weekStatus": {
       "headerText": "Week status",
