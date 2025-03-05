@@ -14,7 +14,7 @@ import { SigninError } from './SigninError'
  */
 export const USER_INVITATION_ACCEPTED = (invitedBy: User, delay = 5) =>
   new SigninError(
-    '37ef71e8',
+    'invitation_accepted',
     'Invitation accepted',
     `You have accepted the invitation to join did from ${invitedBy.displayName}.\n\nYou will be redirected to the login page in ${delay} seconds.`,
     'Checkmark',
