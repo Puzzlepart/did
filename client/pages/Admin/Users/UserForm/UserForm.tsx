@@ -16,31 +16,18 @@ import { useUserForm } from './useUserForm'
 export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   const { t } = useTranslation()
   const {
+    formControlProps,
     isEditMode,
     inputProps,
     model,
     register,
-    submitProps,
     onSelectUser,
     roles,
     availableAdUsers
   } = useUserForm(props)
 
   return (
-    <FormControl
-      id={UserForm.displayName}
-      model={model}
-      panel={{
-        ...props,
-        title: isEditMode
-          ? t('admin.users.editUserPanelTitle')
-          : t('admin.users.addNewUserPanelTitle'),
-        description: isEditMode
-          ? t('admin.users.editUserPanelDescription')
-          : t('admin.users.addNewUserPanelDescription')
-      }}
-      submitProps={submitProps}
-    >
+    <FormControl {...formControlProps}>
       <AutocompleteControl
         {...register('_' as any, {
           required: !model.value('id') && !isEditMode,
@@ -90,24 +77,26 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
           value: role.name,
           text: role.name
         }))}
+        disabled={model.value('isExternal')}
       />
       <DateControl
         {...register('employmentStartDate')}
         label={t('admin.users.employmentStartDateLabel')}
         description={t('admin.users.employmentStartDateDescription')}
+        hidden={model.value('isExternal')}
       />
       <DateControl
         {...register('employmentEndDate')}
         label={t('admin.users.employmentEndDateLabel')}
         description={t('admin.users.employmentEndDateDescription')}
+        hidden={model.value('isExternal')}
       />
-      {isEditMode && (
-        <CheckboxControl
-          {...register('hiddenFromReports')}
-          label={t('admin.userHiddenFromReportsLabel')}
-          description={t('admin.userHiddenFromReportsDescription')}
-        />
-      )}
+      <CheckboxControl
+        {...register('hiddenFromReports')}
+        label={t('admin.userHiddenFromReportsLabel')}
+        description={t('admin.userHiddenFromReportsDescription')}
+        hidden={!isEditMode}
+      />
     </FormControl>
   )
 }

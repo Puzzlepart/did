@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import createDebug from 'debug'
 import _ from 'lodash'
 import { User } from '../../../graphql'
@@ -19,14 +20,15 @@ const debug = createDebug(
 function evaluateUserSync(
   user: User,
   properties: string[],
-  data: Record<string, any>,
-  syncManager: boolean
+  data: Record<string, any>
 ) {
-  const mergedData: Record<string, any> = _.pick(data, properties)
-
-  if (syncManager) {
-    mergedData.manager = _.pick(data.manager, 'id', 'mail', 'displayName')
-  }
+  const mergedData: Record<string, any> = _.pick(
+    {
+      ...data,
+      manager: _.pick(data.manager, 'id', 'mail', 'displayName')
+    },
+    properties
+  )
 
   const needSync = !_.isEqual(
     _.pick(user, [...properties, 'photo']),
@@ -49,28 +51,32 @@ export async function synchronizeUserProfile(
   userSvc: UserService,
   syncManager = true
 ): Promise<void> {
-  const { properties, syncUserPhoto } = user?.subscription?.settings?.adsync
+  let { properties, syncUserPhoto } = user?.subscription?.settings?.adsync
+  if (!syncManager) {
+    debug('Manager synchronization is turned off for external users.')
+    properties = _.without(properties, 'manager')
+  }
   if (_.isEmpty(properties)) {
     debug(
       'User profile synchronization is turned on, but no properties are selected.'
     )
     return
   }
+  debug(
+    'Synchronizing user profile properties %s from Azure AD for %s.',
+    properties.join(', '),
+    user.id
+  )
   try {
     const msGraphSvc = new MSGraphService(new MSOAuthService({ user }))
     const [data, userPhoto] = await Promise.all([
       msGraphSvc.getCurrentUser(properties),
       msGraphSvc.getUserPhoto('48x48')
     ])
-    const [needSync, mergedData] = evaluateUserSync(
-      user,
-      properties,
-      {
-        ...data,
-        photo: userPhoto
-      },
-      syncManager
-    )
+    const [needSync, mergedData] = evaluateUserSync(user, properties, {
+      ...data,
+      photo: userPhoto
+    })
     if (syncUserPhoto && userPhoto) {
       user.photo = {
         base64: userPhoto

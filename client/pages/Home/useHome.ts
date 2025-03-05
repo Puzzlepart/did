@@ -11,7 +11,7 @@ import { useLoginRedirect } from './useLoginRedirect'
  *
  * @returns The logic for the `Home` component
  */
-export function useHome(paramName = 'response') {
+export function useHome(paramName = 'client_response') {
   const { user, subscription } = useAppContext()
   const location = useLocation<{ prevPath: string }>()
   const urlSearchParameters = new URLSearchParams(document.location.search)

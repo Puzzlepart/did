@@ -11,7 +11,7 @@ import { omitTypename } from 'utils'
  * will be synced. The hook is using the mutation `updateUsers` to
  * update the users.
  *
- * @param context Context
+ * @param context Context for `Users`
  */
 export function useUsersSync(context: IUsersContext) {
   const [updateUsers] = useMutation($updateUsers)

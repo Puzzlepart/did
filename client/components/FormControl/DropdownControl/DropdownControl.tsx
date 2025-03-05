@@ -22,10 +22,11 @@ export const DropdownControl: FormInputControlComponent<
       const modelValue = props.model.value(props.name)
       const option = _.findWhere(props.values, { value: modelValue })
       if (option && modelValue) {
-        return option.text
+        return option.text ?? null
       }
+      return null
     }
-    return props.defaultValue
+    return props.defaultValue ?? null
   }, [props.defaultValue, props.model, props.name])
 
   return (

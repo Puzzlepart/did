@@ -45,6 +45,12 @@ export const Users: TabComponent<ITabProps> = () => {
               List,
               t('admin.users.activeHeaderText'),
               {
+                searchBox: {
+                  fullWidth: true,
+                  placeholder: t('admin.users.searchUsersLabel', {
+                    usersCount: context.state.activeUsers.length
+                  })
+                },
                 items: context.state.activeUsers,
                 columns: columns('active'),
                 onItemInvoked: (user) => {
@@ -56,6 +62,7 @@ export const Users: TabComponent<ITabProps> = () => {
                   )
                 },
                 menuItems,
+                setKey: context.state.setKey,
                 checkboxVisibility: CheckboxVisibility.onHover,
                 selectionProps: [
                   SelectionMode.multiple,

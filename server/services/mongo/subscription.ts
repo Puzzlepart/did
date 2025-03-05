@@ -145,6 +145,27 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   }
 
   /**
+   * Removes an external user from the subscription's external users list.
+   *
+   * @param provider - The provider name (e.g., 'google', 'facebook').
+   * @param mailOrId - The email or ID of the external user to be removed.
+   * @param subscriptionId - The ID of the subscription. Defaults to the current context subscription ID.
+   *
+   * @returns A promise that resolves to the result of the update operation.
+   */
+  public async removeExternalUser(
+    provider: string,
+    mailOrId: string,
+    subscriptionId = this.context.subscription.id
+  ): Promise<boolean> {
+    const { result } = await this.collection.updateOne(
+      { _id: subscriptionId },
+      { $pull: { [`externals.${provider}`]: mailOrId } }
+    )
+    return result.ok === 1 && result.nModified === 1
+  }
+
+  /**
    * Lock or unlock a period for the subscription.
    *
    * @param periodId Period ID
@@ -176,7 +197,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
 
       return await this.update(
         { _id: this.context.subscription.id },
-        { lockedPeriods }
+        { lockedPeriods, updatedAt: new Date() }
       )
     } catch (error) {
       throw error
@@ -195,6 +216,9 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
       const result = await this.collection.updateOne(
         { _id: this.context.subscription.id },
         {
+          $set: {
+            updatedAt: new Date()
+          },
           $push: { [`invitations.${invitation.provider}|external`]: invitation }
         }
       )
@@ -237,6 +261,9 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     const result = await this.collection.updateOne(
       { _id: this.context.subscription.id },
       {
+        $set: {
+          updatedAt: new Date()
+        },
         $pull: {
           [`invitations.${provider}|external`]: {
             id: invitationId

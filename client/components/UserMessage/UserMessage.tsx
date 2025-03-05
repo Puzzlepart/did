@@ -2,7 +2,7 @@ import {
   MessageBar,
   MessageBarActions,
   MessageBarBody,
-  Title3
+  MessageBarTitle
 } from '@fluentui/react-components'
 import { Progress } from 'components/Progress'
 import { ReusableComponent } from 'components/types'
@@ -36,7 +36,9 @@ export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
       >
         <MessageBarBody>
           {props.headerText && (
-            <Title3 className={styles.header}>{props.headerText}</Title3>
+            <div className={styles.header}>
+              <MessageBarTitle>{props.headerText}</MessageBarTitle>
+            </div>
           )}
           {props.renderProgress[0] && (
             <Progress text={props.renderProgress[1] ?? props.text} />

@@ -4,6 +4,9 @@ import { IUserFormProps } from './UserForm/types'
 import { IInviteExternalUserFormProps } from './InviteExternalUserForm'
 
 export interface IUsersState {
+  /**
+   * Flag that indicates whether the users are loading
+   */
   loading: boolean
 
   /**
@@ -66,4 +69,10 @@ export interface IUsersState {
    * Text for the Progress bar
    */
   progress?: string
+
+  /**
+   * A key that uniquely identifies the given items. 
+   * If provided, the selection will be reset when the key changes.
+   */
+  setKey?: string
 }

@@ -1,0 +1,8 @@
+mutation RevokeExternalAccess ($userId: String!) {
+  result: revokeExternalAccess(userId: $userId) {
+    success
+    error {
+      message
+    }
+  }
+}

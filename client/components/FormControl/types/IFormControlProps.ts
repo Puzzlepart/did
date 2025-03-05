@@ -3,6 +3,7 @@ import { useMap } from 'hooks/common/useMap'
 import { HTMLAttributes } from 'react'
 import { ISubmitProps } from './ISubmitProps'
 import { useFormControls } from '../useFormControls'
+import { IDynamicButtonProps } from 'components'
 export interface IFormControlProps<T = any>
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
   /**
@@ -19,6 +20,11 @@ export interface IFormControlProps<T = any>
    * Submit  props
    */
   submitProps?: ISubmitProps
+
+  /**
+   * Additional actions to be added to the form control.
+   */
+  additonalActions?: IDynamicButtonProps[]
 
   /**
    * Specify panel props to open the form control in

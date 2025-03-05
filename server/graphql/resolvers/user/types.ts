@@ -242,6 +242,12 @@ export class UserInput {
 
   @Field(() => UserInput, { nullable: true })
   manager?: UserInput
+
+  @Field({ nullable: true })
+  isExternal?: boolean
+
+  @Field({ nullable: true })
+  invitedAt?: Date
 }
 
 /**

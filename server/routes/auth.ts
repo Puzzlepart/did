@@ -55,7 +55,7 @@ export const authCallbackHandler =
           url.format({
             pathname: '/',
             query: {
-              response: _error?.toString()
+              client_response: _error?.toString()
             }
           })
         )

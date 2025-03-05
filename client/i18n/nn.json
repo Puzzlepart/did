@@ -260,7 +260,11 @@
       "invitationRoleDescription": "Vennligst velg en rolle for den inviterte brukeren. Kun roller som eksplisitt er aktivert for eksterne brukere er tilgjengelige i denne listen. Hvis ingen roller vises, betyr det at ingen roller for øyeblikket er aktivert for eksterne invitasjoner.",
       "invitedByString": "Invitert av {{displayName}}",
       "inviteExternalUserSubmit": "Send invitasjon",
-      "removeExternalUser": "Fjern tilgang"
+      "removeExternalUser": "Fjern tilgang",
+      "removeExternalUserError": "Prøv igjen. Om problemet held fram, kontakt ein administrator.",
+      "removeExternalUserSuccess": "Vi har fjerna tilgangen deira til systemet. Om du vil invitere dei igjen seinare, kan du enkelt gjere det frå brukarstyringssida.",
+      "removeExternalUserErrorTitle": "Noko gjekk galt ved fjerning av ekstern brukar {{displayName}}.",
+      "removeExternalUserSuccessTitle": "Ekstern brukar {{displayName}} er no fjerna frå systemet."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

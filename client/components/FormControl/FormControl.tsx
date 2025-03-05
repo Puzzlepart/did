@@ -29,8 +29,11 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
   )
   return (
     <FormControlContext.Provider value={context}>
-      {props.panel ? (
-        <Panel {...props.panel} actions={[submitAction]}>
+      {Boolean(props.panel) ? (
+        <Panel
+          {...props.panel}
+          actions={[submitAction, ...props.additonalActions]}
+        >
           {content}
         </Panel>
       ) : (
@@ -49,5 +52,6 @@ FormControl.className = styles.formControl
 FormControl.defaultProps = {
   submitProps: {
     text: undefined
-  }
+  },
+  additonalActions: []
 }
