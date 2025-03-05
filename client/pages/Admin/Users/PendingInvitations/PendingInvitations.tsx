@@ -5,6 +5,7 @@ import {
   Caption1,
   Card,
   CardHeader,
+  MessageBar,
   Spinner,
   Text
 } from '@fluentui/react-components'
@@ -13,17 +14,17 @@ import {
   MailRegular,
   ShieldLockRegular
 } from '@fluentui/react-icons'
-import React from 'react'
-import { StyledComponent } from 'types'
-import styles from './PendingInvitations.module.scss'
-import { usePendingInvitations } from './usePendingInvitations'
 import date from 'DateUtils'
 import _ from 'lodash'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyledComponent } from 'types'
 import { getFluentIcon } from 'utils'
+import styles from './PendingInvitations.module.scss'
+import { usePendingInvitations } from './usePendingInvitations'
 
 export const PendingInvitations: StyledComponent = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const { invitations, loading, cancelInvitation } =
     usePendingInvitations()
 
@@ -33,8 +34,10 @@ export const PendingInvitations: StyledComponent = () => {
 
   if (_.isEmpty(invitations)) {
     return (
-      <div>
-        <h4>{t('admin.users.noPendingInvitations')}</h4>
+      <div className={PendingInvitations.className}>
+        <MessageBar>
+          <Caption1>{t('admin.users.noPendingInvitations')}</Caption1>
+        </MessageBar>
       </div>
     )
   }
@@ -74,13 +77,13 @@ export const PendingInvitations: StyledComponent = () => {
               <div className={styles.infoRow}>
                 <CalendarRegular />
                 <Caption1>
-                  {t('admin.users.invitedString', {invitedAt: date.formatDate(invitation.invitedAt, 'LLL')})}
+                  {t('admin.users.invitedString', { invitedAt: date.formatDate(invitation.invitedAt, 'LLL') })}
                 </Caption1>
               </div>
             </div>
             <div className={styles.actions}>
               <Button
-              icon={getFluentIcon('PersonDelete')}
+                icon={getFluentIcon('PersonDelete')}
                 appearance='subtle'
                 onClick={() => cancelInvitation(invitation.id)}
               >

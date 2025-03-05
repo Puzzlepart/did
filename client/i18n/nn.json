@@ -247,10 +247,12 @@
       "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
       "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn.",
       "inviteExternalUser": "Inviter ekstern bruker",
-      "noPendingInvitations": "Ingen ventende invitasjoner for øyeblikket.",
+      "noPendingInvitations": "Ingen ventende eksterne invitasjoner for øyeblikket.",
       "invitedString": "Invitert {{invitedAt}}",
       "cancelInvitation": "Kanseller invitasjon",
-      "pendingInvitations": "Eksterne invitasjoner"
+      "pendingInvitations": "Eksterne invitasjoner",
+      "cancelInvitationError": "Det skjedde en feil under kansellering av invitasjonen: {{error}}",
+      "cancelInvitationSuccess": "Invitasjonen er nå kansellert."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

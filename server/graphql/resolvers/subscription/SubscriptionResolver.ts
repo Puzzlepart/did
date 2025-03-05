@@ -15,6 +15,7 @@ import {
   SubscriptionSettingsInput
 } from './types'
 import { generateId } from '../../../utils'
+import _ from 'lodash'
 
 /**
  * Resolver for `Subscription`.
@@ -112,11 +113,36 @@ export class SubscriptionResolver {
     }
   }
 
+  /**
+   * Fetches external invitations using the subscription service.
+   *
+   * @returns A promise that resolves to the external invitations.
+   */
   @Query(() => [ExternalUserInvitation], {
     description: 'Get external invitations',
     nullable: true
   })
   async externalInvitations() {
     return await this._subscription.getExternalInvitations()
+  }
+
+  /**
+   * Cancel an external user invitation.
+   *
+   * @param invitationId - The ID of the invitation to cancel.
+   * 
+   * @returns A promise that resolves when the invitation is cancelled.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
+  @Mutation(() => BaseResult, { description: 'Cancel external user invitation' })
+  async cancelExternalInvitation(
+    @Arg('invitationId') invitationId: string
+  ): Promise<BaseResult> {
+    try {
+      await this._subscription.cancelExternalInvitation(invitationId)
+      return { success: true, error: null }
+    } catch (error) {
+      return { success: false, error: _.pick(error, ['name', 'message', 'code', 'statusCode']) }
+    }
   }
 }

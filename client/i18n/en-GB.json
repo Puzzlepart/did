@@ -292,10 +292,12 @@
       "inviteExternalUserError": "An error occurred while inviting the external user.",
       "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration.",
       "inviteExternalUser": "Invite External User",
-      "noPendingInvitations": "No pending invitations at the moment.",
+      "noPendingInvitations": "No pending external invitations at the moment.",
       "invitedString": "Invited {{invitedAt}}",
       "cancelInvitation": "Cancel invitation",
-      "pendingInvitations": "Pending Invitations"
+      "pendingInvitations": "Pending Invitations",
+      "cancelInvitationError": "There was an error cancelling the invitation: {{error}}",
+      "cancelInvitationSuccess": "Successfully cancelled invitation."
     },
     "weekStatus": {
       "headerText": "Week status",

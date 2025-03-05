@@ -1,6 +1,11 @@
-import { useCallback, useState } from 'react'
-import { ExternalUserInvitation } from 'types'
+/* eslint-disable unicorn/prevent-abbreviations */
+import { useMutation } from '@apollo/client'
+import { useAppContext } from 'AppContext'
+import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { BaseResult, ExternalUserInvitation } from 'types'
 import { useUsersContext } from '../context'
+import $cancelExternalInvitation from './cancelExternalInvitation.gql'
 
 export interface UsePendingInvitationsResult {
   invitations: ExternalUserInvitation[]
@@ -10,33 +15,33 @@ export interface UsePendingInvitationsResult {
 }
 
 export function usePendingInvitations(): UsePendingInvitationsResult {
+  const { t } = useTranslation()
   const { state } = useUsersContext()
-  const [error, setError] = useState<Error | null>(null)
+  const [invitations, setInvitations] = useState<ExternalUserInvitation[]>([])
+  useEffect(() => {
+    setInvitations(state.invitations)
+  }, [state.invitations])
+
+  const { displayToast } = useAppContext()
+  const [cancelExternalInvitation] = useMutation<{ result: BaseResult }, { invitationId: string }>($cancelExternalInvitation)
 
   /**
    * Cancel a pending invitation
    */
   const cancelInvitation = useCallback(async (invitationId: string) => {
-    try {
-      // In a real implementation, this would make an API call to cancel the invitation
-      // eslint-disable-next-line no-console
-      console.log(`Cancelling invitation ${invitationId}`)
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 500))
-    } catch (error_) {
-      setError(
-        error_ instanceof Error
-          ? error_
-          : new Error('Failed to cancel invitation')
-      )
-      throw error_
+    const { data } = await cancelExternalInvitation({ variables: { invitationId } })
+    if (data?.result?.success) {
+      displayToast(t('admin.users.cancelInvitationSuccess'), 'success')
+      setInvitations((prev) => prev.filter((invitation) => invitation.id !== invitationId))
+    } else {
+      displayToast(t('admin.users.cancelInvitationError', { error: data?.result?.error?.message }), 'error')
     }
   }, [])
 
   return {
-    invitations: state.invitations,
+    invitations,
     loading: state.loading,
-    error,
+    error: null,
     cancelInvitation
   }
 }
