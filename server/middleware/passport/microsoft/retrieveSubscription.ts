@@ -1,20 +1,23 @@
 import { SubscriptionService } from 'server/services'
 import { TENANT_NOT_ENROLLED } from '../errors'
 import { PROVIDER, debug } from './onVerifySignin'
+import { IProfileJson } from './types'
 
 /**
  * Retrieve the subscription for the given user.
  *
  * @param subSvc - Subscription service
  * @param subId - Subscription ID
- * @param mail - User email
+ * @param profile - User profile object
+ *
  * @returns The subscription object
+ *
  * @throws TENANT_NOT_ENROLLED if no subscription is found
  */
 export async function retrieveSubscription(
   subSvc: SubscriptionService,
   subId: string,
-  mail: string
+  profile: IProfileJson
 ) {
   // Try to get subscription by tenant ID
   let subscription = await subSvc.getById(subId)
@@ -24,14 +27,17 @@ export async function retrieveSubscription(
   }
 
   // Try to get subscription by external ID
-  subscription = await subSvc.getByExternalId(mail, PROVIDER)
+  subscription = await subSvc.getByExternalId(profile.oid, PROVIDER)
 
   if (subscription) {
     return subscription
   }
 
   // Check if there's an invitation
-  const userInvitation = await subSvc.getExternalInvitation(mail, PROVIDER)
+  const userInvitation = await subSvc.getExternalInvitation(
+    profile.preferred_username,
+    PROVIDER
+  )
   subscription = userInvitation?.subscription
 
   if (!subscription) {

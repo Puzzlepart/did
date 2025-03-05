@@ -13,6 +13,9 @@ export class ExternalUserInvitationInput {
   id?: string
 
   @Field({ nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
   mail?: string
 
   @Field({ nullable: true })
@@ -27,6 +30,31 @@ export class ExternalUserInvitationInput {
   @Field({ nullable: true })
   provider?: string
 
+  @Field({ nullable: true })
+  status?: 'pending' | 'expired'
+
+  /**
+   * Language to be used by the user.
+   * This is hardcoded to 'en-GB' for now.
+   */
+  preferredLanguage?: string
+
+  /**
+   * Start page for the user.
+   * This is hardcoded to '/reports' for now.
+   */
+  startPage?: string
+
+  /**
+   * Theme to be used by the user.
+   * This is harcoded to 'auto' for now.
+   */
+  theme?: string
+
+  /**
+   * Subscription to be associated with the
+   * user invitation.
+   */
   subscription?: Subscription
 }
 
@@ -41,6 +69,9 @@ export class ExternalUserInvitation {
   id?: string
 
   @Field({ nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
   mail?: string
 
   @Field({ nullable: true })
@@ -54,4 +85,7 @@ export class ExternalUserInvitation {
 
   @Field({ nullable: true })
   provider?: string
+
+  @Field({ nullable: true })
+  status?: 'pending' | 'expired'
 }

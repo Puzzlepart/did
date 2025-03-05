@@ -125,18 +125,18 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * Register external user
    *
    * @param provider - Provider
-   * @param mail - Email address
+   * @param mailOrId - Mail or ID (preferably ID)
    * @param subscriptionId - Subscription ID
    */
   public async registerExternalUser(
     provider: string,
-    mail: string,
+    mailOrId: string,
     subscriptionId = this.context.subscription.id
   ) {
     try {
       const result = await this.collection.updateOne(
         { _id: subscriptionId },
-        { $push: { [`externals.${provider}`]: mail } }
+        { $push: { [`externals.${provider}`]: mailOrId } }
       )
       return result
     } catch (error) {
@@ -150,6 +150,8 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @param periodId Period ID
    * @param unlock If true, unlock the period
    * @param reason Reason for locking the period (optional)
+   *
+   * @returns The result of the update operation.
    */
   public async lockPeriod(periodId: string, unlock: boolean, reason?: string) {
     try {
@@ -185,6 +187,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * Invites an external user by adding their invitation to the subscription's invitations list.
    *
    * @param invitation - The invitation details for the external user.
+   *
    * @returns The result of the update operation.
    */
   public async inviteExternalUser(invitation: ExternalUserInvitationInput) {
@@ -201,6 +204,13 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     }
   }
 
+  /**
+   * Retrieves external user invitations for a specified provider.
+   *
+   * @param provider - The name of the provider to retrieve invitations for. Defaults to 'microsoft'.
+   *
+   * @returns A promise that resolves to an array of external user invitation inputs.
+   */
   public async getExternalInvitations(
     provider = 'microsoft'
   ): Promise<ExternalUserInvitationInput[]> {
@@ -208,6 +218,33 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
       _id: this.context.subscription.id
     })
     return _.get(current, `invitations.${provider}|external`, [])
+  }
+
+  /**
+   * Cancels an external invitation for a given provider.
+   *
+   * @param invitationId - The ID of the invitation to cancel.
+   * @param provider - The provider of the invitation, defaults to 'microsoft'.
+   *
+   * @returns A promise that resolves to the result of the update operation.
+   *
+   * @throws Will throw an error if the update operation fails.
+   */
+  public async cancelExternalInvitation(
+    invitationId: string,
+    provider = 'microsoft'
+  ) {
+    const result = await this.collection.updateOne(
+      { _id: this.context.subscription.id },
+      {
+        $pull: {
+          [`invitations.${provider}|external`]: {
+            id: invitationId
+          }
+        }
+      }
+    )
+    return result
   }
 
   /**

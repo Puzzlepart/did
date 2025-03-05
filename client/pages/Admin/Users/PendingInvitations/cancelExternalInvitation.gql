@@ -1,0 +1,8 @@
+mutation CancelExternalInvitation ($invitationId: String!) {
+  result: cancelExternalInvitation(invitationId: $invitationId) {
+    success
+    error {
+      message
+    }
+  }
+}

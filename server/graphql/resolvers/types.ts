@@ -4,11 +4,11 @@ import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType({ description: 'A type that describes a Error' })
 export class Error {
-  @Field()
-  name: string
+  @Field({ nullable: true })
+  name?: string
 
-  @Field()
-  message: string
+  @Field({ nullable: true })
+  message?: string
 
   @Field({ nullable: true })
   code?: string

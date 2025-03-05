@@ -4,14 +4,14 @@ import { usePermissions } from 'hooks/user/usePermissions'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { IUsersContext } from './context'
+import { IUsersContext } from '../context'
 import {
   CLEAR_PROGRESS,
   SET_ADD_MULTIPLE_PANEL,
   SET_INVITE_EXTERNAL_USER_FORM,
   SET_PROGRESS,
   SET_USER_FORM
-} from './reducer/actions'
+} from '../reducer/actions'
 import { useUsersSync } from './useUsersSync'
 
 /**
@@ -34,7 +34,7 @@ export function useUsersMenuItems(context: IUsersContext) {
         .withDispatch(context, SET_USER_FORM, {
           headerText: t('admin.users.addNewUser')
         }),
-      new ListMenuItem('Inviter ekstern bruker')
+      new ListMenuItem(t('admin.users.inviteExternalUser'))
         .withIcon('GlobePerson')
         .setDisabled(context.state.loading)
         .setHidden(!hasPermission(PermissionScope.INVITE_EXTERNAL_USERS))

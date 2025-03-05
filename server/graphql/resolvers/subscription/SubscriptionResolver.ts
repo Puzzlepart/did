@@ -15,6 +15,7 @@ import {
   SubscriptionSettingsInput
 } from './types'
 import { generateId } from '../../../utils'
+import _ from 'lodash'
 
 /**
  * Resolver for `Subscription`.
@@ -34,7 +35,11 @@ export class SubscriptionResolver {
    *
    * @param _subscription - Subscription service
    */
-  constructor(private readonly _subscription: SubscriptionService) {}
+  constructor(private readonly _subscription: SubscriptionService) {
+    // This constructor will be probably be empty at least until
+    // the world is at peace and there is no more hunger. I could
+    // really recommend the song "Imagine" by John Lennon.
+  }
 
   /**
    * Get current subscription
@@ -94,9 +99,13 @@ export class SubscriptionResolver {
       await this._subscription.inviteExternalUser({
         ...invitation,
         id: generateId(),
+        status: 'pending',
         invitedAt: new Date(),
         invitedBy: context.user.id,
-        provider: 'microsoft'
+        provider: 'microsoft',
+        startPage: '/reports',
+        theme: 'auto',
+        preferredLanguage: 'en-GB'
       })
       return { success: true, error: null }
     } catch (error) {
@@ -104,11 +113,41 @@ export class SubscriptionResolver {
     }
   }
 
+  /**
+   * Fetches external invitations using the subscription service.
+   *
+   * @returns A promise that resolves to the external invitations.
+   */
   @Query(() => [ExternalUserInvitation], {
     description: 'Get external invitations',
     nullable: true
   })
   async externalInvitations() {
     return await this._subscription.getExternalInvitations()
+  }
+
+  /**
+   * Cancel an external user invitation.
+   *
+   * @param invitationId - The ID of the invitation to cancel.
+   *
+   * @returns A promise that resolves when the invitation is cancelled.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
+  @Mutation(() => BaseResult, {
+    description: 'Cancel external user invitation'
+  })
+  async cancelExternalInvitation(
+    @Arg('invitationId') invitationId: string
+  ): Promise<BaseResult> {
+    try {
+      await this._subscription.cancelExternalInvitation(invitationId)
+      return { success: true, error: null }
+    } catch (error) {
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
+    }
   }
 }

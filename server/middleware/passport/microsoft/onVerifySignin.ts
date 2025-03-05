@@ -1,21 +1,22 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import createDebug from 'debug'
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
-import { User } from 'server/graphql'
+import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from '../../../services'
 import { environment } from '../../../utils'
+import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
+import { processUserInvitation } from './processUserInvitation'
+import { retrieveSubscription } from './retrieveSubscription'
+import { synchronizeUserProfile } from './synchronizeUserProfile'
+import { IProfileJson } from './types'
 import {
   NO_OID_FOUND,
   USER_ACCOUNT_DISABLED,
   USER_INVITATION_ACCEPTED,
   USER_NOT_ENROLLED
 } from '../errors'
-import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
-import { synchronizeUserProfile } from './synchronizeUserProfile'
-import createDebug from 'debug'
-import { processUserInvitation } from './processUserInvitation'
-import { retrieveSubscription } from './retrieveSubscription'
 
 export const debug = createDebug('middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
@@ -43,18 +44,21 @@ export const onVerifySignin = async (
     db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
+    // Extract profile JSON
+    const _profile = profile._json as IProfileJson
+
     // User invitation
-    let userInvitation
+    let userInvitation: ExternalUserInvitationInput
 
     // Extract user identity information
-    const { tid: subId, oid: userId, preferred_username: mail } = profile._json
+    const { tid: subId, oid: userId, preferred_username: mail } = _profile
 
     if (!userId) {
       throw NO_OID_FOUND
     }
 
     // Find applicable subscription
-    const subscription = await retrieveSubscription(subSvc, subId, mail)
+    const subscription = await retrieveSubscription(subSvc, subId, _profile)
 
     // Check if user is owner
     const isOwner = subscription.owner === mail
@@ -74,12 +78,8 @@ export const onVerifySignin = async (
         dbUser = await processUserInvitation(
           userSrv,
           subSvc,
-          userId,
-          mail,
-          subId,
-          profile,
-          userInvitation,
-          subscription
+          _profile,
+          userInvitation
         )
       }
     }
@@ -124,7 +124,7 @@ export const onVerifySignin = async (
     }
 
     if (subscription?.settings?.adsync?.enabled) {
-      await synchronizeUserProfile(user, userSrv)
+      await synchronizeUserProfile(user, userSrv, !Boolean(userInvitation))
     }
 
     // Check if user invitation was accepted, if so, return

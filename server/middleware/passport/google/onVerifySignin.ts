@@ -5,7 +5,8 @@ import { Profile } from 'passport-google-oauth20'
 import _ from 'underscore'
 import { SubscriptionService, UserService } from '../../../services/mongo'
 import { environment } from '../../../utils'
-import { TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
+import { TENANT_NOT_ENROLLED } from '../errors/TENANT_NOT_ENROLLED'
+import { USER_NOT_ENROLLED } from '../errors/USER_NOT_ENROLLED'
 
 /**
  * On verify sign for Google accounts

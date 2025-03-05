@@ -13,14 +13,14 @@ on:
       - 'package.json'
       - '.deployment'
       - '.deploy/**'
-      - '.github/workflows/on_push_dev_deploy.yml' # This file
+      - '.github/workflows/on_push_dev_deploy.yml'
 
 jobs:
   package:
     name: Package did
     runs-on: ubuntu-latest
     concurrency: 
-      group: ${{ github.ref }}_on_push_dev_deploy
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     if: "!contains(github.event.head_commit.message, '[skip-ci]') && !contains(github.event.head_commit.message, '[skip-deploy]')"
     steps:

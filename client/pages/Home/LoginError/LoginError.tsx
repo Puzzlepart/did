@@ -3,26 +3,45 @@ import React from 'react'
 import { StyledComponent } from 'types'
 import { ILoginErrorProps } from './types'
 import styles from './LoginError.module.scss'
-import { Button, Caption1 } from '@fluentui/react-components'
+import {
+  Button,
+  Caption1,
+  MessageBar,
+  MessageBarActions,
+  MessageBarBody,
+  MessageBarTitle
+} from '@fluentui/react-components'
 import { getFluentIcon } from 'utils'
+import { useTranslation } from 'react-i18next'
 
 export const LoginError: StyledComponent<ILoginErrorProps> = (props) => {
+  const { t } = useTranslation()
   return (
-    <div className={LoginError.className}>
-      <h3 className={styles.text}>{props.text}</h3>
-      <Caption1 hidden={!props.message}>
-        <Markdown text={props.message} />
-      </Caption1>
+    <MessageBar className={LoginError.className} intent={props.intent}>
+      <div className={styles.container}>
+        <MessageBarTitle>{props.text}</MessageBarTitle>
 
-      <Button
-        style={{ marginTop: '1rem' }}
-        icon={getFluentIcon('Dismiss')}
-        appearance='subtle'
-        onClick={() => window.location.replace(window.location.origin)}
-      >
-        Dismiss
-      </Button>
-    </div>
+        <MessageBarBody>
+          <Caption1 hidden={!props.message} className={styles.message}>
+            <Markdown text={props.message} />
+          </Caption1>
+        </MessageBarBody>
+        {props.enableDismiss && (
+          <MessageBarActions
+            containerAction={
+              <Button
+                aria-label='dismiss'
+                appearance='transparent'
+                icon={getFluentIcon('Dismiss')}
+                onClick={() => window.location.replace(window.location.origin)}
+              >
+                {t('common.dismiss')}
+              </Button>
+            }
+          />
+        )}
+      </div>
+    </MessageBar>
   )
 }
 

@@ -1,10 +1,10 @@
 import createDebug from 'debug'
-import _ from 'underscore'
+import _ from 'lodash'
 import { User } from '../../../graphql'
 import { MSGraphService, UserService } from '../../../services'
 import MSOAuthService from '../../../services/msoauth'
 const debug = createDebug(
-  'middleware/passport/microsoft/synchronizeUserProfile'
+  'server/middleware/passport/microsoft/synchronizeUserProfile'
 )
 
 /**
@@ -14,19 +14,19 @@ const debug = createDebug(
  * @param user - User object
  * @param properties - Properties to check
  * @param data - Data to compare
+ * @param syncManager - Sync manager information
  */
 function evaluateUserSync(
   user: User,
   properties: string[],
-  data: Record<string, any>
+  data: Record<string, any>,
+  syncManager: boolean
 ) {
-  const mergedData: Record<string, any> = _.pick(
-    {
-      ...data,
-      manager: _.pick(data.manager, 'id', 'mail', 'displayName')
-    },
-    properties
-  )
+  const mergedData: Record<string, any> = _.pick(data, properties)
+
+  if (syncManager) {
+    mergedData.manager = _.pick(data.manager, 'id', 'mail', 'displayName')
+  }
 
   const needSync = !_.isEqual(
     _.pick(user, [...properties, 'photo']),
@@ -42,10 +42,12 @@ function evaluateUserSync(
  *
  * @param user - User
  * @param userSvc - User service
+ * @param syncManager - Sync manager information
  */
 export async function synchronizeUserProfile(
   user: User,
-  userSvc: UserService
+  userSvc: UserService,
+  syncManager = true
 ): Promise<void> {
   const { properties, syncUserPhoto } = user?.subscription?.settings?.adsync
   if (_.isEmpty(properties)) {
@@ -60,10 +62,15 @@ export async function synchronizeUserProfile(
       msGraphSvc.getCurrentUser(properties),
       msGraphSvc.getUserPhoto('48x48')
     ])
-    const [needSync, mergedData] = evaluateUserSync(user, properties, {
-      ...data,
-      photo: userPhoto
-    })
+    const [needSync, mergedData] = evaluateUserSync(
+      user,
+      properties,
+      {
+        ...data,
+        photo: userPhoto
+      },
+      syncManager
+    )
     if (syncUserPhoto && userPhoto) {
       user.photo = {
         base64: userPhoto

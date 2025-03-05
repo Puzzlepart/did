@@ -290,7 +290,21 @@
       "searchUsersLabel": "Search users...",
       "invitationsHeaderText": "Pending invitations",
       "inviteExternalUserError": "An error occurred while inviting the external user.",
-      "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration."
+      "inviteExternalUserSuccess": "User {{mail}} invited successfully. Ask the user to login to complete the registration.",
+      "inviteExternalUser": "Invite External User",
+      "noPendingInvitations": "No pending external invitations at the moment.",
+      "invitedString": "Invited {{invitedAt}}",
+      "cancelInvitation": "Cancel invitation",
+      "pendingInvitations": "Pending Invitations",
+      "cancelInvitationError": "There was an error cancelling the invitation: {{error}}",
+      "cancelInvitationSuccess": "Successfully cancelled invitation.",
+      "invitationNamePlaceholder": "Enter the name of the user you want to invite...",
+      "invitationNameDescription": "The name of the user you want to invite — it's recommended to fill this out, but not required.",
+      "invitationEmailDescription": "The e-mail of the user you want to invite. There might be limitations on supported domains.",
+      "invitationNameRecommended": "It is recommended to provide a name for the individual you want to invite.",
+      "invitationRoleDescription": "description={t('Please select a role for the invited user. Only roles that have been explicitly enabled for external users are available for selection in this list. If no roles are visible, it means no roles are currently enabled for external invitations.",
+      "invitedByString": "Invited by {{displayName}}",
+      "inviteExternalUserSubmit": "Send invitation"
     },
     "weekStatus": {
       "headerText": "Week status",
@@ -754,7 +768,7 @@
     "outlookCategoryError": "There was an error creating the category in Outlook. If you just created it, it might take some moments before it shows up here.",
     "tagFieldLabel": "Tag",
     "ignoredHours": "Ignored hours",
-    "signInDisabledMessage": "We'",
+    "signInDisabledMessage": "Sign-in is temporarily unavailable. We're working to resolve the issue. Please check back soon!",
     "general": "General",
     "projectRoleLabel": "Project Role",
     "hourlyRate": "Hourly Rate",
@@ -777,7 +791,11 @@
     "idLabel": "ID",
     "invitedAtLabel": "Invited at",
     "invitedByLabel": "Invited by",
-    "cancelButtonDisabledTooltip": "Cancelling invitations is currently not supported."
+    "cancelButtonDisabledTooltip": "Cancelling invitations is currently not supported.",
+    "ok": "OK",
+    "dismiss": "Dismiss",
+    "pending": "Pending",
+    "expired": "Expired"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

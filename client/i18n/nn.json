@@ -245,7 +245,21 @@
       "searchUsersLabel": "Søk i brukarar...",
       "invitationsHeaderText": "Aktive invitasjoner",
       "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
-      "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn."
+      "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn.",
+      "inviteExternalUser": "Inviter ekstern bruker",
+      "noPendingInvitations": "Ingen ventende eksterne invitasjoner for øyeblikket.",
+      "invitedString": "Invitert {{invitedAt}}",
+      "cancelInvitation": "Kanseller invitasjon",
+      "pendingInvitations": "Eksterne invitasjoner",
+      "cancelInvitationError": "Det skjedde en feil under kansellering av invitasjonen: {{error}}",
+      "cancelInvitationSuccess": "Invitasjonen er nå kansellert.",
+      "invitationNamePlaceholder": "Skriv inn navnet på brukeren du vil invitere...",
+      "invitationNameDescription": "Navnet på brukeren du vil invitere - det anbefales å fylle ut dette, men ikke påkrevd.",
+      "invitationEmailDescription": "E-posten til brukeren du vil invitere. Det kan være begrensninger på støttede domener.",
+      "invitationNameRecommended": "Det anbefales å oppgi et navn på personen du vil invitere.",
+      "invitationRoleDescription": "Vennligst velg en rolle for den inviterte brukeren. Kun roller som eksplisitt er aktivert for eksterne brukere er tilgjengelige i denne listen. Hvis ingen roller vises, betyr det at ingen roller for øyeblikket er aktivert for eksterne invitasjoner.",
+      "invitedByString": "Invitert av {{displayName}}",
+      "inviteExternalUserSubmit": "Send invitasjon"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -774,7 +788,12 @@
     "idLabel": "Id",
     "invitedAtLabel": "Invitert",
     "invitedByLabel": "Invitert av",
-    "cancelButtonDisabledTooltip": "Å avbryte invitasjoner støttes foreløpig ikke."
+    "cancelButtonDisabledTooltip": "Å avbryte invitasjoner støttes foreløpig ikke.",
+    "ok": "OK",
+    "dismiss": "Avvis",
+    "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!",
+    "pending": "Venter",
+    "expired": "Utløpt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
