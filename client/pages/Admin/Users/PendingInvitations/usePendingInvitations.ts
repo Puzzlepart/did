@@ -30,7 +30,7 @@ export function usePendingInvitations(): UsePendingInvitationsResult {
   >($cancelExternalInvitation)
 
   /**
-   * Cancel a pending invitation by calling the 
+   * Cancel a pending invitation by calling the
    * `cancelExternalInvitation` mutation.
    */
   const cancelInvitation = useCallback(async (invitationId: string) => {
