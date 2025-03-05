@@ -77,3 +77,10 @@ export const USER_ACCOUNT_DISABLED = new SigninError(
   'Your account is disabled.',
   'Cancel'
 )
+
+export const USER_INVITATION_ACCEPTED = new SigninError(
+  '37ef71e8',
+  'Invitation accepted',
+  'You have accepted the invitation to join did. Please log in with your Microsoft account to continue.',
+  'Checkmark'
+)

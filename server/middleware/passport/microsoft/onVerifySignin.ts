@@ -7,14 +7,15 @@ import { SubscriptionService, UserService } from '../../../services'
 import { environment } from '../../../utils'
 import {
   NO_OID_FOUND,
-  TENANT_NOT_ENROLLED,
   USER_ACCOUNT_DISABLED,
+  USER_INVITATION_ACCEPTED,
   USER_NOT_ENROLLED
 } from '../errors'
 import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
 import { synchronizeUserProfile } from './synchronizeUserProfile'
 import createDebug from 'debug'
 import { processUserInvitation } from './processUserInvitation'
+import { retrieveSubscription } from './retrieveSubscription'
 
 export const debug = createDebug('middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
@@ -42,6 +43,9 @@ export const onVerifySignin = async (
     db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
+    // User invitation
+    let userInvitation
+
     // Extract user identity information
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
 
@@ -50,7 +54,7 @@ export const onVerifySignin = async (
     }
 
     // Find applicable subscription
-    const subscription = await findSubscription(subSvc, subId, mail)
+    const subscription = await retrieveSubscription(subSvc, subId, mail)
 
     // Check if user is owner
     const isOwner = subscription.owner === mail
@@ -65,7 +69,7 @@ export const onVerifySignin = async (
 
     // Process user invitation if exists
     if (!dbUser) {
-      const userInvitation = await subSvc.getExternalInvitation(mail, PROVIDER)
+      userInvitation = await subSvc.getExternalInvitation(mail, PROVIDER)
       if (userInvitation?.subscription?.id === subscription.id) {
         dbUser = await processUserInvitation(
           userSrv,
@@ -123,51 +127,17 @@ export const onVerifySignin = async (
       await synchronizeUserProfile(user, userSrv)
     }
 
-    done(null, user)
+    // Check if user invitation was accepted, if so, return
+    // a special error message to the client
+    if (Boolean(userInvitation)) {
+      return done(USER_INVITATION_ACCEPTED, null)
+    }
+
+      done(null, user)
   } catch (error) {
     debug('Failed to verify sign in', error.message)
     done(error, null)
   }
-}
-
-/**
- * Find the subscription for the given user
- *
- * @param subSvc - Subscription service
- * @param subId - Subscription ID
- * @param mail - User email
- * @returns The subscription object
- * @throws TENANT_NOT_ENROLLED if no subscription is found
- */
-async function findSubscription(
-  subSvc: SubscriptionService,
-  subId: string,
-  mail: string
-) {
-  // Try to get subscription by tenant ID
-  let subscription = await subSvc.getById(subId)
-
-  if (subscription) {
-    return subscription
-  }
-
-  // Try to get subscription by external ID
-  subscription = await subSvc.getByExternalId(mail, PROVIDER)
-
-  if (subscription) {
-    return subscription
-  }
-
-  // Check if there's an invitation
-  const userInvitation = await subSvc.getExternalInvitation(mail, PROVIDER)
-  subscription = userInvitation?.subscription
-
-  if (!subscription) {
-    debug(`Tenant ${subId} is not enrolled`)
-    throw TENANT_NOT_ENROLLED
-  }
-
-  return subscription
 }
 
 /**
