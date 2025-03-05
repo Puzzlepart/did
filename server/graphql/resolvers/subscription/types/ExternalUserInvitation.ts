@@ -46,7 +46,7 @@ export class ExternalUserInvitationInput {
   theme?: string
 
   /**
-   * Subscription to be associated with the 
+   * Subscription to be associated with the
    * user invitation.
    */
   subscription?: Subscription

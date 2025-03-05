@@ -36,7 +36,13 @@ export const signInHandler =
   }
 
 /**
- * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
+ * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`.
+ *
+ * Authenticates the user using the provided strategy, then redirects the user to
+ * the root path if the user is not authenticated.
+ *
+ * For now it uses the deprecated `url.format` method to redirect the user to the
+ * root path with an error message if the user is not authenticated.
  */
 export const authCallbackHandler =
   (strategy: AuthProvider) =>
@@ -49,7 +55,7 @@ export const authCallbackHandler =
           url.format({
             pathname: '/',
             query: {
-              error: _error?.toString()
+              response: _error?.toString()
             }
           })
         )

@@ -1,10 +1,9 @@
 /* eslint-disable unicorn/prevent-abbreviations */
+import _ from 'lodash'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from 'server/services'
 import { debug, PROVIDER } from './onVerifySignin'
 import { IProfileJson } from './types'
-import _ from 'lodash'
-import { TENANT_NOT_ENROLLED } from '../errors'
 
 /**
  * Process a user invitation and create a user account
@@ -23,8 +22,6 @@ export async function processUserInvitation(
   debug(
     `User invitation with ID ${userInvitation.id} found. Adding user to the database`
   )
-
-  throw TENANT_NOT_ENROLLED
 
   const invitedBy = await userSrv.getById(userInvitation.invitedBy)
 

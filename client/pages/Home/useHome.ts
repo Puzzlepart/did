@@ -6,12 +6,12 @@ import { useEffect } from 'react'
 
 /**
  * Component logic for `Home`
- * 
+ *
  * @param paramName - The name of the parameter to use for the error
- * 
+ *
  * @returns The logic for the `Home` component
  */
-export function useHome(paramName = 'error') {
+export function useHome(paramName = 'response') {
   const { user, subscription } = useAppContext()
   const location = useLocation<{ prevPath: string }>()
   const urlSearchParameters = new URLSearchParams(document.location.search)

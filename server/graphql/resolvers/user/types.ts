@@ -167,6 +167,12 @@ export class User {
 
   @Field({ nullable: true })
   isExternal?: boolean
+
+  @Field({ nullable: true })
+  invitationId?: string
+
+  @Field({ nullable: true })
+  invitedAt?: Date
 }
 
 /**

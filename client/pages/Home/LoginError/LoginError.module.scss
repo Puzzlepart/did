@@ -1,10 +1,19 @@
 .loginError {
     margin: 15px 0 0 0;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center;
 
-    .text {
-        margin-bottom: 5px;
+    .container {
+        padding: 10px 25px;
+
+        h4.text {
+            margin: 10px 0 0 0;
+        }
+
+        .message {
+            word-wrap: break-word;
+            line-break: auto;
+        }
     }
 }
