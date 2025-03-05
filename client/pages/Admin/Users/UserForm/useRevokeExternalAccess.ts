@@ -6,8 +6,6 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import $revokeExternalAccess from './revokeExternalAccess.gql'
-import { useUsersContext } from '../context'
-import { RESET_SELECTION } from '../reducer'
 
 /**
  * Custom hook to handle the revocation of external access for a user.
@@ -29,7 +27,6 @@ export function useRevokeExternalAccess<T = IDynamicButtonProps>(
 ): T {
     const { t } = useTranslation()
     const { displayToast } = useAppContext()
-    const context = useUsersContext()
     const [revokeExternalAccess] = useMutation<any, any>($revokeExternalAccess)
 
     const onClick = async () => {
@@ -50,7 +47,6 @@ export function useRevokeExternalAccess<T = IDynamicButtonProps>(
         displayToast(t('admin.users.removeExternalUserSuccess'), 'success', 8, {
             headerText: t('admin.users.removeExternalUserSuccessTitle', user)
         })
-        context.dispatch(RESET_SELECTION())
     }
 
     return useMemo<T>(() => {

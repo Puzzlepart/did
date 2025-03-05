@@ -30,7 +30,10 @@ export function useUsersMenuItems(context: IUsersContext) {
   const syncUsers = useUsersSync(context)
   const revokeExternalAccess = useRevokeExternalAccess<ListMenuItem>(
     _.first(context.state.selectedUsers),
-    context.refetch,
+    () => {
+      context.refetch()
+      context.dispatch(RESET_SELECTION())
+    },
     true
   )
   return useMemo(() => {
