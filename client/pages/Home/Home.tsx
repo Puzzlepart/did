@@ -36,7 +36,9 @@ export const Home: PageComponent = () => {
         />
       )}
       {_.isEmpty(Object.keys(providers)) && (
-        <LoginError text={t('common.signInDisabledText')} />
+        <LoginError
+          text={t('common.signInDisabledText')}
+          message={t('common.signInDisabledMessage')} />
       )}
       {!subscription && !loginError && (
         <div className={styles.signIn}>

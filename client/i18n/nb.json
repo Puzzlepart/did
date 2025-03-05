@@ -777,7 +777,8 @@
     "invitedByLabel": "Invitert av",
     "cancelButtonDisabledTooltip": "Å avbryte invitasjoner støttes foreløpig ikke.",
     "ok": "OK",
-    "dismiss": "Avvis"
+    "dismiss": "Avvis",
+    "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

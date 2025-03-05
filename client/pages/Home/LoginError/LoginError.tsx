@@ -8,7 +8,8 @@ import {
   Caption1,
   MessageBar,
   MessageBarActions,
-  MessageBarBody
+  MessageBarBody,
+  MessageBarTitle
 } from '@fluentui/react-components'
 import { getFluentIcon } from 'utils'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +19,7 @@ export const LoginError: StyledComponent<ILoginErrorProps> = (props) => {
   return (
     <MessageBar className={LoginError.className} intent={props.intent}>
       <div className={styles.container}>
-        <h4 className={styles.text}>{props.text}</h4>
+        <MessageBarTitle>{props.text}</MessageBarTitle>
 
         <MessageBarBody>
           <Caption1 hidden={!props.message} className={styles.message}>

@@ -755,7 +755,7 @@
     "outlookCategoryError": "There was an error creating the category in Outlook. If you just created it, it might take some moments before it shows up here.",
     "tagFieldLabel": "Tag",
     "ignoredHours": "Ignored hours",
-    "signInDisabledMessage": "We'",
+    "signInDisabledMessage": "Sign-in is temporarily unavailable. We're working to resolve the issue. Please check back soon!",
     "general": "General",
     "projectRoleLabel": "Project Role",
     "hourlyRate": "Hourly Rate",

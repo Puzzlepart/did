@@ -3,7 +3,6 @@ import { SigninError } from './SigninError'
 /**
  * Tenant not enrolled error
  */
-
 export const TENANT_NOT_ENROLLED = new SigninError(
   'de72e4da',
   'Your company is not enrolled in did',
