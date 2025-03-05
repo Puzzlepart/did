@@ -133,7 +133,7 @@ export const onVerifySignin = async (
       return done(USER_INVITATION_ACCEPTED, null)
     }
 
-      done(null, user)
+    done(null, user)
   } catch (error) {
     debug('Failed to verify sign in', error.message)
     done(error, null)

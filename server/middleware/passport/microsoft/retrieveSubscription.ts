@@ -1,6 +1,6 @@
-import { SubscriptionService } from 'server/services';
-import { TENANT_NOT_ENROLLED } from '../errors';
-import { PROVIDER, debug } from './onVerifySignin';
+import { SubscriptionService } from 'server/services'
+import { TENANT_NOT_ENROLLED } from '../errors'
+import { PROVIDER, debug } from './onVerifySignin'
 
 /**
  * Retrieve the subscription for the given user.
@@ -14,29 +14,30 @@ import { PROVIDER, debug } from './onVerifySignin';
 export async function retrieveSubscription(
   subSvc: SubscriptionService,
   subId: string,
-  mail: string) {
+  mail: string
+) {
   // Try to get subscription by tenant ID
-  let subscription = await subSvc.getById(subId);
+  let subscription = await subSvc.getById(subId)
 
   if (subscription) {
-    return subscription;
+    return subscription
   }
 
   // Try to get subscription by external ID
-  subscription = await subSvc.getByExternalId(mail, PROVIDER);
+  subscription = await subSvc.getByExternalId(mail, PROVIDER)
 
   if (subscription) {
-    return subscription;
+    return subscription
   }
 
   // Check if there's an invitation
-  const userInvitation = await subSvc.getExternalInvitation(mail, PROVIDER);
-  subscription = userInvitation?.subscription;
+  const userInvitation = await subSvc.getExternalInvitation(mail, PROVIDER)
+  subscription = userInvitation?.subscription
 
   if (!subscription) {
-    debug(`Tenant ${subId} is not enrolled`);
-    throw TENANT_NOT_ENROLLED;
+    debug(`Tenant ${subId} is not enrolled`)
+    throw TENANT_NOT_ENROLLED
   }
 
-  return subscription;
+  return subscription
 }
