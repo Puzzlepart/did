@@ -10,16 +10,19 @@ import { IListContext } from './context'
  * @param parameterName - The name of the URL parameter to use for the search term. Defaults to 'q'.
  */
 export function useListPersistedSearch(
-    context: IListContext,
-    parameterName = 'q'
+  context: IListContext,
+  parameterName = 'q'
 ) {
-    useEffect(() => {
-        if (!context.props.searchBox?.persist) return
-        if (context.state.searchTerm === '') {
-            const hash = window.location.hash.replace(new RegExp(`${parameterName}=[^&]*&?`), '')
-            window.location.hash =hash.length === 1 ? '' : hash
-            return
-        }
-        window.location.hash = `${parameterName}=${context.state.searchTerm ?? ''}`
-    }, [context.state.searchTerm])
+  useEffect(() => {
+    if (!context.props.searchBox?.persist) return
+    if (context.state.searchTerm === '') {
+      const hash = window.location.hash.replace(
+        new RegExp(`${parameterName}=[^&]*&?`),
+        ''
+      )
+      window.location.hash = hash.length === 1 ? '' : hash
+      return
+    }
+    window.location.hash = `${parameterName}=${context.state.searchTerm ?? ''}`
+  }, [context.state.searchTerm])
 }
