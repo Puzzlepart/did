@@ -98,8 +98,6 @@ export class ProjectService extends MongoDocumentService<Project> {
     const { result } = await this.collection.deleteOne({
       _id: projectId
     })
-    // eslint-disable-next-line no-console
-    console.log('deleteProject =>', result.ok, result)
     return result.ok === 1 && result.n === 1
   }
 
