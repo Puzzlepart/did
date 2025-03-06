@@ -64,7 +64,6 @@ export function useProjectsReducer() {
       })
       .addCase(PROJECT_DELETE_SUCCESS, (state) => {
         state.selected = null
-        document.location.replace('/projects')
       })
   )
 }
