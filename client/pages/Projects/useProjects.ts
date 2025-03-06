@@ -1,8 +1,9 @@
 import { useSubscriptionSettings } from 'AppContext'
 import { useMemo } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { IProjectsContext } from './context'
 import { useProjectsReducer } from './reducer'
+import { IProjectsUrlParameters } from './types'
 import { useProjectsQuery } from './useProjectsQuery'
 
 /**
@@ -11,7 +12,7 @@ import { useProjectsQuery } from './useProjectsQuery'
  * the default tab to be shown based on the subscription setting `projects.showMyProjectsByDefault`.
  */
 export function useProjects() {
-  const { params } = useRouteMatch<{ currentTab: string }>()
+  const urlParameters = useParams<IProjectsUrlParameters>()
   const showMyProjectsByDefault = useSubscriptionSettings(
     'projects.showMyProjectsByDefault'
   )
@@ -26,7 +27,7 @@ export function useProjects() {
     [state, query.loading]
   )
   const renderDetails =
-    params.currentTab?.includes('_') || Boolean(state.selected)
+    urlParameters.currentTab?.includes('_') || Boolean(state.selected)
   const defaultTab = showMyProjectsByDefault ? 'm' : 's'
 
   return { context, renderDetails, defaultTab }

@@ -71,7 +71,6 @@ export function useProjectDeleteAction() {
     await displayToast(t('projects.deleteSuccess', project), 'success', 5, {
       headerText: t('projects.deleteSuccessTitle')
     })
-    context.refetch()
     history.push('/projects')
     context.dispatch(PROJECT_DELETE_SUCCESS())
   }

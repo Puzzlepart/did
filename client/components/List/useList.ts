@@ -22,7 +22,7 @@ export function useList(props: IListProps) {
     items: props.items,
     itemsPreFilter: props.items,
     searchTerm: document.location.hash.includes('q=')
-      ? document.location.hash.split('q=')[1].split('&')[0]
+      ? decodeURIComponent(document.location.hash.split('q=')[1].split('&')[0])
       : ''
   })
 

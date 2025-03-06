@@ -179,7 +179,9 @@
     "deleteSuccess": "Deletion of project **{{name}}** completed successfully. The project is no longer available in the system. You will be redirected to the Project page in 5 seonds.",
     "projecNotReadyOrNotFound": "The project is currently unavailable. If it was just created, please try again in a few moments. Otherwise, it may not exist.",
     "projecNotReadyOrNotFoundTitle": "Project Not Found or Still Processing",
-    "homeButtonLabel": "Go back to Projects page"
+    "homeButtonLabel": "Go back to Projects page",
+    "noProjectResults": "No items match your search criteria **{{searchTerm}}**.",
+    "noProjects": "No projects are available. This may be due to active filters or because there are no projects to display."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

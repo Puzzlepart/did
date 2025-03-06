@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import { useReduxReducer as useReducer } from 'hooks'
 import { useParams } from 'react-router-dom'
 import _ from 'underscore'
@@ -18,7 +17,7 @@ import { current } from '@reduxjs/toolkit'
  * Use Projects reducer.
  */
 export function useProjectsReducer() {
-  const urlParams = useParams<IProjectsUrlParameters>()
+  const urlParameters = useParams<IProjectsUrlParameters>()
   const initialState: IProjectsState = {
     projects: [],
     myProjects: [],
@@ -39,7 +38,7 @@ export function useProjectsReducer() {
             extensions: tryParseJson(p.extensions as string, {})
           }))
           state.myProjects = payload.data.myProjects.map((p) => p.tag)
-          const selectedTag = state.selected?.tag ?? urlParams.currentTab
+          const selectedTag = state.selected?.tag ?? urlParameters.currentTab
           if (selectedTag) {
             state.selected = _.find(state.projects, ({ tag }) =>
               fuzzyStringEqual(tag, selectedTag)
