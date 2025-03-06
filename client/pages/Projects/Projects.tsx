@@ -30,6 +30,7 @@ export const Projects: FC = () => {
                 getKey: (item) => item?.tag,
                 enableShimmer: context.loading,
                 searchBox: {
+                  persist: true,
                   disabled: context.loading,
                   placeholder: (state) =>
                     t('projects.searchPlaceholder', {
@@ -45,6 +46,7 @@ export const Projects: FC = () => {
                 getKey: (item) => item?.tag,
                 enableShimmer: context.loading,
                 searchBox: {
+                  persist: true,
                   disabled: context.loading,
                   placeholder: (state) =>
                     t('projects.myProjectsSearchPlaceholder', {
