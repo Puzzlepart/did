@@ -79,13 +79,26 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
-      await this.cache.clear()
+      await this.cache.clear('getprojectsdata')
       const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
       const { result } = await this.update(filter, project)
       return result.ok === 1
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * Delete a project from the database by ID.
+   *
+   * @param projectId - The ID of the project to delete
+   */
+  public async deleteProject(projectId: string): Promise<boolean> {
+    await this.cache.clear('getprojectsdata')
+    const { result } = await this.collection.deleteOne({
+      _id: projectId
+    })
+    return result.ok === 1 && result.n === 1
   }
 
   /**

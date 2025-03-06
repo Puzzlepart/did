@@ -3,6 +3,7 @@ import { SearchBox } from '@fluentui/react-search-preview'
 import React from 'react'
 import { useListContext } from '../context'
 import { EXECUTE_SEARCH } from '../reducer'
+import _ from 'lodash'
 import { ListMenuItem } from './ListMenuItem'
 
 export function useSearchBoxCommand() {
@@ -11,7 +12,12 @@ export function useSearchBoxCommand() {
     key: 'SEARCH_BOX',
     onRender: () => (
       <SearchBox
-        {...context.props.searchBox}
+        {..._.omit(context.props.searchBox, 'placeholder', 'fullWidth')}
+        placeholder={
+          _.isFunction(context.props.searchBox.placeholder)
+            ? context.props.searchBox.placeholder(context.state)
+            : context.props.searchBox.placeholder
+        }
         style={{
           minWidth: '600px'
         }}

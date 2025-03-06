@@ -58,16 +58,19 @@ export function useApp(props: IAppProps) {
     duration: number = 6,
     additionalProps: Partial<IToastProps> = {}
   ) => {
-    context.dispatch(
-      SET_TOAST({
-        text,
-        intent,
-        ...additionalProps
-      })
-    )
-    setTimeout(() => {
-      context.dispatch(SET_TOAST(null))
-    }, duration * 1000)
+    return new Promise((resolve) => {
+      context.dispatch(
+        SET_TOAST({
+          text,
+          intent,
+          ...additionalProps
+        })
+      )
+      setTimeout(() => {
+        context.dispatch(SET_TOAST(null))
+        resolve(null)
+      }, duration * 1000)
+    })
   }
 
   const context = useMemo<IAppContext>(

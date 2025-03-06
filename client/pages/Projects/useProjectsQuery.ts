@@ -11,8 +11,12 @@ import { IProjectsState } from './types'
  * reducer using `DATA_UPDATED` action.
  *
  * @param dispatch - Dispatch
+ * @param sortBy - Sort by property
  */
-export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
+export function useProjectsQuery(
+  dispatch: Dispatch<AnyAction>,
+  sortBy = 'name'
+) {
   const query = useQuery<
     Pick<IProjectsState, 'projects' | 'myProjects' | 'outlookCategories'> & {
       myProjects: {
@@ -20,7 +24,7 @@ export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
       }[]
     }
   >($projects_outlook, {
-    variables: { sortBy: 'name' },
+    variables: { sortBy },
     fetchPolicy: 'cache-and-network'
   })
   useEffect(() => dispatch(DATA_UPDATED(query)), [query])

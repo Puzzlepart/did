@@ -89,14 +89,14 @@
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
-    "searchPlaceholder": "Søk i prosjekt",
+    "searchPlaceholder": "Søk i {{count}} prosjekter...",
     "workspaceLabel": "Prosjektområde",
     "createOutlookCategoryLabel": "Lag ein Outlook-kategori",
     "noTimeEntriesText": "Ingen timar registrerte på dette prosjektet.",
     "timeEntriesErrorText": "Det oppstod ein feil ved innlasting av timane for dette prosjektet.",
     "timeEntriesLoadingLabel": "Lastar inn timer for prosjektet",
     "myProjectsText": "Prosjekta mine",
-    "myProjectsSearchPlaceholder": "Søk i prosjekta mine...",
+    "myProjectsSearchPlaceholder": "Søk i mine {{count}} prosjekt...",
     "exportTimeEntriesLabel": "Eksporter til Excel",
     "keyFieldDescription": "Ein unik identifikator for prosjektet. Blir brukt saman med kundenøkkelen for å lage nøkkelen som blir brukt til å merke kalenderoppføringer i Outlook. Hold det kort, mellom {{min}} og {{max}} teikn.",
     "createSuccess": "Prosjektet **{{name}}** vart oppretta. Bruk **{{projectId}}** til å merke kalenderoppføringane dine i Outlook. Klikk for å gå direkte til det nyoppretta prosjektet, eller bli her for å oppretta eit nytt.",
@@ -164,7 +164,19 @@
     "parentLabel": "Overordna prosjekt",
     "childrenLabel": "Underordna prosjekter",
     "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
-    "loadTimeEntriesLabel": "Last inn tidsoppføringer"
+    "loadTimeEntriesLabel": "Last inn tidsoppføringer",
+    "deleteButtonLabel": "Slett prosjekt",
+    "deleteError": "Dette prosjektet har {{count}} tilknyttede tidsregistreringer. Vennligst slett alle relaterte tidsregistreringer før du prøver å slette prosjektet.",
+    "deleteConfirmation": "Er du sikker på at du vil slette prosjektet **{{name}}** for kunde **{{customer}}**? Før vi fortsetter, vil vi kontrollere om det finnes tidsregistreringer tilknyttet dette prosjektet. Hvis det finnes tidsregistreringer, må disse slettes før prosjektet kan fjernes.",
+    "deleteDialogTitle": "Slett prosjekt",
+    "deleteCheckLabel": "Kontrollerer tilknyttede tidsregistreringer",
+    "deleteCheckHint": "Vi undersøker om dette prosjektet har tilknyttede tidsregistreringer. Denne prosessen kan ta litt tid, avhengig av det totale antallet registreringer...",
+    "checkSuccess": "Ingen tidsoppføringer funnet. Prosjektet kan trygt slettes.",
+    "checkButtonLabel": "Fortsett",
+    "deleteFailedTitle": "Sletting av prosjekt mislyktes",
+    "deleteFailed": "En uventet feil oppstod under forsøket på å slette prosjektet **{{name}}**. Vennligst prøv igjen senere eller kontakt support hvis problemet vedvarer.",
+    "deleteSuccessTitle": "Prosjekt slettet",
+    "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -798,7 +810,8 @@
     "dismiss": "Avvis",
     "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!",
     "pending": "Venter",
-    "expired": "Utløpt"
+    "expired": "Utløpt",
+    "abort": "Avbryt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

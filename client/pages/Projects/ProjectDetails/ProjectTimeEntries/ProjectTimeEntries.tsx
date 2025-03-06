@@ -13,11 +13,11 @@ import { useProjectTimeEntries } from './useProjectTimeEntries'
  */
 export const ProjectTimeEntries: StyledComponent = () => {
   const { t } = useTranslation()
-  const { loading, timeEntries, onExport, error, skip } =
+  const { loading, selected, timeEntries, onExport, error, skip } =
     useProjectTimeEntries()
   return (
     <div className={ProjectTimeEntries.className}>
-      <div hidden={skip.value}>
+      <div hidden={skip.value && !loading}>
         {error && (
           <UserMessage
             intent='error'
@@ -40,7 +40,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
 
       <EventList
         items={timeEntries}
-        enableShimmer={loading}
+        enableShimmer={loading || !Boolean(selected)}
         additionalColumns={[
           {
             key: 'resource.displayName',
@@ -71,6 +71,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
             .setGroup('actions')
             .setDisabled(_.isEmpty(timeEntries))
         ]}
+        hidden={!loading && _.isEmpty(timeEntries)}
       />
     </div>
   )

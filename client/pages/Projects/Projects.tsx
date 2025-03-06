@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
-import { ProjectList } from './ProjectList'
+import { IProjectListProps, ProjectList } from './ProjectList'
 import { CLOSE_EDIT_PANEL } from './reducer'
 import { useProjects } from './useProjects'
 
@@ -27,20 +27,33 @@ export const Projects: FC = () => {
               ProjectList,
               t('common.search'),
               {
+                getKey: (item) => item?.tag,
                 enableShimmer: context.loading,
                 searchBox: {
-                  placeholder: t('common.searchPlaceholder')
+                  persist: true,
+                  disabled: context.loading,
+                  placeholder: (state) =>
+                    t('projects.searchPlaceholder', {
+                      count: state.origItems?.length ?? 0
+                    })
                 }
-              }
+              } as IProjectListProps
             ],
             m: [
               ProjectList,
               t('projects.myProjectsText'),
               {
+                getKey: (item) => item?.tag,
+                enableShimmer: context.loading,
                 searchBox: {
-                  placeholder: t('projects.myProjectsSearchPlaceholder')
+                  persist: true,
+                  disabled: context.loading,
+                  placeholder: (state) =>
+                    t('projects.myProjectsSearchPlaceholder', {
+                      count: state.origItems?.length ?? 0
+                    })
                 }
-              }
+              } as IProjectListProps
             ],
             new: [ProjectForm, t('projects.createNewText')]
           }}

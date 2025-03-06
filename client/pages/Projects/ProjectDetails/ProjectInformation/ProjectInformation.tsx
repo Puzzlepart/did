@@ -64,9 +64,11 @@ export const ProjectInformation: StyledComponent = () => {
         title={t('common.labelsText')}
         isDataLoaded={!context.loading}
       >
-        {(context.state.selected?.labels as Label[]).map((label, index) => (
-          <EntityLabel key={index} label={label} />
-        ))}
+        {((context.state.selected?.labels ?? []) as Label[]).map(
+          (label, index) => (
+            <EntityLabel key={index} label={label} />
+          )
+        )}
       </InformationProperty>
       <InformationProperty
         hidden={

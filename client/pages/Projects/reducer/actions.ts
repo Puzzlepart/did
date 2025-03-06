@@ -17,3 +17,4 @@ export const SET_SELECTED_PROJECT = createAction<Project | string>(
 )
 export const OPEN_EDIT_PANEL = createAction<Project>('OPEN_EDIT_PANEL')
 export const CLOSE_EDIT_PANEL = createAction('CLOSE_EDIT_PANEL')
+export const PROJECT_DELETE_SUCCESS = createAction('PROJECT_DELETE_SUCCESS')

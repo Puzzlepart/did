@@ -88,14 +88,14 @@
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
-    "searchPlaceholder": "Search in projects...",
+    "searchPlaceholder": "Search {{count}} projects...",
     "workspaceLabel": "Project workspace",
     "createOutlookCategoryLabel": "Create category in Outlook",
     "noTimeEntriesText": "No time entries registered for the project.",
     "timeEntriesErrorText": "An error occured loading time entries for the project.",
     "timeEntriesLoadingLabel": "Loading time entries for project",
     "myProjectsText": "My projects",
-    "myProjectsSearchPlaceholder": "Search my projects...",
+    "myProjectsSearchPlaceholder": "Search my {{count}} projects...",
     "exportTimeEntriesLabel": "Export to Excel",
     "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, between {{min}} and {{max}} characters.",
     "createSuccess": "The project **{{name}}** was succesfully created. Use **{{projectId}}** to tag your events in Outlook. Click to go directly to the newly created project, or stay here and create another one.",
@@ -164,7 +164,19 @@
     "parentLabel": "Parent Project",
     "childrenLabel": "Child Projects",
     "parentProjectDisabledText": "You can only select a parent project under the same customer, and there's no customer selected, or no projects under the selected customer.",
-    "loadTimeEntriesLabel": "Load time entries"
+    "loadTimeEntriesLabel": "Load time entries",
+    "deleteButtonLabel": "Delete project",
+    "deleteError": "This project has {{count}} associated time entries. To proceed with deleting the project, please remove all related time entries first.",
+    "deleteConfirmation": "Are you sure you want to delete the project **{{name}}** for customer **{{customer}}**? Before proceeding, we will check if there are any time entries associated with this project. If time entries are found, the project cannot be deleted until they are removed.",
+    "deleteDialogTitle": "Delete Project",
+    "deleteCheckLabel": "Verifying associated time entries",
+    "deleteCheckHint": "We are checking whether this project has any associated time entries. This process may take some time depending on the total number of entries...",
+    "checkSuccess": "No time entries found. The project can be safely deleted.",
+    "checkButtonLabel": "Go ahead",
+    "deleteFailed": "An unexpected error occurred while attempting to delete project **{{name}}**. Please try again later or contact support if the issue persists.",
+    "deleteFailedTitle": "Project Deletion Failed",
+    "deleteSuccessTitle": "Project Deleted Successfully",
+    "deleteSuccess": "Deletion of project **{{name}}** completed successfully. The project is no longer available in the system. You will be redirected to the Project page in 5 seonds."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -800,7 +812,8 @@
     "ok": "OK",
     "dismiss": "Dismiss",
     "pending": "Pending",
-    "expired": "Expired"
+    "expired": "Expired",
+    "abort": "Abort"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

@@ -178,13 +178,19 @@ import {
   GroupRegular,
   GroupFilled,
   LockClosedRegular,
-  LockClosedFilled
+  LockClosedFilled,
+  ErrorCircleRegular,
+  ErrorCircleFilled
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  ErrorCircle: {
+    regular: ErrorCircleRegular,
+    filled: ErrorCircleFilled
+  },
   PersonDelete: {
     regular: PersonDeleteRegular,
     filled: PersonDeleteFilled

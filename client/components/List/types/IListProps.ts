@@ -14,8 +14,9 @@ import { IListGroupProps } from './IListGroupProps'
 import { ListFilterState } from './ListFilterState'
 import { IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
+import { IListState } from './IListState'
 
-interface SearchBox extends SearchBoxProps {
+interface SearchBox extends Omit<SearchBoxProps, 'placeholder'> {
   /**
    * Enable full width for the `SearchBox`. It will be standalone
    * and full width, not inside the `ToolBar`.
@@ -26,6 +27,11 @@ interface SearchBox extends SearchBoxProps {
    * Persist the search term in the URL hash.
    */
   persist?: boolean
+
+  /**
+   * Placeholder text or function that returns the placeholder text.
+   */
+  placeholder?: string | ((state: IListState<any>) => string)
 }
 
 /**
