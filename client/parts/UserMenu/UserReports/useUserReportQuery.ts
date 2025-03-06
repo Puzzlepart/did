@@ -45,27 +45,33 @@ export function useUserReportQuery(
     }
   )
   const data = query?.data?.userReport ?? []
-  return useMemo<UserReportTransformedQueryResult>(
-    () => {
-      const autoMatchScore = Number.parseFloat((_.filter(data, (t) => t.manualMatch !== true).length / data.length).toFixed(2))
-      return {
-        data,
-        loading: query.loading,
-        preset: (preset?.text || '').toLowerCase(),
-        hours: getSum(data, 'duration').toFixed(0),
-        projects: _.unique(data, (t) => t.project?.name).length,
-        autoMatchScore: {
-          value: autoMatchScore,
-          validationMessage: autoMatchScore < 0.7
+  return useMemo<UserReportTransformedQueryResult>(() => {
+    const autoMatchScore = Number.parseFloat(
+      (
+        _.filter(data, (t) => t.manualMatch !== true).length / data.length
+      ).toFixed(2)
+    )
+    return {
+      data,
+      loading: query.loading,
+      preset: (preset?.text || '').toLowerCase(),
+      hours: getSum(data, 'duration').toFixed(0),
+      projects: _.unique(data, (t) => t.project?.name).length,
+      autoMatchScore: {
+        value: autoMatchScore,
+        validationMessage:
+          autoMatchScore < 0.7
             ? t('common.autoMatchError')
-            : (autoMatchScore < 0.85
-              ? t('common.autoMatchWarning')
-              : (autoMatchScore >= 0.95
-                && t('common.autoMatchSuccess'))),
-          validationState: (autoMatchScore < 0.7 ? 'error' : (autoMatchScore < 0.85 ? 'warning' : 'success'))
-        }
+            : autoMatchScore < 0.85
+            ? t('common.autoMatchWarning')
+            : autoMatchScore >= 0.95 && t('common.autoMatchSuccess'),
+        validationState:
+          autoMatchScore < 0.7
+            ? 'error'
+            : autoMatchScore < 0.85
+            ? 'warning'
+            : 'success'
       }
-    },
-    [data]
-  )
+    }
+  }, [data])
 }

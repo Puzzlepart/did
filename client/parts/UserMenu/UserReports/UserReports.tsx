@@ -1,5 +1,10 @@
 import { ChoiceGroup } from '@fluentui/react'
-import { Skeleton, SkeletonItem, Field, ProgressBar } from '@fluentui/react-components'
+import {
+  Skeleton,
+  SkeletonItem,
+  Field,
+  ProgressBar
+} from '@fluentui/react-components'
 import { Markdown, Panel } from 'components'
 import { UserMessage } from 'components/UserMessage'
 import React, { FC } from 'react'
@@ -50,16 +55,18 @@ export const UserReports: FC = () => {
             {preset && (
               <Field
                 label={t('common.autoMatchScoreLabel')}
-                hint={(
+                hint={
                   <Markdown
                     text={t('common.autoMatchScoreHint', {
                       autoMatch: query.autoMatchScore.value * 100,
-                      manualMatch: 100 - (query.autoMatchScore.value * 100)
-                    })} />
-                )}
+                      manualMatch: 100 - query.autoMatchScore.value * 100
+                    })}
+                  />
+                }
                 validationMessage={query.autoMatchScore.validationMessage}
                 validationState={query.autoMatchScore.validationState}
-                hidden={!preset}>
+                hidden={!preset}
+              >
                 <ProgressBar value={query.autoMatchScore.value} />
               </Field>
             )}
