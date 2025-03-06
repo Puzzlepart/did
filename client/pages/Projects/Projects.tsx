@@ -11,7 +11,8 @@ import { useProjects } from './useProjects'
  * @category Function Component
  */
 export const Projects: FC = () => {
-  const { t, context, renderDetails, defaultTab, createListProps } = useProjects()
+  const { t, context, renderDetails, defaultTab, createListProps } =
+    useProjects()
 
   return (
     <ProjectsContext.Provider value={{ ...context }}>
@@ -21,11 +22,7 @@ export const Projects: FC = () => {
         <Tabs
           defaultSelectedValue={defaultTab}
           items={{
-            s: [
-              ProjectList,
-              t('common.search'),
-              createListProps('s')
-            ],
+            s: [ProjectList, t('common.search'), createListProps('s')],
             m: [
               ProjectList,
               t('projects.myProjectsText'),

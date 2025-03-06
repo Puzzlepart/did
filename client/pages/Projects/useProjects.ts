@@ -49,14 +49,16 @@ export function useProjects() {
    *   - `placeholder`: A function to get the placeholder text for the search box, based on the type and the number of original items in the state.
    */
   const createListProps = (type: 'm' | 's'): IProjectListProps => {
-    const placeholder: IProjectListProps['searchBox']['placeholder'] = state => {
+    const placeholder: IProjectListProps['searchBox']['placeholder'] = (
+      state
+    ) => {
       return type === 'm'
         ? t('projects.myProjectsSearchPlaceholder', {
-          count: state.origItems?.length ?? 0
-        })
+            count: state.origItems?.length ?? 0
+          })
         : t('projects.searchPlaceholder', {
-          count: state.origItems?.length ?? 0
-        })
+            count: state.origItems?.length ?? 0
+          })
     }
     return {
       getKey: (item) => item?.tag,
