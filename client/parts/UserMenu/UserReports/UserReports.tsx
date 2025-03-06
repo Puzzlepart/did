@@ -1,6 +1,6 @@
 import { ChoiceGroup } from '@fluentui/react'
-import { Skeleton, SkeletonItem } from '@fluentui/react-components'
-import { Panel } from 'components'
+import { Skeleton, SkeletonItem, Field, ProgressBar } from '@fluentui/react-components'
+import { Markdown, Panel } from 'components'
 import { UserMessage } from 'components/UserMessage'
 import React, { FC } from 'react'
 import { BrowserView } from 'react-device-detect'
@@ -35,16 +35,35 @@ export const UserReports: FC = () => {
             <SkeletonItem style={{ height: 66 }} />
           </Skeleton>
         ) : (
-          <UserMessage
-            hidden={!preset}
-            text={t('common.userReportSummary', query)}
-            action={{
-              iconName: 'ExcelDocument',
-              iconColor: '#217346',
-              text: t('common.exportExcel'),
-              onClick: onExport
-            }}
-          />
+          <div>
+            <UserMessage
+              style={{ maxHeight: 180 }}
+              hidden={!preset}
+              text={t('common.userReportSummary', query)}
+              action={{
+                iconName: 'ExcelDocument',
+                iconColor: '#217346',
+                text: t('common.exportExcel'),
+                onClick: onExport
+              }}
+            />
+            {preset && (
+              <Field
+                label={t('common.autoMatchScoreLabel')}
+                hint={(
+                  <Markdown
+                    text={t('common.autoMatchScoreHint', {
+                      autoMatch: query.autoMatchScore.value * 100,
+                      manualMatch: 100 - (query.autoMatchScore.value * 100)
+                    })} />
+                )}
+                validationMessage={query.autoMatchScore.validationMessage}
+                validationState={query.autoMatchScore.validationState}
+                hidden={!preset}>
+                <ProgressBar value={query.autoMatchScore.value} />
+              </Field>
+            )}
+          </div>
         )}
       </Panel>
     </BrowserView>

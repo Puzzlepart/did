@@ -1,5 +1,4 @@
-import { mergeClasses } from '@fluentui/react-components'
-import { SearchBox } from '@fluentui/react-search-preview'
+import { mergeClasses, SearchBox } from '@fluentui/react-components'
 import { DynamicButton } from 'components/DynamicButton'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -8,7 +7,7 @@ import { IDynamicSearchBoxProps } from './types'
 import { useDynamicSearchBox } from './useDynamicSearchBox'
 
 /**
- * DynamicSearchBox is a wrapper around the `SearchBox` component from `@fluentui/react-search-preview`
+ * DynamicSearchBox is a wrapper around the `SearchBox` component from `@fluentui/react-components`
  * enabling proper clearing of the search box. It also has default appearance of `underline` and
  * fills the width of the parent container.
  *

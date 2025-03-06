@@ -22,8 +22,11 @@
     }
 
     .searchBox {
-        min-width: calc(100% - 16px);
-        box-sizing: border-box;
-        margin: 12px 0 12px 12px;
+        min-width: 600px;
+        &.fullWidth {
+            min-width: calc(100% - 16px);
+            box-sizing: border-box;
+            margin: 12px 0 12px 12px;
+        }
     }
 }

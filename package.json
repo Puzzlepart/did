@@ -51,7 +51,6 @@
     "@fluentui/react-components": "9.53.0",
     "@fluentui/react-datepicker-compat": "0.4.39",
     "@fluentui/react-portal-compat": "9.0.147",
-    "@fluentui/react-search-preview": "0.2.0",
     "@fluentui/react-tags-preview": "0.4.0",
     "@microsoft/microsoft-graph-client": "2.2.1",
     "@octokit/auth-app": "3.3.0",

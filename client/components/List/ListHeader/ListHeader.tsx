@@ -1,12 +1,11 @@
 import { merge } from '@fluentui/react'
-import { mergeClasses, SearchBox } from '@fluentui/react-components'
-import _ from 'lodash'
+import { mergeClasses } from '@fluentui/react-components'
 import React, { useRef } from 'react'
 import { StyledComponent } from 'types'
 import { useListContext } from '../context'
-import { ListToolbar } from './ListToolbar'
-import { EXECUTE_SEARCH } from '../reducer'
 import styles from './ListHeader.module.scss'
+import { ListToolbar } from './ListToolbar'
+import { SearchBox } from './SearchBox'
 import { IListHeaderProps } from './types'
 
 export const ListHeader: StyledComponent<IListHeaderProps> = ({
@@ -62,21 +61,7 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
       )}
     >
       {context.props.searchBox?.fullWidth && (
-        <SearchBox
-          {..._.omit(context.props.searchBox, 'placeholder', 'fullWidth')}
-          placeholder={
-            _.isFunction(context.props.searchBox.placeholder)
-              ? context.props.searchBox.placeholder(context.state)
-              : context.props.searchBox.placeholder
-          }
-          className={styles.searchBox}
-          defaultValue={context.state.searchTerm}
-          onChange={(_event, data) => {
-            if (context.props.searchBox.onChange)
-              context.props.searchBox.onChange(_event, data)
-            context.dispatch(EXECUTE_SEARCH({ searchTerm: data?.value }))
-          }}
-        />
+        <SearchBox {...context.props.searchBox} />
       )}
       {!hideToolbar && <ListToolbar />}
       {defaultRender(mergedHeaderProps)}

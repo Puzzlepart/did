@@ -1,4 +1,4 @@
-import { SearchBoxProps } from '@fluentui/react-search-preview'
+import { SearchBoxProps } from '@fluentui/react-components'
 import { FluentIconName } from 'utils'
 
 /**

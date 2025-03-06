@@ -823,7 +823,12 @@
     "refreshText": "Refresh the page",
     "noResults": "No elements are available. This may be due to active filters or because there are no elements to display.",
     "noResultsWithCriteria": "No items match your search criteria **{{searchTerm}}**.",
-    "estimatedIncome": "Estimated income"
+    "estimatedIncome": "Estimated income",
+    "autoMatchScoreLabel": "Automatic Matching Score",
+    "autoMatchScoreHint": "You have auto-matched **{{autoMatch}}%** of the total entries, meaning that **{{manualMatch}}%** of the entries have been matched to a project manually in the application.",
+    "autoMatchWarning": "The automatic matching score is below 85%. To improve accuracy, please ensure your Outlook calendar events are consistently categorized and consider adding the relevant project tag to the subject or body of your events.",
+    "autoMatchError": "The automatic matching score is critically low (below 70%). To achieve better matching results, please categorize your Outlook events appropriately and include the correct project tag in the event subject or body.",
+    "autoMatchSuccess": "The automatic matching score is very high (above 95%). Your Outlook events appear well-structured with correct categories and project tags. Keep this up to ensure accurate time tracking."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

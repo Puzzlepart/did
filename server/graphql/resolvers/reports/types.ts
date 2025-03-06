@@ -67,6 +67,9 @@ export class TimeEntry {
 
   @Field(() => ProjectRole, { nullable: true })
   role: ProjectRole
+
+  @Field({ nullable: true })
+  manualMatch?: boolean
 }
 
 /**

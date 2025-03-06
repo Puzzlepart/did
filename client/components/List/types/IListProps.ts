@@ -6,7 +6,7 @@ import {
   IShimmeredDetailsListProps,
   SelectionMode
 } from '@fluentui/react'
-import { SearchBoxProps } from '@fluentui/react-search-preview'
+import { SearchBoxProps } from '@fluentui/react-components'
 import { CSSProperties, HTMLProps } from 'react'
 import { ListMenuItem } from '../ListHeader'
 import { IListColumn } from './IListColumn'
@@ -32,6 +32,11 @@ interface SearchBox extends Omit<SearchBoxProps, 'placeholder'> {
    * Placeholder text or function that returns the placeholder text.
    */
   placeholder?: string | ((state: IListState<any>) => string)
+
+  /**
+   * Delay in milliseconds before executing the search (default: 300).
+   */
+  searchDelayMs?: number
 }
 
 /**

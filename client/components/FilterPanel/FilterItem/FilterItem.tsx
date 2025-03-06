@@ -1,5 +1,4 @@
-import { Checkbox } from '@fluentui/react-components'
-import { SearchBox } from '@fluentui/react-search-preview'
+import { Checkbox,SearchBox } from '@fluentui/react-components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
