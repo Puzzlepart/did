@@ -28,6 +28,8 @@ import { PendingInvitations } from './PendingInvitations'
  * * See disabled users
  * * Add new users
  * * Edit users
+ * * Invite external users
+ * * See pending invitations
  *
  * @ignore
  */
@@ -68,7 +70,8 @@ export const Users: TabComponent<ITabProps> = () => {
                   SelectionMode.multiple,
                   (selected) =>
                     context.dispatch(SET_SELECTED_USERS(selected as User[]))
-                ]
+                ],
+                enableShimmer: context.state.loading
               } as IListProps<User>
             ],
             disabled: [
@@ -77,7 +80,8 @@ export const Users: TabComponent<ITabProps> = () => {
               {
                 items: context.state.disabledUsers,
                 columns: columns('disabled'),
-                selectionMode: SelectionMode.none
+                selectionMode: SelectionMode.none,
+                enableShimmer: context.state.loading
               }
             ],
             pendingInvitations: [
