@@ -1,5 +1,7 @@
+import _ from 'lodash'
+
 type CasePredicate<R = any> = (v: R) => boolean
-type Case<R = any, T = any> = [CasePredicate<R>, T]
+type Case<R = any, T = any> = [CasePredicate<R> | boolean, T]
 
 /**
  * Evaluates a value against a list of cases and returns the result of the first matching case.
@@ -20,5 +22,5 @@ export function switchCase<T, R>(
   value: T = null,
   defaultCase: R = null
 ): R | undefined {
-  return cases.find(([predicate]) => predicate(value))?.[1] ?? defaultCase
+  return cases.find(([predicate]) => _.isFunction(predicate) ? predicate(value) : predicate)?.[1] ?? defaultCase
 }
