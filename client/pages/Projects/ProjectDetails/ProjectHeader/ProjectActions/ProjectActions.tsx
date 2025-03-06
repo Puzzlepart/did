@@ -29,6 +29,7 @@ export const ProjectActions: StyledComponent = (props) => {
           onClick={() =>
             window.open(state.selected?.externalSystemURL, '_blank')
           }
+          disabled={!Boolean(state.selected)}
         />
         <DynamicButton
           hidden={!hasPermission($.DELETE_PROJECTS)}
@@ -36,6 +37,7 @@ export const ProjectActions: StyledComponent = (props) => {
           appearance='transparent'
           iconName='Delete'
           {...onDelete}
+          disabled={!Boolean(state.selected)}
         />
         <DynamicButton
           hidden={!hasPermission($.MANAGE_PROJECTS)}
@@ -43,6 +45,7 @@ export const ProjectActions: StyledComponent = (props) => {
           appearance='transparent'
           iconName='Edit'
           onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))}
+          disabled={!Boolean(state.selected)}
         />
       </div>
       {onDelete.dialog}

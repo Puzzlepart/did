@@ -174,7 +174,9 @@
     "deleteFailedTitle": "Sletting av prosjekt mislyktes",
     "deleteFailed": "En uventet feil oppstod under forsøket på å slette prosjektet **{{name}}**. Vennligst prøv igjen senere eller kontakt support hvis problemet vedvarer.",
     "deleteSuccessTitle": "Prosjekt slettet",
-    "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder."
+    "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder.",
+    "projecNotReadyOrNotFound": "Prosjektet er foreløpig ikke tilgjengelig. Hvis det nettopp ble opprettet, kan du prøve igjen om noen få øyeblikk. Ellers kan det hende at det ikke eksisterer.",
+    "projecNotReadyOrNotFoundTitle": "Prosjektet er utilgjengelig"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -811,7 +813,8 @@
     "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!",
     "pending": "Venter",
     "expired": "Utløpt",
-    "abort": "Avbryt"
+    "abort": "Avbryt",
+    "refreshText": "Last siden på nytt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

@@ -176,7 +176,10 @@
     "deleteFailed": "An unexpected error occurred while attempting to delete project **{{name}}**. Please try again later or contact support if the issue persists.",
     "deleteFailedTitle": "Project Deletion Failed",
     "deleteSuccessTitle": "Project Deleted Successfully",
-    "deleteSuccess": "Deletion of project **{{name}}** completed successfully. The project is no longer available in the system. You will be redirected to the Project page in 5 seonds."
+    "deleteSuccess": "Deletion of project **{{name}}** completed successfully. The project is no longer available in the system. You will be redirected to the Project page in 5 seonds.",
+    "projecNotReadyOrNotFound": "The project is currently unavailable. If it was just created, please try again in a few moments. Otherwise, it may not exist.",
+    "projecNotReadyOrNotFoundTitle": "Project Not Found or Still Processing",
+    "homeButtonLabel": "Go back to Projects page"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -813,7 +816,8 @@
     "dismiss": "Dismiss",
     "pending": "Pending",
     "expired": "Expired",
-    "abort": "Abort"
+    "abort": "Abort",
+    "refreshText": "Refresh the page"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
