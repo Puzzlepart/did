@@ -189,7 +189,7 @@
     "prettier": "3.0.3",
     "prettier-plugin-organize-imports": "3.2.3",
     "rimraf": "3.0.2",
-    "sexy-commits": "^0.3.17-6",
+    "sexy-commits": "0.3.17",
     "terser-webpack-plugin": "^5.3.6",
     "webpack-bundle-analyzer": "4.10.2",
     "webpack-livereload-plugin": "3.0.2"
