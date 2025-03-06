@@ -9,9 +9,9 @@ import { useProjectTimeEntriesSummary } from './useProjectTimeEntriesSummary'
 /**
  * @category Projects
  */
-export const ProjectTimeEntriesSummary: StyledComponent<IProjectTimeEntriesSummaryProps> = (
-  props
-) => {
+export const ProjectTimeEntriesSummary: StyledComponent<
+  IProjectTimeEntriesSummaryProps
+> = (props) => {
   const items = useProjectTimeEntriesSummary(props)
   return (
     <div className={ProjectTimeEntriesSummary.className} hidden={isMobile}>

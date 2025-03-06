@@ -1,5 +1,5 @@
 import { SelectionMode } from '@fluentui/react'
-import { List ,TabComponent,ListMenuItem} from 'components'
+import { List, TabComponent, ListMenuItem } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelForm } from './LabelForm/LabelForm'

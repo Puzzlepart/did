@@ -145,10 +145,13 @@ export function useSubscriptionConfig() {
         {
           id: 'enableInvoiceEstimation',
           type: 'bool',
-          hiddenIf: (settings: SubscriptionSettings) => !settings?.projects?.resourceMetadata?.includes('hourlyRate'),
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.projects?.resourceMetadata?.includes('hourlyRate'),
           props: {
             label: t('admin.budgetTrackingEnableInvoiceEstimationLabel'),
-            description: t('admin.budgetTrackingEnableInvoiceEstimationDescription')
+            description: t(
+              'admin.budgetTrackingEnableInvoiceEstimationDescription'
+            )
           }
         },
         {

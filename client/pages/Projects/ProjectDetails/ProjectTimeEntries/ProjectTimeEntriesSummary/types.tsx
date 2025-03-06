@@ -1,7 +1,8 @@
 import { HTMLProps } from 'react'
 import { TimeEntry } from 'types'
 
-export interface IProjectTimeEntriesSummaryProps extends HTMLProps<HTMLDivElement> {
+export interface IProjectTimeEntriesSummaryProps
+  extends HTMLProps<HTMLDivElement> {
   /**
    * The time entries.
    */

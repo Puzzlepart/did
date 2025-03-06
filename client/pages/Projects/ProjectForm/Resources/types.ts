@@ -1,16 +1,18 @@
-import { GetAdditionalMetadataFieldFunction, IInputFieldProps } from 'components'
+import {
+  GetAdditionalMetadataFieldFunction,
+  IInputFieldProps
+} from 'components'
 
-
-export const ProjectRoleField: GetAdditionalMetadataFieldFunction<Partial<IInputFieldProps>> = (
-  t
-) => ({
+export const ProjectRoleField: GetAdditionalMetadataFieldFunction<
+  Partial<IInputFieldProps>
+> = (t) => ({
   label: t('common.projectRole'),
   type: 'text'
 })
 
-export const HourlyRateField: GetAdditionalMetadataFieldFunction<Partial<IInputFieldProps>> = (
-  t
-) => ({
+export const HourlyRateField: GetAdditionalMetadataFieldFunction<
+  Partial<IInputFieldProps>
+> = (t) => ({
   label: t('common.hourlyRate'),
   type: 'number',
   renderAs: 'currency'

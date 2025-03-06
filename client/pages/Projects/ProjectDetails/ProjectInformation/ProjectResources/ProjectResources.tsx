@@ -7,7 +7,7 @@ import styles from './ProjectResources.module.scss'
 import { useProjectResources } from './useProjectResources'
 
 /**
- * Shows the project resources, including the project owner 
+ * Shows the project resources, including the project owner
  * and other resources for the project.
  *
  * @category Projects
@@ -25,13 +25,20 @@ export const ProjectResources: StyledComponent = () => {
         <div className={styles.projectResources}>
           <div className={styles.container}>
             {projectOwner && (
-              <UserColumn user={projectOwner} role={{ name: t('projects.projectOwner') }} />
+              <UserColumn
+                user={projectOwner}
+                role={{ name: t('projects.projectOwner') }}
+              />
             )}
             {resources.map((resource, index) => (
               <UserColumn
                 key={index}
                 user={resource}
-                role={{ name: resource.projectRole, hourlyRate: resource.hourlyRate }} />
+                role={{
+                  name: resource.projectRole,
+                  hourlyRate: resource.hourlyRate
+                }}
+              />
             ))}
           </div>
         </div>

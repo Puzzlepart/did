@@ -4,7 +4,7 @@ import { AdditionalMetadataField, IUserPickerProps } from './UserPicker'
 
 export interface IUserPickerControlProps
   extends FormInputControlBase,
-  IUserPickerProps { }
+    IUserPickerProps {}
 
 /**
  * Represents a function that retrieves an additional metadata field

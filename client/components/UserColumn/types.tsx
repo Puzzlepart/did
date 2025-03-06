@@ -2,7 +2,8 @@ import { PersonaProps } from '@fluentui/react-components'
 import { HTMLAttributes } from 'react'
 import { ProjectRole, User } from 'types'
 
-export interface IUserColumnProps extends Omit<HTMLAttributes<HTMLDivElement>, 'role'> {
+export interface IUserColumnProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'role'> {
   /**
    * User to display
    */

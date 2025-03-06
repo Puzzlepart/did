@@ -48,7 +48,9 @@ export const ProjectTimeEntries: StyledComponent = () => {
             name: t('common.employeeLabel'),
             minWidth: 100,
             maxWidth: 150,
-            onRender: ({ resource, role }) => <UserColumn user={resource} role={role} />
+            onRender: ({ resource, role }) => (
+              <UserColumn user={resource} role={role} />
+            )
           }
         ]}
         dateFormat='MMM DD YYYY HH:mm'

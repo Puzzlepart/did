@@ -1,5 +1,5 @@
 import { SelectionMode } from '@fluentui/react'
-import { List,ListMenuItem } from 'components'
+import { List, ListMenuItem } from 'components'
 import { ITabProps } from 'components/Tabs/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
