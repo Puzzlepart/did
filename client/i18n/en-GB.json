@@ -172,7 +172,11 @@
     "deleteCheckLabel": "Verifying associated time entries",
     "deleteCheckHint": "We are checking whether this project has any associated time entries. This process may take some time depending on the total number of entries...",
     "checkSuccess": "No time entries found. The project can be safely deleted.",
-    "checkButtonLabel": "Go ahead"
+    "checkButtonLabel": "Go ahead",
+    "deleteFailed": "An unexpected error occurred while attempting to delete project **{{name}}**. Please try again later or contact support if the issue persists.",
+    "deleteFailedTitle": "Project Deletion Failed",
+    "deleteSuccessTitle": "Project Deleted Successfully",
+    "deleteSuccess": "Deletion of project **{{name}}** completed successfully. The project is no longer available in the system. You will be redirected to the Project page in 5 seonds."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

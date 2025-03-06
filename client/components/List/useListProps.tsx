@@ -56,6 +56,7 @@ export function useListProps({
       })
     : items
   return {
+    getKey: context.props.getKey,
     setKey: context.props.setKey,
     styles: context.props.styles,
     enableShimmer: context.props.enableShimmer,

@@ -1,3 +1,5 @@
+import { Project } from 'types'
+
 export type DialogState =
   | 'hidden'
   | 'initial'
@@ -26,5 +28,5 @@ export interface IProjectDeleteDialogProps {
    */
   loading: boolean
 
-  onDelete: () => void
+  onDelete: (project: Project) => void
 }

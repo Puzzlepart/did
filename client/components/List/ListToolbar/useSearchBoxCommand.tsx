@@ -13,9 +13,11 @@ export function useSearchBoxCommand() {
     onRender: () => (
       <SearchBox
         {..._.omit(context.props.searchBox, 'placeholder', 'fullWidth')}
-        placeholder={_.isFunction(context.props.searchBox.placeholder)
-          ? context.props.searchBox.placeholder(context.state)
-          : context.props.searchBox.placeholder}
+        placeholder={
+          _.isFunction(context.props.searchBox.placeholder)
+            ? context.props.searchBox.placeholder(context.state)
+            : context.props.searchBox.placeholder
+        }
         style={{
           minWidth: '600px'
         }}

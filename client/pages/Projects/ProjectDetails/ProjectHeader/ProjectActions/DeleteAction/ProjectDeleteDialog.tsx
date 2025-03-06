@@ -79,7 +79,7 @@ export const ProjectDeleteDialog: FC<IProjectDeleteDialogProps> = ({
               appearance='primary'
               disabled={loading || isError}
               onClick={() => {
-                if (isSuccess) onDelete()
+                if (isSuccess) onDelete(context.state.selected)
                 else setState('checking')
               }}
             >

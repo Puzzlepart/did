@@ -27,12 +27,14 @@ export const Projects: FC = () => {
               ProjectList,
               t('common.search'),
               {
+                getKey: (item) => item?.tag,
                 enableShimmer: context.loading,
                 searchBox: {
                   disabled: context.loading,
-                  placeholder: state => t('projects.searchPlaceholder', {
-                    count: state.origItems?.length ?? 0
-                  })
+                  placeholder: (state) =>
+                    t('projects.searchPlaceholder', {
+                      count: state.origItems?.length ?? 0
+                    })
                 }
               } as IProjectListProps
             ],
@@ -40,10 +42,14 @@ export const Projects: FC = () => {
               ProjectList,
               t('projects.myProjectsText'),
               {
+                getKey: (item) => item?.tag,
                 enableShimmer: context.loading,
                 searchBox: {
                   disabled: context.loading,
-                  placeholder: state => t('projects.myProjectsSearchPlaceholder', { count: state.origItems?.length ?? 0 })
+                  placeholder: (state) =>
+                    t('projects.myProjectsSearchPlaceholder', {
+                      count: state.origItems?.length ?? 0
+                    })
                 }
               } as IProjectListProps
             ],

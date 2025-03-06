@@ -52,7 +52,7 @@ export interface IAppContext extends IAppProps {
     intent?: IToastProps['intent'],
     duration?: number,
     additionalProps?: Partial<IToastProps>
-  ) => void
+  ) => Promise<void>
 }
 
 export const AppContext = createContext<IAppContext>(null)

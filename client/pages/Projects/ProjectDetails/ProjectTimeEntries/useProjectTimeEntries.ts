@@ -24,7 +24,8 @@ export function useProjectTimeEntries() {
   })
 
   return {
-    loading,
+    loading: loading || !Boolean(state.selected),
+    selected: state.selected,
     error,
     onExport,
     timeEntries,

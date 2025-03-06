@@ -8,6 +8,7 @@ import {
   CLOSE_EDIT_PANEL,
   DATA_UPDATED,
   OPEN_EDIT_PANEL,
+  PROJECT_DELETE_SUCCESS,
   SET_SELECTED_PROJECT
 } from './actions'
 import { Project } from 'types'
@@ -60,6 +61,10 @@ export function useProjectsReducer() {
       })
       .addCase(CLOSE_EDIT_PANEL, (state) => {
         state.editProject = null
+      })
+      .addCase(PROJECT_DELETE_SUCCESS, (state) => {
+        state.selected = null
+        document.location.replace('/projects')
       })
   )
 }

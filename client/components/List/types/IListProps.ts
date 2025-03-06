@@ -40,7 +40,7 @@ interface SearchBox extends Omit<SearchBoxProps, 'placeholder'> {
 
 export interface IListProps<T = any>
   extends Pick<HTMLProps<HTMLDivElement>, 'className'>,
-  Omit<IShimmeredDetailsListProps, 'selectionMode'> {
+    Omit<IShimmeredDetailsListProps, 'selectionMode'> {
   /**
    * Items
    */
