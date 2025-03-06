@@ -1,5 +1,5 @@
 import { EventList, UserColumn, UserMessage } from 'components'
-import { ListMenuItem } from 'components/List/ListToolbar'
+import { ListMenuItem } from 'components/List'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
@@ -48,7 +48,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
             name: t('common.employeeLabel'),
             minWidth: 100,
             maxWidth: 150,
-            onRender: ({ resource }) => <UserColumn user={resource} />
+            onRender: ({ resource, role }) => <UserColumn user={resource} role={role} />
           }
         ]}
         dateFormat='MMM DD YYYY HH:mm'

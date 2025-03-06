@@ -15,7 +15,7 @@ export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'>> = ({
   return (
     <div
       className={EmptyMessage.className}
-      hidden={context.props.enableShimmer || items?.length > 0}
+      hidden={context.props.enableShimmer || items?.length > 0 || context.props.hideEmptyMessage}
     >
       <Markdown
         text={

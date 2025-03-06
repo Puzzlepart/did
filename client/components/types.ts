@@ -7,5 +7,5 @@ import { StyledComponent } from 'types'
  * @extends StyledComponent
  */
 export type ReusableComponent<
-  T extends Omit<HTMLAttributes<any>, 'onChange' | 'defaultChecked'>
+  T extends Omit<HTMLAttributes<any>, 'onChange' | 'defaultChecked' | 'role'>
 > = StyledComponent<T>

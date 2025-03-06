@@ -1,8 +1,8 @@
 import { ICommandBarItemProps } from '@fluentui/react'
 import { SearchBox } from '@fluentui/react-search-preview'
 import React from 'react'
-import { useListContext } from '../context'
-import { EXECUTE_SEARCH } from '../reducer'
+import { useListContext } from '../../context'
+import { EXECUTE_SEARCH } from '../../reducer'
 import _ from 'lodash'
 import { ListMenuItem } from './ListMenuItem'
 

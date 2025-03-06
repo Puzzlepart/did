@@ -1,6 +1,6 @@
 export * from './ItemColumn'
 export * from './List'
-export * from './ListToolbar'
+export * from './ListHeader'
 export * from './types'
 export * from './useList'
 export * from './useListGroups'

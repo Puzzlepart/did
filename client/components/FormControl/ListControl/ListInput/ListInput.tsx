@@ -29,6 +29,8 @@ ListInput.className = styles.listInput
 ListInput.defaultProps = {
   onChange: () => {
     // Nothing happens on change if not provided.
+    // At least until we have world peace and
+    // a working copy of the infinite improbability drive.
   },
   fields: []
 }

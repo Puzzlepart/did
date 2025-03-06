@@ -19,6 +19,7 @@ export function useOverview() {
   const listGroupProps = useListGroupProps()
   const eventListProps: IEventListProps = {
     hideToolbar: true,
+    hideEmptyMessage: true,
     enableShimmer: !!state.loading,
     hidden: !!state.error,
     items: [],

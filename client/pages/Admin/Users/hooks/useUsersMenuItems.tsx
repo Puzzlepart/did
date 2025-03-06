@@ -1,5 +1,4 @@
-import { ListMenuItem } from 'components/List/ListToolbar'
-import { Progress } from 'components/Progress'
+import { ListMenuItem, Progress } from 'components'
 import { usePermissions } from 'hooks/user/usePermissions'
 import _ from 'lodash'
 import React, { useMemo } from 'react'

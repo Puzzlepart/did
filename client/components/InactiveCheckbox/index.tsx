@@ -3,7 +3,7 @@ import {
   CheckboxProps,
   SwitchProps
 } from '@fluentui/react-components'
-import { ListMenuItem, ListMenuItemGroup } from 'components/List/ListToolbar'
+import { ListMenuItem, ListMenuItemGroup } from 'components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './InactiveCheckbox.module.scss'

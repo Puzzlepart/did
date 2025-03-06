@@ -1,7 +1,5 @@
 import { SelectionMode } from '@fluentui/react'
-import { List } from 'components'
-import { ListMenuItem } from 'components/List/ListToolbar'
-import { TabComponent } from 'components/Tabs'
+import { List ,ListMenuItem,TabComponent} from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ReportLinks.module.scss'

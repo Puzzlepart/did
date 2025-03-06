@@ -51,6 +51,7 @@ query UserContext {
         keyMaxLength
         enableResourceManagement
         resourceMetadata
+        enableInvoiceEstimation
         enableProjectRoles
         enableSimpleHierachy
         autoLoadTimeEntries

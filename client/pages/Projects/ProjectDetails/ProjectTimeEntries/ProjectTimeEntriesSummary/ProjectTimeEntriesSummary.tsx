@@ -3,16 +3,16 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { StyledComponent } from 'types'
 import styles from './ProjectTimeEntriesSummary.module.scss'
-import { ISummaryProps } from './types'
-import { useSummary } from './useSummary'
+import { IProjectTimeEntriesSummaryProps } from './types'
+import { useProjectTimeEntriesSummary } from './useProjectTimeEntriesSummary'
 
 /**
  * @category Projects
  */
-export const ProjectTimeEntriesSummary: StyledComponent<ISummaryProps> = (
+export const ProjectTimeEntriesSummary: StyledComponent<IProjectTimeEntriesSummaryProps> = (
   props
 ) => {
-  const items = useSummary(props)
+  const items = useProjectTimeEntriesSummary(props)
   return (
     <div className={ProjectTimeEntriesSummary.className} hidden={isMobile}>
       <div className={styles.container}>

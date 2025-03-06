@@ -1,14 +1,14 @@
-import { Persona } from '@fluentui/react-components'
-import { InformationProperty } from 'components'
+import { InformationProperty, UserColumn } from 'components'
+import _ from 'lodash'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import styles from './ProjectResources.module.scss'
 import { useProjectResources } from './useProjectResources'
-import { useTranslation } from 'react-i18next'
-import _ from 'lodash'
 
 /**
- * Shows details about the selected project.
+ * Shows the project resources, including the project owner 
+ * and other resources for the project.
  *
  * @category Projects
  */
@@ -25,31 +25,13 @@ export const ProjectResources: StyledComponent = () => {
         <div className={styles.projectResources}>
           <div className={styles.container}>
             {projectOwner && (
-              <Persona
-                primaryText={projectOwner.displayName}
-                secondaryText='Prosjekteier'
-                avatar={{
-                  image: {
-                    src: projectOwner.photo?.base64
-                  }
-                }}
-              />
+              <UserColumn user={projectOwner} role={{ name: t('projects.projectOwner') }} />
             )}
             {resources.map((resource, index) => (
-              <Persona
+              <UserColumn
                 key={index}
-                primaryText={resource.displayName}
-                secondaryText={resource.projectRole}
-                tertiaryText={
-                  resource.hourlyRate &&
-                  t('projects.hourlyRate', { rate: resource.hourlyRate })
-                }
-                avatar={{
-                  image: {
-                    src: resource.photo?.base64
-                  }
-                }}
-              />
+                user={resource}
+                role={{ name: resource.projectRole, hourlyRate: resource.hourlyRate }} />
             ))}
           </div>
         </div>

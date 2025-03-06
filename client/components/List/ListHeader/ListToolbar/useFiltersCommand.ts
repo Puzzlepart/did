@@ -1,7 +1,7 @@
 import { ICommandBarItemProps } from '@fluentui/react'
 import _ from 'underscore'
-import { useListContext } from '../context'
-import { TOGGLE_FILTER_PANEL } from '../reducer'
+import { useListContext } from '../../context'
+import { TOGGLE_FILTER_PANEL } from '../../reducer'
 import { ListMenuItem } from './ListMenuItem'
 
 /**
