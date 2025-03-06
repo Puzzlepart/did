@@ -155,7 +155,9 @@ export class MongoDocumentService<T> {
     const documents = documents_.map((document_) => ({
       ...document_,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      createdBy: this.context.user?.id,
+      updatedBy: this.context.user?.id
     }))
     return this.collection.insertMany(documents)
   }
@@ -173,7 +175,9 @@ export class MongoDocumentService<T> {
     return this.collection.insertOne({
       ...document,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      createdBy: this.context.user?.id,
+      updatedBy: this.context.user?.id
     })
   }
 
@@ -190,7 +194,8 @@ export class MongoDocumentService<T> {
     return this.collection.updateOne(query, {
       $set: {
         ...document,
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        updatedBy: this.context.user?.id
       }
     })
   }
