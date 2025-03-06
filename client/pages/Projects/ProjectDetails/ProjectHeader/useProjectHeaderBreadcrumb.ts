@@ -32,14 +32,15 @@ export function useProjectHeaderBreadcrumb() {
       },
       {
         value: state.selected?.customer.name ?? '...',
-        onClick: Boolean(state.selected) && (() =>
-          history.replace(
-            createRouterLink('/customers/{{key}}', state.selected?.customer)
-          )
-        )
+        onClick:
+          Boolean(state.selected) &&
+          (() =>
+            history.replace(
+              createRouterLink('/customers/{{key}}', state.selected?.customer)
+            ))
       },
       {
-        value: state.selected?.name ?? '...',
+        value: state.selected?.name ?? '...'
       },
       {
         value: detailsTab
