@@ -10,7 +10,7 @@ jobs:
     name: Package did
     runs-on: ubuntu-latest
     concurrency: 
-      group: ${{ github.ref }}_on_push_staging_deploy
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
 
     steps:

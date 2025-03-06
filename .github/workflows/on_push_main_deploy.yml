@@ -19,7 +19,7 @@ jobs:
     name: Package did
     runs-on: ubuntu-latest
     concurrency: 
-      group: ${{ github.ref }}_on_push_main_deploy
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
