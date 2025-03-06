@@ -1,4 +1,4 @@
-import { PersonaProps } from '@fluentui/react-components'
+import { PersonaProps, TagProps } from '@fluentui/react-components'
 import { HTMLAttributes } from 'react'
 import { ProjectRole, User } from 'types'
 
@@ -26,4 +26,9 @@ export interface IUserColumnProps
    * a role in the project.
    */
   role?: Partial<ProjectRole>
+
+  /**
+   * Props for the secondary text.
+   */
+  secondaryText?: TagProps
 }
