@@ -54,7 +54,9 @@ export const UserReports: FC = () => {
             />
             {preset && (
               <Field
-                label={t('common.autoMatchScoreLabel', {score: query.autoMatchScore.value * 100})}
+                label={t('common.autoMatchScoreLabel', {
+                  score: query.autoMatchScore.value * 100
+                })}
                 hint={
                   <Markdown
                     text={t('common.autoMatchScoreHint', {
