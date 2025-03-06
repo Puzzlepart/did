@@ -1,4 +1,4 @@
-import { ListMenuItem } from 'components/List/ListToolbar'
+import { ListMenuItem } from 'components/List'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'

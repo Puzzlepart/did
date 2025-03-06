@@ -8,7 +8,7 @@ import {
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-search-preview'
 import { CSSProperties, HTMLProps } from 'react'
-import { ListMenuItem } from '../ListToolbar'
+import { ListMenuItem } from '../ListHeader'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
 import { ListFilterState } from './ListFilterState'
@@ -148,4 +148,9 @@ export interface IListProps<T = any>
    * uppercase letters, some letter spacing and text shadows.
    */
   minmalHeaderColumns?: boolean
+
+  /**
+   * Always hide the empty message, even if there are no items.
+   */
+  hideEmptyMessage?: boolean
 }

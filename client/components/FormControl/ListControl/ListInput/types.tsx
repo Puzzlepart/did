@@ -8,6 +8,7 @@ export type ListField<P = Record<string, any>> = {
   renderAs?: 'currency' | 'boolean'
   defaultValue?: string
   required?: boolean
+  maxWidth?: number
   props?: P
 }
 

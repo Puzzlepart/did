@@ -1,12 +1,12 @@
 /* eslint-disable unicorn/prevent-abbreviations */
+import { Button } from '@fluentui/react-components'
+import { IListColumn, List } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useUserPickerContext } from '../context'
-import { IListColumn, List } from 'components'
-import { UserMetadataCell } from './UserMetadataCell'
 import { User } from 'types'
-import { Button } from '@fluentui/react-components'
 import { getFluentIcon } from 'utils'
+import { useUserPickerContext } from '../context'
+import { UserMetadataCell } from './UserMetadataCell'
 
 export const SelectedUsersList: FC = () => {
   const { t } = useTranslation()

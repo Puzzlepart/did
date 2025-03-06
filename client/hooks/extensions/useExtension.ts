@@ -19,7 +19,7 @@ export function useExtension<T = any, R = any>(
   key?: string,
   defaultValue = null,
   mergeWithDefault = false
-) {
+): R {
   if (!key) {
     const value = _.get(
       entity,

@@ -17,7 +17,7 @@ export const useProjectResources = () => {
     context.state.selected,
     Resources.extensionId,
     undefined,
-    {
+    { 
       projectOwner: null,
       resources: []
     },

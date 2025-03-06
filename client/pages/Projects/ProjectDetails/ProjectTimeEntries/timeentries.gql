@@ -10,6 +10,10 @@
       endDateTime
       resource {
         id
+      }   
+      role {
+        name
+        hourlyRate
       }
     }
     users: users {

@@ -19,7 +19,7 @@ export const ItemsList: FC = () => {
           fieldName: field.key,
           name: field.label,
           minWidth: 100,
-          maxWidth: 150,
+          maxWidth: field.maxWidth ?? 140,
           onRender: (item: any, index: number) => (
             <ItemCell index={index} field={field} value={item[field.key]} />
           )

@@ -22,6 +22,7 @@ export const EventList: ReusableComponent<IEventListProps> = (props) => {
           props,
           'items',
           'hideToolbar',
+          'hideEmptyMessage',
           'enableShimmer',
           'listGroupProps',
           'menuItems',

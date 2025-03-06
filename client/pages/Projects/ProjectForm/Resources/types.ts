@@ -1,28 +1,14 @@
-import { IInputFieldProps } from 'components'
-import { AdditionalMetadataField } from 'components/FormControl/UserPickerControl/UserPicker'
-import { TFunction } from 'i18next'
+import { GetAdditionalMetadataFieldFunction, IInputFieldProps } from 'components'
 
-/**
- * Represents a function that retrieves an additional metadata field.
- *
- * @param t - The translation function.
- * @param args - Additional arguments for the function.
- *
- * @returns The additional metadata field.
- */
-export type GetFieldFunction<P> = (
-  t: TFunction,
-  ...args: any[]
-) => AdditionalMetadataField<P>
 
-export const ProjectRoleField: GetFieldFunction<Partial<IInputFieldProps>> = (
+export const ProjectRoleField: GetAdditionalMetadataFieldFunction<Partial<IInputFieldProps>> = (
   t
 ) => ({
   label: t('common.projectRole'),
   type: 'text'
 })
 
-export const HourlyRateField: GetFieldFunction<Partial<IInputFieldProps>> = (
+export const HourlyRateField: GetAdditionalMetadataFieldFunction<Partial<IInputFieldProps>> = (
   t
 ) => ({
   label: t('common.hourlyRate'),
