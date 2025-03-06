@@ -9,6 +9,11 @@ export type DialogState =
 
 export interface IProjectDeleteDialogProps {
   /**
+   * The project to delete.
+   */
+  project: Project
+  
+  /**
    * The current state of the dialog.
    */
   state: DialogState

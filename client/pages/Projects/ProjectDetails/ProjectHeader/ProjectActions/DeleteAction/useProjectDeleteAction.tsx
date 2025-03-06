@@ -98,6 +98,7 @@ export function useProjectDeleteAction() {
 
     const dialog = (
         <ProjectDeleteDialog
+            project={context.state.selected}
             state={dialogState}
             setState={setDialogState}
             message={message}
