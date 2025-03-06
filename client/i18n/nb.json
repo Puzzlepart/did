@@ -176,9 +176,7 @@
     "deleteSuccessTitle": "Prosjekt slettet",
     "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder.",
     "projecNotReadyOrNotFound": "Prosjektet er foreløpig ikke tilgjengelig. Hvis det nettopp ble opprettet, kan du prøve igjen om noen få øyeblikk. Ellers kan det hende at det ikke eksisterer.",
-    "projecNotReadyOrNotFoundTitle": "Prosjektet er utilgjengelig",
-    "noProjectResults": "Ingen elementer samsvarer med søkekriteriene dine **{{searchTerm}}**.",
-    "noProjects": "Ingen prosjekter er tilgjengelige. Dette kan skyldes aktive filtre eller at det ikke finnes noen prosjekter å vise. Vennligst kontroller filtrene dine eller prøv igjen senere."
+    "projecNotReadyOrNotFoundTitle": "Prosjektet er utilgjengelig"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -816,7 +814,9 @@
     "pending": "Venter",
     "expired": "Utløpt",
     "abort": "Avbryt",
-    "refreshText": "Last siden på nytt"
+    "refreshText": "Last siden på nytt",
+    "noResults": "Ingen elementer tilgjengelig. Dette kan skyldes aktive filtre eller at det ikke finnes noen elementer å vise.",
+    "noResultsWithCriteria": "Ingen elementer samsvarer med søkekriteriene dine **{{searchTerm}}**."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

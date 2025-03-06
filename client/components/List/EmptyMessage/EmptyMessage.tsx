@@ -20,8 +20,8 @@ export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'>> = ({
       <Markdown
         text={
           context.state.searchTerm?.length > 0
-            ? t('projects.noProjectResults', context.state)
-            : t('projects.noProjects')
+            ? t('common.noResultsWithCriteria', context.state)
+            : t('common.noResults')
         }
       />
     </div>
