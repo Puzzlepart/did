@@ -65,7 +65,7 @@ export function useUserReportQuery(
             [s => s < 0.7, 'error'],
             [s => s < 0.85, 'warning'],
             [s => s >= 0.95, 'success']
-          ])
+          ], 'none')
         }
       }
     },
