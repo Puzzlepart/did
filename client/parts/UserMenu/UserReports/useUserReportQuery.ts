@@ -2,7 +2,7 @@ import { WatchQueryFetchPolicy, useQuery } from '@apollo/client'
 import { useMemo } from 'react'
 import { TimeEntry } from 'types'
 import _ from 'underscore'
-import { getSum } from 'utils/getSum'
+import { getSum, switchCase } from 'utils'
 import { default_query } from './queries'
 import { useTranslation } from 'react-i18next'
 import { FieldProps, ProgressBarProps } from '@fluentui/react-components'
@@ -45,33 +45,30 @@ export function useUserReportQuery(
     }
   )
   const data = query?.data?.userReport ?? []
-  return useMemo<UserReportTransformedQueryResult>(() => {
-    const autoMatchScore = Number.parseFloat(
-      (
-        _.filter(data, (t) => t.manualMatch !== true).length / data.length
-      ).toFixed(2)
-    )
-    return {
-      data,
-      loading: query.loading,
-      preset: (preset?.text || '').toLowerCase(),
-      hours: getSum(data, 'duration').toFixed(0),
-      projects: _.unique(data, (t) => t.project?.name).length,
-      autoMatchScore: {
-        value: autoMatchScore,
-        validationMessage:
-          autoMatchScore < 0.7
-            ? t('common.autoMatchError')
-            : autoMatchScore < 0.85
-            ? t('common.autoMatchWarning')
-            : autoMatchScore >= 0.95 && t('common.autoMatchSuccess'),
-        validationState:
-          autoMatchScore < 0.7
-            ? 'error'
-            : autoMatchScore < 0.85
-            ? 'warning'
-            : 'success'
+  return useMemo<UserReportTransformedQueryResult>(
+    () => {
+      const autoMatchScore = Number.parseFloat((_.filter(data, (t) => t.manualMatch !== true).length / data.length).toFixed(2))
+      return {
+        data,
+        loading: query.loading,
+        preset: (preset?.text || '').toLowerCase(),
+        hours: getSum(data, 'duration').toFixed(0),
+        projects: _.unique(data, (t) => t.project?.name).length,
+        autoMatchScore: {
+          value: autoMatchScore,
+          validationMessage: switchCase<number, string>(autoMatchScore, [
+            [s => s < 0.7, t('common.autoMatchError')],
+            [s => s < 0.85, t('common.autoMatchWarning')],
+            [s => s >= 0.95, t('common.autoMatchSuccess')]
+          ]),
+          validationState: switchCase<number, FieldProps['validationState']>(autoMatchScore, [
+            [s => s < 0.7, 'error'],
+            [s => s < 0.85, 'warning'],
+            [s => s >= 0.95, 'success']
+          ])
+        }
       }
-    }
-  }, [data])
+    },
+    [data]
+  )
 }

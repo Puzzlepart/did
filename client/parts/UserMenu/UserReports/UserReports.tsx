@@ -42,7 +42,7 @@ export const UserReports: FC = () => {
         ) : (
           <div>
             <UserMessage
-              style={{ maxHeight: 180 }}
+              style={{ maxHeight: 150 }}
               hidden={!preset}
               text={t('common.userReportSummary', query)}
               action={{
@@ -54,7 +54,7 @@ export const UserReports: FC = () => {
             />
             {preset && (
               <Field
-                label={t('common.autoMatchScoreLabel')}
+                label={t('common.autoMatchScoreLabel', {score: query.autoMatchScore.value * 100})}
                 hint={
                   <Markdown
                     text={t('common.autoMatchScoreHint', {

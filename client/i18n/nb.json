@@ -821,7 +821,7 @@
     "noResults": "Ingen elementer tilgjengelig. Dette kan skyldes aktive filtre eller at det ikke finnes noen elementer å vise.",
     "noResultsWithCriteria": "Ingen elementer samsvarer med søkekriteriene dine **{{searchTerm}}**.",
     "estimatedIncome": "Estimert inntekt",
-    "autoMatchScoreLabel": "Automatch-score",
+    "autoMatchScoreLabel": "Automatch-score ({{score}}%)",
     "autoMatchScoreHint": "Du har automatisk matchet **{{autoMatch}}%** av de totale tidsoppføringene, noe som betyr at **{{manualMatch}}%** av oppføringene har blitt matchet manuelt i applikasjonen.",
     "autoMatchError": "Den automatiske matchingsscoren er kritisk lav (under 70 %). For bedre resultater bør du kategorisere Outlook-avtalene dine og inkludere korrekt prosjekttagg i emnefeltet eller brødteksten.",
     "autoMatchWarning": "Den automatiske matchingsscoren er under 85 %. For å forbedre nøyaktigheten, bør du sørge for at Outlook-avtalene dine er riktig kategorisert, og gjerne legge til prosjekttagg i emnefeltet eller brødteksten til avtalene.",
