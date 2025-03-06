@@ -21,6 +21,11 @@ interface SearchBox extends SearchBoxProps {
    * and full width, not inside the `ToolBar`.
    */
   fullWidth?: boolean
+
+  /**
+   * Persist the search term in the URL hash.
+   */
+  persist?: boolean
 }
 
 /**
