@@ -68,7 +68,5 @@ export function useUserReportQuery(
           ], 'none')
         }
       }
-    },
-    [data]
-  )
+    }, [data])
 }
