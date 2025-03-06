@@ -25,8 +25,8 @@ export interface IListState<T = any> extends Pick<IListProps, 'filterValues'> {
   items?: T[]
 
   /**
-   * Items before filters are applied,
-   * but after search term is applied.
+   * Items before filters are applied, but after
+   * search term is applied.
    */
   itemsPreFilter?: T[]
 

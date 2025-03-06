@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'
@@ -6,6 +7,7 @@ import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
 import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
+import { useListPersistedSearch } from './useListPersistedSearch'
 
 /**
  * Hook that returns a list of items and selection state for a given set of props.
@@ -19,7 +21,9 @@ export function useList(props: IListProps) {
     origItems: props.items,
     items: props.items,
     itemsPreFilter: props.items,
-    searchTerm: ''
+    searchTerm: document.location.hash.includes('q=')
+      ? document.location.hash.split('q=')[1].split('&')[0]
+      : ''
   })
 
   useEffect(
@@ -61,6 +65,8 @@ export function useList(props: IListProps) {
       })
     }
   }, [state.items])
+
+  useListPersistedSearch(context)
 
   return { listProps, context } as const
 }

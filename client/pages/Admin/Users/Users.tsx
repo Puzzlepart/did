@@ -49,6 +49,7 @@ export const Users: TabComponent<ITabProps> = () => {
               {
                 searchBox: {
                   fullWidth: true,
+                  persist: true,
                   placeholder: t('admin.users.searchUsersLabel', {
                     usersCount: context.state.activeUsers.length
                   })

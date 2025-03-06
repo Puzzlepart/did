@@ -77,7 +77,12 @@ export default (initialState: IListState) => {
       builder
         .addCase(PROPS_UPDATED, (state, { payload }) => {
           state.origItems = payload.items ?? []
-          state.itemsPreFilter = state.origItems
+          state.itemsPreFilter = current(state).origItems.filter((item) =>
+            searchObject({
+              item,
+              searchTerm: state.searchTerm
+            })
+          )
           state.filterValues = payload.filterValues ?? {}
           state.items = applyFilters(state.itemsPreFilter, state.filterValues)
         })
