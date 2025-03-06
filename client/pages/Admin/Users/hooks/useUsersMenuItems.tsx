@@ -58,8 +58,10 @@ export function useUsersMenuItems(context: IUsersContext) {
         .withIcon('ArrowSync')
         .setDisabled(
           context.state.loading ||
-            context.state.selectedUsers.filter(({ isExternal }) => !isExternal)
-              .length === 0
+          context.state.selectedUsers
+            .filter(Boolean)
+            .filter(({ isExternal }) => !isExternal)
+            .length === 0
         )
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .setOnClick(async () => {
