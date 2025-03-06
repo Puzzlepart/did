@@ -1,17 +1,18 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogBody,
-    DialogContent,
-    DialogSurface,
-    DialogTitle,
-    DialogTrigger,
-    Field,
-    ProgressBar
+  Button,
+  Dialog,
+  DialogActions,
+  DialogBody,
+  DialogContent,
+  DialogSurface,
+  DialogTitle,
+  DialogTrigger,
+  Field,
+  FieldProps,
+  ProgressBar
 } from '@fluentui/react-components'
-import { Markdown, UserMessage } from 'components'
+import { Markdown } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils'
@@ -27,67 +28,77 @@ import { IProjectDeleteDialogProps } from './types'
  * @returns The rendered ProjectDeleteDialog component.
  */
 export const ProjectDeleteDialog: FC<IProjectDeleteDialogProps> = ({
-    state,
-    setState,
-    message,
-    loading,
-    onDelete
+  state,
+  setState,
+  message,
+  loading,
+  onDelete
 }) => {
-    const { t } = useTranslation()
-    const context = useProjectsContext()
+  const { t } = useTranslation()
+  const context = useProjectsContext()
 
-    return (
-        <Dialog open={['initial', 'checking', 'error', 'success'].includes(state)}>
-            <DialogSurface className={styles.projectDeleteDialog}>
-                <DialogBody>
-                    <DialogTitle>{t('projects.deleteDialogTitle')}</DialogTitle>
-                    <DialogContent>
-                        <div hidden={state !== 'initial'}>
-                            <Markdown
-                                text={t('projects.deleteConfirmation', {
-                                    ...context.state.selected,
-                                    customer: context.state.selected?.customer?.name
-                                })}
-                            />
-                        </div>
-                        <div className={styles.checkProgress} style={{ display: state === 'checking' ? 'flex' : 'none' }}>
-                            {getFluentIcon('Timer2', {size: 60})}
-                            <Field
-                                label={t('projects.deleteCheckLabel')}
-                                hint={t('projects.deleteCheckHint')}
-                            >
-                                <ProgressBar />
-                            </Field>
-                        </div>
-                        <div hidden={!['error', 'success'].includes(state)}>
-                            <UserMessage intent='info'>{message}</UserMessage>
-                        </div>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button
-                            appearance='primary'
-                            disabled={loading || state === 'error'}
-                            onClick={() => {
-                                if (state === 'success') onDelete()
-                                else setState('checking')
-                            }}
-                        >
-                            {state === 'success'
-                                ? t('projects.deleteButtonLabel')
-                                : t('projects.checkButtonLabel')}
-                        </Button>
-                        <DialogTrigger disableButtonEnhancement>
-                            <Button
-                                appearance='secondary'
-                                disabled={loading}
-                                onClick={() => setState('hidden')}
-                            >
-                                {t('common.abort')}
-                            </Button>
-                        </DialogTrigger>
-                    </DialogActions>
-                </DialogBody>
-            </DialogSurface>
-        </Dialog>
-    )
+  const isIntial = state === 'initial'
+  const isChecking = state === 'checking'
+  const isError = state === 'error'
+  const isSuccess = state === 'success'
+
+  return (
+    <Dialog open={state !== 'hidden'}>
+      <DialogSurface className={styles.projectDeleteDialog}>
+        <DialogBody>
+          <DialogTitle>{t('projects.deleteDialogTitle')}</DialogTitle>
+          <DialogContent>
+            <div hidden={state !== 'initial'}>
+              <Markdown
+                text={t('projects.deleteConfirmation', {
+                  ...context.state.selected,
+                  customer: context.state.selected?.customer?.name
+                })}
+              />
+            </div>
+            <div
+              className={styles.checkProgress}
+              style={{ display: isIntial ? 'none' : 'flex' }}
+            >
+              {getFluentIcon('Timer', { size: 60 })}
+              <Field
+                className={styles.field}
+                label={t('projects.deleteCheckLabel')}
+                hint={isChecking && t('projects.deleteCheckHint')}
+                validationState={
+                  (isChecking ? 'none' : state) as FieldProps['validationState']
+                }
+                validationMessage={message}
+              >
+                <ProgressBar value={isChecking ? undefined : 1} />
+              </Field>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              appearance='primary'
+              disabled={loading || isError}
+              onClick={() => {
+                if (isSuccess) onDelete()
+                else setState('checking')
+              }}
+            >
+              {state === 'success'
+                ? t('projects.deleteButtonLabel')
+                : t('projects.checkButtonLabel')}
+            </Button>
+            <DialogTrigger disableButtonEnhancement>
+              <Button
+                appearance='secondary'
+                disabled={loading}
+                onClick={() => setState('hidden')}
+              >
+                {t('common.abort')}
+              </Button>
+            </DialogTrigger>
+          </DialogActions>
+        </DialogBody>
+      </DialogSurface>
+    </Dialog>
+  )
 }

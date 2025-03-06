@@ -38,7 +38,7 @@ export class ProjectResolver {
     private readonly _projectSvc: ProjectService,
     private readonly _msgraphSvc: MSGraphService
   ) {
-    // Empty constructor. Probably this will be empty 
+    // Empty constructor. Probably this will be empty
     // until they release the new Elder Scrolls game.
     // I'm really looking forward to that.
   }
@@ -126,13 +126,18 @@ export class ProjectResolver {
    * @param projectId - Project ID
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.DELETE_PROJECTS })
-  @Mutation(() => BaseResult, { description: 'Delete project' })
-  public async deleteProject(@Arg('projectId') projectId: string): Promise<BaseResult> {
+  @Mutation(() => BaseResult, { description: 'Delete project by ID' })
+  public async deleteProject(
+    @Arg('projectId') projectId: string
+  ): Promise<BaseResult> {
     try {
-      await this._projectSvc.deleteProject(projectId + '_make_delete_fail')
-      return { success: true, error: null }
+      const success = await this._projectSvc.deleteProject(projectId)
+      return { success, error: null }
     } catch (error) {
-      return { success: false, error: _.pick(error, ['name', 'message', 'code', 'statusCode']) }
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
     }
   }
 }

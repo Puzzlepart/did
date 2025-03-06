@@ -90,16 +90,15 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Delete a project from the database by ID.
-   * 
+   *
    * @param projectId - The ID of the project to delete
    */
-  public async deleteProject(projectId: string): Promise<void> {
+  public async deleteProject(projectId: string): Promise<boolean> {
     await this.cache.clear('getprojectsdata')
     const { result } = await this.collection.deleteOne({
       _id: projectId
     })
-    // eslint-disable-next-line no-console
-    console.log(result)
+    return result.ok === 1 && result.n === 1
   }
 
   /**
@@ -128,8 +127,8 @@ export class ProjectService extends MongoDocumentService<Project> {
             this.find(query, { name: 1 }),
             mergedOptions.includeCustomers
               ? (this._customerSvc.getCustomers(
-                query?.customerKey && { key: query.customerKey }
-              ) as Promise<Customer[]>)
+                  query?.customerKey && { key: query.customerKey }
+                ) as Promise<Customer[]>)
               : Promise.resolve([]),
             mergedOptions.includeLabels
               ? this._labelSvc.getLabels()
