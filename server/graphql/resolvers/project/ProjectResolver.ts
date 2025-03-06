@@ -6,11 +6,13 @@ import { MSGraphService, ProjectService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import {
+  BaseResult,
   CreateOrUpdateProjectResult,
   Project,
   ProjectInput,
   ProjectOptions
 } from '../types'
+import _ from 'lodash'
 
 /**
  * Resolver for `Project`.
@@ -36,7 +38,9 @@ export class ProjectResolver {
     private readonly _projectSvc: ProjectService,
     private readonly _msgraphSvc: MSGraphService
   ) {
-    // Empty constructor
+    // Empty constructor. Probably this will be empty 
+    // until they release the new Elder Scrolls game.
+    // I'm really looking forward to that.
   }
 
   /**
@@ -113,6 +117,22 @@ export class ProjectResolver {
         await this._msgraphSvc.createOutlookCategory(projectId)
       }
       return { success: true, id: projectId }
+    }
+  }
+
+  /**
+   * Delete project. Permission scope `DELETE_PROJECTS` is required.
+   *
+   * @param projectId - Project ID
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.DELETE_PROJECTS })
+  @Mutation(() => BaseResult, { description: 'Delete project' })
+  public async deleteProject(@Arg('projectId') projectId: string): Promise<BaseResult> {
+    try {
+      await this._projectSvc.deleteProject(projectId + '_make_delete_fail')
+      return { success: true, error: null }
+    } catch (error) {
+      return { success: false, error: _.pick(error, ['name', 'message', 'code', 'statusCode']) }
     }
   }
 }

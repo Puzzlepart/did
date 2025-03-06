@@ -167,7 +167,7 @@
     "loadTimeEntriesLabel": "Load time entries",
     "deleteButtonLabel": "Delete project",
     "deleteError": "This project has {{count}} associated time entries. To proceed with deleting the project, please remove all related time entries first.",
-    "deleteConfirmation": "Are you sure you want to delete the project {{name}}? Before proceeding, we will check if there are any time entries associated with this project. If time entries are found, the project cannot be deleted until they are removed.",
+    "deleteConfirmation": "Are you sure you want to delete the project **{{name}}** for customer **{{customer}}**? Before proceeding, we will check if there are any time entries associated with this project. If time entries are found, the project cannot be deleted until they are removed.",
     "deleteDialogTitle": "Delete Project",
     "deleteCheckLabel": "Verifying associated time entries",
     "deleteCheckHint": "We are checking whether this project has any associated time entries. This process may take some time depending on the total number of entries...",

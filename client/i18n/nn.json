@@ -167,7 +167,7 @@
     "loadTimeEntriesLabel": "Last inn tidsoppføringer",
     "deleteButtonLabel": "Slett prosjekt",
     "deleteError": "Dette prosjektet har {{count}} tilknyttede tidsregistreringer. Vennligst slett alle relaterte tidsregistreringer før du prøver å slette prosjektet.",
-    "deleteConfirmation": "Er du sikker på at du vil slette prosjektet {{name}}? Før vi fortsetter, vil vi kontrollere om det finnes tidsregistreringer tilknyttet dette prosjektet. Hvis det finnes tidsregistreringer, må disse slettes før prosjektet kan fjernes.",
+    "deleteConfirmation": "Er du sikker på at du vil slette prosjektet **{{name}}** for kunde **{{customer}}**? Før vi fortsetter, vil vi kontrollere om det finnes tidsregistreringer tilknyttet dette prosjektet. Hvis det finnes tidsregistreringer, må disse slettes før prosjektet kan fjernes.",
     "deleteDialogTitle": "Slett prosjekt",
     "deleteCheckLabel": "Kontrollerer tilknyttede tidsregistreringer",
     "deleteCheckHint": "Vi undersøker om dette prosjektet har tilknyttede tidsregistreringer. Denne prosessen kan ta litt tid, avhengig av det totale antallet registreringer...",

@@ -1,14 +1,26 @@
 /* eslint-disable unicorn/consistent-function-scoping */
-import { Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, Button, DialogTrigger, ProgressBar, Field } from '@fluentui/react-components'
-import { Markdown, UserMessage } from 'components'
+import { useMutation, useQuery } from '@apollo/client'
 import { useProjectsContext } from 'pages/Projects/context'
 import React, { useEffect, useState } from 'react'
-import timeentriesQuery from './timeentries.gql'
-import { useQuery } from '@apollo/client'
-import { TimeEntry } from 'types'
 import { useTranslation } from 'react-i18next'
+import { TimeEntry } from 'types'
+import { ProjectDeleteDialog } from './ProjectDeleteDialog'
+import timeentriesQuery from './timeentries.gql'
+import $deleteProject from './deleteProject.gql'
 import { DialogState } from './types'
 
+/**
+ * Custom hook to handle the deletion of a project.
+ *
+ * This hook manages the state and logic for deleting a project, including
+ * checking for associated time entries and displaying appropriate messages
+ * in a dialog.
+ *
+ * @returns An object containing:
+ * - `onClick`: A function to initiate the deletion process.
+ * - `disabled`: A boolean indicating if the delete action is disabled.
+ * - `dialog`: A JSX element representing the delete confirmation dialog.
+ */
 export function useProjectDeleteAction() {
     const { t } = useTranslation()
     const context = useProjectsContext()
@@ -22,6 +34,17 @@ export function useProjectDeleteAction() {
         },
         skip: !context.state.selected || dialogState !== 'checking'
     })
+    const [deleteProject] = useMutation($deleteProject)
+
+    const onDelete = async () => {
+        const { data } = await deleteProject({
+            variables: {
+                projectId: context.state.selected?.tag
+            }
+        })
+        // eslint-disable-next-line no-console
+        console.log(data.result)
+    }
 
     useEffect(() => {
         switch (dialogState) {
@@ -34,7 +57,9 @@ export function useProjectDeleteAction() {
                 }
                 if (query.data.timeEntries.length > 0) {
                     setDialogState('error')
-                    setMessage(t('projects.deleteError', { count: query.data.timeEntries.length }))
+                    setMessage(
+                        t('projects.deleteError', { count: query.data.timeEntries.length })
+                    )
                     return
                 }
                 setDialogState('success')
@@ -44,49 +69,20 @@ export function useProjectDeleteAction() {
         }
     }, [dialogState, query.loading])
 
+
     const dialog = (
-        <Dialog open={['initial', 'checking', 'error', 'success'].includes(dialogState)}>
-            <DialogSurface>
-                <DialogBody>
-                    <DialogTitle>{t('projects.deleteDialogTitle')}</DialogTitle>
-                    <DialogContent>
-                        <div hidden={dialogState !== 'initial'}>
-                            <Markdown text={t('projects.deleteConfirmation', context.state.selected)} />
-                        </div>
-                        <div hidden={dialogState !== 'checking'}>
-                            <Field
-                                label={t('projects.deleteCheckLabel')}
-                                hint={t('projects.deleteCheckHint')}>
-                                <ProgressBar />
-                            </Field>
-                        </div>
-                        <div hidden={!['error', 'success'].includes(dialogState)}>
-                            <UserMessage intent='info'>
-                                {message}
-                            </UserMessage>
-                        </div>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button
-                            appearance='primary'
-                            disabled={query.loading || dialogState === 'error'}
-                            onClick={() => setDialogState('checking')}
-                        >{dialogState === 'success'
-                            ? t('projects.deleteButtonLabel')
-                            : t('projects.checkButtonLabel')}</Button>
-                        <DialogTrigger disableButtonEnhancement>
-                            <Button
-                                appearance='secondary'
-                                disabled={query.loading}
-                                onClick={() => setDialogState('hidden')}>
-                                {t('common.abort')}
-                            </Button>
-                        </DialogTrigger>
-                    </DialogActions>
-                </DialogBody>
-            </DialogSurface>
-        </Dialog>
+        <ProjectDeleteDialog
+            state={dialogState}
+            setState={setDialogState}
+            message={message}
+            loading={query.loading}
+            onDelete={onDelete}
+        />
     )
 
-    return { onClick: () => setDialogState('initial'), disabled: false, dialog }
+    return {
+        onClick: () => setDialogState('initial'),
+        disabled: query.loading,
+        dialog
+    }
 }
