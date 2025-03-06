@@ -22,5 +22,9 @@ export function switchCase<T, R>(
   value: T = null,
   defaultCase: R = null
 ): R | undefined {
-  return cases.find(([predicate]) => _.isFunction(predicate) ? predicate(value) : predicate)?.[1] ?? defaultCase
+  return (
+    cases.find(([predicate]) =>
+      _.isFunction(predicate) ? predicate(value) : predicate
+    )?.[1] ?? defaultCase
+  )
 }
