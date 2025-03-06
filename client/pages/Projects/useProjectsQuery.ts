@@ -5,7 +5,10 @@ import $projectsQuery from './projectsQuery.gql'
 import { DATA_UPDATED } from './reducer/actions'
 import { IProjectsState } from './types'
 
-type ProjectsQueryResultType = Pick<IProjectsState, 'projects' | 'myProjects' | 'outlookCategories'> & {
+type ProjectsQueryResultType = Pick<
+  IProjectsState,
+  'projects' | 'myProjects' | 'outlookCategories'
+> & {
   myProjects: {
     tag: string
   }[]
@@ -27,10 +30,13 @@ export function useProjectsQuery(
   dispatch: Dispatch<AnyAction>,
   sortBy = 'name'
 ) {
-  const query = useQuery<ProjectsQueryResultType, ProjectsQueryVariables>($projectsQuery, {
-    variables: { sortBy },
-    fetchPolicy: 'cache-and-network'
-  })
+  const query = useQuery<ProjectsQueryResultType, ProjectsQueryVariables>(
+    $projectsQuery,
+    {
+      variables: { sortBy },
+      fetchPolicy: 'cache-and-network'
+    }
+  )
 
   useEffect(() => dispatch(DATA_UPDATED(query)), [query])
 
