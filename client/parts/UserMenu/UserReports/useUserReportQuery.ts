@@ -59,11 +59,14 @@ export function useUserReportQuery(
       projects: _.unique(data, (t) => t.project?.name).length,
       autoMatchScore: {
         value: autoMatchScore,
-        validationMessage: switchCase<number, string>([
-          [(s) => s < 0.7, t('common.autoMatchError')],
-          [(s) => s < 0.85, t('common.autoMatchWarning')],
-          [(s) => s >= 0.95, t('common.autoMatchSuccess')]
-        ], autoMatchScore),
+        validationMessage: switchCase<number, string>(
+          [
+            [(s) => s < 0.7, t('common.autoMatchError')],
+            [(s) => s < 0.85, t('common.autoMatchWarning')],
+            [(s) => s >= 0.95, t('common.autoMatchSuccess')]
+          ],
+          autoMatchScore
+        ),
         validationState: switchCase<number, FieldProps['validationState']>(
           [
             [(s) => s < 0.7, 'error'],

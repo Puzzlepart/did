@@ -21,7 +21,7 @@ export function useDynamicButton(props: IDynamicButtonProps) {
   buttonProps.appearance = switchCase<null, IDynamicButtonProps['appearance']>([
     [() => props.primary, 'primary'],
     [() => props.secondary, 'secondary'],
-    [() => props.subtle, 'subtle'],
+    [() => props.subtle, 'subtle']
   ])
   return buttonProps
 }
