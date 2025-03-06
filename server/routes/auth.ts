@@ -17,7 +17,7 @@ import {
 } from '../middleware/passport/errors'
 import { environment } from '../utils'
 const auth = Router()
-const debug = createDebug('server/middleware/passport/microsoft/onVerifySignin')
+const debug = createDebug('server/routes/auth')
 
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
 type AuthProvider = 'azuread-openidconnect' | 'google'
