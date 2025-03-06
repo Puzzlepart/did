@@ -2,6 +2,7 @@ import { Combobox, Option, Persona } from '@fluentui/react-components'
 import { Shimmered } from 'components/Shimmered'
 import React from 'react'
 import { StyledComponent } from 'types'
+import { emptyFunction } from 'utils/emptyFunction'
 import { AddUserButton } from './AddUserButton'
 import { AdditionalMetadata } from './AdditionalMetadata'
 import { SelectedUsersList } from './SelectedUsersList'
@@ -9,7 +10,6 @@ import styles from './UserPicker.module.scss'
 import { UserPickerContext } from './context'
 import { IUserPickerProps } from './types'
 import { useUserPicker } from './useUserPicker'
-import { emptyFunction } from 'utils/emptyFunction'
 
 /**
  * @category Function Component
