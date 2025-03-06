@@ -4,7 +4,7 @@ import { useAppContext } from 'AppContext'
 import { useProjectsContext } from 'pages/Projects/context'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { BaseResult, Project, TimeEntry } from 'types'
 import { PROJECT_DELETE_SUCCESS } from '../../../../reducer'
 import $deleteProject from './deleteProject.gql'
@@ -27,7 +27,7 @@ import { DialogState } from './types'
 export function useProjectDeleteAction() {
   const { t } = useTranslation()
   const { displayToast } = useAppContext()
-  const location = useLocation()
+  const history = useHistory()
   const context = useProjectsContext()
   const [dialogState, setDialogState] = useState<DialogState>('hidden')
   const [message, setMessage] = useState<string>()
@@ -72,7 +72,7 @@ export function useProjectDeleteAction() {
       headerText: t('projects.deleteSuccessTitle')
     })
     context.refetch()
-    location.pathname = '/projects'
+    history.push('/projects')
     context.dispatch(PROJECT_DELETE_SUCCESS())
   }
 

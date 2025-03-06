@@ -172,7 +172,7 @@
     "deleteCheckLabel": "Kontrollerer tilknyttede tidsregistreringer",
     "deleteCheckHint": "Vi undersøker om dette prosjektet har tilknyttede tidsregistreringer. Denne prosessen kan ta litt tid, avhengig av det totale antallet registreringer...",
     "checkSuccess": "Ingen tidsoppføringer funnet. Prosjektet kan trygt slettes.",
-    "checkButtonLabel": "Fortsett",
+    "checkButtonLabel": "Gå videre",
     "deleteFailedTitle": "Sletting av prosjekt mislyktes",
     "deleteFailed": "En uventet feil oppstod under forsøket på å slette prosjektet **{{name}}**. Vennligst prøv igjen senere eller kontakt support hvis problemet vedvarer.",
     "deleteSuccessTitle": "Prosjekt slettet",
