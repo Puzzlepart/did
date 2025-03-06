@@ -164,7 +164,15 @@
     "parentLabel": "Overordna prosjekt",
     "childrenLabel": "Underordna prosjekter",
     "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
-    "loadTimeEntriesLabel": "Last inn tidsoppføringer"
+    "loadTimeEntriesLabel": "Last inn tidsoppføringer",
+    "deleteButtonLabel": "Slett prosjekt",
+    "deleteError": "Dette prosjektet har {{count}} tilknyttede tidsregistreringer. Vennligst slett alle relaterte tidsregistreringer før du prøver å slette prosjektet.",
+    "deleteConfirmation": "Er du sikker på at du vil slette prosjektet {{name}}? Før vi fortsetter, vil vi kontrollere om det finnes tidsregistreringer tilknyttet dette prosjektet. Hvis det finnes tidsregistreringer, må disse slettes før prosjektet kan fjernes.",
+    "deleteDialogTitle": "Slett prosjekt",
+    "deleteCheckLabel": "Kontrollerer tilknyttede tidsregistreringer",
+    "deleteCheckHint": "Vi undersøker om dette prosjektet har tilknyttede tidsregistreringer. Denne prosessen kan ta litt tid, avhengig av det totale antallet registreringer...",
+    "checkSuccess": "Ingen tidsoppføringer funnet. Prosjektet kan trygt slettes.",
+    "checkButtonLabel": "Fortsett"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
@@ -798,7 +806,8 @@
     "dismiss": "Avvis",
     "signInDisabledMessage": "Pålogging er midlertidig utilgjengelig. Vi jobber for å løse problemet. Vennligst kom tilbake snart!",
     "pending": "Venter",
-    "expired": "Utløpt"
+    "expired": "Utløpt",
+    "abort": "Avbryt"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

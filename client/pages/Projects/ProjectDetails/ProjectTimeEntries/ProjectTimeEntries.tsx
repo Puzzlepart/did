@@ -71,6 +71,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
             .setGroup('actions')
             .setDisabled(_.isEmpty(timeEntries))
         ]}
+        hidden={!loading && _.isEmpty(timeEntries)}
       />
     </div>
   )

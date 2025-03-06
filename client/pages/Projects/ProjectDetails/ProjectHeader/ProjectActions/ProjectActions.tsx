@@ -7,6 +7,7 @@ import { StyledComponent } from 'types'
 import { useProjectsContext } from '../../../context'
 import { OPEN_EDIT_PANEL } from '../../../reducer/actions'
 import styles from './ProjectActions.module.scss'
+import { useProjectDeleteAction } from './DeleteAction'
 
 /**
  * @category Projects
@@ -15,6 +16,7 @@ export const ProjectActions: StyledComponent = (props) => {
   const { state, dispatch } = useProjectsContext()
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
+  const onDelete = useProjectDeleteAction()
 
   return (
     <div className={ProjectActions.className} hidden={props.hidden}>
@@ -29,6 +31,13 @@ export const ProjectActions: StyledComponent = (props) => {
           }
         />
         <DynamicButton
+          hidden={!hasPermission($.DELETE_PROJECTS)}
+          text={t('projects.deleteButtonLabel')}
+          appearance='transparent'
+          iconName='Delete'
+          {...onDelete}
+        />
+        <DynamicButton
           hidden={!hasPermission($.MANAGE_PROJECTS)}
           text={t('projects.editButtonLabel')}
           appearance='transparent'
@@ -36,6 +45,7 @@ export const ProjectActions: StyledComponent = (props) => {
           onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))}
         />
       </div>
+      {onDelete.dialog}
     </div>
   )
 }
