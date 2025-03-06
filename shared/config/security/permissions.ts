@@ -55,7 +55,6 @@ export const getPermissions = (
     name: t('permissions.deleteProjects'),
     description: t('permissions.deleteProjectsDescription'),
     iconName: 'DeleteTable',
-    disabled: true,
     api: true,
     category: 'projects'
   },
