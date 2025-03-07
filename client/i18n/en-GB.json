@@ -943,7 +943,7 @@
   "list": {
     "viewColumnsPanel": {
       "title": "Edit view columns",
-      "description": "Select the columns to display in the list view. To change the order, you can drag and drop or use the up and down arrows next to each column.",
+      "description": "Select the columns to display in the list view. To change the order, you can drag and drop or use the up and down arrows next to each column. Changes here does not affect the export to Excel.",
       "moveUp": "Move column up",
       "moveDown": "Move column down"
     }

@@ -940,7 +940,7 @@
   "list": {
     "viewColumnsPanel": {
       "title": "Rediger visningskolonner",
-      "description": "Velg kolonnene som skal vises i listevisningen. Hvis du vil endre rekkefølgen, kan du dra og slippe eller bruke opp- og ned-pilen ved siden av hver kolonne.",
+      "description": "Velg kolonnene som skal vises i listevisningen. Hvis du vil endre rekkefølgen, kan du dra og slippe eller bruke opp- og ned-pilen ved siden av hver kolonne. Endringer her påvirker ikke Excel-eksporten.",
       "moveUp": "Flytt kolonnen opp",
       "moveDown": "Flytt kolonnen ned"
     }

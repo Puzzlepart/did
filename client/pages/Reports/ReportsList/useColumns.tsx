@@ -106,6 +106,7 @@ export function useColumns() {
         ),
         createColumnDef<TimeEntry>('role.name', t('projects.roleFieldLabel'), {
           minWidth: 100,
+          maxWidth: 140,
           data: { hidden: true }
         }),
         createColumnDef<TimeEntry>(
@@ -113,6 +114,7 @@ export function useColumns() {
           t('common.hourlyRateLabel'),
           {
             minWidth: 100,
+            maxWidth: 140,
             data: { hidden: true }
           }
         ),
@@ -147,6 +149,7 @@ export function useColumns() {
           t('common.startTimeLabel'),
           {
             minWidth: 125,
+            maxWidth: 125,
             data: { excelColFormat: 'date', hidden: true },
             onRender: ({ startDateTime }) =>
               $date.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
@@ -154,6 +157,7 @@ export function useColumns() {
         ),
         createColumnDef<TimeEntry>('endDateTime', t('common.endTimeLabel'), {
           minWidth: 125,
+          maxWidth: 125,
           data: { excelColFormat: 'date', hidden: true },
           onRender: ({ endDateTime }) =>
             $date.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
@@ -177,6 +181,7 @@ export function useColumns() {
           t('common.surnameLabel'),
           {
             minWidth: 100,
+            maxWidth: 100,
             data: { hidden: true }
           }
         ),
@@ -185,6 +190,7 @@ export function useColumns() {
           t('common.givenNameLabel'),
           {
             minWidth: 100,
+            maxWidth: 100,
             data: { hidden: true }
           }
         ),
@@ -193,12 +199,14 @@ export function useColumns() {
           t('common.managerLabel'),
           {
             minWidth: 100,
+            maxWidth: 175,
             onRender: ({ resource }) => <UserColumn user={resource.manager} />,
             data: { hidden: true }
           }
         ),
         createColumnDef<TimeEntry>('resource.mail', t('common.mailLabel'), {
           minWidth: 100,
+          maxWidth: 100,
           data: { hidden: true }
         }),
         createColumnDef<TimeEntry>('week', t('common.weekLabel'), {
