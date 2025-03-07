@@ -9,6 +9,7 @@ import styles from './List.module.scss'
 import { ListFilterPanel } from './ListFilterPanel'
 import { IListProps } from './types'
 import { useList } from './useList'
+import { ViewColumnsPanel } from './ViewColumnsPanel'
 
 /**
  * List component using  `<ShimmeredDetailsList />` from `@fluentui/react`.
@@ -28,6 +29,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
           <EmptyMessage items={listProps.items} />
           <ColumnHeaderContextMenu />
           <ListFilterPanel />
+          <ViewColumnsPanel />
         </ScrollablePaneWrapper>
       </ListContext.Provider>
     </div>
