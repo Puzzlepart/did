@@ -20,7 +20,8 @@ export function useDateControl(props: IDateControlProps) {
     [props.model]
   )
 
-  const value = new Date(props.model.value<string>(props.name, null)) ?? null
+  const value = props.model.value<string>(props.name, null)
+  const dateValue = value ? new Date(value) : null
 
-  return { onChange, value }
+  return { onChange, value: dateValue }
 }
