@@ -209,22 +209,32 @@ export function useColumns() {
           maxWidth: 100,
           data: { hidden: true }
         }),
+        createColumnDef<TimeEntry>('period', 'Periode', {
+          minWidth: 100,
+          maxWidth: 100,
+          data:{ hiddenFromExport: true },
+        }, (item) => `${item.week}/${item.month}/${item.year}`),
         createColumnDef<TimeEntry>('week', t('common.weekLabel'), {
           minWidth: 50,
           maxWidth: 50,
           data: {
+            hidden: true,
             isGroupable: true
           }
         }),
         createColumnDef<TimeEntry>('month', t('common.monthLabel'), {
           minWidth: 60,
           maxWidth: 60,
-          onRender: ({ month }) => $date.getMonthNames()[month - 1]
-        }),
+          data: {
+            hidden: true,
+            isGroupable: true
+          }
+        }, (item) => $date.getMonthNames()[item.month - 1]),
         createColumnDef<TimeEntry>('year', t('common.yearLabel'), {
           minWidth: 60,
           maxWidth: 60,
           data: {
+            hidden: true,
             isGroupable: true
           }
         })

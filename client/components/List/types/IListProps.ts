@@ -178,4 +178,10 @@ export interface IListProps<T = any>
    * This feature is (for now) not enabled by default.
    */
   enableViewColumnsEdit?: boolean
+
+  /**
+   * Persist view columns in the local storage
+   * using the provided key.
+   */
+  persistViewColumns?: string
 }

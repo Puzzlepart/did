@@ -51,6 +51,7 @@ export const ReportsList: TabComponent = () => {
           contentAfter: createContentAfter
         }}
         enableViewColumnsEdit
+        persistViewColumns={ReportsList.displayName}
       />
       {_.isEmpty(context.state.data.timeEntries) &&
         !context.state.loading &&

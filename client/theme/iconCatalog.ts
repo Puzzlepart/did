@@ -184,7 +184,9 @@ import {
   ErrorCircleRegular,
   ErrorCircleFilled,
   ChevronUpRegular,
-  ChevronUpFilled
+  ChevronUpFilled,
+  ArrowLeftRegular,
+  ArrowLeftFilled
 } from '@fluentui/react-icons'
 
 /**
@@ -562,5 +564,9 @@ export const iconCatalog = {
   HourGlassHalf: {
     regular: HourglassHalfRegular,
     filled: HourglassHalfFilled
+  },
+  ArrowLeft: {
+    regular: ArrowLeftRegular,
+    filled: ArrowLeftFilled
   }
 }
