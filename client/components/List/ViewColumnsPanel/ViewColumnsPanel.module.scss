@@ -21,7 +21,8 @@
   }
   
   &.dragging {
-    background-color: var(--colorNeutralBackground2);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100; /* Ensure it appears above other elements */
+    opacity: 1 !important; /* Override any opacity settings */
   }
 }

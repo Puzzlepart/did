@@ -1,4 +1,4 @@
-import { Checkbox, Label } from '@fluentui/react-components'
+import { Checkbox, Label, mergeClasses } from '@fluentui/react-components'
 import { Panel } from 'components/Panel'
 import React, { FC, useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
@@ -44,7 +44,7 @@ export const ViewColumnsPanel: FC = () => {
      description='Select columns to display in the list. Drag and drop to reorder columns.'>
       <div className={styles.columnsContainer}>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="columns">
+          <Droppable droppableId='columns'>
             {(provided) => (
               <div
                 {...provided.droppableProps}
@@ -58,7 +58,7 @@ export const ViewColumnsPanel: FC = () => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className={`${styles.columnItem} ${snapshot.isDragging ? styles.dragging : ''}`}
+                        className={mergeClasses(styles.columnItem, snapshot.isDragging && styles.dragging)}
                       >
                         <Checkbox
                           checked={!column.data?.hidden}
