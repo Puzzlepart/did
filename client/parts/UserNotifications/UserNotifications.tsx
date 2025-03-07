@@ -27,7 +27,7 @@ export const UserNotifications: StyledComponent<IUserNotificationsProps> = ({
   const { t } = useTranslation()
   const context = useAppContext()
   const [isOpen, togglePanel] = useToggle(false)
-  if(context.user?.isExternal) return null
+  if (context.user?.isExternal) return null
   return (
     <>
       {renderAsMenuItem ? (
