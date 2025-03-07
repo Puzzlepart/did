@@ -1,19 +1,15 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import $date, { DateObject } from 'DateUtils'
-import { IProjectTagProps } from 'components'
-import { ICustomerLinkProps } from 'components/CustomerLink'
+import { ICustomerLinkProps, IListColumn, IProjectLinkProps, IProjectTagProps, UserColumn } from 'components'
 import {
   CustomerFilter,
   ProjectFilter,
   ResourceFilter
 } from 'components/FilterPanel'
-import { IListColumn } from 'components/List/types'
-import { IProjectLinkProps } from 'components/ProjectLink/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimeEntry } from 'types'
 import { createColumnDef, CreateColumnDefFunction } from 'utils'
-import { UserColumn } from '../../../../components/UserColumn'
 
 
 const titleColumn:CreateColumnDefFunction = t => createColumnDef<TimeEntry>('title', t('common.titleLabel'), {
