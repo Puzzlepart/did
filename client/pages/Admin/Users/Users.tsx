@@ -8,6 +8,7 @@ import { PermissionScope } from 'security'
 import { User } from 'types'
 import { BulkImportPanel } from './BulkImportPanel'
 import { InviteExternalUserForm } from './InviteExternalUserForm'
+import { PendingInvitations } from './PendingInvitations'
 import { UserForm } from './UserForm'
 import styles from './Users.module.scss'
 import { UsersContext } from './context'
@@ -19,7 +20,6 @@ import {
   SET_SELECTED_USERS,
   SET_USER_FORM
 } from './reducer/actions'
-import { PendingInvitations } from './PendingInvitations'
 
 /**
  * Manage users
@@ -72,7 +72,9 @@ export const Users: TabComponent<ITabProps> = () => {
                   (selected) =>
                     context.dispatch(SET_SELECTED_USERS(selected as User[]))
                 ],
-                enableShimmer: context.state.loading
+                enableShimmer: context.state.loading,
+                enableViewColumnsEdit: true,
+                persistViewColumns: Users.displayName
               } as IListProps<User>
             ],
             disabled: [
@@ -82,8 +84,10 @@ export const Users: TabComponent<ITabProps> = () => {
                 items: context.state.disabledUsers,
                 columns: columns('disabled'),
                 selectionMode: SelectionMode.none,
-                enableShimmer: context.state.loading
-              }
+                enableShimmer: context.state.loading,
+                enableViewColumnsEdit: true,
+                persistViewColumns: Users.displayName
+              } as IListProps<User>
             ],
             pendingInvitations: [
               PendingInvitations,

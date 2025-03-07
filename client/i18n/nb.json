@@ -835,7 +835,14 @@
     "startTimeLabel_MMM_DD": "Starttid (kun dato)",
     "endTimeLabel_MMM_DD": "Sluttid (kun dato)",
     "employeeWithRoleLabel": "Ansatt (med rolledetaljer)",
-    "employeeWithRoleDescription": "Viser den ansatte knyttet til timeregistreringen, inkludert detaljer om rollen vedkommende har i prosjektet i den aktuelle perioden."
+    "employeeWithRoleDescription": "Viser den ansatte knyttet til timeregistreringen, inkludert detaljer om rollen vedkommende har i prosjektet i den aktuelle perioden.",
+    "externalLabel": "Ekstern",
+    "preferredLanguage_en-US": "English (United States)",
+    "preferredLanguage_en-GB": "English (United Kingdom)",
+    "preferredLanguage_nb-NO": "Norsk (bokmål)",
+    "preferredLanguage_nb": "Norsk (bokmål)",
+    "preferredLanguage_nn-NO": "Norsk (bokmål)",
+    "preferredLanguage_nn": "Norsk (nynorsk)"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

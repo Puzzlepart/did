@@ -6,7 +6,7 @@ import { ListMenuItem } from './ListMenuItem'
 import { useExcelExportCommand } from './useExcelExportCommand'
 import { useFiltersCommand } from './useFiltersCommand'
 import { useSearchBoxCommand } from './useSearchBoxCommand'
-import { useViewColumnsEditCommand } from './useViewColumnsEditCommand'
+import { useViewColumnsEditCommand } from '../../ViewColumnsPanel'
 
 /**
  * Custom hook that returns the necessary props for a list toolbar, including search box, filter commands, and export options.

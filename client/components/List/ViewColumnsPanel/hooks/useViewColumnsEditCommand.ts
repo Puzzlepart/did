@@ -2,7 +2,8 @@ import { useListContext } from 'components/List/context'
 import { TOGGLE_VIEW_COLUMNS_PANEL } from 'components/List/reducer'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ListMenuItem } from './ListMenuItem'
+import { ListMenuItem } from '../../ListHeader/ListToolbar/ListMenuItem'
+import { isMobile } from 'react-device-detect'
 
 /**
  * Custom hook that creates a `ListMenuItem` for editing view columns.
@@ -20,7 +21,7 @@ export function useViewColumnsEditCommand(): ListMenuItem {
       .setGroup('actions')
       .withIcon('Settings')
       .setDisabled(context.props.enableShimmer)
-      .setHidden(!context.props.enableViewColumnsEdit)
+      .setHidden(!context.props.enableViewColumnsEdit || isMobile)
       .withDispatch(context, TOGGLE_VIEW_COLUMNS_PANEL)
-  }, [])
+  }, [context.props.enableViewColumnsEdit, context.props.enableShimmer])
 }

@@ -838,7 +838,14 @@
     "startTimeLabel_MMM_DD": "Start time (Date Only)",
     "endTimeLabel_MMM_DD": "End time (Date Only)",
     "employeeWithRoleLabel": "Employee (with role details)",
-    "employeeWithRoleDescription": "Displays the employee associated with the time entry, including details of the role they hold within the project during the recorded period."
+    "employeeWithRoleDescription": "Displays the employee associated with the time entry, including details of the role they hold within the project during the recorded period.",
+    "externalLabel": "External",
+    "preferredLanguage_en-US": "English (United States)",
+    "preferredLanguage_en-GB": "English (United Kingdom)",
+    "preferredLanguage_nb-NO": "Norsk (bokmål)",
+    "preferredLanguage_nb": "Norsk (bokmål)",
+    "preferredLanguage_nn-NO": "Norsk (bokmål)",
+    "preferredLanguage_nn": "Norsk (nynorsk)"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

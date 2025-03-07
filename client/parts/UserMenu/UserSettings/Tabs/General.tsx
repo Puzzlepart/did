@@ -35,15 +35,15 @@ export const General: UserSettingsTabComponent = ({ register }) => {
         values={[
           {
             value: 'en-GB',
-            text: 'English (United Kingdom)'
+            text: t('common.preferredLanguage_en-GB')
           },
           {
             value: 'nb',
-            text: 'Norsk (bokmål)'
+            text: t('common.preferredLanguage_nb')
           },
           {
             value: 'nn',
-            text: 'Norsk (nynorsk)'
+            text: t('common.preferredLanguage_nn')
           }
         ]}
       />

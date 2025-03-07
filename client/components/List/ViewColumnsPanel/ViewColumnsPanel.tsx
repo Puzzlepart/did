@@ -36,24 +36,26 @@ export const ViewColumnsPanel: FC = () => {
                 ref={provided.innerRef}
                 className={styles.droppableArea}
               >
-                {columns.map((column, index) => (
-                  <Draggable
-                    key={column.key}
-                    draggableId={column.key}
-                    index={index}
-                  >
-                    {(provided, snapshot) => (
-                      <ViewColumn
-                        index={index}
-                        provided={provided}
-                        snapshot={snapshot}
-                        column={column}
-                        onToggle={toggleColumnVisibility}
-                        onReorder={reorderColumns}
-                      />
-                    )}
-                  </Draggable>
-                ))}
+                {columns
+                  .filter((column) => Boolean(column.name))
+                  .map((column, index) => (
+                    <Draggable
+                      key={column.key}
+                      draggableId={column.key}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <ViewColumn
+                          index={index}
+                          provided={provided}
+                          snapshot={snapshot}
+                          column={column}
+                          onToggle={toggleColumnVisibility}
+                          onReorder={reorderColumns}
+                        />
+                      )}
+                    </Draggable>
+                  ))}
                 {provided.placeholder}
               </div>
             )}
