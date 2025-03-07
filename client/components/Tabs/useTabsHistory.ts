@@ -18,7 +18,7 @@ export function useTabsHistory(level: number, selectedValue: string) {
       const paths = Array.from(history.location.pathname.split('/'))
       const updatedPaths = Array.from(paths)
       updatedPaths[level] = key
-      if(isEqual(paths, updatedPaths)) return
+      if (isEqual(paths, updatedPaths)) return
       history.replace(
         `/${updatedPaths
           .filter(Boolean)

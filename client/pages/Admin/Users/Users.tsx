@@ -98,9 +98,7 @@ export const Users: TabComponent<ITabProps> = () => {
           <UserForm
             {...context.state.userForm}
             open={!!context.state.userForm}
-            onDismiss={({
-              refetch = false
-            } = {}) => {
+            onDismiss={({ refetch = false } = {}) => {
               context.dispatch(HIDE_USER_FORM())
               refetch && context.refetch()
             }}
