@@ -92,6 +92,8 @@ did is a web application built with React and Node.js that manages projects, tim
 This guide should be updated as the project evolves and new patterns emerge.
 
 ## Additional Context
+
+### Commit Messages
 When asked for help to create commit messages, you should propose running the npm script "commit".
 
 It works as follows:
@@ -102,3 +104,7 @@ commit "[changes]" "[type]" "[message]"
 
 Where `[type]` is found in the `package.json` file under the `gitmoji` key, and `[message]` is the commit message you want to create
 based on the type you chose and the git changes. `[changes]` is the git changes you want to commit, use `all` to commit all changes.
+
+### Creating new components
+When asked to create a new component, you should use [Template ](client/components/Template) as a template for the new component.
+Also include a component logic hook in the same folder as the component, this should be named `use[ComponentName].ts`. This should be used to separate the logic from the component. All components and functions should have a basic jsdoc comment with a description of what they do.
