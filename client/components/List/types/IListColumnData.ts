@@ -14,7 +14,7 @@ export interface IListColumnData {
   hidden?: boolean
 
   /**
-   * Required column 
+   * Required column
    */
   required?: boolean
 

@@ -15,7 +15,7 @@ import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 import { IListState } from './IListState'
 
- export type ListFilterState = {
+export type ListFilterState = {
   filters: IFilter[]
   isFiltered: boolean
 }

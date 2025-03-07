@@ -2,6 +2,15 @@
 import { IListColumn } from 'components/List'
 import { TFunction } from 'react-i18next'
 
+/**
+ * A function type that creates a column definition for a list.
+ * It needs to have a translation function passed in to localize
+ * the column headers etc.
+ *
+ * @param t - A translation function used to localize column headers.
+ * 
+ * @returns An object representing the column definition.
+ */
 export type CreateColumnDefFunction = (t: TFunction) => IListColumn
 
 /**

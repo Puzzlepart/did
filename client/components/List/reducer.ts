@@ -32,7 +32,9 @@ export const SET_SORT = createAction<{
   direction: 'asc' | 'desc'
 }>('SET_SORT')
 export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
-export const TOGGLE_VIEW_COLUMNS_PANEL = createAction('TOGGLE_VIEW_COLUMNS_PANEL')
+export const TOGGLE_VIEW_COLUMNS_PANEL = createAction(
+  'TOGGLE_VIEW_COLUMNS_PANEL'
+)
 export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
 )

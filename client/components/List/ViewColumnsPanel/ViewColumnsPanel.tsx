@@ -17,7 +17,8 @@ import { TOGGLE_VIEW_COLUMNS_PANEL } from '../reducer'
 export const ViewColumnsPanel: FC = () => {
   const { t } = useTranslation()
   const context = useListContext()
-  const { columns, toggleColumnVisibility, reorderColumns } = useViewColumnsPanel()
+  const { columns, toggleColumnVisibility, reorderColumns } =
+    useViewColumnsPanel()
   const { handleDragEnd } = useDragAndDrop(reorderColumns)
 
   return (
@@ -25,7 +26,8 @@ export const ViewColumnsPanel: FC = () => {
       {...context.state.viewColumnsPanel}
       onDismiss={() => context.dispatch(TOGGLE_VIEW_COLUMNS_PANEL())}
       title={t('list.viewColumnsPanel.title')}
-      description={t('list.viewColumnsPanel.description')}>
+      description={t('list.viewColumnsPanel.description')}
+    >
       <div className={styles.columnsContainer}>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId='columns'>
@@ -36,7 +38,11 @@ export const ViewColumnsPanel: FC = () => {
                 className={styles.droppableArea}
               >
                 {columns.map((column, index) => (
-                  <Draggable key={column.key} draggableId={column.key} index={index}>
+                  <Draggable
+                    key={column.key}
+                    draggableId={column.key}
+                    index={index}
+                  >
                     {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
@@ -53,10 +59,18 @@ export const ViewColumnsPanel: FC = () => {
                           onChange={() => toggleColumnVisibility(column.key)}
                         />
                         <Label className={styles.label}>{column.name}</Label>
-                        <div className={styles.moveUp} onClick={() => reorderColumns(index, index - 1)} title={t('list.viewColumnsPanel.moveUp')}>
+                        <div
+                          className={styles.moveUp}
+                          onClick={() => reorderColumns(index, index - 1)}
+                          title={t('list.viewColumnsPanel.moveUp')}
+                        >
                           {getFluentIcon('ChevronUp', { size: 24 })}
                         </div>
-                        <div className={styles.moveDown} onClick={() => reorderColumns(index, index + 1)} title={t('list.viewColumnsPanel.moveDown')}>
+                        <div
+                          className={styles.moveDown}
+                          onClick={() => reorderColumns(index, index + 1)}
+                          title={t('list.viewColumnsPanel.moveDown')}
+                        >
                           {getFluentIcon('ChevronDown', { size: 24 })}
                         </div>
                       </div>

@@ -6,8 +6,8 @@ import _ from 'lodash'
 import { useCallback } from 'react'
 
 type PersistedColumn = {
-    key: string
-    hidden: boolean
+  key: string
+  hidden: boolean
 }
 
 /**
@@ -21,7 +21,9 @@ type PersistedColumn = {
 export function useViewColumnsPersist(columns: IListColumn[]) {
   const context = useListContext()
   const [persistedColumns, , , set] = useBrowserStorage<PersistedColumn[]>({
-    key: `${context.props.persistViewColumns?.replace(' ', '_')?.toLowerCase()}_columns`,
+    key: `${context.props.persistViewColumns
+      ?.replace(' ', '_')
+      ?.toLowerCase()}_columns`,
     initialValue: []
   })
 
@@ -30,12 +32,14 @@ export function useViewColumnsPersist(columns: IListColumn[]) {
     if (_.isEmpty(persistedColumns)) return columns
     return [...columns]
       .sort((a, b) => {
-        const aIndex = persistedColumns.findIndex(c => c.key === a.key)
-        const bIndex = persistedColumns.findIndex(c => c.key === b.key)
+        const aIndex = persistedColumns.findIndex((c) => c.key === a.key)
+        const bIndex = persistedColumns.findIndex((c) => c.key === b.key)
         return aIndex - bIndex
       })
-      .map(column => {
-        const persistedColumn = persistedColumns.find(c => c.key === column.key)
+      .map((column) => {
+        const persistedColumn = persistedColumns.find(
+          (c) => c.key === column.key
+        )
         return {
           ...column,
           data: {
@@ -48,10 +52,12 @@ export function useViewColumnsPersist(columns: IListColumn[]) {
 
   const update = useCallback(() => {
     if (context.props.persistViewColumns) {
-      set(columns.map<PersistedColumn>(column => ({
-        key: column.key,
-        hidden: column.data?.hidden
-      })))
+      set(
+        columns.map<PersistedColumn>((column) => ({
+          key: column.key,
+          hidden: column.data?.hidden
+        }))
+      )
     }
   }, [columns])
 

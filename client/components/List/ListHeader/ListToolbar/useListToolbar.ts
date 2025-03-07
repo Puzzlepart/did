@@ -43,16 +43,16 @@ export function useListToolbar() {
   const menuItems = useMemo(() => {
     return _.isEmpty(menuItemsFromProps)
       ? ListMenuItem.convert([
-        ...commandBarProps.items,
-        ...commandBarProps.farItems
-      ])
+          ...commandBarProps.items,
+          ...commandBarProps.farItems
+        ])
       : [
-        searchBoxMenuItem,
-        ...menuItemsFromProps,
-        filterCommands.toggle?.menuItem,
-        excelExportCommands?.menuItem,
-        viewColumnsEditCommand
-      ].filter(Boolean)
+          searchBoxMenuItem,
+          ...menuItemsFromProps,
+          filterCommands.toggle?.menuItem,
+          excelExportCommands?.menuItem,
+          viewColumnsEditCommand
+        ].filter(Boolean)
   }, [menuItemsFromProps])
 
   const menuItemGroups = useMemo<{ [key: string]: ListMenuItem[] }>(

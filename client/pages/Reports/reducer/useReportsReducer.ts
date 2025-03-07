@@ -13,7 +13,6 @@ import {
 } from './actions'
 import { TimeEntry, User } from 'types'
 
-
 /**
  * Retrieves a resource from a list of users based on a given time entry.
  * If the resource is found, it also retrieves the manager of the resource.

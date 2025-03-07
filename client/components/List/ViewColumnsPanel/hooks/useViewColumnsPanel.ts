@@ -6,7 +6,7 @@ import { useViewColumnsPersist } from './useViewColumnsPersist'
 
 /**
  * Hook for managing column state and operations in the `ViewColumnsPanel`
- * 
+ *
  * @returns Object containing columns state and methods for managing columns
  */
 export const useViewColumnsPanel = () => {
@@ -26,11 +26,11 @@ export const useViewColumnsPanel = () => {
 
   /**
    * Toggle the visibility of a column
-   * 
+   *
    * @param key - The key of the column to toggle
    */
   const toggleColumnVisibility = (key: string) => {
-    const updatedColumns = columns.map(column =>
+    const updatedColumns = columns.map((column) =>
       column.key === key
         ? { ...column, data: { ...column.data, hidden: !column.data?.hidden } }
         : column
@@ -40,7 +40,7 @@ export const useViewColumnsPanel = () => {
 
   /**
    * Update the order of columns after drag and drop
-   * 
+   *
    * @param sourceIndex - The source index of the dragged column
    * @param destinationIndex - The destination index where the column was dropped
    */
