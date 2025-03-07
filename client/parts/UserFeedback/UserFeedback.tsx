@@ -8,6 +8,7 @@ import { MenuItem } from '../UserMenu/MenuItem'
 import { FeedbackPanel } from './FeedbackPanel'
 import styles from './UserFeedback.module.scss'
 import { IUserFeedbackProps } from './types'
+import { useAppContext } from 'AppContext'
 
 /**
  * User feedback
@@ -23,7 +24,9 @@ export const UserFeedback: StyledComponent<IUserFeedbackProps> = ({
   renderAsMenuItem
 }) => {
   const { t } = useTranslation()
+  const context = useAppContext()
   const panelState = useBoolean(false)
+  if (context.user?.isExternal) return null
   return (
     <>
       {renderAsMenuItem ? (

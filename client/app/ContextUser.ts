@@ -21,6 +21,7 @@ export class ContextUser {
   public theme: UserTheme
   public lastActive: Date
   public timebank: UserTimebank
+  public isExternal: boolean
 
   /**
    * Constructor for `ContextUser`
@@ -35,6 +36,8 @@ export class ContextUser {
    * * `startPage`
    * * `photo`
    * * `lastActive`
+   * * `timebank`
+   * * `isExternal`
    *
    * We can't extend the `User` class
    * due the usage of [type-graphql](https://www.npmjs.com/package/type-graphql)
@@ -55,7 +58,8 @@ export class ContextUser {
           'startPage',
           'photo',
           'lastActive',
-          'timebank'
+          'timebank',
+          'isExternal'
         )
       )
       this.configuration = tryParseJson(_user.configuration, {})

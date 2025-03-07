@@ -82,6 +82,7 @@ query UserContext {
         balanceAdjustment
       }
     }
+    isExternal
   }
   authProviders
 }

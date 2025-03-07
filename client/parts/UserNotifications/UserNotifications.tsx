@@ -9,6 +9,7 @@ import { NotificationIndicator } from './NotificationIndicator'
 import { NotificationsPanel } from './NotificationsPanel'
 import { IUserNotificationsProps } from './types'
 import styles from './UserNotifications.module.scss'
+import { useAppContext } from 'AppContext'
 
 /**
  * User notifications
@@ -24,7 +25,9 @@ export const UserNotifications: StyledComponent<IUserNotificationsProps> = ({
   renderAsMenuItem
 }) => {
   const { t } = useTranslation()
+  const context = useAppContext()
   const [isOpen, togglePanel] = useToggle(false)
+  if(context.user?.isExternal) return null
   return (
     <>
       {renderAsMenuItem ? (
