@@ -490,7 +490,8 @@
     "welcomeHeaderText": "Home",
     "filterIconPlaceholder": "Search for a filter icon...",
     "searchPlaceholder": "Search in {{count}} time entries ({{hours}} hours)...",
-    "searchCount": "Showing {{count}} of {{total}} time entries"
+    "searchCount": "Showing {{count}} of {{total}} time entries",
+    "viewColumnsLabel": "Show or hide columns"
   },
   "common": {
     "datePicker": {
@@ -937,6 +938,14 @@
       "addUser": "Add",
       "displayName": "Name",
       "removeUser": "Remove"
+    }
+  },
+  "list": {
+    "viewColumnsPanel": {
+      "title": "Edit view columns",
+      "description": "Select the columns to display in the list view. To change the order, you can drag and drop or use the up and down arrows next to each column.",
+      "moveUp": "Move column up",
+      "moveDown": "Move column down"
     }
   }
 }

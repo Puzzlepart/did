@@ -347,6 +347,10 @@
     "colours": true
   },
   "gitmoji": {
+    "lazy": [
+      "🍺",
+      "Can't remember what I did"
+    ],
     "services": [
       "🚀",
       "Updated or added new services"

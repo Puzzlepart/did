@@ -3,6 +3,7 @@ import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { ColumnHeaderContextMenu } from './ColumnHeaderContextMenu'
 import { IListColumn } from './IListColumn'
 import { IListProps } from './IListProps'
+import { IPanelProps } from 'components/Panel'
 
 /**
  * @category List
@@ -61,9 +62,16 @@ export interface IListState<T = any> extends Pick<IListProps, 'filterValues'> {
   sortOpts?: SortOptions
 
   /**
-   * Is filter panel open
+   * Properties for the filter panel. For now
+   * all we need is if it's open or not.
    */
   filterPanel?: Pick<IFilterPanelProps, 'open'>
+
+  /**
+   * Properties for the view columns panel. For now
+   * all we need is if it's open or not.
+   */
+  viewColumnsPanel?: Pick<IPanelProps, 'open'>
 }
 
 export type SortOptions = [string, 'asc' | 'desc']

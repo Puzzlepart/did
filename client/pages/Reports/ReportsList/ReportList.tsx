@@ -50,6 +50,7 @@ export const ReportsList: TabComponent = () => {
           placeholder: createPlaceholder,
           contentAfter: createContentAfter
         }}
+        enableViewColumnsEdit
       />
       {_.isEmpty(context.state.data.timeEntries) &&
         !context.state.loading &&

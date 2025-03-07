@@ -488,7 +488,8 @@
     "welcomeHeaderText": "Hjem",
     "filterIconPlaceholder": "Søk etter et ikon for filteret...",
     "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer)...",
-    "searchCount": "Viser {{count}} av {{total}} tidsregistreringer"
+    "searchCount": "Viser {{count}} av {{total}} tidsregistreringer",
+    "viewColumnsLabel": " Vis eller skjul kolonner"
   },
   "common": {
     "datePicker": {
@@ -934,6 +935,14 @@
       "addUser": "Legg til",
       "displayName": "Navn",
       "removeUser": "Fjern"
+    }
+  },
+  "list": {
+    "viewColumnsPanel": {
+      "title": "Rediger visningskolonner",
+      "description": "Velg kolonnene som skal vises i listevisningen. Hvis du vil endre rekkefølgen, kan du dra og slippe eller bruke opp- og ned-pilen ved siden av hver kolonne.",
+      "moveUp": "Flytt kolonnen opp",
+      "moveDown": "Flytt kolonnen ned"
     }
   }
 }

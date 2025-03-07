@@ -182,7 +182,9 @@ import {
   LockClosedRegular,
   LockClosedFilled,
   ErrorCircleRegular,
-  ErrorCircleFilled
+  ErrorCircleFilled,
+  ChevronUpRegular,
+  ChevronUpFilled
 } from '@fluentui/react-icons'
 
 /**
@@ -252,6 +254,10 @@ export const iconCatalog = {
   ChevronDown: {
     regular: ChevronDownRegular,
     filled: ChevronDownFilled
+  },
+  ChevronUp: {
+    regular: ChevronUpRegular,
+    filled: ChevronUpFilled
   },
   ArrowUpload: {
     regular: ArrowUploadRegular,

@@ -6,6 +6,7 @@ import { ListMenuItem } from './ListMenuItem'
 import { useExcelExportCommand } from './useExcelExportCommand'
 import { useFiltersCommand } from './useFiltersCommand'
 import { useSearchBoxCommand } from './useSearchBoxCommand'
+import { useViewColumnsEditCommand } from './useViewColumnsEditCommand'
 
 /**
  * Custom hook that returns the necessary props for a list toolbar, including search box, filter commands, and export options.
@@ -18,6 +19,7 @@ export function useListToolbar() {
   const { commandBarItem: searchBoxItem, menuItem: searchBoxMenuItem } =
     useSearchBoxCommand()
   const filterCommands = useFiltersCommand()
+  const viewColumnsEditCommand = useViewColumnsEditCommand()
 
   const commandBarProps = useMemo<ICommandBarProps>(
     () => ({
@@ -41,15 +43,16 @@ export function useListToolbar() {
   const menuItems = useMemo(() => {
     return _.isEmpty(menuItemsFromProps)
       ? ListMenuItem.convert([
-          ...commandBarProps.items,
-          ...commandBarProps.farItems
-        ])
+        ...commandBarProps.items,
+        ...commandBarProps.farItems
+      ])
       : [
-          searchBoxMenuItem,
-          ...menuItemsFromProps,
-          filterCommands.toggle?.menuItem,
-          excelExportCommands?.menuItem
-        ].filter(Boolean)
+        searchBoxMenuItem,
+        ...menuItemsFromProps,
+        filterCommands.toggle?.menuItem,
+        excelExportCommands?.menuItem,
+        viewColumnsEditCommand
+      ].filter(Boolean)
   }, [menuItemsFromProps])
 
   const menuItemGroups = useMemo<{ [key: string]: ListMenuItem[] }>(
