@@ -15,6 +15,7 @@ export const ViewColumn: FC<IViewColumnProps> = (props) => {
   return (
     <div
       ref={props.provided.innerRef}
+      hidden={!Boolean(props.column.name)}
       {...props.provided.draggableProps}
       {...props.provided.dragHandleProps}
       className={mergeClasses(

@@ -36,9 +36,7 @@ export const ViewColumnsPanel: FC = () => {
                 ref={provided.innerRef}
                 className={styles.droppableArea}
               >
-                {columns
-                  .filter((column) => Boolean(column.name))
-                  .map((column, index) => (
+                {columns .map((column, index) => (
                     <Draggable
                       key={column.key}
                       draggableId={column.key}

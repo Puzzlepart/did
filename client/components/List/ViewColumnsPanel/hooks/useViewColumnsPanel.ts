@@ -14,9 +14,7 @@ export const useViewColumnsPanel = () => {
   const [columns, setColumns] = useState<IListColumn[]>(context.props.columns)
   const persist = useViewColumnsPersist(columns)
 
-  useEffect(() => {
-    setColumns(persist.apply(context.props.columns))
-  }, [context.props.columns])
+  useEffect(() => setColumns(persist.apply(context.props.columns)), [context.props.columns])
 
   useEffect(() => {
     context.dispatch(UPDATE_COLUMNS(columns))
