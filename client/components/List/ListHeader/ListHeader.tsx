@@ -13,7 +13,10 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
   defaultRender
 }) => {
   const context = useListContext()
-  const mergedHeaderProps = merge<IDetailsHeaderProps>(headerProps, context.props.columnHeaderProps)
+  const mergedHeaderProps = merge<IDetailsHeaderProps>(
+    headerProps,
+    context.props.columnHeaderProps
+  )
   const root = useRef(null)
   const hideToolbar =
     context.props.menuItems?.length === 0 &&

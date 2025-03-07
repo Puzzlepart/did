@@ -43,13 +43,14 @@ export const ViewColumnsPanel: FC = () => {
                     index={index}
                   >
                     {(provided, snapshot) => (
-                      <ViewColumn 
-                      index={index}
-                      provided={provided}
-                      snapshot={snapshot}
-                      column={column} 
-                      onToggle={toggleColumnVisibility}
-                      onReorder={reorderColumns} />
+                      <ViewColumn
+                        index={index}
+                        provided={provided}
+                        snapshot={snapshot}
+                        column={column}
+                        onToggle={toggleColumnVisibility}
+                        onReorder={reorderColumns}
+                      />
                     )}
                   </Draggable>
                 ))}

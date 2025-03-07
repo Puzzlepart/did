@@ -22,7 +22,7 @@ import {
   weekColumn,
   yearColumn,
   mailColumn,
-  managerColumn,
+  managerColumn
 } from './definitions'
 
 /**

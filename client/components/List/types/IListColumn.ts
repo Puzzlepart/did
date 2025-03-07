@@ -10,7 +10,7 @@ export interface IListColumn<T extends object = any, P extends object = any>
   extends IColumn {
   /**
    * The label of the column (can differ from the name). This
-   * will be preferred in the [ViewColumnsPanel](../ViewColumnsPanel/ViewColumnsPanel.tsx) 
+   * will be preferred in the [ViewColumnsPanel](../ViewColumnsPanel/ViewColumnsPanel.tsx)
    * component.
    */
   label?: string
