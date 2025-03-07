@@ -21,6 +21,7 @@ export function useList(props: IListProps) {
     origItems: props.items,
     items: props.items,
     itemsPreFilter: props.items,
+    columns: props.columns,
     searchTerm: document.location.hash.includes('q=')
       ? decodeURIComponent(document.location.hash.split('q=')[1].split('&')[0])
       : ''

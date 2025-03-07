@@ -35,6 +35,7 @@ export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
 export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
 )
+export const UPDATE_COLUMNS = createAction<IListColumn[]>('UPDATE_COLUMNS')
 
 /**
  * Applies filters to an array of items based on the provided filter values.
@@ -140,6 +141,9 @@ export default (initialState: IListState) => {
                 f.selected.has(get(entry, f.key, { default: '' }))
               ).length === payload.filters.length
           )
+        })
+        .addCase(UPDATE_COLUMNS, (state, { payload }) => {
+          state.columns = payload
         })
     )
   }, [])

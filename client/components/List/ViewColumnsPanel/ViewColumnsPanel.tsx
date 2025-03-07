@@ -4,6 +4,7 @@ import React, { FC, useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 import { useListContext } from '../context'
 import styles from './ViewColumnsPanel.module.scss'
+import { UPDATE_COLUMNS } from '../reducer'
 
 export const ViewColumnsPanel: FC = () => {
   const context = useListContext()
@@ -12,6 +13,10 @@ export const ViewColumnsPanel: FC = () => {
   useEffect(() => {
     setColumns(context.props.columns)
   }, [context.props.columns])
+
+  useEffect(() => {
+    context.dispatch(UPDATE_COLUMNS(columns))
+  }, [columns])
 
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return
@@ -61,6 +66,7 @@ export const ViewColumnsPanel: FC = () => {
                         className={mergeClasses(styles.columnItem, snapshot.isDragging && styles.dragging)}
                       >
                         <Checkbox
+                        disabled={column.data?.required}
                           checked={!column.data?.hidden}
                           onChange={() => handleToggleColumn(column.key)}
                         />

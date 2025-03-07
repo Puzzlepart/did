@@ -25,6 +25,11 @@ export interface IListState<T = any> extends Pick<IListProps, 'filterValues'> {
   items?: T[]
 
   /**
+   * Columns
+   */
+  columns?: IListColumn[]
+
+  /**
    * Items before filters are applied, but after
    * search term is applied.
    */

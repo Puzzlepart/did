@@ -26,7 +26,10 @@ export function useColumns() {
       [
         createColumnDef<TimeEntry>('title', t('common.titleLabel'), {
           minWidth: 100,
-          maxWidth: 150
+          maxWidth: 150,
+          data: {
+            required: true,
+          }
         }),
         createColumnDef<TimeEntry, IProjectLinkProps>(
           'project.parent.name',
