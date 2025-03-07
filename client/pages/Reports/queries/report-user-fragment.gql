@@ -1,0 +1,13 @@
+fragment ReportUserFragment on User {
+    id
+    displayName
+    givenName
+    surname
+    mail
+    photo {
+        base64
+    }
+    manager {
+        displayName
+    }
+}

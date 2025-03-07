@@ -13,10 +13,11 @@ import { REMOVE_SAVED_FILTER, SET_FILTER } from '../reducer/actions'
 export function useMenuItems(): ListMenuItem[] {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
-  const { savedFilters, activeFilter } = context.state
+  const { savedFilters, activeFilter, loading } = context.state
   return [
     new ListMenuItem(activeFilter?.text ?? t('reports.savedFilters'))
       .withIcon('ContentView')
+      .setDisabled(loading)
       .setHidden(Object.keys(savedFilters).length === 0)
       .setItems(
         Object.keys(savedFilters).map((key) => {

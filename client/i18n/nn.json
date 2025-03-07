@@ -487,7 +487,9 @@
     "fetchDataButton": "Hent ferske data fra serveren",
     "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}.",
     "welcomeHeaderText": "Heim",
-    "filterIconPlaceholder": "Søk etter et ikon for filteret..."
+    "filterIconPlaceholder": "Søk etter et ikon for filteret...",
+    "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer)...",
+    "searchCount": "Viser {{count}} av {{total}} tidsregistreringer"
   },
   "common": {
     "datePicker": {

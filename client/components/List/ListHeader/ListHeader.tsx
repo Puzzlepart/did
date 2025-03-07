@@ -63,7 +63,7 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
       {context.props.searchBox?.fullWidth && (
         <SearchBox {...context.props.searchBox} />
       )}
-      {!hideToolbar && <ListToolbar />}
+      <ListToolbar />
       {defaultRender(mergedHeaderProps)}
     </div>
   )

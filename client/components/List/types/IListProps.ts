@@ -16,7 +16,8 @@ import { IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 import { IListState } from './IListState'
 
-interface SearchBox extends Omit<SearchBoxProps, 'placeholder'> {
+interface SearchBox
+  extends Omit<SearchBoxProps, 'placeholder' | 'contentAfter'> {
   /**
    * Enable full width for the `SearchBox`. It will be standalone
    * and full width, not inside the `ToolBar`.
@@ -31,7 +32,16 @@ interface SearchBox extends Omit<SearchBoxProps, 'placeholder'> {
   /**
    * Placeholder text or function that returns the placeholder text.
    */
-  placeholder?: string | ((state: IListState<any>) => string)
+  placeholder?:
+    | SearchBoxProps['placeholder']
+    | ((state: IListState<any>) => SearchBoxProps['placeholder'])
+
+  /**
+   * Content after the search box or function that returns the content.
+   */
+  contentAfter?:
+    | SearchBoxProps['contentAfter']
+    | ((state: IListState<any>) => SearchBoxProps['contentAfter'])
 
   /**
    * Delay in milliseconds before executing the search (default: 300).

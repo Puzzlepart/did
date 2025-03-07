@@ -1,3 +1,5 @@
+#import "./report-user-fragment.gql"
+
 query SummaryReport(
   $userQuery: UserQuery
   $queries: [ConfirmedPeriodsQuery!]!
@@ -13,13 +15,8 @@ query SummaryReport(
       duration
     }
   }
-  users: users(query: $userQuery) {
-    id
-    displayName
-    mail
-    photo {
-      base64
-    }
+  users: users {
+    ...ReportUserFragment
   }
   projects: projects {
     _id

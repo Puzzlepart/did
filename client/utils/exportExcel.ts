@@ -5,6 +5,16 @@ import s from 'underscore.string'
 import { loadScripts } from './loadScripts'
 import $date from 'DateUtils'
 
+type XLSX = {
+  utils: {
+    aoa_to_sheet: (data: any[][]) => any
+    book_new: () => any
+    book_append_sheet: (workBook: any, sheet: any, name: string) => void
+  }
+  write: (workBook: any, options: any) => string
+}
+type FileSaver = (blob: Blob, fileName: string) => void
+
 export interface IExcelExportOptions {
   fileName: string
   columns?: IListColumn[]
@@ -33,7 +43,7 @@ export default function stringToArrayBuffer(binaryString: string) {
 }
 
 /**
- * Export to Excel
+ * Export to Excel with table formatting and filters
  *
  * @param items - An array of items
  * @param options - Options
@@ -44,7 +54,7 @@ export async function exportExcel(
   items: any[],
   options: IExcelExportOptions
 ): Promise<Blob> {
-  const { xlsx, saveAs } = await loadScripts<{ xlsx: any; saveAs: any }>(
+  const { xlsx, saveAs } = await loadScripts<{ xlsx: XLSX; saveAs: FileSaver }>(
     ['FileSaver.js/1.3.8/FileSaver.min.js', 'xlsx/0.14.5/xlsx.full.min.js'],
     'https://cdnjs.cloudflare.com/ajax/libs/',
     { xlsx: 'XLSX', saveAs: 'saveAs' }
@@ -94,12 +104,45 @@ export async function exportExcel(
       ]
     }
   ]
+
   const workBook = xlsx.utils.book_new()
+
   for (const s of sheets) {
+    // Convert data to worksheet
     const sheet = xlsx.utils.aoa_to_sheet(s.data)
+
+    // Add autofilter to the sheet
+    sheet['!autofilter'] = { ref: sheet['!ref'] }
+
+    // Set column widths (auto-width)
+    const colWidths = columns.map(() => ({ wch: 15 }))
+    sheet['!cols'] = colWidths
+
+    // Add table formatting
+    if (!workBook.Workbook) workBook.Workbook = { Names: [] }
+
+    // Define table range
+    const tableRange = sheet['!ref']
+
+    // Add table definition
+    workBook.Workbook.Names.push({
+      Name: '_xlnm._FilterDatabase',
+      Ref: `'${s.name}'!${tableRange}`,
+      Hidden: true
+    })
+
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
   }
-  const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' })
+
+  const wbout = xlsx.write(workBook, {
+    bookType: 'xlsx',
+    bookSST: false,
+    type: 'binary',
+    Props: {
+      Author: 'Export'
+    }
+  })
+
   const blob = new Blob([stringToArrayBuffer(wbout)], {
     type: 'application/octet-stream'
   })

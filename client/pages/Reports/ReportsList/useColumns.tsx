@@ -185,6 +185,15 @@ export function useColumns() {
             data: { hidden: true }
           }
         ),
+        createColumnDef<TimeEntry>(
+          'resource.manager.displayName',
+          t('common.managerLabel'),
+          {
+            minWidth: 100,
+            onRender: ({ resource }) => <UserColumn user={resource.manager} />,
+            data: { hidden: true }
+          }
+        ),
         createColumnDef<TimeEntry>('resource.mail', t('common.mailLabel'), {
           minWidth: 100,
           data: { hidden: true }

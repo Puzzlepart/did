@@ -63,5 +63,6 @@ export function useListToolbar() {
       ),
     [menuItems]
   )
+
   return menuItemGroups
 }

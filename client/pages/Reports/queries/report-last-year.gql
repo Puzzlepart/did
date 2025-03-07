@@ -1,15 +1,11 @@
 #import "../../../graphql-client/fragments/timeentry-fragment.gql"
+#import "./report-user-fragment.gql"
 
 query LastYearReport {
   timeEntries: report(preset: "LAST_YEAR") {
     ...TimeEntryFragment
   }
   users: users {
-    id
-    displayName
-    mail
-    photo {
-      base64
-    }
+    ...ReportUserFragment
   }
 }

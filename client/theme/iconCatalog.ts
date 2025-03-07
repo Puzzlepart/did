@@ -1,4 +1,6 @@
 import {
+  ColumnSingleCompareRegular,
+  ColumnSingleCompareFilled,
   PersonDeleteRegular,
   PersonDeleteFilled,
   GlobePersonRegular,
@@ -187,6 +189,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  ColumnSingleCompare: {
+    regular: ColumnSingleCompareRegular,
+    filled: ColumnSingleCompareFilled
+  },
   ErrorCircle: {
     regular: ErrorCircleRegular,
     filled: ErrorCircleFilled
