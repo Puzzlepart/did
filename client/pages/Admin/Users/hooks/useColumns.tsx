@@ -47,30 +47,49 @@ export function useColumns(
         maxWidth: 120,
         data: { hidden: isMobile, isSortable: true }
       }),
-      createColumnDef<User>('employmentStartDate', t('admin.users.employmentStartDateLabel'), {
-        minWidth: 100,
-        maxWidth: 100,
-        renderAs: 'timeFromNow',
-        data: { hidden: true, isSortable: false }
-      }),
-      createColumnDef<User>('employmentEndDate', t('admin.users.employmentEndDateLabel'), {
-        minWidth: 100,
-        maxWidth: 100,
-        renderAs: 'timeFromNow',
-        data: { hidden: true, isSortable: false }
-      }),
+      createColumnDef<User>(
+        'employmentStartDate',
+        t('admin.users.employmentStartDateLabel'),
+        {
+          minWidth: 100,
+          maxWidth: 100,
+          renderAs: 'timeFromNow',
+          data: { hidden: true, isSortable: false }
+        }
+      ),
+      createColumnDef<User>(
+        'employmentEndDate',
+        t('admin.users.employmentEndDateLabel'),
+        {
+          minWidth: 100,
+          maxWidth: 100,
+          renderAs: 'timeFromNow',
+          data: { hidden: true, isSortable: false }
+        }
+      ),
       createColumnDef<User>('jobTitle', t('common.jobTitleLabel'), {
         maxWidth: 140,
         data: { hidden: isMobile, isSortable: true }
       }),
-      createColumnDef<User>('preferredLanguage', t('common.preferredLanguageLabel'), {
-        minWidth: 100,
-        maxWidth: 200,
-        data: { hidden: true, isSortable: true }
-      }, (user) => user.preferredLanguage && t(`common.preferredLanguage_${user.preferredLanguage}`)),
+      createColumnDef<User>(
+        'preferredLanguage',
+        t('common.preferredLanguageLabel'),
+        {
+          minWidth: 100,
+          maxWidth: 200,
+          data: { hidden: true, isSortable: true }
+        },
+        (user) =>
+          user.preferredLanguage &&
+          t(`common.preferredLanguage_${user.preferredLanguage}`)
+      ),
       createColumnDef<User, TagProps>('role.name', t('common.roleLabel'), {
         maxWidth: 150,
-        data: { hidden: isMobile || type !== 'active', isSortable: true, isGroupable: true },
+        data: {
+          hidden: isMobile || type !== 'active',
+          isSortable: true,
+          isGroupable: true
+        },
         renderAs: 'tag',
         createRenderProps: (user) => ({
           icon: getFluentIconWithFallback((user.role as Role)?.icon),
@@ -116,7 +135,9 @@ export function useColumns(
           renderAs: 'timeFromNow'
         },
         (user) => (
-          <div className={styles.lastActiveColumn} style={{ visibility: user.lastActive ? 'visible' : 'hidden' }}
+          <div
+            className={styles.lastActiveColumn}
+            style={{ visibility: user.lastActive ? 'visible' : 'hidden' }}
           >
             {getFluentIcon('Timer')}
             <Caption1>{new DateObject(user.lastActive).$.fromNow()}</Caption1>
