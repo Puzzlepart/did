@@ -32,9 +32,13 @@ export const SET_SORT = createAction<{
   direction: 'asc' | 'desc'
 }>('SET_SORT')
 export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
+export const TOGGLE_VIEW_COLUMNS_PANEL = createAction(
+  'TOGGLE_VIEW_COLUMNS_PANEL'
+)
 export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>(
   'FILTERS_UPDATED'
 )
+export const UPDATE_COLUMNS = createAction<IListColumn[]>('UPDATE_COLUMNS')
 
 /**
  * Applies filters to an array of items based on the provided filter values.
@@ -131,6 +135,11 @@ export default (initialState: IListState) => {
             state.filterBy = null
           }
         })
+        .addCase(TOGGLE_VIEW_COLUMNS_PANEL, (state) => {
+          state.viewColumnsPanel = {
+            open: !state.viewColumnsPanel?.open
+          }
+        })
         .addCase(FILTERS_UPDATED, (state, { payload }) => {
           state.filters = payload.filters
           state.items = _.filter(
@@ -140,6 +149,9 @@ export default (initialState: IListState) => {
                 f.selected.has(get(entry, f.key, { default: '' }))
               ).length === payload.filters.length
           )
+        })
+        .addCase(UPDATE_COLUMNS, (state, { payload }) => {
+          state.columns = payload
         })
     )
   }, [])

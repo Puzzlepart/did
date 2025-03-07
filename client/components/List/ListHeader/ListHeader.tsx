@@ -1,4 +1,4 @@
-import { merge } from '@fluentui/react'
+import { IDetailsHeaderProps, merge } from '@fluentui/react'
 import { mergeClasses } from '@fluentui/react-components'
 import React, { useRef } from 'react'
 import { StyledComponent } from 'types'
@@ -13,7 +13,7 @@ export const ListHeader: StyledComponent<IListHeaderProps> = ({
   defaultRender
 }) => {
   const context = useListContext()
-  const mergedHeaderProps = merge(headerProps, context.props.columnHeaderProps)
+  const mergedHeaderProps = merge<IDetailsHeaderProps>(headerProps, context.props.columnHeaderProps)
   const root = useRef(null)
   const hideToolbar =
     context.props.menuItems?.length === 0 &&

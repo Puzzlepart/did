@@ -489,8 +489,10 @@
     "reportLinkUpdatedText": "Updated by {{updatedBy}} on {{updatedAt}}.",
     "welcomeHeaderText": "Home",
     "filterIconPlaceholder": "Search for a filter icon...",
-    "searchPlaceholder": "Search in {{count}} time entries ({{hours}} hours)...",
-    "searchCount": "Showing {{count}} of {{total}} time entries"
+    "searchPlaceholder": "Search in {{count}} time entries ({{hours}} hours) for {{preset}}..",
+    "searchCount": "Showing {{count}} of {{total}} time entries",
+    "viewColumnsLabel": "Show or hide columns",
+    "periodColumnDescription": "Displays the period of the entry in week, month, and year format."
   },
   "common": {
     "datePicker": {
@@ -830,7 +832,13 @@
     "autoMatchScoreHint": "You have auto-matched **{{autoMatch}}%** of the total entries, meaning that **{{manualMatch}}%** of the entries have been matched to a project manually in the application.",
     "autoMatchWarning": "The automatic matching score is below 85%. To improve accuracy, please ensure your Outlook calendar events are consistently categorized and consider adding the relevant project tag to the subject or body of your events.",
     "autoMatchError": "The automatic matching score is critically low (below 70%). To achieve better matching results, please categorize your Outlook events appropriately and include the correct project tag in the event subject or body.",
-    "autoMatchSuccess": "The automatic matching score is very high (above 95%). Your Outlook events appear well-structured with correct categories and project tags. Keep this up to ensure accurate time tracking."
+    "autoMatchSuccess": "The automatic matching score is very high (above 95%). Your Outlook events appear well-structured with correct categories and project tags. Keep this up to ensure accurate time tracking.",
+    "periodLabel": "Period",
+    "duration": "{{h}}h, {{m}}m",
+    "startTimeLabel_MMM_DD": "Start time (Date Only)",
+    "endTimeLabel_MMM_DD": "End time (Date Only)",
+    "employeeWithRoleLabel": "Employee (with role details)",
+    "employeeWithRoleDescription": "Displays the employee associated with the time entry, including details of the role they hold within the project during the recorded period."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -937,6 +945,14 @@
       "addUser": "Add",
       "displayName": "Name",
       "removeUser": "Remove"
+    }
+  },
+  "list": {
+    "viewColumnsPanel": {
+      "title": "Edit view columns",
+      "description": "Select the columns to display in the list view. To change the order, you can drag and drop or use the up and down arrows next to each column. Changes here does not affect the export to Excel.",
+      "moveUp": "Move column up",
+      "moveDown": "Move column down"
     }
   }
 }

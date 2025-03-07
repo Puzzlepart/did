@@ -24,6 +24,13 @@ export function useBrowserStorage<T = any>({
     }
   })
 
+  const set = (value: T) => {
+    try {
+      setStoredValue(value)
+      store.setItem(key, JSON.stringify(value))
+    } catch {}
+  }
+
   /**
    * Append to array
    *
@@ -48,5 +55,5 @@ export function useBrowserStorage<T = any>({
     } catch {}
   }
 
-  return [storedValue, append, clear] as const
+  return [storedValue, append, clear, set] as const
 }

@@ -57,6 +57,7 @@
     "@octokit/request": "5.4.14",
     "@primer/css": "16.0.2",
     "@reduxjs/toolkit": "1.6.0",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@uifabric/icons": "7.9.5",
     "activity-detector": "^3.0.0",
     "archiver": "^5.3.0",
@@ -104,6 +105,7 @@
     "pzl-react-reusable-components": "0.3.5-2",
     "randomcolor": "0.6.2",
     "react": "17.0.2",
+    "react-beautiful-dnd": "^13.1.1",
     "react-color": "2.19.3",
     "react-copy-to-clipboard": "5.1.0",
     "react-device-detect": "2.1.2",
@@ -345,6 +347,10 @@
     "colours": true
   },
   "gitmoji": {
+    "lazy": [
+      "🍺",
+      "Can't remember what I did"
+    ],
     "services": [
       "🚀",
       "Updated or added new services"

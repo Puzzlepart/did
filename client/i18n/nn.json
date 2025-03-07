@@ -488,8 +488,10 @@
     "reportLinkUpdatedText": "Oppdatert av {{updatedBy}} {{updatedAt}}.",
     "welcomeHeaderText": "Heim",
     "filterIconPlaceholder": "Søk etter et ikon for filteret...",
-    "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer)...",
-    "searchCount": "Viser {{count}} av {{total}} tidsregistreringer"
+    "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer) for {{preset}}...",
+    "searchCount": "Viser {{count}} av {{total}} tidsregistreringer",
+    "viewColumnsLabel": " Vis eller skjul kolonner",
+    "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format."
   },
   "common": {
     "datePicker": {
@@ -828,7 +830,13 @@
     "autoMatchScoreHint": "Du har automatisk matchet **{{autoMatch}}%** av de totale tidsoppføringene, noe som betyr at **{{manualMatch}}%** av oppføringene har blitt matchet manuelt i applikasjonen.",
     "autoMatchError": "Den automatiske matchingsscoren er kritisk lav (under 70 %). For bedre resultater bør du kategorisere Outlook-avtalene dine og inkludere korrekt prosjekttagg i emnefeltet eller brødteksten.",
     "autoMatchWarning": "Den automatiske matchingsscoren er under 85 %. For å forbedre nøyaktigheten, bør du sørge for at Outlook-avtalene dine er riktig kategorisert, og gjerne legge til prosjekttagg i emnefeltet eller brødteksten til avtalene.",
-    "autoMatchSuccess": "Den automatiske matchingsscoren er veldig høy (over 95 %). Outlook-avtalene dine ser ut til å være godt strukturert med riktige kategorier og prosjekttagger. Fortsett med dette for å sikre presis registrering."
+    "autoMatchSuccess": "Den automatiske matchingsscoren er veldig høy (over 95 %). Outlook-avtalene dine ser ut til å være godt strukturert med riktige kategorier og prosjekttagger. Fortsett med dette for å sikre presis registrering.",
+    "periodLabel": "Periode",
+    "duration": "{{h}}t, {{m}}m",
+    "startTimeLabel_MMM_DD": "Starttid (kun dato)",
+    "endTimeLabel_MMM_DD": "Sluttid (kun dato)",
+    "employeeWithRoleLabel": "Tilsett (med rolledetaljer)",
+    "employeeWithRoleDescription": "Viser den tilsette knytte til timeregistreringa, inkludert detaljar om rolla vedkommande har i prosjektet i den aktuelle perioden."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -935,6 +943,14 @@
       "addUser": "Legg til",
       "displayName": "Namn",
       "removeUser": "Fjern"
+    }
+  },
+  "list": {
+    "viewColumnsPanel": {
+      "title": "Rediger visningskolonner",
+      "description": "Vel kolonnane som skal visast i listevisninga for deg. Om du vil endra rekkjefølgja, kan du dra og sleppa eller bruka opp- og ned-pila ved sida av kvar kolonne. Endringar her påverkar ikkje Excel-eksporten.",
+      "moveUp": "Flytt kolonna opp",
+      "moveDown": "Flytt kolonna ned"
     }
   }
 }

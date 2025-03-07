@@ -26,9 +26,9 @@ type UseListProps<T = any> = {
 }
 
 /**
- * List props hook
+ * Custom hook to generate list properties for a component.
  *
- * @category List
+ * @param props - The props for the list.
  */
 export function useListProps({
   context,
@@ -36,7 +36,7 @@ export function useListProps({
   groups,
   items
 }: UseListProps): IListProps {
-  const columns = _.filter(context.props.columns, (col) => {
+  const columns = _.filter(context.state.columns, (col) => {
     const groupBy = context.props.listGroupProps?.fieldName
     if (col.data?.hidden) return false
     if (groupBy && col.fieldName === groupBy) return false

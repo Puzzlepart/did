@@ -1,13 +1,12 @@
 import { CheckboxVisibility } from '@fluentui/react'
-import { List, UserMessage } from 'components'
+import { List } from 'components'
 import { Progress } from 'components/Progress'
 import { TabComponent } from 'components/Tabs'
 import React from 'react'
-import _ from 'underscore'
 import { SET_FILTER_STATE } from '../reducer/actions'
+import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReportsList } from './useReportsList'
-import styles from './ReportsList.module.scss'
 
 /**
  * Reports list
@@ -50,15 +49,9 @@ export const ReportsList: TabComponent = () => {
           placeholder: createPlaceholder,
           contentAfter: createContentAfter
         }}
+        enableViewColumnsEdit
+        persistViewColumns={ReportsList.displayName}
       />
-      {_.isEmpty(context.state.data.timeEntries) &&
-        !context.state.loading &&
-        context.queryPreset && (
-          <UserMessage
-            text={t('reports.noEntriesText', context.queryPreset)}
-            style={{ marginTop: -15 }}
-          />
-        )}
     </div>
   )
 }

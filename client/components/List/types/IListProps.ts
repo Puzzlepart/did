@@ -11,10 +11,14 @@ import { CSSProperties, HTMLProps } from 'react'
 import { ListMenuItem } from '../ListHeader'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
-import { ListFilterState } from './ListFilterState'
-import { IFilterPanelProps } from 'components/FilterPanel'
+import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 import { IListState } from './IListState'
+
+export type ListFilterState = {
+  filters: IFilter[]
+  isFiltered: boolean
+}
 
 interface SearchBox
   extends Omit<SearchBoxProps, 'placeholder' | 'contentAfter'> {
@@ -168,4 +172,16 @@ export interface IListProps<T = any>
    * Always hide the empty message, even if there are no items.
    */
   hideEmptyMessage?: boolean
+
+  /**
+   * Enable view columns edit mode in the view columns panel.
+   * This feature is (for now) not enabled by default.
+   */
+  enableViewColumnsEdit?: boolean
+
+  /**
+   * Persist view columns in the local storage
+   * using the provided key.
+   */
+  persistViewColumns?: string
 }
