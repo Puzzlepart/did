@@ -42,9 +42,28 @@ export function useColumns() {
     hourlyRateColumn,
     startEndDateTimeColumn,
     durationColumn,
-    startDateTimeColumn,
-    endDateTimeColumn,
-    resourceColumn,
+    startDateTimeColumn(),
+    startDateTimeColumn({
+      key: 'startDateTimeShort',
+      name: t('common.startTimeLabel_MMM_DD'),
+      template: 'MMM DD',
+      hiddenFromExport: true
+    }),
+    endDateTimeColumn(),
+    endDateTimeColumn({
+      key: 'endDateTimeShort',
+      name: t('common.endTimeLabel_MMM_DD'),
+      template: 'MMM DD',
+      hiddenFromExport: true
+    }),
+    resourceColumn(),
+    resourceColumn({
+      key: 'resource.displayNameWithRole',
+      label: t('common.employeeWithRoleLabel'),
+      description: t('common.employeeWithRoleDescription'),
+      includeRoleDetails: true,
+      hidden: true
+    }),
     surnameColumn,
     givenNameColumn,
     managerColumn,

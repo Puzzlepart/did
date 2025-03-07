@@ -23,7 +23,8 @@ export function useReportsList() {
       .toFixed(0)
     return t('reports.searchPlaceholder', {
       hours,
-      count: state.origItems.length
+      count: state.origItems.length,
+      preset: context.queryPreset?.text?.toLowerCase()
     })
   }
 

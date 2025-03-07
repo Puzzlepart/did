@@ -38,3 +38,4 @@ schema.gql
 revision.txt
 *.csv
 .vscode/chrome-debug-user-data
+client/components/Template

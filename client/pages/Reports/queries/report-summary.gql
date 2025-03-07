@@ -1,7 +1,6 @@
 #import "./report-user-fragment.gql"
 
 query SummaryReport(
-  $userQuery: UserQuery
   $queries: [ConfirmedPeriodsQuery!]!
 ) {
   periods: confirmedPeriods(queries: $queries) {

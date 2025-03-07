@@ -10,6 +10,7 @@ export const periodColumn: CreateColumnDefFunction = (t) =>
     'period',
     t('common.periodLabel'),
     {
+      description: t('reports.periodColumnDescription'),
       minWidth: 100,
       maxWidth: 100,
       data: { hiddenFromExport: true }

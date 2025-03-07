@@ -1,13 +1,12 @@
-import { Checkbox, Label, mergeClasses } from '@fluentui/react-components'
 import { Panel } from 'components/Panel'
 import React, { FC } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import styles from './ViewColumnsPanel.module.scss'
-import { useDragAndDrop, useViewColumnsPanel } from './hooks'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon } from 'utils'
 import { useListContext } from '../context'
 import { TOGGLE_VIEW_COLUMNS_PANEL } from '../reducer'
+import { useDragAndDrop, useViewColumnsPanel } from './hooks'
+import { ViewColumn } from './ViewColumn'
+import styles from './ViewColumnsPanel.module.scss'
 
 /**
  * Component to display and manage list columns, allowing users to:
@@ -44,36 +43,13 @@ export const ViewColumnsPanel: FC = () => {
                     index={index}
                   >
                     {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className={mergeClasses(
-                          styles.columnItem,
-                          snapshot.isDragging ? styles.dragging : ''
-                        )}
-                      >
-                        <Checkbox
-                          disabled={column.data?.required}
-                          checked={!column.data?.hidden}
-                          onChange={() => toggleColumnVisibility(column.key)}
-                        />
-                        <Label className={styles.label}>{column.name}</Label>
-                        <div
-                          className={styles.moveUp}
-                          onClick={() => reorderColumns(index, index - 1)}
-                          title={t('list.viewColumnsPanel.moveUp')}
-                        >
-                          {getFluentIcon('ChevronUp', { size: 24 })}
-                        </div>
-                        <div
-                          className={styles.moveDown}
-                          onClick={() => reorderColumns(index, index + 1)}
-                          title={t('list.viewColumnsPanel.moveDown')}
-                        >
-                          {getFluentIcon('ChevronDown', { size: 24 })}
-                        </div>
-                      </div>
+                      <ViewColumn 
+                      index={index}
+                      provided={provided}
+                      snapshot={snapshot}
+                      column={column} 
+                      onToggle={toggleColumnVisibility}
+                      onReorder={reorderColumns} />
                     )}
                   </Draggable>
                 ))}
