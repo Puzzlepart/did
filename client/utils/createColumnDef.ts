@@ -1,5 +1,8 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { IListColumn } from 'components/List'
+import { TFunction } from 'react-i18next'
+
+export type CreateColumnDefFunction = (t: TFunction) => IListColumn
 
 /**
  * Creates a column definition for the `List` component.

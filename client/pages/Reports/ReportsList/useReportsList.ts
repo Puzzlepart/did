@@ -3,7 +3,7 @@
 import { createElement, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
-import { useColumns } from './useColumns'
+import { useColumns } from './columns/useColumns'
 import { useMenuItems } from './useMenuItems'
 import { IListProps } from 'components'
 import { Caption1 } from '@fluentui/react-components'
