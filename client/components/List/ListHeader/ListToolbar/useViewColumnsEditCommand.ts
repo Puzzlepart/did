@@ -20,7 +20,7 @@ export function useViewColumnsEditCommand(): ListMenuItem {
       .setGroup('actions')
       .withIcon('Settings')
       .setDisabled(context.props.enableShimmer)
-      .setHidden(context.props.enableViewColumnsEdit === false)
+      .setHidden(!context.props.enableViewColumnsEdit)
       .withDispatch(context, TOGGLE_VIEW_COLUMNS_PANEL)
   }, [])
 }

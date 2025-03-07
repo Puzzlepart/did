@@ -21,8 +21,6 @@ import { ViewColumnsPanel } from './ViewColumnsPanel'
  */
 export const List: ReusableComponent<IListProps> = (props) => {
   const { listProps, context } = useList(props)
-  // eslint-disable-next-line no-console
-  console.log('List', context.state.columns)
   return (
     <div className={List.className} hidden={props.hidden}>
       <ListContext.Provider value={context}>
