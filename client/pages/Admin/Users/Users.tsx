@@ -98,9 +98,11 @@ export const Users: TabComponent<ITabProps> = () => {
           <UserForm
             {...context.state.userForm}
             open={!!context.state.userForm}
-            onDismiss={(event) => {
+            onDismiss={({
+              refetch = false
+            } = {}) => {
               context.dispatch(HIDE_USER_FORM())
-              !event && context.refetch()
+              refetch && context.refetch()
             }}
           />
           <BulkImportPanel

@@ -8,7 +8,6 @@ import { useTabsHistory } from './useTabsHistory'
  * @param props - The props object containing the tab items and level etc.
  */
 export function useTabsSelection(props: ITabsProps) {
-  const [updateHistory, tab] = useTabsHistory(props.level)
   const itemKeys = Object.keys(props.items)
   const [selectedValue, setSelectedValue] = useState<string>(null)
   useEffect(() => {
@@ -18,6 +17,6 @@ export function useTabsSelection(props: ITabsProps) {
         : (props.defaultSelectedValue as string) ?? itemKeys[0]
     )
   }, [])
-
+  const [updateHistory, tab] = useTabsHistory(props.level, selectedValue)
   return { selectedValue, setSelectedValue, updateHistory }
 }

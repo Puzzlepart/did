@@ -3,7 +3,18 @@ import { IDynamicButtonProps } from 'components/DynamicButton'
 import { ReusableComponent } from 'components/types'
 import { HTMLProps, ReactElement } from 'react'
 
-type IPanelDismissEvent = any
+type IPanelDismissEvent = {
+  /**
+   * Any arbitrary data that is passed to the dismiss event.
+   */
+  [key: string]: any
+
+  /**
+   * Whether data should be refetched after the panel is dismissed.
+   * This is useful when the panel is used to create or update data.
+   */
+  refetch?: boolean
+}
 
 export interface IPanelProps
   extends Pick<DrawerProps, 'open' | 'type' | 'position' | 'size'>,

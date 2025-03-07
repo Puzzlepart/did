@@ -63,7 +63,7 @@ export const useUserFormSubmit: FormSubmitHook<
       )
     } finally {
       model.reset()
-      props.onDismiss()
+      props.onDismiss({ refetch: true })
     }
   }
 

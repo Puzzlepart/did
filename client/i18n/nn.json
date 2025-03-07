@@ -838,12 +838,12 @@
     "employeeWithRoleLabel": "Tilsett (med rolledetaljer)",
     "employeeWithRoleDescription": "Viser den tilsette knytte til timeregistreringa, inkludert detaljar om rolla vedkommande har i prosjektet i den aktuelle perioden.",
     "externalLabel": "Ekstern",
-    "preferredLanguage_en-US": "English (United States)",
-    "preferredLanguage_en-GB": "English (United Kingdom)",
-    "preferredLanguage_nb-NO": "Norsk (bokmål)",
-    "preferredLanguage_nb": "Norsk (bokmål)",
-    "preferredLanguage_nn-NO": "Norsk (bokmål)",
-    "preferredLanguage_nn": "Norsk (nynorsk)"
+    "preferredLanguage_en-US": "🇺🇸 English (United States)",
+    "preferredLanguage_en-GB": "🇬🇧 English (United Kingdom)",
+    "preferredLanguage_nb-NO": "🇳🇴 Norsk (bokmål)",
+    "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
+    "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
+    "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

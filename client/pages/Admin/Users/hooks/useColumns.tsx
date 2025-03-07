@@ -75,8 +75,8 @@ export function useColumns(
         'preferredLanguage',
         t('common.preferredLanguageLabel'),
         {
-          minWidth: 100,
-          maxWidth: 200,
+          minWidth: 150,
+          maxWidth: 150,
           data: { hidden: true, isSortable: true }
         },
         (user) =>

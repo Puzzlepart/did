@@ -840,12 +840,12 @@
     "employeeWithRoleLabel": "Employee (with role details)",
     "employeeWithRoleDescription": "Displays the employee associated with the time entry, including details of the role they hold within the project during the recorded period.",
     "externalLabel": "External",
-    "preferredLanguage_en-US": "English (United States)",
-    "preferredLanguage_en-GB": "English (United Kingdom)",
-    "preferredLanguage_nb-NO": "Norsk (bokmål)",
-    "preferredLanguage_nb": "Norsk (bokmål)",
-    "preferredLanguage_nn-NO": "Norsk (bokmål)",
-    "preferredLanguage_nn": "Norsk (nynorsk)"
+    "preferredLanguage_en-US": "🇺🇸 English (United States)",
+    "preferredLanguage_en-GB": "🇬🇧 English (United Kingdom)",
+    "preferredLanguage_nb-NO": "🇳🇴 Norsk (bokmål)",
+    "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
+    "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
+    "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
