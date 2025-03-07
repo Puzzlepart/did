@@ -16,26 +16,31 @@ type ResourceColumnOptions = {
 /**
  * Resource column definition for reports list
  */
-export const resourceColumn = ({
-  key = 'resource.displayName',
-  label,
-  description,
-  includeRoleDetails = false,
-  hidden = false
-}: ResourceColumnOptions = {}): CreateColumnDefFunction => (t) => createColumnDef<TimeEntry>(
-  key,
-  t('common.employeeLabel'),
-  {
+export const resourceColumn =
+  ({
+    key = 'resource.displayName',
     label,
     description,
-    minWidth: 120,
-    maxWidth: 175,
-    data: {
-      isGroupable: true,
-      isFilterable: true,
-      hidden,
-      filterType: ResourceFilter
-    }
-  },
-  ({ resource, role }) => <UserColumn user={resource} role={includeRoleDetails && role} />
-)
+    includeRoleDetails = false,
+    hidden = false
+  }: ResourceColumnOptions = {}): CreateColumnDefFunction =>
+  (t) =>
+    createColumnDef<TimeEntry>(
+      key,
+      t('common.employeeLabel'),
+      {
+        label,
+        description,
+        minWidth: 120,
+        maxWidth: 175,
+        data: {
+          isGroupable: true,
+          isFilterable: true,
+          hidden,
+          filterType: ResourceFilter
+        }
+      },
+      ({ resource, role }) => (
+        <UserColumn user={resource} role={includeRoleDetails && role} />
+      )
+    )

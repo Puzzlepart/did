@@ -1,6 +1,6 @@
 export type DateTimeColumnOptions = {
-    key?: string;
-    name?: string;
-    template?: string;
-    hiddenFromExport?: boolean;
-};
+  key?: string
+  name?: string
+  template?: string
+  hiddenFromExport?: boolean
+}

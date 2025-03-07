@@ -8,7 +8,7 @@ import { TFunction } from 'react-i18next'
  * the column headers etc.
  *
  * @param t - A translation function used to localize column headers.
- * 
+ *
  * @returns An object representing the column definition.
  */
 export type CreateColumnDefFunction = (t: TFunction) => IListColumn
