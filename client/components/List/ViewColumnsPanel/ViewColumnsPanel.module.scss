@@ -1,0 +1,27 @@
+.columnsContainer {
+  margin-top: 16px;
+}
+
+.droppableArea {
+  padding: 8px 0;
+}
+
+.columnItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  background-color: var(--colorNeutralBackground1);
+  border-radius: 4px;
+  cursor: grab;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--colorNeutralBackground1Hover);
+  }
+  
+  &.dragging {
+    background-color: var(--colorNeutralBackground2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
