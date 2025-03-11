@@ -34,8 +34,8 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
             input={
               context.state.searchTerm
                 ? {
-                  value: context.state.searchTerm
-                }
+                    value: context.state.searchTerm
+                  }
                 : {}
             }
             freeform={props.freeform}

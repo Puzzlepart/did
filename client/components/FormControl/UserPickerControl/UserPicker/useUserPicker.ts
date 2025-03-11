@@ -20,9 +20,9 @@ export function useUserPicker(props: IUserPickerProps) {
     const selectedUsers =
       _.isArray(props.value) && props.multiple
         ? props.value.map((value) => ({
-          ...value,
-          ...users.find((user) => user.id === value.id)
-        }))
+            ...value,
+            ...users.find((user) => user.id === value.id)
+          }))
         : []
     setState({
       users,
@@ -126,23 +126,26 @@ export function useUserPicker(props: IUserPickerProps) {
     () =>
       state.users
         .filter(
-          (user) => user.accountEnabled !== false && Boolean(user.displayName))
-        .filter(
-          (user) => {
-            const isSelected = state.selectedUsers.some((u) => u.id === user.id)
-            const matchesSearchTerm = user.displayName
-              .toLowerCase()
-              .includes(state.searchTerm.toLowerCase())
-            return !isSelected && matchesSearchTerm
-          })
+          (user) => user.accountEnabled !== false && Boolean(user.displayName)
+        )
+        .filter((user) => {
+          const isSelected = state.selectedUsers.some((u) => u.id === user.id)
+          const matchesSearchTerm = user.displayName
+            .toLowerCase()
+            .includes(state.searchTerm.toLowerCase())
+          return !isSelected && matchesSearchTerm
+        })
         .sort((a, b) => {
-          const aStartsWith = a.displayName.toLowerCase().startsWith(state.searchTerm.toLowerCase())
-          const bStartsWith = b.displayName.toLowerCase().startsWith(state.searchTerm.toLowerCase())
+          const aStartsWith = a.displayName
+            .toLowerCase()
+            .startsWith(state.searchTerm.toLowerCase())
+          const bStartsWith = b.displayName
+            .toLowerCase()
+            .startsWith(state.searchTerm.toLowerCase())
           if (aStartsWith && !bStartsWith) return -1
           if (!aStartsWith && bStartsWith) return 1
           return 0
-        }
-        ),
+        }),
     [state.users, state.selectedUsers, state.searchTerm]
   )
 

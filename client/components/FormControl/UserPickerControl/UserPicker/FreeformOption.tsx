@@ -6,7 +6,7 @@ import { UserPickerContext } from './context'
 export const FreeformOption: FC = () => {
   const { t } = useTranslation()
   const context = useContext(UserPickerContext)
-  if(!context.state.searchTerm) return null
+  if (!context.state.searchTerm) return null
   return (
     <Option
       key='freeform'
