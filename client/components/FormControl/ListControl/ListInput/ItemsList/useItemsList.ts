@@ -9,7 +9,7 @@ import { IColumn } from '@fluentui/react'
 type UseItemsListReturnType = {
   /**
    * Function to check if an field for an item is currently being edited.
-   * 
+   *
    * @param index Index of the item in the list.
    * @param key Key of the field being edited.
    */
@@ -17,7 +17,7 @@ type UseItemsListReturnType = {
 
   /**
    * Creates a column object for a field.
-   * 
+   *
    * @param field Field object to create a column for.
    */
   createColumn: (field: ListField) => IColumn
@@ -58,13 +58,14 @@ export const useItemsList = (): UseItemsListReturnType => {
     name: field.label,
     minWidth: 100,
     maxWidth: field.maxWidth ?? 140,
-    onRender: (item: any, index: number) => createElement(ItemCell, {
-      index,
-      field,
-      value: item[field.key],
-      isEditing: isEditing(index, field.key),
-      onToggleEdit: () => onToggleEdit(index, field.key)
-    })
+    onRender: (item: any, index: number) =>
+      createElement(ItemCell, {
+        index,
+        field,
+        value: item[field.key],
+        isEditing: isEditing(index, field.key),
+        onToggleEdit: () => onToggleEdit(index, field.key)
+      })
   })
 
   return { isEditing, createColumn, field }

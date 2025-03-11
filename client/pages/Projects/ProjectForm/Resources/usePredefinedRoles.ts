@@ -14,6 +14,7 @@ export function usePredefinedRoles() {
   const roleDefinitions = useExtension<
     Project,
     Array<{
+      id: string
       name: string
       hourlyRate: number
     }>
@@ -29,15 +30,16 @@ export function usePredefinedRoles() {
     const roleDef = roleDefinitions.find(
       (role) => role.name === selectedOptions[0]
     )
-    return (
-      roleDef && {
-        projectRole: roleDef.name,
-        hourlyRate: roleDef.hourlyRate
-      }
-    )
+    if (!Boolean(roleDef)) return null
+    return {
+      projectRoleId: roleDef.id,
+      projectRole: roleDef.name,
+      hourlyRate: roleDef.hourlyRate
+    }
   }
   return {
     hourlyRate: null,
+    projectRoleId: null,
     projectRole: {
       label: t('common.projectRole'),
       type: 'choice',

@@ -23,5 +23,6 @@ export const RoleDefinitions: ProjectFormTabComponent = () => {
   )
 }
 
+RoleDefinitions.displayName = 'RoleDefinitions'
 RoleDefinitions.extensionId = '3f04bf7b-2a80-4e28-843d-64d1bd622ea7'
 RoleDefinitions.extensionDescription = 'Role definitions for the project'

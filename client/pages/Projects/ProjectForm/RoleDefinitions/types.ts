@@ -22,7 +22,7 @@ export const HourlyRateField: GetFieldFunction<Partial<IInputFieldProps>> = (
   required: true,
   editable: true,
   maxWidth: 80,
-  infoMessage:t('projects.roleDefinitions.hourlyRateInfo'),
+  infoMessage: t('projects.roleDefinitions.hourlyRateInfo'),
   props: {
     list: {
       increment: 10,
