@@ -155,7 +155,6 @@ export class ProjectService extends MongoDocumentService<Project> {
         },
         {
           key: ['getprojectsdata', query],
-          hash: 'sha256',
           disabled: !mergedOptions.cache
         }
       )

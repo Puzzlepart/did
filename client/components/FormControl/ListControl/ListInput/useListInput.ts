@@ -26,6 +26,24 @@ export function useListInput(props: IListInputProps) {
     props.onChange(items)
   }
 
+  const onUpdateItem = (index: number, field: ListField, value: string) => {
+    const items = [...state.items].map((item, idx) => {
+      if (idx === index) {
+        return {
+          ...item,
+          [field.key]: value
+        }
+      }
+      return item
+    })
+
+    setState({
+      items
+    })
+
+    props.onChange(items)
+  }
+
   const onRemoveItem = (index: number) => {
     const items = state.items.filter((_, idx) => idx !== index)
 
@@ -73,6 +91,7 @@ export function useListInput(props: IListInputProps) {
     state,
     setState,
     onAddItem,
+    onUpdateItem,
     onRemoveItem,
     onFieldChange,
     isItemValid

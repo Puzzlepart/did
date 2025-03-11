@@ -255,9 +255,10 @@ export class CacheService {
    * it will clear all cache for the current prefix.
    *
    * @param key - Cache key
+   * @param hash - Hash algorithm
    */
-  public clear(key: CacheKey = null) {
-    const pattern = `${this._getScopedCacheKey(key, CacheScope.GLOBAL)}*`
+  public clear(key: CacheKey = null, hash?: string) {
+    const pattern = `${this._getScopedCacheKey(key, CacheScope.GLOBAL, hash)}*`
     log(`Clearing cache for key ${colors.magenta(pattern)}...`)
     return new Promise((resolve) => {
       redisMiddlware.keys(pattern, (_error, keys) => {

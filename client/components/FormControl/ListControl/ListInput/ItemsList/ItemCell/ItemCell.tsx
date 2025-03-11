@@ -2,7 +2,6 @@
 import { InputField } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { emptyFunction } from 'utils/emptyFunction'
 import styles from './ItemCell.module.scss'
 import { renderValue } from './renderValue'
 import { IItemCellProps } from './types'
@@ -10,23 +9,27 @@ import { useItemCell } from './useItemCell'
 
 export const ItemCell: FC<IItemCellProps> = (props) => {
   const { t } = useTranslation()
-  const { value, onChange, editing } = useItemCell(props)
+  const { value, onChange, onEnter,onCancel } = useItemCell(props)
   return (
     <div className={styles.itemCell}>
-      {editing.value ? (
+      {props.isEditing ? (
         <InputField
+          {...props.field.props?.list}
           className={styles.input}
           value={value}
           onChange={onChange}
-          onEnter={() => {
-            props.onChange(value)
-            editing.toggle()
-          }}
+          onEnter={onEnter}
+          onCancel={onCancel}
         />
       ) : (
         <span
           className={styles.value}
-          onClick={Boolean(props.onChange) ? editing.toggle : emptyFunction}
+          style={{ cursor: props.field.editable ? 'pointer' : 'default' }}
+          onClick={() => {
+            if (props.field.editable) {
+              props.onToggleEdit()
+            }
+          }}
         >
           {renderValue(
             value,

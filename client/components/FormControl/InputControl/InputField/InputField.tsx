@@ -1,4 +1,4 @@
-import { Input, Textarea } from '@fluentui/react-components'
+import { Input, mergeClasses, Textarea } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import _ from 'underscore'
@@ -21,7 +21,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
     >
       {props.rows > 1 ? (
         <Textarea
-          className={styles.input}
+          className={mergeClasses(styles.input, props.className)}
           {..._.pick(
             props,
             'id',
@@ -35,10 +35,11 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'rows',
             'onBlur'
           )}
+          style={props.styles?.input}
         />
       ) : (
         <Input
-          className={styles.input}
+          className={mergeClasses(styles.input, props.className)}
           {..._.pick(
             props,
             'id',
@@ -55,9 +56,13 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'contentBefore',
             'contentAfter'
           )}
-          onKeyDown={({ key, currentTarget }) => {
-            if (key === 'Enter' && props.onEnter) {
-              props.onEnter(currentTarget.value)
+          style={props.styles?.input}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && props.onEnter) {
+              props.onEnter(event.currentTarget.value, event)
+            }
+            if (event.key === 'Escape' && props.onCancel) {
+              props.onCancel(event)
             }
           }}
         />

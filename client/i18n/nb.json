@@ -842,7 +842,8 @@
     "preferredLanguage_nb-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
-    "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)"
+    "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
+    "currencySymbol": "kr"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -949,6 +950,9 @@
       "addUser": "Legg til",
       "displayName": "Navn",
       "removeUser": "Fjern"
+    },
+    "listControl": {
+      "editingInfo": "Du redigerer for øyeblikket et element. Klikk **Enter** for å lagre eller **Escape** for å avbryte redigeringen."
     }
   },
   "list": {

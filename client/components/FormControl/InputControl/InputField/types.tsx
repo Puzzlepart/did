@@ -1,5 +1,5 @@
 import { InputProps, TextareaProps } from '@fluentui/react-components'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, CSSProperties, KeyboardEvent } from 'react'
 import { IFieldProps } from '../../Field'
 
 export interface IInputFieldProps
@@ -12,6 +12,7 @@ export interface IInputFieldProps
       | 'contentAfter'
       | 'minLength'
       | 'maxLength'
+      | 'style'
     >,
     IFieldProps {
   /**
@@ -27,5 +28,17 @@ export interface IInputFieldProps
   /**
    * On enter event handler.
    */
-  onEnter?: (value: any) => void
+  onEnter?: (value: any, event: KeyboardEvent<HTMLInputElement>) => void
+
+  /**
+   * On cancel event handler (`Escape` key is pressed).
+   */
+  onCancel?: (event: KeyboardEvent<HTMLInputElement>) => void
+
+  /**
+   * Styles for the input field etc.
+   */
+  styles?: {
+    input: CSSProperties
+  }
 }

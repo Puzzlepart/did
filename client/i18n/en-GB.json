@@ -845,7 +845,8 @@
     "preferredLanguage_nb-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
-    "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)"
+    "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
+    "currencySymbol": "kr"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -952,6 +953,9 @@
       "addUser": "Add",
       "displayName": "Name",
       "removeUser": "Remove"
+    },
+    "listControl": {
+      "editingInfo": "You are currently editing an item. Click **Enter** to save or **Esc** to cancel."
     }
   },
   "list": {
