@@ -13,7 +13,6 @@ export const Resources: ProjectFormTabComponent = () => {
   const { register } = useFormContext()
   const { additionalMetadata, allowEdit, onRenderValue } = useResources()
 
-
   return (
     <FormGroup gap={15}>
       <UserPickerControl
@@ -31,6 +30,7 @@ export const Resources: ProjectFormTabComponent = () => {
           allowEdit,
           onRenderValue
         }}
+        freeform
       />
     </FormGroup>
   )

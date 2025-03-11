@@ -1,25 +1,28 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ComboboxProps } from '@fluentui/react-components'
-import { useMergedState } from 'hooks'
+import { useMergedState as useState } from 'hooks'
 import _ from 'lodash'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
+import { useMemo } from 'react'
 
 export function useUserPicker(props: IUserPickerProps) {
-  const { state, setState } = useMergedState<IUserPickerState>({
+  const { state, setState } = useState<IUserPickerState>({
     isDataLoaded: false,
     users: [],
-    selectedUsers: []
+    selectedUsers: [],
+    searchTerm: ''
   })
 
   useUserPickerQuery((users) => {
     const selectedUsers =
       _.isArray(props.value) && props.multiple
         ? props.value.map((value) => ({
-            ...value,
-            ...users.find((user) => user.id === value.id)
-          }))
+          ...value,
+          ...users.find((user) => user.id === value.id)
+        }))
         : []
     setState({
       users,
@@ -45,7 +48,7 @@ export function useUserPicker(props: IUserPickerProps) {
     { optionValue }
   ) => {
     const selectedUser = state.users.find((user) => user.id === optionValue)
-    setState({ selectedUser })
+    setState({ selectedUser, searchTerm: '' })
     if (!props.multiple) {
       props.onChange([selectedUser])
     }
@@ -112,11 +115,41 @@ export function useUserPicker(props: IUserPickerProps) {
     setState({ selectedUsers })
   }
 
-  const selectableUsers = state.users.filter(
-    (user) =>
-      !state.selectedUsers.some((u) => u.id === user.id) &&
-      user.accountEnabled !== false
+  /**
+   * Selectable users that can be selected in the `Combobox`.
+   * Filters out users that are already selected and users that are not enabled.
+   * Also filters out users that do not match the search term - if the `displayName`
+   * starts with the search term, it should have precedence over users that have
+   * the search term in the middle of their `displayName`.
+   */
+  const selectableUsers = useMemo(
+    () =>
+      state.users
+        .filter(
+          (user) => user.accountEnabled !== false && Boolean(user.displayName))
+        .filter(
+          (user) => {
+            const isSelected = state.selectedUsers.some((u) => u.id === user.id)
+            const matchesSearchTerm = user.displayName
+              .toLowerCase()
+              .includes(state.searchTerm.toLowerCase())
+            return !isSelected && matchesSearchTerm
+          })
+        .sort((a, b) => {
+          const aStartsWith = a.displayName.toLowerCase().startsWith(state.searchTerm.toLowerCase())
+          const bStartsWith = b.displayName.toLowerCase().startsWith(state.searchTerm.toLowerCase())
+          if (aStartsWith && !bStartsWith) return -1
+          if (!aStartsWith && bStartsWith) return 1
+          return 0
+        }
+        ),
+    [state.users, state.selectedUsers, state.searchTerm]
   )
+
+  const onChange: ComboboxProps['onChange'] = (e) => {
+    if (!props.freeform) return
+    setState({ searchTerm: e.target.value })
+  }
 
   return {
     props,
@@ -124,6 +157,7 @@ export function useUserPicker(props: IUserPickerProps) {
     setState,
     selectableUsers,
     onUserSelected,
+    onChange,
     onAddUser,
     onRemoveUser,
     onSetAdditionalMetadata

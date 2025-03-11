@@ -950,7 +950,9 @@
       "additionalMetadata": "Ekstra informasjon",
       "addUser": "Legg til",
       "displayName": "Navn",
-      "removeUser": "Fjern"
+      "removeUser": "Fjern",
+      "searchTerm": "Søk etter \"{{searchTerm}}\"",
+      "clearSearch": "Klikk for å tømme søk"
     },
     "listControl": {
       "editingInfo": "Du redigerer for øyeblikket et element. Klikk **Enter** for å lagre eller trykk utenfor feltet for å avbryte redigeringen."

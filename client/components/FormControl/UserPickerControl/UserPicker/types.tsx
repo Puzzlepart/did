@@ -1,5 +1,6 @@
 import { User } from 'types'
 import { IUserMetadataCellProps } from './SelectedUsersList'
+import { ComboboxProps } from '@fluentui/react-components'
 
 export type SingleUserPickerValue = string
 export type UserInfo = {
@@ -71,6 +72,11 @@ export interface IUserPickerProps {
       props: IUserMetadataCellProps
     ) => any
   }
+
+  /**
+   * Whether the user picker should allow freeform input.
+   */
+  freeform?: ComboboxProps['freeform']
 }
 
 export interface IUserPickerState {
@@ -96,4 +102,9 @@ export interface IUserPickerState {
    * This is only used when `multiple` is true.
    */
   selectedUsers?: UserWithMetadata[]
+
+  /**
+   * The search term for the user picker.
+   */
+  searchTerm?: string
 }
