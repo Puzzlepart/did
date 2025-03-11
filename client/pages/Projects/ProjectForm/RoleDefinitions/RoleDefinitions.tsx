@@ -4,7 +4,6 @@ import React from 'react'
 import { ProjectFormTabComponent } from '../types'
 import { useTranslation } from 'react-i18next'
 import { useRoleDefinitions } from './useRoleDefinitions'
-
 export const RoleDefinitions: ProjectFormTabComponent = () => {
   const { register } = useFormContext()
   const { t } = useTranslation()
@@ -18,6 +17,7 @@ export const RoleDefinitions: ProjectFormTabComponent = () => {
       <ListControl
         {...register('roleDefinitions', {}, RoleDefinitions.extensionId)}
         fields={fields}
+        generateId={() => Math.random().toString(36).slice(2, 11)}
       />
     </FormGroup>
   )

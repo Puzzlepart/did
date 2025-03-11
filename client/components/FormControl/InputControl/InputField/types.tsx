@@ -41,4 +41,14 @@ export interface IInputFieldProps
   styles?: {
     input: CSSProperties
   }
+
+  /**
+   * Enable increment of the value on `ArrowUp` key press.
+   */
+  increment?: number
+
+  /**
+   * Enable decrement of the value on `ArrowDown` key press.
+   */
+  decrement?: number
 }

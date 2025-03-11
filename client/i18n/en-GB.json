@@ -154,7 +154,8 @@
       "hourlyRatePlaceholder": "Enter the hourly rate for the role.",
       "defaultRoleLabel": "Default",
       "defaultRoleDescription": "This role will be assigned to all new project members by default if no other role is specified for them.",
-      "defaultRoleError": "A default role already exists. Please remove the default role {{role}} before adding another."
+      "defaultRoleError": "A default role already exists. Please remove the default role {{role}} before adding another.",
+      "hourlyRateInfo": "Use the up and down arrow keys to adjust the hourly rate up and down by 10."
     },
     "resourcesLabel": "Project Resources",
     "hourlyRate": "kr {{rate}} / hour",
@@ -955,7 +956,7 @@
       "removeUser": "Remove"
     },
     "listControl": {
-      "editingInfo": "You are currently editing an item. Click **Enter** to save or **Esc** to cancel."
+      "editingInfo": "You are currently editing an item. Click **Enter** to save or click outside the input field to abort."
     }
   },
   "list": {

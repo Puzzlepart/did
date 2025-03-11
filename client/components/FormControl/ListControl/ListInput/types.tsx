@@ -30,7 +30,7 @@ export type ListField<P = Record<string, any>> = {
   /**
    * The default value for the field.
    */
-  defaultValue?: string | number | boolean
+  defaultValue?: any
 
   /**
    * Indicates if the field is required.
@@ -46,6 +46,11 @@ export type ListField<P = Record<string, any>> = {
    * The maximum width of the field.
    */
   maxWidth?: number
+
+  /**
+   * The info message for the field.
+   */
+  infoMessage?: string
 
   /**
    * Additional properties for the field input
@@ -80,6 +85,11 @@ export interface IListInputProps {
    * Fields to store in the list.
    */
   fields?: ListField[]
+
+  /**
+   * A function to generate a unique ID for the list items.
+   */
+  generateId?(): string
 }
 
 export interface IListInputState {

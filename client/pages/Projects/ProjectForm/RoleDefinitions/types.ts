@@ -22,8 +22,11 @@ export const HourlyRateField: GetFieldFunction<Partial<IInputFieldProps>> = (
   required: true,
   editable: true,
   maxWidth: 80,
+  infoMessage:t('projects.roleDefinitions.hourlyRateInfo'),
   props: {
     list: {
+      increment: 10,
+      decrement: 10,
       contentBefore: t('common.currencySymbol'),
       styles: {
         input: {
@@ -51,7 +54,7 @@ export const IsDefaultField: GetFieldFunction<Partial<IInputFieldProps>> = (
     form: {
       hint: t('projects.roleDefinitions.defaultRoleDescription'),
       disabled: Boolean(defaultRole),
-      validationState: Boolean(defaultRole) && 'error',
+      validationState: Boolean(defaultRole) && 'warning',
       validationMessage:
         Boolean(defaultRole) &&
         t('projects.roleDefinitions.defaultRoleError', {

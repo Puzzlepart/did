@@ -154,7 +154,8 @@
       "rolePlaceholder": "Skriv inn navnet på rollen.",
       "defaultRoleLabel": "Standardrolle",
       "defaultRoleDescription": "Denne rollen vil bli tildelt alle nye prosjektmedlemmer som standard hvis ingen annen rolle er spesifisert for dem.",
-      "defaultRoleError": "Ei standardrolle eksisterer allereie. Fjern standardrolla {{role}} før du legg til ein annan."
+      "defaultRoleError": "Ei standardrolle eksisterer allereie. Fjern standardrolla {{role}} før du legg til ein annan.",
+      "hourlyRateInfo": "Bruk piltastene opp og ned for å justere timeprisen opp og ned med 10."
     },
     "resourcesLabel": "Prosjektressurser",
     "hourlyRate": "kr {{rate}} / time",
@@ -953,7 +954,7 @@
       "removeUser": "Fjern"
     },
     "listControl": {
-      "editingInfo": "Du redigerer akkurat no eit element. Klikk **Enter** for å lagra eller **Escape** for å avbryta redigeringa."
+      "editingInfo": "Du redigerer akkurat no eit element. Klikk **Enter** for å lagra eller trykk utenfor feltet for å avbryta redigeringa."
     }
   },
   "list": {

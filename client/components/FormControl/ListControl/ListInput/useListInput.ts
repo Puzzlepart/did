@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/consistent-function-scoping */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMergedState } from 'hooks'
 import { IListInputProps, IListInputState, ListField } from './types'
 import _ from 'lodash'
@@ -15,6 +14,16 @@ export function useListInput(props: IListInputProps) {
     if (!state.currentItem) {
       return
     }
+
+    let item = { ...state.currentItem }
+    if (props.generateId) {
+      item = {
+        ...item,
+        id: props.generateId()
+      }
+    }
+    // eslint-disable-next-line no-console
+    console.log(item)
 
     const items = [...state.items, state.currentItem]
 

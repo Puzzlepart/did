@@ -1,7 +1,8 @@
 import { IInputFieldProps } from 'components'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useListInputContext } from '../../context'
 import { IItemCellProps } from './types'
+import { useOutsideAlerter } from 'hooks'
 
 export function useItemCell(props: IItemCellProps) {
   const context = useListInputContext()
@@ -28,12 +29,12 @@ export function useItemCell(props: IItemCellProps) {
     props.onToggleEdit()
   }
 
-  const onCancel: IInputFieldProps['onCancel'] = (event) => {
-    event.stopPropagation()
-    event.preventDefault()
+  const inputWrapperRef = useRef<HTMLDivElement>(null)
+
+  useOutsideAlerter(inputWrapperRef, () => {
     setValue(props.value)
     props.onToggleEdit()
-  }
+  })
 
-  return { value, onChange, onEnter, onCancel }
+  return { value, onChange, onEnter, inputWrapperRef }
 }

@@ -9,18 +9,19 @@ import { useItemCell } from './useItemCell'
 
 export const ItemCell: FC<IItemCellProps> = (props) => {
   const { t } = useTranslation()
-  const { value, onChange, onEnter,onCancel } = useItemCell(props)
+  const { value, onChange, onEnter, inputWrapperRef } = useItemCell(props)
   return (
     <div className={styles.itemCell}>
       {props.isEditing ? (
-        <InputField
-          {...props.field.props?.list}
-          className={styles.input}
-          value={value}
-          onChange={onChange}
-          onEnter={onEnter}
-          onCancel={onCancel}
-        />
+        <div ref={inputWrapperRef}>
+          <InputField
+            {...props.field.props?.list}
+            className={styles.input}
+            value={value}
+            onChange={onChange}
+            onEnter={onEnter}
+          />
+        </div>
       ) : (
         <span
           className={styles.value}
