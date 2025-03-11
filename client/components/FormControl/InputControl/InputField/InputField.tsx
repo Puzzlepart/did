@@ -1,10 +1,11 @@
-import { Input, Textarea } from '@fluentui/react-components'
+import { Input, mergeClasses, Textarea } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
-import React from 'react'
 import _ from 'underscore'
 import { Field } from '../../Field'
 import styles from './InputField.module.scss'
 import { IInputFieldProps } from './types'
+import { useInputField } from './useInputField'
+import React from 'react'
 
 /**
  * A reusable component that renders a input field. If the specified
@@ -14,6 +15,7 @@ import { IInputFieldProps } from './types'
  * @returns A React component that renders an uncontrolled text input field.
  */
 export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
+  const { onKeyDown } = useInputField(props)
   return (
     <Field
       className={InputField.className}
@@ -21,7 +23,7 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
     >
       {props.rows > 1 ? (
         <Textarea
-          className={styles.input}
+          className={mergeClasses(styles.input, props.className)}
           {..._.pick(
             props,
             'id',
@@ -35,10 +37,11 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'rows',
             'onBlur'
           )}
+          style={props.styles?.input}
         />
       ) : (
         <Input
-          className={styles.input}
+          className={mergeClasses(styles.input, props.className)}
           {..._.pick(
             props,
             'id',
@@ -55,11 +58,8 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'contentBefore',
             'contentAfter'
           )}
-          onKeyDown={({ key, currentTarget }) => {
-            if (key === 'Enter' && props.onEnter) {
-              props.onEnter(currentTarget.value)
-            }
-          }}
+          style={props.styles?.input}
+          onKeyDown={onKeyDown}
         />
       )}
     </Field>

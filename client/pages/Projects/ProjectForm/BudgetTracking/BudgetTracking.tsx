@@ -63,4 +63,5 @@ export const BudgetTracking: ProjectFormTabComponent = () => {
   )
 }
 
+BudgetTracking.displayName = 'BudgetTracking'
 BudgetTracking.extensionId = '4bb5dfa9-a742-4692-8aa9-86de79961a70'

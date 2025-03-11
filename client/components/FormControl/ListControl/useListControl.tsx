@@ -1,13 +1,12 @@
 import { useCallback } from 'react'
-import { User } from '../../../../server/graphql'
 import { useFormContext } from '../context'
 import { CLEAR_VALIDATION_MESSAGE } from '../reducer/actions'
 import { IListControlProps } from './types'
 
 /**
- * Custom hook for managing the `UserPickerControl` com
+ * Custom hook for managing the `ListControl` com
  *
- * @param props - The props for the user picker control.
+ * @param props - The props for the list control.
  *
  * @returns An object containing the `onChange` function and the current `value` of the control.
  */
@@ -15,7 +14,7 @@ export function useListControl(props: IListControlProps) {
   const context = useFormContext()
 
   const onChange = useCallback(
-    (value: User[]) => {
+    (value) => {
       context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
       props.model.set(props.name, value)
     },

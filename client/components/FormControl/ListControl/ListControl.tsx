@@ -21,6 +21,6 @@ export const ListControl: FormInputControlComponent<IListControlProps> = (
   )
 }
 
-ListControl.displayName = 'LabelPickerControl'
+ListControl.displayName = 'ListControl'
 ListControl.className = styles.listControl
 ListControl.defaultProps = {}

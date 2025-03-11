@@ -1,5 +1,5 @@
 import { InputProps, TextareaProps } from '@fluentui/react-components'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, CSSProperties, KeyboardEvent } from 'react'
 import { IFieldProps } from '../../Field'
 
 export interface IInputFieldProps
@@ -12,12 +12,13 @@ export interface IInputFieldProps
       | 'contentAfter'
       | 'minLength'
       | 'maxLength'
+      | 'style'
     >,
     IFieldProps {
   /**
    * On change event handler
    */
-  onChange?: (event: ChangeEvent<any>, data: any) => void
+  onChange?: (event: Partial<ChangeEvent<any>>, data: any) => void
 
   /**
    * On blur event handler.
@@ -27,5 +28,27 @@ export interface IInputFieldProps
   /**
    * On enter event handler.
    */
-  onEnter?: (value: any) => void
+  onEnter?: (value: any, event: KeyboardEvent<HTMLInputElement>) => void
+
+  /**
+   * On cancel event handler (`Escape` key is pressed).
+   */
+  onCancel?: (event: KeyboardEvent<HTMLInputElement>) => void
+
+  /**
+   * Styles for the input field etc.
+   */
+  styles?: {
+    input: CSSProperties
+  }
+
+  /**
+   * Enable increment of the value on `ArrowUp` key press.
+   */
+  increment?: number
+
+  /**
+   * Enable decrement of the value on `ArrowDown` key press.
+   */
+  decrement?: number
 }

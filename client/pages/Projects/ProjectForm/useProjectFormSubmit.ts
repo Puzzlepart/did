@@ -23,7 +23,7 @@ export const useProjectFormSubmit: FormSubmitHook<
 > = (props, model, options) => {
   const { t } = useTranslation()
   const { displayToast } = useAppContext()
-  const [createOrUpdateProjct, { loading }] = useMutation<
+  const [createOrUpdateProject, { loading }] = useMutation<
     any,
     CreateOrUpdateProjectVariables
   >($create_or_update_project)
@@ -44,7 +44,7 @@ export const useProjectFormSubmit: FormSubmitHook<
       update: !!props.edit
     }
     try {
-      await createOrUpdateProjct({ variables })
+      await createOrUpdateProject({ variables })
       displayToast(
         variables.update
           ? t('projects.updateSuccess', {

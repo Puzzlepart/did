@@ -24,28 +24,28 @@ export const ProjectActions: StyledComponent = (props) => {
         <DynamicButton
           hidden={!state.selected?.webLink}
           text={t('projects.workspaceLabel')}
-          appearance='transparent'
           iconName='WebAsset'
           onClick={() =>
             window.open(state.selected?.externalSystemURL, '_blank')
           }
           disabled={!Boolean(state.selected)}
+          transparent
         />
         <DynamicButton
           hidden={!hasPermission($.DELETE_PROJECTS)}
           text={t('projects.deleteButtonLabel')}
-          appearance='transparent'
           iconName='Delete'
           {...onDelete}
           disabled={!Boolean(state.selected)}
+          transparent
         />
         <DynamicButton
           hidden={!hasPermission($.MANAGE_PROJECTS)}
           text={t('projects.editButtonLabel')}
-          appearance='transparent'
           iconName='Edit'
           onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))}
           disabled={!Boolean(state.selected)}
+          transparent
         />
       </div>
       {onDelete.dialog}

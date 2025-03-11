@@ -20,7 +20,7 @@ export const ItemForm: FC = () => {
             key={index}
             label={field.label}
             {..._.pick(
-              field.props,
+              field.props?.form,
               'label',
               'hint',
               'required',
@@ -33,7 +33,7 @@ export const ItemForm: FC = () => {
               onChange={(_, { checked }) => {
                 context.onFieldChange(field, checked)
               }}
-              {..._.pick(field.props, 'disabled')}
+              {..._.pick(field.props?.form, 'disabled')}
             />
           </Field>
         )
@@ -51,7 +51,7 @@ export const ItemForm: FC = () => {
                 field.type === 'number' ? Number(value) : value
               )
             }}
-            {...field.props}
+            {...field.props?.form}
           />
         )
       }

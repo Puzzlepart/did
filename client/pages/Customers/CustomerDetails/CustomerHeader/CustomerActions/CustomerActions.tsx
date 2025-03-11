@@ -24,23 +24,22 @@ export const CustomerActions: StyledComponent = (props) => {
         <DynamicButton
           hidden={!context.state.selected?.webLink}
           text={t('customers.webLinkText')}
-          appearance='transparent'
           iconName='WebAsset'
           onClick={() => window.open(context.state.selected?.webLink, '_blank')}
+          transparent
         />
         <DynamicButton
           hidden={!context.state.selected?.externalSystemURL}
           text={t('customers.externalSystemUrlText')}
-          appearance='transparent'
           iconName='System'
           onClick={() =>
             window.open(context.state.selected?.externalSystemURL, '_blank')
           }
+          transparent
         />
         <DynamicButton
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
           text={t('customers.editButtonLabel')}
-          appearance='transparent'
           iconName='Edit'
           onClick={() =>
             context.dispatch(
@@ -50,6 +49,7 @@ export const CustomerActions: StyledComponent = (props) => {
               })
             )
           }
+          transparent
         />
       </div>
     </div>

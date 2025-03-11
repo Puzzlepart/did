@@ -37,6 +37,11 @@ export interface IDynamicButtonProps
   subtle?: boolean
 
   /**
+   * Shortcut to set the button as transparent.
+   */
+  transparent?: boolean
+
+  /**
    * Renders the button as a trigge for `Menu` or `Popover`.
    */
   triggerFor?: 'Menu' | 'Popover'

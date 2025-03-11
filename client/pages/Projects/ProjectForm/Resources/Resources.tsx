@@ -12,6 +12,7 @@ export const Resources: ProjectFormTabComponent = () => {
   const { t } = useTranslation()
   const { register } = useFormContext()
   const { additionalMetadata, allowEdit, onRenderValue } = useResources()
+
   return (
     <FormGroup gap={15}>
       <UserPickerControl
@@ -29,9 +30,12 @@ export const Resources: ProjectFormTabComponent = () => {
           allowEdit,
           onRenderValue
         }}
+        freeform
       />
     </FormGroup>
   )
 }
 
+Resources.displayName = 'Resources'
 Resources.extensionId = '2dfbce96-947f-4c26-95b4-5eda10616074'
+Resources.extensionDescription = 'Resources for the project'

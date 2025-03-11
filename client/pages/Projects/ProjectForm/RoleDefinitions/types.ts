@@ -6,7 +6,9 @@ export const NameField: GetFieldFunction<Partial<IInputFieldProps>> = (t) => ({
   label: t('common.projectRole'),
   required: true,
   props: {
-    placeholder: t('projects.roleDefinitions.rolePlaceholder')
+    form: {
+      placeholder: t('projects.roleDefinitions.rolePlaceholder')
+    }
   }
 })
 
@@ -18,9 +20,24 @@ export const HourlyRateField: GetFieldFunction<Partial<IInputFieldProps>> = (
   label: t('common.hourlyRate'),
   renderAs: 'currency',
   required: true,
+  editable: true,
   maxWidth: 80,
+  infoMessage: t('projects.roleDefinitions.hourlyRateInfo'),
   props: {
-    placeholder: t('projects.roleDefinitions.hourlyRatePlaceholder')
+    list: {
+      increment: 10,
+      decrement: 10,
+      contentBefore: t('common.currencySymbol'),
+      styles: {
+        input: {
+          maxWidth: 80
+        }
+      }
+    },
+    form: {
+      placeholder: t('projects.roleDefinitions.hourlyRatePlaceholder'),
+      contentBefore: t('common.currencySymbol')
+    }
   }
 })
 
@@ -32,16 +49,17 @@ export const IsDefaultField: GetFieldFunction<Partial<IInputFieldProps>> = (
   type: 'boolean',
   label: t('projects.roleDefinitions.defaultRoleLabel'),
   renderAs: 'boolean',
-  defaultValue: '',
-  required: false,
+  defaultValue: false,
   props: {
-    hint: t('projects.roleDefinitions.defaultRoleDescription'),
-    disabled: Boolean(defaultRole),
-    validationState: Boolean(defaultRole) && 'error',
-    validationMessage:
-      Boolean(defaultRole) &&
-      t('projects.roleDefinitions.defaultRoleError', {
-        role: defaultRole.name
-      })
+    form: {
+      hint: t('projects.roleDefinitions.defaultRoleDescription'),
+      disabled: Boolean(defaultRole),
+      validationState: Boolean(defaultRole) && 'warning',
+      validationMessage:
+        Boolean(defaultRole) &&
+        t('projects.roleDefinitions.defaultRoleError', {
+          role: defaultRole.name
+        })
+    }
   }
 })
