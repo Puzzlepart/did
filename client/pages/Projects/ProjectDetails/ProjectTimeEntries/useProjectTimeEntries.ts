@@ -25,7 +25,11 @@ export function useProjectTimeEntries() {
     columns
   })
 
-  const emptyMessage = skip.value && t('projects.noAutomaticTimeEntriesText', { buttonText: t('projects.loadTimeEntriesLabel') })
+  const emptyMessage =
+    skip.value &&
+    t('projects.noAutomaticTimeEntriesText', {
+      buttonText: t('projects.loadTimeEntriesLabel')
+    })
 
   return {
     loading: loading || !Boolean(state.selected),

@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.14.10-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.14.11-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -59,8 +59,9 @@
 | [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-red.svg)](https://semver.org) |
 | [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
 | [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | 21.02.2024      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
-| [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | 12.03.2025      | [![version](https://img.shields.io/badge/version-0.14.10-red.svg)](https://semver.org) |
-| [🛎️ &nbsp;14 -  &nbsp;Silisium](https://github.com/Puzzlepart/did365/milestone/13) | Q1/Q2 2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
+| [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-red.svg)](https://semver.org) |
+| [🛎️ &nbsp;14 -  &nbsp;Silisium](https://github.com/Puzzlepart/did365/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-red.svg)](https://semver.org) |
+| [🦿 &nbsp;15 -  &nbsp;Fosfor](https://github.com/Puzzlepart/did365/milestone/15) | 28.04.2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#backlog)

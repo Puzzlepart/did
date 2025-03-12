@@ -13,8 +13,15 @@ import { useProjectTimeEntries } from './useProjectTimeEntries'
  */
 export const ProjectTimeEntries: StyledComponent = () => {
   const { t } = useTranslation()
-  const { loading, selected, timeEntries, onExport, error, skip, emptyMessage } =
-    useProjectTimeEntries()
+  const {
+    loading,
+    selected,
+    timeEntries,
+    onExport,
+    error,
+    skip,
+    emptyMessage
+  } = useProjectTimeEntries()
   return (
     <div className={ProjectTimeEntries.className}>
       <div hidden={skip.value && !loading}>
@@ -73,7 +80,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
             .setGroup('actions')
             .setDisabled(_.isEmpty(timeEntries))
         ]}
-        hidden={(!loading && !skip.value) && _.isEmpty(timeEntries)}
+        hidden={!loading && !skip.value && _.isEmpty(timeEntries)}
         emptyMessage={emptyMessage}
       />
     </div>

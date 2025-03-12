@@ -44,7 +44,11 @@ export const ItemForm: FC = () => {
             key={index}
             label={field.label}
             type={field.type}
-            value={_.get(context, `state.currentItem.${field.key}`, field.defaultValue ?? '')}
+            value={_.get(
+              context,
+              `state.currentItem.${field.key}`,
+              field.defaultValue ?? ''
+            )}
             onChange={(_, { value }) => {
               context.onFieldChange(
                 field,
