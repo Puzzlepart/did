@@ -5,6 +5,7 @@ export const NameField: GetFieldFunction<Partial<IInputFieldProps>> = (t) => ({
   type: 'text',
   label: t('common.projectRole'),
   required: true,
+  defaultValue: '',
   props: {
     form: {
       placeholder: t('projects.roleDefinitions.rolePlaceholder')
@@ -19,9 +20,9 @@ export const HourlyRateField: GetFieldFunction<Partial<IInputFieldProps>> = (
   type: 'number',
   label: t('common.hourlyRate'),
   renderAs: 'currency',
-  required: true,
   editable: true,
   maxWidth: 80,
+  defaultValue: 0,
   infoMessage: t('projects.roleDefinitions.hourlyRateInfo'),
   props: {
     list: {

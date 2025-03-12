@@ -21,7 +21,8 @@ function renderSecondaryText(props: IUserColumnProps) {
 }
 
 /**
- * Renders the tertiary text for the user column.
+ * Renders the tertiary text for the user column. If the user has an hourly rate,
+ * it will be displayed. Otherwise, null is returned.
  *
  * @param props - The properties for the user column component.
  * @param t - The translation function.
@@ -29,14 +30,13 @@ function renderSecondaryText(props: IUserColumnProps) {
  * @returns A JSX element containing the hourly rate if available, otherwise null.
  */
 function renderTertiaryText(props: IUserColumnProps, t: TFunction) {
-  if (props.role?.hourlyRate) {
-    return (
-      <Caption2Strong>
-        {t('projects.hourlyRate', { rate: props.role.hourlyRate })}
-      </Caption2Strong>
-    )
-  }
-  return null
+  const hourlyRate = Math.floor(props?.role?.hourlyRate)
+  if (!Boolean(hourlyRate)) return null
+  return (
+    <Caption2Strong>
+      {t('projects.hourlyRate', { rate: hourlyRate })}
+    </Caption2Strong>
+  )
 }
 
 /**

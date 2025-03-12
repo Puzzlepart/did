@@ -74,7 +74,15 @@ export const useListInput = (
 ): UseListInputReturnType => {
   const { state, setState } = useMergedState<IListInputState>({
     items: _.isArray(props.value) ? props.value : [],
-    currentItem: null
+    currentItem: props.fields
+    .filter((field) => field.defaultValue !== undefined)
+    .reduce(
+      (accumulator, field) => ({
+        ...accumulator,
+        [field.key]: field.defaultValue
+      }),
+      {}
+    )
   })
 
   const onAddItem: UseListInputReturnType['onAddItem'] = () => {

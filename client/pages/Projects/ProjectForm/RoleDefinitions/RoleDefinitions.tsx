@@ -4,6 +4,7 @@ import React from 'react'
 import { ProjectFormTabComponent } from '../types'
 import { useTranslation } from 'react-i18next'
 import { useRoleDefinitions } from './useRoleDefinitions'
+
 export const RoleDefinitions: ProjectFormTabComponent = () => {
   const { register } = useFormContext()
   const { t } = useTranslation()

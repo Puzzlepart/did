@@ -181,7 +181,8 @@
     "projecNotReadyOrNotFound": "The project is currently unavailable. If it was just created, please try again in a few moments. Otherwise, it may not exist.",
     "projecNotReadyOrNotFoundTitle": "Project Not Found or Still Processing",
     "homeButtonLabel": "Go back to Projects page",
-    "projectOwner": "Project Owner"
+    "projectOwner": "Project Owner",
+    "noAutomaticTimeEntriesText": "Click **{{buttonText}}** to load the time entries for this project."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

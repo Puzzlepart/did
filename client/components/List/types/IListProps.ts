@@ -174,6 +174,11 @@ export interface IListProps<T = any>
   hideEmptyMessage?: boolean
 
   /**
+   * Empty message to show when there are no items.
+   */
+  emptyMessage?: string
+
+  /**
    * Enable view columns edit mode in the view columns panel.
    * This feature is (for now) not enabled by default.
    */

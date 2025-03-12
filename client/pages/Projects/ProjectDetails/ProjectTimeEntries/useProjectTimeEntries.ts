@@ -1,4 +1,5 @@
 import { useExcelExport } from 'hooks'
+import { useTranslation } from 'react-i18next'
 import { useProjectsContext } from '../../context'
 import columns from '../columns'
 import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
@@ -10,6 +11,7 @@ import { useProjectTimeEntriesQuery } from './useProjectTimeEntriesQuery'
  * @category Projects
  */
 export function useProjectTimeEntries() {
+  const { t } = useTranslation()
   const { state } = useProjectsContext()
   const { loading, error, timeEntries, skip } = useProjectTimeEntriesQuery()
   const fileName = `TimeEntries-${state.selected?.tag.replace(
@@ -23,12 +25,15 @@ export function useProjectTimeEntries() {
     columns
   })
 
+  const emptyMessage = skip.value && t('projects.noAutomaticTimeEntriesText', { buttonText: t('projects.loadTimeEntriesLabel') })
+
   return {
     loading: loading || !Boolean(state.selected),
     selected: state.selected,
     error,
     onExport,
     timeEntries,
-    skip
+    skip,
+    emptyMessage
   }
 }

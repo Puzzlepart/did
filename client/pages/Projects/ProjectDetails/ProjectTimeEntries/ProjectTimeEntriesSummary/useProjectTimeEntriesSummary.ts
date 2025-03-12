@@ -44,8 +44,10 @@ export function useProjectTimeEntriesSummary(
     const income =
       enableInvoiceEstimation &&
       filteredEntries.reduce((total, entry) => {
-        const hourlyRate = entry.role?.hourlyRate || 0
-        const entryIncome = (entry.duration || 0) * hourlyRate
+        const hourlyRate = Math.floor(entry.role?.hourlyRate)
+        if(!Boolean(hourlyRate)) return total
+        const duration = entry.duration ?? 0
+        const entryIncome = duration * hourlyRate
         return total + entryIncome
       }, 0)
 

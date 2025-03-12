@@ -178,7 +178,8 @@
     "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder.",
     "projecNotReadyOrNotFound": "Prosjektet er foreløpig ikke tilgjengelig. Hvis det nettopp ble opprettet, kan du prøve igjen om noen få øyeblikk. Ellers kan det hende at det ikke eksisterer.",
     "projecNotReadyOrNotFoundTitle": "Prosjektet er utilgjengelig",
-    "projectOwner": "Prosjekteier"
+    "projectOwner": "Prosjekteier",
+    "noAutomaticTimeEntriesText": "Klikk **{{buttonText}}** for å laste inn tidsoppføringene for dette prosjektet."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
