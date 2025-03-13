@@ -23,8 +23,8 @@ type UsePermissionsReturnType = [
  * permissions and a function to check if the current user
  * has the specified permission.
  *
- * @param scopeIds - Limit the returns permissions to the specified Ids
- * @param api - Only return permissions available to be called externally
+ * @param scopeIds Limit the returns permissions to the specified Ids
+ * @param api Only return permissions available to be called externally
  *
  * @returns Permissions available based on specified `permissionIds`
  * and a function `hasPermission` that checks if the currently logged

@@ -2,12 +2,12 @@ import { DynamicButton } from 'components'
 import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope as $ } from 'security'
+import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
 import { useProjectsContext } from '../../../context'
 import { OPEN_EDIT_PANEL } from '../../../reducer/actions'
-import styles from './ProjectActions.module.scss'
 import { useProjectDeleteAction } from './DeleteAction'
+import styles from './ProjectActions.module.scss'
 
 /**
  * @category Projects
@@ -32,7 +32,7 @@ export const ProjectActions: StyledComponent = (props) => {
           transparent
         />
         <DynamicButton
-          hidden={!hasPermission($.DELETE_PROJECTS)}
+          hidden={!hasPermission(PermissionScope.DELETE_PROJECTS)}
           text={t('projects.deleteButtonLabel')}
           iconName='Delete'
           {...onDelete}
@@ -40,7 +40,7 @@ export const ProjectActions: StyledComponent = (props) => {
           transparent
         />
         <DynamicButton
-          hidden={!hasPermission($.MANAGE_PROJECTS)}
+          hidden={!hasPermission(PermissionScope.MANAGE_PROJECTS)}
           text={t('projects.editButtonLabel')}
           iconName='Edit'
           onClick={() => dispatch(OPEN_EDIT_PANEL(state.selected))}

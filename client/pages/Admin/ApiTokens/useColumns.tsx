@@ -2,7 +2,7 @@ import { IListColumn } from 'components/List/types'
 import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope as $ } from 'security'
+import { PermissionScope } from 'security'
 import { ApiToken } from 'types'
 import { createColumnDef } from 'utils'
 import { ApiKeyDisplay } from './ApiKeyDisplay'
@@ -38,7 +38,7 @@ export function useColumns(
       renderAs: 'timeFromNow'
     }),
 
-    hasPermission($.MANAGE_API_TOKENS) &&
+    hasPermission(PermissionScope.MANAGE_API_TOKENS) &&
       createColumnDef<ApiToken>(
         'secret',
         t('admin.apiTokens.keyLabel'),

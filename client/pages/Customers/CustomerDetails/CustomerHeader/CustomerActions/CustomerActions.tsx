@@ -2,7 +2,7 @@ import { DynamicButton } from 'components'
 import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope as $ } from 'security'
+import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../../../context'
 import { CLOSE_CUSTOMER_PANEL, OPEN_CUSTOMER_PANEL } from '../../../reducer/actions'
@@ -40,7 +40,7 @@ export const CustomerActions: StyledComponent = (props) => {
           transparent
         />
         <DynamicButton
-          hidden={!hasPermission($.DELETE_CUSTOMERS)}
+          hidden={!hasPermission(PermissionScope.DELETE_CUSTOMERS)}
           text={t('customers.deleteButtonLabel')}
           iconName='Delete'
           {...onDelete}
@@ -48,7 +48,7 @@ export const CustomerActions: StyledComponent = (props) => {
           transparent
         />
         <DynamicButton
-          hidden={!hasPermission($.MANAGE_CUSTOMERS)}
+          hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
           text={t('customers.editButtonLabel')}
           iconName='Edit'
           onClick={() =>
