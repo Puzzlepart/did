@@ -188,13 +188,25 @@ import {
   ChevronUpRegular,
   ChevronUpFilled,
   ArrowLeftRegular,
-  ArrowLeftFilled
+  ArrowLeftFilled,
+  FolderRegular,
+  FolderFilled,
+  DocumentRegular,
+  DocumentFilled,
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  Document: {
+    regular: DocumentRegular,
+    filled: DocumentFilled
+  },
+  Folder: {
+    regular: FolderRegular,
+    filled: FolderFilled
+  },
   GroupList: {
     regular: GroupListRegular,
     filled: GroupListFilled

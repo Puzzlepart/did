@@ -33,7 +33,7 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
         <InteractionTagPrimary
           hasSecondaryAction={props.enableFavoriting}
           icon={
-            props.displayIcon && getFluentIconWithFallback(props.project.icon)
+            props.displayIcon && getFluentIconWithFallback(props.project.icon, { default: 'Document' })
           }
         >
           <span>{props.project?.tag}</span>
