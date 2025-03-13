@@ -222,7 +222,8 @@
     "deleteFailed": "An unexpected error occurred while attempting to delete customer **{{name}}**. Please try again later or contact support if the issue persists.",
     "deleteFailedTitle": "Customer Deletion Failed",
     "deleteSuccessTitle": "Customer Deleted Successfully",
-    "deleteSuccess": "Customer **{{name}}** has been successfully deleted. You will be redirected to the Customers page."
+    "deleteSuccess": "Customer **{{name}}** has been successfully deleted. You will be redirected to the Customers page.",
+    "toggleInactive": "Show/hide inactive customers ({{count}})"
   },
   "admin": {
     "apiTokens": {
