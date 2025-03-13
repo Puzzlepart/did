@@ -1,0 +1,6 @@
+query ProjectsByCustomer($customerId: String!) {
+  projects(query: { customerId: $customerId }) {
+    tag
+    name
+  }
+}
