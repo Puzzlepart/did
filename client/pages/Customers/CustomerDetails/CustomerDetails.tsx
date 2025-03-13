@@ -5,12 +5,11 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../context'
+import { CustomerForm } from '../CustomerForm'
 import styles from './CustomerDetails.module.scss'
 import { CustomerHeader } from './CustomerHeader'
-import { useCustomerDetails } from './useCustomerDetails'
-import { CustomerForm } from '../CustomerForm'
 import { CustomerInformation } from './CustomerInformation'
-
+import { useCustomerDetails } from './useCustomerDetails'
 /**
  * Displays the details of a customer, including a list of projects.
  *
@@ -37,6 +36,5 @@ export const CustomerDetails: StyledComponent = () => {
     </div>
   )
 }
-
 CustomerDetails.displayName = 'CustomerDetails'
 CustomerDetails.className = styles.customerDetails

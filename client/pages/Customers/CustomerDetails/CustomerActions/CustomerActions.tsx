@@ -7,8 +7,11 @@ import { StyledComponent } from 'types'
 import { useCustomersContext } from '../../context'
 import { OPEN_CUSTOMER_PANEL } from '../../reducer/actions'
 import { useCustomerDeleteAction } from './DeleteAction'
+import styles from './CustomerActions.module.scss'
 
 /**
+ * Component for displaying customer action buttons like delete and edit
+ * 
  * @category Customers
  */
 export const CustomerActions: StyledComponent = (props) => {
@@ -18,8 +21,8 @@ export const CustomerActions: StyledComponent = (props) => {
   const onDelete = useCustomerDeleteAction()
 
   return (
-    <div className={CustomerActions.className} hidden={props.hidden}>
-      <div className="container">
+    <div className={styles.customerActions} hidden={props.hidden}>
+      <div className={styles.container}>
         <DynamicButton
           hidden={!hasPermission($.DELETE_CUSTOMERS)}
           text={t('customers.deleteButtonLabel')}
@@ -43,4 +46,3 @@ export const CustomerActions: StyledComponent = (props) => {
 }
 
 CustomerActions.displayName = 'CustomerActions'
-CustomerActions.className = 'customerActions'
