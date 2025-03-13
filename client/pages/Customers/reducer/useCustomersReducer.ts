@@ -64,6 +64,7 @@ export function useCustomersReducer() {
         }
       })
       .addCase(OPEN_CUSTOMER_PANEL, (state, { payload }) => {
+        console.log('OPEN_CUSTOMER_PANEL', payload)
         state.customerForm = {
           edit: state.selected,
           panel: {

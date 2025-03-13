@@ -221,7 +221,7 @@
     "deleteFailed": "Ein uventa feil oppstod medan du prøvde å sletta kunden **{{name}}**.  Prøv igjen seinare eller kontaktstøtte viss problemet held fram.",
     "deleteFailedTitle": "Sletting av kunde mislykkast",
     "deleteSuccess": "Kunde **{{name}}** har vorte sletta. Du blir omdirigert til kundesida.",
-    "checkSuccess": "Ingen prosjekt funne. Kunden kan trygt slettast.",
+    "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettast.",
     "deleteError": "Denne kunden har {{count}} tilknytta prosjekt. For å halda fram med å sletta kunden, må du fjerne alle relaterte prosjekt først.",
     "deleteSuccessTitle": "Kunde sletta"
   },

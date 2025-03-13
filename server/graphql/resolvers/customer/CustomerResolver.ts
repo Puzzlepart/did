@@ -57,11 +57,11 @@ export class CustomerResolver {
   }
 
   /**
-   * Delete customer
+   * Delete customer by key.
    *
    * @param key - Key
    */
-  @Authorized<IAuthOptions>({ scope: PermissionScope.DELETE_CUSTOMER })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.DELETE_CUSTOMERS })
   @Mutation(() => BaseResult, { description: 'Delete customer' })
   public async deleteCustomer(@Arg('key') key: string) {
     try {

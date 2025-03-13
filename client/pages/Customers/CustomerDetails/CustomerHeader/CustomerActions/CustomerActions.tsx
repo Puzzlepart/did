@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { PermissionScope as $ } from 'security'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../../../context'
-import { OPEN_CUSTOMER_PANEL } from '../../../reducer/actions'
+import { CLOSE_CUSTOMER_PANEL, OPEN_CUSTOMER_PANEL } from '../../../reducer/actions'
 import styles from './CustomerActions.module.scss'
 import { useCustomerDeleteAction } from './DeleteAction'
 
@@ -15,7 +15,7 @@ import { useCustomerDeleteAction } from './DeleteAction'
  * @category Customers
  */
 export const CustomerActions: StyledComponent = (props) => {
-  const { state, dispatch } = useCustomersContext()
+  const context = useCustomersContext()
   const [, hasPermission] = usePermissions()
   const { t } = useTranslation()
   const onDelete = useCustomerDeleteAction()
@@ -24,35 +24,41 @@ export const CustomerActions: StyledComponent = (props) => {
     <div className={CustomerActions.className} hidden={props.hidden}>
       <div className={styles.container}>
         <DynamicButton
-          hidden={!state.selected?.webLink}
+          hidden={!context.state.selected?.webLink}
           text={t('customers.webLinkText')}
           iconName='WebAsset'
-          onClick={() => window.open(state.selected?.webLink, '_blank')}
+          onClick={() => window.open(context.state.selected?.webLink, '_blank')}
           transparent
         />
         <DynamicButton
-          hidden={!state.selected?.externalSystemURL}
+          hidden={!context.state.selected?.externalSystemURL}
           text={t('customers.externalSystemUrlText')}
           iconName='System'
           onClick={() =>
-            window.open(state.selected?.externalSystemURL, '_blank')
+            window.open(context.state.selected?.externalSystemURL, '_blank')
           }
           transparent
         />
         <DynamicButton
-          hidden={!hasPermission($.MANAGE_CUSTOMERS)}
+          hidden={!hasPermission($.DELETE_CUSTOMERS)}
           text={t('customers.deleteButtonLabel')}
           iconName='Delete'
           {...onDelete}
-          disabled={!Boolean(state.selected)}
+          disabled={!Boolean(context.state.selected)}
           transparent
         />
         <DynamicButton
           hidden={!hasPermission($.MANAGE_CUSTOMERS)}
           text={t('customers.editButtonLabel')}
           iconName='Edit'
-          onClick={() => dispatch(OPEN_CUSTOMER_PANEL({ onDismissCallback: () => { } }))}
-          disabled={!Boolean(state.selected)}
+          onClick={() =>
+            context.dispatch(
+              OPEN_CUSTOMER_PANEL({
+                onDismissCallback: () =>
+                  context.dispatch(CLOSE_CUSTOMER_PANEL())
+              })
+            )
+          }
           transparent
         />
       </div>

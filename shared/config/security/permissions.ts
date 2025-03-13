@@ -66,7 +66,7 @@ export const getPermissions = (
     category: 'customers'
   },
 
-  [PermissionScope.DELETE_CUSTOMER]: {
+  [PermissionScope.DELETE_CUSTOMERS]: {
     name: t('permissions.deleteCustomers'),
     description: t('permissions.deleteCustomersDescription'),
     iconName: 'PageData',
