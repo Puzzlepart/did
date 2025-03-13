@@ -7,12 +7,12 @@ import { ICustomersState, ICustomersUrlParameters } from '../types'
 import {
   CLOSE_CUSTOMER_PANEL,
   CLOSE_PROJECT_PANEL,
+  CUSTOMER_DELETE_SUCCESS,
   DATA_UPDATED,
   OPEN_CUSTOMER_PANEL,
   OPEN_PROJECT_PANEL,
   SET_SELECTED_CUSTOMER
 } from './actions'
-
 /**
  * Use Customers reducer. It will create the initial state
  * and return a reducer and its state.
@@ -81,6 +81,9 @@ export function useCustomersReducer() {
             }
           }
         }
+      })
+      .addCase(CUSTOMER_DELETE_SUCCESS, (state) => {
+        state.selected = null
       })
   )
 }
