@@ -6,8 +6,8 @@ import { PermissionScope as $ } from 'security'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../../../context'
 import { OPEN_CUSTOMER_PANEL } from '../../../reducer/actions'
-import { useCustomerDeleteAction } from './DeleteAction'
 import styles from './CustomerActions.module.scss'
+import { useCustomerDeleteAction } from './DeleteAction'
 
 /**
  * Component for displaying customer action buttons like delete and edit
@@ -21,7 +21,7 @@ export const CustomerActions: StyledComponent = (props) => {
   const onDelete = useCustomerDeleteAction()
 
   return (
-    <div className={styles.customerActions} hidden={props.hidden}>
+    <div className={CustomerActions.className} hidden={props.hidden}>
       <div className={styles.container}>
         <DynamicButton
           hidden={!state.selected?.webLink}
@@ -62,3 +62,4 @@ export const CustomerActions: StyledComponent = (props) => {
 }
 
 CustomerActions.displayName = 'CustomerActions'
+CustomerActions.className = styles.customerActions
