@@ -1,6 +1,8 @@
-mutation DeleteCustomer($customerId: String!) {
-  result: deleteCustomer(customerId: $customerId) {
+mutation DeleteCustomer($key: String!) {
+  result: deleteCustomer(key: $key) {
     success
-    message
+    error {
+      message
+    }
   }
 }

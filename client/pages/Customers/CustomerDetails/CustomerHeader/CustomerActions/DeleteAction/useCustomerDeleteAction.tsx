@@ -34,7 +34,7 @@ export function useCustomerDeleteAction() {
     projects: Project[]
   }>($projectsQuery, {
     variables: {
-      customerId: context.state.selected?.key
+      customerKey: context.state.selected?.key
     },
     skip: !context.state.selected || dialogState !== 'checking'
   })
@@ -58,7 +58,7 @@ export function useCustomerDeleteAction() {
     setMessage(null)
     const { data } = await deleteCustomer({
       variables: {
-        customerId: customer.key
+        key: customer.key
       }
     })
     if (!data.result.success) {

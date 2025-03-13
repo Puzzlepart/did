@@ -69,9 +69,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
   public async deleteCustomer(key: string): Promise<boolean> {
     try {
       await this.cache.clear('getcustomers')
-      // const { result } = await this.collection.deleteOne({ key })
-      // return result.ok === 1 && result.n === 1
-      return true
+      const { result } = await this.collection.deleteOne({ key })
+      return result.ok === 1 && result.n === 1
     } catch (error) {
       throw error
     }

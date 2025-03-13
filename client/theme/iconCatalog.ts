@@ -1,4 +1,6 @@
 import {
+  GroupListRegular,
+  GroupListFilled,
   ColumnSingleCompareRegular,
   ColumnSingleCompareFilled,
   PersonDeleteRegular,
@@ -193,6 +195,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  GroupList: {
+    regular: GroupListRegular,
+    filled: GroupListFilled
+  },
   ColumnSingleCompare: {
     regular: ColumnSingleCompareRegular,
     filled: ColumnSingleCompareFilled

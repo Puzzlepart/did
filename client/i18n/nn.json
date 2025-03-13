@@ -211,7 +211,19 @@
     "nameNotUniqueError": "Det ser ut til at det allerede er en kunde med samme navn.",
     "noLabelsSelectedText": "Legg til merkelapper på kunden for kategorisering.",
     "updateSuccess": "Kunden **{{name}}** blei oppdatert heilt utan problem.",
-    "updateError": "Me kan ikkje oppdatera kunden **{{name}}** akkurat no. Ver vennleg og prøv igjen seinare, eller spør ein voksen om råd."
+    "updateError": "Me kan ikkje oppdatera kunden **{{name}}** akkurat no. Ver vennleg og prøv igjen seinare, eller spør ein voksen om råd.",
+    "deleteDialogTitle": "Slett kunde",
+    "deleteConfirmation": "Er du sikker på at du vil slette kunden **{{name}}**? Før du fortsetter, vil vi sjekke om det er noen prosjekter knyttet til denne kunden. Hvis prosjekter blir funnet, kan ikke kunden slettes før de er fjernet.",
+    "deleteButtonLabel": "Slett kunde",
+    "checkButtonLabel": "Gå videre",
+    "deleteCheckLabel": "Verifisere tilknyttede prosjekter",
+    "deleteCheckHint": "Vi sjekker om denne kunden har noen tilknyttede prosjekter. Denne prosessen kan ta et øyeblikk...",
+    "deleteFailed": "Ein uventa feil oppstod medan du prøvde å sletta kunden **{{name}}**.  Prøv igjen seinare eller kontaktstøtte viss problemet held fram.",
+    "deleteFailedTitle": "Sletting av kunde mislykkast",
+    "deleteSuccess": "Kunde **{{name}}** har vorte sletta. Du blir omdirigert til kundesida.",
+    "checkSuccess": "Ingen prosjekt funne. Kunden kan trygt slettast.",
+    "deleteError": "Denne kunden har {{count}} tilknytta prosjekt. For å halda fram med å sletta kunden, må du fjerne alle relaterte prosjekt først.",
+    "deleteSuccessTitle": "Kunde sletta"
   },
   "admin": {
     "apiTokens": {

@@ -11,7 +11,7 @@ import {
   FieldProps,
   ProgressBar
 } from '@fluentui/react-components'
-import { Markdown } from 'components'
+import { DynamicButton, Markdown } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils'
@@ -58,7 +58,7 @@ export const CustomerDeleteDialog: FC<ICustomerDeleteDialogProps> = ({
               className={styles.checkProgress}
               style={{ display: isInitial ? 'none' : 'flex' }}
             >
-              {getFluentIcon('Timer', { size: 60 })}
+              {getFluentIcon('GroupList', { size: 60 })}
               <Field
                 className={styles.field}
                 label={t('customers.deleteCheckLabel')}
@@ -72,27 +72,23 @@ export const CustomerDeleteDialog: FC<ICustomerDeleteDialogProps> = ({
               </Field>
             </div>
           </DialogContent>
-          <DialogActions>
-            <Button
-              appearance='primary'
+          <DialogActions className={styles.actions}>
+            <DynamicButton
+              primary
+              text={state === 'success'
+                ? t('customers.deleteButtonLabel')
+                : t('customers.checkButtonLabel')}
               disabled={loading || isError}
               onClick={() => {
                 if (isSuccess) onDelete(customer)
                 else setState('checking')
-              }}
-            >
-              {state === 'success'
-                ? t('customers.deleteButtonLabel')
-                : t('customers.checkButtonLabel')}
-            </Button>
+              }} />
             <DialogTrigger disableButtonEnhancement>
-              <Button
-                appearance='secondary'
+              <DynamicButton
+                text={t('common.abort')}
+                secondary
                 disabled={loading}
-                onClick={() => setState('hidden')}
-              >
-                {t('common.abort')}
-              </Button>
+                onClick={() => setState('hidden')} />
             </DialogTrigger>
           </DialogActions>
         </DialogBody>
