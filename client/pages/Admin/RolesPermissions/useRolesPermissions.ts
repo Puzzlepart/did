@@ -76,7 +76,7 @@ export function useRolesPermissions() {
         title: t('admin.addNewRole'),
         onDismiss: ({ refetch = false } = {}) => {
           setPanel(null)
-          if(refetch) {
+          if (refetch) {
             roleQuery.refetch()
           }
         }
@@ -87,7 +87,7 @@ export function useRolesPermissions() {
   /**
    * On edit role. Potentially it should be moved
    * to the `useMenuItems` hook.
-   * 
+   *
    * @param _ - The mouse event
    * @param edit - The role to edit
    */
@@ -97,7 +97,7 @@ export function useRolesPermissions() {
         title: t('admin.editRole'),
         onDismiss: ({ refetch = false } = {}) => {
           setPanel(null)
-          if(refetch) {
+          if (refetch) {
             roleQuery.refetch()
           }
         }

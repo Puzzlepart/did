@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.14.13 - TBA](#-01413---tba)
+	* [➤ 0.14.14 - TBA](#-01414---tba)
 		* [Changed](#changed)
 	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
 		* [Added](#added)
@@ -85,9 +85,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01413---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01414---tba)
 
-## ➤ 0.14.13 - TBA
+## ➤ 0.14.14 - TBA
 
 ### Changed
 - Enhanced roles and permissions management UI

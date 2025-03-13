@@ -13,7 +13,7 @@ type UseMenuItemsProps = {
  * Hook for `<RolesPermissions />` component that returns the menu items. For now it
  * must be passed the `setPanel` function, the `selectedRole` and the
  * `onDelete` function. It returns an array of `ListMenuItem` objects.
- * 
+ *
  * @category RolesPermissions
  */
 export function useMenuItems({
