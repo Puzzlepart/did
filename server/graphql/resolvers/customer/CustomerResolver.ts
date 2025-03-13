@@ -27,7 +27,11 @@ export class CustomerResolver {
    *
    * @param _customer - Customer service
    */
-  constructor(private readonly _customer: CustomerService) { }
+  constructor(private readonly _customer: CustomerService) {
+    // Empty constructor. Probably this will be empty
+    // until they release the new GTA game.
+    // I'm really looking forward to that.
+  }
 
   /**
    * Get customers

@@ -1,4 +1,3 @@
-import { Icon } from '@fluentui/react'
 import {
   Caption1,
   mergeClasses,
@@ -8,12 +7,9 @@ import {
 import { ReusableComponent } from 'components/types'
 import { usePermissions } from 'hooks'
 import React from 'react'
+import { getFluentIconWithFallback } from 'utils'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
-import { getFluentIconWithFallback } from 'utils'
-
-/**
- * @category Reusable Component
  */
 export const PermissionList: ReusableComponent<IPermissionListProps> = ({
   className,

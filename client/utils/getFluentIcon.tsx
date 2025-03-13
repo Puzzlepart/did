@@ -99,7 +99,7 @@ export function getFluentIconWithFallback(
   name: string,
   options?: GetFluentIconOptions
 ) {
-  name = !_.isEmpty(name) ? name : options?.default
+  name = _.isEmpty(name) ? options?.default : name
   if (_.has(iconCatalog, name)) {
     return getFluentIcon(name as FluentIconName, options)
   }
