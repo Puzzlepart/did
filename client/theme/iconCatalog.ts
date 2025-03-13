@@ -193,12 +193,24 @@ import {
   FolderFilled,
   DocumentRegular,
   DocumentFilled,
+  TableDeleteColumnRegular,
+  TableDeleteColumnFilled,
+  DeleteLinesRegular,
+  DeleteLinesFilled,
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  DeleteLines: {
+    regular: DeleteLinesRegular,
+    filled: DeleteLinesFilled
+  },
+  TableDeleteColumn: {
+    regular: TableDeleteColumnRegular,
+    filled: TableDeleteColumnFilled
+  },
   Document: {
     regular: DocumentRegular,
     filled: DocumentFilled
