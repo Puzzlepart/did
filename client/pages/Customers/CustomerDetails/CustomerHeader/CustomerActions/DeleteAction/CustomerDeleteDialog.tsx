@@ -74,20 +74,24 @@ export const CustomerDeleteDialog: FC<ICustomerDeleteDialogProps> = ({
           <DialogActions className={styles.actions}>
             <DynamicButton
               primary
-              text={state === 'success'
-                ? t('customers.deleteButtonLabel')
-                : t('customers.checkButtonLabel')}
+              text={
+                state === 'success'
+                  ? t('customers.deleteButtonLabel')
+                  : t('customers.checkButtonLabel')
+              }
               disabled={loading || isError}
               onClick={() => {
                 if (isSuccess) onDelete(customer)
                 else setState('checking')
-              }} />
+              }}
+            />
             <DialogTrigger disableButtonEnhancement>
               <DynamicButton
                 text={t('common.abort')}
                 secondary
                 disabled={loading}
-                onClick={() => setState('hidden')} />
+                onClick={() => setState('hidden')}
+              />
             </DialogTrigger>
           </DialogActions>
         </DialogBody>

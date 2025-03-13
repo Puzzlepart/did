@@ -5,13 +5,16 @@ import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../../../context'
-import { CLOSE_CUSTOMER_PANEL, OPEN_CUSTOMER_PANEL } from '../../../reducer/actions'
+import {
+  CLOSE_CUSTOMER_PANEL,
+  OPEN_CUSTOMER_PANEL
+} from '../../../reducer/actions'
 import styles from './CustomerActions.module.scss'
 import { useCustomerDeleteAction } from './DeleteAction'
 
 /**
  * Component for displaying customer action buttons like delete and edit
- * 
+ *
  * @category Customers
  */
 export const CustomerActions: StyledComponent = (props) => {

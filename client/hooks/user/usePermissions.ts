@@ -12,7 +12,7 @@ type UsePermissionsReturnType = [
 
   /**
    * Function to check if the current user has the specified permission.
-   * 
+   *
    * @param scope - The permission scope to check
    */
   (scope: PermissionScope) => boolean
@@ -60,9 +60,6 @@ export function usePermissions(
       return context?.user ? context.user.hasPermission(scope) : false
     }
 
-    return [
-      permissionInfo,
-      hasPermission
-    ]
+    return [permissionInfo, hasPermission]
   }, [context?.user, scopeIds, api])
 }

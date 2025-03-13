@@ -54,7 +54,10 @@ export const ApiTokens: TabComponent = () => {
             .setOnClick(onDelete)
             .withIcon('Delete')
             .setGroup('actions')
-            .setDisabled(!selectedToken || !hasPermission(PermissionScope.MANAGE_API_TOKENS))
+            .setDisabled(
+              !selectedToken ||
+                !hasPermission(PermissionScope.MANAGE_API_TOKENS)
+            )
         ]}
       />
       {form.open && (

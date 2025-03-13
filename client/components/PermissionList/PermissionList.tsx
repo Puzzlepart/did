@@ -10,7 +10,7 @@ import React from 'react'
 import { getFluentIconWithFallback } from 'utils'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
- 
+
 export const PermissionList: ReusableComponent<IPermissionListProps> = ({
   className,
   permissionIds
@@ -33,7 +33,9 @@ export const PermissionList: ReusableComponent<IPermissionListProps> = ({
             relationship='description'
           >
             <div className={styles.item}>
-              {getFluentIconWithFallback(perm.iconName, { default: 'Document' })}
+              {getFluentIconWithFallback(perm.iconName, {
+                default: 'Document'
+              })}
               <Caption1>{perm.name}</Caption1>
             </div>
           </Tooltip>

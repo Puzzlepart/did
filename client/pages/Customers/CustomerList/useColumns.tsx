@@ -36,7 +36,7 @@ export function useColumns(): IListColumn[] {
         renderAs: 'tag',
         createRenderProps: (customer) => ({
           icon: getFluentIconWithFallback(customer.icon, {
-            default:'Folder'
+            default: 'Folder'
           })
         })
       }),

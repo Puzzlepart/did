@@ -16,18 +16,20 @@ export const CustomerList: TabComponent = (props) => {
         enableShimmer={context.loading}
         items={context.state.customers}
         columns={columns}
-        menuItems={(_context) => context.state.customers.some((c) => c.inactive)
-          ? [
-            InactiveCheckboxMenuItem(
-              t('customers.toggleInactive', {
-                count: _context.state.itemsPreFilter.filter(
-                  (c) => c.inactive
-                ).length
-              }),
-              showInactive.toggle
-            )
-          ]
-          : []}
+        menuItems={(_context) =>
+          context.state.customers.some((c) => c.inactive)
+            ? [
+                InactiveCheckboxMenuItem(
+                  t('customers.toggleInactive', {
+                    count: _context.state.itemsPreFilter.filter(
+                      (c) => c.inactive
+                    ).length
+                  }),
+                  showInactive.toggle
+                )
+              ]
+            : []
+        }
         getColumnStyle={(customer) => ({
           opacity: customer.inactive ? 0.4 : 1
         })}
@@ -35,8 +37,8 @@ export const CustomerList: TabComponent = (props) => {
           showInactive.value
             ? {}
             : {
-              '!inactive': true
-            }
+                '!inactive': true
+              }
         }
       />
       {props.children}

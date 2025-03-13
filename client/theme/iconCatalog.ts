@@ -196,7 +196,7 @@ import {
   TableDeleteColumnRegular,
   TableDeleteColumnFilled,
   DeleteLinesRegular,
-  DeleteLinesFilled,
+  DeleteLinesFilled
 } from '@fluentui/react-icons'
 
 /**
