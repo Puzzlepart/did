@@ -145,36 +145,40 @@ Now you need to set the required environment variables from this table:
 | Folder/File                   | Description                                                  |
 | ----------------------------- | ------------------------------------------------------------ |
 | `/shared`                     | Shared code between client and server                        |
-| `/shared/config/security`     | Shared security configuration used by both the client and the server |
-| `/shared/utils/date`          | Shared date utilities used by both the client and the server |
-| `/client`                     | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`. |
-| `/client/app`                 | [React](https://reactjs.org/) app entry point                                        |
-| `/client/app`                 | [React](https://reactjs.org/) app parts                                      |
-| `/client/common`              | Common elements like icons etc                               |
-| `/client/components`          | [React](https://reactjs.org/) components reusable throughout the solution            |
-| `/client/graphql`             | Graphql implementation for the client using [@apollo/client](https://www.npmjs.com/package/@apollo/client) |
-| `/client/helpers`             | Helper functions                                             |
-| `/client/pages`               | Main pages of the solution                                   |
-| `/client/types`               | Types, models and interfaces                                 |
-| `/client/utils`               | Utility functions                                            |
-| `/client/index.tsx`           | Main entry point for the app                                 |
-| `/server/public`              | Public assets, static files hosted under "/"                 |
-| `/server/routes`              | [expressjs](https://expressjs.com/) routes using [hbs](https://handlebarsjs.com/) views |
-| `/server/graphql`             | [GraphQL](https://github.com/graphql/graphql-js/) implementation |
-| `/server/graphql/resolvers`   | GraphQL resolvers, queries and mutations                     |
-| `/server/middleware`          | Server side Express middleware functions                     |
-| `/server/middleware/passport` | [passport](http://www.passportjs.org/) authentication middleware |
-| `/server/services`            | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/)) |
-| `/server/utils`               | Utilities                                                    |
-| `/server/views`               | Express HBS views                                            |
-| `/server/app.ts`              | Express app                                                  |
-| `/server/index.ts`            | [Node.js](http://nodejs.org/) server                         |
+| `/shared/config`              | Configuration files used across client and server            |
+| `/shared/config/security`     | Shared security configuration and permission definitions     |
+| `/shared/utils`               | Utility functions shared between client and server           |
+| `/client`                     | Client TypeScript source using React and Apollo Client       |
+| `/client/app`                 | Core application files including entry point and router      |
+| `/client/components`          | Reusable React components used throughout the solution       |
+| `/client/graphql-client`      | Apollo client setup and configuration                        |
+| `/client/graphql-mutations`   | GraphQL mutation definitions                                 |
+| `/client/graphql-queries`     | GraphQL query definitions                                    |
+| `/client/hooks`               | Custom React hooks                                           |
+| `/client/i18n`                | Internationalization files and translation resources         |
+| `/client/logging`             | Client-side logging functionality                            |
+| `/client/pages`               | Main application pages organized by feature                  |
+| `/client/parts`               | Page sections and partial components                         |
+| `/client/theme`               | Styling, theme configuration, and icon catalog               |
+| `/client/types`               | TypeScript type definitions and interfaces                   |
+| `/client/utils`               | Client-side utility functions                                |
+| `/server/public`              | Public assets and static files served under "/"              |
+| `/server/routes`              | Express routes using Handlebars views                        |
+| `/server/graphql`             | GraphQL schema and resolvers                                |
+| `/server/middleware`          | Express middleware functions                                 |
+| `/server/services`            | Business logic services (MS Graph, database, etc.)           |
+| `/server/utils`               | Server-side utility functions                                |
+| `/server/views`               | Express Handlebars view templates                            |
+| `/server/app.ts`              | Express app configuration                                    |
+| `/server/index.ts`            | Node.js server entry point                                   |
+| `/assets`                     | Static assets like images and error pages                    |
+| `/webpack`                    | Webpack configuration and build utilities                    |
 
 ### Node version
 
-**NB: did should be developed with node 18.12.0**
+**NB: did should be developed with node 18.18.0**
 
-_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.12.0._
+_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.18.0._
 
 ### Authentication
 
@@ -232,8 +236,6 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 
 
 ### Documentation
-
-The client is documented [here](./client/.docs/README.md) and the server is documented [here](./server/.docs/README.md).
 
 _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 
