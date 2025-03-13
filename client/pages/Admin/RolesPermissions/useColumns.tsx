@@ -9,7 +9,7 @@ import { createColumnDef } from 'utils/createColumnDef'
 import styles from './RolesPermissions.module.scss'
 
 /**
- * Columns hook for Roles
+ * Columns hook for `<RolesPermissions />` component.
  */
 export function useColumns() {
   const { t } = useTranslation()

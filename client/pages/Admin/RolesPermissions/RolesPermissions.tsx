@@ -1,12 +1,12 @@
 import { SelectionMode } from '@fluentui/react'
-import { List, ListMenuItem } from 'components'
+import { List } from 'components'
 import { ITabProps } from 'components/Tabs/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { RolePanel } from './RolePanel'
 import styles from './RolesPermissions.module.scss'
-import { useRoles } from './useRoles'
+import { useRolesPermissions } from './useRolesPermissions'
 
 export const RolesPermissions: StyledComponent<ITabProps> = () => {
   const { t } = useTranslation()
@@ -17,9 +17,8 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
     setPanel,
     confirmationDialog,
     onSelectionChanged,
-    selectedRole,
-    onDelete
-  } = useRoles()
+    menuItems
+  } = useRolesPermissions()
   return (
     <div className={RolesPermissions.className}>
       <List
@@ -27,36 +26,14 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
         items={query?.data?.roles}
         columns={columns}
         selectionProps={[SelectionMode.single, onSelectionChanged]}
-        menuItems={[
-          new ListMenuItem(t('admin.addNewRole'))
-            .setOnClick(() =>
-              setPanel({
-                panel: {
-                  title: t('admin.addNewRole'),
-                  onDismiss: () => setPanel(null)
-                }
-              })
-            )
-            .withIcon('Permissions'),
-          new ListMenuItem(t('admin.editRole'))
-            .setOnClick(() =>
-              setPanel({
-                panel: {
-                  title: t('admin.editRole'),
-                  onDismiss: () => setPanel(null)
-                },
-                edit: selectedRole
-              })
-            )
-            .withIcon('Edit')
-            .setGroup('actions')
-            .setDisabled(!selectedRole),
-          new ListMenuItem(t('admin.deleteRole'))
-            .setOnClick(onDelete)
-            .withIcon('Delete')
-            .setGroup('actions')
-            .setDisabled(!selectedRole)
-        ]}
+        onItemInvoked={(item) => setPanel({
+          panel: {
+            title: t('admin.editRole'),
+            onDismiss: () => setPanel(null)
+          },
+          edit: item
+        })}
+        menuItems={menuItems}
       />
       {panel && <RolePanel refetch={query.refetch} {...panel} />}
       {confirmationDialog}

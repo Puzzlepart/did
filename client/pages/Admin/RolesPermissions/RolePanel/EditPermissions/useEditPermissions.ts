@@ -19,7 +19,7 @@ export function useEditPermissions(props: IEditPermissionsProps) {
     IPermissionInfo[]
   >([])
   const [permissions] = usePermissions(undefined, props.api)
-  const permissionsGrouped = _.groupBy(permissions, 'category')
+  const permissionsGrouped = _.groupBy(permissions, props.groupBy)
   const selectedOptions = selectedPermissions.map((permission) => permission.id)
 
   /**

@@ -2,14 +2,14 @@ import { useSubscriptionSettings } from 'AppContext'
 import {
   EntityLabel,
   InformationProperty,
+  Markdown,
   ProjectLink,
   ProjectTag,
   UserMessage
 } from 'components'
-import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer'
+import { SET_SELECTED_PROJECT } from '../../reducer'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import ReactMarkdown from 'react-markdown'
 import { LabelObject as Label, StyledComponent } from 'types'
 import _ from 'underscore'
 import { useProjectsContext } from '../../context'
@@ -63,7 +63,7 @@ export const ProjectInformation: StyledComponent = () => {
         hidden={!context.state.selected?.description}
         title={t('common.descriptionFieldLabel')}
         value={context.state.selected?.description}
-        onRenderValue={(value) => <ReactMarkdown>{value}</ReactMarkdown>}
+        onRenderValue={(value) => <Markdown text={value} />}
         isDataLoaded={!context.loading}
       />
       <ProjectResources />

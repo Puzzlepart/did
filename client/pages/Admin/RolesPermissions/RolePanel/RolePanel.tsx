@@ -14,30 +14,29 @@ import { useRolePanel } from './useRolePanel'
 
 export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
   const { t } = useTranslation()
-  const { model, register, submitProps, panelProps, isEditMode } =
-    useRolePanel(props)
+  const formControl = useRolePanel(props)
 
   return (
-    <FormControl
-      id={RolePanel.displayName}
-      model={model}
-      submitProps={submitProps}
-      panel={panelProps}
-    >
+    <FormControl {...formControl}>
       <InputControl
-        {...register('name')}
+        {...formControl.register('name')}
         required={true}
         label={t('admin.roleNameLabel')}
-        disabled={isEditMode}
+        disabled={formControl.isEditMode}
+      />
+      <InputControl
+        {...formControl.register('description')}
+        label={t('admin.roleDescriptionLabel')}
+        rows={4}
       />
       <IconPickerControl
-        {...register('icon')}
+        {...formControl.register('icon')}
         label={t('common.iconFieldLabel')}
         required={true}
         placeholder={t('common.iconSearchPlaceholder')}
       />
       <EditPermissions
-        {...register<BaseControlOptions>('permissions', {
+        {...formControl.register<BaseControlOptions>('permissions', {
           validators: [
             (value = []) =>
               value?.length === 0 || value === null
@@ -47,11 +46,11 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
         })}
         label={t('admin.permissonsLabel')}
         description={t('admin.editPermissionsDescription')}
-        onChange={(permissions) => model.set('permissions', permissions)}
-        selectedPermissions={model.value('permissions')}
+        onChange={(permissions) => formControl.model.set('permissions', permissions)}
+        selectedPermissions={formControl.model.value('permissions')}
       />
       <SwitchControl
-        {...register('enabledForExternalUsers')}
+        {...formControl.register('enabledForExternalUsers')}
         label={t('admin.enabledForExternalUsers')}
         description={t('admin.enabledForExternalUsersDescription')}
       />

@@ -35,4 +35,9 @@ export interface IEditPermissionsProps
    * Whether or not to fetch API permissions.
    */
   api?: boolean
+
+  /**
+   * Group permissions by field.
+   */
+  groupBy?: 'category'
 }

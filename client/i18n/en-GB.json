@@ -479,7 +479,9 @@
     "domainRestrictionAddMessage": "Domain **{0}** successfully added to the allowlist.",
     "domainRestrictionRemoveMessage": "Domain **{0}** successfully removed from the allowlist. Existing users will still have access and be able to log in.",
     "budgetTrackingEnableInvoiceEstimationLabel": "Enable income estimation",
-    "budgetTrackingEnableInvoiceEstimationDescription": "Enabling this setting will display estimated invoicing based on the hourly rates of the resources under each project."
+    "budgetTrackingEnableInvoiceEstimationDescription": "Enabling this setting will display estimated invoicing based on the hourly rates of the resources under each project.",
+    "roleDescriptionLabel": "Description",
+    "roleNotDeletable": "This role cannot be deleted because it is essential or has protected status."
   },
   "reports": {
     "generatingReportProgressText": "Please wait while we generate the report for you...",

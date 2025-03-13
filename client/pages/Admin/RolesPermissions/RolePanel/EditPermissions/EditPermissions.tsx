@@ -43,6 +43,7 @@ export const EditPermissions: StyledComponent<IEditPermissionsProps> = (
               <Option
                 key={p.id}
                 value={p.id}
+                title={p.description}
                 disabled={(!p.api && props.api) || p.disabled}
               >
                 {p.name}
@@ -63,5 +64,6 @@ EditPermissions.defaultProps = {
   selectedPermissions: [],
   name: 'permissions',
   buttonIcon: 'KeyMultiple',
-  labelFormat: '{{label}} ({{count}})'
+  labelFormat: '{{label}} ({{count}})',
+  groupBy: 'category'
 }

@@ -477,7 +477,9 @@
     "domainRestrictionAddMessage": "Domenet **{0}** er lagt til og kan nå brukes for ekstern deling.",
     "domainRestrictionRemoveMessage": "Domene **{0}** er fjernet og kan ikke lenger brukes for ekstern deling. Eksisterende brukere vil fortsatt ha tilgang og kunne logge inn.",
     "budgetTrackingEnableInvoiceEstimationDescription": "Når dette er aktivert, vil estimerte fakturabeløp vises under hvert prosjekt, basert på timeprisene til ressursene.",
-    "budgetTrackingEnableInvoiceEstimationLabel": "Aktiver inntektsestimering"
+    "budgetTrackingEnableInvoiceEstimationLabel": "Aktiver inntektsestimering",
+    "roleDescriptionLabel": "Beskrivelse",
+    "roleNotDeletable": "Denne rollen kan ikke slettes fordi den er viktig eller har beskyttet status."
   },
   "reports": {
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",

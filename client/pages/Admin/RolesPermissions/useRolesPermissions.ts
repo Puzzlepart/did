@@ -7,15 +7,16 @@ import { Role } from 'types'
 import { IRolePanelProps } from './RolePanel/types'
 import $deleteRole from './deleteRole.gql'
 import $roles from './roles.gql'
-import { useColumns } from './useColumns'
+import { useMenuItems } from './useMenuItems'
 import $users from './users.gql'
+import { useColumns } from './useColumns'
 
 /**
- * Component logic hook for `<Roles />`
+ * Component logic hook for `<RolesPermissions />` component.
  *
- * @category Roles
+ * @category RolesPermissions
  */
-export function useRoles() {
+export function useRolesPermissions() {
   const { t } = useTranslation()
   const roleQuery = useQuery($roles)
   const userRoleQuery = useQuery($users, {
@@ -29,7 +30,8 @@ export function useRoles() {
   const { displayToast } = useAppContext()
 
   /**
-   * On delete role
+   * On delete role. Potentially it should be moved
+   * to the `useMenuItems` hook.
    */
   const onDelete = useCallback(async () => {
     const { response } = await getResponse({
@@ -65,15 +67,15 @@ export function useRoles() {
   }, [selectedRole])
 
   const columns = useColumns()
+  const menuItems = useMenuItems({ setPanel, selectedRole, onDelete })
 
   return {
-    confirmationDialog,
     query: roleQuery,
     columns,
     panel,
     setPanel,
+    confirmationDialog,
     onSelectionChanged,
-    selectedRole,
-    onDelete
+    menuItems
   }
 }

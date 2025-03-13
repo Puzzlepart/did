@@ -94,9 +94,11 @@ export class ListMenuItem {
    * Creates a new instance of ListMenuItem.
    *
    * @param text The text to display in the menu item (optional).
+   * @param title The title (tooltip) of the menu item (optional).
    */
-  constructor(text?: string) {
+  constructor(text?: string, title?: string) {
     this._text = text
+    this._title = title
   }
 
   /**

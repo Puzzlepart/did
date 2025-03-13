@@ -5,6 +5,7 @@ query Roles {
     icon
     permissions
     readOnly
+    allowDelete
     enabledForExternalUsers
   }
 }
