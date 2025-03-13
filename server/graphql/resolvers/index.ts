@@ -1,6 +1,6 @@
 import { NonEmptyArray } from 'type-graphql'
 import { ApiTokenResolver } from './apiToken'
-import { CustomerResolver } from './customer'
+import { CustomerResolver } from './customer/CustomerResolver'
 import { LabelResolver } from './label'
 import { NotificationResolver } from './notification'
 import { OutlookCategoryResolver } from './outlookCategory'
@@ -27,7 +27,7 @@ export default [
   ReportLinkResolver
 ] as NonEmptyArray<any>
 export { ApiTokenResolver } from './apiToken'
-export { CustomerResolver } from './customer'
+export { CustomerResolver } from './customer/CustomerResolver'
 export { LabelResolver } from './label'
 export { NotificationResolver } from './notification'
 export { OutlookCategoryResolver } from './outlookCategory'
