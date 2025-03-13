@@ -5,7 +5,16 @@ import { getPermissions, IPermissionInfo, PermissionScope } from 'security'
 import _ from 'underscore'
 
 type UsePermissionsReturnType = [
+  /**
+   * Permissions available based on specified `permissionIds`
+   */
   IPermissionInfo[],
+
+  /**
+   * Function to check if the current user has the specified permission.
+   * 
+   * @param scope - The permission scope to check
+   */
   (scope: PermissionScope) => boolean
 ]
 
@@ -14,8 +23,8 @@ type UsePermissionsReturnType = [
  * permissions and a function to check if the current user
  * has the specified permission.
  *
- * @param scopeIds - Limit the returns permissions to the specified Ids
- * @param api - Only return permissions available to be called externally
+ * @param scopeIds Limit the returns permissions to the specified Ids
+ * @param api Only return permissions available to be called externally
  *
  * @returns Permissions available based on specified `permissionIds`
  * and a function `hasPermission` that checks if the currently logged
@@ -46,12 +55,14 @@ export function usePermissions(
       })
     )
 
+    const hasPermission: UsePermissionsReturnType['1'] = (scope) => {
+      if (!scope) return true
+      return context?.user ? context.user.hasPermission(scope) : false
+    }
+
     return [
       permissionInfo,
-      (scope: PermissionScope) => {
-        if (!scope) return true
-        return context?.user ? context.user.hasPermission(scope) : false
-      }
+      hasPermission
     ]
   }, [context?.user, scopeIds, api])
 }

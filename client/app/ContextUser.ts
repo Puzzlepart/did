@@ -95,7 +95,8 @@ export class ContextUser {
   }
 
   /**
-   * Checks if the user has the specified permission
+   * Checks if the user has the specified permission. If no
+   * permission is specified, it returns `true`.
    *
    * @param permission - Permission
    */

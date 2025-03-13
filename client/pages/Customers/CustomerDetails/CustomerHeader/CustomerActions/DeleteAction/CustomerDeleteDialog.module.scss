@@ -1,0 +1,19 @@
+.customerDeleteDialog {
+  width: 450px;
+
+  .checkProgress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+
+    .field {
+      flex: 1;
+    }
+  }
+
+  .actions {
+    grid-column-start: auto;
+  }
+}

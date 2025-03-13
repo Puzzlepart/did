@@ -208,7 +208,19 @@
     "nameNotUniqueError": "Det ser ut til at det allerede finnes en API-nøkkel med det navnet. \nKom gjerne opp med noe annet.",
     "noLabelsSelectedText": "Legg til merkelapper på kunden for kategorisering.",
     "updateSuccess": "Kunden **{{name}}** ble oppdatert helt uten problemer.",
-    "updateError": "Vi kan ikke oppdatere kunden **{{name}}** for øyeblikket. Vennligst prøv igjen senere, eller spør en voksen om råd."
+    "updateError": "Vi kan ikke oppdatere kunden **{{name}}** for øyeblikket. Vennligst prøv igjen senere, eller spør en voksen om råd.",
+    "deleteDialogTitle": "Slett kunde",
+    "deleteConfirmation": "Er du sikker på at du vil slette kunden **{{name}}**? Før du fortsetter, vil vi sjekke om det er noen prosjekter knyttet til denne kunden. Hvis prosjekter blir funnet, kan ikke kunden slettes før de er fjernet.",
+    "deleteButtonLabel": "Slett kunde",
+    "checkButtonLabel": "Gå videre",
+    "deleteCheckLabel": "Verifisere tilknyttede prosjekter",
+    "deleteCheckHint": "Vi sjekker om denne kunden har noen tilknyttede prosjekter. Denne prosessen kan ta et øyeblikk...",
+    "deleteFailed": "En uventet feil oppstod mens du forsøkte å slette kunden **{{name}}**.  Prøv igjen senere eller kontaktstøtte hvis problemet vedvarer.",
+    "deleteFailedTitle": "Sletting av kunde mislyktes",
+    "deleteSuccess": "Kunde **{{name}}** er blitt slettet. Du blir omdirigert til kundesiden.",
+    "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettes.",
+    "deleteError": "Denne kunden har {{count}} tilknyttede prosjekter. For å fortsette med å slette kunden, må du fjerne alle relaterte prosjekter først.",
+    "deleteSuccessTitle": "Kunde slettet"
   },
   "admin": {
     "apiTokens": {
@@ -866,7 +878,7 @@
     "deleteCustomers": "Slette kunder",
     "manageUsers": "Administrere brukere",
     "manageRolesPermissions": "Administere roller og tilganger",
-    "deleteProjectsDescription": "Sletting av prosjekter støttes foreløpig ikke.",
+    "deleteProjectsDescription": "Gir brukerne muligheten til å fjerne prosjekter permanent fra systemet.",
     "accessTimesheetDescription": "Tilgang til timelisten for å registrere og bekrefte timer.",
     "accessCustomersDescription": "Tilgang til siden kunder der du kan søke i aktive og inaktive kunder.",
     "accessProjectsDescription": "Tilgang til prosjekter-siden der du kan søke i aktive og inaktive prosjekter.",
@@ -874,7 +886,7 @@
     "accessReportsDescription": "Tilgang til alle rapporter. \nI fjor, i år, denne måneden, forrige måned og prognose. \nStøtter også uthenting med API-nøkkel.",
     "manageProjectsDescription": "Opprett nye og rediger eksisterende prosjekter.",
     "manageCustomersDescription": "Opprett nye og rediger eksisterende kunder.",
-    "deleteCustomersDescription": "Sletting av kunder støttes foreløpig ikke.",
+    "deleteCustomersDescription": "Gir brukere muligheten til å permanent fjerne kunder fra systemet.",
     "manageUsersDescription": "Administrer brukere på administratorsiden. \nLegg til nye brukere, én etter én eller i bulk, og endre rolle for eksisterende brukere.",
     "manageRolesPermissionsDescription": "Administrer roller og tillatelser på administratorsiden. \nLag nye roller og rediger eksisterende.",
     "manageSubscription": "Administrer abonnementet",

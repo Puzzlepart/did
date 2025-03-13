@@ -1,23 +1,25 @@
 import { DynamicButton } from 'components'
 import { usePermissions } from 'hooks'
-import {
-  CLOSE_CUSTOMER_PANEL,
-  OPEN_CUSTOMER_PANEL
-} from 'pages/Customers/reducer'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { StyledComponent } from 'types'
-import { CustomersContext } from '../../../context'
+import { useCustomersContext } from '../../../context'
+import { CLOSE_CUSTOMER_PANEL, OPEN_CUSTOMER_PANEL } from '../../../reducer/actions'
 import styles from './CustomerActions.module.scss'
+import { useCustomerDeleteAction } from './DeleteAction'
 
 /**
+ * Component for displaying customer action buttons like delete and edit
+ * 
  * @category Customers
  */
 export const CustomerActions: StyledComponent = (props) => {
-  const { t } = useTranslation()
+  const context = useCustomersContext()
   const [, hasPermission] = usePermissions()
-  const context = useContext(CustomersContext)
+  const { t } = useTranslation()
+  const onDelete = useCustomerDeleteAction()
+
   return (
     <div className={CustomerActions.className} hidden={props.hidden}>
       <div className={styles.container}>
@@ -38,6 +40,14 @@ export const CustomerActions: StyledComponent = (props) => {
           transparent
         />
         <DynamicButton
+          hidden={!hasPermission(PermissionScope.DELETE_CUSTOMERS)}
+          text={t('customers.deleteButtonLabel')}
+          iconName='Delete'
+          {...onDelete}
+          disabled={!Boolean(context.state.selected)}
+          transparent
+        />
+        <DynamicButton
           hidden={!hasPermission(PermissionScope.MANAGE_CUSTOMERS)}
           text={t('customers.editButtonLabel')}
           iconName='Edit'
@@ -52,6 +62,7 @@ export const CustomerActions: StyledComponent = (props) => {
           transparent
         />
       </div>
+      {onDelete.dialog}
     </div>
   )
 }

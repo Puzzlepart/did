@@ -2,6 +2,7 @@ import { Icon } from '@fluentui/react'
 import { bundleIcon } from '@fluentui/react-icons'
 import React, { CSSProperties } from 'react'
 import { iconCatalog } from 'theme/iconCatalog'
+import _ from 'lodash'
 
 /**
  * Represents the name of a Fluent UI icon.
@@ -33,6 +34,11 @@ type GetFluentIconOptions = {
    * The title of the icon.
    */
   title?: string
+
+  /**
+   * The default icon to use if the specified icon is not found in the catalog.
+   */
+  default?: string
 }
 
 /**
@@ -48,12 +54,12 @@ export function getFluentIcon(
   name: FluentIconName,
   options?: GetFluentIconOptions
 ) {
-  if (!iconCatalog[name]) return null
+  if (!iconCatalog[name] && !options?.default) return null
   const bundle = options?.bundle ?? true
   const color = options?.color
   const size = options?.size
   const filled = options?.filled ?? false
-  const icon = iconCatalog[name]
+  const icon = iconCatalog[name ?? options?.default]
   const Icon = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
   const props: { style?: CSSProperties; title?: string } = {
     title: options?.title
@@ -93,7 +99,8 @@ export function getFluentIconWithFallback(
   name: string,
   options?: GetFluentIconOptions
 ) {
-  if (iconCatalog[name]) {
+  name = _.isEmpty(name) ? options?.default : name
+  if (_.has(iconCatalog, name)) {
     return getFluentIcon(name as FluentIconName, options)
   }
   return (

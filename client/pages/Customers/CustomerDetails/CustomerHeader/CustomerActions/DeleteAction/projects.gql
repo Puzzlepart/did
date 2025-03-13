@@ -1,0 +1,6 @@
+query ProjectsByCustomer($customerKey: String!) {
+  projects(customerKey: $customerKey) {
+    tag
+    name
+  }
+}

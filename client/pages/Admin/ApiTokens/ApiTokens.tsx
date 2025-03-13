@@ -3,7 +3,7 @@ import { List, TabComponent, ListMenuItem } from 'components'
 import { usePermissions } from 'hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { PermissionScope as $ } from '../../../../shared/config/security/types'
+import { PermissionScope } from '../../../../shared/config/security/types'
 import { ApiKeyDisplay } from './ApiKeyDisplay'
 import { ApiTokenForm } from './ApiTokenForm'
 import styles from './ApiTokens.module.scss'
@@ -48,13 +48,13 @@ export const ApiTokens: TabComponent = () => {
         menuItems={[
           new ListMenuItem(t('admin.apiTokens.addNew'))
             .withIcon('Add')
-            .setDisabled(!hasPermission($.MANAGE_API_TOKENS))
+            .setDisabled(!hasPermission(PermissionScope.MANAGE_API_TOKENS))
             .setOnClick(() => setForm({ open: true })),
           new ListMenuItem(t('admin.apiTokens.delete'))
             .setOnClick(onDelete)
             .withIcon('Delete')
             .setGroup('actions')
-            .setDisabled(!selectedToken || !hasPermission($.MANAGE_API_TOKENS))
+            .setDisabled(!selectedToken || !hasPermission(PermissionScope.MANAGE_API_TOKENS))
         ]}
       />
       {form.open && (

@@ -35,7 +35,9 @@ export function useColumns(): IListColumn[] {
         maxWidth: 125,
         renderAs: 'tag',
         createRenderProps: (customer) => ({
-          icon: getFluentIconWithFallback(customer.icon)
+          icon: getFluentIconWithFallback(customer.icon, {
+            default:'Folder'
+          })
         })
       }),
       createColumnDef<Customer, ICustomerLinkProps>(

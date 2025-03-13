@@ -18,3 +18,4 @@ export const OPEN_CUSTOMER_PANEL = createAction<OpenPanelPayload>(
   'OPEN_CUSTOMER_PANEL'
 )
 export const CLOSE_CUSTOMER_PANEL = createAction('CLOSE_CUSTOMER_PANEL')
+export const CUSTOMER_DELETE_SUCCESS = createAction('CUSTOMER_DELETE_SUCCESS')

@@ -54,7 +54,7 @@ export const getPermissions = (
   [PermissionScope.DELETE_PROJECTS]: {
     name: t('permissions.deleteProjects'),
     description: t('permissions.deleteProjectsDescription'),
-    iconName: 'DeleteTable',
+    iconName: 'DeleteLines',
     api: true,
     category: 'projects'
   },
@@ -66,11 +66,10 @@ export const getPermissions = (
     category: 'customers'
   },
 
-  [PermissionScope.DELETE_CUSTOMER]: {
+  [PermissionScope.DELETE_CUSTOMERS]: {
     name: t('permissions.deleteCustomers'),
     description: t('permissions.deleteCustomersDescription'),
-    iconName: 'PageData',
-    disabled: true,
+    iconName: 'TableDeleteColumn',
     api: true,
     category: 'customers'
   },

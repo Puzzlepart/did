@@ -1,0 +1,8 @@
+mutation DeleteCustomer($key: String!) {
+  result: deleteCustomer(key: $key) {
+    success
+    error {
+      message
+    }
+  }
+}

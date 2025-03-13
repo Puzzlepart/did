@@ -1,4 +1,6 @@
 import {
+  GroupListRegular,
+  GroupListFilled,
   ColumnSingleCompareRegular,
   ColumnSingleCompareFilled,
   PersonDeleteRegular,
@@ -186,13 +188,41 @@ import {
   ChevronUpRegular,
   ChevronUpFilled,
   ArrowLeftRegular,
-  ArrowLeftFilled
+  ArrowLeftFilled,
+  FolderRegular,
+  FolderFilled,
+  DocumentRegular,
+  DocumentFilled,
+  TableDeleteColumnRegular,
+  TableDeleteColumnFilled,
+  DeleteLinesRegular,
+  DeleteLinesFilled,
 } from '@fluentui/react-icons'
 
 /**
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  DeleteLines: {
+    regular: DeleteLinesRegular,
+    filled: DeleteLinesFilled
+  },
+  TableDeleteColumn: {
+    regular: TableDeleteColumnRegular,
+    filled: TableDeleteColumnFilled
+  },
+  Document: {
+    regular: DocumentRegular,
+    filled: DocumentFilled
+  },
+  Folder: {
+    regular: FolderRegular,
+    filled: FolderFilled
+  },
+  GroupList: {
+    regular: GroupListRegular,
+    filled: GroupListFilled
+  },
   ColumnSingleCompare: {
     regular: ColumnSingleCompareRegular,
     filled: ColumnSingleCompareFilled
