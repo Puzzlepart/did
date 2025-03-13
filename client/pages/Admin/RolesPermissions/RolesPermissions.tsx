@@ -26,13 +26,15 @@ export const RolesPermissions: StyledComponent<ITabProps> = () => {
         items={query?.data?.roles}
         columns={columns}
         selectionProps={[SelectionMode.single, onSelectionChanged]}
-        onItemInvoked={(item) => setPanel({
-          panel: {
-            title: t('admin.editRole'),
-            onDismiss: () => setPanel(null)
-          },
-          edit: item
-        })}
+        onItemInvoked={(item) =>
+          setPanel({
+            panel: {
+              title: t('admin.editRole'),
+              onDismiss: () => setPanel(null)
+            },
+            edit: item
+          })
+        }
         menuItems={menuItems}
       />
       {panel && <RolePanel refetch={query.refetch} {...panel} />}

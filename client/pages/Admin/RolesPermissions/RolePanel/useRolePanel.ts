@@ -21,7 +21,7 @@ export function useRolePanel(props: IRolePanelProps) {
   const formControlProps: IFormControlProps<Role> = {
     id: RolePanel.displayName,
     model,
-    register, 
+    register,
     submitProps,
     panel: {
       ...props.panel,

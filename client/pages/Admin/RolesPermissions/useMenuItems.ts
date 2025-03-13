@@ -15,7 +15,11 @@ type UseMenuItemsProps = {
  * must be passed the `setPanel` function, the `selectedRole` and the
  * `onDelete` function. It returns an array of `ListMenuItem` objects.
  */
-export function useMenuItems({ setPanel, selectedRole, onDelete }:UseMenuItemsProps) {
+export function useMenuItems({
+  setPanel,
+  selectedRole,
+  onDelete
+}: UseMenuItemsProps) {
   const { t } = useTranslation()
   return [
     new ListMenuItem(t('admin.addNewRole'))
@@ -41,7 +45,12 @@ export function useMenuItems({ setPanel, selectedRole, onDelete }:UseMenuItemsPr
       .withIcon('Edit')
       .setGroup('actions')
       .setDisabled(!selectedRole),
-    new ListMenuItem(t('admin.deleteRole'), selectedRole?.allowDelete === false ? t('admin.roleNotDeletable') : undefined)
+    new ListMenuItem(
+      t('admin.deleteRole'),
+      selectedRole?.allowDelete === false
+        ? t('admin.roleNotDeletable')
+        : undefined
+    )
       .setOnClick(onDelete)
       .withIcon('Delete')
       .setGroup('actions')

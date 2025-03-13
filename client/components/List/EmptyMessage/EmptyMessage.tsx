@@ -11,12 +11,11 @@ export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'>> = ({
 }) => {
   const { t } = useTranslation()
   const context = useListContext()
-  const emptyMessage =
-    Boolean(context.props.emptyMessage)
-      ? context.props.emptyMessage
-      : (context.state.searchTerm?.length > 0
-        ? t('common.noResultsWithCriteria', context.state)
-        : t('common.noResults'))
+  const emptyMessage = Boolean(context.props.emptyMessage)
+    ? context.props.emptyMessage
+    : context.state.searchTerm?.length > 0
+    ? t('common.noResultsWithCriteria', context.state)
+    : t('common.noResults')
   return (
     <div
       className={EmptyMessage.className}

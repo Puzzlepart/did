@@ -46,7 +46,9 @@ export const RolePanel: PanelComponent<IRolePanelProps> = (props) => {
         })}
         label={t('admin.permissonsLabel')}
         description={t('admin.editPermissionsDescription')}
-        onChange={(permissions) => formControl.model.set('permissions', permissions)}
+        onChange={(permissions) =>
+          formControl.model.set('permissions', permissions)
+        }
         selectedPermissions={formControl.model.value('permissions')}
       />
       <SwitchControl
