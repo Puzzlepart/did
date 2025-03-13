@@ -10,7 +10,7 @@ import React from 'react'
 import { getFluentIconWithFallback } from 'utils'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
- */
+ 
 export const PermissionList: ReusableComponent<IPermissionListProps> = ({
   className,
   permissionIds
