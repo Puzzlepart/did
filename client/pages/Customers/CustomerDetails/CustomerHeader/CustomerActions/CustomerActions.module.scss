@@ -1,6 +1,11 @@
 .customerActions {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 0;
+
   .container {
-    margin: 6px 15px 0 8px;
     display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 }
