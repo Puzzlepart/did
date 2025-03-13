@@ -15,6 +15,7 @@ import { Markdown } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils'
+import styles from './CustomerDeleteDialog.module.scss'
 import { ICustomerDeleteDialogProps } from './types'
 
 /**
@@ -41,7 +42,7 @@ export const CustomerDeleteDialog: FC<ICustomerDeleteDialogProps> = ({
 
   return (
     <Dialog open={state !== 'hidden'}>
-      <DialogSurface className="customerDeleteDialog">
+      <DialogSurface className={styles.customerDeleteDialog}>
         <DialogBody>
           <DialogTitle>{t('customers.deleteDialogTitle')}</DialogTitle>
           <DialogContent>
@@ -54,12 +55,12 @@ export const CustomerDeleteDialog: FC<ICustomerDeleteDialogProps> = ({
               />
             </div>
             <div
-              className="checkProgress"
+              className={styles.checkProgress}
               style={{ display: isInitial ? 'none' : 'flex' }}
             >
               {getFluentIcon('Timer', { size: 60 })}
               <Field
-                className="field"
+                className={styles.field}
                 label={t('customers.deleteCheckLabel')}
                 hint={isChecking && t('customers.deleteCheckHint')}
                 validationState={
