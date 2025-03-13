@@ -220,7 +220,8 @@
     "deleteSuccess": "Kunde **{{name}}** er blitt slettet. Du blir omdirigert til kundesiden.",
     "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettes.",
     "deleteError": "Denne kunden har {{count}} tilknyttede prosjekter. For å fortsette med å slette kunden, må du fjerne alle relaterte prosjekter først.",
-    "deleteSuccessTitle": "Kunde slettet"
+    "deleteSuccessTitle": "Kunde slettet",
+    "searchPlaceholder": "Søk i {{count}} kunder..."
   },
   "admin": {
     "apiTokens": {

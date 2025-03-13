@@ -223,7 +223,8 @@
     "deleteFailedTitle": "Customer Deletion Failed",
     "deleteSuccessTitle": "Customer Deleted Successfully",
     "deleteSuccess": "Customer **{{name}}** has been successfully deleted. You will be redirected to the Customers page.",
-    "toggleInactive": "Show/hide inactive customers ({{count}})"
+    "toggleInactive": "Show/hide inactive customers ({{count}})",
+    "searchPlaceholder": "Search {{count}} customers..."
   },
   "admin": {
     "apiTokens": {

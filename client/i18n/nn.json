@@ -223,7 +223,8 @@
     "deleteSuccess": "Kunde **{{name}}** har vorte sletta. Du blir omdirigert til kundesida.",
     "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettast.",
     "deleteError": "Denne kunden har {{count}} tilknytta prosjekt. For å halda fram med å sletta kunden, må du fjerne alle relaterte prosjekt først.",
-    "deleteSuccessTitle": "Kunde sletta"
+    "deleteSuccessTitle": "Kunde sletta",
+    "searchPlaceholder": "Søk i {{count}} kunder..."
   },
   "admin": {
     "apiTokens": {
