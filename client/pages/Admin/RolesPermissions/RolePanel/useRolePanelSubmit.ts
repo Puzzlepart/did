@@ -32,8 +32,7 @@ export const useRolePanelSubmit: FormSubmitHook<IRolePanelProps> = (
         update: !!props.edit
       }
     })
-    props.panel.onDismiss()
-    props.refetch()
+    props.panel.onDismiss({ refetch: true })
   }
 
   const submitProps: IFormControlProps['submitProps'] = {

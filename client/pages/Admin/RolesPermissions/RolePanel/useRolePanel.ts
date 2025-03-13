@@ -11,7 +11,7 @@ import { RolePanel } from './RolePanel'
 /**
  * Component logic hook for `<RolePanel />`
  *
- * @category Roles
+ * @category RolesPermissions
  */
 export function useRolePanel(props: IRolePanelProps) {
   const model = useFormControlModel<keyof RoleInput, RoleInput>(props.edit)

@@ -66,14 +66,54 @@ export function useRolesPermissions() {
     }
   }, [selectedRole])
 
+  /**
+   * On add role. Potentially it should be moved
+   * to the `useMenuItems` hook.
+   */
+  const onAdd = () => {
+    setPanel({
+      panel: {
+        title: t('admin.addNewRole'),
+        onDismiss: ({ refetch = false } = {}) => {
+          setPanel(null)
+          if(refetch) {
+            roleQuery.refetch()
+          }
+        }
+      }
+    })
+  }
+
+  /**
+   * On edit role. Potentially it should be moved
+   * to the `useMenuItems` hook.
+   * 
+   * @param _ - The mouse event
+   * @param edit - The role to edit
+   */
+  const onEdit = (_: MouseEvent, edit = selectedRole) => {
+    setPanel({
+      panel: {
+        title: t('admin.editRole'),
+        onDismiss: ({ refetch = false } = {}) => {
+          setPanel(null)
+          if(refetch) {
+            roleQuery.refetch()
+          }
+        }
+      },
+      edit
+    })
+  }
+
   const columns = useColumns()
-  const menuItems = useMenuItems({ setPanel, selectedRole, onDelete })
+  const menuItems = useMenuItems({ selectedRole, onDelete, onAdd, onEdit })
 
   return {
     query: roleQuery,
     columns,
     panel,
-    setPanel,
+    onEdit,
     confirmationDialog,
     onSelectionChanged,
     menuItems
