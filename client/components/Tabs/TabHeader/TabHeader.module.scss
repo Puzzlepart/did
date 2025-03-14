@@ -1,4 +1,19 @@
 .tabHeader {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+
+    &.indent .text {
+        margin-left: 16px;
+        font-size: 14px;
+    }
+
+    .text {
+        margin: 0;
+       text-align: left;
+    }
+
+    .description {
+        max-width: 150px;
+    }
 }

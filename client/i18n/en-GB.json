@@ -485,6 +485,12 @@
     "roleNotDeletable": "This role cannot be deleted because it is essential or has protected status."
   },
   "reports": {
+    "apollo": {
+      "genericErrorName": "An error occurred while generating the report",
+      "genericErrorMesssage": "An error occurred while processing your request. Please try again later.",
+      "maximumCallStackSizeExceededName": "An error occurred while generating the report",
+      "maximumCallStackSizeExceededMessage": "An error occurred while processing your request. You might be requesting too much data at once. Please try again later, or do a more specific search."
+    },
     "generatingReportProgressText": "Please wait while we generate the report for you...",
     "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no time entries available for ``{{text}}``.",
@@ -509,7 +515,27 @@
     "searchPlaceholder": "Search in {{count}} time entries ({{hours}} hours) for {{preset}}..",
     "searchCount": "Showing {{count}} of {{total}} time entries",
     "viewColumnsLabel": "Show or hide columns",
-    "periodColumnDescription": "Displays the period of the entry in week, month, and year format."
+    "periodColumnDescription": "Displays the period of the entry in week, month, and year format.",
+    "runReport": "Run report",
+    "customQueryHeaderText": "Custom query",
+    "filterCriteriasHeader": "Filter criterias",
+    "filterCriteriasSubHeader": "Specify filter criterias for the report to ensure accurate and relevant results. At least one filter criterion must be selected before generating the report.",
+    "projectIdDescription": "Enter the project ID consisting of a customer key and a project key (e.g., CAL AME).",
+    "resetFilters": "Reset filters",
+    "userIdsLabel": "Employees",
+    "addUsersManager": "Select Employees I Manage",
+    "addUsersManagerToastHeader": "Added {{count}} Employees I Manage",
+    "addUsersManagerToastText": "Added {{users}} to the filter criterias.",
+    "customQuerySuccessHeader": "Custom Report Generated in {{duration}}",
+    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias.",
+    "loadingCustomReport": "Loading reporth with custom query",
+    "customQueryDateRangeDisabled": "You cannot use start date or end date while filtering by week, month, or year.",
+    "customQueryYearDisabled": "You cannot filter by year while filtering on start date or end date.",
+    "generatingReportProgressLabel": "Generating report for {{text}} ({{description}}",
+    "customQueryDescription": "Customize the report with your own filters, such as start date and end date, project, or employees.",
+    "summaryDescription": "Get a tabular overview of time entries per employee and period.",
+    "customQueryWeekDisabled": "You cannot filter by week while filtering on start date, end date or month.",
+    "customQueryMonthDisabled": "You cannot filter by month while filtering on start date, end date or week."
   },
   "common": {
     "datePicker": {
@@ -660,10 +686,14 @@
     "minutesShortFormat_singular": "{{minutes}}min",
     "hoursShortFormat_plural": "{{hours}}h",
     "minutesShortFormat_plural": "{{minutes}}min",
+    "secondsShortFormat_singular": "{{seconds}}s",
+    "secondsShortFormat_plural": "{{seconds}}s",
     "hoursLongFormat_singular": "{{hours}} hour",
     "minutesLongFormat_singular": "{{minutes}} minute",
     "hoursLongFormat_plural": "{{hours}} hours",
     "minutesLongFormat_plural": "{{minutes}} minutes",
+    "secondsLongFormat_singular": "{{seconds}} second",
+    "secondsLongFormat_plural": "{{seconds}} seconds",
     "editLabel": "Edit",
     "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",
@@ -863,7 +893,14 @@
     "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
-    "currencySymbol": "kr"
+    "currencySymbol": "kr",
+    "month": "Month",
+    "projectIdLabel": "Project ID",
+    "and": " and ",
+    "invalidDateAfterValidation": "Date must be after {{date}}.",
+    "invalidDateBeforeValidation": "Date must be before {{date}}.",
+    "invalidTimespanValidationMaxDays": "It should be a maximum of {{days}} days between this date and {{name}}.",
+    "invalidTimespanValidationMinDays": "It should be a minimum of {{days}} days between this date and {{name}}."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -971,7 +1008,8 @@
       "displayName": "Name",
       "removeUser": "Remove",
       "searchTerm": " Search for \"{{searchTerm}}\"",
-      "clearSearch": "Click to clear search"
+      "clearSearch": "Click to clear search",
+      "removeUserDbClick": "Double click to remove the user."
     },
     "listControl": {
       "editingInfo": "You are currently editing an item. Click **Enter** to save or click outside the input field to abort."

@@ -317,7 +317,7 @@
       "headerText": "Abonnement",
       "companyLogoLabel": "Logo",
       "companyLogoDescription": "Legg til nettstedsaddressen til firmalogoen din. Bruk enten en Base 64-bildestreng, eller last opp et bilde fra datamaskinen din. Anbefalte dimensjoner er 120 x 40 piksler. Du kan se en forhåndsvisning nedenfor.",
-      "navBackgroundDescription": "Egendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
+      "navBackgroundDescription": "Eigendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
       "navBackgroundLabel": "Bakgrunnsfarge for navigasjonslinjen",
       "imageFieldUploadLabel": "Last opp bilde",
       "projectKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for prosjektnøkkel.",
@@ -385,9 +385,9 @@
       "displayDescription": "Hvor du vil vise rapportlenken til brukerne. På forsiden eller i en av rapportfanene.",
       "yearLabel": "År",
       "yearPlaceholder": "Velg år",
-      "yearDescription": "Velg år for rapporten. Hvis rapporten er for en bestemt måned, velg måneden nedenfor.",
-      "monthLabel": "Måned",
-      "monthPlaceholder": "Velg måned",
+      "yearDescription": "Velg år for rapporten. Hvis rapporten er for en bestemt månad, velg måneden nedenfor.",
+      "monthLabel": "Månad",
+      "monthPlaceholder": "Velg månad",
       "monthDescription": "Velg måneden for rapporten hvis det er aktuelt. Hvis rapporten gjelder et helt år, la dette stå tomt.",
       "promotedDescription": "Når rapporten er promotert, vil den vises på rapportens forside.",
       "promotedLabel": "Promotert",
@@ -484,6 +484,12 @@
     "roleNotDeletable": "Denne rollen kan ikke slettes fordi den er viktig eller har beskyttet status."
   },
   "reports": {
+    "apollo": {
+      "genericErrorName": "Ein feil oppstod under generering av rapporten",
+      "genericErrorMessage": "Ein feil oppstod under behandlinga av førespurnaden din. Ver vennleg og prøv igjen seinare.",
+      "maximumCallStackSizeExceededName": "Ein feil oppstod under generering av rapporten",
+      "maximumCallStackSizeExceededMessage": "Ein feil oppstod under behandlinga av førespurnaden din. Du kan be om for mykje data på ein gong. Ver vennleg og prøv igjen seinare, eller gjer eit meir spesifikt søk."
+    },
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
     "generatingReportDescription": "For å gi deg dei ferskaste resultata, genererer vi rapporten frå nyast mulege data ...",
     "noEntriesText": "Det er ingen tidsoppføringar tilgjengeleg for **{{text}}**.",
@@ -508,13 +514,33 @@
     "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer) for {{preset}}...",
     "searchCount": "Viser {{count}} av {{total}} tidsregistreringer",
     "viewColumnsLabel": " Vis eller skjul kolonner",
-    "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format."
+    "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format.",
+    "runReport": "Hent rapport",
+    "customQueryHeaderText": "Eigendefinert spørring",
+    "filterCriteriasHeader": "Filtreringskriterier",
+    "filterCriteriasSubHeader": "Spesifiser filtreringskriterier for rapporten for å sikra nøyaktige og relevante resultat. Minst eitt kriterium må veljast før rapporten kan genererast.",
+    "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
+    "resetFilters": "Nullstill",
+    "userIdsLabel": "Tilsette",
+    "addUsersManager": "Velg tilsette jeg er leder for",
+    "addUsersManagerToastHeader": "{{count}} tilsette eg er leiar for lagt til",
+    "addUsersManagerToastText": "Lagt til {{users}} til filterkriteriene.",
+    "customQuerySuccessHeader": "Eigendefinert spørring generert på {{duration}}",
+    "customQuerySuccessText": "Den eigendefinerte rapporten din er klar med {{count}} registrerte tidsoppføringar som samsvarer med filterkriteria dine.",
+    "loadingCustomReport": "Laster inn rapport med eigendefinert spørring",
+    "customQueryDateRangeDisabled": "Du kan ikkje filtrera på Startdato eller Sluttdato når du filtrerer etter Veke, Månad eller År.",
+    "customQueryYearDisabled": "Du kan ikkje filtrera på startdato eller sluttdato når du filtrerer på veke, månad eller år.",
+    "generatingReportProgressLabel": "Genererer rapport for {{text}} ({{description}})",
+    "customQueryDescription": "Tilpass rapporten med eigne filter, som startdato/sluttdato, prosjekt eller tilsette.",
+    "summaryDescription": "Få ei tabelloversikt over tidsregistreringar per tilsett og periode.",
+    "customQueryWeekDisabled": "Du kan ikkje filtrera på veke samtidig som du filtrerer på startdato, sluttdato eller månad.",
+    "customQueryMonthDisabled": "Du kan ikkje filtrera på månad samtidig som du filtrerer på startdato, sluttdato eller veke."
   },
   "common": {
     "datePicker": {
       "goToToday": "Gå til i dag",
-      "prevMonthAriaLabel": "Gå til forrige måned",
-      "nextMonthAriaLabel": "Gå til neste måned",
+      "prevMonthAriaLabel": "Gå til forrige månad",
+      "nextMonthAriaLabel": "Gå til neste månad",
       "prevYearAriaLabel": "Gå til forrige år",
       "nextYearAriaLabel": "Gå til neste år",
       "prevYearRangeAriaLabel": "Gå til forrige årrekke",
@@ -659,10 +685,14 @@
     "minutesShortFormat_singular": "{{minutes}}min",
     "hoursShortFormat_plural": "{{hours}}t",
     "minutesShortFormat_plural": "{{minutes}}min",
+    "secondsShortFormat_singular": "{{seconds}}sek",
+    "secondsShortFormat_plural": "{{seconds}}sek",
     "hoursLongFormat_singular": "{{hours}} time",
     "minutesLongFormat_singular": "{{minutes}} minutt",
     "hoursLongFormat_plural": "{{hours}} timer",
-    "minutesLongFormat_plural": "{{minutes}} minutt",
+    "minutesLongFormat_plural": "{{minutes}} minutter",
+    "secondsLongFormat_singular": "{{seconds}} sekund",
+    "secondsLongFormat_plural": "{{seconds}} sekunder",
     "editLabel": "Rediger",
     "iconSearchPlaceholder": "Søk i ikon...",
     "inactiveFieldLabel": "Inaktivt",
@@ -861,7 +891,14 @@
     "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
-    "currencySymbol": "kr"
+    "currencySymbol": "kr",
+    "month": "Månad",
+    "projectIdLabel": "Prosjektnøkkel",
+    "and": " og ",
+    "invalidDateAfterValidation": "Dato må være etter {{date}}.",
+    "invalidDateBeforeValidation": "Dato må være før {{date}}.",
+    "invalidTimespanValidationMinDays": "Det må være minimum {{days}} dager mellom denne datoen og {{name}}.",
+    "invalidTimespanValidationMaxDays": "Det må være maksimalt {{days}} dager mellom denne datoen og {{name}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -969,7 +1006,8 @@
       "displayName": "Namn",
       "removeUser": "Fjern",
       "searchTerm": "Søk etter \"{{searchTerm}}\"",
-      "clearSearch": "Klikk for å tømme søk"
+      "clearSearch": "Klikk for å tømme søk",
+      "removeUserDbClick": "Dobbeltklikk for å fjerne brukeren."
     },
     "listControl": {
       "editingInfo": "Du redigerer akkurat no eit element. Klikk **Enter** for å lagra eller trykk utenfor feltet for å avbryta redigeringa."

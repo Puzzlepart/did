@@ -21,7 +21,7 @@ export function useProjectModel(props: IProjectFormProps) {
       _.omit(
         {
           ...p,
-          labels: mapProperty<any, string>(p.labels, 'name')
+          labels: mapProperty<any, string[]>(p.labels, 'name') 
         },
         ['customer', 'tag', 'outlookCategory']
       ),

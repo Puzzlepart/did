@@ -1,10 +1,18 @@
 import { TFunction } from 'react-i18next'
+import { User } from 'types'
 import { FormInputControlBase } from '../types'
 import { AdditionalMetadataField, IUserPickerProps } from './UserPicker'
 
 export interface IUserPickerControlProps
   extends FormInputControlBase,
-    IUserPickerProps {}
+    IUserPickerProps {
+  /**
+   * Cusom function to transform the value of the user picker.
+   *
+   * @param user - The user to transform.
+   */
+  transformValue?: (user: User) => any
+}
 
 /**
  * Represents a function that retrieves an additional metadata field

@@ -11,6 +11,8 @@ import styles from './UserPicker.module.scss'
 import { UserPickerContext } from './context'
 import { IUserPickerProps } from './types'
 import { useUserPicker } from './useUserPicker'
+import { DynamicButton } from 'components/DynamicButton'
+import _ from 'underscore'
 
 /**
  * @category Function Component
@@ -22,10 +24,11 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
       <div className={UserPicker.className}>
         <Shimmered
           isDataLoaded={context.state.isDataLoaded}
-          width={250}
+          width={300}
           height={30}
         >
           <Combobox
+            style={props.fullWidth ? { width: '100%' } : {}}
             value={context.state.selectedUser?.displayName ?? ''}
             selectedOptions={[context.state.selectedUser?.id].filter(Boolean)}
             placeholder={props.placeholder}
@@ -58,7 +61,16 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
         {props.multiple && (
           <div>
             <AdditionalMetadata />
-            <AddUserButton />
+            <div className={styles.actions}>
+              <AddUserButton />
+              {props.customAction && (
+                <DynamicButton
+                  {...(_.isFunction(props.customAction)
+                    ? props.customAction(context.state)
+                    : props.customAction)}
+                />
+              )}
+            </div>
             <SelectedUsersList />
           </div>
         )}

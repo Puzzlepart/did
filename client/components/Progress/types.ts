@@ -6,6 +6,11 @@ import { FluentIconName } from 'utils'
  */
 export interface IProgressProps extends ProgressBarProps {
   /**
+   * The label to display above the progress bar.
+   */
+  label?: string
+
+  /**
    * The text to display inside the progress bar.
    */
   text: string

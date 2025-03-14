@@ -6,6 +6,16 @@ export interface IProjectPickerControlProps
   extends FormInputControlBase,
     Pick<
       ISearchProjectProps,
-      'label' | 'placeholder' | 'description' | 'disabledText'
+      | 'label'
+      | 'placeholder'
+      | 'description'
+      | 'disabledText'
+      | 'maxSuggestions'
+      | 'onRenderText'
     >,
-    Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {}
+    Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /**
+   * Search all projects skipping all kinds of filters.
+   */
+  all?: boolean
+}

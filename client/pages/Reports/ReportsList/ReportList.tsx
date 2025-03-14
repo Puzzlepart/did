@@ -1,19 +1,18 @@
 import { CheckboxVisibility } from '@fluentui/react'
-import { List } from 'components'
-import { Progress } from 'components/Progress'
-import { TabComponent } from 'components/Tabs'
+import { List, Progress, TabComponent } from 'components'
 import React from 'react'
 import { SET_FILTER_STATE } from '../reducer/actions'
 import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReportsList } from './useReportsList'
+import { IReportsListProps } from './types'
 
 /**
  * Reports list
  *
  * @category Reports
  */
-export const ReportsList: TabComponent = () => {
+export const ReportsList: TabComponent<IReportsListProps> = (props) => {
   const {
     t,
     context,
@@ -21,36 +20,53 @@ export const ReportsList: TabComponent = () => {
     menuItems,
     createPlaceholder,
     createContentAfter
-  } = useReportsList()
+  } = useReportsList(props)
   return (
     <div className={ReportsList.className}>
-      {context.state.loading && (
+      {(Boolean(props.loading) || context.state.loading) && (
         <Progress
           className={styles.progress}
+          label={
+            Boolean(props.loading)
+              ? props.loading
+              : t('reports.generatingReportProgressLabel', {
+                  ...context.queryPreset,
+                  text: context.queryPreset?.text?.toLowerCase()
+                })
+          }
           text={t('reports.generatingReportProgressText')}
         />
       )}
       <List
-        enableShimmer={context.state.loading}
+        hidden={props.hidden}
+        enableShimmer={Boolean(props.loading) || context.state.loading}
         checkboxVisibility={CheckboxVisibility.always}
-        items={context.state.data.timeEntries}
+        items={props.items ?? context.state.data.timeEntries}
         columns={columns}
         menuItems={menuItems}
-        exportFileName={context.queryPreset?.exportFileName}
+        exportFileName={
+          context.queryPreset?.exportFileName ?? props.exportFileName
+        }
         filterValues={context.state?.activeFilter?.values}
-        onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
+        onFilter={(state) =>
+          props.filters && context.dispatch(SET_FILTER_STATE(state))
+        }
         filterPanel={{
           headerElements: <SaveFilterForm />
         }}
-        searchBox={{
-          fullWidth: true,
-          persist: true,
-          hidden: context.state.loading,
-          placeholder: createPlaceholder,
-          contentAfter: createContentAfter
-        }}
+        searchBox={
+          props.search && {
+            fullWidth: true,
+            persist: true,
+            hidden: context.state.loading,
+            placeholder: createPlaceholder,
+            contentAfter: createContentAfter
+          }
+        }
         enableViewColumnsEdit
         persistViewColumns={ReportsList.displayName}
+        filters={props.filters}
+        error={props.error}
       />
     </div>
   )
@@ -58,3 +74,7 @@ export const ReportsList: TabComponent = () => {
 
 ReportsList.displayName = 'ReportsList'
 ReportsList.className = styles.reportList
+ReportsList.defaultProps = {
+  loading: '',
+  exportFileName: 'TimeEntries-Custom-{0}.xlsx'
+}

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 import {
   SelectTabEventHandler,
   Tab,
@@ -14,7 +15,7 @@ import React, {
 } from 'react'
 import { getFluentIcon } from 'utils'
 import { UPDATE_BREADCRUMB } from '../../app/reducer'
-import { TabHeader } from './TabHeader'
+import { ITabHeaderProps, TabHeader } from './TabHeader'
 import { ITabProps, ITabsProps } from './types'
 import { useTabsSelection } from './useTabsSelection'
 
@@ -90,6 +91,15 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
     [setSelectedValue]
   )
 
+  const renderSubTabs = (key: string, header: ITabHeaderProps) => {
+    if (!header.sub) return []
+    return Object.keys(header.sub).map((subKey) => (
+      <Tab key={`${key}_${subKey}`} value={`${key}_${subKey}`}>
+        <TabHeader text={header.sub[subKey]} indent />
+      </Tab>
+    ))
+  }
+
   /**
    * An array of `Tab` components generated from the `items` prop.
    * Each `Tab` component is created with a `value` prop set to the corresponding key in `items`,
@@ -98,7 +108,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
    * If the corresponding header object has a `disabled` property set to `true`, the `Tab` component is created with a `disabled` prop set to `true`.
    */
   const tabItems = useMemo(() => {
-    return Object.keys(props.items).map((key) => {
+    return Object.keys(props.items).flatMap((key) => {
       const [, header] = props.items[key]
       const tabProps: TabProps = {
         value: key,
@@ -115,7 +125,10 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
         })
         tabProps.disabled = header?.disabled
       }
-      return <Tab key={key} {...tabProps} />
+      return [
+        <Tab key={key} {...tabProps} />,
+        ...renderSubTabs(key, header as ITabHeaderProps)
+      ]
     })
   }, [props.items])
 

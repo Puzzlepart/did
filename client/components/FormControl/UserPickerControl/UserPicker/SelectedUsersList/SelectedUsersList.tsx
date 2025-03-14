@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Button } from '@fluentui/react-components'
+import { Button, mergeClasses, Tag } from '@fluentui/react-components'
 import { IListColumn, List } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,12 +7,34 @@ import { User } from 'types'
 import { getFluentIcon } from 'utils'
 import { useUserPickerContext } from '../context'
 import { UserMetadataCell } from './UserMetadataCell'
+import styles from './SelectedUsersList.module.scss'
 
 export const SelectedUsersList: FC = () => {
   const { t } = useTranslation()
   const context = useUserPickerContext()
+  if (context.props.list?.simple) {
+    return (
+      <div
+        className={mergeClasses(
+          styles.selectedUsersList,
+          context.props.list?.simple && styles.simple
+        )}
+      >
+        {context.state.selectedUsers.map((user) => (
+          <Tag
+            key={user.id}
+            onDoubleClick={() => context.onRemoveUser(user.id)}
+            title={t('components.userPicker.removeUserDbClick')}
+          >
+            {user.displayName}
+          </Tag>
+        ))}
+      </div>
+    )
+  }
   return (
     <List
+      className={styles.selectedUsersList}
       enableShimmer={!context.state.isDataLoaded}
       items={context.state.selectedUsers}
       columns={[
@@ -64,6 +86,7 @@ export const SelectedUsersList: FC = () => {
           )
         }
       ]}
+      hideEmptyMessage={context.props.hideEmptyMessage}
     />
   )
 }

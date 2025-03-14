@@ -1,0 +1,55 @@
+.customQueryTab {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+
+    .filterCriterias {
+        width: 500px;
+        transition: width 0.5s ease-in-out;
+
+        .header {
+            cursor: pointer;
+
+            .inner {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .text {
+                    flex: 1;
+                }
+            }
+        }
+
+        &.isCollapsed {
+            width: 100%;
+            transition: width 0.5s ease-in-out;
+            .subHeader,
+            .formSection,
+            .actions {
+                display: none;
+            }
+        }
+
+        .formSection {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+            border-radius: 4px;
+            background-color: var(--colorNeutralBackground1);
+
+            .formRow {
+                display: flex;
+                gap: 16px;
+
+                .numberInput {
+                    width: 100px;
+                }
+            }
+
+        }
+    }
+}

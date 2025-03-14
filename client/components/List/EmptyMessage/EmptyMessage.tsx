@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-nested-ternary */
 import { Markdown } from 'components/Markdown'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -5,9 +6,11 @@ import { useListContext } from '../context'
 import { IListProps } from '../types'
 import styles from './EmptyMessage.module.scss'
 import { useTranslation } from 'react-i18next'
+import { UserMessage } from 'components/UserMessage'
 
-export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'>> = ({
-  items
+export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'|'error'>> = ({
+  items,
+  error
 }) => {
   const { t } = useTranslation()
   const context = useListContext()
@@ -25,7 +28,11 @@ export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'>> = ({
         context.props.hideEmptyMessage
       }
     >
-      <Markdown text={emptyMessage} />
+      {error ? (
+        <UserMessage headerText={error.name} text={error.message} intent='error' />
+      ) : (
+        <Markdown text={emptyMessage} />
+      )}
     </div>
   )
 }

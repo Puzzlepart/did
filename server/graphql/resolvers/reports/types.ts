@@ -90,10 +90,46 @@ export type ReportsQueryPreset =
 @InputType()
 export class ReportsQuery {
   /**
-   * ID of the project to filter on
+   * ID of the project to filter on.
    */
   @Field({ nullable: true })
   projectId?: string
+
+  /**
+   * IDs of the users to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  userIds?: string[]
+
+  /**
+   * Start date to filter on.
+   */
+  @Field({ nullable: true })
+  startDateTime?: Date
+
+  /**
+   * End date to filter on.
+   */
+  @Field({ nullable: true })
+  endDateTime?: Date
+
+  /**
+   * Week to filter on.
+   */
+  @Field({ nullable: true })
+  week?: number
+
+  /**
+   * Month to filter on.
+   */
+  @Field({ nullable: true })
+  month?: number
+
+  /**
+   * Year to filter on.
+   */
+  @Field({ nullable: true })
+  year?: number
 }
 
 /**

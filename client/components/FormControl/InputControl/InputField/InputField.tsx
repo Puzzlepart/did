@@ -19,7 +19,15 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
   return (
     <Field
       className={InputField.className}
-      {..._.pick(props, 'name', 'label', 'description', 'required', 'hidden')}
+      {..._.pick(
+        props,
+        'title',
+        'name',
+        'label',
+        'description',
+        'required',
+        'hidden'
+      )}
     >
       {props.rows > 1 ? (
         <Textarea
@@ -34,6 +42,8 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'disabled',
             'minLength',
             'maxLength',
+            'min',
+            'max',
             'rows',
             'onBlur'
           )}
@@ -54,6 +64,8 @@ export const InputField: ReusableComponent<IInputFieldProps> = (props) => {
             'disabled',
             'minLength',
             'maxLength',
+            'min',
+            'max',
             'onBlur',
             'contentBefore',
             'contentAfter'

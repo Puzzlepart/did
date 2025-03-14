@@ -7,15 +7,18 @@ import { useColumns } from './columns/useColumns'
 import { useMenuItems } from './useMenuItems'
 import { IListProps } from 'components'
 import { Caption1 } from '@fluentui/react-components'
+import { IReportsListProps } from './types'
 
 /**
  * This hook to gather all hooks calls for the `ReportsList` component.
+ *
+ * @param props - The props for the `ReportsList` component.
  */
-export function useReportsList() {
+export function useReportsList(props: IReportsListProps) {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const columns = useColumns()
-  const menuItems = useMenuItems()
+  const menuItems = useMenuItems(props)
 
   const createPlaceholder: IListProps['searchBox']['placeholder'] = (state) => {
     const hours = state.origItems

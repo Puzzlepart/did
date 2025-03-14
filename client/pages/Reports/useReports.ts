@@ -10,6 +10,7 @@ import {
   useReportsQueryPreset
 } from './hooks'
 import { useReportsReducer } from './reducer'
+import { CustomQueryTab } from './CustomQueryTab'
 
 /**
  * Component logic for `<Reports />`
@@ -47,7 +48,20 @@ export function useReports() {
     () => ({
       home: [WelcomeTab, t('reports.welcomeHeaderText')],
       ...queryTabs,
-      summary: [SummaryView, t('reports.summaryHeaderText')]
+      custom: [
+        CustomQueryTab,
+        {
+          text: t('reports.customQueryHeaderText'),
+          description: t('reports.customQueryDescription')
+        }
+      ],
+      summary: [
+        SummaryView,
+        {
+          text: t('reports.summaryHeaderText'),
+          description: t('reports.summaryDescription')
+        }
+      ]
     }),
     [queryTabs]
   )

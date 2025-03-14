@@ -30,20 +30,20 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
       checked: _.isEqual(context.state.sortOpts, [column.fieldName, 'desc'])
     },
     columnData.isSortable &&
-      ({
-        key: 'SORT_ASC',
-        text: t('common.sortAsc'),
-        onClick: () => {
-          context.dispatch(SET_SORT({ column, direction: 'asc' }))
-        },
-        canCheck: true,
-        checked: _.isEqual(context.state.sortOpts, [column.fieldName, 'asc'])
-      } as IContextualMenuItem),
-    columnData.isFilterable && {
+    ({
+      key: 'SORT_ASC',
+      text: t('common.sortAsc'),
+      onClick: () => {
+        context.dispatch(SET_SORT({ column, direction: 'asc' }))
+      },
+      canCheck: true,
+      checked: _.isEqual(context.state.sortOpts, [column.fieldName, 'asc'])
+    } as IContextualMenuItem),
+    (columnData.isFilterable && context.props.filters) && {
       key: 'DIVIDER_0',
       itemType: ContextualMenuItemType.Divider
     },
-    columnData.isFilterable && {
+    (columnData.isFilterable && context.props.filters) && {
       key: 'FILTER_BY',
       text: t('common.filterByColumn', column),
       canCheck: true,
@@ -57,15 +57,15 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
       itemType: ContextualMenuItemType.Divider
     },
     columnData.isGroupable &&
-      ({
-        key: 'GROUP_BY',
-        text: t('common.groupByColumn', column),
-        canCheck: true,
-        checked: context.state.groupBy?.fieldName === column.fieldName,
-        onClick: () => {
-          context.dispatch(SET_GROUP_BY({ column }))
-        }
-      } as IContextualMenuItem)
+    ({
+      key: 'GROUP_BY',
+      text: t('common.groupByColumn', column),
+      canCheck: true,
+      checked: context.state.groupBy?.fieldName === column.fieldName,
+      onClick: () => {
+        context.dispatch(SET_GROUP_BY({ column }))
+      }
+    } as IContextualMenuItem)
   ].filter(Boolean)
 
   return {

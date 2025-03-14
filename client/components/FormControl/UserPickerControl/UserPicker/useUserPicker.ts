@@ -4,10 +4,41 @@
 import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState as useState } from 'hooks'
 import _ from 'lodash'
+import { useEffect, useMemo } from 'react'
+import { User } from 'types'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
-import { useMemo } from 'react'
 
+/**
+ * Maps the selected users based on the provided properties and user list.
+ *
+ * @param props - The properties of the user picker component.
+ * @param users - The list of available users to map from.
+ *
+ * @returns An array of selected user objects or an empty array if the conditions are not met.
+ */
+function mapSelectedUsers(props: IUserPickerProps, users: User[]) {
+  return _.isArray(props.value) && props.multiple
+    ? props.value.filter(Boolean).map((value) => {
+        if (typeof value === 'string') {
+          return users.find((user) => user.id === value)
+        }
+        return {
+          ...value,
+          ...users.find((user) => user.id === value.id)
+        }
+      })
+    : []
+}
+
+/**
+ * Custom component logic hook to manage user
+ * selection in a form control for the `UserPicker` component.
+ *
+ * @param props - The properties for the user picker component.
+ *
+ * @returns An object containing the state, handlers, and selectable users.
+ */
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useState<IUserPickerState>({
     isDataLoaded: false,
@@ -17,23 +48,23 @@ export function useUserPicker(props: IUserPickerProps) {
   })
 
   useUserPickerQuery((users) => {
-    const selectedUsers =
-      _.isArray(props.value) && props.multiple
-        ? props.value.map((value) => ({
-            ...value,
-            ...users.find((user) => user.id === value.id)
-          }))
-        : []
     setState({
       users,
       isDataLoaded: true,
-      selectedUsers,
+      selectedUsers: mapSelectedUsers(props, users),
       selectedUser:
         typeof props.value === 'string' && !props.multiple
           ? users.find((user) => user.id === props.value)
           : null
     })
   })
+
+  useEffect(() => {
+    if (_.isEmpty(state.users)) return
+    setState({
+      selectedUsers: mapSelectedUsers(props, state.users)
+    })
+  }, [props.value])
 
   /**
    * Handler for when a user is selected in the `Combobox`. Gets the
@@ -48,6 +79,17 @@ export function useUserPicker(props: IUserPickerProps) {
     { optionValue }
   ) => {
     const selectedUser = state.users.find((user) => user.id === optionValue)
+    if (!selectedUser) {
+      return setState({ selectedUser: null, searchTerm: '' })
+    }
+    if (props.autoSelect && props.multiple) {
+      const newUser = {
+        ...selectedUser
+      }
+      const selectedUsers = [...state.selectedUsers, newUser]
+      props.onChange(selectedUsers)
+      return setState({ selectedUsers, selectedUser, searchTerm: '' })
+    }
     setState({ selectedUser, searchTerm: '' })
     if (!props.multiple) {
       props.onChange([selectedUser])

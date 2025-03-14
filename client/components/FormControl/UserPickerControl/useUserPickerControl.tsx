@@ -13,6 +13,9 @@ import { IUserPickerControlProps } from './types'
  */
 function transformValue(value: User[], props: IUserPickerControlProps) {
   if (props.multiple) {
+    if (_.isFunction(props.transformValue)) {
+      return value.map((user) => props.transformValue(user))
+    }
     return value.map((user) =>
       _.pick(user, ['id', ...Object.keys(props.additionalMetadata)])
     )

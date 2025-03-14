@@ -7,7 +7,7 @@ import {
 import { IProjectLinkProps } from 'components/ProjectLink/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { LabelObject, Project } from 'types'
+import { LabelObject, OutlookCategory, Project } from 'types'
 import _ from 'underscore'
 import { fuzzyContains, mapProperty } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
@@ -37,10 +37,10 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
   const settings =
     useSubscriptionSettings<SubscriptionProjectsSettings>('projects')
   const context = useProjectsContext()
-  const outlookCategories = mapProperty(
+  const outlookCategories = mapProperty<OutlookCategory, string[]>(
     context?.state?.outlookCategories,
     'displayName'
-  )
+  ) 
   const columns = useMemo(
     () =>
       [

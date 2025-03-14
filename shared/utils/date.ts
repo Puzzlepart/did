@@ -6,7 +6,7 @@
  *
  * @module DateUtils
  */
-import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
+import $dayjs, { ConfigType, PluginFunc, UnitType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 import 'dayjs/locale/nn'
@@ -31,6 +31,11 @@ export type DateInput = ConfigType
 export enum DurationStringFormat {
   Short = 'ShortFormat',
   Long = 'LongFormat'
+}
+
+type GetDurationStringOptions = {
+  format?: DurationStringFormat
+  seconds?: boolean
 }
 
 export class DateUtils {
@@ -61,37 +66,72 @@ export class DateUtils {
    * Get duration string
    *
    * E.g. 15.75 = 15h 45min with `DurationStringFormat.Short` and 15 hours 45 minutes with `DurationStringFormat.Long`
+   * With seconds option, e.g. 15.7583 = 15h 45min 30s
    *
    * Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
    * to handle floating point number precision.
    *
    * @param hours - Duration in hours
    * @param t - Translate function
-   * @param format - Format (`DurationStringFormat.Short` or `DurationStringFormat.Long`)
+   * @param options - Options for the duration string
+   * @param options.format - Format (`DurationStringFormat.Short` or `DurationStringFormat.Long`)
+   * @param options.seconds - Whether to include seconds in the output
    */
   public getDurationString(
     hours: number,
     t: TFunction,
-    format: DurationStringFormat = DurationStringFormat.Short
+    options: GetDurationStringOptions = {}
   ): string {
+    const format = options.format ?? DurationStringFormat.Short
     let hoursPrecision = Number.parseFloat(
-      Number.parseFloat(hours.toString()).toPrecision(5)
+      Number.parseFloat(hours.toString()).toPrecision(options.seconds ? 7 : 5)
     )
-    const minutes = Number.parseInt(((hoursPrecision % 1) * 60).toFixed())
+
+    // Calculate minutes from the fractional part of hours
+    const minutesTotal = (hoursPrecision % 1) * 60
+    const minutes = Math.floor(minutesTotal)
+
+    // Calculate seconds from the fractional part of minutes if seconds option is enabled
+    const seconds = options.seconds ? Math.round((minutesTotal % 1) * 60) : 0
+
+    // Get the whole hours
     hoursPrecision = Math.floor(hoursPrecision)
+
     const hrsString = t(
       `common.hours${format}_${hoursPrecision === 1 ? 'singular' : 'plural'}`,
       {
         hours: hoursPrecision
       }
     )
+
     const minsString = t(
       `common.minutes${format}_${minutes === 1 ? 'singular' : 'plural'}`,
       { minutes }
     )
-    if (minutes === 0) return hrsString
-    if (hoursPrecision === 0) return minsString
-    return [hrsString, minsString].join(' ')
+
+    const secsString = options.seconds
+      ? t(`common.seconds${format}_${seconds === 1 ? 'singular' : 'plural'}`, {
+          seconds
+        })
+      : ''
+
+    // Build the output string based on which components have values
+    const components = []
+
+    if (hoursPrecision > 0) components.push(hrsString)
+    if (minutes > 0) components.push(minsString)
+    if (options.seconds && seconds > 0) components.push(secsString)
+
+    // Return empty string for zero duration
+    if (components.length === 0) {
+      return hoursPrecision === 0 &&
+        minutes === 0 &&
+        (!options.seconds || seconds === 0)
+        ? t(`common.hours${format}_plural`, { hours: 0 })
+        : ''
+    }
+
+    return components.join(' ')
   }
 
   /**
@@ -341,6 +381,10 @@ export class DateUtils {
    */
   public isBefore(a: DateInput, b?: DateInput) {
     return $dayjs(a).isBefore(b)
+  }
+
+  public diff(a: DateInput, b: DateInput, unit: UnitType) {
+    return $dayjs(a).diff(b, unit)
   }
 
   /**

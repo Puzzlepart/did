@@ -1,5 +1,5 @@
-/* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable unicorn/no-array-callback-reference */
+import createDebug from 'debug'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ProjectService, UserService } from '..'
@@ -17,6 +17,7 @@ import {
   TimeEntryService
 } from '../mongo'
 import { Report, IGenerateReportParameters } from './types'
+const debug = createDebug('server/services/report/ReportService')
 
 /**
  * Report service
@@ -42,42 +43,9 @@ export class ReportService {
     private readonly _timeEntrySvc: TimeEntryService,
     private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
     private readonly _confirmedPeriodSvc: ConfirmedPeriodsService
-  ) {}
-
-  /**
-   * Generate preset query from the provided preset.
-   *
-   * Supported presets are:
-   * * LAST_MONTH
-   * * CURRENT_MONTH
-   * * LAST_YEAR
-   * * CURRENT_YEAR
-   *
-   * @param preset - Query preset
-   */
-  private _generatePresetQuery(preset: ReportsQueryPreset) {
-    const date = new DateObject().toObject()
-    return (
-      {
-        LAST_MONTH: {
-          month:
-            date.month === 1
-              ? 12
-              : new DateObject().add('-1m').toObject().month - 1,
-          year: date.month === 1 ? date.year - 1 : date.year
-        },
-        CURRENT_MONTH: {
-          month: date.month,
-          year: date.year
-        },
-        LAST_YEAR: {
-          year: date.year - 1
-        },
-        CURRENT_YEAR: {
-          year: date.year
-        }
-      }[preset] || {}
-    )
+  ) {
+    // Empty constructor on purpose. It will be like
+    // this until we need to inject something.
   }
 
   /**
@@ -155,13 +123,10 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const query_ = _.omit(
-        {
-          ...this._generatePresetQuery(preset),
-          ...query
-        },
-        'preset'
-      )
+      const query_ = this._generateQuery(query, preset)
+      debug('[getReport]', 'Generating report with query:', query_, {
+        userId: this.context.userId
+      })
       const [timeEntries, projectsData, users] = await Promise.all([
         this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
@@ -175,6 +140,7 @@ export class ReportService {
       })
       return report
     } catch (error) {
+      debug('[getReport]', 'Error generating report:', error)
       throw error
     }
   }
@@ -221,12 +187,13 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const q = {
+      const query = {
         userId,
         ...this._generatePresetQuery(preset)
       }
+      debug('[getUserReport]', 'Generating report with query:', query)
       const [timeEntries, { projects, customers }] = await Promise.all([
-        this._timeEntrySvc.find(q),
+        this._timeEntrySvc.find(query),
         this._projectSvc.getProjectsData()
       ])
       const report = this._generateReport({
@@ -239,5 +206,93 @@ export class ReportService {
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * Generates a query object from the provided query, and preset.
+   *
+   * Supported query fields are:
+   * * `projectId`
+   * * `userIds`
+   * * `startDateTime`
+   * * `endDateTime`
+   * * `week`
+   * * `month`
+   * * `year`
+   *
+   * Supported presets are handled by `_generatePresetQuery`.
+   *
+   * @param query Query object
+   * @param preset Query preset
+   */
+  private _generateQuery(query: ReportsQuery = {}, preset: ReportsQueryPreset) {
+    const presetQuery = this._generatePresetQuery(preset)
+    return _.omit(
+      {
+        ...presetQuery,
+        ..._.pick(
+          {
+            projectId: {
+              $eq: query.projectId
+            },
+            userId: {
+              $in: query.userIds
+            },
+            startDateTime: { $gte: new Date(query.startDateTime) },
+            endDateTime: { $lte: new Date(query.endDateTime) },
+            week: { $eq: query.week },
+            month: { $eq: query.month },
+            year: { $eq: query.year }
+          },
+          [...Object.keys(query), !_.isEmpty(query?.userIds) && 'userId']
+        )
+      },
+      'preset'
+    )
+  }
+
+  /**
+   * Generate preset query from the provided preset.
+   *
+   * Supported presets are:
+   * * `LAST_MONTH`
+   * * `CURRENT_MONTH`
+   * * `LAST_YEAR`
+   * * `CURRENT_YEAR`
+   *
+   * @param preset - Query preset
+   */
+  private _generatePresetQuery(preset: ReportsQueryPreset) {
+    const date = new DateObject().toObject()
+
+    debug('[_generatePresetQuery]', 'Generating query from preset:', preset)
+    const query =
+      {
+        LAST_MONTH: {
+          month:
+            date.month === 1
+              ? 12
+              : new DateObject().add('-1m').toObject().month - 1,
+          year: date.month === 1 ? date.year - 1 : date.year
+        },
+        CURRENT_MONTH: {
+          month: date.month,
+          year: date.year
+        },
+        LAST_YEAR: {
+          year: date.year - 1
+        },
+        CURRENT_YEAR: {
+          year: date.year
+        }
+      }[preset] || {}
+    debug(
+      '[_generatePresetQuery]',
+      'Generated query ',
+      query,
+      'from preset:',
+      preset
+    )
+    return query
   }
 }

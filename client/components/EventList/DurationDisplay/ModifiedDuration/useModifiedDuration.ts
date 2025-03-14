@@ -16,13 +16,11 @@ export function useModifiedDuration(props: IModifiedDurationProps) {
   const originalDuration = $date.getDurationString(
     props.event['originalDuration'],
     t,
-    DurationStringFormat.Long
+    { format: DurationStringFormat.Long }
   )
-  const modifiedDuration = $date.getDurationString(
-    props.event.duration,
-    t,
-    DurationStringFormat.Long
-  )
+  const modifiedDuration = $date.getDurationString(props.event.duration, t, {
+    format: DurationStringFormat.Long
+  })
 
   return { modifiedDuration, originalDuration, isAdjusted }
 }

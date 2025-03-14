@@ -1,7 +1,10 @@
 .userPicker {
   display: block;
 
-  .addButton {
-    margin: 5px 0 0 0;
+  .actions {
+    margin: 12px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
   }
 }

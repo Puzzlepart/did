@@ -12,6 +12,7 @@ export interface ISearchProjectProps
       | 'placeholder'
       | 'description'
       | 'selectedKey'
+      | 'maxSuggestions'
     > {
   /**
    * Callback when a project is selected.
@@ -32,4 +33,11 @@ export interface ISearchProjectProps
    * Tooltip to display when the component is disabled.
    */
   disabledText?: string
+
+  /**
+   * Override the default text rendering for the project.
+   *
+   * @param project Project to render the text for
+   */
+  onRenderText?: (project: Project) => string
 }

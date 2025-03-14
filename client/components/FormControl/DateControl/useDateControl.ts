@@ -14,13 +14,14 @@ export function useDateControl(props: IDateControlProps) {
 
   const onChange = useCallback(
     (value) => {
+      if (!props.model) return
       context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
       props.model.set(props.name, value)
     },
     [props.model]
   )
 
-  const value = props.model.value<string>(props.name, null)
+  const value = props.model?.value<string>(props.name, null)
   const dateValue = value ? new Date(value) : null
 
   return { onChange, value: dateValue }

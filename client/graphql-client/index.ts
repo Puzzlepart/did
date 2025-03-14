@@ -40,7 +40,27 @@ export interface IBaseResult {
  */
 export const client = new ApolloClient({
   link: ApolloLink.from([apolloLink, httpLink]),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Role: {
+        // Use `name` as the key field for `Role` objects since they don't have an `ID`
+        keyFields: ['name']
+      },
+      User: {
+        fields: {
+          // Custom merge function for `User.role` field to ensure proper merging
+          role: {
+            merge(existing, incoming) {
+              // If existing has more fields, keep that one
+              return incoming && Object.keys(incoming).length > 1
+                ? incoming
+                : { ...existing, ...incoming }
+            }
+          }
+        }
+      }
+    }
+  }),
   uri: `${document.location.origin}/graphql`,
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
 })

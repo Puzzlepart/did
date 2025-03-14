@@ -1,0 +1,10 @@
+#import "../../../graphql-client/fragments/timeentry-fragment.gql"
+#import "./report-user-fragment.gql"
+query CustomReport($query: ReportsQuery, $sortAsc: Boolean) {
+  timeEntries: report(query: $query, sortAsc: $sortAsc) {
+    ...TimeEntryFragment
+  }
+  users: users(query: { hiddenFromReports: false }) {
+    ...ReportUserFragment
+  }
+}

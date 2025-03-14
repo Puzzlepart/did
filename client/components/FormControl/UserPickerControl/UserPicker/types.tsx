@@ -1,6 +1,7 @@
 import { User } from 'types'
 import { IUserMetadataCellProps } from './SelectedUsersList'
 import { ComboboxProps } from '@fluentui/react-components'
+import { IDynamicButtonProps, IListProps } from 'components'
 
 export type SingleUserPickerValue = string
 export type UserInfo = {
@@ -22,7 +23,7 @@ export type AdditionalMetadataField<P = Record<string, any>> = {
   props?: P
 }
 
-export interface IUserPickerProps {
+export interface IUserPickerProps extends Pick<IListProps, 'hideEmptyMessage'> {
   /**
    * The placeholder text for the user picker.
    */
@@ -71,12 +72,37 @@ export interface IUserPickerProps {
       value: string | number,
       props: IUserMetadataCellProps
     ) => any
+
+    /**
+     * Render the list in a simple mode.
+     */
+    simple?: boolean
   }
 
   /**
    * Whether the user picker should allow freeform input.
    */
   freeform?: ComboboxProps['freeform']
+
+  /**
+   * Custom action for the user picker.
+   */
+  customAction?:
+    | IDynamicButtonProps
+    | ((state: IUserPickerState) => IDynamicButtonProps)
+
+  /**
+   * Whether the user picker should take up the full width.
+   */
+  fullWidth?: boolean
+
+  /**
+   * Auto select users without having to click on
+   * the add button. This is default behavior for
+   * single user pickers, so it is only applicable
+   * when `multiple` is `true`.
+   */
+  autoSelect?: boolean
 }
 
 export interface IUserPickerState {

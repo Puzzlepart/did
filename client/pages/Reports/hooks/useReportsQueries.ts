@@ -16,6 +16,7 @@ import {
   report_summary
 } from '../queries'
 import { IReportsQuery } from '../types'
+import { useSubscriptionSettings } from 'AppContext'
 
 /**
  * Returns query properties for preset
@@ -152,6 +153,10 @@ export function useCurrentYearQuery(
  */
 export function useForecastQuery(query = report_forecast): IReportsQuery {
   const { t } = useTranslation()
+  const isForecastEnabled = useSubscriptionSettings<boolean>(
+    'forecast.enabled',
+    false
+  )
   return {
     id: 'forecast',
     text: t('reports.forecast'),
@@ -160,18 +165,21 @@ export function useForecastQuery(query = report_forecast): IReportsQuery {
     exportFileName: 'Forecast-{0}.xlsx',
     variables: {
       userQuery: { hiddenFromReports: false }
-    }
+    },
+    disabled: !isForecastEnabled
   } as IReportsQuery
 }
 
 /**
  * Returns query properties for Summary view.
  *
+ * @param weeksCount - Number of weeks to include in the summary
+ *
  * @category Reports
  */
-export function useSummaryQuery(): IReportsQuery {
+export function useSummaryQuery(weeksCount = 8): IReportsQuery {
   const { t } = useTranslation()
-  const { periods, queries } = useTimesheetPeriods(8, true)
+  const { periods, queries } = useTimesheetPeriods(weeksCount, true)
   return {
     id: 'summary',
     text: t('reports.summaryHeaderText'),
@@ -213,12 +221,12 @@ export function useReportsQueries() {
       _.reduce(
         _.filter(queries, (q) => !q.hidden),
         (tabs, query) => {
-          const { id, text, description } = query
-          tabs[id] = [
+          tabs[query.id] = [
             ReportTab,
             {
-              text,
-              description
+              text: query.text,
+              description: query.description,
+              disabled: query.disabled
             }
           ]
           return tabs

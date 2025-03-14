@@ -4,6 +4,7 @@ import { HTMLAttributes } from 'react'
 import { ISubmitProps } from './ISubmitProps'
 import { useFormControls } from '../useFormControls'
 import { IDynamicButtonProps } from 'components'
+
 export interface IFormControlProps<T = any>
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
   /**
@@ -17,9 +18,9 @@ export interface IFormControlProps<T = any>
   register?: ReturnType<typeof useFormControls>
 
   /**
-   * Submit  props
+   * Submit props for the form control.
    */
-  submitProps?: ISubmitProps
+  submitProps?: ISubmitProps & { justifyContent?: string }
 
   /**
    * Additional actions to be added to the form control.
