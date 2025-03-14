@@ -3,7 +3,6 @@ import {
   Card,
   CardHeader,
   mergeClasses,
-  Spinner,
   Subtitle1
 } from '@fluentui/react-components'
 import {
@@ -11,6 +10,7 @@ import {
   DynamicButton,
   FormControl,
   InputControl,
+  ProjectPickerControl,
   TabComponent,
   UserPickerControl
 } from 'components'
@@ -115,10 +115,11 @@ export const CustomQueryTab: TabComponent = (props) => {
           </div>
 
           <div className={styles.formRow}>
-            <InputControl
+            <ProjectPickerControl
               {...formControl.register('projectId')}
               label={t('common.projectIdLabel')}
-              description={t('reports.projectIdDescription')}
+              all
+              maxSuggestions={8}
             />
           </div>
 
@@ -136,7 +137,6 @@ export const CustomQueryTab: TabComponent = (props) => {
             />
           </div>
           <div className={styles.actions}>
-            {loading && <Spinner size='tiny' />}
             <DynamicButton
               secondary
               text={t('reports.resetFilters')}

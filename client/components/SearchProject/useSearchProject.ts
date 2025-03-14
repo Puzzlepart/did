@@ -20,15 +20,16 @@ export function useSearchProject(props: ISearchProjectProps) {
     fetchPolicy: 'cache-and-network'
   })
 
+
   const projects = data?.projects.filter(
-    (project) => !project.inactive && props.filterFunc(project)
+    (project) => project.inactive !== true && props.filterFunc(project)
   )
 
   const items: ISuggestionItem<Project>[] = useMemo(
     () =>
       arrayMap<any>(projects, (project) => ({
         key: project.tag,
-        text: project.name,
+        text: props.onRenderText ? props.onRenderText(project) : project.name,
         secondaryText: project.tag,
         searchValue: [project.tag, project.name, project?.customer?.name].join(
           ' '

@@ -21,9 +21,11 @@ export const ProjectPickerControl: FormInputControlComponent<
         'label',
         'description',
         'placeholder',
-        'disabledText'
+        'disabledText',
+        'maxSuggestions',
+        'onRenderText'
       )}
-      filterFunc={filterFunc}
+      filterFunc={props.all ? undefined : filterFunc}
       onSelected={onSelected}
       selectedKey={props.model.value(props.name)}
     />

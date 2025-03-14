@@ -515,7 +515,7 @@
     "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
     "resetFilters": "Nullstill",
     "userIdsLabel": "Tilsette",
-    "addUsersManager": "Velg ansatte jeg er leder for",
+    "addUsersManager": "Velg tilsette jeg er leder for",
     "addUsersManagerToastHeader": "{{count}} tilsette eg er leiar for lagt til",
     "addUsersManagerToastText": "Lagt til {{users}} til filterkriteriene.",
     "customQuerySuccessHeader": "Eigendefinert spørring generert på {{duration}}",

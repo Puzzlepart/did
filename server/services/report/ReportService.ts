@@ -211,6 +211,7 @@ export class ReportService {
    * Generates a query object from the provided query, and preset.
    *
    * Supported query fields are:
+   * * `projectId`
    * * `userIds`
    * * `startDateTime`
    * * `endDateTime`
@@ -229,6 +230,9 @@ export class ReportService {
       ...presetQuery,
       ..._.pick(
         {
+          projectId: {
+            $eq: query.projectId
+          },
           userId: {
             $in: query.userIds
           },

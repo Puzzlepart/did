@@ -9,7 +9,7 @@ import { IProjectPickerControlProps } from './types'
  */
 export function useProjectPickerControl(props: IProjectPickerControlProps) {
   const onSelected: ISearchProjectProps['onSelected'] = (project) => {
-    props.model.set(props.name, project.tag)
+    props.model.set(props.name, project?.tag ?? null)
   }
 
   const filterFunc: ISearchProjectProps['filterFunc'] = (project) => {
