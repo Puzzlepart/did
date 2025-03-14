@@ -8,6 +8,7 @@ import { IListProps } from './types'
 import { useListGroups } from './useListGroups'
 import { useListProps } from './useListProps'
 import { useListPersistedSearch } from './useListPersistedSearch'
+import { getUrlState } from 'utils'
 
 /**
  * Hook that returns a list of items and selection state for a given set of props.
@@ -22,9 +23,7 @@ export function useList(props: IListProps) {
     items: props.items,
     itemsPreFilter: props.items,
     columns: props.columns,
-    searchTerm: document.location.hash.includes('q=')
-      ? decodeURIComponent(document.location.hash.split('q=')[1].split('&')[0])
-      : ''
+    searchTerm: getUrlState('q', 'hash') ?? ''
   })
 
   useEffect(

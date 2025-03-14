@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { IListContext } from './context'
+import { persistUrlState } from 'utils'
 
 /**
  * Custom hook that persists the search term in the URL hash. It will update the URL hash
@@ -15,14 +16,6 @@ export function useListPersistedSearch(
 ) {
   useEffect(() => {
     if (!context.props.searchBox?.persist) return
-    if (context.state.searchTerm === '') {
-      const hash = window.location.hash.replace(
-        new RegExp(`${parameterName}=[^&]*&?`),
-        ''
-      )
-      window.location.hash = hash.length === 1 ? '' : hash
-      return
-    }
-    window.location.hash = `${parameterName}=${context.state.searchTerm ?? ''}`
+    persistUrlState(context.state.searchTerm, parameterName, 'hash')
   }, [context.state.searchTerm])
 }

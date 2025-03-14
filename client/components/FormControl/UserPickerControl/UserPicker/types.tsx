@@ -72,6 +72,11 @@ export interface IUserPickerProps extends Pick<IListProps, 'hideEmptyMessage'> {
       value: string | number,
       props: IUserMetadataCellProps
     ) => any
+
+    /**
+     * Render the list in a simple mode.
+     */
+    simple?: boolean
   }
 
   /**

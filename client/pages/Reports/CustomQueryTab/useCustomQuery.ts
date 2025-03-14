@@ -31,7 +31,9 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
       },
       onCompleted: (data) => {
         context.displayToast(
-          t('reports.customQuerySuccessText', { count: _.get(data, 'timeEntries', []).length }),
+          t('reports.customQuerySuccessText', {
+            count: _.get(data, 'timeEntries', []).length
+          }),
           'success',
           10,
           {

@@ -1,4 +1,3 @@
-
 import { TimeEntry, User } from 'types'
 import { IReportsData } from '../types'
 
@@ -26,16 +25,18 @@ function getResource(entry: TimeEntry, users: User[]): User {
  * The resource property is determined by the getResource function.
  *
  * @param data - A partial `IReportsData` object containing time entries and users.
- * 
+ *
  * @returns A partial `IReportsData` object with updated time entries.
  */
-export const mapTimeEntries = (data: Partial<IReportsData> = {}): Partial<IReportsData> => {
-    const { timeEntries, users } = data 
-    if (timeEntries) {
-        data.timeEntries = timeEntries.map((entry) => ({
-            ...entry,
-            resource: getResource(entry, users)
-        }))
-    }
-    return data
+export const mapTimeEntries = (
+  data: Partial<IReportsData> = {}
+): Partial<IReportsData> => {
+  const { timeEntries, users } = data
+  if (timeEntries) {
+    data.timeEntries = timeEntries.map((entry) => ({
+      ...entry,
+      resource: getResource(entry, users)
+    }))
+  }
+  return data
 }

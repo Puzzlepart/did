@@ -48,7 +48,12 @@ export function useReports() {
     () => ({
       home: [WelcomeTab, t('reports.welcomeHeaderText')],
       ...queryTabs,
-      custom: [CustomQueryTab, t('reports.customQueryHeaderText')],
+      custom: [
+        CustomQueryTab,
+        {
+          text: t('reports.customQueryHeaderText')
+        }
+      ],
       summary: [SummaryView, t('reports.summaryHeaderText')]
     }),
     [queryTabs]

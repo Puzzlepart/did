@@ -4,9 +4,11 @@ export interface IReportsListProps
   extends ITabProps,
     Partial<Pick<IListProps, 'items'>> {
   /**
-   * Flag indicating whether or not the component is loading.
+   * Loading state. If true, a progress bar will be displayed
+   * with this as the label.
    */
-  loading?: boolean
+  loading?: string
+
   /**
    * Flag indicating whether or not to display the filters.
    */

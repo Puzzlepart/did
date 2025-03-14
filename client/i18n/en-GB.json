@@ -520,7 +520,8 @@
     "addUsersManagerToastHeader": "Added {{count}} Employees I Manage",
     "addUsersManagerToastText": "Added {{users}} to the filter criterias.",
     "customQuerySuccessHeader": "Custom Report Generated",
-    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias."
+    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias.",
+    "loadingCustomReport": "Loading reporth with custom query"
   },
   "common": {
     "datePicker": {
@@ -985,7 +986,8 @@
       "displayName": "Name",
       "removeUser": "Remove",
       "searchTerm": " Search for \"{{searchTerm}}\"",
-      "clearSearch": "Click to clear search"
+      "clearSearch": "Click to clear search",
+      "removeUserDbClick": "Double click to remove the user."
     },
     "listControl": {
       "editingInfo": "You are currently editing an item. Click **Enter** to save or click outside the input field to abort."

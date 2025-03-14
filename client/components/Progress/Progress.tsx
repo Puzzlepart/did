@@ -21,8 +21,8 @@ export const Progress: ReusableComponent<IProgressProps> = (props) => {
           {getFluentIcon(props.iconName, { size: 30, bundle: false })}
         </div>
         <Field
-          validationMessage={props.text}
-          validationState='none'
+          label={props.label}
+          hint={props.text}
           className={styles.progress}
         >
           <ProgressBar />

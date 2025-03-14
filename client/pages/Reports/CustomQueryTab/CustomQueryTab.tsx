@@ -26,7 +26,7 @@ import { useCustomQueryTab } from './useCustomQueryTab'
  *
  * @category Reports
  */
-export const CustomQueryTab: TabComponent = () => {
+export const CustomQueryTab: TabComponent = (props) => {
   const {
     t,
     formControl,
@@ -37,7 +37,7 @@ export const CustomQueryTab: TabComponent = () => {
     isQueryCalled,
     isFilterCriterasValid,
     addManagerUsersAction
-  } = useCustomQueryTab()
+  } = useCustomQueryTab(props.id)
 
   return (
     <div className={styles.customQueryTab}>
@@ -124,6 +124,7 @@ export const CustomQueryTab: TabComponent = () => {
               multiple
               transformValue={(user) => user.id}
               customAction={addManagerUsersAction}
+              list={{ simple: true }}
             />
           </div>
           <div className={styles.actions}>
@@ -143,7 +144,11 @@ export const CustomQueryTab: TabComponent = () => {
           </div>
         </FormControl>
       </Card>
-      <ReportsList hidden={!isQueryCalled} loading={loading} items={items} />
+      <ReportsList
+        hidden={!isQueryCalled}
+        loading={loading && t('reports.loadingCustomReport')}
+        items={items}
+      />
     </div>
   )
 }

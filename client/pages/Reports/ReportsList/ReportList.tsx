@@ -23,15 +23,16 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
   } = useReportsList(props)
   return (
     <div className={ReportsList.className}>
-      {(props.loading || context.state.loading) && (
+      {(Boolean(props.loading) || context.state.loading) && (
         <Progress
           className={styles.progress}
+          label={props.loading}
           text={t('reports.generatingReportProgressText')}
         />
       )}
       <List
         hidden={props.hidden}
-        enableShimmer={props.loading || context.state.loading}
+        enableShimmer={Boolean(props.loading) || context.state.loading}
         checkboxVisibility={CheckboxVisibility.always}
         items={props.items ?? context.state.data.timeEntries}
         columns={columns}
@@ -46,13 +47,15 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         filterPanel={{
           headerElements: <SaveFilterForm />
         }}
-        searchBox={{
-          fullWidth: true,
-          persist: true,
-          hidden: context.state.loading || !props.search,
-          placeholder: createPlaceholder,
-          contentAfter: createContentAfter
-        }}
+        searchBox={
+          props.search && {
+            fullWidth: true,
+            persist: true,
+            hidden: context.state.loading,
+            placeholder: createPlaceholder,
+            contentAfter: createContentAfter
+          }
+        }
         enableViewColumnsEdit
         persistViewColumns={ReportsList.displayName}
         filters={props.filters}
@@ -64,5 +67,6 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
 ReportsList.displayName = 'ReportsList'
 ReportsList.className = styles.reportList
 ReportsList.defaultProps = {
+  loading: '',
   exportFileName: 'TimeEntries-Custom-{0}.xlsx'
 }

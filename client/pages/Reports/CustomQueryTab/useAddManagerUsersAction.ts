@@ -9,41 +9,43 @@ import { ReportsQuery } from 'types'
 
 /**
  * Custom hook for the `addManagerUsersAction` in the `CustomQueryTab` component.
- * 
+ *
  * @param set Set function for the custom query model
  */
-export const useAddManagerUsersAction = (set: (key: keyof ReportsQuery, value: any) => void) => {
-    const { t } = useTranslation()
+export const useAddManagerUsersAction = (
+  set: (key: keyof ReportsQuery, value: any) => void
+) => {
+  const { t } = useTranslation()
   const context = useAppContext()
-    const addManagerUsersAction: UseCustomQueryTabReturnType['addManagerUsersAction'] =
-        (state) => {
-            const users = state.users.filter(
-                (user) => user.manager?.id.startsWith(context.user?.id)
-            )
-            return {
-                iconName: 'GlobePerson',
-                hidden: _.isEmpty(users),
-                text: t('reports.addUsersManager'),
-                onClick: () => {
-                    context.displayToast(
-                        t('reports.addUsersManagerToastText', {
-                            users: mapProperty(users, 'displayName', [', ', t('common.and')])
-                        }),
-                        'info',
-                        6,
-                        {
-                            headerText: t('reports.addUsersManagerToastHeader', {
-                                count: users.length
-                            })
-                        }
-                    )
-                    set(
-                        'userIds',
-                        users.map((user) => user.id)
-                    )
-                }
+  const addManagerUsersAction: UseCustomQueryTabReturnType['addManagerUsersAction'] =
+    (state) => {
+      const users = state.users.filter(
+        (user) => user.manager?.id.startsWith(context.user?.id)
+      )
+      return {
+        iconName: 'GlobePerson',
+        hidden: _.isEmpty(users),
+        text: t('reports.addUsersManager'),
+        onClick: () => {
+          context.displayToast(
+            t('reports.addUsersManagerToastText', {
+              users: mapProperty(users, 'displayName', [', ', t('common.and')])
+            }),
+            'info',
+            6,
+            {
+              headerText: t('reports.addUsersManagerToastHeader', {
+                count: users.length
+              })
             }
+          )
+          set(
+            'userIds',
+            users.map((user) => user.id)
+          )
         }
+      }
+    }
 
-    return addManagerUsersAction
+  return addManagerUsersAction
 }

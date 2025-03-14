@@ -317,7 +317,7 @@
       "headerText": "Abonnement",
       "companyLogoLabel": "Logo",
       "companyLogoDescription": "Legg til nettstedsaddressen til firmalogoen din. Bruk enten en Base 64-bildestreng, eller last opp et bilde fra datamaskinen din. Anbefalte dimensjoner er 120 x 40 piksler. Du kan se en forhåndsvisning nedenfor.",
-      "navBackgroundDescription": "Egendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
+      "navBackgroundDescription": "Eigendefinert bakgrunnsfarge for navigasjonslinjen. Hvis ikke spesifisert, vil standard farge brukes.",
       "navBackgroundLabel": "Bakgrunnsfarge for navigasjonslinjen",
       "imageFieldUploadLabel": "Last opp bilde",
       "projectKeyMaxLengthDescription": "Maksimalt tillatt antall tegn for prosjektnøkkel.",
@@ -510,7 +510,7 @@
     "viewColumnsLabel": " Vis eller skjul kolonner",
     "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format.",
     "runReport": "Hent rapport",
-    "customQueryHeaderText": "Egendefinert spørring",
+    "customQueryHeaderText": "Eigendefinert spørring",
     "filterCriteria": "Spesifiser filtreringskriterium for rapporten for å sikra nøyaktige og relevante resultat. Minst eitt kriterium må veljast før rapporten kan genererast.",
     "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
     "resetFilters": "Nullstill",
@@ -518,8 +518,9 @@
     "addUsersManager": "Velg ansatte jeg er leder for",
     "addUsersManagerToastHeader": "{{count}} tilsette eg er leiar for lagt til",
     "addUsersManagerToastText": "Lagt til {{users}} til filterkriteriene.",
-    "customQuerySuccessHeader": "Custom Report Generated",
-    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias."
+    "customQuerySuccessHeader": "Eigendefinert spørring generert",
+    "customQuerySuccessText": "Den eigendefinerte rapporten din er klar med {{count}} registrerte tidsoppføringar som samsvarer med filterkriteria dine.",
+    "loadingCustomReport": "Laster inn rapport med eigendefinert spørring"
   },
   "common": {
     "datePicker": {
@@ -983,7 +984,8 @@
       "displayName": "Namn",
       "removeUser": "Fjern",
       "searchTerm": "Søk etter \"{{searchTerm}}\"",
-      "clearSearch": "Klikk for å tømme søk"
+      "clearSearch": "Klikk for å tømme søk",
+      "removeUserDbClick": "Dobbeltklikk for å fjerne brukeren."
     },
     "listControl": {
       "editingInfo": "Du redigerer akkurat no eit element. Klikk **Enter** for å lagra eller trykk utenfor feltet for å avbryta redigeringa."

@@ -1,9 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import {
-    IFormControlProps,
-    useFormControlModel,
-    useFormControls
-} from 'components'
+import { IFormControlProps, useFormControls } from 'components'
 import { ComponentLogicHook } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,39 +9,42 @@ import { useAddManagerUsersAction } from './useAddManagerUsersAction'
 import { CustomQueryTab } from './CustomQueryTab'
 import { UseCustomQueryTabReturnType } from './types'
 import { useCustomQuery } from './useCustomQuery'
+import { useCustomQueryFilterCriterias } from './useCustomQueryFilterCriterias'
 
 /**
- * Custom hook for CustomQueryTab component logic
+ * Custom hook for `<CustomQueryTab />` component logic
  *
  * @returns CustomQueryTab component logic
  *
  * @category Reports Hooks
  */
 export const useCustomQueryTab: ComponentLogicHook<
-  undefined,
+  string,
   UseCustomQueryTabReturnType
-> = () => {
+> = (id) => {
   const { t } = useTranslation()
   const collapsed = useBoolean(false)
-  const model = useFormControlModel<keyof ReportsQuery, ReportsQuery>()
-  const register = useFormControls<keyof ReportsQuery>(model, CustomQueryTab)
+  const filterCriterias = useCustomQueryFilterCriterias('fq', id)
+  const register = useFormControls<keyof ReportsQuery>(
+    filterCriterias,
+    CustomQueryTab
+  )
   const { executeReport, loading, items, isQueryCalled } = useCustomQuery(
-    model.value(),
+    filterCriterias.value(),
     collapsed.setTrue
   )
-  const addManagerUsersAction = useAddManagerUsersAction(model.set)
+  const addManagerUsersAction = useAddManagerUsersAction(filterCriterias.set)
 
-  model.value()
   const formControl: IFormControlProps<ReportsQuery> = {
     id: CustomQueryTab.displayName,
-    model,
+    model: filterCriterias,
     register,
     submitProps: { hidden: true }
   }
 
   const isFilterCriterasValid = useMemo(
-    () => Object.values(model.$).some((value) => value !== undefined),
-    [model.$]
+    () => Object.values(filterCriterias.$).some((value) => value !== undefined),
+    [filterCriterias.$]
   )
 
   return {

@@ -517,8 +517,9 @@
     "addUsersManager": "Velg ansatte jeg er leder for",
     "addUsersManagerToastHeader": "{{count}} ansatte jeg er leder for lagt til",
     "addUsersManagerToastText": "Lagt til {{users}} til filterkriteriene.",
-    "customQuerySuccessHeader": "Custom Report Generated",
-    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias."
+    "customQuerySuccessHeader": "Egendefinert spørring generert",
+    "customQuerySuccessText": "Din egendefinerte rapport er klar med {{count}} registrerte tidsoppføringer som samsvarer med filterkriteriene dine.",
+    "loadingCustomReport": "Laster inn rapport med egendefinert spørring"
   },
   "common": {
     "datePicker": {
@@ -982,7 +983,8 @@
       "displayName": "Navn",
       "removeUser": "Fjern",
       "searchTerm": "Søk etter \"{{searchTerm}}\"",
-      "clearSearch": "Klikk for å tømme søk"
+      "clearSearch": "Klikk for å tømme søk",
+      "removeUserDbClick": "Dobbeltklikk for å fjerne brukeren."
     },
     "listControl": {
       "editingInfo": "Du redigerer for øyeblikket et element. Klikk **Enter** for å lagre eller trykk utenfor feltet for å avbryte redigeringen."

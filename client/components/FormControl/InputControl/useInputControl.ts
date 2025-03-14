@@ -16,7 +16,7 @@ function transformValue(
 ) {
   switch (type) {
     case 'number': {
-      return Number.isNaN(value) ? 0 : Number(value)
+      return Number.isNaN(value) ? '' : Number(value)
     }
     default: {
       let _value = value
