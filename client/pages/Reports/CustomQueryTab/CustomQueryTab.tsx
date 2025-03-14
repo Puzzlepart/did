@@ -6,13 +6,19 @@ import {
   Spinner,
   Subtitle1
 } from '@fluentui/react-components'
-import { DateControl, DynamicButton, FormControl, InputControl, TabComponent, UserPickerControl } from 'components'
+import {
+  DateControl,
+  DynamicButton,
+  FormControl,
+  InputControl,
+  TabComponent,
+  UserPickerControl
+} from 'components'
 import React from 'react'
+import { getFluentIcon } from 'utils'
 import { ReportsList } from '../ReportsList'
 import styles from './CustomQueryTab.module.scss'
 import { useCustomQueryTab } from './useCustomQueryTab'
-import { getFluentIcon } from 'utils'
-import { useAppContext } from 'AppContext'
 
 /**
  * Custom query tab component that allows users to create and
@@ -21,40 +27,55 @@ import { useAppContext } from 'AppContext'
  * @category Reports
  */
 export const CustomQueryTab: TabComponent = () => {
-  const context = useAppContext()
   const {
     t,
     formControl,
     executeReport,
     loading,
+    items,
     collapsed,
     isQueryCalled,
-    isFilterCriterasValid
+    isFilterCriterasValid,
+    addManagerUsersAction
   } = useCustomQueryTab()
 
   return (
     <div className={styles.customQueryTab}>
-      <Card className={mergeClasses(styles.filterCriterias, collapsed.value && styles.isCollapsed)}>
+      <Card
+        className={mergeClasses(
+          styles.filterCriterias,
+          collapsed.value && styles.isCollapsed
+        )}
+      >
         <CardHeader
           className={styles.header}
           onClick={collapsed.toggle}
           header={
             <div className={styles.inner}>
-              <Subtitle1 className={styles.text}>{t('reports.customQueryHeaderText')}</Subtitle1>
-              {getFluentIcon(collapsed.value ? 'ChevronDown' : 'ChevronUp', { size: 30 })}
+              <Subtitle1 className={styles.text}>
+                {t('reports.customQueryHeaderText')}
+              </Subtitle1>
+              {getFluentIcon(collapsed.value ? 'ChevronDown' : 'ChevronUp', {
+                size: 30
+              })}
             </div>
-          } />
+          }
+        />
 
         <FormControl className={styles.formSection} {...formControl}>
-          <Caption1 className={styles.subHeader}>{t('reports.filterCriteria')}</Caption1>
+          <Caption1 className={styles.subHeader}>
+            {t('reports.filterCriteria')}
+          </Caption1>
 
           <div className={styles.formRow}>
             <DateControl
               {...formControl.register('startDateTime')}
-              label={t('common.startDate')} />
+              label={t('common.startDate')}
+            />
             <DateControl
               {...formControl.register('endDateTime')}
-              label={t('common.endDate')} />
+              label={t('common.endDate')}
+            />
           </div>
 
           <div className={styles.formRow}>
@@ -98,38 +119,31 @@ export const CustomQueryTab: TabComponent = () => {
             <UserPickerControl
               {...formControl.register('userIds')}
               fullWidth
+              hideEmptyMessage
               label={t('reports.userIdsLabel')}
               multiple
               transformValue={(user) => user.id}
-              customAction={state => ({
-                text: t('reports.addUsersManager'),
-                onClick: () => {
-                  const users = state.users.filter(user => user.manager?.id.startsWith(context.user.id))
-                  formControl.model.set('userIds', users.map(user => user.id))
-                }
-              })}
+              customAction={addManagerUsersAction}
             />
           </div>
-
           <div className={styles.actions}>
             {loading && <Spinner size='tiny' />}
             <DynamicButton
               secondary
               text={t('reports.resetFilters')}
-              disabled={loading}
-              onClick={formControl.model.reset} />
+              disabled={loading || !isFilterCriterasValid}
+              onClick={formControl.model.reset}
+            />
             <DynamicButton
               primary
               text={t('reports.runReport')}
               disabled={loading || !isFilterCriterasValid}
-              onClick={executeReport} />
+              onClick={executeReport}
+            />
           </div>
         </FormControl>
       </Card>
-      <ReportsList
-        hidden={!isQueryCalled}
-        filters={false}
-        search={false} />
+      <ReportsList hidden={!isQueryCalled} loading={loading} items={items} />
     </div>
   )
 }

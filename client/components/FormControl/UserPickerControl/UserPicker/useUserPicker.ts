@@ -20,9 +20,9 @@ export function useUserPicker(props: IUserPickerProps) {
     const selectedUsers =
       _.isArray(props.value) && props.multiple
         ? props.value.map((value) => ({
-          ...value,
-          ...users.find((user) => user.id === value.id)
-        }))
+            ...value,
+            ...users.find((user) => user.id === value.id)
+          }))
         : []
     setState({
       users,
@@ -36,19 +36,20 @@ export function useUserPicker(props: IUserPickerProps) {
   })
 
   useEffect(() => {
-    if (!props.value || _.isEmpty(state.users)) return
+    if (_.isEmpty(state.users)) return
     setState({
-      selectedUsers: (_.isArray(props.value) && props.multiple)
-        ? props.value.map((value) => {
-          if (typeof value === 'string') {
-            return state.users.find((user) => user.id === value)
-          }
-          return {
-            ...value,
-            ...state.users.find((user) => user.id === value.id)
-          }
-        })
-        : []
+      selectedUsers:
+        _.isArray(props.value) && props.multiple
+          ? props.value.map((value) => {
+              if (typeof value === 'string') {
+                return state.users.find((user) => user.id === value)
+              }
+              return {
+                ...value,
+                ...state.users.find((user) => user.id === value.id)
+              }
+            })
+          : []
     })
   }, [props.value])
 

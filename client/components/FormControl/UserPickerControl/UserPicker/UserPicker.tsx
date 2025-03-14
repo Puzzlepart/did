@@ -37,8 +37,8 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
             input={
               context.state.searchTerm
                 ? {
-                  value: context.state.searchTerm
-                }
+                    value: context.state.searchTerm
+                  }
                 : {}
             }
             freeform={props.freeform}
@@ -64,7 +64,11 @@ export const UserPicker: StyledComponent<IUserPickerProps> = (props) => {
             <div className={styles.actions}>
               <AddUserButton />
               {props.customAction && (
-                <DynamicButton {...(_.isFunction(props.customAction) ? props.customAction(context.state) : props.customAction)} />
+                <DynamicButton
+                  {...(_.isFunction(props.customAction)
+                    ? props.customAction(context.state)
+                    : props.customAction)}
+                />
               )}
             </div>
             <SelectedUsersList />

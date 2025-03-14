@@ -17,7 +17,7 @@ export const ReportTab: FC = () => {
   return (
     <div>
       {_.isEmpty(context.queryPreset.reportLinks) ? (
-        <ReportsList />
+        <ReportsList search filters />
       ) : (
         <ReportLinks />
       )}

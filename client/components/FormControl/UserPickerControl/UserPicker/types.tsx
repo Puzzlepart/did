@@ -1,7 +1,7 @@
 import { User } from 'types'
 import { IUserMetadataCellProps } from './SelectedUsersList'
 import { ComboboxProps } from '@fluentui/react-components'
-import { IDynamicButtonProps } from 'components'
+import { IDynamicButtonProps, IListProps } from 'components'
 
 export type SingleUserPickerValue = string
 export type UserInfo = {
@@ -23,7 +23,7 @@ export type AdditionalMetadataField<P = Record<string, any>> = {
   props?: P
 }
 
-export interface IUserPickerProps {
+export interface IUserPickerProps extends Pick<IListProps, 'hideEmptyMessage'> {
   /**
    * The placeholder text for the user picker.
    */
@@ -82,7 +82,9 @@ export interface IUserPickerProps {
   /**
    * Custom action for the user picker.
    */
-  customAction?: IDynamicButtonProps | ((state: IUserPickerState) => IDynamicButtonProps)
+  customAction?:
+    | IDynamicButtonProps
+    | ((state: IUserPickerState) => IDynamicButtonProps)
 
   /**
    * Whether the user picker should take up the full width.

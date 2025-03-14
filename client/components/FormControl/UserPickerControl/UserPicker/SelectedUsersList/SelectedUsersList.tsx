@@ -64,6 +64,7 @@ export const SelectedUsersList: FC = () => {
           )
         }
       ]}
+      hideEmptyMessage={context.props.hideEmptyMessage}
     />
   )
 }

@@ -3,17 +3,17 @@ import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
 import { REMOVE_SAVED_FILTER, SET_FILTER } from '../reducer/actions'
-import { IReportsListProps } from './IReportsListProps'
+import { IReportsListProps } from './types'
 
 /**
  * Returns an array of `ListMenuItem` objects to be used in the ReportsList component's menu.
  * The array contains a single `ListMenuItem` object representing the active filter or the default saved filters text.
- * 
+ *
  * @param props - The props for the `<ReportsList />` component.
  *
  * @returns An array of `ListMenuItem` objects.
  */
-export function useMenuItems(props:IReportsListProps): ListMenuItem[] {
+export function useMenuItems(props: IReportsListProps): ListMenuItem[] {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const { savedFilters, activeFilter, loading } = context.state

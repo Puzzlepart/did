@@ -21,7 +21,7 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
   const [query, { data, loading }] = useLazyQuery(
     queryPreset?.query || default_query,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'no-cache'
     }
   )
 

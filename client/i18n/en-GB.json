@@ -516,7 +516,11 @@
     "projectIdDescription": "Enter the project ID consisting of a customer key and a project key (e.g., CAL AME).",
     "resetFilters": "Reset filters",
     "userIdsLabel": "Employees",
-    "addUsersManager": "Select Employees I Manage"
+    "addUsersManager": "Select Employees I Manage",
+    "addUsersManagerToastHeader": "Added {{count}} Employees I Manage",
+    "addUsersManagerToastText": "Added {{users}} to the filter criterias.",
+    "customQuerySuccessHeader": "Custom Report Generated",
+    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias."
   },
   "common": {
     "datePicker": {
@@ -872,7 +876,8 @@
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
     "currencySymbol": "kr",
     "month": "Month",
-    "projectIdLabel": "Project ID"
+    "projectIdLabel": "Project ID",
+    "and": " and "
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

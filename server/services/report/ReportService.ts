@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
@@ -42,7 +41,10 @@ export class ReportService {
     private readonly _timeEntrySvc: TimeEntryService,
     private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
     private readonly _confirmedPeriodSvc: ConfirmedPeriodsService
-  ) { }
+  ) {
+    // Empty constructor on purpose. It will be like
+    // this until we need to inject something.
+  }
 
   /**
    * Generates report by sorting time entries by date, and then
@@ -207,7 +209,7 @@ export class ReportService {
 
   /**
    * Generates a query object from the provided query.
-   * 
+   *
    * Supported query fields are:
    * * `userIds`
    * * `startDateTime`
@@ -215,20 +217,23 @@ export class ReportService {
    * * `week`
    * * `month`
    * * `year`
-   * 
+   *
    * @param query Query object
    */
   private _generateQuery(query: ReportsQuery = {}) {
-    return _.pick({
-      userId: {
-        $in: query.userIds
+    return _.pick(
+      {
+        userId: {
+          $in: query.userIds
+        },
+        startDateTime: { $gte: new Date(query.startDateTime) },
+        endDateTime: { $lte: new Date(query.endDateTime) },
+        week: { $eq: query.week },
+        month: { $eq: query.month },
+        year: { $eq: query.year }
       },
-      startDateTime: { $gte: new Date(query.startDateTime) },
-      endDateTime: { $lte: new Date(query.endDateTime) },
-      week: { $eq: query.week },
-      month: { $eq: query.month },
-      year: { $eq: query.year }
-    }, [...Object.keys(query), query?.userIds && 'userId'])
+      [...Object.keys(query), query?.userIds && 'userId']
+    )
   }
 
   /**

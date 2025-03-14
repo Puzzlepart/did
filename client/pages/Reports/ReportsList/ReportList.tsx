@@ -5,7 +5,7 @@ import { SET_FILTER_STATE } from '../reducer/actions'
 import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReportsList } from './useReportsList'
-import { IReportsListProps } from './IReportsListProps'
+import { IReportsListProps } from './types'
 
 /**
  * Reports list
@@ -23,7 +23,7 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
   } = useReportsList(props)
   return (
     <div className={ReportsList.className}>
-      {context.state.loading && (
+      {(props.loading || context.state.loading) && (
         <Progress
           className={styles.progress}
           text={t('reports.generatingReportProgressText')}
@@ -31,14 +31,18 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
       )}
       <List
         hidden={props.hidden}
-        enableShimmer={context.state.loading}
+        enableShimmer={props.loading || context.state.loading}
         checkboxVisibility={CheckboxVisibility.always}
-        items={context.state.data.timeEntries}
+        items={props.items ?? context.state.data.timeEntries}
         columns={columns}
         menuItems={menuItems}
-        exportFileName={context.queryPreset?.exportFileName}
+        exportFileName={
+          context.queryPreset?.exportFileName ?? props.exportFileName
+        }
         filterValues={context.state?.activeFilter?.values}
-        onFilter={(state) => context.dispatch(SET_FILTER_STATE(state))}
+        onFilter={(state) =>
+          props.filters && context.dispatch(SET_FILTER_STATE(state))
+        }
         filterPanel={{
           headerElements: <SaveFilterForm />
         }}
@@ -60,6 +64,5 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
 ReportsList.displayName = 'ReportsList'
 ReportsList.className = styles.reportList
 ReportsList.defaultProps = {
-  filters: true,
-  search: true
+  exportFileName: 'TimeEntries-Custom-{0}.xlsx'
 }

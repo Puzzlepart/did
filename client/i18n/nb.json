@@ -514,7 +514,11 @@
     "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
     "resetFilters": "Nullstill",
     "userIdsLabel": "Ansatte",
-    "addUsersManager": "Velg ansatte jeg er leder for"
+    "addUsersManager": "Velg ansatte jeg er leder for",
+    "addUsersManagerToastHeader": "{{count}} ansatte jeg er leder for lagt til",
+    "addUsersManagerToastText": "Lagt til {{users}} til filterkriteriene.",
+    "customQuerySuccessHeader": "Custom Report Generated",
+    "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias."
   },
   "common": {
     "datePicker": {
@@ -869,7 +873,8 @@
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
     "currencySymbol": "kr",
     "month": "Måned",
-    "projectIdLabel": "Prosjektnøkkel"
+    "projectIdLabel": "Prosjektnøkkel",
+    "and": " og "
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

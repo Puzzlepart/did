@@ -5,10 +5,10 @@ import { AdditionalMetadataField, IUserPickerProps } from './UserPicker'
 
 export interface IUserPickerControlProps
   extends FormInputControlBase,
-  IUserPickerProps {
+    IUserPickerProps {
   /**
    * Cusom function to transform the value of the user picker.
-   * 
+   *
    * @param user - The user to transform.
    */
   transformValue?: (user: User) => any

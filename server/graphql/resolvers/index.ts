@@ -39,4 +39,3 @@ export { SubscriptionResolver } from './subscription'
 export { TimesheetResolver } from './timesheet'
 export * from './types'
 export { UserResolver } from './user'
-
