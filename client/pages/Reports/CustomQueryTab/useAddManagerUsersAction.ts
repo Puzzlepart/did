@@ -5,7 +5,7 @@ import { mapProperty } from 'utils'
 import { UseCustomQueryTabReturnType } from './types'
 import { useTranslation } from 'react-i18next'
 import { useAppContext } from 'AppContext'
-import { ReportsQuery } from 'types'
+import { ReportsQuery, User } from 'types'
 
 /**
  * Custom hook for the `addManagerUsersAction` in the `CustomQueryTab` component.
@@ -29,7 +29,7 @@ export const useAddManagerUsersAction = (
         onClick: () => {
           context.displayToast(
             t('reports.addUsersManagerToastText', {
-              users: mapProperty(users, 'displayName', [', ', t('common.and')])
+              users: mapProperty<User, string>(users, 'displayName', [', ', t('common.and')])
             }),
             'info',
             4,

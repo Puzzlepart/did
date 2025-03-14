@@ -24,7 +24,7 @@ export const useCustomerForm: ComponentLogicHook<
     props.edit,
     (p) => ({
       ...p,
-      labels: mapProperty<any, string>(p.labels, 'name')
+      labels: mapProperty<any, string[]>(p.labels, 'name')
     })
   )
   const submit = useCustomerFormSubmit(props, model)

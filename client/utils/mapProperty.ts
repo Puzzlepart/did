@@ -12,18 +12,18 @@ export function mapProperty<T, R = any>(
   array: T[],
   property: keyof T,
   separators: string[] = []
-): R[] | string {
-  if (!array) return []
+): R  {
+  if (!array) return [] as R
   const mappedArray = array
     .map((item) => item[property])
-    .filter(Boolean) as unknown as R[]
+    .filter(Boolean)
   if (separators.length > 0) {
     const [firstSeparator, lastSeparator] = separators
     return (
       [...mappedArray].slice(0, -1).join(firstSeparator) +
       lastSeparator +
       mappedArray[mappedArray.length - 1]
-    )
+    ) as R
   }
-  return mappedArray
+  return mappedArray as R
 }
