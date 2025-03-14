@@ -29,7 +29,10 @@ export const useAddManagerUsersAction = (
         onClick: () => {
           context.displayToast(
             t('reports.addUsersManagerToastText', {
-              users: mapProperty<User, string>(users, 'displayName', [', ', t('common.and')])
+              users: mapProperty<User, string>(users, 'displayName', [
+                ', ',
+                t('common.and')
+              ])
             }),
             'info',
             4,

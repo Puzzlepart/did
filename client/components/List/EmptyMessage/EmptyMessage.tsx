@@ -8,10 +8,9 @@ import styles from './EmptyMessage.module.scss'
 import { useTranslation } from 'react-i18next'
 import { UserMessage } from 'components/UserMessage'
 
-export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'|'error'>> = ({
-  items,
-  error
-}) => {
+export const EmptyMessage: StyledComponent<
+  Pick<IListProps, 'items' | 'error'>
+> = ({ items, error }) => {
   const { t } = useTranslation()
   const context = useListContext()
   const emptyMessage = Boolean(context.props.emptyMessage)
@@ -29,7 +28,11 @@ export const EmptyMessage: StyledComponent<Pick<IListProps, 'items'|'error'>> = 
       }
     >
       {error ? (
-        <UserMessage headerText={error.name} text={error.message} intent='error' />
+        <UserMessage
+          headerText={error.name}
+          text={error.message}
+          intent='error'
+        />
       ) : (
         <Markdown text={emptyMessage} />
       )}

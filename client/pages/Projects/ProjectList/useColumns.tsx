@@ -40,7 +40,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
   const outlookCategories = mapProperty<OutlookCategory, string[]>(
     context?.state?.outlookCategories,
     'displayName'
-  ) 
+  )
   const columns = useMemo(
     () =>
       [

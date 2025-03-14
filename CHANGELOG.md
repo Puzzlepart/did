@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.14.14 - TBA](#-01414---tba)
+	* [➤ 0.14.15 - TBA](#-01415---tba)
 		* [Changed](#changed)
 	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
 		* [Added](#added)
@@ -85,13 +85,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01414---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01415---tba)
 
-## ➤ 0.14.14 - TBA
+## ➤ 0.14.15 - TBA
 
 ### Changed
 - Enhanced roles and permissions management UI
-
+- Increased time entries loading capabilities + support for custom filters [#1220](https://github.com/Puzzlepart/did/issues/1220)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01412---13032025)

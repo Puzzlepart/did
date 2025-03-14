@@ -52,11 +52,18 @@ export function useListProps({
   }
   const sortedItems = context.state.sortOpts
     ? arraySort([...items], context.state.sortOpts[0], {
-      reverse: context.state.sortOpts[1] === 'asc'
-    })
+        reverse: context.state.sortOpts[1] === 'asc'
+      })
     : items
   return {
-    ..._.pick(context.props, 'getKey', 'setKey', 'styles', 'enableShimmer', 'error'),
+    ..._.pick(
+      context.props,
+      'getKey',
+      'setKey',
+      'styles',
+      'enableShimmer',
+      'error'
+    ),
     isPlaceholderData: context.props.enableShimmer,
     selection: selectionMode === SelectionMode.none ? undefined : selection,
     columns,
