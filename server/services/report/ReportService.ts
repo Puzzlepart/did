@@ -121,13 +121,9 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const query_ = _.omit(
-        {
-          ...this._generatePresetQuery(preset),
-          ...this._generateQuery(query)
-        },
-        'preset'
-      )
+      const query_ = this._generateQuery(query, preset)
+      // eslint-disable-next-line no-console
+      console.log('ReportService -> getReport -> query_', query_)
       const [timeEntries, projectsData, users] = await Promise.all([
         this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
@@ -208,7 +204,7 @@ export class ReportService {
   }
 
   /**
-   * Generates a query object from the provided query.
+   * Generates a query object from the provided query, and preset.
    *
    * Supported query fields are:
    * * `userIds`
@@ -217,23 +213,30 @@ export class ReportService {
    * * `week`
    * * `month`
    * * `year`
+   * 
+   * Supported presets are handled by `_generatePresetQuery`.
    *
    * @param query Query object
+   * @param preset Query preset
    */
-  private _generateQuery(query: ReportsQuery = {}) {
-    return _.pick(
-      {
-        userId: {
-          $in: query.userIds
+  private _generateQuery(query: ReportsQuery = {}, preset: ReportsQueryPreset) {
+    const presetQuery = this._generatePresetQuery(preset)
+    return _.omit({
+      ...presetQuery,
+      ..._.pick(
+        {
+          userId: {
+            $in: query.userIds
+          },
+          startDateTime: { $gte: new Date(query.startDateTime) },
+          endDateTime: { $lte: new Date(query.endDateTime) },
+          week: { $eq: query.week },
+          month: { $eq: query.month },
+          year: { $eq: query.year }
         },
-        startDateTime: { $gte: new Date(query.startDateTime) },
-        endDateTime: { $lte: new Date(query.endDateTime) },
-        week: { $eq: query.week },
-        month: { $eq: query.month },
-        year: { $eq: query.year }
-      },
-      [...Object.keys(query), query?.userIds && 'userId']
-    )
+        [...Object.keys(query), !_.isEmpty(query?.userIds) && 'userId']
+      )
+    }, 'preset')
   }
 
   /**

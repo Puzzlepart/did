@@ -79,6 +79,15 @@ export function useUserPicker(props: IUserPickerProps) {
     { optionValue }
   ) => {
     const selectedUser = state.users.find((user) => user.id === optionValue)
+    if (props.autoSelect && props.multiple) {
+      const newUser = {
+        ...selectedUser
+      }
+      const selectedUsers = [...state.selectedUsers, newUser]
+      props.onChange(selectedUsers)
+      setState({ selectedUsers, selectedUser, searchTerm: '' })
+      return
+    }
     setState({ selectedUser, searchTerm: '' })
     if (!props.multiple) {
       props.onChange([selectedUser])

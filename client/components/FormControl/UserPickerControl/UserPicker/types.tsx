@@ -95,6 +95,14 @@ export interface IUserPickerProps extends Pick<IListProps, 'hideEmptyMessage'> {
    * Whether the user picker should take up the full width.
    */
   fullWidth?: boolean
+
+  /**
+   * Auto select users without having to click on 
+   * the add button. This is default behavior for
+   * single user pickers, so it is only applicable
+   * when `multiple` is `true`.
+   */
+  autoSelect?: boolean
 }
 
 export interface IUserPickerState {

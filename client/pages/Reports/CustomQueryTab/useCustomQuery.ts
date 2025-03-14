@@ -1,9 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { useLazyQuery } from '@apollo/client'
 import { useAppContext } from 'AppContext'
+import $date, { DurationStringFormat } from 'DateUtils'
 import _ from 'lodash'
+import { useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useBoolean } from 'usehooks-ts'
 import { ReportsQuery } from '../../../types'
 import { report_custom } from '../queries'
 import { mapTimeEntries } from '../reducer'
@@ -17,37 +18,45 @@ import { mapTimeEntries } from '../reducer'
 export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
   const { t } = useTranslation()
   const context = useAppContext()
-  const isQueryCalled = useBoolean(false)
+  const queryBeginRef = useRef<Date>(null)
   const [executeQuery, { data, loading }] = useLazyQuery(report_custom, {
-    fetchPolicy: 'no-cache'
+    fetchPolicy: 'cache-and-network'
   })
 
-  const executeReport = () => {
-    isQueryCalled.setTrue()
+  const onQueryCompleted = useCallback((data) => {
+    const hours = ((Date.now() - queryBeginRef.current.getTime()) / 1000 / 60 / 60)
+    const duration = $date.getDurationString(hours, t, {
+      seconds: true,
+      format: DurationStringFormat.Long
+    })
+    const count = _.get(data, 'timeEntries', []).length
+    context.displayToast(
+      t('reports.customQuerySuccessText', { count }),
+      'success',
+      8,
+      {
+        headerText: t('reports.customQuerySuccessHeader', {
+          duration
+        })
+      }
+    )
+  }, [queryBeginRef?.current])
+
+  const executeReport = useCallback(() => {
+    queryBeginRef.current = new Date()
     onCollapse()
     executeQuery({
       variables: {
         query
       },
-      onCompleted: (data) => {
-        context.displayToast(
-          t('reports.customQuerySuccessText', {
-            count: _.get(data, 'timeEntries', []).length
-          }),
-          'success',
-          10,
-          {
-            headerText: t('reports.customQuerySuccessHeader')
-          }
-        )
-      }
+      onCompleted: onQueryCompleted
     })
-  }
+  }, [query])
 
   return {
     executeReport,
     loading,
     items: _.get(mapTimeEntries(data), 'timeEntries', []),
-    isQueryCalled: isQueryCalled.value
+    isQueryCalled: Boolean(queryBeginRef.current)
   }
 }

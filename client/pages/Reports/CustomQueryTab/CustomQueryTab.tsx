@@ -36,7 +36,8 @@ export const CustomQueryTab: TabComponent = (props) => {
     collapsed,
     isQueryCalled,
     isFilterCriterasValid,
-    addManagerUsersAction
+    addManagerUsersAction,
+    isDisabled
   } = useCustomQueryTab(props.id)
 
   return (
@@ -71,10 +72,12 @@ export const CustomQueryTab: TabComponent = (props) => {
             <DateControl
               {...formControl.register('startDateTime')}
               label={t('common.startDate')}
+              {...isDisabled('startDateTime')}
             />
             <DateControl
               {...formControl.register('endDateTime')}
               label={t('common.endDate')}
+              {...isDisabled('endDateTime')}
             />
           </div>
 
@@ -84,8 +87,9 @@ export const CustomQueryTab: TabComponent = (props) => {
               type='number'
               label={t('common.weekNumberLabel')}
               className={styles.numberInput}
-              minLength={1}
-              maxLength={53}
+              min={1}
+              max={53}
+              {...isDisabled('week')}
             />
 
             <InputControl
@@ -93,8 +97,9 @@ export const CustomQueryTab: TabComponent = (props) => {
               type='number'
               label={t('common.month')}
               className={styles.numberInput}
-              minLength={1}
-              maxLength={12}
+              min={1}
+              max={12}
+              {...isDisabled('month')}
             />
 
             <InputControl
@@ -102,8 +107,9 @@ export const CustomQueryTab: TabComponent = (props) => {
               type='number'
               label={t('common.yearLabel')}
               className={styles.numberInput}
-              minLength={2000}
-              maxLength={2100}
+              min={2000}
+              max={2100}
+              {...isDisabled('year')}
             />
           </div>
 
@@ -118,6 +124,7 @@ export const CustomQueryTab: TabComponent = (props) => {
           <div className={styles.formRow}>
             <UserPickerControl
               {...formControl.register('userIds')}
+              autoSelect
               fullWidth
               hideEmptyMessage
               label={t('reports.userIdsLabel')}

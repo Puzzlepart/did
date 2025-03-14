@@ -49,4 +49,11 @@ export type UseCustomQueryTabReturnType = {
    * Custom action to add manager users
    */
   addManagerUsersAction?: IUserPickerProps['customAction']
+
+  /**
+   * Checks if the given key is disabled.
+   * 
+   * @param key - The key to check if it is disabled
+   */
+  isDisabled?(key: keyof ReportsQuery): { disabled: boolean, title: string }
 }

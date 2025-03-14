@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from 'underscore'
 import { parseUrlHash } from './getUrlState'
+import { isNullish } from './isNullish'
 
 /**
  * Helper function for `persistUrlState` that sets the URL hash based on an object.
@@ -20,28 +22,29 @@ function setUrlHash(object: Record<string, any>) {
  * @param includeNullishValues Flag to include nullish values from the object
  */
 function getObjectValue(object: Record<string, any>, includeNullishValues: boolean) {
-    if (!object) return null
-    if(_.isArray(object)) return null
-    const objectValue = Object.keys(object).reduce((acc, key) => {
-        if (includeNullishValues) {
-            return {
-                ...acc,
-                [key]: object[key]
-            }
-        }
-        return object[key] !== null && object[key] !== undefined ? {
-            ...acc,
-            [key]: object[key]
-        } : acc
-    }, {} as Record<string, any>)
-    return objectValue ? window.btoa(JSON.stringify(objectValue)).replace(/=/g, '') : null
+    // Return null for invalid inputs
+    if (!object || _.isArray(object)) return null
+
+    // Create a filtered copy of the object
+    const objectValue = includeNullishValues
+        ? { ...object } // Include all values
+        : Object.fromEntries(
+            Object.entries(object).filter(
+                ([_, value]) => !isNullish(value) // Exclude nullish values
+            )
+        )
+
+    // If object is empty after filtering, return null
+    return Object.keys(objectValue).length > 0
+        ? window.btoa(JSON.stringify(objectValue)).replace(/=/g, '')
+        : null
 }
 
 /**
  * Persists an object as a URL parameter or hash fragment.
  *
  * @param object - The object to be persisted in the URL.
- * @param key - The key under which the object will be stored.
+ * @param key - The key under which the object will be stored.comm
  * @param location - The location in the URL where the object will be stored ('hash' or 'search').
  * @param includeNullishValues - Whether to include nullish values in the URL (default: `true`).
  *

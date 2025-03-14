@@ -12,7 +12,10 @@ export interface IInputFieldProps
       | 'contentAfter'
       | 'minLength'
       | 'maxLength'
+      | 'min'
+      | 'max'
       | 'style'
+      | 'title'
     >,
     IFieldProps {
   /**

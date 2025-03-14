@@ -32,7 +32,7 @@ export const useAddManagerUsersAction = (
               users: mapProperty(users, 'displayName', [', ', t('common.and')])
             }),
             'info',
-            6,
+            4,
             {
               headerText: t('reports.addUsersManagerToastHeader', {
                 count: users.length

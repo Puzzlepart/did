@@ -47,6 +47,34 @@ export const useCustomQueryTab: ComponentLogicHook<
     [filterCriterias.$]
   )
 
+  const isDisabled = (key: keyof ReportsQuery) => {
+    switch (key) {
+        case 'startDateTime':
+        case 'endDateTime': {
+            const disabled = Boolean(filterCriterias.value('week')) || Boolean(filterCriterias.value('month')) || Boolean(filterCriterias.value('year'))
+            return {
+                disabled,
+                title: disabled ? t('reports.customQueryDateRangeDisabled') : ''
+            }
+        }
+        case 'week':
+        case 'month':
+        case 'year': {
+            const disabled = Boolean(filterCriterias.value('startDateTime')) || Boolean(filterCriterias.value('endDateTime'))
+            return {
+                disabled,
+                title: disabled ? t('reports.customQueryWeekMonthYearDisabled') : ''
+            }
+        }
+        default: {
+            return {
+                disabled: false,
+                title: undefined
+            }    
+        }
+    }
+  }
+
   return {
     t,
     formControl,
@@ -56,6 +84,7 @@ export const useCustomQueryTab: ComponentLogicHook<
     collapsed,
     isQueryCalled,
     isFilterCriterasValid,
-    addManagerUsersAction
+    addManagerUsersAction,
+    isDisabled  
   }
 }

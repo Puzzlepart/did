@@ -18,6 +18,7 @@ export interface IInputControlProps
     Pick<
       IInputFieldProps,
       | 'rows'
+      | 'title'
       | 'placeholder'
       | 'maxLength'
       | 'type'
@@ -25,4 +26,6 @@ export interface IInputControlProps
       | 'contentAfter'
       | 'minLength'
       | 'maxLength'
+      | 'min'
+      | 'max'
     > {}

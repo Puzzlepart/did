@@ -519,9 +519,11 @@
     "addUsersManager": "Select Employees I Manage",
     "addUsersManagerToastHeader": "Added {{count}} Employees I Manage",
     "addUsersManagerToastText": "Added {{users}} to the filter criterias.",
-    "customQuerySuccessHeader": "Custom Report Generated",
+    "customQuerySuccessHeader": "Custom Report Generated in {{duration}}",
     "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias.",
-    "loadingCustomReport": "Loading reporth with custom query"
+    "loadingCustomReport": "Loading reporth with custom query",
+    "customQueryDateRangeDisabled": "You cannot use Start Date or End Date while filtering by Week, Month, or Year.",
+    "customQueryWeekMonthYearDisabled": "You cannot filter by Week, Month, or Year while using Start Date and End Date."
   },
   "common": {
     "datePicker": {
@@ -672,10 +674,14 @@
     "minutesShortFormat_singular": "{{minutes}}min",
     "hoursShortFormat_plural": "{{hours}}h",
     "minutesShortFormat_plural": "{{minutes}}min",
+    "secondsShortFormat_singular": "{{seconds}}s",
+    "secondsShortFormat_plural": "{{seconds}}s",
     "hoursLongFormat_singular": "{{hours}} hour",
     "minutesLongFormat_singular": "{{minutes}} minute",
     "hoursLongFormat_plural": "{{hours}} hours",
     "minutesLongFormat_plural": "{{minutes}} minutes",
+    "secondsLongFormat_singular": "{{seconds}} second",
+    "secondsLongFormat_plural": "{{seconds}} seconds",
     "editLabel": "Edit",
     "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",

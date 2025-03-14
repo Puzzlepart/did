@@ -517,9 +517,11 @@
     "addUsersManager": "Velg ansatte jeg er leder for",
     "addUsersManagerToastHeader": "{{count}} ansatte jeg er leder for lagt til",
     "addUsersManagerToastText": "Lagt til {{users}} til filterkriteriene.",
-    "customQuerySuccessHeader": "Egendefinert spørring generert",
+    "customQuerySuccessHeader": "Egendefinert spørring generert på {{duration}}",
     "customQuerySuccessText": "Din egendefinerte rapport er klar med {{count}} registrerte tidsoppføringer som samsvarer med filterkriteriene dine.",
-    "loadingCustomReport": "Laster inn rapport med egendefinert spørring"
+    "loadingCustomReport": "Laster inn rapport med egendefinert spørring",
+    "customQueryDateRangeDisabled": "Du kan ikke filtrere på Startdato eller Sluttdato når du filtrerer etter Uke, Måned eller År.",
+    "customQueryWeekMonthYearDisabled": "Du kan ikke filtrere på Uke, Måned eller År når du bruker Startdato og Sluttdato."
   },
   "common": {
     "datePicker": {
@@ -670,10 +672,14 @@
     "minutesShortFormat_singular": "{{minutes}}min",
     "hoursShortFormat_plural": "{{hours}}t",
     "minutesShortFormat_plural": "{{minutes}}min",
+    "secondsShortFormat_singular": "{{seconds}}sek",
+    "secondsShortFormat_plural": "{{seconds}}sek",
     "hoursLongFormat_singular": "{{hours}} time",
     "minutesLongFormat_singular": "{{minutes}} minutt",
     "hoursLongFormat_plural": "{{hours}} timer",
     "minutesLongFormat_plural": "{{minutes}} minutter",
+    "secondsLongFormat_singular": "{{seconds}} sekund",
+    "secondsLongFormat_plural": "{{seconds}} sekunder",
     "editLabel": "Rediger",
     "iconSearchPlaceholder": "Søk i ikoner...",
     "inactiveFieldLabel": "Inaktivt",
