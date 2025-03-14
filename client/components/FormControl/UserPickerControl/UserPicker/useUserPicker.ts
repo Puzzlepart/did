@@ -6,7 +6,7 @@ import { useMergedState as useState } from 'hooks'
 import _ from 'lodash'
 import { IUserPickerProps, IUserPickerState } from './types'
 import { useUserPickerQuery } from './useUserPickerQuery'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 export function useUserPicker(props: IUserPickerProps) {
   const { state, setState } = useState<IUserPickerState>({
@@ -20,9 +20,9 @@ export function useUserPicker(props: IUserPickerProps) {
     const selectedUsers =
       _.isArray(props.value) && props.multiple
         ? props.value.map((value) => ({
-            ...value,
-            ...users.find((user) => user.id === value.id)
-          }))
+          ...value,
+          ...users.find((user) => user.id === value.id)
+        }))
         : []
     setState({
       users,
@@ -34,6 +34,23 @@ export function useUserPicker(props: IUserPickerProps) {
           : null
     })
   })
+
+  useEffect(() => {
+    if (!props.value || _.isEmpty(state.users)) return
+    setState({
+      selectedUsers: (_.isArray(props.value) && props.multiple)
+        ? props.value.map((value) => {
+          if (typeof value === 'string') {
+            return state.users.find((user) => user.id === value)
+          }
+          return {
+            ...value,
+            ...state.users.find((user) => user.id === value.id)
+          }
+        })
+        : []
+    })
+  }, [props.value])
 
   /**
    * Handler for when a user is selected in the `Combobox`. Gets the

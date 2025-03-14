@@ -1,32 +1,60 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  gap: 16px;
-  padding: 16px;
-}
+.customQueryTab {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
 
-.formSection {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  border-radius: 4px;
-  background-color: var(--colorNeutralBackground1);
-}
+    .filterCriterias {
+        max-width: 500px;
 
-.formRow {
-  display: flex;
-  gap: 16px;
-}
+        .header {
+            cursor: pointer;
 
-.numberInput {
-  width: 100px;
-}
+            .inner {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
 
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 16px;
+                .text {
+                    flex: 1;
+                }
+            }
+        }
+
+        &.isCollapsed {
+
+            .subHeader,
+            .formSection,
+            .actions {
+                display: none;
+            }
+        }
+
+        .formSection {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+            border-radius: 4px;
+            background-color: var(--colorNeutralBackground1);
+
+            .formRow {
+                display: flex;
+                gap: 16px;
+
+                .numberInput {
+                    width: 100px;
+                }
+            }
+
+        }
+    }
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 16px;
+    }
 }

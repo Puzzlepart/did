@@ -1,6 +1,7 @@
 import { User } from 'types'
 import { IUserMetadataCellProps } from './SelectedUsersList'
 import { ComboboxProps } from '@fluentui/react-components'
+import { IDynamicButtonProps } from 'components'
 
 export type SingleUserPickerValue = string
 export type UserInfo = {
@@ -77,6 +78,16 @@ export interface IUserPickerProps {
    * Whether the user picker should allow freeform input.
    */
   freeform?: ComboboxProps['freeform']
+
+  /**
+   * Custom action for the user picker.
+   */
+  customAction?: IDynamicButtonProps | ((state: IUserPickerState) => IDynamicButtonProps)
+
+  /**
+   * Whether the user picker should take up the full width.
+   */
+  fullWidth?: boolean
 }
 
 export interface IUserPickerState {

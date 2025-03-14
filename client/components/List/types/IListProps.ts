@@ -189,4 +189,9 @@ export interface IListProps<T = any>
    * using the provided key.
    */
   persistViewColumns?: string
+
+  /**
+   * Enable filtering of the list.
+   */
+  filters?: boolean
 }

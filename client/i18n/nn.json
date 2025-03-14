@@ -511,7 +511,11 @@
     "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format.",
     "runReport": "Hent rapport",
     "customQueryHeaderText": "Egendefinert spørring",
-    "filterCriteria": "Filtreringskriterier"
+    "filterCriteria": "Spesifiser filtreringskriterium for rapporten for å sikra nøyaktige og relevante resultat. Minst eitt kriterium må veljast før rapporten kan genererast.",
+    "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
+    "resetFilters": "Nullstill",
+    "userIdsLabel": "Tilsette",
+    "addUsersManager": "Velg ansatte jeg er leder for"
   },
   "common": {
     "datePicker": {
@@ -865,7 +869,8 @@
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
     "currencySymbol": "kr",
-    "month": "Måned"
+    "month": "Måned",
+    "projectIdLabel": "Prosjektnøkkel"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

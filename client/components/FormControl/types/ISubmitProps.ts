@@ -2,11 +2,11 @@ import { ButtonProps } from '@fluentui/react-components'
 import { useMap } from 'hooks/common/useMap'
 
 export interface ISubmitProps
-  extends Pick<ButtonProps, 'onClick' | 'disabled'> {
+  extends Pick<ButtonProps, 'onClick' | 'disabled' | 'hidden'> {
   /**
    * Text to show on the submit button.
    */
-  text: string
+  text?: string
 
   /**
    * On save callback with the model passed as an argument.

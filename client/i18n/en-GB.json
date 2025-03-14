@@ -512,7 +512,11 @@
     "periodColumnDescription": "Displays the period of the entry in week, month, and year format.",
     "runReport": "Run report",
     "customQueryHeaderText": "Custom query",
-    "filterCriteria": "Filter criterias"
+    "filterCriteria": "Specify filter criterias for the report to ensure accurate and relevant results. At least one filter criterion must be selected before generating the report.",
+    "projectIdDescription": "Enter the project ID consisting of a customer key and a project key (e.g., CAL AME).",
+    "resetFilters": "Reset filters",
+    "userIdsLabel": "Employees",
+    "addUsersManager": "Select Employees I Manage"
   },
   "common": {
     "datePicker": {
@@ -867,7 +871,8 @@
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
     "currencySymbol": "kr",
-    "month": "Month"
+    "month": "Month",
+    "projectIdLabel": "Project ID"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

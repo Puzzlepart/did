@@ -37,17 +37,18 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
           {content}
         </Panel>
       ) : (
-        <>
+        <div className={props.className}>
           {content}
-          <div className={styles.formControlFooter}>
+          <div className={styles.formControlFooter} hidden={props.submitProps?.hidden}>
             <DynamicButton {...submitAction} />
           </div>
-        </>
+        </div>
       )}
     </FormControlContext.Provider>
   )
 }
 
+FormControl.displayName = 'FormControl'
 FormControl.className = styles.formControl
 FormControl.defaultProps = {
   submitProps: {

@@ -1,18 +1,18 @@
 import {
-  Body1,
-  Button,
+  Caption1,
   Card,
   CardHeader,
-  Field,
-  Input,
+  mergeClasses,
   Spinner,
   Subtitle1
 } from '@fluentui/react-components'
-import { DateField } from 'components/FormControl'
-import React, { FC } from 'react'
-import { useTranslation } from 'react-i18next'
+import { DateControl, DynamicButton, FormControl, InputControl, TabComponent, UserPickerControl } from 'components'
+import React from 'react'
+import { ReportsList } from '../ReportsList'
 import styles from './CustomQueryTab.module.scss'
 import { useCustomQueryTab } from './useCustomQueryTab'
+import { getFluentIcon } from 'utils'
+import { useAppContext } from 'AppContext'
 
 /**
  * Custom query tab component that allows users to create and
@@ -20,96 +20,118 @@ import { useCustomQueryTab } from './useCustomQueryTab'
  *
  * @category Reports
  */
-export const CustomQueryTab: FC = () => {
-  const { t } = useTranslation()
+export const CustomQueryTab: TabComponent = () => {
+  const context = useAppContext()
   const {
-    formState,
-    updateField,
+    t,
+    formControl,
     executeReport,
-    isFormValid,
-    loading
+    loading,
+    collapsed,
+    isQueryCalled,
+    isFilterCriterasValid
   } = useCustomQueryTab()
 
   return (
-    <div className={styles.container}>
-      <Card>
+    <div className={styles.customQueryTab}>
+      <Card className={mergeClasses(styles.filterCriterias, collapsed.value && styles.isCollapsed)}>
         <CardHeader
-          header={<Subtitle1>{t('reports.customQueryHeaderText')}</Subtitle1>}
-        />
+          className={styles.header}
+          onClick={collapsed.toggle}
+          header={
+            <div className={styles.inner}>
+              <Subtitle1 className={styles.text}>{t('reports.customQueryHeaderText')}</Subtitle1>
+              {getFluentIcon(collapsed.value ? 'ChevronDown' : 'ChevronUp', { size: 30 })}
+            </div>
+          } />
 
-        <div className={styles.formSection}>
-          <Body1>{t('reports.filterCriteria')}</Body1>
-          
+        <FormControl className={styles.formSection} {...formControl}>
+          <Caption1 className={styles.subHeader}>{t('reports.filterCriteria')}</Caption1>
+
           <div className={styles.formRow}>
-            <DateField
-              label={t('common.startDate')}
-              value={formState.startDateTime}
-              onSelectDate={(date) => updateField('startDateTime', date)}
+            <DateControl
+              {...formControl.register('startDateTime')}
+              label={t('common.startDate')} />
+            <DateControl
+              {...formControl.register('endDateTime')}
+              label={t('common.endDate')} />
+          </div>
+
+          <div className={styles.formRow}>
+            <InputControl
+              {...formControl.register('week')}
+              type='number'
+              label={t('common.weekNumberLabel')}
+              className={styles.numberInput}
+              minLength={1}
+              maxLength={53}
             />
-            <DateField
-              label={t('common.endDate')}
-              value={formState.endDateTime}
-              onSelectDate={(date) => updateField('endDateTime', date)}
+
+            <InputControl
+              {...formControl.register('month')}
+              type='number'
+              label={t('common.month')}
+              className={styles.numberInput}
+              minLength={1}
+              maxLength={12}
+            />
+
+            <InputControl
+              {...formControl.register('year')}
+              type='number'
+              label={t('common.yearLabel')}
+              className={styles.numberInput}
+              minLength={2000}
+              maxLength={2100}
             />
           </div>
-          
+
           <div className={styles.formRow}>
-            <Field label={t('common.weekNumberLabel')}>
-              <Input 
-                type='number' 
-                className={styles.numberInput}
-                value={formState.week?.toString() || ''}
-                onChange={(_, data) => updateField('week', Number.parseInt(data.value, 10) || undefined)}
-                min={1}
-                max={53}
-              />
-            </Field>
-            
-            <Field label={t('common.monthLabel')}>
-              <Input 
-                type='number' 
-                className={styles.numberInput}
-                value={formState.month?.toString() || ''}
-                onChange={(_, data) => updateField('month', Number.parseInt(data.value, 10) || undefined)}
-                min={1}
-                max={12}
-              />
-            </Field>
-            
-            <Field label={t('common.yearLabel')}>
-              <Input 
-                type='number' 
-                className={styles.numberInput}
-                value={formState.year?.toString() || ''}
-                onChange={(_, data) => updateField('year', Number.parseInt(data.value, 10) || undefined)}
-                min={2000}
-                max={2100}
-              />
-            </Field>
+            <InputControl
+              {...formControl.register('projectId')}
+              label={t('common.projectIdLabel')}
+              description={t('reports.projectIdDescription')}
+            />
           </div>
-          
+
           <div className={styles.formRow}>
-            <Field label={t('common.projectId')}>
-              <Input 
-                value={formState.projectId || ''}
-                onChange={(_, data) => updateField('projectId', data.value)}
-                placeholder='e.g. PROJ123'
-              />
-            </Field>
+            <UserPickerControl
+              {...formControl.register('userIds')}
+              fullWidth
+              label={t('reports.userIdsLabel')}
+              multiple
+              transformValue={(user) => user.id}
+              customAction={state => ({
+                text: t('reports.addUsersManager'),
+                onClick: () => {
+                  const users = state.users.filter(user => user.manager?.id.startsWith(context.user.id))
+                  formControl.model.set('userIds', users.map(user => user.id))
+                }
+              })}
+            />
           </div>
-          
+
           <div className={styles.actions}>
             {loading && <Spinner size='tiny' />}
-            <Button
-              appearance='primary'
-              disabled={!isFormValid || loading}
-              onClick={executeReport}
-            >
-              {t('reports.runReport')}
-            </Button>
+            <DynamicButton
+              secondary
+              text={t('reports.resetFilters')}
+              disabled={loading}
+              onClick={formControl.model.reset} />
+            <DynamicButton
+              primary
+              text={t('reports.runReport')}
+              disabled={loading || !isFilterCriterasValid}
+              onClick={executeReport} />
           </div>
-        </div>
+        </FormControl>
       </Card>
+      <ReportsList
+        hidden={!isQueryCalled}
+        filters={false}
+        search={false} />
     </div>
   )
 }
+
+CustomQueryTab.displayName = 'CustomQueryTab'

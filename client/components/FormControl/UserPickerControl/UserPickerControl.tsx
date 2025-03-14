@@ -26,4 +26,6 @@ export const UserPickerControl: FormInputControlComponent<
 
 UserPickerControl.displayName = 'LabelPickerControl'
 UserPickerControl.className = styles.userPickerControl
-UserPickerControl.defaultProps = {}
+UserPickerControl.defaultProps = {
+  additionalMetadata: {}
+}

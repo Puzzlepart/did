@@ -41,6 +41,7 @@ export function useFiltersCommand() {
         .withIcon('Filter')
         .setOnClick(toggleCommandBarItem.onClick)
         .setDisabled(toggleCommandBarItem.disabled)
+        .setHidden(!context.props.filters)
         .setGroup('actions')
     }
   }

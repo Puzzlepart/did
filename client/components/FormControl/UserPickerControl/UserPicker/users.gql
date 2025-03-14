@@ -14,5 +14,8 @@ query UserPickerControl {
     photo {
       base64
     }
+    manager {
+      id
+    }
   }
 }

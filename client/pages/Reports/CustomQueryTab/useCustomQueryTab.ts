@@ -1,10 +1,49 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { useLazyQuery } from '@apollo/client'
-import { useContext, useMemo, useState } from 'react'
-import { report_custom } from '../queries'
-import { DATA_UPDATED } from '../reducer/actions'
-import { ReportsContext } from '../context'
+import { IFormControlProps, useFormControlModel, useFormControls } from 'components'
+import { ComponentLogicHook } from 'hooks'
+import { useMemo } from 'react'
+import { TFunction, useTranslation } from 'react-i18next'
+import { useBoolean } from 'usehooks-ts'
 import { ReportsQuery } from '../../../types'
+import { CustomQueryTab } from './CustomQueryTab'
+import { useCustomQuery } from './useCustomQuery'
+
+type UseCustomQueryTabReturnType = {
+    /**
+     * Translation function
+     */
+    t: TFunction
+
+    /**
+     * Form control properties
+     */
+    formControl: IFormControlProps<ReportsQuery>
+
+    /**
+     * Callback to execute the report query
+     */
+    executeReport: () => void
+
+    /**
+     * Indicates if the query is currently loading
+     */
+    loading: boolean
+
+    /**
+     * True if the filters are collapsed
+     */
+    collapsed: ReturnType<typeof useBoolean>
+
+    /**
+     * True if the query has been called
+     */
+    isQueryCalled?: boolean
+
+    /**
+     * True if the filter criterias are valid
+     */
+    isFilterCriterasValid?: boolean
+}
 
 /**
  * Custom hook for CustomQueryTab component logic
@@ -13,64 +52,32 @@ import { ReportsQuery } from '../../../types'
  * 
  * @category Reports Hooks
  */
-export function useCustomQueryTab() {
-    const context = useContext(ReportsContext)
-    const [formState, setFormState] = useState<ReportsQuery>({})
-    const [sortAsc, setSortAsc] = useState<boolean>(true)
+export const useCustomQueryTab: ComponentLogicHook<undefined, UseCustomQueryTabReturnType> = () => {
+    const { t } = useTranslation()
+    const collapsed = useBoolean(false)
+    const model = useFormControlModel<keyof ReportsQuery, ReportsQuery>()
+    const register = useFormControls<keyof ReportsQuery>(model, CustomQueryTab)
+    const { executeReport, loading, isQueryCalled } = useCustomQuery(model.value(), collapsed.setTrue)
 
-    // Query for fetching data
-    const [executeQuery, { data, loading }] = useLazyQuery(report_custom, {
-        fetchPolicy: 'no-cache',
-    })
-
-    // Execute the query with the current form state
-    const executeReport = () => {
-        executeQuery({
-            variables: {
-                query: formState,
-                sortAsc
-            }
-        })
+    model.value()
+    const formControl: IFormControlProps<ReportsQuery> = {
+        id: CustomQueryTab.displayName,
+        model,
+        register,
+        submitProps: { hidden: true }
     }
 
-    // Update the context data when query completes
-    useMemo(() => {
-        if (data) {
-            context.dispatch(DATA_UPDATED({
-                ...data,
-                loading
-            }))
-        }
-    }, [data, loading, context.dispatch])
-
-    // Update a specific form field
-    const updateField = (field: keyof ReportsQuery, value: any) => {
-        setFormState((prev) => ({
-            ...prev,
-            [field]: value
-        }))
-    }
-
-    // Check if the form is valid to execute the query
-    const isFormValid = useMemo(() => {
-        // Require at least one field to be set
-        return Object.values(formState).some(value =>
-            value !== undefined && value !== '' &&
-            (Array.isArray(value) ? value.length > 0 : true)
-        )
-    }, [formState])
-
-
-    // eslint-disable-next-line no-console
-    console.log('context', context.state)
+    const isFilterCriterasValid = useMemo(() => {
+        return Object.values(model.$).some((value) => value !== undefined)
+    }, [model.$])
 
     return {
-        formState,
-        sortAsc,
-        setSortAsc,
-        updateField,
+        t,
+        formControl,
         executeReport,
-        isFormValid,
-        loading
+        loading,
+        collapsed,
+        isQueryCalled,
+        isFilterCriterasValid
     }
 }
