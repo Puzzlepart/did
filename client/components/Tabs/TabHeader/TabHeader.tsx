@@ -14,7 +14,9 @@ export const TabHeader: StyledComponent<ITabHeaderProps> = (props) => {
       )}
     >
       <div className={styles.text}>{props.text}</div>
-      <Caption2 align='start' className={styles.description}>{props.description}</Caption2>
+      <Caption2 align='start' className={styles.description}>
+        {props.description}
+      </Caption2>
     </div>
   )
 }

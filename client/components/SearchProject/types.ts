@@ -12,7 +12,7 @@ export interface ISearchProjectProps
       | 'placeholder'
       | 'description'
       | 'selectedKey'
-      |'maxSuggestions'
+      | 'maxSuggestions'
     > {
   /**
    * Callback when a project is selected.
@@ -36,7 +36,7 @@ export interface ISearchProjectProps
 
   /**
    * Override the default text rendering for the project.
-   * 
+   *
    * @param project Project to render the text for
    */
   onRenderText?: (project: Project) => string

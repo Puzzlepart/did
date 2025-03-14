@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { ReportsQuery } from '../../../types'
 import { report_custom } from '../queries'
 import { mapTimeEntries } from '../reducer'
+import { removeNullishValues } from 'utils'
 
 /**
  * Custom query hook for `CustomQueryTab` that handles the query execution.
@@ -23,30 +24,34 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
     fetchPolicy: 'cache-and-network'
   })
 
-  const onQueryCompleted = useCallback((data) => {
-    const hours = ((Date.now() - queryBeginRef.current.getTime()) / 1000 / 60 / 60)
-    const duration = $date.getDurationString(hours, t, {
-      seconds: true,
-      format: DurationStringFormat.Long
-    })
-    const count = _.get(data, 'timeEntries', []).length
-    context.displayToast(
-      t('reports.customQuerySuccessText', { count }),
-      'success',
-      8,
-      {
-        headerText: t('reports.customQuerySuccessHeader', {
-          duration
-        })
-      }
-    )
-  }, [queryBeginRef?.current])
+  const onQueryCompleted = useCallback(
+    (data) => {
+      const hours =
+        (Date.now() - queryBeginRef.current.getTime()) / 1000 / 60 / 60
+      const duration = $date.getDurationString(hours, t, {
+        seconds: true,
+        format: DurationStringFormat.Long
+      })
+      const count = _.get(data, 'timeEntries', []).length
+      context.displayToast(
+        t('reports.customQuerySuccessText', { count }),
+        'success',
+        8,
+        {
+          headerText: t('reports.customQuerySuccessHeader', {
+            duration
+          })
+        }
+      )
+    },
+    [queryBeginRef?.current]
+  )
 
   /**
    * Executes the report query.
-   * 
-   * This function sets the current date and time to `queryBeginRef`, collapses the UI, 
-   * and then executes the query with the provided variables. Once the query is completed, 
+   *
+   * This function sets the current date and time to `queryBeginRef`, collapses the UI,
+   * and then executes the query with the provided variables. Once the query is completed,
    * it triggers the `onQueryCompleted` callback.
    */
   const onExecuteReport = useCallback(() => {
@@ -54,7 +59,7 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
     onCollapse()
     executeQuery({
       variables: {
-        query
+        query: removeNullishValues(query)
       },
       onCompleted: onQueryCompleted
     })

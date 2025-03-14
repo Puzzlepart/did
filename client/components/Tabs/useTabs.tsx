@@ -94,10 +94,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
   const renderSubTabs = (key: string, header: ITabHeaderProps) => {
     if (!header.sub) return []
     return Object.keys(header.sub).map((subKey) => (
-      <Tab
-        key={`${key}_${subKey}`}
-        value={`${key}_${subKey}`}
-      >
+      <Tab key={`${key}_${subKey}`} value={`${key}_${subKey}`}>
         <TabHeader text={header.sub[subKey]} indent />
       </Tab>
     ))

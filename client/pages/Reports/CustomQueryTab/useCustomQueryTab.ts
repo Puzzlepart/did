@@ -4,10 +4,11 @@ import { ComponentLogicHook } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useBoolean } from 'usehooks-ts'
+import { isNullish } from 'utils'
 import { ReportsQuery } from '../../../types'
-import { useAddManagerUsersAction } from './useAddManagerUsersAction'
 import { CustomQueryTab } from './CustomQueryTab'
 import { UseCustomQueryTabReturnType } from './types'
+import { useAddManagerUsersAction } from './useAddManagerUsersAction'
 import { useCustomQuery } from './useCustomQuery'
 import { useCustomQueryFilterCriterias } from './useCustomQueryFilterCriterias'
 
@@ -41,57 +42,100 @@ export const useCustomQueryTab: ComponentLogicHook<
 
   const addManagerUsersAction = useAddManagerUsersAction(filterCriterias.set)
 
+  /**
+   * Check if the filter criterias are valid.
+   */
+  const isFilterCriterasValid = useMemo(
+    () =>
+      Object.values(filterCriterias.value()).some((value) => !isNullish(value)),
+    [filterCriterias.$]
+  )
+
+  /**
+   * Form control properties for the filter criterias.
+   */
   const formControl: IFormControlProps<ReportsQuery> = {
     id: CustomQueryTab.displayName,
     model: filterCriterias,
     register,
-    submitProps: { hidden: true }
+    submitProps: {
+      text: t('reports.runReport'),
+      onClick: onExecuteReport,
+      justifyContent: 'flex-end',
+      disabled: loading || !isFilterCriterasValid
+    },
+    additonalActions: [
+      {
+        text: t('reports.resetFilters'),
+        onClick: onReset,
+        disabled: loading || !isFilterCriterasValid
+      }
+    ],
+    validateOnBlur: true
   }
 
-  const isFilterCriterasValid = useMemo(
-    () => Object.values(filterCriterias.$).some((value) => value !== undefined),
-    [filterCriterias.$]
-  )
-
+  /**
+   * Check if the query criteria is disabled, based on the current filter criterias.
+   *
+   * @param key Key of the query criteria to check
+   */
   const isDisabled = (key: keyof ReportsQuery) => {
+    const criterias = {
+      startDateTime: Boolean(filterCriterias.value('startDateTime')),
+      endDateTime: Boolean(filterCriterias.value('endDateTime')),
+      week: Boolean(filterCriterias.value('week')),
+      month: Boolean(filterCriterias.value('month')),
+      year: Boolean(filterCriterias.value('year'))
+    }
     switch (key) {
-        case 'startDateTime':
-        case 'endDateTime': {
-            const disabled = Boolean(filterCriterias.value('week')) || Boolean(filterCriterias.value('month')) || Boolean(filterCriterias.value('year'))
-            return {
-                disabled,
-                title: disabled ? t('reports.customQueryDateRangeDisabled') : ''
-            }
+      case 'startDateTime':
+      case 'endDateTime': {
+        const disabled = criterias.week || criterias.month || criterias.year
+        return {
+          disabled,
+          title: disabled ? t('reports.customQueryDateRangeDisabled') : ''
         }
-        case 'week':
-        case 'month':
-        case 'year': {
-            const disabled = Boolean(filterCriterias.value('startDateTime')) || Boolean(filterCriterias.value('endDateTime'))
-            return {
-                disabled,
-                title: disabled ? t('reports.customQueryWeekMonthYearDisabled') : ''
-            }
+      }
+      case 'week': {
+        const disabled =
+          criterias.startDateTime || criterias.endDateTime || criterias.month
+        return {
+          disabled,
+          title: disabled ? t('reports.customQueryWeekDisabled') : ''
         }
-        default: {
-            return {
-                disabled: false,
-                title: undefined
-            }    
+      }
+      case 'month': {
+        const disabled =
+          criterias.startDateTime || criterias.endDateTime || criterias.week
+        return {
+          disabled,
+          title: disabled ? t('reports.customQueryMonthDisabled') : ''
         }
+      }
+      case 'year': {
+        const disabled = criterias.startDateTime || criterias.endDateTime
+        return {
+          disabled,
+          title: disabled ? t('reports.customQueryYearDisabled') : ''
+        }
+      }
+      default: {
+        return {
+          disabled: false,
+          title: undefined
+        }
+      }
     }
   }
 
   return {
     t,
     formControl,
-    onExecuteReport,
-    onReset,
     loading,
     items,
     collapsed,
     isQueryCalled: Boolean(queryBegin.current),
-    isFilterCriterasValid,
     addManagerUsersAction,
-    isDisabled  
+    isDisabled
   }
 }

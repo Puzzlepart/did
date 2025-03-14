@@ -510,7 +510,8 @@
     "periodColumnDescription": "Viser perioden for oppføringen i uke, måned og år format.",
     "runReport": "Hent rapport",
     "customQueryHeaderText": "Egendefinert spørring",
-    "filterCriteria": "Spesifiser filtreringskriterier for rapporten for å sikre nøyaktige og relevante resultater. Minst ett kriterium må velges før rapporten kan genereres.",
+    "filterCriteriasHeader": "Filtreringskriterier",
+    "filterCriteriasSubHeader": "Spesifiser filtreringskriterier for rapporten for å sikre nøyaktige og relevante resultater. Minst ett kriterium må velges før rapporten kan genereres.",
     "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
     "resetFilters": "Nullstill",
     "userIdsLabel": "Ansatte",
@@ -520,11 +521,13 @@
     "customQuerySuccessHeader": "Egendefinert spørring generert på {{duration}}",
     "customQuerySuccessText": "Din egendefinerte rapport er klar med {{count}} registrerte tidsoppføringer som samsvarer med filterkriteriene dine.",
     "loadingCustomReport": "Laster inn rapport med egendefinert spørring",
-    "customQueryDateRangeDisabled": "Du kan ikke filtrere på Startdato eller Sluttdato når du filtrerer etter Uke, Måned eller År.",
-    "customQueryWeekMonthYearDisabled": "Du kan ikke filtrere på Uke, Måned eller År når du bruker Startdato og Sluttdato.",
+    "customQueryDateRangeDisabled": "Du kan ikke filtrere på startdato eller sluttdato når du filtrerer på uke, måned eller år.",
+    "customQueryYearDisabled": "Du kan ikke filtrere på år samtidig som du filtrerer på startdato eller sluttdato.",
     "generatingReportProgressLabel": "Genererer rapport for {{text}} ({{description}})",
     "customQueryDescription": "Tilpass rapporten med egne filtre, som startdato/sluttdato, prosjekt eller ansatte.",
-    "summaryDescription": "Få en tabelloversikt over tidsregistreringer per ansatt og periode."
+    "summaryDescription": "Få en tabelloversikt over tidsregistreringer per ansatt og periode.",
+    "customQueryWeekDisabled": "Du kan ikke filtrere på uke samtidig som du filtrerer på startdato, sluttdato eller måned.",
+    "customQueryMonthDisabled": "Du kan ikke filtrere på måned samtidig som du filtrerer på startdato, sluttdato eller uke."
   },
   "common": {
     "datePicker": {
@@ -884,7 +887,9 @@
     "currencySymbol": "kr",
     "month": "Måned",
     "projectIdLabel": "Prosjektnøkkel",
-    "and": " og "
+    "and": " og ",
+    "invalidDateAfterValidation": "Dato må være etter {{date}}.",
+    "invalidDateBeforeValidation": "Dato må være før {{date}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

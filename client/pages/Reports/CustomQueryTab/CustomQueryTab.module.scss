@@ -5,7 +5,8 @@
     padding: 16px;
 
     .filterCriterias {
-        max-width: 500px;
+        width: 500px;
+        transition: width 0.5s ease-in-out;
 
         .header {
             cursor: pointer;
@@ -23,6 +24,8 @@
         }
 
         &.isCollapsed {
+            width: 100%;
+            transition: width 0.5s ease-in-out;
             .subHeader,
             .formSection,
             .actions {
@@ -48,12 +51,5 @@
             }
 
         }
-    }
-
-    .actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 8px;
-        margin-top: 16px;
     }
 }

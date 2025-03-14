@@ -6,8 +6,9 @@ import {
   Subtitle1
 } from '@fluentui/react-components'
 import {
+  DateAfterValidator,
+  DateBeforeValidator,
   DateControl,
-  DynamicButton,
   FormControl,
   InputControl,
   ProjectPickerControl,
@@ -30,13 +31,10 @@ export const CustomQueryTab: TabComponent = (props) => {
   const {
     t,
     formControl,
-    onReset,
-    onExecuteReport,
     loading,
     items,
     collapsed,
     isQueryCalled,
-    isFilterCriterasValid,
     addManagerUsersAction,
     isDisabled
   } = useCustomQueryTab(props.id)
@@ -55,7 +53,7 @@ export const CustomQueryTab: TabComponent = (props) => {
           header={
             <div className={styles.inner}>
               <Subtitle1 className={styles.text}>
-                {t('reports.customQueryHeaderText')}
+                {t('reports.filterCriteriasHeader')}
               </Subtitle1>
               {getFluentIcon(collapsed.value ? 'ChevronDown' : 'ChevronUp', {
                 size: 30
@@ -66,17 +64,21 @@ export const CustomQueryTab: TabComponent = (props) => {
 
         <FormControl className={styles.formSection} {...formControl}>
           <Caption1 className={styles.subHeader}>
-            {t('reports.filterCriteria')}
+            {t('reports.filterCriteriasSubHeader')}
           </Caption1>
 
           <div className={styles.formRow}>
             <DateControl
-              {...formControl.register('startDateTime')}
+              {...formControl.register('startDateTime', {
+                validators: [DateBeforeValidator(t, formControl.model.value('endDateTime'))]
+              })}
               label={t('common.startDate')}
               {...isDisabled('startDateTime')}
             />
             <DateControl
-              {...formControl.register('endDateTime')}
+              {...formControl.register('endDateTime', {
+                validators: [DateAfterValidator(t, formControl.model.value('startDateTime'))]
+              })}
               label={t('common.endDate')}
               {...isDisabled('endDateTime')}
             />
@@ -134,20 +136,6 @@ export const CustomQueryTab: TabComponent = (props) => {
               transformValue={(user) => user.id}
               customAction={addManagerUsersAction}
               list={{ simple: true }}
-            />
-          </div>
-          <div className={styles.actions}>
-            <DynamicButton
-              secondary
-              text={t('reports.resetFilters')}
-              disabled={loading || !isFilterCriterasValid}
-              onClick={onReset}
-            />
-            <DynamicButton
-              primary
-              text={t('reports.runReport')}
-              disabled={loading || !isFilterCriterasValid}
-              onClick={onExecuteReport}
             />
           </div>
         </FormControl>

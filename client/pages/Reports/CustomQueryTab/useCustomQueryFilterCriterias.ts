@@ -17,29 +17,31 @@ import { getUrlState, persistUrlState } from 'utils'
  * @returns The filter criteria form control model.
  */
 export const useCustomQueryFilterCriterias = (param: string, id: string) => {
-    const filterCriterias = useFormControlModel<
-        keyof ReportsQuery,
-        ReportsQuery
-    >()
+  const filterCriterias = useFormControlModel<
+    keyof ReportsQuery,
+    ReportsQuery
+  >()
 
-    useEffect(() => {
-        const [, f] = id.split('_')
-        if (f) {
-            filterCriterias.$set(new Map(Object.entries(JSON.parse(window.atob(f))) as any))
-            return
-        }
-        filterCriterias.$set(
-            new Map(Object.entries(getUrlState(param, 'hash', true))) as any
-        )
-    }, [id])
+  useEffect(() => {
+    const [, f] = id.split('_')
+    if (f) {
+      filterCriterias.$set(
+        new Map(Object.entries(JSON.parse(window.atob(f))) as any)
+      )
+      return
+    }
+    filterCriterias.$set(
+      new Map(Object.entries(getUrlState(param, 'hash', true))) as any
+    )
+  }, [id])
 
-    useEffect(() => {
-        persistUrlState<ReportsQuery>(
-            _.isEmpty(filterCriterias.value()) ? undefined : filterCriterias.value(),
-            param,
-            'hash',
-            false
-        )
-    }, [filterCriterias])
-    return filterCriterias
+  useEffect(() => {
+    persistUrlState<ReportsQuery>(
+      _.isEmpty(filterCriterias.value()) ? undefined : filterCriterias.value(),
+      param,
+      'hash',
+      false
+    )
+  }, [filterCriterias])
+  return filterCriterias
 }

@@ -4,6 +4,6 @@ import { IFieldProps } from '../../Field'
 export interface IDateFieldProps
   extends Pick<
       DatePickerProps,
-      'allowTextInput' | 'value' | 'onChange' | 'onSelectDate'
+      'allowTextInput' | 'value' | 'onChange' | 'onSelectDate' | 'onBlur'
     >,
     IFieldProps {}

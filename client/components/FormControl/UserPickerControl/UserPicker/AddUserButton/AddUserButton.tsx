@@ -13,7 +13,7 @@ export const AddUserButton: FC = () => {
   const requiredFields = Object.keys(context.props.additionalMetadata).filter(
     (key) => context.props.additionalMetadata[key]?.required
   )
-  if(context.props.autoSelect) {
+  if (context.props.autoSelect) {
     return null
   }
   return (

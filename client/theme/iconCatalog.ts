@@ -1,4 +1,6 @@
 import {
+  TextClearFormattingRegular,
+  TextClearFormattingFilled,
   GroupListRegular,
   GroupListFilled,
   ColumnSingleCompareRegular,
@@ -203,6 +205,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  TextClearFormatting: {
+    regular: TextClearFormattingRegular,
+    filled: TextClearFormattingFilled
+  },
   DeleteLines: {
     regular: DeleteLinesRegular,
     filled: DeleteLinesFilled

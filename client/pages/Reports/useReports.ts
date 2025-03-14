@@ -53,12 +53,15 @@ export function useReports() {
         {
           text: t('reports.customQueryHeaderText'),
           description: t('reports.customQueryDescription')
-        } 
+        }
       ],
-      summary: [SummaryView, {
-        text:t('reports.summaryHeaderText'),
-        description: t('reports.summaryDescription')
-      }]
+      summary: [
+        SummaryView,
+        {
+          text: t('reports.summaryHeaderText'),
+          description: t('reports.summaryDescription')
+        }
+      ]
     }),
     [queryTabs]
   )

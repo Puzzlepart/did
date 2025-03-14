@@ -511,7 +511,8 @@
     "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format.",
     "runReport": "Hent rapport",
     "customQueryHeaderText": "Eigendefinert spørring",
-    "filterCriteria": "Spesifiser filtreringskriterium for rapporten for å sikra nøyaktige og relevante resultat. Minst eitt kriterium må veljast før rapporten kan genererast.",
+    "filterCriteriasHeader": "Filtreringskriterier",
+    "filterCriteriasSubHeader": "Spesifiser filtreringskriterier for rapporten for å sikra nøyaktige og relevante resultat. Minst eitt kriterium må veljast før rapporten kan genererast.",
     "projectIdDescription": "Skriv inn prosjektnøkkelen, som består av en kundenøkkel og en prosjektkode (f.eks. CAL AME).",
     "resetFilters": "Nullstill",
     "userIdsLabel": "Tilsette",
@@ -522,10 +523,12 @@
     "customQuerySuccessText": "Den eigendefinerte rapporten din er klar med {{count}} registrerte tidsoppføringar som samsvarer med filterkriteria dine.",
     "loadingCustomReport": "Laster inn rapport med eigendefinert spørring",
     "customQueryDateRangeDisabled": "Du kan ikkje filtrera på Startdato eller Sluttdato når du filtrerer etter Veke, Månad eller År.",
-    "customQueryWeekMonthYearDisabled": "Du kan ikkje filtrera på Veke, Månad eller År når du bruker Startdato og Sluttdato.",
+    "customQueryYearDisabled": "Du kan ikkje filtrera på startdato eller sluttdato når du filtrerer på veke, månad eller år.",
     "generatingReportProgressLabel": "Genererer rapport for {{text}} ({{description}})",
     "customQueryDescription": "Tilpass rapporten med eigne filter, som startdato/sluttdato, prosjekt eller tilsette.",
-    "summaryDescription": "Få ei tabelloversikt over tidsregistreringar per tilsett og periode."
+    "summaryDescription": "Få ei tabelloversikt over tidsregistreringar per tilsett og periode.",
+    "customQueryWeekDisabled": "Du kan ikkje filtrera på veke samtidig som du filtrerer på startdato, sluttdato eller månad.",
+    "customQueryMonthDisabled": "Du kan ikkje filtrera på månad samtidig som du filtrerer på startdato, sluttdato eller veke."
   },
   "common": {
     "datePicker": {
@@ -885,7 +888,9 @@
     "currencySymbol": "kr",
     "month": "Månad",
     "projectIdLabel": "Prosjektnøkkel",
-    "and": " og "
+    "and": " og ",
+    "invalidDateAfterValidation": "Dato må være etter {{date}}.",
+    "invalidDateBeforeValidation": "Dato må være før {{date}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

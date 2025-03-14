@@ -512,7 +512,8 @@
     "periodColumnDescription": "Displays the period of the entry in week, month, and year format.",
     "runReport": "Run report",
     "customQueryHeaderText": "Custom query",
-    "filterCriteria": "Specify filter criterias for the report to ensure accurate and relevant results. At least one filter criterion must be selected before generating the report.",
+    "filterCriteriasHeader": "Filter criterias",
+    "filterCriteriasSubHeader": "Specify filter criterias for the report to ensure accurate and relevant results. At least one filter criterion must be selected before generating the report.",
     "projectIdDescription": "Enter the project ID consisting of a customer key and a project key (e.g., CAL AME).",
     "resetFilters": "Reset filters",
     "userIdsLabel": "Employees",
@@ -522,11 +523,13 @@
     "customQuerySuccessHeader": "Custom Report Generated in {{duration}}",
     "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias.",
     "loadingCustomReport": "Loading reporth with custom query",
-    "customQueryDateRangeDisabled": "You cannot use Start Date or End Date while filtering by Week, Month, or Year.",
-    "customQueryWeekMonthYearDisabled": "You cannot filter by Week, Month, or Year while using Start Date and End Date.",
+    "customQueryDateRangeDisabled": "You cannot use start date or end date while filtering by week, month, or year.",
+    "customQueryYearDisabled": "You cannot filter by year while filtering on start date or end date.",
     "generatingReportProgressLabel": "Generating report for {{text}} ({{description}}",
     "customQueryDescription": "Customize the report with your own filters, such as start date and end date, project, or employees.",
-    "summaryDescription": "Get a tabular overview of time entries per employee and period."
+    "summaryDescription": "Get a tabular overview of time entries per employee and period.",
+    "customQueryWeekDisabled": "You cannot filter by week while filtering on start date, end date or month.",
+    "customQueryMonthDisabled": "You cannot filter by month while filtering on start date, end date or week."
   },
   "common": {
     "datePicker": {
@@ -887,7 +890,9 @@
     "currencySymbol": "kr",
     "month": "Month",
     "projectIdLabel": "Project ID",
-    "and": " and "
+    "and": " and ",
+    "invalidDateAfterValidation": "Date must be after {{date}}.",
+    "invalidDateBeforeValidation": "Date must be before {{date}}."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

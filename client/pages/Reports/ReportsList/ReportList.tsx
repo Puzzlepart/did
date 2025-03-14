@@ -26,7 +26,14 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
       {(Boolean(props.loading) || context.state.loading) && (
         <Progress
           className={styles.progress}
-          label={Boolean(props.loading) ? props.loading : t('reports.generatingReportProgressLabel', { ...context.queryPreset, text: context.queryPreset?.text?.toLowerCase() })}
+          label={
+            Boolean(props.loading)
+              ? props.loading
+              : t('reports.generatingReportProgressLabel', {
+                  ...context.queryPreset,
+                  text: context.queryPreset?.text?.toLowerCase()
+                })
+          }
           text={t('reports.generatingReportProgressText')}
         />
       )}

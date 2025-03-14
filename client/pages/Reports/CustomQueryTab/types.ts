@@ -16,16 +16,6 @@ export type UseCustomQueryTabReturnType = {
   formControl: IFormControlProps<ReportsQuery>
 
   /**
-   * Callback to execute the report query
-   */
-  onExecuteReport: () => void
-
-  /**
-   * Callback to reset the query
-   */
-  onReset: () => void
-
-  /**
    * Indicates if the query is currently loading
    */
   loading: boolean
@@ -46,19 +36,14 @@ export type UseCustomQueryTabReturnType = {
   isQueryCalled?: boolean
 
   /**
-   * True if the filter criterias are valid
-   */
-  isFilterCriterasValid?: boolean
-
-  /**
    * Custom action to add manager users
    */
   addManagerUsersAction?: IUserPickerProps['customAction']
 
   /**
    * Checks if the given key is disabled.
-   * 
+   *
    * @param key - The key to check if it is disabled
    */
-  isDisabled?(key: keyof ReportsQuery): { disabled: boolean, title: string }
+  isDisabled?(key: keyof ReportsQuery): { disabled: boolean; title: string }
 }

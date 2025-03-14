@@ -20,7 +20,7 @@ export interface IFormControlProps<T = any>
   /**
    * Submit props for the form control.
    */
-  submitProps?: ISubmitProps
+  submitProps?: ISubmitProps & { justifyContent?: string }
 
   /**
    * Additional actions to be added to the form control.

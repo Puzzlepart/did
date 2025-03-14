@@ -14,14 +14,12 @@ import { useUserPickerQuery } from './useUserPickerQuery'
  *
  * @param props - The properties of the user picker component.
  * @param users - The list of available users to map from.
- * 
+ *
  * @returns An array of selected user objects or an empty array if the conditions are not met.
  */
 function mapSelectedUsers(props: IUserPickerProps, users: User[]) {
   return _.isArray(props.value) && props.multiple
-    ? props.value
-      .filter(Boolean)
-      .map((value) => {
+    ? props.value.filter(Boolean).map((value) => {
         if (typeof value === 'string') {
           return users.find((user) => user.id === value)
         }
@@ -34,11 +32,11 @@ function mapSelectedUsers(props: IUserPickerProps, users: User[]) {
 }
 
 /**
- * Custom component logic hook to manage user 
+ * Custom component logic hook to manage user
  * selection in a form control for the `UserPicker` component.
  *
  * @param props - The properties for the user picker component.
- * 
+ *
  * @returns An object containing the state, handlers, and selectable users.
  */
 export function useUserPicker(props: IUserPickerProps) {

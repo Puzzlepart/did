@@ -14,7 +14,12 @@ export const SelectedUsersList: FC = () => {
   const context = useUserPickerContext()
   if (context.props.list?.simple) {
     return (
-      <div className={mergeClasses(styles.selectedUsersList, context.props.list?.simple && styles.simple)}>
+      <div
+        className={mergeClasses(
+          styles.selectedUsersList,
+          context.props.list?.simple && styles.simple
+        )}
+      >
         {context.state.selectedUsers.map((user) => (
           <Tag
             key={user.id}

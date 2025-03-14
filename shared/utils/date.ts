@@ -86,48 +86,51 @@ export class DateUtils {
     let hoursPrecision = Number.parseFloat(
       Number.parseFloat(hours.toString()).toPrecision(options.seconds ? 7 : 5)
     )
-    
+
     // Calculate minutes from the fractional part of hours
     const minutesTotal = (hoursPrecision % 1) * 60
     const minutes = Math.floor(minutesTotal)
-    
+
     // Calculate seconds from the fractional part of minutes if seconds option is enabled
     const seconds = options.seconds ? Math.round((minutesTotal % 1) * 60) : 0
-    
+
     // Get the whole hours
     hoursPrecision = Math.floor(hoursPrecision)
-    
+
     const hrsString = t(
       `common.hours${format}_${hoursPrecision === 1 ? 'singular' : 'plural'}`,
       {
         hours: hoursPrecision
       }
     )
-    
+
     const minsString = t(
       `common.minutes${format}_${minutes === 1 ? 'singular' : 'plural'}`,
       { minutes }
     )
-    
-    const secsString = options.seconds ? t(
-      `common.seconds${format}_${seconds === 1 ? 'singular' : 'plural'}`,
-      { seconds }
-    ) : ''
-    
+
+    const secsString = options.seconds
+      ? t(`common.seconds${format}_${seconds === 1 ? 'singular' : 'plural'}`, {
+          seconds
+        })
+      : ''
+
     // Build the output string based on which components have values
     const components = []
-    
+
     if (hoursPrecision > 0) components.push(hrsString)
     if (minutes > 0) components.push(minsString)
     if (options.seconds && seconds > 0) components.push(secsString)
-    
+
     // Return empty string for zero duration
     if (components.length === 0) {
-      return hoursPrecision === 0 && minutes === 0 && (!options.seconds || seconds === 0)
+      return hoursPrecision === 0 &&
+        minutes === 0 &&
+        (!options.seconds || seconds === 0)
         ? t(`common.hours${format}_plural`, { hours: 0 })
         : ''
     }
-    
+
     return components.join(' ')
   }
 

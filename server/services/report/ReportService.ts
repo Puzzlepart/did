@@ -218,7 +218,7 @@ export class ReportService {
    * * `week`
    * * `month`
    * * `year`
-   * 
+   *
    * Supported presets are handled by `_generatePresetQuery`.
    *
    * @param query Query object
@@ -226,25 +226,28 @@ export class ReportService {
    */
   private _generateQuery(query: ReportsQuery = {}, preset: ReportsQueryPreset) {
     const presetQuery = this._generatePresetQuery(preset)
-    return _.omit({
-      ...presetQuery,
-      ..._.pick(
-        {
-          projectId: {
-            $eq: query.projectId
+    return _.omit(
+      {
+        ...presetQuery,
+        ..._.pick(
+          {
+            projectId: {
+              $eq: query.projectId
+            },
+            userId: {
+              $in: query.userIds
+            },
+            startDateTime: { $gte: new Date(query.startDateTime) },
+            endDateTime: { $lte: new Date(query.endDateTime) },
+            week: { $eq: query.week },
+            month: { $eq: query.month },
+            year: { $eq: query.year }
           },
-          userId: {
-            $in: query.userIds
-          },
-          startDateTime: { $gte: new Date(query.startDateTime) },
-          endDateTime: { $lte: new Date(query.endDateTime) },
-          week: { $eq: query.week },
-          month: { $eq: query.month },
-          year: { $eq: query.year }
-        },
-        [...Object.keys(query), !_.isEmpty(query?.userIds) && 'userId']
-      )
-    }, 'preset')
+          [...Object.keys(query), !_.isEmpty(query?.userIds) && 'userId']
+        )
+      },
+      'preset'
+    )
   }
 
   /**
@@ -262,7 +265,7 @@ export class ReportService {
     const date = new DateObject().toObject()
 
     debug('[_generatePresetQuery]', 'Generating query from preset:', preset)
-    const query = (
+    const query =
       {
         LAST_MONTH: {
           month:
@@ -282,8 +285,13 @@ export class ReportService {
           year: date.year
         }
       }[preset] || {}
+    debug(
+      '[_generatePresetQuery]',
+      'Generated query ',
+      query,
+      'from preset:',
+      preset
     )
-    debug('[_generatePresetQuery]', 'Generated query ', query, 'from preset:', preset)
     return query
   }
 }

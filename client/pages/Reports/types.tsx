@@ -72,7 +72,7 @@ export interface IReportsSavedFilter extends IContextualMenuItem {
  */
 export interface IReportsData {
   /**
-   * Time entries 
+   * Time entries
    */
   timeEntries: any[]
 

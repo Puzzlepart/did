@@ -41,8 +41,12 @@ export const FormControl: ReusableComponent<IFormControlProps> = (props) => {
           {content}
           <div
             className={styles.formControlFooter}
+            style={{ justifyContent: props.submitProps?.justifyContent }}
             hidden={props.submitProps?.hidden}
           >
+            {props.additonalActions.map((action, index) => (
+              <DynamicButton key={index} {...action} />
+            ))}
             <DynamicButton {...submitAction} />
           </div>
         </div>

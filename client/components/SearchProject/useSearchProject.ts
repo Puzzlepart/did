@@ -20,7 +20,6 @@ export function useSearchProject(props: ISearchProjectProps) {
     fetchPolicy: 'cache-and-network'
   })
 
-
   const projects = data?.projects.filter(
     (project) => project.inactive !== true && props.filterFunc(project)
   )
