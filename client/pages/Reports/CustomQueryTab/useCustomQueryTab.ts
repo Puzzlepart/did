@@ -29,10 +29,16 @@ export const useCustomQueryTab: ComponentLogicHook<
     filterCriterias,
     CustomQueryTab
   )
-  const { executeReport, loading, items, isQueryCalled } = useCustomQuery(
+  const { onExecuteReport, loading, items, queryBegin } = useCustomQuery(
     filterCriterias.value(),
     collapsed.setTrue
   )
+
+  const onReset = () => {
+    filterCriterias.reset()
+    queryBegin.current = null
+  }
+
   const addManagerUsersAction = useAddManagerUsersAction(filterCriterias.set)
 
   const formControl: IFormControlProps<ReportsQuery> = {
@@ -78,11 +84,12 @@ export const useCustomQueryTab: ComponentLogicHook<
   return {
     t,
     formControl,
-    executeReport,
+    onExecuteReport,
+    onReset,
     loading,
     items,
     collapsed,
-    isQueryCalled,
+    isQueryCalled: Boolean(queryBegin.current),
     isFilterCriterasValid,
     addManagerUsersAction,
     isDisabled  

@@ -47,7 +47,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
     useTabsSelection(props)
 
   const [selectedComponent, selectedTab, selectedComponentProps] = useMemo(
-    () => props.items[selectedValue?.split('_')[0]] ?? [null, null, {}],
+    () => props.items[selectedValue] ?? [null, null, {}],
     [props.items, selectedValue]
   )
 

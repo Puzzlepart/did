@@ -4,10 +4,10 @@
 import { ComboboxProps } from '@fluentui/react-components'
 import { useMergedState as useState } from 'hooks'
 import _ from 'lodash'
-import { IUserPickerProps, IUserPickerState } from './types'
-import { useUserPickerQuery } from './useUserPickerQuery'
 import { useEffect, useMemo } from 'react'
 import { User } from 'types'
+import { IUserPickerProps, IUserPickerState } from './types'
+import { useUserPickerQuery } from './useUserPickerQuery'
 
 /**
  * Maps the selected users based on the provided properties and user list.
@@ -19,15 +19,17 @@ import { User } from 'types'
  */
 function mapSelectedUsers(props: IUserPickerProps, users: User[]) {
   return _.isArray(props.value) && props.multiple
-    ? props.value.map((value) => {
-      if (typeof value === 'string') {
-        return users.find((user) => user.id === value)
-      }
-      return {
-        ...value,
-        ...users.find((user) => user.id === value.id)
-      }
-    })
+    ? props.value
+      .filter(Boolean)
+      .map((value) => {
+        if (typeof value === 'string') {
+          return users.find((user) => user.id === value)
+        }
+        return {
+          ...value,
+          ...users.find((user) => user.id === value.id)
+        }
+      })
     : []
 }
 
@@ -79,14 +81,16 @@ export function useUserPicker(props: IUserPickerProps) {
     { optionValue }
   ) => {
     const selectedUser = state.users.find((user) => user.id === optionValue)
+    if (!selectedUser) {
+      return setState({ selectedUser: null, searchTerm: '' })
+    }
     if (props.autoSelect && props.multiple) {
       const newUser = {
         ...selectedUser
       }
       const selectedUsers = [...state.selectedUsers, newUser]
       props.onChange(selectedUsers)
-      setState({ selectedUsers, selectedUser, searchTerm: '' })
-      return
+      return setState({ selectedUsers, selectedUser, searchTerm: '' })
     }
     setState({ selectedUser, searchTerm: '' })
     if (!props.multiple) {

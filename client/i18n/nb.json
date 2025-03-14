@@ -521,7 +521,10 @@
     "customQuerySuccessText": "Din egendefinerte rapport er klar med {{count}} registrerte tidsoppføringer som samsvarer med filterkriteriene dine.",
     "loadingCustomReport": "Laster inn rapport med egendefinert spørring",
     "customQueryDateRangeDisabled": "Du kan ikke filtrere på Startdato eller Sluttdato når du filtrerer etter Uke, Måned eller År.",
-    "customQueryWeekMonthYearDisabled": "Du kan ikke filtrere på Uke, Måned eller År når du bruker Startdato og Sluttdato."
+    "customQueryWeekMonthYearDisabled": "Du kan ikke filtrere på Uke, Måned eller År når du bruker Startdato og Sluttdato.",
+    "generatingReportProgressLabel": "Genererer rapport for {{text}} ({{description}})",
+    "customQueryDescription": "Tilpass rapporten med egne filtre, som startdato/sluttdato, prosjekt eller ansatte.",
+    "summaryDescription": "Få en tabelloversikt over tidsregistreringer per ansatt og periode."
   },
   "common": {
     "datePicker": {

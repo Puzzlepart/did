@@ -30,7 +30,8 @@ export const CustomQueryTab: TabComponent = (props) => {
   const {
     t,
     formControl,
-    executeReport,
+    onReset,
+    onExecuteReport,
     loading,
     items,
     collapsed,
@@ -140,13 +141,13 @@ export const CustomQueryTab: TabComponent = (props) => {
               secondary
               text={t('reports.resetFilters')}
               disabled={loading || !isFilterCriterasValid}
-              onClick={formControl.model.reset}
+              onClick={onReset}
             />
             <DynamicButton
               primary
               text={t('reports.runReport')}
               disabled={loading || !isFilterCriterasValid}
-              onClick={executeReport}
+              onClick={onExecuteReport}
             />
           </div>
         </FormControl>

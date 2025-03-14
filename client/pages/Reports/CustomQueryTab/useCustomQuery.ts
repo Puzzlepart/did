@@ -49,7 +49,7 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
    * and then executes the query with the provided variables. Once the query is completed, 
    * it triggers the `onQueryCompleted` callback.
    */
-  const executeReport = useCallback(() => {
+  const onExecuteReport = useCallback(() => {
     queryBeginRef.current = new Date()
     onCollapse()
     executeQuery({
@@ -61,9 +61,9 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
   }, [query])
 
   return {
-    executeReport,
+    onExecuteReport,
     loading,
     items: _.get(mapTimeEntries({ ...data }), 'timeEntries', []),
-    isQueryCalled: Boolean(queryBeginRef.current)
+    queryBegin: queryBeginRef
   }
 }

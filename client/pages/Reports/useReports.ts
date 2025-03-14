@@ -51,10 +51,14 @@ export function useReports() {
       custom: [
         CustomQueryTab,
         {
-          text: t('reports.customQueryHeaderText')
-        }
+          text: t('reports.customQueryHeaderText'),
+          description: t('reports.customQueryDescription')
+        } 
       ],
-      summary: [SummaryView, t('reports.summaryHeaderText')]
+      summary: [SummaryView, {
+        text:t('reports.summaryHeaderText'),
+        description: t('reports.summaryDescription')
+      }]
     }),
     [queryTabs]
   )

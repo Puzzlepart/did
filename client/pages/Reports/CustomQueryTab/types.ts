@@ -18,7 +18,12 @@ export type UseCustomQueryTabReturnType = {
   /**
    * Callback to execute the report query
    */
-  executeReport: () => void
+  onExecuteReport: () => void
+
+  /**
+   * Callback to reset the query
+   */
+  onReset: () => void
 
   /**
    * Indicates if the query is currently loading

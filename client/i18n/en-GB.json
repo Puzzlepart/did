@@ -523,7 +523,10 @@
     "customQuerySuccessText": "Your custom report is ready with {{count}} recorded time entries matching your filter criterias.",
     "loadingCustomReport": "Loading reporth with custom query",
     "customQueryDateRangeDisabled": "You cannot use Start Date or End Date while filtering by Week, Month, or Year.",
-    "customQueryWeekMonthYearDisabled": "You cannot filter by Week, Month, or Year while using Start Date and End Date."
+    "customQueryWeekMonthYearDisabled": "You cannot filter by Week, Month, or Year while using Start Date and End Date.",
+    "generatingReportProgressLabel": "Generating report for {{text}} ({{description}}",
+    "customQueryDescription": "Customize the report with your own filters, such as start date and end date, project, or employees.",
+    "summaryDescription": "Get a tabular overview of time entries per employee and period."
   },
   "common": {
     "datePicker": {

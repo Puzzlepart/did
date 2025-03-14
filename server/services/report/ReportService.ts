@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/no-array-callback-reference */
+import createDebug from 'debug'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ProjectService, UserService } from '..'
@@ -16,6 +17,7 @@ import {
   TimeEntryService
 } from '../mongo'
 import { Report, IGenerateReportParameters } from './types'
+const debug = createDebug('server/services/report/ReportService')
 
 /**
  * Report service
@@ -122,8 +124,9 @@ export class ReportService {
   ): Promise<Report> {
     try {
       const query_ = this._generateQuery(query, preset)
-      // eslint-disable-next-line no-console
-      console.log('ReportService -> getReport -> query_', query_)
+      debug('[getReport]', 'Generating report with query:', query_, {
+        userId: this.context.userId
+      })
       const [timeEntries, projectsData, users] = await Promise.all([
         this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
@@ -183,12 +186,13 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const q = {
+      const query = {
         userId,
         ...this._generatePresetQuery(preset)
       }
+      debug('[getUserReport]', 'Generating report with query:', query)
       const [timeEntries, { projects, customers }] = await Promise.all([
-        this._timeEntrySvc.find(q),
+        this._timeEntrySvc.find(query),
         this._projectSvc.getProjectsData()
       ])
       const report = this._generateReport({
@@ -252,7 +256,9 @@ export class ReportService {
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
     const date = new DateObject().toObject()
-    return (
+
+    debug('[_generatePresetQuery]', 'Generating query from preset:', preset)
+    const query = (
       {
         LAST_MONTH: {
           month:
@@ -273,5 +279,7 @@ export class ReportService {
         }
       }[preset] || {}
     )
+    debug('[_generatePresetQuery]', 'Generated query ', query, 'from preset:', preset)
+    return query
   }
 }
