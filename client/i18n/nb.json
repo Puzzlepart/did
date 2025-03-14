@@ -507,7 +507,10 @@
     "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer) for {{preset}}...",
     "searchCount": "Viser {{count}} av {{total}} tidsregistreringer",
     "viewColumnsLabel": " Vis eller skjul kolonner",
-    "periodColumnDescription": "Viser perioden for oppføringen i uke, måned og år format."
+    "periodColumnDescription": "Viser perioden for oppføringen i uke, måned og år format.",
+    "runReport": "Hent rapport",
+    "customQueryHeaderText": "Egendefinert spørring",
+    "filterCriteria": "Filtreringskriterier"
   },
   "common": {
     "datePicker": {
@@ -860,7 +863,8 @@
     "preferredLanguage_nb": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn-NO": "🇳🇴 Norsk (bokmål)",
     "preferredLanguage_nn": "🇳🇴 Norsk (nynorsk)",
-    "currencySymbol": "kr"
+    "currencySymbol": "kr",
+    "month": "Måned"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

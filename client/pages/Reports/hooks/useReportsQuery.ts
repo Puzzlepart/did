@@ -21,7 +21,7 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
   const [query, { data, loading }] = useLazyQuery(
     queryPreset?.query || default_query,
     {
-      fetchPolicy: 'no-cache'
+      fetchPolicy: 'no-cache',
     }
   )
 
@@ -45,8 +45,8 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
   )
 
   useEffect(() => {
-    if (_.isEmpty(queryPreset?.reportLinks)) {
-      query({ variables: queryPreset?.variables })
-    }
+    if (!queryPreset) return
+    if (!_.isEmpty(queryPreset?.reportLinks)) return
+    query({ variables: queryPreset?.variables })
   }, [queryPreset])
 }
