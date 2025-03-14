@@ -66,6 +66,7 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         enableViewColumnsEdit
         persistViewColumns={ReportsList.displayName}
         filters={props.filters}
+        error={props.error}
       />
     </div>
   )

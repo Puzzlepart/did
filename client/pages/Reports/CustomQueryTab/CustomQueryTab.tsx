@@ -13,9 +13,11 @@ import {
   InputControl,
   ProjectPickerControl,
   TabComponent,
+  TimespanValidator,
   UserPickerControl
 } from 'components'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils'
 import { ReportsList } from '../ReportsList'
 import styles from './CustomQueryTab.module.scss'
@@ -28,15 +30,16 @@ import { useCustomQueryTab } from './useCustomQueryTab'
  * @category Reports
  */
 export const CustomQueryTab: TabComponent = (props) => {
+  const { t } = useTranslation()
   const {
-    t,
     formControl,
     loading,
     items,
     collapsed,
     isQueryCalled,
     addManagerUsersAction,
-    isDisabled
+    isDisabled,
+    error
   } = useCustomQueryTab(props.id)
 
   return (
@@ -70,14 +73,40 @@ export const CustomQueryTab: TabComponent = (props) => {
           <div className={styles.formRow}>
             <DateControl
               {...formControl.register('startDateTime', {
-                validators: [DateBeforeValidator(t, formControl.model.value('endDateTime'))]
+                validators: [
+                  DateBeforeValidator(
+                    t,
+                    formControl.model.value('endDateTime')
+                  ),
+                  TimespanValidator(
+                    t,
+                    {
+                      name: t('common.endDate'),
+                      value: formControl.model.value('endDateTime')
+                    },
+                    { maxDays: 2000 }
+                  )
+                ]
               })}
               label={t('common.startDate')}
               {...isDisabled('startDateTime')}
             />
             <DateControl
               {...formControl.register('endDateTime', {
-                validators: [DateAfterValidator(t, formControl.model.value('startDateTime'))]
+                validators: [
+                  DateAfterValidator(
+                    t,
+                    formControl.model.value('startDateTime')
+                  ),
+                  TimespanValidator(
+                    t,
+                    {
+                      name: t('common.startDate'),
+                      value: formControl.model.value('startDateTime')
+                    },
+                    { maxDays: 2000 }
+                  )
+                ]
               })}
               label={t('common.endDate')}
               {...isDisabled('endDateTime')}
@@ -144,6 +173,7 @@ export const CustomQueryTab: TabComponent = (props) => {
         hidden={!isQueryCalled}
         loading={loading && t('reports.loadingCustomReport')}
         items={items}
+        error={error}
       />
     </div>
   )

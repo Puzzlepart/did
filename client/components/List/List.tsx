@@ -26,7 +26,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
       <ListContext.Provider value={context}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
           <ShimmeredDetailsList {...listProps} />
-          <EmptyMessage items={listProps.items} />
+          <EmptyMessage {...listProps} />
           <ColumnHeaderContextMenu />
           <ListFilterPanel />
           <ViewColumnsPanel />

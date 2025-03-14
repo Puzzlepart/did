@@ -194,4 +194,9 @@ export interface IListProps<T = any>
    * Enable filtering of the list.
    */
   filters?: boolean
+
+  /**
+   * Error state. If set, the list will display an error message.
+   */
+  error?: Error
 }

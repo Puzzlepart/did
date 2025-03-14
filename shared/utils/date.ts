@@ -6,7 +6,7 @@
  *
  * @module DateUtils
  */
-import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
+import $dayjs, { ConfigType, PluginFunc, UnitType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 import 'dayjs/locale/nn'
@@ -381,6 +381,10 @@ export class DateUtils {
    */
   public isBefore(a: DateInput, b?: DateInput) {
     return $dayjs(a).isBefore(b)
+  }
+
+  public diff(a: DateInput, b: DateInput, unit: UnitType) {
+    return $dayjs(a).diff(b, unit)
   }
 
   /**

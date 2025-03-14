@@ -892,7 +892,9 @@
     "projectIdLabel": "Project ID",
     "and": " and ",
     "invalidDateAfterValidation": "Date must be after {{date}}.",
-    "invalidDateBeforeValidation": "Date must be before {{date}}."
+    "invalidDateBeforeValidation": "Date must be before {{date}}.",
+    "invalidTimespanValidationMaxDays": "It should be a maximum of {{days}} days between this date and {{name}}.",
+    "invalidTimespanValidationMinDays": "It should be a minimum of {{days}} days between this date and {{name}}."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
@@ -1014,5 +1016,11 @@
       "moveUp": "Move column up",
       "moveDown": "Move column down"
     }
+  },
+  "apollo": {
+    "genericErrorName": "An error occurred",
+    "genericErrorMesssage": "An error occurred while processing your request. Please try again later.",
+    "maximumCallStackSizeExceededName": "An error occurred",
+    "maximumCallStackSizeExceededMessage": "An error occurred while processing your request. You might be requesting too much data at once. Please try again later, or do a more specific search."
   }
 }

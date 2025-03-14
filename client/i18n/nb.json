@@ -889,7 +889,9 @@
     "projectIdLabel": "Prosjektnøkkel",
     "and": " og ",
     "invalidDateAfterValidation": "Dato må være etter {{date}}.",
-    "invalidDateBeforeValidation": "Dato må være før {{date}}."
+    "invalidDateBeforeValidation": "Dato må være før {{date}}.",
+    "invalidTimespanValidationMaxDays": "Det måre være maksimalt {{days}} dager mellom denne datoen og {{name}}.",
+    "invalidTimespanValidationMinDays": "Det må være minimum {{days}} dager mellom denne datoen og {{name}}."
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
@@ -1011,5 +1013,11 @@
       "moveUp": "Flytt kolonnen opp",
       "moveDown": "Flytt kolonnen ned"
     }
+  },
+  "apollo": {
+    "genericErrorName": "En feil oppstod",
+    "genericErrorMesssage": "En feil oppstod under behandlingen av forespørselen din. Vennligst prøv igjen senere.",
+    "maximumCallStackSizeExceededName": "En feil oppstod",
+    "maximumCallStackSizeExceededMessage": "En feil oppstod under behandlingen av forespørselen din. Du kan be om for mye data på en gang. Vennligst prøv igjen senere, eller gjør et mer spesifikt søk."
   }
 }

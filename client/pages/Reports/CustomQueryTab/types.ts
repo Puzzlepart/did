@@ -1,15 +1,9 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { IFormControlProps, IUserPickerProps } from 'components'
-import { TFunction } from 'react-i18next'
 import { useBoolean } from 'usehooks-ts'
 import { ReportsQuery } from '../../../types'
 
 export type UseCustomQueryTabReturnType = {
-  /**
-   * Translation function
-   */
-  t: TFunction
-
   /**
    * Form control properties
    */
@@ -46,4 +40,9 @@ export type UseCustomQueryTabReturnType = {
    * @param key - The key to check if it is disabled
    */
   isDisabled?(key: keyof ReportsQuery): { disabled: boolean; title: string }
+
+  /**
+   * Error object returned from the query.
+   */
+  error?: Error
 }

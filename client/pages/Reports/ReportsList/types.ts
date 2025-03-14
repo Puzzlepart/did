@@ -2,7 +2,7 @@ import { IListProps, ITabProps } from 'components'
 
 export interface IReportsListProps
   extends ITabProps,
-    Partial<Pick<IListProps, 'items'>> {
+    Partial<Pick<IListProps, 'items' | 'error'>> {
   /**
    * Loading state. If true, a progress bar will be displayed
    * with this as the label.

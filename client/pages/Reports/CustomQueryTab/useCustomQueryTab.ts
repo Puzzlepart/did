@@ -30,7 +30,7 @@ export const useCustomQueryTab: ComponentLogicHook<
     filterCriterias,
     CustomQueryTab
   )
-  const { onExecuteReport, loading, items, queryBegin } = useCustomQuery(
+  const { onExecuteReport, loading, items, queryBegin, error } = useCustomQuery(
     filterCriterias.value(),
     collapsed.setTrue
   )
@@ -129,13 +129,13 @@ export const useCustomQueryTab: ComponentLogicHook<
   }
 
   return {
-    t,
     formControl,
     loading,
     items,
     collapsed,
     isQueryCalled: Boolean(queryBegin.current),
     addManagerUsersAction,
-    isDisabled
+    isDisabled,
+    error
   }
 }

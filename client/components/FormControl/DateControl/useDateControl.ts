@@ -14,7 +14,7 @@ export function useDateControl(props: IDateControlProps) {
 
   const onChange = useCallback(
     (value) => {
-      if(!props.model) return
+      if (!props.model) return
       context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
       props.model.set(props.name, value)
     },

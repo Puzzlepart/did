@@ -140,6 +140,7 @@ export class ReportService {
       })
       return report
     } catch (error) {
+      debug('[getReport]', 'Error generating report:', error)
       throw error
     }
   }
