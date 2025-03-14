@@ -42,43 +42,7 @@ export class ReportService {
     private readonly _timeEntrySvc: TimeEntryService,
     private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
     private readonly _confirmedPeriodSvc: ConfirmedPeriodsService
-  ) {}
-
-  /**
-   * Generate preset query from the provided preset.
-   *
-   * Supported presets are:
-   * * LAST_MONTH
-   * * CURRENT_MONTH
-   * * LAST_YEAR
-   * * CURRENT_YEAR
-   *
-   * @param preset - Query preset
-   */
-  private _generatePresetQuery(preset: ReportsQueryPreset) {
-    const date = new DateObject().toObject()
-    return (
-      {
-        LAST_MONTH: {
-          month:
-            date.month === 1
-              ? 12
-              : new DateObject().add('-1m').toObject().month - 1,
-          year: date.month === 1 ? date.year - 1 : date.year
-        },
-        CURRENT_MONTH: {
-          month: date.month,
-          year: date.year
-        },
-        LAST_YEAR: {
-          year: date.year - 1
-        },
-        CURRENT_YEAR: {
-          year: date.year
-        }
-      }[preset] || {}
-    )
-  }
+  ) { }
 
   /**
    * Generates report by sorting time entries by date, and then
@@ -158,7 +122,7 @@ export class ReportService {
       const query_ = _.omit(
         {
           ...this._generatePresetQuery(preset),
-          ...query
+          ...this._generateQuery(query)
         },
         'preset'
       )
@@ -239,5 +203,67 @@ export class ReportService {
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * Generates a query object from the provided query.
+   * 
+   * Supported query fields are:
+   * * `userIds`
+   * * `startDateTime`
+   * * `endDateTime`
+   * * `week`
+   * * `month`
+   * * `year`
+   * 
+   * @param query Query object
+   */
+  private _generateQuery(query: ReportsQuery = {}) {
+    return _.pick({
+      userId: {
+        $in: query.userIds
+      },
+      startDateTime: { $gte: new Date(query.startDateTime) },
+      endDateTime: { $lte: new Date(query.endDateTime) },
+      week: { $eq: query.week },
+      month: { $eq: query.month },
+      year: { $eq: query.year }
+    }, [...Object.keys(query), query?.userIds && 'userId'])
+  }
+
+  /**
+   * Generate preset query from the provided preset.
+   *
+   * Supported presets are:
+   * * `LAST_MONTH`
+   * * `CURRENT_MONTH`
+   * * `LAST_YEAR`
+   * * `CURRENT_YEAR`
+   *
+   * @param preset - Query preset
+   */
+  private _generatePresetQuery(preset: ReportsQueryPreset) {
+    const date = new DateObject().toObject()
+    return (
+      {
+        LAST_MONTH: {
+          month:
+            date.month === 1
+              ? 12
+              : new DateObject().add('-1m').toObject().month - 1,
+          year: date.month === 1 ? date.year - 1 : date.year
+        },
+        CURRENT_MONTH: {
+          month: date.month,
+          year: date.year
+        },
+        LAST_YEAR: {
+          year: date.year - 1
+        },
+        CURRENT_YEAR: {
+          year: date.year
+        }
+      }[preset] || {}
+    )
   }
 }
