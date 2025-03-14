@@ -84,7 +84,7 @@ export const CustomQueryTab: TabComponent = (props) => {
                       name: t('common.endDate'),
                       value: formControl.model.value('endDateTime')
                     },
-                    { maxDays: 2000 }
+                    { maxDays: 1.5 * 365 } // 1.5 years
                   )
                 ]
               })}
@@ -104,7 +104,7 @@ export const CustomQueryTab: TabComponent = (props) => {
                       name: t('common.startDate'),
                       value: formControl.model.value('startDateTime')
                     },
-                    { maxDays: 2000 }
+                    { maxDays: 1.5 * 365 } // 1.5 years
                   )
                 ]
               })}
