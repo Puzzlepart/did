@@ -31,7 +31,7 @@ function getResource(entry: TimeEntry, users: User[]): User {
 export const mapTimeEntries = (
   data: Partial<IReportsData> = {}
 ): Partial<IReportsData> => {
-  const { timeEntries, users } = data
+  const { timeEntries, users } = { ...data }
   if (timeEntries) {
     data.timeEntries = timeEntries.map((entry) => ({
       ...entry,

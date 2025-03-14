@@ -42,6 +42,13 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
     )
   }, [queryBeginRef?.current])
 
+  /**
+   * Executes the report query.
+   * 
+   * This function sets the current date and time to `queryBeginRef`, collapses the UI, 
+   * and then executes the query with the provided variables. Once the query is completed, 
+   * it triggers the `onQueryCompleted` callback.
+   */
   const executeReport = useCallback(() => {
     queryBeginRef.current = new Date()
     onCollapse()
@@ -56,7 +63,7 @@ export function useCustomQuery(query: ReportsQuery, onCollapse: () => void) {
   return {
     executeReport,
     loading,
-    items: _.get(mapTimeEntries(data), 'timeEntries', []),
+    items: _.get(mapTimeEntries({ ...data }), 'timeEntries', []),
     isQueryCalled: Boolean(queryBeginRef.current)
   }
 }
