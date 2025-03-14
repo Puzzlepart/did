@@ -485,6 +485,12 @@
     "roleNotDeletable": "This role cannot be deleted because it is essential or has protected status."
   },
   "reports": {
+    "apollo": {
+      "genericErrorName": "An error occurred while generating the report",
+      "genericErrorMesssage": "An error occurred while processing your request. Please try again later.",
+      "maximumCallStackSizeExceededName": "An error occurred while generating the report",
+      "maximumCallStackSizeExceededMessage": "An error occurred while processing your request. You might be requesting too much data at once. Please try again later, or do a more specific search."
+    },
     "generatingReportProgressText": "Please wait while we generate the report for you...",
     "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no time entries available for ``{{text}}``.",
@@ -1016,11 +1022,5 @@
       "moveUp": "Move column up",
       "moveDown": "Move column down"
     }
-  },
-  "apollo": {
-    "genericErrorName": "An error occurred",
-    "genericErrorMesssage": "An error occurred while processing your request. Please try again later.",
-    "maximumCallStackSizeExceededName": "An error occurred",
-    "maximumCallStackSizeExceededMessage": "An error occurred while processing your request. You might be requesting too much data at once. Please try again later, or do a more specific search."
   }
 }

@@ -483,6 +483,12 @@
     "roleNotDeletable": "Denne rollen kan ikke slettes fordi den er viktig eller har beskyttet status."
   },
   "reports": {
+    "apollo": {
+      "genericErrorName": "En feil oppstod under generering av rapporten",
+      "genericErrorMesssage": "En feil oppstod under behandlingen av forespørselen din. Vennligst prøv igjen senere.",
+      "maximumCallStackSizeExceededName": "En feil oppstod under generering av rapporten",
+      "maximumCallStackSizeExceededMessage": "En feil oppstod under behandlingen av forespørselen din. Du kan be om for mye data på en gang. Vennligst prøv igjen senere, eller gjør et mer spesifikt søk."
+    },
     "generatingReportProgressText": "Vennligst vent mens vi genererer rapporten for deg...",
     "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene ...",
     "noEntriesText": "Det er ingen tidsoppføringar tilgjengelig for ``{{text}}``.",
@@ -1013,11 +1019,5 @@
       "moveUp": "Flytt kolonnen opp",
       "moveDown": "Flytt kolonnen ned"
     }
-  },
-  "apollo": {
-    "genericErrorName": "En feil oppstod",
-    "genericErrorMesssage": "En feil oppstod under behandlingen av forespørselen din. Vennligst prøv igjen senere.",
-    "maximumCallStackSizeExceededName": "En feil oppstod",
-    "maximumCallStackSizeExceededMessage": "En feil oppstod under behandlingen av forespørselen din. Du kan be om for mye data på en gang. Vennligst prøv igjen senere, eller gjør et mer spesifikt søk."
   }
 }
