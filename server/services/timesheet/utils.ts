@@ -1,61 +1,12 @@
 import _ from 'lodash'
 import { ClientEventInput, EventObject, Project } from '../../graphql'
-import { tryParseJson } from '../../utils'
-import {
-  ProjectResourcesExtensionId,
-  ProjectRoleDefinitionsExtensionId
-} from '../mongo/project'
 import { ITimesheetPeriodData } from './types'
-
-/**
- * Finds the project role for a given project based on the user ID in the configuration.
- *
- * @param projects - The projects to search for the role.
- * @param projectId - The project ID
- * @param userId - The user ID to search for in the project resources.
- *
- * @returns An object containing the project role name and hourly rate if found, otherwise null.
- */
-const findProjectRole = (
-  projects: Project[],
-  projectId: string,
-  userId: string
-) => {
-  const project = _.find(projects, ({ _id }) => _id === projectId)
-  if (!project) return null
-  const extensions = tryParseJson(
-    _.get(project, 'extensions', { default: 'null' }) as string
-  )
-  if (!extensions) return null
-  const resources = _.get(
-    extensions,
-    `${ProjectResourcesExtensionId}.properties.resources`,
-    { default: [] }
-  )
-  const roleDefinitions = _.get(
-    extensions,
-    `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
-    { default: [] }
-  )
-  const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
-  const resource = _.find(resources, ({ id }) => id === userId)
-  if (!resource) {
-    if (!defaultRole) return null
-    return {
-      name: defaultRole.name,
-      hourlyRate: defaultRole.hourlyRate
-    }
-  }
-  return {
-    name: resource.projectRole,
-    hourlyRate: resource.hourlyRate
-  }
-}
+import { eventExtensions, TimeEntryExtensionContext } from './extensions'
 
 /**
  * Map matched events. Takes the matched events retrieved from the client, and combines
  * the event data with the actual events from Microsoft Graph. Also adds additional data
- * to the events from the period.
+ * to the events from the period using the dynamic extension system.
  *
  * @param period - The period
  * @param matchedEvents - The matched events retrieved from the client
@@ -73,18 +24,30 @@ export function mapMatchedEvents(
   const events_ = []
   const hours = matchedEvents.reduce((hours, matchedEvent) => {
     const event = _.find(events, ({ id }) => id === matchedEvent.id)
-    if (!event) return null
-    events_.push({
+    if (!event) return hours
+
+    // Create base event by merging matched event and original event
+    const baseEvent = {
       ...matchedEvent,
-      ...event,
-      startDateTime: matchedEvent.startDateTime ?? event.startDateTime,
-      endDateTime: matchedEvent.endDateTime ?? event.endDateTime,
-      duration: matchedEvent.duration ?? event.duration,
-      originalDuration: matchedEvent.originalDuration ?? event.originalDuration,
-      adjustedMinutes: matchedEvent.adjustedMinutes ?? event.adjustedMinutes,
-      role: findProjectRole(projects, matchedEvent.projectId, period.userId)
-    })
-    return hours + event.duration
+      ...event
+    }
+
+    // Extension context
+    const extensionContext: TimeEntryExtensionContext = {
+      period,
+      matchedEvent,
+      originalEvent: event,
+      projects
+    }
+
+    // Apply all registered extensions to the event
+    const extendedEvent = eventExtensions.reduce((extendedEvent, extension) => ({
+      ...extendedEvent,
+      ...extension.apply(extendedEvent, extensionContext)
+    }), baseEvent)
+
+    events_.push(extendedEvent)
+    return hours + (extendedEvent.duration || 0)
   }, 0)
 
   /**
