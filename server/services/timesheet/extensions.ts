@@ -22,12 +22,6 @@ export interface TimeEntryExtension {
         event: ClientEventInput & EventObject,
         context: TimeEntryExtensionContext
     ) => Record<string, any>
-
-    /**
-     * Additional properties or methods for
-     * the extension class.
-     */
-    [key: string]: any
 }
 
 /**
@@ -37,32 +31,13 @@ export interface TimeEntryExtension {
 export const ProjectRoleEventExtension: TimeEntryExtension = {
     apply(_event, { period, matchedEvent, projects }) {
         if (!matchedEvent.projectId) return {}
-        const role = this.findProjectRole(projects, matchedEvent.projectId, period.userId)
-        if (!role) return {}
-
-        return { role }
-    },
-
-    /**
-     * Finds the project role for a given project based on the user ID.
-     * 
-     * @param projects - The projects to search for the role
-     * @param projectId - The project ID
-     * @param userId - The user ID to search for in the project resources
-     * @returns An object containing the project role name and hourly rate if found, otherwise null
-     */
-    findProjectRole(
-        projects: Project[],
-        projectId: string,
-        userId: string
-    ) {
-        const project = _.find(projects, ({ _id }) => _id === projectId)
-        if (!project) return null
+        const project = _.find(projects, ({ _id }) => _id === matchedEvent.projectId)
+        if (!project) return {}
 
         const extensions = tryParseJson(
             _.get(project, 'extensions', { default: 'null' }) as string
         )
-        if (!extensions) return null
+        if (!extensions) return {}
 
         const resources = _.get(
             extensions,
@@ -76,19 +51,23 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
         )
 
         const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
-        const resource = _.find(resources, ({ id }) => id === userId)
+        const resource = _.find(resources, ({ id }) => id === period.userId)
 
         if (!resource) {
-            if (!defaultRole) return null
+            if (!defaultRole) return {}
             return {
-                name: defaultRole.name,
-                hourlyRate: defaultRole.hourlyRate
+                role: {
+                    name: defaultRole.name,
+                    hourlyRate: defaultRole.hourlyRate
+                }
             }
         }
 
         return {
-            name: resource.projectRole,
-            hourlyRate: resource.hourlyRate
+            role: {
+                name: resource.projectRole,
+                hourlyRate: resource.hourlyRate
+            }
         }
     }
 }
