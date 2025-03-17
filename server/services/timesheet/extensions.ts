@@ -34,7 +34,10 @@ export interface TimeEntryExtension {
 export const ProjectRoleEventExtension: TimeEntryExtension = {
   apply(_event, { period, matchedEvent, projects }) {
     if (!matchedEvent.projectId) return {}
-    const project = _.find(projects, ({ _id }) => _id === matchedEvent.projectId)
+    const project = _.find(
+      projects,
+      ({ _id }) => _id === matchedEvent.projectId
+    )
     if (!project) return {}
 
     const extensions = tryParseJson(
