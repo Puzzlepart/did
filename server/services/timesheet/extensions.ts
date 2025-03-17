@@ -2,16 +2,19 @@ import { ClientEventInput, EventObject, Project } from '../../graphql'
 import { ITimesheetPeriodData } from './types'
 import _ from 'lodash'
 import { tryParseJson } from '../../utils'
-import { ProjectResourcesExtensionId, ProjectRoleDefinitionsExtensionId } from '../mongo/project'
+import {
+  ProjectResourcesExtensionId,
+  ProjectRoleDefinitionsExtensionId
+} from '../mongo/project'
 
 /**
  * Context object passed to extensions with all the data they might need
  */
 export type TimeEntryExtensionContext = {
-    period: ITimesheetPeriodData
-    matchedEvent: ClientEventInput
-    originalEvent: EventObject
-    projects: Project[]
+  period: ITimesheetPeriodData
+  matchedEvent: ClientEventInput
+  originalEvent: EventObject
+  projects: Project[]
 }
 
 /**
@@ -39,16 +42,16 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
         )
         if (!extensions) return {}
 
-        const resources = _.get(
-            extensions,
-            `${ProjectResourcesExtensionId}.properties.resources`,
-            { default: [] }
-        )
-        const roleDefinitions = _.get(
-            extensions,
-            `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
-            { default: [] }
-        )
+    const resources = _.get(
+      extensions,
+      `${ProjectResourcesExtensionId}.properties.resources`,
+      { default: [] }
+    )
+    const roleDefinitions = _.get(
+      extensions,
+      `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
+      { default: [] }
+    )
 
         const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
         const resource = _.find(resources, ({ id }) => id === period.userId)
@@ -70,6 +73,12 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
             }
         }
     }
+
+    return {
+      name: resource.projectRole,
+      hourlyRate: resource.hourlyRate
+    }
+  }
 }
 
 /**
@@ -77,23 +86,24 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
  * Handles correct precedence of different duration values.
  */
 export const DurationEventExtension: TimeEntryExtension = {
-    apply(_event, { matchedEvent, originalEvent }) {
-        return {
-            startDateTime: matchedEvent.startDateTime ?? originalEvent.startDateTime,
-            endDateTime: matchedEvent.endDateTime ?? originalEvent.endDateTime,
-            duration: matchedEvent.duration ?? originalEvent.duration,
-            originalDuration: matchedEvent.originalDuration ?? originalEvent.originalDuration,
-            adjustedMinutes: matchedEvent.adjustedMinutes ?? originalEvent.adjustedMinutes
-        }
+  apply(_event, { matchedEvent, originalEvent }) {
+    return {
+      startDateTime: matchedEvent.startDateTime ?? originalEvent.startDateTime,
+      endDateTime: matchedEvent.endDateTime ?? originalEvent.endDateTime,
+      duration: matchedEvent.duration ?? originalEvent.duration,
+      originalDuration:
+        matchedEvent.originalDuration ?? originalEvent.originalDuration,
+      adjustedMinutes:
+        matchedEvent.adjustedMinutes ?? originalEvent.adjustedMinutes
     }
+  }
 }
-
 
 /**
  * Registry of all event extensions.
  * Add new extension classes to this array to automatically apply them to events.
  */
 export const eventExtensions = [
-    DurationEventExtension,
-    ProjectRoleEventExtension
+  DurationEventExtension,
+  ProjectRoleEventExtension
 ]
