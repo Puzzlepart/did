@@ -21,10 +21,10 @@ export type TimeEntryExtensionContext = {
  * Interface for time entry extensions
  */
 export interface TimeEntryExtension {
-    apply: (
-        event: ClientEventInput & EventObject,
-        context: TimeEntryExtensionContext
-    ) => Record<string, any>
+  apply: (
+    event: ClientEventInput & EventObject,
+    context: TimeEntryExtensionContext
+  ) => Record<string, any>
 }
 
 /**
@@ -32,15 +32,15 @@ export interface TimeEntryExtension {
  * Adds role properties to events based on project resources and role definitions.
  */
 export const ProjectRoleEventExtension: TimeEntryExtension = {
-    apply(_event, { period, matchedEvent, projects }) {
-        if (!matchedEvent.projectId) return {}
-        const project = _.find(projects, ({ _id }) => _id === matchedEvent.projectId)
-        if (!project) return {}
+  apply(_event, { period, matchedEvent, projects }) {
+    if (!matchedEvent.projectId) return {}
+    const project = _.find(projects, ({ _id }) => _id === matchedEvent.projectId)
+    if (!project) return {}
 
-        const extensions = tryParseJson(
-            _.get(project, 'extensions', { default: 'null' }) as string
-        )
-        if (!extensions) return {}
+    const extensions = tryParseJson(
+      _.get(project, 'extensions', { default: 'null' }) as string
+    )
+    if (!extensions) return {}
 
     const resources = _.get(
       extensions,
@@ -53,30 +53,24 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
       { default: [] }
     )
 
-        const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
-        const resource = _.find(resources, ({ id }) => id === period.userId)
+    const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
+    const resource = _.find(resources, ({ id }) => id === period.userId)
 
-        if (!resource) {
-            if (!defaultRole) return {}
-            return {
-                role: {
-                    name: defaultRole.name,
-                    hourlyRate: defaultRole.hourlyRate
-                }
-            }
+    if (!resource) {
+      if (!defaultRole) return {}
+      return {
+        role: {
+          name: defaultRole.name,
+          hourlyRate: defaultRole.hourlyRate
         }
-
-        return {
-            role: {
-                name: resource.projectRole,
-                hourlyRate: resource.hourlyRate
-            }
-        }
+      }
     }
 
     return {
-      name: resource.projectRole,
-      hourlyRate: resource.hourlyRate
+      role: {
+        name: resource.projectRole,
+        hourlyRate: resource.hourlyRate
+      }
     }
   }
 }
