@@ -103,7 +103,7 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Get projects from the database.
-   * 
+   *
    * @param query - Query for the projects
    */
   public getProjects(query?: FilterQuery<Project>): Promise<Project[]> {
@@ -138,8 +138,8 @@ export class ProjectService extends MongoDocumentService<Project> {
             this.getProjects(query),
             mergedOptions.includeCustomers
               ? (this._customerSvc.getCustomers(
-                query?.customerKey && { key: query.customerKey }
-              ) as Promise<Customer[]>)
+                  query?.customerKey && { key: query.customerKey }
+                ) as Promise<Customer[]>)
               : Promise.resolve([]),
             mergedOptions.includeLabels
               ? this._labelSvc.getLabels()

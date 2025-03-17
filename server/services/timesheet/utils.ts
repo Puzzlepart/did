@@ -1,20 +1,26 @@
 import _ from 'lodash'
 import { ClientEventInput, EventObject, Project } from '../../graphql'
 import { tryParseJson } from '../../utils'
-import { ProjectResourcesExtensionId, ProjectRoleDefinitionsExtensionId } from '../mongo/project'
+import {
+  ProjectResourcesExtensionId,
+  ProjectRoleDefinitionsExtensionId
+} from '../mongo/project'
 import { ITimesheetPeriodData } from './types'
-
 
 /**
  * Finds the project role for a given project based on the user ID in the configuration.
  *
  * @param projects - The projects to search for the role.
- * @param projectId - The project ID 
+ * @param projectId - The project ID
  * @param userId - The user ID to search for in the project resources.
  *
  * @returns An object containing the project role name and hourly rate if found, otherwise null.
  */
-const findProjectRole = ( projects: Project[], projectId: string, userId: string) => {
+const findProjectRole = (
+  projects: Project[],
+  projectId: string,
+  userId: string
+) => {
   const project = _.find(projects, ({ _id }) => _id === projectId)
   if (!project) return null
   const extensions = tryParseJson(
@@ -32,10 +38,7 @@ const findProjectRole = ( projects: Project[], projectId: string, userId: string
     { default: [] }
   )
   const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
-  const resource = _.find(
-    resources,
-    ({ id }) => id === userId
-  )
+  const resource = _.find(resources, ({ id }) => id === userId)
   if (!resource) {
     if (!defaultRole) return null
     return {

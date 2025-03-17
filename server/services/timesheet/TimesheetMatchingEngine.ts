@@ -2,9 +2,7 @@ import { findBestMatch } from 'string-similarity'
 import _ from 'underscore'
 import s from 'underscore.string'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
-import {
-  ProjectsData
-} from '../mongo/project'
+import { ProjectsData } from '../mongo/project'
 import { ProjectMatch } from './types'
 
 /**
