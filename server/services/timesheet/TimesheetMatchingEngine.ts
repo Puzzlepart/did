@@ -1,12 +1,8 @@
-import get from 'get-value'
 import { findBestMatch } from 'string-similarity'
 import _ from 'underscore'
 import s from 'underscore.string'
-import { Customer, EventObject, Project } from '../../graphql/resolvers/types'
-import { tryParseJson } from '../../utils'
+import { Customer, EventObject } from '../../graphql/resolvers/types'
 import {
-  ProjectResourcesExtensionId,
-  ProjectRoleDefinitionsExtensionId,
   ProjectsData
 } from '../mongo/project'
 import { ProjectMatch } from './types'
@@ -203,10 +199,6 @@ export default class TimesheetMatchingEngine {
       )
     }
 
-    if (event.project) {
-      event.role = this._findProjectRole(event.project)
-    }
-
     // If a customer is found but no project is found, look for project
     // suggestions based on the customer and a project key
     if (event.customer && !event.project) {
@@ -225,46 +217,6 @@ export default class TimesheetMatchingEngine {
     // Fix the duration of the event if necessary
     event = this._fixDuration(event)
     return event
-  }
-
-  /**
-   * Finds the project role for a given project based on the user ID in the configuration.
-   *
-   * @param project - The project object to search for the role.
-   *
-   * @returns An object containing the project role name and hourly rate if found, otherwise null.
-   */
-  private _findProjectRole(project: Project) {
-    const extensions = tryParseJson(
-      get(project, 'extensions', { default: 'null' })
-    )
-    if (!extensions) return null
-    const resources = get(
-      extensions,
-      `${ProjectResourcesExtensionId}.properties.resources`,
-      { default: [] }
-    )
-    const roleDefinitions = get(
-      extensions,
-      `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
-      { default: [] }
-    )
-    const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
-    const resource = _.find(
-      resources,
-      ({ id }) => id === this._configuration.userId
-    )
-    if (!resource) {
-      if (!defaultRole) return null
-      return {
-        name: defaultRole.name,
-        hourlyRate: defaultRole.hourlyRate
-      }
-    }
-    return {
-      name: resource.projectRole,
-      hourlyRate: resource.hourlyRate
-    }
   }
 
   /**

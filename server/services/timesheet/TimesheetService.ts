@@ -65,7 +65,7 @@ export class TimesheetService {
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
     private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -166,11 +166,14 @@ export class TimesheetService {
     parameters: ISubmitPeriodParameters
   ): Promise<void> {
     try {
-      const events = await this._getEventsFromProvider({
-        ...parameters.period,
-        ...parameters,
-        provider: this.context.provider
-      })
+      const [events, projects] = await Promise.all([
+        this._getEventsFromProvider({
+          ...parameters.period,
+          ...parameters,
+          provider: this.context.provider
+        }),
+        this._projectSvc.getProjects()
+      ])
       const period: ITimesheetPeriodData = {
         ...this._getPeriodData(parameters.period.id, this.context.userId),
         hours: 0,
@@ -179,7 +182,8 @@ export class TimesheetService {
       const { getEvents, hours } = mapMatchedEvents(
         period,
         parameters.period.matchedEvents,
-        events
+        events,
+        projects
       )
       period.hours = hours
       period.events = getEvents(false)

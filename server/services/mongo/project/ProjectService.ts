@@ -102,6 +102,17 @@ export class ProjectService extends MongoDocumentService<Project> {
   }
 
   /**
+   * Get projects from the database.
+   * 
+   * @param query - Query for the projects
+   */
+  public getProjects(query?: FilterQuery<Project>): Promise<Project[]> {
+    return this.cache.usingCache<Project[]>(() => this.find(query), {
+      key: ['getprojects', query]
+    })
+  }
+
+  /**
    * Get projects, customers and labels.
    *
    * Projects are sorted by the name property, then connects
@@ -124,11 +135,11 @@ export class ProjectService extends MongoDocumentService<Project> {
       return this.cache.usingCache<ProjectsData>(
         async () => {
           const [projects, customers, labels] = await Promise.all([
-            this.find(query, { name: 1 }),
+            this.getProjects(query),
             mergedOptions.includeCustomers
               ? (this._customerSvc.getCustomers(
-                  query?.customerKey && { key: query.customerKey }
-                ) as Promise<Customer[]>)
+                query?.customerKey && { key: query.customerKey }
+              ) as Promise<Customer[]>)
               : Promise.resolve([]),
             mergedOptions.includeLabels
               ? this._labelSvc.getLabels()

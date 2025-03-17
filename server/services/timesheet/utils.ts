@@ -1,6 +1,53 @@
-import _ from 'underscore'
-import { ClientEventInput, EventObject } from '../../graphql'
+import _ from 'lodash'
+import { ClientEventInput, EventObject, Project } from '../../graphql'
+import { tryParseJson } from '../../utils'
+import { ProjectResourcesExtensionId, ProjectRoleDefinitionsExtensionId } from '../mongo/project'
 import { ITimesheetPeriodData } from './types'
+
+
+/**
+ * Finds the project role for a given project based on the user ID in the configuration.
+ *
+ * @param projects - The projects to search for the role.
+ * @param projectId - The project ID 
+ * @param userId - The user ID to search for in the project resources.
+ *
+ * @returns An object containing the project role name and hourly rate if found, otherwise null.
+ */
+const findProjectRole = ( projects: Project[], projectId: string, userId: string) => {
+  const project = _.find(projects, ({ _id }) => _id === projectId)
+  if (!project) return null
+  const extensions = tryParseJson(
+    _.get(project, 'extensions', { default: 'null' }) as string
+  )
+  if (!extensions) return null
+  const resources = _.get(
+    extensions,
+    `${ProjectResourcesExtensionId}.properties.resources`,
+    { default: [] }
+  )
+  const roleDefinitions = _.get(
+    extensions,
+    `${ProjectRoleDefinitionsExtensionId}.properties.roleDefinitions`,
+    { default: [] }
+  )
+  const defaultRole = _.find(roleDefinitions, ({ isDefault }) => isDefault)
+  const resource = _.find(
+    resources,
+    ({ id }) => id === userId
+  )
+  if (!resource) {
+    if (!defaultRole) return null
+    return {
+      name: defaultRole.name,
+      hourlyRate: defaultRole.hourlyRate
+    }
+  }
+  return {
+    name: resource.projectRole,
+    hourlyRate: resource.hourlyRate
+  }
+}
 
 /**
  * Map matched events. Takes the matched events retrieved from the client, and combines
@@ -10,13 +57,15 @@ import { ITimesheetPeriodData } from './types'
  * @param period - The period
  * @param matchedEvents - The matched events retrieved from the client
  * @param events - The events fetched from Microsoft Graph
+ * @param projects - The projects
  *
  * @returns A mapped events function and the total hours
  */
 export function mapMatchedEvents(
   period: ITimesheetPeriodData,
   matchedEvents: ClientEventInput[],
-  events: EventObject[]
+  events: EventObject[],
+  projects: Project[]
 ) {
   const events_ = []
   const hours = matchedEvents.reduce((hours, matchedEvent) => {
@@ -29,7 +78,8 @@ export function mapMatchedEvents(
       endDateTime: matchedEvent.endDateTime ?? event.endDateTime,
       duration: matchedEvent.duration ?? event.duration,
       originalDuration: matchedEvent.originalDuration ?? event.originalDuration,
-      adjustedMinutes: matchedEvent.adjustedMinutes ?? event.adjustedMinutes
+      adjustedMinutes: matchedEvent.adjustedMinutes ?? event.adjustedMinutes,
+      role: findProjectRole(projects, matchedEvent.projectId, period.userId)
     })
     return hours + event.duration
   }, 0)
@@ -56,5 +106,5 @@ export function mapMatchedEvents(
   return {
     getEvents,
     hours
-  } as const
+  }
 }
