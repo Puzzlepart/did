@@ -41,10 +41,13 @@ export function mapMatchedEvents(
     }
 
     // Apply all registered extensions to the event
-    const extendedEvent = eventExtensions.reduce((extendedEvent, extension) => ({
-      ...extendedEvent,
-      ...extension.apply(extendedEvent, extensionContext)
-    }), baseEvent)
+    const extendedEvent = eventExtensions.reduce(
+      (extendedEvent, extension) => ({
+        ...extendedEvent,
+        ...extension.apply(extendedEvent, extensionContext)
+      }),
+      baseEvent
+    )
 
     events_.push(extendedEvent)
     return hours + (extendedEvent.duration || 0)
