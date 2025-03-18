@@ -10,7 +10,7 @@ import { IProjectPopoverProps } from './types'
 
 /**
  * Shows more details about the project in a
- * `<TooltipHost />` from `@fluentui/react`
+ * `<Popover />` from `@fluentui/react-components`.
  *
  * @category Reusable Component
  */
