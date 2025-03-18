@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.14.17 - TBA](#-01417---tba)
+	* [➤ 0.14.17 - 18.03.2025](#-01417---18032025)
 		* [Fixed](#fixed)
 	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
 		* [Fixed](#fixed-1)
@@ -90,11 +90,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01417---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01417---18032025)
 
-## ➤ 0.14.17 - TBA
+## ➤ 0.14.17 - 18.03.2025
 
 ### Fixed
+
 - Enhanced ProjectPopover with support for extra content (f.ex. event list) and improved component structure for better project information display
 
 
