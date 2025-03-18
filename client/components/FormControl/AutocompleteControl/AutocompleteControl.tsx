@@ -63,18 +63,21 @@ export const AutocompleteControl: FormInputControlComponent<
               onDoubleClick={() => dispatch(ON_SEARCH(''))}
               freeform
             >
-              {_.take(state.suggestions, props.maxSuggestions).map((option) => (
-                <Option
-                  key={option.key}
-                  value={option.key as string}
-                  text={option.text}
-                  checkIcon={null}
-                >
-                  {renderOption(option)}
-                </Option>
-              ))}
+              <div className={props.optionsContainerClassName}>
+                {_.take(state.suggestions, props.maxSuggestions).map((option) => (
+                  <Option
+                    key={option.key}
+                    className={props.optionClassName}
+                    value={option.key as string}
+                    text={option.text}
+                    checkIcon={null}
+                  >
+                    {renderOption(option, props.hideOptionText)}
+                  </Option>
+                ))}
+              </div>
               {_.isEmpty(state.suggestions) && !state.selectedItem && (
-                <Option key='no-results'>
+                <Option key='no-results' disabled>
                   {props.noResultsMessage ??
                     (t('autocomplete.noResultsMessage', props) as string)}
                 </Option>

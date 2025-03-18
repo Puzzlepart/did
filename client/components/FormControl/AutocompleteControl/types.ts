@@ -91,6 +91,21 @@ export interface IAutocompleteControlProps<T = any>
    * The maximum number of suggestions to display.
    */
   maxSuggestions?: number
+
+  /**
+   * The class name for the options container.
+   */
+  optionsContainerClassName?: string
+
+  /**
+   * The class name for the options.
+   */
+  optionClassName?: string
+
+  /**
+   * Whether to hide the text and secondary text of the options.
+   */
+  hideOptionText?: boolean
 }
 
 /**

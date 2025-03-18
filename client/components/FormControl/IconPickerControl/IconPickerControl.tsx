@@ -3,6 +3,7 @@ import { AutocompleteControl } from '../AutocompleteControl'
 import { FormInputControlComponent } from '../types'
 import { IIconPickerControlProps } from './types'
 import { useIconPickerControl } from './useIconPickerControl'
+import styles from './IconPickerControl.module.scss'
 
 /**
  * Icon picker using `<Autocomplete />` to select
@@ -14,7 +15,14 @@ export const IconPickerControl: FormInputControlComponent<
   IIconPickerControlProps
 > = (props) => {
   const autoCompleteProps = useIconPickerControl(props)
-  return <AutocompleteControl {...autoCompleteProps} />
+  return (
+    <AutocompleteControl
+      {...autoCompleteProps}
+      maxSuggestions={500}
+      optionsContainerClassName={styles.optionsContainer}
+      hideOptionText
+    />
+  )
 }
 
 IconPickerControl.displayName = 'IconPickerControl'
