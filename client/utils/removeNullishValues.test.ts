@@ -8,6 +8,5 @@ test('removeNullishValues removes all nullish values from an object', (t) => {
     email: null,
     phone: undefined
   })
-  console.log('removeNullishValues', result)
   t.deepEqual(result, { name: 'Carl Joachim Damsleth', age: 33 })
 })

@@ -49,7 +49,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    * @returns A promise that resolves to the ID of the inserted project.
    *
    * @remarks
-   * This method clears the cache for 'getprojectsdata' before adding the new project.
+   * This method clears the cache for 'getprojects*' before adding the new project.
    * The project's key and customer key are converted to uppercase and used as the `_id` in the database.
    */
   public async addProject(project: Project): Promise<string> {
@@ -57,7 +57,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     const key = project.key.toUpperCase()
     const tag = `${customerKey} ${key}`
 
-    await this.cache.clear('getprojectsdata')
+    await this.cache.clear('getprojects')
 
     const { insertedId } = await this.insert({
       _id: tag,
@@ -79,7 +79,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
-      await this.cache.clear('getprojectsdata')
+      await this.cache.clear('getprojects')
       const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
       const { result } = await this.update(filter, project)
       return result.ok === 1
@@ -94,7 +94,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    * @param projectId - The ID of the project to delete
    */
   public async deleteProject(projectId: string): Promise<boolean> {
-    await this.cache.clear('getprojectsdata')
+    await this.cache.clear('getprojects')
     const { result } = await this.collection.deleteOne({
       _id: projectId
     })
@@ -108,7 +108,8 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public getProjects(query?: FilterQuery<Project>): Promise<Project[]> {
     return this.cache.usingCache<Project[]>(() => this.find(query), {
-      key: ['getprojects', query]
+      key: ['getprojects', query],
+      expiry: 30
     })
   }
 

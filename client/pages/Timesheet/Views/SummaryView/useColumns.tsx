@@ -8,6 +8,8 @@ import { CHANGE_PERIOD, CHANGE_VIEW } from '../../reducer/actions'
 import { Overview } from '../Overview'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
+import styles from './SummaryView.module.scss'
+import { mergeClasses } from '@fluentui/react-components'
 
 /**
  * A custom hook that generates and returns a list of columns for a timesheet summary view.
@@ -96,29 +98,28 @@ export function useColumns(): IListColumn[] {
       isMultiline: true,
       isResizable: true,
       onRender: (row: ILabelColumnProps) => {
-        if (row.project) {
-          const items = context.state.selectedPeriod
-            ?.getEvents()
-            .filter((event) => event.project?.tag === row.project.tag)
-          return row.project.tag ? (
-            <ProjectPopover
-              width={450}
-              project={row.project}
-              content={
+        if (!row.project?.tag) return <LabelColumn {...row} />
+        const items = context.state.selectedPeriod
+          ?.getEvents()
+          .filter((event) => event.project?.tag === row.project.tag)
+        return (
+          <ProjectPopover
+            width={450}
+            project={row.project}
+            content={
+              <div className={mergeClasses(styles.popoverContent, styles.eventList)}>
                 <EventList
                   items={items}
                   dateFormat='MMM DD HH:mm'
-                  columnWidths={{ title: 90, time: 180 }}
+                  columnWidths={{ title: 90, time: 180, duration: 50 }}
+                  durationColumn={{ showModifiedDurationTooltip: false }}
                 />
-              }
-            >
-              <LabelColumn {...row} />
-            </ProjectPopover>
-          ) : (
+              </div>
+            }
+          >
             <LabelColumn {...row} />
-          )
-        }
-        return <LabelColumn {...row} />
+          </ProjectPopover>
+        )
       }
     },
     ...columns,

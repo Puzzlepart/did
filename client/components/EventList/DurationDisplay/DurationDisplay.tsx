@@ -14,10 +14,13 @@ export const DurationDisplay: FC<IDurationDisplayProps> = (props) => {
   if (props.displayFormat)
     displayValue = format(props.displayFormat, displayValue)
   return (
-    <ModifiedDuration event={props.event}>
+    <ModifiedDuration event={props.event} hidden={!props.showModifiedDurationTooltip}>
       <span style={props.style}>{displayValue}</span>
     </ModifiedDuration>
   )
 }
 
 DurationDisplay.displayName = 'DurationDisplay'
+DurationDisplay.defaultProps = {
+  showModifiedDurationTooltip: true
+}

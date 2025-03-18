@@ -2,7 +2,7 @@ import { DateRangeType } from '@fluentui/react'
 import $date from 'DateUtils'
 import { IListColumn } from 'components/List/types'
 import { TFunction, useTranslation } from 'react-i18next'
-import { EventObject, Project } from 'types'
+import { Customer, EventObject, Project } from 'types'
 import _ from 'underscore'
 import { useTimesheetContext } from '../../context'
 import { ISummaryViewRow } from './types'
@@ -10,7 +10,7 @@ import { ISummaryViewRow } from './types'
 /**
  * Project row type for summary view
  */
-type ProjectRow = Project | { name: string; tag?: never; customer?: never }
+type ProjectRow = Project | { name: string; tag?: string; customer?: Customer }
 
 /**
  * Get unique project rows from `events`.
@@ -27,7 +27,7 @@ function getUniqueProjectRows(
     ..._.unique(
       _.filter(
         events.map((event) => event.project),
-        (p) => !!p
+        Boolean
       ),
       (p: Project) => p?.tag
     ),
@@ -113,9 +113,9 @@ export function useRowGenerator(columns: IListColumn[]) {
         const rows = projectRows
           .map((project) => {
             const projectEvents = events.filter(
-              (event) =>
-                event.project?.tag === project.tag ||
-                (!project.tag && !event.project)
+              ({project}) =>
+                project?.tag === project.tag ||
+                (!project.tag && !project)
             )
 
             return columnsTrimmed.reduce(

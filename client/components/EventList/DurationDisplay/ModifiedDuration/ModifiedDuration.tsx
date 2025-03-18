@@ -13,7 +13,7 @@ export const ModifiedDuration: StyledComponent<IModifiedDurationProps> = (
   const { t } = useTranslation()
   const { modifiedDuration, originalDuration, isAdjusted } =
     useModifiedDuration(props)
-  if (!isAdjusted) return <>{props.children}</>
+  if (!isAdjusted || props.hidden) return <>{props.children}</>
   return (
     <Tooltip
       relationship={props.relationship}

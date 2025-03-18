@@ -1,5 +1,6 @@
 import { IListProps, IListColumn } from 'components/List/types'
 import { ITitleColumnProps } from './TitleColumn/types'
+import { IDurationDisplayProps } from './DurationDisplay'
 
 /**
  * @category EventList
@@ -32,6 +33,11 @@ export interface IEventListProps extends IListProps {
     mobile?: Partial<ITitleColumnProps>
     browser?: Partial<ITitleColumnProps>
   }
+
+  /**
+   * Duration column props
+   */
+  durationColumn?: Partial<IDurationDisplayProps>
 
   /**
    * Whether to use the time column

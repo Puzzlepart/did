@@ -89,7 +89,7 @@ const createDurationColumnDef = (
     'duration',
     name,
     { ...getSizing(props, 'duration', 75, 75) },
-    (event) => <DurationDisplay event={event} />
+    (event) => <DurationDisplay event={event}  {...props.durationColumn} />
   )
 
 /**
