@@ -85,9 +85,8 @@ export type BaseControlOptions = {
     | (ValidatorFunction | AsyncValidatorFunction | ValidatorObject)[]
     | ValidatorMessage
 
-
   /**
-   * Connected fields for the control to be validated on blur event 
+   * Connected fields for the control to be validated on blur event
    * if blur valdiation is enabled for the `FormControl`.
    */
   connectedFields?: string[]

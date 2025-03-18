@@ -1,5 +1,12 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Button, InteractionTag, InteractionTagPrimary, InteractionTagSecondary, mergeClasses, TagGroup } from '@fluentui/react-components'
+import {
+  Button,
+  InteractionTag,
+  InteractionTagPrimary,
+  InteractionTagSecondary,
+  mergeClasses,
+  TagGroup
+} from '@fluentui/react-components'
 import { IListColumn, List } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,16 +26,11 @@ export const SelectedUsersList: FC = () => {
           styles.selectedUsersList,
           context.props.list?.simple && styles.simple
         )}
-        onDismiss={(_, { value }) => context.onRemoveUser(value)}>
+        onDismiss={(_, { value }) => context.onRemoveUser(value)}
+      >
         {context.state.selectedUsers.map((user) => (
-          <InteractionTag
-            key={user.id}
-            value={user.id}
-          >
-
-            <InteractionTagPrimary
-              hasSecondaryAction
-            >
+          <InteractionTag key={user.id} value={user.id}>
+            <InteractionTagPrimary hasSecondaryAction>
               {user.displayName}
             </InteractionTagPrimary>
             <InteractionTagSecondary />

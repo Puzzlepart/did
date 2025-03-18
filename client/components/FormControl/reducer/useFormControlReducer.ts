@@ -38,7 +38,7 @@ export function useFormControlReducer() {
             }
             state.validationMessages = validationMessages
           } else {
-          state.validationMessages = new Map<string, ValidationResult>()
+            state.validationMessages = new Map<string, ValidationResult>()
           }
         })
   )

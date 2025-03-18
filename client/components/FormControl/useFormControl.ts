@@ -66,7 +66,9 @@ export const useFormControl: ComponentLogicHook<
     ({ target }: React.FocusEvent<HTMLInputElement>) => {
       if (!props.validateOnBlur) return
       const [, name] = target.id.split('_')
-      const fields = Object.values(CONTROL_REGISTRY[props.id]) as FormInputControlBase[]
+      const fields = Object.values(
+        CONTROL_REGISTRY[props.id]
+      ) as FormInputControlBase[]
       const field = fields.find((f) => f.name === name)
       if (!field) return
       const validateFields = fields.filter(

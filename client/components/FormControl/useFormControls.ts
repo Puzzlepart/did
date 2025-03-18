@@ -8,7 +8,10 @@ import _ from 'lodash'
  * Registry of controls. The key is the ID of the form control, and the value is an array of form controls.
  * This is used to keep track of all form controls that are registered with a specific form control ID.
  */
-export const CONTROL_REGISTRY: Record<string, Record<string, FormInputControlBase>> = {}
+export const CONTROL_REGISTRY: Record<
+  string,
+  Record<string, FormInputControlBase>
+> = {}
 
 /**
  * Register control for a form control with the given name and options.
@@ -84,21 +87,22 @@ export function useFormControls<KeyType extends string = any>(
   model: ReturnType<typeof useMap>,
   component?: FC
 ) {
-  return useCallback(<TOptions = BaseControlOptions>(
-    name: KeyType,
-    options?: TOptions,
-    extensionId?: string
-  ) => {
-    if (extensionId) {
-      name = getExtendedPropertyName(name, extensionId)
-    }
-    return registerControl<TOptions, KeyType>(
-      name,
-      model,
-      options,
-      component.displayName
-    )
-  },
+  return useCallback(
+    <TOptions = BaseControlOptions>(
+      name: KeyType,
+      options?: TOptions,
+      extensionId?: string
+    ) => {
+      if (extensionId) {
+        name = getExtendedPropertyName(name, extensionId)
+      }
+      return registerControl<TOptions, KeyType>(
+        name,
+        model,
+        options,
+        component.displayName
+      )
+    },
     [model]
   )
 }
