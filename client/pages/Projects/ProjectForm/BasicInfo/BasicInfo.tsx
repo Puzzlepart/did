@@ -40,6 +40,7 @@ export const BasicInfo: ProjectFormTabComponent = () => {
           placeholder={t('common.searchPlaceholder')}
           selectedKey={model.value('customerKey')}
           onSelected={(customer) => model.set('customerKey', customer?.key)}
+          maxSuggestions={8}
         />
       )}
       <ProjectKeyInput />

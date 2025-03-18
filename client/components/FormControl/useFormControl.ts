@@ -5,9 +5,9 @@ import {
 } from 'components'
 import { ComponentLogicHook } from 'hooks'
 import _ from 'lodash'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { CLEAR_VALIDATION_MESSAGES, useFormControlReducer } from './reducer'
-import { IFormControlProps } from './types'
+import { FormInputControlBase, IFormControlProps } from './types'
 import { useFormControlValidation } from './useFormControlValidation'
 
 type UseFormControlReturnType = {
@@ -62,6 +62,24 @@ export const useFormControl: ComponentLogicHook<
     ) as T
   }
 
+  const onBlurCallback = useCallback(
+    ({ target }: React.FocusEvent<HTMLInputElement>) => {
+      if (!props.validateOnBlur) return
+      const [, name] = target.id.split('_')
+      const fields = Object.values(CONTROL_REGISTRY[props.id]) as FormInputControlBase[]
+      const field = fields.find((f) => f.name === name)
+      if (!field) return
+      const validateFields = fields.filter(
+        (f) =>
+          f.name === field.name ||
+          field.options?.connectedFields?.includes(f.name)
+      )
+      dispatch(CLEAR_VALIDATION_MESSAGES(validateFields.map((f) => f.name)))
+      validateForm(validateFields)
+    },
+    [props.validateOnBlur, props.id, state, dispatch]
+  )
+
   const context = useMemo<IFormControlContext>(
     () => ({
       ...state,
@@ -73,13 +91,7 @@ export const useFormControl: ComponentLogicHook<
       ]),
       getExtensionValue,
       dispatch,
-      onBlurCallback: ({ target }) => {
-        if (props.validateOnBlur) {
-          const [, name] = target.id.split('_')
-          const fields = Object.values(CONTROL_REGISTRY[props.id])
-          validateForm(fields.filter((f) => f.name === name))
-        }
-      }
+      onBlurCallback
     }),
     [state, props.model]
   )

@@ -1006,7 +1006,7 @@
       "removeUser": "Fjern",
       "searchTerm": "Søk etter \"{{searchTerm}}\"",
       "clearSearch": "Klikk for å tømme søk",
-      "removeUserDbClick": "Dobbeltklikk for å fjerne brukeren."
+      "removeUserDbClick": ""
     },
     "listControl": {
       "editingInfo": "Du redigerer for øyeblikket et element. Klikk **Enter** for å lagre eller trykk utenfor feltet for å avbryte redigeringen."

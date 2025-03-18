@@ -17,8 +17,9 @@ export const CLEAR_VALIDATION_MESSAGE = createAction<{ name: string }>(
 )
 
 /**
- * `CLEAR_VALIDATION_MESSAGES`: Clears all validation messages.
+ * `CLEAR_VALIDATION_MESSAGES`: Clears the provided validation messages,
+ * or clears all validation messages if no payload is provided.
  */
-export const CLEAR_VALIDATION_MESSAGES = createAction(
+export const CLEAR_VALIDATION_MESSAGES = createAction<string[]>(
   'CLEAR_VALIDATION_MESSAGES'
 )

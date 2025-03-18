@@ -30,8 +30,16 @@ export function useFormControlReducer() {
           validationMessages.delete(action.payload.name)
           state.validationMessages = validationMessages
         })
-        .addCase(CLEAR_VALIDATION_MESSAGES, (state) => {
+        .addCase(CLEAR_VALIDATION_MESSAGES, (state, { payload }) => {
+          if (payload) {
+            const validationMessages = new Map(state.validationMessages)
+            for (const name of payload) {
+              validationMessages.delete(name)
+            }
+            state.validationMessages = validationMessages
+          } else {
           state.validationMessages = new Map<string, ValidationResult>()
+          }
         })
   )
 }

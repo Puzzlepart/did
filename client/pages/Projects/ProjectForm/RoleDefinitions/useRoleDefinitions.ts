@@ -9,8 +9,8 @@ export function useRoleDefinitions() {
   const { t } = useTranslation()
   const context = useProjectsContext()
   const roleDefinitions = _.get(
-    context.state.selected.extensions,
-    `${RoleDefinitions.extensionId}.properties.roleDefinitions`,
+    context.state.selected,
+    `extensions.${RoleDefinitions.extensionId}.properties.roleDefinitions`,
     []
   )
   const defaultRole = roleDefinitions.find(({ isDefault }) => isDefault)

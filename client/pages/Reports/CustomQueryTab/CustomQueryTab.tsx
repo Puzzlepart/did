@@ -6,6 +6,7 @@ import {
   Subtitle1
 } from '@fluentui/react-components'
 import {
+  BaseControlOptions,
   DateAfterValidator,
   DateBeforeValidator,
   DateControl,
@@ -73,6 +74,7 @@ export const CustomQueryTab: TabComponent = (props) => {
           <div className={styles.formRow}>
             <DateControl
               {...formControl.register('startDateTime', {
+                connectedFields: ['endDateTime'],
                 validators: [
                   DateBeforeValidator(
                     t,
@@ -84,15 +86,16 @@ export const CustomQueryTab: TabComponent = (props) => {
                       name: t('common.endDate'),
                       value: formControl.model.value('endDateTime')
                     },
-                    { maxDays: 1.5 * 365 } // 1.5 years
+                    { maxDays: 500 } 
                   )
                 ]
-              })}
+              } as BaseControlOptions)}
               label={t('common.startDate')}
               {...isDisabled('startDateTime')}
             />
             <DateControl
               {...formControl.register('endDateTime', {
+                connectedFields: ['startDateTime'],
                 validators: [
                   DateAfterValidator(
                     t,
@@ -104,10 +107,10 @@ export const CustomQueryTab: TabComponent = (props) => {
                       name: t('common.startDate'),
                       value: formControl.model.value('startDateTime')
                     },
-                    { maxDays: 1.5 * 365 } // 1.5 years
+                    { maxDays: 500 } 
                   )
                 ]
-              })}
+              } as BaseControlOptions)}
               label={t('common.endDate')}
               {...isDisabled('endDateTime')}
             />

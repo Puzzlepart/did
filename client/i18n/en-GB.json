@@ -1009,7 +1009,7 @@
       "removeUser": "Remove",
       "searchTerm": " Search for \"{{searchTerm}}\"",
       "clearSearch": "Click to clear search",
-      "removeUserDbClick": "Double click to remove the user."
+      "removeUserDbClick": ""
     },
     "listControl": {
       "editingInfo": "You are currently editing an item. Click **Enter** to save or click outside the input field to abort."

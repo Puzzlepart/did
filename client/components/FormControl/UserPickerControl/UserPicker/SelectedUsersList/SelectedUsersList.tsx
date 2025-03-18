@@ -1,35 +1,40 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Button, mergeClasses, Tag } from '@fluentui/react-components'
+import { Button, InteractionTag, InteractionTagPrimary, InteractionTagSecondary, mergeClasses, TagGroup } from '@fluentui/react-components'
 import { IListColumn, List } from 'components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { getFluentIcon } from 'utils'
 import { useUserPickerContext } from '../context'
-import { UserMetadataCell } from './UserMetadataCell'
 import styles from './SelectedUsersList.module.scss'
+import { UserMetadataCell } from './UserMetadataCell'
 
 export const SelectedUsersList: FC = () => {
   const { t } = useTranslation()
   const context = useUserPickerContext()
   if (context.props.list?.simple) {
     return (
-      <div
+      <TagGroup
         className={mergeClasses(
           styles.selectedUsersList,
           context.props.list?.simple && styles.simple
         )}
-      >
+        onDismiss={(_, { value }) => context.onRemoveUser(value)}>
         {context.state.selectedUsers.map((user) => (
-          <Tag
+          <InteractionTag
             key={user.id}
-            onDoubleClick={() => context.onRemoveUser(user.id)}
-            title={t('components.userPicker.removeUserDbClick')}
+            value={user.id}
           >
-            {user.displayName}
-          </Tag>
+
+            <InteractionTagPrimary
+              hasSecondaryAction
+            >
+              {user.displayName}
+            </InteractionTagPrimary>
+            <InteractionTagSecondary />
+          </InteractionTag>
         ))}
-      </div>
+      </TagGroup>
     )
   }
   return (

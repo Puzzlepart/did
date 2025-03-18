@@ -1,11 +1,11 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable unicorn/prevent-abbreviations */
+import { useAppContext } from 'AppContext'
 import _ from 'lodash'
+import { useTranslation } from 'react-i18next'
+import { ReportsQuery, User } from 'types'
 import { mapProperty } from 'utils'
 import { UseCustomQueryTabReturnType } from './types'
-import { useTranslation } from 'react-i18next'
-import { useAppContext } from 'AppContext'
-import { ReportsQuery, User } from 'types'
 
 /**
  * Custom hook for the `addManagerUsersAction` in the `CustomQueryTab` component.
@@ -23,7 +23,6 @@ export const useAddManagerUsersAction = (
         (user) => user.manager?.id.startsWith(context.user?.id)
       )
       return {
-        iconName: 'GlobePerson',
         hidden: _.isEmpty(users),
         text: t('reports.addUsersManager'),
         onClick: () => {
