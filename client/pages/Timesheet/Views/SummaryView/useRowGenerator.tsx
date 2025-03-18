@@ -19,7 +19,10 @@ type ProjectRow = Project | { name: string; tag?: never; customer?: never }
  * @param t - Translate function (needs to be passed as a parameter since this is not a hook)
  * @returns Array of unique projects and an unconfirmed hours entry
  */
-function getUniqueProjectRows(events: EventObject[], t: TFunction): ProjectRow[] {
+function getUniqueProjectRows(
+  events: EventObject[],
+  t: TFunction
+): ProjectRow[] {
   return [
     ..._.unique(
       _.filter(
@@ -34,7 +37,7 @@ function getUniqueProjectRows(events: EventObject[], t: TFunction): ProjectRow[]
 
 /**
  * Helper function to sum event durations
- * 
+ *
  * @param events - Events to sum durations for
  * @returns Total duration
  */
@@ -44,29 +47,31 @@ function sumEventDurations(events: EventObject[]): number {
 
 /**
  * Hook to generate rows for the Summary View in Timesheet
- * 
+ *
  * @param columns - List columns configuration
  * @returns Functions to generate rows and totals
  */
 export function useRowGenerator(columns: IListColumn[]) {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
-  
+
   /**
    * Generates the total row for the summary view
-   * 
+   *
    * @returns Summary view total row
    */
   function generateTotalRow(): ISummaryViewRow {
     switch (state.dateRangeType) {
       case DateRangeType.Week: {
         const events = state.selectedPeriod?.getEvents() || []
-        const columnsTrimmed = columns.slice(1, - 1)
-        
+        const columnsTrimmed = columns.slice(1, -1)
+
         return columnsTrimmed.reduce(
           (row, col) => {
             const filteredEvents = events.filter(
-              (event) => $date.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
+              (event) =>
+                $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+                col.fieldName
             )
             const sum = sumEventDurations(filteredEvents)
             row[col.fieldName] = sum
@@ -95,7 +100,7 @@ export function useRowGenerator(columns: IListColumn[]) {
 
   /**
    * Generates all data rows for the summary view
-   * 
+   *
    * @returns Array of summary view rows
    */
   function generateRows(): ISummaryViewRow[] {
@@ -103,8 +108,8 @@ export function useRowGenerator(columns: IListColumn[]) {
       case DateRangeType.Week: {
         const events = state.selectedPeriod?.getEvents() || []
         const projectRows = getUniqueProjectRows(events, t)
-        const columnsTrimmed = columns.slice(1, - 1)
-        
+        const columnsTrimmed = columns.slice(1, -1)
+
         const rows = projectRows
           .map((project) => {
             const projectEvents = events.filter(
@@ -112,11 +117,13 @@ export function useRowGenerator(columns: IListColumn[]) {
                 event.project?.tag === project.tag ||
                 (!project.tag && !event.project)
             )
-            
+
             return columnsTrimmed.reduce(
               (object, col) => {
                 const filteredEvents = projectEvents.filter(
-                  (event) => $date.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
+                  (event) =>
+                    $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+                    col.fieldName
                 )
                 const sum = sumEventDurations(filteredEvents)
                 object[col.fieldName] = sum
@@ -138,16 +145,18 @@ export function useRowGenerator(columns: IListColumn[]) {
           period.getEvents()
         )
         const projectRows = getUniqueProjectRows(events, t)
-        
+
         const rows = projectRows
           .map((project) =>
             state.periods.reduce(
               (row, period) => {
-                const periodEvents = period.getEvents().filter(
-                  (event) =>
-                    event.project?.tag === project.tag ||
-                    (!project.tag && !event.project)
-                )
+                const periodEvents = period
+                  .getEvents()
+                  .filter(
+                    (event) =>
+                      event.project?.tag === project.tag ||
+                      (!project.tag && !event.project)
+                  )
                 const sum = sumEventDurations(periodEvents)
                 row[period.id] = sum
                 row.sum += sum

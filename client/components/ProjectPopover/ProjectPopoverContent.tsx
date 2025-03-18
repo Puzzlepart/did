@@ -35,9 +35,7 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
             <ReactMarkdown>{project.description}</ReactMarkdown>
           </Caption2>
         </div>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
         {!_.isEmpty(project.labels) && (
           <div className={styles.labels}>
             {(project.labels as LabelObject[]).map((label, index) => (

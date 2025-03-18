@@ -40,5 +40,5 @@ EventList.displayName = 'EventList'
 EventList.className = styles.eventList
 EventList.defaultProps = {
   useTimeColumn: true,
-  additionalColumns: [],
+  additionalColumns: []
 }
