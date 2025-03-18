@@ -8,19 +8,33 @@ import _ from 'underscore'
 import styles from './ProjectPopoverContent.module.scss'
 import { IProjectPopoverProps } from './types'
 
-export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = (props) => {
+export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = (
+  props
+) => {
   return (
-    <div className={ProjectPopoverContent.className} style={{ width: props.width }}>
+    <div
+      className={ProjectPopoverContent.className}
+      style={{ width: props.width }}
+    >
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.iconContainer}>
-            <Icon iconName={props.project.icon} styles={{ root: { fontSize: 28 } }} />
+            <Icon
+              iconName={props.project.icon}
+              styles={{ root: { fontSize: 28 } }}
+            />
           </div>
           <div className={styles.title}>
-            <ProjectLink project={props.project} appearance='link' showIcon={false} />
+            <ProjectLink
+              project={props.project}
+              appearance='link'
+              showIcon={false}
+            />
             {props.project.customer && (
               <div className={styles.subTitle}>
-                <Caption2Strong>for {props.project.customer.name}</Caption2Strong>
+                <Caption2Strong>
+                  for {props.project.customer.name}
+                </Caption2Strong>
               </div>
             )}
           </div>

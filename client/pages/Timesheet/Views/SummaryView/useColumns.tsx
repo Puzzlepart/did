@@ -107,7 +107,12 @@ export function useColumns(): IListColumn[] {
             width={450}
             project={row.project}
             content={
-              <div className={mergeClasses(styles.popoverContent, styles.eventList)}>
+              <div
+                className={mergeClasses(
+                  styles.popoverContent,
+                  styles.eventList
+                )}
+              >
                 <EventList
                   items={items}
                   dateFormat='MMM DD HH:mm'

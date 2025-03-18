@@ -113,9 +113,8 @@ export function useRowGenerator(columns: IListColumn[]) {
         const rows = projectRows
           .map((project) => {
             const projectEvents = events.filter(
-              ({project}) =>
-                project?.tag === project.tag ||
-                (!project.tag && !project)
+              ({ project }) =>
+                project?.tag === project.tag || (!project.tag && !project)
             )
 
             return columnsTrimmed.reduce(

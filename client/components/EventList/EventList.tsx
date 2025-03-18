@@ -39,5 +39,5 @@ EventList.displayName = 'EventList'
 EventList.defaultProps = {
   useTimeColumn: true,
   additionalColumns: [],
-  durationColumn: {},
+  durationColumn: {}
 }
