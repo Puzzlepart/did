@@ -39,5 +39,6 @@ export const EventList: ReusableComponent<IEventListProps> = (props) => {
 EventList.displayName = 'EventList'
 EventList.className = styles.eventList
 EventList.defaultProps = {
-  useTimeColumn: true
+  useTimeColumn: true,
+  additionalColumns: [],
 }

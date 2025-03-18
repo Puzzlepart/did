@@ -22,5 +22,3 @@ export const DurationColumn: FC<IDurationColumnProps> = ({
 
   return <div style={style}>{colValue}</div>
 }
-
-export * from './types'

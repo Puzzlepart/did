@@ -8,16 +8,22 @@ import { useTimesheetContext } from '../../context'
 import { ISummaryViewRow } from './types'
 
 /**
+ * Project row type for summary view
+ */
+type ProjectRow = Project | { name: string; tag?: never; customer?: never }
+
+/**
  * Get unique project rows from `events`.
  *
  * @param events - Events
  * @param t - Translate function (needs to be passed as a parameter since this is not a hook)
+ * @returns Array of unique projects and an unconfirmed hours entry
  */
-function getUniqueProjectRows(events: EventObject[], t: TFunction): any[] {
+function getUniqueProjectRows(events: EventObject[], t: TFunction): ProjectRow[] {
   return [
     ..._.unique(
       _.filter(
-        events.map((event_) => event_.project),
+        events.map((event) => event.project),
         (p) => !!p
       ),
       (p: Project) => p?.tag
@@ -26,23 +32,43 @@ function getUniqueProjectRows(events: EventObject[], t: TFunction): any[] {
   ]
 }
 
+/**
+ * Helper function to sum event durations
+ * 
+ * @param events - Events to sum durations for
+ * @returns Total duration
+ */
+function sumEventDurations(events: EventObject[]): number {
+  return events.reduce((sum, event) => sum + event.duration, 0)
+}
+
+/**
+ * Hook to generate rows for the Summary View in Timesheet
+ * 
+ * @param columns - List columns configuration
+ * @returns Functions to generate rows and totals
+ */
 export function useRowGenerator(columns: IListColumn[]) {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
-
+  
+  /**
+   * Generates the total row for the summary view
+   * 
+   * @returns Summary view total row
+   */
   function generateTotalRow(): ISummaryViewRow {
     switch (state.dateRangeType) {
       case DateRangeType.Week: {
         const events = state.selectedPeriod?.getEvents() || []
-        return [...columns].splice(1, columns.length - 2).reduce(
+        const columnsTrimmed = columns.slice(1, - 1)
+        
+        return columnsTrimmed.reduce(
           (row, col) => {
-            const sum = [...events]
-              .filter(
-                (event) =>
-                  $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
-                  col.fieldName
-              )
-              .reduce((sum, event) => (sum += event.duration), 0)
+            const filteredEvents = events.filter(
+              (event) => $date.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
+            )
+            const sum = sumEventDurations(filteredEvents)
             row[col.fieldName] = sum
             row.sum += sum
             return row
@@ -53,9 +79,7 @@ export function useRowGenerator(columns: IListColumn[]) {
       case DateRangeType.Month: {
         return state.periods.reduce(
           (row, period) => {
-            const sum = period
-              .getEvents()
-              .reduce((sum, event) => (sum += event.duration), 0)
+            const sum = sumEventDurations(period.getEvents())
             row[period.id] = sum
             row.sum += sum
             return row
@@ -63,14 +87,24 @@ export function useRowGenerator(columns: IListColumn[]) {
           { label: t('common.sumLabel'), sum: 0 }
         )
       }
+      default: {
+        return { label: t('common.sumLabel'), sum: 0 }
+      }
     }
   }
 
+  /**
+   * Generates all data rows for the summary view
+   * 
+   * @returns Array of summary view rows
+   */
   function generateRows(): ISummaryViewRow[] {
     switch (state.dateRangeType) {
       case DateRangeType.Week: {
         const events = state.selectedPeriod?.getEvents() || []
         const projectRows = getUniqueProjectRows(events, t)
+        const columnsTrimmed = columns.slice(1, - 1)
+        
         const rows = projectRows
           .map((project) => {
             const projectEvents = events.filter(
@@ -78,15 +112,13 @@ export function useRowGenerator(columns: IListColumn[]) {
                 event.project?.tag === project.tag ||
                 (!project.tag && !event.project)
             )
-            return [...columns].splice(1, columns.length - 2).reduce(
+            
+            return columnsTrimmed.reduce(
               (object, col) => {
-                const sum = [...projectEvents]
-                  .filter(
-                    (event) =>
-                      $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
-                      col.fieldName
-                  )
-                  .reduce((sum, event) => (sum += event.duration), 0)
+                const filteredEvents = projectEvents.filter(
+                  (event) => $date.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
+                )
+                const sum = sumEventDurations(filteredEvents)
                 object[col.fieldName] = sum
                 object.sum += sum
                 return object
@@ -106,29 +138,33 @@ export function useRowGenerator(columns: IListColumn[]) {
           period.getEvents()
         )
         const projectRows = getUniqueProjectRows(events, t)
-        const rows = projectRows.map((project) =>
-          state.periods.reduce(
-            (row, period) => {
-              const sum = period
-                .getEvents()
-                .filter(
+        
+        const rows = projectRows
+          .map((project) =>
+            state.periods.reduce(
+              (row, period) => {
+                const periodEvents = period.getEvents().filter(
                   (event) =>
                     event.project?.tag === project.tag ||
                     (!project.tag && !event.project)
                 )
-                .reduce((sum, event) => (sum += event.duration), 0)
-              row[period.id] = sum
-              row.sum += sum
-              return row
-            },
-            {
-              sum: 0,
-              project,
-              customer: project.customer
-            }
+                const sum = sumEventDurations(periodEvents)
+                row[period.id] = sum
+                row.sum += sum
+                return row
+              },
+              {
+                sum: 0,
+                project,
+                customer: project.customer
+              }
+            )
           )
-        )
+          .filter((row) => row.sum > 0)
         return rows
+      }
+      default: {
+        return []
       }
     }
   }

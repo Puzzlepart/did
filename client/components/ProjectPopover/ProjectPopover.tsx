@@ -24,8 +24,16 @@ export const ProjectPopover: ReusableComponent<IProjectPopoverProps> = (
         <div>{props.children}</div>
       </PopoverTrigger>
       <PopoverSurface>
-        <ProjectPopoverContent {...props} />
+        <ProjectPopoverContent {...props}>
+          {props.content}
+        </ProjectPopoverContent>
       </PopoverSurface>
     </Popover>
   )
+}
+
+ProjectPopover.displayName = 'ProjectPopover'
+ProjectPopover.defaultProps = {
+  width: 400,
+  content: null
 }

@@ -1,6 +1,5 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import { DateRangeType, useTheme } from '@fluentui/react'
-import { IListColumn, ProjectPopover } from 'components'
+import { EventList, IListColumn, ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
@@ -10,26 +9,40 @@ import { Overview } from '../Overview'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 
+
 /**
- * Columns hook for `<SummaryView />`
+ * A custom hook that generates and returns a list of columns for a timesheet summary view.
+ * The columns are dynamically created based on the current date range type (week or month)
+ * and include additional configurations for rendering, styling, and interactivity.
+ *
+ * @returns An array of column definitions for the timesheet summary view.
+ *
+ * @remarks
+ * - For the `Week` date range type, columns are generated for each day in the selected period,
+ *   with headers styled to indicate national holidays.
+ * - For the `Month` date range type, columns are generated for each period, with clickable headers
+ *   that allow switching views and periods.
+ * - Includes a "label" column for displaying project-related information with optional popovers
+ *   and an "event list" for associated events.
+ * - Includes a "sum" column for displaying aggregated data.
  */
 export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
   const theme = useTheme()
-  const { state, dispatch } = useTimesheetContext()
+  const context = useTimesheetContext()
   const onRender = (row: any, _index: number, col: IListColumn) => (
     <DurationColumn row={row} column={col} />
   )
   let columns: IListColumn[] = []
-  switch (state.dateRangeType) {
+  switch (context.state.dateRangeType) {
     case DateRangeType.Week: {
       {
         for (
-          let i = state.selectedPeriod?.startDateIndex;
-          i <= state.selectedPeriod?.endDateIndex;
+          let i = context.state.selectedPeriod?.startDateIndex;
+          i <= context.state.selectedPeriod?.endDateIndex;
           i++
         ) {
-          const day = state.dateRange.getDay(i)
+          const day = context.state.dateRange.getDay(i)
           columns.push({
             key: day.format('YYYY-MM-DD'),
             fieldName: day.format('YYYY-MM-DD'),
@@ -39,7 +52,7 @@ export function useColumns(): IListColumn[] {
             onRender,
             onRenderHeader: (props, defaultRender) => {
               const holiday = day.isNationalHoliday(
-                state.selectedPeriod?.holidays
+                context.state.selectedPeriod?.holidays
               )
               return (
                 <div
@@ -57,7 +70,7 @@ export function useColumns(): IListColumn[] {
     }
     case DateRangeType.Month: {
       {
-        columns = state.periods.map<IListColumn>((period) => ({
+        columns = context.state.periods.map<IListColumn>((period) => ({
           key: period.id,
           fieldName: period.id,
           name: period.getName(t),
@@ -66,8 +79,8 @@ export function useColumns(): IListColumn[] {
           onRender,
           styles: { root: { cursor: 'pointer' } },
           onColumnClick: () => {
-            dispatch(CHANGE_VIEW({ view: Overview }))
-            dispatch(CHANGE_PERIOD({ id: period.id }))
+            context.dispatch(CHANGE_VIEW({ view: Overview }))
+            context.dispatch(CHANGE_PERIOD({ id: period.id }))
           }
         }))
       }
@@ -85,8 +98,17 @@ export function useColumns(): IListColumn[] {
       isResizable: true,
       onRender: (row: ILabelColumnProps) => {
         if (row.project) {
+          const items = context.state.selectedPeriod?.getEvents().filter((event) => event.project?.tag === row.project.tag)
           return row.project.tag ? (
-            <ProjectPopover project={row.project}>
+            <ProjectPopover
+              width={450}
+              project={row.project}
+              content={(
+                <EventList
+                  items={items}
+                  dateFormat='MMM DD HH:mm'
+                  columnWidths={{ title: 90, time: 180 }} />)
+              }>
               <LabelColumn {...row} />
             </ProjectPopover>
           ) : (

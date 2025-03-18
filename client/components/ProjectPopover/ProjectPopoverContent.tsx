@@ -1,6 +1,6 @@
 import { Icon } from '@fluentui/react'
 import { Caption2, Caption2Strong } from '@fluentui/react-components'
-import { EntityLabel, ProjectTag } from 'components'
+import { EntityLabel, ProjectLink, ProjectTag } from 'components'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { LabelObject, StyledComponent } from 'types'
@@ -9,17 +9,19 @@ import styles from './ProjectTooltip.module.scss'
 import { IProjectPopoverProps } from './types'
 
 export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
-  project
+  project,
+  width,
+  children
 }) => {
   return (
-    <div className={ProjectPopoverContent.className}>
+    <div className={ProjectPopoverContent.className} style={{ width }}>
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.iconContainer}>
             <Icon iconName={project.icon} styles={{ root: { fontSize: 28 } }} />
           </div>
           <div className={styles.title}>
-            <span>{project.name}</span>
+            <ProjectLink project={project} appearance='link' showIcon={false} />
             {project.customer && (
               <div className={styles.subTitle}>
                 <Caption2Strong>for {project.customer.name}</Caption2Strong>
@@ -32,6 +34,9 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = ({
           <Caption2>
             <ReactMarkdown>{project.description}</ReactMarkdown>
           </Caption2>
+        </div>
+        <div>
+          {children}
         </div>
         {!_.isEmpty(project.labels) && (
           <div className={styles.labels}>

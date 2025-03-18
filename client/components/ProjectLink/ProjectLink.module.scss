@@ -1,12 +1,14 @@
 .projectLink {
   display: flex;
   align-items: center;
+  gap: 6px;
   
   .icon {
     align-self: flex-start;
   }
 
   .link {
-    margin-left: 6px;
+    margin: 0;
+    outline: none !important;
   }
 }

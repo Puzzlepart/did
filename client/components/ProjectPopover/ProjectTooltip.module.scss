@@ -1,7 +1,6 @@
 .projectTooltip {
   margin: 0;
   padding: 8px 10px;
-  width: 400px;
   position: relative;
 
   .container {
@@ -19,6 +18,10 @@
         font-size: 13pt;
         margin: 0;
         flex: 1;
+
+        .link {
+          outline: none !important;
+        }
       }
 
       .subTitle {
