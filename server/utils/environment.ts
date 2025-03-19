@@ -1,6 +1,5 @@
-import createDebug from 'debug'
 import s from 'underscore.string'
-const debug = createDebug('environment')
+const debug = require('debug')('environment')
 
 type EnvironmentParseOptions = {
   /**

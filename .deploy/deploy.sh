@@ -50,7 +50,7 @@ compare_versions() {
 
 # Verify Node.js installed
 hash node 2>/dev/null
-exitWithMessageOnError "Missing node.js executable, please install node.js, if already installed make sure it can be reached from the current environment."
+exitWithMessageOnError "Missing Node.js executable, please install Node.js, if already installed make sure it can be reached from the current environment."
 
 # Setup
 # -------------

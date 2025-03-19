@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import createDebug from 'debug'
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
@@ -17,7 +16,7 @@ import {
   USER_INVITATION_ACCEPTED,
   USER_NOT_ENROLLED
 } from '../errors'
-const debug = createDebug('server/middleware/passport/microsoft/onVerifySignin')
+const debug = require('debug')('middleware/passport/microsoft/onVerifySignin')
 export const PROVIDER = 'microsoft'
 
 /**

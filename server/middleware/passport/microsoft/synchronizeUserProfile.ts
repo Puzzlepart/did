@@ -1,10 +1,9 @@
 /* eslint-disable prefer-const */
-import createDebug from 'debug'
 import _ from 'lodash'
 import { User } from '../../../graphql'
 import { MSGraphService, UserService } from '../../../services'
 import MSOAuthService from '../../../services/msoauth'
-const debug = createDebug(
+const debug = require('debug')(
   'server/middleware/passport/microsoft/synchronizeUserProfile'
 )
 
