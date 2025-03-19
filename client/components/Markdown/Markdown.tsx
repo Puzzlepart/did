@@ -18,7 +18,8 @@ export const Markdown: StyledComponent<IMarkdownProps> = (props) => {
     <div className={mergeClasses(Markdown.className, props.className)}>
       <ReactMarkdown
         linkTarget={props.linkTarget}
-        rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+        rehypePlugins={[rehypeRaw, rehypeSanitize]}
+      >
         {props.text}
       </ReactMarkdown>
     </div>
