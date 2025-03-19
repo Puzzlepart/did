@@ -98,7 +98,7 @@ jobs:
 
   build_client:
     name: Build Client
-    needs: [test, lint]
+    needs: [test]
     runs-on: ubuntu-latest
     concurrency: 
       group: ${{ github.workflow }}-build_client-${{ github.ref }}
@@ -130,7 +130,7 @@ jobs:
 
   build_server:
     name: Build Server
-    needs: [test, lint]
+    needs: [test]
     runs-on: ubuntu-latest
     concurrency: 
       group: ${{ github.workflow }}-build_server-${{ github.ref }}
