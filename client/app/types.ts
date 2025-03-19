@@ -1,5 +1,5 @@
 import { IToastProps } from 'components'
-import { SessionContext } from '../graphql-queries/session'
+import { SessionContext } from 'graphql-queries/session'
 import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 
 export interface IAppProps {
