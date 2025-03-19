@@ -184,9 +184,6 @@ export class CacheService {
         options.scope,
         options.hash
       )
-      log(
-        `Retrieving cached value for key ${colors.magenta(scopedCacheKey)}...`
-      )
       redisMiddlware.get(scopedCacheKey, (error, reply) => {
         if (error) {
           log(
@@ -217,13 +214,6 @@ export class CacheService {
         options.key,
         options.scope,
         options.hash
-      )
-      log(
-        `Setting value for key ${colors.magenta(
-          scopedCacheKey
-        )} with a expiration of ${colors.magenta(
-          options.expiry.toString()
-        )} seconds.`
       )
       redisMiddlware.setex(
         scopedCacheKey,

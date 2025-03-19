@@ -6,7 +6,6 @@
  *
  * @module AuthRoute
  */
-import createDebug from 'debug'
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import _ from 'underscore'
@@ -17,7 +16,7 @@ import {
 } from '../middleware/passport/errors'
 import { environment } from '../utils'
 const auth = Router()
-const debug = createDebug('server/routes/auth')
+const debug = require('debug')('server/routes/auth')
 
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
 type AuthProvider = 'azuread-openidconnect' | 'google'

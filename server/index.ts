@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /**
  * Main entry point for the http server (using [http](https://www.npmjs.com/package/http))
  *
@@ -9,7 +8,7 @@ import chalk from 'chalk'
 import * as http from 'http'
 import app from './app'
 import { environment } from './utils/environment'
-const log = console.log
+const log = require('debug')('server')
 
 /**
  * Start server on the specified `port`
@@ -37,19 +36,15 @@ export async function startServer(port: string) {
 
     switch (error.code) {
       case 'EACCES': {
-        log()
         log(
           chalk.red(
             `😭 did server error: ${bind} requires elevated privileges 😭`
           )
         )
-        log()
         process.exit(1)
       }
       case 'EADDRINUSE': {
-        log()
         log(chalk.red(`😭 did server error: ${bind} is already in use 😭`))
-        log()
         process.exit(1)
       }
       default: {
@@ -63,9 +58,7 @@ export async function startServer(port: string) {
    * server.
    */
   function onListening() {
-    log()
     log(chalk.cyan(`did server listening on port [${port}] 🚀`))
-    log()
   }
 
   server.listen(port)

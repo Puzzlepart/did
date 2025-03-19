@@ -2,7 +2,6 @@
 /* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const tryRequire = require('try-require')
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const constants = require('./constants')

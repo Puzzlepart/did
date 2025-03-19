@@ -25,7 +25,9 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip-ci]') && !contains(github.event.head_commit.message, '[skip-deploy]')"
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-node@v3
+
+    - name: Use Node.js (${{ vars.NODE_VERSION }})
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ vars.NODE_VERSION }}
 

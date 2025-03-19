@@ -1,7 +1,6 @@
 /**
  * [GraphQL](https://graphql.org/) context
  */
-import createDebug from 'debug'
 import get from 'get-value'
 import { verify } from 'jsonwebtoken'
 import { MongoClient, Db as MongoDatabase } from 'mongodb'
@@ -12,7 +11,7 @@ import { environment, tryParseJson } from '../utils'
 import { Subscription } from './resolvers/types'
 import { GraphQLError } from 'graphql'
 import colors from 'colors/safe'
-const debug = createDebug('graphql/requestContext')
+const debug = require('debug')('graphql/requestContext')
 
 interface User extends Partial<Omit<Express.User, 'subscription'>> {
   subscription?: Subscription
