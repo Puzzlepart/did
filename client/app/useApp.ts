@@ -27,7 +27,7 @@ function useLastActiveUpdater() {
 
 /**
  * Component logic for `App` component.
- * 
+ *
  * @param sessionContext - The session context object containing user information.
  *
  * @category App Hooks
