@@ -74,7 +74,7 @@ export class UserResolver {
     nullable: true,
     description: 'Get the currently logged in user'
   })
-  async currentUser(@Ctx() context: RequestContext): Promise<User> {
+  public async currentUser(@Ctx() context: RequestContext): Promise<User> {
     const user = await this._userSvc.getById(context.userId)
     if (!user) return null
     return {
@@ -90,7 +90,7 @@ export class UserResolver {
   @Query(() => [ActiveDirectoryUser], {
     description: 'Get all users from Active Directory'
   })
-  activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
+  public activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
     return this._msgraphSvc.getUsers()
   }
 
@@ -101,7 +101,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [User], { description: 'Get users' })
-  users(
+  public users(
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ): Promise<User[]> {
     return this._userSvc.getUsers(query)
@@ -115,7 +115,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Add or update user' })
-  async addOrUpdateUser(
+  public async addOrUpdateUser(
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
@@ -137,7 +137,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Add users' })
-  async addUsers(
+  public async addUsers(
     @Arg('users', () => [UserInput]) users: UserInput[]
   ): Promise<BaseResult> {
     users = users.map((user) => ({
@@ -155,7 +155,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
   @Mutation(() => BaseResult, { description: 'Update users' })
-  async updateUsers(
+  public async updateUsers(
     @Arg('users', () => [UserInput]) users: UserInput[]
   ): Promise<BaseResult> {
     await this._userSvc.updateUsers(users)
@@ -171,7 +171,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, { description: 'Update user configuration' })
-  async updateUserConfiguration(
+  public async updateUserConfiguration(
     @Arg('user', { nullable: true }) user: string,
     @Arg('lastActive', { nullable: true }) lastActive?: string
   ): Promise<BaseResult> {
@@ -186,7 +186,7 @@ export class UserResolver {
   @Mutation(() => UpdateUserTimebankResult, {
     description: 'Updates the balance of the user timebank'
   })
-  async updateUserTimebank(
+  public async updateUserTimebank(
     @Ctx() context: RequestContext,
     @Arg('balanceAdjustment', { nullable: false }) balanceAdjustment: number,
     @Arg('entryId', { nullable: false }) entryId: string,
@@ -222,7 +222,7 @@ export class UserResolver {
    * @param feedback - Feedback model
    */
   @Mutation(() => UserFeedbackResult, { description: 'Submit feedback' })
-  async submitFeedback(
+  public async submitFeedback(
     @Arg('feedback') feedback: UserFeedback
   ): Promise<UserFeedbackResult> {
     try {

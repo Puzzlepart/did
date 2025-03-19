@@ -1,11 +1,15 @@
+// External imports
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { isBrowser } from 'react-device-detect'
+import _ from 'underscore'
+import s from 'underscore.string'
+
+// Project imports
 import { DateObject } from 'DateUtils'
 import { TabItems } from 'components/Tabs'
 import { useTimesheetPeriods } from 'hooks'
-import { useMemo } from 'react'
-import { isBrowser } from 'react-device-detect'
-import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
-import s from 'underscore.string'
+import { useSubscriptionSettings } from 'AppContext'
 import { ReportTab } from '../ReportTab'
 import {
   report_current_month,
@@ -16,20 +20,21 @@ import {
   report_summary
 } from '../queries'
 import { IReportsQuery } from '../types'
-import { useSubscriptionSettings } from 'AppContext'
+
+type QueryHook = (query?: any, ...args: any[]) => IReportsQuery
 
 /**
- * Returns query properties for preset
- * **LAST_MONTH**
+ * Returns query properties for preset **LAST_MONTH**.
  *
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param query - GraphQL query
+ * @param query - GraphQL query to use for the report
+ * @returns Report query configuration
  *
  * @category Reports
  */
-export function useLastMonthQuery(query = report_last_month): IReportsQuery {
+export const useLastMonthQuery: QueryHook = (query = report_last_month) => {
   const { t } = useTranslation()
   const dateObject = new DateObject().add('-1month').toObject()
   const monthName = s.capitalize(dateObject.monthName)
@@ -44,25 +49,26 @@ export function useLastMonthQuery(query = report_last_month): IReportsQuery {
       userQuery: { hiddenFromReports: false }
     },
     reportLinkRef: [dateObject.year, dateObject.month].join('_')
-  } as IReportsQuery
+  }
 }
 
 /**
- * Returns query properties for preset
- * **CURRENT_MONTH**. Report link ref (`reportLinkRef`)
- * is added to find potential report links for
- * this query..
+ * Returns query properties for preset **CURRENT_MONTH**
+ * 
+ * Report link ref (`reportLinkRef`) is added to find 
+ * potential report links for this query.
  *
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param query - GraphQL query
+ * @param query - GraphQL query to use for the report
+ * @returns Report query configuration
  *
  * @category Reports
  */
-export function useCurrentMonthQuery(
+export const useCurrentMonthQuery: QueryHook = (
   query = report_current_month
-): IReportsQuery {
+) => {
   const { t } = useTranslation()
   const dateObject = new DateObject().toObject()
   const monthName = s.capitalize(dateObject.monthName)
@@ -77,81 +83,86 @@ export function useCurrentMonthQuery(
       userQuery: { hiddenFromReports: false }
     },
     reportLinkRef: [dateObject.year, dateObject.month].join('_')
-  } as IReportsQuery
+  }
 }
 
 /**
- * Returns query properties for preset
- * **LAST_YEAR**. Report link ref (`reportLinkRef`)
- * is added to find potential report links for
- * this query.
+ * Returns query properties for preset **LAST_YEAR**
+ * 
+ * Report link ref (`reportLinkRef`) is added to find 
+ * potential report links for this query.
  *
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param query - GraphQL query
+ * @param query - GraphQL query to use for the report
+ * @returns Report query configuration
  *
  * @category Reports
  */
-export function useLastYearQuery(query = report_last_year): IReportsQuery {
+export const useLastYearQuery: QueryHook = (query = report_last_year) => {
   const { t } = useTranslation()
   const dateObject = new DateObject().toObject('year')
-  const year = dateObject.year - 1
+  const previousYear = dateObject.year - 1
   return {
     id: 'last_year',
     text: t('common.exportTypeLastYear'),
-    description: isBrowser && `${year}`,
+    description: isBrowser && `${previousYear}`,
     icon: 'Previous',
     query,
-    exportFileName: `TimeEntries-${year}-{0}.xlsx`,
-    reportLinkRef: year.toString()
-  } as IReportsQuery
-}
-
-/**
- * Returns query properties for preset
- * **CURRENT_YEAR**. Report link ref (`reportLinkRef`)
- * is added to find potential report links for
- * this query..
- *
- * @remarks Made as generic so it can also be used by
- * `<UserReports />` which are using `IChoiceGroupOption`
- *
- * @param query - GraphQL query
- *
- * @category Reports
- */
-export function useCurrentYearQuery(
-  query = report_current_year
-): IReportsQuery {
-  const { t } = useTranslation()
-  const { year } = new DateObject().toObject('year')
-  return {
-    id: 'current_year',
-    text: t('common.exportTypeCurrentYear'),
-    description: isBrowser && `${year}`,
-    icon: 'CalendarReply',
-    query,
-    exportFileName: `TimeEntries-${year}-{0}.xlsx`,
+    exportFileName: `TimeEntries-${previousYear}-{0}.xlsx`,
     variables: {
       userQuery: { hiddenFromReports: false }
     },
-    reportLinkRef: year.toString()
-  } as IReportsQuery
+    reportLinkRef: previousYear.toString()
+  }
 }
 
 /**
- * Returns query properties for preset
- * **FORECAST**
+ * Returns query properties for preset **CURRENT_YEAR**
+ * 
+ * Report link ref (`reportLinkRef`) is added to find 
+ * potential report links for this query.
  *
  * @remarks Made as generic so it can also be used by
  * `<UserReports />` which are using `IChoiceGroupOption`
  *
- * @param query - GraphQL query
+ * @param query - GraphQL query to use for the report
+ * @returns Report query configuration
  *
  * @category Reports
  */
-export function useForecastQuery(query = report_forecast): IReportsQuery {
+export const useCurrentYearQuery: QueryHook = (
+  query = report_current_year
+) => {
+  const { t } = useTranslation()
+  const { year: currentYear } = new DateObject().toObject('year')
+  return {
+    id: 'current_year',
+    text: t('common.exportTypeCurrentYear'),
+    description: isBrowser && `${currentYear}`,
+    icon: 'CalendarReply',
+    query,
+    exportFileName: `TimeEntries-${currentYear}-{0}.xlsx`,
+    variables: {
+      userQuery: { hiddenFromReports: false }
+    },
+    reportLinkRef: currentYear.toString()
+  }
+}
+
+/**
+ * Returns query properties for preset **FORECAST**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
+ *
+ * @param query - GraphQL query to use for the report
+ * @returns Report query configuration
+ *
+ * @category Reports
+ */
+export const useForecastQuery: QueryHook = (query = report_forecast) => {
   const { t } = useTranslation()
   const isForecastEnabled = useSubscriptionSettings<boolean>(
     'forecast.enabled',
@@ -167,17 +178,19 @@ export function useForecastQuery(query = report_forecast): IReportsQuery {
       userQuery: { hiddenFromReports: false }
     },
     disabled: !isForecastEnabled
-  } as IReportsQuery
+  }
 }
 
 /**
  * Returns query properties for Summary view.
  *
+ * @param query - GraphQL query to use for the report
  * @param weeksCount - Number of weeks to include in the summary
+ * @returns Report query configuration
  *
  * @category Reports
  */
-export function useSummaryQuery(weeksCount = 8): IReportsQuery {
+export const useSummaryQuery: QueryHook = (query = report_summary, weeksCount = 8) => {
   const { t } = useTranslation()
   const { periods, queries } = useTimesheetPeriods(weeksCount, true)
   return {
@@ -186,17 +199,19 @@ export function useSummaryQuery(weeksCount = 8): IReportsQuery {
     icon: 'CalendarWeek',
     hidden: true,
     periods,
-    query: report_summary,
+    query,
     variables: {
-      userQuery: { hiddenFromReports: false },
-      queries
+      queries,
+      userQuery: { hiddenFromReports: false }
     }
-  } as IReportsQuery
+  }
 }
 
 /**
  * Returns all queries and query tabs available
  * for `<Reports />`.
+ * 
+ * @returns Object containing available queries and query tabs
  *
  * @category Reports
  */
@@ -207,7 +222,8 @@ export function useReportsQueries() {
   const lastYearQuery = useLastYearQuery()
   const forecastQuery = useForecastQuery()
   const summaryQuery = useSummaryQuery()
-  const queries = [
+
+  const allQueries = [
     lastMonthQuery,
     currentMonthQuery,
     currentYearQuery,
@@ -219,7 +235,7 @@ export function useReportsQueries() {
   const queryTabs = useMemo(
     () =>
       _.reduce(
-        _.filter(queries, (q) => !q.hidden),
+        _.filter(allQueries, (query) => !query.hidden),
         (tabs, query) => {
           tabs[query.id] = [
             ReportTab,
@@ -233,10 +249,10 @@ export function useReportsQueries() {
         },
         {} as TabItems
       ),
-    [queries]
+    [allQueries]
   )
 
-  return { queries, queryTabs }
+  return { queries: allQueries, queryTabs }
 }
 
 export { default as default_query } from '../queries/report-current-month.gql'

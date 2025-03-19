@@ -14,10 +14,10 @@ query SummaryReport(
       duration
     }
   }
-  users: users {
+  users {
     ...ReportUserFragment
   }
-  projects: projects {
+  projects {
     _id
     customerKey
     customer {

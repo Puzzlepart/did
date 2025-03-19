@@ -17,11 +17,15 @@ function generateColumnData(periods: TimesheetPeriodObject[] = []) {
 }
 
 /**
- * Hooks for generating rows data from `state` data.
+ * Hooks for generating rows data from `state` data. Generates
+ * rows for each user and a total row. If the user has no hours
+ * in the selected periods, the row is not included.
+ * 
+ * @category SummaryView
  */
 export function useRows() {
   const context = useReportsContext()
-  return [
+  const rows = [
     ...context.state.data.users.map((user) => {
       const periods = context.state.data.periods.filter(
         (period) => period.userId === user.id
@@ -35,5 +39,6 @@ export function useRows() {
       isTotalRow: true,
       ...generateColumnData(context.state.data.periods)
     }
-  ]
+  ].filter((row) => Object.keys(row).length > 1)
+  return rows
 }
