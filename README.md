@@ -8,13 +8,13 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.15.0-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.15.1-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
 <br />
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#table-of-contents)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
@@ -41,7 +41,7 @@
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#roadmap)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#roadmap)
 
 ## ➤ Roadmap
 
@@ -64,14 +64,14 @@
 | [🦿 &nbsp;15 -  &nbsp;Fosfor](https://github.com/Puzzlepart/did365/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#backlog)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#backlog)
 
 ## ➤ Backlog
 
 Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#environments)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#environments)
 
 ## ➤ Environments
 
@@ -85,7 +85,7 @@ Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#contributing)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#contributing)
 
 ## ➤ Contributing
 
@@ -241,7 +241,7 @@ _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#contributors)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#contributors)
 
 ## ➤ Contributors
 	
