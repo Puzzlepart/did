@@ -1,7 +1,10 @@
-import React, { FC } from 'react'
+import { mergeClasses } from '@fluentui/react-components'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
+import { StyledComponent } from 'types'
+import styles from './Markdown.module.scss'
 import { IMarkdownProps } from './types'
 
 /**
@@ -10,10 +13,20 @@ import { IMarkdownProps } from './types'
  *
  * @param props - The props for the Markdown component.
  */
-export const Markdown: FC<IMarkdownProps> = (props) => {
+export const Markdown: StyledComponent<IMarkdownProps> = (props) => {
   return (
-    <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
-      {props.text}
-    </ReactMarkdown>
+    <div className={mergeClasses(Markdown.className, props.className)}>
+      <ReactMarkdown
+        linkTarget={props.linkTarget}
+        rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+        {props.text}
+      </ReactMarkdown>
+    </div>
   )
+}
+
+Markdown.displayName = 'Markdown'
+Markdown.className = styles.markdown
+Markdown.defaultProps = {
+  linkTarget: '_blank'
 }
