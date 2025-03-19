@@ -27,7 +27,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/setup-node@v3
       with:
-        node-version: ${{ vars.NODE_VERSION }}
+        node-version: 22.11.0
 
     - run: |
         npm ci --no-audit --no-fund --loglevel=error
