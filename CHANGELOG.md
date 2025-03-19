@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.14.19 - 19.03.2025](#-01419---19032025)
+	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
 		* [Fixed](#fixed)
 	* [➤ 0.14.18 - 18.03.2025](#-01418---18032025)
 		* [Fixed](#fixed-1)
@@ -94,9 +94,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#01419---19032025)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#0150---19032025)
 
-## ➤ 0.14.19 - 19.03.2025
+## ➤ 0.15.0 - 19.03.2025
 
 ### Fixed
 
