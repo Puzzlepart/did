@@ -1,10 +1,27 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import { IAppProps } from 'app/types'
 import { ContextUser } from 'AppContext'
-import $userContextQuery from './user-context.gql'
+import { Subscription } from 'types'
+import $session_context from './session-context.gql'
+
+export type SessionContext = {
+  /**
+   * The currently logged in user
+   */
+  user?: ContextUser
+
+  /**
+   * Subscription
+   */
+  subscription?: Subscription
+
+  /**
+   * Auth providers
+   */
+  authProviders?: string[]
+}
 
 /**
- * Fetches the user context from the server.
+ * Fetches the session context from the GraphQL server.
  *
  * - `user` is a `ContextUser` object.
  * - `subscription` is a `Subscription` object.
@@ -14,12 +31,12 @@ import $userContextQuery from './user-context.gql'
  *
  * @returns A Promise that resolves to an object containing the user context.
  */
-export async function fetchUserContext(
+export async function fetchSessionContext(
   client: ApolloClient<NormalizedCacheObject>
-): Promise<IAppProps> {
+): Promise<SessionContext> {
   try {
-    const { data } = await client.query<Partial<IAppProps>>({
-      query: $userContextQuery,
+    const { data } = await client.query<Partial<SessionContext>>({
+      query: $session_context,
       fetchPolicy: 'cache-first'
     })
     return {
