@@ -15,7 +15,7 @@ import { render } from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { App } from './app'
 import { client } from './graphql-client'
-import { fetchUserContext } from './graphql-queries/user'
+import { fetchSessionContext } from './graphql-queries/session'
 import './i18n'
 
 // Enable the MapSet plugin
@@ -30,13 +30,13 @@ enableMapSet()
  */
 export const bootstrap = async () => {
   initializeIcons(ICONS_BASE_URL)
-  const context = await fetchUserContext(client)
-  $date.setup(context.user.preferredLanguage)
-  i18next.changeLanguage(context.user.preferredLanguage)
+  const sessionContext = await fetchSessionContext(client)
+  $date.setup(sessionContext.user.preferredLanguage)
+  i18next.changeLanguage(sessionContext.user.preferredLanguage)
 
   render(
     <ApolloProvider client={client}>
-      <App {...context} />
+      <App sessionContext={sessionContext} />
     </ApolloProvider>,
     document.querySelector('#app')
   )

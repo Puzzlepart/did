@@ -1,23 +1,15 @@
 import { IToastProps } from 'components'
-import { Subscription } from 'types'
+import { SessionContext } from '../graphql-queries/session'
 import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
-import { ContextUser } from './ContextUser'
 
 export interface IAppProps {
   /**
-   * The currently logged in user
+   * Session context object containing user information.
+   * 
+   * This is retrieved from the GraphQL server and contains details about the user,
+   * subscription status, and authentication providers.
    */
-  user?: ContextUser
-
-  /**
-   * Subscription
-   */
-  subscription?: Subscription
-
-  /**
-   * Auth providers
-   */
-  authProviders?: string[]
+  sessionContext: SessionContext
 }
 
 export interface IAppState {

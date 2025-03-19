@@ -1,13 +1,13 @@
 import createActivityDetector from 'activity-detector'
 import { IAppContext } from 'AppContext'
 import { IToastProps } from 'components'
+import { SessionContext } from 'graphql-queries/session'
+import { logging } from 'logging'
 import { usePages } from 'pages/usePages'
 import { useEffect, useMemo } from 'react'
 import { useNotificationsQuery } from '../hooks'
 import { useUpdateUserConfiguration } from '../hooks/user/useUpdateUserConfiguration'
 import useAppReducer, { SET_TOAST } from './reducer'
-import { IAppProps } from './types'
-import { logging } from 'logging'
 
 /**
  * Update `last_active` property for the user.
@@ -26,13 +26,15 @@ function useLastActiveUpdater() {
 }
 
 /**
- * Component logic for `App`
+ * Component logic for `App` component.
+ * 
+ * @param sessionContext - The session context object containing user information.
  *
  * @category App Hooks
  */
-export function useApp(props: IAppProps) {
+export function useApp(sessionContext: SessionContext) {
   const [state, dispatch] = useAppReducer({})
-  const notifications = useNotificationsQuery({ user: props.user })
+  const notifications = useNotificationsQuery({ user: sessionContext.user })
   const pages = usePages()
 
   logging
@@ -76,7 +78,7 @@ export function useApp(props: IAppProps) {
   const context = useMemo<IAppContext>(
     () =>
       ({
-        ...props,
+        ...sessionContext,
         pages,
         notifications,
         state,
