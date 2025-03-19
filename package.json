@@ -383,6 +383,10 @@
       "🌱",
       "Improved an existing feature"
     ],
+    "hotfix": [
+      "🚑",
+      "Fixed a critical bug"
+    ],
     "fix": [
       "🐛",
       "Fixed a bug"

@@ -10,6 +10,7 @@ import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
 import { mergeClasses } from '@fluentui/react-components'
+import _ from 'lodash'
 
 /**
  * A custom hook that generates and returns a list of columns for a timesheet summary view.
@@ -98,10 +99,11 @@ export function useColumns(): IListColumn[] {
       isMultiline: true,
       isResizable: true,
       onRender: (row: ILabelColumnProps) => {
-        if (!row.project?.tag) return <LabelColumn {...row} />
+        const tag = _.get(row, 'project.tag')
+        if (!tag) return <LabelColumn {...row} />
         const items = context.state.selectedPeriod
           ?.getEvents()
-          .filter((event) => event.project?.tag === row.project.tag)
+          .filter(({ project }) => project?.tag === tag)
         return (
           <ProjectPopover
             width={450}
