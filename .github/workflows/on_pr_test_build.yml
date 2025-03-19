@@ -16,7 +16,6 @@ jobs:
     concurrency: 
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-      
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +34,7 @@ jobs:
       - name: Ava tests
         run: |
           npm test
+        if: "!contains(github.event.head_commit.message, '[skip-tests]')"
 
       - name: ESLint
         run: |
