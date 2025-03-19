@@ -46,10 +46,10 @@ export const setupGraphQL = async (
     const schema = await generateGraphQLSchema()
     const server = new ApolloServer<RequestContext>({
       logger: {
-        debug: () => null,
-        info: () => null,
-        warn: () => null,
-        error: () => null
+        debug,
+        info: debug,
+        warn: debug,
+        error: debug
       },
       schema,
       rootValue: global,
