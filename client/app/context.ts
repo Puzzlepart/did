@@ -2,13 +2,14 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { IToastProps } from 'components'
 import get from 'get-value'
+import { SessionContext } from 'graphql-queries/session'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
 import { SubscriptionSettings } from 'types'
 import { useNotificationsQuery } from '../hooks'
-import { IAppProps, IAppState } from './types'
+import { IAppState } from './types'
 
-export interface IAppContext extends IAppProps {
+export interface IAppContext extends SessionContext {
   /**
    * Pages
    */
