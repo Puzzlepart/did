@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /**
  * Main entry point for the http server (using [http](https://www.npmjs.com/package/http))
  *
@@ -9,7 +8,7 @@ import chalk from 'chalk'
 import * as http from 'http'
 import app from './app'
 import { environment } from './utils/environment'
-const log = console.log
+const log = require('debug')('index')
 
 /**
  * Start server on the specified `port`

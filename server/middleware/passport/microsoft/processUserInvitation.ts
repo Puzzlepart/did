@@ -1,11 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import createDebug from 'debug'
 import _ from 'lodash'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from 'server/services'
 import { PROVIDER } from './onVerifySignin'
 import { IProfileJson } from './types'
-const debug = createDebug(
+const debug = require('debug')(
   'server/middleware/passport/microsoft/processUserInvitation'
 )
 

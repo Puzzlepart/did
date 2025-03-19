@@ -9,7 +9,6 @@ import { ApolloServerPluginSchemaReporting } from '@apollo/server/plugin/schemaR
 import { json } from 'body-parser'
 import colors from 'colors/safe'
 import cors from 'cors'
-import createDebug from 'debug'
 import express from 'express'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
@@ -19,7 +18,7 @@ import { RequestContext } from './requestContext'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
 import { environment } from '../utils'
-export const debug = createDebug('graphql/setupGraphQL')
+export const debug = require('debug')('graphql/setupGraphQL')
 
 /**
  * Set up [GraphQL](https://graphql.org/) for the [express](https://www.npmjs.com/package/express)
