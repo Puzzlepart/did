@@ -10,7 +10,7 @@
     "url": "https://github.com/Puzzlepart/did/issues"
   },
   "ava": {
-    "workerThreads": false,
+    "workerThreads": true,
     "timeout": "2m",
     "extensions": {
       "ts": "module"
