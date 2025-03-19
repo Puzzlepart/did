@@ -20,7 +20,7 @@ function generateColumnData(periods: TimesheetPeriodObject[] = []) {
  * Hooks for generating rows data from `state` data. Generates
  * rows for each user and a total row. If the user has no hours
  * in the selected periods, the row is not included.
- * 
+ *
  * @category SummaryView
  */
 export function useRows() {

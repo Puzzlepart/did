@@ -54,8 +54,8 @@ export const useLastMonthQuery: QueryHook = (query = report_last_month) => {
 
 /**
  * Returns query properties for preset **CURRENT_MONTH**
- * 
- * Report link ref (`reportLinkRef`) is added to find 
+ *
+ * Report link ref (`reportLinkRef`) is added to find
  * potential report links for this query.
  *
  * @remarks Made as generic so it can also be used by
@@ -88,8 +88,8 @@ export const useCurrentMonthQuery: QueryHook = (
 
 /**
  * Returns query properties for preset **LAST_YEAR**
- * 
- * Report link ref (`reportLinkRef`) is added to find 
+ *
+ * Report link ref (`reportLinkRef`) is added to find
  * potential report links for this query.
  *
  * @remarks Made as generic so it can also be used by
@@ -120,8 +120,8 @@ export const useLastYearQuery: QueryHook = (query = report_last_year) => {
 
 /**
  * Returns query properties for preset **CURRENT_YEAR**
- * 
- * Report link ref (`reportLinkRef`) is added to find 
+ *
+ * Report link ref (`reportLinkRef`) is added to find
  * potential report links for this query.
  *
  * @remarks Made as generic so it can also be used by
@@ -132,9 +132,7 @@ export const useLastYearQuery: QueryHook = (query = report_last_year) => {
  *
  * @category Reports
  */
-export const useCurrentYearQuery: QueryHook = (
-  query = report_current_year
-) => {
+export const useCurrentYearQuery: QueryHook = (query = report_current_year) => {
   const { t } = useTranslation()
   const { year: currentYear } = new DateObject().toObject('year')
   return {
@@ -190,7 +188,10 @@ export const useForecastQuery: QueryHook = (query = report_forecast) => {
  *
  * @category Reports
  */
-export const useSummaryQuery: QueryHook = (query = report_summary, weeksCount = 8) => {
+export const useSummaryQuery: QueryHook = (
+  query = report_summary,
+  weeksCount = 8
+) => {
   const { t } = useTranslation()
   const { periods, queries } = useTimesheetPeriods(weeksCount, true)
   return {
@@ -210,7 +211,7 @@ export const useSummaryQuery: QueryHook = (query = report_summary, weeksCount = 
 /**
  * Returns all queries and query tabs available
  * for `<Reports />`.
- * 
+ *
  * @returns Object containing available queries and query tabs
  *
  * @category Reports
