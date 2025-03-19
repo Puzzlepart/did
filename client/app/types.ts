@@ -5,7 +5,7 @@ import { IMobileBreadcrumbItem } from '../parts/MobileBreadcrumb'
 export interface IAppProps {
   /**
    * Session context object containing user information.
-   * 
+   *
    * This is retrieved from the GraphQL server and contains details about the user,
    * subscription status, and authentication providers.
    */
