@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.14.18",
+  "version": "0.14.19",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
