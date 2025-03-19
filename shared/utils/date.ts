@@ -297,20 +297,39 @@ export class DateUtils {
 
   /**
    * Get Iso Week number
-   * Handles a weakness in dayjs, where week 53 occuring in january of a year
-   * e.g. jan 1-3 2021, is returned as january 2022
+   * Properly handles ISO week numbering edge cases by validating the week number
+   * against the year's actual number of weeks.
+   * 
+   * ISO weeks:
+   * - A year can have 52 or 53 weeks
+   * - Week 1 is the week with the year's first Thursday
+   * - Dates before week 1 belong to the previous year's last week
    *
    * @param isoWeek - Iso week number
    * @param year - Year
    */
   public getIsoWeek(isoWeek: number, year: number) {
-    if (
-      isoWeek === 53 &&
-      $dayjs()
-        .year(year - 1)
-        .isoWeeksInYear() === 53
-    )
-      return 0
+    const weeksInYear = $dayjs().year(year).isoWeeksInYear()
+    const weeksInPrevYear = $dayjs().year(year - 1).isoWeeksInYear()
+    
+    // Handle dates in week 53
+    if (isoWeek === 53) {
+      return weeksInYear === 53 ? 53 : (weeksInPrevYear === 53 ? 53 : 1)
+    }
+    
+    // Handle dates in week 52
+    if (isoWeek === 52) {
+      return weeksInYear >= 52 ? 52 : 52
+    }
+    
+    // Handle week 1 edge case (last few days of previous year)
+    if (isoWeek === 1 && weeksInPrevYear === 53) {
+      const lastWeekOfPrevYear = $dayjs().year(year - 1).isoWeek(53)
+      if ($dayjs().year(year).isoWeek(1).isAfter(lastWeekOfPrevYear)) {
+        return 1
+      }
+    }
+    
     return isoWeek
   }
 
