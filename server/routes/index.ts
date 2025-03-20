@@ -1,15 +1,6 @@
 import { Request, Response } from 'express'
-import { environment } from '../utils'
-import { renderPage } from './renderPage'
-
-/**
- * Checks if the application is in maintenance mode based on environment variables.
- *
- * @returns boolean True if maintenance mode is enabled
- */
-const isMaintenanceMode = (): boolean => {
-  return environment<boolean>('MAINTENANCE_MODE', null, { isSwitch: true })
-}
+import { handleMaintenanceMode, isMaintenanceMode } from './maintenanceMode'
+import { renderPage } from './utils'
 
 /**
  * Default route handler for the root path `/`. It checks if the user is
@@ -28,7 +19,7 @@ export default (request: Request, response: Response) => {
   // If maintenance mode is enabled, render the maintenance page for all routes
   // except API routes which might be needed by the maintenance page itself
   if (isMaintenanceMode()) {
-    return renderPage(response, 'maintenance.html', 503)
+    return handleMaintenanceMode(response)
   }
 
   // Define public routes that don't require authentication
