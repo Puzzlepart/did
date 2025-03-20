@@ -16,7 +16,8 @@ import { renderErrorPage } from './renderErrorPage'
 export function renderPage(
   response: Response,
   page: string,
-  statusCode: number = 200) {
+  statusCode: number = 200
+) {
   return response.render(page, {}, (err, html) => {
     if (err) {
       return renderErrorPage(response, 503)
