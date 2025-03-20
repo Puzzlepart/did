@@ -2,6 +2,9 @@ import { Request, Response } from 'express'
 import { handleMaintenanceMode, isMaintenanceMode } from './maintenanceMode'
 import { renderPage } from './utils'
 
+// Define public routes that don't require authentication
+const publicRoutes = new Set(['/termsofservice', '/privacystatement', '/'])
+
 /**
  * Default route handler for the root path `/`. It checks if the user is
  * authenticated and redirects to the login page if not.
@@ -22,11 +25,8 @@ export default (request: Request, response: Response) => {
     return handleMaintenanceMode(response)
   }
 
-  // Define public routes that don't require authentication
-  const publicRoutes = ['/termsofservice', '/privacystatement', '/']
-
   // Only check authentication for non-public routes
-  if (request.isUnauthenticated() && !publicRoutes.includes(url)) {
+  if (request.isUnauthenticated() && !publicRoutes.has(url)) {
     return response.redirect(
       `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
     )

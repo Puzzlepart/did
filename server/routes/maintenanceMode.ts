@@ -4,6 +4,7 @@ import path from 'path'
 import { Response } from 'express'
 
 const DEFAULT_MAINTENANCE_MESSAGE =
+  // eslint-disable-next-line quotes
   "We're currently deploying updates to did. Please check back in a few minutes (or hours if everything goes wrong)."
 
 /**
@@ -28,7 +29,7 @@ export const handleMaintenanceMode = (response: Response) => {
   return renderPage(
     response,
     path.join(__dirname, '../public/pages/maintenance'),
-    503,
+    418,
     { message }
   )
 }
