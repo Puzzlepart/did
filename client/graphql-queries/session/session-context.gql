@@ -1,4 +1,4 @@
-query UserContext {
+query SessionContext {
   subscription {
     id
     name

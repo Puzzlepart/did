@@ -1,11 +1,10 @@
 import colors from 'colors/safe'
-import createDebug from 'debug'
 import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { Request } from '../graphql/requestContext'
-const debug = createDebug('services/msoauth')
+const debug = require('debug')('services/msoauth')
 
 export interface MSAccessTokenOptions {
   clientId: string

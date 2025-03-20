@@ -16,7 +16,7 @@ import { useApp } from './useApp'
  * @category App
  */
 export const App: FC<IAppProps> = (props) => {
-  const context = useApp(props)
+  const context = useApp(props.sessionContext)
   return (
     <AppContext.Provider value={context}>
       <Themed>

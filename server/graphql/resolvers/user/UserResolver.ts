@@ -1,4 +1,3 @@
-import createDebug from 'debug'
 import 'reflect-metadata'
 import Format from 'string-format'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
@@ -24,7 +23,7 @@ import {
   UserInput,
   UserQuery
 } from './types'
-const debug = createDebug('graphql/resolvers/user')
+const debug = require('debug')('graphql/resolvers/user')
 
 /**
  * Resolver for `User`.

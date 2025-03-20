@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.15.1-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.15.3-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -75,11 +75,11 @@ Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 ## ➤ Environments
 
-| Environment | Branch/Tag   | CI | Status |
-| ----------- | ------------------------------------------------------------  | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Production](https://did.puzzlepart.com)     | **main** | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | [![Build and deploy to didapp](https://github.com/Puzzlepart/did/actions/workflows/on_push_main_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_main_deploy.yml) |
-| [Development (new features)](https://didapp-dev.azurewebsites.net) | **dev** and  **feat/**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | [![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml/badge.svg?branch=dev)](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml) |
-| [Staging (pre-prod)](https://didapp-staging.azurewebsites.net) | Release tags | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/staging/vstscd) | [![Build and deploy to didapp/staging](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml) |
+| Environment | Branch/Tag   | Node Version | CI | Status |
+| ----------- | ------------------------------------------------------------  | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Production](https://did.puzzlepart.com)     | **main** | Node 18 LTS ⚠️ | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | [![Build and deploy to didapp](https://github.com/Puzzlepart/did/actions/workflows/on_push_main_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_main_deploy.yml) |
+| [Development (new features)](https://didapp-dev.azurewebsites.net) | **dev** and  **feat/**  | Node 22 LTS | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | [![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml/badge.svg?branch=dev)](https://github.com/Puzzlepart/did/actions/workflows/on_push_dev_deploy.yml) |
+| [Staging (pre-prod)](https://didapp-staging.azurewebsites.net) | Release tags | Node 22 LTS | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/staging/vstscd) | [![Build and deploy to didapp/staging](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml/badge.svg)](https://github.com/Puzzlepart/did/actions/workflows/on_push_staging_deploy.yml) |
 
 
 
@@ -101,7 +101,7 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 5. Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 6. Install the [ESLint extension for vscode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 7. Install the [i18n Ally extension for vscode](https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally)
-8. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
+8. Create an Azure app registration
 9. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
 The following permissions are required by Azure App Registration:
@@ -176,7 +176,7 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: did should be developed with node 18.18.0**
+**NB: did should be developed with Node 22.11.0 (LTS).**
 
 _It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.18.0._
 

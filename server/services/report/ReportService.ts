@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-import createDebug from 'debug'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ProjectService, UserService } from '..'
@@ -17,7 +16,7 @@ import {
   TimeEntryService
 } from '../mongo'
 import { Report, IGenerateReportParameters } from './types'
-const debug = createDebug('server/services/report/ReportService')
+const debug = require('debug')('services/report/ReportService')
 
 /**
  * Report service

@@ -12,7 +12,7 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 5. Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 6. Install the [ESLint extension for vscode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 7. Install the [i18n Ally extension for vscode](https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally)
-8. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
+8. Create an Azure app registration
 9. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
 The following permissions are required by Azure App Registration:
@@ -87,7 +87,7 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: did should be developed with node 18.18.0**
+**NB: did should be developed with Node 22.11.0 (LTS).**
 
 _It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.18.0._
 

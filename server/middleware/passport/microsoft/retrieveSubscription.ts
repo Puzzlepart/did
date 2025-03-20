@@ -1,9 +1,8 @@
-import createDebug from 'debug'
 import { SubscriptionService } from 'server/services'
 import { TENANT_NOT_ENROLLED } from '../errors'
 import { PROVIDER } from './onVerifySignin'
 import { IProfileJson } from './types'
-const debug = createDebug(
+const debug = require('debug')(
   'server/middleware/passport/microsoft/retrieveSubscription'
 )
 
