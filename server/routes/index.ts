@@ -31,25 +31,13 @@ export default (request: Request, response: Response) => {
   }
   switch (url) {
     case '/terms_of_service': {
-      return renderPage(
-        response,
-        'terms_of_service',
-        200
-      )
+      return renderPage(response, 'terms_of_service', 200)
     }
     case '/privacy_statement': {
-      return renderPage(
-        response,
-        'privacy_statement',
-        200
-      )
+      return renderPage(response, 'privacy_statement', 200)
     }
     default: {
-      return renderPage(
-        response,
-        'index',
-        200
-      )
+      return renderPage(response, 'index', 200)
     }
   }
 }

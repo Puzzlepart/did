@@ -110,6 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added "Reload" button to timesheet to fetch fresh data from Microsoft Graph without using cache
 - Refactored server routes with improved error handling during page rendering
+- Added Terms of Service and Privacy Statement pages with initial content
 
 
 
