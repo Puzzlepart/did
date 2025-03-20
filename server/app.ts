@@ -176,10 +176,7 @@ export class App {
           timestamp: new Date(),
           maintenanceMode: {
             enabled: environment('MAINTENANCE_MODE', false, { isSwitch: true }),
-            message: environment(
-              'MAINTENANCE_MESSAGE',
-              null
-            )
+            message: environment('MAINTENANCE_MESSAGE', null)
           },
           mongodb: {
             connected: isMongoConnected
