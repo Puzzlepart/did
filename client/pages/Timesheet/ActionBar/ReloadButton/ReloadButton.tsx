@@ -8,7 +8,10 @@ import { useTimesheetContext } from 'pages/Timesheet/context'
 export const ReloadButton: FC<IReloadButtonProps> = (props) => {
   const { t } = useTranslation()
   const context = useTimesheetContext()
-  if (context.state?.selectedPeriod?.isConfirmed || Boolean(context.state.loading)) {
+  if (
+    context.state?.selectedPeriod?.isConfirmed ||
+    Boolean(context.state.loading)
+  ) {
     return null
   }
   return (
@@ -16,7 +19,8 @@ export const ReloadButton: FC<IReloadButtonProps> = (props) => {
       hidden
       icon={icon(props.iconName)}
       title={t('timesheet.reloadButtonTooltip')}
-      onClick={() => context.refetch({ cache: props.cache })}>
+      onClick={() => context.refetch({ cache: props.cache })}
+    >
       {t('timesheet.reloadButtonText')}
     </ToolbarButton>
   )
