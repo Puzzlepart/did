@@ -189,9 +189,10 @@ export class App {
 
         // Set security headers
         res.set({
-          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0'
+          'Cache-Control':
+            'no-store, no-cache, must-revalidate, proxy-revalidate',
+          Pragma: 'no-cache',
+          Expires: '0'
         })
 
         res.status(isMongoConnected ? 200 : 500).json(healthStatus)
