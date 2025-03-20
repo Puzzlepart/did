@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.15.2 - TBA](#-0152---tba)
+	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
 		* [Changed](#changed)
 	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
 		* [Fixed](#fixed)
@@ -98,9 +98,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0152---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0153---20032025)
 
-## ➤ 0.15.2 - TBA
+## ➤ 0.15.3 - 20.03.2025
 
 ### Changed
 
