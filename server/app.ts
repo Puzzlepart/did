@@ -174,6 +174,13 @@ export class App {
           status: isMongoConnected ? 'ok' : 'error',
           uptime: process.uptime(),
           timestamp: new Date(),
+          maintenanceMode: {
+            enabled: environment('MAINTENANCE_MODE', false, { isSwitch: true }),
+            message: environment(
+              'MAINTENANCE_MESSAGE',
+              null
+            )
+          },
           mongodb: {
             connected: isMongoConnected
           },
