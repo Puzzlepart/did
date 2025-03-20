@@ -3,6 +3,10 @@
   "description": "the calendar is your timesheet",
   "version": "0.15.4",
   "private": true,
+  "engines": {
+    "node": ">=22.14.0",
+    "npm": ">=10.0.0"
+  },
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
   },
@@ -215,10 +219,6 @@
       "img": "https://avatars.githubusercontent.com/u/170147?&size=130"
     }
   ],
-  "engines": {
-    "node": ">=22.0.0",
-    "npm": ">=10.0.0"
-  },
   "sideEffects": false,
   "eslintConfig": {
     "env": {
