@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.15.5 - TBA](#-0155---tba)
+	* [➤ 0.15.5 - 20.03.2025](#-0155---20032025)
 		* [Added](#added)
 		* [Changed](#changed)
 	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
@@ -103,9 +103,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0155---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0155---20032025)
 
-## ➤ 0.15.5 - TBA
+## ➤ 0.15.5 - 20.03.2025
 
 ### Added
 - Added support for enabling maintenance mode
