@@ -7,9 +7,10 @@ import path from 'path'
  * @param response - The HTTP response object used to send the error page.
  * @param statusCode - The HTTP status code for the error page. Defaults to 503.
  */
-export function renderErrorPage(
-  response: Response,
-  statusCode: number = 503) {
-  const errorPagePath = path.join(__dirname, `../public/errors/${statusCode}.html`)
+export function renderErrorPage(response: Response, statusCode: number = 503) {
+  const errorPagePath = path.join(
+    __dirname,
+    `../public/errors/${statusCode}.html`
+  )
   response.status(statusCode).sendFile(errorPagePath)
 }
