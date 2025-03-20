@@ -85,7 +85,8 @@
       "balanceAdjustmentNotAvailable": "You need to confirm your hours for the week before adjusting timebank balance. If the week is split, both periods needs to be confirmed."
     },
     "periodLockedText": "The period is locked by an administrator, and no changes can be made to it until it is unlocked.",
-    "reloadButtonText": "Reload"
+    "reloadButtonText": "Reload",
+    "reloadButtonTooltip": "Refresh the timesheet with new data from your calendar."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",

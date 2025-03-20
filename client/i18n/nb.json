@@ -84,7 +84,8 @@
     },
     "periodLockedText": "Perioden er låst av en administrator, og det er ikke mulig å gjøre endringer før den låses opp.",
     "periodLockedConfirmedText": "**{{hours}}** bekreftet denne perioden. Perioden er låst og det kan ikke gjøres endringer for den.",
-    "reloadButtonText": "Last inn på nytt"
+    "reloadButtonText": "Last inn på nytt",
+    "reloadButtonTooltip": "Oppdater timelisten med nye data fra kalenderen din."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
