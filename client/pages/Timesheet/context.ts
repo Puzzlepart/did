@@ -21,7 +21,9 @@ export interface ITimesheetContext {
   /**
    * Refetch data
    */
-  refetch?: (variables?: Partial<OperationVariables>) => Promise<ApolloQueryResult<any>>
+  refetch?: (
+    variables?: Partial<OperationVariables>
+  ) => Promise<ApolloQueryResult<any>>
 
   /**
    * Submit the current period.

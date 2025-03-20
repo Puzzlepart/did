@@ -316,7 +316,7 @@ export class DateUtils {
 
     // Handle dates in week 53
     if (isoWeek === 53) {
-      return weeksInYear === 53 ? 53 : (weeksInPrevYear === 53 ? 53 : 1)
+      return weeksInYear === 53 ? 53 : weeksInPrevYear === 53 ? 53 : 1
     }
 
     // Handle dates in week 52
@@ -424,7 +424,7 @@ export class DateUtils {
   }
 
   /**
-   * Converts the date time to ISO format using the specified 
+   * Converts the date time to ISO format using the specified
    * timezone offset.
    *
    * @param dateTime - Date time in whatever format you can think of

@@ -13,7 +13,8 @@ export const ReloadButton: FC<IReloadButtonProps> = (props) => {
       icon={icon(props.iconName)}
       onClick={() => {
         context.refetch({ cache: props.cache })
-      }}>
+      }}
+    >
       {t('timesheet.reloadButtonText')}
     </ToolbarButton>
   )
