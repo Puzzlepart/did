@@ -71,7 +71,7 @@ export class TimesheetResolver {
         ...query,
         ...options,
         configuration: context.userConfiguration?.timesheet || {},
-        cache,
+        cache
       })
     } catch (error) {
       throw error

@@ -37,10 +37,11 @@ export function useTimesheetReducer() {
   return useReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload: query }) => {
-        state.loading = (query.loading && query.variables?.cache) && {
-          text: t('timesheet.loadingTimesheetText'),
-          iconName: 'HourGlassHalf'
-        }
+        state.loading = query.loading &&
+          query.variables?.cache && {
+            text: t('timesheet.loadingTimesheetText'),
+            iconName: 'HourGlassHalf'
+          }
         if (query.data) {
           state.periods = query.data.periods.map(
             (period: TimesheetPeriodObject) =>
