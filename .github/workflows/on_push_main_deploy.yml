@@ -12,6 +12,7 @@ on:
       - 'package.json'
       - '.deployment'
       - '.deploy/**'
+      - '.tasks/archivePackage.js'
       - '.github/workflows/on_push_main_deploy.yml' # This file
 
 jobs:
