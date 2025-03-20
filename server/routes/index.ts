@@ -32,7 +32,7 @@ export default (request: Request, response: Response) => {
   }
 
   // Define public routes that don't require authentication
-  const publicRoutes = ['/termsofservice', '/privacy_statement', '/']
+  const publicRoutes = ['/termsofservice', '/privacystatement', '/']
 
   // Only check authentication for non-public routes
   if (request.isUnauthenticated() && !publicRoutes.includes(url)) {
