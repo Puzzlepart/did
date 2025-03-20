@@ -145,6 +145,23 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 > - Manage [client-only](https://www.apollographql.com/docs/devtools/editor-plugins/#client-only-schemas) schemas
 > - [Switch graph variants](https://www.apollographql.com/docs/devtools/editor-plugins/#graph-variant-switching) to work with schemas running on different environments
 
+### Maintenance Mode
+
+The application supports a maintenance mode that can be enabled during deployments or system updates. When maintenance mode is enabled, all requests will be served with a maintenance page instead of the regular application.
+
+To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment:
+
+```bash
+# Enable maintenance mode
+export MAINTENANCE_MODE=true
+
+# Disable maintenance mode
+export MAINTENANCE_MODE=false
+# or unset the variable
+unset MAINTENANCE_MODE
+```
+
+API routes (paths starting with `/api/`) will still function normally even in maintenance mode to allow for background services to continue functioning.
 
 ### Documentation
 

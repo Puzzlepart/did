@@ -52,6 +52,7 @@ type Environment = {
   GITHUB_FEEDBACK_REPO: string
   GITHUB_FEEDBACK_REPORTER_INFO: string
   GITHUB_FEEDBACK_REPORTER_GITHUB_USER_INFO: string
+  MAINTENANCE_MODE: string
 }
 
 /**
@@ -82,6 +83,6 @@ export function environment<T = string>(
     return fallbackValue as T
   }
   if (options.splitBy) return value.split(options.splitBy) as unknown as T
-  if (options.isSwitch) return (value === '1') as unknown as T
-  return value as T
+  if (options.isSwitch) return (value === '1' || value?.toLowerCase() === 'true') as unknown as T
+  return value as unknown as T
 }
