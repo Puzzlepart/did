@@ -5,6 +5,10 @@ const archiver = require('archiver')
 const package = require('../package.json')
 const log = console.log
 
+const DIST_DIR = path.resolve(__dirname, '../dist')
+const SERVER_DIR = path.resolve(__dirname, '../server')
+const NODE_MODULES_DIR = path.resolve(__dirname, '../node_modules')
+
 /**
  * Archives the package by creating a zip file containing package.json, node_modules, server and shared directories.
  * 
@@ -62,19 +66,22 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
 
     if (includeNodeModules) {
         log('Archiving node_modules...')
-        archive.directory(path.resolve(__dirname, '../node_modules'), 'node_modules')
+        archive.directory(NODE_MODULES_DIR, 'node_modules')
     } else {
         log('Skipping node_modules...')
     }
 
     log('Archiving server from dist...')
-    archive.directory(path.resolve(__dirname, '../dist/server'), 'server')
+    archive.directory(path.resolve(DIST_DIR, 'server'), 'server')
 
     log('Archiving error pages...')
-    archive.directory(path.resolve(__dirname, '../server/public/errors'), 'server/public/errors')
+    archive.directory(path.resolve(SERVER_DIR, 'public/errors'), 'server/public/errors')
+
+    log('Archiving public pages...')
+    archive.directory(path.resolve(SERVER_DIR, 'public/pages'), 'server/public/pages')
 
     log('Archiving shared from dist...')
-    archive.directory(path.resolve(__dirname, '../dist/shared'), 'shared')
+    archive.directory(path.resolve(DIST_DIR, 'shared'), 'shared')
 
     archive.pipe(output)
 
