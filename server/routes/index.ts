@@ -1,5 +1,18 @@
 import { Request, Response } from 'express'
 
+function renderPage(
+  response: Response,
+  page: string,
+  statusCode: number = 200
+) {
+  return response.render(page, {}, (err, html) => {
+    if (err) {
+      return response.status(503).send('Internal Server Error')
+    }
+    return response.status(statusCode).send(html)
+  })
+}
+
 /**
  * Default route handler for the root path `/`. It checks if the user is
  * authenticated and redirects to the login page if not.
@@ -16,12 +29,29 @@ export default (request: Request, response: Response) => {
       `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
     )
   }
-  return response.render('index', {}, (err, html) => {
-    if (err) {
-      return response.status(503).send('Internal Server Error')
+  switch (url) {
+    case '/terms_of_service': {
+      return renderPage(
+        response,
+        'terms_of_service',
+        200
+      )
     }
-    return response.status(200).send(html)
-  })
+    case '/privacy_statement': {
+      return renderPage(
+        response,
+        'privacy_statement',
+        200
+      )
+    }
+    default: {
+      return renderPage(
+        response,
+        'index',
+        200
+      )
+    }
+  }
 }
 
 export { default as authRoute } from './auth'
