@@ -24,11 +24,17 @@ function renderPage(
  */
 export default (request: Request, response: Response) => {
   const url = request.originalUrl.split('?')[0]
-  if (request.isUnauthenticated() && url !== '/') {
+
+  // Define public routes that don't require authentication
+  const publicRoutes = ['/terms_of_service', '/privacy_statement', '/']
+
+  // Only check authentication for non-public routes
+  if (request.isUnauthenticated() && !publicRoutes.includes(url)) {
     return response.redirect(
       `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
     )
   }
+
   switch (url) {
     case '/terms_of_service': {
       return renderPage(response, 'terms_of_service', 200)
