@@ -1,5 +1,15 @@
 import { Request, Response } from 'express'
+import { environment } from '../utils'
 import { renderPage } from './renderPage'
+
+/**
+ * Checks if the application is in maintenance mode based on environment variables.
+ * 
+ * @returns boolean True if maintenance mode is enabled
+ */
+const isMaintenanceMode = (): boolean => {
+  return environment<boolean>('MAINTENANCE_MODE', null, { isSwitch: true })
+}
 
 /**
  * Default route handler for the root path `/`. It checks if the user is
@@ -9,9 +19,17 @@ import { renderPage } from './renderPage'
  * with the rendered HTML. If there is an error during rendering,
  * it sends a 503 status code with an 'Internal Server Error' message. This
  * is probably due to a deployment in progress.
+ * 
+ * A
  */
 export default (request: Request, response: Response) => {
   const url = request.originalUrl.split('?')[0]
+
+  // If maintenance mode is enabled, render the maintenance page for all routes
+  // except API routes which might be needed by the maintenance page itself
+  if (isMaintenanceMode()) {
+    return renderPage(response, 'maintenance.html', 503)
+  }
 
   // Define public routes that don't require authentication
   const publicRoutes = ['/termsofservice', '/privacy_statement', '/']
