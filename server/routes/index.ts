@@ -1,17 +1,5 @@
 import { Request, Response } from 'express'
-
-function renderPage(
-  response: Response,
-  page: string,
-  statusCode: number = 200
-) {
-  return response.render(page, {}, (err, html) => {
-    if (err) {
-      return response.status(503).end()
-    }
-    return response.status(statusCode).send(html)
-  })
-}
+import { renderPage } from './renderPage'
 
 /**
  * Default route handler for the root path `/`. It checks if the user is
@@ -37,7 +25,7 @@ export default (request: Request, response: Response) => {
 
   switch (url) {
     case '/termsofservice': {
-      return renderPage(response, 'termsofservice', 200)
+      return renderPage(response, 'termsofservice2', 200)
     }
     case '/privacystatement': {
       return renderPage(response, 'privacystatement', 200)
