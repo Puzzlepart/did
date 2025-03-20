@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.15.3",
+  "version": "0.15.4",
   "private": true,
   "repository": {
     "url": "https://github.com/Puzzlepart/did"
@@ -79,6 +79,7 @@
     "express": "4.19.2",
     "express-bearer-token": "2.4.0",
     "express-favicon": "2.0.4",
+    "express-rate-limit": "7.5.0",
     "express-session": "1.18.0",
     "fast-copy": "2.1.1",
     "get-value": "3.0.1",

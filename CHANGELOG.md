@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * [➤ Changelog](#-changelog)
 	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
 		* [Changed](#changed)
+	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025-1)
+		* [Changed](#changed-1)
 	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
 		* [Fixed](#fixed)
 	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
@@ -30,14 +32,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
 		* [Fixed](#fixed-4)
 	* [➤ 0.14.15 - 17.03.2025](#-01415---17032025)
-		* [Changed](#changed-1)
+		* [Changed](#changed-2)
 		* [Fixed](#fixed-5)
 	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
 		* [Added](#added)
 		* [Fixed](#fixed-6)
 	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
 		* [Fixed](#fixed-7)
-		* [Changed](#changed-2)
+		* [Changed](#changed-3)
 		* [Added](#added-1)
 	* [➤ 0.13.2 - 22.02.2024](#-0132---22022024)
 		* [Fixed](#fixed-8)
@@ -46,15 +48,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
 		* [Fixed](#fixed-10)
 		* [Added](#added-2)
-		* [Changed](#changed-3)
+		* [Changed](#changed-4)
 	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
 		* [Added](#added-3)
 		* [Fixed](#fixed-11)
-		* [Changed](#changed-4)
+		* [Changed](#changed-5)
 	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added-4)
 		* [Fixed](#fixed-12)
-		* [Changed](#changed-5)
+		* [Changed](#changed-6)
 	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
 		* [Fixed](#fixed-13)
 	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
@@ -64,15 +66,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
 		* [Added](#added-5)
 		* [Fixed](#fixed-16)
-		* [Changed](#changed-6)
+		* [Changed](#changed-7)
 	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added-6)
 		* [Fixed](#fixed-17)
-		* [Changed](#changed-7)
+		* [Changed](#changed-8)
 	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-7)
 		* [Fixed](#fixed-18)
-		* [Changed](#changed-8)
+		* [Changed](#changed-9)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-8)
@@ -96,6 +98,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
 		* [Added](#added-13)
 </details>
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0153---20032025)
+
+## ➤ 0.15.3 - 20.03.2025
+
+### Changed
+
+- Now running on Node 22 LTS
+- Refactored user context handling into session context, improving initialization flow and type safety
+- Proper link styling for links in the `Markdown` component
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0153---20032025)
