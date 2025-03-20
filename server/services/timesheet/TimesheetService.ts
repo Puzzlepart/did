@@ -248,7 +248,8 @@ export class TimesheetService {
     dateFormat,
     locale,
     engine = null,
-    configuration
+    configuration,
+    cache
   }: IProviderEventsParameters) {
     const startDateTimeIso = DateUtils.toISOString(
       `${startDate}:00:00:00.000`,
@@ -272,7 +273,8 @@ export class TimesheetService {
       default: {
         events = await this._msgraphSvc.getEvents(
           startDateTimeIso,
-          endDateTimeIso
+          endDateTimeIso,
+          cache
         )
       }
     }

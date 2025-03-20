@@ -20,7 +20,7 @@ import { useOverview } from './useOverview'
 export const Overview: TimesheetViewComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const { eventListProps } = useOverview()
+  const eventListProps = useOverview()
   let element: ReactElement = null
   switch (state.dateRangeType) {
     case DateRangeType.Week: {

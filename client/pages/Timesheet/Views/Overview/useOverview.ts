@@ -10,7 +10,7 @@ import { useListGroupProps } from './useListGroupProps'
  * `listGroupProps` is an object containing props for the list group component. `additionalColumns` is
  * an array of objects containing props for the additional columns.
  *
- * @returns An object containing additionalColumns, listGroupProps, and className.
+ * @returns An object containing props for the `EventList` component.
  */
 export function useOverview() {
   const { subscription } = useAppContext()
@@ -33,7 +33,5 @@ export function useOverview() {
       }
     }
   }
-  return {
-    eventListProps
-  }
+  return eventListProps
 }

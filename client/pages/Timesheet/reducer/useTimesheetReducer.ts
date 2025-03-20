@@ -37,7 +37,7 @@ export function useTimesheetReducer() {
   return useReducer(initialState, (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload: query }) => {
-        state.loading = query.loading && {
+        state.loading = (query.loading && query.variables?.cache) && {
           text: t('timesheet.loadingTimesheetText'),
           iconName: 'HourGlassHalf'
         }

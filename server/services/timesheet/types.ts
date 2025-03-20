@@ -8,13 +8,45 @@ import MatchingEngine from './TimesheetMatchingEngine'
 export type ProjectMatch = { id: string; key: string; customerKey: string }
 
 export interface IGetTimesheetParameters {
+  /**
+   * Start date for the timesheet.
+   */
   startDate: string
+
+  /**
+   * End date for the timesheet.
+   */
   endDate: string
+
+  /**
+   * Timezone offset from client
+   */
   tzOffset: number
+
+  /**
+   * Locale for the timesheet
+   */
   locale?: string
+
+  /**
+   * Date format for the timesheet
+   */
   dateFormat?: string
+
+  /**
+   * Configuration for the matching engine
+   */
   configuration?: Record<string, any>
+
+  /**
+   * Include split weeks in the timesheet
+   */
   includeSplitWeeks?: boolean
+
+  /**
+   * Use cache if available
+   */
+  cache?: boolean
 }
 
 export interface IProviderEventsParameters extends IGetTimesheetParameters {
