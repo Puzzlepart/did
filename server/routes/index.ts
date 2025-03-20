@@ -7,7 +7,7 @@ function renderPage(
 ) {
   return response.render(page, {}, (err, html) => {
     if (err) {
-      return response.status(503).send('Internal Server Error')
+      return response.status(503).end()
     }
     return response.status(statusCode).send(html)
   })
