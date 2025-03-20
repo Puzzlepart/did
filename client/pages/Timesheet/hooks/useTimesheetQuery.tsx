@@ -29,6 +29,7 @@ export function useTimesheetQuery(
   const query = useQuery($timesheet, {
     skip: !state.dateRange.query(),
     variables: {
+      cache: true,
       query: state.dateRange.query(),
       options: {
         dateFormat: 'dddd DD',

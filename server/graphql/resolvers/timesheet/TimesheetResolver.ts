@@ -48,10 +48,13 @@ export class TimesheetResolver {
   ) {}
 
   /**
-   * Get timesheet
+   * Get timesheet for the provided date range specified
+   * by `query.startDate` and `query.endDate`. It will
+   * also take `options` and ``cache` into account.
    *
    * @param query - Query
    * @param options - Options
+   * @param cache - Cache
    */
   @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [TimesheetPeriodObject], {
@@ -60,13 +63,15 @@ export class TimesheetResolver {
   async timesheet(
     @Ctx() context: RequestContext,
     @Arg('query') query: TimesheetQuery,
-    @Arg('options') options: TimesheetOptions
+    @Arg('options') options: TimesheetOptions,
+    @Arg('cache', { nullable: true }) cache: boolean = false
   ) {
     try {
       return await this._timesheetSvc.getTimesheet({
         ...query,
         ...options,
-        configuration: context.userConfiguration?.timesheet || {}
+        configuration: context.userConfiguration?.timesheet || {},
+        cache,
       })
     } catch (error) {
       throw error

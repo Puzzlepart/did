@@ -1,4 +1,4 @@
-import { ApolloQueryResult } from '@apollo/client'
+import { ApolloQueryResult, OperationVariables } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, Dispatch, useContext } from 'react'
 import { useSubmitActions } from './hooks/useSubmitActions'
@@ -21,7 +21,7 @@ export interface ITimesheetContext {
   /**
    * Refetch data
    */
-  refetch?: () => Promise<ApolloQueryResult<any>>
+  refetch?: (variables?: Partial<OperationVariables>) => Promise<ApolloQueryResult<any>>
 
   /**
    * Submit the current period.

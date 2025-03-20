@@ -259,6 +259,7 @@ export class MSGraphService {
    *
    * @param startDateTimeIso - Start date time in `ISO format`
    * @param endDateTimeIso - End date time in `ISO format`
+   * @param cache - Use cache (default: `true`)
    * @param filterString - Filter string for the query (default: `sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
    * @param orderBy - Order by string for the query (default: `start/dateTime asc`)
    *
@@ -269,6 +270,7 @@ export class MSGraphService {
   public async getEvents(
     startDateTimeIso: string,
     endDateTimeIso: string,
+    cache: boolean = true,
     filterString = "sensitivity ne 'private' and isallday eq false and iscancelled eq false",
     orderBy = 'start/dateTime asc'
   ): Promise<EventObject[]> {
@@ -276,7 +278,8 @@ export class MSGraphService {
       const cacheOptions: CacheOptions = {
         key: ['events', startDateTimeIso, endDateTimeIso],
         scope: CacheScope.USER,
-        expiry: 20
+        expiry: 20,
+        disabled: !cache
       }
       const events = await this._cache.usingCache(async () => {
         const query = {

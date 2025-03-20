@@ -1,4 +1,6 @@
 import {
+  ClockArrowDownloadRegular,
+  ClockArrowDownloadFilled,
   TextClearFormattingRegular,
   TextClearFormattingFilled,
   GroupListRegular,
@@ -205,6 +207,10 @@ import {
  * An object containing the available Fluent icons and their corresponding regular and filled versions.
  */
 export const iconCatalog = {
+  ClockArrowDownload: {
+    regular: ClockArrowDownloadRegular,
+    filled: ClockArrowDownloadFilled
+  },
   TextClearFormatting: {
     regular: TextClearFormattingRegular,
     filled: TextClearFormattingFilled

@@ -17,6 +17,7 @@ import { NavigatePeriodsButtons } from './NavigatePeriodsButtons'
 import { TodayButton } from './TodayButton'
 import { useActionBar } from './useActionBar'
 import { WorkWeekStatus } from './WorkWeekStatus'
+import { ReloadButton } from './ReloadButton'
 
 /**
  * @category Timesheet
@@ -51,6 +52,7 @@ export const ActionBar: StyledComponent = () => {
           <NavigatePeriodsButtons name='period' />
         </ToolbarGroup>
         <ToolbarGroup>
+          <ReloadButton />
           <ForecastButtons />
           <ConfirmButtons />
         </ToolbarGroup>
