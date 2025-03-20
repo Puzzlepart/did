@@ -20,10 +20,7 @@ export function renderPage(
   statusCode: number = 200
 ) {
   if (page.endsWith('.html')) {
-    return response.sendFile(path.join(
-      __dirname,
-      `../public/pages/${page}`
-    ))
+    return response.sendFile(path.join(__dirname, `../public/pages/${page}`))
   }
   return response.render(page, {}, (err, html) => {
     if (err) {
