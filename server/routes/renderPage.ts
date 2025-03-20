@@ -1,5 +1,6 @@
 import { Response } from 'express'
 import { renderErrorPage } from './renderErrorPage'
+import path from 'path'
 
 /**
  * Renders a page and sends the HTML response to the client.
@@ -18,6 +19,12 @@ export function renderPage(
   page: string,
   statusCode: number = 200
 ) {
+  if (page.endsWith('.html')) {
+    return response.sendFile(path.join(
+      __dirname,
+      `../public/pages/${page}`
+    ))
+  }
   return response.render(page, {}, (err, html) => {
     if (err) {
       return renderErrorPage(response, 503)

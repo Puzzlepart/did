@@ -25,10 +25,10 @@ export default (request: Request, response: Response) => {
 
   switch (url) {
     case '/termsofservice': {
-      return renderPage(response, 'termsofservice2', 200)
+      return renderPage(response, 'termsofservice.html', 200)
     }
     case '/privacystatement': {
-      return renderPage(response, 'privacystatement', 200)
+      return renderPage(response, 'privacystatement.html', 200)
     }
     default: {
       return renderPage(response, 'index', 200)
