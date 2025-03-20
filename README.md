@@ -18,26 +18,30 @@
 
 ## ➤ Table of Contents
 
-* [➤ Roadmap](#-roadmap)
-* [➤ Backlog](#-backlog)
-* [➤ Environments](#-environments)
-* [➤ Contributing](#-contributing)
-	* [Getting started](#getting-started)
-		* [Set up environment](#set-up-environment)
-	* [Code structure](#code-structure)
-	* [Node version](#node-version)
-	* [Authentication](#authentication)
-		* [Google](#google)
-	* [Branching / Deploying](#branching--deploying)
-		* [Main branch](#main-branch)
-		* [Dev branch](#dev-branch)
-	* [Feature branches](#feature-branches)
-		* [Naming conventions](#naming-conventions)
-		* [See also](#see-also)
-	* [GraphQL](#graphql)
-		* [Extensions for VS Code](#extensions-for-vs-code)
-	* [Documentation](#documentation)
-* [➤ Contributors](#-contributors)
+	* [➤ Roadmap](#-roadmap)
+	* [➤ Backlog](#-backlog)
+	* [➤ Environments](#-environments)
+	* [➤ Contributing](#-contributing)
+		* [Getting started](#getting-started)
+			* [Set up environment](#set-up-environment)
+		* [Code structure](#code-structure)
+		* [Node version](#node-version)
+		* [Authentication](#authentication)
+			* [Google](#google)
+		* [Branching / Deploying](#branching--deploying)
+			* [Main branch](#main-branch)
+			* [Dev branch](#dev-branch)
+		* [Feature branches](#feature-branches)
+			* [Naming conventions](#naming-conventions)
+			* [See also](#see-also)
+		* [GraphQL](#graphql)
+			* [Extensions for VS Code](#extensions-for-vs-code)
+		* [Maintenance Mode](#maintenance-mode)
+* [➤ Enable maintenance mode](#-enable-maintenance-mode)
+* [➤ Disable maintenance mode](#-disable-maintenance-mode)
+* [➤ or unset the variable](#-or-unset-the-variable)
+		* [Documentation](#documentation)
+	* [➤ Contributors](#-contributors)
 </details>
 
 
@@ -234,6 +238,32 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 > - Manage [client-only](https://www.apollographql.com/docs/devtools/editor-plugins/#client-only-schemas) schemas
 > - [Switch graph variants](https://www.apollographql.com/docs/devtools/editor-plugins/#graph-variant-switching) to work with schemas running on different environments
 
+### Maintenance Mode
+
+The application supports a maintenance mode that can be enabled during deployments or system updates. When maintenance mode is enabled, all requests will be served with a maintenance page instead of the regular application.
+
+To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment:
+
+```bash
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#enable-maintenance-mode)
+
+# ➤ Enable maintenance mode
+export MAINTENANCE_MODE=true
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#disable-maintenance-mode)
+
+# ➤ Disable maintenance mode
+export MAINTENANCE_MODE=false
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#or-unset-the-variable)
+
+# ➤ or unset the variable
+unset MAINTENANCE_MODE
+```
+
+API routes (paths starting with `/api/`) will still function normally even in maintenance mode to allow for background services to continue functioning.
 
 ### Documentation
 
