@@ -3,7 +3,6 @@ const path = require('path')
 const chalk = require('chalk')
 const archiver = require('archiver')
 const package = require('../package.json')
-const { arch } = require('os')
 const log = console.log
 
 /**
@@ -56,6 +55,7 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
 
     log('Archiving deployment files...')
     archive.file('.deployment')
+    archive.file('.deploy/deploy.sh')
 
     log('Archiving revision file...')
     archive.file('revision.txt')
@@ -67,10 +67,13 @@ async function run({ includeNodeModules = true, includePackageLockFile = true })
         log('Skipping node_modules...')
     }
 
-    log('Archiving dist/server...')
+    log('Archiving server from dist...')
     archive.directory(path.resolve(__dirname, '../dist/server'), 'server')
 
-    log('Archiving dist/shared...')
+    log('Archiving error pages...')
+    archive.directory(path.resolve(__dirname, '../server/public/errors'), 'server/public/errors')
+
+    log('Archiving shared from dist...')
     archive.directory(path.resolve(__dirname, '../dist/shared'), 'shared')
 
     archive.pipe(output)
