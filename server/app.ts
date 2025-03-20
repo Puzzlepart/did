@@ -24,6 +24,8 @@ import {
 } from './middleware'
 import authRoute from './routes/auth'
 import { environment } from './utils'
+import rateLimit from 'express-rate-limit'
+import os from 'os'
 
 /**
  * did `express` App
@@ -101,6 +103,7 @@ export class App {
     this.setupSession()
     this.setupViewEngine()
     this.setupAssets()
+    this.setupHealthCheck()
     this.setupAuth()
     await this.setupGraphQL()
     this.setupRoutes()
@@ -146,6 +149,60 @@ export class App {
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
     this.instance.use('/auth', authRoute)
+  }
+
+  /**
+   * Setup health check endpoint to be used
+   * by the Azure App Service to check if the
+   * app is running. Includes:
+   * - MongoDB connection status
+   * - System metrics
+   * - Rate limiting
+   * - Security headers
+   */
+  setupHealthCheck() {
+    const healthCheckLimiter = rateLimit({
+      windowMs: 60 * 1000, // 1 minute
+      max: 10 // limit each IP to 10 requests per windowMs
+    })
+
+    this.instance.use('/health_check', healthCheckLimiter, (_, res) => {
+      try {
+        const isMongoConnected = this._mcl?.topology?.isConnected() ?? false
+
+        const healthStatus = {
+          status: isMongoConnected ? 'ok' : 'error',
+          uptime: process.uptime(),
+          timestamp: new Date(),
+          mongodb: {
+            connected: isMongoConnected
+          },
+          system: {
+            memory: {
+              free: os.freemem(),
+              total: os.totalmem()
+            },
+            loadAvg: os.loadavg(),
+            uptime: os.uptime()
+          }
+        }
+
+        // Set security headers
+        res.set({
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        })
+
+        res.status(isMongoConnected ? 200 : 500).json(healthStatus)
+      } catch {
+        res.status(500).json({
+          status: 'error',
+          timestamp: new Date(),
+          error: 'Health check failed'
+        })
+      }
+    })
   }
 
   /**
