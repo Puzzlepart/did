@@ -4,7 +4,7 @@ import { renderPage } from './renderPage'
 
 /**
  * Checks if the application is in maintenance mode based on environment variables.
- * 
+ *
  * @returns boolean True if maintenance mode is enabled
  */
 const isMaintenanceMode = (): boolean => {
@@ -19,7 +19,7 @@ const isMaintenanceMode = (): boolean => {
  * with the rendered HTML. If there is an error during rendering,
  * it sends a 503 status code with an 'Internal Server Error' message. This
  * is probably due to a deployment in progress.
- * 
+ *
  * A
  */
 export default (request: Request, response: Response) => {
