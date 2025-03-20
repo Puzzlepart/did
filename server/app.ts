@@ -22,7 +22,7 @@ import {
   redisSessionMiddleware,
   serveGzippedMiddleware
 } from './middleware'
-import authRoute from './routes/auth'
+import { default as defaultRoute, authRoute } from './routes'
 import { environment } from './utils'
 import rateLimit from 'express-rate-limit'
 import os from 'os'
@@ -223,15 +223,7 @@ export class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (request, response) => {
-      const url = request.originalUrl.split('?')[0]
-      if (request.isUnauthenticated() && url !== '/') {
-        return response.redirect(
-          `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
-        )
-      }
-      return response.render('index')
-    })
+    index.get('/', defaultRoute)
     this.instance.use('*', index)
   }
 
