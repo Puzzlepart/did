@@ -1,10 +1,10 @@
 # Production image for the DID application
-FROM node:22-alpine
+FROM node:22-slim
 
 WORKDIR /app
 
 # Create a non-root user to run the application
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
 # Copy package files and install dependencies
 COPY package*.json ./
@@ -30,10 +30,11 @@ USER appuser
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=9001
+# Use PORT from environment, fallback to 9001
+ENV PORT=${PORT:-9001}
 
 # Expose the port the app will run on
-EXPOSE 9001
+EXPOSE ${PORT}
 
 # Command to run the application
-CMD ["npm", "run", "start"]
+CMD ["sh", "-c", "npm run start"]
