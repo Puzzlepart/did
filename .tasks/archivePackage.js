@@ -12,12 +12,12 @@ const NODE_MODULES_DIR = path.resolve(__dirname, '../node_modules')
 /**
  * Archives the package by creating a zip file containing package.json, node_modules, server and shared directories.
  * 
- * @param includeNodeModules - Whether to include node_modules in the archive. Defaults to true.
- * @param includePackageLockFile - Whether to include package-lock.json in the archive. Defaults to true.
+ * @param includeNodeModules - Whether to include node_modules in the archive. Defaults to `false`.
+ * @param includePackageLockFile - Whether to include package-lock.json in the archive. Defaults to `true`.
  * 
  * @returns - A Promise that resolves when the archive has been created.
  */
-async function run({ includeNodeModules = true, includePackageLockFile = true }) {
+async function run({ includeNodeModules = false, includePackageLockFile = true }) {
     const filename = `./${package.name}-package.zip`
     log(chalk.cyan(`Creating archive ${filename}`))
     const output = fs.createWriteStream(filename)
