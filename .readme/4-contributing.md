@@ -145,6 +145,117 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 > - Manage [client-only](https://www.apollographql.com/docs/devtools/editor-plugins/#client-only-schemas) schemas
 > - [Switch graph variants](https://www.apollographql.com/docs/devtools/editor-plugins/#graph-variant-switching) to work with schemas running on different environments
 
+### Docker Deployment
+
+The application supports Docker-based development and deployment. This makes it easy to run the application consistently across different environments.
+
+#### Development with Docker
+
+To run the application locally using Docker:
+
+```bash
+# Start the application in development mode
+docker-compose up
+```
+
+This will start the application and MongoDB in development mode with hot reloading enabled.
+
+#### Production Deployment with Docker
+
+For production deployment, use the production Docker Compose file:
+
+```bash
+# Set environment variables (replace with your values)
+export DOCKER_REGISTRY=your-registry
+export APP_VERSION=v1.0.0
+export MONGO_USER=your_mongo_user
+export MONGO_PASSWORD=your_secure_password
+
+# Deploy the application
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Maintenance Mode in Docker
+
+To enable maintenance mode during deployment or updates:
+
+```bash
+# Enable maintenance mode
+export MAINTENANCE_MODE=true
+docker-compose -f docker-compose.prod.yml up -d
+
+# Perform your maintenance or deployment
+
+# Disable maintenance mode when done
+export MAINTENANCE_MODE=false
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Building and Pushing Docker Images
+
+You can build and push Docker images manually:
+
+```bash
+# Build the image
+docker build -t did-app:latest .
+
+# Tag and push to your registry
+docker tag did-app:latest your-registry/did-app:latest
+docker push your-registry/did-app:latest
+```
+
+Alternatively, set `DOCKER_DEPLOYMENT=true` in your CI/CD pipeline to use the Docker deployment flow in the deployment script.
+
+## ➤ Docker Deployment to Azure Container Registry
+
+### Local Build and Push to ACR
+
+For deploying to Azure Container Registry (ACR), we've created a script that handles:
+1. Building the application locally (with Git access)
+2. Building the Docker image using pre-built assets
+3. Pushing the image to ACR
+
+```bash
+# Basic usage
+./build-and-push-acr.sh your-acr-name tag-name
+
+# Example with specific tag
+./build-and-push-acr.sh didregistry v1.2.3
+
+# Example with "latest" tag
+./build-and-push-acr.sh didregistry
+```
+
+### Deploying to Azure Web App
+
+After pushing to ACR, deploy to Azure Web App using:
+
+```bash
+# Deploy the latest image to dev environment
+az webapp config container set \
+  --name didapp-dev \
+  --resource-group pzl-did \
+  --docker-custom-image-name your-acr-name.azurecr.io/did:latest \
+  --docker-registry-server-url https://your-acr-name.azurecr.io
+
+# Deploy a specific version to production
+az webapp config container set \
+  --name didapp \
+  --resource-group pzl-did \
+  --docker-custom-image-name your-acr-name.azurecr.io/did:v1.2.3 \
+  --docker-registry-server-url https://your-acr-name.azurecr.io
+```
+
+### CI/CD Integration
+
+The GitHub Actions workflow handles:
+1. Building the application in the CI environment
+2. Building and pushing Docker images to ACR
+3. Deploying to the appropriate Azure Web App environment
+
+See the workflow definition in `.github/workflows/on_push_docker_deploy.yml`.
+
+
 ### Maintenance Mode
 
 The application supports a maintenance mode that can be enabled during deployments or system updates. When maintenance mode is enabled, all requests will be served with a maintenance page instead of the regular application.

@@ -14,7 +14,6 @@ yarn-error.log*
 .env.*
 
 # Build artifacts
-dist
 artifacts
 coverage
 .nyc_output
