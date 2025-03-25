@@ -39,7 +39,5 @@ revision.txt
 *.csv
 .vscode/chrome-debug-user-data
 client/components/Template
-.github/copilot-instructions.md
-
-# temp folder, for e.g. copilot implementation plans
+logs
 .tmp
