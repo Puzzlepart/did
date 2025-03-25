@@ -17,8 +17,13 @@ import { IFieldProps } from './types'
  *
  * @returns An object with `validationMessage` and `validationState` properties.
  */
-function getValidationProps(context: IFormControlContext, name: string, validation: IFieldProps['validation']) {
-  if (!context) return { validationMessage: validation[0], validationState: validation[1] }
+function getValidationProps(
+  context: IFormControlContext,
+  name: string,
+  validation: IFieldProps['validation']
+) {
+  if (!context)
+    return { validationMessage: validation[0], validationState: validation[1] }
   const { validationMessages } = context
   const [validationMessage = null, validationState = 'none'] =
     validationMessages.get(name) ?? validation
@@ -31,28 +36,27 @@ function getValidationProps(context: IFormControlContext, name: string, validati
 /**
  * @category Reusable Component
  */
-export const FieldContainer: StyledComponent<IFieldProps> = (props) => (
-    !props.hidden && (
-      <FormControlContext.Consumer>
-        {(context) => (
-          <Field
-            className={mergeClasses(FieldContainer.className, props.className)}
-            {..._.pick(props, 'onKeyDown', 'title', 'style')}
+export const FieldContainer: StyledComponent<IFieldProps> = (props) =>
+  !props.hidden && (
+    <FormControlContext.Consumer>
+      {(context) => (
+        <Field
+          className={mergeClasses(FieldContainer.className, props.className)}
+          {..._.pick(props, 'onKeyDown', 'title', 'style')}
           {...getValidationProps(context, props.name, props.validation)}
-          >
-            <FieldLabel
-              {...props.labelProps}
-              required={props.required}
-              disabled={props.disabled}
-              text={props.label}
-            />
-            {props.children}
-            {props.description && <FieldDescription text={props.description} />}
-          </Field>
-        )}
-      </FormControlContext.Consumer>
-    )
-)
+        >
+          <FieldLabel
+            {...props.labelProps}
+            required={props.required}
+            disabled={props.disabled}
+            text={props.label}
+          />
+          {props.children}
+          {props.description && <FieldDescription text={props.description} />}
+        </Field>
+      )}
+    </FormControlContext.Consumer>
+  )
 
 FieldContainer.displayName = 'FieldContainer'
 FieldContainer.className = styles.fieldContainer
@@ -61,5 +65,5 @@ FieldContainer.defaultProps = {
   labelProps: {
     weight: 'semibold'
   },
-  validation: [null, 'none'],
+  validation: [null, 'none']
 }

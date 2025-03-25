@@ -48,5 +48,8 @@ export interface IFieldProps<KeyType = string>
   /**
    * Optional validation state and message for the field.
    */
-  validation?: [FieldProps['validationMessage']?, FieldProps['validationState']?]
+  validation?: [
+    FieldProps['validationMessage']?,
+    FieldProps['validationState']?
+  ]
 }
