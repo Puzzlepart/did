@@ -24,11 +24,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 1rem;
+      box-sizing: border-box;
     }
 
     .error-page {
       text-align: center;
+      max-width: 90vw;
+      margin: 0 auto;
     }
 
     h1,
@@ -39,19 +43,23 @@
     }
 
     .error-page h1 {
-      font-size: 15rem;
-      line-height: .8;
+      font-size: clamp(3rem, 10vw, 12rem);
+      line-height: 1;
       padding-top: 2rem;
       margin: 0;
     }
 
     .error-page h2 {
-      font-size: 3rem;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      margin-top: 1rem;
     }
 
     .error-page p {
-      font-size: 1.5rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       font-style: italic;
+      padding: 1.5rem 1rem;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .error-page .btn {
@@ -64,11 +72,20 @@
       border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      transition: background-color 0.2s ease;
+    }
+
+    .error-page .btn:hover {
+      background-color: #b06ff8;
+    }
+
+    .error-page .btn:active {
+      transform: scale(0.98);
     }
 
     .error-exclamation {
-      width: 10rem;
+      width: clamp(6rem, 15vw, 10rem);
       padding: 1rem;
       fill: none;
       display: inline-flex;
@@ -76,6 +93,20 @@
       stroke-width: 2px;
       stroke-dasharray: 5, 9;
       stroke-linejoin: miter;
+    }
+
+    @media (max-width: 480px) {
+      .error-page h1 {
+        padding-top: 1rem;
+      }
+
+      .error-page p {
+        padding: 1rem .5rem;
+      }
+
+      .error-exclamation {
+        padding: 0.5rem;
+      }
     }
   </style>
 </head>
