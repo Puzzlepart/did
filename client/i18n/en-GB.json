@@ -484,7 +484,9 @@
     "budgetTrackingEnableInvoiceEstimationLabel": "Enable income estimation",
     "budgetTrackingEnableInvoiceEstimationDescription": "Enabling this setting will display estimated invoicing based on the hourly rates of the resources under each project.",
     "roleDescriptionLabel": "Description",
-    "roleNotDeletable": "This role cannot be deleted because it is essential or has protected status."
+    "roleNotDeletable": "This role cannot be deleted because it is essential or has protected status.",
+    "domainRestrictionExternalAddButtonText": "Add domain",
+    "domainRestrictionExternalAlreadyAddedMessage": "Domain {0} already added to list of domains."
   },
   "reports": {
     "apollo": {

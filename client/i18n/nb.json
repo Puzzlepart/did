@@ -482,7 +482,9 @@
     "budgetTrackingEnableInvoiceEstimationDescription": "Når dette er aktivert, vil estimerte fakturabeløp vises under hvert prosjekt, basert på timeprisene til ressursene.",
     "budgetTrackingEnableInvoiceEstimationLabel": "Aktiver inntektsestimering",
     "roleDescriptionLabel": "Beskrivelse",
-    "roleNotDeletable": "Denne rollen kan ikke slettes fordi den er viktig eller har beskyttet status."
+    "roleNotDeletable": "Denne rollen kan ikke slettes fordi den er viktig eller har beskyttet status.",
+    "domainRestrictionExternalAddButtonText": "Legg til domene",
+    "domainRestrictionExternalAlreadyAddedMessage": "Domene {0} er allerede lagt til i liste over domener."
   },
   "reports": {
     "apollo": {

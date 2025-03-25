@@ -73,6 +73,16 @@ export interface ISubscriptionSettingList<T = any>
    * The message to display when an item is removed
    */
   onRemoveMessage?: string
+
+  /**
+   * Display add button with the specified text
+   */
+  addButtonText?: string
+
+  /**
+   * The (warning) message to display when an item is already added
+   */
+  itemAlreadyAddedMessage?: string
 }
 
 export type SubscriptionSettingField<T = any> =

@@ -1,4 +1,4 @@
-import { LabelProps } from '@fluentui/react-components'
+import { FieldProps, LabelProps } from '@fluentui/react-components'
 import { HTMLProps } from 'react'
 import { IFieldLabelProps } from './FieldLabel/types'
 
@@ -44,4 +44,9 @@ export interface IFieldProps<KeyType = string>
    * Label properties
    */
   labelProps?: IFieldLabelProps
+
+  /**
+   * Optional validation state and message for the field.
+   */
+  validation?: [FieldProps['validationMessage']?, FieldProps['validationState']?]
 }
