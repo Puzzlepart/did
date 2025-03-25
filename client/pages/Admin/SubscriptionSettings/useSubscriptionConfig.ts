@@ -249,6 +249,10 @@ export function useSubscriptionConfig() {
             !_.get(settings, 'security.domainRestrictionExternalEnabled'),
           onAddMessage: t('admin.domainRestrictionAddMessage'),
           onRemoveMessage: t('admin.domainRestrictionRemoveMessage'),
+          addButtonText: t('admin.domainRestrictionExternalAddButtonText'),
+          itemAlreadyAddedMessage: t(
+            'admin.domainRestrictionExternalAlreadyAddedMessage'
+          ),
           props: {
             label: t('admin.domainRestrictionExternalLabel'),
             description: t('admin.domainRestrictionExternalDescription'),

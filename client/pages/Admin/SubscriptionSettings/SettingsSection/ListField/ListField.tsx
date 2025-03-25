@@ -1,8 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Button, Input } from '@fluentui/react-components'
-import { Field } from 'components'
+import { Input, InteractionTag, InteractionTagPrimary, InteractionTagSecondary, TagGroup } from '@fluentui/react-components'
+import { DynamicButton, Field } from 'components'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import styles from './ListField.module.scss'
 import { IListFieldProps } from './types'
@@ -15,13 +14,15 @@ export const ListField: StyledComponent<IListFieldProps> = ({
   settingsKey,
   onAddMessage,
   onRemoveMessage,
+  addButtonText,
+  itemAlreadyAddedMessage,
   props
 }) => {
-  const { t } = useTranslation()
-  const { items, inputValue, onChange, onKeyDown, onRemove } = useListField({
+  const { items, inputValue, onChange, onKeyDown, onAddValue, onRemove, validation } = useListField({
     settingsKey,
     onAddMessage,
-    onRemoveMessage
+    onRemoveMessage,
+    itemAlreadyAddedMessage
   })
   return (
     <Field
@@ -29,25 +30,35 @@ export const ListField: StyledComponent<IListFieldProps> = ({
       label={props.label}
       description={props.description}
       hidden={props.hidden}
+      validation={validation}
     >
       <Input
         {...props}
         value={inputValue}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        contentAfter={Boolean(addButtonText) && (
+          <DynamicButton
+            text={addButtonText}
+            transparent
+            size='small'
+            iconName='AddCircle'
+            disabled={inputValue.trim() === ''}
+            onClick={() => onAddValue()} />
+        )}
       />
-      <ul className={styles.list}>
+      <TagGroup
+        className={styles.items}
+        onDismiss={(_, { value }) => onRemove(value as any)}>
         {items.map((item, index) => (
-          <li key={index}>
-            <div>{item}</div>
-            <div>
-              <Button onClick={() => onRemove(index)} size='small'>
-                {t('common.delete')}
-              </Button>
-            </div>
-          </li>
+          <InteractionTag key={index} value={index as any}>
+            <InteractionTagPrimary hasSecondaryAction>
+              {item}
+            </InteractionTagPrimary>
+            <InteractionTagSecondary />
+          </InteractionTag>
         ))}
-      </ul>
+      </TagGroup>
     </Field>
   )
 }

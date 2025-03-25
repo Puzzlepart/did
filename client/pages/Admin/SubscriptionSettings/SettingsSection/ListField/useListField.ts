@@ -5,12 +5,14 @@ import { InputProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { IListFieldProps } from './types'
 import { format } from '@fluentui/react'
+import { IFieldProps } from 'components'
 
 export function useListField(props: Partial<IListFieldProps>) {
   const context = useContext(SubscriptionContext)
   const { displayToast } = useAppContext()
   const items = _.get(context.settings, props.settingsKey, [])
   const [inputValue, setInputValue] = useState('')
+  const [validation, setValidation] = useState<IFieldProps['validation']>([])
 
   /**
    * Handles the change event for an input field.
@@ -30,6 +32,24 @@ export function useListField(props: Partial<IListFieldProps>) {
   }
 
   /**
+   * Handles the addition of a new value to the list.
+   * 
+   * @param value - The value to be added to the list (default is the current input value).
+   */
+  const onAddValue = (value: string = inputValue) => {
+    if (value.trim() === '') return
+    if (items.includes(value)) return setValidation([format(props.itemAlreadyAddedMessage, value), 'warning'])
+    context.onChange(props.settingsKey, (currentValue: string[] = []) => {
+      return [...currentValue, value].filter(Boolean)
+    })
+    setInputValue('')
+
+    if (props.onAddMessage) {
+      displayToast(format(props.onAddMessage, value), 'success')
+    }
+  }
+
+  /**
    * Handles the key down event for the input field.
    *
    * @param event - The keyboard event object.
@@ -44,16 +64,7 @@ export function useListField(props: Partial<IListFieldProps>) {
    */
   const onKeyDown = ({ key, currentTarget }) => {
     if (key === 'Enter') {
-      if (currentTarget.value.trim() === '') return
-      if (items.includes(currentTarget.value)) return
-      context.onChange(props.settingsKey, (currentValue: string[] = []) => {
-        return [...currentValue, currentTarget.value].filter(Boolean)
-      })
-      setInputValue('')
-
-      if (props.onAddMessage) {
-        displayToast(format(props.onAddMessage, currentTarget.value), 'success')
-      }
+      onAddValue(currentTarget.value)
     }
   }
 
@@ -80,8 +91,10 @@ export function useListField(props: Partial<IListFieldProps>) {
   return {
     items,
     inputValue,
+    onAddValue,
     onChange,
     onKeyDown,
-    onRemove
+    onRemove,
+    validation
   }
 }
