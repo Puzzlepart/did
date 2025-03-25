@@ -1,0 +1,104 @@
+name: Docker Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  docker:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=sha,format=long
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy to Environment
+    needs: docker
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/tags/v')
+
+    environment:
+      name: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production') || (github.ref == 'refs/heads/dev' && 'dev') || (startsWith(github.ref, 'refs/tags/v') && 'staging') }}
+      
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Set environment variables
+        id: env
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "production" || "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "DEPLOY_HOST=${{ secrets.PRODUCTION_HOST }}" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.environment }}" == "staging" || "${{ github.ref }}" == refs/tags/v* ]]; then
+            echo "DEPLOY_HOST=${{ secrets.STAGING_HOST }}" >> $GITHUB_ENV
+          else
+            echo "DEPLOY_HOST=${{ secrets.DEV_HOST }}" >> $GITHUB_ENV
+          fi
+          echo "DOCKER_IMAGE=${REGISTRY}/${IMAGE_NAME}:${{ github.sha }}" >> $GITHUB_ENV
+          echo "BUILD_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Deploy to server
+        run: |
+          ssh ${{ secrets.DEPLOY_USER }}@${{ env.DEPLOY_HOST }} "
+            cd /opt/did && \
+            export DOCKER_REGISTRY=${REGISTRY} && \
+            export APP_VERSION=${BUILD_VERSION} && \
+            docker-compose -f docker-compose.prod.yml pull && \
+            docker-compose -f docker-compose.prod.yml up -d
+          "

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    image: ${DOCKER_REGISTRY:-did}/did-app:${APP_VERSION:-latest}
+    restart: unless-stopped
+    ports:
+      - "${PORT:-9001}:9001"
+    environment:
+      - NODE_ENV=production
+      - PORT=9001
+      - MAINTENANCE_MODE=${MAINTENANCE_MODE:-false}
+      # Add your other environment variables here
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-did}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-password}
+    command: ["--auth"]
+    # For production, use a bind mount to a secure location or a named volume
+    # managed by your infrastructure
+
+  # You can add other services like Redis if needed
+  # redis:
+  #   image: redis:alpine
+  #   restart: unless-stopped
+  #   volumes:
+  #     - redis-data:/data
+
+volumes:
+  mongodb-data:
+  # redis-data:

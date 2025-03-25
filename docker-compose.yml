@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "9001:9001"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=9001
+    depends_on:
+      - mongodb
+    command: npm run watch
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=did
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+volumes:
+  mongodb-data:
