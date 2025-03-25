@@ -1,5 +1,11 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Input, InteractionTag, InteractionTagPrimary, InteractionTagSecondary, TagGroup } from '@fluentui/react-components'
+import {
+  Input,
+  InteractionTag,
+  InteractionTagPrimary,
+  InteractionTagSecondary,
+  TagGroup
+} from '@fluentui/react-components'
 import { DynamicButton, Field } from 'components'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -18,7 +24,15 @@ export const ListField: StyledComponent<IListFieldProps> = ({
   itemAlreadyAddedMessage,
   props
 }) => {
-  const { items, inputValue, onChange, onKeyDown, onAddValue, onRemove, validation } = useListField({
+  const {
+    items,
+    inputValue,
+    onChange,
+    onKeyDown,
+    onAddValue,
+    onRemove,
+    validation
+  } = useListField({
     settingsKey,
     onAddMessage,
     onRemoveMessage,
@@ -37,19 +51,23 @@ export const ListField: StyledComponent<IListFieldProps> = ({
         value={inputValue}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        contentAfter={Boolean(addButtonText) && (
-          <DynamicButton
-            text={addButtonText}
-            transparent
-            size='small'
-            iconName='AddCircle'
-            disabled={inputValue.trim() === ''}
-            onClick={() => onAddValue()} />
-        )}
+        contentAfter={
+          Boolean(addButtonText) && (
+            <DynamicButton
+              text={addButtonText}
+              transparent
+              size='small'
+              iconName='AddCircle'
+              disabled={inputValue.trim() === ''}
+              onClick={() => onAddValue()}
+            />
+          )
+        }
       />
       <TagGroup
         className={styles.items}
-        onDismiss={(_, { value }) => onRemove(value as any)}>
+        onDismiss={(_, { value }) => onRemove(value as any)}
+      >
         {items.map((item, index) => (
           <InteractionTag key={index} value={index as any}>
             <InteractionTagPrimary hasSecondaryAction>

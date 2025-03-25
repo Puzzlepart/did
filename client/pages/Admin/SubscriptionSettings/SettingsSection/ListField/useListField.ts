@@ -33,12 +33,16 @@ export function useListField(props: Partial<IListFieldProps>) {
 
   /**
    * Handles the addition of a new value to the list.
-   * 
+   *
    * @param value - The value to be added to the list (default is the current input value).
    */
   const onAddValue = (value: string = inputValue) => {
     if (value.trim() === '') return
-    if (items.includes(value)) return setValidation([format(props.itemAlreadyAddedMessage, value), 'warning'])
+    if (items.includes(value))
+      return setValidation([
+        format(props.itemAlreadyAddedMessage, value),
+        'warning'
+      ])
     context.onChange(props.settingsKey, (currentValue: string[] = []) => {
       return [...currentValue, value].filter(Boolean)
     })
