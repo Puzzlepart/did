@@ -1,7 +1,7 @@
 import { useQuery, WatchQueryFetchPolicy } from '@apollo/client'
 import { useMemo } from 'react'
 import { Customer } from 'types'
-import $projects from './projects.gql'
+import $customerProjects from './customerProjects.gql'
 
 /**
  * Handles fetching projects for the selected customer.
@@ -13,7 +13,7 @@ export function useProjectsQuery(
   customer: Customer,
   fetchPolicy: WatchQueryFetchPolicy = 'cache-and-network'
 ) {
-  const query = useQuery($projects, {
+  const query = useQuery($customerProjects, {
     variables: {
       customerKey: customer?.key
     },

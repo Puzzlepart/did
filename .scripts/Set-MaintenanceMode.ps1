@@ -3,7 +3,7 @@ Param(
     [string]$ResourceGroupName,
     [Parameter(Mandatory = $true)]
     [string]$AppName,
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$Slot,
     [Parameter(Mandatory = $false)]
     [switch]$Disable,
@@ -25,13 +25,22 @@ az webapp config appsettings set `
     --output none
 
 if(-not $Disable.IsPresent) {
-    # Set the message for maintenance mode
-    az webapp config appsettings set `
+    if(-not $Slot) {
+        # Set the message for maintenance mode
+        az webapp config appsettings set `
         --name $AppName `
         --resource-group $ResourceGroupName `
-        --slot $Slot `
         --settings MAINTENANCE_MESSAGE=$Message `
         --output none
+    } else {    
+        # Set the message for maintenance mode
+        az webapp config appsettings set `
+            --name $AppName `
+            --resource-group $ResourceGroupName `
+            --slot $Slot `
+            --settings MAINTENANCE_MESSAGE=$Message `
+            --output none
+    }
 } else {
     # Clear the maintenance message
     az webapp config appsettings set `
