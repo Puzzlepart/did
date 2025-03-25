@@ -1,0 +1,33 @@
+# Node modules and logs
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Development files
+.git
+.github
+.vscode
+*.md
+!README.md
+.env
+.env.*
+
+# Build artifacts
+dist
+artifacts
+coverage
+.nyc_output
+*.tsbuildinfo
+
+# Docker files
+.dockerignore
+Dockerfile
+docker-compose*.yml
+
+# Deployment files
+.deploy
+
+# Other files
+.DS_Store
+*.log
