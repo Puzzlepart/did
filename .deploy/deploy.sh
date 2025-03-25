@@ -84,7 +84,7 @@ fi
 #
 # 1. rsync to copy files from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET
 # 2. Select Node version
-# 3. Installing node_modules with npm ci
+# 3. Installing node_modules with npm install --omit=dev
 # ----------
 
 # Checks if package.json doesn't exist
@@ -122,11 +122,11 @@ fi
 # 2. Select Node version
 selectNodeVersion
 
-# 3. Installing node_modules with npm ci
+# 3. Installing node_modules with npm install --omit=dev
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD ci"
-  eval $NPM_CMD ci
+  echo "Running $NPM_CMD install --omit=dev --no-audit --no-fund"
+  eval $NPM_CMD install --omit=dev --no-audit --no-fund
   exitWithMessageOnError "Failed to install production npm dependencies"
 fi
 
