@@ -463,6 +463,10 @@
       "📃",
       "Added or updated issue or PR templates"
     ],
+    "deploy": [
+      "🚀",
+      "Adjustments to deployment procedure"
+    ],
     "other": [
       "🔧",
       "Other changes that don't fit into any of the other categories"
