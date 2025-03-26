@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.15.8 - TBA](#-0158---tba)
+	* [➤ 0.15.8 - 26.03.2025](#-0158---26032025)
 		* [Fixed](#fixed)
 	* [➤ 0.15.7 - 25.03.2025](#-0157---25032025)
 		* [Fixed](#fixed-1)
@@ -109,9 +109,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0158---tba)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0158---26032025)
 
-## ➤ 0.15.8 - TBA
+## ➤ 0.15.8 - 26.03.2025
 
 ### Fixed
 - Improved administration of subscription setting `security.domainRestrictionExternal`.
