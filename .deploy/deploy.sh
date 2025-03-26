@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ----------------------
-# did Deployment Script
-# Version: 0.0.1
+# did deployment script
+# Version: 1.0.0
 # ----------------------
 
 # Helpers
