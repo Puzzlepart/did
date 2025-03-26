@@ -2,6 +2,8 @@ name: Build and deploy to didapp/staging
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
 
