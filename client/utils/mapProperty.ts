@@ -1,10 +1,12 @@
+/* eslint-disable prefer-const */
 /**
  * Returns an array of values for a given property of an array of objects.
  *
  * @param array - The array of objects to map.
  * @param property - The property to map from each object in the array.
  * @param separators - The separators to split the property value by, first
- * is for all except the last, second is for the last.
+ * is for all except the last, second is for the last. If no second is provided,
+ * the first will be used for the last as well.
  *
  * @returns An array of values for the given property.
  */
@@ -18,7 +20,8 @@ export function mapProperty<T, R = any>(
   if (separators.length > 0) {
     if (mappedArray.length === 0) return '' as R
     if (mappedArray.length === 1) return mappedArray[0] as R
-    const [firstSeparator, lastSeparator] = separators
+    let [firstSeparator, lastSeparator] = separators
+    lastSeparator = lastSeparator ?? firstSeparator
     return ([...mappedArray].slice(0, -1).join(firstSeparator) +
       lastSeparator +
       mappedArray[mappedArray.length - 1]) as R
