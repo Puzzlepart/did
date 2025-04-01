@@ -83,7 +83,7 @@ export async function exportExcel(
         ...items.map((item) =>
           columns.map((col) => {
             const fieldValue = get(item, col.fieldName)
-            if(col?.data?.excelRenderFunction) {
+            if (col?.data?.excelRenderFunction) {
               return col.data.excelRenderFunction(fieldValue)
             }
             switch (col?.data?.excelColFormat) {

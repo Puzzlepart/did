@@ -33,7 +33,7 @@ export interface IListColumnData {
   /**
    * Custom render function for the column
    * in Excel exports.
-   * 
+   *
    * @param fieldValue Field value
    */
   excelRenderFunction?: (fieldValue: any) => string | number

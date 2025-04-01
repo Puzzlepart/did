@@ -9,13 +9,9 @@ import { ILabelListProps } from './types'
  *
  * @category Reusable Component
  */
-export const LabelList: ReusableComponent<ILabelListProps> = ({
-  labels
-}) => (
-  <div className={LabelList.className }>
-    {labels?.map((label) => (
-      <EntityLabel key={label.name} label={label} />
-    ))}
+export const LabelList: ReusableComponent<ILabelListProps> = ({ labels }) => (
+  <div className={LabelList.className}>
+    {labels?.map((label) => <EntityLabel key={label.name} label={label} />)}
   </div>
 )
 

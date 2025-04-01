@@ -18,10 +18,13 @@ export const projectLabelsColumn: CreateColumnDefFunction = (t) =>
         hidden: true,
         isSortable: false,
         isFilterable: false,
-        excelRenderFunction: (fieldValue) => mapProperty<LabelObject, string>(fieldValue, 'name', ['; '])
+        excelRenderFunction: (fieldValue) =>
+          mapProperty<LabelObject, string>(fieldValue, 'name', ['; '])
       }
     },
     ({ project }) => {
-      return createElement(LabelList, { labels: project.labels as LabelObject[] })
+      return createElement(LabelList, {
+        labels: project.labels as LabelObject[]
+      })
     }
   )
