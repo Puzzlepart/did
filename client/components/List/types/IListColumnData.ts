@@ -29,6 +29,14 @@ export interface IListColumnData {
   excelColFormat?: ExcelColumnType
 
   /**
+   * Custom render function for the column
+   * in Excel exports.
+   * 
+   * @param fieldValue Field value
+   */
+  excelRenderFunction?: (fieldValue: any) => string | number
+
+  /**
    * Hidden from Excel exports
    */
   hiddenFromExport?: boolean

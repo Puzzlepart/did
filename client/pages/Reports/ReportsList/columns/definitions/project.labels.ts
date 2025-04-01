@@ -2,7 +2,7 @@ import { IProjectTagProps } from 'components'
 import { LabelList } from 'components/LabelList'
 import { createElement } from 'react'
 import { LabelObject, TimeEntry } from 'types'
-import { createColumnDef, CreateColumnDefFunction } from 'utils'
+import { createColumnDef, CreateColumnDefFunction, mapProperty } from 'utils'
 
 /**
  * Project labels column definition for reports list
@@ -18,6 +18,7 @@ export const projectLabelsColumn: CreateColumnDefFunction = (t) =>
         hidden: true,
         isSortable: false,
         isFilterable: false,
+        excelRenderFunction: (fieldValue) => mapProperty<LabelObject, string>(fieldValue, 'name', ['; '])
       }
     },
     ({ project }) => {
