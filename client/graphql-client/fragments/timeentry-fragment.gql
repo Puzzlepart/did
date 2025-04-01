@@ -18,6 +18,12 @@ fragment TimeEntryFragment on TimeEntry {
       tag
       name
     }
+    labels {
+      name
+      description
+      color
+      icon
+    }
   }
   resource {
     id

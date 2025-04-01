@@ -22,7 +22,8 @@ import {
   weekColumn,
   yearColumn,
   mailColumn,
-  managerColumn
+  managerColumn,
+  projectLabelsColumn
 } from './definitions'
 
 /**
@@ -38,6 +39,7 @@ export function useColumns() {
     projectNameColumn,
     customerNameColumn,
     projectTagColumn,
+    projectLabelsColumn,
     roleColumn,
     hourlyRateColumn,
     startEndDateTimeColumn,

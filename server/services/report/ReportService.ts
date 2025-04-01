@@ -91,7 +91,8 @@ export class ReportService {
             'name',
             'description',
             'icon',
-            'parent'
+            'parent',
+            'labels'
           ),
           customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
           resource
