@@ -19,7 +19,7 @@ export function mapProperty<T, R = any>(
   if (separators.length > 0) {
     if (mappedArray.length === 0) return '' as R
     if (mappedArray.length === 1) return mappedArray[0] as R
-    if(separators.length === 1) {
+    if (separators.length === 1) {
       return mappedArray.join(separators[0]) as R
     }
     const [firstSeparator, lastSeparator] = separators
