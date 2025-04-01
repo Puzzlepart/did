@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 /**
  * Returns an array of values for a given property of an array of objects.
  *
@@ -8,7 +7,7 @@
  * is for all except the last, second is for the last. If no second is provided,
  * the first will be used for the last as well.
  *
- * @returns An array of values for the given property.
+ * @returns An array of values of the specified property from each object in the array.
  */
 export function mapProperty<T, R = any>(
   array: T[],
@@ -20,8 +19,10 @@ export function mapProperty<T, R = any>(
   if (separators.length > 0) {
     if (mappedArray.length === 0) return '' as R
     if (mappedArray.length === 1) return mappedArray[0] as R
-    let [firstSeparator, lastSeparator] = separators
-    lastSeparator = lastSeparator ?? firstSeparator
+    if(separators.length === 1) {
+      return mappedArray.join(separators[0]) as R
+    }
+    const [firstSeparator, lastSeparator] = separators
     return ([...mappedArray].slice(0, -1).join(firstSeparator) +
       lastSeparator +
       mappedArray[mappedArray.length - 1]) as R
