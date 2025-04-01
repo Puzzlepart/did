@@ -9,7 +9,9 @@ import { IListGroupProps } from './IListGroupProps'
 
 export interface IListColumnData {
   /**
-   * Hidden column
+   * Hidden column. For List instances that have customizable columns,
+   * this property is used to determine if the column should be hidden
+   * in the list instance by default.
    */
   hidden?: boolean
 
