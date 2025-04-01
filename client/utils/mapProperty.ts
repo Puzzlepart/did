@@ -16,6 +16,8 @@ export function mapProperty<T, R = any>(
   if (!array) return [] as R
   const mappedArray = array.map((item) => item[property]).filter(Boolean)
   if (separators.length > 0) {
+    if(mappedArray.length === 0) return '' as R
+    if(mappedArray.length === 1) return mappedArray[0] as R
     const [firstSeparator, lastSeparator] = separators
     return ([...mappedArray].slice(0, -1).join(firstSeparator) +
       lastSeparator +
