@@ -7,6 +7,7 @@
 export * from './title'
 export * from './duration'
 export * from './customer.name'
+export * from './project.labels'
 export * from './project.name'
 export * from './project.tag'
 export * from './project.parent.name'
