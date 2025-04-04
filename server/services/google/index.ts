@@ -3,7 +3,7 @@ import get from 'get-value'
 import { calendar_v3, google } from 'googleapis'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { EventObject } from '../../graphql'
+import { EventObject } from '../../graphql/resolvers/timesheet/types'
 import { environment } from '../../utils/environment'
 import { Request } from '../../graphql/requestContext'
 
