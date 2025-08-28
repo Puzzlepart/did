@@ -97,6 +97,13 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         description={t('admin.userHiddenFromReportsDescription')}
         hidden={!isEditMode}
       />
+      <CheckboxControl
+        {...register('accountEnabled')}
+        label={t('common.accountEnabledLabel')}
+        description={t('common.accountEnabledDescription')}
+        key={'accountEnabled'}
+        hidden={!isEditMode}
+      />
     </FormControl>
   )
 }

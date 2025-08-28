@@ -15,7 +15,7 @@ import { omitTypename } from 'utils'
  */
 export function useUsersSync(context: IUsersContext) {
   const [updateUsers] = useMutation($updateUsers)
-  return async (properties = ['accountEnabled', 'manager']) => {
+  return async (properties = ['manager']) => {
     const users = context.state.selectedUsers
       .map((user) => {
         const adUser = _.find(context.state.adUsers, ({ id }) => id === user.id)

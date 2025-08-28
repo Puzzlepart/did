@@ -322,7 +322,8 @@ export function useSubscriptionConfig() {
             preferredLanguage: t('common.preferredLanguageLabel'),
             department: t('common.departmentLabel'),
             officeLocation: t('common.officeLocationLabel'),
-            manager: t('common.managerLabel')
+            manager: t('common.managerLabel'),
+            accountEnabled: t('common.accountEnabledLabel')
           },
           props: {
             label: t('admin.adUserSyncPropertiesLabel'),
