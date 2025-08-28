@@ -659,7 +659,7 @@
     "givenNameLabel": "Fornavn",
     "jobTitleLabel": "Jobbtittel",
     "accountEnabledLabel": "Konto aktivert",
-    "accountEnabledDescription": "Om brukerkontoen er aktivert eller deaktivert",
+    "accountEnabledDescription": "Om brukerkontoen er aktivert eller deaktivert. NB: Denne egenskapen kan endres selv om synkronisering med AAD er slått på. Dette betyr at alle brukere med aktivert konto i AAD vil få did-kontoen sin reaktivert dersom en synkronisering blir utført.",
     "mailLabel": "E-post",
     "descriptionFieldLabel": "Beskrivelse",
     "iconFieldLabel": "Ikon",

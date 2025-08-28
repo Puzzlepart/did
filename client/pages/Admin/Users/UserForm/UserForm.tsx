@@ -99,10 +99,9 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
       />
       <CheckboxControl
         {...register('accountEnabled')}
-        {...inputProps({
-          key: 'accountEnabled',
-          label: t('common.accountEnabledLabel')
-        })}
+        label={t('common.accountEnabledLabel')}
+        description={t('common.accountEnabledDescription')}
+        key={'accountEnabled'}
         hidden={!isEditMode}
       />
     </FormControl>

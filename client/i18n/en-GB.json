@@ -661,7 +661,7 @@
     "givenNameLabel": "Given name",
     "jobTitleLabel": "Job title",
     "accountEnabledLabel": "Account enabled",
-    "accountEnabledDescription": "Whether the user account is enabled or disabled",
+    "accountEnabledDescription": "Whether the user account is enabled or disabled. NB: This property is editable even if AAD synchronization is turned on. This means that any user with their account enabled in AAD will have their did-account re-activated if a synchronization is performed.",
     "mailLabel": "Mail",
     "descriptionFieldLabel": "Description",
     "iconFieldLabel": "Icon",
