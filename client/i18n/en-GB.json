@@ -659,6 +659,8 @@
     "surnameLabel": "Surname",
     "givenNameLabel": "Given name",
     "jobTitleLabel": "Job title",
+    "accountEnabledLabel": "Account enabled",
+    "accountEnabledDescription": "Whether the user account is enabled or disabled",
     "mailLabel": "Mail",
     "descriptionFieldLabel": "Description",
     "iconFieldLabel": "Icon",

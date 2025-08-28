@@ -658,6 +658,8 @@
     "surnameLabel": "Etternamn",
     "givenNameLabel": "Førenamn",
     "jobTitleLabel": "Jobbtittel",
+    "accountEnabledLabel": "Konto aktivert",
+    "accountEnabledDescription": "Om brukarkontoen er aktivert eller deaktivert",
     "mailLabel": "E-post",
     "descriptionFieldLabel": "Skildring",
     "iconFieldLabel": "Ikon",
