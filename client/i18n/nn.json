@@ -275,7 +275,7 @@
       "employmentStartDateDescription": "Datoen brukerens ansettelse starter. \nHvis brukeren allerede er ansatt, sett denne datoen til første arbeidsdag.",
       "employmentEndDateLabel": "Sluttdato for ansettelse",
       "employmentStartDateLabel": "Startdato for ansettelse",
-      "searchUsersLabel": "Søk i {{usersCount}} aktive brukere...",
+      "searchUsersLabel": "Søk blant {{usersCount}} aktive brukere...",
       "invitationsHeaderText": "Aktive invitasjoner",
       "inviteExternalUserError": "Det oppstod en feil mens du inviterte den eksterne brukeren.",
       "inviteExternalUserSuccess": "Invitasjonen til {{mail}} ble sendt. Be brukeren fullføre registreringen ved å logge inn.",
@@ -297,7 +297,8 @@
       "removeExternalUserError": "Prøv igjen. Om problemet held fram, kontakt ein administrator.",
       "removeExternalUserSuccess": "Vi har fjerna tilgangen deira til systemet. Om du vil invitere dei igjen seinare, kan du enkelt gjere det frå brukarstyringssida.",
       "removeExternalUserErrorTitle": "Noko gjekk galt ved fjerning av ekstern brukar {{displayName}}.",
-      "removeExternalUserSuccessTitle": "Ekstern brukar {{displayName}} er no fjerna frå systemet."
+      "removeExternalUserSuccessTitle": "Ekstern brukar {{displayName}} er no fjerna frå systemet.",
+      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukarar..."
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -658,6 +659,8 @@
     "surnameLabel": "Etternamn",
     "givenNameLabel": "Førenamn",
     "jobTitleLabel": "Jobbtittel",
+    "accountEnabledLabel": "Konto aktivert",
+    "accountEnabledDescription": "Om brukarkontoen er aktivert eller deaktivert. NB: Denne eigenskapen kan endrast sjølv om synkronisering med AAD er slått på. Dette betyr at alle brukarar med aktivert konto i AAD vil få did-kontoen sin reaktivert dersom ei synkronisering blir utført.",
     "mailLabel": "E-post",
     "descriptionFieldLabel": "Skildring",
     "iconFieldLabel": "Ikon",
