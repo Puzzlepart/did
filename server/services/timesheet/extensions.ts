@@ -69,10 +69,19 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
       }
     }
 
+    // Find the role definition for this resource's role to get the hourlyRate if missing
+    const roleDefinition = _.find(
+      roleDefinitions,
+      ({ name }) => name === resource.projectRole
+    )
+
     return {
       role: {
         name: resource.projectRole,
-        hourlyRate: resource.hourlyRate
+        hourlyRate:
+          resource.hourlyRate == null
+            ? roleDefinition?.hourlyRate
+            : resource.hourlyRate
       }
     }
   }
