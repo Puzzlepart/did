@@ -1,20 +1,4 @@
 query UsersAdmin {
-  activeDirectoryUsers {
-    id
-    displayName
-    givenName
-    surname
-    jobTitle
-    mobilePhone
-    mail
-    preferredLanguage
-    accountEnabled
-    manager {
-      id
-      mail
-      displayName
-    }
-  }
   users {
     id
     displayName

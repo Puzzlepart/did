@@ -187,6 +187,40 @@ export class MSGraphService {
   }
 
   /**
+   * Search users from Microsoft Graph with filters.
+   * 
+   * @param search - Search term to filter users
+   * @param limit - Maximum number of results to return (default: 10)
+   */
+  public async searchUsers(search: string, limit = 10): Promise<any> {
+    try {
+      const client = await this._getClient()
+      const response = await client
+        .api('/users')
+        // eslint-disable-next-line quotes
+        .filter(`userType eq 'Member' and (startswith(displayName,'${search}') or startswith(givenName,'${search}') or startswith(surname,'${search}') or startswith(mail,'${search}'))`)
+        .select([
+          'id',
+          'givenName',
+          'surname',
+          'jobTitle',
+          'displayName',
+          'mobilePhone',
+          'mail',
+          'preferredLanguage',
+          'accountEnabled',
+          'manager'
+        ])
+        .expand('manager')
+        .top(limit)
+        .get()
+      return _.sortBy(response.value, 'displayName')
+    } catch (error) {
+      throw new MSGraphError('searchUsers', error.message)
+    }
+  }
+
+  /**
    * Create Outlook category.
    *
    * @param category The category to create
