@@ -959,7 +959,9 @@
     "listApiTokens": "List API-tokens",
     "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems.",
     "inviteExternalUsers": "Invite External Users",
-    "inviteExternalUsersDescription": "Allows inviting users outside of the organization to collaborate and access resources."
+    "inviteExternalUsersDescription": "Allows inviting users outside of the organization to collaborate and access resources.",
+    "lockUnlockWeeks": "Lock/Unlock Weeks",
+    "lockUnlockWeeksDescription": "Allows locking and unlocking weeks to prevent or allow time entry modifications."
   },
   "notifications": {
     "moreLinkText": "Read more here",

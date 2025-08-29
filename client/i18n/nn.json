@@ -957,7 +957,9 @@
     "listApiTokens": "Liste ut API-nøkler",
     "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer.",
     "inviteExternalUsers": "Invitere eksterne brukere",
-    "inviteExternalUsersDescription": "Gir rettighet til å invitere brukere utenfor organisasjonen for samarbeid og tilgang til ressurser."
+    "inviteExternalUsersDescription": "Gir rettighet til å invitere brukere utenfor organisasjonen for samarbeid og tilgang til ressurser.",
+    "lockUnlockWeeks": "Lås/Lås opp veker",
+    "lockUnlockWeeksDescription": "Gir rettighet til å låse og låse opp veker for å hindre eller tillate endringar i tidsregistreringar."
   },
   "notifications": {
     "moreLinkText": "Les meir her",
