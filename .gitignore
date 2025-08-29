@@ -9,6 +9,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.local
+.env.production
+.env.*.local
 
 # Node public folder
 server/public/js
@@ -40,3 +43,11 @@ revision.txt
 .vscode/chrome-debug-user-data
 client/components/Template
 .github/copilot-instructions.md
+
+# Docker
+did-package.zip
+docker-compose.override.yml.local
+
+# Logs
+*.log
+logs/

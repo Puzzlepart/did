@@ -42,7 +42,13 @@
     "create-env": "node .tasks/createDotEnv.js",
     "tag": "node .tasks/git-tag.js",
     "update:version": "node .tasks/updateVersion.js",
-    "commit": "sexy-commits"
+    "commit": "sexy-commits",
+    "docker:setup": "./scripts/docker-dev.sh setup",
+    "docker:start": "./scripts/docker-dev.sh start",
+    "docker:stop": "./scripts/docker-dev.sh stop",
+    "docker:logs": "./scripts/docker-dev.sh logs",
+    "docker:shell": "./scripts/docker-dev.sh shell",
+    "docker:clean": "./scripts/docker-dev.sh clean"
   },
   "dependencies": {
     "@apollo/client": "3.10.4",
