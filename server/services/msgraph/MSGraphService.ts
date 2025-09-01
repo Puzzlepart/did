@@ -197,13 +197,13 @@ export class MSGraphService {
    * OData string literals are enclosed in single quotes, and single quotes are escaped by doubling them.
    */
   private escapeODataString(str: string): string {
-    return String(str).replace(/'/g, "''");
+    return String(str).replace(/'/g, "''")
   }
 
   public async searchUsers(search: string, limit = 10): Promise<any> {
     try {
       const client = await this._getClient()
-      const safeSearch = this.escapeODataString(search);
+      const safeSearch = this.escapeODataString(search)
       const response = await client
         .api('/users')
         // eslint-disable-next-line quotes
