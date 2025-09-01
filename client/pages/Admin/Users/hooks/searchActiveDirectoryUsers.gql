@@ -1,0 +1,18 @@
+query SearchActiveDirectoryUsers($search: String!, $limit: Int = 10) {
+  searchActiveDirectoryUsers(search: $search, limit: $limit) {
+    id
+    displayName
+    givenName
+    surname
+    jobTitle
+    mobilePhone
+    mail
+    preferredLanguage
+    accountEnabled
+    manager {
+      id
+      mail
+      displayName
+    }
+  }
+}

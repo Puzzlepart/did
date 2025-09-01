@@ -6,12 +6,14 @@ import {
   FormControl,
   InputControl
 } from 'components/FormControl'
+import { Button, Spinner } from '@fluentui/react-components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import styles from './UserForm.module.scss'
 import { IUserFormProps } from './types'
 import { useUserForm } from './useUserForm'
+import { useLoadAdUsers } from '../BulkImportPanel/useLoadAdUsers'
 
 export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   const { t } = useTranslation()
@@ -25,9 +27,30 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
     roles,
     availableAdUsers
   } = useUserForm(props)
+  const { loadUsers, loading, hasUsers } = useLoadAdUsers()
 
   return (
     <FormControl {...formControlProps}>
+      {!isEditMode && !hasUsers && (
+        <div style={{ marginBottom: '16px' }}>
+          <Button appearance='secondary' disabled={loading} onClick={loadUsers}>
+            {loading ? (
+              <>
+                <Spinner size='tiny' style={{ marginRight: '8px' }} />
+                {t('admin.users.loadingActiveDirectoryUsers')}
+              </>
+            ) : (
+              t('admin.users.loadActiveDirectoryUsers')
+            )}
+          </Button>
+          {!loading && (
+            <p style={{ marginTop: '8px', fontSize: '14px', color: '#666' }}>
+              {t('admin.users.loadActiveDirectoryUsersDescription')}
+            </p>
+          )}
+        </div>
+      )}
+
       <AutocompleteControl
         {...register('_' as any, {
           required: !model.value('id') && !isEditMode,
@@ -38,11 +61,12 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         items={availableAdUsers.map((u) => ({
           key: u.id,
           text: u.displayName,
-          searchValue: u.displayName,
+          searchValue: [u.displayName, u.mail].filter(Boolean).join(' '),
           data: u
         }))}
         onSelected={onSelectUser}
-        hidden={isEditMode}
+        hidden={isEditMode || !hasUsers}
+        minCharacters={2}
       />
       <InputControl
         {...register('surname')}
