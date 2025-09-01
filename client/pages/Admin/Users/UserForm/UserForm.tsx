@@ -61,8 +61,7 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         items={availableAdUsers.map((u) => ({
           key: u.id,
           text: u.displayName,
-          secondaryText: u.mail,
-          searchValue: `${u.displayName} ${u.mail ?? ''}`,
+          searchValue: [u.displayName, u.mail].filter(Boolean).join(' '),
           data: u
         }))}
         onSelected={onSelectUser}
