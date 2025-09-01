@@ -25,7 +25,6 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -36,9 +35,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ vars.NODE_VERSION }}
- 
+
       - run: |
           npm ci --no-audit --no-fund --loglevel=error --include=dev
+
       - name: ESLint and prettier
         run: |
           npm run lint:fix
@@ -72,20 +72,12 @@ jobs:
           This way we avoid having to generate documentation, run eslint etc. locally before \
           commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
 
-      - name: Push changes to new branch (if staged changes)
+      - name: Configure git authentication for push
         if: ${{ steps.git_context.outputs.status != '' }}
         run: |
-          BRANCH="auto/chores-${{ steps.git_context.outputs.sha_short }}"
-          git checkout -b "$BRANCH"
-          git push origin "$BRANCH"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-      - name: Create Pull Request (if staged changes)
+      - name: Push changes (if staged changes)
         if: ${{ steps.git_context.outputs.status != '' }}
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: dev
-          branch: auto/chores-${{ steps.git_context.outputs.sha_short }}
-          title: "Automatic chores (${{ steps.git_context.outputs.sha_short }})"
-          body: "This PR was created automatically by the Automatic chores workflow."
-          commit-message: "automatic chores (${{ steps.git_context.outputs.sha_short }}) 📝 [skip-ci]"
+        run: |
+          git push origin HEAD:dev
