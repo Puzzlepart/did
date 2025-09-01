@@ -25,6 +25,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -71,9 +72,20 @@ jobs:
           This way we avoid having to generate documentation, run eslint etc. locally before \
           commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
 
-      - name: Push changes (if staged changes)
+      - name: Push changes to new branch (if staged changes)
         if: ${{ steps.git_context.outputs.status != '' }}
-        uses: ad-m/github-push-action@master
+        run: |
+          BRANCH="auto/chores-${{ steps.git_context.outputs.sha_short }}"
+          git checkout -b "$BRANCH"
+          git push origin "$BRANCH"
+
+      - name: Create Pull Request (if staged changes)
+        if: ${{ steps.git_context.outputs.status != '' }}
+        uses: peter-evans/create-pull-request@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: dev
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: dev
+          branch: auto/chores-${{ steps.git_context.outputs.sha_short }}
+          title: "Automatic chores (${{ steps.git_context.outputs.sha_short }})"
+          body: "This PR was created automatically by the Automatic chores workflow."
+          commit-message: "automatic chores (${{ steps.git_context.outputs.sha_short }}) 📝 [skip-ci]"
