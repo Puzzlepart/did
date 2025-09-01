@@ -30,6 +30,11 @@ export interface IUsersState {
   adUsers: ActiveDirectoryUser[]
 
   /**
+   * Flag that indicates whether the AD users are loading
+   */
+  adUsersLoading: boolean
+
+  /**
    * Users registered in Azure Active Directory with a valid email address,
    * that are not already registered in the system.
    */

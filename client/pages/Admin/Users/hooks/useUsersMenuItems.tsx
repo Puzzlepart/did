@@ -54,19 +54,28 @@ export function useUsersMenuItems(context: IUsersContext) {
         .setDisabled(context.state.loading)
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
-      new ListMenuItem(t('admin.users.syncUsersLabel'))
+      new ListMenuItem(
+        context.state.selectedUsers.filter(Boolean).filter(({ isExternal }) => !isExternal).length === 0
+          ? t('admin.users.syncAllUsersLabel')
+          : t('admin.users.syncSelectedUsersLabel')
+      )
         .withIcon('ArrowSync')
         .setDisabled(
           context.state.loading ||
-            context.state.selectedUsers
-              .filter(Boolean)
-              .filter(({ isExternal }) => !isExternal).length === 0
+            context.state.adUsersLoading
         )
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .setOnClick(async () => {
-          context.dispatch(
-            SET_PROGRESS(t('admin.users.synchronizingUserProperties'))
-          )
+          // Show appropriate progress message based on AD users loading state
+          if (context.state.adUsers.length === 0) {
+            context.dispatch(
+              SET_PROGRESS(t('admin.users.loadingActiveDirectoryUsers'))
+            )
+          } else {
+            context.dispatch(
+              SET_PROGRESS(t('admin.users.synchronizingUserProperties'))
+            )
+          }
           await syncUsers()
           context.dispatch(CLEAR_PROGRESS())
         }),
@@ -97,7 +106,7 @@ export function useUsersMenuItems(context: IUsersContext) {
     ]
   }, [
     context.state.loading,
-    context.state.availableAdUsers,
+    context.state.adUsersLoading,
     context.state.progress,
     context.state.selectedUsers
   ])

@@ -187,6 +187,49 @@ export class MSGraphService {
   }
 
   /**
+   * Search users from Microsoft Graph with filters.
+   * 
+   * @param search - Search term to filter users
+   * @param limit - Maximum number of results to return (default: 10)
+   */
+  /**
+   * Escapes a string for safe use in OData string literals.
+   * OData string literals are enclosed in single quotes, and single quotes are escaped by doubling them.
+   */
+  private escapeODataString(str: string): string {
+    return String(str).replace(/'/g, "''")
+  }
+
+  public async searchUsers(search: string, limit = 10): Promise<any> {
+    try {
+      const client = await this._getClient()
+      const safeSearch = this.escapeODataString(search)
+      const response = await client
+        .api('/users')
+        // eslint-disable-next-line quotes
+        .filter(`userType eq 'Member' and (startswith(displayName,'${safeSearch}') or startswith(givenName,'${safeSearch}') or startswith(surname,'${safeSearch}') or startswith(mail,'${safeSearch}'))`)
+        .select([
+          'id',
+          'givenName',
+          'surname',
+          'jobTitle',
+          'displayName',
+          'mobilePhone',
+          'mail',
+          'preferredLanguage',
+          'accountEnabled',
+          'manager'
+        ])
+        .expand('manager')
+        .top(limit)
+        .get()
+      return _.sortBy(response.value, 'displayName')
+    } catch (error) {
+      throw new MSGraphError('searchUsers', error.message)
+    }
+  }
+
+  /**
    * Create Outlook category.
    *
    * @param category The category to create

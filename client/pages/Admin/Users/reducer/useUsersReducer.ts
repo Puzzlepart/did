@@ -12,7 +12,11 @@ import {
   SET_INVITE_EXTERNAL_USER_FORM,
   SET_PROGRESS,
   SET_SELECTED_USERS,
-  SET_USER_FORM
+  SET_USER_FORM,
+  SET_AD_USERS,
+  SET_AD_USERS_LOADING,
+  SEARCH_AD_USERS_SUCCESS,
+  SEARCH_AD_USERS_LOADING
 } from './actions'
 import { initialState } from './initialState'
 
@@ -24,21 +28,12 @@ export function useUsersReducer() {
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
         const users = get(payload, 'query.data.users', { default: [] })
-        const activeDirectoryUsers = get(
-          payload,
-          'query.data.activeDirectoryUsers',
-          { default: [] }
-        )
         const roles = get(payload, 'query.data.roles', { default: [] })
         state.users = users
         state.activeUsers = _.filter(users, (u) => u.accountEnabled !== false)
         state.disabledUsers = _.filter(users, (u) => u.accountEnabled === false)
         state.roles = roles
-        state.adUsers = activeDirectoryUsers
-        state.availableAdUsers = _.filter(
-          activeDirectoryUsers,
-          (x) => !_.any(users, (y) => y.id === x.id) && Boolean(x.mail)
-        )
+        // Note: adUsers and availableAdUsers are now loaded separately via SET_AD_USERS
         state.invitations = get(payload, 'query.data.invitations', {
           default: []
         })
@@ -74,6 +69,26 @@ export function useUsersReducer() {
       .addCase(RESET_SELECTION, (state) => {
         state.selectedUsers = []
         state.setKey = Date.now().toString()
+      })
+      .addCase(SET_AD_USERS, (state, { payload }) => {
+        state.adUsers = payload
+        state.availableAdUsers = _.filter(
+          payload,
+          (x) => !_.any(state.users, (y) => y.id === x.id) && Boolean(x.mail)
+        )
+        state.adUsersLoading = false
+      })
+      .addCase(SET_AD_USERS_LOADING, (state, { payload }) => {
+        state.adUsersLoading = payload
+      })
+      .addCase(SEARCH_AD_USERS_SUCCESS, (state, { payload }) => {
+        // For search results, we don't filter out existing users
+        // as this is used for autocomplete/search functionality
+        state.adUsers = payload
+        state.adUsersLoading = false
+      })
+      .addCase(SEARCH_AD_USERS_LOADING, (state, { payload }) => {
+        state.adUsersLoading = payload
       })
   )
 }
