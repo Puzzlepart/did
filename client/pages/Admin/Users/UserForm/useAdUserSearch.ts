@@ -7,18 +7,15 @@ export function useAdUserSearch() {
   const [searchResults, setSearchResults] = useState<ActiveDirectoryUser[]>([])
   const [searchLoading, setSearchLoading] = useState(false)
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>()
-
-  const [searchActiveDirectoryUsers] = useLazyQuery(
-    $searchActiveDirectoryUsers,
-    {
-      onCompleted: (data) => {
-        setSearchResults(data.searchActiveDirectoryUsers || [])
-        setSearchLoading(false)
-      },
-      onError: () => {
-        setSearchResults([])
-        setSearchLoading(false)
-      }
+  
+  const [searchActiveDirectoryUsers] = useLazyQuery($searchActiveDirectoryUsers, {
+    onCompleted: (data) => {
+      setSearchResults(data.searchActiveDirectoryUsers || [])
+      setSearchLoading(false)
+    },
+    onError: () => {
+      setSearchResults([])
+      setSearchLoading(false)
     }
   )
 
