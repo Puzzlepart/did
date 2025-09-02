@@ -15,6 +15,13 @@ on:
       - '.deploy/**'
       - '.tasks/archivePackage.js'
       - '.github/workflows/on_push_dev_deploy.yml'
+  workflow_run:
+    workflows: ["Automatic chores"]
+    branches:
+      - dev
+      - feat/*
+    types:
+      - completed
 
 jobs:
   package:
@@ -23,9 +30,13 @@ jobs:
     concurrency: 
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-    if: "!contains(github.event.head_commit.message, '[skip-ci]') && !contains(github.event.head_commit.message, '[skip-deploy]')"
+    if: |
+      (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip-ci]') && !contains(github.event.head_commit.message, '[skip-deploy]')) ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     steps:
     - uses: actions/checkout@master
+      with:
+        ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 
     - name: Use Node.js (${{ vars.NODE_VERSION }})
       uses: actions/setup-node@v3
