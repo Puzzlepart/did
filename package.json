@@ -17,10 +17,12 @@
     "workerThreads": true,
     "timeout": "2m",
     "extensions": {
-      "ts": "module"
+      "ts": "commonjs"
     },
+    "require": [
+      "ts-node/register"
+    ],
     "nodeArguments": [
-      "--loader=ts-node/esm",
       "--no-warnings"
     ]
   },
