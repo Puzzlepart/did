@@ -15,6 +15,9 @@ RUN npm cache clean --force && \
 # Stage 2: Development image
 FROM base AS development
 
+# Install git for webpack build
+RUN apk add --no-cache git
+
 # Copy source code
 COPY . .
 

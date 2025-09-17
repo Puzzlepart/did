@@ -27,7 +27,7 @@
     ]
   },
   "config": {
-    "BUNDLE_FILE_NAME": "'did.[name].[fullhash].js"
+    "BUNDLE_FILE_NAME": "did.[name].[fullhash].js"
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
