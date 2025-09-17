@@ -1,5 +1,5 @@
 <!-- ⚠️ This README has been generated from the file(s) ".changelog/CHANGELOG.md" ⚠️-->
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#changelog)
+[](#changelog)
 
 # ➤ Changelog
 
@@ -12,108 +12,160 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <summary>📖 Table of Contents</summary>
 <br />
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#table-of-contents)
+[](#table-of-contents)
 
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.15.10 - 01.04.2025](#-01510---01042025)
+	* [➤ 0.15.11 - 15.09.2025](#-01511---15092025)
 		* [Added](#added)
-	* [➤ 0.15.9 - 01.04.2025](#-0159---01042025)
-		* [Added](#added-1)
-	* [➤ 0.15.8 - 26.03.2025](#-0158---26032025)
-		* [Fixed](#fixed)
-	* [➤ 0.15.7 - 25.03.2025](#-0157---25032025)
-		* [Fixed](#fixed-1)
-	* [➤ 0.15.6 - 24.03.2025](#-0156---24032025)
 		* [Changed](#changed)
-	* [➤ 0.15.5 - 20.03.2025](#-0155---20032025)
+		* [Fixed](#fixed)
+		* [Documentation](#documentation)
+		* [CI / Chores](#ci--chores)
+		* [Internal](#internal)
+		* [Notes](#notes)
+	* [➤ 0.15.10 - 01.04.2025](#-01510---01042025)
+		* [Added](#added-1)
+	* [➤ 0.15.9 - 01.04.2025](#-0159---01042025)
 		* [Added](#added-2)
-		* [Changed](#changed-1)
-	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
-		* [Changed](#changed-2)
-	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
-		* [Changed](#changed-3)
-	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
+	* [➤ 0.15.8 - 26.03.2025](#-0158---26032025)
+		* [Fixed](#fixed-1)
+	* [➤ 0.15.7 - 25.03.2025](#-0157---25032025)
 		* [Fixed](#fixed-2)
-	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
-		* [Fixed](#fixed-3)
-	* [➤ 0.14.18 - 18.03.2025](#-01418---18032025)
-		* [Fixed](#fixed-4)
-	* [➤ 0.14.17 - 18.03.2025](#-01417---18032025)
-		* [Fixed](#fixed-5)
-	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
-		* [Fixed](#fixed-6)
-	* [➤ 0.14.15 - 17.03.2025](#-01415---17032025)
-		* [Changed](#changed-4)
-		* [Fixed](#fixed-7)
-	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
+	* [➤ 0.15.6 - 24.03.2025](#-0156---24032025)
+		* [Changed](#changed-1)
+	* [➤ 0.15.5 - 20.03.2025](#-0155---20032025)
 		* [Added](#added-3)
-		* [Fixed](#fixed-8)
-	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
-		* [Fixed](#fixed-9)
+		* [Changed](#changed-2)
+	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
+		* [Changed](#changed-3)
+	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
+		* [Changed](#changed-4)
+	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
+		* [Fixed](#fixed-3)
+	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
+		* [Fixed](#fixed-4)
+	* [➤ 0.14.18 - 18.03.2025](#-01418---18032025)
+		* [Fixed](#fixed-5)
+	* [➤ 0.14.17 - 18.03.2025](#-01417---18032025)
+		* [Fixed](#fixed-6)
+	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
+		* [Fixed](#fixed-7)
+	* [➤ 0.14.15 - 17.03.2025](#-01415---17032025)
 		* [Changed](#changed-5)
+		* [Fixed](#fixed-8)
+	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
 		* [Added](#added-4)
-	* [➤ 0.13.2 - 22.02.2024](#-0132---22022024)
+		* [Fixed](#fixed-9)
+	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
 		* [Fixed](#fixed-10)
-	* [➤ 0.13.1 - 21.02.2024](#-0131---21022024)
-		* [Fixed](#fixed-11)
-	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
-		* [Fixed](#fixed-12)
-		* [Added](#added-5)
 		* [Changed](#changed-6)
-	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
-		* [Added](#added-6)
+		* [Added](#added-5)
+	* [➤ 0.13.2 - 22.02.2024](#-0132---22022024)
+		* [Fixed](#fixed-11)
+	* [➤ 0.13.1 - 21.02.2024](#-0131---21022024)
+		* [Fixed](#fixed-12)
+	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
 		* [Fixed](#fixed-13)
+		* [Added](#added-6)
 		* [Changed](#changed-7)
-	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
+	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
 		* [Added](#added-7)
 		* [Fixed](#fixed-14)
 		* [Changed](#changed-8)
-	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
-		* [Fixed](#fixed-15)
-	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
-		* [Fixed](#fixed-16)
-	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
-		* [Fixed](#fixed-17)
-	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
+	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added-8)
-		* [Fixed](#fixed-18)
+		* [Fixed](#fixed-15)
 		* [Changed](#changed-9)
-	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
+	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
+		* [Fixed](#fixed-16)
+	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
+		* [Fixed](#fixed-17)
+	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
+		* [Fixed](#fixed-18)
+	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
 		* [Added](#added-9)
 		* [Fixed](#fixed-19)
 		* [Changed](#changed-10)
-	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
+	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added-10)
 		* [Fixed](#fixed-20)
 		* [Changed](#changed-11)
-		* [Removed](#removed)
-	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
+	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-11)
 		* [Fixed](#fixed-21)
-	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
+		* [Changed](#changed-12)
+		* [Removed](#removed)
+	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-12)
 		* [Fixed](#fixed-22)
-	* [➤ 0.6.0 - N/A](#-060---na)
-	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
+	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
 		* [Added](#added-13)
 		* [Fixed](#fixed-23)
-	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
+	* [➤ 0.6.0 - N/A](#-060---na)
+	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
 		* [Added](#added-14)
 		* [Fixed](#fixed-24)
-		* [Fixed](#fixed-25)
-	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
+	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
 		* [Added](#added-15)
+		* [Fixed](#fixed-25)
 		* [Fixed](#fixed-26)
-	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
-		* [Fixed](#fixed-27)
-	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
 		* [Added](#added-16)
+		* [Fixed](#fixed-27)
+	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+		* [Fixed](#fixed-28)
+	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+		* [Added](#added-17)
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#01510---01042025)
+[](#01511---15092025)
+
+## ➤ 0.15.11 - 15.09.2025
+
+### Added
+- Account enabled checkbox added to the User form (enabled even when syncing from AAD)
+- Subscription settings now allow optionally syncing "accountEnabled" from AAD
+- Lazy loading for Active Directory users in bulk import panel with "Load Users" button
+- Search functionality for Active Directory (Entra ID) users with server-side filtering
+- Progress indicators for Entra ID user loading operations
+- Add New User panel now supports lazy loading of Entra ID users and local filtering in the picker
+- Internationalization: added new labels for Entra ID user loading and user sync menu (en-GB, nb, nn)
+
+### Changed
+- Default bulk user sync no longer includes "accountEnabled" unless explicitly selected
+- **Performance:** Entra ID users (≈19k) no longer fetched on initial page load, improving Admin > Users load time from ~5s to ~500ms
+- User synchronization menu now shows context-aware text (all users vs. selected users)
+- Bulk import panel now requires explicit "Load Users from Active Directory" action instead of auto-loading
+- User sync operations now load Entra ID users on-demand with progress messaging
+- Add New User panel no longer performs server-side search after initial load; uses client-side filtering
+- Sync action is disabled while Entra ID users are loading, with contextual progress text
+
+### Fixed
+- Eliminated performance bottleneck caused by fetching all Entra ID users on every Admin > Users page load
+- Fixed AVA test runner configuration (ESM loader cycle) that caused all tests to fail
+- Minor adjustment to Google Calendar service
+
+### Documentation
+- Added `CLAUDE.md` with project guidance and development instructions
+- Updated Copilot and contributor instructions
+
+### CI / Chores
+- Enhanced and refactored automatic chores workflow (creation, PR behavior)
+- Disabled automatic chores workflow (temporarily) for stability
+- Updated contributors list
+
+### Internal
+- Version bump to 0.15.11
+
+### Notes
+This release focuses on significant scalability improvements for large Entra ID tenants and lays groundwork for more responsive administrative workflows.
+
+
+
+[](#01510---01042025)
 
 ## ➤ 0.15.10 - 01.04.2025
 
@@ -121,7 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Minor fix for labels in Reports [#1281](https://github.com/Puzzlepart/did/issues/1281)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0159---01042025)
+[](#0159---01042025)
 
 ## ➤ 0.15.9 - 01.04.2025
 
@@ -129,7 +181,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for including project labels in reports [#1281](https://github.com/Puzzlepart/did/issues/1281)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0158---26032025)
+[](#0158---26032025)
 
 ## ➤ 0.15.8 - 26.03.2025
 
@@ -137,7 +189,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved administration of subscription setting `security.domainRestrictionExternal`.
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0157---25032025)
+[](#0157---25032025)
 
 ## ➤ 0.15.7 - 25.03.2025
 
@@ -146,7 +198,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue with the customer projects query on the customer page.
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0156---24032025)
+[](#0156---24032025)
 
 ## ➤ 0.15.6 - 24.03.2025
 
@@ -155,7 +207,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reload button not available when a period is confirmed
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0155---20032025)
+[](#0155---20032025)
 
 ## ➤ 0.15.5 - 20.03.2025
 
@@ -170,7 +222,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0154---20032025)
+[](#0154---20032025)
 
 ## ➤ 0.15.4 - 20.03.2025
 
@@ -179,7 +231,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added health check endpoint `/health_check` to the backend
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0153---20032025)
+[](#0153---20032025)
 
 ## ➤ 0.15.3 - 20.03.2025
 
@@ -190,7 +242,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Proper link styling for links in the `Markdown` component
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0151---19032025)
+[](#0151---19032025)
 
 ## ➤ 0.15.1 - 19.03.2025
 
@@ -199,7 +251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed critical bug in `SummaryView` for `Timesheet` page that caused the component when there were unmatched events
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0150---19032025)
+[](#0150---19032025)
 
 ## ➤ 0.15.0 - 19.03.2025
 
@@ -209,7 +261,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Users with no hours in selected periods are now filtered out in the `SummaryView`
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#01418---18032025)
+[](#01418---18032025)
 
 ## ➤ 0.14.18 - 18.03.2025
 
@@ -218,7 +270,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed unneccessary margin from the `EventList` component
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#01417---18032025)
+[](#01417---18032025)
 
 ## ➤ 0.14.17 - 18.03.2025
 
@@ -228,7 +280,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#01416---18032025)
+[](#01416---18032025)
 
 ## ➤ 0.14.16 - 18.03.2025
 
@@ -243,7 +295,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#01415---17032025)
+[](#01415---17032025)
 
 ## ➤ 0.14.15 - 17.03.2025
 
@@ -255,7 +307,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue with project roles when manually matching in the UI
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#01412---13032025)
+[](#01412---13032025)
 
 ## ➤ 0.14.12 - 13.03.2025
 
@@ -270,7 +322,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0133---25022025)
+[](#0133---25022025)
 
 ## ➤ 0.13.3 - 25.02.2025
 
@@ -298,7 +350,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0132---22022024)
+[](#0132---22022024)
 
 ## ➤ 0.13.2 - 22.02.2024
 
@@ -307,7 +359,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix for [#1207](https://github.com/Puzzlepart/did/issues/1207)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0131---21022024)
+[](#0131---21022024)
 
 ## ➤ 0.13.1 - 21.02.2024
 
@@ -316,7 +368,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix for [#1200](https://github.com/Puzzlepart/did/issues/1200)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0130---21022024)
+[](#0130---21022024)
 
 ## ➤ 0.13.0 - 21.02.2024
 
@@ -338,7 +390,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrating to `@apollo/server@v4` [#1116](https://github.com/Puzzlepart/did/issues/1116)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0120---17042023)
+[](#0120---17042023)
 
 ## ➤ 0.12.0 - 17.04.2023
 
@@ -354,7 +406,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vacation days reset per year by changing the user configuration format [#1086](https://github.com/Puzzlepart/did/pull/1086)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0114---21122022)
+[](#0114---21122022)
 
 ## ➤ 0.11.4 - 21.12.2022
 
@@ -372,7 +424,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Events without subject/title is now visible to the end user and displayed as an error that needs to be resolved before submitting [#1082](https://github.com/Puzzlepart/did/issues/1082)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0113---25112022)
+[](#0113---25112022)
 
 ## ➤ 0.11.3 - 25.11.2022
 
@@ -380,7 +432,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed issue with user reports [#1077](https://github.com/Puzzlepart/did/issues/1077)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0112---18112022)
+[](#0112---18112022)
 
 ## ➤ 0.11.2 - 18.11.2022
 
@@ -389,7 +441,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0111---18112022)
+[](#0111---18112022)
 
 ## ➤ 0.11.1 - 18.11.2022
 
@@ -398,7 +450,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0110---16112022)
+[](#0110---16112022)
 
 ## ➤ 0.11.0 - 16.11.2022
 
@@ -423,7 +475,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deleting API-keys and labels now requires confirmation [#953](https://github.com/Puzzlepart/did/issues/953)
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#0100---27042021)
+[](#0100---27042021)
 
 ## ➤ 0.10.0 - 27.04.2021
 
@@ -464,7 +516,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#090---15122020)
+[](#090---15122020)
 
 ## ➤ 0.9.0 - 15.12.2020
 ### Added
@@ -506,7 +558,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#080---15102020)
+[](#080---15102020)
 
 ## ➤ 0.8.0 - 15.10.2020
 ### Added
@@ -526,7 +578,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#070---09092020)
+[](#070---09092020)
 
 ## ➤ 0.7.0 - 09.09.2020
 ### Added
@@ -545,14 +597,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#060---na)
+[](#060---na)
 
 ## ➤ 0.6.0 - N/A
 Need details.
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#050---2252020)
+[](#050---2252020)
 
 ## ➤ 0.5.0 - 22.5.2020
 
@@ -570,7 +622,7 @@ Need details.
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#040---1152020)
+[](#040---1152020)
 
 ## ➤ 0.4.0 - 11.5.2020
 
@@ -591,7 +643,7 @@ Need details.
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#031---16042020)
+[](#031---16042020)
 
 ## ➤ 0.3.1 - 16.04.2020
 
@@ -606,7 +658,7 @@ Need details.
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#030---20032020)
+[](#030---20032020)
 
 ## ➤ 0.3.0 - 20.03.2020
 
@@ -616,7 +668,7 @@ Need details.
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#020---05032020)
+[](#020---05032020)
 
 ## ➤ 0.2.0 - 05.03.2020
 

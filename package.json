@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.15.10",
+  "version": "0.15.11",
   "private": true,
   "engines": {
     "node": ">=22.14.0",
@@ -17,10 +17,12 @@
     "workerThreads": true,
     "timeout": "2m",
     "extensions": {
-      "ts": "module"
+      "ts": "commonjs"
     },
+    "require": [
+      "ts-node/register"
+    ],
     "nodeArguments": [
-      "--loader=ts-node/esm",
       "--no-warnings"
     ]
   },
@@ -205,18 +207,21 @@
   "contributors": [
     {
       "name": "Carl Joakim Damsleth",
-      "email": "carl.joakim.damsleth@puzzlepart.com",
-      "img": "https://avatars.githubusercontent.com/u/7300548?&size=130"
+      "email": "cj@d0.si",
+      "img": "https://avatars.githubusercontent.com/u/7300548?&size=130",
+      "url": "https://github.com/damsleth"
     },
     {
       "name": "Ole Martin Pettersen",
-      "email": "olemp@puzzlepart.com",
-      "img": "https://avatars.githubusercontent.com/u/7606007?&size=130"
+      "email": "olem.pettersen@gmail.com",
+      "img": "https://avatars.githubusercontent.com/u/7606007?&size=130",
+      "url": "https://github.com/olemp"
     },
     {
       "name": "Ole Kristian Mørch-Storstein",
-      "email": "olekms@puzzlepart.com",
-      "img": "https://avatars.githubusercontent.com/u/170147?&size=130"
+      "email": "ok@okms.me",
+      "img": "https://avatars.githubusercontent.com/u/170147?&size=130",
+      "url": "https://github.com/okms"
     }
   ],
   "sideEffects": false,

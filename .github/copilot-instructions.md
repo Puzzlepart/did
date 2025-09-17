@@ -1,10 +1,11 @@
-# GitHub Copilot Instructions for DID
+# GitHub Copilot Instructions for did
 
 This document provides instructions and context for GitHub Copilot to better assist with development in the DID project.
 
 ## Project Overview
 
-did is a web application built with React and Node.js that manages projects, time reporting, and customer data. The application uses GraphQL for data fetching and manipulation.
+did is a web application built with React and Node.js that manages projects, time reporting, and customer data.
+The application uses GraphQL for fetching and manipulating data from the Microsoft Graph API, as well as a custom backend API.
 
 ## Project Structure
 
@@ -106,5 +107,5 @@ Where `[type]` is found in the `package.json` file under the `gitmoji` key, and 
 based on the type you chose and the git changes. `[changes]` is the git changes you want to commit, use `all` to commit all changes.
 
 ### Creating new components
-When asked to create a new component, you should use [Template ](client/components/Template) as a template for the new component.
+When asked to create a new component, you should examine the structure of the existing components under ./client/components and follow the same conventions and structure.
 Also include a component logic hook in the same folder as the component, this should be named `use[ComponentName].ts`. This should be used to separate the logic from the component. All components and functions should have a basic jsdoc comment with a description of what they do.

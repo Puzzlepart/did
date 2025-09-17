@@ -26,11 +26,7 @@ export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
     >
       {!hasUsers && (
         <div style={{ marginBottom: '16px' }}>
-          <Button
-            appearance='secondary'
-            disabled={loading}
-            onClick={loadUsers}
-          >
+          <Button appearance='secondary' disabled={loading} onClick={loadUsers}>
             {loading ? (
               <>
                 <Spinner size='tiny' style={{ marginRight: '8px' }} />
@@ -47,7 +43,7 @@ export const BulkImportPanel: StyledComponent<IBulkImportPanelProps> = (
           )}
         </div>
       )}
-      
+
       {hasUsers && (
         <>
           <Button

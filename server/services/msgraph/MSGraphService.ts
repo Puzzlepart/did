@@ -188,7 +188,7 @@ export class MSGraphService {
 
   /**
    * Search users from Microsoft Graph with filters.
-   * 
+   *
    * @param search - Search term to filter users
    * @param limit - Maximum number of results to return (default: 10)
    */
@@ -207,7 +207,9 @@ export class MSGraphService {
       const response = await client
         .api('/users')
         // eslint-disable-next-line quotes
-        .filter(`userType eq 'Member' and (startswith(displayName,'${safeSearch}') or startswith(givenName,'${safeSearch}') or startswith(surname,'${safeSearch}') or startswith(mail,'${safeSearch}'))`)
+        .filter(
+          `userType eq 'Member' and (startswith(displayName,'${safeSearch}') or startswith(givenName,'${safeSearch}') or startswith(surname,'${safeSearch}') or startswith(mail,'${safeSearch}'))`
+        )
         .select([
           'id',
           'givenName',
