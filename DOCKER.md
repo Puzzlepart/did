@@ -168,12 +168,12 @@ docker build -t did:latest .
 
 2. **Deploy with production compose:**
    ```bash
-   docker-compose -f docker-compose.prod.yml up -d
+   docker compose -f docker-compose.prod.yml up -d
    ```
 
 3. **Scale the application:**
    ```bash
-   docker-compose -f docker-compose.prod.yml up -d --scale did=3
+   docker compose -f docker-compose.prod.yml up -d --scale did=3
    ```
 
 ### Production Environment Variables
@@ -216,19 +216,19 @@ sudo chown -R $USER:$USER .
 **3. Database connection issues:**
 ```bash
 # Check if MongoDB is running
-docker-compose ps
+docker compose ps
 
 # View MongoDB logs
-docker-compose logs mongodb
+docker compose logs mongodb
 
 # Restart MongoDB
-docker-compose restart mongodb
+docker compose restart mongodb
 ```
 
 **4. Build issues:**
 ```bash
 # Clean build cache
-docker-compose build --no-cache
+docker compose build --no-cache
 
 # Clean Docker system
 docker system prune -f
@@ -242,7 +242,7 @@ docker system prune -f
 ./scripts/docker-dev.sh logs
 
 # Check container status
-docker-compose ps
+docker compose ps
 
 # Enter container for debugging
 ./scripts/docker-dev.sh shell
@@ -254,7 +254,7 @@ docker-compose ps
 ./scripts/docker-dev.sh db-shell
 
 # Check database status
-docker-compose exec mongodb mongosh --eval "db.runCommand('ping')"
+docker compose exec mongodb mongosh --eval "db.runCommand('ping')"
 ```
 
 **3. Cache issues:**
@@ -263,7 +263,7 @@ docker-compose exec mongodb mongosh --eval "db.runCommand('ping')"
 ./scripts/docker-dev.sh redis-cli
 
 # Check Redis status
-docker-compose exec redis redis-cli ping
+docker compose exec redis redis-cli ping
 ```
 
 ## Advanced Usage
@@ -329,14 +329,14 @@ The application includes built-in health checks:
 curl http://localhost:9001/health
 
 # Check Docker health status
-docker-compose ps
+docker compose ps
 ```
 
 ## Monitoring
 
 For production monitoring, consider integrating:
 
-- **Logs**: Use `docker-compose logs` or external log aggregation
+- **Logs**: Use `docker compose logs` or external log aggregation
 - **Metrics**: Application exposes metrics at `/metrics`
 - **Monitoring**: Use tools like Prometheus, Grafana, or Azure Monitor
 

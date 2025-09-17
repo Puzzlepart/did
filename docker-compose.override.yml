@@ -1,7 +1,5 @@
 # Docker Compose override for local development
 # This file is automatically used by docker-compose to override the main configuration
-version: '3.8'
-
 services:
   did:
     environment:

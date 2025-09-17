@@ -58,10 +58,12 @@ validate_docker_compose() {
     
     if docker compose version >/dev/null 2>&1; then
         local compose_version=$(docker compose version | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1)
-        log_success "Docker Compose v${compose_version} is available"
+        log_success "Docker Compose v${compose_version} is available (V2)"
     elif command_exists docker-compose; then
         local compose_version=$(docker-compose --version | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1)
-        log_success "Docker Compose v${compose_version} is available (standalone)"
+        log_warning "Docker Compose v${compose_version} is available (V1 - deprecated)"
+        echo "  Consider upgrading to Docker Compose V2 for better performance"
+        echo "  V1 (docker-compose) is deprecated in favor of V2 (docker compose)"
     else
         log_error "Docker Compose is not available"
         echo "  Install Docker Compose: https://docs.docker.com/compose/install/"

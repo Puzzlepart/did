@@ -79,7 +79,7 @@ setup_dev() {
     
     # Build images
     log_info "Building Docker images..."
-    docker-compose build
+    docker compose build
     
     log_success "Development environment setup complete!"
     log_info "Run './scripts/docker-dev.sh start' to start the application"
@@ -93,7 +93,7 @@ start_services() {
     fi
     
     log_info "Starting DID development environment..."
-    docker-compose up -d $profiles
+    docker compose up -d $profiles
     
     log_success "Services started successfully!"
     log_info "Application will be available at: http://localhost:9001"
@@ -107,7 +107,7 @@ start_services() {
 # Stop services
 stop_services() {
     log_info "Stopping DID development environment..."
-    docker-compose down
+    docker compose down
     log_success "Services stopped successfully!"
 }
 
@@ -121,7 +121,7 @@ restart_services() {
 # Build images
 build_images() {
     log_info "Building Docker images..."
-    docker-compose build --no-cache
+    docker compose build --no-cache
     log_success "Images built successfully!"
 }
 
@@ -132,7 +132,7 @@ clean_docker() {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         log_info "Cleaning up Docker resources..."
-        docker-compose down -v --remove-orphans
+        docker compose down -v --remove-orphans
         docker system prune -f
         log_success "Cleanup complete!"
     else
@@ -142,28 +142,28 @@ clean_docker() {
 
 # Show logs
 show_logs() {
-    docker-compose logs -f did
+    docker compose logs -f did
 }
 
 # Open shell in DID container
 open_shell() {
-    docker-compose exec did /bin/sh
+    docker compose exec did /bin/sh
 }
 
 # Open MongoDB shell
 open_db_shell() {
-    docker-compose exec mongodb mongosh did_dev
+    docker compose exec mongodb mongosh did_dev
 }
 
 # Open Redis CLI
 open_redis_cli() {
-    docker-compose exec redis redis-cli
+    docker compose exec redis redis-cli
 }
 
 # Show status
 show_status() {
     log_info "DID Development Environment Status:"
-    docker-compose ps
+    docker compose ps
 }
 
 # Main script logic
