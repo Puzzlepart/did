@@ -48,6 +48,9 @@ client/components/Template
 did-package.zip
 docker-compose.override.yml.local
 
+# MongoDB development data (sensitive)
+docker/data/**/*.json
+
 # Logs
 *.log
 logs/

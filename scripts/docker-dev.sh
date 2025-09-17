@@ -77,6 +77,14 @@ setup_dev() {
         log_warning "Please edit .env file with your configuration before starting the application"
     fi
     
+    # Check for data import files
+    if [ -d "docker/data" ] && [ "$(ls -A docker/data/*.json 2>/dev/null)" ]; then
+        log_info "Found data files in docker/data/ - these will be imported to MongoDB on first startup"
+    else
+        log_info "No data files found in docker/data/ - MongoDB will start with empty collections"
+        log_info "To import production data, place JSON files exported with mongoexport in docker/data/"
+    fi
+    
     # Build images
     log_info "Building Docker images..."
     docker compose build

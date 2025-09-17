@@ -34,7 +34,9 @@ services:
       - MONGO_INITDB_DATABASE=did_dev
     volumes:
       - mongodb_data:/data/db
-      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  # mongo-init.js removed; only import-data.sh and data folder are used
+      - ./docker/import-data.sh:/docker-entrypoint-initdb.d/02-import-data.sh:ro
+      - ./docker/data:/docker-entrypoint-initdb.d/data:ro
     networks:
       - did-network
     restart: unless-stopped

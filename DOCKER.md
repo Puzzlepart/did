@@ -97,6 +97,26 @@ This guide provides comprehensive instructions for using Docker with the DID app
 | MongoDB | 27017 | Database | localhost:27017 |
 | Redis | 6379 | Cache | localhost:6379 |
 
+### Database Data Import
+
+MongoDB can be pre-populated with production data for development:
+
+1. **Export data from production** using `mongoexport`:
+   ```bash
+   mongoexport --uri="your-prod-connection-string" --collection=users --out=users.json
+   mongoexport --uri="your-prod-connection-string" --collection=projects --out=projects.json
+   mongoexport --uri="your-prod-connection-string" --collection=customers --out=customers.json
+   ```
+
+2. **Place JSON files** in `docker/data/` folder (this folder is gitignored)
+
+3. **Start services** - data will be imported automatically on first MongoDB startup:
+   ```bash
+   ./scripts/docker-dev.sh start
+   ```
+
+**Note**: Data import only happens when MongoDB starts with an empty database.
+
 ### Admin Tools (Optional)
 
 Include admin tools with `--with-tools` flag:

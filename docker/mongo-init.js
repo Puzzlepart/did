@@ -1,5 +1,5 @@
 // MongoDB initialization script for DID development
-// This script sets up the initial database structure
+// This script sets up the initial database structure and imports data if available
 
 print('Initializing DID MongoDB database...');
 
@@ -29,3 +29,6 @@ db.createCollection('subscriptions');
 db.subscriptions.createIndex({ "tenantId": 1 }, { unique: true });
 
 print('DID MongoDB database initialized successfully!');
+
+// Note: Data import is handled by the Docker entrypoint script
+// Place JSON files in docker/data/ and they will be imported automatically
