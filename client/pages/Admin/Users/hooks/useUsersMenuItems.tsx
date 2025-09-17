@@ -55,15 +55,14 @@ export function useUsersMenuItems(context: IUsersContext) {
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .withDispatch(context, SET_ADD_MULTIPLE_PANEL, { isOpen: true }),
       new ListMenuItem(
-        context.state.selectedUsers.filter(Boolean).filter(({ isExternal }) => !isExternal).length === 0
+        context.state.selectedUsers
+          .filter(Boolean)
+          .filter(({ isExternal }) => !isExternal).length === 0
           ? t('admin.users.syncAllUsersLabel')
           : t('admin.users.syncSelectedUsersLabel')
       )
         .withIcon('ArrowSync')
-        .setDisabled(
-          context.state.loading ||
-            context.state.adUsersLoading
-        )
+        .setDisabled(context.state.loading || context.state.adUsersLoading)
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .setOnClick(async () => {
           // Show appropriate progress message based on AD users loading state

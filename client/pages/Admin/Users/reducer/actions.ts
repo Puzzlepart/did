@@ -26,6 +26,12 @@ export const RESET_SELECTION = createAction('RESET_SELECTION')
 
 // New actions for AD users lazy loading
 export const SET_AD_USERS = createAction<ActiveDirectoryUser[]>('SET_AD_USERS')
-export const SET_AD_USERS_LOADING = createAction<boolean>('SET_AD_USERS_LOADING')
-export const SEARCH_AD_USERS_SUCCESS = createAction<ActiveDirectoryUser[]>('SEARCH_AD_USERS_SUCCESS')
-export const SEARCH_AD_USERS_LOADING = createAction<boolean>('SEARCH_AD_USERS_LOADING')
+export const SET_AD_USERS_LOADING = createAction<boolean>(
+  'SET_AD_USERS_LOADING'
+)
+export const SEARCH_AD_USERS_SUCCESS = createAction<ActiveDirectoryUser[]>(
+  'SEARCH_AD_USERS_SUCCESS'
+)
+export const SEARCH_AD_USERS_LOADING = createAction<boolean>(
+  'SEARCH_AD_USERS_LOADING'
+)

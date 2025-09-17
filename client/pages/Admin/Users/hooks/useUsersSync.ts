@@ -44,9 +44,10 @@ export function useUsersSync(context: IUsersContext) {
     }
 
     // Determine which users to sync: selected users or all non-external users
-    const usersToSync = context.state.selectedUsers.length > 0
-      ? context.state.selectedUsers.filter(({ isExternal }) => !isExternal)
-      : context.state.users.filter(({ isExternal }) => !isExternal)
+    const usersToSync =
+      context.state.selectedUsers.length > 0
+        ? context.state.selectedUsers.filter(({ isExternal }) => !isExternal)
+        : context.state.users.filter(({ isExternal }) => !isExternal)
 
     const users = usersToSync
       .map((user) => {
