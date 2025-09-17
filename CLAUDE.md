@@ -145,7 +145,7 @@ Redis used for:
 ## CI/CD & Deployment
 
 ### Branches
-- **main**: Production branch (did.puzzlepart.com)
+- **main**: Production branch (did.crayonconsulting.no)
 - **dev**: Development branch (didapp-dev.azurewebsites.net)
 - **feat/**: Feature branches (also deploy to dev environment)
 
@@ -160,9 +160,21 @@ Use prefixes: `hotfix/`, `bugfix/`, `feat/`
 ### Maintenance Mode
 Set `MAINTENANCE_MODE=true` environment variable to enable maintenance page (API routes remain functional).
 
+## Documentation 
+- When updating the documentation, make sure to update the correct file and sections.
+### README.md
+- readme.md is modular and gets updated from files in the `.readme/` folder, see `blueprint.json` for structure.
+- do NOT update the readme.md file directly.
+### CHANGELOG.md
+- changelog.md is generated from files in the `.changelog/` folder.
+- do NOT update the changelog.md file directly.
+### CLAUDE.md
+- This file (CLAUDE.md) provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+### .github/copilot-instructions.md
+- Instructions for GitHub Copilot when working in this repository.
+
 ## Special Notes
 
-- Excel exports maintain consistent formatting with column widths and filters
 - Search functionality should include count display and proper loading states
 - User data should include manager information when appropriate
 - Commit messages use emoji-based conventional commits via `npm run commit`
