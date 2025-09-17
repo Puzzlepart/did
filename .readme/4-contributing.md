@@ -148,47 +148,7 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 
 The application supports Docker-based development and deployment. This makes it easy to run the application consistently across different environments.
 
-#### Development with Docker
-
-To run the application locally using Docker:
-
-```bash
-# Start the application in development mode
-docker-compose up
-```
-
-This will start the application and MongoDB in development mode with hot reloading enabled.
-
-#### Production Deployment with Docker
-
-For production deployment, use the production Docker Compose file:
-
-```bash
-# Set environment variables (replace with your values)
-export DOCKER_REGISTRY=your-registry
-export APP_VERSION=v1.0.0
-export MONGO_USER=your_mongo_user
-export MONGO_PASSWORD=your_secure_password
-
-# Deploy the application
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-### Maintenance Mode in Docker
-
-To enable maintenance mode during deployment or updates:
-
-```bash
-# Enable maintenance mode
-export MAINTENANCE_MODE=true
-docker-compose -f docker-compose.prod.yml up -d
-
-# Perform your maintenance or deployment
-
-# Disable maintenance mode when done
-export MAINTENANCE_MODE=false
-docker-compose -f docker-compose.prod.yml up -d
-```
+To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment.  
 
 ### Building and Pushing Docker Images
 
