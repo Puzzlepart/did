@@ -1,6 +1,6 @@
 import { QueryResult } from '@apollo/client'
 import { createAction } from '@reduxjs/toolkit'
-import { User } from 'types'
+import { User, ActiveDirectoryUser } from 'types'
 import { IBulkImportPanelProps } from '../BulkImportPanel'
 import { IUserFormProps } from '../UserForm'
 import { IInviteExternalUserFormProps } from '../InviteExternalUserForm'
@@ -23,3 +23,15 @@ export const CLEAR_PROGRESS = createAction('CLEAR_PROGRESS')
 export const HIDE_ADD_MULTIPLE_PANEL = createAction('HIDE_ADD_MULTIPLE_PANEL')
 export const HIDE_USER_FORM = createAction('HIDE_USER_FORM')
 export const RESET_SELECTION = createAction('RESET_SELECTION')
+
+// New actions for AD users lazy loading
+export const SET_AD_USERS = createAction<ActiveDirectoryUser[]>('SET_AD_USERS')
+export const SET_AD_USERS_LOADING = createAction<boolean>(
+  'SET_AD_USERS_LOADING'
+)
+export const SEARCH_AD_USERS_SUCCESS = createAction<ActiveDirectoryUser[]>(
+  'SEARCH_AD_USERS_SUCCESS'
+)
+export const SEARCH_AD_USERS_LOADING = createAction<boolean>(
+  'SEARCH_AD_USERS_LOADING'
+)
