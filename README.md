@@ -1,3 +1,29 @@
+## ➤ Testing
+
+To run all tests:
+
+```bash
+npm test
+```
+
+Tests are written in TypeScript and run with [AVA](https://github.com/avajs/ava). The current configuration uses CommonJS via `ts-node/register` to avoid ESM require cycle issues. If you migrate to full ESM, update the AVA config and ensure no circular imports.
+
+## ➤ Release Process
+
+1. Bump the version:
+	```bash
+	npm run update:version
+	```
+2. Add/update changelog fragment in `.changelog/` (see `.changelog/CHANGELOG.md` for structure).
+3. Tag the release:
+	```bash
+	npm run tag
+	```
+4. Commit changes using the commit helper:
+	```bash
+	npm run commit
+	```
+5. Deploy to dev/staging/production as described above.
 <!-- ⚠️ This README has been generated from the file(s) ".readme/README.md" ⚠️--><p align="center">
   <img src="./server/public/images/favicon/android-chrome-192x192.png" alt="Logo" width="192" height="192" />
 </p> <p align="center">
@@ -8,7 +34,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.15.10-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.15.11-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -243,22 +269,18 @@ The application supports a maintenance mode that can be enabled during deploymen
 
 To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment:
 
+### Enable maintenance mode
 ```bash
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#enable-maintenance-mode)
-
-# ➤ Enable maintenance mode
 export MAINTENANCE_MODE=true
+```
 
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#disable-maintenance-mode)
-
-# ➤ Disable maintenance mode
+### Disable maintenance mode
+```bash
 export MAINTENANCE_MODE=false
+```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#or-unset-the-variable)
-
-# ➤ or unset the variable
+### Unset the variable
+```bash
 unset MAINTENANCE_MODE
 ```
 
@@ -275,7 +297,7 @@ _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 ## ➤ Contributors
 	
 
-| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](undefined) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](undefined) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](undefined) |
+| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](https://github.com/damsleth) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](https://github.com/olemp) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](https://github.com/okms) |
 |:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
-| [Carl Joakim Damsleth](undefined)                | [Ole Martin Pettersen](undefined)                | [Ole Kristian Mørch-Storstein](undefined)        |
+| [Carl Joakim Damsleth](https://github.com/damsleth)                | [Ole Martin Pettersen](https://github.com/olemp)                | [Ole Kristian Mørch-Storstein](https://github.com/okms)        |
 | [carl.joakim.damsleth@puzzlepart.com](mailto:carl.joakim.damsleth@puzzlepart.com) | [olemp@puzzlepart.com](mailto:olemp@puzzlepart.com) | [olekms@puzzlepart.com](mailto:olekms@puzzlepart.com) |
