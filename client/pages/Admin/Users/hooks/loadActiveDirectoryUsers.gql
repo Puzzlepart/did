@@ -1,0 +1,18 @@
+query LoadActiveDirectoryUsers {
+  activeDirectoryUsers {
+    id
+    displayName
+    givenName
+    surname
+    jobTitle
+    mobilePhone
+    mail
+    preferredLanguage
+    accountEnabled
+    manager {
+      id
+      mail
+      displayName
+    }
+  }
+}
