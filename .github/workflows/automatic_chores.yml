@@ -3,7 +3,7 @@ name: Automatic chores
 on:
   push:
     branches:
-      - dev
+      - NOT-IN-USE-FOR-NOW
     paths:
       - '.github/workflows/automatic_chores.yml'
       - '.readme/*.md'
@@ -23,6 +23,8 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -33,9 +35,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ vars.NODE_VERSION }}
- 
+
       - run: |
           npm ci --no-audit --no-fund --loglevel=error --include=dev
+
       - name: ESLint and prettier
         run: |
           npm run lint:fix
@@ -69,9 +72,12 @@ jobs:
           This way we avoid having to generate documentation, run eslint etc. locally before \
           commiting to the repo. See https://github.com/Puzzlepart/did/issues/903 for more details."
 
+      - name: Configure git authentication for push
+        if: ${{ steps.git_context.outputs.status != '' }}
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
       - name: Push changes (if staged changes)
         if: ${{ steps.git_context.outputs.status != '' }}
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          branch: ${{ github.ref }}
+        run: |
+          git push origin HEAD:dev
