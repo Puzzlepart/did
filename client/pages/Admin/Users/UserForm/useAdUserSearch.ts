@@ -6,18 +6,21 @@ import $searchActiveDirectoryUsers from '../hooks/searchActiveDirectoryUsers.gql
 export function useAdUserSearch() {
   const [searchResults, setSearchResults] = useState<ActiveDirectoryUser[]>([])
   const [searchLoading, setSearchLoading] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout>()
-  
-  const [searchActiveDirectoryUsers] = useLazyQuery($searchActiveDirectoryUsers, {
-    onCompleted: (data) => {
-      setSearchResults(data.searchActiveDirectoryUsers || [])
-      setSearchLoading(false)
-    },
-    onError: () => {
-      setSearchResults([])
-      setSearchLoading(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>()
+
+  const [searchActiveDirectoryUsers] = useLazyQuery(
+    $searchActiveDirectoryUsers,
+    {
+      onCompleted: (data) => {
+        setSearchResults(data.searchActiveDirectoryUsers || [])
+        setSearchLoading(false)
+      },
+      onError: () => {
+        setSearchResults([])
+        setSearchLoading(false)
+      }
     }
-  })
+  )
 
   const performSearch = useCallback(
     async (search: string) => {
