@@ -208,17 +208,20 @@
     {
       "name": "Carl Joakim Damsleth",
       "email": "cj@d0.si",
-      "img": "https://avatars.githubusercontent.com/u/7300548?&size=130"
+      "img": "https://avatars.githubusercontent.com/u/7300548?&size=130",
+      "url": "https://github.com/damsleth"
     },
     {
       "name": "Ole Martin Pettersen",
       "email": "olem.pettersen@gmail.com",
-      "img": "https://avatars.githubusercontent.com/u/7606007?&size=130"
+      "img": "https://avatars.githubusercontent.com/u/7606007?&size=130",
+      "url": "https://github.com/olemp"
     },
     {
       "name": "Ole Kristian Mørch-Storstein",
       "email": "ok@okms.me",
-      "img": "https://avatars.githubusercontent.com/u/170147?&size=130"
+      "img": "https://avatars.githubusercontent.com/u/170147?&size=130",
+      "url": "https://github.com/okms"
     }
   ],
   "sideEffects": false,
