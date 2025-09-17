@@ -51,3 +51,6 @@ docker-compose.override.yml.local
 # Logs
 *.log
 logs/
+
+# temp folder, for e.g. copilot implementation plans
+.tmp

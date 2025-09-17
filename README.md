@@ -8,44 +8,41 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.15.10-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.15.11-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
 <br />
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#table-of-contents)
+[](#table-of-contents)
 
 ## ➤ Table of Contents
 
-	* [➤ Roadmap](#-roadmap)
-	* [➤ Backlog](#-backlog)
-	* [➤ Environments](#-environments)
-	* [➤ Contributing](#-contributing)
-		* [Getting started](#getting-started)
-			* [Set up environment](#set-up-environment)
-		* [Code structure](#code-structure)
-		* [Node version](#node-version)
-		* [Authentication](#authentication)
-			* [Google](#google)
-		* [Branching / Deploying](#branching--deploying)
-			* [Main branch](#main-branch)
-			* [Dev branch](#dev-branch)
-		* [Feature branches](#feature-branches)
-			* [Naming conventions](#naming-conventions)
-			* [See also](#see-also)
-		* [GraphQL](#graphql)
-			* [Extensions for VS Code](#extensions-for-vs-code)
-		* [Maintenance Mode](#maintenance-mode)
-* [➤ Enable maintenance mode](#-enable-maintenance-mode)
-* [➤ Disable maintenance mode](#-disable-maintenance-mode)
-* [➤ or unset the variable](#-or-unset-the-variable)
-		* [Documentation](#documentation)
-	* [➤ Contributors](#-contributors)
+* [➤ Roadmap](#-roadmap)
+* [➤ Backlog](#-backlog)
+* [➤ Environments](#-environments)
+* [➤ Contributing](#-contributing)
+	* [Getting started](#getting-started)
+		* [Set up environment](#set-up-environment)
+	* [Code structure](#code-structure)
+	* [Node version](#node-version)
+	* [Authentication](#authentication)
+		* [Google](#google)
+	* [Branching / Deploying](#branching--deploying)
+		* [Main branch](#main-branch)
+		* [Dev branch](#dev-branch)
+	* [Feature branches](#feature-branches)
+		* [Naming conventions](#naming-conventions)
+		* [See also](#see-also)
+	* [GraphQL](#graphql)
+		* [Extensions for VS Code](#extensions-for-vs-code)
+	* [Maintenance Mode](#maintenance-mode)
+	* [Documentation](#documentation)
+* [➤ Contributors](#-contributors)
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#roadmap)
+[](#roadmap)
 
 ## ➤ Roadmap
 
@@ -68,14 +65,14 @@
 | [🦿 &nbsp;15 -  &nbsp;Fosfor](https://github.com/Puzzlepart/did365/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#backlog)
+[](#backlog)
 
 ## ➤ Backlog
 
 Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#environments)
+[](#environments)
 
 ## ➤ Environments
 
@@ -89,7 +86,7 @@ Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#contributing)
+[](#contributing)
 
 ## ➤ Contributing
 
@@ -340,26 +337,7 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 
 The application supports a maintenance mode that can be enabled during deployments or system updates. When maintenance mode is enabled, all requests will be served with a maintenance page instead of the regular application.
 
-To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment:
-
-```bash
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#enable-maintenance-mode)
-
-# ➤ Enable maintenance mode
-export MAINTENANCE_MODE=true
-
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#disable-maintenance-mode)
-
-# ➤ Disable maintenance mode
-export MAINTENANCE_MODE=false
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#or-unset-the-variable)
-
-# ➤ or unset the variable
-unset MAINTENANCE_MODE
-```
+To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment.  
 
 API routes (paths starting with `/api/`) will still function normally even in maintenance mode to allow for background services to continue functioning.
 
@@ -369,12 +347,12 @@ _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#contributors)
+[](#contributors)
 
 ## ➤ Contributors
 	
 
-| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](undefined) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](undefined) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](undefined) |
+| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](https://github.com/damsleth) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](https://github.com/olemp) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](https://github.com/okms) |
 |:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
-| [Carl Joakim Damsleth](undefined)                | [Ole Martin Pettersen](undefined)                | [Ole Kristian Mørch-Storstein](undefined)        |
-| [carl.joakim.damsleth@puzzlepart.com](mailto:carl.joakim.damsleth@puzzlepart.com) | [olemp@puzzlepart.com](mailto:olemp@puzzlepart.com) | [olekms@puzzlepart.com](mailto:olekms@puzzlepart.com) |
+| [Carl Joakim Damsleth](https://github.com/damsleth) | [Ole Martin Pettersen](https://github.com/olemp) | [Ole Kristian Mørch-Storstein](https://github.com/okms) |
+| [cj@d0.si](mailto:cj@d0.si)                      | [olem.pettersen@gmail.com](mailto:olem.pettersen@gmail.com) | [ok@okms.me](mailto:ok@okms.me)                  |
