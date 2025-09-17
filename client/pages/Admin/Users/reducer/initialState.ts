@@ -9,6 +9,7 @@ export const initialState: IUsersState = {
   activeUsers: [],
   disabledUsers: [],
   adUsers: [],
+  adUsersLoading: false,
   availableAdUsers: [],
   selectedUsers: [],
   roles: [],

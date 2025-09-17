@@ -94,6 +94,20 @@ export class UserResolver {
   }
 
   /**
+   * Search Active Directory users with filters
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
+  @Query(() => [ActiveDirectoryUser], {
+    description: 'Search users from Active Directory with filters'
+  })
+  public searchActiveDirectoryUsers(
+    @Arg('search', () => String) search: string,
+    @Arg('limit', () => Number, { defaultValue: 10 }) limit: number
+  ): Promise<ActiveDirectoryUser[]> {
+    return this._msgraphSvc.searchUsers(search, limit)
+  }
+
+  /**
    * Get users in the system.
    *
    * @param query - Query
