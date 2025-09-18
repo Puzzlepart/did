@@ -14,7 +14,7 @@ import { environment } from '../../utils'
  *
  * @category Express middleware
  */
-const redisPort = Number.parseInt(environment('REDIS_CACHE_PORT', '6379'), 10)
+const redisPort = Number(environment('REDIS_CACHE_PORT', '6379'))
 const redisKey = environment('REDIS_CACHE_KEY')
 const redisHostname = environment('REDIS_CACHE_HOSTNAME')
 
