@@ -141,7 +141,7 @@ validate_ports() {
 validate_docker_build() {
     log_info "Testing Docker build (this may take a while)..."
     
-    if timeout 120 docker build --target base -t did:validate . >/dev/null 2>&1; then
+    if timeout 300 docker build --target base -t did:validate . >/dev/null 2>&1; then
         log_success "Docker build test completed successfully"
         docker rmi did:validate >/dev/null 2>&1 || true
     else
