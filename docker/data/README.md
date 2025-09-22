@@ -4,14 +4,16 @@ This folder contains JSON files exported from production using `mongoexport` for
 
 ## Usage
 
-Place your exported JSON files here with the naming convention:
-- `[collection-name].json` - Will be imported to the `[collection-name]` collection
+Place your exported JSON files in subfolders named after the target database. Use the following convention:
+- `[database-name]/[collection-name].json` — The JSON file will be imported into the `[collection-name]` collection of the `[database-name]` database.
 
 For example:
-- `users.json` - Imported to `users` collection
-- `projects.json` - Imported to `projects` collection
-- `customers.json` - Imported to `customers` collection
-- `timeentries.json` - Imported to `timeentries` collection
+- `craycon/users.json` — Imported to the `users` collection in the `craycon` database
+- `craycon/projects.json` — Imported to the `projects` collection in the `craycon` database
+- `craycon/customers.json` — Imported to the `customers` collection in the `craycon` database
+- `craycon/timeentries.json` — Imported to the `timeentries` collection in the `craycon` database
+
+This structure helps organize data for multiple databases and ensures clarity when importing.
 
 ## Exporting from Production
 

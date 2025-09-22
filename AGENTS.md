@@ -106,7 +106,7 @@ MICROSOFT_CLIENT_SECRET=your_azure_ad_client_secret
 
 # Database
 MONGO_DB_CONNECTION_STRING=mongodb://localhost:27017
-MONGO_DB_DB_NAME=did
+MONGO_DB_DB_NAME=main
 
 # Sessions & Security
 SESSION_SIGNING_KEY=your_session_key
@@ -184,7 +184,7 @@ API_TOKEN_SECRET=your_api_secret
 - `npm run docker:shell` - Access container shell
 
 ### Production
-- Multi-stage Dockerfile for optimized builds
+- Production deployment is done using slot swapping in azure app service, there is no specific dockerfile for prod
 - docker-compose for service orchestration
 - Environment-specific overrides in compose files
 

@@ -135,7 +135,7 @@ The application uses environment variables for configuration. Key variables for 
 ```bash
 # Database
 MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
-MONGO_DB_DB_NAME=did_dev
+MONGO_DB_DB_NAME=main
 
 # Cache
 REDIS_CACHE_HOSTNAME=redis

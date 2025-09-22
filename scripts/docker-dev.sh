@@ -160,7 +160,7 @@ open_shell() {
 
 # Open MongoDB shell
 open_db_shell() {
-    docker compose exec mongodb mongosh did_dev
+    docker compose exec mongodb mongosh main
 }
 
 # Open Redis CLI
