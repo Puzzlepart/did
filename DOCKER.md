@@ -1,6 +1,6 @@
-# Docker Development Guide for DID
+# Docker Development Guide for did
 
-This guide provides comprehensive instructions for using Docker with the DID application for development, testing, and deployment.
+This guide provides comprehensive instructions for using Docker with the did application for development, testing, and deployment.
 
 ## Table of Contents
 
@@ -64,7 +64,7 @@ This guide provides comprehensive instructions for using Docker with the DID app
 # View application logs in real-time
 ./scripts/docker-dev.sh logs
 
-# Open a shell in the DID container
+# Open a shell in the did container
 ./scripts/docker-dev.sh shell
 
 # Access MongoDB shell
@@ -93,7 +93,7 @@ This guide provides comprehensive instructions for using Docker with the DID app
 
 | Service | Port | Description | Access |
 |---------|------|-------------|--------|
-| DID App | 9001 | Main application | http://localhost:9001 |
+| did App | 9001 | Main application | http://localhost:9001 |
 | MongoDB | 27017 | Database | localhost:27017 |
 | Redis | 6379 | Cache | localhost:6379 |
 
@@ -340,13 +340,13 @@ docker buildx build --platform linux/amd64,linux/arm64 -t did:latest .
 
 The application includes built-in health checks:
 
-- **Endpoint**: `http://localhost:9001/health`
+- **Endpoint**: `http://localhost:9001/health_check`
 - **Docker Health Check**: Configured in Dockerfile
 - **Compose Health Check**: Available in production compose
 
 ```bash
 # Check application health
-curl http://localhost:9001/health
+curl http://localhost:9001/health_check
 
 # Check Docker health status
 docker compose ps

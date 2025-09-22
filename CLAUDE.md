@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**did** is a web application that transforms your calendar into your timesheet - "the calendar is your timesheet". It's built with React/TypeScript frontend and Node.js/Express backend, using GraphQL for API communication and integrating with Microsoft Graph API and Google APIs for calendar synchronization.
+**did** (always stylised in lowercase) is a web application that transforms your calendar into your timesheet - "the calendar is your timesheet". It's built with React/TypeScript frontend and Node.js/Express backend, using GraphQL for API communication and integrating with Microsoft Graph API and Google APIs for calendar synchronization.
 
 ## Architecture Overview
 
@@ -179,4 +179,4 @@ Set `MAINTENANCE_MODE=true` environment variable to enable maintenance page (API
 - User data should include manager information when appropriate
 - Commit messages use emoji-based conventional commits via `npm run commit`
 - The application uses activity detection to track user engagement
-- Azure App Service deployment with slot swapping for zero-downtime releases
+- Azure App Service deployment with slot swapping of dev and production for zero-downtime releases

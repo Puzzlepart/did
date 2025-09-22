@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Docker environment validation script for DID
-# This script validates that Docker is properly set up for DID development
+# Docker environment validation script for did
+# This script validates that Docker is properly set up for did development
 
 set -e
 
@@ -165,7 +165,7 @@ validate_scripts() {
 # Main validation
 main() {
     echo "=================================="
-    echo "DID Docker Environment Validation"
+    echo "did Docker Environment Validation"
     echo "=================================="
     echo
     

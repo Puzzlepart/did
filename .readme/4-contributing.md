@@ -110,7 +110,7 @@ See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) fo
 After successful review and CI/CD pipeline completion, changes are deployed to the staging slot at [didapp-staging.azurewebsites.net](https://didapp-staging.azurewebsites.net). Once verified in staging, the changes can be swapped to production at [did.puzzlepart.com](https://did.puzzlepart.com).
 
 #### Dev branch
-The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
+The `/dev` branch also requires pull requests, and is set up waith a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
 
 ### Feature branches
 For new features use the naming convention below. A CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) is set up for branches matching the pattern `feat/*` and `dev`.

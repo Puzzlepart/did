@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Docker development helper script for DID application
+# Docker development helper script for did application
 
 set -e
 
@@ -43,7 +43,7 @@ check_docker() {
 
 # Show help
 show_help() {
-    echo "DID Docker Development Helper"
+    echo "did Docker Development Helper"
     echo ""
     echo "Usage: $0 [command]"
     echo ""
@@ -54,7 +54,7 @@ show_help() {
     echo "  build        Build Docker images"
     echo "  clean        Clean up Docker resources"
     echo "  logs         Show application logs"
-    echo "  shell        Open shell in the DID container"
+    echo "  shell        Open shell in the did container"
     echo "  db-shell     Open MongoDB shell"
     echo "  redis-cli    Open Redis CLI"
     echo "  setup        Initial setup for development"
@@ -68,7 +68,7 @@ show_help() {
 
 # Setup development environment
 setup_dev() {
-    log_info "Setting up DID development environment..."
+    log_info "Setting up did development environment..."
     
     # Copy .env.sample to .env if it doesn't exist
     if [ ! -f .env ]; then
@@ -100,7 +100,7 @@ start_services() {
         profiles="--profile tools"
     fi
     
-    log_info "Starting DID development environment..."
+    log_info "Starting did development environment..."
     docker compose up -d $profiles
     
     log_success "Services started successfully!"
@@ -114,14 +114,14 @@ start_services() {
 
 # Stop services
 stop_services() {
-    log_info "Stopping DID development environment..."
+    log_info "Stopping did development environment..."
     docker compose down
     log_success "Services stopped successfully!"
 }
 
 # Restart services
 restart_services() {
-    log_info "Restarting DID development environment..."
+    log_info "Restarting did development environment..."
     stop_services
     start_services "$@"
 }
@@ -135,7 +135,7 @@ build_images() {
 
 # Clean up Docker resources
 clean_docker() {
-    log_warning "This will remove all DID Docker resources including volumes (data will be lost)!"
+    log_warning "This will remove all did Docker resources including volumes (data will be lost)!"
     read -p "Are you sure? (y/N): " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -153,7 +153,7 @@ show_logs() {
     docker compose logs -f did
 }
 
-# Open shell in DID container
+# Open shell in did container
 open_shell() {
     docker compose exec did /bin/sh
 }
@@ -170,7 +170,7 @@ open_redis_cli() {
 
 # Show status
 show_status() {
-    log_info "DID Development Environment Status:"
+    log_info "did Development Environment Status:"
     docker compose ps
 }
 

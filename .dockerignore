@@ -46,25 +46,23 @@ Thumbs.db
 .git
 .gitignore
 
-# Docker
-Dockerfile*
-docker-compose*
+# Docker (keep Dockerfile & compose files in context for reproducible builds)
 .dockerignore
 
 # CI/CD
 .github
 
-# Documentation
-*.md
-.readme
+# Documentation (retain markdown for labels & introspection)
+# .readme
 
 # Environment files (will be handled separately)
 .env
 .env.local
 .env.*.local
 
-# Test files
-**/*.test.*
+# Test files (ignore only unit test implementations)
+**/*.test.ts
+**/*.test.tsx
 **/__tests__/**
 
 # Temporary files

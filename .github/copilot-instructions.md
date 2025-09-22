@@ -1,11 +1,13 @@
 # GitHub Copilot Instructions for did
 
-This document provides instructions and context for GitHub Copilot to better assist with development in the DID project.
+This document provides instructions and context for GitHub Copilot to better assist with development in the did project.
 
 ## Project Overview
 
 did is a web application built with React and Node.js that manages projects, time reporting, and customer data.
 The application uses GraphQL for fetching and manipulating data from the Microsoft Graph API, as well as a custom backend API.
+**did is always stylised in lowercase**
+
 
 ## Project Structure
 

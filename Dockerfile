@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile for DID application
+# Multi-stage Dockerfile for did application
 # Stage 1: Base development image
 FROM node:22.14.0-alpine AS base
 
@@ -74,9 +74,20 @@ USER did
 # Expose port
 EXPOSE 9001
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD node -e "require('http').get('http://localhost:9001/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"
+# Build args for metadata (optional at build time)
+ARG BUILD_VERSION="unknown"
+ARG GIT_COMMIT="unknown"
+
+# Labels for observability / SBOM traceability
+LABEL org.opencontainers.image.title="did" \
+      org.opencontainers.image.version="${BUILD_VERSION}" \
+      org.opencontainers.image.revision="${GIT_COMMIT}" \
+      org.opencontainers.image.source="https://github.com/Puzzlepart/did" \
+      org.opencontainers.image.licenses="MIT"
+
+# Health check (align with implemented /health_check route)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:9001/health_check', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"
 
 # Start application with dumb-init
 ENTRYPOINT ["dumb-init", "--"]

@@ -1,5 +1,5 @@
 services:
-  # Main DID application
+  # Main did application
   did:
     build:
       context: .
@@ -21,6 +21,7 @@ services:
     depends_on:
       - mongodb
       - redis
+    # Note: healthcheck intentionally omitted for faster inner-loop; production compose defines it.
     networks:
       - did-network
     restart: unless-stopped

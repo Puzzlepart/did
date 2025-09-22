@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MongoDB data import script for DID development
+# MongoDB data import script for did development
 # This script imports JSON data files from the /data directory
 
 DATA_DIR="/docker-entrypoint-initdb.d/data"
