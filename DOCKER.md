@@ -9,7 +9,7 @@ This guide provides comprehensive instructions for using Docker with the did app
 - [Development Workflow](#development-workflow)
 - [Services](#services)
 - [Configuration](#configuration)
-- [Production Deployment](#production-deployment)
+- [Deployment Notes](#deployment-notes)
 - [Troubleshooting](#troubleshooting)
 - [Advanced Usage](#advanced-usage)
 
@@ -99,7 +99,7 @@ This guide provides comprehensive instructions for using Docker with the did app
 
 ### Database Data Import
 
-MongoDB can be pre-populated with production data for development:
+MongoDB can be pre-populated with tenant data for development:
 
 1. **Export data from production** using `mongoexport`:
    ```bash
@@ -108,14 +108,21 @@ MongoDB can be pre-populated with production data for development:
    mongoexport --uri="your-prod-connection-string" --collection=customers --out=customers.json
    ```
 
-2. **Place JSON files** in `docker/data/` folder (this folder is gitignored)
+2. **Create a database-specific folder** inside `docker/data/` (this folder is gitignored). The folder name becomes the database name during import:
+   ```text
+   docker/data/
+     └── puzzlepart/
+         ├── users.json
+         ├── projects.json
+         └── timeentries.json
+   ```
 
 3. **Start services** - data will be imported automatically on first MongoDB startup:
    ```bash
    ./scripts/docker-dev.sh start
    ```
 
-**Note**: Data import only happens when MongoDB starts with an empty database.
+**Note**: Data import only happens when MongoDB starts with an empty database, and only JSON files inside subdirectories are imported.
 
 ### Admin Tools (Optional)
 
@@ -151,7 +158,6 @@ DEBUG=environment*,graphql*
 
 - `docker-compose.yml`: Main development configuration
 - `docker-compose.override.yml`: Local environment variable overrides
-- `docker-compose.prod.yml`: Production configuration
 
 ### Custom Configuration
 
@@ -166,47 +172,9 @@ services:
       - DEBUG=app*,graphql*,mongodb*
 ```
 
-## Production Deployment
+## Deployment Notes
 
-### Building Production Image
-
-```bash
-# Build production image
-docker build --target production -t did:latest .
-
-# Or build all stages
-docker build -t did:latest .
-```
-
-### Production Deployment
-
-1. **Prepare environment:**
-   ```bash
-   cp .env.sample .env.production
-   # Edit .env.production with production values
-   ```
-
-2. **Deploy with production compose:**
-   ```bash
-   docker compose -f docker-compose.prod.yml up -d
-   ```
-
-3. **Scale the application:**
-   ```bash
-   docker compose -f docker-compose.prod.yml up -d --scale did=3
-   ```
-
-### Production Environment Variables
-
-Required for production:
-
-```bash
-NODE_ENV=production
-MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
-MONGO_ROOT_USERNAME=your_mongo_user
-MONGO_ROOT_PASSWORD=your_mongo_password
-REDIS_PASSWORD=your_redis_password
-```
+Production deployments are handled manually via Azure App Service slot swaps. The Docker tooling in this repository targets development workflows only.
 
 ## Troubleshooting
 
@@ -299,19 +267,6 @@ docker run -it --rm -p 9001:9001 --env-file .env.custom did:dev
 
 # Override entrypoint for debugging
 docker run -it --rm --entrypoint /bin/sh did:dev
-```
-
-### Using with External Services
-
-You can connect to external MongoDB or Redis instances:
-
-```yaml
-# docker-compose.override.yml
-services:
-  did:
-    environment:
-      - MONGO_DB_CONNECTION_STRING=mongodb://your-external-mongo:27017
-      - REDIS_CACHE_HOSTNAME=your-external-redis
 ```
 
 ### Development with Volumes

@@ -3,6 +3,8 @@
 # MongoDB data import script for did development
 # This script imports JSON data files from the /data directory
 
+set -euo pipefail
+
 DATA_DIR="/docker-entrypoint-initdb.d/data"
 
 echo "Checking for data files to import..."
@@ -13,22 +15,39 @@ until mongosh --eval "print('MongoDB is ready')" > /dev/null 2>&1; do
     sleep 2
 done
 
-# Recursively import all JSON files in subfolders
-find "$DATA_DIR" -type f -name '*.json' | while read -r file; do
-    # Get database and collection from path
-    relpath="${file#$DATA_DIR/}"
-    dbname="${relpath%%/*}"
-    collection="$(basename "$file" .json)"
+shopt -s nullglob
 
-    if [ -n "$dbname" ] && [ -n "$collection" ]; then
+# Warn and skip JSON files placed directly under DATA_DIR
+root_files=("$DATA_DIR"/*.json)
+if [ ${#root_files[@]} -gt 0 ]; then
+    echo "Ignoring JSON files at $DATA_DIR root. Place files inside database-named subdirectories."
+fi
+
+db_dirs=("$DATA_DIR"/*/)
+
+if [ ${#db_dirs[@]} -eq 0 ]; then
+    echo "No database directories found in $DATA_DIR. Skipping import."
+    exit 0
+fi
+
+for dir in "${db_dirs[@]}"; do
+    dbname="$(basename "$dir")"
+    files=("$dir"*.json)
+
+    if [ ${#files[@]} -eq 0 ]; then
+        echo "No JSON files found in $dir. Skipping."
+        continue
+    fi
+
+    for file in "${files[@]}"; do
+        collection="$(basename "$file" .json)"
         echo "Importing $file into $dbname.$collection ..."
-        mongoimport --db="$dbname" --collection="$collection" --file="$file"
-        if [ $? -eq 0 ]; then
+        if mongoimport --db="$dbname" --collection="$collection" --file="$file"; then
             echo "Successfully imported $dbname.$collection"
         else
             echo "Failed to import $dbname.$collection"
         fi
-    fi
+    done
 done
 
-echo "MongoDB recursive data import completed!"
+echo "MongoDB data import completed!"

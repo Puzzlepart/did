@@ -66,29 +66,58 @@ show_help() {
     echo ""
 }
 
+# Inspect seed data directory structure and provide feedback
+describe_seed_data() {
+    local data_root="docker/data"
+
+    if [ ! -d "$data_root" ]; then
+        log_info "No seed data directory detected (docker/data). MongoDB will start empty."
+        log_info "Create $data_root/<database>/<collection>.json folders to preload data."
+        return
+    fi
+
+    if compgen -G "$data_root/*.json" > /dev/null; then
+        log_warning "JSON files at $data_root root will be ignored. Move them into database-named subdirectories."
+    fi
+
+    local has_seed_dirs=false
+    for dir in "$data_root"/*/; do
+        [ -d "$dir" ] || continue
+        if compgen -G "$dir"*.json > /dev/null; then
+            has_seed_dirs=true
+            local db_name
+            db_name=$(basename "$dir")
+            local count
+            count=$(find "$dir" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')
+            log_info "Seed data ready for database '$db_name' ($count collections)."
+        else
+            log_warning "Found directory $(basename "$dir") without JSON files; skipping."
+        fi
+    done
+
+    if [ "$has_seed_dirs" = false ]; then
+        log_info "No usable seed directories detected under $data_root. MongoDB will start empty."
+        log_info "Create $data_root/<database>/<collection>.json to preload data."
+    fi
+}
+
 # Setup development environment
 setup_dev() {
     log_info "Setting up did development environment..."
-    
+
     # Copy .env.sample to .env if it doesn't exist
     if [ ! -f .env ]; then
         log_info "Creating .env file from .env.sample..."
         cp .env.sample .env
         log_warning "Please edit .env file with your configuration before starting the application"
     fi
-    
-    # Check for data import files
-    if [ -d "docker/data" ] && [ "$(ls -A docker/data/*.json 2>/dev/null)" ]; then
-        log_info "Found data files in docker/data/ - these will be imported to MongoDB on first startup"
-    else
-        log_info "No data files found in docker/data/ - MongoDB will start with empty collections"
-        log_info "To import production data, place JSON files exported with mongoexport in docker/data/"
-    fi
-    
+
+    describe_seed_data
+
     # Build images
     log_info "Building Docker images..."
     docker compose build
-    
+
     log_success "Development environment setup complete!"
     log_info "Run './scripts/docker-dev.sh start' to start the application"
 }
@@ -102,7 +131,7 @@ start_services() {
     
     log_info "Starting did development environment..."
     docker compose up -d $profiles
-    
+
     log_success "Services started successfully!"
     log_info "Application will be available at: http://localhost:9001"
     
@@ -110,6 +139,8 @@ start_services() {
         log_info "MongoDB Express: http://localhost:8081 (admin/admin123)"
         log_info "Redis Commander: http://localhost:8082"
     fi
+
+    describe_seed_data
 }
 
 # Stop services
