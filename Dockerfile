@@ -66,8 +66,6 @@ RUN npm ci --only=production --no-audit --no-fund --loglevel=error && \
 
 # Copy built application from build stage
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/revision.txt ./revision.txt
-
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S did -u 1001
