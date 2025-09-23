@@ -4,8 +4,9 @@ services:
   did:
     environment:
       # Override these with your actual values for local development
-      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID:-##Insert GUID##}
-      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET:-##Insert Password##}
+      # Copy this file to docker-compose.override.yml.local and update with your credentials
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID:-##Insert your Azure AD Client ID##}
+      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET:-##Insert your Azure AD Client Secret##}
       - MICROSOFT_REDIRECT_URI=${MICROSOFT_REDIRECT_URI:-http://localhost:9001/auth/azuread-openidconnect/callback}
       - MICROSOFT_SCOPES=${MICROSOFT_SCOPES:-profile offline_access user.read user.read.all calendars.read mailboxsettings.readwrite}
       - SESSION_SIGNING_KEY=${SESSION_SIGNING_KEY:-##Insert Key##}
@@ -18,6 +19,16 @@ services:
       - WEBPACK_NOTIFICATIONS_SOUND=${WEBPACK_NOTIFICATIONS_SOUND:-growl}
       - FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE=${FORK_TS_CHECKER_WEBPACK_PLUGIN_PROFILE:-1}
       - DISPLAY_VERSION_DETAILS=${DISPLAY_VERSION_DETAILS:-1}
+      # Force Docker to use local Redis instead of Azure Redis from .env
+      - REDIS_CACHE_HOSTNAME=redis
+      - REDIS_CACHE_PORT=6379
+      # No Redis auth key needed for local Docker Redis
+      - REDIS_CACHE_KEY=
+      # Force Docker to use local MongoDB instead of Azure Cosmos from .env
+      - MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
+      - MONGO_DB_DB_NAME=main
+      # Enable debug logging for authentication troubleshooting
+      - DEBUG=server/routes/auth,middleware/passport*
     # Mount your local .env file if it exists
     volumes:
       - ./.env:/app/.env:ro

@@ -91,4 +91,3 @@ webpack
 # Scripts that are not needed in container
 .scripts
 .tasks
-pull-request-draft.md

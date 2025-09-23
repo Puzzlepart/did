@@ -21,83 +21,120 @@ This guide provides comprehensive instructions for using Docker with the did app
 
 ## Quick Start
 
-1. **Clone and setup:**
-   ```bash
-   git clone https://github.com/Puzzlepart/did.git
-   cd did
-   git checkout dev
-   ```
-
-2. **Initialize development environment:**
-   ```bash
-   ./scripts/docker-dev.sh setup
-   ```
-
-3. **Configure environment:**
-   Edit the `.env` file created in the previous step with your configuration values.
-
-4. **Start services:**
-   ```bash
-   ./scripts/docker-dev.sh start
-   ```
-
-5. **Access the application:**
-   - Application: http://localhost:9001
-   - MongoDB: localhost:27017
-   - Redis: localhost:6379
-
-## Development Workflow
-
-### Starting Development
+The fastest path to a working local stack (app + MongoDB + Redis) with a clean slate.
 
 ```bash
-# Start all services
-./scripts/docker-dev.sh start
+# 1. Clone (first time only)
+git clone https://github.com/Puzzlepart/did.git
+cd did
 
-# Start with admin tools (MongoDB Express, Redis Commander)
-./scripts/docker-dev.sh start --with-tools
+# 2. (Optional) Switch branch
+git checkout dev
+
+# 3. Create your local override file for secrets (only once)
+cp docker-compose.override.yml docker-compose.local.yml
+# Edit docker-compose.local.yml and add your real MICROSOFT_CLIENT_ID / _SECRET
+
+# 4. (Recommended) Tell Docker Compose to always include the local file
+echo 'COMPOSE_FILE=docker-compose.yml:docker-compose.override.yml:docker-compose.local.yml' >> .env
+
+# 5. Start fresh (removes old volumes so Mongo seed import runs again)
+docker compose down -v || true
+docker compose up --build -d
+
+# 6. Tail logs (optional)
+docker compose logs -f did
 ```
 
-### Working with the Application
+Access:
+- App: http://localhost:9001
+- Health: http://localhost:9001/health_check
+- MongoDB: localhost:27017
+- Redis: localhost:6379
 
+Need admin tools (mongo-express / redis-commander)?
 ```bash
-# View application logs in real-time
-./scripts/docker-dev.sh logs
-
-# Open a shell in the did container
-./scripts/docker-dev.sh shell
-
-# Access MongoDB shell
-./scripts/docker-dev.sh db-shell
-
-# Access Redis CLI
-./scripts/docker-dev.sh redis-cli
+docker compose --profile tools up -d
 ```
 
-### Stopping and Cleanup
-
+Clean restart later:
 ```bash
-# Stop all services
-./scripts/docker-dev.sh stop
-
-# Restart services
-./scripts/docker-dev.sh restart
-
-# Clean up all data (WARNING: This removes all data!)
-./scripts/docker-dev.sh clean
+docker compose down -v && docker compose up -d
 ```
+
+Minimal daily workflow (after initial setup):
+```bash
+git pull
+docker compose up -d --build
+```
+
+If authentication hangs on /auth/... ensure:
+- docker-compose.override.yml forces REDIS_CACHE_HOSTNAME=redis & MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
+- Your local override (docker-compose.local.yml) does NOT contain cloud Redis / Cosmos values
+- `MICROSOFT_REDIRECT_URI` matches http://localhost:9001/auth/azuread-openidconnect/callback
+
+## Authentication Troubleshooting
+
+Common local sign‑in issues and fixes.
+
+| Symptom | Likely Cause | Fix |
+|---------|--------------|-----|
+| `/auth/azuread-openidconnect/signin` hangs | Session store (Redis) unreachable | Ensure `REDIS_CACHE_HOSTNAME=redis` in compose overrides; remove cloud Redis vars from local file; restart: `docker compose down -v && docker compose up -d` |
+| Redirect loop to sign-in for JS/CSS assets | Catch-all route intercepting static assets | Confirm updated routing logic in `server/app.ts` (no `use('*', ...)`); rebuild container |
+| 401 with no Microsoft redirect | Missing / invalid `MICROSOFT_CLIENT_ID` / secret | Add values to `docker-compose.local.yml` or host env; restart containers |
+| Microsoft login page shows wrong redirect URI | Mismatch between Azure app and local config | Update Azure AD app redirect to `http://localhost:9001/auth/azuread-openidconnect/callback` OR update `MICROSOFT_REDIRECT_URI` to the registered value |
+| Error after callback (generic sign-in failed) | User not enrolled / subscription check failed | Seed proper subscription + user docs into Mongo (place JSON in `docker/data/<dbname>/`) and restart with fresh volume |
+| Random sign-out during dev | Session lost (volume cleared or Redis restart) | Keep Redis running; avoid `down -v` unless resetting; re-login |
+
+Diagnostic commands:
+```bash
+# Tail only auth + passport debug logs
+docker compose logs -f did | egrep 'server/routes/auth|middleware/passport'
+
+# Check Redis connectivity
+docker compose exec redis redis-cli ping
+
+# Verify Mongo connection from app container
+docker compose exec did node -e "require('mongodb').MongoClient.connect('mongodb://mongodb:27017').then(()=>console.log('ok')||process.exit())"
+
+# Inspect environment inside running app
+docker compose exec did env | egrep 'MICROSOFT_|REDIS_|MONGO_DB_'
+```
+
+When in doubt: clean slate.
+```bash
+docker compose down -v && docker compose up --build -d
+```
+
+## Development Workflow (Concise)
+
+Core script: `./scripts/docker-dev.sh`
+
+| Action | Command |
+|--------|---------|
+| Start | `./scripts/docker-dev.sh start` |
+| Start + tools | `./scripts/docker-dev.sh start --with-tools` |
+| Logs (follow) | `./scripts/docker-dev.sh logs` |
+| Shell (app) | `./scripts/docker-dev.sh shell` |
+| Mongo shell | `./scripts/docker-dev.sh db-shell` |
+| Redis CLI | `./scripts/docker-dev.sh redis-cli` |
+| Stop | `./scripts/docker-dev.sh stop` |
+| Restart | `./scripts/docker-dev.sh restart` |
+| Clean (remove volumes) | `./scripts/docker-dev.sh clean` |
+
+Quickstart script alternative: `./scripts/docker-quickstart.sh --fresh`
 
 ## Services
 
-### Main Services
+| Service | Port | Notes |
+|---------|------|-------|
+| did app | 9001 | React/GraphQL, served by Node/Express |
+| MongoDB | 27017 | Seeded on first empty start via `docker/import-data.sh` |
+| Redis | 6379 | Session + cache |
+| mongo-express (profile tools) | 8081 | `admin/admin123` |
+| redis-commander (profile tools) | 8082 | No auth |
 
-| Service | Port | Description | Access |
-|---------|------|-------------|--------|
-| did App | 9001 | Main application | http://localhost:9001 |
-| MongoDB | 27017 | Database | localhost:27017 |
-| Redis | 6379 | Cache | localhost:6379 |
-
-### Database Data Import
+### Seed Data Import
 
 MongoDB can be pre-populated with tenant data for development:
 
@@ -133,43 +170,28 @@ Include admin tools with `--with-tools` flag:
 | MongoDB Express | 8081 | MongoDB admin | http://localhost:8081 | admin/admin123 |
 | Redis Commander | 8082 | Redis admin | http://localhost:8082 | None |
 
-## Configuration
+## Configuration (Essentials)
 
-### Environment Variables
+| Area | Key Vars / Files | Notes |
+|------|------------------|-------|
+| DB | `MONGO_DB_CONNECTION_STRING`, `MONGO_DB_DB_NAME` | Overridden to local in compose override |
+| Cache | `REDIS_CACHE_HOSTNAME`, `REDIS_CACHE_PORT` | Use `redis` host locally |
+| Auth | `MICROSOFT_CLIENT_ID`, `MICROSOFT_CLIENT_SECRET`, `MICROSOFT_REDIRECT_URI` | Add to `docker-compose.local.yml` |
+| Debug | `DEBUG` | E.g. `server/routes/auth,middleware/passport*` |
+| Compose stack | `COMPOSE_FILE` | Chain base + override + local |
 
-The application uses environment variables for configuration. Key variables for Docker development:
+Files:
+- `docker-compose.yml` (base)
+- `docker-compose.override.yml` (template placeholders)
+- `docker-compose.local.yml` (gitignored secrets)
+- `.env` (can hold `COMPOSE_FILE` + misc vars)
 
-```bash
-# Database
-MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
-MONGO_DB_DB_NAME=main
-
-# Cache
-REDIS_CACHE_HOSTNAME=redis
-REDIS_CACHE_PORT=6379
-
-# Application
-NODE_ENV=development
-PORT=9001
-DEBUG=environment*,graphql*
-```
-
-### Docker Compose Files
-
-- `docker-compose.yml`: Main development configuration
-- `docker-compose.override.yml`: Local environment variable overrides
-
-### Custom Configuration
-
-You can override environment variables by editing the `.env` file or `docker-compose.override.yml`:
-
+Override example snippet:
 ```yaml
-# docker-compose.override.yml
-version: '3.8'
 services:
   did:
     environment:
-      - DEBUG=app*,graphql*,mongodb*
+      - DEBUG=graphql*,middleware/passport*
 ```
 
 ## Deployment Notes

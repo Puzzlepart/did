@@ -32,7 +32,7 @@ services:
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_DATABASE=did_dev
+      - MONGO_INITDB_DATABASE=main
     volumes:
       - mongodb_data:/data/db
       - ./docker/import-data.sh:/docker-entrypoint-initdb.d/02-import-data.sh:ro
