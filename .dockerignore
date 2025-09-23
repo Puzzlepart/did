@@ -85,9 +85,6 @@ artifacts
 .AppleDouble
 .LSOverride
 
-# Webpack
-webpack
-
 # Scripts that are not needed in container
 .scripts
 .tasks
