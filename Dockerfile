@@ -5,6 +5,9 @@ FROM node:22.14.0-alpine AS base
 # Set working directory
 WORKDIR /app
 
+# Install packages required for builds
+RUN apk add --no-cache git
+
 # Copy package files
 COPY package*.json ./
 
@@ -14,9 +17,6 @@ RUN npm cache clean --force && \
 
 # Stage 2: Development image
 FROM base AS development
-
-# Install git for webpack build
-RUN apk add --no-cache git
 
 # Copy source code
 COPY . .
