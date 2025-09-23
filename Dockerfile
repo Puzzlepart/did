@@ -5,8 +5,13 @@ FROM node:22.14.0-alpine AS base
 # Set working directory
 WORKDIR /app
 
-# Install packages required for builds
-RUN apk add --no-cache git
+# Propagate git metadata collected during CI builds
+ARG GIT_COMMIT=unknown
+ARG GIT_BRANCH=unknown
+ARG GIT_COMMIT_DATETIME=unknown
+ENV GIT_COMMIT=$GIT_COMMIT \
+    GIT_BRANCH=$GIT_BRANCH \
+    GIT_COMMIT_DATETIME=$GIT_COMMIT_DATETIME
 
 # Copy package files
 COPY package*.json ./
