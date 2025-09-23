@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.6
 # Multi-stage Dockerfile for did application
 # Stage 1: Base development image
 FROM node:22.14.0-alpine AS base
@@ -11,14 +12,28 @@ ARG GIT_BRANCH=unknown
 ARG GIT_COMMIT_DATETIME=unknown
 ENV GIT_COMMIT=$GIT_COMMIT \
     GIT_BRANCH=$GIT_BRANCH \
-    GIT_COMMIT_DATETIME=$GIT_COMMIT_DATETIME
+    GIT_COMMIT_DATETIME=$GIT_COMMIT_DATETIME \
+    npm_config_fetch_retries=5 \
+    npm_config_fetch_retry_mintimeout=20000 \
+    npm_config_fetch_retry_maxtimeout=120000 \
+    npm_config_progress=false
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with retry and clean cache
-RUN npm cache clean --force && \
-    npm ci --no-audit --no-fund --loglevel=error
+# Install dependencies with cached downloads and retry handling
+RUN --mount=type=cache,target=/root/.npm \
+    set -eux; \
+    for attempt in 1 2 3; do \
+        npm ci --no-audit --no-fund --loglevel=error && break; \
+        if [ "${attempt}" -lt 3 ]; then \
+            echo "npm ci failed (attempt ${attempt}); retrying..." >&2; \
+            sleep $((attempt * 5)); \
+        else \
+            echo "npm ci failed after ${attempt} attempts" >&2; \
+            exit 1; \
+        fi; \
+    done
 
 # Stage 2: Development image
 FROM base AS development
@@ -60,9 +75,19 @@ RUN apk add --no-cache dumb-init
 # Copy package files
 COPY package*.json ./
 
-# Install only production dependencies
-RUN npm ci --only=production --no-audit --no-fund --loglevel=error && \
-    npm cache clean --force
+# Install only production dependencies (with cached downloads and retries)
+RUN --mount=type=cache,target=/root/.npm \
+    set -eux; \
+    for attempt in 1 2 3; do \
+        npm ci --only=production --no-audit --no-fund --loglevel=error && break; \
+        if [ "${attempt}" -lt 3 ]; then \
+            echo "npm ci (production) failed (attempt ${attempt}); retrying..." >&2; \
+            sleep $((attempt * 5)); \
+        else \
+            echo "npm ci (production) failed after ${attempt} attempts" >&2; \
+            exit 1; \
+        fi; \
+    done
 
 # Copy built application from build stage
 COPY --from=build /app/dist ./dist
