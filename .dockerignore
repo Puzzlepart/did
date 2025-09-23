@@ -91,3 +91,8 @@ webpack
 # Scripts that are not needed in container
 .scripts
 .tasks
+
+# Local secrets and seed data (recommended)
+docker-compose.local.yml
+docker-compose.override.yml.local
+docker/data/**/*.json

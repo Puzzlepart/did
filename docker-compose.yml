@@ -19,8 +19,10 @@ services:
       - .:/app
       - /app/node_modules
     depends_on:
-      - mongodb
-      - redis
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     # Note: healthcheck intentionally omitted for faster inner-loop; production compose defines it.
     networks:
       - did-network
@@ -45,13 +47,18 @@ services:
   redis:
     image: redis:7.2-alpine
     ports:
-      - "6379:6379"
+      - "6379:6379" # Exposed for local dev only; do not expose in production
     volumes:
       - redis_data:/data
     networks:
       - did-network
     restart: unless-stopped
     command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # MongoDB Express for database administration (optional)
   mongo-express:

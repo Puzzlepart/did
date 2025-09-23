@@ -1,3 +1,21 @@
+## Quickstart vs Dev Script
+
+Use `./scripts/docker-quickstart.sh --fresh` for a one-command clean start and config check. Use `./scripts/docker-dev.sh` for granular control and status checks.
+
+To see your effective compose chain and services:
+```bash
+./scripts/docker-quickstart.sh --status
+```
+## Common Reset Recipes
+
+To reset MongoDB and re-import seed data:
+```bash
+docker compose stop mongodb && docker compose rm -f mongodb && docker volume rm did_mongodb_data && docker compose up -d mongodb
+```
+
+## Security Note
+
+Never commit real secrets (client IDs, secrets, session keys) to the repository. Always use `docker-compose.local.yml` for local secrets and ensure it's gitignored.
 # Docker Development Guide for did
 
 This guide provides comprehensive instructions for using Docker with the did application for development, testing, and deployment.

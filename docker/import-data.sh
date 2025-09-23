@@ -41,7 +41,8 @@ for dir in "${db_dirs[@]}"; do
 
     for file in "${files[@]}"; do
         collection="$(basename "$file" .json)"
-        echo "Importing $file into $dbname.$collection ..."
+        size=$(stat -c%s "$file" 2>/dev/null || wc -c < "$file")
+        echo "Importing $file into $dbname.$collection ... (size: ${size} bytes)"
         if mongoimport --db="$dbname" --collection="$collection" --file="$file"; then
             echo "Successfully imported $dbname.$collection"
         else

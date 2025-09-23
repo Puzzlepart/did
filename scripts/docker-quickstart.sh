@@ -49,13 +49,38 @@ else
   fi
 fi
 
+
 CLEAN=0
+STATUS=0
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --clean|--fresh) CLEAN=1; shift ;;
+    --status) STATUS=1; shift ;;
     *) warn "Unknown arg: $1"; shift ;;
   esac
 done
+
+# Placeholder detection for secrets
+if grep -q '##Insert' "$OVERRIDE_LOCAL"; then
+  warn "docker-compose.local.yml contains placeholder secrets. Please update with your Azure AD credentials."
+fi
+
+# Seed data summary
+DATA_ROOT="docker/data"
+if [ -d "$DATA_ROOT" ]; then
+  for dir in "$DATA_ROOT"/*/; do
+    [ -d "$dir" ] || continue
+    count=$(find "$dir" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')
+    db_name=$(basename "$dir")
+    info "Seed data: $db_name ($count collections)"
+  done
+fi
+
+if (( STATUS == 1 )); then
+  info "Effective COMPOSE_FILE chain: $COMPOSE_CHAIN"
+  docker compose config --services
+  exit 0
+fi
 
 if (( CLEAN == 1 )); then
   info "Removing existing containers + volumes"

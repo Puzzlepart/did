@@ -10,7 +10,7 @@ COPY package*.json ./
 
 # Install dependencies with retry and clean cache
 RUN npm cache clean --force && \
-    npm ci --no-audit --no-fund --loglevel=error || npm install --no-audit --no-fund
+    npm ci --no-audit --no-fund --loglevel=error
 
 # Stage 2: Development image
 FROM base AS development
