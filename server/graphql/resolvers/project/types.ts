@@ -199,6 +199,12 @@ export class Project {
   parentKey?: string
 
   /**
+   * The key of the partner customer.
+   */
+  @Field({ nullable: true })
+  partnerKey?: string
+
+  /**
    * The parent project.
    */
   @Field(() => Project, { nullable: true })
