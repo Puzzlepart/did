@@ -88,6 +88,12 @@ export class ProjectInput {
    */
   @Field({ nullable: true })
   parentKey?: string
+
+  /**
+   * The key of the partner customer.
+   */
+  @Field({ nullable: true })
+  partnerKey?: string
 }
 
 /**
@@ -197,6 +203,12 @@ export class Project {
    */
   @Field(() => Project, { nullable: true })
   parent?: Project
+
+  /**
+   * The partner customer.
+   */
+  @Field(() => Customer, { nullable: true })
+  partner?: Customer
 
   /**
    * The children projects.

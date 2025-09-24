@@ -5,12 +5,14 @@ import { ProjectList } from '../../Projects'
 import { CustomersContext } from '../context'
 import { CLOSE_PROJECT_PANEL, OPEN_PROJECT_PANEL } from '../reducer/actions'
 import { useProjectsQuery } from './useProjectsQuery'
+import { usePartnerProjectsQuery } from './usePartnerProjectsQuery'
 
 export function useCustomerDetails() {
   const { t } = useTranslation()
   const context = useContext(CustomersContext)
   const selected = context.state.selected
   const [projects, { error, refetch }] = useProjectsQuery(selected)
+  const [partnerProjects, { error: partnerError, refetch: refetchPartner }] = usePartnerProjectsQuery(selected)
   const tabs: TabItems = useMemo(
     () => ({
       projects: [
@@ -37,9 +39,22 @@ export function useCustomerDetails() {
               })
           ]
         }
+      ],
+      partner: [
+        ProjectList,
+        { text: t('customers.partnerProjectsHeaderText'), iconName: 'Teamwork' },
+        {
+          hideColumns: ['customer'],
+          enableShimmer: context.loading,
+          data: partnerProjects,
+          searchBox: {
+            placeholder: t('customers.searchPartnerProjectsPlaceholder', selected),
+            disabled: context.loading
+          }
+        }
       ]
     }),
-    [context.state, context.loading, selected, projects]
+    [context.state, context.loading, selected, projects, partnerProjects]
   )
-  return { projects, error, tabs, refetch }
+  return { projects, partnerProjects, error: error || partnerError, tabs, refetch: () => { refetch(); refetchPartner() } }
 }

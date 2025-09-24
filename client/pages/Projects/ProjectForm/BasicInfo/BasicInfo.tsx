@@ -100,6 +100,16 @@ export const BasicInfo: ProjectFormTabComponent = () => {
         description={t('projects.parentProjectDescription')}
         disabledText={t('projects.parentProjectDisabledText')}
       />
+      <SearchCustomer
+        {...register('partnerKey')}
+        label={t('projects.partnerCustomer')}
+        description={t('projects.partnerCustomerDescription')}
+        placeholder={t('common.searchPlaceholder')}
+        selectedKey={model.value('partnerKey')}
+        onSelected={(customer) => model.set('partnerKey', customer?.key)}
+        maxSuggestions={8}
+        allowFreeform={false}
+      />
       <CreateOutlookCategory />
     </FormGroup>
   )

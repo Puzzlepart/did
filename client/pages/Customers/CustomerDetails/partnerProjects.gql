@@ -1,5 +1,5 @@
-query CustomerProjects ($customerKey: String) {
-  projects(customerKey: $customerKey) {
+query PartnerProjects ($customerKey: String!) {
+  partnerProjects(customerKey: $customerKey) {
     tag
     key
     name
