@@ -193,6 +193,7 @@ API_TOKEN_SECRET=your_api_secret
 ### Client Optimizations
 - Implement virtualization for long lists (>100 items)
 - Use React.memo for expensive components
+- Use memoization for expensive calculations
 - Optimize GraphQL queries to fetch only needed fields
 - Lazy load routes and components where possible
 
@@ -201,6 +202,42 @@ API_TOKEN_SECRET=your_api_secret
 - Database query optimization
 - GraphQL resolver batching
 - Rate limiting to prevent abuse
+
+## Accessibility Requirements
+
+- Ensure all interactive elements have appropriate ARIA attributes
+- Maintain keyboard navigation support
+- Use semantic HTML elements
+- Follow WCAG guidelines for color contrast and visual hierarchy
+- Provide alternative text for images and icons
+- Ensure proper focus management in dynamic content
+
+## Project-Specific Guidelines
+
+### Internationalization
+- Use `useTranslation` hook from react-i18next for all user-facing text
+- Add new strings to `/client/i18n/[language].json` files
+- Support for en-GB, nb (Norwegian Bokmål), nn (Norwegian Nynorsk)
+- Maintain consistent terminology across languages
+
+### Data Management
+- User data should include manager information when appropriate
+- Excel exports should maintain consistent formatting with column widths and filters
+- When creating search functionality, implement count display and proper loading states
+- Calendar events automatically become time entries via Microsoft Graph API
+
+### Component Development
+- Follow the established component structure pattern
+- Include JSDoc comments for all functions/components
+- Separate business logic into `use[ComponentName].ts` hooks
+- Use SCSS modules for styling with BEM-like naming conventions
+- Import styles as `styles` from corresponding `.module.scss` files
+
+### Testing Standards
+- Unit tests should be placed next to the file they test with `.test.ts` extension
+- Mock external dependencies when testing components
+- Use AVA test framework with TypeScript support
+- Maintain 2-minute timeout per test for comprehensive testing
 
 ## Deployment Notes
 
