@@ -16,6 +16,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  PLATFORMS: linux/amd64,linux/arm64
 
 jobs:
   build:
@@ -39,6 +40,10 @@ jobs:
         run: |
           IMAGE_NAME_LOWER=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
           echo "IMAGE_NAME=${IMAGE_NAME_LOWER}" >> "$GITHUB_ENV"
+
+      - name: Adjust build platforms for PRs
+        if: github.event_name == 'pull_request'
+        run: echo "PLATFORMS=linux/amd64" >> "$GITHUB_ENV"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -77,7 +82,7 @@ jobs:
             GIT_COMMIT_DATETIME=${{ steps.git_meta.outputs.commit_date }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ env.PLATFORMS }}
 
       - name: Build development image (for testing)
         if: github.event_name == 'pull_request'
@@ -87,6 +92,7 @@ jobs:
           target: development
           push: false
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev-test
+          platforms: ${{ env.PLATFORMS }}
           build-args: |
             GIT_COMMIT=${{ steps.git_meta.outputs.commit_sha }}
             GIT_BRANCH=${{ steps.git_meta.outputs.branch_name }}
