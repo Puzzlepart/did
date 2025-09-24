@@ -1,11 +1,12 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/empty-brace-spaces */
 /* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require('fs')
+const path = require('path')
 const tryRequire = require('try-require')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const constants = require('./constants')
-const gitRevisionPlugin = new GitRevisionPlugin()
 const createExportedVarsPlugin = require('./exportedVarsPlugin')
 
 /**
@@ -16,9 +17,12 @@ const createExportedVarsPlugin = require('./exportedVarsPlugin')
  * @returns plugins config for webpack
  */
 function getPluginsForEnvironment() {
+  const gitDirectoryPath = path.resolve(process.cwd(), '.git')
+  const shouldUseGitPlugin = fs.existsSync(gitDirectoryPath)
+  const gitRevisionPlugin = shouldUseGitPlugin ? new GitRevisionPlugin() : null
   const exportedVarsPlugin = createExportedVarsPlugin(gitRevisionPlugin)
   let plugins = [
-    gitRevisionPlugin,
+    ...(gitRevisionPlugin ? [gitRevisionPlugin] : []),
     new HtmlWebpackPlugin({
       template: constants.get('HTML_PLUGIN_TEMPLATE'),
       filename: constants.get('HTML_PLUGIN_FILE_NAME'),

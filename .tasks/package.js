@@ -3,6 +3,7 @@ const concurrently = require('concurrently')
 const chalk = require('chalk')
 const { promisify } = require('util')
 const rimraf = require('rimraf')
+const { execSync } = require('child_process')
 const rmdir = promisify(rimraf)
 const path = require('path')
 const archivePackage = require('./archivePackage')
@@ -16,6 +17,23 @@ const INCLUDE_PACKAGE_LOCK_FILE = process.env.INCLUDE_PACKAGE_LOCK_FILE !== '0'
  * Runs the package script, which cleans the `DIST_PATH` directory and then concurrently 
  * runs the `package:client` and `build:server` scripts. Finally, it archives the package.
  */
+function resolveRevision() {
+  if (process.env.GIT_COMMIT && process.env.GIT_COMMIT.trim() !== '') {
+    return process.env.GIT_COMMIT.trim()
+  }
+
+  try {
+    return execSync('git rev-parse --short HEAD', {
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+      .toString()
+      .trim()
+  } catch (error) {
+    log(chalk.yellow('Unable to determine git revision, using "unknown".'))
+    return 'unknown'
+  }
+}
+
 async function package() {
   if (process.env.CI !== 'true') {
     log()
@@ -28,14 +46,14 @@ async function package() {
 
   await concurrently([
     { command: 'npm run package:client', name: 'Packaging client' },
-    { command: "npm run build:server", name: 'Building server' },
-    { command: "git rev-parse --short HEAD > revision.txt", name: 'Writing revision to file' }
+    { command: 'npm run build:server', name: 'Building server' },
   ], {
     prefix: 'none',
   })
   await archivePackage({
     includeNodeModules: INCLUDE_NODE_MODULES,
-    includePackageLockFile: INCLUDE_PACKAGE_LOCK_FILE
+    includePackageLockFile: INCLUDE_PACKAGE_LOCK_FILE,
+    revision: resolveRevision(),
   })
 }
 

@@ -95,6 +95,48 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 
 ### Getting started
 
+#### Option 1: Docker Development (Recommended)
+
+**Prerequisites:**
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+
+**Quick Start:**
+1. Check out the `dev` branch
+2. Run `./scripts/docker-dev.sh setup` to initialize the development environment
+3. Edit `.env` file with your configuration (see `Set up .env` below)
+4. Run `./scripts/docker-dev.sh start` to start all services
+5. Access the application at http://localhost:9001
+
+**Docker Commands:**
+```bash
+# Start development environment
+./scripts/docker-dev.sh start
+
+# Start with admin tools (MongoDB Express, Redis Commander)
+./scripts/docker-dev.sh start --with-tools
+
+# View logs
+./scripts/docker-dev.sh logs
+
+# Open shell in DID container
+./scripts/docker-dev.sh shell
+
+# Stop services
+./scripts/docker-dev.sh stop
+
+# Clean up (removes all data)
+./scripts/docker-dev.sh clean
+```
+
+**Services included:**
+- **DID Application**: http://localhost:9001
+- **MongoDB**: localhost:27017 (did_dev database)
+- **Redis**: localhost:6379
+- **MongoDB Express** (with --with-tools): http://localhost:8081 (admin/admin123)
+- **Redis Commander** (with --with-tools): http://localhost:8082
+
+#### Option 2: Native Development
+
 1. Check out the `dev` branch
 2. Run `npm install`
 3. Run `npm run-script create-env` to create your own `.env` file for local testing
@@ -215,6 +257,63 @@ You are encouraged to branch with either of the following prefixes
 See also [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 
 If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.
+
+### Docker Deployment
+
+#### Production Deployment with Docker
+
+For production deployment using Docker:
+
+1. **Build the production image:**
+   ```bash
+   docker build --target production -t did:latest .
+   ```
+
+2. **Run with production compose:**
+   ```bash
+   # Copy and configure production environment
+   cp .env.sample .env.production
+   # Edit .env.production with production values
+   
+   # Start production stack
+   docker-compose -f docker-compose.prod.yml up -d
+   ```
+
+3. **Environment Variables for Production:**
+   - Set up `.env.production` with production database credentials
+   - Configure `MONGO_ROOT_USERNAME` and `MONGO_ROOT_PASSWORD` for MongoDB
+   - Set `REDIS_PASSWORD` for Redis authentication
+   - Configure external services (Azure AD, MongoDB Atlas, Redis Cloud, etc.)
+
+#### Docker Image Registry
+
+Docker images are automatically built and published to GitHub Container Registry (GHCR) via GitHub Actions:
+
+- **Development builds**: `ghcr.io/puzzlepart/did:dev`
+- **Release builds**: `ghcr.io/puzzlepart/did:latest`
+- **Tagged releases**: `ghcr.io/puzzlepart/did:v{version}`
+
+Pull images directly:
+```bash
+docker pull ghcr.io/puzzlepart/did:latest
+```
+
+#### Scaling with Docker
+
+The production compose file includes resource limits and can be scaled:
+
+```bash
+# Scale the application to 3 replicas
+docker-compose -f docker-compose.prod.yml up -d --scale did=3
+```
+
+#### Health Checks
+
+The Docker image includes health checks for monitoring:
+- **Endpoint**: `http://localhost:9001/health`
+- **Interval**: 30 seconds
+- **Timeout**: 3 seconds
+- **Retries**: 3
 
 ### GraphQL
 

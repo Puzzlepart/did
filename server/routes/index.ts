@@ -5,6 +5,18 @@ import { renderPage } from './utils'
 // Define public routes that don't require authentication
 const publicRoutes = new Set(['/termsofservice', '/privacystatement', '/'])
 
+// Check if a URL is a static asset or API route that should not require authentication
+const isPublicResource = (url: string): boolean => {
+  return publicRoutes.has(url) ||
+         url.startsWith('/js/') ||
+         url.startsWith('/css/') ||
+         url.startsWith('/assets/') ||
+         url.startsWith('/auth/') ||
+         url.startsWith('/graphql') ||
+         url.startsWith('/health_check') ||
+         url.includes('.') // Files with extensions (js, css, ico, etc.)
+}
+
 /**
  * Default route handler for the root path `/`. It checks if the user is
  * authenticated and redirects to the login page if not.
@@ -25,8 +37,8 @@ export default (request: Request, response: Response) => {
     return handleMaintenanceMode(response)
   }
 
-  // Only check authentication for non-public routes
-  if (request.isUnauthenticated() && !publicRoutes.has(url)) {
+  // Only check authentication for non-public routes and resources
+  if (request.isUnauthenticated() && !isPublicResource(url)) {
     return response.redirect(
       `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
     )
