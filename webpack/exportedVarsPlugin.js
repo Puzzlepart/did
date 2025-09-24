@@ -31,6 +31,7 @@ function resolveGitValue({ envKey, getter, fallback = 'unknown' }) {
     if (result) {
       return result
     }
+  // eslint-disable-next-line unicorn/prefer-optional-catch-binding
   } catch (error) {
     // Swallow errors when git metadata is unavailable (e.g., .git not in Docker context)
   }
