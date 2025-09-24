@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.15.11",
+  "version": "0.16.0",
   "private": true,
   "engines": {
     "node": ">=22.14.0",
@@ -27,7 +27,7 @@
     ]
   },
   "config": {
-    "BUNDLE_FILE_NAME": "'did.[name].[fullhash].js"
+    "BUNDLE_FILE_NAME": "did.[name].[fullhash].js"
   },
   "scripts": {
     "watch": "node .tasks/watch.js",
@@ -44,7 +44,13 @@
     "create-env": "node .tasks/createDotEnv.js",
     "tag": "node .tasks/git-tag.js",
     "update:version": "node .tasks/updateVersion.js",
-    "commit": "sexy-commits"
+    "commit": "sexy-commits",
+    "docker:setup": "./scripts/docker-dev.sh setup",
+    "docker:start": "./scripts/docker-dev.sh start",
+    "docker:stop": "./scripts/docker-dev.sh stop",
+    "docker:logs": "./scripts/docker-dev.sh logs",
+    "docker:shell": "./scripts/docker-dev.sh shell",
+    "docker:clean": "./scripts/docker-dev.sh clean"
   },
   "dependencies": {
     "@apollo/client": "3.10.4",
@@ -207,7 +213,7 @@
   "contributors": [
     {
       "name": "Carl Joakim Damsleth",
-      "email": "cj@d0.si",
+      "email": "cj.gh@d0.si",
       "img": "https://avatars.githubusercontent.com/u/7300548?&size=130",
       "url": "https://github.com/damsleth"
     },
