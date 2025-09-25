@@ -3,11 +3,16 @@ query ProjectsQuery {
     tag
     key
     customerKey
+    partnerKey
     name
     description
     webLink
     icon
     customer {
+      key
+      name
+    }
+    partner {
       key
       name
     }

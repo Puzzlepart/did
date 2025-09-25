@@ -221,14 +221,30 @@ export class App {
    * Setup routes
    *
    * Configuring `/` to redirect to the login page
-   * if the user is not authenticated, and `*` to use
+   * if the user is not authenticated, and catch-all route to use
    * our index route giving the React Router full
-   * control of the routing.
+   * control of the routing. Excludes static assets and API routes.
    */
   setupRoutes() {
     const index = express.Router()
     index.get('/', defaultRoute)
-    this.instance.use('*', index)
+    // Only catch routes that should be handled by React Router
+    // Exclude static assets (/js/, /css/, /assets/), API routes (/auth/, /graphql/, /health_check/)
+    this.instance.get('*', (req, res, next) => {
+      const url = req.path
+      // Skip if it's a static asset or API route
+      if (url.startsWith('/js/') || 
+          url.startsWith('/css/') || 
+          url.startsWith('/assets/') || 
+          url.startsWith('/auth/') || 
+          url.startsWith('/graphql') || 
+          url.startsWith('/health_check') ||
+          url.includes('.')) { // Skip files with extensions (js, css, ico, etc.)
+        return next()
+      }
+      // Handle as a page route
+      defaultRoute(req, res)
+    })
   }
 
   /**
