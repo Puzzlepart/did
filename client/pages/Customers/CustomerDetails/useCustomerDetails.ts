@@ -5,14 +5,16 @@ import { ProjectList } from '../../Projects'
 import { CustomersContext } from '../context'
 import { CLOSE_PROJECT_PANEL, OPEN_PROJECT_PANEL } from '../reducer/actions'
 import { useProjectsQuery } from './useProjectsQuery'
+import { usePartnerProjectsQuery } from './usePartnerProjectsQuery'
 
 export function useCustomerDetails() {
   const { t } = useTranslation()
   const context = useContext(CustomersContext)
   const selected = context.state.selected
   const [projects, { error, refetch }] = useProjectsQuery(selected)
-  const tabs: TabItems = useMemo(
-    () => ({
+  const [partnerProjects, { error: partnerError, refetch: refetchPartner }] = usePartnerProjectsQuery(selected)
+  const tabs: TabItems = useMemo(() => {
+    const base: TabItems = {
       projects: [
         ProjectList,
         { text: t('customers.projectsHeaderText'), iconName: 'Collections' },
@@ -38,8 +40,25 @@ export function useCustomerDetails() {
           ]
         }
       ]
-    }),
-    [context.state, context.loading, selected, projects]
-  )
-  return { projects, error, tabs, refetch }
+    }
+
+    // Only include the partner tab if there is at least one partner project (and not loading initial state)
+    if (!context.loading && partnerProjects?.length > 0) {
+      base.partner = [
+        ProjectList,
+        { text: t('customers.partnerProjectsHeaderText'), iconName: 'PeopleTeam' },
+        {
+          hideColumns: ['customer'],
+          enableShimmer: context.loading,
+          overrideItems: partnerProjects,
+          searchBox: {
+            placeholder: t('customers.searchPartnerProjectsPlaceholder', selected),
+            disabled: context.loading
+          }
+        }
+      ]
+    }
+    return base
+  }, [context.loading, context.state, partnerProjects, selected])
+  return { projects, partnerProjects, error: error || partnerError, tabs, refetch: () => { refetch(); refetchPartner() } }
 }

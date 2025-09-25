@@ -36,6 +36,8 @@ export const useProjectFormSubmit: FormSubmitHook<
       project: _.omit(
         {
           ...model.$,
+          // Make sure inactive is a boolean (never undefined / null)
+          inactive: model.$.inactive ?? false,
           extensions: JSON.stringify(model.$.extensions)
         },
         ['parent', 'children']

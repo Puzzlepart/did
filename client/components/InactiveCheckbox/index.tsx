@@ -1,18 +1,14 @@
-import {
-  Checkbox,
-  CheckboxProps,
-  SwitchProps
-} from '@fluentui/react-components'
+import { Switch, SwitchProps } from '@fluentui/react-components'
 import { ListMenuItem, ListMenuItemGroup } from 'components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import styles from './InactiveCheckbox.module.scss'
 
-export const InactiveCheckbox: ReusableComponent<CheckboxProps> = (props) => {
+export const InactiveCheckbox: ReusableComponent<SwitchProps> = (props) => {
   return (
     <div className={InactiveCheckbox.className}>
       <div className={styles.container}>
-        <Checkbox {...props} onChange={props.onChange} />
+        <Switch {...props} onChange={props.onChange} />
       </div>
     </div>
   )
@@ -40,6 +36,4 @@ export const InactiveCheckboxMenuItem = (
 
 InactiveCheckbox.displayName = 'InactiveCheckbox'
 InactiveCheckbox.className = styles.inactiveCheckbox
-InactiveCheckbox.defaultProps = {
-  labelPosition: 'after'
-}
+InactiveCheckbox.defaultProps = {}

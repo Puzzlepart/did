@@ -1,7 +1,7 @@
 import { Tabs } from 'components/Tabs'
 import { UserMessage } from 'components/UserMessage'
 import { ProjectForm, ProjectsContext } from 'pages/Projects'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { useCustomersContext } from '../context'
@@ -10,6 +10,8 @@ import styles from './CustomerDetails.module.scss'
 import { CustomerHeader } from './CustomerHeader'
 import { CustomerInformation } from './CustomerInformation'
 import { useCustomerDetails } from './useCustomerDetails'
+import { useHistory, useParams } from 'react-router-dom'
+import { ICustomersUrlParameters } from '../types'
 /**
  * Displays the details of a customer, including a list of projects.
  *
@@ -18,7 +20,20 @@ import { useCustomerDetails } from './useCustomerDetails'
 export const CustomerDetails: StyledComponent = () => {
   const { t } = useTranslation()
   const context = useCustomersContext()
-  const { projects, error, tabs, refetch } = useCustomerDetails()
+  const history = useHistory()
+  const urlParams = useParams<ICustomersUrlParameters>()
+  const { projects, partnerProjects, error, tabs, refetch } = useCustomerDetails()
+
+  // Redirect if URL explicitly targets partner tab but it is not available (no partner projects)
+  useEffect(() => {
+    if (
+      urlParams?.detailsTab === 'partner' &&
+      !context.loading &&
+      (!partnerProjects || partnerProjects.length === 0)
+    ) {
+      history.replace(`/customers/${urlParams.currentTab ?? ''}/projects`)
+    }
+  }, [urlParams?.detailsTab, partnerProjects, context.loading])
   return (
     <div className={CustomerDetails.className}>
       <ProjectsContext.Provider value={{ state: { projects } }}>
