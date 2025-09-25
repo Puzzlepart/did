@@ -60,5 +60,5 @@ export function useCustomerDetails() {
     }
     return base
   }, [context.loading, context.state, partnerProjects, selected])
-  return { projects, partnerProjects, error: error || partnerError, tabs, refetch: () => { refetch(); refetchPartner(); } }
+  return { projects, partnerProjects, error: error || partnerError, tabs, refetch: () => { refetch(); refetchPartner() } }
 }
