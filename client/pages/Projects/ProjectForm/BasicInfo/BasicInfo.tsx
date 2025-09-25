@@ -6,9 +6,10 @@ import {
   InputControlOptions,
   LabelPickerControl,
   ProjectPickerControl,
-  useFormContext
+  useFormContext,
+  SwitchControl,
+  SwitchControlOptions
 } from 'components/FormControl'
-import { SwitchControl, SwitchControlOptions } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCustomersContext } from '../../../Customers/context'
