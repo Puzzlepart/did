@@ -168,7 +168,7 @@
     "partnerCustomer": "Partnerkunde",
     "partnerCustomerDescription": "Velg en partnerkunde for dette prosjektet. Dette er nyttig når du jobber som underleverandør gjennom et partnerselskap som håndterer faktureringen.",
     "loadTimeEntriesLabel": "Last inn tidsoppføringer",
-    "deleteButtonLabel": "Delete project",
+    "deleteButtonLabel": "Slett prosjekt",
     "deleteError": "Dette prosjektet har {{count}} tilknyttede tidsregistreringer. Vennligst slett alle relaterte tidsregistreringer før du prøver å slette prosjektet.",
     "deleteConfirmation": "Er du sikker på at du vil slette prosjektet **{{name}}** for kunde **{{customer}}**? Før vi fortsetter, vil vi kontrollere om det finnes tidsregistreringer tilknyttet dette prosjektet. Hvis det finnes tidsregistreringer, må disse slettes før prosjektet kan fjernes.",
     "deleteDialogTitle": "Slett prosjekt",
