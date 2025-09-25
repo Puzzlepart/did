@@ -58,6 +58,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     const tag = `${customerKey} ${key}`
 
     await this.cache.clear('getprojects')
+    await this.cache.clear('getpartnerprojects')
 
     const { insertedId } = await this.insert({
       _id: tag,
@@ -80,6 +81,7 @@ export class ProjectService extends MongoDocumentService<Project> {
   public async updateProject(project: Project): Promise<boolean> {
     try {
       await this.cache.clear('getprojects')
+      await this.cache.clear('getpartnerprojects')
       const filter: FilterQuery<Project> = _.pick(project, 'key', 'customerKey')
       const { result } = await this.update(filter, project)
       return result.ok === 1
@@ -95,6 +97,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async deleteProject(projectId: string): Promise<boolean> {
     await this.cache.clear('getprojects')
+    await this.cache.clear('getpartnerprojects')
     const { result } = await this.collection.deleteOne({
       _id: projectId
     })
@@ -109,6 +112,19 @@ export class ProjectService extends MongoDocumentService<Project> {
   public getProjects(query?: FilterQuery<Project>): Promise<Project[]> {
     return this.cache.usingCache<Project[]>(() => this.find(query), {
       key: ['getprojects', query],
+      expiry: 30
+    })
+  }
+
+  /**
+   * Get projects where the specified customer key is a partner.
+   *
+   * @param customerKey - The customer key to search for as partner
+   */
+  public getPartnerProjects(customerKey: string): Promise<Project[]> {
+    const query: FilterQuery<Project> = { partnerKey: customerKey }
+    return this.cache.usingCache<Project[]>(() => this.find(query), {
+      key: ['getpartnerprojects', customerKey],
       expiry: 30
     })
   }
@@ -151,6 +167,8 @@ export class ProjectService extends MongoDocumentService<Project> {
               ...project,
               customer:
                 _.find(customers, (c) => c.key === project.customerKey) || null,
+              partner:
+                _.find(customers, (c) => c.key === project.partnerKey) || null,
               labels: _.filter(labels, (l) =>
                 _.contains(project.labels, l.name)
               ),
