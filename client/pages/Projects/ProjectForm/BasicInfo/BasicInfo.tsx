@@ -1,6 +1,5 @@
 import { SearchCustomer } from 'components'
 import {
-  CheckboxControl,
   FormGroup,
   IconPickerControl,
   InputControl,
@@ -9,6 +8,7 @@ import {
   ProjectPickerControl,
   useFormContext
 } from 'components/FormControl'
+import { SwitchControl, SwitchControlOptions } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCustomersContext } from '../../../Customers/context'
@@ -75,8 +75,8 @@ export const BasicInfo: ProjectFormTabComponent = () => {
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
       />
-      <CheckboxControl
-        {...register('inactive')}
+      <SwitchControl
+        {...register<SwitchControlOptions>('inactive')}
         label={t('common.inactiveFieldLabel')}
         description={t('projects.inactiveFieldDescription')}
         hidden={!isEditMode}
@@ -108,7 +108,6 @@ export const BasicInfo: ProjectFormTabComponent = () => {
         selectedKey={model.value('partnerKey')}
         onSelected={(customer) => model.set('partnerKey', customer?.key)}
         maxSuggestions={8}
-        allowFreeform={false}
       />
       <CreateOutlookCategory />
     </FormGroup>

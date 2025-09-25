@@ -20,6 +20,8 @@ export function useProjectModel(props: IProjectFormProps) {
     (p) =>
       _.omit(
         {
+          // Ensure inactive has an explicit boolean value; avoid undefined -> null in mutation
+          inactive: p?.inactive ?? false,
           ...p,
           labels: mapProperty<any, string[]>(p.labels, 'name')
         },
