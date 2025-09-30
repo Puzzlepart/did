@@ -251,7 +251,8 @@ export class App {
    * Setup error handling using `http-errors`
    */
   setupErrorHandling() {
-    this.instance.use((_req, _res, next) => next(createError(401)))
+  // Fallback: anything not handled earlier becomes a 404 (was 401, which cluttered logs)
+  this.instance.use((_req, _res, next) => next(createError(404)))
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
         response.render('index', {
