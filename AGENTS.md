@@ -112,6 +112,12 @@ MONGO_DB_DB_NAME=main
 SESSION_SIGNING_KEY=your_session_key
 REDIS_CACHE_HOSTNAME=localhost
 REDIS_CACHE_KEY=your_redis_key
+REDIS_CACHE_PORT=6379
+# Optional: Explicit TLS/SSL port (falls back to 6380 automatically when REDIS_CACHE_KEY is set and REDIS_CACHE_PORT=6379)
+# For Azure Redis (TLS) you typically set REDIS_CACHE_HOSTNAME to the primary host name and supply REDIS_CACHE_KEY.
+# If you leave REDIS_CACHE_PORT at 6379 the application will internally switch to 6380 when a key is present.
+# Use REDIS_CACHE_SSL_PORT only if your TLS port differs from 6380.
+# REDIS_CACHE_SSL_PORT=6380
 API_TOKEN_SECRET=your_api_secret
 ```
 

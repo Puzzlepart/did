@@ -7,6 +7,43 @@ import { IMissingSubmissionPeriod } from './types'
 import { useWeekStatusQuery } from './useWeekStatusQuery'
 
 /**
+ * Check if a user's employment period overlaps with a given date period
+ *
+ * @param user - User with employment dates
+ * @param datePeriod - Date period to check against
+ */
+const isUserEmployedDuringPeriod = (user: User, datePeriod: IDatePeriod): boolean => {
+  // If user has no employment start/end dates, assume they should be included
+  if (!user.employmentStartDate && !user.employmentEndDate) {
+    return true
+  }
+
+  const periodStart = datePeriod.startDate.$.toDate()
+  const periodEnd = datePeriod.endDate.$.toDate()
+
+  // Check if user employment period overlaps with the date period
+  const employmentStart = user.employmentStartDate ? new Date(user.employmentStartDate) : null
+  const employmentEnd = user.employmentEndDate ? new Date(user.employmentEndDate) : null
+
+  // If only start date is set, check if period end is after employment start
+  if (employmentStart && !employmentEnd) {
+    return periodEnd >= employmentStart
+  }
+
+  // If only end date is set, check if period start is before employment end
+  if (!employmentStart && employmentEnd) {
+    return periodStart <= employmentEnd
+  }
+
+  // If both dates are set, check for overlap
+  if (employmentStart && employmentEnd) {
+    return periodStart <= employmentEnd && periodEnd >= employmentStart
+  }
+
+  return true
+}
+
+/**
  * Maps `User` to `IMissingSubmissionUser`. We don't want to extend
  * classes that have the `ObjectType` decorator.
  *
@@ -43,6 +80,7 @@ export const getPeriodsWithMissingSubmissions = (
     users: users
       .filter(
         (user) =>
+          isUserEmployedDuringPeriod(user, p) &&
           !_.any(
             periods,
             ({ userId, week, month, year }) =>
@@ -64,11 +102,12 @@ export const getUsersWithMissingPeriods = (
 ) =>
   arrayMap<User, IMissingSubmissionUser>(users, (user) => {
     const missingPeriods = datePeriods.filter(
-      ({ id }) =>
+      (datePeriod) =>
+        isUserEmployedDuringPeriod(user, datePeriod) &&
         !_.any(
           periods,
           ({ userId, week, month, year }) =>
-            userId === user.id && [week, month, year].join('_') === id
+            userId === user.id && [week, month, year].join('_') === datePeriod.id
         )
     )
     return missingPeriods.length > 0 && mapUser(user, missingPeriods)
