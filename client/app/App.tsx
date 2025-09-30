@@ -25,4 +25,3 @@ export const App: FC<IAppProps> = (props) => {
     </AppContext.Provider>
   )
 }
-"// dev test 1759237403"
