@@ -133,5 +133,12 @@ export const getPermissions = (
     description: t('permissions.inviteExternalUsersDescription'),
     iconName: 'Globe',
     category: 'admin'
+  },
+  [PermissionScope.LOCK_UNLOCK_WEEKS]: {
+    name: t('permissions.lockUnlockWeeks'),
+    description: t('permissions.lockUnlockWeeksDescription'),
+    iconName: 'LockClosed',
+    api: true,
+    category: 'admin'
   }
 })
