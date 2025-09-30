@@ -90,7 +90,12 @@ export enum PermissionScope {
   /**
    * Permission to invite external users.
    */
-  INVITE_EXTERNAL_USERS = '785e1c6e'
+  INVITE_EXTERNAL_USERS = '785e1c6e',
+
+  /**
+   * Permission to lock and unlock weeks/periods.
+   */
+  LOCK_UNLOCK_WEEKS = 'a7b8c9d0'
 }
 
 export interface IPermissionInfo {

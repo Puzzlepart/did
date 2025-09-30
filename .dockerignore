@@ -85,9 +85,10 @@ artifacts
 .AppleDouble
 .LSOverride
 
-# Scripts that are not needed in container
+# Development helper scripts (exclude most, allow watch.js specifically)
 .scripts
-.tasks
+.tasks/*
+!.tasks/watch.js
 
 # Local secrets and seed data (recommended)
 docker-compose.local.yml
