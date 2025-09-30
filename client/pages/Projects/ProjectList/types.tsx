@@ -31,4 +31,12 @@ export interface IProjectListProps
    * - `'m'` - Show My projects (projects with category in the user's outlook) tab.
    */
   id?: 's' | 'm'
+
+  /**
+   * Optional explicit list of projects to render. When provided, this overrides
+   * the default projects derived from the ProjectsContext. Useful when reusing
+   * ProjectList in other domains (e.g. CustomerDetails partner projects) where
+   * the backing dataset differs from the global projects state.
+   */
+  overrideItems?: Project[]
 }
