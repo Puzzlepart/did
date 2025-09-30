@@ -362,9 +362,22 @@ export class DateUtils {
    * @param year - Year
    */
   public getIsoWeek(isoWeek: number, year: number) {
+    // Deprecated: add warning and validation
+    console.warn(
+      '[DEPRECATED] getIsoWeek is deprecated and will be removed in the future. Use getIsoWeekAndYear or getIsoWeekStartDate instead.'
+    );
+    // Validate isoWeek
+    if (!Number.isInteger(isoWeek) || isoWeek < 1) {
+      throw new Error(`Invalid isoWeek: ${isoWeek}. Must be a positive integer.`);
+    }
+    // Use dayjs to get the max ISO weeks in the year
+    const maxIsoWeeks = $dayjs(`${year}-01-01`).isoWeeksInYear();
+    if (isoWeek > maxIsoWeeks) {
+      throw new Error(`Invalid isoWeek: ${isoWeek}. Year ${year} has only ${maxIsoWeeks} ISO weeks.`);
+    }
     // For backward compatibility, return the input week number
     // The real logic is now handled by getIsoWeekStartDate in DateObject.fromObject
-    return isoWeek
+    return isoWeek;
   }
 
   /**
