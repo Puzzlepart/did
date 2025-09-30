@@ -42,6 +42,14 @@ services:
     networks:
       - did-network
     restart: unless-stopped
+    # Healthcheck required because other services use condition: service_healthy
+    # mongosh is included in official mongo images (v5+). We ping the admin DB.
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   # Redis cache
   redis:
