@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { omitTypename } from 'utils'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
 import { IRolePanelProps } from './types'
+import { useAppContext } from 'AppContext'
 
 /**
  * A custom form submit hook for the RolePanel component.
@@ -21,18 +22,28 @@ export const useRolePanelSubmit: FormSubmitHook<IRolePanelProps> = (
 ) => {
   const { t } = useTranslation()
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
+  const app = useAppContext()
 
   /**
    * On save role
    */
   async function onSave() {
-    await addOrUpdateRole({
+    const result = await addOrUpdateRole({
       variables: {
         role: omitTypename(model.$),
         update: !!props.edit
       }
     })
+    // Show confirmation toast
+    const roleName = model.value('name')
+    app.displayToast(
+      props.edit
+        ? t('admin.roleUpdatedSuccess', { name: roleName })
+        : t('admin.roleCreatedSuccess', { name: roleName }),
+      'success'
+    )
     props.panel.onDismiss({ refetch: true })
+    return result
   }
 
   const submitProps: IFormControlProps['submitProps'] = {

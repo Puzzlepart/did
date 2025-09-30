@@ -18,7 +18,28 @@ const createExportedVarsPlugin = require('./exportedVarsPlugin')
  */
 function getPluginsForEnvironment() {
   const gitDirectoryPath = path.resolve(process.cwd(), '.git')
-  const shouldUseGitPlugin = fs.existsSync(gitDirectoryPath)
+  // Determine if we should enable the GitRevisionPlugin.
+  // We require three things:
+  //  1. A .git directory is present (mounted or cloned)
+  //  2. The git binary exists in the runtime image
+  //  3. The developer has not explicitly disabled it via SKIP_GIT_PLUGIN=1
+  const hasGitDirectory = fs.existsSync(gitDirectoryPath)
+  let hasGitBinary = false
+  if (hasGitDirectory) {
+    try {
+      // Only check for the binary; avoid running git commands that assume a work tree.
+      require('child_process').execSync('command -v git', { stdio: 'ignore' })
+      hasGitBinary = true
+    } catch {
+      hasGitBinary = false
+    }
+  }
+  const skipByEnv = process.env.SKIP_GIT_PLUGIN === '1'
+  const shouldUseGitPlugin = hasGitDirectory && hasGitBinary && !skipByEnv
+  if (!shouldUseGitPlugin && process.env.IS_DEVELOPMENT === '1') {
+    // eslint-disable-next-line no-console
+    console.log('[webpack] Git metadata plugin disabled:', JSON.stringify({ hasGitDirectory, hasGitBinary, skipByEnv }))
+  }
   const gitRevisionPlugin = shouldUseGitPlugin ? new GitRevisionPlugin() : null
   const exportedVarsPlugin = createExportedVarsPlugin(gitRevisionPlugin)
   let plugins = [

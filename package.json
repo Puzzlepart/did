@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.16.0",
+  "version": "0.16.1-beta.0",
   "private": true,
   "engines": {
     "node": ">=22.14.0",
@@ -44,13 +44,16 @@
     "create-env": "node .tasks/createDotEnv.js",
     "tag": "node .tasks/git-tag.js",
     "update:version": "node .tasks/updateVersion.js",
+    "update:version:minor": "npm run update:version -- --minor",
     "commit": "sexy-commits",
     "docker:setup": "./scripts/docker-dev.sh setup",
     "docker:start": "./scripts/docker-dev.sh start",
     "docker:stop": "./scripts/docker-dev.sh stop",
     "docker:logs": "./scripts/docker-dev.sh logs",
     "docker:shell": "./scripts/docker-dev.sh shell",
-    "docker:clean": "./scripts/docker-dev.sh clean"
+    "docker:clean": "./scripts/docker-dev.sh clean",
+    "docker:rebuild:watch": "docker compose build did && docker compose up -d did && docker compose logs -f did",
+    "docker:watch": "docker compose up -d did && docker compose logs -f did"
   },
   "dependencies": {
     "@apollo/client": "3.10.4",

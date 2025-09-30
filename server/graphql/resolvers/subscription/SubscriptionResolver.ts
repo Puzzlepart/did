@@ -76,7 +76,7 @@ export class SubscriptionResolver {
    * @param periodId Period ID
    * @param unlock If true, unlock the period
    */
-  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_SUBSCRIPTION })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.LOCK_UNLOCK_WEEKS })
   @Mutation(() => BaseResult, { description: 'Lock or unlock a period' })
   async lockPeriod(
     @Arg('periodId') periodId: string,

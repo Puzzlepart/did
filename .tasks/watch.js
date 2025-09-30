@@ -46,8 +46,33 @@ if (_.contains(process.argv, 'analyze')) {
 }
 
 rmdir(dir, () => {
-  concurrently([
-    { command: 'nodemon', name: 'server' },
-    { command: webpackCmd, name: 'client' }
-  ], {})
+  log(chalk.yellow('[watch] Starting concurrent processes...'))
+  log(chalk.yellow(`[watch] server: nodemon`))
+  log(chalk.yellow(`[watch] client: ${webpackCmd}`))
+  const cp = concurrently([
+    { command: 'nodemon', name: 'server', prefixColor: 'blue' },
+    { command: webpackCmd, name: 'client', prefixColor: 'magenta' }
+  ], {
+    killOthers: ['failure'],
+    restartTries: 0,
+    prefix: '{name} |',
+    raw: false
+  })
+
+  // concurrently v6 returns an object with a .successPromise and .result may be undefined
+  const promise = cp.success || cp.successPromise || cp.result || cp
+  if (promise && typeof promise.then === 'function') {
+    promise.then(() => {
+      log(chalk.green('[watch] All processes exited cleanly'))
+    }).catch((error) => {
+      log(chalk.red('[watch] A process exited with error'))
+      if (Array.isArray(error)) {
+        error.forEach(e => log(chalk.red(`[watch]   -> ${e.command?.name || 'proc'} exited with code ${e.exitCode}`)))
+      } else if (error) {
+        log(chalk.red(`[watch]   -> ${error.message || error}`))
+      }
+    })
+  } else {
+    log(chalk.yellow('[watch] (info) Unable to attach completion promise; continuing'))
+  }
 })

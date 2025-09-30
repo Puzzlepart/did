@@ -2,8 +2,9 @@
  * [GraphQL](https://graphql.org/) context
  */
 import get from 'get-value'
+import _ from 'underscore'
 import { verify } from 'jsonwebtoken'
-import { MongoClient, Db as MongoDatabase } from 'mongodb'
+import { MongoClient, Db as MongoDatabase, ObjectId } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
@@ -115,21 +116,50 @@ export class RequestContext {
       context.subscription = get(request, 'user.subscription', { default: {} })
       const apiKey = get(request, 'api_key')
       if (apiKey) {
-        const { permissions, subscription } = await handleTokenAuthentication(
-          apiKey,
-          database
-        )
+        // API key path remains snapshot-based as before
+        const { permissions, subscription } = await handleTokenAuthentication(apiKey, database)
         context.permissions = permissions
         context.subscription = subscription
       } else {
+        // Populate basic user context
         context.user = get(request, 'user')
         context.userId = get(request, 'user.id')
-        context.userConfiguration = tryParseJson<Record<string, any>>(
-          get(request, 'user.configuration'),
-          {}
-        )
+        context.userConfiguration = tryParseJson<Record<string, any>>(get(request, 'user.configuration'), {})
         context.provider = get(request, 'user.provider')
-        context.permissions = get(request, 'user.role.permissions')
+
+        // Dynamic role permission resolution per request to avoid stale sessions
+        try {
+          // Use the subscription-specific database for tenant-scoped collections
+          const tenantDbName = get(request, 'user.subscription.db')
+          const tenantDb = tenantDbName ? mcl.db(tenantDbName) : database
+          const roleId = get(request, 'user.roleId') || get(request, 'user.role._id')
+          if (roleId) {
+            let objectId: ObjectId | undefined
+            try { objectId = new ObjectId(roleId) } catch { /* ignore */ }
+            const roleQuery: any = objectId ? { _id: objectId } : { _id: roleId }
+            let role = await tenantDb.collection('roles').findOne(roleQuery)
+            // If not found by _id and we have a role name, attempt name-based lookup as fallback
+            if (!role) {
+              const roleName = get(request, 'user.role.name')
+              if (roleName) {
+                role = await tenantDb.collection('roles').findOne({ name: roleName })
+                if (role) debug(`Resolved role by name fallback: ${roleName}`)
+              }
+            }
+            if (role?.permissions) {
+              context.permissions = role.permissions
+            } else {
+              context.permissions = get(request, 'user.role.permissions') || []
+              debug(`Role not resolved for id=${roleId}; using embedded permissions fallback.`)
+            }
+          } else {
+            context.permissions = get(request, 'user.role.permissions') || []
+            if (!_.isEmpty(context.permissions)) debug('No roleId; using embedded permissions (legacy).')
+          }
+        } catch (roleError) {
+          debug(`Failed dynamic role resolve: ${roleError?.message}`)
+          context.permissions = get(request, 'user.role.permissions') || []
+        }
       }
       context.db = context.mcl.db(context.subscription.db)
       context.container.set({ id: 'CONTEXT', transient: true, value: context })

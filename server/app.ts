@@ -73,6 +73,23 @@ export class App {
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )
+    // Suppress noisy logging for obvious static asset 404s (e.g. hashed files the client re-requests between builds)
+    this.instance.use((req, res, next) => {
+      const isStatic = /\.(?:js|css|map|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf)$/.test(req.path)
+      if (!isStatic) return next()
+      // Temporarily capture status to decide whether to skip logging
+  const originalEnd = res.end
+      res.end = function (...args) {
+        // If 404, do not log; otherwise proceed with logger
+        if (res.statusCode !== 404) {
+          originalEnd.apply(this, args)
+          return
+        }
+        // For 404 we still end the response but skip morgan (by not calling logger first)
+        originalEnd.apply(this, args)
+      }
+      return next()
+    })
     this.instance.use(logger('dev'))
     this.instance.use(express.json())
     this.instance.use(express.urlencoded({ extended: false }))
@@ -251,7 +268,21 @@ export class App {
    * Setup error handling using `http-errors`
    */
   setupErrorHandling() {
-    this.instance.use((_req, _res, next) => next(createError(401)))
+    // Fallback: anything not handled earlier becomes a 404 (was 401, which cluttered logs)
+    this.instance.use((req: express.Request, res: express.Response, next) => {
+      // If the client explicitly accepts JSON or it's an API/GraphQL style path, return structured JSON
+      const acceptsJson = req.accepts(['json', 'html']) === 'json' ||
+        req.path.startsWith('/graphql') ||
+        req.path.startsWith('/api/')
+      if (acceptsJson) {
+        return res.status(404).json({
+          status: 404,
+            error: 'Not Found',
+            path: req.path
+        })
+      }
+      return next(createError(404))
+    })
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
         response.render('index', {

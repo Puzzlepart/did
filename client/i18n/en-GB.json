@@ -367,13 +367,16 @@
       "confirmLockTitle": "Lock week",
       "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
       "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
-      "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}."
+  "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}.",
+  "lockPermissionDenied": "You do not have permission to lock or unlock weeks."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",
     "teamsEnabledDescription": "Enable Teams functionality like reminding users about missing submissions etc.",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
+    "roleCreatedSuccess": "Role **{{name}}** was successfully created.",
+    "roleUpdatedSuccess": "Role **{{name}}** was successfully updated.",
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months/weeks in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
@@ -967,7 +970,9 @@
     "listApiTokens": "List API-tokens",
     "listApiTokensDescription": "List existing API tokens. You only have access to basic information about the keys. Name, description, created date and when they expire. You do not have the option of extracting the actual key needed to run the query from third-party systems.",
     "inviteExternalUsers": "Invite External Users",
-    "inviteExternalUsersDescription": "Allows inviting users outside of the organization to collaborate and access resources."
+    "inviteExternalUsersDescription": "Allows inviting users outside of the organization to collaborate and access resources.",
+    "lockUnlockWeeks": "Lock/Unlock Weeks",
+    "lockUnlockWeeksDescription": "Allows locking and unlocking weeks to prevent or allow time entry modifications."
   },
   "notifications": {
     "moreLinkText": "Read more here",

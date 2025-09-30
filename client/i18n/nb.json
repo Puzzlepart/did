@@ -366,6 +366,7 @@
       "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse uken...",
       "confirmLockTitle": "Lås uke",
       "weekLockedMessage": "Uke {{weekNumber}} ble låst {{lockedAt}}."
+  ,"lockPermissionDenied": "Du har ikke tilgang til å låse eller låse opp uker."
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",
@@ -411,6 +412,8 @@
     "teamsEnabledDescription": "Aktiver Teams-funksjonalitet som å minne brukere om manglende uker osv.",
     "addNewRole": "Legg til ny rolle",
     "roleNameLabel": "Rollenavn",
+  "roleCreatedSuccess": "Rollen **{{name}}** ble opprettet.",
+  "roleUpdatedSuccess": "Rollen **{{name}}** ble oppdatert.",
     "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene/ukene i det valgte året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilganger",
@@ -964,7 +967,9 @@
     "listApiTokensDescription": "Se eksisterende API-nøkler. Du har kun tilgang til grunnleggende informasjon om nøklene. Navn, beskrivelse, opprettet dato og når de utløper. Du har ikke mulighet for å hente ut selve nøkkelen som trengs for å kjøre spørringen fra tredjeapartssystemer.",
     "listApiTokens": "Liste ut API-nøkler",
     "inviteExternalUsers": "Invitere eksterne brukere",
-    "inviteExternalUsersDescription": "Gir rettighet til å invitere brukere utenfor organisasjonen for samarbeid og tilgang til ressurser."
+    "inviteExternalUsersDescription": "Gir rettighet til å invitere brukere utenfor organisasjonen for samarbeid og tilgang til ressurser.",
+    "lockUnlockWeeks": "Lås/Lås opp uker",
+    "lockUnlockWeeksDescription": "Gir rettighet til å låse og låse opp uker for å hindre eller tillate endringer i timelister for en periode."
   },
   "notifications": {
     "moreLinkText": "Les mer her",
