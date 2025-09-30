@@ -412,6 +412,8 @@
     "teamsEnabledDescription": "Aktiver Teams-funksjonalitet som å minne brukere om manglende uker osv.",
     "addNewRole": "Legg til ei ny rolle",
     "roleNameLabel": "Rollenamn",
+  "roleCreatedSuccess": "Rolla **{{name}}** vart oppretta.",
+  "roleUpdatedSuccess": "Rolla **{{name}}** vart oppdatert.",
     "noTimeEntriesText": "Det finst ikkje stadfesta timar for dei valde månadene/vekene i det valde året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilgangar",

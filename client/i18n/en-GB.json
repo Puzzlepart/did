@@ -374,6 +374,8 @@
     "teamsEnabledDescription": "Enable Teams functionality like reminding users about missing submissions etc.",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
+    "roleCreatedSuccess": "Role **{{name}}** was successfully created.",
+    "roleUpdatedSuccess": "Role **{{name}}** was successfully updated.",
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months/weeks in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
