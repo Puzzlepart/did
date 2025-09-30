@@ -367,7 +367,8 @@
       "confirmLockTitle": "Lock week",
       "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
       "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
-      "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}."
+  "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}.",
+  "lockPermissionDenied": "You do not have permission to lock or unlock weeks."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",

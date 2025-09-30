@@ -366,6 +366,7 @@
       "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse uken...",
       "confirmLockTitle": "Lås uke",
       "weekLockedMessage": "Uke {{weekNumber}} ble låst {{lockedAt}}."
+  ,"lockPermissionDenied": "Du har ikke tilgang til å låse eller låse opp uker."
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",
