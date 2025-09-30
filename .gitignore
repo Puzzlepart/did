@@ -9,6 +9,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.local
+.env.production
+.env.*.local
 
 # Node public folder
 server/public/js
@@ -40,6 +43,17 @@ revision.txt
 .vscode/chrome-debug-user-data
 client/components/Template
 .github/copilot-instructions.md
+
+# Docker
+did-package.zip
+docker-compose.local.yml
+
+# MongoDB development data (sensitive)
+docker/data/**/*.json
+
+# Logs
+*.log
+logs/
 
 # temp folder, for e.g. copilot implementation plans
 .tmp
