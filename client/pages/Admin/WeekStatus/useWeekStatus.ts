@@ -70,33 +70,52 @@ export const useWeekStatus: ComponentLogicHook<
     const period = periods.find((p) => p.id === periodId)
     const isLocked = lockedPeriods.isLocked(periodId)
 
-    const { data } = await lockPeriod({
-      variables: {
-        periodId,
-        unlock: lockedPeriods.isLocked(periodId),
-        reason
+    try {
+      const { data } = await lockPeriod({
+        variables: {
+          periodId,
+          unlock: lockedPeriods.isLocked(periodId),
+          reason
+        },
+        errorPolicy: 'all'
+      })
+
+      // GraphQL auth/permission errors return no data or errors array; handle gracefully
+      if (!data?.result?.success) {
+        displayToast(
+          t('admin.weekStatus.lockPermissionDenied', {
+            defaultValue: t('common.accessDenied', 'Access denied')
+          }),
+          'error'
+        )
+        return
       }
-    })
 
-    if (!data.result?.success) return
+      if (isLocked) {
+        lockedPeriods.remove(periodId)
+      } else {
+        lockedPeriods.add(periodId, reason)
+      }
 
-    if (isLocked) {
-      lockedPeriods.remove(periodId)
-    } else {
-      lockedPeriods.add(periodId, reason)
-    }
-
-    const periodDisplay =
-      period?.weekNumber + (period.monthName ? ` (${period.monthName})` : '')
-    if (isLocked) {
+      const periodDisplay =
+        period?.weekNumber + (period.monthName ? ` (${period.monthName})` : '')
+      if (isLocked) {
+        displayToast(
+          t('admin.weekStatus.weekUnlocked', { period: periodDisplay }),
+          'success'
+        )
+      } else {
+        displayToast(
+          t('admin.weekStatus.weekLocked', { period: periodDisplay }),
+          'success'
+        )
+      }
+  } catch {
       displayToast(
-        t('admin.weekStatus.weekUnlocked', { period: periodDisplay }),
-        'success'
-      )
-    } else {
-      displayToast(
-        t('admin.weekStatus.weekLocked', { period: periodDisplay }),
-        'success'
+        t('admin.weekStatus.lockPermissionDenied', {
+          defaultValue: 'You do not have permission to lock or unlock weeks.'
+        }),
+        'error'
       )
     }
   }

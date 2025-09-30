@@ -16,6 +16,10 @@ query CustomerProjects ($customerKey: String) {
       key
       name
     }
+    partner {
+      key
+      name
+    }
     parentKey
     parent {
       tag

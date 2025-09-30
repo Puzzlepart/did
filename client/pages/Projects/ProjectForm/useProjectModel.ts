@@ -20,10 +20,14 @@ export function useProjectModel(props: IProjectFormProps) {
     (p) =>
       _.omit(
         {
+          // Ensure inactive has an explicit boolean value; avoid undefined -> null in mutation
+          inactive: p?.inactive ?? false,
           ...p,
           labels: mapProperty<any, string[]>(p.labels, 'name')
         },
-        ['customer', 'tag', 'outlookCategory']
+        // Omit server-resolved / object fields that are not part of ProjectInput
+        // and would otherwise leak into the mutation variables (causing GraphQL errors)
+        ['customer', 'tag', 'outlookCategory', 'partner', 'parent', 'children']
       ),
     { useNestedKeys: true }
   )

@@ -1,0 +1,39 @@
+query PartnerProjects ($customerKey: String!) {
+  partnerProjects(customerKey: $customerKey) {
+    tag
+    key
+    name
+    description
+    icon
+    inactive
+    labels {
+      name
+      description
+      color
+      icon
+    }
+    customer {
+      key
+      name
+    }
+    partner {
+      key
+      name
+    }
+    parentKey
+    parent {
+      tag
+      key
+      name
+      description
+      icon
+    }
+    children {
+      tag
+      key
+      name
+      description
+      icon
+    }
+  }
+}

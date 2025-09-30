@@ -26,7 +26,8 @@ export function useProjectList(props: IProjectListProps) {
   const columns = useColumns(props)
 
   const items = useMemo(() => {
-    let projects = context?.state?.projects ?? []
+    // Allow an explicit override of the items (e.g. partner projects on CustomerDetails page)
+    let projects = props.overrideItems ?? context?.state?.projects ?? []
     if (props.id === 'm') {
       projects = projects.filter(
         ({ outlookCategory, tag }) =>
@@ -34,7 +35,7 @@ export function useProjectList(props: IProjectListProps) {
       )
     }
     return projects
-  }, [context?.state?.projects, props.id])
+  }, [props.overrideItems, context?.state?.projects, props.id])
 
   const menuItems: IListProps['menuItems'] = ({ state }) => [
     items.some((c) => c.inactive) &&

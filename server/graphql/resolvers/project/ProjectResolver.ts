@@ -60,6 +60,22 @@ export class ProjectResolver {
   }
 
   /**
+   * Get projects where the specified customer is a partner
+   *
+   * @param customerKey - Customer key to search for as partner
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_PROJECTS })
+  @Query(() => [Project], { description: 'Get projects where customer is partner' })
+  async partnerProjects(
+    @Arg('customerKey') customerKey: string
+  ): Promise<Project[]> {
+    const { projects } = await this._projectSvc.getProjectsData(
+      { partnerKey: customerKey }
+    )
+    return projects
+  }
+
+  /**
    * Get projects where the current user is a member. It needs to check
    * the extension with the ID `2dfbce96-947f-4c26-95b4-5eda10616074`.
    *
