@@ -13,6 +13,8 @@ query MissingSubmissions (
     displayName
     mail
     lastActive
+    employmentStartDate
+    employmentEndDate
     photo {
       base64
     }
