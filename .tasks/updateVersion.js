@@ -23,14 +23,14 @@ async function updateVersion({ major, minor, patch, alpha, beta }) {
         let nextMinor = min
         let nextPatch = pat
 
-        if (argv.major) {
+        if (major) {
             nextMajor = maj + 1
             nextMinor = 0
             nextPatch = 0
-        } else if (argv.minor) {
+        } else if (minor) {
             nextMinor = min + 1
             nextPatch = 0
-        } else if (argv.patch) {
+        } else if (patch) {
             nextPatch = pat + 1
         }
 

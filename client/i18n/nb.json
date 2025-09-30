@@ -969,7 +969,7 @@
     "inviteExternalUsers": "Invitere eksterne brukere",
     "inviteExternalUsersDescription": "Gir rettighet til å invitere brukere utenfor organisasjonen for samarbeid og tilgang til ressurser.",
     "lockUnlockWeeks": "Lås/Lås opp uker",
-    "lockUnlockWeeksDescription": "Gir rettighet til å låse og låse opp uker for å hindre eller tillate endringer i tidfører registreringer."
+    "lockUnlockWeeksDescription": "Gir rettighet til å låse og låse opp uker for å hindre eller tillate endringer i timelister for en periode."
   },
   "notifications": {
     "moreLinkText": "Les mer her",
