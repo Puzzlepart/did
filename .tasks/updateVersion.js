@@ -16,12 +16,25 @@ let newVersion = currentVersion
  * @returns {Promise<void>}
  */
 async function updateVersion({ major, minor, patch, alpha, beta }) {
-    if (argv.major) {
-        newVersion = currentVersion.split('.').map((v, i) => i === 0 ? parseInt(v) + 1 : 0).splice(0, 3).join('.')
-    } else if (argv.minor) {
-        newVersion = currentVersion.split('.').map((v, i) => i === 1 ? parseInt(v) + 1 : 0).splice(0, 3).join('.')
-    } else if (argv.patch) {
-        newVersion = currentVersion.split('.').map((v, i) => i === 2 ? parseInt(v) + 1 : 0).splice(0, 3).join('.')
+    if (argv.major || argv.minor || argv.patch) {
+        const base = currentVersion.split('-')[0]
+        const [maj, min, pat] = base.split('.').map(v => parseInt(v, 10))
+        let nextMajor = maj
+        let nextMinor = min
+        let nextPatch = pat
+
+        if (argv.major) {
+            nextMajor = maj + 1
+            nextMinor = 0
+            nextPatch = 0
+        } else if (argv.minor) {
+            nextMinor = min + 1
+            nextPatch = 0
+        } else if (argv.patch) {
+            nextPatch = pat + 1
+        }
+
+        newVersion = `${nextMajor}.${nextMinor}.${nextPatch}`
     }
     else if (argv.alpha) {
         if (currentVersion.includes('-alpha')) {
