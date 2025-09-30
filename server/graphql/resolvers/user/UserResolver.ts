@@ -7,8 +7,10 @@ import { PermissionScope } from '../../../../shared/config/security'
 import {
   GitHubService,
   MSGraphService,
+  MSGraphDeltaService,
   SubscriptionService,
-  UserService
+  UserService,
+  GraphUsersEnrichmentService
 } from '../../../services'
 import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
@@ -21,7 +23,9 @@ import {
   UserFeedback,
   UserFeedbackResult,
   UserInput,
-  UserQuery
+  UserQuery,
+  UserSyncResult,
+  ActiveDirectoryManagerEnrichmentStatus
 } from './types'
 const debug = require('debug')('graphql/resolvers/user')
 
@@ -43,12 +47,14 @@ export class UserResolver {
    * Constructor for UserResolver
    *
    * @param _msgraphSvc - MS Graph service
+   * @param _msgraphDeltaSvc - MS Graph Delta sync service
    * @param _userSvc - User service
    * @param _subSvc - Subscription service
    * @param _githubSvc - GitHub service
    */
   constructor(
     private readonly _msgraphSvc: MSGraphService,
+    private readonly _msgraphDeltaSvc: MSGraphDeltaService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService,
     private readonly _githubSvc: GitHubService
@@ -83,28 +89,59 @@ export class UserResolver {
   }
 
   /**
-   * Get Active Directory users
+   * Get Active Directory users from cached MongoDB collection
+   * Uses delta sync for efficient updates. If no users exist in the database,
+   * performs initial sync automatically.
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [ActiveDirectoryUser], {
-    description: 'Get all users from Active Directory'
+    description: 'Get all users from Active Directory (via cached MongoDB collection)'
   })
-  public activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
-    return this._msgraphSvc.getUsers()
+  public async activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
+    try {
+      // Check if initial sync is needed
+      const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
+      
+      // Perform initial sync if never synced before
+      if (!syncStatus.hasBeenSynced || syncStatus.userCount === 0) {
+        debug('No users in cache, performing initial sync')
+        await this._msgraphDeltaSvc.syncUsers()
+      }
+
+      // Return cached users from MongoDB with Redis cache
+      return await this._msgraphDeltaSvc.getUsers()
+    } catch (error) {
+      debug('Error getting Active Directory users:', error.message)
+      throw error
+    }
   }
 
   /**
-   * Search Active Directory users with filters
+   * Search Active Directory users with filters from cached MongoDB collection
+   * Falls back to direct MS Graph search if cache is empty
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [ActiveDirectoryUser], {
     description: 'Search users from Active Directory with filters'
   })
-  public searchActiveDirectoryUsers(
+  public async searchActiveDirectoryUsers(
     @Arg('search', () => String) search: string,
     @Arg('limit', () => Number, { defaultValue: 10 }) limit: number
   ): Promise<ActiveDirectoryUser[]> {
-    return this._msgraphSvc.searchUsers(search, limit)
+    try {
+      const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
+      
+      // Use cached search if users are synced, otherwise fall back to direct MS Graph
+      if (syncStatus.hasBeenSynced && syncStatus.userCount > 0) {
+        return await this._msgraphDeltaSvc.searchUsers(search, limit)
+      } else {
+        debug('Cache empty, falling back to direct MS Graph search')
+        return await this._msgraphSvc.searchUsers(search, limit)
+      }
+    } catch (error) {
+      debug('Error searching Active Directory users:', error.message)
+      throw error
+    }
   }
 
   /**
@@ -225,6 +262,123 @@ export class UserResolver {
     } catch (error) {
       debug('There was an issue updating the user timebank: ', error.message)
       return { success: false }
+    }
+  }
+
+  /**
+   * Sync Active Directory users using delta query.
+   * Performs incremental sync if delta link exists, otherwise full sync.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => UserSyncResult, {
+    description: 'Sync Active Directory users using delta query'
+  })
+  public async syncActiveDirectoryUsers(
+    @Arg('forceFullSync', { nullable: true, defaultValue: false })
+    forceFullSync: boolean
+  ): Promise<UserSyncResult> {
+    try {
+      debug('Starting Active Directory user sync...')
+      const result = await this._msgraphDeltaSvc.syncUsers(forceFullSync)
+      return {
+        success: true,
+        error: null,
+        upserted: result.upserted,
+        deleted: result.deleted,
+        totalUsers: result.totalUsers,
+        isFullSync: result.isFullSync,
+        duration: result.duration
+      }
+    } catch (error) {
+      debug('Error syncing Active Directory users:', error.message)
+      return {
+        success: false,
+        error: error.message
+      }
+    }
+  }
+
+  /**
+   * Force a full sync of Active Directory users.
+   * Clears all cached data and re-syncs from scratch.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => UserSyncResult, {
+    description: 'Force a full sync of Active Directory users'
+  })
+  public async forceFullSyncActiveDirectoryUsers(): Promise<UserSyncResult> {
+    try {
+      debug('Forcing full Active Directory user sync...')
+      const result = await this._msgraphDeltaSvc.forceFullSync()
+      return {
+        success: true,
+        error: null,
+        upserted: result.upserted,
+        deleted: result.deleted,
+        totalUsers: result.totalUsers,
+        isFullSync: result.isFullSync,
+        duration: result.duration
+      }
+    } catch (error) {
+      debug('Error forcing full sync:', error.message)
+      return {
+        success: false,
+        error: error.message
+      }
+    }
+  }
+
+  /**
+   * Start background enrichment of manager information for AD users.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => ActiveDirectoryManagerEnrichmentStatus, {
+    description: 'Start background manager enrichment for Active Directory users'
+  })
+  public async startActiveDirectoryManagerEnrichment(
+    @Arg('concurrency', () => Number, { defaultValue: 10 }) concurrency: number
+  ): Promise<ActiveDirectoryManagerEnrichmentStatus> {
+    const svc = new GraphUsersEnrichmentService((this as any)['context'])
+    const status = await svc.start(concurrency)
+    return {
+      running: status.running,
+      startedAt: status.startedAt,
+      finishedAt: status.finishedAt,
+      totalUsers: status.totalUsers,
+      processed: status.processed,
+      failures: status.failures,
+      lastUserId: status.lastUserId,
+      progressPercent:
+        status.totalUsers > 0
+          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) / 100
+          : 0
+    }
+  }
+
+  /**
+   * Get background manager enrichment status.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Query(() => ActiveDirectoryManagerEnrichmentStatus, {
+    nullable: true,
+    description: 'Get background manager enrichment status'
+  })
+  public async activeDirectoryManagerEnrichmentStatus(): Promise<ActiveDirectoryManagerEnrichmentStatus> {
+    const svc = new GraphUsersEnrichmentService((this as any)['context'])
+    const status = await svc.getStatus()
+    if (!status) return null
+    return {
+      running: status.running,
+      startedAt: status.startedAt,
+      finishedAt: status.finishedAt,
+      totalUsers: status.totalUsers,
+      processed: status.processed,
+      failures: status.failures,
+      lastUserId: status.lastUserId,
+      progressPercent:
+        status.totalUsers > 0
+          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) / 100
+          : 0
     }
   }
 

@@ -400,4 +400,145 @@ export class MSGraphService {
       return false
     }
   }
+
+  /**
+   * Get manager for a specific user.
+   * Returns minimal manager object or null if not found / no permission.
+   *
+   * @param userId - User ID (GUID)
+   */
+  public async getUserManager(userId: string): Promise<any | null> {
+    try {
+      const client = await this._getClient()
+      const manager = await client
+        .api(`/users/${userId}/manager`)
+        .select(['id', 'displayName', 'mail'])
+        .get()
+      return manager
+    } catch {
+      return null
+    }
+  }
+
+  /**
+   * Get users delta - fetch incremental changes using MS Graph delta query
+   * Follows the delta link pattern with @odata.nextLink and @odata.deltaLink
+   *
+   * @param deltaLink - Previous delta link URL (null for initial sync)
+   *
+   * @returns Object containing users array, deleted user IDs, and new delta link
+   *
+   * @public
+   *
+   * @memberof MSGraphService
+   */
+  public async getUsersDelta(deltaLink: string | null = null): Promise<{
+    users: any[]
+    deletedUserIds: string[]
+    newDeltaLink: string
+  }> {
+    try {
+      const client = await this._getClient()
+      const users: any[] = []
+      const deletedUserIds: string[] = []
+
+      // Build initial request
+      let requestUrl = deltaLink
+      if (requestUrl === null) {
+        // Initial delta request (do NOT add filter/expand to keep delta supported)
+        // Only use $select (allowed) to reduce payload size.
+        // NOTE: Some tenants / permissions setups reject filters on delta for users.
+        requestUrl = '/users/delta'
+        const request = client.api(requestUrl).select([
+          'id',
+          'givenName',
+            'surname',
+            'jobTitle',
+            'displayName',
+            'mobilePhone',
+            'mail',
+            'preferredLanguage',
+            'accountEnabled'
+        ])
+
+        let response = await request.get()
+
+        // Process initial response
+        this._processDeltaResponse(response, users, deletedUserIds)
+
+        // Follow nextLink pagination
+        while (response['@odata.nextLink']) {
+          response = await client.api(response['@odata.nextLink']).get()
+          this._processDeltaResponse(response, users, deletedUserIds)
+        }
+
+        // Get the final delta link
+        const newDeltaLink = response['@odata.deltaLink'] || null
+
+        return { users, deletedUserIds, newDeltaLink }
+      } else {
+        // Use existing delta link for incremental changes
+        let response = await client.api(deltaLink).get()
+
+        // Process delta response
+        this._processDeltaResponse(response, users, deletedUserIds)
+
+        // Follow nextLink if there are more changes
+        while (response['@odata.nextLink']) {
+          response = await client.api(response['@odata.nextLink']).get()
+          this._processDeltaResponse(response, users, deletedUserIds)
+        }
+
+        // Get the new delta link
+        const newDeltaLink = response['@odata.deltaLink'] || deltaLink
+
+        return { users, deletedUserIds, newDeltaLink }
+      }
+    } catch (error) {
+      throw new MSGraphError('getUsersDelta', error.message)
+    }
+  }
+
+  /**
+   * Process a delta response and extract users and deleted user IDs
+   *
+   * @param response - The response from MS Graph delta query
+   * @param users - Array to accumulate users
+   * @param deletedUserIds - Array to accumulate deleted user IDs
+   *
+   * @private
+   *
+   * @memberof MSGraphService
+   */
+  private _processDeltaResponse(
+    response: any,
+    users: any[],
+    deletedUserIds: string[]
+  ): void {
+    if (response.value) {
+      for (const item of response.value) {
+        if (item['@removed']) {
+          // User was deleted or removed
+          deletedUserIds.push(item.id)
+        } else {
+          // User was added or updated
+          users.push(item)
+        }
+      }
+    }
+  }
+
+  /**
+   * Enrich users with manager information by fetching it separately.
+   * Delta queries don't support expand(), so we need to fetch managers individually.
+   * This is done in batches to avoid overwhelming the API.
+   *
+   * @param client - MS Graph client
+   * @param users - Array of users to enrich
+   *
+   * @private
+   *
+   * @memberof MSGraphService
+   */
+  // Manager enrichment removed for now to keep delta queries fast and compliant.
 }

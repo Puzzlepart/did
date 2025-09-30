@@ -353,3 +353,56 @@ export class ActiveDirectoryUser {
   @Field(() => User, { nullable: true })
   manager?: User
 }
+
+@ObjectType({ description: 'Active Directory manager enrichment status' })
+export class ActiveDirectoryManagerEnrichmentStatus {
+  @Field()
+  running: boolean
+
+  @Field(() => GraphQLDateTime)
+  startedAt: Date
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  finishedAt?: Date
+
+  @Field()
+  totalUsers: number
+
+  @Field()
+  processed: number
+
+  @Field()
+  failures: number
+
+  @Field({ nullable: true })
+  lastUserId?: string
+
+  @Field({ nullable: true })
+  progressPercent?: number
+}
+
+/**
+ * A type that describes the result of a user sync operation
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'Result of syncing Active Directory users',
+  simpleResolvers: true
+})
+export class UserSyncResult extends BaseResult {
+  @Field({ nullable: true })
+  upserted?: number
+
+  @Field({ nullable: true })
+  deleted?: number
+
+  @Field({ nullable: true })
+  totalUsers?: number
+
+  @Field({ nullable: true })
+  isFullSync?: boolean
+
+  @Field({ nullable: true })
+  duration?: number
+}
