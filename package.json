@@ -51,7 +51,9 @@
     "docker:stop": "./scripts/docker-dev.sh stop",
     "docker:logs": "./scripts/docker-dev.sh logs",
     "docker:shell": "./scripts/docker-dev.sh shell",
-    "docker:clean": "./scripts/docker-dev.sh clean"
+    "docker:clean": "./scripts/docker-dev.sh clean",
+    "docker:rebuild:watch": "docker compose build did && docker compose up -d did && docker compose logs -f did",
+    "docker:watch": "docker compose up -d did && docker compose logs -f did"
   },
   "dependencies": {
     "@apollo/client": "3.10.4",
