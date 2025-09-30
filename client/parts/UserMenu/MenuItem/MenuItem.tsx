@@ -1,5 +1,5 @@
 import { Button, mergeClasses } from '@fluentui/react-components'
-import React, { MouseEventHandler } from 'react'
+import React, { MouseEventHandler, forwardRef } from 'react'
 import { StyledComponent } from 'types'
 import styles from './MenuItem.module.scss'
 import { IMenuItemProps } from './types'
@@ -7,7 +7,7 @@ import { IMenuItemProps } from './types'
 /**
  * @category UserMenu
  */
-export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
+export const MenuItem: StyledComponent<IMenuItemProps> = forwardRef<HTMLDivElement, IMenuItemProps>((props, ref) => {
   let onClick: MouseEventHandler<any> = props.onClick
 
   if (props.href) {
@@ -18,6 +18,7 @@ export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
 
   return (
     <div
+      ref={ref}
       className={mergeClasses(MenuItem.className, props.className)}
       title={props.title}
       style={{
@@ -54,7 +55,7 @@ export const MenuItem: StyledComponent<IMenuItemProps> = (props) => {
       {props.children}
     </div>
   )
-}
+})
 
 MenuItem.displayName = 'MenuItem'
 MenuItem.className = styles.menuItem
