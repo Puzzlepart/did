@@ -452,13 +452,13 @@ export class MSGraphService {
         const request = client.api(requestUrl).select([
           'id',
           'givenName',
-            'surname',
-            'jobTitle',
-            'displayName',
-            'mobilePhone',
-            'mail',
-            'preferredLanguage',
-            'accountEnabled'
+          'surname',
+          'jobTitle',
+          'displayName',
+          'mobilePhone',
+          'mail',
+          'preferredLanguage',
+          'accountEnabled'
         ])
 
         let response = await request.get()
