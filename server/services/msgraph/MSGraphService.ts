@@ -435,7 +435,7 @@ export class MSGraphService {
   public async getUsersDelta(deltaLink: string | null = null): Promise<{
     users: any[]
     deletedUserIds: string[]
-    newDeltaLink: string
+    newDeltaLink: string | null
   }> {
     try {
       const client = await this._getClient()

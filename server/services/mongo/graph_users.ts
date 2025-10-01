@@ -50,14 +50,20 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
     limit: number = 10
   ): Promise<ActiveDirectoryUser[]> {
     try {
-      const regex = new RegExp(search, 'i')
+      const term = (search ?? '').trim()
+      if (!term) return []
+      // Escape regex metacharacters to prevent injection / ReDoS
+      const escaped = term.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&')
+      // Optionally cap length to mitigate excessive backtracking on huge inputs
+      const safe = escaped.slice(0, 200)
+      const regex = new RegExp(safe, 'i')
       const users = await this.collection
         .find({
           $or: [
-            { displayName: regex },
-            { givenName: regex },
-            { surname: regex },
-            { mail: regex }
+        { displayName: regex },
+        { givenName: regex },
+        { surname: regex },
+        { mail: regex }
           ]
         })
         .limit(limit)
