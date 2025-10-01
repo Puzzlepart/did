@@ -696,6 +696,7 @@
     "project": "Prosjekt",
     "sumLabel": "Sum",
     "customer": "Kunde",
+    "partner": "Partner",
     "startTimeLabel": "Starttid",
     "endTimeLabel": "Sluttid",
     "hoursShortFormat_singular": "{{hours}}t",

@@ -26,6 +26,12 @@ export function useColumns() {
         minWidth: 100
       },
       {
+        key: 'partner',
+        fieldName: 'partner.name',
+        name: t('common.partner'),
+        minWidth: 100
+      },
+      {
         key: 'duration',
         fieldName: 'duration',
         name: t('common.durationLabel'),

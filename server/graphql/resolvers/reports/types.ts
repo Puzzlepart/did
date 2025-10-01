@@ -62,6 +62,9 @@ export class TimeEntry {
   @Field(() => Customer)
   customer: Customer
 
+  @Field(() => Customer, { nullable: true })
+  partner: Customer
+
   @Field(() => User)
   resource: User
 

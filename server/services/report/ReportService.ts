@@ -80,6 +80,9 @@ export class ReportService {
           customers,
           (c) => c.key === _.first(entry.projectId.split(' '))
         )
+        const partner = project?.partnerKey
+          ? _.find(customers, (c) => c.key === project.partnerKey)
+          : null
         if (!project || !customer || !resource) {
           return entries
         }
@@ -95,6 +98,9 @@ export class ReportService {
             'labels'
           ),
           customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
+          partner: partner
+            ? _.pick(partner, 'key', 'name', 'description', 'icon')
+            : null,
           resource
         }
         return [...entries, mergedEntry]
