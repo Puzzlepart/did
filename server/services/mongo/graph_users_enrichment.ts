@@ -28,7 +28,7 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
     super(context, 'graph_users_enrichment')
     this._graphUsers = new GraphUsersService(context)
     // MSGraphService is scoped – create new instance for direct calls
-    this._msGraph = new MSGraphService((null as unknown) as any, null, context)
+    this._msGraph = new MSGraphService(undefined, null, context)
   }
 
   private _statusId = 'manager_enrichment'

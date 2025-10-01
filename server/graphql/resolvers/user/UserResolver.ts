@@ -51,13 +51,15 @@ export class UserResolver {
    * @param _userSvc - User service
    * @param _subSvc - Subscription service
    * @param _githubSvc - GitHub service
+   * @param _graphUsersEnrichmentSvc - Graph Users Enrichment service
    */
   constructor(
     private readonly _msgraphSvc: MSGraphService,
     private readonly _msgraphDeltaSvc: MSGraphDeltaService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService,
-    private readonly _githubSvc: GitHubService
+    private readonly _githubSvc: GitHubService,
+    private readonly _graphUsersEnrichmentSvc: GraphUsersEnrichmentService
   ) {}
 
   /**
@@ -338,8 +340,7 @@ export class UserResolver {
   public async startActiveDirectoryManagerEnrichment(
     @Arg('concurrency', () => Number, { defaultValue: 10 }) concurrency: number
   ): Promise<ActiveDirectoryManagerEnrichmentStatus> {
-    const svc = new GraphUsersEnrichmentService((this as any)['context'])
-    const status = await svc.start(concurrency)
+    const status = await this._graphUsersEnrichmentSvc.start(concurrency)
     return {
       running: status.running,
       startedAt: status.startedAt,
@@ -364,8 +365,7 @@ export class UserResolver {
     description: 'Get background manager enrichment status'
   })
   public async activeDirectoryManagerEnrichmentStatus(): Promise<ActiveDirectoryManagerEnrichmentStatus> {
-    const svc = new GraphUsersEnrichmentService((this as any)['context'])
-    const status = await svc.getStatus()
+    const status = await this._graphUsersEnrichmentSvc.getStatus()
     if (!status) return null
     return {
       running: status.running,
