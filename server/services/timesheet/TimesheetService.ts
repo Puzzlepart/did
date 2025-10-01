@@ -323,11 +323,6 @@ export class TimesheetService {
     userId: string,
     includeSplitWeeks = true
   ): TimesheetPeriodObject[] {
-    // Runtime assertion (uses debug) to help diagnose constructor issues without console.* lint violations
-    const dbg = require('debug')('services/timesheet')
-    try {
-      dbg('TimesheetPeriodObject typeof = %s', typeof TimesheetPeriodObject)
-    } catch {}
     const range = {
       startDate: new DateObject(startDate),
       endDate: new DateObject(startDate).endOfWeek
