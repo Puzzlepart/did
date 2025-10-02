@@ -97,7 +97,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [ActiveDirectoryUser], {
-    description: 'Get all users from Active Directory (via cached MongoDB collection)'
+    description: 'Get all users from Entra ID (via cached MongoDB collection)'
   })
   public async activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
     try {
@@ -124,7 +124,7 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [ActiveDirectoryUser], {
-    description: 'Search users from Active Directory with filters'
+    description: 'Search users from Entra ID with filters'
   })
   public async searchActiveDirectoryUsers(
     @Arg('search', () => String) search: string,

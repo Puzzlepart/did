@@ -351,7 +351,8 @@
       "removeExternalUserSuccess": "Their access to the system has been removed. If you ever need to invite them again, you can do it easily from the user management page.",
       "removeExternalUserErrorTitle": "Something went wrong while removing external user {{displayName}}.",
       "removeExternalUserSuccessTitle": "Success! External user {{displayName}} no longer has access.",
-      "searchInactiveUsersLabel": "Search {{usersCount}} inactive users..."
+      "searchInactiveUsersLabel": "Search {{usersCount}} inactive users...",
+      "includeUsersWithoutGivenName": "Include users with no given name"
     },
     "weekStatus": {
       "headerText": "Week status",
@@ -367,8 +368,8 @@
       "confirmLockTitle": "Lock week",
       "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
       "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
-  "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}.",
-  "lockPermissionDenied": "You do not have permission to lock or unlock weeks."
+      "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}.",
+      "lockPermissionDenied": "You do not have permission to lock or unlock weeks."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",
@@ -847,8 +848,8 @@
     "cancelButtonLabel": "Cancel",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "User settings",
-    "adUserLabel": "User from Active Directory",
-    "adUserRequired": "You must select an Active Directory user to add.",
+    "adUserLabel": "User from Entra ID",
+    "adUserRequired": "You must select an Entra ID user to add.",
     "labelFieldLabel": "Labels",
     "filterLabels": "Filter labels...",
     "labelsText": "Labels",

@@ -71,6 +71,7 @@
     "ignoreAllTooltip": "Ignorer alle hendingar som ikkje er tilkopla eitt prosjekt.",
     "eventNoTitleErrorText": "Legg inn eit emne for denne hendinga. Arrangement utan emne vil ikkje bli inkludert i timelista.",
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
+    "manuallyResolveEventActionTooltip": "Klikk for å manuelt løyse hendinga {{title}}. Hugs at det alltid er best å halde Outlook-kalenderen din oppdatert.",
     "timesheet": {
       "projectLabelsTooltipText": "hei"
     },
@@ -306,7 +307,8 @@
       "removeExternalUserSuccess": "Vi har fjerna tilgangen deira til systemet. Om du vil invitere dei igjen seinare, kan du enkelt gjere det frå brukarstyringssida.",
       "removeExternalUserErrorTitle": "Noko gjekk galt ved fjerning av ekstern brukar {{displayName}}.",
       "removeExternalUserSuccessTitle": "Ekstern brukar {{displayName}} er no fjerna frå systemet.",
-      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukarar..."
+      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukarar...",
+      "includeUsersWithoutGivenName": "Inkludér brukarar utan namn (givenName i Entra ID)"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

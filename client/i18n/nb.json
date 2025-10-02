@@ -71,6 +71,7 @@
     "ignoreAllTooltip": "Ignorer alle hendelser som ikke er tilkoblet ett prosjekt.",
     "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten.",
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
+    "manuallyResolveEventActionTooltip": "Klikk for å manuelt løse hendelsen {{title}}. Husk at det alltid er best å holde Outlook-kalenderen din oppdatert.",
     "timebank": {
       "balance": " Du har {{balance}} timer i tidsbanken din.",
       "balanceAdjustmentLabel": "{{balanceAdjustment}} timer",
@@ -182,6 +183,7 @@
     "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder.",
     "projecNotReadyOrNotFound": "Prosjektet er foreløpig ikke tilgjengelig. Hvis det nettopp ble opprettet, kan du prøve igjen om noen få øyeblikk. Ellers kan det hende at det ikke eksisterer.",
     "projecNotReadyOrNotFoundTitle": "Prosjektet er utilgjengelig",
+    "homeButtonLabel": "Gå tilbake til prosjektsiden",
     "projectOwner": "Prosjekteier",
     "noAutomaticTimeEntriesText": "Klikk **{{buttonText}}** for å laste inn tidsoppføringene for dette prosjektet."
   },
@@ -303,7 +305,8 @@
       "removeExternalUserSuccess": "Vi har fjernet tilgangen deres til systemet. Hvis du ønsker å invitere dem igjen senere, kan du enkelt gjøre det fra brukerstyringssiden.",
       "removeExternalUserErrorTitle": "Noe gikk galt ved fjerning av ekstern bruker {{displayName}}.",
       "removeExternalUserSuccessTitle": "Ekstern bruker {{displayName}} er nå fjernet fra systemet.",
-      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukere..."
+      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukere...",
+      "includeUsersWithoutGivenName": "Inkluder brukere uten fornavn"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",

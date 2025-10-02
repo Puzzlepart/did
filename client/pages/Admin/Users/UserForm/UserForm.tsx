@@ -9,7 +9,7 @@ import {
 import { Button, Spinner } from '@fluentui/react-components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyledComponent } from 'types'
+import { StyledComponent, UserInput } from 'types'
 import styles from './UserForm.module.scss'
 import { IUserFormProps } from './types'
 import { useUserForm } from './useUserForm'
@@ -58,15 +58,22 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         })}
         label={t('common.adUserLabel')}
         placeholder={t('common.searchPlaceholder')}
-        items={availableAdUsers.map((u) => ({
-          key: u.id,
-          text: u.displayName,
-          searchValue: [u.displayName, u.mail].filter(Boolean).join(' '),
-          data: u
-        }))}
+        items={availableAdUsers
+          .filter((u) => model.value(('includeUsersWithoutGivenName' as keyof UserInput)) || u.givenName)
+          .map((u) => ({
+        key: u.id,
+        text: `${u.displayName} (${u.mail})`,
+        searchValue: [u.displayName, u.mail].filter(Boolean).join(' '),
+        data: u
+          }))}
         onSelected={onSelectUser}
         hidden={isEditMode || !hasUsers}
         minCharacters={2}
+      />
+      <CheckboxControl
+        {...register(('includeUsersWithoutGivenName' as keyof UserInput))}
+        label={t('admin.users.includeUsersWithoutGivenName')}
+        hidden={isEditMode || !hasUsers}
       />
       <InputControl
         {...register('surname')}
