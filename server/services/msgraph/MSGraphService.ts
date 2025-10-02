@@ -442,24 +442,23 @@ export class MSGraphService {
       const users: any[] = []
       const deletedUserIds: string[] = []
 
-      // Build initial request
-      let requestUrl = deltaLink
-      if (requestUrl === null) {
+      if (deltaLink === null) {
         // Initial delta request (do NOT add filter/expand to keep delta supported)
         // Only use $select (allowed) to reduce payload size.
         // NOTE: Some tenants / permissions setups reject filters on delta for users.
-        requestUrl = '/users/delta'
-        const request = client.api(requestUrl).select([
-          'id',
-          'givenName',
-          'surname',
-          'jobTitle',
-          'displayName',
-          'mobilePhone',
-          'mail',
-          'preferredLanguage',
-          'accountEnabled'
-        ])
+        const request = client
+          .api('/users/delta')
+          .select([
+            'id',
+            'givenName',
+            'surname',
+            'jobTitle',
+            'displayName',
+            'mobilePhone',
+            'mail',
+            'preferredLanguage',
+            'accountEnabled'
+          ])
 
         let response = await request.get()
 
