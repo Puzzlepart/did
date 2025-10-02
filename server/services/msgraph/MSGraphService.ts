@@ -495,7 +495,7 @@ export class MSGraphService {
         return { users, deletedUserIds, newDeltaLink }
       }
     } catch (error) {
-      throw new MSGraphError('getUsersDelta', error.message)
+      throw new MSGraphError('getUsersDelta', error instanceof Error ? error.message : String(error))
     }
   }
 
