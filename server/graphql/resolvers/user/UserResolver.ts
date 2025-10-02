@@ -348,6 +348,10 @@ export class UserResolver {
       totalUsers: status.totalUsers,
       processed: status.processed,
       failures: status.failures,
+      rateLimitErrors: status.rateLimitErrors || 0,
+      networkErrors: status.networkErrors || 0,
+      authErrors: status.authErrors || 0,
+      otherErrors: status.otherErrors || 0,
       lastUserId: status.lastUserId,
       progressPercent:
         status.totalUsers > 0
@@ -374,6 +378,10 @@ export class UserResolver {
       totalUsers: status.totalUsers,
       processed: status.processed,
       failures: status.failures,
+      rateLimitErrors: status.rateLimitErrors || 0,
+      networkErrors: status.networkErrors || 0,
+      authErrors: status.authErrors || 0,
+      otherErrors: status.otherErrors || 0,
       lastUserId: status.lastUserId,
       progressPercent:
         status.totalUsers > 0

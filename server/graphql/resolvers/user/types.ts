@@ -374,6 +374,18 @@ export class ActiveDirectoryManagerEnrichmentStatus {
   @Field()
   failures: number
 
+  @Field()
+  rateLimitErrors: number
+
+  @Field()
+  networkErrors: number
+
+  @Field()
+  authErrors: number
+
+  @Field()
+  otherErrors: number
+
   @Field({ nullable: true })
   lastUserId?: string
 
