@@ -170,10 +170,21 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
   private async _launchWorker(concurrency: number) {
     if (this._isWorkerRunning) return
     this._isWorkerRunning = true
-    debug('Starting enrichment worker with concurrency %d...', concurrency)
-    
+    const effectiveConcurrency = Math.min(
+      Math.max(MIN_CONCURRENCY, concurrency),
+      MAX_CONCURRENCY
+    )
+    if (effectiveConcurrency !== concurrency) {
+      debug(
+        'Adjusted enrichment concurrency from %d to %d to stay within bounds',
+        concurrency,
+        effectiveConcurrency
+      )
+    }
+    debug('Starting enrichment worker with concurrency %d...', effectiveConcurrency)
+
     let batchCount = 0
-    
+
     try {
       // Process users without manager field OR manager null
       while (true) {
@@ -194,9 +205,9 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
         
         const batch = await this._graphUsers.collection
           .find({ $or: [{ manager: { $exists: false } }, { manager: null }] })
-          .limit(concurrency)
+          .limit(effectiveConcurrency)
           .toArray()
-          
+
         if (batch.length === 0) {
           await this.collection.updateOne(
             { id: this._statusId },
@@ -283,9 +294,9 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
         }
         
         batchCount++
-        
-        // Add delay between batches to prevent sustained high load
-        if (batch.length > 0) {
+
+        // Add delay between batches when we hit the concurrency cap to avoid hammering services
+        if (batch.length === effectiveConcurrency) {
           await new Promise((resolve) => setTimeout(resolve, BATCH_DELAY_MS))
         }
       }
