@@ -32,7 +32,11 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
           />
         </div>
         <ResponsiveContainer
-          width={props.container?.clientWidth / 2}
+          width={
+            props.container?.clientWidth
+              ? props.container.clientWidth / 2
+              : '100%'
+          }
           height={500}
         >
           <PieChart>
