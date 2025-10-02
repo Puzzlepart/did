@@ -69,7 +69,7 @@ export const AutocompleteControl: FormInputControlComponent<
                   value={option.key as string}
                   text={option.text}
                   checkIcon={null}
-                  disabled={(option as any).disabled}
+                  disabled={option.disabled}
                 >
                   {renderOption(option)}
                 </Option>
