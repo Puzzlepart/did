@@ -133,6 +133,18 @@ export class ReportsQuery {
    */
   @Field({ nullable: true })
   year?: number
+
+  /**
+   * Maximum number of results to return (for pagination)
+   */
+  @Field({ nullable: true })
+  limit?: number
+
+  /**
+   * Number of results to skip (for pagination)
+   */
+  @Field({ nullable: true })
+  skip?: number
 }
 
 /**

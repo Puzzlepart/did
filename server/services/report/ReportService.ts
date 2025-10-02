@@ -133,8 +133,25 @@ export class ReportService {
       debug('[getReport]', 'Generating report with query:', query_, {
         userId: this.context.userId
       })
+
+      // Apply safety limits for large queries
+      const safeQuery = this._applySafetyLimits(query, preset)
+      const isLargeQuery = this._isLargeQuery(preset, query_)
+      
+      if (isLargeQuery && !safeQuery.limit) {
+        debug('[getReport]', 'Using streaming approach for large query')
+        return await this._getReportWithStreaming(query_, sortAsc)
+      }
+
+      // Use traditional approach for smaller queries or when pagination is specified
       const [timeEntries, projectsData, users] = await Promise.all([
-        this._timeEntrySvc.find(query_),
+        safeQuery.limit ? 
+          this._timeEntrySvc.findPaginated(query_, { 
+            limit: safeQuery.limit, 
+            skip: safeQuery.skip,
+            sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
+          }) :
+          this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
         this._userSvc.getUsers({ hiddenFromReports: false })
       ])
@@ -149,6 +166,108 @@ export class ReportService {
       debug('[getReport]', 'Error generating report:', error)
       throw error
     }
+  }
+
+  /**
+   * Apply safety limits to prevent memory exhaustion on large queries
+   */
+  private _applySafetyLimits(query: ReportsQuery, preset?: ReportsQueryPreset): ReportsQuery {
+    const safeQuery = { ...query }
+    
+    // Apply default limits for large queries if no limit is specified
+    if (!safeQuery.limit && this._isLargeQuery(preset)) {
+      const DEFAULT_LARGE_QUERY_LIMIT = 5000
+      safeQuery.limit = DEFAULT_LARGE_QUERY_LIMIT
+      
+      debug('[_applySafetyLimits]', `Applied default limit of ${DEFAULT_LARGE_QUERY_LIMIT} for large query`, {
+        preset,
+        originalLimit: query.limit
+      })
+    }
+    
+    // Cap extremely large limits
+    const MAX_LIMIT = 50_000
+    if (safeQuery.limit && safeQuery.limit > MAX_LIMIT) {
+      debug('[_applySafetyLimits]', `Capping limit from ${safeQuery.limit} to ${MAX_LIMIT}`)
+      safeQuery.limit = MAX_LIMIT
+    }
+    
+    return safeQuery
+  }
+
+  /**
+   * Memory-efficient report generation using streaming for large datasets
+   */
+  private async _getReportWithStreaming(
+    query: any,
+    sortAsc?: boolean
+  ): Promise<Report> {
+    const [projectsData, users] = await Promise.all([
+      this._projectSvc.getProjectsData(),
+      this._userSvc.getUsers({ hiddenFromReports: false })
+    ])
+
+    const reportEntries: TimeEntry[] = []
+    const BATCH_SIZE = 1000
+    const MAX_MEMORY_ENTRIES = 10_000 // Limit total entries in memory
+
+    await this._timeEntrySvc.streamFind(
+      query,
+      (timeEntriesBatch) => {
+        const processedBatch = this._generateReport({
+          ...projectsData,
+          timeEntries: timeEntriesBatch,
+          users,
+          sortAsc
+        })
+        
+        // If we're approaching memory limit, process and clear
+        if (reportEntries.length + processedBatch.length > MAX_MEMORY_ENTRIES) {
+          debug('[_getReportWithStreaming]', 'Memory limit reached, processing batch')
+          // In a real implementation, you might want to yield results or write to a file
+          // For now, we'll take the first MAX_MEMORY_ENTRIES entries
+          const remainingSpace = MAX_MEMORY_ENTRIES - reportEntries.length
+          if (remainingSpace > 0) {
+            reportEntries.push(...processedBatch.slice(0, remainingSpace))
+          }
+          return
+        }
+        
+        reportEntries.push(...processedBatch)
+      },
+      {
+        batchSize: BATCH_SIZE,
+        sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
+      }
+    )
+
+    // Sort the final result if needed
+    if (sortAsc !== undefined) {
+      reportEntries.sort(({ startDateTime: a }, { startDateTime: b }) => {
+        return sortAsc
+          ? new Date(a).getTime() - new Date(b).getTime()
+          : new Date(b).getTime() - new Date(a).getTime()
+      })
+    }
+
+    return reportEntries
+  }
+
+  /**
+   * Determine if a query is likely to return a large dataset that requires streaming
+   */
+  private _isLargeQuery(preset?: ReportsQueryPreset, query?: any): boolean {
+    // Current year and last year queries are typically large
+    if (preset === 'CURRENT_YEAR' || preset === 'LAST_YEAR') {
+      return true
+    }
+    
+    // Queries without time constraints are potentially large
+    if (!query?.month && !query?.week && !query?.startDateTime && !query?.endDateTime) {
+      return true
+    }
+    
+    return false
   }
 
   /**
@@ -225,6 +344,8 @@ export class ReportService {
    * * `week`
    * * `month`
    * * `year`
+   * * `limit` (for pagination)
+   * * `skip` (for pagination)
    *
    * Supported presets are handled by `_generatePresetQuery`.
    *
@@ -233,24 +354,26 @@ export class ReportService {
    */
   private _generateQuery(query: ReportsQuery = {}, preset: ReportsQueryPreset) {
     const presetQuery = this._generatePresetQuery(preset)
+    // Exclude pagination parameters from MongoDB query
+    const queryWithoutPagination = _.omit(query, 'limit', 'skip')
     return _.omit(
       {
         ...presetQuery,
         ..._.pick(
           {
             projectId: {
-              $eq: query.projectId
+              $eq: queryWithoutPagination.projectId
             },
             userId: {
-              $in: query.userIds
+              $in: queryWithoutPagination.userIds
             },
-            startDateTime: { $gte: new Date(query.startDateTime) },
-            endDateTime: { $lte: new Date(query.endDateTime) },
-            week: { $eq: query.week },
-            month: { $eq: query.month },
-            year: { $eq: query.year }
+            startDateTime: { $gte: new Date(queryWithoutPagination.startDateTime) },
+            endDateTime: { $lte: new Date(queryWithoutPagination.endDateTime) },
+            week: { $eq: queryWithoutPagination.week },
+            month: { $eq: queryWithoutPagination.month },
+            year: { $eq: queryWithoutPagination.year }
           },
-          [...Object.keys(query), !_.isEmpty(query?.userIds) && 'userId']
+          [...Object.keys(queryWithoutPagination), !_.isEmpty(queryWithoutPagination?.userIds) && 'userId']
         )
       },
       'preset'

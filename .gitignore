@@ -57,3 +57,6 @@ logs/
 
 # temp folder, for e.g. copilot implementation plans
 .tmp
+
+# Documentation output
+_doc
