@@ -352,7 +352,8 @@
       "removeExternalUserErrorTitle": "Something went wrong while removing external user {{displayName}}.",
       "removeExternalUserSuccessTitle": "Success! External user {{displayName}} no longer has access.",
       "searchInactiveUsersLabel": "Search {{usersCount}} inactive users...",
-      "includeUsersWithoutGivenName": "Include users with no given name"
+      "includeUsersWithoutGivenName": "Include users with no given name",
+      "showAlreadyAddedUsers": "Show already added users"
     },
     "weekStatus": {
       "headerText": "Week status",
@@ -850,6 +851,7 @@
     "userSettingsPanelHeaderText": "User settings",
     "adUserLabel": "User from Entra ID",
     "adUserRequired": "You must select an Entra ID user to add.",
+    "userAlreadyAdded": "Already added to system",
     "labelFieldLabel": "Labels",
     "filterLabels": "Filter labels...",
     "labelsText": "Labels",

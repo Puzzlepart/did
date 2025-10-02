@@ -308,7 +308,8 @@
       "removeExternalUserErrorTitle": "Noko gjekk galt ved fjerning av ekstern brukar {{displayName}}.",
       "removeExternalUserSuccessTitle": "Ekstern brukar {{displayName}} er no fjerna frå systemet.",
       "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukarar...",
-      "includeUsersWithoutGivenName": "Inkludér brukarar utan namn (givenName i Entra ID)"
+      "includeUsersWithoutGivenName": "Inkludér brukarar utan namn (givenName i Entra ID)",
+      "showAlreadyAddedUsers": "Vis allereie tillagde brukarar"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -850,6 +851,7 @@
     "userSettingsPanelHeaderText": "Brukerinstillingar",
     "adUserLabel": "Brukar frå Active Directory",
     "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
+    "userAlreadyAdded": "Allereie lagt til i systemet",
     "labelFieldLabel": "Merkelappar",
     "filterLabels": "Filtrer merkelappar...",
     "labelsText": "Merkelappar",
