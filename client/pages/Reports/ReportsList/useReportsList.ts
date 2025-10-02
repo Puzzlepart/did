@@ -8,6 +8,7 @@ import { useMenuItems } from './useMenuItems'
 import { IListProps } from 'components'
 import { Caption1 } from '@fluentui/react-components'
 import { IReportsListProps } from './types'
+import { useReportsExcelExportCommand } from '../hooks/useReportsExcelExportCommand'
 
 /**
  * This hook to gather all hooks calls for the `ReportsList` component.
@@ -19,6 +20,8 @@ export function useReportsList(props: IReportsListProps) {
   const context = useContext(ReportsContext)
   const columns = useColumns()
   const menuItems = useMenuItems(props)
+  const { progress: exportProgress, progressMessage: exportProgressMessage } = 
+    useReportsExcelExportCommand(props)
 
   const createPlaceholder: IListProps['searchBox']['placeholder'] = (state) => {
     const hours = state.origItems
@@ -50,6 +53,8 @@ export function useReportsList(props: IReportsListProps) {
     columns,
     menuItems,
     createPlaceholder,
-    createContentAfter
+    createContentAfter,
+    exportProgress,
+    exportProgressMessage
   }
 }
