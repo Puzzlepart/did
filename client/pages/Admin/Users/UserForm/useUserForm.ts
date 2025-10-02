@@ -105,7 +105,7 @@ export function useUserForm(props: IUserFormProps) {
     if (showAlreadyAddedUsers !== null && showAlreadyAddedUsers !== undefined) {
       model.set('showAlreadyAddedUsers' as any, showAlreadyAddedUsers)
     }
-  }, [initialModel])
+  }, [initialModel, model])
 
   const formControlProps: IFormControlProps = {
     id: UserForm.displayName,
