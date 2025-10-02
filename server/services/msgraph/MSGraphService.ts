@@ -421,6 +421,30 @@ export class MSGraphService {
   }
 
   /**
+   * Get a specific user by ID with full profile information including manager.
+   * Returns user object or null if not found / no permission.
+   *
+   * @param userId - User ID (GUID)
+   */
+  public async getUser(userId: string): Promise<any | null> {
+    try {
+      const client = await this._getClient()
+      const user = await client
+        .api(`/users/${userId}`)
+        .expand('manager')
+        .select([
+          'id', 'displayName', 'givenName', 'surname', 'mail', 
+          'jobTitle', 'department', 'officeLocation', 'mobilePhone',
+          'accountEnabled', 'manager'
+        ])
+        .get()
+      return user
+    } catch {
+      return null
+    }
+  }
+
+  /**
    * Get users delta - fetch incremental changes using MS Graph delta query
    * Follows the delta link pattern with @odata.nextLink and @odata.deltaLink
    *

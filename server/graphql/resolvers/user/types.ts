@@ -354,8 +354,8 @@ export class ActiveDirectoryUser {
   manager?: User
 }
 
-@ObjectType({ description: 'Active Directory manager enrichment status' })
-export class ActiveDirectoryManagerEnrichmentStatus {
+@ObjectType({ description: 'User database update status' })
+export class UserDatabaseUpdateStatus {
   @Field()
   running: boolean
 

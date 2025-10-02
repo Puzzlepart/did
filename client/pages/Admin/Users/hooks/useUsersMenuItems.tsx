@@ -1,7 +1,7 @@
 import { ListMenuItem, Progress } from 'components'
 import { usePermissions } from 'hooks/user/usePermissions'
 import _ from 'lodash'
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { IUsersContext } from '../context'
@@ -15,6 +15,8 @@ import {
 } from '../reducer/actions'
 import { useRevokeExternalAccess } from '../UserForm'
 import { useUsersSync } from './useUsersSync'
+import { useUserDatabaseUpdate } from './useUserDatabaseUpdate'
+import { useUserDatabaseUpdateStatus } from './useUserDatabaseUpdateStatus'
 
 /**
  * Returns an array of menu items for the Users tab in the Admin section.
@@ -27,6 +29,28 @@ export function useUsersMenuItems(context: IUsersContext) {
   const { t } = useTranslation()
   const [, hasPermission] = usePermissions()
   const syncUsers = useUsersSync(context)
+  const updateUserDatabase = useUserDatabaseUpdate(context)
+  const { status: updateStatus, isRunning: isUpdateRunning } = useUserDatabaseUpdateStatus()
+  const [showCompletion, setShowCompletion] = useState(false)
+  const [wasRunning, setWasRunning] = useState(false)
+
+  // Track completion state - show "Complete!" for 3 seconds after finishing
+  useEffect(() => {
+    // Track if the job was running
+    if (isUpdateRunning) {
+      setWasRunning(true)
+    }
+    
+    // If it was running and now it's not running and has finished, show completion
+    if (wasRunning && !isUpdateRunning && updateStatus?.finishedAt && !showCompletion) {
+      setShowCompletion(true)
+      setWasRunning(false) // Reset the tracking
+      const timer = setTimeout(() => {
+        setShowCompletion(false)
+      }, 3000) // Show completion for 3 seconds
+      return () => clearTimeout(timer)
+    }
+  }, [isUpdateRunning, updateStatus?.finishedAt, wasRunning, showCompletion])
   const revokeExternalAccess = useRevokeExternalAccess<ListMenuItem>(
     _.first(context.state.selectedUsers),
     () => {
@@ -78,6 +102,35 @@ export function useUsersMenuItems(context: IUsersContext) {
           await syncUsers()
           context.dispatch(CLEAR_PROGRESS())
         }),
+      new ListMenuItem(
+        showCompletion
+          ? t('admin.users.userDatabaseUpdateComplete')
+          : (isUpdateRunning && updateStatus
+            ? t('admin.users.userDatabaseUpdateStatus', {
+                processed: updateStatus.processed,
+                total: updateStatus.totalUsers,
+                percent: Math.round(updateStatus.progressPercent || 0)
+              })
+            : t('admin.users.updateUserDatabaseLabel'))
+      )
+        .withIcon(
+          showCompletion 
+            ? 'CheckMark' 
+            : (isUpdateRunning 
+              ? 'ProgressRingDots' 
+              : 'DatabaseSync')
+        )
+        .setDisabled(context.state.loading || context.state.adUsersLoading || isUpdateRunning || showCompletion)
+        .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
+        .setOnClick(async () => {
+          if (!isUpdateRunning && !showCompletion) {
+            context.dispatch(
+              SET_PROGRESS(t('admin.users.updatingUserDatabase'))
+            )
+            await updateUserDatabase()
+            context.dispatch(CLEAR_PROGRESS())
+          }
+        }),
       new ListMenuItem().setCustomRender(() => (
         <Progress
           text={context.state.progress}
@@ -107,6 +160,10 @@ export function useUsersMenuItems(context: IUsersContext) {
     context.state.loading,
     context.state.adUsersLoading,
     context.state.progress,
-    context.state.selectedUsers
+    context.state.selectedUsers,
+    isUpdateRunning,
+    updateStatus,
+    showCompletion,
+    wasRunning
   ])
 }

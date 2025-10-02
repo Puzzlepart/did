@@ -10,7 +10,7 @@ import {
   MSGraphDeltaService,
   SubscriptionService,
   UserService,
-  GraphUsersEnrichmentService
+  GraphUsersUpdateService
 } from '../../../services'
 import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
@@ -25,7 +25,7 @@ import {
   UserInput,
   UserQuery,
   UserSyncResult,
-  ActiveDirectoryManagerEnrichmentStatus
+  UserDatabaseUpdateStatus
 } from './types'
 const debug = require('debug')('graphql/resolvers/user')
 
@@ -51,7 +51,7 @@ export class UserResolver {
    * @param _userSvc - User service
    * @param _subSvc - Subscription service
    * @param _githubSvc - GitHub service
-   * @param _graphUsersEnrichmentSvc - Graph Users Enrichment service
+   * @param _graphUsersUpdateSvc - Graph Users Update service
    */
   constructor(
     private readonly _msgraphSvc: MSGraphService,
@@ -59,7 +59,7 @@ export class UserResolver {
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService,
     private readonly _githubSvc: GitHubService,
-    private readonly _graphUsersEnrichmentSvc: GraphUsersEnrichmentService
+    private readonly _graphUsersUpdateSvc: GraphUsersUpdateService
   ) {}
 
   /**
@@ -331,16 +331,16 @@ export class UserResolver {
   }
 
   /**
-   * Start background enrichment of manager information for AD users.
+   * Start background update of user database from Entra ID.
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
-  @Mutation(() => ActiveDirectoryManagerEnrichmentStatus, {
-    description: 'Start background manager enrichment for Active Directory users'
+  @Mutation(() => UserDatabaseUpdateStatus, {
+    description: 'Start background user database update from Entra ID'
   })
-  public async startActiveDirectoryManagerEnrichment(
+  public async startUserDatabaseUpdate(
     @Arg('concurrency', () => Number, { defaultValue: 10 }) concurrency: number
-  ): Promise<ActiveDirectoryManagerEnrichmentStatus> {
-    const status = await this._graphUsersEnrichmentSvc.start(concurrency)
+  ): Promise<UserDatabaseUpdateStatus> {
+    const status = await this._graphUsersUpdateSvc.start(concurrency)
     return {
       running: status.running,
       startedAt: status.startedAt,
@@ -361,15 +361,15 @@ export class UserResolver {
   }
 
   /**
-   * Get background manager enrichment status.
+   * Get background user database update status.
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
-  @Query(() => ActiveDirectoryManagerEnrichmentStatus, {
+  @Query(() => UserDatabaseUpdateStatus, {
     nullable: true,
-    description: 'Get background manager enrichment status'
+    description: 'Get background user database update status'
   })
-  public async activeDirectoryManagerEnrichmentStatus(): Promise<ActiveDirectoryManagerEnrichmentStatus> {
-    const status = await this._graphUsersEnrichmentSvc.getStatus()
+  public async userDatabaseUpdateStatus(): Promise<UserDatabaseUpdateStatus> {
+    const status = await this._graphUsersUpdateSvc.getStatus()
     if (!status) return null
     return {
       running: status.running,

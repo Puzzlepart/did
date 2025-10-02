@@ -14,9 +14,9 @@ const MAX_RETRIES = 3
 const INITIAL_RETRY_DELAY_MS = 1000
 const MAX_RETRY_DELAY_MS = 30_000
 
-export interface GraphUsersEnrichmentStatusDoc {
+export interface GraphUsersUpdateStatusDoc {
   _id?: string
-  id: string // fixed: 'manager_enrichment'
+  id: string // fixed: 'user_database_update'
   startedAt: Date
   finishedAt?: Date
   totalUsers: number
@@ -33,13 +33,13 @@ export interface GraphUsersEnrichmentStatusDoc {
 }
 
 @Service({ global: false })
-export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsersEnrichmentStatusDoc> {
+export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpdateStatusDoc> {
   private _graphUsers: GraphUsersService
   private _msGraph: MSGraphService
   private _isWorkerRunning = false
 
   constructor(@Inject('CONTEXT') readonly context: RequestContext) {
-    super(context, 'graph_users_enrichment')
+    super(context, 'graph_users_update')
     this._graphUsers = new GraphUsersService(context)
     // MSGraphService is scoped – create new instance for direct calls
     this._msGraph = new MSGraphService(undefined, null, context)
@@ -120,13 +120,13 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
     return 'other'
   }
 
-  private _statusId = 'manager_enrichment'
+  private _statusId = 'user_database_update'
 
-  public async getStatus(): Promise<GraphUsersEnrichmentStatusDoc | null> {
+  public async getStatus(): Promise<GraphUsersUpdateStatusDoc | null> {
     return (await this.collection.findOne({ id: this._statusId })) as any
   }
 
-  public async start(concurrency = 10): Promise<GraphUsersEnrichmentStatusDoc> {
+  public async start(concurrency = 10): Promise<GraphUsersUpdateStatusDoc> {
     // Check for existing running process with heartbeat validation
     const existing = await this.getStatus()
     if (existing?.running) {
@@ -144,7 +144,7 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
     
     const totalUsers = await this._graphUsers.collection.countDocuments({})
     const safeConcurrency = Math.min(Math.max(MIN_CONCURRENCY, concurrency), MAX_CONCURRENCY)
-    const doc: GraphUsersEnrichmentStatusDoc = {
+    const doc: GraphUsersUpdateStatusDoc = {
       id: this._statusId,
       startedAt: new Date(),
       totalUsers,
@@ -181,18 +181,18 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
         effectiveConcurrency
       )
     }
-    debug('Starting enrichment worker with concurrency %d...', effectiveConcurrency)
-
+    debug('Starting user database update worker with concurrency %d...', concurrency)
+    
     let batchCount = 0
-
+    
     try {
-      // Process users without manager field OR manager null
+      // Process all users to get updated information from Entra ID
       while (true) {
         // Check status every N batches to allow for graceful stopping
         if (batchCount % STATUS_CHECK_INTERVAL === 0) {
           const status = await this.getStatus()
           if (!status?.running) {
-            debug('Enrichment stopped by external request')
+            debug('User database update stopped by external request')
             break
           }
           
@@ -203,27 +203,27 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
           )
         }
         
+        // Get batch of users to update
         const batch = await this._graphUsers.collection
-          .find({ $or: [{ manager: { $exists: false } }, { manager: null }] })
-          .limit(effectiveConcurrency)
+          .find({})
+          .skip(batchCount * concurrency)
+          .limit(concurrency)
           .toArray()
-
+          
         if (batch.length === 0) {
           await this.collection.updateOne(
             { id: this._statusId },
             { $set: { running: false, finishedAt: new Date() } }
           )
-          debug('Enrichment complete - no more users to process')
+          debug('User database update complete - no more users to process')
           break
         }
         
-        debug('Processing batch of %d users (batch #%d)', batch.length, batchCount + 1)
-        
-        // Process batch with enhanced error handling
+        debug('Processing batch of %d users (batch #%d)', batch.length, batchCount + 1)        // Process batch with enhanced error handling
         const promises = batch.map(async (user) => {
           try {
-            const { result: manager, errorType } = await this._retryWithBackoff(
-              () => this._msGraph.getUserManager(user.id),
+            const { result: updatedUser, errorType } = await this._retryWithBackoff(
+              () => this._msGraph.getUser(user.id),
               user.id
             )
             
@@ -254,12 +254,8 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
                 { $inc: { failures: 1, [errorField]: 1 } }
               )
               
-              // For 'notFound' errors, still update the user with null manager
+              // For 'notFound' errors, mark as processed but don't update user
               if (errorType === 'notFound') {
-                await this._graphUsers.collection.updateOne(
-                  { id: user.id },
-                  { $set: { manager: null } }
-                )
                 await this.collection.updateOne(
                   { id: this._statusId },
                   { $inc: { processed: 1 }, $set: { lastUserId: user.id } }
@@ -268,11 +264,20 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
               return { success: false, userId: user.id, error: errorType }
             }
             
-            // Success - update user and increment processed count
-            await this._graphUsers.collection.updateOne(
-              { id: user.id },
-              { $set: { manager: manager || null } }
-            )
+            // Success - merge updated data with existing user and update
+            if (updatedUser) {
+              const mergedUser = {
+                ...user,
+                ...updatedUser,
+                id: user.id // Ensure ID stays the same
+              }
+              
+              await this._graphUsers.collection.updateOne(
+                { id: user.id },
+                { $set: mergedUser }
+              )
+            }
+            
             await this.collection.updateOne(
               { id: this._statusId },
               { $inc: { processed: 1 }, $set: { lastUserId: user.id } }
@@ -301,14 +306,14 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
         }
       }
     } catch (error) {
-      debug('Critical error in enrichment worker: %s', error.message)
+      debug('Critical error in user database update worker: %s', error.message)
       await this.collection.updateOne(
         { id: this._statusId },
         { $set: { running: false, finishedAt: new Date() } }
       )
     } finally {
       this._isWorkerRunning = false
-      debug('Enrichment worker stopped')
+      debug('User database update worker stopped')
     }
   }
   public async stop(): Promise<void> {

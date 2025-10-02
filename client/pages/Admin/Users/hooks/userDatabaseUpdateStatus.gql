@@ -1,0 +1,16 @@
+query UserDatabaseUpdateStatus {
+  userDatabaseUpdateStatus {
+    running
+    startedAt
+    finishedAt
+    totalUsers
+    processed
+    failures
+    rateLimitErrors
+    networkErrors
+    authErrors
+    otherErrors
+    lastUserId
+    progressPercent
+  }
+}
