@@ -52,22 +52,14 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
     try {
       const term = (search ?? '').trim()
       if (!term) return []
-      // Escape regex metacharacters to prevent injection / ReDoS
-      const escaped = term.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&')
-      // Optionally cap length to mitigate excessive backtracking on huge inputs
-      const safe = escaped.slice(0, 200)
-      const regex = new RegExp(safe, 'i')
+      // NOTE: Requires a text index on displayName, givenName, surname, mail fields.
+      // db.graph_users.createIndex({ displayName: "text", givenName: "text", surname: "text", mail: "text" })
+      const safe = term.slice(0, 200)
       const users = await this.collection
-        .find({
-          $or: [
-        { displayName: regex },
-        { givenName: regex },
-        { surname: regex },
-        { mail: regex }
-          ]
-        })
+        .find({ $text: { $search: safe } })
         .limit(limit)
-        .sort({ displayName: 1 })
+        .sort({ score: { $meta: "textScore" } })
+        .project({ score: { $meta: "textScore" } })
         .toArray()
       return users as ActiveDirectoryUser[]
     } catch (error) {
