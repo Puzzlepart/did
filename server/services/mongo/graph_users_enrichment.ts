@@ -55,7 +55,7 @@ export class GraphUsersEnrichmentService extends MongoDocumentService<GraphUsers
   ): Promise<{ result: T | null; errorType: string | null }> {
     let lastError: Error
     
-    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         const result = await operation()
         return { result, errorType: null }
