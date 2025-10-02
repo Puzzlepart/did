@@ -104,10 +104,12 @@ export class UserResolver {
       // Check if initial sync is needed
       const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
       
-      // Perform initial sync if never synced before
+      // If initial sync is needed, trigger it in the background
       if (!syncStatus.hasBeenSynced || syncStatus.userCount === 0) {
-        debug('No users in cache, performing initial sync')
-        await this._msgraphDeltaSvc.syncUsers()
+        debug('No users in cache, triggering initial sync in background')
+        this._msgraphDeltaSvc.syncUsers().catch((err: any) => {
+          debug('Background initial sync failed:', err.message)
+        })
       }
 
       // Return cached users from MongoDB with Redis cache
