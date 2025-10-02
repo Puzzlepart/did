@@ -8,9 +8,9 @@ import { ISuggestionItem } from './types'
  *
  * @param option The option to render.
  */
-export const renderOption = (option: ISuggestionItem<any>): ReactElement => {
-  const isDisabled = (option as any).disabled
-  const optionClass = isDisabled ? `${styles.option} ${styles.disabled || 'disabled'}` : styles.option
+export const renderOption = (option: ISuggestionItem<any> & { disabled?: boolean }): ReactElement => {
+  const isDisabled = option.disabled
+  const optionClass = isDisabled && styles.disabled ? `${styles.option} ${styles.disabled}` : styles.option
   return (
     <div className={optionClass}>
       <div className={styles.container}>
