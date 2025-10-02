@@ -138,12 +138,27 @@ export class ReportService {
       const safeQuery = this._applySafetyLimits(query, preset)
       const isLargeQuery = this._isLargeQuery(preset, query_)
       
+      debug('[getReport]', 'Query analysis:', {
+        preset,
+        originalQuery: query,
+        safeQuery,
+        isLargeQuery,
+        hasLimit: !!safeQuery.limit,
+        willUseStreaming: isLargeQuery && !safeQuery.limit
+      })
+      
       if (isLargeQuery && !safeQuery.limit) {
         debug('[getReport]', 'Using streaming approach for large query')
         return await this._getReportWithStreaming(query_, sortAsc)
       }
 
       // Use traditional approach for smaller queries or when pagination is specified
+      debug('[getReport]', 'Using pagination approach', {
+        limit: safeQuery.limit,
+        skip: safeQuery.skip,
+        queryKeys: Object.keys(query_)
+      })
+      
       const [timeEntries, projectsData, users] = await Promise.all([
         safeQuery.limit ? 
           this._timeEntrySvc.findPaginated(query_, { 
@@ -155,12 +170,18 @@ export class ReportService {
         this._projectSvc.getProjectsData(),
         this._userSvc.getUsers({ hiddenFromReports: false })
       ])
+      
+      debug('[getReport]', `Retrieved ${timeEntries.length} time entries for processing`)
+      
       const report = this._generateReport({
         ...projectsData,
         timeEntries,
         users,
         sortAsc
       })
+      
+      debug('[getReport]', `Generated report with ${report.length} entries`)
+      
       return report
     } catch (error) {
       debug('[getReport]', 'Error generating report:', error)
