@@ -43,7 +43,7 @@ export function useUserForm(props: IUserFormProps) {
     if (!isEditMode && context.state.adUsers.length === 0 && !context.state.adUsersLoading) {
       loadUsers()
     }
-  }, [isEditMode])
+  }, [isEditMode, context.state.adUsers, context.state.adUsersLoading, loadUsers])
 
   const adSyncProperties = get(
     appContext,
