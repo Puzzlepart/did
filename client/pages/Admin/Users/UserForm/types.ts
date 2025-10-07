@@ -61,9 +61,8 @@ export function createUserInput(user: User, defaultRole = 'User'): UserInput {
   const cleanedUser = omitTypename(userWithRole)
   
   // Remove photo field using object destructuring
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { photo: _photo, ...userInput } = cleanedUser as any
-  
-  
   
   return userInput as UserInput
 }
