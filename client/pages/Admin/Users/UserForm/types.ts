@@ -61,9 +61,9 @@ export function createUserInput(user: User, defaultRole = 'User'): UserInput {
   const cleanedUser = omitTypename(userWithRole)
   
   // Remove photo field using object destructuring
-  const { photo, ...userInput } = cleanedUser as any
-  // Ignore unused 'photo' variable
-  void photo
+  const { photo: _photo, ...userInput } = cleanedUser as any
+  
+  
   
   return userInput as UserInput
 }
