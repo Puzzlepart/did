@@ -65,6 +65,11 @@ ComponentName/
 - User profiles include manager relationships
 
 ### Database & Caching
+- **Multi-Tenant Architecture**: Each customer has their own MongoDB database
+  - Configuration/metadata stored in `main` database
+  - Time entries, projects, users stored in customer-specific databases (e.g., `puzzlepart`, `crayon`)
+  - Database name determined by user's subscription during authentication
+  - Scripts/tools must specify customer database explicitly
 - MongoDB for persistent data storage
 - Redis for sessions and API response caching
 - TypeDI dependency injection on server
