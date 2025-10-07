@@ -1,6 +1,7 @@
 import { OperationVariables } from '@apollo/client'
 import { IPanelProps } from 'components/Panel'
 import { User, UserInput } from 'types'
+import { omitTypename } from 'utils'
 import _ from 'underscore'
 
 export interface IUserFormProps extends IPanelProps {
@@ -54,12 +55,12 @@ function getUserRole(user: User, defaultRole: string): string {
  */
 export function createUserInput(user: User, defaultRole = 'User'): UserInput {
   if (!user) return null
+  const userWithRole = {
+    ...user,
+    role: getUserRole(user, defaultRole)
+  }
   const userInput: UserInput = _.omit(
-    {
-      ...user,
-      role: getUserRole(user, defaultRole)
-    },
-    '__typename',
+    omitTypename(userWithRole),
     'photo'
   ) as UserInput
   return userInput
