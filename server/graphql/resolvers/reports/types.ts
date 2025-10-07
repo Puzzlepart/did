@@ -76,6 +76,30 @@ export class TimeEntry {
 }
 
 /**
+ * Paginated report result including metadata for client-side navigation.
+ */
+@ObjectType({ description: 'Paginated report page result' })
+export class ReportPageResult {
+  @Field(() => [TimeEntry])
+  entries: TimeEntry[]
+
+  @Field({ description: 'True when additional pages exist after this one' })
+  hasMore: boolean
+
+  @Field({ nullable: true, description: 'Total matching entries (may be approximate for very large queries)' })
+  totalCount?: number
+
+  @Field({ nullable: true })
+  limit?: number
+
+  @Field({ nullable: true })
+  skip?: number
+
+  @Field({ nullable: true })
+  preset?: string
+}
+
+/**
  * Reports query preset
  *
  * @category GraphQL Type

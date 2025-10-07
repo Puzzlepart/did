@@ -8,7 +8,8 @@ import {
   ConfirmedPeriodsQuery,
   ReportsQuery,
   ReportsQueryPreset,
-  TimeEntry
+  TimeEntry,
+  ReportPageResult
 } from '../../graphql/resolvers/types'
 import {
   ConfirmedPeriodsService,
@@ -190,6 +191,57 @@ export class ReportService {
   }
 
   /**
+   * Get a single paginated page of a report.
+   *
+   * Provides explicit paging metadata so clients can iterate without risk
+   * of silent truncation.
+   */
+  public async getReportPage(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {},
+    sortAsc?: boolean
+  ): Promise<ReportPageResult> {
+    const limit = query.limit || 1000
+    const skip = query.skip || 0
+    const query_ = this._generateQuery(query, preset)
+
+    debug('[getReportPage]', 'Fetching page', { preset, limit, skip, query_ })
+
+    const [projectsData, users] = await Promise.all([
+      this._projectSvc.getProjectsData(),
+      this._userSvc.getUsers({ hiddenFromReports: false })
+    ])
+
+    // Execute count and page fetch sequentially to avoid double query building complexity.
+    const totalCount = await this._timeEntrySvc.collection.countDocuments(
+      this._timeEntrySvc['_extendQuery'](query_)
+    )
+    const items = await this._timeEntrySvc.findPaginated(query_, {
+      limit,
+      skip,
+      sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
+    })
+
+    const entries = this._generateReport({
+      ...projectsData,
+      timeEntries: items,
+      users,
+      sortAsc
+    })
+
+    const hasMore = skip + items.length < totalCount
+
+    return {
+      entries,
+      hasMore,
+      totalCount,
+      limit,
+      skip,
+      preset
+    }
+  }
+
+  /**
    * Apply safety limits to prevent memory exhaustion on large queries
    */
   private _applySafetyLimits(query: ReportsQuery, preset?: ReportsQueryPreset): ReportsQuery {
@@ -244,14 +296,9 @@ export class ReportService {
         
         // If we're approaching memory limit, process and clear
         if (reportEntries.length + processedBatch.length > MAX_MEMORY_ENTRIES) {
-          debug('[_getReportWithStreaming]', 'Memory limit reached, processing batch')
-          // In a real implementation, you might want to yield results or write to a file
-          // For now, we'll take the first MAX_MEMORY_ENTRIES entries
-          const remainingSpace = MAX_MEMORY_ENTRIES - reportEntries.length
-          if (remainingSpace > 0) {
-            reportEntries.push(...processedBatch.slice(0, remainingSpace))
-          }
-          return
+          const message = 'Report too large to stream without pagination. Use reportPage with limit/skip.'
+          debug('[_getReportWithStreaming]', message)
+          throw new Error(message)
         }
         
         reportEntries.push(...processedBatch)

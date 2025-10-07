@@ -10,7 +10,8 @@ import {
   ConfirmedPeriodsQuery,
   ReportsQuery,
   ReportsQueryPreset,
-  TimeEntry
+  TimeEntry,
+  ReportPageResult
 } from './types'
 
 /**
@@ -53,6 +54,21 @@ export class ReportsResolver {
     @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
   ): Promise<TimeEntry[]> {
     return await this._report.getReport(preset, query, sortAsc)
+  }
+
+  /**
+   * Get a paginated report page. Use this instead of the legacy `report` query
+   * for large datasets to avoid memory pressure and to detect completion.
+   */
+  @Query(() => ReportPageResult, {
+    description: 'Get a paginated report page (use for large datasets).'
+  })
+  async reportPage(
+    @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
+    @Arg('query', { nullable: true }) query?: ReportsQuery,
+    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
+  ): Promise<ReportPageResult> {
+    return await this._report.getReportPage(preset, query, sortAsc)
   }
 
   /**
