@@ -22,7 +22,8 @@ export const CustomerDetails: StyledComponent = () => {
   const context = useCustomersContext()
   const history = useHistory()
   const urlParams = useParams<ICustomersUrlParameters>()
-  const { projects, partnerProjects, error, tabs, refetch } = useCustomerDetails()
+  const { projects, partnerProjects, error, tabs, refetch } =
+    useCustomerDetails()
 
   // Redirect if URL explicitly targets partner tab but it is not available (no partner projects)
   useEffect(() => {
