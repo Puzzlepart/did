@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
+import { omitTypename } from 'utils'
 import $addUsers from './addUsers.gql'
 import { IUsersContext } from '../context'
 import { useUsersReducer } from '../reducer'
@@ -51,7 +51,7 @@ export function useUsers() {
     await addUsers({
       variables: {
         users: users.map((user) => ({
-          ..._.omit(user, '__typename'),
+          ...omitTypename(user),
           provider: 'azuread-openidconnect'
         }))
       }
