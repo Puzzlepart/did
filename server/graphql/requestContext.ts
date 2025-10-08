@@ -117,14 +117,20 @@ export class RequestContext {
       const apiKey = get(request, 'api_key')
       if (apiKey) {
         // API key path remains snapshot-based as before
-        const { permissions, subscription } = await handleTokenAuthentication(apiKey, database)
+        const { permissions, subscription } = await handleTokenAuthentication(
+          apiKey,
+          database
+        )
         context.permissions = permissions
         context.subscription = subscription
       } else {
         // Populate basic user context
         context.user = get(request, 'user')
         context.userId = get(request, 'user.id')
-        context.userConfiguration = tryParseJson<Record<string, any>>(get(request, 'user.configuration'), {})
+        context.userConfiguration = tryParseJson<Record<string, any>>(
+          get(request, 'user.configuration'),
+          {}
+        )
         context.provider = get(request, 'user.provider')
 
         // Dynamic role permission resolution per request to avoid stale sessions
@@ -132,17 +138,26 @@ export class RequestContext {
           // Use the subscription-specific database for tenant-scoped collections
           const tenantDbName = get(request, 'user.subscription.db')
           const tenantDb = tenantDbName ? mcl.db(tenantDbName) : database
-          const roleId = get(request, 'user.roleId') || get(request, 'user.role._id')
+          const roleId =
+            get(request, 'user.roleId') || get(request, 'user.role._id')
           if (roleId) {
             let objectId: ObjectId | undefined
-            try { objectId = new ObjectId(roleId) } catch { /* ignore */ }
-            const roleQuery: any = objectId ? { _id: objectId } : { _id: roleId }
+            try {
+              objectId = new ObjectId(roleId)
+            } catch {
+              /* ignore */
+            }
+            const roleQuery: any = objectId
+              ? { _id: objectId }
+              : { _id: roleId }
             let role = await tenantDb.collection('roles').findOne(roleQuery)
             // If not found by _id and we have a role name, attempt name-based lookup as fallback
             if (!role) {
               const roleName = get(request, 'user.role.name')
               if (roleName) {
-                role = await tenantDb.collection('roles').findOne({ name: roleName })
+                role = await tenantDb
+                  .collection('roles')
+                  .findOne({ name: roleName })
                 if (role) debug(`Resolved role by name fallback: ${roleName}`)
               }
             }
@@ -150,11 +165,14 @@ export class RequestContext {
               context.permissions = role.permissions
             } else {
               context.permissions = get(request, 'user.role.permissions') || []
-              debug(`Role not resolved for id=${roleId}; using embedded permissions fallback.`)
+              debug(
+                `Role not resolved for id=${roleId}; using embedded permissions fallback.`
+              )
             }
           } else {
             context.permissions = get(request, 'user.role.permissions') || []
-            if (!_.isEmpty(context.permissions)) debug('No roleId; using embedded permissions (legacy).')
+            if (!_.isEmpty(context.permissions))
+              debug('No roleId; using embedded permissions (legacy).')
           }
         } catch (roleError) {
           debug(`Failed dynamic role resolve: ${roleError?.message}`)

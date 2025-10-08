@@ -7,14 +7,16 @@ const publicRoutes = new Set(['/termsofservice', '/privacystatement', '/'])
 
 // Check if a URL is a static asset or API route that should not require authentication
 const isPublicResource = (url: string): boolean => {
-  return publicRoutes.has(url) ||
-         url.startsWith('/js/') ||
-         url.startsWith('/css/') ||
-         url.startsWith('/assets/') ||
-         url.startsWith('/auth/') ||
-         url.startsWith('/graphql') ||
-         url.startsWith('/health_check') ||
-         url.includes('.') // Files with extensions (js, css, ico, etc.)
+  return (
+    publicRoutes.has(url) ||
+    url.startsWith('/js/') ||
+    url.startsWith('/css/') ||
+    url.startsWith('/assets/') ||
+    url.startsWith('/auth/') ||
+    url.startsWith('/graphql') ||
+    url.startsWith('/health_check') ||
+    url.includes('.')
+  ) // Files with extensions (js, css, ico, etc.)
 }
 
 /**

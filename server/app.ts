@@ -75,10 +75,13 @@ export class App {
     )
     // Suppress noisy logging for obvious static asset 404s (e.g. hashed files the client re-requests between builds)
     this.instance.use((req, res, next) => {
-      const isStatic = /\.(?:js|css|map|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf)$/.test(req.path)
+      const isStatic =
+        /\.(?:js|css|map|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf)$/.test(
+          req.path
+        )
       if (!isStatic) return next()
       // Temporarily capture status to decide whether to skip logging
-  const originalEnd = res.end
+      const originalEnd = res.end
       res.end = function (...args) {
         // If 404, do not log; otherwise proceed with logger
         if (res.statusCode !== 404) {
@@ -250,13 +253,16 @@ export class App {
     this.instance.get('*', (req, res, next) => {
       const url = req.path
       // Skip if it's a static asset or API route
-      if (url.startsWith('/js/') || 
-          url.startsWith('/css/') || 
-          url.startsWith('/assets/') || 
-          url.startsWith('/auth/') || 
-          url.startsWith('/graphql') || 
-          url.startsWith('/health_check') ||
-          url.includes('.')) { // Skip files with extensions (js, css, ico, etc.)
+      if (
+        url.startsWith('/js/') ||
+        url.startsWith('/css/') ||
+        url.startsWith('/assets/') ||
+        url.startsWith('/auth/') ||
+        url.startsWith('/graphql') ||
+        url.startsWith('/health_check') ||
+        url.includes('.')
+      ) {
+        // Skip files with extensions (js, css, ico, etc.)
         return next()
       }
       // Handle as a page route
@@ -271,14 +277,15 @@ export class App {
     // Fallback: anything not handled earlier becomes a 404 (was 401, which cluttered logs)
     this.instance.use((req: express.Request, res: express.Response, next) => {
       // If the client explicitly accepts JSON or it's an API/GraphQL style path, return structured JSON
-      const acceptsJson = req.accepts(['json', 'html']) === 'json' ||
+      const acceptsJson =
+        req.accepts(['json', 'html']) === 'json' ||
         req.path.startsWith('/graphql') ||
         req.path.startsWith('/api/')
       if (acceptsJson) {
         return res.status(404).json({
           status: 404,
-            error: 'Not Found',
-            path: req.path
+          error: 'Not Found',
+          path: req.path
         })
       }
       return next(createError(404))

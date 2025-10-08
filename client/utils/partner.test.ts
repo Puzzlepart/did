@@ -38,7 +38,7 @@ test('Partner project filtering logic', (t) => {
       name: 'Project 1'
     },
     {
-      key: 'PROJ2', 
+      key: 'PROJ2',
       customerKey: 'CUSTB',
       partnerKey: 'PARTB',
       name: 'Project 2'
@@ -58,21 +58,21 @@ test('Partner project filtering logic', (t) => {
   ]
 
   // Filter projects where PARTB is partner
-  const partnerBProjects = allProjects.filter(p => p.partnerKey === 'PARTB')
-  
+  const partnerBProjects = allProjects.filter((p) => p.partnerKey === 'PARTB')
+
   t.is(partnerBProjects.length, 2)
   t.is(partnerBProjects[0].key, 'PROJ1')
   t.is(partnerBProjects[1].key, 'PROJ2')
 
-  // Filter projects where PARTA is partner  
-  const partnerAProjects = allProjects.filter(p => p.partnerKey === 'PARTA')
-  
+  // Filter projects where PARTA is partner
+  const partnerAProjects = allProjects.filter((p) => p.partnerKey === 'PARTA')
+
   t.is(partnerAProjects.length, 1)
   t.is(partnerAProjects[0].key, 'PROJ3')
 
   // Filter projects with no partner
-  const noPartnerProjects = allProjects.filter(p => !p.partnerKey)
-  
+  const noPartnerProjects = allProjects.filter((p) => !p.partnerKey)
+
   t.is(noPartnerProjects.length, 1)
   t.is(noPartnerProjects[0].key, 'PROJ4')
 })

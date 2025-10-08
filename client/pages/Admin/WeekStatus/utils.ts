@@ -12,7 +12,10 @@ import { useWeekStatusQuery } from './useWeekStatusQuery'
  * @param user - User with employment dates
  * @param datePeriod - Date period to check against
  */
-const isUserEmployedDuringPeriod = (user: User, datePeriod: IDatePeriod): boolean => {
+const isUserEmployedDuringPeriod = (
+  user: User,
+  datePeriod: IDatePeriod
+): boolean => {
   // If user has no employment start/end dates, assume they should be included
   if (!user.employmentStartDate && !user.employmentEndDate) {
     return true
@@ -22,8 +25,12 @@ const isUserEmployedDuringPeriod = (user: User, datePeriod: IDatePeriod): boolea
   const periodEnd = datePeriod.endDate.$.toDate()
 
   // Check if user employment period overlaps with the date period
-  const employmentStart = user.employmentStartDate ? new Date(user.employmentStartDate) : null
-  const employmentEnd = user.employmentEndDate ? new Date(user.employmentEndDate) : null
+  const employmentStart = user.employmentStartDate
+    ? new Date(user.employmentStartDate)
+    : null
+  const employmentEnd = user.employmentEndDate
+    ? new Date(user.employmentEndDate)
+    : null
 
   // If only start date is set, check if period end is after employment start
   if (employmentStart && !employmentEnd) {
@@ -107,7 +114,8 @@ export const getUsersWithMissingPeriods = (
         !_.any(
           periods,
           ({ userId, week, month, year }) =>
-            userId === user.id && [week, month, year].join('_') === datePeriod.id
+            userId === user.id &&
+            [week, month, year].join('_') === datePeriod.id
         )
     )
     return missingPeriods.length > 0 && mapUser(user, missingPeriods)

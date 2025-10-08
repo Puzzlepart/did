@@ -2,7 +2,7 @@ import { format } from '@fluentui/react'
 import { UserMessage } from 'components'
 import React from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'
-import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { Legend, Pie, PieChart, Tooltip } from 'recharts'
 import { StyledComponent } from 'types'
 import { useTimesheetContext } from '../../../context'
 import { ChartTooltip } from './ChartTooltip'
@@ -31,11 +31,22 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
             style={{ width: '80%' }}
           />
         </div>
-        <ResponsiveContainer
-          width={props.container?.clientWidth / 2}
-          height={500}
+        <div
+          style={{
+            width: props.container?.clientWidth
+              ? props.container.clientWidth / 2
+              : '100%',
+            height: 500
+          }}
         >
-          <PieChart>
+          <PieChart
+            width={
+              props.container?.clientWidth
+                ? props.container.clientWidth / 2
+                : 400
+            }
+            height={500}
+          >
             <Tooltip
               content={<ChartTooltip showFullTooltip={showFullTooltip.value} />}
             />
@@ -54,7 +65,7 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
               {cells}
             </Pie>
           </PieChart>
-        </ResponsiveContainer>
+        </div>
       </FadeIn>
     </div>
   )

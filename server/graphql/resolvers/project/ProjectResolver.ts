@@ -65,13 +65,15 @@ export class ProjectResolver {
    * @param customerKey - Customer key to search for as partner
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_PROJECTS })
-  @Query(() => [Project], { description: 'Get projects where customer is partner' })
+  @Query(() => [Project], {
+    description: 'Get projects where customer is partner'
+  })
   async partnerProjects(
     @Arg('customerKey') customerKey: string
   ): Promise<Project[]> {
-    const { projects } = await this._projectSvc.getProjectsData(
-      { partnerKey: customerKey }
-    )
+    const { projects } = await this._projectSvc.getProjectsData({
+      partnerKey: customerKey
+    })
     return projects
   }
 

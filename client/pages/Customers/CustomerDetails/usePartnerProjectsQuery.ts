@@ -20,6 +20,9 @@ export function usePartnerProjectsQuery(
     skip: !customer,
     fetchPolicy
   })
-  const partnerProjects = useMemo(() => query?.data?.partnerProjects ?? [], [query])
+  const partnerProjects = useMemo(
+    () => query?.data?.partnerProjects ?? [],
+    [query]
+  )
   return [partnerProjects, query] as const
 }
