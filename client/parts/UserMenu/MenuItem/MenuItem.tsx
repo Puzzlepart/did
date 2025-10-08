@@ -7,7 +7,10 @@ import { IMenuItemProps } from './types'
 /**
  * @category UserMenu
  */
-export const MenuItem: StyledComponent<IMenuItemProps> = forwardRef<HTMLDivElement, IMenuItemProps>((props, ref) => {
+export const MenuItem: StyledComponent<IMenuItemProps> = forwardRef<
+  HTMLDivElement,
+  IMenuItemProps
+>((props, ref) => {
   let onClick: MouseEventHandler<any> = props.onClick
 
   if (props.href) {
