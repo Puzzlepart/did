@@ -110,7 +110,7 @@ export const useWeekStatus: ComponentLogicHook<
           'success'
         )
       }
-  } catch {
+    } catch {
       displayToast(
         t('admin.weekStatus.lockPermissionDenied', {
           defaultValue: 'You do not have permission to lock or unlock weeks.'
