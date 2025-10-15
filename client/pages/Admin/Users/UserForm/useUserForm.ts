@@ -43,7 +43,8 @@ export function useUserForm(props: IUserFormProps) {
     if (!isEditMode && context.state.adUsers.length === 0 && !context.state.adUsersLoading) {
       loadUsers()
     }
-  }, [isEditMode, context.state.adUsers, context.state.adUsersLoading, loadUsers])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditMode])
 
   const adSyncProperties = get(
     appContext,
