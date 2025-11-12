@@ -12,7 +12,9 @@ import {
   OPEN_CUSTOMER_PANEL,
   OPEN_PROJECT_PANEL,
   SET_SELECTED_CUSTOMER,
-  SET_SELECTED_CUSTOMERS
+  SET_SELECTED_CUSTOMERS,
+  OPEN_BULK_EDIT_PANEL,
+  CLOSE_BULK_EDIT_PANEL
 } from './actions'
 /**
  * Use Customers reducer. It will create the initial state
@@ -32,7 +34,8 @@ export function useCustomersReducer() {
         open: false
       }
     },
-    selectedCustomers: []
+    selectedCustomers: [],
+    bulkEditPanelOpen: false
   }
   const urlParameters = useParams<ICustomersUrlParameters>()
   return useReducer(initialState, (builder) =>
@@ -89,6 +92,12 @@ export function useCustomersReducer() {
       })
       .addCase(SET_SELECTED_CUSTOMERS, (state, { payload }) => {
         state.selectedCustomers = payload
+      })
+      .addCase(OPEN_BULK_EDIT_PANEL, (state) => {
+        state.bulkEditPanelOpen = true
+      })
+      .addCase(CLOSE_BULK_EDIT_PANEL, (state) => {
+        state.bulkEditPanelOpen = false
       })
   )
 }

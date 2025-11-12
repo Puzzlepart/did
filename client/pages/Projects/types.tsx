@@ -62,4 +62,9 @@ export interface IProjectsState {
    * The list of selected projects for bulk operations.
    */
   selectedProjects?: Project[]
+
+  /**
+   * Whether the bulk edit panel is open.
+   */
+  bulkEditPanelOpen?: boolean
 }

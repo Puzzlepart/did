@@ -5,13 +5,17 @@ import { useTranslation } from 'react-i18next'
 import { useCustomersContext } from '../context'
 import { useCustomerList } from './useCustomerList'
 import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
-import { SET_SELECTED_CUSTOMERS } from '../reducer'
+import { SET_SELECTED_CUSTOMERS, OPEN_BULK_EDIT_PANEL } from '../reducer'
 import { Customer } from 'types'
+import { ListMenuItem } from 'components/List'
+import { usePermissions } from 'hooks/user/usePermissions'
+import { PermissionScope } from 'security'
 
 export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
   const context = useCustomersContext()
   const { columns, showInactive } = useCustomerList()
+  const [, hasPermission] = usePermissions()
   return (
     <>
       <List
@@ -26,8 +30,8 @@ export const CustomerList: TabComponent = (props) => {
         enableShimmer={context.loading}
         items={context.state.customers}
         columns={columns}
-        menuItems={(_context) =>
-          context.state.customers.some((c) => c.inactive)
+        menuItems={(_context) => [
+          ...(context.state.customers.some((c) => c.inactive)
             ? [
                 InactiveCheckboxMenuItem(
                   t('customers.toggleInactive', {
@@ -38,8 +42,15 @@ export const CustomerList: TabComponent = (props) => {
                   showInactive.toggle
                 )
               ]
-            : []
-        }
+            : []),
+          new ListMenuItem(t('customers.bulkEdit.label'))
+            .withIcon('Edit')
+            .setHidden(
+              !hasPermission(PermissionScope.MANAGE_CUSTOMERS) ||
+                (context?.state?.selectedCustomers?.length ?? 0) <= 1
+            )
+            .withDispatch(context, OPEN_BULK_EDIT_PANEL)
+        ]}
         getColumnStyle={(customer) => ({
           opacity: customer.inactive ? 0.4 : 1
         })}

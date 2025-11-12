@@ -58,4 +58,9 @@ export interface ICustomersState {
    * The list of selected customers for bulk operations.
    */
   selectedCustomers?: Customer[]
+
+  /**
+   * Whether the bulk edit panel is open.
+   */
+  bulkEditPanelOpen?: boolean
 }

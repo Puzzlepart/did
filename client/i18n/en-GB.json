@@ -124,6 +124,7 @@
     "tagLabel": "Key",
     "editButtonLabel": "Edit project",
     "toggleInactive": "Show/hide inactive projects ({{count}})",
+    "bulkEdit": "Bulk Edit",
     "searchTimeEntriesPlaceholder": "Search in time entries...",
     "keyInvalid": "The project key must be between {{min}} and {{max}} characters.",
     "descriptionWarning": "We recommend including a quick summary of the project. This will provide a concise overview and help others quickly grasp the project's essence.",
@@ -142,6 +143,13 @@
     "budgetCriticalThreshold": "Budget Critical Threshold",
     "budgetCriticalThresholdDescription": "The percentage of the budget at which an error will be shown.",
     "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown.",
+    "bulkEdit": {
+      "title": "Bulk Edit {{count}} Projects",
+      "description": "Edit multiple projects at once. Changes will apply to all selected projects.",
+      "selectedProjects": "Selected Projects"
+    },
+    "partnerCustomerLabel": "Partner Customer",
+    "searchPartnerCustomer": "Search for a partner customer...",
     "resources": {
       "headerText": "Resources",
       "projectOwnerLabel": "Project Owner",
@@ -230,7 +238,13 @@
     "deleteSuccessTitle": "Customer Deleted Successfully",
     "deleteSuccess": "Customer **{{name}}** has been successfully deleted. You will be redirected to the Customers page.",
     "toggleInactive": "Show/hide inactive customers ({{count}})",
-    "searchPlaceholder": "Search {{count}} customers..."
+    "searchPlaceholder": "Search {{count}} customers...",
+    "bulkEdit": {
+      "label": "Bulk Edit",
+      "title": "Bulk Edit {{count}} Customers",
+      "description": "Edit multiple customers at once. Changes will apply to all selected customers.",
+      "selectedCustomers": "Selected Customers"
+    }
   },
   "admin": {
     "apiTokens": {

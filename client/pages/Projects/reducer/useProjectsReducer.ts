@@ -9,7 +9,9 @@ import {
   OPEN_EDIT_PANEL,
   PROJECT_DELETE_SUCCESS,
   SET_SELECTED_PROJECT,
-  SET_SELECTED_PROJECTS
+  SET_SELECTED_PROJECTS,
+  OPEN_BULK_EDIT_PANEL,
+  CLOSE_BULK_EDIT_PANEL
 } from './actions'
 import { Project } from 'types'
 import { current } from '@reduxjs/toolkit'
@@ -25,7 +27,8 @@ export function useProjectsReducer() {
     outlookCategories: [],
     selected: null,
     editProject: null,
-    selectedProjects: []
+    selectedProjects: [],
+    bulkEditPanelOpen: false
   }
   return useReducer(initialState, (builder) =>
     builder
@@ -68,6 +71,12 @@ export function useProjectsReducer() {
       })
       .addCase(SET_SELECTED_PROJECTS, (state, { payload }) => {
         state.selectedProjects = payload
+      })
+      .addCase(OPEN_BULK_EDIT_PANEL, (state) => {
+        state.bulkEditPanelOpen = true
+      })
+      .addCase(CLOSE_BULK_EDIT_PANEL, (state) => {
+        state.bulkEditPanelOpen = false
       })
   )
 }
