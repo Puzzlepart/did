@@ -78,6 +78,29 @@ export class CustomerResolver {
       }
     }
   }
+
+  /**
+   * Update multiple customers. Permission scope `MANAGE_CUSTOMERS` is required.
+   *
+   * @param customers - Array of customers to update
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_CUSTOMERS })
+  @Mutation(() => BaseResult, { description: 'Update multiple customers' })
+  public async updateCustomers(
+    @Arg('customers', () => [CustomerInput]) customers: CustomerInput[]
+  ): Promise<BaseResult> {
+    try {
+      for (const customer of customers) {
+        await this._customer.updateCustomer(customer as Customer)
+      }
+      return { success: true, error: null }
+    } catch (error) {
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
+    }
+  }
 }
 
 export * from './types'

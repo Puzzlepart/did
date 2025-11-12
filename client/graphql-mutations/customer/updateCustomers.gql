@@ -1,0 +1,9 @@
+mutation UpdateCustomers($customers: [CustomerInput!]!) {
+  updateCustomers(customers: $customers) {
+    success
+    error {
+      message
+      code
+    }
+  }
+}

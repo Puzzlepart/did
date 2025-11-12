@@ -53,4 +53,9 @@ export interface ICustomersState {
    * Any error that occurred while loading or updating the state.
    */
   error?: any
+
+  /**
+   * The list of selected customers for bulk operations.
+   */
+  selectedCustomers?: Customer[]
 }

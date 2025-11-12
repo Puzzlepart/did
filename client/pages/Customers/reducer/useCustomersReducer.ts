@@ -11,7 +11,8 @@ import {
   DATA_UPDATED,
   OPEN_CUSTOMER_PANEL,
   OPEN_PROJECT_PANEL,
-  SET_SELECTED_CUSTOMER
+  SET_SELECTED_CUSTOMER,
+  SET_SELECTED_CUSTOMERS
 } from './actions'
 /**
  * Use Customers reducer. It will create the initial state
@@ -30,7 +31,8 @@ export function useCustomersReducer() {
       panel: {
         open: false
       }
-    }
+    },
+    selectedCustomers: []
   }
   const urlParameters = useParams<ICustomersUrlParameters>()
   return useReducer(initialState, (builder) =>
@@ -84,6 +86,9 @@ export function useCustomersReducer() {
       })
       .addCase(CUSTOMER_DELETE_SUCCESS, (state) => {
         state.selected = null
+      })
+      .addCase(SET_SELECTED_CUSTOMERS, (state, { payload }) => {
+        state.selectedCustomers = payload
       })
   )
 }

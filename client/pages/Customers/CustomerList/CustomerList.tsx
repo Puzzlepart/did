@@ -4,6 +4,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCustomersContext } from '../context'
 import { useCustomerList } from './useCustomerList'
+import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { SET_SELECTED_CUSTOMERS } from '../reducer'
+import { Customer } from 'types'
 
 export const CustomerList: TabComponent = (props) => {
   const { t } = useTranslation()
@@ -47,6 +50,12 @@ export const CustomerList: TabComponent = (props) => {
                 '!inactive': true
               }
         }
+        checkboxVisibility={CheckboxVisibility.onHover}
+        selectionProps={[
+          SelectionMode.multiple,
+          (selected) =>
+            context.dispatch(SET_SELECTED_CUSTOMERS(selected as Customer[]))
+        ]}
       />
       {props.children}
     </>

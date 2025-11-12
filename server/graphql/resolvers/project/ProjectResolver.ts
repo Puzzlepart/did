@@ -158,4 +158,28 @@ export class ProjectResolver {
       }
     }
   }
+
+  /**
+   * Update multiple projects. Permission scope `MANAGE_PROJECTS` is required.
+   *
+   * @param projects - Array of projects to update
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_PROJECTS })
+  @Mutation(() => BaseResult, { description: 'Update multiple projects' })
+  public async updateProjects(
+    @Arg('projects', () => [ProjectInput]) projects: ProjectInput[]
+  ): Promise<BaseResult> {
+    try {
+      for (const projectInput of projects) {
+        const project = new Project(projectInput)
+        await this._projectSvc.updateProject(project)
+      }
+      return { success: true, error: null }
+    } catch (error) {
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
+    }
+  }
 }

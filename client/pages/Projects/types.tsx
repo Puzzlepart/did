@@ -57,4 +57,9 @@ export interface IProjectsState {
    * The error that occurred while fetching or updating data.
    */
   error?: ApolloError
+
+  /**
+   * The list of selected projects for bulk operations.
+   */
+  selectedProjects?: Project[]
 }

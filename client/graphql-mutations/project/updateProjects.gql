@@ -1,0 +1,9 @@
+mutation UpdateProjects($projects: [ProjectInput!]!) {
+  updateProjects(projects: $projects) {
+    success
+    error {
+      message
+      code
+    }
+  }
+}

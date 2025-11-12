@@ -8,7 +8,8 @@ import {
   DATA_UPDATED,
   OPEN_EDIT_PANEL,
   PROJECT_DELETE_SUCCESS,
-  SET_SELECTED_PROJECT
+  SET_SELECTED_PROJECT,
+  SET_SELECTED_PROJECTS
 } from './actions'
 import { Project } from 'types'
 import { current } from '@reduxjs/toolkit'
@@ -23,7 +24,8 @@ export function useProjectsReducer() {
     myProjects: [],
     outlookCategories: [],
     selected: null,
-    editProject: null
+    editProject: null,
+    selectedProjects: []
   }
   return useReducer(initialState, (builder) =>
     builder
@@ -63,6 +65,9 @@ export function useProjectsReducer() {
       })
       .addCase(PROJECT_DELETE_SUCCESS, (state) => {
         state.selected = null
+      })
+      .addCase(SET_SELECTED_PROJECTS, (state, { payload }) => {
+        state.selectedProjects = payload
       })
   )
 }
