@@ -1,8 +1,7 @@
 import {
   Checkbox,
   Field,
-  Label,
-  Switch
+  Label
 } from '@fluentui/react-components'
 import { LabelPickerControl } from 'components/FormControl'
 import { Panel } from 'components'
@@ -19,9 +18,7 @@ export const BulkEditProjectsPanel: React.FC<IBulkEditProjectsPanelProps> = (
   const {
     inactive,
     setInactive,
-    labels,
     setLabels,
-    partnerKey,
     setPartnerKey,
     loading,
     handleSave

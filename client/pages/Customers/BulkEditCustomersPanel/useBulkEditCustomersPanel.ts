@@ -37,8 +37,8 @@ export function useBulkEditCustomersPanel(
 
       await props.onSave(updates)
       props.onDismiss()
-    } catch (error) {
-      console.error('Error updating customers:', error)
+    } catch {
+      // Error is handled by Apollo Client
     } finally {
       setLoading(false)
     }

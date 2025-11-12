@@ -42,8 +42,8 @@ export function useBulkEditProjectsPanel(
 
       await props.onSave(updates)
       props.onDismiss()
-    } catch (error) {
-      console.error('Error updating projects:', error)
+    } catch {
+      // Error is handled by Apollo Client
     } finally {
       setLoading(false)
     }

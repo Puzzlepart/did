@@ -17,7 +17,6 @@ export const BulkEditCustomersPanel: React.FC<
   const {
     inactive,
     setInactive,
-    labels,
     setLabels,
     loading,
     handleSave
