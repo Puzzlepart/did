@@ -9,9 +9,6 @@ node_modules/
 
 # dotenv environment variables file
 .env
-.env.local
-.env.production
-.env.*.local
 
 # Node public folder
 server/public/js
