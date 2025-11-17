@@ -140,6 +140,12 @@
     "budgetWarningThreshold": "Advarsel terskel for budsjett",
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
     "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
+    "bulkEdit": {
+    "label": "Masseredigering",
+    "title": "Masserediger {{count}} prosjekter",
+    "description": "Rediger flere prosjekter samtidig. Endringer vil gjelde for alle valgte prosjekter.",
+    "selectedProjects": "Valgte prosjekter"
+    },
     "resources": {
       "headerText": "Ressurser",
       "resourcesPlaceholder": "Søk etter brukere...",
@@ -227,7 +233,13 @@
     "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettes.",
     "deleteError": "Denne kunden har {{count}} tilknyttede prosjekter. For å fortsette med å slette kunden, må du fjerne alle relaterte prosjekter først.",
     "deleteSuccessTitle": "Kunde slettet",
-    "searchPlaceholder": "Søk i {{count}} kunder..."
+    "searchPlaceholder": "Søk i {{count}} kunder...",
+    "bulkEdit": {
+    "label": "Masseredigering",
+    "title": "Masserediger {{count}} kunder",
+    "description": "Rediger flere kunder samtidig. Endringer vil gjelde for alle valgte prosjekter.",
+    "selectedProjects": "Valgte kunder"
+    }
   },
   "admin": {
     "apiTokens": {

@@ -22,9 +22,13 @@
     }
 
     .searchBox {
-        min-width: 600px;
+        min-width: 400px;
+        flex: 1;
+        max-width: 600px;
+        
         &.fullWidth {
             min-width: calc(100% - 25px);
+            max-width: none;
             box-sizing: border-box;
             margin: 12px 0 12px 12px;
         }
