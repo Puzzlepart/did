@@ -57,8 +57,6 @@ Thumbs.db
 
 # Environment files (will be handled separately)
 .env
-.env.local
-.env.*.local
 
 # Test files (ignore only unit test implementations)
 **/*.test.ts
