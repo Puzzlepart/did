@@ -45,7 +45,7 @@ export const Projects: FC = () => {
       <BulkEditProjectsPanel
         open={context.state.bulkEditPanelOpen}
         onDismiss={() => context.dispatch(CLOSE_BULK_EDIT_PANEL())}
-        projects={context.state.selectedProjects || []}
+        projects={context.state.bulkEditProjects || []}
         onSave={async () => {
           await context.refetch()
         }}

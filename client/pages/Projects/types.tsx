@@ -67,4 +67,9 @@ export interface IProjectsState {
    * Whether the bulk edit panel is open.
    */
   bulkEditPanelOpen?: boolean
+
+  /**
+   * Snapshot of projects to bulk edit (preserved when panel is open).
+   */
+  bulkEditProjects?: Project[]
 }

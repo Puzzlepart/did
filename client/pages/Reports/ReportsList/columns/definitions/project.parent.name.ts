@@ -9,7 +9,7 @@ import { createColumnDef, CreateColumnDefFunction } from 'utils'
 export const parentProjectColumn: CreateColumnDefFunction = (t) =>
   createColumnDef<TimeEntry, IProjectLinkProps>(
     'project.parent.name',
-    t('common.parentProject'),
+    t('projects.parentProject'),
     {
       minWidth: 100,
       maxWidth: 140,

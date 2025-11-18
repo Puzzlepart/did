@@ -1,31 +1,23 @@
-import {
-  Checkbox,
-  Field,
-  Label
-} from '@fluentui/react-components'
-import { LabelPickerControl } from 'components/FormControl'
+import { Field, Label } from '@fluentui/react-components'
+import { LabelPickerControl, SwitchControl } from 'components/FormControl'
 import { Panel } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { IBulkEditCustomersPanelProps } from './types'
 import { useBulkEditCustomersPanel } from './useBulkEditCustomersPanel'
 
-export const BulkEditCustomersPanel: React.FC<
-  IBulkEditCustomersPanelProps
-> = (props) => {
+export const BulkEditCustomersPanel: React.FC<IBulkEditCustomersPanelProps> = (
+  props
+) => {
   const { t } = useTranslation()
-  const {
-    inactive,
-    setInactive,
-    setLabels,
-    loading,
-    handleSave
-  } = useBulkEditCustomersPanel(props)
+  const { model, loading, handleSave } = useBulkEditCustomersPanel(props)
 
   return (
     <Panel
       open={props.open}
       onDismiss={props.onDismiss}
+      type='overlay'
+      lightDismiss={false}
       title={t('customers.bulkEdit.title', {
         count: props.customers.length
       })}
@@ -33,7 +25,7 @@ export const BulkEditCustomersPanel: React.FC<
       actions={[
         {
           appearance: 'primary',
-          text: t('common.saveButtonLabel'),
+          text: t('common.save'),
           onClick: handleSave,
           disabled: loading
         }
@@ -60,26 +52,25 @@ export const BulkEditCustomersPanel: React.FC<
           </div>
         </Field>
 
-        <Field>
-          <Label>{t('common.labelsText')}</Label>
-          <LabelPickerControl
-            placeholder={t('common.filterLabels')}
-            noSelectionText={t('customers.noLabelsSelectedText')}
-            onChange={(selectedLabels) =>
-              setLabels(selectedLabels.map((lbl) => lbl.name))
-            }
-          />
-        </Field>
+        <LabelPickerControl
+          label={t('common.labelsText')}
+          placeholder={t('common.filterLabels')}
+          noSelectionText={t('customers.noLabelsSelectedText')}
+          defaultSelectedKeys={model.value('labels')}
+          onChange={(selectedLabels) =>
+            model.set(
+              'labels',
+              selectedLabels.map((lbl) => lbl.name)
+            )
+          }
+        />
 
-        <Field>
-          <Checkbox
-            checked={inactive === true}
-            onChange={(_, data) =>
-              setInactive(data.checked === true ? true : null)
-            }
-            label={t('common.inactiveFieldLabel')}
-          />
-        </Field>
+        <SwitchControl
+          name='inactive'
+          model={model}
+          label={t('common.inactiveFieldLabel')}
+          description={t('customers.inactiveFieldDescription')}
+        />
       </div>
     </Panel>
   )

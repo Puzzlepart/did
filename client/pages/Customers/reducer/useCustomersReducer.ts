@@ -35,7 +35,8 @@ export function useCustomersReducer() {
       }
     },
     selectedCustomers: [],
-    bulkEditPanelOpen: false
+    bulkEditPanelOpen: false,
+    bulkEditCustomers: []
   }
   const urlParameters = useParams<ICustomersUrlParameters>()
   return useReducer(initialState, (builder) =>
@@ -93,11 +94,14 @@ export function useCustomersReducer() {
       .addCase(SET_SELECTED_CUSTOMERS, (state, { payload }) => {
         state.selectedCustomers = payload
       })
-      .addCase(OPEN_BULK_EDIT_PANEL, (state) => {
+      .addCase(OPEN_BULK_EDIT_PANEL, (state, { payload }) => {
         state.bulkEditPanelOpen = true
+        state.bulkEditCustomers = payload
       })
       .addCase(CLOSE_BULK_EDIT_PANEL, (state) => {
         state.bulkEditPanelOpen = false
+        state.selectedCustomers = []
+        state.bulkEditCustomers = []
       })
   )
 }

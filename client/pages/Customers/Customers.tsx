@@ -32,7 +32,7 @@ export const Customers: FC = () => {
       <BulkEditCustomersPanel
         open={context.state.bulkEditPanelOpen}
         onDismiss={() => context.dispatch(CLOSE_BULK_EDIT_PANEL())}
-        customers={context.state.selectedCustomers || []}
+        customers={context.state.bulkEditCustomers || []}
         onSave={async () => {
           await context.refetch()
         }}

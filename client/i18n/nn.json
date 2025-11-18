@@ -148,6 +148,9 @@
     "description": "Rediger flere prosjekt samstundes. Endringar vil gjelde for alle valde prosjekt.",
     "selectedProjects": "Valgte prosjekt"
     },
+    "partnerCustomerLabel": "Partnarkundar",
+    "searchPartnerCustomer": "Søk etter ein partnarkundar...",
+    "searchParentProject": "Søk etter eit overordna prosjekt...",
     "resources": {
       "headerText": "Ressurser",
       "resourcesPlaceholder": "Søk etter brukarar...",
@@ -170,7 +173,6 @@
     "roleFieldLabel": "Prosjektrolle",
     "parentProject": "Overordna prosjekt",
     "parentProjectDescription": "Vel eit overordna prosjekt som dette prosjektet høyrer til. Dette er særleg nyttig for å organisere prosjekt hierarkisk og oppretthalde samanhengar mellom relaterte prosjekt.",
-    "parentLabel": "Overordna prosjekt",
     "childrenLabel": "Underordna prosjekter",
     "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
     "partnerCustomer": "Partnerkunde",
@@ -885,7 +887,6 @@
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
     "reason": "Begrunning",
-    "parentProject": "Overordna prosjekt",
     "invalidEmailValidation": "Du har skrevet inn en ugyldig e-post.",
     "emailLabel": "E-postadresse",
     "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene for eksterne brukere.",

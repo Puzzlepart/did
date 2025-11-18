@@ -55,7 +55,11 @@ export function useProjectList(props: IProjectListProps) {
         !hasPermission(PermissionScope.MANAGE_PROJECTS) ||
           (context?.state?.selectedProjects?.length ?? 0) <= 1
       )
-      .withDispatch(context, OPEN_BULK_EDIT_PANEL),
+      .withDispatch(
+        context,
+        OPEN_BULK_EDIT_PANEL,
+        context.state.selectedProjects
+      ),
     ...(props.menuItems as ListMenuItem[])
   ]
 

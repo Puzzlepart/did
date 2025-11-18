@@ -49,7 +49,11 @@ export const CustomerList: TabComponent = (props) => {
               !hasPermission(PermissionScope.MANAGE_CUSTOMERS) ||
                 (context?.state?.selectedCustomers?.length ?? 0) <= 1
             )
-            .withDispatch(context, OPEN_BULK_EDIT_PANEL)
+            .withDispatch(
+              context,
+              OPEN_BULK_EDIT_PANEL,
+              context.state.selectedCustomers
+            )
         ]}
         getColumnStyle={(customer) => ({
           opacity: customer.inactive ? 0.4 : 1

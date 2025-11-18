@@ -21,5 +21,7 @@ export const PROJECT_DELETE_SUCCESS = createAction('PROJECT_DELETE_SUCCESS')
 export const SET_SELECTED_PROJECTS = createAction<Project[]>(
   'SET_SELECTED_PROJECTS'
 )
-export const OPEN_BULK_EDIT_PANEL = createAction('OPEN_BULK_EDIT_PANEL')
+export const OPEN_BULK_EDIT_PANEL = createAction<Project[]>(
+  'OPEN_BULK_EDIT_PANEL'
+)
 export const CLOSE_BULK_EDIT_PANEL = createAction('CLOSE_BULK_EDIT_PANEL')

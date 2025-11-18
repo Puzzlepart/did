@@ -28,7 +28,8 @@ export function useProjectsReducer() {
     selected: null,
     editProject: null,
     selectedProjects: [],
-    bulkEditPanelOpen: false
+    bulkEditPanelOpen: false,
+    bulkEditProjects: []
   }
   return useReducer(initialState, (builder) =>
     builder
@@ -72,11 +73,14 @@ export function useProjectsReducer() {
       .addCase(SET_SELECTED_PROJECTS, (state, { payload }) => {
         state.selectedProjects = payload
       })
-      .addCase(OPEN_BULK_EDIT_PANEL, (state) => {
+      .addCase(OPEN_BULK_EDIT_PANEL, (state, { payload }) => {
         state.bulkEditPanelOpen = true
+        state.bulkEditProjects = payload
       })
       .addCase(CLOSE_BULK_EDIT_PANEL, (state) => {
         state.bulkEditPanelOpen = false
+        state.selectedProjects = []
+        state.bulkEditProjects = []
       })
   )
 }
