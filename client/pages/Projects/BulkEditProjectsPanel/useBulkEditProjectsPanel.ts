@@ -36,11 +36,11 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
       typeof label === 'string' ? label : label?.name
     )
 
+  const getSortedLabels = (labels: Project['labels']) =>
+    [...normalizeLabels(labels)].sort()
+
   // Initialize model with common values from all selected projects
   useEffect(() => {
-    /* eslint-disable no-console */
-    console.log('🔍 [BulkEditProjects] Initializing with projects:', props.projects.length)
-    
     // Clear model and dirty fields when projects change
     model.$set(new Map())
     setDirtyFields(new Set())
@@ -48,31 +48,19 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
     if (props.projects.length === 0) return
 
     const firstProject = props.projects[0]
-    
-    console.log('🏷️ [BulkEditProjects] Project labels:')
-    for (let i = 0; i < props.projects.length; i++) {
-      const p = props.projects[i]
-      console.log(`  Project ${i} (${p.name}):`, normalizeLabels(p.labels))
-    }
 
     // Check if all projects have the same labels
-    const firstLabels = normalizeLabels(firstProject.labels).sort()
+    const firstLabels = getSortedLabels(firstProject.labels)
     const allLabelsMatch = props.projects.every((p) => {
-      const labels = normalizeLabels(p.labels).sort()
+      const labels = getSortedLabels(p.labels)
       return JSON.stringify(labels) === JSON.stringify(firstLabels)
     })
-    
-    console.log('✅ [BulkEditProjects] All labels match:', allLabelsMatch)
-    console.log('🏷️ [BulkEditProjects] First project labels:', firstLabels)
-    
+
     // Build initial map with common values
     const initialMap = new Map<string, any>()
-    
+
     if (allLabelsMatch && firstLabels.length > 0) {
-      console.log('📝 [BulkEditProjects] Setting labels to:', firstLabels)
       initialMap.set('labels', firstLabels)
-    } else {
-      console.log('❌ [BulkEditProjects] Not setting labels (match:', allLabelsMatch, 'length:', firstLabels.length, ')')
     }
 
     // Check if all projects have the same inactive status
@@ -98,11 +86,8 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
     if (allParentKeyMatch && firstProject.parentKey) {
       initialMap.set('parentKey', firstProject.parentKey)
     }
-    
     // Set all values at once using $set
     model.$set(initialMap)
-    console.log('✓ [BulkEditProjects] Model initialized, labels value:', model.value('labels'))
-    /* eslint-enable no-console */
   }, [props.projects])
 
   const handleSave = async () => {
