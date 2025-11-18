@@ -58,7 +58,7 @@ export function useListProps({
   return {
     ..._.pick(
       context.props,
-      'getKey',
+      selectionMode === SelectionMode.none ? 'getKey' : null,
       'setKey',
       'styles',
       'enableShimmer',

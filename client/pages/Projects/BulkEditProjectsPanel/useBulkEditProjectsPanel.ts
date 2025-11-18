@@ -20,12 +20,84 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
   // Create a model using useMap for form control compatibility
   const model = useMap<string, Partial<Project>>(new Map())
 
-  // Track field changes
-  const originalSet = model.set
-  model.set = (key: string, value: any) => {
-    setDirtyFields((prev) => new Set(prev).add(key))
-    return originalSet(key, value)
+  // Store original set method before any overriding
+  const originalSetRef = useRef<typeof model.set>(null)
+  if (!originalSetRef.current) {
+    originalSetRef.current = model.set.bind(model)
+    // Override set method immediately to track changes
+    model.set = (key: string, value: any) => {
+      setDirtyFields((prev) => new Set(prev).add(key))
+      return originalSetRef.current(key, value)
+    }
   }
+
+  // Initialize model with common values from all selected projects
+  useEffect(() => {
+    /* eslint-disable no-console */
+    console.log('🔍 [BulkEditProjects] Initializing with projects:', props.projects.length)
+    
+    // Clear model and dirty fields when projects change
+    model.$set(new Map())
+    setDirtyFields(new Set())
+
+    if (props.projects.length === 0) return
+
+    const firstProject = props.projects[0]
+    
+    console.log('🏷️ [BulkEditProjects] Project labels:')
+    for (let i = 0; i < props.projects.length; i++) {
+      const p = props.projects[i]
+      console.log(`  Project ${i} (${p.name}):`, p.labels)
+    }
+
+    // Check if all projects have the same labels
+    const firstLabels = firstProject.labels || []
+    const allLabelsMatch = props.projects.every(
+      (p) => JSON.stringify((p.labels || []).sort()) === JSON.stringify(firstLabels.sort())
+    )
+    
+    console.log('✅ [BulkEditProjects] All labels match:', allLabelsMatch)
+    console.log('🏷️ [BulkEditProjects] First project labels:', firstLabels)
+    
+    // Build initial map with common values
+    const initialMap = new Map<string, any>()
+    
+    if (allLabelsMatch && firstLabels.length > 0) {
+      console.log('📝 [BulkEditProjects] Setting labels to:', firstLabels)
+      initialMap.set('labels', firstLabels)
+    } else {
+      console.log('❌ [BulkEditProjects] Not setting labels (match:', allLabelsMatch, 'length:', firstLabels.length, ')')
+    }
+
+    // Check if all projects have the same inactive status
+    const allInactiveMatch = props.projects.every(
+      (p) => p.inactive === firstProject.inactive
+    )
+    if (allInactiveMatch && firstProject.inactive !== undefined) {
+      initialMap.set('inactive', firstProject.inactive)
+    }
+
+    // Check if all projects have the same partnerKey
+    const allPartnerKeyMatch = props.projects.every(
+      (p) => p.partnerKey === firstProject.partnerKey
+    )
+    if (allPartnerKeyMatch && firstProject.partnerKey) {
+      initialMap.set('partnerKey', firstProject.partnerKey)
+    }
+
+    // Check if all projects have the same parentKey
+    const allParentKeyMatch = props.projects.every(
+      (p) => p.parentKey === firstProject.parentKey
+    )
+    if (allParentKeyMatch && firstProject.parentKey) {
+      initialMap.set('parentKey', firstProject.parentKey)
+    }
+    
+    // Set all values at once using $set
+    model.$set(initialMap)
+    console.log('✓ [BulkEditProjects] Model initialized, labels value:', model.value('labels'))
+    /* eslint-enable no-console */
+  }, [props.projects])
 
   const handleSave = async () => {
     setLoading(true)

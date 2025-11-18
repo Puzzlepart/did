@@ -20,12 +20,68 @@ export function useBulkEditCustomersPanel(props: IBulkEditCustomersPanelProps) {
   // Create a model using useMap for form control compatibility
   const model = useMap<string, Partial<Customer>>(new Map())
 
-  // Track field changes
-  const originalSet = model.set
-  model.set = (key: string, value: any) => {
-    setDirtyFields((prev) => new Set(prev).add(key))
-    return originalSet(key, value)
+  // Store original set method before any overriding
+  const originalSetRef = useRef<typeof model.set>(null)
+  if (!originalSetRef.current) {
+    originalSetRef.current = model.set.bind(model)
+    // Override set method immediately to track changes
+    model.set = (key: string, value: any) => {
+      setDirtyFields((prev) => new Set(prev).add(key))
+      return originalSetRef.current(key, value)
+    }
   }
+
+  // Initialize model with common values from all selected customers
+  useEffect(() => {
+    /* eslint-disable no-console */
+    console.log('🔍 [BulkEditCustomers] Initializing with customers:', props.customers.length)
+    
+    // Clear model and dirty fields when customers change
+    model.$set(new Map())
+    setDirtyFields(new Set())
+
+    if (props.customers.length === 0) return
+
+    const firstCustomer = props.customers[0]
+    
+    console.log('🏷️ [BulkEditCustomers] Customer labels:')
+    for (let i = 0; i < props.customers.length; i++) {
+      const c = props.customers[i]
+      console.log(`  Customer ${i} (${c.name}):`, c.labels)
+    }
+
+    // Check if all customers have the same labels
+    const firstLabels = firstCustomer.labels || []
+    const allLabelsMatch = props.customers.every(
+      (c) => JSON.stringify((c.labels || []).sort()) === JSON.stringify(firstLabels.sort())
+    )
+    
+    console.log('✅ [BulkEditCustomers] All labels match:', allLabelsMatch)
+    console.log('🏷️ [BulkEditCustomers] First customer labels:', firstLabels)
+    
+    // Build initial map with common values
+    const initialMap = new Map<string, any>()
+    
+    if (allLabelsMatch && firstLabels.length > 0) {
+      console.log('📝 [BulkEditCustomers] Setting labels to:', firstLabels)
+      initialMap.set('labels', firstLabels)
+    } else {
+      console.log('❌ [BulkEditCustomers] Not setting labels (match:', allLabelsMatch, 'length:', firstLabels.length, ')')
+    }
+
+    // Check if all customers have the same inactive status
+    const allInactiveMatch = props.customers.every(
+      (c) => c.inactive === firstCustomer.inactive
+    )
+    if (allInactiveMatch && firstCustomer.inactive !== undefined) {
+      initialMap.set('inactive', firstCustomer.inactive)
+    }
+    
+    // Set all values at once using $set
+    model.$set(initialMap)
+    console.log('✓ [BulkEditCustomers] Model initialized, labels value:', model.value('labels'))
+    /* eslint-enable no-console */
+  }, [props.customers])
 
   const handleSave = async () => {
     setLoading(true)
