@@ -31,6 +31,11 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
     }
   }
 
+  const normalizeLabels = (labels: Project['labels']) =>
+    (labels ?? []).map((label) =>
+      typeof label === 'string' ? label : label?.name
+    )
+
   // Initialize model with common values from all selected projects
   useEffect(() => {
     /* eslint-disable no-console */
@@ -47,14 +52,15 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
     console.log('🏷️ [BulkEditProjects] Project labels:')
     for (let i = 0; i < props.projects.length; i++) {
       const p = props.projects[i]
-      console.log(`  Project ${i} (${p.name}):`, p.labels)
+      console.log(`  Project ${i} (${p.name}):`, normalizeLabels(p.labels))
     }
 
     // Check if all projects have the same labels
-    const firstLabels = firstProject.labels || []
-    const allLabelsMatch = props.projects.every(
-      (p) => JSON.stringify((p.labels || []).sort()) === JSON.stringify(firstLabels.sort())
-    )
+    const firstLabels = normalizeLabels(firstProject.labels).sort()
+    const allLabelsMatch = props.projects.every((p) => {
+      const labels = normalizeLabels(p.labels).sort()
+      return JSON.stringify(labels) === JSON.stringify(firstLabels)
+    })
     
     console.log('✅ [BulkEditProjects] All labels match:', allLabelsMatch)
     console.log('🏷️ [BulkEditProjects] First project labels:', firstLabels)
@@ -108,8 +114,9 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
       if (dirtyFields.has('inactive')) {
         updates.inactive = model.value('inactive')
       }
-      if (dirtyFields.has('labels')) {
-        updates.labels = model.value('labels', [])
+      const labelsValue = model.value('labels')
+      if (labelsValue !== undefined) {
+        updates.labels = labelsValue ?? []
       }
       if (dirtyFields.has('partnerKey')) {
         updates.partnerKey = model.value('partnerKey')

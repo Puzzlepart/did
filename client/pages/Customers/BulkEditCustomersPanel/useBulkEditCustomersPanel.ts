@@ -31,6 +31,11 @@ export function useBulkEditCustomersPanel(props: IBulkEditCustomersPanelProps) {
     }
   }
 
+  const normalizeLabels = (labels: Customer['labels']) =>
+    (labels ?? []).map((label) =>
+      typeof label === 'string' ? label : label?.name
+    )
+
   // Initialize model with common values from all selected customers
   useEffect(() => {
     /* eslint-disable no-console */
@@ -47,14 +52,15 @@ export function useBulkEditCustomersPanel(props: IBulkEditCustomersPanelProps) {
     console.log('🏷️ [BulkEditCustomers] Customer labels:')
     for (let i = 0; i < props.customers.length; i++) {
       const c = props.customers[i]
-      console.log(`  Customer ${i} (${c.name}):`, c.labels)
+      console.log(`  Customer ${i} (${c.name}):`, normalizeLabels(c.labels))
     }
 
     // Check if all customers have the same labels
-    const firstLabels = firstCustomer.labels || []
-    const allLabelsMatch = props.customers.every(
-      (c) => JSON.stringify((c.labels || []).sort()) === JSON.stringify(firstLabels.sort())
-    )
+    const firstLabels = normalizeLabels(firstCustomer.labels).sort()
+    const allLabelsMatch = props.customers.every((c) => {
+      const labels = normalizeLabels(c.labels).sort()
+      return JSON.stringify(labels) === JSON.stringify(firstLabels)
+    })
     
     console.log('✅ [BulkEditCustomers] All labels match:', allLabelsMatch)
     console.log('🏷️ [BulkEditCustomers] First customer labels:', firstLabels)
@@ -92,8 +98,9 @@ export function useBulkEditCustomersPanel(props: IBulkEditCustomersPanelProps) {
       if (dirtyFields.has('inactive')) {
         updates.inactive = model.value('inactive')
       }
-      if (dirtyFields.has('labels')) {
-        updates.labels = model.value('labels', [])
+      const labelsValue = model.value('labels')
+      if (labelsValue !== undefined) {
+        updates.labels = labelsValue ?? []
       }
 
       const customersToUpdate = propsRef.current.customers.map((customer) => ({
