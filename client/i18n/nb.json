@@ -239,7 +239,7 @@
     "bulkEdit": {
     "label": "Masseredigering",
     "title": "Masserediger {{count}} kunder",
-    "description": "Rediger flere kunder samtidig. Endringer vil gjelde for alle valgte prosjekter.",
+    "description": "Rediger flere kunder samtidig. Endringer vil gjelde for alle valgte kunder.",
     "selectedProjects": "Valgte kunder"
     }
   },
