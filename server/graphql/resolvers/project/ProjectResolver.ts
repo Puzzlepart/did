@@ -11,7 +11,9 @@ import {
   CreateOrUpdateProjectResult,
   Project,
   ProjectInput,
-  ProjectOptions
+  ProjectOptions,
+  UpdateProjectsResult,
+  ProjectUpdateError
 } from '../types'
 
 /**
@@ -156,6 +158,42 @@ export class ProjectResolver {
         success: false,
         error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
       }
+    }
+  }
+
+  /**
+   * Update multiple projects. Permission scope `MANAGE_PROJECTS` is required.
+   *
+   * @param projects - Array of projects to update
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_PROJECTS })
+  @Mutation(() => UpdateProjectsResult, {
+    description: 'Update multiple projects'
+  })
+  public async updateProjects(
+    @Arg('projects', () => [ProjectInput]) projects: ProjectInput[]
+  ): Promise<UpdateProjectsResult> {
+    const errors: ProjectUpdateError[] = []
+    let successCount = 0
+
+    for (const projectInput of projects) {
+      try {
+        const project = new Project(projectInput)
+        await this._projectSvc.updateProject(project)
+        successCount++
+      } catch (error) {
+        errors.push({
+          projectKey: projectInput.key,
+          message: error.message || 'Failed to update project'
+        })
+      }
+    }
+
+    return {
+      success: errors.length === 0,
+      successCount,
+      failureCount: errors.length,
+      errors: errors.length > 0 ? errors : undefined
     }
   }
 }

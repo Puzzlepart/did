@@ -284,3 +284,37 @@ export class ProjectRoleInput {
   @Field({ nullable: true })
   hourlyRate: number
 }
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes an error for a specific project'
+})
+export class ProjectUpdateError {
+  @Field()
+  projectKey: string
+
+  @Field()
+  message: string
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes the result of updating multiple projects'
+})
+export class UpdateProjectsResult {
+  @Field({ nullable: true, defaultValue: true })
+  success: boolean
+
+  @Field({ nullable: true })
+  successCount: number
+
+  @Field({ nullable: true })
+  failureCount: number
+
+  @Field(() => [ProjectUpdateError], { nullable: true })
+  errors?: ProjectUpdateError[]
+}
