@@ -7,7 +7,12 @@ import { PermissionScope } from '../../../../shared/config/security'
 import { CustomerService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
-import { Customer, CustomerInput } from './types'
+import {
+  Customer,
+  CustomerInput,
+  UpdateCustomersResult,
+  CustomerUpdateError
+} from './types'
 
 /**
  * Resolver for `Customer`.
@@ -85,20 +90,32 @@ export class CustomerResolver {
    * @param customers - Array of customers to update
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_CUSTOMERS })
-  @Mutation(() => BaseResult, { description: 'Update multiple customers' })
+  @Mutation(() => UpdateCustomersResult, {
+    description: 'Update multiple customers'
+  })
   public async updateCustomers(
     @Arg('customers', () => [CustomerInput]) customers: CustomerInput[]
-  ): Promise<BaseResult> {
-    try {
-      for (const customer of customers) {
+  ): Promise<UpdateCustomersResult> {
+    const errors: CustomerUpdateError[] = []
+    let successCount = 0
+
+    for (const customer of customers) {
+      try {
         await this._customer.updateCustomer(customer as Customer)
+        successCount++
+      } catch (error) {
+        errors.push({
+          customerKey: customer.key,
+          message: error.message || 'Failed to update customer'
+        })
       }
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
-      }
+    }
+
+    return {
+      success: errors.length === 0,
+      successCount,
+      failureCount: errors.length,
+      errors: errors.length > 0 ? errors : undefined
     }
   }
 }

@@ -123,14 +123,24 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
         ...updates
       }))
 
-      await updateProjects({
+      const result = await updateProjects({
         variables: {
           projects: projectsToUpdate
         }
       })
 
-      await propsRef.current.onSave(updates)
-      propsRef.current.onDismiss()
+      const data = result.data?.updateProjects
+      if (data?.success) {
+        await propsRef.current.onSave(updates)
+        propsRef.current.onDismiss()
+      } else if (data?.errors && data.errors.length > 0) {
+        // Show error message with details
+        const errorMessage = `${data.successCount} of ${projectsToUpdate.length} projects updated successfully. ${data.failureCount} failed: ${data.errors.map((e) => `${e.projectKey}: ${e.message}`).join(', ')}`
+        alert(errorMessage)
+        // Still close the panel and refresh even with partial success
+        await propsRef.current.onSave(updates)
+        propsRef.current.onDismiss()
+      }
     } catch {
       // Error is handled by Apollo Client
     } finally {

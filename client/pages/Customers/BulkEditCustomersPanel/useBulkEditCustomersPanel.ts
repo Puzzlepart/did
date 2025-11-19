@@ -98,14 +98,24 @@ export function useBulkEditCustomersPanel(props: IBulkEditCustomersPanelProps) {
         ...updates
       }))
 
-      await updateCustomers({
+      const result = await updateCustomers({
         variables: {
           customers: customersToUpdate
         }
       })
 
-      await propsRef.current.onSave(updates)
-      propsRef.current.onDismiss()
+      const data = result.data?.updateCustomers
+      if (data?.success) {
+        await propsRef.current.onSave(updates)
+        propsRef.current.onDismiss()
+      } else if (data?.errors && data.errors.length > 0) {
+        // Show error message with details
+        const errorMessage = `${data.successCount} of ${customersToUpdate.length} customers updated successfully. ${data.failureCount} failed: ${data.errors.map((e) => `${e.customerKey}: ${e.message}`).join(', ')}`
+        alert(errorMessage)
+        // Still close the panel and refresh even with partial success
+        await propsRef.current.onSave(updates)
+        propsRef.current.onDismiss()
+      }
     } catch {
       // Error is handled by Apollo Client
     } finally {

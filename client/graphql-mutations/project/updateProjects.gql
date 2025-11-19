@@ -1,9 +1,11 @@
 mutation UpdateProjects($projects: [ProjectInput!]!) {
   updateProjects(projects: $projects) {
     success
-    error {
+    successCount
+    failureCount
+    errors {
+      projectKey
       message
-      code
     }
   }
 }
