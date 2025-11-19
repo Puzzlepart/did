@@ -30,8 +30,10 @@ export function useLabelPicker({
         defaultSelectedKeys.includes(lbl.name)
       )
       setSelectedLabels(_selectedLabels)
+    } else {
+      setSelectedLabels([])
     }
-  }, [labels])
+  }, [labels, defaultSelectedKeys])
 
   return {
     onToggleLabel,

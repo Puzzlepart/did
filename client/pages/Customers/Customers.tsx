@@ -4,7 +4,9 @@ import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
+import { BulkEditCustomersPanel } from './BulkEditCustomersPanel'
 import { CustomersContext } from './context'
+import { CLOSE_BULK_EDIT_PANEL } from './reducer'
 import { useCustomers } from './useCustomers'
 
 /**
@@ -27,6 +29,14 @@ export const Customers: FC = () => {
           }}
         />
       )}
+      <BulkEditCustomersPanel
+        open={context.state.bulkEditPanelOpen}
+        onDismiss={() => context.dispatch(CLOSE_BULK_EDIT_PANEL())}
+        customers={context.state.bulkEditCustomers || []}
+        onSave={async () => {
+          await context.refetch()
+        }}
+      />
     </CustomersContext.Provider>
   )
 }
