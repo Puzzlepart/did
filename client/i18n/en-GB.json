@@ -142,6 +142,15 @@
     "budgetCriticalThreshold": "Budget Critical Threshold",
     "budgetCriticalThresholdDescription": "The percentage of the budget at which an error will be shown.",
     "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown.",
+    "bulkEdit": {
+      "label": "Bulk Edit",
+      "title": "Bulk Edit {{count}} Projects",
+      "description": "Edit multiple projects at once. Changes will apply to all selected projects.",
+      "selectedProjects": "Selected Projects"
+    },
+    "partnerCustomerLabel": "Partner Customer",
+    "searchPartnerCustomer": "Search for a partner customer...",
+    "searchParentProject": "Search for a parent project...",
     "resources": {
       "headerText": "Resources",
       "projectOwnerLabel": "Project Owner",
@@ -164,7 +173,6 @@
     "roleFieldLabel": "Project Role",
     "parentProject": "Parent Project",
     "parentProjectDescription": "Select a parent project to which this project belongs. This is particularly useful for organizing projects hierarchically and maintaining connections between related projects.",
-    "parentLabel": "Parent Project",
     "childrenLabel": "Child Projects",
     "parentProjectDisabledText": "You can only select a parent project under the same customer, and there's no customer selected, or no projects under the selected customer.",
     "partnerCustomer": "Partner Customer",
@@ -230,7 +238,13 @@
     "deleteSuccessTitle": "Customer Deleted Successfully",
     "deleteSuccess": "Customer **{{name}}** has been successfully deleted. You will be redirected to the Customers page.",
     "toggleInactive": "Show/hide inactive customers ({{count}})",
-    "searchPlaceholder": "Search {{count}} customers..."
+    "searchPlaceholder": "Search {{count}} customers...",
+    "bulkEdit": {
+      "label": "Bulk Edit",
+      "title": "Bulk Edit {{count}} Customers",
+      "description": "Edit multiple customers at once. Changes will apply to all selected customers.",
+      "selectedCustomers": "Selected Customers"
+    }
   },
   "admin": {
     "apiTokens": {
@@ -876,7 +890,6 @@
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
     "reason": "Reason",
-    "parentProject": "Parent Project",
     "invalidEmailValidation": "You've entered an invalid email.",
     "emailLabel": "Mail",
     "invalidEmailDomainValidation": "{{domain}} is not a supported domain.",

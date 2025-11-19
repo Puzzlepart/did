@@ -19,3 +19,10 @@ export const OPEN_CUSTOMER_PANEL = createAction<OpenPanelPayload>(
 )
 export const CLOSE_CUSTOMER_PANEL = createAction('CLOSE_CUSTOMER_PANEL')
 export const CUSTOMER_DELETE_SUCCESS = createAction('CUSTOMER_DELETE_SUCCESS')
+export const SET_SELECTED_CUSTOMERS = createAction<Customer[]>(
+  'SET_SELECTED_CUSTOMERS'
+)
+export const OPEN_BULK_EDIT_PANEL = createAction<Customer[]>(
+  'OPEN_BULK_EDIT_PANEL'
+)
+export const CLOSE_BULK_EDIT_PANEL = createAction('CLOSE_BULK_EDIT_PANEL')
