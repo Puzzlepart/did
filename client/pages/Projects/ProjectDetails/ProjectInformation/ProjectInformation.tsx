@@ -81,7 +81,7 @@ export const ProjectInformation: StyledComponent = () => {
       </InformationProperty>
       <InformationProperty
         hidden={!context.state.selected?.parent || !enableSimpleHierachy}
-        title={t('projects.parentLabel')}
+        title={t('projects.parentProject')}
         onRenderValue={() => (
           <ProjectLink
             project={context.state.selected?.parent}

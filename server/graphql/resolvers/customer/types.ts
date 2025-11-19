@@ -154,3 +154,37 @@ export interface ICreateOrUpdateCustomerVariables {
 export interface IDeleteCustomerVariables {
   key: string
 }
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes an error for a specific customer'
+})
+export class CustomerUpdateError {
+  @Field()
+  customerKey: string
+
+  @Field()
+  message: string
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes the result of updating multiple customers'
+})
+export class UpdateCustomersResult {
+  @Field({ nullable: true, defaultValue: true })
+  success: boolean
+
+  @Field({ nullable: true })
+  successCount: number
+
+  @Field({ nullable: true })
+  failureCount: number
+
+  @Field(() => [CustomerUpdateError], { nullable: true })
+  errors?: CustomerUpdateError[]
+}

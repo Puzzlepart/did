@@ -1,0 +1,11 @@
+mutation UpdateCustomers($customers: [CustomerInput!]!) {
+  updateCustomers(customers: $customers) {
+    success
+    successCount
+    failureCount
+    errors {
+      customerKey
+      message
+    }
+  }
+}

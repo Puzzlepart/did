@@ -11,7 +11,10 @@ import {
   DATA_UPDATED,
   OPEN_CUSTOMER_PANEL,
   OPEN_PROJECT_PANEL,
-  SET_SELECTED_CUSTOMER
+  SET_SELECTED_CUSTOMER,
+  SET_SELECTED_CUSTOMERS,
+  OPEN_BULK_EDIT_PANEL,
+  CLOSE_BULK_EDIT_PANEL
 } from './actions'
 /**
  * Use Customers reducer. It will create the initial state
@@ -30,7 +33,10 @@ export function useCustomersReducer() {
       panel: {
         open: false
       }
-    }
+    },
+    selectedCustomers: [],
+    bulkEditPanelOpen: false,
+    bulkEditCustomers: []
   }
   const urlParameters = useParams<ICustomersUrlParameters>()
   return useReducer(initialState, (builder) =>
@@ -84,6 +90,18 @@ export function useCustomersReducer() {
       })
       .addCase(CUSTOMER_DELETE_SUCCESS, (state) => {
         state.selected = null
+      })
+      .addCase(SET_SELECTED_CUSTOMERS, (state, { payload }) => {
+        state.selectedCustomers = payload
+      })
+      .addCase(OPEN_BULK_EDIT_PANEL, (state, { payload }) => {
+        state.bulkEditPanelOpen = true
+        state.bulkEditCustomers = payload
+      })
+      .addCase(CLOSE_BULK_EDIT_PANEL, (state) => {
+        state.bulkEditPanelOpen = false
+        state.selectedCustomers = []
+        state.bulkEditCustomers = []
       })
   )
 }

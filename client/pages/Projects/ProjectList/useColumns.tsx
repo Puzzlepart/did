@@ -88,7 +88,7 @@ export function useColumns(props: IProjectListProps): IListColumn[] {
             isMultiline: true
           }
         ),
-        createColumnDef<Project>('parent', t('projects.parentLabel'), {
+        createColumnDef<Project>('parent', t('projects.parentProject'), {
           hidden: !settings?.enableSimpleHierachy,
           renderAs: 'projectLink',
           createRenderProps: (project) => ({

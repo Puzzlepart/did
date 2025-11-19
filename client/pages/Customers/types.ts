@@ -53,4 +53,19 @@ export interface ICustomersState {
    * Any error that occurred while loading or updating the state.
    */
   error?: any
+
+  /**
+   * The list of selected customers for bulk operations.
+   */
+  selectedCustomers?: Customer[]
+
+  /**
+   * Whether the bulk edit panel is open.
+   */
+  bulkEditPanelOpen?: boolean
+
+  /**
+   * Snapshot of customers to bulk edit (preserved when panel is open).
+   */
+  bulkEditCustomers?: Customer[]
 }
