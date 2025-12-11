@@ -16,5 +16,5 @@
 | [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did/milestone/12) | 21.02.2024      | [![version](https://img.shields.io/badge/version-0.13.0-green.svg)](https://semver.org) |
 | [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-green.svg)](https://semver.org) |
 | [🖥️ &nbsp;14 -  &nbsp;Silicon](https://github.com/Puzzlepart/did/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-green.svg)](https://semver.org) |
-| [🎆 &nbsp;15 -  &nbsp;Phosphorous](https://github.com/Puzzlepart/did/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-yellow.svg)](https://semver.org) |
-| [🥚 &nbsp;16 -  &nbsp;Sulfur](https://github.com/Puzzlepart/did/milestone/16) | XX.09.2025 | [![version](https://img.shields.io/badge/version-0.16.0-red.svg)](https://semver.org) |
+| [🎆 &nbsp;15 -  &nbsp;Phosphorous](https://github.com/Puzzlepart/did/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-green.svg)](https://semver.org) |
+| [🥚 &nbsp;16 -  &nbsp;Sulfur](https://github.com/Puzzlepart/did/milestone/16) | 25.09.2025 | [![version](https://img.shields.io/badge/version-0.16.0-red.svg)](https://semver.org) |

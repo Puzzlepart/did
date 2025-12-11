@@ -2,13 +2,11 @@ import 'reflect-metadata'
 import { Field, Float, ID, Int, ObjectType } from 'type-graphql'
 import DateUtils, { DateWithTimezone } from '../../../../../shared/utils/date'
 import { stripHtmlString } from '../../../../utils/stripHtmlString'
-import {
-  Customer,
-  EventError,
-  LabelObject,
-  Project,
-  ProjectRole
-} from '../../types'
+// Import directly from specific modules to avoid circular dependency through the barrel `../../types`
+import { Customer } from '../../customer/types'
+import { LabelObject } from '../../label/types'
+import { Project, ProjectRole } from '../../project/types'
+import { EventError } from '../../types' // Keep this (defined in root types barrel)
 
 /**
  * An Object type that describes a Event

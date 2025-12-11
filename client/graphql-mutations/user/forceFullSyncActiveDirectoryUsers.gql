@@ -1,0 +1,11 @@
+mutation ForceFullSyncActiveDirectoryUsers {
+  forceFullSyncActiveDirectoryUsers {
+    success
+    error
+    upserted
+    deleted
+    totalUsers
+    isFullSync
+    duration
+  }
+}
