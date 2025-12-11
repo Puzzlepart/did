@@ -1,0 +1,11 @@
+mutation SyncActiveDirectoryUsers($forceFullSync: Boolean) {
+  syncActiveDirectoryUsers(forceFullSync: $forceFullSync) {
+    success
+    error
+    upserted
+    deleted
+    totalUsers
+    isFullSync
+    duration
+  }
+}
