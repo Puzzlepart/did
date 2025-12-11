@@ -1,24 +1,25 @@
 import { useMutation } from '@apollo/client'
 import { IUsersContext } from '../context'
-import $startUserDatabaseUpdate from './startUserDatabaseUpdate.gql'
+import $syncActiveDirectoryUsers from '../../../../graphql-mutations/user/syncActiveDirectoryUsers.gql'
 
 /**
- * Hook for starting user database update from Entra ID.
- * This will update all user properties in the MongoDB cache from MS Graph.
+ * Hook for syncing user database from Entra ID using delta queries.
+ * This efficiently updates only changed users and saves a delta link for future incremental syncs.
  *
  * @param context Context for Users page
- * @returns Function to start the user database update
+ * @returns Function to start the user database sync
  */
 export function useUserDatabaseUpdate(context: IUsersContext) {
-  const [startUserDatabaseUpdate] = useMutation($startUserDatabaseUpdate)
+  const [syncActiveDirectoryUsers] = useMutation($syncActiveDirectoryUsers)
 
-  return async (concurrency = 10) => {
+  return async (forceFullSync = false) => {
     try {
-      await startUserDatabaseUpdate({ 
-        variables: { concurrency } 
+      const result = await syncActiveDirectoryUsers({
+        variables: { forceFullSync }
       })
-      // Optionally refetch users to show updated data
+      // Refetch users to show updated data
       context.refetch()
+      return result.data?.syncActiveDirectoryUsers
     } catch (error) {
       // Error will be handled by Apollo Client error boundaries
       throw error
