@@ -103,12 +103,12 @@ export class UserResolver {
     try {
       // Check if initial sync is needed
       const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
-      
+
       // If initial sync is needed, trigger it in the background
       if (!syncStatus.hasBeenSynced || syncStatus.userCount === 0) {
         debug('No users in cache, triggering initial sync in background')
-        this._msgraphDeltaSvc.syncUsers().catch((err: any) => {
-          debug('Background initial sync failed:', err.message)
+        this._msgraphDeltaSvc.syncUsers().catch((error: any) => {
+          debug('Background initial sync failed:', error.message)
         })
       }
 
@@ -134,7 +134,7 @@ export class UserResolver {
   ): Promise<ActiveDirectoryUser[]> {
     try {
       const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
-      
+
       // Use cached search if users are synced, otherwise fall back to direct MS Graph
       if (syncStatus.hasBeenSynced && syncStatus.userCount > 0) {
         return await this._msgraphDeltaSvc.searchUsers(search, limit)
@@ -254,12 +254,12 @@ export class UserResolver {
         entries: reset
           ? []
           : [
-              ...(user.timebank?.entries ?? []),
-              {
-                id: entryId,
-                balanceAdjustment
-              }
-            ]
+            ...(user.timebank?.entries ?? []),
+            {
+              id: entryId,
+              balanceAdjustment
+            }
+          ]
       }
       await this._userSvc.updateUser(user, ['timebank'])
       return { success: true, balance: user.timebank.balance }

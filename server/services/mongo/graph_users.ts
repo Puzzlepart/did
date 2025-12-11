@@ -58,8 +58,8 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
       const users = await this.collection
         .find({ $text: { $search: safe } })
         .limit(limit)
-        .sort({ score: { $meta: "textScore" } })
-        .project({ score: { $meta: "textScore" } })
+        .sort({ score: { $meta: 'textScore' } })
+        .project({ score: { $meta: 'textScore' } })
         .toArray()
       return users as ActiveDirectoryUser[]
     } catch (error) {
