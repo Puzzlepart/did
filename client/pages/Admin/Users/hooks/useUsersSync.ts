@@ -32,7 +32,7 @@ export function useUsersSync(context: IUsersContext) {
       context.dispatch(SET_AD_USERS_LOADING(true))
       try {
         await loadActiveDirectoryUsers()
-      } catch (error) {
+      } catch {
         context.dispatch(SET_AD_USERS_LOADING(false))
         return { success: false, error: 'Failed to load AD users' }
       }
@@ -71,16 +71,16 @@ export function useUsersSync(context: IUsersContext) {
       })
       .filter(Boolean)
 
-    if (!_.isEmpty(users)) {
+    if (_.isEmpty(users)) {
+      return { success: true, count: 0 }
+    } else {
       try {
         await updateUsers({ variables: { users } })
         context.refetch()
         return { success: true, count: users.length }
-      } catch (error) {
+      } catch {
         return { success: false, error: 'Failed to update users' }
       }
-    } else {
-      return { success: true, count: 0 }
     }
   }
 }
