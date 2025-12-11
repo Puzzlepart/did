@@ -10,7 +10,7 @@ import { ISuggestionItem } from './types'
  */
 export const renderOption = (option: ISuggestionItem<any>): ReactElement => {
   const isDisabled = (option as any).disabled
-  const optionClass = isDisabled ? `${styles.option} ${styles.disabled || 'disabled'}` : styles.option
+  const optionClass = isDisabled ? `${styles.option} ${styles.disabled}` : styles.option
   return (
     <div className={optionClass}>
       <div className={styles.container}>
