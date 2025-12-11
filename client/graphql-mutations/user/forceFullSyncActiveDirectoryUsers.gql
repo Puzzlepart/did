@@ -1,7 +1,12 @@
 mutation ForceFullSyncActiveDirectoryUsers {
   forceFullSyncActiveDirectoryUsers {
     success
-    error
+    error {
+      name
+      message
+      code
+      statusCode
+    }
     upserted
     deleted
     totalUsers
