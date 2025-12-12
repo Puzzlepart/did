@@ -1,7 +1,12 @@
 mutation SyncActiveDirectoryUsers($forceFullSync: Boolean) {
   syncActiveDirectoryUsers(forceFullSync: $forceFullSync) {
     success
-    error
+    error {
+      name
+      message
+      code
+      statusCode
+    }
     upserted
     deleted
     totalUsers

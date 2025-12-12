@@ -179,7 +179,7 @@ export class RequestContext {
           context.permissions = get(request, 'user.role.permissions') || []
         }
       }
-      context.db = context.mcl.db(context.subscription.db)
+      context.db = context.mcl.db(context.subscription.db || environment('MONGO_DB_DB_NAME'))
       context.container.set({ id: 'CONTEXT', transient: true, value: context })
       context.container.set({ id: 'REQUEST', transient: true, value: request })
       debug(`Context created for request ${colors.magenta(context.requestId)}`)

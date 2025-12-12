@@ -297,7 +297,7 @@ export class UserResolver {
       debug('Error syncing Active Directory users:', error.message)
       return {
         success: false,
-        error: error.message
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
       }
     }
   }
@@ -327,7 +327,7 @@ export class UserResolver {
       debug('Error forcing full sync:', error.message)
       return {
         success: false,
-        error: error.message
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
       }
     }
   }
