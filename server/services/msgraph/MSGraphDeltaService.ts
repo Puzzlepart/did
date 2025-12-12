@@ -70,10 +70,12 @@ export class MSGraphDeltaService {
     const startTime = Date.now()
     debug('Starting user sync...')
 
+    let deltaLink: string | null = null
+
     try {
       // Get stored delta link
       const storedDelta = await this._deltaLinksService.getDeltaLink('users')
-      const deltaLink = forceFullSync ? null : storedDelta?.deltaLink
+      deltaLink = forceFullSync ? null : storedDelta?.deltaLink
 
       const isFullSync = !deltaLink
 
@@ -122,6 +124,22 @@ export class MSGraphDeltaService {
         duration
       }
     } catch (error) {
+      // Check if delta link is expired (prefer error code, fallback to message string)
+      // Microsoft Graph returns error code 'SyncStateNotFound' when delta link is expired/invalid
+      const errorCode = error.code || error.body?.error?.code
+      const isDeltaLinkExpired =
+        errorCode === 'SyncStateNotFound' ||
+        error.message?.includes('DeltaLink older than 30 days')
+
+      if (isDeltaLinkExpired) {
+        debug('Delta link expired or invalid, clearing and retrying with full sync')
+        await this._deltaLinksService.clearDeltaLink('users')
+        // Retry with full sync ONLY if not already doing one (prevents infinite recursion)
+        if (!forceFullSync && deltaLink) {
+          debug('Retrying with full sync after delta link expiration')
+          return await this.syncUsers(true)
+        }
+      }
       debug('Error during user sync:', error.message)
       throw error
     }

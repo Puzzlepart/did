@@ -133,7 +133,7 @@ export function useUsersMenuItems(context: IUsersContext) {
             }
           } else {
             appContext.displayToast(
-              result?.error || t('admin.users.userDatabaseUpdateError'),
+              result?.error?.message || t('admin.users.userDatabaseUpdateError'),
               'error'
             )
           }
