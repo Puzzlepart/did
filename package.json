@@ -182,7 +182,6 @@
     "@types/simple-oauth2": "4.1.0",
     "@types/string-format": "2.0.0",
     "@types/string-similarity": "4.0.0",
-    "@types/string-strip-html": "5.0.0",
     "@types/ua-parser-js": "0.7.35",
     "@types/underscore": "1.11.0",
     "@types/underscore.string": "0.0.38",
