@@ -43,7 +43,6 @@ export const NavigatePeriodsButtons: StyledComponent<
             )}
             key={index}
             name={name}
-            defaultChecked={period.id === state.selectedPeriod?.id}
             value={period.id}
             icon={getFluentIcon('CalendarWeekNumbers')}
             disabled={!!state.loading || state.selectedPeriod?.id === period.id}
