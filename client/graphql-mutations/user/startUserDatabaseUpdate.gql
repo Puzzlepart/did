@@ -1,0 +1,16 @@
+mutation StartUserDatabaseUpdate($concurrency: Float) {
+  startUserDatabaseUpdate(concurrency: $concurrency) {
+    running
+    startedAt
+    finishedAt
+    totalUsers
+    processed
+    failures
+    rateLimitErrors
+    networkErrors
+    authErrors
+    otherErrors
+    lastUserId
+    progressPercent
+  }
+}
