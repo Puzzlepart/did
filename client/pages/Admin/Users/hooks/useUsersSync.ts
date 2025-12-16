@@ -34,13 +34,13 @@ export function useUsersSync(context: IUsersContext) {
         await loadActiveDirectoryUsers()
       } catch {
         context.dispatch(SET_AD_USERS_LOADING(false))
-        return // Exit early if loading fails
+        return { success: false, error: 'Failed to load AD users' }
       }
     }
 
     // Wait for AD users to be loaded if they're currently loading
     if (context.state.adUsersLoading) {
-      return // Exit early, user can try again once loaded
+      return { success: false, error: 'AD users are still loading' }
     }
 
     // Determine which users to sync: selected users or all non-external users
@@ -70,9 +70,17 @@ export function useUsersSync(context: IUsersContext) {
         return omitTypename({ id: user.id, ...userUpdate })
       })
       .filter(Boolean)
-    if (!_.isEmpty(users)) {
-      await updateUsers({ variables: { users } })
-      context.refetch()
+
+    if (_.isEmpty(users)) {
+      return { success: true, count: 0 }
+    } else {
+      try {
+        await updateUsers({ variables: { users } })
+        context.refetch()
+        return { success: true, count: users.length }
+      } catch {
+        return { success: false, error: 'Failed to update users' }
+      }
     }
   }
 }

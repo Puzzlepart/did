@@ -142,6 +142,15 @@
     "budgetCriticalThreshold": "Budget Critical Threshold",
     "budgetCriticalThresholdDescription": "The percentage of the budget at which an error will be shown.",
     "budgetWarningThresholdDescription": "The percentage of the budget at which a warning will be shown.",
+    "bulkEdit": {
+      "label": "Bulk Edit",
+      "title": "Bulk Edit {{count}} Projects",
+      "description": "Edit multiple projects at once. Changes will apply to all selected projects.",
+      "selectedProjects": "Selected Projects"
+    },
+    "partnerCustomerLabel": "Partner Customer",
+    "searchPartnerCustomer": "Search for a partner customer...",
+    "searchParentProject": "Search for a parent project...",
     "resources": {
       "headerText": "Resources",
       "projectOwnerLabel": "Project Owner",
@@ -164,7 +173,6 @@
     "roleFieldLabel": "Project Role",
     "parentProject": "Parent Project",
     "parentProjectDescription": "Select a parent project to which this project belongs. This is particularly useful for organizing projects hierarchically and maintaining connections between related projects.",
-    "parentLabel": "Parent Project",
     "childrenLabel": "Child Projects",
     "parentProjectDisabledText": "You can only select a parent project under the same customer, and there's no customer selected, or no projects under the selected customer.",
     "partnerCustomer": "Partner Customer",
@@ -230,7 +238,13 @@
     "deleteSuccessTitle": "Customer Deleted Successfully",
     "deleteSuccess": "Customer **{{name}}** has been successfully deleted. You will be redirected to the Customers page.",
     "toggleInactive": "Show/hide inactive customers ({{count}})",
-    "searchPlaceholder": "Search {{count}} customers..."
+    "searchPlaceholder": "Search {{count}} customers...",
+    "bulkEdit": {
+      "label": "Bulk Edit",
+      "title": "Bulk Edit {{count}} Customers",
+      "description": "Edit multiple customers at once. Changes will apply to all selected customers.",
+      "selectedCustomers": "Selected Customers"
+    }
   },
   "admin": {
     "apiTokens": {
@@ -315,7 +329,19 @@
       "userFieldAdSync": "The field is automatically synchronized from Entra ID when the user logs in, and can not be modified in did.",
       "syncUsersLabel": "Synchronize user properties",
       "syncAllUsersLabel": "Synchronize all users",
+      "syncSelectedUsersLabel": "Synchronize selected users",
+      "updateUserDatabaseLabel": "Update user database from Entra ID",
+      "updatingUserDatabase": "Updating user database from Entra ID...",
+      "userDatabaseUpdateStatus": "Database update: {{processed}}/{{total}} users ({{percent}}%)",
+      "userDatabaseUpdateComplete": "Database update completed",
+      "userDatabaseUpdateFailed": "Database update failed ({{failures}} errors)",
       "synchronizingUserProperties": "Synchronizing user properties...",
+      "syncUsersSuccess": "Successfully synchronized {{count}} user(s).",
+      "syncUsersNoChanges": "All users are already up to date. No changes needed.",
+      "syncUsersError": "An error occurred while synchronizing users.",
+      "userDatabaseUpdateSuccess": "Database updated: {{upserted}} upserted, {{deleted}} deleted. Total users: {{total}}.",
+      "userDatabaseUpdateNoChanges": "Database is already up to date. No changes detected.",
+      "userDatabaseUpdateError": "An error occurred while updating the user database.",
       "updateSuccess": "Successfully updated user **{{displayName}}**.",
       "createSuccess": "The user **{{displayName}}** has been successfully created and is now ready to begin submitting their timesheets. Feel free to get started right away!",
       "updateError": "An error occured when updating user **{{displayName}}*.",
@@ -351,7 +377,9 @@
       "removeExternalUserSuccess": "Their access to the system has been removed. If you ever need to invite them again, you can do it easily from the user management page.",
       "removeExternalUserErrorTitle": "Something went wrong while removing external user {{displayName}}.",
       "removeExternalUserSuccessTitle": "Success! External user {{displayName}} no longer has access.",
-      "searchInactiveUsersLabel": "Search {{usersCount}} inactive users..."
+      "searchInactiveUsersLabel": "Search {{usersCount}} inactive users...",
+      "includeUsersWithoutGivenName": "Include users with no given name",
+      "showAlreadyAddedUsers": "Show already added users"
     },
     "weekStatus": {
       "headerText": "Week status",
@@ -367,8 +395,8 @@
       "confirmLockTitle": "Lock week",
       "confirmLockSubText": "Are you sure you want to lock week {{period}}?",
       "lockReasonPlaceholder": "Optionally enter the reason for locking this week...",
-  "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}.",
-  "lockPermissionDenied": "You do not have permission to lock or unlock weeks."
+      "weekLockedMessage": "Week {{weekNumber}} was locked {{lockedAt}}.",
+      "lockPermissionDenied": "You do not have permission to lock or unlock weeks."
     },
     "teams": "Teams",
     "teamsEnabledLabel": "Enable Teams functionality",
@@ -847,8 +875,9 @@
     "cancelButtonLabel": "Cancel",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "User settings",
-    "adUserLabel": "User from Active Directory",
-    "adUserRequired": "You must select an Active Directory user to add.",
+    "adUserLabel": "User from Entra ID",
+    "adUserRequired": "You must select an Entra ID user to add.",
+    "userAlreadyAdded": "Already added to system",
     "labelFieldLabel": "Labels",
     "filterLabels": "Filter labels...",
     "labelsText": "Labels",
@@ -876,7 +905,6 @@
     "hourlyRateLabel": "Hourly Rate",
     "noManagerLabel": "No Manager Assigned",
     "reason": "Reason",
-    "parentProject": "Parent Project",
     "invalidEmailValidation": "You've entered an invalid email.",
     "emailLabel": "Mail",
     "invalidEmailDomainValidation": "{{domain}} is not a supported domain.",
