@@ -67,12 +67,9 @@ function getPluginsForEnvironment() {
       }
     }),
     new CustomCompileHooks({
-      url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
-      localtunnel: {
-        port: process.env.PORT || 9001,
-        subdomain: process.env.LOCALTUNNEL_SUBDOMAIN,
-        callback: '{0}/auth/azuread-openidconnect/callback'
-      },
+      url: process.env.MICROSOFT_REDIRECT_URI 
+        ? new URL(process.env.MICROSOFT_REDIRECT_URI).origin 
+        : 'https://did-dev.craycon.no',
       launchBrowser: process.env.LAUNCH_BROWSER === '1'
     }),
     new LiveReloadPlugin()

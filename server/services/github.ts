@@ -11,9 +11,8 @@ import { environment } from '../utils'
 @Service({ global: false })
 export class GitHubService {
   private _auth = createAppAuth({
-    appId: environment('GITHUB_APPID'),
-    installationId: environment('GITHUB_INSTALLATION_ID'),
-    privateKey: environment('GITHUB_PRIVATE_KEY'),
+    appId: Number.parseInt(environment('GITHUB_APPID'), 10),
+    privateKey: environment('GITHUB_PRIVATE_KEY') as string,
     clientId: environment('GITHUB_CLIENT_ID'),
     clientSecret: environment('GITHUB_CLIENT_SECRET')
   })
@@ -25,7 +24,10 @@ export class GitHubService {
    * the access token.
    */
   private async _getAccessToken(): Promise<string> {
-    const { token } = (await this._auth({ type: 'installation' })) as any
+    const { token } = (await this._auth({
+      type: 'installation',
+      installationId: Number.parseInt(environment('GITHUB_INSTALLATION_ID'), 10)
+    })) as any
     return token
   }
 
