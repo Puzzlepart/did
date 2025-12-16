@@ -1,4 +1,4 @@
-import stripHtml from 'string-strip-html'
+import { stripHtml } from 'string-strip-html'
 
 /**
  * Strip html from string using [string-strip-html](https://www.npmjs.com/package/string-strip-html)
