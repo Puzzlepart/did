@@ -41,4 +41,21 @@
       }
     }
   }
+
+  &.disabled {
+    .container {
+      .content {
+        .text {
+          color: #999;
+          font-style: italic;
+          font-size: 100%;
+        }
+
+        .secondaryText {
+          color: #aaa;
+          font-size: 10px;
+        }
+      }
+    }
+  }
 }

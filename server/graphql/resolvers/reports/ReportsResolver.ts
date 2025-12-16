@@ -5,7 +5,8 @@ import { PermissionScope } from '../../../../shared/config/security'
 import { ReportService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
-import { TimesheetPeriodObject } from '../timesheet'
+// Import directly to avoid potential circular import through barrel index
+import { TimesheetPeriodObject } from '../timesheet/types/TimesheetPeriodObject'
 import {
   ConfirmedPeriodsQuery,
   ReportsQuery,

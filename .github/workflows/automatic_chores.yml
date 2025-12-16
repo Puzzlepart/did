@@ -3,23 +3,23 @@ name: Automatic chores
 on:
   push:
     branches:
-      - NOT-IN-USE-FOR-NOW
+      - dev
     paths:
-      - '.github/workflows/automatic_chores.yml'
-      - '.readme/*.md'
-      - '.readme/blueprint.json'
-      - '.changelog/*.md'
-      - '.changelog/blueprint.json'
-      - 'server/**'
-      - 'client/**'
-      - 'shared/**'
-      - 'package.json'
+      - ".github/workflows/automatic_chores.yml"
+      - ".readme/*.md"
+      - ".readme/blueprint.json"
+      - ".changelog/*.md"
+      - ".changelog/blueprint.json"
+      - "server/**"
+      - "client/**"
+      - "shared/**"
+      - "package.json"
 
 jobs:
   automatic_chores:
     name: Automatic chores
     runs-on: ubuntu-latest
-    concurrency: 
+    concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
