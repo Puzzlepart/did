@@ -1,22 +1,7 @@
-import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
 import { environment } from '../../../utils'
 import { onVerifySignin } from './onVerifySignin'
-
-/**
- * Get redirect URL
- */
-function getRedirectUrl() {
-  let redirectUrl = environment('MICROSOFT_REDIRECT_URI')
-  if (environment('LOCALTUNNEL_SUBDOMAIN', null)) {
-    const _redirectUrl = fs.readFileSync('.localtunnel', 'utf8')
-    if (_redirectUrl) {
-      redirectUrl = _redirectUrl
-    }
-  }
-  return redirectUrl
-}
 
 /**
  * Microsoft/Azure AD auth strategy
@@ -26,7 +11,7 @@ function getRedirectUrl() {
  * @returns `OIDCStrategy`
  */
 export const azureAdStrategy = (mcl: MongoClient) => {
-  const redirectUrl = getRedirectUrl()
+  const redirectUrl = environment('MICROSOFT_REDIRECT_URI')
   return new OIDCStrategy(
     {
       loggingLevel: 'error',
