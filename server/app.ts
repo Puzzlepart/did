@@ -69,6 +69,16 @@ export class App {
    */
   constructor() {
     this.instance = express()
+    // Trust proxy headers from Cloudflare tunnel and other reverse proxies
+    this.instance.set('trust proxy', true)
+    // Debug middleware to log incoming requests with proxy info
+    if (process.env.NODE_ENV === 'development') {
+      const debug = require('debug')('server:proxy')
+      this.instance.use((req, res, next) => {
+        debug(`[${req.method}] ${req.protocol}://${req.get('host')}${req.path}`)
+        next()
+      })
+    }
     this.instance.use(helmetMiddleware())
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))

@@ -67,7 +67,9 @@ function getPluginsForEnvironment() {
       }
     }),
     new CustomCompileHooks({
-      url: new URL(process.env.MICROSOFT_REDIRECT_URI).origin,
+      url: process.env.MICROSOFT_REDIRECT_URI 
+        ? new URL(process.env.MICROSOFT_REDIRECT_URI).origin 
+        : 'https://did-dev.craycon.no',
       launchBrowser: process.env.LAUNCH_BROWSER === '1'
     }),
     new LiveReloadPlugin()
