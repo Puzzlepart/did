@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { environment, getCallbackUrl } from '../../../utils'
+import { environment } from '../../../utils'
 import { onVerifySignin } from './onVerifySignin'
 import { Request } from 'express'
 const log = require('debug')('server/middleware/passort/azuread')
