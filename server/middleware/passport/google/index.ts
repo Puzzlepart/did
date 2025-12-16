@@ -3,7 +3,7 @@ import { Strategy as GoogleStrategyOAuth2 } from 'passport-google-oauth20'
 import { environment, getCallbackUrl } from '../../../utils'
 import { onVerifySignin } from './onVerifySignin'
 import { Request } from 'express'
-const log = require('debug')('server/middleware/passort/google')
+const log = require('debug')('server/middleware/passport/google')
 
 /**
  * Google auth strategy

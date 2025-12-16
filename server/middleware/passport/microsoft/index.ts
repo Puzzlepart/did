@@ -3,7 +3,7 @@ import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
 import { environment } from '../../../utils'
 import { onVerifySignin } from './onVerifySignin'
 import { Request } from 'express'
-const log = require('debug')('server/middleware/passort/azuread')
+const log = require('debug')('server/middleware/passport/azuread')
 
 /**
  * Microsoft/Azure AD auth strategy
@@ -44,20 +44,24 @@ export const azureAdStrategy = (mcl: MongoClient) => {
       return onVerifySignin(mcl, profile, tokenParameters, done)
     }
   )
-  
+
   // Intercept authenticate method to inject dynamic redirect URL from session
   const originalAuthenticate = strategy.authenticate
-  strategy.authenticate = function(this: any, req: any, options?: any) {
+  strategy.authenticate = function (
+    this: OIDCStrategy & { _options?: { redirectUrl?: string } },
+    req: Request & { session?: Record<string, unknown> },
+    options?: Record<string, unknown>
+  ) {
     // Check if we have a dynamic callback URL stored in the session
     const dynamicCallbackUrl = req?.session?.['__callbackUrl']
     if (dynamicCallbackUrl) {
       // Override the redirect URL for this specific authentication request
-      this._options.redirectUrl = dynamicCallbackUrl
+      this._options.redirectUrl = dynamicCallbackUrl as string
       log(`[Azure AD] Using dynamic redirect URL: ${dynamicCallbackUrl}`)
     }
     // Call original with proper this context
     return originalAuthenticate.call(this, req, options)
   }
-  
+
   return strategy
 }
