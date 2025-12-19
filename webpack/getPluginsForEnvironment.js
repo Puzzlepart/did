@@ -69,7 +69,7 @@ function getPluginsForEnvironment() {
     new CustomCompileHooks({
       url: process.env.MICROSOFT_REDIRECT_URI 
         ? new URL(process.env.MICROSOFT_REDIRECT_URI).origin 
-        : 'https://did-dev.craycon.no',
+        : 'http://localhost:9001',
       launchBrowser: process.env.LAUNCH_BROWSER === '1'
     }),
     new LiveReloadPlugin()
