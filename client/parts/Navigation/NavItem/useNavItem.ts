@@ -11,7 +11,7 @@ import { INavItemProps } from './types'
 export function useNavItem(props: INavItemProps) {
   const { dispatch } = useAppContext()
   const [, hasPermission] = usePermissions()
-  const isActive = location.pathname.startsWith(props.to.pathname)
+  const isActive = !!(typeof props.to === 'object' && props.to?.pathname && location.pathname.startsWith(props.to.pathname))
   return {
     onClick: () => dispatch(PAGE_NAVIGATE()),
     isActive,

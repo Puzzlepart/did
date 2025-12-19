@@ -71,6 +71,7 @@
     "ignoreAllTooltip": "Ignorer alle hendelser som ikke er tilkoblet ett prosjekt.",
     "eventNoTitleErrorText": "Legg inn et emne for denne hendelsen. \nArrangementer uten emne vil ikke bli inkludert i timelisten.",
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
+    "manuallyResolveEventActionTooltip": "Klikk for å manuelt løse hendelsen {{title}}. Husk at det alltid er best å holde Outlook-kalenderen din oppdatert.",
     "timebank": {
       "balance": " Du har {{balance}} timer i tidsbanken din.",
       "balanceAdjustmentLabel": "{{balanceAdjustment}} timer",
@@ -140,6 +141,15 @@
     "budgetWarningThreshold": "Advarsel terskel for budsjett",
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
     "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
+    "bulkEdit": {
+    "label": "Masseredigering",
+    "title": "Masserediger {{count}} prosjekter",
+    "description": "Rediger flere prosjekter samtidig. Endringer vil gjelde for alle valgte prosjekter.",
+    "selectedProjects": "Valgte prosjekter"
+    },
+    "partnerCustomerLabel": "Partnerkunde",
+    "searchPartnerCustomer": "Søk etter en partnerkunde...",
+    "searchParentProject": "Søk etter et overordnet prosjekt...",
     "resources": {
       "headerText": "Ressurser",
       "resourcesPlaceholder": "Søk etter brukere...",
@@ -162,7 +172,6 @@
     "roleFieldLabel": "Prosjektrolle",
     "parentProject": "Overordnet prosjekt",
     "parentProjectDescription": "Velg et overordnet prosjekt som dette prosjektet skal tilhøre. Dette er spesielt nyttig for å organisere prosjekter hierarkisk og opprettholde sammenhenger mellom relaterte prosjekter.",
-    "parentLabel": "Overordnet prosjekt",
     "childrenLabel": "Underordnede prosjekter",
     "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
     "partnerCustomer": "Partnerkunde",
@@ -182,6 +191,7 @@
     "deleteSuccess": "Prosjektet **{{name}}** ble slettet. Operasjonen ble fullført uten feil. Du blir omdirigert til prosjektsiden om 5 sekunder.",
     "projecNotReadyOrNotFound": "Prosjektet er foreløpig ikke tilgjengelig. Hvis det nettopp ble opprettet, kan du prøve igjen om noen få øyeblikk. Ellers kan det hende at det ikke eksisterer.",
     "projecNotReadyOrNotFoundTitle": "Prosjektet er utilgjengelig",
+    "homeButtonLabel": "Gå tilbake til prosjektsiden",
     "projectOwner": "Prosjekteier",
     "noAutomaticTimeEntriesText": "Klikk **{{buttonText}}** for å laste inn tidsoppføringene for dette prosjektet."
   },
@@ -227,7 +237,13 @@
     "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettes.",
     "deleteError": "Denne kunden har {{count}} tilknyttede prosjekter. For å fortsette med å slette kunden, må du fjerne alle relaterte prosjekter først.",
     "deleteSuccessTitle": "Kunde slettet",
-    "searchPlaceholder": "Søk i {{count}} kunder..."
+    "searchPlaceholder": "Søk i {{count}} kunder...",
+    "bulkEdit": {
+    "label": "Masseredigering",
+    "title": "Masserediger {{count}} kunder",
+    "description": "Rediger flere kunder samtidig. Endringer vil gjelde for alle valgte kunder.",
+    "selectedProjects": "Valgte kunder"
+    }
   },
   "admin": {
     "apiTokens": {
@@ -267,7 +283,19 @@
       "userFieldAdSync": "Feltet synkroniseres automatisk fra Entra ID når brukeren logger på, og kan ikke endres i did.",
       "syncUsersLabel": "Synkroniser brukeregenskaper",
       "syncAllUsersLabel": "Synkroniser alle brukere",
+      "syncSelectedUsersLabel": "Synkroniser valgte brukere",
+      "updateUserDatabaseLabel": "Oppdater brukerdatabase fra Entra ID",
+      "updatingUserDatabase": "Oppdaterer brukerdatabase fra Entra ID...",
+      "userDatabaseUpdateStatus": "Databaseoppdatering: {{processed}}/{{total}} brukere ({{percent}}%)",
+      "userDatabaseUpdateComplete": "Databaseoppdatering fullført",
+      "userDatabaseUpdateFailed": "Databaseoppdatering mislyktes ({{failures}} feil)",
       "synchronizingUserProperties": "Synkroniserer brukeregenskaper...",
+      "syncUsersSuccess": "Synkroniserte {{count}} bruker(e).",
+      "syncUsersNoChanges": "Alle brukere er allerede oppdaterte. Ingen endringer nødvendig.",
+      "syncUsersError": "Det oppstod en feil under synkronisering av brukere.",
+      "userDatabaseUpdateSuccess": "Database oppdatert: {{upserted}} lagt til/oppdatert, {{deleted}} slettet. Totalt antall brukere: {{total}}.",
+      "userDatabaseUpdateNoChanges": "Databasen er allerede oppdatert. Ingen endringer oppdaget.",
+      "userDatabaseUpdateError": "Det oppstod en feil under oppdatering av brukerdatabasen.",
       "updateSuccess": "Brukeren **{{displayName}}** ble oppdatert uten problem.",
       "createSuccess": "Brukeren **{{displayName}}** er opprettet og er nå klar til å begynne å registrere timer.",
       "updateError": "Det oppstod en feil under oppdatering av bruker **{{displayName}}**.",
@@ -303,7 +331,9 @@
       "removeExternalUserSuccess": "Vi har fjernet tilgangen deres til systemet. Hvis du ønsker å invitere dem igjen senere, kan du enkelt gjøre det fra brukerstyringssiden.",
       "removeExternalUserErrorTitle": "Noe gikk galt ved fjerning av ekstern bruker {{displayName}}.",
       "removeExternalUserSuccessTitle": "Ekstern bruker {{displayName}} er nå fjernet fra systemet.",
-      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukere..."
+      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukere...",
+      "includeUsersWithoutGivenName": "Inkluder brukere uten fornavn",
+      "showAlreadyAddedUsers": "Vis allerede tillagte brukere"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -845,8 +875,9 @@
     "cancelButtonLabel": "Avbryt",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "Brukerinstillinger",
-    "adUserLabel": "Bruker fra Active Directory",
-    "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
+    "adUserLabel": "Bruker fra Entra ID",
+    "adUserRequired": "Du må velge en Entra ID-bruker å legge til.",
+    "userAlreadyAdded": "Allerede lagt til i systemet",
     "labelFieldLabel": "Merkelapper",
     "filterLabels": "Filtrer merkelapper...",
     "labelsText": "Merkelapper",
@@ -872,7 +903,6 @@
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
     "reason": "Begrunnelse",
-    "parentProject": "Overordnet prosjekt",
     "invalidEmailValidation": "Du har skrevet inn en ugyldig e-post.",
     "emailLabel": "E-postadresse",
     "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene for eksterne brukere.",

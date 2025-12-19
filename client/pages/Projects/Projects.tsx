@@ -4,7 +4,8 @@ import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
 import { ProjectList } from './ProjectList'
-import { CLOSE_EDIT_PANEL } from './reducer'
+import { BulkEditProjectsPanel } from './BulkEditProjectsPanel'
+import { CLOSE_EDIT_PANEL, CLOSE_BULK_EDIT_PANEL } from './reducer'
 import { useProjects } from './useProjects'
 
 /**
@@ -40,6 +41,14 @@ export const Projects: FC = () => {
           onDismiss: () => context.dispatch(CLOSE_EDIT_PANEL())
         }}
         refetch={context.refetch}
+      />
+      <BulkEditProjectsPanel
+        open={context.state.bulkEditPanelOpen}
+        onDismiss={() => context.dispatch(CLOSE_BULK_EDIT_PANEL())}
+        projects={context.state.bulkEditProjects || []}
+        onSave={async () => {
+          await context.refetch()
+        }}
       />
     </ProjectsContext.Provider>
   )

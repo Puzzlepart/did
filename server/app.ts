@@ -69,6 +69,16 @@ export class App {
    */
   constructor() {
     this.instance = express()
+    // Trust proxy headers from Cloudflare tunnel and other reverse proxies
+    this.instance.set('trust proxy', true)
+    // Debug middleware to log incoming requests with proxy info
+    if (process.env.NODE_ENV === 'development') {
+      const debug = require('debug')('server:proxy')
+      this.instance.use((req, res, next) => {
+        debug(`[${req.method}] ${req.protocol}://${req.get('host')}${req.path}`)
+        next()
+      })
+    }
     this.instance.use(helmetMiddleware())
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
@@ -117,7 +127,15 @@ export class App {
       environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        // Increase timeouts for Azure Cosmos DB for MongoDB
+        // Cosmos DB can be slower than native MongoDB, especially for bulk operations
+        socketTimeoutMS: 300_000, // 5 minutes (default: 0 = no timeout)
+        serverSelectionTimeoutMS: 30_000, // 30 seconds (default: 30000)
+        maxPoolSize: 50, // Connection pool size (default: 100)
+        minPoolSize: 10, // Minimum connections to maintain
+        // Retry failed writes once (helps with Cosmos DB throttling)
+        retryWrites: true
       }
     )
     this.setupSession()

@@ -2,12 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
-const fs = require('fs')
 const chalk = require('chalk')
-const { promisify } = require('util')
-const format = require('string-format')
-const writeFileAsync = promisify(fs.writeFile)
-const localtunnel = require('localtunnel')
 const open = require('open')
 const log = console.log
 
@@ -31,34 +26,11 @@ class CustomCompileHooks {
     compiler.hooks.watchRun.tapAsync(
       CustomCompileHooks.name,
       /**
-       * Adding our `watchRun` hook that checks if 
-       * `localtunnel` should be set up. If 
-       * `this.options.localtunnel` is specified,
-       * the localtunnel is started with on the 
-       * specified `subdomain` and `port`.
-       * 
-       * The actual callback url used by the
-       * backend is persisted to a file on 
-       * the root of the project **.localtunnel**
+       * Adding our `watchRun` hook for first run setup
        */
       async ({ }, callback) => {
         if (!this.isFirstRun) {
           return callback()
-        }
-        if (this.options.localtunnel.subdomain) {
-          const { port, subdomain, callback } = this.options.localtunnel
-          log(`[${CustomCompileHooks.name}] Setting up localtunnel at ${subdomain}:${port}`)
-          const tunnel = await localtunnel({
-            subdomain,
-            port,
-          })
-          await writeFileAsync(
-            './.localtunnel',
-            format(callback, tunnel.url)
-          )
-          this.url = tunnel.url
-        } else {
-          await writeFileAsync('./.localtunnel', '')
         }
         callback()
       }

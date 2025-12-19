@@ -71,6 +71,7 @@
     "ignoreAllTooltip": "Ignorer alle hendingar som ikkje er tilkopla eitt prosjekt.",
     "eventNoTitleErrorText": "Legg inn eit emne for denne hendinga. Arrangement utan emne vil ikkje bli inkludert i timelista.",
     "eventDurationModifiedTitle": "Automatisk endret hendelsesvarighet",
+    "manuallyResolveEventActionTooltip": "Klikk for å manuelt løyse hendinga {{title}}. Hugs at det alltid er best å halde Outlook-kalenderen din oppdatert.",
     "timesheet": {
       "projectLabelsTooltipText": "hei"
     },
@@ -142,6 +143,15 @@
     "budgetWarningThreshold": "Advarsel terskel for budsjett",
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
     "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
+    "bulkEdit": {
+    "label": "Masseredigering",
+    "title": "Masserediger {{count}} prosjekt",
+    "description": "Rediger flere prosjekt samstundes. Endringar vil gjelde for alle valde prosjekt.",
+    "selectedProjects": "Valgte prosjekt"
+    },
+    "partnerCustomerLabel": "Partnarkundar",
+    "searchPartnerCustomer": "Søk etter ein partnarkundar...",
+    "searchParentProject": "Søk etter eit overordna prosjekt...",
     "resources": {
       "headerText": "Ressurser",
       "resourcesPlaceholder": "Søk etter brukarar...",
@@ -164,7 +174,6 @@
     "roleFieldLabel": "Prosjektrolle",
     "parentProject": "Overordna prosjekt",
     "parentProjectDescription": "Vel eit overordna prosjekt som dette prosjektet høyrer til. Dette er særleg nyttig for å organisere prosjekt hierarkisk og oppretthalde samanhengar mellom relaterte prosjekt.",
-    "parentLabel": "Overordna prosjekt",
     "childrenLabel": "Underordna prosjekter",
     "parentProjectDisabledText": "Du kan bare velge et overordnet prosjekt under samme kunde, og det er ikke valgt noen kunde, eller er det ingen prosjekter under den valgte kunden.",
     "partnerCustomer": "Partnerkunde",
@@ -230,7 +239,13 @@
     "checkSuccess": "Ingen prosjekter funnet. Kunden kan trygt slettast.",
     "deleteError": "Denne kunden har {{count}} tilknytta prosjekt. For å halda fram med å sletta kunden, må du fjerne alle relaterte prosjekt først.",
     "deleteSuccessTitle": "Kunde sletta",
-    "searchPlaceholder": "Søk i {{count}} kunder..."
+    "searchPlaceholder": "Søk i {{count}} kunder...",
+    "bulkEdit": {
+    "label": "Masseredigering",
+    "title": "Masserediger {{count}} kundar",
+    "description": "Rediger fleire kundar samstundes. Endringar vil gjelde for alle valde kundar.",
+    "selectedProjects": "Valde kundar"
+    }
   },
   "admin": {
     "apiTokens": {
@@ -270,7 +285,19 @@
       "userFieldAdSync": "Feltet blir synkronisert automatisk frå Entra ID når brukaren loggar seg på, og kan ikkje endrast i did.",
       "syncUsersLabel": "Synkroniser brukeregenskaper",
       "syncAllUsersLabel": "Synkroniser alle brukarar",
+      "syncSelectedUsersLabel": "Synkroniser valde brukarar",
+      "updateUserDatabaseLabel": "Oppdater brukardatabase frå Entra ID",
+      "updatingUserDatabase": "Oppdaterer brukardatabase frå Entra ID...",
+      "userDatabaseUpdateStatus": "Databaseoppdatering: {{processed}}/{{total}} brukarar ({{percent}}%)",
+      "userDatabaseUpdateComplete": "Databaseoppdatering fullført",
+      "userDatabaseUpdateFailed": "Databaseoppdatering mislykkast ({{failures}} feil)",
       "synchronizingUserProperties": "Synkroniserer brukaregenskaper...",
+      "syncUsersSuccess": "Synkroniserte {{count}} brukar(e).",
+      "syncUsersNoChanges": "Alle brukarar er allereie oppdaterte. Ingen endringar nødvendig.",
+      "syncUsersError": "Det oppstod ein feil under synkronisering av brukarar.",
+      "userDatabaseUpdateSuccess": "Database oppdatert: {{upserted}} lagt til/oppdatert, {{deleted}} sletta. Totalt antal brukarar: {{total}}.",
+      "userDatabaseUpdateNoChanges": "Databasen er allereie oppdatert. Ingen endringar oppdaga.",
+      "userDatabaseUpdateError": "Det oppstod ein feil under oppdatering av brukardatabasen.",
       "updateSuccess": "Brukaren **{{displayName}}** vart oppdatert utan problem.",
       "createSuccess": "Brukaren **{{displayName}}** er oppretta og er no klar til å byrja å registrera timar.",
       "updateError": "Det oppstod ein feil under oppdatering av brukar **{{displayName}}**.",
@@ -306,7 +333,9 @@
       "removeExternalUserSuccess": "Vi har fjerna tilgangen deira til systemet. Om du vil invitere dei igjen seinare, kan du enkelt gjere det frå brukarstyringssida.",
       "removeExternalUserErrorTitle": "Noko gjekk galt ved fjerning av ekstern brukar {{displayName}}.",
       "removeExternalUserSuccessTitle": "Ekstern brukar {{displayName}} er no fjerna frå systemet.",
-      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukarar..."
+      "searchInactiveUsersLabel": "Søk blant {{usersCount}} inaktive brukarar...",
+      "includeUsersWithoutGivenName": "Inkludér brukarar utan namn (givenName i Entra ID)",
+      "showAlreadyAddedUsers": "Vis allereie tillagde brukarar"
     },
     "labels": {
       "confirmDeleteTitle": "Slett merkelapp",
@@ -545,12 +574,12 @@
     "customQuerySuccessText": "Den eigendefinerte rapporten din er klar med {{count}} registrerte tidsoppføringar som samsvarer med filterkriteria dine.",
     "loadingCustomReport": "Laster inn rapport med eigendefinert spørring",
     "customQueryDateRangeDisabled": "Du kan ikkje filtrera på Startdato eller Sluttdato når du filtrerer etter Veke, Månad eller År.",
-    "customQueryYearDisabled": "Du kan ikkje filtrera på startdato eller sluttdato når du filtrerer på veke, månad eller år.",
+    "customQueryYearDisabled": "Du kan ikkje filtrere på startdato eller sluttdato når du filtrerer på veke, månad eller år.",
     "generatingReportProgressLabel": "Genererer rapport for {{text}} ({{description}})",
     "customQueryDescription": "Tilpass rapporten med eigne filter, som startdato/sluttdato, prosjekt eller tilsette.",
     "summaryDescription": "Få ei tabelloversikt over tidsregistreringar per tilsett og periode.",
-    "customQueryWeekDisabled": "Du kan ikkje filtrera på veke samtidig som du filtrerer på startdato, sluttdato eller månad.",
-    "customQueryMonthDisabled": "Du kan ikkje filtrera på månad samtidig som du filtrerer på startdato, sluttdato eller veke."
+    "customQueryWeekDisabled": "Du kan ikkje filtrere på veke samstundes som du filtrerer på startdato, sluttdato eller månad.",
+    "customQueryMonthDisabled": "Du kan ikkje filtrere på månad samstundes som du filtrerer på startdato, sluttdato eller veke."
   },
   "common": {
     "datePicker": {
@@ -846,8 +875,9 @@
     "cancelButtonLabel": "Avbryt",
     "toggleFilterPanel": "Filter",
     "userSettingsPanelHeaderText": "Brukerinstillingar",
-    "adUserLabel": "Brukar frå Active Directory",
-    "adUserRequired": "Du må velge en Active Directory-bruker å legge til.",
+    "adUserLabel": "Brukar frå Entra ID",
+    "adUserRequired": "Du må velge en Entra ID-bruker å legge til.",
+    "userAlreadyAdded": "Allereie lagt til i systemet",
     "labelFieldLabel": "Merkelappar",
     "filterLabels": "Filtrer merkelappar...",
     "labelsText": "Merkelappar",
@@ -873,7 +903,6 @@
     "hourlyRateLabel": "Timepris",
     "noManagerLabel": "Ingen leder tildelt",
     "reason": "Begrunning",
-    "parentProject": "Overordna prosjekt",
     "invalidEmailValidation": "Du har skrevet inn en ugyldig e-post.",
     "emailLabel": "E-postadresse",
     "invalidEmailDomainValidation": "{{domain}} er ikke et støttet domene for eksterne brukere.",
