@@ -240,7 +240,7 @@ export function useExcelExportWithProgress({
             // 3. Hit batch limit
             const normalEnd = batchEntries.length < batchSize
             const reachedEstimate = loadedEntries >= estimatedEntries
-            const hitBatchLimit = batchNumber >= MAX_BATCHES
+            const hitBatchLimit = batchNumber >= MAX_BATCHES_HARD_LIMIT
             
             hasMore = !normalEnd && !reachedEstimate && !hitBatchLimit
             
