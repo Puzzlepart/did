@@ -2,7 +2,7 @@ import { format } from '@fluentui/react'
 import { IListColumn } from 'components/List/types'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TimeEntry } from 'types'
+import { TimeEntry, User } from 'types'
 import { exportExcel } from 'utils/exportExcel'
 import { debugLogger } from 'utils'
 import { useLazyQuery } from '@apollo/client'
@@ -60,6 +60,41 @@ const MAX_CONSECUTIVE_EMPTY_BATCHES = 2
 const SAFETY_MULTIPLIER_OVER_ESTIMATE = 2
 
 /**
+ * Joins time entries with user data to populate resource fields.
+ * 
+ * @param entries - Time entries with resource.id
+ * @param users - Full user data
+ * @returns Time entries with complete resource data
+ */
+function mapTimeEntries(entries: TimeEntry[], users: User[]): TimeEntry[] {
+  if (!users || users.length === 0) {
+    return entries
+  }
+  
+  return entries.map((entry) => {
+    if (!entry.resource?.id) {
+      return entry
+    }
+    
+    const resource = users.find(({ id }) => id === entry.resource?.id)
+    if (!resource) {
+      return entry
+    }
+    
+    const manager = users.find(({ id }) => id === resource.manager?.id)
+    
+    return {
+      ...entry,
+      resource: {
+        id: entry.resource.id,
+        ...resource,
+        manager
+      } as User
+    }
+  })
+}
+
+/**
  * Excel export hook with progress tracking for large datasets
  * 
  * @category React Hook
@@ -102,6 +137,7 @@ export function useExcelExportWithProgress({
 
     try {
       let allEntries: TimeEntry[] = []
+      let users: User[] = []
       let totalBatches = 0
 
       // For large datasets, use pagination
@@ -119,6 +155,7 @@ export function useExcelExportWithProgress({
         })
 
         const firstBatchEntries = firstBatch.data?.timeEntries || firstBatch.data?.report || []
+        users = firstBatch.data?.users || []
         
         if (firstBatchEntries.length < 100) {
           // If first batch is less than 100, we have the exact count
@@ -178,6 +215,11 @@ export function useExcelExportWithProgress({
 
             // Extract entries from result - handle different possible field names
             const batchEntries = result.data?.timeEntries || result.data?.report || []
+            
+            // Users data is the same across all batches, only fetch once
+            if (users.length === 0 && result.data?.users) {
+              users = result.data.users
+            }
 
             // Debug logging for development
             debugLogger.log(`[Excel Export] Batch ${batchNumber}: skip=${skip}, limit=${batchSize}, got ${batchEntries.length} entries`)
@@ -289,6 +331,7 @@ export function useExcelExportWithProgress({
           variables: queryVariables
         })
         allEntries = result.data?.timeEntries || result.data?.report || []
+        users = result.data?.users || []
         
         setProgress(prev => ({
           ...prev,
@@ -299,6 +342,10 @@ export function useExcelExportWithProgress({
           totalBatches: 1
         }))
       }
+
+      // Map time entries with user data to populate resource fields
+      debugLogger.log(`[Excel Export] Mapping ${allEntries.length} entries with ${users.length} users`)
+      const mappedEntries = mapTimeEntries(allEntries, users)
 
       // Processing stage
       setProgress(prev => ({
@@ -319,7 +366,7 @@ export function useExcelExportWithProgress({
         new Date().toDateString().split(' ').join('-')
       )
 
-      await exportExcel(allEntries, {
+      await exportExcel(mappedEntries, {
         columns,
         fileName: formattedFileName
       })
