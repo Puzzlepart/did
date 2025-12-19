@@ -128,8 +128,7 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
       if (users.length === 0) return
 
       const totalBatches = Math.ceil(users.length / batchSize)
-      // eslint-disable-next-line no-console
-      console.log(`📦 Starting bulk upsert: ${users.length} users in ${totalBatches} batches (${batchSize} per batch)`)
+      debug(`📦 Starting bulk upsert: ${users.length} users in ${totalBatches} batches (${batchSize} per batch)`)
       debug(`Starting bulk upsert of ${users.length} users in batches of ${batchSize}`)
 
       // Process users in batches to prevent timeout
@@ -138,8 +137,7 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         const currentBatch = Math.floor(i / batchSize) + 1
         const batchStartTime = Date.now()
 
-        // eslint-disable-next-line no-console
-        console.log(`  ⏳ Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)...`)
+        debug(`  ⏳ Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)...`)
         debug(`Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)`)
 
         const bulkOps = batch.map((user) => ({
@@ -154,17 +152,14 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         await this.collection.bulkWrite(bulkOps, { ordered: false })
 
         const batchDuration = Date.now() - batchStartTime
-        // eslint-disable-next-line no-console
-        console.log(`  ✅ Batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`)
+        debug(`  ✅ Batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`)
         debug(`Completed batch ${currentBatch}/${totalBatches}`)
       }
 
-      // eslint-disable-next-line no-console
-      console.log(`✅ Bulk upsert completed for ${users.length} users`)
+      debug(`✅ Bulk upsert completed for ${users.length} users`)
       debug(`Bulk upsert completed for ${users.length} users`)
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('❌ Error in bulkUpsertUsers:', error.message)
+      debug('❌ Error in bulkUpsertUsers:', error.message)
       debug('Error in bulkUpsertUsers:', error.message)
       throw error
     }
@@ -196,8 +191,7 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
       if (userIds.length === 0) return
 
       const totalBatches = Math.ceil(userIds.length / batchSize)
-      // eslint-disable-next-line no-console
-      console.log(`🗑️  Starting bulk delete: ${userIds.length} users in ${totalBatches} batches (${batchSize} per batch)`)
+      debug(`🗑️  Starting bulk delete: ${userIds.length} users in ${totalBatches} batches (${batchSize} per batch)`)
       debug(`Starting bulk delete of ${userIds.length} users in batches of ${batchSize}`)
 
       // Process deletions in batches to prevent timeout
@@ -206,22 +200,18 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         const currentBatch = Math.floor(i / batchSize) + 1
         const batchStartTime = Date.now()
 
-        // eslint-disable-next-line no-console
-        console.log(`  ⏳ Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)...`)
+        debug(`  ⏳ Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)...`)
         debug(`Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)`)
         await this.collection.deleteMany({ id: { $in: batch } })
         const batchDuration = Date.now() - batchStartTime
-        // eslint-disable-next-line no-console
-        console.log(`  ✅ Deletion batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`)
+        debug(`  ✅ Deletion batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`)
         debug(`Completed deletion batch ${currentBatch}/${totalBatches}`)
       }
 
-      // eslint-disable-next-line no-console
-      console.log(`✅ Bulk delete completed for ${userIds.length} users`)
+      debug(`✅ Bulk delete completed for ${userIds.length} users`)
       debug(`Bulk delete completed for ${userIds.length} users`)
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('❌ Error in bulkDeleteUsers:', error.message)
+      debug('❌ Error in bulkDeleteUsers:', error.message)
       debug('Error in bulkDeleteUsers:', error.message)
       throw error
     }

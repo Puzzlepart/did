@@ -282,13 +282,11 @@ export class UserResolver {
     forceFullSync: boolean
   ): Promise<UserSyncResult> {
     const syncId = `sync-${Date.now()}`
-    // eslint-disable-next-line no-console
-    console.log(`[${syncId}] 🔄 Starting Active Directory user sync (forceFullSync: ${forceFullSync})...`)
+    debug(`[${syncId}] 🔄 Starting Active Directory user sync (forceFullSync: ${forceFullSync})...`)
     try {
       debug('Starting Active Directory user sync...')
       const result = await this._msgraphDeltaSvc.syncUsers(forceFullSync)
-      // eslint-disable-next-line no-console
-      console.log(`[${syncId}] ✅ Sync completed successfully:`, {
+      debug(`[${syncId}] ✅ Sync completed successfully:`, {
         upserted: result.upserted,
         deleted: result.deleted,
         totalUsers: result.totalUsers,

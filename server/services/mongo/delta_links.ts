@@ -1,6 +1,7 @@
 import { Inject, Service } from 'typedi'
 import { RequestContext } from '../../graphql/requestContext'
 import { MongoDocumentService } from './document'
+const debug = require('debug')('services/mongo/delta_links')
 
 /**
  * Delta link data structure for tracking MS Graph sync state
@@ -42,8 +43,7 @@ export class DeltaLinksService extends MongoDocumentService<DeltaLink> {
    */
   constructor(@Inject('CONTEXT') readonly context: RequestContext) {
     super(context, 'delta_links')
-    // eslint-disable-next-line no-console
-    console.log(`📍 DeltaLinksService initialized - Database: ${this.context.db.databaseName}, Collection: delta_links`)
+    debug(`📍 DeltaLinksService initialized - Database: ${this.context.db.databaseName}, Collection: delta_links`)
   }
 
   /**
@@ -53,20 +53,16 @@ export class DeltaLinksService extends MongoDocumentService<DeltaLink> {
    */
   public async getDeltaLink(resourceType: string): Promise<DeltaLink | null> {
     try {
-      // eslint-disable-next-line no-console
-      console.log(`🔍 Looking for delta link in: ${this.context.db.databaseName}.delta_links (resourceType: ${resourceType})`)
+      debug(`🔍 Looking for delta link in: ${this.context.db.databaseName}.delta_links (resourceType: ${resourceType})`)
       const deltaLink = await this.collection.findOne({ resourceType })
       if (deltaLink) {
-        // eslint-disable-next-line no-console
-        console.log(`✅ Found existing delta link (lastSync: ${deltaLink.lastSync?.toISOString()})`)
+        debug(`✅ Found existing delta link (lastSync: ${deltaLink.lastSync?.toISOString()})`)
       } else {
-        // eslint-disable-next-line no-console
-        console.log('ℹ️  No delta link found - will perform full sync')
+        debug('ℹ️  No delta link found - will perform full sync')
       }
       return deltaLink
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('❌ Error getting delta link:', error.message)
+      debug('❌ Error getting delta link:', error.message)
       throw error
     }
   }
@@ -82,13 +78,10 @@ export class DeltaLinksService extends MongoDocumentService<DeltaLink> {
     deltaLink: string
   ): Promise<void> {
     try {
-      // eslint-disable-next-line no-console
-      console.log(`💾 Saving delta link to: ${this.context.db.databaseName}.delta_links`)
-      // eslint-disable-next-line no-console
-      console.log(`   Resource: ${resourceType}`)
-      // eslint-disable-next-line no-console
-      console.log(`   Delta Link (first 100 chars): ${deltaLink.slice(0, 100)}...`)
-      
+      debug(`💾 Saving delta link to: ${this.context.db.databaseName}.delta_links`)
+      debug(`   Resource: ${resourceType}`)
+      debug(`   Delta Link (first 100 chars): ${deltaLink.slice(0, 100)}...`)
+
       const result = await this.collection.updateOne(
         { resourceType },
         {
@@ -101,12 +94,10 @@ export class DeltaLinksService extends MongoDocumentService<DeltaLink> {
         },
         { upsert: true }
       )
-      
-      // eslint-disable-next-line no-console
-      console.log(`✅ Delta link saved successfully (matched: ${result.matchedCount}, modified: ${result.modifiedCount}, upserted: ${result.upsertedCount})`)
+
+      debug(`✅ Delta link saved successfully (matched: ${result.matchedCount}, modified: ${result.modifiedCount}, upserted: ${result.upsertedCount})`)
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('❌ Error saving delta link:', error.message)
+      debug('❌ Error saving delta link:', error.message)
       throw error
     }
   }
@@ -118,14 +109,11 @@ export class DeltaLinksService extends MongoDocumentService<DeltaLink> {
    */
   public async clearDeltaLink(resourceType: string): Promise<void> {
     try {
-      // eslint-disable-next-line no-console
-      console.log(`🗑️  Clearing delta link from: ${this.context.db.databaseName}.delta_links (resourceType: ${resourceType})`)
+      debug(`🗑️  Clearing delta link from: ${this.context.db.databaseName}.delta_links (resourceType: ${resourceType})`)
       const result = await this.collection.deleteOne({ resourceType })
-      // eslint-disable-next-line no-console
-      console.log(`✅ Delta link cleared (deleted: ${result.deletedCount})`)
+      debug(`✅ Delta link cleared (deleted: ${result.deletedCount})`)
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('❌ Error clearing delta link:', error.message)
+      debug('❌ Error clearing delta link:', error.message)
       throw error
     }
   }
