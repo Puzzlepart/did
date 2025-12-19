@@ -118,7 +118,10 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
         icon: project.icon,
         webLink: project.webLink,
         externalSystemURL: project.externalSystemURL,
-          extensions: typeof project.extensions === 'string' ? project.extensions : JSON.stringify(project.extensions || {}),
+        extensions:
+          typeof project.extensions === 'string'
+            ? project.extensions
+            : JSON.stringify(project.extensions || {}),
         parentKey: project.parentKey,
         ...updates
       }))
@@ -135,7 +138,13 @@ export function useBulkEditProjectsPanel(props: IBulkEditProjectsPanelProps) {
         propsRef.current.onDismiss()
       } else if (data?.errors && data.errors.length > 0) {
         // Show error message with details
-        const errorMessage = `${data.successCount} of ${projectsToUpdate.length} projects updated successfully. ${data.failureCount} failed: ${data.errors.map((e) => `${e.projectKey}: ${e.message}`).join(', ')}`
+        const errorMessage = `${data.successCount} of ${
+          projectsToUpdate.length
+        } projects updated successfully. ${
+          data.failureCount
+        } failed: ${data.errors
+          .map((e) => `${e.projectKey}: ${e.message}`)
+          .join(', ')}`
         alert(errorMessage)
         // Still close the panel and refresh even with partial success
         await propsRef.current.onSave(updates)
