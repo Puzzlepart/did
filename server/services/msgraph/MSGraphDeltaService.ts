@@ -74,44 +74,69 @@ export class MSGraphDeltaService {
 
     try {
       // Get stored delta link
+      debug('📥 Checking for existing delta link...')
       const storedDelta = await this._deltaLinksService.getDeltaLink('users')
       deltaLink = forceFullSync ? null : storedDelta?.deltaLink
 
       const isFullSync = !deltaLink
 
       if (isFullSync) {
+        debug('🔄 Performing FULL sync (no delta link found or forced)')
         debug('Performing full sync (no delta link found or forced)')
       } else {
+        debug('⚡ Performing INCREMENTAL sync using existing delta link')
         debug('Performing incremental sync using delta link')
       }
 
       // Perform delta sync
+      debug('🌐 Fetching users from Microsoft Graph API...')
+      const graphStartTime = Date.now()
       const { users, deletedUserIds, newDeltaLink } = await this._msGraphService.getUsersDelta(deltaLink)
+      const graphDuration = Date.now() - graphStartTime
+      debug(`✅ Graph API call completed in ${graphDuration}ms:`, {
+        usersReceived: users.length,
+        deletedUsers: deletedUserIds.length,
+        hasDeltaLink: !!newDeltaLink
+      })
+      if (!newDeltaLink) {
+        debug('⚠️  WARNING: Microsoft Graph did not return a delta link! This will cause a full sync every time.')
+      }
 
       // Process deletions
       if (deletedUserIds.length > 0) {
+        debug(`🗑️  Deleting ${deletedUserIds.length} users from MongoDB...`)
         debug(`Deleting ${deletedUserIds.length} users`)
+        const deleteStartTime = Date.now()
         await this._graphUsersService.bulkDeleteUsers(deletedUserIds)
+        debug(`✅ Deletion completed in ${Date.now() - deleteStartTime}ms`)
       }
 
       // Process additions/updates
       if (users.length > 0) {
+        debug(`💾 Upserting ${users.length} users to MongoDB...`)
         debug(`Upserting ${users.length} users`)
+        const upsertStartTime = Date.now()
         await this._graphUsersService.bulkUpsertUsers(users)
+        debug(`✅ Upsert completed in ${Date.now() - upsertStartTime}ms`)
       }
 
       // Save the new delta link
       if (newDeltaLink) {
+        debug('💾 Saving new delta link...')
         await this._deltaLinksService.saveDeltaLink('users', newDeltaLink)
       }
 
       // Get total count
+      debug('🔢 Counting total users in database...')
       const totalUsers = await this._graphUsersService.getUserCount()
+      debug(`📊 Total users in database: ${totalUsers}`)
 
       // Clear cache
+      debug('🧹 Clearing Redis cache...')
       await this._cache.clear('getusers_')
 
       const duration = Date.now() - startTime
+      debug(`✅ Sync completed successfully in ${duration}ms`)
       debug(
         `Sync completed in ${duration}ms: ${users.length} upserted, ${deletedUserIds.length} deleted, ${totalUsers} total users`
       )
@@ -132,14 +157,21 @@ export class MSGraphDeltaService {
         error.message?.includes('DeltaLink older than 30 days')
 
       if (isDeltaLinkExpired) {
+        debug('⚠️  Delta link expired or invalid, clearing and retrying with full sync')
         debug('Delta link expired or invalid, clearing and retrying with full sync')
         await this._deltaLinksService.clearDeltaLink('users')
         // Retry with full sync ONLY if not already doing one (prevents infinite recursion)
         if (!forceFullSync && deltaLink) {
+          debug('🔄 Retrying with full sync after delta link expiration...')
           debug('Retrying with full sync after delta link expiration')
           return await this.syncUsers(true)
         }
       }
+      debug('❌ Error during user sync:', {
+        message: error.message,
+        code: errorCode,
+        name: error.name
+      })
       debug('Error during user sync:', error.message)
       throw error
     }

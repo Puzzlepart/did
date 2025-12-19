@@ -89,7 +89,7 @@ export class DateUtils {
 
     // Calculate minutes from the fractional part of hours
     const minutesTotal = (hoursPrecision % 1) * 60
-    const minutes = Math.floor(minutesTotal)
+    const minutes = Math.round(minutesTotal)
 
     // Calculate seconds from the fractional part of minutes if seconds option is enabled
     const seconds = options.seconds ? Math.round((minutesTotal % 1) * 60) : 0
