@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimeEntry } from 'types'
 import { exportExcel } from 'utils/exportExcel'
+import { debugLogger } from 'utils'
 import { useLazyQuery } from '@apollo/client'
 
 interface IUseExcelExportWithProgressOptions {
@@ -24,6 +25,39 @@ interface ExportProgress {
   totalBatches: number
   stage: 'loading' | 'processing' | 'generating' | 'complete'
 }
+
+/**
+ * Safety limit: Maximum total entries to fetch across all batches.
+ * Set to 200,000 based on browser memory constraints and Excel's practical limits.
+ * Prevents memory exhaustion when exporting very large datasets.
+ */
+const MAX_TOTAL_ENTRIES = 200_000
+
+/**
+ * Multiplier for estimating total entries from batch size.
+ * Used as (batchSize * 25) to estimate maximum expected entries.
+ * Value of 25 chosen based on typical year-long reports with daily entries.
+ */
+const BATCH_SIZE_MULTIPLIER = 25
+
+/**
+ * Hard limit on number of batches to prevent infinite loops.
+ * Set to 20 as an additional safety measure independent of entry count.
+ * With default batchSize of 5000, this allows up to 100k entries.
+ */
+const MAX_BATCHES_HARD_LIMIT = 20
+
+/**
+ * Maximum consecutive empty batches before stopping pagination.
+ * Prevents unnecessary API calls when no more data is available.
+ */
+const MAX_CONSECUTIVE_EMPTY_BATCHES = 2
+
+/**
+ * Multiplier for detecting data size exceeding estimates.
+ * If actual entries exceed (estimated * this multiplier), export stops as a safety measure.
+ */
+const SAFETY_MULTIPLIER_OVER_ESTIMATE = 2
 
 /**
  * Excel export hook with progress tracking for large datasets
@@ -101,8 +135,7 @@ export function useExcelExportWithProgress({
           }))
         } else {
           // We have a large dataset, estimate total batches conservatively
-          // Assume first 100 is representative and extrapolate
-          const estimatedTotal = Math.min(200_000, batchSize * 25) // Cap at 200k entries
+          const estimatedTotal = Math.min(MAX_TOTAL_ENTRIES, batchSize * BATCH_SIZE_MULTIPLIER)
           totalBatches = Math.ceil(estimatedTotal / batchSize)
 
           setProgress(prev => ({
@@ -119,10 +152,11 @@ export function useExcelExportWithProgress({
           let consecutiveEmptyBatches = 0
           // Estimate based on query type - these are reasonable estimates for safety
           const estimatedEntries = isLargeDataset ? 50_000 : 10_000
-          const MAX_EMPTY_BATCHES = 2 // Stop after 2 consecutive empty/small batches
-          const MAX_BATCHES = Math.ceil(estimatedEntries / batchSize) + 2 // Add buffer
+          // Calculate dynamic batch limit based on estimate, but cap with hard limit
+          const dynamicBatchLimit = Math.ceil(estimatedEntries / batchSize) + 2
+          const effectiveBatchLimit = Math.min(dynamicBatchLimit, MAX_BATCHES_HARD_LIMIT)
 
-          while (hasMore && batchNumber < Math.min(MAX_BATCHES, 20)) { // Hard limit: max 20 batches
+          while (hasMore && batchNumber < effectiveBatchLimit) {
             batchNumber++
             
             setProgress(prev => ({
@@ -146,37 +180,40 @@ export function useExcelExportWithProgress({
             const batchEntries = result.data?.timeEntries || result.data?.report || []
 
             // Debug logging for development
-            if (process.env.NODE_ENV === 'development') {
-              // eslint-disable-next-line no-console
-              console.log(`[Excel Export] Batch ${batchNumber}: skip=${skip}, limit=${batchSize}, got ${batchEntries.length} entries`)
-            }
+            debugLogger.log(`[Excel Export] Batch ${batchNumber}: skip=${skip}, limit=${batchSize}, got ${batchEntries.length} entries`)
             
-            // Check for duplicates by looking at IDs (exclude undefined/null IDs)
+            // Check for duplicates by looking at valid IDs (exclude entries with missing IDs)
             if (batchEntries.length > 0 && allEntries.length > 0) {
-              const newIds = new Set(
-                batchEntries
-                  .map(e => String(e.id))
-                  .filter(id => id && id !== 'undefined' && id !== 'null')
+              const getValidIds = (entries: Array<{ id?: unknown }>) =>
+                entries
+                  .map((e) => e.id)
+                  .filter(
+                    (id: unknown): id is string | number =>
+                      id !== null && id !== undefined
+                  )
+                  .map(String)
+
+              const newIds = new Set(getValidIds(batchEntries))
+              const existingIds = new Set(getValidIds(allEntries))
+              const duplicates = Array.from(newIds).filter((id: string) =>
+                existingIds.has(id)
               )
-              const existingIds = new Set(
-                allEntries
-                  .map(e => String(e.id))
-                  .filter(id => id && id !== 'undefined' && id !== 'null')
-              )
-              const duplicates = Array.from(newIds).filter((id: string) => existingIds.has(id))
-              
+
               if (duplicates.length > 0) {
-                // eslint-disable-next-line no-console
-                console.error(`[Excel Export] DUPLICATE ENTRIES DETECTED! ${duplicates.length} duplicates in batch ${batchNumber}`, duplicates.slice(0, 5))
+                debugLogger.error(
+                  `[Excel Export] DUPLICATE ENTRIES DETECTED! ${duplicates.length} duplicates in batch ${batchNumber}`,
+                  duplicates.slice(0, 5)
+                )
               }
             }
             
             // Check for no data or if we've exceeded expected total
             if (batchEntries.length === 0) {
               consecutiveEmptyBatches++
-              if (consecutiveEmptyBatches >= MAX_EMPTY_BATCHES) {
-                // eslint-disable-next-line no-console
-                console.log(`[Excel Export] Stopping due to ${consecutiveEmptyBatches} consecutive empty batches`)
+              if (consecutiveEmptyBatches >= MAX_CONSECUTIVE_EMPTY_BATCHES) {
+                debugLogger.log(
+                  `[Excel Export] Stopping due to ${consecutiveEmptyBatches} consecutive empty batches`
+                )
                 hasMore = false
                 break
               }
@@ -184,10 +221,12 @@ export function useExcelExportWithProgress({
               consecutiveEmptyBatches = 0 // Reset counter
             }
 
-            // Check for potential infinite loop - if we have way more data than estimated
-            if (allEntries.length > estimatedEntries * 2) {
-              // eslint-disable-next-line no-console
-              console.warn(`[Excel Export] STOPPING: Got ${allEntries.length} entries, estimated ~${estimatedEntries}. Possible infinite loop detected.`)
+            // Safety check: stop if we have significantly more data than estimated
+            if (allEntries.length > estimatedEntries * SAFETY_MULTIPLIER_OVER_ESTIMATE) {
+              debugLogger.warn(
+                `[Excel Export] STOPPING: Got ${allEntries.length} entries, estimated ~${estimatedEntries}. ` +
+                  'Data size exceeded estimate by more than 2x, stopping as safety measure.'
+              )
               hasMore = false
               break
             }
@@ -219,10 +258,10 @@ export function useExcelExportWithProgress({
             }))
 
             // Debug the termination condition
-            if (process.env.NODE_ENV === 'development') {
-              // eslint-disable-next-line no-console
-              console.log(`[Excel Export] Batch ${batchNumber}: got ${batchEntries.length} entries, total: ${loadedEntries}, normalEnd: ${normalEnd}, reachedEstimate: ${reachedEstimate}, hasMore: ${hasMore}`)
-            }
+            debugLogger.log(
+              `[Excel Export] Batch ${batchNumber}: got ${batchEntries.length} entries, ` +
+                `total: ${loadedEntries}, normalEnd: ${normalEnd}, reachedEstimate: ${reachedEstimate}, hasMore: ${hasMore}`
+            )
 
             // Increment skip for next batch
             skip += batchSize
@@ -232,14 +271,16 @@ export function useExcelExportWithProgress({
           }
 
           // Final safety check and warnings
-          if (batchNumber >= 20) {
-            // eslint-disable-next-line no-console
-            console.warn('[Excel Export] Stopped at safety limit of 20 batches')
+          if (batchNumber >= MAX_BATCHES_HARD_LIMIT) {
+            debugLogger.warn(
+              `[Excel Export] Stopped at safety limit of ${MAX_BATCHES_HARD_LIMIT} batches`
+            )
           }
-          
+
           if (allEntries.length > estimatedEntries * 1.5) {
-            // eslint-disable-next-line no-console
-            console.warn(`[Excel Export] Info: Got ${allEntries.length} entries, estimated ~${estimatedEntries}`)
+            debugLogger.warn(
+              `[Excel Export] Info: Got ${allEntries.length} entries, estimated ~${estimatedEntries}`
+            )
           }
         }
       } else {
@@ -305,8 +346,7 @@ export function useExcelExportWithProgress({
       }, 3000)
 
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error exporting to Excel:', error)
+      debugLogger.error('Error exporting to Excel:', error)
       setProgress({
         isExporting: false,
         totalEntries: 0,

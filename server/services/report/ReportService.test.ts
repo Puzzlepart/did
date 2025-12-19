@@ -3,6 +3,12 @@ import { ReportService } from './ReportService'
 
 /**
  * Test for ReportService memory optimization
+ * 
+ * Note: These tests access private methods using `as any` type casting.
+ * This is intentional to test critical safety limit logic that prevents memory exhaustion.
+ * The safety limit behavior is complex and important enough to warrant direct testing
+ * rather than only testing through the public getReport API, which would require
+ * extensive mocking of database operations and make tests brittle.
  */
 test('ReportService should apply safety limits for large queries', async (t) => {
   // Mock the required dependencies
@@ -31,11 +37,11 @@ test('ReportService should apply safety limits for large queries', async (t) => 
   t.true(isLargeQuery, 'CURRENT_YEAR should be identified as a large query')
 
   // Test that safety limits are applied
-  const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_YEAR')
+  const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_YEAR', true)
   t.is(safeQuery.limit, 5000, 'Default limit should be applied for large queries')
 
   // Test that extremely large limits are capped
-  const cappedQuery = (reportService as any)._applySafetyLimits({ limit: 100000 }, 'CURRENT_YEAR')
+  const cappedQuery = (reportService as any)._applySafetyLimits({ limit: 100000 }, 'CURRENT_YEAR', true)
   t.is(cappedQuery.limit, 50000, 'Extremely large limits should be capped')
 })
 
@@ -60,11 +66,12 @@ test('ReportService should not apply limits for small queries', async (t) => {
     mockConfirmedPeriodService as any
   )
 
-  // Test that CURRENT_MONTH preset is not identified as a large query
-  const isLargeQuery = (reportService as any)._isLargeQuery('CURRENT_MONTH')
-  t.false(isLargeQuery, 'CURRENT_MONTH should not be identified as a large query')
+  // Test that CURRENT_MONTH preset with month field is not identified as a large query
+  const generatedQuery = { month: 12, year: 2025 } // Simulating generated query from CURRENT_MONTH preset
+  const isLargeQuery = (reportService as any)._isLargeQuery('CURRENT_MONTH', generatedQuery)
+  t.false(isLargeQuery, 'CURRENT_MONTH with month field should not be identified as a large query')
 
   // Test that no safety limits are applied for small queries
-  const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_MONTH')
+  const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_MONTH', false)
   t.is(safeQuery.limit, undefined, 'No limit should be applied for small queries')
 })

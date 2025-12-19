@@ -48,6 +48,17 @@ export class ReportService {
   }
 
   /**
+   * Helper to extract standard customer fields for reports
+   * 
+   * @param customer - Customer object to pick fields from
+   */
+  private _pickCustomerFields(customer: any) {
+    return customer
+      ? _.pick(customer, 'key', 'name', 'description', 'icon')
+      : null
+  }
+
+  /**
    * Generates report by sorting time entries by date, and then
    * mapping each time entry to a report entry, which is an object
    * containing the time entry, the project, the customer, and the
@@ -97,10 +108,8 @@ export class ReportService {
             'parent',
             'labels'
           ),
-          customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
-          partner: partner
-            ? _.pick(partner, 'key', 'name', 'description', 'icon')
-            : null,
+          customer: this._pickCustomerFields(customer),
+          partner: this._pickCustomerFields(partner),
           resource
         }
         return [...entries, mergedEntry]
@@ -135,8 +144,8 @@ export class ReportService {
       })
 
       // Apply safety limits for large queries
-      const safeQuery = this._applySafetyLimits(query, preset)
       const isLargeQuery = this._isLargeQuery(preset, query_)
+      const safeQuery = this._applySafetyLimits(query, preset, isLargeQuery)
       
       debug('[getReport]', 'Query analysis:', {
         preset,
@@ -190,34 +199,65 @@ export class ReportService {
   }
 
   /**
+   * Default limit for large queries without explicit pagination.
+   * Set to 5,000 as a reasonable balance between performance and data completeness
+   * for typical monthly/yearly reports with hundreds of time entries.
+   */
+  private readonly DEFAULT_LARGE_QUERY_LIMIT = 5000
+
+  /**
+   * Maximum allowed limit for any single query.
+   * Set to 50,000 based on memory constraints and observed performance limits.
+   * Queries exceeding this use streaming/batching approaches instead.
+   */
+  private readonly MAX_LIMIT = 50_000
+
+  /**
    * Apply safety limits to prevent memory exhaustion on large queries
    */
-  private _applySafetyLimits(query: ReportsQuery, preset?: ReportsQueryPreset): ReportsQuery {
+  private _applySafetyLimits(
+    query: ReportsQuery,
+    preset?: ReportsQueryPreset,
+    isLargeQuery?: boolean
+  ): ReportsQuery {
     const safeQuery = { ...query }
     
     // Apply default limits for large queries if no limit is specified
-    if (!safeQuery.limit && this._isLargeQuery(preset)) {
-      const DEFAULT_LARGE_QUERY_LIMIT = 5000
-      safeQuery.limit = DEFAULT_LARGE_QUERY_LIMIT
+    if (!safeQuery.limit && isLargeQuery) {
+      safeQuery.limit = this.DEFAULT_LARGE_QUERY_LIMIT
       
-      debug('[_applySafetyLimits]', `Applied default limit of ${DEFAULT_LARGE_QUERY_LIMIT} for large query`, {
+      debug('[_applySafetyLimits]', `Applied default limit of ${this.DEFAULT_LARGE_QUERY_LIMIT} for large query`, {
         preset,
         originalLimit: query.limit
       })
     }
     
     // Cap extremely large limits
-    const MAX_LIMIT = 50_000
-    if (safeQuery.limit && safeQuery.limit > MAX_LIMIT) {
-      debug('[_applySafetyLimits]', `Capping limit from ${safeQuery.limit} to ${MAX_LIMIT}`)
-      safeQuery.limit = MAX_LIMIT
+    if (safeQuery.limit && safeQuery.limit > this.MAX_LIMIT) {
+      debug('[_applySafetyLimits]', `Capping limit from ${safeQuery.limit} to ${this.MAX_LIMIT}`)
+      safeQuery.limit = this.MAX_LIMIT
     }
     
     return safeQuery
   }
 
   /**
-   * Memory-efficient report generation using streaming for large datasets
+   * Maximum number of entries to keep in memory during streaming operations.
+   * Set to 10,000 to balance memory usage with report completeness.
+   * When this limit is reached, data collection stops and a warning is logged.
+   * 
+   * Note: This is not true streaming - all data is loaded into memory before returning.
+   * True streaming would require architectural changes to support progressive data delivery.
+   */
+  private readonly MAX_MEMORY_ENTRIES = 10_000
+
+  /**
+   * Memory-efficient report generation using streaming for large datasets.
+   * 
+   * Note: Despite the name, this method does not stream results to the client.
+   * It uses MongoDB cursor streaming internally but accumulates all results in memory
+   * before returning. This still helps with database memory usage but may cause
+   * memory issues with truly large datasets (>10k entries).
    */
   private async _getReportWithStreaming(
     query: any,
@@ -230,7 +270,6 @@ export class ReportService {
 
     const reportEntries: TimeEntry[] = []
     const BATCH_SIZE = 1000
-    const MAX_MEMORY_ENTRIES = 10_000 // Limit total entries in memory
 
     await this._timeEntrySvc.streamFind(
       query,
@@ -242,12 +281,15 @@ export class ReportService {
           sortAsc
         })
         
-        // If we're approaching memory limit, process and clear
-        if (reportEntries.length + processedBatch.length > MAX_MEMORY_ENTRIES) {
-          debug('[_getReportWithStreaming]', 'Memory limit reached, processing batch')
-          // In a real implementation, you might want to yield results or write to a file
-          // For now, we'll take the first MAX_MEMORY_ENTRIES entries
-          const remainingSpace = MAX_MEMORY_ENTRIES - reportEntries.length
+        // If we're approaching memory limit, stop processing and log warning
+        if (reportEntries.length + processedBatch.length > this.MAX_MEMORY_ENTRIES) {
+          debug(
+            '[_getReportWithStreaming]',
+            `⚠️  Memory limit reached: ${reportEntries.length} entries loaded, limit is ${this.MAX_MEMORY_ENTRIES}. ` +
+            'Data will be truncated. Consider using pagination or requesting a smaller date range.'
+          )
+          // Take only what fits within the limit
+          const remainingSpace = this.MAX_MEMORY_ENTRIES - reportEntries.length
           if (remainingSpace > 0) {
             reportEntries.push(...processedBatch.slice(0, remainingSpace))
           }
@@ -260,6 +302,11 @@ export class ReportService {
         batchSize: BATCH_SIZE,
         sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
       }
+    )
+
+    debug(
+      '[_getReportWithStreaming]',
+      `Completed streaming: loaded ${reportEntries.length} entries (max: ${this.MAX_MEMORY_ENTRIES})`
     )
 
     // Sort the final result if needed
