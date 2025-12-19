@@ -127,7 +127,15 @@ export class App {
       environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        // Increase timeouts for Azure Cosmos DB for MongoDB
+        // Cosmos DB can be slower than native MongoDB, especially for bulk operations
+        socketTimeoutMS: 300_000, // 5 minutes (default: 0 = no timeout)
+        serverSelectionTimeoutMS: 30_000, // 30 seconds (default: 30000)
+        maxPoolSize: 50, // Connection pool size (default: 100)
+        minPoolSize: 10, // Minimum connections to maintain
+        // Retry failed writes once (helps with Cosmos DB throttling)
+        retryWrites: true
       }
     )
     this.setupSession()

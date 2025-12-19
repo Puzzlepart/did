@@ -281,9 +281,20 @@ export class UserResolver {
     @Arg('forceFullSync', { nullable: true, defaultValue: false })
     forceFullSync: boolean
   ): Promise<UserSyncResult> {
+    const syncId = `sync-${Date.now()}`
+    // eslint-disable-next-line no-console
+    console.log(`[${syncId}] 🔄 Starting Active Directory user sync (forceFullSync: ${forceFullSync})...`)
     try {
       debug('Starting Active Directory user sync...')
       const result = await this._msgraphDeltaSvc.syncUsers(forceFullSync)
+      // eslint-disable-next-line no-console
+      console.log(`[${syncId}] ✅ Sync completed successfully:`, {
+        upserted: result.upserted,
+        deleted: result.deleted,
+        totalUsers: result.totalUsers,
+        isFullSync: result.isFullSync,
+        duration: `${result.duration}ms`
+      })
       return {
         success: true,
         error: null,
@@ -294,6 +305,13 @@ export class UserResolver {
         duration: result.duration
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`[${syncId}] ❌ Sync failed:`, {
+        name: error.name,
+        message: error.message,
+        code: error.code,
+        statusCode: error.statusCode
+      })
       debug('Error syncing Active Directory users:', error.message)
       return {
         success: false,
