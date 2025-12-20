@@ -6,6 +6,8 @@ import { TimeEntry, User } from 'types'
 import { exportExcel } from 'utils/exportExcel'
 import { debugLogger } from 'utils'
 import { useLazyQuery } from '@apollo/client'
+import report_custom from 'pages/Reports/queries/report-custom.gql'
+import { DateObject } from 'DateUtils'
 
 interface IUseExcelExportWithProgressOptions {
   query: any
@@ -14,6 +16,7 @@ interface IUseExcelExportWithProgressOptions {
   columns: IListColumn[]
   isLargeDataset?: boolean
   batchSize?: number
+  presetId?: string  // e.g., 'current_year', 'last_year' for generating preset query
 }
 
 interface ExportProgress {
@@ -41,23 +44,48 @@ const MAX_TOTAL_ENTRIES = 200_000
 const BATCH_SIZE_MULTIPLIER = 25
 
 /**
- * Hard limit on number of batches to prevent infinite loops.
- * Set to 20 as an additional safety measure independent of entry count.
- * With default batchSize of 5000, this allows up to 100k entries.
- */
-const MAX_BATCHES_HARD_LIMIT = 20
-
-/**
  * Maximum consecutive empty batches before stopping pagination.
  * Prevents unnecessary API calls when no more data is available.
  */
 const MAX_CONSECUTIVE_EMPTY_BATCHES = 2
 
 /**
- * Multiplier for detecting data size exceeding estimates.
- * If actual entries exceed (estimated * this multiplier), export stops as a safety measure.
+ * Generate query parameters for preset queries
+ * Mirrors server-side _generatePresetQuery logic
  */
-const SAFETY_MULTIPLIER_OVER_ESTIMATE = 2
+function generatePresetQuery(presetId?: string): Record<string, any> {
+  if (!presetId) return {}
+  
+  const dateObject = new DateObject()
+  
+  switch (presetId) {
+    case 'last_month': {
+      const lastMonth = dateObject.add('-1month').toObject()
+      return {
+        month: lastMonth.month,
+        year: lastMonth.year
+      }
+    }
+    case 'current_month': {
+      const current = dateObject.toObject()
+      return {
+        month: current.month,
+        year: current.year
+      }
+    }
+    case 'last_year': {
+      const lastYear = dateObject.toObject('year').year - 1
+      return { year: lastYear }
+    }
+    case 'current_year': {
+      const currentYear = dateObject.toObject('year').year
+      return { year: currentYear }
+    }
+    default: {
+      return {}
+    }
+  }
+}
 
 /**
  * Joins time entries with user data to populate resource fields.
@@ -105,7 +133,8 @@ export function useExcelExportWithProgress({
   fileName,
   columns,
   isLargeDataset = false,
-  batchSize = 5000
+  batchSize = 5000,
+  presetId
 }: IUseExcelExportWithProgressOptions) {
   const { t } = useTranslation()
   const [progress, setProgress] = useState<ExportProgress>({
@@ -118,7 +147,11 @@ export function useExcelExportWithProgress({
     stage: 'loading'
   })
 
-  const [executeQuery] = useLazyQuery(query, {
+  // For large datasets with pagination, use report_custom query which supports limit/skip
+  // For small datasets, use the original query (which might be a preset query)
+  const effectiveQuery = isLargeDataset ? report_custom : query
+  
+  const [executeQuery] = useLazyQuery(effectiveQuery, {
     fetchPolicy: 'no-cache'
   })
 
@@ -142,188 +175,136 @@ export function useExcelExportWithProgress({
 
       // For large datasets, use pagination
       if (isLargeDataset) {
-        // Get first small batch to estimate total and determine batching strategy
-        const firstBatch = await executeQuery({
-          variables: {
-            ...queryVariables,
-            query: {
-              ...queryVariables?.query,
-              limit: 100,  // Small batch to estimate
-              skip: 0
+        // For preset queries, generate the preset parameters and pass them as query.
+        // Note: We cannot reliably infer "end of dataset" from the number of returned
+        // report entries in a batch, because the server may filter out entries during
+        // report generation (e.g., missing project/customer/resource), yielding fewer
+        // than `limit` even when more raw time entries exist. Instead, we paginate
+        // until we hit consecutive empty batches (or safety limits).
+        const presetQuery = generatePresetQuery(presetId)
+        const baseQuery = presetId ? presetQuery : (queryVariables?.query || {})
+
+        // Estimate total batches conservatively (used for progress display only)
+        const estimatedTotal = Math.min(
+          MAX_TOTAL_ENTRIES,
+          batchSize * BATCH_SIZE_MULTIPLIER
+        )
+        totalBatches = Math.ceil(estimatedTotal / batchSize)
+
+        setProgress((prev) => ({
+          ...prev,
+          totalEntries: estimatedTotal,
+          totalBatches,
+          loadedEntries: 0
+        }))
+
+        // Fetch in batches; stop only on consecutive empty batches or safety limits.
+        let skip = 0
+        let hasMore = true
+        let batchNumber = 0
+        let consecutiveEmptyBatches = 0
+
+        const dynamicBatchLimit = Math.ceil(MAX_TOTAL_ENTRIES / batchSize) + 2
+        const effectiveBatchLimit = dynamicBatchLimit
+
+        while (hasMore && batchNumber < effectiveBatchLimit) {
+          batchNumber++
+
+          setProgress((prev) => ({
+            ...prev,
+            currentBatch: batchNumber,
+            stage: 'loading'
+          }))
+
+          const result = await executeQuery({
+            variables: {
+              query: {
+                ...baseQuery,
+                limit: batchSize,
+                skip
+              }
+            }
+          })
+
+          // Extract entries from result - handle different possible field names
+          const batchEntries = result.data?.timeEntries || result.data?.report || []
+
+          // Users data is the same across all batches, only fetch once
+          if (users.length === 0 && result.data?.users) {
+            users = result.data.users
+          }
+
+          debugLogger.log(
+            `[Excel Export] Batch ${batchNumber}: skip=${skip}, limit=${batchSize}, got ${batchEntries.length} entries`
+          )
+
+          // Check for duplicates by looking at valid IDs (exclude entries with missing IDs)
+          if (batchEntries.length > 0 && allEntries.length > 0) {
+            const getValidIds = (entries: Array<{ id?: unknown }>) =>
+              entries
+                .map((e) => e.id)
+                .filter(
+                  (id: unknown): id is string | number =>
+                    id !== null && id !== undefined
+                )
+                .map(String)
+
+            const newIds = new Set(getValidIds(batchEntries))
+            const existingIds = new Set(getValidIds(allEntries))
+            const duplicates = Array.from(newIds).filter((id: string) =>
+              existingIds.has(id)
+            )
+
+            if (duplicates.length > 0) {
+              debugLogger.error(
+                `[Excel Export] DUPLICATE ENTRIES DETECTED! ${duplicates.length} duplicates in batch ${batchNumber}`,
+                duplicates.slice(0, 5)
+              )
             }
           }
-        })
 
-        const firstBatchEntries = firstBatch.data?.timeEntries || firstBatch.data?.report || []
-        users = firstBatch.data?.users || []
-        
-        if (firstBatchEntries.length < 100) {
-          // If first batch is less than 100, we have the exact count
-          allEntries = firstBatchEntries
-          totalBatches = 1
-          
-          setProgress(prev => ({
-            ...prev,
-            totalEntries: firstBatchEntries.length,
-            loadedEntries: firstBatchEntries.length,
-            progress: 70,
-            currentBatch: 1,
-            totalBatches: 1
-          }))
-        } else {
-          // We have a large dataset, estimate total batches conservatively
-          const estimatedTotal = Math.min(MAX_TOTAL_ENTRIES, batchSize * BATCH_SIZE_MULTIPLIER)
-          totalBatches = Math.ceil(estimatedTotal / batchSize)
-
-          setProgress(prev => ({
-            ...prev,
-            totalEntries: estimatedTotal,
-            totalBatches,
-            loadedEntries: 0
-          }))
-
-          // Now fetch in proper batches
-          let skip = 0
-          let hasMore = true
-          let batchNumber = 0
-          let consecutiveEmptyBatches = 0
-          // Estimate based on query type - these are reasonable estimates for safety
-          const estimatedEntries = isLargeDataset ? 50_000 : 10_000
-          // Calculate dynamic batch limit based on estimate, but cap with hard limit
-          const dynamicBatchLimit = Math.ceil(estimatedEntries / batchSize) + 2
-          const effectiveBatchLimit = Math.min(dynamicBatchLimit, MAX_BATCHES_HARD_LIMIT)
-
-          while (hasMore && batchNumber < effectiveBatchLimit) {
-            batchNumber++
-            
-            setProgress(prev => ({
-              ...prev,
-              currentBatch: batchNumber,
-              stage: 'loading'
-            }))
-
-            const result = await executeQuery({
-              variables: {
-                ...queryVariables,
-                query: {
-                  ...queryVariables?.query,
-                  limit: batchSize,
-                  skip: skip
-                }
-              }
-            })
-
-            // Extract entries from result - handle different possible field names
-            const batchEntries = result.data?.timeEntries || result.data?.report || []
-            
-            // Users data is the same across all batches, only fetch once
-            if (users.length === 0 && result.data?.users) {
-              users = result.data.users
-            }
-
-            // Debug logging for development
-            debugLogger.log(`[Excel Export] Batch ${batchNumber}: skip=${skip}, limit=${batchSize}, got ${batchEntries.length} entries`)
-            
-            // Check for duplicates by looking at valid IDs (exclude entries with missing IDs)
-            if (batchEntries.length > 0 && allEntries.length > 0) {
-              const getValidIds = (entries: Array<{ id?: unknown }>) =>
-                entries
-                  .map((e) => e.id)
-                  .filter(
-                    (id: unknown): id is string | number =>
-                      id !== null && id !== undefined
-                  )
-                  .map(String)
-
-              const newIds = new Set(getValidIds(batchEntries))
-              const existingIds = new Set(getValidIds(allEntries))
-              const duplicates = Array.from(newIds).filter((id: string) =>
-                existingIds.has(id)
-              )
-
-              if (duplicates.length > 0) {
-                debugLogger.error(
-                  `[Excel Export] DUPLICATE ENTRIES DETECTED! ${duplicates.length} duplicates in batch ${batchNumber}`,
-                  duplicates.slice(0, 5)
-                )
-              }
-            }
-            
-            // Check for no data or if we've exceeded expected total
-            if (batchEntries.length === 0) {
-              consecutiveEmptyBatches++
-              if (consecutiveEmptyBatches >= MAX_CONSECUTIVE_EMPTY_BATCHES) {
-                debugLogger.log(
-                  `[Excel Export] Stopping due to ${consecutiveEmptyBatches} consecutive empty batches`
-                )
-                hasMore = false
-                break
-              }
-            } else {
-              consecutiveEmptyBatches = 0 // Reset counter
-            }
-
-            // Safety check: stop if we have significantly more data than estimated
-            if (allEntries.length > estimatedEntries * SAFETY_MULTIPLIER_OVER_ESTIMATE) {
-              debugLogger.warn(
-                `[Excel Export] STOPPING: Got ${allEntries.length} entries, estimated ~${estimatedEntries}. ` +
-                  'Data size exceeded estimate by more than 2x, stopping as safety measure.'
+          if (batchEntries.length === 0) {
+            consecutiveEmptyBatches++
+            debugLogger.log(
+              `[Excel Export] Empty batch (${consecutiveEmptyBatches}/${MAX_CONSECUTIVE_EMPTY_BATCHES})`
+            )
+            if (consecutiveEmptyBatches >= MAX_CONSECUTIVE_EMPTY_BATCHES) {
+              debugLogger.log(
+                `[Excel Export] Stopping due to ${consecutiveEmptyBatches} consecutive empty batches`
               )
               hasMore = false
-              break
             }
-
+          } else {
+            consecutiveEmptyBatches = 0
             allEntries = [...allEntries, ...batchEntries]
-            const loadedEntries = allEntries.length
-            
-            // Multiple termination conditions:
-            // 1. Got fewer entries than requested (normal end)
-            // 2. Reached estimated limit (safety)
-            // 3. Hit batch limit
-            const normalEnd = batchEntries.length < batchSize
-            const reachedEstimate = loadedEntries >= estimatedEntries
-            const hitBatchLimit = batchNumber >= MAX_BATCHES_HARD_LIMIT
-            
-            hasMore = !normalEnd && !reachedEstimate && !hitBatchLimit
-            
-            // Update total batches based on actual data
-            if (!hasMore) {
-              totalBatches = batchNumber
-            }
-
-            setProgress(prev => ({
-              ...prev,
-              totalEntries: loadedEntries,
-              loadedEntries,
-              progress: Math.min((batchNumber / Math.max(totalBatches, batchNumber)) * 70, 70),
-              totalBatches: Math.max(totalBatches, batchNumber)
-            }))
-
-            // Debug the termination condition
-            debugLogger.log(
-              `[Excel Export] Batch ${batchNumber}: got ${batchEntries.length} entries, ` +
-                `total: ${loadedEntries}, normalEnd: ${normalEnd}, reachedEstimate: ${reachedEstimate}, hasMore: ${hasMore}`
-            )
-
-            // Increment skip for next batch
-            skip += batchSize
-
-            // Small delay to prevent overwhelming the server
-            await new Promise(resolve => setTimeout(resolve, 100))
           }
 
-          // Final safety check and warnings
-          if (batchNumber >= MAX_BATCHES_HARD_LIMIT) {
+          const loadedEntries = allEntries.length
+          const reachedMaxLimit = loadedEntries >= MAX_TOTAL_ENTRIES
+
+          if (reachedMaxLimit) {
             debugLogger.warn(
-              `[Excel Export] Stopped at safety limit of ${MAX_BATCHES_HARD_LIMIT} batches`
+              `[Excel Export] Stopped at MAX_TOTAL_ENTRIES safety limit (${MAX_TOTAL_ENTRIES} entries)`
             )
+            hasMore = false
           }
 
-          if (allEntries.length > estimatedEntries * 1.5) {
-            debugLogger.warn(
-              `[Excel Export] Info: Got ${allEntries.length} entries, estimated ~${estimatedEntries}`
-            )
-          }
+          setProgress((prev) => ({
+            ...prev,
+            totalEntries: loadedEntries,
+            loadedEntries,
+            progress: Math.min(
+              (batchNumber / Math.max(totalBatches, batchNumber)) * 70,
+              70
+            ),
+            totalBatches: Math.max(totalBatches, batchNumber)
+          }))
+
+          // Increment skip for next batch regardless of how many report entries were returned,
+          // since pagination happens on the server's raw time entry query.
+          skip += batchSize
+
+          await new Promise((resolve) => setTimeout(resolve, 100))
         }
       } else {
         // For small datasets, fetch all at once

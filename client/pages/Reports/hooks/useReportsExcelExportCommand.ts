@@ -26,7 +26,8 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
     fileName: context.queryPreset?.exportFileName || props.exportFileName || 'TimeEntries-{0}.xlsx',
     columns,
     isLargeDataset,
-    batchSize: 5000
+    batchSize: 5000,
+    presetId: context.queryPreset?.id  // Pass preset ID to generate correct query parameters
   })
 
   if (!context.queryPreset) {

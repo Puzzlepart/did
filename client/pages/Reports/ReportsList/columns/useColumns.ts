@@ -66,7 +66,8 @@ export function useColumns() {
       label: t('common.employeeWithRoleLabel'),
       description: t('common.employeeWithRoleDescription'),
       includeRoleDetails: true,
-      hidden: true
+      hidden: true,
+      hiddenFromExport: true
     }),
     surnameColumn,
     givenNameColumn,
