@@ -28,8 +28,8 @@ export function getHolidayHoursInPeriod(
     const hoursOff = holiday.hoursOff ?? 8 // Default to 8 hours if not specified
 
     // For recurring holidays, check if the holiday falls in any year within the period
-    if (holiday.recurring !== false) {
-      // Default to true if not specified
+    // Default to true if recurring is not explicitly set to false
+    if (holiday.recurring ?? true) {
       const startYear = start.year()
       const endYear = end.year()
 

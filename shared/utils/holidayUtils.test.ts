@@ -6,25 +6,34 @@ import {
   getWorkingDaysInPeriod
 } from './holidayUtils'
 
-const testHolidays: Partial<HolidayObject>[] = [
-  {
-    date: new Date('2025-12-24'),
-    name: 'Christmas Eve',
-    hoursOff: 8,
-    recurring: true
-  },
-  {
-    date: new Date('2025-12-25'),
-    name: 'Christmas Day',
-    hoursOff: 8,
-    recurring: true
-  },
-  {
-    date: new Date('2025-12-26'),
-    name: 'Boxing Day',
-    hoursOff: 8,
-    recurring: true
+// Helper to create complete HolidayObject with defaults
+function createHoliday(
+  partial: Partial<HolidayObject> & { date: Date; name: string }
+): HolidayObject {
+  return {
+    _id: partial._id || 'test-id',
+    date: partial.date,
+    name: partial.name,
+    hoursOff: partial.hoursOff ?? 8,
+    recurring: partial.recurring ?? true,
+    notes: partial.notes,
+    periodId: partial.periodId
   }
+}
+
+const testHolidays: HolidayObject[] = [
+  createHoliday({
+    date: new Date('2025-12-24'),
+    name: 'Christmas Eve'
+  }),
+  createHoliday({
+    date: new Date('2025-12-25'),
+    name: 'Christmas Day'
+  }),
+  createHoliday({
+    date: new Date('2025-12-26'),
+    name: 'Boxing Day'
+  })
 ]
 
 test('getHolidayHoursInPeriod calculates correct hours for week 52 2025', (t) => {
@@ -68,49 +77,43 @@ test('getExpectedHoursForPeriod returns work week hours when no holidays', (t) =
 })
 
 test('getExpectedHoursForPeriod does not return negative hours', (t) => {
-  const manyHolidays: Partial<HolidayObject>[] = [
-    {
+  const manyHolidays: HolidayObject[] = [
+    createHoliday({
       date: new Date('2025-12-22'),
       name: 'Day 1',
-      hoursOff: 8,
       recurring: false
-    },
-    {
+    }),
+    createHoliday({
       date: new Date('2025-12-23'),
       name: 'Day 2',
-      hoursOff: 8,
       recurring: false
-    },
-    {
+    }),
+    createHoliday({
       date: new Date('2025-12-24'),
       name: 'Day 3',
-      hoursOff: 8,
       recurring: false
-    },
-    {
+    }),
+    createHoliday({
       date: new Date('2025-12-25'),
       name: 'Day 4',
-      hoursOff: 8,
       recurring: false
-    },
-    {
+    }),
+    createHoliday({
       date: new Date('2025-12-26'),
       name: 'Day 5',
-      hoursOff: 8,
       recurring: false
-    },
-    {
+    }),
+    createHoliday({
       date: new Date('2025-12-27'),
       name: 'Day 6',
-      hoursOff: 8,
       recurring: false
-    }
+    })
   ]
   const expectedHours = getExpectedHoursForPeriod(
     40,
     '2025-12-22',
     '2025-12-28',
-    manyHolidays as HolidayObject[]
+    manyHolidays
   )
   // Should not be negative even with 48 hours off
   t.is(expectedHours, 0)
@@ -131,20 +134,18 @@ test('getWorkingDaysInPeriod excludes weekends', (t) => {
 })
 
 test('recurring holidays work correctly for different years', (t) => {
-  const recurringHoliday: Partial<HolidayObject>[] = [
-    {
+  const recurringHoliday: HolidayObject[] = [
+    createHoliday({
       date: new Date('2024-12-25'),
-      name: 'Christmas',
-      hoursOff: 8,
-      recurring: true
-    }
+      name: 'Christmas'
+    })
   ]
 
   // Check 2025 - should find the holiday recurring on Dec 25, 2025
   const hours2025 = getHolidayHoursInPeriod(
     '2025-12-20',
     '2025-12-31',
-    recurringHoliday as HolidayObject[]
+    recurringHoliday
   )
   t.is(hours2025, 8)
 
@@ -152,50 +153,46 @@ test('recurring holidays work correctly for different years', (t) => {
   const hours2026 = getHolidayHoursInPeriod(
     '2026-12-20',
     '2026-12-31',
-    recurringHoliday as HolidayObject[]
+    recurringHoliday
   )
   t.is(hours2026, 8)
 })
 
 test('partial day holidays work correctly', (t) => {
-  const partialHolidays: Partial<HolidayObject>[] = [
-    {
+  const partialHolidays: HolidayObject[] = [
+    createHoliday({
       date: new Date('2025-12-31'),
       name: "New Year's Eve",
-      hoursOff: 4, // half day
-      recurring: true
-    }
+      hoursOff: 4 // half day
+    })
   ]
 
   const holidayHours = getHolidayHoursInPeriod(
     '2025-12-29',
     '2026-01-04',
-    partialHolidays as HolidayObject[]
+    partialHolidays
   )
   t.is(holidayHours, 4)
 })
 
 test('cross-year period with recurring holidays', (t) => {
-  const newYearHolidays: Partial<HolidayObject>[] = [
-    {
+  const newYearHolidays: HolidayObject[] = [
+    createHoliday({
       date: new Date('2024-12-31'),
       name: "New Year's Eve",
-      hoursOff: 4,
-      recurring: true
-    },
-    {
+      hoursOff: 4
+    }),
+    createHoliday({
       date: new Date('2024-01-01'),
-      name: "New Year's Day",
-      hoursOff: 8,
-      recurring: true
-    }
+      name: "New Year's Day"
+    })
   ]
 
   // Period spans from 2025 to 2026
   const holidayHours = getHolidayHoursInPeriod(
     '2025-12-29',
     '2026-01-04',
-    newYearHolidays as HolidayObject[]
+    newYearHolidays
   )
   // Should find both Dec 31, 2025 (4h) and Jan 1, 2026 (8h) = 12h
   t.is(holidayHours, 12)
