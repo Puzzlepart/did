@@ -7,6 +7,7 @@ import { useColumns } from '../ReportsList/columns/useColumns'
 import { useBrowserStorage } from 'hooks'
 import _ from 'lodash'
 import { ListFilterState } from 'components/List/types'
+import report_custom from 'pages/Reports/queries/report-custom.gql'
 
 type PersistedColumn = {
   key: string
@@ -94,8 +95,9 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
     'last_year'
   ].includes(context.queryPreset?.id)
 
+  const exportQuery = context.queryPreset?.query || report_custom
   const { exportAllData, progress, progressMessage, isExporting } = useExcelExportWithProgress({
-    query: context.queryPreset?.query,
+    query: exportQuery,
     queryVariables: {
       ...context.queryPreset?.variables,
       ...(supportsQueryFilters && hasAppliedFilters && { query: appliedFilterQuery })

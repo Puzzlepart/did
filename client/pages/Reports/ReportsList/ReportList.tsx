@@ -42,10 +42,12 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
           text={t('reports.generatingReportProgressText')}
         />
       )}
-      <ExportProgress 
-        progress={exportProgress} 
-        progressMessage={exportProgressMessage}
-      />
+      {exportProgress && (
+        <ExportProgress 
+          progress={exportProgress} 
+          progressMessage={exportProgressMessage}
+        />
+      )}
       <List
         hidden={props.hidden}
         enableShimmer={Boolean(props.loading) || context.state.loading}

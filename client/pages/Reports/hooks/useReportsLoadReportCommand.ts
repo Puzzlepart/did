@@ -18,7 +18,14 @@ export function useReportsLoadReportCommand() {
   const largeReportLimit = 5000
 
   return useMemo(() => {
-    if (!context.loadReport) return
+    if (!context.loadReport || !context.queryPreset) return
+    if (
+      !['last_month', 'current_month', 'last_year', 'current_year', 'forecast'].includes(
+        context.queryPreset.id
+      )
+    ) {
+      return
+    }
 
     const countText = approxCount ?? '…'
     const text =
