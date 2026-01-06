@@ -52,6 +52,7 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
         checked: context.state.filterBy?.fieldName === column.fieldName,
         onClick: () => {
           context.dispatch(SET_FILTER_BY({ column }))
+          context.props.onFilterPanelToggle?.(true)
         }
       },
     columnData.isGroupable && {

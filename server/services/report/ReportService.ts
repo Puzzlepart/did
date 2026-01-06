@@ -2,6 +2,7 @@
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ProjectService } from '../mongo/project/ProjectService'
+import { CustomerService } from '../mongo/customer'
 import { UserService } from '../mongo/user'
 import { DateObject } from '../../../shared/utils/DateObject'
 import { RequestContext } from '../../graphql/requestContext'
@@ -11,6 +12,7 @@ import {
   ReportsQueryPreset,
   TimeEntry
 } from '../../graphql/resolvers/types'
+import { ReportFilterOptions } from '../../graphql/resolvers/reports/types'
 import {
   ConfirmedPeriodsService
 } from '../mongo/confirmed_periods'
@@ -39,6 +41,7 @@ export class ReportService {
   constructor(
     @Inject('CONTEXT') readonly context: RequestContext,
     private readonly _projectSvc: ProjectService,
+    private readonly _customerSvc: CustomerService,
     private readonly _userSvc: UserService,
     private readonly _timeEntrySvc: TimeEntryService,
     private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
@@ -139,7 +142,7 @@ export class ReportService {
     sortAsc?: boolean
   ): Promise<Report> {
     try {
-      const query_ = this._generateQuery(query, preset)
+      const query_ = await this._generateQueryWithFilters(query, preset)
       debug('[getReport]', 'Generating report with query:', query_, {
         userId: this.context.userId
       })
@@ -209,9 +212,61 @@ export class ReportService {
     preset?: ReportsQueryPreset,
     query: ReportsQuery = {}
   ): Promise<number> {
-    const query_ = this._generateQuery(query, preset)
+    const query_ = await this._generateQueryWithFilters(query, preset)
     debug('[getReportCount]', 'Counting raw time entries with query:', query_)
     return await this._timeEntrySvc.count(query_)
+  }
+
+  /**
+   * Get filter options for report preloading.
+   */
+  public async getReportFilterOptions(): Promise<ReportFilterOptions> {
+    const [projects, customers, users] = await Promise.all([
+      this._projectSvc.find(
+        {},
+        { name: 1, tag: 1, parentKey: 1 }
+      ) as Promise<any[]>,
+      this._customerSvc.getCustomers(),
+      this._userSvc.getUsers({ hiddenFromReports: false })
+    ])
+
+    const projectsByTag = new Map(
+      projects.map((project) => [project.tag, project])
+    )
+
+    const projectNames = Array.from(
+      new Set(projects.map((project) => project.name).filter(Boolean))
+    ).sort()
+
+    const parentProjectNames = Array.from(
+      new Set(
+        projects
+          .map((project) =>
+            project.parentKey ? projectsByTag.get(project.parentKey)?.name : null
+          )
+          .filter(Boolean)
+      )
+    ).sort()
+
+    const customerNames = Array.from(
+      new Set(customers.map((customer) => customer.name).filter(Boolean))
+    ).sort()
+
+    const partnerNames = Array.from(
+      new Set(customers.map((customer) => customer.name).filter(Boolean))
+    ).sort()
+
+    const employeeNames = Array.from(
+      new Set(users.map((user) => user.displayName).filter(Boolean))
+    ).sort()
+
+    return {
+      projectNames,
+      parentProjectNames,
+      customerNames,
+      partnerNames,
+      employeeNames
+    }
   }
 
   /**
@@ -475,6 +530,155 @@ export class ReportService {
       },
       'preset'
     )
+  }
+
+  private async _generateQueryWithFilters(
+    query: ReportsQuery = {},
+    preset?: ReportsQueryPreset
+  ) {
+    const baseQuery = this._generateQuery(query, preset)
+    const { projectIds, userIds } = await this._resolveFilterIds(query)
+
+    if (projectIds !== undefined) {
+      const baseProjectId =
+        baseQuery.projectId?.$eq ??
+        (_.isArray(baseQuery.projectId?.$in) ? baseQuery.projectId.$in : null)
+      const baseProjectIds = baseProjectId
+        ? (Array.isArray(baseProjectId) ? baseProjectId : [baseProjectId])
+        : null
+      const effectiveProjectIds = baseProjectIds
+        ? _.intersection(baseProjectIds, projectIds)
+        : projectIds
+      baseQuery.projectId = { $in: effectiveProjectIds }
+    }
+
+    if (userIds !== undefined) {
+      const baseUserIds = baseQuery.userId?.$in ?? null
+      const effectiveUserIds = baseUserIds
+        ? _.intersection(baseUserIds, userIds)
+        : userIds
+      baseQuery.userId = { $in: effectiveUserIds }
+    }
+
+    return baseQuery
+  }
+
+  private async _resolveFilterIds(query: ReportsQuery) {
+    const projectNames = query.projectNames ?? []
+    const parentProjectNames = query.parentProjectNames ?? []
+    const customerNames = query.customerNames ?? []
+    const partnerNames = query.partnerNames ?? []
+    const employeeNames = query.employeeNames ?? []
+
+    const hasProjectFilters =
+      projectNames.length > 0 ||
+      parentProjectNames.length > 0 ||
+      customerNames.length > 0 ||
+      partnerNames.length > 0
+
+    const hasUserFilters = employeeNames.length > 0 || query.userIds?.length > 0
+
+    if (!hasProjectFilters && !hasUserFilters) {
+      return {}
+    }
+
+    const [projects, customers, users] = await Promise.all([
+      hasProjectFilters
+        ? (this._projectSvc.find(
+            {},
+            { name: 1, tag: 1, parentKey: 1, customerKey: 1, partnerKey: 1 }
+          ) as Promise<any[]>)
+        : Promise.resolve([]),
+      hasProjectFilters ? this._customerSvc.getCustomers() : Promise.resolve([]),
+      hasUserFilters
+        ? this._userSvc.getUsers({ hiddenFromReports: false })
+        : Promise.resolve([])
+    ])
+
+    let projectIds: string[] | null = null
+
+    if (hasProjectFilters) {
+      const customerKeysByName = new Map(
+        customers.map((customer) => [customer.name, customer.key])
+      )
+
+      const projectFilterSets: string[][] = []
+
+      if (projectNames.length > 0) {
+        const projectTags = projects
+          .filter((project) => projectNames.includes(project.name))
+          .map((project) => project.tag)
+        projectFilterSets.push(projectTags)
+      }
+
+      if (parentProjectNames.length > 0) {
+        const parentTags = projects
+          .filter((project) => parentProjectNames.includes(project.name))
+          .map((project) => project.tag)
+        const parentTagSet = new Set(parentTags)
+        const childProjectTags = projects
+          .filter((project) => parentTagSet.has(project.parentKey))
+          .map((project) => project.tag)
+        projectFilterSets.push(childProjectTags)
+      }
+
+      if (customerNames.length > 0) {
+        const customerKeys = customerNames
+          .map((name) => customerKeysByName.get(name))
+          .filter(Boolean)
+        const customerKeySet = new Set(customerKeys)
+        const customerProjectTags = projects
+          .filter((project) => customerKeySet.has(project.customerKey))
+          .map((project) => project.tag)
+        projectFilterSets.push(customerProjectTags)
+      }
+
+      if (partnerNames.length > 0) {
+        const partnerKeys = partnerNames
+          .map((name) => customerKeysByName.get(name))
+          .filter(Boolean)
+        const partnerKeySet = new Set(partnerKeys)
+        const partnerProjectTags = projects
+          .filter((project) => partnerKeySet.has(project.partnerKey))
+          .map((project) => project.tag)
+        projectFilterSets.push(partnerProjectTags)
+      }
+
+      if (projectFilterSets.length > 0) {
+        projectIds = projectFilterSets.reduce((acc, set) => {
+          if (!acc) return set
+          return _.intersection(acc, set)
+        }, null)
+      }
+    }
+
+    let userIds: string[] | null = null
+
+    if (hasUserFilters) {
+      const providedUserIds = query.userIds ?? []
+      const employeeIds =
+        employeeNames.length > 0
+          ? users
+              .filter((user) => employeeNames.includes(user.displayName))
+              .map((user) => user.id)
+          : []
+      if (employeeNames.length > 0 && providedUserIds.length > 0) {
+        userIds = _.intersection(providedUserIds, employeeIds)
+      } else if (employeeNames.length > 0) {
+        userIds = employeeIds
+      } else {
+        userIds = providedUserIds
+      }
+    }
+
+    const resolved: { projectIds?: string[]; userIds?: string[] } = {}
+    if (projectIds !== null) {
+      resolved.projectIds = projectIds
+    }
+    if (userIds !== null) {
+      resolved.userIds = userIds
+    }
+    return resolved
   }
 
   /**

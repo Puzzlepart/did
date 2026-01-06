@@ -31,7 +31,11 @@ export function useFiltersCommand() {
     iconOnly: true,
     disabled:
       context.props.enableShimmer || context.state.origItems.length === 0,
-    onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
+    onClick: () => {
+      const nextOpen = !context.state.filterPanel?.open
+      context.dispatch(TOGGLE_FILTER_PANEL())
+      context.props.onFilterPanelToggle?.(nextOpen)
+    }
   }
 
   return {

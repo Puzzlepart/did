@@ -1,8 +1,8 @@
 #import "../../../graphql-client/fragments/timeentry-fragment.gql"
 #import "./report-user-fragment.gql"
 
-query CurrentYearReport {
-  timeEntries: report(preset: "CURRENT_YEAR") {
+query CurrentYearReport($query: ReportsQuery) {
+  timeEntries: report(preset: "CURRENT_YEAR", query: $query) {
     ...TimeEntryFragment
   }
   users: users {

@@ -14,6 +14,7 @@ test('ReportService should apply safety limits for large queries', async (t) => 
   // Mock the required dependencies
   const mockContext = { userId: 'test-user' }
   const mockProjectService = { getProjectsData: async () => ({ projects: [], customers: [] }) }
+  const mockCustomerService = { getCustomers: async () => [] }
   const mockUserService = { getUsers: async () => [] }
   const mockTimeEntryService = { 
     find: async () => [],
@@ -26,6 +27,7 @@ test('ReportService should apply safety limits for large queries', async (t) => 
   const reportService = new ReportService(
     mockContext as any,
     mockProjectService as any,
+    mockCustomerService as any,
     mockUserService as any,
     mockTimeEntryService as any,
     mockForecastTimeEntryService as any,
@@ -48,6 +50,7 @@ test('ReportService should apply safety limits for large queries', async (t) => 
 test('ReportService should not apply limits for small queries', async (t) => {
   const mockContext = { userId: 'test-user' }
   const mockProjectService = { getProjectsData: async () => ({ projects: [], customers: [] }) }
+  const mockCustomerService = { getCustomers: async () => [] }
   const mockUserService = { getUsers: async () => [] }
   const mockTimeEntryService = { 
     find: async () => [],
@@ -60,6 +63,7 @@ test('ReportService should not apply limits for small queries', async (t) => {
   const reportService = new ReportService(
     mockContext as any,
     mockProjectService as any,
+    mockCustomerService as any,
     mockUserService as any,
     mockTimeEntryService as any,
     mockForecastTimeEntryService as any,
@@ -79,6 +83,7 @@ test('ReportService should not apply limits for small queries', async (t) => {
 test('ReportService getReportCount should count raw time entries', async (t) => {
   const mockContext = { userId: 'test-user' }
   const mockProjectService = { getProjectsData: async () => ({ projects: [], customers: [] }) }
+  const mockCustomerService = { getCustomers: async () => [] }
   const mockUserService = { getUsers: async () => [] }
   let capturedQuery: any
   const mockTimeEntryService = { 
@@ -99,6 +104,7 @@ test('ReportService getReportCount should count raw time entries', async (t) => 
   const reportService = new ReportService(
     mockContext as any,
     mockProjectService as any,
+    mockCustomerService as any,
     mockUserService as any,
     mockTimeEntryService as any,
     mockForecastTimeEntryService as any,

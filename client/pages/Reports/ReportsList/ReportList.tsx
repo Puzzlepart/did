@@ -1,7 +1,7 @@
 import { CheckboxVisibility } from '@fluentui/react'
 import { List, Progress, TabComponent } from 'components'
 import React from 'react'
-import { SET_FILTER_STATE } from '../reducer/actions'
+import { APPLY_FILTER_STATE, SET_FILTER_STATE, SET_FILTERS_OPEN } from '../reducer/actions'
 import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReportsList } from './useReportsList'
@@ -20,6 +20,7 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
     columns,
     menuItems,
     loadReportCommand,
+    filterPanelItems,
     createPlaceholder,
     createContentAfter,
     exportProgress,
@@ -59,6 +60,19 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         onFilter={(state) =>
           props.filters && context.dispatch(SET_FILTER_STATE(state))
         }
+        filterPanelItems={filterPanelItems}
+        onFilterPanelToggle={(isOpen) => {
+          context.dispatch(SET_FILTERS_OPEN(isOpen))
+          if (!isOpen) {
+            const filterState = context.state?.filterState ?? { filters: [] }
+            context.dispatch(
+              APPLY_FILTER_STATE({
+                ...filterState,
+                filters: [...(filterState.filters ?? [])]
+              })
+            )
+          }
+        }}
         filterPanel={{
           headerElements: <SaveFilterForm />
         }}

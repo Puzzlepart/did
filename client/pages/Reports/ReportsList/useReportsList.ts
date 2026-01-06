@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/consistent-function-scoping */
-import { createElement, useContext } from 'react'
+import { createElement, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
 import { useColumns } from './columns/useColumns'
@@ -24,6 +24,39 @@ export function useReportsList(props: IReportsListProps) {
   const { progress: exportProgress, progressMessage: exportProgressMessage } = 
     useReportsExcelExportCommand(props)
   const loadReportCommand = useReportsLoadReportCommand()
+  const filterPanelItems = useMemo(() => {
+    const options = context.state?.preload?.filterOptions
+    if (!options) return []
+
+    const items: any[] = []
+
+    for (const name of options.projectNames ?? []) {
+      if (!name) continue
+      items.push({ project: { name } })
+    }
+
+    for (const name of options.parentProjectNames ?? []) {
+      if (!name) continue
+      items.push({ project: { parent: { name } } })
+    }
+
+    for (const name of options.customerNames ?? []) {
+      if (!name) continue
+      items.push({ customer: { name } })
+    }
+
+    for (const name of options.partnerNames ?? []) {
+      if (!name) continue
+      items.push({ partner: { name } })
+    }
+
+    for (const name of options.employeeNames ?? []) {
+      if (!name) continue
+      items.push({ resource: { displayName: name } })
+    }
+
+    return items
+  }, [context.state?.preload?.filterOptions])
 
   const createPlaceholder: IListProps['searchBox']['placeholder'] = (state) => {
     const hours = state.origItems
@@ -55,6 +88,7 @@ export function useReportsList(props: IReportsListProps) {
     columns,
     menuItems,
     loadReportCommand,
+    filterPanelItems,
     createPlaceholder,
     createContentAfter,
     exportProgress,

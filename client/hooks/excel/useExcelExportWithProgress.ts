@@ -182,7 +182,10 @@ export function useExcelExportWithProgress({
         // than `limit` even when more raw time entries exist. Instead, we paginate
         // until we hit consecutive empty batches (or safety limits).
         const presetQuery = generatePresetQuery(presetId)
-        const baseQuery = presetId ? presetQuery : (queryVariables?.query || {})
+        const queryOverrides = queryVariables?.query
+        const baseQuery = presetId
+          ? (queryOverrides ? { ...presetQuery, ...queryOverrides } : presetQuery)
+          : (queryOverrides ?? {})
 
         // Estimate total batches conservatively (used for progress display only)
         const estimatedTotal = Math.min(

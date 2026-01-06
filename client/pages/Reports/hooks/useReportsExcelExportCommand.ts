@@ -6,10 +6,42 @@ import { IReportsListProps } from '../ReportsList/types'
 import { useColumns } from '../ReportsList/columns/useColumns'
 import { useBrowserStorage } from 'hooks'
 import _ from 'lodash'
+import { ListFilterState } from 'components/List/types'
 
 type PersistedColumn = {
   key: string
   hidden: boolean
+}
+
+function buildFilterQuery(filterState?: ListFilterState) {
+  const filters = filterState?.filters ?? []
+  if (filters.length === 0) return {}
+
+  const filter = filters[0]
+  const values = Array.from(filter.selected ?? [])
+
+  if (values.length === 0) return {}
+
+  switch (filter.key) {
+    case 'project.name': {
+      return { projectNames: values }
+    }
+    case 'project.parent.name': {
+      return { parentProjectNames: values }
+    }
+    case 'customer.name': {
+      return { customerNames: values }
+    }
+    case 'partner.name': {
+      return { partnerNames: values }
+    }
+    case 'resource.displayName': {
+      return { employeeNames: values }
+    }
+    default: {
+      return {}
+    }
+  }
 }
 
 /**
@@ -24,6 +56,15 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
     key: 'reportslist_columns',
     initialValue: []
   })
+
+  const appliedFilterQuery = buildFilterQuery(context.state?.appliedFilterState)
+  const hasAppliedFilters = Object.keys(appliedFilterQuery).length > 0
+  const supportsQueryFilters = [
+    'last_month',
+    'current_month',
+    'last_year',
+    'current_year'
+  ].includes(context.queryPreset?.id)
 
   const exportColumns = _.isEmpty(persistedColumns)
     ? columns
@@ -55,7 +96,10 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
 
   const { exportAllData, progress, progressMessage, isExporting } = useExcelExportWithProgress({
     query: context.queryPreset?.query,
-    queryVariables: context.queryPreset?.variables,
+    queryVariables: {
+      ...context.queryPreset?.variables,
+      ...(supportsQueryFilters && hasAppliedFilters && { query: appliedFilterQuery })
+    },
     fileName: context.queryPreset?.exportFileName || props.exportFileName || 'TimeEntries-{0}.xlsx',
     columns: exportColumns.filter((col) => !col?.data?.hidden),
     isLargeDataset,

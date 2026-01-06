@@ -6,11 +6,13 @@ import _ from 'underscore'
 import { IReportsState } from '../types'
 import {
   ADD_SAVED_FILTER,
+  APPLY_FILTER_STATE,
   DATA_UPDATED,
   PRELOAD_UPDATED,
   REMOVE_SAVED_FILTER,
   REPORT_CLEARED,
   REPORT_LOADED,
+  SET_FILTERS_OPEN,
   SET_FILTER,
   SET_FILTER_STATE
 } from './actions'
@@ -37,6 +39,10 @@ export function useReportsReducer() {
         filterState: {
           filters: []
         },
+        appliedFilterState: {
+          filters: []
+        },
+        isFiltersOpen: false,
         preload: {
           loading: false,
           approxCount: undefined
@@ -86,6 +92,26 @@ export function useReportsReducer() {
       })
 
       /**
+       * `SET_FILTERS_OPEN`: Track whether the filter panel is open.
+       */
+      .addCase(SET_FILTERS_OPEN, (state, { payload }) => {
+        state.isFiltersOpen = payload
+      })
+
+      /**
+       * `APPLY_FILTER_STATE`: Apply pending filters to server-side queries.
+       */
+      .addCase(APPLY_FILTER_STATE, (state, { payload }) => {
+        const normalizedFilters = payload?.filters?.length
+          ? [payload.filters[0]]
+          : []
+        state.appliedFilterState = {
+          ...payload,
+          filters: normalizedFilters
+        }
+      })
+
+      /**
        * `SET_FILTER`: Set active filter.
        */
       .addCase(SET_FILTER, (state, { payload }) => {
@@ -126,8 +152,14 @@ export function useReportsReducer() {
        * `SET_FILTER_STATE`: Set filter state and update active filter if filter is not active.
        */
       .addCase(SET_FILTER_STATE, (state, { payload }) => {
-        state.filterState = payload
-        if (!payload.isFiltered) state.activeFilter = null
+        const normalizedFilters = payload?.filters?.length
+          ? [payload.filters[0]]
+          : []
+        state.filterState = {
+          ...payload,
+          filters: normalizedFilters
+        }
+        if (!payload.filters?.length) state.activeFilter = null
       })
   )
 }

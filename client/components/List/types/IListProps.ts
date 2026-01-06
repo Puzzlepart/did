@@ -142,6 +142,17 @@ export interface IListProps<T = any>
   onFilter?: (filterState: ListFilterState) => void
 
   /**
+   * Optional items to use when building filter options.
+   * Defaults to the list items.
+   */
+  filterPanelItems?: any[]
+
+  /**
+   * Callback invoked when the filter panel is opened or closed.
+   */
+  onFilterPanelToggle?: (open: boolean) => void
+
+  /**
    * Filter values to apply to the list.
    */
   filterValues?: Record<string, any>

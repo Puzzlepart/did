@@ -9,6 +9,7 @@ import { RequestContext } from '../../requestContext'
 import { TimesheetPeriodObject } from '../timesheet/types/TimesheetPeriodObject'
 import {
   ConfirmedPeriodsQuery,
+  ReportFilterOptions,
   ReportsQuery,
   ReportsQueryPreset,
   TimeEntry
@@ -54,6 +55,16 @@ export class ReportsResolver {
     @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
   ): Promise<TimeEntry[]> {
     return await this._report.getReport(preset, query, sortAsc)
+  }
+
+  /**
+   * Get filter options for report preloading.
+   */
+  @Query(() => ReportFilterOptions, {
+    description: 'Get filter options for report preloading.'
+  })
+  async reportFilterOptions(): Promise<ReportFilterOptions> {
+    return await this._report.getReportFilterOptions()
   }
 
   /**

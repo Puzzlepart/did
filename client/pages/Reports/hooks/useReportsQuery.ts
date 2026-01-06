@@ -1,12 +1,18 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { ReportLink } from 'types'
 import _ from 'underscore'
 import { IReportsContext } from '../context'
 import { forecast_preload, report_links, report_preload } from '../queries'
-import { DATA_UPDATED, PRELOAD_UPDATED, REPORT_CLEARED, REPORT_LOADED } from '../reducer/actions'
+import {
+  DATA_UPDATED,
+  PRELOAD_UPDATED,
+  REPORT_CLEARED,
+  REPORT_LOADED
+} from '../reducer/actions'
 import { default_query } from './useReportsQueries'
+import { ListFilterState } from 'components/List/types'
 
 /**
  * Responsible for fetching data for `Reports` component.
@@ -37,8 +43,48 @@ function mapQueryPresetToReportsPreset(queryPresetId?: string) {
   }
 }
 
-export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
+function buildFilterQuery(filterState?: ListFilterState) {
+  const filters = filterState?.filters ?? []
+  if (filters.length === 0) return {}
+
+  const filter = filters[0]
+  const values = Array.from(filter.selected ?? [])
+
+  if (values.length === 0) return {}
+
+  switch (filter.key) {
+    case 'project.name': {
+      return { projectNames: values }
+    }
+    case 'project.parent.name': {
+      return { parentProjectNames: values }
+    }
+    case 'customer.name': {
+      return { customerNames: values }
+    }
+    case 'partner.name': {
+      return { partnerNames: values }
+    }
+    case 'resource.displayName': {
+      return { employeeNames: values }
+    }
+    default: {
+      return {}
+    }
+  }
+}
+
+export function useReportsQuery({
+  dispatch,
+  queryPreset,
+  state
+}: IReportsContext) {
   const client = useApolloClient()
+  const appliedFilterQuery = useMemo(
+    () => buildFilterQuery(state?.appliedFilterState),
+    [state?.appliedFilterState]
+  )
+  const hasAppliedFilters = Object.keys(appliedFilterQuery).length > 0
 
   const [loadPreloadQuery, preloadResult] = useLazyQuery(report_preload, {
     fetchPolicy: 'no-cache'
@@ -78,7 +124,8 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
     dispatch(
       PRELOAD_UPDATED({
         loading: preloadResult.loading,
-        approxCount: preloadResult.data?.approxCount
+        approxCount: preloadResult.data?.approxCount,
+        filterOptions: preloadResult.data?.filterOptions
       })
     )
   }, [preloadResult.called, preloadResult.data, preloadResult.loading, dispatch])
@@ -95,7 +142,8 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
     dispatch(
       PRELOAD_UPDATED({
         loading: forecastPreloadResult.loading,
-        approxCount: forecastPreloadResult.data?.approxCount
+        approxCount: forecastPreloadResult.data?.approxCount,
+        filterOptions: forecastPreloadResult.data?.filterOptions
       })
     )
   }, [
@@ -108,9 +156,16 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
   useEffect(() => {
     if (!queryPreset) return
     if (!_.isEmpty(queryPreset?.reportLinks)) return
-    if (!['last_month', 'current_month', 'last_year', 'current_year', 'forecast'].includes(queryPreset.id)) {
+    const supportsQueryFilters = [
+      'last_month',
+      'current_month',
+      'last_year',
+      'current_year'
+    ].includes(queryPreset.id)
+    if (!supportsQueryFilters && queryPreset.id !== 'forecast') {
       return
     }
+    if (state?.isFiltersOpen) return
 
     dispatch(REPORT_CLEARED())
     dispatch(
@@ -126,7 +181,9 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
     }
 
     const preset = mapQueryPresetToReportsPreset(queryPreset.id)
-    const query = queryPreset.variables?.query
+    const query = supportsQueryFilters && hasAppliedFilters
+      ? appliedFilterQuery
+      : queryPreset.variables?.query
 
     loadPreloadQuery({
       variables: {
@@ -138,6 +195,9 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
     queryPreset?.id,
     queryPreset?.reportLinks,
     queryPreset?.variables?.query,
+    appliedFilterQuery,
+    hasAppliedFilters,
+    state?.isFiltersOpen,
     dispatch,
     loadForecastPreloadQuery,
     loadPreloadQuery
@@ -145,6 +205,12 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
 
   const loadReport = useCallback(() => {
     if (!queryPreset) return
+    const supportsQueryFilters = [
+      'last_month',
+      'current_month',
+      'last_year',
+      'current_year'
+    ].includes(queryPreset.id)
     dispatch(
       DATA_UPDATED({
         loading: true
@@ -153,7 +219,12 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
     client
       .query({
         query: queryPreset?.query || default_query,
-        variables: queryPreset?.variables,
+        variables: {
+          ...queryPreset?.variables,
+          ...(supportsQueryFilters && hasAppliedFilters && {
+            query: appliedFilterQuery
+          })
+        },
         fetchPolicy: 'no-cache'
       })
       .then((result) => {
@@ -174,7 +245,15 @@ export function useReportsQuery({ dispatch, queryPreset }: IReportsContext) {
           })
         )
       })
-  }, [client, dispatch, queryPreset?.id, queryPreset?.query, queryPreset?.variables])
+  }, [
+    client,
+    dispatch,
+    queryPreset?.id,
+    queryPreset?.query,
+    queryPreset?.variables,
+    appliedFilterQuery,
+    hasAppliedFilters
+  ])
 
   return { loadReport }
 }

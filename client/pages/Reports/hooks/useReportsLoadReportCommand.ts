@@ -15,12 +15,19 @@ export function useReportsLoadReportCommand() {
   const approxCount = context.state?.preload?.approxCount
   const isPreloading = Boolean(context.state?.preload?.loading)
   const isReportLoaded = Boolean(context.state?.isReportLoaded)
+  const largeReportLimit = 5000
 
   return useMemo(() => {
     if (!context.loadReport) return
 
     const countText = approxCount ?? '…'
-    const text = t('reports.loadApproxEntries', { count: countText })
+    const text =
+      typeof approxCount === 'number' && approxCount > largeReportLimit
+        ? t('reports.loadApproxEntriesFirst', {
+            count: countText,
+            limit: largeReportLimit
+          })
+        : t('reports.loadApproxEntries', { count: countText })
 
     return new ListMenuItem(text)
       .setGroup('actions')
@@ -28,5 +35,12 @@ export function useReportsLoadReportCommand() {
       .setDisabled(isPreloading)
       .setHidden(isReportLoaded)
       .setOnClick(() => context.loadReport())
-  }, [context.loadReport, approxCount, isPreloading, isReportLoaded, t])
+  }, [
+    context.loadReport,
+    approxCount,
+    isPreloading,
+    isReportLoaded,
+    t,
+    largeReportLimit
+  ])
 }

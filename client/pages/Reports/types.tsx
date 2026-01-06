@@ -142,11 +142,23 @@ export interface IReportsState {
   filterState?: ListFilterState
 
   /**
+   * Applied filter state used for server-side filtering.
+   */
+  appliedFilterState?: ListFilterState
+
+  /**
    * Preload state for the current report (count + metadata).
    */
   preload?: {
     loading: boolean
     approxCount?: number
+    filterOptions?: {
+      projectNames: string[]
+      parentProjectNames: string[]
+      customerNames: string[]
+      partnerNames: string[]
+      employeeNames: string[]
+    }
   }
 
   /**
