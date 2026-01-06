@@ -1,15 +1,5 @@
+import { HolidayObject } from '../../server/graphql/resolvers/timesheet/types/HolidayObject'
 import { $dayjs } from './date'
-
-/**
- * Represents a holiday configuration
- */
-export interface Holiday {
-  date: string
-  name: string
-  hoursOff: number
-  recurring?: boolean
-  notes?: string
-}
 
 /**
  * Calculates the total hours off due to holidays within a given date range.
@@ -22,7 +12,7 @@ export interface Holiday {
 export function getHolidayHoursInPeriod(
   startDate: string,
   endDate: string,
-  holidays: Holiday[]
+  holidays: HolidayObject[]
 ): number {
   if (!holidays || holidays.length === 0) {
     return 0
@@ -35,9 +25,11 @@ export function getHolidayHoursInPeriod(
 
   for (const holiday of holidays) {
     const holidayDate = $dayjs(holiday.date)
+    const hoursOff = holiday.hoursOff ?? 8 // Default to 8 hours if not specified
 
     // For recurring holidays, check if the holiday falls in any year within the period
-    if (holiday.recurring) {
+    if (holiday.recurring !== false) {
+      // Default to true if not specified
       const startYear = start.year()
       const endYear = end.year()
 
@@ -49,7 +41,7 @@ export function getHolidayHoursInPeriod(
           holidayThisYear.isSameOrAfter(start, 'day') &&
           holidayThisYear.isSameOrBefore(end, 'day')
         ) {
-          totalHoursOff += holiday.hoursOff
+          totalHoursOff += hoursOff
         }
       }
     } else {
@@ -58,7 +50,7 @@ export function getHolidayHoursInPeriod(
         holidayDate.isSameOrAfter(start, 'day') &&
         holidayDate.isSameOrBefore(end, 'day')
       ) {
-        totalHoursOff += holiday.hoursOff
+        totalHoursOff += hoursOff
       }
     }
   }
@@ -79,7 +71,7 @@ export function getExpectedHoursForPeriod(
   workWeekHours: number,
   startDate: string,
   endDate: string,
-  holidays: Holiday[]
+  holidays: HolidayObject[]
 ): number {
   const holidayHours = getHolidayHoursInPeriod(startDate, endDate, holidays)
   return Math.max(0, workWeekHours - holidayHours)
@@ -118,95 +110,95 @@ export function getWorkingDaysInPeriod(
  * Norway national holidays preset.
  * These are the standard Norwegian national holidays (red days).
  */
-export const NORWAY_HOLIDAYS: Holiday[] = [
+export const NORWAY_HOLIDAYS: Partial<HolidayObject>[] = [
   {
-    date: '2025-01-01',
+    date: new Date('2025-01-01'),
     name: 'Første nyttårsdag',
     hoursOff: 8,
     recurring: true
   },
   {
-    date: '2025-04-17',
+    date: new Date('2025-04-17'),
     name: 'Skjærtorsdag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-04-18',
+    date: new Date('2025-04-18'),
     name: 'Langfredag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-04-20',
+    date: new Date('2025-04-20'),
     name: 'Første påskedag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-04-21',
+    date: new Date('2025-04-21'),
     name: 'Andre påskedag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-05-01',
+    date: new Date('2025-05-01'),
     name: 'Arbeidernes dag',
     hoursOff: 8,
     recurring: true
   },
   {
-    date: '2025-05-17',
+    date: new Date('2025-05-17'),
     name: 'Grunnlovsdag',
     hoursOff: 8,
     recurring: true
   },
   {
-    date: '2025-05-29',
+    date: new Date('2025-05-29'),
     name: 'Kristi himmelfartsdag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-06-08',
+    date: new Date('2025-06-08'),
     name: 'Første pinsedag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-06-09',
+    date: new Date('2025-06-09'),
     name: 'Andre pinsedag',
     hoursOff: 8,
     recurring: false,
     notes: 'Moves with Easter'
   },
   {
-    date: '2025-12-24',
+    date: new Date('2025-12-24'),
     name: 'Julaften',
     hoursOff: 8,
     recurring: true,
     notes: 'Company can customize hours'
   },
   {
-    date: '2025-12-25',
+    date: new Date('2025-12-25'),
     name: 'Første juledag',
     hoursOff: 8,
     recurring: true
   },
   {
-    date: '2025-12-26',
+    date: new Date('2025-12-26'),
     name: 'Andre juledag',
     hoursOff: 8,
     recurring: true
   },
   {
-    date: '2025-12-31',
+    date: new Date('2025-12-31'),
     name: 'Nyttårsaften',
     hoursOff: 4,
     recurring: true,

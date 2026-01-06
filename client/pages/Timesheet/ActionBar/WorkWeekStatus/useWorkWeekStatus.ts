@@ -1,6 +1,5 @@
-import { useAppContext, useSubscriptionSettings } from 'AppContext'
+import { useAppContext } from 'AppContext'
 import { getHolidayHoursInPeriod } from 'DateUtils'
-import { SubscriptionHolidaySettings } from 'types'
 import { useTimesheetState } from '../../context'
 
 /**
@@ -9,8 +8,6 @@ import { useTimesheetState } from '../../context'
  */
 export function useWorkWeekStatus() {
   const { getUserConfiguration } = useAppContext()
-  const holidaySettings =
-    useSubscriptionSettings<SubscriptionHolidaySettings>('holidays')
   const { periods, loading } = useTimesheetState()
   let text = null
   let background = null
@@ -26,22 +23,23 @@ export function useWorkWeekStatus() {
     0
   )
 
-  // Calculate expected hours accounting for holidays
+  // Calculate expected hours accounting for holidays from periods
   let expectedHours = workWeekHours
-  if (holidaySettings?.enabled && holidaySettings?.holidays?.length > 0) {
-    // Calculate total holiday hours across all periods in the week
-    const totalHolidayHours = periods.reduce((sum, period) => {
+  const totalHolidayHours = periods.reduce((sum, period) => {
+    // Use holidays already fetched and attached to the period by TimesheetService
+    if (period.holidays && period.holidays.length > 0) {
       const periodHolidayHours = getHolidayHoursInPeriod(
         period.startDate,
         period.endDate,
-        holidaySettings.holidays
+        period.holidays
       )
       return sum + periodHolidayHours
-    }, 0)
+    }
+    return sum
+  }, 0)
 
-    // Subtract holiday hours from expected work hours
-    expectedHours = Math.max(0, workWeekHours - totalHolidayHours)
-  }
+  // Subtract holiday hours from expected work hours
+  expectedHours = Math.max(0, workWeekHours - totalHolidayHours)
 
   const workWeekHoursDiff = totalHours - expectedHours
   if (workWeekHoursDiff === 0 || totalHours === 0) {
