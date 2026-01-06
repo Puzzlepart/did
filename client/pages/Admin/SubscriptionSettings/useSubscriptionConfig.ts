@@ -5,6 +5,7 @@ import { DateObject } from 'DateUtils'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
+import { HolidaysField } from './SettingsSection/HolidaysField'
 import { ISettingsSectionProps } from './SettingsSection/types'
 import { SubscriptionSettingField } from './types'
 
@@ -295,6 +296,32 @@ export function useSubscriptionConfig() {
             description: t('admin.timesheetTimebankEnabledDescription')
           }
         }
+      ]
+    },
+    {
+      id: 'holidays',
+      icon: 'Calendar',
+      text: t('admin.holidaysHeader'),
+      fields: [
+        {
+          id: 'enabled',
+          type: 'bool',
+          props: {
+            label: t('admin.holidaysEnabledLabel'),
+            description: t('admin.holidaysEnabledDescription')
+          }
+        },
+        {
+          id: 'holidays',
+          type: 'custom',
+          component: HolidaysField,
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.holidays?.enabled,
+          props: {
+            label: t('admin.holidayListHeader'),
+            description: t('admin.holidaysDescription')
+          }
+        } as SubscriptionSettingField
       ]
     },
     {

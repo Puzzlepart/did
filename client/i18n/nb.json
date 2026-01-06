@@ -970,7 +970,8 @@
     "invalidDateAfterValidation": "Dato må være etter {{date}}.",
     "invalidDateBeforeValidation": "Dato må være før {{date}}.",
     "invalidTimespanValidationMaxDays": "Det må være maksimalt {{days}} dager mellom denne datoen og {{name}}.",
-    "invalidTimespanValidationMinDays": "Det må være minimum {{days}} dager mellom denne datoen og {{name}}."
+    "invalidTimespanValidationMinDays": "Det må være minimum {{days}} dager mellom denne datoen og {{name}}.",
+    "comingSoon": "Kommer snart"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",

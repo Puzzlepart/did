@@ -3,6 +3,7 @@ import { TabComponent } from 'components/Tabs'
 import React from 'react'
 import { parseInt } from 'utils'
 import { ImageField } from './ImageField'
+import { HolidaysField } from './HolidaysField'
 import { MultiCheckboxField } from './MultiCheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
@@ -86,6 +87,18 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
                   <ImageField
                     {...fieldProps}
                     key={settingsKey}
+                    value={getValueWithDefault(null)}
+                    onChange={onChange}
+                  />
+                )
+              }
+              case 'custom': {
+                const CustomComponent = field.component
+                return (
+                  <CustomComponent
+                    {...fieldProps}
+                    key={settingsKey}
+                    id={field.id}
                     value={getValueWithDefault(null)}
                     onChange={onChange}
                   />
