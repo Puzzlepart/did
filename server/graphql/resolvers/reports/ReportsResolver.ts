@@ -63,8 +63,12 @@ export class ReportsResolver {
   @Query(() => ReportFilterOptions, {
     description: 'Get filter options for report preloading.'
   })
-  async reportFilterOptions(): Promise<ReportFilterOptions> {
-    return await this._report.getReportFilterOptions()
+  async reportFilterOptions(
+    @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
+    @Arg('query', { nullable: true }) query?: ReportsQuery,
+    @Arg('forecast', { nullable: true }) forecast?: boolean
+  ): Promise<ReportFilterOptions> {
+    return await this._report.getReportFilterOptions(preset, query, forecast)
   }
 
   /**

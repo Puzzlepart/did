@@ -169,6 +169,16 @@ export class MongoDocumentService<T> {
   }
 
   /**
+   * Get distinct values for a field matching the given query.
+   *
+   * @param field - Field name
+   * @param query - Filter query
+   */
+  public async distinct(field: string, query: FilterQuery<T>): Promise<any[]> {
+    return await this.collection.distinct(field, this._extendQuery(query))
+  }
+
+  /**
    * Count documents matching the given query.
    *
    * @param query - Filter query

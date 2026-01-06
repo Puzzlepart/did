@@ -2,7 +2,7 @@
 
 query ReportPreload($preset: String, $query: ReportsQuery) {
   approxCount: reportCount(preset: $preset, query: $query)
-  filterOptions: reportFilterOptions {
+  filterOptions: reportFilterOptions(preset: $preset, query: $query) {
     projectNames
     parentProjectNames
     customerNames

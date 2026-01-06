@@ -220,18 +220,99 @@ export class ReportService {
   /**
    * Get filter options for report preloading.
    */
-  public async getReportFilterOptions(): Promise<ReportFilterOptions> {
-    const [projects, customers, users] = await Promise.all([
-      this._projectSvc.find(
-        {},
-        { name: 1, tag: 1, parentKey: 1 }
-      ) as Promise<any[]>,
-      this._customerSvc.getCustomers(),
-      this._userSvc.getUsers({ hiddenFromReports: false })
+  public async getReportFilterOptions(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {},
+    forecast?: boolean
+  ): Promise<ReportFilterOptions> {
+    const baseQuery = forecast
+      ? {
+          ...(await this._generateQueryWithFilters(query)),
+          startDateTime: {
+            $gte: new Date()
+          }
+        }
+      : await this._generateQueryWithFilters(query, preset)
+
+    const [projectIds, userIds] = await Promise.all([
+      (forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc).distinct(
+        'projectId',
+        baseQuery
+      ),
+      (forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc).distinct(
+        'userId',
+        baseQuery
+      )
     ])
 
-    const projectsByTag = new Map(
-      projects.map((project) => [project.tag, project])
+    if (projectIds.length === 0 && userIds.length === 0) {
+      return {
+        projectNames: [],
+        parentProjectNames: [],
+        customerNames: [],
+        partnerNames: [],
+        employeeNames: []
+      }
+    }
+
+    const [projects, users] = await Promise.all([
+      projectIds.length > 0
+        ? (this._projectSvc.find(
+            {
+              $or: [
+                { _id: { $in: projectIds } },
+                { tag: { $in: projectIds } }
+              ]
+            },
+            { name: 1, tag: 1, parentKey: 1, customerKey: 1, partnerKey: 1 }
+          ) as Promise<any[]>)
+        : Promise.resolve([]),
+      userIds.length > 0
+        ? this._userSvc.getUsers({
+            _id: { $in: userIds },
+            hiddenFromReports: false
+          } as any)
+        : Promise.resolve([])
+    ])
+
+    const parentKeys = Array.from(
+      new Set(projects.map((project) => project.parentKey).filter(Boolean))
+    )
+
+    const parentProjects =
+      parentKeys.length > 0
+        ? await this._projectSvc.find(
+            {
+              $or: [{ _id: { $in: parentKeys } }, { tag: { $in: parentKeys } }]
+            },
+            { name: 1, tag: 1 }
+          )
+        : []
+
+    const customersToFetch = Array.from(
+      new Set(
+        projects
+          .reduce<string[]>(
+            (acc, project) => [
+              ...acc,
+              project.customerKey,
+              project.partnerKey
+            ],
+            []
+          )
+          .filter(Boolean)
+      )
+    )
+
+    const customers =
+      customersToFetch.length > 0
+        ? await this._customerSvc.getCustomers({
+            key: { $in: customersToFetch }
+          })
+        : []
+
+    const customerNameByKey = new Map(
+      customers.map((customer) => [customer.key, customer.name])
     )
 
     const projectNames = Array.from(
@@ -240,20 +321,24 @@ export class ReportService {
 
     const parentProjectNames = Array.from(
       new Set(
-        projects
-          .map((project) =>
-            project.parentKey ? projectsByTag.get(project.parentKey)?.name : null
-          )
-          .filter(Boolean)
+        parentProjects.map((project) => project.name).filter(Boolean)
       )
     ).sort()
 
     const customerNames = Array.from(
-      new Set(customers.map((customer) => customer.name).filter(Boolean))
+      new Set(
+        projects
+          .map((project) => customerNameByKey.get(project.customerKey))
+          .filter(Boolean)
+      )
     ).sort()
 
     const partnerNames = Array.from(
-      new Set(customers.map((customer) => customer.name).filter(Boolean))
+      new Set(
+        projects
+          .map((project) => customerNameByKey.get(project.partnerKey))
+          .filter(Boolean)
+      )
     ).sort()
 
     const employeeNames = Array.from(

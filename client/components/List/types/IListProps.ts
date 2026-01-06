@@ -153,6 +153,11 @@ export interface IListProps<T = any>
   onFilterPanelToggle?: (open: boolean) => void
 
   /**
+   * Whether filter options are still loading.
+   */
+  filterPanelLoading?: boolean
+
+  /**
    * Filter values to apply to the list.
    */
   filterValues?: Record<string, any>
