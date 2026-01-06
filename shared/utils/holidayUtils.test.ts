@@ -144,3 +144,29 @@ test('partial day holidays work correctly', (t) => {
   )
   t.is(holidayHours, 4)
 })
+
+test('cross-year period with recurring holidays', (t) => {
+  const newYearHolidays: Holiday[] = [
+    {
+      date: '2024-12-31',
+      name: "New Year's Eve",
+      hoursOff: 4,
+      recurring: true
+    },
+    {
+      date: '2024-01-01',
+      name: "New Year's Day",
+      hoursOff: 8,
+      recurring: true
+    }
+  ]
+
+  // Period spans from 2025 to 2026
+  const holidayHours = getHolidayHoursInPeriod(
+    '2025-12-29',
+    '2026-01-04',
+    newYearHolidays
+  )
+  // Should find both Dec 31, 2025 (4h) and Jan 1, 2026 (8h) = 12h
+  t.is(holidayHours, 12)
+})

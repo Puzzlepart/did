@@ -528,7 +528,7 @@
     "domainRestrictionExternalAddButtonText": "Legg til domene",
     "domainRestrictionExternalAlreadyAddedMessage": "Domene {0} er allerede lagt til i liste over domener.",
     "holidaysHeader": "Heilagdagar",
-    "holidaysDescription": "Konfigurer nasjonale heilagdagar og selskapssp ecific fridagar for å sikre nøyaktige tidsbankberekningar.",
+    "holidaysDescription": "Konfigurer nasjonale heilagdagar og selskapsspesifikke fridagar for å sikre nøyaktige tidsbankberekningar.",
     "holidaysEnabledLabel": "Aktiver heilagdagberekningar",
     "holidaysEnabledDescription": "Når aktivert vil heilagdagar bli teke omsyn til i tidsbank- og arbeidsvekeberekningar",
     "holidaysCountryCodeLabel": "Landsførehandsinnstilling",

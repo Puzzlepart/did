@@ -30,22 +30,27 @@ export function getHolidayHoursInPeriod(
 
   const start = $dayjs(startDate)
   const end = $dayjs(endDate)
-  const currentYear = start.year()
 
   let totalHoursOff = 0
 
   for (const holiday of holidays) {
     const holidayDate = $dayjs(holiday.date)
 
-    // For recurring holidays, check if the holiday falls in the current year's period
+    // For recurring holidays, check if the holiday falls in any year within the period
     if (holiday.recurring) {
-      const holidayThisYear = $dayjs(holiday.date).year(currentYear)
+      const startYear = start.year()
+      const endYear = end.year()
 
-      if (
-        holidayThisYear.isSameOrAfter(start, 'day') &&
-        holidayThisYear.isSameOrBefore(end, 'day')
-      ) {
-        totalHoursOff += holiday.hoursOff
+      // Handle periods that span multiple years
+      for (let year = startYear; year <= endYear; year++) {
+        const holidayThisYear = $dayjs(holiday.date).year(year)
+
+        if (
+          holidayThisYear.isSameOrAfter(start, 'day') &&
+          holidayThisYear.isSameOrBefore(end, 'day')
+        ) {
+          totalHoursOff += holiday.hoursOff
+        }
       }
     } else {
       // For non-recurring holidays, check the exact date
@@ -81,7 +86,7 @@ export function getExpectedHoursForPeriod(
 }
 
 /**
- * Gets the number of working days in a week (Monday-Friday).
+ * Gets the number of working days (Monday-Friday) in a period.
  *
  * @param startDate - Start date of the period (YYYY-MM-DD)
  * @param endDate - End date of the period (YYYY-MM-DD)
