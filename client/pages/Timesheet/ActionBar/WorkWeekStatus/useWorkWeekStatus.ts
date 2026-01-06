@@ -1,5 +1,5 @@
 import { useAppContext, useSubscriptionSettings } from 'AppContext'
-import { getExpectedHoursForPeriod } from 'DateUtils'
+import { getHolidayHoursInPeriod } from 'DateUtils'
 import { SubscriptionHolidaySettings } from 'types'
 import { useTimesheetState } from '../../context'
 
@@ -28,17 +28,19 @@ export function useWorkWeekStatus() {
 
   // Calculate expected hours accounting for holidays
   let expectedHours = workWeekHours
-  if (holidaySettings?.enabled && holidaySettings?.holidays) {
-    // Sum up expected hours for all periods, accounting for holidays in each
-    expectedHours = periods.reduce((sum, period) => {
-      const periodExpectedHours = getExpectedHoursForPeriod(
-        workWeekHours / periods.length, // Divide work week hours by number of periods
+  if (holidaySettings?.enabled && holidaySettings?.holidays?.length > 0) {
+    // Calculate total holiday hours across all periods in the week
+    const totalHolidayHours = periods.reduce((sum, period) => {
+      const periodHolidayHours = getHolidayHoursInPeriod(
         period.startDate,
         period.endDate,
         holidaySettings.holidays
       )
-      return sum + periodExpectedHours
+      return sum + periodHolidayHours
     }, 0)
+
+    // Subtract holiday hours from expected work hours
+    expectedHours = Math.max(0, workWeekHours - totalHolidayHours)
   }
 
   const workWeekHoursDiff = totalHours - expectedHours
