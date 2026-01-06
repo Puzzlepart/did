@@ -25,10 +25,11 @@ export function getHolidayHoursInPeriod(
 
   for (const holiday of holidays) {
     const holidayDate = $dayjs(holiday.date)
-    const hoursOff = holiday.hoursOff ?? 8 // Default to 8 hours if not specified
+    // Default to 8 hours if not specified (defensive, though GraphQL default should apply)
+    const hoursOff = holiday.hoursOff ?? 8
 
     // For recurring holidays, check if the holiday falls in any year within the period
-    // Default to true if recurring is not explicitly set to false
+    // Default to true if not specified (defensive, though GraphQL default should apply)
     if (holiday.recurring ?? true) {
       const startYear = start.year()
       const endYear = end.year()
@@ -109,8 +110,10 @@ export function getWorkingDaysInPeriod(
 /**
  * Norway national holidays preset.
  * These are the standard Norwegian national holidays (red days).
+ * Note: These are partial objects for import - they will get default values
+ * (hoursOff=8, recurring=true) when stored in the database.
  */
-export const NORWAY_HOLIDAYS: Partial<HolidayObject>[] = [
+export const NORWAY_HOLIDAYS: Array<Pick<HolidayObject, 'date' | 'name' | 'hoursOff' | 'recurring' | 'notes'>> = [
   {
     date: new Date('2025-01-01'),
     name: 'Første nyttårsdag',
