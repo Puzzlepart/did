@@ -1,7 +1,8 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { ProjectService, UserService } from '..'
+import { ProjectService } from '../mongo/project/ProjectService'
+import { UserService } from '../mongo/user'
 import { DateObject } from '../../../shared/utils/DateObject'
 import { RequestContext } from '../../graphql/requestContext'
 import {
@@ -11,10 +12,10 @@ import {
   TimeEntry
 } from '../../graphql/resolvers/types'
 import {
-  ConfirmedPeriodsService,
-  ForecastedTimeEntryService,
-  TimeEntryService
-} from '../mongo'
+  ConfirmedPeriodsService
+} from '../mongo/confirmed_periods'
+import { ForecastedTimeEntryService } from '../mongo/forecasted_time_entry'
+import { TimeEntryService } from '../mongo/time_entry'
 import { Report, IGenerateReportParameters } from './types'
 const debug = require('debug')('services/report/ReportService')
 
@@ -196,6 +197,34 @@ export class ReportService {
       debug('[getReport]', 'Error generating report:', error)
       throw error
     }
+  }
+
+  /**
+   * Count raw time entries that match the given preset and query.
+   *
+   * @param preset - Query preset
+   * @param query - Custom query
+   */
+  public async getReportCount(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {}
+  ): Promise<number> {
+    const query_ = this._generateQuery(query, preset)
+    debug('[getReportCount]', 'Counting raw time entries with query:', query_)
+    return await this._timeEntrySvc.count(query_)
+  }
+
+  /**
+   * Count forecasted time entries.
+   */
+  public async getForecastReportCount(): Promise<number> {
+    const query = {
+      startDateTime: {
+        $gte: new Date()
+      }
+    }
+    debug('[getForecastReportCount]', 'Counting forecasted time entries with query:', query)
+    return await this._forecastTimeEntrySvc.count(query as any)
   }
 
   /**

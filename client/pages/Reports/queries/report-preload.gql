@@ -1,0 +1,8 @@
+#import "./report-user-fragment.gql"
+
+query ReportPreload($preset: String, $query: ReportsQuery) {
+  approxCount: reportCount(preset: $preset, query: $query)
+  users: users {
+    ...ReportUserFragment
+  }
+}

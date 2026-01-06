@@ -1,0 +1,8 @@
+#import "./report-user-fragment.gql"
+
+query ForecastPreload {
+  approxCount: forecastedReportCount
+  users: users {
+    ...ReportUserFragment
+  }
+}

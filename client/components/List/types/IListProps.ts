@@ -153,6 +153,14 @@ export interface IListProps<T = any>
   menuItems?: ListMenuItem[] | ((context: IListContext) => ListMenuItem[])
 
   /**
+   * Menu items inserted after the built-in Filters command (if present),
+   * and before the View Columns command (if present).
+   */
+  menuItemsAfterFilters?:
+    | ListMenuItem[]
+    | ((context: IListContext) => ListMenuItem[])
+
+  /**
    * Hide the toolbar
    */
   hideToolbar?: boolean

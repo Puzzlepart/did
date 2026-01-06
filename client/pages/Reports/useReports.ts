@@ -32,12 +32,11 @@ export function useReports() {
   const { queries, queryTabs } = useReportsQueries()
   const [state, dispatch] = useReportsReducer()
   const queryPreset = useReportsQueryPreset(queries, state)
+  const { loadReport } = useReportsQuery({ dispatch, queryPreset })
   const context = useMemo<IReportsContext>(
-    () => ({ state, dispatch, queryPreset }),
-    [state, queryPreset]
+    () => ({ state, dispatch, queryPreset, loadReport }),
+    [state, queryPreset, loadReport]
   )
-
-  useReportsQuery(context)
 
   /**
    * Tabs for `<Reports />`. The `home` tab is always present,

@@ -4,6 +4,13 @@ import { useTranslation } from 'react-i18next'
 import { useReportsContext } from '../context'
 import { IReportsListProps } from '../ReportsList/types'
 import { useColumns } from '../ReportsList/columns/useColumns'
+import { useBrowserStorage } from 'hooks'
+import _ from 'lodash'
+
+type PersistedColumn = {
+  key: string
+  hidden: boolean
+}
 
 /**
  * Enhanced Excel export command for Reports with progress tracking
@@ -13,6 +20,32 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
   const { t } = useTranslation()
   const context = useReportsContext()
   const columns = useColumns()
+  const [persistedColumns] = useBrowserStorage<PersistedColumn[]>({
+    key: 'reportslist_columns',
+    initialValue: []
+  })
+
+  const exportColumns = _.isEmpty(persistedColumns)
+    ? columns
+    : [...columns]
+        .sort((a, b) => {
+          const aIndex = persistedColumns.findIndex((c) => c.key === a.key)
+          const bIndex = persistedColumns.findIndex((c) => c.key === b.key)
+          return aIndex - bIndex
+        })
+        .map((column) => {
+          const persistedColumn = persistedColumns.find((c) => c.key === column.key)
+          return {
+            ...column,
+            data: {
+              ...column.data,
+              hidden:
+                persistedColumn === undefined
+                  ? column?.data?.hidden
+                  : persistedColumn.hidden
+            }
+          }
+        })
 
   // Determine if this is a large dataset query
   const isLargeDataset = [
@@ -24,7 +57,7 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
     query: context.queryPreset?.query,
     queryVariables: context.queryPreset?.variables,
     fileName: context.queryPreset?.exportFileName || props.exportFileName || 'TimeEntries-{0}.xlsx',
-    columns,
+    columns: exportColumns.filter((col) => !col?.data?.hidden),
     isLargeDataset,
     batchSize: 5000,
     presetId: context.queryPreset?.id  // Pass preset ID to generate correct query parameters

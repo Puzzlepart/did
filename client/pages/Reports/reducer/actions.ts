@@ -30,3 +30,21 @@ export const REMOVE_SAVED_FILTER = createAction<string>('REMOVE_SAVED_FILTER')
  */
 export const SET_FILTER_STATE =
   createAction<ListFilterState>('SET_FILTER_STATE')
+
+/**
+ * @category Reports Actions
+ */
+export const PRELOAD_UPDATED = createAction<{
+  loading: boolean
+  approxCount?: number
+}>('PRELOAD_UPDATED')
+
+/**
+ * @category Reports Actions
+ */
+export const REPORT_CLEARED = createAction('REPORT_CLEARED')
+
+/**
+ * @category Reports Actions
+ */
+export const REPORT_LOADED = createAction('REPORT_LOADED')

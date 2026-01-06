@@ -38,12 +38,27 @@ debug(
   configuredPort === effectivePort ? 'as-configured' : 'switched-to-ssl-port'
 )
 
-export const redisMiddlware = createRedisClient(effectivePort, redisHostname, {
-  ...(redisKey && { auth_pass: redisKey }),
-  ...(redisKey && {
-    tls: {
-      servername: redisHostname
-    }
-  }),
-  socket_keepalive: true
-})
+export const redisMiddlware = redisHostname
+  ? createRedisClient(effectivePort, redisHostname, {
+      ...(redisKey && { auth_pass: redisKey }),
+      ...(redisKey && {
+        tls: {
+          servername: redisHostname
+        }
+      }),
+      socket_keepalive: true
+    })
+  : ({
+      get: (_key: string, callback: (error: Error | null, reply: any) => void) =>
+        callback(new Error('Redis not configured'), null),
+      setex: (
+        _key: string,
+        _seconds: number,
+        _value: string,
+        callback: (error: Error | null, reply: any) => void
+      ) => callback(new Error('Redis not configured'), null),
+      del: (
+        _keys: string | string[],
+        callback: (error?: Error | null, reply?: any) => void
+      ) => callback?.(new Error('Redis not configured'), null)
+    } as any)

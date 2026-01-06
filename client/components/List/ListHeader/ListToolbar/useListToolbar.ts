@@ -40,6 +40,12 @@ export function useListToolbar() {
     ? context.props.menuItems(context)
     : context.props.menuItems
 
+  const menuItemsAfterFiltersFromProps = _.isFunction(
+    context.props.menuItemsAfterFilters
+  )
+    ? context.props.menuItemsAfterFilters(context)
+    : context.props.menuItemsAfterFilters
+
   const menuItems = useMemo(() => {
     return _.isEmpty(menuItemsFromProps)
       ? ListMenuItem.convert([
@@ -50,10 +56,11 @@ export function useListToolbar() {
           searchBoxMenuItem,
           ...menuItemsFromProps,
           filterCommands.toggle?.menuItem,
+          ...(menuItemsAfterFiltersFromProps ?? []),
           excelExportCommands?.menuItem,
           viewColumnsEditCommand
         ].filter(Boolean)
-  }, [menuItemsFromProps])
+  }, [menuItemsFromProps, menuItemsAfterFiltersFromProps])
 
   const menuItemGroups = useMemo<{ [key: string]: ListMenuItem[] }>(
     () =>

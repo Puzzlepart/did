@@ -7,7 +7,10 @@ import { IReportsState } from '../types'
 import {
   ADD_SAVED_FILTER,
   DATA_UPDATED,
+  PRELOAD_UPDATED,
   REMOVE_SAVED_FILTER,
+  REPORT_CLEARED,
+  REPORT_LOADED,
   SET_FILTER,
   SET_FILTER_STATE
 } from './actions'
@@ -27,12 +30,18 @@ export function useReportsReducer() {
         data: {
           reportLinks: [],
           users: [],
-          periods: []
+          periods: [],
+          timeEntries: []
         },
         activeFilter: null,
         filterState: {
           filters: []
         },
+        preload: {
+          loading: false,
+          approxCount: undefined
+        },
+        isReportLoaded: false,
         savedFilters: getUserConfiguration('reports.filters') || {}
       }) as IReportsState,
     []
@@ -43,10 +52,37 @@ export function useReportsReducer() {
        * `DATA_UPDATED`: Update state with new data from the queries.
        */
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        state.loading = payload.loading
+        if (payload.loading !== undefined) {
+          state.loading = payload.loading
+        }
         if (payload) {
           state.data = mapTimeEntries({ ...state.data, ...payload })
         }
+      })
+
+      /**
+       * `PRELOAD_UPDATED`: Update preload state for the current report.
+       */
+      .addCase(PRELOAD_UPDATED, (state, { payload }) => {
+        state.preload = payload
+      })
+
+      /**
+       * `REPORT_CLEARED`: Clear loaded report time entries (used when changing preset).
+       */
+      .addCase(REPORT_CLEARED, (state) => {
+        state.data = {
+          ...state.data,
+          timeEntries: []
+        }
+        state.isReportLoaded = false
+      })
+
+      /**
+       * `REPORT_LOADED`: Mark the report as loaded.
+       */
+      .addCase(REPORT_LOADED, (state) => {
+        state.isReportLoaded = true
       })
 
       /**

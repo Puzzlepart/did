@@ -140,6 +140,19 @@ export interface IReportsState {
    * Current filter state
    */
   filterState?: ListFilterState
+
+  /**
+   * Preload state for the current report (count + metadata).
+   */
+  preload?: {
+    loading: boolean
+    approxCount?: number
+  }
+
+  /**
+   * Whether the current report's time entries have been loaded.
+   */
+  isReportLoaded?: boolean
 }
 
 /**

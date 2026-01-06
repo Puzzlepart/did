@@ -19,6 +19,7 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
     context,
     columns,
     menuItems,
+    loadReportCommand,
     createPlaceholder,
     createContentAfter,
     exportProgress,
@@ -51,6 +52,7 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         items={props.items ?? context.state.data.timeEntries}
         columns={columns}
         menuItems={menuItems}
+        menuItemsAfterFilters={loadReportCommand ? [loadReportCommand] : []}
         // Intentionally do not pass exportFileName so the List's default Excel export is disabled;
         // instead, we use a custom export implementation with progress tracking (see ExportProgress).
         filterValues={context.state?.activeFilter?.values}

@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Ctx, Int, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { PermissionScope } from '../../../../shared/config/security'
 import { ReportService } from '../../../services'
@@ -54,6 +54,30 @@ export class ReportsResolver {
     @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
   ): Promise<TimeEntry[]> {
     return await this._report.getReport(preset, query, sortAsc)
+  }
+
+  /**
+   * Count raw time entries matching the specified report filters.
+   */
+  @Query(() => Int, {
+    description: 'Count raw time entries matching a preset report or custom filters.'
+  })
+  async reportCount(
+    @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
+    @Arg('query', { nullable: true }) query?: ReportsQuery
+  ): Promise<number> {
+    return await this._report.getReportCount(preset, query)
+  }
+
+  /**
+   * Count forecasted time entries.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
+  @Query(() => Int, {
+    description: 'Count forecasted time entries.'
+  })
+  async forecastedReportCount(): Promise<number> {
+    return await this._report.getForecastReportCount()
   }
 
   /**

@@ -169,6 +169,15 @@ export class MongoDocumentService<T> {
   }
 
   /**
+   * Count documents matching the given query.
+   *
+   * @param query - Filter query
+   */
+  public async count(query: FilterQuery<T>): Promise<number> {
+    return await this.collection.countDocuments(this._extendQuery(query))
+  }
+
+  /**
    * Stream documents from the database to avoid loading large datasets into memory.
    * Processes documents in batches for memory efficiency.
    *

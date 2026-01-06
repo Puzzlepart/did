@@ -75,3 +75,38 @@ test('ReportService should not apply limits for small queries', async (t) => {
   const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_MONTH', false)
   t.is(safeQuery.limit, undefined, 'No limit should be applied for small queries')
 })
+
+test('ReportService getReportCount should count raw time entries', async (t) => {
+  const mockContext = { userId: 'test-user' }
+  const mockProjectService = { getProjectsData: async () => ({ projects: [], customers: [] }) }
+  const mockUserService = { getUsers: async () => [] }
+  let capturedQuery: any
+  const mockTimeEntryService = { 
+    count: async (query: any) => {
+      capturedQuery = query
+      return 123
+    },
+    find: async () => [],
+    findPaginated: async () => [],
+    streamFind: async () => {}
+  }
+  const mockConfirmedPeriodService = { find: async () => [] }
+  const mockForecastTimeEntryService = { 
+    find: async () => [],
+    count: async () => 0
+  }
+
+  const reportService = new ReportService(
+    mockContext as any,
+    mockProjectService as any,
+    mockUserService as any,
+    mockTimeEntryService as any,
+    mockForecastTimeEntryService as any,
+    mockConfirmedPeriodService as any
+  )
+
+  const count = await reportService.getReportCount('CURRENT_YEAR', {})
+
+  t.is(count, 123)
+  t.truthy(capturedQuery?.year, 'Expected generated query to include year filter')
+})

@@ -565,6 +565,7 @@
     "filterIconPlaceholder": "Søk etter et ikon for filteret...",
     "searchPlaceholder": "Søk i {{count}} tidsregistreringer ({{hours}} timer) for {{preset}}...",
     "searchCount": "Viser {{count}} av {{total}} tidsregistreringer",
+    "loadApproxEntries": "Last (ca. {{count}} tidsoppføringer)",
     "viewColumnsLabel": " Vis eller skjul kolonner",
     "periodColumnDescription": "Viser perioden for oppføringa i veke, månad og år format.",
     "runReport": "Hent rapport",

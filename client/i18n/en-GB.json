@@ -565,6 +565,7 @@
     "filterIconPlaceholder": "Search for a filter icon...",
     "searchPlaceholder": "Search in {{count}} time entries ({{hours}} hours) for {{preset}}..",
     "searchCount": "Showing {{count}} of {{total}} time entries",
+    "loadApproxEntries": "Load (approx {{count}} entries)",
     "viewColumnsLabel": "Show or hide columns",
     "periodColumnDescription": "Displays the period of the entry in week, month, and year format.",
     "runReport": "Run report",
