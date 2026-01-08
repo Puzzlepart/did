@@ -26,14 +26,12 @@ export function useReportsLoadReportCommand() {
     ) {
       return
     }
-
-    const countText = approxCount ?? '…'
     const text =
       typeof approxCount === 'number' && approxCount > largeReportLimit
         ? t('reports.loadApproxEntriesFirst', {
-            count: approxCount,
-            limit: largeReportLimit
-          })
+          count: approxCount,
+          limit: largeReportLimit
+        })
         : t('reports.loadApproxEntries', { count: approxCount })
 
     return new ListMenuItem(text)
