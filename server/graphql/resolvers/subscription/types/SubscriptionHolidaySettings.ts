@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, InputType, ObjectType } from 'type-graphql'
+import { IsISO8601, Length, Min, Max, IsOptional } from 'class-validator'
 
 /**
  * Represents a single holiday or non-working day configuration.
@@ -52,18 +53,24 @@ export class Holiday {
 })
 export class HolidayInput {
   @Field()
+  @IsISO8601({ strict: true }, { message: 'Date must be in ISO format (YYYY-MM-DD)' })
   date: string
 
   @Field()
+  @Length(1, 100, { message: 'Name must be between 1 and 100 characters' })
   name: string
 
   @Field(() => Float)
+  @Min(0, { message: 'Hours off cannot be negative' })
+  @Max(8, { message: 'Hours off cannot exceed 8 hours' })
   hoursOff: number
 
   @Field({ defaultValue: true })
   recurring?: boolean
 
   @Field({ nullable: true })
+  @IsOptional()
+  @Length(0, 500, { message: 'Notes must be 500 characters or less' })
   notes?: string
 }
 

@@ -572,17 +572,246 @@ Mo  Tu  We  Th  Fr  Sa  Su
 
 ## 🧪 Testing & Quality
 
-### Additional Test Coverage
-**Priority:** MEDIUM
+### Test Coverage for Holiday Feature (NEXT PR)
+**Priority:** HIGH - Should be next PR after initial merge
 **Effort:** 1-2 days
+**Blockers:** None - can start immediately after PR #1326 merges
 
-**Current:** 50+ unit tests covering utility functions.
+**Current State:**
+- ✅ Utility functions (`holidayUtils.ts`): 50+ tests, ~95% coverage (excellent!)
+- ❌ React components: 0% coverage
+- ❌ GraphQL integration: 0% coverage
+- ❌ React hooks: 0% coverage
+- ❌ Server-side validation: 0% coverage (will be added in PR #1326)
 
-**Missing:**
+**Test Files to Create:**
+
+#### 1. `HolidaysField.test.tsx` (~200 lines)
+**Framework:** React Testing Library + Jest
+**Estimated:** 3-4 hours
+
+```typescript
+describe('HolidaysField Component', () => {
+  // Rendering & Display
+  it('should render empty state when no holidays configured')
+  it('should render list of holidays in table')
+  it('should show warnings for weekend holidays')
+  it('should show warnings for duplicate dates')
+  it('should show warning for Feb 29 holidays')
+
+  // Add Holiday Flow
+  it('should open add dialog when Add button clicked')
+  it('should validate required fields (date, name, hours)')
+  it('should validate date format (ISO YYYY-MM-DD)')
+  it('should validate name length (1-100 chars)')
+  it('should validate hours (0-8, 0.25 increments)')
+  it('should show validation errors in dialog')
+  it('should add holiday and sort by date')
+  it('should close dialog after successful add')
+
+  // Edit Holiday Flow
+  it('should open edit dialog with pre-filled values')
+  it('should update holiday on save')
+  it('should maintain sort order after edit')
+
+  // Delete Holiday Flow
+  it('should show confirmation dialog before delete')
+  it('should delete holiday on confirm')
+  it('should cancel delete operation')
+  it('should not show deleted holiday in list')
+
+  // Import Preset Flow
+  it('should import Norway holidays (13 items)')
+  it('should not import holidays with duplicate dates')
+  it('should generate movable holidays for current year')
+  it('should set countryCode to NO after import')
+  it('should merge with existing holidays')
+  it('should handle empty holiday list on import')
+
+  // Warning System
+  it('should calculate duplicates correctly')
+  it('should memoize duplicate detection')
+  it('should show multiple warnings per holiday')
+
+  // Edge Cases
+  it('should handle undefined value prop')
+  it('should handle holidays with missing optional fields')
+  it('should prevent saving with validation errors')
+})
+```
+
+#### 2. `useWorkWeekStatus.test.ts` (~150 lines)
+**Framework:** @testing-library/react-hooks + Jest
+**Estimated:** 2-3 hours
+
+```typescript
+describe('useWorkWeekStatus Hook', () => {
+  // Basic Functionality
+  it('should return null when no workWeekHours configured')
+  it('should return null when loading')
+  it('should return 0 diff when hours match exactly')
+  it('should calculate positive diff (overtime)')
+  it('should calculate negative diff (undertime)')
+
+  // Holiday Integration (CRITICAL - Main feature)
+  it('should subtract holiday hours from expected hours')
+  it('should handle multiple holidays in same week')
+  it('should handle periods with no holidays')
+  it('should handle week with all days as holidays')
+  it('should handle half-day holidays (4 hours)')
+  it('should handle mixed full and half-day holidays')
+
+  // Error Handling
+  it('should handle holiday calculation errors gracefully')
+  it('should continue if one period calculation fails')
+  it('should log error when holiday hours exceed work week')
+  it('should return default values on error')
+
+  // Performance & Memoization
+  it('should memoize calculation results')
+  it('should only recalculate when periods change')
+  it('should only recalculate when workWeekHours change')
+  it('should not recalculate on unrelated prop changes')
+
+  // Edge Cases
+  it('should handle invalid period dates')
+  it('should handle period with invalid holiday data')
+  it('should handle empty periods array')
+  it('should handle null/undefined holidays in period')
+
+  // Display Values
+  it('should format positive hours with "timer" text')
+  it('should format negative hours with "timer" text')
+  it('should set green background for overtime')
+  it('should set red background for undertime')
+})
+```
+
+#### 3. `subscription.resolver.test.ts` (~200 lines)
+**Framework:** Jest + Supertest (GraphQL integration)
+**Estimated:** 4-5 hours
+
+```typescript
+describe('Subscription Resolver - Holiday Mutations', () => {
+  // Authorization Tests
+  it('should require MANAGE_SUBSCRIPTION permission')
+  it('should reject non-admin users')
+  it('should reject unauthenticated requests')
+  it('should allow users with ADMIN role')
+
+  // Server-Side Validation - Date
+  it('should reject invalid date format "12/25/2025"')
+  it('should reject invalid date format "25-12-2025"')
+  it('should reject invalid dates "2025-13-01"')
+  it('should reject invalid dates "2025-02-30"')
+  it('should accept valid ISO dates "2025-12-25"')
+
+  // Server-Side Validation - Name
+  it('should reject empty name')
+  it('should reject whitespace-only name')
+  it('should reject name > 100 characters')
+  it('should accept valid name')
+  it('should trim whitespace from name')
+
+  // Server-Side Validation - Hours
+  it('should reject negative hours')
+  it('should reject hours > 8')
+  it('should reject hours > dailyWorkHours')
+  it('should reject non-quarter-hour increments (4.3)')
+  it('should accept valid hours (0, 4, 8)')
+  it('should accept quarter-hour increments (0.25, 0.5, 0.75)')
+
+  // Input Sanitization (XSS Protection)
+  it('should sanitize XSS in name field "<script>alert(1)</script>"')
+  it('should sanitize XSS in notes field "<img src=x onerror=alert(1)>"')
+  it('should remove HTML tags from name')
+  it('should remove HTML tags from notes')
+
+  // Successful Operations
+  it('should successfully create holidays')
+  it('should successfully update holidays')
+  it('should successfully delete holidays')
+  it('should store dates in ISO format')
+  it('should store holidays in subscription settings')
+
+  // Data Integrity
+  it('should handle concurrent updates correctly')
+  it('should allow duplicate dates (with warning)')
+  it('should preserve existing holidays when adding new')
+  it('should handle empty holidays array')
+
+  // Response Format
+  it('should return success: true on successful update')
+  it('should return error details on validation failure')
+  it('should include field name in validation errors')
+})
+```
+
+#### 4. `holidayUtils.integration.test.ts` (~150 lines)
+**Framework:** Jest
+**Estimated:** 2-3 hours
+
+```typescript
+describe('Holiday System Integration Tests', () => {
+  // Timebank Calculation Integration
+  it('should calculate timebank correctly with holidays')
+  it('should reduce expected hours by holiday hours')
+  it('should handle week with multiple holidays')
+  it('should handle week with all days as holidays')
+
+  // Cross-Year Integration
+  it('should handle recurring holidays across years')
+  it('should handle period from Dec 31 to Jan 1')
+  it('should generate correct movable holidays for multiple years')
+
+  // Leap Year Integration
+  it('should skip Feb 29 in non-leap years')
+  it('should include Feb 29 in leap years')
+  it('should log warning when skipping Feb 29')
+
+  // Import Preset Integration
+  it('should import Norway preset with correct dates')
+  it('should generate Easter dates correctly for 2025-2030')
+  it('should calculate Ascension Day (39 days after Easter)')
+  it('should calculate Pentecost (49-50 days after Easter)')
+
+  // Full User Flow
+  it('should complete full flow: import → add → edit → delete')
+  it('should handle user adding holiday for current week')
+  it('should recalculate timebank when holiday added')
+
+  // Error Recovery
+  it('should handle invalid holiday data gracefully')
+  it('should continue processing after single holiday error')
+  it('should maintain data integrity after errors')
+})
+```
+
+**Test Execution Plan:**
+1. Run tests locally: `npm test -- holiday`
+2. Ensure all tests pass
+3. Check coverage: `npm run test:coverage`
+4. Target: 80%+ coverage for new code
+5. Commit tests in separate PR after initial feature merge
+
+**Dependencies:**
+- @testing-library/react
+- @testing-library/react-hooks
+- @testing-library/jest-dom
+- @testing-library/user-event
+- jest
+- supertest (for GraphQL integration tests)
+
+---
+
+### Additional Test Coverage
+
+**Additional Test Coverage (nice to have):**
+
 1. **Integration Tests:**
-   - GraphQL mutations end-to-end
+   - GraphQL mutations end-to-end ⚠️ CRITICAL
    - Database constraints enforcement
-   - Permission checks
+   - Permission checks ⚠️ CRITICAL
 
 2. **E2E Tests:**
    - Full user flow: Import preset → Edit → Delete
@@ -595,9 +824,9 @@ Mo  Tu  We  Th  Fr  Sa  Su
    - Bulk operations
 
 4. **Security Tests:**
-   - XSS attempts in holiday names
+   - XSS attempts in holiday names ⚠️ CRITICAL
    - SQL injection attempts
-   - Permission bypass attempts
+   - Permission bypass attempts ⚠️ CRITICAL
 
 ---
 

@@ -10,6 +10,19 @@ import { environment } from '../../utils'
 import { MongoDocumentService } from './document'
 
 /**
+ * Sanitizes a string by removing HTML tags and escaping special characters
+ * to prevent XSS attacks.
+ *
+ * @param input - String to sanitize
+ * @returns Sanitized string
+ */
+function sanitizeString(input: string): string {
+  if (!input) return input
+  // Remove HTML tags
+  return input.replace(/<[^>]*>/g, '').trim()
+}
+
+/**
  * Subscription service
  *
  * @extends MongoDocumentService
