@@ -67,7 +67,7 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         onFilterPanelToggle={(isOpen) => {
           context.dispatch(SET_FILTERS_OPEN(isOpen))
           if (!isOpen) {
-            const filterState = context.state?.filterState ?? { filters: [] }
+            const filterState = context.state?.filterState ?? { filters: [], isFiltered: false }
             context.dispatch(
               APPLY_FILTER_STATE({
                 ...filterState,

@@ -291,7 +291,7 @@ export function useExcelExportWithProgress({
               const existingIds = new Set(
                 allEntries
                   .map((e) => e.id)
-                  .filter((id): id is string | number => id !== null && id !== undefined)
+                  .filter((id) => id !== null && id !== undefined)
                   .map(String)
               )
 

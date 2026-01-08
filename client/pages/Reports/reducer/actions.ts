@@ -6,7 +6,7 @@ import { IReportsData, IReportsSavedFilter } from '../types'
 /**
  * category Reports Actions
  */
-export const DATA_UPDATED = createAction<IReportsData>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<Partial<IReportsData>>('DATA_UPDATED')
 
 /**
  * @category Reports Actions

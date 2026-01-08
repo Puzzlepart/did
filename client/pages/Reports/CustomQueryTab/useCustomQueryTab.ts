@@ -90,7 +90,7 @@ export const useCustomQueryTab: ComponentLogicHook<
   const submitText =
     typeof approxCount === 'number'
       ? t('reports.loadApproxEntriesShort', {
-          count: approxCount.toLocaleString()
+          count: approxCount
         })
       : t('reports.preloadReport')
   const formControl: IFormControlProps<ReportsQuery> = {

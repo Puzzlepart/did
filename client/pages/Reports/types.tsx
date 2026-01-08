@@ -74,22 +74,22 @@ export interface IReportsData {
   /**
    * Time entries
    */
-  timeEntries: any[]
+  timeEntries?: any[]
 
   /**
    * Users
    */
-  users: User[]
+  users?: User[]
 
   /**
    * Periods
    */
-  periods: TimesheetPeriodObject[]
+  periods?: TimesheetPeriodObject[]
 
   /**
    * Projects
    */
-  projects: Project[]
+  projects?: Project[]
 
   /**
    * Report links

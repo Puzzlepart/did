@@ -144,7 +144,7 @@ export const CustomQueryTab: TabComponent = (props) => {
               className={styles.yearInput}
               values={Array.from({ length: 101 }, (_, index) => {
                 const year = 2000 + index
-                return { value: year, text: year.toString() }
+                return { value: year.toString(), text: year.toString() }
               })}
               placeholder={t('common.yearLabel')}
               {...isDisabled('year')}

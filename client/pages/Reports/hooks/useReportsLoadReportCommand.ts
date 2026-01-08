@@ -31,10 +31,10 @@ export function useReportsLoadReportCommand() {
     const text =
       typeof approxCount === 'number' && approxCount > largeReportLimit
         ? t('reports.loadApproxEntriesFirst', {
-            count: countText,
+            count: approxCount,
             limit: largeReportLimit
           })
-        : t('reports.loadApproxEntries', { count: countText })
+        : t('reports.loadApproxEntries', { count: approxCount })
 
     return new ListMenuItem(text)
       .setGroup('actions')

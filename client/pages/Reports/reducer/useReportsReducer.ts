@@ -3,7 +3,7 @@ import { useAppContext } from 'AppContext'
 import { useReduxReducer as useReducer } from 'hooks'
 import { useMemo } from 'react'
 import _ from 'underscore'
-import { IReportsState } from '../types'
+import { IReportsData, IReportsState } from '../types'
 import {
   ADD_SAVED_FILTER,
   APPLY_FILTER_STATE,
@@ -57,7 +57,7 @@ export function useReportsReducer() {
       /**
        * `DATA_UPDATED`: Update state with new data from the queries.
        */
-      .addCase(DATA_UPDATED, (state, { payload }) => {
+      .addCase(DATA_UPDATED, (state, { payload }: { payload: Partial<IReportsData> }) => {
         if (payload.loading !== undefined) {
           state.loading = payload.loading
         }
