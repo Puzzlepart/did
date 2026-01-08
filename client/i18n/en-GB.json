@@ -526,7 +526,32 @@
     "roleDescriptionLabel": "Description",
     "roleNotDeletable": "This role cannot be deleted because it is essential or has protected status.",
     "domainRestrictionExternalAddButtonText": "Add domain",
-    "domainRestrictionExternalAlreadyAddedMessage": "Domain {0} already added to list of domains."
+    "domainRestrictionExternalAlreadyAddedMessage": "Domain {0} already added to list of domains.",
+    "holidaysHeader": "Holidays",
+    "holidaysDescription": "Configure national holidays and company-specific non-working days to ensure accurate timebank calculations.",
+    "holidaysEnabledLabel": "Enable holiday calculations",
+    "holidaysEnabledDescription": "When enabled, holidays will be accounted for in timebank and work week calculations",
+    "holidaysCountryCodeLabel": "Country preset",
+    "holidaysCountryCodeDescription": "Select a country to import national holidays. You can then customize them for your company.",
+    "holidayListHeader": "Configured holidays",
+    "holidayDateLabel": "Date",
+    "holidayNameLabel": "Holiday name",
+    "holidayHoursOffLabel": "Hours off",
+    "holidayRecurringLabel": "Recurring annually",
+    "holidayNotesLabel": "Notes",
+    "addHolidayButton": "Add holiday",
+    "editHolidayButton": "Edit",
+    "deleteHolidayButton": "Delete",
+    "importHolidaysButton": "Import from preset",
+    "holidayHoursOffDescription": "Number of hours off for this day (0 = working day, 4 = half day, 8 = full day off)",
+    "holidayRecurringDescription": "If enabled, this holiday will recur every year on the same date",
+    "holidayImportedSuccess": "Holidays imported successfully",
+    "holidayAddedSuccess": "Holiday added successfully",
+    "holidayUpdatedSuccess": "Holiday updated successfully",
+    "holidayDeletedSuccess": "Holiday deleted successfully",
+    "noHolidaysConfigured": "No holidays configured. Import from a preset or add manually.",
+    "holidayDeleteConfirmTitle": "Delete holiday?",
+    "holidayDeleteConfirmMessage": "Are you sure you want to delete {{name}}?"
   },
   "reports": {
     "apollo": {
@@ -946,7 +971,8 @@
     "invalidDateAfterValidation": "Date must be after {{date}}.",
     "invalidDateBeforeValidation": "Date must be before {{date}}.",
     "invalidTimespanValidationMaxDays": "It should be a maximum of {{days}} days between this date and {{name}}.",
-    "invalidTimespanValidationMinDays": "It should be a minimum of {{days}} days between this date and {{name}}."
+    "invalidTimespanValidationMinDays": "It should be a minimum of {{days}} days between this date and {{name}}.",
+    "comingSoon": "Coming soon"
   },
   "navigation": {
     "TimesheetPage": "Timesheet",

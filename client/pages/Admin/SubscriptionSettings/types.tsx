@@ -1,5 +1,6 @@
 import { ITextFieldProps } from '@fluentui/react'
 import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import React from 'react'
 import { IImageFieldProps } from './SettingsSection/ImageField'
 import { SubscriptionSettings } from 'types'
 
@@ -85,6 +86,16 @@ export interface ISubscriptionSettingList<T = any>
   itemAlreadyAddedMessage?: string
 }
 
+export interface ISubscriptionSettingCustom<T = any>
+  extends ISubscriptionSettingBase<T> {
+  type: 'custom'
+
+  /**
+   * The custom component to render
+   */
+  component: React.ComponentType<any>
+}
+
 export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingText<T>
   | ISubscriptionSettingBool<T>
@@ -92,3 +103,4 @@ export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingCheckboxMulti<T>
   | ISubscriptionSettingImage
   | ISubscriptionSettingList
+  | ISubscriptionSettingCustom

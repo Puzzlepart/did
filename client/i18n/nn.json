@@ -144,10 +144,10 @@
     "budgetCriticalThreshold": "Kritisk terskel for budsjett",
     "budgetCriticalThresholdDescription": "Prosentandelen av budsjettet der en feil vises.",
     "bulkEdit": {
-    "label": "Masseredigering",
-    "title": "Masserediger {{count}} prosjekt",
-    "description": "Rediger flere prosjekt samstundes. Endringar vil gjelde for alle valde prosjekt.",
-    "selectedProjects": "Valgte prosjekt"
+      "label": "Masseredigering",
+      "title": "Masserediger {{count}} prosjekt",
+      "description": "Rediger flere prosjekt samstundes. Endringar vil gjelde for alle valde prosjekt.",
+      "selectedProjects": "Valgte prosjekt"
     },
     "partnerCustomerLabel": "Partnarkundar",
     "searchPartnerCustomer": "Søk etter ein partnarkundar...",
@@ -241,10 +241,10 @@
     "deleteSuccessTitle": "Kunde sletta",
     "searchPlaceholder": "Søk i {{count}} kunder...",
     "bulkEdit": {
-    "label": "Masseredigering",
-    "title": "Masserediger {{count}} kundar",
-    "description": "Rediger fleire kundar samstundes. Endringar vil gjelde for alle valde kundar.",
-    "selectedProjects": "Valde kundar"
+      "label": "Masseredigering",
+      "title": "Masserediger {{count}} kundar",
+      "description": "Rediger fleire kundar samstundes. Endringar vil gjelde for alle valde kundar.",
+      "selectedProjects": "Valde kundar"
     }
   },
   "admin": {
@@ -395,8 +395,8 @@
       "confirmLockSubText": "Er du sikker på at du vil låse veke {{period}}?",
       "lockReasonPlaceholder": "Skriv eventuelt grunnen til å låse veka...",
       "confirmLockTitle": "Lås veke",
-      "weekLockedMessage": "Veke {{weekNumber}} ble låst {{lockedAt}}.{{reason}}"
-  ,"lockPermissionDenied": "Du har ikkje tilgang til å låse eller låse opp veker."
+      "weekLockedMessage": "Veke {{weekNumber}} ble låst {{lockedAt}}.{{reason}}",
+      "lockPermissionDenied": "Du har ikkje tilgang til å låse eller låse opp veker."
     },
     "reportLinks": {
       "headerText": "Rapportkoblinger",
@@ -442,8 +442,8 @@
     "teamsEnabledDescription": "Aktiver Teams-funksjonalitet som å minne brukere om manglende uker osv.",
     "addNewRole": "Legg til ei ny rolle",
     "roleNameLabel": "Rollenamn",
-  "roleCreatedSuccess": "Rolla **{{name}}** vart oppretta.",
-  "roleUpdatedSuccess": "Rolla **{{name}}** vart oppdatert.",
+    "roleCreatedSuccess": "Rolla **{{name}}** vart oppretta.",
+    "roleUpdatedSuccess": "Rolla **{{name}}** vart oppdatert.",
     "noTimeEntriesText": "Det finst ikkje stadfesta timar for dei valde månadene/vekene i det valde året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilgangar",
@@ -526,7 +526,32 @@
     "roleDescriptionLabel": "Beskrivelse",
     "roleNotDeletable": "Denne rollen kan ikke slettes fordi den er viktig eller har beskyttet status.",
     "domainRestrictionExternalAddButtonText": "Legg til domene",
-    "domainRestrictionExternalAlreadyAddedMessage": "Domene {0} er allerede lagt til i liste over domener."
+    "domainRestrictionExternalAlreadyAddedMessage": "Domene {0} er allerede lagt til i liste over domener.",
+    "holidaysHeader": "Heilagdagar",
+    "holidaysDescription": "Konfigurer nasjonale heilagdagar og selskapsspesifikke fridagar for å sikre nøyaktige tidsbankberekningar.",
+    "holidaysEnabledLabel": "Aktiver heilagdagberekningar",
+    "holidaysEnabledDescription": "Når aktivert vil heilagdagar bli teke omsyn til i tidsbank- og arbeidsvekeberekningar",
+    "holidaysCountryCodeLabel": "Landsførehandsinnstilling",
+    "holidaysCountryCodeDescription": "Vel eit land for å importere nasjonale heilagdagar. Du kan deretter tilpasse dei for selskapet ditt.",
+    "holidayListHeader": "Konfigurerte heilagdagar",
+    "holidayDateLabel": "Dato",
+    "holidayNameLabel": "Heilagdagnamn",
+    "holidayHoursOffLabel": "Timar fri",
+    "holidayRecurringLabel": "Gjentakast årleg",
+    "holidayNotesLabel": "Notat",
+    "addHolidayButton": "Legg til heilagdag",
+    "editHolidayButton": "Rediger",
+    "deleteHolidayButton": "Slett",
+    "importHolidaysButton": "Importer frå førehandsinnstilling",
+    "holidayHoursOffDescription": "Antal timar fri for denne dagen (0 = arbeidsdag, 4 = halv dag, 8 = heil dag fri)",
+    "holidayRecurringDescription": "Viss aktivert vil denne heilagdagen gjentakast kvart år på same dato",
+    "holidayImportedSuccess": "Heilagdagar importerte",
+    "holidayAddedSuccess": "Heilagdag lagd til",
+    "holidayUpdatedSuccess": "Heilagdag oppdatert",
+    "holidayDeletedSuccess": "Heilagdag sletta",
+    "noHolidaysConfigured": "Ingen heilagdagar konfigurerte. Importer frå ei førehandsinnstilling eller legg til manuelt.",
+    "holidayDeleteConfirmTitle": "Slette heilagdag?",
+    "holidayDeleteConfirmMessage": "Er du sikker på at du vil slette {{name}}?"
   },
   "reports": {
     "apollo": {
@@ -945,7 +970,8 @@
     "invalidDateAfterValidation": "Dato må være etter {{date}}.",
     "invalidDateBeforeValidation": "Dato må være før {{date}}.",
     "invalidTimespanValidationMinDays": "Det må være minimum {{days}} dager mellom denne datoen og {{name}}.",
-    "invalidTimespanValidationMaxDays": "Det må være maksimalt {{days}} dager mellom denne datoen og {{name}}."
+    "invalidTimespanValidationMaxDays": "Det må være maksimalt {{days}} dager mellom denne datoen og {{name}}.",
+    "comingSoon": "Kjem snart"
   },
   "navigation": {
     "TimesheetPage": "Timeliste",
