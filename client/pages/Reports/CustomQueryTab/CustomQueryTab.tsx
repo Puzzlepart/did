@@ -10,6 +10,7 @@ import {
   DateAfterValidator,
   DateBeforeValidator,
   DateControl,
+  DropdownControl,
   FormControl,
   InputControl,
   ProjectPickerControl,
@@ -137,13 +138,15 @@ export const CustomQueryTab: TabComponent = (props) => {
               {...isDisabled('month')}
             />
 
-            <InputControl
+            <DropdownControl
               {...formControl.register('year')}
-              type='number'
               label={t('common.yearLabel')}
-              className={styles.numberInput}
-              min={2000}
-              max={2100}
+              className={styles.yearInput}
+              values={Array.from({ length: 101 }, (_, index) => {
+                const year = 2000 + index
+                return { value: year, text: year.toString() }
+              })}
+              placeholder={t('common.yearLabel')}
               {...isDisabled('year')}
             />
           </div>

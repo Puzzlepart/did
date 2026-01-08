@@ -139,7 +139,8 @@ export class ReportService {
   public async getReport(
     preset?: ReportsQueryPreset,
     query: ReportsQuery = {},
-    sortAsc?: boolean
+    sortAsc?: boolean,
+    allowLarge?: boolean
   ): Promise<Report> {
     try {
       const query_ = await this._generateQueryWithFilters(query, preset)
@@ -148,8 +149,10 @@ export class ReportService {
       })
 
       // Apply safety limits for large queries
-      const isLargeQuery = this._isLargeQuery(preset, query_)
-      const safeQuery = this._applySafetyLimits(query, preset, isLargeQuery)
+      const isLargeQuery = allowLarge ? false : this._isLargeQuery(preset, query_)
+      const safeQuery = allowLarge
+        ? { ...query }
+        : this._applySafetyLimits(query, preset, isLargeQuery)
       
       debug('[getReport]', 'Query analysis:', {
         preset,

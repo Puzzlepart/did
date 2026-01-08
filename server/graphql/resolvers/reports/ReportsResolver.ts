@@ -52,9 +52,10 @@ export class ReportsResolver {
   async report(
     @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
     @Arg('query', { nullable: true }) query?: ReportsQuery,
-    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
+    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean,
+    @Arg('allowLarge', { nullable: true }) allowLarge?: boolean
   ): Promise<TimeEntry[]> {
-    return await this._report.getReport(preset, query, sortAsc)
+    return await this._report.getReport(preset, query, sortAsc, allowLarge)
   }
 
   /**
