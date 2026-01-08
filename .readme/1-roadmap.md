@@ -17,5 +17,6 @@
 | [🥫 &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-green.svg)](https://semver.org) |
 | [🖥️ &nbsp;14 -  &nbsp;Silicon](https://github.com/Puzzlepart/did/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-green.svg)](https://semver.org) |
 | [🎆 &nbsp;15 -  &nbsp;Phosphorous](https://github.com/Puzzlepart/did/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-green.svg)](https://semver.org) |
-| [🥚 &nbsp;16 -  &nbsp;Sulfur](https://github.com/Puzzlepart/did/milestone/16) | 25.09.2025 | [![version](https://img.shields.io/badge/version-0.16.0-yellow.svg)](https://semver.org) |
-| [🧼&nbsp;17 -  &nbsp;Chlorine](https://github.com/Puzzlepart/did/milestone/17) | 16.12.2025 | [![version](https://img.shields.io/badge/version-0.17.0-red.svg)](https://semver.org) |
+| [🥚 &nbsp;16 -  &nbsp;Sulfur](https://github.com/Puzzlepart/did/milestone/16) | 25.09.2025 | [![version](https://img.shields.io/badge/version-0.16.0-green.svg)](https://semver.org) |
+| [🧼&nbsp;17 -  &nbsp;Chlorine](https://github.com/Puzzlepart/did/milestone/17) | 16.12.2025 | [![version](https://img.shields.io/badge/version-0.17.0-yellow.svg)](https://semver.org) |
+| [☁️&nbsp;18 -  &nbsp;Argon](https://github.com/Puzzlepart/did/milestone/18) | 01.2025 | [![version](https://img.shields.io/badge/version-0.18.0-red.svg)](https://semver.org) |

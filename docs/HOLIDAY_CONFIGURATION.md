@@ -1,222 +1,311 @@
 # Holiday Configuration Guide
 
-This guide explains how to configure holidays in the `did` application to ensure accurate timebank calculations.
+This guide explains the holiday management system in the `did` application and how it affects timebank calculations.
 
 ## Overview
 
-Holidays are stored in the `holidays` collection in the customer database and are automatically fetched by the `TimesheetService`. The timebank calculation accounts for holidays by subtracting holiday hours from expected work hours.
+The holiday system reduces expected work hours when national holidays or company-specific non-working days occur, ensuring accurate timebank calculations. Without holiday configuration, employees working during holiday weeks may incorrectly show negative timebank balances.
 
-## Integration with Existing System
+### Example: Week 52 2025
 
-The holiday system integrates with existing `did` infrastructure:
-- **HolidaysService**: MongoDB service for managing holidays (`/server/services/mongo/holidays.ts`)
-- **HolidayObject**: GraphQL type extended with `hoursOff` field (`/server/graphql/resolvers/timesheet/types/HolidayObject.ts`)
-- **TimesheetService**: Automatically fetches holidays and attaches them to periods
-- **isNationalHoliday()**: DateObject method for checking if a date is a holiday
-
-## Example: Week 52 2025
-
-Without holiday configuration:
+**Without holidays configured:**
 - Standard work week: 40 hours
-- Week 52 (Dec 22-28, 2025) has 3 national holidays (Christmas Eve, Christmas Day, Boxing Day)
-- User works 16 hours (Mon, Tue only)
+- Week 52 (Dec 22-28) has 3 Norwegian holidays (Dec 24-26)
+- Employee works 16 hours (Mon-Tue only)
 - **Problem**: Timebank shows -24 hours (red) ❌
 
-With holiday configuration:
-- Standard work week: 40 hours
-- Holidays configured: Dec 24-26 with `hoursOff: 8` each (24 hours total)
+**With holidays configured:**
+- Holidays: Dec 24-26 with 8 hours off each (24 hours total)
 - Expected hours: 40 - 24 = 16 hours
-- User works 16 hours
+- Employee works 16 hours
 - **Result**: Timebank shows 0 hours ✅
 
-## HolidayObject Fields
+## Architecture
 
-The extended `HolidayObject` now includes:
-
-```typescript
-{
-  _id: string              // MongoDB document ID
-  date: Date               // Date of the holiday
-  name: string             // Display name (e.g., "Christmas Eve")
-  hoursOff: number         // Hours off (0-8): 0=work, 4=half, 8=full
-  recurring: boolean       // Whether holiday recurs annually
-  notes: string            // Company-specific rules
-  periodId: string         // Period ID for filtering
-}
-```
-
-### Field Details
-
-- **hoursOff** (0-8): Determines how many hours to subtract from expected work hours
-  - `8` = Full day off (standard national holiday)
-  - `4` = Half day off (e.g., New Year's Eve)
-  - `0` = Working day (useful for company-specific overrides)
-- **recurring** (boolean): When `true`, holiday repeats annually on the same date
-- **notes** (string): Optional documentation of company rules
-- **periodId** (string): Used by `TimesheetService` to filter holidays by period
-
-## Configuration via HolidaysService
-
-Holidays are stored in the `holidays` collection in each customer's database. Use the `HolidaysService` to manage them:
-
-### Adding Holidays via GraphQL
-
-```graphql
-mutation AddHoliday {
-  # Example of adding a holiday
-  # The mutation would use HolidaysService.insert()
-  # to store in the holidays collection
-}
-```
-
-### Example Holiday Documents
-
-**Full Day Holiday:**
-```json
-{
-  "date": "2025-12-24",
-  "name": "Julaften",
-  "hoursOff": 8,
-  "recurring": true,
-  "notes": "Christmas Eve - full day off",
-  "periodId": "2025-12"
-}
-```
-
-**Half Day Holiday:**
-```json
-{
-  "date": "2025-12-31",
-  "name": "Nyttårsaften",
-  "hoursOff": 4,
-  "recurring": true,
-  "notes": "New Year's Eve - half day off",
-  "periodId": "2025-12"
-}
-```
-
-**Company Override (Working Day):**
-```json
-{
-  "date": "2025-05-17",
-  "name": "Grunnlovsdag",
-  "hoursOff": 0,
-  "recurring": true,
-  "notes": "Company policy: work this day",
-  "periodId": "2025-05"
-}
-```
-
-## Norway National Holidays Preset
-
-A preset of Norwegian national holidays is available in `shared/utils/holidayUtils.ts` under the `NORWAY_HOLIDAYS` constant. This includes:
-
-- Første nyttårsdag (New Year's Day) - 8 hours
-- Easter holidays (Maundy Thursday, Good Friday, Easter Sunday/Monday) - 8 hours each
-- Arbeidernes dag (Labour Day) - 8 hours
-- Grunnlovsdag (Constitution Day) - 8 hours  
-- Ascension Day - 8 hours
-- Whitsun (Pentecost) - 8 hours
-- Julaften (Christmas Eve) - 8 hours (customizable)
-- Første juledag (Christmas Day) - 8 hours
-- Andre juledag (Boxing Day) - 8 hours
-- Nyttårsaften (New Year's Eve) - 4 hours (half day, customizable)
-
-**Note**: Easter-related holidays have `recurring: false` and need annual updates with correct dates.
-
-## How It Works
-
-### Data Flow
-
-1. **Storage**: Holidays stored in `holidays` collection via `HolidaysService`
-2. **Retrieval**: `TimesheetService.getTimesheet()` fetches holidays for periods
-3. **Attachment**: Holidays attached to `period.holidays` array
-4. **Calculation**: `useWorkWeekStatus` hook calculates holiday hours
-5. **Display**: Timebank shows adjusted expected hours
-
-### Calculation Logic
+### Data Model
 
 ```typescript
-// In useWorkWeekStatus hook:
+interface Holiday {
+  date: string              // ISO format: YYYY-MM-DD
+  name: string              // Display name (e.g., "Christmas Eve")
+  hoursOff: number          // 0-8: 0=work, 4=half, 8=full
+  recurring: boolean        // Annual recurrence
+  notes?: string            // Optional company-specific rules
+}
+
+interface HolidaysConfiguration {
+  enabled: boolean          // Master toggle
+  countryCode?: string      // Country preset used (e.g., 'NO')
+  holidays: Holiday[]       // List of configured holidays
+}
+```
+
+### System Components
+
+1. **Storage**: `SubscriptionSettings.holidays` (MongoDB)
+2. **GraphQL**: `SubscriptionHolidaySettings` type with mutations
+3. **Service**: `HolidaysService` extends `MongoDocumentService`
+4. **UI**: `HolidaysField` component in Admin > Subscription Settings
+5. **Calculation**: `getHolidayHoursInPeriod()` in `holidayUtils.ts`
+6. **Integration**: `useWorkWeekStatus` hook applies holidays to timebank
+
+## Configuration
+
+### Via Admin UI
+
+1. Navigate to **Admin > Subscription Settings > Holidays**
+2. Click **Add Holiday** to create individual holidays
+3. Or use **Import from preset** → **Norway (Norge)** for Norwegian holidays
+
+### Field Validation
+
+The system enforces:
+- **Date**: ISO format (YYYY-MM-DD), valid calendar date
+- **Name**: 1-100 characters, non-empty
+- **Hours Off**: 0-8 in 0.25 increments (quarter-hours)
+- **Recurring**: Boolean (true = annual repetition)
+
+Warnings are shown for:
+- Holidays falling on weekends
+- Duplicate dates
+- Feb 29 (skipped in non-leap years)
+
+### Norway Preset
+
+Includes:
+- **Fixed holidays** (recurring=true):
+  - New Year's Day, Labour Day, Constitution Day (May 17)
+  - Christmas Eve, Christmas Day, Boxing Day
+  - New Year's Eve (4h half-day)
+
+- **Movable holidays** (recurring=false):
+  - Easter: Maundy Thursday, Good Friday, Easter Sunday/Monday
+  - Ascension Day (39 days after Easter)
+  - Pentecost/Whit Monday (49-50 days after Easter)
+
+**Note**: Movable holidays require annual regeneration or use Easter calculation.
+
+## Implementation Details
+
+### Timezone Handling
+
+Holidays are stored as ISO date strings (YYYY-MM-DD) without time components. All date comparisons use day-level precision to prevent timezone shift bugs:
+
+```typescript
+// Good: Uses ISO string and day-level comparison
+$dayjs('2025-12-24').isSameOrAfter(start, 'day')
+
+// Bad: Would cause timezone shifts
+new Date('2025-12-24T00:00:00Z') // Shifts to Dec 23 in UTC-1
+```
+
+See `parseHolidayDate()` and `toISODateString()` for timezone-safe parsing.
+
+### Calculation Flow
+
+1. **TimesheetService** fetches holidays matching period dates
+2. **Attaches** to `period.holidays` array
+3. **useWorkWeekStatus** hook calls `getHolidayHoursInPeriod()`
+4. **Subtracts** holiday hours from expected work hours
+5. **Compares** actual hours vs. adjusted expected hours
+
+```typescript
+// In useWorkWeekStatus.ts
 const totalHolidayHours = periods.reduce((sum, period) => {
-  if (period.holidays && period.holidays.length > 0) {
-    return sum + getHolidayHoursInPeriod(
-      period.startDate,
-      period.endDate, 
-      period.holidays
-    )
-  }
-  return sum
+  return sum + getHolidayHoursInPeriod(
+    period.startDate,
+    period.endDate,
+    period.holidays,
+    workWeekHours
+  )
 }, 0)
 
-const expectedHours = workWeekHours - totalHolidayHours
+const expectedHours = Math.max(0, workWeekHours - totalHolidayHours)
 const workWeekHoursDiff = actualHours - expectedHours
 ```
 
-### isNationalHoliday() Integration
+### Easter Calculation
 
-The existing `DateObject.isNationalHoliday()` method checks if a date matches a holiday:
+Uses the [Anonymous Gregorian algorithm](https://en.wikipedia.org/wiki/Date_of_Easter#Anonymous_Gregorian_algorithm) to compute Easter Sunday for any year:
 
 ```typescript
-const dateObj = new DateObject('2025-12-24')
-const holiday = dateObj.isNationalHoliday(holidays)
-if (holiday) {
-  console.log(`${holiday.name}: ${holiday.hoursOff} hours off`)
-}
+const easter = calculateEasterSunday(2025) // April 20, 2025
+const movableHolidays = generateMovableHolidays(2025) // All 7 Easter-related holidays
 ```
 
 ## Testing
 
-### Unit Tests
+### Running Tests
 
-Tests are located in `shared/utils/holidayUtils.test.ts`:
-- Week 52 2025 scenario (24 hours off)
-- Recurring holidays across years
-- Cross-year periods (Dec-Jan)
-- Partial day holidays (half days)
-- Negative hour prevention
+```bash
+npm test -- holidayUtils.test.ts
+```
 
-Run tests: `npm test -- holidayUtils.test.ts`
+### Test Coverage
 
-### Manual Testing
+- ✅ Validation (dates, names, hours)
+- ✅ Timezone handling (ISO dates, day precision)
+- ✅ Duplicate detection
+- ✅ Weekend detection
+- ✅ Easter calculations
+- ✅ Recurring vs. non-recurring holidays
+- ✅ Cross-year periods
+- ✅ Leap year handling (Feb 29)
+- ✅ Error handling and edge cases
 
-1. Add holidays to the database for a specific week
-2. Navigate to timesheet for that week
-3. Verify timebank calculation
-4. Example: Week with 8 hours holiday → Expected 32h (not 40h)
+## Known Limitations & Future Enhancements
+
+### Current Limitations
+
+1. **No User/Department Overrides**
+   - All users in a subscription share the same holidays
+   - Part-time workers with different schedules need manual adjustments
+   - Remote workers in different countries use company defaults
+
+2. **No Retroactive Recalculation**
+   - Changing holidays doesn't automatically recalculate historical timebanks
+   - Users must refresh timesheets to see updates
+
+3. **Movable Holiday Maintenance**
+   - Easter-related holidays must be regenerated annually
+   - No automatic update mechanism for future years
+
+### Planned Enhancements
+
+#### Permission System
+```typescript
+// Future: Role-based access control
+permissions: {
+  'holidays.view': ['admin', 'manager'],
+  'holidays.manage': ['admin'],
+  'holidays.import': ['admin']
+}
+```
+
+#### Audit Logging
+```typescript
+// Future: Track all holiday configuration changes
+auditLog: {
+  action: 'holiday.created' | 'holiday.updated' | 'holiday.deleted',
+  userId: string,
+  timestamp: Date,
+  changes: { before: Holiday, after: Holiday }
+}
+```
+
+#### Hierarchy & Overrides
+```typescript
+// Future: Multi-level configuration
+Company → Department → User
+- Inheritance with overrides
+- User-specific work schedules
+- Department-specific holiday policies
+```
 
 ## Troubleshooting
 
 ### Holidays Not Affecting Timebank
 
-1. **Check holiday storage**: Verify holidays exist in `holidays` collection
-2. **Check hoursOff field**: Must be a number between 0-8
-3. **Check periodId**: Should match the period format used by `TimesheetService`
-4. **Check date format**: Must be a valid Date object
-5. **Browser console**: Check for errors in `useWorkWeekStatus` hook
+1. **Check subscription settings**: `Admin > Subscription Settings > Holidays`
+   - Verify `enabled` is true
+   - Confirm holidays exist for the period
 
-### Timebank Still Incorrect
+2. **Check date format**: Holidays must be ISO dates (YYYY-MM-DD)
 
-1. **Verify work week hours**: Check user's `workWeek.hours` configuration
-2. **Check period.holidays**: Ensure holidays are attached to periods
-3. **Refresh page**: Ensure latest data is loaded
-4. **Check calculation**: `expectedHours = workWeekHours - holidayHours`
+3. **Check logs**: Open browser console for validation errors:
+   ```
+   Invalid hoursOff (12) for holiday Christmas: Hours off cannot exceed...
+   Holiday hours (48) exceed work week hours (40)...
+   ```
 
-## Future Enhancements
+4. **Verify period overlap**: Holiday date must fall within the timesheet period
 
-A UI for managing holidays will be added to the admin settings. Currently, holidays must be managed via:
-- Direct database access
-- GraphQL mutations using `HolidaysService`
-- Import scripts for bulk holiday creation
+### Excessive Holiday Hours Warning
+
+If you see: `Holiday hours (X) exceed work week hours (Y)`
+
+**Causes:**
+- Duplicate holidays on same dates
+- Multiple holidays configured incorrectly
+- Holiday hours set too high (e.g., 24 instead of 8)
+
+**Fix:**
+- Check for duplicates: UI shows warning icon for duplicate dates
+- Verify `hoursOff` values (should be 0-8)
+- Review logs for specific holidays causing the issue
+
+### Feb 29 Holidays
+
+Holidays on Feb 29 (leap year) will be skipped in non-leap years with a warning:
+
+```
+Skipping Christmas in 2025 (not a leap year)
+```
+
+**Solution**: Don't create recurring holidays on Feb 29. Create annual non-recurring holidays instead.
+
+## API Reference
+
+### Key Functions
+
+```typescript
+// Validation
+validateHolidayDate(dateStr: string): boolean
+validateHolidayName(name: string): boolean
+validateHoursOff(hours: number, dailyWorkHours?: number): boolean
+
+// Calculations
+getHolidayHoursInPeriod(
+  startDate: string,
+  endDate: string,
+  holidays: HolidayObject[],
+  workWeekHours?: number
+): number
+
+// Easter
+calculateEasterSunday(year: number): Date
+generateMovableHolidays(year: number): Holiday[]
+
+// Utilities
+isWeekend(dateStr: string): boolean
+findDuplicateHolidays(holidays: Holiday[]): string[]
+parseHolidayDate(dateInput: string | Date): Dayjs
+toISODateString(dateInput: string | Date): string
+```
+
+### GraphQL Mutations
+
+```graphql
+mutation UpdateSubscriptionSettings($input: SubscriptionSettingsInput!) {
+  updateSubscriptionSettings(input: $input) {
+    holidays {
+      enabled
+      countryCode
+      holidays {
+        date
+        name
+        hoursOff
+        recurring
+        notes
+      }
+    }
+  }
+}
+```
+
+## Best Practices
+
+1. **Import presets first**, then customize for your company
+2. **Regenerate movable holidays annually** (Easter, etc.) in January
+3. **Review duplicate warnings** - usually indicates configuration errors
+4. **Use half-days** (4h) for commonly shortened days (e.g., New Year's Eve)
+5. **Add notes** for company-specific rules ("Office closed at noon")
+6. **Test with historical periods** before rolling out company-wide
+7. **Communicate changes** to users when updating holidays retroactively
 
 ## Support
 
 For issues or questions:
-- Check existing holidays with `isNationalHoliday()` method
-- Verify `HolidaysService` queries return expected data
-- Review `TimesheetService` to ensure holidays are fetched
-- Create issue in repository with details
-
----
-
-**Note**: This implementation extends the existing holiday infrastructure with `hoursOff` support for accurate timebank calculations. The system automatically uses holidays stored in the database without requiring additional configuration.
+- Check browser console for validation errors
+- Review this documentation
+- Contact development team with specific error messages
