@@ -145,7 +145,7 @@ export interface IListProps<T = any>
    * Optional items to use when building filter options.
    * Defaults to the list items.
    */
-  filterPanelItems?: any[]
+  filterPanelItems?: T[]
 
   /**
    * Callback invoked when the filter panel is opened or closed.

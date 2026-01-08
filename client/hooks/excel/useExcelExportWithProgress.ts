@@ -1,6 +1,6 @@
 import { format } from '@fluentui/react'
 import { IListColumn } from 'components/List/types'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimeEntry, User } from 'types'
 import { exportExcel } from 'utils/exportExcel'
@@ -147,16 +147,39 @@ export function useExcelExportWithProgress({
     stage: 'loading'
   })
 
+  // Track if component is mounted and if an export is in progress
+  const isMountedRef = useRef(true)
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const isExportingRef = useRef(false)
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
+  }, [])
+
   // For large datasets with pagination, use report_custom query which supports limit/skip
   // For small datasets, use the original query (which might be a preset query)
   const effectiveQuery = isLargeDataset ? report_custom : query
-  
+
   const [executeQuery] = useLazyQuery(effectiveQuery, {
     fetchPolicy: 'no-cache'
   })
 
   const exportAllData = async () => {
-    if (progress.isExporting) return
+    // Check ref for truly synchronous check
+    if (isExportingRef.current) {
+      debugLogger.log('[Excel Export] Export already in progress, ignoring request')
+      return
+    }
+
+    // Set both ref and state
+    isExportingRef.current = true
+    abortControllerRef.current = new AbortController()
 
     setProgress({
       isExporting: true,
@@ -211,13 +234,21 @@ export function useExcelExportWithProgress({
         const effectiveBatchLimit = dynamicBatchLimit
 
         while (hasMore && batchNumber < effectiveBatchLimit) {
+          // Check if export was cancelled
+          if (abortControllerRef.current?.signal.aborted) {
+            debugLogger.log('[Excel Export] Export cancelled by user')
+            return
+          }
+
           batchNumber++
 
-          setProgress((prev) => ({
-            ...prev,
-            currentBatch: batchNumber,
-            stage: 'loading'
-          }))
+          if (isMountedRef.current) {
+            setProgress((prev) => ({
+              ...prev,
+              currentBatch: batchNumber,
+              stage: 'loading'
+            }))
+          }
 
           const result = await executeQuery({
             variables: {
@@ -241,31 +272,6 @@ export function useExcelExportWithProgress({
             `[Excel Export] Batch ${batchNumber}: skip=${skip}, limit=${batchSize}, got ${batchEntries.length} entries`
           )
 
-          // Check for duplicates by looking at valid IDs (exclude entries with missing IDs)
-          if (batchEntries.length > 0 && allEntries.length > 0) {
-            const getValidIds = (entries: Array<{ id?: unknown }>) =>
-              entries
-                .map((e) => e.id)
-                .filter(
-                  (id: unknown): id is string | number =>
-                    id !== null && id !== undefined
-                )
-                .map(String)
-
-            const newIds = new Set(getValidIds(batchEntries))
-            const existingIds = new Set(getValidIds(allEntries))
-            const duplicates = Array.from(newIds).filter((id: string) =>
-              existingIds.has(id)
-            )
-
-            if (duplicates.length > 0) {
-              debugLogger.error(
-                `[Excel Export] DUPLICATE ENTRIES DETECTED! ${duplicates.length} duplicates in batch ${batchNumber}`,
-                duplicates.slice(0, 5)
-              )
-            }
-          }
-
           if (batchEntries.length === 0) {
             consecutiveEmptyBatches++
             debugLogger.log(
@@ -279,7 +285,42 @@ export function useExcelExportWithProgress({
             }
           } else {
             consecutiveEmptyBatches = 0
-            allEntries = [...allEntries, ...batchEntries]
+
+            // Deduplicate entries by ID before adding to allEntries
+            if (allEntries.length > 0) {
+              const existingIds = new Set(
+                allEntries
+                  .map((e) => e.id)
+                  .filter((id): id is string | number => id !== null && id !== undefined)
+                  .map(String)
+              )
+
+              const uniqueNewEntries = batchEntries.filter((entry) => {
+                const id = entry.id
+                if (id === null || id === undefined) {
+                  // Keep entries without IDs (edge case)
+                  return true
+                }
+                const isDuplicate = existingIds.has(String(id))
+                if (isDuplicate) {
+                  debugLogger.warn(
+                    `[Excel Export] Skipping duplicate entry with id: ${id} in batch ${batchNumber}`
+                  )
+                }
+                return !isDuplicate
+              })
+
+              const duplicateCount = batchEntries.length - uniqueNewEntries.length
+              if (duplicateCount > 0) {
+                debugLogger.warn(
+                  `[Excel Export] Removed ${duplicateCount} duplicate entries from batch ${batchNumber}`
+                )
+              }
+
+              allEntries = [...allEntries, ...uniqueNewEntries]
+            } else {
+              allEntries = [...batchEntries]
+            }
           }
 
           const loadedEntries = allEntries.length
@@ -292,16 +333,18 @@ export function useExcelExportWithProgress({
             hasMore = false
           }
 
-          setProgress((prev) => ({
-            ...prev,
-            totalEntries: loadedEntries,
-            loadedEntries,
-            progress: Math.min(
-              (batchNumber / Math.max(totalBatches, batchNumber)) * 70,
-              70
-            ),
-            totalBatches: Math.max(totalBatches, batchNumber)
-          }))
+          if (isMountedRef.current) {
+            setProgress((prev) => ({
+              ...prev,
+              totalEntries: loadedEntries,
+              loadedEntries,
+              progress: Math.min(
+                (batchNumber / Math.max(totalBatches, batchNumber)) * 70,
+                70
+              ),
+              totalBatches: Math.max(totalBatches, batchNumber)
+            }))
+          }
 
           // Increment skip for next batch regardless of how many report entries were returned,
           // since pagination happens on the server's raw time entry query.
@@ -316,15 +359,23 @@ export function useExcelExportWithProgress({
         })
         allEntries = result.data?.timeEntries || result.data?.report || []
         users = result.data?.users || []
-        
-        setProgress(prev => ({
-          ...prev,
-          totalEntries: allEntries.length,
-          loadedEntries: allEntries.length,
-          progress: 70,
-          currentBatch: 1,
-          totalBatches: 1
-        }))
+
+        if (isMountedRef.current) {
+          setProgress(prev => ({
+            ...prev,
+            totalEntries: allEntries.length,
+            loadedEntries: allEntries.length,
+            progress: 70,
+            currentBatch: 1,
+            totalBatches: 1
+          }))
+        }
+      }
+
+      // Check if cancelled before proceeding
+      if (abortControllerRef.current?.signal.aborted) {
+        debugLogger.log('[Excel Export] Export cancelled before mapping')
+        return
       }
 
       // Map time entries with user data to populate resource fields
@@ -332,18 +383,22 @@ export function useExcelExportWithProgress({
       const mappedEntries = mapTimeEntries(allEntries, users)
 
       // Processing stage
-      setProgress(prev => ({
-        ...prev,
-        stage: 'processing',
-        progress: 80
-      }))
+      if (isMountedRef.current) {
+        setProgress(prev => ({
+          ...prev,
+          stage: 'processing',
+          progress: 80
+        }))
+      }
 
       // Generate Excel file
-      setProgress(prev => ({
-        ...prev,
-        stage: 'generating',
-        progress: 90
-      }))
+      if (isMountedRef.current) {
+        setProgress(prev => ({
+          ...prev,
+          stage: 'generating',
+          progress: 90
+        }))
+      }
 
       const formattedFileName = format(
         fileName,
@@ -356,27 +411,42 @@ export function useExcelExportWithProgress({
       })
 
       // Complete
-      setProgress(prev => ({
-        ...prev,
-        stage: 'complete',
-        progress: 100,
-        isExporting: false
-      }))
+      if (isMountedRef.current) {
+        setProgress(prev => ({
+          ...prev,
+          stage: 'complete',
+          progress: 100,
+          isExporting: false
+        }))
 
-      // Reset after a short delay
-      setTimeout(() => {
-        setProgress({
-          isExporting: false,
-          totalEntries: 0,
-          loadedEntries: 0,
-          progress: 0,
-          currentBatch: 0,
-          totalBatches: 0,
-          stage: 'loading'
-        })
-      }, 3000)
+        // Reset after a short delay
+        setTimeout(() => {
+          if (isMountedRef.current) {
+            setProgress({
+              isExporting: false,
+              totalEntries: 0,
+              loadedEntries: 0,
+              progress: 0,
+              currentBatch: 0,
+              totalBatches: 0,
+              stage: 'loading'
+            })
+          }
+        }, 3000)
+      }
 
     } catch (error) {
+      // Don't update state if component unmounted or export was cancelled
+      if (!isMountedRef.current) {
+        debugLogger.log('[Excel Export] Component unmounted, skipping error state update')
+        return
+      }
+
+      if (abortControllerRef.current?.signal.aborted) {
+        debugLogger.log('[Excel Export] Export was cancelled')
+        return
+      }
+
       debugLogger.error('Error exporting to Excel:', error)
       setProgress({
         isExporting: false,
@@ -387,6 +457,10 @@ export function useExcelExportWithProgress({
         totalBatches: 0,
         stage: 'loading'
       })
+    } finally {
+      // Always clean up refs
+      isExportingRef.current = false
+      abortControllerRef.current = null
     }
   }
 
