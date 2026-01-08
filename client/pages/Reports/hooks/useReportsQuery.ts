@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import { useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { ReportLink } from 'types'
 import _ from 'underscore'
 import { IReportsContext } from '../context'
@@ -85,6 +85,11 @@ export function useReportsQuery({
     [state?.appliedFilterState]
   )
   const hasAppliedFilters = Object.keys(appliedFilterQuery).length > 0
+  const summaryKey = useMemo(() => {
+    if (queryPreset?.id !== 'summary') return ''
+    return JSON.stringify(queryPreset.variables?.queries ?? [])
+  }, [queryPreset?.id, queryPreset?.variables?.queries])
+  const lastSummaryKey = useRef<string>('')
 
   const [loadPreloadQuery, preloadResult] = useLazyQuery(report_preload, {
     fetchPolicy: 'no-cache'
@@ -202,6 +207,40 @@ export function useReportsQuery({
     loadForecastPreloadQuery,
     loadPreloadQuery
   ])
+
+  useEffect(() => {
+    if (queryPreset?.id !== 'summary') return
+    if (!summaryKey || summaryKey === lastSummaryKey.current) return
+    lastSummaryKey.current = summaryKey
+    dispatch(
+      DATA_UPDATED({
+        loading: true
+      })
+    )
+    client
+      .query({
+        query: queryPreset?.query || default_query,
+        variables: {
+          ...queryPreset?.variables
+        },
+        fetchPolicy: 'no-cache'
+      })
+      .then((result) => {
+        dispatch(
+          DATA_UPDATED({
+            ...result.data,
+            loading: false
+          })
+        )
+      })
+      .catch(() => {
+        dispatch(
+          DATA_UPDATED({
+            loading: false
+          })
+        )
+      })
+  }, [client, dispatch, queryPreset?.id, queryPreset?.query, queryPreset?.variables, summaryKey])
 
   const loadReport = useCallback(() => {
     if (!queryPreset) return
