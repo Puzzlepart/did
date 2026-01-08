@@ -957,8 +957,8 @@
     "and": " and ",
     "invalidDateAfterValidation": "Date must be after {{date}}.",
     "invalidDateBeforeValidation": "Date must be before {{date}}.",
-    "invalidTimespanValidationMaxDays": "It should be a maximum of {{days}} days between this date and {{name}}.",
-    "invalidTimespanValidationMinDays": "It should be a minimum of {{days}} days between this date and {{name}}."
+    "invalidTimespanValidationMaxDays": "Max {{days}} days between this date and {{name}}.",
+    "invalidTimespanValidationMinDays": "At least {{days}} days between this date and {{name}}."
   },
   "navigation": {
     "TimesheetPage": "Timesheet",
