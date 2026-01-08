@@ -56,3 +56,6 @@ logs/
 
 # doc folder for LLM generated documentation
 _doc
+
+# code reviews
+CODE_REVIEW*.md
