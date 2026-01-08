@@ -50,8 +50,10 @@ export function useColumnHeaderContextMenu(): IContextualMenuProps {
         text: t('common.filterByColumn', column),
         canCheck: true,
         checked: context.state.filterBy?.fieldName === column.fieldName,
+        disabled: Boolean(context.props.filterPanelLoading),
         onClick: () => {
           context.dispatch(SET_FILTER_BY({ column }))
+          context.props.onFilterPanelToggle?.(true)
         }
       },
     columnData.isGroupable && {

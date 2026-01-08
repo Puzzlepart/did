@@ -1,8 +1,8 @@
 #import "../../../graphql-client/fragments/timeentry-fragment.gql"
 #import "./report-user-fragment.gql"
 
-query LastMonthReport {
-  timeEntries: report(preset: "LAST_MONTH") {
+query LastMonthReport($query: ReportsQuery) {
+  timeEntries: report(preset: "LAST_MONTH", query: $query) {
     ...TimeEntryFragment
   }
   users: users {

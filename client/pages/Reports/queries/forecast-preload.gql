@@ -1,0 +1,15 @@
+#import "./report-user-fragment.gql"
+
+query ForecastPreload {
+  approxCount: forecastedReportCount
+  filterOptions: reportFilterOptions(forecast: true) {
+    projectNames
+    parentProjectNames
+    customerNames
+    partnerNames
+    employeeNames
+  }
+  users: users {
+    ...ReportUserFragment
+  }
+}

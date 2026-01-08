@@ -1,0 +1,15 @@
+#import "./report-user-fragment.gql"
+
+query ReportPreload($preset: String, $query: ReportsQuery) {
+  approxCount: reportCount(preset: $preset, query: $query)
+  filterOptions: reportFilterOptions(preset: $preset, query: $query) {
+    projectNames
+    parentProjectNames
+    customerNames
+    partnerNames
+    employeeNames
+  }
+  users: users {
+    ...ReportUserFragment
+  }
+}

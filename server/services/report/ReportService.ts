@@ -1,7 +1,9 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
-import { ProjectService, UserService } from '..'
+import { ProjectService } from '../mongo/project/ProjectService'
+import { CustomerService } from '../mongo/customer'
+import { UserService } from '../mongo/user'
 import { DateObject } from '../../../shared/utils/DateObject'
 import { RequestContext } from '../../graphql/requestContext'
 import {
@@ -10,11 +12,12 @@ import {
   ReportsQueryPreset,
   TimeEntry
 } from '../../graphql/resolvers/types'
+import { ReportFilterOptions } from '../../graphql/resolvers/reports/types'
 import {
-  ConfirmedPeriodsService,
-  ForecastedTimeEntryService,
-  TimeEntryService
-} from '../mongo'
+  ConfirmedPeriodsService
+} from '../mongo/confirmed_periods'
+import { ForecastedTimeEntryService } from '../mongo/forecasted_time_entry'
+import { TimeEntryService } from '../mongo/time_entry'
 import { Report, IGenerateReportParameters } from './types'
 const debug = require('debug')('services/report/ReportService')
 
@@ -38,6 +41,7 @@ export class ReportService {
   constructor(
     @Inject('CONTEXT') readonly context: RequestContext,
     private readonly _projectSvc: ProjectService,
+    private readonly _customerSvc: CustomerService,
     private readonly _userSvc: UserService,
     private readonly _timeEntrySvc: TimeEntryService,
     private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
@@ -45,6 +49,17 @@ export class ReportService {
   ) {
     // Empty constructor on purpose. It will be like
     // this until we need to inject something.
+  }
+
+  /**
+   * Helper to extract standard customer fields for reports
+   * 
+   * @param customer - Customer object to pick fields from
+   */
+  private _pickCustomerFields(customer: any) {
+    return customer
+      ? _.pick(customer, 'key', 'name', 'description', 'icon')
+      : null
   }
 
   /**
@@ -62,6 +77,11 @@ export class ReportService {
     projects,
     customers
   }: IGenerateReportParameters): TimeEntry[] {
+    // Create Maps for O(1) lookup instead of O(n) with _.find
+    const customerMap = new Map(customers.map((c) => [c.key, c]))
+    const projectMap = new Map(projects.map((p) => [p._id, p]))
+    const userMap = new Map(users?.map((u) => [u.id, u]) || [])
+
     return timeEntries
       .sort(({ startDateTime: a }, { startDateTime: b }) => {
         return sortAsc
@@ -72,14 +92,13 @@ export class ReportService {
         if (!entry.projectId) {
           return entries
         }
-        const resource = users
-          ? _.find(users, (user) => user.id === entry.userId)
-          : {}
-        const project = _.find(projects, ({ _id }) => _id === entry.projectId)
-        const customer = _.find(
-          customers,
-          (c) => c.key === _.first(entry.projectId.split(' '))
-        )
+        const resource = users ? userMap.get(entry.userId) : {}
+        const project = projectMap.get(entry.projectId)
+        const customerKey = _.first(entry.projectId.split(' '))
+        const customer = customerMap.get(customerKey)
+        const partner = project?.partnerKey
+          ? customerMap.get(project.partnerKey)
+          : null
         if (!project || !customer || !resource) {
           return entries
         }
@@ -94,7 +113,8 @@ export class ReportService {
             'parent',
             'labels'
           ),
-          customer: _.pick(customer, 'key', 'name', 'description', 'icon'),
+          customer: this._pickCustomerFields(customer),
+          partner: this._pickCustomerFields(partner),
           resource
         }
         return [...entries, mergedEntry]
@@ -120,29 +140,240 @@ export class ReportService {
   public async getReport(
     preset?: ReportsQueryPreset,
     query: ReportsQuery = {},
-    sortAsc?: boolean
+    sortAsc?: boolean,
+    allowLarge?: boolean
   ): Promise<Report> {
     try {
-      const query_ = this._generateQuery(query, preset)
+      const query_ = await this._generateQueryWithFilters(query, preset)
       debug('[getReport]', 'Generating report with query:', query_, {
         userId: this.context.userId
       })
+
+      // Apply safety limits for large queries
+      const safeQuery = allowLarge
+        ? { ...query }
+        : this._applySafetyLimits(query)
+      
+      debug('[getReport]', 'Using pagination approach', {
+        limit: safeQuery.limit,
+        skip: safeQuery.skip,
+        queryKeys: Object.keys(query_)
+      })
+      
       const [timeEntries, projectsData, users] = await Promise.all([
-        this._timeEntrySvc.find(query_),
+        safeQuery.limit ? 
+          this._timeEntrySvc.findPaginated(query_, { 
+            limit: safeQuery.limit, 
+            skip: safeQuery.skip,
+            sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
+          }) :
+          this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
         this._userSvc.getUsers({ hiddenFromReports: false })
       ])
+      
+      debug('[getReport]', `Retrieved ${timeEntries.length} time entries for processing`)
+      
       const report = this._generateReport({
         ...projectsData,
         timeEntries,
         users,
         sortAsc
       })
+      
+      debug('[getReport]', `Generated report with ${report.length} entries`)
+      
       return report
     } catch (error) {
       debug('[getReport]', 'Error generating report:', error)
       throw error
     }
+  }
+
+  /**
+   * Count raw time entries that match the given preset and query.
+   *
+   * @param preset - Query preset
+   * @param query - Custom query
+   */
+  public async getReportCount(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {}
+  ): Promise<number> {
+    const query_ = await this._generateQueryWithFilters(query, preset)
+    debug('[getReportCount]', 'Counting raw time entries with query:', query_)
+    return await this._timeEntrySvc.count(query_)
+  }
+
+  /**
+   * Get filter options for report preloading.
+   */
+  public async getReportFilterOptions(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {},
+    forecast?: boolean
+  ): Promise<ReportFilterOptions> {
+    const baseQuery = forecast
+      ? {
+          ...(await this._generateQueryWithFilters(query)),
+          startDateTime: {
+            $gte: new Date()
+          }
+        }
+      : await this._generateQueryWithFilters(query, preset)
+
+    const [projectIds, userIds] = await Promise.all([
+      (forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc).distinct(
+        'projectId',
+        baseQuery
+      ),
+      (forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc).distinct(
+        'userId',
+        baseQuery
+      )
+    ])
+
+    if (projectIds.length === 0 && userIds.length === 0) {
+      return {
+        projectNames: [],
+        parentProjectNames: [],
+        customerNames: [],
+        partnerNames: [],
+        employeeNames: []
+      }
+    }
+
+    const [projects, users] = await Promise.all([
+      projectIds.length > 0
+        ? (this._projectSvc.find(
+            {
+              $or: [
+                { _id: { $in: projectIds } },
+                { tag: { $in: projectIds } }
+              ]
+            },
+            { name: 1, tag: 1, parentKey: 1, customerKey: 1, partnerKey: 1 }
+          ) as Promise<any[]>)
+        : Promise.resolve([]),
+      userIds.length > 0
+        ? this._userSvc.getUsers({
+            _id: { $in: userIds },
+            hiddenFromReports: false
+          } as any)
+        : Promise.resolve([])
+    ])
+
+    const parentKeys = Array.from(
+      new Set(projects.map((project) => project.parentKey).filter(Boolean))
+    )
+
+    const parentProjects =
+      parentKeys.length > 0
+        ? await this._projectSvc.find(
+            {
+              $or: [{ _id: { $in: parentKeys } }, { tag: { $in: parentKeys } }]
+            },
+            { name: 1, tag: 1 }
+          )
+        : []
+
+    const customersToFetch = Array.from(
+      new Set(
+        projects
+          .reduce<string[]>(
+            (acc, project) => [
+              ...acc,
+              project.customerKey,
+              project.partnerKey
+            ],
+            []
+          )
+          .filter(Boolean)
+      )
+    )
+
+    const customers =
+      customersToFetch.length > 0
+        ? await this._customerSvc.getCustomers({
+            key: { $in: customersToFetch }
+          })
+        : []
+
+    const customerNameByKey = new Map(
+      customers.map((customer) => [customer.key, customer.name])
+    )
+
+    const projectNames = Array.from(
+      new Set(projects.map((project) => project.name).filter(Boolean))
+    ).sort()
+
+    const parentProjectNames = Array.from(
+      new Set(
+        parentProjects.map((project) => project.name).filter(Boolean)
+      )
+    ).sort()
+
+    const customerNames = Array.from(
+      new Set(
+        projects
+          .map((project) => customerNameByKey.get(project.customerKey))
+          .filter(Boolean)
+      )
+    ).sort()
+
+    const partnerNames = Array.from(
+      new Set(
+        projects
+          .map((project) => customerNameByKey.get(project.partnerKey))
+          .filter(Boolean)
+      )
+    ).sort()
+
+    const employeeNames = Array.from(
+      new Set(users.map((user) => user.displayName).filter(Boolean))
+    ).sort()
+
+    return {
+      projectNames,
+      parentProjectNames,
+      customerNames,
+      partnerNames,
+      employeeNames
+    }
+  }
+
+  /**
+   * Count forecasted time entries.
+   */
+  public async getForecastReportCount(): Promise<number> {
+    const query = {
+      startDateTime: {
+        $gte: new Date()
+      }
+    }
+    debug('[getForecastReportCount]', 'Counting forecasted time entries with query:', query)
+    return await this._forecastTimeEntrySvc.count(query as any)
+  }
+
+  /**
+   * Maximum allowed limit for any single query.
+   * Set to 100,000 to balance memory usage with report completeness.
+   */
+  private readonly MAX_LIMIT = 100_000
+
+  /**
+   * Apply safety limits to prevent memory exhaustion on large queries
+   */
+  private _applySafetyLimits(query: ReportsQuery): ReportsQuery {
+    const safeQuery = { ...query }
+    
+    // Cap extremely large limits
+    if (safeQuery.limit && safeQuery.limit > this.MAX_LIMIT) {
+      debug('[_applySafetyLimits]', `Capping limit from ${safeQuery.limit} to ${this.MAX_LIMIT}`)
+      safeQuery.limit = this.MAX_LIMIT
+    }
+    
+    return safeQuery
   }
 
   /**
@@ -219,6 +450,8 @@ export class ReportService {
    * * `week`
    * * `month`
    * * `year`
+   * * `limit` (for pagination)
+   * * `skip` (for pagination)
    *
    * Supported presets are handled by `_generatePresetQuery`.
    *
@@ -227,28 +460,179 @@ export class ReportService {
    */
   private _generateQuery(query: ReportsQuery = {}, preset: ReportsQueryPreset) {
     const presetQuery = this._generatePresetQuery(preset)
+    // Exclude pagination parameters from MongoDB query
+    const queryWithoutPagination = _.omit(query, 'limit', 'skip')
     return _.omit(
       {
         ...presetQuery,
         ..._.pick(
           {
             projectId: {
-              $eq: query.projectId
+              $eq: queryWithoutPagination.projectId
             },
             userId: {
-              $in: query.userIds
+              $in: queryWithoutPagination.userIds
             },
-            startDateTime: { $gte: new Date(query.startDateTime) },
-            endDateTime: { $lte: new Date(query.endDateTime) },
-            week: { $eq: query.week },
-            month: { $eq: query.month },
-            year: { $eq: query.year }
+            startDateTime: { $gte: new Date(queryWithoutPagination.startDateTime) },
+            endDateTime: { $lte: new Date(queryWithoutPagination.endDateTime) },
+            week: { $eq: queryWithoutPagination.week },
+            month: { $eq: queryWithoutPagination.month },
+            year: { $eq: queryWithoutPagination.year }
           },
-          [...Object.keys(query), !_.isEmpty(query?.userIds) && 'userId']
+          [...Object.keys(queryWithoutPagination), !_.isEmpty(queryWithoutPagination?.userIds) && 'userId']
         )
       },
       'preset'
     )
+  }
+
+  private async _generateQueryWithFilters(
+    query: ReportsQuery = {},
+    preset?: ReportsQueryPreset
+  ) {
+    const baseQuery = this._generateQuery(query, preset)
+    const { projectIds, userIds } = await this._resolveFilterIds(query)
+
+    if (projectIds !== undefined) {
+      const baseProjectId =
+        baseQuery.projectId?.$eq ??
+        (_.isArray(baseQuery.projectId?.$in) ? baseQuery.projectId.$in : null)
+      const baseProjectIds = baseProjectId
+        ? (Array.isArray(baseProjectId) ? baseProjectId : [baseProjectId])
+        : null
+      const effectiveProjectIds = baseProjectIds
+        ? _.intersection(baseProjectIds, projectIds)
+        : projectIds
+      baseQuery.projectId = { $in: effectiveProjectIds }
+    }
+
+    if (userIds !== undefined) {
+      const baseUserIds = baseQuery.userId?.$in ?? null
+      const effectiveUserIds = baseUserIds
+        ? _.intersection(baseUserIds, userIds)
+        : userIds
+      baseQuery.userId = { $in: effectiveUserIds }
+    }
+
+    return baseQuery
+  }
+
+  private async _resolveFilterIds(query: ReportsQuery) {
+    const projectNames = query.projectNames ?? []
+    const parentProjectNames = query.parentProjectNames ?? []
+    const customerNames = query.customerNames ?? []
+    const partnerNames = query.partnerNames ?? []
+    const employeeNames = query.employeeNames ?? []
+
+    const hasProjectFilters =
+      projectNames.length > 0 ||
+      parentProjectNames.length > 0 ||
+      customerNames.length > 0 ||
+      partnerNames.length > 0
+
+    const hasUserFilters = employeeNames.length > 0 || query.userIds?.length > 0
+
+    if (!hasProjectFilters && !hasUserFilters) {
+      return {}
+    }
+
+    const [projects, customers, users] = await Promise.all([
+      hasProjectFilters
+        ? (this._projectSvc.find(
+            {},
+            { name: 1, tag: 1, parentKey: 1, customerKey: 1, partnerKey: 1 }
+          ) as Promise<any[]>)
+        : Promise.resolve([]),
+      hasProjectFilters ? this._customerSvc.getCustomers() : Promise.resolve([]),
+      hasUserFilters
+        ? this._userSvc.getUsers({ hiddenFromReports: false })
+        : Promise.resolve([])
+    ])
+
+    let projectIds: string[] | null = null
+
+    if (hasProjectFilters) {
+      const customerKeysByName = new Map(
+        customers.map((customer) => [customer.name, customer.key])
+      )
+
+      const projectFilterSets: string[][] = []
+
+      if (projectNames.length > 0) {
+        const projectTags = projects
+          .filter((project) => projectNames.includes(project.name))
+          .map((project) => project.tag)
+        projectFilterSets.push(projectTags)
+      }
+
+      if (parentProjectNames.length > 0) {
+        const parentTags = projects
+          .filter((project) => parentProjectNames.includes(project.name))
+          .map((project) => project.tag)
+        const parentTagSet = new Set(parentTags)
+        const childProjectTags = projects
+          .filter((project) => parentTagSet.has(project.parentKey))
+          .map((project) => project.tag)
+        projectFilterSets.push(childProjectTags)
+      }
+
+      if (customerNames.length > 0) {
+        const customerKeys = customerNames
+          .map((name) => customerKeysByName.get(name))
+          .filter(Boolean)
+        const customerKeySet = new Set(customerKeys)
+        const customerProjectTags = projects
+          .filter((project) => customerKeySet.has(project.customerKey))
+          .map((project) => project.tag)
+        projectFilterSets.push(customerProjectTags)
+      }
+
+      if (partnerNames.length > 0) {
+        const partnerKeys = partnerNames
+          .map((name) => customerKeysByName.get(name))
+          .filter(Boolean)
+        const partnerKeySet = new Set(partnerKeys)
+        const partnerProjectTags = projects
+          .filter((project) => partnerKeySet.has(project.partnerKey))
+          .map((project) => project.tag)
+        projectFilterSets.push(partnerProjectTags)
+      }
+
+      if (projectFilterSets.length > 0) {
+        projectIds = projectFilterSets.reduce((acc, set) => {
+          if (!acc) return set
+          return _.intersection(acc, set)
+        }, null)
+      }
+    }
+
+    let userIds: string[] | null = null
+
+    if (hasUserFilters) {
+      const providedUserIds = query.userIds ?? []
+      const employeeIds =
+        employeeNames.length > 0
+          ? users
+              .filter((user) => employeeNames.includes(user.displayName))
+              .map((user) => user.id)
+          : []
+      if (employeeNames.length > 0 && providedUserIds.length > 0) {
+        userIds = _.intersection(providedUserIds, employeeIds)
+      } else if (employeeNames.length > 0) {
+        userIds = employeeIds
+      } else {
+        userIds = providedUserIds
+      }
+    }
+
+    const resolved: { projectIds?: string[]; userIds?: string[] } = {}
+    if (projectIds !== null) {
+      resolved.projectIds = projectIds
+    }
+    if (userIds !== null) {
+      resolved.userIds = userIds
+    }
+    return resolved
   }
 
   /**

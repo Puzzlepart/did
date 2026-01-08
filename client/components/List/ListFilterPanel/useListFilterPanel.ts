@@ -19,6 +19,7 @@ export function useListFilterPanel(): IFilterPanelProps {
         .map<BaseFilter>((col) => new col.data.filterType().fromColumn(col)),
     [context.props.columns]
   )
+  const filterItems = context.props.filterPanelItems ?? context.state.items
   return useMemo<IFilterPanelProps>(
     () =>
       ({
@@ -26,12 +27,15 @@ export function useListFilterPanel(): IFilterPanelProps {
         ...context.props.filterPanel,
         title: t('reports.filterPanelHeaderText'),
         filters,
-        items: context.state.items,
+        items: filterItems,
         onFiltersUpdated: (filters) =>
           context.dispatch(FILTERS_UPDATED({ filters })),
-        onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
+        onDismiss: () => {
+          context.dispatch(TOGGLE_FILTER_PANEL())
+          context.props.onFilterPanelToggle?.(false)
+        },
         selectedFilter: context.state.filterBy
       }) as IFilterPanelProps,
-    [context]
+    [context, filterItems]
   )
 }

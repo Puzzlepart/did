@@ -1,11 +1,12 @@
 import { CheckboxVisibility } from '@fluentui/react'
 import { List, Progress, TabComponent } from 'components'
 import React from 'react'
-import { SET_FILTER_STATE } from '../reducer/actions'
+import { APPLY_FILTER_STATE, SET_FILTER_STATE, SET_FILTERS_OPEN } from '../reducer/actions'
 import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReportsList } from './useReportsList'
 import { IReportsListProps } from './types'
+import { ExportProgress } from '../components/ExportProgress'
 
 /**
  * Reports list
@@ -18,8 +19,12 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
     context,
     columns,
     menuItems,
+    loadReportCommand,
+    filterPanelItems,
     createPlaceholder,
-    createContentAfter
+    createContentAfter,
+    exportProgress,
+    exportProgressMessage
   } = useReportsList(props)
   return (
     <div className={ReportsList.className}>
@@ -32,9 +37,15 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
               : t('reports.generatingReportProgressLabel', {
                   ...context.queryPreset,
                   text: context.queryPreset?.text?.toLowerCase()
-                })
+              })
           }
           text={t('reports.generatingReportProgressText')}
+        />
+      )}
+      {exportProgress && (
+        <ExportProgress 
+          progress={exportProgress} 
+          progressMessage={exportProgressMessage}
         />
       )}
       <List
@@ -44,13 +55,27 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         items={props.items ?? context.state.data.timeEntries}
         columns={columns}
         menuItems={menuItems}
-        exportFileName={
-          context.queryPreset?.exportFileName ?? props.exportFileName
-        }
+        menuItemsAfterFilters={loadReportCommand ? [loadReportCommand] : []}
+        // Intentionally do not pass exportFileName so the List's default Excel export is disabled;
+        // instead, we use a custom export implementation with progress tracking (see ExportProgress).
         filterValues={context.state?.activeFilter?.values}
         onFilter={(state) =>
           props.filters && context.dispatch(SET_FILTER_STATE(state))
         }
+        filterPanelItems={filterPanelItems}
+        filterPanelLoading={context.state?.preload?.loading}
+        onFilterPanelToggle={(isOpen) => {
+          context.dispatch(SET_FILTERS_OPEN(isOpen))
+          if (!isOpen) {
+            const filterState = context.state?.filterState ?? { filters: [], isFiltered: false }
+            context.dispatch(
+              APPLY_FILTER_STATE({
+                ...filterState,
+                filters: [...(filterState.filters ?? [])]
+              })
+            )
+          }
+        }}
         filterPanel={{
           headerElements: <SaveFilterForm />
         }}

@@ -26,6 +26,11 @@ export interface IReportsContext {
    * The currently selected query preset
    */
   queryPreset: IReportsQuery
+
+  /**
+   * Trigger loading the report time entries for the current preset.
+   */
+  loadReport?: () => void
 }
 
 /**
