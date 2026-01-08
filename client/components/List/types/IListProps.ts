@@ -142,6 +142,22 @@ export interface IListProps<T = any>
   onFilter?: (filterState: ListFilterState) => void
 
   /**
+   * Optional items to use when building filter options.
+   * Defaults to the list items.
+   */
+  filterPanelItems?: T[]
+
+  /**
+   * Callback invoked when the filter panel is opened or closed.
+   */
+  onFilterPanelToggle?: (open: boolean) => void
+
+  /**
+   * Whether filter options are still loading.
+   */
+  filterPanelLoading?: boolean
+
+  /**
    * Filter values to apply to the list.
    */
   filterValues?: Record<string, any>
@@ -151,6 +167,14 @@ export interface IListProps<T = any>
    * This can also be a function that returns the menu items.
    */
   menuItems?: ListMenuItem[] | ((context: IListContext) => ListMenuItem[])
+
+  /**
+   * Menu items inserted after the built-in Filters command (if present),
+   * and before the View Columns command (if present).
+   */
+  menuItemsAfterFilters?:
+    | ListMenuItem[]
+    | ((context: IListContext) => ListMenuItem[])
 
   /**
    * Hide the toolbar

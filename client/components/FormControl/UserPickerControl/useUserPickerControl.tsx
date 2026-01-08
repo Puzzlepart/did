@@ -38,7 +38,7 @@ export function useUserPickerControl(props: IUserPickerControlProps) {
       context.dispatch(CLEAR_VALIDATION_MESSAGE({ name: props.name }))
       props.model.set(props.name, transformValue(value, props))
     },
-    [props.model]
+    [context, props.model, props.name]
   )
 
   const value = props.model.value<IUserPickerControlProps['value']>(

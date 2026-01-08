@@ -34,12 +34,6 @@ export const TimespanValidator = (
     )
 
     if (!compareDate.value) {
-      if (options.maxDays) {
-        return [maxDaysValidationError, 'error']
-      }
-      if (options.minDays) {
-        return [minDaysValidationError, 'error']
-      }
       return null
     }
 

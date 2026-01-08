@@ -1,6 +1,7 @@
 import { ButtonProps } from '@fluentui/react-components'
 import { HTMLProps } from 'react'
 import { FluentIconName } from 'utils'
+import { ReactNode } from 'react'
 
 type PartialButtonProps = Pick<
   ButtonProps,
@@ -20,6 +21,11 @@ export interface IDynamicButtonProps
    * the `Button` component from `@fluentui/react-components`.
    */
   text?: string
+
+  /**
+   * Custom content to render inside the button.
+   */
+  content?: ReactNode
 
   /**
    * Shortcut to set the button as primary.

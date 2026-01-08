@@ -62,6 +62,9 @@ export class TimeEntry {
   @Field(() => Customer)
   customer: Customer
 
+  @Field(() => Customer, { nullable: true })
+  partner: Customer
+
   @Field(() => User)
   resource: User
 
@@ -130,6 +133,71 @@ export class ReportsQuery {
    */
   @Field({ nullable: true })
   year?: number
+
+  /**
+   * Project names to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  projectNames?: string[]
+
+  /**
+   * Parent project names to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  parentProjectNames?: string[]
+
+  /**
+   * Customer names to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  customerNames?: string[]
+
+  /**
+   * Partner names to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  partnerNames?: string[]
+
+  /**
+   * Employee display names to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  employeeNames?: string[]
+
+  /**
+   * Maximum number of results to return (for pagination)
+   */
+  @Field({ nullable: true })
+  limit?: number
+
+  /**
+   * Number of results to skip (for pagination)
+   */
+  @Field({ nullable: true })
+  skip?: number
+}
+
+/**
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'Filter options for report preloading'
+})
+export class ReportFilterOptions {
+  @Field(() => [String])
+  projectNames: string[]
+
+  @Field(() => [String])
+  parentProjectNames: string[]
+
+  @Field(() => [String])
+  customerNames: string[]
+
+  @Field(() => [String])
+  partnerNames: string[]
+
+  @Field(() => [String])
+  employeeNames: string[]
 }
 
 /**

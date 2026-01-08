@@ -19,18 +19,19 @@ export const DynamicButton: ReusableComponent<IDynamicButtonProps> = (
   props
 ) => {
   const buttonProps = useDynamicButton(props)
+  const buttonContent = props.content ?? props.text
   switch (props.triggerFor) {
     case 'Menu': {
       return (
         <MenuTrigger disableButtonEnhancement>
-          <Button {...buttonProps}>{props.text}</Button>
+          <Button {...buttonProps}>{buttonContent}</Button>
         </MenuTrigger>
       )
     }
     case 'Popover': {
       return (
         <PopoverTrigger disableButtonEnhancement>
-          <Button {...buttonProps}>{props.text}</Button>
+          <Button {...buttonProps}>{buttonContent}</Button>
         </PopoverTrigger>
       )
     }
@@ -45,7 +46,7 @@ export const DynamicButton: ReusableComponent<IDynamicButtonProps> = (
           )}
           hidden={props.hidden}
         >
-          <Button {...buttonProps}>{props.text}</Button>
+          <Button {...buttonProps}>{buttonContent}</Button>
         </div>
       )
     }

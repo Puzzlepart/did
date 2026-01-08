@@ -28,10 +28,12 @@ export class CustomerFilter extends BaseFilter {
    */
   public initialize(items: any[]): IFilter {
     const filterItems = _.unique(
-      items.map((item_) => ({
-        key: get(item_, this.keyFieldName),
-        value: get(item_, this.valueFieldName)
-      })),
+      items
+        .map((item_) => ({
+          key: get(item_, this.keyFieldName),
+          value: get(item_, this.valueFieldName)
+        }))
+        .filter((item) => item.key !== undefined && item.key !== null),
       (item) => item.key
     ).sort((a, b) => {
       if (a.value < b.value) return -1
