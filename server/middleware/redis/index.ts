@@ -26,13 +26,23 @@ const redisHostname = environment('REDIS_CACHE_HOSTNAME')
 const effectivePort =
   redisKey && configuredPort === 6379 ? configuredSslPort : configuredPort
 
-if (!redisHostname) {
-  debug('No REDIS_CACHE_HOSTNAME provided. Redis client will not be created.')
+// Allow missing Redis in test environment
+const isTestEnv = process.env.NODE_ENV === 'test' || process.env.AVA_TEST === 'true'
+
+if (!redisHostname && !isTestEnv) {
+  throw new Error(
+    'Redis configuration required: REDIS_CACHE_HOSTNAME environment variable must be set. ' +
+    'Redis is required for session management and API caching.'
+  )
+}
+
+if (!redisHostname && isTestEnv) {
+  debug('Running in test environment without Redis - using mock client')
 }
 
 debug(
   'Initializing Redis client host=%s port=%d tls=%s fallbackPortLogic=%s',
-  redisHostname,
+  redisHostname || 'none',
   effectivePort,
   !!redisKey,
   configuredPort === effectivePort ? 'as-configured' : 'switched-to-ssl-port'
@@ -48,17 +58,18 @@ export const redisMiddlware = redisHostname
       }),
       socket_keepalive: true
     })
-  : ({
+  : // Test environment mock client (no-op)
+    ({
       get: (_key: string, callback: (error: Error | null, reply: any) => void) =>
-        callback(new Error('Redis not configured'), null),
+        callback(null, null),
       setex: (
         _key: string,
         _seconds: number,
         _value: string,
         callback: (error: Error | null, reply: any) => void
-      ) => callback(new Error('Redis not configured'), null),
+      ) => callback(null, 'OK'),
       del: (
         _keys: string | string[],
         callback: (error?: Error | null, reply?: any) => void
-      ) => callback?.(new Error('Redis not configured'), null)
+      ) => callback?.(null, 1)
     } as any)

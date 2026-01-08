@@ -77,6 +77,11 @@ export class ReportService {
     projects,
     customers
   }: IGenerateReportParameters): TimeEntry[] {
+    // Create Maps for O(1) lookup instead of O(n) with _.find
+    const customerMap = new Map(customers.map((c) => [c.key, c]))
+    const projectMap = new Map(projects.map((p) => [p._id, p]))
+    const userMap = new Map(users?.map((u) => [u.id, u]) || [])
+
     return timeEntries
       .sort(({ startDateTime: a }, { startDateTime: b }) => {
         return sortAsc
@@ -87,16 +92,12 @@ export class ReportService {
         if (!entry.projectId) {
           return entries
         }
-        const resource = users
-          ? _.find(users, (user) => user.id === entry.userId)
-          : {}
-        const project = _.find(projects, ({ _id }) => _id === entry.projectId)
-        const customer = _.find(
-          customers,
-          (c) => c.key === _.first(entry.projectId.split(' '))
-        )
+        const resource = users ? userMap.get(entry.userId) : {}
+        const project = projectMap.get(entry.projectId)
+        const customerKey = _.first(entry.projectId.split(' '))
+        const customer = customerMap.get(customerKey)
         const partner = project?.partnerKey
-          ? _.find(customers, (c) => c.key === project.partnerKey)
+          ? customerMap.get(project.partnerKey)
           : null
         if (!project || !customer || !resource) {
           return entries
@@ -149,26 +150,10 @@ export class ReportService {
       })
 
       // Apply safety limits for large queries
-      const isLargeQuery = allowLarge ? false : this._isLargeQuery(preset, query_)
       const safeQuery = allowLarge
         ? { ...query }
-        : this._applySafetyLimits(query, preset, isLargeQuery)
+        : this._applySafetyLimits(query)
       
-      debug('[getReport]', 'Query analysis:', {
-        preset,
-        originalQuery: query,
-        safeQuery,
-        isLargeQuery,
-        hasLimit: !!safeQuery.limit,
-        willUseStreaming: isLargeQuery && !safeQuery.limit
-      })
-      
-      if (isLargeQuery && !safeQuery.limit) {
-        debug('[getReport]', 'Using streaming approach for large query')
-        return await this._getReportWithStreaming(query_, sortAsc)
-      }
-
-      // Use traditional approach for smaller queries or when pagination is specified
       debug('[getReport]', 'Using pagination approach', {
         limit: safeQuery.limit,
         skip: safeQuery.skip,
@@ -371,38 +356,16 @@ export class ReportService {
   }
 
   /**
-   * Default limit for large queries without explicit pagination.
-   * Set to 5,000 as a reasonable balance between performance and data completeness
-   * for typical monthly/yearly reports with hundreds of time entries.
-   */
-  private readonly DEFAULT_LARGE_QUERY_LIMIT = 5000
-
-  /**
    * Maximum allowed limit for any single query.
-   * Set to 50,000 based on memory constraints and observed performance limits.
-   * Queries exceeding this use streaming/batching approaches instead.
+   * Set to 100,000 to balance memory usage with report completeness.
    */
-  private readonly MAX_LIMIT = 50_000
+  private readonly MAX_LIMIT = 100_000
 
   /**
    * Apply safety limits to prevent memory exhaustion on large queries
    */
-  private _applySafetyLimits(
-    query: ReportsQuery,
-    preset?: ReportsQueryPreset,
-    isLargeQuery?: boolean
-  ): ReportsQuery {
+  private _applySafetyLimits(query: ReportsQuery): ReportsQuery {
     const safeQuery = { ...query }
-    
-    // Apply default limits for large queries if no limit is specified
-    if (!safeQuery.limit && isLargeQuery) {
-      safeQuery.limit = this.DEFAULT_LARGE_QUERY_LIMIT
-      
-      debug('[_applySafetyLimits]', `Applied default limit of ${this.DEFAULT_LARGE_QUERY_LIMIT} for large query`, {
-        preset,
-        originalLimit: query.limit
-      })
-    }
     
     // Cap extremely large limits
     if (safeQuery.limit && safeQuery.limit > this.MAX_LIMIT) {
@@ -411,103 +374,6 @@ export class ReportService {
     }
     
     return safeQuery
-  }
-
-  /**
-   * Maximum number of entries to keep in memory during streaming operations.
-   * Set to 10,000 to balance memory usage with report completeness.
-   * When this limit is reached, data collection stops and a warning is logged.
-   * 
-   * Note: This is not true streaming - all data is loaded into memory before returning.
-   * True streaming would require architectural changes to support progressive data delivery.
-   */
-  private readonly MAX_MEMORY_ENTRIES = 10_000
-
-  /**
-   * Memory-efficient report generation using streaming for large datasets.
-   * 
-   * Note: Despite the name, this method does not stream results to the client.
-   * It uses MongoDB cursor streaming internally but accumulates all results in memory
-   * before returning. This still helps with database memory usage but may cause
-   * memory issues with truly large datasets (>10k entries).
-   */
-  private async _getReportWithStreaming(
-    query: any,
-    sortAsc?: boolean
-  ): Promise<Report> {
-    const [projectsData, users] = await Promise.all([
-      this._projectSvc.getProjectsData(),
-      this._userSvc.getUsers({ hiddenFromReports: false })
-    ])
-
-    const reportEntries: TimeEntry[] = []
-    const BATCH_SIZE = 1000
-
-    await this._timeEntrySvc.streamFind(
-      query,
-      (timeEntriesBatch) => {
-        const processedBatch = this._generateReport({
-          ...projectsData,
-          timeEntries: timeEntriesBatch,
-          users,
-          sortAsc
-        })
-        
-        // If we're approaching memory limit, stop processing and log warning
-        if (reportEntries.length + processedBatch.length > this.MAX_MEMORY_ENTRIES) {
-          debug(
-            '[_getReportWithStreaming]',
-            `⚠️  Memory limit reached: ${reportEntries.length} entries loaded, limit is ${this.MAX_MEMORY_ENTRIES}. ` +
-            'Data will be truncated. Consider using pagination or requesting a smaller date range.'
-          )
-          // Take only what fits within the limit
-          const remainingSpace = this.MAX_MEMORY_ENTRIES - reportEntries.length
-          if (remainingSpace > 0) {
-            reportEntries.push(...processedBatch.slice(0, remainingSpace))
-          }
-          return
-        }
-        
-        reportEntries.push(...processedBatch)
-      },
-      {
-        batchSize: BATCH_SIZE,
-        sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
-      }
-    )
-
-    debug(
-      '[_getReportWithStreaming]',
-      `Completed streaming: loaded ${reportEntries.length} entries (max: ${this.MAX_MEMORY_ENTRIES})`
-    )
-
-    // Sort the final result if needed
-    if (sortAsc !== undefined) {
-      reportEntries.sort(({ startDateTime: a }, { startDateTime: b }) => {
-        return sortAsc
-          ? new Date(a).getTime() - new Date(b).getTime()
-          : new Date(b).getTime() - new Date(a).getTime()
-      })
-    }
-
-    return reportEntries
-  }
-
-  /**
-   * Determine if a query is likely to return a large dataset that requires streaming
-   */
-  private _isLargeQuery(preset?: ReportsQueryPreset, query?: any): boolean {
-    // Current year and last year queries are typically large
-    if (preset === 'CURRENT_YEAR' || preset === 'LAST_YEAR') {
-      return true
-    }
-    
-    // Queries without time constraints are potentially large
-    if (!query?.month && !query?.week && !query?.startDateTime && !query?.endDateTime) {
-      return true
-    }
-    
-    return false
   }
 
   /**

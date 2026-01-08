@@ -10,7 +10,7 @@ import { ReportService } from './ReportService'
  * rather than only testing through the public getReport API, which would require
  * extensive mocking of database operations and make tests brittle.
  */
-test('ReportService should apply safety limits for large queries', async (t) => {
+test('ReportService should cap extremely large limits', async (t) => {
   // Mock the required dependencies
   const mockContext = { userId: 'test-user' }
   const mockProjectService = { getProjectsData: async () => ({ projects: [], customers: [] }) }
@@ -19,7 +19,7 @@ test('ReportService should apply safety limits for large queries', async (t) => 
   const mockTimeEntryService = { 
     find: async () => [],
     findPaginated: async () => [],
-    streamFind: async () => {}
+    count: async () => 0
   }
   const mockConfirmedPeriodService = { find: async () => [] }
   const mockForecastTimeEntryService = { find: async () => [] }
@@ -34,20 +34,16 @@ test('ReportService should apply safety limits for large queries', async (t) => 
     mockConfirmedPeriodService as any
   )
 
-  // Test that CURRENT_YEAR preset is identified as a large query
-  const isLargeQuery = (reportService as any)._isLargeQuery('CURRENT_YEAR')
-  t.true(isLargeQuery, 'CURRENT_YEAR should be identified as a large query')
-
-  // Test that safety limits are applied
-  const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_YEAR', true)
-  t.is(safeQuery.limit, 5000, 'Default limit should be applied for large queries')
-
-  // Test that extremely large limits are capped
-  const cappedQuery = (reportService as any)._applySafetyLimits({ limit: 100000 }, 'CURRENT_YEAR', true)
-  t.is(cappedQuery.limit, 50000, 'Extremely large limits should be capped')
+  // Test that extremely large limits are capped to MAX_LIMIT (100000)
+  const cappedQuery = (reportService as any)._applySafetyLimits({ limit: 200000 })
+  t.is(cappedQuery.limit, 100000, 'Extremely large limits should be capped to 100000')
+  
+  // Test that limits under MAX_LIMIT pass through unchanged
+  const validQuery = (reportService as any)._applySafetyLimits({ limit: 50000 })
+  t.is(validQuery.limit, 50000, 'Limits under MAX_LIMIT should pass through unchanged')
 })
 
-test('ReportService should not apply limits for small queries', async (t) => {
+test('ReportService should not cap limits below MAX_LIMIT', async (t) => {
   const mockContext = { userId: 'test-user' }
   const mockProjectService = { getProjectsData: async () => ({ projects: [], customers: [] }) }
   const mockCustomerService = { getCustomers: async () => [] }
@@ -55,7 +51,7 @@ test('ReportService should not apply limits for small queries', async (t) => {
   const mockTimeEntryService = { 
     find: async () => [],
     findPaginated: async () => [],
-    streamFind: async () => {}
+    count: async () => 0
   }
   const mockConfirmedPeriodService = { find: async () => [] }
   const mockForecastTimeEntryService = { find: async () => [] }
@@ -70,14 +66,13 @@ test('ReportService should not apply limits for small queries', async (t) => {
     mockConfirmedPeriodService as any
   )
 
-  // Test that CURRENT_MONTH preset with month field is not identified as a large query
-  const generatedQuery = { month: 12, year: 2025 } // Simulating generated query from CURRENT_MONTH preset
-  const isLargeQuery = (reportService as any)._isLargeQuery('CURRENT_MONTH', generatedQuery)
-  t.false(isLargeQuery, 'CURRENT_MONTH with month field should not be identified as a large query')
-
-  // Test that no safety limits are applied for small queries
-  const safeQuery = (reportService as any)._applySafetyLimits({}, 'CURRENT_MONTH', false)
-  t.is(safeQuery.limit, undefined, 'No limit should be applied for small queries')
+  // Test that limits are not modified if they're reasonable
+  const safeQuery = (reportService as any)._applySafetyLimits({ limit: 1000 })
+  t.is(safeQuery.limit, 1000, 'Reasonable limits should not be modified')
+  
+  // Test that queries without limits keep no limit
+  const noLimitQuery = (reportService as any)._applySafetyLimits({})
+  t.is(noLimitQuery.limit, undefined, 'Queries without limits should remain unlimited')
 })
 
 test('ReportService getReportCount should count raw time entries', async (t) => {
@@ -93,7 +88,7 @@ test('ReportService getReportCount should count raw time entries', async (t) => 
     },
     find: async () => [],
     findPaginated: async () => [],
-    streamFind: async () => {}
+    distinct: async () => []
   }
   const mockConfirmedPeriodService = { find: async () => [] }
   const mockForecastTimeEntryService = { 
