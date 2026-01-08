@@ -42,10 +42,10 @@ export function useWorkWeekStatus() {
               workWeekHours // Pass for validation
             )
             return sum + periodHolidayHours
-          } catch (err) {
+          } catch (error) {
             console.error(
               `Failed to calculate holiday hours for period ${period.startDate} - ${period.endDate}:`,
-              err instanceof Error ? err.message : String(err)
+              error instanceof Error ? error.message : String(error)
             )
             return sum // Continue with other periods
           }
@@ -60,7 +60,7 @@ export function useWorkWeekStatus() {
       if (totalHolidayHours > workWeekHours) {
         console.warn(
           `Holiday hours (${totalHolidayHours}) exceed work week hours (${workWeekHours}). ` +
-            `This may indicate misconfigured holidays or duplicates.`
+            'This may indicate misconfigured holidays or duplicates.'
         )
       }
 
@@ -84,10 +84,10 @@ export function useWorkWeekStatus() {
         background,
         iconName
       }
-    } catch (err) {
+    } catch (error) {
       console.error(
         'Error calculating work week status:',
-        err instanceof Error ? err.message : String(err)
+        error instanceof Error ? error.message : String(error)
       )
       // Return default values on error
       return { text: null, background: null, iconName: null, workWeekHoursDiff: 0 }

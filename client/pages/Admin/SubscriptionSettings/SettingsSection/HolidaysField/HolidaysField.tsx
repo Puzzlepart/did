@@ -44,7 +44,7 @@ import {
 } from '../../../../../../shared/utils/holidayUtils'
 import { StyledComponent } from 'types'
 import styles from './HolidaysField.module.scss'
-import { Holiday, HolidaysConfiguration, IHolidaysFieldProps } from './types'
+import { Holiday, IHolidaysFieldProps } from './types'
 
 const useStyles = makeStyles({
   root: {
@@ -154,25 +154,25 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
     try {
       validateHolidayDate(formData.date)
-    } catch (err) {
-      if (err instanceof HolidayValidationError) {
-        errors.push(err.message)
+    } catch (error) {
+      if (error instanceof HolidayValidationError) {
+        errors.push(error.message)
       }
     }
 
     try {
       validateHolidayName(formData.name)
-    } catch (err) {
-      if (err instanceof HolidayValidationError) {
-        errors.push(err.message)
+    } catch (error) {
+      if (error instanceof HolidayValidationError) {
+        errors.push(error.message)
       }
     }
 
     try {
       validateHoursOff(formData.hoursOff)
-    } catch (err) {
-      if (err instanceof HolidayValidationError) {
-        errors.push(err.message)
+    } catch (error) {
+      if (error instanceof HolidayValidationError) {
+        errors.push(error.message)
       }
     }
 
@@ -195,10 +195,10 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
     const updatedHolidays = [...holidays]
 
-    if (editingIndex !== null) {
-      updatedHolidays[editingIndex] = newHoliday
-    } else {
+    if (editingIndex === null) {
       updatedHolidays.push(newHoliday)
+    } else {
+      updatedHolidays[editingIndex] = newHoliday
     }
 
     // Sort by date
@@ -291,7 +291,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
         <div className={classes.actions}>
           <Button
-            appearance="primary"
+            appearance='primary'
             icon={<Add20Regular />}
             onClick={() => handleOpenDialog()}
           >
@@ -302,7 +302,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
             placeholder={t('admin.importHolidaysButton')}
             onOptionSelect={(_, data) => handleImportPreset(data.optionValue as string)}
           >
-            <Option key="NO" value="NO">
+            <Option key='NO' value='NO'>
               Norway (Norge)
             </Option>
           </Dropdown>
@@ -362,15 +362,15 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                     <DataGridCell>
                       <div className={classes.actions}>
                         <Button
-                          size="small"
+                          size='small'
                           icon={<Edit20Regular />}
                           onClick={() => handleOpenDialog(item, index)}
                         >
                           {t('admin.editHolidayButton')}
                         </Button>
                         <Button
-                          size="small"
-                          appearance="subtle"
+                          size='small'
+                          appearance='subtle'
                           icon={<Delete20Regular />}
                           onClick={() => setDeleteIndex(index)}
                         >
@@ -390,7 +390,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
           <DialogSurface>
             <DialogBody>
               <DialogTitle>
-                {editingIndex !== null ? t('admin.editHolidayButton') : t('admin.addHolidayButton')}
+                {editingIndex === null ? t('admin.addHolidayButton') : t('admin.editHolidayButton')}
               </DialogTitle>
               <DialogContent className={classes.dialogContent}>
                 {validationErrors.length > 0 && (
@@ -403,7 +403,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
                 <Field label={t('admin.holidayDateLabel')} required>
                   <Input
-                    type="date"
+                    type='date'
                     value={formData.date}
                     onChange={(_, data) => setFormData({ ...formData, date: data.value })}
                   />
@@ -423,10 +423,10 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                   required
                 >
                   <Input
-                    type="number"
+                    type='number'
                     value={String(formData.hoursOff)}
                     onChange={(_, data) =>
-                      setFormData({ ...formData, hoursOff: parseFloat(data.value) || 0 })
+                      setFormData({ ...formData, hoursOff: Number.parseFloat(data.value) || 0 })
                     }
                     min={0}
                     max={8}
@@ -442,23 +442,23 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                     }
                     label={t('admin.holidayRecurringLabel')}
                   />
-                  <Label size="small">{t('admin.holidayRecurringDescription')}</Label>
+                  <Label size='small'>{t('admin.holidayRecurringDescription')}</Label>
                 </Field>
 
                 <Field label={t('admin.holidayNotesLabel')}>
                   <Textarea
                     value={formData.notes}
                     onChange={(_, data) => setFormData({ ...formData, notes: data.value })}
-                    placeholder="Optional notes about company-specific rules..."
+                    placeholder='Optional notes about company-specific rules...'
                     rows={3}
                   />
                 </Field>
               </DialogContent>
               <DialogActions>
                 <DialogTrigger disableButtonEnhancement>
-                  <Button appearance="secondary">{t('common.cancel')}</Button>
+                  <Button appearance='secondary'>{t('common.cancel')}</Button>
                 </DialogTrigger>
-                <Button appearance="primary" onClick={handleSave}>
+                <Button appearance='primary' onClick={handleSave}>
                   {t('common.save')}
                 </Button>
               </DialogActions>
@@ -485,10 +485,10 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
               </DialogContent>
               <DialogActions>
                 <DialogTrigger disableButtonEnhancement>
-                  <Button appearance="secondary">{t('common.cancel')}</Button>
+                  <Button appearance='secondary'>{t('common.cancel')}</Button>
                 </DialogTrigger>
                 <Button
-                  appearance="primary"
+                  appearance='primary'
                   onClick={() => deleteIndex !== null && handleDelete(deleteIndex)}
                 >
                   {t('common.delete')}
