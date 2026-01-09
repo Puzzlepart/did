@@ -25,13 +25,20 @@ export function useFiltersCommand() {
     }
   }
 
+  const filterItems = context.props.filterPanelItems ?? context.state.origItems
+  const hasFilterItems = filterItems.length > 0
+  const isFilterLoading = Boolean(context.props.filterPanelLoading)
   const toggleCommandBarItem: ICommandBarItemProps = {
     key: 'TOGGLE_FILTER_PANEL',
-    iconProps: { iconName: 'Filter' },
+    iconProps: { iconName: isFilterLoading ? 'ProgressRingDots' : 'Filter' },
     iconOnly: true,
     disabled:
-      context.props.enableShimmer || context.state.origItems.length === 0,
-    onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
+      context.props.enableShimmer || !hasFilterItems || isFilterLoading,
+    onClick: () => {
+      const nextOpen = !context.state.filterPanel?.open
+      context.dispatch(TOGGLE_FILTER_PANEL())
+      context.props.onFilterPanelToggle?.(nextOpen)
+    }
   }
 
   return {

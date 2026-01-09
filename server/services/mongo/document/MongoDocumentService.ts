@@ -142,6 +142,97 @@ export class MongoDocumentService<T> {
   }
 
   /**
+   * Wrapper on `_.find().toArray()` with pagination support and memory optimization.
+   *
+   * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+   *
+   * @param query - Filter query
+   * @param options - Find options including sort, limit, skip
+   */
+  public async findPaginated<S = any>(
+    query: FilterQuery<T>, 
+    options?: { 
+      sort?: S
+      limit?: number
+      skip?: number
+    }
+  ): Promise<T[]> {
+    const findOptions: any = {}
+    if (options?.sort) findOptions.sort = options.sort
+    if (options?.limit) findOptions.limit = options.limit
+    if (options?.skip) findOptions.skip = options.skip
+
+    const array = await this.collection
+      .find(this._extendQuery(query), findOptions)
+      .toArray()
+    return this._handleFieldTypes('get', ...array)
+  }
+
+  /**
+   * Get distinct values for a field matching the given query.
+   *
+   * @param field - Field name
+   * @param query - Filter query
+   */
+  public async distinct(field: string, query: FilterQuery<T>): Promise<any[]> {
+    return await this.collection.distinct(field, this._extendQuery(query))
+  }
+
+  /**
+   * Count documents matching the given query.
+   *
+   * @param query - Filter query
+   */
+  public async count(query: FilterQuery<T>): Promise<number> {
+    return await this.collection.countDocuments(this._extendQuery(query))
+  }
+
+  /**
+   * Stream documents from the database to avoid loading large datasets into memory.
+   * Processes documents in batches for memory efficiency.
+   *
+   * @param query - Filter query
+   * @param batchSize - Number of documents to process at once (default: 1000)
+   * @param sort - Sort options
+   * @param processor - Function to process each batch of documents
+   */
+  public async streamFind<S = any>(
+    query: FilterQuery<T>,
+    processor: (batch: T[]) => Promise<void> | void,
+    options?: {
+      batchSize?: number
+      sort?: S
+    }
+  ): Promise<void> {
+    const batchSize = options?.batchSize || 1000
+    const findOptions: any = { batchSize }
+    if (options?.sort) findOptions.sort = options.sort
+
+    const cursor = this.collection.find(this._extendQuery(query), findOptions)
+    
+    let batch: T[] = []
+    let batchCount = 0
+
+    for await (const doc of cursor) {
+      batch.push(doc)
+      batchCount++
+
+      if (batchCount >= batchSize) {
+        const processedBatch = this._handleFieldTypes('get', ...batch)
+        await processor(processedBatch)
+        batch = []
+        batchCount = 0
+      }
+    }
+
+    // Process remaining documents
+    if (batch.length > 0) {
+      const processedBatch = this._handleFieldTypes('get', ...batch)
+      await processor(processedBatch)
+    }
+  }
+
+  /**
    * Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
    *
    * @remarks Returns void if documents_ is empty

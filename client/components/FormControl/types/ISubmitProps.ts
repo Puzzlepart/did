@@ -1,4 +1,5 @@
 import { ButtonProps } from '@fluentui/react-components'
+import { ReactNode } from 'react'
 import { useMap } from 'hooks/common/useMap'
 
 export interface ISubmitProps
@@ -7,6 +8,11 @@ export interface ISubmitProps
    * Text to show on the submit button.
    */
   text?: string
+
+  /**
+   * Custom content to render inside the button.
+   */
+  content?: ReactNode
 
   /**
    * On save callback with the model passed as an argument.

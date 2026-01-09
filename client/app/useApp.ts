@@ -4,7 +4,8 @@ import { IToastProps } from 'components'
 import { SessionContext } from 'graphql-queries/session'
 import { logging } from 'logging'
 import { usePages } from 'pages/usePages'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { Subscription } from 'types'
 import { useNotificationsQuery } from '../hooks'
 import { useUpdateUserConfiguration } from '../hooks/user/useUpdateUserConfiguration'
 import useAppReducer, { SET_TOAST } from './reducer'
@@ -34,6 +35,9 @@ function useLastActiveUpdater() {
  */
 export function useApp(sessionContext: SessionContext) {
   const [state, dispatch] = useAppReducer({})
+  const [subscription, setSubscription] = useState<Subscription>(
+    sessionContext.subscription
+  )
   const notifications = useNotificationsQuery({ user: sessionContext.user })
   const pages = usePages()
 
@@ -79,16 +83,22 @@ export function useApp(sessionContext: SessionContext) {
     () =>
       ({
         ...sessionContext,
+        subscription,
         pages,
         notifications,
         state,
         dispatch,
-        displayToast
+        displayToast,
+        setSubscription
       }) as IAppContext,
-    [state, notifications]
+    [state, notifications, subscription]
   )
 
   useLastActiveUpdater()
+
+  useEffect(() => {
+    setSubscription(sessionContext.subscription)
+  }, [sessionContext.subscription])
 
   return context
 }
