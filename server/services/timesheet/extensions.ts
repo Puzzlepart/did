@@ -19,7 +19,7 @@ const isValidHourlyRate = (
   context?: { userId?: string; projectId?: string; role?: string }
 ): rate is number => {
   if (rate == null) return false
-  if (typeof rate !== 'number' || isNaN(rate)) {
+  if (typeof rate !== 'number' || Number.isNaN(rate)) {
     debug('WARNING: Non-numeric hourly rate detected: %o, context: %o', rate, context)
     return false
   }
