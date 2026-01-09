@@ -41,6 +41,10 @@ import {
   SubscriptionCustomersSettings,
   SubscriptionCustomersSettingsInput
 } from './SubscriptionCustomersSettings'
+import {
+  SubscriptionHolidaySettings,
+  SubscriptionHolidaySettingsInput
+} from './SubscriptionHolidaySettings'
 
 /**
  * @category GraphQL ObjectType
@@ -76,6 +80,9 @@ export class SubscriptionSettings {
 
   @Field(() => SubscriptionProjectsSettings, { nullable: true })
   projects?: SubscriptionProjectsSettings
+
+  @Field(() => SubscriptionHolidaySettings, { nullable: true })
+  holidays?: SubscriptionHolidaySettings
 }
 
 /**
@@ -112,4 +119,7 @@ export class SubscriptionSettingsInput {
 
   @Field(() => SubscriptionProjectsSettingsInput, { nullable: true })
   projects?: SubscriptionProjectsSettingsInput
+
+  @Field(() => SubscriptionHolidaySettingsInput, { nullable: true })
+  holidays?: SubscriptionHolidaySettingsInput
 }

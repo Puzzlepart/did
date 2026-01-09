@@ -5,7 +5,7 @@ import get from 'get-value'
 import { SessionContext } from 'graphql-queries/session'
 import { PageComponent } from 'pages/types'
 import { createContext, useContext } from 'react'
-import { SubscriptionSettings } from 'types'
+import { Subscription, SubscriptionSettings } from 'types'
 import { useNotificationsQuery } from '../hooks'
 import { IAppState } from './types'
 
@@ -39,6 +39,11 @@ export interface IAppContext extends SessionContext {
    * Get user configuration
    */
   getUserConfiguration: <T = any>(path: string) => T
+
+  /**
+   * Update subscription in app context.
+   */
+  setSubscription?: (subscription: Subscription) => void
 
   /**
    * Displays a toast message with the given properties and duration (which defaults to 6 seconds).
