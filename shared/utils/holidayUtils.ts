@@ -150,9 +150,9 @@ export function validateHolidayDate(dateStr: string): boolean {
     )
   }
 
-  // Validate that it's a real date
-  const date = $dayjs(dateStr)
-  if (!date.isValid()) {
+  // Validate that it's a real date and doesn't wrap (e.g., month 13 becomes month 1 of next year)
+  const date = $dayjs(dateStr, 'YYYY-MM-DD', true) // strict parsing
+  if (!date.isValid() || date.format('YYYY-MM-DD') !== dateStr) {
     throw new HolidayValidationError(
       'Holiday date is not a valid date',
       'date',
