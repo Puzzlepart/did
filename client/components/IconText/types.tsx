@@ -1,7 +1,9 @@
+import { HTMLAttributes } from 'react'
+
 /**
  * @category IconText
  */
-export interface IIconTextProps {
+export interface IIconTextProps extends HTMLAttributes<HTMLDivElement> {
   text: string
   iconName: string
   styles?: {

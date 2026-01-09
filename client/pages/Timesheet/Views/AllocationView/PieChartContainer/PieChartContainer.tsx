@@ -15,6 +15,8 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
 ) => {
   const { state } = useTimesheetContext()
   const { showFullTooltip, cells } = usePieChartContainer(props)
+  const totalDurationText = String(state.selectedPeriod?.totalDuration ?? 0)
+  const entryCountText = String(props.entries?.length ?? 0)
 
   return (
     <div className={PieChartContainer.className}>
@@ -24,8 +26,8 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
           <UserMessage
             text={format(
               props.chart.subTitle,
-              state.selectedPeriod?.totalDuration,
-              props.entries?.length
+              totalDurationText,
+              entryCountText
             )}
             renderProgress={[!!state.loading, props.chart.loadingText]}
             style={{ width: '80%' }}
