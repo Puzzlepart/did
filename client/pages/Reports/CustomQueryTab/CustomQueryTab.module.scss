@@ -47,6 +47,21 @@
 
                 .numberInput {
                     width: 100px;
+                    min-width: 100px;
+                }
+
+                .yearInput {
+                    width: auto;
+                    min-width: auto;
+                }
+
+                .yearInput :global(.fui-Dropdown) {
+                    width: auto;
+                    min-width: auto;
+                }
+
+                .yearInput :global(.fui-Button) {
+                    min-width: auto;
                 }
             }
 
