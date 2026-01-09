@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - dev
-      - feat/*
     tags:
       - v*
   pull_request:
@@ -41,8 +40,8 @@ jobs:
           IMAGE_NAME_LOWER=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
           echo "IMAGE_NAME=${IMAGE_NAME_LOWER}" >> "$GITHUB_ENV"
 
-      - name: Adjust build platforms for PRs
-        if: github.event_name == 'pull_request'
+      - name: Adjust build platforms for PRs and feature branches
+        if: github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/feat/')
         run: echo "PLATFORMS=linux/amd64" >> "$GITHUB_ENV"
 
       - name: Set up Docker Buildx
