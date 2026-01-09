@@ -57,9 +57,11 @@ export function useSubscriptionSettings() {
     try {
       await updateSubscription({ variables })
       setSavedSettings(omitTypename(subscription.settings))
-      context.subscription = {
-        ...context.subscription,
-        settings: subscription.settings
+      if (context.setSubscription) {
+        context.setSubscription({
+          ...context.subscription,
+          settings: subscription.settings
+        })
       }
       context.displayToast(
         t('admin.subscriptionSettingsUpdateSuccess'),
