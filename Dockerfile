@@ -91,12 +91,13 @@ RUN --mount=type=cache,target=/root/.npm \
 
 # Copy built application from build stage
 COPY --from=build /app/dist ./dist
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S did -u 1001
 
-# Change ownership of the app directory
-RUN chown -R did:nodejs /app
+# Create non-root user early
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S did -u 1001 && \
+    chown -R did:nodejs /app/dist
+
+# Switch to non-root user
 USER did
 
 # Expose port

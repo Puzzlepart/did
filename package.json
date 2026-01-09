@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "the calendar is your timesheet",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "private": true,
   "engines": {
     "node": ">=22.14.0",
@@ -269,7 +269,7 @@
       "no-inferrable-types": 0,
       "react/display-name": 1,
       "no-compare-neg-zero": 1,
-      "no-console": 2,
+      "no-console": 0,
       "eqeqeq": 1,
       "max-classes-per-file": 0,
       "jsx-quotes": [
