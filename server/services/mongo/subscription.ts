@@ -124,6 +124,15 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async updateSubscription(settings: SubscriptionSettings) {
     try {
+      // Sanitize holiday inputs to prevent XSS attacks
+      if (settings?.holidays?.holidays) {
+        settings.holidays.holidays = settings.holidays.holidays.map((holiday) => ({
+          ...holiday,
+          name: sanitizeString(holiday.name),
+          notes: holiday.notes ? sanitizeString(holiday.notes) : holiday.notes
+        }))
+      }
+
       const result = await this.update(
         { _id: this.context.subscription.id },
         { settings }

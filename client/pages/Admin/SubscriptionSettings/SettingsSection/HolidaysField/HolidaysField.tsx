@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Button,
@@ -105,6 +105,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [validationErrors, setValidationErrors] = useState<string[]>([])
+  const [isImporting, setIsImporting] = useState(false)
 
   const currentYear = new Date().getFullYear()
 
@@ -117,7 +118,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
   })
 
   const holidays = value?.holidays || []
-  const duplicates = findDuplicateHolidays(holidays)
+  const duplicates = useMemo(() => findDuplicateHolidays(holidays), [holidays])
 
   const handleOpenDialog = useCallback((holiday?: Holiday, index?: number) => {
     if (holiday && index !== undefined) {
@@ -226,44 +227,53 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
   const handleImportPreset = useCallback(
     (countryCode: string) => {
-      if (countryCode === 'NO') {
-        // Import Norway holidays
-        const fixedHolidays = NORWAY_HOLIDAYS.filter((h) => h.recurring !== false).map(
-          (h) => ({
-            date: $dayjs(h.date).format('YYYY-MM-DD'),
-            name: h.name as string,
-            hoursOff: h.hoursOff as number,
+      if (isImporting) return
+
+      setIsImporting(true)
+      try {
+        if (countryCode === 'NO') {
+          // Import Norway holidays - filter out entries with missing required fields
+          const fixedHolidays = NORWAY_HOLIDAYS.filter(
+            (h) => h.recurring !== false && h.name && h.hoursOff !== undefined && h.date
+          ).map((h) => ({
+            date: $dayjs(h.date!).format('YYYY-MM-DD'),
+            name: h.name!,
+            hoursOff: h.hoursOff!,
             recurring: h.recurring ?? true,
             notes: h.notes
+          }))
+
+          // Generate movable holidays for current year - filter out entries with missing required fields
+          const movableHolidays = generateMovableHolidays(currentYear)
+            .filter((h) => h.name && h.hoursOff !== undefined && h.date)
+            .map((h) => ({
+              date: $dayjs(h.date!).format('YYYY-MM-DD'),
+              name: h.name!,
+              hoursOff: h.hoursOff!,
+              recurring: h.recurring ?? false,
+              notes: h.notes
+            }))
+
+          const importedHolidays = [...fixedHolidays, ...movableHolidays]
+
+          // Merge with existing, avoiding duplicates
+          const existingDates = new Set(holidays.map((h) => h.date))
+          const newHolidays = importedHolidays.filter((h) => !existingDates.has(h.date))
+
+          const updatedHolidays = [...holidays, ...newHolidays]
+          updatedHolidays.sort((a, b) => a.date.localeCompare(b.date))
+
+          onChange?.({
+            ...value,
+            holidays: updatedHolidays,
+            countryCode: 'NO'
           })
-        )
-
-        // Generate movable holidays for current year
-        const movableHolidays = generateMovableHolidays(currentYear).map((h) => ({
-          date: $dayjs(h.date).format('YYYY-MM-DD'),
-          name: h.name as string,
-          hoursOff: h.hoursOff as number,
-          recurring: h.recurring ?? false,
-          notes: h.notes
-        }))
-
-        const importedHolidays = [...fixedHolidays, ...movableHolidays]
-
-        // Merge with existing, avoiding duplicates
-        const existingDates = new Set(holidays.map((h) => h.date))
-        const newHolidays = importedHolidays.filter((h) => !existingDates.has(h.date))
-
-        const updatedHolidays = [...holidays, ...newHolidays]
-        updatedHolidays.sort((a, b) => a.date.localeCompare(b.date))
-
-        onChange?.({
-          ...value,
-          holidays: updatedHolidays,
-          countryCode: 'NO'
-        })
+        }
+      } finally {
+        setIsImporting(false)
       }
     },
-    [holidays, value, onChange, currentYear]
+    [isImporting, holidays, value, onChange, currentYear]
   )
 
   const getWarningsForHoliday = useCallback((holiday: Holiday): string[] => {
@@ -301,6 +311,7 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
           <Dropdown
             placeholder={t('admin.importHolidaysButton')}
             onOptionSelect={(_, data) => handleImportPreset(data.optionValue as string)}
+            disabled={isImporting}
           >
             <Option key='NO' value='NO'>
               Norway (Norge)
