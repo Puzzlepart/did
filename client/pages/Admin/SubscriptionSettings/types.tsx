@@ -11,6 +11,12 @@ interface ISubscriptionSettingBase<T = any> {
   id: string
 
   /**
+   * Optional override for the settings key path.
+   * Defaults to `${sectionId}.${id}` when not provided.
+   */
+  settingsKey?: string
+
+  /**
    * Conditionally disable the setting based on the current settings
    *
    * @param settings The current settings

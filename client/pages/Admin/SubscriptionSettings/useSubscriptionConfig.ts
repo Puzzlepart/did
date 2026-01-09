@@ -300,7 +300,7 @@ export function useSubscriptionConfig() {
     },
     {
       id: 'holidays',
-      icon: 'Calendar',
+      icon: 'CalendarMonth',
       text: t('admin.holidaysHeader'),
       fields: [
         {
@@ -314,6 +314,7 @@ export function useSubscriptionConfig() {
         {
           id: 'holidays',
           type: 'custom',
+          settingsKey: 'holidays',
           component: HolidaysField,
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.holidays?.enabled,

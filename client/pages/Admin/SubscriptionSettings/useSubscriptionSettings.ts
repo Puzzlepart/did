@@ -23,6 +23,9 @@ export function useSubscriptionSettings() {
   const [subscription, setSubscription] = useState<Subscription>(
     omitTypename(context.subscription)
   )
+  const [savedSettings, setSavedSettings] = useState(
+    omitTypename(context.subscription.settings)
+  )
   const [updateSubscription] = useMutation($updateSubscription)
   const sections = useSubscriptionConfig()
 
@@ -53,6 +56,11 @@ export function useSubscriptionSettings() {
     const variables = _.pick(subscription, 'settings')
     try {
       await updateSubscription({ variables })
+      setSavedSettings(omitTypename(subscription.settings))
+      context.subscription = {
+        ...context.subscription,
+        settings: subscription.settings
+      }
       context.displayToast(
         t('admin.subscriptionSettingsUpdateSuccess'),
         'success'
@@ -69,12 +77,8 @@ export function useSubscriptionSettings() {
    * @returns `true` if there are changes, `false` otherwise.
    */
   const hasChanges = useMemo(
-    () =>
-      !_.isEqual(
-        subscription.settings,
-        omitTypename(context.subscription.settings)
-      ),
-    [subscription.settings, context.subscription]
+    () => !_.isEqual(subscription.settings, savedSettings),
+    [subscription.settings, savedSettings]
   )
 
   const tabs = sections.reduce(
