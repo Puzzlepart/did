@@ -56,6 +56,17 @@ query SessionContext {
         enableSimpleHierachy
         autoLoadTimeEntries
       }
+      holidays {
+        enabled
+        countryCode
+        holidays {
+          date
+          name
+          hoursOff
+          recurring
+          notes
+        }
+      }
     }
   }
   user: currentUser {

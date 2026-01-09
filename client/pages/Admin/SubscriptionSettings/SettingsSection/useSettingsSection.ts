@@ -19,7 +19,7 @@ export function useSettingsSection(props: ISettingsSectionProps) {
         hidden: field.hiddenIf && field.hiddenIf(context.settings || {})
       } as Record<string, any>
 
-      const settingsKey = `${props.id}.${field.id}`
+      const settingsKey = field.settingsKey || `${props.id}.${field.id}`
 
       const getValueWithDefault = (defaultValue: any) => {
         return get(context.settings, settingsKey, { default: defaultValue })

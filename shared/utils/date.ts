@@ -522,4 +522,5 @@ export default new DateUtils({
 
 export { default as $dayjs } from 'dayjs'
 export { IDatePeriod } from './DateObject'
+export * from './holidayUtils'
 export * from './types'

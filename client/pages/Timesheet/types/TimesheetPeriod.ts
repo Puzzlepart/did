@@ -4,6 +4,7 @@ import { TFunction } from 'i18next'
 import {
   ClientEventInput,
   EventObject,
+  HolidayObject,
   Project,
   TimesheetPeriodInput,
   TimesheetPeriodObject
@@ -58,7 +59,7 @@ export class TimesheetPeriod {
   public readonly isForecast: boolean
   public readonly forecastedHours: number
   public readonly month: string
-  public readonly holidays: any[]
+  public readonly holidays: HolidayObject[]
 
   /**
    * Events for the period

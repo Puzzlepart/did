@@ -91,6 +91,18 @@ export const SettingsSection: TabComponent<ISettingsSectionProps> = (props) => {
                   />
                 )
               }
+              case 'custom': {
+                const CustomComponent = field.component
+                return (
+                  <CustomComponent
+                    {...fieldProps}
+                    key={settingsKey}
+                    id={field.id}
+                    value={getValueWithDefault(null)}
+                    onChange={onChange}
+                  />
+                )
+              }
             }
           }
         )}

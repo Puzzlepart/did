@@ -10,6 +10,19 @@ import { environment } from '../../utils'
 import { MongoDocumentService } from './document'
 
 /**
+ * Sanitizes a string by removing HTML tags and escaping special characters
+ * to prevent XSS attacks.
+ *
+ * @param input - String to sanitize
+ * @returns Sanitized string
+ */
+function sanitizeString(input: string): string {
+  if (!input) return input
+  // Remove HTML tags
+  return input.replace(/<[^>]*>/g, '').trim()
+}
+
+/**
  * Subscription service
  *
  * @extends MongoDocumentService
@@ -111,6 +124,15 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async updateSubscription(settings: SubscriptionSettings) {
     try {
+      // Sanitize holiday inputs to prevent XSS attacks
+      if (settings?.holidays?.holidays) {
+        settings.holidays.holidays = settings.holidays.holidays.map((holiday) => ({
+          ...holiday,
+          name: sanitizeString(holiday.name),
+          notes: holiday.notes ? sanitizeString(holiday.notes) : holiday.notes
+        }))
+      }
+
       const result = await this.update(
         { _id: this.context.subscription.id },
         { settings }

@@ -16,10 +16,11 @@ jobs:
       cancel-in-progress: true
 
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: ${{ vars.NODE_VERSION }}
+        cache: 'npm'
 
     - run: |
         npm ci --no-audit --no-fund --loglevel=error
