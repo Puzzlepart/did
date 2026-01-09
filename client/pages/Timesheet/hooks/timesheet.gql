@@ -10,6 +10,9 @@ query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!, $cache: B
     holidays {
       date
       name
+      hoursOff
+      recurring
+      notes
     }
     events {
       id

@@ -26,15 +26,16 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Use Node.js (${{ vars.NODE_VERSION }})
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ vars.NODE_VERSION }}
+          cache: 'npm'
 
       - run: |
           npm ci --no-audit --no-fund --loglevel=error --include=dev
@@ -58,8 +59,8 @@ jobs:
         id: git_context
         run: |
           status=`git status --porcelain`
-          echo "::set-output name=status::$status"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Commit files as {github-automatic-chores} (if staged changes)
         if: ${{ steps.git_context.outputs.status != '' }}
