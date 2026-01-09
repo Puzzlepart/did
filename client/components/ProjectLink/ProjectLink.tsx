@@ -1,9 +1,8 @@
-import { Icon } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
-import { createRouterLink } from 'utils'
+import { createRouterLink, getFluentIconWithFallback } from 'utils'
 import { getFluentIcon as icon } from 'utils/getFluentIcon'
 import styles from './ProjectLink.module.scss'
 import { IProjectLinkProps } from './types'
@@ -26,7 +25,9 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
       element = (
         <div className={ProjectLink.className}>
           {props.showIcon && (
-            <Icon className={styles.icon} iconName={props.project?.icon} />
+            <span className={styles.icon}>
+              {getFluentIconWithFallback(props.project?.icon)}
+            </span>
           )}
           <Link
             className={styles.link}

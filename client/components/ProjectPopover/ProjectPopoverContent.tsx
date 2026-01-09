@@ -1,9 +1,9 @@
-import { Icon } from '@fluentui/react'
 import { Caption2, Caption2Strong } from '@fluentui/react-components'
 import { EntityLabel, ProjectLink, ProjectTag } from 'components'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { LabelObject, StyledComponent } from 'types'
+import { getFluentIconWithFallback } from 'utils'
 import _ from 'underscore'
 import styles from './ProjectPopoverContent.module.scss'
 import { IProjectPopoverProps } from './types'
@@ -19,10 +19,7 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = (
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.iconContainer}>
-            <Icon
-              iconName={props.project.icon}
-              styles={{ root: { fontSize: 28 } }}
-            />
+            {getFluentIconWithFallback(props.project.icon, { size: 28 })}
           </div>
           <div className={styles.title}>
             <ProjectLink

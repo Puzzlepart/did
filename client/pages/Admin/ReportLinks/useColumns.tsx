@@ -1,10 +1,9 @@
-import { Icon } from '@fluentui/react'
 import { Caption1, Link } from '@fluentui/react-components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
-import { createColumnDef, getFluentIcon } from 'utils'
+import { createColumnDef, getFluentIcon, getFluentIconWithFallback } from 'utils'
 import styles from './ReportLinks.module.scss'
 
 export function useColumns() {
@@ -47,11 +46,11 @@ export function useColumns() {
       { maxWidth: 220 },
       (reportLink) => (
         <div className={styles.nameColumn}>
-          <Icon
-            className={styles.icon}
-            iconName={reportLink.icon}
-            styles={{ root: { color: reportLink.iconColor } }}
-          />
+          <span className={styles.icon}>
+            {getFluentIconWithFallback(reportLink.icon, {
+              color: reportLink.iconColor
+            })}
+          </span>
           <Link
             className={styles.link}
             href={reportLink.externalUrl}

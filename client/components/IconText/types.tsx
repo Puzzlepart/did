@@ -1,8 +1,13 @@
-import { IIconProps } from '@fluentui/react'
-
 /**
  * @category IconText
  */
-export interface IIconTextProps extends IIconProps {
+export interface IIconTextProps {
   text: string
+  iconName: string
+  styles?: {
+    root?: {
+      color?: string
+      fontSize?: string | number
+    }
+  }
 }

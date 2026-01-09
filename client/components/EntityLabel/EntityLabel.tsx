@@ -1,9 +1,8 @@
-import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
-import { getContrastColor } from 'utils'
+import { getContrastColor, getFluentIconWithFallback } from 'utils'
 import styles from './EntityLabel.module.scss'
 import { IEntityLabelProps } from './types'
 
@@ -30,13 +29,9 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
       title={label.description}
     >
       {label.icon && (
-        <Icon
-          iconName={label.icon}
-          style={{
-            color: contrastColor,
-            marginRight: 6
-          }}
-        />
+        <span style={{ marginRight: 6, display: 'inline-flex' }}>
+          {getFluentIconWithFallback(label.icon, { color: contrastColor })}
+        </span>
       )}
       <span style={{ color: contrastColor }}>
         {s.isBlank(label.name) ? t('admin.labels.defaultTitle') : label.name}

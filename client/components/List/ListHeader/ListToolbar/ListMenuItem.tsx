@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/switch-case-braces */
 /* eslint-disable unicorn/consistent-function-scoping */
-import { ICommandBarItemProps, Icon } from '@fluentui/react'
+import { ICommandBarItemProps } from '@fluentui/react'
 import { MenuItemCheckboxProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
@@ -272,21 +272,21 @@ export class ListMenuItem {
   }
 
   /**
-   * Creates an icon component based on the provided list menu item.
-   * Supports both `FluentIcon` from `@fluentui/react-icons` and
-   * `Icon` from `@fluentui/react`.
+   * Creates an icon component based on the provided list menu item using v9 icons.
    *
    * @param item - The list menu item to create the icon for.
    *
    * @returns The icon component.
    */
   public static createIcon(item: ListMenuItem) {
-    let IconElement = () => null
     if (typeof item._iconName === 'string') {
-      return <Icon iconName={item._iconName} />
+      return getFluentIconWithFallback(item._iconName)
     }
-    if (item._iconName) IconElement = item._iconName as any
-    return <IconElement />
+    if (item._iconName) {
+      const IconElement = item._iconName as any
+      return <IconElement />
+    }
+    return null
   }
 
   public get text() {
