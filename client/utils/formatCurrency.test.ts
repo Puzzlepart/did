@@ -110,8 +110,8 @@ test('formatCurrency: handles 0.5 rounds to 0 or 1', (t) => {
 // Edge case: special number values
 test('formatCurrency: handles NaN', (t) => {
   const result = formatCurrency(Number.NaN)
-  // toFixed on NaN returns 'NaN' string
-  t.is(result, 'kr NaN')
+  // NaN is falsy, so returns 'kr 0'
+  t.is(result, 'kr 0')
 })
 
 test('formatCurrency: handles Infinity', (t) => {

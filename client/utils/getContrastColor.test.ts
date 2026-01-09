@@ -12,9 +12,9 @@ test('getContrastColor: returns black for light color', (t) => {
   t.is(result, 'black')
 })
 
-test('getContrastColor: returns black for pure red', (t) => {
+test('getContrastColor: returns white for pure red', (t) => {
   const result = getContrastColor('#FF0000')
-  t.is(result, 'black')
+  t.is(result, 'white')
 })
 
 test('getContrastColor: returns white for dark red', (t) => {
@@ -55,7 +55,7 @@ test('getContrastColor: handles three-character hex code #FFF', (t) => {
 
 test('getContrastColor: handles three-character hex code #F00', (t) => {
   const result = getContrastColor('#F00')
-  t.is(result, 'black')
+  t.is(result, 'white')
 })
 
 test('getContrastColor: handles three-character hex code #0F0', (t) => {
@@ -145,7 +145,7 @@ test('getContrastColor: handles common color names as hex - white', (t) => {
 
 test('getContrastColor: handles common color names as hex - red', (t) => {
   const result = getContrastColor('#FF0000')
-  t.is(result, 'black')
+  t.is(result, 'white')
 })
 
 // Testing YIQ formula accuracy
@@ -162,9 +162,9 @@ test('getContrastColor: YIQ formula gives correct contrast for cyan', (t) => {
 })
 
 test('getContrastColor: YIQ formula gives correct contrast for magenta', (t) => {
-  // Magenta (#FF00FF) is moderately bright, should get black text
+  // Magenta (#FF00FF) YIQ = 105.315 < 128, should get white text
   const result = getContrastColor('#FF00FF')
-  t.is(result, 'black')
+  t.is(result, 'white')
 })
 
 test('getContrastColor: YIQ formula gives correct contrast for navy', (t) => {
@@ -184,8 +184,8 @@ test('getContrastColor: handles too short hex code', (t) => {
   // Only 2 characters, will parse incorrectly
   const result = getContrastColor('#FF')
   // substr(0,2) = 'FF', substr(2,2) = '', substr(4,2) = ''
-  // r = 255, g = 0, b = 0 -> red -> YIQ high -> black
-  t.is(result, 'black')
+  // r = 255, g = 0, b = 0 -> YIQ = 76 < 128 -> white
+  t.is(result, 'white')
 })
 
 test('getContrastColor: handles too long hex code', (t) => {
@@ -287,7 +287,7 @@ test('getContrastColor: validates YIQ weighting - red is weighted less than gree
   // Pure green: YIQ = (255*587)/1000 = 149.685 >= 128 -> black
   const green = getContrastColor('#00FF00')
   
-  t.is(red, 'black') // Red is actually bright in YIQ
+  t.is(red, 'white') // Red is actually dark in YIQ perception
   t.is(green, 'black') // Green is the brightest
 })
 

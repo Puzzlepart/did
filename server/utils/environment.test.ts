@@ -1,15 +1,20 @@
 import test from 'ava'
 import { environment } from './environment'
 
+// Define context type
+interface TestContext {
+  originalEnv: NodeJS.ProcessEnv
+}
+
 // Mock process.env for testing
 test.beforeEach((t) => {
   // Save original env
-  t.context.originalEnv = { ...process.env }
+  t.context = { originalEnv: { ...process.env } }
 })
 
 test.afterEach((t) => {
   // Restore original env
-  process.env = t.context.originalEnv
+  process.env = (t.context as TestContext).originalEnv
 })
 
 // Happy path: existing environment variable
