@@ -1,5 +1,12 @@
 import { HolidayObject } from '../../server/graphql/resolvers/timesheet/types/HolidayObject'
 import { $dayjs } from './date'
+import dayjs from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
+// Extend dayjs with comparison plugins
+dayjs.extend(isSameOrAfter)
+dayjs.extend(isSameOrBefore)
 
 /**
  * TIMEZONE HANDLING STRATEGY:

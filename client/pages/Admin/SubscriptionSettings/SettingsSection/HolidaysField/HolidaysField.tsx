@@ -327,17 +327,70 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
           <DataGrid
             items={holidays}
             columns={[
-              { columnId: 'date', renderHeaderCell: () => t('admin.holidayDateLabel') },
-              { columnId: 'name', renderHeaderCell: () => t('admin.holidayNameLabel') },
+              {
+                columnId: 'date',
+                renderHeaderCell: () => t('admin.holidayDateLabel'),
+                compare: (a, b) => a.date.localeCompare(b.date),
+                renderCell: (item) => {
+                  const warnings = getWarningsForHoliday(item)
+                  return (
+                    <>
+                      {$dayjs(item.date).format('YYYY-MM-DD')}
+                      {warnings.length > 0 && (
+                        <div className={classes.warningText}>
+                          <Warning20Regular />
+                          {warnings.join(', ')}
+                        </div>
+                      )}
+                    </>
+                  )
+                }
+              },
+              {
+                columnId: 'name',
+                renderHeaderCell: () => t('admin.holidayNameLabel'),
+                compare: (a, b) => a.name.localeCompare(b.name),
+                renderCell: (item) => item.name
+              },
               {
                 columnId: 'hoursOff',
-                renderHeaderCell: () => t('admin.holidayHoursOffLabel')
+                renderHeaderCell: () => t('admin.holidayHoursOffLabel'),
+                compare: (a, b) => a.hoursOff - b.hoursOff,
+                renderCell: (item) => `${item.hoursOff}h`
               },
               {
                 columnId: 'recurring',
-                renderHeaderCell: () => t('admin.holidayRecurringLabel')
+                renderHeaderCell: () => t('admin.holidayRecurringLabel'),
+                compare: (a, b) => Number(a.recurring) - Number(b.recurring),
+                renderCell: (item) => (item.recurring ? t('common.yes') : t('common.no'))
               },
-              { columnId: 'actions', renderHeaderCell: () => '' }
+              {
+                columnId: 'actions',
+                renderHeaderCell: () => '',
+                compare: () => 0,
+                renderCell: (item) => {
+                  const index = holidays.indexOf(item)
+                  return (
+                    <div className={classes.actions}>
+                      <Button
+                        size='small'
+                        icon={<Edit20Regular />}
+                        onClick={() => handleOpenDialog(item, index)}
+                      >
+                        {t('admin.editHolidayButton')}
+                      </Button>
+                      <Button
+                        size='small'
+                        appearance='subtle'
+                        icon={<Delete20Regular />}
+                        onClick={() => setDeleteIndex(index)}
+                      >
+                        {t('admin.deleteHolidayButton')}
+                      </Button>
+                    </div>
+                  )
+                }
+              }
             ]}
             sortable
             className={classes.table}
@@ -350,48 +403,11 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
               </DataGridRow>
             </DataGridHeader>
             <DataGridBody<Holiday>>
-              {({ item, rowId }) => {
-                const index = holidays.indexOf(item)
-                const warnings = getWarningsForHoliday(item)
-
-                return (
-                  <DataGridRow<Holiday> key={rowId}>
-                    <DataGridCell>
-                      {$dayjs(item.date).format('YYYY-MM-DD')}
-                      {warnings.length > 0 && (
-                        <div className={classes.warningText}>
-                          <Warning20Regular />
-                          {warnings.join(', ')}
-                        </div>
-                      )}
-                    </DataGridCell>
-                    <DataGridCell>{item.name}</DataGridCell>
-                    <DataGridCell>{item.hoursOff}h</DataGridCell>
-                    <DataGridCell>
-                      {item.recurring ? t('common.yes') : t('common.no')}
-                    </DataGridCell>
-                    <DataGridCell>
-                      <div className={classes.actions}>
-                        <Button
-                          size='small'
-                          icon={<Edit20Regular />}
-                          onClick={() => handleOpenDialog(item, index)}
-                        >
-                          {t('admin.editHolidayButton')}
-                        </Button>
-                        <Button
-                          size='small'
-                          appearance='subtle'
-                          icon={<Delete20Regular />}
-                          onClick={() => setDeleteIndex(index)}
-                        >
-                          {t('admin.deleteHolidayButton')}
-                        </Button>
-                      </div>
-                    </DataGridCell>
-                  </DataGridRow>
-                )
-              }}
+              {({ item, rowId }) => (
+                <DataGridRow<Holiday> key={rowId}>
+                  {({ renderCell }) => <DataGridCell>{renderCell(item)}</DataGridCell>}
+                </DataGridRow>
+              )}
             </DataGridBody>
           </DataGrid>
         )}

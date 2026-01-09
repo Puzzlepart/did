@@ -26,7 +26,6 @@ You are an expert developer working on **did** (always styled in lowercase), a c
 - **Testing:** AVA test framework with TypeScript support
 - **Code Quality:** ESLint + Prettier (enforced standards)
 
-**Current Version:** 0.18.0
 **Node Version:** >=22.14.0 LTS (see .nvmrc)
 
 ## Core Architecture Patterns
