@@ -1,6 +1,7 @@
 import $date from 'DateUtils'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import format from 'string-format'
 import { ModifiedDuration } from './ModifiedDuration'
 import { IDurationDisplayProps } from './types'
 
@@ -11,8 +12,7 @@ export const DurationDisplay: FC<IDurationDisplayProps> = (props) => {
   const { t } = useTranslation()
   let displayValue = $date.getDurationString(props.event.duration, t)
   if (props.displayFormat) {
-    // Replace format placeholders with values
-    displayValue = props.displayFormat.replace('{0}', displayValue)
+    displayValue = format(props.displayFormat, displayValue)
   }
   return (
     <ModifiedDuration

@@ -2,7 +2,7 @@ import { Tab, TabList } from '@fluentui/react-components'
 import { useSubscriptionSettings } from 'AppContext'
 import { FormControl } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
 import { getFluentIcon } from 'utils'
@@ -26,6 +26,43 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
 
   const showTabs = budgetTracking?.enabled || projects?.enableResourceManagement
 
+  const tabs = useMemo(
+    () => [
+      {
+        value: 'general',
+        label: t('common.general'),
+        icon: 'Info',
+        component: <BasicInfo />,
+        visible: true
+      },
+      {
+        value: 'roleDefinitions',
+        label: t('projects.roleDefinitions.headerText'),
+        icon: 'FabricUserFolder',
+        component: <RoleDefinitions />,
+        visible: !!projects?.enableProjectRoles
+      },
+      {
+        value: 'resources',
+        label: t('projects.resources.headerText'),
+        icon: 'Group',
+        component: <Resources />,
+        visible: !!projects?.enableResourceManagement
+      },
+      {
+        value: 'budget',
+        label: t('projects.budget'),
+        icon: 'LineChart',
+        component: <BudgetTracking />,
+        visible: !!budgetTracking?.enabled && formControlProps.isEditMode
+      }
+    ],
+    [t, projects, budgetTracking, formControlProps.isEditMode]
+  )
+
+  const visibleTabs = tabs.filter((tab) => tab.visible)
+  const selectedTabConfig = tabs.find((tab) => tab.value === selectedTab)
+
   return (
     <FormControl {...formControlProps}>
       <TabList
@@ -36,36 +73,14 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
           display: showTabs ? 'flex' : 'none'
         }}
       >
-        <Tab value='general' icon={getFluentIcon('Info')}>
-          {t('common.general')}
-        </Tab>
-        {projects?.enableProjectRoles && (
-          <Tab value='roleDefinitions' icon={getFluentIcon('FabricUserFolder')}>
-            {t('projects.roleDefinitions.headerText')}
+        {visibleTabs.map((tab) => (
+          <Tab key={tab.value} value={tab.value} icon={getFluentIcon(tab.icon)}>
+            {tab.label}
           </Tab>
-        )}
-        {projects?.enableResourceManagement && (
-          <Tab value='resources' icon={getFluentIcon('Group')}>
-            {t('projects.resources.headerText')}
-          </Tab>
-        )}
-        {budgetTracking?.enabled && formControlProps.isEditMode && (
-          <Tab value='budget' icon={getFluentIcon('LineChart')}>
-            {t('projects.budget')}
-          </Tab>
-        )}
+        ))}
       </TabList>
 
-      {selectedTab === 'general' && <BasicInfo />}
-      {selectedTab === 'roleDefinitions' && projects?.enableProjectRoles && (
-        <RoleDefinitions />
-      )}
-      {selectedTab === 'resources' && projects?.enableResourceManagement && (
-        <Resources />
-      )}
-      {selectedTab === 'budget' &&
-        budgetTracking?.enabled &&
-        formControlProps.isEditMode && <BudgetTracking />}
+      {selectedTabConfig?.component}
     </FormControl>
   )
 }
