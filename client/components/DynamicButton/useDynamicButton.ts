@@ -11,7 +11,7 @@ import { IDynamicButtonProps } from './types'
  * @returns The props for the button.
  */
 export function useDynamicButton(props: IDynamicButtonProps) {
-  let buttonProps = _.omit(props, 'hidden', 'text') as ButtonProps
+  let buttonProps = _.omit(props, 'hidden', 'text', 'content') as ButtonProps
   if (props.iconName) {
     buttonProps = {
       ...buttonProps,

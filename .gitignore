@@ -58,4 +58,4 @@ logs/
 _doc
 
 # code reviews
-CODE_REVIEW*.md
+CODE_REVIEW_*
