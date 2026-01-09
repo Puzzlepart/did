@@ -1,4 +1,4 @@
-import { format } from '@fluentui/react'
+import format from 'string-format'
 import { UserMessage } from 'components'
 import React from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'

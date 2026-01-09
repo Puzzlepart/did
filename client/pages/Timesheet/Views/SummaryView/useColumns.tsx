@@ -1,4 +1,5 @@
-import { DateRangeType, useTheme } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react'
+import { mergeClasses, tokens } from '@fluentui/react-components'
 import { EventList, IListColumn, ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +10,6 @@ import { Overview } from '../Overview'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
-import { mergeClasses } from '@fluentui/react-components'
 import _ from 'lodash'
 
 /**
@@ -30,7 +30,6 @@ import _ from 'lodash'
  */
 export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
-  const theme = useTheme()
   const context = useTimesheetContext()
   const onRender = (row: any, _index: number, col: IListColumn) => (
     <DurationColumn row={row} column={col} />
@@ -59,7 +58,7 @@ export function useColumns(): IListColumn[] {
               return (
                 <div
                   title={holiday?.name}
-                  style={{ color: holiday && theme.palette.red }}
+                  style={{ color: holiday && tokens.colorPaletteRedForeground1 }}
                 >
                   {defaultRender(props)}
                 </div>

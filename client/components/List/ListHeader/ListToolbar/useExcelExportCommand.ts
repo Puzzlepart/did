@@ -1,4 +1,5 @@
-import { format, ICommandBarItemProps } from '@fluentui/react'
+import { ICommandBarItemProps } from '@fluentui/react'
+import format from 'string-format'
 import { useTranslation } from 'react-i18next'
 import { exportExcel } from 'utils/exportExcel'
 import { useListContext } from '../../context'
