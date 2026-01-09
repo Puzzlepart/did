@@ -56,6 +56,9 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --loglevel=error --include=dev
+      
       - name: Run Ava tests
         run: npm test
 
@@ -81,6 +84,9 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund --loglevel=error --include=dev
       
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --loglevel=error --include=dev
+      
       - name: Run ESLint
         run: npm run lint
 
@@ -102,6 +108,9 @@ jobs:
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --loglevel=error --include=dev
       
       - name: Install dependencies
         run: npm ci --no-audit --no-fund --loglevel=error --include=dev
@@ -132,6 +141,9 @@ jobs:
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --loglevel=error --include=dev
       
       - name: Install dependencies
         run: npm ci --no-audit --no-fund --loglevel=error --include=dev
