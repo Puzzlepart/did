@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { IPanelProps } from '@fluentui/react'
+import { IPanelProps } from 'components/Panel'
 import { useAppContext } from 'AppContext'
 import { IDynamicButtonProps, ListMenuItem } from 'components'
 import { useMemo } from 'react'

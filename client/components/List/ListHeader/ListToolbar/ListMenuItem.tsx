@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/switch-case-braces */
 /* eslint-disable unicorn/consistent-function-scoping */
-import { ICommandBarItemProps } from '@fluentui/react'
 import { MenuItemCheckboxProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
+import { ListCommandBarItem } from 'components/List/types'
 import { FluentIconName, getFluentIconWithFallback } from 'utils'
 
 export type ListMenuItemGroup = 'default' | 'actions'
@@ -36,7 +36,7 @@ export class ListMenuItem {
 
   /**
    * The icon to display in the menu item. A string representing a FluentIcon
-   * or an Icon from `@fluentui/react` can be provided.
+   * or an Icon from Fluent UI can be provided.
    */
   private _iconName?: string | FluentIconName
 
@@ -83,7 +83,7 @@ export class ListMenuItem {
   /**
    * Custom render function for the command bar item associated with this list menu item.
    */
-  public onRender?: ICommandBarItemProps['onRender']
+  public onRender?: ListCommandBarItem['onRender']
 
   /**
    * The group name for the menu item.
@@ -266,7 +266,7 @@ export class ListMenuItem {
    *
    * @returns The updated ListMenuItem instance.
    */
-  public setCustomRender(onRender: ICommandBarItemProps['onRender']) {
+  public setCustomRender(onRender: ListCommandBarItem['onRender']) {
     this.onRender = onRender
     return this
   }
@@ -294,16 +294,16 @@ export class ListMenuItem {
   }
 
   /**
-   * Converts an array of ICommandBarItemProps to an array of ListMenuItem.
+   * Converts an array of ListCommandBarItem to an array of ListMenuItem.
    *
-   * @param items - The array of ICommandBarItemProps to convert.
+   * @param items - The array of ListCommandBarItem to convert.
    *
    * @returns An array of ListMenuItem.
    */
-  public static convert(items: ICommandBarItemProps[]) {
+  public static convert(items: ListCommandBarItem[]) {
     return items.map((item) =>
       new ListMenuItem(item.text)
-        .withIcon(item.iconProps?.iconName)
+        .withIcon(item.iconName)
         .setOnClick(item.onClick)
         .setDisabled(item.disabled)
     )

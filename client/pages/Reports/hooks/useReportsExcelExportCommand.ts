@@ -1,4 +1,3 @@
-import { ICommandBarItemProps } from '@fluentui/react'
 import { useExcelExportWithProgress } from '../../../hooks/excel/useExcelExportWithProgress'
 import { useTranslation } from 'react-i18next'
 import { useReportsContext } from '../context'
@@ -6,7 +5,7 @@ import { IReportsListProps } from '../ReportsList/types'
 import { useColumns } from '../ReportsList/columns/useColumns'
 import { useBrowserStorage } from 'hooks'
 import _ from 'lodash'
-import { ListFilterState } from 'components/List/types'
+import { ListCommandBarItem, ListFilterState } from 'components/List/types'
 import report_custom from 'pages/Reports/queries/report-custom.gql'
 
 type PersistedColumn = {
@@ -118,17 +117,14 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
     }
   }
 
-  const commandBarItem: ICommandBarItemProps = {
+  const commandBarItem: ListCommandBarItem = {
     key: 'EXPORT_TO_EXCEL_PROGRESS',
     text: isExporting ? progressMessage : t('reports.exportToExcel'),
     onClick: () => {
       exportAllData()
     },
     disabled: isExporting,
-    iconProps: {
-      iconName: isExporting ? 'Progress' : 'ExcelDocument',
-      styles: { root: { color: isExporting ? '#0078d4' : 'green' } }
-    }
+    iconName: isExporting ? 'Progress' : 'ExcelDocument'
   }
 
   return {

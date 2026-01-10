@@ -47,7 +47,7 @@ export const ReportLinks: TabComponent = () => {
             {
               key: 'ADD_NEW_REPORT_LINK',
               text: t('admin.reportLinks.addNewReportsLink'),
-              iconProps: { iconName: 'Add' },
+              iconName: 'Add',
               onClick: () => {
                 setForm({ open: true })
               }

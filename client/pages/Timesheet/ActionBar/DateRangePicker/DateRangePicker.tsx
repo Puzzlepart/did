@@ -1,15 +1,15 @@
 import {
   Calendar,
+  CalendarStrings,
   DayOfWeek,
-  FirstWeekOfYear,
-  ICalendarStrings,
-  useTheme
-} from '@fluentui/react'
+  FirstWeekOfYear
+} from '@fluentui/react-calendar-compat'
 import {
   Popover,
   PopoverSurface,
   PopoverTrigger,
-  ToolbarButton
+  ToolbarButton,
+  tokens
 } from '@fluentui/react-components'
 import React from 'react'
 import { isBrowser } from 'react-device-detect'
@@ -28,7 +28,6 @@ import { useDateRangePicker } from './useDateRangePicker'
 export const DateRangePicker: StyledComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const { palette } = useTheme()
   const { triggerText, triggerIcon, open, handleOpenChange } =
     useDateRangePicker()
   return (
@@ -57,7 +56,7 @@ export const DateRangePicker: StyledComponent = () => {
           strings={
             t('common.calendarStrings', {
               returnObjects: true
-            }) as ICalendarStrings
+            }) as CalendarStrings
           }
           showGoToToday={false}
           showWeekNumbers={true}
@@ -68,7 +67,7 @@ export const DateRangePicker: StyledComponent = () => {
           calendarMonthProps={{
             styles: {
               currentItemButton: {
-                color: palette.neutralPrimary
+                color: tokens.colorNeutralForeground1
               }
             }
           }}

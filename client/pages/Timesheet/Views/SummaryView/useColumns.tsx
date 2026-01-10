@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { mergeClasses, tokens } from '@fluentui/react-components'
 import { EventList, IListColumn, ProjectPopover } from 'components'
 import React from 'react'

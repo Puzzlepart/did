@@ -1,5 +1,4 @@
 import {
-  ICommandBarProps,
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
   IRenderFunction,
@@ -7,13 +6,28 @@ import {
   SelectionMode
 } from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-components'
-import { CSSProperties, HTMLProps } from 'react'
+import { CSSProperties, HTMLProps, ReactNode } from 'react'
 import { ListMenuItem } from '../ListHeader'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
 import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 import { IListState } from './IListState'
+
+export type ListCommandBarItem = {
+  key?: string
+  text?: string
+  iconName?: string
+  disabled?: boolean
+  onClick?: (event?: unknown) => void
+  onRender?: (item?: unknown, defaultRender?: unknown) => ReactNode
+}
+
+export type ListCommandBarProps = {
+  hidden?: boolean
+  items?: ListCommandBarItem[]
+  farItems?: ListCommandBarItem[]
+}
 
 export type ListFilterState = {
   filters: IFilter[]
@@ -103,7 +117,7 @@ export interface IListProps<T = any>
   /**
    * Command bar props
    */
-  commandBar?: ICommandBarProps
+  commandBar?: ListCommandBarProps
 
   /**
    * Hidden state of the list
