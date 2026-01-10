@@ -1,4 +1,4 @@
-import { SelectionMode } from '@fluentui/react'
+import { SelectionMode } from 'components/List/types'
 import { List, ListMenuItem, TabComponent } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

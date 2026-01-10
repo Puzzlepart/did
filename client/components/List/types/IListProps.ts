@@ -1,10 +1,3 @@
-import {
-  IDetailsGroupRenderProps,
-  IDetailsHeaderProps,
-  IRenderFunction,
-  IShimmeredDetailsListProps,
-  SelectionMode
-} from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-components'
 import { CSSProperties, HTMLProps, ReactNode } from 'react'
 import { ListMenuItem } from '../ListHeader'
@@ -13,6 +6,7 @@ import { IListGroupProps } from './IListGroupProps'
 import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 import { IListState } from './IListState'
+import { CheckboxVisibility, SelectionMode } from './Selection'
 
 export type ListCommandBarItem = {
   key?: string
@@ -72,8 +66,7 @@ interface SearchBox
  */
 
 export interface IListProps<T = any>
-  extends Pick<HTMLProps<HTMLDivElement>, 'className'>,
-    Omit<IShimmeredDetailsListProps, 'selectionMode'> {
+  extends Pick<HTMLProps<HTMLDivElement>, 'className'> {
   /**
    * Items
    */
@@ -105,14 +98,24 @@ export interface IListProps<T = any>
   selectionProps?: [SelectionMode, ((selected: T | T[]) => void)?]
 
   /**
+   * Checkbox visibility for selection (hint).
+   */
+  checkboxVisibility?: CheckboxVisibility
+
+  /**
+   * Row key getter.
+   */
+  getKey?: (item: T, index?: number) => string | number
+
+  /**
+   * List instance key (used to force re-rendering).
+   */
+  setKey?: string
+
+  /**
    * Group props
    */
   listGroupProps?: IListGroupProps
-
-  /**
-   * Group render props
-   */
-  listGroupRenderProps?: IDetailsGroupRenderProps
 
   /**
    * Command bar props
@@ -129,7 +132,6 @@ export interface IListProps<T = any>
    */
   columnHeaderProps?: {
     className?: string
-    onRender?: IRenderFunction<IDetailsHeaderProps>
   }
 
   /**
@@ -237,4 +239,9 @@ export interface IListProps<T = any>
    * Error state. If set, the list will display an error message.
    */
   error?: Error
+
+  /**
+   * Callback invoked when an item row is clicked.
+   */
+  onItemInvoked?: (item: T) => void
 }

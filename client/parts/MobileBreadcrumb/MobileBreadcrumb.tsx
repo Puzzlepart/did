@@ -17,7 +17,7 @@ export const MobileBreadcrumb: StyledComponent<IMobileBreadcrumbProps> = (
   const appContext = useAppContext()
   if (!appContext.isAuthenticated) return null
   const items = useMobileBreadcrumb(props)
-  if (!items.length) return null
+  if (items.length === 0) return null
   return (
     <MobileView>
       <FadeIn>

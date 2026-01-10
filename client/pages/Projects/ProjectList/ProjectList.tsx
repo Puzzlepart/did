@@ -4,7 +4,7 @@ import React from 'react'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { CheckboxVisibility, SelectionMode } from 'components/List/types'
 import { SET_SELECTED_PROJECTS } from '../reducer'
 import { Project } from 'types'
 

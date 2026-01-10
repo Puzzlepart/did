@@ -39,7 +39,7 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = (props) => {
       return renderMap.get(props.column.renderAs)
     } else {
       if (props.column.onRender) {
-        element = props.column.onRender(props.item)
+        element = props.column.onRender(props.item, props.index, props.column)
       } else element = <Text size={200}>{fieldValue}</Text>
     }
   }

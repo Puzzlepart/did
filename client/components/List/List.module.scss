@@ -1,9 +1,125 @@
 .list {
   margin: 0 0 25px 0;
   position: relative;
+}
 
-  [class*='ms-DetailsRow-cellCheck'] {
-    display: flex;
-    align-items: center;
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 8px 0;
+}
+
+.minimalHeaderColumns {
+  .headerCell,
+  .treeGridHeaderCell {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: var(--shadow8);
   }
+}
+
+.dataGrid {
+  width: 100%;
+}
+
+.dataGridHeaderRow,
+.treeGridHeaderRow {
+  border-top: 1px solid rgb(234, 234, 234);
+}
+
+.headerCell,
+.treeGridHeaderCell {
+  padding-top: 8px;
+}
+
+.headerContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.headerSortable {
+  cursor: pointer;
+}
+
+.headerText {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sortIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dataGridRow {
+  min-height: 40px;
+}
+
+.cell,
+.treeGridCell {
+  display: flex;
+  align-items: center;
+}
+
+.selectionCell {
+  justify-content: center;
+  width: 36px;
+}
+
+.selectionCellHover {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.selectionHover:hover {
+  .selectionCellHover {
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  margin-top: 12px;
+}
+
+.skeletonRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.skeletonCell {
+  height: 18px;
+}
+
+.treeGrid {
+  width: 100%;
+}
+
+.treeGridRow {
+  min-height: 40px;
+}
+
+.groupHeaderRow {
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+}
+
+.groupHeaderCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-weight: 600;
+}
+
+.groupHeaderTotal {
+  margin-left: auto;
+  font-weight: normal;
+  color: rgb(110, 110, 110);
 }

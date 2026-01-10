@@ -1,4 +1,4 @@
-import { CheckboxVisibility } from '@fluentui/react'
+import { CheckboxVisibility } from 'components/List/types'
 import { List, Progress, TabComponent } from 'components'
 import React from 'react'
 import { APPLY_FILTER_STATE, SET_FILTER_STATE, SET_FILTERS_OPEN } from '../reducer/actions'

@@ -1,4 +1,4 @@
-import { SelectionMode } from '@fluentui/react'
+import { SelectionMode } from 'components/List/types'
 import { List, TabComponent, ListMenuItem } from 'components'
 import { usePermissions } from 'hooks'
 import React from 'react'
