@@ -19,7 +19,7 @@ import {
   TreeGridRowOnOpenChangeData
 } from '@fluentui-contrib/react-tree-grid'
 import { ReusableComponent } from 'components/types'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getFluentIcon } from 'utils/getFluentIcon'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { ListContext } from './context'
@@ -59,6 +59,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   const selectionMode = props.selectionProps?.[0] ?? SelectionMode.none
   const onSelectionChanged = props.selectionProps?.[1]
+  const onSelectionChangedRef = useRef(onSelectionChanged)
+  useEffect(() => {
+    onSelectionChangedRef.current = onSelectionChanged
+  }, [onSelectionChanged])
   const checkboxVisibility =
     props.checkboxVisibility ?? CheckboxVisibility.onHover
 
@@ -92,15 +96,15 @@ export const List: ReusableComponent<IListProps> = (props) => {
   const updateSelection = useCallback(
     (nextSelectedRowIds: Set<string | number>) => {
       setSelectedRowIds(nextSelectedRowIds)
-      if (!onSelectionChanged) return
+      if (!onSelectionChangedRef.current) return
       const selectedItems = Array.from(nextSelectedRowIds)
         .map((id) => itemsById.get(id))
         .filter(Boolean)
-      onSelectionChanged(
+      onSelectionChangedRef.current(
         selectionMode === SelectionMode.single ? selectedItems[0] : selectedItems
       )
     },
-    [itemsById, onSelectionChanged, selectionMode]
+    [itemsById, selectionMode]
   )
 
   useEffect(() => {
@@ -115,8 +119,11 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   useEffect(() => {
     if (selectionMode === SelectionMode.none) return
-    updateSelection(new Set())
-  }, [props.setKey, selectionMode, updateSelection])
+    setSelectedRowIds(new Set())
+    onSelectionChangedRef.current?.(
+      selectionMode === SelectionMode.single ? undefined : []
+    )
+  }, [props.setKey, selectionMode])
 
   const toggleRowSelection = useCallback(
     (rowId: string | number) => {
@@ -236,6 +243,14 @@ export const List: ReusableComponent<IListProps> = (props) => {
   )
 
   const dataGridColumns = useMemo(() => {
+    const selectionColumnMeta: IListColumn = {
+      key: 'selection',
+      name: '',
+      fieldName: '',
+      minWidth: 40,
+      maxWidth: 40,
+      isResizable: false
+    }
     const selectionColumn = shouldShowSelectionColumn
       ? [
           {
@@ -284,7 +299,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   }}
                 />
               )
-            }
+            },
+            column: selectionColumnMeta
           }
         ]
       : []
@@ -384,11 +400,16 @@ export const List: ReusableComponent<IListProps> = (props) => {
                     header
                     className={mergeClasses(
                       styles.treeGridHeaderCell,
-                      props.columnHeaderProps?.className
+                      props.columnHeaderProps?.className,
+                      column.isMultiline ? styles.multiline : styles.nowrap
                     )}
                     style={{
                       minWidth: column.minWidth,
-                      maxWidth: column.maxWidth
+                      maxWidth: column.maxWidth,
+                      width:
+                        column.minWidth === column.maxWidth
+                          ? column.minWidth
+                          : undefined
                     }}
                   >
                     {renderHeaderCellContent(column)}
@@ -430,11 +451,18 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                   key={`${rowId}-${column.key}`}
                                   className={mergeClasses(
                                     styles.treeGridCell,
-                                    column.className
+                                    column.className,
+                                    column.isMultiline
+                                      ? styles.multiline
+                                      : styles.nowrap
                                   )}
                                   style={{
                                     minWidth: column.minWidth,
-                                    maxWidth: column.maxWidth
+                                    maxWidth: column.maxWidth,
+                                    width:
+                                      column.minWidth === column.maxWidth
+                                        ? column.minWidth
+                                        : undefined
                                   }}
                                 >
                                   <ItemColumn
@@ -483,17 +511,26 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   {({ renderHeaderCell, columnId, column }) => {
                     const columnMeta = (column as { column?: IListColumn })
                       ?.column
+                    const isSelectionColumn = columnId === 'selection'
                     return (
                       <DataGridHeaderCell
                         key={columnId}
                         className={mergeClasses(
                           styles.headerCell,
                           props.columnHeaderProps?.className,
-                          columnMeta?.className
+                          isSelectionColumn && styles.selectionCell,
+                          columnMeta?.className,
+                          columnMeta?.isMultiline
+                            ? styles.multiline
+                            : styles.nowrap
                         )}
                         style={{
                           minWidth: columnMeta?.minWidth,
-                          maxWidth: columnMeta?.maxWidth
+                          maxWidth: columnMeta?.maxWidth,
+                          width:
+                            columnMeta?.minWidth === columnMeta?.maxWidth
+                              ? columnMeta?.minWidth
+                              : undefined
                         }}
                         onClick={() =>
                           columnMeta && handleHeaderClick(columnMeta)
@@ -531,11 +568,18 @@ export const List: ReusableComponent<IListProps> = (props) => {
                             isSelectionColumn &&
                               checkboxVisibility === CheckboxVisibility.onHover &&
                               styles.selectionCellHover,
-                            columnMeta?.className
+                            columnMeta?.className,
+                            columnMeta?.isMultiline
+                              ? styles.multiline
+                              : styles.nowrap
                           )}
                           style={{
                             minWidth: columnMeta?.minWidth,
-                            maxWidth: columnMeta?.maxWidth
+                            maxWidth: columnMeta?.maxWidth,
+                            width:
+                              columnMeta?.minWidth === columnMeta?.maxWidth
+                                ? columnMeta?.minWidth
+                                : undefined
                           }}
                         >
                           {renderCell(item)}

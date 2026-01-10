@@ -33,12 +33,17 @@
 .headerCell,
 .treeGridHeaderCell {
   padding-top: 8px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .headerContent {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .headerSortable {
@@ -63,11 +68,20 @@
 .treeGridCell {
   display: flex;
   align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cell > *,
+.treeGridCell > * {
+  min-width: 0;
 }
 
 .selectionCell {
   justify-content: center;
-  width: 36px;
+  width: 40px;
+  max-width: 40px;
+  padding: 0 6px;
 }
 
 .selectionCellHover {
@@ -102,6 +116,17 @@
 
 .treeGridRow {
   min-height: 40px;
+}
+
+.nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.multiline {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .groupHeaderRow {

@@ -14,19 +14,17 @@ import { IFilterPanelContext } from './context'
 export function useFilterPanel(props: IFilterPanelProps) {
   const { t } = useTranslation()
   const [selected, setSelected] = useState<Map<string, Set<string>>>(new Map())
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
+  const filters = useMemo<IFilter[]>(
+    () => props.filters.map((f) => f.initialize(props.items)),
+    [props.filters, props.items]
   )
 
   // Use ref to store the latest callback to avoid effect re-runs
   const onFiltersUpdatedRef = useRef(props.onFiltersUpdated)
+  const lastUpdateSignature = useRef<string>('')
   useEffect(() => {
     onFiltersUpdatedRef.current = props.onFiltersUpdated
   }, [props.onFiltersUpdated])
-
-  useEffect(() => {
-    setFilters(props.filters.map((f) => f.initialize(props.items)))
-  }, [props.items, props.filters])
 
   /**
    * On filter updated
@@ -49,7 +47,17 @@ export function useFilterPanel(props: IFilterPanelProps) {
         selected: selected.get(f.key) ?? new Set<string>()
       }))
       .filter(({ selected }) => selected.size > 0)
-    onFiltersUpdatedRef.current(updatedFilters)
+    const signature = updatedFilters
+      .map((filter) => {
+        const values = Array.from(filter.selected).sort().join('|')
+        return `${filter.key}:${values}`
+      })
+      .sort()
+      .join(';')
+    if (signature !== lastUpdateSignature.current) {
+      lastUpdateSignature.current = signature
+      onFiltersUpdatedRef.current(updatedFilters)
+    }
   }, [selected, filters])
 
   const title = props.selectedFilter
@@ -72,7 +80,7 @@ export function useFilterPanel(props: IFilterPanelProps) {
 
   return {
     filtersToRender,
-    title,
+  title,
     contextValue
   }
 }
