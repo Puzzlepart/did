@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IFilter } from './Filters'
 import { IFilterPanelProps } from './types'
@@ -18,6 +18,12 @@ export function useFilterPanel(props: IFilterPanelProps) {
     props.filters.map((f) => f.initialize(props.items))
   )
 
+  // Use ref to store the latest callback to avoid effect re-runs
+  const onFiltersUpdatedRef = useRef(props.onFiltersUpdated)
+  useEffect(() => {
+    onFiltersUpdatedRef.current = props.onFiltersUpdated
+  }, [props.onFiltersUpdated])
+
   useEffect(() => {
     setFilters(props.filters.map((f) => f.initialize(props.items)))
   }, [props.items, props.filters])
@@ -28,13 +34,13 @@ export function useFilterPanel(props: IFilterPanelProps) {
    * @param filter - Filter to update
    * @param selected - Selected keys
    */
-  const onFilterUpdated = (filter: IFilter, selected: Set<string>) => {
+  const onFilterUpdated = useCallback((filter: IFilter, selected: Set<string>) => {
     setSelected((previousSelected) => {
       const newSelected = new Map(previousSelected)
       newSelected.set(filter.key, selected)
       return newSelected
     })
-  }
+  }, [])
 
   useEffect(() => {
     const updatedFilters = filters
@@ -43,8 +49,8 @@ export function useFilterPanel(props: IFilterPanelProps) {
         selected: selected.get(f.key) ?? new Set<string>()
       }))
       .filter(({ selected }) => selected.size > 0)
-    props.onFiltersUpdated(updatedFilters)
-  }, [selected])
+    onFiltersUpdatedRef.current(updatedFilters)
+  }, [selected, filters])
 
   const title = props.selectedFilter
     ? t('common.filterByColumn', props.selectedFilter)
@@ -61,7 +67,7 @@ export function useFilterPanel(props: IFilterPanelProps) {
       selected,
       setSelected
     }),
-    [selected]
+    [props, onFilterUpdated, selected]
   )
 
   return {

@@ -240,6 +240,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
       ? [
           {
             columnId: 'selection',
+            compare: () => 0,
             renderHeaderCell: () => {
               if (selectionMode !== SelectionMode.multiple) return null
               const allSelected =
@@ -297,6 +298,19 @@ export const List: ReusableComponent<IListProps> = (props) => {
           index={itemMeta.get(item)?.index ?? 0}
         />
       ),
+      compare: column.data?.isSortable ? (a: any, b: any) => {
+        const fieldName = column.fieldName
+        if (!fieldName) return 0
+        const aValue = a[fieldName]
+        const bValue = b[fieldName]
+        if (aValue === bValue) return 0
+        if (aValue == null) return 1
+        if (bValue == null) return -1
+        if (typeof aValue === 'string' && typeof bValue === 'string') {
+          return aValue.localeCompare(bValue)
+        }
+        return aValue < bValue ? -1 : 1
+      } : () => 0,
       column
     }))
     return [...selectionColumn, ...listColumns]
