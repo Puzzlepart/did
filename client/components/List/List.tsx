@@ -258,7 +258,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               return (
                 <Checkbox
                   checked={
-                    allSelected ? true : someSelected ? 'mixed' : false
+                    allSelected ? true : (someSelected ? 'mixed' : false)
                   }
                   onClick={(event) => event.stopPropagation()}
                   onChange={(_event, data) => {
@@ -442,7 +442,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                     }}
                     subtree={
                       <>
-                        {group.items.map((item, groupIndex) => {
+                        {group.items.map((item, _groupIndex) => {
                           const itemIndex = items.indexOf(item)
                           const rowId = getItemRowId(item, itemIndex)
                           return (

@@ -1,5 +1,5 @@
 import { DateRangeType } from '@fluentui/react-calendar-compat'
-import { mergeClasses, tokens } from '@fluentui/react-components'
+import { mergeClasses } from '@fluentui/react-components'
 import { EventList, IListColumn, ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -44,7 +44,7 @@ export function useColumns(): IListColumn[] {
           i++
         ) {
           const day = context.state.dateRange.getDay(i)
-          const holiday = day.isNationalHoliday(
+          const _holiday = day.isNationalHoliday(
             context.state.selectedPeriod?.holidays
           )
           columns.push({

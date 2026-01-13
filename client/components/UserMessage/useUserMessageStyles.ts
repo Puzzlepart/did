@@ -9,7 +9,7 @@ import { CSSProperties } from 'react'
  * @category UserMessage
  */
 export function useUserMessageStyles(
-  intent: MessageBarProps['intent']
+  _intent: MessageBarProps['intent']
 ): CSSProperties {
   // Return empty object to let MessageBar use native v9 intent styling
   return {}
