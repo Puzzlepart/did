@@ -18,6 +18,7 @@ import { UPDATE_BREADCRUMB } from '../../app/reducer'
 import { ITabHeaderProps, TabHeader } from './TabHeader'
 import { ITabProps, ITabsProps } from './types'
 import { useTabsSelection } from './useTabsSelection'
+import _ from 'underscore'
 
 type UseTabsReturnType = {
   selectedValue: string
@@ -42,13 +43,27 @@ type UseTabsReturnType = {
 export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
   props
 ) => {
-  const { dispatch } = useAppContext()
+  const { dispatch, user } = useAppContext()
   const { selectedValue, setSelectedValue, updateHistory } =
     useTabsSelection(props)
 
+  // Filter items based on permissions
+  const filteredItems = useMemo(() => {
+    const filtered = { ...props.items }
+    Object.keys(filtered).forEach((key) => {
+      const [, , componentProps] = filtered[key]
+      if (componentProps?.permission && user) {
+        if (!user.hasPermission(componentProps.permission)) {
+          delete filtered[key]
+        }
+      }
+    })
+    return filtered
+  }, [props.items, user])
+
   const [selectedComponent, selectedTab, selectedComponentProps] = useMemo(
-    () => props.items[selectedValue] ?? [null, null, {}],
-    [props.items, selectedValue]
+    () => filteredItems[selectedValue] ?? [null, null, {}],
+    [filteredItems, selectedValue]
   )
 
   const [Component, componentProps] = useMemo<
@@ -61,7 +76,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
         id: selectedValue
       }
     ],
-    [props.items, selectedValue]
+    [filteredItems, selectedValue]
   )
 
   useEffect(() => {
@@ -106,10 +121,11 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
    * and a `children` prop set to the `text` property of the corresponding header object, or the header string if it is not an object.
    * If the corresponding header object has an `iconName` property, the `Tab` component is created with an `icon` prop set to the corresponding Fluent icon.
    * If the corresponding header object has a `disabled` property set to `true`, the `Tab` component is created with a `disabled` prop set to `true`.
+   * Tabs are filtered based on the user's permissions.
    */
   const tabItems = useMemo(() => {
-    return Object.keys(props.items).flatMap((key) => {
-      const [, header] = props.items[key]
+    return Object.keys(filteredItems).flatMap((key) => {
+      const [, header] = filteredItems[key]
       const tabProps: TabProps = {
         value: key,
         children:
@@ -130,7 +146,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
         ...renderSubTabs(key, header as ITabHeaderProps)
       ]
     })
-  }, [props.items])
+  }, [filteredItems])
 
   return {
     selectedValue,

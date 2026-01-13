@@ -1,5 +1,8 @@
 import { Tabs } from 'components/Tabs'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import { PermissionScope } from 'security'
+import { usePermissions } from 'hooks'
 import { ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectForm } from './ProjectForm'
@@ -7,6 +10,7 @@ import { ProjectList } from './ProjectList'
 import { BulkEditProjectsPanel } from './BulkEditProjectsPanel'
 import { CLOSE_EDIT_PANEL, CLOSE_BULK_EDIT_PANEL } from './reducer'
 import { useProjects } from './useProjects'
+import { IProjectsUrlParameters } from './types'
 
 /**
  * @category Function Component
@@ -14,6 +18,19 @@ import { useProjects } from './useProjects'
 export const Projects: FC = () => {
   const { t, context, renderDetails, defaultTab, createListProps } =
     useProjects()
+  const history = useHistory()
+  const urlParameters = useParams<IProjectsUrlParameters>()
+  const [, hasPermission] = usePermissions()
+
+  // Redirect if user tries to access /projects/new without permission
+  useEffect(() => {
+    if (
+      urlParameters.currentTab === 'new' &&
+      !hasPermission(PermissionScope.MANAGE_PROJECTS)
+    ) {
+      history.replace('/projects')
+    }
+  }, [urlParameters.currentTab, hasPermission, history])
 
   return (
     <ProjectsContext.Provider value={{ ...context }}>
@@ -29,7 +46,11 @@ export const Projects: FC = () => {
               t('projects.myProjectsText'),
               createListProps('m')
             ],
-            new: [ProjectForm, t('projects.createNewText')]
+            new: [
+              ProjectForm,
+              t('projects.createNewText'),
+              { permission: PermissionScope.MANAGE_PROJECTS }
+            ]
           }}
         />
       )}

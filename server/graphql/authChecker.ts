@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { AuthChecker, ResolverData } from 'type-graphql'
+import { GraphQLError } from 'graphql'
 import _ from 'underscore'
 import { PermissionScope } from '../../shared/config/security'
 import { RequestContext } from './requestContext'
@@ -34,12 +35,31 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
   [authOptions]
 ) => {
   if (!authOptions) {
-    return !!context.permissions
+    if (!context.permissions) {
+      throw new GraphQLError('Authentication required', {
+        extensions: { code: 'UNAUTHENTICATED' }
+      })
+    }
+    return true
   }
   if (authOptions.requiresUserContext) {
-    return !!context.userId
+    if (!context.userId) {
+      throw new GraphQLError('User context required', {
+        extensions: { code: 'UNAUTHENTICATED' }
+      })
+    }
+    return true
   }
   if (authOptions.scope) {
-    return _.contains(context.permissions, authOptions.scope)
+    if (!_.contains(context.permissions, authOptions.scope)) {
+      throw new GraphQLError(
+        `Permission denied. Required permission: ${authOptions.scope}`,
+        {
+          extensions: { code: 'FORBIDDEN', permission: authOptions.scope }
+        }
+      )
+    }
+    return true
   }
+  return true
 }

@@ -1,7 +1,10 @@
 import { Tabs } from 'components/Tabs'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
+import { PermissionScope } from 'security'
+import { usePermissions } from 'hooks'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import { BulkEditCustomersPanel } from './BulkEditCustomersPanel'
@@ -15,6 +18,18 @@ import { useCustomers } from './useCustomers'
 export const Customers: FC = () => {
   const { t } = useTranslation()
   const { context, renderDetails, currentTab } = useCustomers()
+  const history = useHistory()
+  const [, hasPermission] = usePermissions()
+
+  // Redirect if user tries to access /customers/new without permission
+  useEffect(() => {
+    if (
+      currentTab === 'new' &&
+      !hasPermission(PermissionScope.MANAGE_CUSTOMERS)
+    ) {
+      history.replace('/customers')
+    }
+  }, [currentTab, hasPermission, history])
 
   return (
     <CustomersContext.Provider value={context}>
@@ -25,7 +40,11 @@ export const Customers: FC = () => {
           defaultSelectedValue={currentTab}
           items={{
             s: [CustomerList, t('common.search')],
-            new: [CustomerForm, t('customers.createNewText')]
+            new: [
+              CustomerForm,
+              t('customers.createNewText'),
+              { permission: PermissionScope.MANAGE_CUSTOMERS }
+            ]
           }}
         />
       )}

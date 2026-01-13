@@ -53,7 +53,23 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
-      formatError: (error) => _.pick(error, 'message'),
+      formatError: (error) => {
+        // Include error extensions for better client-side error handling
+        const formattedError = _.pick(error, 'message', 'extensions')
+        // Add status code to extensions if available
+        if (error.extensions?.code === 'UNAUTHENTICATED') {
+          formattedError.extensions = {
+            ...formattedError.extensions,
+            http: { status: 401 }
+          }
+        } else if (error.extensions?.code === 'FORBIDDEN') {
+          formattedError.extensions = {
+            ...formattedError.extensions,
+            http: { status: 403 }
+          }
+        }
+        return formattedError
+      },
       plugins: [
         ApolloServerPluginUsageReporting({
           sendVariableValues: { all: true },
