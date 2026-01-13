@@ -45,7 +45,7 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         label={t('common.iconFieldLabel')}
         description={t('admin.reportLinks.iconDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        defaultSelected={model.$.icon}
+        defaultSelected={model.$.iconName}
         required={true}
       />
       <InputControl

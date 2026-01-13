@@ -32,7 +32,7 @@ export const ReportLinks: StyledComponent<IReportLinksProps> = (props) => {
             <Button
               className={styles.link}
               onClick={() => window.open(link.externalUrl, '_blank')}
-              icon={getFluentIcon(link.icon, {
+              icon={getFluentIcon(link.iconName, {
                 color: link.iconColor
               })}
             >

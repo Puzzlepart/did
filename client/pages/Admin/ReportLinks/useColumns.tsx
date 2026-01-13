@@ -47,7 +47,7 @@ export function useColumns() {
       (reportLink) => (
         <div className={styles.nameColumn}>
           <span className={styles.icon}>
-            {getFluentIcon(reportLink.icon, {
+            {getFluentIcon(reportLink.iconName, {
               color: reportLink.iconColor
             })}
           </span>
