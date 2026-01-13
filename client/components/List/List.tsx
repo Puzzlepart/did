@@ -66,34 +66,23 @@ export const List: ReusableComponent<IListProps> = (props) => {
   const checkboxVisibility =
     props.checkboxVisibility ?? CheckboxVisibility.onHover
 
-  const getRowId = useCallback(
-    (item: any) => {
-      const index = items.indexOf(item)
+  // Compute row IDs and create lookup maps in a single pass
+  const { itemsById, allRowIds, getItemRowId } = useMemo(() => {
+    const itemsById = new Map<string | number, any>()
+    const allRowIds: Array<string | number> = []
+
+    const getItemRowId = (item: any, index: number): string | number => {
       return props.getKey?.(item, index) ?? item?.id ?? index
-    },
-    [props.getKey, items]
-  )
+    }
 
-  const itemMeta = useMemo(() => {
-    const meta = new Map<any, { rowId: string | number; index: number }>()
     for (const [index, item] of items.entries()) {
-      meta.set(item, { rowId: getRowId(item), index })
+      const rowId = getItemRowId(item, index)
+      itemsById.set(rowId, item)
+      allRowIds.push(rowId)
     }
-    return meta
-  }, [items, getRowId])
 
-  const itemsById = useMemo(() => {
-    const map = new Map<string | number, any>()
-    for (const [item, value] of itemMeta.entries()) {
-      map.set(value.rowId, item)
-    }
-    return map
-  }, [itemMeta])
-
-  const allRowIds = useMemo(
-    () => Array.from(itemsById.keys()),
-    [itemsById]
-  )
+    return { itemsById, allRowIds, getItemRowId }
+  }, [items, props.getKey])
 
   const updateSelection = useCallback(
     (nextSelectedRowIds: Set<string | number>) => {
@@ -281,7 +270,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
               )
             },
             renderCell: (item: any) => {
-              const rowId = itemMeta.get(item)?.rowId ?? getRowId(item)
+              const index = items.indexOf(item)
+              const rowId = getItemRowId(item, index)
               return (
                 <Checkbox
                   checked={selectedRowIds.has(rowId)}
@@ -310,13 +300,16 @@ export const List: ReusableComponent<IListProps> = (props) => {
     const listColumns = columns.map((column) => ({
       columnId: column.key,
       renderHeaderCell: () => renderHeaderCellContent(column),
-      renderCell: (item: any) => (
-        <ItemColumn
-          item={item}
-          column={column}
-          index={itemMeta.get(item)?.index ?? 0}
-        />
-      ),
+      renderCell: (item: any) => {
+        const index = items.indexOf(item)
+        return (
+          <ItemColumn
+            item={item}
+            column={column}
+            index={index}
+          />
+        )
+      },
       compare: column.data?.isSortable ? (a: any, b: any) => {
         const fieldName = column.fieldName
         if (!fieldName) return 0
@@ -336,8 +329,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
   }, [
     allRowIds,
     columns,
-    getRowId,
-    itemMeta,
+    items,
+    getItemRowId,
     renderHeaderCellContent,
     selectedRowIds,
     selectionMode,
@@ -449,9 +442,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
                     }}
                     subtree={
                       <>
-                        {group.items.map((item, index) => {
-                          const rowId =
-                            itemMeta.get(item)?.rowId ?? getRowId(item)
+                        {group.items.map((item, groupIndex) => {
+                          const itemIndex = items.indexOf(item)
+                          const rowId = getItemRowId(item, itemIndex)
                           return (
                             <TreeGridRow
                               key={rowId}
@@ -482,7 +475,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                   <ItemColumn
                                     item={item}
                                     column={column}
-                                    index={itemMeta.get(item)?.index ?? index}
+                                    index={itemIndex}
                                   />
                                 </TreeGridCell>
                               ))}
@@ -517,7 +510,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
             <DataGrid
               items={items}
               columns={dataGridColumns}
-              getRowId={getRowId}
+              getRowId={(item) => {
+                const index = items.indexOf(item)
+                return getItemRowId(item, index)
+              }}
               className={styles.dataGrid}
             >
               <DataGridHeader>

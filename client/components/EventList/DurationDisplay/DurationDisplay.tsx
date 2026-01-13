@@ -1,6 +1,8 @@
 import $date from 'DateUtils'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+// Note: string-format has identical API to @fluentui/react format function
+// Both use {0}, {1}, etc. for positional args and {name} for object properties
 import format from 'string-format'
 import { ModifiedDuration } from './ModifiedDuration'
 import { IDurationDisplayProps } from './types'

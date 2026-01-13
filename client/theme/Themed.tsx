@@ -19,10 +19,20 @@ export const Themed: FC<HTMLProps<HTMLDivElement>> = (props) => {
 
   // Apply theme background color to body element
   useEffect(() => {
+    const originalBg = document.body.style.backgroundColor
+    const originalColor = document.body.style.color
+
     document.body.style.backgroundColor = theme.colorNeutralBackground1
     document.body.style.color = theme.colorNeutralForeground1
+
+    return () => {
+      document.body.style.backgroundColor = originalBg
+      document.body.style.color = originalColor
+    }
   }, [theme])
 
+  // Note: useMemo with empty deps to prevent re-rendering the entire app
+  // when context changes. The FluentProvider will handle theme updates via props.
   return useMemo(
     () => (
       <FluentProvider
@@ -35,6 +45,7 @@ export const Themed: FC<HTMLProps<HTMLDivElement>> = (props) => {
         {props.children}
       </FluentProvider>
     ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 }

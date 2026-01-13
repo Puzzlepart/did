@@ -46,12 +46,20 @@ type GetFluentIconOptions = {
  * @param name - The name of the icon to retrieve.
  * @param options - The options to use when retrieving the icon.
  *
- * @returns The specified Fluent icon with the specified options, or null if not found in catalog.
+ * @returns The specified Fluent icon with the specified options, or a fallback icon if not found.
  */
 export function getFluentIcon(
   name: string,
   options?: GetFluentIconOptions
 ) {
+  // Handle null/undefined/empty names
+  if (_.isEmpty(name) && _.isEmpty(options?.default)) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('[getFluentIcon] No icon name provided and no default specified')
+    }
+    return null
+  }
+
   name = _.isEmpty(name) ? options?.default : name
 
   // Return icon if it exists in v9 catalog
@@ -63,7 +71,7 @@ export function getFluentIcon(
     const icon = iconCatalog[name]
     const IconComponent = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
     const props: { style?: CSSProperties; title?: string } = {
-      title: options?.title
+      title: options?.title ?? name
     }
     if (color) props.style = { color }
     if (size) {
@@ -76,7 +84,30 @@ export function getFluentIcon(
     return <IconComponent {...props} filled={filled} />
   }
 
-  // Icon not found in catalog
+  // Icon not found in catalog - use fallback
+  if (process.env.NODE_ENV === 'development') {
+    console.warn(`[getFluentIcon] Icon "${name}" not found in catalog, using fallback`)
+  }
+
+  // Return fallback icon (ErrorCircle)
+  const fallbackIcon = iconCatalog['ErrorCircle']
+  if (fallbackIcon) {
+    const FallbackComponent = bundleIcon(fallbackIcon.filled, fallbackIcon.regular)
+    const props: { style?: CSSProperties; title?: string } = {
+      title: `Missing icon: ${name}`
+    }
+    if (options?.color) props.style = { color: options.color }
+    if (options?.size) {
+      props.style = {
+        ...props.style,
+        width: options.size,
+        height: options.size
+      }
+    }
+    return <FallbackComponent {...props} />
+  }
+
+  // Ultimate fallback if even ErrorCircle doesn't exist
   return null
 }
 

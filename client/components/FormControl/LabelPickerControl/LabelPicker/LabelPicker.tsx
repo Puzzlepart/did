@@ -37,6 +37,7 @@ export const LabelPicker: StyledComponent<ILabelPickerProps> = (props) => {
                       ({ name }) => name === label.name
                     )}
                     className={styles.itemCheckbox}
+                    // v9 Checkbox supports complex ReactNode content in label prop
                     label={
                       <div style={{ marginLeft: 8 }}>
                         <div>

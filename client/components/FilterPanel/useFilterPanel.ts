@@ -47,6 +47,11 @@ export function useFilterPanel(props: IFilterPanelProps) {
         selected: selected.get(f.key) ?? new Set<string>()
       }))
       .filter(({ selected }) => selected.size > 0)
+
+    // Use signature-based comparison to prevent calling onFiltersUpdated
+    // when filters/selected Maps are recreated but values are unchanged.
+    // This prevents potential infinite loops when parent components reload
+    // items in response to filter changes.
     const signature = updatedFilters
       .map((filter) => {
         const values = Array.from(filter.selected).sort().join('|')

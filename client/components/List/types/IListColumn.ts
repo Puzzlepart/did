@@ -33,7 +33,9 @@ export interface IListColumn<T extends object = any, P extends object = any> {
   maxWidth?: number
 
   /**
-   * Allow resizing (when supported).
+   * Allow resizing (NOT IMPLEMENTED in v9 migration).
+   * This property is accepted for backwards compatibility but has no effect.
+   * Column resizing is not currently supported in the DataGrid implementation.
    */
   isResizable?: boolean
 

@@ -5,7 +5,7 @@ import {
   DialogTitle
 } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import FadeIn from 'react-fade-in'
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
@@ -23,12 +23,21 @@ export type IHotkeyModal = GlobalHotKeysProps & {
  */
 export const HotkeyModal: ReusableComponent<IHotkeyModal> = (props) => {
   const { t } = useTranslation()
-  return (
-    <Dialog open={props.isOpen} onOpenChange={(_, data) => {
-      if (!data.open && props.onDismiss) {
+  const wasOpenRef = useRef(props.isOpen)
+
+  const handleOpenChange = useCallback(
+    (_: unknown, data: { open: boolean }) => {
+      // Only call onDismiss when transitioning from open to closed
+      if (wasOpenRef.current && !data.open && props.onDismiss) {
         props.onDismiss()
       }
-    }}>
+      wasOpenRef.current = data.open
+    },
+    [props.onDismiss]
+  )
+
+  return (
+    <Dialog open={props.isOpen} onOpenChange={handleOpenChange}>
       <DialogSurface className={HotkeyModal.className}>
         <DialogBody>
           <DialogTitle>{t('common.shortcuts')}</DialogTitle>
