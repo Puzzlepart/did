@@ -15,8 +15,7 @@ export function useColumns() {
 
       {
         minWidth: 100,
-        maxWidth: 100,
-        iconName: 'PromotedDatabase'
+        maxWidth: 100
       },
       (reportLink) =>
         reportLink.published ? (
@@ -30,8 +29,7 @@ export function useColumns() {
       t('admin.reportLinks.promotedLabel'),
       {
         minWidth: 100,
-        maxWidth: 100,
-        iconName: 'PromotedDatabase'
+        maxWidth: 100
       },
       (reportLink) =>
         reportLink.promoted ? (
