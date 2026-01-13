@@ -3,7 +3,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { ReportLink } from 'types'
-import { createColumnDef, getFluentIcon, getFluentIconWithFallback } from 'utils'
+import { createColumnDef, getFluentIcon } from 'utils'
 import styles from './ReportLinks.module.scss'
 
 export function useColumns() {
@@ -47,7 +47,7 @@ export function useColumns() {
       (reportLink) => (
         <div className={styles.nameColumn}>
           <span className={styles.icon}>
-            {getFluentIconWithFallback(reportLink.icon, {
+            {getFluentIcon(reportLink.icon, {
               color: reportLink.iconColor
             })}
           </span>

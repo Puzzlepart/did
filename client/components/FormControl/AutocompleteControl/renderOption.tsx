@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import styles from './AutocompleteControl.module.scss'
 import { ISuggestionItem } from './types'
 
@@ -15,7 +15,7 @@ export const renderOption = (option: ISuggestionItem<any>): ReactElement => {
     <div className={optionClass}>
       <div className={styles.container}>
         <div className={styles.icon} hidden={!option.iconName}>
-          {getFluentIconWithFallback(option.iconName, { size: 22 })}
+          {getFluentIcon(option.iconName, { size: 22 })}
         </div>
         <div className={styles.content}>
           <div className={styles.text}>{option.text}</div>

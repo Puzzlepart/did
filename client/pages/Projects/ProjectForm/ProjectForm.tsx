@@ -5,7 +5,7 @@ import { TabComponent } from 'components/Tabs'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import { BasicInfo } from './BasicInfo'
 import { BudgetTracking } from './BudgetTracking'
 import { Resources } from './Resources'
@@ -77,7 +77,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
           <Tab
             key={tab.value}
             value={tab.value}
-            icon={getFluentIconWithFallback(tab.icon)}
+            icon={getFluentIcon(tab.icon)}
           >
             {tab.label}
           </Tab>

@@ -4,7 +4,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
-import { createColumnDef, getFluentIconWithFallback } from 'utils'
+import { createColumnDef, getFluentIcon } from 'utils'
 import styles from './RolesPermissions.module.scss'
 
 /**
@@ -16,7 +16,7 @@ export function useColumns() {
     createColumnDef<Role>('name', '', { maxWidth: 150 }, (role) => {
       return (
         <div className={styles.nameColumn}>
-          {getFluentIconWithFallback(role.icon)}
+          {getFluentIcon(role.icon)}
           <Caption1>{role.name}</Caption1>
         </div>
       )

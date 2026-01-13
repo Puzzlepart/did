@@ -1,7 +1,7 @@
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { createRouterLink, getFluentIconWithFallback } from 'utils'
+import { createRouterLink, getFluentIcon } from 'utils'
 import styles from './CustomerLink.module.scss'
 import { ICustomerLinkProps } from './types'
 
@@ -16,7 +16,7 @@ export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
     <div className={CustomerLink.className}>
       {props.showIcon && (
         <span className={styles.icon}>
-          {getFluentIconWithFallback(props.customer?.icon)}
+          {getFluentIcon(props.customer?.icon)}
         </span>
       )}
       <Link

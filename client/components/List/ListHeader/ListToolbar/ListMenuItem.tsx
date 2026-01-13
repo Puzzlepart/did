@@ -4,7 +4,7 @@ import { MenuItemCheckboxProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
 import { ListCommandBarItem } from 'components/List/types'
-import { FluentIconName, getFluentIconWithFallback } from 'utils'
+import { FluentIconName, getFluentIcon } from 'utils'
 
 export type ListMenuItemGroup = 'default' | 'actions'
 
@@ -280,7 +280,7 @@ export class ListMenuItem {
    */
   public static createIcon(item: ListMenuItem) {
     if (typeof item._iconName === 'string') {
-      return getFluentIconWithFallback(item._iconName)
+      return getFluentIcon(item._iconName)
     }
     if (item._iconName) {
       const IconElement = item._iconName as any
@@ -403,7 +403,7 @@ export class ListMenuItem {
         }
         break
     }
-    if (this._iconName) props.icon = getFluentIconWithFallback(this._iconName)
+    if (this._iconName) props.icon = getFluentIcon(this._iconName)
     if (this._onClick) props.onClick = this._onClick
     props.disabled = this._disabled
     props.title = this._title

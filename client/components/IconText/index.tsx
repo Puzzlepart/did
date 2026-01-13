@@ -1,6 +1,6 @@
 import { ReusableComponent } from 'components/types'
 import React from 'react'
-import { getFluentIconWithFallback } from 'utils/getFluentIcon'
+import { getFluentIcon } from 'utils/getFluentIcon'
 import styles from './IconText.module.scss'
 import { IIconTextProps } from './types'
 
@@ -12,7 +12,7 @@ import { IIconTextProps } from './types'
 export const IconText: ReusableComponent<IIconTextProps> = (props) => {
   return (
     <div className={IconText.className}>
-      {getFluentIconWithFallback(props.iconName, {
+      {getFluentIcon(props.iconName, {
         color: props.styles?.root?.color as string,
         size: props.styles?.root?.fontSize
       })}

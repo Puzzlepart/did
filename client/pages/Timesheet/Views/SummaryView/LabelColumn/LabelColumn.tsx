@@ -1,7 +1,7 @@
 import { EntityLabel } from 'components/EntityLabel'
 import React from 'react'
 import { LabelObject as Label, StyledComponent } from 'types'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import _ from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { ILabelColumnProps } from './types'
@@ -14,7 +14,7 @@ export const LabelColumn: StyledComponent<ILabelColumnProps> = (props) => {
     return (
       <div className={LabelColumn.className}>
         <div className={styles.iconContainer}>
-          {getFluentIconWithFallback(props.project.icon, { size: 18 })}
+          {getFluentIcon(props.project.icon, { size: 18 })}
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{props.project.name}</div>

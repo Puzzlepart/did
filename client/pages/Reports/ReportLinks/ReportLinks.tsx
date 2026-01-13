@@ -4,7 +4,7 @@ import { UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import { ReportLinkTooltip } from './ReportLinkTooltip'
 import styles from './ReportLinks.module.scss'
 import { IReportLinksProps } from './types'
@@ -32,7 +32,7 @@ export const ReportLinks: StyledComponent<IReportLinksProps> = (props) => {
             <Button
               className={styles.link}
               onClick={() => window.open(link.externalUrl, '_blank')}
-              icon={getFluentIconWithFallback(link.icon, {
+              icon={getFluentIcon(link.icon, {
                 color: link.iconColor
               })}
             >

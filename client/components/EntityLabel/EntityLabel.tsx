@@ -2,7 +2,7 @@ import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import s from 'underscore.string'
-import { getContrastColor, getFluentIconWithFallback } from 'utils'
+import { getContrastColor, getFluentIcon } from 'utils'
 import styles from './EntityLabel.module.scss'
 import { IEntityLabelProps } from './types'
 
@@ -30,7 +30,7 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
     >
       {label.icon && (
         <span style={{ marginRight: 6, display: 'inline-flex' }}>
-          {getFluentIconWithFallback(label.icon, { color: contrastColor })}
+          {getFluentIcon(label.icon, { color: contrastColor })}
         </span>
       )}
       <span style={{ color: contrastColor }}>
