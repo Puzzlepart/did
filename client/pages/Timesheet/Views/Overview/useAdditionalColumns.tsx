@@ -21,13 +21,13 @@ export function useAdditionalColumns() {
           createColumnDef<EventObject>(
             'customer',
             t('common.customer'),
-            { minWidth: 150, maxWidth: 200 },
+            { minWidth: 150, maxWidth: 9999 },
             (event) => <CustomerLink customer={event.customer} />
           ),
         createColumnDef<EventObject>(
           'project',
           t('common.project'),
-          { minWidth: 150, maxWidth: 300 },
+          { minWidth: 150, maxWidth: 9999 },
           (event) => (
             <ProjectColumn event={event} includeCustomerLink={isMobile} />
           )

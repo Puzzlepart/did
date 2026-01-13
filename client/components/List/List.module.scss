@@ -28,6 +28,8 @@
 .dataGridHeaderRow,
 .treeGridHeaderRow {
   border-top: 1px solid rgb(234, 234, 234);
+  display: flex;
+  width: 100%;
 }
 
 .headerCell,
@@ -35,6 +37,7 @@
   padding-top: 8px;
   min-width: 0;
   overflow: hidden;
+  flex: 1 1 auto;
 }
 
 .headerContent {
@@ -62,6 +65,8 @@
 
 .dataGridRow {
   min-height: 40px;
+  display: flex;
+  width: 100%;
 }
 
 .cell,
@@ -70,6 +75,7 @@
   align-items: center;
   min-width: 0;
   overflow: hidden;
+  flex: 1 1 auto;
 }
 
 .cell > *,
@@ -116,6 +122,8 @@
 
 .treeGridRow {
   min-height: 40px;
+  display: flex;
+  width: 100%;
 }
 
 .nowrap {
