@@ -18,7 +18,6 @@ import { UPDATE_BREADCRUMB } from '../../app/reducer'
 import { ITabHeaderProps, TabHeader } from './TabHeader'
 import { ITabProps, ITabsProps } from './types'
 import { useTabsSelection } from './useTabsSelection'
-import _ from 'underscore'
 
 type UseTabsReturnType = {
   selectedValue: string

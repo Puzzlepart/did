@@ -59,7 +59,6 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
         }
       )
     }
-    return true
   }
   return true
 }
