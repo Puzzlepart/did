@@ -42,13 +42,13 @@ export function useListGroups<T = any>(
   const itemsSort = { props: [groupByFieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames_ = items.map((g) =>
-    get(g, groupByFieldName, { default: defaultGroupName }).toString()
+    get(g as any, groupByFieldName, { default: defaultGroupName }).toString()
   )
   const uniqueGroupNames =
     groupNames || _.unique(groupNames_).sort((a, b) => (a > b ? 1 : -1))
   const groups = uniqueGroupNames.map((name, index): ListGroup<T> => {
     const items_ = items.filter((item) => {
-      const itemValue = `${get(item, groupByFieldName, {
+      const itemValue = `${get(item as any, groupByFieldName, {
         default: defaultGroupName
       })}`
       return `${itemValue}`.toLowerCase() === name.toLowerCase()
@@ -57,13 +57,13 @@ export function useListGroups<T = any>(
     const group: ListGroup<T> = {
       key: name,
       name,
+      items: items_,
       data: {
         ...(groupData && groupData[index]),
         total,
         styles: context.props.listGroupProps.styles
       }
     }
-    group.items = items_
     return group
   })
   return [groups, items]

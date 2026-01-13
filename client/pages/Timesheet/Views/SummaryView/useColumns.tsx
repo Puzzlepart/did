@@ -44,27 +44,17 @@ export function useColumns(): IListColumn[] {
           i++
         ) {
           const day = context.state.dateRange.getDay(i)
+          const holiday = day.isNationalHoliday(
+            context.state.selectedPeriod?.holidays
+          )
           columns.push({
             key: day.format('YYYY-MM-DD'),
             fieldName: day.format('YYYY-MM-DD'),
             name: s.capitalize(day.format('ddd DD')),
             minWidth: 70,
             maxWidth: 70,
-            onRender,
-            onRenderHeader: (props, defaultRender) => {
-              const holiday = day.isNationalHoliday(
-                context.state.selectedPeriod?.holidays
-              )
-              return (
-                <div
-                  title={holiday?.name}
-                  style={{ color: holiday && tokens.colorPaletteRedForeground1 }}
-                >
-                  {defaultRender(props)}
-                </div>
-              )
-            }
-          })
+            onRender
+          } as any)
         }
       }
       break

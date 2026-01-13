@@ -35,7 +35,6 @@ export const ColumnHeaderContextMenu: FC = () => {
                   key={item.key}
                   name='columnHeader'
                   value={item.key}
-                  checked={item.checked}
                   disabled={item.disabled}
                   onClick={() => {
                     item.onClick?.()

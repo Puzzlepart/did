@@ -64,13 +64,6 @@ export const DateRangePicker: StyledComponent = () => {
           firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
           dateRangeType={state.dateRangeType}
           value={state.dateRange.startDate.jsDate}
-          calendarMonthProps={{
-            styles: {
-              currentItemButton: {
-                color: tokens.colorNeutralForeground1
-              }
-            }
-          }}
         />
       </PopoverSurface>
     </Popover>

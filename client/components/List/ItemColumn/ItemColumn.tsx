@@ -17,7 +17,11 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = (props) => {
   // If there's a custom onRender function, call it regardless of fieldValue
   // The custom render function may want to handle null/undefined values
   if (props.column.onRender) {
-    const element = props.column.onRender(props.item, props.index, props.column)
+    const element = props.column.onRender(
+      props.item,
+      props.index,
+      props.column as any
+    )
     return (
       <div className={ItemColumn.className} style={style}>
         {element}

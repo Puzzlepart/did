@@ -13,6 +13,16 @@ export interface ISearchProjectProps
     | 'maxSuggestions'
   > {
   /**
+   * Optional width of the search box
+   */
+  width?: string
+
+  /**
+   * Auto focus the search box when rendered
+   */
+  autoFocus?: boolean
+
+  /**
    * Callback when a project is selected.
    *
    * @param project The selected project

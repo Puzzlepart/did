@@ -28,7 +28,7 @@ export function useSaveFilterForm() {
       return
     }
     context.dispatch(ADD_SAVED_FILTER({ model: $ }))
-    $set(INITIAL_MODEL)
+    $set(INITIAL_MODEL as any)
     inputVisible.setFalse()
   }
 

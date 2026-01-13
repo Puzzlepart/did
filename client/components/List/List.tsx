@@ -67,15 +67,17 @@ export const List: ReusableComponent<IListProps> = (props) => {
     props.checkboxVisibility ?? CheckboxVisibility.onHover
 
   const getRowId = useCallback(
-    (item: any, index: number) =>
-      props.getKey?.(item, index) ?? item?.id ?? index,
-    [props.getKey]
+    (item: any) => {
+      const index = items.indexOf(item)
+      return props.getKey?.(item, index) ?? item?.id ?? index
+    },
+    [props.getKey, items]
   )
 
   const itemMeta = useMemo(() => {
     const meta = new Map<any, { rowId: string | number; index: number }>()
     for (const [index, item] of items.entries()) {
-      meta.set(item, { rowId: getRowId(item, index), index })
+      meta.set(item, { rowId: getRowId(item), index })
     }
     return meta
   }, [items, getRowId])
@@ -266,8 +268,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
               )
               return (
                 <Checkbox
-                  checked={allSelected}
-                  indeterminate={!allSelected && someSelected}
+                  checked={
+                    allSelected ? true : someSelected ? 'mixed' : false
+                  }
                   onClick={(event) => event.stopPropagation()}
                   onChange={(_event, data) => {
                     updateSelection(
@@ -278,7 +281,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               )
             },
             renderCell: (item: any) => {
-              const rowId = itemMeta.get(item)?.rowId ?? getRowId(item, 0)
+              const rowId = itemMeta.get(item)?.rowId ?? getRowId(item)
               return (
                 <Checkbox
                   checked={selectedRowIds.has(rowId)}
@@ -341,6 +344,17 @@ export const List: ReusableComponent<IListProps> = (props) => {
     shouldShowSelectionColumn,
     updateSelection
   ])
+
+  // Create a map of columnId to column metadata for v9 DataGrid
+  const columnMetaMap = useMemo(() => {
+    const map = new Map<string, IListColumn>()
+    for (const col of dataGridColumns) {
+      if ((col as any).column) {
+        map.set(col.columnId, (col as any).column)
+      }
+    }
+    return map
+  }, [dataGridColumns])
 
   const hasMenuItems =
     typeof props.menuItems === 'function'
@@ -437,7 +451,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       <>
                         {group.items.map((item, index) => {
                           const rowId =
-                            itemMeta.get(item)?.rowId ?? getRowId(item, index)
+                            itemMeta.get(item)?.rowId ?? getRowId(item)
                           return (
                             <TreeGridRow
                               key={rowId}
@@ -508,9 +522,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
             >
               <DataGridHeader>
                 <DataGridRow className={styles.dataGridHeaderRow}>
-                  {({ renderHeaderCell, columnId, column }) => {
-                    const columnMeta = (column as { column?: IListColumn })
-                      ?.column
+                  {({ renderHeaderCell, columnId }) => {
+                    const columnMeta = columnMetaMap.get(String(columnId))
                     const isSelectionColumn = columnId === 'selection'
                     return (
                       <DataGridHeaderCell
@@ -556,9 +569,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       handleRowDoubleClick(event, item)
                     }
                   >
-                    {({ renderCell, columnId, column }) => {
-                      const columnMeta = (column as { column?: IListColumn })
-                        ?.column
+                    {({ renderCell, columnId }) => {
+                      const columnMeta = columnMetaMap.get(String(columnId))
                       const isSelectionColumn = columnId === 'selection'
                       return (
                         <DataGridCell
