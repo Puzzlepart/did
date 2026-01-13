@@ -17,14 +17,14 @@ import { Project } from 'types'
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const context = useProjectsContext()
   const { items, columns, menuItems, showInactive } = useProjectList(props)
+  const canSelect = typeof context.dispatch === 'function'
   return (
     <>
-      <List
+      <List 
         {...props}
         enableShimmer={context.loading}
         items={items}
         columns={columns}
-        groups={props.groups}
         menuItems={menuItems}
         filterValues={
           showInactive.value
@@ -34,11 +34,15 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
               }
         }
         checkboxVisibility={CheckboxVisibility.onHover}
-        selectionProps={[
-          SelectionMode.multiple,
-          (selected) =>
-            context.dispatch(SET_SELECTED_PROJECTS(selected as Project[]))
-        ]}
+        selectionProps={
+          canSelect
+            ? [
+                SelectionMode.multiple,
+                (selected) =>
+                  context.dispatch?.(SET_SELECTED_PROJECTS(selected as Project[]))
+              ]
+            : undefined
+        }
       />
       {props.children}
     </>
