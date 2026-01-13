@@ -1,4 +1,3 @@
-import { Icon } from '@fluentui/react'
 import { bundleIcon } from '@fluentui/react-icons'
 import React, { CSSProperties } from 'react'
 import { iconCatalog } from 'theme/iconCatalog'
@@ -43,12 +42,11 @@ type GetFluentIconOptions = {
 
 /**
  * Returns the Fluent icon with the specified name.
- * Automatically falls back to v8 Icon component if the icon is not found in the v9 catalog.
  *
  * @param name - The name of the icon to retrieve.
  * @param options - The options to use when retrieving the icon.
  *
- * @returns The specified Fluent icon with the specified options, or a v8 Icon fallback if not found.
+ * @returns The specified Fluent icon with the specified options, or null if not found in catalog.
  */
 export function getFluentIcon(
   name: string,
@@ -56,7 +54,7 @@ export function getFluentIcon(
 ) {
   name = _.isEmpty(name) ? options?.default : name
 
-  // If icon exists in v9 catalog, use it
+  // Return icon if it exists in v9 catalog
   if (_.has(iconCatalog, name)) {
     const bundle = options?.bundle ?? true
     const color = options?.color
@@ -78,13 +76,8 @@ export function getFluentIcon(
     return <IconComponent {...props} filled={filled} />
   }
 
-  // Fallback to v8 Icon for icons not yet migrated to v9
-  return (
-    <Icon
-      iconName={name}
-      style={{ color: options?.color, fontSize: options?.size }}
-    />
-  )
+  // Icon not found in catalog
+  return null
 }
 
 /**

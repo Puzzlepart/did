@@ -61,7 +61,6 @@
     "@babel/core": "7.24.6",
     "@babel/preset-env": "7.24.6",
     "@fluentui-contrib/react-tree-grid": "^0.3.2",
-    "@fluentui/react": "8.118.6",
     "@fluentui/react-breadcrumb-preview": "1.0.5",
     "@fluentui/react-components": "9.53.0",
     "@fluentui/react-datepicker-compat": "0.4.39",
