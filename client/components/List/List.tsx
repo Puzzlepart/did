@@ -416,7 +416,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       width:
                         column.minWidth === column.maxWidth
                           ? column.minWidth
-                          : undefined
+                          : undefined,
+                      flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
                     }}
                   >
                     {renderHeaderCellContent(column)}
@@ -469,7 +470,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                     width:
                                       column.minWidth === column.maxWidth
                                         ? column.minWidth
-                                        : undefined
+                                        : undefined,
+                                    flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
                                   }}
                                 >
                                   <ItemColumn
@@ -539,7 +541,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
                           width:
                             columnMeta?.minWidth === columnMeta?.maxWidth
                               ? columnMeta?.minWidth
-                              : undefined
+                              : undefined,
+                          flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
                         }}
                         onClick={() =>
                           columnMeta && handleHeaderClick(columnMeta)
@@ -587,7 +590,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
                             width:
                               columnMeta?.minWidth === columnMeta?.maxWidth
                                 ? columnMeta?.minWidth
-                                : undefined
+                                : undefined,
+                            flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
                           }}
                         >
                           {renderCell(item)}

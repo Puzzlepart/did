@@ -53,7 +53,7 @@ const createTitleColumnDef = (
   return createColumnDef<EventObject>(
     'title',
     name,
-    { ...getSizing(props, 'title', 200, 9999), isMultiline: true },
+    { ...getSizing(props, 'title', 200, 600), isMultiline: true },
     (event) => <TitleColumn {...titleColumnProps} event={event} />
   )
 }
@@ -71,7 +71,7 @@ const createTimeColumnDef = (
   createColumnDef<TimeEntry>(
     'time',
     name,
-    { ...getSizing(props, 'time', 90, 90) },
+    { ...getSizing(props, 'time', 115, 130) },
     (event) => <TimeColumn {...props} event={event} />
   )
 
@@ -88,7 +88,7 @@ const createDurationColumnDef = (
   createColumnDef<TimeEntry>(
     'duration',
     name,
-    { ...getSizing(props, 'duration', 75, 75) },
+    { ...getSizing(props, 'duration', 95, 110) },
     (event) => <DurationDisplay event={event} {...props.durationColumn} />
   )
 
