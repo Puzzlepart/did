@@ -74,7 +74,7 @@ export const useReportsFormSubmit: FormSubmitHook<
   const isFormValid =
     !s.isBlank(model.value('name', '')) &&
     isValidUrl(model.value('externalUrl', '')) &&
-    !s.isBlank(model.value('icon' as any, '')) &&
+    !s.isBlank(model.value('iconName' as any, '')) &&
     !s.isBlank(model.value('iconColor' as any, '')) &&
     !s.isBlank(model.value('description', ''))
 

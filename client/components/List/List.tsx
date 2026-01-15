@@ -364,13 +364,13 @@ export const List: ReusableComponent<IListProps> = (props) => {
     const columnMeta = dataGridColumns
       .map((col) => (col as { column?: IListColumn }).column)
       .filter(Boolean) as IListColumn[]
-    if (!columnMeta.length) return ''
-    return columnMeta.map(getColumnTrackSize).join(' ')
+    if (columnMeta.length === 0) return ''
+    return columnMeta.map((column) => getColumnTrackSize(column)).join(' ')
   }, [dataGridColumns, getColumnTrackSize])
 
   const treeGridTemplateColumns = useMemo(() => {
-    if (!columns.length) return ''
-    return columns.map(getColumnTrackSize).join(' ')
+    if (columns.length === 0) return ''
+    return columns.map((column) => getColumnTrackSize(column)).join(' ')
   }, [columns, getColumnTrackSize])
 
   const dataGridStyle = useMemo(

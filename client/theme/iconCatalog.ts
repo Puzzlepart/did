@@ -93,6 +93,8 @@ import {
   Dismiss24Regular,
   DocumentDatabase24Filled,
   DocumentDatabase24Regular,
+  DocumentTableFilled,
+  DocumentTableRegular,
   DrinkMargarita24Filled,
   DrinkMargarita24Regular,
   Edit24Filled,
@@ -105,6 +107,8 @@ import {
   Eye24Regular,
   FastForward24Filled,
   FastForward24Regular,
+  FilterFilled,
+  FilterRegular,
   HeartFilled,
   HeartRegular,
   Home24Filled,
@@ -139,8 +143,12 @@ import {
   PersonProhibited24Regular,
   PersonSync24Filled,
   PersonSync24Regular,
+  PlayFilled,
+  PlayRegular,
   SelectAllOff24Filled,
   SelectAllOff24Regular,
+  SettingsFilled,
+  SettingsRegular,
   SignOut24Filled,
   SignOut24Regular,
   StoreMicrosoft24Filled,
@@ -226,6 +234,18 @@ export const iconCatalog = {
   Document: {
     regular: DocumentRegular,
     filled: DocumentFilled
+  },
+  DocumentTable: {
+    regular: DocumentTableRegular,
+    filled: DocumentTableFilled
+  },
+  ExcelDocument: {
+    regular: DocumentTableRegular,
+    filled: DocumentTableFilled
+  },
+  ExcelLogoInverse: {
+    regular: DocumentTableRegular,
+    filled: DocumentTableFilled
   },
   Folder: {
     regular: FolderRegular,
@@ -571,6 +591,14 @@ export const iconCatalog = {
     regular: FastForward24Regular,
     filled: FastForward24Filled
   },
+  Filter: {
+    regular: FilterRegular,
+    filled: FilterFilled
+  },
+  Play: {
+    regular: PlayRegular,
+    filled: PlayFilled
+  },
   TableEdit: {
     regular: TableEdit24Regular,
     filled: TableEdit24Filled
@@ -582,6 +610,10 @@ export const iconCatalog = {
   System: {
     regular: System24Regular,
     filled: System24Filled
+  },
+  Settings: {
+    regular: SettingsRegular,
+    filled: SettingsFilled
   },
   SignOut: {
     regular: SignOut24Regular,
