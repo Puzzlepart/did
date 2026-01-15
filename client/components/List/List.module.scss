@@ -23,17 +23,14 @@
 
 .dataGrid {
   width: 100%;
-
-  // Ensure columns fill available width proportionally
-  :global(.fui-DataGridHeaderCell),
-  :global(.fui-DataGridCell) {
-    flex: 1 1 auto;
-  }
 }
 
-.dataGridHeaderRow,
-.treeGridHeaderRow {
+.dataGridHeaderRow:global(.fui-TableRow),
+.treeGridHeaderRow:global(.fui-TreeGridRow) {
   border-top: 1px solid rgb(234, 234, 234);
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--list-grid-template, auto);
 }
 
 .headerCell,
@@ -66,8 +63,11 @@
   align-items: center;
 }
 
-.dataGridRow {
+.dataGridRow:global(.fui-TableRow) {
   min-height: 40px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--list-grid-template, auto);
 }
 
 .cell,
@@ -118,15 +118,13 @@
 
 .treeGrid {
   width: 100%;
-
-  // Ensure tree grid cells fill available width proportionally
-  :global(.fui-TreeGridCell) {
-    flex: 0 1 auto;
-  }
 }
 
-.treeGridRow {
+.treeGridRow:global(.fui-TreeGridRow) {
   min-height: 40px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--list-grid-template, auto);
 }
 
 .nowrap {

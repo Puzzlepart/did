@@ -349,6 +349,46 @@ export const List: ReusableComponent<IListProps> = (props) => {
     return map
   }, [dataGridColumns])
 
+  const getColumnTrackSize = useCallback((column: IListColumn) => {
+    const minWidth = column.minWidth ?? 100
+    const maxWidth = column.maxWidth
+    if (maxWidth != null) {
+      return maxWidth <= minWidth
+        ? `${minWidth}px`
+        : `minmax(${minWidth}px, ${maxWidth}px)`
+    }
+    return `minmax(${minWidth}px, 1fr)`
+  }, [])
+
+  const dataGridTemplateColumns = useMemo(() => {
+    const columnMeta = dataGridColumns
+      .map((col) => (col as { column?: IListColumn }).column)
+      .filter(Boolean) as IListColumn[]
+    if (!columnMeta.length) return ''
+    return columnMeta.map(getColumnTrackSize).join(' ')
+  }, [dataGridColumns, getColumnTrackSize])
+
+  const treeGridTemplateColumns = useMemo(() => {
+    if (!columns.length) return ''
+    return columns.map(getColumnTrackSize).join(' ')
+  }, [columns, getColumnTrackSize])
+
+  const dataGridStyle = useMemo(
+    () =>
+      dataGridTemplateColumns
+        ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
+        : undefined,
+    [dataGridTemplateColumns]
+  )
+
+  const treeGridStyle = useMemo(
+    () =>
+      treeGridTemplateColumns
+        ? ({ '--list-grid-template': treeGridTemplateColumns } as React.CSSProperties)
+        : undefined,
+    [treeGridTemplateColumns]
+  )
+
   const hasMenuItems =
     typeof props.menuItems === 'function'
       ? true
@@ -399,7 +439,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               ))}
             </Skeleton>
           ) : (isGrouped ? (
-            <TreeGrid className={styles.treeGrid}>
+            <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
               <TreeGridRow className={styles.treeGridHeaderRow}>
                 {columns.map((column) => (
                   <TreeGridCell
@@ -517,6 +557,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                 return getItemRowId(item, index)
               }}
               className={styles.dataGrid}
+              style={dataGridStyle}
             >
               <DataGridHeader>
                 <DataGridRow className={styles.dataGridHeaderRow}>
