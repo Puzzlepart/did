@@ -709,6 +709,8 @@
     },
     "headerTotalDuration": " ({{duration}})",
     "groupBy": "Group by",
+    "expandAllGroups": "Expand all groups",
+    "collapseAllGroups": "Collapse all groups",
     "all": "All",
     "none": "None",
     "previousMonth": "Last month ({{monthName}})",

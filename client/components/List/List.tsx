@@ -20,6 +20,7 @@ import {
 } from '@fluentui-contrib/react-tree-grid'
 import { ReusableComponent } from 'components/types'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils/getFluentIcon'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { ListContext } from './context'
@@ -49,6 +50,7 @@ import { ViewColumnsPanel } from './ViewColumnsPanel'
  * @category Reusable Component
  */
 export const List: ReusableComponent<IListProps> = (props) => {
+  const { t } = useTranslation()
   const { context, columns, items } = useList(props)
   const [groups] = useListGroups(context)
   const isGrouped = groups.length > 0
@@ -389,6 +391,23 @@ export const List: ReusableComponent<IListProps> = (props) => {
     [treeGridTemplateColumns]
   )
 
+  const hasGroups = isGrouped && groups.length > 0
+  const allGroupsOpen =
+    hasGroups &&
+    groups.every((group) => openGroups[group.key] ?? true)
+  const toggleAllLabel = allGroupsOpen
+    ? t('common.collapseAllGroups')
+    : t('common.expandAllGroups')
+  const handleToggleAllGroups = useCallback(() => {
+    if (!hasGroups) return
+    const nextOpen = !allGroupsOpen
+    const nextGroups: Record<string, boolean> = {}
+    for (const group of groups) {
+      nextGroups[group.key] = nextOpen
+    }
+    setOpenGroups(nextGroups)
+  }, [allGroupsOpen, groups, hasGroups])
+
   const hasMenuItems =
     typeof props.menuItems === 'function'
       ? true
@@ -441,7 +460,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
           ) : (isGrouped ? (
             <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
               <TreeGridRow className={styles.treeGridHeaderRow}>
-                {columns.map((column) => (
+                {columns.map((column, index) => (
                   <TreeGridCell
                     key={column.key}
                     header
@@ -460,7 +479,23 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
                     }}
                   >
-                    {renderHeaderCellContent(column)}
+                    <div className={styles.treeGridHeaderContent}>
+                      {index === 0 && hasGroups && (
+                        <button
+                          type="button"
+                          className={styles.treeGridToggleAllButton}
+                          onClick={(event) => {
+                            event.stopPropagation()
+                            handleToggleAllGroups()
+                          }}
+                          aria-label={toggleAllLabel}
+                          title={toggleAllLabel}
+                        >
+                          {allGroupsOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                        </button>
+                      )}
+                      {renderHeaderCellContent(column)}
+                    </div>
                   </TreeGridCell>
                 ))}
               </TreeGridRow>
@@ -541,7 +576,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                     >
                       <span>{group.name}</span>
                       {total && (
-                        <span className={styles.groupHeaderTotal}>{total}</span>
+                        <span className={styles.groupHeaderTotal}>({total})</span>
                       )}
                     </TreeGridCell>
                   </TreeGridRow>
