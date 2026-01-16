@@ -33,7 +33,9 @@ const legacyIconAliases: Record<string, FluentIconName> = {
   TaskGroupMirrored: 'GroupList',
   TestIcon: 'ErrorCircle',
   Telemarketer: 'Person',
-  TimeSheet: 'CalendarWorkWeek'
+  TimeSheet: 'CalendarWorkWeek',
+  Vacation: 'WeatherSunnyLow',
+  Health: 'Heart'
 }
 
 const missingIconWarnings = new Set<string>()
