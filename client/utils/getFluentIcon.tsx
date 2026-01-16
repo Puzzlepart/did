@@ -8,6 +8,36 @@ import _ from 'lodash'
  */
 export type FluentIconName = keyof typeof iconCatalog
 
+const legacyIconAliases: Record<string, FluentIconName> = {
+  Add: 'Add',
+  AwayStatus: 'PresenceAway',
+  BusinessHoursSign: 'CalendarClock',
+  Calendar: 'Calendar',
+  CalendarDay: 'CalendarDay',
+  CalendarReply: 'CalendarReply',
+  CalendarWeek: 'CalendarWeekNumbers',
+  EatDrink: 'DrinkMargarita',
+  Emoji2: 'EmojiLaugh',
+  EmojiDisappointed: 'EmojiSad',
+  EmojiNeutral: 'EmojiMeh',
+  EmojiTabSymbols: 'EmojiMultiple',
+  FabricUserFolder: 'Folder',
+  LineChart: 'ChartMultiple',
+  Page: 'Document',
+  Previous: 'Previous',
+  ProjectIcon: 'Briefcase',
+  Refresh: 'ArrowSync',
+  ReminderPerson: 'PersonClock',
+  Sad: 'EmojiSadSlight',
+  Storyboard: 'WebAsset',
+  TaskGroupMirrored: 'GroupList',
+  TestIcon: 'ErrorCircle',
+  Telemarketer: 'Person',
+  TimeSheet: 'CalendarWorkWeek'
+}
+
+const missingIconWarnings = new Set<string>()
+
 type GetFluentIconOptions = {
   /**
    * Whether to bundle the icon with the filled version. Defaults to true.
@@ -51,27 +81,30 @@ type GetFluentIconOptions = {
 export function getFluentIcon(
   name: string,
   options?: GetFluentIconOptions
-) {
+): React.ReactElement | null {
   // Handle null/undefined/empty names
   if (_.isEmpty(name) && _.isEmpty(options?.default)) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('[getFluentIcon] No icon name provided and no default specified')
-    }
     return null
   }
 
-  name = _.isEmpty(name) ? options?.default : name
+  const resolvedName = _.isEmpty(name) ? options?.default : name
+  const aliasName = legacyIconAliases[resolvedName] ?? resolvedName
 
-  // Return icon if it exists in v9 catalog
-  if (_.has(iconCatalog, name)) {
+  const hasAlias = _.has(iconCatalog, aliasName)
+  const fallbackName = options?.default
+  const hasFallback = !hasAlias && fallbackName && _.has(iconCatalog, fallbackName)
+  const iconName = hasAlias ? aliasName : (hasFallback ? fallbackName : null)
+
+  // Return icon if it exists in v9 catalog or if a fallback is provided
+  if (iconName) {
     const bundle = options?.bundle ?? true
     const color = options?.color
     const size = options?.size
     const filled = options?.filled ?? false
-    const icon = iconCatalog[name]
+    const icon = iconCatalog[iconName]
     const IconComponent = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
     const props: { style?: CSSProperties; title?: string } = {
-      title: options?.title ?? name
+      title: options?.title ?? iconName
     }
     if (color) props.style = { color }
     if (size) {
@@ -85,8 +118,9 @@ export function getFluentIcon(
   }
 
   // Icon not found in catalog - use fallback
-  if (process.env.NODE_ENV === 'development') {
-    console.warn(`[getFluentIcon] Icon "${name}" not found in catalog, using fallback`)
+  if (process.env.NODE_ENV === 'development' && !missingIconWarnings.has(aliasName)) {
+    missingIconWarnings.add(aliasName)
+    console.warn(`[getFluentIcon] Icon "${aliasName}" not found in catalog, using fallback`)
   }
 
   // Return fallback icon (ErrorCircle)
@@ -94,7 +128,7 @@ export function getFluentIcon(
   if (fallbackIcon) {
     const FallbackComponent = bundleIcon(fallbackIcon.filled, fallbackIcon.regular)
     const props: { style?: CSSProperties; title?: string } = {
-      title: `Missing icon: ${name}`
+      title: `Missing icon: ${aliasName}`
     }
     if (options?.color) props.style = { color: options.color }
     if (options?.size) {

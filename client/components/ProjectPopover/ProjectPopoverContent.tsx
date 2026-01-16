@@ -19,7 +19,11 @@ export const ProjectPopoverContent: StyledComponent<IProjectPopoverProps> = (
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.iconContainer}>
-            {getFluentIcon(props.project.icon, { size: 28 })}
+            {props.project.icon &&
+              getFluentIcon(props.project.icon, {
+                default: 'Briefcase',
+                size: 28
+              })}
           </div>
           <div className={styles.title}>
             <ProjectLink

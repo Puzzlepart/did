@@ -29,6 +29,8 @@ import {
   ArrowUploadFilled,
   AddCircle24Filled,
   AddCircle24Regular,
+  AddFilled,
+  AddRegular,
   Alert24Filled,
   Alert24Regular,
   ArrowCircleLeft24Filled,
@@ -49,20 +51,28 @@ import {
   ArrowUndo24Regular,
   BinRecycle24Filled,
   BinRecycle24Regular,
+  BuildingFilled,
+  BuildingRegular,
   BuildingSkyscraperFilled,
   BuildingSkyscraperRegular,
+  CalendarFilled,
+  CalendarRegular,
   CalendarAdd24Filled,
   CalendarAdd24Regular,
   CalendarCancel24Filled,
   CalendarCancel24Regular,
   CalendarClock24Filled,
   CalendarClock24Regular,
+  CalendarDayFilled,
+  CalendarDayRegular,
   CalendarDateFilled,
   CalendarDateRegular,
   CalendarMonth24Filled,
   CalendarMonth24Regular,
   CalendarPlay24Filled,
   CalendarPlay24Regular,
+  CalendarReplyFilled,
+  CalendarReplyRegular,
   CalendarSync24Filled,
   CalendarSync24Regular,
   CalendarToday24Filled,
@@ -103,12 +113,24 @@ import {
   EditSettings24Regular,
   Emoji24Filled,
   Emoji24Regular,
+  EmojiLaughFilled,
+  EmojiLaughRegular,
+  EmojiMehFilled,
+  EmojiMehRegular,
+  EmojiMultipleFilled,
+  EmojiMultipleRegular,
+  EmojiSadFilled,
+  EmojiSadRegular,
+  EmojiSadSlightFilled,
+  EmojiSadSlightRegular,
   Eye24Filled,
   Eye24Regular,
   FastForward24Filled,
   FastForward24Regular,
   FilterFilled,
   FilterRegular,
+  HandshakeFilled,
+  HandshakeRegular,
   HeartFilled,
   HeartRegular,
   Home24Filled,
@@ -135,6 +157,8 @@ import {
   PeopleEdit24Regular,
   PeopleTeam24Filled,
   PeopleTeam24Regular,
+  PersonClockFilled,
+  PersonClockRegular,
   Person24Filled,
   Person24Regular,
   PersonEdit24Filled,
@@ -145,6 +169,10 @@ import {
   PersonSync24Regular,
   PlayFilled,
   PlayRegular,
+  PresenceAwayFilled,
+  PresenceAwayRegular,
+  PreviousFilled,
+  PreviousRegular,
   SelectAllOff24Filled,
   SelectAllOff24Regular,
   SettingsFilled,
@@ -295,6 +323,10 @@ export const iconCatalog = {
     regular: GroupRegular,
     filled: GroupFilled
   },
+  Handshake: {
+    regular: HandshakeRegular,
+    filled: HandshakeFilled
+  },
   Apps: {
     regular: AppsRegular,
     filled: AppsFilled
@@ -362,6 +394,10 @@ export const iconCatalog = {
   ContentSettings: {
     regular: ContentSettings24Regular,
     filled: ContentSettings24Filled
+  },
+  Building: {
+    regular: BuildingRegular,
+    filled: BuildingFilled
   },
   BuildingSkyscraper: {
     regular: BuildingSkyscraperRegular,
@@ -463,6 +499,26 @@ export const iconCatalog = {
     regular: Emoji24Regular,
     filled: Emoji24Filled
   },
+  EmojiLaugh: {
+    regular: EmojiLaughRegular,
+    filled: EmojiLaughFilled
+  },
+  EmojiMeh: {
+    regular: EmojiMehRegular,
+    filled: EmojiMehFilled
+  },
+  EmojiMultiple: {
+    regular: EmojiMultipleRegular,
+    filled: EmojiMultipleFilled
+  },
+  EmojiSad: {
+    regular: EmojiSadRegular,
+    filled: EmojiSadFilled
+  },
+  EmojiSadSlight: {
+    regular: EmojiSadSlightRegular,
+    filled: EmojiSadSlightFilled
+  },
   Alert: {
     regular: Alert24Regular,
     filled: Alert24Filled
@@ -515,9 +571,17 @@ export const iconCatalog = {
     regular: ArrowImport24Regular,
     filled: ArrowImport24Filled
   },
+  Add: {
+    regular: AddRegular,
+    filled: AddFilled
+  },
   PeopleAdd: {
     regular: PeopleAdd24Regular,
     filled: PeopleAdd24Filled
+  },
+  PersonClock: {
+    regular: PersonClockRegular,
+    filled: PersonClockFilled
   },
   PersonSync: {
     regular: PersonSync24Regular,
@@ -526,6 +590,14 @@ export const iconCatalog = {
   AddCircle: {
     regular: AddCircle24Regular,
     filled: AddCircle24Filled
+  },
+  Calendar: {
+    regular: CalendarRegular,
+    filled: CalendarFilled
+  },
+  CalendarDay: {
+    regular: CalendarDayRegular,
+    filled: CalendarDayFilled
   },
   CalendarWeekNumbers: {
     regular: CalendarWeekNumbers24Regular,
@@ -546,6 +618,10 @@ export const iconCatalog = {
   CalendarMonth: {
     regular: CalendarMonth24Regular,
     filled: CalendarMonth24Filled
+  },
+  CalendarReply: {
+    regular: CalendarReplyRegular,
+    filled: CalendarReplyFilled
   },
   CalendarSync: {
     regular: CalendarSync24Regular,
@@ -590,6 +666,14 @@ export const iconCatalog = {
   FastForward: {
     regular: FastForward24Regular,
     filled: FastForward24Filled
+  },
+  PresenceAway: {
+    regular: PresenceAwayRegular,
+    filled: PresenceAwayFilled
+  },
+  Previous: {
+    regular: PreviousRegular,
+    filled: PreviousFilled
   },
   Filter: {
     regular: FilterRegular,

@@ -14,9 +14,11 @@ import { ICustomerLinkProps } from './types'
 export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
   return (
     <div className={CustomerLink.className}>
-      {props.showIcon && (
+      {props.showIcon && props.customer?.icon && (
         <span className={styles.icon}>
-          {getFluentIcon(props.customer?.icon)}
+          {getFluentIcon(props.customer.icon, {
+            default: 'Building'
+          })}
         </span>
       )}
       <Link

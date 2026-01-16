@@ -30,7 +30,10 @@ export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({
     >
       {label.icon && (
         <span style={{ marginRight: 6, display: 'inline-flex' }}>
-          {getFluentIcon(label.icon, { color: contrastColor })}
+          {getFluentIcon(label.icon, {
+            color: contrastColor,
+            default: 'TagQuestionMark'
+          })}
         </span>
       )}
       <span style={{ color: contrastColor }}>

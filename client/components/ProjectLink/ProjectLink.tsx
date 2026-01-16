@@ -24,9 +24,11 @@ export const ProjectLink: ReusableComponent<IProjectLinkProps> = (props) => {
     case 'link': {
       element = (
         <div className={ProjectLink.className}>
-          {props.showIcon && (
+          {props.showIcon && props.project?.icon && (
             <span className={styles.icon}>
-              {getFluentIcon(props.project?.icon)}
+              {getFluentIcon(props.project.icon, {
+                default: 'Briefcase'
+              })}
             </span>
           )}
           <Link
