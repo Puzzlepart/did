@@ -35,7 +35,14 @@ const legacyIconAliases: Record<string, FluentIconName> = {
   Telemarketer: 'Person',
   TimeSheet: 'CalendarWorkWeek',
   Vacation: 'WeatherSunnyLow',
-  Health: 'Heart'
+  Health: 'Heart',
+  DatabaseSync: 'ArrowSync',
+  M365InvoicingLogo: 'DocumentTable',
+  UserGauge: 'Person',
+  Admin: 'Settings',
+  CrownSolid: 'LockClosed',
+  NavigateExternalInline: 'ArrowExportUp',
+  Globe2: 'Globe'
 }
 
 const missingIconWarnings = new Set<string>()
