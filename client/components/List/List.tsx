@@ -1,16 +1,23 @@
 import {
   Checkbox,
-  DataGrid,
-  DataGridBody,
+  DataGrid as FluentDataGrid,
+  DataGridBody as FluentDataGridBody,
   DataGridCell,
   DataGridHeader,
   DataGridHeaderCell,
-  DataGridRow,
+  DataGridRow as FluentDataGridRow,
   Skeleton,
   SkeletonItem,
   mergeClasses,
-  tokens
+  tokens,
+  useScrollbarWidth,
+  useFluent
 } from '@fluentui/react-components'
+import {
+  DataGrid as VirtualizedDataGrid,
+  DataGridBody as VirtualizedDataGridBody,
+  DataGridRow as VirtualizedDataGridRow
+} from '@fluentui-contrib/react-data-grid-react-window'
 import { ChevronDown20Regular, ChevronRight20Regular } from '@fluentui/react-icons'
 import {
   TreeGrid,
@@ -67,6 +74,12 @@ export const List: ReusableComponent<IListProps> = (props) => {
   }, [onSelectionChanged])
   const checkboxVisibility =
     props.checkboxVisibility ?? CheckboxVisibility.onHover
+
+  // Virtualization support
+  const { targetDocument } = useFluent()
+  const scrollbarWidth = useScrollbarWidth({ targetDocument })
+  const isVirtualized = props.virtualized && props.height && !isGrouped
+  const rowHeight = props.rowHeight ?? 44
 
   // Compute row IDs and create lookup maps in a single pass
   const { itemsById, allRowIds, getItemRowId } = useMemo(() => {
@@ -421,6 +434,211 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   const headerClassName = styles.header
 
+  // Helper function to render the appropriate DataGrid variant
+  const renderDataGrid = () => {
+    if (isVirtualized) {
+      // Virtualized DataGrid for large datasets
+      return (
+        <VirtualizedDataGrid
+          items={items}
+          columns={dataGridColumns}
+          getRowId={(item: any) => {
+            const index = items.indexOf(item)
+            return getItemRowId(item, index)
+          }}
+          className={styles.dataGrid}
+          style={dataGridStyle}
+        >
+          <DataGridHeader style={{ paddingRight: scrollbarWidth }}>
+            <VirtualizedDataGridRow className={styles.dataGridHeaderRow}>
+              {({ renderHeaderCell, columnId }) => {
+                const columnMeta = columnMetaMap.get(String(columnId))
+                const isSelectionColumn = columnId === 'selection'
+                return (
+                  <DataGridHeaderCell
+                    key={columnId}
+                    className={mergeClasses(
+                      styles.headerCell,
+                      props.columnHeaderProps?.className,
+                      isSelectionColumn && styles.selectionCell,
+                      columnMeta?.className,
+                      columnMeta?.isMultiline
+                        ? styles.multiline
+                        : styles.nowrap
+                    )}
+                    style={{
+                      minWidth: columnMeta?.minWidth,
+                      maxWidth: columnMeta?.maxWidth,
+                      width:
+                        columnMeta?.minWidth === columnMeta?.maxWidth
+                          ? columnMeta?.minWidth
+                          : undefined,
+                      flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
+                    }}
+                    onClick={() =>
+                      columnMeta && handleHeaderClick(columnMeta)
+                    }
+                  >
+                    {renderHeaderCell()}
+                  </DataGridHeaderCell>
+                )
+              }}
+            </VirtualizedDataGridRow>
+          </DataGridHeader>
+          <VirtualizedDataGridBody<any>
+            itemSize={rowHeight}
+            height={props.height!}
+          >
+            {({ item, rowId }, style) => (
+              <VirtualizedDataGridRow
+                key={rowId}
+                style={style}
+                className={mergeClasses(
+                  styles.dataGridRow,
+                  checkboxVisibility === CheckboxVisibility.onHover &&
+                    styles.selectionHover
+                )}
+                onClick={(event: React.MouseEvent<HTMLElement>) => handleRowClick(event, rowId)}
+                onDoubleClick={(event: React.MouseEvent<HTMLElement>) =>
+                  handleRowDoubleClick(event, item)
+                }
+              >
+                {({ renderCell, columnId }) => {
+                  const columnMeta = columnMetaMap.get(String(columnId))
+                  const isSelectionColumn = columnId === 'selection'
+                  return (
+                    <DataGridCell
+                      className={mergeClasses(
+                        styles.cell,
+                        isSelectionColumn && styles.selectionCell,
+                        isSelectionColumn &&
+                          checkboxVisibility === CheckboxVisibility.onHover &&
+                          styles.selectionCellHover,
+                        columnMeta?.className,
+                        columnMeta?.isMultiline
+                          ? styles.multiline
+                          : styles.nowrap
+                      )}
+                      style={{
+                        minWidth: columnMeta?.minWidth,
+                        maxWidth: columnMeta?.maxWidth,
+                        width:
+                          columnMeta?.minWidth === columnMeta?.maxWidth
+                            ? columnMeta?.minWidth
+                            : undefined,
+                        flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
+                      }}
+                    >
+                      {renderCell(item)}
+                    </DataGridCell>
+                  )
+                }}
+              </VirtualizedDataGridRow>
+            )}
+          </VirtualizedDataGridBody>
+        </VirtualizedDataGrid>
+      )
+    }
+
+    // Standard DataGrid for smaller datasets
+    return (
+      <FluentDataGrid
+        items={items}
+        columns={dataGridColumns}
+        getRowId={(item: any) => {
+          const index = items.indexOf(item)
+          return getItemRowId(item, index)
+        }}
+        className={styles.dataGrid}
+        style={dataGridStyle}
+      >
+        <DataGridHeader>
+          <FluentDataGridRow className={styles.dataGridHeaderRow}>
+            {({ renderHeaderCell, columnId }) => {
+              const columnMeta = columnMetaMap.get(String(columnId))
+              const isSelectionColumn = columnId === 'selection'
+              return (
+                <DataGridHeaderCell
+                  key={columnId}
+                  className={mergeClasses(
+                    styles.headerCell,
+                    props.columnHeaderProps?.className,
+                    isSelectionColumn && styles.selectionCell,
+                    columnMeta?.className,
+                    columnMeta?.isMultiline
+                      ? styles.multiline
+                      : styles.nowrap
+                  )}
+                  style={{
+                    minWidth: columnMeta?.minWidth,
+                    maxWidth: columnMeta?.maxWidth,
+                    width:
+                      columnMeta?.minWidth === columnMeta?.maxWidth
+                        ? columnMeta?.minWidth
+                        : undefined,
+                    flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
+                  }}
+                  onClick={() =>
+                    columnMeta && handleHeaderClick(columnMeta)
+                  }
+                >
+                  {renderHeaderCell()}
+                </DataGridHeaderCell>
+              )
+            }}
+          </FluentDataGridRow>
+        </DataGridHeader>
+        <FluentDataGridBody>
+          {({ item, rowId }) => (
+            <FluentDataGridRow
+              key={rowId}
+              className={mergeClasses(
+                styles.dataGridRow,
+                checkboxVisibility === CheckboxVisibility.onHover &&
+                  styles.selectionHover
+              )}
+              onClick={(event) => handleRowClick(event, rowId)}
+              onDoubleClick={(event) =>
+                handleRowDoubleClick(event, item)
+              }
+            >
+              {({ renderCell, columnId }) => {
+                const columnMeta = columnMetaMap.get(String(columnId))
+                const isSelectionColumn = columnId === 'selection'
+                return (
+                  <DataGridCell
+                    className={mergeClasses(
+                      styles.cell,
+                      isSelectionColumn && styles.selectionCell,
+                      isSelectionColumn &&
+                        checkboxVisibility === CheckboxVisibility.onHover &&
+                        styles.selectionCellHover,
+                      columnMeta?.className,
+                      columnMeta?.isMultiline
+                        ? styles.multiline
+                        : styles.nowrap
+                    )}
+                    style={{
+                      minWidth: columnMeta?.minWidth,
+                      maxWidth: columnMeta?.maxWidth,
+                      width:
+                        columnMeta?.minWidth === columnMeta?.maxWidth
+                          ? columnMeta?.minWidth
+                          : undefined,
+                      flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
+                    }}
+                  >
+                    {renderCell(item)}
+                  </DataGridCell>
+                )
+              }}
+            </FluentDataGridRow>
+          )}
+        </FluentDataGridBody>
+      </FluentDataGrid>
+    )
+  }
+
   return (
     <div
       className={mergeClasses(
@@ -482,7 +700,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                     <div className={styles.treeGridHeaderContent}>
                       {index === 0 && hasGroups && (
                         <button
-                          type="button"
+                          type='button'
                           className={styles.treeGridToggleAllButton}
                           onClick={(event) => {
                             event.stopPropagation()
@@ -584,100 +802,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               })}
             </TreeGrid>
           ) : (
-            <DataGrid
-              items={items}
-              columns={dataGridColumns}
-              getRowId={(item) => {
-                const index = items.indexOf(item)
-                return getItemRowId(item, index)
-              }}
-              className={styles.dataGrid}
-              style={dataGridStyle}
-            >
-              <DataGridHeader>
-                <DataGridRow className={styles.dataGridHeaderRow}>
-                  {({ renderHeaderCell, columnId }) => {
-                    const columnMeta = columnMetaMap.get(String(columnId))
-                    const isSelectionColumn = columnId === 'selection'
-                    return (
-                      <DataGridHeaderCell
-                        key={columnId}
-                        className={mergeClasses(
-                          styles.headerCell,
-                          props.columnHeaderProps?.className,
-                          isSelectionColumn && styles.selectionCell,
-                          columnMeta?.className,
-                          columnMeta?.isMultiline
-                            ? styles.multiline
-                            : styles.nowrap
-                        )}
-                        style={{
-                          minWidth: columnMeta?.minWidth,
-                          maxWidth: columnMeta?.maxWidth,
-                          width:
-                            columnMeta?.minWidth === columnMeta?.maxWidth
-                              ? columnMeta?.minWidth
-                              : undefined,
-                          flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
-                        }}
-                        onClick={() =>
-                          columnMeta && handleHeaderClick(columnMeta)
-                        }
-                      >
-                        {renderHeaderCell()}
-                      </DataGridHeaderCell>
-                    )
-                  }}
-                </DataGridRow>
-              </DataGridHeader>
-              <DataGridBody>
-                {({ item, rowId }) => (
-                  <DataGridRow
-                    key={rowId}
-                    className={mergeClasses(
-                      styles.dataGridRow,
-                      checkboxVisibility === CheckboxVisibility.onHover &&
-                        styles.selectionHover
-                    )}
-                    onClick={(event) => handleRowClick(event, rowId)}
-                    onDoubleClick={(event) =>
-                      handleRowDoubleClick(event, item)
-                    }
-                  >
-                    {({ renderCell, columnId }) => {
-                      const columnMeta = columnMetaMap.get(String(columnId))
-                      const isSelectionColumn = columnId === 'selection'
-                      return (
-                        <DataGridCell
-                          className={mergeClasses(
-                            styles.cell,
-                            isSelectionColumn && styles.selectionCell,
-                            isSelectionColumn &&
-                              checkboxVisibility === CheckboxVisibility.onHover &&
-                              styles.selectionCellHover,
-                            columnMeta?.className,
-                            columnMeta?.isMultiline
-                              ? styles.multiline
-                              : styles.nowrap
-                          )}
-                          style={{
-                            minWidth: columnMeta?.minWidth,
-                            maxWidth: columnMeta?.maxWidth,
-                            width:
-                              columnMeta?.minWidth === columnMeta?.maxWidth
-                                ? columnMeta?.minWidth
-                                : undefined,
-                            flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
-                          }}
-                        >
-                          {renderCell(item)}
-                        </DataGridCell>
-                      )
-                    }}
-                  </DataGridRow>
-                )}
-              </DataGridBody>
-            </DataGrid>
+            renderDataGrid()
           ))}
           <EmptyMessage items={items} error={props.error} />
           <ListFilterPanel />

@@ -1,6 +1,7 @@
 import { CheckboxVisibility } from 'components/List/types'
 import { List, Progress, TabComponent } from 'components'
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useWindowSize } from 'usehooks-ts'
 import { APPLY_FILTER_STATE, SET_FILTER_STATE, SET_FILTERS_OPEN } from '../reducer/actions'
 import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
@@ -26,6 +27,15 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
     exportProgress,
     exportProgressMessage
   } = useReportsList(props)
+
+  // Calculate virtualized list height based on viewport
+  const { height: windowHeight } = useWindowSize()
+  const items = props.items ?? context.state.data.timeEntries
+  const listHeight = useMemo(() => {
+    // Reserve space for header, toolbar, progress bar, etc. (~200px)
+    const reservedHeight = 200
+    return Math.max(400, windowHeight - reservedHeight)
+  }, [windowHeight])
   return (
     <div className={ReportsList.className}>
       {(Boolean(props.loading) || context.state.loading) && (
@@ -52,7 +62,10 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
         hidden={props.hidden}
         enableShimmer={Boolean(props.loading) || context.state.loading}
         checkboxVisibility={CheckboxVisibility.always}
-        items={props.items ?? context.state.data.timeEntries}
+        items={items}
+        virtualized={items.length > 100}
+        height={listHeight}
+        rowHeight={44}
         columns={columns}
         menuItems={menuItems}
         menuItemsAfterFilters={loadReportCommand ? [loadReportCommand] : []}

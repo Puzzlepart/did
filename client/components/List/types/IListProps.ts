@@ -244,4 +244,21 @@ export interface IListProps<T = any>
    * Callback invoked when an item row is clicked.
    */
   onItemInvoked?: (item: T) => void
+
+  /**
+   * Enable virtualization for large datasets.
+   * When enabled, only visible rows are rendered to the DOM.
+   * Requires `height` to be set for the virtualized container.
+   *
+   * @default false
+   */
+  virtualized?: boolean
+
+  /**
+   * The height of each row in pixels when virtualization is enabled.
+   * This must be a fixed value for virtualization to work correctly.
+   *
+   * @default 44
+   */
+  rowHeight?: number
 }

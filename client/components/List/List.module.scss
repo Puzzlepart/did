@@ -34,7 +34,7 @@
   grid-template-columns: var(--list-grid-template, auto);
 }
 .treeGridHeaderRow:global(.fui-TreeGridRow) {
-  border-top:0px solid transparent;
+  border-top: 0px solid transparent;
 }
 
 .headerCell,
@@ -165,7 +165,7 @@
   // padding: 0.1rem 0.6rem;
   padding: 0.2rem 0.5rem 0.2rem 2rem;
   &:hover {
-    background-color: #f4f4f4 !important;
+    background-color: var(--colorNeutralBackground1Hover);
     border-radius: 3px;
   }
 }
