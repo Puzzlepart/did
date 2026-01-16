@@ -26,7 +26,7 @@ import {
   TreeGridRowOnOpenChangeData
 } from '@fluentui-contrib/react-tree-grid'
 import { ReusableComponent } from 'components/types'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils/getFluentIcon'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
@@ -79,6 +79,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
   const { targetDocument } = useFluent()
   const scrollbarWidth = useScrollbarWidth({ targetDocument })
   const isVirtualized = props.virtualized && props.height && !isGrouped
+  const listHeaderRef = useRef<HTMLDivElement>(null)
+  const dataGridHeaderRef = useRef<HTMLDivElement>(null)
+  const [virtualizedBodyHeight, setVirtualizedBodyHeight] = useState<number>()
   const rowHeight = props.rowHeight ?? 44
 
   // Compute row IDs and create lookup maps in a single pass
@@ -434,6 +437,20 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   const headerClassName = styles.header
 
+  useLayoutEffect(() => {
+    if (!isVirtualized || !props.height) {
+      setVirtualizedBodyHeight(undefined)
+      return
+    }
+    const toolbarHeight = showToolbar
+      ? (listHeaderRef.current?.getBoundingClientRect().height ?? 0)
+      : 0
+    const gridHeaderHeight =
+      dataGridHeaderRef.current?.getBoundingClientRect().height ?? 0
+    const nextHeight = Math.max(0, props.height - toolbarHeight - gridHeaderHeight)
+    setVirtualizedBodyHeight((prev) => (prev === nextHeight ? prev : nextHeight))
+  }, [isVirtualized, props.height, showToolbar, dataGridColumns.length, props.enableShimmer])
+
   // Helper function to render the appropriate DataGrid variant
   const renderDataGrid = () => {
     if (isVirtualized) {
@@ -449,7 +466,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
           className={styles.dataGrid}
           style={dataGridStyle}
         >
-          <DataGridHeader style={{ paddingRight: scrollbarWidth }}>
+          <DataGridHeader
+            ref={dataGridHeaderRef}
+            style={{ paddingRight: scrollbarWidth }}
+          >
             <VirtualizedDataGridRow className={styles.dataGridHeaderRow}>
               {({ renderHeaderCell, columnId }) => {
                 const columnMeta = columnMetaMap.get(String(columnId))
@@ -487,7 +507,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
           </DataGridHeader>
           <VirtualizedDataGridBody<any>
             itemSize={rowHeight}
-            height={props.height!}
+            height={virtualizedBodyHeight ?? props.height!}
           >
             {({ item, rowId }, style) => (
               <VirtualizedDataGridRow
@@ -649,165 +669,327 @@ export const List: ReusableComponent<IListProps> = (props) => {
       hidden={props.hidden}
     >
       <ListContext.Provider value={context}>
-        <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          {showToolbar && (
-            <div className={headerClassName}>
-              {props.searchBox?.fullWidth && (
-                <ListSearchBox {...props.searchBox} />
-              )}
-              <ListToolbar />
-            </div>
-          )}
-          {props.enableShimmer ? (
-            <Skeleton className={styles.skeleton}>
-              {Array.from({
-                length: Math.max(3, Math.min(items.length, 8))
-              }).map((_, rowIndex) => (
-                <div key={`skeleton-row-${rowIndex}`} className={styles.skeletonRow}>
-                  {Array.from({
-                    length: Math.max(columns.length, 3)
-                  }).map((_, colIndex) => (
-                    <SkeletonItem
-                      key={`skeleton-cell-${rowIndex}-${colIndex}`}
-                      className={styles.skeletonCell}
-                    />
-                  ))}
-                </div>
-              ))}
-            </Skeleton>
-          ) : (isGrouped ? (
-            <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
-              <TreeGridRow className={styles.treeGridHeaderRow}>
-                {columns.map((column, index) => (
-                  <TreeGridCell
-                    key={column.key}
-                    header
-                    className={mergeClasses(
-                      styles.treeGridHeaderCell,
-                      props.columnHeaderProps?.className,
-                      column.isMultiline ? styles.multiline : styles.nowrap
-                    )}
-                    style={{
-                      minWidth: column.minWidth,
-                      maxWidth: column.maxWidth,
-                      width:
-                        column.minWidth === column.maxWidth
-                          ? column.minWidth
-                          : undefined,
-                      flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
-                    }}
-                  >
-                    <div className={styles.treeGridHeaderContent}>
-                      {index === 0 && hasGroups && (
-                        <button
-                          type='button'
-                          className={styles.treeGridToggleAllButton}
-                          onClick={(event) => {
-                            event.stopPropagation()
-                            handleToggleAllGroups()
-                          }}
-                          aria-label={toggleAllLabel}
-                          title={toggleAllLabel}
-                        >
-                          {allGroupsOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
-                        </button>
-                      )}
-                      {renderHeaderCellContent(column)}
-                    </div>
-                  </TreeGridCell>
+        {isVirtualized ? (
+          <div style={{ position: 'relative', height: props.height, overflow: 'hidden' }}>
+            {showToolbar && (
+              <div ref={listHeaderRef} className={headerClassName}>
+                {props.searchBox?.fullWidth && (
+                  <ListSearchBox {...props.searchBox} />
+                )}
+                <ListToolbar />
+              </div>
+            )}
+            {props.enableShimmer ? (
+              <Skeleton className={styles.skeleton}>
+                {Array.from({
+                  length: Math.max(3, Math.min(items.length, 8))
+                }).map((_, rowIndex) => (
+                  <div key={`skeleton-row-${rowIndex}`} className={styles.skeletonRow}>
+                    {Array.from({
+                      length: Math.max(columns.length, 3)
+                    }).map((_, colIndex) => (
+                      <SkeletonItem
+                        key={`skeleton-cell-${rowIndex}-${colIndex}`}
+                        className={styles.skeletonCell}
+                      />
+                    ))}
+                  </div>
                 ))}
-              </TreeGridRow>
-              {groups.map((group) => {
-                const isOpen = openGroups[group.key] ?? true
-                const holiday = group.data?.holiday
-                const total = group.data?.total
-                return (
-                  <TreeGridRow
-                    key={group.key}
-                    open={isOpen}
-                    onOpenChange={(
-                      _event,
-                      data: TreeGridRowOnOpenChangeData
-                    ) => {
-                      setOpenGroups((prev) => ({
-                        ...prev,
-                        [group.key]: data.open
-                      }))
-                    }}
-                    subtree={
-                      <>
-                        {group.items.map((item, _groupIndex) => {
-                          const itemIndex = items.indexOf(item)
-                          const rowId = getItemRowId(item, itemIndex)
-                          return (
-                            <TreeGridRow
-                              key={rowId}
-                              onDoubleClick={(event) =>
-                                handleRowDoubleClick(event, item)
-                              }
-                              className={styles.treeGridRow}
-                            >
-                              {columns.map((column) => (
-                                <TreeGridCell
-                                  key={`${rowId}-${column.key}`}
-                                  className={mergeClasses(
-                                    styles.treeGridCell,
-                                    column.className,
-                                    column.isMultiline
-                                      ? styles.multiline
-                                      : styles.nowrap
-                                  )}
-                                  style={{
-                                    minWidth: column.minWidth,
-                                    maxWidth: column.maxWidth,
-                                    width:
-                                      column.minWidth === column.maxWidth
-                                        ? column.minWidth
-                                        : undefined,
-                                    flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
-                                  }}
-                                >
-                                  <ItemColumn
-                                    item={item}
-                                    column={column}
-                                    index={itemIndex}
-                                  />
-                                </TreeGridCell>
-                              ))}
-                            </TreeGridRow>
-                          )
-                        })}
-                      </>
-                    }
-                    className={styles.groupHeaderRow}
-                    title={holiday?.name}
-                  >
-                    {isOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+              </Skeleton>
+            ) : (isGrouped ? (
+              <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
+                <TreeGridRow className={styles.treeGridHeaderRow}>
+                  {columns.map((column, index) => (
                     <TreeGridCell
+                      key={column.key}
                       header
-                      aria-colspan={columns.length}
-                      className={styles.groupHeaderCell}
+                      className={mergeClasses(
+                        styles.treeGridHeaderCell,
+                        props.columnHeaderProps?.className,
+                        column.isMultiline ? styles.multiline : styles.nowrap
+                      )}
                       style={{
-                        color: holiday ? tokens.colorPaletteRedForeground1 : undefined,
-                        ...group.data?.styles
+                        minWidth: column.minWidth,
+                        maxWidth: column.maxWidth,
+                        width:
+                          column.minWidth === column.maxWidth
+                            ? column.minWidth
+                            : undefined,
+                        flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
                       }}
                     >
-                      <span>{group.name}</span>
-                      {total && (
-                        <span className={styles.groupHeaderTotal}>({total})</span>
-                      )}
+                      <div className={styles.treeGridHeaderContent}>
+                        {index === 0 && hasGroups && (
+                          <button
+                            type='button'
+                            className={styles.treeGridToggleAllButton}
+                            onClick={(event) => {
+                              event.stopPropagation()
+                              handleToggleAllGroups()
+                            }}
+                            aria-label={toggleAllLabel}
+                            title={toggleAllLabel}
+                          >
+                            {allGroupsOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                          </button>
+                        )}
+                        {renderHeaderCellContent(column)}
+                      </div>
                     </TreeGridCell>
-                  </TreeGridRow>
-                )
-              })}
-            </TreeGrid>
-          ) : (
-            renderDataGrid()
-          ))}
-          <EmptyMessage items={items} error={props.error} />
-          <ListFilterPanel />
-          <ViewColumnsPanel />
-        </ScrollablePaneWrapper>
+                  ))}
+                </TreeGridRow>
+                {groups.map((group) => {
+                  const isOpen = openGroups[group.key] ?? true
+                  const holiday = group.data?.holiday
+                  const total = group.data?.total
+                  return (
+                    <TreeGridRow
+                      key={group.key}
+                      open={isOpen}
+                      onOpenChange={(
+                        _event,
+                        data: TreeGridRowOnOpenChangeData
+                      ) => {
+                        setOpenGroups((prev) => ({
+                          ...prev,
+                          [group.key]: data.open
+                        }))
+                      }}
+                      subtree={
+                        <>
+                          {group.items.map((item, _groupIndex) => {
+                            const itemIndex = items.indexOf(item)
+                            const rowId = getItemRowId(item, itemIndex)
+                            return (
+                              <TreeGridRow
+                                key={rowId}
+                                onDoubleClick={(event) =>
+                                  handleRowDoubleClick(event, item)
+                                }
+                                className={styles.treeGridRow}
+                              >
+                                {columns.map((column) => (
+                                  <TreeGridCell
+                                    key={`${rowId}-${column.key}`}
+                                    className={mergeClasses(
+                                      styles.treeGridCell,
+                                      column.className,
+                                      column.isMultiline
+                                        ? styles.multiline
+                                        : styles.nowrap
+                                    )}
+                                    style={{
+                                      minWidth: column.minWidth,
+                                      maxWidth: column.maxWidth,
+                                      width:
+                                        column.minWidth === column.maxWidth
+                                          ? column.minWidth
+                                          : undefined,
+                                      flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                                    }}
+                                  >
+                                    <ItemColumn
+                                      item={item}
+                                      column={column}
+                                      index={itemIndex}
+                                    />
+                                  </TreeGridCell>
+                                ))}
+                              </TreeGridRow>
+                            )
+                          })}
+                        </>
+                      }
+                      className={styles.groupHeaderRow}
+                      title={holiday?.name}
+                    >
+                      {isOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                      <TreeGridCell
+                        header
+                        aria-colspan={columns.length}
+                        className={styles.groupHeaderCell}
+                        style={{
+                          color: holiday ? tokens.colorPaletteRedForeground1 : undefined,
+                          ...group.data?.styles
+                        }}
+                      >
+                        <span>{group.name}</span>
+                        {total && (
+                          <span className={styles.groupHeaderTotal}>({total})</span>
+                        )}
+                      </TreeGridCell>
+                    </TreeGridRow>
+                  )
+                })}
+              </TreeGrid>
+            ) : (
+              renderDataGrid()
+            ))}
+            <EmptyMessage items={items} error={props.error} />
+            <ListFilterPanel />
+            <ViewColumnsPanel />
+          </div>
+        ) : (
+          <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
+            {showToolbar && (
+              <div ref={listHeaderRef} className={headerClassName}>
+                {props.searchBox?.fullWidth && (
+                  <ListSearchBox {...props.searchBox} />
+                )}
+                <ListToolbar />
+              </div>
+            )}
+            {props.enableShimmer ? (
+              <Skeleton className={styles.skeleton}>
+                {Array.from({
+                  length: Math.max(3, Math.min(items.length, 8))
+                }).map((_, rowIndex) => (
+                  <div key={`skeleton-row-${rowIndex}`} className={styles.skeletonRow}>
+                    {Array.from({
+                      length: Math.max(columns.length, 3)
+                    }).map((_, colIndex) => (
+                      <SkeletonItem
+                        key={`skeleton-cell-${rowIndex}-${colIndex}`}
+                        className={styles.skeletonCell}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </Skeleton>
+            ) : (isGrouped ? (
+              <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
+                <TreeGridRow className={styles.treeGridHeaderRow}>
+                  {columns.map((column, index) => (
+                    <TreeGridCell
+                      key={column.key}
+                      header
+                      className={mergeClasses(
+                        styles.treeGridHeaderCell,
+                        props.columnHeaderProps?.className,
+                        column.isMultiline ? styles.multiline : styles.nowrap
+                      )}
+                      style={{
+                        minWidth: column.minWidth,
+                        maxWidth: column.maxWidth,
+                        width:
+                          column.minWidth === column.maxWidth
+                            ? column.minWidth
+                            : undefined,
+                        flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                      }}
+                    >
+                      <div className={styles.treeGridHeaderContent}>
+                        {index === 0 && hasGroups && (
+                          <button
+                            type='button'
+                            className={styles.treeGridToggleAllButton}
+                            onClick={(event) => {
+                              event.stopPropagation()
+                              handleToggleAllGroups()
+                            }}
+                            aria-label={toggleAllLabel}
+                            title={toggleAllLabel}
+                          >
+                            {allGroupsOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                          </button>
+                        )}
+                        {renderHeaderCellContent(column)}
+                      </div>
+                    </TreeGridCell>
+                  ))}
+                </TreeGridRow>
+                {groups.map((group) => {
+                  const isOpen = openGroups[group.key] ?? true
+                  const holiday = group.data?.holiday
+                  const total = group.data?.total
+                  return (
+                    <TreeGridRow
+                      key={group.key}
+                      open={isOpen}
+                      onOpenChange={(
+                        _event,
+                        data: TreeGridRowOnOpenChangeData
+                      ) => {
+                        setOpenGroups((prev) => ({
+                          ...prev,
+                          [group.key]: data.open
+                        }))
+                      }}
+                      subtree={
+                        <>
+                          {group.items.map((item, _groupIndex) => {
+                            const itemIndex = items.indexOf(item)
+                            const rowId = getItemRowId(item, itemIndex)
+                            return (
+                              <TreeGridRow
+                                key={rowId}
+                                onDoubleClick={(event) =>
+                                  handleRowDoubleClick(event, item)
+                                }
+                                className={styles.treeGridRow}
+                              >
+                                {columns.map((column) => (
+                                  <TreeGridCell
+                                    key={`${rowId}-${column.key}`}
+                                    className={mergeClasses(
+                                      styles.treeGridCell,
+                                      column.className,
+                                      column.isMultiline
+                                        ? styles.multiline
+                                        : styles.nowrap
+                                    )}
+                                    style={{
+                                      minWidth: column.minWidth,
+                                      maxWidth: column.maxWidth,
+                                      width:
+                                        column.minWidth === column.maxWidth
+                                          ? column.minWidth
+                                          : undefined,
+                                      flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                                    }}
+                                  >
+                                    <ItemColumn
+                                      item={item}
+                                      column={column}
+                                      index={itemIndex}
+                                    />
+                                  </TreeGridCell>
+                                ))}
+                              </TreeGridRow>
+                            )
+                          })}
+                        </>
+                      }
+                      className={styles.groupHeaderRow}
+                      title={holiday?.name}
+                    >
+                      {isOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                      <TreeGridCell
+                        header
+                        aria-colspan={columns.length}
+                        className={styles.groupHeaderCell}
+                        style={{
+                          color: holiday ? tokens.colorPaletteRedForeground1 : undefined,
+                          ...group.data?.styles
+                        }}
+                      >
+                        <span>{group.name}</span>
+                        {total && (
+                          <span className={styles.groupHeaderTotal}>({total})</span>
+                        )}
+                      </TreeGridCell>
+                    </TreeGridRow>
+                  )
+                })}
+              </TreeGrid>
+            ) : (
+              renderDataGrid()
+            ))}
+            <EmptyMessage items={items} error={props.error} />
+            <ListFilterPanel />
+            <ViewColumnsPanel />
+          </ScrollablePaneWrapper>
+        )}
       </ListContext.Provider>
     </div>
   )

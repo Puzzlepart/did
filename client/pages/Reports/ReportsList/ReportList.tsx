@@ -1,6 +1,6 @@
 import { CheckboxVisibility } from 'components/List/types'
 import { List, Progress, TabComponent } from 'components'
-import React, { useMemo } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { APPLY_FILTER_STATE, SET_FILTER_STATE, SET_FILTERS_OPEN } from '../reducer/actions'
 import styles from './ReportsList.module.scss'
@@ -30,12 +30,17 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
 
   // Calculate virtualized list height based on viewport
   const { height: windowHeight } = useWindowSize()
+  const listContainerRef = useRef<HTMLDivElement>(null)
   const items = props.items ?? context.state.data.timeEntries
-  const listHeight = useMemo(() => {
-    // Reserve space for header, toolbar, progress bar, etc. (~200px)
-    const reservedHeight = 200
-    return Math.max(400, windowHeight - reservedHeight)
-  }, [windowHeight])
+  const [listHeight, setListHeight] = useState(400)
+
+  useLayoutEffect(() => {
+    if (!windowHeight || !listContainerRef.current) return
+    const { top } = listContainerRef.current.getBoundingClientRect()
+    const bottomPadding = 16
+    const nextHeight = Math.max(400, windowHeight - top - bottomPadding)
+    setListHeight((prev) => (prev === nextHeight ? prev : nextHeight))
+  }, [windowHeight, context.state.loading, exportProgress, props.loading])
   return (
     <div className={ReportsList.className}>
       {(Boolean(props.loading) || context.state.loading) && (
@@ -58,54 +63,56 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
           progressMessage={exportProgressMessage}
         />
       )}
-      <List
-        hidden={props.hidden}
-        enableShimmer={Boolean(props.loading) || context.state.loading}
-        checkboxVisibility={CheckboxVisibility.always}
-        items={items}
-        virtualized={items.length > 100}
-        height={listHeight}
-        rowHeight={44}
-        columns={columns}
-        menuItems={menuItems}
-        menuItemsAfterFilters={loadReportCommand ? [loadReportCommand] : []}
-        // Intentionally do not pass exportFileName so the List's default Excel export is disabled;
-        // instead, we use a custom export implementation with progress tracking (see ExportProgress).
-        filterValues={context.state?.activeFilter?.values}
-        onFilter={(state) =>
-          props.filters && context.dispatch(SET_FILTER_STATE(state))
-        }
-        filterPanelItems={filterPanelItems}
-        filterPanelLoading={context.state?.preload?.loading}
-        onFilterPanelToggle={(isOpen) => {
-          context.dispatch(SET_FILTERS_OPEN(isOpen))
-          if (!isOpen) {
-            const filterState = context.state?.filterState ?? { filters: [], isFiltered: false }
-            context.dispatch(
-              APPLY_FILTER_STATE({
-                ...filterState,
-                filters: [...(filterState.filters ?? [])]
-              })
-            )
+      <div ref={listContainerRef} className={styles.listContainer}>
+        <List
+          hidden={props.hidden}
+          enableShimmer={Boolean(props.loading) || context.state.loading}
+          checkboxVisibility={CheckboxVisibility.always}
+          items={items}
+          virtualized={items.length > 100}
+          height={listHeight}
+          rowHeight={44}
+          columns={columns}
+          menuItems={menuItems}
+          menuItemsAfterFilters={loadReportCommand ? [loadReportCommand] : []}
+          // Intentionally do not pass exportFileName so the List's default Excel export is disabled;
+          // instead, we use a custom export implementation with progress tracking (see ExportProgress).
+          filterValues={context.state?.activeFilter?.values}
+          onFilter={(state) =>
+            props.filters && context.dispatch(SET_FILTER_STATE(state))
           }
-        }}
-        filterPanel={{
-          headerElements: <SaveFilterForm />
-        }}
-        searchBox={
-          props.search && {
-            fullWidth: true,
-            persist: true,
-            hidden: context.state.loading,
-            placeholder: createPlaceholder,
-            contentAfter: createContentAfter
+          filterPanelItems={filterPanelItems}
+          filterPanelLoading={context.state?.preload?.loading}
+          onFilterPanelToggle={(isOpen) => {
+            context.dispatch(SET_FILTERS_OPEN(isOpen))
+            if (!isOpen) {
+              const filterState = context.state?.filterState ?? { filters: [], isFiltered: false }
+              context.dispatch(
+                APPLY_FILTER_STATE({
+                  ...filterState,
+                  filters: [...(filterState.filters ?? [])]
+                })
+              )
+            }
+          }}
+          filterPanel={{
+            headerElements: <SaveFilterForm />
+          }}
+          searchBox={
+            props.search && {
+              fullWidth: true,
+              persist: true,
+              hidden: context.state.loading,
+              placeholder: createPlaceholder,
+              contentAfter: createContentAfter
+            }
           }
-        }
-        enableViewColumnsEdit
-        persistViewColumns={ReportsList.displayName}
-        filters={props.filters}
-        error={props.error}
-      />
+          enableViewColumnsEdit
+          persistViewColumns={ReportsList.displayName}
+          filters={props.filters}
+          error={props.error}
+        />
+      </div>
     </div>
   )
 }
