@@ -439,7 +439,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   useLayoutEffect(() => {
     if (!isVirtualized || !props.height) {
-      setVirtualizedBodyHeight(undefined)
+      setVirtualizedBodyHeight()
       return
     }
     const toolbarHeight = showToolbar
