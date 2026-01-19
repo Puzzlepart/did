@@ -439,7 +439,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   useLayoutEffect(() => {
     if (!isVirtualized || !props.height) {
-      setVirtualizedBodyHeight()
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setVirtualizedBodyHeight(undefined)
       return
     }
     const toolbarHeight = showToolbar
