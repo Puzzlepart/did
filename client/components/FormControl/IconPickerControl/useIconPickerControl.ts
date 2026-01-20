@@ -1,4 +1,3 @@
-import { IIconProps } from '@fluentui/react'
 import {
   IAutocompleteControlProps,
   ISuggestionItem
@@ -62,6 +61,6 @@ export function useIconPickerControl(props: IIconPickerControlProps) {
     onClear,
     itemIcons: true,
     iconPreview: true,
-    getIcon: (item: ISuggestionItem<IIconProps>) => item.iconName
+    getIcon: (item: ISuggestionItem<{ iconName: string }>) => item.iconName
   } as IAutocompleteControlProps
 }

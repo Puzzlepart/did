@@ -1,4 +1,4 @@
-import { format } from '@fluentui/react'
+import format from 'string-format'
 import { IListColumn } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'

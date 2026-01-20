@@ -1,7 +1,13 @@
-import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import { BaseFilter } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
 import { IListGroupProps } from './IListGroupProps'
+import type { IListColumn } from './IListColumn'
+
+export type ListColumnHeaderRenderProps = {
+  column: IListColumn
+  className?: string
+  sortDirection?: 'asc' | 'desc' | null
+}
 
 /**
  * @category List
@@ -73,9 +79,9 @@ export interface IListColumnData {
   ) => BaseFilter
 
   /**
-   * Callback to render a tooltip for the column header
+   * Callback to render custom column header content.
    */
   onRenderColumnHeader?: (
-    props: IDetailsColumnRenderTooltipProps
+    props: ListColumnHeaderRenderProps
   ) => JSX.Element
 }

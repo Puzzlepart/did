@@ -1,8 +1,8 @@
-import { ICommandBarItemProps } from '@fluentui/react'
 import _ from 'underscore'
 import { useListContext } from '../../context'
 import { TOGGLE_FILTER_PANEL } from '../../reducer'
 import { ListMenuItem } from './ListMenuItem'
+import { ListCommandBarItem } from '../../types'
 
 /**
  * Returns an object containing two command bar items for toggling and clearing filters in a list.
@@ -28,10 +28,9 @@ export function useFiltersCommand() {
   const filterItems = context.props.filterPanelItems ?? context.state.origItems
   const hasFilterItems = filterItems.length > 0
   const isFilterLoading = Boolean(context.props.filterPanelLoading)
-  const toggleCommandBarItem: ICommandBarItemProps = {
+  const toggleCommandBarItem: ListCommandBarItem = {
     key: 'TOGGLE_FILTER_PANEL',
-    iconProps: { iconName: isFilterLoading ? 'ProgressRingDots' : 'Filter' },
-    iconOnly: true,
+    iconName: isFilterLoading ? 'ProgressRingDots' : 'Filter',
     disabled:
       context.props.enableShimmer || !hasFilterItems || isFilterLoading,
     onClick: () => {

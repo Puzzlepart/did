@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { IBreadcrumbItem } from '@fluentui/react'
+import { IBreadcrumbItem } from 'components/Breadcrumb/types'
 import { useAppContext } from 'AppContext'
 import { IMobileBreadcrumbProps } from '.'
 
@@ -12,17 +12,21 @@ export function useMobileBreadcrumb(
 ): IBreadcrumbItem[] {
   const { state } = useAppContext()
   const nav = Object.keys(state.nav || {})
-  const items = [
-    {
-      key: 'current',
-      text: props.page.displayName,
-      isCurrentItem: nav.length === 0
-    },
-    ...nav.map((key, index) => ({
-      key,
-      text: state.nav[key].text,
-      isCurrentItem: index === nav.length - 1
+  const pageText = props.page.text ?? props.page.displayName ?? ''
+  const navItems = nav
+    .map((key) => state.nav?.[key])
+    .filter(Boolean)
+    .map((item, index) => ({
+      key: index + 1,
+      value: item?.text ?? '',
+      onClick: item?.onClick
     }))
+
+  return [
+    {
+      key: 0,
+      value: pageText
+    },
+    ...navItems
   ]
-  return items
 }

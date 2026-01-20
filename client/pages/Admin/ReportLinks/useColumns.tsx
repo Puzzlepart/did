@@ -1,4 +1,3 @@
-import { Icon } from '@fluentui/react'
 import { Caption1, Link } from '@fluentui/react-components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
@@ -16,8 +15,7 @@ export function useColumns() {
 
       {
         minWidth: 100,
-        maxWidth: 100,
-        iconName: 'PromotedDatabase'
+        maxWidth: 100
       },
       (reportLink) =>
         reportLink.published ? (
@@ -31,8 +29,7 @@ export function useColumns() {
       t('admin.reportLinks.promotedLabel'),
       {
         minWidth: 100,
-        maxWidth: 100,
-        iconName: 'PromotedDatabase'
+        maxWidth: 100
       },
       (reportLink) =>
         reportLink.promoted ? (
@@ -47,11 +44,11 @@ export function useColumns() {
       { maxWidth: 220 },
       (reportLink) => (
         <div className={styles.nameColumn}>
-          <Icon
-            className={styles.icon}
-            iconName={reportLink.icon}
-            styles={{ root: { color: reportLink.iconColor } }}
-          />
+          <span className={styles.icon}>
+            {getFluentIcon(reportLink.iconName, {
+              color: reportLink.iconColor
+            })}
+          </span>
           <Link
             className={styles.link}
             href={reportLink.externalUrl}

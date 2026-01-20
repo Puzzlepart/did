@@ -1,4 +1,4 @@
-import { Label } from '@fluentui/react'
+import { Label } from '@fluentui/react-components'
 import { ColorPickerField } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import {
