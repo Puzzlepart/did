@@ -11,7 +11,7 @@ import { IReportLinksFormProps } from './types'
 const INITIAL_MODEL = convertToMap<keyof ReportLink>({
   name: '',
   description: '',
-  icon: 'ExcelDocument',
+  iconName: 'ExcelDocument',
   iconColor: '#008000'
 })
 

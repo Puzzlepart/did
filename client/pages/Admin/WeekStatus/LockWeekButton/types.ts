@@ -1,6 +1,6 @@
-import { IButtonProps } from '@fluentui/react'
+import { ButtonProps } from '@fluentui/react-components'
 import { IMissingSubmissionPeriod } from '../types'
 
-export interface ILockWeekButtonProps extends IButtonProps {
+export type ILockWeekButtonProps = ButtonProps & {
   period: IMissingSubmissionPeriod
 }

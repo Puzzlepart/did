@@ -1,10 +1,9 @@
 import {
   Calendar,
+  CalendarStrings,
   DayOfWeek,
-  FirstWeekOfYear,
-  ICalendarStrings,
-  useTheme
-} from '@fluentui/react'
+  FirstWeekOfYear
+} from '@fluentui/react-calendar-compat'
 import {
   Popover,
   PopoverSurface,
@@ -28,7 +27,6 @@ import { useDateRangePicker } from './useDateRangePicker'
 export const DateRangePicker: StyledComponent = () => {
   const { t } = useTranslation()
   const { state, dispatch } = useTimesheetContext()
-  const { palette } = useTheme()
   const { triggerText, triggerIcon, open, handleOpenChange } =
     useDateRangePicker()
   return (
@@ -57,7 +55,7 @@ export const DateRangePicker: StyledComponent = () => {
           strings={
             t('common.calendarStrings', {
               returnObjects: true
-            }) as ICalendarStrings
+            }) as CalendarStrings
           }
           showGoToToday={false}
           showWeekNumbers={true}
@@ -65,13 +63,6 @@ export const DateRangePicker: StyledComponent = () => {
           firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
           dateRangeType={state.dateRangeType}
           value={state.dateRange.startDate.jsDate}
-          calendarMonthProps={{
-            styles: {
-              currentItemButton: {
-                color: palette.neutralPrimary
-              }
-            }
-          }}
         />
       </PopoverSurface>
     </Popover>

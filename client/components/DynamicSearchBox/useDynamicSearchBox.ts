@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useMemo, useState } from 'react'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import { IDynamicSearchBoxProps } from './types'
 
 export function useDynamicSearchBox(props: IDynamicSearchBoxProps) {
@@ -15,7 +15,7 @@ export function useDynamicSearchBox(props: IDynamicSearchBoxProps) {
 
   let contentBefore: ReactElement
   if (props.iconName) {
-    contentBefore = getFluentIconWithFallback(props.iconName)
+    contentBefore = getFluentIcon(props.iconName)
   }
 
   return { setSearchTerm, value, contentBefore }

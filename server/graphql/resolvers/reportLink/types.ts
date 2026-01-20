@@ -19,7 +19,7 @@ export class ReportLinkInput {
   description: string
 
   @Field({ nullable: true, defaultValue: 'ExcelDocument' })
-  icon: string
+  iconName: string
 
   @Field({ nullable: true, defaultValue: '#008000' })
   iconColor: string
@@ -87,7 +87,7 @@ export class ReportLink {
   description: string
 
   @Field({ nullable: true, defaultValue: 'ExcelDocument' })
-  icon: string
+  iconName: string
 
   @Field({ nullable: true, defaultValue: '#008000' })
   iconColor: string

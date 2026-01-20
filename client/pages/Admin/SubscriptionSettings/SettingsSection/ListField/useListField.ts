@@ -4,7 +4,7 @@ import { SubscriptionContext } from '../../context'
 import { InputProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { IListFieldProps } from './types'
-import { format } from '@fluentui/react'
+import format from 'string-format'
 import { IFieldProps } from 'components'
 
 export function useListField(props: Partial<IListFieldProps>) {

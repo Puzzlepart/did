@@ -1,7 +1,6 @@
-import { IContextualMenuItem } from '@fluentui/react'
 import { createAction } from '@reduxjs/toolkit'
 import { ListFilterState } from 'components/List/types'
-import { IReportsData, IReportsSavedFilter } from '../types'
+import { IReportsData, IReportsMenuItem, IReportsSavedFilter } from '../types'
 
 /**
  * category Reports Actions
@@ -16,7 +15,7 @@ export const SET_FILTER = createAction<IReportsSavedFilter>('SET_FILTER')
 /**
  * @category Reports Actions
  */
-export const ADD_SAVED_FILTER = createAction<{ model: IContextualMenuItem }>(
+export const ADD_SAVED_FILTER = createAction<{ model: IReportsMenuItem }>(
   'ADD_SAVED_FILTER'
 )
 

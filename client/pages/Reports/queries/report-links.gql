@@ -2,7 +2,7 @@ query ReportLinks {
   reportLinks(query: { published: true }) {
     name
     description
-    icon
+    iconName
     iconColor
     externalUrl
     linkRef

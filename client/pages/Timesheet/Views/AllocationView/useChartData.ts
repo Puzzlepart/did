@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { GetEventsOption } from 'pages/Timesheet/types'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'

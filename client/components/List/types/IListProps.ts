@@ -1,19 +1,27 @@
-import {
-  ICommandBarProps,
-  IDetailsGroupRenderProps,
-  IDetailsHeaderProps,
-  IRenderFunction,
-  IShimmeredDetailsListProps,
-  SelectionMode
-} from '@fluentui/react'
 import { SearchBoxProps } from '@fluentui/react-components'
-import { CSSProperties, HTMLProps } from 'react'
+import { CSSProperties, HTMLProps, ReactNode } from 'react'
 import { ListMenuItem } from '../ListHeader'
 import { IListColumn } from './IListColumn'
 import { IListGroupProps } from './IListGroupProps'
 import { IFilter, IFilterPanelProps } from 'components/FilterPanel'
 import { IListContext } from '../context'
 import { IListState } from './IListState'
+import { CheckboxVisibility, SelectionMode } from './Selection'
+
+export type ListCommandBarItem = {
+  key?: string
+  text?: string
+  iconName?: string
+  disabled?: boolean
+  onClick?: (event?: unknown) => void
+  onRender?: (item?: unknown, defaultRender?: unknown) => ReactNode
+}
+
+export type ListCommandBarProps = {
+  hidden?: boolean
+  items?: ListCommandBarItem[]
+  farItems?: ListCommandBarItem[]
+}
 
 export type ListFilterState = {
   filters: IFilter[]
@@ -58,8 +66,7 @@ interface SearchBox
  */
 
 export interface IListProps<T = any>
-  extends Pick<HTMLProps<HTMLDivElement>, 'className'>,
-    Omit<IShimmeredDetailsListProps, 'selectionMode'> {
+  extends Pick<HTMLProps<HTMLDivElement>, 'className'> {
   /**
    * Items
    */
@@ -91,19 +98,29 @@ export interface IListProps<T = any>
   selectionProps?: [SelectionMode, ((selected: T | T[]) => void)?]
 
   /**
+   * Checkbox visibility for selection (hint).
+   */
+  checkboxVisibility?: CheckboxVisibility
+
+  /**
+   * Row key getter.
+   */
+  getKey?: (item: T, index?: number) => string | number
+
+  /**
+   * List instance key (used to force re-rendering).
+   */
+  setKey?: string
+
+  /**
    * Group props
    */
   listGroupProps?: IListGroupProps
 
   /**
-   * Group render props
-   */
-  listGroupRenderProps?: IDetailsGroupRenderProps
-
-  /**
    * Command bar props
    */
-  commandBar?: ICommandBarProps
+  commandBar?: ListCommandBarProps
 
   /**
    * Hidden state of the list
@@ -115,7 +132,6 @@ export interface IListProps<T = any>
    */
   columnHeaderProps?: {
     className?: string
-    onRender?: IRenderFunction<IDetailsHeaderProps>
   }
 
   /**
@@ -223,4 +239,26 @@ export interface IListProps<T = any>
    * Error state. If set, the list will display an error message.
    */
   error?: Error
+
+  /**
+   * Callback invoked when an item row is clicked.
+   */
+  onItemInvoked?: (item: T) => void
+
+  /**
+   * Enable virtualization for large datasets.
+   * When enabled, only visible rows are rendered to the DOM.
+   * Requires `height` to be set for the virtualized container.
+   *
+   * @default false
+   */
+  virtualized?: boolean
+
+  /**
+   * The height of each row in pixels when virtualization is enabled.
+   * This must be a fixed value for virtualization to work correctly.
+   *
+   * @default 44
+   */
+  rowHeight?: number
 }

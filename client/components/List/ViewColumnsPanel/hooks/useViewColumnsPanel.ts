@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useListContext } from '../../context'
 import { UPDATE_COLUMNS } from '../../reducer'
 import { IListColumn } from '../../types'
@@ -13,17 +13,36 @@ export const useViewColumnsPanel = () => {
   const context = useListContext()
   const [columns, setColumns] = useState<IListColumn[]>(context.props.columns)
   const persist = useViewColumnsPersist(columns)
+  const lastSyncSignature = useRef<string>('')
+  const dispatchRef = useRef(context.dispatch)
+  dispatchRef.current = context.dispatch
 
-  useEffect(
-    () => setColumns(persist.apply(context.props.columns)),
-    [context.props.columns]
+  const getSignature = (columns: IListColumn[]) =>
+    columns
+      .map((column) => `${column.key}:${column.data?.hidden ? '1' : '0'}`)
+      .join('|')
+
+  const persistedColumns = useMemo(
+    () => persist.apply(context.props.columns),
+    [persist, context.props.columns]
   )
 
   useEffect(() => {
-    context.dispatch(UPDATE_COLUMNS(columns))
+    const signature = getSignature(persistedColumns)
+    if (signature !== lastSyncSignature.current) {
+      lastSyncSignature.current = signature
+      setColumns(persistedColumns)
+    }
+  }, [persistedColumns])
 
-    persist.update()
-  }, [columns, context])
+  useEffect(() => {
+    const signature = getSignature(columns)
+    if (signature !== lastSyncSignature.current) {
+      lastSyncSignature.current = signature
+      dispatchRef.current(UPDATE_COLUMNS(columns))
+      persist.update()
+    }
+  }, [columns, persist])
 
   /**
    * Toggle the visibility of a column

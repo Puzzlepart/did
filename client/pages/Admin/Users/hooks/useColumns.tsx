@@ -6,7 +6,7 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
-import { getFluentIcon, getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import { IUsersContext } from '../context'
 import styles from '../Users.module.scss'
@@ -92,7 +92,7 @@ export function useColumns(
         },
         renderAs: 'tag',
         createRenderProps: (user) => ({
-          icon: getFluentIconWithFallback((user.role as Role)?.icon),
+          icon: getFluentIcon((user.role as Role)?.icon),
           size: 'small'
         })
       }),

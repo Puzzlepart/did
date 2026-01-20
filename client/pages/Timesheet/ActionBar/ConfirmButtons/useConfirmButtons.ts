@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { ToolbarButtonProps } from '@fluentui/react-components'
 import $date from 'DateUtils'
 import { Overview } from 'pages/Timesheet/Views/Overview'

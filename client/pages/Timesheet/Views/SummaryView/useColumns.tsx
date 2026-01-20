@@ -1,4 +1,5 @@
-import { DateRangeType, useTheme } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
+import { mergeClasses } from '@fluentui/react-components'
 import { EventList, IListColumn, ProjectPopover } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +10,6 @@ import { Overview } from '../Overview'
 import { DurationColumn } from './DurationColumn'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
-import { mergeClasses } from '@fluentui/react-components'
 import _ from 'lodash'
 
 /**
@@ -30,7 +30,6 @@ import _ from 'lodash'
  */
 export function useColumns(): IListColumn[] {
   const { t } = useTranslation()
-  const theme = useTheme()
   const context = useTimesheetContext()
   const onRender = (row: any, _index: number, col: IListColumn) => (
     <DurationColumn row={row} column={col} />
@@ -45,27 +44,17 @@ export function useColumns(): IListColumn[] {
           i++
         ) {
           const day = context.state.dateRange.getDay(i)
+          const _holiday = day.isNationalHoliday(
+            context.state.selectedPeriod?.holidays
+          )
           columns.push({
             key: day.format('YYYY-MM-DD'),
             fieldName: day.format('YYYY-MM-DD'),
             name: s.capitalize(day.format('ddd DD')),
             minWidth: 70,
             maxWidth: 70,
-            onRender,
-            onRenderHeader: (props, defaultRender) => {
-              const holiday = day.isNationalHoliday(
-                context.state.selectedPeriod?.holidays
-              )
-              return (
-                <div
-                  title={holiday?.name}
-                  style={{ color: holiday && theme.palette.red }}
-                >
-                  {defaultRender(props)}
-                </div>
-              )
-            }
-          })
+            onRender
+          } as any)
         }
       }
       break

@@ -5,7 +5,7 @@ import { IListColumn } from 'components/List/types'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer, LabelObject } from 'types'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import { createColumnDef } from 'utils/createColumnDef'
 import { useCustomersContext } from '../context'
 import { SET_SELECTED_CUSTOMER } from '../reducer/actions'
@@ -35,7 +35,7 @@ export function useColumns(): IListColumn[] {
         maxWidth: 125,
         renderAs: 'tag',
         createRenderProps: (customer) => ({
-          icon: getFluentIconWithFallback(customer.icon, {
+          icon: getFluentIcon(customer.icon, {
             default: 'Folder'
           })
         })

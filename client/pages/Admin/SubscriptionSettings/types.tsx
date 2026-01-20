@@ -1,5 +1,5 @@
-import { ITextFieldProps } from '@fluentui/react'
 import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import { IInputFieldProps } from 'components/FormControl/InputControl'
 import React from 'react'
 import { IImageFieldProps } from './SettingsSection/ImageField'
 import { SubscriptionSettings } from 'types'
@@ -36,7 +36,7 @@ interface ISubscriptionSettingBase<T = any> {
   props: T
 }
 
-export interface ISubscriptionSettingText<T = ITextFieldProps>
+export interface ISubscriptionSettingText<T = IInputFieldProps>
   extends ISubscriptionSettingBase<T> {
   type: 'text'
 }

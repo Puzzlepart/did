@@ -1,8 +1,10 @@
-import { IBreadcrumbItem } from '@fluentui/react'
 import { PageComponent } from 'pages/types'
 import { HTMLAttributes } from 'react'
 
-export interface IMobileBreadcrumbItem extends IBreadcrumbItem {
+export interface IMobileBreadcrumbItem {
+  key: string | number
+  text: string
+  onClick?: () => void
   level: number
 }
 

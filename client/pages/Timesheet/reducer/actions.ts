@@ -1,5 +1,5 @@
 import { QueryResult } from '@apollo/client'
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { createAction } from '@reduxjs/toolkit'
 import { EventObject, Project } from 'types'
 import { TimesheetDateRange } from '../types'

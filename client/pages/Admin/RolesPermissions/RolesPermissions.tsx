@@ -1,4 +1,4 @@
-import { SelectionMode } from '@fluentui/react'
+import { SelectionMode } from 'components/List/types'
 import { List } from 'components'
 import { ITabProps } from 'components/Tabs/types'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { Shimmer } from '@fluentui/react'
+import { Skeleton, SkeletonItem } from '@fluentui/react-components'
 import { Breadcrumb } from 'components'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -15,19 +15,21 @@ export const CustomerHeader: StyledComponent = () => {
   const { loading } = useContext(CustomersContext)
   const breadcrumbItems = useCustomerHeaderBreadcrumb()
   return (
-    <Shimmer
-      className={CustomerHeader.className}
-      isDataLoaded={!loading}
-      styles={{ dataWrapper: { width: '100%' } }}
-    >
-      <div
-        className={styles.container}
-        style={{ display: isMobile ? 'none' : 'flex' }}
-      >
-        <Breadcrumb className={styles.breadcrumb} items={breadcrumbItems} />
-        <CustomerActions />
-      </div>
-    </Shimmer>
+    <div className={CustomerHeader.className}>
+      {loading ? (
+        <Skeleton>
+          <SkeletonItem style={{ width: '100%', height: 32 }} />
+        </Skeleton>
+      ) : (
+        <div
+          className={styles.container}
+          style={{ display: isMobile ? 'none' : 'flex' }}
+        >
+          <Breadcrumb className={styles.breadcrumb} items={breadcrumbItems} />
+          <CustomerActions />
+        </div>
+      )}
+    </div>
   )
 }
 

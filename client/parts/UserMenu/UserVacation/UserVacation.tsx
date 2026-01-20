@@ -1,6 +1,10 @@
 import { useQuery } from '@apollo/client'
-import { useTheme } from '@fluentui/react'
-import { Skeleton, SkeletonItem, Tooltip } from '@fluentui/react-components'
+import {
+  Skeleton,
+  SkeletonItem,
+  Tooltip,
+  tokens
+} from '@fluentui/react-components'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuItem } from '../MenuItem'
@@ -13,7 +17,6 @@ import $vacation from './vacation.gql'
 export const UserVacation: FC = () => {
   const { t } = useTranslation()
   const { data, loading } = useQuery($vacation, { fetchPolicy: 'cache-first' })
-  const { palette } = useTheme()
   return (
     <Skeleton>
       <Tooltip
@@ -29,7 +32,7 @@ export const UserVacation: FC = () => {
             style={{ cursor: 'help' }}
             text={t('common.vacationSummaryText', data?.vacation)}
             textStyle={{
-              color: palette.neutralPrimary,
+              color: tokens.colorNeutralForeground1,
               padding: '0 0 0 10px',
               fontSize: 12
             }}

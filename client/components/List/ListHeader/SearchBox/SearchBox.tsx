@@ -1,4 +1,4 @@
-import { SearchBox } from '@fluentui/react-components'
+import { SearchBox, mergeClasses } from '@fluentui/react-components'
 import React, { useRef } from 'react'
 import { StyledComponent } from 'types'
 import _ from 'lodash'
@@ -6,7 +6,6 @@ import { EXECUTE_SEARCH } from '../../reducer'
 import { useListContext } from '../../context'
 import { IListProps } from 'components'
 import styles from '../ListHeader.module.scss'
-import { css } from '@fluentui/react'
 
 export const SearchBoxComponent: StyledComponent<IListProps['searchBox']> = (
   props
@@ -16,7 +15,7 @@ export const SearchBoxComponent: StyledComponent<IListProps['searchBox']> = (
   return (
     <SearchBox
       {..._.omit(props, 'contentAfter', 'placeholder', 'fullWidth', 'hidden')}
-      className={css(
+      className={mergeClasses(
         SearchBoxComponent.className,
         props.fullWidth && styles.fullWidth
       )}

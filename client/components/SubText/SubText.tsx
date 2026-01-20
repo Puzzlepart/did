@@ -1,4 +1,4 @@
-import { useTheme } from '@fluentui/react'
+import { tokens } from '@fluentui/react-components'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -7,7 +7,7 @@ import styles from './SubText.module.scss'
 import { ISubTextProps } from './types'
 
 /**
- * Renders sub text using color `semanticColors.bodySubtext`. Supports markdown
+ * Renders sub text using Fluent UI v9 tokens. Supports markdown
  * using `ReactMarkdown`.
  *
  * @remarks Has a default padding top of **4px**
@@ -15,14 +15,20 @@ import { ISubTextProps } from './types'
  * @category Reusable Component
  */
 export const SubText: ReusableComponent<ISubTextProps> = (props) => {
-  const { fonts, semanticColors } = useTheme()
+  const fontSizeMap = {
+    xSmall: tokens.fontSizeBase200,
+    small: tokens.fontSizeBase300,
+    medium: tokens.fontSizeBase400,
+    large: tokens.fontSizeBase500
+  }
+
   return (
     <div
       className={`${SubText.className} ${props.className}`}
       style={{
         paddingTop: 4,
-        fontSize: fonts[props.font].fontSize,
-        color: semanticColors.bodySubtext,
+        fontSize: fontSizeMap[props.font],
+        color: tokens.colorNeutralForeground2,
         ...props.style
       }}
       hidden={s.isBlank(props.text)}

@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { useParams } from 'react-router-dom'
 import { useViews } from '../Views'
 import { TimesheetDateRange } from '../types'

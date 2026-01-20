@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import DateUtils, { DateInput, DateObject } from 'DateUtils'
 import { TimesheetQuery } from 'types'
 import s from 'underscore.string'

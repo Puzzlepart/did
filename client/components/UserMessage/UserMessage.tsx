@@ -24,12 +24,13 @@ import { useUserMessage } from './useUserMessage'
  */
 export const UserMessage: ReusableComponent<IUserMessageProps> = (props) => {
   const { containerProps, alertStyle } = useUserMessage(props)
+  const hasCustomStyles = Object.keys(alertStyle).length > 0
   return (
     <div {...containerProps}>
       <MessageBar
         {...props}
         icon={props.iconName && getFluentIcon(props.iconName)}
-        style={alertStyle}
+        style={hasCustomStyles ? alertStyle : undefined}
         className={styles.alert}
         layout='auto'
         politeness='assertive'

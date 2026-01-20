@@ -2,17 +2,28 @@
   width: 280px;
   height: 320px;
 
-  .header {
-    padding: 12px;
-
-    .searchBox {
-      margin: 12px 0;
-    }
-  }
-
   .scrollableContent {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+
+    .stickyHeader {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: white;
+      padding: 12px;
+      border-bottom: 1px solid #eaecef;
+
+      .searchBox {
+        margin: 12px 0;
+      }
+    }
+
     .container {
       padding-bottom: 20px;
+
       ul {
         list-style-type: none;
         padding: 0;

@@ -12,7 +12,7 @@ import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
-import { getFluentIcon, getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import styles from './ProjectTag.module.scss'
 import { IProjectTagProps } from './types'
 import { useProjectTag } from './useProjectTag'
@@ -34,7 +34,7 @@ export const ProjectTag: ReusableComponent<IProjectTagProps> = (props) => {
           hasSecondaryAction={props.enableFavoriting}
           icon={
             props.displayIcon &&
-            getFluentIconWithFallback(props.project.icon, {
+            getFluentIcon(props.project.icon, {
               default: 'Document'
             })
           }

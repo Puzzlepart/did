@@ -1,4 +1,4 @@
-import { useTheme } from '@fluentui/react/lib/Theme'
+import { tokens } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { useUserNotifications } from 'parts/UserNotifications/useUserNotifications'
 
@@ -14,11 +14,10 @@ import { useUserNotifications } from 'parts/UserNotifications/useUserNotificatio
  */
 export function useNavigation() {
   const { pages, isAuthenticated, subscription } = useAppContext()
-  const theme = useTheme()
   const contextValue = useUserNotifications()
   const background =
     subscription?.settings?.brand?.navBackground ??
-    theme.semanticColors.menuHeader
+    tokens.colorNeutralBackground2
 
   return {
     pages,

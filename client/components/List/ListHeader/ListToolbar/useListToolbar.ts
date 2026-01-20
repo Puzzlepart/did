@@ -1,8 +1,8 @@
-import { ICommandBarProps } from '@fluentui/react'
 import { useMemo } from 'react'
 import _ from 'underscore'
 import { useListContext } from '../../context'
 import { ListMenuItem } from './ListMenuItem'
+import { ListCommandBarProps } from '../../types'
 import { useExcelExportCommand } from './useExcelExportCommand'
 import { useFiltersCommand } from './useFiltersCommand'
 import { useSearchBoxCommand } from './useSearchBoxCommand'
@@ -21,7 +21,7 @@ export function useListToolbar() {
   const filterCommands = useFiltersCommand()
   const viewColumnsEditCommand = useViewColumnsEditCommand()
 
-  const commandBarProps = useMemo<ICommandBarProps>(
+  const commandBarProps = useMemo<ListCommandBarProps>(
     () => ({
       ...context.props.commandBar,
       items: [searchBoxItem, ...context.props.commandBar?.items].filter(

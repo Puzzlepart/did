@@ -1,11 +1,13 @@
-import { Button, Caption1, mergeClasses } from '@fluentui/react-components'
 import {
+  Button,
+  Caption1,
   Drawer,
   DrawerBody,
   DrawerFooter,
   DrawerHeader,
-  DrawerHeaderTitle
-} from '@fluentui/react-components/unstable'
+  DrawerHeaderTitle,
+  mergeClasses
+} from '@fluentui/react-components'
 import { DynamicButton } from 'components/DynamicButton'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,18 +17,22 @@ import { PanelComponent } from './types'
 import { usePanel } from './usePanel'
 
 /**
- * Wrapper over `<Drawer />` from `@fluentui/react-components/unstable` that provides
+ * Wrapper over `<Drawer />` from `@fluentui/react-components` that provides
  * a consistent look and feel for panels.
  */
 export const Panel: PanelComponent = (props) => {
   const { t } = useTranslation()
   const { onOpenChange, bodyStyle } = usePanel(props)
+  const modalType =
+    props.modalType ?? (props.lightDismiss === false ? 'alert' : 'modal')
   return (
     <Drawer
       className={mergeClasses(Panel.className, props.className)}
       type={props.type}
       separator={true}
       open={props.open}
+      modalType={modalType}
+      inertTrapFocus={props.inertTrapFocus}
       onOpenChange={onOpenChange}
       position={props.position}
       size={props.size}

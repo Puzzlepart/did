@@ -1,12 +1,7 @@
-import {
-  Checkbox,
-  Icon,
-  ScrollablePane,
-  Sticky,
-  StickyPositionType
-} from '@fluentui/react'
+import { Checkbox } from '@fluentui/react-components'
 import { DynamicSearchBox } from 'components'
 import { SubText } from 'components/SubText'
+import { getFluentIcon } from 'utils/getFluentIcon'
 import React from 'react'
 import { StyledComponent } from 'types'
 import _ from 'underscore'
@@ -23,17 +18,15 @@ export const LabelPicker: StyledComponent<ILabelPickerProps> = (props) => {
 
   return (
     <div className={LabelPicker.className}>
-      <ScrollablePane className={styles.scrollableContent}>
+      <div className={styles.scrollableContent}>
+        <div className={styles.stickyHeader}>
+          <DynamicSearchBox
+            className={styles.searchBox}
+            placeholder={props.placeholder}
+            onChange={onSearch}
+          />
+        </div>
         <div className={styles.container}>
-          <Sticky stickyPosition={StickyPositionType.Header}>
-            <div className={styles.header}>
-              <DynamicSearchBox
-                className={styles.searchBox}
-                placeholder={props.placeholder}
-                onChange={onSearch}
-              />
-            </div>
-          </Sticky>
           <ul>
             {labels.map((label) => (
               <li key={label.name}>
@@ -44,18 +37,19 @@ export const LabelPicker: StyledComponent<ILabelPickerProps> = (props) => {
                       ({ name }) => name === label.name
                     )}
                     className={styles.itemCheckbox}
-                    onRenderLabel={() => (
+                    // v9 Checkbox supports complex ReactNode content in label prop
+                    label={
                       <div style={{ marginLeft: 8 }}>
                         <div>
-                          <Icon
-                            iconName='CircleFill'
-                            style={{ color: label.color, fontSize: 10 }}
-                          />
+                          {getFluentIcon('CircleFill', {
+                            color: label.color,
+                            size: 10
+                          })}
                           <span style={{ paddingLeft: 5 }}>{label.name}</span>
                         </div>
                         <SubText text={s.prune(label.description, 80)} />
                       </div>
-                    )}
+                    }
                     onChange={() => {
                       props.onToggleLabel(label)
                     }}
@@ -65,7 +59,7 @@ export const LabelPicker: StyledComponent<ILabelPickerProps> = (props) => {
             ))}
           </ul>
         </div>
-      </ScrollablePane>
+      </div>
     </div>
   )
 }

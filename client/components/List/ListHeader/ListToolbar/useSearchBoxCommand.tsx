@@ -1,12 +1,12 @@
-import { ICommandBarItemProps } from '@fluentui/react'
 import React from 'react'
 import { useListContext } from '../../context'
 import { SearchBox } from '../SearchBox'
 import { ListMenuItem } from './ListMenuItem'
+import { ListCommandBarItem } from '../../types'
 
 export function useSearchBoxCommand() {
   const context = useListContext()
-  const commandBarItem: ICommandBarItemProps = {
+  const commandBarItem: ListCommandBarItem = {
     key: 'SEARCH_BOX',
     onRender: () => <SearchBox {...context.props.searchBox} />
   }
