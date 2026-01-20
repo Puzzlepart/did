@@ -50,8 +50,7 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
     }
     return true
   }
-  if (authOptions.scope) {
-    if (!_.contains(context.permissions, authOptions.scope)) {
+  if (authOptions.scope && !_.contains(context.permissions, authOptions.scope)) {
       throw new GraphQLError(
         `Permission denied. Required permission: ${authOptions.scope}`,
         {
@@ -59,6 +58,5 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
         }
       )
     }
-  }
   return true
 }

@@ -49,14 +49,12 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
   // Filter items based on permissions
   const filteredItems = useMemo(() => {
     const filtered = { ...props.items }
-    Object.keys(filtered).forEach((key) => {
-      const [, , componentProps] = filtered[key]
-      if (componentProps?.permission && user) {
-        if (!user.hasPermission(componentProps.permission)) {
+    for (const key of Object.keys(filtered)) {
+      const componentProps = filtered[key][2]
+      if (componentProps?.permission && user && !user.hasPermission(componentProps.permission)) {
           delete filtered[key]
         }
-      }
-    })
+    }
     return filtered
   }, [props.items, user])
 
