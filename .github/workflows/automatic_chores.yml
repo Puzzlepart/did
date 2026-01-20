@@ -58,7 +58,7 @@ jobs:
       - name: Get git context
         id: git_context
         run: |
-          status=`git status --porcelain`
+          status="$(git status --porcelain | wc -l)"
           echo "status=$status" >> "$GITHUB_OUTPUT"
           echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
