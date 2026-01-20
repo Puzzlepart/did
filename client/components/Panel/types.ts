@@ -1,4 +1,4 @@
-import { DrawerProps } from '@fluentui/react-components/unstable'
+import { DialogProps, DrawerProps } from '@fluentui/react-components'
 import { IDynamicButtonProps } from 'components/DynamicButton'
 import { ReusableComponent } from 'components/types'
 import { HTMLProps, ReactElement } from 'react'
@@ -18,6 +18,7 @@ type IPanelDismissEvent = {
 
 export interface IPanelProps
   extends Pick<DrawerProps, 'open' | 'type' | 'position' | 'size'>,
+    Pick<DialogProps, 'modalType' | 'inertTrapFocus'>,
     Omit<HTMLProps<HTMLDivElement>, 'type' | 'open' | 'size'> {
   /**
    * The title of the panel to be displayed in the header.

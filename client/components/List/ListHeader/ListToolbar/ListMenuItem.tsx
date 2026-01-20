@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/switch-case-braces */
 /* eslint-disable unicorn/consistent-function-scoping */
-import { ICommandBarItemProps, Icon } from '@fluentui/react'
 import { MenuItemCheckboxProps } from '@fluentui/react-components'
 import { AnyAction } from '@reduxjs/toolkit'
 import React, { CSSProperties, Dispatch, MouseEventHandler } from 'react'
-import { FluentIconName, getFluentIconWithFallback } from 'utils'
+import { ListCommandBarItem } from 'components/List/types'
+import { FluentIconName, getFluentIcon } from 'utils'
 
 export type ListMenuItemGroup = 'default' | 'actions'
 
@@ -36,7 +36,7 @@ export class ListMenuItem {
 
   /**
    * The icon to display in the menu item. A string representing a FluentIcon
-   * or an Icon from `@fluentui/react` can be provided.
+   * or an Icon from Fluent UI can be provided.
    */
   private _iconName?: string | FluentIconName
 
@@ -83,7 +83,7 @@ export class ListMenuItem {
   /**
    * Custom render function for the command bar item associated with this list menu item.
    */
-  public onRender?: ICommandBarItemProps['onRender']
+  public onRender?: ListCommandBarItem['onRender']
 
   /**
    * The group name for the menu item.
@@ -266,27 +266,27 @@ export class ListMenuItem {
    *
    * @returns The updated ListMenuItem instance.
    */
-  public setCustomRender(onRender: ICommandBarItemProps['onRender']) {
+  public setCustomRender(onRender: ListCommandBarItem['onRender']) {
     this.onRender = onRender
     return this
   }
 
   /**
-   * Creates an icon component based on the provided list menu item.
-   * Supports both `FluentIcon` from `@fluentui/react-icons` and
-   * `Icon` from `@fluentui/react`.
+   * Creates an icon component based on the provided list menu item using v9 icons.
    *
    * @param item - The list menu item to create the icon for.
    *
    * @returns The icon component.
    */
   public static createIcon(item: ListMenuItem) {
-    let IconElement = () => null
     if (typeof item._iconName === 'string') {
-      return <Icon iconName={item._iconName} />
+      return getFluentIcon(item._iconName)
     }
-    if (item._iconName) IconElement = item._iconName as any
-    return <IconElement />
+    if (item._iconName) {
+      const IconElement = item._iconName as any
+      return <IconElement />
+    }
+    return null
   }
 
   public get text() {
@@ -294,16 +294,16 @@ export class ListMenuItem {
   }
 
   /**
-   * Converts an array of ICommandBarItemProps to an array of ListMenuItem.
+   * Converts an array of ListCommandBarItem to an array of ListMenuItem.
    *
-   * @param items - The array of ICommandBarItemProps to convert.
+   * @param items - The array of ListCommandBarItem to convert.
    *
    * @returns An array of ListMenuItem.
    */
-  public static convert(items: ICommandBarItemProps[]) {
+  public static convert(items: ListCommandBarItem[]) {
     return items.map((item) =>
       new ListMenuItem(item.text)
-        .withIcon(item.iconProps?.iconName)
+        .withIcon(item.iconName)
         .setOnClick(item.onClick)
         .setDisabled(item.disabled)
     )
@@ -403,7 +403,7 @@ export class ListMenuItem {
         }
         break
     }
-    if (this._iconName) props.icon = getFluentIconWithFallback(this._iconName)
+    if (this._iconName) props.icon = getFluentIcon(this._iconName)
     if (this._onClick) props.onClick = this._onClick
     props.disabled = this._disabled
     props.title = this._title

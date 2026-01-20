@@ -13,9 +13,28 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = (props) => {
   const context = useListContext()
   const fieldValue = get(props.item, props.column.fieldName)
   const style = context.props.getColumnStyle(props.item)
+
+  // If there's a custom onRender function, call it regardless of fieldValue
+  // The custom render function may want to handle null/undefined values
+  if (props.column.onRender) {
+    const element = props.column.onRender(
+      props.item,
+      props.index,
+      props.column as any
+    )
+    return (
+      <div className={ItemColumn.className} style={style}>
+        {element}
+      </div>
+    )
+  }
+
+  // For default rendering, return null if there's no field value
   if (!fieldValue) return null
+
   const renderMap = createRenderMap(fieldValue, props)
   let element: ReactElement = null
+
   if (props.column.isMultiline && fieldValue?.length > 80) {
     element = (
       <Tooltip
@@ -38,9 +57,7 @@ export const ItemColumn: StyledComponent<IItemColumnProps> = (props) => {
     if (renderMap.has(props.column.renderAs)) {
       return renderMap.get(props.column.renderAs)
     } else {
-      if (props.column.onRender) {
-        element = props.column.onRender(props.item)
-      } else element = <Text size={200}>{fieldValue}</Text>
+      element = <Text size={200}>{fieldValue}</Text>
     }
   }
 

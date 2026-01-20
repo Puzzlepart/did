@@ -709,6 +709,8 @@
     },
     "headerTotalDuration": " ({{duration}})",
     "groupBy": "Grupper etter",
+    "expandAllGroups": "Utvid alle grupper",
+    "collapseAllGroups": "Skjul alle grupper",
     "all": "Alle",
     "none": "Ingen",
     "previousMonth": "Forrige måned ({{monthName}})",

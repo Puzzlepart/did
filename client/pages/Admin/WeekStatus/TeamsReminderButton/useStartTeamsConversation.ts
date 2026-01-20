@@ -1,4 +1,4 @@
-import { format } from '@fluentui/react'
+import format from 'string-format'
 import { useSubscriptionSettings } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionTeamsSettings } from 'types'

@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prefer-ternary */
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { mergeClasses } from '@fluentui/react-components'
 import { EventList } from 'components'
 import { Tabs } from 'components/Tabs'

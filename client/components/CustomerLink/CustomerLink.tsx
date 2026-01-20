@@ -1,8 +1,7 @@
-import { Icon } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { createRouterLink } from 'utils'
+import { createRouterLink, getFluentIcon } from 'utils'
 import styles from './CustomerLink.module.scss'
 import { ICustomerLinkProps } from './types'
 
@@ -15,8 +14,12 @@ import { ICustomerLinkProps } from './types'
 export const CustomerLink: ReusableComponent<ICustomerLinkProps> = (props) => {
   return (
     <div className={CustomerLink.className}>
-      {props.showIcon && (
-        <Icon className={styles.icon} iconName={props.customer?.icon} />
+      {props.showIcon && props.customer?.icon && (
+        <span className={styles.icon}>
+          {getFluentIcon(props.customer.icon, {
+            default: 'Building'
+          })}
+        </span>
       )}
       <Link
         className={styles.link}

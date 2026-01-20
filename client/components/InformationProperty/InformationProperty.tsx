@@ -1,4 +1,4 @@
-import { Shimmer } from '@fluentui/react'
+import { Skeleton, SkeletonItem } from '@fluentui/react-components'
 import { FieldLabel } from 'components'
 import React from 'react'
 import { StyledComponent } from 'types'
@@ -10,20 +10,26 @@ export const InformationProperty: StyledComponent<IInformationPropertyProps> = (
   props
 ) => {
   if (props.hidden) return null
+  const isDataLoaded = props.isDataLoaded ?? true
   return (
-    <Shimmer
+    <div
       className={mergeClasses(InformationProperty.className, props.className)}
-      isDataLoaded={props.isDataLoaded}
     >
-      <div hidden={props.value === null || props.value === ''}>
-        <FieldLabel
-          text={props.title}
-          hidden={props.value === null || props.value === ''}
-        />
-        {props.onRenderValue(props.value)}
-        {props.children}
-      </div>
-    </Shimmer>
+      {isDataLoaded ? (
+        <div hidden={props.value === null || props.value === ''}>
+          <FieldLabel
+            text={props.title}
+            hidden={props.value === null || props.value === ''}
+          />
+          {props.onRenderValue(props.value)}
+          {props.children}
+        </div>
+      ) : (
+        <Skeleton>
+          <SkeletonItem style={{ width: '100%', height: 16 }} />
+        </Skeleton>
+      )}
+    </div>
   )
 }
 

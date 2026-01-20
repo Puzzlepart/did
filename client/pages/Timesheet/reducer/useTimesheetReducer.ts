@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { current } from '@reduxjs/toolkit'
 import { useReduxReducer as useReducer } from 'hooks'
 import { useTranslation } from 'react-i18next'

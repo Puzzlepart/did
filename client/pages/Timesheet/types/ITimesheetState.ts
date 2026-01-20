@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { IUserMessageProps } from 'components'
 import { EventObject } from 'types'
 import { TimesheetViewComponent } from '../Views'

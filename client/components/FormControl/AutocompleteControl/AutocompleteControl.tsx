@@ -8,7 +8,7 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import styles from './AutocompleteControl.module.scss'
 import { ON_SEARCH, SET_SELECTED } from './reducer/actions'
 import { renderOption } from './renderOption'
@@ -47,7 +47,7 @@ export const AutocompleteControl: FormInputControlComponent<
           <div ref={ref} className={styles.container}>
             {state.value &&
               props.iconPreview &&
-              getFluentIconWithFallback(state.value, {
+              getFluentIcon(state.value, {
                 size: 18
               })}
             <Combobox
