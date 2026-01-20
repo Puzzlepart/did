@@ -33,9 +33,20 @@ export interface IListColumn<T extends object = any, P extends object = any> {
   maxWidth?: number
 
   /**
-   * Allow resizing (NOT IMPLEMENTED in v9 migration).
-   * This property is accepted for backwards compatibility but has no effect.
-   * Column resizing is not currently supported in the DataGrid implementation.
+   * Default/initial width for resizable columns. Used as the starting
+   * width before any user resizing. Falls back to minWidth if not specified.
+   */
+  defaultWidth?: number
+
+  /**
+   * Ideal/target width for auto-fit scenarios. When columns are auto-fitted
+   * to container, this represents the optimal width. Falls back to defaultWidth.
+   */
+  idealWidth?: number
+
+  /**
+   * Allow resizing. When the parent List component has `resizableColumns={true}`,
+   * this column will be resizable unless explicitly set to false.
    */
   isResizable?: boolean
 

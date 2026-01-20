@@ -8,6 +8,7 @@ import {
   DataGridRow as FluentDataGridRow,
   Skeleton,
   SkeletonItem,
+  TableColumnId,
   mergeClasses,
   tokens,
   useScrollbarWidth,
@@ -43,6 +44,7 @@ import {
 } from './types'
 import { useList } from './useList'
 import { useListGroups } from './useListGroups'
+import { useColumnWidthPersist } from './hooks'
 import { SET_SORT } from './reducer'
 import { SearchBox as ListSearchBox } from './ListHeader/SearchBox'
 import { ListToolbar } from './ListHeader/ListToolbar'
@@ -407,6 +409,24 @@ export const List: ReusableComponent<IListProps> = (props) => {
     [treeGridTemplateColumns]
   )
 
+  // Column resizing support
+  const resizableColumns = props.resizableColumns ?? true
+  const { columnSizingOptions, handleColumnResize } = useColumnWidthPersist(
+    columns,
+    props.persistColumnWidths
+  )
+
+  const onColumnResize = useCallback(
+    (
+      e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
+      data: { columnId: TableColumnId; width: number }
+    ) => {
+      handleColumnResize(e, { columnId: String(data.columnId), width: data.width })
+      props.onColumnResize?.(e, { columnId: String(data.columnId), width: data.width })
+    },
+    [handleColumnResize, props.onColumnResize]
+  )
+
   const hasGroups = isGrouped && groups.length > 0
   const allGroupsOpen =
     hasGroups &&
@@ -466,6 +486,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
           }}
           className={styles.dataGrid}
           style={dataGridStyle}
+          resizableColumns={resizableColumns}
+          columnSizingOptions={columnSizingOptions}
+          onColumnResize={onColumnResize}
+          resizableColumnsOptions={{ autoFitColumns: props.autoFitColumns ?? true }}
         >
           <DataGridHeader
             ref={dataGridHeaderRef}
@@ -572,6 +596,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
         }}
         className={styles.dataGrid}
         style={dataGridStyle}
+        resizableColumns={resizableColumns}
+        columnSizingOptions={columnSizingOptions}
+        onColumnResize={onColumnResize}
+        resizableColumnsOptions={{ autoFitColumns: props.autoFitColumns ?? true }}
       >
         <DataGridHeader>
           <FluentDataGridRow className={styles.dataGridHeaderRow}>
@@ -1017,5 +1045,7 @@ List.defaultProps = {
   minmalHeaderColumns: true,
   checkboxVisibility: CheckboxVisibility.onHover,
   selectionProps: [SelectionMode.none],
-  setKey: List.displayName
+  setKey: List.displayName,
+  resizableColumns: true,
+  autoFitColumns: true
 }
