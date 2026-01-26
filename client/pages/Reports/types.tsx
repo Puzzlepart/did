@@ -1,4 +1,3 @@
-import { IContextualMenuItem } from '@fluentui/react'
 import { IListGroupProps, ListFilterState } from 'components/List/types'
 import { ITabProps } from 'components/Tabs'
 import { IDatePeriod } from 'DateUtils'
@@ -56,14 +55,22 @@ export interface IReportsQuery<QueryType = any> extends ITabProps {
 /**
  * @ignore
  */
-export interface IGroupByOption extends IContextualMenuItem {
+export interface IReportsMenuItem {
+  key: string
+  text: string
+}
+
+/**
+ * @ignore
+ */
+export interface IGroupByOption extends IReportsMenuItem {
   props: IListGroupProps
 }
 
 /**
  * @category Reports
  */
-export interface IReportsSavedFilter extends IContextualMenuItem {
+export interface IReportsSavedFilter extends IReportsMenuItem {
   values: Record<string, any>
 }
 

@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import $date from 'DateUtils'
 import { IListColumn } from 'components/List/types'
 import { TFunction, useTranslation } from 'react-i18next'

@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Icon } from '@fluentui/react'
 import { Button } from '@fluentui/react-components'
 import { UserMessage } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
+import { getFluentIcon } from 'utils'
 import { ReportLinkTooltip } from './ReportLinkTooltip'
 import styles from './ReportLinks.module.scss'
 import { IReportLinksProps } from './types'
@@ -32,9 +32,9 @@ export const ReportLinks: StyledComponent<IReportLinksProps> = (props) => {
             <Button
               className={styles.link}
               onClick={() => window.open(link.externalUrl, '_blank')}
-              icon={
-                <Icon iconName={link.icon} style={{ color: link.iconColor }} />
-              }
+              icon={getFluentIcon(link.iconName, {
+                color: link.iconColor
+              })}
             >
               {link.name}
             </Button>

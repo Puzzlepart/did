@@ -1,18 +1,16 @@
-import { AlertProps } from '@fluentui/react-components/unstable'
-import { useAppContext } from 'AppContext'
+import { MessageBarProps } from '@fluentui/react-components'
+import { CSSProperties } from 'react'
 
 /**
  * Get `background` and `color` styles for `UserMessage` based on
- * the provided `intent`. We use colors from `semanticColors` in
- * the legacy theme.
+ * the provided `intent`. In Fluent UI v9, MessageBar handles intent
+ * styling natively, so we return an empty object.
  *
  * @category UserMessage
  */
-export function useUserMessageStyles(intent: AlertProps['intent']) {
-  const { user } = useAppContext()
-  const semanticColors = user.theme.legacyTheme?.semanticColors ?? {}
-  return {
-    background: semanticColors[`${intent}Background`],
-    color: semanticColors[`${intent}Text`]
-  }
+export function useUserMessageStyles(
+  _intent: MessageBarProps['intent']
+): CSSProperties {
+  // Return empty object to let MessageBar use native v9 intent styling
+  return {}
 }

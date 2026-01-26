@@ -7,7 +7,7 @@ import {
 import { ReusableComponent } from 'components/types'
 import { usePermissions } from 'hooks'
 import React from 'react'
-import { getFluentIconWithFallback } from 'utils'
+import { getFluentIcon } from 'utils'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 
@@ -33,7 +33,7 @@ export const PermissionList: ReusableComponent<IPermissionListProps> = ({
             relationship='description'
           >
             <div className={styles.item}>
-              {getFluentIconWithFallback(perm.iconName, {
+              {getFluentIcon(perm.iconName, {
                 default: 'Document'
               })}
               <Caption1>{perm.name}</Caption1>

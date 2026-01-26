@@ -1,5 +1,4 @@
-import { useTheme } from '@fluentui/react'
-import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import { CheckboxProps, SliderProps, tokens } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { DateObject } from 'DateUtils'
 import _ from 'lodash'
@@ -17,7 +16,6 @@ import { SubscriptionSettingField } from './types'
  */
 export function useSubscriptionConfig() {
   const { subscription } = useAppContext()
-  const theme = useTheme()
   const { t } = useTranslation()
   return [
     {
@@ -58,7 +56,7 @@ export function useSubscriptionConfig() {
             description: t(
               'admin.subscriptionSettings.navBackgroundDescription'
             ),
-            defaultValue: theme?.semanticColors?.menuHeader
+            defaultValue: tokens.colorBrandBackground
           }
         },
         {

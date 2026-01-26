@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { PopoverProps } from '@fluentui/react-components'
 import { useState } from 'react'
 import { isBrowser } from 'react-device-detect'

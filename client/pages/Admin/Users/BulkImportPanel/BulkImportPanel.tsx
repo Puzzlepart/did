@@ -1,4 +1,4 @@
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { CheckboxVisibility, SelectionMode } from 'components/List/types'
 import { Button, Spinner } from '@fluentui/react-components'
 import { List, Panel } from 'components'
 import React from 'react'
