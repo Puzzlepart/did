@@ -1,4 +1,4 @@
-import { SelectionMode } from '@fluentui/react'
+import { SelectionMode } from 'components/List/types'
 import { List, ListMenuItem, TabComponent } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -47,7 +47,7 @@ export const ReportLinks: TabComponent = () => {
             {
               key: 'ADD_NEW_REPORT_LINK',
               text: t('admin.reportLinks.addNewReportsLink'),
-              iconProps: { iconName: 'Add' },
+              iconName: 'Add',
               onClick: () => {
                 setForm({ open: true })
               }

@@ -1,5 +1,4 @@
-import { useTheme } from '@fluentui/react'
-import { Popover, PopoverSurface } from '@fluentui/react-components'
+import { Popover, PopoverSurface, tokens } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import React from 'react'
 import { MobileView } from 'react-device-detect'
@@ -22,7 +21,6 @@ import { VersionInfo } from './VersionInfo'
 export const UserMenu: StyledComponent = () => {
   const { t } = useTranslation()
   const { subscription } = useAppContext()
-  const { palette } = useTheme()
   return (
     <Popover withArrow={true} closeOnScroll={true}>
       <UserMenuTrigger />
@@ -30,7 +28,7 @@ export const UserMenu: StyledComponent = () => {
         <MenuItem
           text={subscription.name}
           className={styles.subscription}
-          style={{ color: palette.neutralSecondary }}
+          style={{ color: tokens.colorNeutralForeground2 }}
         />
         <UserAvatar />
         <UserVacation />

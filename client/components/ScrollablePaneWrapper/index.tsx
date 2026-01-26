@@ -1,4 +1,3 @@
-import { ScrollablePane, ScrollbarVisibility } from '@fluentui/react'
 import { ReusableComponent } from 'components/types'
 import React from 'react'
 
@@ -14,13 +13,15 @@ export const ScrollablePaneWrapper: ReusableComponent<any> = ({
   height
 }) =>
   condition ? (
-    <div style={{ position: 'relative', height }}>
-      <ScrollablePane
-        scrollbarVisibility={ScrollbarVisibility.auto}
-        styles={{ contentContainer: { overflowX: 'hidden' } }}
-      >
-        {children}
-      </ScrollablePane>
+    <div
+      style={{
+        position: 'relative',
+        height,
+        overflowY: 'auto',
+        overflowX: 'hidden'
+      }}
+    >
+      {children}
     </div>
   ) : (
     children

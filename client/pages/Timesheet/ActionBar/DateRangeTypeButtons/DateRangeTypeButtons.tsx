@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/date-time-utilities'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import {
   ToolbarRadioButton,
   ToolbarRadioButtonProps

@@ -2,7 +2,7 @@ query ReportLinks {
   reportLinks {
     name
     description
-    icon
+    iconName
     iconColor
     externalUrl
     year 

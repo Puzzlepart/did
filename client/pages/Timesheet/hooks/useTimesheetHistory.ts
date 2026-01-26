@@ -1,4 +1,4 @@
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { useAppContext } from 'AppContext'
 import { useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'

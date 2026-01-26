@@ -5,7 +5,7 @@ import _ from 'underscore'
 import { Field } from '../../Field'
 import styles from './DateField.module.scss'
 import { IDateFieldProps } from './types'
-import { DayOfWeek } from '@fluentui/react'
+import { DayOfWeek } from '@fluentui/react-calendar-compat'
 import { useTranslation } from 'react-i18next'
 
 /**

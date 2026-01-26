@@ -1,4 +1,4 @@
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { CheckboxVisibility, SelectionMode } from 'components/List/types'
 import { IListProps, List } from 'components/List'
 import { Tabs } from 'components/Tabs'
 import { ITabProps, TabComponent } from 'components/Tabs/types'
