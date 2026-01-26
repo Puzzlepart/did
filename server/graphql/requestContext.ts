@@ -145,22 +145,28 @@ export class RequestContext {
             const userDoc = await tenantDb
               .collection('users')
               .findOne({ _id: userId })
-            if (userDoc?.role) {
+            if (userDoc?.role && typeof userDoc.role === 'string') {
               // User's role is stored as a string (role name) in the database
               roleName = userDoc.role
               debug(
                 `Fetched current role assignment for user ${userId}: ${roleName}`
               )
+            } else if (userDoc) {
+              debug(
+                `User ${userId} found but role is missing or not a string. Using session fallback.`
+              )
+            } else {
+              debug(
+                `User ${userId} not found in database. Using session fallback.`
+              )
             }
           }
 
-          // Fallback to session role name if database lookup fails
+          // Fallback to session role name if database lookup fails or returns invalid data
           if (!roleName) {
             roleName = get(request, 'user.role.name')
             if (roleName) {
-              debug(
-                `Using session role name as fallback: ${roleName} (user not found in database or no role set)`
-              )
+              debug(`Using session role name as fallback: ${roleName}`)
             }
           }
 
