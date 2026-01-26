@@ -53,17 +53,29 @@ export const setupGraphQL = async (
       schema,
       rootValue: global,
       formatError: (error) => {
-        // Include error extensions for better client-side error handling
-        const { message, extensions } = error
+        const { message, extensions, locations, path } = error
         const code = extensions?.code
-        
+
+        // Log unexpected errors (not auth errors which are expected)
+        if (code !== 'UNAUTHENTICATED' && code !== 'FORBIDDEN') {
+          debug('GraphQL error:', { message, code, path })
+        }
+
         // Map error codes to HTTP status for client-side handling
-        const httpStatus = 
-          code === 'UNAUTHENTICATED' ? 401 :
-          (code === 'FORBIDDEN' ? 403 : undefined)
-        
+        const httpStatusMap: Record<string, number> = {
+          'UNAUTHENTICATED': 401,
+          'FORBIDDEN': 403,
+          'BAD_USER_INPUT': 400,
+          'GRAPHQL_PARSE_FAILED': 400,
+          'GRAPHQL_VALIDATION_FAILED': 400,
+          'INTERNAL_SERVER_ERROR': 500
+        }
+        const httpStatus = code ? httpStatusMap[code as string] : undefined
+
         return {
           message,
+          locations,
+          path,
           extensions: httpStatus
             ? { ...extensions, http: { status: httpStatus } }
             : extensions
@@ -120,6 +132,7 @@ export const setupGraphQL = async (
       `ApolloServer server started and available at ${colors.magenta(path)}`
     )
   } catch (error) {
-    debug(error)
+    console.error('[FATAL] Failed to initialize GraphQL server:', error)
+    throw error
   }
 }

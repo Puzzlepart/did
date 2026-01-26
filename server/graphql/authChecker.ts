@@ -5,6 +5,8 @@ import _ from 'underscore'
 import { PermissionScope } from '../../shared/config/security'
 import { RequestContext } from './requestContext'
 
+export const debug = require('debug')('graphql/authChecker')
+
 /**
  * GraphQL API authentication options.
  *
@@ -36,6 +38,7 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
 ) => {
   if (!authOptions) {
     if (!context.permissions) {
+      debug('Authentication required - no permissions present')
       throw new GraphQLError('Authentication required', {
         extensions: { code: 'UNAUTHENTICATED' }
       })
@@ -44,6 +47,7 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
   }
   if (authOptions.requiresUserContext) {
     if (!context.userId) {
+      debug('User context required - no userId present')
       throw new GraphQLError('User context required', {
         extensions: { code: 'UNAUTHENTICATED' }
       })
@@ -51,8 +55,9 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
     return true
   }
   if (authOptions.scope && !_.contains(context.permissions, authOptions.scope)) {
-    // Log permission details server-side for debugging, but don't expose to client
-    console.log(`[AuthChecker] Permission denied: required ${authOptions.scope}, user has ${context.permissions?.join(', ') || 'none'}`)
+    debug(
+      `Permission denied: required ${authOptions.scope}, user has ${context.permissions?.length ?? 0} permissions`
+    )
     throw new GraphQLError(
       'Insufficient permissions to perform this operation',
       {
