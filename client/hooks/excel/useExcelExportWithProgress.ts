@@ -209,9 +209,9 @@ export function useExcelExportWithProgress({
         const presetQuery = generatePresetQuery(presetId)
         const queryOverrides = queryVariables?.query
         const baseQuery = presetId
-          ? queryOverrides
+          ? (queryOverrides
             ? { ...presetQuery, ...queryOverrides }
-            : presetQuery
+            : presetQuery)
           : queryOverrides ?? {}
 
         // Estimate total batches conservatively (used for progress display only)
