@@ -81,7 +81,5 @@ export interface IListColumnData {
   /**
    * Callback to render custom column header content.
    */
-  onRenderColumnHeader?: (
-    props: ListColumnHeaderRenderProps
-  ) => JSX.Element
+  onRenderColumnHeader?: (props: ListColumnHeaderRenderProps) => JSX.Element
 }

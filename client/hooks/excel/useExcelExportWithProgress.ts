@@ -16,7 +16,7 @@ interface IUseExcelExportWithProgressOptions {
   columns: IListColumn[]
   isLargeDataset?: boolean
   batchSize?: number
-  presetId?: string  // e.g., 'current_year', 'last_year' for generating preset query
+  presetId?: string // e.g., 'current_year', 'last_year' for generating preset query
 }
 
 interface ExportProgress {
@@ -55,9 +55,9 @@ const MAX_CONSECUTIVE_EMPTY_BATCHES = 2
  */
 function generatePresetQuery(presetId?: string): Record<string, any> {
   if (!presetId) return {}
-  
+
   const dateObject = new DateObject()
-  
+
   switch (presetId) {
     case 'last_month': {
       const lastMonth = dateObject.add('-1month').toObject()
@@ -89,7 +89,7 @@ function generatePresetQuery(presetId?: string): Record<string, any> {
 
 /**
  * Joins time entries with user data to populate resource fields.
- * 
+ *
  * @param entries - Time entries with resource.id
  * @param users - Full user data
  * @returns Time entries with complete resource data
@@ -98,19 +98,19 @@ function mapTimeEntries(entries: TimeEntry[], users: User[]): TimeEntry[] {
   if (!users || users.length === 0) {
     return entries
   }
-  
+
   return entries.map((entry) => {
     if (!entry.resource?.id) {
       return entry
     }
-    
+
     const resource = users.find(({ id }) => id === entry.resource?.id)
     if (!resource) {
       return entry
     }
-    
+
     const manager = users.find(({ id }) => id === resource.manager?.id)
-    
+
     return {
       ...entry,
       resource: {
@@ -124,7 +124,7 @@ function mapTimeEntries(entries: TimeEntry[], users: User[]): TimeEntry[] {
 
 /**
  * Excel export hook with progress tracking for large datasets
- * 
+ *
  * @category React Hook
  */
 export function useExcelExportWithProgress({
@@ -173,7 +173,9 @@ export function useExcelExportWithProgress({
   const exportAllData = async () => {
     // Check ref for truly synchronous check
     if (isExportingRef.current) {
-      debugLogger.log('[Excel Export] Export already in progress, ignoring request')
+      debugLogger.log(
+        '[Excel Export] Export already in progress, ignoring request'
+      )
       return
     }
 
@@ -207,8 +209,10 @@ export function useExcelExportWithProgress({
         const presetQuery = generatePresetQuery(presetId)
         const queryOverrides = queryVariables?.query
         const baseQuery = presetId
-          ? (queryOverrides ? { ...presetQuery, ...queryOverrides } : presetQuery)
-          : (queryOverrides ?? {})
+          ? (queryOverrides
+            ? { ...presetQuery, ...queryOverrides }
+            : presetQuery)
+          : queryOverrides ?? {}
 
         // Estimate total batches conservatively (used for progress display only)
         const estimatedTotal = Math.min(
@@ -261,7 +265,8 @@ export function useExcelExportWithProgress({
           })
 
           // Extract entries from result - handle different possible field names
-          const batchEntries = result.data?.timeEntries || result.data?.report || []
+          const batchEntries =
+            result.data?.timeEntries || result.data?.report || []
 
           // Users data is the same across all batches, only fetch once
           if (users.length === 0 && result.data?.users) {
@@ -310,7 +315,8 @@ export function useExcelExportWithProgress({
                 return !isDuplicate
               })
 
-              const duplicateCount = batchEntries.length - uniqueNewEntries.length
+              const duplicateCount =
+                batchEntries.length - uniqueNewEntries.length
               if (duplicateCount > 0) {
                 debugLogger.warn(
                   `[Excel Export] Removed ${duplicateCount} duplicate entries from batch ${batchNumber}`
@@ -361,7 +367,7 @@ export function useExcelExportWithProgress({
         users = result.data?.users || []
 
         if (isMountedRef.current) {
-          setProgress(prev => ({
+          setProgress((prev) => ({
             ...prev,
             totalEntries: allEntries.length,
             loadedEntries: allEntries.length,
@@ -379,12 +385,14 @@ export function useExcelExportWithProgress({
       }
 
       // Map time entries with user data to populate resource fields
-      debugLogger.log(`[Excel Export] Mapping ${allEntries.length} entries with ${users.length} users`)
+      debugLogger.log(
+        `[Excel Export] Mapping ${allEntries.length} entries with ${users.length} users`
+      )
       const mappedEntries = mapTimeEntries(allEntries, users)
 
       // Processing stage
       if (isMountedRef.current) {
-        setProgress(prev => ({
+        setProgress((prev) => ({
           ...prev,
           stage: 'processing',
           progress: 80
@@ -393,7 +401,7 @@ export function useExcelExportWithProgress({
 
       // Generate Excel file
       if (isMountedRef.current) {
-        setProgress(prev => ({
+        setProgress((prev) => ({
           ...prev,
           stage: 'generating',
           progress: 90
@@ -412,7 +420,7 @@ export function useExcelExportWithProgress({
 
       // Complete
       if (isMountedRef.current) {
-        setProgress(prev => ({
+        setProgress((prev) => ({
           ...prev,
           stage: 'complete',
           progress: 100,
@@ -434,11 +442,12 @@ export function useExcelExportWithProgress({
           }
         }, 3000)
       }
-
     } catch (error) {
       // Don't update state if component unmounted or export was cancelled
       if (!isMountedRef.current) {
-        debugLogger.log('[Excel Export] Component unmounted, skipping error state update')
+        debugLogger.log(
+          '[Excel Export] Component unmounted, skipping error state update'
+        )
         return
       }
 
@@ -466,18 +475,20 @@ export function useExcelExportWithProgress({
 
   const getProgressMessage = () => {
     if (!progress.isExporting) return ''
-    
+
     switch (progress.stage) {
       case 'loading': {
-        return isLargeDataset 
-          ? t('reports.exportProgressLoadingBatch', { 
-              current: progress.currentBatch, 
-              total: progress.totalBatches || '?' 
+        return isLargeDataset
+          ? t('reports.exportProgressLoadingBatch', {
+              current: progress.currentBatch,
+              total: progress.totalBatches || '?'
             })
           : t('reports.exportProgressLoading')
       }
       case 'processing': {
-        return t('reports.exportProgressProcessing', { count: progress.totalEntries })
+        return t('reports.exportProgressProcessing', {
+          count: progress.totalEntries
+        })
       }
       case 'generating': {
         return t('reports.exportProgressGenerating')

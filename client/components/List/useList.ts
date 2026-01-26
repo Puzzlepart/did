@@ -42,11 +42,9 @@ export function useList(props: IListProps) {
 
   const items = useMemo(() => {
     if (!context.state.sortOpts) return context.state.items
-    return arraySort(
-      [...context.state.items],
-      context.state.sortOpts[0],
-      { reverse: context.state.sortOpts[1] === 'asc' }
-    )
+    return arraySort([...context.state.items], context.state.sortOpts[0], {
+      reverse: context.state.sortOpts[1] === 'asc'
+    })
   }, [context.state.items, context.state.sortOpts])
 
   useEffect(() => {

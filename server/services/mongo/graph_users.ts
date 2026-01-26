@@ -32,7 +32,10 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
   private async ensureIndexes(): Promise<void> {
     try {
       // Index on id field for upsert operations (unique)
-      await this.collection.createIndex({ id: 1 }, { unique: true, background: true })
+      await this.collection.createIndex(
+        { id: 1 },
+        { unique: true, background: true }
+      )
 
       // Text index for search functionality on displayName, givenName, surname, mail
       await this.collection.createIndex(
@@ -122,14 +125,21 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
    * @param users - Array of user objects to upsert
    * @param batchSize - Number of users to process per batch (default: 500)
    */
-  public async bulkUpsertUsers(users: ActiveDirectoryUser[], batchSize: number = 500): Promise<void> {
+  public async bulkUpsertUsers(
+    users: ActiveDirectoryUser[],
+    batchSize: number = 500
+  ): Promise<void> {
     const debug = require('debug')('services/mongo/graph_users')
     try {
       if (users.length === 0) return
 
       const totalBatches = Math.ceil(users.length / batchSize)
-      debug(`📦 Starting bulk upsert: ${users.length} users in ${totalBatches} batches (${batchSize} per batch)`)
-      debug(`Starting bulk upsert of ${users.length} users in batches of ${batchSize}`)
+      debug(
+        `📦 Starting bulk upsert: ${users.length} users in ${totalBatches} batches (${batchSize} per batch)`
+      )
+      debug(
+        `Starting bulk upsert of ${users.length} users in batches of ${batchSize}`
+      )
 
       // Process users in batches to prevent timeout
       for (let i = 0; i < users.length; i += batchSize) {
@@ -137,8 +147,12 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         const currentBatch = Math.floor(i / batchSize) + 1
         const batchStartTime = Date.now()
 
-        debug(`  ⏳ Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)...`)
-        debug(`Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)`)
+        debug(
+          `  ⏳ Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)...`
+        )
+        debug(
+          `Processing batch ${currentBatch}/${totalBatches} (${batch.length} users)`
+        )
 
         const bulkOps = batch.map((user) => ({
           updateOne: {
@@ -152,7 +166,9 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         await this.collection.bulkWrite(bulkOps, { ordered: false })
 
         const batchDuration = Date.now() - batchStartTime
-        debug(`  ✅ Batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`)
+        debug(
+          `  ✅ Batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`
+        )
         debug(`Completed batch ${currentBatch}/${totalBatches}`)
       }
 
@@ -185,14 +201,21 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
    * @param userIds - Array of user IDs to delete
    * @param batchSize - Number of users to delete per batch (default: 1000)
    */
-  public async bulkDeleteUsers(userIds: string[], batchSize: number = 1000): Promise<void> {
+  public async bulkDeleteUsers(
+    userIds: string[],
+    batchSize: number = 1000
+  ): Promise<void> {
     const debug = require('debug')('services/mongo/graph_users')
     try {
       if (userIds.length === 0) return
 
       const totalBatches = Math.ceil(userIds.length / batchSize)
-      debug(`🗑️  Starting bulk delete: ${userIds.length} users in ${totalBatches} batches (${batchSize} per batch)`)
-      debug(`Starting bulk delete of ${userIds.length} users in batches of ${batchSize}`)
+      debug(
+        `🗑️  Starting bulk delete: ${userIds.length} users in ${totalBatches} batches (${batchSize} per batch)`
+      )
+      debug(
+        `Starting bulk delete of ${userIds.length} users in batches of ${batchSize}`
+      )
 
       // Process deletions in batches to prevent timeout
       for (let i = 0; i < userIds.length; i += batchSize) {
@@ -200,11 +223,17 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         const currentBatch = Math.floor(i / batchSize) + 1
         const batchStartTime = Date.now()
 
-        debug(`  ⏳ Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)...`)
-        debug(`Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)`)
+        debug(
+          `  ⏳ Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)...`
+        )
+        debug(
+          `Deleting batch ${currentBatch}/${totalBatches} (${batch.length} users)`
+        )
         await this.collection.deleteMany({ id: { $in: batch } })
         const batchDuration = Date.now() - batchStartTime
-        debug(`  ✅ Deletion batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`)
+        debug(
+          `  ✅ Deletion batch ${currentBatch}/${totalBatches} completed in ${batchDuration}ms`
+        )
         debug(`Completed deletion batch ${currentBatch}/${totalBatches}`)
       }
 

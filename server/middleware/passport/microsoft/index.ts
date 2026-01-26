@@ -14,7 +14,10 @@ const log = require('debug')('server/middleware/passport/azuread')
  */
 export const azureAdStrategy = (mcl: MongoClient) => {
   // Use environment variable as base
-  const redirectUrl = environment('MICROSOFT_REDIRECT_URI', 'http://localhost:9001/auth/azuread-openidconnect/callback')
+  const redirectUrl = environment(
+    'MICROSOFT_REDIRECT_URI',
+    'http://localhost:9001/auth/azuread-openidconnect/callback'
+  )
 
   const strategy = new OIDCStrategy(
     {

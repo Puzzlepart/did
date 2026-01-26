@@ -433,9 +433,17 @@ export class MSGraphService {
         .api(`/users/${userId}`)
         .expand('manager')
         .select([
-          'id', 'displayName', 'givenName', 'surname', 'mail', 
-          'jobTitle', 'department', 'officeLocation', 'mobilePhone',
-          'accountEnabled', 'manager'
+          'id',
+          'displayName',
+          'givenName',
+          'surname',
+          'mail',
+          'jobTitle',
+          'department',
+          'officeLocation',
+          'mobilePhone',
+          'accountEnabled',
+          'manager'
         ])
         .get()
       return user
@@ -518,7 +526,10 @@ export class MSGraphService {
         return { users, deletedUserIds, newDeltaLink }
       }
     } catch (error) {
-      throw new MSGraphError('getUsersDelta', error instanceof Error ? error.message : String(error))
+      throw new MSGraphError(
+        'getUsersDelta',
+        error instanceof Error ? error.message : String(error)
+      )
     }
   }
 

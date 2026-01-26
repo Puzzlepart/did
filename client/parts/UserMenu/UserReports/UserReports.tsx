@@ -37,11 +37,7 @@ export const UserReports: FC = () => {
           }}
         >
           {queries.map((option) => (
-            <Radio
-              key={option.key}
-              value={option.key}
-              label={option.text}
-            />
+            <Radio key={option.key} value={option.key} label={option.text} />
           ))}
         </RadioGroup>
         {query.loading ? (
