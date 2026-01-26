@@ -380,25 +380,44 @@ export const List: ReusableComponent<IListProps> = (props) => {
     return `minmax(${minWidth}px, 1fr)`
   }, [])
 
+  // Column resizing support
+  const resizableColumns = props.resizableColumns ?? true
+  const autoFitColumns = props.autoFitColumns ?? true
+  const { columnSizingOptions, handleColumnResize, columnWidths, columnWidthOverrides } =
+    useColumnWidthPersist(columns, props.persistColumnWidths)
+
   const dataGridTemplateColumns = useMemo(() => {
     const columnMeta = dataGridColumns
       .map((col) => (col as { column?: IListColumn }).column)
       .filter(Boolean) as IListColumn[]
     if (columnMeta.length === 0) return ''
-    return columnMeta.map((column) => getColumnTrackSize(column)).join(' ')
-  }, [dataGridColumns, getColumnTrackSize])
+    return columnMeta
+      .map((column) => {
+        if (!resizableColumns) return getColumnTrackSize(column)
+        if (column.key === 'selection') return getColumnTrackSize(column)
+        const hasOverride = columnWidthOverrides.has(column.key)
+        if (autoFitColumns && !hasOverride) {
+          return getColumnTrackSize(column)
+        }
+        const minWidth = column.minWidth ?? 100
+        const width = columnWidths[column.key] ?? minWidth
+        const clamped = Math.max(minWidth, width)
+        return `minmax(${minWidth}px, ${clamped}px)`
+      })
+      .join(' ')
+  }, [
+    dataGridColumns,
+    getColumnTrackSize,
+    resizableColumns,
+    autoFitColumns,
+    columnWidths,
+    columnWidthOverrides
+  ])
 
   const treeGridTemplateColumns = useMemo(() => {
     if (columns.length === 0) return ''
     return columns.map((column) => getColumnTrackSize(column)).join(' ')
   }, [columns, getColumnTrackSize])
-
-  // Column resizing support
-  const resizableColumns = props.resizableColumns ?? true
-  const { columnSizingOptions, handleColumnResize } = useColumnWidthPersist(
-    columns,
-    props.persistColumnWidths
-  )
 
   const onColumnResize = useCallback(
     (
@@ -411,13 +430,32 @@ export const List: ReusableComponent<IListProps> = (props) => {
     [handleColumnResize, props.onColumnResize]
   )
 
-  const dataGridStyle = useMemo(
-    () =>
-      !resizableColumns && dataGridTemplateColumns
-        ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
-        : undefined,
-    [dataGridTemplateColumns, resizableColumns]
+  const getDataGridCellStyle = useCallback(
+    (columnMeta: IListColumn | undefined, isSelectionColumn: boolean) => {
+      if (!columnMeta) return undefined
+      const lockWidth = columnMeta.minWidth === columnMeta.maxWidth
+      return {
+        minWidth: columnMeta.minWidth,
+        maxWidth:
+          resizableColumns && !isSelectionColumn
+            ? undefined
+            : columnMeta.maxWidth,
+        width: lockWidth ? columnMeta.minWidth : undefined,
+        flex: lockWidth ? undefined : '1 1 auto'
+      } as React.CSSProperties
+    },
+    [resizableColumns]
   )
+
+  const dataGridStyle = useMemo(() => {
+    if (!dataGridTemplateColumns && autoFitColumns) return undefined
+    return {
+      ...(dataGridTemplateColumns
+        ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
+        : {}),
+      ...(autoFitColumns ? {} : { overflowX: 'auto' })
+    }
+  }, [dataGridTemplateColumns, autoFitColumns])
 
   const treeGridStyle = useMemo(
     () =>
@@ -489,7 +527,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
           resizableColumns={resizableColumns}
           columnSizingOptions={columnSizingOptions}
           onColumnResize={onColumnResize}
-          resizableColumnsOptions={{ autoFitColumns: props.autoFitColumns ?? true }}
+          resizableColumnsOptions={{ autoFitColumns }}
         >
           <DataGridHeader
             ref={dataGridHeaderRef}
@@ -511,15 +549,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                         ? styles.multiline
                         : styles.nowrap
                     )}
-                    style={{
-                      minWidth: columnMeta?.minWidth,
-                      maxWidth: columnMeta?.maxWidth,
-                      width:
-                        columnMeta?.minWidth === columnMeta?.maxWidth
-                          ? columnMeta?.minWidth
-                          : undefined,
-                      flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
-                    }}
+                    style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                     onClick={() =>
                       columnMeta && handleHeaderClick(columnMeta)
                     }
@@ -564,15 +594,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                           ? styles.multiline
                           : styles.nowrap
                       )}
-                      style={{
-                        minWidth: columnMeta?.minWidth,
-                        maxWidth: columnMeta?.maxWidth,
-                        width:
-                          columnMeta?.minWidth === columnMeta?.maxWidth
-                            ? columnMeta?.minWidth
-                            : undefined,
-                        flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
-                      }}
+                      style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                     >
                       {renderCell(item)}
                     </DataGridCell>
@@ -599,7 +621,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
         resizableColumns={resizableColumns}
         columnSizingOptions={columnSizingOptions}
         onColumnResize={onColumnResize}
-        resizableColumnsOptions={{ autoFitColumns: props.autoFitColumns ?? true }}
+        resizableColumnsOptions={{ autoFitColumns }}
       >
         <DataGridHeader>
           <FluentDataGridRow className={styles.dataGridHeaderRow}>
@@ -618,15 +640,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       ? styles.multiline
                       : styles.nowrap
                   )}
-                  style={{
-                    minWidth: columnMeta?.minWidth,
-                    maxWidth: columnMeta?.maxWidth,
-                    width:
-                      columnMeta?.minWidth === columnMeta?.maxWidth
-                        ? columnMeta?.minWidth
-                        : undefined,
-                    flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
-                  }}
+                  style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                   onClick={() =>
                     columnMeta && handleHeaderClick(columnMeta)
                   }
@@ -667,15 +681,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                         ? styles.multiline
                         : styles.nowrap
                     )}
-                    style={{
-                      minWidth: columnMeta?.minWidth,
-                      maxWidth: columnMeta?.maxWidth,
-                      width:
-                        columnMeta?.minWidth === columnMeta?.maxWidth
-                          ? columnMeta?.minWidth
-                          : undefined,
-                      flex: columnMeta?.minWidth === columnMeta?.maxWidth ? undefined : '1 1 auto'
-                    }}
+                    style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                   >
                     {renderCell(item)}
                   </DataGridCell>
@@ -699,7 +705,14 @@ export const List: ReusableComponent<IListProps> = (props) => {
     >
       <ListContext.Provider value={context}>
         {isVirtualized ? (
-          <div style={{ position: 'relative', height: props.height, overflow: 'hidden' }}>
+          <div
+            style={{
+              position: 'relative',
+              height: props.height,
+              overflowX: autoFitColumns ? 'hidden' : 'auto',
+              overflowY: 'hidden'
+            }}
+          >
             {showToolbar && (
               <div ref={listHeaderRef} className={headerClassName}>
                 {props.searchBox?.fullWidth && (

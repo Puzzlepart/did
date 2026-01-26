@@ -4,6 +4,10 @@ import { useBrowserStorage } from 'hooks'
 import { useCallback, useMemo, useRef, useEffect } from 'react'
 
 type PersistedColumnWidths = Record<string, number>
+type StorageLike = {
+  getItem: (key: string) => string | null
+  setItem: (key: string, value: string) => void
+}
 
 /**
  * Custom hook to persist column widths in localStorage and generate
@@ -27,11 +31,23 @@ export function useColumnWidthPersist(
     ? `${persistKey}_column_widths`
     : ephemeralKeyRef.current
 
+  const memoryStoreRef = useRef<StorageLike | null>(null)
+  if (!memoryStoreRef.current) {
+    const cache = new Map<string, string>()
+    memoryStoreRef.current = {
+      getItem: (key) => cache.get(key) ?? null,
+      setItem: (key, value) => {
+        cache.set(key, String(value))
+      }
+    }
+  }
+
   const storage = useBrowserStorage<PersistedColumnWidths>({
     key: storageKey,
-    initialValue: {}
+    initialValue: {},
+    store: persistKey ? window.localStorage : memoryStoreRef.current
   })
-  const persistedWidths = storage[0]
+  const persistedWidths = storage[0] ?? {}
   const setPersistedWidthsRaw = storage[3]
   
   // Wrapper to enable functional updates (useBrowserStorage doesn't support them natively)
@@ -54,12 +70,32 @@ export function useColumnWidthPersist(
     return map
   }, [columns])
 
+  const columnWidthOverrides = useMemo(
+    () => new Set(Object.keys(persistedWidths)),
+    [persistedWidths]
+  )
+
+  const columnWidths = useMemo<Record<string, number>>(() => {
+    const map: Record<string, number> = {}
+    for (const col of columns) {
+      const minWidth = minWidthByCol[col.key]
+      const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
+      const defaultWidth = Math.max(minWidth, defaultWidthRaw)
+      const idealWidth = col.idealWidth ?? defaultWidth
+      const persistedWidth = persistedWidths[col.key]
+      const baseWidth = persistedWidth ?? idealWidth
+      const clamped = Math.max(minWidth, baseWidth)
+      map[col.key] = clamped
+    }
+    return map
+  }, [columns, minWidthByCol, persistedWidths])
+
   const columnSizingOptions = useMemo<TableColumnSizingOptions>(() => {
     return columns.reduce<TableColumnSizingOptions>((acc, col) => {
       const minWidth = minWidthByCol[col.key]
       const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
       const defaultWidth = Math.max(minWidth, defaultWidthRaw)
-      const persistedWidth = persistKey ? persistedWidths?.[col.key] : undefined
+      const persistedWidth = persistedWidths[col.key]
       const idealWidth =
         persistedWidth === undefined
           ? col.idealWidth ?? defaultWidth
@@ -74,14 +110,13 @@ export function useColumnWidthPersist(
         }
       }
     }, {})
-  }, [columns, persistKey, persistedWidths, minWidthByCol])
+  }, [columns, persistedWidths, minWidthByCol])
 
   const handleColumnResize = useCallback(
     (
       _e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
       data: { columnId: string; width: number }
     ) => {
-      if (!persistKey) return
       const min = minWidthByCol[data.columnId] ?? 0
       const clamped = Math.max(min, data.width)
       setPersistedWidths(prev => ({
@@ -89,12 +124,11 @@ export function useColumnWidthPersist(
         [data.columnId]: clamped
       }))
     },
-    [persistKey, minWidthByCol, setPersistedWidths]
+    [minWidthByCol, setPersistedWidths]
   )
 
   // Prune widths for removed columns and normalize to minWidth when columns change.
   useEffect(() => {
-    if (!persistKey) return
     setPersistedWidths(prev => {
       const allowed = new Set(columns.map(c => c.key))
       let changed = false
@@ -111,7 +145,12 @@ export function useColumnWidthPersist(
       }
       return changed ? next : prev
     })
-  }, [columns, minWidthByCol, persistKey, setPersistedWidths])
+  }, [columns, minWidthByCol, setPersistedWidths])
 
-  return { columnSizingOptions, handleColumnResize } as const
+  return {
+    columnSizingOptions,
+    handleColumnResize,
+    columnWidths,
+    columnWidthOverrides
+  } as const
 }
