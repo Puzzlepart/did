@@ -7,7 +7,6 @@ on:
       - dev
     paths-ignore:
       - '**.md'
-      - '**.yml'
   
 jobs:
   setup:
@@ -156,3 +155,23 @@ jobs:
         run: npm run build:server
         env:
           NODE_ENV: production
+
+  # This job aggregates all other jobs and provides a single status check
+  # Update your branch protection to require "Test build" (this job) instead of the workflow name
+  status:
+    name: Test build
+    needs: [setup, test, lint, build_client, build_server]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check status
+        run: |
+          if [[ "${{ needs.setup.result }}" == "failure" || \
+                "${{ needs.test.result }}" == "failure" || \
+                "${{ needs.lint.result }}" == "failure" || \
+                "${{ needs.build_client.result }}" == "failure" || \
+                "${{ needs.build_server.result }}" == "failure" ]]; then
+            echo "One or more jobs failed"
+            exit 1
+          fi
+          echo "All jobs passed"
