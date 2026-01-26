@@ -22,15 +22,19 @@ export const Projects: FC = () => {
   const urlParameters = useParams<IProjectsUrlParameters>()
   const [, hasPermission] = usePermissions()
 
-  // Redirect if user tries to access /projects/new without permission
+  // Block access to /projects/new without permission (before rendering)
+  const canCreateProject = hasPermission(PermissionScope.MANAGE_PROJECTS)
+  
   useEffect(() => {
-    if (
-      urlParameters.currentTab === 'new' &&
-      !hasPermission(PermissionScope.MANAGE_PROJECTS)
-    ) {
+    if (urlParameters.currentTab === 'new' && !canCreateProject) {
       history.replace('/projects')
     }
-  }, [urlParameters.currentTab, hasPermission, history])
+  }, [urlParameters.currentTab, canCreateProject, history])
+
+  // Don't render unauthorized form to prevent flash of content
+  if (urlParameters.currentTab === 'new' && !canCreateProject) {
+    return null
+  }
 
   return (
     <ProjectsContext.Provider value={{ ...context }}>

@@ -47,15 +47,15 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
     useTabsSelection(props)
 
   // Filter items based on permissions
+  // Fail-closed: if user is not loaded or permission check fails, hide the tab
   const filteredItems = useMemo(() => {
-    const filtered = { ...props.items }
-    for (const key of Object.keys(filtered)) {
-      const componentProps = filtered[key][2]
-      if (componentProps?.permission && user && !user.hasPermission(componentProps.permission)) {
-          delete filtered[key]
-        }
-    }
-    return filtered
+    return Object.fromEntries(
+      // eslint-disable-next-line unicorn/no-unreadable-array-destructuring
+      Object.entries(props.items).filter(([, [, , componentProps]]) => {
+        if (!componentProps?.permission) return true
+        return user?.hasPermission(componentProps.permission) ?? false
+      })
+    )
   }, [props.items, user])
 
   const [selectedComponent, selectedTab, selectedComponentProps] = useMemo(

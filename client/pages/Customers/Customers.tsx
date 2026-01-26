@@ -21,15 +21,19 @@ export const Customers: FC = () => {
   const history = useHistory()
   const [, hasPermission] = usePermissions()
 
-  // Redirect if user tries to access /customers/new without permission
+  // Block access to /customers/new without permission (before rendering)
+  const canCreateCustomer = hasPermission(PermissionScope.MANAGE_CUSTOMERS)
+  
   useEffect(() => {
-    if (
-      currentTab === 'new' &&
-      !hasPermission(PermissionScope.MANAGE_CUSTOMERS)
-    ) {
+    if (currentTab === 'new' && !canCreateCustomer) {
       history.replace('/customers')
     }
-  }, [currentTab, hasPermission, history])
+  }, [currentTab, canCreateCustomer, history])
+
+  // Don't render unauthorized form to prevent flash of content
+  if (currentTab === 'new' && !canCreateCustomer) {
+    return null
+  }
 
   return (
     <CustomersContext.Provider value={context}>

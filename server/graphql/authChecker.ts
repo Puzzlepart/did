@@ -51,12 +51,14 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
     return true
   }
   if (authOptions.scope && !_.contains(context.permissions, authOptions.scope)) {
-      throw new GraphQLError(
-        `Permission denied. Required permission: ${authOptions.scope}`,
-        {
-          extensions: { code: 'FORBIDDEN', permission: authOptions.scope }
-        }
-      )
-    }
+    // Log permission details server-side for debugging, but don't expose to client
+    console.log(`[AuthChecker] Permission denied: required ${authOptions.scope}, user has ${context.permissions?.join(', ') || 'none'}`)
+    throw new GraphQLError(
+      'Insufficient permissions to perform this operation',
+      {
+        extensions: { code: 'FORBIDDEN' }
+      }
+    )
+  }
   return true
 }

@@ -13,7 +13,6 @@ import express from 'express'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import Container, { ContainerInstance } from 'typedi'
-import _ from 'underscore'
 import { RequestContext } from './requestContext'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
@@ -55,20 +54,20 @@ export const setupGraphQL = async (
       rootValue: global,
       formatError: (error) => {
         // Include error extensions for better client-side error handling
-        const formattedError = _.pick(error, 'message', 'extensions')
-        // Add status code to extensions if available
-        if (error.extensions?.code === 'UNAUTHENTICATED') {
-          formattedError.extensions = {
-            ...formattedError.extensions,
-            http: { status: 401 }
-          }
-        } else if (error.extensions?.code === 'FORBIDDEN') {
-          formattedError.extensions = {
-            ...formattedError.extensions,
-            http: { status: 403 }
-          }
+        const { message, extensions } = error
+        const code = extensions?.code
+        
+        // Map error codes to HTTP status for client-side handling
+        const httpStatus = 
+          code === 'UNAUTHENTICATED' ? 401 :
+          (code === 'FORBIDDEN' ? 403 : undefined)
+        
+        return {
+          message,
+          extensions: httpStatus
+            ? { ...extensions, http: { status: httpStatus } }
+            : extensions
         }
-        return formattedError
       },
       plugins: [
         ApolloServerPluginUsageReporting({
