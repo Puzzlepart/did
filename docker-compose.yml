@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
   # Main did application
   did:
@@ -27,6 +33,7 @@ services:
     networks:
       - did-network
     restart: unless-stopped
+    logging: *default-logging
 
   # MongoDB database
   mongodb:
@@ -42,6 +49,7 @@ services:
     networks:
       - did-network
     restart: unless-stopped
+    logging: *default-logging
     # Healthcheck required because other services use condition: service_healthy
     # mongosh is included in official mongo images (v5+). We ping the admin DB.
     healthcheck:
@@ -62,6 +70,7 @@ services:
       - did-network
     restart: unless-stopped
     command: redis-server --appendonly yes
+    logging: *default-logging
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -83,6 +92,7 @@ services:
     networks:
       - did-network
     restart: unless-stopped
+    logging: *default-logging
     profiles:
       - tools
 
@@ -98,6 +108,7 @@ services:
     networks:
       - did-network
     restart: unless-stopped
+    logging: *default-logging
     profiles:
       - tools
 
