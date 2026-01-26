@@ -393,22 +393,6 @@ export const List: ReusableComponent<IListProps> = (props) => {
     return columns.map((column) => getColumnTrackSize(column)).join(' ')
   }, [columns, getColumnTrackSize])
 
-  const dataGridStyle = useMemo(
-    () =>
-      dataGridTemplateColumns
-        ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
-        : undefined,
-    [dataGridTemplateColumns]
-  )
-
-  const treeGridStyle = useMemo(
-    () =>
-      treeGridTemplateColumns
-        ? ({ '--list-grid-template': treeGridTemplateColumns } as React.CSSProperties)
-        : undefined,
-    [treeGridTemplateColumns]
-  )
-
   // Column resizing support
   const resizableColumns = props.resizableColumns ?? true
   const { columnSizingOptions, handleColumnResize } = useColumnWidthPersist(
@@ -425,6 +409,22 @@ export const List: ReusableComponent<IListProps> = (props) => {
       props.onColumnResize?.(e, { columnId: String(data.columnId), width: data.width })
     },
     [handleColumnResize, props.onColumnResize]
+  )
+
+  const dataGridStyle = useMemo(
+    () =>
+      !resizableColumns && dataGridTemplateColumns
+        ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
+        : undefined,
+    [dataGridTemplateColumns, resizableColumns]
+  )
+
+  const treeGridStyle = useMemo(
+    () =>
+      treeGridTemplateColumns
+        ? ({ '--list-grid-template': treeGridTemplateColumns } as React.CSSProperties)
+        : undefined,
+    [treeGridTemplateColumns]
   )
 
   const hasGroups = isGrouped && groups.length > 0
