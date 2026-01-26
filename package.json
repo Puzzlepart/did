@@ -36,6 +36,7 @@
     "docker:logs": "./scripts/docker-dev.sh logs",
     "docker:shell": "./scripts/docker-dev.sh shell",
     "docker:clean": "./scripts/docker-dev.sh clean",
+    "docker:maintenance": "./scripts/docker-dev.sh maintenance",
     "docker:rebuild:watch": "docker compose build did && docker compose run --rm did npm ci --no-audit --no-fund --loglevel=error && docker compose up -d did && docker compose logs -f did",
     "docker:watch": "docker compose up -d did && docker compose logs -f did",
     "watch": "node .tasks/watch.js",

@@ -42,13 +42,25 @@ type UseTabsReturnType = {
 export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
   props
 ) => {
-  const { dispatch } = useAppContext()
+  const { dispatch, user } = useAppContext()
   const { selectedValue, setSelectedValue, updateHistory } =
     useTabsSelection(props)
 
+  // Filter items based on permissions
+  // Fail-closed: if user is not loaded or permission check fails, hide the tab
+  const filteredItems = useMemo(() => {
+    return Object.fromEntries(
+      // eslint-disable-next-line unicorn/no-unreadable-array-destructuring
+      Object.entries(props.items).filter(([, [, , componentProps]]) => {
+        if (!componentProps?.permission) return true
+        return user?.hasPermission(componentProps.permission) ?? false
+      })
+    )
+  }, [props.items, user])
+
   const [selectedComponent, selectedTab, selectedComponentProps] = useMemo(
-    () => props.items[selectedValue] ?? [null, null, {}],
-    [props.items, selectedValue]
+    () => filteredItems[selectedValue] ?? [null, null, {}],
+    [filteredItems, selectedValue]
   )
 
   const [Component, componentProps] = useMemo<
@@ -61,7 +73,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
         id: selectedValue
       }
     ],
-    [props.items, selectedValue]
+    [filteredItems, selectedValue]
   )
 
   useEffect(() => {
@@ -106,10 +118,11 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
    * and a `children` prop set to the `text` property of the corresponding header object, or the header string if it is not an object.
    * If the corresponding header object has an `iconName` property, the `Tab` component is created with an `icon` prop set to the corresponding Fluent icon.
    * If the corresponding header object has a `disabled` property set to `true`, the `Tab` component is created with a `disabled` prop set to `true`.
+   * Tabs are filtered based on the user's permissions.
    */
   const tabItems = useMemo(() => {
-    return Object.keys(props.items).flatMap((key) => {
-      const [, header] = props.items[key]
+    return Object.keys(filteredItems).flatMap((key) => {
+      const [, header] = filteredItems[key]
       const tabProps: TabProps = {
         value: key,
         children:
@@ -130,7 +143,7 @@ export const useTabs: ComponentLogicHook<ITabsProps, UseTabsReturnType> = (
         ...renderSubTabs(key, header as ITabHeaderProps)
       ]
     })
-  }, [props.items])
+  }, [filteredItems])
 
   return {
     selectedValue,

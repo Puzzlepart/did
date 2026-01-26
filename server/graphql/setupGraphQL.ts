@@ -13,7 +13,6 @@ import express from 'express'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import Container, { ContainerInstance } from 'typedi'
-import _ from 'underscore'
 import { RequestContext } from './requestContext'
 import { generateClientInfo } from './generateClientInfo'
 import { generateGraphQLSchema } from './generateGraphQLSchema'
@@ -53,7 +52,35 @@ export const setupGraphQL = async (
       },
       schema,
       rootValue: global,
-      formatError: (error) => _.pick(error, 'message'),
+      formatError: (error) => {
+        const { message, extensions, locations, path } = error
+        const code = extensions?.code
+
+        // Log unexpected errors (not auth errors which are expected)
+        if (code !== 'UNAUTHENTICATED' && code !== 'FORBIDDEN') {
+          debug('GraphQL error:', { message, code, path })
+        }
+
+        // Map error codes to HTTP status for client-side handling
+        const httpStatusMap: Record<string, number> = {
+          'UNAUTHENTICATED': 401,
+          'FORBIDDEN': 403,
+          'BAD_USER_INPUT': 400,
+          'GRAPHQL_PARSE_FAILED': 400,
+          'GRAPHQL_VALIDATION_FAILED': 400,
+          'INTERNAL_SERVER_ERROR': 500
+        }
+        const httpStatus = code ? httpStatusMap[code as string] : undefined
+
+        return {
+          message,
+          locations,
+          path,
+          extensions: httpStatus
+            ? { ...extensions, http: { status: httpStatus } }
+            : extensions
+        }
+      },
       plugins: [
         ApolloServerPluginUsageReporting({
           sendVariableValues: { all: true },
@@ -105,6 +132,7 @@ export const setupGraphQL = async (
       `ApolloServer server started and available at ${colors.magenta(path)}`
     )
   } catch (error) {
-    debug(error)
+    console.error('[FATAL] Failed to initialize GraphQL server:', error)
+    throw error
   }
 }

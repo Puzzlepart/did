@@ -13,6 +13,32 @@ To reset MongoDB and re-import seed data:
 docker compose stop mongodb && docker compose rm -f mongodb && docker volume rm did_mongodb_data && docker compose up -d mongodb
 ```
 
+## Disk Hygiene (Cache + Logs)
+
+Most Docker disk growth comes from build cache. You can inspect it with:
+```bash
+docker builder du
+```
+
+Run a safe cleanup that keeps active containers and volumes:
+```bash
+./scripts/docker-maintenance.sh --days 7
+```
+
+Via npm:
+```bash
+npm run docker:maintenance -- --days 7
+```
+
+Optional flags:
+```bash
+./scripts/docker-maintenance.sh --aggressive --include-volumes --clean-dist
+```
+
+Notes:
+- The compose file enables log rotation (max 10MB per file, 5 files).
+- Consider scheduling the maintenance script with cron or launchd if disk usage is a recurring problem.
+
 ## Security Note
 
 Never commit real secrets (client IDs, secrets, session keys) to the repository. Always use `docker-compose.local.yml` for local secrets and ensure it's gitignored.
