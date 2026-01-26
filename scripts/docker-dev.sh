@@ -53,6 +53,7 @@ show_help() {
     echo "  restart      Restart the development environment"
     echo "  build        Build Docker images"
     echo "  clean        Clean up Docker resources"
+    echo "  maintenance  Prune Docker caches/logs safely"
     echo "  logs         Show application logs"
     echo "  shell        Open shell in the did container"
     echo "  db-shell     Open MongoDB shell"
@@ -205,6 +206,11 @@ show_status() {
     docker compose ps
 }
 
+# Run maintenance script
+run_maintenance() {
+    ./scripts/docker-maintenance.sh "${@:2}"
+}
+
 # Main script logic
 main() {
     check_docker
@@ -224,6 +230,9 @@ main() {
             ;;
         clean)
             clean_docker
+            ;;
+        maintenance)
+            run_maintenance "$@"
             ;;
         logs)
             show_logs
