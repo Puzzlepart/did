@@ -5,7 +5,11 @@ import { useCallback, useMemo, useRef, useEffect } from 'react'
 
 type PersistedColumnWidths = Record<string, number>
 type StorageLike = {
+  readonly length: number
+  clear: () => void
   getItem: (key: string) => string | null
+  key: (index: number) => string | null
+  removeItem: (key: string) => void
   setItem: (key: string, value: string) => void
 }
 
@@ -35,7 +39,14 @@ export function useColumnWidthPersist(
   if (!memoryStoreRef.current) {
     const cache = new Map<string, string>()
     memoryStoreRef.current = {
+      get length() { return cache.size },
+      clear: () => { cache.clear() },
       getItem: (key) => cache.get(key) ?? null,
+      key: (index) => {
+        const keys = Array.from(cache.keys())
+        return keys[index] ?? null
+      },
+      removeItem: (key) => { cache.delete(key) },
       setItem: (key, value) => {
         cache.set(key, String(value))
       }

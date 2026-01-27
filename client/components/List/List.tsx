@@ -336,8 +336,8 @@ export const List: ReusableComponent<IListProps> = (props) => {
         const aValue = a[fieldName]
         const bValue = b[fieldName]
         if (aValue === bValue) return 0
-        if (aValue == null) return 1
-        if (bValue == null) return -1
+        if (aValue === null || aValue === undefined) return 1
+        if (bValue === null || bValue === undefined) return -1
         if (typeof aValue === 'string' && typeof bValue === 'string') {
           return aValue.localeCompare(bValue)
         }
@@ -372,7 +372,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
   const getColumnTrackSize = useCallback((column: IListColumn) => {
     const minWidth = column.minWidth ?? 100
     const maxWidth = column.maxWidth
-    if (maxWidth != null) {
+    if (maxWidth !== null && maxWidth !== undefined) {
       return maxWidth <= minWidth
         ? `${minWidth}px`
         : `minmax(${minWidth}px, ${maxWidth}px)`
@@ -432,7 +432,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   const getDataGridCellStyle = useCallback(
     (columnMeta: IListColumn | undefined, isSelectionColumn: boolean) => {
-      if (!columnMeta) return undefined
+      if (!columnMeta) return {}
       const lockWidth = columnMeta.minWidth === columnMeta.maxWidth
       return {
         minWidth: columnMeta.minWidth,
@@ -448,12 +448,12 @@ export const List: ReusableComponent<IListProps> = (props) => {
   )
 
   const dataGridStyle = useMemo(() => {
-    if (!dataGridTemplateColumns && autoFitColumns) return undefined
+    if (!dataGridTemplateColumns && autoFitColumns) return {}
     return {
       ...(dataGridTemplateColumns
         ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
         : {}),
-      ...(autoFitColumns ? {} : { overflowX: 'auto' })
+      ...(autoFitColumns ? {} : { overflowX: 'auto' as React.CSSProperties['overflowX'] })
     }
   }, [dataGridTemplateColumns, autoFitColumns])
 
