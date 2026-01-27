@@ -432,7 +432,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
 
   const getDataGridCellStyle = useCallback(
     (columnMeta: IListColumn | undefined, isSelectionColumn: boolean) => {
-      if (!columnMeta) return {}
+      if (!columnMeta) return
       const lockWidth = columnMeta.minWidth === columnMeta.maxWidth
       return {
         minWidth: columnMeta.minWidth,
@@ -448,7 +448,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
   )
 
   const dataGridStyle = useMemo(() => {
-    if (!dataGridTemplateColumns && autoFitColumns) return {}
+    if (!dataGridTemplateColumns && autoFitColumns) return
     return {
       ...(dataGridTemplateColumns
         ? ({ '--list-grid-template': dataGridTemplateColumns } as React.CSSProperties)
