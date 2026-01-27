@@ -261,4 +261,36 @@ export interface IListProps<T = any>
    * @default 44
    */
   rowHeight?: number
+
+  /**
+   * Enable column resizing. When enabled, column borders can be dragged
+   * to adjust column widths. Uses controlled mode with columnSizingOptions.
+   *
+   * @default true
+   */
+  resizableColumns?: boolean
+
+  /**
+   * Persist column widths to localStorage using this key.
+   * When provided, user-resized column widths are saved and restored.
+   * If not provided, widths are not persisted across page reloads.
+   */
+  persistColumnWidths?: string
+
+  /**
+   * Auto-fit columns to container width. When true (default), columns
+   * are squeezed to fit the container and the last column extends to fill.
+   * When false, columns can exceed container width, enabling horizontal scroll.
+   *
+   * @default true
+   */
+  autoFitColumns?: boolean
+
+  /**
+   * Callback invoked when a column is resized.
+   */
+  onColumnResize?: (
+    e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
+    data: { columnId: string; width: number }
+  ) => void
 }

@@ -1,7 +1,9 @@
 .errorFallback {
-  max-width: 1440px;
+  width: 100%;
+  max-width: 800px; // Error messages benefit from narrower width for readability
   box-sizing: border-box;
   margin: 80px auto auto auto;
+  padding: 0 32px;
 
   .header {
     font-size: 22px;

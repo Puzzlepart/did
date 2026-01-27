@@ -17,10 +17,12 @@
   }
 
   .container {
-    max-width: 1440px;
+    width: 100%;
     box-sizing: border-box;
     margin: auto;
     margin-top: 20px;
+    padding: 0 24px;
+
     > div {
       margin-top: 65px;
     }
@@ -30,33 +32,27 @@
     overflow: scroll;
   }
 
-  @media (min-width: 576px) {
-    .container {
-      max-width: 540px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .container {
-      max-width: 720px;
-    }
-  }
-
-  @media (min-width: 992px) {
+  // Mobile/tablet: constrained width
+  @media (max-width: 991px) {
     .container {
       max-width: 960px;
+      padding: 0 16px;
     }
   }
 
-  @media (min-width: 1200px) {
+  // Desktop: full width with comfortable padding
+  @media (min-width: 992px) {
     .container {
-      max-width: 1140px;
+      max-width: none;
+      padding: 0 32px;
     }
   }
 
-  @media (min-width: 1440px) {
+  // Ultra-wide (4K+): extra padding and max-width cap
+  @media (min-width: 2560px) {
     .container {
-      max-width: 1330px;
+      padding: 0 64px;
+      max-width: 2400px;
     }
   }
 }
