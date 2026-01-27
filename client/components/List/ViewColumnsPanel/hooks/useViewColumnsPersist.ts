@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-unreadable-array-destructuring */
 import { useListContext } from 'components/List/context'
 import { IListColumn } from 'components/List/types'
 import { useBrowserStorage } from 'hooks'
@@ -20,12 +19,14 @@ type PersistedColumn = {
  */
 export function useViewColumnsPersist(columns: IListColumn[]) {
   const context = useListContext()
-  const [persistedColumns, , , set] = useBrowserStorage<PersistedColumn[]>({
+  const storage = useBrowserStorage<PersistedColumn[]>({
     key: `${context.props.persistViewColumns
       ?.replace(' ', '_')
       ?.toLowerCase()}_columns`,
     initialValue: []
   })
+  const persistedColumns = storage[0]
+  const set = storage[3]
 
   const apply = useCallback(
     (columns: IListColumn[]) => {
