@@ -1,7 +1,7 @@
 /**
  * Simple debug logger for client-side development logging
  * Automatically disabled in production builds
- * 
+ *
  * @category Utility
  */
 class DebugLogger {

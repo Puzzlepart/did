@@ -13,9 +13,7 @@ import {
   TimeEntry
 } from '../../graphql/resolvers/types'
 import { ReportFilterOptions } from '../../graphql/resolvers/reports/types'
-import {
-  ConfirmedPeriodsService
-} from '../mongo/confirmed_periods'
+import { ConfirmedPeriodsService } from '../mongo/confirmed_periods'
 import { ForecastedTimeEntryService } from '../mongo/forecasted_time_entry'
 import { TimeEntryService } from '../mongo/time_entry'
 import { Report, IGenerateReportParameters } from './types'
@@ -53,7 +51,7 @@ export class ReportService {
 
   /**
    * Helper to extract standard customer fields for reports
-   * 
+   *
    * @param customer - Customer object to pick fields from
    */
   private _pickCustomerFields(customer: any) {
@@ -153,36 +151,39 @@ export class ReportService {
       const safeQuery = allowLarge
         ? { ...query }
         : this._applySafetyLimits(query)
-      
+
       debug('[getReport]', 'Using pagination approach', {
         limit: safeQuery.limit,
         skip: safeQuery.skip,
         queryKeys: Object.keys(query_)
       })
-      
+
       const [timeEntries, projectsData, users] = await Promise.all([
-        safeQuery.limit ? 
-          this._timeEntrySvc.findPaginated(query_, { 
-            limit: safeQuery.limit, 
-            skip: safeQuery.skip,
-            sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
-          }) :
-          this._timeEntrySvc.find(query_),
+        safeQuery.limit
+          ? this._timeEntrySvc.findPaginated(query_, {
+              limit: safeQuery.limit,
+              skip: safeQuery.skip,
+              sort: sortAsc ? { startDateTime: 1 } : { startDateTime: -1 }
+            })
+          : this._timeEntrySvc.find(query_),
         this._projectSvc.getProjectsData(),
         this._userSvc.getUsers({ hiddenFromReports: false })
       ])
-      
-      debug('[getReport]', `Retrieved ${timeEntries.length} time entries for processing`)
-      
+
+      debug(
+        '[getReport]',
+        `Retrieved ${timeEntries.length} time entries for processing`
+      )
+
       const report = this._generateReport({
         ...projectsData,
         timeEntries,
         users,
         sortAsc
       })
-      
+
       debug('[getReport]', `Generated report with ${report.length} entries`)
-      
+
       return report
     } catch (error) {
       debug('[getReport]', 'Error generating report:', error)
@@ -247,10 +248,7 @@ export class ReportService {
       projectIds.length > 0
         ? (this._projectSvc.find(
             {
-              $or: [
-                { _id: { $in: projectIds } },
-                { tag: { $in: projectIds } }
-              ]
+              $or: [{ _id: { $in: projectIds } }, { tag: { $in: projectIds } }]
             },
             { name: 1, tag: 1, parentKey: 1, customerKey: 1, partnerKey: 1 }
           ) as Promise<any[]>)
@@ -281,11 +279,7 @@ export class ReportService {
       new Set(
         projects
           .reduce<string[]>(
-            (acc, project) => [
-              ...acc,
-              project.customerKey,
-              project.partnerKey
-            ],
+            (acc, project) => [...acc, project.customerKey, project.partnerKey],
             []
           )
           .filter(Boolean)
@@ -308,9 +302,7 @@ export class ReportService {
     ).sort()
 
     const parentProjectNames = Array.from(
-      new Set(
-        parentProjects.map((project) => project.name).filter(Boolean)
-      )
+      new Set(parentProjects.map((project) => project.name).filter(Boolean))
     ).sort()
 
     const customerNames = Array.from(
@@ -351,7 +343,11 @@ export class ReportService {
         $gte: new Date()
       }
     }
-    debug('[getForecastReportCount]', 'Counting forecasted time entries with query:', query)
+    debug(
+      '[getForecastReportCount]',
+      'Counting forecasted time entries with query:',
+      query
+    )
     return await this._forecastTimeEntrySvc.count(query as any)
   }
 
@@ -366,13 +362,16 @@ export class ReportService {
    */
   private _applySafetyLimits(query: ReportsQuery): ReportsQuery {
     const safeQuery = { ...query }
-    
+
     // Cap extremely large limits
     if (safeQuery.limit && safeQuery.limit > this.MAX_LIMIT) {
-      debug('[_applySafetyLimits]', `Capping limit from ${safeQuery.limit} to ${this.MAX_LIMIT}`)
+      debug(
+        '[_applySafetyLimits]',
+        `Capping limit from ${safeQuery.limit} to ${this.MAX_LIMIT}`
+      )
       safeQuery.limit = this.MAX_LIMIT
     }
-    
+
     return safeQuery
   }
 
@@ -473,13 +472,18 @@ export class ReportService {
             userId: {
               $in: queryWithoutPagination.userIds
             },
-            startDateTime: { $gte: new Date(queryWithoutPagination.startDateTime) },
+            startDateTime: {
+              $gte: new Date(queryWithoutPagination.startDateTime)
+            },
             endDateTime: { $lte: new Date(queryWithoutPagination.endDateTime) },
             week: { $eq: queryWithoutPagination.week },
             month: { $eq: queryWithoutPagination.month },
             year: { $eq: queryWithoutPagination.year }
           },
-          [...Object.keys(queryWithoutPagination), !_.isEmpty(queryWithoutPagination?.userIds) && 'userId']
+          [
+            ...Object.keys(queryWithoutPagination),
+            !_.isEmpty(queryWithoutPagination?.userIds) && 'userId'
+          ]
         )
       },
       'preset'
@@ -498,7 +502,9 @@ export class ReportService {
         baseQuery.projectId?.$eq ??
         (_.isArray(baseQuery.projectId?.$in) ? baseQuery.projectId.$in : null)
       const baseProjectIds = baseProjectId
-        ? (Array.isArray(baseProjectId) ? baseProjectId : [baseProjectId])
+        ? (Array.isArray(baseProjectId)
+          ? baseProjectId
+          : [baseProjectId])
         : null
       const effectiveProjectIds = baseProjectIds
         ? _.intersection(baseProjectIds, projectIds)
@@ -543,7 +549,9 @@ export class ReportService {
             { name: 1, tag: 1, parentKey: 1, customerKey: 1, partnerKey: 1 }
           ) as Promise<any[]>)
         : Promise.resolve([]),
-      hasProjectFilters ? this._customerSvc.getCustomers() : Promise.resolve([]),
+      hasProjectFilters
+        ? this._customerSvc.getCustomers()
+        : Promise.resolve([]),
       hasUserFilters
         ? this._userSvc.getUsers({ hiddenFromReports: false })
         : Promise.resolve([])

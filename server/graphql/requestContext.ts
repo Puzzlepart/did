@@ -2,9 +2,8 @@
  * [GraphQL](https://graphql.org/) context
  */
 import get from 'get-value'
-import _ from 'underscore'
 import { verify } from 'jsonwebtoken'
-import { MongoClient, Db as MongoDatabase, ObjectId } from 'mongodb'
+import { MongoClient, Db as MongoDatabase } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
@@ -138,48 +137,67 @@ export class RequestContext {
           // Use the subscription-specific database for tenant-scoped collections
           const tenantDbName = get(request, 'user.subscription.db')
           const tenantDb = tenantDbName ? mcl.db(tenantDbName) : database
-          const roleId =
-            get(request, 'user.roleId') || get(request, 'user.role._id')
-          if (roleId) {
-            let objectId: ObjectId | undefined
-            try {
-              objectId = new ObjectId(roleId)
-            } catch {
-              /* ignore */
+          const userId = context.userId
+
+          // Fetch user's current role assignment from database to handle role changes
+          let roleName: string | null = null
+          if (userId) {
+            const userDoc = await tenantDb
+              .collection('users')
+              .findOne({ _id: userId })
+            if (userDoc?.role && typeof userDoc.role === 'string') {
+              // User's role is stored as a string (role name) in the database
+              roleName = userDoc.role
+              debug(
+                `Fetched current role assignment for user ${userId}: ${roleName}`
+              )
+            } else if (userDoc) {
+              debug(
+                `User ${userId} found but role is missing or not a string. Using session fallback.`
+              )
+            } else {
+              debug(
+                `User ${userId} not found in database. Using session fallback.`
+              )
             }
-            const roleQuery: any = objectId
-              ? { _id: objectId }
-              : { _id: roleId }
-            let role = await tenantDb.collection('roles').findOne(roleQuery)
-            // If not found by _id and we have a role name, attempt name-based lookup as fallback
-            if (!role) {
-              const roleName = get(request, 'user.role.name')
-              if (roleName) {
-                role = await tenantDb
-                  .collection('roles')
-                  .findOne({ name: roleName })
-                if (role) debug(`Resolved role by name fallback: ${roleName}`)
-              }
+          }
+
+          // Fallback to session role name if database lookup fails or returns invalid data
+          if (!roleName) {
+            roleName = get(request, 'user.role.name')
+            if (roleName) {
+              debug(`Using session role name as fallback: ${roleName}`)
             }
+          }
+
+          // Look up the role's permissions from the database
+          if (roleName) {
+            const role = await tenantDb
+              .collection('roles')
+              .findOne({ name: roleName })
             if (role?.permissions) {
               context.permissions = role.permissions
+              debug(
+                `Resolved permissions for role ${roleName}: ${role.permissions.length} permissions`
+              )
             } else {
               context.permissions = get(request, 'user.role.permissions') || []
               debug(
-                `Role not resolved for id=${roleId}; using embedded permissions fallback.`
+                `Role ${roleName} not found in database; using embedded permissions fallback`
               )
             }
           } else {
             context.permissions = get(request, 'user.role.permissions') || []
-            if (!_.isEmpty(context.permissions))
-              debug('No roleId; using embedded permissions (legacy).')
+            debug('No role name found; using embedded permissions (legacy).')
           }
         } catch (roleError) {
           debug(`Failed dynamic role resolve: ${roleError?.message}`)
           context.permissions = get(request, 'user.role.permissions') || []
         }
       }
-      context.db = context.mcl.db(context.subscription.db || environment('MONGO_DB_DB_NAME'))
+      context.db = context.mcl.db(
+        context.subscription.db || environment('MONGO_DB_DB_NAME')
+      )
       context.container.set({ id: 'CONTEXT', transient: true, value: context })
       context.container.set({ id: 'REQUEST', transient: true, value: request })
       debug(`Context created for request ${colors.magenta(context.requestId)}`)

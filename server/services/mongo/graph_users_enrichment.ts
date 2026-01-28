@@ -54,7 +54,7 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
     maxRetries = MAX_RETRIES
   ): Promise<{ result: T | null; errorType: string | null }> {
     let lastError: Error
-    
+
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         const result = await operation()
@@ -62,61 +62,83 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
       } catch (error) {
         lastError = error
         const errorType = this._categorizeError(error)
-        
+
         // Don't retry certain error types
         if (errorType === 'auth' || errorType === 'notFound') {
           debug('Non-retryable error for user %s: %s', userId, error.message)
           return { result: null, errorType }
         }
-        
+
         // Don't retry on final attempt
         if (attempt === maxRetries) {
           debug('Max retries exceeded for user %s: %s', userId, error.message)
           return { result: null, errorType }
         }
-        
+
         // Calculate delay with exponential backoff and jitter
-        const baseDelay = Math.min(INITIAL_RETRY_DELAY_MS * Math.pow(2, attempt), MAX_RETRY_DELAY_MS)
+        const baseDelay = Math.min(
+          INITIAL_RETRY_DELAY_MS * Math.pow(2, attempt),
+          MAX_RETRY_DELAY_MS
+        )
         const jitter = Math.random() * 0.1 * baseDelay // ±10% jitter
         const delay = baseDelay + jitter
-        
-        debug('Retrying user %s in %dms (attempt %d/%d): %s', userId, delay, attempt + 1, maxRetries, error.message)
-        await new Promise(resolve => setTimeout(resolve, delay))
+
+        debug(
+          'Retrying user %s in %dms (attempt %d/%d): %s',
+          userId,
+          delay,
+          attempt + 1,
+          maxRetries,
+          error.message
+        )
+        await new Promise((resolve) => setTimeout(resolve, delay))
       }
     }
-    
+
     return { result: null, errorType: this._categorizeError(lastError) }
   }
-  
+
   /**
    * Categorize errors for better tracking and retry decisions
    */
   private _categorizeError(error: any): string {
     const message = error?.message?.toLowerCase() || ''
     const code = error?.code?.toString() || ''
-    
+
     // Rate limiting
-    if (message.includes('rate limit') || message.includes('throttle') || code === '429') {
+    if (
+      message.includes('rate limit') ||
+      message.includes('throttle') ||
+      code === '429'
+    ) {
       return 'rateLimit'
     }
-    
+
     // Authentication/Authorization
-    if (message.includes('unauthorized') || message.includes('forbidden') || 
-        code === '401' || code === '403') {
+    if (
+      message.includes('unauthorized') ||
+      message.includes('forbidden') ||
+      code === '401' ||
+      code === '403'
+    ) {
       return 'auth'
     }
-    
+
     // Network errors
-    if (message.includes('network') || message.includes('timeout') || 
-        message.includes('econnreset') || message.includes('enotfound')) {
+    if (
+      message.includes('network') ||
+      message.includes('timeout') ||
+      message.includes('econnreset') ||
+      message.includes('enotfound')
+    ) {
       return 'network'
     }
-    
+
     // Not found - user might not exist or no manager
     if (message.includes('not found') || code === '404') {
       return 'notFound'
     }
-    
+
     return 'other'
   }
 
@@ -141,9 +163,12 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
         { $set: { running: false, finishedAt: new Date() } }
       )
     }
-    
+
     const totalUsers = await this._graphUsers.collection.countDocuments({})
-    const safeConcurrency = Math.min(Math.max(MIN_CONCURRENCY, concurrency), MAX_CONCURRENCY)
+    const safeConcurrency = Math.min(
+      Math.max(MIN_CONCURRENCY, concurrency),
+      MAX_CONCURRENCY
+    )
     const doc: GraphUsersUpdateStatusDoc = {
       id: this._statusId,
       startedAt: new Date(),
@@ -181,10 +206,13 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
         effectiveConcurrency
       )
     }
-    debug('Starting user database update worker with concurrency %d...', concurrency)
-    
+    debug(
+      'Starting user database update worker with concurrency %d...',
+      concurrency
+    )
+
     let batchCount = 0
-    
+
     try {
       // Process all users to get updated information from Entra ID
       while (true) {
@@ -195,21 +223,21 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
             debug('User database update stopped by external request')
             break
           }
-          
+
           // Update heartbeat to indicate worker is alive
           await this.collection.updateOne(
             { id: this._statusId },
             { $set: { lastHeartbeat: new Date() } }
           )
         }
-        
+
         // Get batch of users to update
         const batch = await this._graphUsers.collection
           .find({})
           .skip(batchCount * concurrency)
           .limit(concurrency)
           .toArray()
-          
+
         if (batch.length === 0) {
           await this.collection.updateOne(
             { id: this._statusId },
@@ -218,15 +246,20 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
           debug('User database update complete - no more users to process')
           break
         }
-        
-        debug('Processing batch of %d users (batch #%d)', batch.length, batchCount + 1)        // Process batch with enhanced error handling
+
+        debug(
+          'Processing batch of %d users (batch #%d)',
+          batch.length,
+          batchCount + 1
+        ) // Process batch with enhanced error handling
         const promises = batch.map(async (user) => {
           try {
-            const { result: updatedUser, errorType } = await this._retryWithBackoff(
-              () => this._msGraph.getUser(user.id),
-              user.id
-            )
-            
+            const { result: updatedUser, errorType } =
+              await this._retryWithBackoff(
+                () => this._msGraph.getUser(user.id),
+                user.id
+              )
+
             if (errorType) {
               // Increment specific error counter
               let errorField: string
@@ -248,12 +281,12 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
                   break
                 }
               }
-              
+
               await this.collection.updateOne(
                 { id: this._statusId },
                 { $inc: { failures: 1, [errorField]: 1 } }
               )
-              
+
               // For 'notFound' errors, mark as processed but don't update user
               if (errorType === 'notFound') {
                 await this.collection.updateOne(
@@ -263,7 +296,7 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
               }
               return { success: false, userId: user.id, error: errorType }
             }
-            
+
             // Success - merge updated data with existing user and update
             if (updatedUser) {
               const mergedUser = {
@@ -271,33 +304,41 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
                 ...updatedUser,
                 id: user.id // Ensure ID stays the same
               }
-              
+
               await this._graphUsers.collection.updateOne(
                 { id: user.id },
                 { $set: mergedUser }
               )
             }
-            
+
             await this.collection.updateOne(
               { id: this._statusId },
               { $inc: { processed: 1 }, $set: { lastUserId: user.id } }
             )
             return { success: true, userId: user.id, error: null }
           } catch (error) {
-            debug('Unexpected error processing user %s: %s', user.id, error.message)
+            debug(
+              'Unexpected error processing user %s: %s',
+              user.id,
+              error.message
+            )
             return { success: false, userId: user.id, error: error.message }
           }
         })
-        
+
         const results = await Promise.all(promises)
-        
+
         // Log any unexpected errors
         for (const result of results) {
           if (!result.success && result.error) {
-            debug('Processing error for user %s: %s', result.userId, result.error)
+            debug(
+              'Processing error for user %s: %s',
+              result.userId,
+              result.error
+            )
           }
         }
-        
+
         batchCount++
 
         // Add delay between batches when we hit the concurrency cap to avoid hammering services

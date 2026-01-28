@@ -17,7 +17,10 @@ export const googleStrategy = (mcl: MongoClient) => {
     {
       clientID: environment('GOOGLE_CLIENT_ID'),
       clientSecret: environment('GOOGLE_CLIENT_SECRET'),
-      callbackURL: environment('GOOGLE_REDIRECT_URI', 'http://localhost:9001/auth/google/callback'),
+      callbackURL: environment(
+        'GOOGLE_REDIRECT_URI',
+        'http://localhost:9001/auth/google/callback'
+      ),
       userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
       passReqToCallback: true // Enable request in callback
     },
@@ -28,12 +31,12 @@ export const googleStrategy = (mcl: MongoClient) => {
         '/auth/google/callback',
         'GOOGLE_REDIRECT_URI'
       )
-      
+
       // Log for debugging purposes
       if (environment('NODE_ENV') === 'development') {
         log('[Google OAuth] Dynamic callback URL:', dynamicCallbackUrl)
       }
-      
+
       return onVerifySignin(
         mcl,
         {

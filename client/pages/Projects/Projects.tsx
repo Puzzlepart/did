@@ -24,7 +24,7 @@ export const Projects: FC = () => {
 
   // Block access to /projects/new without permission (before rendering)
   const canCreateProject = hasPermission(PermissionScope.MANAGE_PROJECTS)
-  
+
   useEffect(() => {
     if (urlParameters.currentTab === 'new' && !canCreateProject) {
       history.replace('/projects')

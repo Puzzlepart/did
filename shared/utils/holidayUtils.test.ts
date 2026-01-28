@@ -30,19 +30,27 @@ test('validateHoursOff should reject negative hours', (t) => {
 })
 
 test('validateHoursOff should reject hours exceeding daily work hours', (t) => {
-  t.throws(() => validateHoursOff(9), { message: /cannot exceed daily work hours/ })
-  t.throws(() => validateHoursOff(10, 8), { instanceOf: HolidayValidationError })
+  t.throws(() => validateHoursOff(9), {
+    message: /cannot exceed daily work hours/
+  })
+  t.throws(() => validateHoursOff(10, 8), {
+    instanceOf: HolidayValidationError
+  })
   t.is(validateHoursOff(10, 12), true) // Should work with custom daily hours
 })
 
 test('validateHoursOff should reject non-quarter-hour increments', (t) => {
   t.throws(() => validateHoursOff(4.3), { message: /quarter-hour increments/ })
-  t.throws(() => validateHoursOff(7.123), { instanceOf: HolidayValidationError })
+  t.throws(() => validateHoursOff(7.123), {
+    instanceOf: HolidayValidationError
+  })
 })
 
 test('validateHoursOff should reject invalid types', (t) => {
   t.throws(() => validateHoursOff(NaN), { message: /must be a valid number/ })
-  t.throws(() => validateHoursOff('8' as any), { instanceOf: HolidayValidationError })
+  t.throws(() => validateHoursOff('8' as any), {
+    instanceOf: HolidayValidationError
+  })
 })
 
 // Validation Functions - validateHolidayDate
@@ -53,14 +61,22 @@ test('validateHolidayDate should accept valid ISO dates', (t) => {
 
 test('validateHolidayDate should reject invalid formats', (t) => {
   t.throws(() => validateHolidayDate('24-12-2025'), { message: /ISO format/ })
-  t.throws(() => validateHolidayDate('12/24/2025'), { instanceOf: HolidayValidationError })
-  t.throws(() => validateHolidayDate('2025-13-01'), { message: /not a valid date/ })
-  t.throws(() => validateHolidayDate('2025-02-30'), { instanceOf: HolidayValidationError })
+  t.throws(() => validateHolidayDate('12/24/2025'), {
+    instanceOf: HolidayValidationError
+  })
+  t.throws(() => validateHolidayDate('2025-13-01'), {
+    message: /not a valid date/
+  })
+  t.throws(() => validateHolidayDate('2025-02-30'), {
+    instanceOf: HolidayValidationError
+  })
 })
 
 test('validateHolidayDate should reject empty or non-string values', (t) => {
   t.throws(() => validateHolidayDate(''), { message: /non-empty string/ })
-  t.throws(() => validateHolidayDate(null as any), { instanceOf: HolidayValidationError })
+  t.throws(() => validateHolidayDate(null as any), {
+    instanceOf: HolidayValidationError
+  })
 })
 
 // Validation Functions - validateHolidayName
@@ -76,11 +92,15 @@ test('validateHolidayName should reject empty or whitespace names', (t) => {
 
 test('validateHolidayName should reject names over 100 characters', (t) => {
   const longName = 'A'.repeat(101)
-  t.throws(() => validateHolidayName(longName), { message: /100 characters or less/ })
+  t.throws(() => validateHolidayName(longName), {
+    message: /100 characters or less/
+  })
 })
 
 test('validateHolidayName should reject non-string values', (t) => {
-  t.throws(() => validateHolidayName(null as any), { instanceOf: HolidayValidationError })
+  t.throws(() => validateHolidayName(null as any), {
+    instanceOf: HolidayValidationError
+  })
 })
 
 // Timezone Handling - parseHolidayDate

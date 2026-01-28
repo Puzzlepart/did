@@ -27,12 +27,13 @@ const effectivePort =
   redisKey && configuredPort === 6379 ? configuredSslPort : configuredPort
 
 // Allow missing Redis in test environment
-const isTestEnv = process.env.NODE_ENV === 'test' || process.env.AVA_TEST === 'true'
+const isTestEnv =
+  process.env.NODE_ENV === 'test' || process.env.AVA_TEST === 'true'
 
 if (!redisHostname && !isTestEnv) {
   throw new Error(
     'Redis configuration required: REDIS_CACHE_HOSTNAME environment variable must be set. ' +
-    'Redis is required for session management and API caching.'
+      'Redis is required for session management and API caching.'
   )
 }
 
@@ -60,8 +61,10 @@ export const redisMiddlware = redisHostname
     })
   : // Test environment mock client (no-op)
     ({
-      get: (_key: string, callback: (error: Error | null, reply: any) => void) =>
-        callback(null, null),
+      get: (
+        _key: string,
+        callback: (error: Error | null, reply: any) => void
+      ) => callback(null, null),
       setex: (
         _key: string,
         _seconds: number,

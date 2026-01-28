@@ -90,7 +90,10 @@ export class HolidaysService extends MongoDocumentService<any> {
       const dayStr = baseDate.format('DD')
       const isRecurring = holiday.recurring ?? true
       const years = isRecurring
-        ? Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i)
+        ? Array.from(
+            { length: endYear - startYear + 1 },
+            (_, i) => startYear + i
+          )
         : [DateUtils.getYear(baseDate.jsDate)]
 
       for (const year of years) {
@@ -126,7 +129,11 @@ export class HolidaysService extends MongoDocumentService<any> {
     return results
   }
 
-  private _buildHolidayId(periodId: string, date: string, name: string): string {
+  private _buildHolidayId(
+    periodId: string,
+    date: string,
+    name: string
+  ): string {
     return `${periodId}-${date}-${encodeURIComponent(name)}`
   }
 

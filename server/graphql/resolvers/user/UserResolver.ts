@@ -254,12 +254,12 @@ export class UserResolver {
         entries: reset
           ? []
           : [
-            ...(user.timebank?.entries ?? []),
-            {
-              id: entryId,
-              balanceAdjustment
-            }
-          ]
+              ...(user.timebank?.entries ?? []),
+              {
+                id: entryId,
+                balanceAdjustment
+              }
+            ]
       }
       await this._userSvc.updateUser(user, ['timebank'])
       return { success: true, balance: user.timebank.balance }
@@ -282,7 +282,9 @@ export class UserResolver {
     forceFullSync: boolean
   ): Promise<UserSyncResult> {
     const syncId = `sync-${Date.now()}`
-    debug(`[${syncId}] 🔄 Starting Active Directory user sync (forceFullSync: ${forceFullSync})...`)
+    debug(
+      `[${syncId}] 🔄 Starting Active Directory user sync (forceFullSync: ${forceFullSync})...`
+    )
     try {
       debug('Starting Active Directory user sync...')
       const result = await this._msgraphDeltaSvc.syncUsers(forceFullSync)
@@ -373,7 +375,8 @@ export class UserResolver {
       lastUserId: status.lastUserId,
       progressPercent:
         status.totalUsers > 0
-          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) / 100
+          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) /
+            100
           : 0
     }
   }
@@ -403,7 +406,8 @@ export class UserResolver {
       lastUserId: status.lastUserId,
       progressPercent:
         status.totalUsers > 0
-          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) / 100
+          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) /
+            100
           : 0
     }
   }

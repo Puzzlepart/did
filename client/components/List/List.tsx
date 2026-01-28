@@ -19,7 +19,10 @@ import {
   DataGridBody as VirtualizedDataGridBody,
   DataGridRow as VirtualizedDataGridRow
 } from '@fluentui-contrib/react-data-grid-react-window'
-import { ChevronDown20Regular, ChevronRight20Regular } from '@fluentui/react-icons'
+import {
+  ChevronDown20Regular,
+  ChevronRight20Regular
+} from '@fluentui/react-icons'
 import {
   TreeGrid,
   TreeGridCell,
@@ -27,7 +30,14 @@ import {
   TreeGridRowOnOpenChangeData
 } from '@fluentui-contrib/react-tree-grid'
 import { ReusableComponent } from 'components/types'
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFluentIcon } from 'utils/getFluentIcon'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
@@ -112,7 +122,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
         .map((id) => itemsById.get(id))
         .filter(Boolean)
       onSelectionChangedRef.current(
-        selectionMode === SelectionMode.single ? selectedItems[0] : selectedItems
+        selectionMode === SelectionMode.single
+          ? selectedItems[0]
+          : selectedItems
       )
     },
     [itemsById, selectionMode]
@@ -161,10 +173,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
     checkboxVisibility !== CheckboxVisibility.hidden
 
   const handleRowClick = useCallback(
-    (
-      event: React.MouseEvent<HTMLElement>,
-      rowId: string | number
-    ) => {
+    (event: React.MouseEvent<HTMLElement>, rowId: string | number) => {
       const target = event.target as HTMLElement
       if (
         target.closest(
@@ -277,9 +286,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               )
               return (
                 <Checkbox
-                  checked={
-                    allSelected ? true : (someSelected ? 'mixed' : false)
-                  }
+                  checked={allSelected ? true : (someSelected ? 'mixed' : false)}
                   onClick={(event) => event.stopPropagation()}
                   onChange={(_event, data) => {
                     updateSelection(
@@ -322,13 +329,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
       renderHeaderCell: () => renderHeaderCellContent(column),
       renderCell: (item: any) => {
         const index = items.indexOf(item)
-        return (
-          <ItemColumn
-            item={item}
-            column={column}
-            index={index}
-          />
-        )
+        return <ItemColumn item={item} column={column} index={index} />
       },
       compare: column.data?.isSortable ? (a: any, b: any) => {
         const fieldName = column.fieldName
@@ -460,15 +461,16 @@ export const List: ReusableComponent<IListProps> = (props) => {
   const treeGridStyle = useMemo(
     () =>
       treeGridTemplateColumns
-        ? ({ '--list-grid-template': treeGridTemplateColumns } as React.CSSProperties)
+        ? ({
+            '--list-grid-template': treeGridTemplateColumns
+          } as React.CSSProperties)
         : undefined,
     [treeGridTemplateColumns]
   )
 
   const hasGroups = isGrouped && groups.length > 0
   const allGroupsOpen =
-    hasGroups &&
-    groups.every((group) => openGroups[group.key] ?? true)
+    hasGroups && groups.every((group) => openGroups[group.key] ?? true)
   const toggleAllLabel = allGroupsOpen
     ? t('common.collapseAllGroups')
     : t('common.expandAllGroups')
@@ -502,13 +504,24 @@ export const List: ReusableComponent<IListProps> = (props) => {
       return
     }
     const toolbarHeight = showToolbar
-      ? (listHeaderRef.current?.getBoundingClientRect().height ?? 0)
+      ? listHeaderRef.current?.getBoundingClientRect().height ?? 0
       : 0
     const gridHeaderHeight =
       dataGridHeaderRef.current?.getBoundingClientRect().height ?? 0
-    const nextHeight = Math.max(0, props.height - toolbarHeight - gridHeaderHeight)
-    setVirtualizedBodyHeight((prev) => (prev === nextHeight ? prev : nextHeight))
-  }, [isVirtualized, props.height, showToolbar, dataGridColumns.length, props.enableShimmer])
+    const nextHeight = Math.max(
+      0,
+      props.height - toolbarHeight - gridHeaderHeight
+    )
+    setVirtualizedBodyHeight((prev) =>
+      prev === nextHeight ? prev : nextHeight
+    )
+  }, [
+    isVirtualized,
+    props.height,
+    showToolbar,
+    dataGridColumns.length,
+    props.enableShimmer
+  ])
 
   // Helper function to render the appropriate DataGrid variant
   const renderDataGrid = () => {
@@ -545,9 +558,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       props.columnHeaderProps?.className,
                       isSelectionColumn && styles.selectionCell,
                       columnMeta?.className,
-                      columnMeta?.isMultiline
-                        ? styles.multiline
-                        : styles.nowrap
+                      columnMeta?.isMultiline ? styles.multiline : styles.nowrap
                     )}
                     style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                     onClick={() =>
@@ -573,7 +584,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   checkboxVisibility === CheckboxVisibility.onHover &&
                     styles.selectionHover
                 )}
-                onClick={(event: React.MouseEvent<HTMLElement>) => handleRowClick(event, rowId)}
+                onClick={(event: React.MouseEvent<HTMLElement>) =>
+                  handleRowClick(event, rowId)
+                }
                 onDoubleClick={(event: React.MouseEvent<HTMLElement>) =>
                   handleRowDoubleClick(event, item)
                 }
@@ -636,9 +649,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                     props.columnHeaderProps?.className,
                     isSelectionColumn && styles.selectionCell,
                     columnMeta?.className,
-                    columnMeta?.isMultiline
-                      ? styles.multiline
-                      : styles.nowrap
+                    columnMeta?.isMultiline ? styles.multiline : styles.nowrap
                   )}
                   style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                   onClick={() =>
@@ -661,9 +672,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   styles.selectionHover
               )}
               onClick={(event) => handleRowClick(event, rowId)}
-              onDoubleClick={(event) =>
-                handleRowDoubleClick(event, item)
-              }
+              onDoubleClick={(event) => handleRowDoubleClick(event, item)}
             >
               {({ renderCell, columnId }) => {
                 const columnMeta = columnMetaMap.get(String(columnId))
@@ -677,9 +686,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                         checkboxVisibility === CheckboxVisibility.onHover &&
                         styles.selectionCellHover,
                       columnMeta?.className,
-                      columnMeta?.isMultiline
-                        ? styles.multiline
-                        : styles.nowrap
+                      columnMeta?.isMultiline ? styles.multiline : styles.nowrap
                     )}
                     style={getDataGridCellStyle(columnMeta, isSelectionColumn)}
                   >
@@ -726,7 +733,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
                 {Array.from({
                   length: Math.max(3, Math.min(items.length, 8))
                 }).map((_, rowIndex) => (
-                  <div key={`skeleton-row-${rowIndex}`} className={styles.skeletonRow}>
+                  <div
+                    key={`skeleton-row-${rowIndex}`}
+                    className={styles.skeletonRow}
+                  >
                     {Array.from({
                       length: Math.max(columns.length, 3)
                     }).map((_, colIndex) => (
@@ -757,7 +767,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
                           column.minWidth === column.maxWidth
                             ? column.minWidth
                             : undefined,
-                        flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                        flex:
+                          column.minWidth === column.maxWidth
+                            ? undefined
+                            : '1 1 auto'
                       }}
                     >
                       <div className={styles.treeGridHeaderContent}>
@@ -772,7 +785,11 @@ export const List: ReusableComponent<IListProps> = (props) => {
                             aria-label={toggleAllLabel}
                             title={toggleAllLabel}
                           >
-                            {allGroupsOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                            {allGroupsOpen ? (
+                              <ChevronDown20Regular />
+                            ) : (
+                              <ChevronRight20Regular />
+                            )}
                           </button>
                         )}
                         {renderHeaderCellContent(column)}
@@ -827,7 +844,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                         column.minWidth === column.maxWidth
                                           ? column.minWidth
                                           : undefined,
-                                      flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                                      flex:
+                                        column.minWidth === column.maxWidth
+                                          ? undefined
+                                          : '1 1 auto'
                                     }}
                                   >
                                     <ItemColumn
@@ -845,19 +865,27 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       className={styles.groupHeaderRow}
                       title={holiday?.name}
                     >
-                      {isOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                      {isOpen ? (
+                        <ChevronDown20Regular />
+                      ) : (
+                        <ChevronRight20Regular />
+                      )}
                       <TreeGridCell
                         header
                         aria-colspan={columns.length}
                         className={styles.groupHeaderCell}
                         style={{
-                          color: holiday ? tokens.colorPaletteRedForeground1 : undefined,
+                          color: holiday
+                            ? tokens.colorPaletteRedForeground1
+                            : undefined,
                           ...group.data?.styles
                         }}
                       >
                         <span>{group.name}</span>
                         {total && (
-                          <span className={styles.groupHeaderTotal}>({total})</span>
+                          <span className={styles.groupHeaderTotal}>
+                            ({total})
+                          </span>
                         )}
                       </TreeGridCell>
                     </TreeGridRow>
@@ -872,7 +900,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
             <ViewColumnsPanel />
           </div>
         ) : (
-          <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
+          <ScrollablePaneWrapper
+            condition={!!props.height}
+            height={props.height}
+          >
             {showToolbar && (
               <div ref={listHeaderRef} className={headerClassName}>
                 {props.searchBox?.fullWidth && (
@@ -886,7 +917,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
                 {Array.from({
                   length: Math.max(3, Math.min(items.length, 8))
                 }).map((_, rowIndex) => (
-                  <div key={`skeleton-row-${rowIndex}`} className={styles.skeletonRow}>
+                  <div
+                    key={`skeleton-row-${rowIndex}`}
+                    className={styles.skeletonRow}
+                  >
                     {Array.from({
                       length: Math.max(columns.length, 3)
                     }).map((_, colIndex) => (
@@ -917,7 +951,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
                           column.minWidth === column.maxWidth
                             ? column.minWidth
                             : undefined,
-                        flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                        flex:
+                          column.minWidth === column.maxWidth
+                            ? undefined
+                            : '1 1 auto'
                       }}
                     >
                       <div className={styles.treeGridHeaderContent}>
@@ -932,7 +969,11 @@ export const List: ReusableComponent<IListProps> = (props) => {
                             aria-label={toggleAllLabel}
                             title={toggleAllLabel}
                           >
-                            {allGroupsOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                            {allGroupsOpen ? (
+                              <ChevronDown20Regular />
+                            ) : (
+                              <ChevronRight20Regular />
+                            )}
                           </button>
                         )}
                         {renderHeaderCellContent(column)}
@@ -987,7 +1028,10 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                         column.minWidth === column.maxWidth
                                           ? column.minWidth
                                           : undefined,
-                                      flex: column.minWidth === column.maxWidth ? undefined : '1 1 auto'
+                                      flex:
+                                        column.minWidth === column.maxWidth
+                                          ? undefined
+                                          : '1 1 auto'
                                     }}
                                   >
                                     <ItemColumn
@@ -1005,19 +1049,27 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       className={styles.groupHeaderRow}
                       title={holiday?.name}
                     >
-                      {isOpen ? <ChevronDown20Regular /> : <ChevronRight20Regular />}
+                      {isOpen ? (
+                        <ChevronDown20Regular />
+                      ) : (
+                        <ChevronRight20Regular />
+                      )}
                       <TreeGridCell
                         header
                         aria-colspan={columns.length}
                         className={styles.groupHeaderCell}
                         style={{
-                          color: holiday ? tokens.colorPaletteRedForeground1 : undefined,
+                          color: holiday
+                            ? tokens.colorPaletteRedForeground1
+                            : undefined,
                           ...group.data?.styles
                         }}
                       >
                         <span>{group.name}</span>
                         {total && (
-                          <span className={styles.groupHeaderTotal}>({total})</span>
+                          <span className={styles.groupHeaderTotal}>
+                            ({total})
+                          </span>
                         )}
                       </TreeGridCell>
                     </TreeGridRow>

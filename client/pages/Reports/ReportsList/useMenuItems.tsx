@@ -18,7 +18,8 @@ export function useMenuItems(props: IReportsListProps): ListMenuItem[] {
   const { t } = useTranslation()
   const context = useContext(ReportsContext)
   const { savedFilters, activeFilter, loading } = context.state
-  const { commandBarItem: excelExportCommand } = useReportsExcelExportCommand(props)
+  const { commandBarItem: excelExportCommand } =
+    useReportsExcelExportCommand(props)
 
   const menuItems: ListMenuItem[] = []
 
@@ -32,7 +33,9 @@ export function useMenuItems(props: IReportsListProps): ListMenuItem[] {
   }
 
   // Add saved filters menu
-  const savedFiltersMenuItem = new ListMenuItem(activeFilter?.text ?? t('reports.savedFilters'))
+  const savedFiltersMenuItem = new ListMenuItem(
+    activeFilter?.text ?? t('reports.savedFilters')
+  )
     .withIcon('ContentView')
     .setDisabled(loading)
     .setHidden(Object.keys(savedFilters).length === 0 || !props.filters)
@@ -52,6 +55,6 @@ export function useMenuItems(props: IReportsListProps): ListMenuItem[] {
     )
 
   menuItems.push(savedFiltersMenuItem)
-  
+
   return menuItems
 }
