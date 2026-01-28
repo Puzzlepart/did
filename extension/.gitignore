@@ -1,0 +1,12 @@
+# Build artifacts
+build/
+dist/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
