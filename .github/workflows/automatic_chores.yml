@@ -53,7 +53,6 @@ jobs:
         with:
           token: ${{ secrets.CI_BOT_TOKEN }}
 
-          # Unique branch per attempt to avoid rerun collisions
           branch: auto/chores-${{ github.run_id }}-${{ github.run_attempt }}
           base: dev
 
@@ -68,20 +67,11 @@ jobs:
           author: github-automatic-chores <github-automatic-chores@users.noreply.github.com>
           delete-branch: true
 
-          # Critical: only include docs-related outputs, so the action never
-          # tries to commit unrelated files (and avoids conflicts like ReportService.ts).
           add-paths: |
             README.md
             CHANGELOG.md
             .readme/
             .changelog/
-
-      - name: Auto-approve Pull Request
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        uses: hmarr/auto-approve-action@v4
-        with:
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
 
       - name: Enable auto-merge
         if: ${{ steps.cpr.outputs.pull-request-number }}
