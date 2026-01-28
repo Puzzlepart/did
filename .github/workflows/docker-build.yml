@@ -2,13 +2,6 @@ name: Build and push Docker image
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - dev
-    tags:
-      - v*
-
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
