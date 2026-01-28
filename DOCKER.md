@@ -353,8 +353,8 @@ Build for multiple architectures:
 # Setup buildx
 docker buildx create --use
 
-# Build for multiple platforms
-docker buildx build --platform linux/amd64,linux/arm64 -t did:latest .
+# Build for amd64 - arm64 builds bomb on github
+docker buildx build --platform linux/amd64 -t did:latest .
 ```
 
 ## Health Checks

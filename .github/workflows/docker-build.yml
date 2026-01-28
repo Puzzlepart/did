@@ -1,6 +1,7 @@
 name: Build and push Docker image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -11,7 +12,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  PLATFORMS: linux/amd64,linux/arm64
+  PLATFORMS: linux/amd64
 
 jobs:
   build:
