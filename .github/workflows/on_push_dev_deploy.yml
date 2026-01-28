@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - 'feat/*'
     paths:
       - 'server/**'
       - 'client/**'

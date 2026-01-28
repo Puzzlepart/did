@@ -61,7 +61,7 @@ This directory contains all GitHub Actions workflows for the **did** project.
 ---
 
 ### ✅ on_pr_test_build.yml
-**Trigger:** Pull requests to `dev` or `master`
+**Trigger:** Pull requests to `dev` or `main`
 
 **Purpose:** Validates PRs with tests and builds (doesn't fix lint - that's handled by automatic_chores)
 
@@ -161,3 +161,4 @@ Required repository secrets:
 - `DIDAPP_DEV_PUBLISH_PROFILE` - Azure publish profile for dev slot
 - `DIDAPP_STAGING_PUBLISH_PROFILE` - Azure publish profile for staging slot
 - `GITHUB_TOKEN` - Automatically provided by GitHub Actions
+- `CI_BOT_TOKEN` - Bot PAT used for auto-approve/auto-merge in automatic_chores

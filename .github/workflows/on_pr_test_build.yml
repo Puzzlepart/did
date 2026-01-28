@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
     branches:
-      - master
+      - main
       - dev
     paths-ignore:
       - '**.md'
@@ -98,10 +98,10 @@ jobs:
     steps:
       - name: Check status
         run: |
-          if [[ "${{ needs.test.result }}" == "failure" || \
-                "${{ needs.build_client.result }}" == "failure" || \
-                "${{ needs.build_server.result }}" == "failure" ]]; then
-            echo "One or more jobs failed"
+          if [[ "${{ needs.test.result }}" != "success" || \
+                "${{ needs.build_client.result }}" != "success" || \
+                "${{ needs.build_server.result }}" != "success" ]]; then
+            echo "One or more jobs failed/cancelled/skipped"
             exit 1
           fi
           echo "All jobs passed"
