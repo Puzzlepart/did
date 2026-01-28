@@ -74,11 +74,7 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
         }}
       >
         {visibleTabs.map((tab) => (
-          <Tab
-            key={tab.value}
-            value={tab.value}
-            icon={getFluentIcon(tab.icon)}
-          >
+          <Tab key={tab.value} value={tab.value} icon={getFluentIcon(tab.icon)}>
             {tab.label}
           </Tab>
         ))}

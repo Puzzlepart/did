@@ -1,5 +1,8 @@
 import test, { ExecutionContext } from 'ava'
-import { ProjectRoleEventExtension, TimeEntryExtensionContext } from './extensions'
+import {
+  ProjectRoleEventExtension,
+  TimeEntryExtensionContext
+} from './extensions'
 import { ClientEventInput, EventObject, Project } from '../../graphql'
 import { ITimesheetPeriodData } from './types'
 

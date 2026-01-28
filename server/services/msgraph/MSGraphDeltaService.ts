@@ -66,7 +66,9 @@ export class MSGraphDeltaService {
    *
    * @param forceFullSync - Force a full sync even if delta link exists
    */
-  public async syncUsers(forceFullSync: boolean = false): Promise<DeltaSyncResult> {
+  public async syncUsers(
+    forceFullSync: boolean = false
+  ): Promise<DeltaSyncResult> {
     const startTime = Date.now()
     debug('Starting user sync...')
 
@@ -91,7 +93,8 @@ export class MSGraphDeltaService {
       // Perform delta sync
       debug('🌐 Fetching users from Microsoft Graph API...')
       const graphStartTime = Date.now()
-      const { users, deletedUserIds, newDeltaLink } = await this._msGraphService.getUsersDelta(deltaLink)
+      const { users, deletedUserIds, newDeltaLink } =
+        await this._msGraphService.getUsersDelta(deltaLink)
       const graphDuration = Date.now() - graphStartTime
       debug(`✅ Graph API call completed in ${graphDuration}ms:`, {
         usersReceived: users.length,
@@ -99,7 +102,9 @@ export class MSGraphDeltaService {
         hasDeltaLink: !!newDeltaLink
       })
       if (!newDeltaLink) {
-        debug('⚠️  WARNING: Microsoft Graph did not return a delta link! This will cause a full sync every time.')
+        debug(
+          '⚠️  WARNING: Microsoft Graph did not return a delta link! This will cause a full sync every time.'
+        )
       }
 
       // Process deletions
@@ -157,8 +162,12 @@ export class MSGraphDeltaService {
         error.message?.includes('DeltaLink older than 30 days')
 
       if (isDeltaLinkExpired) {
-        debug('⚠️  Delta link expired or invalid, clearing and retrying with full sync')
-        debug('Delta link expired or invalid, clearing and retrying with full sync')
+        debug(
+          '⚠️  Delta link expired or invalid, clearing and retrying with full sync'
+        )
+        debug(
+          'Delta link expired or invalid, clearing and retrying with full sync'
+        )
         await this._deltaLinksService.clearDeltaLink('users')
         // Retry with full sync ONLY if not already doing one (prevents infinite recursion)
         if (!forceFullSync && deltaLink) {
@@ -182,7 +191,9 @@ export class MSGraphDeltaService {
    *
    * @param cacheExpiry - Cache expiry in seconds (default: 300 = 5 minutes)
    */
-  public async getUsers(cacheExpiry: number = 300): Promise<ActiveDirectoryUser[]> {
+  public async getUsers(
+    cacheExpiry: number = 300
+  ): Promise<ActiveDirectoryUser[]> {
     try {
       return await this._cache.usingCache(
         async () => {

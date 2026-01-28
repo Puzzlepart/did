@@ -20,11 +20,19 @@ const isValidHourlyRate = (
 ): rate is number => {
   if (rate == null) return false
   if (typeof rate !== 'number' || Number.isNaN(rate)) {
-    debug('WARNING: Non-numeric hourly rate detected: %o, context: %o', rate, context)
+    debug(
+      'WARNING: Non-numeric hourly rate detected: %o, context: %o',
+      rate,
+      context
+    )
     return false
   }
   if (rate < 0) {
-    debug('WARNING: Negative hourly rate detected: %s, context: %o', rate, context)
+    debug(
+      'WARNING: Negative hourly rate detected: %s, context: %o',
+      rate,
+      context
+    )
     return false
   }
   // Allow zero rates for interns, volunteers, etc.
@@ -107,10 +115,16 @@ export const ProjectRoleEventExtension: TimeEntryExtension = {
 
     // Determine the hourly rate to use
     let hourlyRate: number | undefined
-    if (resource.hourlyRate != null && isValidHourlyRate(resource.hourlyRate, logContext)) {
+    if (
+      resource.hourlyRate != null &&
+      isValidHourlyRate(resource.hourlyRate, logContext)
+    ) {
       // Use resource-level hourly rate (includes 0 as valid)
       hourlyRate = resource.hourlyRate
-    } else if (roleDefinition && isValidHourlyRate(roleDefinition.hourlyRate, logContext)) {
+    } else if (
+      roleDefinition &&
+      isValidHourlyRate(roleDefinition.hourlyRate, logContext)
+    ) {
       // Fall back to role definition hourly rate
       hourlyRate = roleDefinition.hourlyRate
       debug(

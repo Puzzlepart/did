@@ -31,7 +31,7 @@ test('isNullish: POTENTIAL BUG - treats 0 as nullish', (t) => {
   // This behavior might be a bug depending on use case
   // 0 is a valid number and often should not be treated as "missing" data
   t.is(isNullish(0), true)
-  
+
   // In many contexts, you'd expect:
   // t.is(isNullish(0), false)
 })
@@ -95,8 +95,14 @@ test('isNullish: returns false for false', (t) => {
 
 // Test functions
 test('isNullish: returns false for functions', (t) => {
-  t.is(isNullish(() => {}), false)
-  t.is(isNullish(function () {}), false)
+  t.is(
+    isNullish(() => {}),
+    false
+  )
+  t.is(
+    isNullish(function () {}),
+    false
+  )
 })
 
 // Test symbols
@@ -216,11 +222,7 @@ test('isNullish: correctly identifies non-nullish values', (t) => {
     Symbol('test')
   ]
   for (const value of nonNullishValues) {
-    t.is(
-      isNullish(value),
-      false,
-      `${String(value)} should not be nullish`
-    )
+    t.is(isNullish(value), false, `${String(value)} should not be nullish`)
   }
 })
 
@@ -228,7 +230,7 @@ test('isNullish: correctly identifies non-nullish values', (t) => {
 test('isNullish: works with generic type parameter', (t) => {
   const stringValue: string | null = null
   t.is(isNullish<string | null>(stringValue), true)
-  
+
   const numberValue: number | undefined = undefined
   t.is(isNullish<number | undefined>(numberValue), true)
 })

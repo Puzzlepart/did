@@ -2,7 +2,11 @@ import { CheckboxVisibility } from 'components/List/types'
 import { List, Progress, TabComponent } from 'components'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useWindowSize } from 'usehooks-ts'
-import { APPLY_FILTER_STATE, SET_FILTER_STATE, SET_FILTERS_OPEN } from '../reducer/actions'
+import {
+  APPLY_FILTER_STATE,
+  SET_FILTER_STATE,
+  SET_FILTERS_OPEN
+} from '../reducer/actions'
 import styles from './ReportsList.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReportsList } from './useReportsList'
@@ -52,14 +56,14 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
               : t('reports.generatingReportProgressLabel', {
                   ...context.queryPreset,
                   text: context.queryPreset?.text?.toLowerCase()
-              })
+                })
           }
           text={t('reports.generatingReportProgressText')}
         />
       )}
       {exportProgress && (
-        <ExportProgress 
-          progress={exportProgress} 
+        <ExportProgress
+          progress={exportProgress}
           progressMessage={exportProgressMessage}
         />
       )}
@@ -86,7 +90,10 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
           onFilterPanelToggle={(isOpen) => {
             context.dispatch(SET_FILTERS_OPEN(isOpen))
             if (!isOpen) {
-              const filterState = context.state?.filterState ?? { filters: [], isFiltered: false }
+              const filterState = context.state?.filterState ?? {
+                filters: [],
+                isFiltered: false
+              }
               context.dispatch(
                 APPLY_FILTER_STATE({
                   ...filterState,

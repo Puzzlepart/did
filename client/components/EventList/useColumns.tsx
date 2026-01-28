@@ -42,7 +42,7 @@ function getSizing(
  * @param name - Name
  */
 const createTitleColumnDef = (
-  props: IEventListProps, 
+  props: IEventListProps,
   name: string
 ): IListColumn => {
   const titleColumnProps: Partial<ITitleColumnProps> = {

@@ -63,12 +63,12 @@ export const setupGraphQL = async (
 
         // Map error codes to HTTP status for client-side handling
         const httpStatusMap: Record<string, number> = {
-          'UNAUTHENTICATED': 401,
-          'FORBIDDEN': 403,
-          'BAD_USER_INPUT': 400,
-          'GRAPHQL_PARSE_FAILED': 400,
-          'GRAPHQL_VALIDATION_FAILED': 400,
-          'INTERNAL_SERVER_ERROR': 500
+          UNAUTHENTICATED: 401,
+          FORBIDDEN: 403,
+          BAD_USER_INPUT: 400,
+          GRAPHQL_PARSE_FAILED: 400,
+          GRAPHQL_VALIDATION_FAILED: 400,
+          INTERNAL_SERVER_ERROR: 500
         }
         const httpStatus = code ? httpStatusMap[code as string] : undefined
 

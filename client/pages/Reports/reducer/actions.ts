@@ -63,6 +63,5 @@ export const SET_FILTERS_OPEN = createAction<boolean>('SET_FILTERS_OPEN')
 /**
  * @category Reports Actions
  */
-export const APPLY_FILTER_STATE = createAction<ListFilterState>(
-  'APPLY_FILTER_STATE'
-)
+export const APPLY_FILTER_STATE =
+  createAction<ListFilterState>('APPLY_FILTER_STATE')

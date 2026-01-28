@@ -101,7 +101,8 @@ export function getFluentIcon(
 
   const hasAlias = _.has(iconCatalog, aliasName)
   const fallbackName = options?.default
-  const hasFallback = !hasAlias && fallbackName && _.has(iconCatalog, fallbackName)
+  const hasFallback =
+    !hasAlias && fallbackName && _.has(iconCatalog, fallbackName)
   const iconName = hasAlias ? aliasName : (hasFallback ? fallbackName : null)
 
   // Return icon if it exists in v9 catalog or if a fallback is provided
@@ -111,7 +112,9 @@ export function getFluentIcon(
     const size = options?.size
     const filled = options?.filled ?? false
     const icon = iconCatalog[iconName]
-    const IconComponent = bundle ? bundleIcon(icon.filled, icon.regular) : icon.regular
+    const IconComponent = bundle
+      ? bundleIcon(icon.filled, icon.regular)
+      : icon.regular
     const props: { style?: CSSProperties; title?: string } = {
       title: options?.title ?? iconName
     }
@@ -127,15 +130,23 @@ export function getFluentIcon(
   }
 
   // Icon not found in catalog - use fallback
-  if (process.env.NODE_ENV === 'development' && !missingIconWarnings.has(aliasName)) {
+  if (
+    process.env.NODE_ENV === 'development' &&
+    !missingIconWarnings.has(aliasName)
+  ) {
     missingIconWarnings.add(aliasName)
-    console.warn(`[getFluentIcon] Icon "${aliasName}" not found in catalog, using fallback`)
+    console.warn(
+      `[getFluentIcon] Icon "${aliasName}" not found in catalog, using fallback`
+    )
   }
 
   // Return fallback icon (ErrorCircle)
   const fallbackIcon = iconCatalog['ErrorCircle']
   if (fallbackIcon) {
-    const FallbackComponent = bundleIcon(fallbackIcon.filled, fallbackIcon.regular)
+    const FallbackComponent = bundleIcon(
+      fallbackIcon.filled,
+      fallbackIcon.regular
+    )
     const props: { style?: CSSProperties; title?: string } = {
       title: `Missing icon: ${aliasName}`
     }

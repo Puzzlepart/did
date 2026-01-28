@@ -68,7 +68,7 @@ test('generateId: generates different IDs on consecutive calls', (t) => {
   const id1 = generateId()
   const id2 = generateId()
   const id3 = generateId()
-  
+
   t.not(id1, id2)
   t.not(id2, id3)
   t.not(id1, id3)
@@ -77,11 +77,11 @@ test('generateId: generates different IDs on consecutive calls', (t) => {
 test('generateId: high probability of uniqueness in 100 IDs', (t) => {
   const ids = new Set<string>()
   const count = 100
-  
+
   for (let i = 0; i < count; i++) {
     ids.add(generateId())
   }
-  
+
   // All IDs should be unique
   t.is(ids.size, count)
 })
@@ -89,15 +89,18 @@ test('generateId: high probability of uniqueness in 100 IDs', (t) => {
 test('generateId: high probability of uniqueness in 1000 IDs', (t) => {
   const ids = new Set<string>()
   const count = 1000
-  
+
   for (let i = 0; i < count; i++) {
     ids.add(generateId())
   }
-  
+
   // With random generation, there's a tiny chance of collision
   // but it should be extremely rare
   // We'll allow 1 collision in 1000 to account for randomness
-  t.true(ids.size >= count - 1, `Expected at least ${count - 1} unique IDs, got ${ids.size}`)
+  t.true(
+    ids.size >= count - 1,
+    `Expected at least ${count - 1} unique IDs, got ${ids.size}`
+  )
 })
 
 // Edge case: very large length
@@ -141,11 +144,11 @@ test('generateId: handles float length by coercion', (t) => {
 test('generateId: consistent length output for same parameter', (t) => {
   const length = 5
   const results = []
-  
+
   for (let i = 0; i < 10; i++) {
     results.push(generateId(length))
   }
-  
+
   // All should have same length (or less if random string is shorter)
   const lengths = results.map((r) => r.length)
   const allSameLength = lengths.every((l) => l === lengths[0])
@@ -168,7 +171,7 @@ test('generateId: null parameter coerces to 0', (t) => {
 // Distribution check: does it use all possible characters?
 test('generateId: uses variety of characters from base36', (t) => {
   const allChars = new Set<string>()
-  
+
   // Generate many IDs to collect character samples
   for (let i = 0; i < 500; i++) {
     const id = generateId(10)
@@ -176,17 +179,20 @@ test('generateId: uses variety of characters from base36', (t) => {
       allChars.add(char)
     }
   }
-  
+
   // Should have seen multiple different characters
   // Base36 has 36 possible characters (0-9, a-z)
   // We won't see all of them, but should see a good variety
-  t.true(allChars.size >= 15, `Expected at least 15 different characters, got ${allChars.size}`)
+  t.true(
+    allChars.size >= 15,
+    `Expected at least 15 different characters, got ${allChars.size}`
+  )
 })
 
 // Testing randomness: no obvious patterns
 test('generateId: no obvious repeating patterns', (t) => {
   const id = generateId(20)
-  
+
   // Check if ID is not all same character
   const allSameChar = id.split('').every((char) => char === id[0])
   t.false(allSameChar, 'ID should not be all same character')
@@ -196,11 +202,11 @@ test('generateId: no obvious repeating patterns', (t) => {
 test('generateId: can generate many IDs quickly', (t) => {
   const start = Date.now()
   const count = 10000
-  
+
   for (let i = 0; i < count; i++) {
     generateId()
   }
-  
+
   const elapsed = Date.now() - start
   // Should generate 10000 IDs in less than 1 second
   t.true(elapsed < 1000, `Took ${elapsed}ms to generate ${count} IDs`)
@@ -227,7 +233,7 @@ test('generateId: may contain leading zeros (valid in base36)', (t) => {
   // Just verify this doesn't cause issues
   // Leading zeros are valid in the output
   let hasLeadingZero = false
-  
+
   for (let i = 0; i < 100; i++) {
     const id = generateId()
     if (id.startsWith('0')) {
@@ -235,7 +241,7 @@ test('generateId: may contain leading zeros (valid in base36)', (t) => {
       break
     }
   }
-  
+
   // It's okay if we find leading zeros - they're valid
   // This test just documents the behavior
   t.pass()
@@ -246,13 +252,13 @@ test('generateId: collision probability is extremely low', (t) => {
   // For 9-character base36 string: 36^9 = ~1.01 * 10^14 possibilities
   // Birthday paradox: for 50% collision probability, need ~sqrt(36^9) ≈ 10^7 IDs
   // So for typical usage (thousands of IDs), collision is virtually impossible
-  
+
   // Generate 10000 IDs
   const ids = new Set<string>()
   for (let i = 0; i < 10000; i++) {
     ids.add(generateId())
   }
-  
+
   // Should all be unique
   t.is(ids.size, 10000)
 })

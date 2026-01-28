@@ -7,7 +7,7 @@ import $loadActiveDirectoryUsers from '../hooks/loadActiveDirectoryUsers.gql'
 export function useLoadAdUsers() {
   const context = useContext(UsersContext)
   const loadAttemptedRef = useRef(false)
-  
+
   const [loadActiveDirectoryUsers] = useLazyQuery($loadActiveDirectoryUsers, {
     fetchPolicy: 'network-only', // Prevent Apollo cache from interfering
     onCompleted: (data) => {
@@ -23,7 +23,7 @@ export function useLoadAdUsers() {
     if (loadAttemptedRef.current || context.state.adUsersLoading) {
       return
     }
-    
+
     loadAttemptedRef.current = true
     context.dispatch(SET_AD_USERS_LOADING(true))
     try {

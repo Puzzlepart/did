@@ -211,7 +211,15 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
     })
 
     handleCloseDialog()
-  }, [formData, holidays, value, onChange, validateForm, editingIndex, handleCloseDialog])
+  }, [
+    formData,
+    holidays,
+    value,
+    onChange,
+    validateForm,
+    editingIndex,
+    handleCloseDialog
+  ])
 
   const handleDelete = useCallback(
     (index: number) => {
@@ -234,7 +242,11 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
         if (countryCode === 'NO') {
           // Import Norway holidays - filter out entries with missing required fields
           const fixedHolidays = NORWAY_HOLIDAYS.filter(
-            (h) => h.recurring !== false && h.name && h.hoursOff !== undefined && h.date
+            (h) =>
+              h.recurring !== false &&
+              h.name &&
+              h.hoursOff !== undefined &&
+              h.date
           ).map((h) => ({
             date: $dayjs(h.date!).format('YYYY-MM-DD'),
             name: h.name!,
@@ -258,7 +270,9 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
           // Merge with existing, avoiding duplicates
           const existingDates = new Set(holidays.map((h) => h.date))
-          const newHolidays = importedHolidays.filter((h) => !existingDates.has(h.date))
+          const newHolidays = importedHolidays.filter(
+            (h) => !existingDates.has(h.date)
+          )
 
           const updatedHolidays = [...holidays, ...newHolidays]
           updatedHolidays.sort((a, b) => a.date.localeCompare(b.date))
@@ -276,23 +290,29 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
     [isImporting, holidays, value, onChange, currentYear]
   )
 
-  const getWarningsForHoliday = useCallback((holiday: Holiday): string[] => {
-    const warnings: string[] = []
+  const getWarningsForHoliday = useCallback(
+    (holiday: Holiday): string[] => {
+      const warnings: string[] = []
 
-    if (isWeekend(holiday.date)) {
-      warnings.push('Falls on weekend')
-    }
+      if (isWeekend(holiday.date)) {
+        warnings.push('Falls on weekend')
+      }
 
-    if (duplicates.includes(holiday.date)) {
-      warnings.push('Duplicate date')
-    }
+      if (duplicates.includes(holiday.date)) {
+        warnings.push('Duplicate date')
+      }
 
-    if ($dayjs(holiday.date).month() === 1 && $dayjs(holiday.date).date() === 29) {
-      warnings.push('Feb 29 - skipped in non-leap years')
-    }
+      if (
+        $dayjs(holiday.date).month() === 1 &&
+        $dayjs(holiday.date).date() === 29
+      ) {
+        warnings.push('Feb 29 - skipped in non-leap years')
+      }
 
-    return warnings
-  }, [duplicates])
+      return warnings
+    },
+    [duplicates]
+  )
 
   return (
     <div className={HolidaysField.className}>
@@ -310,7 +330,9 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
 
           <Dropdown
             placeholder={t('admin.importHolidaysButton')}
-            onOptionSelect={(_, data) => handleImportPreset(data.optionValue as string)}
+            onOptionSelect={(_, data) =>
+              handleImportPreset(data.optionValue as string)
+            }
             disabled={isImporting}
           >
             <Option key='NO' value='NO'>
@@ -362,7 +384,8 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                 columnId: 'recurring',
                 renderHeaderCell: () => t('admin.holidayRecurringLabel'),
                 compare: (a, b) => Number(a.recurring) - Number(b.recurring),
-                renderCell: (item) => (item.recurring ? t('common.yes') : t('common.no'))
+                renderCell: (item) =>
+                  item.recurring ? t('common.yes') : t('common.no')
               },
               {
                 columnId: 'actions',
@@ -405,7 +428,9 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
             <DataGridBody<Holiday>>
               {({ item, rowId }) => (
                 <DataGridRow<Holiday> key={rowId}>
-                  {({ renderCell }) => <DataGridCell>{renderCell(item)}</DataGridCell>}
+                  {({ renderCell }) => (
+                    <DataGridCell>{renderCell(item)}</DataGridCell>
+                  )}
                 </DataGridRow>
               )}
             </DataGridBody>
@@ -413,11 +438,16 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
         )}
 
         {/* Add/Edit Dialog */}
-        <Dialog open={isDialogOpen} onOpenChange={(_, data) => data.open || handleCloseDialog()}>
+        <Dialog
+          open={isDialogOpen}
+          onOpenChange={(_, data) => data.open || handleCloseDialog()}
+        >
           <DialogSurface>
             <DialogBody>
               <DialogTitle>
-                {editingIndex === null ? t('admin.addHolidayButton') : t('admin.editHolidayButton')}
+                {editingIndex === null
+                  ? t('admin.addHolidayButton')
+                  : t('admin.editHolidayButton')}
               </DialogTitle>
               <DialogContent className={classes.dialogContent}>
                 {validationErrors.length > 0 && (
@@ -432,14 +462,18 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                   <Input
                     type='date'
                     value={formData.date}
-                    onChange={(_, data) => setFormData({ ...formData, date: data.value })}
+                    onChange={(_, data) =>
+                      setFormData({ ...formData, date: data.value })
+                    }
                   />
                 </Field>
 
                 <Field label={t('admin.holidayNameLabel')} required>
                   <Input
                     value={formData.name}
-                    onChange={(_, data) => setFormData({ ...formData, name: data.value })}
+                    onChange={(_, data) =>
+                      setFormData({ ...formData, name: data.value })
+                    }
                     placeholder="Christmas Day, New Year's Eve, etc."
                   />
                 </Field>
@@ -453,7 +487,10 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                     type='number'
                     value={String(formData.hoursOff)}
                     onChange={(_, data) =>
-                      setFormData({ ...formData, hoursOff: Number.parseFloat(data.value) || 0 })
+                      setFormData({
+                        ...formData,
+                        hoursOff: Number.parseFloat(data.value) || 0
+                      })
                     }
                     min={0}
                     max={8}
@@ -465,17 +502,24 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                   <Checkbox
                     checked={formData.recurring}
                     onChange={(_, data) =>
-                      setFormData({ ...formData, recurring: data.checked as boolean })
+                      setFormData({
+                        ...formData,
+                        recurring: data.checked as boolean
+                      })
                     }
                     label={t('admin.holidayRecurringLabel')}
                   />
-                  <Label size='small'>{t('admin.holidayRecurringDescription')}</Label>
+                  <Label size='small'>
+                    {t('admin.holidayRecurringDescription')}
+                  </Label>
                 </Field>
 
                 <Field label={t('admin.holidayNotesLabel')}>
                   <Textarea
                     value={formData.notes}
-                    onChange={(_, data) => setFormData({ ...formData, notes: data.value })}
+                    onChange={(_, data) =>
+                      setFormData({ ...formData, notes: data.value })
+                    }
                     placeholder='Optional notes about company-specific rules...'
                     rows={3}
                   />
@@ -516,7 +560,9 @@ export const HolidaysField: StyledComponent<IHolidaysFieldProps> = (props) => {
                 </DialogTrigger>
                 <Button
                   appearance='primary'
-                  onClick={() => deleteIndex !== null && handleDelete(deleteIndex)}
+                  onClick={() =>
+                    deleteIndex !== null && handleDelete(deleteIndex)
+                  }
                 >
                   {t('common.delete')}
                 </Button>

@@ -20,18 +20,22 @@ export function useReportsLoadReportCommand() {
   return useMemo(() => {
     if (!context.loadReport || !context.queryPreset) return
     if (
-      !['last_month', 'current_month', 'last_year', 'current_year', 'forecast'].includes(
-        context.queryPreset.id
-      )
+      ![
+        'last_month',
+        'current_month',
+        'last_year',
+        'current_year',
+        'forecast'
+      ].includes(context.queryPreset.id)
     ) {
       return
     }
     const text =
       typeof approxCount === 'number' && approxCount > largeReportLimit
         ? t('reports.loadApproxEntriesFirst', {
-          count: approxCount,
-          limit: largeReportLimit
-        })
+            count: approxCount,
+            limit: largeReportLimit
+          })
         : t('reports.loadApproxEntries', { count: approxCount })
 
     return new ListMenuItem(text)

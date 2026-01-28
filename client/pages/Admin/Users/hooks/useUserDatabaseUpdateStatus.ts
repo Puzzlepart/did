@@ -9,12 +9,15 @@ import $userDatabaseUpdateStatus from './userDatabaseUpdateStatus.gql'
  */
 export function useUserDatabaseUpdateStatus() {
   const [pollInterval, setPollInterval] = useState<number>(0)
-  
-  const { data, loading, startPolling, stopPolling } = useQuery($userDatabaseUpdateStatus, {
-    pollInterval: pollInterval || undefined, // Dynamic polling based on status
-    fetchPolicy: 'cache-and-network',
-    notifyOnNetworkStatusChange: true
-  })
+
+  const { data, loading, startPolling, stopPolling } = useQuery(
+    $userDatabaseUpdateStatus,
+    {
+      pollInterval: pollInterval || undefined, // Dynamic polling based on status
+      fetchPolicy: 'cache-and-network',
+      notifyOnNetworkStatusChange: true
+    }
+  )
 
   const status = data?.userDatabaseUpdateStatus
   const isRunning = status?.running || false
@@ -30,7 +33,7 @@ export function useUserDatabaseUpdateStatus() {
       setPollInterval(0)
       stopPolling()
     }
-    
+
     return () => {
       // Cleanup: stop polling when component unmounts
       stopPolling()

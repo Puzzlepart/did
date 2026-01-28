@@ -133,7 +133,12 @@ export function useReportsQuery({
         filterOptions: preloadResult.data?.filterOptions
       })
     )
-  }, [preloadResult.called, preloadResult.data, preloadResult.loading, dispatch])
+  }, [
+    preloadResult.called,
+    preloadResult.data,
+    preloadResult.loading,
+    dispatch
+  ])
 
   useEffect(() => {
     if (forecastPreloadResult.data?.users) {
@@ -186,9 +191,10 @@ export function useReportsQuery({
     }
 
     const preset = mapQueryPresetToReportsPreset(queryPreset.id)
-    const query = supportsQueryFilters && hasAppliedFilters
-      ? appliedFilterQuery
-      : queryPreset.variables?.query
+    const query =
+      supportsQueryFilters && hasAppliedFilters
+        ? appliedFilterQuery
+        : queryPreset.variables?.query
 
     loadPreloadQuery({
       variables: {
@@ -240,7 +246,14 @@ export function useReportsQuery({
           })
         )
       })
-  }, [client, dispatch, queryPreset?.id, queryPreset?.query, queryPreset?.variables, summaryKey])
+  }, [
+    client,
+    dispatch,
+    queryPreset?.id,
+    queryPreset?.query,
+    queryPreset?.variables,
+    summaryKey
+  ])
 
   const loadReport = useCallback(() => {
     if (!queryPreset) return
@@ -260,9 +273,10 @@ export function useReportsQuery({
         query: queryPreset?.query || default_query,
         variables: {
           ...queryPreset?.variables,
-          ...(supportsQueryFilters && hasAppliedFilters && {
-            query: appliedFilterQuery
-          })
+          ...(supportsQueryFilters &&
+            hasAppliedFilters && {
+              query: appliedFilterQuery
+            })
         },
         fetchPolicy: 'no-cache'
       })

@@ -150,8 +150,8 @@ export class MongoDocumentService<T> {
    * @param options - Find options including sort, limit, skip
    */
   public async findPaginated<S = any>(
-    query: FilterQuery<T>, 
-    options?: { 
+    query: FilterQuery<T>,
+    options?: {
       sort?: S
       limit?: number
       skip?: number
@@ -209,7 +209,7 @@ export class MongoDocumentService<T> {
     if (options?.sort) findOptions.sort = options.sort
 
     const cursor = this.collection.find(this._extendQuery(query), findOptions)
-    
+
     let batch: T[] = []
     let batchCount = 0
 

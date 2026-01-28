@@ -21,7 +21,7 @@ export function useReportsList(props: IReportsListProps) {
   const context = useContext(ReportsContext)
   const columns = useColumns()
   const menuItems = useMenuItems(props)
-  const { progress: exportProgress, progressMessage: exportProgressMessage } = 
+  const { progress: exportProgress, progressMessage: exportProgressMessage } =
     useReportsExcelExportCommand(props)
   const loadReportCommand = useReportsLoadReportCommand()
   const filterPanelItems = useMemo(() => {
