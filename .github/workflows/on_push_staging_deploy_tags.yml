@@ -1,0 +1,16 @@
+name: Build and deploy to didapp/staging (tags)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-reusable.yml
+    with:
+      environment: staging
+      slot-name: staging
+      display-version-details: '0'
+    secrets:
+      publish-profile: ${{ secrets.DIDAPP_STAGING_PUBLISH_PROFILE }}
