@@ -32,13 +32,16 @@ export function useFilterPanel(props: IFilterPanelProps) {
    * @param filter - Filter to update
    * @param selected - Selected keys
    */
-  const onFilterUpdated = useCallback((filter: IFilter, selected: Set<string>) => {
-    setSelected((previousSelected) => {
-      const newSelected = new Map(previousSelected)
-      newSelected.set(filter.key, selected)
-      return newSelected
-    })
-  }, [])
+  const onFilterUpdated = useCallback(
+    (filter: IFilter, selected: Set<string>) => {
+      setSelected((previousSelected) => {
+        const newSelected = new Map(previousSelected)
+        newSelected.set(filter.key, selected)
+        return newSelected
+      })
+    },
+    []
+  )
 
   useEffect(() => {
     const updatedFilters = filters
@@ -85,7 +88,7 @@ export function useFilterPanel(props: IFilterPanelProps) {
 
   return {
     filtersToRender,
-  title,
+    title,
     contextValue
   }
 }

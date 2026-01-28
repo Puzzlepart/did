@@ -15,8 +15,7 @@ export function useImageField(props: IImageFieldProps) {
   const [isInputDisabled, setIsInputDisabled] = useState(false)
 
   const navBackground =
-    subscription?.settings?.brand?.navBackground ??
-    tokens.colorBrandBackground
+    subscription?.settings?.brand?.navBackground ?? tokens.colorBrandBackground
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]

@@ -8,7 +8,7 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.15.11-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.19.0-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
@@ -38,6 +38,11 @@
 		* [Extensions for VS Code](#extensions-for-vs-code)
 	* [Maintenance Mode](#maintenance-mode)
 	* [Documentation](#documentation)
+* [➤ ➤ Microsoft Edge Sidebar Extension](#--microsoft-edge-sidebar-extension)
+	* [Key Benefits](#key-benefits)
+	* [Installation](#installation)
+	* [Documentation](#documentation-1)
+	* [Use Cases](#use-cases)
 * [➤ Contributors](#-contributors)
 </details>
 
@@ -48,21 +53,25 @@
 
 | Milestone                                                    | Release date | Version                                                      |
 | ------------------------------------------------------------ | ------------ | ------------------------------------------------------------ |
-| [💧 &nbsp;1 - &nbsp;Hydrogen](https://github.com/Puzzlepart/did365/milestone/1) | 03.02.2020   | [![version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://semver.org) |
-| [🎈 &nbsp;2 - &nbsp;Helium](https://github.com/Puzzlepart/did365/milestone/2) | 02.04.2020   | [![version](https://img.shields.io/badge/version-0.3.0-green.svg)](https://semver.org) |
-| [🔋 &nbsp;3 - &nbsp;Lithium](https://github.com/Puzzlepart/did365/milestone/5) | 11.05.2020   | [![version](https://img.shields.io/badge/version-0.4.0-green.svg)](https://semver.org) |
-| [🛰 &nbsp;4 - &nbsp;Beryllium](https://github.com/Puzzlepart/did365/milestone/3) | 22.05.2020   | [![version](https://img.shields.io/badge/version-0.5.0-green.svg)](https://semver.org) |
-| [☄️ &nbsp;5 - &nbsp;Boron](https://github.com/Puzzlepart/did365/milestone/4) | 19.08.2020   | [![version](https://img.shields.io/badge/version-0.6.0-green.svg)](https://semver.org) |
-| [🌱 &nbsp;6 - &nbsp;Carbon](https://github.com/Puzzlepart/did365/milestone/6) | 09.09.2020   | [![version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://semver.org) |
-| [💨 &nbsp;7 - &nbsp;Nitrogen](https://github.com/Puzzlepart/did365/milestone/7) | 15.10.2020   | [![version](https://img.shields.io/badge/version-0.8.0-green.svg)](https://semver.org) |
-| [🅾️ &nbsp;8 - &nbsp;Oxygen](https://github.com/Puzzlepart/did365/milestone/8) | 15.12.2020   | [![version](https://img.shields.io/badge/version-0.9.0-green.svg)](https://semver.org) |
-| [🦷 &nbsp;9 - &nbsp;Fluor](https://github.com/Puzzlepart/did365/milestone/9) | 27.04.2021   | [![version](https://img.shields.io/badge/version-0.10.0-yellow.svg)](https://semver.org) |
-| [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-red.svg)](https://semver.org) |
-| [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
-| [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | 21.02.2024      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
-| [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-red.svg)](https://semver.org) |
-| [🛎️ &nbsp;14 -  &nbsp;Silisium](https://github.com/Puzzlepart/did365/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-red.svg)](https://semver.org) |
-| [🦿 &nbsp;15 -  &nbsp;Fosfor](https://github.com/Puzzlepart/did365/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
+| [💧 &nbsp;1 - &nbsp;Hydrogen](https://github.com/Puzzlepart/did/milestone/1) | 03.02.2020   | [![version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://semver.org) |
+| [🎈 &nbsp;2 - &nbsp;Helium](https://github.com/Puzzlepart/did/milestone/2) | 02.04.2020   | [![version](https://img.shields.io/badge/version-0.3.0-green.svg)](https://semver.org) |
+| [🔋 &nbsp;3 - &nbsp;Lithium](https://github.com/Puzzlepart/did/milestone/5) | 11.05.2020   | [![version](https://img.shields.io/badge/version-0.4.0-green.svg)](https://semver.org) |
+| [🛰 &nbsp;4 - &nbsp;Beryllium](https://github.com/Puzzlepart/did/milestone/3) | 22.05.2020   | [![version](https://img.shields.io/badge/version-0.5.0-green.svg)](https://semver.org) |
+| [☄️ &nbsp;5 - &nbsp;Boron](https://github.com/Puzzlepart/did/milestone/4) | 19.08.2020   | [![version](https://img.shields.io/badge/version-0.6.0-green.svg)](https://semver.org) |
+| [🌱 &nbsp;6 - &nbsp;Carbon](https://github.com/Puzzlepart/did/milestone/6) | 09.09.2020   | [![version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://semver.org) |
+| [💨 &nbsp;7 - &nbsp;Nitrogen](https://github.com/Puzzlepart/did/milestone/7) | 15.10.2020   | [![version](https://img.shields.io/badge/version-0.8.0-green.svg)](https://semver.org) |
+| [🅾️ &nbsp;8 - &nbsp;Oxygen](https://github.com/Puzzlepart/did/milestone/8) | 15.12.2020   | [![version](https://img.shields.io/badge/version-0.9.0-green.svg)](https://semver.org) |
+| [🦷 &nbsp;9 - &nbsp;Fluor](https://github.com/Puzzlepart/did/milestone/9) | 27.04.2021   | [![version](https://img.shields.io/badge/version-0.10.0-green.svg)](https://semver.org) |
+| [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-green.svg)](https://semver.org) |
+| [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-green.svg)](https://semver.org) |
+| [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did/milestone/12) | 21.02.2024      | [![version](https://img.shields.io/badge/version-0.13.0-green.svg)](https://semver.org) |
+| [🥫 &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-green.svg)](https://semver.org) |
+| [🖥️ &nbsp;14 -  &nbsp;Silicon](https://github.com/Puzzlepart/did/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-green.svg)](https://semver.org) |
+| [🎆 &nbsp;15 -  &nbsp;Phosphorous](https://github.com/Puzzlepart/did/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-green.svg)](https://semver.org) |
+| [🥚 &nbsp;16 -  &nbsp;Sulfur](https://github.com/Puzzlepart/did/milestone/16) | 25.09.2025 | [![version](https://img.shields.io/badge/version-0.16.0-green.svg)](https://semver.org) |
+| [🧼&nbsp;17 -  &nbsp;Chlorine](https://github.com/Puzzlepart/did/milestone/17) | 16.12.2025 | [![version](https://img.shields.io/badge/version-0.17.0-green.svg)](https://semver.org) |
+| [☁️&nbsp;18 -  &nbsp;Argon](https://github.com/Puzzlepart/did/milestone/18) | 08.01.2026 | [![version](https://img.shields.io/badge/version-0.18.0-yellow.svg)](https://semver.org) |
+| [🧴&nbsp;19 -  &nbsp;Potassium](https://github.com/Puzzlepart/did/milestone/18) | 19.01.2026 | [![version](https://img.shields.io/badge/version-0.19.0-red.svg)](https://semver.org) |
 
 
 [](#backlog)
@@ -94,48 +103,6 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 
 
 ### Getting started
-
-#### Option 1: Docker Development (Recommended)
-
-**Prerequisites:**
-- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
-
-**Quick Start:**
-1. Check out the `dev` branch
-2. Run `./scripts/docker-dev.sh setup` to initialize the development environment
-3. Edit `.env` file with your configuration (see `Set up .env` below)
-4. Run `./scripts/docker-dev.sh start` to start all services
-5. Access the application at http://localhost:9001
-
-**Docker Commands:**
-```bash
-# Start development environment
-./scripts/docker-dev.sh start
-
-# Start with admin tools (MongoDB Express, Redis Commander)
-./scripts/docker-dev.sh start --with-tools
-
-# View logs
-./scripts/docker-dev.sh logs
-
-# Open shell in DID container
-./scripts/docker-dev.sh shell
-
-# Stop services
-./scripts/docker-dev.sh stop
-
-# Clean up (removes all data)
-./scripts/docker-dev.sh clean
-```
-
-**Services included:**
-- **DID Application**: http://localhost:9001
-- **MongoDB**: localhost:27017 (did_dev database)
-- **Redis**: localhost:6379
-- **MongoDB Express** (with --with-tools): http://localhost:8081 (admin/admin123)
-- **Redis Commander** (with --with-tools): http://localhost:8082
-
-#### Option 2: Native Development
 
 1. Check out the `dev` branch
 2. Run `npm install`
@@ -258,63 +225,6 @@ See also [A successful Git branching model](https://nvie.com/posts/a-successful-
 
 If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.
 
-### Docker Deployment
-
-#### Production Deployment with Docker
-
-For production deployment using Docker:
-
-1. **Build the production image:**
-   ```bash
-   docker build --target production -t did:latest .
-   ```
-
-2. **Run with production compose:**
-   ```bash
-   # Copy and configure production environment
-   cp .env.sample .env.production
-   # Edit .env.production with production values
-   
-   # Start production stack
-   docker-compose -f docker-compose.prod.yml up -d
-   ```
-
-3. **Environment Variables for Production:**
-   - Set up `.env.production` with production database credentials
-   - Configure `MONGO_ROOT_USERNAME` and `MONGO_ROOT_PASSWORD` for MongoDB
-   - Set `REDIS_PASSWORD` for Redis authentication
-   - Configure external services (Azure AD, MongoDB Atlas, Redis Cloud, etc.)
-
-#### Docker Image Registry
-
-Docker images are automatically built and published to GitHub Container Registry (GHCR) via GitHub Actions:
-
-- **Development builds**: `ghcr.io/puzzlepart/did:dev`
-- **Release builds**: `ghcr.io/puzzlepart/did:latest`
-- **Tagged releases**: `ghcr.io/puzzlepart/did:v{version}`
-
-Pull images directly:
-```bash
-docker pull ghcr.io/puzzlepart/did:latest
-```
-
-#### Scaling with Docker
-
-The production compose file includes resource limits and can be scaled:
-
-```bash
-# Scale the application to 3 replicas
-docker-compose -f docker-compose.prod.yml up -d --scale did=3
-```
-
-#### Health Checks
-
-The Docker image includes health checks for monitoring:
-- **Endpoint**: `http://localhost:9001/health`
-- **Interval**: 30 seconds
-- **Timeout**: 3 seconds
-- **Retries**: 3
-
 ### GraphQL
 
 #### Extensions for VS Code
@@ -347,6 +257,39 @@ _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 
 
 
+[](#-microsoft-edge-sidebar-extension)
+
+## ➤ ➤ Microsoft Edge Sidebar Extension
+
+did includes a **proof-of-concept Microsoft Edge Sidebar extension** that brings your timesheet directly into Edge's sidebar for seamless access while working in Office 365 web apps and other browser-based applications.
+
+### Key Benefits
+
+- **Always Accessible**: Keep your timesheet visible while working in Outlook, Teams, SharePoint, and other web apps
+- **No Context Switching**: Update your timesheet without leaving your current work context
+- **Multi-Environment Support**: Switch between production, staging, development, and local environments
+- **Native Integration**: More "app-like" feel with persistent sidebar access
+
+### Installation
+
+1. Navigate to `edge://extensions/` in Microsoft Edge
+2. Enable "Developer mode"
+3. Click "Load unpacked" and select the `/extension` folder
+4. Click the did icon in your toolbar to open the sidebar
+
+### Documentation
+
+For detailed installation instructions, usage guide, and technical details, see the [extension README](./extension/README.md).
+
+### Use Cases
+
+- **Outlook on the Web**: Track time while managing your calendar and emails
+- **Office 365 Apps**: Keep timesheet accessible in Teams, SharePoint, Word Online, Excel Online
+- **Line of Business Apps**: Access did from any web-based application
+- **Development**: Test against local or development instances of did
+
+
+
 [](#contributors)
 
 ## ➤ Contributors
@@ -355,4 +298,4 @@ _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 | [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](https://github.com/damsleth) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](https://github.com/olemp) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](https://github.com/okms) |
 |:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
 | [Carl Joakim Damsleth](https://github.com/damsleth) | [Ole Martin Pettersen](https://github.com/olemp) | [Ole Kristian Mørch-Storstein](https://github.com/okms) |
-| [cj@d0.si](mailto:cj@d0.si)                      | [olem.pettersen@gmail.com](mailto:olem.pettersen@gmail.com) | [ok@okms.me](mailto:ok@okms.me)                  |
+| [cj.gh@d0.si](mailto:cj.gh@d0.si)                | [olem.pettersen@gmail.com](mailto:olem.pettersen@gmail.com) | [ok@okms.me](mailto:ok@okms.me)                  |

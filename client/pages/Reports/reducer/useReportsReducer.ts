@@ -57,14 +57,17 @@ export function useReportsReducer() {
       /**
        * `DATA_UPDATED`: Update state with new data from the queries.
        */
-      .addCase(DATA_UPDATED, (state, { payload }: { payload: Partial<IReportsData> }) => {
-        if (payload.loading !== undefined) {
-          state.loading = payload.loading
+      .addCase(
+        DATA_UPDATED,
+        (state, { payload }: { payload: Partial<IReportsData> }) => {
+          if (payload.loading !== undefined) {
+            state.loading = payload.loading
+          }
+          if (payload) {
+            state.data = mapTimeEntries({ ...state.data, ...payload })
+          }
         }
-        if (payload) {
-          state.data = mapTimeEntries({ ...state.data, ...payload })
-        }
-      })
+      )
 
       /**
        * `PRELOAD_UPDATED`: Update preload state for the current report.

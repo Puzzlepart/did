@@ -28,33 +28,39 @@ type AuthProvider = 'azuread-openidconnect' | 'google'
  * strategy using `request.session.regenerate`.
  */
 export const signInHandler =
-  (strategy: AuthProvider, callbackPath: string, options: passport.AuthenticateOptions) =>
+  (
+    strategy: AuthProvider,
+    callbackPath: string,
+    options: passport.AuthenticateOptions
+  ) =>
   (request: Request, response: Response, next: NextFunction) => {
     request.session.regenerate(() => {
       request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
       // Store the incoming request's protocol and host for OAuth callback URL construction
       request.session['__originalProtocol'] = request.protocol
       request.session['__originalHost'] = request.get('host')
-      
+
       // Dynamically construct the callback URL based on the incoming request
       const dynamicCallbackUrl = getCallbackUrl(
         request,
         callbackPath,
-        strategy === 'azuread-openidconnect' ? 'MICROSOFT_REDIRECT_URI' : 'GOOGLE_REDIRECT_URI'
+        strategy === 'azuread-openidconnect'
+          ? 'MICROSOFT_REDIRECT_URI'
+          : 'GOOGLE_REDIRECT_URI'
       )
-      
+
       // Store the callback URL in session for passport-azure-ad to use
       request.session['__callbackUrl'] = dynamicCallbackUrl
-      
+
       debug(`[${strategy}] Using callback URL: ${dynamicCallbackUrl}`)
-      
+
       // For Google, we can override the callback URL in options
       // For Azure AD, we need to override it differently (see middleware/passport/microsoft)
       const authOptions = {
         ...options,
         ...(strategy === 'google' ? { callbackURL: dynamicCallbackUrl } : {})
       }
-      
+
       passport.authenticate(strategy, authOptions)(request, response, next)
     })
   }
@@ -123,10 +129,14 @@ const authProviders = environment<string[]>('AUTH_PROVIDERS', [], {
 if (_.contains(authProviders, 'azuread-openidconnect')) {
   auth.get(
     '/azuread-openidconnect/signin',
-    signInHandler('azuread-openidconnect', '/auth/azuread-openidconnect/callback', {
-      prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
-      failureRedirect: '/'
-    })
+    signInHandler(
+      'azuread-openidconnect',
+      '/auth/azuread-openidconnect/callback',
+      {
+        prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
+        failureRedirect: '/'
+      }
+    )
   )
   auth.post(
     '/azuread-openidconnect/callback',

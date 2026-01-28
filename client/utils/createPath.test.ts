@@ -230,7 +230,7 @@ test('createPath: handles large arrays efficiently', (t) => {
   const start = Date.now()
   const result = createPath(parts)
   const elapsed = Date.now() - start
-  
+
   t.true(result.length > 1000)
   t.true(elapsed < 100, `Took ${elapsed}ms`)
 })

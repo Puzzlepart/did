@@ -23,7 +23,7 @@ export const Customers: FC = () => {
 
   // Block access to /customers/new without permission (before rendering)
   const canCreateCustomer = hasPermission(PermissionScope.MANAGE_CUSTOMERS)
-  
+
   useEffect(() => {
     if (currentTab === 'new' && !canCreateCustomer) {
       history.replace('/customers')
