@@ -286,7 +286,7 @@ test('getContrastColor: validates YIQ weighting - red is weighted less than gree
   const red = getContrastColor('#FF0000')
   // Pure green: YIQ = (255*587)/1000 = 149.685 >= 128 -> black
   const green = getContrastColor('#00FF00')
-  
+
   t.is(red, 'white') // Red is actually dark in YIQ perception
   t.is(green, 'black') // Green is the brightest
 })

@@ -20,7 +20,7 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const canSelect = typeof context.dispatch === 'function'
   return (
     <>
-      <List 
+      <List
         {...props}
         enableShimmer={context.loading}
         items={items}
@@ -39,7 +39,9 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
             ? [
                 SelectionMode.multiple,
                 (selected) =>
-                  context.dispatch?.(SET_SELECTED_PROJECTS(selected as Project[]))
+                  context.dispatch?.(
+                    SET_SELECTED_PROJECTS(selected as Project[])
+                  )
               ]
             : undefined
         }

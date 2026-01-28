@@ -76,7 +76,8 @@ export class ReportsResolver {
    * Count raw time entries matching the specified report filters.
    */
   @Query(() => Int, {
-    description: 'Count raw time entries matching a preset report or custom filters.'
+    description:
+      'Count raw time entries matching a preset report or custom filters.'
   })
   async reportCount(
     @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,

@@ -30,12 +30,19 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
   } = useUserForm(props)
 
   // Memoize the set of existing user IDs for O(1) lookup performance
-  const existingUserIds = useMemo(() => new Set(users.map((u) => u.id)), [users])
+  const existingUserIds = useMemo(
+    () => new Set(users.map((u) => u.id)),
+    [users]
+  )
 
   // Memoize filtered user items to avoid recalculating on every render
   const userItems = useMemo(() => {
-    const includeUsersWithoutGivenName = model.value('includeUsersWithoutGivenName' as keyof UserInput)
-    const showAlreadyAddedUsers = model.value('showAlreadyAddedUsers' as keyof UserInput)
+    const includeUsersWithoutGivenName = model.value(
+      'includeUsersWithoutGivenName' as keyof UserInput
+    )
+    const showAlreadyAddedUsers = model.value(
+      'showAlreadyAddedUsers' as keyof UserInput
+    )
 
     // Filter and categorize users
     const availableUsers: any[] = []
@@ -44,15 +51,17 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
     for (const u of adUsers) {
       // Only process users with valid email
       if (!u.mail) continue
-      
+
       // Skip users without given name unless checkbox is checked
       if (!includeUsersWithoutGivenName && !u.givenName) continue
-      
+
       const isAlreadyAdded = existingUserIds.has(u.id)
       const item = {
         key: u.id,
         text: `${u.displayName} (${u.mail})`,
-        secondaryText: isAlreadyAdded ? t('common.userAlreadyAdded') : undefined,
+        secondaryText: isAlreadyAdded
+          ? t('common.userAlreadyAdded')
+          : undefined,
         searchValue: [u.displayName, u.mail].filter(Boolean).join(' '),
         data: u,
         disabled: isAlreadyAdded
@@ -69,12 +78,25 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
 
     // Return available users first, then already-added users at the bottom
     return [...availableUsers, ...alreadyAddedUsers]
-  }, [adUsers, existingUserIds, model.value('includeUsersWithoutGivenName' as keyof UserInput), model.value('showAlreadyAddedUsers' as keyof UserInput), t])
+  }, [
+    adUsers,
+    existingUserIds,
+    model.value('includeUsersWithoutGivenName' as keyof UserInput),
+    model.value('showAlreadyAddedUsers' as keyof UserInput),
+    t
+  ])
 
   return (
     <FormControl {...formControlProps}>
       {!isEditMode && adUsersLoading && (
-        <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div
+          style={{
+            marginBottom: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
           <Spinner size='tiny' />
           {t('admin.users.loadingActiveDirectoryUsers')}
         </div>
@@ -94,12 +116,12 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
       />
       <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         <CheckboxControl
-          {...register(('includeUsersWithoutGivenName' as keyof UserInput))}
+          {...register('includeUsersWithoutGivenName' as keyof UserInput)}
           label={t('admin.users.includeUsersWithoutGivenName')}
           hidden={isEditMode}
         />
         <CheckboxControl
-          {...register(('showAlreadyAddedUsers' as any))}
+          {...register('showAlreadyAddedUsers' as any)}
           label={t('admin.users.showAlreadyAddedUsers')}
           hidden={isEditMode}
         />

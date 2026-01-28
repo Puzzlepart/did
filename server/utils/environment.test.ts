@@ -84,7 +84,9 @@ test('environment: splits value by space', (t) => {
 
 test('environment: splitBy with empty value returns fallback', (t) => {
   process.env.EMPTY_SPLIT = ''
-  const result = environment('EMPTY_SPLIT' as any, ['default'], { splitBy: ',' })
+  const result = environment('EMPTY_SPLIT' as any, ['default'], {
+    splitBy: ','
+  })
   t.deepEqual(result, ['default'])
 })
 
@@ -227,13 +229,17 @@ test('environment: generic type parameter for string', (t) => {
 
 test('environment: generic type parameter for array', (t) => {
   process.env.ARRAY_VAR = 'a,b,c'
-  const result = environment<string[]>('ARRAY_VAR' as any, undefined, { splitBy: ',' })
+  const result = environment<string[]>('ARRAY_VAR' as any, undefined, {
+    splitBy: ','
+  })
   t.true(Array.isArray(result))
 })
 
 test('environment: generic type parameter for boolean', (t) => {
   process.env.BOOL_VAR = 'true'
-  const result = environment<boolean>('BOOL_VAR' as any, undefined, { isSwitch: true })
+  const result = environment<boolean>('BOOL_VAR' as any, undefined, {
+    isSwitch: true
+  })
   t.is(typeof result, 'boolean')
 })
 
@@ -334,7 +340,7 @@ test('environment: reflects changes to environment variables', (t) => {
   process.env.CHANGING_VAR = 'first'
   const result1 = environment('CHANGING_VAR' as any)
   t.is(result1, 'first')
-  
+
   process.env.CHANGING_VAR = 'second'
   const result2 = environment('CHANGING_VAR' as any)
   t.is(result2, 'second')

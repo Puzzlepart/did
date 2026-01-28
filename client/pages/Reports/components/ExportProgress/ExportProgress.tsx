@@ -29,8 +29,8 @@ export const ExportProgress: FC<IExportProgressProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.message}>{progressMessage}</div>
-      <ProgressBar 
-        value={progress.progress} 
+      <ProgressBar
+        value={progress.progress}
         max={100}
         className={styles.progressBar}
       />

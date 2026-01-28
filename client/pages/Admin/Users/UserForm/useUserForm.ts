@@ -40,7 +40,11 @@ export function useUserForm(props: IUserFormProps) {
 
   // Automatically load AD users when the form opens in add mode
   useEffect(() => {
-    if (!isEditMode && context.state.adUsers.length === 0 && !context.state.adUsersLoading) {
+    if (
+      !isEditMode &&
+      context.state.adUsers.length === 0 &&
+      !context.state.adUsersLoading
+    ) {
       loadUsers()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,48 +69,79 @@ export function useUserForm(props: IUserFormProps) {
    *
    * @param item The selected user item.
    */
-  const onSelectUser = useCallback((item) => {
-    // Preserve checkbox values that should persist between searches
-    const includeUsersWithoutGivenName = model.value('includeUsersWithoutGivenName' as keyof UserInput)
-    const showAlreadyAddedUsers = model.value('showAlreadyAddedUsers' as keyof UserInput)
-    
-    if (item?.data) {
-      for (const key in item.data) {
-        // Skip setting the checkbox values - they should persist
-        if (key === 'includeUsersWithoutGivenName' || key === 'showAlreadyAddedUsers') {
-          continue
-        }
-        model.set(key as any, item.data[key])
-      }
-    } else {
-      // When clearing the input, reset the form but preserve checkbox states
-      // Reset all fields from the initial model
-      if (initialModel) {
-        for (const key in initialModel) {
-          // Skip checkbox fields that should persist
-          if (key === 'includeUsersWithoutGivenName' || key === 'showAlreadyAddedUsers') {
+  const onSelectUser = useCallback(
+    (item) => {
+      // Preserve checkbox values that should persist between searches
+      const includeUsersWithoutGivenName = model.value(
+        'includeUsersWithoutGivenName' as keyof UserInput
+      )
+      const showAlreadyAddedUsers = model.value(
+        'showAlreadyAddedUsers' as keyof UserInput
+      )
+
+      if (item?.data) {
+        for (const key in item.data) {
+          // Skip setting the checkbox values - they should persist
+          if (
+            key === 'includeUsersWithoutGivenName' ||
+            key === 'showAlreadyAddedUsers'
+          ) {
             continue
           }
-          model.set(key as any, initialModel[key])
+          model.set(key as any, item.data[key])
         }
       } else {
-        // If no initial model (new user mode), just clear the form fields
-        // but don't use model.reset() as it would clear checkboxes too
-        const fields = ['displayName', 'givenName', 'surname', 'mail', 'role', 'active', 'manager', 'entraIdUserId']
-        for (const field of fields) {
-          model.set(field as any, null)
+        // When clearing the input, reset the form but preserve checkbox states
+        // Reset all fields from the initial model
+        if (initialModel) {
+          for (const key in initialModel) {
+            // Skip checkbox fields that should persist
+            if (
+              key === 'includeUsersWithoutGivenName' ||
+              key === 'showAlreadyAddedUsers'
+            ) {
+              continue
+            }
+            model.set(key as any, initialModel[key])
+          }
+        } else {
+          // If no initial model (new user mode), just clear the form fields
+          // but don't use model.reset() as it would clear checkboxes too
+          const fields = [
+            'displayName',
+            'givenName',
+            'surname',
+            'mail',
+            'role',
+            'active',
+            'manager',
+            'entraIdUserId'
+          ]
+          for (const field of fields) {
+            model.set(field as any, null)
+          }
         }
       }
-    }
-    
-    // Always restore the preserved checkbox values
-    if (includeUsersWithoutGivenName !== null && includeUsersWithoutGivenName !== undefined) {
-      model.set('includeUsersWithoutGivenName' as any, includeUsersWithoutGivenName)
-    }
-    if (showAlreadyAddedUsers !== null && showAlreadyAddedUsers !== undefined) {
-      model.set('showAlreadyAddedUsers' as any, showAlreadyAddedUsers)
-    }
-  }, [initialModel, model])
+
+      // Always restore the preserved checkbox values
+      if (
+        includeUsersWithoutGivenName !== null &&
+        includeUsersWithoutGivenName !== undefined
+      ) {
+        model.set(
+          'includeUsersWithoutGivenName' as any,
+          includeUsersWithoutGivenName
+        )
+      }
+      if (
+        showAlreadyAddedUsers !== null &&
+        showAlreadyAddedUsers !== undefined
+      ) {
+        model.set('showAlreadyAddedUsers' as any, showAlreadyAddedUsers)
+      }
+    },
+    [initialModel, model]
+  )
 
   const formControlProps: IFormControlProps = {
     id: UserForm.displayName,

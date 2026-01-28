@@ -6,7 +6,10 @@ import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { firstPart } from '../../../shared/utils/firstPart'
 import { RequestContext } from '../../graphql/requestContext'
-import { SubscriptionVacationSettings, VacationSummary } from '../../graphql/resolvers/types'
+import {
+  SubscriptionVacationSettings,
+  VacationSummary
+} from '../../graphql/resolvers/types'
 // Import TimesheetPeriodObject directly to avoid circular barrel export issues
 import { TimesheetPeriodObject } from '../../graphql/resolvers/timesheet/types/TimesheetPeriodObject'
 import { toFixed } from '../../utils'
@@ -118,8 +121,7 @@ export class TimesheetService {
         const periodHolidays = holidays.filter(
           ({ periodId }) => periodId === period.id
         )
-        const subscriptionHolidays =
-          subscriptionHolidayMap.get(period.id) || []
+        const subscriptionHolidays = subscriptionHolidayMap.get(period.id) || []
         period.holidays = this._holidaysService.mergePeriodHolidays(
           periodHolidays,
           subscriptionHolidays
@@ -154,7 +156,6 @@ export class TimesheetService {
       throw error
     }
   }
-
 
   /**
    * Submit period

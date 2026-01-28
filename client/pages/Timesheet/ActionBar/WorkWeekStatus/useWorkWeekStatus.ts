@@ -90,7 +90,12 @@ export function useWorkWeekStatus() {
         error instanceof Error ? error.message : String(error)
       )
       // Return default values on error
-      return { text: null, background: null, iconName: null, workWeekHoursDiff: 0 }
+      return {
+        text: null,
+        background: null,
+        iconName: null,
+        workWeekHoursDiff: 0
+      }
     }
   }, [workWeekHours, loading, periods]) // Dependencies for memoization
 }

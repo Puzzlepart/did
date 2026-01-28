@@ -40,6 +40,8 @@ export function useActiveDirectorySync() {
     sync,
     forceSync,
     loading: syncLoading || fullSyncLoading,
-    lastSyncResult: syncData?.syncActiveDirectoryUsers || fullSyncData?.forceFullSyncActiveDirectoryUsers
+    lastSyncResult:
+      syncData?.syncActiveDirectoryUsers ||
+      fullSyncData?.forceFullSyncActiveDirectoryUsers
   }
 }

@@ -75,7 +75,9 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
           return aIndex - bIndex
         })
         .map((column) => {
-          const persistedColumn = persistedColumns.find((c) => c.key === column.key)
+          const persistedColumn = persistedColumns.find(
+            (c) => c.key === column.key
+          )
           return {
             ...column,
             data: {
@@ -89,24 +91,28 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
         })
 
   // Determine if this is a large dataset query
-  const isLargeDataset = [
-    'current_year',
-    'last_year'
-  ].includes(context.queryPreset?.id)
+  const isLargeDataset = ['current_year', 'last_year'].includes(
+    context.queryPreset?.id
+  )
 
   const exportQuery = context.queryPreset?.query || report_custom
-  const { exportAllData, progress, progressMessage, isExporting } = useExcelExportWithProgress({
-    query: exportQuery,
-    queryVariables: {
-      ...context.queryPreset?.variables,
-      ...(supportsQueryFilters && hasAppliedFilters && { query: appliedFilterQuery })
-    },
-    fileName: context.queryPreset?.exportFileName || props.exportFileName || 'TimeEntries-{0}.xlsx',
-    columns: exportColumns.filter((col) => !col?.data?.hidden),
-    isLargeDataset,
-    batchSize: 5000,
-    presetId: context.queryPreset?.id  // Pass preset ID to generate correct query parameters
-  })
+  const { exportAllData, progress, progressMessage, isExporting } =
+    useExcelExportWithProgress({
+      query: exportQuery,
+      queryVariables: {
+        ...context.queryPreset?.variables,
+        ...(supportsQueryFilters &&
+          hasAppliedFilters && { query: appliedFilterQuery })
+      },
+      fileName:
+        context.queryPreset?.exportFileName ||
+        props.exportFileName ||
+        'TimeEntries-{0}.xlsx',
+      columns: exportColumns.filter((col) => !col?.data?.hidden),
+      isLargeDataset,
+      batchSize: 5000,
+      presetId: context.queryPreset?.id // Pass preset ID to generate correct query parameters
+    })
 
   if (!context.queryPreset) {
     return {

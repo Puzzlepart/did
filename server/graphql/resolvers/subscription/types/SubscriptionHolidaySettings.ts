@@ -53,7 +53,10 @@ export class Holiday {
 })
 export class HolidayInput {
   @Field()
-  @IsISO8601({ strict: true }, { message: 'Date must be in ISO format (YYYY-MM-DD)' })
+  @IsISO8601(
+    { strict: true },
+    { message: 'Date must be in ISO format (YYYY-MM-DD)' }
+  )
   date: string
 
   @Field()

@@ -96,10 +96,7 @@ export function useUsersMenuItems(context: IUsersContext) {
               )
             }
           } else {
-            appContext.displayToast(
-              t('admin.users.syncUsersError'),
-              'error'
-            )
+            appContext.displayToast(t('admin.users.syncUsersError'), 'error')
           }
         }),
       new ListMenuItem(t('admin.users.updateUserDatabaseLabel'))
@@ -107,9 +104,7 @@ export function useUsersMenuItems(context: IUsersContext) {
         .setDisabled(context.state.loading || context.state.adUsersLoading)
         .setHidden(!hasPermission(PermissionScope.IMPORT_USERS))
         .setOnClick(async () => {
-          context.dispatch(
-            SET_PROGRESS(t('admin.users.updatingUserDatabase'))
-          )
+          context.dispatch(SET_PROGRESS(t('admin.users.updatingUserDatabase')))
           const result = await updateUserDatabase()
           context.dispatch(CLEAR_PROGRESS())
 
@@ -133,7 +128,8 @@ export function useUsersMenuItems(context: IUsersContext) {
             }
           } else {
             appContext.displayToast(
-              result?.error?.message || t('admin.users.userDatabaseUpdateError'),
+              result?.error?.message ||
+                t('admin.users.userDatabaseUpdateError'),
               'error'
             )
           }

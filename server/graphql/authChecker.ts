@@ -54,9 +54,14 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
     }
     return true
   }
-  if (authOptions.scope && !_.contains(context.permissions, authOptions.scope)) {
+  if (
+    authOptions.scope &&
+    !_.contains(context.permissions, authOptions.scope)
+  ) {
     debug(
-      `Permission denied: required ${authOptions.scope}, user has ${context.permissions?.length ?? 0} permissions`
+      `Permission denied: required ${authOptions.scope}, user has ${
+        context.permissions?.length ?? 0
+      } permissions`
     )
     throw new GraphQLError(
       'Insufficient permissions to perform this operation',

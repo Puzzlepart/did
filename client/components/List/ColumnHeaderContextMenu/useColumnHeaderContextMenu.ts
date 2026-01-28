@@ -29,9 +29,7 @@ type ColumnHeaderContextMenuProps = {
 
 const CHECKBOX_NAME = 'columnHeader'
 
-export function useColumnHeaderContextMenu():
-  | ColumnHeaderContextMenuProps
-  | null {
+export function useColumnHeaderContextMenu(): ColumnHeaderContextMenuProps | null {
   const { t } = useTranslation()
   const context = useListContext()
   if (!context.state.columnHeaderContextMenu) return null
@@ -91,7 +89,9 @@ export function useColumnHeaderContextMenu():
   ].filter(Boolean) as ColumnHeaderMenuItem[]
 
   const checkedValues = {
-    [CHECKBOX_NAME]: items.filter((item) => item.checked).map((item) => item.key)
+    [CHECKBOX_NAME]: items
+      .filter((item) => item.checked)
+      .map((item) => item.key)
   }
   const hasCheckmarks = items.some((item) => item.checkable)
 

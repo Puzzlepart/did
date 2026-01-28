@@ -375,7 +375,9 @@ export function getHolidayHoursInPeriod(
       try {
         const holidayDate = $dayjs(holiday.date)
         if (!holidayDate.isValid()) {
-          console.warn(`Invalid holiday date: ${holiday.date} for ${holiday.name}`)
+          console.warn(
+            `Invalid holiday date: ${holiday.date} for ${holiday.name}`
+          )
           continue
         }
 
@@ -387,7 +389,9 @@ export function getHolidayHoursInPeriod(
           validateHoursOff(hoursOff)
         } catch (err) {
           console.warn(
-            `Invalid hoursOff (${hoursOff}) for holiday ${holiday.name}: ${err instanceof Error ? err.message : String(err)}`
+            `Invalid hoursOff (${hoursOff}) for holiday ${holiday.name}: ${
+              err instanceof Error ? err.message : String(err)
+            }`
           )
           continue
         }
@@ -510,7 +514,9 @@ export function getWorkingDaysInPeriod(
  * Note: These are partial objects for import - they will get default values
  * (hoursOff=8, recurring=true) when stored in the database.
  */
-export const NORWAY_HOLIDAYS: Array<Pick<HolidayObject, 'date' | 'name' | 'hoursOff' | 'recurring' | 'notes'>> = [
+export const NORWAY_HOLIDAYS: Array<
+  Pick<HolidayObject, 'date' | 'name' | 'hoursOff' | 'recurring' | 'notes'>
+> = [
   {
     date: new Date('2025-01-01'),
     name: 'Første nyttårsdag',

@@ -31,8 +31,7 @@ export function useFiltersCommand() {
   const toggleCommandBarItem: ListCommandBarItem = {
     key: 'TOGGLE_FILTER_PANEL',
     iconName: isFilterLoading ? 'ProgressRingDots' : 'Filter',
-    disabled:
-      context.props.enableShimmer || !hasFilterItems || isFilterLoading,
+    disabled: context.props.enableShimmer || !hasFilterItems || isFilterLoading,
     onClick: () => {
       const nextOpen = !context.state.filterPanel?.open
       context.dispatch(TOGGLE_FILTER_PANEL())
