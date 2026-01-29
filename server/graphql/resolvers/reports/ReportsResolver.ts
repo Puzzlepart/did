@@ -46,6 +46,7 @@ export class ReportsResolver {
    * @param query - Query
    * @param sortAsc - Sort ascending
    */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
   @Query(() => [TimeEntry], {
     description: 'Get a preset report, or use custom filters.'
   })
@@ -61,6 +62,7 @@ export class ReportsResolver {
   /**
    * Get filter options for report preloading.
    */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
   @Query(() => ReportFilterOptions, {
     description: 'Get filter options for report preloading.'
   })
@@ -75,6 +77,7 @@ export class ReportsResolver {
   /**
    * Count raw time entries matching the specified report filters.
    */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.ACCESS_REPORTS })
   @Query(() => Int, {
     description:
       'Count raw time entries matching a preset report or custom filters.'
