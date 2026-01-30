@@ -4,7 +4,7 @@ import {
   GraphQLRequestContext
 } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
-import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/landingPage/disabled'
+import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled'
 import { ApolloServerPluginUsageReporting } from '@apollo/server/plugin/usageReporting'
 import { ApolloServerPluginSchemaReporting } from '@apollo/server/plugin/schemaReporting'
 import { json } from 'body-parser'
@@ -43,7 +43,8 @@ export const setupGraphQL = async (
   path = '/graphql'
 ): Promise<void> => {
   try {
-    const isProduction = environment('NODE_ENV', 'development') === 'production'
+    const isProduction =
+      environment<string>('NODE_ENV', 'development') === 'production'
     const schema = await generateGraphQLSchema()
     const server = new ApolloServer<RequestContext>({
       logger: {
