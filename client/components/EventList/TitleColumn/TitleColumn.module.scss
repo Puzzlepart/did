@@ -8,10 +8,15 @@
 
   a {
     min-width: 0;
+    display: block;
+    width: 100%;
   }
 
   a span {
+    display: inline-block;
     overflow-wrap: break-word;
+    font-weight: 600;
+    white-space: normal;
   }
 
   .labels {
@@ -28,17 +33,49 @@
 
 @media (max-width: 600px) {
   .titleColumn {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 4px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'title time'
+      'labels labels';
+    align-items: baseline;
+    column-gap: 8px;
+    row-gap: 2px;
+
+    a {
+      grid-area: title;
+    }
 
     .labels {
+      grid-area: labels;
+      grid-column: 1 / -1;
       margin: 0;
     }
 
     .time {
+      grid-area: time;
+      justify-self: end;
+      margin-left: 0;
       min-width: 0;
+      font-size: 0.85rem;
+      color: var(--colorNeutralForeground1);
+    }
+  }
+
+  .titleColumn[data-wrapped='true'] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'title'
+      'time'
+      'labels';
+
+    a {
+      grid-column: 1 / -1;
+    }
+
+    .time {
+      grid-column: 1 / -1;
+      justify-self: start;
     }
   }
 }

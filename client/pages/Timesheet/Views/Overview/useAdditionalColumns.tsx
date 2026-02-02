@@ -27,7 +27,7 @@ export function useAdditionalColumns() {
         createColumnDef<EventObject>(
           'project',
           t('common.project'),
-          { minWidth: 180, maxWidth: 500 },
+          { minWidth: 180, maxWidth: 500, data: { hideMobileLabel: true } },
           (event) => (
             <ProjectColumn event={event} includeCustomerLink={isMobile} />
           )
