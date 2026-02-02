@@ -197,7 +197,7 @@
 
 .multiline {
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .groupHeaderRow {
@@ -226,4 +226,79 @@
   margin-left: auto;
   font-weight: normal;
   color: rgb(110, 110, 110);
+}
+
+@media (max-width: 600px) {
+  .list {
+    margin: 0.75rem 0;
+  }
+
+  .dataGrid,
+  .treeGrid {
+    // Force a single-column layout on narrow screens
+    --list-grid-template: 1fr !important;
+  }
+
+  .dataGridHeaderRow:global(.fui-TableRow),
+  .treeGridHeaderRow:global(.fui-TreeGridRow) {
+    display: none;
+  }
+
+  .dataGridRow:global(.fui-TableRow),
+  .treeGridRow:global(.fui-TreeGridRow) {
+    grid-template-columns: 1fr !important;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 10px;
+    background-color: var(--colorNeutralBackground1);
+    row-gap: 8px;
+  }
+
+  .treeGridRow:global(.fui-TreeGridRow) {
+    padding-left: 12px;
+  }
+
+  .selectionCell {
+    width: auto;
+    max-width: none;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .cell,
+  .treeGridCell {
+    align-items: flex-start;
+  }
+
+  .cell[data-label]:not([data-label='']),
+  .treeGridCell[data-label]:not([data-label='']) {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+
+  .cell[data-label]:not([data-label=''])::before,
+  .treeGridCell[data-label]:not([data-label=''])::before {
+    content: attr(data-label);
+    color: rgb(120, 120, 120);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+
+  .groupHeaderRow {
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.25rem;
+    border-top: 1px solid rgb(236, 236, 236);
+    background-color: rgb(248, 248, 248);
+    border-radius: 8px;
+  }
+
+  .groupHeaderCell {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
 }

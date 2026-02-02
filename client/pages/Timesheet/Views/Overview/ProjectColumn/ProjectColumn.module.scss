@@ -8,6 +8,7 @@
   &.mobile {
     padding: 0px;
     .content {
+      flex-wrap: wrap;
       .link {
         font-size: 10pt;
         margin: 0;
