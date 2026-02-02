@@ -4,6 +4,7 @@ import packageFile from 'package'
 import React from 'react'
 import styles from './Logo.module.scss'
 import { ILogoProps } from './types'
+import { VersionInfo } from 'parts/UserMenu/VersionInfo/VersionInfo'
 
 /**
  * @category Reusable Component
@@ -19,16 +20,16 @@ export const Logo: ReusableComponent<ILogoProps> = (props) => {
           <defs>
             <linearGradient id='lingrad' x1='0%' y1='0%' x2='100%' y2='100%'>
               <stop offset='0%' stopColor='#ee7752'>
-                <animate attributeName='stopColor' values='#ee7752;#e73c7e;#23a6d5;#23d5ab;#ee7752' dur='10s' repeatCount='indefinite' />
+                <animate attributeName='stop-color' values='#ee7752;#e73c7e;#23a6d5;#23d5ab;#ee7752' dur='10s' repeatCount='indefinite' />
               </stop>
               <stop offset='50%' stopColor='#e73c7e'>
-                <animate attributeName='stopColor' values='#e73c7e;#23a6d5;#23d5ab;#ee7752;#e73c7e' dur='10s' repeatCount='indefinite' />
+                <animate attributeName='stop-color' values='#e73c7e;#23a6d5;#23d5ab;#ee7752;#e73c7e' dur='10s' repeatCount='indefinite' />
               </stop>
               <stop offset='75%' stopColor='#23a6d5'>
-                <animate attributeName='stopColor' values='#23a6d5;#23d5ab;#ee7752;#e73c7e;#23a6d5' dur='10s' repeatCount='indefinite' />
+                <animate attributeName='stop-color' values='#23a6d5;#23d5ab;#ee7752;#e73c7e;#23a6d5' dur='10s' repeatCount='indefinite' />
               </stop>
               <stop offset='100%' stopColor='#23d5ab'>
-                <animate attributeName='stopColor' values='#23d5ab;#ee7752;#e73c7e;#23a6d5;#23d5ab' dur='10s' repeatCount='indefinite' />
+                <animate attributeName='stop-color' values='#23d5ab;#ee7752;#e73c7e;#23a6d5;#23d5ab' dur='10s' repeatCount='indefinite' />
               </stop>
             </linearGradient>
           </defs>
@@ -39,9 +40,9 @@ export const Logo: ReusableComponent<ILogoProps> = (props) => {
           />
         </svg>
       </div>
-      {props.showMotto && <Caption1
-        className={styles.motto}
-      >{packageFile.name} - {packageFile.description}</Caption1>}
+      {props.showMotto && <Caption1 className={styles.motto}
+      ><b>{packageFile.name}</b> - <i>{packageFile.description}</i></Caption1>}
+      {props.showVersion && <Caption1 className={styles.version}><VersionInfo /></Caption1>}
     </div >
   )
 }
@@ -54,7 +55,8 @@ Logo.defaultProps = {
   fill: '#3a0960',
   dropShadow: false,
   width: 165,
-  height: 94
+  height: 94,
+  showVersion: false
 }
 
 export * from './types'
