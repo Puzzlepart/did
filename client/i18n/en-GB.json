@@ -22,7 +22,7 @@
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
     "undoIgnoreTooltip": "Undo all ignored events.",
     "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
-    "splitWeekInfoText": ". Selected week spans two months. Navigate between the first and second period using the command bar above. ",
+    "splitWeekInfoText": ". Selected week spans two months. Navigate between the first and second period using the command bar above",
     "projectInactiveError": "Project is no longer active. Please resolve the event in Outlook.",
     "customerInactiveError": "Customer is no longer active. Please resolve the event in Outlook.",
     "noProjectMatchFoundText": "No match found. Click to resolve manually",
