@@ -594,8 +594,14 @@ export const List: ReusableComponent<IListProps> = (props) => {
                 {({ renderCell, columnId }) => {
                   const columnMeta = columnMetaMap.get(String(columnId))
                   const isSelectionColumn = columnId === 'selection'
+                  const cellLabel =
+                    isSelectionColumn || columnMeta?.data?.hideMobileLabel
+                      ? ''
+                      : (columnMeta?.name ?? String(columnId))
                   return (
                     <DataGridCell
+                      data-label={cellLabel}
+                      data-column-id={String(columnId)}
                       className={mergeClasses(
                         styles.cell,
                         isSelectionColumn && styles.selectionCell,
@@ -677,8 +683,14 @@ export const List: ReusableComponent<IListProps> = (props) => {
               {({ renderCell, columnId }) => {
                 const columnMeta = columnMetaMap.get(String(columnId))
                 const isSelectionColumn = columnId === 'selection'
+                const cellLabel =
+                  isSelectionColumn || columnMeta?.data?.hideMobileLabel
+                    ? ''
+                    : (columnMeta?.name ?? String(columnId))
                 return (
                   <DataGridCell
+                    data-label={cellLabel}
+                    data-column-id={String(columnId)}
                     className={mergeClasses(
                       styles.cell,
                       isSelectionColumn && styles.selectionCell,
@@ -830,6 +842,12 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                 {columns.map((column) => (
                                   <TreeGridCell
                                     key={`${rowId}-${column.key}`}
+                                    data-label={
+                                      column.data?.hideMobileLabel
+                                        ? ''
+                                        : column.name
+                                    }
+                                    data-column-id={column.key}
                                     className={mergeClasses(
                                       styles.treeGridCell,
                                       column.className,
@@ -1014,6 +1032,12 @@ export const List: ReusableComponent<IListProps> = (props) => {
                                 {columns.map((column) => (
                                   <TreeGridCell
                                     key={`${rowId}-${column.key}`}
+                                    data-label={
+                                      column.data?.hideMobileLabel
+                                        ? ''
+                                        : column.name
+                                    }
+                                    data-column-id={column.key}
                                     className={mergeClasses(
                                       styles.treeGridCell,
                                       column.className,

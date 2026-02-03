@@ -53,7 +53,11 @@ const createTitleColumnDef = (
   return createColumnDef<EventObject>(
     'title',
     name,
-    { ...getSizing(props, 'title', 200, 600), isMultiline: true },
+    {
+      ...getSizing(props, 'title', 200, 600),
+      isMultiline: true,
+      data: { hideMobileLabel: true }
+    },
     (event) => <TitleColumn {...titleColumnProps} event={event} />
   )
 }
