@@ -1,15 +1,45 @@
 .logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
+  overflow: visible;
+  margin: 2rem 0;
 
-  .logo {
-    letter-spacing: .4rem;
-    margin: .8rem 0 1.1rem 0;
+  .logoSvg {
+    width: 100%;
+    min-width: 8rem;
+    max-width: 20rem;
+    max-height: 300px;
+    overflow: visible;
+  }
+
+  .logoMark {
+    fill: url(#lingrad);
+    width: 100%;
+    height: auto;
+    fill-opacity: 0.9;
+    stroke: rgb(255, 102, 0, 0.5);
+    stroke-width: 1px;
+    filter: drop-shadow(0.05rem 0.3rem 0.1rem rgba(0, 20, 90, 0.21));
   }
 
   .dropShadow {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-      rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    filter: drop-shadow(2px 4px 6px rgba(114, 34, 5, 0.413));
+  }
+
+  .motto {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: rgb(255, 102, 0);
+  }
+  .version {
+    margin-top: 0.5rem;
+    span {
+      font-size: .8rem;
+      color: rgb(255, 102, 0);
+      font-weight: normal;
+      position: relative;
+    }
   }
 }
