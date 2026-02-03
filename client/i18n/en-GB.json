@@ -17,7 +17,7 @@
     "hoursNotMatchedText": "**{{hours}}** unmatched. All events must be matched before you can confirm your timesheet",
     "allHoursMatchedText": "All hours matched! Ready to confirm?",
     "allHoursMatchedPeriodLockedText": "All hours matched, but the week is locked and no changes can be made to it at this time",
-    "periodConfirmedText": "**{{hours}}** confirmed this week. Click **Unconfirm hours** if you want to make some adjustments",
+    "periodConfirmedText": "**{{hours}}** confirmed this week. Click **Unconfirm hours** if you want to make adjustments",
     "periodLockedConfirmedText": "**{{hours}}** confirmed this week. The week is locked and no changes can be made to it",
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
     "undoIgnoreTooltip": "Undo all ignored events.",

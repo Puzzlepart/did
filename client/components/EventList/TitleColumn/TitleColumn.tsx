@@ -7,16 +7,12 @@ import styles from './TitleColumn.module.scss'
 import { ITitleColumnProps } from './types'
 
 export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
-  const containerRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLSpanElement>(null)
-  const timeRef = useRef<HTMLDivElement>(null)
   const [isWrapped, setIsWrapped] = useState<boolean>(false)
 
   useLayoutEffect(() => {
     const titleElement = titleRef.current
-    const containerElement = containerRef.current
-    if (!titleElement || !containerElement || typeof window === 'undefined')
-      return
+    if (!titleElement || typeof window === 'undefined') return
     const updateWrapState = () => {
       const isNarrow =
         window.matchMedia?.('(max-width: 600px)').matches ?? false
@@ -24,14 +20,7 @@ export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
         setIsWrapped(false)
         return
       }
-      const containerWidth =
-        containerElement.getBoundingClientRect().width ?? 0
-      const timeWidth = timeRef.current
-        ? timeRef.current.getBoundingClientRect().width
-        : 0
-      const availableWidth = Math.max(0, containerWidth - timeWidth - 8)
-      const titleWidth = titleElement.scrollWidth
-      const nextWrapped = titleWidth > availableWidth
+      const nextWrapped = titleElement.getClientRects().length > 1
       setIsWrapped((prev) => (prev === nextWrapped ? prev : nextWrapped))
     }
 
@@ -39,8 +28,7 @@ export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
     let observer: ResizeObserver | null = null
     if (typeof ResizeObserver !== 'undefined') {
       observer = new ResizeObserver(updateWrapState)
-      observer.observe(containerElement)
-      if (timeRef.current) observer.observe(timeRef.current)
+      observer.observe(titleElement)
     }
     window.addEventListener('resize', updateWrapState)
     return () => {
@@ -51,7 +39,6 @@ export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
 
   return (
     <div
-      ref={containerRef}
       className={TitleColumn.className}
       data-wrapped={isWrapped ? 'true' : 'false'}
     >
@@ -70,7 +57,7 @@ export const TitleColumn: StyledComponent<ITitleColumnProps> = (props) => {
         </div>
       )}
       {props.displayTime && (
-        <div ref={timeRef} className={styles.time}>
+        <div className={styles.time}>
           <TimeColumn {...props} />
         </div>
       )}

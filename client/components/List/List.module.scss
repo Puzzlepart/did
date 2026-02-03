@@ -242,6 +242,10 @@
   margin-left: auto;
   font-weight: normal;
   color: var(--colorNeutralForeground2);
+  background-color: var(--colorNeutralBackground3);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
 }
 
 @media (max-width: 600px) {
@@ -269,6 +273,7 @@
     border-radius: 6px;
     background-color: var(--colorNeutralBackground2);
     row-gap: 4px;
+    min-height: 44px;
   }
 
   .treeGridRow:global(.fui-TreeGridRow) {
@@ -306,6 +311,9 @@
   }
 
   .groupHeaderRow {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     margin-top: 0.4rem;
     padding: 0.4rem 0.25rem;
     border-top: 1px solid var(--colorNeutralStroke1);

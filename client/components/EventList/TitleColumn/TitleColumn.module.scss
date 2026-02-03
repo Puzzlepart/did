@@ -15,8 +15,8 @@
   a span {
     display: inline-block;
     overflow-wrap: break-word;
-    font-weight: 600;
     white-space: normal;
+    font-weight: normal;
   }
 
   .labels {
@@ -44,6 +44,9 @@
 
     a {
       grid-area: title;
+      span {
+        font-weight: 600;
+      }
     }
 
     .labels {
