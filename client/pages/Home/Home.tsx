@@ -26,7 +26,7 @@ export const Home: PageComponent = () => {
 
   return (
     <div className={Home.className}>
-      <Logo showMotto dropShadow />
+      <Logo showMotto showVersion />
       {loginError && (
         <LoginError
           text={loginError.name}
