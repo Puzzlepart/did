@@ -43,7 +43,7 @@ export const Logo: ReusableComponent<ILogoProps> = (props) => {
       {props.showMotto && <Caption1 className={styles.motto}
       ><b>{packageFile.name}</b> - <i>{packageFile.description}</i></Caption1>}
       {props.showVersion && <Caption1 className={styles.version}><VersionInfo /></Caption1>}
-    </div >
+    </div>
   )
 }
 

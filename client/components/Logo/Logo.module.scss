@@ -14,7 +14,7 @@
   }
 
   .logoMark {
-    fill: none;
+
     fill: url(#lingrad);
     width: 100%;
     height: auto;
@@ -37,7 +37,7 @@
     }
   }
 
-  Resources .dropShadow {
+  .dropShadow {
     filter: drop-shadow(2px 4px 6px rgba(114, 34, 5, 0.413));
   }
 
