@@ -1,6 +1,7 @@
 .customerLink {
   display: flex;
   align-items: center;
+  min-width: 0;
   
   .icon {
     align-self: flex-start;
@@ -8,5 +9,10 @@
 
   .link {
     margin-left: 6px;
+    min-width: 0;
+
+    span {
+      overflow-wrap: break-word;
+    }
   }
 }

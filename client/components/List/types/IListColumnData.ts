@@ -82,4 +82,10 @@ export interface IListColumnData {
    * Callback to render custom column header content.
    */
   onRenderColumnHeader?: (props: ListColumnHeaderRenderProps) => JSX.Element
+
+  /**
+   * Hide the mobile label for this column.
+   */
+  hideMobileLabel?: boolean
+
 }

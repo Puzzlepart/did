@@ -7,7 +7,14 @@
 
   &.mobile {
     padding: 0px;
+    gap: 2px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     .content {
+      flex-wrap: wrap;
+      gap: 4px;
       .link {
         font-size: 10pt;
         margin: 0;
