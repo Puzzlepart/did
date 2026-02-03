@@ -48,9 +48,16 @@
 }
 .dataGridHeaderRow:global(.fui-TableRow) > :global(.fui-TableHeaderCell) {
   border-right: 1px solid var(--colorNeutralStroke1);
+  padding-right: 18px;
+  box-sizing: border-box;
 }
 .dataGridHeaderRow:global(.fui-TableRow) > :global(.fui-TableHeaderCell):last-child {
   border-right: none;
+}
+
+.dataGridHeaderRow:global(.fui-TableRow) :global(.fui-TableHeaderCell__button) {
+  padding-right: 12px;
+  box-sizing: border-box;
 }
 .treeGridHeaderRow:global(.fui-TreeGridRow) {
   border-top: 0px solid transparent;
