@@ -5,7 +5,7 @@ import { HTMLAttributes } from 'react'
  */
 export interface ILogoProps extends HTMLAttributes<HTMLDivElement> {
   color?: string // defaults to #ffffff
-  fill?: string // defaults to #3a0960
+
   dropShadow?: boolean // defaults to false
   showMotto?: boolean // defaults to false
   showVersion?: boolean // defaults to false

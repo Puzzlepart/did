@@ -4,7 +4,7 @@ import packageFile from 'package'
 import React from 'react'
 import styles from './Logo.module.scss'
 import { ILogoProps } from './types'
-import { VersionInfo } from 'parts/UserMenu/VersionInfo/VersionInfo'
+import { VersionInfo } from 'parts/UserMenu/VersionInfo'
 
 /**
  * @category Reusable Component
@@ -52,7 +52,6 @@ Logo.className = styles.logo
 Logo.defaultProps = {
   showMotto: false,
   color: '#ffffff',
-  fill: '#3a0960',
   dropShadow: false,
   width: 165,
   height: 94,

@@ -7,8 +7,9 @@
   margin: 2rem 0;
 
   .logoSvg {
-    width: 33vw;
-    max-width: 33vw;
+    width: 100%;
+    min-width: 8rem;
+    max-width: 20rem;
     max-height: 300px;
     overflow: visible;
   }
