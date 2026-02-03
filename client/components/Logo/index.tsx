@@ -51,10 +51,7 @@ Logo.displayName = 'Logo'
 Logo.className = styles.logo
 Logo.defaultProps = {
   showMotto: false,
-  color: '#ffffff',
   dropShadow: false,
-  width: 165,
-  height: 94,
   showVersion: false
 }
 
