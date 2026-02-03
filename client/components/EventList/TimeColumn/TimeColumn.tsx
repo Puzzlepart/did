@@ -1,5 +1,6 @@
 import $date from 'DateUtils'
 import React, { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
 import { ITimeColumnProps } from './types'
 
@@ -86,18 +87,40 @@ const useIsNarrowScreen = (): boolean => {
 /**
  * Format duration in compact hours.
  */
-const formatCompactDuration = (hours: number): string => {
+const formatCompactDuration = (
+  hours: number,
+  formatNumber: (value: number, withFraction: boolean) => string,
+  formatHours: (value: string, isSingular: boolean) => string
+): string => {
   const safeHours = Number.isFinite(hours) ? hours : 0
   const rounded = Math.round(safeHours * 10) / 10
-  const value = Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(1)
-  return `${value}h`
+  const withFraction = !Number.isInteger(rounded)
+  const value = formatNumber(rounded, withFraction)
+  return formatHours(value, rounded === 1)
 }
 
 export const TimeColumn: StyledComponent<ITimeColumnProps> = (props) => {
+  const { t, i18n } = useTranslation()
   const isNarrowScreen = useIsNarrowScreen()
-  const timeTemplate = isNarrowScreen ? 'HHmm' : (props.dateFormat ?? 'HH:mm')
+  const baseTimeFormat = props.dateFormat ?? 'HH:mm'
+  const timeTemplate = isNarrowScreen
+    ? baseTimeFormat.replace(/:/g, '')
+    : baseTimeFormat
   const startTime = $date.formatDate(props.event.startDateTime, timeTemplate)
   const endTime = $date.formatDate(props.event.endDateTime, timeTemplate)
+  const numberFormatters = useMemo(
+    () => ({
+      noFraction: new Intl.NumberFormat(i18n.language, {
+        maximumFractionDigits: 1,
+        minimumFractionDigits: 0
+      }),
+      withFraction: new Intl.NumberFormat(i18n.language, {
+        maximumFractionDigits: 1,
+        minimumFractionDigits: 1
+      })
+    }),
+    [i18n.language]
+  )
   const durationHours = useMemo(() => {
     if (typeof props.event.duration === 'number') return props.event.duration
     return $date.getDurationHours(
@@ -107,7 +130,18 @@ export const TimeColumn: StyledComponent<ITimeColumnProps> = (props) => {
   }, [props.event.duration, props.event.endDateTime, props.event.startDateTime])
 
   if (isNarrowScreen) {
-    const compactDuration = formatCompactDuration(durationHours)
+    const compactDuration = formatCompactDuration(
+      durationHours,
+      (value, withFraction) =>
+        withFraction
+          ? numberFormatters.withFraction.format(value)
+          : numberFormatters.noFraction.format(value),
+      (value, isSingular) =>
+        t(
+          `common.hoursShortFormat_${isSingular ? 'singular' : 'plural'}`,
+          { hours: value }
+        )
+    )
     return (
       <div className={props.className}>
         <span>

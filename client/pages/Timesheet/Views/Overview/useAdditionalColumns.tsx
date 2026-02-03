@@ -12,19 +12,20 @@ const MOBILE_BREAKPOINT = 600
 
 /**
  * Hook that returns additonal columns for the event list.
- * The `customer` column is only shown on desktop devices,
- * while the `project` column is always shown, but also
- * includes the customer link on mobile devices.
+ * The `customer` column is only shown on wider screens,
+ * while the `project` column is always shown, but can
+ * include the customer link on narrow screens.
  */
 export function useAdditionalColumns() {
   const { t } = useTranslation()
   const { state } = useTimesheetContext()
-  const selectedPeriodId = state.selectedPeriod?.id
   const [isNarrowScreen, setIsNarrowScreen] = useState(
     typeof window !== 'undefined' && window.innerWidth <= MOBILE_BREAKPOINT
   )
+  const events = state.selectedPeriod?.getEvents() ?? []
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const handleResize = () => {
       setIsNarrowScreen(window.innerWidth <= MOBILE_BREAKPOINT)
     }
@@ -33,7 +34,6 @@ export function useAdditionalColumns() {
   }, [])
 
   return useMemo(() => {
-    const events = state.selectedPeriod?.getEvents() ?? []
     const multipleCustomersByDate = new Map<string, Set<string>>()
     for (const event of events) {
       const dateKey =
@@ -49,8 +49,10 @@ export function useAdditionalColumns() {
       multipleCustomersByDate.get(dateKey)?.add(customerKey)
     }
 
+    const showCustomerColumn = isBrowser && !isNarrowScreen
+
     const shouldShowCustomerLink = (event: EventObject) => {
-      if (!isNarrowScreen) return false
+      if (showCustomerColumn) return false
       const dateKey =
         event.date ?? $date.formatDate(event.startDateTime, 'YYYY-MM-DD')
       const customers = multipleCustomersByDate.get(dateKey)
@@ -58,7 +60,7 @@ export function useAdditionalColumns() {
     }
 
     return [
-      isBrowser &&
+      showCustomerColumn &&
       createColumnDef<EventObject>(
         'customer',
         t('common.customer'),
@@ -77,5 +79,5 @@ export function useAdditionalColumns() {
         )
       )
     ].filter(Boolean)
-  }, [selectedPeriodId, state.selectedPeriod, t])
+  }, [events, isNarrowScreen, t])
 }
