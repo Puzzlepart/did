@@ -4,25 +4,80 @@ import { StyledComponent } from 'types'
 import { ITimeColumnProps } from './types'
 
 /**
+ * Internal shared state for narrow screen media query.
+ * Ensures we register only a single `matchMedia` listener for all components.
+ */
+const NARROW_MEDIA_QUERY = '(max-width: 600px)'
+let narrowScreenValue = false
+let narrowScreenMedia: MediaQueryList | null = null
+const narrowScreenSubscribers = new Set<(value: boolean) => void>()
+let narrowScreenListenerInitialised = false
+
+/**
+ * Get initial narrow-screen value in a safe way (SSR compatible).
+ */
+const getInitialNarrowScreen = (): boolean => {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return false
+  }
+  return window.matchMedia(NARROW_MEDIA_QUERY).matches
+}
+
+/**
+ * Ensure a single media query listener is registered for the narrow-screen query.
+ */
+const ensureNarrowScreenListener = (): void => {
+  if (narrowScreenListenerInitialised) return
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return
+  }
+
+  narrowScreenMedia = window.matchMedia(NARROW_MEDIA_QUERY)
+  narrowScreenValue = narrowScreenMedia.matches
+
+  const handleChange = (event: MediaQueryListEvent | MediaQueryList): void => {
+    const matches = 'matches' in event ? event.matches : narrowScreenMedia?.matches ?? false
+    narrowScreenValue = matches
+    for (const subscriber of narrowScreenSubscribers) subscriber(matches)
+  }
+
+  // Call once to ensure all subscribers receive the initial value.
+  handleChange(narrowScreenMedia)
+
+  if (typeof narrowScreenMedia.addEventListener === 'function') {
+    narrowScreenMedia.addEventListener('change', handleChange)
+  } else if (typeof narrowScreenMedia.addListener === 'function') {
+    // Fallback for older browsers
+    narrowScreenMedia.addListener(handleChange)
+  }
+
+  narrowScreenListenerInitialised = true
+}
+
+/**
+ * Subscribe to shared narrow-screen state.
+ */
+const subscribeToNarrowScreen = (
+  subscriber: (value: boolean) => void
+): (() => void) => {
+  narrowScreenSubscribers.add(subscriber)
+  // Immediately send current value to new subscriber
+  subscriber(narrowScreenValue)
+  return () => {
+    narrowScreenSubscribers.delete(subscriber)
+  }
+}
+
+/**
  * Track whether the viewport is narrow.
+ * Uses a shared media-query listener to avoid one listener per TimeColumn instance.
  */
 const useIsNarrowScreen = (): boolean => {
-  const [isNarrow, setIsNarrow] = useState<boolean>(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return false
-    return window.matchMedia('(max-width: 600px)').matches
-  })
+  const [isNarrow, setIsNarrow] = useState<boolean>(() => getInitialNarrowScreen())
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return
-    const media = window.matchMedia('(max-width: 600px)')
-    const handleChange = () => setIsNarrow(media.matches)
-    handleChange()
-    if (media.addEventListener) {
-      media.addEventListener('change', handleChange)
-      return () => media.removeEventListener('change', handleChange)
-    }
-    media.addListener(handleChange)
-    return () => media.removeListener(handleChange)
+    ensureNarrowScreenListener()
+    return subscribeToNarrowScreen(setIsNarrow)
   }, [])
 
   return isNarrow
