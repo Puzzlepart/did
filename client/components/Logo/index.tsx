@@ -4,14 +4,14 @@ import packageFile from 'package'
 import React from 'react'
 import styles from './Logo.module.scss'
 import { ILogoProps } from './types'
-import { VersionInfo } from 'parts/UserMenu/VersionInfo'
+import { VersionInfo } from 'components/VersionInfo'
 
 /**
  * @category Reusable Component
  */
 export const Logo: ReusableComponent<ILogoProps> = (props) => {
   return (
-    <div className={Logo.className}>
+    <div className={Logo.className} aria-label='Logo'>
       <div className={styles.logo}>
         <svg className={styles.logoSvg}
           version='1.0'

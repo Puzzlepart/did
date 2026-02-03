@@ -13,7 +13,7 @@ import { UserMenuTrigger } from './UserMenuTrigger'
 import { UserReports } from './UserReports'
 import { UserSettings } from './UserSettings'
 import { UserVacation } from './UserVacation'
-import { VersionInfo } from './VersionInfo'
+import { VersionInfo } from '../../components/VersionInfo'
 
 /**
  * @category Function Component
