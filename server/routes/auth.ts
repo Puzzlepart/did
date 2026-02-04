@@ -10,6 +10,7 @@ import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import _ from 'underscore'
 import url from 'url'
+import crypto from 'crypto'
 import {
   GENERIC_SIGNIN_FAILED,
   SigninError
@@ -175,11 +176,22 @@ if (
 ) {
   auth.post('/inject-session', (request: Request, response: Response) => {
     try {
-      // Verify secret token
-      const providedSecret = request.headers['x-injection-secret']
+      // Verify secret token with timing-safe comparison
+      const providedSecretRaw = request.headers['x-injection-secret']
+      const providedSecret = Array.isArray(providedSecretRaw)
+        ? providedSecretRaw[0]
+        : providedSecretRaw
       const expectedSecret = environment('SESSION_INJECTION_SECRET') as string
-      if (providedSecret !== expectedSecret) {
-        debug('Session injection failed: invalid secret')
+
+      if (
+        !providedSecret ||
+        typeof providedSecret !== 'string' ||
+        !crypto.timingSafeEqual(
+          Buffer.from(providedSecret),
+          Buffer.from(expectedSecret)
+        )
+      ) {
+        debug('Session injection failed: invalid or missing secret')
         return response.status(403).json({ error: 'Invalid secret' })
       }
 

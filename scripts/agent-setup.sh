@@ -34,9 +34,12 @@ info "Project: $COMPOSE_PROJECT_NAME"
 PARENT_ENV="${ROOT_DIR}/../.env"
 if [[ -f "$PARENT_ENV" ]]; then
   info "Loading credentials from parent .env"
-  while IFS='=' read -r key value; do
+  while IFS= read -r line; do
     # Skip empty lines and comments
-    [[ -z "${key}" || "${key}" =~ ^[[:space:]]*# ]] && continue
+    [[ -z "${line}" || "${line}" =~ ^[[:space:]]*# ]] && continue
+    # Split only on first '=' to handle values containing '='
+    key="${line%%=*}"
+    value="${line#*=}"
     case "${key}" in
       MICROSOFT_CLIENT_ID|MICROSOFT_CLIENT_SECRET|TEST_SESSION_COOKIE|SESSION_INJECTION_SECRET)
         # Only set from parent .env if not already present in environment
