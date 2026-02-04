@@ -11,6 +11,14 @@ cd "$ROOT_DIR"
 info() { echo -e "[agent-setup] $*"; }
 error() { echo -e "[agent-setup][ERROR] $*" >&2; }
 
+# List of environment variables to load from parent .env
+ALLOWED_ENV_VARS=(
+  "MICROSOFT_CLIENT_ID"
+  "MICROSOFT_CLIENT_SECRET"
+  "TEST_SESSION_COOKIE"
+  "SESSION_INJECTION_SECRET"
+)
+
 # --- Derive unique identifiers from worktree path ---
 WORKTREE_NAME=$(basename "$ROOT_DIR")
 # Normalize worktree name for Docker Compose compatibility:
@@ -42,20 +50,20 @@ if [[ -f "$PARENT_ENV" ]]; then
     # Split only on first '=' to handle values containing '='
     key="${line%%=*}"
     value="${line#*=}"
-    case "${key}" in
-      MICROSOFT_CLIENT_ID|MICROSOFT_CLIENT_SECRET|TEST_SESSION_COOKIE|SESSION_INJECTION_SECRET)
+    
+    # Check if key is in allowlist
+    for allowed_key in "${ALLOWED_ENV_VARS[@]}"; do
+      if [[ "${key}" == "${allowed_key}" ]]; then
         # Only set from parent .env if not already present in environment
         if [[ -z "${!key-}" && -n "${value}" ]]; then
-          # Strip surrounding quotes (both single and double)
-          if [[ "${value}" =~ ^\"(.*)\"$ ]] || [[ "${value}" =~ ^\'(.*)\'$ ]]; then
-            value="${BASH_REMATCH[1]}"
-          fi
+          # Strip surrounding quotes using simpler pattern matching
+          value="${value#[\'\"]}"
+          value="${value%[\'\"]}"
           export "${key}=${value}"
         fi
-        ;;
-      *)
-        ;;
-    esac
+        break
+      fi
+    done
   done < "$PARENT_ENV"
 fi
 

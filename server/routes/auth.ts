@@ -177,10 +177,8 @@ if (
   auth.post('/inject-session', (request: Request, response: Response) => {
     try {
       // Verify secret token with timing-safe comparison
-      const providedSecretRaw = request.headers['x-injection-secret']
-      const providedSecret = Array.isArray(providedSecretRaw)
-        ? providedSecretRaw[0]
-        : providedSecretRaw
+      // Using request.get() for case-insensitive header lookup
+      const providedSecret = request.get('x-injection-secret')
       const expectedSecret = environment('SESSION_INJECTION_SECRET') as string
 
       // Validate secret exists and lengths match before timing-safe comparison
