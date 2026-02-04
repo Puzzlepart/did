@@ -75,7 +75,7 @@ Environment preference is saved to `chrome.storage.local` and persists across se
   "side_panel": {
     "default_path": "sidebar.html"
   },
-  "permissions": ["sidePanel"],
+  "permissions": ["sidePanel", "storage"],
   "host_permissions": [
     "https://did.puzzlepart.com/*",
     "https://didapp-dev.azurewebsites.net/*",
