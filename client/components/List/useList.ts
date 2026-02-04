@@ -26,7 +26,7 @@ export function useList(props: IListProps) {
 
   useEffect(
     () => dispatch(PROPS_UPDATED(props)),
-    [props.items, props.filterValues]
+    [props.items, props.filterValues, props.columns]
   )
 
   const context = { props, state, dispatch } as IListContext

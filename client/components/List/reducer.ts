@@ -81,6 +81,7 @@ export default (initialState: IListState) => {
       builder
         .addCase(PROPS_UPDATED, (state, { payload }) => {
           state.origItems = payload.items ?? []
+          state.columns = payload.columns ?? []
           state.itemsPreFilter = current(state).origItems.filter((item) =>
             searchObject({
               item,
