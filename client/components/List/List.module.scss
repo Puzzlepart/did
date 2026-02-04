@@ -42,15 +42,7 @@
 .dataGridHeaderRow:global(.fui-TableRow),
 .treeGridHeaderRow:global(.fui-TreeGridRow) {
   border-top: 1px solid var(--colorNeutralStroke1);
-  display: grid;
   align-items: center;
-  grid-template-columns: var(--list-grid-template, auto);
-}
-.dataGridHeaderRow:global(.fui-TableRow) > :global(.fui-TableHeaderCell) {
-  border-right: 1px solid var(--colorNeutralStroke1);
-}
-.dataGridHeaderRow:global(.fui-TableRow) > :global(.fui-TableHeaderCell):last-child {
-  border-right: none;
 }
 
 .dataGridHeaderRow:global(.fui-TableRow) :global(.fui-TableHeaderCell__button) {
@@ -58,6 +50,9 @@
 }
 .treeGridHeaderRow:global(.fui-TreeGridRow) {
   border-top: 0px solid transparent;
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--list-grid-template, auto);
 }
 
 .headerCell,
@@ -124,9 +119,7 @@
 
 .dataGridRow:global(.fui-TableRow) {
   min-height: 40px;
-  display: grid;
   align-items: center;
-  grid-template-columns: var(--list-grid-template, auto);
   padding: 0.4rem 0.5rem;
   border-bottom: 1px solid var(--colorNeutralStroke1);
 }

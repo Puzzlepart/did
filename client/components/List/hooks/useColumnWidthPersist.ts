@@ -104,13 +104,24 @@ export function useColumnWidthPersist(
   const columnSizingOptions = useMemo<TableColumnSizingOptions>(() => {
     return columns.reduce<TableColumnSizingOptions>((acc, col) => {
       const minWidth = minWidthByCol[col.key]
-      const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
-      const defaultWidth = Math.max(minWidth, defaultWidthRaw)
       const persistedWidth = persistedWidths[col.key]
-      const idealWidth =
-        persistedWidth === undefined
-          ? col.idealWidth ?? defaultWidth
-          : Math.max(minWidth, persistedWidth)
+      const maxWidth =
+        col.maxWidth !== undefined && col.maxWidth !== null && col.maxWidth >= minWidth
+          ? col.maxWidth
+          : undefined
+      const clampWidth = (value: number) => {
+        const clampedMin = Math.max(minWidth, value)
+        if (maxWidth === undefined || maxWidth === null) return clampedMin
+        return Math.min(maxWidth, clampedMin)
+      }
+      const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
+      const defaultWidth = clampWidth(
+        persistedWidth === undefined ? defaultWidthRaw : persistedWidth
+      )
+      const idealWidthRaw = col.idealWidth ?? defaultWidth
+      const idealWidth = clampWidth(
+        persistedWidth === undefined ? idealWidthRaw : persistedWidth
+      )
 
       return {
         ...acc,
@@ -129,13 +140,20 @@ export function useColumnWidthPersist(
       data: { columnId: string; width: number }
     ) => {
       const min = minWidthByCol[data.columnId] ?? 0
-      const clamped = Math.max(min, data.width)
+      const maxRaw = columns.find(col => col.key === data.columnId)?.maxWidth
+      const max =
+        maxRaw !== undefined && maxRaw !== null && maxRaw >= min
+          ? maxRaw
+          : undefined
+      const clampedMin = Math.max(min, data.width)
+      const clamped =
+        max === undefined || max === null ? clampedMin : Math.min(max, clampedMin)
       setPersistedWidths(prev => ({
         ...prev,
         [data.columnId]: clamped
       }))
     },
-    [minWidthByCol, setPersistedWidths]
+    [columns, minWidthByCol, setPersistedWidths]
   )
 
   // Prune widths for removed columns and normalize to minWidth when columns change.
