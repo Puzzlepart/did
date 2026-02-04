@@ -44,6 +44,9 @@ client/components/Template
 did-package.zip
 docker-compose.local.yml
 
+# Agent environment
+.agent-env
+
 # MongoDB development data (sensitive)
 docker/data/**/*.json
 
