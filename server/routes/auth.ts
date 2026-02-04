@@ -168,7 +168,7 @@ auth.get('/signout', signOutHandler)
  * curl http://localhost:9142/auth/inject-session
  */
 if (
-  environment('ENABLE_SESSION_INJECTION') &&
+  environment('ENABLE_SESSION_INJECTION', false, { isSwitch: true }) &&
   environment('TEST_SESSION_COOKIE')
 ) {
   auth.get('/inject-session', (request: Request, response: Response) => {
