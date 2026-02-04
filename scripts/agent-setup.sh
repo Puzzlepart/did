@@ -37,6 +37,8 @@ if [[ -f "$PARENT_ENV" ]]; then
   while IFS= read -r line; do
     # Skip empty lines and comments
     [[ -z "${line}" || "${line}" =~ ^[[:space:]]*# ]] && continue
+    # Skip lines without '=' (malformed)
+    [[ ! "${line}" =~ = ]] && continue
     # Split only on first '=' to handle values containing '='
     key="${line%%=*}"
     value="${line#*=}"
@@ -44,9 +46,10 @@ if [[ -f "$PARENT_ENV" ]]; then
       MICROSOFT_CLIENT_ID|MICROSOFT_CLIENT_SECRET|TEST_SESSION_COOKIE|SESSION_INJECTION_SECRET)
         # Only set from parent .env if not already present in environment
         if [[ -z "${!key-}" && -n "${value}" ]]; then
-          # Strip surrounding double quotes if present
-          value="${value%\"}"
-          value="${value#\"}"
+          # Strip surrounding quotes (both single and double)
+          if [[ "${value}" =~ ^\"(.*)\"$ ]] || [[ "${value}" =~ ^\'(.*)\'$ ]]; then
+            value="${BASH_REMATCH[1]}"
+          fi
           export "${key}=${value}"
         fi
         ;;

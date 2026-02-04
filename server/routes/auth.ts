@@ -183,15 +183,24 @@ if (
         : providedSecretRaw
       const expectedSecret = environment('SESSION_INJECTION_SECRET') as string
 
+      // Validate secret exists and lengths match before timing-safe comparison
       if (
         !providedSecret ||
         typeof providedSecret !== 'string' ||
+        providedSecret.length !== expectedSecret.length
+      ) {
+        debug('Session injection failed: invalid or missing secret')
+        return response.status(403).json({ error: 'Invalid secret' })
+      }
+
+      // Timing-safe comparison to prevent timing attacks
+      if (
         !crypto.timingSafeEqual(
           Buffer.from(providedSecret),
           Buffer.from(expectedSecret)
         )
       ) {
-        debug('Session injection failed: invalid or missing secret')
+        debug('Session injection failed: secret mismatch')
         return response.status(403).json({ error: 'Invalid secret' })
       }
 
