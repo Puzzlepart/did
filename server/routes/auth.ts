@@ -225,7 +225,7 @@ if (
         }
 
         // Only copy allowlisted field (passport) onto new session
-        ;(request.session as any).passport = passportData
+        request.session['passport'] = passportData
 
         request.session.save((error) => {
           if (error) {

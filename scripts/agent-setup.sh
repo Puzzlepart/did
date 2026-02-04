@@ -56,9 +56,11 @@ if [[ -f "$PARENT_ENV" ]]; then
       if [[ "${key}" == "${allowed_key}" ]]; then
         # Only set from parent .env if not already present in environment
         if [[ -z "${!key-}" && -n "${value}" ]]; then
-          # Strip surrounding quotes using simpler pattern matching
-          value="${value#[\'\"]}"
-          value="${value%[\'\"]}"
+          # Strip surrounding quotes (both single and double)
+          value="${value#\"}"
+          value="${value%\"}"
+          value="${value#\'}"
+          value="${value%\'}"
           export "${key}=${value}"
         fi
         break
