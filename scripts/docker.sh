@@ -39,6 +39,12 @@ check_docker() {
     error "Docker is not running. Please start Docker first."
     exit 1
   fi
+
+  if ! docker compose version &> /dev/null; then
+    error "Docker Compose plugin is not installed or enabled."
+    echo "  Visit: https://docs.docker.com/compose/install/"
+    exit 1
+  fi
 }
 
 # ─────────────────────────────────────────────────────────────────────────────

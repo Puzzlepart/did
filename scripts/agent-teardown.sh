@@ -11,7 +11,11 @@ info() { echo -e "[agent-teardown] $*"; }
 warn() { echo -e "[agent-teardown][WARN] $*"; }
 
 WORKTREE_NAME=$(basename "$ROOT_DIR")
-export COMPOSE_PROJECT_NAME="did-${WORKTREE_NAME}"
+# Normalize worktree name to match agent-setup:
+# - convert to lowercase
+# - replace any non-alphanumeric characters with hyphens
+NORMALIZED_WORKTREE_NAME="$(printf '%s' "$WORKTREE_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g')"
+export COMPOSE_PROJECT_NAME="did-${NORMALIZED_WORKTREE_NAME}"
 
 # Parse arguments
 REMOVE_WORKTREE=0

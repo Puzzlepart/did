@@ -424,24 +424,31 @@ Or capture the full session object server-side and base64 encode it:
 }
 ```
 
-**2. Set the environment variable:**
+**2. Set the environment variables:**
 ```bash
 export TEST_SESSION_COOKIE="eyJwYXNzc...base64..."
+export SESSION_INJECTION_SECRET="your-secret-token"
 ```
 
 **3. Authenticate via the injection endpoint:**
 ```bash
-curl http://localhost:9142/auth/inject-session
+# Uses APP_URL from .agent-env or your configured port
+curl -X POST "${APP_URL}/auth/inject-session" -H "X-Injection-Secret: ${SESSION_INJECTION_SECRET}"
 # Redirects to /timesheet with valid session
 ```
 
 In Playwright tests:
 ```typescript
-test('authenticated flow', async ({ page }) => {
+test('authenticated flow', async ({ page, request }) => {
   // Inject session before testing protected routes
-  await page.goto(`${process.env.APP_URL}/auth/inject-session`)
+  await request.post(`${process.env.APP_URL}/auth/inject-session`, {
+    headers: {
+      'X-Injection-Secret': process.env.SESSION_INJECTION_SECRET
+    }
+  })
   
   // Now authenticated - test protected functionality
+  await page.goto(`${process.env.APP_URL}/timesheet`)
   await expect(page.locator('h1')).toContainText('Timesheet')
 })
 ```
