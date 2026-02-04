@@ -13,10 +13,6 @@ a, a:visited {
     color: var(--colorBrandForegroundLink);
 }
 
-a, a:hover, a:visited, a:active {
-    text-decoration: none !important;
-}
-
 h1 {
     font-size: 3em;
 }
@@ -35,8 +31,4 @@ h4 {
 
 h5 {
     font-size: 1.2em;
-}
-
-.fui-FluentProvider {
-    background-color: transparent !important;
 }
