@@ -258,9 +258,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
       const sortIcon =
         sortDirection === 'asc'
           ? getFluentIcon('ArrowSortUp', { size: 12 })
-          : (sortDirection === 'desc'
+          : sortDirection === 'desc'
           ? getFluentIcon('ArrowSortDown', { size: 12 })
-          : null)
+          : null
       return (
         <div
           className={mergeClasses(
@@ -292,7 +292,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               )
               return (
                 <Checkbox
-                  checked={allSelected ? true : (someSelected ? 'mixed' : false)}
+                  checked={allSelected ? true : someSelected ? 'mixed' : false}
                   onClick={(event) => event.stopPropagation()}
                   onChange={(_event, data) => {
                     updateSelection(
@@ -337,19 +337,21 @@ export const List: ReusableComponent<IListProps> = (props) => {
         const index = items.indexOf(item)
         return <ItemColumn item={item} column={column} index={index} />
       },
-      compare: column.data?.isSortable ? (a: any, b: any) => {
-        const fieldName = column.fieldName
-        if (!fieldName) return 0
-        const aValue = a[fieldName]
-        const bValue = b[fieldName]
-        if (aValue === bValue) return 0
-        if (aValue === null || aValue === undefined) return 1
-        if (bValue === null || bValue === undefined) return -1
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
-          return aValue.localeCompare(bValue)
-        }
-        return aValue < bValue ? -1 : 1
-      } : () => 0,
+      compare: column.data?.isSortable
+        ? (a: any, b: any) => {
+            const fieldName = column.fieldName
+            if (!fieldName) return 0
+            const aValue = a[fieldName]
+            const bValue = b[fieldName]
+            if (aValue === bValue) return 0
+            if (aValue === null || aValue === undefined) return 1
+            if (bValue === null || bValue === undefined) return -1
+            if (typeof aValue === 'string' && typeof bValue === 'string') {
+              return aValue.localeCompare(bValue)
+            }
+            return aValue < bValue ? -1 : 1
+          }
+        : () => 0,
       column
     }))
     return [...selectionColumn, ...listColumns]
@@ -417,8 +419,14 @@ export const List: ReusableComponent<IListProps> = (props) => {
       e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
       data: { columnId: TableColumnId; width: number }
     ) => {
-      handleColumnResize(e, { columnId: String(data.columnId), width: data.width })
-      props.onColumnResize?.(e, { columnId: String(data.columnId), width: data.width })
+      handleColumnResize(e, {
+        columnId: String(data.columnId),
+        width: data.width
+      })
+      props.onColumnResize?.(e, {
+        columnId: String(data.columnId),
+        width: data.width
+      })
     },
     [handleColumnResize, props.onColumnResize]
   )
@@ -530,9 +538,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                       columnMeta?.className,
                       columnMeta?.isMultiline ? styles.multiline : styles.nowrap
                     )}
-                    onClick={() =>
-                      columnMeta && handleHeaderClick(columnMeta)
-                    }
+                    onClick={() => columnMeta && handleHeaderClick(columnMeta)}
                   >
                     {renderHeaderCell()}
                   </DataGridHeaderCell>
@@ -566,7 +572,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   const cellLabel =
                     isSelectionColumn || columnMeta?.data?.hideMobileLabel
                       ? ''
-                      : (columnMeta?.name ?? String(columnId))
+                      : columnMeta?.name ?? String(columnId)
                   return (
                     <DataGridCell
                       data-label={cellLabel}
@@ -616,21 +622,19 @@ export const List: ReusableComponent<IListProps> = (props) => {
               const columnMeta = columnMetaMap.get(String(columnId))
               const isSelectionColumn = columnId === 'selection'
               return (
-              <DataGridHeaderCell
-                key={columnId}
-                className={mergeClasses(
-                  styles.headerCell,
-                  props.columnHeaderProps?.className,
-                  isSelectionColumn && styles.selectionCell,
-                  columnMeta?.className,
-                  columnMeta?.isMultiline ? styles.multiline : styles.nowrap
-                )}
-                onClick={() =>
-                  columnMeta && handleHeaderClick(columnMeta)
-                }
-              >
-                {renderHeaderCell()}
-              </DataGridHeaderCell>
+                <DataGridHeaderCell
+                  key={columnId}
+                  className={mergeClasses(
+                    styles.headerCell,
+                    props.columnHeaderProps?.className,
+                    isSelectionColumn && styles.selectionCell,
+                    columnMeta?.className,
+                    columnMeta?.isMultiline ? styles.multiline : styles.nowrap
+                  )}
+                  onClick={() => columnMeta && handleHeaderClick(columnMeta)}
+                >
+                  {renderHeaderCell()}
+                </DataGridHeaderCell>
               )
             }}
           </FluentDataGridRow>
@@ -653,23 +657,23 @@ export const List: ReusableComponent<IListProps> = (props) => {
                 const cellLabel =
                   isSelectionColumn || columnMeta?.data?.hideMobileLabel
                     ? ''
-                    : (columnMeta?.name ?? String(columnId))
+                    : columnMeta?.name ?? String(columnId)
                 return (
-                <DataGridCell
-                  data-label={cellLabel}
-                  data-column-id={String(columnId)}
-                  className={mergeClasses(
-                    styles.cell,
-                    isSelectionColumn && styles.selectionCell,
+                  <DataGridCell
+                    data-label={cellLabel}
+                    data-column-id={String(columnId)}
+                    className={mergeClasses(
+                      styles.cell,
+                      isSelectionColumn && styles.selectionCell,
                       isSelectionColumn &&
                         checkboxVisibility === CheckboxVisibility.onHover &&
                         styles.selectionCellHover,
                       columnMeta?.className,
-                    columnMeta?.isMultiline ? styles.multiline : styles.nowrap
-                  )}
-                >
-                  {renderCell(item)}
-                </DataGridCell>
+                      columnMeta?.isMultiline ? styles.multiline : styles.nowrap
+                    )}
+                  >
+                    {renderCell(item)}
+                  </DataGridCell>
                 )
               }}
             </FluentDataGridRow>
@@ -726,7 +730,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   </div>
                 ))}
               </Skeleton>
-            ) : (isGrouped ? (
+            ) : isGrouped ? (
               <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
                 <TreeGridRow className={styles.treeGridHeaderRow}>
                   {columns.map((column, index) => (
@@ -878,7 +882,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               </TreeGrid>
             ) : (
               renderDataGrid()
-            ))}
+            )}
             <EmptyMessage items={items} error={props.error} />
             <ListFilterPanel />
             <ViewColumnsPanel />
@@ -916,7 +920,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   </div>
                 ))}
               </Skeleton>
-            ) : (isGrouped ? (
+            ) : isGrouped ? (
               <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
                 <TreeGridRow className={styles.treeGridHeaderRow}>
                   {columns.map((column, index) => (
@@ -1068,7 +1072,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               </TreeGrid>
             ) : (
               renderDataGrid()
-            ))}
+            )}
             <EmptyMessage items={items} error={props.error} />
             <ListFilterPanel />
             <ViewColumnsPanel />

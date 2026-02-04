@@ -18,7 +18,10 @@ let narrowScreenListenerInitialised = false
  * Get initial narrow-screen value in a safe way (SSR compatible).
  */
 const getInitialNarrowScreen = (): boolean => {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+  if (
+    typeof window === 'undefined' ||
+    typeof window.matchMedia !== 'function'
+  ) {
     return false
   }
   return window.matchMedia(NARROW_MEDIA_QUERY).matches
@@ -29,7 +32,10 @@ const getInitialNarrowScreen = (): boolean => {
  */
 const ensureNarrowScreenListener = (): void => {
   if (narrowScreenListenerInitialised) return
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+  if (
+    typeof window === 'undefined' ||
+    typeof window.matchMedia !== 'function'
+  ) {
     return
   }
 
@@ -37,7 +43,8 @@ const ensureNarrowScreenListener = (): void => {
   narrowScreenValue = narrowScreenMedia.matches
 
   const handleChange = (event: MediaQueryListEvent | MediaQueryList): void => {
-    const matches = 'matches' in event ? event.matches : narrowScreenMedia?.matches ?? false
+    const matches =
+      'matches' in event ? event.matches : narrowScreenMedia?.matches ?? false
     narrowScreenValue = matches
     for (const subscriber of narrowScreenSubscribers) subscriber(matches)
   }
@@ -74,7 +81,9 @@ const subscribeToNarrowScreen = (
  * Uses a shared media-query listener to avoid one listener per TimeColumn instance.
  */
 const useIsNarrowScreen = (): boolean => {
-  const [isNarrow, setIsNarrow] = useState<boolean>(() => getInitialNarrowScreen())
+  const [isNarrow, setIsNarrow] = useState<boolean>(() =>
+    getInitialNarrowScreen()
+  )
 
   useEffect(() => {
     ensureNarrowScreenListener()
@@ -137,10 +146,9 @@ export const TimeColumn: StyledComponent<ITimeColumnProps> = (props) => {
           ? numberFormatters.withFraction.format(value)
           : numberFormatters.noFraction.format(value),
       (value, isSingular) =>
-        t(
-          `common.hoursShortFormat_${isSingular ? 'singular' : 'plural'}`,
-          { hours: value }
-        )
+        t(`common.hoursShortFormat_${isSingular ? 'singular' : 'plural'}`, {
+          hours: value
+        })
     )
     return (
       <div className={props.className}>

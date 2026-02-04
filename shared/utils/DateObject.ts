@@ -75,7 +75,7 @@ export class DateObject {
       typeof input.year === 'string' ? Number.parseInt(input.year) : input.year
     const isoWeek =
       typeof input.week === 'string' ? Number.parseInt(input.week) : input.week
-    
+
     // Use proper ISO week calculation to get the correct date
     const weekStartDate = DateUtils.getIsoWeekStartDate(isoWeek, year)
     this.$ = weekStartDate.$

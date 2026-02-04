@@ -502,9 +502,9 @@ export class ReportService {
         baseQuery.projectId?.$eq ??
         (_.isArray(baseQuery.projectId?.$in) ? baseQuery.projectId.$in : null)
       const baseProjectIds = baseProjectId
-        ? (Array.isArray(baseProjectId)
+        ? Array.isArray(baseProjectId)
           ? baseProjectId
-          : [baseProjectId])
+          : [baseProjectId]
         : null
       const effectiveProjectIds = baseProjectIds
         ? _.intersection(baseProjectIds, projectIds)

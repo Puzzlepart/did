@@ -12,10 +12,10 @@ test('DateObject.fromObject creates a valid date object from object', (t) => {
 test('DateObject.fromObject handles Week 1 2021 correctly (should not show as 2020)', (t) => {
   const date = new DateObject().fromObject({ year: 2021, week: 1 })
   const { isoWeek, isoYear } = DateUtils.getIsoWeekAndYear(date.jsDate)
-  
+
   t.is(isoWeek, 1, 'Should be week 1')
   t.is(isoYear, 2021, 'Should be ISO year 2021, not 2020')
-  
+
   // The Monday of week 1 2021 should be January 4, 2021
   t.is(date.jsDate.getDate(), 4)
   t.is(date.jsDate.getMonth(), 0) // January is month 0
@@ -25,10 +25,10 @@ test('DateObject.fromObject handles Week 1 2021 correctly (should not show as 20
 test('DateObject.fromObject handles Week 1 2023 correctly (should not show as 2022)', (t) => {
   const date = new DateObject().fromObject({ year: 2023, week: 1 })
   const { isoWeek, isoYear } = DateUtils.getIsoWeekAndYear(date.jsDate)
-  
+
   t.is(isoWeek, 1, 'Should be week 1')
   t.is(isoYear, 2023, 'Should be ISO year 2023, not 2022')
-  
+
   // The Monday of week 1 2023 should be January 2, 2023
   t.is(date.jsDate.getDate(), 2)
   t.is(date.jsDate.getMonth(), 0) // January is month 0
@@ -38,10 +38,10 @@ test('DateObject.fromObject handles Week 1 2023 correctly (should not show as 20
 test('DateObject.fromObject handles Week 52 spanning years correctly', (t) => {
   const date = new DateObject().fromObject({ year: 2021, week: 52 })
   const { isoWeek, isoYear } = DateUtils.getIsoWeekAndYear(date.jsDate)
-  
+
   t.is(isoWeek, 52, 'Should be week 52')
   t.is(isoYear, 2021, 'Should be ISO year 2021')
-  
+
   // Week 52 of 2021 starts on December 27, 2021
   t.is(date.jsDate.getDate(), 27)
   t.is(date.jsDate.getMonth(), 11) // December is month 11
@@ -51,10 +51,10 @@ test('DateObject.fromObject handles Week 52 spanning years correctly', (t) => {
 test('DateObject.fromObject handles Week 1 2026 correctly (future edge case)', (t) => {
   const date = new DateObject().fromObject({ year: 2026, week: 1 })
   const { isoWeek, isoYear } = DateUtils.getIsoWeekAndYear(date.jsDate)
-  
+
   t.is(isoWeek, 1, 'Should be week 1')
   t.is(isoYear, 2026, 'Should be ISO year 2026')
-  
+
   // The Monday of week 1 2026 should be December 29, 2025 (week spans years)
   t.is(date.jsDate.getDate(), 29)
   t.is(date.jsDate.getMonth(), 11) // December is month 11
@@ -64,7 +64,7 @@ test('DateObject.fromObject handles Week 1 2026 correctly (future edge case)', (
 test('DateObject.fromObject with string inputs', (t) => {
   const date = new DateObject().fromObject({ year: '2023', week: '1' })
   const { isoWeek, isoYear } = DateUtils.getIsoWeekAndYear(date.jsDate)
-  
+
   t.is(isoWeek, 1)
   t.is(isoYear, 2023)
 })

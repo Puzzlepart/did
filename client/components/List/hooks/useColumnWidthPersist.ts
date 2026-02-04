@@ -39,14 +39,20 @@ export function useColumnWidthPersist(
   if (!memoryStoreRef.current) {
     const cache = new Map<string, string>()
     memoryStoreRef.current = {
-      get length() { return cache.size },
-      clear: () => { cache.clear() },
+      get length() {
+        return cache.size
+      },
+      clear: () => {
+        cache.clear()
+      },
       getItem: (key) => cache.get(key) ?? null,
       key: (index) => {
         const keys = Array.from(cache.keys())
         return keys[index] ?? null
       },
-      removeItem: (key) => { cache.delete(key) },
+      removeItem: (key) => {
+        cache.delete(key)
+      },
       setItem: (key, value) => {
         cache.set(key, String(value))
       }
@@ -60,10 +66,12 @@ export function useColumnWidthPersist(
   })
   const persistedWidths = storage[0] ?? {}
   const setPersistedWidthsRaw = storage[3]
-  
+
   // Wrapper to enable functional updates (useBrowserStorage doesn't support them natively)
   const setPersistedWidths = (
-    update: PersistedColumnWidths | ((prev: PersistedColumnWidths) => PersistedColumnWidths)
+    update:
+      | PersistedColumnWidths
+      | ((prev: PersistedColumnWidths) => PersistedColumnWidths)
   ) => {
     if (typeof update === 'function') {
       setPersistedWidthsRaw(update(persistedWidths))
@@ -106,7 +114,9 @@ export function useColumnWidthPersist(
       const minWidth = minWidthByCol[col.key]
       const persistedWidth = persistedWidths[col.key]
       const maxWidth =
-        col.maxWidth !== undefined && col.maxWidth !== null && col.maxWidth >= minWidth
+        col.maxWidth !== undefined &&
+        col.maxWidth !== null &&
+        col.maxWidth >= minWidth
           ? col.maxWidth
           : undefined
       const clampWidth = (value: number) => {
@@ -140,15 +150,17 @@ export function useColumnWidthPersist(
       data: { columnId: string; width: number }
     ) => {
       const min = minWidthByCol[data.columnId] ?? 0
-      const maxRaw = columns.find(col => col.key === data.columnId)?.maxWidth
+      const maxRaw = columns.find((col) => col.key === data.columnId)?.maxWidth
       const max =
         maxRaw !== undefined && maxRaw !== null && maxRaw >= min
           ? maxRaw
           : undefined
       const clampedMin = Math.max(min, data.width)
       const clamped =
-        max === undefined || max === null ? clampedMin : Math.min(max, clampedMin)
-      setPersistedWidths(prev => ({
+        max === undefined || max === null
+          ? clampedMin
+          : Math.min(max, clampedMin)
+      setPersistedWidths((prev) => ({
         ...prev,
         [data.columnId]: clamped
       }))
@@ -158,8 +170,8 @@ export function useColumnWidthPersist(
 
   // Prune widths for removed columns and normalize to minWidth when columns change.
   useEffect(() => {
-    setPersistedWidths(prev => {
-      const allowed = new Set(columns.map(c => c.key))
+    setPersistedWidths((prev) => {
+      const allowed = new Set(columns.map((c) => c.key))
       let changed = false
       const next: PersistedColumnWidths = {}
       for (const k in prev) {
