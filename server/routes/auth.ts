@@ -156,4 +156,45 @@ if (_.contains(authProviders, 'google')) {
 
 auth.get('/signout', signOutHandler)
 
+/**
+ * Session injection for agent/e2e testing (development only)
+ *
+ * Allows agents and Playwright tests to authenticate without going through OAuth.
+ * Requires ENABLE_SESSION_INJECTION=true and TEST_SESSION_COOKIE to be set.
+ * The TEST_SESSION_COOKIE should be a base64-encoded JSON object containing
+ * the user session data (copy from a real logged-in session).
+ *
+ * @example
+ * curl http://localhost:9142/auth/inject-session
+ */
+if (
+  environment('ENABLE_SESSION_INJECTION') &&
+  environment('TEST_SESSION_COOKIE')
+) {
+  auth.get('/inject-session', (request: Request, response: Response) => {
+    try {
+      const sessionData = JSON.parse(
+        Buffer.from(
+          environment('TEST_SESSION_COOKIE') as string,
+          'base64'
+        ).toString('utf8')
+      )
+      debug('Injecting session for user: %s', sessionData?.passport?.user?.mail)
+      Object.assign(request.session, sessionData)
+      request.session.save((error) => {
+        if (error) {
+          debug('Session injection failed: %s', error.message)
+          return response.status(500).json({ error: 'Session save failed' })
+        }
+        const redirectUrl = sessionData?.passport?.user?.startPage || '/timesheet'
+        return response.redirect(redirectUrl)
+      })
+    } catch (error) {
+      debug('Session injection parse error: %s', (error as Error).message)
+      return response.status(400).json({ error: 'Invalid TEST_SESSION_COOKIE' })
+    }
+  })
+  debug('Session injection route enabled at /auth/inject-session')
+}
+
 export default auth
