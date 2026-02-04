@@ -17,7 +17,7 @@ const NODE_MODULES_DIR = path.resolve(__dirname, '../node_modules')
  * 
  * @returns - A Promise that resolves when the archive has been created.
  */
-async function run({ includeNodeModules = false, includePackageLockFile = true }) {
+async function run({ includeNodeModules = false, includePackageLockFile = true, revision = 'unknown' }) {
     const filename = `./${package.name}-package.zip`
     log(chalk.cyan(`Creating archive ${filename}`))
     const output = fs.createWriteStream(filename)
@@ -61,8 +61,8 @@ async function run({ includeNodeModules = false, includePackageLockFile = true }
     archive.file('.deployment')
     archive.file('.deploy/deploy.sh')
 
-    log('Archiving revision file...')
-    archive.file('revision.txt')
+    log('Archiving revision metadata...')
+    archive.append(`${revision}\n`, { name: 'revision.txt' })
 
     if (includeNodeModules) {
         log('Archiving node_modules...')

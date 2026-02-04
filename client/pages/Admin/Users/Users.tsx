@@ -1,4 +1,4 @@
-import { CheckboxVisibility, SelectionMode } from '@fluentui/react'
+import { CheckboxVisibility, SelectionMode } from 'components/List/types'
 import { IListProps, List } from 'components/List'
 import { Tabs } from 'components/Tabs'
 import { ITabProps, TabComponent } from 'components/Tabs/types'
@@ -81,9 +81,31 @@ export const Users: TabComponent<ITabProps> = () => {
               List,
               t('admin.users.disabledHeaderText'),
               {
+                searchBox: {
+                  fullWidth: true,
+                  persist: true,
+                  placeholder: t('admin.users.searchInactiveUsersLabel', {
+                    usersCount: context.state.disabledUsers.length
+                  })
+                },
                 items: context.state.disabledUsers,
                 columns: columns('disabled'),
-                selectionMode: SelectionMode.none,
+                onItemInvoked: (user) => {
+                  context.dispatch(
+                    SET_USER_FORM({
+                      headerText: user.displayName,
+                      user
+                    })
+                  )
+                },
+                menuItems,
+                setKey: context.state.setKey,
+                checkboxVisibility: CheckboxVisibility.onHover,
+                selectionProps: [
+                  SelectionMode.multiple,
+                  (selected) =>
+                    context.dispatch(SET_SELECTED_USERS(selected as User[]))
+                ],
                 enableShimmer: context.state.loading,
                 enableViewColumnsEdit: true,
                 persistViewColumns: Users.displayName

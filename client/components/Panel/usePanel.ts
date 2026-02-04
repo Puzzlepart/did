@@ -16,7 +16,11 @@ export function usePanel(props: IPanelProps) {
    * `isLightDismiss` prop from the old `Panel` component.
    */
   const onOpenChange = (_: any, data: DialogOpenChangeData) => {
-    if (data.type === 'backdropClick' && !data.open && props.lightDismiss) {
+    if (
+      !data.open &&
+      props.lightDismiss &&
+      (data.type === 'backdropClick' || data.type === 'escapeKeyDown')
+    ) {
       props.onDismiss()
     }
   }

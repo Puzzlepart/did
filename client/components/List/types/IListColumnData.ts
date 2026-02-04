@@ -1,7 +1,13 @@
-import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import { BaseFilter } from 'components/FilterPanel'
 import { ExcelColumnType } from 'utils/exportExcel'
 import { IListGroupProps } from './IListGroupProps'
+import type { IListColumn } from './IListColumn'
+
+export type ListColumnHeaderRenderProps = {
+  column: IListColumn
+  className?: string
+  sortDirection?: 'asc' | 'desc' | null
+}
 
 /**
  * @category List
@@ -9,7 +15,9 @@ import { IListGroupProps } from './IListGroupProps'
 
 export interface IListColumnData {
   /**
-   * Hidden column
+   * Hidden column. For List instances that have customizable columns,
+   * this property is used to determine if the column should be hidden
+   * in the list instance by default.
    */
   hidden?: boolean
 
@@ -27,6 +35,14 @@ export interface IListColumnData {
    * Excel column format
    */
   excelColFormat?: ExcelColumnType
+
+  /**
+   * Custom render function for the column
+   * in Excel exports.
+   *
+   * @param fieldValue Field value
+   */
+  excelRenderFunction?: (fieldValue: any) => string | number
 
   /**
    * Hidden from Excel exports
@@ -63,9 +79,13 @@ export interface IListColumnData {
   ) => BaseFilter
 
   /**
-   * Callback to render a tooltip for the column header
+   * Callback to render custom column header content.
    */
-  onRenderColumnHeader?: (
-    props: IDetailsColumnRenderTooltipProps
-  ) => JSX.Element
+  onRenderColumnHeader?: (props: ListColumnHeaderRenderProps) => JSX.Element
+
+  /**
+   * Hide the mobile label for this column.
+   */
+  hideMobileLabel?: boolean
+
 }

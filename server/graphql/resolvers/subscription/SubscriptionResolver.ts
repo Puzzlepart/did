@@ -63,10 +63,27 @@ export class SubscriptionResolver {
   @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_SUBSCRIPTION })
   @Mutation(() => BaseResult, { description: 'Update subscription' })
   async updateSubscription(
+    @Ctx() context: RequestContext,
     @Arg('settings', () => SubscriptionSettingsInput)
     settings: SubscriptionSettingsInput
   ): Promise<BaseResult> {
     await this._subSvc.updateSubscription(settings)
+    const updatedSubscription = await this._subSvc.getById(
+      context.subscription.id
+    )
+    if (updatedSubscription) {
+      context.subscription = updatedSubscription
+      const request = context.container.get('REQUEST') as any
+      if (request?.user) {
+        request.user.subscription = updatedSubscription
+      }
+      if (request?.session?.passport?.user) {
+        request.session.passport.user.subscription = updatedSubscription
+      }
+      if (request?.session?.save) {
+        request.session.save(() => {})
+      }
+    }
     return { success: true }
   }
 
@@ -76,7 +93,7 @@ export class SubscriptionResolver {
    * @param periodId Period ID
    * @param unlock If true, unlock the period
    */
-  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_SUBSCRIPTION })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.LOCK_UNLOCK_WEEKS })
   @Mutation(() => BaseResult, { description: 'Lock or unlock a period' })
   async lockPeriod(
     @Arg('periodId') periodId: string,

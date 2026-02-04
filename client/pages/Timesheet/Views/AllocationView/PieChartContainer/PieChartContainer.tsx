@@ -1,8 +1,8 @@
-import { format } from '@fluentui/react'
+import format from 'string-format'
 import { UserMessage } from 'components'
 import React from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'
-import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { Legend, Pie, PieChart, Tooltip } from 'recharts'
 import { StyledComponent } from 'types'
 import { useTimesheetContext } from '../../../context'
 import { ChartTooltip } from './ChartTooltip'
@@ -15,6 +15,8 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
 ) => {
   const { state } = useTimesheetContext()
   const { showFullTooltip, cells } = usePieChartContainer(props)
+  const totalDurationText = String(state.selectedPeriod?.totalDuration ?? 0)
+  const entryCountText = String(props.entries?.length ?? 0)
 
   return (
     <div className={PieChartContainer.className}>
@@ -24,18 +26,29 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
           <UserMessage
             text={format(
               props.chart.subTitle,
-              state.selectedPeriod?.totalDuration,
-              props.entries?.length
+              totalDurationText,
+              entryCountText
             )}
             renderProgress={[!!state.loading, props.chart.loadingText]}
             style={{ width: '80%' }}
           />
         </div>
-        <ResponsiveContainer
-          width={props.container?.clientWidth / 2}
-          height={500}
+        <div
+          style={{
+            width: props.container?.clientWidth
+              ? props.container.clientWidth / 2
+              : '100%',
+            height: 500
+          }}
         >
-          <PieChart>
+          <PieChart
+            width={
+              props.container?.clientWidth
+                ? props.container.clientWidth / 2
+                : 400
+            }
+            height={500}
+          >
             <Tooltip
               content={<ChartTooltip showFullTooltip={showFullTooltip.value} />}
             />
@@ -54,7 +67,7 @@ export const PieChartContainer: StyledComponent<IPieChartContainerProps> = (
               {cells}
             </Pie>
           </PieChart>
-        </ResponsiveContainer>
+        </div>
       </FadeIn>
     </div>
   )

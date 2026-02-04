@@ -4,6 +4,9 @@ import React from 'react'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useProjectList } from './useProjectList'
+import { CheckboxVisibility, SelectionMode } from 'components/List/types'
+import { SET_SELECTED_PROJECTS } from '../reducer'
+import { Project } from 'types'
 
 /**
  * Project list component used by `<Projects />`. Renders
@@ -14,6 +17,7 @@ import { useProjectList } from './useProjectList'
 export const ProjectList: TabComponent<IProjectListProps> = (props) => {
   const context = useProjectsContext()
   const { items, columns, menuItems, showInactive } = useProjectList(props)
+  const canSelect = typeof context.dispatch === 'function'
   return (
     <>
       <List
@@ -21,7 +25,6 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
         enableShimmer={context.loading}
         items={items}
         columns={columns}
-        groups={props.groups}
         menuItems={menuItems}
         filterValues={
           showInactive.value
@@ -29,6 +32,18 @@ export const ProjectList: TabComponent<IProjectListProps> = (props) => {
             : {
                 '!inactive': true
               }
+        }
+        checkboxVisibility={CheckboxVisibility.onHover}
+        selectionProps={
+          canSelect
+            ? [
+                SelectionMode.multiple,
+                (selected) =>
+                  context.dispatch?.(
+                    SET_SELECTED_PROJECTS(selected as Project[])
+                  )
+              ]
+            : undefined
         }
       />
       {props.children}

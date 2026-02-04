@@ -1,110 +1,74 @@
-# GitHub Copilot Instructions for DID
+# GitHub Copilot Instructions for did
 
-This document provides instructions and context for GitHub Copilot to better assist with development in the DID project.
+**did** (always stylised in lowercase) is a calendar-to-timesheet web application that syncs Microsoft calendar events into time entries.
 
-## Project Overview
+## Tech Stack
 
-did is a web application built with React and Node.js that manages projects, time reporting, and customer data. The application uses GraphQL for data fetching and manipulation.
+Use these technologies and patterns:
 
-## Project Structure
+- **Frontend:** React 17 with TypeScript, functional components with hooks only
+- **Backend:** Node.js 22 LTS, Express, TypeScript
+- **API:** GraphQL with Apollo Client (client) and TypeGraphQL (server)
+- **Database:** MongoDB with multi-tenant architecture (separate database per customer)
+- **Cache:** Redis for sessions and API caching
+- **Styling:** SCSS modules, Fluent UI components
+- **i18n:** react-i18next (support en-GB, nb, nn)
 
-- `/client`: Frontend React application
-  - `/app`: Core application files
-  - `/components`: Reusable React components
-  - `/graphql-client`: Apollo client setup
-  - `/graphql-mutations`: GraphQL mutation definitions
-  - `/graphql-queries`: GraphQL query definitions
-  - `/hooks`: Custom React hooks
-  - `/i18n`: Internationalization files
-  - `/pages`: Application pages organized by feature
-  - `/parts`: Page sections and partial components
-  - `/theme`: Styling and theme configuration
-  - `/utils`: Utility functions
+## Critical Patterns
 
-- `/server`: Backend Node.js application
-  - `/graphql`: GraphQL schema and resolvers
-  - `/middleware`: Express middleware
-  - `/routes`: API routes
-  - `/services`: Business logic services
-  - `/utils`: Server-side utility functions
-  
-- `/shared`: Code shared between client and server
-  - `/config`: Configuration files
-  - `/utils`: Shared utilities
+### Component Structure
 
-## Code Conventions
+Follow this exact structure for all React components in `/client/components/[ComponentName]/`:
 
-### TypeScript
-
-- Use TypeScript for all new code
-- Prefer interfaces over types for object definitions
-- Use explicit return types for functions
-
-### React
-
-- Use functional components with hooks
-- Follow the file structure pattern in existing components
-- Component files should be named with PascalCase
-
-### GraphQL
-
-- Place fragments in `/client/graphql-client/fragments`
-- Organize queries and mutations by entity/domain
-- Follow naming conventions in existing GraphQL files
-
-### Styling
-
-- Use SCSS modules for component styling
-- Import styles as `styles` from the corresponding `.module.scss` file
-- Follow BEM-like naming within SCSS files
-
-## Project-specific Guidelines
-
-- For internationalization, use the `useTranslation` hook and add new strings to the i18n files
-- User data should include manager information when appropriate
-- Excel exports should maintain consistent formatting with column widths and filters
-- When creating search functionality, implement count display and proper loading states
-
-## Common Tasks
-
-- **Adding a new component**: Create files in `/client/components/[ComponentName]/`
-- **Adding a new page**: Create files in `/client/pages/[Feature]/`
-- **Adding GraphQL operations**: Add to corresponding directories based on operation type
-- **Adding translations**: Update files in `/client/i18n/`
-
-## Testing Approach
-
-- Unit tests should be placed next to the file they test with a `.test.tsx` extension
-- Mock external dependencies when testing components
-
-## Performance Considerations
-
-- Implement virtualization for long lists
-- Use memoization for expensive calculations
-- Optimize GraphQL queries to fetch only needed fields
-
-## Accessibility Requirements
-
-- Ensure all interactive elements have appropriate ARIA attributes
-- Maintain keyboard navigation support
-- Use semantic HTML elements
-
-This guide should be updated as the project evolves and new patterns emerge.
-
-## Additional Context
-
-### Commit Messages
-When asked for help to create commit messages, you should propose running the npm script "commit".
-
-It works as follows:
-
-```bash
-commit "[changes]" "[type]" "[message]"
+```
+ComponentName/
+├── ComponentName.tsx           # Main component (functional with hooks)
+├── ComponentName.module.scss   # SCSS module
+├── index.ts                    # Re-exports
+├── types.ts                    # TypeScript interfaces
+└── useComponentName.ts         # Business logic hook
 ```
 
-Where `[type]` is found in the `package.json` file under the `gitmoji` key, and `[message]` is the commit message you want to create
-based on the type you chose and the git changes. `[changes]` is the git changes you want to commit, use `all` to commit all changes.
+- Separate business logic into `use[ComponentName].ts` hooks
+- Import styles as `styles` from `.module.scss` files
+- Include JSDoc comments for all functions/components
+- Use explicit TypeScript return types
 
-### Creating new components
-When asked to create a new component, you should use [Template ](client/components/Template) as a template for the new component.
-Also include a component logic hook in the same folder as the component, this should be named `use[ComponentName].ts`. This should be used to separate the logic from the component. All components and functions should have a basic jsdoc comment with a description of what they do.
+### Multi-Tenant Architecture
+
+Respect the multi-tenant database architecture:
+
+- Each customer has their own MongoDB database (e.g., `puzzlepart`, `crayon`)
+- Configuration/metadata stored in `main` database
+- Database name determined by user's subscription during authentication
+- Scripts/tools must specify customer database explicitly
+
+### Internationalization
+
+Use `useTranslation` hook for ALL user-facing text:
+
+```typescript
+const { t } = useTranslation()
+return <Button>{t('common.save')}</Button>
+```
+
+Add strings to `/client/i18n/[language].json` files (en-GB, nb, nn).
+
+### GraphQL Organization
+
+- Queries: `/client/graphql-queries/[entity]/`
+- Mutations: `/client/graphql-mutations/[entity]/`
+- Fragments: `/client/graphql-client/fragments/`
+- Server resolvers: `/server/graphql/resolvers/`
+
+## Essential Commands
+
+- `npm run watch` - Primary development command (concurrent client/server with hot reload)
+- `npm run create-env` - Generate .env file (run this first for local setup)
+- `npm run lint:fix` - Auto-fix linting issues
+- `npm run prettier:write` - Auto-format code (single quotes, no semicolons, 2-space indent)
+- `npm test` - Run AVA test suite
+
+## Comprehensive Documentation
+
+For complete architectural details, authentication/security patterns, deployment workflows, GraphQL conventions, environment setup, testing strategies, and performance guidelines, see [AGENTS.md](../AGENTS.md).

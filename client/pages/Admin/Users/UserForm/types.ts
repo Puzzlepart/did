@@ -1,7 +1,7 @@
 import { OperationVariables } from '@apollo/client'
 import { IPanelProps } from 'components/Panel'
 import { User, UserInput } from 'types'
-import _ from 'underscore'
+import { omitTypename } from 'utils'
 
 export interface IUserFormProps extends IPanelProps {
   /**
@@ -54,13 +54,15 @@ function getUserRole(user: User, defaultRole: string): string {
  */
 export function createUserInput(user: User, defaultRole = 'User'): UserInput {
   if (!user) return null
-  const userInput: UserInput = _.omit(
-    {
-      ...user,
-      role: getUserRole(user, defaultRole)
-    },
-    '__typename',
-    'photo'
-  ) as UserInput
-  return userInput
+  const userWithRole = {
+    ...user,
+    role: getUserRole(user, defaultRole)
+  }
+  const cleanedUser = omitTypename(userWithRole)
+
+  // Remove photo field using object destructuring
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { photo: _photo, ...userInput } = cleanedUser as any
+
+  return userInput as UserInput
 }

@@ -8,9 +8,10 @@ import { firstPart } from '../../../shared/utils/firstPart'
 import { RequestContext } from '../../graphql/requestContext'
 import {
   SubscriptionVacationSettings,
-  TimesheetPeriodObject,
   VacationSummary
 } from '../../graphql/resolvers/types'
+// Import TimesheetPeriodObject directly to avoid circular barrel export issues
+import { TimesheetPeriodObject } from '../../graphql/resolvers/timesheet/types/TimesheetPeriodObject'
 import { toFixed } from '../../utils'
 import {
   ConfirmedPeriodsService,
@@ -99,6 +100,11 @@ export class TimesheetService {
       const holidays = await this._holidaysService.find({
         periodId: { $in: periods.map((p) => p.id) }
       })
+      const subscriptionHolidayMap =
+        this._holidaysService.buildSubscriptionHolidayMap(
+          periods,
+          this.context.subscription?.settings?.holidays
+        )
       const data = await this._projectSvc.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
         let period = periods[index]
@@ -112,8 +118,13 @@ export class TimesheetService {
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = forecasted?.hours ?? 0
-        period.holidays = holidays.filter(
+        const periodHolidays = holidays.filter(
           ({ periodId }) => periodId === period.id
+        )
+        const subscriptionHolidays = subscriptionHolidayMap.get(period.id) || []
+        period.holidays = this._holidaysService.mergePeriodHolidays(
+          periodHolidays,
+          subscriptionHolidays
         )
         if (confirmed) {
           period = {

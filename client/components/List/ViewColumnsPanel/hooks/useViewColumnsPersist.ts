@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-unreadable-array-destructuring */
 import { useListContext } from 'components/List/context'
 import { IListColumn } from 'components/List/types'
 import { useBrowserStorage } from 'hooks'
@@ -20,38 +19,43 @@ type PersistedColumn = {
  */
 export function useViewColumnsPersist(columns: IListColumn[]) {
   const context = useListContext()
-  const [persistedColumns, , , set] = useBrowserStorage<PersistedColumn[]>({
+  const storage = useBrowserStorage<PersistedColumn[]>({
     key: `${context.props.persistViewColumns
       ?.replace(' ', '_')
       ?.toLowerCase()}_columns`,
     initialValue: []
   })
+  const persistedColumns = storage[0]
+  const set = storage[3]
 
-  const apply = useCallback((columns: IListColumn[]) => {
-    if (!context.props.persistViewColumns) return columns
-    if (_.isEmpty(persistedColumns)) return columns
-    return [...columns]
-      .sort((a, b) => {
-        const aIndex = persistedColumns.findIndex((c) => c.key === a.key)
-        const bIndex = persistedColumns.findIndex((c) => c.key === b.key)
-        return aIndex - bIndex
-      })
-      .map((column) => {
-        const persistedColumn = persistedColumns.find(
-          (c) => c.key === column.key
-        )
-        return {
-          ...column,
-          data: {
-            ...column.data,
-            hidden:
-              persistedColumn === undefined
-                ? column?.data?.hidden
-                : persistedColumn.hidden
+  const apply = useCallback(
+    (columns: IListColumn[]) => {
+      if (!context.props.persistViewColumns) return columns
+      if (_.isEmpty(persistedColumns)) return columns
+      return [...columns]
+        .sort((a, b) => {
+          const aIndex = persistedColumns.findIndex((c) => c.key === a.key)
+          const bIndex = persistedColumns.findIndex((c) => c.key === b.key)
+          return aIndex - bIndex
+        })
+        .map((column) => {
+          const persistedColumn = persistedColumns.find(
+            (c) => c.key === column.key
+          )
+          return {
+            ...column,
+            data: {
+              ...column.data,
+              hidden:
+                persistedColumn === undefined
+                  ? column?.data?.hidden
+                  : persistedColumn.hidden
+            }
           }
-        }
-      })
-  }, [])
+        })
+    },
+    [context.props.persistViewColumns, persistedColumns]
+  )
 
   const update = useCallback(() => {
     if (context.props.persistViewColumns) {
@@ -62,7 +66,7 @@ export function useViewColumnsPersist(columns: IListColumn[]) {
         }))
       )
     }
-  }, [columns])
+  }, [columns, context.props.persistViewColumns, set])
 
   return { apply, update } as const
 }

@@ -4,7 +4,19 @@ import { EditingState } from './types'
 import { useListInputContext } from '../context'
 import { ListField } from '../types'
 import { ItemCell } from './ItemCell'
-import { IColumn } from '@fluentui/react'
+
+/**
+ * Column definition interface for list items.
+ * Defines the structure and rendering of a column in the items list.
+ */
+export interface IColumn {
+  key: string
+  fieldName: string
+  name: string
+  minWidth?: number
+  maxWidth?: number
+  onRender?: (item: any, index: number) => React.ReactNode
+}
 
 type UseItemsListReturnType = {
   /**

@@ -1,4 +1,4 @@
-import { IColumn } from '@fluentui/react'
+import { ReactNode } from 'react'
 import { ItemColumnRenderType } from '../ItemColumn'
 import { IListColumnData } from './IListColumnData'
 
@@ -6,8 +6,64 @@ import { IListColumnData } from './IListColumnData'
  * @category List
  */
 
-export interface IListColumn<T extends object = any, P extends object = any>
-  extends IColumn {
+export interface IListColumn<T extends object = any, P extends object = any> {
+  /**
+   * Unique key for the column.
+   */
+  key: string
+
+  /**
+   * The display name for the column header.
+   */
+  name: string
+
+  /**
+   * The field name to read from the row item.
+   */
+  fieldName: string
+
+  /**
+   * Minimum width for the column.
+   */
+  minWidth?: number
+
+  /**
+   * Maximum width for the column.
+   */
+  maxWidth?: number
+
+  /**
+   * Default/initial width for resizable columns. Used as the starting
+   * width before any user resizing. Falls back to minWidth if not specified.
+   */
+  defaultWidth?: number
+
+  /**
+   * Ideal/target width for auto-fit scenarios. When columns are auto-fitted
+   * to container, this represents the optimal width. Falls back to defaultWidth.
+   */
+  idealWidth?: number
+
+  /**
+   * Allow resizing. When the parent List component has `resizableColumns={true}`,
+   * this column will be resizable unless explicitly set to false.
+   */
+  isResizable?: boolean
+
+  /**
+   * Allow multiline content.
+   */
+  isMultiline?: boolean
+
+  /**
+   * Custom class name for the column cells.
+   */
+  className?: string
+
+  /**
+   * Custom render callback.
+   */
+  onRender?: (item?: T, index?: number, column?: IListColumn<T, P>) => ReactNode
   /**
    * The label of the column (can differ from the name). This
    * will be preferred in the [ViewColumnsPanel](../ViewColumnsPanel/ViewColumnsPanel.tsx)

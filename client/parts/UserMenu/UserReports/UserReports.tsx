@@ -1,9 +1,10 @@
-import { ChoiceGroup } from '@fluentui/react'
 import {
   Skeleton,
   SkeletonItem,
   Field,
-  ProgressBar
+  ProgressBar,
+  RadioGroup,
+  Radio
 } from '@fluentui/react-components'
 import { Markdown, Panel } from 'components'
 import { UserMessage } from 'components/UserMessage'
@@ -28,13 +29,17 @@ export const UserReports: FC = () => {
         size='small'
         contentGap={25}
       >
-        <ChoiceGroup
-          defaultSelectedKey={preset?.key}
-          onChange={(_, option) => {
-            setPreset(option)
+        <RadioGroup
+          defaultValue={preset?.key}
+          onChange={(_, data) => {
+            const selectedOption = queries.find((q) => q.key === data.value)
+            setPreset(selectedOption)
           }}
-          options={queries}
-        />
+        >
+          {queries.map((option) => (
+            <Radio key={option.key} value={option.key} label={option.text} />
+          ))}
+        </RadioGroup>
         {query.loading ? (
           <Skeleton>
             <SkeletonItem style={{ height: 66 }} />

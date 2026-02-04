@@ -1,10 +1,10 @@
-import { useTheme } from '@fluentui/react'
-import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import { CheckboxProps, SliderProps, tokens } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { DateObject } from 'DateUtils'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
+import { HolidaysField } from './SettingsSection/HolidaysField'
 import { ISettingsSectionProps } from './SettingsSection/types'
 import { SubscriptionSettingField } from './types'
 
@@ -16,7 +16,6 @@ import { SubscriptionSettingField } from './types'
  */
 export function useSubscriptionConfig() {
   const { subscription } = useAppContext()
-  const theme = useTheme()
   const { t } = useTranslation()
   return [
     {
@@ -57,7 +56,7 @@ export function useSubscriptionConfig() {
             description: t(
               'admin.subscriptionSettings.navBackgroundDescription'
             ),
-            defaultValue: theme?.semanticColors?.menuHeader
+            defaultValue: tokens.colorBrandBackground
           }
         },
         {
@@ -298,6 +297,33 @@ export function useSubscriptionConfig() {
       ]
     },
     {
+      id: 'holidays',
+      icon: 'CalendarMonth',
+      text: t('admin.holidaysHeader'),
+      fields: [
+        {
+          id: 'enabled',
+          type: 'bool',
+          props: {
+            label: t('admin.holidaysEnabledLabel'),
+            description: t('admin.holidaysEnabledDescription')
+          }
+        },
+        {
+          id: 'holidays',
+          type: 'custom',
+          settingsKey: 'holidays',
+          component: HolidaysField,
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.holidays?.enabled,
+          props: {
+            label: t('admin.holidayListHeader'),
+            description: t('admin.holidaysDescription')
+          }
+        } as SubscriptionSettingField
+      ]
+    },
+    {
       id: 'adsync',
       icon: 'PersonSync',
       text: t('admin.adsync'),
@@ -322,7 +348,8 @@ export function useSubscriptionConfig() {
             preferredLanguage: t('common.preferredLanguageLabel'),
             department: t('common.departmentLabel'),
             officeLocation: t('common.officeLocationLabel'),
-            manager: t('common.managerLabel')
+            manager: t('common.managerLabel'),
+            accountEnabled: t('common.accountEnabledLabel')
           },
           props: {
             label: t('admin.adUserSyncPropertiesLabel'),

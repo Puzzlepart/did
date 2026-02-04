@@ -10,6 +10,10 @@ fragment TimeEntryFragment on TimeEntry {
     key
     name
   }
+  partner {
+    key
+    name
+  }
   project {
     tag
     name
@@ -17,6 +21,12 @@ fragment TimeEntryFragment on TimeEntry {
     parent {
       tag
       name
+    }
+    labels {
+      name
+      description
+      color
+      icon
     }
   }
   resource {

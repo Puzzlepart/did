@@ -1,9 +1,327 @@
 .list {
-  margin: 0 0 25px 0;
+  margin: 1rem 0;
   position: relative;
+}
 
-  [class*='ms-DetailsRow-cellCheck'] {
-    display: flex;
-    align-items: center;
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 8px 0;
+  border-top: none;
+}
+
+.minimalHeaderColumns {
+  .headerCell,
+  .treeGridHeaderCell {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+}
+
+.dataGrid {
+  width: 100%;
+}
+
+.dataGrid :global(.fui-TableResizeHandle) {
+  opacity: 1;
+}
+
+.dataGrid :global(.fui-TableResizeHandle::after) {
+  width: 2px;
+  background-color: rgb(210, 210, 210);
+}
+
+.dataGrid :global(.fui-TableResizeHandle:hover::after) {
+  background-color: rgb(170, 170, 170);
+}
+
+.dataGridHeaderRow:global(.fui-TableRow),
+.treeGridHeaderRow:global(.fui-TreeGridRow) {
+  border-top: 1px solid var(--colorNeutralStroke1);
+  align-items: center;
+}
+
+.dataGridHeaderRow:global(.fui-TableRow) :global(.fui-TableHeaderCell__button) {
+  min-width: 0;
+}
+.treeGridHeaderRow:global(.fui-TreeGridRow) {
+  border-top: 0px solid transparent;
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--list-grid-template, auto);
+}
+
+.headerCell,
+.treeGridHeaderCell {
+  padding-top: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.treeGridHeaderContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.treeGridToggleAllButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.treeGridToggleAllButton:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.treeGridToggleAllButton:focus-visible {
+  outline: 2px solid rgb(140, 140, 140);
+  outline-offset: 2px;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.headerSortable {
+  cursor: pointer;
+}
+
+.headerText {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sortIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dataGridRow:global(.fui-TableRow) {
+  min-height: 40px;
+  align-items: center;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--colorNeutralStroke1);
+}
+
+.cell,
+.treeGridCell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cell > *,
+.treeGridCell > * {
+  min-width: 0;
+}
+
+.cell:not(.selectionCell),
+.treeGridCell {
+  :global(.fui-Icon-regular),
+  :global(.fui-Icon-filled),
+  :global(.fui-Icon-light),
+  :global(.fui-Icon-color),
+  :global(.fui-Icon-font) {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 20px !important;
+    line-height: 20px;
+    flex: 0 0 20px;
+  }
+}
+
+.selectionCell {
+  justify-content: center;
+  width: 40px;
+  max-width: 40px;
+  padding: 0 6px;
+}
+
+.selectionCellHover {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.selectionHover:hover {
+  .selectionCellHover {
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  margin-top: 12px;
+}
+
+.skeletonRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.skeletonCell {
+  height: 18px;
+}
+
+.treeGrid {
+  width: 100%;
+}
+
+.treeGridRow:global(.fui-TreeGridRow) {
+  min-height: 40px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--list-grid-template, auto);
+  // padding: 0.1rem 0.6rem;
+  padding: 0.2rem 0.5rem 0.2rem 2rem;
+  &:hover {
+    background-color: var(--colorNeutralBackground1Hover);
+    border-radius: 3px;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.multiline {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.groupHeaderRow {
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  border-top: 1px solid var(--colorNeutralStroke1);
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  &:hover {
+    background-color: var(--colorNeutralBackground1Hover) !important;
+    border-radius: 3px;
+  }
+}
+
+.groupHeaderCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: var(--fontSizeBase400);
+  font-weight: 400;
+  color: var(--colorNeutralForeground1);
+}
+
+.groupHeaderTotal {
+  margin-left: auto;
+  font-weight: normal;
+  color: var(--colorNeutralForeground2);
+  background-color: var(--colorNeutralBackground3);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .list {
+    margin: 0.4rem 0;
+  }
+
+  .dataGrid,
+  .treeGrid {
+    // Force a single-column layout on narrow screens
+    --list-grid-template: 1fr !important;
+  }
+
+  .dataGridHeaderRow:global(.fui-TableRow),
+  .treeGridHeaderRow:global(.fui-TreeGridRow) {
+    display: none;
+  }
+
+  .dataGridRow:global(.fui-TableRow),
+  .treeGridRow:global(.fui-TreeGridRow) {
+    grid-template-columns: 1fr !important;
+    padding: 6px 8px;
+    margin: 4px 0;
+    border: 1px solid var(--colorNeutralStroke1);
+    border-radius: 6px;
+    background-color: var(--colorNeutralBackground2);
+    row-gap: 4px;
+    min-height: 44px;
+  }
+
+  .treeGridRow:global(.fui-TreeGridRow) {
+    padding-left: 12px;
+  }
+
+  .selectionCell {
+    width: auto;
+    max-width: none;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .cell,
+  .treeGridCell {
+    align-items: flex-start;
+  }
+
+  .cell[data-label]:not([data-label='']),
+  .treeGridCell[data-label]:not([data-label='']) {
+    display: grid;
+    grid-template-columns: 70px minmax(0, 1fr);
+    column-gap: 8px;
+  }
+
+  .cell[data-label]:not([data-label=''])::before,
+  .treeGridCell[data-label]:not([data-label=''])::before {
+    content: attr(data-label);
+    color: var(--colorNeutralForeground2);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+
+  .groupHeaderRow {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-top: 0.4rem;
+    padding: 0.4rem 0.25rem;
+    border-top: 1px solid var(--colorNeutralStroke1);
+    background-color: var(--colorNeutralBackground2);
+    border-radius: 6px;
+  }
+
+  .groupHeaderCell {
+    flex-wrap: wrap;
+    gap: 4px;
+    color: var(--colorNeutralForeground1);
   }
 }

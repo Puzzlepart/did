@@ -7,8 +7,10 @@ import { PermissionScope } from '../../../../shared/config/security'
 import {
   GitHubService,
   MSGraphService,
+  MSGraphDeltaService,
   SubscriptionService,
-  UserService
+  UserService,
+  GraphUsersUpdateService
 } from '../../../services'
 import { environment } from '../../../utils'
 import { IAuthOptions } from '../../authChecker'
@@ -21,7 +23,9 @@ import {
   UserFeedback,
   UserFeedbackResult,
   UserInput,
-  UserQuery
+  UserQuery,
+  UserSyncResult,
+  UserDatabaseUpdateStatus
 } from './types'
 const debug = require('debug')('graphql/resolvers/user')
 
@@ -43,15 +47,19 @@ export class UserResolver {
    * Constructor for UserResolver
    *
    * @param _msgraphSvc - MS Graph service
+   * @param _msgraphDeltaSvc - MS Graph Delta sync service
    * @param _userSvc - User service
    * @param _subSvc - Subscription service
    * @param _githubSvc - GitHub service
+   * @param _graphUsersUpdateSvc - Graph Users Update service
    */
   constructor(
     private readonly _msgraphSvc: MSGraphService,
+    private readonly _msgraphDeltaSvc: MSGraphDeltaService,
     private readonly _userSvc: UserService,
     private readonly _subSvc: SubscriptionService,
-    private readonly _githubSvc: GitHubService
+    private readonly _githubSvc: GitHubService,
+    private readonly _graphUsersUpdateSvc: GraphUsersUpdateService
   ) {}
 
   /**
@@ -83,14 +91,61 @@ export class UserResolver {
   }
 
   /**
-   * Get Active Directory users
+   * Get Active Directory users from cached MongoDB collection
+   * Uses delta sync for efficient updates. If no users exist in the database,
+   * performs initial sync automatically.
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
   @Query(() => [ActiveDirectoryUser], {
-    description: 'Get all users from Active Directory'
+    description: 'Get all users from Entra ID (via cached MongoDB collection)'
   })
-  public activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
-    return this._msgraphSvc.getUsers()
+  public async activeDirectoryUsers(): Promise<ActiveDirectoryUser[]> {
+    try {
+      // Check if initial sync is needed
+      const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
+
+      // If initial sync is needed, trigger it in the background
+      if (!syncStatus.hasBeenSynced || syncStatus.userCount === 0) {
+        debug('No users in cache, triggering initial sync in background')
+        this._msgraphDeltaSvc.syncUsers().catch((error: any) => {
+          debug('Background initial sync failed:', error.message)
+        })
+      }
+
+      // Return cached users from MongoDB with Redis cache
+      return await this._msgraphDeltaSvc.getUsers()
+    } catch (error) {
+      debug('Error getting Active Directory users:', error.message)
+      throw error
+    }
+  }
+
+  /**
+   * Search Active Directory users with filters from cached MongoDB collection
+   * Falls back to direct MS Graph search if cache is empty
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.LIST_USERS })
+  @Query(() => [ActiveDirectoryUser], {
+    description: 'Search users from Entra ID with filters'
+  })
+  public async searchActiveDirectoryUsers(
+    @Arg('search', () => String) search: string,
+    @Arg('limit', () => Number, { defaultValue: 10 }) limit: number
+  ): Promise<ActiveDirectoryUser[]> {
+    try {
+      const syncStatus = await this._msgraphDeltaSvc.getSyncStatus()
+
+      // Use cached search if users are synced, otherwise fall back to direct MS Graph
+      if (syncStatus.hasBeenSynced && syncStatus.userCount > 0) {
+        return await this._msgraphDeltaSvc.searchUsers(search, limit)
+      } else {
+        debug('Cache empty, falling back to direct MS Graph search')
+        return await this._msgraphSvc.searchUsers(search, limit)
+      }
+    } catch (error) {
+      debug('Error searching Active Directory users:', error.message)
+      throw error
+    }
   }
 
   /**
@@ -211,6 +266,149 @@ export class UserResolver {
     } catch (error) {
       debug('There was an issue updating the user timebank: ', error.message)
       return { success: false }
+    }
+  }
+
+  /**
+   * Sync Active Directory users using delta query.
+   * Performs incremental sync if delta link exists, otherwise full sync.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => UserSyncResult, {
+    description: 'Sync Active Directory users using delta query'
+  })
+  public async syncActiveDirectoryUsers(
+    @Arg('forceFullSync', { nullable: true, defaultValue: false })
+    forceFullSync: boolean
+  ): Promise<UserSyncResult> {
+    const syncId = `sync-${Date.now()}`
+    debug(
+      `[${syncId}] 🔄 Starting Active Directory user sync (forceFullSync: ${forceFullSync})...`
+    )
+    try {
+      debug('Starting Active Directory user sync...')
+      const result = await this._msgraphDeltaSvc.syncUsers(forceFullSync)
+      debug(`[${syncId}] ✅ Sync completed successfully:`, {
+        upserted: result.upserted,
+        deleted: result.deleted,
+        totalUsers: result.totalUsers,
+        isFullSync: result.isFullSync,
+        duration: `${result.duration}ms`
+      })
+      return {
+        success: true,
+        error: null,
+        upserted: result.upserted,
+        deleted: result.deleted,
+        totalUsers: result.totalUsers,
+        isFullSync: result.isFullSync,
+        duration: result.duration
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`[${syncId}] ❌ Sync failed:`, {
+        name: error.name,
+        message: error.message,
+        code: error.code,
+        statusCode: error.statusCode
+      })
+      debug('Error syncing Active Directory users:', error.message)
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
+    }
+  }
+
+  /**
+   * Force a full sync of Active Directory users.
+   * Clears all cached data and re-syncs from scratch.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => UserSyncResult, {
+    description: 'Force a full sync of Active Directory users'
+  })
+  public async forceFullSyncActiveDirectoryUsers(): Promise<UserSyncResult> {
+    try {
+      debug('Forcing full Active Directory user sync...')
+      const result = await this._msgraphDeltaSvc.forceFullSync()
+      return {
+        success: true,
+        error: null,
+        upserted: result.upserted,
+        deleted: result.deleted,
+        totalUsers: result.totalUsers,
+        isFullSync: result.isFullSync,
+        duration: result.duration
+      }
+    } catch (error) {
+      debug('Error forcing full sync:', error.message)
+      return {
+        success: false,
+        error: _.pick(error, ['name', 'message', 'code', 'statusCode'])
+      }
+    }
+  }
+
+  /**
+   * Start background update of user database from Entra ID.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Mutation(() => UserDatabaseUpdateStatus, {
+    description: 'Start background user database update from Entra ID'
+  })
+  public async startUserDatabaseUpdate(
+    @Arg('concurrency', () => Number, { defaultValue: 10 }) concurrency: number
+  ): Promise<UserDatabaseUpdateStatus> {
+    const status = await this._graphUsersUpdateSvc.start(concurrency)
+    return {
+      running: status.running,
+      startedAt: status.startedAt,
+      finishedAt: status.finishedAt,
+      totalUsers: status.totalUsers,
+      processed: status.processed,
+      failures: status.failures,
+      rateLimitErrors: status.rateLimitErrors || 0,
+      networkErrors: status.networkErrors || 0,
+      authErrors: status.authErrors || 0,
+      otherErrors: status.otherErrors || 0,
+      lastUserId: status.lastUserId,
+      progressPercent:
+        status.totalUsers > 0
+          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) /
+            100
+          : 0
+    }
+  }
+
+  /**
+   * Get background user database update status.
+   */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_USERS })
+  @Query(() => UserDatabaseUpdateStatus, {
+    nullable: true,
+    description: 'Get background user database update status'
+  })
+  public async userDatabaseUpdateStatus(): Promise<UserDatabaseUpdateStatus> {
+    const status = await this._graphUsersUpdateSvc.getStatus()
+    if (!status) return null
+    return {
+      running: status.running,
+      startedAt: status.startedAt,
+      finishedAt: status.finishedAt,
+      totalUsers: status.totalUsers,
+      processed: status.processed,
+      failures: status.failures,
+      rateLimitErrors: status.rateLimitErrors || 0,
+      networkErrors: status.networkErrors || 0,
+      authErrors: status.authErrors || 0,
+      otherErrors: status.otherErrors || 0,
+      lastUserId: status.lastUserId,
+      progressPercent:
+        status.totalUsers > 0
+          ? Math.round((status.processed / status.totalUsers) * (100 * 100)) /
+            100
+          : 0
     }
   }
 

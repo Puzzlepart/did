@@ -1,5 +1,6 @@
-import { ITextFieldProps } from '@fluentui/react'
 import { CheckboxProps, SliderProps } from '@fluentui/react-components'
+import { IInputFieldProps } from 'components/FormControl/InputControl'
+import React from 'react'
 import { IImageFieldProps } from './SettingsSection/ImageField'
 import { SubscriptionSettings } from 'types'
 
@@ -8,6 +9,12 @@ interface ISubscriptionSettingBase<T = any> {
    * The ID of the setting
    */
   id: string
+
+  /**
+   * Optional override for the settings key path.
+   * Defaults to `${sectionId}.${id}` when not provided.
+   */
+  settingsKey?: string
 
   /**
    * Conditionally disable the setting based on the current settings
@@ -29,7 +36,7 @@ interface ISubscriptionSettingBase<T = any> {
   props: T
 }
 
-export interface ISubscriptionSettingText<T = ITextFieldProps>
+export interface ISubscriptionSettingText<T = IInputFieldProps>
   extends ISubscriptionSettingBase<T> {
   type: 'text'
 }
@@ -85,6 +92,16 @@ export interface ISubscriptionSettingList<T = any>
   itemAlreadyAddedMessage?: string
 }
 
+export interface ISubscriptionSettingCustom<T = any>
+  extends ISubscriptionSettingBase<T> {
+  type: 'custom'
+
+  /**
+   * The custom component to render
+   */
+  component: React.ComponentType<any>
+}
+
 export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingText<T>
   | ISubscriptionSettingBool<T>
@@ -92,3 +109,4 @@ export type SubscriptionSettingField<T = any> =
   | ISubscriptionSettingCheckboxMulti<T>
   | ISubscriptionSettingImage
   | ISubscriptionSettingList
+  | ISubscriptionSettingCustom

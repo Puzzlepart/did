@@ -16,18 +16,21 @@ export const getPermissions = (
     name: t('permissions.accessTimesheet'),
     description: t('permissions.accessTimesheetDescription'),
     iconName: 'TimeSheet',
+    api: true,
     category: 'timesheet'
   },
   [PermissionScope.ACCESS_CUSTOMERS]: {
     name: t('permissions.accessCustomers'),
     description: t('permissions.accessCustomersDescription'),
     iconName: 'People',
+    api: true,
     category: 'customers'
   },
   [PermissionScope.ACCESS_PROJECTS]: {
     name: t('permissions.accessProjects'),
     description: t('permissions.accessProjectsDescription'),
     iconName: 'ProjectCollection',
+    api: true,
     category: 'projects'
   },
   [PermissionScope.ACCESS_ADMIN]: {
@@ -132,6 +135,13 @@ export const getPermissions = (
     name: t('permissions.inviteExternalUsers'),
     description: t('permissions.inviteExternalUsersDescription'),
     iconName: 'Globe',
+    category: 'admin'
+  },
+  [PermissionScope.LOCK_UNLOCK_WEEKS]: {
+    name: t('permissions.lockUnlockWeeks'),
+    description: t('permissions.lockUnlockWeeksDescription'),
+    iconName: 'LockClosed',
+    api: true,
     category: 'admin'
   }
 })

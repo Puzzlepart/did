@@ -8,74 +8,80 @@
 <br />
 
 
-[![version](https://img.shields.io/badge/version-0.15.8-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.19.0-green.svg)](https://semver.org)
 
 <details>
 <summary>📖 Table of Contents</summary>
 <br />
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#table-of-contents)
+[](#table-of-contents)
 
 ## ➤ Table of Contents
 
-	* [➤ Roadmap](#-roadmap)
-	* [➤ Backlog](#-backlog)
-	* [➤ Environments](#-environments)
-	* [➤ Contributing](#-contributing)
-		* [Getting started](#getting-started)
-			* [Set up environment](#set-up-environment)
-		* [Code structure](#code-structure)
-		* [Node version](#node-version)
-		* [Authentication](#authentication)
-			* [Google](#google)
-		* [Branching / Deploying](#branching--deploying)
-			* [Main branch](#main-branch)
-			* [Dev branch](#dev-branch)
-		* [Feature branches](#feature-branches)
-			* [Naming conventions](#naming-conventions)
-			* [See also](#see-also)
-		* [GraphQL](#graphql)
-			* [Extensions for VS Code](#extensions-for-vs-code)
-		* [Maintenance Mode](#maintenance-mode)
-* [➤ Enable maintenance mode](#-enable-maintenance-mode)
-* [➤ Disable maintenance mode](#-disable-maintenance-mode)
-* [➤ or unset the variable](#-or-unset-the-variable)
-		* [Documentation](#documentation)
-	* [➤ Contributors](#-contributors)
+* [➤ Roadmap](#-roadmap)
+* [➤ Backlog](#-backlog)
+* [➤ Environments](#-environments)
+* [➤ Contributing](#-contributing)
+	* [Getting started](#getting-started)
+		* [Set up environment](#set-up-environment)
+	* [Code structure](#code-structure)
+	* [Node version](#node-version)
+	* [Authentication](#authentication)
+		* [Google](#google)
+	* [Branching / Deploying](#branching--deploying)
+		* [Main branch](#main-branch)
+		* [Dev branch](#dev-branch)
+	* [Feature branches](#feature-branches)
+		* [Naming conventions](#naming-conventions)
+		* [See also](#see-also)
+	* [GraphQL](#graphql)
+		* [Extensions for VS Code](#extensions-for-vs-code)
+	* [Maintenance Mode](#maintenance-mode)
+	* [Documentation](#documentation)
+* [➤ ➤ Microsoft Edge Sidebar Extension](#--microsoft-edge-sidebar-extension)
+	* [Key Benefits](#key-benefits)
+	* [Installation](#installation)
+	* [Documentation](#documentation-1)
+	* [Use Cases](#use-cases)
+* [➤ Contributors](#-contributors)
 </details>
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#roadmap)
+[](#roadmap)
 
 ## ➤ Roadmap
 
 | Milestone                                                    | Release date | Version                                                      |
 | ------------------------------------------------------------ | ------------ | ------------------------------------------------------------ |
-| [💧 &nbsp;1 - &nbsp;Hydrogen](https://github.com/Puzzlepart/did365/milestone/1) | 03.02.2020   | [![version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://semver.org) |
-| [🎈 &nbsp;2 - &nbsp;Helium](https://github.com/Puzzlepart/did365/milestone/2) | 02.04.2020   | [![version](https://img.shields.io/badge/version-0.3.0-green.svg)](https://semver.org) |
-| [🔋 &nbsp;3 - &nbsp;Lithium](https://github.com/Puzzlepart/did365/milestone/5) | 11.05.2020   | [![version](https://img.shields.io/badge/version-0.4.0-green.svg)](https://semver.org) |
-| [🛰 &nbsp;4 - &nbsp;Beryllium](https://github.com/Puzzlepart/did365/milestone/3) | 22.05.2020   | [![version](https://img.shields.io/badge/version-0.5.0-green.svg)](https://semver.org) |
-| [☄️ &nbsp;5 - &nbsp;Boron](https://github.com/Puzzlepart/did365/milestone/4) | 19.08.2020   | [![version](https://img.shields.io/badge/version-0.6.0-green.svg)](https://semver.org) |
-| [🌱 &nbsp;6 - &nbsp;Carbon](https://github.com/Puzzlepart/did365/milestone/6) | 09.09.2020   | [![version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://semver.org) |
-| [💨 &nbsp;7 - &nbsp;Nitrogen](https://github.com/Puzzlepart/did365/milestone/7) | 15.10.2020   | [![version](https://img.shields.io/badge/version-0.8.0-green.svg)](https://semver.org) |
-| [🅾️ &nbsp;8 - &nbsp;Oxygen](https://github.com/Puzzlepart/did365/milestone/8) | 15.12.2020   | [![version](https://img.shields.io/badge/version-0.9.0-green.svg)](https://semver.org) |
-| [🦷 &nbsp;9 - &nbsp;Fluor](https://github.com/Puzzlepart/did365/milestone/9) | 27.04.2021   | [![version](https://img.shields.io/badge/version-0.10.0-yellow.svg)](https://semver.org) |
-| [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-red.svg)](https://semver.org) |
-| [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did365/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-red.svg)](https://semver.org) |
-| [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did365/milestone/12) | 21.02.2024      | [![version](https://img.shields.io/badge/version-0.13.0-red.svg)](https://semver.org) |
-| [⚪ &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did365/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-red.svg)](https://semver.org) |
-| [🛎️ &nbsp;14 -  &nbsp;Silisium](https://github.com/Puzzlepart/did365/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-red.svg)](https://semver.org) |
-| [🦿 &nbsp;15 -  &nbsp;Fosfor](https://github.com/Puzzlepart/did365/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-red.svg)](https://semver.org) |
+| [💧 &nbsp;1 - &nbsp;Hydrogen](https://github.com/Puzzlepart/did/milestone/1) | 03.02.2020   | [![version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://semver.org) |
+| [🎈 &nbsp;2 - &nbsp;Helium](https://github.com/Puzzlepart/did/milestone/2) | 02.04.2020   | [![version](https://img.shields.io/badge/version-0.3.0-green.svg)](https://semver.org) |
+| [🔋 &nbsp;3 - &nbsp;Lithium](https://github.com/Puzzlepart/did/milestone/5) | 11.05.2020   | [![version](https://img.shields.io/badge/version-0.4.0-green.svg)](https://semver.org) |
+| [🛰 &nbsp;4 - &nbsp;Beryllium](https://github.com/Puzzlepart/did/milestone/3) | 22.05.2020   | [![version](https://img.shields.io/badge/version-0.5.0-green.svg)](https://semver.org) |
+| [☄️ &nbsp;5 - &nbsp;Boron](https://github.com/Puzzlepart/did/milestone/4) | 19.08.2020   | [![version](https://img.shields.io/badge/version-0.6.0-green.svg)](https://semver.org) |
+| [🌱 &nbsp;6 - &nbsp;Carbon](https://github.com/Puzzlepart/did/milestone/6) | 09.09.2020   | [![version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://semver.org) |
+| [💨 &nbsp;7 - &nbsp;Nitrogen](https://github.com/Puzzlepart/did/milestone/7) | 15.10.2020   | [![version](https://img.shields.io/badge/version-0.8.0-green.svg)](https://semver.org) |
+| [🅾️ &nbsp;8 - &nbsp;Oxygen](https://github.com/Puzzlepart/did/milestone/8) | 15.12.2020   | [![version](https://img.shields.io/badge/version-0.9.0-green.svg)](https://semver.org) |
+| [🦷 &nbsp;9 - &nbsp;Fluor](https://github.com/Puzzlepart/did/milestone/9) | 27.04.2021   | [![version](https://img.shields.io/badge/version-0.10.0-green.svg)](https://semver.org) |
+| [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did/milestone/10) | 16.11.2022      | [![version](https://img.shields.io/badge/version-0.11.0-green.svg)](https://semver.org) |
+| [🧂 &nbsp;11 - &nbsp;Sodium](https://github.com/Puzzlepart/did/milestone/11) | 17.04.2023      | [![version](https://img.shields.io/badge/version-0.12.0-green.svg)](https://semver.org) |
+| [🧲 &nbsp;12 - &nbsp;Magnesium](https://github.com/Puzzlepart/did/milestone/12) | 21.02.2024      | [![version](https://img.shields.io/badge/version-0.13.0-green.svg)](https://semver.org) |
+| [🥫 &nbsp;13 - &nbsp;Aluminium](https://github.com/Puzzlepart/did/milestone/13) | 25.02.2025      | [![version](https://img.shields.io/badge/version-0.13.4-green.svg)](https://semver.org) |
+| [🖥️ &nbsp;14 -  &nbsp;Silicon](https://github.com/Puzzlepart/did/milestone/13) | 12.03.2025 | [![version](https://img.shields.io/badge/version-0.14.10-green.svg)](https://semver.org) |
+| [🎆 &nbsp;15 -  &nbsp;Phosphorous](https://github.com/Puzzlepart/did/milestone/15) | 19.03.2025 | [![version](https://img.shields.io/badge/version-0.15.0-green.svg)](https://semver.org) |
+| [🥚 &nbsp;16 -  &nbsp;Sulfur](https://github.com/Puzzlepart/did/milestone/16) | 25.09.2025 | [![version](https://img.shields.io/badge/version-0.16.0-green.svg)](https://semver.org) |
+| [🧼&nbsp;17 -  &nbsp;Chlorine](https://github.com/Puzzlepart/did/milestone/17) | 16.12.2025 | [![version](https://img.shields.io/badge/version-0.17.0-green.svg)](https://semver.org) |
+| [☁️&nbsp;18 -  &nbsp;Argon](https://github.com/Puzzlepart/did/milestone/18) | 08.01.2026 | [![version](https://img.shields.io/badge/version-0.18.0-yellow.svg)](https://semver.org) |
+| [🧴&nbsp;19 -  &nbsp;Potassium](https://github.com/Puzzlepart/did/milestone/18) | 19.01.2026 | [![version](https://img.shields.io/badge/version-0.19.0-red.svg)](https://semver.org) |
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#backlog)
+[](#backlog)
 
 ## ➤ Backlog
 
 Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#environments)
+[](#environments)
 
 ## ➤ Environments
 
@@ -89,7 +95,7 @@ Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#contributing)
+[](#contributing)
 
 ## ➤ Contributing
 
@@ -200,8 +206,7 @@ See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) fo
 ### Branching / Deploying
 
 #### Main branch
-
-The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did.puzzlepart.com](https://did.puzzlepart.com)  
+After successful review and CI/CD pipeline completion, changes are deployed to the staging slot at [didapp-staging.azurewebsites.net](https://didapp-staging.azurewebsites.net). Once verified in staging, the changes can be swapped to production at [did.puzzlepart.com](https://did.puzzlepart.com).
 
 #### Dev branch
 The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net).
@@ -242,26 +247,7 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 
 The application supports a maintenance mode that can be enabled during deployments or system updates. When maintenance mode is enabled, all requests will be served with a maintenance page instead of the regular application.
 
-To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment:
-
-```bash
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#enable-maintenance-mode)
-
-# ➤ Enable maintenance mode
-export MAINTENANCE_MODE=true
-
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#disable-maintenance-mode)
-
-# ➤ Disable maintenance mode
-export MAINTENANCE_MODE=false
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#or-unset-the-variable)
-
-# ➤ or unset the variable
-unset MAINTENANCE_MODE
-```
+To enable maintenance mode, set the `MAINTENANCE_MODE` environment variable to `true` or `1`. This can be done in your deployment process or directly in your environment.  
 
 API routes (paths starting with `/api/`) will still function normally even in maintenance mode to allow for background services to continue functioning.
 
@@ -271,12 +257,45 @@ _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/cloudy.png)](#contributors)
+[](#-microsoft-edge-sidebar-extension)
+
+## ➤ ➤ Microsoft Edge Sidebar Extension
+
+did includes a **proof-of-concept Microsoft Edge Sidebar extension** that brings your timesheet directly into Edge's sidebar for seamless access while working in Office 365 web apps and other browser-based applications.
+
+### Key Benefits
+
+- **Always Accessible**: Keep your timesheet visible while working in Outlook, Teams, SharePoint, and other web apps
+- **No Context Switching**: Update your timesheet without leaving your current work context
+- **Multi-Environment Support**: Switch between production, staging, development, and local environments
+- **Native Integration**: More "app-like" feel with persistent sidebar access
+
+### Installation
+
+1. Navigate to `edge://extensions/` in Microsoft Edge
+2. Enable "Developer mode"
+3. Click "Load unpacked" and select the `/extension` folder
+4. Click the did icon in your toolbar to open the sidebar
+
+### Documentation
+
+For detailed installation instructions, usage guide, and technical details, see the [extension README](./extension/README.md).
+
+### Use Cases
+
+- **Outlook on the Web**: Track time while managing your calendar and emails
+- **Office 365 Apps**: Keep timesheet accessible in Teams, SharePoint, Word Online, Excel Online
+- **Line of Business Apps**: Access did from any web-based application
+- **Development**: Test against local or development instances of did
+
+
+
+[](#contributors)
 
 ## ➤ Contributors
 	
 
-| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](undefined) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](undefined) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](undefined) |
+| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](https://github.com/damsleth) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](https://github.com/olemp) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](https://github.com/okms) |
 |:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
-| [Carl Joakim Damsleth](undefined)                | [Ole Martin Pettersen](undefined)                | [Ole Kristian Mørch-Storstein](undefined)        |
-| [carl.joakim.damsleth@puzzlepart.com](mailto:carl.joakim.damsleth@puzzlepart.com) | [olemp@puzzlepart.com](mailto:olemp@puzzlepart.com) | [olekms@puzzlepart.com](mailto:olekms@puzzlepart.com) |
+| [Carl Joakim Damsleth](https://github.com/damsleth) | [Ole Martin Pettersen](https://github.com/olemp) | [Ole Kristian Mørch-Storstein](https://github.com/okms) |
+| [cj.gh@d0.si](mailto:cj.gh@d0.si)                | [olem.pettersen@gmail.com](mailto:olem.pettersen@gmail.com) | [ok@okms.me](mailto:ok@okms.me)                  |

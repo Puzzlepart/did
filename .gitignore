@@ -32,7 +32,6 @@ client/**/*js.map
 
 doc/
 .DS_Store
-.localtunnel
 schema.gql
 *.mp3
 revision.txt
@@ -40,3 +39,24 @@ revision.txt
 .vscode/chrome-debug-user-data
 client/components/Template
 .github/copilot-instructions.md
+
+# Docker
+did-package.zip
+docker-compose.local.yml
+
+# MongoDB development data (sensitive)
+docker/data/**/*.json
+
+# Logs
+*.log
+logs/
+
+# temp folder, for e.g. copilot implementation plans
+.tmp
+
+# doc folder for LLM generated documentation
+_doc
+_todo
+
+# code reviews
+CODE_REVIEW_*

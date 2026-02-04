@@ -7,6 +7,9 @@ import { useBoolean } from 'usehooks-ts'
 import { useProjectsContext } from '../context'
 import { IProjectListProps } from './types'
 import { useColumns } from './useColumns'
+import { usePermissions } from 'hooks/user/usePermissions'
+import { PermissionScope } from 'security'
+import { OPEN_BULK_EDIT_PANEL } from '../reducer'
 
 /**
  * Component logic hook for `<ProjecList />`. This hook is used to
@@ -24,9 +27,11 @@ export function useProjectList(props: IProjectListProps) {
   const context = useProjectsContext()
   const showInactive = useBoolean(false)
   const columns = useColumns(props)
+  const [, hasPermission] = usePermissions()
 
   const items = useMemo(() => {
-    let projects = context?.state?.projects ?? []
+    // Allow an explicit override of the items (e.g. partner projects on CustomerDetails page)
+    let projects = props.overrideItems ?? context?.state?.projects ?? []
     if (props.id === 'm') {
       projects = projects.filter(
         ({ outlookCategory, tag }) =>
@@ -34,7 +39,7 @@ export function useProjectList(props: IProjectListProps) {
       )
     }
     return projects
-  }, [context?.state?.projects, props.id])
+  }, [props.overrideItems, context?.state?.projects, props.id])
 
   const menuItems: IListProps['menuItems'] = ({ state }) => [
     items.some((c) => c.inactive) &&
@@ -43,6 +48,17 @@ export function useProjectList(props: IProjectListProps) {
           count: state.itemsPreFilter.filter((c) => c.inactive).length
         }),
         showInactive.toggle
+      ),
+    new ListMenuItem(t('projects.bulkEdit.label'))
+      .withIcon('Edit')
+      .setHidden(
+        !hasPermission(PermissionScope.MANAGE_PROJECTS) ||
+          (context?.state?.selectedProjects?.length ?? 0) <= 1
+      )
+      .withDispatch(
+        context,
+        OPEN_BULK_EDIT_PANEL,
+        context.state.selectedProjects
       ),
     ...(props.menuItems as ListMenuItem[])
   ]

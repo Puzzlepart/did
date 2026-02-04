@@ -69,10 +69,40 @@ export class App {
    */
   constructor() {
     this.instance = express()
+    // Trust proxy headers from Cloudflare tunnel and other reverse proxies
+    this.instance.set('trust proxy', true)
+    // Debug middleware to log incoming requests with proxy info
+    if (process.env.NODE_ENV === 'development') {
+      const debug = require('debug')('server:proxy')
+      this.instance.use((req, res, next) => {
+        debug(`[${req.method}] ${req.protocol}://${req.get('host')}${req.path}`)
+        next()
+      })
+    }
     this.instance.use(helmetMiddleware())
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )
+    // Suppress noisy logging for obvious static asset 404s (e.g. hashed files the client re-requests between builds)
+    this.instance.use((req, res, next) => {
+      const isStatic =
+        /\.(?:js|css|map|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf)$/.test(
+          req.path
+        )
+      if (!isStatic) return next()
+      // Temporarily capture status to decide whether to skip logging
+      const originalEnd = res.end
+      res.end = function (...args) {
+        // If 404, do not log; otherwise proceed with logger
+        if (res.statusCode !== 404) {
+          originalEnd.apply(this, args)
+          return
+        }
+        // For 404 we still end the response but skip morgan (by not calling logger first)
+        originalEnd.apply(this, args)
+      }
+      return next()
+    })
     this.instance.use(logger('dev'))
     this.instance.use(express.json())
     this.instance.use(express.urlencoded({ extended: false }))
@@ -97,7 +127,15 @@ export class App {
       environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        // Increase timeouts for Azure Cosmos DB for MongoDB
+        // Cosmos DB can be slower than native MongoDB, especially for bulk operations
+        socketTimeoutMS: 300_000, // 5 minutes (default: 0 = no timeout)
+        serverSelectionTimeoutMS: 30_000, // 30 seconds (default: 30000)
+        maxPoolSize: 50, // Connection pool size (default: 100)
+        minPoolSize: 10, // Minimum connections to maintain
+        // Retry failed writes once (helps with Cosmos DB throttling)
+        retryWrites: true
       }
     )
     this.setupSession()
@@ -221,21 +259,55 @@ export class App {
    * Setup routes
    *
    * Configuring `/` to redirect to the login page
-   * if the user is not authenticated, and `*` to use
+   * if the user is not authenticated, and catch-all route to use
    * our index route giving the React Router full
-   * control of the routing.
+   * control of the routing. Excludes static assets and API routes.
    */
   setupRoutes() {
     const index = express.Router()
     index.get('/', defaultRoute)
-    this.instance.use('*', index)
+    // Only catch routes that should be handled by React Router
+    // Exclude static assets (/js/, /css/, /assets/), API routes (/auth/, /graphql/, /health_check/)
+    this.instance.get('*', (req, res, next) => {
+      const url = req.path
+      // Skip if it's a static asset or API route
+      if (
+        url.startsWith('/js/') ||
+        url.startsWith('/css/') ||
+        url.startsWith('/assets/') ||
+        url.startsWith('/auth/') ||
+        url.startsWith('/graphql') ||
+        url.startsWith('/health_check') ||
+        url.includes('.')
+      ) {
+        // Skip files with extensions (js, css, ico, etc.)
+        return next()
+      }
+      // Handle as a page route
+      defaultRoute(req, res)
+    })
   }
 
   /**
    * Setup error handling using `http-errors`
    */
   setupErrorHandling() {
-    this.instance.use((_req, _res, next) => next(createError(401)))
+    // Fallback: anything not handled earlier becomes a 404 (was 401, which cluttered logs)
+    this.instance.use((req: express.Request, res: express.Response, next) => {
+      // If the client explicitly accepts JSON or it's an API/GraphQL style path, return structured JSON
+      const acceptsJson =
+        req.accepts(['json', 'html']) === 'json' ||
+        req.path.startsWith('/graphql') ||
+        req.path.startsWith('/api/')
+      if (acceptsJson) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Not Found',
+          path: req.path
+        })
+      }
+      return next(createError(404))
+    })
     this.instance.use(
       (error: any, _request: express.Request, response: express.Response) => {
         response.render('index', {

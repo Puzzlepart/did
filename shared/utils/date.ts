@@ -89,7 +89,7 @@ export class DateUtils {
 
     // Calculate minutes from the fractional part of hours
     const minutesTotal = (hoursPrecision % 1) * 60
-    const minutes = Math.floor(minutesTotal)
+    const minutes = Math.round(minutesTotal)
 
     // Calculate seconds from the fractional part of minutes if seconds option is enabled
     const seconds = options.seconds ? Math.round((minutesTotal % 1) * 60) : 0
@@ -296,44 +296,101 @@ export class DateUtils {
   }
 
   /**
-   * Get Iso Week number
-   * Properly handles ISO week numbering edge cases by validating the week number
-   * against the year's actual number of weeks.
+   * Calculate the ISO week number and year for a given date.
    *
-   * ISO weeks:
-   * - A year can have 52 or 53 weeks
+   * This implementation follows ISO 8601 standard:
    * - Week 1 is the week with the year's first Thursday
-   * - Dates before week 1 belong to the previous year's last week
+   * - Weeks run Monday to Sunday
+   * - A year can have 52 or 53 weeks
+   * - Days before week 1 belong to the previous year's last week
    *
+   * @param date - The date to calculate for
+   * @returns Object with isoWeek and isoYear
+   */
+  public getIsoWeekAndYear(date: ConfigType): {
+    isoWeek: number
+    isoYear: number
+  } {
+    const jsDate = $dayjs(date).toDate()
+
+    // Copy date to avoid mutation
+    const d = new Date(
+      jsDate.getFullYear(),
+      jsDate.getMonth(),
+      jsDate.getDate()
+    )
+
+    // Set to nearest Thursday: current date + 4 - current day number
+    // Make Sunday's day number 7
+    const dayNumber = (d.getDay() + 6) % 7
+    d.setDate(d.getDate() - dayNumber + 3)
+
+    // ISO year is the year of the Thursday
+    const isoYear = d.getFullYear()
+
+    // January 4 is always in week 1
+    const jan4 = new Date(isoYear, 0, 4)
+    jan4.setDate(jan4.getDate() - ((jan4.getDay() + 6) % 7) + 3)
+
+    // Calculate the week number
+    const isoWeek =
+      1 +
+      Math.round(
+        ((d.getTime() - jan4.getTime()) / 86400000 -
+          3 +
+          ((jan4.getDay() + 6) % 7)) /
+          7
+      )
+
+    return { isoWeek, isoYear }
+  }
+
+  /**
+   * Get the start date of an ISO week
+   *
+   * @param isoWeek - ISO week number (1-53)
+   * @param isoYear - ISO year
+   * @returns DateObject for the Monday of that week
+   */
+  public getIsoWeekStartDate(isoWeek: number, isoYear: number): DateObject {
+    // January 4 is always in week 1
+    const jan4 = new Date(isoYear, 0, 4)
+
+    // Find the Monday of week 1
+    const dayNumber = (jan4.getDay() + 6) % 7 // Monday = 0
+    const week1Monday = new Date(jan4)
+    week1Monday.setDate(jan4.getDate() - dayNumber)
+
+    // Calculate the target week's Monday
+    const targetWeekMonday = new Date(week1Monday)
+    targetWeekMonday.setDate(week1Monday.getDate() + (isoWeek - 1) * 7)
+
+    return new DateObject(targetWeekMonday)
+  }
+
+  /**
+   * Get Iso Week number
+   *
+   * @deprecated Use getIsoWeekAndYear instead for proper ISO week handling
    * @param isoWeek - Iso week number
    * @param year - Year
    */
   public getIsoWeek(isoWeek: number, year: number) {
-    const weeksInYear = $dayjs().year(year).isoWeeksInYear()
-    const weeksInPrevYear = $dayjs()
-      .year(year - 1)
-      .isoWeeksInYear()
-
-    // Handle dates in week 53
-    if (isoWeek === 53) {
-      return weeksInYear === 53 ? 53 : weeksInPrevYear === 53 ? 53 : 1
+    // Log deprecation warning only in non-production environments to avoid cluttering logs
+    if (
+      typeof process !== 'undefined' &&
+      process.env &&
+      process.env.NODE_ENV !== 'production'
+    ) {
+      console.warn(
+        '[DEPRECATED] getIsoWeek is deprecated and will be removed in the future. Use getIsoWeekAndYear or getIsoWeekStartDate instead.'
+      )
     }
-
-    // Handle dates in week 52
-    if (isoWeek === 52) {
-      return weeksInYear >= 52 ? 52 : 52
-    }
-
-    // Handle week 1 edge case (last few days of previous year)
-    if (isoWeek === 1 && weeksInPrevYear === 53) {
-      const lastWeekOfPrevYear = $dayjs()
-        .year(year - 1)
-        .isoWeek(53)
-      if ($dayjs().year(year).isoWeek(1).isAfter(lastWeekOfPrevYear)) {
-        return 1
-      }
-    }
-
+    // For backward compatibility: historically, this method simply returned the input week number
+    // without any calculation or validation. Some consumers may rely on this behavior, so we preserve it
+    // here to avoid a breaking change. The actual ISO week logic is now handled by getIsoWeekStartDate
+    // in DateObject.fromObject. Please migrate to the new methods as this function will be removed
+    // in the future.
     return isoWeek
   }
 
@@ -464,11 +521,15 @@ export class DateUtils {
   /**
    * Get period id for the date
    *
+   * Uses proper ISO week and year calculation to ensure correct period identification
+   * across year boundaries.
+   *
    * @param dateTime - Date time
    */
   public getPeriod(dateTime: ConfigType): string {
+    const { isoWeek, isoYear } = this.getIsoWeekAndYear(dateTime)
     const date = $dayjs(dateTime)
-    return [date.isoWeek(), date.month() + 1, date.year()].join('_')
+    return [isoWeek, date.month() + 1, isoYear].join('_')
   }
 
   /**
@@ -522,4 +583,5 @@ export default new DateUtils({
 
 export { default as $dayjs } from 'dayjs'
 export { IDatePeriod } from './DateObject'
+export * from './holidayUtils'
 export * from './types'

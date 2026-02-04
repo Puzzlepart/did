@@ -1,6 +1,6 @@
 import { ButtonProps } from '@fluentui/react-components'
 import _ from 'underscore'
-import { getFluentIconWithFallback, switchCase } from 'utils'
+import { getFluentIcon, switchCase } from 'utils'
 import { IDynamicButtonProps } from './types'
 
 /**
@@ -11,11 +11,11 @@ import { IDynamicButtonProps } from './types'
  * @returns The props for the button.
  */
 export function useDynamicButton(props: IDynamicButtonProps) {
-  let buttonProps = _.omit(props, 'hidden', 'text') as ButtonProps
+  let buttonProps = _.omit(props, 'hidden', 'text', 'content') as ButtonProps
   if (props.iconName) {
     buttonProps = {
       ...buttonProps,
-      icon: getFluentIconWithFallback(props.iconName)
+      icon: getFluentIcon(props.iconName)
     }
   }
   buttonProps.appearance = switchCase<null, IDynamicButtonProps['appearance']>([

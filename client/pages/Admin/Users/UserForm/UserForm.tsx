@@ -6,9 +6,10 @@ import {
   FormControl,
   InputControl
 } from 'components/FormControl'
-import React from 'react'
+import { Spinner } from '@fluentui/react-components'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyledComponent } from 'types'
+import { StyledComponent, UserInput } from 'types'
 import styles from './UserForm.module.scss'
 import { IUserFormProps } from './types'
 import { useUserForm } from './useUserForm'
@@ -23,11 +24,84 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
     register,
     onSelectUser,
     roles,
-    availableAdUsers
+    adUsers,
+    users,
+    adUsersLoading
   } = useUserForm(props)
+
+  // Memoize the set of existing user IDs for O(1) lookup performance
+  const existingUserIds = useMemo(
+    () => new Set(users.map((u) => u.id)),
+    [users]
+  )
+
+  // Memoize filtered user items to avoid recalculating on every render
+  const userItems = useMemo(() => {
+    const includeUsersWithoutGivenName = model.value(
+      'includeUsersWithoutGivenName' as keyof UserInput
+    )
+    const showAlreadyAddedUsers = model.value(
+      'showAlreadyAddedUsers' as keyof UserInput
+    )
+
+    // Filter and categorize users
+    const availableUsers: any[] = []
+    const alreadyAddedUsers: any[] = []
+
+    for (const u of adUsers) {
+      // Only process users with valid email
+      if (!u.mail) continue
+
+      // Skip users without given name unless checkbox is checked
+      if (!includeUsersWithoutGivenName && !u.givenName) continue
+
+      const isAlreadyAdded = existingUserIds.has(u.id)
+      const item = {
+        key: u.id,
+        text: `${u.displayName} (${u.mail})`,
+        secondaryText: isAlreadyAdded
+          ? t('common.userAlreadyAdded')
+          : undefined,
+        searchValue: [u.displayName, u.mail].filter(Boolean).join(' '),
+        data: u,
+        disabled: isAlreadyAdded
+      }
+
+      if (isAlreadyAdded) {
+        if (showAlreadyAddedUsers) {
+          alreadyAddedUsers.push(item)
+        }
+      } else {
+        availableUsers.push(item)
+      }
+    }
+
+    // Return available users first, then already-added users at the bottom
+    return [...availableUsers, ...alreadyAddedUsers]
+  }, [
+    adUsers,
+    existingUserIds,
+    model.value('includeUsersWithoutGivenName' as keyof UserInput),
+    model.value('showAlreadyAddedUsers' as keyof UserInput),
+    t
+  ])
 
   return (
     <FormControl {...formControlProps}>
+      {!isEditMode && adUsersLoading && (
+        <div
+          style={{
+            marginBottom: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
+          <Spinner size='tiny' />
+          {t('admin.users.loadingActiveDirectoryUsers')}
+        </div>
+      )}
+
       <AutocompleteControl
         {...register('_' as any, {
           required: !model.value('id') && !isEditMode,
@@ -35,15 +109,23 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         })}
         label={t('common.adUserLabel')}
         placeholder={t('common.searchPlaceholder')}
-        items={availableAdUsers.map((u) => ({
-          key: u.id,
-          text: u.displayName,
-          searchValue: u.displayName,
-          data: u
-        }))}
+        items={userItems}
         onSelected={onSelectUser}
         hidden={isEditMode}
+        minCharacters={2}
       />
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <CheckboxControl
+          {...register('includeUsersWithoutGivenName' as keyof UserInput)}
+          label={t('admin.users.includeUsersWithoutGivenName')}
+          hidden={isEditMode}
+        />
+        <CheckboxControl
+          {...register('showAlreadyAddedUsers' as any)}
+          label={t('admin.users.showAlreadyAddedUsers')}
+          hidden={isEditMode}
+        />
+      </div>
       <InputControl
         {...register('surname')}
         {...inputProps({ key: 'surname', label: t('common.surnameLabel') })}
@@ -95,6 +177,13 @@ export const UserForm: StyledComponent<IUserFormProps> = (props) => {
         {...register('hiddenFromReports')}
         label={t('admin.userHiddenFromReportsLabel')}
         description={t('admin.userHiddenFromReportsDescription')}
+        hidden={!isEditMode}
+      />
+      <CheckboxControl
+        {...register('accountEnabled')}
+        label={t('common.accountEnabledLabel')}
+        description={t('common.accountEnabledDescription')}
+        key={'accountEnabled'}
         hidden={!isEditMode}
       />
     </FormControl>

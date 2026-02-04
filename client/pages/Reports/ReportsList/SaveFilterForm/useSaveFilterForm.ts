@@ -1,4 +1,3 @@
-import { IContextualMenuItem } from '@fluentui/react'
 import { useMap, useUpdateUserConfiguration } from 'hooks'
 import { useContext, useEffect } from 'react'
 import { useBoolean } from 'usehooks-ts'
@@ -6,13 +5,14 @@ import { ReportsContext } from '../../context'
 import { ADD_SAVED_FILTER } from '../../reducer/actions'
 import { INITIAL_MODEL } from './types'
 import _ from 'lodash'
+import { IReportsMenuItem } from '../../types'
 
 export function useSaveFilterForm() {
   const context = useContext(ReportsContext)
   const { updateUserSettings } = useUpdateUserConfiguration()
   const { $, set, $set, value } = useMap<
-    keyof IContextualMenuItem,
-    IContextualMenuItem
+    keyof IReportsMenuItem,
+    IReportsMenuItem
   >(INITIAL_MODEL)
   const inputVisible = useBoolean(false)
 
@@ -28,7 +28,7 @@ export function useSaveFilterForm() {
       return
     }
     context.dispatch(ADD_SAVED_FILTER({ model: $ }))
-    $set(INITIAL_MODEL)
+    $set(INITIAL_MODEL as any)
     inputVisible.setFalse()
   }
 

@@ -16,4 +16,6 @@
 
 [[load:.readme/4-contributing.md]]
 
+[[load:.readme/6-edge-extension.md]]
+
 [[ template:contributors ]]

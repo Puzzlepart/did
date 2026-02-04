@@ -3,7 +3,7 @@ import {
   useQuery,
   WatchQueryFetchPolicy
 } from '@apollo/client'
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { AnyAction } from '@reduxjs/toolkit'
 import { useAppContext } from 'AppContext'
 import { Dispatch, useEffect } from 'react'

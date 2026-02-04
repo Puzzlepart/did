@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>did - Timesheet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3f2f1;
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #CF5F00 0%, #FF8C42 100%);
+      color: white;
+      padding: 12px 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      position: relative;
+    }
+
+    .header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo {
+      width: 24px;
+      height: 24px;
+      background-color: white;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #CF5F00;
+      font-size: 14px;
+    }
+
+    .settings-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .settings-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .content {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .loading {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #605e5c;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #edebe9;
+      border-top-color: #CF5F00;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #did-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+      background-color: white;
+    }
+
+    #did-frame.loaded {
+      display: block;
+    }
+
+    .error-message {
+      display: none;
+      padding: 16px;
+      background-color: #fde7e9;
+      color: #a80000;
+      border-left: 4px solid #a80000;
+      margin: 16px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .config-panel {
+      display: none;
+      padding: 16px;
+      background-color: white;
+      border-bottom: 1px solid #edebe9;
+    }
+
+    .config-panel.show {
+      display: block;
+    }
+
+    .config-panel label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #323130;
+    }
+
+    .config-panel select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #8a8886;
+      border-radius: 2px;
+      font-size: 14px;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .config-panel select:focus {
+      outline: none;
+      border-color: #CF5F00;
+      box-shadow: 0 0 0 1px #CF5F00;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>
+      <div class="logo">d</div>
+      did Timesheet
+    </h1>
+    <button class="settings-btn" id="settings-btn">⚙️ Environment</button>
+  </div>
+
+  <div class="config-panel" id="config-panel">
+    <label for="environment-select">Select Environment:</label>
+    <select id="environment-select">
+      <option value="https://did.puzzlepart.com">Production (did.puzzlepart.com)</option>
+      <option value="https://didapp-staging.azurewebsites.net">Staging (didapp-staging.azurewebsites.net)</option>
+      <option value="https://didapp-dev.azurewebsites.net">Development (didapp-dev.azurewebsites.net)</option>
+      <option value="http://localhost:9001">Local Development (localhost:9001)</option>
+    </select>
+  </div>
+
+  <div class="content">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+    </div>
+    <div class="error-message" id="error-message">
+      Failed to load did. Please check your connection and try again.
+    </div>
+    <iframe id="did-frame" src="" allow="clipboard-write"></iframe>
+  </div>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>

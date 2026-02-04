@@ -1,7 +1,7 @@
 /**
  * @category List
  */
-import { IGroupHeaderStyles } from '@fluentui/react'
+import { CSSProperties } from 'react'
 
 export interface IListGroupProps<T = any> {
   /**
@@ -34,5 +34,5 @@ export interface IListGroupProps<T = any> {
   /**
    * Styles for the group header.
    */
-  styles?: Partial<IGroupHeaderStyles>
+  styles?: CSSProperties
 }

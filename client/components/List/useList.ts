@@ -1,14 +1,12 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { Selection, SelectionMode } from '@fluentui/react'
 import { useEffect, useMemo } from 'react'
 import _ from 'underscore'
 import { IListContext } from './context'
 import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
-import { useListGroups } from './useListGroups'
-import { useListProps } from './useListProps'
 import { useListPersistedSearch } from './useListPersistedSearch'
 import { getUrlState } from 'utils'
+import * as arraySort from 'array-sort'
 
 /**
  * Hook that returns a list of items and selection state for a given set of props.
@@ -28,34 +26,26 @@ export function useList(props: IListProps) {
 
   useEffect(
     () => dispatch(PROPS_UPDATED(props)),
-    [props.items, props.filterValues]
+    [props.items, props.filterValues, props.columns]
   )
-
-  const selection = useMemo(() => {
-    const [selectionMode = SelectionMode.none, onChanged] = props.selectionProps
-    if (!onChanged) return null
-    return new Selection({
-      onSelectionChanged: () => {
-        const _selection = selection.getSelection()
-        if (selectionMode === SelectionMode.single) {
-          onChanged(_.first(_selection))
-        } else {
-          onChanged(_selection)
-        }
-      }
-    })
-  }, [props.selectionProps])
 
   const context = { props, state, dispatch } as IListContext
 
-  const [groups, items] = useListGroups(context)
+  const columns = useMemo(() => {
+    const groupBy = context.props.listGroupProps?.fieldName
+    return _.filter(context.state.columns, (col) => {
+      if (col?.data?.hidden) return false
+      if (groupBy && col.fieldName === groupBy) return false
+      return true
+    })
+  }, [context.state.columns, context.props.listGroupProps?.fieldName])
 
-  const listProps = useListProps({
-    context,
-    groups,
-    items,
-    selection
-  })
+  const items = useMemo(() => {
+    if (!context.state.sortOpts) return context.state.items
+    return arraySort([...context.state.items], context.state.sortOpts[0], {
+      reverse: context.state.sortOpts[1] === 'asc'
+    })
+  }, [context.state.items, context.state.sortOpts])
 
   useEffect(() => {
     if (props.onFilter) {
@@ -68,5 +58,5 @@ export function useList(props: IListProps) {
 
   useListPersistedSearch(context)
 
-  return { listProps, context } as const
+  return { context, columns, items } as const
 }

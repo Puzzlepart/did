@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { DateRangeType } from '@fluentui/react'
+import { DateRangeType } from '@fluentui/react-calendar-compat'
 import { Tab, TabList } from '@fluentui/react-components'
 import { HotkeyModal } from 'components/HotkeyModal'
 import React, { FC } from 'react'

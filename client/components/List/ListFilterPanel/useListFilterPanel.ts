@@ -12,26 +12,49 @@ import { FILTERS_UPDATED, TOGGLE_FILTER_PANEL } from '../reducer'
 export function useListFilterPanel(): IFilterPanelProps {
   const { t } = useTranslation()
   const context = useListContext()
+  const columns = context.props.columns
   const filters = useMemo<BaseFilter[]>(
     () =>
-      context.props.columns
+      columns
         .filter((col) => col?.data?.isFilterable)
         .map<BaseFilter>((col) => new col.data.filterType().fromColumn(col)),
-    [context.props.columns]
+    [columns]
   )
+  const filterItems =
+    context.props.filterPanelItems ??
+    context.state.itemsPreFilter ??
+    context.state.origItems ??
+    []
+  const filterPanelState = context.state.filterPanel
+  const filterPanelProps = context.props.filterPanel
+  const selectedFilter = context.state.filterBy
+  const onFilterPanelToggle = context.props.onFilterPanelToggle
+  const dispatch = context.dispatch
+
   return useMemo<IFilterPanelProps>(
     () =>
       ({
-        ...context.state.filterPanel,
-        ...context.props.filterPanel,
+        ...filterPanelState,
+        ...filterPanelProps,
         title: t('reports.filterPanelHeaderText'),
         filters,
-        items: context.state.items,
-        onFiltersUpdated: (filters) =>
-          context.dispatch(FILTERS_UPDATED({ filters })),
-        onDismiss: () => context.dispatch(TOGGLE_FILTER_PANEL()),
-        selectedFilter: context.state.filterBy
+        items: filterItems,
+        onFiltersUpdated: (filters) => dispatch(FILTERS_UPDATED({ filters })),
+        onDismiss: () => {
+          dispatch(TOGGLE_FILTER_PANEL())
+          onFilterPanelToggle?.(false)
+        },
+        selectedFilter
       }) as IFilterPanelProps,
-    [context]
+    [
+      filterPanelState,
+      filterPanelProps,
+      t,
+      filters,
+      filterItems,
+      dispatch,
+      onFilterPanelToggle,
+      selectedFilter
+    ]
   )
 }

@@ -1,10 +1,11 @@
-import { Pivot, PivotItem } from '@fluentui/react'
+import { Tab, TabList } from '@fluentui/react-components'
 import { useSubscriptionSettings } from 'AppContext'
 import { FormControl } from 'components/FormControl'
 import { TabComponent } from 'components/Tabs'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PermissionScope } from 'security'
+import { getFluentIcon } from 'utils'
 import { BasicInfo } from './BasicInfo'
 import { BudgetTracking } from './BudgetTracking'
 import { Resources } from './Resources'
@@ -21,59 +22,65 @@ export const ProjectForm: TabComponent<IProjectFormProps> = (props) => {
   const { t } = useTranslation()
   const { budgetTracking, projects } = useSubscriptionSettings()
   const { formControlProps } = useProjectForm(props)
+  const [selectedTab, setSelectedTab] = useState<string>('general')
+
+  const showTabs = budgetTracking?.enabled || projects?.enableResourceManagement
+
+  const tabs = useMemo(
+    () => [
+      {
+        value: 'general',
+        label: t('common.general'),
+        icon: 'Info',
+        component: <BasicInfo />,
+        visible: true
+      },
+      {
+        value: 'roleDefinitions',
+        label: t('projects.roleDefinitions.headerText'),
+        icon: 'FabricUserFolder',
+        component: <RoleDefinitions />,
+        visible: !!projects?.enableProjectRoles
+      },
+      {
+        value: 'resources',
+        label: t('projects.resources.headerText'),
+        icon: 'Group',
+        component: <Resources />,
+        visible: !!projects?.enableResourceManagement
+      },
+      {
+        value: 'budget',
+        label: t('projects.budget'),
+        icon: 'LineChart',
+        component: <BudgetTracking />,
+        visible: !!budgetTracking?.enabled && formControlProps.isEditMode
+      }
+    ],
+    [t, projects, budgetTracking, formControlProps.isEditMode]
+  )
+
+  const visibleTabs = tabs.filter((tab) => tab.visible)
+  const selectedTabConfig = tabs.find((tab) => tab.value === selectedTab)
+
   return (
     <FormControl {...formControlProps}>
-      <Pivot
-        styles={{
-          link: {
-            display:
-              budgetTracking?.enabled || projects?.enableResourceManagement
-                ? 'initial'
-                : 'none'
-          },
-          itemContainer: {
-            paddingTop:
-              budgetTracking?.enabled || projects?.enableResourceManagement
-                ? 15
-                : 0
-          }
+      <TabList
+        selectedValue={selectedTab}
+        onTabSelect={(_, data) => setSelectedTab(data.value as string)}
+        style={{
+          paddingTop: showTabs ? 15 : 0,
+          display: showTabs ? 'flex' : 'none'
         }}
       >
-        <PivotItem
-          headerText={t('common.general')}
-          itemIcon='Info'
-          itemKey='general'
-        >
-          <BasicInfo />
-        </PivotItem>
-        {projects?.enableProjectRoles && (
-          <PivotItem
-            headerText={t('projects.roleDefinitions.headerText')}
-            itemIcon='FabricUserFolder'
-            itemKey='roleDefinitions'
-          >
-            <RoleDefinitions />
-          </PivotItem>
-        )}
-        {projects?.enableResourceManagement && (
-          <PivotItem
-            headerText={t('projects.resources.headerText')}
-            itemIcon='Group'
-            itemKey='resources'
-          >
-            <Resources />
-          </PivotItem>
-        )}
-        {budgetTracking?.enabled && formControlProps.isEditMode && (
-          <PivotItem
-            headerText={t('projects.budget')}
-            itemIcon='LineChart'
-            itemKey='budget'
-          >
-            <BudgetTracking />
-          </PivotItem>
-        )}
-      </Pivot>
+        {visibleTabs.map((tab) => (
+          <Tab key={tab.value} value={tab.value} icon={getFluentIcon(tab.icon)}>
+            {tab.label}
+          </Tab>
+        ))}
+      </TabList>
+
+      {selectedTabConfig?.component}
     </FormControl>
   )
 }

@@ -1,6 +1,9 @@
-import { IDetailsColumnRenderTooltipProps } from '@fluentui/react'
 import $date from 'DateUtils'
-import { IListColumn, IListColumnData } from 'components/List/types'
+import {
+  IListColumn,
+  IListColumnData,
+  ListColumnHeaderRenderProps
+} from 'components/List/types'
 import { useUserListColumn } from 'components/UserColumn'
 import React from 'react'
 import { useReportsContext } from '../../context'
@@ -26,11 +29,14 @@ export function useColumns(): IListColumn[] {
         endDate: true
       }
     })
-    data.onRenderColumnHeader = (props: IDetailsColumnRenderTooltipProps) => (
+    data.onRenderColumnHeader = ({
+      column,
+      className
+    }: ListColumnHeaderRenderProps) => (
       <ColumnHeader
-        hostClassName={props.hostClassName}
-        text={props.column.name}
-        subText={props.column.data?.subText}
+        hostClassName={className}
+        text={column.name}
+        subText={column.data?.subText}
       />
     )
     columns.push({

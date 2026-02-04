@@ -40,12 +40,12 @@ export const ReportLinksForm: FC<IReportLinksFormProps> = (props) => {
         description={t('admin.reportLinks.descriptionDescription')}
       />
       <IconPickerControl
-        name='icon'
+        name='iconName'
         model={model}
         label={t('common.iconFieldLabel')}
         description={t('admin.reportLinks.iconDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
-        defaultSelected={model.$.icon}
+        defaultSelected={model.$.iconName}
         required={true}
       />
       <InputControl

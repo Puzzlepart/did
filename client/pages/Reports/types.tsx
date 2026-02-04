@@ -1,4 +1,3 @@
-import { IContextualMenuItem } from '@fluentui/react'
 import { IListGroupProps, ListFilterState } from 'components/List/types'
 import { ITabProps } from 'components/Tabs'
 import { IDatePeriod } from 'DateUtils'
@@ -56,14 +55,22 @@ export interface IReportsQuery<QueryType = any> extends ITabProps {
 /**
  * @ignore
  */
-export interface IGroupByOption extends IContextualMenuItem {
+export interface IReportsMenuItem {
+  key: string
+  text: string
+}
+
+/**
+ * @ignore
+ */
+export interface IGroupByOption extends IReportsMenuItem {
   props: IListGroupProps
 }
 
 /**
  * @category Reports
  */
-export interface IReportsSavedFilter extends IContextualMenuItem {
+export interface IReportsSavedFilter extends IReportsMenuItem {
   values: Record<string, any>
 }
 
@@ -74,22 +81,22 @@ export interface IReportsData {
   /**
    * Time entries
    */
-  timeEntries: any[]
+  timeEntries?: any[]
 
   /**
    * Users
    */
-  users: User[]
+  users?: User[]
 
   /**
    * Periods
    */
-  periods: TimesheetPeriodObject[]
+  periods?: TimesheetPeriodObject[]
 
   /**
    * Projects
    */
-  projects: Project[]
+  projects?: Project[]
 
   /**
    * Report links
@@ -140,6 +147,31 @@ export interface IReportsState {
    * Current filter state
    */
   filterState?: ListFilterState
+
+  /**
+   * Applied filter state used for server-side filtering.
+   */
+  appliedFilterState?: ListFilterState
+
+  /**
+   * Preload state for the current report (count + metadata).
+   */
+  preload?: {
+    loading: boolean
+    approxCount?: number
+    filterOptions?: {
+      projectNames: string[]
+      parentProjectNames: string[]
+      customerNames: string[]
+      partnerNames: string[]
+      employeeNames: string[]
+    }
+  }
+
+  /**
+   * Whether the current report's time entries have been loaded.
+   */
+  isReportLoaded?: boolean
 }
 
 /**

@@ -1,7 +1,9 @@
-import { useMutation } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import _ from 'underscore'
 import { IUsersContext } from '../context'
+import { SET_AD_USERS, SET_AD_USERS_LOADING } from '../reducer/actions'
 import $updateUsers from './updateUsers.gql'
+import $loadActiveDirectoryUsers from './loadActiveDirectoryUsers.gql'
 import { omitTypename } from 'utils'
 
 /**
@@ -15,8 +17,39 @@ import { omitTypename } from 'utils'
  */
 export function useUsersSync(context: IUsersContext) {
   const [updateUsers] = useMutation($updateUsers)
-  return async (properties = ['accountEnabled', 'manager']) => {
-    const users = context.state.selectedUsers
+  const [loadActiveDirectoryUsers] = useLazyQuery($loadActiveDirectoryUsers, {
+    onCompleted: (data) => {
+      context.dispatch(SET_AD_USERS(data.activeDirectoryUsers))
+    },
+    onError: () => {
+      context.dispatch(SET_AD_USERS_LOADING(false))
+    }
+  })
+
+  return async (properties = ['manager']) => {
+    // Check if AD users are loaded, if not load them first
+    if (context.state.adUsers.length === 0 && !context.state.adUsersLoading) {
+      context.dispatch(SET_AD_USERS_LOADING(true))
+      try {
+        await loadActiveDirectoryUsers()
+      } catch {
+        context.dispatch(SET_AD_USERS_LOADING(false))
+        return { success: false, error: 'Failed to load AD users' }
+      }
+    }
+
+    // Wait for AD users to be loaded if they're currently loading
+    if (context.state.adUsersLoading) {
+      return { success: false, error: 'AD users are still loading' }
+    }
+
+    // Determine which users to sync: selected users or all non-external users
+    const usersToSync =
+      context.state.selectedUsers.length > 0
+        ? context.state.selectedUsers.filter(({ isExternal }) => !isExternal)
+        : context.state.users.filter(({ isExternal }) => !isExternal)
+
+    const users = usersToSync
       .map((user) => {
         const adUser = _.find(context.state.adUsers, ({ id }) => id === user.id)
         if (!adUser) return null
@@ -37,9 +70,17 @@ export function useUsersSync(context: IUsersContext) {
         return omitTypename({ id: user.id, ...userUpdate })
       })
       .filter(Boolean)
-    if (!_.isEmpty(users)) {
-      await updateUsers({ variables: { users } })
-      context.refetch()
+
+    if (_.isEmpty(users)) {
+      return { success: true, count: 0 }
+    } else {
+      try {
+        await updateUsers({ variables: { users } })
+        context.refetch()
+        return { success: true, count: users.length }
+      } catch {
+        return { success: false, error: 'Failed to update users' }
+      }
     }
   }
 }

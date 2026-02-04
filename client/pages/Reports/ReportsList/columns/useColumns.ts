@@ -10,6 +10,7 @@ import {
   hourlyRateColumn,
   monthColumn,
   parentProjectColumn,
+  partnerNameColumn,
   periodColumn,
   projectNameColumn,
   projectTagColumn,
@@ -22,7 +23,8 @@ import {
   weekColumn,
   yearColumn,
   mailColumn,
-  managerColumn
+  managerColumn,
+  projectLabelsColumn
 } from './definitions'
 
 /**
@@ -37,7 +39,9 @@ export function useColumns() {
     parentProjectColumn,
     projectNameColumn,
     customerNameColumn,
+    partnerNameColumn,
     projectTagColumn,
+    projectLabelsColumn,
     roleColumn,
     hourlyRateColumn,
     startEndDateTimeColumn,
@@ -62,7 +66,8 @@ export function useColumns() {
       label: t('common.employeeWithRoleLabel'),
       description: t('common.employeeWithRoleDescription'),
       includeRoleDetails: true,
-      hidden: true
+      hidden: true,
+      hiddenFromExport: true
     }),
     surnameColumn,
     givenNameColumn,

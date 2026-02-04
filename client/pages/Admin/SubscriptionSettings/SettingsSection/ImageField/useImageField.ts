@@ -1,9 +1,8 @@
-import { useId } from '@fluentui/react-components'
+import { tokens, useId } from '@fluentui/react-components'
 import React, { useState } from 'react'
 import { IImageFieldProps } from './types'
 import { ImageField } from './ImageField'
 import { useAppContext } from 'AppContext'
-import { useTheme } from '@fluentui/react'
 
 /**
  * Custom hook for handling image field functionality.
@@ -13,12 +12,10 @@ import { useTheme } from '@fluentui/react'
 export function useImageField(props: IImageFieldProps) {
   const imagePickerId = useId(ImageField.displayName)
   const { subscription } = useAppContext()
-  const theme = useTheme()
   const [isInputDisabled, setIsInputDisabled] = useState(false)
 
   const navBackground =
-    subscription?.settings?.brand?.navBackground ??
-    theme.semanticColors.menuHeader
+    subscription?.settings?.brand?.navBackground ?? tokens.colorBrandBackground
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]

@@ -27,7 +27,8 @@ export const EventList: ReusableComponent<IEventListProps> = (props) => {
           'menuItems',
           'searchBox',
           'styles',
-          'emptyMessage'
+          'emptyMessage',
+          'className'
         )}
         columns={columns}
       />

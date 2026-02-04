@@ -54,7 +54,7 @@ export const ProjectTimeEntries: StyledComponent = () => {
             fieldName: 'resource.displayName',
             name: t('common.employeeLabel'),
             minWidth: 100,
-            maxWidth: 150,
+            // maxWidth: 150,
             onRender: ({ resource, role }) => (
               <UserColumn user={resource} role={role} />
             )
