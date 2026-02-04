@@ -103,7 +103,7 @@ export function getFluentIcon(
   const fallbackName = options?.default
   const hasFallback =
     !hasAlias && fallbackName && _.has(iconCatalog, fallbackName)
-  const iconName = hasAlias ? aliasName : hasFallback ? fallbackName : null
+  const iconName = hasAlias ? aliasName : (hasFallback ? fallbackName : null)
 
   // Return icon if it exists in v9 catalog or if a fallback is provided
   if (iconName) {

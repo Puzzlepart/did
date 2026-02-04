@@ -258,9 +258,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
       const sortIcon =
         sortDirection === 'asc'
           ? getFluentIcon('ArrowSortUp', { size: 12 })
-          : sortDirection === 'desc'
+          : (sortDirection === 'desc'
           ? getFluentIcon('ArrowSortDown', { size: 12 })
-          : null
+          : null)
       return (
         <div
           className={mergeClasses(
@@ -292,7 +292,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               )
               return (
                 <Checkbox
-                  checked={allSelected ? true : someSelected ? 'mixed' : false}
+                  checked={allSelected ? true : (someSelected ? 'mixed' : false)}
                   onClick={(event) => event.stopPropagation()}
                   onChange={(_event, data) => {
                     updateSelection(
@@ -730,7 +730,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   </div>
                 ))}
               </Skeleton>
-            ) : isGrouped ? (
+            ) : (isGrouped ? (
               <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
                 <TreeGridRow className={styles.treeGridHeaderRow}>
                   {columns.map((column, index) => (
@@ -882,7 +882,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               </TreeGrid>
             ) : (
               renderDataGrid()
-            )}
+            ))}
             <EmptyMessage items={items} error={props.error} />
             <ListFilterPanel />
             <ViewColumnsPanel />
@@ -920,7 +920,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
                   </div>
                 ))}
               </Skeleton>
-            ) : isGrouped ? (
+            ) : (isGrouped ? (
               <TreeGrid className={styles.treeGrid} style={treeGridStyle}>
                 <TreeGridRow className={styles.treeGridHeaderRow}>
                   {columns.map((column, index) => (
@@ -1072,7 +1072,7 @@ export const List: ReusableComponent<IListProps> = (props) => {
               </TreeGrid>
             ) : (
               renderDataGrid()
-            )}
+            ))}
             <EmptyMessage items={items} error={props.error} />
             <ListFilterPanel />
             <ViewColumnsPanel />
