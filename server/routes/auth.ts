@@ -160,41 +160,79 @@ auth.get('/signout', signOutHandler)
  * Session injection for agent/e2e testing (development only)
  *
  * Allows agents and Playwright tests to authenticate without going through OAuth.
- * Requires ENABLE_SESSION_INJECTION=true and TEST_SESSION_COOKIE to be set.
+ * Requires NODE_ENV=development, ENABLE_SESSION_INJECTION=true, and TEST_SESSION_COOKIE to be set.
  * The TEST_SESSION_COOKIE should be a base64-encoded JSON object containing
  * the user session data (copy from a real logged-in session).
  *
  * @example
- * curl http://localhost:9142/auth/inject-session
+ * curl -X POST "$APP_URL/auth/inject-session" -H "X-Injection-Secret: $SESSION_INJECTION_SECRET"
  */
 if (
+  environment('NODE_ENV') === 'development' &&
   environment('ENABLE_SESSION_INJECTION', false, { isSwitch: true }) &&
-  environment('TEST_SESSION_COOKIE')
+  environment('TEST_SESSION_COOKIE') &&
+  environment('SESSION_INJECTION_SECRET')
 ) {
-  auth.get('/inject-session', (request: Request, response: Response) => {
+  auth.post('/inject-session', (request: Request, response: Response) => {
     try {
+      // Verify secret token
+      const providedSecret = request.headers['x-injection-secret']
+      const expectedSecret = environment('SESSION_INJECTION_SECRET') as string
+      if (providedSecret !== expectedSecret) {
+        debug('Session injection failed: invalid secret')
+        return response.status(403).json({ error: 'Invalid secret' })
+      }
+
       const sessionData = JSON.parse(
         Buffer.from(
           environment('TEST_SESSION_COOKIE') as string,
           'base64'
         ).toString('utf8')
       )
-      debug('Injecting session for user: %s', sessionData?.passport?.user?.mail)
-      Object.assign(request.session, sessionData)
-      request.session.save((error) => {
-        if (error) {
-          debug('Session injection failed: %s', error.message)
-          return response.status(500).json({ error: 'Session save failed' })
+
+      const passportData = sessionData?.passport
+      if (!passportData) {
+        debug('Session injection error: missing passport data in TEST_SESSION_COOKIE')
+        return response.status(400).json({ error: 'Invalid TEST_SESSION_COOKIE' })
+      }
+
+      debug('Injecting session for user: %s', passportData?.user?.mail)
+
+      // Regenerate session before injection to prevent fixation
+      request.session.regenerate((regenerateError) => {
+        if (regenerateError) {
+          debug('Session regeneration failed: %s', regenerateError.message)
+          return response.status(500).json({ error: 'Session regeneration failed' })
         }
-        const redirectUrl = sessionData?.passport?.user?.startPage || '/timesheet'
-        return response.redirect(redirectUrl)
+
+        // Only copy allowlisted field (passport) onto new session
+        ;(request.session as any).passport = passportData
+
+        request.session.save((error) => {
+          if (error) {
+            debug('Session injection failed: %s', error.message)
+            return response.status(500).json({ error: 'Session save failed' })
+          }
+
+          // Restrict redirectUrl to internal relative paths only
+          let redirectUrl = passportData?.user?.startPage || '/timesheet'
+          if (
+            typeof redirectUrl !== 'string' ||
+            !redirectUrl.startsWith('/') ||
+            redirectUrl.startsWith('//')
+          ) {
+            redirectUrl = '/timesheet'
+          }
+
+          return response.redirect(redirectUrl)
+        })
       })
     } catch (error) {
       debug('Session injection parse error: %s', (error as Error).message)
       return response.status(400).json({ error: 'Invalid TEST_SESSION_COOKIE' })
     }
   })
-  debug('Session injection route enabled at /auth/inject-session')
+  debug('Session injection route enabled at POST /auth/inject-session')
 }
 
 export default auth
