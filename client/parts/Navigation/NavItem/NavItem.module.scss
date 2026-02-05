@@ -2,32 +2,43 @@
   display: flex;
   align-items: center;
   height: 100%;
-  margin: 0 8px;
+  margin: 0 0.3rem;
   position: relative;
 
   .link {
     display: flex;
-    color: #fff;
+    color: #ffffff;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 0.9rem;
+    align-items: center;
+    letter-spacing: 0.5px;
+    height: 100%;
     text-decoration: none;
     text-transform: capitalize;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: var(--shadow8);
+    padding: 0 0.7rem;
+    text-shadow: 0px 1px 1px #888;
 
     .icon {
-      display: none;
+      display: inline-flex;
+      margin-right: 5px;
     }
 
     &:hover {
-      color: #bbb;
+      background-color: #ff6a4c22;
+      border-radius: 0.3rem;
     }
 
     &.active {
-      color: #f6f586;
+      color: #ffffff;
+      font-weight: 800;
       cursor: default;
-      font-weight: bold;
+      padding-top: 3px;
+      padding-bottom: 0;
+      height: calc(100% - 6px);
+      border-bottom: 3px inset #ff6a4c;
+      &:hover {
+        border-radius: 0;
+      }
     }
   }
 
