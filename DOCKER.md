@@ -1,10 +1,11 @@
-## Quickstart vs Dev Script
+## Docker Script
 
-Use `./scripts/docker-quickstart.sh --fresh` for a one-command clean start and config check. Use `./scripts/docker-dev.sh` for granular control and status checks.
+Use `./scripts/docker.sh` for all Docker development operations:
 
-To see your effective compose chain and services:
 ```bash
-./scripts/docker-quickstart.sh --status
+./scripts/docker.sh              # Start containers (default)
+./scripts/docker.sh start --fresh  # Clean start with fresh volumes
+./scripts/docker.sh status       # Show config and container status
 ```
 ## Common Reset Recipes
 
@@ -56,6 +57,8 @@ This guide provides comprehensive instructions for using Docker with the did app
 - [Deployment Notes](#deployment-notes)
 - [Troubleshooting](#troubleshooting)
 - [Advanced Usage](#advanced-usage)
+- [Agent / Worktree Setup](#agent--worktree-setup)
+- [Health Checks](#health-checks)
 
 ## Prerequisites
 
@@ -150,23 +153,24 @@ When in doubt: clean slate.
 docker compose down -v && docker compose up --build -d
 ```
 
-## Development Workflow (Concise)
+## Development Workflow
 
-Core script: `./scripts/docker-dev.sh`
+Core script: `./scripts/docker.sh`
 
 | Action | Command |
-|--------|---------|
-| Start | `./scripts/docker-dev.sh start` |
-| Start + tools | `./scripts/docker-dev.sh start --with-tools` |
-| Logs (follow) | `./scripts/docker-dev.sh logs` |
-| Shell (app) | `./scripts/docker-dev.sh shell` |
-| Mongo shell | `./scripts/docker-dev.sh db-shell` |
-| Redis CLI | `./scripts/docker-dev.sh redis-cli` |
-| Stop | `./scripts/docker-dev.sh stop` |
-| Restart | `./scripts/docker-dev.sh restart` |
-| Clean (remove volumes) | `./scripts/docker-dev.sh clean` |
-
-Quickstart script alternative: `./scripts/docker-quickstart.sh --fresh`
+|--------|--------|
+| Start | `./scripts/docker.sh` or `./scripts/docker.sh start` |
+| Start + tools | `./scripts/docker.sh start --with-tools` |
+| Start fresh | `./scripts/docker.sh start --fresh` |
+| Logs (follow) | `./scripts/docker.sh logs` |
+| Shell (app) | `./scripts/docker.sh shell` |
+| Mongo shell | `./scripts/docker.sh db` |
+| Redis CLI | `./scripts/docker.sh redis` |
+| Stop | `./scripts/docker.sh stop` |
+| Restart | `./scripts/docker.sh restart` |
+| Status | `./scripts/docker.sh status` |
+| Clean (remove volumes) | `./scripts/docker.sh clean` |
+| Maintenance | `./scripts/docker.sh maintenance` |
 
 ## Services
 
@@ -200,7 +204,7 @@ MongoDB can be pre-populated with tenant data for development:
 
 3. **Start services** - data will be imported automatically on first MongoDB startup:
    ```bash
-   ./scripts/docker-dev.sh start
+   ./scripts/docker.sh start
    ```
 
 **Note**: Data import only happens when MongoDB starts with an empty database, and only JSON files inside subdirectories are imported.
@@ -261,7 +265,7 @@ services:
 **2. Permission issues:**
 ```bash
 # Make sure script is executable
-chmod +x ./scripts/docker-dev.sh
+chmod +x ./scripts/docker.sh
 
 # Fix ownership issues (Linux/macOS)
 sudo chown -R $USER:$USER .
@@ -293,19 +297,19 @@ docker system prune -f
 **1. Application not starting:**
 ```bash
 # Check container logs
-./scripts/docker-dev.sh logs
+./scripts/docker.sh logs
 
 # Check container status
 docker compose ps
 
 # Enter container for debugging
-./scripts/docker-dev.sh shell
+./scripts/docker.sh shell
 ```
 
 **2. Database issues:**
 ```bash
 # Access MongoDB directly
-./scripts/docker-dev.sh db-shell
+./scripts/docker.sh db
 
 # Check database status
 docker compose exec mongodb mongosh --eval "db.runCommand('ping')"
@@ -314,7 +318,7 @@ docker compose exec mongodb mongosh --eval "db.runCommand('ping')"
 **3. Cache issues:**
 ```bash
 # Access Redis CLI
-./scripts/docker-dev.sh redis-cli
+./scripts/docker.sh redis
 
 # Check Redis status
 docker compose exec redis redis-cli ping
@@ -357,6 +361,140 @@ docker buildx create --use
 docker buildx build --platform linux/amd64 -t did:latest .
 ```
 
+## Agent / Worktree Setup
+
+For CI agents, coding assistants, or isolated development in git worktrees, use the dedicated agent scripts. These automatically assign unique ports to avoid conflicts with main development on port 9001.
+
+### Quick Start (Agent)
+
+```bash
+# Set credentials (or place in parent directory's .env)
+export MICROSOFT_CLIENT_ID="your-client-id"
+export MICROSOFT_CLIENT_SECRET="your-client-secret"
+export TEST_SESSION_COOKIE="base64-encoded-session"  # optional, for auth bypass
+
+# Setup - automatically assigns unique ports based on worktree/folder name
+./scripts/agent-setup.sh
+
+# Teardown when done
+./scripts/agent-teardown.sh
+./scripts/agent-teardown.sh --remove-worktree  # also removes the git worktree
+```
+
+### Port Allocation
+
+Ports are deterministically derived from the folder name, so the same worktree always gets the same ports:
+
+| Service | Main Dev | Agent Worktrees |
+|---------|----------|-----------------|
+| App | 9001 | 9101-9199 |
+| MongoDB | 27017 | 27101-27199 |
+| Redis | 6379 | 6401-6499 |
+
+Connection info is written to `.agent-env` for programmatic access:
+```bash
+source .agent-env
+echo "App running at $APP_URL"
+```
+
+### Session Injection (Auth Bypass)
+
+For e2e tests or agent workflows that need authentication without OAuth, session injection is available in development mode.
+
+**1. Export your session from a logged-in browser:**
+
+Open browser devtools while logged into did and run:
+```javascript
+// Copy session data from your cookies/session storage
+// The exact method depends on how you want to capture it
+```
+
+Or capture the full session object server-side and base64 encode it:
+```bash
+# Example structure (base64 encode this JSON)
+{
+  "passport": {
+    "user": {
+      "id": "user-oid",
+      "mail": "user@example.com",
+      "displayName": "Test User",
+      "subscription": { "id": "sub-id", "db": "tenant-db" }
+    }
+  }
+}
+```
+
+**2. Set the environment variables:**
+```bash
+export TEST_SESSION_COOKIE="eyJwYXNzc...base64..."
+export SESSION_INJECTION_SECRET="your-secret-token"
+```
+
+**3. Authenticate via the injection endpoint:**
+```bash
+# Uses APP_URL from .agent-env or your configured port
+curl -X POST "${APP_URL}/auth/inject-session" -H "X-Injection-Secret: ${SESSION_INJECTION_SECRET}"
+# Redirects to /timesheet with valid session
+```
+
+In Playwright tests:
+```typescript
+test('authenticated flow', async ({ page, request }) => {
+  // Inject session before testing protected routes
+  await request.post(`${process.env.APP_URL}/auth/inject-session`, {
+    headers: {
+      'X-Injection-Secret': process.env.SESSION_INJECTION_SECRET
+    }
+  })
+  
+  // Now authenticated - test protected functionality
+  await page.goto(`${process.env.APP_URL}/timesheet`)
+  await expect(page.locator('h1')).toContainText('Timesheet')
+})
+```
+
+### Worktree Lifecycle Example
+
+```bash
+# 1. Create worktree for a feature branch
+git worktree add ../did-feature-123 -b feature/my-feature dev
+
+# 2. Enter worktree and setup
+cd ../did-feature-123
+./scripts/agent-setup.sh
+
+# 3. Work on feature (app available at assigned port)
+# ... make changes, run tests ...
+
+# 4. Commit and push
+git add . && git commit -m "feat: my feature"
+git push -u origin feature/my-feature
+
+# 5. Teardown after PR is merged
+./scripts/agent-teardown.sh --remove-worktree
+```
+
+### Environment Variables
+
+The agent scripts look for credentials in this order:
+1. Environment variables (`MICROSOFT_CLIENT_ID`, etc.)
+2. Parent directory's `.env` file (`../.env`)
+3. Fails with error if required vars are missing
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `MICROSOFT_CLIENT_ID` | Yes | Azure AD app client ID |
+| `MICROSOFT_CLIENT_SECRET` | Yes | Azure AD app client secret |
+| `TEST_SESSION_COOKIE` | No | Base64-encoded session for auth bypass |
+
+### Generated Files
+
+| File | Purpose | Gitignored |
+|------|---------|------------|
+| `docker-compose.local.yml` | Port overrides + credentials | Yes |
+| `.agent-env` | Connection info for scripts | Yes |
+| `.env` | Compose file chain config | Yes |
+
 ## Health Checks
 
 The application includes built-in health checks:
@@ -393,6 +531,6 @@ For production monitoring, consider integrating:
 For issues and questions:
 
 1. Check this guide and troubleshooting section
-2. Review Docker Compose logs: `./scripts/docker-dev.sh logs`
+2. Review Docker Compose logs: `./scripts/docker.sh logs`
 3. Open an issue on GitHub with logs and configuration
 4. Contact the development team

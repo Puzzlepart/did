@@ -12,7 +12,8 @@
     "default_path": "sidebar.html"
   },
   "permissions": [
-    "sidePanel"
+    "sidePanel",
+    "storage"
   ],
   "action": {
     "default_title": "Open did Timesheet",

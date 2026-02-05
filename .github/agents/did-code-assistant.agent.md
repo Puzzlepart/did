@@ -269,13 +269,25 @@ Generate `.env` file: `npm run create-env`
 - `npm run lint:fix` - Fix linting issues
 - `npm run prettier:write` - Auto-format code
 
-### Docker Development (Recommended)
+### Docker Development
 ```bash
-./scripts/docker-dev.sh setup   # Initialize environment
-./scripts/docker-dev.sh start   # Start services
-./scripts/docker-dev.sh logs    # View logs
-./scripts/docker-dev.sh shell   # Access container shell
-./scripts/docker-dev.sh stop    # Stop services
+./scripts/docker.sh              # Start containers (default)
+./scripts/docker.sh start --fresh  # Clean start with fresh volumes
+./scripts/docker.sh start --with-tools  # Include admin UI tools
+./scripts/docker.sh logs         # Tail logs
+./scripts/docker.sh shell        # Access container shell
+./scripts/docker.sh db           # MongoDB shell
+./scripts/docker.sh redis        # Redis CLI
+./scripts/docker.sh stop         # Stop containers
+./scripts/docker.sh status       # Show status
+./scripts/docker.sh clean        # Remove everything
+```
+
+### Agent/Worktree Environments
+For isolated development in worktrees or CI agents:
+```bash
+./scripts/agent-setup.sh         # Setup with unique ports
+./scripts/agent-teardown.sh      # Cleanup
 ```
 
 Services: DID app (localhost:9001), MongoDB (27017), Redis (6379)
