@@ -189,10 +189,19 @@ API_TOKEN_SECRET=your_api_secret
 ## Docker Support
 
 ### Development
-- `npm run docker:setup` - Initial Docker environment setup
-- `npm run docker:start` - Start containers
+- `npm run docker:start` - Start containers (or `./scripts/docker.sh`)
+- `npm run docker:stop` - Stop containers
 - `npm run docker:logs` - View container logs
 - `npm run docker:shell` - Access container shell
+- `npm run docker:db` - MongoDB shell
+- `npm run docker:redis` - Redis CLI
+- `npm run docker:status` - Show container status
+- `npm run docker:clean` - Remove containers and volumes
+
+### Agent/Worktree Environments
+For isolated development in worktrees or CI:
+- `./scripts/agent-setup.sh` - Setup with unique ports (avoids conflict with main dev)
+- `./scripts/agent-teardown.sh` - Cleanup agent environment
 
 ### Production
 - Production deployment is done using slot swapping in azure app service, there is no specific dockerfile for prod
