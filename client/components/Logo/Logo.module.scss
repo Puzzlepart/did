@@ -19,8 +19,6 @@
     width: 100%;
     height: auto;
     fill-opacity: 0.9;
-    stroke: rgb(255, 102, 0, 0.5);
-    stroke-width: 1px;
     filter: drop-shadow(0.05rem 0.3rem 0.1rem rgba(0, 20, 90, 0.21));
   }
 
@@ -36,7 +34,7 @@
   .version {
     margin-top: 0.5rem;
     span {
-      font-size: .8rem;
+      font-size: 0.8rem;
       color: rgb(255, 102, 0);
       font-weight: normal;
       position: relative;
