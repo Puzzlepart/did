@@ -87,5 +87,4 @@ export interface IListColumnData {
    * Hide the mobile label for this column.
    */
   hideMobileLabel?: boolean
-
 }

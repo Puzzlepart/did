@@ -39,10 +39,7 @@ export function useAdditionalColumns() {
       const dateKey =
         event.date ?? $date.formatDate(event.startDateTime, 'YYYY-MM-DD')
       const customerKey =
-        event.customer?.key ??
-        event.customer?.id ??
-        event.customer?.name ??
-        ''
+        event.customer?.key ?? event.customer?.id ?? event.customer?.name ?? ''
       if (!dateKey || !customerKey) continue
       if (!multipleCustomersByDate.has(dateKey))
         multipleCustomersByDate.set(dateKey, new Set())
@@ -61,12 +58,12 @@ export function useAdditionalColumns() {
 
     return [
       showCustomerColumn &&
-      createColumnDef<EventObject>(
-        'customer',
-        t('common.customer'),
-        { minWidth: 180, maxWidth: 400 },
-        (event) => <CustomerLink customer={event.customer} />
-      ),
+        createColumnDef<EventObject>(
+          'customer',
+          t('common.customer'),
+          { minWidth: 180, maxWidth: 400 },
+          (event) => <CustomerLink customer={event.customer} />
+        ),
       createColumnDef<EventObject>(
         'project',
         t('common.project'),
