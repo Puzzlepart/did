@@ -1,6 +1,6 @@
 import { Inject, Service } from 'typedi'
 import { RequestContext } from '../../graphql/requestContext'
-import { environment } from '../../utils'
+import { getMainDatabaseName } from '../../utils'
 import { MongoDocumentService } from './document'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { HolidayObject } from '../../graphql/resolvers/timesheet/types/HolidayObject'
@@ -25,7 +25,7 @@ export class HolidaysService extends MongoDocumentService<any> {
       context,
       'holidays',
       null,
-      context?.mcl?.db(environment('MONGO_DB_DB_NAME'))
+      context?.mcl?.db(getMainDatabaseName())
     )
   }
 

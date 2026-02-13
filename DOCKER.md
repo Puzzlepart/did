@@ -1,536 +1,144 @@
-## Docker Script
-
-Use `./scripts/docker.sh` for all Docker development operations:
-
-```bash
-./scripts/docker.sh              # Start containers (default)
-./scripts/docker.sh start --fresh  # Clean start with fresh volumes
-./scripts/docker.sh status       # Show config and container status
-```
-## Common Reset Recipes
-
-To reset MongoDB and re-import seed data:
-```bash
-docker compose stop mongodb && docker compose rm -f mongodb && docker volume rm did_mongodb_data && docker compose up -d mongodb
-```
-
-## Disk Hygiene (Cache + Logs)
-
-Most Docker disk growth comes from build cache. You can inspect it with:
-```bash
-docker builder du
-```
-
-Run a safe cleanup that keeps active containers and volumes:
-```bash
-./scripts/docker-maintenance.sh --days 7
-```
-
-Via npm:
-```bash
-npm run docker:maintenance -- --days 7
-```
-
-Optional flags:
-```bash
-./scripts/docker-maintenance.sh --aggressive --include-volumes --clean-dist
-```
-
-Notes:
-- The compose file enables log rotation (max 10MB per file, 5 files).
-- Consider scheduling the maintenance script with cron or launchd if disk usage is a recurring problem.
-
-## Security Note
-
-Never commit real secrets (client IDs, secrets, session keys) to the repository. Always use `docker-compose.local.yml` for local secrets and ensure it's gitignored.
 # Docker Development Guide for did
 
-This guide provides comprehensive instructions for using Docker with the did application for development, testing, and deployment.
+The local Docker stack now uses **2 services only**:
+- `did` (Node/Express app, GraphQL, SQLite access)
+- `redis` (sessions + cache)
 
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
-- [Development Workflow](#development-workflow)
-- [Services](#services)
-- [Configuration](#configuration)
-- [Deployment Notes](#deployment-notes)
-- [Troubleshooting](#troubleshooting)
-- [Advanced Usage](#advanced-usage)
-- [Agent / Worktree Setup](#agent--worktree-setup)
-- [Health Checks](#health-checks)
-
-## Prerequisites
-
-- [Docker](https://docs.docker.com/get-docker/) (v20.10 or later)
-- [Docker Compose](https://docs.docker.com/compose/install/) (v2.0 or later)
-- Git
+There is no MongoDB container, no mongo-express, and no redis-commander.
 
 ## Quick Start
 
-The fastest path to a working local stack (app + MongoDB + Redis) with a clean slate.
-
 ```bash
-# 1. Clone (first time only)
-git clone https://github.com/Puzzlepart/did.git
-cd did
+# 1) Create local env (first time)
+npm run create-env
 
-# 2. (Optional) Switch branch
-git checkout dev
+# 2) Start stack
+./scripts/docker.sh start
 
-# 3. Create your local override file for secrets (only once)
-cp docker-compose.override.yml docker-compose.local.yml
-# Edit docker-compose.local.yml and add your real MICROSOFT_CLIENT_ID / _SECRET
-
-# 4. (Recommended) Tell Docker Compose to always include the local file
-echo 'COMPOSE_FILE=docker-compose.yml:docker-compose.override.yml:docker-compose.local.yml' >> .env
-
-# 5. Start fresh (removes old volumes so Mongo seed import runs again)
-docker compose down -v || true
-docker compose up --build -d
-
-# 6. Tail logs (optional)
-docker compose logs -f did
+# 3) Optional: wait for health check
+./scripts/docker.sh start --wait
 ```
 
 Access:
-- App: http://localhost:9001
-- Health: http://localhost:9001/health_check
-- MongoDB: localhost:27017
-- Redis: localhost:6379
-
-Need admin tools (mongo-express / redis-commander)?
-```bash
-docker compose --profile tools up -d
-```
-
-Clean restart later:
-```bash
-docker compose down -v && docker compose up -d
-```
-
-Minimal daily workflow (after initial setup):
-```bash
-git pull
-docker compose up -d --build
-```
-
-If authentication hangs on /auth/... ensure:
-- docker-compose.override.yml forces REDIS_CACHE_HOSTNAME=redis & MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
-- Your local override (docker-compose.local.yml) does NOT contain cloud Redis / Cosmos values
-- `MICROSOFT_REDIRECT_URI` matches http://localhost:9001/auth/azuread-openidconnect/callback
-
-## Authentication Troubleshooting
-
-Common local sign‑in issues and fixes.
-
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| `/auth/azuread-openidconnect/signin` hangs | Session store (Redis) unreachable | Ensure `REDIS_CACHE_HOSTNAME=redis` in compose overrides; remove cloud Redis vars from local file; restart: `docker compose down -v && docker compose up -d` |
-| Redirect loop to sign-in for JS/CSS assets | Catch-all route intercepting static assets | Confirm updated routing logic in `server/app.ts` (no `use('*', ...)`); rebuild container |
-| 401 with no Microsoft redirect | Missing / invalid `MICROSOFT_CLIENT_ID` / secret | Add values to `docker-compose.local.yml` or host env; restart containers |
-| Microsoft login page shows wrong redirect URI | Mismatch between Azure app and local config | Update Azure AD app redirect to `http://localhost:9001/auth/azuread-openidconnect/callback` OR update `MICROSOFT_REDIRECT_URI` to the registered value |
-| Error after callback (generic sign-in failed) | User not enrolled / subscription check failed | Seed proper subscription + user docs into Mongo (place JSON in `docker/data/<dbname>/`) and restart with fresh volume |
-| Random sign-out during dev | Session lost (volume cleared or Redis restart) | Keep Redis running; avoid `down -v` unless resetting; re-login |
-
-Diagnostic commands:
-```bash
-# Tail only auth + passport debug logs
-docker compose logs -f did | egrep 'server/routes/auth|middleware/passport'
-
-# Check Redis connectivity
-docker compose exec redis redis-cli ping
-
-# Verify Mongo connection from app container
-docker compose exec did node -e "require('mongodb').MongoClient.connect('mongodb://mongodb:27017').then(()=>console.log('ok')||process.exit())"
-
-# Inspect environment inside running app
-docker compose exec did env | egrep 'MICROSOFT_|REDIS_|MONGO_DB_'
-```
-
-When in doubt: clean slate.
-```bash
-docker compose down -v && docker compose up --build -d
-```
-
-## Development Workflow
-
-Core script: `./scripts/docker.sh`
-
-| Action | Command |
-|--------|--------|
-| Start | `./scripts/docker.sh` or `./scripts/docker.sh start` |
-| Start + tools | `./scripts/docker.sh start --with-tools` |
-| Start fresh | `./scripts/docker.sh start --fresh` |
-| Logs (follow) | `./scripts/docker.sh logs` |
-| Shell (app) | `./scripts/docker.sh shell` |
-| Mongo shell | `./scripts/docker.sh db` |
-| Redis CLI | `./scripts/docker.sh redis` |
-| Stop | `./scripts/docker.sh stop` |
-| Restart | `./scripts/docker.sh restart` |
-| Status | `./scripts/docker.sh status` |
-| Clean (remove volumes) | `./scripts/docker.sh clean` |
-| Maintenance | `./scripts/docker.sh maintenance` |
+- App: <http://localhost:9001>
+- Health: <http://localhost:9001/health_check>
 
 ## Services
 
-| Service | Port | Notes |
-|---------|------|-------|
-| did app | 9001 | React/GraphQL, served by Node/Express |
-| MongoDB | 27017 | Seeded on first empty start via `docker/import-data.sh` |
-| Redis | 6379 | Session + cache |
-| mongo-express (profile tools) | 8081 | `admin/admin123` |
-| redis-commander (profile tools) | 8082 | No auth |
+| Service | Port | Purpose |
+|---|---:|---|
+| did | 9001 | App server + SQLite-backed data layer |
+| redis | 6379 | Session store + cache |
 
-### Seed Data Import
+## SQLite Storage Model
 
-MongoDB can be pre-populated with tenant data for development:
+SQLite runs **inside the `did` container** (not a separate DB container).
 
-1. **Export data from production** using `mongoexport`:
-   ```bash
-   mongoexport --uri="your-prod-connection-string" --collection=users --out=users.json
-   mongoexport --uri="your-prod-connection-string" --collection=projects --out=projects.json
-   mongoexport --uri="your-prod-connection-string" --collection=customers --out=customers.json
-   ```
+Compose sets:
+- `SQLITE_DB_PATH=/app/did.sqlite`
+- `SQLITE_DB_MAIN_DB_NAME=main`
 
-2. **Create a database-specific folder** inside `docker/data/` (this folder is gitignored). The folder name becomes the database name during import:
-   ```text
-   docker/data/
-     └── puzzlepart/
-         ├── users.json
-         ├── projects.json
-         └── timeentries.json
-   ```
+Because the project root is bind-mounted to `/app`, the SQLite database is persisted in the repository root as `did.sqlite`.
 
-3. **Start services** - data will be imported automatically on first MongoDB startup:
-   ```bash
-   ./scripts/docker.sh start
-   ```
+On container start, `did` now runs `./scripts/dev-start.sh`, which auto-syncs `node_modules` via `npm ci` when:
+- `package-lock.json` changed
+- dependency stamp is missing
+- required modules (such as `sqlite3` / `sift`) are missing
 
-**Note**: Data import only happens when MongoDB starts with an empty database, and only JSON files inside subdirectories are imported.
+## Backup Import Workflow
 
-### Admin Tools (Optional)
+Backups should be placed under:
+- `.backup/backup-YYYY-MM-DD_HH-mm-ss/`
 
-Include admin tools with `--with-tools` flag:
+Import newest backup into SQLite:
 
-| Service | Port | Description | Access | Credentials |
-|---------|------|-------------|--------|-------------|
-| MongoDB Express | 8081 | MongoDB admin | http://localhost:8081 | admin/admin123 |
-| Redis Commander | 8082 | Redis admin | http://localhost:8082 | None |
-
-## Configuration (Essentials)
-
-| Area | Key Vars / Files | Notes |
-|------|------------------|-------|
-| DB | `MONGO_DB_CONNECTION_STRING`, `MONGO_DB_DB_NAME` | Overridden to local in compose override |
-| Cache | `REDIS_CACHE_HOSTNAME`, `REDIS_CACHE_PORT` | Use `redis` host locally |
-| Auth | `MICROSOFT_CLIENT_ID`, `MICROSOFT_CLIENT_SECRET`, `MICROSOFT_REDIRECT_URI` | Add to `docker-compose.local.yml` |
-| Debug | `DEBUG` | E.g. `server/routes/auth,middleware/passport*` |
-| Compose stack | `COMPOSE_FILE` | Chain base + override + local |
-
-Files:
-- `docker-compose.yml` (base)
-- `docker-compose.override.yml` (template placeholders)
-- `docker-compose.local.yml` (gitignored secrets)
-- `.env` (can hold `COMPOSE_FILE` + misc vars)
-
-Override example snippet:
-```yaml
-services:
-  did:
-    environment:
-      - DEBUG=graphql*,middleware/passport*
+```bash
+npm run db:import-latest-backup
 ```
 
-## Deployment Notes
+This command:
+- Finds the newest folder under `.backup/` that starts with `backup`
+- Imports all `*.json` NDJSON files from each tenant folder (`main`, `crayon`, etc.)
+- Replaces each target collection (`database_name + collection_name`) in SQLite
 
-Production deployments are handled manually via Azure App Service slot swaps. The Docker tooling in this repository targets development workflows only.
+## Common Commands
 
-## Troubleshooting
-
-### Common Issues
-
-**1. Port conflicts:**
 ```bash
-# Check what's using the port
-lsof -i :9001
+# Start / stop
+./scripts/docker.sh start
+./scripts/docker.sh stop
 
-# Change port in docker-compose.override.yml
-services:
-  did:
-    ports:
-      - "9002:9001"
-```
+# Restart
+./scripts/docker.sh restart
 
-**2. Permission issues:**
-```bash
-# Make sure script is executable
-chmod +x ./scripts/docker.sh
+# Rebuild image without cache
+./scripts/docker.sh build
 
-# Fix ownership issues (Linux/macOS)
-sudo chown -R $USER:$USER .
-```
-
-**3. Database connection issues:**
-```bash
-# Check if MongoDB is running
-docker compose ps
-
-# View MongoDB logs
-docker compose logs mongodb
-
-# Restart MongoDB
-docker compose restart mongodb
-```
-
-**4. Build issues:**
-```bash
-# Clean build cache
-docker compose build --no-cache
-
-# Clean Docker system
-docker system prune -f
-```
-
-### Debugging
-
-**1. Application not starting:**
-```bash
-# Check container logs
+# Tail app logs
 ./scripts/docker.sh logs
 
-# Check container status
-docker compose ps
-
-# Enter container for debugging
+# Open shell in app container
 ./scripts/docker.sh shell
-```
 
-**2. Database issues:**
-```bash
-# Access MongoDB directly
+# Show SQLite status (path + did_documents row count)
 ./scripts/docker.sh db
 
-# Check database status
-docker compose exec mongodb mongosh --eval "db.runCommand('ping')"
-```
-
-**3. Cache issues:**
-```bash
-# Access Redis CLI
+# Open Redis CLI
 ./scripts/docker.sh redis
 
-# Check Redis status
-docker compose exec redis redis-cli ping
+# Status overview
+./scripts/docker.sh status
+
+# Full cleanup (containers + volumes + local images)
+./scripts/docker.sh clean
 ```
 
-## Advanced Usage
-
-### Custom Docker Commands
-
-```bash
-# Build specific stage
-docker build --target development -t did:dev .
-
-# Run with custom environment
-docker run -it --rm -p 9001:9001 --env-file .env.custom did:dev
-
-# Override entrypoint for debugging
-docker run -it --rm --entrypoint /bin/sh did:dev
-```
-
-### Development with Volumes
-
-For active development, code changes are automatically reflected due to volume mounts:
-
-```yaml
-volumes:
-  - .:/app
-  - /app/node_modules  # Prevents overwriting container node_modules
-```
-
-### Multi-Architecture Builds
-
-Build for multiple architectures:
-
-```bash
-# Setup buildx
-docker buildx create --use
-
-# Build for amd64 - arm64 builds bomb on github
-docker buildx build --platform linux/amd64 -t did:latest .
-```
+Equivalent npm scripts:
+- `npm run docker:start`
+- `npm run docker:stop`
+- `npm run docker:logs`
+- `npm run docker:shell`
+- `npm run docker:db`
+- `npm run docker:redis`
+- `npm run docker:status`
+- `npm run docker:clean`
 
 ## Agent / Worktree Setup
 
-For CI agents, coding assistants, or isolated development in git worktrees, use the dedicated agent scripts. These automatically assign unique ports to avoid conflicts with main development on port 9001.
-
-### Quick Start (Agent)
+For isolated worktrees:
 
 ```bash
-# Set credentials (or place in parent directory's .env)
-export MICROSOFT_CLIENT_ID="your-client-id"
-export MICROSOFT_CLIENT_SECRET="your-client-secret"
-export TEST_SESSION_COOKIE="base64-encoded-session"  # optional, for auth bypass
-
-# Setup - automatically assigns unique ports based on worktree/folder name
 ./scripts/agent-setup.sh
-
-# Teardown when done
 ./scripts/agent-teardown.sh
-./scripts/agent-teardown.sh --remove-worktree  # also removes the git worktree
 ```
 
-### Port Allocation
+`agent-setup.sh` assigns unique ports for:
+- app
+- redis
 
-Ports are deterministically derived from the folder name, so the same worktree always gets the same ports:
+## Troubleshooting
 
-| Service | Main Dev | Agent Worktrees |
-|---------|----------|-----------------|
-| App | 9001 | 9101-9199 |
-| MongoDB | 27017 | 27101-27199 |
-| Redis | 6379 | 6401-6499 |
-
-Connection info is written to `.agent-env` for programmatic access:
-```bash
-source .agent-env
-echo "App running at $APP_URL"
-```
-
-### Session Injection (Auth Bypass)
-
-For e2e tests or agent workflows that need authentication without OAuth, session injection is available in development mode.
-
-**1. Export your session from a logged-in browser:**
-
-Open browser devtools while logged into did and run:
-```javascript
-// Copy session data from your cookies/session storage
-// The exact method depends on how you want to capture it
-```
-
-Or capture the full session object server-side and base64 encode it:
-```bash
-# Example structure (base64 encode this JSON)
-{
-  "passport": {
-    "user": {
-      "id": "user-oid",
-      "mail": "user@example.com",
-      "displayName": "Test User",
-      "subscription": { "id": "sub-id", "db": "tenant-db" }
-    }
-  }
-}
-```
-
-**2. Set the environment variables:**
-```bash
-export TEST_SESSION_COOKIE="eyJwYXNzc...base64..."
-export SESSION_INJECTION_SECRET="your-secret-token"
-```
-
-**3. Authenticate via the injection endpoint:**
-```bash
-# Uses APP_URL from .agent-env or your configured port
-curl -X POST "${APP_URL}/auth/inject-session" -H "X-Injection-Secret: ${SESSION_INJECTION_SECRET}"
-# Redirects to /timesheet with valid session
-```
-
-In Playwright tests:
-```typescript
-test('authenticated flow', async ({ page, request }) => {
-  // Inject session before testing protected routes
-  await request.post(`${process.env.APP_URL}/auth/inject-session`, {
-    headers: {
-      'X-Injection-Secret': process.env.SESSION_INJECTION_SECRET
-    }
-  })
-  
-  // Now authenticated - test protected functionality
-  await page.goto(`${process.env.APP_URL}/timesheet`)
-  await expect(page.locator('h1')).toContainText('Timesheet')
-})
-```
-
-### Worktree Lifecycle Example
+### App fails to start
 
 ```bash
-# 1. Create worktree for a feature branch
-git worktree add ../did-feature-123 -b feature/my-feature dev
-
-# 2. Enter worktree and setup
-cd ../did-feature-123
-./scripts/agent-setup.sh
-
-# 3. Work on feature (app available at assigned port)
-# ... make changes, run tests ...
-
-# 4. Commit and push
-git add . && git commit -m "feat: my feature"
-git push -u origin feature/my-feature
-
-# 5. Teardown after PR is merged
-./scripts/agent-teardown.sh --remove-worktree
+docker compose logs --tail=200 did
 ```
 
-### Environment Variables
-
-The agent scripts look for credentials in this order:
-1. Environment variables (`MICROSOFT_CLIENT_ID`, etc.)
-2. Parent directory's `.env` file (`../.env`)
-3. Fails with error if required vars are missing
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `MICROSOFT_CLIENT_ID` | Yes | Azure AD app client ID |
-| `MICROSOFT_CLIENT_SECRET` | Yes | Azure AD app client secret |
-| `TEST_SESSION_COOKIE` | No | Base64-encoded session for auth bypass |
-
-### Generated Files
-
-| File | Purpose | Gitignored |
-|------|---------|------------|
-| `docker-compose.local.yml` | Port overrides + credentials | Yes |
-| `.agent-env` | Connection info for scripts | Yes |
-| `.env` | Compose file chain config | Yes |
-
-## Health Checks
-
-The application includes built-in health checks:
-
-- **Endpoint**: `http://localhost:9001/health_check`
-- **Docker Health Check**: Configured in Dockerfile
-- **Compose Health Check**: Available in production compose
+### Redis connectivity issues
 
 ```bash
-# Check application health
-curl http://localhost:9001/health_check
-
-# Check Docker health status
-docker compose ps
+docker compose exec redis redis-cli ping
 ```
 
-## Monitoring
+### Reset local data completely
 
-For production monitoring, consider integrating:
+```bash
+./scripts/docker.sh clean
+./scripts/docker.sh start
+```
 
-- **Logs**: Use `docker compose logs` or external log aggregation
-- **Metrics**: Application exposes metrics at `/metrics`
-- **Monitoring**: Use tools like Prometheus, Grafana, or Azure Monitor
+Then re-import backup if needed:
 
-## Security Considerations
-
-1. **Secrets Management**: Use Docker secrets or external secret management
-2. **Network Security**: Configure proper network policies
-3. **User Permissions**: Run containers with non-root user (handled automatically)
-4. **Image Security**: Regularly update base images and scan for vulnerabilities
-
-## Support
-
-For issues and questions:
-
-1. Check this guide and troubleshooting section
-2. Review Docker Compose logs: `./scripts/docker.sh logs`
-3. Open an issue on GitHub with logs and configuration
-4. Contact the development team
+```bash
+npm run db:import-latest-backup
+```

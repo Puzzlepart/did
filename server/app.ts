@@ -11,7 +11,7 @@ import express from 'express'
 import bearerToken from 'express-bearer-token'
 import favicon from 'express-favicon'
 import createError from 'http-errors'
-import { MongoClient } from 'mongodb'
+import { MongoClient } from './services/sqlite'
 import logger from 'morgan'
 import path from 'path'
 import _ from 'underscore'
@@ -23,7 +23,7 @@ import {
   serveGzippedMiddleware
 } from './middleware'
 import { default as defaultRoute, authRoute } from './routes'
-import { environment } from './utils'
+import { environment, getDatabaseConnectionString } from './utils'
 import rateLimit from 'express-rate-limit'
 import os from 'os'
 
@@ -49,7 +49,7 @@ import os from 'os'
  * * [express-favicon](https://www.npmjs.com/package/express-favicon)
  * * [http-errors](https://www.npmjs.com/package/http-errors)
  * * [passport](https://www.npmjs.com/package/passport)
- * * [mongodb](https://www.npmjs.com/package/mongodb)
+ * * [sqlite3](https://www.npmjs.com/package/sqlite3)
  * * [morgan](https://www.npmjs.com/package/morgan)
  * * [underscore](https://www.npmjs.com/package/underscore)
  */
@@ -60,7 +60,7 @@ export class App {
   public instance: express.Application
 
   /**
-   * Mongo client
+   * SQLite client
    */
   private _mcl: MongoClient
 
@@ -113,7 +113,7 @@ export class App {
   /**
    * Setup app
    *
-   * * Connecting to our Mongo client
+   * * Connecting to our SQLite client
    * * Setting up sessions
    * * Setting up view engine
    * * Setting up static assets
@@ -123,21 +123,7 @@ export class App {
    * * Setting up error handling
    */
   public async setup() {
-    this._mcl = await MongoClient.connect(
-      environment('MONGO_DB_CONNECTION_STRING'),
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        // Increase timeouts for Azure Cosmos DB for MongoDB
-        // Cosmos DB can be slower than native MongoDB, especially for bulk operations
-        socketTimeoutMS: 300_000, // 5 minutes (default: 0 = no timeout)
-        serverSelectionTimeoutMS: 30_000, // 30 seconds (default: 30000)
-        maxPoolSize: 50, // Connection pool size (default: 100)
-        minPoolSize: 10, // Minimum connections to maintain
-        // Retry failed writes once (helps with Cosmos DB throttling)
-        retryWrites: true
-      }
-    )
+    this._mcl = await MongoClient.connect(getDatabaseConnectionString())
     this.setupSession()
     this.setupViewEngine()
     this.setupAssets()
@@ -193,7 +179,7 @@ export class App {
    * Setup health check endpoint to be used
    * by the Azure App Service to check if the
    * app is running. Includes:
-   * - MongoDB connection status
+   * - SQLite connection status
    * - System metrics
    * - Rate limiting
    * - Security headers
@@ -206,18 +192,18 @@ export class App {
 
     this.instance.use('/health_check', healthCheckLimiter, (_, res) => {
       try {
-        const isMongoConnected = this._mcl?.topology?.isConnected() ?? false
+        const isDatabaseConnected = this._mcl?.topology?.isConnected() ?? false
 
         const healthStatus = {
-          status: isMongoConnected ? 'ok' : 'error',
+          status: isDatabaseConnected ? 'ok' : 'error',
           uptime: process.uptime(),
           timestamp: new Date(),
           maintenanceMode: {
             enabled: environment('MAINTENANCE_MODE', false, { isSwitch: true }),
             message: environment('MAINTENANCE_MESSAGE', null)
           },
-          mongodb: {
-            connected: isMongoConnected
+          sqlite: {
+            connected: isDatabaseConnected
           },
           system: {
             memory: {
@@ -237,7 +223,7 @@ export class App {
           Expires: '0'
         })
 
-        res.status(isMongoConnected ? 200 : 500).json(healthStatus)
+        res.status(isDatabaseConnected ? 200 : 500).json(healthStatus)
       } catch {
         res.status(500).json({
           status: 'error',

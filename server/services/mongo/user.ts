@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import _ from 'lodash'
-import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import { RoleService } from '.'
 import { RequestContext } from '../../graphql/requestContext'
 import { User } from '../../graphql/resolvers/types'
+import { FilterQuery } from '../sqlite'
 import { MongoDocumentService } from './document'
 
 /**

@@ -87,26 +87,19 @@ check_placeholder_secrets() {
   fi
 }
 
-describe_seed_data() {
-  local data_root="docker/data"
+describe_backups() {
+  local backup_root=".backup"
 
-  if [[ ! -d "$data_root" ]]; then
+  if [[ ! -d "$backup_root" ]]; then
     return
   fi
 
-  if compgen -G "$data_root/*.json" > /dev/null 2>&1; then
-    warn "JSON files at $data_root root will be ignored. Move them into database-named subdirectories."
+  local latest_backup
+  latest_backup=$(find "$backup_root" -maxdepth 1 -type d -name 'backup*' | sort | tail -n 1 || true)
+  if [[ -n "$latest_backup" ]]; then
+    info "Latest backup folder: $latest_backup"
+    info "Import to SQLite: npm run db:import-latest-backup"
   fi
-
-  for dir in "$data_root"/*/; do
-    [[ -d "$dir" ]] || continue
-    if compgen -G "$dir"*.json > /dev/null 2>&1; then
-      local db_name count
-      db_name=$(basename "$dir")
-      count=$(find "$dir" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')
-      info "Seed data: $db_name ($count collections)"
-    fi
-  done
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -141,13 +134,11 @@ wait_for_healthy() {
 
 cmd_start() {
   local fresh=0
-  local with_tools=0
   local wait=0
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --fresh|--clean) fresh=1; shift ;;
-      --with-tools) with_tools=1; shift ;;
       --wait) wait=1; shift ;;
       *) warn "Unknown start flag: $1"; shift ;;
     esac
@@ -156,28 +147,19 @@ cmd_start() {
   ensure_local_override
   ensure_env_file
   check_placeholder_secrets
-  describe_seed_data
+  describe_backups
 
   if (( fresh == 1 )); then
     info "Removing existing containers + volumes"
     docker compose down -v 2>/dev/null || true
   fi
 
-  local profiles=""
-  if (( with_tools == 1 )); then
-    profiles="--profile tools"
-  fi
-
   info "Building & starting containers..."
-  if docker compose up --build -d $profiles; then
+  if docker compose up --build -d; then
     success "Stack started!"
     echo ""
     info "App: http://localhost:9001"
     info "Health: http://localhost:9001/health_check"
-    if (( with_tools == 1 )); then
-      info "MongoDB Express: http://localhost:8081 (admin/admin123)"
-      info "Redis Commander: http://localhost:8082"
-    fi
     info "Tail logs: docker compose logs -f did"
 
     if (( wait == 1 )); then
@@ -217,7 +199,20 @@ cmd_shell() {
 }
 
 cmd_db() {
-  docker compose exec mongodb mongosh main
+  docker compose exec did node - <<'NODE'
+const sqlite3 = require('sqlite3').verbose()
+const dbPath = process.env.SQLITE_DB_PATH || 'did.sqlite'
+const db = new sqlite3.Database(dbPath)
+db.get('SELECT COUNT(*) AS count FROM did_documents', (err, row) => {
+  if (err) {
+    console.error('[docker] Failed to query SQLite:', err.message)
+    process.exit(1)
+  }
+  console.log(`[docker] SQLite path: ${dbPath}`)
+  console.log(`[docker] did_documents rows: ${row.count}`)
+  db.close()
+})
+NODE
 }
 
 cmd_redis() {
@@ -229,7 +224,7 @@ cmd_status() {
   echo ""
   docker compose ps
   echo ""
-  describe_seed_data
+  describe_backups
   check_placeholder_secrets
 }
 
@@ -263,7 +258,7 @@ Commands:
   build         Rebuild images (no cache)
   logs          Tail application logs
   shell         Open shell in did container
-  db            Open MongoDB shell
+  db            Show SQLite database status
   redis         Open Redis CLI
   status        Show container status and configuration
   clean         Remove containers, volumes, and local images
@@ -272,15 +267,13 @@ Commands:
 
 Start flags:
   --fresh       Remove volumes before starting (clean slate)
-  --with-tools  Include admin tools (mongo-express, redis-commander)
   --wait        Wait for health check before returning
 
 Examples:
   $0                      # Start containers
   $0 start --fresh        # Clean start with fresh volumes
-  $0 start --with-tools   # Start with admin UI tools
   $0 logs                 # Tail logs
-  $0 db                   # MongoDB shell
+  $0 db                   # SQLite status
   $0 clean                # Remove everything
 
 Agent/Worktree Setup:

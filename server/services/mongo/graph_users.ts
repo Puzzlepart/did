@@ -86,16 +86,16 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
     try {
       const term = (search ?? '').trim()
       if (!term) return []
-      // NOTE: Requires a text index on displayName, givenName, surname, mail fields.
-      // db.graph_users.createIndex({ displayName: "text", givenName: "text", surname: "text", mail: "text" })
-      const safe = term.slice(0, 200)
-      const users = await this.collection
-        .find({ $text: { $search: safe } })
-        .limit(limit)
-        .sort({ score: { $meta: 'textScore' } })
-        .project({ score: { $meta: 'textScore' } })
-        .toArray()
-      return users as ActiveDirectoryUser[]
+      const safe = term.slice(0, 200).toLowerCase()
+      const users = await this.find({}, { displayName: 1 })
+
+      return users
+        .filter((user) => {
+          return [user.displayName, user.givenName, user.surname, user.mail]
+            .filter(Boolean)
+            .some((value) => String(value).toLowerCase().includes(safe))
+        })
+        .slice(0, limit)
     } catch (error) {
       throw error
     }

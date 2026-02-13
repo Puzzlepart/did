@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient } from '../../services/sqlite'
 import passport from 'passport'
 import { googleStrategy } from './google'
 import { azureAdStrategy } from './microsoft'

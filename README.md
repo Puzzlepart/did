@@ -113,6 +113,7 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 7. Install the [i18n Ally extension for vscode](https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally)
 8. Create an Azure app registration
 9. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
+10. Optional: Import latest backup from `.backup/backup*` into SQLite with `npm run db:import-latest-backup`
 
 The following permissions are required by Azure App Registration:
 
@@ -143,8 +144,8 @@ Now you need to set the required environment variables from this table:
 | `REDIS_CACHE_KEY` | Secret key for the [Redis cache]([Redis](https://redis.io/)) | **Yes** |
 | `APOLLO_KEY` | Key for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs) | **Yes**  |
 | `APOLLO_GRAPH_VARIANT` | Graph variant for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs). See [this article](https://www.apollographql.com/docs/apollo-server/monitoring/metrics/) | **Yes**  |
-| `MONGO_DB_CONNECTION_STRING` | Connection string for MongoDB                                | **Yes**  |
-| `MONGO_DB_DB_NAME` | Database name for MongoDB                                    | **Yes**  |
+| `SQLITE_DB_PATH` | Filesystem path for the SQLite database file                                  | **Yes**  |
+| `SQLITE_DB_MAIN_DB_NAME` | Logical main database name for shared collections                      | **Yes**  |
 | `API_TOKEN_SECRET` | Secret to generate API tokens                                | **Yes**  |
 | `DEBUG`                         | To debug the Node backend. E.g. `app*` to see all logs from app. See [debug](https://www.npmjs.com/package/debug). | No       |
 | `LAUNCH_BROWSER`      | Set to `1` if you want to automatically open did in the browser when running `watch` task. | No       |

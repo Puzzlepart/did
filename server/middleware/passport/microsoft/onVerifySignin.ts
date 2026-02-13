@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { ExternalUserInvitationInput, User } from 'server/graphql'
 import { SubscriptionService, UserService } from '../../../services'
-import { environment } from '../../../utils'
+import { MongoClient } from '../../../services/sqlite'
+import { getMainDatabaseName } from '../../../utils'
 import { checkSecurityGroupMembership } from './checkSecurityGroupMembership'
 import { processUserInvitation } from './processUserInvitation'
 import { retrieveSubscription } from './retrieveSubscription'
@@ -39,7 +39,7 @@ export const onVerifySignin = async (
   done: VerifyCallback
 ): Promise<void> => {
   const subSvc = new SubscriptionService({
-    db: mcl.db(environment('MONGO_DB_DB_NAME'))
+    db: mcl.db(getMainDatabaseName())
   })
   try {
     // Extract profile JSON

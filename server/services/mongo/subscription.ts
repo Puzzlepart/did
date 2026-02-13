@@ -6,7 +6,7 @@ import {
   Subscription,
   SubscriptionSettings
 } from '../../graphql/resolvers/types'
-import { environment } from '../../utils'
+import { getMainDatabaseName } from '../../utils'
 import { MongoDocumentService } from './document'
 
 /**
@@ -42,7 +42,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
       context,
       'subscriptions',
       null,
-      context?.mcl?.db(environment('MONGO_DB_DB_NAME'))
+      context?.mcl?.db(getMainDatabaseName())
     )
   }
 

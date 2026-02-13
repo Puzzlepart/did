@@ -10,13 +10,15 @@ services:
     build:
       context: .
       target: development
+    command: ["/bin/sh", "-c", "./scripts/dev-start.sh"]
     ports:
       - "9001:9001"
     environment:
       - NODE_ENV=development
+      - NODE_OPTIONS=--max-old-space-size=8192
       - PORT=9001
-      - MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
-      - MONGO_DB_DB_NAME=main
+      - SQLITE_DB_PATH=/app/did.sqlite
+      - SQLITE_DB_MAIN_DB_NAME=main
       - REDIS_CACHE_HOSTNAME=redis
       - REDIS_CACHE_PORT=6379
       - DEBUG=environment*,graphql*
@@ -25,39 +27,15 @@ services:
       - .:/app
       - /app/node_modules
     depends_on:
-      mongodb:
-        condition: service_healthy
       redis:
         condition: service_healthy
+    mem_limit: 10g
+    mem_reservation: 8g
     # Note: healthcheck intentionally omitted for faster inner-loop; production compose defines it.
     networks:
       - did-network
     restart: unless-stopped
     logging: *default-logging
-
-  # MongoDB database
-  mongodb:
-    image: mongo:7.0-jammy
-    ports:
-      - "27017:27017"
-    environment:
-      - MONGO_INITDB_DATABASE=main
-    volumes:
-      - mongodb_data:/data/db
-      - ./docker/import-data.sh:/docker-entrypoint-initdb.d/02-import-data.sh:ro
-      - ./docker/data:/docker-entrypoint-initdb.d/data:ro
-    networks:
-      - did-network
-    restart: unless-stopped
-    logging: *default-logging
-    # Healthcheck required because other services use condition: service_healthy
-    # mongosh is included in official mongo images (v5+). We ping the admin DB.
-    healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   # Redis cache
   redis:
@@ -77,43 +55,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # MongoDB Express for database administration (optional)
-  mongo-express:
-    image: mongo-express:1.0-20-alpine3.18
-    ports:
-      - "8081:8081"
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=admin123
-    depends_on:
-      - mongodb
-    networks:
-      - did-network
-    restart: unless-stopped
-    logging: *default-logging
-    profiles:
-      - tools
-
-  # Redis Commander for Redis administration (optional)
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    ports:
-      - "8082:8081"
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-    depends_on:
-      - redis
-    networks:
-      - did-network
-    restart: unless-stopped
-    logging: *default-logging
-    profiles:
-      - tools
-
 volumes:
-  mongodb_data:
   redis_data:
 
 networks:

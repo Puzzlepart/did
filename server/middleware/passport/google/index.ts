@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient } from '../../../services/sqlite'
 import { Strategy as GoogleStrategyOAuth2 } from 'passport-google-oauth20'
 import { environment, getCallbackUrl } from '../../../utils'
 import { onVerifySignin } from './onVerifySignin'

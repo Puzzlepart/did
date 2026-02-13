@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { MongoClient } from 'mongodb'
 import { VerifyCallback } from 'passport-azure-ad'
 import { Profile } from 'passport-google-oauth20'
 import _ from 'underscore'
+import { MongoClient } from '../../../services/sqlite'
 import { SubscriptionService, UserService } from '../../../services/mongo'
-import { environment } from '../../../utils'
+import { getMainDatabaseName } from '../../../utils'
 import { TENANT_NOT_ENROLLED } from '../errors/TENANT_NOT_ENROLLED'
 import { USER_NOT_ENROLLED } from '../errors/USER_NOT_ENROLLED'
 
@@ -26,7 +26,7 @@ export const onVerifySignin = async (
     const mail = _.first(profile.emails)
     const id = mail?.value || profile.id
     const subSrv = new SubscriptionService({
-      db: mcl.db(environment('MONGO_DB_DB_NAME'))
+      db: mcl.db(getMainDatabaseName())
     })
     const subscription = await subSrv.getByExternalId(id, 'google')
     if (!subscription) throw TENANT_NOT_ENROLLED

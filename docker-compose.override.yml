@@ -24,9 +24,9 @@ services:
       - REDIS_CACHE_PORT=6379
       # No Redis auth key needed for local Docker Redis
       - REDIS_CACHE_KEY=
-      # Force Docker to use local MongoDB instead of Azure Cosmos from .env
-      - MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017
-      - MONGO_DB_DB_NAME=main
+      # Force Docker to use local SQLite file storage
+      - SQLITE_DB_PATH=/app/did.sqlite
+      - SQLITE_DB_MAIN_DB_NAME=main
       # Enable debug logging for authentication and proxy troubleshooting
       - DEBUG=server/routes/auth,middleware/passport*,server:proxy
     # Mount your local .env file if it exists

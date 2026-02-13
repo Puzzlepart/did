@@ -232,11 +232,13 @@ export class GraphUsersUpdateService extends MongoDocumentService<GraphUsersUpda
         }
 
         // Get batch of users to update
-        const batch = await this._graphUsers.collection
-          .find({})
-          .skip(batchCount * concurrency)
-          .limit(concurrency)
-          .toArray()
+        const batch = await this._graphUsers.collection.find(
+          {},
+          {
+            skip: batchCount * effectiveConcurrency,
+            limit: effectiveConcurrency
+          }
+        ).toArray()
 
         if (batch.length === 0) {
           await this.collection.updateOne(

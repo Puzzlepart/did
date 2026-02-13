@@ -3,7 +3,7 @@ import {
   FilterQuery,
   InsertOneWriteOpResult,
   WithId
-} from 'mongodb'
+} from '../sqlite'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'

@@ -1,10 +1,10 @@
 import { sign } from 'jsonwebtoken'
-import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { RequestContext } from '../../graphql/requestContext'
 import { ApiToken } from '../../graphql/resolvers/types'
-import { environment } from '../../utils'
+import { FilterQuery } from '../sqlite'
+import { environment, getMainDatabaseName } from '../../utils'
 import { MongoDocumentService } from './document'
 
 /**
@@ -25,7 +25,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
       context,
       'api_tokens',
       null,
-      context?.mcl?.db(environment('MONGO_DB_DB_NAME'))
+      context?.mcl?.db(getMainDatabaseName())
     )
   }
 

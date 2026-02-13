@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
 import _ from 'lodash'
 import { RequestContext } from '../../../graphql/requestContext'
 import { CacheService } from '../../cache'
+import { Collection, Db, FilterQuery, OptionalId } from '../../sqlite'
 import { Extension, ExtensionMetadata, Extensions, FieldType } from './types'
 import { tryParseJson } from '../../../utils'
 

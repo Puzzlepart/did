@@ -178,10 +178,10 @@ When adding UI text:
   - Access organizational data
 - **Service Location:** `/server/services/msgraph/`
 
-### Database (MongoDB)
-- **Multi-tenant:** Each customer has own database
-- **Connection:** MongoDB connection strings in environment variables
-- **Services:** `/server/services/mongo/`
+### Database (SQLite)
+- **Multi-tenant:** Each customer has own logical database namespace
+- **Connection:** SQLite database path and main logical database name in environment variables
+- **Services:** `/server/services/mongo/` (legacy folder name; backed by SQLite adapter)
 - **TypeDI:** Dependency injection for service management
 
 ### Caching (Redis)
@@ -200,7 +200,7 @@ When adding UI text:
 
 ### Server Optimizations
 - **Redis Caching:** Cache frequent database queries
-- **Query Optimization:** Efficient MongoDB queries with proper indexes
+- **Query Optimization:** Prefer targeted SQLite queries over loading full collections in memory
 - **Resolver Batching:** Batch GraphQL resolver operations
 - **Rate Limiting:** Configured on API endpoints (express-rate-limit)
 
@@ -247,8 +247,8 @@ Required variables for local development:
 - `MICROSOFT_SCOPES` - MS Graph API scopes
 
 ### Database & Caching
-- `MONGO_DB_CONNECTION_STRING` - MongoDB connection string
-- `MONGO_DB_DB_NAME` - Main database name (usually `main`)
+- `SQLITE_DB_PATH` - SQLite database file path
+- `SQLITE_DB_MAIN_DB_NAME` - Main logical database name (usually `main`)
 - `REDIS_CACHE_HOSTNAME` - Redis hostname
 - `REDIS_CACHE_KEY` - Redis authentication key
 - `REDIS_CACHE_PORT` - Redis port (6379 or 6380 for TLS)

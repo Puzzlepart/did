@@ -29,13 +29,12 @@ NORMALIZED_WORKTREE_NAME="$(printf '%s' "$WORKTREE_NAME" | tr '[:upper:]' '[:low
 PORT_OFFSET=$(echo -n "$WORKTREE_NAME" | cksum | cut -d' ' -f1)
 PORT_OFFSET=$((PORT_OFFSET % 99 + 1))
 APP_PORT=$((9100 + PORT_OFFSET))
-MONGO_PORT=$((27100 + PORT_OFFSET))
 REDIS_PORT=$((6400 + PORT_OFFSET))
 
 export COMPOSE_PROJECT_NAME="did-${NORMALIZED_WORKTREE_NAME}"
 
 info "Worktree: $WORKTREE_NAME"
-info "Ports: app=$APP_PORT, mongo=$MONGO_PORT, redis=$REDIS_PORT"
+info "Ports: app=$APP_PORT, redis=$REDIS_PORT"
 info "Project: $COMPOSE_PROJECT_NAME"
 
 # --- Load credentials from parent .env if exists ---
@@ -90,9 +89,6 @@ services:
       - ENABLE_SESSION_INJECTION="${TEST_SESSION_COOKIE:+true}"
       - TEST_SESSION_COOKIE="${TEST_SESSION_COOKIE}"
       - SESSION_INJECTION_SECRET="${SESSION_INJECTION_SECRET}"
-  mongodb:
-    ports:
-      - "${MONGO_PORT}:27017"
   redis:
     ports:
       - "${REDIS_PORT}:6379"
@@ -145,8 +141,6 @@ done
 cat > .agent-env <<EOF
 APP_PORT=${APP_PORT}
 APP_URL=http://localhost:${APP_PORT}
-MONGO_PORT=${MONGO_PORT}
-MONGO_URL=mongodb://localhost:${MONGO_PORT}
 REDIS_PORT=${REDIS_PORT}
 REDIS_URL=redis://localhost:${REDIS_PORT}
 COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}
@@ -157,7 +151,6 @@ EOF
 info "Environment ready!"
 echo ""
 echo "APP_URL=http://localhost:${APP_PORT}"
-echo "MONGO_URL=mongodb://localhost:${MONGO_PORT}"
 echo "REDIS_URL=redis://localhost:${REDIS_PORT}"
 echo "COMPOSE_PROJECT=${COMPOSE_PROJECT_NAME}"
 echo ""

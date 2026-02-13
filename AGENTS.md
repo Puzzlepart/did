@@ -65,15 +65,15 @@ ComponentName/
 - User profiles include manager relationships
 
 ### Database & Caching
-- **Multi-Tenant Architecture**: Each customer has their own MongoDB database
-  - Configuration/metadata stored in `main` database
-  - Time entries, projects, users stored in customer-specific databases (e.g., `puzzlepart`, `crayon`)
+- **Multi-Tenant Architecture**: Each customer has their own logical database namespace
+  - Configuration/metadata stored in logical `main` database
+  - Time entries, projects, users stored in customer-specific logical databases (e.g., `puzzlepart`, `crayon`)
   - Database name determined by user's subscription during authentication
-  - Scripts/tools must specify customer database explicitly
-- MongoDB for persistent data storage
+  - Data is persisted in SQLite, partitioned by logical database and collection
+- SQLite for persistent data storage
 - Redis for sessions and API response caching
 - TypeDI dependency injection on server
-- Connection strings in environment variables
+- Database path and logical main database name in environment variables
 
 ### Authentication Flow
 - Primary: Azure AD OpenID Connect (`azuread-openidconnect`)
@@ -110,8 +110,8 @@ MICROSOFT_CLIENT_ID=your_azure_ad_client_id
 MICROSOFT_CLIENT_SECRET=your_azure_ad_client_secret
 
 # Database
-MONGO_DB_CONNECTION_STRING=mongodb://localhost:27017
-MONGO_DB_DB_NAME=main
+SQLITE_DB_PATH=./data/did.sqlite
+SQLITE_DB_MAIN_DB_NAME=main
 
 # Sessions & Security
 SESSION_SIGNING_KEY=your_session_key
@@ -183,7 +183,7 @@ API_TOKEN_SECRET=your_api_secret
 ### Data Protection
 - Helmet middleware for security headers
 - Input validation with class-validator
-- SQL injection protection via MongoDB
+- SQL injection protection via parameterized SQLite queries
 - Environment variable validation
 
 ## Docker Support
@@ -193,7 +193,7 @@ API_TOKEN_SECRET=your_api_secret
 - `npm run docker:stop` - Stop containers
 - `npm run docker:logs` - View container logs
 - `npm run docker:shell` - Access container shell
-- `npm run docker:db` - MongoDB shell
+- `npm run docker:db` - SQLite status check
 - `npm run docker:redis` - Redis CLI
 - `npm run docker:status` - Show container status
 - `npm run docker:clean` - Remove containers and volumes

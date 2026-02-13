@@ -3,11 +3,11 @@
  */
 import get from 'get-value'
 import { verify } from 'jsonwebtoken'
-import { MongoClient, Db as MongoDatabase } from 'mongodb'
+import { Db as MongoDatabase, MongoClient } from '../services/sqlite'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
-import { environment, tryParseJson } from '../utils'
+import { environment, getMainDatabaseName, tryParseJson } from '../utils'
 import { Subscription } from './resolvers/types'
 import { GraphQLError } from 'graphql'
 import colors from 'colors/safe'
@@ -108,7 +108,7 @@ export class RequestContext {
     mcl: MongoClient
   ): Promise<RequestContext> => {
     try {
-      const database = mcl.db(environment('MONGO_DB_DB_NAME'))
+      const database = mcl.db(getMainDatabaseName())
       const context = new RequestContext()
       debug(`Creating context for request ${colors.magenta(context.requestId)}`)
       context.mcl = mcl
@@ -121,7 +121,7 @@ export class RequestContext {
           database
         )
         context.permissions = permissions
-        context.subscription = subscription
+        context.subscription = subscription as Subscription
       } else {
         // Populate basic user context
         context.user = get(request, 'user')
@@ -196,7 +196,7 @@ export class RequestContext {
         }
       }
       context.db = context.mcl.db(
-        context.subscription.db || environment('MONGO_DB_DB_NAME')
+        context.subscription.db || getMainDatabaseName()
       )
       context.container.set({ id: 'CONTEXT', transient: true, value: context })
       context.container.set({ id: 'REQUEST', transient: true, value: request })
