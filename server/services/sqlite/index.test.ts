@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto'
 import fs from 'fs'
 import path from 'path'
 import { Collection, MongoClient } from './index'
+import { TABLE_NAME } from './constants'
 
 const TEST_DB_DIR = path.join(process.cwd(), '.test-db')
 const getTestDbPath = () =>
@@ -234,6 +235,62 @@ test('Nested Date objects are preserved', async (t) => {
   const doc = await collection.findOne({ _id: insertedId })
   t.true(doc?.metadata.timestamps.created instanceof Date)
   t.is(doc?.metadata.timestamps.created.toISOString(), testDate.toISOString())
+
+  await client.close()
+})
+
+test('Date marker collision: extra keys prevent Date decoding', async (t) => {
+  const client = await MongoClient.connect(getTestDbPath())
+  const collection = client.db('test').collection('items')
+
+  const legacyLike = {
+    __did_sqlite_type__: 'date',
+    value: '2024-06-15T10:30:00.000Z',
+    note: 'this should not become a Date'
+  }
+
+  const { insertedId } = await collection.insertOne({ createdAt: legacyLike })
+  const doc = await collection.findOne({ _id: insertedId })
+
+  t.true(typeof doc?.createdAt === 'object')
+  t.false(doc?.createdAt instanceof Date)
+  t.is(doc?.createdAt.__did_sqlite_type__, 'date')
+  t.is(doc?.createdAt.value, legacyLike.value)
+  t.is(doc?.createdAt.note, legacyLike.note)
+
+  await client.close()
+})
+
+test('Legacy encoded Date shape still decodes', async (t) => {
+  const client = await MongoClient.connect(getTestDbPath())
+
+  const databaseName = 'test'
+  const collectionName = 'items'
+  const documentId = 'legacy-doc'
+  const legacyDateValue = '2024-06-15T10:30:00.000Z'
+
+  const legacyJson = JSON.stringify({
+    _id: documentId,
+    createdAt: {
+      __did_sqlite_type__: 'date',
+      value: legacyDateValue
+    }
+  })
+
+  await (client as any)._run(
+    `INSERT INTO ${TABLE_NAME}
+      (database_name, collection_name, document_id, document_json)
+     VALUES (?, ?, ?, ?)`,
+    [databaseName, collectionName, documentId, legacyJson]
+  )
+
+  const doc = await client
+    .db(databaseName)
+    .collection(collectionName)
+    .findOne({ _id: documentId })
+
+  t.true(doc?.createdAt instanceof Date)
+  t.is(doc?.createdAt.toISOString(), legacyDateValue)
 
   await client.close()
 })
@@ -492,6 +549,30 @@ test('insertMany rolls back on failure', async (t) => {
   await client.close()
 })
 
+test('Nested withTransaction uses savepoints (inner rollback, outer continues)', async (t) => {
+  const client = await MongoClient.connect(getTestDbPath())
+  const collection = client.db('test').collection('items')
+
+  await client.withTransaction(async () => {
+    await collection.insertOne({ _id: 'outer-1', ok: true })
+
+    await t.throwsAsync(async () => {
+      await client.withTransaction(async () => {
+        await collection.insertOne({ _id: 'inner-1', ok: false })
+        throw new Error('boom')
+      })
+    })
+
+    await collection.insertOne({ _id: 'outer-2', ok: true })
+  })
+
+  t.truthy(await collection.findOne({ _id: 'outer-1' }))
+  t.truthy(await collection.findOne({ _id: 'outer-2' }))
+  t.is(await collection.findOne({ _id: 'inner-1' }), null)
+
+  await client.close()
+})
+
 // ============================================================================
 // Edge Cases
 // ============================================================================
@@ -534,6 +615,50 @@ test('null and undefined in documents', async (t) => {
   // undefined is not serialized in JSON
   t.false('undefinedField' in (doc || {}))
 
+  await client.close()
+})
+
+test('Prototype pollution is prevented on encode/decode', async (t) => {
+  const client = await MongoClient.connect(getTestDbPath())
+  const collection = client.db('test').collection('items')
+
+  const payload: any = { normal: 1 }
+  // Using an object literal with __proto__ changes the object's prototype.
+  // Define an explicit enumerable own property instead.
+  Object.defineProperty(payload, '__proto__', {
+    value: { polluted: true },
+    enumerable: true,
+    writable: true,
+    configurable: true
+  })
+
+  await collection.insertOne(payload)
+
+  // Should not leak to global Object prototype
+  t.is(({} as any).polluted, undefined)
+
+  const [doc] = await collection.find({ normal: 1 }).toArray()
+  const desc = Object.getOwnPropertyDescriptor(doc as any, '__proto__')
+  t.truthy(desc)
+  t.deepEqual(desc?.value, { polluted: true })
+  t.is(({} as any).polluted, undefined)
+
+  await client.close()
+})
+
+test('Unsafe update paths are rejected', async (t) => {
+  const client = await MongoClient.connect(getTestDbPath())
+  const collection = client.db('test').collection('items')
+
+  const { insertedId } = await collection.insertOne({ ok: true })
+  await t.throwsAsync(async () => {
+    await collection.updateOne(
+      { _id: insertedId },
+      { $set: { '__proto__.polluted': true } }
+    )
+  })
+
+  t.is(({} as any).polluted, undefined)
   await client.close()
 })
 

@@ -19,7 +19,23 @@ require('dotenv').config()
 // These constants MUST match server/services/sqlite/constants.ts
 const TABLE_NAME = 'did_documents'
 const TYPE_FIELD = '__did_sqlite_type__'
+const ENCODED_FIELD = '__did_sqlite_encoded__'
 const DATE_TYPE = 'date'
+
+const DANGEROUS_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
+
+function setSafeProperty(target, key, value) {
+  if (DANGEROUS_KEYS.has(key)) {
+    Object.defineProperty(target, key, {
+      value,
+      enumerable: true,
+      writable: true,
+      configurable: true
+    })
+    return
+  }
+  target[key] = value
+}
 
 /**
  * Checks if a value is a plain object (not array, Date, or other special type).
@@ -60,7 +76,7 @@ function toNativeFromMongoExport(value) {
     }
 
     return Object.entries(value).reduce((out, [k, v]) => {
-      out[k] = toNativeFromMongoExport(v)
+      setSafeProperty(out, k, toNativeFromMongoExport(v))
       return out
     }, {})
   }
@@ -76,6 +92,7 @@ function encodeForSqlite(value) {
   if (value instanceof Date) {
     return {
       [TYPE_FIELD]: DATE_TYPE,
+      [ENCODED_FIELD]: true,
       value: value.toISOString()
     }
   }
@@ -86,7 +103,7 @@ function encodeForSqlite(value) {
 
   if (isPlainObject(value)) {
     return Object.entries(value).reduce((out, [k, v]) => {
-      out[k] = encodeForSqlite(v)
+      setSafeProperty(out, k, encodeForSqlite(v))
       return out
     }, {})
   }

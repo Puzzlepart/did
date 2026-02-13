@@ -17,6 +17,18 @@ const log = Debug('sqlite')
 
 const Sqlite = sqlite3.verbose()
 
+const DANGEROUS_PATH_SEGMENTS = new Set(['__proto__', 'constructor', 'prototype'])
+
+const assertSafePath = (pathValue: string): void => {
+  if (!pathValue) return
+  const segments = pathValue.split('.')
+  for (const segment of segments) {
+    if (DANGEROUS_PATH_SEGMENTS.has(segment)) {
+      throw new Error(`Unsafe path segment in field path: ${pathValue}`)
+    }
+  }
+}
+
 const isOperatorObject = (value: unknown): boolean => {
   if (!isObject(value)) return false
   return Object.keys(value).some((key) => key.startsWith('$'))
@@ -70,6 +82,7 @@ const applyProjection = <T>(
       projected._id = _.get(document as any, '_id')
     }
     for (const key of includeKeys) {
+      assertSafePath(key)
       if (_.has(document as any, key)) {
         _.set(projected, key, _.get(document as any, key))
       }
@@ -79,6 +92,7 @@ const applyProjection = <T>(
 
   const projected = clone(document) as Record<string, any>
   for (const key of excludeKeys) {
+    assertSafePath(key)
     _.unset(projected, key)
   }
   return projected as T
@@ -110,6 +124,7 @@ const extractUpsertBase = (filter: Record<string, any>): Record<string, any> => 
     (base, [key, value]) => {
       if (key.startsWith('$')) return base
       if (isOperatorObject(value)) return base
+      assertSafePath(key)
       _.set(base, key, clone(value))
       return base
     },
@@ -138,20 +153,34 @@ const applyUpdateDocument = <T>(
   const hasOperators = Object.keys(update).some((key) => key.startsWith('$'))
 
   if (!hasOperators) {
-    return {
-      ...next,
-      ...clone(update)
-    } as T
+    const replacement = clone(update) as Record<string, any>
+    for (const [key, value] of Object.entries(replacement)) {
+      // Replacement documents should not allow prototype-pollution keys.
+      // We treat keys as literal top-level fields (not dotted paths).
+      if (DANGEROUS_PATH_SEGMENTS.has(key)) {
+        Object.defineProperty(next, key, {
+          value: clone(value),
+          enumerable: true,
+          writable: true,
+          configurable: true
+        })
+      } else {
+        next[key] = clone(value)
+      }
+    }
+    return next as T
   }
 
   if (isObject(update.$set)) {
     for (const [key, value] of Object.entries(update.$set)) {
+      assertSafePath(key)
       _.set(next, key, clone(value))
     }
   }
 
   if (isObject(update.$inc)) {
     for (const [key, value] of Object.entries(update.$inc)) {
+      assertSafePath(key)
       const currentValue = Number(_.get(next, key, 0))
       const increment = Number(value || 0)
       _.set(next, key, currentValue + increment)
@@ -160,6 +189,7 @@ const applyUpdateDocument = <T>(
 
   if (isObject(update.$push)) {
     for (const [key, value] of Object.entries(update.$push)) {
+      assertSafePath(key)
       const currentValue = _.get(next, key)
       const arrayValue = Array.isArray(currentValue) ? currentValue : []
       const pushValues =
@@ -170,6 +200,7 @@ const applyUpdateDocument = <T>(
 
   if (isObject(update.$pull)) {
     for (const [key, value] of Object.entries(update.$pull)) {
+      assertSafePath(key)
       const currentValue = _.get(next, key)
       if (!Array.isArray(currentValue)) continue
       const shouldRemove =
@@ -266,6 +297,15 @@ const getSqliteFilePath = (connectionString?: string): string => {
     connectionString.startsWith('mongodb://') ||
     connectionString.startsWith('mongodb+srv://')
   ) {
+    // Guard against silently writing to a local sqlite file when a MongoDB URI
+    // is accidentally supplied.
+    if (!process.env.SQLITE_DB_PATH) {
+      throw new Error(
+        'MongoDB connection string provided, but SQLite shim is active. ' +
+          'Set SQLITE_DB_PATH explicitly or use a sqlite:// connection string.'
+      )
+    }
+    log('WARN: MongoDB URI supplied; using SQLITE_DB_PATH instead')
     return path.resolve(process.cwd(), fallbackPath)
   }
 
@@ -923,6 +963,7 @@ export class Collection<T = Record<string, any>> {
     field: string,
     query: FilterQuery<T> = {}
   ): Promise<any[]> {
+    assertSafePath(field)
     const documents = await this.find(query).toArray()
     if (documents.length > 1000) {
       log(
@@ -1081,6 +1122,7 @@ type RunResult = {
  */
 export class MongoClient {
   private _connected = false
+  private _transactionDepth = 0
   public readonly topology = {
     isConnected: () => this._connected
   }
@@ -1178,21 +1220,54 @@ export class MongoClient {
    * Use this for atomic multi-document operations.
    */
   public async beginTransaction(): Promise<void> {
-    await this._run('BEGIN IMMEDIATE')
+    if (this._transactionDepth === 0) {
+      await this._run('BEGIN IMMEDIATE')
+      this._transactionDepth = 1
+      return
+    }
+
+    const savepointName = `sp_${this._transactionDepth + 1}`
+    await this._run(`SAVEPOINT ${savepointName}`)
+    this._transactionDepth += 1
   }
 
   /**
    * Commits the current transaction.
    */
   public async commit(): Promise<void> {
-    await this._run('COMMIT')
+    if (this._transactionDepth === 0) {
+      throw new Error('No active transaction to commit')
+    }
+
+    if (this._transactionDepth === 1) {
+      await this._run('COMMIT')
+      this._transactionDepth = 0
+      return
+    }
+
+    const savepointName = `sp_${this._transactionDepth}`
+    await this._run(`RELEASE SAVEPOINT ${savepointName}`)
+    this._transactionDepth -= 1
   }
 
   /**
    * Rolls back the current transaction.
    */
   public async rollback(): Promise<void> {
-    await this._run('ROLLBACK')
+    if (this._transactionDepth === 0) {
+      throw new Error('No active transaction to rollback')
+    }
+
+    if (this._transactionDepth === 1) {
+      await this._run('ROLLBACK')
+      this._transactionDepth = 0
+      return
+    }
+
+    const savepointName = `sp_${this._transactionDepth}`
+    await this._run(`ROLLBACK TO SAVEPOINT ${savepointName}`)
+    await this._run(`RELEASE SAVEPOINT ${savepointName}`)
+    this._transactionDepth -= 1
   }
 
   /**
