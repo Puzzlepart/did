@@ -66,3 +66,4 @@ CODE_REVIEW_*
 
 # backups
 .backup/
+.db/
