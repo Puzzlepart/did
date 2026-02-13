@@ -42,9 +42,9 @@ interface HolidaysConfiguration {
 
 ### System Components
 
-1. **Storage**: `SubscriptionSettings.holidays` (MongoDB)
+1. **Storage**: `SubscriptionSettings.holidays` (SQLite)
 2. **GraphQL**: `SubscriptionHolidaySettings` type with mutations
-3. **Service**: `HolidaysService` extends `MongoDocumentService`
+3. **Service**: `HolidaysService` extends `MongoDocumentService` (uses SQLite backend)
 4. **UI**: `HolidaysField` component in Admin > Subscription Settings
 5. **Calculation**: `getHolidayHoursInPeriod()` in `holidayUtils.ts`
 6. **Integration**: `useWorkWeekStatus` hook applies holidays to timebank
