@@ -17,7 +17,7 @@ services:
       - NODE_ENV=development
       - NODE_OPTIONS=--max-old-space-size=8192
       - PORT=9001
-      - SQLITE_DB_PATH=/app/did.sqlite
+      - SQLITE_DB_PATH=/app/db/did.sqlite
       - SQLITE_DB_MAIN_DB_NAME=main
       - REDIS_CACHE_HOSTNAME=redis
       - REDIS_CACHE_PORT=6379
@@ -26,6 +26,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - ./db:/app/db
     depends_on:
       redis:
         condition: service_healthy

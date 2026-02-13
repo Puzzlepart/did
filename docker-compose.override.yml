@@ -25,7 +25,7 @@ services:
       # No Redis auth key needed for local Docker Redis
       - REDIS_CACHE_KEY=
       # Force Docker to use local SQLite file storage
-      - SQLITE_DB_PATH=/app/did.sqlite
+      - SQLITE_DB_PATH=/app/db/did.sqlite
       - SQLITE_DB_MAIN_DB_NAME=main
       # Enable debug logging for authentication and proxy troubleshooting
       - DEBUG=server/routes/auth,middleware/passport*,server:proxy
