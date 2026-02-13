@@ -1,81 +1,25 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { randomUUID } from 'crypto'
+import Debug from 'debug'
 import fs from 'fs'
 import _ from 'lodash'
 import path from 'path'
 import sqlite3 from 'sqlite3'
 import sift from 'sift'
+import { TABLE_NAME } from './constants'
+import {
+  deserializeDocument,
+  isPlainObject as isObject,
+  serializeDocument
+} from './serialization'
 
-const TABLE_NAME = 'did_documents'
-const TYPE_FIELD = '__did_sqlite_type__'
-const DATE_TYPE = 'date'
-
-type JsonValue = string | number | boolean | null | JsonValue[] | JsonObject
-
-interface JsonObject {
-  [key: string]: JsonValue
-}
-
-type EncodedDate = {
-  [TYPE_FIELD]: typeof DATE_TYPE
-  value: string
-}
+const log = Debug('sqlite')
 
 const Sqlite = sqlite3.verbose()
-
-const isObject = (value: unknown): value is Record<string, any> =>
-  _.isPlainObject(value)
 
 const isOperatorObject = (value: unknown): boolean => {
   if (!isObject(value)) return false
   return Object.keys(value).some((key) => key.startsWith('$'))
-}
-
-const encodeSpecialTypes = (value: any): JsonValue => {
-  if (value instanceof Date) {
-    const encoded: EncodedDate = {
-      [TYPE_FIELD]: DATE_TYPE,
-      value: value.toISOString()
-    }
-    return encoded as unknown as JsonValue
-  }
-  if (Array.isArray(value)) {
-    return value.map((entry) => encodeSpecialTypes(entry))
-  }
-  if (isObject(value)) {
-    return Object.entries(value).reduce<JsonObject>((encoded, [key, entry]) => {
-      encoded[key] = encodeSpecialTypes(entry)
-      return encoded
-    }, {})
-  }
-  return value
-}
-
-const decodeSpecialTypes = (value: JsonValue): any => {
-  if (Array.isArray(value)) {
-    return value.map((entry) => decodeSpecialTypes(entry))
-  }
-  if (isObject(value)) {
-    if (value[TYPE_FIELD] === DATE_TYPE && typeof value.value === 'string') {
-      return new Date(value.value)
-    }
-    return Object.entries(value).reduce<Record<string, any>>(
-      (decoded, [key, entry]) => {
-        decoded[key] = decodeSpecialTypes(entry as JsonValue)
-        return decoded
-      },
-      {}
-    )
-  }
-  return value
-}
-
-const serializeDocument = (document: Record<string, any>): string => {
-  return JSON.stringify(encodeSpecialTypes(document))
-}
-
-const deserializeDocument = (document: string): Record<string, any> => {
-  return decodeSpecialTypes(JSON.parse(document)) as Record<string, any>
 }
 
 const clone = <T>(value: T): T => structuredClone(value)
@@ -154,7 +98,10 @@ const applySort = <T>(documents: T[], sort?: Record<string, any>): T[] => {
       if (leftValue === rightValue) continue
       return leftValue > rightValue ? multiplier : -1 * multiplier
     }
-    return 0
+    // Tie-breaker: sort by _id for stable ordering
+    const leftId = String((left as any)._id || '')
+    const rightId = String((right as any)._id || '')
+    return leftId.localeCompare(rightId)
   })
 }
 
@@ -336,6 +283,12 @@ const getSqliteFilePath = (connectionString?: string): string => {
   return path.resolve(process.cwd(), connectionString)
 }
 
+/**
+ * A cursor for iterating over query results with support for chaining
+ * operations like limit, skip, sort, and project.
+ *
+ * @typeParam T - The document type
+ */
 export class Cursor<T> implements AsyncIterable<T> {
   private _limitValue: number | null = null
   private _skipValue = 0
@@ -344,26 +297,55 @@ export class Cursor<T> implements AsyncIterable<T> {
 
   constructor(private readonly _documentsPromise: Promise<T[]>) {}
 
+  /**
+   * Limits the number of documents returned.
+   *
+   * @param value - Maximum number of documents to return
+   * @returns This cursor for chaining
+   */
   public limit(value: number): Cursor<T> {
     this._limitValue = value
     return this
   }
 
+  /**
+   * Skips a number of documents in the result set.
+   *
+   * @param value - Number of documents to skip
+   * @returns This cursor for chaining
+   */
   public skip(value: number): Cursor<T> {
     this._skipValue = value
     return this
   }
 
+  /**
+   * Sorts the documents by the specified fields.
+   *
+   * @param value - Sort specification (e.g., `{ createdAt: -1 }` for descending)
+   * @returns This cursor for chaining
+   */
   public sort(value: Record<string, any>): Cursor<T> {
     this._sortValue = value
     return this
   }
 
+  /**
+   * Projects (includes or excludes) specific fields from documents.
+   *
+   * @param value - Projection specification (1 to include, 0 to exclude)
+   * @returns This cursor for chaining
+   */
   public project(value: Record<string, any>): Cursor<T> {
     this._projectionValue = value
     return this
   }
 
+  /**
+   * Executes the cursor and returns all matching documents as an array.
+   *
+   * @returns Promise resolving to array of documents
+   */
   public async toArray(): Promise<T[]> {
     let documents = await this._documentsPromise
     if (this._sortValue) {
@@ -383,6 +365,9 @@ export class Cursor<T> implements AsyncIterable<T> {
     return documents
   }
 
+  /**
+   * Async iterator implementation for `for await...of` loops.
+   */
   public async *[Symbol.asyncIterator](): AsyncIterableIterator<T> {
     const documents = await this.toArray()
     for (const document of documents) {
@@ -391,6 +376,16 @@ export class Cursor<T> implements AsyncIterable<T> {
   }
 }
 
+/**
+ * A MongoDB-compatible collection backed by SQLite storage.
+ * Provides CRUD operations with MongoDB-style query syntax using sift.
+ *
+ * @typeParam T - The document type
+ *
+ * @remarks
+ * This is a compatibility layer that emulates MongoDB Collection API.
+ * Queries not using `_id` perform full collection scans.
+ */
 export class Collection<T = Record<string, any>> {
   constructor(
     private readonly _client: MongoClient,
@@ -510,7 +505,9 @@ export class Collection<T = Record<string, any>> {
       .map((value) => toDocumentId(value))
   }
 
-  private async _insertDocument(document: Record<string, any>): Promise<string> {
+  private async _insertDocument(
+    document: Record<string, any>
+  ): Promise<{ documentId: string; insertedDocument: Record<string, any> }> {
     const nextDocument = clone(document)
     if (nextDocument._id === undefined || nextDocument._id === null) {
       nextDocument._id = randomUUID()
@@ -527,8 +524,7 @@ export class Collection<T = Record<string, any>> {
         serializeDocument(nextDocument)
       ]
     )
-    Object.assign(document, nextDocument)
-    return documentId
+    return { documentId, insertedDocument: nextDocument }
   }
 
   private async _writeDocument(
@@ -556,6 +552,21 @@ export class Collection<T = Record<string, any>> {
     return documents.find((entry) => matcher(entry.document)) || null
   }
 
+  /**
+   * Finds documents matching the query filter.
+   *
+   * @param query - MongoDB-style query filter (uses sift for matching)
+   * @param options - Optional find options
+   * @returns Cursor for iterating results
+   *
+   * @remarks
+   * For queries not using `_id`, this performs a full collection scan.
+   *
+   * @example
+   * ```typescript
+   * const users = await collection.find({ role: 'admin' }, { limit: 10 }).toArray()
+   * ```
+   */
   public find(query: FilterQuery<T> = {}, options: FindOptions = {}): Cursor<T> {
     const exactDocumentId = this._extractExactDocumentId(query)
     const documentIds = this._extractDocumentIdsFromInQuery(query)
@@ -604,6 +615,12 @@ export class Collection<T = Record<string, any>> {
     return cursor
   }
 
+  /**
+   * Finds a single document matching the query.
+   *
+   * @param query - MongoDB-style query filter
+   * @returns The first matching document, or null if none found
+   */
   public async findOne<S = T>(query: FilterQuery<T> = {}): Promise<S | null> {
     const exactDocumentId = this._extractExactDocumentId(query)
     if (exactDocumentId !== null) {
@@ -614,16 +631,23 @@ export class Collection<T = Record<string, any>> {
     return (document as unknown as S) || null
   }
 
+  /**
+   * Inserts a single document into the collection.
+   *
+   * @param document - Document to insert (may omit `_id` for auto-generation)
+   * @returns Insert result with the inserted document and ID
+   */
   public async insertOne<S = T>(
     document: OptionalId<S>
   ): Promise<InsertOneWriteOpResult<WithId<S>>> {
-    const nextDocument = clone(document as Record<string, any>)
-    await this._insertDocument(nextDocument)
+    const { insertedDocument } = await this._insertDocument(
+      document as Record<string, any>
+    )
 
     return {
       insertedCount: 1,
-      insertedId: nextDocument._id,
-      ops: [clone(nextDocument) as WithId<S>],
+      insertedId: insertedDocument._id,
+      ops: [clone(insertedDocument) as WithId<S>],
       result: {
         ok: 1,
         n: 1
@@ -631,32 +655,54 @@ export class Collection<T = Record<string, any>> {
     }
   }
 
+  /**
+   * Inserts multiple documents into the collection atomically.
+   *
+   * @param documents - Array of documents to insert
+   * @returns Insert result with all inserted documents and IDs
+   *
+   * @remarks
+   * This operation is wrapped in a transaction; if any insert fails,
+   * all inserts are rolled back.
+   */
   public async insertMany<S = T>(
     documents: OptionalId<S>[]
   ): Promise<InsertManyResult<WithId<S>>> {
-    const insertedIds: Record<number, any> = {}
-    const ops: WithId<S>[] = []
-    let insertedCount = 0
+    return await this._client.withTransaction(async () => {
+      const insertedIds: Record<number, any> = {}
+      const ops: WithId<S>[] = []
+      let insertedCount = 0
 
-    for (const [index, document] of documents.entries()) {
-      const nextDocument = clone(document as Record<string, any>)
-      await this._insertDocument(nextDocument)
-      insertedIds[index] = nextDocument._id
-      ops.push(clone(nextDocument) as WithId<S>)
-      insertedCount++
-    }
-
-    return {
-      insertedCount,
-      insertedIds,
-      ops,
-      result: {
-        ok: 1,
-        n: insertedCount
+      for (const [index, document] of documents.entries()) {
+        const { insertedDocument } = await this._insertDocument(
+          document as Record<string, any>
+        )
+        insertedIds[index] = insertedDocument._id
+        ops.push(clone(insertedDocument) as WithId<S>)
+        insertedCount++
       }
-    }
+
+      return {
+        insertedCount,
+        insertedIds,
+        ops,
+        result: {
+          ok: 1,
+          n: insertedCount
+        }
+      }
+    })
   }
 
+  /**
+   * Updates a single document matching the filter.
+   *
+   * @param filter - Query filter to match documents
+   * @param update - Update operations (`$set`, `$inc`, `$push`, `$pull`, or replacement)
+   * @param options - Update options
+   * @param options.upsert - If true, inserts a new document when no match found
+   * @returns Update result with match and modification counts
+   */
   public async updateOne(
     filter: FilterQuery<T>,
     update: Record<string, any>,
@@ -686,13 +732,15 @@ export class Collection<T = Record<string, any>> {
       ) {
         ;(upsertedDocument as Record<string, any>)._id = randomUUID()
       }
-      await this._insertDocument(upsertedDocument as Record<string, any>)
+      const { insertedDocument } = await this._insertDocument(
+        upsertedDocument as Record<string, any>
+      )
 
       return {
         matchedCount: 0,
         modifiedCount: 0,
         upsertedCount: 1,
-        upsertedId: (upsertedDocument as Record<string, any>)._id,
+        upsertedId: insertedDocument._id,
         result: {
           ok: 1,
           n: 1,
@@ -725,6 +773,12 @@ export class Collection<T = Record<string, any>> {
     }
   }
 
+  /**
+   * Deletes a single document matching the filter.
+   *
+   * @param filter - Query filter to match the document to delete
+   * @returns Delete result with count of deleted documents
+   */
   public async deleteOne(
     filter: FilterQuery<T>
   ): Promise<DeleteWriteOpResultObject> {
@@ -769,6 +823,15 @@ export class Collection<T = Record<string, any>> {
     }
   }
 
+  /**
+   * Deletes all documents matching the filter atomically.
+   *
+   * @param filter - Query filter to match documents to delete
+   * @returns Delete result with count of deleted documents
+   *
+   * @remarks
+   * For bulk deletes, this operation is wrapped in a transaction.
+   */
   public async deleteMany(
     filter: FilterQuery<T>
   ): Promise<DeleteWriteOpResultObject> {
@@ -788,22 +851,24 @@ export class Collection<T = Record<string, any>> {
           }
         }
       }
-      let deletedCount = 0
-      for (const documentId of documentIds) {
-        const result = await this._client._run(
-          `DELETE FROM ${TABLE_NAME}
-           WHERE database_name = ? AND collection_name = ? AND document_id = ?`,
-          [this._databaseName, this._collectionName, documentId]
-        )
-        deletedCount += result.changes || 0
-      }
-      return {
-        deletedCount,
-        result: {
-          ok: 1,
-          n: deletedCount
+      return this._client.withTransaction(async () => {
+        let deletedCount = 0
+        for (const documentId of documentIds) {
+          const result = await this._client._run(
+            `DELETE FROM ${TABLE_NAME}
+             WHERE database_name = ? AND collection_name = ? AND document_id = ?`,
+            [this._databaseName, this._collectionName, documentId]
+          )
+          deletedCount += result.changes || 0
         }
-      }
+        return {
+          deletedCount,
+          result: {
+            ok: 1,
+            n: deletedCount
+          }
+        }
+      })
     }
 
     const documents = await this._readDocuments()
@@ -822,30 +887,51 @@ export class Collection<T = Record<string, any>> {
       }
     }
 
-    let deletedCount = 0
-    for (const documentId of matchingDocumentIds) {
-      const result = await this._client._run(
-        `DELETE FROM ${TABLE_NAME}
-         WHERE database_name = ? AND collection_name = ? AND document_id = ?`,
-        [this._databaseName, this._collectionName, documentId]
-      )
-      deletedCount += result.changes || 0
-    }
-
-    return {
-      deletedCount,
-      result: {
-        ok: 1,
-        n: deletedCount
+    return this._client.withTransaction(async () => {
+      let deletedCount = 0
+      for (const documentId of matchingDocumentIds) {
+        const result = await this._client._run(
+          `DELETE FROM ${TABLE_NAME}
+           WHERE database_name = ? AND collection_name = ? AND document_id = ?`,
+          [this._databaseName, this._collectionName, documentId]
+        )
+        deletedCount += result.changes || 0
       }
-    }
+
+      return {
+        deletedCount,
+        result: {
+          ok: 1,
+          n: deletedCount
+        }
+      }
+    })
   }
 
+  /**
+   * Returns distinct values for a field across matching documents.
+   *
+   * @param field - Field path to get distinct values for
+   * @param query - Optional query filter
+   * @returns Array of unique values
+   *
+   * @remarks
+   * This loads all matching documents into memory. Large collections
+   * with many documents will impact performance.
+   */
   public async distinct(
     field: string,
     query: FilterQuery<T> = {}
   ): Promise<any[]> {
     const documents = await this.find(query).toArray()
+    if (documents.length > 1000) {
+      log(
+        'PERF: distinct() loaded %d documents for %s.%s',
+        documents.length,
+        this._databaseName,
+        this._collectionName
+      )
+    }
     const values = documents.reduce<any[]>((allValues, document) => {
       const value = _.get(document as any, field)
       if (Array.isArray(value)) return [...allValues, ...value]
@@ -854,6 +940,16 @@ export class Collection<T = Record<string, any>> {
     return uniqueValues(values.filter((value) => value !== undefined))
   }
 
+  /**
+   * Counts documents matching the query.
+   *
+   * @param query - Query filter (empty for total count)
+   * @returns Number of matching documents
+   *
+   * @remarks
+   * Empty query uses optimized SQL COUNT(*). Filtered queries
+   * except exact `_id` lookups load documents into memory.
+   */
   public async countDocuments(query: FilterQuery<T> = {}): Promise<number> {
     if (_.isEmpty(query || {})) {
       const rows = await this._client._all<{ count: number }>(
@@ -872,42 +968,75 @@ export class Collection<T = Record<string, any>> {
     }
 
     const documents = await this.find(query).toArray()
+    if (documents.length > 1000) {
+      log(
+        'PERF: countDocuments() loaded %d documents for %s.%s',
+        documents.length,
+        this._databaseName,
+        this._collectionName
+      )
+    }
     return documents.length
   }
 
+  /**
+   * Executes multiple write operations atomically.
+   *
+   * @param operations - Array of write operations (currently supports updateOne)
+   * @param options - Bulk write options
+   * @param options.ordered - If true (default), stops on first error
+   * @returns Bulk write result with counts
+   *
+   * @remarks
+   * All operations are wrapped in a single transaction.
+   */
   public async bulkWrite(
     operations: any[],
     options: { ordered?: boolean } = {}
   ): Promise<BulkWriteResult> {
-    let matchedCount = 0
-    let modifiedCount = 0
-    let upsertedCount = 0
     const ordered = options.ordered !== false
 
-    for (const operation of operations) {
-      try {
-        if (operation.updateOne) {
-          const result = await this.updateOne(
-            operation.updateOne.filter,
-            operation.updateOne.update,
-            { upsert: operation.updateOne.upsert }
-          )
-          matchedCount += result.matchedCount
-          modifiedCount += result.modifiedCount
-          upsertedCount += result.upsertedCount
-        }
-      } catch (error) {
-        if (ordered) throw error
-      }
-    }
+    return await this._client.withTransaction(async () => {
+      let matchedCount = 0
+      let modifiedCount = 0
+      let upsertedCount = 0
 
-    return {
-      matchedCount,
-      modifiedCount,
-      upsertedCount
-    }
+      for (const operation of operations) {
+        try {
+          if (operation.updateOne) {
+            const result = await this.updateOne(
+              operation.updateOne.filter,
+              operation.updateOne.update,
+              { upsert: operation.updateOne.upsert }
+            )
+            matchedCount += result.matchedCount
+            modifiedCount += result.modifiedCount
+            upsertedCount += result.upsertedCount
+          }
+        } catch (error) {
+          if (ordered) throw error
+        }
+      }
+
+      return {
+        matchedCount,
+        modifiedCount,
+        upsertedCount
+      }
+    })
   }
 
+  /**
+   * Creates an index specification (no-op stub).
+   *
+   * @param indexSpec - Index specification
+   * @param _options - Index options (ignored)
+   * @returns Promise resolving to index name
+   *
+   * @deprecated This method is a no-op stub for MongoDB API compatibility.
+   * SQLite shim does NOT create actual database indexes.
+   * Queries filter documents in-memory using sift.
+   */
   public createIndex(
     indexSpec: Record<string, any>,
     _options: Record<string, any> = {}
@@ -916,12 +1045,21 @@ export class Collection<T = Record<string, any>> {
   }
 }
 
+/**
+ * Represents a logical database containing collections.
+ */
 export class Db {
   constructor(
     private readonly _client: MongoClient,
     public readonly databaseName: string
   ) {}
 
+  /**
+   * Gets a collection from this database.
+   *
+   * @param name - Collection name
+   * @returns Collection instance for the specified name
+   */
   public collection<T = Record<string, any>>(name: string): Collection<T> {
     return new Collection<T>(this._client, this.databaseName, name)
   }
@@ -932,6 +1070,15 @@ type RunResult = {
   changes: number
 }
 
+/**
+ * SQLite-backed MongoDB-compatible client.
+ * Provides a MongoDB-like API backed by SQLite storage.
+ *
+ * @remarks
+ * This is a compatibility layer designed for migration from MongoDB.
+ * Documents are stored in a single SQLite table partitioned by
+ * database name and collection name.
+ */
 export class MongoClient {
   private _connected = false
   public readonly topology = {
@@ -943,6 +1090,13 @@ export class MongoClient {
   }
 
   private async _ensureSchema(): Promise<void> {
+    // Enable WAL mode for concurrent reads during writes
+    await this._run('PRAGMA journal_mode = WAL')
+    // Wait up to 30 seconds for locks to clear
+    await this._run('PRAGMA busy_timeout = 30000')
+    // NORMAL sync is safe with WAL and faster than FULL
+    await this._run('PRAGMA synchronous = NORMAL')
+
     await this._run(
       `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (
         rowid INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -961,6 +1115,16 @@ export class MongoClient {
     )
   }
 
+  /**
+   * Connects to a SQLite database, creating it if necessary.
+   *
+   * @param connectionString - SQLite file path or connection string
+   *   - If empty, uses `SQLITE_DB_PATH` env var or defaults to `did.sqlite`
+   *   - Supports `sqlite://path`, `file:path`, or direct file paths
+   *   - MongoDB connection strings are ignored (falls back to default)
+   * @param _options - Connection options (ignored, for MongoDB API compatibility)
+   * @returns Connected MongoClient instance
+   */
   public static async connect(
     connectionString?: string,
     _options?: Record<string, any>
@@ -983,10 +1147,19 @@ export class MongoClient {
     return client
   }
 
+  /**
+   * Gets a database instance.
+   *
+   * @param databaseName - Logical database name (defaults to 'main')
+   * @returns Db instance for the specified database
+   */
   public db(databaseName = 'main'): Db {
     return new Db(this, databaseName || 'main')
   }
 
+  /**
+   * Closes the database connection.
+   */
   public async close(): Promise<void> {
     await new Promise<void>((resolve, reject) => {
       this._database.close((error) => {
@@ -1000,6 +1173,48 @@ export class MongoClient {
     this._connected = false
   }
 
+  /**
+   * Begins a database transaction with IMMEDIATE lock.
+   * Use this for atomic multi-document operations.
+   */
+  public async beginTransaction(): Promise<void> {
+    await this._run('BEGIN IMMEDIATE')
+  }
+
+  /**
+   * Commits the current transaction.
+   */
+  public async commit(): Promise<void> {
+    await this._run('COMMIT')
+  }
+
+  /**
+   * Rolls back the current transaction.
+   */
+  public async rollback(): Promise<void> {
+    await this._run('ROLLBACK')
+  }
+
+  /**
+   * Executes a function within a transaction.
+   * Automatically commits on success or rolls back on error.
+   *
+   * @param fn - Async function to execute within the transaction
+   * @returns The result of the function
+   */
+  public async withTransaction<T>(fn: () => Promise<T>): Promise<T> {
+    await this.beginTransaction()
+    try {
+      const result = await fn()
+      await this.commit()
+      return result
+    } catch (error) {
+      await this.rollback()
+      throw error
+    }
+  }
+
+  /** @internal */
   public async _run(sql: string, parameters: any[] = []): Promise<RunResult> {
     return await new Promise<RunResult>((resolve, reject) => {
       this._database.run(sql, parameters, function (error) {
@@ -1015,6 +1230,7 @@ export class MongoClient {
     })
   }
 
+  /** @internal */
   public async _all<T = Record<string, any>>(
     sql: string,
     parameters: any[] = []
