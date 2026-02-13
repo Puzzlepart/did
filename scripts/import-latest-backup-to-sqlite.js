@@ -1,5 +1,14 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+/**
+ * Import script for migrating MongoDB backup data to SQLite.
+ *
+ * This script uses the same encoding format as the runtime SQLite shim.
+ * Constants are duplicated here because this script runs before TypeScript compilation.
+ * Any changes to the encoding format MUST be kept in sync with:
+ * - server/services/sqlite/constants.ts
+ * - server/services/sqlite/serialization.ts
+ */
 const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
@@ -7,10 +16,15 @@ const readline = require('readline')
 const sqlite3 = require('sqlite3').verbose()
 require('dotenv').config()
 
+// These constants MUST match server/services/sqlite/constants.ts
 const TABLE_NAME = 'did_documents'
 const TYPE_FIELD = '__did_sqlite_type__'
 const DATE_TYPE = 'date'
 
+/**
+ * Checks if a value is a plain object (not array, Date, or other special type).
+ * Must match logic in server/services/sqlite/serialization.ts
+ */
 function isPlainObject(value) {
   return (
     value !== null &&
@@ -54,6 +68,10 @@ function toNativeFromMongoExport(value) {
   return value
 }
 
+/**
+ * Encodes special types for SQLite storage.
+ * Must produce same output as server/services/sqlite/serialization.ts encodeSpecialTypes()
+ */
 function encodeForSqlite(value) {
   if (value instanceof Date) {
     return {
